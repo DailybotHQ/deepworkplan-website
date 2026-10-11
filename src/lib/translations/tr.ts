@@ -700,7 +700,7 @@ export const tr: SiteTranslations = {
         description:
           'İstemi ve skill’i denetleyene kadar güvenilmez olarak ele alın. Her ikisi de açık kaynaklıdır ve MIT lisanslıdır; skill, ağ çağrısı ve telemetri içermeyen Markdown odaklı bir yapıdadır. Her sürüm, gönderilen skill üzerinde bir SHA256SUMS yayımlar; çalıştırmadan önce kopyanızın eşleştiğini doğrulayabilirsiniz. Sürümler sağlama toplamlıdır, imzalı değildir (imzalama, belgelenmiş bir sonraki adımdır).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -722,7 +722,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Yerel inceleme ve tercihe dayalı eklentiler',
         description:
-          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve yedi tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim ve Agentkit — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
+          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve yedi tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim ve Agentkit — yalnızca uygun olduklarında kabul edersiniz. Her bileşen, SHA256SUMS özetini init.md’nin yayımladığı bir sürüme sabitlenmiştir ve bu geçiş idempotenttir: eksik bileşenler sunulur, eski olanlar yerinde yükseltilir, güncel olanlara dokunulmaz. Kabul edilen bir devcontainer tam yığınla sonuçlanır — seçtiğiniz ajanlar, iki yönlü bağlanmış Herdr ve yalnızca siz etkinleştirirseniz ana makine hesapları. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
       },
       {
         title: 'Planlayın ve yürütün',
@@ -749,6 +749,10 @@ export const tr: SiteTranslations = {
       {
         label: 'İsteğe bağlı: DeepWorkPlan Vim terminal düzenleyicisi',
         href: '/kit/vim',
+      },
+      {
+        label: 'Birçok ajanı çalıştırmak',
+        href: '/methodology/06-orchestration',
       },
     ],
   },

@@ -1,7 +1,7 @@
 ---
 title: "Quickstart — Deep Work Plan"
 description: "AI एजेंट्स के लिए निष्पादन योग्य ऑनबोर्डिंग प्रॉम्प्ट: किसी भी रिपॉज़िटरी में Deep Work Plan अपनाएँ — विश्लेषण करें, दस्तावेज़ बनाएँ, स्किल स्थापित करें, और इसे एजेंट-संचालन योग्य छोड़ें।"
-lastUpdated: 2026-09-28
+lastUpdated: 2026-10-11
 ---
 
 आप एक AI कोडिंग एजेंट हैं। पहले यह पूरा प्रॉम्प्ट पढ़ें, फिर Deep Work Plan (DWP) पद्धति
@@ -84,14 +84,29 @@ lastUpdated: 2026-09-28
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  # आप जो रिलीज़ स्थापित करना चाहते हैं उसके लिए चेकसम डाउनलोड करें (vX.Y.Z बदलें):
+  git checkout v7.5.1
+  # उस रिलीज़ के चेकसम डाउनलोड करें और उन्हें नीचे दिए digest से मिलाएँ:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS
+  shasum -a 256 SHA256SUMS   # पिन की गई रिलीज़ में deepworkplan-skill के digest के बराबर होना चाहिए
   ./setup.sh --verify        # शून्येतर exit का अर्थ है फ़ाइल मेल नहीं खाती — रुकें
   ```
 
   रिलीज़ **चेकसम की गई हैं, हस्ताक्षरित नहीं** (हस्ताक्षर एक दस्तावेज़ीकृत अगला चरण है)। सब कुछ खुला और
   diff योग्य है, इसलिए आप किसी भी फ़ाइल की उसके tag पर रिपॉज़िटरी से तुलना कर सकते हैं।
+- **पिन की गई रिलीज़।** यह प्रॉम्प्ट जो भी घटक स्थापित करता है, वह एक ही रिलीज़ पर पिन है। किसी
+  रिलीज़ के `SHA256SUMS` का उपयोग करने से पहले, उस फ़ाइल को ही नीचे दिए digest से जाँचें
+  (`shasum -a 256 SHA256SUMS`, या Linux पर `sha256sum`); मेल न खाने का अर्थ है रुकें।
+
+  | रिपॉज़िटरी (github.com/DailybotHQ) | Tag | उसके `SHA256SUMS` का sha256 |
+  | --- | --- | --- |
+  | deepworkplan-skill | `v7.5.1` | `9c3a6f067bd0a0c6940197167eb14759f2b5ff96c17c53839e0a90920a8bca7f` |
+  | coding-agents-kit | `v0.4.0` | `3aa27f9933aa881fd8f09fccf7d4eba0c2ab9e51a03e898a1e3e77a48c1a4834` |
+  | herdr-peers | `v0.1.0` | `373823f4ceb1891032a474f776ad502c2d745d45318b42eb8f38f8c4aaf2a6d1` |
+  | devcontainer-kit | `v0.2.11` | `b67e0c839d695d8bf6dfe8158f45ce5a546b60a4c9d4505b72d35920089bf6ed` |
+  | deepworkplan-vim | `v0.6.0` | `9d17cf01a9b442f116af7d5f1bdb90d4e80b5567e4db93331ed10cf3ce6b2425` |
+  | ai-diff-reviewer | `v3.3.8` | `225004727d5f1b77edc7219607f5eaa684cc7f3ea88873be11760712d883c1a6` |
+  | agent-skill | `v3.23.11` | कोई प्रकाशित नहीं — skills CLI `skills-lock.json` में एक content hash दर्ज करता है |
 - **कोई समस्या रिपोर्ट करें।** सुरक्षा संबंधी समस्याएँ संबंधित रिपॉज़िटरी पर **GitHub के भेद्यता रिपोर्टिंग के माध्यम से निजी तौर पर** रिपोर्ट करें — `https://github.com/DailybotHQ/deepworkplan-skill/security` या `https://github.com/DailybotHQ/deepworkplan-website/security` — सार्वजनिक issue के रूप में नहीं। प्रत्येक रिपॉज़िटरी का `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`, और विश्वास पृष्ठ `https://deepworkplan.com/trust` भी देखें।
 
 ## 2. Deep Work Plan स्किल स्थापित करें
@@ -218,18 +233,43 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 
 नई योजनाओं को कम-से-कम तीन अंकों वाली क्रमशः बढ़ती संख्यात्मक ID मिलती है (उदाहरण: `PLAN_001_add_payment_webhooks/`)। स्थिर v5 स्कीमा संख्यात्मक ID को एक शब्द गिनते हैं, इसलिए v5 slug में 2–4 शब्द और v6 तथा v7 slug में 2–5 शब्द होते हैं। मौजूदा बिना नंबर वाले `PLAN_<slug>/` फ़ोल्डर पढ़ने योग्य बने रहते हैं और उनका नाम कभी नहीं बदला जाता। नंबर वाली योजनाएँ मौजूद होने पर `latest` सबसे बड़ी संख्यात्मक ID वाली योजना को दर्शाता है।
 
-## 4. आवश्यक स्थानीय समीक्षा स्थापित करें, फिर ऑप्ट-इन ऐडऑन प्रस्तुत करें
+## 4. स्थानीय समीक्षा और ऐडऑन स्थापित करें — या अपग्रेड करें
 
-आधाररेखा ऑनबोर्डिंग के बाद, **AI Diff Reviewer स्थानीय समीक्षा** स्थापित करें (Phase 7a — संस्करण
-2.3.0 से आवश्यक): tag-pinned vendored स्किल
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) साथ ही
-`generate-extension` के माध्यम से रिपॉज़िटरी के लिए ढाली गई `.review/extension.md`, ऑनबोर्डिंग की
-सहमति के अंतर्गत। फिर सात वैकल्पिक ऐडऑन (devcontainer, Dailybot, dependency upgrade, design system, agentkit, Herdr,
-DeepWorkPlan Vim) गिनाएँ, हर एक को एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत करें, और हर स्वीकृति को
-`.dwp/config.json` में दर्ज करें। एक रिपॉज़िटरी **शून्य** वैकल्पिक ऐडऑन
-के साथ पूर्णतः अनुरूप होती है — उन्हें कभी स्वतः-स्थापित न करें।
+आधाररेखा ऑनबोर्डिंग के बाद, इकोसिस्टम के हर घटक को उसकी पिन की गई रिलीज़ पर लाएँ। इस खंड को
+नई रिपॉज़िटरी पर और महीनों पहले ऑनबोर्ड की गई रिपॉज़िटरी पर एक ही तरह चलाएँ: यह **idempotent** है।
+हर घटक के लिए पता लगाएँ कि क्या स्थापित है और उसका संस्करण क्या है, फिर शाखा चुनें:
 
-- **Devcontainer समर्थन** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.11` पर पिन, अपनी `dck-dockerfile` skill के साथ) का एक पतला एकीकरणकर्ता: `dck init` रिपॉज़िटरी का अपना container रेंडर करता है — digest पर पिन की गई आधिकारिक image, कोई साझा base image नहीं, `bash dev.sh up` — और किसी मौजूदा devcontainer का मिलान केवल उसके diff के स्वीकार होने के बाद करता है; कोडिंग एजेंट एक opt-in परत हैं।
+- **अनुपस्थित** — आवश्यक स्थानीय समीक्षा ऑनबोर्डिंग की सहमति के अंतर्गत स्थापित की जाती है; एक वैकल्पिक
+  ऐडऑन **प्रस्तुत** किया जाता है, और केवल तभी स्थापित होता है जब डेवलपर उसे स्वीकार करे।
+- **स्थापित, पिन से पुराना** — उसी पिन किए गए कमांड से उसे **उसी स्थान पर** अपग्रेड करें (हर इंस्टॉलर
+  अपनी फ़ाइलें बदलता है और उपयोगकर्ता का कॉन्फ़िगरेशन, लॉगिन और डेटा बनाए रखता है)। चलाने से पहले बताएँ
+  कि क्या बदलेगा।
+- **पिन पर या उससे नया स्थापित** — कुछ न बदलें।
+
+हर स्वीकृति या अस्वीकृति को `.dwp/config.json` में दर्ज करें; अस्वीकार किया गया ऐडऑन तब तक दोबारा
+प्रस्तुत नहीं किया जाता जब तक डेवलपर न माँगे। इस खंड का दूसरा रन कुछ नहीं बदलता।
+
+| घटक | स्थापित संस्करण का पता लगाएँ | स्थापित या अपग्रेड करें (पिन किया गया) |
+| --- | --- | --- |
+| AI Diff Reviewer (आवश्यक) | `.agents/skills/ai-diff-reviewer/SKILL.md` में `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `.agents/skills/dailybot/SKILL.md` में `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.11 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh` |
+| Herdr | स्थापित herdr-peers स्किल में `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh` |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh पर सत्यापित इंस्टॉलर (यह `v0.6.0` पिन करता है; डाउनलोड करें, `shasum -a 256 -c install.sh.sha256`, फिर चलाएँ) |
+
+हर डाउनलोड को चलाने से पहले उसकी रिलीज़ के `SHA256SUMS` और ऊपर *पिन की गई रिलीज़* में दिए digest से
+सत्यापित करें।
+
+**आवश्यक स्थानीय समीक्षा।** **AI Diff Reviewer स्थानीय समीक्षा** स्थापित करें (Phase 7a — संस्करण
+2.3.0 से आवश्यक): ऊपर दी गई tag-pinned स्किल, साथ ही `generate-extension` के माध्यम से रिपॉज़िटरी
+के लिए ढाली गई `.review/extension.md`, ऑनबोर्डिंग की सहमति के अंतर्गत।
+
+**वैकल्पिक ऐडऑन।** सात वैकल्पिक ऐडऑन (devcontainer, Dailybot, dependency upgrade, design system,
+agentkit, Herdr, DeepWorkPlan Vim) गिनाएँ और हर एक को एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत करें। एक
+रिपॉज़िटरी **शून्य** वैकल्पिक ऐडऑन के साथ पूर्णतः अनुरूप होती है — उन्हें कभी स्वतः-स्थापित न करें।
+
+- **Devcontainer समर्थन** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.11` पर पिन, अपनी `dck-dockerfile` skill के साथ) का एक पतला एकीकरणकर्ता: `dck init` रिपॉज़िटरी का अपना container रेंडर करता है — digest पर पिन की गई आधिकारिक image, कोई साझा base image नहीं, `bash dev.sh up` — और किसी मौजूदा devcontainer का मिलान केवल उसके diff के स्वीकार होने के बाद करता है। स्वीकार होने पर, पूर्ण स्टैक तक पहुँचने के लिए नीचे दिए *devcontainer पथ* का पालन करें।
 - **Dailybot एकीकरण** — चार जीवनचक्र ईवेंट (किकऑफ़, महत्वपूर्ण कार्य, अवरुद्ध, पूर्णता) पहले से Dailybot का उपयोग करने वाली टीमों के लिए सर्वोत्तम-प्रयास प्रगति रिपोर्ट के रूप में, वैकल्पिक स्वायत्त हुक प्रवर्तन (`dailybot-cli >= 3.9.0`) के साथ। जोड़ी गई Dailybot एजेंट स्किल (3.23.11) स्थापित करने से चैट, चेक-इन, फ़ॉर्म ऑथरिंग, AI से पूछना, Plan बोर्ड और कार्य, per-repo API keys और अन्य सुविधाएँ भी उपलब्ध होती हैं — ऐडऑन केवल रिपोर्टिंग को DWP निष्पादन से जोड़ता है। मूल पद्धति की Dailybot पर शून्य निर्भरता है।
 - **Dependency upgrade** — पैकेज-मैनेजर-निरपेक्ष, बैच-आधारित, सत्यापित, वापस लेने योग्य अपग्रेड। स्वीकार किए जाने पर,
   यह `/lib-upgrade` कमांड स्थापित करता है।
@@ -237,10 +277,66 @@ DeepWorkPlan Vim) गिनाएँ, हर एक को एक स्पष�
   (शुद्ध लाइब्रेरी, हेडलेस सेवाओं, या केवल-इन्फ़्रा रिपॉज़िटरी के लिए प्रस्तुत नहीं)। तीन प्रोफ़ाइल एक
   फ़ाइल में स्तरित होती हैं: visual-ui (पता लगाने पर पुरज़ोर सिफ़ारिश; इंस्टॉल स्पष्ट स्वीकृति से नियंत्रित), cli-output और संवादात्मक — अंतिम दो
   सदैव पूछे जाते हैं, कभी स्वतः-लागू नहीं।
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v0.4.0` पर पिन) का मशीन-स्तरीय इंस्टॉल, उन योजनाओं के लिए जो सीमित `parallel_safe` कार्य दूसरे कोडिंग एजेंटों को सौंपती हैं (headless, हर प्रतिनिधि के लिए उसके अपने worktree में एक `ak run`); kit डिफ़ॉल्ट रूप से एजेंटों को स्वायत्तता में लॉन्च करता है और उसका opt-out (`--ask` या `AGENTKIT_PERMISSIONS=ask`) हमेशा प्रभावी रहता है।
-- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (`v0.1.0` पर पिन, साथ में Herdr की आधिकारिक स्किल) का मशीन-स्तरीय इंस्टॉल, उन योजनाओं के लिए जो किसी भी मशीन पर Herdr पेन में मौजूद एक सहकर्मी एजेंट से एक अधिकृत उत्तर माँगती हैं।
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v0.4.0` पर पिन) का मशीन-स्तरीय इंस्टॉल: हर कोडिंग एजेंट के लिए एक कमांड, हर प्रोफ़ाइल के लिए एक खाता, सबसे अधिक गुंजाइश वाला खाता चुनने के लिए `ak usage` और `ak pick`, और उन योजनाओं के लिए headless `ak run` जो सीमित `parallel_safe` कार्य दूसरे कोडिंग एजेंटों को सौंपती हैं (हर worktree में एक प्रतिनिधि)। kit डिफ़ॉल्ट रूप से एजेंटों को स्वायत्तता में लॉन्च करता है और उसका opt-out (`--ask` या `AGENTKIT_PERMISSIONS=ask`) हमेशा प्रभावी रहता है।
+- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (`v0.1.0` पर पिन, साथ में Herdr की आधिकारिक स्किल) का मशीन-स्तरीय इंस्टॉल, उन योजनाओं के लिए जो किसी भी मशीन पर Herdr पेन में मौजूद एक सहकर्मी एजेंट से एक अधिकृत उत्तर माँगती हैं, और उस लीड के लिए जो अपनी लेन पर नज़र रखता है।
 - **DeepWorkPlan Vim** — टर्मिनल एडिटर ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v0.6.0` पर पिन), एक मशीन-स्तरीय इंस्टॉल जो स्पष्ट सहमति के बिना किसी मौजूदा Neovim कॉन्फ़िगरेशन को कभी अधिलेखित नहीं करता।
-- **AI Diff Reviewer** — आवश्यक स्थानीय समीक्षा (कोई ऑप्ट-इन नहीं): हर Final Review की सुरक्षा-जाँच योजना के संचित परिवर्तन-समुच्चय पर [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + आवश्यक `.review/extension.md`) चलाती है। अनुपस्थित skill या एक्सटेंशन एक दर्ज `local reviewer not installed` निष्कर्ष है, — कभी चुपचाप नहीं छोड़ा जाता, और कभी अचानक बूटस्ट्रैप नहीं: इंस्टॉल onboarding की सहमति या addon की स्पष्ट invocation से संबंधित है; इनवोकेशन त्रुटियाँ सॉफ्ट-फेल होती हैं; पूर्ण पास के **सत्यापित `critical` निष्कर्ष** अब भी पूर्णता को ब्लॉक करते हैं (v3, BC-07 — असत्यापित गंभीर दावे एनोटेटेड चेतावनी के रूप में आते हैं, और `incomplete`/`timeout` समीक्षा एक स्वच्छ पास नहीं है, BC-04)। **Flow B** (`pr-review.yml` वाला CI गेट) एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत होता है और बिना अनुरोध कभी स्थापित नहीं किया जाता। कोई भी Deep Work Plan प्रवाह किसी व्यावसायिक सेवा, CI प्रदाता या secret की आवश्यकता नहीं रखता।
+- **AI Diff Reviewer** — आवश्यक स्थानीय समीक्षा (कोई ऑप्ट-इन नहीं): हर Final Review की सुरक्षा-जाँच योजना के संचित परिवर्तन-समुच्चय पर [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + आवश्यक `.review/extension.md`) चलाती है। अनुपस्थित skill या एक्सटेंशन एक दर्ज `local reviewer not installed` निष्कर्ष है — कभी चुपचाप नहीं छोड़ा जाता, और कभी अचानक बूटस्ट्रैप नहीं: इंस्टॉल onboarding की सहमति या addon की स्पष्ट invocation से संबंधित है; इनवोकेशन त्रुटियाँ सॉफ्ट-फेल होती हैं; पूर्ण पास के **सत्यापित `critical` निष्कर्ष** अब भी पूर्णता को ब्लॉक करते हैं (v3, BC-07 — असत्यापित गंभीर दावे एनोटेटेड चेतावनी के रूप में आते हैं, और `incomplete`/`timeout` समीक्षा एक स्वच्छ पास नहीं है, BC-04)। **Flow B** (`pr-review.yml` वाला CI गेट) एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत होता है और बिना अनुरोध कभी स्थापित नहीं किया जाता। कोई भी Deep Work Plan प्रवाह किसी व्यावसायिक सेवा, CI प्रदाता या secret की आवश्यकता नहीं रखता।
+
+### devcontainer पथ (स्वीकार होने पर)
+
+devcontainer ऐडऑन एक काम करते स्टैक पर समाप्त होता है, केवल रेंडर किए गए फ़ाइल-समुच्चय पर नहीं। हर
+चरण पर डेवलपर की सहमति के साथ:
+
+1. **रेंडर करें।** `dck init` `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`,
+   `docker/local/docker-compose.yaml` और `dev.sh` लिखता है, पहले योजना दिखाता है और किसी मौजूदा
+   फ़ाइल को बदलने से पहले पूछता है।
+2. **`.devcontainer/dck.toml` में परतें चुनें।** `[layers] agents` केवल तभी चालू करें जब डेवलपर भीतर
+   कोडिंग एजेंट चाहता हो, और `[agents] clis` में **केवल उसके चुने हुए CLI** सूचीबद्ध करें (उदाहरण के
+   लिए `["claude", "codex"]`); और कुछ स्थापित नहीं होता। `editor` DeepWorkPlan Vim जोड़ता है।
+3. **Herdr जोड़ें।** `[herdr] machine = true` container को एक Herdr मशीन के रूप में पंजीकृत करता है और
+   `layout = "standard"` उसे मानक साइडबार के साथ खोलता है — App · Editor · Development · Agents —
+   हर पेन ऐप पथ में (डिफ़ॉल्ट रूप से `/app`)। मेश भीतर के एजेंटों को होस्ट और दूसरे containers के
+   एजेंटों तक पहुँचने देता है।
+4. **होस्ट खाते (opt-in, डेवलपर का निर्णय)।** डेवलपर की **होस्ट प्रोफ़ाइल**
+   (`~/.config/dck/profile.toml`) में, रिपॉज़िटरी की `dck.toml` में कभी नहीं, `[agents] host_profiles = true`
+   container को रिपॉज़िटरी द्वारा स्थापित CLI के होस्ट खातों का उपयोग करने देता है — Claude
+   `CLAUDE_CODE_OAUTH_TOKEN` (`@default`) या `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` (`@name`) के माध्यम से, Codex
+   अपनी auth फ़ाइल के माध्यम से — केवल-पठन, अतिरिक्त वेरिएबल नामों की allow-list के रूप में `host_env_keys` के साथ।
+   इसे डेवलपर की ओर से कभी चालू न करें, और कभी कोई token प्रिंट न करें।
+5. **शुरू करें।** `bash dev.sh up` container को बिल्ड करता है, शुरू करता है और पंजीकृत करता है।
+6. **जाँचें।** हर आइटम एक कमांड है:
+   - [ ] `dck doctor --json` vendored लेआउट को `current` बताता है।
+   - [ ] `bash dev.sh ps` सेवा को चलती हुई दिखाता है; `dck herdr status` मशीन को जुड़ी हुई दिखाता है।
+   - [ ] `bash dev.sh shell -c 'ak doctor'` ठीक वही CLI सूचीबद्ध करता है जो `[agents] clis` में हैं (केवल agents परत में)।
+   - [ ] `bash dev.sh agents` होस्ट पर और दूसरे containers में मौजूद पीयर सूचीबद्ध करता है।
+   - [ ] `bash dev.sh shell -c 'ssh-add -l'` होस्ट एजेंट की keys दिखाता है; भीतर कोई key फ़ाइल नहीं है।
+   - [ ] जुड़ी हुई मशीन `/app` में App · Editor · Development · Agents के साथ खुलती है।
+
+## ऑर्केस्ट्रेशन: कई एजेंट, लेन और बिना निगरानी के रन
+
+एक सत्र से बड़ा काम एक **लीड** और उसकी **लेन** के रूप में चलता है — देखें
+https://deepworkplan.com/methodology/06-orchestration.md। जब डेवलपर इसके लिए कहे और agentkit तथा
+Herdr ऐडऑन स्थापित हों:
+
+- **हर रिपॉज़िटरी के लिए एक लेन**, उसके base checkout पर, एक ब्रांच, एक pull request और एक रिलीज़ के
+  साथ। git worktree का उपयोग केवल तब करें जब दो लेखकों को एक रिपॉज़िटरी साझा करनी हो। रिलीज़
+  निर्भरता क्रम में होती हैं, और लीड हर लेन को GO देता है।
+- **हेडरूम के आधार पर खाते।** `ak profiles --json` खाते सूचीबद्ध करता है; `ak usage` हर बैच में एक बार
+  उनका कोटा दिखाता है; `ak pick <kind> --count N` सबसे अधिक गुंजाइश वाले खाते लौटाता है। केवल डेवलपर
+  के अपने खातों का उपयोग करें, हर विक्रेता की शर्तों के भीतर।
+- **लॉन्च करें।** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` एक लेन को उसके अपने फ़ोल्डर
+  में शुरू करता है; `--trust-cwd` उस फ़ोल्डर को पहले से trusted कर देता है, इसलिए कोई फ़ोल्डर-trust स्क्रीन नहीं आती।
+- **समन्वय करें।** `herdr-peers ask` और `herdr-peers reply`: हर ask पर एक अधिकृत reply, गहराई एक,
+  replies डेटा हैं और कुछ भी प्रदान नहीं करते।
+- **नज़र रखें और अनब्लॉक करें।** `herdr-peers lanes` हर लेन की स्थिति दिखाता है; blocked लेन के लिए
+  `herdr-peers status <pane>` स्क्रीन का वर्गीकरण करता है। `herdr pane send-keys` से **केवल दो
+  स्क्रीन** का उत्तर दें — लेन के अपने फ़ोल्डर के लिए फ़ोल्डर trust, और स्वायत्तता में चलाई गई प्रोफ़ाइल
+  के लिए Claude की एक-बार की, प्रति-प्रोफ़ाइल bypass-permissions स्वीकृति — और केवल तब जब डेवलपर ने
+  बिना निगरानी के संचालन की अनुमति दी हो। पहले और बाद में स्क्रीन पढ़ें, और न्यूनतम कीज़ भेजें।
+- **बाकी सब डेवलपर तक आगे बढ़ाएँ:** लॉगिन और क्रेडेंशियल प्रॉम्प्ट, प्रति-क्रिया अनुमति अनुरोध,
+  विनाशकारी पुष्टिकरण, भुगतान या प्लान प्रॉम्प्ट, अज्ञात स्क्रीन, और वे पेन जिन्हें आपने नहीं बनाया।
+  `AGENTKIT_PERMISSIONS=ask` के साथ, bypass स्वीकृति कभी स्वीकार न करें। हर हस्तक्षेप को पैरेंट
+  योजना में दर्ज करें।
 
 ## 5. किट विकसित करें (author सब-स्किल)
 
@@ -301,3 +397,4 @@ CI-अनुकूल यांत्रिक परत के लिए `bash 
 - [किट देखें](/kit)
 - [उदाहरण देखें](/examples)
 - [वैकल्पिक: टर्मिनल एडिटर DeepWorkPlan Vim](/kit/vim)
+- [कई एजेंट चलाना](/methodology/06-orchestration)

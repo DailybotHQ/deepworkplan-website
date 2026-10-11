@@ -703,7 +703,7 @@ export const uk: SiteTranslations = {
         description:
           'Ставтеся до промту та скілу як до ненадійних, доки не перевірите їх. Обидва є відкритими під ліцензією MIT; скіл є Markdown-first без мережевих викликів і телеметрії. Кожен реліз публікує SHA256SUMS для скілу, що постачається, тож ви можете підтвердити відповідність своєї копії перед запуском. Релізи контрольно-суміовані, але не підписані (підписання — задокументований наступний крок).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -725,7 +725,7 @@ export const uk: SiteTranslations = {
       {
         title: 'Локальний огляд та опціональні addon',
         description:
-          'Онбординг встановлює необхідний локальний огляд AI Diff Reviewer (його CI-гейт лишається опціональним) і пропонує сім опціональних addon — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim та Agentkit — які ви приймаєте лише тоді, коли вони доречні. Репозиторій повністю відповідає вимогам і з нульовою кількістю опціональних addon. Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди понад базовий набір.',
+          'Онбординг встановлює необхідний локальний огляд AI Diff Reviewer (його CI-гейт лишається опціональним) і пропонує сім опціональних addon — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim та Agentkit — які ви приймаєте лише тоді, коли вони доречні. Кожен компонент закріплено за релізом, дайджест SHA256SUMS якого публікує init.md, а прохід ідемпотентний: відсутні компоненти пропонуються, старіші оновлюються на місці, актуальні залишаються без змін. Прийнятий devcontainer завершується повним стеком — обраними вами агентами, Herdr, зʼєднаним в обидва боки, і обліковими записами хоста лише тоді, коли ви їх увімкнете. Репозиторій повністю відповідає вимогам і з нульовою кількістю опціональних addon. Використовуйте /skill-create та /agent-create (суб-скіл author), щоб розвивати скіли, агенти та команди понад базовий набір.',
       },
       {
         title: 'Плануйте та виконуйте',
@@ -752,6 +752,10 @@ export const uk: SiteTranslations = {
       {
         label: 'Необовʼязково: термінальний редактор DeepWorkPlan Vim',
         href: '/kit/vim',
+      },
+      {
+        label: 'Запуск багатьох агентів',
+        href: '/methodology/06-orchestration',
       },
     ],
   },

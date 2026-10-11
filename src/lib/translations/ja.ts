@@ -701,7 +701,7 @@ export const ja: SiteTranslations = {
         description:
           '確認が済むまで、プロンプトとスキルを信頼できないものとして扱ってください。どちらもオープンソースで MIT ライセンスです。スキルは Markdown ファーストでネットワーク呼び出しもテレメトリーもありません。各リリースでは出荷されたスキルに対する SHA256SUMS が公開されているため、実行する前に手元のコピーが一致することを確認できます。リリースはチェックサム付きですが、署名はされていません（署名はドキュメント化された次のステップです）。',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -723,7 +723,7 @@ export const ja: SiteTranslations = {
       {
         title: 'ローカルレビューとオプトインのアドオン',
         description:
-          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、七つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim、Agentkit）を提案します。適合する場合にのみ受け入れてください。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
+          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、七つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim、Agentkit）を提案します。適合する場合にのみ受け入れてください。すべてのコンポーネントは、init.md が SHA256SUMS のダイジェストを公開するリリースに固定されています。この手順は冪等で、未導入のコンポーネントは提案され、古いものはその場でアップグレードされ、最新のものはそのままです。受け入れた devcontainer は完全なスタック（選んだエージェント、双方向に接続された Herdr、オプトインした場合のみのホストアカウント）に仕上がります。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',
@@ -748,6 +748,10 @@ export const ja: SiteTranslations = {
       { label: 'キットを見る', href: '/kit' },
       { label: '事例を見る', href: '/examples' },
       { label: '任意：ターミナルエディタ DeepWorkPlan Vim', href: '/kit/vim' },
+      {
+        label: '多数のエージェントを動かす',
+        href: '/methodology/06-orchestration',
+      },
     ],
   },
 

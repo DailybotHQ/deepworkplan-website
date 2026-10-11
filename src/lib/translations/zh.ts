@@ -690,7 +690,7 @@ export const zh: SiteTranslations = {
         description:
           '在核查之前，请将提示和技能视为不可信的。两者均为开源且采用 MIT 许可；该技能以 Markdown 为核心，无网络调用，也无遥测。每个发布版本都会发布一份涵盖所有已发布技能文件的 SHA256SUMS，以便你在运行前确认副本匹配。发布版本有校验和，但未签名（签名是已记录的下一步计划）。',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -712,7 +712,7 @@ export const zh: SiteTranslations = {
       {
         title: '本地评审与可选附加组件',
         description:
-          '接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供七个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim 与 Agentkit——你只在它们契合时才采纳。一个仓库即便不带任何可选附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
+          '接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供七个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim 与 Agentkit——你只在它们契合时才采纳。每个组件都锁定到一个发布版本，其 SHA256SUMS 摘要由 init.md 公布；整个流程是幂等的：缺失的组件会被提供，较旧的组件原地升级，已是最新的组件保持不变。被采纳的 devcontainer 会形成完整环境——你选定的代理、双向连通的 Herdr，以及仅在你选择启用时才共享的主机账户。一个仓库即便不带任何可选附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
       },
       {
         title: '规划并执行',
@@ -737,6 +737,7 @@ export const zh: SiteTranslations = {
       { label: '浏览套件', href: '/kit' },
       { label: '查看示例', href: '/examples' },
       { label: '可选：DeepWorkPlan Vim 终端编辑器', href: '/kit/vim' },
+      { label: '运行多个代理', href: '/methodology/06-orchestration' },
     ],
   },
 

@@ -1,7 +1,7 @@
 ---
 title: "Inicio rápido — Deep Work Plan"
 description: "El prompt de incorporación ejecutable: adopta Deep Work Plan en cualquier repositorio — analiza, documenta, instala el skill y déjalo pilotable por IA."
-lastUpdated: 2026-09-28
+lastUpdated: 2026-10-11
 ---
 
 Eres un agente de programación de IA. Lee primero todo este prompt y luego haz que el repositorio
@@ -82,15 +82,30 @@ que ha sido comprobado.
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- # Descarga los checksums para la versión que vas a instalar (reemplaza vX.Y.Z):
+ git checkout v7.5.1
+ # Descarga los checksums de esa versión y compáralos con el digest de abajo:
  curl -fsSL -o SHA256SUMS \
- https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS
+ shasum -a 256 SHA256SUMS # debe coincidir con el digest de deepworkplan-skill en Versiones fijadas
  ./setup.sh --verify # una salida distinta de cero indica que un archivo no coincide — detente
  ```
 
  Las versiones tienen **checksums, no firmas** (las firmas son el próximo paso documentado). Todo
  está abierto y es comparable mediante diff, así que también puedes comparar cualquier archivo con
  el repositorio en su etiqueta.
+- **Versiones fijadas.** Cada componente que instala este prompt está fijado a una versión. Antes de
+  usar el `SHA256SUMS` de una versión, comprueba el propio archivo contra el digest de abajo
+  (`shasum -a 256 SHA256SUMS`, o `sha256sum` en Linux); si no coincide, detente.
+
+  | Repositorio (github.com/DailybotHQ) | Tag | sha256 de su `SHA256SUMS` |
+  | --- | --- | --- |
+  | deepworkplan-skill | `v7.5.1` | `9c3a6f067bd0a0c6940197167eb14759f2b5ff96c17c53839e0a90920a8bca7f` |
+  | coding-agents-kit | `v0.4.0` | `3aa27f9933aa881fd8f09fccf7d4eba0c2ab9e51a03e898a1e3e77a48c1a4834` |
+  | herdr-peers | `v0.1.0` | `373823f4ceb1891032a474f776ad502c2d745d45318b42eb8f38f8c4aaf2a6d1` |
+  | devcontainer-kit | `v0.2.11` | `b67e0c839d695d8bf6dfe8158f45ce5a546b60a4c9d4505b72d35920089bf6ed` |
+  | deepworkplan-vim | `v0.6.0` | `9d17cf01a9b442f116af7d5f1bdb90d4e80b5567e4db93331ed10cf3ce6b2425` |
+  | ai-diff-reviewer | `v3.3.8` | `225004727d5f1b77edc7219607f5eaa684cc7f3ea88873be11760712d883c1a6` |
+  | agent-skill | `v3.23.11` | no se publica — la CLI de skills registra un hash de contenido en `skills-lock.json` |
 - **Reporta un problema.** Reporta los problemas de seguridad **de forma privada a través del sistema de reporte de vulnerabilidades de GitHub** en el repositorio correspondiente — `https://github.com/DailybotHQ/deepworkplan-skill/security` o `https://github.com/DailybotHQ/deepworkplan-website/security` — no como un issue público. Consulta también el `SECURITY.md` de cada repositorio, `https://deepworkplan.com/.well-known/security.txt` y la página de confianza `https://deepworkplan.com/trust`.
 
 ## 2. Instala el skill de Deep Work Plan
@@ -199,18 +214,43 @@ metodología) en vez de sobrescribir — y confirma con el usuario antes de reem
 
 Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 y v7 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
 
-## 4. Instala la revisión local requerida y luego ofrece los addons opcionales
+## 4. Instala — o actualiza — la revisión local y los addons
 
-Tras la incorporación base, instala la **revisión local de AI Diff Reviewer** (Fase 7a — requerida
-desde el estándar 2.3.0): la skill vendorizada fijada por tag
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) más un
-`.review/extension.md` a medida del repo vía `generate-extension`, bajo el consentimiento del
-onboarding. Luego enumera los siete addons opcionales (devcontainer, Dailybot, actualización de dependencias,
-design system, agentkit, Herdr, DeepWorkPlan Vim) y ofrece cada uno como una opción explícita,
-registrando cada aceptación en `.dwp/config.json`. Un repositorio es totalmente conforme con
-**cero** addons opcionales — nunca instales esos automáticamente.
+Tras la incorporación base, lleva cada componente del ecosistema a su versión fijada. Ejecuta esta
+sección igual en un repositorio nuevo y en uno incorporado hace meses: es **idempotente**.
+Para cada componente, detecta qué está instalado y en qué versión, y luego decide:
 
-- **Soporte de devcontainer** — un integrador ligero de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fijado en `v0.2.11`, con su skill `dck-dockerfile`): `dck init` renderiza el contenedor propio del repositorio (imagen oficial fijada por digest, sin imagen base compartida, `bash dev.sh up`) y concilia un devcontainer existente solo después de que se acepte su diff; los agentes de código son una capa opcional.
+- **Ausente** — la revisión local requerida se instala bajo el consentimiento del onboarding; un addon
+  opcional se **ofrece**, y se instala solo cuando el desarrollador lo acepta.
+- **Instalado, anterior a la versión fijada** — actualízalo **en su lugar** con el mismo comando fijado (cada
+  instalador reemplaza sus propios archivos y conserva la configuración, los inicios de sesión y los datos del usuario). Di qué
+  cambiará antes de ejecutarlo.
+- **Instalado en la versión fijada, o posterior** — no cambies nada.
+
+Registra cada aceptación o rechazo en `.dwp/config.json`; un addon rechazado no se vuelve a ofrecer
+salvo que el desarrollador lo pida. Una segunda ejecución de esta sección no cambia nada.
+
+| Componente | Detectar la versión instalada | Instalar o actualizar (fijado) |
+| --- | --- | --- |
+| AI Diff Reviewer (requerido) | `version:` en `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `version:` en `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.11 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh` |
+| Herdr | `scripts/herdr-peers --version` en la skill herdr-peers instalada | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh` |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | el instalador verificado en https://deepworkplan.com/vim/install.sh (fija `v0.6.0`; descárgalo, `shasum -a 256 -c install.sh.sha256` y luego ejecútalo) |
+
+Verifica cada descarga contra el `SHA256SUMS` de su versión y el digest de *Versiones fijadas* de arriba
+antes de ejecutarla.
+
+**La revisión local requerida.** Instala la **revisión local de AI Diff Reviewer** (Fase 7a — requerida
+desde el estándar 2.3.0): la skill fijada por tag de arriba más un `.review/extension.md` a medida del repo vía
+`generate-extension`, bajo el consentimiento del onboarding.
+
+**Los addons opcionales.** Enumera los siete addons opcionales (devcontainer, Dailybot, actualización de
+dependencias, design system, agentkit, Herdr, DeepWorkPlan Vim) y ofrece cada uno como una opción explícita. Un
+repositorio es totalmente conforme con **cero** addons opcionales — nunca instales esos automáticamente.
+
+- **Soporte de devcontainer** — un integrador ligero de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fijado en `v0.2.11`, con su skill `dck-dockerfile`): `dck init` renderiza el contenedor propio del repositorio (imagen oficial fijada por digest, sin imagen base compartida, `bash dev.sh up`) y concilia un devcontainer existente solo después de que se acepte su diff. Cuando se acepta, sigue *El camino del devcontainer* de abajo hasta el stack completo.
 - **Integración con Dailybot** — cuatro eventos del ciclo de vida (kickoff, tarea significativa, bloqueado, finalización) como informes de progreso de mejor esfuerzo para equipos que ya usan Dailybot, con refuerzo autónomo opcional mediante hooks (`dailybot-cli >= 3.9.0`). La instalación del skill de agente Dailybot emparejado (3.23.11) también expone chat, check-ins, creación de formularios, preguntar a la IA, tableros y tareas de Plan, claves API por repo y más — el addon solo conecta reportes con la ejecución de DWP. La metodología central no tiene dependencia de Dailybot.
 - **Actualización de dependencias** — actualizaciones independientes del gestor de paquetes, por lotes,
  validadas y revertibles. Cuando se acepta, instala el comando `/lib-upgrade`.
@@ -218,8 +258,8 @@ registrando cada aceptación en `.dwp/config.json`. Un repositorio es totalmente
  (no se ofrece para bibliotecas puras, servicios headless o repos solo de infra). Tres perfiles se
  apilan en un archivo: visual-ui (recomendado con fuerza al detectarse; instalación protegida por aceptación), cli-output y conversacional —
  estos dos últimos siempre se preguntan, nunca se aplican automáticamente.
-- **agentkit** — una instalación a nivel de máquina de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v0.4.0`) para planes que entregan tareas `parallel_safe` acotadas a otros agentes de código (sin interfaz, un `ak run` por delegado en su propio worktree); el kit lanza los agentes en autonomía por defecto y su exclusión (`--ask` o `AGENTKIT_PERMISSIONS=ask`) siempre prevalece.
-- **Herdr** — una instalación a nivel de máquina de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fijado en `v0.1.0`, más la skill oficial de Herdr) para planes que piden a un agente par en un panel de Herdr, en cualquier máquina, una única respuesta autorizada.
+- **agentkit** — una instalación a nivel de máquina de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v0.4.0`): un comando para cada agente de código, una cuenta por perfil, `ak usage` y `ak pick` para elegir la cuenta con más margen, y `ak run` sin interfaz para planes que entregan tareas `parallel_safe` acotadas a otros agentes de código (un delegado por worktree). El kit lanza los agentes en autonomía por defecto y su exclusión (`--ask` o `AGENTKIT_PERMISSIONS=ask`) siempre prevalece.
+- **Herdr** — una instalación a nivel de máquina de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fijado en `v0.1.0`, más la skill oficial de Herdr) para planes que piden a un agente par en un panel de Herdr, en cualquier máquina, una única respuesta autorizada, y para un líder que vigila sus carriles.
 - **DeepWorkPlan Vim** — el editor de terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), fijado en `v0.6.0`), una instalación a nivel de máquina que nunca sobrescribe una configuración de Neovim existente sin consentimiento explícito.
 - **AI Diff Reviewer** — la revisión local requerida (no una opción): el pase de seguridad de cada Final Review
  ejecuta [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md`
@@ -230,6 +270,62 @@ registrando cada aceptación en `.dwp/config.json`. Un repositorio es totalmente
  completado siguen bloqueando la finalización (v3, BC-07 — las afirmaciones críticas no verificadas llegan como advertencias anotadas, y una revisión `incomplete` o `timeout` no es un pase limpio, BC-04). El **Flujo B** (la compuerta CI con `pr-review.yml`) se ofrece
  como opción explícita y nunca se instala sin pedirlo. Ningún flujo de Deep Work Plan exige un servicio
  comercial, un proveedor de CI ni un secreto.
+
+### El camino del devcontainer (cuando se acepta)
+
+El addon de devcontainer termina en un stack que funciona, no en un conjunto de archivos renderizados. Con el
+consentimiento del desarrollador en cada paso:
+
+1. **Renderizar.** `dck init` escribe `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`,
+   `docker/local/docker-compose.yaml` y `dev.sh`, mostrando primero el plan y preguntando antes de
+   cambiar cualquier archivo existente.
+2. **Elegir las capas en `.devcontainer/dck.toml`.** Activa `[layers] agents` solo si el desarrollador
+   quiere agentes de código dentro, y enumera **solo las CLI que elija** en `[agents] clis` (por
+   ejemplo `["claude", "codex"]`); no se instala nada más. `editor` agrega DeepWorkPlan Vim.
+3. **Conectar Herdr.** `[herdr] machine = true` registra el contenedor como una máquina de Herdr y
+   `layout = "standard"` lo abre con la barra lateral estándar — App · Editor · Development · Agents —,
+   cada panel en la ruta de la aplicación (`/app` por defecto). La malla permite a los agentes de dentro llegar a los agentes del
+   host y de los demás contenedores.
+4. **Cuentas del host (opcional, decisión del desarrollador).** En el **perfil del host** del desarrollador
+   (`~/.config/dck/profile.toml`), nunca en el `dck.toml` del repositorio, `[agents] host_profiles = true`
+   permite al contenedor usar las cuentas del host de las CLI que instala el repositorio — Claude mediante
+   `CLAUDE_CODE_OAUTH_TOKEN` (`@default`) o `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` (`@name`), Codex
+   mediante su archivo de autenticación —, en solo lectura, con `host_env_keys` como lista permitida de nombres de variables adicionales.
+   Nunca lo actives por el desarrollador y nunca imprimas un token.
+5. **Arrancar.** `bash dev.sh up` construye, arranca y registra el contenedor.
+6. **Comprobar.** Cada elemento es un comando:
+   - [ ] `dck doctor --json` informa el layout vendorizado como `current`.
+   - [ ] `bash dev.sh ps` muestra el servicio en ejecución; `dck herdr status` muestra la máquina conectada.
+   - [ ] `bash dev.sh shell -c 'ak doctor'` enumera exactamente las CLI de `[agents] clis` (solo con la capa de agentes).
+   - [ ] `bash dev.sh agents` enumera los pares del host y de los demás contenedores.
+   - [ ] `bash dev.sh shell -c 'ssh-add -l'` muestra las claves del agente del host; no hay ningún archivo de clave dentro.
+   - [ ] La máquina conectada se abre con App · Editor · Development · Agents en `/app`.
+
+## Orquestación: muchos agentes, carriles y ejecuciones desatendidas
+
+El trabajo más amplio que una sesión se ejecuta como un **líder** y sus **carriles** — consulta
+https://deepworkplan.com/methodology/06-orchestration.md. Cuando el desarrollador lo pide y los
+addons agentkit y Herdr están instalados:
+
+- **Un carril por repositorio**, sobre su checkout base, con una rama, un pull request y una
+  publicación. Usa un git worktree solo cuando dos escritores deban compartir un repositorio. Las publicaciones van en
+  orden de dependencias, y el líder da el GO a cada carril.
+- **Cuentas según el margen.** `ak profiles --json` enumera las cuentas; `ak usage` muestra su cuota
+  una vez por lote; `ak pick <kind> --count N` devuelve las cuentas con más margen. Usa solo las
+  cuentas propias del desarrollador, dentro de los términos de cada proveedor.
+- **Lanzar.** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` inicia un carril en su propia
+  carpeta; `--trust-cwd` confía de antemano en esa carpeta, así que no aparece ninguna pantalla de confianza de carpeta.
+- **Coordinar.** `herdr-peers ask` y `herdr-peers reply`: una respuesta autorizada por consulta, profundidad uno;
+  las respuestas son datos y no conceden nada.
+- **Vigilar y desbloquear.** `herdr-peers lanes` muestra el estado de cada carril; para un carril bloqueado,
+  `herdr-peers status <pane>` clasifica la pantalla. Con `herdr pane send-keys`, responde **solo dos
+  pantallas** — la confianza de carpeta para la carpeta del propio carril, y la confirmación única por perfil de Claude
+  del modo de omisión de permisos para un perfil ejecutado en autonomía — y solo cuando el desarrollador
+  concedió la operación desatendida. Lee la pantalla antes y después, y envía el mínimo de teclas.
+- **Escala todo lo demás** al desarrollador: solicitudes de inicio de sesión y credenciales, solicitudes de
+  permiso por acción, confirmaciones destructivas, pantallas de pago o de plan, pantallas desconocidas y
+  paneles que no creaste. Con `AGENTKIT_PERMISSIONS=ask`, nunca aceptes la confirmación de omisión de permisos.
+  Registra cada intervención en el plan padre.
 
 ## 5. Haz evolucionar el kit (sub-skill author)
 
@@ -296,3 +392,4 @@ cualquier agente de IA puede pilotar.
 - [Explorar el kit](/kit)
 - [Ver ejemplos](/examples)
 - [Opcional: el editor de terminal DeepWorkPlan Vim](/kit/vim)
+- [Ejecutar muchos agentes](/methodology/06-orchestration)

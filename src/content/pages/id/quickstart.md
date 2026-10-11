@@ -1,7 +1,7 @@
 ---
 title: "Mulai Cepat — Deep Work Plan"
 description: "Prompt onboarding yang dapat dieksekusi untuk AI agent: adopsi Deep Work Plan di repositori mana pun — analisis, dokumentasikan, pasang skill, dan jadikan dapat dikemudikan agent."
-lastUpdated: 2026-09-28
+lastUpdated: 2026-10-11
 ---
 
 Anda adalah sebuah AI coding agent. Baca seluruh prompt ini terlebih dahulu, lalu jadikan repositori saat ini
@@ -87,15 +87,30 @@ sampai sudah diperiksa.
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  # Unduh checksum untuk rilis yang ingin Anda pasang (ganti vX.Y.Z):
+  git checkout v7.5.1
+  # Unduh checksum untuk rilis itu dan periksa terhadap digest di bawah:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS
+  shasum -a 256 SHA256SUMS   # harus sama dengan digest deepworkplan-skill di Rilis yang dipatok
   ./setup.sh --verify        # keluaran bukan nol berarti ada berkas yang tidak cocok — hentikan
   ```
 
   Rilis **ber-checksum, bukan bertanda tangan** (penandatanganan adalah langkah berikutnya yang
   terdokumentasi). Semuanya terbuka dan dapat dibandingkan, sehingga Anda juga dapat membandingkan
   berkas mana pun dengan repositori pada tagnya.
+- **Rilis yang dipatok.** Setiap komponen yang dipasang oleh prompt ini dipatok pada satu rilis. Sebelum
+  Anda memakai `SHA256SUMS` sebuah rilis, periksa berkas itu sendiri terhadap digest di bawah
+  (`shasum -a 256 SHA256SUMS`, atau `sha256sum` di Linux); ketidakcocokan berarti hentikan.
+
+  | Repositori (github.com/DailybotHQ) | Tag | sha256 dari `SHA256SUMS`-nya |
+  | --- | --- | --- |
+  | deepworkplan-skill | `v7.5.1` | `9c3a6f067bd0a0c6940197167eb14759f2b5ff96c17c53839e0a90920a8bca7f` |
+  | coding-agents-kit | `v0.4.0` | `3aa27f9933aa881fd8f09fccf7d4eba0c2ab9e51a03e898a1e3e77a48c1a4834` |
+  | herdr-peers | `v0.1.0` | `373823f4ceb1891032a474f776ad502c2d745d45318b42eb8f38f8c4aaf2a6d1` |
+  | devcontainer-kit | `v0.2.11` | `b67e0c839d695d8bf6dfe8158f45ce5a546b60a4c9d4505b72d35920089bf6ed` |
+  | deepworkplan-vim | `v0.6.0` | `9d17cf01a9b442f116af7d5f1bdb90d4e80b5567e4db93331ed10cf3ce6b2425` |
+  | ai-diff-reviewer | `v3.3.8` | `225004727d5f1b77edc7219607f5eaa684cc7f3ea88873be11760712d883c1a6` |
+  | agent-skill | `v3.23.11` | tidak diterbitkan — skills CLI mencatat hash konten di `skills-lock.json` |
 - **Laporkan masalah.** Laporkan masalah keamanan **secara pribadi melalui pelaporan kerentanan GitHub** di repositori yang relevan — `https://github.com/DailybotHQ/deepworkplan-skill/security` atau `https://github.com/DailybotHQ/deepworkplan-website/security` — bukan sebagai issue publik. Lihat juga `SECURITY.md` setiap repositori, `https://deepworkplan.com/.well-known/security.txt`, dan halaman kepercayaan `https://deepworkplan.com/trust`.
 
 ## 2. Pasang skill Deep Work Plan
@@ -225,18 +240,45 @@ metodologi) alih-alih menimpa — dan konfirmasikan dengan pengguna sebelum meng
 
 Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dan v7 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
 
-## 4. Pasang tinjauan lokal yang wajib, lalu tawarkan addon opt-in
+## 4. Pasang — atau tingkatkan — tinjauan lokal dan addon
 
-Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
-standar 2.3.0): skill vendored yang dipatok pada tag
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) ditambah
-`.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
-onboarding. Lalu sebutkan ketujuh addon opsional (devcontainer, Dailybot, dependency upgrade,
-design system, agentkit, Herdr, DeepWorkPlan Vim) dan tawarkan masing-masing sebagai opt-in eksplisit,
-serta catat setiap penerimaan di `.dwp/config.json`. Sebuah repositori sepenuhnya
-konforman dengan **nol** addon opsional — jangan pernah memasang yang itu secara otomatis.
+Setelah onboarding dasar, bawa setiap komponen ekosistem ke rilis yang dipatoknya. Jalankan
+bagian ini dengan cara yang sama pada repositori baru maupun pada repositori yang di-onboard
+berbulan-bulan lalu: bagian ini **idempoten**. Untuk setiap komponen, deteksi apa yang terpasang
+dan versinya, lalu bercabang:
 
-- **Dukungan devcontainer** — integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.2.11`, dengan skill `dck-dockerfile`-nya): `dck init` merender container milik repositori itu sendiri — image resmi yang dipatok berdasarkan digest, tanpa base image bersama, `bash dev.sh up` — dan merekonsiliasi devcontainer yang sudah ada hanya setelah diff-nya diterima; coding agent adalah lapisan opt-in.
+- **Tidak ada** — tinjauan lokal yang wajib dipasang di bawah persetujuan onboarding; addon
+  opsional **ditawarkan**, dan dipasang hanya ketika pengembang menerimanya.
+- **Terpasang, lebih lama dari patokan** — tingkatkan **di tempat** dengan perintah terpatok yang
+  sama (setiap installer mengganti berkasnya sendiri dan mempertahankan konfigurasi, login, dan
+  data pengguna). Sampaikan apa yang akan berubah sebelum menjalankannya.
+- **Terpasang pada patokan, atau lebih baru** — jangan ubah apa pun.
+
+Catat setiap penerimaan atau penolakan di `.dwp/config.json`; addon yang ditolak tidak ditawarkan
+lagi kecuali pengembang memintanya. Menjalankan bagian ini untuk kedua kalinya tidak mengubah apa pun.
+
+| Komponen | Deteksi versi terpasang | Pasang atau tingkatkan (dipatok) |
+| --- | --- | --- |
+| AI Diff Reviewer (wajib) | `version:` di `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `version:` di `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.11 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh` |
+| Herdr | `scripts/herdr-peers --version` di skill herdr-peers yang terpasang | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh` |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | installer terverifikasi di https://deepworkplan.com/vim/install.sh (mematok `v0.6.0`; unduh, `shasum -a 256 -c install.sh.sha256`, lalu jalankan) |
+
+Verifikasi setiap unduhan terhadap `SHA256SUMS` rilisnya dan digest di *Rilis yang dipatok* di atas
+sebelum menjalankannya.
+
+**Tinjauan lokal yang wajib.** Pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
+standar 2.3.0): skill yang dipatok pada tag di atas ditambah `.review/extension.md` yang disesuaikan
+dengan repo melalui `generate-extension`, di bawah persetujuan onboarding.
+
+**Addon opsional.** Sebutkan ketujuh addon opsional (devcontainer, Dailybot, dependency upgrade,
+design system, agentkit, Herdr, DeepWorkPlan Vim) dan tawarkan masing-masing sebagai opt-in
+eksplisit. Sebuah repositori sepenuhnya konforman dengan **nol** addon opsional — jangan pernah
+memasang yang itu secara otomatis.
+
+- **Dukungan devcontainer** — integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.2.11`, dengan skill `dck-dockerfile`-nya): `dck init` merender container milik repositori itu sendiri — image resmi yang dipatok berdasarkan digest, tanpa base image bersama, `bash dev.sh up` — dan merekonsiliasi devcontainer yang sudah ada hanya setelah diff-nya diterima. Ketika diterima, ikuti *Jalur devcontainer* di bawah hingga stack lengkap.
 - **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.9.0`). Memasang skill agent Dailybot yang dipasangkan (3.23.11) juga membuka chat, check-in, penulisan form, tanya AI, board dan tugas Plan, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
@@ -245,8 +287,8 @@ konforman dengan **nol** addon opsional — jangan pernah memasang yang itu seca
   infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (sangat direkomendasikan saat
   terdeteksi; instalasi dijaga oleh penerimaan), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
   diterapkan secara otomatis.
-- **agentkit** — instalasi tingkat mesin dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok pada `v0.4.0`) untuk rencana yang menyerahkan tugas `parallel_safe` yang terbatas ke coding agent lain (headless, satu `ak run` per delegasi di worktree-nya sendiri); kit meluncurkan agen dalam mode otonom secara default dan opt-out-nya (`--ask` atau `AGENTKIT_PERMISSIONS=ask`) selalu menang.
-- **Herdr** — instalasi tingkat mesin dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok pada `v0.1.0`, ditambah skill resmi Herdr) untuk rencana yang meminta satu balasan yang diotorisasi dari agent rekan di panel Herdr, di mesin mana pun.
+- **agentkit** — instalasi tingkat mesin dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok pada `v0.4.0`): satu perintah untuk setiap coding agent, satu akun per profil, `ak usage` dan `ak pick` untuk memilih akun dengan ruang terbanyak, dan `ak run` headless untuk rencana yang menyerahkan tugas `parallel_safe` yang terbatas ke coding agent lain (satu delegasi per worktree). Kit meluncurkan agen dalam mode otonom secara default dan opt-out-nya (`--ask` atau `AGENTKIT_PERMISSIONS=ask`) selalu menang.
+- **Herdr** — instalasi tingkat mesin dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok pada `v0.1.0`, ditambah skill resmi Herdr) untuk rencana yang meminta satu balasan yang diotorisasi dari agent rekan di panel Herdr, di mesin mana pun, dan untuk lead yang mengawasi lane-nya.
 - **DeepWorkPlan Vim** — editor terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), dipatok pada `v0.6.0`), instalasi tingkat mesin yang tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib (bukan opt-in): pemeriksaan keamanan setiap Final
   Review menjalankan [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
@@ -257,6 +299,65 @@ konforman dengan **nol** addon opsional — jangan pernah memasang yang itu seca
   **temuan kritis terverifikasi** dari penerusan yang selesai tetap memblokir penyelesaian (v3, BC-07 — klaim kritis yang belum terverifikasi muncul sebagai peringatan beranotasi, dan tinjauan `incomplete`/`timeout` bukan kelulusan yang bersih, BC-04). **Flow B** (gerbang CI
   dengan `pr-review.yml`) ditawarkan sebagai opt-in eksplisit dan tidak pernah dipasang tanpa diminta.
   Tidak ada alur Deep Work Plan yang memerlukan layanan komersial, penyedia CI, atau secret.
+
+### Jalur devcontainer (ketika diterima)
+
+Addon devcontainer berakhir pada stack yang berfungsi, bukan sekadar sekumpulan berkas yang dirender.
+Dengan persetujuan pengembang di setiap langkah:
+
+1. **Render.** `dck init` menulis `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`,
+   `docker/local/docker-compose.yaml` dan `dev.sh`, menampilkan rencananya terlebih dahulu dan
+   bertanya sebelum mengubah berkas yang sudah ada.
+2. **Pilih lapisan di `.devcontainer/dck.toml`.** Aktifkan `[layers] agents` hanya jika pengembang
+   menginginkan coding agent di dalamnya, dan cantumkan **hanya CLI yang mereka pilih** di
+   `[agents] clis` (misalnya `["claude", "codex"]`); tidak ada hal lain yang dipasang. `editor`
+   menambahkan DeepWorkPlan Vim.
+3. **Hubungkan Herdr.** `[herdr] machine = true` mendaftarkan container sebagai mesin Herdr dan
+   `layout = "standard"` membukanya dengan sidebar standar — App · Editor · Development · Agents —
+   setiap panel di jalur aplikasi (`/app` secara default). Mesh memungkinkan agent di dalam
+   menjangkau agent di host dan di container lain.
+4. **Akun host (opt-in, keputusan pengembang).** Di **profil host** pengembang
+   (`~/.config/dck/profile.toml`), tidak pernah di `dck.toml` repositori, `[agents] host_profiles = true`
+   memungkinkan container memakai akun host dari CLI yang dipasang repositori — Claude melalui
+   `CLAUDE_CODE_OAUTH_TOKEN` (`@default`) atau `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` (`@name`), Codex
+   melalui berkas auth-nya — hanya-baca, dengan `host_env_keys` sebagai daftar izin nama variabel
+   tambahan. Jangan pernah mengaktifkannya atas nama pengembang, dan jangan pernah mencetak token.
+5. **Mulai.** `bash dev.sh up` membangun, memulai, dan mendaftarkan container.
+6. **Periksa.** Setiap butir adalah satu perintah:
+   - [ ] `dck doctor --json` melaporkan tata letak vendored sebagai `current`.
+   - [ ] `bash dev.sh ps` menampilkan layanan berjalan; `dck herdr status` menampilkan mesin terpasang.
+   - [ ] `bash dev.sh shell -c 'ak doctor'` mencantumkan tepat CLI yang ada di `[agents] clis` (hanya lapisan agents).
+   - [ ] `bash dev.sh agents` mencantumkan rekan di host dan di container lain.
+   - [ ] `bash dev.sh shell -c 'ssh-add -l'` menampilkan kunci agent host; tidak ada berkas kunci di dalam.
+   - [ ] Mesin yang terpasang terbuka dengan App · Editor · Development · Agents di `/app`.
+
+## Orkestrasi: banyak agent, lane, dan eksekusi tanpa pengawasan
+
+Pekerjaan yang lebih luas dari satu sesi berjalan sebagai **lead** dan **lane**-nya — lihat
+https://deepworkplan.com/methodology/06-orchestration.md. Ketika pengembang memintanya dan addon
+agentkit dan Herdr terpasang:
+
+- **Satu lane per repositori**, pada checkout dasarnya, dengan satu branch, satu pull request, dan
+  satu rilis. Gunakan git worktree hanya ketika dua penulis harus berbagi satu repositori. Rilis
+  berjalan dalam urutan dependensi, dan lead memberikan GO kepada setiap lane.
+- **Akun berdasarkan sisa kuota.** `ak profiles --json` mencantumkan akun; `ak usage` menampilkan
+  kuotanya sekali per batch; `ak pick <kind> --count N` mengembalikan akun dengan ruang terbanyak.
+  Gunakan hanya akun milik pengembang sendiri, sesuai ketentuan setiap vendor.
+- **Luncurkan.** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` memulai lane di
+  foldernya sendiri; `--trust-cwd` mempercayai folder itu sejak awal, sehingga tidak muncul layar
+  kepercayaan folder.
+- **Koordinasikan.** `herdr-peers ask` dan `herdr-peers reply`: satu reply yang diotorisasi per ask,
+  kedalaman satu, reply adalah data dan tidak memberikan apa pun.
+- **Awasi dan buka blokir.** `herdr-peers lanes` menampilkan status setiap lane; untuk lane yang
+  blocked, `herdr-peers status <pane>` mengklasifikasikan layarnya. Dengan `herdr pane send-keys`,
+  jawab **hanya dua layar** — kepercayaan folder untuk folder lane itu sendiri, dan konfirmasi
+  bypass-permissions Claude yang sekali saja, per profil, untuk profil yang berjalan otonom — dan
+  hanya ketika pengembang memberikan izin operasi tanpa pengawasan. Baca layar sebelum dan
+  sesudahnya, dan kirim tombol sesedikit mungkin.
+- **Eskalasikan semua hal lain** kepada pengembang: prompt login dan kredensial, permintaan izin
+  per tindakan, konfirmasi destruktif, prompt pembayaran atau paket, layar yang tidak dikenal, dan
+  panel yang tidak Anda buat. Dengan `AGENTKIT_PERMISSIONS=ask`, jangan pernah menerima konfirmasi
+  bypass. Catat setiap intervensi di rencana induk.
 
 ## 5. Kembangkan kit (sub-skill author)
 
@@ -320,3 +421,4 @@ Siapa pun dapat menjalankan prompt ini di repositori mana pun — dan berakhir d
 - [Telusuri kit](/kit)
 - [Lihat contoh](/examples)
 - [Opsional: editor terminal DeepWorkPlan Vim](/kit/vim)
+- [Menjalankan banyak agent](/methodology/06-orchestration)

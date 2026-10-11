@@ -696,7 +696,7 @@ export const ko: SiteTranslations = {
         description:
           '프롬프트와 스킬을 확인하기 전까지 신뢰할 수 없는 것으로 취급하세요. 둘 다 오픈 소스이며 MIT 라이선스입니다. 스킬은 마크다운 우선으로 네트워크 호출과 텔레메트리가 없습니다. 모든 릴리스는 배포된 스킬에 대한 SHA256SUMS를 게시하므로 실행 전에 사본이 일치하는지 확인할 수 있습니다. 릴리스는 서명이 아니라 체크섬으로 검증됩니다(서명은 문서화된 다음 단계입니다).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -718,7 +718,7 @@ export const ko: SiteTranslations = {
       {
         title: '로컬 리뷰와 선택형 애드온',
         description:
-          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 일곱 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, Agentkit — 을 제안하며, 맞을 때만 채택하면 됩니다. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
+          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 일곱 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, Agentkit — 을 제안하며, 맞을 때만 채택하면 됩니다. 모든 구성 요소는 init.md가 SHA256SUMS 다이제스트를 게시하는 릴리스에 고정되며, 이 과정은 멱등적입니다. 없는 구성 요소는 제안되고, 오래된 것은 제자리에서 업그레이드되며, 최신인 것은 그대로 둡니다. 수락된 devcontainer는 전체 스택으로 완성됩니다 — 고른 에이전트, 양방향으로 연결된 Herdr, 그리고 옵트인한 경우에만 호스트 계정. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
       },
       {
         title: '계획하고 실행',
@@ -743,6 +743,10 @@ export const ko: SiteTranslations = {
       { label: '키트 둘러보기', href: '/kit' },
       { label: '예시 보기', href: '/examples' },
       { label: '선택 사항: 터미널 에디터 DeepWorkPlan Vim', href: '/kit/vim' },
+      {
+        label: '여러 에이전트 운영하기',
+        href: '/methodology/06-orchestration',
+      },
     ],
   },
 

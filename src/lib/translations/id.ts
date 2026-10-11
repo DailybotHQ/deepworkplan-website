@@ -699,7 +699,7 @@ export const id: SiteTranslations = {
         description:
           'Perlakukan prompt dan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Keduanya bersumber terbuka dan berlisensi MIT; skill berbasis Markdown tanpa panggilan jaringan dan tanpa telemetri. Setiap rilis menerbitkan SHA256SUMS atas skill yang dikirimkan, sehingga Anda dapat mengonfirmasi salinan Anda cocok sebelum menjalankannya. Rilis ber-checksum, bukan bertanda tangan (penandatanganan adalah langkah berikutnya yang terdokumentasi).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -721,7 +721,7 @@ export const id: SiteTranslations = {
       {
         title: 'Review lokal dan addon opt-in',
         description:
-          'Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan tujuh addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, dan Agentkit — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon opsional. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
+          'Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan tujuh addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, dan Agentkit — yang Anda terima hanya ketika cocok. Setiap komponen dipatok pada rilis yang digest SHA256SUMS-nya diterbitkan oleh init.md, dan prosesnya idempoten: komponen yang belum ada ditawarkan, yang lebih lama ditingkatkan di tempat, yang sudah terkini dibiarkan. Devcontainer yang diterima berakhir pada stack lengkap — agent yang Anda pilih, Herdr terhubung dua arah, dan akun host hanya jika Anda memilih ikut serta. Sebuah repo sepenuhnya konforman dengan nol addon opsional. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
       },
       {
         title: 'Rencanakan dan eksekusi',
@@ -746,6 +746,10 @@ export const id: SiteTranslations = {
       { label: 'Telusuri kit', href: '/kit' },
       { label: 'Lihat contoh', href: '/examples' },
       { label: 'Opsional: editor terminal DeepWorkPlan Vim', href: '/kit/vim' },
+      {
+        label: 'Menjalankan banyak agent',
+        href: '/methodology/06-orchestration',
+      },
     ],
   },
 

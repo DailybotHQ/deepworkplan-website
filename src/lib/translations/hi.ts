@@ -695,7 +695,7 @@ export const hi: SiteTranslations = {
         description:
           'प्रॉम्प्ट और स्किल को तब तक अविश्वसनीय मानें जब तक आपने उन्हें जाँच न लिया हो। दोनों ओपन-सोर्स और MIT लाइसेंस प्राप्त हैं; स्किल Markdown-first है जिसमें कोई नेटवर्क कॉल नहीं और कोई टेलीमेट्री नहीं है। प्रत्येक रिलीज़ भेजी गई स्किल पर SHA256SUMS प्रकाशित करती है, ताकि आप चलाने से पहले पुष्टि कर सकें कि आपकी प्रति मेल खाती है। रिलीज़ चेकसम की गई हैं, हस्ताक्षरित नहीं (हस्ताक्षर एक दस्तावेज़ीकृत अगला चरण है)।',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -717,7 +717,7 @@ export const hi: SiteTranslations = {
       {
         title: 'स्थानीय समीक्षा और ऑप्ट-इन ऐडऑन',
         description:
-          'ऑनबोर्डिंग अनिवार्य AI Diff Reviewer स्थानीय समीक्षा स्थापित करती है (इसका CI गेट वैकल्पिक बना रहता है) और सात ऑप्ट-इन ऐडऑन प्रदान करती है — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim और Agentkit — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों। एक रिपॉज़िटरी शून्य वैकल्पिक ऐडऑन के साथ भी पूर्णतः अनुरूप होती है। बेसलाइन से परे स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें।',
+          'ऑनबोर्डिंग अनिवार्य AI Diff Reviewer स्थानीय समीक्षा स्थापित करती है (इसका CI गेट वैकल्पिक बना रहता है) और सात ऑप्ट-इन ऐडऑन प्रदान करती है — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim और Agentkit — जिन्हें आप तभी स्वीकार करते हैं जब वे उपयुक्त हों। हर घटक एक ऐसी रिलीज़ पर पिन है जिसका SHA256SUMS digest init.md प्रकाशित करता है, और यह पास idempotent है: अनुपस्थित घटक प्रस्तुत किए जाते हैं, पुराने उसी स्थान पर अपग्रेड होते हैं, और वर्तमान घटक जैसे हैं वैसे छोड़ दिए जाते हैं। स्वीकार किया गया devcontainer पूर्ण स्टैक पर समाप्त होता है — आपके चुने हुए एजेंट, दोनों दिशाओं में जुड़ा Herdr, और होस्ट खाते केवल तभी जब आप opt-in करें। एक रिपॉज़िटरी शून्य वैकल्पिक ऐडऑन के साथ भी पूर्णतः अनुरूप होती है। बेसलाइन से परे स्टैक-उपयुक्त स्किल्स, एजेंट्स और कमांड्स विकसित करने के लिए /skill-create और /agent-create (author सब-स्किल) का उपयोग करें।',
       },
       {
         title: 'योजना बनाएँ और निष्पादित करें',
@@ -742,6 +742,7 @@ export const hi: SiteTranslations = {
       { label: 'किट देखें', href: '/kit' },
       { label: 'उदाहरण देखें', href: '/examples' },
       { label: 'वैकल्पिक: टर्मिनल एडिटर DeepWorkPlan Vim', href: '/kit/vim' },
+      { label: 'कई एजेंट चलाना', href: '/methodology/06-orchestration' },
     ],
   },
 

@@ -703,7 +703,7 @@ export const fr: SiteTranslations = {
         description:
           "Traitez le prompt et le skill comme non fiables jusqu'à les avoir vérifiés. Tous deux sont open source et sous licence MIT ; le skill est Markdown-first sans appels réseau ni télémétrie. Chaque version publie un SHA256SUMS sur les fichiers du skill, ce qui vous permet de confirmer que votre copie correspond avant de l'exécuter. Les versions ont des checksums, pas des signatures (la signature est la prochaine étape documentée).",
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -725,7 +725,7 @@ export const fr: SiteTranslations = {
       {
         title: 'Revue locale et addons facultatifs',
         description:
-          'L’onboarding installe la revue locale obligatoire AI Diff Reviewer (sa porte CI reste facultative) et propose sept addons optionnels — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim et Agentkit — que vous acceptez seulement lorsqu’ils conviennent. Un dépôt est pleinement conforme avec zéro addon optionnel. Utilisez /skill-create et /agent-create (le sous-skill author) pour faire grandir des skills, agents et commandes au-delà de la ligne de base.',
+          'L’onboarding installe la revue locale obligatoire AI Diff Reviewer (sa porte CI reste facultative) et propose sept addons optionnels — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim et Agentkit — que vous acceptez seulement lorsqu’ils conviennent. Chaque composant est épinglé à une version dont init.md publie le digest SHA256SUMS, et la passe est idempotente : les composants absents sont proposés, les plus anciens sont mis à jour sur place et les composants à jour sont laissés tels quels. Un devcontainer accepté aboutit à la pile complète : les agents que vous avez choisis, Herdr relié dans les deux sens et les comptes de l’hôte seulement si vous les activez. Un dépôt est pleinement conforme avec zéro addon optionnel. Utilisez /skill-create et /agent-create (le sous-skill author) pour faire grandir des skills, agents et commandes au-delà de la ligne de base.',
       },
       {
         title: 'Planifier et exécuter',
@@ -752,6 +752,10 @@ export const fr: SiteTranslations = {
       {
         label: 'Facultatif : l’éditeur de terminal DeepWorkPlan Vim',
         href: '/kit/vim',
+      },
+      {
+        label: 'Faire tourner de nombreux agents',
+        href: '/methodology/06-orchestration',
       },
     ],
   },

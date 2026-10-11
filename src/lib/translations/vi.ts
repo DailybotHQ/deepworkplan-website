@@ -696,7 +696,7 @@ export const vi: SiteTranslations = {
         description:
           'Hãy coi lời nhắc và skill là không đáng tin cho đến khi bạn đã kiểm tra chúng. Cả hai đều là mã nguồn mở và cấp phép MIT; skill là Markdown-first không có lời gọi mạng và không có telemetry. Mỗi bản phát hành công bố một SHA256SUMS cho skill được giao, vì vậy bạn có thể xác nhận bản sao của mình khớp trước khi chạy nó. Các bản phát hành có checksum, không có chữ ký (ký là bước tiếp theo đã được ghi lại).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -718,7 +718,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Đánh giá cục bộ và addon tự nguyện',
         description:
-          'Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bảy addon tự nguyện — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim và Agentkit — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon tùy chọn nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
+          'Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bảy addon tự nguyện — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim và Agentkit — mà bạn chỉ chấp nhận khi chúng phù hợp. Mọi thành phần đều được ghim vào một bản phát hành có digest SHA256SUMS được init.md công bố, và lượt cài đặt là idempotent: thành phần chưa có được đề xuất, thành phần cũ hơn được nâng cấp tại chỗ, thành phần đã cập nhật được giữ nguyên. Một devcontainer được chấp nhận sẽ kết thúc với toàn bộ stack — các agent bạn đã chọn, Herdr được đấu nối hai chiều, và tài khoản host chỉ khi bạn tự nguyện bật. Một repo hoàn toàn tuân thủ với không cần addon tùy chọn nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
       },
       {
         title: 'Lập kế hoạch và thực thi',
@@ -746,6 +746,7 @@ export const vi: SiteTranslations = {
         label: 'Tùy chọn: trình soạn thảo terminal DeepWorkPlan Vim',
         href: '/kit/vim',
       },
+      { label: 'Chạy nhiều agent', href: '/methodology/06-orchestration' },
     ],
   },
 

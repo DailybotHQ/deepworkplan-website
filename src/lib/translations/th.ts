@@ -692,7 +692,7 @@ export const th: SiteTranslations = {
         description:
           'ปฏิบัติต่อพรอมต์และสกิลว่าเป็นสิ่งที่ไม่น่าเชื่อถือจนกว่าจะได้ตรวจสอบ ทั้งสองเป็นโอเพนซอร์สและ MIT สกิลเป็น Markdown-first ไม่มีการเรียกเครือข่ายและไม่มีการเก็บข้อมูลการใช้งาน ทุกรีลีสเผยแพร่ SHA256SUMS สำหรับสกิลที่ส่งมา คุณจึงสามารถยืนยันว่าสำเนาของคุณตรงกันก่อนรัน รีลีสถูกตรวจสอบด้วย checksum ไม่ใช่ลายเซ็น (การลงนามเป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร)',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -714,7 +714,7 @@ export const th: SiteTranslations = {
       {
         title: 'การรีวิวในเครื่องและ addon แบบสมัครใจ',
         description:
-          'การ onboarding จะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจเจ็ดตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim และ Agentkit ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม repo สอดคล้องอย่างสมบูรณ์โดยมี addon เสริมศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
+          'การ onboarding จะติดตั้งการรีวิวในเครื่องที่จำเป็นของ AI Diff Reviewer (เกต CI ยังคงเป็นทางเลือก) และเสนอ addon แบบสมัครใจเจ็ดตัว ได้แก่ devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim และ Agentkit ซึ่งคุณรับมาเฉพาะเมื่อเหมาะสม ทุกคอมโพเนนต์ถูกตรึงไว้กับรีลีสที่ init.md เผยแพร่ digest ของ SHA256SUMS ไว้ และขั้นตอนนี้ idempotent: คอมโพเนนต์ที่ยังไม่มีจะถูกเสนอ ตัวที่เก่ากว่าจะอัปเกรดในที่เดิม ส่วนตัวที่เป็นปัจจุบันจะไม่ถูกแตะต้อง devcontainer ที่ยอมรับแล้วจะจบที่ stack ครบชุด ได้แก่ agent ที่คุณเลือก Herdr ที่เชื่อมสองทิศทาง และบัญชีโฮสต์เฉพาะเมื่อคุณเลือกเปิดใช้ repo สอดคล้องอย่างสมบูรณ์โดยมี addon เสริมศูนย์ตัว ใช้ /skill-create และ /agent-create (สกิลย่อย author) เพื่อสร้างสกิล agent และคำสั่งที่เหมาะกับสแตกเกินกว่าชุดพื้นฐาน',
       },
       {
         title: 'วางแผนและดำเนินการ',
@@ -739,6 +739,7 @@ export const th: SiteTranslations = {
       { label: 'เรียกดูชุดเครื่องมือ', href: '/kit' },
       { label: 'ดูตัวอย่าง', href: '/examples' },
       { label: 'ไม่บังคับ: ตัวแก้ไขบนเทอร์มินัล DeepWorkPlan Vim', href: '/kit/vim' },
+      { label: 'การรันเอเจนต์หลายตัว', href: '/methodology/06-orchestration' },
     ],
   },
 

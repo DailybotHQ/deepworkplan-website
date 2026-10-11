@@ -693,7 +693,7 @@ export const es: SiteTranslations = {
         description:
           'Trata el prompt y el skill como no confiables hasta haberlos comprobado. Ambos son de código abierto y con licencia MIT; el skill es Markdown-first sin llamadas de red ni telemetría. Cada versión publica un SHA256SUMS sobre los archivos del skill, así que puedes confirmar que tu copia coincide antes de ejecutarlo. Las versiones tienen checksums, no firmas (las firmas son el próximo paso documentado).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -715,7 +715,7 @@ export const es: SiteTranslations = {
       {
         title: 'Revisión local y addons opcionales',
         description:
-          'La incorporación instala la revisión local obligatoria de AI Diff Reviewer (su gate de CI sigue siendo opcional) y ofrece siete addons opcionales — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim y Agentkit — que aceptas solo cuando encajan. Un repo es plenamente conforme con cero addons opcionales. Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos más allá de la línea base.',
+          'La incorporación instala la revisión local obligatoria de AI Diff Reviewer (su gate de CI sigue siendo opcional) y ofrece siete addons opcionales — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim y Agentkit — que aceptas solo cuando encajan. Cada componente está fijado a una versión cuyo digest de SHA256SUMS publica init.md, y el paso es idempotente: los componentes ausentes se ofrecen, los anteriores se actualizan en su lugar y los actuales no se tocan. Un devcontainer aceptado termina en el stack completo: los agentes que elegiste, Herdr conectado en ambos sentidos y cuentas del host solo si las activas. Un repo es plenamente conforme con cero addons opcionales. Usa /skill-create y /agent-create (la sub-skill author) para hacer crecer skills, agentes y comandos más allá de la línea base.',
       },
       {
         title: 'Planifica y ejecuta',
@@ -742,6 +742,10 @@ export const es: SiteTranslations = {
       {
         label: 'Opcional: el editor de terminal DeepWorkPlan Vim',
         href: '/kit/vim',
+      },
+      {
+        label: 'Ejecutar muchos agentes',
+        href: '/methodology/06-orchestration',
       },
     ],
   },

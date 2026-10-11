@@ -702,7 +702,7 @@ export const ru: SiteTranslations = {
         description:
           'Относитесь к промпту и навыку как к ненадёжным, пока вы их не проверили. Оба являются открытым кодом под лицензией MIT; навык построен на Markdown без сетевых запросов и без телеметрии. Каждый релиз публикует SHA256SUMS для поставляемого навыка, так что вы можете убедиться, что ваша копия совпадает, прежде чем его запускать. Релизы содержат контрольные суммы, а не подписи (подпись — задокументированный следующий шаг).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -724,7 +724,7 @@ export const ru: SiteTranslations = {
       {
         title: 'Локальная проверка и опциональные дополнения',
         description:
-          'Онбординг устанавливает обязательную локальную проверку AI Diff Reviewer (её CI-гейт остаётся опциональным) и предлагает семь опциональных дополнений — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim и Agentkit, — которые вы принимаете, только когда они уместны. Репозиторий полностью соответствует стандарту и с нулём опциональных дополнений. Используйте /skill-create и /agent-create (под-навык author), чтобы растить навыки, агентов и команды за пределами базовой конфигурации.',
+          'Онбординг устанавливает обязательную локальную проверку AI Diff Reviewer (её CI-гейт остаётся опциональным) и предлагает семь опциональных дополнений — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim и Agentkit, — которые вы принимаете, только когда они уместны. Каждый компонент закреплён за релизом, дайджест SHA256SUMS которого публикует init.md, а проход идемпотентен: отсутствующие компоненты предлагаются, более старые обновляются на месте, актуальные остаются без изменений. Принятый devcontainer завершается полным стеком — выбранными вами агентами, Herdr, связанным в обе стороны, и учётными записями хоста, только если вы их включите. Репозиторий полностью соответствует стандарту и с нулём опциональных дополнений. Используйте /skill-create и /agent-create (под-навык author), чтобы растить навыки, агентов и команды за пределами базовой конфигурации.',
       },
       {
         title: 'Планируйте и выполняйте',
@@ -751,6 +751,10 @@ export const ru: SiteTranslations = {
       {
         label: 'По желанию: терминальный редактор DeepWorkPlan Vim',
         href: '/kit/vim',
+      },
+      {
+        label: 'Запуск множества агентов',
+        href: '/methodology/06-orchestration',
       },
     ],
   },
