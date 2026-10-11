@@ -279,7 +279,7 @@ standar 2.3.0): skill yang dipatok pada tag di atas ditambah `.review/extension.
 dengan repo melalui `generate-extension`, di bawah persetujuan onboarding.
 
 **Addon opsional.** Sebutkan ketujuh addon opsional (devcontainer, Dailybot, dependency upgrade,
-design system, agentkit, Herdr, DeepWorkPlan Vim) dan tawarkan masing-masing sebagai opt-in
+design system, agentkit, Herdr, DeepWorkPlan Vim) dan tawarkan hanya yang cocok untuk repositori ini, masing-masing sebagai opt-in
 eksplisit. Sebuah repositori sepenuhnya konforman dengan **nol** addon opsional — jangan pernah
 memasang yang itu secara otomatis.
 

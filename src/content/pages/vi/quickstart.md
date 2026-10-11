@@ -277,7 +277,7 @@ kể từ chuẩn 2.3.0): skill được ghim theo tag ở trên cùng một `.r
 `generate-extension`, dưới sự chấp thuận của quá trình khởi tạo.
 
 **Các addon tùy chọn.** Liệt kê bảy addon tùy chọn (devcontainer, Dailybot, dependency
-upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng. Một
+upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) và chỉ đề xuất những cái phù hợp với repository này, mỗi cái như một lựa chọn tự nguyện rõ ràng. Một
 repository hoàn toàn tuân thủ với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
 
 - **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.3.0`, cùng skill `dck-dockerfile` của nó): `dck init` tạo container riêng của repository — image chính thức ghim theo digest, không có base image dùng chung, `bash dev.sh up` — và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận. Khi được chấp nhận, hãy làm theo *Lộ trình devcontainer* bên dưới cho đến toàn bộ stack.

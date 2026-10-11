@@ -241,7 +241,7 @@ standardu 2.3.0): powyższy skill przypięty do tagu plus dopasowany do repozyto
 `generate-extension`, w ramach zgody onboardingu.
 
 **Opcjonalne dodatki.** Wymień siedem opcjonalnych dodatków (devcontainer, Dailybot, dependency upgrade,
-design system, agentkit, Herdr, DeepWorkPlan Vim) i zaproponuj każdy jako wyraźną opcję do wyboru. Repozytorium
+design system, agentkit, Herdr, DeepWorkPlan Vim) i zaproponuj tylko te, które pasują do tego repozytorium, każdy jako wyraźną opcję do wyboru. Repozytorium
 jest w pełni zgodne przy **zerowej** liczbie opcjonalnych dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — lekki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty `v0.3.0`, ze skillem `dck-dockerfile`): `dck init` generuje własny kontener repozytorium — oficjalny obraz przypięty po digeście, bez wspólnego obrazu bazowego, `bash dev.sh up` — i uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu. Po akceptacji przejdź *Ścieżkę devcontainera* poniżej aż do pełnego stosu.

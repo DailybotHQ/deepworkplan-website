@@ -270,7 +270,7 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 के लिए ढाली गई `.review/extension.md`, ऑनबोर्डिंग की सहमति के अंतर्गत।
 
 **वैकल्पिक ऐडऑन।** सात वैकल्पिक ऐडऑन (devcontainer, Dailybot, dependency upgrade, design system,
-agentkit, Herdr, DeepWorkPlan Vim) गिनाएँ और हर एक को एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत करें। एक
+agentkit, Herdr, DeepWorkPlan Vim) गिनाएँ और केवल वे प्रस्तुत करें जो इस रिपॉज़िटरी में फ़िट होते हैं, हर एक को एक स्पष्ट ऑप्ट-इन के रूप में। एक
 रिपॉज़िटरी **शून्य** वैकल्पिक ऐडऑन के साथ पूर्णतः अनुरूप होती है — उन्हें कभी स्वतः-स्थापित न करें।
 
 - **Devcontainer समर्थन** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.3.0` पर पिन, अपनी `dck-dockerfile` skill के साथ) का एक पतला एकीकरणकर्ता: `dck init` रिपॉज़िटरी का अपना container रेंडर करता है — digest पर पिन की गई आधिकारिक image, कोई साझा base image नहीं, `bash dev.sh up` — और किसी मौजूदा devcontainer का मिलान केवल उसके diff के स्वीकार होने के बाद करता है। स्वीकार होने पर, पूर्ण स्टैक तक पहुँचने के लिए नीचे दिए *devcontainer पथ* का पालन करें।

@@ -243,7 +243,7 @@ CI-поверхня, ніколи не обов'язкова для базово
 `generate-extension`, у межах згоди на онбординг.
 
 **Опційні аддони.** Перелічіть сім опційних аддонів (devcontainer, Dailybot, dependency upgrade,
-design system, agentkit, Herdr, DeepWorkPlan Vim) і запропонуйте кожен як явний opt-in. Репозиторій
+design system, agentkit, Herdr, DeepWorkPlan Vim) і запропонуйте лише ті, що підходять цьому репозиторію, кожен як явний opt-in. Репозиторій
 повністю відповідає вимогам і з **нульовою** кількістю опційних аддонів — ніколи не встановлюйте їх автоматично.
 
 - **Підтримка Devcontainer** — тонкий інтегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закріплено `v0.3.0`, зі скілом `dck-dockerfile`): `dck init` генерує власний контейнер репозиторію — офіційний образ, закріплений за digest, без спільного базового образу, `bash dev.sh up` — і узгоджує наявний devcontainer лише після того, як його diff прийнято. Після прийняття пройдіть *Шлях devcontainer* нижче до повного стека.

@@ -274,7 +274,7 @@ standardından itibaren gereklidir): yukarıdaki etikete sabitlenmiş skill art�
 `generate-extension` aracılığıyla depoya uyarlanmış bir `.review/extension.md`, onboarding onayı altında.
 
 **İsteğe bağlı eklentiler.** Yedi isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency
-upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) sıralayın ve her birini açık bir tercih
+upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) sıralayın ve yalnızca bu depoya uyanları, her birini açık bir tercih
 olarak sunun. Bir depo, **sıfır** isteğe bağlı eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
 - **Devcontainer desteği** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) için ince bir entegrasyon katmanı (`dck`, `v0.3.0` sürümüne sabitlenmiş, `dck-dockerfile` becerisiyle birlikte): `dck init` deponun kendi konteynerini oluşturur — özetle (digest) sabitlenmiş resmî imaj, ortak temel imaj yok, `bash dev.sh up` — ve mevcut bir devcontainer’ı yalnızca farkı (diff) kabul edildikten sonra uzlaştırır. Kabul edildiğinde, tam yığına ulaşmak için aşağıdaki *Devcontainer yolu*nu izleyin.

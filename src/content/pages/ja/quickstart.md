@@ -199,7 +199,7 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 **必須のローカルレビュー。** **AI Diff Reviewer ローカルレビュー**をインストールします（フェーズ 7a — 標準 2.3.0 以降は必須）。上の表にあるタグで固定されたスキルと、`generate-extension` によるリポジトリに合わせた `.review/extension.md` を、オンボーディングの同意のもとでインストールします。
 
-**オプションのアドオン。** 七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、それぞれを明示的なオプトインとして提案します。オプションのアドオンが**一つもなくても**、リポジトリは完全に適合します。これらを自動でインストールしてはいけません。
+**オプションのアドオン。** 七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、このリポジトリに合うものだけを、それぞれ明示的なオプトインとして提案します。オプションのアドオンが**一つもなくても**、リポジトリは完全に適合します。これらを自動でインストールしてはいけません。
 
 - **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.3.0` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ独自のコンテナを生成し（公式イメージをダイジェストで固定、共有ベースイメージなし、`bash dev.sh up`）、既存の devcontainer は差分が受け入れられた後にのみ調整します。受け入れられたら、下の*devcontainer の手順*に従って完全なスタックまで仕上げます。
 - **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.12）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。

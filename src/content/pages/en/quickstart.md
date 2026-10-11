@@ -285,7 +285,7 @@ since standard 2.3.0): the tag-pinned skill above plus a repo-tailored `.review/
 `generate-extension`, under the onboarding consent.
 
 **The optional addons.** Enumerate the seven optional addons (devcontainer, Dailybot, dependency
-upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) and offer each as an explicit opt-in. A
+upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) and offer only the ones that fit this repository, each as an explicit opt-in. A
 repository is fully conformant with **zero** optional addons — never auto-install those.
 
 - **Devcontainer support** — a thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v0.3.0`, with its `dck-dockerfile` skill): `dck init` renders the repository's own container — official image pinned by digest, no shared base image, `bash dev.sh up` — and reconciles an existing devcontainer only after its diff is accepted. When accepted, follow *The devcontainer path* below to the full stack.

@@ -9,13 +9,17 @@ import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 // kit, spec, methodology and page Markdown, the quickstart strings — must name
 // exactly that tag, and /init.md must publish each release's SHA256SUMS digest.
 // Moving a pin is one edit in ecosystem-pins.ts plus every surface this test
-// names. Historical release notes (the changelog collection) are excluded:
-// they record what was true then.
+// names. Historical release notes (the changelog collection) and the dated
+// provenance history in docs/ARCHITECTURE.md are excluded: they record what
+// was true then. docs/ECOSYSTEM_CONTEXT.md is in: its table is the hub's
+// claim of what the site pins.
 
 const ROOT = process.cwd();
 
 const SURFACES = [
   'README.md',
+  'AGENTS.md',
+  'docs/ECOSYSTEM_CONTEXT.md',
   'public/init.md',
   'public/llms.txt',
   'public/llms-full.txt',
@@ -60,6 +64,10 @@ const tagPatterns = (repo: string): RegExp[] => {
       `\\[${r}\\]\\([^)]*\\)[^\\n]*?pinned \`(v\\d+\\.\\d+\\.\\d+)\``,
       'g'
     ),
+    new RegExp(`\\b${r} \`(v\\d+\\.\\d+\\.\\d+)\``, 'g'),
+    new RegExp(`\\b${r}@(v\\d+\\.\\d+\\.\\d+)`, 'g'),
+    // A table row that starts with the repository (init.md, ECOSYSTEM_CONTEXT).
+    new RegExp(`^\\| ${r} \\|[^\\n]*?\\| \`(v\\d+\\.\\d+\\.\\d+)\``, 'gm'),
   ];
 };
 

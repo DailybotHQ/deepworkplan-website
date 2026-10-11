@@ -25,8 +25,8 @@ deepworkplan-skill pins).
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
 | deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v7.6.0` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
-| ai-diff-reviewer | Addon: pull-request review | Public | `v3.3.0` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
-| agent-skill | Addon: Dailybot reporting | Public | `v3.23.3` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
+| ai-diff-reviewer | Addon: pull-request review | Public | `v3.3.9` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
+| agent-skill | Addon: Dailybot reporting | Public | `v3.23.12` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |
 | devcontainer-kit | Addon: development containers | Public | `v0.3.0` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon: coding-agent installer | Public | `v0.5.0` | `/kit/agentkit`, `/init.md` | Documented only |

@@ -254,7 +254,7 @@ depuis le standard 2.3.0) : la skill épinglée par tag ci-dessus plus un `.revi
 `generate-extension`, sous le consentement de l’onboarding.
 
 **Les addons facultatifs.** Énumérez les sept addons facultatifs (devcontainer, Dailybot, mise à jour des
-dépendances, design system, agentkit, Herdr, DeepWorkPlan Vim) et proposez chacun comme un choix explicite. Un
+dépendances, design system, agentkit, Herdr, DeepWorkPlan Vim) et proposez uniquement ceux qui conviennent à ce dépôt, chacun comme un choix explicite. Un
 dépôt est pleinement conforme avec **zéro** addon facultatif — ne les installez jamais automatiquement.
 
 - **Prise en charge du devcontainer** — un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.3.0`, avec sa skill `dck-dockerfile`) : `dck init` génère le conteneur propre au dépôt (image officielle épinglée par digest, aucune image de base partagée, `bash dev.sh up`) et ne réconcilie un devcontainer existant qu’après acceptation de son diff. Une fois accepté, suivez *Le parcours devcontainer* ci-dessous jusqu’à la pile complète.

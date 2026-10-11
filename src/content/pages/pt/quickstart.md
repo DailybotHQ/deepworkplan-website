@@ -248,7 +248,7 @@ desde o padrão 2.3.0): a skill fixada por tag acima mais um `.review/extension.
 `generate-extension`, sob o consentimento do onboarding.
 
 **Os addons opcionais.** Enumere os sete addons opcionais (devcontainer, Dailybot, atualização de
-dependências, design system, agentkit, Herdr, DeepWorkPlan Vim) e ofereça cada um como uma escolha explícita. Um
+dependências, design system, agentkit, Herdr, DeepWorkPlan Vim) e ofereça apenas os que se encaixam neste repositório, cada um como uma escolha explícita. Um
 repositório é totalmente conforme com **zero** addons opcionais — nunca instale esses automaticamente.
 
 - **Suporte a devcontainer** — um integrador enxuto do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v0.3.0`, com sua skill `dck-dockerfile`): `dck init` renderiza o contêiner próprio do repositório (imagem oficial fixada por digest, sem imagem base compartilhada, `bash dev.sh up`) e reconcilia um devcontainer existente somente depois que seu diff é aceito. Quando aceito, siga *O caminho do devcontainer* abaixo até o stack completo.
