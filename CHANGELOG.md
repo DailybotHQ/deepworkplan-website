@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.53] - 2026-10-11
+
 ### Changed
 
 - The vendored Deep Work Plan skill moves to 7.5.1 and every public pin to devcontainer-kit v0.2.11, whose Herdr layout also closes the workspace Herdr opens before the layout runs (named after the app path, such as "app"), so the container shows only App · Editor · Development · Agents. The site's container is re-rendered with v0.2.11, and the addon registry records ai-diff-reviewer v3.3.7 and Dailybot v3.23.10.
@@ -1250,7 +1252,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.52...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.53...HEAD
+[5.0.53]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.53
 [5.0.52]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.52
 [5.0.51]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.51
 [5.0.50]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.50
