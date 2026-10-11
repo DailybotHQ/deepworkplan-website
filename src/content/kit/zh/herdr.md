@@ -56,7 +56,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 容器与主机
 
-借助基于 devcontainer-kit `v0.2.5` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。
+借助基于 devcontainer-kit `v0.2.6` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。
 
 ## Herdr 还是 agentkit
 
