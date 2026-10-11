@@ -60,7 +60,7 @@ La barra laterale risponde al mouse e alla tastiera. La piccola freccia accanto 
 
 Piani e albero dei file si alternano: aprire una barra laterale chiude l’altra, così si guarda una cosa alla volta. Il lettore si chiude insieme alla barra laterale dei piani. Se aprire una barra laterale chiuda l’altra lo decide la chiave `sidebars.exclusive` in `dwpvim.json`.
 
-Un piano orchestratore — un lead che coordina corsie in altri repository — ha anche una vista delle corsie: ogni corsia con il suo repository e il suo stato, accanto al piano padre, così l’intera orchestra si legge in un unico posto. Vedi [Eseguire molti agenti](/methodology/06-orchestration).
+Un piano orchestratore — un lead che coordina corsie in altri repository — ha anche una vista delle corsie in sola lettura: `:DwpLanes`, o `L` nella barra laterale dei piani. Legge le tabelle delle corsie del piano e mostra lo stato in tempo reale di ogni corsia da `herdr-peers lanes`; se nessun Herdr è raggiungibile, lo segnala e mostra solo le tabelle. Vedi [Eseguire molti agenti](/methodology/06-orchestration).
 
 Per leggere sul posto i file Markdown di un piano, `SPC m p` mostra l’anteprima del buffer corrente nel browser e `SPC m r` lo renderizza nel buffer. Entrambi funzionano solo nei buffer Markdown.
 

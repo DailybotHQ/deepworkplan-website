@@ -49,7 +49,7 @@ Vendor dapat dicampur dengan cara yang sama. Lane Claude dapat menulis sementara
 Lead dapat memulai lane dan menjaganya tetap berjalan tanpa ada orang di depan keyboard. Ia menggunakan perintah Herdr sendiri; tidak ada kode kit yang mengirim penekanan tombol. Prosedurnya memiliki urutan tetap: hindari prompt, deteksi saat berhenti, buka blokir hanya yang sudah dikenal, eskalasikan sisanya.
 
 1. **Hindari lebih dulu.** `ak pick <kind>` menyebut akun dengan ruang terbanyak, dan `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` meluncurkan lane di foldernya sendiri. `--trust-cwd` (atau `AGENTKIT_TRUST_CWD=1`) mempercayai folder itu sejak awal, dan otonomi default kit melakukan sisanya, sehingga Claude dan Codex melewati layar kepercayaan folder tanpa penekanan tombol.
-2. **Deteksi.** `herdr-peers lanes` (atau `herdr agent list`) menampilkan setiap lane sebagai working, idle, blocked, atau done. Untuk lane yang blocked, atau idle tanpa keluaran, `herdr-peers status <pane>` mengklasifikasikan layar tempat ia berada, dan `herdr pane read <pane>` menampilkannya.
+2. **Deteksi.** `herdr-peers lanes` (atau `herdr agent list`) menampilkan setiap lane sebagai working, idle, blocked, atau done. Untuk lane yang blocked, atau idle tanpa keluaran, `herdr-peers status <pane>` mengklasifikasikan layar tempat ia berada — kepercayaan folder, pengakuan bypass, login, izin, atau tidak dikenal — beserta langkah berikutnya yang terdokumentasi, dan `herdr pane read <pane>` menampilkannya.
 3. **Buka blokir hanya layar pertama yang sudah dikenal.** Dengan `herdr pane send-keys`, lead menjawab dua layar dan tidak lebih: kepercayaan folder untuk folder milik lane itu sendiri, dan pengakuan satu kali per profil dari Claude atas mode bypass-permissions untuk profil yang dijalankan pengembang secara otonom. Lead melakukannya hanya ketika pengembang telah mengizinkan operasi tanpa pengawasan — sebuah instruksi tetap atau pra-otorisasi rencana. Ia membaca layar sebelum mengirim tombol, mengirim tombol paling sedikit yang menjawabnya, lalu membaca lagi.
 4. **Eskalasikan semua yang lain.** Prompt login dan kredensial, permintaan izin per aksi, konfirmasi destruktif, prompt pembayaran atau paket, layar yang tidak dikenal, dan panel yang tidak dibuat oleh lead diteruskan ke pengembang sebagai milestone blocked, tidak pernah sebagai penekanan tombol.
 5. **Opt-out selalu menang.** Dengan `AGENTKIT_PERMISSIONS=ask`, pengakuan bypass-permissions tidak pernah diterima.
@@ -67,7 +67,7 @@ Lane dan lead berkomunikasi melalui [herdr-peers](/id/kit/herdr): sebuah **ask**
 - **Data, bukan instruksi.** Sebuah reply tidak memberikan apa pun yang belum dimiliki penerimanya. Klaim sebuah lane bahwa gate-nya lulus diperiksa dengan menjalankan gate tersebut.
 - **Catatan tentang siapa melakukan apa.** Setiap catatan delegasi menyebut akun dan vendor lane tersebut, sehingga rencana induk menunjukkan akun mana yang mengerjakan pekerjaan mana.
 
-Lead dapat melihat seluruh orkestra sekaligus: `herdr-peers lanes` mencantumkan setiap lane beserta statusnya, dan [DeepWorkPlan Vim](/id/kit/vim) menampilkan lane dari sebuah rencana orkestrator dalam tampilan lane di samping rencana itu sendiri.
+Lead dapat melihat seluruh orkestra sekaligus: `herdr-peers lanes` mencantumkan setiap lane beserta statusnya, dan [DeepWorkPlan Vim](/id/kit/vim) menampilkan lane dari sebuah rencana orkestrator di samping rencana itu sendiri (`:DwpLanes`).
 
 ## Satu branch, satu rilis per repositori
 

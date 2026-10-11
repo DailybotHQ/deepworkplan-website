@@ -49,7 +49,7 @@ Anbieter lassen sich auf dieselbe Weise mischen. Eine Claude-Lane kann schreiben
 Ein Lead kann Lanes starten und in Bewegung halten, ohne dass jemand an der Tastatur sitzt. Er nutzt dafür die eigenen Befehle von Herdr; kein Code des Kits sendet Tastendrücke. Das Vorgehen hat eine feste Reihenfolge: die Abfrage vermeiden, den Halt erkennen, nur Bekanntes entsperren, den Rest eskalieren.
 
 1. **Zuerst vermeiden.** `ak pick <kind>` nennt das Konto mit dem meisten Spielraum, und `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` startet die Lane in ihrem eigenen Ordner. `--trust-cwd` (oder `AGENTKIT_TRUST_CWD=1`) vertraut diesem Ordner im Voraus, und die standardmäßige Autonomie des Kits erledigt den Rest, sodass Claude und Codex ihre Bildschirme zum Ordnervertrauen ohne Tastendrücke überspringen.
-2. **Erkennen.** `herdr-peers lanes` (oder `herdr agent list`) zeigt jede Lane als arbeitend, untätig, blockiert oder fertig. Für eine Lane, die blockiert ist oder untätig ohne Ausgabe, klassifiziert `herdr-peers status <pane>` den Bildschirm, auf dem sie steht, und `herdr pane read <pane>` zeigt ihn an.
+2. **Erkennen.** `herdr-peers lanes` (oder `herdr agent list`) zeigt jede Lane als arbeitend, untätig, blockiert oder fertig. Für eine Lane, die blockiert ist oder untätig ohne Ausgabe, klassifiziert `herdr-peers status <pane>` den Bildschirm, auf dem sie steht — Ordnervertrauen, Bypass-Bestätigung, Anmeldung, Berechtigung oder unbekannt — mit dem dokumentierten nächsten Schritt, und `herdr pane read <pane>` zeigt ihn an.
 3. **Nur die bekannten Erststart-Bildschirme entsperren.** Mit `herdr pane send-keys` beantwortet der Lead zwei Bildschirme und sonst nichts: das Ordnervertrauen für den eigenen Ordner der Lane und Claudes einmalige Bestätigung des Bypass-Permissions-Modus pro Profil, für ein Profil, das der Entwickler in Autonomie betreibt. Er tut dies nur, wenn der Entwickler unbeaufsichtigten Betrieb gewährt hat — eine dauerhafte Anweisung oder die Vorab-Autorisierung des Plans. Er liest den Bildschirm, bevor er Tasten sendet, sendet die wenigsten Tasten, die ihn beantworten, und liest erneut.
 4. **Alles andere eskalieren.** Anmelde- und Zugangsdatenabfragen, Berechtigungsanfragen pro Aktion, Bestätigungen destruktiver Schritte, Zahlungs- oder Tarifabfragen, unbekannte Bildschirme und Panes, die der Lead nicht erstellt hat, gehen als blockierter Meilenstein an den Entwickler, nie als Tastendrücke.
 5. **Das Opt-out gewinnt.** Mit `AGENTKIT_PERMISSIONS=ask` wird die Bestätigung des Bypass-Permissions-Modus nie akzeptiert.
@@ -67,7 +67,7 @@ Lanes und Lead kommunizieren über [herdr-peers](/de/kit/herdr): Ein **ask** tr�
 - **Daten, keine Anweisungen.** Eine reply gewährt nichts, was der Empfänger nicht schon hatte. Die Behauptung einer Lane, ihr Gate sei bestanden, wird geprüft, indem das Gate ausgeführt wird.
 - **Ein Nachweis, wer was getan hat.** Jeder Delegationsnachweis nennt das Konto und den Anbieter der Lane, sodass der übergeordnete Plan zeigt, welches Konto welche Arbeit getragen hat.
 
-Der Lead kann das gesamte Orchester auf einen Blick sehen: `herdr-peers lanes` listet jede Lane mit ihrem Zustand auf, und [DeepWorkPlan Vim](/de/kit/vim) zeigt die Lanes eines Orchestrator-Plans in einer Lanes-Ansicht neben dem Plan selbst.
+Der Lead kann das gesamte Orchester auf einen Blick sehen: `herdr-peers lanes` listet jede Lane mit ihrem Zustand auf, und [DeepWorkPlan Vim](/de/kit/vim) zeigt die Lanes eines Orchestrator-Plans neben dem Plan selbst (`:DwpLanes`).
 
 ## Ein Branch, ein Release pro Repository
 

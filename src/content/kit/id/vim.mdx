@@ -60,7 +60,7 @@ Bilah samping ini merespons mouse dan keyboard. Panah kecil di samping sebuah re
 
 Rencana dan pohon berkas bergantian: membuka satu bilah samping menutup yang lain, sehingga Anda melihat satu hal pada satu waktu. Pembaca ditutup bersama bilah samping rencana. Apakah membuka satu bilah samping menutup yang lain diatur oleh kunci `sidebars.exclusive` di `dwpvim.json`.
 
-Rencana orkestrator — lead yang mengoordinasikan lane di repositori lain — juga mendapat tampilan lane: setiap lane dengan repositori dan statusnya, di samping rencana induk, sehingga seluruh orkestra terbaca di satu tempat. Lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+Rencana orkestrator — lead yang mengoordinasikan lane di repositori lain — juga mendapat tampilan lane hanya-baca: `:DwpLanes`, atau `L` di bilah samping rencana. Tampilan ini membaca tabel lane rencana dan menampilkan status langsung setiap lane dari `herdr-peers lanes`; bila tidak ada Herdr yang dapat dijangkau, ia menyatakannya dan hanya menampilkan tabel. Lihat [Menjalankan banyak agent](/methodology/06-orchestration).
 
 Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau buffer saat ini di peramban dan `SPC m r` merendernya di dalam buffer. Keduanya hanya berfungsi di buffer Markdown.
 

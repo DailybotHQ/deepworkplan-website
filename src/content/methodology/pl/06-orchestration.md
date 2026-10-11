@@ -49,7 +49,7 @@ Dostawców łączy się w ten sam sposób. Tor Claude może pisać, podczas gdy 
 Prowadzący może uruchamiać tory i utrzymywać je w ruchu, gdy nikt nie siedzi przy klawiaturze. Używa do tego własnych poleceń Herdr; żaden kod kitu nie wysyła naciśnięć klawiszy. Procedura ma stałą kolejność: unikać monitu, wykryć zatrzymanie, odblokować tylko to, co znane, eskalować resztę.
 
 1. **Najpierw unikaj.** `ak pick <kind>` wskazuje konto z największym zapasem, a `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` uruchamia tor w jego własnym folderze. `--trust-cwd` (lub `AGENTKIT_TRUST_CWD=1`) z góry oznacza ten folder jako zaufany, a domyślna autonomia kitu robi resztę, więc Claude i Codex pomijają ekrany zaufania do folderu bez naciskania klawiszy.
-2. **Wykryj.** `herdr-peers lanes` (lub `herdr agent list`) pokazuje każdy tor jako pracujący, bezczynny, zablokowany lub zakończony. Dla toru zablokowanego albo bezczynnego bez wyjścia `herdr-peers status <pane>` klasyfikuje ekran, na którym stoi, a `herdr pane read <pane>` go pokazuje.
+2. **Wykryj.** `herdr-peers lanes` (lub `herdr agent list`) pokazuje każdy tor jako pracujący, bezczynny, zablokowany lub zakończony. Dla toru zablokowanego albo bezczynnego bez wyjścia `herdr-peers status <pane>` klasyfikuje ekran, na którym stoi — zaufanie do folderu, potwierdzenie trybu bypass, logowanie, uprawnienie lub nieznany — wraz z udokumentowanym następnym krokiem, a `herdr pane read <pane>` go pokazuje.
 3. **Odblokowuj tylko znane ekrany pierwszego uruchomienia.** Za pomocą `herdr pane send-keys` prowadzący odpowiada na dwa ekrany i nic więcej: zaufanie do własnego folderu toru oraz jednorazowe, per profil, potwierdzenie trybu bypass-permissions w Claude dla profilu, który programista uruchamia w trybie autonomii. Robi to tylko wtedy, gdy programista zezwolił na pracę bez nadzoru — stałym poleceniem lub wstępną autoryzacją planu. Czyta ekran przed wysłaniem klawiszy, wysyła najmniej klawiszy, które na niego odpowiadają, i czyta ponownie.
 4. **Eskaluj wszystko inne.** Monity logowania i poświadczeń, prośby o uprawnienia dla poszczególnych akcji, potwierdzenia operacji destrukcyjnych, monity płatności lub planu, nieznane ekrany i panele, których prowadzący nie utworzył, trafiają do programisty jako zablokowany kamień milowy, nigdy jako naciśnięcia klawiszy.
 5. **Rezygnacja wygrywa.** Przy `AGENTKIT_PERMISSIONS=ask` potwierdzenie trybu bypass-permissions nigdy nie jest akceptowane.
@@ -67,7 +67,7 @@ Tory i prowadzący komunikują się przez [herdr-peers](/pl/kit/herdr): **ask** 
 - **Dane, nie instrukcje.** Reply nie przyznaje niczego, czego odbiorca jeszcze nie miał. Twierdzenie toru, że jego bramka przeszła, sprawdza się, uruchamiając bramkę.
 - **Zapis tego, kto co zrobił.** Każdy zapis delegacji podaje konto i dostawcę toru, dzięki czemu plan nadrzędny pokazuje, które konto wykonało którą pracę.
 
-Prowadzący może zobaczyć całą orkiestrę naraz: `herdr-peers lanes` wyświetla każdy tor z jego stanem, a [DeepWorkPlan Vim](/pl/kit/vim) pokazuje tory planu orkiestratora w widoku torów obok samego planu.
+Prowadzący może zobaczyć całą orkiestrę naraz: `herdr-peers lanes` wyświetla każdy tor z jego stanem, a [DeepWorkPlan Vim](/pl/kit/vim) pokazuje tory planu orkiestratora obok samego planu (`:DwpLanes`).
 
 ## Jedna gałąź, jedno wydanie na repozytorium
 

@@ -60,7 +60,7 @@ Kenar çubuğu hem fareye hem klavyeye yanıt verir. Bir planın yanındaki kü�
 
 Planlar ve dosya ağacı sırayla açılır: bir kenar çubuğunu açmak diğerini kapatır, böylece aynı anda tek bir şeye bakarsınız. Okuyucu, plan kenar çubuğuyla birlikte kapanır. Bir kenar çubuğunu açmanın diğerini kapatıp kapatmayacağını `dwpvim.json` içindeki `sidebars.exclusive` anahtarı belirler.
 
-Bir orkestratör planı — diğer depolardaki şeritleri koordine eden bir lider — ayrıca bir şeritler görünümü de alır: her şerit deposu ve durumuyla, üst planın yanında; böylece tüm orkestra tek bir yerden okunur. Bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
+Bir orkestratör planı — diğer depolardaki şeritleri koordine eden bir lider — ayrıca salt okunur bir şeritler görünümü de alır: `:DwpLanes` ya da plan kenar çubuğunda `L`. Planın şerit tablolarını okur ve her şeridin canlı durumunu `herdr-peers lanes` üzerinden gösterir; erişilebilir bir Herdr yoksa bunu belirtir ve yalnızca tabloları gösterir. Bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
 
 Bir planın Markdown dosyalarını yerinde okumak için `SPC m p` geçerli arabelleği tarayıcıda önizler, `SPC m r` ise arabellek içinde işler. İkisi de yalnızca Markdown arabelleklerinde çalışır.
 

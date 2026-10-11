@@ -49,7 +49,7 @@ Sağlayıcılar da aynı şekilde karıştırılabilir. Bir Claude şeridi yazar
 Bir lider, klavyede kimse olmadan şeritleri başlatabilir ve ilerlemelerini sürdürebilir. Herdr'ın kendi komutlarını kullanır; hiçbir kit kodu tuş vuruşu göndermez. Prosedürün sabit bir sırası vardır: istemden kaçın, durmayı algıla, yalnızca bilineni çöz, gerisini yukarı aktar.
 
 1. **Önce kaçının.** `ak pick <kind>` en çok kapasiteye sahip hesabı belirtir ve `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` şeridi kendi klasöründe başlatır. `--trust-cwd` (veya `AGENTKIT_TRUST_CWD=1`) o klasöre önceden güvenir ve gerisini kitin varsayılan özerkliği halleder; böylece Claude ve Codex klasör güveni ekranlarını hiç tuş vuruşu olmadan atlar.
-2. **Algılayın.** `herdr-peers lanes` (veya `herdr agent list`), her şeridi çalışıyor, boşta, engellenmiş ya da tamamlanmış olarak gösterir. Engellenmiş ya da çıktısız boşta duran bir şerit için `herdr-peers status <pane>` bulunduğu ekranı sınıflandırır, `herdr pane read <pane>` ise ekranı gösterir.
+2. **Algılayın.** `herdr-peers lanes` (veya `herdr agent list`), her şeridi çalışıyor, boşta, engellenmiş ya da tamamlanmış olarak gösterir. Engellenmiş ya da çıktısız boşta duran bir şerit için `herdr-peers status <pane>` bulunduğu ekranı — klasör güveni, bypass onayı, oturum açma, izin ya da bilinmeyen — belgelenmiş sonraki adımla birlikte sınıflandırır, `herdr pane read <pane>` ise ekranı gösterir.
 3. **Yalnızca bilinen ilk çalıştırma ekranlarının engelini kaldırın.** Lider `herdr pane send-keys` ile iki ekranı yanıtlar, başka hiçbirini değil: şeridin kendi klasörü için klasör güveni ve geliştiricinin özerk çalıştırdığı bir profil için Claude'un bypass-permissions modunu bir kez, profil başına onaylaması. Bunu yalnızca geliştirici gözetimsiz çalışmaya izin verdiğinde yapar — kalıcı bir talimat ya da planın ön yetkilendirmesi. Tuş göndermeden önce ekranı okur, onu yanıtlayan en az tuşu gönderir ve yeniden okur.
 4. **Geri kalan her şeyi yukarı aktarın.** Oturum açma ve kimlik bilgisi istemleri, eylem başına izin istekleri, yıkıcı onaylar, ödeme ya da plan istemleri, bilinmeyen ekranlar ve liderin oluşturmadığı bölmeler, tuş vuruşu olarak değil, engellenmiş bir kilometre taşı olarak geliştiriciye gider.
 5. **Devre dışı bırakma üstün gelir.** `AGENTKIT_PERMISSIONS=ask` ayarlıyken bypass-permissions onayı asla kabul edilmez.
@@ -67,7 +67,7 @@ Her müdahale — ekranın ne gösterdiği, hangi tuşların gönderildiği, ard
 - **Talimat değil, veri.** Bir yanıt, alıcıya zaten sahip olmadığı hiçbir şeyi vermez. Bir şeridin kapısının geçtiği iddiası, kapı çalıştırılarak doğrulanır.
 - **Kimin neyi yaptığının kaydı.** Her devretme kaydı şeridin hesabını ve sağlayıcısını belirtir; böylece üst plan hangi hesabın hangi işi taşıdığını gösterir.
 
-Lider tüm orkestrayı tek bakışta görebilir: `herdr-peers lanes` her şeridi durumuyla birlikte listeler ve [DeepWorkPlan Vim](/tr/kit/vim), bir orkestratör planının şeritlerini planın hemen yanındaki bir şeritler görünümünde gösterir.
+Lider tüm orkestrayı tek bakışta görebilir: `herdr-peers lanes` her şeridi durumuyla birlikte listeler ve [DeepWorkPlan Vim](/tr/kit/vim), bir orkestratör planının şeritlerini planın hemen yanında gösterir (`:DwpLanes`).
 
 ## Depo başına tek dal, tek sürüm
 

@@ -49,7 +49,7 @@ Các nhà cung cấp cũng được kết hợp theo cùng cách. Một lane Cla
 Một lead có thể khởi chạy các lane và giữ cho chúng tiếp tục chạy mà không cần ai ngồi trước bàn phím. Nó dùng chính các lệnh của Herdr; không có mã nào của kit gửi phím bấm. Quy trình có thứ tự cố định: tránh lời nhắc, phát hiện điểm dừng, chỉ gỡ vướng những gì đã biết, chuyển lên phần còn lại.
 
 1. **Tránh trước tiên.** `ak pick <kind>` chỉ ra tài khoản còn nhiều chỗ nhất, và `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` khởi chạy lane trong thư mục riêng của nó. `--trust-cwd` (hoặc `AGENTKIT_TRUST_CWD=1`) tin cậy trước thư mục đó và chế độ tự chủ mặc định của kit lo phần còn lại, nên Claude và Codex bỏ qua màn hình tin cậy thư mục mà không cần phím bấm nào.
-2. **Phát hiện.** `herdr-peers lanes` (hoặc `herdr agent list`) hiển thị mỗi lane đang làm việc, nhàn rỗi, bị chặn hay đã xong. Với một lane bị chặn, hoặc nhàn rỗi mà không có đầu ra, `herdr-peers status <pane>` phân loại màn hình mà nó đang ở, và `herdr pane read <pane>` hiển thị màn hình đó.
+2. **Phát hiện.** `herdr-peers lanes` (hoặc `herdr agent list`) hiển thị mỗi lane đang làm việc, nhàn rỗi, bị chặn hay đã xong. Với một lane bị chặn, hoặc nhàn rỗi mà không có đầu ra, `herdr-peers status <pane>` phân loại màn hình mà nó đang ở — tin cậy thư mục, xác nhận bypass, đăng nhập, cấp quyền hoặc không xác định — kèm bước tiếp theo đã được tài liệu hóa, và `herdr pane read <pane>` hiển thị màn hình đó.
 3. **Chỉ gỡ vướng các màn hình lần đầu đã biết.** Với `herdr pane send-keys`, lead trả lời hai màn hình và không gì khác: tin cậy thư mục cho thư mục riêng của lane, và xác nhận một lần, theo từng hồ sơ, của Claude về chế độ bypass-permissions cho một hồ sơ mà nhà phát triển chạy tự chủ. Nó chỉ làm vậy khi nhà phát triển đã cho phép vận hành không giám sát — một chỉ thị thường trực hoặc sự cấp phép trước của kế hoạch. Nó đọc màn hình trước khi gửi phím, gửi ít phím nhất đủ để trả lời, rồi đọc lại.
 4. **Chuyển lên mọi thứ khác.** Lời nhắc đăng nhập và thông tin xác thực, yêu cầu cấp quyền cho từng hành động, xác nhận phá hủy, lời nhắc thanh toán hoặc gói dịch vụ, màn hình không xác định và các pane mà lead không tạo ra đều được chuyển tới nhà phát triển dưới dạng một mốc bị chặn, không bao giờ dưới dạng phím bấm.
 5. **Opt-out luôn được ưu tiên.** Với `AGENTKIT_PERMISSIONS=ask`, xác nhận bypass-permissions không bao giờ được chấp nhận.
@@ -67,7 +67,7 @@ Các lane và lead trao đổi qua [herdr-peers](/vi/kit/herdr): một **ask** m
 - **Dữ liệu, không phải chỉ thị.** Một reply không cấp thêm điều gì mà bên nhận chưa có. Lời khẳng định của một lane rằng cổng kiểm chứng đã đạt được kiểm tra bằng cách chạy cổng đó.
 - **Bản ghi ai đã làm gì.** Mỗi bản ghi ủy thác nêu tài khoản và nhà cung cấp của lane, nên kế hoạch cha cho thấy tài khoản nào đã đảm nhận công việc nào.
 
-Lead có thể nhìn thấy toàn bộ dàn nhạc cùng lúc: `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, và [DeepWorkPlan Vim](/vi/kit/vim) hiển thị các lane của một kế hoạch điều phối trong chế độ xem lane ngay cạnh chính kế hoạch đó.
+Lead có thể nhìn thấy toàn bộ dàn nhạc cùng lúc: `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, và [DeepWorkPlan Vim](/vi/kit/vim) hiển thị các lane của một kế hoạch điều phối ngay cạnh chính kế hoạch đó (`:DwpLanes`).
 
 ## Một nhánh, một bản phát hành cho mỗi repository
 

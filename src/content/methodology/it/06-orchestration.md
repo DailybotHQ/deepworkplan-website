@@ -49,7 +49,7 @@ I fornitori si combinano allo stesso modo. Una corsia Claude può scrivere mentr
 Un lead può avviare corsie e farle avanzare senza nessuno alla tastiera. Usa i comandi di Herdr; nessun codice del kit invia tasti. La procedura ha un ordine fisso: evitare il prompt, rilevare l’arresto, sbloccare solo ciò che è noto, escalare il resto.
 
 1. **Prima, evitare.** `ak pick <kind>` indica l’account con più margine, e `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` avvia la corsia nella propria cartella. `--trust-cwd` (o `AGENTKIT_TRUST_CWD=1`) considera attendibile in anticipo quella cartella e l’autonomia predefinita del kit fa il resto, così Claude e Codex saltano le schermate di attendibilità della cartella senza alcun tasto.
-2. **Rilevare.** `herdr-peers lanes` (o `herdr agent list`) mostra ogni corsia come al lavoro, inattiva, bloccata o completata. Per una corsia bloccata, o inattiva senza output, `herdr-peers status <pane>` classifica la schermata in cui si trova, e `herdr pane read <pane>` la mostra.
+2. **Rilevare.** `herdr-peers lanes` (o `herdr agent list`) mostra ogni corsia come al lavoro, inattiva, bloccata o completata. Per una corsia bloccata, o inattiva senza output, `herdr-peers status <pane>` classifica la schermata in cui si trova — attendibilità della cartella, conferma del bypass dei permessi, login, permesso o sconosciuta — con il passo successivo documentato, e `herdr pane read <pane>` la mostra.
 3. **Sbloccare solo le schermate note del primo avvio.** Con `herdr pane send-keys`, il lead risponde a due schermate e a nient’altro: l’attendibilità della cartella per la cartella della corsia stessa, e la conferma una tantum, per profilo, della modalità di bypass dei permessi di Claude per un profilo che lo sviluppatore esegue in autonomia. Lo fa solo quando lo sviluppatore ha concesso il funzionamento non presidiato — un’istruzione permanente o la pre-autorizzazione del piano. Legge la schermata prima di inviare tasti, invia il minimo di tasti che la risolve e rilegge.
 4. **Escalare tutto il resto.** Prompt di login e di credenziali, richieste di permesso per singola azione, conferme distruttive, schermate di pagamento o di piano, schermate sconosciute e pannelli che il lead non ha creato vanno allo sviluppatore come milestone di blocco, mai come tasti.
 5. **L’opt-out prevale.** Con `AGENTKIT_PERMISSIONS=ask`, la conferma della modalità di bypass dei permessi non viene mai accettata.
@@ -67,7 +67,7 @@ Le corsie e il lead comunicano tramite [herdr-peers](/it/kit/herdr): una **richi
 - **Dati, non istruzioni.** Una risposta non concede nulla che il destinatario non avesse già. L’affermazione di una corsia che il suo gate è passato si verifica eseguendo il gate.
 - **Una traccia di chi ha fatto cosa.** Ogni record di delega indica l’account e il fornitore della corsia, così il piano padre mostra quale account ha svolto quale lavoro.
 
-Il lead può vedere tutta l’orchestra in un colpo d’occhio: `herdr-peers lanes` elenca ogni corsia con il suo stato, e [DeepWorkPlan Vim](/it/kit/vim) mostra le corsie di un piano orchestratore in una vista delle corsie accanto al piano stesso.
+Il lead può vedere tutta l’orchestra in un colpo d’occhio: `herdr-peers lanes` elenca ogni corsia con il suo stato, e [DeepWorkPlan Vim](/it/kit/vim) mostra le corsie di un piano orchestratore accanto al piano stesso (`:DwpLanes`).
 
 ## Un branch, un rilascio per repository
 

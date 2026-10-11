@@ -49,7 +49,7 @@ Los proveedores se combinan igual. Un carril de Claude puede escribir mientras u
 Un líder puede iniciar carriles y mantenerlos en marcha sin nadie al teclado. Usa los propios comandos de Herdr; ningún código del kit envía pulsaciones de teclas. El procedimiento tiene un orden fijo: evitar la pregunta, detectar la parada, desbloquear solo lo conocido y escalar el resto.
 
 1. **Primero, evitar.** `ak pick <kind>` nombra la cuenta con más margen, y `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` lanza el carril en su propia carpeta. `--trust-cwd` (o `AGENTKIT_TRUST_CWD=1`) confía de antemano en esa carpeta y la autonomía predeterminada del kit hace el resto, así que Claude y Codex omiten sus pantallas de confianza de carpeta sin pulsaciones.
-2. **Detectar.** `herdr-peers lanes` (o `herdr agent list`) muestra cada carril como trabajando, inactivo, bloqueado o terminado. Para un carril bloqueado, o inactivo sin salida, `herdr-peers status <pane>` clasifica la pantalla en la que está, y `herdr pane read <pane>` la muestra.
+2. **Detectar.** `herdr-peers lanes` (o `herdr agent list`) muestra cada carril como trabajando, inactivo, bloqueado o terminado. Para un carril bloqueado, o inactivo sin salida, `herdr-peers status <pane>` clasifica la pantalla en la que está — confianza de carpeta, confirmación de omisión de permisos, inicio de sesión, permiso o desconocida — con el siguiente paso documentado, y `herdr pane read <pane>` la muestra.
 3. **Desbloquear solo las pantallas conocidas del primer arranque.** Con `herdr pane send-keys`, el líder responde dos pantallas y nada más: la confianza de carpeta para la carpeta del propio carril, y la confirmación única por perfil de Claude del modo de omisión de permisos para un perfil que el desarrollador ejecuta en autonomía. Solo lo hace cuando el desarrollador concedió la operación desatendida: una instrucción permanente o la autorización previa del plan. Lee la pantalla antes de enviar teclas, envía el mínimo de teclas que la responden y vuelve a leer.
 4. **Escalar todo lo demás.** Las solicitudes de inicio de sesión y credenciales, las solicitudes de permiso por acción, las confirmaciones destructivas, las pantallas de pago o de plan, las pantallas desconocidas y los paneles que el líder no creó van al desarrollador como un hito de bloqueo, nunca como pulsaciones.
 5. **La exclusión prevalece.** Con `AGENTKIT_PERMISSIONS=ask`, la confirmación del modo de omisión de permisos nunca se acepta.
@@ -67,7 +67,7 @@ Los carriles y el líder se comunican mediante [herdr-peers](/es/kit/herdr): una
 - **Datos, no instrucciones.** Una respuesta no concede nada que el receptor no tuviera ya. La afirmación de un carril de que su puerta de validación pasó se comprueba ejecutando esa puerta.
 - **Un registro de quién hizo qué.** Cada registro de delegación nombra la cuenta y el proveedor del carril, de modo que el plan padre muestra qué cuenta llevó qué trabajo.
 
-El líder puede ver toda la orquesta a la vez: `herdr-peers lanes` enumera cada carril con su estado, y [DeepWorkPlan Vim](/es/kit/vim) muestra los carriles de un plan orquestador en una vista de carriles junto al propio plan.
+El líder puede ver toda la orquesta a la vez: `herdr-peers lanes` enumera cada carril con su estado, y [DeepWorkPlan Vim](/es/kit/vim) muestra los carriles de un plan orquestador junto al propio plan (`:DwpLanes`).
 
 ## Una rama, una publicación por repositorio
 

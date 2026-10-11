@@ -60,7 +60,7 @@ Die Seitenleiste reagiert auf Maus und Tastatur. Der kleine Pfeil neben einem Pl
 
 Pläne und Dateibaum wechseln sich ab: Das Öffnen der einen Seitenleiste schließt die andere, sodass Sie jeweils nur eines betrachten. Der Reader schließt sich zusammen mit der Plan-Seitenleiste. Ob das Öffnen der einen Seitenleiste die andere schließt, legt der Schlüssel `sidebars.exclusive` in `dwpvim.json` fest.
 
-Ein Orchestrator-Plan — ein Lead, der Lanes in anderen Repositorys koordiniert — erhält zusätzlich eine Lanes-Ansicht: jede Lane mit ihrem Repository und ihrem Zustand, neben dem übergeordneten Plan, sodass sich das gesamte Orchester an einer Stelle lesen lässt. Siehe [Viele Agenten betreiben](/methodology/06-orchestration).
+Ein Orchestrator-Plan — ein Lead, der Lanes in anderen Repositorys koordiniert — erhält zusätzlich eine schreibgeschützte Lanes-Ansicht: `:DwpLanes` oder `L` in der Plan-Seitenleiste. Sie liest die Lane-Tabellen des Plans und zeigt den Live-Zustand jeder Lane aus `herdr-peers lanes`; ist kein Herdr erreichbar, sagt sie das und zeigt nur die Tabellen. Siehe [Viele Agenten betreiben](/methodology/06-orchestration).
 
 Um die Markdown-Dateien eines Plans an Ort und Stelle zu lesen, zeigt `SPC m p` den aktuellen Puffer im Browser an und `SPC m r` rendert ihn im Puffer. Beides funktioniert nur in Markdown-Puffern.
 
