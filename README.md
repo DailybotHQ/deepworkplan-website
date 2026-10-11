@@ -48,7 +48,7 @@ The fastest path: paste this into any coding agent, in the repository you want t
 Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.
 ```
 
-`/init.md` is English-only and machine-executable. It verifies what it installs, installs or upgrades the skill and every addon you accept to the pinned releases it lists, onboards the repository without overwriting your work, and ends with a conformance check. The human version, in 17 languages, is [/quickstart](https://deepworkplan.com/quickstart).
+`/init.md` is English-only and machine-executable. It verifies what it installs, installs or upgrades the skill and the required local review to the pinned releases it lists, detects every addon — upgrading the ones you use and offering the ones that fit — onboards the repository without overwriting your work, and ends with a conformance check. The human version, in 17 languages, is [/quickstart](https://deepworkplan.com/quickstart).
 
 To install the skill by hand, pinned to its release and verified first:
 
@@ -85,7 +85,7 @@ curl -s -H 'Accept: text/markdown' https://deepworkplan.com/kit | head -5
 - **[agentkit](https://deepworkplan.com/kit/agentkit)** — accounts and profiles, `ak profiles --json`, `ak pick`, `--trust-cwd`, the `agentkit-orchestrate` skill.
 - **[devcontainer](https://deepworkplan.com/kit/devcontainer)** — host accounts inside the container (`[agents] host_profiles`, opt-in in the host profile; only the CLIs the repository installs).
 - **[Herdr](https://deepworkplan.com/kit/herdr)** and **[DeepWorkPlan Vim](https://deepworkplan.com/kit/vim)** — lane status and the `:DwpLanes` lanes view.
-- **`/init.md`** — a pinned-releases table with digests, an idempotent install-or-upgrade pass for every addon, the devcontainer path to the full stack, and the unattended-lane rules.
+- **`/init.md`** — a pinned-releases table with digests, an idempotent pass that detects every addon, upgrades the ones you use and offers the ones that fit, the devcontainer path to the full stack, and the unattended-lane rules.
 
 ## How it fits with Deep Work Plan
 

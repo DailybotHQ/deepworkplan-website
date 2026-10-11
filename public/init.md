@@ -317,15 +317,20 @@ methodology) instead of overwriting — and confirm with the user before replaci
 
 ## 4. Install — or upgrade — the local review and the addons
 
-After the baseline onboarding, bring every ecosystem component to its pinned release. Run this
-section the same way on a fresh repository and on one onboarded months ago: it is **idempotent**.
-For each component, detect what is installed and its version, then branch:
+After the baseline onboarding, the Deep Work Plan skill and the required AI Diff Reviewer local
+review are in place in **every** repository. The other addons are not: each one belongs only in the
+repositories it fits. This section **detects every addon, upgrades the ones you use, and offers the
+ones that fit** — it never adds an addon just to complete the set. Run it the same way on a fresh
+repository and on one onboarded months ago: it is **idempotent**. For each component, detect what
+is installed and its version, then branch:
 
-- **Absent** — the required local review is installed under the onboarding consent; an optional
-  addon is **offered**, and installed only when the developer accepts it.
-- **Installed, older than the pin** — upgrade it **in place** with the same pinned command (each
-  installer replaces its own files and keeps the user's configuration, logins and data). Say what
-  will change before running it.
+- **Absent** — the required local review is installed under the onboarding consent. An optional
+  addon is **offered** only when it fits this repository, and installed only when the developer
+  accepts it.
+- **Installed, older than the pin** — if it still fits, upgrade it **in place** with the same pinned
+  command (each installer replaces its own files and keeps the user's configuration, logins and
+  data). Say what will change before running it. If it no longer fits, say so and leave the
+  decision to the developer.
 - **Installed at the pin, or newer** — change nothing.
 
 Record every acceptance or decline in `.dwp/config.json`; a declined addon is not offered again

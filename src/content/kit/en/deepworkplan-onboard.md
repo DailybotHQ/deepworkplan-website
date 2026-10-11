@@ -29,7 +29,7 @@ Turn a repository into an AI-first, spec-driven codebase. This is the onboard su
 4. Generate `docs/` (architecture, standards, testing, security, and more) and per-module docs.
 5. Generate `.agents/` (agents, thin `dwp-*` commands, stack-appropriate skills, catalog) + `.claude → .agents`.
 6. Install the skill and scaffold a gitignored `.dwp/` (plans, drafts) and a `tmp/` scratch space.
-7. Install the required AI Diff Reviewer local review, offer the opt-in addons, then self-check.
+7. Install the required AI Diff Reviewer local review; detect every addon, upgrade the ones the repository uses and offer the ones that fit (never one just to complete the set); then self-check.
 
 ## Notes
 
