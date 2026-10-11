@@ -1,7 +1,7 @@
 ---
 title: "La méthodologie Deep Work Plan"
-description: "Cinq chapitres, du manifeste aux archétypes : les principes, la boucle centrale, les modèles, les skills et les adaptations derrière la méthodologie Deep Work Plan."
-lastUpdated: 2026-09-28
+description: "Six chapitres, du manifeste à l’orchestration : principes, boucle centrale, modèles, skills, archétypes et nombreux agents de la méthodologie Deep Work Plan."
+lastUpdated: 2026-10-11
 ---
 
 ## La méthodologie Deep Work Plan
@@ -17,13 +17,14 @@ DWP repose sur trois piliers.
 
 **Efficacité des tokens — de long horizon par conception, efficace par construction.** Le contexte est la ressource la plus rare qu’un agent de codage possède, et une méthodologie qui le gaspille échoue précisément quand le travail s’allonge. DWP charge les instructions de manière progressive — chaque guide se charge lorsque son déclencheur se déclenche —, sélectionne la validation à partir de ce que chaque tâche touche réellement, et décide des skills localement par tâche. Les octets d’instruction que chaque flux exige sont mesurés et publiés ; aucun pourcentage de tokens inventé.
 
-La méthodologie est expliquée en cinq chapitres :
+La méthodologie est expliquée en six chapitres :
 
 1. **Manifeste** — ce qu’est un Deep Work Plan et pourquoi l’exécution structurée compte.
 2. **Boucle centrale** — le cycle planifier-exécuter-vérifier qui pilote chaque tâche.
 3. **Modèles** — les structures de plan et de tâche que les agents et les humains partagent.
 4. **Skills et agents** — comment les commandes et les rôles d’agent s’articulent, le kit vivant (comment un dépôt fait grandir ses propres skills via le sous-skill author) et les add-ons facultatifs comme dependency-upgrade et l’add-on design-system pour toute surface d’interface destinée aux utilisateurs (UI visuelle, sortie CLI ou conversationnelle).
 5. **Archétypes** — adapter la méthodologie aux dépôts individuels et aux hubs orchestrateurs.
+6. **Faire tourner de nombreux agents** — un coordinateur et ses couloirs entre panneaux, conteneurs, machines et comptes, avec une branche et une publication par dépôt.
 
 - [Lire la méthodologie](/methodology)
 - [Lire la spécification](/spec)

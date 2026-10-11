@@ -579,12 +579,12 @@ export const tr: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan Metodolojisi',
       description:
-        'Manifestodan arketiplere beş bölüm: Deep Work Plan’in arkasındaki ilkeler, çekirdek döngü, şablonlar, skill’ler ve ajanlar ve uyarlamalar.',
+        'Manifestodan orkestrasyona altı bölüm: ilkeler, çekirdek döngü, şablonlar, skill’ler ve ajanlar, arketipler ve aynı anda birçok ajanı çalıştırmak.',
     },
     eyebrow: 'Metodoloji',
     title: 'Deep Work Plan Metodolojisi',
     intro:
-      'Deep Work Plan’in arkasındaki felsefeden, her gün kullandığınız pratik döngüye, şablonlara ve uyarlamalara götüren beş bölüm.',
+      'Deep Work Plan’in arkasındaki felsefeden pratik döngüye, şablonlara, uyarlamalara ve aynı anda birçok ajanı çalıştırmaya götüren altı bölüm.',
     chapterLabel: 'Bölüm',
     readChapter: 'Bölümü oku',
     prev: 'Önceki',
@@ -700,7 +700,7 @@ export const tr: SiteTranslations = {
         description:
           'İstemi ve skill’i denetleyene kadar güvenilmez olarak ele alın. Her ikisi de açık kaynaklıdır ve MIT lisanslıdır; skill, ağ çağrısı ve telemetri içermeyen Markdown odaklı bir yapıdadır. Her sürüm, gönderilen skill üzerinde bir SHA256SUMS yayımlar; çalıştırmadan önce kopyanızın eşleştiğini doğrulayabilirsiniz. Sürümler sağlama toplamlıdır, imzalı değildir (imzalama, belgelenmiş bir sonraki adımdır).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -708,7 +708,7 @@ export const tr: SiteTranslations = {
         description:
           'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve dokuz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard, author ve upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -722,7 +722,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Yerel inceleme ve tercihe dayalı eklentiler',
         description:
-          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve yedi tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim ve Agentkit — yalnızca uygun olduklarında kabul edersiniz. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
+          'Kuruluma alma, zorunlu AI Diff Reviewer yerel incelemesini kurar (CI kapısı isteğe bağlı kalır) ve yedi tercihe dayalı eklenti sunar — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim ve Agentkit — yalnızca uygun olduklarında kabul edersiniz. Skill ve yerel inceleme her depoya kurulur; geri kalanlar için geçiş her eklentiyi saptar, kullandıklarınızı yükseltir ve uygun olanları sunar — yalnızca kümeyi tamamlamak için asla bir eklenti eklemez. Her bileşen, SHA256SUMS özetini init.md’nin yayımladığı bir sürüme sabitlenmiştir ve ikinci bir çalıştırma hiçbir şeyi değiştirmez. Kabul edilen bir devcontainer tam yığınla sonuçlanır — seçtiğiniz ajanlar, iki yönlü bağlanmış Herdr ve yalnızca siz etkinleştirirseniz ana makine hesapları. Bir depo, sıfır isteğe bağlı eklentiyle tam uyumludur. Temel yapının ötesinde yığına uygun skill’ler, ajanlar ve komutlar geliştirmek için /skill-create ve /agent-create (author alt skill’i) kullanın.',
       },
       {
         title: 'Planlayın ve yürütün',
@@ -749,6 +749,10 @@ export const tr: SiteTranslations = {
       {
         label: 'İsteğe bağlı: DeepWorkPlan Vim terminal düzenleyicisi',
         href: '/kit/vim',
+      },
+      {
+        label: 'Birçok ajanı çalıştırmak',
+        href: '/methodology/06-orchestration',
       },
     ],
   },
@@ -813,7 +817,7 @@ export const tr: SiteTranslations = {
             id: 'how-to-use',
             question: 'Nasıl kullanılır?',
             answer:
-              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
+              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
             linkLabel: 'Hızlı başlangıç',
             linkPath: '/quickstart',
           },
@@ -1021,7 +1025,7 @@ export const tr: SiteTranslations = {
             id: 'cost',
             question: 'Maliyeti nedir ve verimlilik nasıl ölçülür?',
             answer:
-              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın **girişte** yüklediği talimat byte sayısı olarak raporlanır — bir oturumun başındaki paket — ve buna ek olarak, işin gerçekten sürdüğünde akışın kendi tetikleyicilerinin yüklediklerini de ekleyen adlandırılmış **uçtan uca yollar** ile birlikte yayımlanır (örneğin yürütmeye devam eden bir sürdürme akışı genellikle giriş paketinin birkaç katını yükler). Bu iki rakamdan hiçbiri bir oturumu sınırlamaz: gerçek bir çalışma ayrıca deponun kendi dosyalarını, araç çıktısını ve planın çalışma dosyalarını da okur; bunların hiçbiri bu defterde sayılmaz. Her iki sayı da skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
+              'Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın girişte yüklediği talimat byte sayısı olarak raporlanır — bir oturumun başındaki paket — ve buna ek olarak, işin gerçekten sürdüğünde akışın kendi tetikleyicilerinin yüklediklerini de ekleyen adlandırılmış uçtan uca yollar ile birlikte yayımlanır (örneğin yürütmeye devam eden bir sürdürme akışı genellikle giriş paketinin birkaç katını yükler). Bu iki rakamdan hiçbiri bir oturumu sınırlamaz: gerçek bir çalışma ayrıca deponun kendi dosyalarını, araç çıktısını ve planın çalışma dosyalarını da okur; bunların hiçbiri bu defterde sayılmaz. Her iki sayı da skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.',
             linkLabel: 'Güven ve açıklama',
             linkPath: '/trust',
           },

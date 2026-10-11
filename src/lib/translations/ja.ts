@@ -580,12 +580,12 @@ export const ja: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan の方法論',
       description:
-        'マニフェストからアーキタイプまでの五つの章。Deep Work Plan を支える原則、中核ループ、テンプレート、スキルとエージェント、そして適応のしくみ。',
+        'マニフェストからオーケストレーションまでの六つの章。原則、中核ループ、テンプレート、スキルとエージェント、アーキタイプ、多数のエージェントの同時実行。',
     },
     eyebrow: '方法論',
     title: 'Deep Work Plan の方法論',
     intro:
-      'Deep Work Plan を支える哲学から、日々使う実践的なループ、テンプレート、適応へと導く五つの章。',
+      'Deep Work Plan を支える哲学から、実践的なループ、テンプレート、適応、そして多数のエージェントの同時実行へと導く六つの章。',
     chapterLabel: '章',
     readChapter: '章を読む',
     prev: '前へ',
@@ -701,7 +701,7 @@ export const ja: SiteTranslations = {
         description:
           '確認が済むまで、プロンプトとスキルを信頼できないものとして扱ってください。どちらもオープンソースで MIT ライセンスです。スキルは Markdown ファーストでネットワーク呼び出しもテレメトリーもありません。各リリースでは出荷されたスキルに対する SHA256SUMS が公開されているため、実行する前に手元のコピーが一致することを確認できます。リリースはチェックサム付きですが、署名はされていません（署名はドキュメント化された次のステップです）。',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -709,7 +709,7 @@ export const ja: SiteTranslations = {
         description:
           'Deep Work Plan スキルを追加し、どのエージェントも構造化された作業を計画して実行できるようにします。スキルはルーターと九つのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）を備えます。',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -723,7 +723,7 @@ export const ja: SiteTranslations = {
       {
         title: 'ローカルレビューとオプトインのアドオン',
         description:
-          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、七つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim、Agentkit）を提案します。適合する場合にのみ受け入れてください。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
+          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、七つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim、Agentkit）を提案します。適合する場合にのみ受け入れてください。スキルとローカルレビューはすべてのリポジトリに入ります。それ以外については、この手順がすべてのアドオンを検出し、使っているものをアップグレードし、適合するものを提案します。セットをそろえるためだけに追加することは決してありません。すべてのコンポーネントは、init.md が SHA256SUMS のダイジェストを公開するリリースに固定されており、二回目に実行しても何も変わりません。受け入れた devcontainer は完全なスタック（選んだエージェント、双方向に接続された Herdr、オプトインした場合のみのホストアカウント）に仕上がります。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',
@@ -748,6 +748,10 @@ export const ja: SiteTranslations = {
       { label: 'キットを見る', href: '/kit' },
       { label: '事例を見る', href: '/examples' },
       { label: '任意：ターミナルエディタ DeepWorkPlan Vim', href: '/kit/vim' },
+      {
+        label: '多数のエージェントを動かす',
+        href: '/methodology/06-orchestration',
+      },
     ],
   },
 
@@ -811,7 +815,7 @@ export const ja: SiteTranslations = {
             id: 'how-to-use',
             question: 'どう使いますか？',
             answer:
-              '三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` が進行中の計画（スコープ、タスク、または Lite プランから Full への昇格）を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成し、`/dwp-upgrade` がインストール済みのスキルを、既存のプランに触れることなく新しいリリースへ移動します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。',
+              '三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` が進行中の計画（スコープ、タスク、または Lite プランから Full への昇格）を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成し、`/dwp-upgrade` がインストール済みのスキルを、既存のプランに触れることなく新しいリリースへ移動します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。',
             linkLabel: 'クイックスタート',
             linkPath: '/quickstart',
           },
@@ -1018,7 +1022,7 @@ export const ja: SiteTranslations = {
             id: 'cost',
             question: '費用はいくらですか？効率はどのように測定されますか？',
             answer:
-              '方法論とスキルは MIT ライセンスで無料です。中核のフローにサービスも API キーもテレメトリーもありません。効率は、各フローが**入口**で読み込む指示バイト数——セッション開始時点のバンドル——として報告され、これと並んで、実際の作業が進んだ際にそのフロー自身のトリガーが読み込む分を加えた**エンドツーエンドのパス**が名前つきで公開されます(たとえば、実行まで進む resume は、通常その入口バンドルの数倍を読み込みます)。どちらの数値もセッションの上限ではありません。実際の実行では、リポジトリ自体のファイル、ツールの出力、計画の作業ファイルも読み込まれますが、この台帳はそれらを一切数えていません。両方の数値は、スキルとともにコミットされたスクリプトによって計測され、リリースのベースラインごとに再計測され、評価台帳として公開され、増加は減少と同じようにはっきり報告されます。バイトの目録はそれらを立証しないため、トークンのパーセンテージやコスト削減として報告されることはありません。凍結されたプロトコルの下、公開のフレッシュエージェント評価がすでに実行されました：同じ2つの機能を、ハーネスなし・前のメジャーバージョン・現行版のクリーンなクローンでそれぞれ構築したものです。その結果、ハーネスを持つツリー上のエージェントは両タスクでより少ないバイトを読み、現行版の機能セッションは両タスクで前のメジャーバージョンより少ないモデル入出力を消費しました——ハーネス報告による、単一ワークロードでの値です。同時に正直な限界も判明しました：オンボーディングは一回限りのコストであり、フローが使われて初めて回収されること、ワークロードごとのトークンの純方向は混在していたこと、ウォールクロックの優位は主張しないこと、そしてフレッシュなエージェントは自力ではフローに入らないこと——フローはあなたか、呼び出し方を知るエージェントが実行するコマンドです。',
+              '方法論とスキルは MIT ライセンスで無料です。中核のフローにサービスも API キーもテレメトリーもありません。効率は、各フローが入口で読み込む指示バイト数——セッション開始時点のバンドル——として報告され、これと並んで、実際の作業が進んだ際にそのフロー自身のトリガーが読み込む分を加えたエンドツーエンドのパスが名前つきで公開されます(たとえば、実行まで進む resume は、通常その入口バンドルの数倍を読み込みます)。どちらの数値もセッションの上限ではありません。実際の実行では、リポジトリ自体のファイル、ツールの出力、計画の作業ファイルも読み込まれますが、この台帳はそれらを一切数えていません。両方の数値は、スキルとともにコミットされたスクリプトによって計測され、リリースのベースラインごとに再計測され、評価台帳として公開され、増加は減少と同じようにはっきり報告されます。バイトの目録はそれらを立証しないため、トークンのパーセンテージやコスト削減として報告されることはありません。凍結されたプロトコルの下、公開のフレッシュエージェント評価がすでに実行されました：同じ2つの機能を、ハーネスなし・前のメジャーバージョン・現行版のクリーンなクローンでそれぞれ構築したものです。その結果、ハーネスを持つツリー上のエージェントは両タスクでより少ないバイトを読み、現行版の機能セッションは両タスクで前のメジャーバージョンより少ないモデル入出力を消費しました——ハーネス報告による、単一ワークロードでの値です。同時に正直な限界も判明しました：オンボーディングは一回限りのコストであり、フローが使われて初めて回収されること、ワークロードごとのトークンの純方向は混在していたこと、ウォールクロックの優位は主張しないこと、そしてフレッシュなエージェントは自力ではフローに入らないこと——フローはあなたか、呼び出し方を知るエージェントが実行するコマンドです。',
             linkLabel: '信頼と開示',
             linkPath: '/trust',
           },

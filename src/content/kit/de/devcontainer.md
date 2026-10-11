@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Ein reproduzierbarer Dev-Container pro Repository aus einem Template: Agenten über ak startklar, Herdr in beide Richtungen, nie ein SSH-Schlüssel im Container."
+description: "Ein reproduzierbarer Dev-Container pro Repository aus einem Template: Agenten über ak auf Ihren Host-Konten, Herdr in beide Richtungen, kein SSH-Schlüssel."
 kind: addon
 lang: de
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer-Addon
 
-Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.5.1`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
+Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.6.0`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
 ## Was devcontainer-kit bereitstellt
 
@@ -21,22 +21,22 @@ Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontaine
 ## Installation
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.2.11`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.3.0`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.2.11`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.3.0`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
 
 ## Layer
 
-Jeder Container enthält die Entwicklungswerkzeuge — git, gh, ripgrep, einen SSH-Server, Herdr und herdr-peers — und kein Geheimnis. Der Rest ist ein Layer, den Sie in `dck.toml` wählen:
+Jeder Container enthält die Entwicklungswerkzeuge — git, gh, ripgrep, einen SSH-Server, Herdr und herdr-peers — und kein Geheimnis, sofern Sie sich nicht für [Host-Konten](#host-konten-im-container) entscheiden. Der Rest ist ein Layer, den Sie in `dck.toml` wählen:
 
 | Layer | Standard | Was er hinzufügt |
 |---|---|---|
@@ -57,6 +57,24 @@ Seit `v0.2.3` richtet `dck up` unter Docker Desktop ohne manuellen Schritt ein b
 - **Container, die das Kit nicht erstellt hat.** Führen Sie die öffentlichen Schlüssel, mit denen sie sich anmelden, unter `[ssh] authorized_extra` in Ihrem Host-Profil auf, dann erreichen auch sie dck-Container.
 
 Kombinieren Sie es mit [coding-agents-kit](/kit/agentkit) auf dem Host und im Container, und dasselbe `ak` startet Agenten auf beiden Seiten.
+
+## Host-Konten im Container
+
+Ein Container kann die Konten nutzen, die Sie auf dem Host bereits haben — so wie git bereits über den SSH-Agenten des Hosts arbeitet —, ohne Anmeldung im Container. Das ist Opt-in und liegt in Ihrem **Host-Profil**, nie in der `dck.toml` eines Repositorys:
+
+```toml
+[agents]
+host_profiles = true          # Standard: false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # Allowlist der zu teilenden env-Namen
+```
+
+Mit aktiviertem `host_profiles` teilt `dck up` nur die Profile der CLIs, die das Repository installiert:
+
+- **Claude Code** über ein langlebiges Token pro Profil: `CLAUDE_CODE_OAUTH_TOKEN` für `@default` und `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` für `@name` (das Suffix in Großbuchstaben, jedes Zeichen außerhalb von `A-Z`, `0-9` und `_` wird zu `_`).
+- **Codex** über seine Auth-Datei, für `@default` und für jedes Profil.
+- **Die env-Datei des Kits**, schreibgeschützt und auf die Namen in `host_env_keys` reduziert.
+
+Das gesamte Agentkit-Home wird nie eingebunden, und Profile mit absoluten Host-Pfaden werden übersprungen. Eine mit Schreibzugriff geteilte Codex-Anmeldung kann von zwei Schreibern gleichzeitig erneuert werden: Halten Sie einen aktiven Agenten pro Codex-Konto. Im Container läuft dasselbe `ak <kind> @<profile>` auf demselben Konto wie auf dem Host; das erlaubt einem Lead, Container-Lanes die Konten zu übergeben, die `ak pick` gewählt hat — siehe [Viele Agenten betreiben](/methodology/06-orchestration).
 
 ## Sicherheitsvorgaben
 

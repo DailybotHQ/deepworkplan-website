@@ -14,11 +14,11 @@ Es ist ein optionales Addon von **DWP v7** (`v7.0.0`). Die Methodik funktioniert
 
 ## Was es integriert
 
-Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v0.1.0`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
+Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v0.2.1`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, Tag `v0.1.0`, Protokoll 1 |
+| Produkt | `DailybotHQ/herdr-peers`, Tag `v0.2.1`, Protokoll 1 |
 | Registry-Schlüssel | `herdr` in `.dwp/config.json` |
 | Transport | interaktiv: ein Peer in einem Herdr-Pane |
 | Stellt bereit | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](http
 Installieren Sie herdr-peers und den offiziellen Skill von Herdr, von dem es abhängt. Jeder Rechner, dessen Agenten antworten sollen, braucht den Skill ebenfalls.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers authentifiziert den Absender nicht: Das Feld `from=` in einem Stempe
 
 ## Container und Host
 
-Mit dem Addon [devcontainer](/kit/devcontainer) auf devcontainer-kit `v0.2.11` bringt jeder dck-Container herdr-peers mit und tritt bei `dck up` dem Mesh bei: Seine Agenten können Agenten auf dem Host, in den anderen Containern und in den anderen Loopback-Containern des Hosts fragen und erhalten die Antwort zurück. `dck setup` installiert ein verifiziertes herdr-peers auf dem Host, sodass auch Host-Agenten antworten. Der Host-Listener und die zusätzlichen Schlüssel, die andere Container hereinlassen, sind Ihre Entscheidungen im Host-Profil des Kits; dieses Addon setzt sie nie.
+Mit dem Addon [devcontainer](/kit/devcontainer) auf devcontainer-kit `v0.3.0` bringt jeder dck-Container herdr-peers mit und tritt bei `dck up` dem Mesh bei: Seine Agenten können Agenten auf dem Host, in den anderen Containern und in den anderen Loopback-Containern des Hosts fragen und erhalten die Antwort zurück. `dck setup` installiert ein verifiziertes herdr-peers auf dem Host, sodass auch Host-Agenten antworten. Der Host-Listener und die zusätzlichen Schlüssel, die andere Container hereinlassen, sind Ihre Entscheidungen im Host-Profil des Kits; dieses Addon setzt sie nie.
 
 ## Herdr oder Agentkit
 
@@ -66,6 +66,8 @@ Beide Addons implementieren dieselbe Delegationsschnittstelle — `launch`, `obs
 |---|---|
 | Eine abgegrenzte `parallel_safe`-Aufgabe mit deklarierter Ausgabe | [agentkit](/kit/agentkit) (headless `ak run` in einem Worktree) |
 | Die Aufgabe erfordert Interaktion, läuft lange oder befindet sich auf einem anderen Rechner | Herdr (ein Peer in einem Pane) |
+
+Für einen Lead, der viele Lanes gleichzeitig betreibt — Panes auf dem Host, in Containern und auf anderen Rechnern, jede auf einem eigenen Konto — listet `herdr-peers lanes` jede Lane mit ihrem Zustand auf, `herdr-peers status <pane>` klassifiziert den Bildschirm, auf dem eine blockierte Lane steht, und jeder Delegationsnachweis nennt das Konto und den Anbieter, die sie getragen haben. Siehe [Viele Agenten betreiben](/methodology/06-orchestration).
 
 ## Hinweise
 

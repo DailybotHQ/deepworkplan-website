@@ -1,7 +1,7 @@
 ---
 title: "クイックスタート — Deep Work Plan"
 description: "AIエージェントのための実行可能なオンボーディングプロンプト。あらゆるリポジトリで Deep Work Plan を採用し、分析し、文書化し、スキルをインストールし、操縦できる状態に残す。"
-lastUpdated: 2026-09-28
+lastUpdated: 2026-10-11
 ---
 
 あなたはAIコーディングエージェントです。まずこのプロンプト全体を読み、その後、Deep Work Plan（DWP）方法論を採用することで、現在のリポジトリを **AI-first**、**仕様駆動**、**エージェントが操縦できる**ものにしてください。これを手早い編集ではなく、構造化されたエンジニアリング作業、すなわち Deep Work Plan として扱ってください。
@@ -28,13 +28,28 @@ lastUpdated: 2026-09-28
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  # インストールするリリースのチェックサムをダウンロードする（vX.Y.Z を置き換えてください）:
+  git checkout v7.6.0
+  # そのリリースのチェックサムをダウンロードし、下のダイジェストと照合する:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS
+  shasum -a 256 SHA256SUMS # 「固定されたリリース」の deepworkplan-skill のダイジェストと一致すること
   ./setup.sh --verify        # ゼロ以外の終了コードはファイルが一致しないことを意味します — 停止してください
   ```
 
   リリースは**チェックサム付きですが、署名はされていません**（署名はドキュメント化された次のステップです）。すべてはオープンで差分比較可能なので、任意のファイルをそのタグのリポジトリと比較することもできます。
+- **固定されたリリース。** このプロンプトがインストールするすべてのコンポーネントは、一つのリリースに固定されています。
+  リリースの `SHA256SUMS` を使う前に、そのファイル自体を下のダイジェストと照合してください
+  （`shasum -a 256 SHA256SUMS`、Linux では `sha256sum`）。一致しなければ中止します。
+
+  | リポジトリ（github.com/DailybotHQ） | タグ | その `SHA256SUMS` の sha256 |
+  | --- | --- | --- |
+  | deepworkplan-skill | `v7.6.0` | `99f0dbf3bcc1e795fa6e15b520d6250f0a47d5efcb44614fa5d1926fb2320784` |
+  | coding-agents-kit | `v0.5.0` | `a90f45e44085370694a954a3578d037d0637d0eb4ec2f1b846a8d29556b1ec27` |
+  | herdr-peers | `v0.2.1` | `72b3ea5352ab3eb13045fb0ff901efddc5d8b860724daa3d75d4531df3ebfb3f` |
+  | devcontainer-kit | `v0.3.0` | `02d4de086eeb010b42458dd131b690df36638b361033e5df6aa3d5ceba4a7eea` |
+  | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
+  | ai-diff-reviewer | `v3.3.9` | `aaf490cfe01ba858df49732798d6861a7c742b967f39fedb4f1a9c999aafc0c9` |
+  | agent-skill | `v3.23.12` | 公開なし — skills CLI が `skills-lock.json` にコンテンツハッシュを記録します |
 - **問題を報告する。** セキュリティの問題は、該当リポジトリで **GitHub の脆弱性報告**を通じてプライベートに報告してください — `https://github.com/DailybotHQ/deepworkplan-skill/security` または `https://github.com/DailybotHQ/deepworkplan-website/security` — 公開 Issue としてではなく。各リポジトリの `SECURITY.md`、`https://deepworkplan.com/.well-known/security.txt`、そしてトラストページ `https://deepworkplan.com/trust` も参照してください。
 
 ## 0. 方法論と仕様を読む
@@ -65,7 +80,7 @@ lastUpdated: 2026-09-28
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y
 ```
 
 または OpenClaw 経由でインストール：
@@ -87,7 +102,7 @@ Work Plan スキルのリリースによって実装されています。現在�
 ルーターと九つのサブスキル — `create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author`、`upgrade` — が含まれます。
 
-インストール済みスキルのリリースは **7.5.1** です。現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
+インストール済みスキルのリリースは **7.6.0** です。現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
 
 この標準は意図的に比例的であり、その比例性を開発者の規律ではなく計画の性質
 にしています。計画は **Lite**（小さく限定された作業向けに、計画の README
@@ -135,7 +150,7 @@ Review** です。これは、必須のローカル AI Diff Reviewer レビュ�
 蓄積された変更セット全体に対するセキュリティパスを実行し、最終的なリポジ
 トリの状態を検証し、タスクが使用したスキルを整合させ、証跡と制限事項を記録
 します。ローカルレビュースキルは固定されたリリースにインストールされ、現在
-文書化されているコマンドは `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0` をインストールしま
+文書化されているコマンドは `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9` をインストールしま
 す。GitHub Action は別個のオプションの CI surface であり、コアの方法論に
 は決して必須ではありません。
 
@@ -161,18 +176,69 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 新しい計画には、3桁以上の単調増加する数値 ID を付けます（例：`PLAN_001_add_payment_webhooks/`）。凍結された v5 スキーマでは数値 ID も1語として数えるため、v5 の slug は2〜4語、v6 と v7 の slug は2〜5語です。既存の番号なし `PLAN_<slug>/` フォルダーは引き続き読み取り可能で、名前は変更しません。番号付き計画がある場合、`latest` は数値 ID が最も大きい計画を指します。
 
-## 4. 必須のローカルレビューをインストールし、その後オプトイン式のアドオンを提案する
+## 4. ローカルレビューとアドオンをインストール、またはアップグレードする
 
-ベースラインのオンボーディング後、**AI Diff Reviewer ローカルレビュー**をインストールします（フェーズ 7a — 標準 2.3.0 以降は必須）。タグで固定されたベンダースキル（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`）に加えて、`generate-extension` によるリポジトリ向けに調整された `.review/extension.md` を、オンボーディングの同意のもとでインストールします。次に、七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、それぞれを明示的なオプトインとして提案し、受け入れられたものはすべて `.dwp/config.json` に記録します。リポジトリはオプションのアドオンが**ゼロ**でも完全に適合します。それらを決して自動でインストールしないでください。
+ベースラインのオンボーディング後、Deep Work Plan スキルと必須の AI Diff Reviewer ローカルレビューは**すべての**リポジトリに入ります。それ以外のアドオンは違います。各アドオンは、それが適合するリポジトリにだけ置きます。この節は**すべてのアドオンを検出し、使っているものをアップグレードし、適合するものを提案します**。セットをそろえるためだけにアドオンを追加することは決してありません。新しいリポジトリでも、数か月前にオンボーディングしたリポジトリでも、この節は同じように実行します。この節は**冪等**です。各コンポーネントについて、インストールの有無とバージョンを検出し、次のように分岐します。
 
-- **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.2.11` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ専用のコンテナ（ダイジェストで固定した公式イメージ、共有ベースイメージなし、`bash dev.sh up`）をレンダリングし、既存の devcontainer はその差分が受け入れられた後にのみ調整します。コーディングエージェントはオプトインのレイヤーです。
-- **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.3）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
+- **未インストール** — 必須のローカルレビューはオンボーディングの同意のもとでインストールします。オプションのアドオンは、このリポジトリに適合する場合にのみ**提案**し、開発者が受け入れた場合にのみインストールします。
+- **インストール済みで、固定より古い** — まだ適合するなら、同じ固定コマンドで**その場で**アップグレードします（各インストーラーは自分のファイルを置き換え、ユーザーの設定、ログイン、データは保持します）。実行する前に、何が変わるかを伝えます。もう適合しないなら、そのことを伝え、判断は開発者に委ねます。
+- **インストール済みで、固定と同じかそれより新しい** — 何も変更しません。
+
+受け入れと辞退はすべて `.dwp/config.json` に記録します。辞退されたアドオンは、開発者が求めない限り再び提案しません。この節を二回目に実行しても何も変わりません。
+
+| コンポーネント | インストール済みのバージョンを検出 | インストールまたはアップグレード（固定） |
+| --- | --- | --- |
+| AI Diff Reviewer（必須） | `.agents/skills/ai-diff-reviewer/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `.agents/skills/dailybot/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | インストール済みの herdr-peers スキル内の `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh の検証済みインストーラー（`v0.7.0` に固定。ダウンロードし、`shasum -a 256 -c install.sh.sha256` を実行してから起動） |
+
+各ダウンロードは、実行する前にそのリリースの `SHA256SUMS` と、上の*固定されたリリース*にあるダイジェストで検証してください。
+
+**必須のローカルレビュー。** **AI Diff Reviewer ローカルレビュー**をインストールします（フェーズ 7a — 標準 2.3.0 以降は必須）。上の表にあるタグで固定されたスキルと、`generate-extension` によるリポジトリに合わせた `.review/extension.md` を、オンボーディングの同意のもとでインストールします。
+
+**オプションのアドオン。** 七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、このリポジトリに合うものだけを、それぞれ明示的なオプトインとして提案します。オプションのアドオンが**一つもなくても**、リポジトリは完全に適合します。これらを自動でインストールしてはいけません。
+
+- **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.3.0` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ独自のコンテナを生成し（公式イメージをダイジェストで固定、共有ベースイメージなし、`bash dev.sh up`）、既存の devcontainer は差分が受け入れられた後にのみ調整します。受け入れられたら、下の*devcontainer の手順*に従って完全なスタックまで仕上げます。
+- **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.12）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。受け入れられると、`/lib-upgrade` コマンドをインストールします。
 - **Design system** — 検出されたインターフェイス面を持つリポジトリのみを対象とした、オプトインの `docs/DESIGN.md`（純粋なライブラリ、ヘッドレスサービス、インフラ専用リポジトリには提案されません）。三つのプロファイルが一つのファイルに重ねられます：visual-ui（検出時に強く推奨；インストールは受け入れでゲート）、cli-output、conversational — 後者二つは常に尋ねられ、自動適用されることはありません。
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.4.0` に固定）のマシンレベルのインストール。範囲の限られた `parallel_safe` タスクを他のコーディングエージェントに渡す計画向けです（ヘッドレスで、委任先ごとに専用の worktree で `ak run` を一回実行）。キットはデフォルトでエージェントを自律モードで起動し、そのオプトアウト（`--ask` または `AGENTKIT_PERMISSIONS=ask`）が常に優先されます。
-- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v0.1.0` に固定、Herdr の公式スキルも併せて）のマシンレベルのインストール。任意のマシン上の Herdr ペインにいるピアエージェントに、認可された返信を一つ求める計画向けです。
-- **DeepWorkPlan Vim** — ターミナルエディタ（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)、`v0.6.0` に固定）。マシンレベルのインストールであり、明示的な同意なしに既存の Neovim 設定を上書きすることは決してありません。
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.5.0` に固定）のマシンレベルのインストール。すべてのコーディングエージェントを一つのコマンドで扱い、プロファイルごとにアカウントを持ち、`ak usage` と `ak pick` で余裕の最も大きいアカウントを選び、範囲の限られた `parallel_safe` タスクを他のコーディングエージェントに渡す計画のためにヘッドレスの `ak run` を提供します（worktree ごとに一つの委任先）。キットは既定でエージェントを自律モードで起動し、そのオプトアウト（`--ask` または `AGENTKIT_PERMISSIONS=ask`）が常に優先します。
+- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v0.2.1` に固定、Herdr の公式スキルも併せて）のマシンレベルのインストール。任意のマシン上の Herdr ペインにいるピアエージェントに、認可された返信を一つ求める計画のため、そして自分のレーンを見守るリードのためのものです。
+- **DeepWorkPlan Vim** — ターミナルエディタ（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)、`v0.7.0` に固定）。マシンレベルのインストールであり、明示的な同意なしに既存の Neovim 設定を上書きすることは決してありません。
 - **AI Diff Reviewer** — 必須のローカルレビューです（オプトインではありません）。すべての Final Review のセキュリティパスが、計画の累積した変更セットに対して [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必須の `.review/extension.md`）を実行します。スキルまたは拡張機能の欠落は `local reviewer not installed` の発見として記録されます。黙ってスキップされることは決してなく、決してサプライズブートストラップでもありません：インストールはオンボーディングの同意または明示的なアドオン呼び出しに属します。呼び出しのエラーはソフト失敗となり、完了したパスの **検証済み `critical` 結果**は引き続き完了をブロックします（v3、BC-07 —— 未検証のクリティカル主張は注釈付き警告として現れ、`incomplete`/`timeout` のレビューはクリーンなパスではない、BC-04）。**Flow B**（`pr-review.yml` を使った CI ゲート）は明示的なオプトインとして提案され、要求なしにインストールされることは決してありません。Deep Work Plan のどのフローも、商用サービス、CI プロバイダー、シークレットを必要としません。
+
+### devcontainer の手順（受け入れられた場合）
+
+devcontainer アドオンの終着点は、生成されたファイル一式ではなく、動作するスタックです。各手順で開発者の同意を得ます。
+
+1. **生成する。** `dck init` が `.devcontainer/devcontainer.json`、`docker/local/<service>/Dockerfile`、`docker/local/docker-compose.yaml`、`dev.sh` を書き出します。先に計画を示し、既存のファイルを変更する前に確認します。
+2. **`.devcontainer/dck.toml` でレイヤーを選ぶ。** 開発者がコンテナ内でコーディングエージェントを使いたい場合にのみ `[layers] agents` を有効にし、`[agents] clis` には**開発者が選んだ CLI だけ**を列挙します（例：`["claude", "codex"]`）。それ以外は何もインストールしません。`editor` は DeepWorkPlan Vim を追加します。
+3. **Herdr を接続する。** `[herdr] machine = true` はコンテナを Herdr のマシンとして登録し、`layout = "standard"` は標準のサイドバー（App · Editor · Development · Agents）で開きます。どのペインもアプリのパス（既定は `/app`）にあります。メッシュにより、中のエージェントはホストや他のコンテナのエージェントに届きます。
+4. **ホストのアカウント（オプトイン、開発者が決めること）。** リポジトリの `dck.toml` ではなく、開発者の**ホストプロファイル**（`~/.config/dck/profile.toml`）で `[agents] host_profiles = true` を設定すると、コンテナはリポジトリがインストールする CLI のホストのアカウントを使えます。Claude は `CLAUDE_CODE_OAUTH_TOKEN`（`@default`）または `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>`（`@name`）で、Codex は認証ファイルで共有し、読み取り専用で、`host_env_keys` を追加の変数名の許可リストとします。開発者の代わりにこれを有効にしてはならず、トークンを表示してもいけません。
+5. **起動する。** `bash dev.sh up` がコンテナをビルドし、起動し、登録します。
+6. **確認する。** 各項目は一つのコマンドです。
+   - [ ] `dck doctor --json` がベンダー化されたレイアウトを `current` と報告する。
+   - [ ] `bash dev.sh ps` がサービスの稼働を示し、`dck herdr status` がマシンの接続を示す。
+   - [ ] `bash dev.sh shell -c 'ak doctor'` が `[agents] clis` の CLI をちょうどそのとおりに列挙する（agents レイヤーのみ）。
+   - [ ] `bash dev.sh agents` がホストと他のコンテナのピアを列挙する。
+   - [ ] `bash dev.sh shell -c 'ssh-add -l'` がホストのエージェントの鍵を示し、中に鍵ファイルはない。
+   - [ ] 接続したマシンが `/app` で App · Editor · Development · Agents とともに開く。
+
+## オーケストレーション：多数のエージェント、レーン、無人実行
+
+一つのセッションに収まらない作業は、**リード**とその**レーン**として動かします。https://deepworkplan.com/methodology/06-orchestration.md を参照してください。開発者が求め、agentkit と Herdr のアドオンがインストールされている場合は次のとおりです。
+
+- **リポジトリごとに一つのレーン**を、そのベースのチェックアウトで、一つのブランチ、一つのプルリクエスト、一つのリリースで動かします。git worktree を使うのは、二つの書き手が一つのリポジトリを共有しなければならない場合だけです。リリースは依存の順に行い、リードが各レーンに GO を出します。
+- **余裕で選ぶアカウント。** `ak profiles --json` はアカウントを一覧表示し、`ak usage` はバッチごとに一度そのクォータを表示し、`ak pick <kind> --count N` は余裕の最も大きいアカウントを返します。使うのは開発者自身のアカウントだけにし、各ベンダーの規約の範囲内に留めます。
+- **一度だけ準備する。** Claude Code の権限バイパスの確認は、プロファイルごとに一度だけ、プロファイルを作成するときに**開発者**が行う手順です（devcontainer-kit のコンテナでは、キットがコンテナ自身の home にだけ書き込みます）。この確認のためにキーを送ってはいけません。
+- **起動する。** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` がレーン自身のフォルダでレーンを起動します。`--trust-cwd` がそのフォルダを事前に信頼するため、フォルダ信頼の画面は表示されません。開発者が無人運用を許可したら、起動のたびに改めて承認を得る必要はありません。
+- **調整する。** `herdr-peers ask` と `herdr-peers reply`：ask ごとに認可された reply は一つ、深さは一、reply はデータであり何も与えません。
+- **見守る。** `herdr-peers lanes` はすべてのレーンの状態を表示し、ブロック中のレーンについては `herdr-peers status <pane>` が画面を分類し、`herdr pane read <pane>` がその画面を表示します。
+- **キー入力は一つの場合だけ。** `herdr pane send-keys` で送ってよいキーは、フォルダ信頼の画面への応答だけです。それも、自分で起動したペインで、`--trust-cwd` が使えなかった場合に限ります。前後で画面を読み、キーは最小限だけ送ります。
+- **それ以外はすべて読み、記録し、開発者にエスカレーションします**。Claude の権限バイパスの確認、ログインや認証情報のプロンプト、操作ごとの権限要求、破壊的な確認、支払いやプランのプロンプト、未知の画面、自分が作成していないペインです。`AGENTKIT_PERMISSIONS=ask` が設定されていれば、レーンは行動の前に確認を求めます。それらのプロンプトを決して回避してはいけません。すべての介入を親計画に記録します。
 
 ## 5. キットを進化させる（author サブスキル)
 
@@ -224,3 +290,4 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 - [キットを見る](/kit)
 - [事例を見る](/examples)
 - [任意：ターミナルエディタ DeepWorkPlan Vim](/kit/vim)
+- [多数のエージェントを動かす](/methodology/06-orchestration)

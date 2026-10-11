@@ -572,12 +572,12 @@ export const zh: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 方法论',
       description:
-        '从宣言到原型，共五章：Deep Work Plan 背后的原则、核心循环、模板、技能与代理，以及各项适配。',
+        '从宣言到编排，共六章：Deep Work Plan 背后的原则、核心循环、模板、技能与代理、代码仓库原型，以及同时运行多个代理的方法。',
     },
     eyebrow: '方法论',
     title: 'Deep Work Plan 方法论',
     intro:
-      '五章内容，带你从 Deep Work Plan 背后的理念，走到你每天都在使用的实操循环、模板与适配。',
+      '六章内容，带你从 Deep Work Plan 背后的理念，走到实操循环、模板、适配，以及同时运行多个代理。',
     chapterLabel: '章',
     readChapter: '阅读本章',
     prev: '上一章',
@@ -690,7 +690,7 @@ export const zh: SiteTranslations = {
         description:
           '在核查之前，请将提示和技能视为不可信的。两者均为开源且采用 MIT 许可；该技能以 Markdown 为核心，无网络调用，也无遥测。每个发布版本都会发布一份涵盖所有已发布技能文件的 SHA256SUMS，以便你在运行前确认副本匹配。发布版本有校验和，但未签名（签名是已记录的下一步计划）。',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -698,7 +698,7 @@ export const zh: SiteTranslations = {
         description:
           '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加九个子技能——create、execute、refine、resume、status、verify、onboard、author 与 upgrade。',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -712,7 +712,7 @@ export const zh: SiteTranslations = {
       {
         title: '本地评审与可选附加组件',
         description:
-          '接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供七个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim 与 Agentkit——你只在它们契合时才采纳。一个仓库即便不带任何可选附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
+          '接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供七个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim 与 Agentkit——你只在它们契合时才采纳。技能与本地审查会进入每一个仓库；对于其余部分，该流程会检测每个附加组件，升级你在用的组件，并提供契合的组件——绝不会仅仅为了凑齐全套而添加任何一个。每个组件都锁定到一个发布版本，其 SHA256SUMS 摘要由 init.md 公布，再次运行不会改变任何东西。被采纳的 devcontainer 会形成完整环境——你选定的代理、双向连通的 Herdr，以及仅在你选择启用时才共享的主机账户。一个仓库即便不带任何可选附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
       },
       {
         title: '规划并执行',
@@ -737,6 +737,7 @@ export const zh: SiteTranslations = {
       { label: '浏览套件', href: '/kit' },
       { label: '查看示例', href: '/examples' },
       { label: '可选：DeepWorkPlan Vim 终端编辑器', href: '/kit/vim' },
+      { label: '运行多个代理', href: '/methodology/06-orchestration' },
     ],
   },
 
@@ -800,7 +801,7 @@ export const zh: SiteTranslations = {
             id: 'how-to-use',
             question: '如何使用？',
             answer:
-              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
+              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
             linkLabel: '快速开始',
             linkPath: '/quickstart',
           },
@@ -997,7 +998,7 @@ export const zh: SiteTranslations = {
             id: 'cost',
             question: '它收费吗？效率如何衡量？',
             answer:
-              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程**在入口处**加载的指令字节数来报告——即会话开始时加载的入口包——并与命名的**端到端路径**一并发布，后者加上了该流程真实触发条件在工作实际推进后所加载的内容（例如，一次进入执行阶段的 resume 通常会加载数倍于其入口包的字节）。这两个数字都不是会话的上限：一次真实运行还会读取仓库自身的文件、工具输出以及计划的工作文件，这些都不计入此账本。两个数字均由随技能一同提交的脚本测量，在各发布基线上重新测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些。一项公开的新代理评估已在冻结协议下执行：同样的两个功能，分别在无 harness、上一大版本与本版本的干净克隆上构建。它发现带有 harness 的代理在两项任务中都读取了更少的字节，且本版本的功能会话在两项任务中消耗的模型输入与输出均少于上一大版本——由 harness 报告，单一工作负载。它同样给出了诚实的边界：onboarding 是一次性成本，只有在流程被使用时才会回本；每个工作负载的 token 净方向结果不一；不主张任何时钟时间优势；新代理不会自行进入流程——流程是由你或知道调用它的代理执行的命令。',
+              '方法论与技能均采用 MIT 许可，且完全免费；核心流程中没有服务、没有 API 密钥、也没有遥测。效率以每个流程在入口处加载的指令字节数来报告——即会话开始时加载的入口包——并与命名的端到端路径一并发布，后者加上了该流程真实触发条件在工作实际推进后所加载的内容（例如，一次进入执行阶段的 resume 通常会加载数倍于其入口包的字节）。这两个数字都不是会话的上限：一次真实运行还会读取仓库自身的文件、工具输出以及计划的工作文件，这些都不计入此账本。两个数字均由随技能一同提交的脚本测量，在各发布基线上重新测量，并发布在一本评估台账中，增长与下降同样如实呈现。它不以 token 百分比或成本节省的形式报告，因为一份字节清单无法证明这些。一项公开的新代理评估已在冻结协议下执行：同样的两个功能，分别在无 harness、上一大版本与本版本的干净克隆上构建。它发现带有 harness 的代理在两项任务中都读取了更少的字节，且本版本的功能会话在两项任务中消耗的模型输入与输出均少于上一大版本——由 harness 报告，单一工作负载。它同样给出了诚实的边界：onboarding 是一次性成本，只有在流程被使用时才会回本；每个工作负载的 token 净方向结果不一；不主张任何时钟时间优势；新代理不会自行进入流程——流程是由你或知道调用它的代理执行的命令。',
             linkLabel: '信任与披露',
             linkPath: '/trust',
           },

@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 import { getSupportedLanguages } from '@/lib/i18n';
 
 // Source-contract test for the kit index ecosystem plate (KitEcosystem.astro):
@@ -9,7 +10,7 @@ import { getSupportedLanguages } from '@/lib/i18n';
 // no eager hydration), plus its facts: every row links an existing kit page in
 // every language and pins exactly the tags of the v7 claims ledger
 // (PLAN_004_v7_kit_pages_and_vendor, rows C-11/C-21/C-31/C-39; amendments A2,
-// A4, A7 and A8; moved to the pack v7.1.4 pins by PLAN_009_dwpwebsite_dockerfile_pilot). Changing a pin here is a claims decision, not a formatting choice.
+// A4, A7 and A8; moved to the pack v7.1.4 pins by PLAN_009_dwpwebsite_dockerfile_pilot). The pins come from src/lib/ecosystem-pins.ts; changing one is a claims decision, not a formatting choice.
 
 const SOURCE_PATH = resolve(
   process.cwd(),
@@ -18,12 +19,12 @@ const SOURCE_PATH = resolve(
 const source = readFileSync(SOURCE_PATH, 'utf8');
 const languages = getSupportedLanguages();
 
-const PINS: Record<string, string> = {
-  herdr: 'herdr-peers@v0.1.0',
-  agentkit: 'coding-agents-kit@v0.4.0',
-  devcontainer: 'devcontainer-kit@v0.2.11',
-  vim: 'deepworkplan-vim@v0.6.0',
-};
+const PINS: Record<string, string> = Object.fromEntries(
+  (['herdr', 'agentkit', 'devcontainer', 'vim'] as const).map((key) => [
+    key,
+    `${ECOSYSTEM_PINS[key].repo}@${ECOSYSTEM_PINS[key].tag}`,
+  ])
+);
 
 type Entry = Record<string, string | string[]>;
 
@@ -120,6 +121,6 @@ describe('KitEcosystem facts', () => {
   });
 
   it('names the stable pack release', () => {
-    expect(source).toContain("const packTag = 'v7.5.1';");
+    expect(source).toContain("const packTag = 'v7.6.0';");
   });
 });

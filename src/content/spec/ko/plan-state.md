@@ -205,7 +205,7 @@ Markdown은 모든 불일치에서 이겨야(MUST) 합니다. `state.json`이 �
 
 ## 검증된 계획 발행
 
-완료를 선언하기 전에, 완성된 작업 로그(각각 자신의 **스킬 처분(Skills disposition)**을, 그리고 Final Review에서는 자신의 **문서화 결정(Documentation decision)**을 담고 있음), README 색인, 그리고 `PROGRESS.md`는 실제로 얻어진 출처와 인수 결과로부터 작성되어야(MUST) 합니다. 계획의 마지막 작업은 그런 다음 배포된 최종화기(finalizer)를 통해 마감됩니다: 그 종단 전환은 상태를 쓰기 전에 완료 후보를 모든 계획 산출물에 대해 검증하고, 이후 파일들을 검증하며, `analysis_results/FINALIZATION.json` 영수증을 기록합니다. 지어낸 통과 게이트는 이 전환을 뒷받침해서는 안 됩니다(MUST NOT) — 이 영수증은 실제로 무엇이 점검되었는지에 대한 외부 증거이며, 결코 그 자체의 전제 조건이 아닙니다. 그다음 `bash ../verify/conformance.sh --plan PLAN_name`이 디스크상의 실제 산출물에 대해 실행됩니다.
+완료를 선언하기 전에, 완성된 작업 로그(각각 자신의 **스킬 처분**(Skills disposition)을, 그리고 Final Review에서는 자신의 **문서화 결정**(Documentation decision)을 담고 있음), README 색인, 그리고 `PROGRESS.md`는 실제로 얻어진 출처와 인수 결과로부터 작성되어야(MUST) 합니다. 계획의 마지막 작업은 그런 다음 배포된 최종화기(finalizer)를 통해 마감됩니다: 그 종단 전환은 상태를 쓰기 전에 완료 후보를 모든 계획 산출물에 대해 검증하고, 이후 파일들을 검증하며, `analysis_results/FINALIZATION.json` 영수증을 기록합니다. 지어낸 통과 게이트는 이 전환을 뒷받침해서는 안 됩니다(MUST NOT) — 이 영수증은 실제로 무엇이 점검되었는지에 대한 외부 증거이며, 결코 그 자체의 전제 조건이 아닙니다. 그다음 `bash ../verify/conformance.sh --plan PLAN_name`이 디스크상의 실제 산출물에 대해 실행됩니다.
 
 중단된 발행은 `.finalizing.json` 마커를 그대로 남깁니다; 증거가 점검되고 복구 도우미가 동일한 후보에 대해 성공할 때까지 일반 검증은 실패합니다 — 어떤 것도 가정에 의해 발행을 재개하지 않습니다. 오래된 협조적 잠금은 제거하기 전에 어떤 작성자도 여전히 활성 상태가 아님을 확인해야 합니다. 이 레이어의 어떤 것도 커밋하거나, 푸시하거나, 저장된 게이트 명령을 실행하거나, 계획의 마크다운을 조용히 수리하지 않습니다. Python 인터프리터가 없으면 `completed`가 아니라 `UNVERIFIED`가 산출됩니다.
 

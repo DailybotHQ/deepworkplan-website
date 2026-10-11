@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Her terminal kodlama ajanı için tek komut. Varsayılan tam özerklik ve devre dışı bırakma, git worktree içinde başsız çalıştırma, bir önekle ikinci hesap."
+description: "Her terminal kodlama ajanı için tek komut: profil başına bir hesap, en çok kapasiteli hesap için ak pick, kapatılabilen özerklik ve başsız çalıştırmalar."
 kind: addon
 lang: tr
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayrakları, ikinci bir hesabı ayrı tutmak için kendi yolu, kendi başsız (headless) modu ve izin istemlerini atlamak için kendi anahtarı vardır. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)**, hepsinin üzerine tek bir komut yüzeyi koyar: `ak <kind> [@profile]`.
 
-Bu eklenti, kiti **DWP v7**'ye (paket `v7.5.1`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
+Bu eklenti, kiti **DWP v7**'ye (paket `v7.6.0`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
 ## Kitin size sundukları
 
@@ -21,31 +21,42 @@ Bu eklenti, kiti **DWP v7**'ye (paket `v7.5.1`) **başsız** devretme taşımas�
 - **Doğrulanmış kurulumlar.** `ak install <cli>`, eksik bir CLI'ı sağlayıcısının resmî kanalından sabitlenmiş bir sürümde kurar ve sabitlenmiş bir sha256 değerine ya da npm kayıt defterinin bütünlük bilgisine karşı doğrular.
 - **Tanıdık adlar.** Siz açana kadar kapalı kalan iki takma ad ön ayarı: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) ve `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …); her biri bir `ak <kind>` komutudur.
 
-## Kota, profiller ve kurulum
+## Hesaplar, kota ve hesap seçimi
 
-`ak usage`, kitin görebildiği her hesabın kotasını ve kullanımını hesap ve profil başına bir satırla listeler: Claude Code abonelikleri (5 saatlik, haftalık ve model başına pencereler), ChatGPT ile Codex oturumları ve Z.AI kodlama planı anahtarları için canlıdır; Cursor, Grok, xAI ve Azure OpenAI nedeniyle birlikte `n/d` gösterir. Salt okunurdur: hiçbir oturumu yenilemez, hiçbir token yazdırmaz ve bir profilin altına hiçbir şey yazmaz. `--json` aynı listeyi araçlara verir. Kullanım uç noktaları sağlayıcılara özgü ve resmî olmayan uç noktalardır.
+Kit, sahip olduğunuz her oturumu veya anahtarı bir **hesap** olarak ele alır: bir CLI × bir profil. `@default` (veya `@1`) CLI'ın kendi home dizinidir; `@2`, `@work` ya da `@client-x` ise her biri profiller kökü altında kendi dizininde bulunan ve yan yana çalışan ayrı oturumlardır. `ak profiles` bunları oturum durumları ve anahtarlarının adlarıyla listeler; `ak profiles --json` aynı listeyi araçlara verir (şema `profiles-v1`).
+
+`ak usage`, kitin görebildiği her hesabın kotasını ve kullanımını hesap ve profil başına bir satırla listeler: Claude Code abonelikleri (5 saatlik, haftalık ve model başına pencereler), ChatGPT ile Codex oturumları ve Z.AI kodlama planı anahtarları için canlıdır; Cursor, Grok, xAI ve Azure OpenAI nedeniyle birlikte `n/d` gösterir. Salt okunurdur: hiçbir oturumu yenilemez, hiçbir token yazdırmaz ve bir profilin altına hiçbir şey yazmaz. `--json` aynı listeyi araçlara verir (şema `usage-v1`). Kullanım uç noktaları sağlayıcılara özgü ve resmî olmayan uç noktalardır.
+
+`ak pick <kind>` aynı satırları okur ve en çok boş kapasiteye sahip hesabı belirtir. `--count N` en iyisinden başlayarak en fazla N hesap döndürür; `--exclude @<profile>` meşgul bir hesabı dışarıda tutar; `--model` tek bir modelin haftalık penceresini sayar; `--need 5h:40` o kadar kapasite olmadan seçim yapmayı reddeder. `--json`, `pick-v1` şemasını verir.
 
 ```bash
-ak usage              # her hesabın ve profilin kotası
-ak claude @2          # kendi home dizininde ikinci bir Claude hesabı
-ak profiles ls        # bu makinedeki profiller
-ak setup verify       # her biri kendi onarım komutuyla sıralı kontroller
+ak usage                   # her hesabın ve profilin kotası
+ak pick claude --count 3   # en çok kapasiteye sahip üç Claude hesabı
+ak claude @work --trust-cwd  # ikinci bir hesap, klasöre önceden güvenilmiş
+ak profiles --json         # araçlar için profiles-v1
+ak setup verify            # her biri kendi onarım komutuyla sıralı kontroller
 ```
 
-Profiller hesapları birbirinden ayırır: `@default` (veya `@1`) CLI'ın kendi home dizinidir; `@2`, `@work` ya da `@client-x` ise yan yana çalışan ayrı oturumlardır. `ak setup probe | verify | docker`, `agentkit-setup` skill'i tarafından yönlendirilen salt okunur bir yardımcıdır: makineyi inceler, kurulumu doğrular ve etikete sabitlenmiş, doğrulanmış bir konteyner tarifi üretir.
+`--trust-cwd` (veya `AGENTKIT_TRUST_CWD=1`), agent'ın başladığı klasöre önceden güvenir; böylece Claude Code ve Codex klasör güveni ekranı olmadan açılır. `ak setup probe | verify | docker`, `agentkit-setup` skill'i tarafından yönlendirilen salt okunur bir yardımcıdır: makineyi inceler, kurulumu doğrular ve etikete sabitlenmiş, doğrulanmış bir konteyner tarifi üretir.
+
+## Birkaç agent, birkaç hesap
+
+`agentkit-orchestrate` skill'i (`ak --skill orchestrate`), bir agent'a işi birkaç agent'a, hesaba ve sağlayıcıya dağıtmayı öğretir: toplu işten önce bir `ak usage`, hesapları seçmek için `ak pick --count N`, hesap başına bir delege, her sonuçta deponun kendi kapısı ve bir hesap sınıra ulaştığında bir sonraki hesaba geçiş. Kit gözlemler, hesaplar ve çalıştırır; asla zamanlama yapmaz. Kararı lider verir — siz ya da görevlendirdiğiniz bir agent — yalnızca kendi hesaplarınızı kullanarak ve her sağlayıcının koşulları içinde kalarak.
+
+Uzun, etkileşimli şeritlerde her şerit, kendi hesabıyla bir [Herdr](/kit/herdr) bölmesinde çalışır. [Birçok ajanı çalıştırmak](/methodology/06-orchestration) metodoloji bölümü tüm modeli açıklar: bir lider ve şeritleri, boş kapasiteye göre seçilen hesaplar, herdr-peers koordinasyonu ve depo başına tek dal ve tek sürüm.
 
 ## Kurulum
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.4.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.5.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v0.4.0` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v0.5.0` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |
@@ -70,7 +81,7 @@ Sözleşmesi `agent_delegation` yetkisi veren bir v7 planında `execute`, `paral
 | Bildirilmiş bir çıktısı olan, sınırları belirli `parallel_safe` bir görev | Agentkit (başsız) |
 | Görev etkileşim gerektiriyor, uzun sürüyor ya da başka bir makinede bulunuyor | [Herdr](/kit/herdr) (bir bölmedeki eş) |
 
-İkisi birlikte kullanılabilir: herdr-peers, bir bölmede `ak env <kind> @profile` komutunun yazdırdığı ortamla bir eş başlatabilir.
+İkisi birlikte kullanılabilir: herdr-peers, bir bölmede `ak env <kind> @profile` komutunun yazdırdığı ortamla bir eş başlatabilir. Aynı anda birçok şerit için [Birçok ajanı çalıştırmak](/methodology/06-orchestration) bölümüne bakın.
 
 ## Notlar
 

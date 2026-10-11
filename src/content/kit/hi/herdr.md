@@ -14,11 +14,11 @@ order: 7
 
 ## यह क्या एकीकृत करता है
 
-यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v0.1.0`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
+यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v0.2.1`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/herdr-peers`, tag `v0.1.0`, प्रोटोकॉल 1 |
+| उत्पाद | `DailybotHQ/herdr-peers`, tag `v0.2.1`, प्रोटोकॉल 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `herdr` |
 | ट्रांसपोर्ट | इंटरैक्टिव: Herdr पेन में एक पीयर |
 | प्रदान करता है | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 herdr-peers और Herdr की आधिकारिक skill इंस्टॉल करें, जिस पर यह निर्भर है। जिस भी मशीन के एजेंटों को उत्तर देना है, उस पर भी यह skill होनी चाहिए।
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers प्रेषक को प्रमाणित नहीं क�
 
 ## Container और होस्ट
 
-devcontainer-kit `v0.2.11` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता।
+devcontainer-kit `v0.3.0` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता।
 
 ## Herdr या agentkit
 
@@ -66,6 +66,8 @@ devcontainer-kit `v0.2.11` पर [devcontainer](/kit/devcontainer) ऐडऑन
 |---|---|
 | घोषित आउटपुट वाला एक सीमित `parallel_safe` कार्य | [agentkit](/kit/agentkit) (एक worktree में headless `ak run`) |
 | कार्य को इंटरैक्शन चाहिए, वह लंबा चलता है, या किसी दूसरी मशीन पर है | Herdr (पेन में एक पीयर) |
+
+एक साथ कई लेन चलाने वाले लीड के लिए — होस्ट पर, कंटेनरों में और दूसरी मशीनों पर पेन, हर एक अपने खाते पर — `herdr-peers lanes` हर लेन को उसकी स्थिति के साथ सूचीबद्ध करता है, `herdr-peers status <pane>` उस स्क्रीन का वर्गीकरण करता है जिस पर कोई blocked लेन है, और हर प्रत्यायोजन रिकॉर्ड उस खाते और विक्रेता का नाम दर्ज करता है जिसने काम किया। देखें [कई एजेंट चलाना](/methodology/06-orchestration)।
 
 ## टिप्पणियाँ
 

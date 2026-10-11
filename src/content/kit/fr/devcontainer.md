@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Un conteneur de développement reproductible par dépôt, depuis un modèle : agents prêts via ak, Herdr relié dans les deux sens et aucune clé SSH à l'intérieur."
+description: "Un conteneur de développement reproductible par dépôt, depuis un modèle : agents sur vos comptes de l’hôte via ak, Herdr dans les deux sens et aucune clé SSH."
 kind: addon
 lang: fr
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Addon devcontainer
 
-Donnez au dépôt un conteneur de développement reproductible et isolé, utilisable aussi bien par les personnes que par les éditeurs et les agents de code. Dans **DWP v7** (pack `v7.5.1`), cet addon intègre **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un produit MIT qui fonctionne sans Deep Work Plan. Il est facultatif : un dépôt est pleinement conforme sans lui.
+Donnez au dépôt un conteneur de développement reproductible et isolé, utilisable aussi bien par les personnes que par les éditeurs et les agents de code. Dans **DWP v7** (pack `v7.6.0`), cet addon intègre **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un produit MIT qui fonctionne sans Deep Work Plan. Il est facultatif : un dépôt est pleinement conforme sans lui.
 
 ## Ce que fournit devcontainer-kit
 
@@ -21,22 +21,22 @@ Donnez au dépôt un conteneur de développement reproductible et isolé, utilis
 ## Installation
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Prérequis : `bash` 3.2 ou ultérieur et `python3` 3.11 ou ultérieur sur un hôte Linux ou macOS, et Docker avec Compose v2 pour les commandes du conteneur. Vérifiez une version à l’aide de son asset `SHA256SUMS`. Épinglez `v0.2.11` : `v0.2.0` n’est pas prise en charge.
+Prérequis : `bash` 3.2 ou ultérieur et `python3` 3.11 ou ultérieur sur un hôte Linux ou macOS, et Docker avec Compose v2 pour les commandes du conteneur. Vérifiez une version à l’aide de son asset `SHA256SUMS`. Épinglez `v0.3.0` : `v0.2.0` n’est pas prise en charge.
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/devcontainer-kit`, tag `v0.2.11`, interface 2 |
+| Produit | `DailybotHQ/devcontainer-kit`, tag `v0.3.0`, interface 2 |
 | Clé de registre | `devcontainer` dans `.dwp/config.json` |
 | Configuration par dépôt | `.devcontainer/dck.toml` |
 | Détection | `dck doctor --json` |
 
 ## Couches
 
-Chaque conteneur embarque les outils de développement (git, gh, ripgrep, un serveur SSH, Herdr et herdr-peers) et aucun secret. Le reste est une couche que vous choisissez dans `dck.toml` :
+Chaque conteneur embarque les outils de développement (git, gh, ripgrep, un serveur SSH, Herdr et herdr-peers) et aucun secret, sauf si vous activez les [comptes de l’hôte](#comptes-de-lhôte-dans-le-conteneur). Le reste est une couche que vous choisissez dans `dck.toml` :
 
 | Couche | Par défaut | Ce qu’elle ajoute |
 |---|---|---|
@@ -57,6 +57,24 @@ Depuis `v0.2.3`, `dck up` établit un maillage bidirectionnel sans aucune étape
 - **Les conteneurs que le kit n’a pas créés.** Listez les clés publiques avec lesquelles ils se connectent sous `[ssh] authorized_extra` dans votre profil d’hôte, et ils pourront eux aussi atteindre les conteneurs dck.
 
 Associez-le à [coding-agents-kit](/kit/agentkit) sur l’hôte et dans le conteneur, et le même `ak` lance des agents des deux côtés.
+
+## Comptes de l’hôte dans le conteneur
+
+Un conteneur peut utiliser les comptes que vous avez déjà sur l’hôte, de la même façon que git fonctionne déjà via l’agent SSH de l’hôte, sans aucune connexion à l’intérieur. C’est facultatif et cela se règle dans votre **profil d’hôte**, jamais dans le `dck.toml` d’un dépôt :
+
+```toml
+[agents]
+host_profiles = true          # default false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
+```
+
+Avec `host_profiles` activé, `dck up` ne partage que les profils des CLI que le dépôt installe :
+
+- **Claude Code** via un jeton longue durée par profil : `CLAUDE_CODE_OAUTH_TOKEN` pour `@default` et `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` pour `@name` (le suffixe en majuscules, tout caractère hors de `A-Z`, `0-9` et `_` remplacé par `_`).
+- **Codex** via son fichier d’authentification, pour `@default` et pour chaque profil.
+- **Le fichier d’environnement du kit**, en lecture seule et réduit aux noms de `host_env_keys`.
+
+Le home complet d’agentkit n’est jamais monté, et les profils qui contiennent des chemins absolus de l’hôte sont ignorés. Une connexion Codex partagée en lecture-écriture peut être renouvelée par deux rédacteurs à la fois : gardez un seul agent actif par compte Codex. Dans le conteneur, le même `ak <kind> @<profile>` tourne sur le même compte que sur l’hôte, ce qui permet à un coordinateur de confier aux couloirs du conteneur les comptes choisis par `ak pick` — voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
 
 ## Sécurité par défaut
 

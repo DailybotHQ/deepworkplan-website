@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Một dev container có thể tái tạo cho mỗi kho mã, từ một mẫu duy nhất: agent sẵn sàng qua ak, Herdr nối hai chiều và không có khóa SSH nào bên trong container."
+description: "Một dev container có thể tái tạo cho mỗi kho mã, từ một mẫu duy nhất: agent dùng tài khoản host qua ak, Herdr nối hai chiều và không có khóa SSH bên trong."
 kind: addon
 lang: vi
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.5.1`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
+Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.6.0`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
 
 ## devcontainer-kit cung cấp những gì
 
@@ -21,22 +21,22 @@ Mang đến cho repository một dev container có thể tái lập và được
 ## Cài đặt
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v0.2.11`: `v0.2.0` không được hỗ trợ.
+Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v0.3.0`: `v0.2.0` không được hỗ trợ.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.2.11`, giao diện 2 |
+| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.3.0`, giao diện 2 |
 | Khóa registry | `devcontainer` trong `.dwp/config.json` |
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
 
 ## Các lớp
 
-Mọi container đều mang theo các công cụ phát triển — git, gh, ripgrep, một máy chủ SSH, Herdr và herdr-peers — và không có secret nào. Phần còn lại là một lớp mà bạn chọn trong `dck.toml`:
+Mọi container đều mang theo các công cụ phát triển — git, gh, ripgrep, một máy chủ SSH, Herdr và herdr-peers — và không có secret nào trừ khi bạn chọn bật [tài khoản host](#tài-khoản-host-bên-trong-container). Phần còn lại là một lớp mà bạn chọn trong `dck.toml`:
 
 | Lớp | Mặc định | Bổ sung gì |
 |---|---|---|
@@ -57,6 +57,24 @@ Từ `v0.2.3`, `dck up` thiết lập một mạng lưới hai chiều mà khôn
 - **Container không do bộ kit tạo ra.** Liệt kê các khóa công khai mà chúng dùng để đăng nhập trong `[ssh] authorized_extra` của hồ sơ host, và chúng cũng có thể kết nối tới các container dck.
 
 Kết hợp với [coding-agents-kit](/kit/agentkit) trên máy host và trong container, và cùng một lệnh `ak` sẽ khởi chạy agent ở cả hai phía.
+
+## Tài khoản host bên trong container
+
+Một container có thể dùng các tài khoản bạn đã có trên máy host, giống như cách git vốn hoạt động qua SSH agent của máy host, mà không cần đăng nhập bên trong. Tính năng này là opt-in và nằm trong **hồ sơ host** của bạn, không bao giờ trong `dck.toml` của một repository:
+
+```toml
+[agents]
+host_profiles = true          # default false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
+```
+
+Khi bật `host_profiles`, `dck up` chỉ chia sẻ hồ sơ của những CLI mà repository cài đặt:
+
+- **Claude Code** qua một token dài hạn cho mỗi hồ sơ: `CLAUDE_CODE_OAUTH_TOKEN` cho `@default` và `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` cho `@name` (hậu tố viết hoa, mọi ký tự ngoài `A-Z`, `0-9` và `_` được đổi thành `_`).
+- **Codex** qua tệp xác thực của nó, cho `@default` và cho từng hồ sơ.
+- **Tệp env của bộ kit**, chỉ đọc và rút gọn còn các tên trong `host_env_keys`.
+
+Toàn bộ home của agentkit không bao giờ được mount, và các hồ sơ chứa đường dẫn tuyệt đối của máy host sẽ bị bỏ qua. Một phiên đăng nhập Codex được chia sẻ ở chế độ đọc-ghi có thể bị hai bên ghi làm mới cùng lúc: hãy giữ một agent đang hoạt động cho mỗi tài khoản Codex. Bên trong container, cùng lệnh `ak <kind> @<profile>` chạy trên cùng tài khoản như trên máy host, và đó là điều cho phép một lead giao cho các lane trong container những tài khoản mà `ak pick` đã chọn — xem [Chạy nhiều agent](/methodology/06-orchestration).
 
 ## Mặc định bảo mật
 

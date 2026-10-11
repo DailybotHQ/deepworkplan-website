@@ -576,12 +576,12 @@ export const ko: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 방법론',
       description:
-        '매니페스토부터 아키타입까지 다섯 장: Deep Work Plan을 떠받치는 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 그리고 적응 방식을 다룹니다.',
+        '매니페스토부터 오케스트레이션까지 여섯 장: 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 아키타입, 그리고 여러 에이전트를 동시에 운영하기.',
     },
     eyebrow: '방법론',
     title: 'Deep Work Plan 방법론',
     intro:
-      'Deep Work Plan의 철학에서 출발해 매일 사용하는 실전 루프, 템플릿, 적응 방식까지 안내하는 다섯 장.',
+      'Deep Work Plan의 철학에서 출발해 실전 루프, 템플릿, 적응 방식, 그리고 여러 에이전트를 동시에 운영하는 방법까지 안내하는 여섯 장.',
     chapterLabel: '장',
     readChapter: '장 읽기',
     prev: '이전',
@@ -696,7 +696,7 @@ export const ko: SiteTranslations = {
         description:
           '프롬프트와 스킬을 확인하기 전까지 신뢰할 수 없는 것으로 취급하세요. 둘 다 오픈 소스이며 MIT 라이선스입니다. 스킬은 마크다운 우선으로 네트워크 호출과 텔레메트리가 없습니다. 모든 릴리스는 배포된 스킬에 대한 SHA256SUMS를 게시하므로 실행 전에 사본이 일치하는지 확인할 수 있습니다. 릴리스는 서명이 아니라 체크섬으로 검증됩니다(서명은 문서화된 다음 단계입니다).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -704,7 +704,7 @@ export const ko: SiteTranslations = {
         description:
           '어떤 에이전트든 구조화된 작업을 계획하고 실행할 수 있도록 Deep Work Plan 스킬을 추가합니다. 스킬은 라우터와 아홉 개의 하위 스킬 — create, execute, refine, resume, status, verify, onboard, author, upgrade — 을 제공합니다.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -718,7 +718,7 @@ export const ko: SiteTranslations = {
       {
         title: '로컬 리뷰와 선택형 애드온',
         description:
-          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 일곱 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, Agentkit — 을 제안하며, 맞을 때만 채택하면 됩니다. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
+          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 일곱 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, Agentkit — 을 제안하며, 맞을 때만 채택하면 됩니다. 스킬과 로컬 리뷰는 모든 리포지토리에 들어갑니다. 나머지에 대해서는 이 과정이 모든 애드온을 감지하고, 사용 중인 것은 업그레이드하고, 맞는 것은 제안합니다 — 구성을 채우기 위해서만 추가하는 일은 결코 없습니다. 모든 구성 요소는 init.md가 SHA256SUMS 다이제스트를 게시하는 릴리스에 고정되며, 두 번째로 실행해도 아무것도 바뀌지 않습니다. 수락된 devcontainer는 전체 스택으로 완성됩니다 — 고른 에이전트, 양방향으로 연결된 Herdr, 그리고 옵트인한 경우에만 호스트 계정. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
       },
       {
         title: '계획하고 실행',
@@ -743,6 +743,10 @@ export const ko: SiteTranslations = {
       { label: '키트 둘러보기', href: '/kit' },
       { label: '예시 보기', href: '/examples' },
       { label: '선택 사항: 터미널 에디터 DeepWorkPlan Vim', href: '/kit/vim' },
+      {
+        label: '여러 에이전트 운영하기',
+        href: '/methodology/06-orchestration',
+      },
     ],
   },
 
@@ -806,7 +810,7 @@ export const ko: SiteTranslations = {
             id: 'how-to-use',
             question: '어떻게 사용하나요?',
             answer:
-              '세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 진행 중인 계획을 편집하고(범위, 작업, 또는 Lite 계획을 Full로 승격), `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성하고, `/dwp-upgrade` 는 설치된 스킬을 기존 계획을 건드리지 않고 새 릴리스로 옮깁니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.',
+              '세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 진행 중인 계획을 편집하고(범위, 작업, 또는 Lite 계획을 Full로 승격), `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성하고, `/dwp-upgrade` 는 설치된 스킬을 기존 계획을 건드리지 않고 새 릴리스로 옮깁니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.',
             linkLabel: '빠른 시작',
             linkPath: '/quickstart',
           },
@@ -1011,7 +1015,7 @@ export const ko: SiteTranslations = {
             id: 'cost',
             question: '비용은 얼마인가요? 효율은 어떻게 측정되나요?',
             answer:
-              '방법론과 스킬은 MIT 라이선스이며 무료입니다; 핵심 플로우에는 서비스도, API 키도, 텔레메트리도 없습니다. 효율은 각 플로우가 **진입 시점에** 로드하는 지시사항 바이트 수 — 세션 시작 시의 번들 — 로 보고되며, 플로우 자체의 트리거가 실제 작업이 계속될 때 추가로 로드하는 양을 더한 이름 붙은 **엔드투엔드 경로**와 함께 공개됩니다(예를 들어, 실행까지 이어지는 재개는 일반적으로 진입 번들의 몇 배를 로드합니다). 두 수치 모두 세션의 상한이 아닙니다: 실제 실행은 저장소 자체의 파일, 도구 출력, 계획의 작업 파일도 읽으며, 이 원장은 그중 어느 것도 세지 않습니다. 두 수치는 모두 스킬과 함께 커밋된 스크립트가 측정하고 릴리스 베이스라인마다 다시 측정하여 평가 원장에 공개하며, 증가는 감소만큼 평범하게 보고됩니다. 바이트 목록은 그런 것을 입증하지 못하므로 토큰 백분율이나 비용 절감으로 보고하지 않습니다. 이제 동결된 프로토콜 아래에서 새로운 에이전트 대상의 공개 평가가 실행되었습니다: 동일한 두 기능을 하네스 없이, 이전 메이저 버전으로, 현재 버전으로 — 각각 깨끗한 클론에서 구축했습니다. 그 결과, 하네스가 있는 트리에서 작업한 에이전트는 두 작업 모두에서 더 적은 바이트를 읽었고, 현재 버전의 기능 세션은 두 작업 모두에서 이전 메이저 버전보다 적은 모델 입력과 출력을 소비했습니다 — 하네스가 보고한 값이며 단일 워크로드 기준입니다. 이 평가는 정직한 한계도 밝혔습니다: 온보딩은 플로우가 사용될 때에만 회수되는 일회성 비용이고, 워크로드별 토큰 순 방향은 섞여 있었으며, 경과 시간 우위는 주장하지 않고, 새로운 에이전트는 스스로 플로우에 들어가지 않습니다 — 플로우는 사용자나 에이전트가 호출하는 명령입니다.',
+              '방법론과 스킬은 MIT 라이선스이며 무료입니다; 핵심 플로우에는 서비스도, API 키도, 텔레메트리도 없습니다. 효율은 각 플로우가 진입 시점에 로드하는 지시사항 바이트 수 — 세션 시작 시의 번들 — 로 보고되며, 플로우 자체의 트리거가 실제 작업이 계속될 때 추가로 로드하는 양을 더한 이름 붙은 엔드투엔드 경로와 함께 공개됩니다(예를 들어, 실행까지 이어지는 재개는 일반적으로 진입 번들의 몇 배를 로드합니다). 두 수치 모두 세션의 상한이 아닙니다: 실제 실행은 저장소 자체의 파일, 도구 출력, 계획의 작업 파일도 읽으며, 이 원장은 그중 어느 것도 세지 않습니다. 두 수치는 모두 스킬과 함께 커밋된 스크립트가 측정하고 릴리스 베이스라인마다 다시 측정하여 평가 원장에 공개하며, 증가는 감소만큼 평범하게 보고됩니다. 바이트 목록은 그런 것을 입증하지 못하므로 토큰 백분율이나 비용 절감으로 보고하지 않습니다. 이제 동결된 프로토콜 아래에서 새로운 에이전트 대상의 공개 평가가 실행되었습니다: 동일한 두 기능을 하네스 없이, 이전 메이저 버전으로, 현재 버전으로 — 각각 깨끗한 클론에서 구축했습니다. 그 결과, 하네스가 있는 트리에서 작업한 에이전트는 두 작업 모두에서 더 적은 바이트를 읽었고, 현재 버전의 기능 세션은 두 작업 모두에서 이전 메이저 버전보다 적은 모델 입력과 출력을 소비했습니다 — 하네스가 보고한 값이며 단일 워크로드 기준입니다. 이 평가는 정직한 한계도 밝혔습니다: 온보딩은 플로우가 사용될 때에만 회수되는 일회성 비용이고, 워크로드별 토큰 순 방향은 섞여 있었으며, 경과 시간 우위는 주장하지 않고, 새로운 에이전트는 스스로 플로우에 들어가지 않습니다 — 플로우는 사용자나 에이전트가 호출하는 명령입니다.',
             linkLabel: '신뢰와 공개',
             linkPath: '/trust',
           },

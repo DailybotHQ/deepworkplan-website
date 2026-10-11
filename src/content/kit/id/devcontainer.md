@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Dev container yang dapat direproduksi per repositori dari satu templat: agen siap lewat ak, Herdr terhubung dua arah, dan tanpa kunci SSH di dalamnya."
+description: "Dev container yang dapat direproduksi per repositori dari satu templat: agen pada akun host Anda lewat ak, Herdr terhubung dua arah, tanpa kunci SSH."
 kind: addon
 lang: id
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.5.1`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
+Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.6.0`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
 ## Yang disediakan devcontainer-kit
 
@@ -21,22 +21,22 @@ Berikan repositori sebuah dev container yang reproducible dan terisolasi — yan
 ## Instalasi
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.2.11`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.3.0`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.2.11`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.3.0`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
 
 ## Lapisan
 
-Setiap container membawa alat pengembangan — git, gh, ripgrep, server SSH, Herdr, dan herdr-peers — dan tidak membawa secret. Sisanya adalah lapisan yang Anda pilih di `dck.toml`:
+Setiap container membawa alat pengembangan — git, gh, ripgrep, server SSH, Herdr, dan herdr-peers — dan tidak membawa secret kecuali Anda memilih [akun host](#akun-host-di-dalam-container). Sisanya adalah lapisan yang Anda pilih di `dck.toml`:
 
 | Lapisan | Default | Yang ditambahkan |
 |---|---|---|
@@ -57,6 +57,24 @@ Sejak `v0.2.3`, `dck up` menyambungkan mesh dua arah tanpa langkah manual, di Do
 - **Container yang tidak dibuat oleh kit.** Cantumkan kunci publik yang mereka gunakan untuk login di bawah `[ssh] authorized_extra` dalam profil host Anda, dan mereka juga dapat menjangkau container dck.
 
 Padukan dengan [coding-agents-kit](/kit/agentkit) di host dan di container, dan `ak` yang sama menjalankan agen di kedua sisi.
+
+## Akun host di dalam container
+
+Sebuah container dapat menggunakan akun yang sudah Anda miliki di host, seperti git yang sudah bekerja melalui SSH agent milik host, tanpa login di dalamnya. Fitur ini bersifat opt-in dan berada di **profil host** Anda, tidak pernah di `dck.toml` milik repositori:
+
+```toml
+[agents]
+host_profiles = true          # default false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
+```
+
+Dengan `host_profiles` aktif, `dck up` hanya membagikan profil dari CLI yang diinstal oleh repositori:
+
+- **Claude Code** melalui token berumur panjang per profil: `CLAUDE_CODE_OAUTH_TOKEN` untuk `@default` dan `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` untuk `@name` (sufiks dalam huruf kapital, dengan setiap karakter di luar `A-Z`, `0-9`, dan `_` diubah menjadi `_`).
+- **Codex** melalui file auth-nya, untuk `@default` dan untuk setiap profil.
+- **File env milik kit**, hanya-baca dan dibatasi pada nama-nama di `host_env_keys`.
+
+Seluruh home agentkit tidak pernah di-mount, dan profil yang menyimpan path absolut host akan dilewati. Login Codex yang dibagikan dalam mode baca-tulis dapat diperbarui oleh dua penulis sekaligus: pertahankan satu agen aktif per akun Codex. Di dalam container, `ak <kind> @<profile>` yang sama berjalan pada akun yang sama seperti di host, dan inilah yang memungkinkan lead memberikan kepada lane di container akun-akun yang dipilih `ak pick` — lihat [Menjalankan banyak agent](/methodology/06-orchestration).
 
 ## Default keamanan
 

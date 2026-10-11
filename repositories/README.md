@@ -30,6 +30,7 @@ for how the repositories relate.
 | [deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) | Addon: DeepWorkPlan Vim (Neovim distribution with the plan reader) | Public | `bash tests/smoke/run.sh` | [AGENTS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/main/AGENTS.md) |
 | [ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) | Addon: local and CI pull-request reviewer | Public | `python3 -m unittest discover -s tests` | [AGENTS.md](https://github.com/DailybotHQ/ai-diff-reviewer/blob/main/AGENTS.md) |
 | [agent-skill](https://github.com/DailybotHQ/agent-skill) | Addon: the Dailybot agent skill (reporting) — **owned by the Dailybot hub too** | Public | `bats tests/` | [AGENTS.md](https://github.com/DailybotHQ/agent-skill/blob/main/AGENTS.md) |
+| [cli](https://github.com/DailybotHQ/cli) | Consumer: the Dailybot CLI, the reference production repository that dogfoods the full stack — **owned by the Dailybot hub too**; every merge to `main` auto-releases | Public | `ruff check . && mypy dailybot_cli && pytest` | [AGENTS.md](https://github.com/DailybotHQ/cli/blob/main/AGENTS.md) |
 
 Once cloned, each guide is also at `repositories/<name>/AGENTS.md`; read it
 before working in that repository, because its own rules win inside it.

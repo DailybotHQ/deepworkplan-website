@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "모든 저장소에 재현 가능한 개발 컨테이너를 하나의 템플릿으로. ak로 바로 쓰는 에이전트, 양방향으로 연결된 Herdr, 컨테이너 안에는 SSH 키가 없습니다."
+description: "모든 저장소에 재현 가능한 개발 컨테이너를 하나의 템플릿으로. ak로 호스트 계정을 쓰는 에이전트, 양방향 Herdr, 안에는 SSH 키가 없습니다."
 kind: addon
 lang: ko
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 애드온
 
-사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.5.1`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
+사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.6.0`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
 
 ## devcontainer-kit이 제공하는 것
 
@@ -21,22 +21,22 @@ order: 1
 ## 설치
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v0.2.11`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
+요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v0.3.0`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v0.2.11`, 인터페이스 2 |
+| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v0.3.0`, 인터페이스 2 |
 | 레지스트리 키 | `.dwp/config.json`의 `devcontainer` |
 | 리포지토리별 설정 | `.devcontainer/dck.toml` |
 | 감지 | `dck doctor --json` |
 
 ## 레이어
 
-모든 컨테이너에는 개발 도구 — git, gh, ripgrep, SSH 서버, Herdr, herdr-peers — 가 들어 있으며, 비밀 값은 없습니다. 나머지는 `dck.toml`에서 선택하는 레이어입니다:
+모든 컨테이너에는 개발 도구 — git, gh, ripgrep, SSH 서버, Herdr, herdr-peers — 가 들어 있으며, [호스트 계정](#컨테이너-안의-호스트-계정)을 옵트인하지 않는 한 비밀 값은 없습니다. 나머지는 `dck.toml`에서 선택하는 레이어입니다:
 
 | 레이어 | 기본값 | 추가되는 것 |
 |---|---|---|
@@ -57,6 +57,24 @@ cd your-repo && dck init && bash dev.sh up
 - **키트가 만들지 않은 컨테이너.** 그 컨테이너들이 로그인에 쓰는 공개 키를 호스트 프로필의 `[ssh] authorized_extra` 아래에 나열하면, 그 컨테이너들도 dck 컨테이너에 접근할 수 있습니다.
 
 호스트와 컨테이너 양쪽에서 [coding-agents-kit](/kit/agentkit)과 함께 사용하면, 같은 `ak`로 양쪽에서 에이전트를 실행할 수 있습니다.
+
+## 컨테이너 안의 호스트 계정
+
+컨테이너는 호스트에 이미 있는 계정을 사용할 수 있습니다. git이 이미 호스트의 SSH 에이전트를 통해 동작하는 것과 같은 방식이며, 컨테이너 안에서 로그인할 필요가 없습니다. 이는 옵트인이며 설정은 여러분의 **호스트 프로필**에 있고, 리포지토리의 `dck.toml`에는 결코 두지 않습니다.
+
+```toml
+[agents]
+host_profiles = true          # 기본값 false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # 공유할 환경 변수 이름의 허용 목록
+```
+
+`host_profiles`를 켜면 `dck up`은 리포지토리가 설치하는 CLI의 프로필만 공유합니다.
+
+- **Claude Code**는 프로필마다 하나의 장기 토큰으로 공유합니다. `@default`에는 `CLAUDE_CODE_OAUTH_TOKEN`, `@name`에는 `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>`를 사용합니다(접미사는 대문자로 바꾸고, `A-Z`, `0-9`, `_` 이외의 문자는 `_`로 바꿉니다).
+- **Codex**는 인증 파일로, `@default`와 각 프로필에 대해 공유합니다.
+- **키트의 env 파일**은 읽기 전용이며 `host_env_keys`에 있는 이름으로만 줄입니다.
+
+agentkit home 전체는 결코 마운트하지 않으며, 호스트 절대 경로를 담은 프로필은 건너뜁니다. 읽기-쓰기로 공유한 Codex 로그인은 두 작성자가 동시에 갱신할 수 있으므로, Codex 계정마다 활성 에이전트를 하나만 두십시오. 컨테이너 안에서도 같은 `ak <kind> @<profile>`이 호스트에서와 같은 계정으로 실행되며, 덕분에 리드는 `ak pick`이 고른 계정을 컨테이너 레인에 넘길 수 있습니다. [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
 
 ## 보안 기본값
 

@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "dev container ที่ทำซ้ำได้สำหรับทุกที่เก็บจากเทมเพลตเดียว เอเจนต์พร้อมใช้ผ่าน ak, Herdr เชื่อมสองทิศทาง และไม่มีกุญแจ SSH อยู่ในคอนเทนเนอร์เลย"
+description: "dev container ที่ทำซ้ำได้สำหรับทุกที่เก็บจากเทมเพลตเดียว เอเจนต์ใช้บัญชีบนโฮสต์ของคุณผ่าน ak, Herdr เชื่อมสองทิศทาง และไม่มีกุญแจ SSH อยู่ข้างใน"
 kind: addon
 lang: th
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # แอดออน Devcontainer
 
-มอบ dev container ที่ทำซ้ำได้และแยกสภาพแวดล้อมให้กับ repository ซึ่งทั้งคน editor และ coding agent ใช้ร่วมกันได้ ใน **DWP v7** (แพ็ก `v7.5.1`) แอดออนนี้ผสาน **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** เข้ามา ซึ่งเป็นผลิตภัณฑ์ MIT ที่ทำงานได้แม้ไม่มี Deep Work Plan แอดออนนี้เป็นแบบเลือกใช้ repository หนึ่งสอดคล้องกับมาตรฐานได้อย่างสมบูรณ์แม้ไม่มีมัน
+มอบ dev container ที่ทำซ้ำได้และแยกสภาพแวดล้อมให้กับ repository ซึ่งทั้งคน editor และ coding agent ใช้ร่วมกันได้ ใน **DWP v7** (แพ็ก `v7.6.0`) แอดออนนี้ผสาน **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** เข้ามา ซึ่งเป็นผลิตภัณฑ์ MIT ที่ทำงานได้แม้ไม่มี Deep Work Plan แอดออนนี้เป็นแบบเลือกใช้ repository หนึ่งสอดคล้องกับมาตรฐานได้อย่างสมบูรณ์แม้ไม่มีมัน
 
 ## สิ่งที่ devcontainer-kit มอบให้
 
@@ -21,22 +21,22 @@ order: 1
 ## การติดตั้ง
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-ข้อกำหนด: `bash` 3.2 ขึ้นไปและ `python3` 3.11 ขึ้นไปบนโฮสต์ Linux หรือ macOS รวมถึง Docker พร้อม Compose v2 สำหรับคำสั่งเกี่ยวกับคอนเทนเนอร์ ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น ให้ตรึงไว้ที่ `v0.2.11` เนื่องจาก `v0.2.0` ไม่ได้รับการสนับสนุน
+ข้อกำหนด: `bash` 3.2 ขึ้นไปและ `python3` 3.11 ขึ้นไปบนโฮสต์ Linux หรือ macOS รวมถึง Docker พร้อม Compose v2 สำหรับคำสั่งเกี่ยวกับคอนเทนเนอร์ ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น ให้ตรึงไว้ที่ `v0.3.0` เนื่องจาก `v0.2.0` ไม่ได้รับการสนับสนุน
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.2.11` อินเทอร์เฟซ 2 |
+| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.3.0` อินเทอร์เฟซ 2 |
 | คีย์ใน registry | `devcontainer` ใน `.dwp/config.json` |
 | config ต่อ repository | `.devcontainer/dck.toml` |
 | การตรวจจับ | `dck doctor --json` |
 
 ## เลเยอร์
 
-ทุกคอนเทนเนอร์มีเครื่องมือพัฒนา ได้แก่ git, gh, ripgrep, เซิร์ฟเวอร์ SSH, Herdr และ herdr-peers โดยไม่มีความลับใด ๆ ส่วนที่เหลือเป็นเลเยอร์ที่คุณเลือกใน `dck.toml`:
+ทุกคอนเทนเนอร์มีเครื่องมือพัฒนา ได้แก่ git, gh, ripgrep, เซิร์ฟเวอร์ SSH, Herdr และ herdr-peers โดยไม่มีความลับใด ๆ เว้นแต่คุณจะเลือกเปิดใช้[บัญชีโฮสต์](#บัญชีโฮสต์ภายในคอนเทนเนอร์) ส่วนที่เหลือเป็นเลเยอร์ที่คุณเลือกใน `dck.toml`:
 
 | เลเยอร์ | ค่าเริ่มต้น | สิ่งที่เพิ่มเข้ามา |
 |---|---|---|
@@ -57,6 +57,24 @@ cd your-repo && dck init && bash dev.sh up
 - **คอนเทนเนอร์ที่ชุดเครื่องมือไม่ได้สร้าง** ระบุ public key ที่คอนเทนเนอร์เหล่านั้นใช้ล็อกอินไว้ใต้ `[ssh] authorized_extra` ในโปรไฟล์โฮสต์ของคุณ แล้วคอนเทนเนอร์เหล่านั้นก็จะเข้าถึงคอนเทนเนอร์ dck ได้เช่นกัน
 
 ใช้ร่วมกับ [coding-agents-kit](/kit/agentkit) ทั้งบนโฮสต์และในคอนเทนเนอร์ แล้ว `ak` ตัวเดียวกันจะเปิดเอเจนต์ได้ทั้งสองฝั่ง
+
+## บัญชีโฮสต์ภายในคอนเทนเนอร์
+
+คอนเทนเนอร์ใช้บัญชีที่คุณมีอยู่แล้วบนโฮสต์ได้ เช่นเดียวกับที่ git ทำงานผ่าน SSH agent ของโฮสต์อยู่แล้ว โดยไม่ต้องล็อกอินภายในคอนเทนเนอร์ ความสามารถนี้ต้องเลือกเปิดใช้เอง และตั้งค่าไว้ใน **โปรไฟล์โฮสต์** ของคุณ ไม่ใช่ใน `dck.toml` ของ repository:
+
+```toml
+[agents]
+host_profiles = true          # ค่าเริ่มต้น false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list ของชื่อ env ที่จะแชร์
+```
+
+เมื่อเปิด `host_profiles` คำสั่ง `dck up` จะแชร์เฉพาะโปรไฟล์ของ CLI ที่ repository ติดตั้ง:
+
+- **Claude Code** ผ่านโทเคนอายุยาวหนึ่งตัวต่อโปรไฟล์ ได้แก่ `CLAUDE_CODE_OAUTH_TOKEN` สำหรับ `@default` และ `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` สำหรับ `@name` (suffix เป็นตัวพิมพ์ใหญ่ และอักขระใดที่อยู่นอก `A-Z`, `0-9` และ `_` จะถูกแปลงเป็น `_`)
+- **Codex** ผ่านไฟล์ auth ของมัน สำหรับ `@default` และสำหรับแต่ละโปรไฟล์
+- **ไฟล์ env ของชุดเครื่องมือ** แบบอ่านอย่างเดียว และคัดเหลือเฉพาะชื่อที่อยู่ใน `host_env_keys`
+
+home ของ agentkit ทั้งหมดจะไม่ถูกเมานต์เลย และโปรไฟล์ที่เก็บ path แบบ absolute ของโฮสต์จะถูกข้ามไป การล็อกอิน Codex ที่แชร์แบบอ่าน-เขียนอาจถูกรีเฟรชโดยผู้เขียนสองรายพร้อมกัน จึงควรมีเอเจนต์ที่ทำงานอยู่เพียงตัวเดียวต่อหนึ่งบัญชี Codex ภายในคอนเทนเนอร์ คำสั่ง `ak <kind> @<profile>` เดียวกันจะรันบนบัญชีเดียวกับบนโฮสต์ ซึ่งทำให้ lead ส่งบัญชีที่ `ak pick` เลือกไว้ให้ lane ในคอนเทนเนอร์ได้ ดู [การรันเอเจนต์หลายตัว](/methodology/06-orchestration)
 
 ## ค่าเริ่มต้นด้านความปลอดภัย
 

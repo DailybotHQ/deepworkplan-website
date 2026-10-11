@@ -29,7 +29,7 @@ usage: /deepworkplan-onboard
 4. 生成 `docs/`（架构、规范、测试、安全等）与各模块文档。
 5. 生成 `.agents/`（代理、轻量 `dwp-*` 命令、与技术栈相适配的技能、目录）+ `.claude → .agents`。
 6. 安装技能，并搭建一个被 gitignore 的 `.dwp/`（plans、drafts）与一个 `tmp/` 草稿空间。
-7. 安装必备的 AI Diff Reviewer 本地审查，提供可选的附加组件，然后进行自检。
+7. 安装必备的 AI Diff Reviewer 本地审查；检测每个附加组件，升级仓库在用的组件，并提供契合的组件（绝不仅为凑齐全套而添加）；然后进行自检。
 
 ## 备注
 

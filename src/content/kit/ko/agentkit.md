@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "모든 터미널 코딩 에이전트를 하나의 명령으로. 기본값은 완전 자율(옵트아웃 가능), git worktree에서 헤드리스 실행, 접두사 하나로 두 번째 계정까지."
+description: "모든 터미널 코딩 에이전트를 하나의 명령으로. 프로필마다 계정, 여유가 가장 많은 계정을 고르는 ak pick, 옵트아웃 가능한 자율, 헤드리스 실행."
 kind: addon
 lang: ko
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 터미널 코딩 에이전트는 저마다 세션을 이어 가는 고유한 플래그, 두 번째 계정을 분리하는 고유한 방식, 고유한 헤드리스 모드, 그리고 권한 프롬프트를 건너뛰는 고유한 스위치를 갖고 있습니다. [**coding-agents-kit**](https://github.com/DailybotHQ/coding-agents-kit)는 그 모두 위에 하나의 명령 체계를 얹습니다: `ak <kind> [@profile]`.
 
-이 애드온은 이 키트를 **DWP v7**(팩 `v7.5.1`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
+이 애드온은 이 키트를 **DWP v7**(팩 `v7.6.0`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
 
 ## 키트가 제공하는 것
 
@@ -21,31 +21,42 @@ order: 8
 - **검증된 설치.** `ak install <cli>`는 누락된 CLI를 벤더의 공식 채널에서 고정된 버전으로 설치하며, 고정된 sha256 또는 npm 레지스트리의 무결성 정보와 대조해 확인합니다.
 - **익숙한 이름.** 켜기 전까지는 꺼져 있는 두 가지 별칭 프리셋: `classic`(`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`)과 `providers`(`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …). 각각은 하나의 `ak <kind>`입니다.
 
-## 할당량, 프로필, 설정
+## 계정, 할당량, 계정 선택
 
-`ak usage`는 키트가 볼 수 있는 모든 계정의 할당량과 사용량을 계정과 프로필마다 한 줄씩 보여 줍니다. Claude Code 구독(5시간, 주간, 모델별 창), ChatGPT로 로그인한 Codex, Z.AI 코딩 플랜 키는 실시간으로 조회하며, Cursor, Grok, xAI, Azure OpenAI는 이유와 함께 `n/d`로 표시합니다. 읽기 전용이므로 로그인을 갱신하지 않고, 토큰을 출력하지 않으며, 프로필 안에 아무것도 쓰지 않습니다. `--json`은 도구에 같은 목록을 제공합니다. 사용량 엔드포인트는 공급업체 내부용이며 비공식입니다.
+키트는 여러분이 가진 모든 로그인이나 키를 하나의 **계정**으로 취급합니다. CLI 하나 × 프로필 하나입니다. `@default`(또는 `@1`)는 CLI 자체의 home이고, `@2`, `@work`, `@client-x`는 별도의 로그인으로, 각각 프로필 루트 아래의 자체 디렉터리에 있으며 나란히 실행됩니다. `ak profiles`는 이들을 로그인 상태 및 키 이름과 함께 나열하고, `ak profiles --json`은 도구에 같은 목록을 제공합니다(스키마 `profiles-v1`).
+
+`ak usage`는 키트가 볼 수 있는 모든 계정의 할당량과 사용량을 계정과 프로필마다 한 줄씩 보여 줍니다. Claude Code 구독(5시간, 주간, 모델별 창), ChatGPT로 로그인한 Codex, Z.AI 코딩 플랜 키는 실시간으로 조회하며, Cursor, Grok, xAI, Azure OpenAI는 이유와 함께 `n/d`로 표시합니다. 읽기 전용이므로 로그인을 갱신하지 않고, 토큰을 출력하지 않으며, 프로필 안에 아무것도 쓰지 않습니다. `--json`은 도구에 같은 목록을 제공합니다(스키마 `usage-v1`). 사용량 엔드포인트는 공급업체 내부용이며 비공식입니다.
+
+`ak pick <kind>`는 같은 행을 읽고 여유가 가장 많은 계정을 알려 줍니다. `--count N`은 좋은 순서로 최대 N개의 계정을 반환하고, `--exclude @<profile>`은 바쁜 계정을 제외하며, `--model`은 한 모델의 주간 창으로 계산하고, `--need 5h:40`은 그만큼의 여유가 없으면 선택을 거부합니다. `--json`은 스키마 `pick-v1`을 제공합니다.
 
 ```bash
-ak usage              # 모든 계정과 프로필의 할당량
-ak claude @2          # 자체 home을 가진 두 번째 Claude 계정
-ak profiles ls        # 이 머신의 프로필
-ak setup verify       # 순서대로 진행되는 점검, 각각 복구 명령 포함
+ak usage                   # 모든 계정과 프로필의 할당량
+ak pick claude --count 3   # 여유가 가장 많은 Claude 계정 세 개
+ak claude @work --trust-cwd  # 두 번째 계정, 폴더 미리 신뢰
+ak profiles --json         # 도구용 profiles-v1
+ak setup verify            # 순서대로 진행되는 점검, 각각 복구 명령 포함
 ```
 
-프로필은 계정을 서로 분리합니다. `@default`(또는 `@1`)는 CLI 자체의 home이고, `@2`, `@work`, `@client-x`는 나란히 실행되는 별도의 로그인입니다. `ak setup probe | verify | docker`는 `agentkit-setup` 스킬이 사용하는 읽기 전용 도우미로, 머신을 점검하고 설치를 검증하며 태그로 고정되고 검증된 컨테이너 레시피를 만들어 줍니다.
+`--trust-cwd`(또는 `AGENTKIT_TRUST_CWD=1`)는 에이전트가 시작하는 폴더를 미리 신뢰하므로, Claude Code와 Codex가 폴더 신뢰 화면 없이 열립니다. `ak setup probe | verify | docker`는 `agentkit-setup` 스킬이 사용하는 읽기 전용 도우미로, 머신을 점검하고 설치를 검증하며 태그로 고정되고 검증된 컨테이너 레시피를 만들어 줍니다.
+
+## 여러 에이전트, 여러 계정
+
+`agentkit-orchestrate` 스킬(`ak --skill orchestrate`)은 에이전트에게 작업을 여러 에이전트, 계정, 벤더에 나누는 방법을 가르칩니다. 배치 전에 `ak usage`를 한 번 실행하고, `ak pick --count N`으로 계정을 고르고, 계정마다 하나의 위임 대상을 두고, 모든 결과에 리포지토리 자체의 게이트를 실행하며, 한 계정이 한도에 걸리면 다음 계정으로 넘어갑니다. 키트는 관찰하고, 계산하고, 실행할 뿐 스케줄링하지 않습니다. 결정은 리드(여러분, 또는 여러분이 요청한 에이전트)가 내리며, 자신의 계정만 사용하고 각 벤더의 약관을 지킵니다.
+
+길고 상호작용이 필요한 레인은 각각 [Herdr](/kit/herdr) 페인에서 자신의 계정으로 실행됩니다. 방법론 장 [여러 에이전트 운영하기](/methodology/06-orchestration)는 전체 모델을 설명합니다. 리드와 레인, 여유량으로 고른 계정, herdr-peers 조율, 그리고 리포지토리마다 하나의 브랜치와 하나의 릴리스입니다.
 
 ## 설치
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v0.4.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
+요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v0.5.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v0.4.0`, 인터페이스 1 |
+| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v0.5.0`, 인터페이스 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `agentkit` |
 | 전송 방식 | 헤드리스: 위임 대상마다 전용 git worktree에서 `ak run` 한 번 |
 | 제공 | `subagents`, `cancel_children`, `model_routing` |
@@ -70,7 +81,7 @@ ak doctor
 | 출력이 선언된, 범위가 정해진 `parallel_safe` 작업 | Agentkit(헤드리스) |
 | 작업에 상호작용이 필요하거나, 오래 실행되거나, 다른 머신에 있음 | [Herdr](/kit/herdr)(페인 안의 피어) |
 
-둘은 함께 쓸 수 있습니다. herdr-peers는 `ak env <kind> @profile`이 출력하는 환경으로 페인 안에 피어를 실행할 수 있습니다.
+둘은 함께 쓸 수 있습니다. herdr-peers는 `ak env <kind> @profile`이 출력하는 환경으로 페인 안에 피어를 실행할 수 있습니다. 여러 레인을 한꺼번에 운영하려면 [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
 
 ## 참고
 

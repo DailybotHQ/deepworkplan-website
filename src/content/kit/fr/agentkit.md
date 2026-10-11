@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Une commande pour chaque agent de code en terminal. Autonomie totale par défaut, désactivable, exécutions sans interface en worktree, second compte en préfixe."
+description: "Une commande pour chaque agent de code en terminal : un compte par profil, ak pick pour le compte le plus libre, autonomie désactivable, exécutions headless."
 kind: addon
 lang: fr
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 Chaque agent de code en terminal a ses propres options pour reprendre une session, sa propre manière d’isoler un second compte, son propre mode headless et son propre interrupteur pour ignorer les demandes d’autorisation. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** place une seule surface de commandes au-dessus de tous : `ak <kind> [@profile]`.
 
-Cet addon intègre le kit dans **DWP v7** (pack `v7.5.1`) comme transport de délégation **headless**. Il est facultatif : sans lui, chaque tâche s’exécute dans la session courante, exactement comme avant. Le kit lui-même est un produit MIT qui fonctionne sans Deep Work Plan.
+Cet addon intègre le kit dans **DWP v7** (pack `v7.6.0`) comme transport de délégation **headless**. Il est facultatif : sans lui, chaque tâche s’exécute dans la session courante, exactement comme avant. Le kit lui-même est un produit MIT qui fonctionne sans Deep Work Plan.
 
 ## Ce que vous apporte le kit
 
@@ -21,31 +21,42 @@ Cet addon intègre le kit dans **DWP v7** (pack `v7.5.1`) comme transport de dé
 - **Des installations vérifiées.** `ak install <cli>` installe une CLI manquante depuis le canal officiel de son éditeur, dans une version épinglée, contrôlée par un sha256 épinglé ou par l’intégrité du registre npm.
 - **Des noms familiers.** Deux presets d’alias, désactivés tant que vous ne les activez pas : `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) et `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), chacun équivalant à `ak <kind>`.
 
-## Quota, profils et configuration
+## Comptes, quota et choix d’un compte
 
-`ak usage` liste le quota et l’utilisation de chaque compte que le kit peut voir, une ligne par compte et par profil : en direct pour les abonnements Claude Code (fenêtres de 5 heures, hebdomadaire et par modèle), les connexions Codex via ChatGPT et les clés du forfait de code Z.AI ; Cursor, Grok, xAI et Azure OpenAI affichent `n/d` avec la raison. La commande est en lecture seule : elle ne renouvelle jamais une connexion, n’affiche jamais un jeton et n’écrit jamais dans un profil. `--json` fournit la même liste aux outils. Les points de terminaison d’utilisation sont internes aux fournisseurs et non officiels.
+Le kit traite chaque connexion ou clé que vous détenez comme un **compte** : une CLI × un profil. `@default` (ou `@1`) est le home propre de la CLI ; `@2`, `@work` ou `@client-x` sont des connexions distinctes, chacune dans son propre répertoire sous la racine des profils, qui tournent côte à côte. `ak profiles` les liste avec leur état de connexion et les noms de leurs clés ; `ak profiles --json` fournit la même liste aux outils (schéma `profiles-v1`).
+
+`ak usage` liste le quota et l’utilisation de chaque compte que le kit peut voir, une ligne par compte et par profil : en direct pour les abonnements Claude Code (fenêtres de 5 heures, hebdomadaire et par modèle), les connexions Codex via ChatGPT et les clés du forfait de code Z.AI ; Cursor, Grok, xAI et Azure OpenAI affichent `n/d` avec la raison. La commande est en lecture seule : elle ne renouvelle jamais une connexion, n’affiche jamais un jeton et n’écrit jamais dans un profil. `--json` fournit la même liste aux outils (schéma `usage-v1`). Les points de terminaison d’utilisation sont internes aux fournisseurs et non officiels.
+
+`ak pick <kind>` lit les mêmes lignes et désigne le compte qui a le plus de marge. `--count N` renvoie jusqu’à N comptes, le meilleur en premier ; `--exclude @<profile>` écarte un compte occupé ; `--model` compte la fenêtre hebdomadaire d’un modèle ; `--need 5h:40` refuse de choisir sans cette marge. `--json` fournit le schéma `pick-v1`.
 
 ```bash
-ak usage              # quota de chaque compte et profil
-ak claude @2          # un second compte Claude dans son propre home
-ak profiles ls        # les profils de cette machine
-ak setup verify       # des vérifications ordonnées, chacune avec sa commande de réparation
+ak usage                   # quota de chaque compte et profil
+ak pick claude --count 3   # les trois comptes Claude qui ont le plus de marge
+ak claude @work --trust-cwd  # un second compte, dossier déjà approuvé
+ak profiles --json         # profiles-v1, pour les outils
+ak setup verify            # des vérifications ordonnées, chacune avec sa commande de réparation
 ```
 
-Les profils séparent les comptes : `@default` (ou `@1`) est le home propre de la CLI, et `@2`, `@work` ou `@client-x` sont des connexions distinctes qui tournent côte à côte. `ak setup probe | verify | docker` est un assistant en lecture seule, piloté par le skill `agentkit-setup`, qui inspecte la machine, vérifie l’installation et produit une recette de conteneur épinglée par tag et vérifiée.
+`--trust-cwd` (ou `AGENTKIT_TRUST_CWD=1`) approuve à l’avance le dossier dans lequel l’agent démarre, si bien que Claude Code et Codex s’ouvrent sans leur écran de confiance de dossier. `ak setup probe | verify | docker` est un assistant en lecture seule, piloté par le skill `agentkit-setup`, qui inspecte la machine, vérifie l’installation et produit une recette de conteneur épinglée par tag et vérifiée.
+
+## Plusieurs agents, plusieurs comptes
+
+Le skill `agentkit-orchestrate` (`ak --skill orchestrate`) apprend à un agent à répartir le travail entre plusieurs agents, comptes et fournisseurs : un `ak usage` avant le lot, `ak pick --count N` pour choisir les comptes, un délégué par compte, la porte de validation du dépôt lui-même sur chaque résultat, et un basculement vers le compte suivant quand l’un atteint une limite. Le kit observe, calcule et exécute ; il n’ordonnance jamais. Le coordinateur — vous, ou un agent à qui vous l’avez demandé — décide, en n’utilisant que vos propres comptes et dans le respect des conditions de chaque fournisseur.
+
+Pour les couloirs longs et interactifs, chaque couloir tourne dans un panneau [Herdr](/kit/herdr) sur son propre compte. Le chapitre de la méthodologie [Faire tourner de nombreux agents](/methodology/06-orchestration) décrit le modèle complet : un coordinateur et ses couloirs, des comptes choisis selon leur marge, la coordination via herdr-peers, et une branche et une publication par dépôt.
 
 ## Installation
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v0.4.0` : `v0.2.0` et `v0.2.1` ne sont pas prises en charge. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
+Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v0.5.0` : `v0.2.0` et `v0.2.1` ne sont pas prises en charge. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/coding-agents-kit`, tag `v0.4.0`, interface 1 |
+| Produit | `DailybotHQ/coding-agents-kit`, tag `v0.5.0`, interface 1 |
 | Clé de registre | `agentkit` dans `.dwp/config.json` |
 | Transport | headless : un `ak run` par délégué dans un worktree git dédié |
 | Fournit | `subagents`, `cancel_children`, `model_routing` |
@@ -70,7 +81,7 @@ Sur un plan v7 dont le contrat octroie `agent_delegation`, `execute` peut confie
 | Une tâche `parallel_safe` délimitée avec une sortie déclarée | Agentkit (headless) |
 | La tâche nécessite une interaction, dure longtemps ou se trouve sur une autre machine | [Herdr](/kit/herdr) (un pair dans un panneau) |
 
-Les deux se combinent : herdr-peers peut lancer un pair dans un panneau avec l’environnement qu’affiche `ak env <kind> @profile`.
+Les deux se combinent : herdr-peers peut lancer un pair dans un panneau avec l’environnement qu’affiche `ak env <kind> @profile`. Pour de nombreux couloirs à la fois, voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
 
 ## Notes
 

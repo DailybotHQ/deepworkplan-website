@@ -7,7 +7,7 @@
 
 # Deep Work Plan
 
-**The methodology site for planning and executing complex software work with AI coding agents.**
+**The official site of the Deep Work Plan methodology — and the hub of its open-source ecosystem.**
 
 [![CI](https://github.com/DailybotHQ/deepworkplan-website/actions/workflows/ci.yml/badge.svg)](https://github.com/DailybotHQ/deepworkplan-website/actions/workflows/ci.yml)
 [![Release](https://img.shields.io/github/v/release/DailybotHQ/deepworkplan-website)](https://github.com/DailybotHQ/deepworkplan-website/releases)
@@ -16,114 +16,137 @@
 [![Svelte](https://img.shields.io/badge/Svelte-5.x-FF3E00?logo=svelte)](https://svelte.dev)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.x-38BDF8?logo=tailwindcss)](https://tailwindcss.com)
 
-[🌐 Live Site](https://deepworkplan.com) · [📖 Architecture](./docs/ARCHITECTURE.md) · [📋 Product Spec](./docs/PRODUCT_SPEC.md)
+[Live site](https://deepworkplan.com) · [/init.md](https://deepworkplan.com/init.md) · [Methodology](https://deepworkplan.com/methodology) · [Architecture](./docs/ARCHITECTURE.md)
 
 </div>
 
 ---
 
-## ✨ What it is
+## What it is
 
-[deepworkplan.com](https://deepworkplan.com) is the official website for the **Deep Work Plan (DWP)** methodology — a structured, agent-agnostic approach to executing complex, multi-step software work reliably with AI coding agents.
+[deepworkplan.com](https://deepworkplan.com) is the official website for the **Deep Work Plan (DWP)** methodology, and this repository is its source. DWP turns any repository into an AI-first, agent-pilotable codebase: it documents the repository (`AGENTS.md`, `docs/`, an `.agents/` kit), installs the Deep Work Plan skill, and lets any coding agent run long-horizon plans against explicit acceptance criteria and validation gates. It is for developers and teams who hand real, multi-step work to coding agents and need it finished and verified, not just attempted.
 
-**Models matter; context matters more.** DWP turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and finishes long-horizon work. Put another way: *Deep Work Plan is spec-driven development where the repository itself becomes the harness.*
+**The problem.** Long work fills any model's context, detail falls away, and an agent declares itself done without proof. DWP keeps the plan, the gates and the state in the repository, so any agent — or a different one tomorrow — can resume the work and prove each step. *Deep Work Plan is spec-driven development where the repository itself becomes the harness.*
 
 The methodology rests on five ideas, and the site is built to argue them:
 
-1. **You steer; the agents do the hours.** You decide what *done* means and where the lines are. The plan carries your intent, so the work does not need correcting every twenty minutes.
-2. **The plan is what the agent returns to.** Long work fills any model's context and detail falls away. Atomic tasks, validation gates, and resumable state give the agent something durable to come back to.
-3. **Done is a contract, not a feeling.** Every task names its acceptance criteria and the checks that must pass. An agent does not get to *decide* it finished — it passes, or the task stays open.
-4. **The repository is the harness.** Context, tools, guardrails, and state live in the repo as plain files any agent can read. No lock-in, no external brain; it survives a context reset or a change of agent mid-flight.
-5. **Context is the scarcest resource.** Instructions load progressively by trigger, validation is selected from what each task touched, and skills are decided task-locally — so the plan pays for itself.
+1. **You steer; the agents do the hours.** You decide what *done* means and where the lines are. The plan carries your intent.
+2. **The plan is what the agent returns to.** Atomic tasks, validation gates and resumable state give the agent something durable to come back to.
+3. **Done is a contract, not a feeling.** Every task names its acceptance criteria and the checks that must pass.
+4. **The repository is the harness.** Context, tools, guardrails and state live in the repository as plain files any agent can read.
+5. **Context is the scarcest resource.** Instructions load progressively, validation is selected from what each task touched, and skills are decided task-locally.
 
-Work is planned at the size it deserves: a compact **Lite** plan for bounded changes, a per-task **Full** plan for long-horizon work, with the same contract — stable task ids, touched surface, acceptance criteria, gates, completion evidence, and one final review — behind both.
-
-The site is a fast, fully multilingual static site built with [Astro](https://astro.build) — 17 languages ship today (English, Spanish, Portuguese, Chinese, Japanese, German, French, Korean, Russian, Italian, Turkish, Indonesian, Vietnamese, Hindi, Polish, Ukrainian, Thai). It explains and sells the methodology, hosts the readable specification, and catalogs the kit (presets, adapters, commands) for installing DWP into any repository. The repository **dogfoods** the methodology it documents.
-
-### This repository dogfoods DWP
-
-The repository practices the methodology it documents. The official DeepWorkPlan skill is **vendored** under `.agents/skills/deepworkplan/` — the whole pack is committed and pinned by `skills-lock.json`, so every agent that clones this repo gets the exact same harness with no install step. Alongside it live the thin `dwp-*` command delegators, the `/skill-create` and `/agent-create` delegators (which route to the skill's **author** sub-skill that grows the repo's own kit), the `/lib-upgrade` delegator for the opt-in **dependency-upgrade** add-on, and the `/init` adoption flow. All Deep Work Plan output lives in the gitignored `.dwp/` directory. Running `/dwp-verify` here checks this repository against the same standard the site publishes. See [docs/ARCHITECTURE.md](./docs/ARCHITECTURE.md#dogfooding-dwp) for details.
-
-### Highlights
-
-| Feature | Description |
-| :------ | :---------- |
-| 📚 **Methodology reader** | The DWP methodology, principles, and adoption workflow |
-| 📐 **Specification reader** | The normative DWP standard: task anatomy, validation gates, archetypes |
-| 🧰 **Kit catalog** | Presets, adapters, and commands for installing DWP into a repo |
-| 🌐 **Multilingual** | 17 languages (en, es, pt, zh, ja, de, fr, ko, ru, it, tr, id, vi, hi, pl, uk, th) with route parity |
-| 🌙 **Dark mode** | Inline hurricane-lamp toggle in the masthead with localStorage persistence |
-| ⚡ **Performance-first** | Static site, minimal JS, optimized assets, 90+ Lighthouse |
-| 🔍 **SEO + AEO** | Sitemap, Open Graph, structured data, agent-friendly Markdown endpoints |
-| 🚀 **`/init` adoption endpoint** | A canonical, copy-paste onboarding prompt at [deepworkplan.com/init](https://deepworkplan.com/init) — paste it into any agent and it adopts the methodology in the current repo |
-| 🔌 **Agent API + MCP** | Markdown endpoints for every page, a published `openapi.json`, and an MCP server at the edge so agents can query the methodology directly |
-| 🤖 **Agent-friendly** | Shared `.agents/` home for skills, commands, and agent definitions across Claude Code, Codex, Cursor, Gemini |
-
-> **Note:** The site focuses on the methodology, specification, and kit readers plus agent-friendly Markdown endpoints. Earlier blog, slides/tech-talks, and personal pages have been removed.
+The site ships in 17 languages (English, Spanish, Portuguese, Chinese, Japanese, German, French, Korean, Russian, Italian, Turkish, Indonesian, Vietnamese, Hindi, Polish, Ukrainian, Thai) and serves every page as Markdown to agents. It hosts the methodology, the readable specification, the kit catalog and the machine-executable [`/init.md`](https://deepworkplan.com/init.md) adoption prompt.
 
 ---
 
-## 📦 Install
+## Adopt Deep Work Plan in a repository
 
-To use the methodology in your own repository, install the Deep Work Plan skill pinned to a release tag:
+The fastest path: paste this into any coding agent, in the repository you want to adopt DWP.
 
-```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
+```text
+Read and follow the instructions at https://deepworkplan.com/init.md to make this repository AI-first.
 ```
 
-Verify it against the release `SHA256SUMS` first — the recipe is on [deepworkplan.com/trust](https://deepworkplan.com/trust).
+`/init.md` is English-only and machine-executable. It verifies what it installs, installs or upgrades the skill and the required local review to the pinned releases it lists, detects every addon — upgrading the ones you use and offering the ones that fit — onboards the repository without overwriting your work, and ends with a conformance check. The human version, in 17 languages, is [/quickstart](https://deepworkplan.com/quickstart).
 
-To work on this site, clone it at a release tag (see [Releases](https://github.com/DailybotHQ/deepworkplan-website/releases)) or at `main`:
+To install the skill by hand, pinned to its release and verified first:
 
 ```bash
-git clone --branch <release-tag> https://github.com/DailybotHQ/deepworkplan-website
-cd deepworkplan-website
+git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill
+curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS
+shasum -a 256 SHA256SUMS   # compare with the digest in /init.md → Pinned releases
+./setup.sh --verify        # non-zero exit means a file does not match — stop
+cd .. && npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y
 ```
+
+Then run `/deepworkplan-onboard` in your agent, and `/dwp-create <goal>` → `/dwp-execute` → `/dwp-verify` from there.
+
+## What the site serves
+
+| Surface | What it is |
+| :------ | :--------- |
+| [`/init.md`](https://deepworkplan.com/init.md) | The executable onboarding prompt; its **Pinned releases** table lists every ecosystem release with the sha256 of its `SHA256SUMS` |
+| [`/quickstart`](https://deepworkplan.com/quickstart) | The same adoption path for people, in 17 languages |
+| [`/methodology`](https://deepworkplan.com/methodology) | Six chapters, from the manifesto to [running many agents](https://deepworkplan.com/methodology/06-orchestration) |
+| [`/spec`](https://deepworkplan.com/spec) | The normative DWP standard: task anatomy, gates, completion, archetypes, addons |
+| [`/kit`](https://deepworkplan.com/kit) | Commands, agent adapters, presets and the addons, one page each at `/kit/<slug>` |
+| Markdown for agents | Every page as Markdown: append `.md` or send `Accept: text/markdown` |
+| [`/api/mcp`](https://deepworkplan.com/.well-known/mcp.json) | A stateless MCP server: `get_init_prompt`, `list_site_sections`, `read_page` |
+
+```bash
+curl -s https://deepworkplan.com/init.md | head -20
+curl -s -H 'Accept: text/markdown' https://deepworkplan.com/kit | head -5
+```
+
+### New in this release: orchestration at scale
+
+- **[Running many agents](https://deepworkplan.com/methodology/06-orchestration)** — a lead and its lanes in Herdr panes on the host, in containers and on other machines; accounts chosen by headroom (`ak usage`, `ak pick`); herdr-peers coordination (`herdr-peers lanes`, `herdr-peers status`); one lane per repository with one branch and one release; launching and unblocking lanes with no human present, within strict limits.
+- **[agentkit](https://deepworkplan.com/kit/agentkit)** — accounts and profiles, `ak profiles --json`, `ak pick`, `--trust-cwd`, the `agentkit-orchestrate` skill.
+- **[devcontainer](https://deepworkplan.com/kit/devcontainer)** — host accounts inside the container (`[agents] host_profiles`, opt-in in the host profile; only the CLIs the repository installs).
+- **[Herdr](https://deepworkplan.com/kit/herdr)** and **[DeepWorkPlan Vim](https://deepworkplan.com/kit/vim)** — lane status and the `:DwpLanes` lanes view.
+- **`/init.md`** — a pinned-releases table with digests, an idempotent pass that detects every addon, upgrades the ones you use and offers the ones that fit, the devcontainer path to the full stack, and the unattended-lane rules.
+
+## How it fits with Deep Work Plan
+
+This repository is two things:
+
+- **The site.** Every product claim on it traces to a tagged release. The pins live in one file, [`src/lib/ecosystem-pins.ts`](src/lib/ecosystem-pins.ts), and a test fails when `/init.md`, the kit pages or the quickstart name another tag.
+- **The ecosystem hub.** It coordinates the public ecosystem repositories, cloned under the git-ignored [`repositories/`](repositories/README.md) by `bash scripts/repositories.sh clone|status|pull|ls`. Cross-repository work is an orchestrator plan here with one child plan per repository; the hub never commits another repository's code. Besides the repositories below, the hub tracks the [Dailybot CLI](https://github.com/DailybotHQ/cli) as a **consumer**: the reference production repository that runs the full stack. See [Ecosystem context](docs/ECOSYSTEM_CONTEXT.md) and [Cross-project standards](docs/CROSS_PROJECT_STANDARDS.md).
+
+It also **dogfoods** the methodology: the Deep Work Plan skill is vendored under `.agents/skills/deepworkplan/` and pinned by `skills-lock.json`, with the Dailybot and AI Diff Reviewer skills beside it, so every agent that clones the repository gets the same harness with no install step. Plan output lives in the git-ignored `.dwp/`. See [Architecture → Dogfooding](docs/ARCHITECTURE.md#dogfooding-dwp).
+
+## Part of the DeepWorkPlan ecosystem
+
+| Repository | Role | Purpose |
+| --- | --- | --- |
+| [deepworkplan-skill](https://github.com/DailybotHQ/deepworkplan-skill) | Pack | The methodology, specification and kit as an installable agent skill |
+| [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) | Addon: agentkit | One command for every coding agent: accounts, quota, `ak pick`, headless runs |
+| [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) | Addon: devcontainer | A reproducible dev container per repository, wired to Herdr and the host's accounts |
+| [herdr-peers](https://github.com/DailybotHQ/herdr-peers) | Addon: Herdr | Ask an agent in another Herdr pane, on any machine, and get one authorized reply |
+| [deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) | Addon: DeepWorkPlan Vim | The terminal editor for plans: plan browser, lanes view, Markdown viewer |
+| [ai-diff-reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) | Required local review | Reviews a change set locally and in CI; every Final Review runs it |
+| [agent-skill](https://github.com/DailybotHQ/agent-skill) | Addon: Dailybot | The Dailybot agent skill: progress reports, check-ins, chat and more |
+| [deepworkplan.com](https://deepworkplan.com) ([source](https://github.com/DailybotHQ/deepworkplan-website)) (this repository) | Site and hub | The methodology, specification, kit catalog and `/init.md`; coordinates the ecosystem |
+
+Every product works on its own; the addons are optional, and a repository is fully conformant with none of them.
 
 ---
 
-## 🚀 Quickstart
+## Work on the site
 
-> Requires **Node.js 24+** (CI runs on 24.20.0). The package manager is
-> **pnpm**, pinned via Corepack in `package.json#packageManager`. Enable it
-> once with `corepack enable`; the dev container does this automatically.
+> Requires **Node.js 24+** (CI runs on 24.20.0) and **pnpm**, pinned via Corepack in `package.json#packageManager`. The repository's dev container (`bash dev.sh up`) provides both.
 
 ```bash
+git clone https://github.com/DailybotHQ/deepworkplan-website && cd deepworkplan-website
 corepack enable
 pnpm install
-pnpm run dev
+pnpm run dev            # http://localhost:5555
 ```
 
-Visit **http://localhost:5555** to preview.
-
----
-
-## 📜 Commands
+### Commands
 
 | Command | Description |
 | :------ | :---------- |
 | `pnpm run dev` | Start dev server at `localhost:5555` |
-| `pnpm run build` | Production build (prebuild regenerates `.agents/skills/index.json`, then `astro check && astro build`) |
+| `pnpm run build` | Production build (prebuild regenerates `.agents/skills/index.json`, then `astro check && astro build`, then the rendered-emphasis check) |
 | `pnpm run astro:preview` | Preview production build locally |
 | `pnpm run biome:check` | Lint and format check |
 | `pnpm run biome:fix` | Auto-fix lint and format issues |
 | `pnpm run astro:check` | TypeScript type checking |
-| `pnpm run test` | Run unit tests (Vitest) |
-| `pnpm run test:watch` | Vitest in watch mode |
+| `pnpm run test` | Run unit tests (Vitest), including the pin-drift guard |
 | `pnpm run test:coverage` | Tests with coverage report |
-| `pnpm run images:optimize` | Convert staged images to WebP |
-| `pnpm run md:check` | Verify HTML / Markdown agent-endpoint parity |
-| `pnpm run md:check:strict` | Same as `md:check`; exits 1 on missing (for CI) |
+| `pnpm run md:check:strict` | Verify every HTML page has its Markdown endpoint (exits 1 on missing) |
+| `pnpm run md:content-check` | Verify the Markdown carries equivalent content |
 | `pnpm run i18n:check` | Verify translation parity across all 17 active languages |
-| `pnpm run i18n:scaffold` | Scaffold strings + content for a new language code |
-| `pnpm run lighthouse` | Run Lighthouse CI audit (mobile) |
-| `pnpm run lighthouse:desktop` | Run Lighthouse CI audit (desktop) |
-| `pnpm run ncu:check` | Check for dependency updates |
-| `pnpm run release` | Bump version and create release commit |
+| `pnpm run i18n:scaffold` | Scaffold strings and content for a new language code |
+| `pnpm run lighthouse` | Lighthouse CI audit (mobile; `lighthouse:desktop` for desktop) |
+| `bash scripts/check-public-hygiene.sh` | Public-hygiene check: no private context or secret-shaped literals |
+| `bash scripts/repositories.sh status` | Ecosystem hub: branch and state of every clone |
 
----
+The gate before a pull request: `biome:check`, `astro:check`, `test`, `build`, `i18n:check`, `md:check:strict` and the public-hygiene check — see [Development Commands](docs/DEVELOPMENT_COMMANDS.md).
 
-## 🛠 Tech Stack
+### Tech stack
 
 | Layer | Technology |
 | :---- | :--------- |
@@ -134,40 +157,44 @@ Visit **http://localhost:5555** to preview.
 | Linting | [Biome](https://biomejs.dev) 2.x |
 | Testing | [Vitest](https://vitest.dev) + Testing Library |
 | Content | Markdown, MDX |
-| Edge | Cloudflare Pages Functions (bot analytics middleware) |
-| Hosting | [Cloudflare Pages](https://pages.cloudflare.com) |
+| Edge | Cloudflare Pages Functions (MCP server, agent middleware) |
+| Hosting | [Cloudflare Pages](https://pages.cloudflare.com), deployed on every push to `main` |
 
----
-
-## 📁 Project Structure
+### Project structure
 
 ```
-├── public/             # Static assets (images, fonts, icons, robots.txt)
+├── public/             # Static assets and agent artifacts (init.md, llms.txt, .well-known/)
 ├── src/
 │   ├── components/     # Astro & Svelte components
 │   ├── content/        # Content Collections (17 language folders per collection)
-│   │   ├── methodology/  # Methodology docs by language (en/, es/, pt/, zh/, …) — primary content
-│   │   ├── spec/         # Specification reader content (en/, es/, pt/, zh/, …)
-│   │   ├── kit/          # Kit catalog: presets, adapters, commands (en/, es/, pt/, zh/, …)
-│   │   └── pages/        # Agent-friendly Markdown endpoints (en/, es/, pt/, zh/, …)
-│   ├── layouts/        # MainLayout, InternalLayout, ...
-│   ├── lib/            # Utilities, types, translations (one `<code>.ts` per active language)
-│   ├── pages/          # File-based routing (EN at root, non-EN under /[lang]/ dynamic tree)
-│   ├── middleware.ts   # Route allowlist & rewrites (derived from the language registry)
+│   │   ├── methodology/  # Methodology chapters — primary content
+│   │   ├── spec/         # Specification reader content
+│   │   ├── kit/          # Kit catalog: commands, adapters, presets, addons
+│   │   └── pages/        # Agent-friendly Markdown endpoints
+│   ├── layouts/        # MainLayout, InternalLayout, ShowcaseLayout
+│   ├── lib/            # Utilities, translations, ecosystem pins, MCP logic
+│   ├── pages/          # File-based routing (EN at root, non-EN under /[lang]/)
+│   ├── middleware.ts   # Route allowlist & rewrites
 │   └── styles/         # Global CSS (Tailwind 4)
-├── functions/          # Cloudflare Pages Functions (edge middleware)
-├── tests/              # Vitest unit & integration tests
-├── scripts/            # Build utilities (image optimization, parity checks)
+├── functions/          # Cloudflare Pages Functions (edge)
+├── tests/              # Vitest unit tests
+├── scripts/            # Build utilities, audits, the hub sync script
 ├── docs/               # Project documentation
+├── repositories/       # Ecosystem hub clones (git-ignored except the index and manifest)
 ├── .agents/            # Cross-agent skills, commands, agent definitions
-├── .claude → .agents   # Backward-compat symlink for Claude Code
-├── assets/             # README and documentation assets
-└── astro.config.mjs
+└── .claude → .agents   # Backward-compat symlink for Claude Code
 ```
 
 ---
 
-## 📚 Documentation
+## Security and trust
+
+- The site is static; the edge runs only the agent middleware and a read-only MCP server. There are no user accounts, and no secrets in the repository — `scripts/check-public-hygiene.sh` enforces that in CI. Analytics are privacy-first and loaded asynchronously ([Analytics](docs/ANALYTICS.md)).
+- Every install command the site publishes is pinned to a release tag (never a branch), and `/init.md` publishes the sha256 of each release's `SHA256SUMS` so an agent verifies before it runs. Releases are checksummed, not signed.
+- `/init.md` tells agents to treat it as untrusted input, verify provenance, ask before replacing anything, and escalate every credential or permission prompt to a human.
+- Report vulnerabilities privately through GitHub — see [SECURITY.md](./SECURITY.md) and the [trust page](https://deepworkplan.com/trust).
+
+## Documentation and links
 
 | Document | Description |
 | :------- | :---------- |
@@ -177,46 +204,16 @@ Visit **http://localhost:5555** to preview.
 | [Standards](./docs/STANDARDS.md) | Coding conventions |
 | [I18N Guide](./docs/I18N_GUIDE.md) | Multilingual content and translations |
 | [Testing](./docs/TESTING_GUIDE.md) | Vitest setup and test conventions |
-| [Performance](./docs/PERFORMANCE.md) | Astro SSG optimization and budgets |
-| [Accessibility](./docs/ACCESSIBILITY.md) | WCAG AA standards and patterns |
-| [SEO](./docs/SEO.md) | Meta, structured data, multilingual, AEO |
+| [Ecosystem Context](./docs/ECOSYSTEM_CONTEXT.md) | The hub role, release order and boundaries |
 | [Security](./docs/SECURITY.md) | Security best practices |
-| [AI Agent Onboarding](./docs/AI_AGENT_ONBOARDING.md) | Setup for AI coding assistants |
-| [Skills & Agents Catalog](./.agents/docs/skills_agents_catalog.md) | Available skills and agents |
+| [AI Agent Onboarding](./docs/AI_AGENT_ONBOARDING.md) | Setup for AI coding assistants; agents start at [AGENTS.md](AGENTS.md) |
+| [CHANGELOG](./CHANGELOG.md) | Release history |
 
----
+Contributing: see [CONTRIBUTING.md](CONTRIBUTING.md) for the setup, the gate and the pull-request flow, and the [Code of Conduct](CODE_OF_CONDUCT.md).
 
-## 🚢 Deployment
+## License
 
-Deployed to **Cloudflare Pages** on every push to `main`:
-
-1. Cloudflare triggers a build
-2. Runs `pnpm run build` (regenerates the agent-skills index, then `astro check && astro build`)
-3. Serves the `dist/` folder from its global CDN
-
-Live at **[deepworkplan.com](https://deepworkplan.com)**.
-
----
-
-## 🔒 Security
-
-Report vulnerabilities privately — never in a public issue. See [SECURITY.md](./SECURITY.md) (GitHub private vulnerability reporting, supported versions, response targets).
-
----
-
-## 🤝 Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for the development setup, the gate and the pull-request flow. Everyone taking part follows the [Code of Conduct](CODE_OF_CONDUCT.md). Coding agents start at [AGENTS.md](AGENTS.md).
-
----
-
-## 📄 License
-
-[MIT](LICENSE) — Dailybot, Inc.
-
-### Third-Party Assets
-
-- **Icons:** [Heroicons](https://heroicons.com), [Simple Icons](https://simpleicons.org)
+[MIT](LICENSE) — Dailybot, Inc. Icons: [Heroicons](https://heroicons.com), [Simple Icons](https://simpleicons.org).
 
 ---
 
@@ -229,5 +226,3 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for the development setup, the gate and t
 <div align="center">
   <sub>Built with Astro · Hosted on Cloudflare Pages</sub>
 </div>
-
-Part of the [DeepWorkPlan](https://deepworkplan.com) ecosystem — works on its own.

@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Un comando per ogni agente di codice da terminale. Piena autonomia di default con opt-out, esecuzioni headless in un git worktree e un secondo account."
+description: "Un comando per ogni agente di codice da terminale: un account per profilo, ak pick per quello con più margine, autonomia con opt-out ed esecuzioni headless."
 kind: addon
 lang: it
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 Ogni agente di codice da terminale ha i propri flag per continuare una sessione, il proprio modo di tenere separato un secondo account, la propria modalità headless e il proprio interruttore per saltare le richieste di autorizzazione. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** mette un’unica superficie di comandi sopra tutti loro: `ak <kind> [@profile]`.
 
-Questo addon integra il kit in **DWP v7** (pack `v7.5.1`) come trasporto di delega **headless**. È opzionale: senza di esso, ogni task viene eseguito nella sessione corrente, esattamente come prima. Il kit stesso è un prodotto MIT che funziona senza Deep Work Plan.
+Questo addon integra il kit in **DWP v7** (pack `v7.6.0`) come trasporto di delega **headless**. È opzionale: senza di esso, ogni task viene eseguito nella sessione corrente, esattamente come prima. Il kit stesso è un prodotto MIT che funziona senza Deep Work Plan.
 
 ## Cosa ti offre il kit
 
@@ -21,31 +21,42 @@ Questo addon integra il kit in **DWP v7** (pack `v7.5.1`) come trasporto di dele
 - **Installazioni verificate.** `ak install <cli>` installa una CLI mancante dal canale ufficiale del suo fornitore a una versione fissata, controllata rispetto a uno sha256 fissato o all’integrità del registro npm.
 - **Nomi familiari.** Due preset di alias, disattivati finché non li attivi: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) e `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), ciascuno equivalente a `ak <kind>`.
 
-## Quota, profili e configurazione
+## Account, quota e scelta dell’account
 
-`ak usage` elenca la quota e l’utilizzo di ogni account che il kit può vedere, una riga per account e profilo: in tempo reale per gli abbonamenti Claude Code (finestre di 5 ore, settimanale e per modello), i login Codex con ChatGPT e le chiavi del piano di programmazione Z.AI; Cursor, Grok, xAI e Azure OpenAI mostrano `n/d` con il motivo. È di sola lettura: non rinnova mai un login, non stampa mai un token e non scrive mai dentro un profilo. `--json` fornisce lo stesso elenco agli strumenti. Gli endpoint di utilizzo sono interni al fornitore e non ufficiali.
+Il kit tratta ogni login o chiave che possiedi come un **account**: una CLI × un profilo. `@default` (o `@1`) è la home della CLI stessa; `@2`, `@work` o `@client-x` sono login distinti, ciascuno nella propria directory sotto la radice dei profili, che girano in parallelo. `ak profiles` li elenca con lo stato del login e i nomi delle chiavi; `ak profiles --json` fornisce lo stesso elenco agli strumenti (schema `profiles-v1`).
+
+`ak usage` elenca la quota e l’utilizzo di ogni account che il kit può vedere, una riga per account e profilo: in tempo reale per gli abbonamenti Claude Code (finestre di 5 ore, settimanale e per modello), i login Codex con ChatGPT e le chiavi del piano di programmazione Z.AI; Cursor, Grok, xAI e Azure OpenAI mostrano `n/d` con il motivo. È di sola lettura: non rinnova mai un login, non stampa mai un token e non scrive mai dentro un profilo. `--json` fornisce lo stesso elenco agli strumenti (schema `usage-v1`). Gli endpoint di utilizzo sono interni al fornitore e non ufficiali.
+
+`ak pick <kind>` legge le stesse righe e indica l’account con più margine. `--count N` restituisce fino a N account, il migliore per primo; `--exclude @<profile>` esclude un account occupato; `--model` conta la finestra settimanale di un modello; `--need 5h:40` si rifiuta di scegliere senza quel margine. `--json` fornisce lo schema `pick-v1`.
 
 ```bash
-ak usage              # quota di ogni account e profilo
-ak claude @2          # un secondo account Claude nella sua home
-ak profiles ls        # i profili di questa macchina
-ak setup verify       # controlli ordinati, ognuno con il suo comando di riparazione
+ak usage                   # quota di ogni account e profilo
+ak pick claude --count 3   # i tre account Claude con più margine
+ak claude @work --trust-cwd  # un secondo account, cartella già attendibile
+ak profiles --json         # profiles-v1, per gli strumenti
+ak setup verify            # controlli ordinati, ognuno con il suo comando di riparazione
 ```
 
-I profili tengono separati gli account: `@default` (o `@1`) è la home della CLI stessa, mentre `@2`, `@work` o `@client-x` sono login distinti che girano in parallelo. `ak setup probe | verify | docker` è un helper di sola lettura, guidato dallo skill `agentkit-setup`, che ispeziona la macchina, verifica l’installazione e genera una ricetta di container fissata per tag e verificata.
+`--trust-cwd` (o `AGENTKIT_TRUST_CWD=1`) considera attendibile in anticipo la cartella in cui parte l’agente, così Claude Code e Codex si aprono senza la schermata di attendibilità della cartella. `ak setup probe | verify | docker` è un helper di sola lettura, guidato dallo skill `agentkit-setup`, che ispeziona la macchina, verifica l’installazione e genera una ricetta di container fissata per tag e verificata.
+
+## Più agenti, più account
+
+Lo skill `agentkit-orchestrate` (`ak --skill orchestrate`) insegna a un agente a distribuire il lavoro tra più agenti, account e fornitori: un `ak usage` prima del lotto, `ak pick --count N` per scegliere gli account, un delegato per account, il gate del repository stesso su ogni risultato e il failover all’account successivo quando uno raggiunge un limite. Il kit osserva, calcola ed esegue; non pianifica mai. Il lead — tu, o un agente a cui l’hai chiesto — decide, usando solo i tuoi account e nel rispetto dei termini di ogni fornitore.
+
+Per le corsie lunghe e interattive, ogni corsia gira in un pannello [Herdr](/kit/herdr) sul proprio account. Il capitolo della metodologia [Eseguire molti agenti](/methodology/06-orchestration) descrive l’intero modello: un lead e le sue corsie, account scelti in base al margine, coordinamento tramite herdr-peers e un branch e un rilascio per repository.
 
 ## Installazione
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisiti: `bash` su macOS o Linux e `python3` 3.9 o successivo; nient’altro. Windows usa `install.ps1`. Fissa `v0.4.0`: `v0.2.0` e `v0.2.1` non sono supportate. Verifica una release con il suo asset `SHA256SUMS`.
+Requisiti: `bash` su macOS o Linux e `python3` 3.9 o successivo; nient’altro. Windows usa `install.ps1`. Fissa `v0.5.0`: `v0.2.0` e `v0.2.1` non sono supportate. Verifica una release con il suo asset `SHA256SUMS`.
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/coding-agents-kit`, tag `v0.4.0`, interfaccia 1 |
+| Prodotto | `DailybotHQ/coding-agents-kit`, tag `v0.5.0`, interfaccia 1 |
 | Chiave di registro | `agentkit` in `.dwp/config.json` |
 | Trasporto | headless: un `ak run` per delegato in un worktree git dedicato |
 | Fornisce | `subagents`, `cancel_children`, `model_routing` |
@@ -70,7 +81,7 @@ In un piano v7 il cui contratto concede `agent_delegation`, `execute` può affid
 | Un task `parallel_safe` delimitato con un output dichiarato | Agentkit (headless) |
 | Il task richiede interazione, dura a lungo o si trova su un’altra macchina | [Herdr](/kit/herdr) (un peer in un pannello) |
 
-I due si combinano: herdr-peers può avviare un peer in un pannello con l’ambiente stampato da `ak env <kind> @profile`.
+I due si combinano: herdr-peers può avviare un peer in un pannello con l’ambiente stampato da `ak env <kind> @profile`. Per molte corsie insieme, vedi [Eseguire molti agenti](/methodology/06-orchestration).
 
 ## Note
 

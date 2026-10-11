@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "每个仓库一个可复现的开发容器，源自同一模板：代理通过 ak 即开即用，Herdr 双向连通，容器内绝不存放 SSH 密钥。"
+description: "每个仓库一个可复现的开发容器，源自同一模板：代理通过 ak 使用你的主机账户，Herdr 双向连通，容器内不存放 SSH 密钥。"
 kind: addon
 lang: zh
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 附加组件
 
-为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v7**（技能包 `v7.5.1`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
+为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v7**（技能包 `v7.6.0`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
 
 ## devcontainer-kit 提供什么
 
@@ -21,22 +21,22 @@ order: 1
 ## 安装
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v0.2.11`：`v0.2.0` 不受支持。
+要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v0.3.0`：`v0.2.0` 不受支持。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v0.2.11`，接口 2 |
+| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v0.3.0`，接口 2 |
 | 注册表键 | `.dwp/config.json` 中的 `devcontainer` |
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |
 
 ## 层
 
-每个容器都携带开发工具——git、gh、ripgrep、一个 SSH 服务器、Herdr 和 herdr-peers——且不含任何机密。其余部分都是你在 `dck.toml` 中选择的层：
+每个容器都携带开发工具——git、gh、ripgrep、一个 SSH 服务器、Herdr 和 herdr-peers——除非你选择启用[主机账户](#容器内的主机账户)，否则不含任何机密。其余部分都是你在 `dck.toml` 中选择的层：
 
 | 层 | 默认 | 添加内容 |
 |---|---|---|
@@ -57,6 +57,24 @@ cd your-repo && dck init && bash dev.sh up
 - **非工具包创建的容器。** 在主机配置文件的 `[ssh] authorized_extra` 下列出它们登录所用的公钥，它们也就能访问 dck 容器。
 
 在主机和容器中都搭配 [coding-agents-kit](/kit/agentkit) 使用，同一个 `ak` 即可在两侧启动代理。
+
+## 容器内的主机账户
+
+容器可以使用你在主机上已有的账户，就像 git 已经通过主机的 SSH agent 工作一样，容器内无需登录。该功能需主动启用，配置位于你的**主机配置文件**中，绝不在仓库的 `dck.toml` 中：
+
+```toml
+[agents]
+host_profiles = true          # 默认 false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # 允许共享的环境变量名称列表
+```
+
+开启 `host_profiles` 后，`dck up` 只共享仓库所安装 CLI 的配置档：
+
+- **Claude Code**：每个配置档通过一个长期令牌共享——`@default` 使用 `CLAUDE_CODE_OAUTH_TOKEN`，`@name` 使用 `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>`（后缀转为大写，`A-Z`、`0-9` 和 `_` 以外的任何字符都替换为 `_`）。
+- **Codex**：通过其认证文件共享，适用于 `@default` 和每个配置档。
+- **工具包的 env 文件**：只读，并精简为 `host_env_keys` 中列出的名称。
+
+整个 agentkit home 从不挂载，包含主机绝对路径的配置档会被跳过。以读写方式共享的 Codex 登录可能被两个写入者同时刷新：每个 Codex 账户只保留一个活动代理。在容器内，同样的 `ak <kind> @<profile>` 与在主机上一样使用同一个账户运行，这使主导者能够把 `ak pick` 选出的账户交给容器中的通道——参见[运行多个代理](/methodology/06-orchestration)。
 
 ## 安全默认值
 

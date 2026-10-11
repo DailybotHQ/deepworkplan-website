@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "全リポジトリに再現可能な開発コンテナを一つのテンプレートから。エージェントは ak ですぐ使え、Herdr は双方向に連携、コンテナ内に SSH 鍵は置きません。"
+description: "全リポジトリに再現可能な開発コンテナを一つのテンプレートから。エージェントは ak でホストのアカウントを使い、Herdr は双方向、SSH 鍵は置きません。"
 kind: addon
 lang: ja
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer アドオン
 
-リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.5.1`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
+リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.6.0`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
 
 ## devcontainer-kit が提供するもの
 
@@ -21,22 +21,22 @@ order: 1
 ## インストール
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.2.11` に固定してください。`v0.2.0` はサポート対象外です。
+要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.3.0` に固定してください。`v0.2.0` はサポート対象外です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.2.11`、インターフェース 2 |
+| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.3.0`、インターフェース 2 |
 | レジストリキー | `.dwp/config.json` 内の `devcontainer` |
 | リポジトリごとの設定 | `.devcontainer/dck.toml` |
 | 検出 | `dck doctor --json` |
 
 ## レイヤー
 
-どのコンテナにも開発ツール（git、gh、ripgrep、SSH サーバー、Herdr、herdr-peers）が含まれ、シークレットは一切含まれません。それ以外は、`dck.toml` で選ぶレイヤーです：
+どのコンテナにも開発ツール（git、gh、ripgrep、SSH サーバー、Herdr、herdr-peers）が含まれ、[ホストのアカウント](#コンテナ内のホストアカウント)をオプトインしない限り、シークレットは一切含まれません。それ以外は、`dck.toml` で選ぶレイヤーです：
 
 | レイヤー | デフォルト | 追加されるもの |
 |---|---|---|
@@ -57,6 +57,24 @@ cd your-repo && dck init && bash dev.sh up
 - **キットが作成していないコンテナ。** それらがログインに使う公開鍵をホストプロファイルの `[ssh] authorized_extra` に列挙すれば、それらのコンテナも dck コンテナに到達できます。
 
 ホストとコンテナの両方で [coding-agents-kit](/kit/agentkit) と組み合わせれば、同じ `ak` で両側のエージェントを起動できます。
+
+## コンテナ内のホストアカウント
+
+コンテナは、ホストですでに持っているアカウントを使えます。git がすでにホストの SSH エージェントを通じて動いているのと同じように、コンテナ内でのログインは不要です。これはオプトインで、設定はあなたの**ホストプロファイル**に置き、リポジトリの `dck.toml` には決して置きません。
+
+```toml
+[agents]
+host_profiles = true          # 既定は false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # 共有する環境変数名の許可リスト
+```
+
+`host_profiles` を有効にすると、`dck up` はリポジトリがインストールする CLI のプロファイルだけを共有します。
+
+- **Claude Code** はプロファイルごとの長期トークンで共有します。`@default` には `CLAUDE_CODE_OAUTH_TOKEN`、`@name` には `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` を使います（接尾辞は大文字にし、`A-Z`、`0-9`、`_` 以外の文字は `_` に置き換えます）。
+- **Codex** は認証ファイルで、`@default` と各プロファイルについて共有します。
+- **キットの env ファイル**は読み取り専用で、`host_env_keys` にある名前だけに絞り込みます。
+
+agentkit の home 全体がマウントされることはなく、ホストの絶対パスを含むプロファイルはスキップされます。読み書き可能で共有した Codex のログインは、二つの書き手から同時に更新される可能性があります。Codex アカウントごとに動かすエージェントは一つにしてください。コンテナ内では、同じ `ak <kind> @<profile>` がホスト上と同じアカウントで動きます。これにより、リードは `ak pick` が選んだアカウントをコンテナのレーンに渡せます。詳しくは[多数のエージェントを動かす](/methodology/06-orchestration)を参照してください。
 
 ## セキュリティのデフォルト
 

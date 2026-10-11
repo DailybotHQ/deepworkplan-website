@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Her depo için tek şablondan yeniden üretilebilir geliştirme konteyneri: ak ile hazır ajanlar, iki yönlü Herdr ve konteynerin içinde hiç SSH anahtarı yok."
+description: "Her depo için tek şablondan tekrarlanabilir geliştirme konteyneri: ak ile ana makine hesaplarınızda ajanlar, iki yönlü Herdr ve içeride hiç SSH anahtarı yok."
 kind: addon
 lang: tr
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer eklentisi
 
-Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.5.1`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
+Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.6.0`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
 ## devcontainer-kit'in sağladıkları
 
@@ -21,22 +21,22 @@ Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin �
 ## Kurulum
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.2.11` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.3.0` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v0.2.11` etiketi, arayüz 2 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v0.3.0` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
 ## Katmanlar
 
-Her konteyner geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH sunucusu, Herdr ve herdr-peers — ve hiçbir gizli bilgi içermez. Geri kalanı, `dck.toml` içinde seçtiğiniz bir katmandır:
+Her konteyner geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH sunucusu, Herdr ve herdr-peers — ve siz [ana makine hesaplarını](#konteynerin-içinde-ana-makine-hesapları) etkinleştirmedikçe hiçbir gizli bilgi içermez. Geri kalanı, `dck.toml` içinde seçtiğiniz bir katmandır:
 
 | Katman | Varsayılan | Ne ekler |
 |---|---|---|
@@ -57,6 +57,24 @@ Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.
 - **Kitin oluşturmadığı konteynerler.** Oturum açarken kullandıkları açık anahtarları ana makine profilinizde `[ssh] authorized_extra` altında listeleyin; onlar da dck konteynerlerine ulaşabilir.
 
 Ana makinede ve konteynerde [coding-agents-kit](/kit/agentkit) ile birlikte kullanın; aynı `ak` her iki tarafta da agent başlatır.
+
+## Konteynerin içinde ana makine hesapları
+
+Bir konteyner, ana makinede zaten sahip olduğunuz hesapları kullanabilir — git'in ana makinenin SSH agent'ı aracılığıyla zaten çalıştığı gibi — içeride oturum açmadan. Bu isteğe bağlıdır ve bir deponun `dck.toml` dosyasında değil, her zaman **ana makine profilinizde** bulunur:
+
+```toml
+[agents]
+host_profiles = true          # default false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
+```
+
+`host_profiles` açıkken `dck up`, yalnızca deponun kurduğu CLI'ların profillerini paylaşır:
+
+- **Claude Code**, profil başına uzun ömürlü bir token aracılığıyla: `@default` için `CLAUDE_CODE_OAUTH_TOKEN` ve `@name` için `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` (sonek büyük harfe çevrilir, `A-Z`, `0-9` ve `_` dışındaki her karakter `_` olur).
+- **Codex**, kimlik doğrulama dosyası aracılığıyla; `@default` ve her profil için.
+- **Kitin env dosyası**, salt okunur ve `host_env_keys` içindeki adlara indirgenmiş olarak.
+
+agentkit home dizininin tamamı asla bağlanmaz ve mutlak ana makine yolları içeren profiller atlanır. Okuma-yazma olarak paylaşılan bir Codex oturumu aynı anda iki yazar tarafından yenilenebilir: Codex hesabı başına tek bir etkin agent tutun. Konteynerin içinde aynı `ak <kind> @<profile>`, ana makinedekiyle aynı hesapta çalışır; bu da bir liderin konteyner şeritlerine `ak pick`'in seçtiği hesapları vermesini sağlar — bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
 
 ## Güvenlik varsayılanları
 

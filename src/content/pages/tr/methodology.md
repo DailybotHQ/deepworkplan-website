@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan metodolojisi"
-description: "Manifestodan arketiplere beş bölüm: Deep Work Plan metodolojisinin ardındaki ilkeler, çekirdek döngü, şablonlar, skill’ler ve uyarlamalar."
-lastUpdated: 2026-09-28
+description: "Manifestodan orkestrasyona altı bölüm: Deep Work Plan metodolojisinin ardındaki ilkeler, çekirdek döngü, şablonlar, skill’ler, arketipler ve birçok ajan."
+lastUpdated: 2026-10-11
 ---
 
 ## Deep Work Plan metodolojisi
@@ -17,13 +17,14 @@ DWP üç temel direğe dayanır.
 
 **Token verimliliği — uzun ufuk tasarım gereği, verimlilik yapı gereği.** Bağlam, bir kodlama ajanının sahip olduğu en kıt kaynaktır ve onu israf eden bir metodoloji, tam da iş uzadığında başarısız olur. DWP yönergeleri kademeli olarak yükler — her rehber, kendi tetikleyicisi devreye girdiğinde yüklenir — doğrulamayı her görevin gerçekte dokunduğundan seçer ve skill kararlarını görev-yerel verir. Her akışın gerektirdiği yönerge baytları ölçülür ve yayımlanır; uydurma token yüzdeleri yoktur.
 
-Metodoloji beş bölümde açıklanır:
+Metodoloji altı bölümde açıklanır:
 
 1. **Manifesto** — bir Deep Work Plan’in ne olduğu ve yapılandırılmış yürütmenin neden önemli olduğu.
 2. **Çekirdek döngü** — her görevi yürüten plan-yürüt-doğrula döngüsü.
 3. **Şablonlar** — ajanların ve insanların paylaştığı plan ve görev yapıları.
 4. **Skill’ler ve ajanlar** — komutların ve ajan rollerinin nasıl bir araya geldiği, yaşayan kit (bir deponun author alt skill’i aracılığıyla kendi skill’lerini nasıl büyüttüğü) ve dependency-upgrade ile kullanıcıya dönük herhangi bir arayüz yüzeyi (görsel UI, CLI çıktısı veya konuşma tabanlı) için design-system eklentisi gibi tercihe dayalı eklentiler.
 5. **Arketipler** — metodolojiyi bireysel depolara ve orkestratör merkezlerine uyarlamak.
+6. **Birçok ajanı çalıştırmak** — bölmeler, konteynerler, makineler ve hesaplar genelinde bir lider ve şeritleri; depo başına tek dal ve tek sürüm.
 
 - [Metodolojiyi okuyun](/methodology)
 - [Spesifikasyonu okuyun](/spec)

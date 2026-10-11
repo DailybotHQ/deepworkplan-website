@@ -1,7 +1,7 @@
 ---
 title: "Bắt đầu nhanh — Deep Work Plan"
 description: "Lời nhắc khởi tạo thực thi được cho agent AI: áp dụng Deep Work Plan trong mọi repository — phân tích, lập tài liệu, cài skill, để repo điều khiển được bằng agent."
-lastUpdated: 2026-09-28
+lastUpdated: 2026-10-11
 ---
 
 Bạn là một agent lập trình AI. Hãy đọc toàn bộ lời nhắc này trước, rồi biến repository hiện tại thành
@@ -87,14 +87,29 @@ nó đã được kiểm tra.
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  # Tải xuống checksum cho bản phát hành bạn định cài (thay vX.Y.Z):
+  git checkout v7.6.0
+  # Tải xuống checksum của bản phát hành đó và đối chiếu với digest bên dưới:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS
+  shasum -a 256 SHA256SUMS   # phải bằng digest của deepworkplan-skill trong Bản phát hành được ghim
   ./setup.sh --verify        # kết quả khác không có nghĩa là một tệp không khớp — dừng lại
   ```
 
   Các bản phát hành **có checksum, không có chữ ký** (ký là bước tiếp theo đã được ghi lại). Mọi thứ
   đều mở và có thể so sánh, vì vậy bạn cũng có thể so sánh bất kỳ tệp nào với repository tại tag của nó.
+- **Bản phát hành được ghim.** Mọi thành phần mà lời nhắc này cài đặt đều được ghim vào một bản phát hành. Trước
+  khi dùng `SHA256SUMS` của một bản phát hành, hãy đối chiếu chính tệp đó với digest bên dưới
+  (`shasum -a 256 SHA256SUMS`, hoặc `sha256sum` trên Linux); không khớp có nghĩa là dừng lại.
+
+  | Repository (github.com/DailybotHQ) | Tag | sha256 của `SHA256SUMS` |
+  | --- | --- | --- |
+  | deepworkplan-skill | `v7.6.0` | `99f0dbf3bcc1e795fa6e15b520d6250f0a47d5efcb44614fa5d1926fb2320784` |
+  | coding-agents-kit | `v0.5.0` | `a90f45e44085370694a954a3578d037d0637d0eb4ec2f1b846a8d29556b1ec27` |
+  | herdr-peers | `v0.2.1` | `72b3ea5352ab3eb13045fb0ff901efddc5d8b860724daa3d75d4531df3ebfb3f` |
+  | devcontainer-kit | `v0.3.0` | `02d4de086eeb010b42458dd131b690df36638b361033e5df6aa3d5ceba4a7eea` |
+  | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
+  | ai-diff-reviewer | `v3.3.9` | `aaf490cfe01ba858df49732798d6861a7c742b967f39fedb4f1a9c999aafc0c9` |
+  | agent-skill | `v3.23.12` | không công bố — CLI skills ghi một hash nội dung trong `skills-lock.json` |
 - **Báo cáo vấn đề.** Báo cáo các vấn đề bảo mật **riêng tư qua tính năng báo cáo lỗ hổng bảo mật của GitHub** trên repository liên quan — `https://github.com/DailybotHQ/deepworkplan-skill/security` hoặc `https://github.com/DailybotHQ/deepworkplan-website/security` — không phải dưới dạng issue công khai. Xem thêm `SECURITY.md` của mỗi repository, `https://deepworkplan.com/.well-known/security.txt`, và trang tin tưởng `https://deepworkplan.com/trust`.
 
 ## 2. Cài skill Deep Work Plan
@@ -106,7 +121,7 @@ cùng chín sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `ve
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y
 ```
 
 Hoặc cài đặt qua OpenClaw:
@@ -128,7 +143,7 @@ bản skill Deep Work Plan đã cài ở trên. Gói skill hiện tại bao gồ
 và chín sub-skill: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` và `upgrade`.
 
-Phiên bản skill đã cài: **7.5.1**. Gói 7.x hiện tại mặc định tạo kế hoạch mới bằng v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
+Phiên bản skill đã cài: **7.6.0**. Gói 7.x hiện tại mặc định tạo kế hoạch mới bằng v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
 
 Tiêu chuẩn này được thiết kế có chủ đích theo tỷ lệ, và biến sự tỷ lệ đó thành
 một thuộc tính của kế hoạch chứ không phải kỷ luật của nhà phát triển. Một kế
@@ -179,7 +194,7 @@ kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao g
 bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,
 đối chiếu các skill mà các tác vụ đã sử dụng, và ghi lại bằng chứng cùng các
 giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên bản cố định; lệnh
-được ghi lại hiện tại cài đặt `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`. GitHub
+được ghi lại hiện tại cài đặt `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9`. GitHub
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
 
@@ -225,28 +240,57 @@ phương pháp luận) thay vì ghi đè — và xác nhận với người dùn
 
 Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 và v7 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
 
-## 4. Cài đặt đánh giá cục bộ bắt buộc, rồi đề xuất các addon tùy chọn
+## 4. Cài đặt — hoặc nâng cấp — đánh giá cục bộ và các addon
 
-Sau khi khởi tạo nền tảng, hãy cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc kể từ
-chuẩn 2.3.0): skill vendored được ghim theo tag
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) cùng một
-`.review/extension.md` được điều chỉnh riêng cho repo qua `generate-extension`, dưới sự chấp thuận của
-quá trình khởi tạo. Sau đó liệt kê bảy addon tùy chọn (devcontainer, Dailybot, dependency upgrade,
-design system, agentkit, Herdr, DeepWorkPlan Vim) và đề xuất mỗi cái như một lựa chọn tự nguyện rõ ràng,
-ghi lại mọi lần chấp nhận trong `.dwp/config.json`. Một repository hoàn toàn tuân thủ
-với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
+Sau khi khởi tạo nền tảng, skill Deep Work Plan và đánh giá cục bộ AI Diff Reviewer bắt buộc đã có mặt
+trong **mọi** repository. Các addon khác thì không: mỗi addon chỉ thuộc về những repository mà nó phù hợp.
+Phần này **phát hiện mọi addon, nâng cấp những addon bạn đang dùng và đề xuất những addon phù hợp** —
+nó không bao giờ thêm một addon chỉ để cho đủ bộ. Chạy phần này theo cùng một cách trên một repository
+mới và trên một repository đã được khởi tạo từ nhiều tháng trước: nó **idempotent**. Với mỗi thành phần,
+hãy phát hiện những gì đã được cài và phiên bản của nó, rồi rẽ nhánh:
 
-- **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.11`, cùng skill `dck-dockerfile` của nó): `dck init` tạo container riêng của repository — image chính thức ghim theo digest, không có base image dùng chung, `bash dev.sh up` — và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận; coding agent là một lớp opt-in.
-- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.3) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
+- **Chưa có** — đánh giá cục bộ bắt buộc được cài dưới sự chấp thuận của quá trình khởi tạo. Một addon
+  tùy chọn chỉ được **đề xuất** khi nó phù hợp với repository này, và chỉ được cài khi nhà phát triển chấp nhận.
+- **Đã cài, cũ hơn bản ghim** — nếu nó vẫn phù hợp, nâng cấp nó **tại chỗ** bằng cùng lệnh đã ghim (mỗi
+  trình cài đặt thay thế các tệp của riêng nó và giữ nguyên cấu hình, phiên đăng nhập và dữ liệu của người
+  dùng). Nói rõ những gì sẽ thay đổi trước khi chạy. Nếu nó không còn phù hợp, hãy nói rõ điều đó và để
+  nhà phát triển quyết định.
+- **Đã cài ở bản ghim, hoặc mới hơn** — không thay đổi gì.
+
+Ghi lại mọi lần chấp nhận hoặc từ chối trong `.dwp/config.json`; một addon đã bị từ chối sẽ không được đề xuất lại
+trừ khi nhà phát triển yêu cầu. Chạy phần này lần thứ hai không thay đổi gì.
+
+| Thành phần | Phát hiện phiên bản đã cài | Cài đặt hoặc nâng cấp (đã ghim) |
+| --- | --- | --- |
+| AI Diff Reviewer (bắt buộc) | `version:` trong `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `version:` trong `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | `scripts/herdr-peers --version` trong skill herdr-peers đã cài | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | trình cài đặt đã xác minh tại https://deepworkplan.com/vim/install.sh (nó ghim `v0.7.0`; tải xuống, `shasum -a 256 -c install.sh.sha256`, rồi chạy) |
+
+Xác minh mỗi bản tải xuống với `SHA256SUMS` của bản phát hành tương ứng và digest trong *Bản phát hành được ghim* ở trên
+trước khi chạy nó.
+
+**Đánh giá cục bộ bắt buộc.** Cài **đánh giá cục bộ AI Diff Reviewer** (Giai đoạn 7a — bắt buộc
+kể từ chuẩn 2.3.0): skill được ghim theo tag ở trên cùng một `.review/extension.md` được điều chỉnh riêng cho repo qua
+`generate-extension`, dưới sự chấp thuận của quá trình khởi tạo.
+
+**Các addon tùy chọn.** Liệt kê bảy addon tùy chọn (devcontainer, Dailybot, dependency
+upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) và chỉ đề xuất những cái phù hợp với repository này, mỗi cái như một lựa chọn tự nguyện rõ ràng. Một
+repository hoàn toàn tuân thủ với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
+
+- **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.3.0`, cùng skill `dck-dockerfile` của nó): `dck init` tạo container riêng của repository — image chính thức ghim theo digest, không có base image dùng chung, `bash dev.sh up` — và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận. Khi được chấp nhận, hãy làm theo *Lộ trình devcontainer* bên dưới cho đến toàn bộ stack.
+- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.12) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` tự nguyện dành cho các repo có bề mặt giao diện được phát hiện
   (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
   một tệp: visual-ui (được khuyến nghị mạnh mẽ khi phát hiện; cài đặt kiểm soát bằng sự chấp nhận), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
-- **agentkit** — bản cài đặt cấp máy của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim ở `v0.4.0`) cho các kế hoạch giao những tác vụ `parallel_safe` có giới hạn cho coding agent khác (headless, mỗi bên được ủy thác chạy một `ak run` trong worktree riêng); bộ kit khởi chạy agent ở chế độ tự chủ theo mặc định và lựa chọn opt-out của nó (`--ask` hoặc `AGENTKIT_PERMISSIONS=ask`) luôn được ưu tiên.
-- **Herdr** — bản cài đặt cấp máy của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim ở `v0.1.0`, cùng skill chính thức của Herdr) cho các kế hoạch yêu cầu một agent ngang hàng trong một pane Herdr, trên bất kỳ máy nào, gửi một phản hồi được ủy quyền.
-- **DeepWorkPlan Vim** — trình soạn thảo terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), ghim ở `v0.6.0`), một bản cài đặt cấp máy không bao giờ ghi đè cấu hình Neovim có sẵn khi chưa có sự đồng ý rõ ràng.
+- **agentkit** — bản cài đặt cấp máy của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim ở `v0.5.0`): một lệnh cho mọi coding agent, một tài khoản cho mỗi hồ sơ, `ak usage` và `ak pick` để chọn tài khoản còn nhiều chỗ nhất, và `ak run` headless cho các kế hoạch giao những tác vụ `parallel_safe` có giới hạn cho coding agent khác (mỗi worktree một bên được ủy thác). Bộ kit khởi chạy agent ở chế độ tự chủ theo mặc định và lựa chọn opt-out của nó (`--ask` hoặc `AGENTKIT_PERMISSIONS=ask`) luôn được ưu tiên.
+- **Herdr** — bản cài đặt cấp máy của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim ở `v0.2.1`, cùng skill chính thức của Herdr) cho các kế hoạch yêu cầu một agent ngang hàng trong một pane Herdr, trên bất kỳ máy nào, gửi một phản hồi được ủy quyền, và cho một lead theo dõi các lane của mình.
+- **DeepWorkPlan Vim** — trình soạn thảo terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), ghim ở `v0.7.0`), một bản cài đặt cấp máy không bao giờ ghi đè cấu hình Neovim có sẵn khi chưa có sự đồng ý rõ ràng.
 - **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
   Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
   `.review/extension.md` bắt buộc) trên toàn bộ tập thay đổi đã tích lũy của kế hoạch. Một skill hoặc
@@ -256,6 +300,67 @@ với **không** addon tùy chọn nào — đừng bao giờ tự động cài 
   nhẹ; kết quả **nghiêm trọng đã xác minh** từ một lượt hoàn tất vẫn chặn việc hoàn thành (v3, BC-07 — các xác nhận nghiêm trọng chưa xác minh xuất hiện dưới dạng cảnh báo có chú thích, và một lượt đánh giá `incomplete`/`timeout` không phải là một lượt sạch, BC-04). **Flow B** (cổng CI với
   `pr-review.yml`) được đề xuất như một lựa chọn tự nguyện rõ ràng và không bao giờ được cài khi chưa
   được yêu cầu. Không luồng Deep Work Plan nào yêu cầu một dịch vụ thương mại, nhà cung cấp CI hay bí mật.
+
+### Lộ trình devcontainer (khi được chấp nhận)
+
+Addon devcontainer kết thúc bằng một stack hoạt động được, không phải một bộ tệp vừa được tạo. Với sự chấp thuận
+của nhà phát triển ở mỗi bước:
+
+1. **Tạo tệp.** `dck init` ghi `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`,
+   `docker/local/docker-compose.yaml` và `dev.sh`, trình bày kế hoạch trước và hỏi trước khi
+   thay đổi bất kỳ tệp có sẵn nào.
+2. **Chọn các lớp trong `.devcontainer/dck.toml`.** Chỉ bật `[layers] agents` nếu nhà phát triển
+   muốn có coding agent bên trong, và chỉ liệt kê **những CLI mà họ chọn** trong `[agents] clis` (ví dụ
+   `["claude", "codex"]`); không cài gì khác. `editor` thêm DeepWorkPlan Vim.
+3. **Đấu nối Herdr.** `[herdr] machine = true` đăng ký container như một máy Herdr và
+   `layout = "standard"` mở nó với thanh bên tiêu chuẩn — App · Editor · Development · Agents —
+   mọi pane đều ở đường dẫn ứng dụng (mặc định là `/app`). Mạng lưới cho phép các agent bên trong kết nối tới các agent trên
+   máy host và trong các container khác.
+4. **Tài khoản host (tự nguyện, do nhà phát triển quyết định).** Trong **hồ sơ host** của nhà phát triển
+   (`~/.config/dck/profile.toml`), không bao giờ trong `dck.toml` của repository, `[agents] host_profiles = true`
+   cho phép container dùng các tài khoản trên máy host của những CLI mà repository cài — Claude qua
+   `CLAUDE_CODE_OAUTH_TOKEN` (`@default`) hoặc `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` (`@name`), Codex
+   qua tệp xác thực của nó — chỉ đọc, với `host_env_keys` là danh sách cho phép các tên biến bổ sung.
+   Đừng bao giờ bật tùy chọn này thay cho nhà phát triển, và đừng bao giờ in ra một token.
+5. **Khởi động.** `bash dev.sh up` build, khởi động và đăng ký container.
+6. **Kiểm tra.** Mỗi mục là một lệnh:
+   - [ ] `dck doctor --json` báo cáo bố cục vendored là `current`.
+   - [ ] `bash dev.sh ps` cho thấy service đang chạy; `dck herdr status` cho thấy máy đã được gắn.
+   - [ ] `bash dev.sh shell -c 'ak doctor'` liệt kê đúng các CLI trong `[agents] clis` (chỉ với lớp agents).
+   - [ ] `bash dev.sh agents` liệt kê các peer trên máy host và trong các container khác.
+   - [ ] `bash dev.sh shell -c 'ssh-add -l'` hiển thị các khóa của agent trên máy host; không có tệp khóa nào bên trong.
+   - [ ] Máy đã gắn mở ra với App · Editor · Development · Agents trong `/app`.
+
+## Điều phối: nhiều agent, lane và lần chạy không người giám sát
+
+Công việc rộng hơn một phiên chạy dưới dạng một **lead** và các **lane** của nó — xem
+https://deepworkplan.com/methodology/06-orchestration.md. Khi nhà phát triển yêu cầu và các addon
+agentkit và Herdr đã được cài:
+
+- **Một lane cho mỗi repository**, trên bản checkout gốc của nó, với một nhánh, một pull request và một
+  bản phát hành. Chỉ dùng git worktree khi hai bên ghi phải dùng chung một repository. Các bản phát hành đi theo
+  thứ tự phụ thuộc, và lead trao GO cho từng lane.
+- **Tài khoản theo hạn mức còn lại.** `ak profiles --json` liệt kê các tài khoản; `ak usage` hiển thị hạn mức của chúng
+  một lần cho mỗi đợt; `ak pick <kind> --count N` trả về các tài khoản còn nhiều chỗ nhất. Chỉ dùng
+  tài khoản của chính nhà phát triển, trong phạm vi điều khoản của từng nhà cung cấp.
+- **Chuẩn bị một lần.** Xác nhận bypass-permissions của Claude Code là bước một lần, theo từng hồ sơ,
+  do **nhà phát triển** thực hiện khi hồ sơ được tạo (trong một container devcontainer-kit, kit chỉ
+  ghi nó vào các thư mục home riêng của container). Không bao giờ gửi phím cho bước này.
+- **Khởi chạy.** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` khởi chạy một lane trong thư mục
+  riêng của nó; `--trust-cwd` tin cậy trước thư mục đó, nên không có màn hình tin cậy thư mục nào xuất hiện.
+  Khi nhà phát triển đã cho phép vận hành không người giám sát, mỗi lần khởi chạy không cần thêm phê duyệt nào.
+- **Phối hợp.** `herdr-peers ask` và `herdr-peers reply`: mỗi ask một reply được ủy quyền, độ sâu một,
+  reply là dữ liệu và không cấp thêm gì.
+- **Theo dõi.** `herdr-peers lanes` hiển thị trạng thái của mọi lane; với một lane bị chặn,
+  `herdr-peers status <pane>` phân loại màn hình và `herdr pane read <pane>` hiển thị nó.
+- **Một lần gõ phím, một trường hợp.** Những phím duy nhất bạn được gửi bằng `herdr pane send-keys` là
+  câu trả lời cho màn hình tin cậy thư mục, trên một pane do chính bạn khởi chạy, khi không dùng được
+  `--trust-cwd`. Đọc màn hình trước và sau, và gửi ít phím nhất.
+- **Đọc, ghi lại và chuyển mọi thứ khác lên** nhà phát triển: xác nhận bypass-permissions của Claude,
+  lời nhắc đăng nhập và thông tin xác thực, yêu cầu cấp quyền theo từng hành động, xác nhận mang tính
+  phá hủy, lời nhắc thanh toán hoặc gói dịch vụ, màn hình không xác định và các pane bạn không tạo. Với
+  `AGENTKIT_PERMISSIONS=ask`, các lane hỏi trước khi hành động; không bao giờ lách qua những lời nhắc
+  đó. Ghi lại mọi lần can thiệp trong kế hoạch cha.
 
 ## 5. Phát triển bộ kit (sub-skill author)
 
@@ -318,3 +423,4 @@ Bất cứ ai cũng có thể chạy lời nhắc này trên bất kỳ reposito
 - [Duyệt bộ kit](/kit)
 - [Xem ví dụ](/examples)
 - [Tùy chọn: trình soạn thảo terminal DeepWorkPlan Vim](/kit/vim)
+- [Chạy nhiều agent](/methodology/06-orchestration)

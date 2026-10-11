@@ -575,12 +575,12 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Phương pháp luận Deep Work Plan',
       description:
-        'Năm chương từ tuyên ngôn tới các kiểu hình: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, cùng những thích ứng đằng sau Deep Work Plan.',
+        'Sáu chương từ tuyên ngôn tới điều phối: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, các kiểu hình, và cách chạy nhiều agent cùng lúc.',
     },
     eyebrow: 'Phương pháp luận',
     title: 'Phương pháp luận Deep Work Plan',
     intro:
-      'Năm chương đưa bạn từ triết lý đằng sau Deep Work Plan tới vòng lặp thực hành, các mẫu và những thích ứng bạn dùng hằng ngày.',
+      'Sáu chương đưa bạn từ triết lý đằng sau Deep Work Plan tới vòng lặp thực hành, các mẫu, những thích ứng và cách chạy nhiều agent cùng lúc.',
     chapterLabel: 'Chương',
     readChapter: 'Đọc chương',
     prev: 'Trước',
@@ -696,7 +696,7 @@ export const vi: SiteTranslations = {
         description:
           'Hãy coi lời nhắc và skill là không đáng tin cho đến khi bạn đã kiểm tra chúng. Cả hai đều là mã nguồn mở và cấp phép MIT; skill là Markdown-first không có lời gọi mạng và không có telemetry. Mỗi bản phát hành công bố một SHA256SUMS cho skill được giao, vì vậy bạn có thể xác nhận bản sao của mình khớp trước khi chạy nó. Các bản phát hành có checksum, không có chữ ký (ký là bước tiếp theo đã được ghi lại).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -704,7 +704,7 @@ export const vi: SiteTranslations = {
         description:
           'Thêm skill Deep Work Plan để mọi agent đều có thể lập kế hoạch và thực thi công việc có cấu trúc. Skill đi kèm một bộ định tuyến cùng chín sub-skill — create, execute, refine, resume, status, verify, onboard, author và upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -718,7 +718,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Đánh giá cục bộ và addon tự nguyện',
         description:
-          'Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bảy addon tự nguyện — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim và Agentkit — mà bạn chỉ chấp nhận khi chúng phù hợp. Một repo hoàn toàn tuân thủ với không cần addon tùy chọn nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
+          'Khởi tạo cài đặt bản đánh giá cục bộ bắt buộc của AI Diff Reviewer (cổng CI của nó vẫn là tùy chọn) và đề xuất bảy addon tự nguyện — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim và Agentkit — mà bạn chỉ chấp nhận khi chúng phù hợp. Skill và đánh giá cục bộ được cài vào mọi repository; với phần còn lại, lượt cài đặt phát hiện mọi addon, nâng cấp những addon bạn đang dùng và đề xuất những addon phù hợp — không bao giờ thêm một addon chỉ để cho đủ bộ. Mọi thành phần đều được ghim vào một bản phát hành có digest SHA256SUMS được init.md công bố, và chạy lần thứ hai không thay đổi gì. Một devcontainer được chấp nhận sẽ kết thúc với toàn bộ stack — các agent bạn đã chọn, Herdr được đấu nối hai chiều, và tài khoản host chỉ khi bạn tự nguyện bật. Một repo hoàn toàn tuân thủ với không cần addon tùy chọn nào. Dùng /skill-create và /agent-create (sub-skill author) để phát triển các skill, agent và command phù hợp với stack vượt ra ngoài cơ sở.',
       },
       {
         title: 'Lập kế hoạch và thực thi',
@@ -746,6 +746,7 @@ export const vi: SiteTranslations = {
         label: 'Tùy chọn: trình soạn thảo terminal DeepWorkPlan Vim',
         href: '/kit/vim',
       },
+      { label: 'Chạy nhiều agent', href: '/methodology/06-orchestration' },
     ],
   },
 
@@ -811,7 +812,7 @@ export const vi: SiteTranslations = {
             id: 'how-to-use',
             question: 'Tôi dùng nó như thế nào?',
             answer:
-              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
+              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
             linkLabel: 'Khởi động nhanh',
             linkPath: '/quickstart',
           },
@@ -1021,7 +1022,7 @@ export const vi: SiteTranslations = {
             id: 'cost',
             question: 'Chi phí là bao nhiêu, và hiệu suất được đo thế nào?',
             answer:
-              'Phương pháp luận và skill cấp phép MIT và miễn phí; không có dịch vụ, không có API key và không có telemetry trong các luồng lõi. Hiệu suất được báo cáo bằng số byte hướng dẫn mà mỗi luồng tải **khi vào** — gói dữ liệu ban đầu lúc bắt đầu một phiên — công bố cùng với các **lộ trình đầu-cuối** được đặt tên, cộng thêm những gì các trigger thực sự của luồng tải khi công việc thực sự tiếp diễn (ví dụ, một lượt resume tiếp tục sang thực thi thường tải gấp nhiều lần gói dữ liệu ban đầu của nó). Không con số nào trong hai con số này giới hạn một phiên làm việc: một lượt chạy thực tế còn đọc cả các tệp của repository, đầu ra công cụ và các tệp làm việc của kế hoạch, không cái nào trong số đó được tính vào sổ cái này. Cả hai con số đều được đo bằng một script được commit cùng skill, đo lại ở mỗi đường cơ sở phát hành và công bố trong một sổ cái đánh giá, với mức tăng được báo cáo thẳng thắn như mức giảm. Nó không được báo cáo dưới dạng phần trăm token hay khoản tiết kiệm chi phí, vì một bản kê byte không chứng minh được những điều đó. Một đợt đánh giá công khai với các agent mới đã được thực hiện theo một giao thức đóng băng: cùng hai tính năng được xây dựng từ các bản sao sạch không harness, với phiên bản chính trước đó và với phiên bản hiện tại. Đợt đánh giá nhận thấy các agent trên cây có harness đọc ít byte hơn ở cả hai tác vụ, và các phiên làm việc tính năng của phiên bản hiện tại tiêu thụ ít đầu vào và đầu ra mô hình hơn phiên bản chính trước đó ở cả hai tác vụ — theo như harness báo cáo, trên một khối lượng công việc duy nhất. Nó cũng ghi nhận các giới hạn trung thực: onboarding là chi phí một lần chỉ được hoàn lại khi các luồng được sử dụng, hướng token ròng theo từng khối lượng công việc là hỗn hợp, không có tuyên bố ưu thế về thời gian đồng hồ, và một agent mới không tự đi vào các luồng — các luồng là các lệnh do bạn hoặc do agent biết gọi chúng khởi phát.',
+              'Phương pháp luận và skill cấp phép MIT và miễn phí; không có dịch vụ, không có API key và không có telemetry trong các luồng lõi. Hiệu suất được báo cáo bằng số byte hướng dẫn mà mỗi luồng tải khi vào — gói dữ liệu ban đầu lúc bắt đầu một phiên — công bố cùng với các lộ trình đầu-cuối được đặt tên, cộng thêm những gì các trigger thực sự của luồng tải khi công việc thực sự tiếp diễn (ví dụ, một lượt resume tiếp tục sang thực thi thường tải gấp nhiều lần gói dữ liệu ban đầu của nó). Không con số nào trong hai con số này giới hạn một phiên làm việc: một lượt chạy thực tế còn đọc cả các tệp của repository, đầu ra công cụ và các tệp làm việc của kế hoạch, không cái nào trong số đó được tính vào sổ cái này. Cả hai con số đều được đo bằng một script được commit cùng skill, đo lại ở mỗi đường cơ sở phát hành và công bố trong một sổ cái đánh giá, với mức tăng được báo cáo thẳng thắn như mức giảm. Nó không được báo cáo dưới dạng phần trăm token hay khoản tiết kiệm chi phí, vì một bản kê byte không chứng minh được những điều đó. Một đợt đánh giá công khai với các agent mới đã được thực hiện theo một giao thức đóng băng: cùng hai tính năng được xây dựng từ các bản sao sạch không harness, với phiên bản chính trước đó và với phiên bản hiện tại. Đợt đánh giá nhận thấy các agent trên cây có harness đọc ít byte hơn ở cả hai tác vụ, và các phiên làm việc tính năng của phiên bản hiện tại tiêu thụ ít đầu vào và đầu ra mô hình hơn phiên bản chính trước đó ở cả hai tác vụ — theo như harness báo cáo, trên một khối lượng công việc duy nhất. Nó cũng ghi nhận các giới hạn trung thực: onboarding là chi phí một lần chỉ được hoàn lại khi các luồng được sử dụng, hướng token ròng theo từng khối lượng công việc là hỗn hợp, không có tuyên bố ưu thế về thời gian đồng hồ, và một agent mới không tự đi vào các luồng — các luồng là các lệnh do bạn hoặc do agent biết gọi chúng khởi phát.',
             linkLabel: 'Tin tưởng và công bố',
             linkPath: '/trust',
           },

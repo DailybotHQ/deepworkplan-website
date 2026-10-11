@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "A reproducible dev container for every repository, from one template: agents ready through ak, Herdr wired both ways, and no SSH key ever inside the container."
+description: "A reproducible dev container for every repository, from one template: agents on your host accounts through ak, Herdr wired both ways, and no SSH key inside."
 kind: addon
 lang: en
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.5.1`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
+Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.6.0`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
 
 ## What devcontainer-kit provides
 
@@ -21,22 +21,22 @@ Give the repository a reproducible, isolated development container — one that 
 ## Install
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v0.2.11`: `v0.2.0` is unsupported.
+Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v0.3.0`: `v0.2.0` is unsupported.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/devcontainer-kit`, tag `v0.2.11`, interface 2 |
+| Product | `DailybotHQ/devcontainer-kit`, tag `v0.3.0`, interface 2 |
 | Registry key | `devcontainer` in `.dwp/config.json` |
 | Per-repository config | `.devcontainer/dck.toml` |
 | Detection | `dck doctor --json` |
 
 ## Layers
 
-Every container carries the development tools — git, gh, ripgrep, an SSH server, Herdr and herdr-peers — and no secret. The rest is a layer you choose in `dck.toml`:
+Every container carries the development tools — git, gh, ripgrep, an SSH server, Herdr and herdr-peers — and no secret unless you opt in to [host accounts](#host-accounts-inside-the-container). The rest is a layer you choose in `dck.toml`:
 
 | Layer | Default | What it adds |
 |---|---|---|
@@ -57,6 +57,24 @@ Since `v0.2.3`, `dck up` wires a two-way mesh with no hand step, on Docker Deskt
 - **Containers the kit did not create.** List the public keys they log in with under `[ssh] authorized_extra` in your host profile, and they can reach dck containers too.
 
 Pair it with [coding-agents-kit](/kit/agentkit) on the host and in the container, and the same `ak` launches agents on both sides.
+
+## Host accounts inside the container
+
+A container can use the accounts you already have on the host, the way git already works through the host's SSH agent, with no login inside. It is opt-in and lives in your **host profile**, never in a repository's `dck.toml`:
+
+```toml
+[agents]
+host_profiles = true          # default false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
+```
+
+With `host_profiles` on, `dck up` shares only the profiles of the CLIs the repository installs:
+
+- **Claude Code** through a long-lived token per profile: `CLAUDE_CODE_OAUTH_TOKEN` for `@default` and `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` for `@name` (the suffix uppercased, any character outside `A-Z`, `0-9` and `_` turned into `_`).
+- **Codex** through its auth file, for `@default` and for each profile.
+- **The kit's env file**, read-only and reduced to the names in `host_env_keys`.
+
+The whole agentkit home is never mounted, and profiles that hold absolute host paths are skipped. A Codex login shared read-write can be refreshed by two writers at once: keep one active agent per Codex account. Inside the container, the same `ak <kind> @<profile>` runs on the same account as on the host, which is what lets a lead hand container lanes the accounts `ak pick` chose — see [Running many agents](/methodology/06-orchestration).
 
 ## Security defaults
 

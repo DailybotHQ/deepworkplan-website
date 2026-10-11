@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "全ターミナルエージェントを一つのコマンドで。既定で完全自律（オプトアウト可）、git worktree でのヘッドレス実行、接頭辞一つで別アカウントへ。"
+description: "全ターミナルエージェントを一つのコマンドで。プロファイルごとのアカウント、余裕最大を選ぶ ak pick、オプトアウト可能な自律とヘッドレス実行。"
 kind: addon
 lang: ja
 order: 8
@@ -10,7 +10,7 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.5.1`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v7**（パック `v7.6.0`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 ## キットが提供するもの
 
@@ -21,31 +21,42 @@ order: 8
 - **検証済みのインストール。** `ak install <cli>` は、不足している CLI をベンダーの公式チャネルから固定バージョンでインストールし、固定された sha256 または npm レジストリの完全性情報と照合します。
 - **なじみのある名前。** 二つのエイリアスプリセットがあり、有効にするまではオフです：`classic`（`claudex`、`codexx`、`cursorx`、`opencodex`、`pix`、`clinex`、`grokx`）と `providers`（`claude-glm`、`codex-azure`、`codex-xai`、`pi-glm`、…）。いずれも一つの `ak <kind>` に対応します。
 
-## クォータ、プロファイル、セットアップ
+## アカウント、クォータ、アカウントの選び方
 
-`ak usage` は、キットから見えるすべてのアカウントのクォータと使用量を、アカウントとプロファイルごとに 1 行で一覧表示します。Claude Code のサブスクリプション（5 時間、週次、モデル別のウィンドウ）、ChatGPT での Codex ログイン、Z.AI コーディングプランのキーはライブで取得し、Cursor、Grok、xAI、Azure OpenAI は理由付きで `n/d` と表示します。読み取り専用で、ログインを更新することも、トークンを表示することも、プロファイル内に書き込むこともありません。`--json` はツール向けに同じ一覧を返します。使用量のエンドポイントはベンダー内部の非公式なものです。
+キットは、あなたが持つログインやキーの一つひとつを**アカウント**として扱います。一つの CLI × 一つのプロファイルです。`@default`（または `@1`）は CLI 自身の home で、`@2`、`@work`、`@client-x` は別々のログインです。それぞれプロファイルのルート配下の専用ディレクトリに置かれ、並行して動きます。`ak profiles` はそれらをログイン状態とキーの名前とともに一覧表示し、`ak profiles --json` はツール向けに同じ一覧を返します（スキーマ `profiles-v1`）。
+
+`ak usage` は、キットから見えるすべてのアカウントのクォータと使用量を、アカウントとプロファイルごとに 1 行で一覧表示します。Claude Code のサブスクリプション（5 時間、週次、モデル別のウィンドウ）、ChatGPT での Codex ログイン、Z.AI コーディングプランのキーはライブで取得し、Cursor、Grok、xAI、Azure OpenAI は理由付きで `n/d` と表示します。読み取り専用で、ログインを更新することも、トークンを表示することも、プロファイル内に書き込むこともありません。`--json` はツール向けに同じ一覧を返します（スキーマ `usage-v1`）。使用量のエンドポイントはベンダー内部の非公式なものです。
+
+`ak pick <kind>` は同じ行を読み、余裕の最も大きいアカウントを示します。`--count N` は余裕の大きい順に最大 N 個のアカウントを返し、`--exclude @<profile>` は使用中のアカウントを除外し、`--model` は一つのモデルの週次ウィンドウで数え、`--need 5h:40` はそれだけの余裕がなければ選択を拒みます。`--json` はスキーマ `pick-v1` を返します。
 
 ```bash
-ak usage              # すべてのアカウントとプロファイルのクォータ
-ak claude @2          # 専用の home を持つ 2 つ目の Claude アカウント
-ak profiles ls        # このマシンのプロファイル
-ak setup verify       # 順序付きのチェック（それぞれに修復コマンド付き）
+ak usage                   # すべてのアカウントとプロファイルのクォータ
+ak pick claude --count 3   # 余裕が最も大きい Claude アカウント 3 つ
+ak claude @work --trust-cwd  # 2 つ目のアカウント、フォルダは事前に信頼
+ak profiles --json         # ツール向けの profiles-v1
+ak setup verify            # 順序付きのチェック（それぞれに修復コマンド付き）
 ```
 
-プロファイルはアカウントを分離します。`@default`（または `@1`）は CLI 自身の home で、`@2`、`@work`、`@client-x` は並行して動く別々のログインです。`ak setup probe | verify | docker` は `agentkit-setup` スキルが使う読み取り専用のヘルパーで、マシンを調べ、インストールを検証し、タグで固定され検証済みのコンテナレシピを生成します。
+`--trust-cwd`（または `AGENTKIT_TRUST_CWD=1`）は、エージェントが起動するフォルダを事前に信頼するため、Claude Code と Codex はフォルダ信頼の画面なしで開きます。`ak setup probe | verify | docker` は `agentkit-setup` スキルが使う読み取り専用のヘルパーで、マシンを調べ、インストールを検証し、タグで固定され検証済みのコンテナレシピを生成します。
+
+## 複数のエージェント、複数のアカウント
+
+`agentkit-orchestrate` スキル（`ak --skill orchestrate`）は、作業を複数のエージェント、アカウント、ベンダーに分散させる方法をエージェントに教えます。バッチの前に `ak usage` を一度実行し、`ak pick --count N` でアカウントを選び、アカウントごとに一つの委任先を置き、すべての結果にリポジトリ自身のゲートを実行し、あるアカウントが上限に達したら次のアカウントへ切り替えます。キットは観測し、計算し、実行しますが、スケジューリングはしません。判断するのはリード（あなた、またはあなたが依頼したエージェント）であり、使うのは自分のアカウントだけで、各ベンダーの規約の範囲内に留めます。
+
+長時間の対話的なレーンでは、各レーンが [Herdr](/kit/herdr) のペインで自分のアカウントを使って動きます。方法論の章[多数のエージェントを動かす](/methodology/06-orchestration)は、モデル全体を説明しています。リードとそのレーン、余裕で選ぶアカウント、herdr-peers による調整、そしてリポジトリごとに一つのブランチと一つのリリースです。
 
 ## インストール
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.4.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.5.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.4.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.5.0`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
@@ -70,7 +81,7 @@ ak doctor
 | 出力が宣言された、範囲の限定された `parallel_safe` なタスク | Agentkit（ヘッドレス） |
 | タスクに対話が必要、長時間実行される、または別のマシン上にある | [Herdr](/kit/herdr)（ペイン内のピア） |
 
-二つは組み合わせられます。herdr-peers は、`ak env <kind> @profile` が出力する環境を使って、ペイン内にピアを起動できます。
+二つは組み合わせられます。herdr-peers は、`ak env <kind> @profile` が出力する環境を使って、ペイン内にピアを起動できます。多数のレーンを同時に動かす場合は、[多数のエージェントを動かす](/methodology/06-orchestration)を参照してください。
 
 ## 補足
 

@@ -1,7 +1,7 @@
 ---
 title: "The Deep Work Plan Methodology"
-description: "Five chapters from manifesto to archetypes: the principles, core loop, templates, skills, and adaptations behind the Deep Work Plan methodology."
-lastUpdated: 2026-09-28
+description: "Six chapters from manifesto to orchestration: the principles, core loop, templates, skills, archetypes, and many agents behind the Deep Work Plan methodology."
+lastUpdated: 2026-10-11
 ---
 
 ## The Deep Work Plan Methodology
@@ -17,13 +17,14 @@ DWP rests on three pillars.
 
 **Token efficiency — long-horizon by design, efficient by construction.** Context is the scarcest resource a coding agent has, and a methodology that wastes it fails exactly when the work gets long. DWP loads instructions progressively — each guide loads when its trigger fires — selects validation from what each task actually touches, and decides skills task-locally. The instruction bytes each flow requires are measured and published; no invented token percentages.
 
-The methodology is explained in five chapters:
+The methodology is explained in six chapters:
 
 1. **Manifesto** — what a Deep Work Plan is and why structured execution matters.
 2. **Core loop** — the plan-execute-verify cycle that drives every task.
 3. **Templates** — the plan and task structures agents and humans share.
 4. **Skills & agents** — how commands and agent roles fit together, the living kit (how a repository grows its own skills via the author sub-skill), and opt-in add-ons such as dependency-upgrade and the design-system add-on for any user-facing interface surface (visual UI, CLI output, or conversational).
 5. **Archetypes** — adapting the methodology to individual repos and orchestrator hubs.
+6. **Running many agents** — a lead and its lanes across panes, containers, machines and accounts, with one branch and one release per repository.
 
 - [Read the methodology](/methodology)
 - [Read the specification](/spec)

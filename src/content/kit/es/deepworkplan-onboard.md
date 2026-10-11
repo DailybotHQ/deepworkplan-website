@@ -29,7 +29,7 @@ Convierte un repositorio en una base de código AI-first y guiada por especifica
 4. Genera `docs/` (arquitectura, estándares, pruebas, seguridad y más) y docs por módulo.
 5. Genera `.agents/` (agentes, comandos `dwp-*` ligeros, skills adaptadas, catálogo) + `.claude → .agents`.
 6. Instala la skill y crea un `.dwp/` ignorado por git (plans, drafts) y un espacio `tmp/`.
-7. Instala la revisión local requerida de AI Diff Reviewer, ofrece los addons opcionales y luego hace una autoverificación.
+7. Instala la revisión local requerida de AI Diff Reviewer; detecta todos los addons, actualiza los que usa el repositorio y ofrece los que encajan (nunca uno solo para completar el conjunto); luego hace una autoverificación.
 
 ## Notas
 

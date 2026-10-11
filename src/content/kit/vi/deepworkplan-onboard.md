@@ -29,7 +29,7 @@ Biến một repository thành codebase AI-first, hướng spec. Đây là sub-s
 4. Sinh ra `docs/` (kiến trúc, tiêu chuẩn, kiểm thử, bảo mật, và nhiều hơn) cùng tài liệu cho từng module.
 5. Sinh ra `.agents/` (các agent, các lệnh `dwp-*` gọn nhẹ, các skill phù hợp với stack, catalog) + `.claude → .agents`.
 6. Cài đặt skill và dựng khung một `.dwp/` được gitignore (kế hoạch, bản nháp) cùng một không gian nháp `tmp/`.
-7. Cài đặt đánh giá cục bộ AI Diff Reviewer bắt buộc, đề nghị các addon tùy chọn, rồi tự kiểm tra.
+7. Cài đặt đánh giá cục bộ AI Diff Reviewer bắt buộc; phát hiện mọi addon, nâng cấp những addon mà repository đang dùng và đề nghị những addon phù hợp (không bao giờ thêm addon chỉ để cho đủ bộ); rồi tự kiểm tra.
 
 ## Ghi chú
 

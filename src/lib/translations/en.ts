@@ -570,12 +570,12 @@ export const en: SiteTranslations = {
     meta: {
       title: 'The Deep Work Plan Methodology',
       description:
-        'Five chapters from manifesto to archetypes: the principles, the core loop, templates, skills and agents, and the adaptations behind Deep Work Plan.',
+        'Six chapters from manifesto to orchestration: the principles, the core loop, templates, skills and agents, archetypes, and running many agents at once.',
     },
     eyebrow: 'Methodology',
     title: 'The Deep Work Plan Methodology',
     intro:
-      'Five chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, and adaptations you use every day.',
+      'Six chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, adaptations, and running many agents at once.',
     chapterLabel: 'Chapter',
     readChapter: 'Read chapter',
     prev: 'Previous',
@@ -692,7 +692,7 @@ export const en: SiteTranslations = {
         description:
           'Treat the prompt and the skill as untrusted until you have checked them. Both are open source and MIT; the skill is Markdown-first with no network calls and no telemetry. Each release publishes a SHA256SUMS over the shipped skill, so you can confirm your copy matches before running it. Releases are checksummed, not signed (signing is a documented next step).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -700,7 +700,7 @@ export const en: SiteTranslations = {
         description:
           'Add the skill to your repository so any agent can plan and execute structured work. It ships a router plus nine sub-skills — create, execute, refine, resume, status, verify, onboard, author, and upgrade. Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -714,7 +714,7 @@ export const en: SiteTranslations = {
       {
         title: 'Local review and opt-in addons',
         description:
-          'Onboarding installs the required AI Diff Reviewer local review (its CI gate stays optional) and offers seven opt-in addons — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, and Agentkit — that you accept only when they fit. A repo is fully conformant with zero optional addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
+          'Onboarding installs the required AI Diff Reviewer local review (its CI gate stays optional) and offers seven opt-in addons — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, and Agentkit — that you accept only when they fit. The skill and the local review go into every repository; for the rest, the pass detects every addon, upgrades the ones you use and offers the ones that fit — never one just to complete the set. Every component is pinned to a release whose SHA256SUMS digest init.md publishes, and a second run changes nothing. An accepted devcontainer ends in the full stack — the agents you chose, Herdr wired both ways, and host accounts only if you opt in. A repo is fully conformant with zero optional addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
       },
       {
         title: 'Plan and execute',
@@ -742,6 +742,7 @@ export const en: SiteTranslations = {
         label: 'Optional: the DeepWorkPlan Vim terminal editor',
         href: '/kit/vim',
       },
+      { label: 'Running many agents', href: '/methodology/06-orchestration' },
     ],
   },
   faqPage: {
@@ -804,7 +805,7 @@ export const en: SiteTranslations = {
             id: 'how-to-use',
             question: 'How do I use it?',
             answer:
-              'Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.',
+              'Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.',
             linkLabel: 'Quickstart',
             linkPath: '/quickstart',
           },
@@ -1010,7 +1011,7 @@ export const en: SiteTranslations = {
             id: 'cost',
             question: 'What does it cost, and how is efficiency measured?',
             answer:
-              "The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads **at entry** — its bundle at the start of a session — published alongside named **end-to-end paths** that add what the flow's own triggers load once real work continues (for example, a resume that goes on to execute typically loads several times its entry bundle). Neither figure caps a session: a real run also reads the repository's own files, tool output and the plan's working files, none of which this ledger counts. Both numbers are measured by a script committed with the skill, re-measured across release baselines, and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those. A public fresh-agent evaluation has now run under a frozen protocol: the same two features built from clean clones with no harness, with the previous major version and with the current one. It found that agents on a harness-bearing tree read fewer bytes in both tasks, and that the current version’s feature sessions consumed less model input and output than the previous major’s in both tasks — as reported by the harness, on a single workload. It also found the honest limits: onboarding is a one-time cost that only pays back when the flows are used, the net token direction per workload was mixed, no wall-clock advantage is claimed, and a fresh agent does not enter the flows unaided — the flows are commands you or the agent invoke.",
+              "The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads at entry — its bundle at the start of a session — published alongside named end-to-end paths that add what the flow's own triggers load once real work continues (for example, a resume that goes on to execute typically loads several times its entry bundle). Neither figure caps a session: a real run also reads the repository's own files, tool output and the plan's working files, none of which this ledger counts. Both numbers are measured by a script committed with the skill, re-measured across release baselines, and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those. A public fresh-agent evaluation has now run under a frozen protocol: the same two features built from clean clones with no harness, with the previous major version and with the current one. It found that agents on a harness-bearing tree read fewer bytes in both tasks, and that the current version’s feature sessions consumed less model input and output than the previous major’s in both tasks — as reported by the harness, on a single workload. It also found the honest limits: onboarding is a one-time cost that only pays back when the flows are used, the net token direction per workload was mixed, no wall-clock advantage is claimed, and a fresh agent does not enter the flows unaided — the flows are commands you or the agent invoke.",
             linkLabel: 'Trust and disclosure',
             linkPath: '/trust',
           },

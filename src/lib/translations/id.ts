@@ -578,12 +578,12 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Metodologi Deep Work Plan',
       description:
-        'Lima bab dari manifesto hingga arketipe: prinsip, core loop, template, skill dan agent, serta adaptasi di balik Deep Work Plan.',
+        'Enam bab dari manifesto hingga orkestrasi: prinsip, core loop, template, skill dan agent, arketipe, serta menjalankan banyak agent sekaligus.',
     },
     eyebrow: 'Metodologi',
     title: 'Metodologi Deep Work Plan',
     intro:
-      'Lima bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, dan adaptasi yang Anda pakai setiap hari.',
+      'Enam bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, adaptasi, dan menjalankan banyak agent sekaligus.',
     chapterLabel: 'Bab',
     readChapter: 'Baca bab',
     prev: 'Sebelumnya',
@@ -699,7 +699,7 @@ export const id: SiteTranslations = {
         description:
           'Perlakukan prompt dan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Keduanya bersumber terbuka dan berlisensi MIT; skill berbasis Markdown tanpa panggilan jaringan dan tanpa telemetri. Setiap rilis menerbitkan SHA256SUMS atas skill yang dikirimkan, sehingga Anda dapat mengonfirmasi salinan Anda cocok sebelum menjalankannya. Rilis ber-checksum, bukan bertanda tangan (penandatanganan adalah langkah berikutnya yang terdokumentasi).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -707,7 +707,7 @@ export const id: SiteTranslations = {
         description:
           'Tambahkan skill Deep Work Plan agar agent mana pun dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Skill ini membawa sebuah router ditambah sembilan sub-skill — create, execute, refine, resume, status, verify, onboard, author, dan upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -721,7 +721,7 @@ export const id: SiteTranslations = {
       {
         title: 'Review lokal dan addon opt-in',
         description:
-          'Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan tujuh addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, dan Agentkit — yang Anda terima hanya ketika cocok. Sebuah repo sepenuhnya konforman dengan nol addon opsional. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
+          'Onboarding memasang review lokal AI Diff Reviewer yang wajib (gerbang CI-nya tetap opsional) dan menawarkan tujuh addon opt-in — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, dan Agentkit — yang Anda terima hanya ketika cocok. Skill dan review lokal dipasang di setiap repositori; untuk sisanya, prosesnya mendeteksi setiap addon, meningkatkan yang Anda gunakan, dan menawarkan yang cocok — tidak pernah menambahkan addon hanya untuk melengkapi set. Setiap komponen dipatok pada rilis yang digest SHA256SUMS-nya diterbitkan oleh init.md, dan menjalankannya untuk kedua kalinya tidak mengubah apa pun. Devcontainer yang diterima berakhir pada stack lengkap — agent yang Anda pilih, Herdr terhubung dua arah, dan akun host hanya jika Anda memilih ikut serta. Sebuah repo sepenuhnya konforman dengan nol addon opsional. Gunakan /skill-create dan /agent-create (sub-skill author) untuk menumbuhkan skill, agent, dan command yang sesuai stack di luar baseline.',
       },
       {
         title: 'Rencanakan dan eksekusi',
@@ -746,6 +746,10 @@ export const id: SiteTranslations = {
       { label: 'Telusuri kit', href: '/kit' },
       { label: 'Lihat contoh', href: '/examples' },
       { label: 'Opsional: editor terminal DeepWorkPlan Vim', href: '/kit/vim' },
+      {
+        label: 'Menjalankan banyak agent',
+        href: '/methodology/06-orchestration',
+      },
     ],
   },
 
@@ -809,7 +813,7 @@ export const id: SiteTranslations = {
             id: 'how-to-use',
             question: 'Bagaimana cara menggunakannya?',
             answer:
-              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
+              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
             linkLabel: 'Mulai Cepat',
             linkPath: '/quickstart',
           },
@@ -1018,7 +1022,7 @@ export const id: SiteTranslations = {
             id: 'cost',
             question: 'Berapa biayanya, dan bagaimana efisiensi diukur?',
             answer:
-              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur **saat masuk** — paket awalnya di permulaan sesi — dipublikasikan berdampingan dengan **jalur end-to-end** bernama yang menambahkan apa yang benar-benar dimuat oleh pemicu alur itu sendiri saat pekerjaan sungguh berlanjut (misalnya, resume yang berlanjut ke eksekusi biasanya memuat beberapa kali lipat paket masuknya). Tak satu pun dari kedua angka ini membatasi sebuah sesi: eksekusi nyata juga membaca file repositori itu sendiri, keluaran tool, dan file kerja rencana, yang tak satu pun dihitung dalam ledger ini. Kedua angka diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.',
+              'Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur saat masuk — paket awalnya di permulaan sesi — dipublikasikan berdampingan dengan jalur end-to-end bernama yang menambahkan apa yang benar-benar dimuat oleh pemicu alur itu sendiri saat pekerjaan sungguh berlanjut (misalnya, resume yang berlanjut ke eksekusi biasanya memuat beberapa kali lipat paket masuknya). Tak satu pun dari kedua angka ini membatasi sebuah sesi: eksekusi nyata juga membaca file repositori itu sendiri, keluaran tool, dan file kerja rencana, yang tak satu pun dihitung dalam ledger ini. Kedua angka diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.',
             linkLabel: 'Kepercayaan dan pengungkapan',
             linkPath: '/trust',
           },
