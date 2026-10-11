@@ -9,6 +9,10 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The vendored Deep Work Plan skill moves to 7.5.0 and every public pin to devcontainer-kit v0.2.10 and coding-agents-kit v0.4.0. The agentkit kit page, in every language, documents `ak usage` (read-only quota of every account and profile: live for Claude Code subscriptions, Codex ChatGPT logins and Z.AI keys, `n/d` with a reason elsewhere), profiles (`ak claude @2`, `ak profiles ls`) and `ak setup`. The site's container is re-rendered with v0.2.10, and the addon registry records agentkit v0.4.0, ai-diff-reviewer v3.3.6 and Dailybot v3.23.9.
+
 ## [5.0.51] - 2026-10-11
 
 ### Changed

@@ -3,32 +3,32 @@
     "agentkit": {
       "enabled": true,
       "note": "ak installed machine-wide in this container (coding-agents-kit)",
-      "version": "v0.3.0"
+      "version": "v0.4.0"
     },
     "ai-diff-reviewer": {
       "enabled": true,
       "note": "back-filled on upgrade: already installed (detected v3.3.0)",
-      "version": "v3.3.5"
+      "version": "v3.3.6"
     },
     "dailybot": {
       "enabled": true,
       "note": "repo-level: vendored skill + lifecycle hooks in .agents/settings.json (AGENTS.md)",
-      "version": "v3.23.8"
+      "version": "v3.23.9"
     },
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.4.0"
+      "version": "v7.5.0"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.4.0"
+      "version": "v7.5.0"
     },
     "devcontainer": {
       "enabled": true,
       "note": "dck container: docker/local/dwpwebsite (dck init)",
-      "version": "v0.2.9"
+      "version": "v0.2.10"
     },
     "herdr": {
       "enabled": true,

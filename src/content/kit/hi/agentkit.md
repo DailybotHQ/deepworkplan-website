@@ -10,7 +10,7 @@ order: 8
 
 हर टर्मिनल कोडिंग एजेंट के पास सत्र जारी रखने के अपने फ़्लैग, दूसरे खाते को अलग रखने का अपना तरीका, अपना headless मोड और अनुमति प्रॉम्प्ट छोड़ने का अपना स्विच होता है। **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** इन सभी के ऊपर एक ही कमांड सतह रखता है: `ak <kind> [@profile]`।
 
-यह ऐडऑन इस kit को **DWP v7** (पैक `v7.4.0`) में **headless** प्रत्यायोजन ट्रांसपोर्ट के रूप में एकीकृत करता है। यह वैकल्पिक है: इसके बिना हर कार्य वर्तमान सत्र में ही चलता है, ठीक पहले की तरह। kit स्वयं एक MIT उत्पाद है जो Deep Work Plan के बिना भी काम करता है।
+यह ऐडऑन इस kit को **DWP v7** (पैक `v7.5.0`) में **headless** प्रत्यायोजन ट्रांसपोर्ट के रूप में एकीकृत करता है। यह वैकल्पिक है: इसके बिना हर कार्य वर्तमान सत्र में ही चलता है, ठीक पहले की तरह। kit स्वयं एक MIT उत्पाद है जो Deep Work Plan के बिना भी काम करता है।
 
 ## kit आपको क्या देता है
 
@@ -21,18 +21,31 @@ order: 8
 - **सत्यापित इंस्टॉल।** `ak install <cli>` किसी अनुपस्थित CLI को उसके विक्रेता के आधिकारिक चैनल से एक पिन किए गए संस्करण पर इंस्टॉल करता है, जिसे एक पिन किए गए sha256 या npm रजिस्ट्री की integrity से जाँचा जाता है।
 - **परिचित नाम।** दो alias presets, जो तब तक बंद रहते हैं जब तक आप उन्हें चालू न करें: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) और `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), जिनमें से हर एक एक `ak <kind>` है।
 
+## कोटा, प्रोफ़ाइल और सेटअप
+
+`ak usage` उन सभी खातों का कोटा और उपयोग दिखाता है जिन्हें kit देख सकता है, हर खाते और प्रोफ़ाइल के लिए एक पंक्ति: Claude Code सब्सक्रिप्शन (5 घंटे, साप्ताहिक और प्रति-मॉडल विंडो), ChatGPT से Codex लॉगिन और Z.AI कोडिंग प्लान की कुंजियों के लिए लाइव; Cursor, Grok, xAI और Azure OpenAI कारण के साथ `n/d` दिखाते हैं। यह केवल पढ़ता है: यह कभी लॉगिन रीफ़्रेश नहीं करता, कभी टोकन प्रिंट नहीं करता और कभी किसी प्रोफ़ाइल के भीतर कुछ नहीं लिखता। `--json` टूल्स को वही सूची देता है। उपयोग के endpoint विक्रेताओं के आंतरिक और अनौपचारिक हैं।
+
+```bash
+ak usage              # हर खाते और प्रोफ़ाइल का कोटा
+ak claude @2          # अपने अलग home में दूसरा Claude खाता
+ak profiles ls        # इस मशीन की प्रोफ़ाइलें
+ak setup verify       # क्रमबद्ध जाँचें, हर एक अपने सुधार कमांड के साथ
+```
+
+प्रोफ़ाइलें खातों को अलग रखती हैं: `@default` (या `@1`) CLI का अपना home है, और `@2`, `@work` या `@client-x` अलग लॉगिन हैं जो साथ-साथ चलते हैं। `ak setup probe | verify | docker` केवल-पढ़ने वाला सहायक है, जिसे `agentkit-setup` skill चलाता है: यह मशीन की जाँच करता है, इंस्टॉल को सत्यापित करता है और tag पर पिन की गई, सत्यापित container रेसिपी बनाता है।
+
 ## इंस्टॉल
 
 ```bash
-git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v0.3.0` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
+आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v0.4.0` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v0.3.0`, इंटरफ़ेस 1 |
+| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v0.4.0`, इंटरफ़ेस 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `agentkit` |
 | ट्रांसपोर्ट | headless: हर प्रत्यायोजित एजेंट के लिए एक समर्पित git worktree में एक `ak run` |
 | प्रदान करता है | `subagents`, `cancel_children`, `model_routing` |

@@ -31,7 +31,7 @@ Otto addon sono disponibili oggi — sette opt-in più la revisione locale richi
 
 ### Devcontainer (primo addon)
 
-Un integratore leggero di [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fissato a `v0.2.9`, interfaccia `2`): un template Dev Containers che `dck init` genera nel repository come suo container, più la skill `dck-dockerfile`.
+Un integratore leggero di [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fissato a `v0.2.10`, interfaccia `2`): un template Dev Containers che `dck init` genera nel repository come suo container, più la skill `dck-dockerfile`.
 
 - **Pagina kit:** [Devcontainer](/kit/devcontainer)
 - **Cosa aggiunge:** `docker/local/<service>/Dockerfile` dall'immagine ufficiale del runtime fissata per digest (`python-3.13`, `node-24` o `debian`, nessuna immagine base condivisa), `dev.sh` sopra il launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agenti di coding come livello opt-in, porte solo su loopback, git via SSH tramite l'agente dell'host senza alcuna chiave all'interno, e macchine Herdr per container con il layout standard
@@ -100,7 +100,7 @@ Un integratore leggero di [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepw
 
 ### Agentkit (ottavo addon)
 
-Un integratore leggero di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fissato a `v0.3.0`, interfaccia `1`), il trasporto di delega **headless** dei piani v7.
+Un integratore leggero di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fissato a `v0.4.0`, interfaccia `1`), il trasporto di delega **headless** dei piani v7.
 
 - **Pagina kit:** [Agentkit](/kit/agentkit)
 - **Cosa aggiunge:** un'unica superficie di comando `ak` sugli agenti di coding da terminale, usata per eseguire in modalità headless un'attività delimitata del piano; contribuisce le capacità `subagents`, `cancel_children` e `model_routing` solo a runtime, quando è abilitato, rilevato e su un'interfaccia compatibile

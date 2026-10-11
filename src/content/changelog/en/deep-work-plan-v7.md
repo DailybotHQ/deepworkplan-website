@@ -28,4 +28,4 @@ Benchmark and learnings mode records what each plan teaches, so findings can be 
 
 v7 is a step change in orchestration and auditability, not yet fully hands-off autonomy. Release 7.2.0 closes the gaps that audit found: benchmark and learnings now measure v7 plans, starting a task before its prerequisites are complete is refused, and the test suite runs hermetically (815 of 815 on a clean environment). Agent outcome non-inferiority has not been measured. Existing plans keep their recorded generation and are never migrated implicitly; new plans use the v7 contract by default.
 
-Installed skill release: **7.4.0**, stable since 7.0.0.
+Installed skill release: **7.5.0**, stable since 7.0.0.
