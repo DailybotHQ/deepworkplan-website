@@ -107,6 +107,8 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
   ./setup.sh --verify        # non-zero exit means a file does not match — stop
   ```
 
+  Releases are **checksummed, not signed** (signing is a documented next step). Everything is open and
+  diffable, so you can also compare any file against the repository at its tag.
 - **Pinned releases.** Every component this prompt installs is pinned to one release. Before you use
   a release's `SHA256SUMS`, check the file itself against the digest below
   (`shasum -a 256 SHA256SUMS`, or `sha256sum` on Linux); a mismatch means stop.
@@ -120,9 +122,6 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
   | deepworkplan-vim | `v0.6.0` | `9d17cf01a9b442f116af7d5f1bdb90d4e80b5567e4db93331ed10cf3ce6b2425` |
   | ai-diff-reviewer | `v3.3.8` | `225004727d5f1b77edc7219607f5eaa684cc7f3ea88873be11760712d883c1a6` |
   | agent-skill | `v3.23.11` | none published — the skills CLI records a content hash in `skills-lock.json` |
-
-  Releases are **checksummed, not signed** (signing is a documented next step). Everything is open and
-  diffable, so you can also compare any file against the repository at its tag.
 - **Report a problem.** Report security issues **privately through GitHub's vulnerability reporting**
   on the relevant repository — `https://github.com/DailybotHQ/deepworkplan-skill/security`
   or `https://github.com/DailybotHQ/deepworkplan-website/security` — not as a public

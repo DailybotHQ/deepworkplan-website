@@ -692,7 +692,7 @@ export const en: SiteTranslations = {
         description:
           'Treat the prompt and the skill as untrusted until you have checked them. Both are open source and MIT; the skill is Markdown-first with no network calls and no telemetry. Each release publishes a SHA256SUMS over the shipped skill, so you can confirm your copy matches before running it. Releases are checksummed, not signed (signing is a documented next step).',
         commands: [
-          'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -714,7 +714,7 @@ export const en: SiteTranslations = {
       {
         title: 'Local review and opt-in addons',
         description:
-          'Onboarding installs the required AI Diff Reviewer local review (its CI gate stays optional) and offers seven opt-in addons — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, and Agentkit — that you accept only when they fit. A repo is fully conformant with zero optional addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
+          'Onboarding installs the required AI Diff Reviewer local review (its CI gate stays optional) and offers seven opt-in addons — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, and Agentkit — that you accept only when they fit. Every component is pinned to a release whose SHA256SUMS digest init.md publishes, and the pass is idempotent: absent components are offered, older ones upgrade in place, current ones are left alone. An accepted devcontainer ends in the full stack — the agents you chose, Herdr wired both ways, and host accounts only if you opt in. A repo is fully conformant with zero optional addons. Use /skill-create and /agent-create (the author sub-skill) to grow stack-appropriate skills, agents, and commands beyond the baseline.',
       },
       {
         title: 'Plan and execute',
@@ -742,6 +742,7 @@ export const en: SiteTranslations = {
         label: 'Optional: the DeepWorkPlan Vim terminal editor',
         href: '/kit/vim',
       },
+      { label: 'Running many agents', href: '/methodology/06-orchestration' },
     ],
   },
   faqPage: {
