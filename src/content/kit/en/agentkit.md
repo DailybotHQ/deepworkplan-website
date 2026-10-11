@@ -25,7 +25,7 @@ This addon integrates the kit into **DWP v7** (pack `v7.5.1`) as the **headless*
 
 The kit treats every login or key you hold as an **account**: one CLI × one profile. `@default` (or `@1`) is the CLI's own home; `@2`, `@work` or `@client-x` are separate logins, each in its own directory under the profiles root, that run side by side. `ak profiles` lists them with their login state and the names of their keys; `ak profiles --json` gives tools the same list (schema `profiles-v1`).
 
-`ak usage` lists the quota and usage of every account the kit can see, one row per account and profile: live for Claude Code subscriptions (5-hour, weekly and per-model windows), Codex ChatGPT logins and Z.AI coding-plan keys; Cursor, Grok, xAI and Azure OpenAI show `n/d` with the reason. It is read-only: it never refreshes a login, never prints a token and never writes under a profile. The usage endpoints are vendor-internal and unofficial.
+`ak usage` lists the quota and usage of every account the kit can see, one row per account and profile: live for Claude Code subscriptions (5-hour, weekly and per-model windows), Codex ChatGPT logins and Z.AI coding-plan keys; Cursor, Grok, xAI and Azure OpenAI show `n/d` with the reason. It is read-only: it never refreshes a login, never prints a token and never writes under a profile. `--json` gives tools the same list (schema `usage-v1`). The usage endpoints are vendor-internal and unofficial.
 
 `ak pick <kind>` reads the same rows and names the account with the most room. `--count N` returns up to N accounts, best first; `--exclude @<profile>` keeps a busy one out; `--model` counts one model's weekly window; `--need 5h:40` refuses to pick without that much room. `--json` gives the schema `pick-v1`.
 
