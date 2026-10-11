@@ -31,7 +31,7 @@ Oito addons são distribuídos hoje — sete opcionais mais a revisão local obr
 
 ### Devcontainer (primeiro addon)
 
-Um integrador leve do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v0.2.6`, interface `2`): um modelo de Dev Containers que `dck init` gera no repositório como o seu próprio contentor, mais a skill `dck-dockerfile`.
+Um integrador leve do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v0.2.7`, interface `2`): um modelo de Dev Containers que `dck init` gera no repositório como o seu próprio contentor, mais a skill `dck-dockerfile`.
 
 - **Página do kit:** [Devcontainer](/kit/devcontainer)
 - **O que adiciona:** `docker/local/<service>/Dockerfile` a partir da imagem oficial do runtime fixada por digest (`python-3.13`, `node-24` ou `debian`, sem imagem base partilhada), `dev.sh` sobre o lançador `dck` (`up`, `shell`, `rebuild`, `doctor`), agentes de programação como camada opcional, portas apenas de loopback, git sobre SSH através do agente do anfitrião sem nenhuma chave lá dentro, e máquinas Herdr por contentor com o layout padrão

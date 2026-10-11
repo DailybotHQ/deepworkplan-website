@@ -31,7 +31,7 @@ Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục b�
 
 ### Devcontainer (addon đầu tiên)
 
-Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.6`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
+Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.7`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
 
 - **Trang kit:** [Devcontainer](/kit/devcontainer)
 - **Bổ sung:** `docker/local/<service>/Dockerfile` từ image chính thức của runtime được ghim theo digest (`python-3.13`, `node-24` hoặc `debian`, không có image cơ sở dùng chung), `dev.sh` chạy trên trình khởi chạy `dck` (`up`, `shell`, `rebuild`, `doctor`), coding agent như một lớp opt-in, cổng chỉ dùng loopback, git qua SSH thông qua agent của máy host mà không có khóa nào bên trong, và máy Herdr cho mỗi container với bố cục tiêu chuẩn
