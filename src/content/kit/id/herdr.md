@@ -56,7 +56,7 @@ herdr-peers tidak mengautentikasi pengirim: kolom `from=` dalam cap adalah sebua
 
 ## Container dan host
 
-Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v0.2.6`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya.
+Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v0.2.7`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya.
 
 ## Herdr atau agentkit
 

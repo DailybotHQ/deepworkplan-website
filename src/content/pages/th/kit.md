@@ -10,7 +10,7 @@ kit คือทุกอย่างที่คุณต้องใช้เ�
 `DailybotHQ/deepworkplan-skill`
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.3.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.3.2 --skill deepworkplan -y
 ```
 
 แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายต้องมีคำขออย่างชัดเจน
@@ -67,10 +67,10 @@ skill ของ Deep Work Plan คือตัวกำหนดเส้นท�
 - **สกิล Deep Work Plan** — สร้าง ดำเนินการ ตรวจสอบ ทำต่อ และปรับปรุงแผน ไม่ต้องใช้ส่วนเสริมใด
 - **[herdr](/th/kit/herdr)** — peer ใน pane ของ Herdr บนเครื่องใดก็ได้: การมอบหมายงานแบบโต้ตอบที่มีการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียว ปักหมุดที่ `herdr-peers@v0.1.0`
 - **[agentkit](/th/kit/agentkit)** — คำสั่ง ak เดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว: ทำงานอัตโนมัติโดยค่าเริ่มต้นพร้อมทางเลือกปิด และการมอบหมายงานแบบ headless ใน worktree ปักหมุดที่ `coding-agents-kit@v0.3.0`
-- **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และไม่มี SSH key อยู่ข้างใน ปักหมุดที่ `devcontainer-kit@v0.2.6`
+- **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และไม่มี SSH key อยู่ข้างใน ปักหมุดที่ `devcontainer-kit@v0.2.7`
 - **[vim](/th/kit/vim)** — ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown ปักหมุดที่ `deepworkplan-vim@v0.6.0`
 
-รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7: `v7.3.1`
+รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7: `v7.3.2`
 
 ### ตัวอย่าง
 

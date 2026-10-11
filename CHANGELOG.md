@@ -9,6 +9,10 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The vendored Deep Work Plan skill moves to 7.3.2 and every public pin to devcontainer-kit v0.2.7, whose containers start persisted JSON files as `{}` so Claude Code runs on first start (an empty `~/.claude.json` stopped it in every new container). The site's container is re-rendered with v0.2.7.
+
 ## [5.0.48] - 2026-10-11
 
 ### Changed

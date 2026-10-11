@@ -56,7 +56,7 @@ herdr-peers no autentica al remitente: el campo `from=` de un sello es una afirm
 
 ## Contenedores y el host
 
-Con el addon [devcontainer](/kit/devcontainer) sobre devcontainer-kit `v0.2.6`, cada contenedor dck incluye herdr-peers y se une a la malla en `dck up`: sus agentes pueden consultar a agentes del host, de los demás contenedores y de los otros contenedores loopback del host, y recibir la respuesta. `dck setup` instala un herdr-peers verificado en el host, así que los agentes del host también responden. El listener del host y las claves adicionales que dejan entrar a otros contenedores son decisiones tuyas en el perfil del host del kit; este addon nunca los configura.
+Con el addon [devcontainer](/kit/devcontainer) sobre devcontainer-kit `v0.2.7`, cada contenedor dck incluye herdr-peers y se une a la malla en `dck up`: sus agentes pueden consultar a agentes del host, de los demás contenedores y de los otros contenedores loopback del host, y recibir la respuesta. `dck setup` instala un herdr-peers verificado en el host, así que los agentes del host también responden. El listener del host y las claves adicionales que dejan entrar a otros contenedores son decisiones tuyas en el perfil del host del kit; este addon nunca los configura.
 
 ## Herdr o agentkit
 

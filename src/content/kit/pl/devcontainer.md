@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z którego mogą korzystać ludzie, edytory i agenci kodujący. W **DWP v7** (pakiet `v7.3.1`) ten addon integruje **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produkt na licencji MIT działający bez Deep Work Plan. Jest opcjonalny: repozytorium bez niego jest w pełni zgodne.
+Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z którego mogą korzystać ludzie, edytory i agenci kodujący. W **DWP v7** (pakiet `v7.3.2`) ten addon integruje **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produkt na licencji MIT działający bez Deep Work Plan. Jest opcjonalny: repozytorium bez niego jest w pełni zgodne.
 
 ## Co zapewnia devcontainer-kit
 
@@ -21,15 +21,15 @@ Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z
 ## Instalacja
 
 ```bash
-git clone --branch v0.2.6 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.7 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v0.2.6`: `v0.2.0` nie jest obsługiwane.
+Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v0.2.7`: `v0.2.0` nie jest obsługiwane.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, tag `v0.2.6`, interfejs 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, tag `v0.2.7`, interfejs 2 |
 | Klucz rejestru | `devcontainer` w `.dwp/config.json` |
 | Konfiguracja repozytorium | `.devcontainer/dck.toml` |
 | Wykrywanie | `dck doctor --json` |

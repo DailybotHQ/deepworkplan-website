@@ -56,7 +56,7 @@ herdr-peers does not authenticate the sender: the `from=` field in a stamp is a 
 
 ## Containers and the host
 
-With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v0.2.6`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them.
+With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v0.2.7`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them.
 
 ## Herdr or agentkit
 
