@@ -39,7 +39,7 @@ clis = ["claude", "codex", "cursor", "opencode", "pi", "cline", "grok"]
 # Register the container as a Herdr machine on `dck up` (needs ssh_port).
 machine = true
 label = "DWP website"
-# The sidebar `dck up` creates inside the container: "standard" (Home · Editor ·
+# The sidebar `dck up` creates inside the container: "standard" (App · Editor ·
 # Development · Agents) or "none".
 layout = "standard"
 # `dck up` makes the other dck containers (and the host, with host_machine)

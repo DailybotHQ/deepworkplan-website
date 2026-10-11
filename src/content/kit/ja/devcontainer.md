@@ -8,28 +8,28 @@ order: 1
 
 # Devcontainer アドオン
 
-リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.3.3`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
+リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.4.0`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
 
 ## devcontainer-kit が提供するもの
 
 - **テンプレート。** [Dev Containers](https://containers.dev) 仕様に基づき、`dck init` が一つの固定レイアウトでリポジトリに展開します：`.devcontainer/devcontainer.json`、`docker/local/<service>/Dockerfile`、`docker/local/docker-compose.yaml`、`dev.sh`。後から再実行すると調整を行い、あなたの編集を上書きすることはありません。既存ファイルへの変更はすべて事前に提示され、同意が必要です。
 - **リポジトリ専用のコンテナ。** Dockerfile はランタイムの公式イメージ（`node-24`、`python-3.13`、`debian`）をダイジェストで固定して起点とし、キットのビルド手順を `docker/local/<service>/dck/` にコピーします。共有ベースイメージは一切使いません。
 - **`dev.sh` と `dck`。** `bash dev.sh up` は素のターミナルからコンテナをビルドし、起動し、アタッチします。`shell`、`rebuild`、`doctor` などのコマンドは、VS Code や Cursor の有無を問わず動作します。
-- **Herdr は双方向。** ホストの [Herdr](https://herdr.dev) は、ループバック専用の SSH サーバーを通じて各コンテナを一台のマシンとしてアタッチし、コンテナは標準のサイドバー（Home、Editor、Development、Agents）付きで開きます。コンテナ内では [herdr-peers](/kit/herdr) により、エージェントがホストや他のコンテナにいるエージェントに問い合わせられます。
+- **Herdr は双方向。** ホストの [Herdr](https://herdr.dev) は、ループバック専用の SSH サーバーを通じて各コンテナを一台のマシンとしてアタッチし、コンテナは標準のサイドバー（App、Editor、Development、Agents）付きで開きます。すべてのワークスペースとペイン（後から開いたものも含む）は、アプリのパス（既定では `/app`）で起動します。コンテナ内では [herdr-peers](/kit/herdr) により、エージェントがホストや他のコンテナにいるエージェントに問い合わせられます。
 - **`dck-dockerfile` スキル。** エージェントが依頼に応じてリポジトリのコンテナを作成または再生成し、実際のビルドでそれを証明します。
 
 ## インストール
 
 ```bash
-git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.2.8` に固定してください。`v0.2.0` はサポート対象外です。
+要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.2.9` に固定してください。`v0.2.0` はサポート対象外です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.2.8`、インターフェース 2 |
+| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.2.9`、インターフェース 2 |
 | レジストリキー | `.dwp/config.json` 内の `devcontainer` |
 | リポジトリごとの設定 | `.devcontainer/dck.toml` |
 | 検出 | `dck doctor --json` |

@@ -28,4 +28,4 @@ Kıyaslama ve öğrenimler modu, her planın neyi öğrettiğini kaydeder; böyl
 
 v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müdahalesiz özerklik değildir. 7.2.0 sürümü, bu denetimin bulduğu boşlukları kapatır: kıyaslama ve öğrenimler artık v7 planlarını ölçer, ön koşulları tamamlanmadan bir göreve başlamak reddedilir ve test paketi hermetik biçimde çalışır (temiz bir ortamda 815 içinde 815). Ajan çıktılarının aşağı olmama durumu ölçülmemiştir. Mevcut planlar kayıtlı nesillerini korur ve örtük olarak asla taşınmaz; yeni planlar varsayılan olarak v7 sözleşmesini kullanır.
 
-Yüklü skill sürümü: **7.3.3**, 7.0.0'dan beri kararlı.
+Yüklü skill sürümü: **7.4.0**, 7.0.0'dan beri kararlı.

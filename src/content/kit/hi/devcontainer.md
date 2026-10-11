@@ -8,28 +8,28 @@ order: 1
 
 # Devcontainer addon
 
-रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.3.3`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
+रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.4.0`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
 
 ## devcontainer-kit क्या प्रदान करता है
 
 - **एक टेम्पलेट**, जो [Dev Containers](https://containers.dev) विनिर्देश पर आधारित है और जिसे `dck init` रिपॉज़िटरी में एक निश्चित लेआउट में रेंडर करता है: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` और `dev.sh`। बाद में दोबारा चलाने पर यह समाधान (reconcile) करता है और आपके संपादनों को कभी अधिलेखित नहीं करता; किसी मौजूदा फ़ाइल में हर बदलाव पहले दिखाया जाता है और उसके लिए सहमति आवश्यक है।
 - **रिपॉज़िटरी का अपना container।** Dockerfile runtime की आधिकारिक image से शुरू होता है, जो digest पर पिन की गई है — `node-24`, `python-3.13` या `debian` — और kit के build चरणों को `docker/local/<service>/dck/` में कॉपी करता है। कोई साझा base image शामिल नहीं है।
 - **`dev.sh` और `dck`।** `bash dev.sh up` एक सामान्य टर्मिनल से container को build करता है, शुरू करता है और उससे जुड़ता है; `shell`, `rebuild`, `doctor` और बाकी कमांड VS Code या Cursor के साथ या उनके बिना काम करती हैं।
-- **दोनों दिशाओं में Herdr।** होस्ट का [Herdr](https://herdr.dev) हर container को केवल loopback पर सुनने वाले SSH सर्वर के माध्यम से एक मशीन के रूप में जोड़ता है, और container मानक साइडबार के साथ खुलता है: Home, Editor, Development और Agents। भीतर, [herdr-peers](/kit/herdr) एजेंटों को होस्ट पर और दूसरे containers में मौजूद एजेंटों से पूछने देता है।
+- **दोनों दिशाओं में Herdr।** होस्ट का [Herdr](https://herdr.dev) हर container को केवल loopback पर सुनने वाले SSH सर्वर के माध्यम से एक मशीन के रूप में जोड़ता है, और container मानक साइडबार के साथ खुलता है: App, Editor, Development और Agents। हर workspace और pane, बाद में खोले गए भी, ऐप पाथ (डिफ़ॉल्ट रूप से `/app`) में शुरू होते हैं। भीतर, [herdr-peers](/kit/herdr) एजेंटों को होस्ट पर और दूसरे containers में मौजूद एजेंटों से पूछने देता है।
 - **`dck-dockerfile` skill।** एक एजेंट अनुरोध पर किसी रिपॉज़िटरी का container बनाता या दोबारा उत्पन्न करता है और उसे एक वास्तविक build से सिद्ध करता है।
 
 ## इंस्टॉल
 
 ```bash
-git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.2.8` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.2.9` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.2.8`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.2.9`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |

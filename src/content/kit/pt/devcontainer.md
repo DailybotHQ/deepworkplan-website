@@ -8,28 +8,28 @@ order: 1
 
 # Addon devcontainer
 
-Dê ao repositório um contêiner de desenvolvimento reproduzível e isolado, que pessoas, editores e agentes de código possam usar igualmente. No **DWP v7** (pack `v7.3.3`), este addon integra o **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, um produto MIT que funciona sem o Deep Work Plan. É opcional: um repositório é totalmente conforme sem ele.
+Dê ao repositório um contêiner de desenvolvimento reproduzível e isolado, que pessoas, editores e agentes de código possam usar igualmente. No **DWP v7** (pack `v7.4.0`), este addon integra o **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, um produto MIT que funciona sem o Deep Work Plan. É opcional: um repositório é totalmente conforme sem ele.
 
 ## O que o devcontainer-kit fornece
 
 - **Um template**, baseado na especificação [Dev Containers](https://containers.dev), que `dck init` renderiza no repositório em uma estrutura fixa: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` e `dev.sh`. Executado novamente depois, ele reconcilia e nunca sobrescreve suas edições; qualquer mudança em um arquivo existente é mostrada antes e exige consentimento.
 - **O contêiner próprio do repositório.** O Dockerfile parte da imagem oficial do runtime fixada por digest (`node-24`, `python-3.13` ou `debian`) e copia as etapas de build do kit para `docker/local/<service>/dck/`. Nenhuma imagem base compartilhada está envolvida.
 - **`dev.sh` e `dck`.** `bash dev.sh up` constrói, inicia e se conecta ao contêiner a partir de um terminal comum; `shell`, `rebuild`, `doctor` e os demais funcionam com ou sem VS Code ou Cursor.
-- **Herdr nos dois sentidos.** O [Herdr](https://herdr.dev) do host conecta cada contêiner como uma máquina por meio de um servidor SSH restrito ao loopback, e o contêiner abre com a barra lateral padrão: Home, Editor, Development e Agents. Dentro dele, o [herdr-peers](/kit/herdr) permite que agentes consultem agentes no host e em outros contêineres.
+- **Herdr nos dois sentidos.** O [Herdr](https://herdr.dev) do host conecta cada contêiner como uma máquina por meio de um servidor SSH restrito ao loopback, e o contêiner abre com a barra lateral padrão: App, Editor, Development e Agents. Cada espaço de trabalho e cada painel, inclusive os abertos depois, começam no caminho da aplicação (`/app` por padrão). Dentro dele, o [herdr-peers](/kit/herdr) permite que agentes consultem agentes no host e em outros contêineres.
 - **A skill `dck-dockerfile`.** Um agente cria ou regenera o contêiner de um repositório quando solicitado e o comprova com um build real.
 
 ## Instalação
 
 ```bash
-git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisitos: `bash` 3.2 ou mais recente e `python3` 3.11 ou mais recente em um host Linux ou macOS, e Docker com Compose v2 para os comandos do contêiner. Verifique uma versão com o asset `SHA256SUMS` dela. Fixe a `v0.2.8`: a `v0.2.0` não tem suporte.
+Requisitos: `bash` 3.2 ou mais recente e `python3` 3.11 ou mais recente em um host Linux ou macOS, e Docker com Compose v2 para os comandos do contêiner. Verifique uma versão com o asset `SHA256SUMS` dela. Fixe a `v0.2.9`: a `v0.2.0` não tem suporte.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/devcontainer-kit`, tag `v0.2.8`, interface 2 |
+| Produto | `DailybotHQ/devcontainer-kit`, tag `v0.2.9`, interface 2 |
 | Chave de registro | `devcontainer` em `.dwp/config.json` |
 | Configuração por repositório | `.devcontainer/dck.toml` |
 | Detecção | `dck doctor --json` |
