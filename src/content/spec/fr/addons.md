@@ -31,7 +31,7 @@ Huit addons sont actifs aujourd’hui — sept opt-in plus la revue locale requi
 
 ### Devcontainer (premier addon)
 
-Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.2.11`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
+Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.3.0`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
 
 - **Page kit :** [Devcontainer](/kit/devcontainer)
 - **Ce qu'il ajoute :** `docker/local/<service>/Dockerfile` à partir de l'image officielle du runtime épinglée par digest (`python-3.13`, `node-24` ou `debian`, sans image de base partagée), `dev.sh` au-dessus du lanceur `dck` (`up`, `shell`, `rebuild`, `doctor`), les agents de code comme couche optionnelle, des ports limités au loopback, git via SSH à travers l'agent de l'hôte sans aucune clé à l'intérieur, et des machines Herdr par conteneur avec la disposition standard
@@ -44,7 +44,7 @@ Une connexion optionnelle à l'**équipe Dailybot** du développeur pour la visi
 
 - **Page kit :** [Dailybot](/kit/dailybot) — référence complète des capacités
 - **Ce que l'addon DWP connecte :** quatre rapports du cycle de vie du plan (kickoff, tâche significative, bloqué, achèvement) via la sous-skill `report` de dailybot ; application déterministe optionnelle par hooks (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill jumelée :** installer [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (actuellement **3.23.11**) expose **17 capacités** — chat sur Slack/Teams/Discord/Google Chat, check-ins, création de formulaires, ask AI, kudos, tableaux et tâches Plan, labels d'organisation, clés API par dépôt (`.dailybot/env.json`), e-mail et plus. L'addon DWP ne connecte que **report** ; les autres capacités sont invoquées directement via la skill Dailybot
+- **Skill jumelée :** installer [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (actuellement **3.23.12**) expose **17 capacités** — chat sur Slack/Teams/Discord/Google Chat, check-ins, création de formulaires, ask AI, kudos, tableaux et tâches Plan, labels d'organisation, clés API par dépôt (`.dailybot/env.json`), e-mail et plus. L'addon DWP ne connecte que **report** ; les autres capacités sont invoquées directement via la skill Dailybot
 - **Auth :** entièrement reportée à la skill Dailybot (`dailybot login` ou `DAILYBOT_API_KEY`) ; cet addon ne stocke jamais de credentials
 - **Garde-fou neutre vis-à-vis du fournisseur :** le DWP central a **zéro** dépendance à Dailybot ; ne jamais installer automatiquement pour tout le monde
 - **Quand proposé :** le développeur ou l'équipe utilise déjà Dailybot, ou demande explicitement des rapports d'équipe
@@ -72,7 +72,7 @@ Un `DESIGN.md` à portée de surface d'interface que tout agent de codage lit po
 L’**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) dote la passe de sécurité obligatoire du Final Review d’une revue locale structurée et bloque optionnellement les pull requests en CI. Depuis le standard 2.3.0, la **revue locale fait partie du socle** ; seule la surface CI est optionnelle. Cet addon est actualisé automatiquement à chaque publication : le tag indiqué ci-dessous est donc celui en vigueur au moment de la rédaction et peut être en retard sur la copie vendorisée — le `SKILL.md` propre à l’addon et ses releases GitHub font foi pour le tag réellement installé. L’installation est toujours épinglée à un tag publié, jamais à une branche mobile.
 
 - **Page kit :** [AI Diff Reviewer](/kit/ai-diff-reviewer) — référence complète des capacités
-- **Requise à l’onboarding (Phase 7a) :** installation de la skill vendorisée épinglée à un tag (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) plus un `.review/extension.md` adapté au dépôt (via `generate-extension`), sous le consentement de l’onboarding ; une mise à niveau ciblée de la harness réconcilie les deux lorsqu’ils manquent ; un refus est enregistré comme exception déclarée et signalé par `verify` jusqu’à son installation
+- **Requise à l’onboarding (Phase 7a) :** installation de la skill vendorisée épinglée à un tag (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer -y`) plus un `.review/extension.md` adapté au dépôt (via `generate-extension`), sous le consentement de l’onboarding ; une mise à niveau ciblée de la harness réconcilie les deux lorsqu’ils manquent ; un refus est enregistré comme exception déclarée et signalé par `verify` jusqu’à son installation
 - **Requise dans chaque Final Review :** la passe de sécurité exécute le flux parent par défaut de la skill upstream sur l’ensemble des changements accumulé et ajoute sa sortie au `analysis_results/SECURITY_REVIEW.md` local au plan (dans le dossier propre du plan, jamais à la racine du dépôt) ; une skill ou une extension manquante est un constat enregistré `local reviewer not installed` — jamais un saut silencieux, et jamais un amorçage surprise : l'installation appartient au consentement de l'onboarding ou à une invocation explicite de l'addon ; les **constats critiques vérifiés** d’un passage terminé bloquent l’achèvement jusqu’à correction ou acceptation explicite (v3, BC-07 — les affirmations critiques non vérifiées arrivent comme avertissements annotés, et une revue `incomplete` ou `timeout` n’est pas une passe propre, BC-04)
 - **Surface CI optionnelle (Flow B) :** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`) via la sous-skill upstream `setup`, plus les compagnons `apply-review` (lecture seule) et `address-review` (commite, pousse et réarme ; nouveau en v3.1.1) comme commodités invocables par le développeur — proposé explicitement, jamais installé sans demande, jamais le défaut, jamais une tâche du plan
 - **Jamais bloquant (invocation uniquement) :** une revue locale qui peut démarrer mais échoue sur une erreur avertit une fois, enregistre et poursuit ; elle ne fait jamais échouer la tâche
@@ -82,7 +82,7 @@ L’**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 
 ### Herdr (sixième addon)
 
-Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v0.1.0`, protocole `1`), le transport de délégation **interactif** des plans v7.
+Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v0.2.1`, protocole `1`), le transport de délégation **interactif** des plans v7.
 
 - **Page kit :** [Herdr](/kit/herdr)
 - **Ce qu'il ajoute :** un plan peut confier une tâche bornée à un agent de code dans un autre panneau [Herdr](https://herdr.dev), sur la même machine ou sur une machine que Herdr atteint via SSH, et enregistrer son unique réponse autorisée dans le journal
@@ -91,7 +91,7 @@ Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 
 ### DeepWorkPlan Vim (septième addon)
 
-Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v0.6.0`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
+Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v0.7.0`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
 
 - **Page kit :** [DeepWorkPlan Vim](/kit/vim)
 - **Ce qu'il ajoute :** une surface d’édition optionnelle, au niveau de la machine, pour les agents et les humains — un index des commandes généré, un navigateur de plans en lecture seule et une visionneuse Markdown ; chaque affirmation est lue depuis la surface lisible par machine épinglée du produit
@@ -100,7 +100,7 @@ Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepw
 
 ### Agentkit (huitième addon)
 
-Un intégrateur léger de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, épinglé à `v0.4.0`, interface `1`), le transport de délégation **headless** (sans interface) des plans v7.
+Un intégrateur léger de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, épinglé à `v0.5.0`, interface `1`), le transport de délégation **headless** (sans interface) des plans v7.
 
 - **Page kit :** [Agentkit](/kit/agentkit)
 - **Ce qu'il ajoute :** une surface de commande `ak` unique au-dessus des agents de code en terminal, utilisée pour exécuter une tâche de plan bornée en mode headless ; il n’apporte les capacités `subagents`, `cancel_children` et `model_routing` qu’à l’exécution, lorsqu’il est activé, détecté et sur une interface compatible

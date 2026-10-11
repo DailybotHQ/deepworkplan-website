@@ -10,7 +10,7 @@ order: 8
 
 Every terminal coding agent has its own flags for continuing a session, its own way to keep a second account apart, its own headless mode and its own switch for skipping permission prompts. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** puts one command surface over all of them: `ak <kind> [@profile]`.
 
-This addon integrates the kit into **DWP v7** (pack `v7.5.1`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
+This addon integrates the kit into **DWP v7** (pack `v7.6.0`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
 
 ## What the kit gives you
 
@@ -48,15 +48,15 @@ For long, interactive lanes, each lane runs in a [Herdr](/kit/herdr) pane on its
 ## Install
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.4.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.5.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v0.4.0`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v0.5.0`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |

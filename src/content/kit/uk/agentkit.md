@@ -10,7 +10,7 @@ order: 8
 
 Кожен термінальний агент для програмування має власні прапорці для продовження сесії, власний спосіб відокремити другий обліковий запис, власний headless-режим і власний перемикач для пропуску запитів дозволів. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** накладає на всіх них одну командну поверхню: `ak <kind> [@profile]`.
 
-Цей аддон інтегрує kit у **DWP v7** (пакет `v7.5.1`) як **headless**-транспорт делегування. Він опційний: без нього кожне завдання виконується в поточній сесії, як і раніше. Сам kit — це продукт за ліцензією MIT, який працює без Deep Work Plan.
+Цей аддон інтегрує kit у **DWP v7** (пакет `v7.6.0`) як **headless**-транспорт делегування. Він опційний: без нього кожне завдання виконується в поточній сесії, як і раніше. Сам kit — це продукт за ліцензією MIT, який працює без Deep Work Plan.
 
 ## Що дає kit
 
@@ -48,15 +48,15 @@ Skill `agentkit-orchestrate` (`ak --skill orchestrate`) навчає агент�
 ## Встановлення
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v0.4.0`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
+Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v0.5.0`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/coding-agents-kit`, тег `v0.4.0`, інтерфейс 1 |
+| Продукт | `DailybotHQ/coding-agents-kit`, тег `v0.5.0`, інтерфейс 1 |
 | Ключ реєстру | `agentkit` у `.dwp/config.json` |
 | Транспорт | headless: один `ak run` на делегата в окремому git worktree |
 | Надає | `subagents`, `cancel_children`, `model_routing` |

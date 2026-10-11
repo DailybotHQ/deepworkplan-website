@@ -10,7 +10,7 @@ The kit is everything you need to run the methodology in practice. It is install
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y
 ```
 
 The current 7.x pack creates new plans with v7 by default. Existing plans retain their recorded generation; migration requires an explicit request.
@@ -52,7 +52,7 @@ and a generic fallback.
 Capabilities the onboard flow layers onto a repo. Seven are optional and never part of the AI-first baseline; the AI Diff Reviewer local review is required since standard 2.3.0:
 
 - **Devcontainer** — a reproducible, isolated dev container with persistent AI-CLI auth.
-- **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.23.11: chat, check-ins, forms, ask AI, Plan, per-repo API keys, and more).
+- **Dailybot** — plan-lifecycle reporting (kickoff, significant task, blocked, completion) for teams using Dailybot, plus access to the full Dailybot agent skill (3.23.12: chat, check-ins, forms, ask AI, Plan, per-repo API keys, and more).
 - **Dependency upgrade** — package-manager-agnostic, batched, validated, revertible upgrades.
 - **Design system** — an interface-scoped `DESIGN.md` (at `docs/DESIGN.md`, referenced from `AGENTS.md`) reasoned from the repo's real design source, with profiles for visual UI, styled CLI output, and conversational messaging, so agents generate on-brand interface output; a detected design system makes the offer mandatory while installation stays acceptance-gated — the visual profile is strongly recommended when detected, the CLI and conversational profiles are recommended when detected and always asked about.
 - **AI Diff Reviewer** — the required local review: onboarding installs [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, and every Final Review's security pass runs it; optional Flow B adds a CI PR merge gate sharing the same extension, offered explicitly and never installed unrequested.
@@ -65,12 +65,12 @@ Capabilities the onboard flow layers onto a repo. Seven are optional and never p
 **The methodology works alone. Addons amplify it.** Each addon is a thin integrator inside the Deep Work Plan skill, pinned by tag to a product with its own repository, release and interface version. Every product works without Deep Work Plan, and no addon is required.
 
 - **Deep Work Plan skill** — Create, execute, verify, resume and refine plans. Needs no addon.
-- **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v0.1.0`.
-- **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: autonomy by default with an opt-out, and headless delegation in a worktree. Pinned at `coding-agents-kit@v0.4.0`.
-- **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, no SSH key inside. Pinned at `devcontainer-kit@v0.2.11`.
-- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.6.0`.
+- **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v0.2.1`.
+- **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: autonomy by default with an opt-out, and headless delegation in a worktree. Pinned at `coding-agents-kit@v0.5.0`.
+- **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, no SSH key inside. Pinned at `devcontainer-kit@v0.3.0`.
+- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v0.7.0`.
 
-The addon registry and descriptors ship in Deep Work Plan v7: `v7.5.1`
+The addon registry and descriptors ship in Deep Work Plan v7: `v7.6.0`
 
 ### Examples
 

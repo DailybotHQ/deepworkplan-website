@@ -53,11 +53,11 @@ Read and follow the instructions at https://deepworkplan.com/init.md to make thi
 To install the skill by hand, pinned to its release and verified first:
 
 ```bash
-git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill
-curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS
+git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill
+curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS
 shasum -a 256 SHA256SUMS   # compare with the digest in /init.md → Pinned releases
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
-cd .. && npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
+cd .. && npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y
 ```
 
 Then run `/deepworkplan-onboard` in your agent, and `/dwp-create <goal>` → `/dwp-execute` → `/dwp-verify` from there.

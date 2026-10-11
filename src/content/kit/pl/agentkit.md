@@ -10,7 +10,7 @@ order: 8
 
 Każdy terminalowy agent kodujący ma własne flagi do kontynuowania sesji, własny sposób oddzielenia drugiego konta, własny tryb headless i własny przełącznik pomijania pytań o uprawnienia. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** nakłada na nie wszystkie jedną powierzchnię poleceń: `ak <kind> [@profile]`.
 
-Ten addon integruje kit z **DWP v7** (pakiet `v7.5.1`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
+Ten addon integruje kit z **DWP v7** (pakiet `v7.6.0`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
 
 ## Co daje kit
 
@@ -48,15 +48,15 @@ W przypadku długich, interaktywnych torów każdy tor działa w panelu [Herdr](
 ## Instalacja
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v0.4.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
+Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v0.5.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, tag `v0.4.0`, interfejs 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, tag `v0.5.0`, interfejs 1 |
 | Klucz rejestru | `agentkit` w `.dwp/config.json` |
 | Transport | headless: jedno `ak run` na delegata w dedykowanym git worktree |
 | Zapewnia | `subagents`, `cancel_children`, `model_routing` |

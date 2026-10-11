@@ -10,7 +10,7 @@ Kit adalah semua yang Anda perlukan untuk menjalankan metodologi dalam praktik. 
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y
 ```
 
 Paket 7.x saat ini membuat rencana baru menggunakan v7 secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan permintaan eksplisit.
@@ -66,12 +66,12 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Tujuh bersifat opsional 
 **Metodologi bekerja sendiri. Addon memperkuatnya.** Setiap addon adalah integrator tipis di dalam skill Deep Work Plan, dipatok berdasarkan tag ke sebuah produk dengan repositori, rilis, dan versi antarmukanya sendiri. Setiap produk berfungsi tanpa Deep Work Plan, dan tidak ada addon yang wajib.
 
 - **Skill Deep Work Plan** — Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan addon.
-- **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v0.1.0`.
-- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: otonomi secara default dengan opt-out, dan delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.4.0`.
-- **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, tanpa kunci SSH di dalamnya. Dipatok pada `devcontainer-kit@v0.2.11`.
-- **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.6.0`.
+- **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v0.2.1`.
+- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: otonomi secara default dengan opt-out, dan delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v0.5.0`.
+- **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, tanpa kunci SSH di dalamnya. Dipatok pada `devcontainer-kit@v0.3.0`.
+- **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v0.7.0`.
 
-Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.5.1`
+Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.6.0`
 
 ### Contoh
 

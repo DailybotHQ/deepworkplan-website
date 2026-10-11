@@ -8,7 +8,7 @@ order: 1
 
 # Addon de devcontainer
 
-Dale al repositorio un contenedor de desarrollo reproducible y aislado, que puedan usar por igual las personas, los editores y los agentes de programación. En **DWP v7** (pack `v7.5.1`) este addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un producto MIT que funciona sin Deep Work Plan. Es opcional: un repositorio es plenamente conforme sin él.
+Dale al repositorio un contenedor de desarrollo reproducible y aislado, que puedan usar por igual las personas, los editores y los agentes de programación. En **DWP v7** (pack `v7.6.0`) este addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un producto MIT que funciona sin Deep Work Plan. Es opcional: un repositorio es plenamente conforme sin él.
 
 ## Qué proporciona devcontainer-kit
 
@@ -21,15 +21,15 @@ Dale al repositorio un contenedor de desarrollo reproducible y aislado, que pued
 ## Instalación
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisitos: `bash` 3.2 o posterior y `python3` 3.11 o posterior en un host Linux o macOS, y Docker con Compose v2 para los comandos del contenedor. Verifica una versión con su asset `SHA256SUMS`. Fija `v0.2.11`: `v0.2.0` no tiene soporte.
+Requisitos: `bash` 3.2 o posterior y `python3` 3.11 o posterior en un host Linux o macOS, y Docker con Compose v2 para los comandos del contenedor. Verifica una versión con su asset `SHA256SUMS`. Fija `v0.3.0`: `v0.2.0` no tiene soporte.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/devcontainer-kit`, tag `v0.2.11`, interfaz 2 |
+| Producto | `DailybotHQ/devcontainer-kit`, tag `v0.3.0`, interfaz 2 |
 | Clave de registro | `devcontainer` en `.dwp/config.json` |
 | Configuración por repositorio | `.devcontainer/dck.toml` |
 | Detección | `dck doctor --json` |

@@ -10,7 +10,7 @@ order: 8
 
 Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caranya sendiri untuk memisahkan akun kedua, mode headless-nya sendiri, dan sakelarnya sendiri untuk melewati prompt izin. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** menyatukan semuanya di bawah satu permukaan perintah: `ak <kind> [@profile]`.
 
-Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.5.1`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
+Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.6.0`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
 ## Yang diberikan kit ini
 
@@ -48,15 +48,15 @@ Untuk lane interaktif yang panjang, setiap lane berjalan di panel [Herdr](/kit/h
 ## Instalasi
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.4.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.5.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.4.0`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.5.0`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |

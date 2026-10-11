@@ -10,7 +10,7 @@ order: 8
 
 У каждого терминального агента для программирования свои флаги для продолжения сессии, свой способ держать второй аккаунт отдельно, свой headless-режим и свой переключатель для пропуска запросов разрешений. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** накладывает на них всех одну командную поверхность: `ak <kind> [@profile]`.
 
-Этот аддон интегрирует kit в **DWP v7** (пакет `v7.5.1`) как **headless**-транспорт делегирования. Он опционален: без него каждая задача выполняется в текущей сессии, как и раньше. Сам kit — продукт под лицензией MIT, который работает без Deep Work Plan.
+Этот аддон интегрирует kit в **DWP v7** (пакет `v7.6.0`) как **headless**-транспорт делегирования. Он опционален: без него каждая задача выполняется в текущей сессии, как и раньше. Сам kit — продукт под лицензией MIT, который работает без Deep Work Plan.
 
 ## Что даёт kit
 
@@ -48,15 +48,15 @@ Skill `agentkit-orchestrate` (`ak --skill orchestrate`) учит агента р
 ## Установка
 
 ```bash
-git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Требования: `bash` на macOS или Linux и `python3` 3.9 или новее; больше ничего. Windows использует `install.ps1`. Закрепите `v0.4.0`: `v0.2.0` и `v0.2.1` не поддерживаются. Проверьте релиз по его ресурсу `SHA256SUMS`.
+Требования: `bash` на macOS или Linux и `python3` 3.9 или новее; больше ничего. Windows использует `install.ps1`. Закрепите `v0.5.0`: `v0.2.0` и `v0.2.1` не поддерживаются. Проверьте релиз по его ресурсу `SHA256SUMS`.
 
 | Элемент | Значение |
 |---|---|
-| Продукт | `DailybotHQ/coding-agents-kit`, тег `v0.4.0`, интерфейс 1 |
+| Продукт | `DailybotHQ/coding-agents-kit`, тег `v0.5.0`, интерфейс 1 |
 | Ключ реестра | `agentkit` в `.dwp/config.json` |
 | Транспорт | headless: один `ak run` на делегата в отдельном git worktree |
 | Предоставляет | `subagents`, `cancel_children`, `model_routing` |

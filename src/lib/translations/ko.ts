@@ -696,7 +696,7 @@ export const ko: SiteTranslations = {
         description:
           '프롬프트와 스킬을 확인하기 전까지 신뢰할 수 없는 것으로 취급하세요. 둘 다 오픈 소스이며 MIT 라이선스입니다. 스킬은 마크다운 우선으로 네트워크 호출과 텔레메트리가 없습니다. 모든 릴리스는 배포된 스킬에 대한 SHA256SUMS를 게시하므로 실행 전에 사본이 일치하는지 확인할 수 있습니다. 릴리스는 서명이 아니라 체크섬으로 검증됩니다(서명은 문서화된 다음 단계입니다).',
         commands: [
-          'git clone --branch v7.5.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.5.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -704,7 +704,7 @@ export const ko: SiteTranslations = {
         description:
           '어떤 에이전트든 구조화된 작업을 계획하고 실행할 수 있도록 Deep Work Plan 스킬을 추가합니다. 스킬은 라우터와 아홉 개의 하위 스킬 — create, execute, refine, resume, status, verify, onboard, author, upgrade — 을 제공합니다.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -810,7 +810,7 @@ export const ko: SiteTranslations = {
             id: 'how-to-use',
             question: '어떻게 사용하나요?',
             answer:
-              '세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.1 --skill deepworkplan -y`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 진행 중인 계획을 편집하고(범위, 작업, 또는 Lite 계획을 Full로 승격), `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성하고, `/dwp-upgrade` 는 설치된 스킬을 기존 계획을 건드리지 않고 새 릴리스로 옮깁니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.',
+              '세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 진행 중인 계획을 편집하고(범위, 작업, 또는 Lite 계획을 Full로 승격), `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성하고, `/dwp-upgrade` 는 설치된 스킬을 기존 계획을 건드리지 않고 새 릴리스로 옮깁니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.',
             linkLabel: '빠른 시작',
             linkPath: '/quickstart',
           },
