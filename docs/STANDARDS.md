@@ -35,6 +35,21 @@ This document defines the **canonical coding rules** for all contributors and AI
 - Use correct spelling for technical terms and common words
 - Verify proper capitalization of brand names and acronyms
 
+**CJK and other languages without word spaces (`zh`, `ja`, `ko`, `th`):**
+
+- Use the language's own punctuation: full-width `，。：；？！（）「」` in Chinese and Japanese.
+- **Bold next to punctuation (MANDATORY).** CommonMark closes `**…**` only when the closing `**` is *right-flanking*. A closing `**` that comes after punctuation and is followed directly by a letter or ideograph does not close, so the reader sees literal asterisks. The punctuation can be full-width (`）`, `？`, `。`), a half-width `)`, or a code span's backtick. Keep trailing punctuation **outside** the bold span, or drop the bold:
+
+  | Renders literal `**` | Write instead |
+  | --- | --- |
+  | `**这是什么类型的代码仓库？**它` | `**这是什么类型的代码仓库**？它` |
+  | `**ハーネス（harness）**は` | `**ハーネス**（harness）は` |
+  | `**기능 계층(feature tier)**이` | `**기능 계층**(feature tier)이` |
+  | ``**`ak usage`**는`` | `` `ak usage`는 `` |
+
+  A space after the closing `**` (common in Korean and Thai) also avoids it. Translation strings render as plain text, so they never carry `**` at all.
+- **The guard.** `pnpm run build` ends with `node scripts/check-rendered-emphasis.mjs`, which fails when any built page shows a literal `**` or `__` outside code. Run it on its own with `pnpm run emphasis:check` after a build.
+
 **Pre-commit check for Spanish content:**
 
 Before committing any Spanish text (methodology/spec/kit content, translations, UI strings), verify:

@@ -7,7 +7,8 @@ Complete reference for all npm scripts and CLI commands available in deepworkpla
 | Command | Description |
 |---------|-------------|
 | `pnpm run dev` | Start development server |
-| `pnpm run build` | Production build with type check |
+| `pnpm run build` | Production build with type check; ends with the rendered-emphasis check (fails on a literal `**` or `__` in any built page) |
+| `pnpm run emphasis:check` | The rendered-emphasis check alone, over an existing `dist/` ([Standards → bold next to punctuation](STANDARDS.md#orthography--diacritical-marks-mandatory)) |
 | `pnpm run biome:check` | Check code quality |
 | `pnpm run biome:fix` | Auto-fix code issues |
 | `pnpm run astro:check` | TypeScript type checking |

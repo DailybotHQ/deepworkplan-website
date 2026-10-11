@@ -129,7 +129,7 @@ pnpm run dev            # http://localhost:5555
 | Command | Description |
 | :------ | :---------- |
 | `pnpm run dev` | Start dev server at `localhost:5555` |
-| `pnpm run build` | Production build (prebuild regenerates `.agents/skills/index.json`, then `astro check && astro build`) |
+| `pnpm run build` | Production build (prebuild regenerates `.agents/skills/index.json`, then `astro check && astro build`, then the rendered-emphasis check) |
 | `pnpm run astro:preview` | Preview production build locally |
 | `pnpm run biome:check` | Lint and format check |
 | `pnpm run biome:fix` | Auto-fix lint and format issues |

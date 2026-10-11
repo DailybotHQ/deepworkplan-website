@@ -16,7 +16,8 @@
   },
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && node scripts/check-rendered-emphasis.mjs",
+    "emphasis:check": "node scripts/check-rendered-emphasis.mjs",
     "prebuild": "node scripts/generate-agent-skills-index.mjs && node scripts/generate-api-v1-pages.mjs && node scripts/generate-redirects.mjs && node scripts/stamp-versions.mjs",
     "generate:agent-skills-index": "node scripts/generate-agent-skills-index.mjs",
     "astro": "astro",
