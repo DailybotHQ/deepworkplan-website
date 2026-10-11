@@ -8,7 +8,7 @@ order: 1
 
 # แอดออน Devcontainer
 
-มอบ dev container ที่ทำซ้ำได้และแยกสภาพแวดล้อมให้กับ repository ซึ่งทั้งคน editor และ coding agent ใช้ร่วมกันได้ ใน **DWP v7** (แพ็ก `v7.4.0`) แอดออนนี้ผสาน **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** เข้ามา ซึ่งเป็นผลิตภัณฑ์ MIT ที่ทำงานได้แม้ไม่มี Deep Work Plan แอดออนนี้เป็นแบบเลือกใช้ repository หนึ่งสอดคล้องกับมาตรฐานได้อย่างสมบูรณ์แม้ไม่มีมัน
+มอบ dev container ที่ทำซ้ำได้และแยกสภาพแวดล้อมให้กับ repository ซึ่งทั้งคน editor และ coding agent ใช้ร่วมกันได้ ใน **DWP v7** (แพ็ก `v7.5.0`) แอดออนนี้ผสาน **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** เข้ามา ซึ่งเป็นผลิตภัณฑ์ MIT ที่ทำงานได้แม้ไม่มี Deep Work Plan แอดออนนี้เป็นแบบเลือกใช้ repository หนึ่งสอดคล้องกับมาตรฐานได้อย่างสมบูรณ์แม้ไม่มีมัน
 
 ## สิ่งที่ devcontainer-kit มอบให้
 
@@ -21,15 +21,15 @@ order: 1
 ## การติดตั้ง
 
 ```bash
-git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.10 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-ข้อกำหนด: `bash` 3.2 ขึ้นไปและ `python3` 3.11 ขึ้นไปบนโฮสต์ Linux หรือ macOS รวมถึง Docker พร้อม Compose v2 สำหรับคำสั่งเกี่ยวกับคอนเทนเนอร์ ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น ให้ตรึงไว้ที่ `v0.2.9` เนื่องจาก `v0.2.0` ไม่ได้รับการสนับสนุน
+ข้อกำหนด: `bash` 3.2 ขึ้นไปและ `python3` 3.11 ขึ้นไปบนโฮสต์ Linux หรือ macOS รวมถึง Docker พร้อม Compose v2 สำหรับคำสั่งเกี่ยวกับคอนเทนเนอร์ ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น ให้ตรึงไว้ที่ `v0.2.10` เนื่องจาก `v0.2.0` ไม่ได้รับการสนับสนุน
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.2.9` อินเทอร์เฟซ 2 |
+| ผลิตภัณฑ์ | `DailybotHQ/devcontainer-kit` แท็ก `v0.2.10` อินเทอร์เฟซ 2 |
 | คีย์ใน registry | `devcontainer` ใน `.dwp/config.json` |
 | config ต่อ repository | `.devcontainer/dck.toml` |
 | การตรวจจับ | `dck doctor --json` |

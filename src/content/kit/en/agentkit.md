@@ -10,7 +10,7 @@ order: 8
 
 Every terminal coding agent has its own flags for continuing a session, its own way to keep a second account apart, its own headless mode and its own switch for skipping permission prompts. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** puts one command surface over all of them: `ak <kind> [@profile]`.
 
-This addon integrates the kit into **DWP v7** (pack `v7.4.0`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
+This addon integrates the kit into **DWP v7** (pack `v7.5.0`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
 
 ## What the kit gives you
 
@@ -21,18 +21,31 @@ This addon integrates the kit into **DWP v7** (pack `v7.4.0`) as the **headless*
 - **Verified installs.** `ak install <cli>` installs a missing CLI from its vendor's official channel at a pinned version, checked against a pinned sha256 or the npm registry's integrity.
 - **Familiar names.** Two alias presets, off until you turn them on: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) and `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), each one `ak <kind>`.
 
+## Quota, profiles and setup
+
+`ak usage` lists the quota and usage of every account the kit can see, one row per account and profile: live for Claude Code subscriptions (5-hour, weekly and per-model windows), Codex ChatGPT logins and Z.AI coding-plan keys; Cursor, Grok, xAI and Azure OpenAI show `n/d` with the reason. It is read-only: it never refreshes a login, never prints a token and never writes under a profile. `--json` gives tools the same list. The usage endpoints are vendor-internal and unofficial.
+
+```bash
+ak usage              # quota of every account and profile
+ak claude @2          # a second Claude account in its own home
+ak profiles ls        # the profiles on this machine
+ak setup verify       # ordered checks, each with its repair command
+```
+
+Profiles keep accounts apart: `@default` (or `@1`) is the CLI's own home, and `@2`, `@work` or `@client-x` are separate logins that run side by side. `ak setup probe | verify | docker` is a read-only helper, driven by the `agentkit-setup` skill, that inspects the machine, checks the install and renders a pinned, verified container recipe.
+
 ## Install
 
 ```bash
-git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.3.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.4.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v0.3.0`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v0.4.0`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |

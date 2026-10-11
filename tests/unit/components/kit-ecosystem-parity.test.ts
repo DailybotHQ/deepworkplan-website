@@ -20,8 +20,8 @@ const languages = getSupportedLanguages();
 
 const PINS: Record<string, string> = {
   herdr: 'herdr-peers@v0.1.0',
-  agentkit: 'coding-agents-kit@v0.3.0',
-  devcontainer: 'devcontainer-kit@v0.2.9',
+  agentkit: 'coding-agents-kit@v0.4.0',
+  devcontainer: 'devcontainer-kit@v0.2.10',
   vim: 'deepworkplan-vim@v0.6.0',
 };
 
@@ -120,6 +120,6 @@ describe('KitEcosystem facts', () => {
   });
 
   it('names the stable pack release', () => {
-    expect(source).toContain("const packTag = 'v7.4.0';");
+    expect(source).toContain("const packTag = 'v7.5.0';");
   });
 });

@@ -28,4 +28,4 @@ O modo de benchmark e aprendizados registra o que cada plano ensina, para que as
 
 A v7 representa um salto em orquestração e auditabilidade, mas ainda não é autonomia totalmente sem supervisão. A versão 7.2.0 fecha as lacunas que essa auditoria encontrou: o benchmark e os aprendizados agora medem os planos v7, iniciar uma tarefa antes de seus pré-requisitos estarem completos é recusado, e a suíte de testes roda de forma hermética (815 de 815 em um ambiente limpo). A não inferioridade dos resultados dos agentes não foi medida. Os planos existentes mantêm a geração registrada e nunca são migrados implicitamente; os planos novos usam o contrato v7 por padrão.
 
-Versão da skill instalada: **7.4.0**, estável desde a 7.0.0.
+Versão da skill instalada: **7.5.0**, estável desde a 7.0.0.

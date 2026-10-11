@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer-Addon
 
-Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.4.0`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
+Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.5.0`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
 ## Was devcontainer-kit bereitstellt
 
@@ -21,15 +21,15 @@ Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontaine
 ## Installation
 
 ```bash
-git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.10 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.2.9`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.2.10`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.2.9`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.2.10`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |

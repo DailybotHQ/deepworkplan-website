@@ -10,7 +10,7 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.4.0`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v7**（パック `v7.5.0`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 ## キットが提供するもの
 
@@ -21,18 +21,31 @@ order: 8
 - **検証済みのインストール。** `ak install <cli>` は、不足している CLI をベンダーの公式チャネルから固定バージョンでインストールし、固定された sha256 または npm レジストリの完全性情報と照合します。
 - **なじみのある名前。** 二つのエイリアスプリセットがあり、有効にするまではオフです：`classic`（`claudex`、`codexx`、`cursorx`、`opencodex`、`pix`、`clinex`、`grokx`）と `providers`（`claude-glm`、`codex-azure`、`codex-xai`、`pi-glm`、…）。いずれも一つの `ak <kind>` に対応します。
 
+## クォータ、プロファイル、セットアップ
+
+`ak usage` は、キットから見えるすべてのアカウントのクォータと使用量を、アカウントとプロファイルごとに 1 行で一覧表示します。Claude Code のサブスクリプション（5 時間、週次、モデル別のウィンドウ）、ChatGPT での Codex ログイン、Z.AI コーディングプランのキーはライブで取得し、Cursor、Grok、xAI、Azure OpenAI は理由付きで `n/d` と表示します。読み取り専用で、ログインを更新することも、トークンを表示することも、プロファイル内に書き込むこともありません。`--json` はツール向けに同じ一覧を返します。使用量のエンドポイントはベンダー内部の非公式なものです。
+
+```bash
+ak usage              # すべてのアカウントとプロファイルのクォータ
+ak claude @2          # 専用の home を持つ 2 つ目の Claude アカウント
+ak profiles ls        # このマシンのプロファイル
+ak setup verify       # 順序付きのチェック（それぞれに修復コマンド付き）
+```
+
+プロファイルはアカウントを分離します。`@default`（または `@1`）は CLI 自身の home で、`@2`、`@work`、`@client-x` は並行して動く別々のログインです。`ak setup probe | verify | docker` は `agentkit-setup` スキルが使う読み取り専用のヘルパーで、マシンを調べ、インストールを検証し、タグで固定され検証済みのコンテナレシピを生成します。
+
 ## インストール
 
 ```bash
-git clone --branch v0.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.3.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.4.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.3.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.4.0`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |

@@ -10,7 +10,7 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.4.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.5.0 --skill deepworkplan -y
 ```
 
 Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; міграція потребує явного запиту.
@@ -66,11 +66,11 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.4.
 
 - **Скіл Deep Work Plan** — Створює, виконує, перевіряє, відновлює та уточнює плани. Не потребує аддонів.
 - **[herdr](/uk/kit/herdr)** — Peer-агенти в панелях Herdr на будь-якій машині: інтерактивне делегування з однією авторизованою відповіддю. Закріплено на `herdr-peers@v0.1.0`.
-- **[agentkit](/uk/kit/agentkit)** — Одна команда ak для кожного термінального агента для програмування: автономія за замовчуванням із можливістю відмови та делегування без інтерфейсу у worktree. Закріплено на `coding-agents-kit@v0.3.0`.
-- **[devcontainer](/uk/kit/devcontainer)** — Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, без SSH-ключа всередині. Закріплено на `devcontainer-kit@v0.2.9`.
+- **[agentkit](/uk/kit/agentkit)** — Одна команда ak для кожного термінального агента для програмування: автономія за замовчуванням із можливістю відмови та делегування без інтерфейсу у worktree. Закріплено на `coding-agents-kit@v0.4.0`.
+- **[devcontainer](/uk/kit/devcontainer)** — Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, без SSH-ключа всередині. Закріплено на `devcontainer-kit@v0.2.10`.
 - **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v0.6.0`.
 
-Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.4.0`
+Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.5.0`
 
 ### Приклади
 

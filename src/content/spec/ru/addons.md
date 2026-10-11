@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (первый аддон)
 
-Тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён на `v0.2.9`, интерфейс `2`): шаблон Dev Containers, который `dck init` разворачивает в репозитории как его собственный контейнер, а также навык `dck-dockerfile`.
+Тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён на `v0.2.10`, интерфейс `2`): шаблон Dev Containers, который `dck init` разворачивает в репозитории как его собственный контейнер, а также навык `dck-dockerfile`.
 
 - **Страница kit:** [Devcontainer](/kit/devcontainer)
 - **Что добавляет:** `docker/local/<service>/Dockerfile` на основе официального образа среды выполнения, закреплённого по digest (`python-3.13`, `node-24` или `debian`, без общего базового образа), `dev.sh` поверх лаунчера `dck` (`up`, `shell`, `rebuild`, `doctor`), агентов для программирования как подключаемый по желанию слой, порты только на loopback, git по SSH через агент хоста без ключей внутри и машины Herdr для каждого контейнера со стандартной раскладкой
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit (восьмой аддон)
 
-Тонкий интегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закреплён на `v0.3.0`, интерфейс `1`) — транспорт делегирования **без интерфейса** для планов v7.
+Тонкий интегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закреплён на `v0.4.0`, интерфейс `1`) — транспорт делегирования **без интерфейса** для планов v7.
 
 - **Страница kit:** [Agentkit](/kit/agentkit)
 - **Что добавляет:** единую поверхность команды `ak` над терминальными агентами для кода, используемую для выполнения ограниченной задачи плана без интерфейса; возможности `subagents`, `cancel_children` и `model_routing` предоставляются только во время выполнения — когда аддон включён, обнаружен и интерфейс совместим
