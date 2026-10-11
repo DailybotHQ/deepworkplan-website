@@ -190,9 +190,9 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 | --- | --- | --- |
 | AI Diff Reviewer（必須） | `.agents/skills/ai-diff-reviewer/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | インストール済みの herdr-peers スキル内の `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh の検証済みインストーラー（`v0.7.0` に固定。ダウンロードし、`shasum -a 256 -c install.sh.sha256` を実行してから起動） |
 
 各ダウンロードは、実行する前にそのリリースの `SHA256SUMS` と、上の*固定されたリリース*にあるダイジェストで検証してください。

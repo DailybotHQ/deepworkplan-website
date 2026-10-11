@@ -257,9 +257,9 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 | --- | --- | --- |
 | AI Diff Reviewer (आवश्यक) | `.agents/skills/ai-diff-reviewer/SKILL.md` में `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md` में `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | स्थापित herdr-peers स्किल में `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh पर सत्यापित इंस्टॉलर (यह `v0.7.0` पिन करता है; डाउनलोड करें, `shasum -a 256 -c install.sh.sha256`, फिर चलाएँ) |
 
 हर डाउनलोड को चलाने से पहले उसकी रिलीज़ के `SHA256SUMS` और ऊपर *पिन की गई रिलीज़* में दिए digest से

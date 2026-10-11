@@ -224,9 +224,9 @@ es sei denn, der Entwickler fragt danach. Ein zweiter Durchlauf dieses Abschnitt
 | --- | --- | --- |
 | AI Diff Reviewer (erforderlich) | `version:` in `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` in `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` in der installierten herdr-peers-Skill | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | der verifizierte Installer unter https://deepworkplan.com/vim/install.sh (er pinnt `v0.7.0`; herunterladen, `shasum -a 256 -c install.sh.sha256`, dann ausführen) |
 
 Verifizieren Sie jeden Download gegen die `SHA256SUMS` seines Releases und den Digest unter *Gepinnte Releases* oben,
