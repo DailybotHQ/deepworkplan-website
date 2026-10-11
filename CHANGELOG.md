@@ -9,6 +9,10 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The vendored Deep Work Plan skill moves to 7.3.3 and every public pin to devcontainer-kit v0.2.8, which gives agents in Herdr panes the mounted host SSH agent when the attaching client forwarded none. The site's start hook drops its own copy of that fallback, now part of the kit.
+
 ## [5.0.49] - 2026-10-11
 
 ### Changed

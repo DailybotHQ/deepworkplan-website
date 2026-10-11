@@ -8,27 +8,27 @@
     "ai-diff-reviewer": {
       "enabled": true,
       "note": "back-filled on upgrade: already installed (detected v3.3.0)",
-      "version": "v3.3.3"
+      "version": "v3.3.4"
     },
     "dailybot": {
       "enabled": true,
       "note": "repo-level: vendored skill + lifecycle hooks in .agents/settings.json (AGENTS.md)",
-      "version": "v3.23.5"
+      "version": "v3.23.7"
     },
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.3.2"
+      "version": "v7.3.3"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.3.2"
+      "version": "v7.3.3"
     },
     "devcontainer": {
       "enabled": true,
       "note": "dck container: docker/local/dwpwebsite (dck init)",
-      "version": "v0.2.7"
+      "version": "v0.2.8"
     },
     "herdr": {
       "enabled": true,
