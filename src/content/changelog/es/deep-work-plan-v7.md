@@ -26,6 +26,6 @@ Cuatro addons opcionales convierten la delegación en autonomía práctica. Herd
 
 El modo de benchmark y aprendizajes registra lo que enseña cada plan, de modo que los hallazgos puedan analizarse después. Una auditoría de todo el ecosistema, ejecutada como un plan orquestador v7 con un agente por repositorio, no encontró ninguna regresión de comportamiento frente a v6: la suite del paquete pasa 807 de 807 en un entorno limpio, y la carga de instrucciones creció entre 0.1% y 3.9% por flujo (4.6% para el paquete completo), medida en bytes sobre ambas etiquetas y no estimada como tokens.
 
-v7 supone un salto en orquestación y auditabilidad, pero todavía no es una autonomía totalmente desatendida. El bucle de benchmark y aprendizajes aún no mide automáticamente los planes v7, y no se ha medido la no inferioridad de los resultados de los agentes. Los planes existentes conservan la generación registrada y nunca se migran de forma implícita; los planes nuevos usan el contrato v7 por defecto.
+v7 supone un salto en orquestación y auditabilidad, pero todavía no es una autonomía totalmente desatendida. La versión 7.2.0 cierra las brechas que halló esa auditoría: el benchmark y los aprendizajes ahora miden los planes v7, se rechaza iniciar una tarea antes de que sus requisitos previos estén completos, y la suite de pruebas se ejecuta de forma hermética (815 de 815 en un entorno limpio). No se ha medido la no inferioridad de los resultados de los agentes. Los planes existentes conservan la generación registrada y nunca se migran de forma implícita; los planes nuevos usan el contrato v7 por defecto.
 
-Versión del skill instalada: **7.1.4**, estable desde 7.0.0.
+Versión del skill instalada: **7.2.0**, estable desde 7.0.0.

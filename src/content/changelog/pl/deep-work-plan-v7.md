@@ -26,6 +26,6 @@ Cztery opcjonalne dodatki zamieniają delegowanie w praktyczną autonomię. Herd
 
 Tryb benchmarku i wniosków zapisuje, czego uczy każdy plan, aby ustalenia można było później przeanalizować. Audyt całego ekosystemu, przeprowadzony jako plan orkiestratora v7 z jednym agentem na repozytorium, nie wykrył regresji zachowania względem v6: zestaw testów pakietu przechodzi 807 z 807 w czystym środowisku, a obciążenie instrukcjami wzrosło o 0.1% do 3.9% na przepływ (4.6% dla całego pakietu), mierzone w bajtach na obu tagach, a nie szacowane jako tokeny.
 
-v7 to krok naprzód w orkiestracji i możliwości audytu, ale jeszcze nie w pełni bezobsługowa autonomia. Pętla benchmarku i wniosków nie mierzy jeszcze automatycznie planów v7, a nie gorszość wyników agentów nie została zmierzona. Istniejące plany zachowują zapisaną generację i nigdy nie są migrowane domyślnie; nowe plany domyślnie używają kontraktu v7.
+v7 to krok naprzód w orkiestracji i możliwości audytu, ale jeszcze nie w pełni bezobsługowa autonomia. Wydanie 7.2.0 zamyka luki wykryte przez ten audyt: benchmark i wnioski mierzą teraz plany v7, rozpoczęcie zadania przed ukończeniem jego warunków wstępnych jest odrzucane, a zestaw testów działa hermetycznie (815 z 815 w czystym środowisku). Nie zmierzono, czy wyniki agentów nie są gorsze (non-inferiority). Istniejące plany zachowują zapisaną generację i nigdy nie są migrowane domyślnie; nowe plany domyślnie używają kontraktu v7.
 
-Zainstalowana wersja skilla: **7.1.4**, stabilna od 7.0.0.
+Zainstalowana wersja skilla: **7.2.0**, stabilna od 7.0.0.

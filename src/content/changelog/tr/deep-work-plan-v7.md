@@ -26,6 +26,6 @@ Dört isteğe bağlı eklenti, devretmeyi pratik özerkliğe dönüştürür. He
 
 Kıyaslama ve öğrenimler modu, her planın neyi öğrettiğini kaydeder; böylece bulgular sonradan çözümlenebilir. Depo başına bir ajanla v7 orkestratör planı olarak yürütülen tüm ekosistem denetimi, v6'ya göre davranışsal bir gerileme bulmadı: paket test takımı temiz bir ortamda 807 testin 807'sini geçer ve talimat yükü akış başına %0.1 ile %3.9 arasında arttı (tüm paket için %4.6); bu değer token olarak tahmin edilmedi, iki etiket üzerinde bayt cinsinden ölçüldü.
 
-v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müdahalesiz özerklik değildir. Kıyaslama ve öğrenimler döngüsü v7 planlarını henüz otomatik olarak ölçmez ve ajan çıktılarının aşağı olmama durumu ölçülmemiştir. Mevcut planlar kayıtlı nesillerini korur ve örtük olarak asla taşınmaz; yeni planlar varsayılan olarak v7 sözleşmesini kullanır.
+v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müdahalesiz özerklik değildir. 7.2.0 sürümü, bu denetimin bulduğu boşlukları kapatır: kıyaslama ve öğrenimler artık v7 planlarını ölçer, ön koşulları tamamlanmadan bir göreve başlamak reddedilir ve test paketi hermetik biçimde çalışır (temiz bir ortamda 815 içinde 815). Ajan çıktılarının aşağı olmama durumu ölçülmemiştir. Mevcut planlar kayıtlı nesillerini korur ve örtük olarak asla taşınmaz; yeni planlar varsayılan olarak v7 sözleşmesini kullanır.
 
-Yüklü skill sürümü: **7.1.4**, 7.0.0'dan beri kararlı.
+Yüklü skill sürümü: **7.2.0**, 7.0.0'dan beri kararlı.

@@ -26,6 +26,6 @@ Bốn addon tùy chọn biến việc ủy quyền thành khả năng tự chủ
 
 Chế độ benchmark và bài học ghi lại điều mà mỗi kế hoạch mang lại, để các phát hiện có thể được phân tích sau đó. Một cuộc kiểm toán toàn bộ hệ sinh thái, chạy như một kế hoạch điều phối v7 với mỗi kho mã một agent, không phát hiện hồi quy hành vi nào so với v6: bộ kiểm thử của gói vượt qua 807 trên 807 trong môi trường sạch, và tải chỉ dẫn tăng từ 0.1% đến 3.9% mỗi luồng (4.6% cho toàn gói), được đo bằng byte trên cả hai tag thay vì ước tính theo token.
 
-v7 là một bước tiến về điều phối và khả năng kiểm toán, nhưng chưa phải là khả năng tự chủ hoàn toàn không cần can thiệp. Vòng lặp benchmark và bài học chưa tự động đo các kế hoạch v7, và tính không kém hơn của kết quả agent chưa được đo. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận và không bao giờ bị di chuyển ngầm; kế hoạch mới mặc định dùng hợp đồng v7.
+v7 là một bước tiến về điều phối và khả năng kiểm toán, nhưng chưa phải là khả năng tự chủ hoàn toàn không cần can thiệp. Bản phát hành 7.2.0 khắc phục các khoảng trống mà cuộc kiểm toán đó phát hiện: benchmark và bài học nay đo được các kế hoạch v7, việc bắt đầu một tác vụ trước khi các điều kiện tiên quyết hoàn tất sẽ bị từ chối, và bộ kiểm thử chạy theo cách hermetic (815 trên 815 trong môi trường sạch). Tính không kém hơn của kết quả agent chưa được đo. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận và không bao giờ bị di chuyển ngầm; kế hoạch mới mặc định dùng hợp đồng v7.
 
-Phiên bản skill đã cài: **7.1.4**, ổn định từ 7.0.0.
+Phiên bản skill đã cài: **7.2.0**, ổn định từ 7.0.0.
