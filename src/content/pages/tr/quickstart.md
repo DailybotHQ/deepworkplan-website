@@ -239,15 +239,19 @@ Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (�
 
 ## 4. Yerel incelemeyi ve eklentileri kurun — ya da yükseltin
 
-Temel onboarding sonrasında her ekosistem bileşenini sabitlenmiş sürümüne getirin. Bu bölümü yeni
-bir depoda da, aylar önce onboarding edilmiş bir depoda da aynı şekilde çalıştırın: **idempotenttir**.
-Her bileşen için neyin kurulu olduğunu ve sürümünü saptayın, ardından şu şekilde dallanın:
+Temel onboarding sonrasında Deep Work Plan skill’i ve gerekli AI Diff Reviewer yerel incelemesi
+**her** depoda yerindedir. Diğer eklentiler öyle değildir: her biri yalnızca uygun olduğu depolara
+aittir. Bu bölüm **her eklentiyi saptar, kullandıklarınızı yükseltir ve uygun olanları sunar** —
+yalnızca kümeyi tamamlamak için asla bir eklenti eklemez. Bu bölümü yeni bir depoda da, aylar önce
+onboarding edilmiş bir depoda da aynı şekilde çalıştırın: **idempotenttir**. Her bileşen için neyin
+kurulu olduğunu ve sürümünü saptayın, ardından şu şekilde dallanın:
 
-- **Yok** — gerekli yerel inceleme onboarding onayı altında kurulur; isteğe bağlı bir eklenti
-  **sunulur** ve yalnızca geliştirici kabul ettiğinde kurulur.
-- **Kurulu, sabitlenmiş sürümden eski** — aynı sabitlenmiş komutla **yerinde** yükseltin (her
-  kurucu kendi dosyalarını değiştirir ve kullanıcının yapılandırmasını, oturumlarını ve verilerini
-  korur). Çalıştırmadan önce neyin değişeceğini söyleyin.
+- **Yok** — gerekli yerel inceleme onboarding onayı altında kurulur. İsteğe bağlı bir eklenti
+  yalnızca bu depoya uygun olduğunda **sunulur** ve yalnızca geliştirici kabul ettiğinde kurulur.
+- **Kurulu, sabitlenmiş sürümden eski** — hâlâ uygunsa, aynı sabitlenmiş komutla **yerinde**
+  yükseltin (her kurucu kendi dosyalarını değiştirir ve kullanıcının yapılandırmasını, oturumlarını
+  ve verilerini korur). Çalıştırmadan önce neyin değişeceğini söyleyin. Artık uygun değilse bunu
+  belirtin ve kararı geliştiriciye bırakın.
 - **Sabitlenmiş sürümde ya da daha yeni bir sürümde kurulu** — hiçbir şeyi değiştirmeyin.
 
 Her kabulü veya reddi `.dwp/config.json` içine kaydedin; reddedilen bir eklenti, geliştirici

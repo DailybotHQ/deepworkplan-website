@@ -242,16 +242,21 @@ Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga d
 
 ## 4. Pasang — atau tingkatkan — tinjauan lokal dan addon
 
-Setelah onboarding dasar, bawa setiap komponen ekosistem ke rilis yang dipatoknya. Jalankan
-bagian ini dengan cara yang sama pada repositori baru maupun pada repositori yang di-onboard
-berbulan-bulan lalu: bagian ini **idempoten**. Untuk setiap komponen, deteksi apa yang terpasang
-dan versinya, lalu bercabang:
+Setelah onboarding dasar, skill Deep Work Plan dan tinjauan lokal AI Diff Reviewer yang wajib
+sudah terpasang di **setiap** repositori. Addon lainnya tidak: masing-masing hanya pantas berada di
+repositori yang cocok dengannya. Bagian ini **mendeteksi setiap addon, meningkatkan yang Anda
+gunakan, dan menawarkan yang cocok** — bagian ini tidak pernah menambahkan addon hanya untuk
+melengkapi set. Jalankan bagian ini dengan cara yang sama pada repositori baru maupun pada
+repositori yang di-onboard berbulan-bulan lalu: bagian ini **idempoten**. Untuk setiap komponen,
+deteksi apa yang terpasang dan versinya, lalu bercabang:
 
-- **Tidak ada** — tinjauan lokal yang wajib dipasang di bawah persetujuan onboarding; addon
-  opsional **ditawarkan**, dan dipasang hanya ketika pengembang menerimanya.
-- **Terpasang, lebih lama dari patokan** — tingkatkan **di tempat** dengan perintah terpatok yang
-  sama (setiap installer mengganti berkasnya sendiri dan mempertahankan konfigurasi, login, dan
-  data pengguna). Sampaikan apa yang akan berubah sebelum menjalankannya.
+- **Tidak ada** — tinjauan lokal yang wajib dipasang di bawah persetujuan onboarding. Addon
+  opsional **ditawarkan** hanya ketika cocok dengan repositori ini, dan dipasang hanya ketika
+  pengembang menerimanya.
+- **Terpasang, lebih lama dari patokan** — jika masih cocok, tingkatkan **di tempat** dengan
+  perintah terpatok yang sama (setiap installer mengganti berkasnya sendiri dan mempertahankan
+  konfigurasi, login, dan data pengguna). Sampaikan apa yang akan berubah sebelum menjalankannya.
+  Jika sudah tidak cocok, sampaikan hal itu dan serahkan keputusannya kepada pengembang.
 - **Terpasang pada patokan, atau lebih baru** — jangan ubah apa pun.
 
 Catat setiap penerimaan atau penolakan di `.dwp/config.json`; addon yang ditolak tidak ditawarkan

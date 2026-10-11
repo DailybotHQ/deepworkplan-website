@@ -718,7 +718,7 @@ export const ko: SiteTranslations = {
       {
         title: '로컬 리뷰와 선택형 애드온',
         description:
-          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 일곱 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, Agentkit — 을 제안하며, 맞을 때만 채택하면 됩니다. 모든 구성 요소는 init.md가 SHA256SUMS 다이제스트를 게시하는 릴리스에 고정되며, 이 과정은 멱등적입니다. 없는 구성 요소는 제안되고, 오래된 것은 제자리에서 업그레이드되며, 최신인 것은 그대로 둡니다. 수락된 devcontainer는 전체 스택으로 완성됩니다 — 고른 에이전트, 양방향으로 연결된 Herdr, 그리고 옵트인한 경우에만 호스트 계정. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
+          '온보딩은 필수인 AI Diff Reviewer 로컬 리뷰를 설치하고(그 CI 게이트는 선택으로 남습니다), 일곱 가지 선택형 애드온 — devcontainer, Dailybot, dependency-upgrade, design-system, Herdr, DeepWorkPlan Vim, Agentkit — 을 제안하며, 맞을 때만 채택하면 됩니다. 스킬과 로컬 리뷰는 모든 리포지토리에 들어갑니다. 나머지에 대해서는 이 과정이 모든 애드온을 감지하고, 사용 중인 것은 업그레이드하고, 맞는 것은 제안합니다 — 구성을 채우기 위해서만 추가하는 일은 결코 없습니다. 모든 구성 요소는 init.md가 SHA256SUMS 다이제스트를 게시하는 릴리스에 고정되며, 두 번째로 실행해도 아무것도 바뀌지 않습니다. 수락된 devcontainer는 전체 스택으로 완성됩니다 — 고른 에이전트, 양방향으로 연결된 Herdr, 그리고 옵트인한 경우에만 호스트 계정. 선택형 애드온이 하나도 없어도 리포지토리는 완전히 적합합니다. /skill-create와 /agent-create(author 하위 스킬)로 기본 구성을 넘어 스택에 맞는 스킬, 에이전트, 명령을 키우세요.',
       },
       {
         title: '계획하고 실행',

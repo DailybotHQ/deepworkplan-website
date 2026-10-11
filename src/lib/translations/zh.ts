@@ -712,7 +712,7 @@ export const zh: SiteTranslations = {
       {
         title: '本地评审与可选附加组件',
         description:
-          '接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供七个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim 与 Agentkit——你只在它们契合时才采纳。每个组件都锁定到一个发布版本，其 SHA256SUMS 摘要由 init.md 公布；整个流程是幂等的：缺失的组件会被提供，较旧的组件原地升级，已是最新的组件保持不变。被采纳的 devcontainer 会形成完整环境——你选定的代理、双向连通的 Herdr，以及仅在你选择启用时才共享的主机账户。一个仓库即便不带任何可选附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
+          '接入流程会安装必需的 AI Diff Reviewer 本地评审（其 CI 门禁仍为可选），并提供七个可选附加组件——devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim 与 Agentkit——你只在它们契合时才采纳。技能与本地审查会进入每一个仓库；对于其余部分，该流程会检测每个附加组件，升级你在用的组件，并提供契合的组件——绝不会仅仅为了凑齐全套而添加任何一个。每个组件都锁定到一个发布版本，其 SHA256SUMS 摘要由 init.md 公布，再次运行不会改变任何东西。被采纳的 devcontainer 会形成完整环境——你选定的代理、双向连通的 Herdr，以及仅在你选择启用时才共享的主机账户。一个仓库即便不带任何可选附加组件，也完全符合规范。使用 /skill-create 与 /agent-create（author 子技能）来培育超越基线的技能、代理与命令。',
       },
       {
         title: '规划并执行',

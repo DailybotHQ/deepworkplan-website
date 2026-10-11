@@ -29,7 +29,7 @@ O `deepworkplan-onboard` inspeciona o repositório **real** — linguagens, fram
 4. Gerar `docs/` (arquitetura, padrões, testes, segurança e mais) e docs por módulo.
 5. Gerar `.agents/` (agents, comandos `dwp-*` enxutos, skills apropriadas à stack, catálogo) + `.claude → .agents`.
 6. Instalar a skill e estruturar um `.dwp/` ignorado pelo git (planos, rascunhos) e um espaço de rascunho `tmp/`.
-7. Instalar a revisão local obrigatória do AI Diff Reviewer, oferecer os addons opcionais e, em seguida, fazer a autoverificação.
+7. Instalar a revisão local obrigatória do AI Diff Reviewer; detectar todos os addons, atualizar os que o repositório usa e oferecer os que fazem sentido (nunca um só para completar o conjunto); em seguida, fazer a autoverificação.
 
 ## Notas
 

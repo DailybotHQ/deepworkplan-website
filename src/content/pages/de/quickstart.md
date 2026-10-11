@@ -201,15 +201,20 @@ Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stelle
 
 ## 4. Die lokale Überprüfung und die Addons installieren — oder aktualisieren
 
-Bringen Sie nach dem Baseline-Onboarding jede Komponente des Ökosystems auf ihr gepinntes Release. Führen Sie
-diesen Abschnitt auf einem frischen Repository genauso aus wie auf einem, das vor Monaten onboardet wurde: Er ist **idempotent**.
-Erkennen Sie für jede Komponente, was installiert ist und in welcher Version, und verzweigen Sie dann:
+Nach dem Baseline-Onboarding sind die Deep Work Plan Skill und die erforderliche lokale Überprüfung des AI Diff Reviewer
+in **jedem** Repository vorhanden. Die anderen Addons nicht: Jedes gehört nur in die Repositorys, zu denen es passt.
+Dieser Abschnitt **erkennt jedes Addon, aktualisiert die, die Sie nutzen, und bietet die an, die passen** — er fügt nie
+ein Addon hinzu, nur um die Sammlung zu vervollständigen. Führen Sie ihn auf einem frischen Repository genauso aus wie auf einem,
+das vor Monaten onboardet wurde: Er ist **idempotent**. Erkennen Sie für jede Komponente, was installiert ist und in welcher
+Version, und verzweigen Sie dann:
 
-- **Fehlt** — die erforderliche lokale Überprüfung wird unter der Onboarding-Zustimmung installiert; ein optionales
-  Addon wird **angeboten** und nur installiert, wenn der Entwickler es annimmt.
-- **Installiert, älter als der Pin** — aktualisieren Sie es **an Ort und Stelle** mit demselben gepinnten Befehl (jeder
-  Installer ersetzt seine eigenen Dateien und behält Konfiguration, Anmeldungen und Daten des Nutzers). Sagen Sie, was
-  sich ändern wird, bevor Sie ihn ausführen.
+- **Fehlt** — die erforderliche lokale Überprüfung wird unter der Onboarding-Zustimmung installiert. Ein optionales
+  Addon wird nur **angeboten**, wenn es zu diesem Repository passt, und nur installiert, wenn der Entwickler
+  es annimmt.
+- **Installiert, älter als der Pin** — wenn es noch passt, aktualisieren Sie es **an Ort und Stelle** mit demselben gepinnten
+  Befehl (jeder Installer ersetzt seine eigenen Dateien und behält Konfiguration, Anmeldungen und Daten des Nutzers).
+  Sagen Sie, was sich ändern wird, bevor Sie ihn ausführen. Wenn es nicht mehr passt, sagen Sie das und überlassen Sie
+  die Entscheidung dem Entwickler.
 - **Auf dem Pin installiert oder neuer** — nichts ändern.
 
 Halten Sie jede Annahme und jede Ablehnung in `.dwp/config.json` fest; ein abgelehntes Addon wird nicht erneut angeboten,

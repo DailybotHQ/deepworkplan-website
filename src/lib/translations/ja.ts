@@ -723,7 +723,7 @@ export const ja: SiteTranslations = {
       {
         title: 'ローカルレビューとオプトインのアドオン',
         description:
-          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、七つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim、Agentkit）を提案します。適合する場合にのみ受け入れてください。すべてのコンポーネントは、init.md が SHA256SUMS のダイジェストを公開するリリースに固定されています。この手順は冪等で、未導入のコンポーネントは提案され、古いものはその場でアップグレードされ、最新のものはそのままです。受け入れた devcontainer は完全なスタック（選んだエージェント、双方向に接続された Herdr、オプトインした場合のみのホストアカウント）に仕上がります。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
+          'オンボーディングは必須の AI Diff Reviewer ローカルレビューをインストールし（その CI ゲートは任意のままです）、七つのオプトイン式アドオン（devcontainer、Dailybot、dependency-upgrade、design-system、Herdr、DeepWorkPlan Vim、Agentkit）を提案します。適合する場合にのみ受け入れてください。スキルとローカルレビューはすべてのリポジトリに入ります。それ以外については、この手順がすべてのアドオンを検出し、使っているものをアップグレードし、適合するものを提案します。セットをそろえるためだけに追加することは決してありません。すべてのコンポーネントは、init.md が SHA256SUMS のダイジェストを公開するリリースに固定されており、二回目に実行しても何も変わりません。受け入れた devcontainer は完全なスタック（選んだエージェント、双方向に接続された Herdr、オプトインした場合のみのホストアカウント）に仕上がります。任意アドオンがゼロでも、リポジトリは完全に適合します。/skill-create と /agent-create（author サブスキル）を使って、ベースラインを超えるスキル、エージェント、コマンドを育てることができます。',
       },
       {
         title: '計画して実行する',

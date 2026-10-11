@@ -216,15 +216,20 @@ Los planes nuevos reciben identificadores numéricos monotónicos de al menos tr
 
 ## 4. Instala — o actualiza — la revisión local y los addons
 
-Tras la incorporación base, lleva cada componente del ecosistema a su versión fijada. Ejecuta esta
-sección igual en un repositorio nuevo y en uno incorporado hace meses: es **idempotente**.
-Para cada componente, detecta qué está instalado y en qué versión, y luego decide:
+Tras la incorporación base, el skill de Deep Work Plan y la revisión local requerida de AI Diff Reviewer
+están instalados en **todos** los repositorios. Los demás addons no: cada uno corresponde solo a los
+repositorios en los que encaja. Esta sección **detecta todos los addons, actualiza los que usas y ofrece
+los que encajan** — nunca agrega un addon solo para completar el conjunto. Ejecútala igual en un repositorio
+nuevo y en uno incorporado hace meses: es **idempotente**. Para cada componente, detecta qué está
+instalado y en qué versión, y luego decide:
 
-- **Ausente** — la revisión local requerida se instala bajo el consentimiento del onboarding; un addon
-  opcional se **ofrece**, y se instala solo cuando el desarrollador lo acepta.
-- **Instalado, anterior a la versión fijada** — actualízalo **en su lugar** con el mismo comando fijado (cada
-  instalador reemplaza sus propios archivos y conserva la configuración, los inicios de sesión y los datos del usuario). Di qué
-  cambiará antes de ejecutarlo.
+- **Ausente** — la revisión local requerida se instala bajo el consentimiento del onboarding. Un addon
+  opcional se **ofrece** solo cuando encaja en este repositorio, y se instala solo cuando el desarrollador
+  lo acepta.
+- **Instalado, anterior a la versión fijada** — si todavía encaja, actualízalo **en su lugar** con el mismo
+  comando fijado (cada instalador reemplaza sus propios archivos y conserva la configuración, los inicios de
+  sesión y los datos del usuario). Di qué cambiará antes de ejecutarlo. Si ya no encaja, dilo y deja la
+  decisión al desarrollador.
 - **Instalado en la versión fijada, o posterior** — no cambies nada.
 
 Registra cada aceptación o rechazo en `.dwp/config.json`; un addon rechazado no se vuelve a ofrecer

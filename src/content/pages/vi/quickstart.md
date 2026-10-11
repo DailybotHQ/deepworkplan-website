@@ -242,15 +242,19 @@ Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba ch
 
 ## 4. Cài đặt — hoặc nâng cấp — đánh giá cục bộ và các addon
 
-Sau khi khởi tạo nền tảng, hãy đưa mọi thành phần của hệ sinh thái lên bản phát hành được ghim của nó. Chạy
-phần này theo cùng một cách trên một repository mới và trên một repository đã được khởi tạo từ nhiều tháng trước: nó
-**idempotent**. Với mỗi thành phần, hãy phát hiện những gì đã được cài và phiên bản của nó, rồi rẽ nhánh:
+Sau khi khởi tạo nền tảng, skill Deep Work Plan và đánh giá cục bộ AI Diff Reviewer bắt buộc đã có mặt
+trong **mọi** repository. Các addon khác thì không: mỗi addon chỉ thuộc về những repository mà nó phù hợp.
+Phần này **phát hiện mọi addon, nâng cấp những addon bạn đang dùng và đề xuất những addon phù hợp** —
+nó không bao giờ thêm một addon chỉ để cho đủ bộ. Chạy phần này theo cùng một cách trên một repository
+mới và trên một repository đã được khởi tạo từ nhiều tháng trước: nó **idempotent**. Với mỗi thành phần,
+hãy phát hiện những gì đã được cài và phiên bản của nó, rồi rẽ nhánh:
 
-- **Chưa có** — đánh giá cục bộ bắt buộc được cài dưới sự chấp thuận của quá trình khởi tạo; một addon tùy chọn
-  được **đề xuất**, và chỉ được cài khi nhà phát triển chấp nhận.
-- **Đã cài, cũ hơn bản ghim** — nâng cấp nó **tại chỗ** bằng cùng lệnh đã ghim (mỗi trình cài đặt
-  thay thế các tệp của riêng nó và giữ nguyên cấu hình, phiên đăng nhập và dữ liệu của người dùng). Nói rõ những gì
-  sẽ thay đổi trước khi chạy.
+- **Chưa có** — đánh giá cục bộ bắt buộc được cài dưới sự chấp thuận của quá trình khởi tạo. Một addon
+  tùy chọn chỉ được **đề xuất** khi nó phù hợp với repository này, và chỉ được cài khi nhà phát triển chấp nhận.
+- **Đã cài, cũ hơn bản ghim** — nếu nó vẫn phù hợp, nâng cấp nó **tại chỗ** bằng cùng lệnh đã ghim (mỗi
+  trình cài đặt thay thế các tệp của riêng nó và giữ nguyên cấu hình, phiên đăng nhập và dữ liệu của người
+  dùng). Nói rõ những gì sẽ thay đổi trước khi chạy. Nếu nó không còn phù hợp, hãy nói rõ điều đó và để
+  nhà phát triển quyết định.
 - **Đã cài ở bản ghim, hoặc mới hơn** — không thay đổi gì.
 
 Ghi lại mọi lần chấp nhận hoặc từ chối trong `.dwp/config.json`; một addon đã bị từ chối sẽ không được đề xuất lại

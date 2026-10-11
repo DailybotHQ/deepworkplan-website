@@ -218,15 +218,20 @@ Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois 
 
 ## 4. Installer — ou mettre à jour — la revue locale et les addons
 
-Après l’onboarding de base, amenez chaque composant de l’écosystème à sa version épinglée. Exécutez
-cette section de la même façon sur un dépôt neuf et sur un dépôt intégré il y a des mois : elle est **idempotente**.
-Pour chaque composant, détectez ce qui est installé et sa version, puis tranchez :
+Après l’onboarding de base, le skill Deep Work Plan et la revue locale requise d’AI Diff Reviewer
+sont en place dans **chaque** dépôt. Les autres addons ne le sont pas : chacun n’a sa place que dans les
+dépôts auxquels il convient. Cette section **détecte chaque addon, met à jour ceux que vous utilisez et
+propose ceux qui conviennent** — elle n’ajoute jamais un addon pour compléter l’ensemble. Exécutez-la de la
+même façon sur un dépôt neuf et sur un dépôt intégré il y a des mois : elle est **idempotente**. Pour chaque
+composant, détectez ce qui est installé et sa version, puis tranchez :
 
-- **Absent** — la revue locale requise est installée sous le consentement de l’onboarding ; un addon
-  facultatif est **proposé**, et installé seulement si le développeur l’accepte.
-- **Installé, plus ancien que la version épinglée** — mettez-le à jour **sur place** avec la même commande épinglée (chaque
-  installateur remplace ses propres fichiers et conserve la configuration, les connexions et les données de l’utilisateur).
-  Indiquez ce qui va changer avant de l’exécuter.
+- **Absent** — la revue locale requise est installée sous le consentement de l’onboarding. Un addon
+  facultatif n’est **proposé** que s’il convient à ce dépôt, et installé seulement si le développeur
+  l’accepte.
+- **Installé, plus ancien que la version épinglée** — s’il convient toujours, mettez-le à jour **sur place**
+  avec la même commande épinglée (chaque installateur remplace ses propres fichiers et conserve la
+  configuration, les connexions et les données de l’utilisateur). Indiquez ce qui va changer avant de
+  l’exécuter. S’il ne convient plus, dites-le et laissez la décision au développeur.
 - **Installé à la version épinglée, ou plus récent** — ne changez rien.
 
 Consignez chaque acceptation ou refus dans `.dwp/config.json` ; un addon refusé n’est plus proposé

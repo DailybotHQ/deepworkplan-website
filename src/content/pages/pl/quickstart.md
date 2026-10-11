@@ -206,15 +206,19 @@ Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długośc
 
 ## 4. Zainstaluj — lub zaktualizuj — przegląd lokalny i dodatki
 
-Po onboardingu bazowym doprowadź każdy komponent ekosystemu do jego przypiętego wydania. Uruchamiaj tę
-sekcję tak samo na świeżym repozytorium i na takim, które przeszło onboarding miesiące temu: jest **idempotentna**.
-Dla każdego komponentu wykryj, co jest zainstalowane i w jakiej wersji, a następnie wybierz gałąź:
+Po onboardingu bazowym skill Deep Work Plan i wymagany lokalny przegląd AI Diff Reviewer są obecne w **każdym**
+repozytorium. Pozostałe dodatki nie: każdy należy tylko do repozytoriów, do których pasuje. Ta sekcja **wykrywa
+każdy dodatek, aktualizuje te, których używasz, i proponuje te, które pasują** — nigdy nie dodaje dodatku tylko po to,
+by skompletować zestaw. Uruchamiaj ją tak samo na świeżym repozytorium i na takim, które przeszło onboarding miesiące
+temu: jest **idempotentna**. Dla każdego komponentu wykryj, co jest zainstalowane i w jakiej wersji, a następnie wybierz gałąź:
 
-- **Brak** — wymagany przegląd lokalny jest instalowany w ramach zgody onboardingu; opcjonalny
-  dodatek jest **proponowany** i instalowany tylko wtedy, gdy deweloper go zaakceptuje.
-- **Zainstalowany, starszy niż przypięcie** — zaktualizuj go **na miejscu** tym samym przypiętym poleceniem (każdy
-  instalator zastępuje własne pliki i zachowuje konfigurację, logowania i dane użytkownika). Powiedz, co
-  się zmieni, zanim go uruchomisz.
+- **Brak** — wymagany przegląd lokalny jest instalowany w ramach zgody onboardingu. Opcjonalny
+  dodatek jest **proponowany** tylko wtedy, gdy pasuje do tego repozytorium, i instalowany tylko wtedy, gdy deweloper
+  go zaakceptuje.
+- **Zainstalowany, starszy niż przypięcie** — jeśli nadal pasuje, zaktualizuj go **na miejscu** tym samym przypiętym
+  poleceniem (każdy instalator zastępuje własne pliki i zachowuje konfigurację, logowania i dane użytkownika).
+  Powiedz, co się zmieni, zanim go uruchomisz. Jeśli już nie pasuje, powiedz to i zostaw
+  decyzję deweloperowi.
 - **Zainstalowany w przypiętej wersji lub nowszej** — niczego nie zmieniaj.
 
 Zapisuj każdą akceptację i odmowę w `.dwp/config.json`; odrzucony dodatek nie jest proponowany ponownie,

@@ -216,15 +216,20 @@ I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLA
 
 ## 4. Installa — o aggiorna — la revisione locale e gli addon
 
-Dopo l’onboarding di base, porta ogni componente dell’ecosistema alla sua release fissata. Esegui questa
-sezione allo stesso modo su un repository nuovo e su uno con onboarding fatto mesi fa: è **idempotente**.
-Per ogni componente, rileva cosa è installato e la sua versione, poi scegli:
+Dopo l’onboarding di base, la skill Deep Work Plan e la revisione locale AI Diff Reviewer richiesta
+sono presenti in **ogni** repository. Gli altri addon no: ciascuno appartiene solo ai repository a cui
+si adatta. Questa sezione **rileva ogni addon, aggiorna quelli che usi e propone quelli adatti** — non
+aggiunge mai un addon solo per completare l’insieme. Eseguila allo stesso modo su un repository nuovo e su
+uno con onboarding fatto mesi fa: è **idempotente**. Per ogni componente, rileva cosa è installato e la sua
+versione, poi scegli:
 
-- **Assente** — la revisione locale richiesta si installa sotto il consenso dell’onboarding; un addon
-  opzionale viene **proposto**, e installato solo quando lo sviluppatore lo accetta.
-- **Installato, più vecchio della release fissata** — aggiornalo **sul posto** con lo stesso comando fissato (ogni
-  installer sostituisce i propri file e mantiene la configurazione, i login e i dati dell’utente). Di’ cosa
-  cambierà prima di eseguirlo.
+- **Assente** — la revisione locale richiesta si installa sotto il consenso dell’onboarding. Un addon
+  opzionale viene **proposto** solo quando si adatta a questo repository, e installato solo quando lo
+  sviluppatore lo accetta.
+- **Installato, più vecchio della release fissata** — se si adatta ancora, aggiornalo **sul posto** con lo
+  stesso comando fissato (ogni installer sostituisce i propri file e mantiene la configurazione, i login e i
+  dati dell’utente). Di’ cosa cambierà prima di eseguirlo. Se non si adatta più, dillo e lascia la
+  decisione allo sviluppatore.
 - **Installato alla release fissata, o più recente** — non cambiare nulla.
 
 Registra ogni accettazione o rifiuto in `.dwp/config.json`; un addon rifiutato non viene riproposto
