@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.47] - 2026-10-11
+
 ### Changed
 
 - The vendored Deep Work Plan skill moves to 7.3.0 (verified against its `SHA256SUMS`, 171 files); its devcontainer addon pins devcontainer-kit v0.2.5 and its vim addon DeepWorkPlan Vim v0.6.0. Every public pin follows.
@@ -1213,7 +1215,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.46...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.47...HEAD
+[5.0.47]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.47
 [5.0.46]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.46
 [5.0.45]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.45
 [5.0.44]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.44
