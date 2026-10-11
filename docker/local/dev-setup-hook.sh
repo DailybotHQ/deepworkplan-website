@@ -15,6 +15,22 @@ done
 # /tmp/ov/dist, Node finds them through /tmp/ov/node_modules.
 ln -sfn /app/node_modules /tmp/ov/node_modules
 
+# Herdr keeps its machine catalog (the SSH machines this container's agents can
+# reach: the Mac, other containers) in ~/.local/state/herdr/client, which is not on
+# a volume, so `rebuild` would drop every machine added inside. Keep it on the
+# state volume, next to ~/.config/herdr, so the catalog survives like the logins do.
+state_vol="$HOME/.dck/volumes/state"
+if [ -d "$state_vol" ]; then
+  keep="$state_vol/state_herdr_client"
+  live="$HOME/.local/state/herdr/client"
+  mkdir -p "$keep" "$(dirname "$live")"
+  if [ -d "$live" ] && [ ! -L "$live" ]; then
+    cp -an "$live/." "$keep/" 2>/dev/null || true
+    rm -rf "$live"
+  fi
+  ln -sfn "$keep" "$live"
+fi
+
 # Git, gh and ssh keep working exactly as on the host. devcontainer-kit mounts the
 # host's SSH agent at /run/dck/ssh-agent.sock (public keys only inside the container;
 # signing happens on the host). Herdr points its panes' SSH_AUTH_SOCK at its own
