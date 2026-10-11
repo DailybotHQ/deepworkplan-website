@@ -28,4 +28,4 @@ El modo de benchmark y aprendizajes registra lo que enseña cada plan, de modo q
 
 v7 supone un salto en orquestación y auditabilidad, pero todavía no es una autonomía totalmente desatendida. La versión 7.2.0 cierra las brechas que halló esa auditoría: el benchmark y los aprendizajes ahora miden los planes v7, se rechaza iniciar una tarea antes de que sus requisitos previos estén completos, y la suite de pruebas se ejecuta de forma hermética (815 de 815 en un entorno limpio). No se ha medido la no inferioridad de los resultados de los agentes. Los planes existentes conservan la generación registrada y nunca se migran de forma implícita; los planes nuevos usan el contrato v7 por defecto.
 
-Versión del skill instalada: **7.5.0**, estable desde 7.0.0.
+Versión del skill instalada: **7.5.1**, estable desde 7.0.0.

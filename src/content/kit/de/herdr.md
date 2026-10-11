@@ -56,7 +56,7 @@ herdr-peers authentifiziert den Absender nicht: Das Feld `from=` in einem Stempe
 
 ## Container und Host
 
-Mit dem Addon [devcontainer](/kit/devcontainer) auf devcontainer-kit `v0.2.10` bringt jeder dck-Container herdr-peers mit und tritt bei `dck up` dem Mesh bei: Seine Agenten können Agenten auf dem Host, in den anderen Containern und in den anderen Loopback-Containern des Hosts fragen und erhalten die Antwort zurück. `dck setup` installiert ein verifiziertes herdr-peers auf dem Host, sodass auch Host-Agenten antworten. Der Host-Listener und die zusätzlichen Schlüssel, die andere Container hereinlassen, sind Ihre Entscheidungen im Host-Profil des Kits; dieses Addon setzt sie nie.
+Mit dem Addon [devcontainer](/kit/devcontainer) auf devcontainer-kit `v0.2.11` bringt jeder dck-Container herdr-peers mit und tritt bei `dck up` dem Mesh bei: Seine Agenten können Agenten auf dem Host, in den anderen Containern und in den anderen Loopback-Containern des Hosts fragen und erhalten die Antwort zurück. `dck setup` installiert ein verifiziertes herdr-peers auf dem Host, sodass auch Host-Agenten antworten. Der Host-Listener und die zusätzlichen Schlüssel, die andere Container hereinlassen, sind Ihre Entscheidungen im Host-Profil des Kits; dieses Addon setzt sie nie.
 
 ## Herdr oder Agentkit
 
