@@ -6,7 +6,7 @@ version: "v6 · Strengere Struktur"
 kind: release
 lang: de
 order: 0
-featured: true
+featured: false
 sourceLabel: "Veröffentlichter v6-Schemasatz"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

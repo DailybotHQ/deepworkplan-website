@@ -6,7 +6,7 @@ version: "v6 · Daha sıkı yapı"
 kind: release
 lang: tr
 order: 0
-featured: true
+featured: false
 sourceLabel: "Yayımlanan v6 şema kümesi"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

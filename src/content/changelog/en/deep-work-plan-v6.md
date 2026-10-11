@@ -6,7 +6,7 @@ version: "v6 · Stricter structure"
 kind: release
 lang: en
 order: 0
-featured: true
+featured: false
 sourceLabel: "Published v6 schema set"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

@@ -6,7 +6,7 @@ version: "v6 · Cấu trúc chặt chẽ hơn"
 kind: release
 lang: vi
 order: 0
-featured: true
+featured: false
 sourceLabel: "Bộ schema v6 đã công bố"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

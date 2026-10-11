@@ -6,7 +6,7 @@ version: "v6 · Struktur lebih ketat"
 kind: release
 lang: id
 order: 0
-featured: true
+featured: false
 sourceLabel: "Kumpulan skema v6 yang diterbitkan"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

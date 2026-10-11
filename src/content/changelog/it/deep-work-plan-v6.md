@@ -6,7 +6,7 @@ version: "v6 · Struttura più rigorosa"
 kind: release
 lang: it
 order: 0
-featured: true
+featured: false
 sourceLabel: "Set di schemi v6 pubblicato"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

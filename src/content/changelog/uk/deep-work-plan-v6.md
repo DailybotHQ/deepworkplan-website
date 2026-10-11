@@ -6,7 +6,7 @@ version: "v6 · Суворіша структура"
 kind: release
 lang: uk
 order: 0
-featured: true
+featured: false
 sourceLabel: "Опублікований набір схем v6"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

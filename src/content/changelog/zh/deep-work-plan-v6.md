@@ -6,7 +6,7 @@ version: "v6 · 更严格的结构"
 kind: release
 lang: zh
 order: 0
-featured: true
+featured: false
 sourceLabel: "已发布的 v6 架构集合"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:

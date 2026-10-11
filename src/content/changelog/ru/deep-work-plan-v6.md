@@ -6,7 +6,7 @@ version: "v6 · Более строгая структура"
 kind: release
 lang: ru
 order: 0
-featured: true
+featured: false
 sourceLabel: "Опубликованный набор схем v6"
 sourceUrl: "https://deepworkplan.com/schema/plan-manifest/v6.json"
 sourceLinks:
