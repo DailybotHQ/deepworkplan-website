@@ -8,28 +8,28 @@ order: 1
 
 # Addon Devcontainer
 
-Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.3.3`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
+Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.4.0`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
 ## Yang disediakan devcontainer-kit
 
 - **Sebuah template**, dibangun di atas spesifikasi [Dev Containers](https://containers.dev), yang dirender oleh `dck init` ke dalam repositori dengan satu tata letak tetap: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml`, dan `dev.sh`. Jika dijalankan lagi nanti, ia melakukan rekonsiliasi dan tidak pernah menimpa suntingan Anda; setiap perubahan pada file yang sudah ada ditampilkan terlebih dahulu dan memerlukan persetujuan.
 - **Container milik repositori itu sendiri.** Dockerfile dimulai dari image resmi runtime yang dipatok berdasarkan digest — `node-24`, `python-3.13`, atau `debian` — dan menyalin langkah build kit ke dalam `docker/local/<service>/dck/`. Tidak ada base image bersama yang terlibat.
 - **`dev.sh` dan `dck`.** `bash dev.sh up` mem-build, menjalankan, dan menyambungkan ke container dari terminal biasa; `shell`, `rebuild`, `doctor`, dan lainnya bekerja dengan atau tanpa VS Code atau Cursor.
-- **Herdr dua arah.** [Herdr](https://herdr.dev) di host menyambungkan setiap container sebagai mesin melalui server SSH yang hanya mendengarkan di loopback, dan container terbuka dengan sidebar standar: Home, Editor, Development, dan Agents. Di dalamnya, [herdr-peers](/kit/herdr) memungkinkan agen bertanya kepada agen di host dan di container lain.
+- **Herdr dua arah.** [Herdr](https://herdr.dev) di host menyambungkan setiap container sebagai mesin melalui server SSH yang hanya mendengarkan di loopback, dan container terbuka dengan sidebar standar: App, Editor, Development, dan Agents. Setiap workspace dan panel, termasuk yang dibuka kemudian, dimulai di path aplikasi (`/app` secara default). Di dalamnya, [herdr-peers](/kit/herdr) memungkinkan agen bertanya kepada agen di host dan di container lain.
 - **Skill `dck-dockerfile`.** Sebuah agen membuat atau meregenerasi container sebuah repositori atas permintaan dan membuktikannya dengan build sungguhan.
 
 ## Instalasi
 
 ```bash
-git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.2.8`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.2.9`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.2.8`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.2.9`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |

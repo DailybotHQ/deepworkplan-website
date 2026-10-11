@@ -8,28 +8,28 @@ order: 1
 
 # Devcontainer eklentisi
 
-Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.3.3`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
+Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.4.0`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
 ## devcontainer-kit'in sağladıkları
 
 - [Dev Containers](https://containers.dev) spesifikasyonu üzerine kurulu, `dck init` komutunun depoya tek bir sabit düzende oluşturduğu **bir şablon**: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` ve `dev.sh`. Daha sonra yeniden çalıştırıldığında uzlaştırır ve düzenlemelerinizin üzerine asla yazmaz; var olan bir dosyadaki her değişiklik önce gösterilir ve onay gerektirir.
 - **Deponun kendi konteyneri.** Dockerfile, çalışma ortamının özetle (digest) sabitlenmiş resmî imajından başlar — `node-24`, `python-3.13` ya da `debian` — ve kitin derleme adımlarını `docker/local/<service>/dck/` dizinine kopyalar. Ortak bir temel imaj kullanılmaz.
 - **`dev.sh` ve `dck`.** `bash dev.sh up`, konteyneri düz bir terminalden derler, başlatır ve ona bağlanır; `shell`, `rebuild`, `doctor` ve diğerleri VS Code veya Cursor ile ya da onlar olmadan çalışır.
-- **İki yönlü Herdr.** Ana makinedeki [Herdr](https://herdr.dev), her konteyneri yalnızca loopback üzerinde dinleyen bir SSH sunucusu aracılığıyla bir makine olarak bağlar; konteyner de standart kenar çubuğuyla açılır: Home, Editor, Development ve Agents. İçeride [herdr-peers](/kit/herdr), agent'ların ana makinedeki ve diğer konteynerlerdeki agent'lara soru sormasını sağlar.
+- **İki yönlü Herdr.** Ana makinedeki [Herdr](https://herdr.dev), her konteyneri yalnızca loopback üzerinde dinleyen bir SSH sunucusu aracılığıyla bir makine olarak bağlar; konteyner de standart kenar çubuğuyla açılır: App, Editor, Development ve Agents. Sonradan açılanlar dahil her çalışma alanı ve her panel, uygulama yolunda başlar (varsayılan olarak `/app`). İçeride [herdr-peers](/kit/herdr), agent'ların ana makinedeki ve diğer konteynerlerdeki agent'lara soru sormasını sağlar.
 - **`dck-dockerfile` becerisi.** Bir agent, istek üzerine bir deponun konteynerini oluşturur ya da yeniden üretir ve bunu gerçek bir derlemeyle kanıtlar.
 
 ## Kurulum
 
 ```bash
-git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.2.8` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.2.9` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v0.2.8` etiketi, arayüz 2 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v0.2.9` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |

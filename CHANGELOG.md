@@ -9,6 +9,10 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The vendored Deep Work Plan skill moves to 7.4.0 and every public pin to devcontainer-kit v0.2.9, whose Herdr layout is App · Editor · Development · Agents (Home renamed to App, no extra "~" workspace) with every workspace and pane, including new ones, opening in the app path (`/app` by default). The devcontainer kit page says so in every language, the site's container is re-rendered with v0.2.9, and the addon registry records ai-diff-reviewer v3.3.5 and Dailybot v3.23.8.
+
 ## [5.0.50] - 2026-10-11
 
 ### Changed

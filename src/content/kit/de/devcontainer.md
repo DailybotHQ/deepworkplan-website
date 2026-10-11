@@ -8,28 +8,28 @@ order: 1
 
 # Devcontainer-Addon
 
-Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.3.3`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
+Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.4.0`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
 ## Was devcontainer-kit bereitstellt
 
 - **Ein Template** auf Basis der [Dev Containers](https://containers.dev)-Spezifikation, das `dck init` in einem festen Layout in das Repository rendert: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` und `dev.sh`. Bei einem erneuten Lauf gleicht es ab und überschreibt nie Ihre Änderungen; jede Änderung an einer bestehenden Datei wird zuerst angezeigt und erfordert eine Einwilligung.
 - **Der eigene Container des Repositorys.** Das Dockerfile startet vom offiziellen Image der Laufzeitumgebung, per Digest fixiert — `node-24`, `python-3.13` oder `debian` — und kopiert die Build-Schritte des Kits nach `docker/local/<service>/dck/`. Es ist kein gemeinsames Basis-Image beteiligt.
 - **`dev.sh` und `dck`.** `bash dev.sh up` baut, startet und verbindet den Container aus einem einfachen Terminal; `shell`, `rebuild`, `doctor` und die übrigen Befehle funktionieren mit oder ohne VS Code oder Cursor.
-- **Herdr in beide Richtungen.** Das [Herdr](https://herdr.dev) des Hosts bindet jeden Container über einen nur an Loopback gebundenen SSH-Server als Rechner ein, und der Container öffnet sich mit der Standard-Seitenleiste: Home, Editor, Development und Agents. Darin ermöglicht [herdr-peers](/kit/herdr) Agenten, Agenten auf dem Host und in anderen Containern zu befragen.
+- **Herdr in beide Richtungen.** Das [Herdr](https://herdr.dev) des Hosts bindet jeden Container über einen nur an Loopback gebundenen SSH-Server als Rechner ein, und der Container öffnet sich mit der Standard-Seitenleiste: App, Editor, Development und Agents. Jeder Workspace und jedes Pane, auch die später geöffneten, startet im App-Pfad (standardmäßig `/app`). Darin ermöglicht [herdr-peers](/kit/herdr) Agenten, Agenten auf dem Host und in anderen Containern zu befragen.
 - **Der Skill `dck-dockerfile`.** Ein Agent erstellt oder regeneriert auf Anfrage den Container eines Repositorys und belegt ihn mit einem echten Build.
 
 ## Installation
 
 ```bash
-git clone --branch v0.2.8 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.9 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.2.8`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.2.9`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.2.8`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.2.9`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
