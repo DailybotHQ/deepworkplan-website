@@ -31,7 +31,7 @@ Acht Addons sind heute aktiv — sieben optionale plus die erforderliche lokale 
 
 ### Devcontainer (erstes Addon)
 
-Ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixiert auf `v0.2.2`, Interface `2`): ein Dev-Containers-Template, das `dck init` als eigenen Container des Repositorys in das Repository rendert, dazu der Skill `dck-dockerfile`.
+Ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixiert auf `v0.2.5`, Interface `2`): ein Dev-Containers-Template, das `dck init` als eigenen Container des Repositorys in das Repository rendert, dazu der Skill `dck-dockerfile`.
 
 - **Kit-Seite:** [Devcontainer](/kit/devcontainer)
 - **Was es hinzufügt:** `docker/local/<service>/Dockerfile` aus dem offiziellen, per Digest fixierten Image der Runtime (`python-3.13`, `node-24` oder `debian`, kein gemeinsames Basis-Image), `dev.sh` über dem `dck`-Launcher (`up`, `shell`, `rebuild`, `doctor`), Coding-Agenten als Opt-in-Schicht, Ports ausschließlich auf Loopback, Git über SSH durch den Agenten des Hosts ohne Schlüssel im Container und Herdr-Maschinen pro Container mit dem Standard-Layout
@@ -91,7 +91,7 @@ Ein schlanker Integrator von [herdr-peers](https://github.com/DailybotHQ/herdr-p
 
 ### DeepWorkPlan Vim (siebtes Addon)
 
-Ein schlanker Integrator von [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fixiert auf `v0.5.1`, Interface `1`), dem Terminal-Editor für Deep Work Plan (Neovim 0.12+).
+Ein schlanker Integrator von [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fixiert auf `v0.6.0`, Interface `1`), dem Terminal-Editor für Deep Work Plan (Neovim 0.12+).
 
 - **Kit-Seite:** [DeepWorkPlan Vim](/kit/vim)
 - **Was es hinzufügt:** eine optionale, maschinenweite Editor-Oberfläche für Agenten und Menschen — ein generierter Befehlsindex, ein schreibgeschützter Plan-Browser und ein Markdown-Viewer; jede Aussage wird aus der fixierten maschinenlesbaren Oberfläche des Produkts gelesen

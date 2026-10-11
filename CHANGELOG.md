@@ -9,6 +9,12 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The vendored Deep Work Plan skill moves to 7.3.0 (verified against its `SHA256SUMS`, 171 files); its devcontainer addon pins devcontainer-kit v0.2.5 and its vim addon DeepWorkPlan Vim v0.6.0. Every public pin follows.
+- The site's own container is re-rendered with devcontainer-kit v0.2.5: the agent mesh reaches the host and the host's other loopback containers, the container's Herdr catalog persists across rebuilds (the start hook's workaround is gone), and `dev.sh` works on plain `docker compose` without dck and installs dck with `install-dck`.
+- The devcontainer and herdr kit pages describe the mesh in all 17 languages.
+
 ## [5.0.46] - 2026-10-11
 
 ### Changed

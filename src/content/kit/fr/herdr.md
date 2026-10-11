@@ -54,6 +54,10 @@ Prérequis : Herdr 0.9.1 ou ultérieur, `bash`, et `python3` 3.9 ou ultérieur (
 
 herdr-peers n’authentifie pas l’expéditeur : le champ `from=` d’une estampille est une affirmation. La mesure d’atténuation est la liste d’autorisation `HERDR_PEERS_SCOPE`, qui limite les espaces de travail et les machines qu’un pair accepte.
 
+## Les conteneurs et l’hôte
+
+Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v0.2.5`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais.
+
 ## Herdr ou agentkit
 
 Les deux addons implémentent la même interface de délégation — `launch`, `observe`, `collect`, `cancel` — avec des transports différents.

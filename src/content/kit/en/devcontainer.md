@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.2.0`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
+Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.3.0`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
 
 ## What devcontainer-kit provides
 
@@ -21,15 +21,15 @@ Give the repository a reproducible, isolated development container — one that 
 ## Install
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v0.2.2`: `v0.2.0` is unsupported.
+Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v0.2.5`: `v0.2.0` is unsupported.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/devcontainer-kit`, tag `v0.2.2`, interface 2 |
+| Product | `DailybotHQ/devcontainer-kit`, tag `v0.2.5`, interface 2 |
 | Registry key | `devcontainer` in `.dwp/config.json` |
 | Per-repository config | `.devcontainer/dck.toml` |
 | Detection | `dck doctor --json` |
@@ -46,6 +46,18 @@ Every container carries the development tools — git, gh, ripgrep, an SSH serve
 
 Logins, `gh`, the Herdr configuration and the git identity survive `bash dev.sh rebuild`.
 
+## Agents across machines
+
+Since `v0.2.3`, `dck up` wires a two-way mesh with no hand step, on Docker Desktop:
+
+- **Containers and the host.** Agents inside reach Herdr agents on the host, in every other dck container and in the other loopback containers your host's Herdr already manages — and those reach back. Every peer carries a pinned host key; nothing is trusted on first use.
+- **An optional host listener.** `dck setup` offers, once, a user-level SSH server on `127.0.0.1` that accepts only the dck key and is kept running by launchd (macOS). If you already run a loopback listener, point the host profile at it instead. `dck host listener disable` removes it.
+- **Survives rebuilds.** The container's Herdr machine catalog lives on a volume, so `bash dev.sh rebuild` keeps every machine registered inside.
+- **Replies from the host too.** `dck setup` installs a verified [herdr-peers](/kit/herdr) on the host, so `dck agents` and `dck ask` work there, and host agents answer with `herdr-peers reply`.
+- **Containers the kit did not create.** List the public keys they log in with under `[ssh] authorized_extra` in your host profile, and they can reach dck containers too.
+
+Pair it with [coding-agents-kit](/kit/agentkit) on the host and in the container, and the same `ak` launches agents on both sides.
+
 ## Security defaults
 
 - Every published port binds `127.0.0.1` unless `dck.toml` sets `bind`.
@@ -53,7 +65,7 @@ Logins, `gh`, the Herdr configuration and the git identity survive `bash dev.sh 
 - SSH host keys are generated at runtime into a per-project volume, never baked into an image; the server accepts public keys only, with no root login and no passwords.
 - The template adds no `cap_add`, no `privileged` mode and no Docker socket.
 - Every download is pinned by version and verified by checksum; the base image is pinned by digest.
-- The Herdr mesh that lets agents in one container reach the others is on by default and documented with its off switches in the kit's threat model.
+- The Herdr mesh that lets agents in one container reach the others is on by default and documented with its off switches in the kit's threat model. The host listener lets code in a running container open a shell on the host as you: it is opt-in, loopback-only, accepts only the dck key and comes off with `dck host listener disable`.
 
 ## Notes
 

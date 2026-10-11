@@ -31,7 +31,7 @@ Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wa
 
 ### Devcontainer (addon pertama)
 
-Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.2.2`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
+Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.2.5`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
 
 - **Halaman kit:** [Devcontainer](/kit/devcontainer)
 - **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya, dan mesin Herdr per container dengan tata letak standar
@@ -91,7 +91,7 @@ Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (
 
 ### DeepWorkPlan Vim (addon ketujuh)
 
-Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.5.1`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
+Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.6.0`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
 
 - **Halaman kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Yang ditambahkan:** permukaan editor opsional tingkat mesin untuk agen dan manusia — indeks perintah yang dihasilkan, penjelajah rencana hanya-baca, dan penampil Markdown; setiap klaim dibaca dari permukaan produk yang dapat dibaca mesin dan telah dipatok

@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer アドオン
 
-リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.2.0`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
+リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.3.0`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
 
 ## devcontainer-kit が提供するもの
 
@@ -21,15 +21,15 @@ order: 1
 ## インストール
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.2.2` に固定してください。`v0.2.0` はサポート対象外です。
+要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.2.5` に固定してください。`v0.2.0` はサポート対象外です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.2.2`、インターフェース 2 |
+| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.2.5`、インターフェース 2 |
 | レジストリキー | `.dwp/config.json` 内の `devcontainer` |
 | リポジトリごとの設定 | `.devcontainer/dck.toml` |
 | 検出 | `dck doctor --json` |
@@ -46,6 +46,18 @@ cd your-repo && dck init && bash dev.sh up
 
 ログイン、`gh`、Herdr の設定、git の ID は `bash dev.sh rebuild` の後も保持されます。
 
+## マシンをまたぐエージェント
+
+`v0.2.3` 以降、Docker Desktop 上では `dck up` が手作業なしで双方向のメッシュを構成します。
+
+- **コンテナとホスト。** コンテナ内のエージェントは、ホスト上、他のすべての dck コンテナ内、そしてホストの Herdr がすでに管理している他のループバックコンテナ内の Herdr エージェントに到達でき、逆方向にも到達できます。すべてのピアは固定されたホスト鍵を持ち、初回利用時に信頼されるものはありません。
+- **任意のホストリスナー。** `dck setup` は一度だけ、`127.0.0.1` 上のユーザーレベルの SSH サーバーを提案します。このサーバーは dck の鍵のみを受け付け、launchd（macOS）によって稼働し続けます。すでにループバックのリスナーを動かしている場合は、代わりにホストプロファイルをそちらに向けてください。`dck host listener disable` で削除できます。
+- **再構築後も保持。** コンテナの Herdr マシンカタログはボリューム上にあるため、`bash dev.sh rebuild` の後も内部に登録されたすべてのマシンが保持されます。
+- **ホストからも返信。** `dck setup` はホストに検証済みの [herdr-peers](/kit/herdr) をインストールするため、ホストでも `dck agents` と `dck ask` が使え、ホストのエージェントは `herdr-peers reply` で応答します。
+- **キットが作成していないコンテナ。** それらがログインに使う公開鍵をホストプロファイルの `[ssh] authorized_extra` に列挙すれば、それらのコンテナも dck コンテナに到達できます。
+
+ホストとコンテナの両方で [coding-agents-kit](/kit/agentkit) と組み合わせれば、同じ `ak` で両側のエージェントを起動できます。
+
 ## セキュリティのデフォルト
 
 - 公開されるポートはすべて、`dck.toml` が `bind` を設定しない限り `127.0.0.1` にバインドされます。
@@ -53,7 +65,7 @@ cd your-repo && dck init && bash dev.sh up
 - SSH ホスト鍵は実行時にプロジェクトごとのボリュームへ生成され、イメージに焼き込まれることはありません。サーバーは公開鍵のみを受け付け、root ログインもパスワードも許可しません。
 - テンプレートは `cap_add`、`privileged` モード、Docker ソケットのいずれも追加しません。
 - すべてのダウンロードはバージョンで固定され、チェックサムで検証されます。ベースイメージはダイジェストで固定されます。
-- あるコンテナのエージェントが他のコンテナに到達できる Herdr メッシュはデフォルトで有効であり、その無効化の方法はキットの脅威モデルに記載されています。
+- あるコンテナのエージェントが他のコンテナに到達できる Herdr メッシュはデフォルトで有効であり、その無効化の方法はキットの脅威モデルに記載されています。ホストリスナーは、実行中のコンテナ内のコードがあなたとしてホスト上でシェルを開くことを可能にします。これはオプトインで、ループバック限定であり、dck の鍵のみを受け付け、`dck host listener disable` で削除できます。
 
 ## 補足
 

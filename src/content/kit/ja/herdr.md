@@ -54,6 +54,10 @@ npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr
 
 herdr-peers は送信者を認証しません。スタンプ内の `from=` フィールドは主張にすぎません。その緩和策が `HERDR_PEERS_SCOPE` 許可リストで、ピアが受け入れるワークスペースとマシンを制限します。
 
+## コンテナとホスト
+
+devcontainer-kit `v0.2.5` 上の [devcontainer](/kit/devcontainer) アドオンを使うと、すべての dck コンテナが herdr-peers を同梱し、`dck up` の時点でメッシュに参加します。そのエージェントは、ホスト上、他のコンテナ内、ホストの他のループバックコンテナ内のエージェントに問い合わせ、返信を受け取れます。`dck setup` はホストに検証済みの herdr-peers をインストールするため、ホストのエージェントも返信できます。ホストリスナーと、他のコンテナを受け入れる追加の鍵は、キットのホストプロファイルであなたが決めるものであり、このアドオンがそれらを設定することはありません。
+
 ## Herdr か agentkit か
 
 どちらのアドオンも同じ委任インターフェース（`launch`、`observe`、`collect`、`cancel`）を、異なるトランスポートで実装しています。

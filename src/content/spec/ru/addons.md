@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (первый аддон)
 
-Тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён на `v0.2.2`, интерфейс `2`): шаблон Dev Containers, который `dck init` разворачивает в репозитории как его собственный контейнер, а также навык `dck-dockerfile`.
+Тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён на `v0.2.5`, интерфейс `2`): шаблон Dev Containers, который `dck init` разворачивает в репозитории как его собственный контейнер, а также навык `dck-dockerfile`.
 
 - **Страница kit:** [Devcontainer](/kit/devcontainer)
 - **Что добавляет:** `docker/local/<service>/Dockerfile` на основе официального образа среды выполнения, закреплённого по digest (`python-3.13`, `node-24` или `debian`, без общего базового образа), `dev.sh` поверх лаунчера `dck` (`up`, `shell`, `rebuild`, `doctor`), агентов для программирования как подключаемый по желанию слой, порты только на loopback, git по SSH через агент хоста без ключей внутри и машины Herdr для каждого контейнера со стандартной раскладкой
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim (седьмой аддон)
 
-Тонкий интегратор [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (закреплён на `v0.5.1`, интерфейс `1`) — терминального редактора для Deep Work Plan (Neovim 0.12+).
+Тонкий интегратор [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (закреплён на `v0.6.0`, интерфейс `1`) — терминального редактора для Deep Work Plan (Neovim 0.12+).
 
 - **Страница kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Что добавляет:** опциональную поверхность редактора на уровне машины для агентов и людей — генерируемый индекс команд, браузер планов только для чтения и просмотрщик Markdown; каждое утверждение считывается из закреплённой машиночитаемой поверхности продукта

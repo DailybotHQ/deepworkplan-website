@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (पहला ऐडऑन)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.2` पर पिन किया गया, इंटरफ़ेस `2`) का एक हल्का इंटीग्रेटर: एक Dev Containers टेम्पलेट जिसे `dck init` रिपॉज़िटरी में उसके अपने कंटेनर के रूप में रेंडर करता है, साथ में `dck-dockerfile` स्किल।
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.5` पर पिन किया गया, इंटरफ़ेस `2`) का एक हल्का इंटीग्रेटर: एक Dev Containers टेम्पलेट जिसे `dck init` रिपॉज़िटरी में उसके अपने कंटेनर के रूप में रेंडर करता है, साथ में `dck-dockerfile` स्किल।
 
 - **Kit पृष्ठ:** [Devcontainer](/kit/devcontainer)
 - **क्या जोड़ता है:** digest द्वारा पिन की गई रनटाइम की आधिकारिक इमेज से बना `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` या `debian`, कोई साझा बेस इमेज नहीं), `dck` लॉन्चर (`up`, `shell`, `rebuild`, `doctor`) के ऊपर `dev.sh`, एक ऑप्ट-इन परत के रूप में कोडिंग एजेंट, केवल loopback पोर्ट, होस्ट के एजेंट के माध्यम से SSH पर git जिसमें अंदर कोई कुंजी नहीं होती, और मानक लेआउट के साथ प्रति कंटेनर Herdr मशीनें
@@ -91,7 +91,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### DeepWorkPlan Vim (सातवाँ ऐडऑन)
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v0.5.1`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v0.6.0`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
 
 - **Kit पृष्ठ:** [DeepWorkPlan Vim](/kit/vim)
 - **क्या जोड़ता है:** एजेंटों और मनुष्यों के लिए एक वैकल्पिक, मशीन-स्तरीय एडिटर सतह — एक जनरेट किया गया कमांड इंडेक्स, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर; हर दावा उत्पाद की पिन की गई मशीन-पठनीय सतह से पढ़ा जाता है

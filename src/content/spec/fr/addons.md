@@ -31,7 +31,7 @@ Huit addons sont actifs aujourd’hui — sept opt-in plus la revue locale requi
 
 ### Devcontainer (premier addon)
 
-Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.2.2`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
+Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.2.5`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
 
 - **Page kit :** [Devcontainer](/kit/devcontainer)
 - **Ce qu'il ajoute :** `docker/local/<service>/Dockerfile` à partir de l'image officielle du runtime épinglée par digest (`python-3.13`, `node-24` ou `debian`, sans image de base partagée), `dev.sh` au-dessus du lanceur `dck` (`up`, `shell`, `rebuild`, `doctor`), les agents de code comme couche optionnelle, des ports limités au loopback, git via SSH à travers l'agent de l'hôte sans aucune clé à l'intérieur, et des machines Herdr par conteneur avec la disposition standard
@@ -91,7 +91,7 @@ Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 
 ### DeepWorkPlan Vim (septième addon)
 
-Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v0.5.1`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
+Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v0.6.0`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
 
 - **Page kit :** [DeepWorkPlan Vim](/kit/vim)
 - **Ce qu'il ajoute :** une surface d’édition optionnelle, au niveau de la machine, pour les agents et les humains — un index des commandes généré, un navigateur de plans en lecture seule et une visionneuse Markdown ; chaque affirmation est lue depuis la surface lisible par machine épinglée du produit

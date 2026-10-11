@@ -54,6 +54,10 @@ Yêu cầu: Herdr 0.9.1 trở lên, `bash` và `python3` 3.9 trở lên (chỉ d
 
 herdr-peers không xác thực bên gửi: trường `from=` trong một con dấu chỉ là một tuyên bố. Biện pháp giảm thiểu là danh sách cho phép `HERDR_PEERS_SCOPE`, giới hạn các workspace và máy mà một peer chấp nhận.
 
+## Container và máy host
+
+Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v0.2.5`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng.
+
 ## Herdr hay agentkit
 
 Cả hai addon đều triển khai cùng một giao diện ủy thác — `launch`, `observe`, `collect`, `cancel` — với các phương thức truyền khác nhau.

@@ -31,7 +31,7 @@ Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme
 
 ### Devcontainer (birinci eklenti)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.2` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.2.5` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
 
 - **Kit sayfası:** [Devcontainer](/kit/devcontainer)
 - **Ne ekler:** çalışma zamanının digest ile sabitlenmiş resmi imajından üretilen `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` veya `debian`, paylaşılan temel imaj yok), `dck` başlatıcısı (`up`, `shell`, `rebuild`, `doctor`) üzerine kurulu `dev.sh`, opt-in bir katman olarak kodlama agent'ları, yalnızca loopback portları, içeride hiçbir anahtar olmadan host'un agent'ı üzerinden SSH ile git ve standart düzene sahip container başına Herdr makineleri
@@ -91,7 +91,7 @@ v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https:
 
 ### DeepWorkPlan Vim (yedinci eklenti)
 
-Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.5.1`, arayüz `1`) için ince bir entegrasyon katmanı.
+Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.6.0`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [DeepWorkPlan Vim](/kit/vim)
 - **Ne ekler:** agent'lar ve insanlar için isteğe bağlı, makine düzeyinde bir düzenleyici yüzeyi — üretilmiş bir komut dizini, salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi; her iddia ürünün sabitlenmiş, makine tarafından okunabilir yüzeyinden okunur

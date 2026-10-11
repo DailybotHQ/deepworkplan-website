@@ -31,7 +31,7 @@ Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục b�
 
 ### Devcontainer (addon đầu tiên)
 
-Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.2`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
+Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.2.5`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
 
 - **Trang kit:** [Devcontainer](/kit/devcontainer)
 - **Bổ sung:** `docker/local/<service>/Dockerfile` từ image chính thức của runtime được ghim theo digest (`python-3.13`, `node-24` hoặc `debian`, không có image cơ sở dùng chung), `dev.sh` chạy trên trình khởi chạy `dck` (`up`, `shell`, `rebuild`, `doctor`), coding agent như một lớp opt-in, cổng chỉ dùng loopback, git qua SSH thông qua agent của máy host mà không có khóa nào bên trong, và máy Herdr cho mỗi container với bố cục tiêu chuẩn
@@ -91,7 +91,7 @@ Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-
 
 ### DeepWorkPlan Vim (addon thứ bảy)
 
-Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.5.1`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
+Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.6.0`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
 
 - **Trang kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Bổ sung:** một bề mặt trình soạn thảo tùy chọn ở cấp máy cho agent và con người — chỉ mục lệnh được sinh tự động, trình duyệt kế hoạch chỉ đọc và trình xem Markdown; mọi tuyên bố đều được đọc từ bề mặt máy đọc được đã ghim của sản phẩm

@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.2.0`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
+Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.3.0`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
 ## Yang disediakan devcontainer-kit
 
@@ -21,15 +21,15 @@ Berikan repositori sebuah dev container yang reproducible dan terisolasi — yan
 ## Instalasi
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.2.2`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.2.5`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.2.2`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.2.5`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
@@ -46,6 +46,18 @@ Setiap container membawa alat pengembangan — git, gh, ripgrep, server SSH, Her
 
 Login, `gh`, konfigurasi Herdr, dan identitas git tetap bertahan setelah `bash dev.sh rebuild`.
 
+## Agen lintas mesin
+
+Sejak `v0.2.3`, `dck up` menyambungkan mesh dua arah tanpa langkah manual, di Docker Desktop:
+
+- **Container dan host.** Agen di dalam container menjangkau agen Herdr di host, di setiap container dck lain, dan di container loopback lain yang sudah dikelola Herdr di host Anda — dan agen-agen itu dapat menjangkau balik. Setiap rekan membawa kunci host yang dipatok; tidak ada yang dipercaya pada penggunaan pertama.
+- **Listener host opsional.** `dck setup` menawarkan, satu kali, server SSH tingkat pengguna di `127.0.0.1` yang hanya menerima kunci dck dan dijaga tetap berjalan oleh launchd (macOS). Jika Anda sudah menjalankan listener loopback, arahkan profil host ke listener tersebut. `dck host listener disable` menghapusnya.
+- **Bertahan setelah rebuild.** Katalog mesin Herdr milik container berada di sebuah volume, sehingga `bash dev.sh rebuild` mempertahankan setiap mesin yang terdaftar di dalamnya.
+- **Balasan dari host juga.** `dck setup` memasang [herdr-peers](/kit/herdr) yang terverifikasi di host, sehingga `dck agents` dan `dck ask` berfungsi di sana, dan agen host menjawab dengan `herdr-peers reply`.
+- **Container yang tidak dibuat oleh kit.** Cantumkan kunci publik yang mereka gunakan untuk login di bawah `[ssh] authorized_extra` dalam profil host Anda, dan mereka juga dapat menjangkau container dck.
+
+Padukan dengan [coding-agents-kit](/kit/agentkit) di host dan di container, dan `ak` yang sama menjalankan agen di kedua sisi.
+
 ## Default keamanan
 
 - Setiap port yang dipublikasikan terikat ke `127.0.0.1` kecuali `dck.toml` menyetel `bind`.
@@ -53,7 +65,7 @@ Login, `gh`, konfigurasi Herdr, dan identitas git tetap bertahan setelah `bash d
 - Kunci host SSH dibuat saat runtime ke dalam volume per proyek, tidak pernah ditanamkan ke dalam image; server hanya menerima kunci publik, tanpa login root dan tanpa kata sandi.
 - Template tidak menambahkan `cap_add`, mode `privileged`, maupun socket Docker.
 - Setiap unduhan dipatok berdasarkan versi dan diverifikasi dengan checksum; base image dipatok berdasarkan digest.
-- Mesh Herdr yang memungkinkan agen di satu container menjangkau container lain aktif secara default dan didokumentasikan beserta cara menonaktifkannya dalam threat model kit.
+- Mesh Herdr yang memungkinkan agen di satu container menjangkau container lain aktif secara default dan didokumentasikan beserta cara menonaktifkannya dalam threat model kit. Listener host memungkinkan kode di container yang sedang berjalan membuka shell di host sebagai Anda: listener ini bersifat opt-in, hanya loopback, hanya menerima kunci dck, dan dihapus dengan `dck host listener disable`.
 
 ## Catatan
 

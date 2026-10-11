@@ -54,6 +54,10 @@ Gereksinimler: Herdr 0.9.1 veya daha yenisi, `bash` ve `python3` 3.9 veya daha y
 
 herdr-peers göndereni doğrulamaz: bir damgadaki `from=` alanı bir iddiadır. Önlem, bir eşin kabul ettiği çalışma alanlarını ve makineleri sınırlayan `HERDR_PEERS_SCOPE` izin listesidir.
 
+## Konteynerler ve ana makine
+
+devcontainer-kit `v0.2.5` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz.
+
 ## Herdr mı agentkit mi
 
 Her iki eklenti de aynı devretme arayüzünü — `launch`, `observe`, `collect`, `cancel` — farklı taşıma yöntemleriyle uygular.

@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 附加组件
 
-为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v7**（技能包 `v7.2.0`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
+为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v7**（技能包 `v7.3.0`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
 
 ## devcontainer-kit 提供什么
 
@@ -21,15 +21,15 @@ order: 1
 ## 安装
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v0.2.2`：`v0.2.0` 不受支持。
+要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v0.2.5`：`v0.2.0` 不受支持。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v0.2.2`，接口 2 |
+| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v0.2.5`，接口 2 |
 | 注册表键 | `.dwp/config.json` 中的 `devcontainer` |
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |
@@ -46,6 +46,18 @@ cd your-repo && dck init && bash dev.sh up
 
 登录状态、`gh`、Herdr 配置和 git 身份在 `bash dev.sh rebuild` 之后依然保留。
 
+## 跨机器的代理
+
+自 `v0.2.3` 起，在 Docker Desktop 上，`dck up` 无需任何手动步骤即可连通一个双向网格：
+
+- **容器与主机。** 容器内的代理可以访问主机上、其他每个 dck 容器中以及主机 Herdr 已管理的其他 loopback 容器中的 Herdr 代理，这些代理也能反向访问。每个对等方都带有固定的主机密钥；不会在首次使用时信任任何对象。
+- **可选的主机监听器。** `dck setup` 会一次性提供一个位于 `127.0.0.1` 的用户级 SSH 服务器，它只接受 dck 密钥，并由 launchd（macOS）保持运行。如果你已经在运行一个 loopback 监听器，可改为让主机配置文件指向它。`dck host listener disable` 会将其移除。
+- **重建后依然保留。** 容器的 Herdr 机器目录存放在卷中，因此 `bash dev.sh rebuild` 会保留其中注册的每台机器。
+- **主机同样可以回复。** `dck setup` 会在主机上安装经过校验的 [herdr-peers](/kit/herdr)，因此 `dck agents` 和 `dck ask` 在主机上同样可用，主机上的代理通过 `herdr-peers reply` 回复。
+- **非工具包创建的容器。** 在主机配置文件的 `[ssh] authorized_extra` 下列出它们登录所用的公钥，它们也就能访问 dck 容器。
+
+在主机和容器中都搭配 [coding-agents-kit](/kit/agentkit) 使用，同一个 `ak` 即可在两侧启动代理。
+
 ## 安全默认值
 
 - 每个发布的端口都绑定到 `127.0.0.1`，除非 `dck.toml` 设置了 `bind`。
@@ -53,7 +65,7 @@ cd your-repo && dck init && bash dev.sh up
 - SSH 主机密钥在运行时生成到每个项目独立的卷中，绝不内置于镜像；服务器只接受公钥，不允许 root 登录，也不使用密码。
 - 模板不添加 `cap_add`、不使用 `privileged` 模式，也不挂载 Docker socket。
 - 每次下载都按版本固定并经校验和验证；基础镜像按摘要固定。
-- 让一个容器中的代理访问其他容器的 Herdr 网格默认开启，其关闭开关记录在工具包的威胁模型中。
+- 让一个容器中的代理访问其他容器的 Herdr 网格默认开启，其关闭开关记录在工具包的威胁模型中。主机监听器允许运行中容器内的代码以你的身份在主机上打开 shell：它需要主动启用，仅限 loopback，只接受 dck 密钥，并可通过 `dck host listener disable` 移除。
 
 ## 备注
 

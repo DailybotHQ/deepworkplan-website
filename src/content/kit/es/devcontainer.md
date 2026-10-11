@@ -8,7 +8,7 @@ order: 1
 
 # Addon de devcontainer
 
-Dale al repositorio un contenedor de desarrollo reproducible y aislado, que puedan usar por igual las personas, los editores y los agentes de programación. En **DWP v7** (pack `v7.2.0`) este addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un producto MIT que funciona sin Deep Work Plan. Es opcional: un repositorio es plenamente conforme sin él.
+Dale al repositorio un contenedor de desarrollo reproducible y aislado, que puedan usar por igual las personas, los editores y los agentes de programación. En **DWP v7** (pack `v7.3.0`) este addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un producto MIT que funciona sin Deep Work Plan. Es opcional: un repositorio es plenamente conforme sin él.
 
 ## Qué proporciona devcontainer-kit
 
@@ -21,15 +21,15 @@ Dale al repositorio un contenedor de desarrollo reproducible y aislado, que pued
 ## Instalación
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisitos: `bash` 3.2 o posterior y `python3` 3.11 o posterior en un host Linux o macOS, y Docker con Compose v2 para los comandos del contenedor. Verifica una versión con su asset `SHA256SUMS`. Fija `v0.2.2`: `v0.2.0` no tiene soporte.
+Requisitos: `bash` 3.2 o posterior y `python3` 3.11 o posterior en un host Linux o macOS, y Docker con Compose v2 para los comandos del contenedor. Verifica una versión con su asset `SHA256SUMS`. Fija `v0.2.5`: `v0.2.0` no tiene soporte.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/devcontainer-kit`, tag `v0.2.2`, interfaz 2 |
+| Producto | `DailybotHQ/devcontainer-kit`, tag `v0.2.5`, interfaz 2 |
 | Clave de registro | `devcontainer` en `.dwp/config.json` |
 | Configuración por repositorio | `.devcontainer/dck.toml` |
 | Detección | `dck doctor --json` |
@@ -46,6 +46,18 @@ Todo contenedor incluye las herramientas de desarrollo (git, gh, ripgrep, un ser
 
 Los inicios de sesión, `gh`, la configuración de Herdr y la identidad de git sobreviven a `bash dev.sh rebuild`.
 
+## Agentes entre máquinas
+
+Desde `v0.2.3`, `dck up` configura una malla bidireccional sin pasos manuales, en Docker Desktop:
+
+- **Contenedores y el host.** Los agentes de dentro llegan a los agentes de Herdr del host, de cada uno de los demás contenedores dck y de los otros contenedores loopback que el Herdr de tu host ya gestiona, y estos también llegan de vuelta. Cada par lleva una clave de host fijada; nada se acepta como confiable en el primer uso.
+- **Un listener opcional en el host.** `dck setup` ofrece, una sola vez, un servidor SSH a nivel de usuario en `127.0.0.1` que solo acepta la clave de dck y que launchd mantiene en ejecución (macOS). Si ya ejecutas un listener loopback, apunta el perfil del host a él. `dck host listener disable` lo elimina.
+- **Sobrevive a las reconstrucciones.** El catálogo de máquinas de Herdr del contenedor vive en un volumen, así que `bash dev.sh rebuild` conserva todas las máquinas registradas dentro.
+- **Respuestas también desde el host.** `dck setup` instala un [herdr-peers](/kit/herdr) verificado en el host, de modo que `dck agents` y `dck ask` funcionan allí, y los agentes del host responden con `herdr-peers reply`.
+- **Contenedores que el kit no creó.** Enumera las claves públicas con las que inician sesión en `[ssh] authorized_extra` del perfil del host, y también podrán llegar a los contenedores dck.
+
+Combínalo con [coding-agents-kit](/kit/agentkit) en el host y en el contenedor, y el mismo `ak` lanza agentes en ambos lados.
+
 ## Valores de seguridad predeterminados
 
 - Todo puerto publicado se vincula a `127.0.0.1` salvo que `dck.toml` defina `bind`.
@@ -53,7 +65,7 @@ Los inicios de sesión, `gh`, la configuración de Herdr y la identidad de git s
 - Las claves de host SSH se generan en tiempo de ejecución en un volumen por proyecto, nunca se incorporan a una imagen; el servidor solo acepta claves públicas, sin inicio de sesión como root y sin contraseñas.
 - La plantilla no agrega `cap_add`, ni modo `privileged`, ni el socket de Docker.
 - Cada descarga está fijada por versión y verificada por checksum; la imagen base está fijada por digest.
-- La malla de Herdr que permite a los agentes de un contenedor llegar a los demás está activada por defecto y documentada, junto con sus interruptores de desactivación, en el modelo de amenazas del kit.
+- La malla de Herdr que permite a los agentes de un contenedor llegar a los demás está activada por defecto y documentada, junto con sus interruptores de desactivación, en el modelo de amenazas del kit. El listener del host permite que el código de un contenedor en ejecución abra una shell en el host con tu usuario: es opcional, solo escucha en loopback, acepta únicamente la clave de dck y se retira con `dck host listener disable`.
 
 ## Notas
 

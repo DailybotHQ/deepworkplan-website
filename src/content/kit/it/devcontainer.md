@@ -8,7 +8,7 @@ order: 1
 
 # Addon devcontainer
 
-Dai al repository un container di sviluppo riproducibile e isolato, che persone, editor e agenti di codice possano usare allo stesso modo. In **DWP v7** (pack `v7.2.0`) questo addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un prodotto MIT che funziona senza Deep Work Plan. È opzionale: un repository è pienamente conforme anche senza di esso.
+Dai al repository un container di sviluppo riproducibile e isolato, che persone, editor e agenti di codice possano usare allo stesso modo. In **DWP v7** (pack `v7.3.0`) questo addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un prodotto MIT che funziona senza Deep Work Plan. È opzionale: un repository è pienamente conforme anche senza di esso.
 
 ## Cosa fornisce devcontainer-kit
 
@@ -21,15 +21,15 @@ Dai al repository un container di sviluppo riproducibile e isolato, che persone,
 ## Installazione
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v0.2.2`: `v0.2.0` non è supportata.
+Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v0.2.5`: `v0.2.0` non è supportata.
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.2.2`, interfaccia 2 |
+| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.2.5`, interfaccia 2 |
 | Chiave di registro | `devcontainer` in `.dwp/config.json` |
 | Configurazione per repository | `.devcontainer/dck.toml` |
 | Rilevamento | `dck doctor --json` |
@@ -46,6 +46,18 @@ Ogni container include gli strumenti di sviluppo (git, gh, ripgrep, un server SS
 
 Gli accessi, `gh`, la configurazione di Herdr e l’identità git sopravvivono a `bash dev.sh rebuild`.
 
+## Agenti tra macchine diverse
+
+Da `v0.2.3`, `dck up` configura una mesh bidirezionale senza passaggi manuali, su Docker Desktop:
+
+- **Container e host.** Gli agenti all’interno raggiungono gli agenti Herdr sull’host, in ogni altro container dck e negli altri container loopback che l’Herdr del tuo host gestisce già, e questi li raggiungono a loro volta. Ogni peer porta una chiave host fissata; nulla viene considerato attendibile al primo utilizzo.
+- **Un listener opzionale sull’host.** `dck setup` propone, una sola volta, un server SSH a livello utente su `127.0.0.1` che accetta solo la chiave dck ed è mantenuto in esecuzione da launchd (macOS). Se esegui già un listener loopback, punta invece il profilo host verso di esso. `dck host listener disable` lo rimuove.
+- **Sopravvive alle ricostruzioni.** Il catalogo delle macchine Herdr del container risiede su un volume, quindi `bash dev.sh rebuild` mantiene ogni macchina registrata al suo interno.
+- **Risposte anche dall’host.** `dck setup` installa sull’host un [herdr-peers](/kit/herdr) verificato, così `dck agents` e `dck ask` funzionano anche lì e gli agenti dell’host rispondono con `herdr-peers reply`.
+- **Container non creati dal kit.** Elenca le chiavi pubbliche con cui accedono in `[ssh] authorized_extra` nel profilo host, e potranno raggiungere anche i container dck.
+
+Abbinalo a [coding-agents-kit](/kit/agentkit) sull’host e nel container, e lo stesso `ak` avvia agenti su entrambi i lati.
+
 ## Impostazioni di sicurezza predefinite
 
 - Ogni porta pubblicata si associa a `127.0.0.1`, a meno che `dck.toml` non imposti `bind`.
@@ -53,7 +65,7 @@ Gli accessi, `gh`, la configurazione di Herdr e l’identità git sopravvivono a
 - Le chiavi host SSH vengono generate a runtime in un volume per progetto, mai incorporate in un’immagine; il server accetta solo chiavi pubbliche, senza login root e senza password.
 - Il template non aggiunge `cap_add`, né la modalità `privileged`, né il socket di Docker.
 - Ogni download è fissato per versione e verificato tramite checksum; l’immagine di base è fissata per digest.
-- La mesh di Herdr che permette agli agenti di un container di raggiungere gli altri è attiva per impostazione predefinita ed è documentata, con i relativi interruttori di disattivazione, nel modello delle minacce del kit.
+- La mesh di Herdr che permette agli agenti di un container di raggiungere gli altri è attiva per impostazione predefinita ed è documentata, con i relativi interruttori di disattivazione, nel modello delle minacce del kit. Il listener dell’host permette al codice di un container in esecuzione di aprire una shell sull’host con la tua identità: è opt-in, solo loopback, accetta solo la chiave dck e si rimuove con `dck host listener disable`.
 
 ## Note
 

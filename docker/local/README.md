@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.2 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.5 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -13,7 +13,7 @@ VS Code / Cursor ("Reopen in Container").
 | `docker/local/dwpwebsite/Dockerfile` | the image: dck's managed blocks, then the site's own section (chromium, the npm → pnpm shim, the site helpers) |
 | `docker/local/dwpwebsite/dck/` | the build steps dck vendors (pinned and verified downloads); reconciled by `dck init` |
 | `docker/local/dwpwebsite/.env` | your keys (copied from `.env.example` on the first `up`, mode 0600, gitignored) |
-| `dev.sh` | the entry point, a thin launcher over `dck` |
+| `dev.sh` | the entry point, a thin launcher over `dck` (plain `docker compose` when dck is absent) |
 | `docker/local/dev-setup-hook.sh` | the site's start hook (run by dck at every start): recreates `/tmp/ov/{astro,dist}` for a checkout whose `.astro` / `dist` are symlinks there (build output off the bind mount) |
 
 Blocks between `>>> dck:` and `<<< dck:` markers belong to dck: to change them, edit
@@ -21,13 +21,17 @@ Blocks between `>>> dck:` and `<<< dck:` markers belong to dck: to change them, 
 
 ## Quick start
 
-devcontainer-kit is a one-time install on the host, pinned:
+Docker is the only host requirement. Without devcontainer-kit, `dev.sh` runs `up`, `down`,
+`shell`, `exec`, `build`, `rebuild`, `logs` and `ps` on plain `docker compose` (it still
+creates the `.env`; the container's entrypoint runs the start hook). devcontainer-kit adds the Herdr machine, the dck
+SSH key, `ssh`, `doctor`, `agents` and `ask`; install it once, pinned, when you want those:
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 ```
 
-Then, from the repository root:
+`dev.sh` finds dck on `PATH` or in its default install directory (`~/.local/share/dck`).
+From the repository root:
 
 ```bash
 bash dev.sh up        # first run: .env files and the dck SSH key; then build, start, attach to Herdr
@@ -37,7 +41,7 @@ bash dev.sh down      # stop and remove the container (named volumes are kept)
 ```
 
 `bash dev.sh help` lists every verb: `up`, `down`, `shell`, `exec`, `build`, `rebuild`,
-`logs`, `ps`, `doctor`, `ssh`, `herdr`, `herdr-layout`, `agents`, `ask`.
+`logs`, `ps`, `doctor`, `ssh`, `herdr`, `herdr-layout`, `agents`, `ask`, `install-dck`.
 
 ## How `docker/local/dwpwebsite/.env` reaches your shell
 
@@ -96,6 +100,15 @@ Agents inside reach Herdr agents on the host and in other dck containers through
 bash dev.sh agents                                  # the live agents on every machine
 bash dev.sh ask <machine>:<pane> "Which test covers the parser?"
 ```
+
+Since dck v0.2.3 the mesh is complete: `dck up` also pushes the host (when your dck host
+profile enables it: `dck setup` offers dck's own loopback listener once, or `[host]
+listener = "external"` points at one you already run) and the other loopback containers your
+host's Herdr manages, such as the Dailybot ones, each with a pinned host key. The container's
+Herdr machine catalog lives on the `state` volume, so `rebuild` keeps it. To let containers
+that dck did not create log in here, list the public keys they use under `[ssh]
+authorized_extra` in the host profile. `dck setup` also installs a verified herdr-peers on the
+host, so host agents can reply with `herdr-peers reply`.
 
 The mesh between containers needs Docker Desktop. It is on by default and can be turned off
 with `[herdr] mesh = false` in `dck.toml`. Read devcontainer-kit's `docs/SECURITY.md` before
