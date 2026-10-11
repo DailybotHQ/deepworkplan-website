@@ -9,6 +9,34 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.54] - 2026-10-11
+
+### Changed
+
+- chore: dogfood vendored skills to dailybot v3.23.13, ai-diff-reviewer v3.3.10
+- fix: clone the kit installers in a temporary directory, never inside the repository
+- fix: offer only the addons that fit, and extend the pin drift guard to the hub table
+- chore: date the trust metadata for the 7.6.0 pin
+- feat: pin the released ecosystem — pack v7.6.0, cak v0.5.0, dck v0.3.0, herdr-peers v0.2.1, vim v0.7.0
+- chore(skill): vendor deepworkplan 7.6.0, ai-diff-reviewer 3.3.9 and dailybot 3.23.12
+- docs: translate the addon wording — detect every addon, upgrade where used, offer where it fits — into 16 languages
+- docs: the skill and the local review go everywhere; addons are detected, upgraded where used and offered where they fit (en)
+- fix: close every bold span the renderer left open and guard rendered emphasis in the build
+- docs: translate the bypass-acknowledgement and folder-trust keystroke rule into 16 languages
+- docs: never send keys for the bypass-permissions acknowledgement; folder trust is the only keystroke (en)
+- docs: overhaul the README — adoption path, what the site serves, the hub and the ecosystem table
+- docs: translate the quickstart pins, install-or-upgrade pass, devcontainer path and orchestration into 16 languages
+- chore: register the Dailybot CLI in the ecosystem hub
+- docs: mirror the init.md pins, install-or-upgrade pass, devcontainer path and orchestration in the quickstart (en)
+- feat: pin every ecosystem release in init.md with its SHA256SUMS digest and guard pin drift
+- docs: restore ak usage --json in the agentkit kit page
+- docs: translate the vim lanes view and screen classes into 16 languages
+- docs: name the vim lanes view and the herdr-peers screen classes (en)
+- docs: translate lane status, the vim lanes view and review lanes into 16 languages
+- docs: add lane status, the vim lanes view and review lanes to the orchestration docs (en)
+- docs: translate the running-many-agents chapter and kit host accounts into 16 languages
+- docs: add the running-many-agents methodology chapter and host accounts in the kit pages (en)
+
 ## [5.0.53] - 2026-10-11
 
 ### Changed
@@ -1252,7 +1280,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.53...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.54...HEAD
+[5.0.54]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.54
 [5.0.53]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.53
 [5.0.52]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.52
 [5.0.51]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.51
