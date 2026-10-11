@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Powtarzalny kontener deweloperski dla każdego repozytorium z jednego szablonu: agenci gotowi przez ak, Herdr w obie strony i żadnego klucza SSH w środku."
+description: "Powtarzalny kontener deweloperski dla każdego repozytorium z jednego szablonu: agenci na kontach hosta przez ak, Herdr w obie strony i żadnego klucza SSH."
 kind: addon
 lang: pl
 order: 1
@@ -36,7 +36,7 @@ Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Lin
 
 ## Warstwy
 
-Każdy kontener zawiera narzędzia deweloperskie — git, gh, ripgrep, serwer SSH, Herdr i herdr-peers — i żadnego sekretu. Reszta to warstwa, którą wybierasz w `dck.toml`:
+Każdy kontener zawiera narzędzia deweloperskie — git, gh, ripgrep, serwer SSH, Herdr i herdr-peers — i żadnego sekretu, chyba że włączysz [konta hosta](#konta-hosta-wewnątrz-kontenera). Reszta to warstwa, którą wybierasz w `dck.toml`:
 
 | Warstwa | Domyślnie | Co dodaje |
 |---|---|---|
@@ -57,6 +57,24 @@ Od `v0.2.3` `dck up` zestawia dwukierunkową sieć bez żadnego ręcznego kroku,
 - **Kontenery, których kit nie utworzył.** Wypisz klucze publiczne, którymi się logują, w `[ssh] authorized_extra` w profilu hosta, a one również będą mogły docierać do kontenerów dck.
 
 Połącz go z [coding-agents-kit](/kit/agentkit) na hoście i w kontenerze, a to samo `ak` uruchamia agentów po obu stronach.
+
+## Konta hosta wewnątrz kontenera
+
+Kontener może korzystać z kont, które masz już na hoście — tak jak git już działa przez agenta SSH hosta — bez logowania w środku. To opcja do włączenia, zapisana w Twoim **profilu hosta**, nigdy w `dck.toml` repozytorium:
+
+```toml
+[agents]
+host_profiles = true          # domyślnie false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # lista dozwolonych nazw zmiennych do udostępnienia
+```
+
+Przy włączonym `host_profiles` polecenie `dck up` udostępnia tylko profile CLI instalowanych przez repozytorium:
+
+- **Claude Code** przez długoterminowy token na profil: `CLAUDE_CODE_OAUTH_TOKEN` dla `@default` i `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` dla `@name` (sufiks wielkimi literami, każdy znak spoza `A-Z`, `0-9` i `_` zamieniony na `_`).
+- **Codex** przez swój plik uwierzytelniania, dla `@default` i dla każdego profilu.
+- **Plik env kitu**, tylko do odczytu i ograniczony do nazw z `host_env_keys`.
+
+Cały katalog domowy agentkit nigdy nie jest montowany, a profile zawierające bezwzględne ścieżki hosta są pomijane. Logowanie Codex udostępnione do odczytu i zapisu może zostać odświeżone przez dwóch piszących naraz: utrzymuj jednego aktywnego agenta na konto Codex. Wewnątrz kontenera to samo `ak <kind> @<profile>` działa na tym samym koncie co na hoście, dzięki czemu prowadzący może przekazać torom w kontenerach konta wybrane przez `ak pick` — zobacz [Uruchamianie wielu agentów](/methodology/06-orchestration).
 
 ## Domyślne ustawienia bezpieczeństwa
 

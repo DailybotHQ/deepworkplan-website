@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "一条命令驱动所有终端编码代理。默认完全自主，可随时退出；在 git worktree 中无界面运行，加个前缀即可切换第二个账号。"
+description: "一条命令驱动所有终端编码代理：每个配置档对应一个账户，ak pick 选出剩余配额最多的账户，默认完全自主且可退出，并支持无头运行。"
 kind: addon
 lang: zh
 order: 8
@@ -21,18 +21,29 @@ order: 8
 - **经校验的安装。** `ak install <cli>` 从供应商的官方渠道以固定版本安装缺失的 CLI，并对照固定的 sha256 或 npm 注册表的完整性信息进行校验。
 - **熟悉的名称。** 两个别名预设，在你启用之前保持关闭：`classic`（`claudex`、`codexx`、`cursorx`、`opencodex`、`pix`、`clinex`、`grokx`）和 `providers`（`claude-glm`、`codex-azure`、`codex-xai`、`pi-glm`、…），每个都对应一个 `ak <kind>`。
 
-## 配额、配置文件与设置
+## 账户、配额与账户选择
 
-`ak usage` 列出工具包能看到的每个账户的配额和用量，每个账户和配置文件一行：Claude Code 订阅（5 小时、每周和按模型的窗口）、通过 ChatGPT 登录的 Codex 以及 Z.AI 编程套餐密钥均为实时数据；Cursor、Grok、xAI 和 Azure OpenAI 显示 `n/d` 并附上原因。该命令只读：从不刷新登录、从不打印令牌，也从不在配置文件中写入任何内容。`--json` 为工具提供同一份列表。这些用量端点属于厂商内部接口，并非官方接口。
+工具包把你持有的每个登录或密钥都视为一个**账户**：一个 CLI × 一个配置文件。`@default`（或 `@1`）是 CLI 自己的 home；`@2`、`@work` 或 `@client-x` 是独立的登录，各自位于配置文件根目录下的单独目录中，可同时运行。`ak profiles` 列出它们及其登录状态和密钥名称；`ak profiles --json` 为工具提供同一份列表（schema `profiles-v1`）。
+
+`ak usage` 列出工具包能看到的每个账户的配额和用量，每个账户和配置文件一行：Claude Code 订阅（5 小时、每周和按模型的窗口）、通过 ChatGPT 登录的 Codex 以及 Z.AI 编程套餐密钥均为实时数据；Cursor、Grok、xAI 和 Azure OpenAI 显示 `n/d` 并附上原因。该命令只读：从不刷新登录、从不打印令牌，也从不在配置文件中写入任何内容。这些用量端点属于厂商内部接口，并非官方接口。
+
+`ak pick <kind>` 读取同样的行，选出余量最多的账户。`--count N` 返回最多 N 个账户，按优劣排序；`--exclude @<profile>` 排除一个忙碌的账户；`--model` 计算单个模型的每周窗口；`--need 5h:40` 在余量不足时拒绝选择。`--json` 输出 schema `pick-v1`。
 
 ```bash
-ak usage              # 每个账户和配置文件的配额
-ak claude @2          # 在独立 home 中的第二个 Claude 账户
-ak profiles ls        # 本机上的配置文件
-ak setup verify       # 按顺序的检查，每项附带修复命令
+ak usage                   # 每个账户和配置文件的配额
+ak pick claude --count 3   # 余量最多的三个 Claude 账户
+ak claude @work --trust-cwd  # 第二个账户，文件夹已预先信任
+ak profiles --json         # profiles-v1，供工具使用
+ak setup verify            # 按顺序的检查，每项附带修复命令
 ```
 
-配置文件让账户彼此隔离：`@default`（或 `@1`）是 CLI 自己的 home，而 `@2`、`@work` 或 `@client-x` 是可同时运行的独立登录。`ak setup probe | verify | docker` 是由 `agentkit-setup` 技能驱动的只读助手，用于检查机器、验证安装，并生成按标签固定且经过校验的容器配方。
+`--trust-cwd`（或 `AGENTKIT_TRUST_CWD=1`）预先信任代理启动时所在的文件夹，使 Claude Code 与 Codex 打开时不再出现文件夹信任界面。`ak setup probe | verify | docker` 是由 `agentkit-setup` 技能驱动的只读助手，用于检查机器、验证安装，并生成按标签固定且经过校验的容器配方。
+
+## 多个代理，多个账户
+
+`agentkit-orchestrate` 技能（`ak --skill orchestrate`）教代理把工作分摊到多个代理、账户和厂商上：批次开始前执行一次 `ak usage`，用 `ak pick --count N` 选择账户，每个账户一个委派对象，对每个结果运行仓库自己的验证关卡，并在某个账户触及限额时切换到下一个账户。工具包负责观察、计算和运行；它从不调度。由主导者——你，或你委托的代理——做决定，只使用你自己的账户，并遵守每个厂商的条款。
+
+对于长时间的交互式通道，每条通道在 [Herdr](/kit/herdr) 窗格中以自己的账户运行。方法论章节[运行多个代理](/methodology/06-orchestration)描述了完整的模型：主导者与其通道、按余量选择的账户、herdr-peers 协调，以及每个仓库一个分支、一次发布。
 
 ## 安装
 
@@ -70,7 +81,7 @@ ak doctor
 | 一项有边界、声明了输出的 `parallel_safe` 任务 | Agentkit（无头） |
 | 任务需要交互、运行时间长，或位于另一台机器上 | [Herdr](/kit/herdr)（窗格中的一个对等方） |
 
-二者可以组合：herdr-peers 可以使用 `ak env <kind> @profile` 输出的环境，在窗格中启动一个对等方。
+二者可以组合：herdr-peers 可以使用 `ak env <kind> @profile` 输出的环境，在窗格中启动一个对等方。同时运行多条通道时，请参阅[运行多个代理](/methodology/06-orchestration)。
 
 ## 备注
 

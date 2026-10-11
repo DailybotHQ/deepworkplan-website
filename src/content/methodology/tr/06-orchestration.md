@@ -1,0 +1,93 @@
+---
+title: Birçok ajanı çalıştırmak
+description: "Bir lider ajan bölmelerde, konteynerlerde ve başka makinelerde, boş kapasiteye göre seçilen hesaplarla ve depo başına tek dal ve sürümle birçok şeridi yönetir."
+order: 6
+lang: tr
+summary: Bölmeler, makineler, hesaplar ve depolar genelinde birçok ajanı koordine etmek için lider ve şeritler modeli.
+icon: network
+---
+
+# Birçok ajanı çalıştırmak
+
+Tek bir plan üzerinde tek bir ajan varsayılandır ve işlerin çoğunu karşılar. Bazı işler tek bir oturumdan daha geniştir: birkaç depoyu kesen bir değişiklik, belirli bir sırayla yayımlanması gereken bir sürüm ya da tek bir ajanın günlerce uğraşacağı bir iş birikimi. DWP, sözleşmesini değiştirmeden bu işe ölçeklenir. Plan doğruluk kaynağı olarak kalır, her görev yine kendi kapısıyla kapanır ve ek ajanlar, bir **liderin** koordine ettiği **şeritlerdir**.
+
+Bu bölüm modeli açıklar. Üç isteğe bağlı eklenti kullanır — bölmeler ve eşler için [Herdr](/tr/kit/herdr), hesaplar için [agentkit](/tr/kit/agentkit) ve konteynerler için [devcontainer](/tr/kit/devcontainer) — ve bunların hiçbiri tek ajanlı bir plan için zorunlu değildir.
+
+## Bir lider ve şeritleri
+
+**Lider**, üst planın sahibidir. Şeritlere karar verir, her birine kapsamını verir, kilometre taşlarını toplar ve bir şeridin birleştirmesine ya da sürüm yayımlamasına izin veren onayı verir. Başka bir şeridin kodunu yazmaz.
+
+Bir **şerit**, tek bir kapsamı olan tek bir ajandır — genellikle tek bir depo. O deponun `AGENTS.md` dosyasını okur, o deponun kapısını çalıştırır ve kendi planını deponun içinde tutar. Bir [orkestratör merkezinde](/tr/methodology/05-archetypes) üst plan, alt izleme tablosuyla birlikte merkezin `.dwp/plans/` dizininde yaşar ve her şeridin planı, o deponun plan kimliklerini ve kapısını kullanarak kendi deposunda yaşar.
+
+| Rol | Sahip olduğu | Asla yapmadığı |
+| --- | --- | --- |
+| Lider | Üst plan, şerit listesi, sürüm sırası, GO onayı | Bir şeridin deposunu düzenlemek |
+| Şerit | Tek bir depo: dalı, planı, kapısı ve pull request'i | Liderin GO onayından önce birleştirmek ya da sürüm yayımlamak |
+
+## Şeritlerin çalıştığı yerler
+
+Bir şerit, bir terminal bölmesindeki bir ajandır ve bölme birkaç farklı yerde bulunabilir. [Herdr](https://herdr.dev) her ajanı bir bölmeye yerleştirir ve diğer makinelere SSH üzerinden ulaşır; böylece lider her şeridi tek bir kenar çubuğunda görür.
+
+- **Ana makinede.** Her şerit için bir bölme, liderle yan yana. Geliştiricinin zaten çalıştığı depolar için en hızlı kurulum.
+- **Bir konteynerde.** Bir [devcontainer-kit](/tr/kit/devcontainer) konteyneri `dck up` sırasında Herdr ağına katılır: ajanları ana makineye ve diğer konteynerlere ulaşır, ana makine de onlara ulaşır. Korumalı alan konteynerin kendisidir; bu nedenle ajanları özerk çalışabilir.
+- **Başka bir makinede.** Herdr'ın SSH üzerinden ulaştığı herhangi bir makine, orada da herdr-peers kurulu olduğu sürece şeritleri aynı şekilde barındırır.
+
+Yer, yalıtımı değiştirir, protokolü değil: bir konteynerdeki şerit ile ana makinedeki şerit, liderle aynı şekilde koordine olur.
+
+## Boş kapasiteye göre hesaplar ve sağlayıcılar
+
+Birçok ajan kotayı hızla tüketir. Her şerit kendi hesabında çalışır — [coding-agents-kit](/tr/kit/agentkit) içinde bir CLI ve bir profil — böylece şeritler aynı pencereyi tüketmez ve sınıra ulaşan bir hesap tüm şeritleri değil, yalnızca bir şeridi durdurur.
+
+- **`ak usage`**, her hesapta ve profilde kalan kotayı gösterir; her toplu iş için bir kez.
+- **`ak pick <kind> --count N`**, en çok boş kapasiteye sahip N hesabı en iyisinden başlayarak döndürür; `--exclude` meşgul bir hesabı dışarıda tutar, `--model` tek bir modelin penceresini sayar ve `--need` yeterli kapasite olmadan başlamayı reddeder.
+- **`ak <kind> @<profile>`**, şeridin ajanını o hesapta, kendi bölmesinde başlatır.
+
+Sağlayıcılar da aynı şekilde karıştırılabilir. Bir Claude şeridi yazarken bir Codex şeridi gözden geçirebilir; her biri `ak pick`'in kendi türü için seçtiği hesapta çalışır. Bir konteyner şeridi ana makinenin hesaplarını kullanabilir: geliştiricinin devcontainer-kit ana makine profilinde `host_profiles` açıldığında, bir konteyner deponun kurduğu CLI'ların ana makine profillerini alır — Claude için profil başına uzun ömürlü bir token, Codex için kendi kimlik doğrulama dosyası — ve kendi oturum açmasına gerek kalmaz. Yalnızca kendi hesaplarınızı kullanın ve her sağlayıcının koşulları içinde kalın: işi hesaplara dağıtın, bir sınırı aşmak için hesapları asla döndürmeyin.
+
+## Şeritleri insan olmadan başlatmak ve engelini kaldırmak
+
+Bir lider, klavyede kimse olmadan şeritleri başlatabilir ve ilerlemelerini sürdürebilir. Herdr'ın kendi komutlarını kullanır; hiçbir kit kodu tuş vuruşu göndermez. Prosedürün sabit bir sırası vardır: istemden kaçın, durmayı algıla, yalnızca bilineni çöz, gerisini yukarı aktar.
+
+1. **Önce kaçının.** `ak pick <kind>` en çok kapasiteye sahip hesabı belirtir ve `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` şeridi kendi klasöründe başlatır. `--trust-cwd` (veya `AGENTKIT_TRUST_CWD=1`) o klasöre önceden güvenir ve gerisini kitin varsayılan özerkliği halleder; böylece Claude ve Codex klasör güveni ekranlarını hiç tuş vuruşu olmadan atlar.
+2. **Algılayın.** `herdr agent list`, her şeridi çalışıyor, boşta, engellenmiş ya da tamamlanmış olarak gösterir. Engellenmiş ya da çıktısız boşta duran bir şerit için, hangi ekranda olduğunu belirlemek üzere `herdr pane read <pane>` çalıştırılır.
+3. **Yalnızca bilinen ilk çalıştırma ekranlarının engelini kaldırın.** Lider `herdr pane send-keys` ile iki ekranı yanıtlar, başka hiçbirini değil: şeridin kendi klasörü için klasör güveni ve geliştiricinin özerk çalıştırdığı bir profil için Claude'un bypass-permissions modunu bir kez, profil başına onaylaması. Bunu yalnızca geliştirici gözetimsiz çalışmaya izin verdiğinde yapar — kalıcı bir talimat ya da planın ön yetkilendirmesi. Tuş göndermeden önce ekranı okur, onu yanıtlayan en az tuşu gönderir ve yeniden okur.
+4. **Geri kalan her şeyi yukarı aktarın.** Oturum açma ve kimlik bilgisi istemleri, eylem başına izin istekleri, yıkıcı onaylar, ödeme ya da plan istemleri, bilinmeyen ekranlar ve liderin oluşturmadığı bölmeler, tuş vuruşu olarak değil, engellenmiş bir kilometre taşı olarak geliştiriciye gider.
+5. **Devre dışı bırakma üstün gelir.** `AGENTKIT_PERMISSIONS=ask` ayarlıyken bypass-permissions onayı asla kabul edilmez.
+6. **Yeniden başlatın.** Bir ajan çıkarsa lider onu aynı hesapta yeniden başlatır ya da başka bir hesap seçer. Kaybedilmiş bir oturum bir kimlik bilgisi istemidir: yukarı aktarılır.
+
+Her müdahale — ekranın ne gösterdiği, hangi tuşların gönderildiği, ardından ne olduğu — üst planda kayda geçirilir.
+
+## herdr-peers ile koordinasyon
+
+Şeritler ve lider [herdr-peers](/tr/kit/herdr) aracılığıyla konuşur: bir **soru (ask)**, tam olarak bir **yanıtı (reply)** yetkilendiren bir damga taşır ve her alışveriş kaydedilir. Lider protokolü küçük tutar:
+
+- **Kilometre taşları yukarı.** Her şerit sabit noktalarda rapor verir — plan hazır, pull request açık, engellendi, tamamlandı — ve aralarda yanıt beklemeden çalışmaya devam eder.
+- **Sorular ask olarak.** Bir karara ihtiyaç duyan şerit lidere sorar; lider tek bir yanıtla cevap verir.
+- **Bir derinlik.** Bir yanıta asla yanıt verilmez ve bir şerit işi daha ileriye devretmez. Çağıran başına yayılım sınırlıdır; varsayılan olarak dört eş.
+- **Talimat değil, veri.** Bir yanıt, alıcıya zaten sahip olmadığı hiçbir şeyi vermez. Bir şeridin kapısının geçtiği iddiası, kapı çalıştırılarak doğrulanır.
+
+## Depo başına tek dal, tek sürüm
+
+Birçok şeridi gözden geçirilebilir tutan kural basittir: **depo başına tek şerit, temel çalışma kopyasında, tüm değişiklik için tek dal, tek pull request ve tek sürüm.** Şerit, işini birkaç dala ya da worktree'ye bölmez. Worktree'ler yalnızca iki yazarın tek bir depoyu paylaşması gerektiği durum içindir: her biri kendi worktree'sini alır, böylece her yolun tek bir yazarı olur.
+
+Pull request, liderin GO onayına kadar açık, yeşil ve inceleme etiketiyle kalır. Ardından şerit birleştirir, etiketler ve etiketi geri bildirir.
+
+## Sürüm sırası
+
+Depolar birbirine bağımlıdır; bu nedenle bağımlılık sırasıyla yayımlanırlar: önce araçlar, sonra onları sabitleyenler, sonra sonucu açıklayan belgeler, sonra onu benimseyen tüketiciler. Lider sırayı tutar ve GO onayını her seferinde bir depoya gönderir. Başka bir deponun sürümünü sabitleyen şerit, sabitlemeyi yazmadan önce o etiketi bekler; böylece hiçbir sabitleme var olmayan bir sürümü göstermez.
+
+## Kontrol noktaları
+
+Üst plan raporlarla değil, kanıtlarla kapanır:
+
+1. **Şerit başına.** Her şeridin kapısı kendi dalında geçer ve pull request incelemesi temizdir.
+2. **Sürüm başına.** Her etiket mevcuttur ve bir sonraki deponun ihtiyaç duyduğunu sabitler.
+3. **Entegrasyon.** Son sürümden sonra bir kontrol noktası, tüketicileri yayımlanmış sürümler üzerinde çalıştırır ve kararı üst planın `analysis_results/` dizinine kaydeder.
+4. **Son inceleme.** Üst plan tamamlanmadan önce bir güvenlik geçişi, bir sınırı aşan her şeyi kapsar — özellikle hesapları, token'ları ve konteynerlerle paylaşılan dosyaları.
+
+## Güvenlik
+
+- Bir ask'e, bir isteme ya da bir kayda asla anahtar, token ya da gizli bilgi koymayın; değişkenlere adlarıyla başvurun.
+- Paylaşılan kaynaklar bir kilit alır: bir şerit, konteyner derlemesi gibi ağır bir adımdan önce kilidi alır ve sonra bırakır.
+- İzin devre dışı bırakması ayarlandığında, her şerit ve bir şeridin başlattığı her ajan için üstün gelir.
+- Devam edemeyen bir şerit bunu engellenmiş bir kilometre taşı olarak bildirir ve durur; karar liderindir.

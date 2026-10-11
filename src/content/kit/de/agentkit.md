@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Ein Befehl für jeden Terminal-Coding-Agenten. Standardmäßig volle Autonomie mit Opt-out, headless Läufe in einem Git-Worktree und ein zweites Konto per Präfix."
+description: "Ein Befehl für jeden Terminal-Coding-Agenten: ein Konto pro Profil, ak pick für das mit dem meisten Spielraum, Autonomie mit Opt-out und headless Läufe."
 kind: addon
 lang: de
 order: 8
@@ -21,18 +21,29 @@ Dieses Addon integriert das Kit in **DWP v7** (Paket `v7.5.1`) als **headless** 
 - **Verifizierte Installationen.** `ak install <cli>` installiert eine fehlende CLI über den offiziellen Kanal ihres Herstellers in einer fixierten Version, geprüft gegen einen fixierten sha256-Wert oder die Integritätsangabe der npm-Registry.
 - **Vertraute Namen.** Zwei Alias-Presets, ausgeschaltet, bis Sie sie aktivieren: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) und `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), jeweils ein `ak <kind>`.
 
-## Kontingent, Profile und Einrichtung
+## Konten, Kontingent und Kontowahl
 
-`ak usage` listet Kontingent und Nutzung jedes Kontos, das das Kit sieht, eine Zeile pro Konto und Profil: live für Claude-Code-Abonnements (5-Stunden-, Wochen- und Modellfenster), Codex-Anmeldungen über ChatGPT und Schlüssel des Z.AI-Coding-Plans; Cursor, Grok, xAI und Azure OpenAI zeigen `n/d` mit dem Grund. Der Befehl ist schreibgeschützt: Er erneuert nie eine Anmeldung, gibt nie ein Token aus und schreibt nie in ein Profil. `--json` liefert Werkzeugen dieselbe Liste. Die Nutzungs-Endpunkte sind anbieterintern und inoffiziell.
+Das Kit behandelt jede Anmeldung und jeden Schlüssel, die Sie besitzen, als **Konto**: eine CLI × ein Profil. `@default` (oder `@1`) ist das eigene Home der CLI; `@2`, `@work` oder `@client-x` sind getrennte Anmeldungen, jede in einem eigenen Verzeichnis unter dem Profil-Stammverzeichnis, die nebeneinander laufen. `ak profiles` listet sie mit ihrem Anmeldestatus und den Namen ihrer Schlüssel auf; `ak profiles --json` liefert Werkzeugen dieselbe Liste (Schema `profiles-v1`).
+
+`ak usage` listet Kontingent und Nutzung jedes Kontos, das das Kit sieht, eine Zeile pro Konto und Profil: live für Claude-Code-Abonnements (5-Stunden-, Wochen- und Modellfenster), Codex-Anmeldungen über ChatGPT und Schlüssel des Z.AI-Coding-Plans; Cursor, Grok, xAI und Azure OpenAI zeigen `n/d` mit dem Grund. Der Befehl ist schreibgeschützt: Er erneuert nie eine Anmeldung, gibt nie ein Token aus und schreibt nie in ein Profil. Die Nutzungs-Endpunkte sind anbieterintern und inoffiziell.
+
+`ak pick <kind>` liest dieselben Zeilen und nennt das Konto mit dem meisten Spielraum. `--count N` liefert bis zu N Konten, das beste zuerst; `--exclude @<profile>` hält ein ausgelastetes Konto heraus; `--model` zählt das Wochenfenster eines einzelnen Modells; `--need 5h:40` verweigert die Auswahl ohne so viel Spielraum. `--json` liefert das Schema `pick-v1`.
 
 ```bash
-ak usage              # Kontingent jedes Kontos und Profils
-ak claude @2          # ein zweites Claude-Konto in einem eigenen Home
-ak profiles ls        # die Profile auf diesem Rechner
-ak setup verify       # geordnete Prüfungen, jede mit ihrem Reparaturbefehl
+ak usage                   # Kontingent jedes Kontos und Profils
+ak pick claude --count 3   # die drei Claude-Konten mit dem meisten Spielraum
+ak claude @work --trust-cwd  # ein zweites Konto, Ordner vorab vertraut
+ak profiles --json         # profiles-v1, für Werkzeuge
+ak setup verify            # geordnete Prüfungen, jede mit ihrem Reparaturbefehl
 ```
 
-Profile halten Konten getrennt: `@default` (oder `@1`) ist das eigene Home der CLI, und `@2`, `@work` oder `@client-x` sind getrennte Anmeldungen, die nebeneinander laufen. `ak setup probe | verify | docker` ist ein schreibgeschützter Helfer, gesteuert vom Skill `agentkit-setup`, der den Rechner untersucht, die Installation prüft und ein per Tag fixiertes, verifiziertes Container-Rezept erzeugt.
+`--trust-cwd` (oder `AGENTKIT_TRUST_CWD=1`) vertraut dem Ordner, in dem der Agent startet, im Voraus, sodass Claude Code und Codex ohne ihren Bildschirm zum Ordnervertrauen öffnen. `ak setup probe | verify | docker` ist ein schreibgeschützter Helfer, gesteuert vom Skill `agentkit-setup`, der den Rechner untersucht, die Installation prüft und ein per Tag fixiertes, verifiziertes Container-Rezept erzeugt.
+
+## Mehrere Agenten, mehrere Konten
+
+Der Skill `agentkit-orchestrate` (`ak --skill orchestrate`) bringt einem Agenten bei, Arbeit auf mehrere Agenten, Konten und Anbieter zu verteilen: ein `ak usage` vor dem Batch, `ak pick --count N` zur Wahl der Konten, ein Delegierter pro Konto, das eigene Gate des Repositorys für jedes Ergebnis und Failover auf das nächste Konto, wenn eines an ein Limit stößt. Das Kit beobachtet, berechnet und führt aus; es plant nie. Der Lead — Sie oder ein Agent, den Sie beauftragt haben — entscheidet, ausschließlich mit Ihren eigenen Konten und im Rahmen der Bedingungen jedes Anbieters.
+
+Für lange, interaktive Lanes läuft jede Lane in einem [Herdr](/kit/herdr)-Pane auf einem eigenen Konto. Das Methodik-Kapitel [Viele Agenten betreiben](/methodology/06-orchestration) beschreibt das gesamte Modell: ein Lead und seine Lanes, nach Spielraum gewählte Konten, Koordination über herdr-peers sowie ein Branch und ein Release pro Repository.
 
 ## Installation
 
@@ -70,7 +81,7 @@ In einem v7-Plan, dessen Vertrag `agent_delegation` freigibt, darf `execute` ein
 | Eine abgegrenzte `parallel_safe`-Aufgabe mit deklarierter Ausgabe | Agentkit (headless) |
 | Die Aufgabe erfordert Interaktion, läuft lange oder befindet sich auf einem anderen Rechner | [Herdr](/kit/herdr) (ein Peer in einem Pane) |
 
-Beide lassen sich kombinieren: herdr-peers kann einen Peer in einem Pane mit der Umgebung starten, die `ak env <kind> @profile` ausgibt.
+Beide lassen sich kombinieren: herdr-peers kann einen Peer in einem Pane mit der Umgebung starten, die `ak env <kind> @profile` ausgibt. Für viele Lanes gleichzeitig siehe [Viele Agenten betreiben](/methodology/06-orchestration).
 
 ## Hinweise
 

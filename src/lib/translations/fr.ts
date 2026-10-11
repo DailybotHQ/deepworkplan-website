@@ -582,12 +582,12 @@ export const fr: SiteTranslations = {
     meta: {
       title: 'La méthodologie Deep Work Plan',
       description:
-        'Cinq chapitres, du manifeste aux archétypes : les principes, la boucle centrale, les modèles, les skills et agents, et les adaptations derrière Deep Work Plan.',
+        'Six chapitres, du manifeste à l’orchestration : les principes, la boucle centrale, les modèles, les skills, les archétypes et de nombreux agents à la fois.',
     },
     eyebrow: 'Méthodologie',
     title: 'La méthodologie Deep Work Plan',
     intro:
-      'Cinq chapitres qui vous mènent de la philosophie derrière Deep Work Plan à la boucle pratique, aux modèles et aux adaptations que vous utilisez au quotidien.',
+      'Six chapitres qui vous mènent de la philosophie derrière Deep Work Plan à la boucle pratique, aux modèles, aux adaptations et à l’exécution de nombreux agents à la fois.',
     chapterLabel: 'Chapitre',
     readChapter: 'Lire le chapitre',
     prev: 'Précédent',

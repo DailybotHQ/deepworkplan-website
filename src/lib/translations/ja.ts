@@ -580,12 +580,12 @@ export const ja: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan の方法論',
       description:
-        'マニフェストからアーキタイプまでの五つの章。Deep Work Plan を支える原則、中核ループ、テンプレート、スキルとエージェント、そして適応のしくみ。',
+        'マニフェストからオーケストレーションまでの六つの章。原則、中核ループ、テンプレート、スキルとエージェント、アーキタイプ、多数のエージェントの同時実行。',
     },
     eyebrow: '方法論',
     title: 'Deep Work Plan の方法論',
     intro:
-      'Deep Work Plan を支える哲学から、日々使う実践的なループ、テンプレート、適応へと導く五つの章。',
+      'Deep Work Plan を支える哲学から、実践的なループ、テンプレート、適応、そして多数のエージェントの同時実行へと導く六つの章。',
     chapterLabel: '章',
     readChapter: '章を読む',
     prev: '前へ',

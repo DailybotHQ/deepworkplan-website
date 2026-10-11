@@ -1,6 +1,6 @@
 ---
 title: Agentkit
-description: "Um comando para cada agente de código de terminal. Autonomia total por padrão com opção de saída, execuções headless em um worktree e uma segunda conta."
+description: "Um comando para cada agente de código de terminal: uma conta por perfil, ak pick para a de maior folga, autonomia com opt-out e execuções headless."
 kind: addon
 lang: pt
 order: 8
@@ -21,18 +21,29 @@ Este addon integra o kit ao **DWP v7** (pack `v7.5.1`) como transporte de delega
 - **Instalações verificadas.** `ak install <cli>` instala uma CLI ausente pelo canal oficial do seu fornecedor em uma versão fixada, conferida contra um sha256 fixado ou contra a integridade do registro npm.
 - **Nomes conhecidos.** Dois presets de aliases, desativados até você ativá-los: `classic` (`claudex`, `codexx`, `cursorx`, `opencodex`, `pix`, `clinex`, `grokx`) e `providers` (`claude-glm`, `codex-azure`, `codex-xai`, `pi-glm`, …), cada um equivalente a `ak <kind>`.
 
-## Cota, perfis e configuração
+## Contas, cota e escolha de conta
 
-`ak usage` lista a cota e o uso de cada conta que o kit consegue ver, uma linha por conta e perfil: ao vivo para as assinaturas do Claude Code (janelas de 5 horas, semanal e por modelo), os logins do Codex com ChatGPT e as chaves do plano de programação da Z.AI; Cursor, Grok, xAI e Azure OpenAI mostram `n/d` com o motivo. É somente leitura: nunca renova um login, nunca imprime um token e nunca grava dentro de um perfil. `--json` entrega a mesma lista às ferramentas. Os endpoints de uso são internos do fornecedor e não oficiais.
+O kit trata cada login ou chave que você tem como uma **conta**: uma CLI × um perfil. `@default` (ou `@1`) é o home da própria CLI; `@2`, `@work` ou `@client-x` são logins independentes, cada um no próprio diretório sob a raiz de perfis, que rodam lado a lado. `ak profiles` os lista com o estado de login e os nomes das chaves; `ak profiles --json` entrega a mesma lista às ferramentas (schema `profiles-v1`).
+
+`ak usage` lista a cota e o uso de cada conta que o kit consegue ver, uma linha por conta e perfil: ao vivo para as assinaturas do Claude Code (janelas de 5 horas, semanal e por modelo), os logins do Codex com ChatGPT e as chaves do plano de programação da Z.AI; Cursor, Grok, xAI e Azure OpenAI mostram `n/d` com o motivo. É somente leitura: nunca renova um login, nunca imprime um token e nunca grava dentro de um perfil. Os endpoints de uso são internos do fornecedor e não oficiais.
+
+`ak pick <kind>` lê as mesmas linhas e aponta a conta com mais folga. `--count N` devolve até N contas, a melhor primeiro; `--exclude @<profile>` deixa de fora uma ocupada; `--model` conta a janela semanal de um modelo; `--need 5h:40` se recusa a escolher sem essa folga. `--json` entrega o schema `pick-v1`.
 
 ```bash
-ak usage              # cota de cada conta e perfil
-ak claude @2          # uma segunda conta do Claude no seu próprio home
-ak profiles ls        # os perfis desta máquina
-ak setup verify       # verificações ordenadas, cada uma com seu comando de reparo
+ak usage                   # cota de cada conta e perfil
+ak pick claude --count 3   # as três contas do Claude com mais folga
+ak claude @work --trust-cwd  # uma segunda conta, pasta já confiável
+ak profiles --json         # profiles-v1, para ferramentas
+ak setup verify            # verificações ordenadas, cada uma com seu comando de reparo
 ```
 
-Os perfis mantêm as contas separadas: `@default` (ou `@1`) é o home da própria CLI, e `@2`, `@work` ou `@client-x` são logins independentes que rodam lado a lado. `ak setup probe | verify | docker` é um auxiliar somente leitura, conduzido pelo skill `agentkit-setup`, que inspeciona a máquina, verifica a instalação e gera uma receita de contêiner fixada por tag e verificada.
+`--trust-cwd` (ou `AGENTKIT_TRUST_CWD=1`) confia previamente na pasta em que o agente inicia, então o Claude Code e o Codex abrem sem a tela de confiança de pasta. `ak setup probe | verify | docker` é um auxiliar somente leitura, conduzido pelo skill `agentkit-setup`, que inspeciona a máquina, verifica a instalação e gera uma receita de contêiner fixada por tag e verificada.
+
+## Vários agentes, várias contas
+
+O skill `agentkit-orchestrate` (`ak --skill orchestrate`) ensina um agente a distribuir o trabalho entre vários agentes, contas e fornecedores: um `ak usage` antes do lote, `ak pick --count N` para escolher as contas, um delegado por conta, o gate do próprio repositório em cada resultado e failover para a próxima conta quando uma atinge um limite. O kit observa, calcula e executa; nunca agenda. O líder — você, ou um agente a quem você pediu — decide, usando apenas as suas próprias contas e dentro dos termos de cada fornecedor.
+
+Para frentes longas e interativas, cada frente roda em um painel do [Herdr](/kit/herdr) na própria conta. O capítulo da metodologia [Executar muitos agentes](/methodology/06-orchestration) descreve o modelo completo: um líder e suas frentes, contas escolhidas por folga, coordenação pelo herdr-peers e um branch e um release por repositório.
 
 ## Instalação
 
@@ -70,7 +81,7 @@ Em um plano v7 cujo contrato concede `agent_delegation`, o `execute` pode passar
 | Uma tarefa `parallel_safe` delimitada com uma saída declarada | Agentkit (headless) |
 | A tarefa precisa de interação, é longa ou fica em outra máquina | [Herdr](/kit/herdr) (um par em um painel) |
 
-Os dois se combinam: o herdr-peers pode iniciar um par em um painel com o ambiente que `ak env <kind> @profile` imprime.
+Os dois se combinam: o herdr-peers pode iniciar um par em um painel com o ambiente que `ak env <kind> @profile` imprime. Para muitas frentes ao mesmo tempo, veja [Executar muitos agentes](/methodology/06-orchestration).
 
 ## Notas
 

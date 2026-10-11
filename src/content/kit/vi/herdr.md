@@ -67,6 +67,8 @@ Cả hai addon đều triển khai cùng một giao diện ủy thác — `launc
 | Một tác vụ `parallel_safe` có giới hạn với đầu ra đã khai báo | [agentkit](/kit/agentkit) (`ak run` headless trong một worktree) |
 | Tác vụ cần tương tác, chạy lâu hoặc nằm trên một máy khác | Herdr (một peer trong pane) |
 
+Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, trong container và trên máy khác, mỗi lane trên tài khoản riêng — xem [Chạy nhiều agent](/methodology/06-orchestration).
+
 ## Ghi chú
 
 Tùy chọn và không bao giờ bắt buộc. Một repo hoàn toàn tuân thủ ngay cả khi không có addon tùy chọn nào, và không luồng nào phụ thuộc vào addon này. Vòng khứ hồi hai pane, xuyên máy được kiểm thử với một Herdr mô phỏng; hãy lên kế hoạch cho lần chạy đầu tiên có giám sát.

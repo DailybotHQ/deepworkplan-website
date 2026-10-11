@@ -578,12 +578,12 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Metodologi Deep Work Plan',
       description:
-        'Lima bab dari manifesto hingga arketipe: prinsip, core loop, template, skill dan agent, serta adaptasi di balik Deep Work Plan.',
+        'Enam bab dari manifesto hingga orkestrasi: prinsip, core loop, template, skill dan agent, arketipe, serta menjalankan banyak agent sekaligus.',
     },
     eyebrow: 'Metodologi',
     title: 'Metodologi Deep Work Plan',
     intro:
-      'Lima bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, dan adaptasi yang Anda pakai setiap hari.',
+      'Enam bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, adaptasi, dan menjalankan banyak agent sekaligus.',
     chapterLabel: 'Bab',
     readChapter: 'Baca bab',
     prev: 'Sebelumnya',

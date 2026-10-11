@@ -572,12 +572,12 @@ export const zh: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 方法论',
       description:
-        '从宣言到原型，共五章：Deep Work Plan 背后的原则、核心循环、模板、技能与代理，以及各项适配。',
+        '从宣言到编排，共六章：Deep Work Plan 背后的原则、核心循环、模板、技能与代理、代码仓库原型，以及同时运行多个代理的方法。',
     },
     eyebrow: '方法论',
     title: 'Deep Work Plan 方法论',
     intro:
-      '五章内容，带你从 Deep Work Plan 背后的理念，走到你每天都在使用的实操循环、模板与适配。',
+      '六章内容，带你从 Deep Work Plan 背后的理念，走到实操循环、模板、适配，以及同时运行多个代理。',
     chapterLabel: '章',
     readChapter: '阅读本章',
     prev: '上一章',

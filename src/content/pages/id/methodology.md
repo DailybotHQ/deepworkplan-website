@@ -1,7 +1,7 @@
 ---
 title: "Metodologi Deep Work Plan"
-description: "Lima bab dari manifesto hingga arketipe: prinsip, core loop, template, skill, dan adaptasi di balik metodologi Deep Work Plan."
-lastUpdated: 2026-09-28
+description: "Enam bab dari manifesto hingga orkestrasi: prinsip, core loop, template, skill, arketipe, dan banyak agent di balik metodologi Deep Work Plan."
+lastUpdated: 2026-10-11
 ---
 
 ## Metodologi Deep Work Plan
@@ -17,13 +17,14 @@ DWP berpijak pada tiga pilar.
 
 **Efisiensi token — berhorizon panjang secara desain, efisien secara konstruksi.** Konteks adalah sumber daya paling langka yang dimiliki sebuah coding agent, dan metodologi yang menyia-nyiakannya gagal tepat ketika pekerjaan menjadi panjang. DWP memuat instruksi secara progresif — setiap panduan dimuat ketika pemicunya terpicu — memilih validasi dari apa yang sebenarnya disentuh setiap tugas, dan memutuskan skills di tingkat tugas. Byte instruksi yang dibutuhkan setiap alur diukur dan diterbitkan; tanpa persentase token yang dikarang.
 
-Metodologi ini dijelaskan dalam lima bab:
+Metodologi ini dijelaskan dalam enam bab:
 
 1. **Manifesto** — apa itu Deep Work Plan dan mengapa eksekusi terstruktur penting.
 2. **Core loop** — siklus plan-execute-verify yang menggerakkan setiap tugas.
 3. **Template** — struktur rencana dan tugas yang dibagikan agent dan manusia.
 4. **Skill & agent** — bagaimana command dan peran agent saling melengkapi, kit hidup (bagaimana sebuah repositori menumbuhkan skill-nya sendiri lewat sub-skill author), dan addon opt-in seperti dependency-upgrade dan addon design-system untuk permukaan antarmuka apa pun yang menghadap pengguna (UI visual, output CLI, atau percakapan).
 5. **Arketipe** — menyesuaikan metodologi dengan repo individual dan orchestrator hub.
+6. **Menjalankan banyak agent** — lead dan lane-nya di berbagai panel, container, mesin, dan akun, dengan satu branch dan satu rilis per repositori.
 
 - [Baca metodologinya](/methodology)
 - [Baca spesifikasinya](/spec)

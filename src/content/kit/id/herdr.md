@@ -67,6 +67,8 @@ Kedua addon mengimplementasikan antarmuka delegasi yang sama — `launch`, `obse
 | Tugas `parallel_safe` yang terbatas dengan keluaran yang dideklarasikan | [agentkit](/kit/agentkit) (`ak run` headless di dalam worktree) |
 | Tugas memerlukan interaksi, berjalan lama, atau berada di mesin lain | Herdr (rekan di panel) |
 
+Untuk lead yang menjalankan banyak lane sekaligus — panel di host, di container, dan di mesin lain, masing-masing pada akunnya sendiri — lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+
 ## Catatan
 
 Opsional dan tidak pernah wajib. Sebuah repositori sepenuhnya konform tanpa addon opsional sama sekali, dan tidak ada alur yang bergantung pada addon ini. Perjalanan pulang-pergi dua panel lintas mesin dicakup oleh pengujian terhadap Herdr yang disimulasikan; rencanakan eksekusi pertama dengan pengawasan.

@@ -1,7 +1,7 @@
 ---
 title: "Die Deep Work Plan Methodik"
-description: "Fünf Kapitel vom Manifest bis zu den Archetypen: die Prinzipien, die Kernschleife, Vorlagen, Skills und die Anpassungen hinter der Deep Work Plan Methodik."
-lastUpdated: 2026-09-28
+description: "Sechs Kapitel vom Manifest bis zur Orchestrierung: Prinzipien, Kernschleife, Vorlagen, Skills, Archetypen und viele Agenten in der Deep Work Plan Methodik."
+lastUpdated: 2026-10-11
 ---
 
 ## Die Deep Work Plan Methodik
@@ -17,13 +17,14 @@ DWP ruht auf drei Pfeilern.
 
 **Token-Effizienz — auf lange Horizonte ausgelegt, durch Konstruktion effizient.** Kontext ist die knappste Ressource eines Coding-Agenten, und eine Methodik, die ihn verschwendet, scheitert genau dann, wenn die Arbeit lang wird. DWP lädt Anweisungen schrittweise nach — jeder Leitfaden lädt, wenn sein Auslöser feuert —, wählt die Validierung aus dem, was jede Aufgabe tatsächlich berührt, und entscheidet Skills aufgaben-lokal. Die Anweisungsbytes, die jeder Ablauf benötigt, werden gemessen und veröffentlicht; keine erfundenen Token-Prozentsätze.
 
-Die Methodik wird in fünf Kapiteln erklärt:
+Die Methodik wird in sechs Kapiteln erklärt:
 
 1. **Manifest** — was ein Deep Work Plan ist und warum strukturierte Ausführung zählt.
 2. **Kernschleife** — der Plan-Ausführen-Verifizieren-Zyklus, der jede Aufgabe antreibt.
 3. **Vorlagen** — die Plan- und Aufgabenstrukturen, die Agenten und Menschen teilen.
 4. **Skills & Agenten** — wie Befehle und Agentenrollen zusammenpassen, das lebendige Kit (wie ein Repository über die author-Sub-Skill eigene Skills aufbaut) und Opt-in-Add-ons wie dependency-upgrade und dem design-system-Add-on für jede nutzerseitige Interface-Oberfläche (visuelle UI, CLI-Ausgabe oder konversational).
 5. **Archetypen** — die Methodik an Einzel-Repositorys und Orchestrator-Hubs anpassen.
+6. **Viele Agenten betreiben** — ein Lead und seine Lanes über Panes, Container, Rechner und Konten hinweg, mit einem Branch und einem Release pro Repository.
 
 - [Methodik lesen](/methodology)
 - [Spezifikation lesen](/spec)

@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Her depo için tek şablondan yeniden üretilebilir geliştirme konteyneri: ak ile hazır ajanlar, iki yönlü Herdr ve konteynerin içinde hiç SSH anahtarı yok."
+description: "Her depo için tek şablondan tekrarlanabilir geliştirme konteyneri: ak ile ana makine hesaplarınızda ajanlar, iki yönlü Herdr ve içeride hiç SSH anahtarı yok."
 kind: addon
 lang: tr
 order: 1
@@ -36,7 +36,7 @@ Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `
 
 ## Katmanlar
 
-Her konteyner geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH sunucusu, Herdr ve herdr-peers — ve hiçbir gizli bilgi içermez. Geri kalanı, `dck.toml` içinde seçtiğiniz bir katmandır:
+Her konteyner geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH sunucusu, Herdr ve herdr-peers — ve siz [ana makine hesaplarını](#konteynerin-içinde-ana-makine-hesapları) etkinleştirmedikçe hiçbir gizli bilgi içermez. Geri kalanı, `dck.toml` içinde seçtiğiniz bir katmandır:
 
 | Katman | Varsayılan | Ne ekler |
 |---|---|---|
@@ -57,6 +57,24 @@ Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.
 - **Kitin oluşturmadığı konteynerler.** Oturum açarken kullandıkları açık anahtarları ana makine profilinizde `[ssh] authorized_extra` altında listeleyin; onlar da dck konteynerlerine ulaşabilir.
 
 Ana makinede ve konteynerde [coding-agents-kit](/kit/agentkit) ile birlikte kullanın; aynı `ak` her iki tarafta da agent başlatır.
+
+## Konteynerin içinde ana makine hesapları
+
+Bir konteyner, ana makinede zaten sahip olduğunuz hesapları kullanabilir — git'in ana makinenin SSH agent'ı aracılığıyla zaten çalıştığı gibi — içeride oturum açmadan. Bu isteğe bağlıdır ve bir deponun `dck.toml` dosyasında değil, her zaman **ana makine profilinizde** bulunur:
+
+```toml
+[agents]
+host_profiles = true          # default false
+host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
+```
+
+`host_profiles` açıkken `dck up`, yalnızca deponun kurduğu CLI'ların profillerini paylaşır:
+
+- **Claude Code**, profil başına uzun ömürlü bir token aracılığıyla: `@default` için `CLAUDE_CODE_OAUTH_TOKEN` ve `@name` için `CLAUDE_CODE_OAUTH_TOKEN_<SUFFIX>` (sonek büyük harfe çevrilir, `A-Z`, `0-9` ve `_` dışındaki her karakter `_` olur).
+- **Codex**, kimlik doğrulama dosyası aracılığıyla; `@default` ve her profil için.
+- **Kitin env dosyası**, salt okunur ve `host_env_keys` içindeki adlara indirgenmiş olarak.
+
+agentkit home dizininin tamamı asla bağlanmaz ve mutlak ana makine yolları içeren profiller atlanır. Okuma-yazma olarak paylaşılan bir Codex oturumu aynı anda iki yazar tarafından yenilenebilir: Codex hesabı başına tek bir etkin agent tutun. Konteynerin içinde aynı `ak <kind> @<profile>`, ana makinedekiyle aynı hesapta çalışır; bu da bir liderin konteyner şeritlerine `ak pick`'in seçtiği hesapları vermesini sağlar — bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
 
 ## Güvenlik varsayılanları
 

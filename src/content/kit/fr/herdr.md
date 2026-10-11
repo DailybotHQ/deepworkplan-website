@@ -67,6 +67,8 @@ Les deux addons implémentent la même interface de délégation — `launch`, `
 | Une tâche `parallel_safe` délimitée avec une sortie déclarée | [agentkit](/kit/agentkit) (`ak run` headless dans un worktree) |
 | La tâche nécessite une interaction, dure longtemps ou se trouve sur une autre machine | Herdr (un pair dans un panneau) |
 
+Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des panneaux sur l’hôte, dans des conteneurs et sur d’autres machines, chacun sur son propre compte —, voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
+
 ## Notes
 
 Facultatif et jamais requis. Un dépôt est pleinement conforme avec zéro addon optionnel, et aucun flux ne dépend de celui-ci. L’aller-retour entre deux panneaux et entre machines est couvert par des tests contre un Herdr simulé ; prévoyez une première exécution supervisée.

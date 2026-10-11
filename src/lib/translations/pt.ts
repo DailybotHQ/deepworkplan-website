@@ -582,12 +582,12 @@ export const pt: SiteTranslations = {
     meta: {
       title: 'A Metodologia Deep Work Plan',
       description:
-        'Cinco capítulos do manifesto aos arquétipos: os princípios, o loop central, os templates, as skills e agents, e as adaptações por trás do Deep Work Plan.',
+        'Seis capítulos do manifesto à orquestração: os princípios, o loop central, os templates, as skills e agents, os arquétipos e muitos agentes ao mesmo tempo.',
     },
     eyebrow: 'Metodologia',
     title: 'A Metodologia Deep Work Plan',
     intro:
-      'Cinco capítulos que levam você da filosofia por trás do Deep Work Plan ao loop prático, aos templates e às adaptações que você usa todos os dias.',
+      'Seis capítulos que levam você da filosofia por trás do Deep Work Plan ao loop prático, aos templates, às adaptações e à execução de muitos agentes ao mesmo tempo.',
     chapterLabel: 'Capítulo',
     readChapter: 'Ler capítulo',
     prev: 'Anterior',

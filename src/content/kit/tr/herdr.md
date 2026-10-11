@@ -67,6 +67,8 @@ Her iki eklenti de aynı devretme arayüzünü — `launch`, `observe`, `collect
 | Bildirilmiş bir çıktısı olan, sınırları belirli `parallel_safe` bir görev | [agentkit](/kit/agentkit) (bir worktree'de başsız `ak run`) |
 | Görev etkileşim gerektiriyor, uzun sürüyor ya da başka bir makinede bulunuyor | Herdr (bir bölmedeki eş) |
 
+Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konteynerlerde ve diğer makinelerde, her biri kendi hesabıyla çalışan bölmeler — [Birçok ajanı çalıştırmak](/methodology/06-orchestration) bölümüne bakın.
+
 ## Notlar
 
 İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. Bir depo, sıfır isteğe bağlı eklentiyle tümüyle uyumludur ve hiçbir akış bu eklentiye bağlı değildir. İki bölmeli, makineler arası gidiş-dönüş, simüle edilmiş bir Herdr'a karşı testlerle kapsanmaktadır; ilk çalıştırmayı gözetim altında planlayın.

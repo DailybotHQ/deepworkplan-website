@@ -67,6 +67,8 @@ Beide Addons implementieren dieselbe Delegationsschnittstelle — `launch`, `obs
 | Eine abgegrenzte `parallel_safe`-Aufgabe mit deklarierter Ausgabe | [agentkit](/kit/agentkit) (headless `ak run` in einem Worktree) |
 | Die Aufgabe erfordert Interaktion, läuft lange oder befindet sich auf einem anderen Rechner | Herdr (ein Peer in einem Pane) |
 
+Für einen Lead, der viele Lanes gleichzeitig betreibt — Panes auf dem Host, in Containern und auf anderen Rechnern, jede auf einem eigenen Konto —, siehe [Viele Agenten betreiben](/methodology/06-orchestration).
+
 ## Hinweise
 
 Optional und nie erforderlich. Ein Repository ist mit null optionalen Addons vollständig konform, und kein Ablauf hängt von diesem ab. Der Round-Trip über zwei Panes und Rechnergrenzen hinweg ist durch Tests gegen ein simuliertes Herdr abgedeckt; planen Sie einen beaufsichtigten ersten Lauf ein.

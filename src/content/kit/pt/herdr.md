@@ -67,6 +67,8 @@ Os dois addons implementam a mesma interface de delegação — `launch`, `obser
 | Uma tarefa `parallel_safe` delimitada com uma saída declarada | [agentkit](/kit/agentkit) (`ak run` headless em uma worktree) |
 | A tarefa precisa de interação, é longa ou fica em outra máquina | Herdr (um par em um painel) |
 
+Para um líder que executa muitas frentes ao mesmo tempo — painéis no host, em contêineres e em outras máquinas, cada um na própria conta —, veja [Executar muitos agentes](/methodology/06-orchestration).
+
 ## Notas
 
 Opcional e nunca obrigatório. Um repositório é totalmente conforme com zero addons opcionais, e nenhum fluxo depende deste. A ida e volta entre dois painéis e entre máquinas é coberta por testes contra um Herdr simulado; planeje uma primeira execução supervisionada.

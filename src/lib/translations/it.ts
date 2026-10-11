@@ -578,12 +578,12 @@ export const it: SiteTranslations = {
     meta: {
       title: 'La metodologia Deep Work Plan',
       description:
-        'Cinque capitoli dal manifesto agli archetipi: i principi, il core loop, i template, le skill e gli agenti, e gli adattamenti dietro Deep Work Plan.',
+        'Sei capitoli dal manifesto all’orchestrazione: i principi, il core loop, i template, le skill e gli agenti, gli archetipi e molti agenti eseguiti insieme.',
     },
     eyebrow: 'Metodologia',
     title: 'La metodologia Deep Work Plan',
     intro:
-      'Cinque capitoli che La accompagnano dalla filosofia dietro Deep Work Plan al ciclo pratico, ai template e agli adattamenti che utilizza ogni giorno.',
+      'Sei capitoli che La accompagnano dalla filosofia dietro Deep Work Plan al ciclo pratico, ai template, agli adattamenti e all’esecuzione di molti agenti insieme.',
     chapterLabel: 'Capitolo',
     readChapter: 'Leggi il capitolo',
     prev: 'Precedente',
