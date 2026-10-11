@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.50] - 2026-10-11
+
 ### Changed
 
 - The vendored Deep Work Plan skill moves to 7.3.3 and every public pin to devcontainer-kit v0.2.8, which gives agents in Herdr panes the mounted host SSH agent when the attaching client forwarded none. The site's start hook drops its own copy of that fallback, now part of the kit.
@@ -1232,7 +1234,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.49...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.50...HEAD
+[5.0.50]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.50
 [5.0.49]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.49
 [5.0.48]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.48
 [5.0.47]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.47
