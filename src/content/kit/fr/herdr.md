@@ -67,7 +67,7 @@ Les deux addons implémentent la même interface de délégation — `launch`, `
 | Une tâche `parallel_safe` délimitée avec une sortie déclarée | [agentkit](/kit/agentkit) (`ak run` headless dans un worktree) |
 | La tâche nécessite une interaction, dure longtemps ou se trouve sur une autre machine | Herdr (un pair dans un panneau) |
 
-Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des panneaux sur l’hôte, dans des conteneurs et sur d’autres machines, chacun sur son propre compte —, voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
+Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des panneaux sur l’hôte, dans des conteneurs et sur d’autres machines, chacun sur son propre compte —, `herdr-peers lanes` liste chaque couloir avec son état, `herdr-peers status <pane>` classe l’écran sur lequel se trouve un couloir bloqué, et chaque enregistrement de délégation nomme le compte et le fournisseur qui l’ont porté. Voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
 
 ## Notes
 

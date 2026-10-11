@@ -49,7 +49,7 @@ Les fournisseurs se combinent de la même manière. Un couloir Claude peut écri
 Un coordinateur peut démarrer des couloirs et les faire avancer sans personne au clavier. Il utilise les commandes propres à Herdr ; aucun code du kit n’envoie de frappes. La procédure suit un ordre fixe : éviter l’invite, détecter l’arrêt, ne débloquer que ce qui est connu, faire remonter le reste.
 
 1. **D’abord, éviter.** `ak pick <kind>` désigne le compte qui a le plus de marge, et `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` lance le couloir dans son propre dossier. `--trust-cwd` (ou `AGENTKIT_TRUST_CWD=1`) approuve ce dossier à l’avance et l’autonomie par défaut du kit fait le reste, si bien que Claude et Codex passent leurs écrans de confiance de dossier sans aucune frappe.
-2. **Détecter.** `herdr agent list` affiche chaque couloir comme actif, inactif, bloqué ou terminé. Un couloir bloqué, ou inactif sans sortie, reçoit un `herdr pane read <pane>` pour identifier l’écran sur lequel il se trouve.
+2. **Détecter.** `herdr-peers lanes` (ou `herdr agent list`) affiche chaque couloir comme actif, inactif, bloqué ou terminé. Pour un couloir bloqué, ou inactif sans sortie, `herdr-peers status <pane>` classe l’écran sur lequel il se trouve, et `herdr pane read <pane>` l’affiche.
 3. **Ne débloquer que les écrans connus du premier lancement.** Avec `herdr pane send-keys`, le coordinateur répond à deux écrans et à rien d’autre : la confiance de dossier pour le propre dossier du couloir, et la confirmation unique, par profil, du mode de contournement des permissions de Claude pour un profil que le développeur fait tourner en autonomie. Il ne le fait que lorsque le développeur a accordé un fonctionnement sans surveillance — une instruction permanente ou la pré-autorisation du plan. Il lit l’écran avant d’envoyer des touches, envoie le moins de touches possible pour y répondre, puis relit.
 4. **Faire remonter tout le reste.** Les invites de connexion et d’identifiants, les demandes de permission par action, les confirmations destructrices, les écrans de paiement ou de forfait, les écrans inconnus et les panneaux que le coordinateur n’a pas créés vont au développeur sous forme de jalon bloqué, jamais sous forme de frappes.
 5. **Le retrait l’emporte.** Avec `AGENTKIT_PERMISSIONS=ask`, la confirmation du mode de contournement des permissions n’est jamais acceptée.
@@ -65,6 +65,9 @@ Les couloirs et le coordinateur communiquent via [herdr-peers](/fr/kit/herdr) : 
 - **Les questions comme demandes.** Un couloir qui a besoin d’une décision interroge le coordinateur ; le coordinateur répond par une réponse.
 - **Profondeur un.** On ne répond jamais à une réponse, et un couloir ne délègue pas plus loin. Le fan-out par appelant est plafonné, à quatre pairs par défaut.
 - **Des données, pas des instructions.** Une réponse n’accorde rien que le destinataire n’avait déjà. L’affirmation d’un couloir selon laquelle sa porte de validation est passée se vérifie en exécutant cette porte.
+- **Une trace de qui a fait quoi.** Chaque enregistrement de délégation nomme le compte et le fournisseur du couloir, si bien que le plan parent montre quel compte a porté quel travail.
+
+Le coordinateur peut voir tout l’orchestre d’un coup d’œil : `herdr-peers lanes` liste chaque couloir avec son état, et [DeepWorkPlan Vim](/fr/kit/vim) affiche les couloirs d’un plan orchestrateur dans une vue des couloirs, à côté du plan lui-même.
 
 ## Une branche, une publication par dépôt
 
@@ -80,7 +83,7 @@ Les dépôts dépendent les uns des autres, ils publient donc dans l’ordre des
 
 Le plan parent se clôt sur des preuves, pas sur des comptes rendus :
 
-1. **Par couloir.** La porte de validation de chaque couloir passe sur sa propre branche, et la relecture de sa pull request est propre.
+1. **Par couloir.** La porte de validation de chaque couloir passe sur sa propre branche, et la relecture de sa pull request est propre. La relecture peut être un couloir à part entière : l’[AI Diff Reviewer](/fr/kit/ai-diff-reviewer) relit la pull request de chaque couloir, et avec l’add-on [Dailybot](/fr/kit/dailybot) chaque couloir rend compte de sa propre progression à l’équipe.
 2. **Par publication.** Chaque tag existe et épingle ce dont le dépôt suivant a besoin.
 3. **Intégration.** Après la dernière publication, un point de contrôle exécute les consommateurs sur les versions publiées et consigne le verdict dans le `analysis_results/` du plan parent.
 4. **Revue finale.** Une passe de sécurité couvre tout ce qui a franchi une frontière — avant tout les comptes, jetons et fichiers partagés dans des conteneurs — avant que le plan parent ne soit terminé.

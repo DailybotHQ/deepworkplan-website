@@ -49,7 +49,7 @@ Os fornecedores se misturam da mesma forma. Uma frente de Claude pode escrever e
 Um líder pode iniciar frentes e mantê-las andando sem ninguém no teclado. Ele usa os próprios comandos do Herdr; nenhum código do kit envia teclas. O procedimento tem uma ordem fixa: evitar o prompt, detectar a parada, desbloquear apenas o que é conhecido e escalar o resto.
 
 1. **Primeiro, evitar.** `ak pick <kind>` aponta a conta com mais folga, e `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` inicia a frente na própria pasta. `--trust-cwd` (ou `AGENTKIT_TRUST_CWD=1`) confia previamente nessa pasta, e a autonomia padrão do kit faz o resto, então o Claude e o Codex pulam suas telas de confiança de pasta sem nenhuma tecla.
-2. **Detectar.** `herdr agent list` mostra cada frente como trabalhando, ociosa, bloqueada ou concluída. Uma frente bloqueada, ou ociosa sem saída, recebe um `herdr pane read <pane>` para identificar a tela em que está.
+2. **Detectar.** `herdr-peers lanes` (ou `herdr agent list`) mostra cada frente como trabalhando, ociosa, bloqueada ou concluída. Para uma frente bloqueada, ou ociosa sem saída, `herdr-peers status <pane>` classifica a tela em que ela está, e `herdr pane read <pane>` a mostra.
 3. **Desbloquear apenas as telas conhecidas da primeira execução.** Com `herdr pane send-keys`, o líder responde a duas telas e a nada mais: a confiança de pasta para a própria pasta da frente, e a confirmação única, por perfil, do Claude para o modo de bypass de permissões em um perfil que o desenvolvedor executa em autonomia. Ele só faz isso quando o desenvolvedor concedeu operação não assistida — uma instrução permanente ou a pré-autorização do plano. Ele lê a tela antes de enviar teclas, envia o mínimo de teclas que a respondem e lê de novo.
 4. **Escalar todo o resto.** Prompts de login e de credenciais, pedidos de permissão por ação, confirmações destrutivas, telas de pagamento ou de plano, telas desconhecidas e painéis que o líder não criou vão para o desenvolvedor como um marco de bloqueio, nunca como teclas.
 5. **O opt-out prevalece.** Com `AGENTKIT_PERMISSIONS=ask`, a confirmação do modo de bypass de permissões nunca é aceita.
@@ -65,6 +65,9 @@ As frentes e o líder conversam pelo [herdr-peers](/pt/kit/herdr): uma **consult
 - **Perguntas como consultas.** Uma frente que precisa de uma decisão consulta o líder; o líder responde com uma resposta.
 - **Profundidade um.** Uma resposta nunca é respondida, e uma frente não delega adiante. O fan-out por chamador é limitado, a quatro pares por padrão.
 - **Dados, não instruções.** Uma resposta não concede nada que o receptor já não tivesse. A afirmação de uma frente de que seu gate passou é verificada rodando o gate.
+- **Um registro de quem fez o quê.** Cada registro de delegação nomeia a conta e o fornecedor da frente, então o plano pai mostra qual conta realizou qual trabalho.
+
+O líder pode ver toda a orquestra de uma vez: `herdr-peers lanes` lista cada frente com seu estado, e o [DeepWorkPlan Vim](/pt/kit/vim) mostra as frentes de um plano orquestrador em uma visão de frentes ao lado do próprio plano.
 
 ## Um branch, um release por repositório
 
@@ -80,7 +83,7 @@ Os repositórios dependem uns dos outros, então fazem release em ordem de depen
 
 O plano pai fecha com evidência, não com relatórios:
 
-1. **Por frente.** O gate de cada frente passa no próprio branch, e a revisão do seu pull request está limpa.
+1. **Por frente.** O gate de cada frente passa no próprio branch, e a revisão do seu pull request está limpa. A revisão pode ser uma frente própria: o [AI Diff Reviewer](/pt/kit/ai-diff-reviewer) revisa o pull request de cada frente e, com o addon [Dailybot](/pt/kit/dailybot), cada frente reporta o próprio progresso à equipe.
 2. **Por release.** Cada tag existe e fixa o que o próximo repositório precisa.
 3. **Integração.** Depois do último release, um checkpoint roda os consumidores nas versões publicadas e registra o veredito em `analysis_results/` do plano pai.
 4. **Revisão final.** Uma passada de segurança cobre tudo o que atravessou uma fronteira — sobretudo contas, tokens e arquivos compartilhados com contêineres — antes de o plano pai ser concluído.

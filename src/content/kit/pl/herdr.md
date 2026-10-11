@@ -67,7 +67,7 @@ Oba addony implementują ten sam interfejs delegowania — `launch`, `observe`, 
 | Ograniczone zadanie `parallel_safe` z zadeklarowanym wynikiem | [agentkit](/kit/agentkit) (headless `ak run` w worktree) |
 | Zadanie wymaga interakcji, trwa długo lub działa na innej maszynie | Herdr (peer w panelu) |
 
-Jeśli prowadzący uruchamia wiele torów naraz — panele na hoście, w kontenerach i na innych maszynach, każdy na własnym koncie — zobacz [Uruchamianie wielu agentów](/methodology/06-orchestration).
+Jeśli prowadzący uruchamia wiele torów naraz — panele na hoście, w kontenerach i na innych maszynach, każdy na własnym koncie — `herdr-peers lanes` wyświetla każdy tor z jego stanem, `herdr-peers status <pane>` klasyfikuje ekran, na którym stoi zablokowany tor, a każdy zapis delegacji podaje konto i dostawcę, które ją wykonały. Zobacz [Uruchamianie wielu agentów](/methodology/06-orchestration).
 
 ## Uwagi
 

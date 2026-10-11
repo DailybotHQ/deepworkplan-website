@@ -67,7 +67,7 @@ devcontainer-kit `v0.2.11` 기반의 [devcontainer](/kit/devcontainer) 애드온
 | 출력이 선언된, 범위가 정해진 `parallel_safe` 작업 | [agentkit](/kit/agentkit)(worktree에서 헤드리스 `ak run`) |
 | 작업에 상호작용이 필요하거나, 오래 실행되거나, 다른 머신에 있음 | Herdr(페인 안의 피어) |
 
-여러 레인(호스트, 컨테이너, 다른 머신의 페인에서 각자 자신의 계정으로 실행)을 한꺼번에 운영하는 리드에 대해서는 [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
+여러 레인(호스트, 컨테이너, 다른 머신의 페인에서 각자 자신의 계정으로 실행)을 한꺼번에 운영하는 리드를 위해, `herdr-peers lanes`는 모든 레인을 상태와 함께 나열하고, `herdr-peers status <pane>`는 차단된 레인이 머문 화면을 분류하며, 모든 위임 기록에는 그 작업을 맡은 계정과 벤더가 적힙니다. [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
 
 ## 참고
 

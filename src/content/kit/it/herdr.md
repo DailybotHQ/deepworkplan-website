@@ -67,7 +67,7 @@ Entrambi gli addon implementano la stessa interfaccia di delega — `launch`, `o
 | Un task `parallel_safe` delimitato con un output dichiarato | [agentkit](/kit/agentkit) (`ak run` headless in un worktree) |
 | Il task richiede interazione, dura a lungo o si trova su un’altra macchina | Herdr (un peer in un pannello) |
 
-Per un lead che esegue molte corsie insieme — pannelli sull’host, nei container e su altre macchine, ciascuno sul proprio account — vedi [Eseguire molti agenti](/methodology/06-orchestration).
+Per un lead che esegue molte corsie insieme — pannelli sull’host, nei container e su altre macchine, ciascuno sul proprio account — `herdr-peers lanes` elenca ogni corsia con il suo stato, `herdr-peers status <pane>` classifica la schermata in cui si trova una corsia bloccata, e ogni record di delega indica l’account e il fornitore che l’hanno svolta. Vedi [Eseguire molti agenti](/methodology/06-orchestration).
 
 ## Note
 

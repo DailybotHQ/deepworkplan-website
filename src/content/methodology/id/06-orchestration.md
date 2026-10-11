@@ -49,7 +49,7 @@ Vendor dapat dicampur dengan cara yang sama. Lane Claude dapat menulis sementara
 Lead dapat memulai lane dan menjaganya tetap berjalan tanpa ada orang di depan keyboard. Ia menggunakan perintah Herdr sendiri; tidak ada kode kit yang mengirim penekanan tombol. Prosedurnya memiliki urutan tetap: hindari prompt, deteksi saat berhenti, buka blokir hanya yang sudah dikenal, eskalasikan sisanya.
 
 1. **Hindari lebih dulu.** `ak pick <kind>` menyebut akun dengan ruang terbanyak, dan `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` meluncurkan lane di foldernya sendiri. `--trust-cwd` (atau `AGENTKIT_TRUST_CWD=1`) mempercayai folder itu sejak awal, dan otonomi default kit melakukan sisanya, sehingga Claude dan Codex melewati layar kepercayaan folder tanpa penekanan tombol.
-2. **Deteksi.** `herdr agent list` menampilkan setiap lane sebagai working, idle, blocked, atau done. Lane yang blocked, atau idle tanpa keluaran, mendapat `herdr pane read <pane>` untuk mengidentifikasi layar tempat ia berada.
+2. **Deteksi.** `herdr-peers lanes` (atau `herdr agent list`) menampilkan setiap lane sebagai working, idle, blocked, atau done. Untuk lane yang blocked, atau idle tanpa keluaran, `herdr-peers status <pane>` mengklasifikasikan layar tempat ia berada, dan `herdr pane read <pane>` menampilkannya.
 3. **Buka blokir hanya layar pertama yang sudah dikenal.** Dengan `herdr pane send-keys`, lead menjawab dua layar dan tidak lebih: kepercayaan folder untuk folder milik lane itu sendiri, dan pengakuan satu kali per profil dari Claude atas mode bypass-permissions untuk profil yang dijalankan pengembang secara otonom. Lead melakukannya hanya ketika pengembang telah mengizinkan operasi tanpa pengawasan — sebuah instruksi tetap atau pra-otorisasi rencana. Ia membaca layar sebelum mengirim tombol, mengirim tombol paling sedikit yang menjawabnya, lalu membaca lagi.
 4. **Eskalasikan semua yang lain.** Prompt login dan kredensial, permintaan izin per aksi, konfirmasi destruktif, prompt pembayaran atau paket, layar yang tidak dikenal, dan panel yang tidak dibuat oleh lead diteruskan ke pengembang sebagai milestone blocked, tidak pernah sebagai penekanan tombol.
 5. **Opt-out selalu menang.** Dengan `AGENTKIT_PERMISSIONS=ask`, pengakuan bypass-permissions tidak pernah diterima.
@@ -65,6 +65,9 @@ Lane dan lead berkomunikasi melalui [herdr-peers](/id/kit/herdr): sebuah **ask**
 - **Pertanyaan sebagai ask.** Lane yang membutuhkan keputusan bertanya kepada lead; lead menjawab dengan satu reply.
 - **Kedalaman satu.** Sebuah reply tidak pernah dijawab, dan lane tidak mendelegasikan lebih jauh. Fan-out per pemanggil dibatasi, empat rekan secara default.
 - **Data, bukan instruksi.** Sebuah reply tidak memberikan apa pun yang belum dimiliki penerimanya. Klaim sebuah lane bahwa gate-nya lulus diperiksa dengan menjalankan gate tersebut.
+- **Catatan tentang siapa melakukan apa.** Setiap catatan delegasi menyebut akun dan vendor lane tersebut, sehingga rencana induk menunjukkan akun mana yang mengerjakan pekerjaan mana.
+
+Lead dapat melihat seluruh orkestra sekaligus: `herdr-peers lanes` mencantumkan setiap lane beserta statusnya, dan [DeepWorkPlan Vim](/id/kit/vim) menampilkan lane dari sebuah rencana orkestrator dalam tampilan lane di samping rencana itu sendiri.
 
 ## Satu branch, satu rilis per repositori
 
@@ -80,7 +83,7 @@ Repositori saling bergantung, sehingga dirilis sesuai urutan dependensi: alat le
 
 Rencana induk ditutup berdasarkan bukti, bukan laporan:
 
-1. **Per lane.** Gate setiap lane lulus di branch-nya sendiri, dan tinjauan pull request-nya bersih.
+1. **Per lane.** Gate setiap lane lulus di branch-nya sendiri, dan tinjauan pull request-nya bersih. Tinjauan dapat menjadi lane tersendiri: [AI Diff Reviewer](/id/kit/ai-diff-reviewer) meninjau pull request setiap lane, dan dengan addon [Dailybot](/id/kit/dailybot) setiap lane melaporkan kemajuannya sendiri kepada tim.
 2. **Per rilis.** Setiap tag ada dan mematok apa yang dibutuhkan repositori berikutnya.
 3. **Integrasi.** Setelah rilis terakhir, sebuah checkpoint menjalankan konsumen pada versi yang dirilis dan mencatat putusannya di `analysis_results/` milik rencana induk.
 4. **Tinjauan akhir.** Sebuah pemeriksaan keamanan mencakup apa pun yang melintasi batas — terutama akun, token, dan file yang dibagikan ke dalam container — sebelum rencana induk selesai.

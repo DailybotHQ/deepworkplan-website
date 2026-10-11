@@ -67,7 +67,7 @@ devcontainer-kit `v0.2.11` 上の [devcontainer](/kit/devcontainer) アドオン
 | 出力が宣言された、範囲の限定された `parallel_safe` なタスク | [agentkit](/kit/agentkit)（worktree 内でヘッドレスに `ak run`） |
 | タスクに対話が必要、長時間実行される、または別のマシン上にある | Herdr（ペイン内のピア） |
 
-多数のレーン（ホスト、コンテナ、別マシン上のペインで、それぞれが自分のアカウントを使う）を同時に動かすリードについては、[多数のエージェントを動かす](/methodology/06-orchestration)を参照してください。
+多数のレーン（ホスト、コンテナ、別マシン上のペインで、それぞれが自分のアカウントを使う）を同時に動かすリードには、`herdr-peers lanes` がすべてのレーンを状態とともに一覧表示し、`herdr-peers status <pane>` がブロック中のレーンのいる画面を分類します。また、すべての委任記録には、その作業を担ったアカウントとベンダーが記されます。[多数のエージェントを動かす](/methodology/06-orchestration)を参照してください。
 
 ## 補足
 

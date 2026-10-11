@@ -67,7 +67,7 @@ Cả hai addon đều triển khai cùng một giao diện ủy thác — `launc
 | Một tác vụ `parallel_safe` có giới hạn với đầu ra đã khai báo | [agentkit](/kit/agentkit) (`ak run` headless trong một worktree) |
 | Tác vụ cần tương tác, chạy lâu hoặc nằm trên một máy khác | Herdr (một peer trong pane) |
 
-Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, trong container và trên máy khác, mỗi lane trên tài khoản riêng — xem [Chạy nhiều agent](/methodology/06-orchestration).
+Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, trong container và trên máy khác, mỗi lane trên tài khoản riêng — `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, `herdr-peers status <pane>` phân loại màn hình mà một lane bị chặn đang ở, và mỗi bản ghi ủy thác nêu tài khoản và nhà cung cấp đã đảm nhận nó. Xem [Chạy nhiều agent](/methodology/06-orchestration).
 
 ## Ghi chú
 

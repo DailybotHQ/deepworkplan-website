@@ -67,7 +67,7 @@ Kedua addon mengimplementasikan antarmuka delegasi yang sama — `launch`, `obse
 | Tugas `parallel_safe` yang terbatas dengan keluaran yang dideklarasikan | [agentkit](/kit/agentkit) (`ak run` headless di dalam worktree) |
 | Tugas memerlukan interaksi, berjalan lama, atau berada di mesin lain | Herdr (rekan di panel) |
 
-Untuk lead yang menjalankan banyak lane sekaligus — panel di host, di container, dan di mesin lain, masing-masing pada akunnya sendiri — lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+Untuk lead yang menjalankan banyak lane sekaligus — panel di host, di container, dan di mesin lain, masing-masing pada akunnya sendiri — `herdr-peers lanes` mencantumkan setiap lane beserta statusnya, `herdr-peers status <pane>` mengklasifikasikan layar tempat lane yang blocked berada, dan setiap catatan delegasi menyebut akun dan vendor yang mengerjakannya. Lihat [Menjalankan banyak agent](/methodology/06-orchestration).
 
 ## Catatan
 

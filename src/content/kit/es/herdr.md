@@ -67,7 +67,7 @@ Ambos addons implementan la misma interfaz de delegación —`launch`, `observe`
 | Una tarea `parallel_safe` acotada con una salida declarada | [agentkit](/kit/agentkit) (`ak run` sin interfaz en un worktree) |
 | La tarea necesita interacción, dura mucho o vive en otra máquina | Herdr (un par en un panel) |
 
-Para un líder que ejecuta muchos carriles a la vez — paneles en el host, en contenedores y en otras máquinas, cada uno con su propia cuenta —, consulta [Ejecutar muchos agentes](/methodology/06-orchestration).
+Para un líder que ejecuta muchos carriles a la vez — paneles en el host, en contenedores y en otras máquinas, cada uno con su propia cuenta —, `herdr-peers lanes` enumera cada carril con su estado, `herdr-peers status <pane>` clasifica la pantalla en la que está un carril bloqueado, y cada registro de delegación nombra la cuenta y el proveedor que lo llevaron. Consulta [Ejecutar muchos agentes](/methodology/06-orchestration).
 
 ## Notas
 

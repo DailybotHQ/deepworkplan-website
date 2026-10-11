@@ -49,7 +49,7 @@ Dostawców łączy się w ten sam sposób. Tor Claude może pisać, podczas gdy 
 Prowadzący może uruchamiać tory i utrzymywać je w ruchu, gdy nikt nie siedzi przy klawiaturze. Używa do tego własnych poleceń Herdr; żaden kod kitu nie wysyła naciśnięć klawiszy. Procedura ma stałą kolejność: unikać monitu, wykryć zatrzymanie, odblokować tylko to, co znane, eskalować resztę.
 
 1. **Najpierw unikaj.** `ak pick <kind>` wskazuje konto z największym zapasem, a `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` uruchamia tor w jego własnym folderze. `--trust-cwd` (lub `AGENTKIT_TRUST_CWD=1`) z góry oznacza ten folder jako zaufany, a domyślna autonomia kitu robi resztę, więc Claude i Codex pomijają ekrany zaufania do folderu bez naciskania klawiszy.
-2. **Wykryj.** `herdr agent list` pokazuje każdy tor jako pracujący, bezczynny, zablokowany lub zakończony. Tor zablokowany albo bezczynny bez wyjścia dostaje `herdr pane read <pane>`, aby ustalić, na jakim ekranie stoi.
+2. **Wykryj.** `herdr-peers lanes` (lub `herdr agent list`) pokazuje każdy tor jako pracujący, bezczynny, zablokowany lub zakończony. Dla toru zablokowanego albo bezczynnego bez wyjścia `herdr-peers status <pane>` klasyfikuje ekran, na którym stoi, a `herdr pane read <pane>` go pokazuje.
 3. **Odblokowuj tylko znane ekrany pierwszego uruchomienia.** Za pomocą `herdr pane send-keys` prowadzący odpowiada na dwa ekrany i nic więcej: zaufanie do własnego folderu toru oraz jednorazowe, per profil, potwierdzenie trybu bypass-permissions w Claude dla profilu, który programista uruchamia w trybie autonomii. Robi to tylko wtedy, gdy programista zezwolił na pracę bez nadzoru — stałym poleceniem lub wstępną autoryzacją planu. Czyta ekran przed wysłaniem klawiszy, wysyła najmniej klawiszy, które na niego odpowiadają, i czyta ponownie.
 4. **Eskaluj wszystko inne.** Monity logowania i poświadczeń, prośby o uprawnienia dla poszczególnych akcji, potwierdzenia operacji destrukcyjnych, monity płatności lub planu, nieznane ekrany i panele, których prowadzący nie utworzył, trafiają do programisty jako zablokowany kamień milowy, nigdy jako naciśnięcia klawiszy.
 5. **Rezygnacja wygrywa.** Przy `AGENTKIT_PERMISSIONS=ask` potwierdzenie trybu bypass-permissions nigdy nie jest akceptowane.
@@ -65,6 +65,9 @@ Tory i prowadzący komunikują się przez [herdr-peers](/pl/kit/herdr): **ask** 
 - **Pytania jako ask.** Tor, który potrzebuje decyzji, pyta prowadzącego; prowadzący odpowiada jedną reply.
 - **Głębokość jeden.** Na reply nigdy się nie odpowiada, a tor nie deleguje dalej. Rozgałęzienie na wywołującego jest ograniczone, domyślnie do czterech peerów.
 - **Dane, nie instrukcje.** Reply nie przyznaje niczego, czego odbiorca jeszcze nie miał. Twierdzenie toru, że jego bramka przeszła, sprawdza się, uruchamiając bramkę.
+- **Zapis tego, kto co zrobił.** Każdy zapis delegacji podaje konto i dostawcę toru, dzięki czemu plan nadrzędny pokazuje, które konto wykonało którą pracę.
+
+Prowadzący może zobaczyć całą orkiestrę naraz: `herdr-peers lanes` wyświetla każdy tor z jego stanem, a [DeepWorkPlan Vim](/pl/kit/vim) pokazuje tory planu orkiestratora w widoku torów obok samego planu.
 
 ## Jedna gałąź, jedno wydanie na repozytorium
 
@@ -80,7 +83,7 @@ Repozytoria zależą od siebie nawzajem, więc wydaje się je w kolejności zale
 
 Plan nadrzędny zamyka się na podstawie dowodów, nie raportów:
 
-1. **Dla każdego toru.** Bramka każdego toru przechodzi na jego własnej gałęzi, a przegląd jego pull requesta jest czysty.
+1. **Dla każdego toru.** Bramka każdego toru przechodzi na jego własnej gałęzi, a przegląd jego pull requesta jest czysty. Przegląd może być osobnym torem: [AI Diff Reviewer](/pl/kit/ai-diff-reviewer) przegląda pull request każdego toru, a z addonem [Dailybot](/pl/kit/dailybot) każdy tor raportuje zespołowi własne postępy.
 2. **Dla każdego wydania.** Każdy tag istnieje i przypina to, czego potrzebuje następne repozytorium.
 3. **Integracja.** Po ostatnim wydaniu punkt kontrolny uruchamia konsumentów na wydanych wersjach i zapisuje werdykt w `analysis_results/` planu nadrzędnego.
 4. **Przegląd końcowy.** Przegląd bezpieczeństwa obejmuje wszystko, co przekroczyło granicę — przede wszystkim konta, tokeny i pliki udostępnione kontenerom — zanim plan nadrzędny zostanie ukończony.

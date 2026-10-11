@@ -67,7 +67,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 | 一项有边界、声明了输出的 `parallel_safe` 任务 | [agentkit](/kit/agentkit)（在 worktree 中以无头方式运行 `ak run`） |
 | 任务需要交互、运行时间长，或位于另一台机器上 | Herdr（窗格中的一个对等方） |
 
-如果主导者要同时运行多条通道——位于主机、容器和其他机器上的窗格，各自使用自己的账户——请参阅[运行多个代理](/methodology/06-orchestration)。
+如果主导者要同时运行多条通道——位于主机、容器和其他机器上的窗格，各自使用自己的账户——`herdr-peers lanes` 会列出每条通道及其状态，`herdr-peers status <pane>` 会对受阻通道所停留的界面进行分类，而每条委派记录都会写明承担该工作的账户和厂商。参见[运行多个代理](/methodology/06-orchestration)。
 
 ## 备注
 

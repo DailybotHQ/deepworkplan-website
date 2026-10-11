@@ -67,7 +67,7 @@ Her iki eklenti de aynı devretme arayüzünü — `launch`, `observe`, `collect
 | Bildirilmiş bir çıktısı olan, sınırları belirli `parallel_safe` bir görev | [agentkit](/kit/agentkit) (bir worktree'de başsız `ak run`) |
 | Görev etkileşim gerektiriyor, uzun sürüyor ya da başka bir makinede bulunuyor | Herdr (bir bölmedeki eş) |
 
-Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konteynerlerde ve diğer makinelerde, her biri kendi hesabıyla çalışan bölmeler — [Birçok ajanı çalıştırmak](/methodology/06-orchestration) bölümüne bakın.
+Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konteynerlerde ve diğer makinelerde, her biri kendi hesabıyla çalışan bölmeler — `herdr-peers lanes` her şeridi durumuyla birlikte listeler, `herdr-peers status <pane>` engellenmiş bir şeridin bulunduğu ekranı sınıflandırır ve her devretme kaydı işi taşıyan hesabı ve sağlayıcıyı belirtir. Bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
 
 ## Notlar
 

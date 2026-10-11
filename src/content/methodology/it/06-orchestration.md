@@ -49,7 +49,7 @@ I fornitori si combinano allo stesso modo. Una corsia Claude può scrivere mentr
 Un lead può avviare corsie e farle avanzare senza nessuno alla tastiera. Usa i comandi di Herdr; nessun codice del kit invia tasti. La procedura ha un ordine fisso: evitare il prompt, rilevare l’arresto, sbloccare solo ciò che è noto, escalare il resto.
 
 1. **Prima, evitare.** `ak pick <kind>` indica l’account con più margine, e `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` avvia la corsia nella propria cartella. `--trust-cwd` (o `AGENTKIT_TRUST_CWD=1`) considera attendibile in anticipo quella cartella e l’autonomia predefinita del kit fa il resto, così Claude e Codex saltano le schermate di attendibilità della cartella senza alcun tasto.
-2. **Rilevare.** `herdr agent list` mostra ogni corsia come al lavoro, inattiva, bloccata o completata. Una corsia bloccata, o inattiva senza output, riceve un `herdr pane read <pane>` per identificare la schermata in cui si trova.
+2. **Rilevare.** `herdr-peers lanes` (o `herdr agent list`) mostra ogni corsia come al lavoro, inattiva, bloccata o completata. Per una corsia bloccata, o inattiva senza output, `herdr-peers status <pane>` classifica la schermata in cui si trova, e `herdr pane read <pane>` la mostra.
 3. **Sbloccare solo le schermate note del primo avvio.** Con `herdr pane send-keys`, il lead risponde a due schermate e a nient’altro: l’attendibilità della cartella per la cartella della corsia stessa, e la conferma una tantum, per profilo, della modalità di bypass dei permessi di Claude per un profilo che lo sviluppatore esegue in autonomia. Lo fa solo quando lo sviluppatore ha concesso il funzionamento non presidiato — un’istruzione permanente o la pre-autorizzazione del piano. Legge la schermata prima di inviare tasti, invia il minimo di tasti che la risolve e rilegge.
 4. **Escalare tutto il resto.** Prompt di login e di credenziali, richieste di permesso per singola azione, conferme distruttive, schermate di pagamento o di piano, schermate sconosciute e pannelli che il lead non ha creato vanno allo sviluppatore come milestone di blocco, mai come tasti.
 5. **L’opt-out prevale.** Con `AGENTKIT_PERMISSIONS=ask`, la conferma della modalità di bypass dei permessi non viene mai accettata.
@@ -65,6 +65,9 @@ Le corsie e il lead comunicano tramite [herdr-peers](/it/kit/herdr): una **richi
 - **Domande come richieste.** Una corsia che ha bisogno di una decisione interpella il lead; il lead risponde con una risposta.
 - **Profondità uno.** A una risposta non si risponde mai, e una corsia non delega oltre. Il fan-out per chiamante è limitato, a quattro peer per impostazione predefinita.
 - **Dati, non istruzioni.** Una risposta non concede nulla che il destinatario non avesse già. L’affermazione di una corsia che il suo gate è passato si verifica eseguendo il gate.
+- **Una traccia di chi ha fatto cosa.** Ogni record di delega indica l’account e il fornitore della corsia, così il piano padre mostra quale account ha svolto quale lavoro.
+
+Il lead può vedere tutta l’orchestra in un colpo d’occhio: `herdr-peers lanes` elenca ogni corsia con il suo stato, e [DeepWorkPlan Vim](/it/kit/vim) mostra le corsie di un piano orchestratore in una vista delle corsie accanto al piano stesso.
 
 ## Un branch, un rilascio per repository
 
@@ -80,7 +83,7 @@ I repository dipendono l’uno dall’altro, quindi rilasciano in ordine di dipe
 
 Il piano padre si chiude su evidenze, non su resoconti:
 
-1. **Per corsia.** Il gate di ogni corsia passa sul proprio branch, e la revisione della sua pull request è pulita.
+1. **Per corsia.** Il gate di ogni corsia passa sul proprio branch, e la revisione della sua pull request è pulita. La revisione può essere una corsia a sé: l’[AI Diff Reviewer](/it/kit/ai-diff-reviewer) rivede la pull request di ogni corsia e, con l’addon [Dailybot](/it/kit/dailybot), ogni corsia riferisce al team i propri progressi.
 2. **Per rilascio.** Ogni tag esiste e fissa ciò che serve al repository successivo.
 3. **Integrazione.** Dopo l’ultimo rilascio, un checkpoint esegue i consumatori sulle versioni rilasciate e registra il verdetto in `analysis_results/` del piano padre.
 4. **Revisione finale.** Un passaggio di sicurezza copre tutto ciò che ha attraversato un confine — soprattutto account, token e file condivisi nei container — prima che il piano padre sia completato.
