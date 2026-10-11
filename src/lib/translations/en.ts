@@ -570,12 +570,12 @@ export const en: SiteTranslations = {
     meta: {
       title: 'The Deep Work Plan Methodology',
       description:
-        'Five chapters from manifesto to archetypes: the principles, the core loop, templates, skills and agents, and the adaptations behind Deep Work Plan.',
+        'Six chapters from manifesto to orchestration: the principles, the core loop, templates, skills and agents, archetypes, and running many agents at once.',
     },
     eyebrow: 'Methodology',
     title: 'The Deep Work Plan Methodology',
     intro:
-      'Five chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, and adaptations you use every day.',
+      'Six chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, adaptations, and running many agents at once.',
     chapterLabel: 'Chapter',
     readChapter: 'Read chapter',
     prev: 'Previous',

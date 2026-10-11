@@ -67,6 +67,8 @@ Both addons implement the same delegation interface — `launch`, `observe`, `co
 | A bounded `parallel_safe` task with a declared output | [agentkit](/kit/agentkit) (headless `ak run` in a worktree) |
 | The task needs interaction, runs long, or lives on another machine | Herdr (a peer in a pane) |
 
+For a lead running many lanes at once — panes on the host, in containers and on other machines, each on its own account — see [Running many agents](/methodology/06-orchestration).
+
 ## Notes
 
 Optional and never required. A repository is fully conformant with zero optional addons, and no flow depends on this one. The two-pane, cross-machine round trip is covered by tests against a simulated Herdr; plan a supervised first run.
