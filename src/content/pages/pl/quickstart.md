@@ -145,7 +145,7 @@ przejście bezpieczeństwa nad całym zakumulowanym zestawem zmian, w tym wymaga
 lokalną recenzję AI Diff Reviewer, waliduje finalny stan repozytorium, uzgadnia
 skille użyte przez zadania i rejestruje dowody oraz ograniczenia. Skill lokalnej
 recenzji jest instalowany w ustalonej wersji; aktualnie udokumentowane polecenie
-instaluje `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`. GitHub Action to osobna, opcjonalna
+instaluje `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8`. GitHub Action to osobna, opcjonalna
 powierzchnia CI, nigdy niewymagana dla podstawowej metodyki.
 
 Przegląd, który się wykonał i niczego nie zgłosił, to nie to samo co przegląd, który w ogóle nie wytworzył ustaleń. Ten drugi przypadek to **przegląd niekompletny**: zapisuje się go jako taki, nigdy nie liczy się jako dowód, że zestaw zmian jest czysty, i nigdy nie stanowi powodu do zamknięcia Final Review — to samo czerwone potraktowanie, jakie otrzymuje przegląd `timeout` przy blokującej surowości (BC-04). Razem z brakującym recenzentem i nieudanym wywołaniem daje to trzy odrębne stany — i żaden z nich nie oznacza, że diff został przejrzany i uznany za czysty. Treść mówiąca `Recommendation: approve` też nie jest dowodem, że check przeszedł. Najpierw przeczytaj blok Highest severity / Strictness gate / Check status w znaczniku śledzenia — środowisko przepisuje modelowe `approve`, gdy bramka nie przechodzi.
@@ -193,7 +193,7 @@ Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długośc
 
 Po onboardingu bazowym zainstaluj **lokalny przegląd AI Diff Reviewer** (Phase 7a — wymagany od
 standardu 2.3.0): vendorowaną skill przypiętą do tagu
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) plus dopasowany
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) plus dopasowany
 do repozytorium `.review/extension.md` przez `generate-extension`, w ramach zgody onboardingu. Następnie
 wymień siedem opcjonalnych dodatków (devcontainer, Dailybot, dependency upgrade, design system,
 agentkit, Herdr, DeepWorkPlan Vim) i zaproponuj każdy jako wyraźną opcję do wyboru, zapisując każdą
@@ -201,7 +201,7 @@ akceptację w `.dwp/config.json`. Repozytorium jest w pełni zgodne przy **zerow
 dodatków — nigdy nie instaluj ich automatycznie.
 
 - **Wsparcie devcontainera** — lekki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v0.2.11`, wraz z jego skillem `dck-dockerfile`): `dck init` renderuje własny kontener repozytorium — oficjalny obraz przypięty przez digest, bez wspólnego obrazu bazowego, `bash dev.sh up` — i uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu; agenci kodujący to warstwa opt-in.
-- **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.9.0`). Instalacja sparowanego skilla agenta Dailybot (3.23.3) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI, tablice i zadania Plan, klucze API per-repo i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
+- **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.9.0`). Instalacja sparowanego skilla agenta Dailybot (3.23.11) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI, tablice i zadania Plan, klucze API per-repo i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne. Po
   zaakceptowaniu instaluje komendę `/lib-upgrade`.
 - **Design system** — opcjonalny `docs/DESIGN.md` tylko dla repozytoriów z wykrytą powierzchnią interfejsu

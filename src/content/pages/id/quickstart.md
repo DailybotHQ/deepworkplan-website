@@ -179,7 +179,7 @@ pemeriksaan keamanan atas seluruh kumpulan perubahan yang terakumulasi, termasuk
 review lokal AI Diff Reviewer yang wajib, memvalidasi status akhir repositori,
 merekonsiliasi skill yang digunakan oleh tugas-tugas, dan mencatat bukti serta
 keterbatasan. Skill review lokal dipasang pada rilis yang dipatok; perintah yang
-saat ini didokumentasikan memasang `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`. GitHub
+saat ini didokumentasikan memasang `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8`. GitHub
 Action adalah permukaan CI terpisah yang opsional, dan tidak pernah wajib untuk
 metodologi inti.
 
@@ -229,7 +229,7 @@ Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga d
 
 Setelah onboarding dasar, pasang **tinjauan lokal AI Diff Reviewer** (Fase 7a — wajib sejak
 standar 2.3.0): skill vendored yang dipatok pada tag
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) ditambah
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) ditambah
 `.review/extension.md` yang disesuaikan dengan repo melalui `generate-extension`, di bawah persetujuan
 onboarding. Lalu sebutkan ketujuh addon opsional (devcontainer, Dailybot, dependency upgrade,
 design system, agentkit, Herdr, DeepWorkPlan Vim) dan tawarkan masing-masing sebagai opt-in eksplisit,
@@ -237,7 +237,7 @@ serta catat setiap penerimaan di `.dwp/config.json`. Sebuah repositori sepenuhny
 konforman dengan **nol** addon opsional — jangan pernah memasang yang itu secara otomatis.
 
 - **Dukungan devcontainer** — integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.2.11`, dengan skill `dck-dockerfile`-nya): `dck init` merender container milik repositori itu sendiri — image resmi yang dipatok berdasarkan digest, tanpa base image bersama, `bash dev.sh up` — dan merekonsiliasi devcontainer yang sudah ada hanya setelah diff-nya diterima; coding agent adalah lapisan opt-in.
-- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.9.0`). Memasang skill agent Dailybot yang dipasangkan (3.23.3) juga membuka chat, check-in, penulisan form, tanya AI, board dan tugas Plan, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
+- **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.9.0`). Memasang skill agent Dailybot yang dipasangkan (3.23.11) juga membuka chat, check-in, penulisan form, tanya AI, board dan tugas Plan, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` opsional hanya untuk repositori dengan permukaan antarmuka yang

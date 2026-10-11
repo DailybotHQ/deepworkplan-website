@@ -176,7 +176,7 @@ yerel AI Diff Reviewer incelemesi dâhil olmak üzere birikmiş değişiklik kü
 üzerinde güvenlik taramasını çalıştırır, nihai depo durumunu doğrular, görevler
 tarafından kullanılan skill'leri uzlaştırır ve kanıtları ile sınırlamaları kaydeder.
 Yerel inceleme skill'i sabitlenmiş bir sürümde kurulur; şu anda belgelenen komut
-`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0` sürümünü kurar. GitHub Action, ayrı ve isteğe bağlı
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8` sürümünü kurar. GitHub Action, ayrı ve isteğe bağlı
 bir CI yüzeyidir ve temel metodoloji için asla zorunlu değildir.
 
 Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz — engelleyici katılık altında bir `timeout` incelemesinin aldığı ile aynı kırmızı muamele (BC-04). Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez. `Recommendation: approve` diyen bir gövde de check’in geçtiğinin kanıtı değildir. Önce izleme işaretinin Highest severity / Strictness gate / Check status bloğunu okuyun — kapı başarısızken çalışma zamanı modelin `approve` satırını yeniden yazar.
@@ -226,7 +226,7 @@ Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (�
 
 Temel onboarding sonrasında, **AI Diff Reviewer yerel incelemesini** kurun (Faz 7a — 2.3.0
 standardından itibaren gereklidir): etikete sabitlenmiş vendored skill
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) artı
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) artı
 `generate-extension` aracılığıyla depoya uyarlanmış bir `.review/extension.md`, onboarding onayı
 altında. Ardından yedi isteğe bağlı eklentiyi (devcontainer, Dailybot, dependency upgrade,
 design system, agentkit, Herdr, DeepWorkPlan Vim) sıralayın, her birini açık bir tercih olarak
@@ -234,7 +234,7 @@ sunun ve her kabulü `.dwp/config.json` içine kaydedin. Bir depo, **sıfır** i
 eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
 - **Devcontainer desteği** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) için ince bir entegrasyon katmanı (`dck`, `v0.2.11` sürümüne sabitlenmiş, `dck-dockerfile` becerisiyle birlikte): `dck init` deponun kendi konteynerini oluşturur — özetle (digest) sabitlenmiş resmî imaj, ortak temel imaj yok, `bash dev.sh up` — ve mevcut bir devcontainer’ı yalnızca farkı (diff) kabul edildikten sonra uzlaştırır; kodlama agent’ları isteğe bağlı bir katmandır.
-- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.3) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
+- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.11) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
 - **Design system** — yalnızca saptanan arayüz yüzeyi olan depolar için isteğe bağlı `docs/DESIGN.md`

@@ -135,7 +135,7 @@ Review** です。これは、必須のローカル AI Diff Reviewer レビュ�
 蓄積された変更セット全体に対するセキュリティパスを実行し、最終的なリポジ
 トリの状態を検証し、タスクが使用したスキルを整合させ、証跡と制限事項を記録
 します。ローカルレビュースキルは固定されたリリースにインストールされ、現在
-文書化されているコマンドは `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0` をインストールしま
+文書化されているコマンドは `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8` をインストールしま
 す。GitHub Action は別個のオプションの CI surface であり、コアの方法論に
 は決して必須ではありません。
 
@@ -163,10 +163,10 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 ## 4. 必須のローカルレビューをインストールし、その後オプトイン式のアドオンを提案する
 
-ベースラインのオンボーディング後、**AI Diff Reviewer ローカルレビュー**をインストールします（フェーズ 7a — 標準 2.3.0 以降は必須）。タグで固定されたベンダースキル（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`）に加えて、`generate-extension` によるリポジトリ向けに調整された `.review/extension.md` を、オンボーディングの同意のもとでインストールします。次に、七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、それぞれを明示的なオプトインとして提案し、受け入れられたものはすべて `.dwp/config.json` に記録します。リポジトリはオプションのアドオンが**ゼロ**でも完全に適合します。それらを決して自動でインストールしないでください。
+ベースラインのオンボーディング後、**AI Diff Reviewer ローカルレビュー**をインストールします（フェーズ 7a — 標準 2.3.0 以降は必須）。タグで固定されたベンダースキル（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`）に加えて、`generate-extension` によるリポジトリ向けに調整された `.review/extension.md` を、オンボーディングの同意のもとでインストールします。次に、七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、それぞれを明示的なオプトインとして提案し、受け入れられたものはすべて `.dwp/config.json` に記録します。リポジトリはオプションのアドオンが**ゼロ**でも完全に適合します。それらを決して自動でインストールしないでください。
 
 - **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.2.11` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ専用のコンテナ（ダイジェストで固定した公式イメージ、共有ベースイメージなし、`bash dev.sh up`）をレンダリングし、既存の devcontainer はその差分が受け入れられた後にのみ調整します。コーディングエージェントはオプトインのレイヤーです。
-- **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.3）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
+- **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.11）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。受け入れられると、`/lib-upgrade` コマンドをインストールします。
 - **Design system** — 検出されたインターフェイス面を持つリポジトリのみを対象とした、オプトインの `docs/DESIGN.md`（純粋なライブラリ、ヘッドレスサービス、インフラ専用リポジトリには提案されません）。三つのプロファイルが一つのファイルに重ねられます：visual-ui（検出時に強く推奨；インストールは受け入れでゲート）、cli-output、conversational — 後者二つは常に尋ねられ、自動適用されることはありません。
 - **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.4.0` に固定）のマシンレベルのインストール。範囲の限られた `parallel_safe` タスクを他のコーディングエージェントに渡す計画向けです（ヘッドレスで、委任先ごとに専用の worktree で `ak run` を一回実行）。キットはデフォルトでエージェントを自律モードで起動し、そのオプトアウト（`--ask` または `AGENTKIT_PERMISSIONS=ask`）が常に優先されます。

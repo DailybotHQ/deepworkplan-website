@@ -156,7 +156,7 @@ accumulés, y compris la revue locale requise d'AI Diff Reviewer, valide
 l'état final du dépôt, réconcilie les skills utilisés par les tâches et
 consigne les preuves et les limites. Le skill de revue locale est installé
 à une version fixée ; la commande actuellement documentée installe
-`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`. La GitHub Action est une surface CI
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8`. La GitHub Action est une surface CI
 séparée et optionnelle, jamais requise pour la méthodologie de base.
 
 Une revue qui s'est exécutée sans rien signaler n'est pas la même chose qu'une revue qui n'a jamais produit le moindre constat. Le second cas est une **revue incomplète** : elle est consignée comme telle, ne compte jamais comme preuve que l'ensemble des modifications est propre, et ne justifie jamais la clôture du Final Review — le même traitement en rouge qu’une revue `timeout` sous stricte bloquante (BC-04). Avec un relecteur absent et une invocation en échec, cela fait trois états distincts — et aucun ne signifie que le diff a été relu et jugé propre. Un corps qui dit `Recommendation: approve` n’est pas non plus une preuve que le contrôle a réussi. Lisez d’abord le bloc Highest severity / Strictness gate / Check status du marqueur de suivi — le runtime réécrit un `approve` du modèle lorsque la barrière échoue.
@@ -205,7 +205,7 @@ Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois 
 
 Après l’onboarding de base, installez la **revue locale d’AI Diff Reviewer** (Phase 7a — requise
 depuis le standard 2.3.0) : la skill vendorisée épinglée par tag
-(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`) plus un
+(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`) plus un
 `.review/extension.md` taillé pour le dépôt via `generate-extension`, sous le consentement de
 l’onboarding. Énumérez ensuite les sept addons facultatifs (devcontainer, Dailybot, mise à jour des
 dépendances, design system, agentkit, Herdr, DeepWorkPlan Vim) et proposez chacun comme un choix
@@ -213,7 +213,7 @@ explicite, en consignant chaque acceptation dans `.dwp/config.json`. Un dépôt 
 pleinement conforme avec **zéro** addon facultatif — ne les installez jamais automatiquement.
 
 - **Prise en charge du devcontainer** — un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.2.11`, avec sa skill `dck-dockerfile`) : `dck init` génère le conteneur propre au dépôt (image officielle épinglée par digest, aucune image de base partagée, `bash dev.sh up`) et ne réconcilie un devcontainer existant qu’après acceptation de son diff ; les agents de code sont une couche à activer explicitement.
-- **Intégration Dailybot** — quatre événements du cycle de vie (kickoff, tâche significative, bloqué, achèvement) comme rapports de progression au mieux pour les équipes utilisant déjà Dailybot, avec une couche facultative d’application autonome des hooks (`dailybot-cli >= 3.9.0`). L’installation du skill d’agent Dailybot apparié (3.23.3) expose aussi le chat, les check-ins, la création de formulaires, la consultation IA, les tableaux et tâches Plan, les clés API par dépôt et plus — l’addon ne raccorde que le reporting à l’exécution DWP. La méthodologie de base n’a aucune dépendance à Dailybot.
+- **Intégration Dailybot** — quatre événements du cycle de vie (kickoff, tâche significative, bloqué, achèvement) comme rapports de progression au mieux pour les équipes utilisant déjà Dailybot, avec une couche facultative d’application autonome des hooks (`dailybot-cli >= 3.9.0`). L’installation du skill d’agent Dailybot apparié (3.23.11) expose aussi le chat, les check-ins, la création de formulaires, la consultation IA, les tableaux et tâches Plan, les clés API par dépôt et plus — l’addon ne raccorde que le reporting à l’exécution DWP. La méthodologie de base n’a aucune dépendance à Dailybot.
 - **Mise à jour des dépendances** — des mises à jour indépendantes du gestionnaire de paquets, par lots, validées et réversibles. Lorsqu’elle est
  acceptée, elle installe la commande `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` optionnel, proposé uniquement pour les dépôts dotés d’une surface

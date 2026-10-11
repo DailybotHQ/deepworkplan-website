@@ -166,7 +166,7 @@ v7 계획은 계약이 `agent_delegation`을 부여하고 위임 애드온(agent
 변경 사항 전체에 대한 보안 검사를 실행하고, 최종 리포지토리 상태를
 검증하고, 작업들이 사용한 스킬을 정합화하고, 증거와 한계를 기록합니다.
 로컬 리뷰 스킬은 고정된 릴리스로 설치되며, 현재 문서화된 명령은
-`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0`을 설치합니다. GitHub Action은
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8`을 설치합니다. GitHub Action은
 별개의 선택적 CI 표면이며 핵심 방법론에는 결코 필수가 아닙니다.
 
 실행되었지만 아무것도 보고하지 않은 리뷰와, 애초에 지적을 하나도 만들어 내지 못한 리뷰는 같지 않습니다. 후자는 **불완전한 리뷰**입니다. 그대로 기록되며, 변경 사항이 깨끗하다는 근거로 결코 계산되지 않고, Final Review를 닫을 이유도 되지 않습니다 — 차단 엄격도에서 `timeout` 검토가 받는 것과 같은 빨간 처리(BC-04). 리뷰어 부재, 호출 오류와 함께 서로 다른 세 가지 상태이며, 그 어느 것도 "diff를 검토했고 문제가 없었다"를 뜻하지 않습니다. `Recommendation: approve`라고 적힌 본문도 체크가 통과했다는 증거가 아닙니다. 추적 마커의 Highest severity / Strictness gate / Check status 블록을 먼저 읽으세요. 게이트가 실패 중이면 런타임이 모델의 `approve`를 다시 씁니다.
@@ -213,14 +213,14 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 ## 4. 필수 로컬 리뷰를 설치한 뒤 선택형 애드온을 제안하세요
 
 기준선 온보딩 이후, **AI Diff Reviewer 로컬 리뷰**를 설치하세요(7a 단계 — 표준 2.3.0부터 필수):
-태그 고정 벤더 스킬(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.0 --skill ai-diff-reviewer -y`)과
+태그 고정 벤더 스킬(`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.8 --skill ai-diff-reviewer -y`)과
 `generate-extension`을 통한 저장소 맞춤 `.review/extension.md`을, 온보딩 동의 아래 설치합니다. 그런 다음
 일곱 가지 선택적 애드온(devcontainer, Dailybot, dependency upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim)을 열거하고
 각각을 명시적 선택형으로 제안하며, 수락된 항목은 모두 `.dwp/config.json`에 기록하세요. 리포지토리는 선택적 애드온이 **하나도** 없어도 완전히
 적합합니다 — 그것들은 결코 자동 설치하지 마세요.
 
 - **Devcontainer 지원** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v0.2.11`로 고정, `dck-dockerfile` 스킬 포함)의 얇은 통합 계층: `dck init`이 리포지토리 자체의 컨테이너 — 다이제스트로 고정된 공식 이미지, 공유 베이스 이미지 없음, `bash dev.sh up` — 를 렌더링하고, 기존 devcontainer는 그 diff가 수락된 뒤에만 조정합니다. 코딩 에이전트는 옵트인 레이어입니다.
-- **Dailybot 연동** — 네 가지 라이프사이클 이벤트(kickoff, 중요 작업, 블로킹, 완료)를 이미 Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 보고로 제공하며, 선택적 자율 훅 강제(`dailybot-cli >= 3.9.0`). 페어링된 Dailybot 에이전트 스킬(3.23.3)을 설치하면 채팅, 체크인, 폼 작성, AI 질의, Plan 보드와 작업, 저장소별 API 키 등도 노출됩니다 — 이 애드온은 DWP 실행에 보고만 연결합니다. 핵심 방법론은 Dailybot 의존성이 전혀 없습니다.
+- **Dailybot 연동** — 네 가지 라이프사이클 이벤트(kickoff, 중요 작업, 블로킹, 완료)를 이미 Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 보고로 제공하며, 선택적 자율 훅 강제(`dailybot-cli >= 3.9.0`). 페어링된 Dailybot 에이전트 스킬(3.23.11)을 설치하면 채팅, 체크인, 폼 작성, AI 질의, Plan 보드와 작업, 저장소별 API 키 등도 노출됩니다 — 이 애드온은 DWP 실행에 보고만 연결합니다. 핵심 방법론은 Dailybot 의존성이 전혀 없습니다.
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
   채택되면 `/lib-upgrade` 명령을 설치합니다.
 - **Design system** — 감지된 인터페이스 표면이 있는 리포지토리에만 제공되는 선택형 `docs/DESIGN.md`
