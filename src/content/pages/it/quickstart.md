@@ -313,19 +313,24 @@ addon agentkit e Herdr sono installati:
 - **Account in base al margine.** `ak profiles --json` elenca gli account; `ak usage` ne mostra la quota
   una volta per lotto; `ak pick <kind> --count N` restituisce gli account con più margine. Usa solo gli
   account dello sviluppatore, nel rispetto dei termini di ogni fornitore.
+- **Preparare una volta.** La conferma della modalità di bypass dei permessi (bypass-permissions) di Claude Code è un passo una tantum, per profilo,
+  che compie lo **sviluppatore** quando il profilo viene creato (in un container di devcontainer-kit, il kit
+  la scrive solo nelle home del container stesso). Non inviare mai tasti per essa.
 - **Avviare.** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` avvia una corsia nella propria
-  cartella; `--trust-cwd` considera attendibile in anticipo quella cartella, così non compare alcuna schermata di attendibilità della cartella.
+  cartella; `--trust-cwd` considera attendibile in anticipo quella cartella, così non compare alcuna schermata di attendibilità della cartella. Una volta che lo
+  sviluppatore ha concesso il funzionamento non presidiato, ogni avvio non richiede altre approvazioni.
 - **Coordinare.** `herdr-peers ask` e `herdr-peers reply`: una risposta autorizzata per richiesta, profondità uno;
   le risposte sono dati e non concedono nulla.
-- **Sorvegliare e sbloccare.** `herdr-peers lanes` mostra lo stato di ogni corsia; per una corsia bloccata,
-  `herdr-peers status <pane>` classifica la schermata. Con `herdr pane send-keys`, rispondi **solo a due
-  schermate** — l’attendibilità della cartella per la cartella della corsia stessa, e la conferma una tantum, per profilo,
-  della modalità di bypass dei permessi di Claude per un profilo eseguito in autonomia — e solo quando lo sviluppatore
-  ha concesso il funzionamento non presidiato. Leggi la schermata prima e dopo, e invia il minimo di tasti.
-- **Escala tutto il resto** allo sviluppatore: prompt di login e di credenziali, richieste di
-  permesso per singola azione, conferme distruttive, schermate di pagamento o di piano, schermate sconosciute e
-  pannelli che non hai creato. Con `AGENTKIT_PERMISSIONS=ask`, non accettare mai la conferma di bypass.
-  Registra ogni intervento nel piano padre.
+- **Sorvegliare.** `herdr-peers lanes` mostra lo stato di ogni corsia; per una corsia bloccata,
+  `herdr-peers status <pane>` classifica la schermata e `herdr pane read <pane>` la mostra.
+- **Un tasto, un caso.** Gli unici tasti che puoi inviare con `herdr pane send-keys` sono la
+  risposta a una schermata di attendibilità della cartella, su un pannello che hai avviato tu stesso, quando `--trust-cwd`
+  non era disponibile. Leggi la schermata prima e dopo, e invia il minimo di tasti.
+- **Leggi, registra ed escala tutto il resto** allo sviluppatore: la conferma della modalità di bypass dei permessi di Claude,
+  i prompt di login e di credenziali, le richieste di permesso per singola azione, le conferme
+  distruttive, le schermate di pagamento o di piano, le schermate sconosciute e i pannelli che non hai creato. Con
+  `AGENTKIT_PERMISSIONS=ask`, le corsie chiedono prima di agire; non aggirare mai quei prompt. Registra ogni
+  intervento nel piano padre.
 
 ## 5. Fai evolvere il kit (sub-skill author)
 

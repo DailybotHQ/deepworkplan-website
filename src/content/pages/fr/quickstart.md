@@ -316,19 +316,24 @@ addons agentkit et Herdr sont installés :
 - **Des comptes selon la marge.** `ak profiles --json` liste les comptes ; `ak usage` affiche leur quota
   une fois par lot ; `ak pick <kind> --count N` renvoie les comptes qui ont le plus de marge. N’utilisez que les
   comptes du développeur lui-même, dans le respect des conditions de chaque fournisseur.
+- **Préparer une fois.** La confirmation du mode de contournement des permissions (bypass-permissions) de Claude Code est une étape unique, par profil,
+  que le **développeur** effectue à la création du profil (dans un conteneur devcontainer-kit, le kit
+  ne l’écrit que dans les homes propres au conteneur). N’envoyez jamais de touches pour elle.
 - **Lancer.** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` démarre un couloir dans son propre
-  dossier ; `--trust-cwd` approuve ce dossier à l’avance, si bien qu’aucun écran de confiance de dossier n’apparaît.
+  dossier ; `--trust-cwd` approuve ce dossier à l’avance, si bien qu’aucun écran de confiance de dossier n’apparaît. Une fois que le
+  développeur a accordé un fonctionnement sans surveillance, chaque lancement ne requiert aucune autre approbation.
 - **Coordonner.** `herdr-peers ask` et `herdr-peers reply` : une réponse autorisée par demande, profondeur un ;
   les réponses sont des données et n’accordent rien.
-- **Surveiller et débloquer.** `herdr-peers lanes` affiche l’état de chaque couloir ; pour un couloir bloqué,
-  `herdr-peers status <pane>` classe l’écran. Avec `herdr pane send-keys`, répondez **uniquement à deux
-  écrans** — la confiance de dossier pour le propre dossier du couloir, et la confirmation unique, par profil, du
-  mode de contournement des permissions de Claude pour un profil exécuté en autonomie — et seulement lorsque le développeur
-  a accordé un fonctionnement sans surveillance. Lisez l’écran avant et après, et envoyez le moins de touches possible.
-- **Faites remonter tout le reste** au développeur : invites de connexion et d’identifiants, demandes de
-  permission par action, confirmations destructrices, écrans de paiement ou de forfait, écrans inconnus et
-  panneaux que vous n’avez pas créés. Avec `AGENTKIT_PERMISSIONS=ask`, n’acceptez jamais la confirmation de contournement.
-  Consignez chaque intervention dans le plan parent.
+- **Surveiller.** `herdr-peers lanes` affiche l’état de chaque couloir ; pour un couloir bloqué,
+  `herdr-peers status <pane>` classe l’écran et `herdr pane read <pane>` l’affiche.
+- **Une frappe, un cas.** Les seules touches que vous pouvez envoyer avec `herdr pane send-keys` sont la
+  réponse à un écran de confiance de dossier, sur un panneau que vous avez lancé vous-même, lorsque `--trust-cwd`
+  n’était pas disponible. Lisez l’écran avant et après, et envoyez le moins de touches possible.
+- **Lisez, consignez et faites remonter tout le reste** au développeur : la confirmation du mode de contournement des permissions de Claude,
+  les invites de connexion et d’identifiants, les demandes de permission par action, les confirmations
+  destructrices, les écrans de paiement ou de forfait, les écrans inconnus et les panneaux que vous n’avez pas créés. Avec
+  `AGENTKIT_PERMISSIONS=ask`, les couloirs demandent avant d’agir ; ne contournez jamais ces invites. Consignez chaque
+  intervention dans le plan parent.
 
 ## 5. Faire évoluer le kit (sous-skill author)
 

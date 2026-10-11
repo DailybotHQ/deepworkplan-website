@@ -297,19 +297,24 @@ Addons agentkit und Herdr installiert sind:
 - **Konten nach Spielraum.** `ak profiles --json` listet die Konten auf; `ak usage` zeigt ihr Kontingent
   einmal pro Batch; `ak pick <kind> --count N` liefert die Konten mit dem meisten Spielraum. Verwenden Sie nur die
   eigenen Konten des Entwicklers, im Rahmen der Bedingungen jedes Anbieters.
+- **Einmal vorbereiten.** Die Bestätigung des Bypass-Permissions-Modus von Claude Code ist ein einmaliger Schritt pro
+  Profil, den der **Entwickler** beim Anlegen des Profils ausführt (in einem devcontainer-kit-Container schreibt das Kit
+  sie nur in die eigenen Home-Verzeichnisse des Containers). Senden Sie nie Tasten dafür.
 - **Starten.** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` startet eine Lane in ihrem eigenen
-  Ordner; `--trust-cwd` vertraut diesem Ordner im Voraus, sodass kein Bildschirm zum Ordnervertrauen erscheint.
+  Ordner; `--trust-cwd` vertraut diesem Ordner im Voraus, sodass kein Bildschirm zum Ordnervertrauen erscheint. Sobald der
+  Entwickler unbeaufsichtigten Betrieb gewährt hat, braucht kein einzelner Start eine weitere Freigabe.
 - **Koordinieren.** `herdr-peers ask` und `herdr-peers reply`: eine autorisierte Antwort pro ask, Tiefe eins,
   Antworten sind Daten und gewähren nichts.
-- **Beobachten und entsperren.** `herdr-peers lanes` zeigt den Zustand jeder Lane; für eine blockierte Lane
-  klassifiziert `herdr-peers status <pane>` den Bildschirm. Beantworten Sie mit `herdr pane send-keys` **nur zwei
-  Bildschirme** — das Ordnervertrauen für den eigenen Ordner der Lane und Claudes einmalige Bestätigung des
-  Bypass-Permissions-Modus pro Profil, für ein Profil, das in Autonomie läuft — und nur, wenn der Entwickler
-  unbeaufsichtigten Betrieb gewährt hat. Lesen Sie den Bildschirm vorher und nachher, und senden Sie die wenigsten Tasten.
-- **Alles andere eskalieren** an den Entwickler: Anmelde- und Zugangsdatenabfragen, Berechtigungsanfragen
-  pro Aktion, Bestätigungen destruktiver Schritte, Zahlungs- oder Tarifabfragen, unbekannte Bildschirme und
-  Panes, die Sie nicht erstellt haben. Akzeptieren Sie mit `AGENTKIT_PERMISSIONS=ask` niemals die Bypass-Bestätigung.
-  Protokollieren Sie jeden Eingriff im übergeordneten Plan.
+- **Beobachten.** `herdr-peers lanes` zeigt den Zustand jeder Lane; für eine blockierte Lane
+  klassifiziert `herdr-peers status <pane>` den Bildschirm, und `herdr pane read <pane>` zeigt ihn an.
+- **Ein Tastendruck, ein Fall.** Die einzigen Tasten, die Sie mit `herdr pane send-keys` senden dürfen, sind die
+  Antwort auf einen Bildschirm zum Ordnervertrauen, in einem Pane, das Sie selbst gestartet haben, wenn `--trust-cwd`
+  nicht verfügbar war. Lesen Sie den Bildschirm vorher und nachher, und senden Sie die wenigsten Tasten.
+- **Alles andere lesen, festhalten und an den Entwickler eskalieren:** Claudes Bestätigung des Bypass-Permissions-Modus,
+  Anmelde- und Zugangsdatenabfragen, Berechtigungsanfragen pro Aktion, Bestätigungen destruktiver
+  Schritte, Zahlungs- oder Tarifabfragen, unbekannte Bildschirme und Panes, die Sie nicht erstellt haben. Mit
+  `AGENTKIT_PERMISSIONS=ask` fragen Lanes, bevor sie handeln; umgehen Sie diese Abfragen nie. Protokollieren Sie jeden
+  Eingriff im übergeordneten Plan.
 
 ## 5. Das Kit weiterentwickeln (author-Sub-Skill)
 

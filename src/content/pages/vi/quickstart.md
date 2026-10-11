@@ -339,19 +339,24 @@ agentkit và Herdr đã được cài:
 - **Tài khoản theo hạn mức còn lại.** `ak profiles --json` liệt kê các tài khoản; `ak usage` hiển thị hạn mức của chúng
   một lần cho mỗi đợt; `ak pick <kind> --count N` trả về các tài khoản còn nhiều chỗ nhất. Chỉ dùng
   tài khoản của chính nhà phát triển, trong phạm vi điều khoản của từng nhà cung cấp.
+- **Chuẩn bị một lần.** Xác nhận bypass-permissions của Claude Code là bước một lần, theo từng hồ sơ,
+  do **nhà phát triển** thực hiện khi hồ sơ được tạo (trong một container devcontainer-kit, kit chỉ
+  ghi nó vào các thư mục home riêng của container). Không bao giờ gửi phím cho bước này.
 - **Khởi chạy.** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` khởi chạy một lane trong thư mục
   riêng của nó; `--trust-cwd` tin cậy trước thư mục đó, nên không có màn hình tin cậy thư mục nào xuất hiện.
+  Khi nhà phát triển đã cho phép vận hành không người giám sát, mỗi lần khởi chạy không cần thêm phê duyệt nào.
 - **Phối hợp.** `herdr-peers ask` và `herdr-peers reply`: mỗi ask một reply được ủy quyền, độ sâu một,
   reply là dữ liệu và không cấp thêm gì.
-- **Theo dõi và gỡ vướng.** `herdr-peers lanes` hiển thị trạng thái của mọi lane; với một lane bị chặn,
-  `herdr-peers status <pane>` phân loại màn hình. Với `herdr pane send-keys`, chỉ trả lời **hai
-  màn hình** — tin cậy thư mục cho thư mục riêng của lane, và xác nhận bypass-permissions một lần, theo từng hồ sơ
-  của Claude cho một hồ sơ chạy ở chế độ tự chủ — và chỉ khi nhà phát triển
-  đã cho phép vận hành không người giám sát. Đọc màn hình trước và sau, và gửi ít phím nhất.
-- **Chuyển mọi thứ khác lên** nhà phát triển: lời nhắc đăng nhập và thông tin xác thực, yêu cầu cấp quyền
-  theo từng hành động, xác nhận mang tính phá hủy, lời nhắc thanh toán hoặc gói dịch vụ, màn hình không xác định và
-  các pane bạn không tạo. Với `AGENTKIT_PERMISSIONS=ask`, không bao giờ chấp nhận xác nhận
-  bypass. Ghi lại mọi lần can thiệp trong kế hoạch cha.
+- **Theo dõi.** `herdr-peers lanes` hiển thị trạng thái của mọi lane; với một lane bị chặn,
+  `herdr-peers status <pane>` phân loại màn hình và `herdr pane read <pane>` hiển thị nó.
+- **Một lần gõ phím, một trường hợp.** Những phím duy nhất bạn được gửi bằng `herdr pane send-keys` là
+  câu trả lời cho màn hình tin cậy thư mục, trên một pane do chính bạn khởi chạy, khi không dùng được
+  `--trust-cwd`. Đọc màn hình trước và sau, và gửi ít phím nhất.
+- **Đọc, ghi lại và chuyển mọi thứ khác lên** nhà phát triển: xác nhận bypass-permissions của Claude,
+  lời nhắc đăng nhập và thông tin xác thực, yêu cầu cấp quyền theo từng hành động, xác nhận mang tính
+  phá hủy, lời nhắc thanh toán hoặc gói dịch vụ, màn hình không xác định và các pane bạn không tạo. Với
+  `AGENTKIT_PERMISSIONS=ask`, các lane hỏi trước khi hành động; không bao giờ lách qua những lời nhắc
+  đó. Ghi lại mọi lần can thiệp trong kế hoạch cha.
 
 ## 5. Phát triển bộ kit (sub-skill author)
 
