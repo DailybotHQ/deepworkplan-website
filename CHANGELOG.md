@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.46] - 2026-10-11
+
 ### Changed
 
 - The vendored Deep Work Plan skill moves from 7.1.4 to 7.2.0, installed from the tagged release and verified against its `SHA256SUMS` (171 files); the public pins (`/init.md`, quickstart, kit plate, developers page, llms files, trust and discovery manifests) and the addon registry follow. 7.2.0 makes benchmark and learnings measure v7 plans, adds a `config.py` setter for the benchmark switches, refuses to start a task before its prerequisites are complete, and makes the pack's test suite hermetic (815 of 815 on a clean environment).
@@ -1205,7 +1207,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.45...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.46...HEAD
+[5.0.46]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.46
 [5.0.45]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.45
 [5.0.44]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.44
 [5.0.43]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.43
