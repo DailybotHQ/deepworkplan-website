@@ -71,6 +71,7 @@ Run each gate from inside the repository it belongs to.
 | deepworkplan-vim | `bash tests/smoke/run.sh` | the full mapping-contract suite needs Podman or Docker |
 | ai-diff-reviewer | `python3 -m unittest discover -s tests` | stdlib only |
 | agent-skill | `bats tests/` | bats-core |
+| cli | `ruff check . && mypy dailybot_cli && pytest` | Python 3.10+, ruff, mypy, pytest |
 
 The gate column mirrors `repositories/manifest.json`; when a repository changes
 its gate, update both. Every ecosystem repository also ships

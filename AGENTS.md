@@ -131,7 +131,7 @@ This repository is also the **DeepWorkPlan ecosystem hub**. `repositories/` hold
 **Where work lands:** a change to the site, its docs, tooling or hub coordination files is committed here. A change to an ecosystem repository is made **inside** `repositories/<name>`: `cd` into it, read its own `AGENTS.md`, pull its default branch, then branch, commit, gate, push and open the PR **there**. Decision tree: [Cross-Project Standards](docs/CROSS_PROJECT_STANDARDS.md#where-work-lands).
 
 - **NEVER commit sub-repository code from the hub root** — no `git add -f repositories/…`, no submodules, no copying a repository's files into this tree. Inside a clone, that repository's rules, gates and reviews apply.
-- **agent-skill is owned by the Dailybot hub too:** pull before editing and never leave unpushed work in its clone, so nobody double-edits.
+- **agent-skill and cli are owned by the Dailybot hub too:** pull before editing and never leave unpushed work in its clone, so nobody double-edits.
 - **The sync script never deletes**, never touches a dirty tree or a feature-branch checkout, and never rewrites a remote. Removing a clone is the developer's manual, literal-path decision.
 
 **Orchestrator pattern:** cross-repository work is a parent plan in this repository's `.dwp/plans/PLAN_{name}/` (with `ORCHESTRATOR_MANIFEST.md` and a child tracking table) that spawns one child plan per repository in `repositories/<name>/.dwp/plans/`, each using that repository's plan IDs and gate, followed by an integration checkpoint (DWP spec §8).
@@ -144,6 +144,7 @@ This repository is also the **DeepWorkPlan ecosystem hub**. `repositories/` hold
 | deepworkplan-vim | Addon | `bash tests/smoke/run.sh` |
 | ai-diff-reviewer | Addon | `python3 -m unittest discover -s tests` |
 | agent-skill | Addon (shared with the Dailybot hub) | `bats tests/` |
+| cli | Consumer (shared with the Dailybot hub; merges auto-release) | `ruff check . && mypy dailybot_cli && pytest` |
 
 **PR conventions (every repository):** conventional commits in English; one branch and one PR per repository per change; add the **`Ready` label as soon as the PR opens — it triggers the AI Diff Reviewer** self-review (run-once; remove and re-add the label to re-run) and wait for it before asking for a merge; no force-push, no admin merge — the owner merges. Cross-repository changes release pack → addons → site ([Ecosystem Context → Release order](docs/ECOSYSTEM_CONTEXT.md#release-order)).
 

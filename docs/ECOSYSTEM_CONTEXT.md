@@ -27,6 +27,7 @@ deepworkplan-skill pins).
 | deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v7.5.1` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
 | ai-diff-reviewer | Addon: pull-request review | Public | `v3.3.0` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
 | agent-skill | Addon: Dailybot reporting | Public | `v3.23.3` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
+| cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |
 | devcontainer-kit | Addon: development containers | Public | `v0.2.11` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon: coding-agent installer | Public | `v0.4.0` | `/kit/agentkit`, `/init.md` | Documented only |
 | deepworkplan-vim | Addon: DeepWorkPlan Vim | Public | `v0.6.0` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |

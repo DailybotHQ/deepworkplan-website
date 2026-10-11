@@ -64,6 +64,16 @@
       "gate": "bats tests/",
       "summary": "The Dailybot agent skill (reporting addon).",
       "shared_with": "Also owned by the Dailybot hub: pull before editing and never keep unpushed work here, so the two hubs never double-edit."
+    },
+    {
+      "name": "cli",
+      "url": "https://github.com/DailybotHQ/cli.git",
+      "default_branch": "main",
+      "role": "consumer",
+      "visibility": "public",
+      "gate": "ruff check . && mypy dailybot_cli && pytest",
+      "summary": "The Dailybot CLI: a production repository that dogfoods the full DWP stack (pack, every addon, dck container) as the ecosystem's reference consumer.",
+      "shared_with": "Also owned by the Dailybot hub: pull before editing and never keep unpushed work here, so the two hubs never double-edit. Every merge to main auto-releases a CLI version."
     }
   ]
 }
