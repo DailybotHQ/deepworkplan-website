@@ -9,6 +9,11 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The vendored Deep Work Plan skill moves to 7.3.1 (verified against its `SHA256SUMS`); its devcontainer addon pins devcontainer-kit v0.2.6, whose containers carry a copy of the host's Herdr catalog so herdr-peers replies route back across machines. Every public pin follows, and the site's container is re-rendered with v0.2.6.
+- The addon registry records the vendored ai-diff-reviewer (v3.3.1) and Dailybot (v3.23.4) versions.
+
 ## [5.0.47] - 2026-10-11
 
 ### Changed
