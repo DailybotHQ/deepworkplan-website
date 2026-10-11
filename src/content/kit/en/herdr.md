@@ -67,7 +67,7 @@ Both addons implement the same delegation interface — `launch`, `observe`, `co
 | A bounded `parallel_safe` task with a declared output | [agentkit](/kit/agentkit) (headless `ak run` in a worktree) |
 | The task needs interaction, runs long, or lives on another machine | Herdr (a peer in a pane) |
 
-For a lead running many lanes at once — panes on the host, in containers and on other machines, each on its own account — see [Running many agents](/methodology/06-orchestration).
+For a lead running many lanes at once — panes on the host, in containers and on other machines, each on its own account — `herdr-peers lanes` lists every lane with its state, `herdr-peers status <pane>` classifies the screen a blocked lane is on, and every delegation record names the account and vendor that carried it. See [Running many agents](/methodology/06-orchestration).
 
 ## Notes
 
