@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer eklentisi
 
-Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.2.0`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
+Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.3.0`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
 ## devcontainer-kit'in sağladıkları
 
@@ -21,15 +21,15 @@ Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin �
 ## Kurulum
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.2.2` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.2.5` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v0.2.2` etiketi, arayüz 2 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v0.2.5` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
@@ -46,6 +46,18 @@ Her konteyner geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH su
 
 Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.sh rebuild` sonrasında korunur.
 
+## Makineler arasında agent'lar
+
+`v0.2.3` sürümünden itibaren `dck up`, Docker Desktop üzerinde elle hiçbir adım gerektirmeden iki yönlü bir ağ kurar:
+
+- **Konteynerler ve ana makine.** İçerideki agent'lar ana makinedeki, diğer her dck konteynerindeki ve ana makinenizin Herdr'ının zaten yönettiği diğer loopback konteynerlerindeki Herdr agent'larına ulaşır; onlar da geri ulaşır. Her eş sabitlenmiş bir ana makine anahtarı taşır; hiçbir şeye ilk kullanımda güvenilmez.
+- **İsteğe bağlı bir ana makine dinleyicisi.** `dck setup`, `127.0.0.1` üzerinde yalnızca dck anahtarını kabul eden ve launchd (macOS) tarafından çalışır durumda tutulan kullanıcı düzeyinde bir SSH sunucusunu bir kez önerir. Zaten bir loopback dinleyicisi çalıştırıyorsanız, ana makine profilini bunun yerine ona yönlendirin. `dck host listener disable` onu kaldırır.
+- **Yeniden derlemelerden sonra korunur.** Konteynerin Herdr makine kataloğu bir birimde tutulur; bu nedenle `bash dev.sh rebuild`, içeride kayıtlı her makineyi korur.
+- **Ana makineden de yanıt.** `dck setup`, ana makineye doğrulanmış bir [herdr-peers](/kit/herdr) kurar; böylece `dck agents` ve `dck ask` orada da çalışır ve ana makinedeki agent'lar `herdr-peers reply` ile yanıt verir.
+- **Kitin oluşturmadığı konteynerler.** Oturum açarken kullandıkları açık anahtarları ana makine profilinizde `[ssh] authorized_extra` altında listeleyin; onlar da dck konteynerlerine ulaşabilir.
+
+Ana makinede ve konteynerde [coding-agents-kit](/kit/agentkit) ile birlikte kullanın; aynı `ak` her iki tarafta da agent başlatır.
+
 ## Güvenlik varsayılanları
 
 - `dck.toml` içinde `bind` ayarlanmadıkça her yayımlanan port `127.0.0.1` adresine bağlanır.
@@ -53,7 +65,7 @@ Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.
 - SSH ana makine anahtarları çalışma zamanında proje başına bir birime üretilir, asla bir imajın içine gömülmez; sunucu yalnızca açık anahtarları kabul eder, root girişi ve parola yoktur.
 - Şablon hiçbir `cap_add`, hiçbir `privileged` modu ve hiçbir Docker soketi eklemez.
 - Her indirme sürüme sabitlenir ve sağlama toplamıyla doğrulanır; temel imaj özetle (digest) sabitlenir.
-- Bir konteynerdeki agent'ların diğerlerine ulaşmasını sağlayan Herdr ağı varsayılan olarak açıktır ve kapatma anahtarlarıyla birlikte kitin tehdit modelinde belgelenmiştir.
+- Bir konteynerdeki agent'ların diğerlerine ulaşmasını sağlayan Herdr ağı varsayılan olarak açıktır ve kapatma anahtarlarıyla birlikte kitin tehdit modelinde belgelenmiştir. Ana makine dinleyicisi, çalışan bir konteynerdeki kodun ana makinede sizin adınıza bir kabuk açmasına izin verir: isteğe bağlıdır, yalnızca loopback üzerinde çalışır, yalnızca dck anahtarını kabul eder ve `dck host listener disable` ile kaldırılır.
 
 ## Notlar
 

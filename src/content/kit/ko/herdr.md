@@ -54,6 +54,10 @@ npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr
 
 herdr-peers는 발신자를 인증하지 않습니다. 스탬프의 `from=` 필드는 주장일 뿐입니다. 완화 수단은 `HERDR_PEERS_SCOPE` 허용 목록으로, 피어가 받아들이는 워크스페이스와 머신을 제한합니다.
 
+## 컨테이너와 호스트
+
+devcontainer-kit `v0.2.5` 기반의 [devcontainer](/kit/devcontainer) 애드온을 사용하면, 모든 dck 컨테이너가 herdr-peers를 포함하고 `dck up` 시점에 메시에 합류합니다. 그 에이전트는 호스트, 다른 컨테이너, 호스트의 다른 루프백 컨테이너에 있는 에이전트에게 질문하고 응답을 받을 수 있습니다. `dck setup`은 호스트에 검증된 herdr-peers를 설치하므로 호스트 에이전트도 응답합니다. 호스트 리스너와 다른 컨테이너의 접근을 허용하는 추가 키는 키트의 호스트 프로필에서 사용자가 결정하는 사항이며, 이 애드온은 이를 결코 설정하지 않습니다.
+
 ## Herdr 또는 agentkit
 
 두 애드온은 같은 위임 인터페이스 — `launch`, `observe`, `collect`, `cancel` — 를 서로 다른 전송 방식으로 구현합니다.

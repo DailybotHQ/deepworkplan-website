@@ -54,6 +54,10 @@ Persyaratan: Herdr 0.9.1 atau lebih baru, `bash`, dan `python3` 3.9 atau lebih b
 
 herdr-peers tidak mengautentikasi pengirim: kolom `from=` dalam cap adalah sebuah klaim. Mitigasinya adalah daftar izin `HERDR_PEERS_SCOPE`, yang membatasi workspace dan mesin yang diterima oleh rekan.
 
+## Container dan host
+
+Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v0.2.5`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya.
+
 ## Herdr atau agentkit
 
 Kedua addon mengimplementasikan antarmuka delegasi yang sama — `launch`, `observe`, `collect`, `cancel` — dengan transport yang berbeda.

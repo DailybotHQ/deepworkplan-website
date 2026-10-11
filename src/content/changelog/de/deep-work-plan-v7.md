@@ -28,4 +28,4 @@ Der Modus für Benchmark und Erkenntnisse zeichnet auf, was jeder Plan lehrt, da
 
 v7 ist ein Fortschritt bei Orchestrierung und Auditierbarkeit, aber noch keine vollständig eingriffsfreie Autonomie. Release 7.2.0 schließt die Lücken, die dieses Audit gefunden hat: Benchmark und Erkenntnisse messen jetzt v7-Pläne, der Start einer Aufgabe vor Abschluss ihrer Voraussetzungen wird abgelehnt, und die Testsuite läuft hermetisch (815 von 815 in einer sauberen Umgebung). Die Nichtunterlegenheit der Agentenergebnisse wurde nicht gemessen. Bestehende Pläne behalten ihre aufgezeichnete Generation und werden nie implizit migriert; neue Pläne verwenden standardmäßig den v7-Vertrag.
 
-Installierte Skill-Version: **7.2.0**, stabil seit 7.0.0.
+Installierte Skill-Version: **7.3.0**, stabil seit 7.0.0.

@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 애드온
 
-사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.2.0`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
+사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.3.0`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
 
 ## devcontainer-kit이 제공하는 것
 
@@ -21,15 +21,15 @@ order: 1
 ## 설치
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v0.2.2`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
+요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v0.2.5`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v0.2.2`, 인터페이스 2 |
+| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v0.2.5`, 인터페이스 2 |
 | 레지스트리 키 | `.dwp/config.json`의 `devcontainer` |
 | 리포지토리별 설정 | `.devcontainer/dck.toml` |
 | 감지 | `dck doctor --json` |
@@ -46,6 +46,18 @@ cd your-repo && dck init && bash dev.sh up
 
 로그인, `gh`, Herdr 설정, git 신원 정보는 `bash dev.sh rebuild` 후에도 유지됩니다.
 
+## 머신을 넘나드는 에이전트
+
+`v0.2.3`부터 Docker Desktop에서 `dck up`은 수작업 없이 양방향 메시를 구성합니다.
+
+- **컨테이너와 호스트.** 컨테이너 안의 에이전트는 호스트, 다른 모든 dck 컨테이너, 그리고 호스트의 Herdr가 이미 관리하는 다른 루프백 컨테이너에 있는 Herdr 에이전트에 접근할 수 있으며, 그쪽에서도 다시 접근할 수 있습니다. 모든 피어는 고정된 호스트 키를 가지며, 최초 사용 시 신뢰되는 것은 없습니다.
+- **선택적 호스트 리스너.** `dck setup`은 `127.0.0.1`에서 동작하는 사용자 수준 SSH 서버를 한 번 제안합니다. 이 서버는 dck 키만 받아들이며 launchd(macOS)가 계속 실행되도록 유지합니다. 이미 루프백 리스너를 운영 중이라면 대신 호스트 프로필이 그것을 가리키도록 하세요. `dck host listener disable`로 제거할 수 있습니다.
+- **재빌드 후에도 유지.** 컨테이너의 Herdr 머신 카탈로그는 볼륨에 있으므로, `bash dev.sh rebuild` 후에도 내부에 등록된 모든 머신이 유지됩니다.
+- **호스트에서도 응답.** `dck setup`은 호스트에 검증된 [herdr-peers](/kit/herdr)를 설치하므로 호스트에서도 `dck agents`와 `dck ask`가 동작하고, 호스트 에이전트는 `herdr-peers reply`로 응답합니다.
+- **키트가 만들지 않은 컨테이너.** 그 컨테이너들이 로그인에 쓰는 공개 키를 호스트 프로필의 `[ssh] authorized_extra` 아래에 나열하면, 그 컨테이너들도 dck 컨테이너에 접근할 수 있습니다.
+
+호스트와 컨테이너 양쪽에서 [coding-agents-kit](/kit/agentkit)과 함께 사용하면, 같은 `ak`로 양쪽에서 에이전트를 실행할 수 있습니다.
+
 ## 보안 기본값
 
 - 공개되는 모든 포트는 `dck.toml`이 `bind`를 설정하지 않는 한 `127.0.0.1`에 바인딩됩니다.
@@ -53,7 +65,7 @@ cd your-repo && dck init && bash dev.sh up
 - SSH 호스트 키는 실행 시점에 프로젝트별 볼륨에 생성되며, 결코 이미지에 구워 넣지 않습니다. 서버는 공개 키만 받아들이며, root 로그인과 비밀번호를 허용하지 않습니다.
 - 템플릿은 `cap_add`, `privileged` 모드, Docker 소켓 중 어느 것도 추가하지 않습니다.
 - 모든 다운로드는 버전으로 고정되고 체크섬으로 검증됩니다. 베이스 이미지는 다이제스트로 고정됩니다.
-- 한 컨테이너의 에이전트가 다른 컨테이너에 접근할 수 있게 하는 Herdr 메시는 기본적으로 켜져 있으며, 이를 끄는 방법은 키트의 위협 모델에 문서화되어 있습니다.
+- 한 컨테이너의 에이전트가 다른 컨테이너에 접근할 수 있게 하는 Herdr 메시는 기본적으로 켜져 있으며, 이를 끄는 방법은 키트의 위협 모델에 문서화되어 있습니다. 호스트 리스너는 실행 중인 컨테이너 안의 코드가 사용자 본인으로서 호스트에서 셸을 열 수 있게 합니다. 이는 옵트인 방식이고, 루프백 전용이며, dck 키만 받아들이고, `dck host listener disable`로 제거할 수 있습니다.
 
 ## 참고
 

@@ -54,6 +54,10 @@ Requisitos: Herdr 0.9.1 ou mais recente, `bash` e `python3` 3.9 ou mais recente 
 
 O herdr-peers não autentica o remetente: o campo `from=` de um carimbo é uma alegação. A mitigação é a lista de permissões `HERDR_PEERS_SCOPE`, que limita os workspaces e as máquinas que um par aceita.
 
+## Contêineres e o host
+
+Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v0.2.5`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define.
+
 ## Herdr ou agentkit
 
 Os dois addons implementam a mesma interface de delegação — `launch`, `observe`, `collect`, `cancel` — com transportes diferentes.

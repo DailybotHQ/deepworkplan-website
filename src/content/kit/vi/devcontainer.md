@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.2.0`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
+Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.3.0`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
 
 ## devcontainer-kit cung cấp những gì
 
@@ -21,15 +21,15 @@ Mang đến cho repository một dev container có thể tái lập và được
 ## Cài đặt
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v0.2.2`: `v0.2.0` không được hỗ trợ.
+Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v0.2.5`: `v0.2.0` không được hỗ trợ.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.2.2`, giao diện 2 |
+| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.2.5`, giao diện 2 |
 | Khóa registry | `devcontainer` trong `.dwp/config.json` |
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
@@ -46,6 +46,18 @@ Mọi container đều mang theo các công cụ phát triển — git, gh, ripg
 
 Thông tin đăng nhập, `gh`, cấu hình Herdr và danh tính git được giữ lại sau `bash dev.sh rebuild`.
 
+## Agent trên nhiều máy
+
+Từ `v0.2.3`, `dck up` thiết lập một mạng lưới hai chiều mà không cần bước thủ công nào, trên Docker Desktop:
+
+- **Container và máy host.** Agent bên trong kết nối tới các agent Herdr trên máy host, trong mọi container dck khác và trong các container loopback khác mà Herdr của máy host đã quản lý — và các agent đó cũng kết nối ngược lại. Mỗi peer mang một khóa host được ghim; không có gì được tin cậy ở lần dùng đầu tiên.
+- **Một listener tùy chọn trên máy host.** `dck setup` đề xuất, một lần duy nhất, một máy chủ SSH cấp người dùng trên `127.0.0.1` chỉ chấp nhận khóa dck và được launchd giữ cho chạy liên tục (macOS). Nếu bạn đã chạy một listener loopback, hãy trỏ hồ sơ host tới listener đó. `dck host listener disable` sẽ gỡ bỏ nó.
+- **Tồn tại qua các lần rebuild.** Danh mục máy Herdr của container nằm trên một volume, nên `bash dev.sh rebuild` giữ lại mọi máy đã đăng ký bên trong.
+- **Phản hồi cả từ máy host.** `dck setup` cài đặt một [herdr-peers](/kit/herdr) đã được xác minh trên máy host, nên `dck agents` và `dck ask` hoạt động ở đó, và các agent trên máy host trả lời bằng `herdr-peers reply`.
+- **Container không do bộ kit tạo ra.** Liệt kê các khóa công khai mà chúng dùng để đăng nhập trong `[ssh] authorized_extra` của hồ sơ host, và chúng cũng có thể kết nối tới các container dck.
+
+Kết hợp với [coding-agents-kit](/kit/agentkit) trên máy host và trong container, và cùng một lệnh `ak` sẽ khởi chạy agent ở cả hai phía.
+
 ## Mặc định bảo mật
 
 - Mọi cổng được công bố đều gắn vào `127.0.0.1` trừ khi `dck.toml` thiết lập `bind`.
@@ -53,7 +65,7 @@ Thông tin đăng nhập, `gh`, cấu hình Herdr và danh tính git được gi
 - Khóa host SSH được tạo lúc chạy vào một volume riêng cho từng dự án, không bao giờ được đóng gói sẵn vào image; máy chủ chỉ chấp nhận khóa công khai, không cho đăng nhập root và không dùng mật khẩu.
 - Template không thêm `cap_add`, không dùng chế độ `privileged` và không có Docker socket.
 - Mọi lượt tải xuống đều được ghim theo phiên bản và xác minh bằng checksum; base image được ghim theo digest.
-- Mạng lưới Herdr cho phép agent trong một container kết nối tới các container khác được bật theo mặc định và được tài liệu hóa cùng các công tắc tắt trong mô hình mối đe dọa của bộ kit.
+- Mạng lưới Herdr cho phép agent trong một container kết nối tới các container khác được bật theo mặc định và được tài liệu hóa cùng các công tắc tắt trong mô hình mối đe dọa của bộ kit. Listener trên máy host cho phép mã trong một container đang chạy mở shell trên máy host dưới danh nghĩa của bạn: nó chỉ bật khi bạn chọn, chỉ dùng loopback, chỉ chấp nhận khóa dck và được gỡ bằng `dck host listener disable`.
 
 ## Ghi chú
 

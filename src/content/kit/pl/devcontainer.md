@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z którego mogą korzystać ludzie, edytory i agenci kodujący. W **DWP v7** (pakiet `v7.2.0`) ten addon integruje **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produkt na licencji MIT działający bez Deep Work Plan. Jest opcjonalny: repozytorium bez niego jest w pełni zgodne.
+Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z którego mogą korzystać ludzie, edytory i agenci kodujący. W **DWP v7** (pakiet `v7.3.0`) ten addon integruje **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produkt na licencji MIT działający bez Deep Work Plan. Jest opcjonalny: repozytorium bez niego jest w pełni zgodne.
 
 ## Co zapewnia devcontainer-kit
 
@@ -21,15 +21,15 @@ Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z
 ## Instalacja
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v0.2.2`: `v0.2.0` nie jest obsługiwane.
+Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v0.2.5`: `v0.2.0` nie jest obsługiwane.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, tag `v0.2.2`, interfejs 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, tag `v0.2.5`, interfejs 2 |
 | Klucz rejestru | `devcontainer` w `.dwp/config.json` |
 | Konfiguracja repozytorium | `.devcontainer/dck.toml` |
 | Wykrywanie | `dck doctor --json` |
@@ -46,6 +46,18 @@ Każdy kontener zawiera narzędzia deweloperskie — git, gh, ripgrep, serwer SS
 
 Zalogowania, `gh`, konfiguracja Herdr i tożsamość git przetrwają `bash dev.sh rebuild`.
 
+## Agenci na wielu maszynach
+
+Od `v0.2.3` `dck up` zestawia dwukierunkową sieć bez żadnego ręcznego kroku, w Docker Desktop:
+
+- **Kontenery i host.** Agenci wewnątrz docierają do agentów Herdr na hoście, w każdym innym kontenerze dck i w pozostałych kontenerach loopback, którymi Herdr na hoście już zarządza — a tamci docierają z powrotem. Każdy peer ma przypięty klucz hosta; nic nie jest zaufane przy pierwszym użyciu.
+- **Opcjonalny listener na hoście.** `dck setup` jednorazowo proponuje serwer SSH na poziomie użytkownika na `127.0.0.1`, który akceptuje wyłącznie klucz dck i jest utrzymywany w działaniu przez launchd (macOS). Jeśli już uruchamiasz listener loopback, wskaż go zamiast tego w profilu hosta. `dck host listener disable` go usuwa.
+- **Przetrwa przebudowy.** Katalog maszyn Herdr kontenera znajduje się na wolumenie, więc `bash dev.sh rebuild` zachowuje każdą zarejestrowaną w nim maszynę.
+- **Odpowiedzi także z hosta.** `dck setup` instaluje na hoście zweryfikowany [herdr-peers](/kit/herdr), więc `dck agents` i `dck ask` działają również tam, a agenci hosta odpowiadają przez `herdr-peers reply`.
+- **Kontenery, których kit nie utworzył.** Wypisz klucze publiczne, którymi się logują, w `[ssh] authorized_extra` w profilu hosta, a one również będą mogły docierać do kontenerów dck.
+
+Połącz go z [coding-agents-kit](/kit/agentkit) na hoście i w kontenerze, a to samo `ak` uruchamia agentów po obu stronach.
+
 ## Domyślne ustawienia bezpieczeństwa
 
 - Każdy publikowany port wiąże się z `127.0.0.1`, chyba że `dck.toml` ustawia `bind`.
@@ -53,7 +65,7 @@ Zalogowania, `gh`, konfiguracja Herdr i tożsamość git przetrwają `bash dev.s
 - Klucze hosta SSH są generowane w czasie działania do wolumenu danego projektu i nigdy nie są wbudowywane w obraz; serwer akceptuje tylko klucze publiczne, bez logowania jako root i bez haseł.
 - Szablon nie dodaje `cap_add`, trybu `privileged` ani gniazda Dockera.
 - Każde pobranie jest przypięte do wersji i weryfikowane sumą kontrolną; obraz bazowy jest przypięty przez digest.
-- Sieć Herdr, przez którą agenci w jednym kontenerze docierają do pozostałych, jest domyślnie włączona i opisana wraz ze sposobami jej wyłączenia w modelu zagrożeń kitu.
+- Sieć Herdr, przez którą agenci w jednym kontenerze docierają do pozostałych, jest domyślnie włączona i opisana wraz ze sposobami jej wyłączenia w modelu zagrożeń kitu. Listener na hoście pozwala kodowi w działającym kontenerze otworzyć powłokę na hoście jako ty: wymaga świadomego włączenia, działa tylko na loopback, akceptuje wyłącznie klucz dck i usuwa się go poleceniem `dck host listener disable`.
 
 ## Uwagi
 

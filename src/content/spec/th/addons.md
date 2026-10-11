@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (addon แรก)
 
-ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.2.2` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
+ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.2.5` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
 
 - **หน้า kit:** [Devcontainer](/kit/devcontainer)
 - **สิ่งที่เพิ่ม:** `docker/local/<service>/Dockerfile` จากอิมเมจทางการของรันไทม์ที่ตรึงด้วย digest (`python-3.13` `node-24` หรือ `debian` ไม่มีอิมเมจพื้นฐานที่ใช้ร่วมกัน) `dev.sh` ที่ทำงานบนตัวเรียกใช้ `dck` (`up`, `shell`, `rebuild`, `doctor`) เอเจนต์เขียนโค้ดเป็นเลเยอร์แบบ opt-in พอร์ตเฉพาะ loopback git ผ่าน SSH โดยใช้ agent ของโฮสต์โดยไม่มีคีย์อยู่ภายใน และเครื่อง Herdr ต่อคอนเทนเนอร์พร้อมเลย์เอาต์มาตรฐาน
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim (addon ที่เจ็ด)
 
-ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v0.5.1`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
+ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v0.6.0`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
 
 - **หน้า kit:** [DeepWorkPlan Vim](/kit/vim)
 - **สิ่งที่เพิ่ม:** พื้นผิวตัวแก้ไขระดับเครื่องแบบเลือกได้สำหรับ agent และมนุษย์ — ดัชนีคำสั่งที่สร้างขึ้น ตัวเรียกดูแผนแบบอ่านอย่างเดียว และตัวแสดง Markdown ทุกข้อกล่าวอ้างอ่านจากพื้นผิวที่เครื่องอ่านได้ซึ่งปักหมุดไว้ของผลิตภัณฑ์

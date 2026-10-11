@@ -28,4 +28,4 @@ La modalità benchmark e apprendimenti registra ciò che ogni piano insegna, cos
 
 v7 è un passo avanti nell'orchestrazione e nella verificabilità, ma non è ancora un'autonomia completamente senza intervento. La versione 7.2.0 colma le lacune individuate da quell'audit: benchmark e apprendimenti ora misurano i piani v7, avviare un'attività prima che i suoi prerequisiti siano completi viene rifiutato, e la suite di test viene eseguita in modo ermetico (815 su 815 in un ambiente pulito). La non inferiorità dei risultati degli agenti non è stata misurata. I piani esistenti mantengono la generazione registrata e non vengono mai migrati in modo implicito; i nuovi piani usano il contratto v7 per impostazione predefinita.
 
-Versione installata della skill: **7.2.0**, stabile dalla 7.0.0.
+Versione installata della skill: **7.3.0**, stabile dalla 7.0.0.

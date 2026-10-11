@@ -28,4 +28,4 @@ Le mode benchmark et enseignements consigne ce que chaque plan apprend, afin que
 
 v7 marque une avancée en orchestration et en auditabilité, mais pas encore une autonomie entièrement sans intervention. La version 7.2.0 comble les lacunes relevées par cet audit : le benchmark et les enseignements mesurent désormais les plans v7, démarrer une tâche avant que ses prérequis ne soient complets est refusé, et la suite de tests s'exécute de façon hermétique (815 sur 815 dans un environnement propre). La non-infériorité des résultats des agents n'a pas été mesurée. Les plans existants conservent leur génération enregistrée et ne sont jamais migrés implicitement ; les nouveaux plans utilisent le contrat v7 par défaut.
 
-Version installée du skill : **7.2.0**, stable depuis 7.0.0.
+Version installée du skill : **7.3.0**, stable depuis 7.0.0.

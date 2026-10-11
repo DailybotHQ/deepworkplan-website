@@ -54,6 +54,10 @@ npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr
 
 herdr-peers प्रेषक को प्रमाणित नहीं करता: मुहर में `from=` फ़ील्ड एक दावा है। इसका शमन `HERDR_PEERS_SCOPE` अनुमति-सूची है, जो उन workspaces और मशीनों को सीमित करती है जिन्हें कोई पीयर स्वीकार करता है।
 
+## Container और होस्ट
+
+devcontainer-kit `v0.2.5` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता।
+
 ## Herdr या agentkit
 
 दोनों ऐडऑन एक ही प्रत्यायोजन इंटरफ़ेस — `launch`, `observe`, `collect`, `cancel` — को अलग-अलग ट्रांसपोर्ट के साथ लागू करते हैं।

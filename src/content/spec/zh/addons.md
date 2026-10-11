@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer（第一个附加组件）
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`，固定为 `v0.2.2`，接口 `2`）的轻量集成器：一个由 `dck init` 渲染到仓库中、作为仓库自有容器的 Dev Containers 模板，外加 `dck-dockerfile` 技能。
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`，固定为 `v0.2.5`，接口 `2`）的轻量集成器：一个由 `dck init` 渲染到仓库中、作为仓库自有容器的 Dev Containers 模板，外加 `dck-dockerfile` 技能。
 
 - **套件页：** [Devcontainer](/kit/devcontainer)
 - **新增内容：** 基于按 digest 固定的运行时官方镜像生成的 `docker/local/<service>/Dockerfile`（`python-3.13`、`node-24` 或 `debian`，无共享基础镜像）、构建在 `dck` 启动器（`up`、`shell`、`rebuild`、`doctor`）之上的 `dev.sh`、作为可选启用层的编码代理、仅限回环地址的端口、经由宿主机 agent 通过 SSH 使用的 git（容器内不放任何密钥），以及每个容器采用标准布局的 Herdr 机器
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第七个附加组件）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v0.5.1`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v0.6.0`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
 
 - **套件页：** [DeepWorkPlan Vim](/kit/vim)
 - **新增内容：** 一个可选的、机器级的编辑器层面，供代理与人类使用——生成的命令索引、只读计划浏览器和 Markdown 查看器；每一项说明都读取自该产品固定版本的机器可读层面

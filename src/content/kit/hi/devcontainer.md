@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.2.0`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
+रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.3.0`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
 
 ## devcontainer-kit क्या प्रदान करता है
 
@@ -21,15 +21,15 @@ order: 1
 ## इंस्टॉल
 
 ```bash
-git clone --branch v0.2.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.2.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.2.2` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.2.5` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.2.2`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.2.5`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
@@ -46,6 +46,18 @@ cd your-repo && dck init && bash dev.sh up
 
 लॉगिन, `gh`, Herdr कॉन्फ़िगरेशन और git पहचान `bash dev.sh rebuild` के बाद भी बने रहते हैं।
 
+## मशीनों के पार एजेंट
+
+`v0.2.3` से, Docker Desktop पर `dck up` बिना किसी मैनुअल चरण के एक दो-तरफ़ा mesh जोड़ देता है:
+
+- **Container और होस्ट।** भीतर के एजेंट होस्ट पर, हर दूसरे dck container में और उन अन्य loopback containers में मौजूद Herdr एजेंटों तक पहुँचते हैं जिन्हें आपके होस्ट का Herdr पहले से प्रबंधित करता है — और वे भी वापस पहुँचते हैं। हर पीयर एक पिन की हुई होस्ट कुंजी रखता है; पहले उपयोग पर किसी पर भरोसा नहीं किया जाता।
+- **एक वैकल्पिक होस्ट listener।** `dck setup` एक बार, `127.0.0.1` पर एक उपयोगकर्ता-स्तरीय SSH सर्वर प्रस्तावित करता है जो केवल dck कुंजी स्वीकार करता है और जिसे launchd (macOS) चालू रखता है। यदि आप पहले से कोई loopback listener चलाते हैं, तो होस्ट प्रोफ़ाइल को उसी की ओर इंगित करें। `dck host listener disable` उसे हटा देता है।
+- **Rebuild के बाद भी बना रहता है।** Container का Herdr मशीन कैटलॉग एक volume पर रहता है, इसलिए `bash dev.sh rebuild` भीतर पंजीकृत हर मशीन को बनाए रखता है।
+- **होस्ट से भी जवाब।** `dck setup` होस्ट पर एक सत्यापित [herdr-peers](/kit/herdr) इंस्टॉल करता है, इसलिए `dck agents` और `dck ask` वहाँ भी काम करते हैं, और होस्ट के एजेंट `herdr-peers reply` से उत्तर देते हैं।
+- **वे containers जिन्हें kit ने नहीं बनाया।** वे जिन सार्वजनिक कुंजियों से लॉगिन करते हैं, उन्हें अपनी होस्ट प्रोफ़ाइल में `[ssh] authorized_extra` के अंतर्गत सूचीबद्ध करें, और वे भी dck containers तक पहुँच सकेंगे।
+
+होस्ट और container दोनों में इसे [coding-agents-kit](/kit/agentkit) के साथ जोड़ें, और वही `ak` दोनों ओर एजेंट लॉन्च करता है।
+
 ## सुरक्षा डिफ़ॉल्ट
 
 - हर प्रकाशित port `127.0.0.1` से बाइंड होता है, जब तक `dck.toml` में `bind` सेट न हो।
@@ -53,7 +65,7 @@ cd your-repo && dck init && bash dev.sh up
 - SSH होस्ट कुंजियाँ runtime पर प्रति-प्रोजेक्ट volume में उत्पन्न की जाती हैं, कभी image में पहले से शामिल नहीं की जातीं; सर्वर केवल सार्वजनिक कुंजियाँ स्वीकार करता है, कोई root लॉगिन नहीं और कोई पासवर्ड नहीं।
 - टेम्पलेट कोई `cap_add`, कोई `privileged` मोड और कोई Docker socket नहीं जोड़ता।
 - हर डाउनलोड संस्करण पर पिन किया जाता है और checksum से सत्यापित होता है; base image digest पर पिन की जाती है।
-- Herdr mesh, जो एक container के एजेंटों को दूसरों तक पहुँचने देता है, डिफ़ॉल्ट रूप से चालू है और kit के threat model में उसे बंद करने के तरीकों के साथ प्रलेखित है।
+- Herdr mesh, जो एक container के एजेंटों को दूसरों तक पहुँचने देता है, डिफ़ॉल्ट रूप से चालू है और kit के threat model में उसे बंद करने के तरीकों के साथ प्रलेखित है। होस्ट listener किसी चल रहे container के कोड को आपके रूप में होस्ट पर shell खोलने देता है: यह opt-in है, केवल loopback पर है, केवल dck कुंजी स्वीकार करता है और `dck host listener disable` से हट जाता है।
 
 ## टिप्पणियाँ
 
