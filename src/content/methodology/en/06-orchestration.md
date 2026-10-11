@@ -49,7 +49,7 @@ Vendors mix the same way. A Claude lane can write while a Codex lane reviews, ea
 A lead can start lanes and keep them moving with no one at the keyboard. It uses Herdr's own commands; no kit code sends keystrokes. The procedure has a fixed order: avoid the prompt, detect the stop, unblock only what is known, escalate the rest.
 
 1. **Avoid first.** `ak pick <kind>` names the account with the most room, and `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` launches the lane in its own folder. `--trust-cwd` (or `AGENTKIT_TRUST_CWD=1`) pre-trusts that folder and the kit's default autonomy does the rest, so Claude and Codex skip their folder-trust screens with no keystrokes.
-2. **Detect.** `herdr-peers lanes` (or `herdr agent list`) shows each lane as working, idle, blocked or done. For a lane that is blocked, or idle with no output, `herdr-peers status <pane>` classifies the screen it is on, and `herdr pane read <pane>` shows it.
+2. **Detect.** `herdr-peers lanes` (or `herdr agent list`) shows each lane as working, idle, blocked or done. For a lane that is blocked, or idle with no output, `herdr-peers status <pane>` classifies the screen it is on — folder trust, bypass acknowledgement, login, permission or unknown — with the documented next step, and `herdr pane read <pane>` shows it.
 3. **Unblock only the known first-run screens.** With `herdr pane send-keys`, the lead answers two screens and nothing else: folder trust for the lane's own folder, and Claude's one-time, per-profile acknowledgement of the bypass-permissions mode for a profile the developer runs in autonomy. It does so only when the developer granted unattended operation — a standing instruction or the plan's pre-authorization. It reads the screen before sending keys, sends the fewest keys that answer it, and reads again.
 4. **Escalate everything else.** Login and credential prompts, per-action permission requests, destructive confirmations, payment or plan prompts, unknown screens and panes the lead did not create go to the developer as a blocked milestone, never as keystrokes.
 5. **The opt-out wins.** With `AGENTKIT_PERMISSIONS=ask`, the bypass-permissions acknowledgement is never accepted.
@@ -67,7 +67,7 @@ Lanes and the lead talk through [herdr-peers](/kit/herdr): an **ask** carries a 
 - **Data, not instructions.** A reply grants nothing the receiver did not already have. A lane's claim that its gate passed is checked by running the gate.
 - **A record of who did what.** Every delegation record names the lane's account and vendor, so the parent plan shows which account carried which work.
 
-The lead can see the whole orchestra at once: `herdr-peers lanes` lists every lane with its state, and [DeepWorkPlan Vim](/kit/vim) shows an orchestrator plan's lanes in a lanes view next to the plan itself.
+The lead can see the whole orchestra at once: `herdr-peers lanes` lists every lane with its state, and [DeepWorkPlan Vim](/kit/vim) shows an orchestrator plan's lanes next to the plan itself (`:DwpLanes`).
 
 ## One branch, one release per repository
 
