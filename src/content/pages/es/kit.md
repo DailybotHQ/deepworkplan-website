@@ -10,7 +10,7 @@ El kit es todo lo que necesitas para ejecutar la metodología en la práctica. S
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.2.0 --skill deepworkplan -y
 ```
 
 El paquete 7.x actual crea planes nuevos con v7 de forma predeterminada. Los planes existentes conservan su generación registrada; la migración requiere una solicitud explícita.
@@ -75,7 +75,7 @@ AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar
 - **[devcontainer](/es/kit/devcontainer)** — El contenedor de desarrollo propio de cada repositorio desde una sola plantilla: agentes a través de ak, Herdr en ambos sentidos, ninguna clave SSH dentro. Fijado en `devcontainer-kit@v0.2.2`.
 - **[vim](/es/kit/vim)** — El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown. Fijado en `deepworkplan-vim@v0.6.0`.
 
-El registro de addons y los descriptores se distribuyen en Deep Work Plan v7: `v7.1.4`
+El registro de addons y los descriptores se distribuyen en Deep Work Plan v7: `v7.2.0`
 
 ### Ejemplos
 

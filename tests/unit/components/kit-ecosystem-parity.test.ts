@@ -120,6 +120,6 @@ describe('KitEcosystem facts', () => {
   });
 
   it('names the stable pack release', () => {
-    expect(source).toContain("const packTag = 'v7.1.4';");
+    expect(source).toContain("const packTag = 'v7.2.0';");
   });
 });

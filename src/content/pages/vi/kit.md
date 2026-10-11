@@ -10,7 +10,7 @@ Bộ kit là mọi thứ bạn cần để chạy phương pháp luận trong th
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.2.0 --skill deepworkplan -y
 ```
 
 Gói 7.x hiện tại mặc định tạo kế hoạch mới bằng v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; di chuyển cần yêu cầu rõ ràng.
@@ -70,7 +70,7 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bảy addon là 
 - **[devcontainer](/vi/kit/devcontainer)** — Dev container riêng của mỗi repository từ một template: agent qua ak, Herdr hai chiều, không có khóa SSH bên trong. Ghim tại `devcontainer-kit@v0.2.2`.
 - **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.6.0`.
 
-Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.1.4`
+Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.2.0`
 
 ### Ví dụ
 

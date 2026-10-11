@@ -26,6 +26,6 @@ Vier optionale Addons machen aus Delegation praktische Autonomie. Herdr übergib
 
 Der Modus für Benchmark und Erkenntnisse zeichnet auf, was jeder Plan lehrt, damit die Befunde danach analysiert werden können. Ein Audit des gesamten Ökosystems, durchgeführt als v7-Orchestrator-Plan mit einem Agenten pro Repository, fand keine Verhaltensregression gegenüber v6: Die Suite des Pakets besteht 807 von 807 Tests in einer sauberen Umgebung, und die Instruktionslast stieg je Ablauf um 0.1% bis 3.9% (4.6% für das gesamte Paket), gemessen in Bytes auf beiden Tags statt als Token geschätzt.
 
-v7 ist ein Fortschritt bei Orchestrierung und Auditierbarkeit, aber noch keine vollständig eingriffsfreie Autonomie. Die Schleife für Benchmark und Erkenntnisse misst v7-Pläne noch nicht automatisch, und die Nichtunterlegenheit der Agentenergebnisse wurde nicht gemessen. Bestehende Pläne behalten ihre aufgezeichnete Generation und werden nie implizit migriert; neue Pläne verwenden standardmäßig den v7-Vertrag.
+v7 ist ein Fortschritt bei Orchestrierung und Auditierbarkeit, aber noch keine vollständig eingriffsfreie Autonomie. Release 7.2.0 schließt die Lücken, die dieses Audit gefunden hat: Benchmark und Erkenntnisse messen jetzt v7-Pläne, der Start einer Aufgabe vor Abschluss ihrer Voraussetzungen wird abgelehnt, und die Testsuite läuft hermetisch (815 von 815 in einer sauberen Umgebung). Die Nichtunterlegenheit der Agentenergebnisse wurde nicht gemessen. Bestehende Pläne behalten ihre aufgezeichnete Generation und werden nie implizit migriert; neue Pläne verwenden standardmäßig den v7-Vertrag.
 
-Installierte Skill-Version: **7.1.4**, stabil seit 7.0.0.
+Installierte Skill-Version: **7.2.0**, stabil seit 7.0.0.

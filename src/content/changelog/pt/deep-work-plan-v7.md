@@ -26,6 +26,6 @@ Quatro addons opcionais transformam a delegação em autonomia prática. O Herdr
 
 O modo de benchmark e aprendizados registra o que cada plano ensina, para que as descobertas possam ser analisadas depois. Uma auditoria de todo o ecossistema, executada como um plano orquestrador v7 com um agente por repositório, não encontrou nenhuma regressão de comportamento em relação à v6: a suíte do pacote passa 807 de 807 em um ambiente limpo, e a carga de instruções cresceu entre 0.1% e 3.9% por fluxo (4.6% para o pacote inteiro), medida em bytes nas duas tags e não estimada como tokens.
 
-A v7 representa um salto em orquestração e auditabilidade, mas ainda não é autonomia totalmente sem supervisão. O ciclo de benchmark e aprendizados ainda não mede automaticamente os planos v7, e a não inferioridade dos resultados dos agentes não foi medida. Os planos existentes mantêm a geração registrada e nunca são migrados implicitamente; os planos novos usam o contrato v7 por padrão.
+A v7 representa um salto em orquestração e auditabilidade, mas ainda não é autonomia totalmente sem supervisão. A versão 7.2.0 fecha as lacunas que essa auditoria encontrou: o benchmark e os aprendizados agora medem os planos v7, iniciar uma tarefa antes de seus pré-requisitos estarem completos é recusado, e a suíte de testes roda de forma hermética (815 de 815 em um ambiente limpo). A não inferioridade dos resultados dos agentes não foi medida. Os planos existentes mantêm a geração registrada e nunca são migrados implicitamente; os planos novos usam o contrato v7 por padrão.
 
-Versão da skill instalada: **7.1.4**, estável desde a 7.0.0.
+Versão da skill instalada: **7.2.0**, estável desde a 7.0.0.

@@ -26,6 +26,6 @@ Four optional addons turn delegation into practical autonomy. Herdr hands a task
 
 Benchmark and learnings mode records what each plan teaches, so findings can be analysed afterwards. An audit of the whole ecosystem, run as a v7 orchestrator plan with one agent per repository, found no behavioural regression against v6: the pack suite passes 807 of 807 on a clean environment, and instruction load grew 0.1% to 3.9% per flow (4.6% for the whole pack), measured in bytes on both tags rather than estimated as tokens.
 
-v7 is a step change in orchestration and auditability, not yet fully hands-off autonomy. The benchmark and learnings loop does not yet measure v7 plans automatically, and agent outcome non-inferiority has not been measured. Existing plans keep their recorded generation and are never migrated implicitly; new plans use the v7 contract by default.
+v7 is a step change in orchestration and auditability, not yet fully hands-off autonomy. Release 7.2.0 closes the gaps that audit found: benchmark and learnings now measure v7 plans, starting a task before its prerequisites are complete is refused, and the test suite runs hermetically (815 of 815 on a clean environment). Agent outcome non-inferiority has not been measured. Existing plans keep their recorded generation and are never migrated implicitly; new plans use the v7 contract by default.
 
-Installed skill release: **7.1.4**, stable since 7.0.0.
+Installed skill release: **7.2.0**, stable since 7.0.0.

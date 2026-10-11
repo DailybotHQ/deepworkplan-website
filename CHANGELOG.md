@@ -9,6 +9,11 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- The vendored Deep Work Plan skill moves from 7.1.4 to 7.2.0, installed from the tagged release and verified against its `SHA256SUMS` (171 files); the public pins (`/init.md`, quickstart, kit plate, developers page, llms files, trust and discovery manifests) and the addon registry follow. 7.2.0 makes benchmark and learnings measure v7 plans, adds a `config.py` setter for the benchmark switches, refuses to start a task before its prerequisites are complete, and makes the pack's test suite hermetic (815 of 815 on a clean environment).
+- The v7 changelog entry reflects 7.2.0 in all 17 languages: the gaps found by the ecosystem audit are closed, and the claim about agent outcomes stays unmeasured.
+
 ## [5.0.45] - 2026-10-10
 
 ### Added

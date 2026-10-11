@@ -10,7 +10,7 @@ Das Kit ist alles, was Sie brauchen, um die Methodik in der Praxis auszuführen.
 `DailybotHQ/deepworkplan-skill` installiert:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.1.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.2.0 --skill deepworkplan -y
 ```
 
 Das aktuelle 7.x-Paket erstellt neue Pläne standardmäßig mit v7. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag.
@@ -70,7 +70,7 @@ Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Sieben sind op
 - **[devcontainer](/de/kit/devcontainer)** — Der eigene Dev-Container jedes Repositorys aus einer einzigen Vorlage: Agenten über ak, Herdr in beide Richtungen, kein SSH-Schlüssel im Container. Fixiert auf `devcontainer-kit@v0.2.2`.
 - **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.6.0`.
 
-Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert: `v7.1.4`
+Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v7 ausgeliefert: `v7.2.0`
 
 ### Beispiele
 

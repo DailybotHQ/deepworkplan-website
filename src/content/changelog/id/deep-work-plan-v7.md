@@ -26,6 +26,6 @@ Empat addon opsional mengubah delegasi menjadi otonomi yang praktis. Herdr menye
 
 Mode benchmark dan pembelajaran mencatat apa yang diajarkan setiap rencana, sehingga temuan dapat dianalisis kemudian. Audit seluruh ekosistem, yang dijalankan sebagai rencana orkestrator v7 dengan satu agen per repositori, tidak menemukan regresi perilaku dibandingkan v6: rangkaian uji paket lulus 807 dari 807 pada lingkungan bersih, dan beban instruksi bertambah 0.1% hingga 3.9% per alur (4.6% untuk seluruh paket), diukur dalam byte pada kedua tag, bukan diperkirakan sebagai token.
 
-v7 adalah lompatan dalam orkestrasi dan kemampuan audit, tetapi belum merupakan otonomi tanpa pengawasan sepenuhnya. Siklus benchmark dan pembelajaran belum mengukur rencana v7 secara otomatis, dan non-inferioritas hasil agen belum diukur. Rencana yang ada mempertahankan generasi yang tercatat dan tidak pernah dimigrasikan secara implisit; rencana baru menggunakan kontrak v7 secara default.
+v7 adalah lompatan dalam orkestrasi dan kemampuan audit, tetapi belum merupakan otonomi tanpa pengawasan sepenuhnya. Rilis 7.2.0 menutup celah yang ditemukan audit tersebut: benchmark dan pembelajaran kini mengukur rencana v7, memulai tugas sebelum prasyaratnya selesai ditolak, dan rangkaian pengujian berjalan secara hermetis (815 dari 815 pada lingkungan bersih). Non-inferioritas hasil agen belum diukur. Rencana yang ada mempertahankan generasi yang tercatat dan tidak pernah dimigrasikan secara implisit; rencana baru menggunakan kontrak v7 secara default.
 
-Rilis skill yang dipasang: **7.1.4**, stabil sejak 7.0.0.
+Rilis skill yang dipasang: **7.2.0**, stabil sejak 7.0.0.
