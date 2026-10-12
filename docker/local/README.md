@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.2.11 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.3.0 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -27,7 +27,7 @@ creates the `.env`; the container's entrypoint runs the start hook). devcontaine
 SSH key, `ssh`, `doctor`, `agents` and `ask`; install it once, pinned, when you want those:
 
 ```bash
-git clone --branch v0.2.11 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+(cd "$(mktemp -d)" && git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)
 ```
 
 `dev.sh` finds dck on `PATH` or in its default install directory (`~/.local/share/dck`).
@@ -56,7 +56,7 @@ Values are never printed. `dck doctor --json` reports key names only.
 ## Coding agents (coding-agents-kit)
 
 The agents layer installs [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)
-v0.4.0 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
+v0.5.0 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
 grok. Each is installed at a pinned version and verified. Every CLI home lives on its own named
 volume, so logins survive `bash dev.sh rebuild`.
 
@@ -69,6 +69,12 @@ volume, so logins survive `bash dev.sh rebuild`.
 
 `ak doctor` shows what is installed and which keys are set (names only). Session flags are the
 same for every CLI: `-c` continues, `-r <id>` resumes.
+
+**Host accounts.** With `[agents] host_profiles = true` in the developer's **host** profile
+(`~/.config/dck/profile.toml`, never this repository), a freshly created container already holds
+the host's Claude and Codex profiles: `ak profiles` lists them and `ak claude @<profile>` opens
+without a login. Claude authenticates through each profile's token, Codex through its auth file
+(one active writer per Codex account). See [/kit/devcontainer](https://deepworkplan.com/kit/devcontainer).
 
 **Autonomy by default.** Agents launched through `ak` run with their CLI's own autonomy flag:
 the container is the sandbox. To have them ask before acting, set `AGENTKIT_PERMISSIONS=ask` in
