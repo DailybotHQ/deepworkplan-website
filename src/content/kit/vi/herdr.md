@@ -56,7 +56,7 @@ herdr-peers không xác thực bên gửi: trường `from=` trong một con d�
 
 ## Container và máy host
 
-Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v0.3.5`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers `v0.3.0`, mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
+Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v0.3.5`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
 
 ## Herdr hay agentkit
 
@@ -69,7 +69,19 @@ Cả hai addon đều triển khai cùng một giao diện ủy thác — `launc
 
 Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, trong container và trên máy khác, mỗi lane trên tài khoản riêng — `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, `herdr-peers status <pane>` phân loại màn hình mà một lane bị chặn đang ở, và mỗi bản ghi ủy thác nêu tài khoản và nhà cung cấp đã đảm nhận nó. Xem [Chạy nhiều agent](/methodology/06-orchestration).
 
-**Lane Codex tự nêu pane của mình.** Codex chạy lệnh của một lane từ một máy chủ nền dùng chung cho mọi phiên của tài khoản đó, nên id pane mà nó kế thừa có thể thuộc về lane khác. Một lane Codex truyền pane của chính nó, lấy từ chỉ dẫn của lead, bằng `--pane <pane>` trên mọi lệnh herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+**Lane Codex tự nêu pane của mình.** Codex chạy lệnh của một lane từ một máy chủ nền dùng chung cho mọi phiên của tài khoản đó, nên id pane mà nó kế thừa có thể thuộc về lane khác. Một lane Codex truyền pane của chính nó, lấy từ chỉ dẫn của lead, bằng `--pane <pane>` trên mọi lệnh herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+
+## Thông báo và quyền lead
+
+herdr-peers `v0.3.0` bổ sung những gì giúp một bầy agent tồn tại lâu hơn lead của nó ([Tự chủ của bầy agent](/methodology/07-swarm-autonomy)):
+
+- **Thông báo.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` gửi một tin nhắn một chiều được đóng dấu `reply=no`. Lệnh `check` của bên nhận phân loại nó là một thông báo, ghi lại nó dưới dạng dữ liệu và không bao giờ trả lời. Thông báo không tốn suất phân nhánh nào và có thể được gửi trong khi một ask đang mở; hãy dùng chúng cho thông báo bàn giao, thay đổi lead và thông báo phát hành.
+- **Một bản ghi lead cho mỗi kế hoạch.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` biến một agent thành lead của một kế hoạch; `lead show` in ra bản ghi (schema `herdr-peers/lead-v1`: kế hoạch, lead, epoch, danh sách kế nhiệm, các lane, thời điểm cập nhật). `lead handover <addr> --plan <P>` chuyển quyền lead cho agent khác, `lead takeover --plan <P>` cho phép phó lead đầu tiên liên lạc được tiếp quản khi lead biến mất, và `lead release --plan <P>` kết thúc nó. Mỗi thay đổi tăng epoch và thông báo cho mọi lane.
+- **Rào chắn (fencing).** Một lane chỉ chấp nhận thông báo lead từ agent đã giao việc cho nó (lần claim đầu tiên), từ lead hiện tại ở epoch kế tiếp (handover), hoặc từ mục đầu tiên liên lạc được trong danh sách kế nhiệm ở epoch kế tiếp (takeover). Mọi thông báo khác được ghi lại và bỏ qua, và một lead quay lại mà thấy epoch cao hơn sẽ rút lui.
+- **Địa chỉ `lead`.** `ask lead …` và `notify lead …` được phân giải thành lead hiện tại của `--plan` (nếu không có thì `$DWP_PLAN`), nên không chỉ dẫn lane nào phải ghi cứng pane của lead.
+- **Màn hình `usage_limit`.** `status` và `lanes` nhận diện thông báo giới hạn sử dụng của một CLI là lớp màn hình `usage_limit`, với bước tiếp theo là bàn giao. Nó không bao giờ được gửi phím. `lanes --json` bổ sung kế hoạch, lead của nó, epoch và năng lực được báo cáo gần nhất của mỗi lane.
+
+Các lane cũng có thể hỏi nhau để lấy thông tin và phối hợp — một giao diện, một tên cờ, trạng thái một nhánh — nhưng chỉ lead mới giao việc. Độ sâu 1 và giới hạn phân nhánh vẫn giữ nguyên. Với `v0.2.x` không có thông báo hay bản ghi lead: các lane hỏi địa chỉ của lead lấy từ chỉ dẫn của chúng, và việc thay đổi lead do nhà phát triển chuyển tiếp.
 
 ## Ghi chú
 

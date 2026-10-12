@@ -43,7 +43,24 @@ ak setup verify            # comprobaciones ordenadas, cada una con su comando d
 
 El skill `agentkit-orchestrate` (`ak --skill orchestrate`) enseña a un agente a repartir el trabajo entre varios agentes, cuentas y proveedores: un `ak usage` antes del lote, `ak pick --count N` para elegir las cuentas, un delegado por cuenta, la puerta de validación del propio repositorio sobre cada resultado y conmutación a la siguiente cuenta cuando una llega a un límite. El kit observa, calcula y ejecuta; nunca planifica. El líder — tú, o un agente al que se lo pediste — decide, usando solo tus propias cuentas y dentro de los términos de cada proveedor.
 
-Para carriles largos e interactivos, cada carril se ejecuta en un panel de [Herdr](/kit/herdr) con su propia cuenta. El capítulo de la metodología [Ejecutar muchos agentes](/methodology/06-orchestration) describe el modelo completo: un líder y sus carriles, cuentas elegidas por margen, coordinación con herdr-peers y una rama y una publicación por repositorio.
+Para carriles largos e interactivos, cada carril se ejecuta en un panel de [Herdr](/kit/herdr) con su propia cuenta. El capítulo de la metodología [Ejecutar muchos agentes](/methodology/06-orchestration) describe el modelo completo: un líder y sus carriles, cuentas elegidas por margen, coordinación con herdr-peers y una rama y una publicación por repositorio; [Autonomía del enjambre](/methodology/07-swarm-autonomy) añade las comprobaciones de capacidad, el traspaso y la sucesión del líder.
+
+## Capacidad y reservas
+
+Desde `v0.6.0` un agente puede preguntar cuánto margen le queda a su propia cuenta, con poco coste, en cada límite entre tareas — la señal que permite a un enjambre traspasar el trabajo antes de que una cuenta se agote ([Autonomía del enjambre](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (esquema `capacity-v1`) da el `headroom_pct` de la cuenta en ejecución, su `binding_window`, `resets_at` y un `verdict`: `ok`, `low` (25 % o menos), `critical` (10 % o menos, o con límite de tasa) o `unknown` (sin fuente de cuota: Cursor, Grok, Antigravity). Usa la aritmética de `ak pick`, así que ambos nunca discrepan, y lee una caché de uso que se conserva 300 segundos (`--max-age`), de modo que una comprobación en cada límite entre tareas sigue siendo barata. `--self` resuelve la cuenta que lanzó `ak`; fuera de un lanzamiento de `ak` sale con código 3 y nunca adivina. `ak usage` sigue leyendo en vivo y refresca la caché.
+- **Umbrales y simulacros.** `AGENTKIT_CAPACITY_LOW` y `AGENTKIT_CAPACITY_CRITICAL` (o `--low` y `--critical`) mueven los umbrales. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` solo puede rebajar una lectura — así es como un simulacro hace que una cuenta parezca escasa — y nunca puede hacer que una parezca más holgada.
+- **`ak lease <kind> @<profile> --owner <addr>`** reserva una cuenta para un carril; `ak lease release …` la libera cuando un sucesor ha aceptado el traspaso, y `ak lease ls` enumera las reservas (esquema `leases-v1`). Un perfil de Codex admite una sola reserva — un escritor por archivo de autenticación — y solo el titular libera una reserva. Las reservas caducan y son registros orientativos de números, nombres de perfil y direcciones de panel, nunca una credencial.
+- **`ak pick <kind> --owner <lead>`** omite las cuentas de Codex reservadas por otro titular y clasifica cada candidata por `headroom / (1 + other leases)`; sin `--owner` la clasificación no cambia.
+
+```bash
+ak capacity --self --json                        # margen y veredicto de este agente
+ak lease claude @work --owner local:w2:p1        # reservar una cuenta para un carril
+ak pick codex --owner local:w1:p1 --count 2      # omitir cuentas reservadas por otros
+```
+
+El trabajo se mueve solo entre las cuentas que declaraste para el plan, dentro de los términos de cada proveedor: ningún agente crea una cuenta, renueva un inicio de sesión ni gasta un restablecimiento de Codex. El pack de Deep Work Plan lee el veredicto con su propio helper y lo convierte en continuar, prepararse o traspasar; sin el kit, o con uno más antiguo, la capacidad se reporta como desconocida, nunca como ok.
 
 ## Instalación
 

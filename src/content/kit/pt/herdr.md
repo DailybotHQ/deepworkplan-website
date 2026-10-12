@@ -56,7 +56,7 @@ O herdr-peers não autentica o remetente: o campo `from=` de um carimbo é uma a
 
 ## Contêineres e o host
 
-Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v0.3.5`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define. Desde o herdr-peers `v0.3.0`, cada máquina mantém o próprio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), então um checkout compartilhado pelo host e por um contêiner não mistura mais os registros de cada um, e desde o devcontainer-kit (`v0.3.3`) o próprio contêiner exporta `HERDR_PEERS_SELF`, então os agentes Codex lá dentro alcançam outras máquinas sem nenhum passo manual.
+Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v0.3.5`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define. Desde o herdr-peers (`v0.2.3`), cada máquina mantém o próprio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), então um checkout compartilhado pelo host e por um contêiner não mistura mais os registros de cada um, e desde o devcontainer-kit (`v0.3.3`) o próprio contêiner exporta `HERDR_PEERS_SELF`, então os agentes Codex lá dentro alcançam outras máquinas sem nenhum passo manual.
 
 ## Herdr ou agentkit
 
@@ -69,7 +69,19 @@ Os dois addons implementam a mesma interface de delegação — `launch`, `obser
 
 Para um líder que executa muitas frentes ao mesmo tempo — painéis no host, em contêineres e em outras máquinas, cada um na própria conta —, `herdr-peers lanes` lista cada frente com seu estado, `herdr-peers status <pane>` classifica a tela em que uma frente bloqueada está, e cada registro de delegação nomeia a conta e o fornecedor que o realizaram. Veja [Executar muitos agentes](/methodology/06-orchestration).
 
-**Lanes do Codex nomeiam seu painel.** O Codex executa os comandos de uma lane a partir de um servidor em segundo plano compartilhado por todas as sessões daquela conta, então o id de painel herdado pode ser de outra lane. Uma lane do Codex passa o próprio painel, tirado do briefing do líder, com `--pane <pane>` em cada verbo do herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+**Lanes do Codex nomeiam seu painel.** O Codex executa os comandos de uma lane a partir de um servidor em segundo plano compartilhado por todas as sessões daquela conta, então o id de painel herdado pode ser de outra lane. Uma lane do Codex passa o próprio painel, tirado do briefing do líder, com `--pane <pane>` em cada verbo do herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+
+## Avisos e liderança
+
+O herdr-peers `v0.3.0` acrescenta o que permite a um enxame sobreviver ao seu líder ([Autonomia do enxame](/methodology/07-swarm-autonomy)):
+
+- **Avisos.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envia uma mensagem de mão única com o selo `reply=no`. O `check` do receptor a classifica como aviso, registra-a como dado e nunca responde. Avisos não consomem nenhuma vaga de fan-out e podem ser enviados enquanto uma consulta está aberta; use-os para anúncios de repasse, mudanças de líder e difusões de release.
+- **Um registro de líder por plano.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` torna um agente o líder de um plano; `lead show` imprime o registro (schema `herdr-peers/lead-v1`: plano, líder, época, sucessão, frentes, hora de atualização). `lead handover <addr> --plan <P>` repassa a liderança, `lead takeover --plan <P>` permite que o primeiro suplente alcançável a assuma quando o líder sumiu, e `lead release --plan <P>` a encerra. Cada mudança incrementa a época e avisa todas as frentes.
+- **Isolamento (fencing).** Uma frente aceita um aviso de líder apenas do agente que lhe deu o briefing (primeira reivindicação), do líder atual na época seguinte (passagem) ou da primeira entrada alcançável da sucessão na época seguinte (tomada). Todo o resto é registrado e ignorado, e um líder que volta e vê uma época maior se retira.
+- **O endereço `lead`.** `ask lead …` e `notify lead …` resolvem para o líder atual de `--plan` (senão, de `$DWP_PLAN`), então nenhum briefing de frente fixa no código o painel do líder.
+- **Telas `usage_limit`.** `status` e `lanes` reconhecem a mensagem de limite de uso de uma CLI como a classe de tela `usage_limit`, cujo próximo passo é um repasse. Ela nunca recebe teclas. `lanes --json` acrescenta o plano, seu líder, a época e a última capacidade reportada de cada frente.
+
+As frentes também podem consultar umas às outras para obter informação e coordenação — uma interface, o nome de uma flag, o estado de um branch —, mas só o líder atribui trabalho. A profundidade 1 e o limite de fan-out continuam valendo. Com a `v0.2.x` não há avisos nem registros de líder: as frentes consultam o endereço do líder que consta no seu briefing, e uma mudança de líder é retransmitida pelo desenvolvedor.
 
 ## Notas
 

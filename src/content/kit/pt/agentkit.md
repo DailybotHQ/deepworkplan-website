@@ -43,7 +43,24 @@ ak setup verify            # verificações ordenadas, cada uma com seu comando 
 
 O skill `agentkit-orchestrate` (`ak --skill orchestrate`) ensina um agente a distribuir o trabalho entre vários agentes, contas e fornecedores: um `ak usage` antes do lote, `ak pick --count N` para escolher as contas, um delegado por conta, o gate do próprio repositório em cada resultado e failover para a próxima conta quando uma atinge um limite. O kit observa, calcula e executa; nunca agenda. O líder — você, ou um agente a quem você pediu — decide, usando apenas as suas próprias contas e dentro dos termos de cada fornecedor.
 
-Para frentes longas e interativas, cada frente roda em um painel do [Herdr](/kit/herdr) na própria conta. O capítulo da metodologia [Executar muitos agentes](/methodology/06-orchestration) descreve o modelo completo: um líder e suas frentes, contas escolhidas por folga, coordenação pelo herdr-peers e um branch e um release por repositório.
+Para frentes longas e interativas, cada frente roda em um painel do [Herdr](/kit/herdr) na própria conta. O capítulo da metodologia [Executar muitos agentes](/methodology/06-orchestration) descreve o modelo completo: um líder e suas frentes, contas escolhidas por folga, coordenação pelo herdr-peers e um branch e um release por repositório; [Autonomia do enxame](/methodology/07-swarm-autonomy) acrescenta verificações de capacidade, repasse e sucessão do líder.
+
+## Capacidade e reservas
+
+A partir da `v0.6.0`, um agente pode perguntar quanta folga a própria conta tem, a baixo custo, em cada limite entre tarefas — o sinal que permite a um enxame repassar o trabalho antes que uma conta se esgote ([Autonomia do enxame](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (schema `capacity-v1`) informa o `headroom_pct` da conta em execução, sua `binding_window`, `resets_at` e um `verdict`: `ok`, `low` (25 % ou menos), `critical` (10 % ou menos, ou com rate limit) ou `unknown` (sem fonte de cota: Cursor, Grok, Antigravity). Ele usa a aritmética do `ak pick`, então os dois nunca discordam, e lê um cache de uso mantido por 300 segundos (`--max-age`), então uma verificação em cada limite entre tarefas continua barata. `--self` resolve a conta que o `ak` iniciou; fora de um início pelo `ak`, ele sai com código 3 e nunca adivinha. `ak usage` continua lendo ao vivo e atualiza o cache.
+- **Limiares e ensaios.** `AGENTKIT_CAPACITY_LOW` e `AGENTKIT_CAPACITY_CRITICAL` (ou `--low` e `--critical`) movem os limiares. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` só pode rebaixar uma leitura — é assim que um ensaio faz uma conta parecer escassa — e nunca pode fazer uma parecer mais folgada.
+- **`ak lease <kind> @<profile> --owner <addr>`** reserva uma conta para uma frente; `ak lease release …` a libera depois que um sucessor aceitou o repasse, e `ak lease ls` lista as reservas (schema `leases-v1`). Um perfil do Codex aceita uma única reserva — um escritor por arquivo de autenticação — e só o dono libera uma reserva. As reservas expiram e são registros consultivos de números, nomes de perfil e endereços de painel, nunca uma credencial.
+- **`ak pick <kind> --owner <lead>`** pula contas do Codex reservadas por outro dono e classifica cada candidata por `headroom / (1 + other leases)`; sem `--owner`, a classificação não muda.
+
+```bash
+ak capacity --self --json                        # folga e veredito deste agente
+ak lease claude @work --owner local:w2:p1        # reservar uma conta para uma frente
+ak pick codex --owner local:w1:p1 --count 2      # pular contas reservadas por outros
+```
+
+O trabalho só circula entre as contas que você declarou para o plano, dentro dos termos de cada fornecedor: nenhum agente cria uma conta, renova um login ou gasta um reset do Codex. O pack do Deep Work Plan lê o veredito pelo próprio helper e o transforma em continuar, preparar ou repassar; sem o kit, ou com um mais antigo, a capacidade é reportada como desconhecida, nunca como ok.
 
 ## Instalação
 

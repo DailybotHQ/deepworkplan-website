@@ -43,7 +43,24 @@ ak setup verify            # uporządkowane kontrole, każda z poleceniem napraw
 
 Skill `agentkit-orchestrate` (`ak --skill orchestrate`) uczy agenta rozkładać pracę na wielu agentów, konta i dostawców: jedno `ak usage` przed partią, `ak pick --count N` do wyboru kont, jeden delegat na konto, własną bramkę repozytorium dla każdego wyniku i przełączenie na następne konto, gdy któreś osiągnie limit. Kit obserwuje, oblicza i uruchamia; nigdy nie planuje. Decyduje prowadzący — Ty albo agent, którego o to poprosisz — używając wyłącznie Twoich własnych kont i w granicach warunków każdego dostawcy.
 
-W przypadku długich, interaktywnych torów każdy tor działa w panelu [Herdr](/kit/herdr) na własnym koncie. Rozdział metodyki [Uruchamianie wielu agentów](/methodology/06-orchestration) opisuje cały model: prowadzący i jego tory, konta wybierane według zapasu, koordynacja przez herdr-peers oraz jedna gałąź i jedno wydanie na repozytorium.
+W przypadku długich, interaktywnych torów każdy tor działa w panelu [Herdr](/kit/herdr) na własnym koncie. Rozdział metodyki [Uruchamianie wielu agentów](/methodology/06-orchestration) opisuje cały model: prowadzący i jego tory, konta wybierane według zapasu, koordynacja przez herdr-peers oraz jedna gałąź i jedno wydanie na repozytorium; [Autonomia roju](/methodology/07-swarm-autonomy) dodaje kontrole pojemności, przekazanie i sukcesję prowadzącego.
+
+## Pojemność i dzierżawy
+
+Od `v0.6.0` agent może tanio, na każdej granicy zadania, zapytać, ile zapasu ma jego własne konto — to sygnał, dzięki któremu rój przekazuje pracę dalej, zanim konto się wyczerpie ([Autonomia roju](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (schemat `capacity-v1`) podaje dla bieżącego konta `headroom_pct`, jego `binding_window`, `resets_at` oraz `verdict`: `ok`, `low` (25 % lub mniej), `critical` (10 % lub mniej albo ograniczenie szybkości) lub `unknown` (brak źródła limitów: Cursor, Grok, Antigravity). Używa arytmetyki `ak pick`, więc oba nigdy się nie rozjeżdżają, i odczytuje pamięć podręczną zużycia przechowywaną przez 300 sekund (`--max-age`), dzięki czemu kontrola na każdej granicy zadania pozostaje tania. `--self` ustala konto, które uruchomiło `ak`; poza uruchomieniem przez `ak` kończy się kodem 3 i nigdy nie zgaduje. `ak usage` nadal odczytuje dane na żywo i odświeża pamięć podręczną.
+- **Progi i ćwiczenia.** `AGENTKIT_CAPACITY_LOW` i `AGENTKIT_CAPACITY_CRITICAL` (lub `--low` i `--critical`) przesuwają progi. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` może jedynie obniżyć odczyt — w ten sposób ćwiczenie sprawia, że konto wygląda na ubogie — i nigdy nie może sprawić, że wygląda na bogatsze.
+- **`ak lease <kind> @<profile> --owner <addr>`** rezerwuje konto dla jednego toru; `ak lease release …` zwalnia je, gdy następca przyjmie przekazanie, a `ak lease ls` wyświetla dzierżawy (schemat `leases-v1`). Profil Codex przyjmuje jedną dzierżawę — jeden piszący na plik uwierzytelniania — i tylko właściciel zwalnia dzierżawę. Dzierżawy wygasają i są doradczymi zapisami liczb, nazw profili i adresów paneli, nigdy poświadczeniem.
+- **`ak pick <kind> --owner <lead>`** pomija konta Codex wydzierżawione innemu właścicielowi i szereguje każdego kandydata według `headroom / (1 + other leases)`; bez `--owner` ranking się nie zmienia.
+
+```bash
+ak capacity --self --json                        # własny zapas i werdykt tego agenta
+ak lease claude @work --owner local:w2:p1        # zarezerwuj konto dla toru
+ak pick codex --owner local:w1:p1 --count 2      # pomiń konta wydzierżawione innym
+```
+
+Praca przemieszcza się wyłącznie między kontami, które zadeklarowałeś dla planu, w granicach warunków każdego dostawcy: żaden agent nie tworzy konta, nie odnawia logowania ani nie zużywa resetu Codex. Pakiet Deep Work Plan odczytuje werdykt przez własnego pomocnika i zamienia go na kontynuację, przygotowanie lub przekazanie; bez kitu albo ze starszą wersją pojemność jest raportowana jako nieznana, nigdy jako ok.
 
 ## Instalacja
 

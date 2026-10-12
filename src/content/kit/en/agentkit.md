@@ -43,7 +43,24 @@ ak setup verify            # ordered checks, each with its repair command
 
 The `agentkit-orchestrate` skill (`ak --skill orchestrate`) teaches an agent to spread work over several agents, accounts and vendors: one `ak usage` before the batch, `ak pick --count N` to choose the accounts, one delegate per account, the repository's own gate on every result, and failover to the next account when one hits a limit. The kit observes, computes and runs; it never schedules. The lead — you, or an agent you asked — decides, using only your own accounts and within each vendor's terms.
 
-For long, interactive lanes, each lane runs in a [Herdr](/kit/herdr) pane on its own account. The methodology chapter [Running many agents](/methodology/06-orchestration) describes the whole model: a lead and its lanes, accounts chosen by headroom, herdr-peers coordination, and one branch and one release per repository.
+For long, interactive lanes, each lane runs in a [Herdr](/kit/herdr) pane on its own account. The methodology chapter [Running many agents](/methodology/06-orchestration) describes the whole model: a lead and its lanes, accounts chosen by headroom, herdr-peers coordination, and one branch and one release per repository; [Swarm autonomy](/methodology/07-swarm-autonomy) adds capacity checks, handoff and lead succession.
+
+## Capacity and leases
+
+From `v0.6.0` an agent can ask how much room its own account has, cheaply, at every task boundary — the signal that lets a swarm hand work on before an account runs out ([Swarm autonomy](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (schema `capacity-v1`) gives the running account's `headroom_pct`, its `binding_window`, `resets_at` and a `verdict`: `ok`, `low` (25 % or less), `critical` (10 % or less, or rate-limited) or `unknown` (no quota source: Cursor, Grok, Antigravity). It uses `ak pick`'s arithmetic, so the two never disagree, and reads a usage cache kept for 300 seconds (`--max-age`), so a check at every task boundary stays cheap. `--self` resolves the account `ak` launched; outside an `ak` launch it exits 3 and never guesses. `ak usage` still reads live and refreshes the cache.
+- **Thresholds and drills.** `AGENTKIT_CAPACITY_LOW` and `AGENTKIT_CAPACITY_CRITICAL` (or `--low` and `--critical`) move the thresholds. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` can only lower a reading — it is how a drill makes an account look poor — and can never make one look richer.
+- **`ak lease <kind> @<profile> --owner <addr>`** holds an account for one lane; `ak lease release …` frees it once a successor has accepted the handoff, and `ak lease ls` lists the leases (schema `leases-v1`). A Codex profile takes a single lease — one writer per auth file — and only the owner releases a lease. Leases expire and are advisory records of numbers, profile names and pane addresses, never a credential.
+- **`ak pick <kind> --owner <lead>`** skips Codex accounts leased to another owner and ranks every candidate by `headroom / (1 + other leases)`; without `--owner` the ranking is unchanged.
+
+```bash
+ak capacity --self --json                        # this agent's own room and verdict
+ak lease claude @work --owner local:w2:p1        # hold an account for a lane
+ak pick codex --owner local:w1:p1 --count 2      # skip accounts leased to others
+```
+
+Work moves only among the accounts you declared for the plan, within each vendor's terms: no agent creates an account, renews a login or spends a Codex reset. The Deep Work Plan pack reads the verdict through its own helper and turns it into continue, prepare or hand off; without the kit, or with an older one, capacity is reported as unknown, never as ok.
 
 ## Install
 

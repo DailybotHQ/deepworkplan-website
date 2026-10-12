@@ -43,7 +43,24 @@ ak setup verify            # her biri kendi onarım komutuyla sıralı kontrolle
 
 `agentkit-orchestrate` skill'i (`ak --skill orchestrate`), bir agent'a işi birkaç agent'a, hesaba ve sağlayıcıya dağıtmayı öğretir: toplu işten önce bir `ak usage`, hesapları seçmek için `ak pick --count N`, hesap başına bir delege, her sonuçta deponun kendi kapısı ve bir hesap sınıra ulaştığında bir sonraki hesaba geçiş. Kit gözlemler, hesaplar ve çalıştırır; asla zamanlama yapmaz. Kararı lider verir — siz ya da görevlendirdiğiniz bir agent — yalnızca kendi hesaplarınızı kullanarak ve her sağlayıcının koşulları içinde kalarak.
 
-Uzun, etkileşimli şeritlerde her şerit, kendi hesabıyla bir [Herdr](/kit/herdr) bölmesinde çalışır. [Birçok ajanı çalıştırmak](/methodology/06-orchestration) metodoloji bölümü tüm modeli açıklar: bir lider ve şeritleri, boş kapasiteye göre seçilen hesaplar, herdr-peers koordinasyonu ve depo başına tek dal ve tek sürüm.
+Uzun, etkileşimli şeritlerde her şerit, kendi hesabıyla bir [Herdr](/kit/herdr) bölmesinde çalışır. [Birçok ajanı çalıştırmak](/methodology/06-orchestration) metodoloji bölümü tüm modeli açıklar: bir lider ve şeritleri, boş kapasiteye göre seçilen hesaplar, herdr-peers koordinasyonu ve depo başına tek dal ve tek sürüm; [Sürü özerkliği](/methodology/07-swarm-autonomy) buna kapasite kontrollerini, devri ve liderin halefiyetini ekler.
+
+## Kapasite ve kiralamalar
+
+`v0.6.0` sürümünden itibaren bir agent, kendi hesabında ne kadar yer kaldığını her görev sınırında ucuza sorabilir — bir sürünün, bir hesap tükenmeden önce işi devretmesini sağlayan sinyal budur ([Sürü özerkliği](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (şema `capacity-v1`), çalışan hesabın `headroom_pct` değerini, `binding_window`, `resets_at` alanlarını ve bir `verdict` verir: `ok`, `low` (%25 veya daha az), `critical` (%10 veya daha az ya da hız sınırına takılmış) veya `unknown` (kota kaynağı yok: Cursor, Grok, Antigravity). `ak pick` ile aynı hesabı kullanır, bu yüzden ikisi asla çelişmez; 300 saniye tutulan bir kullanım önbelleğini okur (`--max-age`), böylece her görev sınırındaki kontrol ucuz kalır. `--self`, `ak` komutunun başlattığı hesabı çözer; bir `ak` başlatması dışında 3 koduyla çıkar ve asla tahmin yürütmez. `ak usage` yine canlı okur ve önbelleği yeniler.
+- **Eşikler ve tatbikatlar.** `AGENTKIT_CAPACITY_LOW` ve `AGENTKIT_CAPACITY_CRITICAL` (ya da `--low` ve `--critical`) eşikleri değiştirir. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` bir okumayı yalnızca düşürebilir — bir tatbikat bir hesabı bu yolla yoksul gösterir — ve bir hesabı asla olduğundan zengin gösteremez.
+- **`ak lease <kind> @<profile> --owner <addr>`** bir hesabı tek bir şerit için tutar; `ak lease release …`, bir halef devri kabul ettikten sonra onu serbest bırakır ve `ak lease ls` kiralamaları listeler (şema `leases-v1`). Bir Codex profili tek bir kiralama alır — kimlik doğrulama dosyası başına tek yazıcı — ve bir kiralamayı yalnızca sahibi serbest bırakır. Kiralamaların süresi dolar; bunlar sayılardan, profil adlarından ve bölme adreslerinden oluşan tavsiye niteliğinde kayıtlardır, asla bir kimlik bilgisi değildir.
+- **`ak pick <kind> --owner <lead>`**, başka bir sahibe kiralanmış Codex hesaplarını atlar ve her adayı `headroom / (1 + other leases)` ile sıralar; `--owner` olmadan sıralama değişmez.
+
+```bash
+ak capacity --self --json                        # bu agent'ın kendi yeri ve kararı
+ak lease claude @work --owner local:w2:p1        # bir hesabı bir şerit için tut
+ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış hesapları atla
+```
+
+İş yalnızca plan için bildirdiğiniz hesaplar arasında, her sağlayıcının koşulları içinde hareket eder: hiçbir agent hesap oluşturmaz, oturum yenilemez ya da bir Codex sıfırlamasını harcamaz. Deep Work Plan paketi kararı kendi yardımcısıyla okur ve onu devam et, hazırlan ya da devret kararına dönüştürür; kit olmadan ya da daha eski bir kitle kapasite asla ok olarak değil, bilinmiyor olarak raporlanır.
 
 ## Kurulum
 

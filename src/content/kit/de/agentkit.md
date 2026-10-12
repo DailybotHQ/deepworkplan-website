@@ -43,7 +43,24 @@ ak setup verify            # geordnete Prüfungen, jede mit ihrem Reparaturbefeh
 
 Der Skill `agentkit-orchestrate` (`ak --skill orchestrate`) bringt einem Agenten bei, Arbeit auf mehrere Agenten, Konten und Anbieter zu verteilen: ein `ak usage` vor dem Batch, `ak pick --count N` zur Wahl der Konten, ein Delegierter pro Konto, das eigene Gate des Repositorys für jedes Ergebnis und Failover auf das nächste Konto, wenn eines an ein Limit stößt. Das Kit beobachtet, berechnet und führt aus; es plant nie. Der Lead — Sie oder ein Agent, den Sie beauftragt haben — entscheidet, ausschließlich mit Ihren eigenen Konten und im Rahmen der Bedingungen jedes Anbieters.
 
-Für lange, interaktive Lanes läuft jede Lane in einem [Herdr](/kit/herdr)-Pane auf einem eigenen Konto. Das Methodik-Kapitel [Viele Agenten betreiben](/methodology/06-orchestration) beschreibt das gesamte Modell: ein Lead und seine Lanes, nach Spielraum gewählte Konten, Koordination über herdr-peers sowie ein Branch und ein Release pro Repository.
+Für lange, interaktive Lanes läuft jede Lane in einem [Herdr](/kit/herdr)-Pane auf einem eigenen Konto. Das Methodik-Kapitel [Viele Agenten betreiben](/methodology/06-orchestration) beschreibt das gesamte Modell: ein Lead und seine Lanes, nach Spielraum gewählte Konten, Koordination über herdr-peers sowie ein Branch und ein Release pro Repository; [Schwarmautonomie](/methodology/07-swarm-autonomy) ergänzt Kapazitätsprüfungen, Übergabe und Lead-Nachfolge.
+
+## Kapazität und Leases
+
+Ab `v0.6.0` kann ein Agent an jeder Aufgabengrenze günstig fragen, wie viel Spielraum sein eigenes Konto hat — das Signal, mit dem ein Schwarm Arbeit weitergibt, bevor ein Konto erschöpft ist ([Schwarmautonomie](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (Schema `capacity-v1`) liefert für das laufende Konto `headroom_pct`, sein `binding_window`, `resets_at` und ein `verdict`: `ok`, `low` (25 % oder weniger), `critical` (10 % oder weniger oder ratenbegrenzt) oder `unknown` (keine Kontingentquelle: Cursor, Grok, Antigravity). Es verwendet die Arithmetik von `ak pick`, sodass beide nie voneinander abweichen, und liest einen Nutzungs-Cache, der 300 Sekunden gehalten wird (`--max-age`), sodass eine Prüfung an jeder Aufgabengrenze günstig bleibt. `--self` ermittelt das Konto, das `ak` gestartet hat; außerhalb eines `ak`-Starts endet es mit Exit-Code 3 und rät nie. `ak usage` liest weiterhin live und aktualisiert den Cache.
+- **Schwellenwerte und Übungen.** `AGENTKIT_CAPACITY_LOW` und `AGENTKIT_CAPACITY_CRITICAL` (oder `--low` und `--critical`) verschieben die Schwellenwerte. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` kann einen Messwert nur senken — so lässt eine Übung ein Konto knapp erscheinen — und nie eines reicher erscheinen lassen.
+- **`ak lease <kind> @<profile> --owner <addr>`** hält ein Konto für eine Lane; `ak lease release …` gibt es frei, sobald ein Nachfolger die Übergabe angenommen hat, und `ak lease ls` listet die Leases auf (Schema `leases-v1`). Ein Codex-Profil nimmt ein einziges Lease — ein Schreiber pro Auth-Datei —, und nur der Besitzer gibt ein Lease frei. Leases laufen ab und sind beratende Einträge aus Zahlen, Profilnamen und Pane-Adressen, nie ein Zugangsdatum.
+- **`ak pick <kind> --owner <lead>`** überspringt Codex-Konten, die an einen anderen Besitzer verliehen sind, und ordnet jeden Kandidaten nach `headroom / (1 + other leases)`; ohne `--owner` bleibt die Rangfolge unverändert.
+
+```bash
+ak capacity --self --json                        # eigener Spielraum und Urteil dieses Agenten
+ak lease claude @work --owner local:w2:p1        # ein Konto für eine Lane halten
+ak pick codex --owner local:w1:p1 --count 2      # an andere verliehene Konten überspringen
+```
+
+Arbeit bewegt sich nur zwischen den Konten, die Sie für den Plan deklariert haben, im Rahmen der Bedingungen jedes Anbieters: Kein Agent legt ein Konto an, erneuert eine Anmeldung oder verbraucht einen Codex-Reset. Das Deep-Work-Plan-Paket liest das Urteil über seinen eigenen Helfer und macht daraus Weitermachen, Vorbereiten oder Übergeben; ohne das Kit oder mit einer älteren Version wird die Kapazität als unbekannt gemeldet, nie als ok.
 
 ## Installation
 

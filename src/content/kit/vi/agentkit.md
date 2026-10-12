@@ -43,7 +43,24 @@ ak setup verify            # các bước kiểm tra theo thứ tự, mỗi bư�
 
 Skill `agentkit-orchestrate` (`ak --skill orchestrate`) dạy một agent phân bổ công việc cho nhiều agent, tài khoản và nhà cung cấp: một lần `ak usage` trước đợt việc, `ak pick --count N` để chọn tài khoản, một agent được ủy thác cho mỗi tài khoản, cổng kiểm chứng của chính repository cho mọi kết quả, và chuyển sang tài khoản kế tiếp khi một tài khoản chạm giới hạn. Bộ kit quan sát, tính toán và chạy; nó không bao giờ lập lịch. Lead — bạn, hoặc một agent bạn đã yêu cầu — là bên quyết định, chỉ dùng tài khoản của chính bạn và tuân thủ điều khoản của từng nhà cung cấp.
 
-Với các lane dài và có tương tác, mỗi lane chạy trong một pane [Herdr](/kit/herdr) trên tài khoản riêng. Chương phương pháp luận [Chạy nhiều agent](/methodology/06-orchestration) mô tả toàn bộ mô hình: một lead và các lane của nó, tài khoản được chọn theo hạn mức còn lại, phối hợp qua herdr-peers, và một nhánh cùng một bản phát hành cho mỗi repository.
+Với các lane dài và có tương tác, mỗi lane chạy trong một pane [Herdr](/kit/herdr) trên tài khoản riêng. Chương phương pháp luận [Chạy nhiều agent](/methodology/06-orchestration) mô tả toàn bộ mô hình: một lead và các lane của nó, tài khoản được chọn theo hạn mức còn lại, phối hợp qua herdr-peers, và một nhánh cùng một bản phát hành cho mỗi repository; [Tự chủ của bầy agent](/methodology/07-swarm-autonomy) bổ sung việc kiểm tra năng lực, bàn giao và kế nhiệm lead.
+
+## Năng lực và lease
+
+Từ `v0.6.0`, một agent có thể hỏi tài khoản của chính nó còn bao nhiêu chỗ, với chi phí thấp, tại mỗi ranh giới tác vụ — tín hiệu cho phép một bầy agent chuyển giao công việc trước khi một tài khoản cạn ([Tự chủ của bầy agent](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (schema `capacity-v1`) cho biết `headroom_pct` của tài khoản đang chạy, `binding_window`, `resets_at` của nó và một `verdict`: `ok`, `low` (25 % trở xuống), `critical` (10 % trở xuống, hoặc bị giới hạn tốc độ) hoặc `unknown` (không có nguồn hạn mức: Cursor, Grok, Antigravity). Lệnh này dùng cùng phép tính của `ak pick`, nên hai lệnh không bao giờ mâu thuẫn, và đọc một bộ nhớ đệm mức sử dụng được giữ trong 300 giây (`--max-age`), nên việc kiểm tra tại mỗi ranh giới tác vụ vẫn rẻ. `--self` xác định tài khoản mà `ak` đã khởi chạy; ngoài một lần khởi chạy bằng `ak`, lệnh thoát với mã 3 và không bao giờ đoán. `ak usage` vẫn đọc trực tiếp và làm mới bộ nhớ đệm.
+- **Ngưỡng và diễn tập.** `AGENTKIT_CAPACITY_LOW` và `AGENTKIT_CAPACITY_CRITICAL` (hoặc `--low` và `--critical`) dịch chuyển các ngưỡng. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` chỉ có thể hạ một số đo — đó là cách một buổi diễn tập làm cho một tài khoản trông như sắp cạn — và không bao giờ làm cho tài khoản trông dư dả hơn.
+- **`ak lease <kind> @<profile> --owner <addr>`** giữ một tài khoản cho một lane; `ak lease release …` giải phóng nó khi một agent kế nhiệm đã chấp nhận bàn giao, và `ak lease ls` liệt kê các lease (schema `leases-v1`). Một hồ sơ Codex chỉ nhận một lease — một bên ghi cho mỗi tệp xác thực — và chỉ chủ sở hữu mới giải phóng được lease. Lease có thời hạn và chỉ là bản ghi tham khảo gồm các con số, tên hồ sơ và địa chỉ pane, không bao giờ là thông tin xác thực.
+- **`ak pick <kind> --owner <lead>`** bỏ qua các tài khoản Codex đã được lease cho chủ sở hữu khác và xếp hạng mọi ứng viên theo `headroom / (1 + other leases)`; khi không có `--owner`, thứ hạng không đổi.
+
+```bash
+ak capacity --self --json                        # chỗ còn lại và kết luận của chính agent này
+ak lease claude @work --owner local:w2:p1        # giữ một tài khoản cho một lane
+ak pick codex --owner local:w1:p1 --count 2      # bỏ qua các tài khoản đã lease cho bên khác
+```
+
+Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho kế hoạch, trong khuôn khổ điều khoản của từng nhà cung cấp: không agent nào tạo tài khoản, gia hạn phiên đăng nhập hay dùng một lần đặt lại Codex. Gói Deep Work Plan đọc kết luận qua trình trợ giúp riêng của nó và chuyển kết luận thành tiếp tục, chuẩn bị hoặc bàn giao; khi không có bộ kit, hoặc với một bộ kit cũ hơn, năng lực được báo cáo là không xác định, không bao giờ là ok.
 
 ## Cài đặt
 

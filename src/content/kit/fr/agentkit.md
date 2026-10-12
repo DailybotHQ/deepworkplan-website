@@ -43,7 +43,24 @@ ak setup verify            # des vérifications ordonnées, chacune avec sa comm
 
 Le skill `agentkit-orchestrate` (`ak --skill orchestrate`) apprend à un agent à répartir le travail entre plusieurs agents, comptes et fournisseurs : un `ak usage` avant le lot, `ak pick --count N` pour choisir les comptes, un délégué par compte, la porte de validation du dépôt lui-même sur chaque résultat, et un basculement vers le compte suivant quand l’un atteint une limite. Le kit observe, calcule et exécute ; il n’ordonnance jamais. Le coordinateur — vous, ou un agent à qui vous l’avez demandé — décide, en n’utilisant que vos propres comptes et dans le respect des conditions de chaque fournisseur.
 
-Pour les couloirs longs et interactifs, chaque couloir tourne dans un panneau [Herdr](/kit/herdr) sur son propre compte. Le chapitre de la méthodologie [Faire tourner de nombreux agents](/methodology/06-orchestration) décrit le modèle complet : un coordinateur et ses couloirs, des comptes choisis selon leur marge, la coordination via herdr-peers, et une branche et une publication par dépôt.
+Pour les couloirs longs et interactifs, chaque couloir tourne dans un panneau [Herdr](/kit/herdr) sur son propre compte. Le chapitre de la méthodologie [Faire tourner de nombreux agents](/methodology/06-orchestration) décrit le modèle complet : un coordinateur et ses couloirs, des comptes choisis selon leur marge, la coordination via herdr-peers, et une branche et une publication par dépôt ; [Autonomie de l’essaim](/methodology/07-swarm-autonomy) ajoute les vérifications de capacité, la passation et la succession du coordinateur.
+
+## Capacité et baux
+
+Depuis `v0.6.0`, un agent peut demander de combien de marge dispose son propre compte, à faible coût, à chaque frontière de tâche — le signal qui permet à un essaim de passer le travail avant qu’un compte ne s’épuise ([Autonomie de l’essaim](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (schéma `capacity-v1`) donne le `headroom_pct` du compte en cours, sa `binding_window`, `resets_at` et un `verdict` : `ok`, `low` (25 % ou moins), `critical` (10 % ou moins, ou limité en débit) ou `unknown` (aucune source de quota : Cursor, Grok, Antigravity). La commande utilise l’arithmétique de `ak pick`, si bien que les deux ne divergent jamais, et lit un cache d’utilisation conservé 300 secondes (`--max-age`), si bien qu’une vérification à chaque frontière de tâche reste peu coûteuse. `--self` résout le compte que `ak` a lancé ; en dehors d’un lancement par `ak`, elle sort avec le code 3 et ne devine jamais. `ak usage` lit toujours en direct et rafraîchit le cache.
+- **Seuils et exercices.** `AGENTKIT_CAPACITY_LOW` et `AGENTKIT_CAPACITY_CRITICAL` (ou `--low` et `--critical`) déplacent les seuils. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` ne peut qu’abaisser une lecture — c’est ainsi qu’un exercice fait paraître un compte à court de marge — et ne peut jamais en faire paraître un plus riche.
+- **`ak lease <kind> @<profile> --owner <addr>`** réserve un compte pour un couloir ; `ak lease release …` le libère une fois qu’un successeur a accepté la passation, et `ak lease ls` liste les baux (schéma `leases-v1`). Un profil Codex n’accepte qu’un seul bail — un rédacteur par fichier d’authentification — et seul le titulaire libère un bail. Les baux expirent et sont des enregistrements indicatifs de nombres, de noms de profils et d’adresses de panneaux, jamais un identifiant.
+- **`ak pick <kind> --owner <lead>`** écarte les comptes Codex réservés par un autre titulaire et classe chaque candidat selon `headroom / (1 + other leases)` ; sans `--owner`, le classement est inchangé.
+
+```bash
+ak capacity --self --json                        # la marge et le verdict de cet agent
+ak lease claude @work --owner local:w2:p1        # réserver un compte pour un couloir
+ak pick codex --owner local:w1:p1 --count 2      # écarter les comptes réservés par d’autres
+```
+
+Le travail ne circule qu’entre les comptes que vous avez déclarés pour le plan, dans le respect des conditions de chaque fournisseur : aucun agent ne crée de compte, ne renouvelle une connexion ni ne dépense une réinitialisation Codex. Le pack Deep Work Plan lit le verdict via son propre helper et le traduit en continuer, préparer ou passer la main ; sans le kit, ou avec une version plus ancienne, la capacité est signalée comme inconnue, jamais comme ok.
 
 ## Installation
 

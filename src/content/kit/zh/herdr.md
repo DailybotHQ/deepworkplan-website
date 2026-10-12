@@ -56,7 +56,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 容器与主机
 
-借助基于 devcontainer-kit `v0.3.5` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers `v0.3.0` 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。
+借助基于 devcontainer-kit `v0.3.5` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers (`v0.2.3`) 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。
 
 ## Herdr 还是 agentkit
 
@@ -69,7 +69,19 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 如果主导者要同时运行多条通道——位于主机、容器和其他机器上的窗格，各自使用自己的账户——`herdr-peers lanes` 会列出每条通道及其状态，`herdr-peers status <pane>` 会对受阻通道所停留的界面进行分类，而每条委派记录都会写明承担该工作的账户和厂商。参见[运行多个代理](/methodology/06-orchestration)。
 
-**Codex 通道要指明自己的窗格。** Codex 通过同一账户所有会话共享的后台服务器运行通道的命令，因此它继承的窗格 id 可能属于另一个通道。Codex 通道在每个 herdr-peers 命令（`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`）上用 `--pane <pane>` 传入主导者任务说明中给出的自身窗格。
+**Codex 通道要指明自己的窗格。** Codex 通过同一账户所有会话共享的后台服务器运行通道的命令，因此它继承的窗格 id 可能属于另一个通道。Codex 通道在每个 herdr-peers 命令（`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`）上用 `--pane <pane>` 传入主导者任务说明中给出的自身窗格。
+
+## 通知与主导权
+
+herdr-peers `v0.3.0` 加入了让代理集群在主导者离开后仍能延续的能力（[集群自主](/methodology/07-swarm-autonomy)）：
+
+- **通知。** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` 发送一条带 `reply=no` 戳记的单向消息。接收方的 `check` 把它归类为通知，作为数据记录下来，从不回复。通知不占用扇出名额，并且可以在一次询问尚未结束时发送；它们用于交接公告、主导者变更和发布广播。
+- **每份计划一条主导者记录。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` 让一个代理成为某份计划的主导者；`lead show` 打印该记录（schema `herdr-peers/lead-v1`：计划、主导者、epoch、继任列表、通道、更新时间）。`lead handover <addr> --plan <P>` 移交主导权，`lead takeover --plan <P>` 在主导者离开时让第一个可达的副手接管，`lead release --plan <P>` 结束主导。每次变更都会提升 epoch 并通知每条通道。
+- **隔离（fencing）。** 通道只接受以下来源的主导者通知：为它下达任务说明的代理（首次认领）、处于下一个 epoch 的当前主导者（移交），或处于下一个 epoch 的第一个可达继任条目（接管）。其他任何通知都会被记录并忽略；重新出现的主导者若看到更高的 epoch，就会让位。
+- **`lead` 地址。** `ask lead …` 和 `notify lead …` 解析为 `--plan`（否则为 `$DWP_PLAN`）的当前主导者，因此任何通道任务说明都无需写死主导者的窗格。
+- **`usage_limit` 界面。** `status` 和 `lanes` 会把 CLI 的用量限额消息识别为界面类别 `usage_limit`，其下一步是交接。绝不对它发送按键。`lanes --json` 会加上计划、其主导者、epoch 以及每条通道最近一次报告的容量。
+
+通道之间也可以互相询问信息并进行协调——一个接口、一个参数名、一个分支状态——但只有主导者分配工作。深度为一和扇出上限依然有效。在 `v0.2.x` 中没有通知，也没有主导者记录：通道从任务说明中获得主导者地址并向其询问，主导者变更由开发者转达。
 
 ## 备注
 

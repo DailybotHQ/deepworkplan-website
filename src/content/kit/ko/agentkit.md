@@ -43,7 +43,24 @@ ak setup verify            # 순서대로 진행되는 점검, 각각 복구 명
 
 `agentkit-orchestrate` 스킬(`ak --skill orchestrate`)은 에이전트에게 작업을 여러 에이전트, 계정, 벤더에 나누는 방법을 가르칩니다. 배치 전에 `ak usage`를 한 번 실행하고, `ak pick --count N`으로 계정을 고르고, 계정마다 하나의 위임 대상을 두고, 모든 결과에 리포지토리 자체의 게이트를 실행하며, 한 계정이 한도에 걸리면 다음 계정으로 넘어갑니다. 키트는 관찰하고, 계산하고, 실행할 뿐 스케줄링하지 않습니다. 결정은 리드(여러분, 또는 여러분이 요청한 에이전트)가 내리며, 자신의 계정만 사용하고 각 벤더의 약관을 지킵니다.
 
-길고 상호작용이 필요한 레인은 각각 [Herdr](/kit/herdr) 페인에서 자신의 계정으로 실행됩니다. 방법론 장 [여러 에이전트 운영하기](/methodology/06-orchestration)는 전체 모델을 설명합니다. 리드와 레인, 여유량으로 고른 계정, herdr-peers 조율, 그리고 리포지토리마다 하나의 브랜치와 하나의 릴리스입니다.
+길고 상호작용이 필요한 레인은 각각 [Herdr](/kit/herdr) 페인에서 자신의 계정으로 실행됩니다. 방법론 장 [여러 에이전트 운영하기](/methodology/06-orchestration)는 전체 모델을 설명합니다. 리드와 레인, 여유량으로 고른 계정, herdr-peers 조율, 그리고 리포지토리마다 하나의 브랜치와 하나의 릴리스입니다. [스웜 자율](/methodology/07-swarm-autonomy)은 여기에 용량 확인, 핸드오프, 리드 승계를 더합니다.
+
+## 용량과 리스
+
+`v0.6.0`부터 에이전트는 모든 작업 경계에서 자신의 계정에 여유가 얼마나 남았는지 적은 비용으로 물을 수 있습니다. 이 신호 덕분에 스웜은 계정이 바닥나기 전에 작업을 넘길 수 있습니다([스웜 자율](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`**(스키마 `capacity-v1`)은 실행 중인 계정의 `headroom_pct`, `binding_window`, `resets_at`, 그리고 `verdict`를 제공합니다. `verdict`는 `ok`, `low`(25 % 이하), `critical`(10 % 이하 또는 속도 제한), `unknown`(할당량 출처 없음: Cursor, Grok, Antigravity) 중 하나입니다. `ak pick`과 같은 계산을 쓰므로 둘의 판단은 결코 어긋나지 않으며, 300초 동안 유지되는 사용량 캐시(`--max-age`)를 읽으므로 작업 경계마다 확인해도 비용이 적습니다. `--self`는 `ak`가 시작한 계정을 찾아내며, `ak` 실행 밖에서는 종료 코드 3으로 끝나고 결코 추측하지 않습니다. `ak usage`는 여전히 실시간으로 읽고 캐시를 갱신합니다.
+- **임계값과 훈련.** `AGENTKIT_CAPACITY_LOW`와 `AGENTKIT_CAPACITY_CRITICAL`(또는 `--low`와 `--critical`)로 임계값을 옮깁니다. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>`는 측정값을 낮추기만 할 수 있습니다. 훈련에서 계정을 여유가 없는 것처럼 보이게 하는 방법이며, 계정을 더 여유 있게 보이게 하는 일은 결코 없습니다.
+- `ak lease <kind> @<profile> --owner <addr>`는 하나의 레인을 위해 계정을 잡아 둡니다. `ak lease release …`는 후임이 핸드오프를 수락한 뒤 계정을 풀어 주고, `ak lease ls`는 리스를 나열합니다(스키마 `leases-v1`). Codex 프로필은 리스를 하나만 받습니다(인증 파일마다 작성자 하나). 리스를 해제하는 것은 소유자뿐입니다. 리스는 만료되며 숫자, 프로필 이름, 페인 주소만 담는 권고용 기록일 뿐, 결코 자격 증명이 아닙니다.
+- `ak pick <kind> --owner <lead>`는 다른 소유자에게 리스된 Codex 계정을 건너뛰고, 모든 후보를 `headroom / (1 + other leases)`로 순위를 매깁니다. `--owner`가 없으면 순위는 바뀌지 않습니다.
+
+```bash
+ak capacity --self --json                        # 이 에이전트 자신의 여유와 판정
+ak lease claude @work --owner local:w2:p1        # 레인을 위해 계정 잡아 두기
+ak pick codex --owner local:w1:p1 --count 2      # 다른 소유자에게 리스된 계정 건너뛰기
+```
+
+작업은 계획에 선언한 계정들 사이에서만, 각 벤더의 약관 안에서 이동합니다. 어떤 에이전트도 계정을 만들거나, 로그인을 갱신하거나, Codex 리셋을 소모하지 않습니다. Deep Work Plan 팩은 자체 헬퍼로 판정을 읽고 이를 계속, 준비, 핸드오프 중 하나로 바꿉니다. 키트가 없거나 오래된 키트라면 용량은 unknown으로 보고되며, 결코 ok로 보고되지 않습니다.
 
 ## 설치
 

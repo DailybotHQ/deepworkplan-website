@@ -43,7 +43,24 @@ ak setup verify            # controlli ordinati, ognuno con il suo comando di ri
 
 Lo skill `agentkit-orchestrate` (`ak --skill orchestrate`) insegna a un agente a distribuire il lavoro tra più agenti, account e fornitori: un `ak usage` prima del lotto, `ak pick --count N` per scegliere gli account, un delegato per account, il gate del repository stesso su ogni risultato e il failover all’account successivo quando uno raggiunge un limite. Il kit osserva, calcola ed esegue; non pianifica mai. Il lead — tu, o un agente a cui l’hai chiesto — decide, usando solo i tuoi account e nel rispetto dei termini di ogni fornitore.
 
-Per le corsie lunghe e interattive, ogni corsia gira in un pannello [Herdr](/kit/herdr) sul proprio account. Il capitolo della metodologia [Eseguire molti agenti](/methodology/06-orchestration) descrive l’intero modello: un lead e le sue corsie, account scelti in base al margine, coordinamento tramite herdr-peers e un branch e un rilascio per repository.
+Per le corsie lunghe e interattive, ogni corsia gira in un pannello [Herdr](/kit/herdr) sul proprio account. Il capitolo della metodologia [Eseguire molti agenti](/methodology/06-orchestration) descrive l’intero modello: un lead e le sue corsie, account scelti in base al margine, coordinamento tramite herdr-peers e un branch e un rilascio per repository; [Autonomia dello sciame](/methodology/07-swarm-autonomy) aggiunge i controlli di capacità, il passaggio di consegne e la successione del lead.
+
+## Capacità e lease
+
+Da `v0.6.0` un agente può chiedere quanto margine ha il proprio account, a basso costo, a ogni confine di task — il segnale che permette a uno sciame di passare il lavoro prima che un account si esaurisca ([Autonomia dello sciame](/methodology/07-swarm-autonomy)).
+
+- **`ak capacity --self --json`** (schema `capacity-v1`) restituisce `headroom_pct` dell’account in esecuzione, la sua `binding_window`, `resets_at` e un `verdict`: `ok`, `low` (25 % o meno), `critical` (10 % o meno, o soggetto a rate limit) o `unknown` (nessuna fonte di quota: Cursor, Grok, Antigravity). Usa l’aritmetica di `ak pick`, così i due non sono mai in disaccordo, e legge una cache di utilizzo mantenuta per 300 secondi (`--max-age`), così un controllo a ogni confine di task resta economico. `--self` risolve l’account che `ak` ha avviato; fuori da un avvio tramite `ak` esce con codice 3 e non tira mai a indovinare. `ak usage` continua a leggere dal vivo e aggiorna la cache.
+- **Soglie ed esercitazioni.** `AGENTKIT_CAPACITY_LOW` e `AGENTKIT_CAPACITY_CRITICAL` (o `--low` e `--critical`) spostano le soglie. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` può solo abbassare una lettura — è così che un’esercitazione fa sembrare un account a corto di margine — e non può mai farne sembrare uno più ricco.
+- **`ak lease <kind> @<profile> --owner <addr>`** riserva un account per una corsia; `ak lease release …` lo libera una volta che un successore ha accettato il passaggio di consegne, e `ak lease ls` elenca i lease (schema `leases-v1`). Un profilo Codex accetta un solo lease — uno scrittore per file di autenticazione — e solo il titolare rilascia un lease. I lease scadono e sono record indicativi di numeri, nomi di profilo e indirizzi di pannello, mai una credenziale.
+- **`ak pick <kind> --owner <lead>`** salta gli account Codex riservati a un altro titolare e classifica ogni candidato per `headroom / (1 + other leases)`; senza `--owner` la classifica non cambia.
+
+```bash
+ak capacity --self --json                        # il margine e il verdetto di questo agente
+ak lease claude @work --owner local:w2:p1        # riservare un account per una corsia
+ak pick codex --owner local:w1:p1 --count 2      # saltare gli account riservati ad altri
+```
+
+Il lavoro si sposta solo tra gli account che hai dichiarato per il piano, nel rispetto dei termini di ogni fornitore: nessun agente crea un account, rinnova un login o spende un reset di Codex. Il pacchetto Deep Work Plan legge il verdetto tramite il proprio helper e lo trasforma in continuare, prepararsi o passare le consegne; senza il kit, o con uno più vecchio, la capacità viene riportata come sconosciuta, mai come ok.
 
 ## Installazione
 

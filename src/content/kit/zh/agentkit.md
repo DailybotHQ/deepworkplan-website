@@ -43,7 +43,24 @@ ak setup verify            # 按顺序的检查，每项附带修复命令
 
 `agentkit-orchestrate` 技能（`ak --skill orchestrate`）教代理把工作分摊到多个代理、账户和厂商上：批次开始前执行一次 `ak usage`，用 `ak pick --count N` 选择账户，每个账户一个委派对象，对每个结果运行仓库自己的验证关卡，并在某个账户触及限额时切换到下一个账户。工具包负责观察、计算和运行；它从不调度。由主导者——你，或你委托的代理——做决定，只使用你自己的账户，并遵守每个厂商的条款。
 
-对于长时间的交互式通道，每条通道在 [Herdr](/kit/herdr) 窗格中以自己的账户运行。方法论章节[运行多个代理](/methodology/06-orchestration)描述了完整的模型：主导者与其通道、按余量选择的账户、herdr-peers 协调，以及每个仓库一个分支、一次发布。
+对于长时间的交互式通道，每条通道在 [Herdr](/kit/herdr) 窗格中以自己的账户运行。方法论章节[运行多个代理](/methodology/06-orchestration)描述了完整的模型：主导者与其通道、按余量选择的账户、herdr-peers 协调，以及每个仓库一个分支、一次发布；[集群自主](/methodology/07-swarm-autonomy)则补充了容量检查、交接与主导者继任。
+
+## 容量与租约
+
+自 `v0.6.0` 起，代理可以在每个任务边界以低成本查询自己的账户还剩多少余量——正是这一信号，让代理集群能在账户耗尽之前把工作交接出去（[集群自主](/methodology/07-swarm-autonomy)）。
+
+- **`ak capacity --self --json`**（schema `capacity-v1`）给出正在运行的账户的 `headroom_pct`、其 `binding_window`、`resets_at` 以及一个 `verdict`：`ok`、`low`（25 % 或更低）、`critical`（10 % 或更低，或已被限流）或 `unknown`（没有配额来源：Cursor、Grok、Antigravity）。它使用与 `ak pick` 相同的算法，因此两者从不矛盾；它读取保留 300 秒的用量缓存（`--max-age`），因此在每个任务边界检查一次的成本依然很低。`--self` 解析出由 `ak` 启动的那个账户；不在 `ak` 启动的环境中时，它以退出码 3 退出，从不猜测。`ak usage` 仍然实时读取并刷新缓存。
+- **阈值与演练。** `AGENTKIT_CAPACITY_LOW` 和 `AGENTKIT_CAPACITY_CRITICAL`（或 `--low` 和 `--critical`）用于调整阈值。`AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` 只能调低读数——演练正是借此让一个账户显得余量不足——绝不能让账户显得余量更多。
+- **`ak lease <kind> @<profile> --owner <addr>`** 为一条通道占用一个账户；继任者接受交接后，`ak lease release …` 将其释放，`ak lease ls` 列出各租约（schema `leases-v1`）。一个 Codex 配置档只接受一个租约——每个认证文件一个写入者——并且只有租约所有者才能释放租约。租约会过期，它们只是记录数字、配置档名称和窗格地址的建议性记录，绝不是凭据。
+- **`ak pick <kind> --owner <lead>`** 跳过已租给其他所有者的 Codex 账户，并按 `headroom / (1 + other leases)` 对每个候选账户排序；不带 `--owner` 时，排序不变。
+
+```bash
+ak capacity --self --json                        # 本代理自身的余量与判定
+ak lease claude @work --owner local:w2:p1        # 为一条通道占用一个账户
+ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账户
+```
+
+工作只在你为计划声明的账户之间转移，并遵守每个厂商的条款：任何代理都不会创建账户、续期登录或使用 Codex 的重置额度。Deep Work Plan 技能包通过自己的辅助程序读取判定结果，并把它转化为继续、准备或交接；没有该工具包，或工具包版本较旧时，容量报告为未知（unknown），绝不报告为 ok。
 
 ## 安装
 
