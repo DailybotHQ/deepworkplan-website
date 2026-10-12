@@ -117,6 +117,19 @@ A segurança é de primeira classe da mesma forma que os testes, e segue o mesmo
 
 Essa disciplina por tarefa não substitui o passe de segurança do Final Review: as verificações por tarefa capturam os problemas no commit onde nascem, enquanto o gate final audita todo o plano — incluindo as próprias tarefas de testes e documentação.
 
+## O padrão de qualidade — verificado, não afirmado
+
+A identidade do DWP é a excelência verificada: correção, clareza, simplicidade, segurança, desempenho e escalabilidade, **comprovadas, não afirmadas**. Estas regras se aplicam a todo plano e a todo agente que dá continuidade a um (§5.1.4 do `DWP_SPECIFICATION.md` do pack):
+
+1. **Gates são hipóteses.** Um gate novo ou alterado DEVE (MUST) demonstrar que falha diante de um defeito semeado (ou na árvore anterior à mudança) antes de ser considerado confiável, e essa execução com falha é registrada. Uma aprovação vazia — um binário ausente, uma entrada vazia, zero arquivos ou testes correspondentes, um log vazio, `|| true` em um gate final — é uma falha. Pipelines rodam com `pipefail` (ou o código de saída é preservado de outra forma). Um gate que só busca em texto que o próprio agente escreveu é uma proteção estrutural, **não** evidência observada de comportamento.
+2. **Comparar com a base.** Desempenho, cobertura e tamanho são comparados com o branch base (ou com a revisão inicial do plano), não apenas com um limiar; uma regressão em relação à base é reportada mesmo quando o limiar continua sendo atendido.
+3. **Medir primeiro.** A tarefa 1 de uma correção, de uma auditoria ou de uma otimização verifica sua premissa e a ferramenta de medição antes de qualquer mudança.
+4. **Projetar antes de construir.** Uma mudança não trivial registra por escrito suas interfaces, modos de falha, postura de segurança e plano de testes antes do código.
+5. **Honestidade do ambiente.** Um gate roda em um ambiente declarado — uma classe de comando wrapper para contêineres, um diretório de trabalho explícito, um locale fixo onde a saída é comparada. Uma falha de ambiente é um bloqueio a corrigir ou reportar — nunca uma aprovação, e nunca atribuída à mudança.
+6. **Revisar antes do passo irreversível.** O AI Diff Review local do Final Review roda antes de qualquer merge, tag ou publicação que o plano realize, contra a baseline do plano. A conclusão do plano mantém o contrato de nunca bloquear da revisão (um revisor ausente é uma descoberta registrada `local reviewer not installed`); o passo de merge, tag ou publicação em si continua bloqueado por essa descoberta até que o revisor rode ou o desenvolvedor a dispense explicitamente — nunca um pulo silencioso. Mudanças de metodologia, de protocolo e relevantes para a segurança DEVERIAM (SHOULD) também passar por um revisor de outro fornecedor ou agente.
+7. **Evidência enxuta.** `analysis_results/` guarda relatórios, logs, resumos e ponteiros — nunca produtos, árvores de dependências ou cópias vendorizadas; um produto ganha o próprio repositório ou uma superfície tocada declarada.
+8. **A continuidade nunca rebaixa o padrão.** Um agente sucessor herda os mesmos gates; um pacote de repasse não fecha nenhum critério, não relaxa nenhum gate e não pula nenhuma revisão ([Autonomia do enxame](/methodology/07-swarm-autonomy)).
+
 ## Ciclo de vida do plano — o Final Review
 
 Todo plano conforme redigido sob esta versão termina com exatamente **uma** tarefa obrigatória: o **Final Review** (tarefa N). Duas responsabilidades que versões anteriores colocavam em tarefas de encerramento separadas são realocadas: as decisões de skills passam para a tarefa que produziu o padrão, e o Executive Report passa a ser um artefato opcional, mediante solicitação. Nada do passe de segurança é relaxado.

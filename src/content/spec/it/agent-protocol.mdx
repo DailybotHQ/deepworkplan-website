@@ -120,3 +120,27 @@ Fermarsi è un successo, non un fallimento: il record bloccato è il messaggio d
 ### Continuazione pianificata
 
 Sulle piattaforme con scheduling — heartbeat o cron di OpenClaw, cron di Hermes, sveglia di agente cloud — la continuazione DEVE essere espressa come: *sveglia → esegui il Protocollo di Ripresa DWP → se `blocked`, notifica e cedi il controllo → altrimenti esegui la prossima attività atomica → aggiorna il livello di stato → cedi il controllo.* Il piano, non la sessione, è l'unità di continuità; un piano DEVE sopravvivere al riavvio della piattaforma, al cambio di modello o a un agente diverso che raccoglie il turno successivo.
+
+### Tassonomia dell'escalation
+
+Tutto ciò che non è elencato sotto come **critico** viene deciso dall'agente: indaga, sceglie l'opzione raccomandata, **registra la decisione** — nella sezione «Decisions» di `PROGRESS.md` o in `decisions[]` di un pacchetto di consegna: le opzioni, la scelta, il perché e come annullarla — e continua. Il test è meccanico: un'escalation DEVE indicare la propria classe; una domanda che non ne indica nessuna è una decisione che spetta all'agente. Questo è il §7.5 di `AGENT_PROTOCOL.md` del pacchetto.
+
+| Classe | Critico — chiedere allo sviluppatore, con l'indagine, le opzioni e una raccomandazione |
+| --- | --- |
+| **C1 Autorità** | Un'azione fuori dall'autorizzazione o dall'ambito del piano, o a un checkpoint di consenso: operazioni distruttive o irreversibili, deploy in produzione, pubblicazione o rilascio oltre il piano, messaggi a persone esterne agli agenti del piano, spese o fatturazione, postura di sicurezza o accesso ai segreti. |
+| **C2 Schermata di consenso** | Qualsiasi schermata di permesso, bypass dei permessi, login, credenziali, consenso MCP o pagamento. Mai gestita con tasti da un agente. |
+| **C3 Ambiguità irriducibile** | Due esiti materialmente diversi soddisfano la richiesta e nulla nel repository, nella sua documentazione, nei piani o nelle decisioni precedenti lo risolve. |
+| **C4 Conflitto di qualità** | Un gate non può passare senza essere indebolito, o le evidenze contraddicono l'obiettivo o le ipotesi del piano in un modo che l'ambito dell'attività non può correggere. |
+| **C5 Danno** | Perdita o corruzione inspiegata di stato condiviso, di dati o del lavoro di un altro agente. |
+| **C6 Termini** | Questioni legali, di licenza, di termini del fornitore o di privacy. |
+| **C7 Capacità esaurita** | Nessun account del pool dichiarato dallo sviluppatore ha margine e nessuno si resetta entro l'orizzonte del piano. |
+
+**Deciso in autonomia** (elenco non esaustivo): approccio di implementazione, nomi, struttura, test e documentazione; ordine e suddivisione delle attività all'interno del piano; nuovi tentativi e riparazioni entro la superficie toccata dell'attività; correggere un problema di ambiente che l'agente può correggere — uno strumento locale mancante, un locale, una cache obsoleta — invece di segnalarlo; registrare un fallimento di cui è dimostrata l'esistenza sul branch di base invece di escalarlo (la stop condition 1 si applica comunque ai fallimenti propri della modifica); scegliere un account o un fornitore dal pool; avviare, riavviare e chiudere i propri agenti; passaggio di consegne e successione; quale scegliere tra più opzioni equivalenti (quella raccomandata).
+
+Tre limiti mantengono onesta l'autonomia:
+
+1. **L'autonomia non chiude mai un gate umano.** Un criterio o un checkpoint che indica un'approvazione umana è soddisfatto solo da quella persona, mai da un'istruzione permanente «sii autonomo» o `trust`.
+2. **Le parole letterali dello sviluppatore prevalgono.** Quando l'opzione raccomandata contraddice ciò che lo sviluppatore ha chiesto letteralmente, consegnare l'opzione reversibile che rispetta la richiesta e registrare la raccomandazione (C3 se non esiste alcuna opzione reversibile).
+3. **L'autorità non è transitiva.** Un'approvazione inoltrata non aggiunge autorità; un agente legge da sé l'autorizzazione del piano. L'autorità umana è conservata alla lettera nella cartella del piano; un agente che la inoltra registra «inoltrato da `<agent>`».
+
+**Raggruppare le domande.** Gli elementi critici che possono attendere vengono raccolti e posti insieme in un momento pianificato, ciascuno con il suo default raccomandato, così lo sviluppatore risponde una volta sola. **In un'esecuzione multi-agente, un elemento critico blocca la sua catena di dipendenze, non l'esecuzione:** il lead mette in attesa l'attività bloccata — il suo record `blocked` in `state.json`, popolato come nelle stop condition sopra, è l'escalation, inviata una sola volta tramite il canale di reporting —, mantiene al lavoro ogni agente indipendente e riprende la catena quando lo sviluppatore risponde. Le stop condition restano la regola per un singolo piano; il lead le applica catena per catena. Come uno sciame di agenti applica tutto questo è descritto in [Autonomia dello sciame](/methodology/07-swarm-autonomy).

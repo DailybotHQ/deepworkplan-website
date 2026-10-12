@@ -117,6 +117,19 @@ La seguridad es de primera clase del mismo modo que las pruebas, y sigue el mism
 
 Esta disciplina por tarea no sustituye al pase de seguridad del Final Review: las comprobaciones por tarea detectan los problemas en el commit donde nacen, mientras que la puerta final audita todo el plan — incluidas las propias tareas de pruebas y documentación.
 
+## El estándar de calidad — verificado, no afirmado
+
+La identidad de DWP es la excelencia verificada: corrección, claridad, simplicidad, seguridad, rendimiento y escalabilidad, **demostradas, no afirmadas**. Estas reglas se aplican a todo plan y a todo agente que continúe uno (§5.1.4 del `DWP_SPECIFICATION.md` del pack):
+
+1. **Las puertas de validación son hipótesis.** Una puerta nueva o modificada DEBE demostrar que falla ante un defecto sembrado (o sobre el árbol previo al cambio) antes de confiar en ella, y esa ejecución fallida se registra. Un pase vacuo — un binario ausente, una entrada vacía, cero archivos o pruebas coincidentes, un registro vacío, `|| true` en una puerta final — es un fallo. Las tuberías se ejecutan con `pipefail` (o el código de salida se preserva de otro modo). Una puerta que solo busca en texto que el propio agente escribió es una guarda estructural, **no** evidencia observada del comportamiento.
+2. **Comparar con la base.** El rendimiento, la cobertura y el tamaño se comparan con la rama base (o con la revisión inicial del plan), no solo con un umbral; una regresión respecto a la base se reporta aunque el umbral se siga cumpliendo.
+3. **Medir primero.** La tarea 1 de una corrección, una auditoría o una optimización verifica su premisa y la herramienta de medición antes de cambiar nada.
+4. **Diseñar antes de construir.** Un cambio no trivial deja por escrito sus interfaces, modos de fallo, postura de seguridad y plan de pruebas antes del código.
+5. **Honestidad del entorno.** Una puerta se ejecuta en un entorno declarado — una clase de comando envoltorio para contenedores, un directorio de trabajo explícito, una configuración regional fija donde se compara salida. Un fallo del entorno es un bloqueo que se corrige o se reporta — nunca un pase, y nunca se atribuye al cambio.
+6. **Revisar antes del paso irreversible.** La revisión local con AI Diff Review del Final Review se ejecuta antes de cualquier merge, tag o publicación que realice el plan, contra la línea base del plan. La finalización del plan mantiene el contrato de la revisión de no bloquear nunca (un revisor ausente es un hallazgo registrado `local reviewer not installed`); el paso de merge, tag o publicación en sí sigue bloqueado por ese hallazgo hasta que el revisor se ejecute o el desarrollador lo dispense explícitamente — nunca una omisión silenciosa. Los cambios de metodología, de protocolo y relevantes para la seguridad DEBERÍAN además pasar por un revisor de otro proveedor o agente.
+7. **Evidencia ligera.** `analysis_results/` contiene informes, registros, resúmenes y punteros — nunca productos, árboles de dependencias ni copias vendorizadas; un producto recibe su propio repositorio o una superficie tocada declarada.
+8. **La continuidad nunca rebaja el estándar.** Un agente sucesor hereda las mismas puertas; un paquete de traspaso no cierra ningún criterio, no relaja ninguna puerta y no omite ninguna revisión ([Autonomía del enjambre](/methodology/07-swarm-autonomy)).
+
 ## Ciclo de vida del plan — el Final Review
 
 Todo plan conforme redactado bajo esta versión termina con exactamente **una** tarea obligatoria: el **Final Review** (tarea N). Dos responsabilidades que versiones anteriores colocaban en tareas de cierre separadas se reubican: las decisiones de skills pasan a la tarea que produjo el patrón, y el Reporte Ejecutivo pasa a ser un artefacto opcional, a petición. Nada del pase de seguridad se relaja.

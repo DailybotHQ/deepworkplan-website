@@ -120,3 +120,27 @@ Zatrzymanie to sukces, nie porażka: rekord zablokowania jest komunikatem eskala
 ### Zaplanowana kontynuacja
 
 Na platformach z harmonogramowaniem — bicie serca lub cron OpenClaw, cron Hermes, budzenie agenta chmurowego — kontynuacja MUSI być wyrażona jako: *przebudzenie → uruchomienie Protokołu Wznowienia DWP → jeśli `blocked`, zgłoszenie i yield → w przeciwnym razie wykonanie następnego zadania atomowego → aktualizacja warstwy stanu → yield.* Plan, a nie sesja, jest jednostką ciągłości; plan MUSI przeżyć restart platformy, zmianę modelu lub przejęcie przez innego agenta w następnej turze.
+
+### Taksonomia eskalacji
+
+Wszystko, czego poniżej nie wymieniono jako **krytyczne**, rozstrzyga agent: bada sprawę, wybiera zalecaną opcję, **zapisuje decyzję** — w sekcji „Decisions" pliku `PROGRESS.md` lub w `decisions[]` pakietu przekazania: opcje, wybór, uzasadnienie i sposób odwrócenia — i kontynuuje. Test jest mechaniczny: eskalacja MUSI podawać swoją klasę; pytanie, które żadnej nie podaje, jest decyzją, którą agent jest winien. To jest §7.5 pliku `AGENT_PROTOCOL.md` pakietu.
+
+| Klasa | Krytyczne — zapytaj programistę, przedstawiając analizę, opcje i rekomendację |
+| --- | --- |
+| **C1 Uprawnienia** | Działanie poza autoryzacją lub zakresem planu albo w punkcie kontrolnym zgody: operacje destrukcyjne lub nieodwracalne, wdrożenia produkcyjne, publikowanie lub wydawanie poza planem, wiadomości do osób spoza agentów planu, wydatki lub rozliczenia, postawa bezpieczeństwa lub dostęp do sekretów. |
+| **C2 Ekran zgody** | Dowolny ekran uprawnień, bypass-permissions, logowania, poświadczeń, zgody MCP lub płatności. Agent nigdy nie odpowiada na niego klawiszami. |
+| **C3 Nieusuwalna niejednoznaczność** | Dwa istotnie różne wyniki spełniają prośbę i nic w repozytorium, jego dokumentacji, planach ani wcześniejszych decyzjach tego nie rozstrzyga. |
+| **C4 Konflikt jakości** | Bramka nie może przejść bez jej osłabienia albo dowody przeczą celowi lub założeniom planu w sposób, którego zakres zadania nie może naprawić. |
+| **C5 Szkoda** | Niewyjaśniona utrata lub uszkodzenie współdzielonego stanu, danych albo pracy innego agenta. |
+| **C6 Warunki** | Kwestie prawne, licencyjne, warunków dostawcy lub prywatności. |
+| **C7 Wyczerpana pojemność** | Żadne konto w puli zadeklarowanej przez programistę nie ma zapasu i żadne nie odnowi się w horyzoncie planu. |
+
+**Rozstrzygane autonomicznie** (lista niewyczerpująca): podejście do implementacji, nazewnictwo, struktura, testy i dokumentacja; kolejność i podział zadań w ramach planu; ponowienia i naprawy w obrębie powierzchni dotkniętej zadania; naprawienie problemu środowiska, który agent może naprawić — brakującego lokalnego narzędzia, locale, nieaktualnej pamięci podręcznej — zamiast zgłaszania go; zapisanie błędu, który dowodnie istnieje na gałęzi bazowej, zamiast jego eskalacji (warunek zatrzymania 1 nadal dotyczy własnych błędów zmiany); wybór konta lub dostawcy z puli; uruchamianie, ponowne uruchamianie i zamykanie własnych agentów; przekazanie i sukcesja; wybór jednej z kilku równoważnych opcji (zalecanej).
+
+Trzy granice utrzymują autonomię w uczciwości:
+
+1. **Autonomia nigdy nie zamyka ludzkiej bramki.** Kryterium lub punkt kontrolny, który wymaga ludzkiej akceptacji, spełnia wyłącznie ten człowiek, nigdy stała instrukcja „bądź autonomiczny" ani `trust`.
+2. **Dosłowne słowa programisty wygrywają.** Gdy zalecana opcja przeczy temu, o co programista dosłownie prosił, dostarcz odwracalną opcję, która respektuje prośbę, i zapisz rekomendację (C3, jeśli odwracalna opcja nie istnieje).
+3. **Uprawnienia nie są przechodnie.** Przekazana dalej zgoda nie dodaje uprawnień; agent sam odczytuje autoryzację planu. Ludzkie uprawnienia są przechowywane dosłownie w folderze planu; agent, który je przekazuje, zapisuje „przekazane przez `<agent>`".
+
+**Grupuj pytania.** Krytyczne kwestie, które mogą poczekać, są zbierane i zadawane razem w jednym zaplanowanym punkcie, każda z zalecaną wartością domyślną, aby programista odpowiedział raz. **W przebiegu z wieloma agentami krytyczna kwestia blokuje swój łańcuch zależności, a nie cały przebieg:** prowadzący odstawia zablokowane zadanie — jego rekord `blocked` w `state.json`, wypełniony jak w warunkach zatrzymania powyżej, jest eskalacją, wysyłaną raz kanałem raportowania — utrzymuje pracę każdego niezależnego agenta i wznawia łańcuch, gdy programista odpowie. Warunki zatrzymania pozostają regułą dla pojedynczego planu; prowadzący stosuje je dla każdego łańcucha osobno. Jak stosuje to rój agentów, opisuje [Autonomia roju](/methodology/07-swarm-autonomy).

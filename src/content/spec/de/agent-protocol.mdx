@@ -120,3 +120,27 @@ Anhalten ist Erfolg, kein Versagen: Der blockierte Eintrag ist die Eskalationsna
 ### Geplante Fortsetzung
 
 Auf Plattformen mit Scheduling — OpenClaw-Heartbeat oder Cron, Hermes-Cron, Cloud-Agenten-Aufwachen — MUSS die Fortsetzung wie folgt ausgedrückt werden: *aufwachen → DWP-Wiederaufnahme-Protokoll ausführen → wenn `blocked`, berichten und freigeben → sonst die nächste atomare Aufgabe ausführen → die Zustandsschicht aktualisieren → freigeben.* Der Plan, nicht die Sitzung, ist die Einheit der Kontinuität; ein Plan MUSS den Neustart der Plattform, den Modellwechsel oder die Übernahme durch einen anderen Agenten im nächsten Turn überleben.
+
+### Eskalationstaxonomie
+
+Alles, was unten nicht als **kritisch** aufgeführt ist, entscheidet der Agent: Er untersucht, wählt die empfohlene Option, **hält die Entscheidung fest** — in `PROGRESS.md` unter „Decisions" oder in `decisions[]` eines Übergabepakets: die Optionen, die Wahl, die Begründung und wie sie rückgängig zu machen ist — und arbeitet weiter. Der Test ist mechanisch: Eine Eskalation MUSS ihre Klasse nennen; eine Frage, die keine nennt, ist eine Entscheidung, die der Agent schuldet. Dies ist §7.5 von `AGENT_PROTOCOL.md` des Pakets.
+
+| Klasse | Kritisch — den Entwickler fragen, mit der Untersuchung, den Optionen und einer Empfehlung |
+| --- | --- |
+| **C1 Autorität** | Eine Aktion außerhalb der Autorisierung oder des Umfangs des Plans oder an einem Zustimmungs-Checkpoint: destruktive oder irreversible Operationen, Produktions-Deployments, Veröffentlichungen oder Releases über den Plan hinaus, Nachrichten an Personen außerhalb der Agenten des Plans, Ausgaben oder Abrechnung, Sicherheitslage oder Zugriff auf Geheimnisse. |
+| **C2 Zustimmungsbildschirm** | Jeder Berechtigungs-, Bypass-Permissions-, Anmelde-, Zugangsdaten-, MCP-Zustimmungs- oder Zahlungsbildschirm. Nie von einem Agenten per Tastendruck beantwortet. |
+| **C3 Unauflösbare Mehrdeutigkeit** | Zwei wesentlich verschiedene Ergebnisse erfüllen die Anfrage, und nichts im Repository, in seinen Dokumenten, den Plänen oder früheren Entscheidungen klärt es. |
+| **C4 Qualitätskonflikt** | Ein Gate kann nicht bestehen, ohne es abzuschwächen, oder Evidenz widerspricht dem Ziel oder den Annahmen des Plans auf eine Weise, die der Umfang der Aufgabe nicht beheben kann. |
+| **C5 Schaden** | Unerklärter Verlust oder unerklärte Beschädigung von geteiltem Zustand, Daten oder der Arbeit eines anderen Agenten. |
+| **C6 Bedingungen** | Rechts-, Lizenz-, Anbieterbedingungs- oder Datenschutzfragen. |
+| **C7 Kapazität erschöpft** | Kein Konto im vom Entwickler deklarierten Pool hat Spielraum, und keines wird innerhalb des Horizonts des Plans zurückgesetzt. |
+
+**Autonom entschieden** (nicht abschließend): Implementierungsansatz, Benennung, Struktur, Tests und Dokumentation; Reihenfolge und Aufteilung von Aufgaben innerhalb des Plans; Wiederholungen und Reparaturen innerhalb der Touched Surface der Aufgabe; das Beheben eines Umgebungsproblems, das der Agent beheben kann — ein fehlendes lokales Werkzeug, eine Locale, ein veralteter Cache —, statt es zu melden; das Festhalten eines Fehlers, der nachweislich auf dem Basis-Branch existiert, statt ihn zu eskalieren (Stopbedingung 1 gilt weiterhin für die eigenen Fehler der Änderung); die Wahl eines Kontos oder Anbieters aus dem Pool; das Starten, Neustarten und Schließen seiner eigenen Agenten; Übergabe und Nachfolge; welche von mehreren gleichwertigen Optionen zu nehmen ist (die empfohlene).
+
+Drei Grenzen halten die Autonomie ehrlich:
+
+1. **Autonomie schließt nie ein menschliches Gate.** Ein Kriterium oder Checkpoint, das eine menschliche Freigabe nennt, wird nur von diesem Menschen erfüllt, nie durch eine dauerhafte „sei autonom"- oder `trust`-Anweisung.
+2. **Der Wortlaut des Entwicklers gewinnt.** Widerspricht die empfohlene Option dem, was der Entwickler wörtlich verlangt hat, wird die reversible Option geliefert, die der Anfrage entspricht, und die Empfehlung festgehalten (C3, wenn keine reversible Option existiert).
+3. **Autorität ist nicht transitiv.** Eine weitergeleitete Genehmigung fügt keine Autorität hinzu; ein Agent liest die Autorisierung des Plans selbst. Menschliche Autorität wird wörtlich im Plan-Ordner aufbewahrt; ein Agent, der sie weiterleitet, hält „weitergeleitet von `<agent>`" fest.
+
+**Fragen bündeln.** Kritische Punkte, die warten können, werden gesammelt und an einem geplanten Punkt gemeinsam gestellt, jeder mit seiner empfohlenen Vorgabe, sodass der Entwickler einmal antwortet. **In einem Lauf mit mehreren Agenten blockiert ein kritischer Punkt seine Abhängigkeitskette, nicht den Lauf:** Der Lead parkt die blockierte Aufgabe — ihr `blocked`-Eintrag in `state.json`, befüllt wie in den Stopbedingungen oben, ist die Eskalation, einmal über den Berichtskanal gesendet —, hält jeden unabhängigen Agenten am Arbeiten und setzt die Kette fort, wenn der Entwickler antwortet. Die Stopbedingungen bleiben die Regel für einen einzelnen Plan; der Lead wendet sie pro Kette an. Wie ein Schwarm von Agenten dies anwendet, beschreibt [Schwarmautonomie](/methodology/07-swarm-autonomy).

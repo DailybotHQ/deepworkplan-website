@@ -117,6 +117,19 @@ La sicurezza è di prima classe allo stesso modo dei test, e segue lo stesso mod
 
 Questa disciplina per attività non sostituisce il passaggio di sicurezza del Final Review: i controlli per attività intercettano i problemi nel commit in cui nascono, mentre il gate finale verifica l'intero piano — incluse le stesse attività di test e documentazione.
 
+## L'asticella della qualità — verificata, non dichiarata
+
+L'identità di DWP è l'eccellenza verificata: correttezza, chiarezza, semplicità, sicurezza, prestazioni e scalabilità, **dimostrate, non dichiarate**. Queste regole si applicano a ogni piano e a ogni agente che ne prosegue uno (§5.1.4 di `DWP_SPECIFICATION.md` del pacchetto):
+
+1. **I gate sono ipotesi.** Un gate nuovo o modificato DEVE essere mostrato fallire su un difetto inserito ad arte (o sull'albero precedente alla modifica) prima di fidarsene, e quell'esecuzione fallita viene registrata. Un passaggio vuoto — un binario mancante, un input vuoto, zero file o test corrispondenti, un log vuoto, `|| true` su un gate finale — è un fallimento. Le pipeline vengono eseguite con `pipefail` (o lo stato di uscita viene preservato in altro modo). Un gate che cerca solo nel testo scritto dall'agente stesso è una protezione strutturale, **non** un'evidenza osservata del comportamento.
+2. **Confrontare con la base.** Prestazioni, copertura e dimensioni vengono confrontate con il branch di base (o con la revisione di partenza del piano), non solo con una soglia; una regressione rispetto alla base viene segnalata anche quando la soglia regge ancora.
+3. **Misurare prima.** L'attività 1 di una correzione, di un audit o di un'ottimizzazione verifica la propria premessa e lo strumento di misura prima di modificare qualsiasi cosa.
+4. **Progettare prima di costruire.** Una modifica non banale mette per iscritto interfacce, modalità di guasto, postura di sicurezza e piano di test prima del codice.
+5. **Onestà dell'ambiente.** Un gate viene eseguito in un ambiente dichiarato — una classe di comando wrapper per i container, una directory di lavoro esplicita, un locale fisso dove l'output viene confrontato. Un fallimento dell'ambiente è un blocco da correggere o segnalare — mai un passaggio, e mai attribuito alla modifica.
+6. **Revisione prima del passo irreversibile.** L'AI Diff Review locale del Final Review viene eseguita prima di qualsiasi merge, tag o pubblicazione che il piano esegue, rispetto alla baseline del piano. Il completamento del piano mantiene il contratto di non blocco della revisione (un revisore mancante è un rilievo registrato `local reviewer not installed`); il passo di merge, tag o pubblicazione resta però bloccato su quel rilievo finché il revisore non viene eseguito o lo sviluppatore vi rinuncia esplicitamente — mai un salto silenzioso. Le modifiche alla metodologia, al protocollo e quelle rilevanti per la sicurezza DOVREBBERO ricevere anche un revisore di un altro fornitore o agente.
+7. **Evidenze snelle.** `analysis_results/` contiene report, log, digest e puntatori — mai prodotti, alberi di dipendenze o copie vendorizzate; un prodotto riceve il proprio repository o una superficie toccata dichiarata.
+8. **La continuità non abbassa mai l'asticella.** Un agente successore eredita gli stessi gate; un pacchetto di consegna non chiude alcun criterio, non allenta alcun gate e non salta alcuna revisione ([Autonomia dello sciame](/methodology/07-swarm-autonomy)).
+
 ## Ciclo di vita del piano — il Final Review
 
 Ogni piano conforme redatto con questa versione termina con esattamente **un'unica** attività obbligatoria: il **Final Review** (attività N). Due responsabilità che le versioni precedenti collocavano in attività di chiusura separate sono ricollocate: le decisioni sulle skill si spostano nell'attività che ha prodotto il pattern, e l'Executive Report diventa un artefatto facoltativo, su richiesta. Nulla del passaggio di sicurezza viene allentato.

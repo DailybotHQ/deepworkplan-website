@@ -117,6 +117,19 @@ Güvenlik, testlerle tam olarak aynı şekilde birinci sınıftır ve aynı iki 
 
 Bu görev bazında disiplin, Final Review'in güvenlik incelemesinin yerini almaz: görev bazında denetimler sorunları doğdukları commit'te yakalar, son kapı ise tüm planı — test ve dokümantasyon görevlerinin kendileri dahil — denetler.
 
+## Kalite çıtası — iddia edilmiş değil, doğrulanmış
+
+DWP'nin kimliği doğrulanmış mükemmelliktir: doğruluk, açıklık, sadelik, güvenlik, performans ve ölçeklenebilirlik, **iddia edilmiş değil, kanıtlanmış**. Bu kurallar her plana ve bir planı sürdüren her ajana uygulanır (paketin `DWP_SPECIFICATION.md` dosyasının §5.1.4 bölümü):
+
+1. **Kapılar hipotezdir.** Yeni veya değiştirilmiş bir kapının, güvenilmeden önce ekilmiş bir kusurda (veya değişiklik öncesi ağaçta) başarısız olduğu GÖSTERİLMEK ZORUNDADIR ve bu başarısız çalıştırma kaydedilir. Boş bir geçiş — eksik bir ikili dosya, boş bir girdi, eşleşen sıfır dosya veya test, boş bir günlük, son bir kapıda `|| true` — bir başarısızlıktır. Boru hatları `pipefail` ile çalışır (ya da çıkış durumu başka bir yolla korunur). Yalnızca ajanın kendi yazdığı metni arayan bir kapı yapısal bir korumadır, davranışın gözlemlenmiş kanıtı **değildir**.
+2. **Temelle karşılaştırın.** Performans, kapsam ve boyut yalnızca bir eşikle değil, temel dalla (veya planın başlangıç revizyonuyla) karşılaştırılır; temele göre bir gerileme, eşik hâlâ tutsa bile raporlanır.
+3. **Önce ölçün.** Bir düzeltmenin, denetimin veya optimizasyonun 1. görevi, herhangi bir şey değiştirilmeden önce öncülünü ve ölçüm aracını doğrular.
+4. **İnşadan önce tasarım.** Önemsiz olmayan bir değişiklik, koddan önce arayüzlerini, hata modlarını, güvenlik duruşunu ve test planını yazıya döker.
+5. **Ortam dürüstlüğü.** Bir kapı bildirilmiş bir ortamda çalışır — konteynerler için bir sarmalayıcı komut sınıfı, açık bir çalışma dizini, çıktının karşılaştırıldığı yerlerde sabit bir yerel ayar. Bir ortam hatası, düzeltilecek ya da raporlanacak bir engeldir — asla bir geçiş değildir ve asla değişikliğe atfedilmez.
+6. **Geri alınamaz adımdan önce inceleme.** Final Review'in yerel AI Diff Review'u, planın gerçekleştirdiği her birleştirme, etiket veya yayımlamadan önce, planın temel çizgisine karşı çalışır. Plan tamamlama, incelemenin asla engellememe sözleşmesini korur (eksik bir inceleyici, kaydedilmiş bir `local reviewer not installed` bulgusudur); birleştirme, etiket veya yayımlama adımının kendisi ise inceleyici çalışana ya da geliştirici açıkça feragat edene kadar bu bulgu nedeniyle engelli kalır — asla sessizce atlanmaz. Metodoloji, protokol ve güvenlikle ilgili değişiklikler ayrıca başka bir sağlayıcının veya ajanın inceleyicisini de ALMALIDIR.
+7. **Yalın kanıt.** `analysis_results/`, raporları, günlükleri, özetleri ve işaretçileri tutar — asla ürünleri, bağımlılık ağaçlarını veya vendored kopyaları değil; bir ürün kendi deposunu ya da bildirilmiş bir dokunulan yüzeyi alır.
+8. **Süreklilik çıtayı asla düşürmez.** Halef ajan aynı kapıları devralır; bir devir paketi hiçbir kriteri kapatmaz, hiçbir kapıyı gevşetmez ve hiçbir incelemeyi atlamaz ([Sürü özerkliği](/methodology/07-swarm-autonomy)).
+
 ## Plan yaşam döngüsü — Final Review
 
 Bu sürüm altında yazılmış uyumlu her plan, tam olarak **bir** zorunlu görevle biter: **Final Review** (görev N). Önceki sürümlerin ayrı kapanış görevlerine yerleştirdiği iki sorumluluk yeniden konumlandırılır: skill kararları, örüntüyü üreten göreve taşınır ve Executive Report isteğe bağlı, talep üzerine bir yapıt hâline gelir. Güvenlik incelemesinde hiçbir şey gevşetilmez.
