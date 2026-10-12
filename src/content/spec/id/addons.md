@@ -31,7 +31,7 @@ Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wa
 
 ### Devcontainer (addon pertama)
 
-Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.3.0`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
+Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.3.1`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
 
 - **Halaman kit:** [Devcontainer](/kit/devcontainer)
 - **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya, dan mesin Herdr per container dengan tata letak standar
@@ -82,7 +82,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 
 ### Herdr (addon keenam)
 
-Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.2.1`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
+Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.2.2`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
 
 - **Halaman kit:** [Herdr](/kit/herdr)
 - **Yang ditambahkan:** sebuah rencana dapat menyerahkan tugas terbatas kepada coding agent di pane [Herdr](https://herdr.dev) lain, di mesin yang sama atau mesin yang dijangkau Herdr melalui SSH, dan mencatat satu-satunya balasan yang diizinkan di jurnal

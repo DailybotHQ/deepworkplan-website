@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer(첫 번째 애드온)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v0.3.0`로 고정, 인터페이스 `2`)의 얇은 통합 계층: `dck init`이 저장소 자체의 컨테이너로 저장소에 렌더링하는 Dev Containers 템플릿과 `dck-dockerfile` 스킬.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v0.3.1`로 고정, 인터페이스 `2`)의 얇은 통합 계층: `dck init`이 저장소 자체의 컨테이너로 저장소에 렌더링하는 Dev Containers 템플릿과 `dck-dockerfile` 스킬.
 
 - **키트 페이지:** [Devcontainer](/kit/devcontainer)
 - **추가 내용:** digest로 고정된 런타임 공식 이미지 기반의 `docker/local/<service>/Dockerfile`(`python-3.13`, `node-24` 또는 `debian`, 공유 베이스 이미지 없음), `dck` 런처(`up`, `shell`, `rebuild`, `doctor`) 위에서 동작하는 `dev.sh`, 옵트인 레이어로서의 코딩 에이전트, 루프백 전용 포트, 컨테이너 안에 키 없이 호스트의 에이전트를 통해 SSH로 사용하는 git, 표준 레이아웃을 갖춘 컨테이너별 Herdr 머신
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr(여섯 번째 애드온)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v0.2.1`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v0.2.2`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Herdr](/kit/herdr)
 - **추가하는 것:** 계획이 경계가 정해진 작업을 같은 머신 또는 Herdr가 SSH로 도달하는 머신의 다른 [Herdr](https://herdr.dev) 페인에 있는 코딩 에이전트에게 넘기고, 승인된 단일 응답을 저널에 기록할 수 있음

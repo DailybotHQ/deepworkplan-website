@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (первый аддон)
 
-Тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён на `v0.3.0`, интерфейс `2`): шаблон Dev Containers, который `dck init` разворачивает в репозитории как его собственный контейнер, а также навык `dck-dockerfile`.
+Тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён на `v0.3.1`, интерфейс `2`): шаблон Dev Containers, который `dck init` разворачивает в репозитории как его собственный контейнер, а также навык `dck-dockerfile`.
 
 - **Страница kit:** [Devcontainer](/kit/devcontainer)
 - **Что добавляет:** `docker/local/<service>/Dockerfile` на основе официального образа среды выполнения, закреплённого по digest (`python-3.13`, `node-24` или `debian`, без общего базового образа), `dev.sh` поверх лаунчера `dck` (`up`, `shell`, `rebuild`, `doctor`), агентов для программирования как подключаемый по желанию слой, порты только на loopback, git по SSH через агент хоста без ключей внутри и машины Herdr для каждого контейнера со стандартной раскладкой
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr (шестой аддон)
 
-Тонкий интегратор [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закреплён на `v0.2.1`, протокол `1`) — **интерактивный** транспорт делегирования для планов v7.
+Тонкий интегратор [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закреплён на `v0.2.2`, протокол `1`) — **интерактивный** транспорт делегирования для планов v7.
 
 - **Страница kit:** [Herdr](/kit/herdr)
 - **Что добавляет:** план может передать ограниченную задачу агенту для кода в другой панели [Herdr](https://herdr.dev) — на той же машине или на машине, до которой Herdr дотягивается по SSH, — и записать его единственный авторизованный ответ в журнал

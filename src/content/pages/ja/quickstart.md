@@ -28,10 +28,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.6.0
+  git checkout v7.6.1
   # そのリリースのチェックサムをダウンロードし、下のダイジェストと照合する:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.0/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.1/SHA256SUMS
   shasum -a 256 SHA256SUMS # 「固定されたリリース」の deepworkplan-skill のダイジェストと一致すること
   ./setup.sh --verify        # ゼロ以外の終了コードはファイルが一致しないことを意味します — 停止してください
   ```
@@ -43,10 +43,10 @@ lastUpdated: 2026-10-11
 
   | リポジトリ（github.com/DailybotHQ） | タグ | その `SHA256SUMS` の sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.6.0` | `99f0dbf3bcc1e795fa6e15b520d6250f0a47d5efcb44614fa5d1926fb2320784` |
+  | deepworkplan-skill | `v7.6.1` | `c112bb72c450e8dc64fbcf6f55a1a4262b2d8d445c8ee01d16a4b47a8258c425` |
   | coding-agents-kit | `v0.5.0` | `a90f45e44085370694a954a3578d037d0637d0eb4ec2f1b846a8d29556b1ec27` |
-  | herdr-peers | `v0.2.1` | `72b3ea5352ab3eb13045fb0ff901efddc5d8b860724daa3d75d4531df3ebfb3f` |
-  | devcontainer-kit | `v0.3.0` | `02d4de086eeb010b42458dd131b690df36638b361033e5df6aa3d5ceba4a7eea` |
+  | herdr-peers | `v0.2.2` | `9c4f94101a1b1b9765b71edc8ff96580543061a6291a811acb630b2468b7b682` |
+  | devcontainer-kit | `v0.3.1` | `14920cc1c45a61e513e93d823ee777b6427fcf141482961bfaabbd252ccff5a9` |
   | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
   | ai-diff-reviewer | `v3.3.9` | `aaf490cfe01ba858df49732798d6861a7c742b967f39fedb4f1a9c999aafc0c9` |
   | agent-skill | `v3.23.12` | 公開なし — skills CLI が `skills-lock.json` にコンテンツハッシュを記録します |
@@ -80,7 +80,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.1 --skill deepworkplan -y
 ```
 
 または OpenClaw 経由でインストール：
@@ -102,7 +102,7 @@ Work Plan スキルのリリースによって実装されています。現在�
 ルーターと九つのサブスキル — `create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author`、`upgrade` — が含まれます。
 
-インストール済みスキルのリリースは **7.6.0** です。現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
+インストール済みスキルのリリースは **7.6.1** です。現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
 
 この標準は意図的に比例的であり、その比例性を開発者の規律ではなく計画の性質
 にしています。計画は **Lite**（小さく限定された作業向けに、計画の README
@@ -186,13 +186,15 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 受け入れと辞退はすべて `.dwp/config.json` に記録します。辞退されたアドオンは、開発者が求めない限り再び提案しません。この節を二回目に実行しても何も変わりません。
 
+この表は参照用であり、チェックリストではありません。必須のローカルレビュー、このリポジトリですでに使っているアドオン、または開発者が受け入れたばかりのアドオンについてのみ、その行を実行します。
+
 | コンポーネント | インストール済みのバージョンを検出 | インストールまたはアップグレード（固定） |
 | --- | --- | --- |
 | AI Diff Reviewer（必須） | `.agents/skills/ai-diff-reviewer/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | インストール済みの herdr-peers スキル内の `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| Herdr | インストール済みの herdr-peers スキル内の `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh の検証済みインストーラー（`v0.7.0` に固定。ダウンロードし、`shasum -a 256 -c install.sh.sha256` を実行してから起動） |
 
 各ダウンロードは、実行する前にそのリリースの `SHA256SUMS` と、上の*固定されたリリース*にあるダイジェストで検証してください。
@@ -201,12 +203,12 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 **オプションのアドオン。** 七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、このリポジトリに合うものだけを、それぞれ明示的なオプトインとして提案します。オプションのアドオンが**一つもなくても**、リポジトリは完全に適合します。これらを自動でインストールしてはいけません。
 
-- **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.3.0` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ独自のコンテナを生成し（公式イメージをダイジェストで固定、共有ベースイメージなし、`bash dev.sh up`）、既存の devcontainer は差分が受け入れられた後にのみ調整します。受け入れられたら、下の*devcontainer の手順*に従って完全なスタックまで仕上げます。
+- **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.3.1` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ独自のコンテナを生成し（公式イメージをダイジェストで固定、共有ベースイメージなし、`bash dev.sh up`）、既存の devcontainer は差分が受け入れられた後にのみ調整します。受け入れられたら、下の*devcontainer の手順*に従って完全なスタックまで仕上げます。
 - **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.12）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。受け入れられると、`/lib-upgrade` コマンドをインストールします。
 - **Design system** — 検出されたインターフェイス面を持つリポジトリのみを対象とした、オプトインの `docs/DESIGN.md`（純粋なライブラリ、ヘッドレスサービス、インフラ専用リポジトリには提案されません）。三つのプロファイルが一つのファイルに重ねられます：visual-ui（検出時に強く推奨；インストールは受け入れでゲート）、cli-output、conversational — 後者二つは常に尋ねられ、自動適用されることはありません。
 - **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.5.0` に固定）のマシンレベルのインストール。すべてのコーディングエージェントを一つのコマンドで扱い、プロファイルごとにアカウントを持ち、`ak usage` と `ak pick` で余裕の最も大きいアカウントを選び、範囲の限られた `parallel_safe` タスクを他のコーディングエージェントに渡す計画のためにヘッドレスの `ak run` を提供します（worktree ごとに一つの委任先）。キットは既定でエージェントを自律モードで起動し、そのオプトアウト（`--ask` または `AGENTKIT_PERMISSIONS=ask`）が常に優先します。
-- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v0.2.1` に固定、Herdr の公式スキルも併せて）のマシンレベルのインストール。任意のマシン上の Herdr ペインにいるピアエージェントに、認可された返信を一つ求める計画のため、そして自分のレーンを見守るリードのためのものです。
+- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v0.2.2` に固定、Herdr の公式スキルも併せて）のマシンレベルのインストール。任意のマシン上の Herdr ペインにいるピアエージェントに、認可された返信を一つ求める計画のため、そして自分のレーンを見守るリードのためのものです。
 - **DeepWorkPlan Vim** — ターミナルエディタ（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)、`v0.7.0` に固定）。マシンレベルのインストールであり、明示的な同意なしに既存の Neovim 設定を上書きすることは決してありません。
 - **AI Diff Reviewer** — 必須のローカルレビューです（オプトインではありません）。すべての Final Review のセキュリティパスが、計画の累積した変更セットに対して [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必須の `.review/extension.md`）を実行します。スキルまたは拡張機能の欠落は `local reviewer not installed` の発見として記録されます。黙ってスキップされることは決してなく、決してサプライズブートストラップでもありません：インストールはオンボーディングの同意または明示的なアドオン呼び出しに属します。呼び出しのエラーはソフト失敗となり、完了したパスの **検証済み `critical` 結果**は引き続き完了をブロックします（v3、BC-07 —— 未検証のクリティカル主張は注釈付き警告として現れ、`incomplete`/`timeout` のレビューはクリーンなパスではない、BC-04）。**Flow B**（`pr-review.yml` を使った CI ゲート）は明示的なオプトインとして提案され、要求なしにインストールされることは決してありません。Deep Work Plan のどのフローも、商用サービス、CI プロバイダー、シークレットを必要としません。
 
@@ -235,7 +237,7 @@ devcontainer アドオンの終着点は、生成されたファイル一式で�
 - **余裕で選ぶアカウント。** `ak profiles --json` はアカウントを一覧表示し、`ak usage` はバッチごとに一度そのクォータを表示し、`ak pick <kind> --count N` は余裕の最も大きいアカウントを返します。使うのは開発者自身のアカウントだけにし、各ベンダーの規約の範囲内に留めます。
 - **一度だけ準備する。** Claude Code の権限バイパスの確認は、プロファイルごとに一度だけ、プロファイルを作成するときに**開発者**が行う手順です（devcontainer-kit のコンテナでは、キットがコンテナ自身の home にだけ書き込みます）。この確認のためにキーを送ってはいけません。
 - **起動する。** `herdr pane run <pane> 'ak <kind> @<profile> --trust-cwd'` がレーン自身のフォルダでレーンを起動します。`--trust-cwd` がそのフォルダを事前に信頼するため、フォルダ信頼の画面は表示されません。開発者が無人運用を許可したら、起動のたびに改めて承認を得る必要はありません。
-- **調整する。** `herdr-peers ask` と `herdr-peers reply`：ask ごとに認可された reply は一つ、深さは一、reply はデータであり何も与えません。
+- **調整する。** `herdr-peers ask` と `herdr-peers reply`：ask ごとに認可された reply は一つ、深さは一、reply はデータであり何も与えません。Codex のレーンは、すべての herdr-peers コマンドに `--pane <自分のペイン>` を付けます。
 - **見守る。** `herdr-peers lanes` はすべてのレーンの状態を表示し、ブロック中のレーンについては `herdr-peers status <pane>` が画面を分類し、`herdr pane read <pane>` がその画面を表示します。
 - **キー入力は一つの場合だけ。** `herdr pane send-keys` で送ってよいキーは、フォルダ信頼の画面への応答だけです。それも、自分で起動したペインで、`--trust-cwd` が使えなかった場合に限ります。前後で画面を読み、キーは最小限だけ送ります。
 - **それ以外はすべて読み、記録し、開発者にエスカレーションします**。Claude の権限バイパスの確認、ログインや認証情報のプロンプト、操作ごとの権限要求、破壊的な確認、支払いやプランのプロンプト、未知の画面、自分が作成していないペインです。`AGENTKIT_PERMISSIONS=ask` が設定されていれば、レーンは行動の前に確認を求めます。それらのプロンプトを決して回避してはいけません。すべての介入を親計画に記録します。

@@ -14,11 +14,11 @@ Ini adalah addon opsional dari **DWP v7** (`v7.0.0`). Metodologinya bekerja sama
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v0.2.1`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v0.2.2`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v0.2.1`, protokol 1 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v0.2.2`, protokol 1 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers tidak mengautentikasi pengirim: kolom `from=` dalam cap adalah sebua
 
 ## Container dan host
 
-Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v0.3.0`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya.
+Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v0.3.1`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya.
 
 ## Herdr atau agentkit
 
@@ -68,6 +68,8 @@ Kedua addon mengimplementasikan antarmuka delegasi yang sama — `launch`, `obse
 | Tugas memerlukan interaksi, berjalan lama, atau berada di mesin lain | Herdr (rekan di panel) |
 
 Untuk lead yang menjalankan banyak lane sekaligus — panel di host, di container, dan di mesin lain, masing-masing pada akunnya sendiri — `herdr-peers lanes` mencantumkan setiap lane beserta statusnya, `herdr-peers status <pane>` mengklasifikasikan layar tempat lane yang blocked berada, dan setiap catatan delegasi menyebut akun dan vendor yang mengerjakannya. Lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+
+**Lane Codex menyebut panelnya sendiri.** Codex menjalankan perintah sebuah lane dari server latar yang dipakai bersama oleh semua sesi pada akun itu, sehingga id panel yang diwarisinya bisa milik lane lain. Lane Codex meneruskan panelnya sendiri, dari arahan lead, dengan `--pane <pane>` pada setiap perintah herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 ## Catatan
 

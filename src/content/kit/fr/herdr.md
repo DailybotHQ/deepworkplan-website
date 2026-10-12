@@ -14,11 +14,11 @@ C’est un addon facultatif de **DWP v7** (`v7.0.0`). La méthodologie fonctionn
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v0.2.1`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v0.2.2`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v0.2.1`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v0.2.2`, protocole 1 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers n’authentifie pas l’expéditeur : le champ `from=` d’une estam
 
 ## Les conteneurs et l’hôte
 
-Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v0.3.0`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais.
+Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v0.3.1`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais.
 
 ## Herdr ou agentkit
 
@@ -68,6 +68,8 @@ Les deux addons implémentent la même interface de délégation — `launch`, `
 | La tâche nécessite une interaction, dure longtemps ou se trouve sur une autre machine | Herdr (un pair dans un panneau) |
 
 Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des panneaux sur l’hôte, dans des conteneurs et sur d’autres machines, chacun sur son propre compte —, `herdr-peers lanes` liste chaque couloir avec son état, `herdr-peers status <pane>` classe l’écran sur lequel se trouve un couloir bloqué, et chaque enregistrement de délégation nomme le compte et le fournisseur qui l’ont porté. Voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
+
+**Les lanes Codex nomment leur panneau.** Codex exécute les commandes d’une lane depuis un serveur d’arrière-plan partagé par toutes les sessions de ce compte : l’identifiant de panneau hérité peut donc appartenir à une autre lane. Une lane Codex passe son propre panneau, indiqué dans la consigne du lead, avec `--pane <pane>` sur chaque verbe de herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 ## Notes
 

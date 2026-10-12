@@ -8,37 +8,37 @@
     "ai-diff-reviewer": {
       "enabled": true,
       "note": "required local review: vendored skill + CI self-review (.review/extension.md)",
-      "version": "v3.3.9"
+      "version": "v3.3.10"
     },
     "dailybot": {
       "enabled": true,
       "note": "repo-level: vendored skill + lifecycle hooks in .agents/settings.json (AGENTS.md)",
-      "version": "v3.23.12"
+      "version": "v3.23.13"
     },
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.6.0"
+      "version": "v7.6.1"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.6.0"
+      "version": "v7.6.1"
     },
     "devcontainer": {
       "enabled": true,
-      "note": "dck container: docker/local/dwpwebsite (dck init)",
-      "version": "v0.2.11"
+      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v0.3.1; host kit v0.3.1)",
+      "version": "v0.3.1"
     },
     "herdr": {
       "enabled": true,
-      "note": "herdr-peers pinned; Herdr runs in this container",
-      "version": "v0.1.0"
+      "note": "herdr-peers v0.2.2 installed in this container by the dck image; Herdr runs in this container",
+      "version": "v0.2.2"
     },
     "vim": {
       "enabled": true,
-      "note": "deepworkplan-vim installed as the container editor",
-      "version": "v0.6.0"
+      "note": "deepworkplan-vim v0.7.0 installed as the container editor (dck editor layer)",
+      "version": "v0.7.0"
     }
   },
   "benchmark": {

@@ -67,6 +67,7 @@ As frentes e o líder conversam pelo [herdr-peers](/pt/kit/herdr): uma **consult
 - **Profundidade um.** Uma resposta nunca é respondida, e uma frente não delega adiante. O fan-out por chamador é limitado, a quatro pares por padrão.
 - **Dados, não instruções.** Uma resposta não concede nada que o receptor já não tivesse. A afirmação de uma frente de que seu gate passou é verificada rodando o gate.
 - **Um registro de quem fez o quê.** Cada registro de delegação nomeia a conta e o fornecedor da frente, então o plano pai mostra qual conta realizou qual trabalho.
+- **Lanes do Codex nomeiam seu painel.** O Codex executa os comandos de uma lane a partir de um servidor em segundo plano compartilhado por todas as sessões daquela conta, então o id de painel herdado pode ser de outra lane. Uma lane do Codex passa o próprio painel, tirado do briefing do líder, com `--pane <pane>` em cada verbo do herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 O líder pode ver toda a orquestra de uma vez: `herdr-peers lanes` lista cada frente com seu estado, e o [DeepWorkPlan Vim](/pt/kit/vim) mostra as frentes de um plano orquestrador ao lado do próprio plano (`:DwpLanes`).
 

@@ -67,6 +67,7 @@ Lanes und Lead kommunizieren über [herdr-peers](/de/kit/herdr): Ein **ask** tr�
 - **Tiefe eins.** Auf eine reply wird nie geantwortet, und eine Lane delegiert nicht weiter. Der Fan-out pro Aufrufer ist begrenzt, standardmäßig auf vier Peers.
 - **Daten, keine Anweisungen.** Eine reply gewährt nichts, was der Empfänger nicht schon hatte. Die Behauptung einer Lane, ihr Gate sei bestanden, wird geprüft, indem das Gate ausgeführt wird.
 - **Ein Nachweis, wer was getan hat.** Jeder Delegationsnachweis nennt das Konto und den Anbieter der Lane, sodass der übergeordnete Plan zeigt, welches Konto welche Arbeit getragen hat.
+- **Codex-Lanes nennen ihr Pane.** Codex führt die Befehle einer Lane über einen Hintergrundserver aus, den sich alle Sitzungen dieses Kontos teilen; die geerbte Pane-ID kann also zu einer anderen Lane gehören. Eine Codex-Lane übergibt ihr eigenes Pane aus dem Auftrag des Leads mit `--pane <pane>` bei jedem herdr-peers-Befehl (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 Der Lead kann das gesamte Orchester auf einen Blick sehen: `herdr-peers lanes` listet jede Lane mit ihrem Zustand auf, und [DeepWorkPlan Vim](/de/kit/vim) zeigt die Lanes eines Orchestrator-Plans neben dem Plan selbst (`:DwpLanes`).
 

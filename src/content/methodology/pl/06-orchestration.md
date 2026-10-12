@@ -67,6 +67,7 @@ Tory i prowadzący komunikują się przez [herdr-peers](/pl/kit/herdr): **ask** 
 - **Głębokość jeden.** Na reply nigdy się nie odpowiada, a tor nie deleguje dalej. Rozgałęzienie na wywołującego jest ograniczone, domyślnie do czterech peerów.
 - **Dane, nie instrukcje.** Reply nie przyznaje niczego, czego odbiorca jeszcze nie miał. Twierdzenie toru, że jego bramka przeszła, sprawdza się, uruchamiając bramkę.
 - **Zapis tego, kto co zrobił.** Każdy zapis delegacji podaje konto i dostawcę toru, dzięki czemu plan nadrzędny pokazuje, które konto wykonało którą pracę.
+- **Lane’y Codexa podają swój panel.** Codex uruchamia polecenia lane’a z serwera w tle wspólnego dla wszystkich sesji danego konta, więc odziedziczony identyfikator panelu może należeć do innego lane’a. Lane Codexa przekazuje własny panel, wskazany w zleceniu lidera, przez `--pane <pane>` przy każdym poleceniu herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 Prowadzący może zobaczyć całą orkiestrę naraz: `herdr-peers lanes` wyświetla każdy tor z jego stanem, a [DeepWorkPlan Vim](/pl/kit/vim) pokazuje tory planu orkiestratora obok samego planu (`:DwpLanes`).
 

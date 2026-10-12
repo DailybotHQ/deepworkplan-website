@@ -14,11 +14,11 @@ Bu, **DWP v7**'nin (`v7.0.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v0.2.1`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v0.2.2`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v0.2.1` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v0.2.2` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers göndereni doğrulamaz: bir damgadaki `from=` alanı bir iddiadır. 
 
 ## Konteynerler ve ana makine
 
-devcontainer-kit `v0.3.0` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz.
+devcontainer-kit `v0.3.1` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz.
 
 ## Herdr mı agentkit mi
 
@@ -68,6 +68,8 @@ Her iki eklenti de aynı devretme arayüzünü — `launch`, `observe`, `collect
 | Görev etkileşim gerektiriyor, uzun sürüyor ya da başka bir makinede bulunuyor | Herdr (bir bölmedeki eş) |
 
 Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konteynerlerde ve diğer makinelerde, her biri kendi hesabıyla çalışan bölmeler — `herdr-peers lanes` her şeridi durumuyla birlikte listeler, `herdr-peers status <pane>` engellenmiş bir şeridin bulunduğu ekranı sınıflandırır ve her devretme kaydı işi taşıyan hesabı ve sağlayıcıyı belirtir. Bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
+
+**Codex lane’leri kendi panellerini belirtir.** Codex bir lane’in komutlarını o hesaptaki tüm oturumların paylaştığı bir arka plan sunucusundan çalıştırır; bu yüzden devraldığı panel kimliği başka bir lane’e ait olabilir. Bir Codex lane’i, liderin görev tanımında yazan kendi panelini her herdr-peers komutunda `--pane <pane>` ile verir (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 ## Notlar
 

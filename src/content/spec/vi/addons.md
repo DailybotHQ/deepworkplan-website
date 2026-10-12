@@ -31,7 +31,7 @@ Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục b�
 
 ### Devcontainer (addon đầu tiên)
 
-Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.3.0`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
+Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.3.1`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
 
 - **Trang kit:** [Devcontainer](/kit/devcontainer)
 - **Bổ sung:** `docker/local/<service>/Dockerfile` từ image chính thức của runtime được ghim theo digest (`python-3.13`, `node-24` hoặc `debian`, không có image cơ sở dùng chung), `dev.sh` chạy trên trình khởi chạy `dck` (`up`, `shell`, `rebuild`, `doctor`), coding agent như một lớp opt-in, cổng chỉ dùng loopback, git qua SSH thông qua agent của máy host mà không có khóa nào bên trong, và máy Herdr cho mỗi container với bố cục tiêu chuẩn
@@ -82,7 +82,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 ### Herdr (addon thứ sáu)
 
-Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v0.2.1`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
+Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v0.2.2`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
 
 - **Trang kit:** [Herdr](/kit/herdr)
 - **Bổ sung:** một kế hoạch có thể giao một tác vụ có giới hạn cho một coding agent trong một pane [Herdr](https://herdr.dev) khác, trên cùng máy hoặc trên một máy mà Herdr kết nối tới qua SSH, và ghi lại phản hồi được ủy quyền duy nhất của nó vào nhật ký
