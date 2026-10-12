@@ -24,6 +24,7 @@
 #   dck_skills_link                          herdr-peers and Herdr skills into each agent's skills dir
 #   dck_agent_trust                          the workspace trusted by Claude and Codex (autonomy on)
 #   dck_ssh_agent_access                     the mounted host SSH agent socket usable by the user
+#   dck_ssh_copy_keys                        [ssh] copy_keys: the host's ~/.ssh/id_* keys into ~/.ssh
 #   dck_mesh_apply                           peers pushed by `dck` (stdin): ssh config, pinned host
 #                                            keys and Herdr machines; no private key involved
 #   dck_start                                the standard sequence of the above
@@ -34,6 +35,7 @@
 #   DCK_PERSIST_ROOT ($DCK_HOME/.dck/volumes)    DCK_REPO_HOOK
 #   DCK_HOST_PROFILES ("claude codex": ak profiles shared from the host)
 #   DCK_HOST_CODEX (the host's Codex home, mounted)   AGENTKIT_PERMISSIONS
+#   DCK_SSH_COPY_KEYS (1: copy ~/.ssh_host/id_* into ~/.ssh; [ssh] copy_keys)
 # For tests: DCK_ROOT prefixes every system path (/etc, /run) and
 # DCK_SSHD_BIN replaces /usr/sbin/sshd.
 #
@@ -1056,6 +1058,85 @@ dck_herdr_agent_link() {
   fi
 }
 
+# dck_ssh_copy_keys — [ssh] copy_keys (host profile, opt-in): copy the host's
+# ~/.ssh/id_* keys (mounted read-only at ~/.ssh_host by `dck up`'s runtime
+# overlay, which also sets DCK_SSH_COPY_KEYS=1) into the user's ~/.ssh, the
+# state volume: private keys 0600, .pub 0644, ~/.ssh 0700. Tools that only offer
+# key files (gh auth login) then use the same keys as the host; the forwarded
+# agent is unchanged. Runs at every start, so a key changed on the host is
+# refreshed and one removed from the host is removed here. Only id_* names are
+# written: dck's own config, config.d/, authorized_keys and known_hosts.dck-host
+# are never touched, and a key the container made itself under the same name
+# is kept. The copied names are listed in ~/.ssh/.dck-copied-keys; with
+# copy_keys off, the next start removes exactly those files. Names only are
+# logged, never a key's contents.
+_dck_key_listed() { case " $2 " in *" $1 "*) return 0 ;; esac; return 1; }
+
+dck_ssh_copy_keys() {
+  _dck_env
+  local src="${DCK_SSH_HOST_DIR:-$DCK_HOME/.ssh_host}" dst="$DCK_HOME/.ssh"
+  local manifest old="" new="" kept="" f name dest mode tmp n
+  manifest="$dst/.dck-copied-keys"
+  if [ -f "$manifest" ] && [ ! -L "$manifest" ]; then
+    while IFS= read -r name; do
+      case "$name" in id_*) case "$name" in *[!A-Za-z0-9._-]*) ;; *) old="$old $name" ;; esac ;; esac
+    done < "$manifest"
+  fi
+  if [ "${DCK_SSH_COPY_KEYS:-0}" != "1" ]; then
+    [ -e "$manifest" ] || [ -L "$manifest" ] || return 0
+    n=0
+    for name in $old; do
+      if [ -f "$dst/$name" ] && [ ! -L "$dst/$name" ]; then rm -f "$dst/$name" && n=$((n + 1)); fi
+    done
+    rm -f "$manifest"
+    dck_log "ssh keys: copy_keys is off; removed $n copied key file(s)"
+    return 0
+  fi
+  if [ ! -d "$src" ]; then
+    dck_log "ssh keys: copy_keys is on but the host's ~/.ssh is not mounted at $src; nothing copied"
+    return 0
+  fi
+  if [ -L "$dst" ] && [ ! -d "$dst" ]; then
+    dck_log "ssh keys: $dst is a dangling link; nothing copied"
+    return 0
+  fi
+  mkdir -p "$dst" && chmod 0700 "$dst/." || return 1
+  for f in "$src"/id_*; do
+    [ -f "$f" ] && [ ! -L "$f" ] || continue
+    name="${f##*/}"
+    case "$name" in *[!A-Za-z0-9._-]*) dck_log "ssh keys: refusing a key name"; continue ;; esac
+    case "$name" in *.pub) mode=0644 ;; *) mode=0600 ;; esac
+    dest="$dst/$name"
+    if [ -L "$dest" ] || { [ -e "$dest" ] && [ ! -f "$dest" ]; }; then
+      kept="$kept $name"; continue
+    fi
+    if [ -f "$dest" ] && ! _dck_key_listed "$name" "$old" && ! cmp -s "$f" "$dest"; then
+      kept="$kept $name"; continue  # the container's own key: never overwritten
+    fi
+    if [ ! -f "$dest" ] || ! cmp -s "$f" "$dest"; then
+      tmp="$(mktemp "$dst/.dck-key.XXXXXX")" || return 1
+      if ! cat "$f" > "$tmp"; then rm -f "$tmp"; dck_log "ssh keys: could not read $name"; continue; fi
+      chmod "$mode" "$tmp" && mv -f "$tmp" "$dest" || { rm -f "$tmp"; continue; }
+    fi
+    chmod "$mode" "$dest"
+    _dck_chown "$DCK_USER:$(_dck_group)" "$dest"
+    new="$new $name"
+  done
+  # A key removed from (or renamed on) the host is removed here too.
+  for name in $old; do
+    _dck_key_listed "$name" "$new" && continue
+    if [ -f "$dst/$name" ] && [ ! -L "$dst/$name" ]; then rm -f "$dst/$name"; fi
+  done
+  tmp="$(mktemp "$dst/.dck-key.XXXXXX")" || return 1
+  for name in $new; do printf '%s\n' "$name"; done > "$tmp"
+  chmod 0600 "$tmp" && mv -f "$tmp" "$manifest"
+  _dck_chown "$DCK_USER:$(_dck_group)" "$dst/." "$manifest"
+  [ -n "$new" ] || new=" none (no id_* key in the mounted ~/.ssh)"
+  dck_log "ssh keys copied:$new"
+  [ -z "$kept" ] || dck_log "ssh keys: kept the container's own:$kept"
+  return 0
+}
+
 dck_start() {
   _dck_env
   dck_log "starting for user $DCK_USER (workspace $DCK_WORKSPACE)"
@@ -1076,6 +1157,7 @@ dck_start() {
   dck_layer_persist || true
   dck_git_identity || true
   dck_ssh_agent_access || true
+  dck_ssh_copy_keys || true
   dck_skills_link || true
   dck_agent_trust || true
   dck_herdr_config || true

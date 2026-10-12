@@ -3,7 +3,8 @@
 # lib/layers/agents.sh — the agents layer: coding-agents-kit (`ak`) from its
 # release tarball verified against the pinned sha256, plus the pinned Node when
 # node is missing or older than its major, then `ak install <kind>...` (each CLI
-# pinned and verified by ak itself) and the `classic` + `providers` presets.
+# pinned and verified by ak itself), the `classic` + `providers` presets, and
+# the kit's three agent skills (agentkit, agentkit-setup, agentkit-orchestrate).
 #
 #   dck-layer agents [kind...]      (rendered by `dck init` when layers.agents = true)
 #
@@ -52,8 +53,24 @@ tar -xzf "$src/agentkit.tar.gz" -C "$src"
 # The install runs as the dev user, so the directory must be theirs.
 if [ "$(id -u)" = "0" ]; then chown -R "$DCK_USER" "$src"; fi
 as_user bash "$src/coding-agents-kit-${AGENTKIT_TAG}/install.sh" --no-rc
+# 2b. The kit's agent skills, from the same verified tarball, into the image's
+#     shared skills directory. Agent homes live on volumes, so a skill installed
+#     there is lost on every recreate; the entrypoint (dck_skills_link) links
+#     these into every agent skills directory at each start instead.
+skills_dir="${DCK_SKILLS_DIR:-/usr/local/share/dck/skills}"
+mkdir -p "$skills_dir"
+for skill in agentkit agentkit-setup agentkit-orchestrate; do
+  from="$src/coding-agents-kit-${AGENTKIT_TAG}/skills/$skill"
+  if [ ! -f "$from/SKILL.md" ] || [ -L "$from" ]; then
+    layer_log "coding-agents-kit ${AGENTKIT_TAG} has no $skill skill"
+    exit 1
+  fi
+  rm -rf "${skills_dir:?}/$skill"
+  cp -R "$from" "$skills_dir/$skill"
+  chmod -R u+rwX,go+rX,go-w "$skills_dir/$skill"
+done
 rm -rf "$src"
-layer_log "installed coding-agents-kit ${AGENTKIT_TAG} (verified)"
+layer_log "installed coding-agents-kit ${AGENTKIT_TAG} (verified) and its skills agentkit, agentkit-setup, agentkit-orchestrate"
 
 # 3. npm installs globals into ~/.local for the dev user: Node's own prefix
 #    (/usr/local) is root's, so `npm install -g` (codex, pi, cline …) would fail
