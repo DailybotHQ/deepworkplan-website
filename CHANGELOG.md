@@ -9,6 +9,21 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Added
+
+- feat: methodology chapter 7, *Swarm autonomy*, in 17 languages: roles (lead, deputy, lane, reviewer), the capacity loop (`ak capacity --self`), the declared account pool, proactive lane handoff and the `dwp-handoff/v1` packet, lead succession with epochs and fencing, lane-to-lane messaging, critical-only escalation (C1–C7), the quality bar and how to drill it
+- docs: the spec reader gains the escalation taxonomy (agent protocol §7.5) and the quality bar (DWP specification §5.1.4); `/kit/agentkit` documents `ak capacity`, `ak lease` and `pick --owner`; `/kit/herdr` documents `herdr-peers notify`, per-plan lead records (`lead claim|show|handover|takeover|release`), the `lead` address and the `usage_limit` screen class — all in 17 languages
+- feat: publish `/schema/dwp-handoff/v1.json`
+
+### Changed
+
+- chore: move the ecosystem pins to coding-agents-kit v0.6.0 and herdr-peers v0.3.0 (tags and SHA256SUMS digests on every install surface)
+- docs: AGENTS.md working principles — decide and record routine choices, escalate only the critical classes C1–C7
+
+### Fixed
+
+- fix: republish `addon-descriptor`, `benchmark-record` and `learnings-record` v1 byte-identical to the vendored pack; the schema publication test now covers every vendored schema
+
 ## [5.0.56] - 2026-10-12
 
 ### Changed
