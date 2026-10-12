@@ -260,7 +260,7 @@ hãy phát hiện những gì đã được cài và phiên bản của nó, r�
 Ghi lại mọi lần chấp nhận hoặc từ chối trong `.dwp/config.json`; một addon đã bị từ chối sẽ không được đề xuất lại
 trừ khi nhà phát triển yêu cầu. Chạy phần này lần thứ hai không thay đổi gì.
 
-Bảng này là tài liệu tra cứu, không phải danh sách kiểm tra: chỉ chạy một hàng cho bước review cục bộ bắt buộc, cho addon mà repository này đã dùng, hoặc cho addon mà developer vừa chấp nhận.
+Bảng này là tài liệu tra cứu, không phải danh sách kiểm tra: chỉ chạy một hàng cho bước review cục bộ bắt buộc, cho addon mà repository này đã dùng, hoặc cho addon mà nhà phát triển vừa chấp nhận.
 
 | Thành phần | Phát hiện phiên bản đã cài | Cài đặt hoặc nâng cấp (đã ghim) |
 | --- | --- | --- |

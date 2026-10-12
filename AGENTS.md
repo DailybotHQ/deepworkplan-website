@@ -303,7 +303,7 @@ This repo has the DWP **Dailybot addon** wired: the `dailybot` skill is installe
 
 - **Do not** hand-edit `.agents/skills/dailybot/` or `.agents/skills/ai-diff-reviewer/` — the release workflow refreshes them to the latest upstream tag on every merge to `main` and overwrites local edits. Contribute upstream.
 - **Do** treat `.agents/skills/deepworkplan/` as repo-adapted: update it only through an explicit, reviewed change (released tag, tree-URL install, `SHA256SUMS` verified), contributed upstream first.
-- **Current provenance (2026-10-11):** `deepworkplan` **v7.6.0**, `ai-diff-reviewer` **v3.3.9**, `dailybot` **v3.23.12**; `.dwp/config.json` (the addon registry) is the only tracked file under `.dwp/`.
+- **Current provenance (2026-10-11):** `deepworkplan` **v7.6.0**, `ai-diff-reviewer` **v3.3.10**, `dailybot` **v3.23.13** (refreshed by the release workflow; the public pins stay at v3.3.9 / v3.23.12, the pack contract); `.dwp/config.json` (the addon registry) is the only tracked file under `.dwp/`.
 
 > Upstream table, install commands, refresh sequence, failure semantics and provenance history: [Architecture → Vendored agent skills](docs/ARCHITECTURE.md#vendored-agent-skills).
 

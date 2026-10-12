@@ -2,7 +2,7 @@
 # The blocks between the dck markers are reconciled by `dck init`; add your
 # project's own layers BELOW them — they are never touched. The scripts the
 # base block copies live next to this file in dck/ (vendored by `dck init`,
-# devcontainer-kit v0.2.2); no shared base image is involved.
+# devcontainer-kit v0.3.0); no shared base image is involved.
 # >>> dck:base >>>
 # dck:managed v0.3.0 base
 # Both ARGs come before any FROM, so they are global (an ARG after a FROM is

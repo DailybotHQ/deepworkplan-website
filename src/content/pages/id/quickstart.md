@@ -262,7 +262,7 @@ deteksi apa yang terpasang dan versinya, lalu bercabang:
 Catat setiap penerimaan atau penolakan di `.dwp/config.json`; addon yang ditolak tidak ditawarkan
 lagi kecuali pengembang memintanya. Menjalankan bagian ini untuk kedua kalinya tidak mengubah apa pun.
 
-Tabel ini adalah rujukan, bukan daftar periksa: jalankan sebuah baris hanya untuk tinjauan lokal wajib, untuk addon yang sudah dipakai repositori ini, atau untuk addon yang baru saja diterima developer.
+Tabel ini adalah rujukan, bukan daftar periksa: jalankan sebuah baris hanya untuk tinjauan lokal wajib, untuk addon yang sudah dipakai repositori ini, atau untuk addon yang baru saja diterima pengembang.
 
 | Komponen | Deteksi versi terpasang | Pasang atau tingkatkan (dipatok) |
 | --- | --- | --- |
