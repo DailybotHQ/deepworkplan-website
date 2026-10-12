@@ -578,12 +578,12 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Die Deep Work Plan Methodik',
       description:
-        'Sechs Kapitel vom Manifest bis zur Orchestrierung: die Prinzipien, die Kernschleife, Vorlagen, Skills und Agenten, Archetypen und viele Agenten gleichzeitig.',
+        'Sieben Kapitel vom Manifest bis zur Schwarmautonomie: Prinzipien, Kernschleife, Vorlagen, Skills und Agenten, Archetypen, viele Agenten und robuste Schwärme.',
     },
     eyebrow: 'Methodik',
     title: 'Die Deep Work Plan Methodik',
     intro:
-      'Sechs Kapitel, die Sie von der Philosophie hinter Deep Work Plan zur praktischen Schleife, den Vorlagen, den Anpassungen und vielen Agenten gleichzeitig führen.',
+      'Sieben Kapitel, die Sie von der Philosophie hinter Deep Work Plan zur praktischen Schleife, den Vorlagen, den Anpassungen, vielen Agenten gleichzeitig und einem Schwarm führen, der weiterläuft.',
     chapterLabel: 'Kapitel',
     readChapter: 'Kapitel lesen',
     prev: 'Zurück',

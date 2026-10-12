@@ -580,12 +580,12 @@ export const pl: SiteTranslations = {
     meta: {
       title: 'Metodyka Deep Work Plan',
       description:
-        'Sześć rozdziałów od manifestu po orkiestrację: zasady, podstawowa pętla, szablony, skille i agenci, archetypy oraz uruchamianie wielu agentów naraz.',
+        'Siedem rozdziałów od manifestu po autonomię roju: zasady, podstawowa pętla, szablony, skille i agenci, archetypy, wielu agentów naraz i odporne roje.',
     },
     eyebrow: 'Metodyka',
     title: 'Metodyka Deep Work Plan',
     intro:
-      'Sześć rozdziałów, które prowadzą od filozofii stojącej za Deep Work Plan do praktycznej pętli, szablonów, adaptacji i uruchamiania wielu agentów naraz.',
+      'Siedem rozdziałów, które prowadzą od filozofii stojącej za Deep Work Plan do praktycznej pętli, szablonów, adaptacji, uruchamiania wielu agentów naraz i utrzymywania roju w ruchu.',
     chapterLabel: 'Rozdział',
     readChapter: 'Przeczytaj rozdział',
     prev: 'Poprzedni',

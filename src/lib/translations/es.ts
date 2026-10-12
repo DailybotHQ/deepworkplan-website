@@ -572,12 +572,12 @@ export const es: SiteTranslations = {
     meta: {
       title: 'La Metodología Deep Work Plan',
       description:
-        'Seis capítulos del manifiesto a la orquestación: los principios, el bucle central, las plantillas, las skills, los arquetipos y muchos agentes a la vez.',
+        'Siete capítulos del manifiesto a la autonomía del enjambre: principios, bucle central, plantillas, skills y agentes, arquetipos, muchos agentes y enjambres.',
     },
     eyebrow: 'Metodología',
     title: 'La Metodología Deep Work Plan',
     intro:
-      'Seis capítulos que te llevan desde la filosofía detrás de Deep Work Plan hasta el bucle práctico, las plantillas, las adaptaciones y la ejecución de muchos agentes a la vez.',
+      'Siete capítulos que te llevan desde la filosofía detrás de Deep Work Plan hasta el bucle práctico, las plantillas, las adaptaciones, la ejecución de muchos agentes a la vez y el mantenimiento de un enjambre en marcha.',
     chapterLabel: 'Capítulo',
     readChapter: 'Leer capítulo',
     prev: 'Anterior',

@@ -357,6 +357,13 @@ ile Herdr eklentileri kurulu olduğunda:
   ya da plan istemleri, bilinmeyen ekranlar ve sizin oluşturmadığınız bölmeler.
   `AGENTKIT_PERMISSIONS=ask` ayarlıyken şeritler harekete geçmeden önce sorar; bu istemleri asla
   dolanmayın. Her müdahaleyi üst planda kayda geçirin.
+- **Sürüyü çalışır tutun.** coding-agents-kit `v0.6.0` ve herdr-peers `v0.3.0` ile her ajan her görev
+  sınırında `ak capacity --self --json` komutunu kontrol eder; `critical` durumunda bir devir paketi yazar
+  (https://deepworkplan.com/schema/dwp-handoff/v1.json) ve lider aynı çalışma kopyasında bir halef
+  başlatır. Lider planını `herdr-peers lead claim` ile sahiplenir, şeritler ona `lead` olarak hitap eder
+  ve lider ortadan kaybolursa bir vekil devralır (`herdr-peers lead takeover`). Her rutin seçime karar
+  verin ve kaydedin; yalnızca C1–C7 kritik sınıflarını yükseltin — bkz.
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Kiti geliştirin (author alt skill’i)
 

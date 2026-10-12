@@ -570,12 +570,12 @@ export const en: SiteTranslations = {
     meta: {
       title: 'The Deep Work Plan Methodology',
       description:
-        'Six chapters from manifesto to orchestration: the principles, the core loop, templates, skills and agents, archetypes, and running many agents at once.',
+        'Seven chapters from manifesto to swarm autonomy: principles, core loop, templates, skills and agents, archetypes, many agents, and swarms that outlive a limit.',
     },
     eyebrow: 'Methodology',
     title: 'The Deep Work Plan Methodology',
     intro:
-      'Six chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, adaptations, and running many agents at once.',
+      'Seven chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, adaptations, running many agents at once, and keeping a swarm running.',
     chapterLabel: 'Chapter',
     readChapter: 'Read chapter',
     prev: 'Previous',

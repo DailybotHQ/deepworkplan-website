@@ -370,6 +370,13 @@ agentkit dan Herdr terpasang:
   pembayaran atau paket, layar yang tidak dikenal, dan panel yang tidak Anda buat. Dengan
   `AGENTKIT_PERMISSIONS=ask`, lane bertanya sebelum bertindak; jangan pernah mengakali prompt
   tersebut. Catat setiap intervensi di rencana induk.
+- **Jaga swarm tetap berjalan.** Dengan coding-agents-kit `v0.6.0` dan herdr-peers `v0.3.0`, setiap agent
+  memeriksa `ak capacity --self --json` di setiap batas tugas; pada `critical` ia menulis paket handoff
+  (https://deepworkplan.com/schema/dwp-handoff/v1.json) dan lead meluncurkan penerus di checkout yang
+  sama. Lead mengklaim rencananya dengan `herdr-peers lead claim`, lane menyapanya sebagai `lead`,
+  dan seorang deputi mengambil alih (`herdr-peers lead takeover`) jika lead menghilang. Putuskan dan
+  catat setiap pilihan rutin; eskalasikan hanya kelas kritis C1–C7 — lihat
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Kembangkan kit (sub-skill author)
 

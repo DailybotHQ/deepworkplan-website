@@ -575,12 +575,12 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Phương pháp luận Deep Work Plan',
       description:
-        'Sáu chương từ tuyên ngôn tới điều phối: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, các kiểu hình, và cách chạy nhiều agent cùng lúc.',
+        'Bảy chương từ tuyên ngôn tới tự chủ của bầy agent: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, các kiểu hình, nhiều agent và bầy agent vượt qua giới hạn.',
     },
     eyebrow: 'Phương pháp luận',
     title: 'Phương pháp luận Deep Work Plan',
     intro:
-      'Sáu chương đưa bạn từ triết lý đằng sau Deep Work Plan tới vòng lặp thực hành, các mẫu, những thích ứng và cách chạy nhiều agent cùng lúc.',
+      'Bảy chương đưa bạn từ triết lý đằng sau Deep Work Plan tới vòng lặp thực hành, các mẫu, những thích ứng, cách chạy nhiều agent cùng lúc và cách giữ cho một bầy agent tiếp tục chạy.',
     chapterLabel: 'Chương',
     readChapter: 'Đọc chương',
     prev: 'Trước',

@@ -67,7 +67,7 @@ Los carriles y el líder se comunican mediante [herdr-peers](/es/kit/herdr): una
 - **Profundidad uno.** Una respuesta nunca se contesta, y un carril no delega más allá. El abanico por llamante está limitado, a cuatro pares por defecto.
 - **Datos, no instrucciones.** Una respuesta no concede nada que el receptor no tuviera ya. La afirmación de un carril de que su puerta de validación pasó se comprueba ejecutando esa puerta.
 - **Un registro de quién hizo qué.** Cada registro de delegación nombra la cuenta y el proveedor del carril, de modo que el plan padre muestra qué cuenta llevó qué trabajo.
-- **Los lanes de Codex nombran su panel.** Codex ejecuta los comandos de un lane desde un servidor en segundo plano compartido por todas las sesiones de esa cuenta, así que el id de panel que hereda puede ser de otro lane. Un lane de Codex pasa su propio panel, tomado del encargo del líder, con `--pane <pane>` en cada verbo de herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+- **Los lanes de Codex nombran su panel.** Codex ejecuta los comandos de un lane desde un servidor en segundo plano compartido por todas las sesiones de esa cuenta, así que el id de panel que hereda puede ser de otro lane. Un lane de Codex pasa su propio panel, tomado del encargo del líder, con `--pane <pane>` en cada verbo de herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
 
 El líder puede ver toda la orquesta a la vez: `herdr-peers lanes` enumera cada carril con su estado, y [DeepWorkPlan Vim](/es/kit/vim) muestra los carriles de un plan orquestador junto al propio plan (`:DwpLanes`).
 
@@ -96,3 +96,7 @@ El plan padre se cierra con evidencia, no con informes:
 - Los recursos compartidos llevan un bloqueo: un carril lo toma antes de un paso pesado, como la construcción de un contenedor, y lo libera después.
 - La exclusión de permisos, cuando está configurada, prevalece para todos los carriles y para todos los agentes que inicie un carril.
 - Un carril que no puede continuar lo dice como un hito de bloqueo y se detiene; el líder decide.
+
+## Cuando una cuenta o el líder se agotan
+
+Una ejecución larga dura más que cualquier cuenta. A partir de coding-agents-kit `v0.6.0` y herdr-peers `v0.3.0`, un carril comprueba su propia capacidad en cada límite entre tareas y traspasa su trabajo mediante un paquete antes de que su cuenta se agote, un líder cede el liderazgo o lo reemplaza su suplente, y solo los elementos críticos llegan al desarrollador. [Autonomía del enjambre](/es/methodology/07-swarm-autonomy) describe el bucle, el paquete, la sucesión y las clases de escalación.

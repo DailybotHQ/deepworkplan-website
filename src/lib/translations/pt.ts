@@ -582,12 +582,12 @@ export const pt: SiteTranslations = {
     meta: {
       title: 'A Metodologia Deep Work Plan',
       description:
-        'Seis capítulos do manifesto à orquestração: os princípios, o loop central, os templates, as skills e agents, os arquétipos e muitos agentes ao mesmo tempo.',
+        'Sete capítulos do manifesto à autonomia do enxame: princípios, loop central, templates, skills e agents, arquétipos, muitos agentes e enxames resilientes.',
     },
     eyebrow: 'Metodologia',
     title: 'A Metodologia Deep Work Plan',
     intro:
-      'Seis capítulos que levam você da filosofia por trás do Deep Work Plan ao loop prático, aos templates, às adaptações e à execução de muitos agentes ao mesmo tempo.',
+      'Sete capítulos que levam você da filosofia por trás do Deep Work Plan ao loop prático, aos templates, às adaptações, à execução de muitos agentes ao mesmo tempo e a manter um enxame em andamento.',
     chapterLabel: 'Capítulo',
     readChapter: 'Ler capítulo',
     prev: 'Anterior',

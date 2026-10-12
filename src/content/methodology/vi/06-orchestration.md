@@ -67,7 +67,7 @@ Các lane và lead trao đổi qua [herdr-peers](/vi/kit/herdr): một **ask** m
 - **Độ sâu một.** Một reply không bao giờ được trả lời lại, và một lane không ủy thác tiếp. Số nhánh tỏa ra cho mỗi bên gọi bị giới hạn, mặc định là bốn peer.
 - **Dữ liệu, không phải chỉ thị.** Một reply không cấp thêm điều gì mà bên nhận chưa có. Lời khẳng định của một lane rằng cổng kiểm chứng đã đạt được kiểm tra bằng cách chạy cổng đó.
 - **Bản ghi ai đã làm gì.** Mỗi bản ghi ủy thác nêu tài khoản và nhà cung cấp của lane, nên kế hoạch cha cho thấy tài khoản nào đã đảm nhận công việc nào.
-- **Lane Codex tự nêu pane của mình.** Codex chạy lệnh của một lane từ một máy chủ nền dùng chung cho mọi phiên của tài khoản đó, nên id pane mà nó kế thừa có thể thuộc về lane khác. Một lane Codex truyền pane của chính nó, lấy từ chỉ dẫn của lead, bằng `--pane <pane>` trên mọi lệnh herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+- **Lane Codex tự nêu pane của mình.** Codex chạy lệnh của một lane từ một máy chủ nền dùng chung cho mọi phiên của tài khoản đó, nên id pane mà nó kế thừa có thể thuộc về lane khác. Một lane Codex truyền pane của chính nó, lấy từ chỉ dẫn của lead, bằng `--pane <pane>` trên mọi lệnh herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
 
 Lead có thể nhìn thấy toàn bộ dàn nhạc cùng lúc: `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, và [DeepWorkPlan Vim](/vi/kit/vim) hiển thị các lane của một kế hoạch điều phối ngay cạnh chính kế hoạch đó (`:DwpLanes`).
 
@@ -96,3 +96,7 @@ Kế hoạch cha khép lại dựa trên bằng chứng, không dựa trên báo
 - Tài nguyên dùng chung có một khóa: một lane lấy khóa trước một bước nặng như build container và trả lại sau đó.
 - Opt-out về quyền, khi được thiết lập, được ưu tiên cho mọi lane và mọi agent mà một lane khởi chạy.
 - Một lane không thể tiếp tục sẽ nói rõ điều đó dưới dạng một mốc bị chặn và dừng lại; lead quyết định.
+
+## Khi một tài khoản hoặc lead cạn kiệt
+
+Một lần chạy dài sống lâu hơn bất kỳ tài khoản đơn lẻ nào. Từ coding-agents-kit `v0.6.0` và herdr-peers `v0.3.0`, một lane kiểm tra năng lực của chính nó tại mỗi ranh giới tác vụ và chuyển giao công việc qua một gói bàn giao trước khi tài khoản của nó cạn, một lead chuyển giao quyền lead hoặc được phó lead thay thế, và chỉ những mục nghiêm trọng mới tới tay nhà phát triển. [Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy) mô tả vòng lặp, gói bàn giao, sự kế nhiệm và các lớp leo thang.

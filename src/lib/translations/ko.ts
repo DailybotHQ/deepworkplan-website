@@ -576,12 +576,12 @@ export const ko: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 방법론',
       description:
-        '매니페스토부터 오케스트레이션까지 여섯 장: 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 아키타입, 그리고 여러 에이전트를 동시에 운영하기.',
+        '매니페스토부터 스웜 자율까지 일곱 장: 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 아키타입, 여러 에이전트, 한도를 넘어 계속 도는 스웜.',
     },
     eyebrow: '방법론',
     title: 'Deep Work Plan 방법론',
     intro:
-      'Deep Work Plan의 철학에서 출발해 실전 루프, 템플릿, 적응 방식, 그리고 여러 에이전트를 동시에 운영하는 방법까지 안내하는 여섯 장.',
+      'Deep Work Plan의 철학에서 출발해 실전 루프, 템플릿, 적응 방식, 여러 에이전트를 동시에 운영하는 방법, 그리고 스웜을 계속 돌아가게 하는 방법까지 안내하는 일곱 장.',
     chapterLabel: '장',
     readChapter: '장 읽기',
     prev: '이전',

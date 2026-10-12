@@ -322,6 +322,13 @@ Addons agentkit und Herdr installiert sind:
   Schritte, Zahlungs- oder Tarifabfragen, unbekannte Bildschirme und Panes, die Sie nicht erstellt haben. Mit
   `AGENTKIT_PERMISSIONS=ask` fragen Lanes, bevor sie handeln; umgehen Sie diese Abfragen nie. Protokollieren Sie jeden
   Eingriff im übergeordneten Plan.
+- **Den Schwarm am Laufen halten.** Mit coding-agents-kit `v0.6.0` und herdr-peers `v0.3.0` prüft jeder Agent
+  `ak capacity --self --json` an jeder Aufgabengrenze; bei `critical` schreibt er ein Übergabepaket
+  (https://deepworkplan.com/schema/dwp-handoff/v1.json), und der Lead startet einen Nachfolger im selben
+  Checkout. Der Lead beansprucht seinen Plan mit `herdr-peers lead claim`, Lanes adressieren ihn als `lead`,
+  und ein Stellvertreter übernimmt (`herdr-peers lead takeover`), wenn er verschwindet. Entscheiden und
+  protokollieren Sie jede Routinewahl; eskalieren Sie nur die kritischen Klassen C1–C7 — siehe
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Das Kit weiterentwickeln (author-Sub-Skill)
 

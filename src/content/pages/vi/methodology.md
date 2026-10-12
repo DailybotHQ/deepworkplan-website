@@ -1,7 +1,7 @@
 ---
 title: "Phương pháp luận Deep Work Plan"
-description: "Sáu chương từ tuyên ngôn tới điều phối: nguyên tắc, vòng lặp lõi, mẫu, skill, các kiểu hình và nhiều agent đứng sau phương pháp luận Deep Work Plan."
-lastUpdated: 2026-10-11
+description: "Bảy chương từ tuyên ngôn tới tự chủ của bầy agent: nguyên tắc, vòng lặp lõi, mẫu, skill, kiểu hình, nhiều agent và bầy agent trong phương pháp Deep Work Plan."
+lastUpdated: 2026-10-12
 ---
 
 ## Phương pháp luận Deep Work Plan
@@ -17,7 +17,7 @@ DWP đứng trên ba trụ cột.
 
 **Hiệu quả token — công việc tầm xa ngay từ thiết kế, hiệu quả ngay từ cách dựng.** Ngữ cảnh là tài nguyên khan hiếm nhất mà một agent lập trình có, và một phương pháp luận lãng phí nó sẽ thất bại đúng lúc công việc trở nên dài. DWP nạp hướng dẫn theo kiểu tiệm tiến — mỗi phần hướng dẫn được nạp khi tín hiệu kích hoạt của nó phát — chọn kiểm chứng từ những gì mỗi tác vụ thực sự chạm tới, và quyết định skill ngay trong tác vụ. Số byte hướng dẫn mà mỗi luồng cần được đo lường và công bố; không có phần trăm token bịa ra.
 
-Phương pháp luận được trình bày qua sáu chương:
+Phương pháp luận được trình bày qua bảy chương:
 
 1. **Tuyên ngôn** — Deep Work Plan là gì và vì sao thực thi có cấu trúc lại quan trọng.
 2. **Vòng lặp lõi** — chu trình lập kế hoạch–thực thi–kiểm chứng dẫn dắt mọi tác vụ.
@@ -25,6 +25,7 @@ Phương pháp luận được trình bày qua sáu chương:
 4. **Skill và agent** — cách các command và vai trò agent ăn khớp với nhau, bộ kit sống (cách một repository nuôi lớn skill của riêng nó qua sub-skill author), và các addon tự nguyện như dependency-upgrade và addon design-system cho bất kỳ bề mặt giao diện hướng tới người dùng nào (UI trực quan, đầu ra CLI, hay hội thoại).
 5. **Các kiểu hình** — thích ứng phương pháp luận cho repo độc lập và trung tâm điều phối.
 6. **Chạy nhiều agent** — một lead và các lane của nó qua pane, container, máy và tài khoản, với một nhánh và một bản phát hành cho mỗi repository.
+7. **Tự chủ của bầy agent** — kiểm tra năng lực tại các ranh giới tác vụ, gói bàn giao, kế nhiệm lead theo epoch và chỉ leo thang việc nghiêm trọng, để một bầy agent vượt qua giới hạn của một tài khoản hay sự mất đi của một agent.
 
 - [Đọc phương pháp luận](/methodology)
 - [Đọc đặc tả](/spec)

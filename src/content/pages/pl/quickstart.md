@@ -319,6 +319,13 @@ agentkit i Herdr są zainstalowane:
   destrukcyjnych, monity płatności lub planu, nieznane ekrany oraz panele, których nie utworzyłeś. Przy
   `AGENTKIT_PERMISSIONS=ask` tory pytają, zanim zadziałają; nigdy nie obchodź tych monitów. Zapisuj każdą
   interwencję w planie nadrzędnym.
+- **Utrzymuj rój w ruchu.** Z coding-agents-kit `v0.6.0` i herdr-peers `v0.3.0` każdy agent sprawdza
+  `ak capacity --self --json` na każdej granicy zadania; przy `critical` pisze pakiet przekazania
+  (https://deepworkplan.com/schema/dwp-handoff/v1.json), a prowadzący uruchamia następcę w tym samym
+  checkoucie. Prowadzący obejmuje swój plan przez `herdr-peers lead claim`, tory adresują go jako `lead`,
+  a zastępca przejmuje (`herdr-peers lead takeover`), jeśli prowadzący zniknie. Rozstrzygaj i zapisuj każdy
+  rutynowy wybór; eskaluj tylko krytyczne klasy C1–C7 — zob.
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Rozwijaj kit (sub-skill author)
 

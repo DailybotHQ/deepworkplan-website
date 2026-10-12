@@ -241,6 +241,7 @@ devcontainer アドオンの終着点は、生成されたファイル一式で�
 - **見守る。** `herdr-peers lanes` はすべてのレーンの状態を表示し、ブロック中のレーンについては `herdr-peers status <pane>` が画面を分類し、`herdr pane read <pane>` がその画面を表示します。
 - **キー入力は一つの場合だけ。** `herdr pane send-keys` で送ってよいキーは、フォルダ信頼の画面への応答だけです。それも、自分で起動したペインで、`--trust-cwd` が使えなかった場合に限ります。前後で画面を読み、キーは最小限だけ送ります。
 - **それ以外はすべて読み、記録し、開発者にエスカレーションします**。Claude の権限バイパスの確認、ログインや認証情報のプロンプト、操作ごとの権限要求、破壊的な確認、支払いやプランのプロンプト、未知の画面、自分が作成していないペインです。`AGENTKIT_PERMISSIONS=ask` が設定されていれば、レーンは行動の前に確認を求めます。それらのプロンプトを決して回避してはいけません。すべての介入を親計画に記録します。
+- **スウォームを動かし続ける。** coding-agents-kit `v0.6.0` と herdr-peers `v0.3.0` があれば、各エージェントはタスクの境目ごとに `ak capacity --self --json` を確認し、`critical` ではハンドオフパケット（https://deepworkplan.com/schema/dwp-handoff/v1.json）を書き、リードが同じチェックアウトで後継を起動します。リードは `herdr-peers lead claim` で自分の計画を claim し、レーンは `lead` というアドレスでリードに連絡し、リードがいなくなれば代理が引き継ぎます（`herdr-peers lead takeover`）。日常的な選択はすべて自分で決めて記録し、エスカレーションするのはクリティカルなクラス C1–C7 だけです。詳しくは https://deepworkplan.com/methodology/07-swarm-autonomy.md を参照してください。
 
 ## 5. キットを進化させる（author サブスキル)
 

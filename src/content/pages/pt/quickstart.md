@@ -334,6 +334,13 @@ addons agentkit e Herdr estão instalados:
   destrutivas, telas de pagamento ou de plano, telas desconhecidas e painéis que você não criou. Com
   `AGENTKIT_PERMISSIONS=ask`, as frentes perguntam antes de agir; nunca contorne esses prompts. Registre cada
   intervenção no plano pai.
+- **Mantenha o enxame em andamento.** Com o coding-agents-kit `v0.6.0` e o herdr-peers `v0.3.0`, cada agente
+  verifica `ak capacity --self --json` em cada limite entre tarefas; em `critical`, escreve um pacote de repasse
+  (https://deepworkplan.com/schema/dwp-handoff/v1.json) e o líder inicia um sucessor no mesmo
+  checkout. O líder reivindica seu plano com `herdr-peers lead claim`, as frentes se dirigem a ele como `lead`,
+  e um suplente assume (`herdr-peers lead takeover`) se ele desaparecer. Decida e registre cada
+  escolha rotineira; escale só as classes críticas C1–C7 — veja
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Evolua o kit (sub-skill author)
 

@@ -293,6 +293,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 - **เฝ้าดู** `herdr-peers lanes` แสดงสถานะของทุก lane สำหรับ lane ที่ถูกบล็อก `herdr-peers status <pane>` จะจำแนกหน้าจอ และ `herdr pane read <pane>` จะแสดงหน้าจอนั้น
 - **กดแป้นได้กรณีเดียว** แป้นเดียวที่คุณส่งได้ด้วย `herdr pane send-keys` คือคำตอบของหน้าจอยืนยันความเชื่อถือโฟลเดอร์ บน pane ที่คุณเปิดเอง เมื่อใช้ `--trust-cwd` ไม่ได้ อ่านหน้าจอทั้งก่อนและหลัง และส่งแป้นให้น้อยที่สุด
 - **อ่าน บันทึก และส่งต่อทุกอย่างที่เหลือ** ให้นักพัฒนา: การรับทราบ bypass-permissions ของ Claude, prompt สำหรับล็อกอินและข้อมูลรับรอง คำขอสิทธิ์รายการกระทำ การยืนยันที่ทำลายข้อมูล prompt เกี่ยวกับการชำระเงินหรือแพ็กเกจ หน้าจอที่ไม่รู้จัก และ pane ที่คุณไม่ได้สร้าง เมื่อตั้ง `AGENTKIT_PERMISSIONS=ask` lane จะถามก่อนลงมือ ห้ามหาทางเลี่ยง prompt เหล่านั้น บันทึกทุกการแทรกแซงไว้ในแผนแม่
+- **ทำให้ swarm ทำงานต่อไป** ด้วย coding-agents-kit `v0.6.0` และ herdr-peers `v0.3.0` เอเจนต์แต่ละตัวตรวจ `ak capacity --self --json` ที่ทุกขอบเขตของงาน เมื่อถึง `critical` มันจะเขียน handoff packet (https://deepworkplan.com/schema/dwp-handoff/v1.json) และ lead เปิดผู้สืบทอดใน checkout เดียวกัน lead claim แผนของตัวเองด้วย `herdr-peers lead claim` lane เรียก lead ด้วยที่อยู่ `lead` และผู้แทนจะรับตำแหน่ง (`herdr-peers lead takeover`) หาก lead หายไป ตัดสินใจและบันทึกทุกทางเลือกตามปกติเอง ส่งต่อเพื่อแก้ไขเฉพาะประเภทวิกฤต C1–C7 — ดู https://deepworkplan.com/methodology/07-swarm-autonomy.md
 
 ## 5. พัฒนา kit (sub-skill ชื่อ author)
 

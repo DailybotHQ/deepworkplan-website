@@ -294,6 +294,7 @@ devcontainer 애드온의 끝은 생성된 파일 묶음이 아니라 동작하�
 - **지켜보기.** `herdr-peers lanes`는 모든 레인의 상태를 보여 주고, 차단된 레인에 대해서는 `herdr-peers status <pane>`가 화면을 분류하며 `herdr pane read <pane>`가 그 화면을 보여 줍니다.
 - **키 입력은 한 가지 경우뿐.** `herdr pane send-keys`로 보낼 수 있는 키는 폴더 신뢰 화면에 대한 응답뿐이며, 그것도 직접 시작한 페인에서 `--trust-cwd`를 쓸 수 없었던 경우로 한정됩니다. 보내기 전과 후에 화면을 읽고, 키는 최소한만 보내세요.
 - **나머지는 모두 읽고, 기록하고,** 개발자에게 **에스컬레이션**하세요: Claude의 권한 우회 확인, 로그인과 자격 증명 프롬프트, 작업별 권한 요청, 파괴적인 확인, 결제나 요금제 프롬프트, 알 수 없는 화면, 직접 만들지 않은 페인. `AGENTKIT_PERMISSIONS=ask`가 설정되어 있으면 레인은 행동하기 전에 묻습니다. 그 프롬프트를 절대 우회하지 마세요. 모든 개입을 상위 계획에 기록하세요.
+- **스웜을 계속 돌아가게 하기.** coding-agents-kit `v0.6.0`과 herdr-peers `v0.3.0`을 쓰면 각 에이전트는 모든 작업 경계에서 `ak capacity --self --json`을 확인합니다. `critical`이 되면 핸드오프 패킷(https://deepworkplan.com/schema/dwp-handoff/v1.json)을 쓰고, 리드가 같은 체크아웃에서 후임을 시작합니다. 리드는 `herdr-peers lead claim`으로 자신의 계획을 claim하고, 레인은 리드를 `lead`라는 주소로 부르며, 리드가 사라지면 대리가 넘겨받습니다(`herdr-peers lead takeover`). 일상적인 선택은 모두 스스로 결정하고 기록하며, 치명적 클래스 C1–C7만 에스컬레이션하세요. 참고: https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 

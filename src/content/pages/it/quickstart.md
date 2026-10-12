@@ -338,6 +338,13 @@ addon agentkit e Herdr sono installati:
   distruttive, le schermate di pagamento o di piano, le schermate sconosciute e i pannelli che non hai creato. Con
   `AGENTKIT_PERMISSIONS=ask`, le corsie chiedono prima di agire; non aggirare mai quei prompt. Registra ogni
   intervento nel piano padre.
+- **Mantieni attivo lo sciame.** Con coding-agents-kit `v0.6.0` e herdr-peers `v0.3.0`, ogni agente
+  controlla `ak capacity --self --json` a ogni confine di task; a `critical` scrive un pacchetto di consegna
+  (https://deepworkplan.com/schema/dwp-handoff/v1.json) e il lead avvia un successore nello
+  stesso checkout. Il lead rivendica il proprio piano con `herdr-peers lead claim`, le corsie lo indirizzano come `lead`,
+  e un vice subentra (`herdr-peers lead takeover`) se scompare. Decidi e registra ogni
+  scelta di routine; escala solo le classi critiche C1–C7 — vedi
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Fai evolvere il kit (sub-skill author)
 

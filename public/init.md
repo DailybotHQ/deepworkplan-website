@@ -438,6 +438,13 @@ agentkit and Herdr addons are installed:
   confirmations, payment or plan prompts, unknown screens, and panes you did not create. With
   `AGENTKIT_PERMISSIONS=ask`, lanes ask before they act; never work around those prompts. Log every
   intervention in the parent plan.
+- **Keep the swarm running.** With coding-agents-kit `v0.6.0` and herdr-peers `v0.3.0`, each agent
+  checks `ak capacity --self --json` at every task boundary; at `critical` it writes a handoff packet
+  (https://deepworkplan.com/schema/dwp-handoff/v1.json) and the lead launches a successor in the
+  same checkout. The lead claims its plan with `herdr-peers lead claim`, lanes address it as `lead`,
+  and a deputy takes over (`herdr-peers lead takeover`) if it disappears. Decide and record every
+  routine choice; escalate only the critical classes C1–C7 — see
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Evolve the kit (author sub-skill)
 

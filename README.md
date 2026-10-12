@@ -68,7 +68,7 @@ Then run `/deepworkplan-onboard` in your agent, and `/dwp-create <goal>` → `/d
 | :------ | :--------- |
 | [`/init.md`](https://deepworkplan.com/init.md) | The executable onboarding prompt; its **Pinned releases** table lists every ecosystem release with the sha256 of its `SHA256SUMS` |
 | [`/quickstart`](https://deepworkplan.com/quickstart) | The same adoption path for people, in 17 languages |
-| [`/methodology`](https://deepworkplan.com/methodology) | Six chapters, from the manifesto to [running many agents](https://deepworkplan.com/methodology/06-orchestration) |
+| [`/methodology`](https://deepworkplan.com/methodology) | Seven chapters, from the manifesto to [running many agents](https://deepworkplan.com/methodology/06-orchestration) and [swarm autonomy](https://deepworkplan.com/methodology/07-swarm-autonomy) |
 | [`/spec`](https://deepworkplan.com/spec) | The normative DWP standard: task anatomy, gates, completion, archetypes, addons |
 | [`/kit`](https://deepworkplan.com/kit) | Commands, agent adapters, presets and the addons, one page each at `/kit/<slug>` |
 | Markdown for agents | Every page as Markdown: append `.md` or send `Accept: text/markdown` |

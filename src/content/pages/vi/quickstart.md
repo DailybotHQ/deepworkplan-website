@@ -363,6 +363,13 @@ agentkit và Herdr đã được cài:
   phá hủy, lời nhắc thanh toán hoặc gói dịch vụ, màn hình không xác định và các pane bạn không tạo. Với
   `AGENTKIT_PERMISSIONS=ask`, các lane hỏi trước khi hành động; không bao giờ lách qua những lời nhắc
   đó. Ghi lại mọi lần can thiệp trong kế hoạch cha.
+- **Giữ cho bầy agent tiếp tục chạy.** Với coding-agents-kit `v0.6.0` và herdr-peers `v0.3.0`, mỗi agent
+  kiểm tra `ak capacity --self --json` tại mỗi ranh giới tác vụ; ở mức `critical`, nó viết một gói bàn
+  giao (https://deepworkplan.com/schema/dwp-handoff/v1.json) và lead khởi chạy một agent kế nhiệm trong
+  cùng checkout. Lead claim kế hoạch của nó bằng `herdr-peers lead claim`, các lane gọi nó bằng địa chỉ
+  `lead`, và một phó lead tiếp quản (`herdr-peers lead takeover`) nếu lead biến mất. Hãy quyết định và
+  ghi lại mọi lựa chọn thường lệ; chỉ leo thang các lớp nghiêm trọng C1–C7 — xem
+  https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. Phát triển bộ kit (sub-skill author)
 

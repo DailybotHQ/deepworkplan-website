@@ -579,12 +579,12 @@ export const tr: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan Metodolojisi',
       description:
-        'Manifestodan orkestrasyona altı bölüm: ilkeler, çekirdek döngü, şablonlar, skill’ler ve ajanlar, arketipler ve aynı anda birçok ajanı çalıştırmak.',
+        'Manifestodan sürü özerkliğine yedi bölüm: ilkeler, çekirdek döngü, şablonlar, skill’ler ve ajanlar, arketipler, birçok ajan ve bir sınırı atlatan sürüler.',
     },
     eyebrow: 'Metodoloji',
     title: 'Deep Work Plan Metodolojisi',
     intro:
-      'Deep Work Plan’in arkasındaki felsefeden pratik döngüye, şablonlara, uyarlamalara ve aynı anda birçok ajanı çalıştırmaya götüren altı bölüm.',
+      'Deep Work Plan’in arkasındaki felsefeden pratik döngüye, şablonlara, uyarlamalara, aynı anda birçok ajanı çalıştırmaya ve bir sürüyü çalışır tutmaya götüren yedi bölüm.',
     chapterLabel: 'Bölüm',
     readChapter: 'Bölümü oku',
     prev: 'Önceki',

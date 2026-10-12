@@ -67,7 +67,7 @@ As frentes e o líder conversam pelo [herdr-peers](/pt/kit/herdr): uma **consult
 - **Profundidade um.** Uma resposta nunca é respondida, e uma frente não delega adiante. O fan-out por chamador é limitado, a quatro pares por padrão.
 - **Dados, não instruções.** Uma resposta não concede nada que o receptor já não tivesse. A afirmação de uma frente de que seu gate passou é verificada rodando o gate.
 - **Um registro de quem fez o quê.** Cada registro de delegação nomeia a conta e o fornecedor da frente, então o plano pai mostra qual conta realizou qual trabalho.
-- **Lanes do Codex nomeiam seu painel.** O Codex executa os comandos de uma lane a partir de um servidor em segundo plano compartilhado por todas as sessões daquela conta, então o id de painel herdado pode ser de outra lane. Uma lane do Codex passa o próprio painel, tirado do briefing do líder, com `--pane <pane>` em cada verbo do herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+- **Lanes do Codex nomeiam seu painel.** O Codex executa os comandos de uma lane a partir de um servidor em segundo plano compartilhado por todas as sessões daquela conta, então o id de painel herdado pode ser de outra lane. Uma lane do Codex passa o próprio painel, tirado do briefing do líder, com `--pane <pane>` em cada verbo do herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
 
 O líder pode ver toda a orquestra de uma vez: `herdr-peers lanes` lista cada frente com seu estado, e o [DeepWorkPlan Vim](/pt/kit/vim) mostra as frentes de um plano orquestrador ao lado do próprio plano (`:DwpLanes`).
 
@@ -96,3 +96,7 @@ O plano pai fecha com evidência, não com relatórios:
 - Recursos compartilhados têm um lock: uma frente o obtém antes de um passo pesado, como o build de um contêiner, e o libera depois.
 - O opt-out de permissões, quando definido, prevalece para todas as frentes e para todos os agentes que uma frente iniciar.
 - Uma frente que não pode continuar diz isso como um marco de bloqueio e para; o líder decide.
+
+## Quando uma conta ou o líder se esgota
+
+Uma execução longa dura mais que qualquer conta. A partir do coding-agents-kit `v0.6.0` e do herdr-peers `v0.3.0`, uma frente verifica a própria capacidade em cada limite entre tarefas e repassa o trabalho por meio de um pacote antes que sua conta se esgote, um líder repassa a liderança ou é substituído pelo seu suplente, e só os itens críticos chegam ao desenvolvedor. [Autonomia do enxame](/pt/methodology/07-swarm-autonomy) descreve o loop, o pacote, a sucessão e as classes de escalação.
