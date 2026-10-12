@@ -224,6 +224,8 @@ temu: jest **idempotentna**. Dla każdego komponentu wykryj, co jest zainstalowa
 Zapisuj każdą akceptację i odmowę w `.dwp/config.json`; odrzucony dodatek nie jest proponowany ponownie,
 chyba że deweloper o to poprosi. Drugi przebieg tej sekcji niczego nie zmienia.
 
+Tabela służy do sprawdzania, a nie jest listą kontrolną: uruchom wiersz tylko dla wymaganego lokalnego przeglądu, dla dodatku, którego to repozytorium już używa, lub dla takiego, który programista właśnie zaakceptował.
+
 | Komponent | Wykryj zainstalowaną wersję | Zainstaluj lub zaktualizuj (przypięte) |
 | --- | --- | --- |
 | AI Diff Reviewer (wymagany) | `version:` w `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

@@ -231,6 +231,8 @@ detecte o que está instalado e em qual versão, e então decida:
 Registre cada aceitação ou recusa em `.dwp/config.json`; um addon recusado não é oferecido de novo
 a menos que o desenvolvedor peça. Uma segunda execução desta seção não muda nada.
 
+A tabela é uma referência, não uma lista de tarefas: execute uma linha apenas para a revisão local obrigatória, para um addon que este repositório já usa ou para um que o desenvolvedor acabou de aceitar.
+
 | Componente | Detectar a versão instalada | Instalar ou atualizar (fixado) |
 | --- | --- | --- |
 | AI Diff Reviewer (obrigatório) | `version:` em `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

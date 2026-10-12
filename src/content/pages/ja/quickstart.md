@@ -186,6 +186,8 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 受け入れと辞退はすべて `.dwp/config.json` に記録します。辞退されたアドオンは、開発者が求めない限り再び提案しません。この節を二回目に実行しても何も変わりません。
 
+この表は参照用であり、チェックリストではありません。必須のローカルレビュー、このリポジトリですでに使っているアドオン、または開発者が受け入れたばかりのアドオンについてのみ、その行を実行します。
+
 | コンポーネント | インストール済みのバージョンを検出 | インストールまたはアップグレード（固定） |
 | --- | --- | --- |
 | AI Diff Reviewer（必須） | `.agents/skills/ai-diff-reviewer/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

@@ -268,6 +268,8 @@ is installed and its version, then branch:
 Record every acceptance or decline in `.dwp/config.json`; a declined addon is not offered again
 unless the developer asks. A second run of this section changes nothing.
 
+The table is a lookup, not a checklist: run a row only for the required local review, for an addon this repository already uses, or for one the developer has just accepted.
+
 | Component | Detect the installed version | Install or upgrade (pinned) |
 | --- | --- | --- |
 | AI Diff Reviewer (required) | `version:` in `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

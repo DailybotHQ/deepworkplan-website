@@ -262,6 +262,8 @@ deteksi apa yang terpasang dan versinya, lalu bercabang:
 Catat setiap penerimaan atau penolakan di `.dwp/config.json`; addon yang ditolak tidak ditawarkan
 lagi kecuali pengembang memintanya. Menjalankan bagian ini untuk kedua kalinya tidak mengubah apa pun.
 
+Tabel ini adalah rujukan, bukan daftar periksa: jalankan sebuah baris hanya untuk tinjauan lokal wajib, untuk addon yang sudah dipakai repositori ini, atau untuk addon yang baru saja diterima developer.
+
 | Komponen | Deteksi versi terpasang | Pasang atau tingkatkan (dipatok) |
 | --- | --- | --- |
 | AI Diff Reviewer (wajib) | `version:` di `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

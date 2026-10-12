@@ -237,6 +237,8 @@ composant, détectez ce qui est installé et sa version, puis tranchez :
 Consignez chaque acceptation ou refus dans `.dwp/config.json` ; un addon refusé n’est plus proposé
 sauf si le développeur le demande. Une seconde exécution de cette section ne change rien.
 
+Le tableau est une référence, pas une liste de contrôle : n’exécutez une ligne que pour la revue locale obligatoire, pour un addon que ce dépôt utilise déjà ou pour un addon que le développeur vient d’accepter.
+
 | Composant | Détecter la version installée | Installer ou mettre à jour (épinglé) |
 | --- | --- | --- |
 | AI Diff Reviewer (requis) | `version:` dans `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

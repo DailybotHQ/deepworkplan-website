@@ -220,6 +220,8 @@ Version, und verzweigen Sie dann:
 Halten Sie jede Annahme und jede Ablehnung in `.dwp/config.json` fest; ein abgelehntes Addon wird nicht erneut angeboten,
 es sei denn, der Entwickler fragt danach. Ein zweiter Durchlauf dieses Abschnitts ändert nichts.
 
+Die Tabelle ist ein Nachschlagewerk, keine Checkliste: Führen Sie eine Zeile nur für das verpflichtende lokale Review aus, für ein Addon, das dieses Repository bereits nutzt, oder für eines, das der Entwickler gerade angenommen hat.
+
 | Komponente | Installierte Version erkennen | Installieren oder aktualisieren (gepinnt) |
 | --- | --- | --- |
 | AI Diff Reviewer (erforderlich) | `version:` in `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

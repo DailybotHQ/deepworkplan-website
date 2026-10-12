@@ -209,6 +209,8 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 
 将每一次接受或拒绝记录在 `.dwp/config.json` 中；被拒绝的附加组件不会再次提供，除非开发者主动要求。再次运行本节不会改变任何东西。
 
+此表用于查阅，而不是清单：只有在执行必需的本地评审、此仓库已在使用的附加组件，或开发者刚刚接受的附加组件时，才运行对应的那一行。
+
 | 组件 | 检测已安装的版本 | 安装或升级（锁定） |
 | --- | --- | --- |
 | AI Diff Reviewer（必备） | `.agents/skills/ai-diff-reviewer/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

@@ -257,6 +257,8 @@ kurulu olduğunu ve sürümünü saptayın, ardından şu şekilde dallanın:
 Her kabulü veya reddi `.dwp/config.json` içine kaydedin; reddedilen bir eklenti, geliştirici
 istemedikçe yeniden sunulmaz. Bu bölümün ikinci kez çalıştırılması hiçbir şeyi değiştirmez.
 
+Tablo bir kontrol listesi değil, bir başvuru tablosudur: bir satırı yalnızca zorunlu yerel inceleme, bu deponun zaten kullandığı bir eklenti ya da geliştiricinin az önce kabul ettiği bir eklenti için çalıştırın.
+
 | Bileşen | Kurulu sürümü saptama | Kurma veya yükseltme (sabitlenmiş) |
 | --- | --- | --- |
 | AI Diff Reviewer (gerekli) | `.agents/skills/ai-diff-reviewer/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |

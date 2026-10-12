@@ -235,6 +235,8 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 
 모든 수락과 거절은 `.dwp/config.json`에 기록하세요. 거절된 애드온은 개발자가 요청하지 않는 한 다시 제안하지 않습니다. 이 절을 두 번째로 실행해도 아무것도 바뀌지 않습니다.
 
+이 표는 체크리스트가 아니라 참고용입니다. 필수 로컬 리뷰, 이 리포지토리가 이미 사용하는 애드온, 또는 개발자가 방금 수락한 애드온에 대해서만 해당 행을 실행하세요.
+
 | 구성 요소 | 설치된 버전 감지 | 설치 또는 업그레이드(고정) |
 | --- | --- | --- |
 | AI Diff Reviewer(필수) | `.agents/skills/ai-diff-reviewer/SKILL.md`의 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
