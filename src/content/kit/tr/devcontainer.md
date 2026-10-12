@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Her depo için tek şablondan tekrarlanabilir geliştirme konteyneri: ak ile ana makine hesaplarınızda ajanlar, iki yönlü Herdr ve içeride hiç SSH anahtarı yok."
+description: "Her depo için tek şablondan tekrarlanabilir geliştirme konteyneri: ak ile ana makine hesaplarınızda ajanlar, iki yönlü Herdr, SSH anahtarları isteğe bağlı."
 kind: addon
 lang: tr
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer eklentisi
 
-Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.6.1`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
+Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.6.2`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
 ## devcontainer-kit'in sağladıkları
 
@@ -21,15 +21,15 @@ Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin �
 ## Kurulum
 
 ```bash
-git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.3.1` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v0.3.2` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v0.3.1` etiketi, arayüz 2 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v0.3.2` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
@@ -44,7 +44,9 @@ Her konteyner geliştirme araçlarını taşır — git, gh, ripgrep, bir SSH su
 | `editor` | açık | Etikete sabitlenmiş [DeepWorkPlan Vim](/kit/vim) ile Neovim; kapalıyken düz bir editör sunar. |
 | `dailybot` | kapalı | dailybot eklentisi için Dailybot CLI. |
 
-Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.sh rebuild` sonrasında korunur.
+Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.sh rebuild` sonrasında korunur. `agents` katmanıyla imaj, coding-agents-kit'in üç becerisini de (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`) taşır; bunlar her başlatmada her agent'ın beceri dizinine bağlanır, böylece yeniden oluşturulan bir konteyner onları korur.
+
+Durum birimi (SSH ana makine anahtarı, `~/.ssh`, `gh` oturumu, Herdr istemci durumu, geçmiş) `state` olarak adlandırılır. Birkaç servis tek bir compose projesini paylaştığında, `dck.toml` içinde `[compose] state_volume` ile (veya `dck init --state-volume NAME` ile) her birine kendi adını verin; aksi hâlde hepsi aynı birimi bağlar ve `dck doctor` bunu belirtir.
 
 ## Makineler arasında agent'lar
 
@@ -52,7 +54,8 @@ Oturum açma bilgileri, `gh`, Herdr yapılandırması ve git kimliği `bash dev.
 
 - **Konteynerler ve ana makine.** İçerideki agent'lar ana makinedeki, diğer her dck konteynerindeki ve ana makinenizin Herdr'ının zaten yönettiği diğer loopback konteynerlerindeki Herdr agent'larına ulaşır; onlar da geri ulaşır. Her eş sabitlenmiş bir ana makine anahtarı taşır; hiçbir şeye ilk kullanımda güvenilmez.
 - **İsteğe bağlı bir ana makine dinleyicisi.** `dck setup`, `127.0.0.1` üzerinde yalnızca dck anahtarını kabul eden ve launchd (macOS) tarafından çalışır durumda tutulan kullanıcı düzeyinde bir SSH sunucusunu bir kez önerir. Zaten bir loopback dinleyicisi çalıştırıyorsanız, ana makine profilini bunun yerine ona yönlendirin. `dck host listener disable` onu kaldırır.
-- **Yeniden derlemelerden sonra korunur.** Konteynerin Herdr makine kataloğu bir birimde tutulur; bu nedenle `bash dev.sh rebuild`, içeride kayıtlı her makineyi korur.
+- **Yeniden derlemelerden sonra korunur.** Konteynerin Herdr makine kataloğu bir birimde tutulur; bu nedenle `bash dev.sh rebuild`, içeride kayıtlı her makineyi korur. `v0.3.2` sürümünden itibaren `rebuild`, `start` ve `restart`, `up` ile aynı adımları çalıştırır: konteyner ana makinenin Herdr'ına yeniden kaydedilir, ana makine anahtarı yeniden sabitlenir ve ağ gönderilir; böylece sıfırdan derlenen bir konteyner ana makineye ve eşlerine hemen ulaşır.
+- **Konteynerin içinde Codex bölmeleri.** `v0.3.2` ile içerideki bir Codex agent'ı, başka makinelerdeki eşlere soru sormadan önce `HERDR_PEERS_SELF` değişkenini konteynerin ana makinede kayıtlı makine kimliğine ayarlar; kitin sonraki bir sürümü bunu kendisi ayarlar.
 - **Ana makineden de yanıt.** `dck setup`, ana makineye doğrulanmış bir [herdr-peers](/kit/herdr) kurar; böylece `dck agents` ve `dck ask` orada da çalışır ve ana makinedeki agent'lar `herdr-peers reply` ile yanıt verir.
 - **Kitin oluşturmadığı konteynerler.** Oturum açarken kullandıkları açık anahtarları ana makine profilinizde `[ssh] authorized_extra` altında listeleyin; onlar da dck konteynerlerine ulaşabilir.
 
@@ -76,10 +79,21 @@ host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
 
 agentkit home dizininin tamamı asla bağlanmaz ve mutlak ana makine yolları içeren profiller atlanır. Okuma-yazma olarak paylaşılan bir Codex oturumu aynı anda iki yazar tarafından yenilenebilir: Codex hesabı başına tek bir etkin agent tutun. Konteynerin içinde aynı `ak <kind> @<profile>`, ana makinedekiyle aynı hesapta çalışır; bu da bir liderin konteyner şeritlerine `ak pick`'in seçtiği hesapları vermesini sağlar — bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
 
+## Ana makinenin SSH anahtarları konteynerin içinde
+
+Bazı araçlar yalnızca anahtar dosyalarını okur ve yönlendirilen SSH agent'ını yok sayar: örneğin `gh auth login` yeni bir anahtar üretmeyi önerir. `v0.3.2` sürümünden itibaren bunu yalnızca **ana makine profilinizde** etkinleştirebilirsiniz (bir deponun `dck.toml` dosyası bunu ayarlayamaz; `dck setup` bir kez sorar, varsayılan hayır):
+
+```toml
+[ssh]
+copy_keys = true              # default false
+```
+
+Açıkken `dck up`, ana makinenin `~/.ssh` dizinini `~/.ssh_host` konumuna salt okunur olarak bağlar ve her başlatma, onun `id_*` anahtarlarını konteynerin `~/.ssh` dizinine kopyalar (özel anahtarlar `0600`) ve onları ana makineyle eşit tutar. Agent yönlendirmesi değişmez; seçenek kapatıldığında kopyalar bir sonraki başlatmada kaldırılır. Bedeli: ana makinenin tüm `~/.ssh` dizini konteynerin içinden okunabilir ve özel anahtarlar durum biriminde durur.
+
 ## Güvenlik varsayılanları
 
 - `dck.toml` içinde `bind` ayarlanmadıkça her yayımlanan port `127.0.0.1` adresine bağlanır.
-- SSH üzerinden git, ana makinenin SSH agent'ı aracılığıyla çalışır — onun soketi; asla bir anahtar dosyası, asla bağlanmış bir `~/.ssh` ya da `~/.gitconfig` değil. Git kimliği, `dck setup` komutunun doldurduğu `DCK_GIT_*` değerlerinden gelir.
+- SSH üzerinden git, ana makinenin SSH agent'ı aracılığıyla çalışır — onun soketi; asla bir anahtar dosyası, asla bağlanmış bir `~/.ssh` ya da `~/.gitconfig` değil (ana makine profilinizde [`copy_keys`](#ana-makinenin-ssh-anahtarları-konteynerin-içinde) seçeneğini açmadıysanız). Git kimliği, `dck setup` komutunun doldurduğu `DCK_GIT_*` değerlerinden gelir.
 - SSH ana makine anahtarları çalışma zamanında proje başına bir birime üretilir, asla bir imajın içine gömülmez; sunucu yalnızca açık anahtarları kabul eder, root girişi ve parola yoktur.
 - Şablon hiçbir `cap_add`, hiçbir `privileged` modu ve hiçbir Docker soketi eklemez.
 - Her indirme sürüme sabitlenir ve sağlama toplamıyla doğrulanır; temel imaj özetle (digest) sabitlenir.

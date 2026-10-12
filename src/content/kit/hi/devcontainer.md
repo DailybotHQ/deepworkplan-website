@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "हर रिपॉज़िटरी के लिए एक ही टेम्पलेट से दोहराने योग्य डेव कंटेनर: ak से आपके होस्ट खातों पर एजेंट, दोनों दिशाओं में जुड़ा Herdr, और अंदर कोई SSH कुंजी नहीं।"
+description: "हर रिपॉज़िटरी के लिए एक ही टेम्पलेट से दोहराने योग्य डेव कंटेनर: ak से आपके होस्ट खातों पर एजेंट, दोनों दिशाओं में जुड़ा Herdr, और SSH कुंजियाँ केवल opt-in पर।"
 kind: addon
 lang: hi
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.6.1`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
+रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.6.2`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
 
 ## devcontainer-kit क्या प्रदान करता है
 
@@ -21,15 +21,15 @@ order: 1
 ## इंस्टॉल
 
 ```bash
-git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.3.1` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.3.2` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.3.1`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.3.2`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
@@ -44,7 +44,9 @@ cd your-repo && dck init && bash dev.sh up
 | `editor` | चालू | tag पर पिन किए गए [DeepWorkPlan Vim](/kit/vim) के साथ Neovim; बंद करने पर एक सामान्य एडिटर मिलता है। |
 | `dailybot` | बंद | dailybot ऐडऑन के लिए Dailybot CLI। |
 
-लॉगिन, `gh`, Herdr कॉन्फ़िगरेशन और git पहचान `bash dev.sh rebuild` के बाद भी बने रहते हैं।
+लॉगिन, `gh`, Herdr कॉन्फ़िगरेशन और git पहचान `bash dev.sh rebuild` के बाद भी बने रहते हैं। `agents` परत के साथ image में coding-agents-kit की तीन skills (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`) भी होती हैं, जो हर start पर हर एजेंट की skills डायरेक्टरी में लिंक की जाती हैं, इसलिए दोबारा बनाया गया container भी उन्हें बनाए रखता है।
+
+State volume (SSH होस्ट कुंजी, `~/.ssh`, `gh` लॉगिन, Herdr क्लाइंट स्थिति, इतिहास) का नाम `state` है। जब कई services एक ही compose प्रोजेक्ट साझा करती हैं, तो `dck.toml` में `[compose] state_volume` से (या `dck init --state-volume NAME` से) हर एक को उसका अपना नाम दें; अन्यथा वे सभी एक ही volume mount करती हैं, और `dck doctor` यह बताता है।
 
 ## मशीनों के पार एजेंट
 
@@ -52,7 +54,8 @@ cd your-repo && dck init && bash dev.sh up
 
 - **Container और होस्ट।** भीतर के एजेंट होस्ट पर, हर दूसरे dck container में और उन अन्य loopback containers में मौजूद Herdr एजेंटों तक पहुँचते हैं जिन्हें आपके होस्ट का Herdr पहले से प्रबंधित करता है — और वे भी वापस पहुँचते हैं। हर पीयर एक पिन की हुई होस्ट कुंजी रखता है; पहले उपयोग पर किसी पर भरोसा नहीं किया जाता।
 - **एक वैकल्पिक होस्ट listener।** `dck setup` एक बार, `127.0.0.1` पर एक उपयोगकर्ता-स्तरीय SSH सर्वर प्रस्तावित करता है जो केवल dck कुंजी स्वीकार करता है और जिसे launchd (macOS) चालू रखता है। यदि आप पहले से कोई loopback listener चलाते हैं, तो होस्ट प्रोफ़ाइल को उसी की ओर इंगित करें। `dck host listener disable` उसे हटा देता है।
-- **Rebuild के बाद भी बना रहता है।** Container का Herdr मशीन कैटलॉग एक volume पर रहता है, इसलिए `bash dev.sh rebuild` भीतर पंजीकृत हर मशीन को बनाए रखता है।
+- **Rebuild के बाद भी बना रहता है।** Container का Herdr मशीन कैटलॉग एक volume पर रहता है, इसलिए `bash dev.sh rebuild` भीतर पंजीकृत हर मशीन को बनाए रखता है। `v0.3.2` से `rebuild`, `start` और `restart` वही चरण चलाते हैं जो `up` चलाता है: container फिर से होस्ट के Herdr में पंजीकृत होता है, उसकी होस्ट कुंजी फिर से पिन होती है और mesh भेजा जाता है, इसलिए शुरू से बना container तुरंत होस्ट और अपने peers तक पहुँचता है।
+- **Container के अंदर Codex पैन।** `v0.3.2` के साथ, अंदर का Codex एजेंट दूसरी मशीनों के peers से पूछने से पहले `HERDR_PEERS_SELF` को container की उस मशीन id पर सेट करता है जो होस्ट पर सहेजी गई है; kit की आगे की कोई रिलीज़ इसे स्वयं सेट करेगी।
 - **होस्ट से भी जवाब।** `dck setup` होस्ट पर एक सत्यापित [herdr-peers](/kit/herdr) इंस्टॉल करता है, इसलिए `dck agents` और `dck ask` वहाँ भी काम करते हैं, और होस्ट के एजेंट `herdr-peers reply` से उत्तर देते हैं।
 - **वे containers जिन्हें kit ने नहीं बनाया।** वे जिन सार्वजनिक कुंजियों से लॉगिन करते हैं, उन्हें अपनी होस्ट प्रोफ़ाइल में `[ssh] authorized_extra` के अंतर्गत सूचीबद्ध करें, और वे भी dck containers तक पहुँच सकेंगे।
 
@@ -76,10 +79,21 @@ host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
 
 पूरी agentkit home कभी mount नहीं की जाती, और जिन प्रोफ़ाइलों में होस्ट के absolute पथ हैं उन्हें छोड़ दिया जाता है। read-write साझा किया गया Codex लॉगिन एक साथ दो लेखकों द्वारा रीफ़्रेश किया जा सकता है: हर Codex खाते पर एक ही सक्रिय एजेंट रखें। कंटेनर के अंदर, वही `ak <kind> @<profile>` होस्ट वाले खाते पर ही चलता है, और यही एक लीड को कंटेनर लेन को वे खाते सौंपने देता है जिन्हें `ak pick` ने चुना — देखें [कई एजेंट चलाना](/methodology/06-orchestration)।
 
+## कंटेनर के अंदर होस्ट की SSH कुंजियाँ
+
+कुछ टूल केवल कुंजी फ़ाइलें पढ़ते हैं और forwarded agent को अनदेखा करते हैं: उदाहरण के लिए, `gh auth login` एक नई कुंजी बनाने की पेशकश करता है। `v0.3.2` से आप इसे opt-in कर सकते हैं, केवल अपनी **होस्ट प्रोफ़ाइल** में (किसी रिपॉज़िटरी की `dck.toml` इसे सेट नहीं कर सकती; `dck setup` एक बार पूछता है, डिफ़ॉल्ट नहीं):
+
+```toml
+[ssh]
+copy_keys = true              # default false
+```
+
+जब तक यह चालू है, `dck up` होस्ट के `~/.ssh` को `~/.ssh_host` पर read-only बाइंड करता है, और हर start उसकी `id_*` कुंजियों को container के `~/.ssh` में कॉपी करता है (निजी कुंजियाँ `0600`), होस्ट के साथ तालमेल में। Agent forwarding अपरिवर्तित रहता है, और इसे बंद करने पर अगले start पर प्रतियाँ हटा दी जाती हैं। इसकी कीमत: पूरा होस्ट `~/.ssh` container के अंदर पढ़ा जा सकता है, और निजी कुंजियाँ state volume में रहती हैं।
+
 ## सुरक्षा डिफ़ॉल्ट
 
 - हर प्रकाशित port `127.0.0.1` से बाइंड होता है, जब तक `dck.toml` में `bind` सेट न हो।
-- SSH पर git होस्ट के SSH agent से होकर जाता है — उसका socket, कभी कोई कुंजी फ़ाइल नहीं और कभी mount किया गया `~/.ssh` या `~/.gitconfig` नहीं। git पहचान `DCK_GIT_*` मानों से आती है, जिन्हें `dck setup` भरता है।
+- SSH पर git होस्ट के SSH agent से होकर जाता है — उसका socket, कभी कोई कुंजी फ़ाइल नहीं और कभी mount किया गया `~/.ssh` या `~/.gitconfig` नहीं, जब तक आपने अपनी होस्ट प्रोफ़ाइल में [`copy_keys`](#कंटेनर-के-अंदर-होस्ट-की-ssh-कुंजियाँ) चालू न किया हो। git पहचान `DCK_GIT_*` मानों से आती है, जिन्हें `dck setup` भरता है।
 - SSH होस्ट कुंजियाँ runtime पर प्रति-प्रोजेक्ट volume में उत्पन्न की जाती हैं, कभी image में पहले से शामिल नहीं की जातीं; सर्वर केवल सार्वजनिक कुंजियाँ स्वीकार करता है, कोई root लॉगिन नहीं और कोई पासवर्ड नहीं।
 - टेम्पलेट कोई `cap_add`, कोई `privileged` मोड और कोई Docker socket नहीं जोड़ता।
 - हर डाउनलोड संस्करण पर पिन किया जाता है और checksum से सत्यापित होता है; base image digest पर पिन की जाती है।

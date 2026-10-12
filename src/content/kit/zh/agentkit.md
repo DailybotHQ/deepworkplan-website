@@ -10,7 +10,7 @@ order: 8
 
 每个终端编码代理都有自己的一套参数用于继续会话，有自己的方式隔离第二个账户，有自己的无头模式，也有自己用于跳过权限提示的开关。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** 在它们之上提供统一的命令界面：`ak <kind> [@profile]`。
 
-这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.6.1`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
+这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.6.2`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
 
 ## 工具包为你提供什么
 
@@ -23,7 +23,7 @@ order: 8
 
 ## 账户、配额与账户选择
 
-工具包把你持有的每个登录或密钥都视为一个**账户**：一个 CLI × 一个配置文件。`@default`（或 `@1`）是 CLI 自己的 home；`@2`、`@work` 或 `@client-x` 是独立的登录，各自位于配置文件根目录下的单独目录中，可同时运行。`ak profiles` 列出它们及其登录状态和密钥名称；`ak profiles --json` 为工具提供同一份列表（schema `profiles-v1`）。
+工具包把你持有的每个登录或密钥都视为一个**账户**：一个 CLI × 一个配置文件。`@default`（或 `@1`）是 CLI 自己的 home；`@2`、`@work` 或 `@client-x` 是独立的登录，各自位于配置文件根目录下的单独目录中，可同时运行。`ak profiles` 列出它们及其登录状态和密钥名称；`ak profiles --json` 为工具提供同一份列表（schema `profiles-v1`）。自 `v0.5.1` 起，它会报告 Claude Code 令牌的实际位置——`file`、`keychain`（macOS）、`none` 或 `unknown`——仅检测其是否存在，从不读取机密；并且能识别 Linux 上的 Cursor 登录，无论是在容器中还是在 Linux 主机上。
 
 `ak usage` 列出工具包能看到的每个账户的配额和用量，每个账户和配置文件一行：Claude Code 订阅（5 小时、每周和按模型的窗口）、通过 ChatGPT 登录的 Codex 以及 Z.AI 编程套餐密钥均为实时数据；Cursor、Grok、xAI 和 Azure OpenAI 显示 `n/d` 并附上原因。该命令只读：从不刷新登录、从不打印令牌，也从不在配置文件中写入任何内容。`--json` 为工具提供同一份列表（schema `usage-v1`）。这些用量端点属于厂商内部接口，并非官方接口。
 
@@ -48,15 +48,15 @@ ak setup verify            # 按顺序的检查，每项附带修复命令
 ## 安装
 
 ```bash
-git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v0.5.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v0.5.1`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v0.5.0`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v0.5.1`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |

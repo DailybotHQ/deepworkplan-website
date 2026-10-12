@@ -85,10 +85,10 @@ teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenil
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.6.1
+  git checkout v7.6.2
   # O sürümün sağlama toplamlarını indirin ve aşağıdaki özetle karşılaştırın:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.1/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.2/SHA256SUMS
   shasum -a 256 SHA256SUMS   # Sabitlenmiş sürümler'deki deepworkplan-skill özetine eşit olmalı
   ./setup.sh --verify        # sıfır dışı çıkış bir dosyanın eşleşmediği anlamına gelir — durdurun
   ```
@@ -102,13 +102,13 @@ teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenil
 
   | Depo (github.com/DailybotHQ) | Etiket | `SHA256SUMS` dosyasının sha256 değeri |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.6.1` | `c112bb72c450e8dc64fbcf6f55a1a4262b2d8d445c8ee01d16a4b47a8258c425` |
-  | coding-agents-kit | `v0.5.0` | `a90f45e44085370694a954a3578d037d0637d0eb4ec2f1b846a8d29556b1ec27` |
+  | deepworkplan-skill | `v7.6.2` | `1972d6b6b2e86d446175cef0cfb5ade21e965b591a86b6eaa6ab27dc261fe7f5` |
+  | coding-agents-kit | `v0.5.1` | `400e8fd684b0574fb88da143018ed9172b3b5ebd80f71172c42ebc0b354a2fd5` |
   | herdr-peers | `v0.2.2` | `9c4f94101a1b1b9765b71edc8ff96580543061a6291a811acb630b2468b7b682` |
-  | devcontainer-kit | `v0.3.1` | `14920cc1c45a61e513e93d823ee777b6427fcf141482961bfaabbd252ccff5a9` |
+  | devcontainer-kit | `v0.3.2` | `3f16a5460fa23f37caa7b341651f2bd66aba67b015c53f0f5c0ce4e87e169e67` |
   | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
-  | ai-diff-reviewer | `v3.3.9` | `aaf490cfe01ba858df49732798d6861a7c742b967f39fedb4f1a9c999aafc0c9` |
-  | agent-skill | `v3.23.12` | yayımlanmadı — skills CLI, `skills-lock.json` içine bir içerik özeti kaydeder |
+  | ai-diff-reviewer | `v3.3.10` | `e89ee97a2af5f17e298ebd63d66be2709470b2a430f84a86626638366df3cb13` |
+  | agent-skill | `v3.23.13` | yayımlanmadı — skills CLI, `skills-lock.json` içine bir içerik özeti kaydeder |
 - **Bir sorun bildirin.** Güvenlik sorunlarını ilgili depoda **GitHub'ın güvenlik açığı bildirme özelliği aracılığıyla özel olarak** bildirin — `https://github.com/DailybotHQ/deepworkplan-skill/security` veya `https://github.com/DailybotHQ/deepworkplan-website/security` — kamuya açık bir issue olarak değil. Ayrıca her deponun `SECURITY.md` dosyasına, `https://deepworkplan.com/.well-known/security.txt` adresine ve güven sayfası `https://deepworkplan.com/trust` adresine bakın.
 
 ## 2. Deep Work Plan skill’ini kurun
@@ -120,7 +120,7 @@ ile dokuz alt skill içerir — `create`, `execute`, `refine`, `resume`, `status
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.2 --skill deepworkplan -y
 ```
 
 Veya OpenClaw ile yükleyin:
@@ -142,7 +142,7 @@ uygulanan **DWP 7.0.0**'dır. Güncel skill paketi, yönlendirici ile dokuz alt 
 içerir: `create`, `execute`, `refine`, `resume`, `status`, `verify`, `onboard`,
 `author` ve `upgrade`.
 
-Yüklü skill sürümü: **7.6.1**. Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; bir v5 planını v6'ya geçirmek açık ve önizlemeli bir geçiş gerektirir.
+Yüklü skill sürümü: **7.6.2**. Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; bir v5 planını v6'ya geçirmek açık ve önizlemeli bir geçiş gerektirir.
 
 Standart kasıtlı olarak orantılıdır ve bu orantıyı geliştiricinin disiplininin değil,
 planın bir özelliği hâline getirir. Bir plan ya küçük, sınırlı iş için planın
@@ -191,7 +191,7 @@ yerel AI Diff Reviewer incelemesi dâhil olmak üzere birikmiş değişiklik kü
 üzerinde güvenlik taramasını çalıştırır, nihai depo durumunu doğrular, görevler
 tarafından kullanılan skill'leri uzlaştırır ve kanıtları ile sınırlamaları kaydeder.
 Yerel inceleme skill'i sabitlenmiş bir sürümde kurulur; şu anda belgelenen komut
-`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9` sürümünü kurar. GitHub Action, ayrı ve isteğe bağlı
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.10` sürümünü kurar. GitHub Action, ayrı ve isteğe bağlı
 bir CI yüzeyidir ve temel metodoloji için asla zorunlu değildir.
 
 Çalışıp hiçbir şey bildirmeyen bir inceleme ile hiç bulgu üretemeyen bir inceleme aynı şey değildir. İkincisi **tamamlanmamış bir incelemedir**: öyle kaydedilir, değişiklik kümesinin temiz olduğunun kanıtı olarak asla sayılmaz ve Final Review'i kapatmak için asla gerekçe olmaz — engelleyici katılık altında bir `timeout` incelemesinin aldığı ile aynı kırmızı muamele (BC-04). Eksik bir inceleyici ve hata veren bir çağrıyla birlikte bunlar üç ayrı durumdur — ve hiçbiri diff'in incelenip temiz bulunduğu anlamına gelmez. `Recommendation: approve` diyen bir gövde de check’in geçtiğinin kanıtı değildir. Önce izleme işaretinin Highest severity / Strictness gate / Check status bloğunu okuyun — kapı başarısızken çalışma zamanı modelin `approve` satırını yeniden yazar.
@@ -261,11 +261,11 @@ Tablo bir kontrol listesi değil, bir başvuru tablosudur: bir satırı yalnızc
 
 | Bileşen | Kurulu sürümü saptama | Kurma veya yükseltme (sabitlenmiş) |
 | --- | --- | --- |
-| AI Diff Reviewer (gerekli) | `.agents/skills/ai-diff-reviewer/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
-| Dailybot | `.agents/skills/dailybot/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| AI Diff Reviewer (gerekli) | `.agents/skills/ai-diff-reviewer/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.10 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `.agents/skills/dailybot/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.13 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | kurulu herdr-peers skill’i içindeki `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh adresindeki doğrulanmış kurucu (`v0.7.0` sürümüne sabitler; indirin, `shasum -a 256 -c install.sh.sha256`, ardından çalıştırın) |
 
 Her indirmeyi çalıştırmadan önce sürümünün `SHA256SUMS` dosyasına ve yukarıdaki *Sabitlenmiş
@@ -279,15 +279,15 @@ standardından itibaren gereklidir): yukarıdaki etikete sabitlenmiş skill art�
 upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) sıralayın ve yalnızca bu depoya uyanları, her birini açık bir tercih
 olarak sunun. Bir depo, **sıfır** isteğe bağlı eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
-- **Devcontainer desteği** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) için ince bir entegrasyon katmanı (`dck`, `v0.3.1` sürümüne sabitlenmiş, `dck-dockerfile` becerisiyle birlikte): `dck init` deponun kendi konteynerini oluşturur — özetle (digest) sabitlenmiş resmî imaj, ortak temel imaj yok, `bash dev.sh up` — ve mevcut bir devcontainer’ı yalnızca farkı (diff) kabul edildikten sonra uzlaştırır. Kabul edildiğinde, tam yığına ulaşmak için aşağıdaki *Devcontainer yolu*nu izleyin.
-- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.12) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
+- **Devcontainer desteği** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) için ince bir entegrasyon katmanı (`dck`, `v0.3.2` sürümüne sabitlenmiş, `dck-dockerfile` becerisiyle birlikte): `dck init` deponun kendi konteynerini oluşturur — özetle (digest) sabitlenmiş resmî imaj, ortak temel imaj yok, `bash dev.sh up` — ve mevcut bir devcontainer’ı yalnızca farkı (diff) kabul edildikten sonra uzlaştırır. Kabul edildiğinde, tam yığına ulaşmak için aşağıdaki *Devcontainer yolu*nu izleyin.
+- **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.13) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.
 - **Design system** — yalnızca saptanan arayüz yüzeyi olan depolar için isteğe bağlı `docs/DESIGN.md`
   (saf kütüphanelere, headless servislere veya yalnızca altyapı depolarına sunulmaz). Üç profil tek bir
   dosyada katmanlanır: visual-ui (saptandığında güçlü biçimde önerilir; kurulum kabul ile sınırlı), cli-output ve conversational —
   son ikisi her zaman sorulur, asla otomatik uygulanmaz.
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v0.5.0` sürümüne sabitlenmiş) aracının makine düzeyinde kurulumu: her kodlama agent’ı için tek komut, profil başına bir hesap, en çok boş kapasiteye sahip hesabı seçmek için `ak usage` ve `ak pick`, ve sınırlı `parallel_safe` görevleri başka kodlama agent’larına devreden planlar için başsız `ak run` (her worktree için bir delege). Kit, agent’ları varsayılan olarak özerk başlatır ve devre dışı bırakma seçeneği (`--ask` ya da `AGENTKIT_PERMISSIONS=ask`) her zaman üstün gelir.
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v0.5.1` sürümüne sabitlenmiş) aracının makine düzeyinde kurulumu: her kodlama agent’ı için tek komut, profil başına bir hesap, en çok boş kapasiteye sahip hesabı seçmek için `ak usage` ve `ak pick`, ve sınırlı `parallel_safe` görevleri başka kodlama agent’larına devreden planlar için başsız `ak run` (her worktree için bir delege). Kit, agent’ları varsayılan olarak özerk başlatır ve devre dışı bırakma seçeneği (`--ask` ya da `AGENTKIT_PERMISSIONS=ask`) her zaman üstün gelir.
 - **Herdr** — herhangi bir makinedeki Herdr bölmesinde bulunan eş bir agent’tan tek bir yetkili yanıt isteyen planlar ve şeritlerini izleyen bir lider için [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (`v0.2.2` sürümüne sabitlenmiş, artı Herdr’ın resmî skill’i) aracının makine düzeyinde kurulumu.
 - **DeepWorkPlan Vim** — terminal düzenleyicisi ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v0.7.0` sürümüne sabitlenmiş); mevcut bir Neovim yapılandırmasının üzerine açık onay olmadan asla yazmayan, makine düzeyinde bir kurulum.
 - **AI Diff Reviewer** — gerekli yerel inceleme (bir opt-in değil): her Final Review’in güvenlik

@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Một dev container có thể tái tạo cho mỗi kho mã, từ một mẫu duy nhất: agent dùng tài khoản host qua ak, Herdr nối hai chiều và không có khóa SSH bên trong."
+description: "Một dev container có thể tái tạo cho mỗi kho mã, từ một mẫu duy nhất: agent dùng tài khoản host qua ak, Herdr nối hai chiều, khóa SSH chỉ khi bạn chọn bật."
 kind: addon
 lang: vi
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.6.1`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
+Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.6.2`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
 
 ## devcontainer-kit cung cấp những gì
 
@@ -21,15 +21,15 @@ Mang đến cho repository một dev container có thể tái lập và được
 ## Cài đặt
 
 ```bash
-git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v0.3.1`: `v0.2.0` không được hỗ trợ.
+Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v0.3.2`: `v0.2.0` không được hỗ trợ.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.3.1`, giao diện 2 |
+| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v0.3.2`, giao diện 2 |
 | Khóa registry | `devcontainer` trong `.dwp/config.json` |
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
@@ -44,7 +44,9 @@ Mọi container đều mang theo các công cụ phát triển — git, gh, ripg
 | `editor` | bật | Neovim với [DeepWorkPlan Vim](/kit/vim) được ghim theo tag; khi tắt sẽ là một trình soạn thảo thông thường. |
 | `dailybot` | tắt | Dailybot CLI, dành cho addon dailybot. |
 
-Thông tin đăng nhập, `gh`, cấu hình Herdr và danh tính git được giữ lại sau `bash dev.sh rebuild`.
+Thông tin đăng nhập, `gh`, cấu hình Herdr và danh tính git được giữ lại sau `bash dev.sh rebuild`. Với lớp `agents`, image còn mang theo ba skill của coding-agents-kit (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`), được liên kết vào thư mục skill của mọi agent ở mỗi lần khởi động, nên một container được tạo lại vẫn giữ chúng.
+
+Volume trạng thái (khóa host SSH, `~/.ssh`, phiên đăng nhập `gh`, trạng thái client Herdr, lịch sử) có tên là `state`. Khi nhiều service dùng chung một dự án compose, hãy đặt cho mỗi service một tên riêng bằng `[compose] state_volume` trong `dck.toml` (hoặc `dck init --state-volume NAME`); nếu không, tất cả sẽ mount cùng một volume, và `dck doctor` sẽ báo điều đó.
 
 ## Agent trên nhiều máy
 
@@ -52,7 +54,8 @@ Từ `v0.2.3`, `dck up` thiết lập một mạng lưới hai chiều mà khôn
 
 - **Container và máy host.** Agent bên trong kết nối tới các agent Herdr trên máy host, trong mọi container dck khác và trong các container loopback khác mà Herdr của máy host đã quản lý — và các agent đó cũng kết nối ngược lại. Mỗi peer mang một khóa host được ghim; không có gì được tin cậy ở lần dùng đầu tiên.
 - **Một listener tùy chọn trên máy host.** `dck setup` đề xuất, một lần duy nhất, một máy chủ SSH cấp người dùng trên `127.0.0.1` chỉ chấp nhận khóa dck và được launchd giữ cho chạy liên tục (macOS). Nếu bạn đã chạy một listener loopback, hãy trỏ hồ sơ host tới listener đó. `dck host listener disable` sẽ gỡ bỏ nó.
-- **Tồn tại qua các lần rebuild.** Danh mục máy Herdr của container nằm trên một volume, nên `bash dev.sh rebuild` giữ lại mọi máy đã đăng ký bên trong.
+- **Tồn tại qua các lần rebuild.** Danh mục máy Herdr của container nằm trên một volume, nên `bash dev.sh rebuild` giữ lại mọi máy đã đăng ký bên trong. Từ `v0.3.2`, `rebuild`, `start` và `restart` chạy cùng các bước như `up`: container được đăng ký lại với Herdr của máy host, khóa host của nó được ghim lại và mạng lưới được đẩy đi, nên một container được dựng từ đầu tiếp cận máy host và các peer của nó ngay lập tức.
+- **Pane Codex bên trong container.** Với `v0.3.2`, một agent Codex bên trong đặt `HERDR_PEERS_SELF` thành mã máy của container như đã lưu trên máy host trước khi hỏi các peer trên máy khác; một bản phát hành sau của bộ kit sẽ tự đặt biến này.
 - **Phản hồi cả từ máy host.** `dck setup` cài đặt một [herdr-peers](/kit/herdr) đã được xác minh trên máy host, nên `dck agents` và `dck ask` hoạt động ở đó, và các agent trên máy host trả lời bằng `herdr-peers reply`.
 - **Container không do bộ kit tạo ra.** Liệt kê các khóa công khai mà chúng dùng để đăng nhập trong `[ssh] authorized_extra` của hồ sơ host, và chúng cũng có thể kết nối tới các container dck.
 
@@ -76,10 +79,21 @@ Khi bật `host_profiles`, `dck up` chỉ chia sẻ hồ sơ của những CLI m
 
 Toàn bộ home của agentkit không bao giờ được mount, và các hồ sơ chứa đường dẫn tuyệt đối của máy host sẽ bị bỏ qua. Một phiên đăng nhập Codex được chia sẻ ở chế độ đọc-ghi có thể bị hai bên ghi làm mới cùng lúc: hãy giữ một agent đang hoạt động cho mỗi tài khoản Codex. Bên trong container, cùng lệnh `ak <kind> @<profile>` chạy trên cùng tài khoản như trên máy host, và đó là điều cho phép một lead giao cho các lane trong container những tài khoản mà `ak pick` đã chọn — xem [Chạy nhiều agent](/methodology/06-orchestration).
 
+## Khóa SSH của máy host bên trong container
+
+Một số công cụ chỉ đọc tệp khóa và bỏ qua agent được chuyển tiếp: ví dụ, `gh auth login` đề nghị tạo một khóa mới. Từ `v0.3.2`, bạn có thể chọn bật, chỉ trong **hồ sơ host** của bạn (`dck.toml` của một repository không thể thiết lập nó; `dck setup` hỏi một lần, mặc định là không):
+
+```toml
+[ssh]
+copy_keys = true              # default false
+```
+
+Khi tùy chọn này bật, `dck up` gắn `~/.ssh` của máy host ở chế độ chỉ đọc tại `~/.ssh_host`, và mỗi lần khởi động sẽ sao chép các khóa `id_*` của nó vào `~/.ssh` của container (khóa riêng tư `0600`), luôn đồng bộ với máy host. Việc chuyển tiếp agent không thay đổi, và khi tắt tùy chọn, các bản sao sẽ bị xóa ở lần khởi động tiếp theo. Cái giá phải trả: toàn bộ `~/.ssh` của máy host có thể được đọc bên trong container, và các khóa riêng tư nằm lại trong volume trạng thái.
+
 ## Mặc định bảo mật
 
 - Mọi cổng được công bố đều gắn vào `127.0.0.1` trừ khi `dck.toml` thiết lập `bind`.
-- Git qua SSH đi qua SSH agent của máy host — socket của nó, không bao giờ là một tệp khóa và không bao giờ là `~/.ssh` hay `~/.gitconfig` được mount vào. Danh tính git lấy từ các giá trị `DCK_GIT_*` do `dck setup` điền.
+- Git qua SSH đi qua SSH agent của máy host — socket của nó, không bao giờ là một tệp khóa và không bao giờ là `~/.ssh` hay `~/.gitconfig` được mount vào, trừ khi bạn đã bật [`copy_keys`](#khóa-ssh-của-máy-host-bên-trong-container) trong hồ sơ host của mình. Danh tính git lấy từ các giá trị `DCK_GIT_*` do `dck setup` điền.
 - Khóa host SSH được tạo lúc chạy vào một volume riêng cho từng dự án, không bao giờ được đóng gói sẵn vào image; máy chủ chỉ chấp nhận khóa công khai, không cho đăng nhập root và không dùng mật khẩu.
 - Template không thêm `cap_add`, không dùng chế độ `privileged` và không có Docker socket.
 - Mọi lượt tải xuống đều được ghim theo phiên bản và xác minh bằng checksum; base image được ghim theo digest.

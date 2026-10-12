@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Ein reproduzierbarer Dev-Container pro Repository aus einem Template: Agenten über ak auf Ihren Host-Konten, Herdr in beide Richtungen, kein SSH-Schlüssel."
+description: "Ein reproduzierbarer Dev-Container pro Repository aus einem Template: Agenten über ak auf Ihren Host-Konten, Herdr beidseitig, SSH-Schlüssel nur per Opt-in."
 kind: addon
 lang: de
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer-Addon
 
-Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.6.1`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
+Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.6.2`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
 ## Was devcontainer-kit bereitstellt
 
@@ -21,15 +21,15 @@ Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontaine
 ## Installation
 
 ```bash
-git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.3.1`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.3.2`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.3.1`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.3.2`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
@@ -44,7 +44,9 @@ Jeder Container enthält die Entwicklungswerkzeuge — git, gh, ripgrep, einen S
 | `editor` | an | Neovim mit [DeepWorkPlan Vim](/kit/vim), per Tag fixiert; ausgeschaltet gibt es einen einfachen Editor. |
 | `dailybot` | aus | Die Dailybot-CLI, für das Dailybot-Addon. |
 
-Anmeldungen, `gh`, die Herdr-Konfiguration und die Git-Identität überstehen `bash dev.sh rebuild`.
+Anmeldungen, `gh`, die Herdr-Konfiguration und die Git-Identität überstehen `bash dev.sh rebuild`. Mit dem Layer `agents` enthält das Image außerdem die drei Skills von coding-agents-kit (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`), die bei jedem Start in das Skills-Verzeichnis jedes Agenten verlinkt werden, sodass ein neu erstellter Container sie behält.
+
+Das State-Volume (SSH-Host-Schlüssel, `~/.ssh`, `gh`-Anmeldung, Herdr-Client-Zustand, Verlauf) heißt `state`. Wenn sich mehrere Services ein Compose-Projekt teilen, geben Sie jedem mit `[compose] state_volume` in `dck.toml` (oder `dck init --state-volume NAME`) einen eigenen Namen; andernfalls binden alle dasselbe Volume ein, und `dck doctor` weist darauf hin.
 
 ## Agenten über Rechnergrenzen hinweg
 
@@ -52,7 +54,8 @@ Seit `v0.2.3` richtet `dck up` unter Docker Desktop ohne manuellen Schritt ein b
 
 - **Container und Host.** Agenten im Container erreichen Herdr-Agenten auf dem Host, in jedem anderen dck-Container und in den anderen Loopback-Containern, die das Herdr Ihres Hosts bereits verwaltet — und diese erreichen sie umgekehrt ebenso. Jeder Peer trägt einen fixierten Host-Schlüssel; nichts wird bei der ersten Verwendung vertraut.
 - **Ein optionaler Host-Listener.** `dck setup` bietet einmalig einen SSH-Server auf Benutzerebene an `127.0.0.1` an, der nur den dck-Schlüssel akzeptiert und von launchd (macOS) am Laufen gehalten wird. Wenn Sie bereits einen Loopback-Listener betreiben, verweisen Sie das Host-Profil stattdessen darauf. `dck host listener disable` entfernt ihn.
-- **Übersteht Rebuilds.** Der Herdr-Rechnerkatalog des Containers liegt auf einem Volume, sodass `bash dev.sh rebuild` jeden darin registrierten Rechner beibehält.
+- **Übersteht Rebuilds.** Der Herdr-Rechnerkatalog des Containers liegt auf einem Volume, sodass `bash dev.sh rebuild` jeden darin registrierten Rechner beibehält. Seit `v0.3.2` führen `rebuild`, `start` und `restart` dieselben Schritte aus wie `up`: Der Container wird erneut beim Herdr des Hosts registriert, sein Host-Schlüssel neu fixiert und das Mesh verteilt, sodass ein von Grund auf neu gebauter Container den Host und seine Peers sofort erreicht.
+- **Codex-Panes im Container.** Mit `v0.3.2` setzt ein Codex-Agent im Container `HERDR_PEERS_SELF` auf die Rechner-ID des Containers, wie sie auf dem Host gespeichert ist, bevor er Peers auf anderen Rechnern anfragt; ein späteres Release des Kits setzt die Variable selbst.
 - **Antworten auch vom Host.** `dck setup` installiert ein verifiziertes [herdr-peers](/kit/herdr) auf dem Host, sodass `dck agents` und `dck ask` dort funktionieren und Host-Agenten mit `herdr-peers reply` antworten.
 - **Container, die das Kit nicht erstellt hat.** Führen Sie die öffentlichen Schlüssel, mit denen sie sich anmelden, unter `[ssh] authorized_extra` in Ihrem Host-Profil auf, dann erreichen auch sie dck-Container.
 
@@ -76,10 +79,21 @@ Mit aktiviertem `host_profiles` teilt `dck up` nur die Profile der CLIs, die das
 
 Das gesamte Agentkit-Home wird nie eingebunden, und Profile mit absoluten Host-Pfaden werden übersprungen. Eine mit Schreibzugriff geteilte Codex-Anmeldung kann von zwei Schreibern gleichzeitig erneuert werden: Halten Sie einen aktiven Agenten pro Codex-Konto. Im Container läuft dasselbe `ak <kind> @<profile>` auf demselben Konto wie auf dem Host; das erlaubt einem Lead, Container-Lanes die Konten zu übergeben, die `ak pick` gewählt hat — siehe [Viele Agenten betreiben](/methodology/06-orchestration).
 
+## Die SSH-Schlüssel des Hosts im Container
+
+Manche Werkzeuge lesen nur Schlüsseldateien und ignorieren den weitergeleiteten Agenten: `gh auth login` etwa bietet an, einen neuen Schlüssel zu erzeugen. Seit `v0.3.2` können Sie das per Opt-in aktivieren, und zwar nur in Ihrem **Host-Profil** (die `dck.toml` eines Repositorys kann es nicht setzen; `dck setup` fragt einmal, Standard ist Nein):
+
+```toml
+[ssh]
+copy_keys = true              # default false
+```
+
+Solange die Option aktiv ist, bindet `dck up` das `~/.ssh` des Hosts schreibgeschützt unter `~/.ssh_host` ein, und jeder Start kopiert dessen `id_*`-Schlüssel in das `~/.ssh` des Containers (private Schlüssel `0600`), synchron mit dem Host. Die Agent-Weiterleitung bleibt unverändert, und das Abschalten entfernt die Kopien beim nächsten Start. Der Preis: Das gesamte `~/.ssh` des Hosts ist im Container lesbar, und die privaten Schlüssel liegen im State-Volume.
+
 ## Sicherheitsvorgaben
 
 - Jeder veröffentlichte Port bindet an `127.0.0.1`, sofern `dck.toml` nicht `bind` setzt.
-- Git über SSH läuft über den SSH-Agenten des Hosts — dessen Socket, nie eine Schlüsseldatei und nie ein eingebundenes `~/.ssh` oder `~/.gitconfig`. Die Git-Identität stammt aus `DCK_GIT_*`-Werten, die `dck setup` ausfüllt.
+- Git über SSH läuft über den SSH-Agenten des Hosts — dessen Socket, nie eine Schlüsseldatei und nie ein eingebundenes `~/.ssh` oder `~/.gitconfig`, es sei denn, Sie haben [`copy_keys`](#die-ssh-schlüssel-des-hosts-im-container) in Ihrem Host-Profil aktiviert. Die Git-Identität stammt aus `DCK_GIT_*`-Werten, die `dck setup` ausfüllt.
 - SSH-Host-Schlüssel werden zur Laufzeit in ein projektbezogenes Volume erzeugt und nie in ein Image eingebacken; der Server akzeptiert nur öffentliche Schlüssel, ohne Root-Login und ohne Passwörter.
 - Das Template fügt kein `cap_add`, keinen `privileged`-Modus und keinen Docker-Socket hinzu.
 - Jeder Download ist per Version fixiert und per Prüfsumme verifiziert; das Basis-Image ist per Digest fixiert.

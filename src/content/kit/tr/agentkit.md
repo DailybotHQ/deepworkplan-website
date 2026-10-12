@@ -10,7 +10,7 @@ order: 8
 
 Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayrakları, ikinci bir hesabı ayrı tutmak için kendi yolu, kendi başsız (headless) modu ve izin istemlerini atlamak için kendi anahtarı vardır. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)**, hepsinin üzerine tek bir komut yüzeyi koyar: `ak <kind> [@profile]`.
 
-Bu eklenti, kiti **DWP v7**'ye (paket `v7.6.1`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
+Bu eklenti, kiti **DWP v7**'ye (paket `v7.6.2`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
 ## Kitin size sundukları
 
@@ -23,7 +23,7 @@ Bu eklenti, kiti **DWP v7**'ye (paket `v7.6.1`) **başsız** devretme taşımas�
 
 ## Hesaplar, kota ve hesap seçimi
 
-Kit, sahip olduğunuz her oturumu veya anahtarı bir **hesap** olarak ele alır: bir CLI × bir profil. `@default` (veya `@1`) CLI'ın kendi home dizinidir; `@2`, `@work` ya da `@client-x` ise her biri profiller kökü altında kendi dizininde bulunan ve yan yana çalışan ayrı oturumlardır. `ak profiles` bunları oturum durumları ve anahtarlarının adlarıyla listeler; `ak profiles --json` aynı listeyi araçlara verir (şema `profiles-v1`).
+Kit, sahip olduğunuz her oturumu veya anahtarı bir **hesap** olarak ele alır: bir CLI × bir profil. `@default` (veya `@1`) CLI'ın kendi home dizinidir; `@2`, `@work` ya da `@client-x` ise her biri profiller kökü altında kendi dizininde bulunan ve yan yana çalışan ayrı oturumlardır. `ak profiles` bunları oturum durumları ve anahtarlarının adlarıyla listeler; `ak profiles --json` aynı listeyi araçlara verir (şema `profiles-v1`). `v0.5.1` sürümünden itibaren Claude Code token'ının gerçekte nerede olduğunu — `file`, `keychain` (macOS), `none` ya da `unknown` — yalnızca varlığına bakarak, gizli bilgiyi asla okumadan bildirir; ayrıca Linux'ta, bir konteynerde ya da bir Linux ana makinesinde bir Cursor oturumunu tanır.
 
 `ak usage`, kitin görebildiği her hesabın kotasını ve kullanımını hesap ve profil başına bir satırla listeler: Claude Code abonelikleri (5 saatlik, haftalık ve model başına pencereler), ChatGPT ile Codex oturumları ve Z.AI kodlama planı anahtarları için canlıdır; Cursor, Grok, xAI ve Azure OpenAI nedeniyle birlikte `n/d` gösterir. Salt okunurdur: hiçbir oturumu yenilemez, hiçbir token yazdırmaz ve bir profilin altına hiçbir şey yazmaz. `--json` aynı listeyi araçlara verir (şema `usage-v1`). Kullanım uç noktaları sağlayıcılara özgü ve resmî olmayan uç noktalardır.
 
@@ -48,15 +48,15 @@ Uzun, etkileşimli şeritlerde her şerit, kendi hesabıyla bir [Herdr](/kit/her
 ## Kurulum
 
 ```bash
-git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.5.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.5.1` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v0.5.0` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v0.5.1` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |

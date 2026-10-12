@@ -690,7 +690,7 @@ export const zh: SiteTranslations = {
         description:
           '在核查之前，请将提示和技能视为不可信的。两者均为开源且采用 MIT 许可；该技能以 Markdown 为核心，无网络调用，也无遥测。每个发布版本都会发布一份涵盖所有已发布技能文件的 SHA256SUMS，以便你在运行前确认副本匹配。发布版本有校验和，但未签名（签名是已记录的下一步计划）。',
         commands: [
-          'git clone --branch v7.6.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.6.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -698,7 +698,7 @@ export const zh: SiteTranslations = {
         description:
           '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加九个子技能——create、execute、refine、resume、status、verify、onboard、author 与 upgrade。',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.2 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -801,7 +801,7 @@ export const zh: SiteTranslations = {
             id: 'how-to-use',
             question: '如何使用？',
             answer:
-              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.1 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
+              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.2 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
             linkLabel: '快速开始',
             linkPath: '/quickstart',
           },
