@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.56] - 2026-10-12
+
 ### Changed
 
 - chore: vendor DWP pack v7.6.3 (via v7.6.2) and move the ecosystem pins to coding-agents-kit v0.5.3, devcontainer-kit v0.3.5, herdr-peers v0.2.3, AI Diff Reviewer v3.3.11 and Dailybot v3.23.14 (tags and SHA256SUMS digests on every install surface)
@@ -1299,7 +1301,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.55...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.56...HEAD
+[5.0.56]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.56
 [5.0.55]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.55
 [5.0.54]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.54
 [5.0.53]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.53
