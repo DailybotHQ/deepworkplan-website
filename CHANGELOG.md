@@ -9,6 +9,18 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.55] - 2026-10-12
+
+### Changed
+
+- chore: dogfood vendored skills to dailybot v3.23.14, ai-diff-reviewer v3.3.11
+- chore: point the dck config reference at v0.3.1 and date the trust metadata for 7.6.1
+- feat: pin pack v7.6.1, devcontainer-kit v0.3.1 and herdr-peers v0.2.2; Codex lanes pass --pane
+- chore(skill): vendor deepworkplan 7.6.1 and re-render the dev container with devcontainer-kit v0.3.1
+- fix: record the refreshed reviewer and Dailybot versions and tidy the lookup translations
+- docs: the install table is a lookup, not a checklist (17 languages)
+- chore: re-render the dev container with devcontainer-kit v0.3.0 and record its addons
+
 ## [5.0.54] - 2026-10-11
 
 ### Changed
@@ -1280,7 +1292,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.54...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.55...HEAD
+[5.0.55]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.55
 [5.0.54]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.54
 [5.0.53]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.53
 [5.0.52]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.52
