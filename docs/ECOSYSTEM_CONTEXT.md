@@ -62,6 +62,9 @@ something that already exists:
 
 An orchestrator plan in this hub sequences those steps; see
 [Cross-project standards](CROSS_PROJECT_STANDARDS.md#orchestrator-plans).
+With coding-agents-kit `v0.6.0` and herdr-peers `v0.3.0` its lanes hand work on
+before an account runs out and the leadership survives the lead
+([Swarm autonomy](https://deepworkplan.com/methodology/07-swarm-autonomy)).
 
 ## Hub boundaries
 

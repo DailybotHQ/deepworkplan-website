@@ -53,6 +53,13 @@ repository (`repositories/<name>/.dwp/plans/PLAN_{child}/`), per
 - Children follow the specification independently and reference the parent's
   manifest; the parent ends with an integration checkpoint (versions, site
   claims, cross-links) after every child completes.
+- Lanes keep the swarm running on their own (pack guide §17, *Swarm
+  autonomy*): each lane checks its account with `ak capacity --self` at task
+  boundaries and hands its child plan on through a `dwp-handoff/v1` packet
+  before it runs out; the lead claims the parent plan with `herdr-peers lead
+  claim` and a deputy takes over if it disappears; only the critical classes
+  C1–C7 reach the developer. Every milestone message ends with a
+  `capacity=<verdict> <headroom>% <@profile>` line.
 - Plan history is local and git-ignored in every repository: it moves with the
   clone, never through a commit. To carry it from an older checkout, copy that
   checkout's `.dwp/` into the new clone without overwriting tracked files.
