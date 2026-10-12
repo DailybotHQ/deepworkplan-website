@@ -24,12 +24,17 @@ for k in "$@"; do
   esac
 done
 
-# 1. Node — the npm-distributed CLIs need a current one. python-3.13 and debian
-#    carry only Debian's nodejs (an older major, installed for the editor's
-#    plugins), so the pinned Node goes into /usr/local, ahead of /usr/bin on PATH,
-#    whenever node is missing or older than the pinned major.
+# 1. Node — the npm-distributed CLIs need a current one. When the image's node is
+#    missing or older than the pinned major (Debian's nodejs on python-3.13 and
+#    debian, or a repository that runs an older Node in production), the pinned
+#    Node goes into the agents' OWN prefix, never over /usr/local: the
+#    repository's node stays the shell's node, and npm trees are never mixed.
+#    The agent CLIs installed through npm are then launched on that Node (step 4).
 node_major="$({ node --version 2>/dev/null || true; } | sed -n 's/^v\([0-9][0-9]*\)\..*/\1/p')"
+agent_node=""
+agent_path="$PATH"
 if [ -z "$node_major" ] || [ "$node_major" -lt "${NODE_VERSION%%.*}" ]; then
+  agent_node="${DCK_LAYER_PREFIX:-/opt/dck}/node"
   arch="$(layer_arch)"
   case "$arch" in
     amd64) node_arch=x64; node_sha="$NODE_SHA256_AMD64" ;;
@@ -37,11 +42,13 @@ if [ -z "$node_major" ] || [ "$node_major" -lt "${NODE_VERSION%%.*}" ]; then
   esac
   tarball="/tmp/node-v${NODE_VERSION}.tar.xz"
   layer_fetch "https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-${node_arch}.tar.xz" "$node_sha" "$tarball"
-  tar -xJf "$tarball" -C "${DCK_LAYER_PREFIX:-/usr/local}" --strip-components=1 \
+  mkdir -p "$agent_node"
+  tar -xJf "$tarball" -C "$agent_node" --strip-components=1 \
     --exclude CHANGELOG.md --exclude LICENSE --exclude README.md
   rm -f "$tarball"
-  corepack enable >/dev/null 2>&1 || true
-  layer_log "installed Node ${NODE_VERSION}"
+  chmod -R a+rX,go-w "$agent_node"
+  agent_path="$agent_node/bin:$PATH"
+  layer_log "installed Node ${NODE_VERSION} for the agents in ${agent_node} (the image's node${node_major:+ v$node_major} is left as it is)"
 fi
 
 # 2. coding-agents-kit from its release tarball, verified before it is unpacked,
@@ -84,16 +91,51 @@ ak_bin="$(as_user bash -lc 'p="$HOME/.local/share/agentkit/bin/ak"; if [ -x "$p"
 
 # 4. The CLIs the repository asked for: ak installs each pinned and verified.
 if [ "$#" -gt 0 ]; then
-  as_user bash -c 'NPM_CONFIG_PREFIX="$HOME/.local" exec "$@"' _ "$ak_bin" install "$@"
+  as_user env PATH="$agent_path" bash -c 'NPM_CONFIG_PREFIX="$HOME/.local" exec "$@"' _ "$ak_bin" install "$@"
   layer_log "ak install $*"
+fi
+
+# 4b. With the agents' own Node: each npm-installed CLI whose entry point is a node
+#     script (~/.local/bin/<cli> -> ../lib/node_modules/...) gets a launcher that
+#     runs it on that Node, whatever node comes first on PATH.
+if [ -n "$agent_node" ]; then
+  # shellcheck disable=SC2016  # expanded by the dev user's shell, not here
+  as_user env DCK_AGENT_NODE="$agent_node" bash -c '
+    n=0
+    for f in "$HOME"/.local/bin/*; do
+      [ -L "$f" ] || continue
+      target="$(readlink -f "$f")" || continue
+      case "$target" in "$HOME"/.local/lib/node_modules/*) ;; *) continue ;; esac
+      head -n 1 "$target" 2>/dev/null | grep -q "^#!.*node" || continue
+      tmp="$f.dck-tmp"
+      printf "#!/bin/sh\n# devcontainer-kit: run on the agents'"'"' own Node (%s); the image'"'"'s node stays first on PATH.\nexec %s/bin/node %s \"\$@\"\n" \
+        "$DCK_AGENT_NODE" "$DCK_AGENT_NODE" "$target" > "$tmp" && chmod 0755 "$tmp" && mv -f "$tmp" "$f" && n=$((n + 1))
+    done
+    echo "$n"' > /tmp/dck-agent-wrappers.count
+  layer_log "$(cat /tmp/dck-agent-wrappers.count) agent CLI(s) run on the agents' own Node"
+  rm -f /tmp/dck-agent-wrappers.count
 fi
 
 # 5. The wrapper names developers type: the classic preset (claudex, codexx, …)
 #    and the providers preset (claude-glm, codex-glm, …), loaded by every bash
-#    the dev user starts (interactive, login, Herdr panes, ssh).
-as_user "$ak_bin" alias preset classic --on >/dev/null
-as_user "$ak_bin" alias preset providers --on >/dev/null
-# shellcheck disable=SC2016  # expanded by the dev user's shell, not here
-as_user bash -c 'line="[ -r \"\$HOME/.local/share/agentkit/aliases.sh\" ] && . \"\$HOME/.local/share/agentkit/aliases.sh\""
-  grep -qxF "$line" "$HOME/.bashrc" 2>/dev/null || printf "%s\n" "$line" >> "$HOME/.bashrc"'
-layer_log "presets classic and providers on"
+#    the dev user starts (interactive, login, Herdr panes, ssh). [agents] presets
+#    in dck.toml chooses them (DCK_AGENT_PRESETS); unset keeps both, as before.
+presets="${DCK_AGENT_PRESETS-classic providers}"
+for p in $presets; do
+  case "$p" in
+    classic|providers) as_user "$ak_bin" alias preset "$p" --on >/dev/null ;;
+    *) layer_log "unknown preset '$p' (classic, providers)"; exit 2 ;;
+  esac
+done
+if [ -n "$presets" ]; then
+  # shellcheck disable=SC2016  # expanded by the dev user's shell, not here
+  as_user bash -c 'line="[ -r \"\$HOME/.local/share/agentkit/aliases.sh\" ] && . \"\$HOME/.local/share/agentkit/aliases.sh\""
+    grep -qxF "$line" "$HOME/.bashrc" 2>/dev/null || printf "%s\n" "$line" >> "$HOME/.bashrc"'
+  if [ "$presets" = "classic providers" ]; then
+    layer_log "presets classic and providers on"
+  else
+    layer_log "presets on: $presets"
+  fi
+else
+  layer_log "no ak alias preset ([agents] presets = [])"
+fi

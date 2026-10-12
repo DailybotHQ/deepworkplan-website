@@ -9,6 +9,13 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+### Changed
+
+- chore: vendor DWP pack v7.6.3 (via v7.6.2) and move the ecosystem pins to coding-agents-kit v0.5.3, devcontainer-kit v0.3.5, herdr-peers v0.2.3, AI Diff Reviewer v3.3.11 and Dailybot v3.23.14 (tags and SHA256SUMS digests on every install surface)
+- docs: /kit/devcontainer, /kit/agentkit and /kit/herdr document the new kit releases in 17 languages: opt-in host SSH keys (`copy_keys`), per-service state volumes, shared compose stacks and workspace satellites, `HERDR_PEERS_SELF` exported in containers, a default account per CLI, `--no-daemon` for shared Codex homes, and per-machine herdr-peers state
+- docs: every devcontainer summary says SSH keys enter the container only on opt-in
+- chore: re-render the dev container with devcontainer-kit v0.3.5 (via v0.3.2) and record the addons
+
 ## [5.0.55] - 2026-10-12
 
 ### Changed

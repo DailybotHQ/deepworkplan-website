@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.3.2 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.3.5 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -27,7 +27,7 @@ creates the `.env`; the container's entrypoint runs the start hook). devcontaine
 SSH key, `ssh`, `doctor`, `agents` and `ask`; install it once, pinned, when you want those:
 
 ```bash
-(cd "$(mktemp -d)" && git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)
+(cd "$(mktemp -d)" && git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)
 ```
 
 `dev.sh` finds dck on `PATH` or in its default install directory (`~/.local/share/dck`).
@@ -56,7 +56,7 @@ Values are never printed. `dck doctor --json` reports key names only.
 ## Coding agents (coding-agents-kit)
 
 The agents layer installs [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)
-v0.5.1 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
+v0.5.3 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
 grok. Each is installed at a pinned version and verified. Every CLI home lives on its own named
 volume, so logins survive `bash dev.sh rebuild`. The image also carries coding-agents-kit's three
 skills (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`), linked into every agent's skills
@@ -125,9 +125,9 @@ host's Herdr manages, such as the Dailybot ones, each with a pinned host key. Th
 Herdr machine catalog lives on the `state` volume, so `rebuild` keeps it. Since dck v0.3.2,
 `rebuild`, `start` and `restart` run the same post-start steps as `up` (the Herdr machine
 re-registered, its host key re-pinned, the mesh pushed), so a container rebuilt from scratch
-reaches the host and its peers at once. A Codex agent inside sets `HERDR_PEERS_SELF` to this
-container's machine id as saved on the host before it asks peers on other machines, until a
-later dck release sets it. To let containers
+reaches the host and its peers at once. Since dck v0.3.3 the container's login shells export `HERDR_PEERS_SELF` (this
+container's machine id as saved on the host), so a Codex agent inside reaches peers on
+other machines with no hand step; `dck doctor` flags a mismatch. To let containers
 that dck did not create log in here, list the public keys they use under `[ssh]
 authorized_extra` in the host profile. `dck setup` also installs a verified herdr-peers on the
 host, so host agents can reply with `herdr-peers reply`.
