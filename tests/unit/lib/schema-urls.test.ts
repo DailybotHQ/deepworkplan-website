@@ -98,6 +98,19 @@ describe('canonical schema URL publication', () => {
     expect(missing, `unpublished: ${missing.join(', ')}`).toEqual([]);
   });
 
+  it('publishes the dwp-handoff/v1 packet schema the pack swarm helper stamps', () => {
+    // shared/swarm.py writes packets whose `schema` const is this URL. The
+    // byte-identity case below covers it once the vendored skill ships it.
+    const file = join(PUBLIC_SCHEMA_DIR, 'dwp-handoff', 'v1.json');
+    expect(existsSync(file), 'dwp-handoff/v1.json is not published').toBe(true);
+    const parsed = JSON.parse(readFileSync(file, 'utf8')) as {
+      properties?: { schema?: { const?: string } };
+    };
+    expect(parsed.properties?.schema?.const).toBe(
+      'https://deepworkplan.com/schema/dwp-handoff/v1.json'
+    );
+  });
+
   it('publishes every schema version the vendored DWP skill carries, byte-identical', () => {
     // The vendored skill names its files <label>.schema.json (v1, e.g.
     // plan-manifest.schema.json), <label>-v<N>.schema.json (plan-manifest-v5)

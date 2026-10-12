@@ -9,13 +9,13 @@ icon: shield
 
 # Tự chủ của bầy agent
 
-[Chạy nhiều agent](/methodology/06-orchestration) mô tả một lead và các lane của nó. Chương này trình bày những gì giữ cho thiết lập đó tiếp tục chạy khi một tài khoản chạm giới hạn hoặc một agent biến mất. Một lane kiểm tra tài khoản của nó còn bao nhiêu chỗ và chuyển giao công việc trước khi cạn. Một lead chuyển giao quyền lead, hoặc được thay thế khi nó biến mất. Bầy agent chỉ hỏi nhà phát triển những gì thực sự nghiêm trọng.
+[Chạy nhiều agent](/vi/methodology/06-orchestration) mô tả một lead và các lane của nó. Chương này trình bày những gì giữ cho thiết lập đó tiếp tục chạy khi một tài khoản chạm giới hạn hoặc một agent biến mất. Một lane kiểm tra tài khoản của nó còn bao nhiêu chỗ và chuyển giao công việc trước khi cạn. Một lead chuyển giao quyền lead, hoặc được thay thế khi nó biến mất. Bầy agent chỉ hỏi nhà phát triển những gì thực sự nghiêm trọng.
 
 Sự cố mà nó giải quyết rất cụ thể: một lead hết hạn mức giữa chừng một kế hoạch sẽ bỏ rơi mọi lane, và không gì tiến triển cho tới khi có người mở một phiên mới. Với các quy tắc dưới đây, kế hoạch tiếp tục tiến lên trong phạm vi sự cấp phép mà nhà phát triển đã đưa ra.
 
 Sáu quy tắc định hình mọi thứ ở đây:
 
-1. **Mỗi sản phẩm một việc.** [coding-agents-kit](/kit/agentkit) (`ak`) biết về tài khoản và năng lực, [herdr-peers](/kit/herdr) biết về tin nhắn, pane và ai đang là lead, còn gói Deep Work Plan biết về phương pháp: khi nào bàn giao, agent kế nhiệm cần gì, điều gì cần leo thang. Mỗi thành phần đều tùy chọn. Khi không có chúng, các quy tắc vẫn giữ nguyên, với nhà phát triển chuyển tiếp tin nhắn và khởi chạy lại agent.
+1. **Mỗi sản phẩm một việc.** [coding-agents-kit](/vi/kit/agentkit) (`ak`) biết về tài khoản và năng lực, [herdr-peers](/vi/kit/herdr) biết về tin nhắn, pane và ai đang là lead, còn gói Deep Work Plan biết về phương pháp: khi nào bàn giao, agent kế nhiệm cần gì, điều gì cần leo thang. Mỗi thành phần đều tùy chọn. Khi không có chúng, các quy tắc vẫn giữ nguyên, với nhà phát triển chuyển tiếp tin nhắn và khởi chạy lại agent.
 2. **Kế hoạch là đơn vị liên tục, không phải agent.** Mọi lần bàn giao và kế nhiệm là một lần tiếp tục thông thường cộng với một gói nhỏ mang theo điều mà nhật ký không có: ý định đang được thực hiện dở.
 3. **Chủ động tốt hơn bị động.** Một agent kiểm tra chỗ còn lại của nó tại các ranh giới tác vụ và bàn giao khi vẫn còn đủ sức viết một gói tốt. Phản ứng sau khi đã chạm giới hạn vẫn là lưới an toàn.
 4. **Tự chủ không bao giờ mở rộng quyền hạn.** Bàn giao, kế nhiệm, khởi chạy và lập lịch đều chạy trong sự cấp phép của kế hoạch. Không agent nào trả lời màn hình cấp quyền, bypass, đăng nhập, chấp thuận hay thanh toán, và công việc chỉ di chuyển giữa các tài khoản nhà phát triển đã khai báo.
@@ -85,7 +85,7 @@ herdr-peers `v0.3.0` giữ một bản ghi lead cho mỗi kế hoạch — lead,
 
 ## Chỉ leo thang việc nghiêm trọng
 
-Mọi thứ không nghiêm trọng đều do agent quyết định: nó điều tra, chọn phương án được khuyến nghị, ghi lại quyết định — các phương án, lựa chọn, lý do và cách đảo ngược — rồi tiếp tục. Một lần leo thang phải nêu tên lớp của nó; một câu hỏi không nêu lớp nào là một quyết định mà agent có nghĩa vụ tự đưa ra. Các lớp là những lớp của [giao thức agent](/spec/agent-protocol):
+Mọi thứ không nghiêm trọng đều do agent quyết định: nó điều tra, chọn phương án được khuyến nghị, ghi lại quyết định — các phương án, lựa chọn, lý do và cách đảo ngược — rồi tiếp tục. Một lần leo thang phải nêu tên lớp của nó; một câu hỏi không nêu lớp nào là một quyết định mà agent có nghĩa vụ tự đưa ra. Các lớp là những lớp của [giao thức agent](/vi/spec/agent-protocol):
 
 | Lớp | Leo thang tới nhà phát triển khi |
 | --- | --- |
@@ -101,7 +101,7 @@ Trong một bầy agent, **một mục nghiêm trọng chặn chuỗi phụ thu�
 
 ## Ngưỡng chất lượng
 
-Một bầy agent chỉ đáng chạy nếu kết quả của nó đáng tin cậy. [Ngưỡng chất lượng](/spec/dwp-specification) áp dụng cho mọi agent tiếp tục một kế hoạch:
+Một bầy agent chỉ đáng chạy nếu kết quả của nó đáng tin cậy. [Ngưỡng chất lượng](/vi/spec/dwp-specification) áp dụng cho mọi agent tiếp tục một kế hoạch:
 
 - **Cổng là giả thuyết.** Một cổng mới hoặc đã thay đổi được chứng minh là thất bại trên một lỗi được cài sẵn trước khi được tin cậy, và một kết quả đạt rỗng — thiếu tệp thực thi, không khớp tệp nào, log rỗng — là một thất bại.
 - **So sánh với nhánh gốc.** Hiệu năng, độ phủ và kích thước được so sánh với nhánh gốc, không chỉ với một ngưỡng.
