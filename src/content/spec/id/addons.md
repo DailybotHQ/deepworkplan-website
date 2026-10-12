@@ -34,7 +34,7 @@ Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wa
 Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.3.2`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
 
 - **Halaman kit:** [Devcontainer](/kit/devcontainer)
-- **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya, dan mesin Herdr per container dengan tata letak standar
+- **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya kecuali pengembang mengaktifkannya dengan `[ssh] copy_keys` di profil host miliknya, dan mesin Herdr per container dengan tata letak standar
 - **Perilaku:** dideteksi melalui `dck doctor --json` (antarmuka 2); `dck init` merekonsiliasi devcontainer yang ada hanya setelah diff-nya diterima, dan mencadangkan file terlebih dahulu — tidak pernah ditimpa
 - **Kapan ditawarkan:** sebagian besar repo dengan Docker atau layanan yang mendapat manfaat dari dev container terisolasi
 

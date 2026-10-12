@@ -34,7 +34,7 @@ section: Addons
 [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v0.3.2` に固定、インターフェース `2`）の薄いインテグレーター：`dck init` がリポジトリ自身のコンテナとしてリポジトリにレンダリングする Dev Containers テンプレートと、`dck-dockerfile` スキル。
 
 - **キットページ：** [Devcontainer](/kit/devcontainer)
-- **追加内容：** digest で固定したランタイム公式イメージから作る `docker/local/<service>/Dockerfile`（`python-3.13`、`node-24` または `debian`、共有ベースイメージなし）、`dck` ランチャー（`up`、`shell`、`rebuild`、`doctor`）の上に立つ `dev.sh`、オプトインのレイヤーとしてのコーディングエージェント、ループバック限定のポート、コンテナ内に鍵を置かずホストのエージェント経由で SSH を使う git、標準レイアウトによるコンテナごとの Herdr マシン
+- **追加内容：** digest で固定したランタイム公式イメージから作る `docker/local/<service>/Dockerfile`（`python-3.13`、`node-24` または `debian`、共有ベースイメージなし）、`dck` ランチャー（`up`、`shell`、`rebuild`、`doctor`）の上に立つ `dev.sh`、オプトインのレイヤーとしてのコーディングエージェント、ループバック限定のポート、コンテナ内に鍵を置かず（開発者がホストプロファイルの `[ssh] copy_keys` でオプトインした場合を除く）ホストのエージェント経由で SSH を使う git、標準レイアウトによるコンテナごとの Herdr マシン
 - **動作：** `dck doctor --json`（インターフェース 2）で検出；`dck init` は diff が承認された後にのみ既存 devcontainer を調和し、先にファイルをバックアップする——上書きされない
 - **提供タイミング：** Docker または分離開発コンテナが有益なサービスを持つほとんどのリポジトリ
 

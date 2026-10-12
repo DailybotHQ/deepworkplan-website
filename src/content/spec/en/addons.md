@@ -34,7 +34,7 @@ Eight addons ship today — seven opt-in plus the required local review. Each ha
 A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v0.3.2`, interface `2`): a Dev Containers template that `dck init` renders into the repository as its own container, plus the `dck-dockerfile` skill.
 
 - **Kit page:** [Devcontainer](/kit/devcontainer)
-- **What it adds:** `docker/local/<service>/Dockerfile` from the runtime's official image pinned by digest (`python-3.13`, `node-24` or `debian`, no shared base image), `dev.sh` over the `dck` launcher (`up`, `shell`, `rebuild`, `doctor`), coding agents as an opt-in layer, loopback-only ports, git over SSH through the host's agent with no key inside, and Herdr machines per container with the standard layout
+- **What it adds:** `docker/local/<service>/Dockerfile` from the runtime's official image pinned by digest (`python-3.13`, `node-24` or `debian`, no shared base image), `dev.sh` over the `dck` launcher (`up`, `shell`, `rebuild`, `doctor`), coding agents as an opt-in layer, loopback-only ports, git over SSH through the host's agent with no key inside unless the developer opts in with `[ssh] copy_keys` in their host profile, and Herdr machines per container with the standard layout
 - **Behavior:** detected through `dck doctor --json` (interface 2); `dck init` reconciles an existing devcontainer only after its diff is accepted, and backs the file up first — never clobbered
 - **When offered:** most repos with Docker or services that benefit from an isolated dev container
 

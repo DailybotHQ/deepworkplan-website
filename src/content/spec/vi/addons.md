@@ -34,7 +34,7 @@ Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục b�
 Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.3.2`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
 
 - **Trang kit:** [Devcontainer](/kit/devcontainer)
-- **Bổ sung:** `docker/local/<service>/Dockerfile` từ image chính thức của runtime được ghim theo digest (`python-3.13`, `node-24` hoặc `debian`, không có image cơ sở dùng chung), `dev.sh` chạy trên trình khởi chạy `dck` (`up`, `shell`, `rebuild`, `doctor`), coding agent như một lớp opt-in, cổng chỉ dùng loopback, git qua SSH thông qua agent của máy host mà không có khóa nào bên trong, và máy Herdr cho mỗi container với bố cục tiêu chuẩn
+- **Bổ sung:** `docker/local/<service>/Dockerfile` từ image chính thức của runtime được ghim theo digest (`python-3.13`, `node-24` hoặc `debian`, không có image cơ sở dùng chung), `dev.sh` chạy trên trình khởi chạy `dck` (`up`, `shell`, `rebuild`, `doctor`), coding agent như một lớp opt-in, cổng chỉ dùng loopback, git qua SSH thông qua agent của máy host mà không có khóa nào bên trong, trừ khi nhà phát triển chủ động bật `[ssh] copy_keys` trong hồ sơ host của mình, và máy Herdr cho mỗi container với bố cục tiêu chuẩn
 - **Hành vi:** được phát hiện qua `dck doctor --json` (giao diện 2); `dck init` chỉ đối chiếu một devcontainer hiện có sau khi diff của nó được chấp nhận, và sao lưu tệp trước — không bao giờ ghi đè
 - **Khi đề xuất:** hầu hết repo có Docker hoặc dịch vụ hưởng lợi từ dev container cô lập
 

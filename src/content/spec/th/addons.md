@@ -34,7 +34,7 @@ section: Addons
 ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.3.2` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
 
 - **หน้า kit:** [Devcontainer](/kit/devcontainer)
-- **สิ่งที่เพิ่ม:** `docker/local/<service>/Dockerfile` จากอิมเมจทางการของรันไทม์ที่ตรึงด้วย digest (`python-3.13` `node-24` หรือ `debian` ไม่มีอิมเมจพื้นฐานที่ใช้ร่วมกัน) `dev.sh` ที่ทำงานบนตัวเรียกใช้ `dck` (`up`, `shell`, `rebuild`, `doctor`) เอเจนต์เขียนโค้ดเป็นเลเยอร์แบบ opt-in พอร์ตเฉพาะ loopback git ผ่าน SSH โดยใช้ agent ของโฮสต์โดยไม่มีคีย์อยู่ภายใน และเครื่อง Herdr ต่อคอนเทนเนอร์พร้อมเลย์เอาต์มาตรฐาน
+- **สิ่งที่เพิ่ม:** `docker/local/<service>/Dockerfile` จากอิมเมจทางการของรันไทม์ที่ตรึงด้วย digest (`python-3.13` `node-24` หรือ `debian` ไม่มีอิมเมจพื้นฐานที่ใช้ร่วมกัน) `dev.sh` ที่ทำงานบนตัวเรียกใช้ `dck` (`up`, `shell`, `rebuild`, `doctor`) เอเจนต์เขียนโค้ดเป็นเลเยอร์แบบ opt-in พอร์ตเฉพาะ loopback git ผ่าน SSH โดยใช้ agent ของโฮสต์โดยไม่มีคีย์อยู่ภายใน เว้นแต่นักพัฒนาจะเลือกเปิดใช้ `[ssh] copy_keys` ในโปรไฟล์โฮสต์ของตน และเครื่อง Herdr ต่อคอนเทนเนอร์พร้อมเลย์เอาต์มาตรฐาน
 - **พฤติกรรม:** ตรวจพบผ่าน `dck doctor --json` (อินเทอร์เฟซ 2) `dck init` กระทบยอด devcontainer ที่มีอยู่เฉพาะหลังจากยอมรับ diff แล้ว และสำรองไฟล์ก่อน — ไม่ทับล้าง
 - **เมื่อเสนอ:** รีโพส่วนใหญ่ที่มี Docker หรือบริการที่ได้ประโยชน์จาก dev container แยก
 

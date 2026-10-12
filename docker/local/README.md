@@ -1,7 +1,7 @@
 # Local Docker development stack
 
 The site's development container is rendered by
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.3.1 from
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`) v0.3.2 from
 `.devcontainer/dck.toml`. The same container serves a plain terminal (`bash dev.sh …`) and
 VS Code / Cursor ("Reopen in Container").
 
@@ -27,7 +27,7 @@ creates the `.env`; the container's entrypoint runs the start hook). devcontaine
 SSH key, `ssh`, `doctor`, `agents` and `ask`; install it once, pinned, when you want those:
 
 ```bash
-(cd "$(mktemp -d)" && git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)
+(cd "$(mktemp -d)" && git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)
 ```
 
 `dev.sh` finds dck on `PATH` or in its default install directory (`~/.local/share/dck`).
@@ -56,9 +56,11 @@ Values are never printed. `dck doctor --json` reports key names only.
 ## Coding agents (coding-agents-kit)
 
 The agents layer installs [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)
-v0.5.0 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
+v0.5.1 and the seven CLIs listed in `dck.toml`: claude, codex, cursor, opencode, pi, cline and
 grok. Each is installed at a pinned version and verified. Every CLI home lives on its own named
-volume, so logins survive `bash dev.sh rebuild`.
+volume, so logins survive `bash dev.sh rebuild`. The image also carries coding-agents-kit's three
+skills (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`), linked into every agent's skills
+directory at each start.
 
 | Names | What they run |
 | --- | --- |
@@ -84,7 +86,15 @@ the container is the sandbox. To have them ask before acting, set `AGENTKIT_PERM
 
 Git signs and pushes with the keys your **host's SSH agent** holds. The agent's socket is mounted
 into the container; no key file is copied in, and neither `~/.ssh` nor `~/.gitconfig` is
-mounted.
+mounted, unless you opt in.
+
+- **Key files for tools that need them (opt-in).** Some tools ignore the agent and read key files
+  (`gh auth login` offers to generate a new key). Set `[ssh] copy_keys = true` in your **host**
+  profile (`dck setup` asks once, default no; `dck.toml` cannot set it): `up` then binds the
+  host's `~/.ssh` read-only at `~/.ssh_host`, and every start copies its `id_*` keys into the
+  container's `~/.ssh` on the `state` volume. While it is on, the whole host `~/.ssh` is
+  readable inside and the private keys rest in the `state` volume; turning it off removes the
+  copies at the next start.
 
 - Load your key on the host once. On macOS: `ssh-add --apple-use-keychain ~/.ssh/<your key>`.
   `bash dev.sh up` warns when the agent holds no keys.
@@ -112,7 +122,12 @@ Since dck v0.2.3 the mesh is complete: `dck up` also pushes the host (when your 
 profile enables it: `dck setup` offers dck's own loopback listener once, or `[host]
 listener = "external"` points at one you already run) and the other loopback containers your
 host's Herdr manages, such as the Dailybot ones, each with a pinned host key. The container's
-Herdr machine catalog lives on the `state` volume, so `rebuild` keeps it. To let containers
+Herdr machine catalog lives on the `state` volume, so `rebuild` keeps it. Since dck v0.3.2,
+`rebuild`, `start` and `restart` run the same post-start steps as `up` (the Herdr machine
+re-registered, its host key re-pinned, the mesh pushed), so a container rebuilt from scratch
+reaches the host and its peers at once. A Codex agent inside sets `HERDR_PEERS_SELF` to this
+container's machine id as saved on the host before it asks peers on other machines, until a
+later dck release sets it. To let containers
 that dck did not create log in here, list the public keys they use under `[ssh]
 authorized_extra` in the host profile. `dck setup` also installs a verified herdr-peers on the
 host, so host agents can reply with `herdr-peers reply`.
@@ -125,9 +140,13 @@ running an untrusted repository next to this one.
 
 | Volume (compose project `deepworkplan-website`) | Holds |
 | --- | --- |
-| `state` | sshd host keys, `gh` login, Herdr config, Dailybot CLI config, shell history |
+| `state` | sshd host keys, `~/.ssh` (and copied key files with `copy_keys`), `gh` login, Herdr config, Dailybot CLI config, shell history |
 | `agentkit` | ak profiles and its env file |
 | `claude`, `codex`, `cursor`, `opencode`, `pi`, `cline`, `grok` | each CLI's home (logins, sessions) |
+
+The state volume is named `state` (`[compose] state_volume` in `dck.toml`, default `state`);
+this repository is the only service in its compose project, so the default is right. A
+repository sharing one compose project with other services gives each its own name.
 
 `bash dev.sh rebuild` replaces the image and keeps every volume. Removing a volume
 (`docker volume rm deepworkplan-website_<name>`) loses what it holds.

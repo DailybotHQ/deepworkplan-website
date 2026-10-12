@@ -55,7 +55,7 @@ cd your-repo && dck init && bash dev.sh up
 - **容器与主机。** 容器内的代理可以访问主机上、其他每个 dck 容器中以及主机 Herdr 已管理的其他 loopback 容器中的 Herdr 代理，这些代理也能反向访问。每个对等方都带有固定的主机密钥；不会在首次使用时信任任何对象。
 - **可选的主机监听器。** `dck setup` 会一次性提供一个位于 `127.0.0.1` 的用户级 SSH 服务器，它只接受 dck 密钥，并由 launchd（macOS）保持运行。如果你已经在运行一个 loopback 监听器，可改为让主机配置文件指向它。`dck host listener disable` 会将其移除。
 - **重建后依然保留。** 容器的 Herdr 机器目录存放在卷中，因此 `bash dev.sh rebuild` 会保留其中注册的每台机器。自 `v0.3.2` 起，`rebuild`、`start` 和 `restart` 执行与 `up` 相同的步骤：容器重新注册到主机的 Herdr，其主机密钥重新固定，网格重新推送，因此从零构建的容器能立即访问主机及其对等方。
-- **容器内的 Codex 窗格。** 在 `v0.3.2` 中，容器内的 Codex 代理会在询问其他机器上的对等方之前，将 `HERDR_PEERS_SELF` 设置为主机上保存的该容器的机器 id；工具包的后续版本将自动设置它。
+- **容器内的 Codex 窗格。** 在 `v0.3.2` 中，容器内的 Codex 代理会在询问其他机器上的对等方之前，将 `HERDR_PEERS_SELF` 设置为主机上保存的该容器的机器 id：主导者的任务说明会给出该 id，工具包的后续版本将自动设置它。
 - **主机同样可以回复。** `dck setup` 会在主机上安装经过校验的 [herdr-peers](/kit/herdr)，因此 `dck agents` 和 `dck ask` 在主机上同样可用，主机上的代理通过 `herdr-peers reply` 回复。
 - **非工具包创建的容器。** 在主机配置文件的 `[ssh] authorized_extra` 下列出它们登录所用的公钥，它们也就能访问 dck 容器。
 

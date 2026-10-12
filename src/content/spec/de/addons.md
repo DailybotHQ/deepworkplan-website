@@ -34,7 +34,7 @@ Acht Addons sind heute aktiv — sieben optionale plus die erforderliche lokale 
 Ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixiert auf `v0.3.2`, Interface `2`): ein Dev-Containers-Template, das `dck init` als eigenen Container des Repositorys in das Repository rendert, dazu der Skill `dck-dockerfile`.
 
 - **Kit-Seite:** [Devcontainer](/kit/devcontainer)
-- **Was es hinzufügt:** `docker/local/<service>/Dockerfile` aus dem offiziellen, per Digest fixierten Image der Runtime (`python-3.13`, `node-24` oder `debian`, kein gemeinsames Basis-Image), `dev.sh` über dem `dck`-Launcher (`up`, `shell`, `rebuild`, `doctor`), Coding-Agenten als Opt-in-Schicht, Ports ausschließlich auf Loopback, Git über SSH durch den Agenten des Hosts ohne Schlüssel im Container und Herdr-Maschinen pro Container mit dem Standard-Layout
+- **Was es hinzufügt:** `docker/local/<service>/Dockerfile` aus dem offiziellen, per Digest fixierten Image der Runtime (`python-3.13`, `node-24` oder `debian`, kein gemeinsames Basis-Image), `dev.sh` über dem `dck`-Launcher (`up`, `shell`, `rebuild`, `doctor`), Coding-Agenten als Opt-in-Schicht, Ports ausschließlich auf Loopback, Git über SSH durch den Agenten des Hosts ohne Schlüssel im Container, es sei denn, der Entwickler aktiviert dies per Opt-in mit `[ssh] copy_keys` in seinem Host-Profil, und Herdr-Maschinen pro Container mit dem Standard-Layout
 - **Verhalten:** erkannt über `dck doctor --json` (Interface 2); `dck init` gleicht einen bestehenden Devcontainer erst ab, nachdem sein Diff akzeptiert wurde, und sichert die Datei vorher — niemals überschrieben
 - **Wann angeboten:** die meisten Repos mit Docker oder Diensten, die von einem isolierten Dev-Container profitieren
 

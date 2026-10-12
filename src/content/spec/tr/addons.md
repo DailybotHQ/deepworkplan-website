@@ -34,7 +34,7 @@ Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme
 [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.3.2` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
 
 - **Kit sayfası:** [Devcontainer](/kit/devcontainer)
-- **Ne ekler:** çalışma zamanının digest ile sabitlenmiş resmi imajından üretilen `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` veya `debian`, paylaşılan temel imaj yok), `dck` başlatıcısı (`up`, `shell`, `rebuild`, `doctor`) üzerine kurulu `dev.sh`, opt-in bir katman olarak kodlama agent'ları, yalnızca loopback portları, içeride hiçbir anahtar olmadan host'un agent'ı üzerinden SSH ile git ve standart düzene sahip container başına Herdr makineleri
+- **Ne ekler:** çalışma zamanının digest ile sabitlenmiş resmi imajından üretilen `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` veya `debian`, paylaşılan temel imaj yok), `dck` başlatıcısı (`up`, `shell`, `rebuild`, `doctor`) üzerine kurulu `dev.sh`, opt-in bir katman olarak kodlama agent'ları, yalnızca loopback portları, içeride hiçbir anahtar olmadan (geliştirici host profilinde `[ssh] copy_keys` ile bunu açıkça seçmedikçe) host'un agent'ı üzerinden SSH ile git ve standart düzene sahip container başına Herdr makineleri
 - **Davranış:** `dck doctor --json` (arayüz 2) ile tespit edilir; `dck init` mevcut bir devcontainer'ı yalnızca diff'i kabul edildikten sonra uzlaştırır ve önce dosyanın yedeğini alır — asla ezilmez
 - **Ne zaman sunulur:** izole dev container'dan faydalanan Docker veya servisli çoğu depo
 
