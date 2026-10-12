@@ -1,6 +1,6 @@
 ---
 title: Devcontainer
-description: "Un dev container riproducibile per ogni repository, da un unico template: agenti sui tuoi account host con ak, Herdr nei due sensi e nessuna chiave SSH dentro."
+description: "Un dev container riproducibile per ogni repository, da un unico template: agenti sui tuoi account host con ak, Herdr in due sensi, chiavi SSH solo se attivate."
 kind: addon
 lang: it
 order: 1
@@ -8,7 +8,7 @@ order: 1
 
 # Addon devcontainer
 
-Dai al repository un container di sviluppo riproducibile e isolato, che persone, editor e agenti di codice possano usare allo stesso modo. In **DWP v7** (pack `v7.6.1`) questo addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un prodotto MIT che funziona senza Deep Work Plan. È opzionale: un repository è pienamente conforme anche senza di esso.
+Dai al repository un container di sviluppo riproducibile e isolato, che persone, editor e agenti di codice possano usare allo stesso modo. In **DWP v7** (pack `v7.6.3`) questo addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un prodotto MIT che funziona senza Deep Work Plan. È opzionale: un repository è pienamente conforme anche senza di esso.
 
 ## Cosa fornisce devcontainer-kit
 
@@ -21,15 +21,15 @@ Dai al repository un container di sviluppo riproducibile e isolato, che persone,
 ## Installazione
 
 ```bash
-git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v0.3.1`: `v0.2.0` non è supportata.
+Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v0.3.5`: `v0.2.0` non è supportata.
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.3.1`, interfaccia 2 |
+| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.3.5`, interfaccia 2 |
 | Chiave di registro | `devcontainer` in `.dwp/config.json` |
 | Configurazione per repository | `.devcontainer/dck.toml` |
 | Rilevamento | `dck doctor --json` |
@@ -44,7 +44,9 @@ Ogni container include gli strumenti di sviluppo (git, gh, ripgrep, un server SS
 | `editor` | attivato | Neovim con [DeepWorkPlan Vim](/kit/vim) fissato per tag; disattivato, lascia un editor semplice. |
 | `dailybot` | disattivato | La CLI di Dailybot, per l’addon dailybot. |
 
-Gli accessi, `gh`, la configurazione di Herdr e l’identità git sopravvivono a `bash dev.sh rebuild`.
+Gli accessi, `gh`, la configurazione di Herdr e l’identità git sopravvivono a `bash dev.sh rebuild`. Con il livello `agents`, l’immagine include anche le tre skill di coding-agents-kit (`agentkit`, `agentkit-setup`, `agentkit-orchestrate`), collegate nella directory delle skill di ogni agente a ogni avvio, così un container ricreato le mantiene.
+
+Il volume di stato (chiave host SSH, `~/.ssh`, login di `gh`, stato del client Herdr, cronologia) si chiama `state`. Quando più servizi condividono un unico progetto compose, assegna a ciascuno un nome proprio con `[compose] state_volume` in `dck.toml` (o `dck init --state-volume NAME`); altrimenti montano tutti lo stesso volume, e `dck doctor` lo segnala.
 
 ## Agenti tra macchine diverse
 
@@ -52,7 +54,8 @@ Da `v0.2.3`, `dck up` configura una mesh bidirezionale senza passaggi manuali, s
 
 - **Container e host.** Gli agenti all’interno raggiungono gli agenti Herdr sull’host, in ogni altro container dck e negli altri container loopback che l’Herdr del tuo host gestisce già, e questi li raggiungono a loro volta. Ogni peer porta una chiave host fissata; nulla viene considerato attendibile al primo utilizzo.
 - **Un listener opzionale sull’host.** `dck setup` propone, una sola volta, un server SSH a livello utente su `127.0.0.1` che accetta solo la chiave dck ed è mantenuto in esecuzione da launchd (macOS). Se esegui già un listener loopback, punta invece il profilo host verso di esso. `dck host listener disable` lo rimuove.
-- **Sopravvive alle ricostruzioni.** Il catalogo delle macchine Herdr del container risiede su un volume, quindi `bash dev.sh rebuild` mantiene ogni macchina registrata al suo interno.
+- **Sopravvive alle ricostruzioni.** Il catalogo delle macchine Herdr del container risiede su un volume, quindi `bash dev.sh rebuild` mantiene ogni macchina registrata al suo interno. Da `v0.3.2`, `rebuild`, `start` e `restart` eseguono gli stessi passaggi di `up`: il container viene registrato di nuovo presso l’Herdr dell’host, la sua chiave host viene fissata di nuovo e la mesh viene distribuita, così un container costruito da zero raggiunge subito l’host e i suoi peer.
+- **Pannelli Codex dentro un container.** Un agente Codex ha bisogno di `HERDR_PEERS_SELF`, l’id macchina del container così come è salvato sull’host, per interpellare peer su altre macchine. Da `v0.3.3` il kit salva quell’id a ogni registrazione e le shell di login del container lo esportano, quindi nessun agente lo imposta a mano; `dck doctor` segnala una discrepanza. Da `v0.3.4` le configurazioni Codex proprie del container saltano il controllo degli aggiornamenti di Codex all’avvio e il suo daemon in background (il kit fissa la versione di ogni CLI), senza mai toccare la home Codex del tuo host né un profilo condiviso.
 - **Risposte anche dall’host.** `dck setup` installa sull’host un [herdr-peers](/kit/herdr) verificato, così `dck agents` e `dck ask` funzionano anche lì e gli agenti dell’host rispondono con `herdr-peers reply`.
 - **Container non creati dal kit.** Elenca le chiavi pubbliche con cui accedono in `[ssh] authorized_extra` nel profilo host, e potranno raggiungere anche i container dck.
 
@@ -74,12 +77,34 @@ Con `host_profiles` attivo, `dck up` condivide solo i profili delle CLI che il r
 - **Codex** tramite il suo file di autenticazione, per `@default` e per ogni profilo.
 - **Il file di ambiente del kit**, di sola lettura e ridotto ai nomi in `host_env_keys`.
 
-L’intera home di agentkit non viene mai montata, e i profili che contengono percorsi assoluti dell’host vengono saltati. Un login Codex condiviso in lettura e scrittura può essere rinnovato da due scrittori contemporaneamente: tieni un solo agente attivo per account Codex. Nel container, lo stesso `ak <kind> @<profile>` gira sullo stesso account che sull’host, ed è ciò che permette a un lead di affidare alle corsie del container gli account scelti da `ak pick` — vedi [Eseguire molti agenti](/methodology/06-orchestration).
+L’intera home di agentkit non viene mai montata, e i profili che contengono percorsi assoluti dell’host vengono saltati. Un login Codex condiviso in lettura e scrittura può essere rinnovato da due scrittori contemporaneamente: tieni un solo agente attivo per account Codex. `[agents] default_profile` nel profilo host (per esempio `{ claude = "@work3" }`) fa sì che un semplice `ak claude` all’interno usi quell’account condiviso (coding-agents-kit ≥ `v0.5.2`); un login Claude `@default` su macOS risiede nel Portachiavi (Keychain) e non può essere condiviso. Da `v0.3.4` le shell del container puntano anche un semplice `claude` o `codex` a quell’account, così i pannelli che Herdr ripristina si aprono su di esso invece che su una schermata di login. Nel container, lo stesso `ak <kind> @<profile>` gira sullo stesso account che sull’host, ed è ciò che permette a un lead di affidare alle corsie del container gli account scelti da `ak pick` — vedi [Eseguire molti agenti](/methodology/06-orchestration).
+
+## Più repository, un solo stack compose
+
+Da `v0.3.3`, un repository il cui servizio è una parte di un progetto compose più ampio (un’API, un’app web, worker e un database che condividono un unico progetto) può unirsi a esso senza modificare a mano ciò che dck genera. Tutto è additivo: un repository che non imposta nessuna di queste chiavi viene generato esattamente come prima.
+
+- **Un progetto, un volume di stato per servizio.** `[compose] project` indica il progetto condiviso in ogni repository; `state_volume`, `[compose] networks` e `[compose] volumes` tengono separati lo stato di ciascun servizio e i volumi di dati e le reti dello stack.
+- **Un blocco utente.** Le righe tra `# >>> user:<service> >>>` e `# <<< user:<service> <<<` all’interno del servizio dck vengono mantenute alla lettera: chiavi semplici per ciò che dck non genera (`depends_on`, `healthcheck`), e `x-dck-merge:` per le chiavi che genera. Un file con solo alcuni dei marcatori di dck viene rifiutato indicando la correzione, invece di essere riscritto.
+- **Porte come stringhe.** `ssh_port` e `ports` accettano espressioni compose come `"${API_PORT:-8000}:8000"`; restano su `127.0.0.1` a meno che la stringa non indichi un IP dell’host.
+- **Build condivise e il tuo launcher.** `[build] context` e `[build] dockerfile` coprono un Dockerfile condiviso da più servizi; `dev_sh = false` mantiene il `dev.sh` proprio del repository.
+- **Satelliti del workspace.** Da `v0.3.5`, una seconda istanza del servizio nel proprio progetto compose si avvia e si arresta tramite dck (`dck --project P --compose-file F --service S up` o `down`), così ottiene la stessa chiave host, gli stessi account, la stessa identità git e la stessa macchina Herdr di quella principale; `up --seed-state-from VOLUME` copia solo i login nel suo volume di stato vuoto. In un file di overlay, `extends` deve indicare il file che estende.
+- **Node per gli agenti.** Il Node degli agenti risiede in `/opt/dck/node` e non sostituisce mai quello dell’immagine; `[agents] node_first = true` lo mette per primo nel PATH quando gli strumenti del repository lo richiedono.
+
+## Le chiavi SSH dell’host nel container
+
+Alcuni strumenti leggono solo file di chiave e ignorano l’agente inoltrato: `gh auth login`, per esempio, propone di generare una nuova chiave. Da `v0.3.2` puoi attivarlo come opt-in, solo nel tuo **profilo host** (il `dck.toml` di un repository non può impostarlo; `dck setup` lo chiede una volta, con risposta predefinita no):
+
+```toml
+[ssh]
+copy_keys = true              # default false
+```
+
+Finché è attivo, `dck up` monta in sola lettura il `~/.ssh` dell’host in `~/.ssh_host`, e a ogni avvio ne copia le chiavi `id_*` nel `~/.ssh` del container (chiavi private `0600`), mantenendole allineate con l’host. L’inoltro dell’agente resta invariato, e disattivandolo le copie vengono rimosse all’avvio successivo. Il costo: l’intero `~/.ssh` dell’host è leggibile all’interno del container, e le chiavi private restano nel volume di stato.
 
 ## Impostazioni di sicurezza predefinite
 
 - Ogni porta pubblicata si associa a `127.0.0.1`, a meno che `dck.toml` non imposti `bind`.
-- Git su SSH passa attraverso l’agente SSH dell’host: il suo socket, mai un file di chiave e mai un `~/.ssh` o un `~/.gitconfig` montato. L’identità git deriva dai valori `DCK_GIT_*` che `dck setup` compila.
+- Git su SSH passa attraverso l’agente SSH dell’host: il suo socket, mai un file di chiave e mai un `~/.ssh` o un `~/.gitconfig` montato, a meno che tu non abbia attivato [`copy_keys`](#le-chiavi-ssh-dellhost-nel-container) nel tuo profilo host. L’identità git deriva dai valori `DCK_GIT_*` che `dck setup` compila.
 - Le chiavi host SSH vengono generate a runtime in un volume per progetto, mai incorporate in un’immagine; il server accetta solo chiavi pubbliche, senza login root e senza password.
 - Il template non aggiunge `cap_add`, né la modalità `privileged`, né il socket di Docker.
 - Ogni download è fissato per versione e verificato tramite checksum; l’immagine di base è fissata per digest.

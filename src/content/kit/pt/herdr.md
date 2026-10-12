@@ -14,11 +14,11 @@ O [Herdr](https://herdr.dev) coloca agentes de programação em painéis, na sua
 
 ## O que ele integra
 
-O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v0.2.2`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
+O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v0.2.3`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/herdr-peers`, tag `v0.2.2`, protocolo 1 |
+| Produto | `DailybotHQ/herdr-peers`, tag `v0.2.3`, protocolo 1 |
 | Chave de registro | `herdr` em `.dwp/config.json` |
 | Transporte | interativo: um par em um painel do Herdr |
 | Fornece | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https:
 Instale o herdr-peers e a skill oficial do Herdr, da qual ele depende. Toda máquina cujos agentes devam responder também precisa da skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ O herdr-peers não autentica o remetente: o campo `from=` de um carimbo é uma a
 
 ## Contêineres e o host
 
-Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v0.3.1`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define.
+Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v0.3.5`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define. Desde o herdr-peers `v0.2.3`, cada máquina mantém o próprio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), então um checkout compartilhado pelo host e por um contêiner não mistura mais os registros de cada um, e desde o devcontainer-kit (`v0.3.3`) o próprio contêiner exporta `HERDR_PEERS_SELF`, então os agentes Codex lá dentro alcançam outras máquinas sem nenhum passo manual.
 
 ## Herdr ou agentkit
 

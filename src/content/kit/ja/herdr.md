@@ -14,11 +14,11 @@ order: 7
 
 ## 何を統合するか
 
-このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v0.2.2`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
+このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v0.2.3`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/herdr-peers`、タグ `v0.2.2`、プロトコル 1 |
+| プロダクト | `DailybotHQ/herdr-peers`、タグ `v0.2.3`、プロトコル 1 |
 | レジストリキー | `.dwp/config.json` 内の `herdr` |
 | トランスポート | 対話型：Herdr ペイン内のピア |
 | 提供するもの | `subagents`、`cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 herdr-peers と、それが依存する Herdr 公式のスキル をインストールします。エージェントに回答させたいすべてのマシンにも、このスキル が必要です。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers は送信者を認証しません。スタンプ内の `from=` フ�
 
 ## コンテナとホスト
 
-devcontainer-kit `v0.3.1` 上の [devcontainer](/kit/devcontainer) アドオンを使うと、すべての dck コンテナが herdr-peers を同梱し、`dck up` の時点でメッシュに参加します。そのエージェントは、ホスト上、他のコンテナ内、ホストの他のループバックコンテナ内のエージェントに問い合わせ、返信を受け取れます。`dck setup` はホストに検証済みの herdr-peers をインストールするため、ホストのエージェントも返信できます。ホストリスナーと、他のコンテナを受け入れる追加の鍵は、キットのホストプロファイルであなたが決めるものであり、このアドオンがそれらを設定することはありません。
+devcontainer-kit `v0.3.5` 上の [devcontainer](/kit/devcontainer) アドオンを使うと、すべての dck コンテナが herdr-peers を同梱し、`dck up` の時点でメッシュに参加します。そのエージェントは、ホスト上、他のコンテナ内、ホストの他のループバックコンテナ内のエージェントに問い合わせ、返信を受け取れます。`dck setup` はホストに検証済みの herdr-peers をインストールするため、ホストのエージェントも返信できます。ホストリスナーと、他のコンテナを受け入れる追加の鍵は、キットのホストプロファイルであなたが決めるものであり、このアドオンがそれらを設定することはありません。herdr-peers `v0.2.3` 以降、各マシンは自身の状態（`$XDG_STATE_HOME/herdr-peers/<server>/`）を持つため、ホストとコンテナが共有するチェックアウトでも互いの記録が混ざらなくなりました。また devcontainer-kit (`v0.3.3`) 以降はコンテナ自身が `HERDR_PEERS_SELF` をエクスポートするため、コンテナ内の Codex エージェントは手作業なしで他のマシンに到達できます。
 
 ## Herdr か agentkit か
 

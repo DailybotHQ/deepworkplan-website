@@ -31,10 +31,10 @@ Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wa
 
 ### Devcontainer (addon pertama)
 
-Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.3.1`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
+Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v0.3.5`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
 
 - **Halaman kit:** [Devcontainer](/kit/devcontainer)
-- **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya, dan mesin Herdr per container dengan tata letak standar
+- **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya kecuali pengembang mengaktifkannya dengan `[ssh] copy_keys` di profil host miliknya, dan mesin Herdr per container dengan tata letak standar
 - **Perilaku:** dideteksi melalui `dck doctor --json` (antarmuka 2); `dck init` merekonsiliasi devcontainer yang ada hanya setelah diff-nya diterima, dan mencadangkan file terlebih dahulu — tidak pernah ditimpa
 - **Kapan ditawarkan:** sebagian besar repo dengan Docker atau layanan yang mendapat manfaat dari dev container terisolasi
 
@@ -44,7 +44,7 @@ Koneksi opt-in ke **tim Dailybot** pengembang untuk visibilitas progres agen.
 
 - **Halaman kit:** [Dailybot](/kit/dailybot) — referensi kemampuan lengkap
 - **Yang dihubungkan addon DWP:** empat laporan siklus hidup rencana (kickoff, significant task, blocked, completion) melalui sub-skill dailybot `report`; penegakan hook deterministik opsional (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (saat ini **3.23.12**) mengekspos **17 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, board dan tugas Plan, label organisasi, API key per repo (`.dailybot/env.json`), email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
+- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (saat ini **3.23.14**) mengekspos **17 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, board dan tugas Plan, label organisasi, API key per repo (`.dailybot/env.json`), email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
 - **Auth:** sepenuhnya ditunda ke skill Dailybot (`dailybot login` atau `DAILYBOT_API_KEY`); addon ini tidak pernah menyimpan kredensial
 - **Pagar vendor-neutral:** DWP inti memiliki **nol** ketergantungan Dailybot; jangan pernah menginstal otomatis untuk semua orang
 - **Kapan ditawarkan:** pengembang atau tim sudah menggunakan Dailybot, atau secara eksplisit meminta pelaporan tim
@@ -72,7 +72,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) memberi pemeriksaan keamanan Final Review wajib sebuah tinjauan lokal terstruktur, dan secara opsional mengontrol pull request di CI. Sejak standar 2.3.0 **tinjauan lokal adalah bagian dari baseline**; hanya permukaan CI yang opt-in. Addon ini diperbarui otomatis setiap rilis, sehingga tag yang ditampilkan di bawah adalah tag yang berlaku saat tulisan ini dibuat dan dapat tertinggal dari salinan yang di-vendor — `SKILL.md` milik addon itu sendiri dan rilis GitHub-nya adalah acuan resmi untuk tag yang benar-benar terpasang. Pemasangan selalu dipatok ke tag yang sudah dirilis, tidak pernah ke branch yang bergerak.
 
 - **Halaman kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — referensi kemampuan lengkap
-- **Wajib saat onboarding (Fase 7a):** instalasi skill vendored yang dipatok pada tag (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer -y`) plus `.review/extension.md` yang disesuaikan dengan repo (melalui `generate-extension`), di bawah persetujuan onboarding; upgrade harness tertarget merekonsiliasi keduanya bila hilang; penolakan dicatat sebagai pengecualian yang dinyatakan dan dilaporkan oleh `verify` hingga terinstal
+- **Wajib saat onboarding (Fase 7a):** instalasi skill vendored yang dipatok pada tag (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer -y`) plus `.review/extension.md` yang disesuaikan dengan repo (melalui `generate-extension`), di bawah persetujuan onboarding; upgrade harness tertarget merekonsiliasi keduanya bila hilang; penolakan dicatat sebagai pengecualian yang dinyatakan dan dilaporkan oleh `verify` hingga terinstal
 - **Wajib di setiap Final Review:** pemeriksaan keamanan menjalankan alur default induk upstream atas kumpulan perubahan yang terakumulasi dan menambahkan outputnya ke `analysis_results/SECURITY_REVIEW.md` milik plan tersebut (di dalam folder plan itu sendiri, bukan di root repo); skill atau ekstensi yang hilang menjadi temuan `local reviewer not installed` yang tercatat — tidak pernah dilewati diam-diam, dan tidak pernah menjadi bootstrap kejutan: instalasi milik persetujuan onboarding atau invokasi addon yang eksplisit; **temuan kritis terverifikasi** dari penerusan yang selesai memblokir penyelesaian hingga diperbaiki atau diterima secara eksplisit (v3, BC-07 — klaim kritis yang belum terverifikasi muncul sebagai peringatan beranotasi, dan tinjauan `incomplete`/`timeout` bukan kelulusan yang bersih, BC-04)
 - **Permukaan CI opsional (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`) melalui sub-skill `setup` upstream, plus pendamping `apply-review` (hanya baca) dan `address-review` (commit, push, dan mengarmkan kembali; baru di v3.1.1) sebagai kenyamanan yang dipanggil pengembang — ditawarkan secara eksplisit, tidak pernah diinstal tanpa diminta, tidak pernah menjadi default, tidak pernah menjadi tugas rencana
 - **Tidak pernah memblokir (hanya pemanggilan):** tinjauan lokal yang bisa dimulai tetapi gagal bersifat peringat-sekali-catat-dan-lanjut; itu tidak pernah menggagalkan tugas
@@ -82,7 +82,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 
 ### Herdr (addon keenam)
 
-Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.2.2`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
+Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.2.3`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
 
 - **Halaman kit:** [Herdr](/kit/herdr)
 - **Yang ditambahkan:** sebuah rencana dapat menyerahkan tugas terbatas kepada coding agent di pane [Herdr](https://herdr.dev) lain, di mesin yang sama atau mesin yang dijangkau Herdr melalui SSH, dan mencatat satu-satunya balasan yang diizinkan di jurnal
@@ -100,7 +100,7 @@ Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkp
 
 ### Agentkit (addon kedelapan)
 
-Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v0.5.0`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
+Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v0.5.3`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
 
 - **Halaman kit:** [Agentkit](/kit/agentkit)
 - **Yang ditambahkan:** satu permukaan perintah `ak` di atas coding agent terminal, digunakan untuk menjalankan tugas rencana terbatas secara headless; addon ini menyumbangkan kemampuan `subagents`, `cancel_children`, dan `model_routing` hanya saat runtime, ketika diaktifkan, terdeteksi, dan berada pada antarmuka yang kompatibel

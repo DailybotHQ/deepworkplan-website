@@ -10,7 +10,7 @@ order: 8
 
 Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caranya sendiri untuk memisahkan akun kedua, mode headless-nya sendiri, dan sakelarnya sendiri untuk melewati prompt izin. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** menyatukan semuanya di bawah satu permukaan perintah: `ak <kind> [@profile]`.
 
-Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.6.1`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
+Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.6.3`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
 ## Yang diberikan kit ini
 
@@ -23,7 +23,7 @@ Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.6.1`) seb
 
 ## Akun, kuota, dan memilih akun
 
-Kit ini memperlakukan setiap login atau kunci yang Anda miliki sebagai sebuah **akun**: satu CLI × satu profil. `@default` (atau `@1`) adalah home milik CLI itu sendiri; `@2`, `@work`, atau `@client-x` adalah login terpisah, masing-masing di direktorinya sendiri di bawah akar profil, yang berjalan berdampingan. `ak profiles` menampilkan daftarnya beserta status login dan nama kuncinya; `ak profiles --json` memberikan daftar yang sama kepada tool (skema `profiles-v1`).
+Kit ini memperlakukan setiap login atau kunci yang Anda miliki sebagai sebuah **akun**: satu CLI × satu profil. `@default` (atau `@1`) adalah home milik CLI itu sendiri; `@2`, `@work`, atau `@client-x` adalah login terpisah, masing-masing di direktorinya sendiri di bawah akar profil, yang berjalan berdampingan. `ak profiles` menampilkan daftarnya beserta status login dan nama kuncinya; `ak profiles --json` memberikan daftar yang sama kepada tool (skema `profiles-v1`). Sejak `v0.5.1`, perintah ini melaporkan di mana token Claude Code sebenarnya berada — `file`, `keychain` (macOS), `none`, atau `unknown` — hanya berdasarkan keberadaannya, tanpa pernah membaca secret-nya, dan login Cursor di Linux, di dalam container atau di host Linux, kini dikenali. Sejak `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` menentukan akun yang dipakai oleh `ak <cli>` tanpa argumen (`@profile` posisional tetap diutamakan); dengan cara inilah dev container memilih akun host yang dibagikannya. Sejak `v0.5.3`, `ak codex` menambahkan `--no-daemon` ketika home Codex yang dibagikan dengan mesin lain mencatat daemon latar belakang yang tidak ada di mesin ini.
 
 `ak usage` menampilkan kuota dan pemakaian setiap akun yang dapat dilihat kit, satu baris per akun dan profil: langsung untuk langganan Claude Code (jendela 5 jam, mingguan, dan per model), login Codex melalui ChatGPT, serta kunci paket coding Z.AI; Cursor, Grok, xAI, dan Azure OpenAI menampilkan `n/d` beserta alasannya. Perintah ini hanya membaca: tidak pernah memperbarui login, tidak pernah mencetak token, dan tidak pernah menulis ke dalam profil. `--json` memberikan daftar yang sama kepada tool (skema `usage-v1`). Endpoint pemakaian bersifat internal vendor dan tidak resmi.
 
@@ -48,15 +48,15 @@ Untuk lane interaktif yang panjang, setiap lane berjalan di panel [Herdr](/kit/h
 ## Instalasi
 
 ```bash
-git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.3 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.5.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.5.3`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.5.0`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.5.3`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |

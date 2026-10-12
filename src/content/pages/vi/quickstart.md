@@ -87,10 +87,10 @@ nó đã được kiểm tra.
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.6.1
+  git checkout v7.6.3
   # Tải xuống checksum của bản phát hành đó và đối chiếu với digest bên dưới:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.1/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.3/SHA256SUMS
   shasum -a 256 SHA256SUMS   # phải bằng digest của deepworkplan-skill trong Bản phát hành được ghim
   ./setup.sh --verify        # kết quả khác không có nghĩa là một tệp không khớp — dừng lại
   ```
@@ -103,13 +103,13 @@ nó đã được kiểm tra.
 
   | Repository (github.com/DailybotHQ) | Tag | sha256 của `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.6.1` | `c112bb72c450e8dc64fbcf6f55a1a4262b2d8d445c8ee01d16a4b47a8258c425` |
-  | coding-agents-kit | `v0.5.0` | `a90f45e44085370694a954a3578d037d0637d0eb4ec2f1b846a8d29556b1ec27` |
-  | herdr-peers | `v0.2.2` | `9c4f94101a1b1b9765b71edc8ff96580543061a6291a811acb630b2468b7b682` |
-  | devcontainer-kit | `v0.3.1` | `14920cc1c45a61e513e93d823ee777b6427fcf141482961bfaabbd252ccff5a9` |
+  | deepworkplan-skill | `v7.6.3` | `ddb486549780a47688c20aa763a55fc090bbf76bf11a4767f1827f3c2266e332` |
+  | coding-agents-kit | `v0.5.3` | `0ab8e810dc9b234597da75b9733538db63c19ef02a9f48ce685e1b4b76d3e343` |
+  | herdr-peers | `v0.2.3` | `dad7faffb678236133da1ccd0e7ed9d665dcd033b60d10b5a7d5fb3d710c90b8` |
+  | devcontainer-kit | `v0.3.5` | `efee9464a24ef78d50c8a470ace8afa4d75bb9aafd845e659839ab40e7ab69ee` |
   | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
-  | ai-diff-reviewer | `v3.3.9` | `aaf490cfe01ba858df49732798d6861a7c742b967f39fedb4f1a9c999aafc0c9` |
-  | agent-skill | `v3.23.12` | không công bố — CLI skills ghi một hash nội dung trong `skills-lock.json` |
+  | ai-diff-reviewer | `v3.3.11` | `d384c1fffc710e46b5a06d85c5366dfdfd612bebd67526c8647838714b089cf6` |
+  | agent-skill | `v3.23.14` | không công bố — CLI skills ghi một hash nội dung trong `skills-lock.json` |
 - **Báo cáo vấn đề.** Báo cáo các vấn đề bảo mật **riêng tư qua tính năng báo cáo lỗ hổng bảo mật của GitHub** trên repository liên quan — `https://github.com/DailybotHQ/deepworkplan-skill/security` hoặc `https://github.com/DailybotHQ/deepworkplan-website/security` — không phải dưới dạng issue công khai. Xem thêm `SECURITY.md` của mỗi repository, `https://deepworkplan.com/.well-known/security.txt`, và trang tin tưởng `https://deepworkplan.com/trust`.
 
 ## 2. Cài skill Deep Work Plan
@@ -121,7 +121,7 @@ cùng chín sub-skill — `create`, `execute`, `refine`, `resume`, `status`, `ve
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
 ```
 
 Hoặc cài đặt qua OpenClaw:
@@ -143,7 +143,7 @@ bản skill Deep Work Plan đã cài ở trên. Gói skill hiện tại bao gồ
 và chín sub-skill: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` và `upgrade`.
 
-Phiên bản skill đã cài: **7.6.1**. Gói 7.x hiện tại mặc định tạo kế hoạch mới bằng v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
+Phiên bản skill đã cài: **7.6.3**. Gói 7.x hiện tại mặc định tạo kế hoạch mới bằng v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; chuyển kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng và xem trước.
 
 Tiêu chuẩn này được thiết kế có chủ đích theo tỷ lệ, và biến sự tỷ lệ đó thành
 một thuộc tính của kế hoạch chứ không phải kỷ luật của nhà phát triển. Một kế
@@ -194,7 +194,7 @@ kiểm tra bảo mật trên toàn bộ tập thay đổi đã tích lũy, bao g
 bộ AI Diff Reviewer bắt buộc, xác thực trạng thái cuối cùng của repository,
 đối chiếu các skill mà các tác vụ đã sử dụng, và ghi lại bằng chứng cùng các
 giới hạn. Skill đánh giá cục bộ được cài đặt ở một phiên bản cố định; lệnh
-được ghi lại hiện tại cài đặt `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9`. GitHub
+được ghi lại hiện tại cài đặt `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11`. GitHub
 Action là một bề mặt CI riêng biệt, tùy chọn, và không bao giờ là bắt buộc đối
 với phương pháp luận cốt lõi.
 
@@ -264,11 +264,11 @@ Bảng này là tài liệu tra cứu, không phải danh sách kiểm tra: ch�
 
 | Thành phần | Phát hiện phiên bản đã cài | Cài đặt hoặc nâng cấp (đã ghim) |
 | --- | --- | --- |
-| AI Diff Reviewer (bắt buộc) | `version:` trong `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.9 --skill ai-diff-reviewer --force -y` |
-| Dailybot | `version:` trong `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.12 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | `scripts/herdr-peers --version` trong skill herdr-peers đã cài | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| AI Diff Reviewer (bắt buộc) | `version:` trong `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `version:` trong `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.14 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.5.3 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | `scripts/herdr-peers --version` trong skill herdr-peers đã cài | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | trình cài đặt đã xác minh tại https://deepworkplan.com/vim/install.sh (nó ghim `v0.7.0`; tải xuống, `shasum -a 256 -c install.sh.sha256`, rồi chạy) |
 
 Xác minh mỗi bản tải xuống với `SHA256SUMS` của bản phát hành tương ứng và digest trong *Bản phát hành được ghim* ở trên
@@ -282,16 +282,16 @@ kể từ chuẩn 2.3.0): skill được ghim theo tag ở trên cùng một `.r
 upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) và chỉ đề xuất những cái phù hợp với repository này, mỗi cái như một lựa chọn tự nguyện rõ ràng. Một
 repository hoàn toàn tuân thủ với **không** addon tùy chọn nào — đừng bao giờ tự động cài chúng.
 
-- **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.3.1`, cùng skill `dck-dockerfile` của nó): `dck init` tạo container riêng của repository — image chính thức ghim theo digest, không có base image dùng chung, `bash dev.sh up` — và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận. Khi được chấp nhận, hãy làm theo *Lộ trình devcontainer* bên dưới cho đến toàn bộ stack.
-- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.12) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
+- **Hỗ trợ devcontainer** — một lớp tích hợp mỏng cho [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v0.3.5`, cùng skill `dck-dockerfile` của nó): `dck init` tạo container riêng của repository — image chính thức ghim theo digest, không có base image dùng chung, `bash dev.sh up` — và chỉ đối chiếu một devcontainer có sẵn sau khi diff của nó được chấp nhận. Khi được chấp nhận, hãy làm theo *Lộ trình devcontainer* bên dưới cho đến toàn bộ stack.
+- **Tích hợp Dailybot** — bốn sự kiện vòng đời (kickoff, tác vụ quan trọng, bị chặn, hoàn tất) dưới dạng báo cáo tiến độ theo nỗ lực tối đa cho các đội đã dùng Dailybot, với lớp hook tự hành tùy chọn (`dailybot-cli >= 3.9.0`). Cài skill agent Dailybot đi kèm (3.23.14) cũng mở ra chat, check-in, tạo biểu mẫu, hỏi AI, board và tác vụ Plan, API key theo repo và nhiều hơn — addon chỉ đấu nối phần báo cáo vào quá trình thực thi DWP. Phương pháp luận lõi không có phụ thuộc nào vào Dailybot.
 - **Nâng cấp phụ thuộc** — nâng cấp độc lập với trình quản lý gói, theo lô, được kiểm chứng, hoàn nguyên được. Khi
   được chấp nhận, nó cài command `/lib-upgrade`.
 - **Design system** — `docs/DESIGN.md` tự nguyện dành cho các repo có bề mặt giao diện được phát hiện
   (không đề xuất cho thư viện thuần, dịch vụ headless hay repo chỉ hạ tầng). Ba profile xếp chồng trong
   một tệp: visual-ui (được khuyến nghị mạnh mẽ khi phát hiện; cài đặt kiểm soát bằng sự chấp nhận), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
-- **agentkit** — bản cài đặt cấp máy của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim ở `v0.5.0`): một lệnh cho mọi coding agent, một tài khoản cho mỗi hồ sơ, `ak usage` và `ak pick` để chọn tài khoản còn nhiều chỗ nhất, và `ak run` headless cho các kế hoạch giao những tác vụ `parallel_safe` có giới hạn cho coding agent khác (mỗi worktree một bên được ủy thác). Bộ kit khởi chạy agent ở chế độ tự chủ theo mặc định và lựa chọn opt-out của nó (`--ask` hoặc `AGENTKIT_PERMISSIONS=ask`) luôn được ưu tiên.
-- **Herdr** — bản cài đặt cấp máy của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim ở `v0.2.2`, cùng skill chính thức của Herdr) cho các kế hoạch yêu cầu một agent ngang hàng trong một pane Herdr, trên bất kỳ máy nào, gửi một phản hồi được ủy quyền, và cho một lead theo dõi các lane của mình.
+- **agentkit** — bản cài đặt cấp máy của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim ở `v0.5.3`): một lệnh cho mọi coding agent, một tài khoản cho mỗi hồ sơ, `ak usage` và `ak pick` để chọn tài khoản còn nhiều chỗ nhất, và `ak run` headless cho các kế hoạch giao những tác vụ `parallel_safe` có giới hạn cho coding agent khác (mỗi worktree một bên được ủy thác). Bộ kit khởi chạy agent ở chế độ tự chủ theo mặc định và lựa chọn opt-out của nó (`--ask` hoặc `AGENTKIT_PERMISSIONS=ask`) luôn được ưu tiên.
+- **Herdr** — bản cài đặt cấp máy của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim ở `v0.2.3`, cùng skill chính thức của Herdr) cho các kế hoạch yêu cầu một agent ngang hàng trong một pane Herdr, trên bất kỳ máy nào, gửi một phản hồi được ủy quyền, và cho một lead theo dõi các lane của mình.
 - **DeepWorkPlan Vim** — trình soạn thảo terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), ghim ở `v0.7.0`), một bản cài đặt cấp máy không bao giờ ghi đè cấu hình Neovim có sẵn khi chưa có sự đồng ý rõ ràng.
 - **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
   Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +

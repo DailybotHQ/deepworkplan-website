@@ -10,7 +10,7 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.6.1`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v7**（パック `v7.6.3`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 ## キットが提供するもの
 
@@ -23,7 +23,7 @@ order: 8
 
 ## アカウント、クォータ、アカウントの選び方
 
-キットは、あなたが持つログインやキーの一つひとつを**アカウント**として扱います。一つの CLI × 一つのプロファイルです。`@default`（または `@1`）は CLI 自身の home で、`@2`、`@work`、`@client-x` は別々のログインです。それぞれプロファイルのルート配下の専用ディレクトリに置かれ、並行して動きます。`ak profiles` はそれらをログイン状態とキーの名前とともに一覧表示し、`ak profiles --json` はツール向けに同じ一覧を返します（スキーマ `profiles-v1`）。
+キットは、あなたが持つログインやキーの一つひとつを**アカウント**として扱います。一つの CLI × 一つのプロファイルです。`@default`（または `@1`）は CLI 自身の home で、`@2`、`@work`、`@client-x` は別々のログインです。それぞれプロファイルのルート配下の専用ディレクトリに置かれ、並行して動きます。`ak profiles` はそれらをログイン状態とキーの名前とともに一覧表示し、`ak profiles --json` はツール向けに同じ一覧を返します（スキーマ `profiles-v1`）。`v0.5.1` 以降は、Claude Code のトークンが実際にどこにあるか（`file`、`keychain`（macOS）、`none`、`unknown`）を、シークレットを読まずに存在の有無だけで報告します。また、コンテナ内でも Linux ホスト上でも、Linux 上の Cursor ログインを認識します。`v0.5.2` 以降は、`AGENTKIT_DEFAULT_PROFILE_<CLI>` で引数なしの `ak <cli>` が使うアカウントを指定できます（位置引数の `@profile` が引き続き優先されます）。開発コンテナはこの仕組みで、共有するホストアカウントを選びます。`v0.5.3` 以降、別のマシンと共有している Codex home に、このマシン上にないバックグラウンドデーモンが記録されている場合、`ak codex` は `--no-daemon` を付けます。
 
 `ak usage` は、キットから見えるすべてのアカウントのクォータと使用量を、アカウントとプロファイルごとに 1 行で一覧表示します。Claude Code のサブスクリプション（5 時間、週次、モデル別のウィンドウ）、ChatGPT での Codex ログイン、Z.AI コーディングプランのキーはライブで取得し、Cursor、Grok、xAI、Azure OpenAI は理由付きで `n/d` と表示します。読み取り専用で、ログインを更新することも、トークンを表示することも、プロファイル内に書き込むこともありません。`--json` はツール向けに同じ一覧を返します（スキーマ `usage-v1`）。使用量のエンドポイントはベンダー内部の非公式なものです。
 
@@ -48,15 +48,15 @@ ak setup verify            # 順序付きのチェック（それぞれに修復
 ## インストール
 
 ```bash
-git clone --branch v0.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.3 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.5.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.5.3` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.5.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.5.3`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |

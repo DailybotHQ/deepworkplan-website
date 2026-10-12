@@ -9,7 +9,7 @@ lastUpdated: 2026-10-09
 キットは、この方法論を実際に実行するために必要なものすべてです。`DailybotHQ/deepworkplan-skill` からインストールします。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
 ```
 
 現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、移行には明示的な依頼が必要です。
@@ -49,7 +49,7 @@ onboard フローがドキュメント、スキル、検証コマンドを適応
 onboard フローがリポジトリに重ねる各機能です。七つはオプションであり、AI-first の基本構成には決して含まれません。AI Diff Reviewer のローカルレビューは標準 2.3.0 以降、必須です。
 
 - **Devcontainer** — 永続的な AI CLI 認証を備えた、再現可能で隔離された開発コンテナ。
-- **Dailybot** — Dailybot を使うチームのための計画ライフサイクルの報告（kickoff、重要タスク、ブロック、完了）と、Dailybot エージェントスキル全体（3.23.12: チャット、チェックイン、フォーム、AI への質問、Plan、リポジトリごとの API キーなど）へのアクセス。
+- **Dailybot** — Dailybot を使うチームのための計画ライフサイクルの報告（kickoff、重要タスク、ブロック、完了）と、Dailybot エージェントスキル全体（3.23.14: チャット、チェックイン、フォーム、AI への質問、Plan、リポジトリごとの API キーなど）へのアクセス。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。
 - **Design system** — インターフェイスに限定された `DESIGN.md`（`docs/DESIGN.md` に置かれ、`AGENTS.md` から参照される）で、リポジトリの実際のデザインソースから推論され、ビジュアル UI、スタイルづけされた CLI 出力、会話のメッセージングのプロファイルを備え、エージェントがオンブランドのインターフェイス出力を生成できるようにします。デザインシステムが検出されたときは提供が必須ですが、インストールは受け入れによってゲートされます：ビジュアルのプロファイルは検出されたとき強く推奨され、CLI と会話のプロファイルは検出されたとき推奨され、必ず尋ねられます。
 - **AI Diff Reviewer** — 必須のローカルレビューです。オンボーディングが [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 と `.review/extension.md` をインストールし、すべての Final Review のセキュリティパスがこれを実行します。オプションの Flow B は同じ extension を共有する CI PR マージゲートを追加し、明示的に提案され、要求なしにインストールされることは決してありません。
@@ -62,12 +62,12 @@ onboard フローがリポジトリに重ねる各機能です。七つはオプ
 **方法論は単独で機能します。アドオンはそれを強化します。** 各アドオンは Deep Work Plan スキル内の薄いインテグレーターであり、独自のリポジトリ、リリース、インターフェースバージョンを持つ製品にタグで固定されています。どの製品も Deep Work Plan なしで動作し、必須のアドオンはありません。
 
 - **Deep Work Plan スキル** — 計画の作成、実行、検証、再開、改善を行います。アドオンは不要です。
-- **[herdr](/ja/kit/herdr)** — 任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。固定バージョン：`herdr-peers@v0.2.2`。
-- **[agentkit](/ja/kit/agentkit)** — あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：デフォルトで自律実行（オプトアウト可）、そして worktree 内でのヘッドレス委任。固定バージョン：`coding-agents-kit@v0.5.0`。
-- **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、内部に SSH 鍵なし。固定バージョン：`devcontainer-kit@v0.3.1`。
+- **[herdr](/ja/kit/herdr)** — 任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。固定バージョン：`herdr-peers@v0.2.3`。
+- **[agentkit](/ja/kit/agentkit)** — あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：デフォルトで自律実行（オプトアウト可）、そして worktree 内でのヘッドレス委任。固定バージョン：`coding-agents-kit@v0.5.3`。
+- **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、SSH 鍵はオプトイン時のみ。固定バージョン：`devcontainer-kit@v0.3.5`。
 - **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v0.7.0`。
 
-アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.6.1`
+アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.6.3`
 
 ### 事例
 

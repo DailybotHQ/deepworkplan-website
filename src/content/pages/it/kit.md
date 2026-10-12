@@ -10,7 +10,7 @@ Il kit è tutto ciò che serve per eseguire la metodologia nella pratica. Si ins
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
 ```
 
 Il pacchetto 7.x attuale crea per impostazione predefinita i nuovi piani in v7. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
@@ -52,7 +52,7 @@ e un fallback generico.
 Capacità che il flusso di onboard aggiunge a un repo. Sette sono opzionali e mai parte della baseline AI-first; la revisione locale AI Diff Reviewer è richiesta dallo standard 2.3.0:
 
 - **Devcontainer** — un dev container riproducibile e isolato con autenticazione AI-CLI persistente.
-- **Dailybot** — report del ciclo di vita del piano (kickoff, attività significativa, bloccato, completamento) per i team che usano Dailybot, più accesso alla skill agente Dailybot completa (3.23.12: chat, check-in, form, ask AI, Plan, API key per repository e altro).
+- **Dailybot** — report del ciclo di vita del piano (kickoff, attività significativa, bloccato, completamento) per i team che usano Dailybot, più accesso alla skill agente Dailybot completa (3.23.14: chat, check-in, form, ask AI, Plan, API key per repository e altro).
 - **Dependency upgrade** — aggiornamenti indipendenti dal package manager, a lotti, validati e annullabili.
 - **Design system** — un `DESIGN.md` con ambito di interfaccia (in `docs/DESIGN.md`, referenziato da `AGENTS.md`) ragionato dalla fonte di design reale del repo, con profili per UI visuale, output CLI stilizzato e messaggistica conversazionale, così che gli agenti generino output di interfaccia on-brand; quando un design system viene rilevato l'offerta è obbligatoria ma l'installazione è subordinata a un'accettazione — il profilo visuale è fortemente raccomandato quando rilevato, mentre i profili CLI e conversazionale sono raccomandati quando rilevati e sempre proposti con una domanda.
 - **AI Diff Reviewer** — la revisione locale richiesta: l'onboarding installa [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) v3 + `.review/extension.md`, e il passaggio di sicurezza di ogni Final Review la esegue; il Flow B opzionale aggiunge un gate di merge PR in CI che condivide la stessa estensione, offerto esplicitamente e mai installato senza richiesta.
@@ -65,12 +65,12 @@ Capacità che il flusso di onboard aggiunge a un repo. Sette sono opzionali e ma
 **La metodologia funziona da sola. Gli addon la amplificano.** Ogni addon è un integratore leggero all’interno della skill Deep Work Plan, fissato tramite tag a un prodotto con il proprio repository, la propria release e la propria versione di interfaccia. Ogni prodotto funziona senza Deep Work Plan, e nessun addon è obbligatorio.
 
 - **Skill Deep Work Plan** — Crea, esegue, verifica, riprende e affina i piani. Non richiede alcun addon.
-- **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v0.2.2`.
-- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v0.5.0`.
-- **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, nessuna chiave SSH all’interno. Fissato a `devcontainer-kit@v0.3.1`.
+- **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v0.2.3`.
+- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v0.5.3`.
+- **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, chiavi SSH solo su opt-in. Fissato a `devcontainer-kit@v0.3.5`.
 - **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v0.7.0`.
 
-Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.6.1`
+Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.6.3`
 
 ### Esempi
 
