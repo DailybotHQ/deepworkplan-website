@@ -52,7 +52,7 @@ Depuis `v0.6.0`, un agent peut demander de combien de marge dispose son propre c
 - **`ak capacity --self --json`** (schéma `capacity-v1`) donne le `headroom_pct` du compte en cours, sa `binding_window`, `resets_at` et un `verdict` : `ok`, `low` (25 % ou moins), `critical` (10 % ou moins, ou limité en débit) ou `unknown` (aucune source de quota : Cursor, Grok, Antigravity). La commande utilise l’arithmétique de `ak pick`, si bien que les deux ne divergent jamais, et lit un cache d’utilisation conservé 300 secondes (`--max-age`), si bien qu’une vérification à chaque frontière de tâche reste peu coûteuse. `--self` résout le compte que `ak` a lancé ; en dehors d’un lancement par `ak`, elle sort avec le code 3 et ne devine jamais. `ak usage` lit toujours en direct et rafraîchit le cache.
 - **Seuils et exercices.** `AGENTKIT_CAPACITY_LOW` et `AGENTKIT_CAPACITY_CRITICAL` (ou `--low` et `--critical`) déplacent les seuils. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` ne peut qu’abaisser une lecture — c’est ainsi qu’un exercice fait paraître un compte à court de marge — et ne peut jamais en faire paraître un plus riche.
 - **`ak lease <kind> @<profile> --owner <addr>`** réserve un compte pour un couloir ; `ak lease release …` le libère une fois qu’un successeur a accepté la passation, et `ak lease ls` liste les baux (schéma `leases-v1`). Un profil Codex n’accepte qu’un seul bail — un rédacteur par fichier d’authentification — et seul le titulaire libère un bail. Les baux expirent et sont des enregistrements indicatifs de nombres, de noms de profils et d’adresses de panneaux, jamais un identifiant.
-- **`ak pick <kind> --owner <lead>`** écarte les comptes Codex réservés par un autre titulaire et classe chaque candidat selon `headroom / (1 + other leases)` ; sans `--owner`, le classement est inchangé.
+- **`ak pick <kind> --owner <lead>`** compte chaque bail actif, y compris ceux du titulaire : il classe les candidats selon `headroom / (1 + leases)` et ne propose jamais un compte Codex réservé, pas même à son détenteur. `--reuse @<profile>` transmet l’un des baux du titulaire, par exemple au successeur d’un couloir. Sans `--owner`, le classement est inchangé.
 
 ```bash
 ak capacity --self --json                        # la marge et le verdict de cet agent
@@ -65,15 +65,15 @@ Le travail ne circule qu’entre les comptes que vous avez déclarés pour le pl
 ## Installation
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v0.6.0` : `v0.2.0` et `v0.2.1` ne sont pas prises en charge. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
+Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v0.6.1` : `v0.2.0` et `v0.2.1` ne sont pas prises en charge. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, interface 1 |
+| Produit | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interface 1 |
 | Clé de registre | `agentkit` dans `.dwp/config.json` |
 | Transport | headless : un `ak run` par délégué dans un worktree git dédié |
 | Fournit | `subagents`, `cancel_children`, `model_routing` |

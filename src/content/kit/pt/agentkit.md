@@ -52,7 +52,7 @@ A partir da `v0.6.0`, um agente pode perguntar quanta folga a própria conta tem
 - **`ak capacity --self --json`** (schema `capacity-v1`) informa o `headroom_pct` da conta em execução, sua `binding_window`, `resets_at` e um `verdict`: `ok`, `low` (25 % ou menos), `critical` (10 % ou menos, ou com rate limit) ou `unknown` (sem fonte de cota: Cursor, Grok, Antigravity). Ele usa a aritmética do `ak pick`, então os dois nunca discordam, e lê um cache de uso mantido por 300 segundos (`--max-age`), então uma verificação em cada limite entre tarefas continua barata. `--self` resolve a conta que o `ak` iniciou; fora de um início pelo `ak`, ele sai com código 3 e nunca adivinha. `ak usage` continua lendo ao vivo e atualiza o cache.
 - **Limiares e ensaios.** `AGENTKIT_CAPACITY_LOW` e `AGENTKIT_CAPACITY_CRITICAL` (ou `--low` e `--critical`) movem os limiares. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` só pode rebaixar uma leitura — é assim que um ensaio faz uma conta parecer escassa — e nunca pode fazer uma parecer mais folgada.
 - **`ak lease <kind> @<profile> --owner <addr>`** reserva uma conta para uma frente; `ak lease release …` a libera depois que um sucessor aceitou o repasse, e `ak lease ls` lista as reservas (schema `leases-v1`). Um perfil do Codex aceita uma única reserva — um escritor por arquivo de autenticação — e só o dono libera uma reserva. As reservas expiram e são registros consultivos de números, nomes de perfil e endereços de painel, nunca uma credencial.
-- **`ak pick <kind> --owner <lead>`** pula contas do Codex reservadas por outro dono e classifica cada candidata por `headroom / (1 + other leases)`; sem `--owner`, a classificação não muda.
+- **`ak pick <kind> --owner <lead>`** conta todas as reservas ativas, inclusive as do próprio dono: classifica as candidatas por `headroom / (1 + leases)` e nunca oferece uma conta do Codex reservada, nem mesmo a quem a detém. `--reuse @<profile>` repassa uma das reservas do próprio dono, por exemplo ao sucessor de uma frente. Sem `--owner`, a classificação não muda.
 
 ```bash
 ak capacity --self --json                        # folga e veredito deste agente
@@ -65,15 +65,15 @@ O trabalho só circula entre as contas que você declarou para o plano, dentro d
 ## Instalação
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.6.0`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
+Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.6.1`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, interface 1 |
+| Produto | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interface 1 |
 | Chave de registro | `agentkit` em `.dwp/config.json` |
 | Transporte | headless: um `ak run` por delegado em uma worktree git dedicada |
 | Fornece | `subagents`, `cancel_children`, `model_routing` |

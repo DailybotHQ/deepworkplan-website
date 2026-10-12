@@ -99,4 +99,4 @@ Plan nadrzędny zamyka się na podstawie dowodów, nie raportów:
 
 ## Gdy wyczerpie się konto lub prowadzący
 
-Długi przebieg trwa dłużej niż którekolwiek pojedyncze konto. Od coding-agents-kit `v0.6.0` i herdr-peers `v0.3.0` tor sprawdza własną pojemność na każdej granicy zadania i przekazuje swoją pracę dalej za pomocą pakietu, zanim jego konto się wyczerpie; prowadzący przekazuje przywództwo albo zostaje zastąpiony przez swojego zastępcę, a do dewelopera trafiają tylko kwestie krytyczne. [Autonomia roju](/pl/methodology/07-swarm-autonomy) opisuje pętlę, pakiet, sukcesję i klasy eskalacji.
+Długi przebieg trwa dłużej niż którekolwiek pojedyncze konto. Od coding-agents-kit `v0.6.1` i herdr-peers `v0.3.1` tor sprawdza własną pojemność na każdej granicy zadania i przekazuje swoją pracę dalej za pomocą pakietu, zanim jego konto się wyczerpie; prowadzący przekazuje przywództwo albo zostaje zastąpiony przez swojego zastępcę, a do dewelopera trafiają tylko kwestie krytyczne. [Autonomia roju](/pl/methodology/07-swarm-autonomy) opisuje pętlę, pakiet, sukcesję i klasy eskalacji.

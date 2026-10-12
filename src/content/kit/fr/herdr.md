@@ -14,11 +14,11 @@ C’est un addon facultatif de **DWP v7** (`v7.0.0`). La méthodologie fonctionn
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v0.3.0`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v0.3.1`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v0.3.0`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v0.3.1`, protocole 1 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,7 +73,7 @@ Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des pa
 
 ## Notifications et leadership
 
-herdr-peers `v0.3.0` ajoute ce qui permet à un essaim de survivre à son coordinateur ([Autonomie de l’essaim](/methodology/07-swarm-autonomy)) :
+herdr-peers `v0.3.1` ajoute ce qui permet à un essaim de survivre à son coordinateur ([Autonomie de l’essaim](/methodology/07-swarm-autonomy)) :
 
 - **Notifications.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envoie un message à sens unique estampillé `reply=no`. Le `check` du destinataire le classe comme notification, le consigne comme donnée et n’y répond jamais. Les notifications ne consomment aucun emplacement de fan-out et peuvent être envoyées pendant qu’une demande est ouverte ; utilisez-les pour les annonces de passation, les changements de coordinateur et les diffusions de publication.
 - **Un enregistrement de coordinateur par plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` fait d’un agent le coordinateur d’un plan ; `lead show` affiche l’enregistrement (schéma `herdr-peers/lead-v1` : plan, coordinateur, époque, succession, couloirs, heure de mise à jour). `lead handover <addr> --plan <P>` transmet le leadership, `lead takeover --plan <P>` permet au premier suppléant joignable de le prendre lorsque le coordinateur a disparu, et `lead release --plan <P>` y met fin. Chaque changement incrémente l’époque et notifie chaque couloir.

@@ -14,11 +14,11 @@ order: 7
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v0.3.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v0.3.1`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v0.3.0`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v0.3.1`，协议 1 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,7 +73,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 通知与主导权
 
-herdr-peers `v0.3.0` 加入了让代理集群在主导者离开后仍能延续的能力（[集群自主](/methodology/07-swarm-autonomy)）：
+herdr-peers `v0.3.1` 加入了让代理集群在主导者离开后仍能延续的能力（[集群自主](/methodology/07-swarm-autonomy)）：
 
 - **通知。** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` 发送一条带 `reply=no` 戳记的单向消息。接收方的 `check` 把它归类为通知，作为数据记录下来，从不回复。通知不占用扇出名额，并且可以在一次询问尚未结束时发送；它们用于交接公告、主导者变更和发布广播。
 - **每份计划一条主导者记录。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` 让一个代理成为某份计划的主导者；`lead show` 打印该记录（schema `herdr-peers/lead-v1`：计划、主导者、epoch、继任列表、通道、更新时间）。`lead handover <addr> --plan <P>` 移交主导权，`lead takeover --plan <P>` 在主导者离开时让第一个可达的副手接管，`lead release --plan <P>` 结束主导。每次变更都会提升 epoch 并通知每条通道。

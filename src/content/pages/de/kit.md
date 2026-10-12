@@ -65,8 +65,8 @@ Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Sieben sind op
 **Die Methodik funktioniert allein. Addons verstärken sie.** Jedes Addon ist ein schlanker Integrator innerhalb des Deep Work Plan Skills, per Tag an ein Produkt mit eigenem Repository, eigenem Release und eigener Schnittstellenversion fixiert. Jedes Produkt funktioniert ohne Deep Work Plan, und kein Addon ist erforderlich.
 
 - **Deep Work Plan Skill** — Pläne erstellen, ausführen, verifizieren, fortsetzen und verfeinern. Benötigt kein Addon.
-- **[herdr](/de/kit/herdr)** — Peers in Herdr-Panes, auf jeder Maschine: interaktive Delegation mit genau einer autorisierten Antwort. Fixiert auf `herdr-peers@v0.3.0`.
-- **[agentkit](/de/kit/agentkit)** — Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Autonomie standardmäßig mit einem Opt-out und Headless-Delegation in einem Worktree. Fixiert auf `coding-agents-kit@v0.6.0`.
+- **[herdr](/de/kit/herdr)** — Peers in Herdr-Panes, auf jeder Maschine: interaktive Delegation mit genau einer autorisierten Antwort. Fixiert auf `herdr-peers@v0.3.1`.
+- **[agentkit](/de/kit/agentkit)** — Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Autonomie standardmäßig mit einem Opt-out und Headless-Delegation in einem Worktree. Fixiert auf `coding-agents-kit@v0.6.1`.
 - **[devcontainer](/de/kit/devcontainer)** — Der eigene Dev-Container jedes Repositorys aus einer einzigen Vorlage: Agenten über ak, Herdr in beide Richtungen, SSH-Schlüssel nur per Opt-in. Fixiert auf `devcontainer-kit@v0.3.5`.
 - **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v0.7.0`.
 

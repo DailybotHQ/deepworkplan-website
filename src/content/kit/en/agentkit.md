@@ -52,7 +52,7 @@ From `v0.6.0` an agent can ask how much room its own account has, cheaply, at ev
 - **`ak capacity --self --json`** (schema `capacity-v1`) gives the running account's `headroom_pct`, its `binding_window`, `resets_at` and a `verdict`: `ok`, `low` (25 % or less), `critical` (10 % or less, or rate-limited) or `unknown` (no quota source: Cursor, Grok, Antigravity). It uses `ak pick`'s arithmetic, so the two never disagree, and reads a usage cache kept for 300 seconds (`--max-age`), so a check at every task boundary stays cheap. `--self` resolves the account `ak` launched; outside an `ak` launch it exits 3 and never guesses. `ak usage` still reads live and refreshes the cache.
 - **Thresholds and drills.** `AGENTKIT_CAPACITY_LOW` and `AGENTKIT_CAPACITY_CRITICAL` (or `--low` and `--critical`) move the thresholds. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` can only lower a reading — it is how a drill makes an account look poor — and can never make one look richer.
 - **`ak lease <kind> @<profile> --owner <addr>`** holds an account for one lane; `ak lease release …` frees it once a successor has accepted the handoff, and `ak lease ls` lists the leases (schema `leases-v1`). A Codex profile takes a single lease — one writer per auth file — and only the owner releases a lease. Leases expire and are advisory records of numbers, profile names and pane addresses, never a credential.
-- **`ak pick <kind> --owner <lead>`** skips Codex accounts leased to another owner and ranks every candidate by `headroom / (1 + other leases)`; without `--owner` the ranking is unchanged.
+- **`ak pick <kind> --owner <lead>`** counts every active lease, the owner's own included: it ranks candidates by `headroom / (1 + leases)` and never offers a leased Codex account, not even to its holder. `--reuse @<profile>` hands one of the owner's own leases on, for example to a lane's successor. Without `--owner` the ranking is unchanged.
 
 ```bash
 ak capacity --self --json                        # this agent's own room and verdict
@@ -65,15 +65,15 @@ Work moves only among the accounts you declared for the plan, within each vendor
 ## Install
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.6.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.6.1`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |

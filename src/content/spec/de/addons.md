@@ -82,7 +82,7 @@ Der **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Mark
 
 ### Herdr (sechstes Addon)
 
-Ein schlanker Integrator von [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixiert auf `v0.3.0`, Protokoll `1`), der **interaktive** Delegationstransport von v7-Plänen.
+Ein schlanker Integrator von [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixiert auf `v0.3.1`, Protokoll `1`), der **interaktive** Delegationstransport von v7-Plänen.
 
 - **Kit-Seite:** [Herdr](/kit/herdr)
 - **Was es hinzufügt:** Ein Plan kann eine begrenzte Aufgabe an einen Coding-Agenten in einem anderen [Herdr](https://herdr.dev)-Pane übergeben, auf derselben Maschine oder auf einer, die Herdr per SSH erreicht, und dessen einzige autorisierte Antwort im Journal aufzeichnen
@@ -100,7 +100,7 @@ Ein schlanker Integrator von [DeepWorkPlan Vim](https://github.com/DailybotHQ/de
 
 ### Agentkit (achtes Addon)
 
-Ein schlanker Integrator von [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixiert auf `v0.6.0`, Schnittstelle `1`), der **Headless**-Delegationstransport von v7-Plänen.
+Ein schlanker Integrator von [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixiert auf `v0.6.1`, Schnittstelle `1`), der **Headless**-Delegationstransport von v7-Plänen.
 
 - **Kit-Seite:** [Agentkit](/kit/agentkit)
 - **Was es hinzufügt:** eine einheitliche `ak`-Befehlsoberfläche über Terminal-Coding-Agenten, mit der eine begrenzte Planaufgabe headless ausgeführt wird; es steuert die Fähigkeiten `subagents`, `cancel_children` und `model_routing` nur zur Laufzeit bei, wenn es aktiviert, erkannt und auf einem kompatiblen Interface ist

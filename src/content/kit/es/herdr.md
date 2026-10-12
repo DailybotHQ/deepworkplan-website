@@ -14,11 +14,11 @@ Es un addon opcional de **DWP v7** (`v7.0.0`). La metodología funciona igual si
 
 ## Qué integra
 
-El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill independiente con licencia MIT fijada en **`v0.3.0`** que es útil sin Deep Work Plan. Define lo que Herdr deja abierto: quién puede responder, cómo vuelve la respuesta a través de máquinas, cómo evitan dos agentes responderse indefinidamente y dónde vive el registro de "pregunté, respondió".
+El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill independiente con licencia MIT fijada en **`v0.3.1`** que es útil sin Deep Work Plan. Define lo que Herdr deja abierto: quién puede responder, cómo vuelve la respuesta a través de máquinas, cómo evitan dos agentes responderse indefinidamente y dónde vive el registro de "pregunté, respondió".
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/herdr-peers`, tag `v0.3.0`, protocolo 1 |
+| Producto | `DailybotHQ/herdr-peers`, tag `v0.3.1`, protocolo 1 |
 | Clave de registro | `herdr` en `.dwp/config.json` |
 | Transporte | interactivo: un par en un panel de Herdr |
 | Proporciona | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://gi
 Instala herdr-peers y la skill oficial de Herdr, de la que depende. Toda máquina cuyos agentes deban responder también necesita la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,7 +73,7 @@ Para un líder que ejecuta muchos carriles a la vez — paneles en el host, en c
 
 ## Avisos y liderazgo
 
-herdr-peers `v0.3.0` añade lo que permite a un enjambre sobrevivir a su líder ([Autonomía del enjambre](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.1` añade lo que permite a un enjambre sobrevivir a su líder ([Autonomía del enjambre](/methodology/07-swarm-autonomy)):
 
 - **Avisos.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envía un mensaje unidireccional sellado con `reply=no`. El `check` del receptor lo clasifica como aviso, lo registra como datos y nunca responde. Los avisos no consumen ningún hueco de fan-out y pueden enviarse mientras hay una consulta abierta; úsalos para anuncios de traspaso, cambios de líder y difusiones de publicación.
 - **Un registro de líder por plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` convierte a un agente en el líder de un plan; `lead show` imprime el registro (esquema `herdr-peers/lead-v1`: plan, líder, época, sucesión, carriles, hora de actualización). `lead handover <addr> --plan <P>` cede el liderazgo, `lead takeover --plan <P>` permite que el primer suplente alcanzable lo asuma cuando el líder ya no está, y `lead release --plan <P>` lo termina. Cada cambio incrementa la época y avisa a todos los carriles.

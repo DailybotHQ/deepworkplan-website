@@ -52,7 +52,7 @@ Uzun, etkileşimli şeritlerde her şerit, kendi hesabıyla bir [Herdr](/kit/her
 - **`ak capacity --self --json`** (şema `capacity-v1`), çalışan hesabın `headroom_pct` değerini, `binding_window`, `resets_at` alanlarını ve bir `verdict` verir: `ok`, `low` (%25 veya daha az), `critical` (%10 veya daha az ya da hız sınırına takılmış) veya `unknown` (kota kaynağı yok: Cursor, Grok, Antigravity). `ak pick` ile aynı hesabı kullanır, bu yüzden ikisi asla çelişmez; 300 saniye tutulan bir kullanım önbelleğini okur (`--max-age`), böylece her görev sınırındaki kontrol ucuz kalır. `--self`, `ak` komutunun başlattığı hesabı çözer; bir `ak` başlatması dışında 3 koduyla çıkar ve asla tahmin yürütmez. `ak usage` yine canlı okur ve önbelleği yeniler.
 - **Eşikler ve tatbikatlar.** `AGENTKIT_CAPACITY_LOW` ve `AGENTKIT_CAPACITY_CRITICAL` (ya da `--low` ve `--critical`) eşikleri değiştirir. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` bir okumayı yalnızca düşürebilir — bir tatbikat bir hesabı bu yolla yoksul gösterir — ve bir hesabı asla olduğundan zengin gösteremez.
 - **`ak lease <kind> @<profile> --owner <addr>`** bir hesabı tek bir şerit için tutar; `ak lease release …`, bir halef devri kabul ettikten sonra onu serbest bırakır ve `ak lease ls` kiralamaları listeler (şema `leases-v1`). Bir Codex profili tek bir kiralama alır — kimlik doğrulama dosyası başına tek yazıcı — ve bir kiralamayı yalnızca sahibi serbest bırakır. Kiralamaların süresi dolar; bunlar sayılardan, profil adlarından ve bölme adreslerinden oluşan tavsiye niteliğinde kayıtlardır, asla bir kimlik bilgisi değildir.
-- **`ak pick <kind> --owner <lead>`**, başka bir sahibe kiralanmış Codex hesaplarını atlar ve her adayı `headroom / (1 + other leases)` ile sıralar; `--owner` olmadan sıralama değişmez.
+- **`ak pick <kind> --owner <lead>`**, sahibin kendi kiralamaları da dahil olmak üzere her etkin kiralamayı sayar: adayları `headroom / (1 + leases)` ile sıralar ve kiralanmış bir Codex hesabını, sahibine bile, asla önermez. `--reuse @<profile>`, sahibin kendi kiralamalarından birini, örneğin bir şeridin halefine devreder. `--owner` olmadan sıralama değişmez.
 
 ```bash
 ak capacity --self --json                        # bu agent'ın kendi yeri ve kararı
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış he
 ## Kurulum
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.6.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.6.1` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v0.6.0` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v0.6.1` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |

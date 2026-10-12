@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr（第六个附加组件）
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（固定为 `v0.3.0`，协议 `1`）的轻量集成器，是 v7 计划的**交互式**委托传输。
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（固定为 `v0.3.1`，协议 `1`）的轻量集成器，是 v7 计划的**交互式**委托传输。
 
 - **套件页：** [Herdr](/kit/herdr)
 - **新增内容：** 计划可以把一项有界任务交给另一个 [Herdr](https://herdr.dev) 窗格中的编码代理——位于同一台机器，或 Herdr 通过 SSH 可达的机器——并在日志中记录其唯一一次获授权的回复
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第八个附加组件）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v0.6.0`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v0.6.1`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
 
 - **套件页：** [Agentkit](/kit/agentkit)
 - **新增内容：** 一个覆盖各终端编码代理的 `ak` 命令层面，用于以无头方式运行有界的计划任务；仅在运行时、且已启用、已检测到并处于兼容接口时，才提供 `subagents`、`cancel_children` 与 `model_routing` 能力

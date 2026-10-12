@@ -41,7 +41,7 @@ Her şeridin bir planı vardır, en azından kendi deposunda bir Lite plan, ve b
 
 ## Kapasite döngüsü
 
-Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren herhangi bir kapı ya da adımdan sonra, CLI'ı bir kullanım sınırı uyarısı gösterdiğinde ve bir devri ya da liderliği kabul etmeden önce kontrol eder. Kontrol, coding-agents-kit `v0.6.0` ile gelen `ak capacity --self --json` komutudur; paketin yardımcısı onu bir karara dönüştürür:
+Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren herhangi bir kapı ya da adımdan sonra, CLI'ı bir kullanım sınırı uyarısı gösterdiğinde ve bir devri ya da liderliği kabul etmeden önce kontrol eder. Kontrol, coding-agents-kit `v0.6.1` ile gelen `ak capacity --self --json` komutudur; paketin yardımcısı onu bir karara dönüştürür:
 
 | Sonuç | Karar | Bir şerit | Bir lider, kendisi için |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren h
 
 ## Lider halefiyeti
 
-herdr-peers `v0.3.0`, plan başına bir lider kaydı tutar — lider, epoch, halef listesi ve şeritler — ve `lead` adresini mevcut lidere çözer; böylece hiçbir şerit görev tanımı liderin bölmesini sabit olarak yazmaz.
+herdr-peers `v0.3.1`, plan başına bir lider kaydı tutar — lider, epoch, halef listesi ve şeritler — ve `lead` adresini mevcut lidere çözer; böylece hiçbir şerit görev tanımı liderin bölmesini sabit olarak yazmaz.
 
 - **Sahiplenme.** Lider bir plana başladığında `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` komutunu, plan bittiğinde ise `lead release` komutunu çalıştırır. Varsayılan halef listesi, önce planlanmış halefi, sonra başlatma sırasına göre planın kendi çalışma kopyasındaki şeritleri, sonra aynı ana makinedeki herhangi bir şeridi içerir; konteynerlerdeki ya da başka makinelerdeki şeritler en sona gelir.
 - **Planlı devir.** `low` durumunda lider bir aday halef belirler. `critical` durumunda bir lider paketi yazar — şerit tablosu, açık sorular, sürüm sırası, bekleyen birleştirmeler, kararlar — epoch'u yükselten ve her şeride bildirim gönderen `herdr-peers lead handover <addr> --plan <P>` komutunu çalıştırır ve durur. Halef paketi kabul eder, orkestratör planını sürdürür ve her şeridi yeniden kontrol eder.

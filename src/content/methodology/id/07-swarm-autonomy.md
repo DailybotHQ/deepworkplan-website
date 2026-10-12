@@ -41,7 +41,7 @@ Setiap lane memiliki rencana, setidaknya rencana Lite di repositorinya sendiri, 
 
 ## Loop kapasitas
 
-Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah gate atau langkah apa pun yang berjalan lebih dari 20 menit, setiap kali CLI-nya menampilkan peringatan batas penggunaan, dan sebelum menerima handoff atau kepemimpinan. Pemeriksaannya adalah `ak capacity --self --json` dari coding-agents-kit `v0.6.0`, yang diubah helper pack menjadi sebuah keputusan:
+Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah gate atau langkah apa pun yang berjalan lebih dari 20 menit, setiap kali CLI-nya menampilkan peringatan batas penggunaan, dan sebelum menerima handoff atau kepemimpinan. Pemeriksaannya adalah `ak capacity --self --json` dari coding-agents-kit `v0.6.1`, yang diubah helper pack menjadi sebuah keputusan:
 
 | Verdict | Keputusan | Sebuah lane | Sebuah lead, untuk dirinya sendiri |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah ga
 
 ## Suksesi lead
 
-herdr-peers `v0.3.0` menyimpan satu catatan lead per rencana — lead, epoch, daftar suksesi, dan lane — dan mengarahkan alamat `lead` ke lead saat ini, sehingga tidak ada arahan lane yang menuliskan panel lead secara permanen.
+herdr-peers `v0.3.1` menyimpan satu catatan lead per rencana — lead, epoch, daftar suksesi, dan lane — dan mengarahkan alamat `lead` ke lead saat ini, sehingga tidak ada arahan lane yang menuliskan panel lead secara permanen.
 
 - **Klaim.** Lead menjalankan `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` ketika memulai sebuah rencana dan `lead release` ketika rencana selesai. Suksesi default adalah penerus yang direncanakan, lalu lane di checkout rencana itu sendiri menurut urutan peluncuran, lalu lane mana pun di host yang sama; lane di container atau di mesin lain berada di urutan terakhir.
 - **Handover, terencana.** Pada `low`, lead menunjuk calon penerus. Pada `critical`, ia menulis paket lead — tabel lane, ask yang terbuka, urutan rilis, merge yang tertunda, keputusan — menjalankan `herdr-peers lead handover <addr> --plan <P>`, yang menaikkan epoch dan memberi tahu setiap lane, lalu berhenti. Penerus menerima paket, melanjutkan rencana orkestrator, dan memeriksa ulang setiap lane.

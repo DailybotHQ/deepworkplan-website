@@ -94,8 +94,8 @@ lastUpdated: 2026-10-11
   | 리포지토리(github.com/DailybotHQ) | 태그 | 해당 `SHA256SUMS`의 sha256 |
   | --- | --- | --- |
   | deepworkplan-skill | `v7.6.3` | `ddb486549780a47688c20aa763a55fc090bbf76bf11a4767f1827f3c2266e332` |
-  | coding-agents-kit | `v0.6.0` | `f7ced7a74d9ef8631c75aeae0792b8b41f5f8ad68350d4fb18d13678528e0b21` |
-  | herdr-peers | `v0.3.0` | `e31f9eaaa5c19af1b957ee7c00c077b2dac1fb87fbb7b45e557b30b47e475bc9` |
+  | coding-agents-kit | `v0.6.1` | `1f9c8beb6d8ae100ba3a154aae3866693a36efe30a4f9c8b0bce647e6fe2b487` |
+  | herdr-peers | `v0.3.1` | `47fbb519a263e8fa828c9f173be6642243f2d0860e1af8287a0ad9d9a5794f99` |
   | devcontainer-kit | `v0.3.5` | `efee9464a24ef78d50c8a470ace8afa4d75bb9aafd845e659839ab40e7ab69ee` |
   | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
   | ai-diff-reviewer | `v3.3.11` | `d384c1fffc710e46b5a06d85c5366dfdfd612bebd67526c8647838714b089cf6` |
@@ -241,8 +241,8 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 | --- | --- | --- |
 | AI Diff Reviewer(필수) | `.agents/skills/ai-diff-reviewer/SKILL.md`의 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md`의 `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.14 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | 설치된 herdr-peers 스킬의 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.0 --skill herdr-peers -g --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | 설치된 herdr-peers 스킬의 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh 의 검증된 설치 프로그램(`v0.7.0`로 고정; 다운로드 후 `shasum -a 256 -c install.sh.sha256`을 실행하고 나서 실행) |
 
@@ -260,8 +260,8 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
   하나의 파일에 쌓입니다: visual-ui(감지되면 강력히 권장; 설치는 수락으로 제어), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v0.6.0`로 고정)의 머신 수준 설치: 모든 코딩 에이전트를 위한 하나의 명령, 프로필마다 하나의 계정, 여유가 가장 많은 계정을 고르는 `ak usage`와 `ak pick`, 그리고 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 헤드리스 `ak run`(worktree마다 위임 대상 하나). 키트는 기본적으로 에이전트를 자율 모드로 시작하며, 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선합니다.
-- **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획, 그리고 자신의 레인을 지켜보는 리드를 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v0.3.0`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v0.6.1`로 고정)의 머신 수준 설치: 모든 코딩 에이전트를 위한 하나의 명령, 프로필마다 하나의 계정, 여유가 가장 많은 계정을 고르는 `ak usage`와 `ak pick`, 그리고 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 헤드리스 `ak run`(worktree마다 위임 대상 하나). 키트는 기본적으로 에이전트를 자율 모드로 시작하며, 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선합니다.
+- **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획, 그리고 자신의 레인을 지켜보는 리드를 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v0.3.1`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
 - **DeepWorkPlan Vim** — 터미널 에디터([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v0.7.0`로 고정)로, 명시적 동의 없이 기존 Neovim 설정을 절대 덮어쓰지 않는 머신 수준 설치입니다.
 - **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 **검증된 `critical` 결과**는 여전히 완료를 차단합니다 (v3, BC-07 — 검증되지 않은 크리티컬 주장은 주석 달린 경고로 표시되며, `incomplete`/`timeout` 검토는 깨끗한 패스가 아님, BC-04). **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
@@ -294,7 +294,7 @@ devcontainer 애드온의 끝은 생성된 파일 묶음이 아니라 동작하�
 - **지켜보기.** `herdr-peers lanes`는 모든 레인의 상태를 보여 주고, 차단된 레인에 대해서는 `herdr-peers status <pane>`가 화면을 분류하며 `herdr pane read <pane>`가 그 화면을 보여 줍니다.
 - **키 입력은 한 가지 경우뿐.** `herdr pane send-keys`로 보낼 수 있는 키는 폴더 신뢰 화면에 대한 응답뿐이며, 그것도 직접 시작한 페인에서 `--trust-cwd`를 쓸 수 없었던 경우로 한정됩니다. 보내기 전과 후에 화면을 읽고, 키는 최소한만 보내세요.
 - **나머지는 모두 읽고, 기록하고,** 개발자에게 **에스컬레이션**하세요: Claude의 권한 우회 확인, 로그인과 자격 증명 프롬프트, 작업별 권한 요청, 파괴적인 확인, 결제나 요금제 프롬프트, 알 수 없는 화면, 직접 만들지 않은 페인. `AGENTKIT_PERMISSIONS=ask`가 설정되어 있으면 레인은 행동하기 전에 묻습니다. 그 프롬프트를 절대 우회하지 마세요. 모든 개입을 상위 계획에 기록하세요.
-- **스웜을 계속 돌아가게 하기.** coding-agents-kit `v0.6.0`과 herdr-peers `v0.3.0`을 쓰면 각 에이전트는 모든 작업 경계에서 `ak capacity --self --json`을 확인합니다. `critical`이 되면 핸드오프 패킷(https://deepworkplan.com/schema/dwp-handoff/v1.json)을 쓰고, 리드가 같은 체크아웃에서 후임을 시작합니다. 리드는 `herdr-peers lead claim`으로 자신의 계획을 claim하고, 레인은 리드를 `lead`라는 주소로 부르며, 리드가 사라지면 대리가 넘겨받습니다(`herdr-peers lead takeover`). 일상적인 선택은 모두 스스로 결정하고 기록하며, 치명적 클래스 C1–C7만 에스컬레이션하세요. 참고: https://deepworkplan.com/methodology/07-swarm-autonomy.md.
+- **스웜을 계속 돌아가게 하기.** coding-agents-kit `v0.6.1`과 herdr-peers `v0.3.1`을 쓰면 각 에이전트는 모든 작업 경계에서 `ak capacity --self --json`을 확인합니다. `critical`이 되면 핸드오프 패킷(https://deepworkplan.com/schema/dwp-handoff/v1.json)을 쓰고, 리드가 같은 체크아웃에서 후임을 시작합니다. 리드는 `herdr-peers lead claim`으로 자신의 계획을 claim하고, 레인은 리드를 `lead`라는 주소로 부르며, 리드가 사라지면 대리가 넘겨받습니다(`herdr-peers lead takeover`). 일상적인 선택은 모두 스스로 결정하고 기록하며, 치명적 클래스 C1–C7만 에스컬레이션하세요. 참고: https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 

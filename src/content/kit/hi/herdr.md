@@ -14,11 +14,11 @@ order: 7
 
 ## यह क्या एकीकृत करता है
 
-यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v0.3.0`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
+यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v0.3.1`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/herdr-peers`, tag `v0.3.0`, प्रोटोकॉल 1 |
+| उत्पाद | `DailybotHQ/herdr-peers`, tag `v0.3.1`, प्रोटोकॉल 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `herdr` |
 | ट्रांसपोर्ट | इंटरैक्टिव: Herdr पेन में एक पीयर |
 | प्रदान करता है | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 herdr-peers और Herdr की आधिकारिक skill इंस्टॉल करें, जिस पर यह निर्भर है। जिस भी मशीन के एजेंटों को उत्तर देना है, उस पर भी यह skill होनी चाहिए।
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,7 +73,7 @@ devcontainer-kit `v0.3.5` पर [devcontainer](/kit/devcontainer) ऐडऑन 
 
 ## नोटिस और नेतृत्व
 
-herdr-peers `v0.3.0` वह जोड़ता है जिससे एक स्वार्म अपने लीड से अधिक समय तक चल सकता है ([स्वार्म स्वायत्तता](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.1` वह जोड़ता है जिससे एक स्वार्म अपने लीड से अधिक समय तक चल सकता है ([स्वार्म स्वायत्तता](/methodology/07-swarm-autonomy)):
 
 - **नोटिस।** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` `reply=no` स्टैम्प वाला एकतरफ़ा संदेश भेजता है। प्राप्तकर्ता का `check` उसे नोटिस के रूप में वर्गीकृत करता है, डेटा के रूप में दर्ज करता है और कभी उत्तर नहीं देता। नोटिस कोई fan-out स्लॉट नहीं लेते और किसी ask के खुले रहते भी भेजे जा सकते हैं; इनका उपयोग हैंडऑफ़ घोषणाओं, लीड परिवर्तनों और रिलीज़ प्रसारणों के लिए करें।
 - **प्रति योजना एक लीड रिकॉर्ड।** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` किसी एजेंट को एक योजना का लीड बनाता है; `lead show` रिकॉर्ड प्रिंट करता है (स्कीमा `herdr-peers/lead-v1`: योजना, लीड, epoch, उत्तराधिकार, लेन, अद्यतन समय)। `lead handover <addr> --plan <P>` नेतृत्व आगे सौंपता है, `lead takeover --plan <P>` लीड के न रहने पर पहले पहुँच योग्य डिप्टी को उसे लेने देता है, और `lead release --plan <P>` उसे समाप्त करता है। हर परिवर्तन epoch बढ़ाता है और हर लेन को नोटिस भेजता है।

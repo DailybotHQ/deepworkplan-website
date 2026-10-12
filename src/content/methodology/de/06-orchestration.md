@@ -99,4 +99,4 @@ Der übergeordnete Plan schließt auf Grundlage von Evidenz, nicht von Meldungen
 
 ## Wenn ein Konto oder der Lead ausfällt
 
-Ein langer Lauf überdauert jedes einzelne Konto. Ab coding-agents-kit `v0.6.0` und herdr-peers `v0.3.0` prüft eine Lane an jeder Aufgabengrenze ihre eigene Kapazität und gibt ihre Arbeit über ein Paket weiter, bevor ihr Konto erschöpft ist; ein Lead gibt die Leitung weiter oder wird durch seinen Stellvertreter ersetzt, und nur kritische Punkte erreichen den Entwickler. [Schwarmautonomie](/de/methodology/07-swarm-autonomy) beschreibt die Schleife, das Paket, die Nachfolge und die Eskalationsklassen.
+Ein langer Lauf überdauert jedes einzelne Konto. Ab coding-agents-kit `v0.6.1` und herdr-peers `v0.3.1` prüft eine Lane an jeder Aufgabengrenze ihre eigene Kapazität und gibt ihre Arbeit über ein Paket weiter, bevor ihr Konto erschöpft ist; ein Lead gibt die Leitung weiter oder wird durch seinen Stellvertreter ersetzt, und nur kritische Punkte erreichen den Entwickler. [Schwarmautonomie](/de/methodology/07-swarm-autonomy) beschreibt die Schleife, das Paket, die Nachfolge und die Eskalationsklassen.

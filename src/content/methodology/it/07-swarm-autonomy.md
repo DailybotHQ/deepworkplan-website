@@ -41,7 +41,7 @@ Ogni corsia ha un piano, almeno un piano Lite nel proprio repository, e quel pia
 
 ## Il ciclo della capacità
 
-Un agente controlla il proprio margine prima di iniziare ogni task, dopo ogni gate o passo durato più di 20 minuti, ogni volta che la sua CLI mostra un avviso di limite d’uso, e prima di accettare un passaggio di consegne o la guida. Il controllo è `ak capacity --self --json` di coding-agents-kit `v0.6.0`, che l’helper del pacchetto trasforma in una decisione:
+Un agente controlla il proprio margine prima di iniziare ogni task, dopo ogni gate o passo durato più di 20 minuti, ogni volta che la sua CLI mostra un avviso di limite d’uso, e prima di accettare un passaggio di consegne o la guida. Il controllo è `ak capacity --self --json` di coding-agents-kit `v0.6.1`, che l’helper del pacchetto trasforma in una decisione:
 
 | Verdetto | Decisione | Una corsia | Un lead, per sé stesso |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Il **pacchetto di consegna** ([`dwp-handoff/v1`](https://deepworkplan.com/schema
 
 ## Successione del lead
 
-herdr-peers `v0.3.0` mantiene un record di lead per piano — lead, epoca, lista di successione e corsie — e risolve l’indirizzo `lead` nel lead corrente, così nessun brief di corsia codifica in modo fisso il pannello del lead.
+herdr-peers `v0.3.1` mantiene un record di lead per piano — lead, epoca, lista di successione e corsie — e risolve l’indirizzo `lead` nel lead corrente, così nessun brief di corsia codifica in modo fisso il pannello del lead.
 
 - **Rivendicazione.** Il lead esegue `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` quando avvia un piano e `lead release` quando il piano è concluso. La successione predefinita è il suo successore previsto, poi le corsie nel checkout del piano stesso in ordine di avvio, poi qualsiasi corsia sullo stesso host; le corsie nei container o su altre macchine vengono per ultime.
 - **Cessione, pianificata.** A `low` il lead designa un successore. A `critical` scrive un pacchetto del lead — tabella delle corsie, richieste aperte, ordine di rilascio, merge in sospeso, decisioni —, esegue `herdr-peers lead handover <addr> --plan <P>`, che incrementa l’epoca e notifica ogni corsia, e si ferma. Il successore accetta il pacchetto, riprende il piano orchestratore e ricontrolla ogni corsia.

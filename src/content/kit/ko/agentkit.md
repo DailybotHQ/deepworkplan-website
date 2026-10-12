@@ -52,7 +52,7 @@ ak setup verify            # 순서대로 진행되는 점검, 각각 복구 명
 - **`ak capacity --self --json`**(스키마 `capacity-v1`)은 실행 중인 계정의 `headroom_pct`, `binding_window`, `resets_at`, 그리고 `verdict`를 제공합니다. `verdict`는 `ok`, `low`(25 % 이하), `critical`(10 % 이하 또는 속도 제한), `unknown`(할당량 출처 없음: Cursor, Grok, Antigravity) 중 하나입니다. `ak pick`과 같은 계산을 쓰므로 둘의 판단은 결코 어긋나지 않으며, 300초 동안 유지되는 사용량 캐시(`--max-age`)를 읽으므로 작업 경계마다 확인해도 비용이 적습니다. `--self`는 `ak`가 시작한 계정을 찾아내며, `ak` 실행 밖에서는 종료 코드 3으로 끝나고 결코 추측하지 않습니다. `ak usage`는 여전히 실시간으로 읽고 캐시를 갱신합니다.
 - **임계값과 훈련.** `AGENTKIT_CAPACITY_LOW`와 `AGENTKIT_CAPACITY_CRITICAL`(또는 `--low`와 `--critical`)로 임계값을 옮깁니다. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>`는 측정값을 낮추기만 할 수 있습니다. 훈련에서 계정을 여유가 없는 것처럼 보이게 하는 방법이며, 계정을 더 여유 있게 보이게 하는 일은 결코 없습니다.
 - `ak lease <kind> @<profile> --owner <addr>`는 하나의 레인을 위해 계정을 잡아 둡니다. `ak lease release …`는 후임이 핸드오프를 수락한 뒤 계정을 풀어 주고, `ak lease ls`는 리스를 나열합니다(스키마 `leases-v1`). Codex 프로필은 리스를 하나만 받습니다(인증 파일마다 작성자 하나). 리스를 해제하는 것은 소유자뿐입니다. 리스는 만료되며 숫자, 프로필 이름, 페인 주소만 담는 권고용 기록일 뿐, 결코 자격 증명이 아닙니다.
-- `ak pick <kind> --owner <lead>`는 다른 소유자에게 리스된 Codex 계정을 건너뛰고, 모든 후보를 `headroom / (1 + other leases)`로 순위를 매깁니다. `--owner`가 없으면 순위는 바뀌지 않습니다.
+- `ak pick <kind> --owner <lead>`는 소유자 자신의 리스를 포함해 모든 활성 리스를 셉니다. 후보를 `headroom / (1 + leases)`로 순위를 매기며, 리스된 Codex 계정은 그 보유자에게도 결코 제시하지 않습니다. `--reuse @<profile>`는 소유자 자신의 리스 하나를 넘겨줍니다. 예를 들어 레인의 후임에게 넘길 때 씁니다. `--owner`가 없으면 순위는 바뀌지 않습니다.
 
 ```bash
 ak capacity --self --json                        # 이 에이전트 자신의 여유와 판정
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 다른 소유자에게 리스
 ## 설치
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v0.6.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
+요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v0.6.1`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v0.6.0`, 인터페이스 1 |
+| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v0.6.1`, 인터페이스 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `agentkit` |
 | 전송 방식 | 헤드리스: 위임 대상마다 전용 git worktree에서 `ak run` 한 번 |
 | 제공 | `subagents`, `cancel_children`, `model_routing` |

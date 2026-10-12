@@ -52,7 +52,7 @@ ak setup verify            # क्रमबद्ध जाँचें, हर
 - **`ak capacity --self --json`** (स्कीमा `capacity-v1`) चल रहे खाते का `headroom_pct`, उसकी `binding_window`, `resets_at` और एक `verdict` देता है: `ok`, `low` (25 % या कम), `critical` (10 % या कम, या rate-limited) या `unknown` (कोई कोटा स्रोत नहीं: Cursor, Grok, Antigravity)। यह `ak pick` का ही गणित इस्तेमाल करता है, इसलिए दोनों कभी असहमत नहीं होते, और 300 सेकंड तक रखे गए usage cache (`--max-age`) को पढ़ता है, इसलिए हर कार्य-सीमा पर जाँच सस्ती रहती है। `--self` उस खाते को पहचानता है जिसे `ak` ने लॉन्च किया; `ak` लॉन्च के बाहर यह कोड 3 के साथ बाहर निकलता है और कभी अनुमान नहीं लगाता। `ak usage` अब भी सीधे पढ़ता है और cache को ताज़ा करता है।
 - **सीमाएँ और अभ्यास।** `AGENTKIT_CAPACITY_LOW` और `AGENTKIT_CAPACITY_CRITICAL` (या `--low` और `--critical`) सीमाओं को खिसकाते हैं। `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` किसी रीडिंग को केवल घटा सकता है — इसी तरह एक अभ्यास किसी खाते को कमज़ोर दिखाता है — और उसे कभी अधिक समृद्ध नहीं दिखा सकता।
 - **`ak lease <kind> @<profile> --owner <addr>`** किसी खाते को एक लेन के लिए रखता है; `ak lease release …` किसी उत्तराधिकारी के हैंडऑफ़ स्वीकार कर लेने पर उसे मुक्त करता है, और `ak lease ls` लीज़ सूचीबद्ध करता है (स्कीमा `leases-v1`)। एक Codex प्रोफ़ाइल केवल एक लीज़ लेती है — हर auth फ़ाइल के लिए एक लेखक — और केवल स्वामी ही लीज़ मुक्त करता है। लीज़ की अवधि समाप्त होती है और वे संख्याओं, प्रोफ़ाइल नामों और पेन पतों के सलाहकारी रिकॉर्ड हैं, कभी क्रेडेंशियल नहीं।
-- **`ak pick <kind> --owner <lead>`** किसी दूसरे स्वामी को लीज़ पर दिए गए Codex खातों को छोड़ देता है और हर उम्मीदवार को `headroom / (1 + other leases)` से रैंक करता है; `--owner` के बिना रैंकिंग अपरिवर्तित रहती है।
+- **`ak pick <kind> --owner <lead>`** हर सक्रिय लीज़ को गिनता है, स्वामी की अपनी लीज़ भी: यह उम्मीदवारों को `headroom / (1 + leases)` से रैंक करता है और लीज़ पर दिया गया Codex खाता कभी पेश नहीं करता, उसके धारक को भी नहीं। `--reuse @<profile>` स्वामी की अपनी किसी लीज़ को आगे सौंपता है, उदाहरण के लिए किसी लेन के उत्तराधिकारी को। `--owner` के बिना रैंकिंग अपरिवर्तित रहती है।
 
 ```bash
 ak capacity --self --json                        # इस एजेंट की अपनी गुंजाइश और निर्णय
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # दूसरों को ल
 ## इंस्टॉल
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v0.6.0` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
+आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v0.6.1` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, इंटरफ़ेस 1 |
+| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, इंटरफ़ेस 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `agentkit` |
 | ट्रांसपोर्ट | headless: हर प्रत्यायोजित एजेंट के लिए एक समर्पित git worktree में एक `ak run` |
 | प्रदान करता है | `subagents`, `cancel_children`, `model_routing` |

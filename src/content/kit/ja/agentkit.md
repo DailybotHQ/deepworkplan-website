@@ -52,7 +52,7 @@ ak setup verify            # 順序付きのチェック（それぞれに修復
 - **`ak capacity --self --json`**（スキーマ `capacity-v1`）は、実行中のアカウントの `headroom_pct`、その `binding_window`、`resets_at`、そして `verdict` を返します。`verdict` は `ok`、`low`（25 % 以下）、`critical`（10 % 以下、またはレート制限中）、`unknown`（クォータの情報源がない：Cursor、Grok、Antigravity）のいずれかです。`ak pick` と同じ計算を使うため両者が食い違うことはなく、300 秒保持される使用量キャッシュ（`--max-age`）を読むため、タスクの境目ごとの確認も低コストに保たれます。`--self` は `ak` が起動したアカウントを解決します。`ak` による起動の外では終了コード 3 で終了し、推測することは決してありません。`ak usage` は引き続きライブで読み取り、キャッシュを更新します。
 - **しきい値と訓練。** `AGENTKIT_CAPACITY_LOW` と `AGENTKIT_CAPACITY_CRITICAL`（または `--low` と `--critical`）でしきい値を動かせます。`AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` は読み取り値を下げることしかできません。訓練でアカウントを余裕のないように見せる方法であり、アカウントをより余裕があるように見せることは決してできません。
 - **`ak lease <kind> @<profile> --owner <addr>`** は一つのレーンのためにアカウントを確保します。後継がハンドオフを受け入れたら `ak lease release …` で解放し、`ak lease ls` でリースを一覧表示します（スキーマ `leases-v1`）。Codex のプロファイルが受け付けるリースは一つだけで（認証ファイルごとに書き手は一人）、リースを解放できるのはその所有者だけです。リースは期限切れになり、数値、プロファイル名、ペインのアドレスを記録した助言的な記録にすぎず、認証情報では決してありません。
-- **`ak pick <kind> --owner <lead>`** は、別の所有者にリースされた Codex アカウントを飛ばし、すべての候補を `headroom / (1 + other leases)` で順位付けします。`--owner` がなければ順位付けは変わりません。
+- **`ak pick <kind> --owner <lead>`** は、所有者自身のものも含め、有効なリースをすべて数えます。候補を `headroom / (1 + leases)` で順位付けし、リース中の Codex アカウントは保有者自身にも決して提示しません。`--reuse @<profile>` は所有者自身のリースの一つを引き継がせます。たとえばレーンの後継に渡す場合です。`--owner` がなければ順位付けは変わりません。
 
 ```bash
 ak capacity --self --json                        # このエージェント自身の余裕と判定
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.6.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.6.1` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.6.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.6.1`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |

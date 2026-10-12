@@ -52,7 +52,7 @@ skill `agentkit-orchestrate` (`ak --skill orchestrate`) สอนเอเจน
 - **`ak capacity --self --json`** (schema `capacity-v1`) ให้ `headroom_pct` ของบัญชีที่กำลังรัน `binding_window` ของมัน `resets_at` และ `verdict` ซึ่งเป็น `ok`, `low` (25 % หรือน้อยกว่า), `critical` (10 % หรือน้อยกว่า หรือถูกจำกัดอัตรา) หรือ `unknown` (ไม่มีแหล่งข้อมูลโควตา: Cursor, Grok, Antigravity) คำสั่งนี้ใช้การคำนวณเดียวกับ `ak pick` ทั้งสองจึงไม่เคยขัดกัน และอ่าน cache การใช้งานที่เก็บไว้ 300 วินาที (`--max-age`) การตรวจทุกขอบเขตของงานจึงยังมีต้นทุนต่ำ `--self` ระบุบัญชีที่ `ak` เป็นผู้เปิด นอกการเปิดด้วย `ak` มันจะออกด้วยรหัส 3 และไม่เดาเด็ดขาด `ak usage` ยังคงอ่านแบบสดและรีเฟรช cache
 - **เกณฑ์และการซ้อม** `AGENTKIT_CAPACITY_LOW` และ `AGENTKIT_CAPACITY_CRITICAL` (หรือ `--low` และ `--critical`) ใช้เลื่อนเกณฑ์ `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` ลดค่าที่อ่านได้เท่านั้น — เป็นวิธีที่การซ้อมทำให้บัญชีดูเหมือนเหลือน้อย — และไม่มีทางทำให้บัญชีดูเหลือมากขึ้น
 - **`ak lease <kind> @<profile> --owner <addr>`** จองบัญชีไว้ให้ lane หนึ่ง `ak lease release …` ปล่อยบัญชีเมื่อผู้สืบทอดยอมรับ handoff แล้ว และ `ak lease ls` แสดงรายการ lease (schema `leases-v1`) โปรไฟล์ Codex รับ lease ได้เพียงหนึ่งรายการ — ผู้เขียนหนึ่งรายต่อไฟล์ auth หนึ่งไฟล์ — และมีเพียงเจ้าของที่ปล่อย lease ได้ lease มีวันหมดอายุ และเป็นเพียงบันทึกเชิงแนะนำที่มีตัวเลข ชื่อโปรไฟล์ และที่อยู่ pane ไม่เคยเป็นข้อมูลรับรอง
-- **`ak pick <kind> --owner <lead>`** ข้ามบัญชี Codex ที่ lease ให้เจ้าของรายอื่น และจัดอันดับผู้สมัครทุกรายด้วย `headroom / (1 + other leases)` หากไม่มี `--owner` การจัดอันดับจะไม่เปลี่ยน
+- **`ak pick <kind> --owner <lead>`** นับ lease ที่ใช้งานอยู่ทุกรายการ รวมถึงของเจ้าของเองด้วย โดยจัดอันดับผู้สมัครด้วย `headroom / (1 + leases)` และไม่เสนอบัญชี Codex ที่ถูก lease อยู่เลย แม้แต่ให้ผู้ถือเอง `--reuse @<profile>` ส่งต่อ lease หนึ่งรายการของเจ้าของเอง เช่น ให้ผู้สืบทอดของ lane หากไม่มี `--owner` การจัดอันดับจะไม่เปลี่ยน
 
 ```bash
 ak capacity --self --json                        # พื้นที่เหลือและผลตัดสินของเอเจนต์นี้เอง
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # ข้ามบัญชี�
 ## การติดตั้ง
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-ข้อกำหนด: `bash` บน macOS หรือ Linux และ `python3` 3.9 ขึ้นไป ไม่ต้องมีอย่างอื่น Windows ใช้ `install.ps1` ให้ตรึงไว้ที่ `v0.6.0` เนื่องจาก `v0.2.0` และ `v0.2.1` ไม่ได้รับการสนับสนุน ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น
+ข้อกำหนด: `bash` บน macOS หรือ Linux และ `python3` 3.9 ขึ้นไป ไม่ต้องมีอย่างอื่น Windows ใช้ `install.ps1` ให้ตรึงไว้ที่ `v0.6.1` เนื่องจาก `v0.2.0` และ `v0.2.1` ไม่ได้รับการสนับสนุน ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/coding-agents-kit` แท็ก `v0.6.0` อินเทอร์เฟซ 1 |
+| ผลิตภัณฑ์ | `DailybotHQ/coding-agents-kit` แท็ก `v0.6.1` อินเทอร์เฟซ 1 |
 | คีย์ใน registry | `agentkit` ใน `.dwp/config.json` |
 | ช่องทางการส่ง | headless: `ak run` หนึ่งครั้งต่อผู้รับมอบหมายหนึ่งราย ใน git worktree เฉพาะ |
 | สิ่งที่มอบให้ | `subagents`, `cancel_children`, `model_routing` |

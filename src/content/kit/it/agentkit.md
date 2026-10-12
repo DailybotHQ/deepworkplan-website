@@ -52,7 +52,7 @@ Da `v0.6.0` un agente può chiedere quanto margine ha il proprio account, a bass
 - **`ak capacity --self --json`** (schema `capacity-v1`) restituisce `headroom_pct` dell’account in esecuzione, la sua `binding_window`, `resets_at` e un `verdict`: `ok`, `low` (25 % o meno), `critical` (10 % o meno, o soggetto a rate limit) o `unknown` (nessuna fonte di quota: Cursor, Grok, Antigravity). Usa l’aritmetica di `ak pick`, così i due non sono mai in disaccordo, e legge una cache di utilizzo mantenuta per 300 secondi (`--max-age`), così un controllo a ogni confine di task resta economico. `--self` risolve l’account che `ak` ha avviato; fuori da un avvio tramite `ak` esce con codice 3 e non tira mai a indovinare. `ak usage` continua a leggere dal vivo e aggiorna la cache.
 - **Soglie ed esercitazioni.** `AGENTKIT_CAPACITY_LOW` e `AGENTKIT_CAPACITY_CRITICAL` (o `--low` e `--critical`) spostano le soglie. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` può solo abbassare una lettura — è così che un’esercitazione fa sembrare un account a corto di margine — e non può mai farne sembrare uno più ricco.
 - **`ak lease <kind> @<profile> --owner <addr>`** riserva un account per una corsia; `ak lease release …` lo libera una volta che un successore ha accettato il passaggio di consegne, e `ak lease ls` elenca i lease (schema `leases-v1`). Un profilo Codex accetta un solo lease — uno scrittore per file di autenticazione — e solo il titolare rilascia un lease. I lease scadono e sono record indicativi di numeri, nomi di profilo e indirizzi di pannello, mai una credenziale.
-- **`ak pick <kind> --owner <lead>`** salta gli account Codex riservati a un altro titolare e classifica ogni candidato per `headroom / (1 + other leases)`; senza `--owner` la classifica non cambia.
+- **`ak pick <kind> --owner <lead>`** conta ogni lease attivo, compresi quelli del titolare stesso: classifica i candidati per `headroom / (1 + leases)` e non offre mai un account Codex riservato, nemmeno a chi lo detiene. `--reuse @<profile>` passa uno dei lease del titolare, per esempio al successore di una corsia. Senza `--owner` la classifica non cambia.
 
 ```bash
 ak capacity --self --json                        # il margine e il verdetto di questo agente
@@ -65,15 +65,15 @@ Il lavoro si sposta solo tra gli account che hai dichiarato per il piano, nel ri
 ## Installazione
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisiti: `bash` su macOS o Linux e `python3` 3.9 o successivo; nient’altro. Windows usa `install.ps1`. Fissa `v0.6.0`: `v0.2.0` e `v0.2.1` non sono supportate. Verifica una release con il suo asset `SHA256SUMS`.
+Requisiti: `bash` su macOS o Linux e `python3` 3.9 o successivo; nient’altro. Windows usa `install.ps1`. Fissa `v0.6.1`: `v0.2.0` e `v0.2.1` non sono supportate. Verifica una release con il suo asset `SHA256SUMS`.
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, interfaccia 1 |
+| Prodotto | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interfaccia 1 |
 | Chiave di registro | `agentkit` in `.dwp/config.json` |
 | Trasporto | headless: un `ak run` per delegato in un worktree git dedicato |
 | Fornisce | `subagents`, `cancel_children`, `model_routing` |

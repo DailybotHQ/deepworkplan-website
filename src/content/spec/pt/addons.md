@@ -82,7 +82,7 @@ O **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (market
 
 ### Herdr (sexto addon)
 
-Um integrador leve do [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixado em `v0.3.0`, protocolo `1`), o transporte de delegação **interativa** dos planos v7.
+Um integrador leve do [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixado em `v0.3.1`, protocolo `1`), o transporte de delegação **interativa** dos planos v7.
 
 - **Página do kit:** [Herdr](/kit/herdr)
 - **O que adiciona:** um plano pode entregar uma tarefa delimitada a um agente de codificação noutro painel do [Herdr](https://herdr.dev), na mesma máquina ou numa que o Herdr alcance por SSH, e registar no diário a sua única resposta autorizada
@@ -100,7 +100,7 @@ Um integrador leve do [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkp
 
 ### Agentkit (oitavo addon)
 
-Um integrador leve do [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixado em `v0.6.0`, interface `1`), o transporte de delegação **sem interface** (headless) dos planos v7.
+Um integrador leve do [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixado em `v0.6.1`, interface `1`), o transporte de delegação **sem interface** (headless) dos planos v7.
 
 - **Página do kit:** [Agentkit](/kit/agentkit)
 - **O que adiciona:** uma única superfície de comandos `ak` sobre os agentes de codificação de terminal, usada para executar sem interface uma tarefa delimitada do plano; contribui com as capacidades `subagents`, `cancel_children` e `model_routing` apenas em tempo de execução, quando ativado, detetado e numa interface compatível

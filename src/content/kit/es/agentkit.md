@@ -52,7 +52,7 @@ Desde `v0.6.0` un agente puede preguntar cuánto margen le queda a su propia cue
 - **`ak capacity --self --json`** (esquema `capacity-v1`) da el `headroom_pct` de la cuenta en ejecución, su `binding_window`, `resets_at` y un `verdict`: `ok`, `low` (25 % o menos), `critical` (10 % o menos, o con límite de tasa) o `unknown` (sin fuente de cuota: Cursor, Grok, Antigravity). Usa la aritmética de `ak pick`, así que ambos nunca discrepan, y lee una caché de uso que se conserva 300 segundos (`--max-age`), de modo que una comprobación en cada límite entre tareas sigue siendo barata. `--self` resuelve la cuenta que lanzó `ak`; fuera de un lanzamiento de `ak` sale con código 3 y nunca adivina. `ak usage` sigue leyendo en vivo y refresca la caché.
 - **Umbrales y simulacros.** `AGENTKIT_CAPACITY_LOW` y `AGENTKIT_CAPACITY_CRITICAL` (o `--low` y `--critical`) mueven los umbrales. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` solo puede rebajar una lectura — así es como un simulacro hace que una cuenta parezca escasa — y nunca puede hacer que una parezca más holgada.
 - **`ak lease <kind> @<profile> --owner <addr>`** reserva una cuenta para un carril; `ak lease release …` la libera cuando un sucesor ha aceptado el traspaso, y `ak lease ls` enumera las reservas (esquema `leases-v1`). Un perfil de Codex admite una sola reserva — un escritor por archivo de autenticación — y solo el titular libera una reserva. Las reservas caducan y son registros orientativos de números, nombres de perfil y direcciones de panel, nunca una credencial.
-- **`ak pick <kind> --owner <lead>`** omite las cuentas de Codex reservadas por otro titular y clasifica cada candidata por `headroom / (1 + other leases)`; sin `--owner` la clasificación no cambia.
+- **`ak pick <kind> --owner <lead>`** cuenta todas las reservas activas, incluidas las del propio titular: clasifica las candidatas por `headroom / (1 + leases)` y nunca ofrece una cuenta de Codex reservada, ni siquiera a quien la tiene. `--reuse @<profile>` traspasa una de las reservas del propio titular, por ejemplo al sucesor de un carril. Sin `--owner` la clasificación no cambia.
 
 ```bash
 ak capacity --self --json                        # margen y veredicto de este agente
@@ -65,15 +65,15 @@ El trabajo se mueve solo entre las cuentas que declaraste para el plan, dentro d
 ## Instalación
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v0.6.0`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
+Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v0.6.1`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, interfaz 1 |
+| Producto | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interfaz 1 |
 | Clave de registro | `agentkit` en `.dwp/config.json` |
 | Transporte | sin interfaz: un `ak run` por delegado en un worktree de git dedicado |
 | Proporciona | `subagents`, `cancel_children`, `model_routing` |

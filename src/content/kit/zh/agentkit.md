@@ -52,7 +52,7 @@ ak setup verify            # 按顺序的检查，每项附带修复命令
 - **`ak capacity --self --json`**（schema `capacity-v1`）给出正在运行的账户的 `headroom_pct`、其 `binding_window`、`resets_at` 以及一个 `verdict`：`ok`、`low`（25 % 或更低）、`critical`（10 % 或更低，或已被限流）或 `unknown`（没有配额来源：Cursor、Grok、Antigravity）。它使用与 `ak pick` 相同的算法，因此两者从不矛盾；它读取保留 300 秒的用量缓存（`--max-age`），因此在每个任务边界检查一次的成本依然很低。`--self` 解析出由 `ak` 启动的那个账户；不在 `ak` 启动的环境中时，它以退出码 3 退出，从不猜测。`ak usage` 仍然实时读取并刷新缓存。
 - **阈值与演练。** `AGENTKIT_CAPACITY_LOW` 和 `AGENTKIT_CAPACITY_CRITICAL`（或 `--low` 和 `--critical`）用于调整阈值。`AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` 只能调低读数——演练正是借此让一个账户显得余量不足——绝不能让账户显得余量更多。
 - **`ak lease <kind> @<profile> --owner <addr>`** 为一条通道占用一个账户；继任者接受交接后，`ak lease release …` 将其释放，`ak lease ls` 列出各租约（schema `leases-v1`）。一个 Codex 配置档只接受一个租约——每个认证文件一个写入者——并且只有租约所有者才能释放租约。租约会过期，它们只是记录数字、配置档名称和窗格地址的建议性记录，绝不是凭据。
-- **`ak pick <kind> --owner <lead>`** 跳过已租给其他所有者的 Codex 账户，并按 `headroom / (1 + other leases)` 对每个候选账户排序；不带 `--owner` 时，排序不变。
+- **`ak pick <kind> --owner <lead>`** 计入每个有效租约，包括所有者自己的租约：它按 `headroom / (1 + leases)` 对候选账户排序，并且从不提供已被租用的 Codex 账户，即使对其持有者也不提供。`--reuse @<profile>` 将所有者自己的某个租约转交出去，例如交给某条通道的继任者。不带 `--owner` 时，排序不变。
 
 ```bash
 ak capacity --self --json                        # 本代理自身的余量与判定
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v0.6.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v0.6.1`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v0.6.0`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v0.6.1`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |

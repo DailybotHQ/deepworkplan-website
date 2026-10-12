@@ -52,7 +52,7 @@ Từ `v0.6.0`, một agent có thể hỏi tài khoản của chính nó còn ba
 - **`ak capacity --self --json`** (schema `capacity-v1`) cho biết `headroom_pct` của tài khoản đang chạy, `binding_window`, `resets_at` của nó và một `verdict`: `ok`, `low` (25 % trở xuống), `critical` (10 % trở xuống, hoặc bị giới hạn tốc độ) hoặc `unknown` (không có nguồn hạn mức: Cursor, Grok, Antigravity). Lệnh này dùng cùng phép tính của `ak pick`, nên hai lệnh không bao giờ mâu thuẫn, và đọc một bộ nhớ đệm mức sử dụng được giữ trong 300 giây (`--max-age`), nên việc kiểm tra tại mỗi ranh giới tác vụ vẫn rẻ. `--self` xác định tài khoản mà `ak` đã khởi chạy; ngoài một lần khởi chạy bằng `ak`, lệnh thoát với mã 3 và không bao giờ đoán. `ak usage` vẫn đọc trực tiếp và làm mới bộ nhớ đệm.
 - **Ngưỡng và diễn tập.** `AGENTKIT_CAPACITY_LOW` và `AGENTKIT_CAPACITY_CRITICAL` (hoặc `--low` và `--critical`) dịch chuyển các ngưỡng. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` chỉ có thể hạ một số đo — đó là cách một buổi diễn tập làm cho một tài khoản trông như sắp cạn — và không bao giờ làm cho tài khoản trông dư dả hơn.
 - **`ak lease <kind> @<profile> --owner <addr>`** giữ một tài khoản cho một lane; `ak lease release …` giải phóng nó khi một agent kế nhiệm đã chấp nhận bàn giao, và `ak lease ls` liệt kê các lease (schema `leases-v1`). Một hồ sơ Codex chỉ nhận một lease — một bên ghi cho mỗi tệp xác thực — và chỉ chủ sở hữu mới giải phóng được lease. Lease có thời hạn và chỉ là bản ghi tham khảo gồm các con số, tên hồ sơ và địa chỉ pane, không bao giờ là thông tin xác thực.
-- **`ak pick <kind> --owner <lead>`** bỏ qua các tài khoản Codex đã được lease cho chủ sở hữu khác và xếp hạng mọi ứng viên theo `headroom / (1 + other leases)`; khi không có `--owner`, thứ hạng không đổi.
+- **`ak pick <kind> --owner <lead>`** đếm mọi lease đang hoạt động, kể cả lease của chính chủ sở hữu: nó xếp hạng ứng viên theo `headroom / (1 + leases)` và không bao giờ đề xuất một tài khoản Codex đang được lease, kể cả cho người đang giữ nó. `--reuse @<profile>` chuyển tiếp một lease của chính chủ sở hữu, chẳng hạn cho agent kế nhiệm của một lane. Khi không có `--owner`, thứ hạng không đổi.
 
 ```bash
 ak capacity --self --json                        # chỗ còn lại và kết luận của chính agent này
@@ -65,15 +65,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.6.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.6.1`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |

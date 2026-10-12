@@ -29,9 +29,9 @@ deepworkplan-skill pins).
 | agent-skill | Addon: Dailybot reporting | Public | `v3.23.14` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |
 | devcontainer-kit | Addon: development containers | Public | `v0.3.5` | `/kit/devcontainer`, `/init.md` | Documented only |
-| coding-agents-kit | Addon: coding-agent installer | Public | `v0.6.0` | `/kit/agentkit`, `/init.md` | Documented only |
+| coding-agents-kit | Addon: coding-agent installer | Public | `v0.6.1` | `/kit/agentkit`, `/init.md` | Documented only |
 | deepworkplan-vim | Addon: DeepWorkPlan Vim | Public | `v0.7.0` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
-| herdr-peers | Addon: peer coordination | Public | `v0.3.0` | `/kit/herdr`, `/init.md` | Documented only |
+| herdr-peers | Addon: peer coordination | Public | `v0.3.1` | `/kit/herdr`, `/init.md` | Documented only |
 
 ## Pack, addons and site claims
 
@@ -62,7 +62,7 @@ something that already exists:
 
 An orchestrator plan in this hub sequences those steps; see
 [Cross-project standards](CROSS_PROJECT_STANDARDS.md#orchestrator-plans).
-With coding-agents-kit `v0.6.0` and herdr-peers `v0.3.0` its lanes hand work on
+With coding-agents-kit `v0.6.1` and herdr-peers `v0.3.1` its lanes hand work on
 before an account runs out and the leadership survives the lead
 ([Swarm autonomy](https://deepworkplan.com/methodology/07-swarm-autonomy)).
 

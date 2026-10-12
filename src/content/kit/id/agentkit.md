@@ -52,7 +52,7 @@ Mulai `v0.6.0`, sebuah agen dapat menanyakan berapa banyak ruang yang tersisa di
 - **`ak capacity --self --json`** (skema `capacity-v1`) memberikan `headroom_pct` akun yang sedang berjalan, `binding_window`, `resets_at`, dan sebuah `verdict`: `ok`, `low` (25 % atau kurang), `critical` (10 % atau kurang, atau terkena rate limit), atau `unknown` (tanpa sumber kuota: Cursor, Grok, Antigravity). Perintah ini memakai aritmetika `ak pick`, sehingga keduanya tidak pernah berselisih, dan membaca cache penggunaan yang disimpan selama 300 detik (`--max-age`), sehingga pemeriksaan di setiap batas tugas tetap murah. `--self` menentukan akun yang diluncurkan `ak`; di luar peluncuran `ak`, ia keluar dengan kode 3 dan tidak pernah menebak. `ak usage` tetap membaca secara langsung dan menyegarkan cache.
 - **Ambang batas dan latihan.** `AGENTKIT_CAPACITY_LOW` dan `AGENTKIT_CAPACITY_CRITICAL` (atau `--low` dan `--critical`) menggeser ambang batas. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` hanya dapat menurunkan sebuah pembacaan — begitulah sebuah latihan membuat akun tampak miskin — dan tidak pernah dapat membuat akun tampak lebih kaya.
 - **`ak lease <kind> @<profile> --owner <addr>`** menahan sebuah akun untuk satu lane; `ak lease release …` membebaskannya setelah penerus menerima handoff, dan `ak lease ls` mencantumkan lease (skema `leases-v1`). Profil Codex hanya menerima satu lease — satu penulis per file auth — dan hanya pemiliknya yang dapat melepaskan sebuah lease. Lease kedaluwarsa dan merupakan catatan anjuran berisi angka, nama profil, dan alamat panel, tidak pernah kredensial.
-- **`ak pick <kind> --owner <lead>`** melewati akun Codex yang di-lease ke pemilik lain dan memeringkat setiap kandidat dengan `headroom / (1 + other leases)`; tanpa `--owner`, peringkatnya tidak berubah.
+- **`ak pick <kind> --owner <lead>`** menghitung setiap lease aktif, termasuk milik pemilik itu sendiri: ia memeringkat kandidat dengan `headroom / (1 + leases)` dan tidak pernah menawarkan akun Codex yang sedang di-lease, bahkan kepada pemegangnya. `--reuse @<profile>` meneruskan salah satu lease milik pemilik itu sendiri, misalnya kepada penerus sebuah lane. Tanpa `--owner`, peringkatnya tidak berubah.
 
 ```bash
 ak capacity --self --json                        # ruang dan verdict milik agen ini sendiri
@@ -65,15 +65,15 @@ Pekerjaan hanya berpindah di antara akun yang Anda deklarasikan untuk rencana, d
 ## Instalasi
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.6.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.6.1`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |

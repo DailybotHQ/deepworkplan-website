@@ -41,7 +41,7 @@ Cada carril tiene un plan, al menos un plan Lite en su propio repositorio, y ese
 
 ## El bucle de capacidad
 
-Un agente comprueba su propio margen antes de empezar cada tarea, después de cualquier puerta o paso que haya durado más de 20 minutos, siempre que su CLI muestre un aviso de límite de uso y antes de aceptar un traspaso o el liderazgo. La comprobación es `ak capacity --self --json` de coding-agents-kit `v0.6.0`, que el helper del pack convierte en una decisión:
+Un agente comprueba su propio margen antes de empezar cada tarea, después de cualquier puerta o paso que haya durado más de 20 minutos, siempre que su CLI muestre un aviso de límite de uso y antes de aceptar un traspaso o el liderazgo. La comprobación es `ak capacity --self --json` de coding-agents-kit `v0.6.1`, que el helper del pack convierte en una decisión:
 
 | Veredicto | Decisión | Un carril | Un líder, para sí mismo |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ El **paquete de traspaso** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/d
 
 ## Sucesión del líder
 
-herdr-peers `v0.3.0` mantiene un registro de líder por plan — líder, época, lista de sucesión y carriles — y resuelve la dirección `lead` al líder actual, de modo que ningún encargo de carril fija en el código el panel del líder.
+herdr-peers `v0.3.1` mantiene un registro de líder por plan — líder, época, lista de sucesión y carriles — y resuelve la dirección `lead` al líder actual, de modo que ningún encargo de carril fija en el código el panel del líder.
 
 - **Reclamación.** El líder ejecuta `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` cuando empieza un plan y `lead release` cuando el plan termina. La sucesión por defecto es su sucesor previsto, después los carriles del propio checkout del plan por orden de lanzamiento y después cualquier carril del mismo host; los carriles en contenedores o en otras máquinas van al final.
 - **Cesión, planificada.** En `low` el líder designa un sucesor. En `critical` escribe un paquete de líder — tabla de carriles, consultas abiertas, orden de publicación, merges pendientes, decisiones —, ejecuta `herdr-peers lead handover <addr> --plan <P>`, que incrementa la época y avisa a todos los carriles, y se detiene. El sucesor acepta el paquete, reanuda el plan orquestador y vuelve a comprobar cada carril.

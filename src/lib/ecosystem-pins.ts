@@ -33,16 +33,16 @@ export const ECOSYSTEM_PINS = {
   },
   agentkit: {
     repo: 'coding-agents-kit',
-    tag: 'v0.6.0',
+    tag: 'v0.6.1',
     sha256sums:
-      'f7ced7a74d9ef8631c75aeae0792b8b41f5f8ad68350d4fb18d13678528e0b21',
+      '1f9c8beb6d8ae100ba3a154aae3866693a36efe30a4f9c8b0bce647e6fe2b487',
     role: 'agentkit addon (`ak`)',
   },
   herdr: {
     repo: 'herdr-peers',
-    tag: 'v0.3.0',
+    tag: 'v0.3.1',
     sha256sums:
-      'e31f9eaaa5c19af1b957ee7c00c077b2dac1fb87fbb7b45e557b30b47e475bc9',
+      '47fbb519a263e8fa828c9f173be6642243f2d0860e1af8287a0ad9d9a5794f99',
     role: 'Herdr addon (herdr-peers)',
   },
   devcontainer: {

@@ -52,7 +52,7 @@ Od `v0.6.0` agent może tanio, na każdej granicy zadania, zapytać, ile zapasu 
 - **`ak capacity --self --json`** (schemat `capacity-v1`) podaje dla bieżącego konta `headroom_pct`, jego `binding_window`, `resets_at` oraz `verdict`: `ok`, `low` (25 % lub mniej), `critical` (10 % lub mniej albo ograniczenie szybkości) lub `unknown` (brak źródła limitów: Cursor, Grok, Antigravity). Używa arytmetyki `ak pick`, więc oba nigdy się nie rozjeżdżają, i odczytuje pamięć podręczną zużycia przechowywaną przez 300 sekund (`--max-age`), dzięki czemu kontrola na każdej granicy zadania pozostaje tania. `--self` ustala konto, które uruchomiło `ak`; poza uruchomieniem przez `ak` kończy się kodem 3 i nigdy nie zgaduje. `ak usage` nadal odczytuje dane na żywo i odświeża pamięć podręczną.
 - **Progi i ćwiczenia.** `AGENTKIT_CAPACITY_LOW` i `AGENTKIT_CAPACITY_CRITICAL` (lub `--low` i `--critical`) przesuwają progi. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` może jedynie obniżyć odczyt — w ten sposób ćwiczenie sprawia, że konto wygląda na ubogie — i nigdy nie może sprawić, że wygląda na bogatsze.
 - **`ak lease <kind> @<profile> --owner <addr>`** rezerwuje konto dla jednego toru; `ak lease release …` zwalnia je, gdy następca przyjmie przekazanie, a `ak lease ls` wyświetla dzierżawy (schemat `leases-v1`). Profil Codex przyjmuje jedną dzierżawę — jeden piszący na plik uwierzytelniania — i tylko właściciel zwalnia dzierżawę. Dzierżawy wygasają i są doradczymi zapisami liczb, nazw profili i adresów paneli, nigdy poświadczeniem.
-- **`ak pick <kind> --owner <lead>`** pomija konta Codex wydzierżawione innemu właścicielowi i szereguje każdego kandydata według `headroom / (1 + other leases)`; bez `--owner` ranking się nie zmienia.
+- **`ak pick <kind> --owner <lead>`** liczy każdą aktywną dzierżawę, również własne dzierżawy właściciela: szereguje kandydatów według `headroom / (1 + leases)` i nigdy nie proponuje wydzierżawionego konta Codex, nawet jego posiadaczowi. `--reuse @<profile>` przekazuje dalej jedną z własnych dzierżaw właściciela, na przykład następcy toru. Bez `--owner` ranking się nie zmienia.
 
 ```bash
 ak capacity --self --json                        # własny zapas i werdykt tego agenta
@@ -65,15 +65,15 @@ Praca przemieszcza się wyłącznie między kontami, które zadeklarowałeś dla
 ## Instalacja
 
 ```bash
-git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v0.6.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
+Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v0.6.1`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, tag `v0.6.0`, interfejs 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interfejs 1 |
 | Klucz rejestru | `agentkit` w `.dwp/config.json` |
 | Transport | headless: jedno `ak run` na delegata w dedykowanym git worktree |
 | Zapewnia | `subagents`, `cancel_children`, `model_routing` |
