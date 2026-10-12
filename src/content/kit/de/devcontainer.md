@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer-Addon
 
-Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.6.2`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
+Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.6.3`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
 ## Was devcontainer-kit bereitstellt
 
@@ -21,15 +21,15 @@ Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontaine
 ## Installation
 
 ```bash
-git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.3.2`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v0.3.5`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.3.2`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v0.3.5`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
@@ -55,7 +55,7 @@ Seit `v0.2.3` richtet `dck up` unter Docker Desktop ohne manuellen Schritt ein b
 - **Container und Host.** Agenten im Container erreichen Herdr-Agenten auf dem Host, in jedem anderen dck-Container und in den anderen Loopback-Containern, die das Herdr Ihres Hosts bereits verwaltet — und diese erreichen sie umgekehrt ebenso. Jeder Peer trägt einen fixierten Host-Schlüssel; nichts wird bei der ersten Verwendung vertraut.
 - **Ein optionaler Host-Listener.** `dck setup` bietet einmalig einen SSH-Server auf Benutzerebene an `127.0.0.1` an, der nur den dck-Schlüssel akzeptiert und von launchd (macOS) am Laufen gehalten wird. Wenn Sie bereits einen Loopback-Listener betreiben, verweisen Sie das Host-Profil stattdessen darauf. `dck host listener disable` entfernt ihn.
 - **Übersteht Rebuilds.** Der Herdr-Rechnerkatalog des Containers liegt auf einem Volume, sodass `bash dev.sh rebuild` jeden darin registrierten Rechner beibehält. Seit `v0.3.2` führen `rebuild`, `start` und `restart` dieselben Schritte aus wie `up`: Der Container wird erneut beim Herdr des Hosts registriert, sein Host-Schlüssel neu fixiert und das Mesh verteilt, sodass ein von Grund auf neu gebauter Container den Host und seine Peers sofort erreicht.
-- **Codex-Panes im Container.** Mit `v0.3.2` setzt ein Codex-Agent im Container `HERDR_PEERS_SELF` auf die Rechner-ID des Containers, wie sie auf dem Host gespeichert ist, bevor er Peers auf anderen Rechnern anfragt: Der Auftrag des Leads nennt diese ID, und ein späteres Release des Kits setzt die Variable selbst.
+- **Codex-Panes im Container.** Ein Codex-Agent braucht `HERDR_PEERS_SELF`, die Rechner-ID des Containers, wie sie auf dem Host gespeichert ist, um Peers auf anderen Rechnern anzufragen. Seit `v0.3.3` hält das Kit diese ID bei jeder Registrierung fest, und die Login-Shells des Containers exportieren sie, sodass kein Agent sie von Hand setzt; `dck doctor` meldet eine Abweichung. Seit `v0.3.4` überspringen die containereigenen Codex-Konfigurationen die Update-Prüfung von Codex beim Start und seinen Hintergrund-Daemon (das Kit fixiert jede CLI-Version), ohne je das Codex-Home Ihres Hosts oder ein geteiltes Profil anzutasten.
 - **Antworten auch vom Host.** `dck setup` installiert ein verifiziertes [herdr-peers](/kit/herdr) auf dem Host, sodass `dck agents` und `dck ask` dort funktionieren und Host-Agenten mit `herdr-peers reply` antworten.
 - **Container, die das Kit nicht erstellt hat.** Führen Sie die öffentlichen Schlüssel, mit denen sie sich anmelden, unter `[ssh] authorized_extra` in Ihrem Host-Profil auf, dann erreichen auch sie dck-Container.
 
@@ -77,7 +77,18 @@ Mit aktiviertem `host_profiles` teilt `dck up` nur die Profile der CLIs, die das
 - **Codex** über seine Auth-Datei, für `@default` und für jedes Profil.
 - **Die env-Datei des Kits**, schreibgeschützt und auf die Namen in `host_env_keys` reduziert.
 
-Das gesamte Agentkit-Home wird nie eingebunden, und Profile mit absoluten Host-Pfaden werden übersprungen. Eine mit Schreibzugriff geteilte Codex-Anmeldung kann von zwei Schreibern gleichzeitig erneuert werden: Halten Sie einen aktiven Agenten pro Codex-Konto. Im Container läuft dasselbe `ak <kind> @<profile>` auf demselben Konto wie auf dem Host; das erlaubt einem Lead, Container-Lanes die Konten zu übergeben, die `ak pick` gewählt hat — siehe [Viele Agenten betreiben](/methodology/06-orchestration).
+Das gesamte Agentkit-Home wird nie eingebunden, und Profile mit absoluten Host-Pfaden werden übersprungen. Eine mit Schreibzugriff geteilte Codex-Anmeldung kann von zwei Schreibern gleichzeitig erneuert werden: Halten Sie einen aktiven Agenten pro Codex-Konto. `[agents] default_profile` im Host-Profil (zum Beispiel `{ claude = "@work3" }`) sorgt dafür, dass ein bloßes `ak claude` im Container dieses geteilte Konto nutzt (coding-agents-kit ≥ `v0.5.2`); eine `@default`-Anmeldung von Claude unter macOS liegt im Schlüsselbund (Keychain) und lässt sich nicht teilen. Seit `v0.3.4` richten die Shells des Containers auch ein bloßes `claude` oder `codex` auf dieses Konto aus, sodass Panes, die Herdr wiederherstellt, darauf statt auf einem Anmeldebildschirm öffnen. Im Container läuft dasselbe `ak <kind> @<profile>` auf demselben Konto wie auf dem Host; das erlaubt einem Lead, Container-Lanes die Konten zu übergeben, die `ak pick` gewählt hat — siehe [Viele Agenten betreiben](/methodology/06-orchestration).
+
+## Mehrere Repositories, ein Compose-Stack
+
+Seit `v0.3.3` kann ein Repository, dessen Service Teil eines größeren Compose-Projekts ist (eine API, eine Web-App, Worker und eine Datenbank, die sich ein Projekt teilen), diesem beitreten, ohne dass Sie von Hand bearbeiten, was dck rendert. Alles ist additiv: Ein Repository, das keinen dieser Schlüssel setzt, wird genau wie bisher gerendert.
+
+- **Ein Projekt, ein State-Volume pro Service.** `[compose] project` benennt in jedem Repository das gemeinsame Projekt; `state_volume`, `[compose] networks` und `[compose] volumes` halten den Zustand jedes Service sowie die Daten-Volumes und Netzwerke des Stacks auseinander.
+- **Ein Benutzerblock.** Zeilen zwischen `# >>> user:<service> >>>` und `# <<< user:<service> <<<` innerhalb des dck-Service bleiben unverändert erhalten: einfache Schlüssel für das, was dck nicht rendert (`depends_on`, `healthcheck`), und `x-dck-merge:` für Schlüssel, die dck rendert. Eine Datei, die nur einen Teil der dck-Markierungen enthält, wird mit Hinweis auf die Korrektur abgelehnt statt neu geschrieben.
+- **Port-Strings.** `ssh_port` und `ports` akzeptieren Compose-Ausdrücke wie `"${API_PORT:-8000}:8000"`; sie bleiben auf `127.0.0.1`, sofern der String keine Host-IP nennt.
+- **Gemeinsame Builds und ein eigener Launcher.** `[build] context` und `[build] dockerfile` decken ein Dockerfile ab, das mehrere Services teilen; `dev_sh = false` behält das eigene `dev.sh` eines Repositorys.
+- **Workspace-Satelliten.** Seit `v0.3.5` startet und stoppt eine zweite Instanz des Service in einem eigenen Compose-Projekt über dck (`dck --project P --compose-file F --service S up` oder `down`) und erhält so denselben Host-Schlüssel, dieselben Konten, dieselbe Git-Identität und denselben Herdr-Rechner wie die Hauptinstanz; `up --seed-state-from VOLUME` kopiert nur die Anmeldungen in ihr leeres State-Volume. In einer Overlay-Datei muss `extends` die Datei nennen, die es erweitert.
+- **Node für Agenten.** Das eigene Node der Agenten liegt unter `/opt/dck/node` und ersetzt nie das des Images; `[agents] node_first = true` stellt es im PATH an die erste Stelle, wenn die Werkzeuge des Repositorys das brauchen.
 
 ## Die SSH-Schlüssel des Hosts im Container
 

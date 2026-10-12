@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 애드온
 
-사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.6.2`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
+사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.6.3`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
 
 ## devcontainer-kit이 제공하는 것
 
@@ -21,15 +21,15 @@ order: 1
 ## 설치
 
 ```bash
-git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v0.3.2`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
+요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v0.3.5`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v0.3.2`, 인터페이스 2 |
+| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v0.3.5`, 인터페이스 2 |
 | 레지스트리 키 | `.dwp/config.json`의 `devcontainer` |
 | 리포지토리별 설정 | `.devcontainer/dck.toml` |
 | 감지 | `dck doctor --json` |
@@ -55,7 +55,7 @@ cd your-repo && dck init && bash dev.sh up
 - **컨테이너와 호스트.** 컨테이너 안의 에이전트는 호스트, 다른 모든 dck 컨테이너, 그리고 호스트의 Herdr가 이미 관리하는 다른 루프백 컨테이너에 있는 Herdr 에이전트에 접근할 수 있으며, 그쪽에서도 다시 접근할 수 있습니다. 모든 피어는 고정된 호스트 키를 가지며, 최초 사용 시 신뢰되는 것은 없습니다.
 - **선택적 호스트 리스너.** `dck setup`은 `127.0.0.1`에서 동작하는 사용자 수준 SSH 서버를 한 번 제안합니다. 이 서버는 dck 키만 받아들이며 launchd(macOS)가 계속 실행되도록 유지합니다. 이미 루프백 리스너를 운영 중이라면 대신 호스트 프로필이 그것을 가리키도록 하세요. `dck host listener disable`로 제거할 수 있습니다.
 - **재빌드 후에도 유지.** 컨테이너의 Herdr 머신 카탈로그는 볼륨에 있으므로, `bash dev.sh rebuild` 후에도 내부에 등록된 모든 머신이 유지됩니다. `v0.3.2`부터 `rebuild`, `start`, `restart`는 `up`과 같은 단계를 실행합니다. 컨테이너가 호스트의 Herdr에 다시 등록되고, 호스트 키가 다시 고정되며, 메시가 다시 배포되므로, 처음부터 빌드한 컨테이너도 곧바로 호스트와 피어에 접근할 수 있습니다.
-- **컨테이너 안의 Codex 창.** `v0.3.2`에서는 컨테이너 안의 Codex 에이전트가 다른 머신의 피어에게 묻기 전에 `HERDR_PEERS_SELF`를 호스트에 저장된 컨테이너의 머신 id로 설정합니다. 이 id는 리드의 지시에 적혀 있으며, 이후 키트 릴리스에서는 키트가 이를 설정합니다.
+- **컨테이너 안의 Codex 창.** Codex 에이전트가 다른 머신의 피어에게 물으려면 호스트에 저장된 컨테이너의 머신 id인 `HERDR_PEERS_SELF`가 필요합니다. `v0.3.3`부터 키트는 등록할 때마다 그 id를 기록하고 컨테이너의 로그인 셸이 이를 export하므로, 어떤 에이전트도 직접 설정할 필요가 없습니다. 불일치는 `dck doctor`가 표시합니다. `v0.3.4`부터 컨테이너 자체의 Codex 설정은 Codex의 시작 시 업데이트 확인과 백그라운드 데몬을 건너뛰며(키트가 모든 CLI 버전을 고정하므로), 호스트의 Codex home이나 공유 프로필은 결코 건드리지 않습니다.
 - **호스트에서도 응답.** `dck setup`은 호스트에 검증된 [herdr-peers](/kit/herdr)를 설치하므로 호스트에서도 `dck agents`와 `dck ask`가 동작하고, 호스트 에이전트는 `herdr-peers reply`로 응답합니다.
 - **키트가 만들지 않은 컨테이너.** 그 컨테이너들이 로그인에 쓰는 공개 키를 호스트 프로필의 `[ssh] authorized_extra` 아래에 나열하면, 그 컨테이너들도 dck 컨테이너에 접근할 수 있습니다.
 
@@ -77,7 +77,18 @@ host_env_keys = ["ZAI_CODING_API_KEY"]   # 공유할 환경 변수 이름의 허
 - **Codex**는 인증 파일로, `@default`와 각 프로필에 대해 공유합니다.
 - **키트의 env 파일**은 읽기 전용이며 `host_env_keys`에 있는 이름으로만 줄입니다.
 
-agentkit home 전체는 결코 마운트하지 않으며, 호스트 절대 경로를 담은 프로필은 건너뜁니다. 읽기-쓰기로 공유한 Codex 로그인은 두 작성자가 동시에 갱신할 수 있으므로, Codex 계정마다 활성 에이전트를 하나만 두십시오. 컨테이너 안에서도 같은 `ak <kind> @<profile>`이 호스트에서와 같은 계정으로 실행되며, 덕분에 리드는 `ak pick`이 고른 계정을 컨테이너 레인에 넘길 수 있습니다. [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
+agentkit home 전체는 결코 마운트하지 않으며, 호스트 절대 경로를 담은 프로필은 건너뜁니다. 읽기-쓰기로 공유한 Codex 로그인은 두 작성자가 동시에 갱신할 수 있으므로, Codex 계정마다 활성 에이전트를 하나만 두십시오. 호스트 프로필의 `[agents] default_profile`(예: `{ claude = "@work3" }`)을 설정하면 컨테이너 안에서 인자 없는 `ak claude`가 그 공유 계정을 사용합니다(coding-agents-kit ≥ `v0.5.2`). macOS의 `@default` Claude 로그인은 키체인에 있으므로 공유할 수 없습니다. `v0.3.4`부터는 컨테이너의 셸이 인자 없는 `claude`나 `codex`도 그 계정으로 향하게 하므로, Herdr가 복원하는 창은 로그인 화면 대신 그 계정으로 열립니다. 컨테이너 안에서도 같은 `ak <kind> @<profile>`이 호스트에서와 같은 계정으로 실행되며, 덕분에 리드는 `ak pick`이 고른 계정을 컨테이너 레인에 넘길 수 있습니다. [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
+
+## 여러 리포지토리, 하나의 compose 스택
+
+`v0.3.3`부터 서비스가 더 큰 compose 프로젝트의 일부인 리포지토리(API, 웹 앱, 워커, 데이터베이스가 하나의 프로젝트를 공유하는 구성)는 dck가 렌더링하는 내용을 직접 편집하지 않고도 그 프로젝트에 합류할 수 있습니다. 모든 설정은 추가 방식입니다. 이 키를 하나도 설정하지 않은 리포지토리는 이전과 정확히 같게 렌더링됩니다.
+
+- **하나의 프로젝트, 서비스마다 하나의 상태 볼륨.** `[compose] project`는 모든 리포지토리에서 공유 프로젝트의 이름을 지정하고, `state_volume`, `[compose] networks`, `[compose] volumes`는 각 서비스의 상태와 스택의 데이터 볼륨 및 네트워크를 분리합니다.
+- **사용자 블록.** dck 서비스 안에서 `# >>> user:<service> >>>`와 `# <<< user:<service> <<<` 사이의 줄은 그대로 보존됩니다. dck가 렌더링하지 않는 항목(`depends_on`, `healthcheck`)에는 일반 키를, dck가 렌더링하는 키에는 `x-dck-merge:`를 사용합니다. dck 마커 중 일부만 있는 파일은 다시 쓰지 않고 수정 방법과 함께 거부됩니다.
+- **포트 문자열.** `ssh_port`와 `ports`는 `"${API_PORT:-8000}:8000"` 같은 compose 표현식을 받습니다. 문자열에 호스트 IP가 지정되지 않는 한 `127.0.0.1`에 머뭅니다.
+- **공유 빌드와 자체 실행 스크립트.** `[build] context`와 `[build] dockerfile`은 여러 서비스가 공유하는 Dockerfile을 다루고, `dev_sh = false`는 리포지토리 자체의 `dev.sh`를 유지합니다.
+- **워크스페이스 위성 인스턴스.** `v0.3.5`부터 자체 compose 프로젝트에 있는 서비스의 두 번째 인스턴스는 dck를 통해 시작하고 중지하므로(`dck --project P --compose-file F --service S up` 또는 `down`), 메인 인스턴스와 같은 호스트 키, 계정, git 신원, Herdr 머신을 얻습니다. `up --seed-state-from VOLUME`은 로그인만 비어 있는 상태 볼륨에 복사합니다. 오버레이 파일에서는 `extends`에 확장하는 파일을 지정해야 합니다.
+- **에이전트용 Node.** 에이전트 자체의 Node는 `/opt/dck/node` 아래에 있으며 이미지의 Node를 결코 대체하지 않습니다. 리포지토리의 도구가 필요로 할 때는 `[agents] node_first = true`로 PATH의 맨 앞에 둡니다.
 
 ## 컨테이너 안의 호스트 SSH 키
 

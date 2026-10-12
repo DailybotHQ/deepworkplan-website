@@ -10,7 +10,7 @@ order: 8
 
 Każdy terminalowy agent kodujący ma własne flagi do kontynuowania sesji, własny sposób oddzielenia drugiego konta, własny tryb headless i własny przełącznik pomijania pytań o uprawnienia. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** nakłada na nie wszystkie jedną powierzchnię poleceń: `ak <kind> [@profile]`.
 
-Ten addon integruje kit z **DWP v7** (pakiet `v7.6.2`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
+Ten addon integruje kit z **DWP v7** (pakiet `v7.6.3`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
 
 ## Co daje kit
 
@@ -23,7 +23,7 @@ Ten addon integruje kit z **DWP v7** (pakiet `v7.6.2`) jako transport delegowani
 
 ## Konta, limity i wybór konta
 
-Kit traktuje każde logowanie lub klucz, który posiadasz, jako **konto**: jedno CLI × jeden profil. `@default` (lub `@1`) to własny katalog domowy CLI; `@2`, `@work` czy `@client-x` to osobne logowania, każde we własnym katalogu w katalogu głównym profili, działające równolegle. `ak profiles` wyświetla je wraz ze stanem logowania i nazwami ich kluczy; `ak profiles --json` daje narzędziom tę samą listę (schemat `profiles-v1`). Od `v0.5.1` pokazuje, gdzie naprawdę jest token Claude Code — `file`, `keychain` (macOS), `none` lub `unknown` — sprawdzając wyłącznie jego obecność i nigdy nie odczytując sekretu, a także rozpoznaje logowanie Cursor na Linuksie, w kontenerze lub na hoście z Linuksem.
+Kit traktuje każde logowanie lub klucz, który posiadasz, jako **konto**: jedno CLI × jeden profil. `@default` (lub `@1`) to własny katalog domowy CLI; `@2`, `@work` czy `@client-x` to osobne logowania, każde we własnym katalogu w katalogu głównym profili, działające równolegle. `ak profiles` wyświetla je wraz ze stanem logowania i nazwami ich kluczy; `ak profiles --json` daje narzędziom tę samą listę (schemat `profiles-v1`). Od `v0.5.1` pokazuje, gdzie naprawdę jest token Claude Code — `file`, `keychain` (macOS), `none` lub `unknown` — sprawdzając wyłącznie jego obecność i nigdy nie odczytując sekretu, a także rozpoznaje logowanie Cursor na Linuksie, w kontenerze lub na hoście z Linuksem. Od `v0.5.2` `AGENTKIT_DEFAULT_PROFILE_<CLI>` wskazuje konto, którego używa samo `ak <cli>` (pozycyjny `@profile` nadal ma pierwszeństwo), i właśnie tak dev container wybiera konto hosta, które współdzieli. Od `v0.5.3` `ak codex` dodaje `--no-daemon`, gdy katalog domowy Codex współdzielony z inną maszyną odnotowuje demona w tle, którego nie ma na tej maszynie.
 
 `ak usage` wyświetla limit i zużycie każdego konta widocznego dla kitu, jeden wiersz na konto i profil: na żywo dla subskrypcji Claude Code (okna 5-godzinne, tygodniowe i per model), logowań Codex przez ChatGPT oraz kluczy planu programistycznego Z.AI; Cursor, Grok, xAI i Azure OpenAI pokazują `n/d` wraz z powodem. Polecenie działa tylko do odczytu: nigdy nie odświeża logowania, nigdy nie wypisuje tokenu i nigdy nie zapisuje niczego w profilu. `--json` daje narzędziom tę samą listę (schemat `usage-v1`). Endpointy zużycia są wewnętrzne dla dostawców i nieoficjalne.
 
@@ -48,15 +48,15 @@ W przypadku długich, interaktywnych torów każdy tor działa w panelu [Herdr](
 ## Instalacja
 
 ```bash
-git clone --branch v0.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.3 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v0.5.1`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
+Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v0.5.3`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, tag `v0.5.1`, interfejs 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, tag `v0.5.3`, interfejs 1 |
 | Klucz rejestru | `agentkit` w `.dwp/config.json` |
 | Transport | headless: jedno `ak run` na delegata w dedykowanym git worktree |
 | Zapewnia | `subagents`, `cancel_children`, `model_routing` |

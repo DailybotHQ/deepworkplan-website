@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.6.2`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
+Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.6.3`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
 
 ## What devcontainer-kit provides
 
@@ -21,15 +21,15 @@ Give the repository a reproducible, isolated development container — one that 
 ## Install
 
 ```bash
-git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v0.3.2`: `v0.2.0` is unsupported.
+Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v0.3.5`: `v0.2.0` is unsupported.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/devcontainer-kit`, tag `v0.3.2`, interface 2 |
+| Product | `DailybotHQ/devcontainer-kit`, tag `v0.3.5`, interface 2 |
 | Registry key | `devcontainer` in `.dwp/config.json` |
 | Per-repository config | `.devcontainer/dck.toml` |
 | Detection | `dck doctor --json` |
@@ -55,7 +55,7 @@ Since `v0.2.3`, `dck up` wires a two-way mesh with no hand step, on Docker Deskt
 - **Containers and the host.** Agents inside reach Herdr agents on the host, in every other dck container and in the other loopback containers your host's Herdr already manages — and those reach back. Every peer carries a pinned host key; nothing is trusted on first use.
 - **An optional host listener.** `dck setup` offers, once, a user-level SSH server on `127.0.0.1` that accepts only the dck key and is kept running by launchd (macOS). If you already run a loopback listener, point the host profile at it instead. `dck host listener disable` removes it.
 - **Survives rebuilds.** The container's Herdr machine catalog lives on a volume, so `bash dev.sh rebuild` keeps every machine registered inside. Since `v0.3.2`, `rebuild`, `start` and `restart` run the same steps as `up`: the container is registered with the host's Herdr again, its host key re-pinned, and the mesh pushed, so a container built from scratch reaches the host and its peers at once.
-- **Codex panes inside a container.** With `v0.3.2`, a Codex agent inside sets `HERDR_PEERS_SELF` to the container's machine id as saved on the host before it asks peers on other machines: the lead's brief names that id, and a later release of the kit sets it.
+- **Codex panes inside a container.** A Codex agent needs `HERDR_PEERS_SELF`, the container's machine id as saved on the host, to ask peers on other machines. Since `v0.3.3` the kit records that id at every registration and the container's login shells export it, so no agent sets it by hand; `dck doctor` flags a mismatch. Since `v0.3.4` the container's own Codex configs skip Codex's startup update check and its background daemon (the kit pins every CLI version), never touching your host's Codex home or a shared profile.
 - **Replies from the host too.** `dck setup` installs a verified [herdr-peers](/kit/herdr) on the host, so `dck agents` and `dck ask` work there, and host agents answer with `herdr-peers reply`.
 - **Containers the kit did not create.** List the public keys they log in with under `[ssh] authorized_extra` in your host profile, and they can reach dck containers too.
 
@@ -77,7 +77,18 @@ With `host_profiles` on, `dck up` shares only the profiles of the CLIs the repos
 - **Codex** through its auth file, for `@default` and for each profile.
 - **The kit's env file**, read-only and reduced to the names in `host_env_keys`.
 
-The whole agentkit home is never mounted, and profiles that hold absolute host paths are skipped. A Codex login shared read-write can be refreshed by two writers at once: keep one active agent per Codex account. Inside the container, the same `ak <kind> @<profile>` runs on the same account as on the host, which is what lets a lead hand container lanes the accounts `ak pick` chose — see [Running many agents](/methodology/06-orchestration).
+The whole agentkit home is never mounted, and profiles that hold absolute host paths are skipped. A Codex login shared read-write can be refreshed by two writers at once: keep one active agent per Codex account. `[agents] default_profile` in the host profile (for example `{ claude = "@work3" }`) makes a bare `ak claude` inside use that shared account (coding-agents-kit ≥ `v0.5.2`); a macOS `@default` Claude login lives in the Keychain and cannot be shared. Since `v0.3.4` the container's shells also point a plain `claude` or `codex` at that account, so panes Herdr restores open on it instead of a login screen. Inside the container, the same `ak <kind> @<profile>` runs on the same account as on the host, which is what lets a lead hand container lanes the accounts `ak pick` chose — see [Running many agents](/methodology/06-orchestration).
+
+## Several repositories, one compose stack
+
+Since `v0.3.3`, a repository whose service is one part of a larger compose project (an API, a web app, workers and a database sharing one project) can join it without hand-editing what dck renders. Everything is additive: a repository that sets none of these keys renders exactly as before.
+
+- **One project, one state volume per service.** `[compose] project` names the shared project in every repository; `state_volume`, `[compose] networks` and `[compose] volumes` keep each service's state and the stack's data volumes and networks apart.
+- **A user block.** Lines between `# >>> user:<service> >>>` and `# <<< user:<service> <<<` inside the dck service are kept verbatim: plain keys for what dck does not render (`depends_on`, `healthcheck`), and `x-dck-merge:` for keys it does. A file with only some of dck's markers is refused with the fix instead of being rewritten.
+- **Port strings.** `ssh_port` and `ports` accept compose expressions such as `"${API_PORT:-8000}:8000"`; they stay on `127.0.0.1` unless the string names a host IP.
+- **Shared builds and your own launcher.** `[build] context` and `[build] dockerfile` cover a Dockerfile shared by several services; `dev_sh = false` keeps a repository's own `dev.sh`.
+- **Workspace satellites.** Since `v0.3.5`, a second instance of the service in its own compose project starts and stops through dck (`dck --project P --compose-file F --service S up` or `down`), so it gets the same host key, accounts, git identity and Herdr machine as the main one; `up --seed-state-from VOLUME` copies only the logins into its empty state volume. In an overlay file, `extends` must name the file it extends.
+- **Node for agents.** The agents' own Node lives under `/opt/dck/node` and never replaces the image's; `[agents] node_first = true` puts it first on PATH when the repository's tooling needs that.
 
 ## The host's SSH keys inside the container
 

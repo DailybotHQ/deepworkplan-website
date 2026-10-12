@@ -2,37 +2,37 @@
   "addons": {
     "agentkit": {
       "enabled": true,
-      "note": "ak v0.5.1 on the host; the dck v0.3.2 render pins coding-agents-kit v0.5.1 (with its three skills) in this container",
-      "version": "v0.5.1"
+      "note": "ak v0.5.3 on the host; the container is still the dck v0.3.2 render (coding-agents-kit v0.5.1 and its three skills in the image)",
+      "version": "v0.5.3"
     },
     "ai-diff-reviewer": {
       "enabled": true,
       "note": "required local review: vendored skill + CI self-review (.review/extension.md)",
-      "version": "v3.3.10"
+      "version": "v3.3.11"
     },
     "dailybot": {
       "enabled": true,
       "note": "repo-level: vendored skill + lifecycle hooks in .agents/settings.json (AGENTS.md)",
-      "version": "v3.23.13"
+      "version": "v3.23.14"
     },
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.6.2"
+      "version": "v7.6.3"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.6.2"
+      "version": "v7.6.3"
     },
     "devcontainer": {
       "enabled": true,
-      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v0.3.2; host kit v0.3.2)",
-      "version": "v0.3.2"
+      "note": "host kit v0.3.5; dck container docker/local/dwpwebsite still rendered with v0.3.2 (dck init)",
+      "version": "v0.3.5"
     },
     "herdr": {
       "enabled": true,
-      "note": "herdr-peers v0.2.2 installed in this container by the dck image; Herdr runs in this container",
+      "note": "herdr-peers v0.2.2 in this container (dck v0.3.2 image); the host has v0.2.3; Herdr runs in this container",
       "version": "v0.2.2"
     },
     "vim": {

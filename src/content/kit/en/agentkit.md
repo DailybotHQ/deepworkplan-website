@@ -10,7 +10,7 @@ order: 8
 
 Every terminal coding agent has its own flags for continuing a session, its own way to keep a second account apart, its own headless mode and its own switch for skipping permission prompts. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** puts one command surface over all of them: `ak <kind> [@profile]`.
 
-This addon integrates the kit into **DWP v7** (pack `v7.6.2`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
+This addon integrates the kit into **DWP v7** (pack `v7.6.3`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
 
 ## What the kit gives you
 
@@ -23,7 +23,7 @@ This addon integrates the kit into **DWP v7** (pack `v7.6.2`) as the **headless*
 
 ## Accounts, quota and choosing an account
 
-The kit treats every login or key you hold as an **account**: one CLI × one profile. `@default` (or `@1`) is the CLI's own home; `@2`, `@work` or `@client-x` are separate logins, each in its own directory under the profiles root, that run side by side. `ak profiles` lists them with their login state and the names of their keys; `ak profiles --json` gives tools the same list (schema `profiles-v1`). Since `v0.5.1` it reports where Claude Code's token really is — `file`, `keychain` (macOS), `none` or `unknown` — by presence only, never reading the secret, and a Cursor login on Linux, in a container or on a Linux host, is recognised.
+The kit treats every login or key you hold as an **account**: one CLI × one profile. `@default` (or `@1`) is the CLI's own home; `@2`, `@work` or `@client-x` are separate logins, each in its own directory under the profiles root, that run side by side. `ak profiles` lists them with their login state and the names of their keys; `ak profiles --json` gives tools the same list (schema `profiles-v1`). Since `v0.5.1` it reports where Claude Code's token really is — `file`, `keychain` (macOS), `none` or `unknown` — by presence only, never reading the secret, and a Cursor login on Linux, in a container or on a Linux host, is recognised. Since `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` names the account a bare `ak <cli>` uses (a positional `@profile` still wins), which is how a dev container picks the host account it shares. Since `v0.5.3`, `ak codex` adds `--no-daemon` when a Codex home shared with another machine records a background daemon that is not on this one.
 
 `ak usage` lists the quota and usage of every account the kit can see, one row per account and profile: live for Claude Code subscriptions (5-hour, weekly and per-model windows), Codex ChatGPT logins and Z.AI coding-plan keys; Cursor, Grok, xAI and Azure OpenAI show `n/d` with the reason. It is read-only: it never refreshes a login, never prints a token and never writes under a profile. `--json` gives tools the same list (schema `usage-v1`). The usage endpoints are vendor-internal and unofficial.
 
@@ -48,15 +48,15 @@ For long, interactive lanes, each lane runs in a [Herdr](/kit/herdr) pane on its
 ## Install
 
 ```bash
-git clone --branch v0.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.3 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.5.1`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.5.3`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v0.5.1`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v0.5.3`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |

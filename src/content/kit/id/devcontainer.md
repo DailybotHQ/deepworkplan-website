@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.6.2`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
+Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.6.3`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
 ## Yang disediakan devcontainer-kit
 
@@ -21,15 +21,15 @@ Berikan repositori sebuah dev container yang reproducible dan terisolasi — yan
 ## Instalasi
 
 ```bash
-git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.3.2`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v0.3.5`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.3.2`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v0.3.5`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
@@ -55,7 +55,7 @@ Sejak `v0.2.3`, `dck up` menyambungkan mesh dua arah tanpa langkah manual, di Do
 - **Container dan host.** Agen di dalam container menjangkau agen Herdr di host, di setiap container dck lain, dan di container loopback lain yang sudah dikelola Herdr di host Anda — dan agen-agen itu dapat menjangkau balik. Setiap rekan membawa kunci host yang dipatok; tidak ada yang dipercaya pada penggunaan pertama.
 - **Listener host opsional.** `dck setup` menawarkan, satu kali, server SSH tingkat pengguna di `127.0.0.1` yang hanya menerima kunci dck dan dijaga tetap berjalan oleh launchd (macOS). Jika Anda sudah menjalankan listener loopback, arahkan profil host ke listener tersebut. `dck host listener disable` menghapusnya.
 - **Bertahan setelah rebuild.** Katalog mesin Herdr milik container berada di sebuah volume, sehingga `bash dev.sh rebuild` mempertahankan setiap mesin yang terdaftar di dalamnya. Sejak `v0.3.2`, `rebuild`, `start`, dan `restart` menjalankan langkah yang sama dengan `up`: container didaftarkan lagi ke Herdr milik host, kunci host-nya dipatok ulang, dan mesh-nya didorong, sehingga container yang dibangun dari nol langsung menjangkau host dan peer-nya.
-- **Panel Codex di dalam container.** Dengan `v0.3.2`, agen Codex di dalam container menyetel `HERDR_PEERS_SELF` ke ID mesin container sebagaimana tersimpan di host sebelum bertanya kepada peer di mesin lain: arahan lead menyebutkan ID tersebut, dan rilis kit berikutnya akan menyetelnya sendiri.
+- **Panel Codex di dalam container.** Agen Codex memerlukan `HERDR_PEERS_SELF`, yaitu ID mesin container sebagaimana tersimpan di host, untuk bertanya kepada peer di mesin lain. Sejak `v0.3.3`, kit mencatat ID tersebut pada setiap registrasi dan login shell container mengekspornya, sehingga tidak ada agen yang perlu menyetelnya secara manual; `dck doctor` menandai ketidakcocokan. Sejak `v0.3.4`, konfigurasi Codex milik container sendiri melewati pemeriksaan pembaruan saat startup Codex dan daemon latar belakangnya (kit mem-pin setiap versi CLI), tanpa pernah menyentuh home Codex di host Anda atau profil bersama.
 - **Balasan dari host juga.** `dck setup` memasang [herdr-peers](/kit/herdr) yang terverifikasi di host, sehingga `dck agents` dan `dck ask` berfungsi di sana, dan agen host menjawab dengan `herdr-peers reply`.
 - **Container yang tidak dibuat oleh kit.** Cantumkan kunci publik yang mereka gunakan untuk login di bawah `[ssh] authorized_extra` dalam profil host Anda, dan mereka juga dapat menjangkau container dck.
 
@@ -77,7 +77,18 @@ Dengan `host_profiles` aktif, `dck up` hanya membagikan profil dari CLI yang dii
 - **Codex** melalui file auth-nya, untuk `@default` dan untuk setiap profil.
 - **File env milik kit**, hanya-baca dan dibatasi pada nama-nama di `host_env_keys`.
 
-Seluruh home agentkit tidak pernah di-mount, dan profil yang menyimpan path absolut host akan dilewati. Login Codex yang dibagikan dalam mode baca-tulis dapat diperbarui oleh dua penulis sekaligus: pertahankan satu agen aktif per akun Codex. Di dalam container, `ak <kind> @<profile>` yang sama berjalan pada akun yang sama seperti di host, dan inilah yang memungkinkan lead memberikan kepada lane di container akun-akun yang dipilih `ak pick` — lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+Seluruh home agentkit tidak pernah di-mount, dan profil yang menyimpan path absolut host akan dilewati. Login Codex yang dibagikan dalam mode baca-tulis dapat diperbarui oleh dua penulis sekaligus: pertahankan satu agen aktif per akun Codex. `[agents] default_profile` di profil host (misalnya `{ claude = "@work3" }`) membuat `ak claude` tanpa argumen di dalam container menggunakan akun bersama tersebut (coding-agents-kit ≥ `v0.5.2`); login Claude `@default` di macOS tersimpan di Keychain dan tidak dapat dibagikan. Sejak `v0.3.4`, shell container juga mengarahkan `claude` atau `codex` tanpa argumen ke akun tersebut, sehingga panel yang dipulihkan Herdr terbuka pada akun itu, bukan pada layar login. Di dalam container, `ak <kind> @<profile>` yang sama berjalan pada akun yang sama seperti di host, dan inilah yang memungkinkan lead memberikan kepada lane di container akun-akun yang dipilih `ak pick` — lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+
+## Beberapa repositori, satu stack compose
+
+Sejak `v0.3.3`, repositori yang service-nya merupakan bagian dari proyek compose yang lebih besar (API, aplikasi web, worker, dan database yang berbagi satu proyek) dapat bergabung ke proyek tersebut tanpa mengedit secara manual apa yang di-render oleh dck. Semuanya bersifat aditif: repositori yang tidak menyetel satu pun kunci ini di-render persis seperti sebelumnya.
+
+- **Satu proyek, satu volume state per service.** `[compose] project` menamai proyek bersama di setiap repositori; `state_volume`, `[compose] networks`, dan `[compose] volumes` menjaga state setiap service serta volume data dan network milik stack tetap terpisah.
+- **Blok pengguna.** Baris di antara `# >>> user:<service> >>>` dan `# <<< user:<service> <<<` di dalam service dck dipertahankan apa adanya: kunci biasa untuk hal yang tidak di-render dck (`depends_on`, `healthcheck`), dan `x-dck-merge:` untuk kunci yang di-render-nya. File yang hanya memiliki sebagian penanda dck ditolak beserta cara memperbaikinya, alih-alih ditulis ulang.
+- **String port.** `ssh_port` dan `ports` menerima ekspresi compose seperti `"${API_PORT:-8000}:8000"`; keduanya tetap di `127.0.0.1` kecuali string tersebut menyebutkan IP host.
+- **Build bersama dan launcher Anda sendiri.** `[build] context` dan `[build] dockerfile` mencakup Dockerfile yang dipakai bersama oleh beberapa service; `dev_sh = false` mempertahankan `dev.sh` milik repositori itu sendiri.
+- **Satelit workspace.** Sejak `v0.3.5`, instance kedua dari service di proyek compose-nya sendiri dijalankan dan dihentikan melalui dck (`dck --project P --compose-file F --service S up` atau `down`), sehingga mendapatkan host key, akun, identitas git, dan mesin Herdr yang sama dengan instance utama; `up --seed-state-from VOLUME` hanya menyalin login ke volume state-nya yang masih kosong. Dalam file overlay, `extends` harus menyebutkan file yang diperluasnya.
+- **Node untuk agen.** Node milik agen berada di `/opt/dck/node` dan tidak pernah menggantikan Node milik image; `[agents] node_first = true` menempatkannya di urutan pertama PATH ketika tooling repositori membutuhkannya.
 
 ## Kunci SSH host di dalam container
 

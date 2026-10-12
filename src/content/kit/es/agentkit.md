@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tiene sus propias opciones para continuar una sesión, su propia forma de mantener separada una segunda cuenta, su propio modo sin interfaz y su propio interruptor para omitir las solicitudes de permiso. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** pone una sola superficie de comandos sobre todos ellos: `ak <kind> [@profile]`.
 
-Este addon integra el kit en **DWP v7** (pack `v7.6.2`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
+Este addon integra el kit en **DWP v7** (pack `v7.6.3`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
 
 ## Qué te da el kit
 
@@ -23,7 +23,7 @@ Este addon integra el kit en **DWP v7** (pack `v7.6.2`) como transporte de deleg
 
 ## Cuentas, cuota y elección de cuenta
 
-El kit trata cada inicio de sesión o clave que tienes como una **cuenta**: una CLI × un perfil. `@default` (o `@1`) es el home propio de la CLI; `@2`, `@work` o `@client-x` son sesiones independientes, cada una en su propio directorio bajo la raíz de perfiles, que se ejecutan a la vez. `ak profiles` las enumera con su estado de sesión y los nombres de sus claves; `ak profiles --json` da a las herramientas la misma lista (esquema `profiles-v1`). Desde `v0.5.1` indica dónde está realmente el token de Claude Code —`file`, `keychain` (macOS), `none` o `unknown`— solo por su presencia, sin leer nunca el secreto, y reconoce un inicio de sesión de Cursor en Linux, ya sea en un contenedor o en un host Linux.
+El kit trata cada inicio de sesión o clave que tienes como una **cuenta**: una CLI × un perfil. `@default` (o `@1`) es el home propio de la CLI; `@2`, `@work` o `@client-x` son sesiones independientes, cada una en su propio directorio bajo la raíz de perfiles, que se ejecutan a la vez. `ak profiles` las enumera con su estado de sesión y los nombres de sus claves; `ak profiles --json` da a las herramientas la misma lista (esquema `profiles-v1`). Desde `v0.5.1` indica dónde está realmente el token de Claude Code —`file`, `keychain` (macOS), `none` o `unknown`— solo por su presencia, sin leer nunca el secreto, y reconoce un inicio de sesión de Cursor en Linux, ya sea en un contenedor o en un host Linux. Desde `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` indica la cuenta que usa un `ak <cli>` sin argumentos (un `@profile` posicional sigue teniendo prioridad), y así es como un contenedor de desarrollo elige la cuenta del host que comparte. Desde `v0.5.3`, `ak codex` añade `--no-daemon` cuando un home de Codex compartido con otra máquina registra un daemon en segundo plano que no está en esta.
 
 `ak usage` muestra la cuota y el uso de cada cuenta que el kit puede ver, una fila por cuenta y perfil: en vivo para las suscripciones de Claude Code (ventanas de 5 horas, semanal y por modelo), los inicios de sesión de Codex con ChatGPT y las claves del plan de programación de Z.AI; Cursor, Grok, xAI y Azure OpenAI muestran `n/d` con el motivo. Es de solo lectura: nunca renueva un inicio de sesión, nunca imprime un token y nunca escribe dentro de un perfil. `--json` da a las herramientas la misma lista (esquema `usage-v1`). Los endpoints de uso son internos del proveedor y no oficiales.
 
@@ -48,15 +48,15 @@ Para carriles largos e interactivos, cada carril se ejecuta en un panel de [Herd
 ## Instalación
 
 ```bash
-git clone --branch v0.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.5.3 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v0.5.1`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
+Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v0.5.3`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/coding-agents-kit`, tag `v0.5.1`, interfaz 1 |
+| Producto | `DailybotHQ/coding-agents-kit`, tag `v0.5.3`, interfaz 1 |
 | Clave de registro | `agentkit` en `.dwp/config.json` |
 | Transporte | sin interfaz: un `ak run` por delegado en un worktree de git dedicado |
 | Proporciona | `subagents`, `cancel_children`, `model_routing` |

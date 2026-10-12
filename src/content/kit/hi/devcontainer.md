@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.6.2`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
+रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.6.3`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
 
 ## devcontainer-kit क्या प्रदान करता है
 
@@ -21,15 +21,15 @@ order: 1
 ## इंस्टॉल
 
 ```bash
-git clone --branch v0.3.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.3.2` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v0.3.5` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.3.2`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v0.3.5`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
@@ -55,7 +55,7 @@ State volume (SSH होस्ट कुंजी, `~/.ssh`, `gh` लॉगि�
 - **Container और होस्ट।** भीतर के एजेंट होस्ट पर, हर दूसरे dck container में और उन अन्य loopback containers में मौजूद Herdr एजेंटों तक पहुँचते हैं जिन्हें आपके होस्ट का Herdr पहले से प्रबंधित करता है — और वे भी वापस पहुँचते हैं। हर पीयर एक पिन की हुई होस्ट कुंजी रखता है; पहले उपयोग पर किसी पर भरोसा नहीं किया जाता।
 - **एक वैकल्पिक होस्ट listener।** `dck setup` एक बार, `127.0.0.1` पर एक उपयोगकर्ता-स्तरीय SSH सर्वर प्रस्तावित करता है जो केवल dck कुंजी स्वीकार करता है और जिसे launchd (macOS) चालू रखता है। यदि आप पहले से कोई loopback listener चलाते हैं, तो होस्ट प्रोफ़ाइल को उसी की ओर इंगित करें। `dck host listener disable` उसे हटा देता है।
 - **Rebuild के बाद भी बना रहता है।** Container का Herdr मशीन कैटलॉग एक volume पर रहता है, इसलिए `bash dev.sh rebuild` भीतर पंजीकृत हर मशीन को बनाए रखता है। `v0.3.2` से `rebuild`, `start` और `restart` वही चरण चलाते हैं जो `up` चलाता है: container फिर से होस्ट के Herdr में पंजीकृत होता है, उसकी होस्ट कुंजी फिर से पिन होती है और mesh भेजा जाता है, इसलिए शुरू से बना container तुरंत होस्ट और अपने peers तक पहुँचता है।
-- **Container के अंदर Codex पैन।** `v0.3.2` के साथ, अंदर का Codex एजेंट दूसरी मशीनों के peers से पूछने से पहले `HERDR_PEERS_SELF` को container की उस मशीन id पर सेट करता है जो होस्ट पर सहेजी गई है: लीड का ब्रीफ़ वह id बताता है, और kit की आगे की कोई रिलीज़ इसे स्वयं सेट करेगी।
+- **Container के अंदर Codex पैन।** दूसरी मशीनों के peers से पूछने के लिए Codex एजेंट को `HERDR_PEERS_SELF` चाहिए, यानी container की वह मशीन id जो होस्ट पर सहेजी गई है। `v0.3.3` से kit हर पंजीकरण पर वह id दर्ज करता है और container के login shells उसे export करते हैं, इसलिए किसी एजेंट को उसे हाथ से सेट नहीं करना पड़ता; `dck doctor` किसी बेमेल को चिह्नित करता है। `v0.3.4` से container के अपने Codex configs, Codex की startup अपडेट जाँच और उसके background daemon को छोड़ देते हैं (kit हर CLI का संस्करण पिन करता है), और आपके होस्ट की Codex home या किसी साझा प्रोफ़ाइल को कभी नहीं छूते।
 - **होस्ट से भी जवाब।** `dck setup` होस्ट पर एक सत्यापित [herdr-peers](/kit/herdr) इंस्टॉल करता है, इसलिए `dck agents` और `dck ask` वहाँ भी काम करते हैं, और होस्ट के एजेंट `herdr-peers reply` से उत्तर देते हैं।
 - **वे containers जिन्हें kit ने नहीं बनाया।** वे जिन सार्वजनिक कुंजियों से लॉगिन करते हैं, उन्हें अपनी होस्ट प्रोफ़ाइल में `[ssh] authorized_extra` के अंतर्गत सूचीबद्ध करें, और वे भी dck containers तक पहुँच सकेंगे।
 
@@ -77,7 +77,18 @@ host_env_keys = ["ZAI_CODING_API_KEY"]   # allow-list of env names to share
 - **Codex** अपनी auth फ़ाइल से, `@default` के लिए और हर प्रोफ़ाइल के लिए।
 - **kit की env फ़ाइल**, केवल-पढ़ने योग्य और `host_env_keys` के नामों तक सीमित।
 
-पूरी agentkit home कभी mount नहीं की जाती, और जिन प्रोफ़ाइलों में होस्ट के absolute पथ हैं उन्हें छोड़ दिया जाता है। read-write साझा किया गया Codex लॉगिन एक साथ दो लेखकों द्वारा रीफ़्रेश किया जा सकता है: हर Codex खाते पर एक ही सक्रिय एजेंट रखें। कंटेनर के अंदर, वही `ak <kind> @<profile>` होस्ट वाले खाते पर ही चलता है, और यही एक लीड को कंटेनर लेन को वे खाते सौंपने देता है जिन्हें `ak pick` ने चुना — देखें [कई एजेंट चलाना](/methodology/06-orchestration)।
+पूरी agentkit home कभी mount नहीं की जाती, और जिन प्रोफ़ाइलों में होस्ट के absolute पथ हैं उन्हें छोड़ दिया जाता है। read-write साझा किया गया Codex लॉगिन एक साथ दो लेखकों द्वारा रीफ़्रेश किया जा सकता है: हर Codex खाते पर एक ही सक्रिय एजेंट रखें। होस्ट प्रोफ़ाइल में `[agents] default_profile` (उदाहरण के लिए `{ claude = "@work3" }`) अंदर बिना तर्क वाले `ak claude` से उस साझा खाते का उपयोग करवाता है (coding-agents-kit ≥ `v0.5.2`); macOS पर `@default` Claude लॉगिन Keychain में रहता है और साझा नहीं किया जा सकता। `v0.3.4` से container के shells बिना तर्क वाले `claude` या `codex` को भी उसी खाते की ओर इंगित करते हैं, इसलिए Herdr जिन पैन को बहाल करता है वे लॉगिन स्क्रीन के बजाय उसी खाते पर खुलते हैं। कंटेनर के अंदर, वही `ak <kind> @<profile>` होस्ट वाले खाते पर ही चलता है, और यही एक लीड को कंटेनर लेन को वे खाते सौंपने देता है जिन्हें `ak pick` ने चुना — देखें [कई एजेंट चलाना](/methodology/06-orchestration)।
+
+## कई रिपॉज़िटरी, एक compose stack
+
+`v0.3.3` से, जिस रिपॉज़िटरी की service किसी बड़े compose प्रोजेक्ट का एक हिस्सा है (एक API, एक वेब ऐप, workers और एक डेटाबेस, जो एक ही प्रोजेक्ट साझा करते हैं), वह dck द्वारा render की गई चीज़ों को हाथ से संपादित किए बिना उसमें शामिल हो सकती है। सब कुछ additive है: जो रिपॉज़िटरी इनमें से कोई भी कुंजी सेट नहीं करती, वह ठीक पहले की तरह render होती है।
+
+- **एक प्रोजेक्ट, हर service के लिए एक state volume।** `[compose] project` हर रिपॉज़िटरी में साझा प्रोजेक्ट का नाम देता है; `state_volume`, `[compose] networks` और `[compose] volumes` हर service की स्थिति और stack के डेटा volumes तथा networks को अलग रखते हैं।
+- **एक user ब्लॉक।** dck service के अंदर `# >>> user:<service> >>>` और `# <<< user:<service> <<<` के बीच की पंक्तियाँ ज्यों की त्यों रखी जाती हैं: जिन चीज़ों को dck render नहीं करता उनके लिए सामान्य कुंजियाँ (`depends_on`, `healthcheck`), और जिन कुंजियों को वह render करता है उनके लिए `x-dck-merge:`। जिस फ़ाइल में dck के केवल कुछ markers हों, उसे दोबारा लिखने के बजाय सुधार के तरीके के साथ अस्वीकार कर दिया जाता है।
+- **पोर्ट स्ट्रिंग्स।** `ssh_port` और `ports` `"${API_PORT:-8000}:8000"` जैसे compose expressions स्वीकार करते हैं; जब तक स्ट्रिंग किसी होस्ट IP का नाम न ले, वे `127.0.0.1` पर ही रहते हैं।
+- **साझा builds और आपका अपना launcher।** `[build] context` और `[build] dockerfile` कई services द्वारा साझा किए गए Dockerfile को संभालते हैं; `dev_sh = false` रिपॉज़िटरी की अपनी `dev.sh` को बनाए रखता है।
+- **Workspace satellites।** `v0.3.5` से, अपने ही compose प्रोजेक्ट में service का दूसरा instance dck के ज़रिए शुरू और बंद होता है (`dck --project P --compose-file F --service S up` या `down`), इसलिए उसे मुख्य instance जैसी ही होस्ट कुंजी, खाते, git पहचान और Herdr मशीन मिलती है; `up --seed-state-from VOLUME` केवल लॉगिन को उसके खाली state volume में कॉपी करता है। किसी overlay फ़ाइल में, `extends` को उस फ़ाइल का नाम देना होगा जिसे वह extend करता है।
+- **एजेंटों के लिए Node।** एजेंटों का अपना Node `/opt/dck/node` के नीचे रहता है और image के Node की जगह कभी नहीं लेता; जब रिपॉज़िटरी के tooling को इसकी ज़रूरत हो, तो `[agents] node_first = true` इसे PATH में सबसे पहले रखता है।
 
 ## कंटेनर के अंदर होस्ट की SSH कुंजियाँ
 
