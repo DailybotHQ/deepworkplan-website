@@ -14,11 +14,11 @@ order: 7
 
 ## यह क्या एकीकृत करता है
 
-यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v0.2.3`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
+यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v0.3.0`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/herdr-peers`, tag `v0.2.3`, प्रोटोकॉल 1 |
+| उत्पाद | `DailybotHQ/herdr-peers`, tag `v0.3.0`, प्रोटोकॉल 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `herdr` |
 | ट्रांसपोर्ट | इंटरैक्टिव: Herdr पेन में एक पीयर |
 | प्रदान करता है | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 herdr-peers और Herdr की आधिकारिक skill इंस्टॉल करें, जिस पर यह निर्भर है। जिस भी मशीन के एजेंटों को उत्तर देना है, उस पर भी यह skill होनी चाहिए।
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers प्रेषक को प्रमाणित नहीं क�
 
 ## Container और होस्ट
 
-devcontainer-kit `v0.3.5` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता। herdr-peers `v0.2.3` से हर मशीन अपनी स्थिति अलग रखती है (`$XDG_STATE_HOME/herdr-peers/<server>/`), इसलिए होस्ट और किसी container द्वारा साझा किया गया checkout अब उनके रिकॉर्ड आपस में नहीं मिलाता, और devcontainer-kit (`v0.3.3`) से container `HERDR_PEERS_SELF` को स्वयं export करता है, इसलिए अंदर के Codex एजेंट बिना किसी मैनुअल कदम के दूसरी मशीनों तक पहुँचते हैं।
+devcontainer-kit `v0.3.5` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता। herdr-peers `v0.3.0` से हर मशीन अपनी स्थिति अलग रखती है (`$XDG_STATE_HOME/herdr-peers/<server>/`), इसलिए होस्ट और किसी container द्वारा साझा किया गया checkout अब उनके रिकॉर्ड आपस में नहीं मिलाता, और devcontainer-kit (`v0.3.3`) से container `HERDR_PEERS_SELF` को स्वयं export करता है, इसलिए अंदर के Codex एजेंट बिना किसी मैनुअल कदम के दूसरी मशीनों तक पहुँचते हैं।
 
 ## Herdr या agentkit
 

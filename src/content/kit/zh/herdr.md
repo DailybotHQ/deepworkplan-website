@@ -14,11 +14,11 @@ order: 7
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v0.2.3`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v0.3.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v0.2.3`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v0.3.0`，协议 1 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 容器与主机
 
-借助基于 devcontainer-kit `v0.3.5` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers `v0.2.3` 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。
+借助基于 devcontainer-kit `v0.3.5` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers `v0.3.0` 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。
 
 ## Herdr 还是 agentkit
 

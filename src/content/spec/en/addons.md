@@ -82,7 +82,7 @@ The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 
 ### Herdr (sixth addon)
 
-A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v0.2.3`, protocol `1`), the **interactive** delegation transport of v7 plans.
+A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v0.3.0`, protocol `1`), the **interactive** delegation transport of v7 plans.
 
 - **Kit page:** [Herdr](/kit/herdr)
 - **What it adds:** a plan can hand a bounded task to a coding agent in another [Herdr](https://herdr.dev) pane, on the same machine or one Herdr reaches over SSH, and record its single authorized reply in the journal
@@ -100,7 +100,7 @@ A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkpl
 
 ### Agentkit (eighth addon)
 
-A thin integrator of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v0.5.3`, interface `1`), the **headless** delegation transport of v7 plans.
+A thin integrator of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v0.6.0`, interface `1`), the **headless** delegation transport of v7 plans.
 
 - **Kit page:** [Agentkit](/kit/agentkit)
 - **What it adds:** one `ak` command surface over terminal coding agents, used to run a bounded plan task headlessly; it contributes the `subagents`, `cancel_children`, and `model_routing` abilities only at runtime, when enabled, detected, and on a compatible interface

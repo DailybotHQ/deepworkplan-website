@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr(여섯 번째 애드온)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v0.2.3`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v0.3.0`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Herdr](/kit/herdr)
 - **추가하는 것:** 계획이 경계가 정해진 작업을 같은 머신 또는 Herdr가 SSH로 도달하는 머신의 다른 [Herdr](https://herdr.dev) 페인에 있는 코딩 에이전트에게 넘기고, 승인된 단일 응답을 저널에 기록할 수 있음
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit(여덟 번째 애드온)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v0.5.3`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v0.6.0`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Agentkit](/kit/agentkit)
 - **추가하는 것:** 터미널 코딩 에이전트 위에 놓인 하나의 `ak` 명령 표면으로, 경계가 정해진 계획 작업을 헤드리스로 실행하는 데 사용됨; `subagents`, `cancel_children`, `model_routing` 능력은 런타임에, 활성화되고 감지되었으며 호환되는 인터페이스일 때만 제공함

@@ -82,7 +82,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Herdr (छठा ऐडऑन)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v0.2.3`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v0.3.0`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Herdr](/kit/herdr)
 - **क्या जोड़ता है:** एक योजना किसी सीमित कार्य को दूसरे [Herdr](https://herdr.dev) पेन में किसी कोडिंग एजेंट को सौंप सकती है, उसी मशीन पर या ऐसी मशीन पर जिस तक Herdr SSH से पहुँचता है, और उसका एकमात्र अधिकृत उत्तर जर्नल में दर्ज कर सकती है
@@ -100,7 +100,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Agentkit (आठवाँ ऐडऑन)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, पिन `v0.5.3`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, पिन `v0.6.0`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Agentkit](/kit/agentkit)
 - **क्या जोड़ता है:** टर्मिनल कोडिंग एजेंटों पर एक `ak` कमांड सतह, जिसका उपयोग किसी सीमित योजना कार्य को हेडलेस चलाने के लिए होता है; यह `subagents`, `cancel_children` और `model_routing` क्षमताएँ केवल रनटाइम पर देता है, जब यह सक्षम हो, पहचाना गया हो और संगत इंटरफ़ेस पर हो

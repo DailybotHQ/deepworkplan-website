@@ -48,15 +48,15 @@ Skill `agentkit-orchestrate` (`ak --skill orchestrate`) учит агента р
 ## Установка
 
 ```bash
-git clone --branch v0.5.3 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.6.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Требования: `bash` на macOS или Linux и `python3` 3.9 или новее; больше ничего. Windows использует `install.ps1`. Закрепите `v0.5.3`: `v0.2.0` и `v0.2.1` не поддерживаются. Проверьте релиз по его ресурсу `SHA256SUMS`.
+Требования: `bash` на macOS или Linux и `python3` 3.9 или новее; больше ничего. Windows использует `install.ps1`. Закрепите `v0.6.0`: `v0.2.0` и `v0.2.1` не поддерживаются. Проверьте релиз по его ресурсу `SHA256SUMS`.
 
 | Элемент | Значение |
 |---|---|
-| Продукт | `DailybotHQ/coding-agents-kit`, тег `v0.5.3`, интерфейс 1 |
+| Продукт | `DailybotHQ/coding-agents-kit`, тег `v0.6.0`, интерфейс 1 |
 | Ключ реестра | `agentkit` в `.dwp/config.json` |
 | Транспорт | headless: один `ak run` на делегата в отдельном git worktree |
 | Предоставляет | `subagents`, `cancel_children`, `model_routing` |
