@@ -14,11 +14,11 @@ It is an optional addon of **DWP v7** (`v7.0.0`). The methodology works the same
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v0.2.1`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v0.2.2`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v0.2.1`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v0.2.2`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers does not authenticate the sender: the `from=` field in a stamp is a 
 
 ## Containers and the host
 
-With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v0.3.0`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them.
+With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v0.3.1`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them.
 
 ## Herdr or agentkit
 
@@ -68,6 +68,8 @@ Both addons implement the same delegation interface — `launch`, `observe`, `co
 | The task needs interaction, runs long, or lives on another machine | Herdr (a peer in a pane) |
 
 For a lead running many lanes at once — panes on the host, in containers and on other machines, each on its own account — `herdr-peers lanes` lists every lane with its state, `herdr-peers status <pane>` classifies the screen a blocked lane is on, and every delegation record names the account and vendor that carried it. See [Running many agents](/methodology/06-orchestration).
+
+**Codex lanes name their pane.** Codex runs a lane's commands from a background server shared by every session on that account, so the pane id it inherits can belong to another lane. A Codex lane passes its own pane, from the lead's brief, with `--pane <pane>` on every herdr-peers verb (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 ## Notes
 

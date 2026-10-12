@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (addon แรก)
 
-ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.3.0` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
+ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.3.1` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
 
 - **หน้า kit:** [Devcontainer](/kit/devcontainer)
 - **สิ่งที่เพิ่ม:** `docker/local/<service>/Dockerfile` จากอิมเมจทางการของรันไทม์ที่ตรึงด้วย digest (`python-3.13` `node-24` หรือ `debian` ไม่มีอิมเมจพื้นฐานที่ใช้ร่วมกัน) `dev.sh` ที่ทำงานบนตัวเรียกใช้ `dck` (`up`, `shell`, `rebuild`, `doctor`) เอเจนต์เขียนโค้ดเป็นเลเยอร์แบบ opt-in พอร์ตเฉพาะ loopback git ผ่าน SSH โดยใช้ agent ของโฮสต์โดยไม่มีคีย์อยู่ภายใน และเครื่อง Herdr ต่อคอนเทนเนอร์พร้อมเลย์เอาต์มาตรฐาน
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr (addon ที่หก)
 
-ตัวผสานรวมแบบบางของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ปักหมุดที่ `v0.2.1`, protocol `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **โต้ตอบ** ของแผน v7
+ตัวผสานรวมแบบบางของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ปักหมุดที่ `v0.2.2`, protocol `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **โต้ตอบ** ของแผน v7
 
 - **หน้า kit:** [Herdr](/kit/herdr)
 - **สิ่งที่เพิ่ม:** แผนสามารถส่งงานที่มีขอบเขตให้ coding agent ใน pane อื่นของ [Herdr](https://herdr.dev) บนเครื่องเดียวกันหรือเครื่องที่ Herdr เข้าถึงผ่าน SSH และบันทึกการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียวลงใน journal

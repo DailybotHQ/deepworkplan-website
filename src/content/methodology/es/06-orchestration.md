@@ -67,6 +67,7 @@ Los carriles y el líder se comunican mediante [herdr-peers](/es/kit/herdr): una
 - **Profundidad uno.** Una respuesta nunca se contesta, y un carril no delega más allá. El abanico por llamante está limitado, a cuatro pares por defecto.
 - **Datos, no instrucciones.** Una respuesta no concede nada que el receptor no tuviera ya. La afirmación de un carril de que su puerta de validación pasó se comprueba ejecutando esa puerta.
 - **Un registro de quién hizo qué.** Cada registro de delegación nombra la cuenta y el proveedor del carril, de modo que el plan padre muestra qué cuenta llevó qué trabajo.
+- **Los lanes de Codex nombran su panel.** Codex ejecuta los comandos de un lane desde un servidor en segundo plano compartido por todas las sesiones de esa cuenta, así que el id de panel que hereda puede ser de otro lane. Un lane de Codex pasa su propio panel, tomado del encargo del líder, con `--pane <pane>` en cada verbo de herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 El líder puede ver toda la orquesta a la vez: `herdr-peers lanes` enumera cada carril con su estado, y [DeepWorkPlan Vim](/es/kit/vim) muestra los carriles de un plan orquestador junto al propio plan (`:DwpLanes`).
 

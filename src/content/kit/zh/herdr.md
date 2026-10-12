@@ -14,11 +14,11 @@ order: 7
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v0.2.1`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v0.2.2`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v0.2.1`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v0.2.2`，协议 1 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 容器与主机
 
-借助基于 devcontainer-kit `v0.3.0` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。
+借助基于 devcontainer-kit `v0.3.1` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。
 
 ## Herdr 还是 agentkit
 
@@ -68,6 +68,8 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 | 任务需要交互、运行时间长，或位于另一台机器上 | Herdr（窗格中的一个对等方） |
 
 如果主导者要同时运行多条通道——位于主机、容器和其他机器上的窗格，各自使用自己的账户——`herdr-peers lanes` 会列出每条通道及其状态，`herdr-peers status <pane>` 会对受阻通道所停留的界面进行分类，而每条委派记录都会写明承担该工作的账户和厂商。参见[运行多个代理](/methodology/06-orchestration)。
+
+**Codex 通道要指明自己的窗格。** Codex 通过同一账户所有会话共享的后台服务器运行通道的命令，因此它继承的窗格 id 可能属于另一个通道。Codex 通道在每个 herdr-peers 命令（`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`）上用 `--pane <pane>` 传入主导者任务说明中给出的自身窗格。
 
 ## 备注
 

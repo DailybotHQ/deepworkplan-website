@@ -31,7 +31,7 @@ Huit addons sont actifs aujourd’hui — sept opt-in plus la revue locale requi
 
 ### Devcontainer (premier addon)
 
-Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.3.0`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
+Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v0.3.1`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
 
 - **Page kit :** [Devcontainer](/kit/devcontainer)
 - **Ce qu'il ajoute :** `docker/local/<service>/Dockerfile` à partir de l'image officielle du runtime épinglée par digest (`python-3.13`, `node-24` ou `debian`, sans image de base partagée), `dev.sh` au-dessus du lanceur `dck` (`up`, `shell`, `rebuild`, `doctor`), les agents de code comme couche optionnelle, des ports limités au loopback, git via SSH à travers l'agent de l'hôte sans aucune clé à l'intérieur, et des machines Herdr par conteneur avec la disposition standard
@@ -82,7 +82,7 @@ L’**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 
 ### Herdr (sixième addon)
 
-Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v0.2.1`, protocole `1`), le transport de délégation **interactif** des plans v7.
+Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v0.2.2`, protocole `1`), le transport de délégation **interactif** des plans v7.
 
 - **Page kit :** [Herdr](/kit/herdr)
 - **Ce qu'il ajoute :** un plan peut confier une tâche bornée à un agent de code dans un autre panneau [Herdr](https://herdr.dev), sur la même machine ou sur une machine que Herdr atteint via SSH, et enregistrer son unique réponse autorisée dans le journal

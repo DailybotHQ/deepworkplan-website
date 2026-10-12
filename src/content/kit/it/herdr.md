@@ -14,11 +14,11 @@ order: 7
 
 ## Cosa integra
 
-L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v0.2.1`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
+L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v0.2.2`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/herdr-peers`, tag `v0.2.1`, protocollo 1 |
+| Prodotto | `DailybotHQ/herdr-peers`, tag `v0.2.2`, protocollo 1 |
 | Chiave di registro | `herdr` in `.dwp/config.json` |
 | Trasporto | interattivo: un peer in un pannello Herdr |
 | Fornisce | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](http
 Installa herdr-peers e la skill ufficiale di Herdr, da cui dipende. Ogni macchina i cui agenti devono rispondere ha bisogno anch’essa della skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers non autentica il mittente: il campo `from=` di un timbro è un’aff
 
 ## Container e host
 
-Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v0.3.0`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai.
+Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v0.3.1`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai.
 
 ## Herdr o agentkit
 
@@ -68,6 +68,8 @@ Entrambi gli addon implementano la stessa interfaccia di delega — `launch`, `o
 | Il task richiede interazione, dura a lungo o si trova su un’altra macchina | Herdr (un peer in un pannello) |
 
 Per un lead che esegue molte corsie insieme — pannelli sull’host, nei container e su altre macchine, ciascuno sul proprio account — `herdr-peers lanes` elenca ogni corsia con il suo stato, `herdr-peers status <pane>` classifica la schermata in cui si trova una corsia bloccata, e ogni record di delega indica l’account e il fornitore che l’hanno svolta. Vedi [Eseguire molti agenti](/methodology/06-orchestration).
+
+**Le lane Codex indicano il proprio pannello.** Codex esegue i comandi di una lane da un server in background condiviso da tutte le sessioni di quell’account, quindi l’id di pannello ereditato può appartenere a un’altra lane. Una lane Codex passa il proprio pannello, indicato nel brief del lead, con `--pane <pane>` su ogni verbo di herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 ## Note
 

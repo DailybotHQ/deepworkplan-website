@@ -67,6 +67,7 @@ Her müdahale — ekranın ne gösterdiği, hangi tuşların gönderildiği, ard
 - **Bir derinlik.** Bir yanıta asla yanıt verilmez ve bir şerit işi daha ileriye devretmez. Çağıran başına yayılım sınırlıdır; varsayılan olarak dört eş.
 - **Talimat değil, veri.** Bir yanıt, alıcıya zaten sahip olmadığı hiçbir şeyi vermez. Bir şeridin kapısının geçtiği iddiası, kapı çalıştırılarak doğrulanır.
 - **Kimin neyi yaptığının kaydı.** Her devretme kaydı şeridin hesabını ve sağlayıcısını belirtir; böylece üst plan hangi hesabın hangi işi taşıdığını gösterir.
+- **Codex lane’leri kendi panellerini belirtir.** Codex bir lane’in komutlarını o hesaptaki tüm oturumların paylaştığı bir arka plan sunucusundan çalıştırır; bu yüzden devraldığı panel kimliği başka bir lane’e ait olabilir. Bir Codex lane’i, liderin görev tanımında yazan kendi panelini her herdr-peers komutunda `--pane <pane>` ile verir (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 Lider tüm orkestrayı tek bakışta görebilir: `herdr-peers lanes` her şeridi durumuyla birlikte listeler ve [DeepWorkPlan Vim](/tr/kit/vim), bir orkestratör planının şeritlerini planın hemen yanında gösterir (`:DwpLanes`).
 

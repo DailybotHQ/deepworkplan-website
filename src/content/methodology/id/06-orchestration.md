@@ -67,6 +67,7 @@ Lane dan lead berkomunikasi melalui [herdr-peers](/id/kit/herdr): sebuah **ask**
 - **Kedalaman satu.** Sebuah reply tidak pernah dijawab, dan lane tidak mendelegasikan lebih jauh. Fan-out per pemanggil dibatasi, empat rekan secara default.
 - **Data, bukan instruksi.** Sebuah reply tidak memberikan apa pun yang belum dimiliki penerimanya. Klaim sebuah lane bahwa gate-nya lulus diperiksa dengan menjalankan gate tersebut.
 - **Catatan tentang siapa melakukan apa.** Setiap catatan delegasi menyebut akun dan vendor lane tersebut, sehingga rencana induk menunjukkan akun mana yang mengerjakan pekerjaan mana.
+- **Lane Codex menyebut panelnya sendiri.** Codex menjalankan perintah sebuah lane dari server latar yang dipakai bersama oleh semua sesi pada akun itu, sehingga id panel yang diwarisinya bisa milik lane lain. Lane Codex meneruskan panelnya sendiri, dari arahan lead, dengan `--pane <pane>` pada setiap perintah herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 Lead dapat melihat seluruh orkestra sekaligus: `herdr-peers lanes` mencantumkan setiap lane beserta statusnya, dan [DeepWorkPlan Vim](/id/kit/vim) menampilkan lane dari sebuah rencana orkestrator di samping rencana itu sendiri (`:DwpLanes`).
 

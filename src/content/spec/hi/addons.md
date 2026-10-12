@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (पहला ऐडऑन)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.3.0` पर पिन किया गया, इंटरफ़ेस `2`) का एक हल्का इंटीग्रेटर: एक Dev Containers टेम्पलेट जिसे `dck init` रिपॉज़िटरी में उसके अपने कंटेनर के रूप में रेंडर करता है, साथ में `dck-dockerfile` स्किल।
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.3.1` पर पिन किया गया, इंटरफ़ेस `2`) का एक हल्का इंटीग्रेटर: एक Dev Containers टेम्पलेट जिसे `dck init` रिपॉज़िटरी में उसके अपने कंटेनर के रूप में रेंडर करता है, साथ में `dck-dockerfile` स्किल।
 
 - **Kit पृष्ठ:** [Devcontainer](/kit/devcontainer)
 - **क्या जोड़ता है:** digest द्वारा पिन की गई रनटाइम की आधिकारिक इमेज से बना `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` या `debian`, कोई साझा बेस इमेज नहीं), `dck` लॉन्चर (`up`, `shell`, `rebuild`, `doctor`) के ऊपर `dev.sh`, एक ऑप्ट-इन परत के रूप में कोडिंग एजेंट, केवल loopback पोर्ट, होस्ट के एजेंट के माध्यम से SSH पर git जिसमें अंदर कोई कुंजी नहीं होती, और मानक लेआउट के साथ प्रति कंटेनर Herdr मशीनें
@@ -82,7 +82,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Herdr (छठा ऐडऑन)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v0.2.1`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v0.2.2`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Herdr](/kit/herdr)
 - **क्या जोड़ता है:** एक योजना किसी सीमित कार्य को दूसरे [Herdr](https://herdr.dev) पेन में किसी कोडिंग एजेंट को सौंप सकती है, उसी मशीन पर या ऐसी मशीन पर जिस तक Herdr SSH से पहुँचता है, और उसका एकमात्र अधिकृत उत्तर जर्नल में दर्ज कर सकती है

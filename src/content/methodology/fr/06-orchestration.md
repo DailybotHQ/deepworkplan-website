@@ -67,6 +67,7 @@ Les couloirs et le coordinateur communiquent via [herdr-peers](/fr/kit/herdr) : 
 - **Profondeur un.** On ne répond jamais à une réponse, et un couloir ne délègue pas plus loin. Le fan-out par appelant est plafonné, à quatre pairs par défaut.
 - **Des données, pas des instructions.** Une réponse n’accorde rien que le destinataire n’avait déjà. L’affirmation d’un couloir selon laquelle sa porte de validation est passée se vérifie en exécutant cette porte.
 - **Une trace de qui a fait quoi.** Chaque enregistrement de délégation nomme le compte et le fournisseur du couloir, si bien que le plan parent montre quel compte a porté quel travail.
+- **Les lanes Codex nomment leur panneau.** Codex exécute les commandes d’une lane depuis un serveur d’arrière-plan partagé par toutes les sessions de ce compte : l’identifiant de panneau hérité peut donc appartenir à une autre lane. Une lane Codex passe son propre panneau, indiqué dans la consigne du lead, avec `--pane <pane>` sur chaque verbe de herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 Le coordinateur peut voir tout l’orchestre d’un coup d’œil : `herdr-peers lanes` liste chaque couloir avec son état, et [DeepWorkPlan Vim](/fr/kit/vim) affiche les couloirs d’un plan orchestrateur à côté du plan lui-même (`:DwpLanes`).
 

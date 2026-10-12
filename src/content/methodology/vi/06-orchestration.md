@@ -67,6 +67,7 @@ Các lane và lead trao đổi qua [herdr-peers](/vi/kit/herdr): một **ask** m
 - **Độ sâu một.** Một reply không bao giờ được trả lời lại, và một lane không ủy thác tiếp. Số nhánh tỏa ra cho mỗi bên gọi bị giới hạn, mặc định là bốn peer.
 - **Dữ liệu, không phải chỉ thị.** Một reply không cấp thêm điều gì mà bên nhận chưa có. Lời khẳng định của một lane rằng cổng kiểm chứng đã đạt được kiểm tra bằng cách chạy cổng đó.
 - **Bản ghi ai đã làm gì.** Mỗi bản ghi ủy thác nêu tài khoản và nhà cung cấp của lane, nên kế hoạch cha cho thấy tài khoản nào đã đảm nhận công việc nào.
+- **Lane Codex tự nêu pane của mình.** Codex chạy lệnh của một lane từ một máy chủ nền dùng chung cho mọi phiên của tài khoản đó, nên id pane mà nó kế thừa có thể thuộc về lane khác. Một lane Codex truyền pane của chính nó, lấy từ chỉ dẫn của lead, bằng `--pane <pane>` trên mọi lệnh herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
 
 Lead có thể nhìn thấy toàn bộ dàn nhạc cùng lúc: `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, và [DeepWorkPlan Vim](/vi/kit/vim) hiển thị các lane của một kế hoạch điều phối ngay cạnh chính kế hoạch đó (`:DwpLanes`).
 
