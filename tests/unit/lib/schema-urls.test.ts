@@ -99,25 +99,30 @@ describe('canonical schema URL publication', () => {
   });
 
   it('publishes every schema version the vendored DWP skill carries, byte-identical', () => {
-    // The vendored skill names its files plan-manifest.schema.json (v1),
-    // plan-manifest-v2.schema.json (v2), plan-manifest-v5.schema.json (v5), etc.
-    const versionOf = (fileName: string): string | null => {
-      const match = fileName.match(
-        /^plan-(manifest|state)(?:-v(\d+))?\.schema\.json$/
-      );
+    // The vendored skill names its files <label>.schema.json (v1, e.g.
+    // plan-manifest.schema.json), <label>-v<N>.schema.json (plan-manifest-v5)
+    // and, for some v1 schemas, <label>-v1.schema.json (dwp-config-v1). Every
+    // file is checked: a published copy that lags the vendored one is drift.
+    const parse = (
+      fileName: string
+    ): { label: string; version: string } | null => {
+      const match = fileName.match(/^([a-z-]+?)(?:-v(\d+))?\.schema\.json$/);
       if (!match) return null;
-      return `v${match[2] ?? '1'}`;
+      return { label: match[1], version: `v${match[2] ?? '1'}` };
     };
 
     const mismatches: string[] = [];
     const checked: string[] = [];
+    const schemaFiles = readdirSync(VENDORED_SKILL_SCHEMA_DIR).filter((f) =>
+      f.endsWith('.schema.json')
+    );
+    let parsedCount = 0;
 
-    for (const fileName of readdirSync(VENDORED_SKILL_SCHEMA_DIR)) {
-      const version = versionOf(fileName);
-      if (!version) continue;
-      const label = fileName.startsWith('plan-manifest')
-        ? 'plan-manifest'
-        : 'plan-state';
+    for (const fileName of schemaFiles) {
+      const parsed = parse(fileName);
+      if (!parsed) continue;
+      parsedCount++;
+      const { label, version } = parsed;
       const vendored = join(VENDORED_SKILL_SCHEMA_DIR, fileName);
       const published = join(PUBLIC_SCHEMA_DIR, label, `${version}.json`);
       if (!existsSync(published)) {
@@ -132,6 +137,10 @@ describe('canonical schema URL publication', () => {
       }
     }
 
+    // No vendored schema file may be skipped silently by the name parser.
+    expect(parsedCount).toBe(schemaFiles.length);
+    expect(checked).toContain('dwp-config/v1');
+    expect(checked).toContain('learnings-record/v1');
     expect(checked).toContain('plan-manifest/v1');
     expect(checked).toContain('plan-state/v1');
     expect(checked).toContain('plan-manifest/v2');
