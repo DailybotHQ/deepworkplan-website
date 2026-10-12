@@ -82,7 +82,7 @@ Der **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Mark
 
 ### Herdr (sechstes Addon)
 
-Ein schlanker Integrator von [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixiert auf `v0.3.1`, Protokoll `1`), der **interaktive** Delegationstransport von v7-Plänen.
+Ein schlanker Integrator von [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixiert auf `v0.3.2`, Protokoll `1`), der **interaktive** Delegationstransport von v7-Plänen.
 
 - **Kit-Seite:** [Herdr](/kit/herdr)
 - **Was es hinzufügt:** Ein Plan kann eine begrenzte Aufgabe an einen Coding-Agenten in einem anderen [Herdr](https://herdr.dev)-Pane übergeben, auf derselben Maschine oder auf einer, die Herdr per SSH erreicht, und dessen einzige autorisierte Antwort im Journal aufzeichnen

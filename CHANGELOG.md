@@ -17,7 +17,7 @@ existing GitHub release notes.
 
 ### Changed
 
-- chore: move the ecosystem pins to coding-agents-kit v0.6.1 and herdr-peers v0.3.1 (tags and SHA256SUMS digests on every install surface)
+- chore: vendor DWP pack v7.7.0 (swarm autonomy) and move the ecosystem pins to it, coding-agents-kit v0.6.1 and herdr-peers v0.3.2 (tags and SHA256SUMS digests on every install surface); the spec reader, chapter 7 and `/kit/herdr` carry the release's drill learnings (claim before launch, lane-owned leases, never poll, edge-case inputs and sentinel output checks, repository-qualified plan ids)
 - docs: AGENTS.md working principles — decide and record routine choices, escalate only the critical classes C1–C7
 
 ### Fixed

@@ -14,11 +14,11 @@ order: 7
 
 ## สิ่งที่ผสานรวมเข้ามา
 
-แอดออนนี้เป็นเพียงตัวเชื่อมบาง ๆ งานจริงทำโดย **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** ซึ่งเป็น skill แบบ MIT ที่แยกเป็นอิสระ ตรึงไว้ที่ **`v0.3.1`** และใช้งานได้แม้ไม่มี Deep Work Plan มันกำหนดสิ่งที่ Herdr เองเปิดทิ้งไว้ ได้แก่ ใครมีสิทธิ์ตอบ คำตอบเดินทางกลับข้ามเครื่องได้อย่างไร เอเจนต์สองตัวจะหลีกเลี่ยงการตอบกันไปมาไม่รู้จบได้อย่างไร และบันทึกว่า "ฉันถามแล้ว มันตอบแล้ว" เก็บไว้ที่ใด
+แอดออนนี้เป็นเพียงตัวเชื่อมบาง ๆ งานจริงทำโดย **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** ซึ่งเป็น skill แบบ MIT ที่แยกเป็นอิสระ ตรึงไว้ที่ **`v0.3.2`** และใช้งานได้แม้ไม่มี Deep Work Plan มันกำหนดสิ่งที่ Herdr เองเปิดทิ้งไว้ ได้แก่ ใครมีสิทธิ์ตอบ คำตอบเดินทางกลับข้ามเครื่องได้อย่างไร เอเจนต์สองตัวจะหลีกเลี่ยงการตอบกันไปมาไม่รู้จบได้อย่างไร และบันทึกว่า "ฉันถามแล้ว มันตอบแล้ว" เก็บไว้ที่ใด
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/herdr-peers` แท็ก `v0.3.1` โปรโตคอล 1 |
+| ผลิตภัณฑ์ | `DailybotHQ/herdr-peers` แท็ก `v0.3.2` โปรโตคอล 1 |
 | คีย์ใน registry | `herdr` ใน `.dwp/config.json` |
 | ช่องทางการส่ง | แบบโต้ตอบ: peer ใน pane ของ Herdr |
 | สิ่งที่มอบให้ | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 ติดตั้ง herdr-peers และ skill ทางการของ Herdr ที่มันต้องพึ่งพา ทุกเครื่องที่ต้องการให้เอเจนต์ของตนตอบได้ก็ต้องมี skill นี้ด้วย
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ herdr-peers ไม่ได้ยืนยันตัวตนของผู�
 
 ## notice และความเป็นผู้นำ
 
-herdr-peers `v0.3.1` เพิ่มสิ่งที่ทำให้ swarm อยู่ได้นานกว่า lead ของมัน ([ความเป็นอิสระของ swarm](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` เพิ่มสิ่งที่ทำให้ swarm อยู่ได้นานกว่า lead ของมัน ([ความเป็นอิสระของ swarm](/methodology/07-swarm-autonomy)):
 
 - **notice** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` ส่งข้อความทางเดียวที่มีตราประทับ `reply=no` คำสั่ง `check` ของผู้รับจำแนกมันเป็น notice บันทึกไว้เป็นข้อมูล และไม่ตอบกลับเลย notice ไม่ใช้ช่อง fan-out และส่งได้แม้ขณะที่ ask ยังเปิดอยู่ ใช้สำหรับประกาศ handoff การเปลี่ยน lead และการประกาศรีลีส
-- **บันทึก lead หนึ่งรายการต่อแผน** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` ทำให้เอเจนต์หนึ่งตัวเป็น lead ของแผนหนึ่งแผน `lead show` พิมพ์บันทึกนั้น (schema `herdr-peers/lead-v1`: แผน lead epoch ลำดับการสืบทอด lane และเวลาที่อัปเดต) `lead handover <addr> --plan <P>` ส่งต่อความเป็นผู้นำ `lead takeover --plan <P>` ให้ผู้แทนรายแรกที่ติดต่อได้รับตำแหน่งไปเมื่อ lead หายไป และ `lead release --plan <P>` ยุติตำแหน่งนั้น ทุกการเปลี่ยนแปลงเพิ่มค่า epoch และแจ้งทุก lane
+- **บันทึก lead หนึ่งรายการต่อแผน** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` ทำให้เอเจนต์หนึ่งตัวเป็น lead ของแผนหนึ่งแผน `lead show` พิมพ์บันทึกนั้น (schema `herdr-peers/lead-v1`: แผน lead epoch ลำดับการสืบทอด lane และเวลาที่อัปเดต) `lead handover <addr> --plan <P>` ส่งต่อความเป็นผู้นำ `lead takeover --plan <P>` ให้ผู้แทนรายแรกที่ติดต่อได้รับตำแหน่งไปเมื่อ lead หายไป และ `lead release --plan <P>` ยุติตำแหน่งนั้น ทุกการเปลี่ยนแปลงเพิ่มค่า epoch และแจ้งทุก lane ให้ claim แผนก่อนเปิด lane ของแผน: `lead` จะ resolve ได้ก็ต่อเมื่อมีบันทึกอยู่แล้ว ตั้งแต่ `v0.3.2` บันทึกจะเก็บ repository ที่ claim ไว้ในเครื่อง และปฏิเสธการ claim แผน id เดียวกันจาก repository อื่น ให้ระบุแผนนั้นเป็น `--plan <repo>/<id>`
 - **fencing** lane ยอมรับ notice จาก lead เฉพาะจากเอเจนต์ที่มอบงานให้มัน (claim ครั้งแรก) จาก lead ปัจจุบันที่ epoch ถัดไป (handover) หรือจากรายการแรกที่ติดต่อได้ในลำดับการสืบทอดที่ epoch ถัดไป (takeover) นอกเหนือจากนี้จะถูกบันทึกและเพิกเฉย และ lead ที่กลับมาแล้วเห็น epoch ที่สูงกว่าจะลงจากตำแหน่ง
 - **ที่อยู่ `lead`** `ask lead …` และ `notify lead …` ชี้ไปยัง lead ปัจจุบันของ `--plan` (หรือ `$DWP_PLAN` หากไม่ระบุ) จึงไม่มีคำสั่งงานของ lane ใดฝังที่อยู่ pane ของ lead ไว้ตายตัว
 - **หน้าจอ `usage_limit`** `status` และ `lanes` รู้จักข้อความแจ้งขีดจำกัดการใช้งานของ CLI ว่าเป็นหน้าจอคลาส `usage_limit` ซึ่งขั้นตอนถัดไปคือ handoff และไม่กดแป้นตอบเด็ดขาด `lanes --json` เพิ่มแผน lead ของแผน epoch และความจุล่าสุดที่แต่ละ lane รายงาน

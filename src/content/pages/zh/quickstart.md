@@ -38,10 +38,10 @@ lastUpdated: 2026-10-11
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- git checkout v7.6.3
+ git checkout v7.7.0
  # 下载该发布版本的校验和，并与下方的摘要比对：
  curl -fsSL -o SHA256SUMS \
- https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.3/SHA256SUMS
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.7.0/SHA256SUMS
  shasum -a 256 SHA256SUMS # 必须等于“锁定的发布版本”中 deepworkplan-skill 的摘要
  ./setup.sh --verify # 非零退出码表示某个文件不匹配——停止操作
  ```
@@ -52,9 +52,9 @@ lastUpdated: 2026-10-11
 
   | 仓库（github.com/DailybotHQ） | 标签 | 其 `SHA256SUMS` 的 sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.6.3` | `ddb486549780a47688c20aa763a55fc090bbf76bf11a4767f1827f3c2266e332` |
+  | deepworkplan-skill | `v7.7.0` | `db4a6690c2af44060f63a71e79fa971d9eb909603973cba2e9368a67d3779947` |
   | coding-agents-kit | `v0.6.1` | `1f9c8beb6d8ae100ba3a154aae3866693a36efe30a4f9c8b0bce647e6fe2b487` |
-  | herdr-peers | `v0.3.1` | `47fbb519a263e8fa828c9f173be6642243f2d0860e1af8287a0ad9d9a5794f99` |
+  | herdr-peers | `v0.3.2` | `8a8112ee216598d85b4b3ef335c1beab3b02a258230b31aa9221cd3b6cd889a5` |
   | devcontainer-kit | `v0.3.5` | `efee9464a24ef78d50c8a470ace8afa4d75bb9aafd845e659839ab40e7ab69ee` |
   | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
   | ai-diff-reviewer | `v3.3.11` | `d384c1fffc710e46b5a06d85c5366dfdfd612bebd67526c8647838714b089cf6` |
@@ -97,7 +97,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.0 --skill deepworkplan -y
 ```
 
 或通过 OpenClaw 安装：
@@ -118,7 +118,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 当前技能包包含路由器和九个子技能：`create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author` 和 `upgrade`。
 
-已安装的技能版本：**7.6.3**。当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
+已安装的技能版本：**7.7.0**。当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
 
 该标准刻意保持比例性，并将这种比例性变成计划本身的属性，而不是开发者自律的
 结果。一份计划要么是 **Lite**——任务记录以内联形式存放在计划的 README
@@ -216,7 +216,7 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 | AI Diff Reviewer（必备） | `.agents/skills/ai-diff-reviewer/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.14 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | 已安装的 herdr-peers 技能中的 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g --force -y` |
+| Herdr | 已安装的 herdr-peers 技能中的 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | 位于 https://deepworkplan.com/vim/install.sh 的经校验安装器（锁定 `v0.7.0`；下载后执行 `shasum -a 256 -c install.sh.sha256`，再运行） |
 
@@ -234,7 +234,7 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
  （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
  （检测到时受到强烈推荐；安装以明确接受为前提）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
 - **agentkit** —— [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，锁定 `v0.6.1`）的机器级安装：一条命令驱动所有编码代理，每个配置档一个账户，用 `ak usage` 与 `ak pick` 选出余量最多的账户，并以无头方式运行 `ak run`，面向把有边界的 `parallel_safe` 任务交给其他编码代理的计划（每个 worktree 一个受托代理）。该工具包默认以自主模式启动代理，其退出选项（`--ask` 或 `AGENTKIT_PERMISSIONS=ask`）始终优先。
-- **Herdr** —— [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（锁定 `v0.3.1`，外加 Herdr 的官方技能）的机器级安装，面向在任意机器上向 Herdr 窗格中的对等代理请求一条获授权回复的计划，也面向关注其各条通道的主导者。
+- **Herdr** —— [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（锁定 `v0.3.2`，外加 Herdr 的官方技能）的机器级安装，面向在任意机器上向 Herdr 窗格中的对等代理请求一条获授权回复的计划，也面向关注其各条通道的主导者。
 - **DeepWorkPlan Vim** —— 终端编辑器（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)，锁定 `v0.7.0`），属于机器级安装，未经明确同意绝不覆盖现有的 Neovim 配置。
 - **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
 
@@ -267,7 +267,7 @@ devcontainer 附加组件的终点是一套可运行的环境，而不是一组�
 - **观察。** `herdr-peers lanes` 显示每条通道的状态；对于受阻的通道，`herdr-peers status <pane>` 对其界面进行分类，`herdr pane read <pane>` 则显示该界面。
 - **一种按键，一种情况。** 你唯一可以通过 `herdr pane send-keys` 发送的按键，是对文件夹信任界面的应答，且仅限于你自己启动的窗格、在 `--trust-cwd` 不可用的情况下。发送前后都读取界面，并发送最少的按键。
 - **其余一律读取、记录并上报**给开发者：Claude 的绕过权限确认、登录与凭据提示、逐项操作的权限请求、破坏性确认、付款或套餐提示、未知界面，以及不是你创建的窗格。设置 `AGENTKIT_PERMISSIONS=ask` 时，通道在行动前先询问；绝不绕过这些提示。把每一次干预记录在父计划中。
-- **让代理集群持续运行。** 借助 coding-agents-kit `v0.6.1` 和 herdr-peers `v0.3.1`，每个代理在每个任务边界检查 `ak capacity --self --json`；在 `critical` 时，它写好一份交接包（https://deepworkplan.com/schema/dwp-handoff/v1.json），主导者在同一个检出中启动一个继任者。主导者用 `herdr-peers lead claim` 认领其计划，通道以 `lead` 为地址联系它，若主导者消失，则由副手接管（`herdr-peers lead takeover`）。每个例行选择都自行决定并记录；只上报关键类别 C1–C7——参见 https://deepworkplan.com/methodology/07-swarm-autonomy.md。
+- **让代理集群持续运行。** 借助 coding-agents-kit `v0.6.1` 和 herdr-peers `v0.3.2`，每个代理在每个任务边界检查 `ak capacity --self --json`；在 `critical` 时，它写好一份交接包（https://deepworkplan.com/schema/dwp-handoff/v1.json），主导者在同一个检出中启动一个继任者。主导者用 `herdr-peers lead claim` 认领其计划，通道以 `lead` 为地址联系它，若主导者消失，则由副手接管（`herdr-peers lead takeover`）。每个例行选择都自行决定并记录；只上报关键类别 C1–C7——参见 https://deepworkplan.com/methodology/07-swarm-autonomy.md。
 
 ## 5. 演化套件（author 子技能）
 

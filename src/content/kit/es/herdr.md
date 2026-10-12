@@ -14,11 +14,11 @@ Es un addon opcional de **DWP v7** (`v7.0.0`). La metodología funciona igual si
 
 ## Qué integra
 
-El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill independiente con licencia MIT fijada en **`v0.3.1`** que es útil sin Deep Work Plan. Define lo que Herdr deja abierto: quién puede responder, cómo vuelve la respuesta a través de máquinas, cómo evitan dos agentes responderse indefinidamente y dónde vive el registro de "pregunté, respondió".
+El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill independiente con licencia MIT fijada en **`v0.3.2`** que es útil sin Deep Work Plan. Define lo que Herdr deja abierto: quién puede responder, cómo vuelve la respuesta a través de máquinas, cómo evitan dos agentes responderse indefinidamente y dónde vive el registro de "pregunté, respondió".
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/herdr-peers`, tag `v0.3.1`, protocolo 1 |
+| Producto | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protocolo 1 |
 | Clave de registro | `herdr` en `.dwp/config.json` |
 | Transporte | interactivo: un par en un panel de Herdr |
 | Proporciona | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://gi
 Instala herdr-peers y la skill oficial de Herdr, de la que depende. Toda máquina cuyos agentes deban responder también necesita la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ Para un líder que ejecuta muchos carriles a la vez — paneles en el host, en c
 
 ## Avisos y liderazgo
 
-herdr-peers `v0.3.1` añade lo que permite a un enjambre sobrevivir a su líder ([Autonomía del enjambre](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` añade lo que permite a un enjambre sobrevivir a su líder ([Autonomía del enjambre](/methodology/07-swarm-autonomy)):
 
 - **Avisos.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envía un mensaje unidireccional sellado con `reply=no`. El `check` del receptor lo clasifica como aviso, lo registra como datos y nunca responde. Los avisos no consumen ningún hueco de fan-out y pueden enviarse mientras hay una consulta abierta; úsalos para anuncios de traspaso, cambios de líder y difusiones de publicación.
-- **Un registro de líder por plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` convierte a un agente en el líder de un plan; `lead show` imprime el registro (esquema `herdr-peers/lead-v1`: plan, líder, época, sucesión, carriles, hora de actualización). `lead handover <addr> --plan <P>` cede el liderazgo, `lead takeover --plan <P>` permite que el primer suplente alcanzable lo asuma cuando el líder ya no está, y `lead release --plan <P>` lo termina. Cada cambio incrementa la época y avisa a todos los carriles.
+- **Un registro de líder por plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` convierte a un agente en el líder de un plan; `lead show` imprime el registro (esquema `herdr-peers/lead-v1`: plan, líder, época, sucesión, carriles, hora de actualización). `lead handover <addr> --plan <P>` cede el liderazgo, `lead takeover --plan <P>` permite que el primer suplente alcanzable lo asuma cuando el líder ya no está, y `lead release --plan <P>` lo termina. Cada cambio incrementa la época y avisa a todos los carriles. Reclama el plan antes de lanzar sus carriles: `lead` solo se resuelve cuando existe un registro. Desde `v0.3.2` el registro guarda localmente el repositorio que reclama y rechaza una reclamación del mismo id de plan desde otro repositorio; nombra ese plan `--plan <repo>/<id>`.
 - **Aislamiento (fencing).** Un carril acepta un aviso de líder solo del agente que le dio su encargo (primera reclamación), del líder actual en la época siguiente (cesión) o de la primera entrada alcanzable de la sucesión en la época siguiente (relevo). Todo lo demás se registra y se ignora, y un líder que vuelve y ve una época mayor se retira.
 - **La dirección `lead`.** `ask lead …` y `notify lead …` se resuelven al líder actual de `--plan` (o, si no, de `$DWP_PLAN`), de modo que ningún encargo de carril fija en el código el panel del líder.
 - **Pantallas `usage_limit`.** `status` y `lanes` reconocen el mensaje de límite de uso de una CLI como la clase de pantalla `usage_limit`, cuyo siguiente paso es un traspaso. Nunca se le envían teclas. `lanes --json` añade el plan, su líder, la época y la última capacidad reportada de cada carril.

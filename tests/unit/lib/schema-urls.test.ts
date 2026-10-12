@@ -99,8 +99,8 @@ describe('canonical schema URL publication', () => {
   });
 
   it('publishes the dwp-handoff/v1 packet schema the pack swarm helper stamps', () => {
-    // shared/swarm.py writes packets whose `schema` const is this URL. The
-    // byte-identity case below covers it once the vendored skill ships it.
+    // shared/swarm.py writes packets whose `schema` const is this URL; the
+    // byte-identity case below also compares it with the vendored copy.
     const file = join(PUBLIC_SCHEMA_DIR, 'dwp-handoff', 'v1.json');
     expect(existsSync(file), 'dwp-handoff/v1.json is not published').toBe(true);
     const parsed = JSON.parse(readFileSync(file, 'utf8')) as {
@@ -153,6 +153,7 @@ describe('canonical schema URL publication', () => {
     // No vendored schema file may be skipped silently by the name parser.
     expect(parsedCount).toBe(schemaFiles.length);
     expect(checked).toContain('dwp-config/v1');
+    expect(checked).toContain('dwp-handoff/v1');
     expect(checked).toContain('learnings-record/v1');
     expect(checked).toContain('plan-manifest/v1');
     expect(checked).toContain('plan-state/v1');

@@ -14,11 +14,11 @@ Es ist ein optionales Addon von **DWP v7** (`v7.0.0`). Die Methodik funktioniert
 
 ## Was es integriert
 
-Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v0.3.1`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
+Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v0.3.2`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, Tag `v0.3.1`, Protokoll 1 |
+| Produkt | `DailybotHQ/herdr-peers`, Tag `v0.3.2`, Protokoll 1 |
 | Registry-Schlüssel | `herdr` in `.dwp/config.json` |
 | Transport | interaktiv: ein Peer in einem Herdr-Pane |
 | Stellt bereit | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](http
 Installieren Sie herdr-peers und den offiziellen Skill von Herdr, von dem es abhängt. Jeder Rechner, dessen Agenten antworten sollen, braucht den Skill ebenfalls.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ Für einen Lead, der viele Lanes gleichzeitig betreibt — Panes auf dem Host, i
 
 ## Notices und Leitung
 
-herdr-peers `v0.3.1` ergänzt, was einen Schwarm seinen Lead überdauern lässt ([Schwarmautonomie](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` ergänzt, was einen Schwarm seinen Lead überdauern lässt ([Schwarmautonomie](/methodology/07-swarm-autonomy)):
 
 - **Notices.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` sendet eine Einweg-Nachricht mit dem Stempel `reply=no`. Das `check` des Empfängers klassifiziert sie als Notice, hält sie als Daten fest und antwortet nie. Notices belegen keinen Fan-out-Platz und dürfen gesendet werden, während ein ask offen ist; verwenden Sie sie für Übergabeankündigungen, Lead-Wechsel und Release-Rundsendungen.
-- **Ein Lead-Eintrag pro Plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` macht einen Agenten zum Lead eines Plans; `lead show` gibt den Eintrag aus (Schema `herdr-peers/lead-v1`: Plan, Lead, Epoche, Nachfolge, Lanes, Aktualisierungszeit). `lead handover <addr> --plan <P>` gibt die Leitung weiter, `lead takeover --plan <P>` lässt den ersten erreichbaren Stellvertreter sie übernehmen, wenn der Lead verschwunden ist, und `lead release --plan <P>` beendet sie. Jede Änderung erhöht die Epoche und benachrichtigt jede Lane.
+- **Ein Lead-Eintrag pro Plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` macht einen Agenten zum Lead eines Plans; `lead show` gibt den Eintrag aus (Schema `herdr-peers/lead-v1`: Plan, Lead, Epoche, Nachfolge, Lanes, Aktualisierungszeit). `lead handover <addr> --plan <P>` gibt die Leitung weiter, `lead takeover --plan <P>` lässt den ersten erreichbaren Stellvertreter sie übernehmen, wenn der Lead verschwunden ist, und `lead release --plan <P>` beendet sie. Jede Änderung erhöht die Epoche und benachrichtigt jede Lane. Beanspruchen Sie den Plan, bevor Sie seine Lanes starten: `lead` wird erst aufgelöst, sobald ein Eintrag existiert. Ab `v0.3.2` hält der Eintrag das beanspruchende Repository lokal fest und lehnt einen Anspruch auf dieselbe Plan-ID aus einem anderen Repository ab; benennen Sie diesen Plan `--plan <repo>/<id>`.
 - **Fencing.** Eine Lane akzeptiert eine Lead-Notice nur von dem Agenten, der ihr den Auftrag gab (erste Übernahme), vom aktuellen Lead in der nächsten Epoche (Übergabe) oder vom ersten erreichbaren Nachfolgeeintrag in der nächsten Epoche (Übernahme im Ausfall). Alles andere wird festgehalten und ignoriert, und ein zurückkehrender Lead, der eine höhere Epoche sieht, tritt zurück.
 - **Die Adresse `lead`.** `ask lead …` und `notify lead …` werden zum aktuellen Lead von `--plan` aufgelöst (sonst `$DWP_PLAN`), sodass kein Lane-Auftrag das Pane des Leads fest einträgt.
 - **`usage_limit`-Bildschirme.** `status` und `lanes` erkennen die Nutzungslimit-Meldung einer CLI als Bildschirmklasse `usage_limit`, deren nächster Schritt eine Übergabe ist. Sie wird nie per Tastendruck beantwortet. `lanes --json` ergänzt den Plan, seinen Lead, die Epoche und die zuletzt gemeldete Kapazität jeder Lane.

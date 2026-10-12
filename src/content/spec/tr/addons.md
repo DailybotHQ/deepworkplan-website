@@ -82,7 +82,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 ### Herdr (altıncı eklenti)
 
-v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v0.3.1`, protokol `1`) için ince bir entegrasyon katmanı.
+v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v0.3.2`, protokol `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Herdr](/kit/herdr)
 - **Ne ekler:** bir plan, sınırlı bir görevi aynı makinede veya Herdr'ın SSH üzerinden ulaştığı bir makinede, başka bir [Herdr](https://herdr.dev) panelindeki bir kodlama agent'ına devredebilir ve onun tek yetkili yanıtını journal'a kaydedebilir

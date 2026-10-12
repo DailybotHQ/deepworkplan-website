@@ -82,7 +82,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 ### Herdr (addon thứ sáu)
 
-Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v0.3.1`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
+Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v0.3.2`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
 
 - **Trang kit:** [Herdr](/kit/herdr)
 - **Bổ sung:** một kế hoạch có thể giao một tác vụ có giới hạn cho một coding agent trong một pane [Herdr](https://herdr.dev) khác, trên cùng máy hoặc trên một máy mà Herdr kết nối tới qua SSH, và ghi lại phản hồi được ủy quyền duy nhất của nó vào nhật ký

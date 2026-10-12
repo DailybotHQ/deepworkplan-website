@@ -99,4 +99,4 @@ Rencana induk ditutup berdasarkan bukti, bukan laporan:
 
 ## Ketika sebuah akun atau lead kehabisan
 
-Eksekusi yang panjang bertahan lebih lama dari satu akun mana pun. Mulai coding-agents-kit `v0.6.1` dan herdr-peers `v0.3.1`, sebuah lane memeriksa kapasitasnya sendiri di setiap batas tugas dan menyerahkan pekerjaannya melalui sebuah paket sebelum akunnya habis, lead menyerahkan kepemimpinan atau digantikan oleh deputinya, dan hanya item kritis yang sampai ke pengembang. [Otonomi swarm](/id/methodology/07-swarm-autonomy) menjelaskan loop-nya, paketnya, suksesi, dan kelas-kelas eskalasi.
+Eksekusi yang panjang bertahan lebih lama dari satu akun mana pun. Mulai coding-agents-kit `v0.6.1` dan herdr-peers `v0.3.2`, sebuah lane memeriksa kapasitasnya sendiri di setiap batas tugas dan menyerahkan pekerjaannya melalui sebuah paket sebelum akunnya habis, lead menyerahkan kepemimpinan atau digantikan oleh deputinya, dan hanya item kritis yang sampai ke pengembang. [Otonomi swarm](/id/methodology/07-swarm-autonomy) menjelaskan loop-nya, paketnya, suksesi, dan kelas-kelas eskalasi.

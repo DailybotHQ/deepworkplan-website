@@ -14,11 +14,11 @@ Bu, **DWP v7**'nin (`v7.0.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v0.3.1`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v0.3.2`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v0.3.1` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v0.3.2` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konte
 
 ## Bildirimler ve liderlik
 
-herdr-peers `v0.3.1`, bir sürünün liderinden daha uzun yaşamasını sağlayan şeyleri ekler ([Sürü özerkliği](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2`, bir sürünün liderinden daha uzun yaşamasını sağlayan şeyleri ekler ([Sürü özerkliği](/methodology/07-swarm-autonomy)):
 
 - **Bildirimler.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>`, `reply=no` damgalı tek yönlü bir mesaj gönderir. Alıcının `check` komutu onu bir bildirim olarak sınıflandırır, veri olarak kaydeder ve asla yanıtlamaz. Bildirimler yayılma kotasından yer harcamaz ve açık bir ask varken de gönderilebilir; devir duyuruları, lider değişiklikleri ve sürüm yayınları için kullanın.
-- **Plan başına bir lider kaydı.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>`, bir agent'ı tek bir planın lideri yapar; `lead show` kaydı yazdırır (şema `herdr-peers/lead-v1`: plan, lider, epoch, halef listesi, şeritler, güncelleme zamanı). `lead handover <addr> --plan <P>` liderliği devreder, `lead takeover --plan <P>` lider gittiğinde ulaşılabilen ilk vekilin liderliği almasını sağlar ve `lead release --plan <P>` onu sona erdirir. Her değişiklik epoch'u yükseltir ve her şeride bildirim gönderir.
+- **Plan başına bir lider kaydı.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>`, bir agent'ı tek bir planın lideri yapar; `lead show` kaydı yazdırır (şema `herdr-peers/lead-v1`: plan, lider, epoch, halef listesi, şeritler, güncelleme zamanı). `lead handover <addr> --plan <P>` liderliği devreder, `lead takeover --plan <P>` lider gittiğinde ulaşılabilen ilk vekilin liderliği almasını sağlar ve `lead release --plan <P>` onu sona erdirir. Her değişiklik epoch'u yükseltir ve her şeride bildirim gönderir. Planı, şeritlerini başlatmadan önce sahiplenin: `lead` ancak bir kayıt var olduğunda çözümlenir. `v0.3.2` sürümünden itibaren kayıt, sahiplenen depoyu yerel olarak tutar ve aynı plan kimliğinin başka bir depodan sahiplenilmesini reddeder; o planı `--plan <repo>/<id>` olarak adlandırın.
 - **Çitleme.** Bir şerit, bir lider bildirimini yalnızca kendisine görev tanımını veren agent'tan (ilk sahiplenme), bir sonraki epoch'ta mevcut liderden (devir) ya da bir sonraki epoch'ta halef listesinin ulaşılabilen ilk girdisinden (devralma) kabul eder. Diğer her şey kaydedilir ve yok sayılır; daha yüksek bir epoch gören, geri dönen bir lider görevi bırakır.
 - **`lead` adresi.** `ask lead …` ve `notify lead …`, `--plan` (yoksa `$DWP_PLAN`) planının mevcut liderine çözülür; böylece hiçbir şerit görev tanımı liderin bölmesini sabit olarak yazmaz.
 - **`usage_limit` ekranları.** `status` ve `lanes`, bir CLI'ın kullanım sınırı mesajını, bir sonraki adımı devir olan `usage_limit` ekran sınıfı olarak tanır. Ona asla tuş gönderilmez. `lanes --json`, planı, liderini, epoch'u ve her şeridin en son bildirdiği kapasiteyi ekler.

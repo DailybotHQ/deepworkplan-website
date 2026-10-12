@@ -99,4 +99,4 @@ Kế hoạch cha khép lại dựa trên bằng chứng, không dựa trên báo
 
 ## Khi một tài khoản hoặc lead cạn kiệt
 
-Một lần chạy dài sống lâu hơn bất kỳ tài khoản đơn lẻ nào. Từ coding-agents-kit `v0.6.1` và herdr-peers `v0.3.1`, một lane kiểm tra năng lực của chính nó tại mỗi ranh giới tác vụ và chuyển giao công việc qua một gói bàn giao trước khi tài khoản của nó cạn, một lead chuyển giao quyền lead hoặc được phó lead thay thế, và chỉ những mục nghiêm trọng mới tới tay nhà phát triển. [Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy) mô tả vòng lặp, gói bàn giao, sự kế nhiệm và các lớp leo thang.
+Một lần chạy dài sống lâu hơn bất kỳ tài khoản đơn lẻ nào. Từ coding-agents-kit `v0.6.1` và herdr-peers `v0.3.2`, một lane kiểm tra năng lực của chính nó tại mỗi ranh giới tác vụ và chuyển giao công việc qua một gói bàn giao trước khi tài khoản của nó cạn, một lead chuyển giao quyền lead hoặc được phó lead thay thế, và chỉ những mục nghiêm trọng mới tới tay nhà phát triển. [Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy) mô tả vòng lặp, gói bàn giao, sự kế nhiệm và các lớp leo thang.

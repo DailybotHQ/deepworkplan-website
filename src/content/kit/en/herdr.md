@@ -14,11 +14,11 @@ It is an optional addon of **DWP v7** (`v7.0.0`). The methodology works the same
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v0.3.1`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v0.3.2`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v0.3.1`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ For a lead running many lanes at once — panes on the host, in containers and o
 
 ## Notices and leadership
 
-herdr-peers `v0.3.1` adds what lets a swarm outlive its lead ([Swarm autonomy](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` adds what lets a swarm outlive its lead ([Swarm autonomy](/methodology/07-swarm-autonomy)):
 
 - **Notices.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` sends a one-way message stamped `reply=no`. The receiver's `check` classifies it as a notice, records it as data and never answers. Notices cost no fan-out slot and may be sent while an ask is open; use them for handoff announcements, lead changes and release broadcasts.
-- **A lead record per plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` makes an agent the lead of one plan; `lead show` prints the record (schema `herdr-peers/lead-v1`: plan, lead, epoch, succession, lanes, updated time). `lead handover <addr> --plan <P>` passes the leadership on, `lead takeover --plan <P>` lets the first reachable deputy take it when the lead is gone, and `lead release --plan <P>` ends it. Each change raises the epoch and notifies every lane.
+- **A lead record per plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` makes an agent the lead of one plan; `lead show` prints the record (schema `herdr-peers/lead-v1`: plan, lead, epoch, succession, lanes, updated time). `lead handover <addr> --plan <P>` passes the leadership on, `lead takeover --plan <P>` lets the first reachable deputy take it when the lead is gone, and `lead release --plan <P>` ends it. Each change raises the epoch and notifies every lane. Claim the plan before launching its lanes: `lead` resolves only once a record exists. From `v0.3.2` the record keeps the claiming repository locally and refuses a claim of the same plan id from another repository; name that plan `--plan <repo>/<id>`.
 - **Fencing.** A lane accepts a lead notice only from the agent that briefed it (first claim), from the current lead at the next epoch (handover), or from the first reachable succession entry at the next epoch (takeover). Anything else is recorded and ignored, and a returning lead that sees a higher epoch steps down.
 - **The `lead` address.** `ask lead …` and `notify lead …` resolve to the current lead of `--plan` (else `$DWP_PLAN`), so no lane brief hard-codes the lead's pane.
 - **`usage_limit` screens.** `status` and `lanes` recognize a CLI's usage-limit message as the screen class `usage_limit`, whose next step is a handoff. It is never keyed. `lanes --json` adds the plan, its lead, the epoch and each lane's last reported capacity.

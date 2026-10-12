@@ -14,11 +14,11 @@ O [Herdr](https://herdr.dev) coloca agentes de programação em painéis, na sua
 
 ## O que ele integra
 
-O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v0.3.1`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
+O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v0.3.2`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/herdr-peers`, tag `v0.3.1`, protocolo 1 |
+| Produto | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protocolo 1 |
 | Chave de registro | `herdr` em `.dwp/config.json` |
 | Transporte | interativo: um par em um painel do Herdr |
 | Fornece | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https:
 Instale o herdr-peers e a skill oficial do Herdr, da qual ele depende. Toda máquina cujos agentes devam responder também precisa da skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ Para um líder que executa muitas frentes ao mesmo tempo — painéis no host, e
 
 ## Avisos e liderança
 
-O herdr-peers `v0.3.1` acrescenta o que permite a um enxame sobreviver ao seu líder ([Autonomia do enxame](/methodology/07-swarm-autonomy)):
+O herdr-peers `v0.3.2` acrescenta o que permite a um enxame sobreviver ao seu líder ([Autonomia do enxame](/methodology/07-swarm-autonomy)):
 
 - **Avisos.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envia uma mensagem de mão única com o selo `reply=no`. O `check` do receptor a classifica como aviso, registra-a como dado e nunca responde. Avisos não consomem nenhuma vaga de fan-out e podem ser enviados enquanto uma consulta está aberta; use-os para anúncios de repasse, mudanças de líder e difusões de release.
-- **Um registro de líder por plano.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` torna um agente o líder de um plano; `lead show` imprime o registro (schema `herdr-peers/lead-v1`: plano, líder, época, sucessão, frentes, hora de atualização). `lead handover <addr> --plan <P>` repassa a liderança, `lead takeover --plan <P>` permite que o primeiro suplente alcançável a assuma quando o líder sumiu, e `lead release --plan <P>` a encerra. Cada mudança incrementa a época e avisa todas as frentes.
+- **Um registro de líder por plano.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` torna um agente o líder de um plano; `lead show` imprime o registro (schema `herdr-peers/lead-v1`: plano, líder, época, sucessão, frentes, hora de atualização). `lead handover <addr> --plan <P>` repassa a liderança, `lead takeover --plan <P>` permite que o primeiro suplente alcançável a assuma quando o líder sumiu, e `lead release --plan <P>` a encerra. Cada mudança incrementa a época e avisa todas as frentes. Reivindique o plano antes de iniciar suas frentes: `lead` só é resolvido quando existe um registro. A partir do `v0.3.2` o registro guarda localmente o repositório que reivindica e recusa uma reivindicação do mesmo id de plano vinda de outro repositório; nomeie esse plano `--plan <repo>/<id>`.
 - **Isolamento (fencing).** Uma frente aceita um aviso de líder apenas do agente que lhe deu o briefing (primeira reivindicação), do líder atual na época seguinte (passagem) ou da primeira entrada alcançável da sucessão na época seguinte (tomada). Todo o resto é registrado e ignorado, e um líder que volta e vê uma época maior se retira.
 - **O endereço `lead`.** `ask lead …` e `notify lead …` resolvem para o líder atual de `--plan` (senão, de `$DWP_PLAN`), então nenhum briefing de frente fixa no código o painel do líder.
 - **Telas `usage_limit`.** `status` e `lanes` reconhecem a mensagem de limite de uso de uma CLI como a classe de tela `usage_limit`, cujo próximo passo é um repasse. Ela nunca recebe teclas. `lanes --json` acrescenta o plano, seu líder, a época e a última capacidade reportada de cada frente.

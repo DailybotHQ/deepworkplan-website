@@ -82,7 +82,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 
 ### Herdr (addon keenam)
 
-Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.3.1`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
+Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.3.2`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
 
 - **Halaman kit:** [Herdr](/kit/herdr)
 - **Yang ditambahkan:** sebuah rencana dapat menyerahkan tugas terbatas kepada coding agent di pane [Herdr](https://herdr.dev) lain, di mesin yang sama atau mesin yang dijangkau Herdr melalui SSH, dan mencatat satu-satunya balasan yang diizinkan di jurnal

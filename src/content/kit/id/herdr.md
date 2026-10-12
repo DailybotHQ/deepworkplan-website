@@ -14,11 +14,11 @@ Ini adalah addon opsional dari **DWP v7** (`v7.0.0`). Metodologinya bekerja sama
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v0.3.1`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v0.3.2`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v0.3.1`, protokol 1 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protokol 1 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ Untuk lead yang menjalankan banyak lane sekaligus — panel di host, di containe
 
 ## Pemberitahuan dan kepemimpinan
 
-herdr-peers `v0.3.1` menambahkan hal yang memungkinkan sebuah swarm bertahan lebih lama dari lead-nya ([Otonomi swarm](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` menambahkan hal yang memungkinkan sebuah swarm bertahan lebih lama dari lead-nya ([Otonomi swarm](/methodology/07-swarm-autonomy)):
 
 - **Pemberitahuan.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` mengirim pesan satu arah yang diberi cap `reply=no`. `check` milik penerima mengklasifikasikannya sebagai pemberitahuan, mencatatnya sebagai data, dan tidak pernah membalasnya. Pemberitahuan tidak memakai slot fan-out dan boleh dikirim saat sebuah ask masih terbuka; gunakan untuk pengumuman handoff, pergantian lead, dan siaran rilis.
-- **Satu catatan lead per rencana.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` menjadikan sebuah agen lead dari satu rencana; `lead show` mencetak catatannya (skema `herdr-peers/lead-v1`: rencana, lead, epoch, suksesi, lane, waktu pembaruan). `lead handover <addr> --plan <P>` menyerahkan kepemimpinan, `lead takeover --plan <P>` membiarkan deputi pertama yang dapat dijangkau mengambil alih ketika lead hilang, dan `lead release --plan <P>` mengakhirinya. Setiap perubahan menaikkan epoch dan memberi tahu setiap lane.
+- **Satu catatan lead per rencana.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` menjadikan sebuah agen lead dari satu rencana; `lead show` mencetak catatannya (skema `herdr-peers/lead-v1`: rencana, lead, epoch, suksesi, lane, waktu pembaruan). `lead handover <addr> --plan <P>` menyerahkan kepemimpinan, `lead takeover --plan <P>` membiarkan deputi pertama yang dapat dijangkau mengambil alih ketika lead hilang, dan `lead release --plan <P>` mengakhirinya. Setiap perubahan menaikkan epoch dan memberi tahu setiap lane. Klaim rencana sebelum meluncurkan lane-nya: `lead` baru dapat di-resolve setelah sebuah catatan ada. Sejak `v0.3.2`, catatan itu menyimpan repositori yang mengklaimnya secara lokal dan menolak klaim atas id rencana yang sama dari repositori lain; namai rencana itu `--plan <repo>/<id>`.
 - **Fencing.** Sebuah lane menerima pemberitahuan lead hanya dari agen yang memberinya arahan (klaim pertama), dari lead saat ini pada epoch berikutnya (handover), atau dari entri suksesi pertama yang dapat dijangkau pada epoch berikutnya (takeover). Selebihnya dicatat dan diabaikan, dan lead yang kembali lalu melihat epoch yang lebih tinggi akan mundur.
 - **Alamat `lead`.** `ask lead …` dan `notify lead …` diarahkan ke lead saat ini dari `--plan` (jika tidak, `$DWP_PLAN`), sehingga tidak ada arahan lane yang menuliskan panel lead secara permanen.
 - **Layar `usage_limit`.** `status` dan `lanes` mengenali pesan batas penggunaan sebuah CLI sebagai kelas layar `usage_limit`, yang langkah berikutnya adalah handoff. Layar ini tidak pernah dijawab dengan tombol. `lanes --json` menambahkan rencana, lead-nya, epoch, dan kapasitas terakhir yang dilaporkan setiap lane.

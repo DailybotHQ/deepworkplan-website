@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr（第六个附加组件）
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（固定为 `v0.3.1`，协议 `1`）的轻量集成器，是 v7 计划的**交互式**委托传输。
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（固定为 `v0.3.2`，协议 `1`）的轻量集成器，是 v7 计划的**交互式**委托传输。
 
 - **套件页：** [Herdr](/kit/herdr)
 - **新增内容：** 计划可以把一项有界任务交给另一个 [Herdr](https://herdr.dev) 窗格中的编码代理——位于同一台机器，或 Herdr 通过 SSH 可达的机器——并在日志中记录其唯一一次获授权的回复

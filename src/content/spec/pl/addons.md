@@ -82,7 +82,7 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 
 ### Herdr (szósty addon)
 
-Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v0.3.1`, protokół `1`), **interaktywny** transport delegowania planów v7.
+Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v0.3.2`, protokół `1`), **interaktywny** transport delegowania planów v7.
 
 - **Strona kit:** [Herdr](/kit/herdr)
 - **Co dodaje:** plan może przekazać ograniczone zadanie agentowi kodującemu w innym panelu [Herdr](https://herdr.dev), na tej samej maszynie lub na takiej, do której Herdr sięga przez SSH, i zapisać jego jedną autoryzowaną odpowiedź w dzienniku

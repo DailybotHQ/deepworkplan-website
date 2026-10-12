@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr (addon ที่หก)
 
-ตัวผสานรวมแบบบางของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ปักหมุดที่ `v0.3.1`, protocol `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **โต้ตอบ** ของแผน v7
+ตัวผสานรวมแบบบางของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ปักหมุดที่ `v0.3.2`, protocol `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **โต้ตอบ** ของแผน v7
 
 - **หน้า kit:** [Herdr](/kit/herdr)
 - **สิ่งที่เพิ่ม:** แผนสามารถส่งงานที่มีขอบเขตให้ coding agent ใน pane อื่นของ [Herdr](https://herdr.dev) บนเครื่องเดียวกันหรือเครื่องที่ Herdr เข้าถึงผ่าน SSH และบันทึกการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียวลงใน journal

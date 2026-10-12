@@ -77,10 +77,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.6.3
+  git checkout v7.7.0
   # ดาวน์โหลด checksum ของรีลีสนั้นแล้วตรวจกับ digest ด้านล่าง:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.3/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.7.0/SHA256SUMS
   shasum -a 256 SHA256SUMS # ต้องตรงกับ digest ของ deepworkplan-skill ในรีลีสที่ตรึงไว้
   ./setup.sh --verify        # exit ที่ไม่ใช่ศูนย์หมายความว่าไฟล์ไม่ตรงกัน หยุด
   ```
@@ -92,9 +92,9 @@ lastUpdated: 2026-10-11
 
   | Repository (github.com/DailybotHQ) | แท็ก | sha256 ของ `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.6.3` | `ddb486549780a47688c20aa763a55fc090bbf76bf11a4767f1827f3c2266e332` |
+  | deepworkplan-skill | `v7.7.0` | `db4a6690c2af44060f63a71e79fa971d9eb909603973cba2e9368a67d3779947` |
   | coding-agents-kit | `v0.6.1` | `1f9c8beb6d8ae100ba3a154aae3866693a36efe30a4f9c8b0bce647e6fe2b487` |
-  | herdr-peers | `v0.3.1` | `47fbb519a263e8fa828c9f173be6642243f2d0860e1af8287a0ad9d9a5794f99` |
+  | herdr-peers | `v0.3.2` | `8a8112ee216598d85b4b3ef335c1beab3b02a258230b31aa9221cd3b6cd889a5` |
   | devcontainer-kit | `v0.3.5` | `efee9464a24ef78d50c8a470ace8afa4d75bb9aafd845e659839ab40e7ab69ee` |
   | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
   | ai-diff-reviewer | `v3.3.11` | `d384c1fffc710e46b5a06d85c5366dfdfd612bebd67526c8647838714b089cf6` |
@@ -110,7 +110,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.0 --skill deepworkplan -y
 ```
 
 หรือติดตั้งผ่าน OpenClaw:
@@ -132,7 +132,7 @@ skill Deep Work Plan ที่ติดตั้งไว้ข้างต้�
 และ sub-skill เก้าตัว ได้แก่ `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` และ `upgrade`
 
-รุ่น skill ที่ติดตั้งคือ **7.6.3** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
+รุ่น skill ที่ติดตั้งคือ **7.7.0** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
 
 มาตรฐานนี้ถูกออกแบบให้ได้สัดส่วนโดยเจตนา และทำให้สัดส่วนนั้นเป็นคุณสมบัติของ
 แผน ไม่ใช่วินัยของผู้พัฒนา แผนหนึ่งเป็นได้ทั้ง **Lite** — บันทึกงานแบบ inline
@@ -241,7 +241,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 | AI Diff Reviewer (จำเป็น) | `version:` ใน `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` ใน `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.14 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | `scripts/herdr-peers --version` ใน skill herdr-peers ที่ติดตั้งไว้ | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g --force -y` |
+| Herdr | `scripts/herdr-peers --version` ใน skill herdr-peers ที่ติดตั้งไว้ | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | ตัวติดตั้งที่ผ่านการตรวจสอบที่ https://deepworkplan.com/vim/install.sh (ตรึง `v0.7.0`; ดาวน์โหลด รัน `shasum -a 256 -c install.sh.sha256` แล้วจึงรัน) |
 
@@ -260,7 +260,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
   ในไฟล์เดียว ได้แก่ visual-ui (แนะนำอย่างหนักแน่นเมื่อตรวจพบ; การติดตั้งควบคุมด้วยการยอมรับ), cli-output และสนทนา — สองโปรไฟล์หลัง
   จะถูกถามเสมอ ไม่เคยถูกใช้โดยอัตโนมัติ
 - **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v0.6.1`): คำสั่งเดียวสำหรับเอเจนต์เขียนโค้ดทุกตัว หนึ่งบัญชีต่อโปรไฟล์ `ak usage` และ `ak pick` สำหรับเลือกบัญชีที่มีพื้นที่เหลือมากที่สุด และ `ak run` แบบ headless สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตชัดเจนให้เอเจนต์เขียนโค้ดตัวอื่น (ผู้รับมอบหมายหนึ่งรายต่อหนึ่ง worktree) ชุดเครื่องมือเปิดเอเจนต์ในโหมดอัตโนมัติโดยค่าเริ่มต้น และการเลือกไม่ใช้ (`--ask` หรือ `AGENTKIT_PERMISSIONS=ask`) ชนะเสมอ
-- **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v0.3.1` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งครั้งจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้ และสำหรับ lead ที่เฝ้าดู lane ของตัวเอง
+- **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v0.3.2` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งครั้งจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้ และสำหรับ lead ที่เฝ้าดู lane ของตัวเอง
 - **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v0.7.0`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
 - **AI Diff Reviewer** — การตรวจสอบในเครื่องที่จำเป็น (ไม่ใช่แบบเลือกเข้าร่วม): การตรวจความปลอดภัยของทุก Final Review รัน [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md` ที่ต้องการ) บนชุดการเปลี่ยนแปลงสะสมของแผน skill หรือส่วนขยายที่ขาดหายเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึกไว้ — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน ข้อผิดพลาดในการเรียกใช้เป็น soft-fail และผลลัพธ์ `critical` **ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสมบูรณ์ยังคงบล็อกการเสร็จสิ้น  (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด, BC-04) **Flow B** (CI gate กับ `pr-review.yml`) ถูกเสนอเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง และไม่เคยถูกติดตั้งโดยไม่ได้ร้องขอ ไม่มีโฟลว์ใดของ Deep Work Plan ที่ต้องการบริการเชิงพาณิชย์ ผู้ให้บริการ CI หรือ secret
 
@@ -293,7 +293,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 - **เฝ้าดู** `herdr-peers lanes` แสดงสถานะของทุก lane สำหรับ lane ที่ถูกบล็อก `herdr-peers status <pane>` จะจำแนกหน้าจอ และ `herdr pane read <pane>` จะแสดงหน้าจอนั้น
 - **กดแป้นได้กรณีเดียว** แป้นเดียวที่คุณส่งได้ด้วย `herdr pane send-keys` คือคำตอบของหน้าจอยืนยันความเชื่อถือโฟลเดอร์ บน pane ที่คุณเปิดเอง เมื่อใช้ `--trust-cwd` ไม่ได้ อ่านหน้าจอทั้งก่อนและหลัง และส่งแป้นให้น้อยที่สุด
 - **อ่าน บันทึก และส่งต่อทุกอย่างที่เหลือ** ให้นักพัฒนา: การรับทราบ bypass-permissions ของ Claude, prompt สำหรับล็อกอินและข้อมูลรับรอง คำขอสิทธิ์รายการกระทำ การยืนยันที่ทำลายข้อมูล prompt เกี่ยวกับการชำระเงินหรือแพ็กเกจ หน้าจอที่ไม่รู้จัก และ pane ที่คุณไม่ได้สร้าง เมื่อตั้ง `AGENTKIT_PERMISSIONS=ask` lane จะถามก่อนลงมือ ห้ามหาทางเลี่ยง prompt เหล่านั้น บันทึกทุกการแทรกแซงไว้ในแผนแม่
-- **ทำให้ swarm ทำงานต่อไป** ด้วย coding-agents-kit `v0.6.1` และ herdr-peers `v0.3.1` เอเจนต์แต่ละตัวตรวจ `ak capacity --self --json` ที่ทุกขอบเขตของงาน เมื่อถึง `critical` มันจะเขียน handoff packet (https://deepworkplan.com/schema/dwp-handoff/v1.json) และ lead เปิดผู้สืบทอดใน checkout เดียวกัน lead claim แผนของตัวเองด้วย `herdr-peers lead claim` lane เรียก lead ด้วยที่อยู่ `lead` และผู้แทนจะรับตำแหน่ง (`herdr-peers lead takeover`) หาก lead หายไป ตัดสินใจและบันทึกทุกทางเลือกตามปกติเอง ส่งต่อเพื่อแก้ไขเฉพาะประเภทวิกฤต C1–C7 — ดู https://deepworkplan.com/methodology/07-swarm-autonomy.md
+- **ทำให้ swarm ทำงานต่อไป** ด้วย coding-agents-kit `v0.6.1` และ herdr-peers `v0.3.2` เอเจนต์แต่ละตัวตรวจ `ak capacity --self --json` ที่ทุกขอบเขตของงาน เมื่อถึง `critical` มันจะเขียน handoff packet (https://deepworkplan.com/schema/dwp-handoff/v1.json) และ lead เปิดผู้สืบทอดใน checkout เดียวกัน lead claim แผนของตัวเองด้วย `herdr-peers lead claim` lane เรียก lead ด้วยที่อยู่ `lead` และผู้แทนจะรับตำแหน่ง (`herdr-peers lead takeover`) หาก lead หายไป ตัดสินใจและบันทึกทุกทางเลือกตามปกติเอง ส่งต่อเพื่อแก้ไขเฉพาะประเภทวิกฤต C1–C7 — ดู https://deepworkplan.com/methodology/07-swarm-autonomy.md
 
 ## 5. พัฒนา kit (sub-skill ชื่อ author)
 

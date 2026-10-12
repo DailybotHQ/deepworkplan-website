@@ -14,11 +14,11 @@ order: 7
 
 ## 何を統合するか
 
-このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v0.3.1`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
+このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v0.3.2`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/herdr-peers`、タグ `v0.3.1`、プロトコル 1 |
+| プロダクト | `DailybotHQ/herdr-peers`、タグ `v0.3.2`、プロトコル 1 |
 | レジストリキー | `.dwp/config.json` 内の `herdr` |
 | トランスポート | 対話型：Herdr ペイン内のピア |
 | 提供するもの | `subagents`、`cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 herdr-peers と、それが依存する Herdr 公式のスキル をインストールします。エージェントに回答させたいすべてのマシンにも、このスキル が必要です。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,10 +73,10 @@ devcontainer-kit `v0.3.5` 上の [devcontainer](/kit/devcontainer) アドオン�
 
 ## 通知とリーダーシップ
 
-herdr-peers `v0.3.1` は、スウォームがリードを失っても続けられるようにする機能を加えます（[スウォームの自律性](/methodology/07-swarm-autonomy)）。
+herdr-peers `v0.3.2` は、スウォームがリードを失っても続けられるようにする機能を加えます（[スウォームの自律性](/methodology/07-swarm-autonomy)）。
 
 - **通知。** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` は、`reply=no` のスタンプが付いた一方向のメッセージを送ります。受け手の `check` はそれを通知として分類し、データとして記録し、決して返信しません。通知はファンアウトの枠を消費せず、ask が開いている間でも送れます。ハンドオフの告知、リードの交代、リリースの一斉通知に使います。
-- **計画ごとのリードレコード。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` は、あるエージェントを一つの計画のリードにします。`lead show` はそのレコードを表示します（スキーマ `herdr-peers/lead-v1`：計画、リード、エポック、継承順、レーン、更新時刻）。`lead handover <addr> --plan <P>` はリーダーシップを引き渡し、`lead takeover --plan <P>` はリードがいなくなったときに最初に到達できる代理がそれを引き継ぐようにし、`lead release --plan <P>` はそれを終えます。変更のたびにエポックが上がり、すべてのレーンに通知されます。
+- **計画ごとのリードレコード。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` は、あるエージェントを一つの計画のリードにします。`lead show` はそのレコードを表示します（スキーマ `herdr-peers/lead-v1`：計画、リード、エポック、継承順、レーン、更新時刻）。`lead handover <addr> --plan <P>` はリーダーシップを引き渡し、`lead takeover --plan <P>` はリードがいなくなったときに最初に到達できる代理がそれを引き継ぐようにし、`lead release --plan <P>` はそれを終えます。変更のたびにエポックが上がり、すべてのレーンに通知されます。レーンを起動する前に計画を claim します。`lead` はレコードが存在して初めて解決されます。`v0.3.2` からレコードは claim したリポジトリをローカルに保持し、別のリポジトリからの同じ計画 id の claim を拒否します。その計画は `--plan <repo>/<id>` と指定します。
 - **フェンシング。** レーンがリードの通知を受け入れるのは、自分に指示を出したエージェント（最初の claim）、次のエポックの現リード（handover）、または次のエポックで最初に到達できる継承順のエントリ（takeover）からだけです。それ以外は記録されて無視され、戻ってきたリードはより高いエポックを見ると身を引きます。
 - **`lead` アドレス。** `ask lead …` と `notify lead …` は `--plan`（なければ `$DWP_PLAN`）の現リードに解決されるため、レーンへの指示にリードのペインを固定で書く必要はありません。
 - **`usage_limit` 画面。** `status` と `lanes` は、CLI の使用量上限のメッセージを画面クラス `usage_limit` として認識し、その次の手順はハンドオフです。この画面にキーを送ることは決してありません。`lanes --json` は、計画、そのリード、エポック、各レーンが最後に報告したキャパシティを加えます。

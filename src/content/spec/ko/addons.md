@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr(여섯 번째 애드온)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v0.3.1`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v0.3.2`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Herdr](/kit/herdr)
 - **추가하는 것:** 계획이 경계가 정해진 작업을 같은 머신 또는 Herdr가 SSH로 도달하는 머신의 다른 [Herdr](https://herdr.dev) 페인에 있는 코딩 에이전트에게 넘기고, 승인된 단일 응답을 저널에 기록할 수 있음

@@ -2,8 +2,8 @@
   "addons": {
     "agentkit": {
       "enabled": true,
-      "note": "ak v0.5.3 on the host; the dck v0.3.5 render pins coding-agents-kit v0.5.3 (with its three skills) in this container",
-      "version": "v0.5.3"
+      "note": "ak v0.6.1 on the host; the dck v0.3.5 render still pins coding-agents-kit v0.5.3 (with its three skills) in this container",
+      "version": "v0.6.1"
     },
     "ai-diff-reviewer": {
       "enabled": true,
@@ -18,12 +18,12 @@
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.6.3"
+      "version": "v7.7.0"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.6.3"
+      "version": "v7.7.0"
     },
     "devcontainer": {
       "enabled": true,
@@ -32,8 +32,8 @@
     },
     "herdr": {
       "enabled": true,
-      "note": "herdr-peers v0.2.3 pinned in this container by the dck v0.3.5 image (host v0.2.3); Herdr runs in this container",
-      "version": "v0.2.3"
+      "note": "herdr-peers v0.3.2 on the host; the dck v0.3.5 image still pins v0.2.3 in this container; Herdr runs in this container",
+      "version": "v0.3.2"
     },
     "vim": {
       "enabled": true,
