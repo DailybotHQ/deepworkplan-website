@@ -103,7 +103,7 @@ lastUpdated: 2026-10-11
   | deepworkplan-skill | `v7.7.1` | `c03ed3cb44ceafb267267b889e480a793bfe70ecd11e3668f326b3a543e773b5` |
   | coding-agents-kit | `v1.0.0` | `8995e737862c5486b3ec3d0235e82f358dbf9c20879f44afa506cf8e0721973e` |
   | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
-  | devcontainer-kit | `v0.3.7` | `2961922dc3d8c0096dc85403d77665614873732fc45814dc534eadff7c294c4f` |
+  | devcontainer-kit | `v1.0.0` | `060d16db41214bc91b05089bc7201cf499d21e5571731954a0bb766edd7cb605` |
   | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
   | ai-diff-reviewer | `v3.3.12` | `3a30a2127df1cf035e6eadce768b8a6f0773b19521a2b6c4ace3552b0c0f6f48` |
   | agent-skill | `v3.23.15` | कोई प्रकाशित नहीं — skills CLI `skills-lock.json` में एक content hash दर्ज करता है |
@@ -261,7 +261,7 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 | Dailybot | `.agents/skills/dailybot/SKILL.md` में `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | स्थापित herdr-peers स्किल में `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.7 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh पर सत्यापित इंस्टॉलर (यह `v1.0.0` पिन करता है; डाउनलोड करें, `shasum -a 256 -c install.sh.sha256`, फिर चलाएँ) |
 
 हर डाउनलोड को चलाने से पहले उसकी रिलीज़ के `SHA256SUMS` और ऊपर *पिन की गई रिलीज़* में दिए digest से
@@ -275,7 +275,7 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 agentkit, Herdr, DeepWorkPlan Vim) गिनाएँ और केवल वे प्रस्तुत करें जो इस रिपॉज़िटरी में फ़िट होते हैं, हर एक को एक स्पष्ट ऑप्ट-इन के रूप में। एक
 रिपॉज़िटरी **शून्य** वैकल्पिक ऐडऑन के साथ पूर्णतः अनुरूप होती है — उन्हें कभी स्वतः-स्थापित न करें।
 
-- **Devcontainer समर्थन** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.3.7` पर पिन, अपनी `dck-dockerfile` skill के साथ) का एक पतला एकीकरणकर्ता: `dck init` रिपॉज़िटरी का अपना container रेंडर करता है — digest पर पिन की गई आधिकारिक image, कोई साझा base image नहीं, `bash dev.sh up` — और किसी मौजूदा devcontainer का मिलान केवल उसके diff के स्वीकार होने के बाद करता है। स्वीकार होने पर, पूर्ण स्टैक तक पहुँचने के लिए नीचे दिए *devcontainer पथ* का पालन करें।
+- **Devcontainer समर्थन** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v1.0.0` पर पिन, अपनी `dck-dockerfile` skill के साथ) का एक पतला एकीकरणकर्ता: `dck init` रिपॉज़िटरी का अपना container रेंडर करता है — digest पर पिन की गई आधिकारिक image, कोई साझा base image नहीं, `bash dev.sh up` — और किसी मौजूदा devcontainer का मिलान केवल उसके diff के स्वीकार होने के बाद करता है। स्वीकार होने पर, पूर्ण स्टैक तक पहुँचने के लिए नीचे दिए *devcontainer पथ* का पालन करें।
 - **Dailybot एकीकरण** — चार जीवनचक्र ईवेंट (किकऑफ़, महत्वपूर्ण कार्य, अवरुद्ध, पूर्णता) पहले से Dailybot का उपयोग करने वाली टीमों के लिए सर्वोत्तम-प्रयास प्रगति रिपोर्ट के रूप में, वैकल्पिक स्वायत्त हुक प्रवर्तन (`dailybot-cli >= 3.9.0`) के साथ। जोड़ी गई Dailybot एजेंट स्किल (3.23.14) स्थापित करने से चैट, चेक-इन, फ़ॉर्म ऑथरिंग, AI से पूछना, Plan बोर्ड और कार्य, per-repo API keys और अन्य सुविधाएँ भी उपलब्ध होती हैं — ऐडऑन केवल रिपोर्टिंग को DWP निष्पादन से जोड़ता है। मूल पद्धति की Dailybot पर शून्य निर्भरता है।
 - **Dependency upgrade** — पैकेज-मैनेजर-निरपेक्ष, बैच-आधारित, सत्यापित, वापस लेने योग्य अपग्रेड। स्वीकार किए जाने पर,
   यह `/lib-upgrade` कमांड स्थापित करता है।

@@ -67,7 +67,7 @@ Capabilities the onboard flow layers onto a repo. Seven are optional and never p
 - **Deep Work Plan skill** — Create, execute, verify, resume and refine plans. Needs no addon.
 - **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v1.0.0`.
 - **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: autonomy by default with an opt-out, and headless delegation in a worktree. Pinned at `coding-agents-kit@v1.0.0`.
-- **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, SSH keys only on opt-in. Pinned at `devcontainer-kit@v0.3.7`.
+- **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, SSH keys only on opt-in. Pinned at `devcontainer-kit@v1.0.0`.
 - **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v1.0.0`.
 
 The addon registry and descriptors ship in Deep Work Plan v7: `v7.7.1`
