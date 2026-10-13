@@ -10,7 +10,7 @@ Il kit è tutto ciò che serve per eseguire la metodologia nella pratica. Si ins
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
 ```
 
 Il pacchetto 7.x attuale crea per impostazione predefinita i nuovi piani in v7. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
@@ -66,11 +66,11 @@ Capacità che il flusso di onboard aggiunge a un repo. Sette sono opzionali e ma
 
 - **Skill Deep Work Plan** — Crea, esegue, verifica, riprende e affina i piani. Non richiede alcun addon.
 - **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v0.3.2`.
-- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v0.6.1`.
-- **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, chiavi SSH solo su opt-in. Fissato a `devcontainer-kit@v0.3.5`.
+- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v0.7.1`.
+- **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, chiavi SSH solo su opt-in. Fissato a `devcontainer-kit@v0.3.7`.
 - **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v0.7.0`.
 
-Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.7.0`
+Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.7.1`
 
 ### Esempi
 

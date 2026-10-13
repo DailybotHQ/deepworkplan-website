@@ -10,7 +10,7 @@ order: 8
 
 터미널 코딩 에이전트는 저마다 세션을 이어 가는 고유한 플래그, 두 번째 계정을 분리하는 고유한 방식, 고유한 헤드리스 모드, 그리고 권한 프롬프트를 건너뛰는 고유한 스위치를 갖고 있습니다. [**coding-agents-kit**](https://github.com/DailybotHQ/coding-agents-kit)는 그 모두 위에 하나의 명령 체계를 얹습니다: `ak <kind> [@profile]`.
 
-이 애드온은 이 키트를 **DWP v7**(팩 `v7.7.0`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
+이 애드온은 이 키트를 **DWP v7**(팩 `v7.7.1`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
 
 ## 키트가 제공하는 것
 
@@ -25,7 +25,7 @@ order: 8
 
 키트는 여러분이 가진 모든 로그인이나 키를 하나의 **계정**으로 취급합니다. CLI 하나 × 프로필 하나입니다. `@default`(또는 `@1`)는 CLI 자체의 home이고, `@2`, `@work`, `@client-x`는 별도의 로그인으로, 각각 프로필 루트 아래의 자체 디렉터리에 있으며 나란히 실행됩니다. `ak profiles`는 이들을 로그인 상태 및 키 이름과 함께 나열하고, `ak profiles --json`은 도구에 같은 목록을 제공합니다(스키마 `profiles-v1`). `v0.5.1`부터는 Claude Code 토큰이 실제로 어디에 있는지 — `file`, `keychain`(macOS), `none`, `unknown` — 를 비밀 값을 읽지 않고 존재 여부만으로 보고하며, 컨테이너 안이든 Linux 호스트든 Linux의 Cursor 로그인도 인식합니다. `v0.5.2`부터는 `AGENTKIT_DEFAULT_PROFILE_<CLI>`가 인자 없는 `ak <cli>`가 사용할 계정을 지정하며(위치 인자 `@profile`이 여전히 우선합니다), 개발 컨테이너는 이 방식으로 공유하는 호스트 계정을 고릅니다. `v0.5.3`부터는 다른 머신과 공유하는 Codex home에 이 머신에 없는 백그라운드 데몬이 기록되어 있으면 `ak codex`가 `--no-daemon`을 추가합니다.
 
-`ak usage`는 키트가 볼 수 있는 모든 계정의 할당량과 사용량을 계정과 프로필마다 한 줄씩 보여 줍니다. Claude Code 구독(5시간, 주간, 모델별 창), ChatGPT로 로그인한 Codex, Z.AI 코딩 플랜 키는 실시간으로 조회하며, Cursor, Grok, xAI, Azure OpenAI는 이유와 함께 `n/d`로 표시합니다. 읽기 전용이므로 로그인을 갱신하지 않고, 토큰을 출력하지 않으며, 프로필 안에 아무것도 쓰지 않습니다. `--json`은 도구에 같은 목록을 제공합니다(스키마 `usage-v1`). 사용량 엔드포인트는 공급업체 내부용이며 비공식입니다.
+`ak usage`(`ak status`로도 실행 가능)는 키트가 아는 모든 CLI의 모든 계정을 해당 CLI 아래에 계정과 프로필마다 한 줄씩 보여 줍니다. Claude Code 구독(5시간, 주간, 모델별 창), ChatGPT로 로그인한 Codex, Z.AI 코딩 플랜 키, 그리고 `v0.7.0`부터는 Linux와 컨테이너에서 Google로 로그인한 Antigravity(agy 자체 `/usage` 패널의 5시간 및 주간 창)의 할당량을 실시간으로 조회합니다. 할당량을 읽을 수 없는 계정도 자체 행을 가지며, 연결 방식과 이유와 함께 `n/d`로 표시되거나(Cursor, Grok, xAI, Azure OpenAI, Gemini API 키, 또는 macOS 키체인에 보관된 Antigravity 로그인) 로그인에 쓸 명령과 함께 `no login`으로 표시되므로, 이 표로 각 CLI의 어떤 계정이 연결되어 있는지도 알 수 있습니다.읽기 전용이므로 로그인을 갱신하지 않고, 토큰을 출력하지 않으며, 프로필 안에 아무것도 쓰지 않습니다. `--json`은 도구에 같은 목록을 제공합니다(스키마 `usage-v1`). 사용량 엔드포인트는 공급업체 내부용이며 비공식입니다.
 
 `ak pick <kind>`는 같은 행을 읽고 여유가 가장 많은 계정을 알려 줍니다. `--count N`은 좋은 순서로 최대 N개의 계정을 반환하고, `--exclude @<profile>`은 바쁜 계정을 제외하며, `--model`은 한 모델의 주간 창으로 계산하고, `--need 5h:40`은 그만큼의 여유가 없으면 선택을 거부합니다. `--json`은 스키마 `pick-v1`을 제공합니다.
 
@@ -49,7 +49,7 @@ ak setup verify            # 순서대로 진행되는 점검, 각각 복구 명
 
 `v0.6.0`부터 에이전트는 모든 작업 경계에서 자신의 계정에 여유가 얼마나 남았는지 적은 비용으로 물을 수 있습니다. 이 신호 덕분에 스웜은 계정이 바닥나기 전에 작업을 넘길 수 있습니다([스웜 자율](/methodology/07-swarm-autonomy)).
 
-- **`ak capacity --self --json`**(스키마 `capacity-v1`)은 실행 중인 계정의 `headroom_pct`, `binding_window`, `resets_at`, 그리고 `verdict`를 제공합니다. `verdict`는 `ok`, `low`(25 % 이하), `critical`(10 % 이하 또는 속도 제한), `unknown`(할당량 출처 없음: Cursor, Grok, Antigravity) 중 하나입니다. `ak pick`과 같은 계산을 쓰므로 둘의 판단은 결코 어긋나지 않으며, 300초 동안 유지되는 사용량 캐시(`--max-age`)를 읽으므로 작업 경계마다 확인해도 비용이 적습니다. `--self`는 `ak`가 시작한 계정을 찾아내며, `ak` 실행 밖에서는 종료 코드 3으로 끝나고 결코 추측하지 않습니다. `ak usage`는 여전히 실시간으로 읽고 캐시를 갱신합니다.
+- **`ak capacity --self --json`**(스키마 `capacity-v1`)은 실행 중인 계정의 `headroom_pct`, `binding_window`, `resets_at`, 그리고 `verdict`를 제공합니다. `verdict`는 `ok`, `low`(25 % 이하), `critical`(10 % 이하 또는 속도 제한), `unknown`(할당량 출처 없음: Cursor, Grok 또는 macOS의 Antigravity) 중 하나입니다. `ak pick`과 같은 계산을 쓰므로 둘의 판단은 결코 어긋나지 않으며, 300초 동안 유지되는 사용량 캐시(`--max-age`)를 읽으므로 작업 경계마다 확인해도 비용이 적습니다. `--self`는 `ak`가 시작한 계정을 찾아내며, `ak` 실행 밖에서는 종료 코드 3으로 끝나고 결코 추측하지 않습니다. `ak usage`는 여전히 실시간으로 읽고 캐시를 갱신합니다.
 - **임계값과 훈련.** `AGENTKIT_CAPACITY_LOW`와 `AGENTKIT_CAPACITY_CRITICAL`(또는 `--low`와 `--critical`)로 임계값을 옮깁니다. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>`는 측정값을 낮추기만 할 수 있습니다. 훈련에서 계정을 여유가 없는 것처럼 보이게 하는 방법이며, 계정을 더 여유 있게 보이게 하는 일은 결코 없습니다.
 - `ak lease <kind> @<profile> --owner <addr>`는 하나의 레인을 위해 계정을 잡아 둡니다. `ak lease release …`는 후임이 핸드오프를 수락한 뒤 계정을 풀어 주고, `ak lease ls`는 리스를 나열합니다(스키마 `leases-v1`). Codex 프로필은 리스를 하나만 받습니다(인증 파일마다 작성자 하나). 리스를 해제하는 것은 소유자뿐입니다. 리스는 만료되며 숫자, 프로필 이름, 페인 주소만 담는 권고용 기록일 뿐, 결코 자격 증명이 아닙니다.
 - `ak pick <kind> --owner <lead>`는 소유자 자신의 리스를 포함해 모든 활성 리스를 셉니다. 후보를 `headroom / (1 + leases)`로 순위를 매기며, 리스된 Codex 계정은 그 보유자에게도 결코 제시하지 않습니다. `--reuse @<profile>`는 소유자 자신의 리스 하나를 넘겨줍니다. 예를 들어 레인의 후임에게 넘길 때 씁니다. `--owner`가 없으면 순위는 바뀌지 않습니다.
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 다른 소유자에게 리스
 ## 설치
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v0.6.1`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
+요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v0.7.1`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v0.6.1`, 인터페이스 1 |
+| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v0.7.1`, 인터페이스 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `agentkit` |
 | 전송 방식 | 헤드리스: 위임 대상마다 전용 git worktree에서 `ak run` 한 번 |
 | 제공 | `subagents`, `cancel_children`, `model_routing` |

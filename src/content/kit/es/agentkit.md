@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tiene sus propias opciones para continuar una sesión, su propia forma de mantener separada una segunda cuenta, su propio modo sin interfaz y su propio interruptor para omitir las solicitudes de permiso. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** pone una sola superficie de comandos sobre todos ellos: `ak <kind> [@profile]`.
 
-Este addon integra el kit en **DWP v7** (pack `v7.7.0`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
+Este addon integra el kit en **DWP v7** (pack `v7.7.1`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
 
 ## Qué te da el kit
 
@@ -25,7 +25,7 @@ Este addon integra el kit en **DWP v7** (pack `v7.7.0`) como transporte de deleg
 
 El kit trata cada inicio de sesión o clave que tienes como una **cuenta**: una CLI × un perfil. `@default` (o `@1`) es el home propio de la CLI; `@2`, `@work` o `@client-x` son sesiones independientes, cada una en su propio directorio bajo la raíz de perfiles, que se ejecutan a la vez. `ak profiles` las enumera con su estado de sesión y los nombres de sus claves; `ak profiles --json` da a las herramientas la misma lista (esquema `profiles-v1`). Desde `v0.5.1` indica dónde está realmente el token de Claude Code —`file`, `keychain` (macOS), `none` o `unknown`— solo por su presencia, sin leer nunca el secreto, y reconoce un inicio de sesión de Cursor en Linux, ya sea en un contenedor o en un host Linux. Desde `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` indica la cuenta que usa un `ak <cli>` sin argumentos (un `@profile` posicional sigue teniendo prioridad), y así es como un contenedor de desarrollo elige la cuenta del host que comparte. Desde `v0.5.3`, `ak codex` añade `--no-daemon` cuando un home de Codex compartido con otra máquina registra un daemon en segundo plano que no está en esta.
 
-`ak usage` muestra la cuota y el uso de cada cuenta que el kit puede ver, una fila por cuenta y perfil: en vivo para las suscripciones de Claude Code (ventanas de 5 horas, semanal y por modelo), los inicios de sesión de Codex con ChatGPT y las claves del plan de programación de Z.AI; Cursor, Grok, xAI y Azure OpenAI muestran `n/d` con el motivo. Es de solo lectura: nunca renueva un inicio de sesión, nunca imprime un token y nunca escribe dentro de un perfil. `--json` da a las herramientas la misma lista (esquema `usage-v1`). Los endpoints de uso son internos del proveedor y no oficiales.
+`ak usage` (también `ak status`) enumera todas las cuentas de cada CLI que el kit conoce, una fila por cuenta y perfil, bajo su CLI: cuota en vivo para las suscripciones de Claude Code (ventanas de 5 horas, semanal y por modelo), los inicios de sesión de Codex con ChatGPT, las claves del plan de programación de Z.AI y, desde `v0.7.0`, los inicios de sesión de Antigravity con Google en Linux y en contenedores (las ventanas de cinco horas y semanal del propio panel `/usage` de agy). Una cuenta cuya cuota no se puede leer conserva su fila: `n/d` con cómo está conectada y por qué —Cursor, Grok, xAI, Azure OpenAI, una clave de API de Gemini o un inicio de sesión de Antigravity guardado en el llavero de macOS (Keychain)— o `no login` con el comando que inicia su sesión, de modo que la tabla también muestra qué cuentas de cada CLI están conectadas. Es de solo lectura: nunca renueva un inicio de sesión, nunca imprime un token y nunca escribe dentro de un perfil. `--json` da a las herramientas la misma lista (esquema `usage-v1`). Los endpoints de uso son internos del proveedor y no oficiales.
 
 `ak pick <kind>` lee las mismas filas y nombra la cuenta con más margen. `--count N` devuelve hasta N cuentas, la mejor primero; `--exclude @<profile>` deja fuera una ocupada; `--model` cuenta la ventana semanal de un modelo; `--need 5h:40` se niega a elegir sin ese margen. `--json` da el esquema `pick-v1`.
 
@@ -49,7 +49,7 @@ Para carriles largos e interactivos, cada carril se ejecuta en un panel de [Herd
 
 Desde `v0.6.0` un agente puede preguntar cuánto margen le queda a su propia cuenta, con poco coste, en cada límite entre tareas — la señal que permite a un enjambre traspasar el trabajo antes de que una cuenta se agote ([Autonomía del enjambre](/methodology/07-swarm-autonomy)).
 
-- **`ak capacity --self --json`** (esquema `capacity-v1`) da el `headroom_pct` de la cuenta en ejecución, su `binding_window`, `resets_at` y un `verdict`: `ok`, `low` (25 % o menos), `critical` (10 % o menos, o con límite de tasa) o `unknown` (sin fuente de cuota: Cursor, Grok, Antigravity). Usa la aritmética de `ak pick`, así que ambos nunca discrepan, y lee una caché de uso que se conserva 300 segundos (`--max-age`), de modo que una comprobación en cada límite entre tareas sigue siendo barata. `--self` resuelve la cuenta que lanzó `ak`; fuera de un lanzamiento de `ak` sale con código 3 y nunca adivina. `ak usage` sigue leyendo en vivo y refresca la caché.
+- **`ak capacity --self --json`** (esquema `capacity-v1`) da el `headroom_pct` de la cuenta en ejecución, su `binding_window`, `resets_at` y un `verdict`: `ok`, `low` (25 % o menos), `critical` (10 % o menos, o con límite de tasa) o `unknown` (sin fuente de cuota: Cursor, Grok o Antigravity en macOS). Usa la aritmética de `ak pick`, así que ambos nunca discrepan, y lee una caché de uso que se conserva 300 segundos (`--max-age`), de modo que una comprobación en cada límite entre tareas sigue siendo barata. `--self` resuelve la cuenta que lanzó `ak`; fuera de un lanzamiento de `ak` sale con código 3 y nunca adivina. `ak usage` sigue leyendo en vivo y refresca la caché.
 - **Umbrales y simulacros.** `AGENTKIT_CAPACITY_LOW` y `AGENTKIT_CAPACITY_CRITICAL` (o `--low` y `--critical`) mueven los umbrales. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` solo puede rebajar una lectura — así es como un simulacro hace que una cuenta parezca escasa — y nunca puede hacer que una parezca más holgada.
 - **`ak lease <kind> @<profile> --owner <addr>`** reserva una cuenta para un carril; `ak lease release …` la libera cuando un sucesor ha aceptado el traspaso, y `ak lease ls` enumera las reservas (esquema `leases-v1`). Un perfil de Codex admite una sola reserva — un escritor por archivo de autenticación — y solo el titular libera una reserva. Las reservas caducan y son registros orientativos de números, nombres de perfil y direcciones de panel, nunca una credencial.
 - **`ak pick <kind> --owner <lead>`** cuenta todas las reservas activas, incluidas las del propio titular: clasifica las candidatas por `headroom / (1 + leases)` y nunca ofrece una cuenta de Codex reservada, ni siquiera a quien la tiene. `--reuse @<profile>` traspasa una de las reservas del propio titular, por ejemplo al sucesor de un carril. Sin `--owner` la clasificación no cambia.
@@ -65,15 +65,15 @@ El trabajo se mueve solo entre las cuentas que declaraste para el plan, dentro d
 ## Instalación
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v0.6.1`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
+Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v0.7.1`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interfaz 1 |
+| Producto | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, interfaz 1 |
 | Clave de registro | `agentkit` en `.dwp/config.json` |
 | Transporte | sin interfaz: un `ak run` por delegado en un worktree de git dedicado |
 | Proporciona | `subagents`, `cancel_children`, `model_routing` |

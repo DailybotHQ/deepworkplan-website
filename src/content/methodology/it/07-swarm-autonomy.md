@@ -41,7 +41,7 @@ Ogni corsia ha un piano, almeno un piano Lite nel proprio repository, e quel pia
 
 ## Il ciclo della capacità
 
-Un agente controlla il proprio margine prima di iniziare ogni task, dopo ogni gate o passo durato più di 20 minuti, ogni volta che la sua CLI mostra un avviso di limite d’uso, e prima di accettare un passaggio di consegne o la guida. Il controllo è `ak capacity --self --json` di coding-agents-kit `v0.6.1`, che l’helper del pacchetto trasforma in una decisione:
+Un agente controlla il proprio margine prima di iniziare ogni task, dopo ogni gate o passo durato più di 20 minuti, ogni volta che la sua CLI mostra un avviso di limite d’uso, e prima di accettare un passaggio di consegne o la guida. Il controllo è `ak capacity --self --json` di coding-agents-kit `v0.7.1`, che l’helper del pacchetto trasforma in una decisione:
 
 | Verdetto | Decisione | Una corsia | Un lead, per sé stesso |
 | --- | --- | --- | --- |

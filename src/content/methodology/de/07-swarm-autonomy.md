@@ -41,7 +41,7 @@ Jede Lane hat einen Plan, mindestens einen Lite-Plan in ihrem eigenen Repository
 
 ## Die Kapazitätsschleife
 
-Ein Agent prüft seinen eigenen Spielraum vor dem Beginn jeder Aufgabe, nach jedem Gate oder Schritt, der länger als 20 Minuten lief, immer wenn seine CLI eine Nutzungslimit-Warnung zeigt, und bevor er eine Übergabe oder die Leitung annimmt. Die Prüfung ist `ak capacity --self --json` aus coding-agents-kit `v0.6.1`, die der Helfer des Pakets in eine Entscheidung übersetzt:
+Ein Agent prüft seinen eigenen Spielraum vor dem Beginn jeder Aufgabe, nach jedem Gate oder Schritt, der länger als 20 Minuten lief, immer wenn seine CLI eine Nutzungslimit-Warnung zeigt, und bevor er eine Übergabe oder die Leitung annimmt. Die Prüfung ist `ak capacity --self --json` aus coding-agents-kit `v0.7.1`, die der Helfer des Pakets in eine Entscheidung übersetzt:
 
 | Urteil | Entscheidung | Eine Lane | Ein Lead, für sich selbst |
 | --- | --- | --- | --- |

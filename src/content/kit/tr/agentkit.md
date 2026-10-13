@@ -10,7 +10,7 @@ order: 8
 
 Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayrakları, ikinci bir hesabı ayrı tutmak için kendi yolu, kendi başsız (headless) modu ve izin istemlerini atlamak için kendi anahtarı vardır. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)**, hepsinin üzerine tek bir komut yüzeyi koyar: `ak <kind> [@profile]`.
 
-Bu eklenti, kiti **DWP v7**'ye (paket `v7.7.0`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
+Bu eklenti, kiti **DWP v7**'ye (paket `v7.7.1`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
 ## Kitin size sundukları
 
@@ -25,7 +25,7 @@ Bu eklenti, kiti **DWP v7**'ye (paket `v7.7.0`) **başsız** devretme taşımas�
 
 Kit, sahip olduğunuz her oturumu veya anahtarı bir **hesap** olarak ele alır: bir CLI × bir profil. `@default` (veya `@1`) CLI'ın kendi home dizinidir; `@2`, `@work` ya da `@client-x` ise her biri profiller kökü altında kendi dizininde bulunan ve yan yana çalışan ayrı oturumlardır. `ak profiles` bunları oturum durumları ve anahtarlarının adlarıyla listeler; `ak profiles --json` aynı listeyi araçlara verir (şema `profiles-v1`). `v0.5.1` sürümünden itibaren Claude Code token'ının gerçekte nerede olduğunu — `file`, `keychain` (macOS), `none` ya da `unknown` — yalnızca varlığına bakarak, gizli bilgiyi asla okumadan bildirir; ayrıca Linux'ta, bir konteynerde ya da bir Linux ana makinesinde bir Cursor oturumunu tanır. `v0.5.2` sürümünden itibaren `AGENTKIT_DEFAULT_PROFILE_<CLI>`, yalın bir `ak <cli>` komutunun kullandığı hesabı belirler (konumsal bir `@profile` yine önceliklidir); bir dev container, paylaştığı ana makine hesabını bu şekilde seçer. `v0.5.3` sürümünden itibaren, başka bir makineyle paylaşılan bir Codex home dizini bu makinede olmayan bir arka plan daemon'u kaydettiğinde `ak codex`, `--no-daemon` ekler.
 
-`ak usage`, kitin görebildiği her hesabın kotasını ve kullanımını hesap ve profil başına bir satırla listeler: Claude Code abonelikleri (5 saatlik, haftalık ve model başına pencereler), ChatGPT ile Codex oturumları ve Z.AI kodlama planı anahtarları için canlıdır; Cursor, Grok, xAI ve Azure OpenAI nedeniyle birlikte `n/d` gösterir. Salt okunurdur: hiçbir oturumu yenilemez, hiçbir token yazdırmaz ve bir profilin altına hiçbir şey yazmaz. `--json` aynı listeyi araçlara verir (şema `usage-v1`). Kullanım uç noktaları sağlayıcılara özgü ve resmî olmayan uç noktalardır.
+`ak usage` (ayrıca `ak status`), kitin tanıdığı her CLI'nin her hesabını, kendi CLI'sinin altında hesap ve profil başına bir satırla listeler: Claude Code abonelikleri (5 saatlik, haftalık ve model başına pencereler), ChatGPT ile Codex oturumları, Z.AI kodlama planı anahtarları ve `v0.7.0` sürümünden beri Linux'ta ve konteynerlerde Antigravity Google oturumları (agy'nin kendi `/usage` panelindeki beş saatlik ve haftalık pencereler) için canlı kota gösterir. Kotası okunamayan bir hesabın da satırı vardır: nasıl bağlandığı ve nedeniyle birlikte `n/d` — Cursor, Grok, xAI, Azure OpenAI, bir Gemini API anahtarı ya da macOS Anahtar Zinciri'nde tutulan bir Antigravity oturumu — veya oturumunu açan komutla birlikte `no login`; böylece tablo her CLI'nin hangi hesaplarının bağlı olduğunu da gösterir. Salt okunurdur: hiçbir oturumu yenilemez, hiçbir token yazdırmaz ve bir profilin altına hiçbir şey yazmaz. `--json` aynı listeyi araçlara verir (şema `usage-v1`). Kullanım uç noktaları sağlayıcılara özgü ve resmî olmayan uç noktalardır.
 
 `ak pick <kind>` aynı satırları okur ve en çok boş kapasiteye sahip hesabı belirtir. `--count N` en iyisinden başlayarak en fazla N hesap döndürür; `--exclude @<profile>` meşgul bir hesabı dışarıda tutar; `--model` tek bir modelin haftalık penceresini sayar; `--need 5h:40` o kadar kapasite olmadan seçim yapmayı reddeder. `--json`, `pick-v1` şemasını verir.
 
@@ -49,7 +49,7 @@ Uzun, etkileşimli şeritlerde her şerit, kendi hesabıyla bir [Herdr](/kit/her
 
 `v0.6.0` sürümünden itibaren bir agent, kendi hesabında ne kadar yer kaldığını her görev sınırında ucuza sorabilir — bir sürünün, bir hesap tükenmeden önce işi devretmesini sağlayan sinyal budur ([Sürü özerkliği](/methodology/07-swarm-autonomy)).
 
-- **`ak capacity --self --json`** (şema `capacity-v1`), çalışan hesabın `headroom_pct` değerini, `binding_window`, `resets_at` alanlarını ve bir `verdict` verir: `ok`, `low` (%25 veya daha az), `critical` (%10 veya daha az ya da hız sınırına takılmış) veya `unknown` (kota kaynağı yok: Cursor, Grok, Antigravity). `ak pick` ile aynı hesabı kullanır, bu yüzden ikisi asla çelişmez; 300 saniye tutulan bir kullanım önbelleğini okur (`--max-age`), böylece her görev sınırındaki kontrol ucuz kalır. `--self`, `ak` komutunun başlattığı hesabı çözer; bir `ak` başlatması dışında 3 koduyla çıkar ve asla tahmin yürütmez. `ak usage` yine canlı okur ve önbelleği yeniler.
+- **`ak capacity --self --json`** (şema `capacity-v1`), çalışan hesabın `headroom_pct` değerini, `binding_window`, `resets_at` alanlarını ve bir `verdict` verir: `ok`, `low` (%25 veya daha az), `critical` (%10 veya daha az ya da hız sınırına takılmış) veya `unknown` (kota kaynağı yok: Cursor, Grok veya macOS'ta Antigravity). `ak pick` ile aynı hesabı kullanır, bu yüzden ikisi asla çelişmez; 300 saniye tutulan bir kullanım önbelleğini okur (`--max-age`), böylece her görev sınırındaki kontrol ucuz kalır. `--self`, `ak` komutunun başlattığı hesabı çözer; bir `ak` başlatması dışında 3 koduyla çıkar ve asla tahmin yürütmez. `ak usage` yine canlı okur ve önbelleği yeniler.
 - **Eşikler ve tatbikatlar.** `AGENTKIT_CAPACITY_LOW` ve `AGENTKIT_CAPACITY_CRITICAL` (ya da `--low` ve `--critical`) eşikleri değiştirir. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` bir okumayı yalnızca düşürebilir — bir tatbikat bir hesabı bu yolla yoksul gösterir — ve bir hesabı asla olduğundan zengin gösteremez.
 - **`ak lease <kind> @<profile> --owner <addr>`** bir hesabı tek bir şerit için tutar; `ak lease release …`, bir halef devri kabul ettikten sonra onu serbest bırakır ve `ak lease ls` kiralamaları listeler (şema `leases-v1`). Bir Codex profili tek bir kiralama alır — kimlik doğrulama dosyası başına tek yazıcı — ve bir kiralamayı yalnızca sahibi serbest bırakır. Kiralamaların süresi dolar; bunlar sayılardan, profil adlarından ve bölme adreslerinden oluşan tavsiye niteliğinde kayıtlardır, asla bir kimlik bilgisi değildir.
 - **`ak pick <kind> --owner <lead>`**, sahibin kendi kiralamaları da dahil olmak üzere her etkin kiralamayı sayar: adayları `headroom / (1 + leases)` ile sıralar ve kiralanmış bir Codex hesabını, sahibine bile, asla önermez. `--reuse @<profile>`, sahibin kendi kiralamalarından birini, örneğin bir şeridin halefine devreder. `--owner` olmadan sıralama değişmez.
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış he
 ## Kurulum
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.6.1` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.7.1` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v0.6.1` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v0.7.1` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |

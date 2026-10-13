@@ -10,7 +10,7 @@ order: 8
 
 Every terminal coding agent has its own flags for continuing a session, its own way to keep a second account apart, its own headless mode and its own switch for skipping permission prompts. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** puts one command surface over all of them: `ak <kind> [@profile]`.
 
-This addon integrates the kit into **DWP v7** (pack `v7.7.0`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
+This addon integrates the kit into **DWP v7** (pack `v7.7.1`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
 
 ## What the kit gives you
 
@@ -25,7 +25,7 @@ This addon integrates the kit into **DWP v7** (pack `v7.7.0`) as the **headless*
 
 The kit treats every login or key you hold as an **account**: one CLI × one profile. `@default` (or `@1`) is the CLI's own home; `@2`, `@work` or `@client-x` are separate logins, each in its own directory under the profiles root, that run side by side. `ak profiles` lists them with their login state and the names of their keys; `ak profiles --json` gives tools the same list (schema `profiles-v1`). Since `v0.5.1` it reports where Claude Code's token really is — `file`, `keychain` (macOS), `none` or `unknown` — by presence only, never reading the secret, and a Cursor login on Linux, in a container or on a Linux host, is recognised. Since `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` names the account a bare `ak <cli>` uses (a positional `@profile` still wins), which is how a dev container picks the host account it shares. Since `v0.5.3`, `ak codex` adds `--no-daemon` when a Codex home shared with another machine records a background daemon that is not on this one.
 
-`ak usage` lists the quota and usage of every account the kit can see, one row per account and profile: live for Claude Code subscriptions (5-hour, weekly and per-model windows), Codex ChatGPT logins and Z.AI coding-plan keys; Cursor, Grok, xAI and Azure OpenAI show `n/d` with the reason. It is read-only: it never refreshes a login, never prints a token and never writes under a profile. `--json` gives tools the same list (schema `usage-v1`). The usage endpoints are vendor-internal and unofficial.
+`ak usage` (also `ak status`) lists every account of every CLI the kit knows, one row per account and profile, under its CLI: live quota for Claude Code subscriptions (5-hour, weekly and per-model windows), Codex ChatGPT logins, Z.AI coding-plan keys and, since `v0.7.0`, Antigravity Google logins on Linux and in containers (the five-hour and weekly windows of agy's own `/usage` panel). An account whose quota cannot be read still has its row: `n/d` with how it is connected and why — Cursor, Grok, xAI, Azure OpenAI, a Gemini API key, or an Antigravity login kept in the macOS Keychain — or `no login` with the command that logs it in, so the table also shows which accounts of each CLI are connected. It is read-only: it never refreshes a login, never prints a token and never writes under a profile. `--json` gives tools the same list (schema `usage-v1`). The usage endpoints are vendor-internal and unofficial.
 
 `ak pick <kind>` reads the same rows and names the account with the most room. `--count N` returns up to N accounts, best first; `--exclude @<profile>` keeps a busy one out; `--model` counts one model's weekly window; `--need 5h:40` refuses to pick without that much room. `--json` gives the schema `pick-v1`.
 
@@ -49,7 +49,7 @@ For long, interactive lanes, each lane runs in a [Herdr](/kit/herdr) pane on its
 
 From `v0.6.0` an agent can ask how much room its own account has, cheaply, at every task boundary — the signal that lets a swarm hand work on before an account runs out ([Swarm autonomy](/methodology/07-swarm-autonomy)).
 
-- **`ak capacity --self --json`** (schema `capacity-v1`) gives the running account's `headroom_pct`, its `binding_window`, `resets_at` and a `verdict`: `ok`, `low` (25 % or less), `critical` (10 % or less, or rate-limited) or `unknown` (no quota source: Cursor, Grok, Antigravity). It uses `ak pick`'s arithmetic, so the two never disagree, and reads a usage cache kept for 300 seconds (`--max-age`), so a check at every task boundary stays cheap. `--self` resolves the account `ak` launched; outside an `ak` launch it exits 3 and never guesses. `ak usage` still reads live and refreshes the cache.
+- **`ak capacity --self --json`** (schema `capacity-v1`) gives the running account's `headroom_pct`, its `binding_window`, `resets_at` and a `verdict`: `ok`, `low` (25 % or less), `critical` (10 % or less, or rate-limited) or `unknown` (no quota source: Cursor, Grok, or Antigravity on macOS). It uses `ak pick`'s arithmetic, so the two never disagree, and reads a usage cache kept for 300 seconds (`--max-age`), so a check at every task boundary stays cheap. `--self` resolves the account `ak` launched; outside an `ak` launch it exits 3 and never guesses. `ak usage` still reads live and refreshes the cache.
 - **Thresholds and drills.** `AGENTKIT_CAPACITY_LOW` and `AGENTKIT_CAPACITY_CRITICAL` (or `--low` and `--critical`) move the thresholds. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` can only lower a reading — it is how a drill makes an account look poor — and can never make one look richer.
 - **`ak lease <kind> @<profile> --owner <addr>`** holds an account for one lane; `ak lease release …` frees it once a successor has accepted the handoff, and `ak lease ls` lists the leases (schema `leases-v1`). A Codex profile takes a single lease — one writer per auth file — and only the owner releases a lease. Leases expire and are advisory records of numbers, profile names and pane addresses, never a credential.
 - **`ak pick <kind> --owner <lead>`** counts every active lease, the owner's own included: it ranks candidates by `headroom / (1 + leases)` and never offers a leased Codex account, not even to its holder. `--reuse @<profile>` hands one of the owner's own leases on, for example to a lane's successor. Without `--owner` the ranking is unchanged.
@@ -65,15 +65,15 @@ Work moves only among the accounts you declared for the plan, within each vendor
 ## Install
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.6.1`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.7.1`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |

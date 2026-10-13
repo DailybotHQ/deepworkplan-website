@@ -41,7 +41,7 @@ Every lane has a plan, at least a Lite plan in its own repository, and that plan
 
 ## The capacity loop
 
-An agent checks its own room before starting each task, after any gate or step that ran longer than 20 minutes, whenever its CLI shows a usage-limit warning, and before accepting a handoff or the leadership. The check is `ak capacity --self --json` from coding-agents-kit `v0.6.1`, which the pack's helper turns into a decision:
+An agent checks its own room before starting each task, after any gate or step that ran longer than 20 minutes, whenever its CLI shows a usage-limit warning, and before accepting a handoff or the leadership. The check is `ak capacity --self --json` from coding-agents-kit `v0.7.1`, which the pack's helper turns into a decision:
 
 | Verdict | Decision | A lane | A lead, for itself |
 | --- | --- | --- | --- |

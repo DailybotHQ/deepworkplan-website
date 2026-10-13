@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tem suas próprias flags para continuar uma sessão, sua própria forma de manter separada uma segunda conta, seu próprio modo headless e sua própria opção para pular os pedidos de permissão. O **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** coloca uma única superfície de comandos sobre todos eles: `ak <kind> [@profile]`.
 
-Este addon integra o kit ao **DWP v7** (pack `v7.7.0`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
+Este addon integra o kit ao **DWP v7** (pack `v7.7.1`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
 
 ## O que o kit oferece
 
@@ -25,7 +25,7 @@ Este addon integra o kit ao **DWP v7** (pack `v7.7.0`) como transporte de delega
 
 O kit trata cada login ou chave que você tem como uma **conta**: uma CLI × um perfil. `@default` (ou `@1`) é o home da própria CLI; `@2`, `@work` ou `@client-x` são logins independentes, cada um no próprio diretório sob a raiz de perfis, que rodam lado a lado. `ak profiles` os lista com o estado de login e os nomes das chaves; `ak profiles --json` entrega a mesma lista às ferramentas (schema `profiles-v1`). Desde a `v0.5.1`, ele informa onde o token do Claude Code realmente está — `file`, `keychain` (macOS), `none` ou `unknown` — apenas pela presença, sem nunca ler o segredo, e reconhece um login do Cursor no Linux, seja em um contêiner ou em um host Linux. Desde a `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` define a conta que um `ak <cli>` sem argumentos usa (um `@profile` posicional continua tendo prioridade), e é assim que um contêiner de desenvolvimento escolhe a conta do host que compartilha. Desde a `v0.5.3`, `ak codex` adiciona `--no-daemon` quando um home do Codex compartilhado com outra máquina registra um daemon em segundo plano que não está nesta.
 
-`ak usage` lista a cota e o uso de cada conta que o kit consegue ver, uma linha por conta e perfil: ao vivo para as assinaturas do Claude Code (janelas de 5 horas, semanal e por modelo), os logins do Codex com ChatGPT e as chaves do plano de programação da Z.AI; Cursor, Grok, xAI e Azure OpenAI mostram `n/d` com o motivo. É somente leitura: nunca renova um login, nunca imprime um token e nunca grava dentro de um perfil. `--json` entrega a mesma lista às ferramentas (schema `usage-v1`). Os endpoints de uso são internos do fornecedor e não oficiais.
+`ak usage` (também `ak status`) lista todas as contas de cada CLI que o kit conhece, uma linha por conta e perfil, sob a sua CLI: cota ao vivo para as assinaturas do Claude Code (janelas de 5 horas, semanal e por modelo), os logins do Codex com ChatGPT, as chaves do plano de programação da Z.AI e, desde a `v0.7.0`, os logins do Antigravity com Google no Linux e em contêineres (as janelas de cinco horas e semanal do próprio painel `/usage` do agy). Uma conta cuja cota não pode ser lida mantém a sua linha: `n/d` com a forma como está conectada e o motivo — Cursor, Grok, xAI, Azure OpenAI, uma chave de API do Gemini ou um login do Antigravity guardado no Keychain do macOS — ou `no login` com o comando que faz o login dela, então a tabela também mostra quais contas de cada CLI estão conectadas. É somente leitura: nunca renova um login, nunca imprime um token e nunca grava dentro de um perfil. `--json` entrega a mesma lista às ferramentas (schema `usage-v1`). Os endpoints de uso são internos do fornecedor e não oficiais.
 
 `ak pick <kind>` lê as mesmas linhas e aponta a conta com mais folga. `--count N` devolve até N contas, a melhor primeiro; `--exclude @<profile>` deixa de fora uma ocupada; `--model` conta a janela semanal de um modelo; `--need 5h:40` se recusa a escolher sem essa folga. `--json` entrega o schema `pick-v1`.
 
@@ -49,7 +49,7 @@ Para frentes longas e interativas, cada frente roda em um painel do [Herdr](/kit
 
 A partir da `v0.6.0`, um agente pode perguntar quanta folga a própria conta tem, a baixo custo, em cada limite entre tarefas — o sinal que permite a um enxame repassar o trabalho antes que uma conta se esgote ([Autonomia do enxame](/methodology/07-swarm-autonomy)).
 
-- **`ak capacity --self --json`** (schema `capacity-v1`) informa o `headroom_pct` da conta em execução, sua `binding_window`, `resets_at` e um `verdict`: `ok`, `low` (25 % ou menos), `critical` (10 % ou menos, ou com rate limit) ou `unknown` (sem fonte de cota: Cursor, Grok, Antigravity). Ele usa a aritmética do `ak pick`, então os dois nunca discordam, e lê um cache de uso mantido por 300 segundos (`--max-age`), então uma verificação em cada limite entre tarefas continua barata. `--self` resolve a conta que o `ak` iniciou; fora de um início pelo `ak`, ele sai com código 3 e nunca adivinha. `ak usage` continua lendo ao vivo e atualiza o cache.
+- **`ak capacity --self --json`** (schema `capacity-v1`) informa o `headroom_pct` da conta em execução, sua `binding_window`, `resets_at` e um `verdict`: `ok`, `low` (25 % ou menos), `critical` (10 % ou menos, ou com rate limit) ou `unknown` (sem fonte de cota: Cursor, Grok ou Antigravity no macOS). Ele usa a aritmética do `ak pick`, então os dois nunca discordam, e lê um cache de uso mantido por 300 segundos (`--max-age`), então uma verificação em cada limite entre tarefas continua barata. `--self` resolve a conta que o `ak` iniciou; fora de um início pelo `ak`, ele sai com código 3 e nunca adivinha. `ak usage` continua lendo ao vivo e atualiza o cache.
 - **Limiares e ensaios.** `AGENTKIT_CAPACITY_LOW` e `AGENTKIT_CAPACITY_CRITICAL` (ou `--low` e `--critical`) movem os limiares. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` só pode rebaixar uma leitura — é assim que um ensaio faz uma conta parecer escassa — e nunca pode fazer uma parecer mais folgada.
 - **`ak lease <kind> @<profile> --owner <addr>`** reserva uma conta para uma frente; `ak lease release …` a libera depois que um sucessor aceitou o repasse, e `ak lease ls` lista as reservas (schema `leases-v1`). Um perfil do Codex aceita uma única reserva — um escritor por arquivo de autenticação — e só o dono libera uma reserva. As reservas expiram e são registros consultivos de números, nomes de perfil e endereços de painel, nunca uma credencial.
 - **`ak pick <kind> --owner <lead>`** conta todas as reservas ativas, inclusive as do próprio dono: classifica as candidatas por `headroom / (1 + leases)` e nunca oferece uma conta do Codex reservada, nem mesmo a quem a detém. `--reuse @<profile>` repassa uma das reservas do próprio dono, por exemplo ao sucessor de uma frente. Sem `--owner`, a classificação não muda.
@@ -65,15 +65,15 @@ O trabalho só circula entre as contas que você declarou para o plano, dentro d
 ## Instalação
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.6.1`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
+Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v0.7.1`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, interface 1 |
+| Produto | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, interface 1 |
 | Chave de registro | `agentkit` em `.dwp/config.json` |
 | Transporte | headless: um `ak run` por delegado em uma worktree git dedicada |
 | Fornece | `subagents`, `cancel_children`, `model_routing` |

@@ -10,7 +10,7 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
 ```
 
 Текущий пакет 7.x по умолчанию создает новые планы в формате v7. Существующие планы сохраняют записанное поколение; для миграции требуется явный запрос.
@@ -66,11 +66,11 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.
 
 - **Навык Deep Work Plan** — Создаёт, выполняет, проверяет, возобновляет и уточняет планы. Не требует дополнений.
 - **[herdr](/ru/kit/herdr)** — Peer-агенты в панелях Herdr на любой машине: интерактивное делегирование с одним авторизованным ответом. Закреплено на `herdr-peers@v0.3.2`.
-- **[agentkit](/ru/kit/agentkit)** — Одна команда ak для любого терминального агента для кода: автономия по умолчанию с возможностью отказа и делегирование без интерфейса в worktree. Закреплено на `coding-agents-kit@v0.6.1`.
-- **[devcontainer](/ru/kit/devcontainer)** — Собственный dev-контейнер каждого репозитория из одного шаблона: агенты через ak, Herdr в обе стороны, SSH-ключи только при явном включении. Закреплено на `devcontainer-kit@v0.3.5`.
+- **[agentkit](/ru/kit/agentkit)** — Одна команда ak для любого терминального агента для кода: автономия по умолчанию с возможностью отказа и делегирование без интерфейса в worktree. Закреплено на `coding-agents-kit@v0.7.1`.
+- **[devcontainer](/ru/kit/devcontainer)** — Собственный dev-контейнер каждого репозитория из одного шаблона: агенты через ak, Herdr в обе стороны, SSH-ключи только при явном включении. Закреплено на `devcontainer-kit@v0.3.7`.
 - **[vim](/ru/kit/vim)** — Терминальный редактор с браузером планов только для чтения и просмотрщиком Markdown. Закреплено на `deepworkplan-vim@v0.7.0`.
 
-Реестр дополнений и дескрипторы поставляются в Deep Work Plan v7: `v7.7.0`
+Реестр дополнений и дескрипторы поставляются в Deep Work Plan v7: `v7.7.1`
 
 ### Примеры
 

@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (addon แรก)
 
-ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.3.5` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
+ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v0.3.7` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
 
 - **หน้า kit:** [Devcontainer](/kit/devcontainer)
 - **สิ่งที่เพิ่ม:** `docker/local/<service>/Dockerfile` จากอิมเมจทางการของรันไทม์ที่ตรึงด้วย digest (`python-3.13` `node-24` หรือ `debian` ไม่มีอิมเมจพื้นฐานที่ใช้ร่วมกัน) `dev.sh` ที่ทำงานบนตัวเรียกใช้ `dck` (`up`, `shell`, `rebuild`, `doctor`) เอเจนต์เขียนโค้ดเป็นเลเยอร์แบบ opt-in พอร์ตเฉพาะ loopback git ผ่าน SSH โดยใช้ agent ของโฮสต์โดยไม่มีคีย์อยู่ภายใน เว้นแต่นักพัฒนาจะเลือกเปิดใช้ `[ssh] copy_keys` ในโปรไฟล์โฮสต์ของตน และเครื่อง Herdr ต่อคอนเทนเนอร์พร้อมเลย์เอาต์มาตรฐาน
@@ -72,7 +72,7 @@ section: Addons
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) ทำให้การตรวจสอบความปลอดภัยบังคับของ Final Review มีการตรวจสอบในเครื่องแบบมีโครงสร้าง และเลือกที่จะควบคุม pull request ใน CI ตั้งแต่มาตรฐาน 2.3.0 **การตรวจสอบในเครื่องเป็นส่วนหนึ่งของพื้นฐาน** สิ่งที่เป็นแบบเลือกใช้คือพื้นผิว CI เท่านั้น addon นี้รีเฟรชอัตโนมัติตามรีลีส (release-auto-refreshed) ดังนั้นแท็กที่แสดงด้านล่างคือแท็กที่เป็นปัจจุบัน ณ เวลาที่เขียน และอาจตามหลังสำเนาที่ถูก vendor ไว้ — `SKILL.md` ของ addon เองและ GitHub releases ของมันคือแหล่งอ้างอิงที่ถูกต้องสำหรับแท็กที่ติดตั้งจริง การติดตั้งจะถูกตรึงไว้กับแท็กที่เผยแพร่แล้วเสมอ ไม่เคยตรึงกับ branch ที่เคลื่อนที่
 
 - **หน้า kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — ข้อมูลอ้างอิงความสามารถเต็มรูปแบบ
-- **จำเป็นตั้งแต่ onboarding (Phase 7a):** ติดตั้ง vendored skill แบบตรึงแท็ก (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer -y`) พร้อม `.review/extension.md` ที่ปรับให้เข้ากับรีโพ (ผ่าน `generate-extension`) ภายใต้ความยินยอมของ onboarding; การอัปเกรด harness แบบเจาะจงกระทบทั้งสองเมื่อขาดหายไป; การปฏิเสธถูกบันทึกเป็นข้อยกเว้นที่ประกาศไว้และ `verify` รายงานจนกว่าจะถูกติดตั้ง
+- **จำเป็นตั้งแต่ onboarding (Phase 7a):** ติดตั้ง vendored skill แบบตรึงแท็ก (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12 --skill ai-diff-reviewer -y`) พร้อม `.review/extension.md` ที่ปรับให้เข้ากับรีโพ (ผ่าน `generate-extension`) ภายใต้ความยินยอมของ onboarding; การอัปเกรด harness แบบเจาะจงกระทบทั้งสองเมื่อขาดหายไป; การปฏิเสธถูกบันทึกเป็นข้อยกเว้นที่ประกาศไว้และ `verify` รายงานจนกว่าจะถูกติดตั้ง
 - **จำเป็นในทุก Final Review:** การตรวจสอบความปลอดภัยรันโฟลว์หลักเริ่มต้นของ upstream บนชุดการเปลี่ยนแปลงสะสมและผนวกผลลัพธ์เข้า `analysis_results/SECURITY_REVIEW.md` ท้องถิ่นของแผน (ภายในโฟลเดอร์ของแผนเอง ไม่ใช่ที่รูทของ repo); skill หรือส่วนขยายที่หายไปเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึก — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน; **ข้อค้นพบ `critical` ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสิ้นบล็อกการเสร็จสิ้นจนกว่าจะแก้ไขหรือได้รับการยอมรับอย่างชัดเจน (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด BC-04)
 - **พื้นผิว CI แบบเลือกใช้ (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`) ผ่าน sub-skill `setup` ต้นทาง พร้อมผู้ช่วย `apply-review` (อ่านอย่างเดียว) และ `address-review` (ทำ commit, push และติดอาวุธใหม่; ใหม่ใน v3.1.1) เป็นเครื่องมือที่นักพัฒนาเรียกใช้ — เสนออย่างชัดเจน ไม่ติดตั้งเมื่อไม่ถูกขอ ไม่เคยเป็นค่าเริ่มต้น ไม่เคยเป็นไฟล์งานของแผน
 - **ไม่บล็อก (เฉพาะการเรียก):** การตรวจสอบในเครื่องที่เริ่มได้แต่เกิดข้อผิดพลาดคือ เตือนครั้งเดียว-บันทึก-ดำเนินต่อ; มันไม่เคยทำให้งานล้มเหลว
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit (addon ที่แปด)
 
-ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ปักหมุดที่ `v0.6.1`, interface `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
+ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ปักหมุดที่ `v0.7.1`, interface `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
 
 - **หน้า kit:** [Agentkit](/kit/agentkit)
 - **สิ่งที่เพิ่ม:** พื้นผิวคำสั่ง `ak` เดียวครอบ coding agent บนเทอร์มินัล ใช้รันงานในแผนที่มีขอบเขตแบบ headless โดยมอบความสามารถ `subagents`, `cancel_children` และ `model_routing` เฉพาะในขณะรันเมื่อเปิดใช้ ตรวจพบ และ interface เข้ากันได้เท่านั้น

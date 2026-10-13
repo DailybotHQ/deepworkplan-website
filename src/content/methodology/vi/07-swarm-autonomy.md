@@ -41,7 +41,7 @@ Mỗi lane có một kế hoạch, tối thiểu là một kế hoạch Lite tro
 
 ## Vòng lặp năng lực
 
-Một agent kiểm tra chỗ còn lại của chính nó trước khi bắt đầu mỗi tác vụ, sau bất kỳ cổng hay bước nào chạy lâu hơn 20 phút, bất cứ khi nào CLI của nó hiển thị cảnh báo giới hạn sử dụng, và trước khi nhận một lần bàn giao hoặc quyền lead. Việc kiểm tra là `ak capacity --self --json` từ coding-agents-kit `v0.6.1`, được trình trợ giúp của gói chuyển thành một quyết định:
+Một agent kiểm tra chỗ còn lại của chính nó trước khi bắt đầu mỗi tác vụ, sau bất kỳ cổng hay bước nào chạy lâu hơn 20 phút, bất cứ khi nào CLI của nó hiển thị cảnh báo giới hạn sử dụng, và trước khi nhận một lần bàn giao hoặc quyền lead. Việc kiểm tra là `ak capacity --self --json` từ coding-agents-kit `v0.7.1`, được trình trợ giúp của gói chuyển thành một quyết định:
 
 | Kết luận | Quyết định | Một lane | Một lead, cho chính nó |
 | --- | --- | --- | --- |

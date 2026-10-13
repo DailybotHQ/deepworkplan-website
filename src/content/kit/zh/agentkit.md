@@ -10,7 +10,7 @@ order: 8
 
 每个终端编码代理都有自己的一套参数用于继续会话，有自己的方式隔离第二个账户，有自己的无头模式，也有自己用于跳过权限提示的开关。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** 在它们之上提供统一的命令界面：`ak <kind> [@profile]`。
 
-这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.7.0`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
+这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.7.1`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
 
 ## 工具包为你提供什么
 
@@ -25,7 +25,7 @@ order: 8
 
 工具包把你持有的每个登录或密钥都视为一个**账户**：一个 CLI × 一个配置文件。`@default`（或 `@1`）是 CLI 自己的 home；`@2`、`@work` 或 `@client-x` 是独立的登录，各自位于配置文件根目录下的单独目录中，可同时运行。`ak profiles` 列出它们及其登录状态和密钥名称；`ak profiles --json` 为工具提供同一份列表（schema `profiles-v1`）。自 `v0.5.1` 起，它会报告 Claude Code 令牌的实际位置——`file`、`keychain`（macOS）、`none` 或 `unknown`——仅检测其是否存在，从不读取机密；并且能识别 Linux 上的 Cursor 登录，无论是在容器中还是在 Linux 主机上。自 `v0.5.2` 起，`AGENTKIT_DEFAULT_PROFILE_<CLI>` 指定不带参数的 `ak <cli>` 所使用的账户（位置参数 `@profile` 仍然优先），开发容器正是借此选择它所共享的主机账户。自 `v0.5.3` 起，当与另一台机器共享的 Codex home 记录了一个不在本机上的后台守护进程时，`ak codex` 会添加 `--no-daemon`。
 
-`ak usage` 列出工具包能看到的每个账户的配额和用量，每个账户和配置文件一行：Claude Code 订阅（5 小时、每周和按模型的窗口）、通过 ChatGPT 登录的 Codex 以及 Z.AI 编程套餐密钥均为实时数据；Cursor、Grok、xAI 和 Azure OpenAI 显示 `n/d` 并附上原因。该命令只读：从不刷新登录、从不打印令牌，也从不在配置文件中写入任何内容。`--json` 为工具提供同一份列表（schema `usage-v1`）。这些用量端点属于厂商内部接口，并非官方接口。
+`ak usage`（也可用 `ak status`）列出工具包所知的每个 CLI 的每个账户，在其所属 CLI 下每个账户和配置文件一行：Claude Code 订阅（5 小时、每周和按模型的窗口）、通过 ChatGPT 登录的 Codex、Z.AI 编程套餐密钥，以及自 `v0.7.0` 起在 Linux 和容器中通过 Google 登录的 Antigravity（agy 自身 `/usage` 面板中的五小时和每周窗口）均显示实时配额。无法读取配额的账户仍有自己的一行：显示 `n/d` 并附上其连接方式和原因——Cursor、Grok、xAI、Azure OpenAI、Gemini API 密钥，或保存在 macOS 钥匙串中的 Antigravity 登录——或者显示 `no login` 并附上用于登录的命令，因此该表也能显示每个 CLI 的哪些账户已连接。该命令只读：从不刷新登录、从不打印令牌，也从不在配置文件中写入任何内容。`--json` 为工具提供同一份列表（schema `usage-v1`）。这些用量端点属于厂商内部接口，并非官方接口。
 
 `ak pick <kind>` 读取同样的行，选出余量最多的账户。`--count N` 返回最多 N 个账户，按优劣排序；`--exclude @<profile>` 排除一个忙碌的账户；`--model` 计算单个模型的每周窗口；`--need 5h:40` 在余量不足时拒绝选择。`--json` 输出 schema `pick-v1`。
 
@@ -49,7 +49,7 @@ ak setup verify            # 按顺序的检查，每项附带修复命令
 
 自 `v0.6.0` 起，代理可以在每个任务边界以低成本查询自己的账户还剩多少余量——正是这一信号，让代理集群能在账户耗尽之前把工作交接出去（[集群自主](/methodology/07-swarm-autonomy)）。
 
-- **`ak capacity --self --json`**（schema `capacity-v1`）给出正在运行的账户的 `headroom_pct`、其 `binding_window`、`resets_at` 以及一个 `verdict`：`ok`、`low`（25 % 或更低）、`critical`（10 % 或更低，或已被限流）或 `unknown`（没有配额来源：Cursor、Grok、Antigravity）。它使用与 `ak pick` 相同的算法，因此两者从不矛盾；它读取保留 300 秒的用量缓存（`--max-age`），因此在每个任务边界检查一次的成本依然很低。`--self` 解析出由 `ak` 启动的那个账户；不在 `ak` 启动的环境中时，它以退出码 3 退出，从不猜测。`ak usage` 仍然实时读取并刷新缓存。
+- **`ak capacity --self --json`**（schema `capacity-v1`）给出正在运行的账户的 `headroom_pct`、其 `binding_window`、`resets_at` 以及一个 `verdict`：`ok`、`low`（25 % 或更低）、`critical`（10 % 或更低，或已被限流）或 `unknown`（没有配额来源：Cursor、Grok，或 macOS 上的 Antigravity）。它使用与 `ak pick` 相同的算法，因此两者从不矛盾；它读取保留 300 秒的用量缓存（`--max-age`），因此在每个任务边界检查一次的成本依然很低。`--self` 解析出由 `ak` 启动的那个账户；不在 `ak` 启动的环境中时，它以退出码 3 退出，从不猜测。`ak usage` 仍然实时读取并刷新缓存。
 - **阈值与演练。** `AGENTKIT_CAPACITY_LOW` 和 `AGENTKIT_CAPACITY_CRITICAL`（或 `--low` 和 `--critical`）用于调整阈值。`AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` 只能调低读数——演练正是借此让一个账户显得余量不足——绝不能让账户显得余量更多。
 - **`ak lease <kind> @<profile> --owner <addr>`** 为一条通道占用一个账户；继任者接受交接后，`ak lease release …` 将其释放，`ak lease ls` 列出各租约（schema `leases-v1`）。一个 Codex 配置档只接受一个租约——每个认证文件一个写入者——并且只有租约所有者才能释放租约。租约会过期，它们只是记录数字、配置档名称和窗格地址的建议性记录，绝不是凭据。
 - **`ak pick <kind> --owner <lead>`** 计入每个有效租约，包括所有者自己的租约：它按 `headroom / (1 + leases)` 对候选账户排序，并且从不提供已被租用的 Codex 账户，即使对其持有者也不提供。`--reuse @<profile>` 将所有者自己的某个租约转交出去，例如交给某条通道的继任者。不带 `--owner` 时，排序不变。
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v0.6.1`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v0.7.1`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v0.6.1`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v0.7.1`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |

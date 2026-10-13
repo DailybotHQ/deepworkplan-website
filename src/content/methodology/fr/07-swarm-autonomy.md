@@ -41,7 +41,7 @@ Chaque couloir a un plan, au moins un plan Lite dans son propre dépôt, et ce p
 
 ## La boucle de capacité
 
-Un agent vérifie sa propre marge avant de commencer chaque tâche, après toute porte de validation ou étape qui a duré plus de 20 minutes, chaque fois que sa CLI affiche un avertissement de limite d’utilisation, et avant d’accepter une passation ou le leadership. La vérification est `ak capacity --self --json` de coding-agents-kit `v0.6.1`, que le helper du pack traduit en décision :
+Un agent vérifie sa propre marge avant de commencer chaque tâche, après toute porte de validation ou étape qui a duré plus de 20 minutes, chaque fois que sa CLI affiche un avertissement de limite d’utilisation, et avant d’accepter une passation ou le leadership. La vérification est `ak capacity --self --json` de coding-agents-kit `v0.7.1`, que le helper du pack traduit en décision :
 
 | Verdict | Décision | Un couloir | Un coordinateur, pour lui-même |
 | --- | --- | --- | --- |

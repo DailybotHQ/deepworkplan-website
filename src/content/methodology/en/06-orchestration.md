@@ -99,4 +99,4 @@ The parent plan closes on evidence, not on reports:
 
 ## When an account or the lead runs out
 
-A long run outlives any one account. From coding-agents-kit `v0.6.1` and herdr-peers `v0.3.2`, a lane checks its own capacity at every task boundary and hands its work on through a packet before its account runs out, a lead hands the leadership on or is replaced by its deputy, and only critical items reach the developer. [Swarm autonomy](/methodology/07-swarm-autonomy) describes the loop, the packet, succession and the escalation classes.
+A long run outlives any one account. From coding-agents-kit `v0.7.1` and herdr-peers `v0.3.2`, a lane checks its own capacity at every task boundary and hands its work on through a packet before its account runs out, a lead hands the leadership on or is replaced by its deputy, and only critical items reach the developer. [Swarm autonomy](/methodology/07-swarm-autonomy) describes the loop, the packet, succession and the escalation classes.

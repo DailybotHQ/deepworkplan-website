@@ -10,7 +10,7 @@ order: 8
 
 Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caranya sendiri untuk memisahkan akun kedua, mode headless-nya sendiri, dan sakelarnya sendiri untuk melewati prompt izin. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** menyatukan semuanya di bawah satu permukaan perintah: `ak <kind> [@profile]`.
 
-Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.7.0`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
+Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.7.1`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
 ## Yang diberikan kit ini
 
@@ -25,7 +25,7 @@ Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.7.0`) seb
 
 Kit ini memperlakukan setiap login atau kunci yang Anda miliki sebagai sebuah **akun**: satu CLI × satu profil. `@default` (atau `@1`) adalah home milik CLI itu sendiri; `@2`, `@work`, atau `@client-x` adalah login terpisah, masing-masing di direktorinya sendiri di bawah akar profil, yang berjalan berdampingan. `ak profiles` menampilkan daftarnya beserta status login dan nama kuncinya; `ak profiles --json` memberikan daftar yang sama kepada tool (skema `profiles-v1`). Sejak `v0.5.1`, perintah ini melaporkan di mana token Claude Code sebenarnya berada — `file`, `keychain` (macOS), `none`, atau `unknown` — hanya berdasarkan keberadaannya, tanpa pernah membaca secret-nya, dan login Cursor di Linux, di dalam container atau di host Linux, kini dikenali. Sejak `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` menentukan akun yang dipakai oleh `ak <cli>` tanpa argumen (`@profile` posisional tetap diutamakan); dengan cara inilah dev container memilih akun host yang dibagikannya. Sejak `v0.5.3`, `ak codex` menambahkan `--no-daemon` ketika home Codex yang dibagikan dengan mesin lain mencatat daemon latar belakang yang tidak ada di mesin ini.
 
-`ak usage` menampilkan kuota dan pemakaian setiap akun yang dapat dilihat kit, satu baris per akun dan profil: langsung untuk langganan Claude Code (jendela 5 jam, mingguan, dan per model), login Codex melalui ChatGPT, serta kunci paket coding Z.AI; Cursor, Grok, xAI, dan Azure OpenAI menampilkan `n/d` beserta alasannya. Perintah ini hanya membaca: tidak pernah memperbarui login, tidak pernah mencetak token, dan tidak pernah menulis ke dalam profil. `--json` memberikan daftar yang sama kepada tool (skema `usage-v1`). Endpoint pemakaian bersifat internal vendor dan tidak resmi.
+`ak usage` (juga `ak status`) mencantumkan setiap akun dari setiap CLI yang dikenal kit, satu baris per akun dan profil, di bawah CLI-nya: kuota langsung untuk langganan Claude Code (jendela 5 jam, mingguan, dan per model), login Codex melalui ChatGPT, kunci paket coding Z.AI, dan, sejak `v0.7.0`, login Google Antigravity di Linux dan di dalam container (jendela lima jam dan mingguan dari panel `/usage` milik agy sendiri). Akun yang kuotanya tidak dapat dibaca tetap memiliki barisnya: `n/d` beserta cara akun itu terhubung dan alasannya — Cursor, Grok, xAI, Azure OpenAI, kunci API Gemini, atau login Antigravity yang disimpan di Keychain macOS — atau `no login` beserta perintah untuk login, sehingga tabel juga menunjukkan akun mana dari setiap CLI yang sudah terhubung. Perintah ini hanya membaca: tidak pernah memperbarui login, tidak pernah mencetak token, dan tidak pernah menulis ke dalam profil. `--json` memberikan daftar yang sama kepada tool (skema `usage-v1`). Endpoint pemakaian bersifat internal vendor dan tidak resmi.
 
 `ak pick <kind>` membaca baris yang sama dan menyebut akun dengan ruang terbanyak. `--count N` mengembalikan hingga N akun, yang terbaik lebih dulu; `--exclude @<profile>` mengecualikan akun yang sedang sibuk; `--model` menghitung jendela mingguan satu model; `--need 5h:40` menolak memilih tanpa ruang sebesar itu. `--json` memberikan skema `pick-v1`.
 
@@ -49,7 +49,7 @@ Untuk lane interaktif yang panjang, setiap lane berjalan di panel [Herdr](/kit/h
 
 Mulai `v0.6.0`, sebuah agen dapat menanyakan berapa banyak ruang yang tersisa di akunnya sendiri, dengan murah, di setiap batas tugas — sinyal yang memungkinkan sebuah swarm menyerahkan pekerjaan sebelum sebuah akun habis ([Otonomi swarm](/methodology/07-swarm-autonomy)).
 
-- **`ak capacity --self --json`** (skema `capacity-v1`) memberikan `headroom_pct` akun yang sedang berjalan, `binding_window`, `resets_at`, dan sebuah `verdict`: `ok`, `low` (25 % atau kurang), `critical` (10 % atau kurang, atau terkena rate limit), atau `unknown` (tanpa sumber kuota: Cursor, Grok, Antigravity). Perintah ini memakai aritmetika `ak pick`, sehingga keduanya tidak pernah berselisih, dan membaca cache penggunaan yang disimpan selama 300 detik (`--max-age`), sehingga pemeriksaan di setiap batas tugas tetap murah. `--self` menentukan akun yang diluncurkan `ak`; di luar peluncuran `ak`, ia keluar dengan kode 3 dan tidak pernah menebak. `ak usage` tetap membaca secara langsung dan menyegarkan cache.
+- **`ak capacity --self --json`** (skema `capacity-v1`) memberikan `headroom_pct` akun yang sedang berjalan, `binding_window`, `resets_at`, dan sebuah `verdict`: `ok`, `low` (25 % atau kurang), `critical` (10 % atau kurang, atau terkena rate limit), atau `unknown` (tanpa sumber kuota: Cursor, Grok, atau Antigravity di macOS). Perintah ini memakai aritmetika `ak pick`, sehingga keduanya tidak pernah berselisih, dan membaca cache penggunaan yang disimpan selama 300 detik (`--max-age`), sehingga pemeriksaan di setiap batas tugas tetap murah. `--self` menentukan akun yang diluncurkan `ak`; di luar peluncuran `ak`, ia keluar dengan kode 3 dan tidak pernah menebak. `ak usage` tetap membaca secara langsung dan menyegarkan cache.
 - **Ambang batas dan latihan.** `AGENTKIT_CAPACITY_LOW` dan `AGENTKIT_CAPACITY_CRITICAL` (atau `--low` dan `--critical`) menggeser ambang batas. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` hanya dapat menurunkan sebuah pembacaan — begitulah sebuah latihan membuat akun tampak miskin — dan tidak pernah dapat membuat akun tampak lebih kaya.
 - **`ak lease <kind> @<profile> --owner <addr>`** menahan sebuah akun untuk satu lane; `ak lease release …` membebaskannya setelah penerus menerima handoff, dan `ak lease ls` mencantumkan lease (skema `leases-v1`). Profil Codex hanya menerima satu lease — satu penulis per file auth — dan hanya pemiliknya yang dapat melepaskan sebuah lease. Lease kedaluwarsa dan merupakan catatan anjuran berisi angka, nama profil, dan alamat panel, tidak pernah kredensial.
 - **`ak pick <kind> --owner <lead>`** menghitung setiap lease aktif, termasuk milik pemilik itu sendiri: ia memeringkat kandidat dengan `headroom / (1 + leases)` dan tidak pernah menawarkan akun Codex yang sedang di-lease, bahkan kepada pemegangnya. `--reuse @<profile>` meneruskan salah satu lease milik pemilik itu sendiri, misalnya kepada penerus sebuah lane. Tanpa `--owner`, peringkatnya tidak berubah.
@@ -65,15 +65,15 @@ Pekerjaan hanya berpindah di antara akun yang Anda deklarasikan untuk rencana, d
 ## Instalasi
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.6.1`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v0.7.1`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |

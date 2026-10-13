@@ -10,7 +10,7 @@ order: 8
 
 Mỗi coding agent trên terminal đều có các cờ riêng để tiếp tục một phiên, cách riêng để tách biệt tài khoản thứ hai, chế độ headless riêng và công tắc riêng để bỏ qua các lời nhắc cấp quyền. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** đặt một bề mặt lệnh duy nhất lên tất cả chúng: `ak <kind> [@profile]`.
 
-Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.7.0`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
+Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.7.1`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
 
 ## Bộ kit mang lại cho bạn những gì
 
@@ -25,7 +25,7 @@ Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.7.0`) làm phương th
 
 Bộ kit coi mỗi phiên đăng nhập hoặc khóa bạn nắm giữ là một **tài khoản**: một CLI × một hồ sơ. `@default` (hoặc `@1`) là home riêng của CLI; `@2`, `@work` hay `@client-x` là các phiên đăng nhập riêng, mỗi phiên trong thư mục riêng dưới thư mục gốc của hồ sơ, chạy song song. `ak profiles` liệt kê chúng cùng trạng thái đăng nhập và tên các khóa; `ak profiles --json` cung cấp cùng danh sách đó cho các công cụ (schema `profiles-v1`). Từ `v0.5.1`, lệnh này báo cáo token của Claude Code thực sự nằm ở đâu — `file`, `keychain` (macOS), `none` hoặc `unknown` — chỉ dựa trên sự hiện diện, không bao giờ đọc secret, và nhận diện được phiên đăng nhập Cursor trên Linux, trong container hoặc trên máy host Linux. Từ `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` chỉ định tài khoản mà lệnh `ak <cli>` không kèm tham số sử dụng (một `@profile` theo vị trí vẫn được ưu tiên), và đó là cách một dev container chọn tài khoản host mà nó dùng chung. Từ `v0.5.3`, `ak codex` thêm `--no-daemon` khi một home Codex dùng chung với máy khác ghi nhận một daemon chạy nền không có trên máy này.
 
-`ak usage` liệt kê hạn mức và mức sử dụng của mọi tài khoản mà kit nhìn thấy, mỗi tài khoản và hồ sơ một dòng: trực tiếp cho các gói đăng ký Claude Code (cửa sổ 5 giờ, hằng tuần và theo từng mô hình), các lần đăng nhập Codex qua ChatGPT và khóa của gói lập trình Z.AI; Cursor, Grok, xAI và Azure OpenAI hiển thị `n/d` kèm lý do. Lệnh này chỉ đọc: không bao giờ làm mới phiên đăng nhập, không bao giờ in token và không bao giờ ghi vào bên trong một hồ sơ. `--json` cung cấp cùng danh sách đó cho các công cụ (schema `usage-v1`). Các endpoint sử dụng là nội bộ của nhà cung cấp và không chính thức.
+`ak usage` (hoặc `ak status`) liệt kê mọi tài khoản của mọi CLI mà kit biết, mỗi tài khoản và hồ sơ một dòng, nằm dưới CLI của nó: hạn mức trực tiếp cho các gói đăng ký Claude Code (cửa sổ 5 giờ, hằng tuần và theo từng mô hình), các lần đăng nhập Codex qua ChatGPT, khóa của gói lập trình Z.AI và, từ `v0.7.0`, các lần đăng nhập Google của Antigravity trên Linux và trong container (cửa sổ năm giờ và hằng tuần của chính bảng `/usage` của agy). Tài khoản không đọc được hạn mức vẫn có dòng của mình: `n/d` kèm cách nó được kết nối và lý do — Cursor, Grok, xAI, Azure OpenAI, một khóa API Gemini, hoặc một lần đăng nhập Antigravity được lưu trong Keychain của macOS — hoặc `no login` kèm lệnh để đăng nhập, nên bảng cũng cho thấy những tài khoản nào của mỗi CLI đã được kết nối. Lệnh này chỉ đọc: không bao giờ làm mới phiên đăng nhập, không bao giờ in token và không bao giờ ghi vào bên trong một hồ sơ. `--json` cung cấp cùng danh sách đó cho các công cụ (schema `usage-v1`). Các endpoint sử dụng là nội bộ của nhà cung cấp và không chính thức.
 
 `ak pick <kind>` đọc cùng các dòng đó và chỉ ra tài khoản còn nhiều chỗ nhất. `--count N` trả về tối đa N tài khoản, tốt nhất trước; `--exclude @<profile>` loại một tài khoản đang bận; `--model` tính cửa sổ hằng tuần của một mô hình; `--need 5h:40` từ chối chọn khi không còn đủ chỗ như vậy. `--json` cung cấp schema `pick-v1`.
 
@@ -49,7 +49,7 @@ Với các lane dài và có tương tác, mỗi lane chạy trong một pane [H
 
 Từ `v0.6.0`, một agent có thể hỏi tài khoản của chính nó còn bao nhiêu chỗ, với chi phí thấp, tại mỗi ranh giới tác vụ — tín hiệu cho phép một bầy agent chuyển giao công việc trước khi một tài khoản cạn ([Tự chủ của bầy agent](/methodology/07-swarm-autonomy)).
 
-- **`ak capacity --self --json`** (schema `capacity-v1`) cho biết `headroom_pct` của tài khoản đang chạy, `binding_window`, `resets_at` của nó và một `verdict`: `ok`, `low` (25 % trở xuống), `critical` (10 % trở xuống, hoặc bị giới hạn tốc độ) hoặc `unknown` (không có nguồn hạn mức: Cursor, Grok, Antigravity). Lệnh này dùng cùng phép tính của `ak pick`, nên hai lệnh không bao giờ mâu thuẫn, và đọc một bộ nhớ đệm mức sử dụng được giữ trong 300 giây (`--max-age`), nên việc kiểm tra tại mỗi ranh giới tác vụ vẫn rẻ. `--self` xác định tài khoản mà `ak` đã khởi chạy; ngoài một lần khởi chạy bằng `ak`, lệnh thoát với mã 3 và không bao giờ đoán. `ak usage` vẫn đọc trực tiếp và làm mới bộ nhớ đệm.
+- **`ak capacity --self --json`** (schema `capacity-v1`) cho biết `headroom_pct` của tài khoản đang chạy, `binding_window`, `resets_at` của nó và một `verdict`: `ok`, `low` (25 % trở xuống), `critical` (10 % trở xuống, hoặc bị giới hạn tốc độ) hoặc `unknown` (không có nguồn hạn mức: Cursor, Grok, hoặc Antigravity trên macOS). Lệnh này dùng cùng phép tính của `ak pick`, nên hai lệnh không bao giờ mâu thuẫn, và đọc một bộ nhớ đệm mức sử dụng được giữ trong 300 giây (`--max-age`), nên việc kiểm tra tại mỗi ranh giới tác vụ vẫn rẻ. `--self` xác định tài khoản mà `ak` đã khởi chạy; ngoài một lần khởi chạy bằng `ak`, lệnh thoát với mã 3 và không bao giờ đoán. `ak usage` vẫn đọc trực tiếp và làm mới bộ nhớ đệm.
 - **Ngưỡng và diễn tập.** `AGENTKIT_CAPACITY_LOW` và `AGENTKIT_CAPACITY_CRITICAL` (hoặc `--low` và `--critical`) dịch chuyển các ngưỡng. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` chỉ có thể hạ một số đo — đó là cách một buổi diễn tập làm cho một tài khoản trông như sắp cạn — và không bao giờ làm cho tài khoản trông dư dả hơn.
 - **`ak lease <kind> @<profile> --owner <addr>`** giữ một tài khoản cho một lane; `ak lease release …` giải phóng nó khi một agent kế nhiệm đã chấp nhận bàn giao, và `ak lease ls` liệt kê các lease (schema `leases-v1`). Một hồ sơ Codex chỉ nhận một lease — một bên ghi cho mỗi tệp xác thực — và chỉ chủ sở hữu mới giải phóng được lease. Lease có thời hạn và chỉ là bản ghi tham khảo gồm các con số, tên hồ sơ và địa chỉ pane, không bao giờ là thông tin xác thực.
 - **`ak pick <kind> --owner <lead>`** đếm mọi lease đang hoạt động, kể cả lease của chính chủ sở hữu: nó xếp hạng ứng viên theo `headroom / (1 + leases)` và không bao giờ đề xuất một tài khoản Codex đang được lease, kể cả cho người đang giữ nó. `--reuse @<profile>` chuyển tiếp một lease của chính chủ sở hữu, chẳng hạn cho agent kế nhiệm của một lane. Khi không có `--owner`, thứ hạng không đổi.
@@ -65,15 +65,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.6.1`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.7.1`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v0.6.1`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |

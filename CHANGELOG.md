@@ -17,7 +17,9 @@ existing GitHub release notes.
 
 ### Changed
 
-- chore: vendor DWP pack v7.7.0 (swarm autonomy) and move the ecosystem pins to it, coding-agents-kit v0.6.1 and herdr-peers v0.3.2 (tags and SHA256SUMS digests on every install surface); the spec reader, chapter 7 and `/kit/herdr` carry the release's drill learnings (claim before launch, lane-owned leases, never poll, edge-case inputs and sentinel output checks, repository-qualified plan ids)
+- chore: vendor DWP pack v7.7.1 (swarm autonomy) and move the ecosystem pins to it, coding-agents-kit v0.7.1, herdr-peers v0.3.2, devcontainer-kit v0.3.7, AI Diff Reviewer v3.3.12 and Dailybot v3.23.15 (tags and SHA256SUMS digests on every install surface); the spec reader, chapter 7 and `/kit/herdr` carry the release's drill learnings (claim before launch, lane-owned leases, never poll, edge-case inputs and sentinel output checks, repository-qualified plan ids)
+- docs: `/kit/agentkit` and the quickstart describe coding-agents-kit v0.7.x: `ak usage` (also `ak status`) lists every account of every CLI, and reads Antigravity's quota on Linux and in containers — 17 languages
+- chore: re-render the dev container with devcontainer-kit v0.3.7 (`antigravity` added to the agent CLIs; coding-agents-kit v0.7.1 and herdr-peers v0.3.2 in the image)
 - docs: AGENTS.md working principles — decide and record routine choices, escalate only the critical classes C1–C7
 
 ### Fixed

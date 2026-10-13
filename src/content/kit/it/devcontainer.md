@@ -8,7 +8,7 @@ order: 1
 
 # Addon devcontainer
 
-Dai al repository un container di sviluppo riproducibile e isolato, che persone, editor e agenti di codice possano usare allo stesso modo. In **DWP v7** (pack `v7.7.0`) questo addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un prodotto MIT che funziona senza Deep Work Plan. È opzionale: un repository è pienamente conforme anche senza di esso.
+Dai al repository un container di sviluppo riproducibile e isolato, che persone, editor e agenti di codice possano usare allo stesso modo. In **DWP v7** (pack `v7.7.1`) questo addon integra **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un prodotto MIT che funziona senza Deep Work Plan. È opzionale: un repository è pienamente conforme anche senza di esso.
 
 ## Cosa fornisce devcontainer-kit
 
@@ -21,15 +21,15 @@ Dai al repository un container di sviluppo riproducibile e isolato, che persone,
 ## Installazione
 
 ```bash
-git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.7 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v0.3.5`: `v0.2.0` non è supportata.
+Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v0.3.7`: `v0.2.0` non è supportata.
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.3.5`, interfaccia 2 |
+| Prodotto | `DailybotHQ/devcontainer-kit`, tag `v0.3.7`, interfaccia 2 |
 | Chiave di registro | `devcontainer` in `.dwp/config.json` |
 | Configurazione per repository | `.devcontainer/dck.toml` |
 | Rilevamento | `dck doctor --json` |

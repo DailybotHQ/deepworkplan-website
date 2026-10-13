@@ -41,7 +41,7 @@ Her şeridin bir planı vardır, en azından kendi deposunda bir Lite plan, ve b
 
 ## Kapasite döngüsü
 
-Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren herhangi bir kapı ya da adımdan sonra, CLI'ı bir kullanım sınırı uyarısı gösterdiğinde ve bir devri ya da liderliği kabul etmeden önce kontrol eder. Kontrol, coding-agents-kit `v0.6.1` ile gelen `ak capacity --self --json` komutudur; paketin yardımcısı onu bir karara dönüştürür:
+Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren herhangi bir kapı ya da adımdan sonra, CLI'ı bir kullanım sınırı uyarısı gösterdiğinde ve bir devri ya da liderliği kabul etmeden önce kontrol eder. Kontrol, coding-agents-kit `v0.7.1` ile gelen `ak capacity --self --json` komutudur; paketin yardımcısı onu bir karara dönüştürür:
 
 | Sonuç | Karar | Bir şerit | Bir lider, kendisi için |
 | --- | --- | --- | --- |

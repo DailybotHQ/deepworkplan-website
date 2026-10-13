@@ -99,4 +99,4 @@ Depolar birbirine bağımlıdır; bu nedenle bağımlılık sırasıyla yayımla
 
 ## Bir hesap ya da lider tükendiğinde
 
-Uzun bir çalıştırma herhangi bir hesaptan daha uzun sürer. coding-agents-kit `v0.6.1` ve herdr-peers `v0.3.2` ile bir şerit her görev sınırında kendi kapasitesini kontrol eder ve hesabı tükenmeden önce işini bir paketle devreder, bir lider liderliği devreder ya da yerini vekili alır ve geliştiriciye yalnızca kritik öğeler ulaşır. [Sürü özerkliği](/tr/methodology/07-swarm-autonomy) döngüyü, paketi, halefiyeti ve yükseltme sınıflarını açıklar.
+Uzun bir çalıştırma herhangi bir hesaptan daha uzun sürer. coding-agents-kit `v0.7.1` ve herdr-peers `v0.3.2` ile bir şerit her görev sınırında kendi kapasitesini kontrol eder ve hesabı tükenmeden önce işini bir paketle devreder, bir lider liderliği devreder ya da yerini vekili alır ve geliştiriciye yalnızca kritik öğeler ulaşır. [Sürü özerkliği](/tr/methodology/07-swarm-autonomy) döngüyü, paketi, halefiyeti ve yükseltme sınıflarını açıklar.

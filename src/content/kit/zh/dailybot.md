@@ -69,7 +69,7 @@ DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连
 
 | 组件 | 命令 / 路径 |
 |------|-------------|
-| **Dailybot 代理技能**（推荐） | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.14 --skill dailybot -y` |
+| **Dailybot 代理技能**（推荐） | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot -y` |
 | **更新现有技能** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI**（技能包基线 `>= 3.9.0`；Plan 需要 `>= 3.25.0`） | 首次使用时由技能通过已验证的 `shared/auth.md` 安装；或 `pip install 'dailybot-cli>=3.9.0'`、Homebrew，或 [cli.dailybot.com](https://cli.dailybot.com) 上的校验和验证安装器 |

@@ -10,7 +10,7 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.7.0`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v7**（パック `v7.7.1`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 ## キットが提供するもの
 
@@ -25,7 +25,7 @@ order: 8
 
 キットは、あなたが持つログインやキーの一つひとつを**アカウント**として扱います。一つの CLI × 一つのプロファイルです。`@default`（または `@1`）は CLI 自身の home で、`@2`、`@work`、`@client-x` は別々のログインです。それぞれプロファイルのルート配下の専用ディレクトリに置かれ、並行して動きます。`ak profiles` はそれらをログイン状態とキーの名前とともに一覧表示し、`ak profiles --json` はツール向けに同じ一覧を返します（スキーマ `profiles-v1`）。`v0.5.1` 以降は、Claude Code のトークンが実際にどこにあるか（`file`、`keychain`（macOS）、`none`、`unknown`）を、シークレットを読まずに存在の有無だけで報告します。また、コンテナ内でも Linux ホスト上でも、Linux 上の Cursor ログインを認識します。`v0.5.2` 以降は、`AGENTKIT_DEFAULT_PROFILE_<CLI>` で引数なしの `ak <cli>` が使うアカウントを指定できます（位置引数の `@profile` が引き続き優先されます）。開発コンテナはこの仕組みで、共有するホストアカウントを選びます。`v0.5.3` 以降、別のマシンと共有している Codex home に、このマシン上にないバックグラウンドデーモンが記録されている場合、`ak codex` は `--no-daemon` を付けます。
 
-`ak usage` は、キットから見えるすべてのアカウントのクォータと使用量を、アカウントとプロファイルごとに 1 行で一覧表示します。Claude Code のサブスクリプション（5 時間、週次、モデル別のウィンドウ）、ChatGPT での Codex ログイン、Z.AI コーディングプランのキーはライブで取得し、Cursor、Grok、xAI、Azure OpenAI は理由付きで `n/d` と表示します。読み取り専用で、ログインを更新することも、トークンを表示することも、プロファイル内に書き込むこともありません。`--json` はツール向けに同じ一覧を返します（スキーマ `usage-v1`）。使用量のエンドポイントはベンダー内部の非公式なものです。
+`ak usage`（`ak status` でも可）は、キットが把握しているすべての CLI のすべてのアカウントを、CLI ごとにアカウントとプロファイル単位で 1 行ずつ一覧表示します。Claude Code のサブスクリプション（5 時間、週次、モデル別のウィンドウ）、ChatGPT での Codex ログイン、Z.AI コーディングプランのキー、そして `v0.7.0` 以降は Linux とコンテナ内での Antigravity の Google ログイン（agy 自身の `/usage` パネルにある 5 時間と週次のウィンドウ）のクォータをライブで取得します。クォータを読み取れないアカウントにも行があり、接続方法と理由を添えて `n/d`（Cursor、Grok、xAI、Azure OpenAI、Gemini API キー、または macOS のキーチェーンに保存された Antigravity ログイン）と表示するか、ログインするためのコマンドを添えて `no login` と表示します。そのため、この表で各 CLI のどのアカウントが接続済みかもわかります。読み取り専用で、ログインを更新することも、トークンを表示することも、プロファイル内に書き込むこともありません。`--json` はツール向けに同じ一覧を返します（スキーマ `usage-v1`）。使用量のエンドポイントはベンダー内部の非公式なものです。
 
 `ak pick <kind>` は同じ行を読み、余裕の最も大きいアカウントを示します。`--count N` は余裕の大きい順に最大 N 個のアカウントを返し、`--exclude @<profile>` は使用中のアカウントを除外し、`--model` は一つのモデルの週次ウィンドウで数え、`--need 5h:40` はそれだけの余裕がなければ選択を拒みます。`--json` はスキーマ `pick-v1` を返します。
 
@@ -49,7 +49,7 @@ ak setup verify            # 順序付きのチェック（それぞれに修復
 
 `v0.6.0` 以降、エージェントは自分のアカウントにどれだけ余裕があるかを、すべてのタスクの境目で低コストに尋ねられます。これが、アカウントが尽きる前にスウォームが作業を引き渡すための合図です（[スウォームの自律性](/methodology/07-swarm-autonomy)）。
 
-- **`ak capacity --self --json`**（スキーマ `capacity-v1`）は、実行中のアカウントの `headroom_pct`、その `binding_window`、`resets_at`、そして `verdict` を返します。`verdict` は `ok`、`low`（25 % 以下）、`critical`（10 % 以下、またはレート制限中）、`unknown`（クォータの情報源がない：Cursor、Grok、Antigravity）のいずれかです。`ak pick` と同じ計算を使うため両者が食い違うことはなく、300 秒保持される使用量キャッシュ（`--max-age`）を読むため、タスクの境目ごとの確認も低コストに保たれます。`--self` は `ak` が起動したアカウントを解決します。`ak` による起動の外では終了コード 3 で終了し、推測することは決してありません。`ak usage` は引き続きライブで読み取り、キャッシュを更新します。
+- **`ak capacity --self --json`**（スキーマ `capacity-v1`）は、実行中のアカウントの `headroom_pct`、その `binding_window`、`resets_at`、そして `verdict` を返します。`verdict` は `ok`、`low`（25 % 以下）、`critical`（10 % 以下、またはレート制限中）、`unknown`（クォータの情報源がない：Cursor、Grok、または macOS 上の Antigravity）のいずれかです。`ak pick` と同じ計算を使うため両者が食い違うことはなく、300 秒保持される使用量キャッシュ（`--max-age`）を読むため、タスクの境目ごとの確認も低コストに保たれます。`--self` は `ak` が起動したアカウントを解決します。`ak` による起動の外では終了コード 3 で終了し、推測することは決してありません。`ak usage` は引き続きライブで読み取り、キャッシュを更新します。
 - **しきい値と訓練。** `AGENTKIT_CAPACITY_LOW` と `AGENTKIT_CAPACITY_CRITICAL`（または `--low` と `--critical`）でしきい値を動かせます。`AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` は読み取り値を下げることしかできません。訓練でアカウントを余裕のないように見せる方法であり、アカウントをより余裕があるように見せることは決してできません。
 - **`ak lease <kind> @<profile> --owner <addr>`** は一つのレーンのためにアカウントを確保します。後継がハンドオフを受け入れたら `ak lease release …` で解放し、`ak lease ls` でリースを一覧表示します（スキーマ `leases-v1`）。Codex のプロファイルが受け付けるリースは一つだけで（認証ファイルごとに書き手は一人）、リースを解放できるのはその所有者だけです。リースは期限切れになり、数値、プロファイル名、ペインのアドレスを記録した助言的な記録にすぎず、認証情報では決してありません。
 - **`ak pick <kind> --owner <lead>`** は、所有者自身のものも含め、有効なリースをすべて数えます。候補を `headroom / (1 + leases)` で順位付けし、リース中の Codex アカウントは保有者自身にも決して提示しません。`--reuse @<profile>` は所有者自身のリースの一つを引き継がせます。たとえばレーンの後継に渡す場合です。`--owner` がなければ順位付けは変わりません。
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v0.6.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.6.1` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.7.1` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.6.1`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.7.1`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
