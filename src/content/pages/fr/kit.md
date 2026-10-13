@@ -10,7 +10,7 @@ Le kit est tout ce dont vous avez besoin pour exécuter la méthodologie en prat
 `DailybotHQ/deepworkplan-skill` :
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
 ```
 
 Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite.
@@ -65,12 +65,12 @@ Des capacités que le flux onboard superpose à un dépôt. Sept sont facultativ
 **La méthodologie fonctionne seule. Les addons l’amplifient.** Chaque addon est un intégrateur léger au sein de la skill Deep Work Plan, épinglé par tag à un produit doté de son propre dépôt, de sa propre version et de sa propre version d’interface. Chaque produit fonctionne sans Deep Work Plan, et aucun addon n’est requis.
 
 - **Skill Deep Work Plan** — Créer, exécuter, vérifier, reprendre et affiner des plans. Ne nécessite aucun addon.
-- **[herdr](/fr/kit/herdr)** — Des pairs dans des panneaux Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée. Épinglé à `herdr-peers@v0.2.3`.
-- **[agentkit](/fr/kit/agentkit)** — Une seule commande ak pour chaque agent de code en terminal : autonomie par défaut avec possibilité de retrait, et délégation sans interface dans un worktree. Épinglé à `coding-agents-kit@v0.5.3`.
-- **[devcontainer](/fr/kit/devcontainer)** — Le conteneur de développement propre à chaque dépôt, issu d’un seul modèle : agents via ak, Herdr dans les deux sens, clés SSH uniquement sur activation explicite. Épinglé à `devcontainer-kit@v0.3.5`.
+- **[herdr](/fr/kit/herdr)** — Des pairs dans des panneaux Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée. Épinglé à `herdr-peers@v0.3.2`.
+- **[agentkit](/fr/kit/agentkit)** — Une seule commande ak pour chaque agent de code en terminal : autonomie par défaut avec possibilité de retrait, et délégation sans interface dans un worktree. Épinglé à `coding-agents-kit@v0.7.1`.
+- **[devcontainer](/fr/kit/devcontainer)** — Le conteneur de développement propre à chaque dépôt, issu d’un seul modèle : agents via ak, Herdr dans les deux sens, clés SSH uniquement sur activation explicite. Épinglé à `devcontainer-kit@v0.3.7`.
 - **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v0.7.0`.
 
-Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 : `v7.6.3`
+Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v7 : `v7.7.1`
 
 ### Exemples
 

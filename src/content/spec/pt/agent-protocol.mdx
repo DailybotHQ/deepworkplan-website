@@ -120,3 +120,27 @@ Interromper é sucesso, não falha: o registro bloqueado é a mensagem de escala
 ### Continuação agendada
 
 Em plataformas com agendamento — heartbeat ou cron do OpenClaw, cron do Hermes, acordar de agente em nuvem — a continuação DEVE (MUST) ser expressa como: *acordar → executar o Protocolo de Retomada do DWP → se `blocked`, reportar e ceder → senão executar a próxima tarefa atômica → atualizar a camada de estado → ceder.* O plano, não a sessão, é a unidade de continuidade; um plano DEVE (MUST) sobreviver à reinicialização da plataforma, à troca de modelo ou a um agente diferente que assume o próximo turno.
+
+### Taxonomia de escalação
+
+Tudo o que não está listado abaixo como **crítico** é decidido pelo agente: ele investiga, adota a opção recomendada, **registra a decisão** — em "Decisions" do `PROGRESS.md` ou em `decisions[]` de um pacote de repasse: as opções, a escolha, o porquê e como revertê-la — e continua. O teste é mecânico: uma escalação DEVE (MUST) nomear sua classe; uma pergunta que não nomeia nenhuma é uma decisão que cabe ao agente. Esta é a §7.5 do `AGENT_PROTOCOL.md` do pack.
+
+| Classe | Crítico — perguntar ao desenvolvedor, com a investigação, as opções e uma recomendação |
+| --- | --- |
+| **C1 Autoridade** | Uma ação fora da autorização ou do escopo do plano, ou em um checkpoint de consentimento: operações destrutivas ou irreversíveis, deploys em produção, publicações ou releases além do plano, mensagens a pessoas de fora dos agentes do plano, gastos ou cobrança, postura de segurança ou acesso a segredos. |
+| **C2 Tela de consentimento** | Qualquer tela de permissão, de bypass de permissões, de login, de credenciais, de consentimento MCP ou de pagamento. Nunca recebe teclas de um agente. |
+| **C3 Ambiguidade irredutível** | Dois resultados materialmente diferentes satisfazem o pedido e nada no repositório, na sua documentação, nos planos ou em decisões anteriores resolve a questão. |
+| **C4 Conflito de qualidade** | Um gate não consegue passar sem ser enfraquecido, ou a evidência contradiz o objetivo ou as premissas do plano de um jeito que o escopo da tarefa não consegue corrigir. |
+| **C5 Dano** | Perda ou corrupção inexplicada de estado compartilhado, de dados ou do trabalho de outro agente. |
+| **C6 Termos** | Questões jurídicas, de licenciamento, de termos do fornecedor ou de privacidade. |
+| **C7 Capacidade esgotada** | Nenhuma conta do conjunto declarado pelo desenvolvedor tem folga e nenhuma é renovada dentro do horizonte do plano. |
+
+**Decidido de forma autônoma** (lista não exaustiva): abordagem de implementação, nomes, estrutura, testes e documentação; ordenar e dividir tarefas dentro do plano; novas tentativas e reparos dentro da superfície tocada da tarefa; corrigir um problema de ambiente que o agente consegue corrigir — uma ferramenta local ausente, um locale, um cache desatualizado — em vez de reportá-lo; registrar uma falha comprovadamente existente no branch base em vez de escalá-la (a condição de parada 1 continua valendo para as falhas da própria mudança); escolher uma conta ou um fornecedor do conjunto; iniciar, reiniciar e fechar os próprios agentes; repasse e sucessão; qual de várias opções equivalentes adotar (a recomendada).
+
+Três limites mantêm a autonomia honesta:
+
+1. **A autonomia nunca fecha um gate humano.** Um critério ou checkpoint que nomeia uma aprovação humana só é satisfeito por essa pessoa, nunca por uma instrução permanente de "seja autônomo" ou por `trust`.
+2. **As palavras literais do desenvolvedor prevalecem.** Quando a opção recomendada contradiz o que o desenvolvedor pediu literalmente, entregue a opção reversível que respeita o pedido e registre a recomendação (C3 se não existir opção reversível).
+3. **A autoridade não é transitiva.** Uma aprovação retransmitida não acrescenta autoridade; um agente lê a autorização do plano por conta própria. A autoridade humana é mantida literalmente na pasta do plano; um agente que a retransmite registra "retransmitido por `<agent>`".
+
+**Agrupe as perguntas.** Os itens críticos que podem esperar são reunidos e perguntados juntos em um único ponto planejado, cada um com seu padrão recomendado, para que o desenvolvedor responda uma só vez. **Em uma execução com vários agentes, um item crítico bloqueia sua cadeia de dependências, não a execução:** o líder estaciona a tarefa bloqueada — o registro `blocked` dela no `state.json`, preenchido como nas condições de parada acima, é a escalação, enviada uma única vez pelo canal de reporte —, mantém todos os agentes independentes trabalhando e retoma a cadeia quando o desenvolvedor responde. As condições de parada continuam sendo a regra para um plano individual; o líder as aplica por cadeia. Como um enxame de agentes aplica isso está descrito em [Autonomia do enxame](/pt/methodology/07-swarm-autonomy).

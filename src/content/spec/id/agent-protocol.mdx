@@ -120,3 +120,27 @@ Berhenti adalah keberhasilan, bukan kegagalan: catatan terblokir adalah pesan es
 ### Kelanjutan terjadwal
 
 Pada platform dengan penjadwalan — heartbeat atau cron OpenClaw, cron Hermes, bangun cloud-agent — kelanjutan MUST dinyatakan sebagai: *bangun → jalankan Protokol Resume DWP → jika `blocked`, laporkan dan yield → jika tidak, eksekusi tugas atomik berikutnya → perbarui lapisan status → yield.* Rencana, bukan sesi, adalah unit kontinuitas; sebuah rencana MUST bertahan dari platform yang restart, model yang berubah, atau agent yang berbeda yang mengambil alih giliran berikutnya.
+
+### Taksonomi eskalasi
+
+Segala hal yang tidak tercantum di bawah sebagai **kritis** diputuskan oleh agent: ia menyelidiki, mengambil opsi yang direkomendasikan, **mencatat keputusannya** — di bagian "Decisions" pada `PROGRESS.md` atau di `decisions[]` milik paket handoff: opsi-opsinya, pilihannya, alasannya, dan cara membatalkannya — lalu melanjutkan. Ujiannya mekanis: sebuah eskalasi MUST menyebut kelasnya; pertanyaan yang tidak menyebut kelas apa pun adalah keputusan yang menjadi kewajiban agent. Ini adalah §7.5 dari `AGENT_PROTOCOL.md` milik pack.
+
+| Kelas | Kritis — tanyakan kepada pengembang, dengan hasil penyelidikan, opsi-opsinya, dan sebuah rekomendasi |
+| --- | --- |
+| **C1 Otoritas** | Tindakan di luar otorisasi atau cakupan rencana, atau pada titik persetujuan: operasi destruktif atau tidak dapat dibatalkan, deploy produksi, penerbitan atau rilis di luar rencana, pesan kepada orang di luar agent-agent rencana, pengeluaran atau penagihan, postur keamanan atau akses ke secrets. |
+| **C2 Layar persetujuan** | Layar izin, bypass-permissions, login, kredensial, persetujuan MCP, atau pembayaran apa pun. Tidak pernah dijawab dengan tombol oleh agent. |
+| **C3 Ambiguitas yang tak tereduksi** | Dua hasil yang berbeda secara material memenuhi permintaan dan tidak ada apa pun di repositori, dokumentasinya, rencana-rencana, atau keputusan sebelumnya yang memutuskannya. |
+| **C4 Konflik kualitas** | Sebuah gate tidak dapat lulus tanpa dilemahkan, atau bukti bertentangan dengan tujuan atau asumsi rencana dengan cara yang tidak dapat diperbaiki oleh cakupan tugas. |
+| **C5 Kerusakan** | Kehilangan atau kerusakan yang tidak dapat dijelaskan pada status bersama, data, atau pekerjaan agent lain. |
+| **C6 Ketentuan** | Pertanyaan hukum, lisensi, ketentuan vendor, atau privasi. |
+| **C7 Kapasitas habis** | Tidak ada akun di pool yang dideklarasikan pengembang yang masih memiliki ruang dan tidak ada yang di-reset dalam horizon rencana. |
+
+**Diputuskan secara otonom** (tidak lengkap): pendekatan implementasi, penamaan, struktur, test, dan dokumentasi; mengurutkan dan memecah tugas di dalam rencana; percobaan ulang dan perbaikan di dalam touched surface tugas; memperbaiki masalah lingkungan yang dapat diperbaiki agent — alat lokal yang hilang, locale, cache yang usang — alih-alih melaporkannya; mencatat kegagalan yang terbukti sudah ada di branch dasar alih-alih mengeskalasikannya (kondisi berhenti 1 tetap berlaku untuk kegagalan perubahan itu sendiri); memilih akun atau vendor dari pool; meluncurkan, meluncurkan ulang, dan menutup agent-agentnya sendiri; handoff dan suksesi; opsi mana yang diambil di antara beberapa opsi yang setara (yang direkomendasikan).
+
+Tiga batas menjaga otonomi tetap jujur:
+
+1. **Otonomi tidak pernah menutup gate manusia.** Kriteria atau titik kontrol yang menyebut persetujuan manusia hanya terpenuhi oleh manusia itu, tidak pernah oleh instruksi tetap "bersikaplah otonom" atau `trust`.
+2. **Kata-kata harfiah pengembang yang menang.** Ketika opsi yang direkomendasikan bertentangan dengan apa yang secara harfiah diminta pengembang, kirimkan opsi yang dapat dibatalkan yang menghormati permintaan itu dan catat rekomendasinya (C3 jika tidak ada opsi yang dapat dibatalkan).
+3. **Otoritas tidak transitif.** Persetujuan yang diteruskan tidak menambah otoritas; agent membaca sendiri otorisasi rencana. Otoritas manusia disimpan kata demi kata di folder rencana; agent yang meneruskannya mencatat "diteruskan oleh `<agent>`".
+
+**Kumpulkan pertanyaannya.** Item kritis yang dapat menunggu dikumpulkan dan ditanyakan bersama pada satu titik yang direncanakan, masing-masing dengan default yang direkomendasikan, sehingga pengembang menjawab sekali. **Dalam eksekusi multi-agent, item kritis memblokir rantai dependensinya, bukan seluruh eksekusi:** lead memarkir tugas yang terblokir — catatan `blocked` di `state.json`-nya, diisi seperti pada kondisi berhenti di atas, adalah eskalasinya, dikirim sekali melalui saluran pelaporan — menjaga setiap agent independen tetap bekerja, dan melanjutkan rantai itu ketika pengembang menjawab. Kondisi berhenti tetap menjadi aturan untuk satu rencana; lead menerapkannya per rantai. Cara swarm agent menerapkan hal ini dijelaskan di [Otonomi swarm](/id/methodology/07-swarm-autonomy).

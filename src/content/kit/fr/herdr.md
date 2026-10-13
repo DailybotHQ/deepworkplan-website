@@ -14,11 +14,11 @@ C’est un addon facultatif de **DWP v7** (`v7.0.0`). La méthodologie fonctionn
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v0.2.3`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v0.3.2`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v0.2.3`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protocole 1 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers n’authentifie pas l’expéditeur : le champ `from=` d’une estam
 
 ## Les conteneurs et l’hôte
 
-Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v0.3.5`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers `v0.2.3`, chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle.
+Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v0.3.7`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers (`v0.2.3`), chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle.
 
 ## Herdr ou agentkit
 
@@ -69,7 +69,19 @@ Les deux addons implémentent la même interface de délégation — `launch`, `
 
 Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des panneaux sur l’hôte, dans des conteneurs et sur d’autres machines, chacun sur son propre compte —, `herdr-peers lanes` liste chaque couloir avec son état, `herdr-peers status <pane>` classe l’écran sur lequel se trouve un couloir bloqué, et chaque enregistrement de délégation nomme le compte et le fournisseur qui l’ont porté. Voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
 
-**Les lanes Codex nomment leur panneau.** Codex exécute les commandes d’une lane depuis un serveur d’arrière-plan partagé par toutes les sessions de ce compte : l’identifiant de panneau hérité peut donc appartenir à une autre lane. Une lane Codex passe son propre panneau, indiqué dans la consigne du lead, avec `--pane <pane>` sur chaque verbe de herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+**Les lanes Codex nomment leur panneau.** Codex exécute les commandes d’une lane depuis un serveur d’arrière-plan partagé par toutes les sessions de ce compte : l’identifiant de panneau hérité peut donc appartenir à une autre lane. Une lane Codex passe son propre panneau, indiqué dans la consigne du lead, avec `--pane <pane>` sur chaque verbe de herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+
+## Notifications et leadership
+
+herdr-peers `v0.3.2` ajoute ce qui permet à un essaim de survivre à son coordinateur ([Autonomie de l’essaim](/fr/methodology/07-swarm-autonomy)) :
+
+- **Notifications.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envoie un message à sens unique estampillé `reply=no`. Le `check` du destinataire le classe comme notification, le consigne comme donnée et n’y répond jamais. Les notifications ne consomment aucun emplacement de fan-out et peuvent être envoyées pendant qu’une demande est ouverte ; utilisez-les pour les annonces de passation, les changements de coordinateur et les diffusions de publication.
+- **Un enregistrement de coordinateur par plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` fait d’un agent le coordinateur d’un plan ; `lead show` affiche l’enregistrement (schéma `herdr-peers/lead-v1` : plan, coordinateur, époque, succession, couloirs, heure de mise à jour). `lead handover <addr> --plan <P>` transmet le leadership, `lead takeover --plan <P>` permet au premier suppléant joignable de le prendre lorsque le coordinateur a disparu, et `lead release --plan <P>` y met fin. Chaque changement incrémente l’époque et notifie chaque couloir. Revendiquez le plan avant de lancer ses couloirs : `lead` ne se résout qu’une fois un enregistrement créé. Depuis `v0.3.2`, l’enregistrement conserve localement le dépôt qui revendique et refuse une revendication du même identifiant de plan venant d’un autre dépôt ; nommez ce plan `--plan <repo>/<id>`.
+- **Isolation par époque (fencing).** Un couloir n’accepte une notification de coordinateur que de l’agent qui lui a donné sa consigne (première revendication), du coordinateur actuel à l’époque suivante (transmission) ou de la première entrée joignable de la succession à l’époque suivante (reprise). Tout le reste est consigné et ignoré, et un coordinateur qui revient et voit une époque supérieure se retire.
+- **L’adresse `lead`.** `ask lead …` et `notify lead …` se résolvent vers le coordinateur actuel de `--plan` (sinon `$DWP_PLAN`), si bien qu’aucune consigne de couloir ne code en dur le panneau du coordinateur.
+- **Écrans `usage_limit`.** `status` et `lanes` reconnaissent le message de limite d’utilisation d’une CLI comme la classe d’écran `usage_limit`, dont l’étape suivante est une passation. Aucune touche n’y est jamais envoyée. `lanes --json` ajoute le plan, son coordinateur, l’époque et la dernière capacité signalée de chaque couloir.
+
+Les couloirs peuvent aussi s’interroger entre eux pour obtenir des informations et se coordonner — une interface, un nom d’option, l’état d’une branche —, mais seul le coordinateur attribue le travail. La profondeur 1 et le plafond de fan-out s’appliquent toujours. Avec `v0.2.x`, il n’y a ni notifications ni enregistrements de coordinateur : les couloirs interrogent l’adresse du coordinateur indiquée dans leur consigne, et un changement de coordinateur est relayé par le développeur.
 
 ## Notes
 

@@ -14,11 +14,11 @@ Bu, **DWP v7**'nin (`v7.0.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v0.2.3`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v0.3.2`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v0.2.3` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v0.3.2` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers göndereni doğrulamaz: bir damgadaki `from=` alanı bir iddiadır. 
 
 ## Konteynerler ve ana makine
 
-devcontainer-kit `v0.3.5` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers `v0.2.3` sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
+devcontainer-kit `v0.3.7` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
 
 ## Herdr mı agentkit mi
 
@@ -69,7 +69,19 @@ Her iki eklenti de aynı devretme arayüzünü — `launch`, `observe`, `collect
 
 Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konteynerlerde ve diğer makinelerde, her biri kendi hesabıyla çalışan bölmeler — `herdr-peers lanes` her şeridi durumuyla birlikte listeler, `herdr-peers status <pane>` engellenmiş bir şeridin bulunduğu ekranı sınıflandırır ve her devretme kaydı işi taşıyan hesabı ve sağlayıcıyı belirtir. Bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
 
-**Codex lane’leri kendi panellerini belirtir.** Codex bir lane’in komutlarını o hesaptaki tüm oturumların paylaştığı bir arka plan sunucusundan çalıştırır; bu yüzden devraldığı panel kimliği başka bir lane’e ait olabilir. Bir Codex lane’i, liderin görev tanımında yazan kendi panelini her herdr-peers komutunda `--pane <pane>` ile verir (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+**Codex lane’leri kendi panellerini belirtir.** Codex bir lane’in komutlarını o hesaptaki tüm oturumların paylaştığı bir arka plan sunucusundan çalıştırır; bu yüzden devraldığı panel kimliği başka bir lane’e ait olabilir. Bir Codex lane’i, liderin görev tanımında yazan kendi panelini her herdr-peers komutunda `--pane <pane>` ile verir (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+
+## Bildirimler ve liderlik
+
+herdr-peers `v0.3.2`, bir sürünün liderinden daha uzun yaşamasını sağlayan şeyleri ekler ([Sürü özerkliği](/tr/methodology/07-swarm-autonomy)):
+
+- **Bildirimler.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>`, `reply=no` damgalı tek yönlü bir mesaj gönderir. Alıcının `check` komutu onu bir bildirim olarak sınıflandırır, veri olarak kaydeder ve asla yanıtlamaz. Bildirimler yayılma kotasından yer harcamaz ve açık bir ask varken de gönderilebilir; devir duyuruları, lider değişiklikleri ve sürüm yayınları için kullanın.
+- **Plan başına bir lider kaydı.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>`, bir agent'ı tek bir planın lideri yapar; `lead show` kaydı yazdırır (şema `herdr-peers/lead-v1`: plan, lider, epoch, halef listesi, şeritler, güncelleme zamanı). `lead handover <addr> --plan <P>` liderliği devreder, `lead takeover --plan <P>` lider gittiğinde ulaşılabilen ilk vekilin liderliği almasını sağlar ve `lead release --plan <P>` onu sona erdirir. Her değişiklik epoch'u yükseltir ve her şeride bildirim gönderir. Planı, şeritlerini başlatmadan önce sahiplenin: `lead` ancak bir kayıt var olduğunda çözümlenir. `v0.3.2` sürümünden itibaren kayıt, sahiplenen depoyu yerel olarak tutar ve aynı plan kimliğinin başka bir depodan sahiplenilmesini reddeder; o planı `--plan <repo>/<id>` olarak adlandırın.
+- **Çitleme.** Bir şerit, bir lider bildirimini yalnızca kendisine görev tanımını veren agent'tan (ilk sahiplenme), bir sonraki epoch'ta mevcut liderden (devir) ya da bir sonraki epoch'ta halef listesinin ulaşılabilen ilk girdisinden (devralma) kabul eder. Diğer her şey kaydedilir ve yok sayılır; daha yüksek bir epoch gören, geri dönen bir lider görevi bırakır.
+- **`lead` adresi.** `ask lead …` ve `notify lead …`, `--plan` (yoksa `$DWP_PLAN`) planının mevcut liderine çözülür; böylece hiçbir şerit görev tanımı liderin bölmesini sabit olarak yazmaz.
+- **`usage_limit` ekranları.** `status` ve `lanes`, bir CLI'ın kullanım sınırı mesajını, bir sonraki adımı devir olan `usage_limit` ekran sınıfı olarak tanır. Ona asla tuş gönderilmez. `lanes --json`, planı, liderini, epoch'u ve her şeridin en son bildirdiği kapasiteyi ekler.
+
+Şeritler bilgi ve koordinasyon için birbirlerine de soru sorabilir — bir arayüz, bir bayrak adı, bir dal durumu — ama işi yalnızca lider atar. Derinlik 1 ve yayılma sınırı yine geçerlidir. `v0.2.x` ile bildirimler ve lider kayıtları yoktur: şeritler liderin adresini görev tanımlarından sorar ve bir lider değişikliğini geliştirici aktarır.
 
 ## Notlar
 

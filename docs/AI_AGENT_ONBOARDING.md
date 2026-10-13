@@ -113,7 +113,7 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 
 ## DWP v6 host and authority records
 
-The current DWP standard is 7.0.0, implemented by the installed 7.6.3 skill.
+The current DWP standard is 7.0.0, implemented by the installed 7.7.1 skill.
 New plans use the v7 contract by default; the addon registry is the tracked
 `.dwp/config.json`; plans from earlier
 generations retain their recorded format and are never migrated implicitly.
@@ -130,6 +130,10 @@ Developers author and authorize requested plans and work. Agents may proceed
 within that scope and retain prior authorization across sessions; they stop
 before pushing to `main` (which deploys), publishing, sending external messages,
 or accessing secrets unless the request explicitly authorizes that action.
+Inside that scope agents decide and record routine choices and escalate only
+the critical classes C1–C7 of the pack's `AGENT_PROTOCOL.md` §7.5 (authority,
+consent screen, irreducible ambiguity, quality conflict, damage, terms,
+exhausted capacity); an escalation names its class.
 Follow the approval and review rules in [AGENTS.md](../AGENTS.md). Dailybot
 reporting remains opt-in/configuration-dependent and best effort.
 

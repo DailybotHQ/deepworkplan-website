@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan metodolojisi"
-description: "Manifestodan orkestrasyona altı bölüm: Deep Work Plan metodolojisinin ardındaki ilkeler, çekirdek döngü, şablonlar, skill’ler, arketipler ve birçok ajan."
-lastUpdated: 2026-10-11
+description: "Manifestodan sürü özerkliğine yedi bölüm: Deep Work Plan metodolojisinin ilkeleri, çekirdek döngüsü, şablonları, skill’leri, arketipleri, ajanları ve sürüleri."
+lastUpdated: 2026-10-12
 ---
 
 ## Deep Work Plan metodolojisi
@@ -17,7 +17,7 @@ DWP üç temel direğe dayanır.
 
 **Token verimliliği — uzun ufuk tasarım gereği, verimlilik yapı gereği.** Bağlam, bir kodlama ajanının sahip olduğu en kıt kaynaktır ve onu israf eden bir metodoloji, tam da iş uzadığında başarısız olur. DWP yönergeleri kademeli olarak yükler — her rehber, kendi tetikleyicisi devreye girdiğinde yüklenir — doğrulamayı her görevin gerçekte dokunduğundan seçer ve skill kararlarını görev-yerel verir. Her akışın gerektirdiği yönerge baytları ölçülür ve yayımlanır; uydurma token yüzdeleri yoktur.
 
-Metodoloji altı bölümde açıklanır:
+Metodoloji yedi bölümde açıklanır:
 
 1. **Manifesto** — bir Deep Work Plan’in ne olduğu ve yapılandırılmış yürütmenin neden önemli olduğu.
 2. **Çekirdek döngü** — her görevi yürüten plan-yürüt-doğrula döngüsü.
@@ -25,6 +25,7 @@ Metodoloji altı bölümde açıklanır:
 4. **Skill’ler ve ajanlar** — komutların ve ajan rollerinin nasıl bir araya geldiği, yaşayan kit (bir deponun author alt skill’i aracılığıyla kendi skill’lerini nasıl büyüttüğü) ve dependency-upgrade ile kullanıcıya dönük herhangi bir arayüz yüzeyi (görsel UI, CLI çıktısı veya konuşma tabanlı) için design-system eklentisi gibi tercihe dayalı eklentiler.
 5. **Arketipler** — metodolojiyi bireysel depolara ve orkestratör merkezlerine uyarlamak.
 6. **Birçok ajanı çalıştırmak** — bölmeler, konteynerler, makineler ve hesaplar genelinde bir lider ve şeritleri; depo başına tek dal ve tek sürüm.
+7. **Sürü özerkliği** — görev sınırlarında kapasite kontrolleri, devir paketleri, epoch’larla lider halefiyeti ve yalnızca kritik yükseltme; böylece bir sürü tek bir hesabın sınırını ya da tek bir ajanın kaybını atlatır.
 
 - [Metodolojiyi okuyun](/methodology)
 - [Spesifikasyonu okuyun](/spec)

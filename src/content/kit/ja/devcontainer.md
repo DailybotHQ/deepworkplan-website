@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer アドオン
 
-リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.6.3`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
+リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.7.1`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
 
 ## devcontainer-kit が提供するもの
 
@@ -21,15 +21,15 @@ order: 1
 ## インストール
 
 ```bash
-git clone --branch v0.3.5 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v0.3.7 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.3.5` に固定してください。`v0.2.0` はサポート対象外です。
+要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.3.7` に固定してください。`v0.2.0` はサポート対象外です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.3.5`、インターフェース 2 |
+| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.3.7`、インターフェース 2 |
 | レジストリキー | `.dwp/config.json` 内の `devcontainer` |
 | リポジトリごとの設定 | `.devcontainer/dck.toml` |
 | 検出 | `dck doctor --json` |

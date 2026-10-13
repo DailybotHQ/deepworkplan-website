@@ -14,11 +14,11 @@ order: 7
 
 ## Cosa integra
 
-L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v0.2.3`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
+L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v0.3.2`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/herdr-peers`, tag `v0.2.3`, protocollo 1 |
+| Prodotto | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protocollo 1 |
 | Chiave di registro | `herdr` in `.dwp/config.json` |
 | Trasporto | interattivo: un peer in un pannello Herdr |
 | Fornisce | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](http
 Installa herdr-peers e la skill ufficiale di Herdr, da cui dipende. Ogni macchina i cui agenti devono rispondere ha bisogno anch’essa della skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers non autentica il mittente: il campo `from=` di un timbro è un’aff
 
 ## Container e host
 
-Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v0.3.5`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai. Da herdr-peers `v0.2.3`, ogni macchina mantiene il proprio stato (`$XDG_STATE_HOME/herdr-peers/<server>/`), quindi un checkout condiviso dall’host e da un container non mescola più i loro registri, e da devcontainer-kit (`v0.3.3`) il container esporta `HERDR_PEERS_SELF` da sé, così gli agenti Codex al suo interno raggiungono altre macchine senza passaggi manuali.
+Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v0.3.7`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai. Da herdr-peers (`v0.2.3`), ogni macchina mantiene il proprio stato (`$XDG_STATE_HOME/herdr-peers/<server>/`), quindi un checkout condiviso dall’host e da un container non mescola più i loro registri, e da devcontainer-kit (`v0.3.3`) il container esporta `HERDR_PEERS_SELF` da sé, così gli agenti Codex al suo interno raggiungono altre macchine senza passaggi manuali.
 
 ## Herdr o agentkit
 
@@ -69,7 +69,19 @@ Entrambi gli addon implementano la stessa interfaccia di delega — `launch`, `o
 
 Per un lead che esegue molte corsie insieme — pannelli sull’host, nei container e su altre macchine, ciascuno sul proprio account — `herdr-peers lanes` elenca ogni corsia con il suo stato, `herdr-peers status <pane>` classifica la schermata in cui si trova una corsia bloccata, e ogni record di delega indica l’account e il fornitore che l’hanno svolta. Vedi [Eseguire molti agenti](/methodology/06-orchestration).
 
-**Le lane Codex indicano il proprio pannello.** Codex esegue i comandi di una lane da un server in background condiviso da tutte le sessioni di quell’account, quindi l’id di pannello ereditato può appartenere a un’altra lane. Una lane Codex passa il proprio pannello, indicato nel brief del lead, con `--pane <pane>` su ogni verbo di herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+**Le lane Codex indicano il proprio pannello.** Codex esegue i comandi di una lane da un server in background condiviso da tutte le sessioni di quell’account, quindi l’id di pannello ereditato può appartenere a un’altra lane. Una lane Codex passa il proprio pannello, indicato nel brief del lead, con `--pane <pane>` su ogni verbo di herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+
+## Notifiche e guida
+
+herdr-peers `v0.3.2` aggiunge ciò che permette a uno sciame di sopravvivere al proprio lead ([Autonomia dello sciame](/it/methodology/07-swarm-autonomy)):
+
+- **Notifiche.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` invia un messaggio unidirezionale con il timbro `reply=no`. Il `check` del destinatario lo classifica come notifica, lo registra come dato e non risponde mai. Le notifiche non consumano alcuno slot di fan-out e si possono inviare mentre una richiesta è aperta; usale per annunci di passaggio di consegne, cambi di lead e annunci di rilascio.
+- **Un record di lead per piano.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` rende un agente il lead di un piano; `lead show` stampa il record (schema `herdr-peers/lead-v1`: piano, lead, epoca, successione, corsie, ora di aggiornamento). `lead handover <addr> --plan <P>` cede la guida, `lead takeover --plan <P>` permette al primo vice raggiungibile di assumerla quando il lead non c’è più, e `lead release --plan <P>` la termina. Ogni cambio incrementa l’epoca e notifica ogni corsia. Rivendica il piano prima di avviarne le corsie: `lead` si risolve solo quando esiste un record. Da `v0.3.2` il record conserva localmente il repository che rivendica e rifiuta una rivendicazione dello stesso id di piano da un altro repository; indica quel piano con `--plan <repo>/<id>`.
+- **Fencing.** Una corsia accetta una notifica del lead solo dall’agente che le ha dato il brief (prima rivendicazione), dal lead corrente all’epoca successiva (cessione) o dalla prima voce raggiungibile della successione all’epoca successiva (subentro). Tutto il resto viene registrato e ignorato, e un lead che ritorna e vede un’epoca più alta si fa da parte.
+- **L’indirizzo `lead`.** `ask lead …` e `notify lead …` si risolvono nel lead corrente di `--plan` (altrimenti `$DWP_PLAN`), così nessun brief di corsia codifica in modo fisso il pannello del lead.
+- **Schermate `usage_limit`.** `status` e `lanes` riconoscono il messaggio di limite d’uso di una CLI come la classe di schermata `usage_limit`, il cui passo successivo è un passaggio di consegne. Non vi si inviano mai tasti. `lanes --json` aggiunge il piano, il suo lead, l’epoca e l’ultima capacità riportata da ogni corsia.
+
+Le corsie possono anche chiedersi a vicenda informazioni e coordinarsi — un’interfaccia, il nome di un flag, lo stato di un branch —, ma solo il lead assegna il lavoro. La profondità 1 e il limite di fan-out restano validi. Con `v0.2.x` non esistono notifiche né record di lead: le corsie interpellano l’indirizzo del lead indicato nel loro brief, e un cambio di lead viene inoltrato dallo sviluppatore.
 
 ## Note
 

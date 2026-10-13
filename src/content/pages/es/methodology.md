@@ -1,7 +1,7 @@
 ---
 title: "La Metodología Deep Work Plan"
-description: "Seis capítulos, del manifiesto a la orquestación: principios, bucle central, plantillas, skills, arquetipos y muchos agentes en la metodología Deep Work Plan."
-lastUpdated: 2026-10-11
+description: "Siete capítulos, del manifiesto a la autonomía del enjambre: principios, bucle central, plantillas, skills, arquetipos, muchos agentes y enjambres."
+lastUpdated: 2026-10-12
 ---
 
 ## La Metodología Deep Work Plan
@@ -17,7 +17,7 @@ DWP se apoya en tres pilares.
 
 **Eficiencia de tokens — de largo alcance por diseño, eficiente por construcción.** El contexto es el recurso más escaso que tiene un agente de código, y una metodología que lo desperdicia falla justo cuando el trabajo se alarga. DWP carga las instrucciones de forma progresiva — cada guía se carga cuando se dispara su desencadenante —, selecciona la validación a partir de lo que cada tarea realmente toca y decide las skills de forma local por tarea. Los bytes de instrucción que cada flujo requiere se miden y publican; sin porcentajes de tokens inventados.
 
-La metodología se explica en seis capítulos:
+La metodología se explica en siete capítulos:
 
 1. **Manifiesto** — qué es un Deep Work Plan y por qué importa la ejecución estructurada.
 2. **Bucle central** — el ciclo planificar-ejecutar-verificar que impulsa cada tarea.
@@ -25,6 +25,7 @@ La metodología se explica en seis capítulos:
 4. **Skills y agentes** — cómo encajan los comandos y los roles de agente, el kit vivo (cómo un repositorio crea sus propias habilidades mediante la subhabilidad author) y los complementos opcionales como dependency-upgrade y el complemento design-system para cualquier superficie de interfaz orientada al usuario (UI visual, salida de CLI o conversacional).
 5. **Arquetipos** — adaptar la metodología a repos individuales y hubs orquestadores.
 6. **Ejecutar muchos agentes** — un líder y sus carriles entre paneles, contenedores, máquinas y cuentas, con una rama y una publicación por repositorio.
+7. **Autonomía del enjambre** — comprobaciones de capacidad en los límites entre tareas, paquetes de traspaso, sucesión del líder con épocas y escalación solo de lo crítico, para que un enjambre sobreviva al límite de una cuenta o a la pérdida de un agente.
 
 - [Leer la metodología](/es/methodology)
 - [Leer la especificación](/es/spec)

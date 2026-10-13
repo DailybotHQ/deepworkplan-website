@@ -67,7 +67,7 @@ Lanes and the lead talk through [herdr-peers](/kit/herdr): an **ask** carries a 
 - **Depth one.** A reply is never answered, and a lane does not delegate onward. Fan-out per caller is capped, four peers by default.
 - **Data, not instructions.** A reply grants nothing the receiver did not already have. A lane's claim that its gate passed is checked by running the gate.
 - **A record of who did what.** Every delegation record names the lane's account and vendor, so the parent plan shows which account carried which work.
-- **Codex lanes name their pane.** Codex runs a lane's commands from a background server shared by every session on that account, so the pane id it inherits can belong to another lane. A Codex lane passes its own pane, from the lead's brief, with `--pane <pane>` on every herdr-peers verb (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+- **Codex lanes name their pane.** Codex runs a lane's commands from a background server shared by every session on that account, so the pane id it inherits can belong to another lane. A Codex lane passes its own pane, from the lead's brief, with `--pane <pane>` on every herdr-peers verb (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
 
 The lead can see the whole orchestra at once: `herdr-peers lanes` lists every lane with its state, and [DeepWorkPlan Vim](/kit/vim) shows an orchestrator plan's lanes next to the plan itself (`:DwpLanes`).
 
@@ -96,3 +96,7 @@ The parent plan closes on evidence, not on reports:
 - Shared resources get a lock: a lane takes it before a heavy step such as a container build and releases it after.
 - The permission opt-out, when set, wins for every lane and every agent a lane starts.
 - A lane that cannot continue says so as a blocked milestone and stops; the lead decides.
+
+## When an account or the lead runs out
+
+A long run outlives any one account. From coding-agents-kit `v0.7.1` and herdr-peers `v0.3.2`, a lane checks its own capacity at every task boundary and hands its work on through a packet before its account runs out, a lead hands the leadership on or is replaced by its deputy, and only critical items reach the developer. [Swarm autonomy](/methodology/07-swarm-autonomy) describes the loop, the packet, succession and the escalation classes.

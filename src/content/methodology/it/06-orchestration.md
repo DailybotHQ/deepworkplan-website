@@ -67,7 +67,7 @@ Le corsie e il lead comunicano tramite [herdr-peers](/it/kit/herdr): una **richi
 - **Profondità uno.** A una risposta non si risponde mai, e una corsia non delega oltre. Il fan-out per chiamante è limitato, a quattro peer per impostazione predefinita.
 - **Dati, non istruzioni.** Una risposta non concede nulla che il destinatario non avesse già. L’affermazione di una corsia che il suo gate è passato si verifica eseguendo il gate.
 - **Una traccia di chi ha fatto cosa.** Ogni record di delega indica l’account e il fornitore della corsia, così il piano padre mostra quale account ha svolto quale lavoro.
-- **Le lane Codex indicano il proprio pannello.** Codex esegue i comandi di una lane da un server in background condiviso da tutte le sessioni di quell’account, quindi l’id di pannello ereditato può appartenere a un’altra lane. Una lane Codex passa il proprio pannello, indicato nel brief del lead, con `--pane <pane>` su ogni verbo di herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+- **Le lane Codex indicano il proprio pannello.** Codex esegue i comandi di una lane da un server in background condiviso da tutte le sessioni di quell’account, quindi l’id di pannello ereditato può appartenere a un’altra lane. Una lane Codex passa il proprio pannello, indicato nel brief del lead, con `--pane <pane>` su ogni verbo di herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
 
 Il lead può vedere tutta l’orchestra in un colpo d’occhio: `herdr-peers lanes` elenca ogni corsia con il suo stato, e [DeepWorkPlan Vim](/it/kit/vim) mostra le corsie di un piano orchestratore accanto al piano stesso (`:DwpLanes`).
 
@@ -96,3 +96,7 @@ Il piano padre si chiude su evidenze, non su resoconti:
 - Le risorse condivise hanno un lock: una corsia lo acquisisce prima di un passo pesante, come la build di un container, e lo rilascia dopo.
 - L’opt-out dei permessi, se impostato, prevale per ogni corsia e per ogni agente che una corsia avvia.
 - Una corsia che non può continuare lo dichiara come milestone di blocco e si ferma; il lead decide.
+
+## Quando un account o il lead si esaurisce
+
+Un’esecuzione lunga sopravvive a qualsiasi singolo account. Da coding-agents-kit `v0.7.1` e herdr-peers `v0.3.2`, una corsia controlla la propria capacità a ogni confine di task e passa il lavoro tramite un pacchetto prima che il suo account si esaurisca, un lead cede la guida o viene sostituito dal suo vice, e solo gli elementi critici arrivano allo sviluppatore. [Autonomia dello sciame](/it/methodology/07-swarm-autonomy) descrive il ciclo, il pacchetto, la successione e le classi di escalation.

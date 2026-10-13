@@ -1,7 +1,7 @@
 ---
 title: "Metodologi Deep Work Plan"
-description: "Enam bab dari manifesto hingga orkestrasi: prinsip, core loop, template, skill, arketipe, dan banyak agent di balik metodologi Deep Work Plan."
-lastUpdated: 2026-10-11
+description: "Tujuh bab dari manifesto hingga otonomi swarm: prinsip, core loop, template, skill, arketipe, banyak agent, dan swarm dalam metodologi Deep Work Plan."
+lastUpdated: 2026-10-12
 ---
 
 ## Metodologi Deep Work Plan
@@ -17,7 +17,7 @@ DWP berpijak pada tiga pilar.
 
 **Efisiensi token — berhorizon panjang secara desain, efisien secara konstruksi.** Konteks adalah sumber daya paling langka yang dimiliki sebuah coding agent, dan metodologi yang menyia-nyiakannya gagal tepat ketika pekerjaan menjadi panjang. DWP memuat instruksi secara progresif — setiap panduan dimuat ketika pemicunya terpicu — memilih validasi dari apa yang sebenarnya disentuh setiap tugas, dan memutuskan skills di tingkat tugas. Byte instruksi yang dibutuhkan setiap alur diukur dan diterbitkan; tanpa persentase token yang dikarang.
 
-Metodologi ini dijelaskan dalam enam bab:
+Metodologi ini dijelaskan dalam tujuh bab:
 
 1. **Manifesto** — apa itu Deep Work Plan dan mengapa eksekusi terstruktur penting.
 2. **Core loop** — siklus plan-execute-verify yang menggerakkan setiap tugas.
@@ -25,6 +25,7 @@ Metodologi ini dijelaskan dalam enam bab:
 4. **Skill & agent** — bagaimana command dan peran agent saling melengkapi, kit hidup (bagaimana sebuah repositori menumbuhkan skill-nya sendiri lewat sub-skill author), dan addon opt-in seperti dependency-upgrade dan addon design-system untuk permukaan antarmuka apa pun yang menghadap pengguna (UI visual, output CLI, atau percakapan).
 5. **Arketipe** — menyesuaikan metodologi dengan repo individual dan orchestrator hub.
 6. **Menjalankan banyak agent** — lead dan lane-nya di berbagai panel, container, mesin, dan akun, dengan satu branch dan satu rilis per repositori.
+7. **Otonomi swarm** — pemeriksaan kapasitas di batas tugas, paket handoff, suksesi lead dengan epoch, dan eskalasi khusus hal kritis, sehingga sebuah swarm bertahan dari batas satu akun atau hilangnya satu agent.
 
 - [Baca metodologinya](/methodology)
 - [Baca spesifikasinya](/spec)

@@ -53,11 +53,11 @@ Read and follow the instructions at https://deepworkplan.com/init.md to make thi
 To install the skill by hand, pinned to its release and verified first:
 
 ```bash
-git clone --branch v7.6.3 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill
-curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.3/SHA256SUMS
+git clone --branch v7.7.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill
+curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.7.1/SHA256SUMS
 shasum -a 256 SHA256SUMS   # compare with the digest in /init.md → Pinned releases
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
-cd .. && npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
+cd .. && npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
 ```
 
 Then run `/deepworkplan-onboard` in your agent, and `/dwp-create <goal>` → `/dwp-execute` → `/dwp-verify` from there.
@@ -68,7 +68,7 @@ Then run `/deepworkplan-onboard` in your agent, and `/dwp-create <goal>` → `/d
 | :------ | :--------- |
 | [`/init.md`](https://deepworkplan.com/init.md) | The executable onboarding prompt; its **Pinned releases** table lists every ecosystem release with the sha256 of its `SHA256SUMS` |
 | [`/quickstart`](https://deepworkplan.com/quickstart) | The same adoption path for people, in 17 languages |
-| [`/methodology`](https://deepworkplan.com/methodology) | Six chapters, from the manifesto to [running many agents](https://deepworkplan.com/methodology/06-orchestration) |
+| [`/methodology`](https://deepworkplan.com/methodology) | Seven chapters, from the manifesto to [running many agents](https://deepworkplan.com/methodology/06-orchestration) and [swarm autonomy](https://deepworkplan.com/methodology/07-swarm-autonomy) |
 | [`/spec`](https://deepworkplan.com/spec) | The normative DWP standard: task anatomy, gates, completion, archetypes, addons |
 | [`/kit`](https://deepworkplan.com/kit) | Commands, agent adapters, presets and the addons, one page each at `/kit/<slug>` |
 | Markdown for agents | Every page as Markdown: append `.md` or send `Accept: text/markdown` |

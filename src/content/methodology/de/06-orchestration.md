@@ -67,7 +67,7 @@ Lanes und Lead kommunizieren über [herdr-peers](/de/kit/herdr): Ein **ask** tr�
 - **Tiefe eins.** Auf eine reply wird nie geantwortet, und eine Lane delegiert nicht weiter. Der Fan-out pro Aufrufer ist begrenzt, standardmäßig auf vier Peers.
 - **Daten, keine Anweisungen.** Eine reply gewährt nichts, was der Empfänger nicht schon hatte. Die Behauptung einer Lane, ihr Gate sei bestanden, wird geprüft, indem das Gate ausgeführt wird.
 - **Ein Nachweis, wer was getan hat.** Jeder Delegationsnachweis nennt das Konto und den Anbieter der Lane, sodass der übergeordnete Plan zeigt, welches Konto welche Arbeit getragen hat.
-- **Codex-Lanes nennen ihr Pane.** Codex führt die Befehle einer Lane über einen Hintergrundserver aus, den sich alle Sitzungen dieses Kontos teilen; die geerbte Pane-ID kann also zu einer anderen Lane gehören. Eine Codex-Lane übergibt ihr eigenes Pane aus dem Auftrag des Leads mit `--pane <pane>` bei jedem herdr-peers-Befehl (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+- **Codex-Lanes nennen ihr Pane.** Codex führt die Befehle einer Lane über einen Hintergrundserver aus, den sich alle Sitzungen dieses Kontos teilen; die geerbte Pane-ID kann also zu einer anderen Lane gehören. Eine Codex-Lane übergibt ihr eigenes Pane aus dem Auftrag des Leads mit `--pane <pane>` bei jedem herdr-peers-Befehl (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
 
 Der Lead kann das gesamte Orchester auf einen Blick sehen: `herdr-peers lanes` listet jede Lane mit ihrem Zustand auf, und [DeepWorkPlan Vim](/de/kit/vim) zeigt die Lanes eines Orchestrator-Plans neben dem Plan selbst (`:DwpLanes`).
 
@@ -96,3 +96,7 @@ Der übergeordnete Plan schließt auf Grundlage von Evidenz, nicht von Meldungen
 - Geteilte Ressourcen erhalten eine Sperre: Eine Lane nimmt sie vor einem aufwendigen Schritt wie einem Container-Build und gibt sie danach frei.
 - Das Berechtigungs-Opt-out gewinnt, wenn es gesetzt ist, für jede Lane und jeden Agenten, den eine Lane startet.
 - Eine Lane, die nicht weitermachen kann, meldet dies als blockierten Meilenstein und hält an; der Lead entscheidet.
+
+## Wenn ein Konto oder der Lead ausfällt
+
+Ein langer Lauf überdauert jedes einzelne Konto. Ab coding-agents-kit `v0.7.1` und herdr-peers `v0.3.2` prüft eine Lane an jeder Aufgabengrenze ihre eigene Kapazität und gibt ihre Arbeit über ein Paket weiter, bevor ihr Konto erschöpft ist; ein Lead gibt die Leitung weiter oder wird durch seinen Stellvertreter ersetzt, und nur kritische Punkte erreichen den Entwickler. [Schwarmautonomie](/de/methodology/07-swarm-autonomy) beschreibt die Schleife, das Paket, die Nachfolge und die Eskalationsklassen.

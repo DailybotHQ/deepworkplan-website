@@ -67,7 +67,7 @@ Les couloirs et le coordinateur communiquent via [herdr-peers](/fr/kit/herdr) : 
 - **Profondeur un.** On ne répond jamais à une réponse, et un couloir ne délègue pas plus loin. Le fan-out par appelant est plafonné, à quatre pairs par défaut.
 - **Des données, pas des instructions.** Une réponse n’accorde rien que le destinataire n’avait déjà. L’affirmation d’un couloir selon laquelle sa porte de validation est passée se vérifie en exécutant cette porte.
 - **Une trace de qui a fait quoi.** Chaque enregistrement de délégation nomme le compte et le fournisseur du couloir, si bien que le plan parent montre quel compte a porté quel travail.
-- **Les lanes Codex nomment leur panneau.** Codex exécute les commandes d’une lane depuis un serveur d’arrière-plan partagé par toutes les sessions de ce compte : l’identifiant de panneau hérité peut donc appartenir à une autre lane. Une lane Codex passe son propre panneau, indiqué dans la consigne du lead, avec `--pane <pane>` sur chaque verbe de herdr-peers (`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`).
+- **Les lanes Codex nomment leur panneau.** Codex exécute les commandes d’une lane depuis un serveur d’arrière-plan partagé par toutes les sessions de ce compte : l’identifiant de panneau hérité peut donc appartenir à une autre lane. Une lane Codex passe son propre panneau, indiqué dans la consigne du lead, avec `--pane <pane>` sur chaque verbe de herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
 
 Le coordinateur peut voir tout l’orchestre d’un coup d’œil : `herdr-peers lanes` liste chaque couloir avec son état, et [DeepWorkPlan Vim](/fr/kit/vim) affiche les couloirs d’un plan orchestrateur à côté du plan lui-même (`:DwpLanes`).
 
@@ -96,3 +96,7 @@ Le plan parent se clôt sur des preuves, pas sur des comptes rendus :
 - Les ressources partagées ont un verrou : un couloir le prend avant une étape lourde, comme la construction d’un conteneur, et le libère ensuite.
 - Le retrait des permissions, lorsqu’il est défini, l’emporte pour chaque couloir et chaque agent qu’un couloir démarre.
 - Un couloir qui ne peut pas continuer le signale par un jalon bloqué et s’arrête ; le coordinateur décide.
+
+## Quand un compte ou le coordinateur s’épuise
+
+Une longue exécution survit à n’importe quel compte pris isolément. Depuis coding-agents-kit `v0.7.1` et herdr-peers `v0.3.2`, un couloir vérifie sa propre capacité à chaque frontière de tâche et passe son travail au moyen d’un paquet avant que son compte ne s’épuise, un coordinateur transmet le leadership ou est remplacé par son suppléant, et seuls les éléments critiques parviennent au développeur. [Autonomie de l’essaim](/fr/methodology/07-swarm-autonomy) décrit la boucle, le paquet, la succession et les classes d’escalade.

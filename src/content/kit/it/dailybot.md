@@ -69,7 +69,7 @@ L'addon **offre** percorsi di installazione; la skill Dailybot gestisce consenso
 
 | Componente | Comando / percorso |
 |-----------|----------------|
-| **Skill agente Dailybot** (consigliata) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.14 --skill dailybot -y` |
+| **Skill agente Dailybot** (consigliata) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot -y` |
 | **Aggiorna skill esistente** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (baseline del pacchetto `>= 3.9.0`; Plan richiede `>= 3.25.0`) | Installata dalla skill al primo utilizzo tramite `shared/auth.md` verificato; oppure `pip install 'dailybot-cli>=3.9.0'`, Homebrew o l'installer con checksum verificato su [cli.dailybot.com](https://cli.dailybot.com) |

@@ -120,3 +120,27 @@ Dừng lại là thành công, không phải thất bại: bản ghi bị chặn
 ### Tiếp tục theo lịch
 
 Trên các nền tảng có lập lịch — heartbeat hoặc cron OpenClaw, cron Hermes, cloud-agent thức dậy — tiếp tục PHẢI được diễn đạt là: *thức dậy → chạy Giao thức Tiếp tục DWP → nếu `blocked`, báo cáo và nhường → ngược lại thực thi tác vụ nguyên tử tiếp theo → cập nhật lớp trạng thái → nhường.* Kế hoạch — không phải phiên — là đơn vị liên tục; một kế hoạch PHẢI tồn tại qua việc nền tảng khởi động lại, mô hình thay đổi, hoặc một agent khác thực hiện lượt tiếp theo.
+
+### Phân loại leo thang
+
+Mọi thứ không được liệt kê dưới đây là **nghiêm trọng** đều do agent quyết định: nó điều tra, chọn phương án được khuyến nghị, **ghi lại quyết định** — trong mục "Decisions" của `PROGRESS.md` hoặc trong `decisions[]` của một gói bàn giao: các phương án, lựa chọn, lý do và cách đảo ngược — rồi tiếp tục. Phép thử mang tính cơ học: một lần leo thang PHẢI nêu tên lớp của nó; một câu hỏi không nêu lớp nào là một quyết định mà agent có nghĩa vụ tự đưa ra. Đây là §7.5 trong `AGENT_PROTOCOL.md` của gói.
+
+| Lớp | Nghiêm trọng — hỏi nhà phát triển, kèm phần điều tra, các phương án và một khuyến nghị |
+| --- | --- |
+| **C1 Quyền hạn** | Một hành động nằm ngoài sự cấp phép hoặc phạm vi của kế hoạch, hoặc tại một điểm kiểm soát chấp thuận: thao tác phá hủy hoặc không thể đảo ngược, triển khai lên production, công bố hoặc phát hành vượt ngoài kế hoạch, tin nhắn tới người ngoài các agent của kế hoạch, chi tiêu hoặc thanh toán, tư thế bảo mật hoặc truy cập secret. |
+| **C2 Màn hình chấp thuận** | Bất kỳ màn hình cấp quyền, bypass-permissions, đăng nhập, thông tin xác thực, chấp thuận MCP hoặc thanh toán nào. Không bao giờ được agent gửi phím. |
+| **C3 Mơ hồ không thể giải quyết** | Hai kết quả khác nhau về bản chất đều thỏa mãn yêu cầu, và không gì trong repository, tài liệu của nó, các kế hoạch hay các quyết định trước đó phân định được. |
+| **C4 Xung đột chất lượng** | Một cổng không thể đạt nếu không làm yếu nó đi, hoặc bằng chứng mâu thuẫn với mục tiêu hay giả định của kế hoạch theo cách mà phạm vi của tác vụ không thể sửa. |
+| **C5 Hư hại** | Mất mát hoặc hư hỏng không giải thích được đối với trạng thái dùng chung, dữ liệu hoặc công việc của một agent khác. |
+| **C6 Điều khoản** | Các câu hỏi về pháp lý, giấy phép, điều khoản nhà cung cấp hoặc quyền riêng tư. |
+| **C7 Cạn kiệt năng lực** | Không tài khoản nào trong nhóm tài khoản mà nhà phát triển đã khai báo còn chỗ, và không tài khoản nào được đặt lại trong khung thời gian của kế hoạch. |
+
+**Được quyết định tự chủ** (không đầy đủ): cách triển khai, đặt tên, cấu trúc, test và tài liệu; sắp xếp và chia tác vụ trong kế hoạch; thử lại và sửa chữa trong bề mặt bị chạm tới của tác vụ; sửa một vấn đề môi trường mà agent tự sửa được — một công cụ cục bộ còn thiếu, một locale, một bộ nhớ đệm cũ — thay vì báo cáo nó; ghi nhận một lỗi đã được chứng minh là tồn tại trên nhánh gốc thay vì leo thang nó (điều kiện dừng 1 vẫn áp dụng cho các lỗi của chính thay đổi); chọn tài khoản hoặc nhà cung cấp từ nhóm tài khoản; khởi chạy, khởi chạy lại và đóng các agent của chính nó; bàn giao và kế nhiệm; chọn phương án nào trong số các phương án tương đương (phương án được khuyến nghị).
+
+Ba giới hạn giữ cho sự tự chủ trung thực:
+
+1. **Tự chủ không bao giờ đóng một cổng của con người.** Một tiêu chí hoặc điểm kiểm soát nêu tên sự phê duyệt của một người chỉ được thỏa mãn bởi chính người đó, không bao giờ bởi một chỉ thị thường trực "hãy tự chủ" hoặc `trust`.
+2. **Lời nguyên văn của nhà phát triển được ưu tiên.** Khi phương án được khuyến nghị mâu thuẫn với điều nhà phát triển đã yêu cầu nguyên văn, hãy đưa ra phương án có thể đảo ngược tôn trọng yêu cầu đó và ghi lại khuyến nghị (C3 nếu không có phương án nào đảo ngược được).
+3. **Quyền hạn không có tính bắc cầu.** Một sự chấp thuận được chuyển tiếp không thêm quyền hạn nào; agent tự đọc sự cấp phép của kế hoạch. Quyền hạn của con người được lưu nguyên văn trong thư mục kế hoạch; một agent chuyển tiếp nó ghi lại "được chuyển tiếp bởi `<agent>`".
+
+**Gom các câu hỏi lại.** Các mục nghiêm trọng có thể chờ được gom lại và hỏi cùng lúc tại một thời điểm đã lên kế hoạch, mỗi mục kèm giá trị mặc định được khuyến nghị, để nhà phát triển chỉ trả lời một lần. **Trong một lần chạy nhiều agent, một mục nghiêm trọng chặn chuỗi phụ thuộc của nó, không chặn cả lần chạy:** lead tạm gác tác vụ bị chặn — bản ghi `blocked` trong `state.json` của nó, được điền như trong các điều kiện dừng ở trên, chính là lần leo thang, được gửi một lần qua kênh báo cáo — giữ mọi agent độc lập tiếp tục làm việc, và tiếp tục chuỗi khi nhà phát triển trả lời. Các điều kiện dừng vẫn là quy tắc cho một kế hoạch đơn lẻ; lead áp dụng chúng theo từng chuỗi. Cách một bầy agent áp dụng điều này được mô tả trong [Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy).

@@ -1,7 +1,7 @@
 ---
 title: "A Metodologia Deep Work Plan"
-description: "Seis capítulos do manifesto à orquestração: princípios, loop central, templates, skills, arquétipos e muitos agentes na metodologia Deep Work Plan."
-lastUpdated: 2026-10-11
+description: "Sete capítulos do manifesto à autonomia do enxame: princípios, loop central, templates, skills, arquétipos, muitos agentes e enxames do Deep Work Plan."
+lastUpdated: 2026-10-12
 ---
 
 ## A Metodologia Deep Work Plan
@@ -17,7 +17,7 @@ O DWP se apoia em três pilares.
 
 **Eficiência de tokens — de horizonte longo por design, eficiente por construção.** O contexto é o recurso mais escasso que um agente de código tem, e uma metodologia que o desperdiça falha exatamente quando o trabalho se alonga. O DWP carrega as instruções de forma progressiva — cada guia é carregado quando seu gatilho dispara —, seleciona a validação a partir do que cada tarefa realmente toca e decide as skills de forma local por tarefa. Os bytes de instrução que cada fluxo exige são medidos e publicados; sem porcentagens de tokens inventadas.
 
-A metodologia é explicada em seis capítulos:
+A metodologia é explicada em sete capítulos:
 
 1. **Manifesto** — o que é um Deep Work Plan e por que a execução estruturada importa.
 2. **Loop central** — o ciclo de planejar-executar-verificar que conduz cada tarefa.
@@ -25,6 +25,7 @@ A metodologia é explicada em seis capítulos:
 4. **Skills e agents** — como os commands e os papéis de agent se encaixam, o kit vivo (como um repositório faz crescer suas próprias skills via a sub-skill author) e os addons opcionais como dependency-upgrade e o addon design-system para qualquer superfície de interface voltada ao usuário (UI visual, saída de CLI ou conversacional).
 5. **Arquétipos** — adaptar a metodologia a repositórios individuais e a hubs orquestradores.
 6. **Executar muitos agentes** — um líder e suas frentes entre painéis, contêineres, máquinas e contas, com um branch e um release por repositório.
+7. **Autonomia do enxame** — verificações de capacidade nos limites entre tarefas, pacotes de repasse, sucessão do líder com épocas e escalação só do crítico, para que um enxame sobreviva ao limite de uma conta ou à perda de um agente.
 
 - [Leia a metodologia](/methodology)
 - [Leia a especificação](/spec)

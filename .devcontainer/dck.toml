@@ -33,7 +33,7 @@ editor = true
 
 [agents]
 # Kinds passed to `ak install` when layers.agents is true.
-clis = ["claude", "codex", "cursor", "opencode", "pi", "cline", "grok"]
+clis = ["claude", "codex", "cursor", "opencode", "pi", "cline", "grok", "antigravity"]
 
 [herdr]
 # Register the container as a Herdr machine on `dck up` (needs ssh_port).

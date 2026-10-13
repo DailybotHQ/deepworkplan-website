@@ -120,3 +120,27 @@ Detenerse es éxito, no fracaso: el registro de bloqueo es el mensaje de escalac
 ### Continuación programada
 
 En plataformas con programación — latido o cron de OpenClaw, cron de Hermes, despertar de agente en la nube — la continuación DEBE expresarse como: *despertar → ejecutar el Protocolo de Reanudación DWP → si `blocked`, reportar y ceder → si no, ejecutar la siguiente tarea atómica → actualizar la capa de estado → ceder.* El plan, no la sesión, es la unidad de continuidad; un plan DEBE sobrevivir al reinicio de la plataforma, al cambio de modelo o a que un agente diferente tome el siguiente turno.
+
+### Taxonomía de escalación
+
+Todo lo que no figura abajo como **crítico** lo decide el agente: investiga, toma la opción recomendada, **registra la decisión** — en "Decisions" de `PROGRESS.md` o en `decisions[]` de un paquete de traspaso: las opciones, la elección, el porqué y cómo revertirla — y continúa. La prueba es mecánica: una escalación DEBE nombrar su clase; una pregunta que no nombra ninguna es una decisión que corresponde al agente. Esto es el §7.5 del `AGENT_PROTOCOL.md` del pack.
+
+| Clase | Crítico — preguntar al desarrollador, con la investigación, las opciones y una recomendación |
+| --- | --- |
+| **C1 Autoridad** | Una acción fuera de la autorización o del alcance del plan, o en un punto de control de consentimiento: operaciones destructivas o irreversibles, despliegues a producción, publicaciones o lanzamientos más allá del plan, mensajes a personas ajenas a los agentes del plan, gasto o facturación, postura de seguridad o acceso a secretos. |
+| **C2 Pantalla de consentimiento** | Cualquier pantalla de permiso, de omisión de permisos, de inicio de sesión, de credenciales, de consentimiento MCP o de pago. Un agente nunca le envía teclas. |
+| **C3 Ambigüedad irreducible** | Dos resultados materialmente distintos satisfacen la solicitud y nada en el repositorio, su documentación, los planes o las decisiones previas lo resuelve. |
+| **C4 Conflicto de calidad** | Una puerta de validación no puede pasar sin debilitarla, o la evidencia contradice el objetivo o las suposiciones del plan de una forma que el alcance de la tarea no puede corregir. |
+| **C5 Daño** | Pérdida o corrupción inexplicada de estado compartido, de datos o del trabajo de otro agente. |
+| **C6 Términos** | Cuestiones legales, de licencias, de términos del proveedor o de privacidad. |
+| **C7 Capacidad agotada** | Ninguna cuenta del grupo declarado por el desarrollador tiene margen y ninguna se restablece dentro del horizonte del plan. |
+
+**Decidido de forma autónoma** (lista no exhaustiva): el enfoque de implementación, los nombres, la estructura, las pruebas y la documentación; ordenar y dividir tareas dentro del plan; reintentos y reparaciones dentro de la superficie tocada de la tarea; corregir un problema del entorno que el agente puede corregir — una herramienta local que falta, una configuración regional, una caché obsoleta — en lugar de reportarlo; registrar un fallo cuya existencia en la rama base está demostrada en lugar de escalarlo (la condición de parada 1 sigue aplicándose a los fallos del propio cambio); elegir una cuenta o un proveedor del grupo; lanzar, relanzar y cerrar sus propios agentes; el traspaso y la sucesión; cuál de varias opciones equivalentes tomar (la recomendada).
+
+Tres límites mantienen honesta la autonomía:
+
+1. **La autonomía nunca cierra una puerta humana.** Un criterio o punto de control que nombra una aprobación humana solo lo satisface esa persona, nunca una instrucción permanente de "sé autónomo" ni `trust`.
+2. **Las palabras literales del desarrollador prevalecen.** Cuando la opción recomendada contradice lo que el desarrollador pidió literalmente, se entrega la opción reversible que respeta la solicitud y se registra la recomendación (C3 si no existe ninguna opción reversible).
+3. **La autoridad no es transitiva.** Una aprobación retransmitida no añade autoridad; un agente lee por sí mismo la autorización del plan. La autoridad humana se conserva literalmente en la carpeta del plan; un agente que la retransmite registra "retransmitido por `<agent>`".
+
+**Agrupar las preguntas.** Los elementos críticos que pueden esperar se reúnen y se preguntan juntos en un único punto planificado, cada uno con su opción por defecto recomendada, de modo que el desarrollador responde una sola vez. **En una ejecución con varios agentes, un elemento crítico bloquea su cadena de dependencias, no la ejecución:** el líder aparca la tarea bloqueada — su registro `blocked` de `state.json`, rellenado como en las condiciones de parada anteriores, es la escalación, enviada una sola vez por el canal de reporte —, mantiene trabajando a todos los agentes independientes y reanuda la cadena cuando el desarrollador responde. Las condiciones de parada siguen siendo la regla para un plan individual; el líder las aplica por cadena. Cómo aplica esto un enjambre de agentes se describe en [Autonomía del enjambre](/es/methodology/07-swarm-autonomy).

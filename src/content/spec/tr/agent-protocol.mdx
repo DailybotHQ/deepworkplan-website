@@ -120,3 +120,27 @@ Durdurmak başarısızlık değil, başarıdır: engellenmiş kayıt, yükseltme
 ### Zamanlanmış devam
 
 Zamanlamalı platformlarda — OpenClaw kalp atışı veya cron, Hermes cron, bulut-ajanı uyanışı — devam şu şekilde ifade EDILMEK ZORUNDADIR: *uyan → DWP Resume Protocol'ü çalıştır → `blocked` ise raporla ve ver → değilse sonraki atomik görevi yürüt → durum katmanını güncelle → ver.* Plan, oturum değil, sürekliliğin birimidir; bir plan platformun yeniden başlatılmasından, modelin değişmesinden veya bir sonraki dönüşü alan farklı bir ajandan KURTULMAK ZORUNDADIR.
+
+### Yükseltme sınıflandırması
+
+Aşağıda **kritik** olarak listelenmeyen her şeye ajan karar verir: araştırır, önerilen seçeneği alır, **kararı kaydeder** — `PROGRESS.md` içindeki "Decisions" bölümüne ya da bir devir paketinin `decisions[]` alanına: seçenekler, seçim, gerekçesi ve nasıl geri alınacağı — ve devam eder. Test mekaniktir: bir yükseltme sınıfını BELİRTMEK ZORUNDADIR; hiçbir sınıf belirtmeyen bir soru, ajanın vermesi gereken bir karardır. Bu, paketin `AGENT_PROTOCOL.md` dosyasının §7.5 bölümüdür.
+
+| Sınıf | Kritik — araştırma, seçenekler ve bir öneriyle geliştiriciye sorun |
+| --- | --- |
+| **C1 Yetki** | Planın yetkisi veya kapsamı dışında ya da bir onay kontrol noktasındaki bir eylem: yıkıcı veya geri alınamaz işlemler, üretime dağıtımlar, planın ötesinde yayımlama veya sürüm çıkarma, planın ajanları dışındaki kişilere mesajlar, harcama veya faturalandırma, güvenlik duruşu veya sırlara erişim. |
+| **C2 Onay ekranı** | Herhangi bir izin, bypass-permissions, oturum açma, kimlik bilgisi, MCP onayı veya ödeme ekranı. Bir ajan buna asla tuş göndermez. |
+| **C3 İndirgenemez belirsizlik** | Esasen farklı iki sonuç isteği karşılıyor ve depodaki, belgelerindeki, planlardaki veya önceki kararlardaki hiçbir şey bunu çözmüyor. |
+| **C4 Kalite çatışması** | Bir kapı zayıflatılmadan geçemiyor ya da kanıt, planın hedefi veya varsayımlarıyla görevin kapsamının düzeltemeyeceği bir şekilde çelişiyor. |
+| **C5 Hasar** | Paylaşılan durumun, verinin veya başka bir ajanın çalışmasının açıklanamayan kaybı veya bozulması. |
+| **C6 Koşullar** | Hukuk, lisans, sağlayıcı koşulları veya gizlilik soruları. |
+| **C7 Kapasite tükendi** | Geliştiricinin bildirdiği havuzdaki hiçbir hesapta yer yok ve hiçbiri planın ufku içinde sıfırlanmıyor. |
+
+**Özerk olarak karar verilenler** (kapsamlı olmayan liste): uygulama yaklaşımı, adlandırma, yapı, testler ve belgeler; plan içinde görevlerin sıralanması ve bölünmesi; görevin dokunulan yüzeyi içindeki yeniden denemeler ve onarımlar; ajanın düzeltebileceği bir ortam sorununu — eksik bir yerel araç, bir yerel ayar, bayat bir önbellek — raporlamak yerine düzeltmek; temel dalda var olduğu kanıtlanmış bir başarısızlığı yükseltmek yerine kaydetmek (değişikliğin kendi başarısızlıkları için durma koşulu 1 yine geçerlidir); havuzdan bir hesap veya sağlayıcı seçmek; kendi ajanlarını başlatmak, yeniden başlatmak ve kapatmak; devir ve halefiyet; birbirine denk birkaç seçenekten hangisinin alınacağı (önerilen).
+
+Üç sınır özerkliği dürüst tutar:
+
+1. **Özerklik hiçbir zaman bir insan kapısını kapatmaz.** Bir insan onayını belirten bir kriter veya kontrol noktası yalnızca o insan tarafından karşılanır; kalıcı bir "özerk ol" ya da `trust` talimatıyla asla.
+2. **Geliştiricinin kelimesi kelimesine söyledikleri üstün gelir.** Önerilen seçenek, geliştiricinin kelimesi kelimesine istediğiyle çeliştiğinde, isteğe uyan geri alınabilir seçeneği uygulayın ve öneriyi kaydedin (geri alınabilir bir seçenek yoksa C3).
+3. **Yetki geçişli değildir.** Aktarılan bir onay yetki eklemez; ajan planın yetkisini kendisi okur. İnsan yetkisi plan klasöründe kelimesi kelimesine tutulur; onu aktaran ajan "`<agent>` tarafından aktarıldı" diye kaydeder.
+
+**Soruları toplu sorun.** Bekleyebilecek kritik öğeler toplanır ve her biri önerilen varsayılanıyla birlikte, planlanmış tek bir noktada hep birlikte sorulur; böylece geliştirici bir kez yanıt verir. **Çok ajanlı bir çalıştırmada kritik bir öğe, çalıştırmayı değil, kendi bağımlılık zincirini engeller:** lider engellenen görevi bekletir — yukarıdaki durma koşullarında olduğu gibi doldurulmuş `state.json` `blocked` kaydı, raporlama kanalı üzerinden bir kez gönderilen yükseltmedir — bağımsız her ajanı çalışır durumda tutar ve geliştirici yanıt verdiğinde zinciri sürdürür. Durma koşulları tek bir plan için kural olmaya devam eder; lider bunları zincir başına uygular. Bir ajan sürüsünün bunu nasıl uyguladığı [Sürü özerkliği](/tr/methodology/07-swarm-autonomy) bölümünde açıklanır.

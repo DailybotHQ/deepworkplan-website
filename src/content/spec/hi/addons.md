@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (पहला ऐडऑन)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.3.5` पर पिन किया गया, इंटरफ़ेस `2`) का एक हल्का इंटीग्रेटर: एक Dev Containers टेम्पलेट जिसे `dck init` रिपॉज़िटरी में उसके अपने कंटेनर के रूप में रेंडर करता है, साथ में `dck-dockerfile` स्किल।
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v0.3.7` पर पिन किया गया, इंटरफ़ेस `2`) का एक हल्का इंटीग्रेटर: एक Dev Containers टेम्पलेट जिसे `dck init` रिपॉज़िटरी में उसके अपने कंटेनर के रूप में रेंडर करता है, साथ में `dck-dockerfile` स्किल।
 
 - **Kit पृष्ठ:** [Devcontainer](/kit/devcontainer)
 - **क्या जोड़ता है:** digest द्वारा पिन की गई रनटाइम की आधिकारिक इमेज से बना `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` या `debian`, कोई साझा बेस इमेज नहीं), `dck` लॉन्चर (`up`, `shell`, `rebuild`, `doctor`) के ऊपर `dev.sh`, एक ऑप्ट-इन परत के रूप में कोडिंग एजेंट, केवल loopback पोर्ट, होस्ट के एजेंट के माध्यम से SSH पर git जिसमें अंदर कोई कुंजी नहीं होती, जब तक डेवलपर अपनी होस्ट प्रोफ़ाइल में `[ssh] copy_keys` से इसे स्वयं चालू न करे, और मानक लेआउट के साथ प्रति कंटेनर Herdr मशीनें
@@ -72,7 +72,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) अनिवार्य Final Review सुरक्षा-जाँच को एक संरचित स्थानीय समीक्षा देता है, और वैकल्पिक रूप से CI में pull requests को गेट करता है। संस्करण 2.3.0 से **स्थानीय समीक्षा baseline का हिस्सा है**; केवल CI सतह ऑप्ट-इन है। यह ऐडऑन हर release पर स्वतः अपडेट होता है, इसलिए नीचे दिखाया गया tag लिखे जाने के समय का वर्तमान tag है और vendored प्रति से पीछे रह सकता है — वास्तव में इंस्टॉल किए गए tag के लिए ऐडऑन का अपना `SKILL.md` और उसकी GitHub releases ही प्रामाणिक हैं। इंस्टॉल हमेशा एक प्रकाशित tag पर स्थिर किया जाता है, कभी किसी चलती हुई branch पर नहीं।
 
 - **Kit पृष्ठ:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — पूर्ण क्षमता संदर्भ
-- **ऑनबोर्डिंग पर आवश्यक (Phase 7a):** vendored skill का tag-pinned इंस्टॉल (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer -y`) साथ ही repo के लिए ढाला गया `.review/extension.md` (`generate-extension` के माध्यम से), ऑनबोर्डिंग की सहमति के अंतर्गत; अनुपस्थित होने पर एक targeted harness upgrade दोनों को समाधान करता है; अस्वीकृति एक घोषित अपवाद के रूप में दर्ज होती है और इंस्टॉल होने तक `verify` उसकी रिपोर्ट करता है
+- **ऑनबोर्डिंग पर आवश्यक (Phase 7a):** vendored skill का tag-pinned इंस्टॉल (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12 --skill ai-diff-reviewer -y`) साथ ही repo के लिए ढाला गया `.review/extension.md` (`generate-extension` के माध्यम से), ऑनबोर्डिंग की सहमति के अंतर्गत; अनुपस्थित होने पर एक targeted harness upgrade दोनों को समाधान करता है; अस्वीकृति एक घोषित अपवाद के रूप में दर्ज होती है और इंस्टॉल होने तक `verify` उसकी रिपोर्ट करता है
 - **हर Final Review में आवश्यक:** सुरक्षा-जाँच संचित change set पर upstream parent डिफ़ॉल्ट प्रवाह चलाती है और अपना आउटपुट plan-local `analysis_results/SECURITY_REVIEW.md` (plan के अपने folder के अंदर, repo root में कभी नहीं) में जोड़ती है; अनुपस्थित skill या एक्सटेंशन एक दर्ज `local reviewer not installed` निष्कर्ष है — कभी चुपचाप नहीं छोड़ा जाता, और कभी अचानक बूटस्ट्रैप नहीं: इंस्टॉल onboarding की सहमति या addon की स्पष्ट invocation से संबंधित है; एक पूर्ण पास के **सत्यापित `critical` निष्कर्ष** ठीक या स्पष्ट रूप से स्वीकृत होने तक पूर्णता को रोकते हैं (v3, BC-07 — असत्यापित गंभीर दावे एनोटेटेड चेतावनी के रूप में आते हैं, और `incomplete`/`timeout` समीक्षा एक स्वच्छ पास नहीं है, BC-04)
 - **वैकल्पिक CI सतह (Flow B):** upstream `setup` sub-skill के माध्यम से `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`), साथ ही `apply-review` (केवल पढ़ने योग्य) और `address-review` (कमिट, पुश और पुनः सक्रिय; v3.1.1 में नया) डेवलपर द्वारा इनवोक किए जाने वाले सुविधाओं के रूप में — स्पष्ट रूप से प्रस्तावित, बिना अनुरोध कभी इंस्टॉल नहीं, कभी डिफ़ॉल्ट नहीं, कभी प्लान टास्क नहीं
 - **कभी अवरोधित नहीं (केवल इनवोकेशन):** एक स्थानीय समीक्षा जो शुरू हो सकती हो पर त्रुटि दे दे, तो एक बार चेतावनी दें, दर्ज करें, जारी रखें; वह उस कार्य को कभी विफल नहीं करती
@@ -82,7 +82,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Herdr (छठा ऐडऑन)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v0.2.3`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v0.3.2`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Herdr](/kit/herdr)
 - **क्या जोड़ता है:** एक योजना किसी सीमित कार्य को दूसरे [Herdr](https://herdr.dev) पेन में किसी कोडिंग एजेंट को सौंप सकती है, उसी मशीन पर या ऐसी मशीन पर जिस तक Herdr SSH से पहुँचता है, और उसका एकमात्र अधिकृत उत्तर जर्नल में दर्ज कर सकती है
@@ -100,7 +100,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Agentkit (आठवाँ ऐडऑन)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, पिन `v0.5.3`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, पिन `v0.7.1`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Agentkit](/kit/agentkit)
 - **क्या जोड़ता है:** टर्मिनल कोडिंग एजेंटों पर एक `ak` कमांड सतह, जिसका उपयोग किसी सीमित योजना कार्य को हेडलेस चलाने के लिए होता है; यह `subagents`, `cancel_children` और `model_routing` क्षमताएँ केवल रनटाइम पर देता है, जब यह सक्षम हो, पहचाना गया हो और संगत इंटरफ़ेस पर हो

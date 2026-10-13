@@ -14,11 +14,11 @@ order: 7
 
 ## 무엇을 통합하는가
 
-이 애드온은 얇은 통합 계층입니다. 실제 작업은 [**herdr-peers**](https://github.com/DailybotHQ/herdr-peers)가 수행합니다. 이는 **`v0.2.3`** 태그에 고정된 독립형 MIT skill이며, Deep Work Plan 없이도 유용합니다. Herdr 자체가 열어 둔 부분을 정의합니다. 누가 응답할 수 있는지, 응답이 머신을 넘어 어떻게 돌아오는지, 두 에이전트가 서로에게 끝없이 응답하는 일을 어떻게 피하는지, 그리고 "내가 물었고, 그것이 답했다"는 기록이 어디에 남는지입니다.
+이 애드온은 얇은 통합 계층입니다. 실제 작업은 [**herdr-peers**](https://github.com/DailybotHQ/herdr-peers)가 수행합니다. 이는 **`v0.3.2`** 태그에 고정된 독립형 MIT skill이며, Deep Work Plan 없이도 유용합니다. Herdr 자체가 열어 둔 부분을 정의합니다. 누가 응답할 수 있는지, 응답이 머신을 넘어 어떻게 돌아오는지, 두 에이전트가 서로에게 끝없이 응답하는 일을 어떻게 피하는지, 그리고 "내가 물었고, 그것이 답했다"는 기록이 어디에 남는지입니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/herdr-peers`, 태그 `v0.2.3`, 프로토콜 1 |
+| 제품 | `DailybotHQ/herdr-peers`, 태그 `v0.3.2`, 프로토콜 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `herdr` |
 | 전송 방식 | 대화형: Herdr 페인 안의 피어 |
 | 제공 | `subagents`, `cancel_children` |
@@ -29,7 +29,7 @@ order: 7
 herdr-peers와, 그것이 의존하는 Herdr 공식 skill을 설치합니다. 에이전트가 응답해야 하는 모든 머신에도 이 skill이 필요합니다.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.2.3 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +56,7 @@ herdr-peers는 발신자를 인증하지 않습니다. 스탬프의 `from=` 필�
 
 ## 컨테이너와 호스트
 
-devcontainer-kit `v0.3.5` 기반의 [devcontainer](/kit/devcontainer) 애드온을 사용하면, 모든 dck 컨테이너가 herdr-peers를 포함하고 `dck up` 시점에 메시에 합류합니다. 그 에이전트는 호스트, 다른 컨테이너, 호스트의 다른 루프백 컨테이너에 있는 에이전트에게 질문하고 응답을 받을 수 있습니다. `dck setup`은 호스트에 검증된 herdr-peers를 설치하므로 호스트 에이전트도 응답합니다. 호스트 리스너와 다른 컨테이너의 접근을 허용하는 추가 키는 키트의 호스트 프로필에서 사용자가 결정하는 사항이며, 이 애드온은 이를 결코 설정하지 않습니다. herdr-peers `v0.2.3`부터 각 머신은 자체 상태(`$XDG_STATE_HOME/herdr-peers/<server>/`)를 유지하므로 호스트와 컨테이너가 공유하는 체크아웃에서도 서로의 기록이 더 이상 섞이지 않으며, devcontainer-kit (`v0.3.3`)부터는 컨테이너가 `HERDR_PEERS_SELF`를 스스로 export하므로 컨테이너 안의 Codex 에이전트가 수작업 없이 다른 머신에 접근합니다.
+devcontainer-kit `v0.3.7` 기반의 [devcontainer](/kit/devcontainer) 애드온을 사용하면, 모든 dck 컨테이너가 herdr-peers를 포함하고 `dck up` 시점에 메시에 합류합니다. 그 에이전트는 호스트, 다른 컨테이너, 호스트의 다른 루프백 컨테이너에 있는 에이전트에게 질문하고 응답을 받을 수 있습니다. `dck setup`은 호스트에 검증된 herdr-peers를 설치하므로 호스트 에이전트도 응답합니다. 호스트 리스너와 다른 컨테이너의 접근을 허용하는 추가 키는 키트의 호스트 프로필에서 사용자가 결정하는 사항이며, 이 애드온은 이를 결코 설정하지 않습니다. herdr-peers (`v0.2.3`)부터 각 머신은 자체 상태(`$XDG_STATE_HOME/herdr-peers/<server>/`)를 유지하므로 호스트와 컨테이너가 공유하는 체크아웃에서도 서로의 기록이 더 이상 섞이지 않으며, devcontainer-kit (`v0.3.3`)부터는 컨테이너가 `HERDR_PEERS_SELF`를 스스로 export하므로 컨테이너 안의 Codex 에이전트가 수작업 없이 다른 머신에 접근합니다.
 
 ## Herdr 또는 agentkit
 
@@ -69,7 +69,19 @@ devcontainer-kit `v0.3.5` 기반의 [devcontainer](/kit/devcontainer) 애드온�
 
 여러 레인(호스트, 컨테이너, 다른 머신의 페인에서 각자 자신의 계정으로 실행)을 한꺼번에 운영하는 리드를 위해, `herdr-peers lanes`는 모든 레인을 상태와 함께 나열하고, `herdr-peers status <pane>`는 차단된 레인이 머문 화면을 분류하며, 모든 위임 기록에는 그 작업을 맡은 계정과 벤더가 적힙니다. [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
 
-**Codex 레인은 자기 패인을 지정합니다.** Codex는 해당 계정의 모든 세션이 공유하는 백그라운드 서버에서 레인의 명령을 실행하므로, 물려받은 패인 id가 다른 레인의 것일 수 있습니다. Codex 레인은 리드의 지시에 적힌 자기 패인을 모든 herdr-peers 명령(`ask`, `reply`, `check`, `wait`, `lanes`, `cancel`)에 `--pane <pane>`으로 넘깁니다.
+**Codex 레인은 자기 패인을 지정합니다.** Codex는 해당 계정의 모든 세션이 공유하는 백그라운드 서버에서 레인의 명령을 실행하므로, 물려받은 패인 id가 다른 레인의 것일 수 있습니다. Codex 레인은 리드의 지시에 적힌 자기 패인을 모든 herdr-peers 명령(`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`)에 `--pane <pane>`으로 넘깁니다.
+
+## 알림과 리더십
+
+herdr-peers `v0.3.2`은 스웜이 리드보다 오래 살아남게 하는 기능을 더합니다([스웜 자율](/ko/methodology/07-swarm-autonomy)).
+
+- **알림(notice).** `herdr-peers notify <addr|lead> "<text>" --pane <pane>`은 `reply=no` 스탬프가 붙은 단방향 메시지를 보냅니다. 수신자의 `check`는 이를 알림으로 분류하고 데이터로 기록하며 결코 답하지 않습니다. 알림은 팬아웃 슬롯을 쓰지 않고 ask가 열려 있는 동안에도 보낼 수 있습니다. 핸드오프 공지, 리드 변경, 릴리스 브로드캐스트에 사용합니다.
+- **계획마다 하나의 리드 기록.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>`는 한 에이전트를 한 계획의 리드로 만듭니다. `lead show`는 기록을 출력합니다(스키마 `herdr-peers/lead-v1`: 계획, 리드, 에포크, 승계 목록, 레인, 갱신 시각). `lead handover <addr> --plan <P>`는 리더십을 넘기고, `lead takeover --plan <P>`는 리드가 사라졌을 때 처음 닿는 대리가 리더십을 넘겨받게 하며, `lead release --plan <P>`는 리더십을 끝냅니다. 변경마다 에포크가 올라가고 모든 레인에 알림이 갑니다. 레인을 시작하기 전에 계획을 claim합니다. `lead`는 기록이 존재해야만 해석됩니다. `v0.3.2`부터 기록은 claim한 리포지토리를 로컬에 보관하며, 다른 리포지토리에서 같은 계획 id를 claim하면 거부합니다. 그 계획은 `--plan <repo>/<id>`로 지정합니다.
+- **펜싱(fencing).** 레인은 자신에게 지시를 준 에이전트(최초 claim), 다음 에포크의 현재 리드(handover), 또는 다음 에포크에서 처음 닿는 승계 목록 항목(takeover)에게서 온 리드 알림만 받아들입니다. 그 밖의 것은 기록하고 무시하며, 돌아온 리드가 더 높은 에포크를 보면 물러납니다.
+- **`lead` 주소.** `ask lead …`와 `notify lead …`는 `--plan`(없으면 `$DWP_PLAN`)의 현재 리드로 해석되므로, 어떤 레인 지시도 리드의 페인을 하드코딩하지 않습니다.
+- **`usage_limit` 화면.** `status`와 `lanes`는 CLI의 사용 한도 메시지를 화면 클래스 `usage_limit`로 인식하며, 그 다음 단계는 핸드오프입니다. 이 화면에는 결코 키를 입력하지 않습니다. `lanes --json`은 계획, 그 리드, 에포크, 각 레인이 마지막으로 보고한 용량을 더합니다.
+
+레인끼리도 정보와 조율(인터페이스, 플래그 이름, 브랜치 상태)을 서로 물을 수 있지만, 작업을 배정하는 것은 리드뿐입니다. 깊이 1과 팬아웃 상한은 여전히 유지됩니다. `v0.2.x`에는 알림도 리드 기록도 없습니다. 레인은 지시에 적힌 리드 주소로 묻고, 리드 변경은 개발자가 전달합니다.
 
 ## 참고
 

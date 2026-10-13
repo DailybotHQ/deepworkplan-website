@@ -65,6 +65,9 @@ const tagPatterns = (repo: string): RegExp[] => {
       'g'
     ),
     new RegExp(`\\b${r} \`(v\\d+\\.\\d+\\.\\d+)\``, 'g'),
+    // Plain prose and a Markdown link followed by the tag (llms.txt).
+    new RegExp(`\\b${r} (v\\d+\\.\\d+\\.\\d+)\\b`, 'g'),
+    new RegExp(`\\[${r}\\]\\([^)]*\\) (v\\d+\\.\\d+\\.\\d+)\\b`, 'g'),
     new RegExp(`\\b${r}@(v\\d+\\.\\d+\\.\\d+)`, 'g'),
     // A table row that starts with the repository (init.md, ECOSYSTEM_CONTEXT).
     new RegExp(`^\\| ${r} \\|[^\\n]*?\\| \`(v\\d+\\.\\d+\\.\\d+)\``, 'gm'),

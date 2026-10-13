@@ -1,7 +1,7 @@
 ---
 title: "Metodyka Deep Work Plan"
-description: "Sześć rozdziałów od manifestu po orkiestrację: zasady, podstawowa pętla, szablony, skille, archetypy i praca wielu agentów naraz w metodyce Deep Work Plan."
-lastUpdated: 2026-10-11
+description: "Siedem rozdziałów od manifestu po autonomię roju: zasady, podstawowa pętla, szablony, skille, archetypy, wielu agentów i roje w metodyce Deep Work Plan."
+lastUpdated: 2026-10-12
 ---
 
 ## Metodyka Deep Work Plan
@@ -17,7 +17,7 @@ DWP opiera się na trzech filarach.
 
 **Efektywność tokenów — długi horyzont z założenia, wydajność z konstrukcji.** Kontekst to najrzadszy zasób, jakim dysponuje agent kodujący, a metodyka, która go marnuje, zawodzi dokładnie wtedy, gdy praca robi się długa. DWP ładuje instrukcje stopniowo — każdy przewodnik ładuje się, gdy zadziała jego wyzwalacz — dobiera walidację według tego, czego faktycznie dotyka każde zadanie, i decyduje o skillach lokalnie w zadaniu. Liczba bajtów instrukcji wymaganych przez każdy przepływ jest mierzona i publikowana; żadnych wymyślonych procentów tokenów.
 
-Metodyka jest wyjaśniona w sześciu rozdziałach:
+Metodyka jest wyjaśniona w siedmiu rozdziałach:
 
 1. **Manifest** — czym jest Deep Work Plan i dlaczego ustrukturyzowane wykonanie ma znaczenie.
 2. **Podstawowa pętla** — cykl plan-wykonanie-weryfikacja napędzający każde zadanie.
@@ -25,6 +25,7 @@ Metodyka jest wyjaśniona w sześciu rozdziałach:
 4. **Skille i agenci** — jak komendy i role agentów współgrają ze sobą, żywy kit (jak repozytorium rozwija własne skille za pomocą sub-skilla author) oraz opcjonalne dodatki, takie jak dependency-upgrade i dodatek design-system dla dowolnej powierzchni interfejsu skierowanej do użytkownika (wizualny UI, wyjście CLI lub konwersacyjna).
 5. **Archetypy** — dostosowanie metodyki do pojedynczych repozytoriów i centrów orkiestracji.
 6. **Uruchamianie wielu agentów** — prowadzący i jego tory w panelach, kontenerach, na maszynach i kontach, z jedną gałęzią i jednym wydaniem na repozytorium.
+7. **Autonomia roju** — kontrole pojemności na granicach zadań, pakiety przekazania, sukcesja prowadzącego z epokami i eskalacja wyłącznie spraw krytycznych, aby rój przetrwał limit jednego konta lub utratę jednego agenta.
 
 - [Przeczytaj metodykę](/methodology)
 - [Przeczytaj specyfikację](/spec)

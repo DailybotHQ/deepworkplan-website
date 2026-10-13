@@ -31,7 +31,7 @@ Dziś dostępnych jest osiem addonów — siedem opcjonalnych plus wymagany loka
 
 ### Devcontainer (pierwszy addon)
 
-Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v0.3.5`, interfejs `2`): szablon Dev Containers, który `dck init` renderuje do repozytorium jako jego własny kontener, plus skill `dck-dockerfile`.
+Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v0.3.7`, interfejs `2`): szablon Dev Containers, który `dck init` renderuje do repozytorium jako jego własny kontener, plus skill `dck-dockerfile`.
 
 - **Strona kit:** [Devcontainer](/kit/devcontainer)
 - **Co dodaje:** `docker/local/<service>/Dockerfile` z oficjalnego obrazu środowiska uruchomieniowego przypiętego przez digest (`python-3.13`, `node-24` lub `debian`, bez współdzielonego obrazu bazowego), `dev.sh` nad launcherem `dck` (`up`, `shell`, `rebuild`, `doctor`), agentów kodujących jako warstwę opt-in, porty tylko na loopbacku, git przez SSH za pośrednictwem agenta hosta bez żadnego klucza w środku, chyba że deweloper włączy `[ssh] copy_keys` w swoim profilu hosta, oraz maszyny Herdr dla każdego kontenera ze standardowym układem
@@ -72,7 +72,7 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) nadaje obowiązkowemu przeglądowi bezpieczeństwa Final Review strukturalny lokalny przegląd i opcjonalnie blokuje pull requesty w CI. Od standardu 2.3.0 **lokalny przegląd jest częścią linii bazowej**; tylko powierzchnia CI jest opcjonalna. Ten addon jest automatycznie odświeżany przy każdym release'ie, więc pokazany poniżej tag jest tym aktualnym w chwili pisania i może być opóźniony względem zwendorowanej kopii — miarodajne dla faktycznie zainstalowanego tagu są własny `SKILL.md` addonu i jego wydania na GitHubie. Instalacja jest zawsze przypięta do opublikowanego tagu, nigdy do ruchomej gałęzi.
 
 - **Strona kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — pełna referencja możliwości
-- **Wymagany przy onboardingu (Phase 7a):** instalacja vendored skilla przypięta do tagu (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.11 --skill ai-diff-reviewer -y`) plus dopasowane do repo `.review/extension.md` (przez `generate-extension`), za zgodą onboardingu; ukierunkowany upgrade harnessu uzgadnia oba elementy, gdy ich brakuje; odmowa jest zapisywana jako zadeklarowany wyjątek i zgłaszana przez `verify` do czasu instalacji
+- **Wymagany przy onboardingu (Phase 7a):** instalacja vendored skilla przypięta do tagu (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12 --skill ai-diff-reviewer -y`) plus dopasowane do repo `.review/extension.md` (przez `generate-extension`), za zgodą onboardingu; ukierunkowany upgrade harnessu uzgadnia oba elementy, gdy ich brakuje; odmowa jest zapisywana jako zadeklarowany wyjątek i zgłaszana przez `verify` do czasu instalacji
 - **Wymagany w każdym Final Review:** przegląd bezpieczeństwa uruchamia domyślny przepływ nadrzędny upstream skilla na skumulowanym zestawie zmian i dołącza jego wynik do lokalnego dla planu `analysis_results/SECURITY_REVIEW.md` (wewnątrz własnego folderu planu, nigdy w katalogu głównym repo); brakująca skill lub rozszerzenie to zapisane znalezisko `local reviewer not installed` — nigdy ciche pominięcie i nigdy zaskakujący bootstrap: instalacja należy do zgody onboardingu albo jawnego wywołania addonu; **zweryfikowane wyniki `critical`** ze zakończonego przebiegu blokują ukończenie do czasu naprawy lub wyraźnej akceptacji (v3, BC-07 — niezweryfikowane twierdzenia krytyczne pojawiają się jako adnotowane ostrzeżenia, a przegląd `incomplete`/`timeout` nie jest czystym przebiegiem, BC-04)
 - **Opcjonalna powierzchnia CI (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`) przez upstream sub-skill `setup`, plus towarzysze `apply-review` (tylko odczyt) i `address-review` (robi commity, push i uzbraja ponownie; nowy w v3.1.1) jako wygodne narzędzia wywoływane przez dewelopera — proponowany wyraźnie, nigdy instalowany nieproszony, nigdy domyślny, nigdy zadanie planu
 - **Nigdy nie blokuje (tylko wywołanie):** lokalny przegląd, który mógł wystartować, ale kończy się błędem, to ostrzeżenie raz, zapis i kontynuacja; nigdy nie zawiedzie z tego powodu zadania
@@ -82,7 +82,7 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 
 ### Herdr (szósty addon)
 
-Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v0.2.3`, protokół `1`), **interaktywny** transport delegowania planów v7.
+Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v0.3.2`, protokół `1`), **interaktywny** transport delegowania planów v7.
 
 - **Strona kit:** [Herdr](/kit/herdr)
 - **Co dodaje:** plan może przekazać ograniczone zadanie agentowi kodującemu w innym panelu [Herdr](https://herdr.dev), na tej samej maszynie lub na takiej, do której Herdr sięga przez SSH, i zapisać jego jedną autoryzowaną odpowiedź w dzienniku
@@ -100,7 +100,7 @@ Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-
 
 ### Agentkit (ósmy addon)
 
-Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v0.5.3`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
+Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v0.7.1`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
 
 - **Strona kit:** [Agentkit](/kit/agentkit)
 - **Co dodaje:** jedną powierzchnię poleceń `ak` nad terminalowymi agentami kodującymi, używaną do bezgłowego wykonania ograniczonego zadania planu; wnosi możliwości `subagents`, `cancel_children` i `model_routing` wyłącznie w czasie działania, gdy jest włączony, wykryty i na zgodnym interfejsie

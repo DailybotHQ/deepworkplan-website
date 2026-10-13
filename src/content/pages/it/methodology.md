@@ -1,7 +1,7 @@
 ---
 title: "La metodologia Deep Work Plan"
-description: "Sei capitoli dal manifesto all’orchestrazione: i principi, il core loop, i template, le skill, gli archetipi e molti agenti nella metodologia Deep Work Plan."
-lastUpdated: 2026-10-11
+description: "Sette capitoli dal manifesto all’autonomia dello sciame: principi, core loop, template, skill, archetipi, molti agenti e sciami nella metodologia DWP."
+lastUpdated: 2026-10-12
 ---
 
 ## La metodologia Deep Work Plan
@@ -17,7 +17,7 @@ DWP poggia su tre pilastri.
 
 **Efficienza dei token — lungo orizzonte by design, efficiente per costruzione.** Il contesto è la risorsa più scarsa per un agente di coding, e una metodologia che la spreca fallisce esattamente quando il lavoro si allunga. DWP carica le istruzioni progressivamente — ogni guida si carica quando scatta il suo trigger —, seleziona la validazione da ciò che ogni attività tocca realmente e decide le skill a livello di attività. I byte di istruzione richiesti da ogni flusso sono misurati e pubblicati; nessuna percentuale di token inventata.
 
-La metodologia è spiegata in sei capitoli:
+La metodologia è spiegata in sette capitoli:
 
 1. **Manifesto** — cos’è un Deep Work Plan e perché l’esecuzione strutturata conta.
 2. **Core loop** — il ciclo pianifica-esegui-verifica che guida ogni attività.
@@ -25,6 +25,7 @@ La metodologia è spiegata in sei capitoli:
 4. **Skill e agenti** — come si integrano comandi e ruoli degli agenti, il kit vivo (come un repository fa crescere le proprie skill tramite la sub-skill author) e gli addon opt-in come dependency-upgrade e l’addon design-system per qualsiasi superficie di interfaccia rivolta all’utente (UI visuale, output CLI o conversazionale).
 5. **Archetipi** — adattare la metodologia ai repo individuali e agli hub orchestratori.
 6. **Eseguire molti agenti** — un lead e le sue corsie tra pannelli, container, macchine e account, con un branch e un rilascio per repository.
+7. **Autonomia dello sciame** — controlli di capacità ai confini dei task, pacchetti di consegna, successione del lead per epoche ed escalation solo per ciò che è critico, così uno sciame sopravvive al limite di un account o alla perdita di un agente.
 
 - [Leggi la metodologia](/methodology)
 - [Leggi la specifica](/spec)

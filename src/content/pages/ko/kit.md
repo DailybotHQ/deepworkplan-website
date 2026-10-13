@@ -10,7 +10,7 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill`에서 설치됩니다.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
 ```
 
 현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다.
@@ -65,12 +65,12 @@ onboard 흐름이 리포지토리에 얹는 기능들입니다. 일곱 가지는
 **방법론은 단독으로 작동합니다. 애드온은 이를 강화합니다.** 각 애드온은 Deep Work Plan 스킬 내부의 얇은 통합 계층으로, 자체 리포지토리, 릴리스, 인터페이스 버전을 갖춘 제품에 태그로 고정됩니다. 모든 제품은 Deep Work Plan 없이도 작동하며, 필수 애드온은 없습니다.
 
 - **Deep Work Plan 스킬** — 계획을 생성, 실행, 검증, 재개, 개선합니다. 애드온이 필요하지 않습니다.
-- **[herdr](/ko/kit/herdr)** — 어떤 머신에서든 Herdr 페인에 있는 피어: 승인된 응답 한 번으로 이루어지는 대화형 위임. 고정 버전 `herdr-peers@v0.2.3`.
-- **[agentkit](/ko/kit/agentkit)** — 모든 터미널 코딩 에이전트를 위한 하나의 ak 명령: 기본은 자율 실행(옵트아웃 가능), 그리고 worktree에서의 헤드리스 위임. 고정 버전 `coding-agents-kit@v0.5.3`.
-- **[devcontainer](/ko/kit/devcontainer)** — 하나의 템플릿으로 만드는 리포지토리별 개발 컨테이너: 에이전트는 ak로, Herdr는 양방향, SSH 키는 옵트인 시에만. 고정 버전 `devcontainer-kit@v0.3.5`.
+- **[herdr](/ko/kit/herdr)** — 어떤 머신에서든 Herdr 페인에 있는 피어: 승인된 응답 한 번으로 이루어지는 대화형 위임. 고정 버전 `herdr-peers@v0.3.2`.
+- **[agentkit](/ko/kit/agentkit)** — 모든 터미널 코딩 에이전트를 위한 하나의 ak 명령: 기본은 자율 실행(옵트아웃 가능), 그리고 worktree에서의 헤드리스 위임. 고정 버전 `coding-agents-kit@v0.7.1`.
+- **[devcontainer](/ko/kit/devcontainer)** — 하나의 템플릿으로 만드는 리포지토리별 개발 컨테이너: 에이전트는 ak로, Herdr는 양방향, SSH 키는 옵트인 시에만. 고정 버전 `devcontainer-kit@v0.3.7`.
 - **[vim](/ko/kit/vim)** — 읽기 전용 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기. 고정 버전 `deepworkplan-vim@v0.7.0`.
 
-애드온 레지스트리와 디스크립터는 Deep Work Plan v7에 포함되어 있습니다: `v7.6.3`
+애드온 레지스트리와 디스크립터는 Deep Work Plan v7에 포함되어 있습니다: `v7.7.1`
 
 ### 예시
 

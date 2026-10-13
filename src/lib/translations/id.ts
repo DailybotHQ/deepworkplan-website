@@ -578,12 +578,12 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Metodologi Deep Work Plan',
       description:
-        'Enam bab dari manifesto hingga orkestrasi: prinsip, core loop, template, skill dan agent, arketipe, serta menjalankan banyak agent sekaligus.',
+        'Tujuh bab dari manifesto hingga otonomi swarm: prinsip, core loop, template, skill dan agent, arketipe, banyak agent, dan swarm yang tahan batas kuota.',
     },
     eyebrow: 'Metodologi',
     title: 'Metodologi Deep Work Plan',
     intro:
-      'Enam bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, adaptasi, dan menjalankan banyak agent sekaligus.',
+      'Tujuh bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, adaptasi, menjalankan banyak agent sekaligus, dan menjaga swarm tetap berjalan.',
     chapterLabel: 'Bab',
     readChapter: 'Baca bab',
     prev: 'Sebelumnya',
@@ -699,7 +699,7 @@ export const id: SiteTranslations = {
         description:
           'Perlakukan prompt dan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Keduanya bersumber terbuka dan berlisensi MIT; skill berbasis Markdown tanpa panggilan jaringan dan tanpa telemetri. Setiap rilis menerbitkan SHA256SUMS atas skill yang dikirimkan, sehingga Anda dapat mengonfirmasi salinan Anda cocok sebelum menjalankannya. Rilis ber-checksum, bukan bertanda tangan (penandatanganan adalah langkah berikutnya yang terdokumentasi).',
         commands: [
-          'git clone --branch v7.6.3 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.6.3/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.7.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.7.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -707,7 +707,7 @@ export const id: SiteTranslations = {
         description:
           'Tambahkan skill Deep Work Plan agar agent mana pun dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Skill ini membawa sebuah router ditambah sembilan sub-skill — create, execute, refine, resume, status, verify, onboard, author, dan upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -813,7 +813,7 @@ export const id: SiteTranslations = {
             id: 'how-to-use',
             question: 'Bagaimana cara menggunakannya?',
             answer:
-              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.6.3 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
+              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
             linkLabel: 'Mulai Cepat',
             linkPath: '/quickstart',
           },

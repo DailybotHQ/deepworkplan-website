@@ -11,6 +11,20 @@ services:
     build:
       context: ./dwpwebsite
       dockerfile: Dockerfile
+      args:
+        # The coding-agent CLIs installed in YOUR image: dck.toml [agents] clis,
+        # unless you set DCK_AGENT_CLIS (docker/local/.env, the shell, or your host
+        # profile's [agents] clis / clis_extra through dck up), plus each
+        # INSTALL_<CLI>_CLI=true. Then `dck rebuild`. Every supported CLI is wired.
+        DCK_AGENT_CLIS: "${DCK_AGENT_CLIS:-claude codex cursor opencode pi cline grok antigravity}"
+        INSTALL_CLAUDE_CLI: "${INSTALL_CLAUDE_CLI:-false}"
+        INSTALL_CODEX_CLI: "${INSTALL_CODEX_CLI:-false}"
+        INSTALL_CURSOR_CLI: "${INSTALL_CURSOR_CLI:-false}"
+        INSTALL_OPENCODE_CLI: "${INSTALL_OPENCODE_CLI:-false}"
+        INSTALL_PI_CLI: "${INSTALL_PI_CLI:-false}"
+        INSTALL_CLINE_CLI: "${INSTALL_CLINE_CLI:-false}"
+        INSTALL_GROK_CLI: "${INSTALL_GROK_CLI:-false}"
+        INSTALL_ANTIGRAVITY_CLI: "${INSTALL_ANTIGRAVITY_CLI:-false}"
     init: true
     working_dir: /app
     command: ["sleep", "infinity"]
@@ -26,6 +40,7 @@ services:
       - pi:/home/node/.dck/volumes/pi
       - cline:/home/node/.dck/volumes/cline
       - grok:/home/node/.dck/volumes/grok
+      - antigravity:/home/node/.dck/volumes/antigravity
       # The host's SSH agent (git over SSH, signing) — never a key file. Docker
       # Desktop exposes it at this path; on a Linux host set DCK_HOST_SSH_AUTH_SOCK
       # (dck up and dck rebuild do it from $SSH_AUTH_SOCK). A missing host path
@@ -48,12 +63,13 @@ services:
       DCK_SSH: "1"
       DCK_EDITOR: "1"
       SSH_AUTH_SOCK: /run/dck/ssh-agent.sock
-      # Agents layer: one named volume per CLI home (persisted by the entrypoint);
-      # ak profiles live on the agentkit volume. Every agent launched through ak
-      # runs in autonomy (this container is the sandbox). Opt-out — agents ask
-      # before acting: set AGENTKIT_PERMISSIONS=ask in ./dwpwebsite/.env (this
-      # block is reconciled by `dck init`; the .env is yours).
-      DCK_AGENTS: "claude codex cursor opencode pi cline grok"
+      # Agents layer: one named volume per supported CLI's home, installed or
+      # not (persisted by the entrypoint); ak profiles live on the agentkit
+      # volume. Every agent launched through ak runs in autonomy (this container
+      # is the sandbox). Opt-out — agents ask before acting:
+      # set AGENTKIT_PERMISSIONS=ask in ./dwpwebsite/.env (this block is
+      # reconciled by `dck init`; the .env is yours).
+      DCK_AGENTS: "claude codex cursor opencode pi cline grok antigravity"
       AGENTKIT_PROFILES_DIR: /home/node/.dck/volumes/agentkit/profiles
       DCK_DAILYBOT: "1"
       # Public key(s) dck authorizes for sshd; set by `dck up`, empty otherwise.
@@ -73,4 +89,5 @@ volumes:
   pi: {}
   cline: {}
   grok: {}
+  antigravity: {}
 # <<< dck:volumes <<<

@@ -120,3 +120,27 @@ S'arrêter est un succès, pas un échec : l'enregistrement bloqué est le messa
 ### Continuation planifiée
 
 Sur les plateformes avec planification — heartbeat ou cron OpenClaw, cron Hermes, réveil d'agent cloud — la continuation MUST être exprimée ainsi : *réveil → exécuter le Protocole de reprise DWP → si `blocked`, signaler et céder la main → sinon exécuter la prochaine tâche atomique → mettre à jour la couche d'état → céder la main.* Le plan, et non la session, est l'unité de continuité ; un plan MUST survivre au redémarrage de la plateforme, au changement de modèle, ou à un agent différent prenant en charge le tour suivant.
+
+### Taxonomie d'escalade
+
+Tout ce qui n'est pas listé ci-dessous comme **critique** est décidé par l'agent : il enquête, retient l'option recommandée, **consigne la décision** — dans la section « Decisions » de `PROGRESS.md` ou dans les `decisions[]` d'un paquet de passation : les options, le choix, la raison et la manière de l'annuler — et continue. Le test est mécanique : une escalade MUST nommer sa classe ; une question qui n'en nomme aucune est une décision que l'agent doit prendre lui-même. C'est le §7.5 du `AGENT_PROTOCOL.md` du pack.
+
+| Classe | Critique — demander au développeur, avec l'investigation, les options et une recommandation |
+| --- | --- |
+| **C1 Autorité** | Une action hors de l'autorisation ou du périmètre du plan, ou à un point de contrôle de consentement : opérations destructrices ou irréversibles, déploiements en production, publication ou release au-delà du plan, messages à des personnes extérieures aux agents du plan, dépenses ou facturation, posture de sécurité ou accès aux secrets. |
+| **C2 Écran de consentement** | Tout écran de permission, de contournement des permissions, de connexion, d'identifiants, de consentement MCP ou de paiement. Jamais validé au clavier par un agent. |
+| **C3 Ambiguïté irréductible** | Deux résultats matériellement différents satisfont la demande et rien dans le dépôt, sa documentation, les plans ou les décisions antérieures ne permet de trancher. |
+| **C4 Conflit de qualité** | Une porte de validation ne peut passer sans être affaiblie, ou des preuves contredisent l'objectif ou les hypothèses du plan d'une manière que le périmètre de la tâche ne peut corriger. |
+| **C5 Dommage** | Perte ou corruption inexpliquée d'un état partagé, de données ou du travail d'un autre agent. |
+| **C6 Conditions** | Questions juridiques, de licence, de conditions des fournisseurs ou de confidentialité. |
+| **C7 Capacité épuisée** | Aucun compte du pool déclaré par le développeur n'a de marge et aucun ne se réinitialise dans l'horizon du plan. |
+
+**Décidé de manière autonome** (liste non exhaustive) : approche d'implémentation, nommage, structure, tests et documentation ; ordre et découpage des tâches au sein du plan ; nouvelles tentatives et réparations dans la surface touchée de la tâche ; correction d'un problème d'environnement que l'agent peut corriger — un outil local manquant, une locale, un cache périmé — au lieu de le signaler ; consignation d'un échec dont l'existence sur la branche de base est prouvée au lieu de le faire remonter (la condition d'arrêt 1 s'applique toujours aux échecs propres au changement) ; choix d'un compte ou d'un fournisseur dans le pool ; lancement, relance et fermeture de ses propres agents ; passation et succession ; choix entre plusieurs options équivalentes (la recommandée).
+
+Trois limites gardent l'autonomie honnête :
+
+1. **L'autonomie ne ferme jamais une porte humaine.** Un critère ou un point de contrôle qui nomme une validation humaine n'est satisfait que par cet humain, jamais par une instruction permanente « sois autonome » ou `trust`.
+2. **Les mots littéraux du développeur l'emportent.** Lorsque l'option recommandée contredit ce que le développeur a littéralement demandé, livrer l'option réversible qui respecte la demande et consigner la recommandation (C3 s'il n'existe aucune option réversible).
+3. **L'autorité n'est pas transitive.** Une approbation relayée n'ajoute aucune autorité ; un agent lit lui-même l'autorisation du plan. L'autorité humaine est conservée mot pour mot dans le dossier du plan ; un agent qui la relaie consigne « relayé par `<agent>` ».
+
+**Regrouper les questions.** Les éléments critiques qui peuvent attendre sont rassemblés et posés ensemble à un moment prévu, chacun avec sa valeur par défaut recommandée, afin que le développeur réponde une seule fois. **Dans une exécution multi-agents, un élément critique bloque sa chaîne de dépendances, pas l'exécution :** le coordinateur met en attente la tâche bloquée — son enregistrement `blocked` dans `state.json`, renseigné comme dans les conditions d'arrêt ci-dessus, est l'escalade, envoyée une seule fois via le canal de rapport —, garde chaque agent indépendant au travail et reprend la chaîne lorsque le développeur répond. Les conditions d'arrêt restent la règle pour un plan unique ; le coordinateur les applique chaîne par chaîne. La manière dont un essaim d'agents applique ces règles est décrite dans [Autonomie de l'essaim](/fr/methodology/07-swarm-autonomy).
