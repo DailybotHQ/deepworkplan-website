@@ -9,6 +9,8 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.57] - 2026-10-13
+
 ### Added
 
 - feat: methodology chapter 7, *Swarm autonomy*, in 17 languages: roles (lead, deputy, lane, reviewer), the capacity loop (`ak capacity --self`), the declared account pool, proactive lane handoff and the `dwp-handoff/v1` packet, lead succession with epochs and fencing, lane-to-lane messaging, critical-only escalation (C1–C7), the quality bar and how to drill it
@@ -1318,7 +1320,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.56...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.57...HEAD
+[5.0.57]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.57
 [5.0.56]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.56
 [5.0.55]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.55
 [5.0.54]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.54
