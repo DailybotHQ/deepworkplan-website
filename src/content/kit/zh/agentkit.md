@@ -43,11 +43,11 @@ ak setup verify            # 按顺序的检查，每项附带修复命令
 
 `agentkit-orchestrate` 技能（`ak --skill orchestrate`）教代理把工作分摊到多个代理、账户和厂商上：批次开始前执行一次 `ak usage`，用 `ak pick --count N` 选择账户，每个账户一个委派对象，对每个结果运行仓库自己的验证关卡，并在某个账户触及限额时切换到下一个账户。工具包负责观察、计算和运行；它从不调度。由主导者——你，或你委托的代理——做决定，只使用你自己的账户，并遵守每个厂商的条款。
 
-对于长时间的交互式通道，每条通道在 [Herdr](/kit/herdr) 窗格中以自己的账户运行。方法论章节[运行多个代理](/methodology/06-orchestration)描述了完整的模型：主导者与其通道、按余量选择的账户、herdr-peers 协调，以及每个仓库一个分支、一次发布；[集群自主](/methodology/07-swarm-autonomy)则补充了容量检查、交接与主导者继任。
+对于长时间的交互式通道，每条通道在 [Herdr](/kit/herdr) 窗格中以自己的账户运行。方法论章节[运行多个代理](/methodology/06-orchestration)描述了完整的模型：主导者与其通道、按余量选择的账户、herdr-peers 协调，以及每个仓库一个分支、一次发布；[集群自主](/zh/methodology/07-swarm-autonomy)则补充了容量检查、交接与主导者继任。
 
 ## 容量与租约
 
-自 `v0.6.0` 起，代理可以在每个任务边界以低成本查询自己的账户还剩多少余量——正是这一信号，让代理集群能在账户耗尽之前把工作交接出去（[集群自主](/methodology/07-swarm-autonomy)）。
+自 `v0.6.0` 起，代理可以在每个任务边界以低成本查询自己的账户还剩多少余量——正是这一信号，让代理集群能在账户耗尽之前把工作交接出去（[集群自主](/zh/methodology/07-swarm-autonomy)）。
 
 - **`ak capacity --self --json`**（schema `capacity-v1`）给出正在运行的账户的 `headroom_pct`、其 `binding_window`、`resets_at` 以及一个 `verdict`：`ok`、`low`（25 % 或更低）、`critical`（10 % 或更低，或已被限流）或 `unknown`（没有配额来源：Cursor、Grok，或 macOS 上的 Antigravity）。它使用与 `ak pick` 相同的算法，因此两者从不矛盾；它读取保留 300 秒的用量缓存（`--max-age`），因此在每个任务边界检查一次的成本依然很低。`--self` 解析出由 `ak` 启动的那个账户；不在 `ak` 启动的环境中时，它以退出码 3 退出，从不猜测。`ak usage` 仍然实时读取并刷新缓存。
 - **阈值与演练。** `AGENTKIT_CAPACITY_LOW` 和 `AGENTKIT_CAPACITY_CRITICAL`（或 `--low` 和 `--critical`）用于调整阈值。`AGENTKIT_CAPACITY_CAP=@<profile>=<pct>` 只能调低读数——演练正是借此让一个账户显得余量不足——绝不能让账户显得余量更多。

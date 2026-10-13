@@ -73,7 +73,7 @@ Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konte
 
 ## Bildirimler ve liderlik
 
-herdr-peers `v0.3.2`, bir sürünün liderinden daha uzun yaşamasını sağlayan şeyleri ekler ([Sürü özerkliği](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2`, bir sürünün liderinden daha uzun yaşamasını sağlayan şeyleri ekler ([Sürü özerkliği](/tr/methodology/07-swarm-autonomy)):
 
 - **Bildirimler.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>`, `reply=no` damgalı tek yönlü bir mesaj gönderir. Alıcının `check` komutu onu bir bildirim olarak sınıflandırır, veri olarak kaydeder ve asla yanıtlamaz. Bildirimler yayılma kotasından yer harcamaz ve açık bir ask varken de gönderilebilir; devir duyuruları, lider değişiklikleri ve sürüm yayınları için kullanın.
 - **Plan başına bir lider kaydı.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>`, bir agent'ı tek bir planın lideri yapar; `lead show` kaydı yazdırır (şema `herdr-peers/lead-v1`: plan, lider, epoch, halef listesi, şeritler, güncelleme zamanı). `lead handover <addr> --plan <P>` liderliği devreder, `lead takeover --plan <P>` lider gittiğinde ulaşılabilen ilk vekilin liderliği almasını sağlar ve `lead release --plan <P>` onu sona erdirir. Her değişiklik epoch'u yükseltir ve her şeride bildirim gönderir. Planı, şeritlerini başlatmadan önce sahiplenin: `lead` ancak bir kayıt var olduğunda çözümlenir. `v0.3.2` sürümünden itibaren kayıt, sahiplenen depoyu yerel olarak tutar ve aynı plan kimliğinin başka bir depodan sahiplenilmesini reddeder; o planı `--plan <repo>/<id>` olarak adlandırın.

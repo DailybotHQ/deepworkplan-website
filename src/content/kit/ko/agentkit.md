@@ -43,11 +43,11 @@ ak setup verify            # 순서대로 진행되는 점검, 각각 복구 명
 
 `agentkit-orchestrate` 스킬(`ak --skill orchestrate`)은 에이전트에게 작업을 여러 에이전트, 계정, 벤더에 나누는 방법을 가르칩니다. 배치 전에 `ak usage`를 한 번 실행하고, `ak pick --count N`으로 계정을 고르고, 계정마다 하나의 위임 대상을 두고, 모든 결과에 리포지토리 자체의 게이트를 실행하며, 한 계정이 한도에 걸리면 다음 계정으로 넘어갑니다. 키트는 관찰하고, 계산하고, 실행할 뿐 스케줄링하지 않습니다. 결정은 리드(여러분, 또는 여러분이 요청한 에이전트)가 내리며, 자신의 계정만 사용하고 각 벤더의 약관을 지킵니다.
 
-길고 상호작용이 필요한 레인은 각각 [Herdr](/kit/herdr) 페인에서 자신의 계정으로 실행됩니다. 방법론 장 [여러 에이전트 운영하기](/methodology/06-orchestration)는 전체 모델을 설명합니다. 리드와 레인, 여유량으로 고른 계정, herdr-peers 조율, 그리고 리포지토리마다 하나의 브랜치와 하나의 릴리스입니다. [스웜 자율](/methodology/07-swarm-autonomy)은 여기에 용량 확인, 핸드오프, 리드 승계를 더합니다.
+길고 상호작용이 필요한 레인은 각각 [Herdr](/kit/herdr) 페인에서 자신의 계정으로 실행됩니다. 방법론 장 [여러 에이전트 운영하기](/methodology/06-orchestration)는 전체 모델을 설명합니다. 리드와 레인, 여유량으로 고른 계정, herdr-peers 조율, 그리고 리포지토리마다 하나의 브랜치와 하나의 릴리스입니다. [스웜 자율](/ko/methodology/07-swarm-autonomy)은 여기에 용량 확인, 핸드오프, 리드 승계를 더합니다.
 
 ## 용량과 리스
 
-`v0.6.0`부터 에이전트는 모든 작업 경계에서 자신의 계정에 여유가 얼마나 남았는지 적은 비용으로 물을 수 있습니다. 이 신호 덕분에 스웜은 계정이 바닥나기 전에 작업을 넘길 수 있습니다([스웜 자율](/methodology/07-swarm-autonomy)).
+`v0.6.0`부터 에이전트는 모든 작업 경계에서 자신의 계정에 여유가 얼마나 남았는지 적은 비용으로 물을 수 있습니다. 이 신호 덕분에 스웜은 계정이 바닥나기 전에 작업을 넘길 수 있습니다([스웜 자율](/ko/methodology/07-swarm-autonomy)).
 
 - **`ak capacity --self --json`**(스키마 `capacity-v1`)은 실행 중인 계정의 `headroom_pct`, `binding_window`, `resets_at`, 그리고 `verdict`를 제공합니다. `verdict`는 `ok`, `low`(25 % 이하), `critical`(10 % 이하 또는 속도 제한), `unknown`(할당량 출처 없음: Cursor, Grok 또는 macOS의 Antigravity) 중 하나입니다. `ak pick`과 같은 계산을 쓰므로 둘의 판단은 결코 어긋나지 않으며, 300초 동안 유지되는 사용량 캐시(`--max-age`)를 읽으므로 작업 경계마다 확인해도 비용이 적습니다. `--self`는 `ak`가 시작한 계정을 찾아내며, `ak` 실행 밖에서는 종료 코드 3으로 끝나고 결코 추측하지 않습니다. `ak usage`는 여전히 실시간으로 읽고 캐시를 갱신합니다.
 - **임계값과 훈련.** `AGENTKIT_CAPACITY_LOW`와 `AGENTKIT_CAPACITY_CRITICAL`(또는 `--low`와 `--critical`)로 임계값을 옮깁니다. `AGENTKIT_CAPACITY_CAP=@<profile>=<pct>`는 측정값을 낮추기만 할 수 있습니다. 훈련에서 계정을 여유가 없는 것처럼 보이게 하는 방법이며, 계정을 더 여유 있게 보이게 하는 일은 결코 없습니다.

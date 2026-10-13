@@ -73,7 +73,7 @@ Für einen Lead, der viele Lanes gleichzeitig betreibt — Panes auf dem Host, i
 
 ## Notices und Leitung
 
-herdr-peers `v0.3.2` ergänzt, was einen Schwarm seinen Lead überdauern lässt ([Schwarmautonomie](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` ergänzt, was einen Schwarm seinen Lead überdauern lässt ([Schwarmautonomie](/de/methodology/07-swarm-autonomy)):
 
 - **Notices.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` sendet eine Einweg-Nachricht mit dem Stempel `reply=no`. Das `check` des Empfängers klassifiziert sie als Notice, hält sie als Daten fest und antwortet nie. Notices belegen keinen Fan-out-Platz und dürfen gesendet werden, während ein ask offen ist; verwenden Sie sie für Übergabeankündigungen, Lead-Wechsel und Release-Rundsendungen.
 - **Ein Lead-Eintrag pro Plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` macht einen Agenten zum Lead eines Plans; `lead show` gibt den Eintrag aus (Schema `herdr-peers/lead-v1`: Plan, Lead, Epoche, Nachfolge, Lanes, Aktualisierungszeit). `lead handover <addr> --plan <P>` gibt die Leitung weiter, `lead takeover --plan <P>` lässt den ersten erreichbaren Stellvertreter sie übernehmen, wenn der Lead verschwunden ist, und `lead release --plan <P>` beendet sie. Jede Änderung erhöht die Epoche und benachrichtigt jede Lane. Beanspruchen Sie den Plan, bevor Sie seine Lanes starten: `lead` wird erst aufgelöst, sobald ein Eintrag existiert. Ab `v0.3.2` hält der Eintrag das beanspruchende Repository lokal fest und lehnt einen Anspruch auf dieselbe Plan-ID aus einem anderen Repository ab; benennen Sie diesen Plan `--plan <repo>/<id>`.

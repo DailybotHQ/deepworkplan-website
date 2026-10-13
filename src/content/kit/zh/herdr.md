@@ -73,7 +73,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 通知与主导权
 
-herdr-peers `v0.3.2` 加入了让代理集群在主导者离开后仍能延续的能力（[集群自主](/methodology/07-swarm-autonomy)）：
+herdr-peers `v0.3.2` 加入了让代理集群在主导者离开后仍能延续的能力（[集群自主](/zh/methodology/07-swarm-autonomy)）：
 
 - **通知。** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` 发送一条带 `reply=no` 戳记的单向消息。接收方的 `check` 把它归类为通知，作为数据记录下来，从不回复。通知不占用扇出名额，并且可以在一次询问尚未结束时发送；它们用于交接公告、主导者变更和发布广播。
 - **每份计划一条主导者记录。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` 让一个代理成为某份计划的主导者；`lead show` 打印该记录（schema `herdr-peers/lead-v1`：计划、主导者、epoch、继任列表、通道、更新时间）。`lead handover <addr> --plan <P>` 移交主导权，`lead takeover --plan <P>` 在主导者离开时让第一个可达的副手接管，`lead release --plan <P>` 结束主导。每次变更都会提升 epoch 并通知每条通道。在启动计划的通道之前先认领该计划：`lead` 只有在记录存在后才能解析。从 `v0.3.2` 起，记录会在本地保存认领它的仓库，并拒绝另一个仓库对同一计划 id 的认领；请将那份计划写作 `--plan <repo>/<id>`。

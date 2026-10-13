@@ -73,7 +73,7 @@ Para un líder que ejecuta muchos carriles a la vez — paneles en el host, en c
 
 ## Avisos y liderazgo
 
-herdr-peers `v0.3.2` añade lo que permite a un enjambre sobrevivir a su líder ([Autonomía del enjambre](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` añade lo que permite a un enjambre sobrevivir a su líder ([Autonomía del enjambre](/es/methodology/07-swarm-autonomy)):
 
 - **Avisos.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envía un mensaje unidireccional sellado con `reply=no`. El `check` del receptor lo clasifica como aviso, lo registra como datos y nunca responde. Los avisos no consumen ningún hueco de fan-out y pueden enviarse mientras hay una consulta abierta; úsalos para anuncios de traspaso, cambios de líder y difusiones de publicación.
 - **Un registro de líder por plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` convierte a un agente en el líder de un plan; `lead show` imprime el registro (esquema `herdr-peers/lead-v1`: plan, líder, época, sucesión, carriles, hora de actualización). `lead handover <addr> --plan <P>` cede el liderazgo, `lead takeover --plan <P>` permite que el primer suplente alcanzable lo asuma cuando el líder ya no está, y `lead release --plan <P>` lo termina. Cada cambio incrementa la época y avisa a todos los carriles. Reclama el plan antes de lanzar sus carriles: `lead` solo se resuelve cuando existe un registro. Desde `v0.3.2` el registro guarda localmente el repositorio que reclama y rechaza una reclamación del mismo id de plan desde otro repositorio; nombra ese plan `--plan <repo>/<id>`.

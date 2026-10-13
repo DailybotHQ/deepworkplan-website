@@ -73,7 +73,7 @@ Per un lead che esegue molte corsie insieme — pannelli sull’host, nei contai
 
 ## Notifiche e guida
 
-herdr-peers `v0.3.2` aggiunge ciò che permette a uno sciame di sopravvivere al proprio lead ([Autonomia dello sciame](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` aggiunge ciò che permette a uno sciame di sopravvivere al proprio lead ([Autonomia dello sciame](/it/methodology/07-swarm-autonomy)):
 
 - **Notifiche.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` invia un messaggio unidirezionale con il timbro `reply=no`. Il `check` del destinatario lo classifica come notifica, lo registra come dato e non risponde mai. Le notifiche non consumano alcuno slot di fan-out e si possono inviare mentre una richiesta è aperta; usale per annunci di passaggio di consegne, cambi di lead e annunci di rilascio.
 - **Un record di lead per piano.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` rende un agente il lead di un piano; `lead show` stampa il record (schema `herdr-peers/lead-v1`: piano, lead, epoca, successione, corsie, ora di aggiornamento). `lead handover <addr> --plan <P>` cede la guida, `lead takeover --plan <P>` permette al primo vice raggiungibile di assumerla quando il lead non c’è più, e `lead release --plan <P>` la termina. Ogni cambio incrementa l’epoca e notifica ogni corsia. Rivendica il piano prima di avviarne le corsie: `lead` si risolve solo quando esiste un record. Da `v0.3.2` il record conserva localmente il repository che rivendica e rifiuta una rivendicazione dello stesso id di piano da un altro repository; indica quel piano con `--plan <repo>/<id>`.

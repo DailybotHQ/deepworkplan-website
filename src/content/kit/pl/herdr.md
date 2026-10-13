@@ -73,7 +73,7 @@ Jeśli prowadzący uruchamia wiele torów naraz — panele na hoście, w kontene
 
 ## Powiadomienia i przywództwo
 
-herdr-peers `v0.3.2` dodaje to, co pozwala rojowi przetrwać swojego prowadzącego ([Autonomia roju](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` dodaje to, co pozwala rojowi przetrwać swojego prowadzącego ([Autonomia roju](/pl/methodology/07-swarm-autonomy)):
 
 - **Powiadomienia.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` wysyła jednokierunkową wiadomość ze znacznikiem `reply=no`. `check` odbiorcy klasyfikuje ją jako powiadomienie, zapisuje jako dane i nigdy nie odpowiada. Powiadomienia nie zajmują miejsca w rozgałęzieniu i można je wysyłać, gdy ask jest otwarty; używaj ich do ogłoszeń przekazania, zmian prowadzącego i rozgłaszania wydań.
 - **Rekord prowadzącego na plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` czyni agenta prowadzącym jednego planu; `lead show` wypisuje rekord (schemat `herdr-peers/lead-v1`: plan, prowadzący, epoka, sukcesja, tory, czas aktualizacji). `lead handover <addr> --plan <P>` przekazuje przywództwo dalej, `lead takeover --plan <P>` pozwala pierwszemu osiągalnemu zastępcy je przejąć, gdy prowadzącego zabraknie, a `lead release --plan <P>` je kończy. Każda zmiana podnosi epokę i powiadamia każdy tor. Obejmij plan przed uruchomieniem jego torów: `lead` rozwiązuje się dopiero, gdy istnieje rekord. Od `v0.3.2` rekord przechowuje lokalnie repozytorium, które objęło plan, i odrzuca objęcie tego samego identyfikatora planu z innego repozytorium; nazwij taki plan `--plan <repo>/<id>`.

@@ -73,7 +73,7 @@ Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des pa
 
 ## Notifications et leadership
 
-herdr-peers `v0.3.2` ajoute ce qui permet à un essaim de survivre à son coordinateur ([Autonomie de l’essaim](/methodology/07-swarm-autonomy)) :
+herdr-peers `v0.3.2` ajoute ce qui permet à un essaim de survivre à son coordinateur ([Autonomie de l’essaim](/fr/methodology/07-swarm-autonomy)) :
 
 - **Notifications.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envoie un message à sens unique estampillé `reply=no`. Le `check` du destinataire le classe comme notification, le consigne comme donnée et n’y répond jamais. Les notifications ne consomment aucun emplacement de fan-out et peuvent être envoyées pendant qu’une demande est ouverte ; utilisez-les pour les annonces de passation, les changements de coordinateur et les diffusions de publication.
 - **Un enregistrement de coordinateur par plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` fait d’un agent le coordinateur d’un plan ; `lead show` affiche l’enregistrement (schéma `herdr-peers/lead-v1` : plan, coordinateur, époque, succession, couloirs, heure de mise à jour). `lead handover <addr> --plan <P>` transmet le leadership, `lead takeover --plan <P>` permet au premier suppléant joignable de le prendre lorsque le coordinateur a disparu, et `lead release --plan <P>` y met fin. Chaque changement incrémente l’époque et notifie chaque couloir. Revendiquez le plan avant de lancer ses couloirs : `lead` ne se résout qu’une fois un enregistrement créé. Depuis `v0.3.2`, l’enregistrement conserve localement le dépôt qui revendique et refuse une revendication du même identifiant de plan venant d’un autre dépôt ; nommez ce plan `--plan <repo>/<id>`.

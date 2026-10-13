@@ -73,7 +73,7 @@ Para um líder que executa muitas frentes ao mesmo tempo — painéis no host, e
 
 ## Avisos e liderança
 
-O herdr-peers `v0.3.2` acrescenta o que permite a um enxame sobreviver ao seu líder ([Autonomia do enxame](/methodology/07-swarm-autonomy)):
+O herdr-peers `v0.3.2` acrescenta o que permite a um enxame sobreviver ao seu líder ([Autonomia do enxame](/pt/methodology/07-swarm-autonomy)):
 
 - **Avisos.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envia uma mensagem de mão única com o selo `reply=no`. O `check` do receptor a classifica como aviso, registra-a como dado e nunca responde. Avisos não consomem nenhuma vaga de fan-out e podem ser enviados enquanto uma consulta está aberta; use-os para anúncios de repasse, mudanças de líder e difusões de release.
 - **Um registro de líder por plano.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` torna um agente o líder de um plano; `lead show` imprime o registro (schema `herdr-peers/lead-v1`: plano, líder, época, sucessão, frentes, hora de atualização). `lead handover <addr> --plan <P>` repassa a liderança, `lead takeover --plan <P>` permite que o primeiro suplente alcançável a assuma quando o líder sumiu, e `lead release --plan <P>` a encerra. Cada mudança incrementa a época e avisa todas as frentes. Reivindique o plano antes de iniciar suas frentes: `lead` só é resolvido quando existe um registro. A partir do `v0.3.2` o registro guarda localmente o repositório que reivindica e recusa uma reivindicação do mesmo id de plano vinda de outro repositório; nomeie esse plano `--plan <repo>/<id>`.

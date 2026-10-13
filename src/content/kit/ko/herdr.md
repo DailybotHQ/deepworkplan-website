@@ -73,7 +73,7 @@ devcontainer-kit `v0.3.7` 기반의 [devcontainer](/kit/devcontainer) 애드온�
 
 ## 알림과 리더십
 
-herdr-peers `v0.3.2`은 스웜이 리드보다 오래 살아남게 하는 기능을 더합니다([스웜 자율](/methodology/07-swarm-autonomy)).
+herdr-peers `v0.3.2`은 스웜이 리드보다 오래 살아남게 하는 기능을 더합니다([스웜 자율](/ko/methodology/07-swarm-autonomy)).
 
 - **알림(notice).** `herdr-peers notify <addr|lead> "<text>" --pane <pane>`은 `reply=no` 스탬프가 붙은 단방향 메시지를 보냅니다. 수신자의 `check`는 이를 알림으로 분류하고 데이터로 기록하며 결코 답하지 않습니다. 알림은 팬아웃 슬롯을 쓰지 않고 ask가 열려 있는 동안에도 보낼 수 있습니다. 핸드오프 공지, 리드 변경, 릴리스 브로드캐스트에 사용합니다.
 - **계획마다 하나의 리드 기록.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>`는 한 에이전트를 한 계획의 리드로 만듭니다. `lead show`는 기록을 출력합니다(스키마 `herdr-peers/lead-v1`: 계획, 리드, 에포크, 승계 목록, 레인, 갱신 시각). `lead handover <addr> --plan <P>`는 리더십을 넘기고, `lead takeover --plan <P>`는 리드가 사라졌을 때 처음 닿는 대리가 리더십을 넘겨받게 하며, `lead release --plan <P>`는 리더십을 끝냅니다. 변경마다 에포크가 올라가고 모든 레인에 알림이 갑니다. 레인을 시작하기 전에 계획을 claim합니다. `lead`는 기록이 존재해야만 해석됩니다. `v0.3.2`부터 기록은 claim한 리포지토리를 로컬에 보관하며, 다른 리포지토리에서 같은 계획 id를 claim하면 거부합니다. 그 계획은 `--plan <repo>/<id>`로 지정합니다.

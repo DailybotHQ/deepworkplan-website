@@ -73,7 +73,7 @@ devcontainer-kit `v0.3.7` 上の [devcontainer](/kit/devcontainer) アドオン�
 
 ## 通知とリーダーシップ
 
-herdr-peers `v0.3.2` は、スウォームがリードを失っても続けられるようにする機能を加えます（[スウォームの自律性](/methodology/07-swarm-autonomy)）。
+herdr-peers `v0.3.2` は、スウォームがリードを失っても続けられるようにする機能を加えます（[スウォームの自律性](/ja/methodology/07-swarm-autonomy)）。
 
 - **通知。** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` は、`reply=no` のスタンプが付いた一方向のメッセージを送ります。受け手の `check` はそれを通知として分類し、データとして記録し、決して返信しません。通知はファンアウトの枠を消費せず、ask が開いている間でも送れます。ハンドオフの告知、リードの交代、リリースの一斉通知に使います。
 - **計画ごとのリードレコード。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` は、あるエージェントを一つの計画のリードにします。`lead show` はそのレコードを表示します（スキーマ `herdr-peers/lead-v1`：計画、リード、エポック、継承順、レーン、更新時刻）。`lead handover <addr> --plan <P>` はリーダーシップを引き渡し、`lead takeover --plan <P>` はリードがいなくなったときに最初に到達できる代理がそれを引き継ぐようにし、`lead release --plan <P>` はそれを終えます。変更のたびにエポックが上がり、すべてのレーンに通知されます。レーンを起動する前に計画を claim します。`lead` はレコードが存在して初めて解決されます。`v0.3.2` からレコードは claim したリポジトリをローカルに保持し、別のリポジトリからの同じ計画 id の claim を拒否します。その計画は `--plan <repo>/<id>` と指定します。

@@ -73,7 +73,7 @@ herdr-peers ไม่ได้ยืนยันตัวตนของผู�
 
 ## notice และความเป็นผู้นำ
 
-herdr-peers `v0.3.2` เพิ่มสิ่งที่ทำให้ swarm อยู่ได้นานกว่า lead ของมัน ([ความเป็นอิสระของ swarm](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` เพิ่มสิ่งที่ทำให้ swarm อยู่ได้นานกว่า lead ของมัน ([ความเป็นอิสระของ swarm](/th/methodology/07-swarm-autonomy)):
 
 - **notice** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` ส่งข้อความทางเดียวที่มีตราประทับ `reply=no` คำสั่ง `check` ของผู้รับจำแนกมันเป็น notice บันทึกไว้เป็นข้อมูล และไม่ตอบกลับเลย notice ไม่ใช้ช่อง fan-out และส่งได้แม้ขณะที่ ask ยังเปิดอยู่ ใช้สำหรับประกาศ handoff การเปลี่ยน lead และการประกาศรีลีส
 - **บันทึก lead หนึ่งรายการต่อแผน** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` ทำให้เอเจนต์หนึ่งตัวเป็น lead ของแผนหนึ่งแผน `lead show` พิมพ์บันทึกนั้น (schema `herdr-peers/lead-v1`: แผน lead epoch ลำดับการสืบทอด lane และเวลาที่อัปเดต) `lead handover <addr> --plan <P>` ส่งต่อความเป็นผู้นำ `lead takeover --plan <P>` ให้ผู้แทนรายแรกที่ติดต่อได้รับตำแหน่งไปเมื่อ lead หายไป และ `lead release --plan <P>` ยุติตำแหน่งนั้น ทุกการเปลี่ยนแปลงเพิ่มค่า epoch และแจ้งทุก lane ให้ claim แผนก่อนเปิด lane ของแผน: `lead` จะ resolve ได้ก็ต่อเมื่อมีบันทึกอยู่แล้ว ตั้งแต่ `v0.3.2` บันทึกจะเก็บ repository ที่ claim ไว้ในเครื่อง และปฏิเสธการ claim แผน id เดียวกันจาก repository อื่น ให้ระบุแผนนั้นเป็น `--plan <repo>/<id>`

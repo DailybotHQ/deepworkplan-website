@@ -73,7 +73,7 @@ Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, t
 
 ## Thông báo và quyền lead
 
-herdr-peers `v0.3.2` bổ sung những gì giúp một bầy agent tồn tại lâu hơn lead của nó ([Tự chủ của bầy agent](/methodology/07-swarm-autonomy)):
+herdr-peers `v0.3.2` bổ sung những gì giúp một bầy agent tồn tại lâu hơn lead của nó ([Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy)):
 
 - **Thông báo.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` gửi một tin nhắn một chiều được đóng dấu `reply=no`. Lệnh `check` của bên nhận phân loại nó là một thông báo, ghi lại nó dưới dạng dữ liệu và không bao giờ trả lời. Thông báo không tốn suất phân nhánh nào và có thể được gửi trong khi một ask đang mở; hãy dùng chúng cho thông báo bàn giao, thay đổi lead và thông báo phát hành.
 - **Một bản ghi lead cho mỗi kế hoạch.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` biến một agent thành lead của một kế hoạch; `lead show` in ra bản ghi (schema `herdr-peers/lead-v1`: kế hoạch, lead, epoch, danh sách kế nhiệm, các lane, thời điểm cập nhật). `lead handover <addr> --plan <P>` chuyển quyền lead cho agent khác, `lead takeover --plan <P>` cho phép phó lead đầu tiên liên lạc được tiếp quản khi lead biến mất, và `lead release --plan <P>` kết thúc nó. Mỗi thay đổi tăng epoch và thông báo cho mọi lane. Hãy claim kế hoạch trước khi khởi chạy các lane của nó: `lead` chỉ phân giải được khi đã có một bản ghi. Từ `v0.3.2`, bản ghi lưu cục bộ repository đã claim nó và từ chối việc claim cùng id kế hoạch từ một repository khác; hãy đặt tên kế hoạch đó là `--plan <repo>/<id>`.
