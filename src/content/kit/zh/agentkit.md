@@ -10,11 +10,11 @@ order: 8
 
 每个终端编码代理都有自己的一套参数用于继续会话，有自己的方式隔离第二个账户，有自己的无头模式，也有自己用于跳过权限提示的开关。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** 在它们之上提供统一的命令界面：`ak <kind> [@profile]`。
 
-这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.7.1`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
+这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.8.0`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
 
 ## 工具包为你提供什么
 
-- **所有 CLI 共用一套语法。** `ak claude`、`ak codex`、`ak cursor`、`ak opencode`、`ak pi`、`ak cline` 和 `ak grok`，以及各提供方变体（GLM、Azure、xAI），使用相同的会话参数：`-c` 继续，`-r <id>` 恢复。
+- **所有 CLI 共用一套语法。** `ak claude`、`ak codex`、`ak cursor`、`ak opencode`、`ak pi`、`ak cline`、`ak grok` 和 `ak antigravity`，以及各提供方路由（Z.AI GLM、Azure OpenAI、xAI 和 Gemini API），使用相同的会话参数：`-c` 继续，`-r <id>` 恢复。
 - **配置档。** `ak claude @work` 在独立的主目录中运行第二个账户，与第一个账户相互隔离。
 - **无头运行。** `ak run <kind> -- "<prompt>"` 以非交互方式运行一条提示，并返回有文档说明的退出码，也可选择以单个 JSON 对象返回。
 - **诊断工具。** `ak doctor --json` 报告已安装哪些 CLI、有哪些配置档，以及已设置的密钥的名称——绝不报告其值。
@@ -65,19 +65,21 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v0.7.1`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.0.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v0.7.1`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.0.0`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |
 | 要求 | 计划契约中的 `agent_delegation` 授权 |
+
+**自 `v1.0.0` 起稳定。** 工具包的公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容的变更：命令面（`providers.toml` 中每种类型对应的 `ak <kind> [@profile]`，以及每个动词及其文档化的参数）、权限姿态、接口 1（`ak doctor --json`、`ak env`、`ak run` 的语法与信封）、JSON 模式（`doctor-v1`、`usage-v1`、`pick-v1`、`capacity-v1`、`leases-v1`、`profiles-v1`、`setup-probe-v1`、`setup-verify-v1`），以及安装布局和 env 文件中的变量名。`v1.0.0` 相对 `v0.7.1` 没有改动任何命令、参数、键或模式。
 
 ## 默认自主运行，退出选项始终优先
 

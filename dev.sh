@@ -16,7 +16,7 @@
 
 # >>> dck:devsh >>>
 set -euo pipefail
-DCK_RENDERED_WITH="v0.3.7"
+DCK_RENDERED_WITH="v1.0.0"
 # sha256 of that release's SHA256SUMS, when the rendering dck knew it (else empty).
 DCK_SUMS_SHA256=""
 # The compose project dck uses, so plain compose never acts on another checkout.

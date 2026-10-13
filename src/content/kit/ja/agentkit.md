@@ -10,11 +10,11 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.7.1`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v7**（パック `v7.8.0`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 ## キットが提供するもの
 
-- **すべての CLI に共通の文法。** `ak claude`、`ak codex`、`ak cursor`、`ak opencode`、`ak pi`、`ak cline`、`ak grok`、さらにプロバイダーごとのバリアント（GLM、Azure、xAI）が、同じセッションフラグを使います。`-c` で継続し、`-r <id>` で再開します。
+- **すべての CLI に共通の文法。** `ak claude`、`ak codex`、`ak cursor`、`ak opencode`、`ak pi`、`ak cline`、`ak grok`、`ak antigravity`、さらにプロバイダーごとのルート（Z.AI GLM、Azure OpenAI、xAI、Gemini API）が、同じセッションフラグを使います。`-c` で継続し、`-r <id>` で再開します。
 - **プロファイル。** `ak claude @work` は二つめのアカウントを専用のホームで実行し、一つめのアカウントから分離します。
 - **ヘッドレス実行。** `ak run <kind> -- "<prompt>"` は一つのプロンプトを非対話で実行し、文書化された終了コードを返します。任意で一つの JSON オブジェクトとして返すこともできます。
 - **ドクター。** `ak doctor --json` は、インストール済みの CLI、プロファイル、そして設定済みのキーの名前を報告します。値を報告することはありません。
@@ -65,19 +65,21 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v0.7.1` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.0.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v0.7.1`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.0.0`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
 | 必要なもの | 計画コントラクトの `agent_delegation` 付与 |
+
+**`v1.0.0` 以降は安定版です。** キットの公開インターフェースはセマンティックバージョニングに従い、互換性のない変更は新しいメジャーバージョンでのみ行われます。対象は、コマンドサーフェス（`providers.toml` 内のすべての種別に対する `ak <kind> [@profile]`、およびすべての動詞とそのドキュメント化されたフラグ）、権限の方針、インターフェース 1（`ak doctor --json`、`ak env`、`ak run` の文法とエンベロープ）、JSON スキーマ（`doctor-v1`、`usage-v1`、`pick-v1`、`capacity-v1`、`leases-v1`、`profiles-v1`、`setup-probe-v1`、`setup-verify-v1`）、そしてインストールされるレイアウトと env ファイルの変数名です。`v1.0.0` は `v0.7.1` からコマンド、フラグ、キー、スキーマを一切変えていません。
 
 ## デフォルトは自律実行、オプトアウトが常に優先
 

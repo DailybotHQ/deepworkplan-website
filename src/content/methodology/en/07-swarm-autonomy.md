@@ -41,7 +41,7 @@ Every lane has a plan, at least a Lite plan in its own repository, and that plan
 
 ## The capacity loop
 
-An agent checks its own room before starting each task, after any gate or step that ran longer than 20 minutes, whenever its CLI shows a usage-limit warning, and before accepting a handoff or the leadership. The check is `ak capacity --self --json` from coding-agents-kit `v0.7.1`, which the pack's helper turns into a decision:
+An agent checks its own room before starting each task, after any gate or step that ran longer than 20 minutes, whenever its CLI shows a usage-limit warning, and before accepting a handoff or the leadership. The check is `ak capacity --self --json` from coding-agents-kit `v1.0.0`, which the pack's helper turns into a decision:
 
 | Verdict | Decision | A lane | A lead, for itself |
 | --- | --- | --- | --- |
@@ -68,9 +68,9 @@ The **handoff packet** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/dwp-h
 
 ## Lead succession
 
-herdr-peers `v0.3.2` keeps a lead record per plan — lead, epoch, succession list and lanes — and resolves the address `lead` to the current lead, so no lane brief hard-codes the lead's pane.
+herdr-peers `v1.0.0` keeps a lead record per plan — lead, epoch, succession list and lanes — and resolves the address `lead` to the current lead, so no lane brief hard-codes the lead's pane.
 
-- **Claim first, then launch.** The lead runs `herdr-peers lead claim --plan <P> --succession <A,B>` before it launches any lane — the `lead` address resolves only once a record exists — refreshes the record with `--lanes <A,B>` as lanes start, and runs `lead release` when the plan is done. From herdr-peers `v0.3.2` the record keeps the claiming repository locally, and a plan with the same id in another repository is named `--plan <repo>/<id>`. The default succession is its planned successor, then lanes in the plan's own checkout by launch order, then any lane on the same host; lanes in containers or on other machines come last.
+- **Claim first, then launch.** The lead runs `herdr-peers lead claim --plan <P> --succession <A,B>` before it launches any lane — the `lead` address resolves only once a record exists — refreshes the record with `--lanes <A,B>` as lanes start, and runs `lead release` when the plan is done. From herdr-peers (`v0.3.2`) the record keeps the claiming repository locally, and a plan with the same id in another repository is named `--plan <repo>/<id>`. The default succession is its planned successor, then lanes in the plan's own checkout by launch order, then any lane on the same host; lanes in containers or on other machines come last.
 - **Handover, planned.** At `low` the lead names a successor-designate. At `critical` it writes a lead packet — lane table, open asks, release order, pending merges, decisions — runs `herdr-peers lead handover <addr> --plan <P>`, which raises the epoch and notifies every lane, and stops. The successor accepts the packet, resumes the orchestrator plan and re-checks every lane.
 - **Takeover, unplanned.** When the lead is unreachable, has no agent, shows a `usage_limit` screen, or an ask to it times out twice, the first reachable entry of the succession list runs `herdr-peers lead takeover --plan <P>` — itself, or by launching a fresh lead pane in the plan's checkout. The new lead rebuilds state from the plan. Missing in-flight intent is recorded as missing, never invented.
 - **Fencing.** Only the holder of the highest epoch acts as lead. A lane accepts a lead notice only from the agent that briefed it (first claim), from the current lead at the next epoch (handover), or from the first reachable succession entry at the next epoch (takeover); ties go to the earlier succession position, and a returning lead that sees a higher epoch steps down. Merges, tags and releases are performed only by the current-epoch lead, are checked against the remote first, and follow the repository's own merge rules.

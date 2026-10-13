@@ -69,7 +69,7 @@ DWP `create` / `execute` 중 애드온은 **네 가지 최선 노력 에이전�
 
 | 구성 요소 | 명령 / 경로 |
 |-----------|-------------|
-| **Dailybot 에이전트 스킬**(권장) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot -y` |
+| **Dailybot 에이전트 스킬**(권장) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot -y` |
 | **기존 스킬 업데이트** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI**(팩 기준 `>= 3.9.0`; Plan은 `>= 3.25.0` 필요) | 첫 사용 시 스킬이 검증된 `shared/auth.md`를 통해 설치; 또는 `pip install 'dailybot-cli>=3.9.0'`, Homebrew, 또는 [cli.dailybot.com](https://cli.dailybot.com)의 체크섬 검증 설치 프로그램 |

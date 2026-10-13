@@ -69,7 +69,7 @@ El addon **ofrece** rutas de instalación; la skill de Dailybot es dueña del co
 
 | Componente | Comando / ruta |
 |-----------|----------------|
-| **Skill de agente Dailybot** (recomendado) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot -y` |
+| **Skill de agente Dailybot** (recomendado) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot -y` |
 | **Actualizar skill existente** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (base del paquete `>= 3.9.0`; Plan requiere `>= 3.25.0`) | Instalada por la skill en el primer uso vía `shared/auth.md` verificado; o `pip install 'dailybot-cli>=3.9.0'`, Homebrew, o el instalador con checksum verificado en [cli.dailybot.com](https://cli.dailybot.com) |

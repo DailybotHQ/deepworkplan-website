@@ -2,43 +2,43 @@
   "addons": {
     "agentkit": {
       "enabled": true,
-      "note": "the dck v0.3.7 render pins coding-agents-kit v0.7.1 (with its three skills) in this container; ak v0.6.1 on the host",
-      "version": "v0.7.1"
+      "note": "the dck v1.0.0 render pins coding-agents-kit v1.0.0 (with its three skills) in this container",
+      "version": "v1.0.0"
     },
     "ai-diff-reviewer": {
       "enabled": true,
       "note": "required local review: vendored skill + CI self-review (.review/extension.md)",
-      "version": "v3.3.12"
+      "version": "v3.3.14"
     },
     "dailybot": {
       "enabled": true,
       "note": "repo-level: vendored skill + lifecycle hooks in .agents/settings.json (AGENTS.md)",
-      "version": "v3.23.15"
+      "version": "v3.23.17"
     },
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.7.1"
+      "version": "v7.8.0"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.7.1"
+      "version": "v7.8.0"
     },
     "devcontainer": {
       "enabled": true,
-      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v0.3.7; host kit v0.3.5)",
-      "version": "v0.3.7"
+      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v1.0.0)",
+      "version": "v1.0.0"
     },
     "herdr": {
       "enabled": true,
-      "note": "herdr-peers v0.3.2 on the host and in the dck v0.3.7 image; Herdr runs in this container",
-      "version": "v0.3.2"
+      "note": "herdr-peers v1.0.0 in the dck v1.0.0 image; Herdr runs in this container",
+      "version": "v1.0.0"
     },
     "vim": {
       "enabled": true,
-      "note": "deepworkplan-vim v0.7.0 installed as the container editor (dck editor layer)",
-      "version": "v0.7.0"
+      "note": "deepworkplan-vim v1.0.0 installed as the container editor (dck editor layer)",
+      "version": "v1.0.0"
     }
   },
   "benchmark": {

@@ -14,22 +14,24 @@ C’est un addon facultatif de **DWP v7** (`v7.0.0`). La méthodologie fonctionn
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v0.3.2`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.0.0`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protocole 1 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
 | Requiert | l’octroi `agent_delegation` du contrat du plan |
+
+**Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique : les verbes de la CLI et leurs options documentées, les codes de sortie `0`–`7`, les variables documentées `HERDR_PEERS_*`, `DWP_PLAN` et `DWP_TASK`, le protocole 1 et les contrats JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` et l’enregistrement de délégation. Un changement incompatible de l’un d’eux incrémente la version majeure, et un changement du format de transmission incrémente aussi le numéro de protocole. `v1.0.0` ne modifie aucun comportement par rapport à `v0.3.3`, et les versions 0.x ne sont plus prises en charge.
 
 ## Installation
 
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +58,7 @@ herdr-peers n’authentifie pas l’expéditeur : le champ `from=` d’une estam
 
 ## Les conteneurs et l’hôte
 
-Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v0.3.7`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers (`v0.2.3`), chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle.
+Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v1.0.0`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers (`v0.2.3`), chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle.
 
 ## Herdr ou agentkit
 
@@ -73,7 +75,7 @@ Pour un coordinateur qui fait tourner de nombreux couloirs à la fois — des pa
 
 ## Notifications et leadership
 
-herdr-peers `v0.3.2` ajoute ce qui permet à un essaim de survivre à son coordinateur ([Autonomie de l’essaim](/fr/methodology/07-swarm-autonomy)) :
+herdr-peers (`v0.3.2`) ajoute ce qui permet à un essaim de survivre à son coordinateur ([Autonomie de l’essaim](/fr/methodology/07-swarm-autonomy)) :
 
 - **Notifications.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envoie un message à sens unique estampillé `reply=no`. Le `check` du destinataire le classe comme notification, le consigne comme donnée et n’y répond jamais. Les notifications ne consomment aucun emplacement de fan-out et peuvent être envoyées pendant qu’une demande est ouverte ; utilisez-les pour les annonces de passation, les changements de coordinateur et les diffusions de publication.
 - **Un enregistrement de coordinateur par plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` fait d’un agent le coordinateur d’un plan ; `lead show` affiche l’enregistrement (schéma `herdr-peers/lead-v1` : plan, coordinateur, époque, succession, couloirs, heure de mise à jour). `lead handover <addr> --plan <P>` transmet le leadership, `lead takeover --plan <P>` permet au premier suppléant joignable de le prendre lorsque le coordinateur a disparu, et `lead release --plan <P>` y met fin. Chaque changement incrémente l’époque et notifie chaque couloir. Revendiquez le plan avant de lancer ses couloirs : `lead` ne se résout qu’une fois un enregistrement créé. Depuis `v0.3.2`, l’enregistrement conserve localement le dépôt qui revendique et refuse une revendication du même identifiant de plan venant d’un autre dépôt ; nommez ce plan `--plan <repo>/<id>`.

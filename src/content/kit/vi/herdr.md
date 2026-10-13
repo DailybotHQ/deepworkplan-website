@@ -14,22 +14,24 @@ order: 7
 
 ## Addon tích hợp những gì
 
-Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v0.3.2`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
+Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.0.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v0.3.2`, giao thức 1 |
+| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v1.0.0`, giao thức 1 |
 | Khóa registry | `herdr` trong `.dwp/config.json` |
 | Phương thức truyền | tương tác: một peer trong pane Herdr |
 | Cung cấp | `subagents`, `cancel_children` |
 | Yêu cầu | quyền `agent_delegation` trong hợp đồng của kế hoạch |
+
+**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning: các động từ CLI cùng các cờ được tài liệu hóa, mã thoát `0`–`7`, các biến `HERDR_PEERS_*`, `DWP_PLAN` và `DWP_TASK` được tài liệu hóa, giao thức 1, và các hợp đồng JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` cùng bản ghi ủy thác. Một thay đổi phá vỡ tương thích ở bất kỳ thành phần nào trong số đó sẽ tăng phiên bản chính, và một thay đổi định dạng truyền tải còn tăng cả số giao thức. `v1.0.0` không thay đổi hành vi nào so với `v0.3.3`, và các bản phát hành 0.x không còn được hỗ trợ.
 
 ## Cài đặt
 
 Cài đặt herdr-peers và skill chính thức của Herdr mà nó phụ thuộc vào. Mọi máy có agent cần trả lời cũng phải có skill này.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +58,7 @@ herdr-peers không xác thực bên gửi: trường `from=` trong một con d�
 
 ## Container và máy host
 
-Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v0.3.7`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
+Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v1.0.0`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
 
 ## Herdr hay agentkit
 
@@ -73,7 +75,7 @@ Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, t
 
 ## Thông báo và quyền lead
 
-herdr-peers `v0.3.2` bổ sung những gì giúp một bầy agent tồn tại lâu hơn lead của nó ([Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy)):
+herdr-peers (`v0.3.2`) bổ sung những gì giúp một bầy agent tồn tại lâu hơn lead của nó ([Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy)):
 
 - **Thông báo.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` gửi một tin nhắn một chiều được đóng dấu `reply=no`. Lệnh `check` của bên nhận phân loại nó là một thông báo, ghi lại nó dưới dạng dữ liệu và không bao giờ trả lời. Thông báo không tốn suất phân nhánh nào và có thể được gửi trong khi một ask đang mở; hãy dùng chúng cho thông báo bàn giao, thay đổi lead và thông báo phát hành.
 - **Một bản ghi lead cho mỗi kế hoạch.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` biến một agent thành lead của một kế hoạch; `lead show` in ra bản ghi (schema `herdr-peers/lead-v1`: kế hoạch, lead, epoch, danh sách kế nhiệm, các lane, thời điểm cập nhật). `lead handover <addr> --plan <P>` chuyển quyền lead cho agent khác, `lead takeover --plan <P>` cho phép phó lead đầu tiên liên lạc được tiếp quản khi lead biến mất, và `lead release --plan <P>` kết thúc nó. Mỗi thay đổi tăng epoch và thông báo cho mọi lane. Hãy claim kế hoạch trước khi khởi chạy các lane của nó: `lead` chỉ phân giải được khi đã có một bản ghi. Từ `v0.3.2`, bản ghi lưu cục bộ repository đã claim nó và từ chối việc claim cùng id kế hoạch từ một repository khác; hãy đặt tên kế hoạch đó là `--plan <repo>/<id>`.

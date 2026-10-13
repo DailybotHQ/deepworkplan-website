@@ -31,7 +31,7 @@ Eight addons ship today — seven opt-in plus the required local review. Each ha
 
 ### Devcontainer (first addon)
 
-A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v0.3.7`, interface `2`): a Dev Containers template that `dck init` renders into the repository as its own container, plus the `dck-dockerfile` skill.
+A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v1.0.0`, interface `2`): a Dev Containers template that `dck init` renders into the repository as its own container, plus the `dck-dockerfile` skill.
 
 - **Kit page:** [Devcontainer](/kit/devcontainer)
 - **What it adds:** `docker/local/<service>/Dockerfile` from the runtime's official image pinned by digest (`python-3.13`, `node-24` or `debian`, no shared base image), `dev.sh` over the `dck` launcher (`up`, `shell`, `rebuild`, `doctor`), coding agents as an opt-in layer, loopback-only ports, git over SSH through the host's agent with no key inside unless the developer opts in with `[ssh] copy_keys` in their host profile, and Herdr machines per container with the standard layout
@@ -72,7 +72,7 @@ An interface-surface-scoped `DESIGN.md` any coding agent reads for consistent UI
 The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) gives the mandatory Final Review security pass a structured local review, and optionally gates pull requests in CI. Since standard 2.3.0 the **local review is part of the baseline**; only the CI surface is opt-in. This addon is release-auto-refreshed, so the tag shown below is the one current at the time of writing and may lag the vendored copy — the addon's own `SKILL.md` and its GitHub releases are authoritative for the tag actually installed. The install is always pinned to a published tag, never to a moving branch.
 
 - **Kit page:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — full capability reference
-- **Required at onboarding (Phase 7a):** tag-pinned install of the vendored skill (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12 --skill ai-diff-reviewer -y`) plus a repo-tailored `.review/extension.md` (via `generate-extension`), under the onboarding consent; a targeted harness upgrade reconciles both when missing; a decline is recorded as a declared exception and reported by `verify` until installed
+- **Required at onboarding (Phase 7a):** tag-pinned install of the vendored skill (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer -y`) plus a repo-tailored `.review/extension.md` (via `generate-extension`), under the onboarding consent; a targeted harness upgrade reconciles both when missing; a decline is recorded as a declared exception and reported by `verify` until installed
 - **Required in every Final Review:** the security pass runs the upstream parent default flow over the accumulated change set and appends its output to the plan-local `analysis_results/SECURITY_REVIEW.md` (inside the plan's own folder, never the repository root); a missing skill or extension is a recorded `local reviewer not installed` finding — never a silent skip, and never a surprise bootstrap: installation belongs to the onboarding consent or an explicit addon invocation; **verified** `critical` findings from a completed pass block completion until fixed or explicitly accepted (v3, BC-07 — unverified critical claims arrive as annotated warnings, and an `incomplete`/`timeout` review is not a clean pass, BC-04)
 - **Optional CI surface (Flow B):** the review workflow (`DailybotHQ/ai-diff-reviewer@v3`) via the upstream `setup` sub-skill, plus the `apply-review` (read-only) and `address-review` (commits, pushes, and re-arms; new in v3.1.1) companions as developer-invoked conveniences — offered explicitly, never installed unrequested, never the default, never a plan task
 - **Never-block (invocation only):** a local review that could start but errors is warn-once-record-and-continue; it never fails the task
@@ -82,7 +82,7 @@ The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 
 ### Herdr (sixth addon)
 
-A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v0.3.2`, protocol `1`), the **interactive** delegation transport of v7 plans.
+A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v1.0.0`, protocol `1`), the **interactive** delegation transport of v7 plans.
 
 - **Kit page:** [Herdr](/kit/herdr)
 - **What it adds:** a plan can hand a bounded task to a coding agent in another [Herdr](https://herdr.dev) pane, on the same machine or one Herdr reaches over SSH, and record its single authorized reply in the journal
@@ -91,7 +91,7 @@ A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (p
 
 ### DeepWorkPlan Vim (seventh addon)
 
-A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v0.7.0`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).
+A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v1.0.0`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).
 
 - **Kit page:** [DeepWorkPlan Vim](/kit/vim)
 - **What it adds:** an optional, machine-level editor surface for agents and humans — a generated command index, a read-only plan browser, and a Markdown viewer; every claim is read from the product's pinned machine-readable surface
@@ -100,7 +100,7 @@ A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkpl
 
 ### Agentkit (eighth addon)
 
-A thin integrator of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v0.7.1`, interface `1`), the **headless** delegation transport of v7 plans.
+A thin integrator of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v1.0.0`, interface `1`), the **headless** delegation transport of v7 plans.
 
 - **Kit page:** [Agentkit](/kit/agentkit)
 - **What it adds:** one `ak` command surface over terminal coding agents, used to run a bounded plan task headlessly; it contributes the `subagents`, `cancel_children`, and `model_routing` abilities only at runtime, when enabled, detected, and on a compatible interface

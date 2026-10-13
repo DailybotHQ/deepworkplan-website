@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer アドオン
 
-リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.7.1`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
+リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.8.0`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
 
 ## devcontainer-kit が提供するもの
 
@@ -21,18 +21,20 @@ order: 1
 ## インストール
 
 ```bash
-git clone --branch v0.3.7 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v0.3.7` に固定してください。`v0.2.0` はサポート対象外です。
+要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v1.0.0` に固定してください。`v0.2.0` はサポート対象外です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v0.3.7`、インターフェース 2 |
+| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v1.0.0`、インターフェース 2 |
 | レジストリキー | `.dwp/config.json` 内の `devcontainer` |
 | リポジトリごとの設定 | `.devcontainer/dck.toml` |
 | 検出 | `dck doctor --json` |
+
+**`v1.0.0` 以降は安定版です。** 公開インターフェースはセマンティックバージョニングに従い、互換性のない変更は新しいメジャーバージョンでのみ行われます（ファイルについては、新しいインターフェース番号も伴います）。対象は、`dck` の動詞とドキュメント化されたフラグおよび終了コード（`0` 成功、`1` 失敗、`2` 使用法、`3` 設定、`4` 環境、`5` 拒否）、`dck.toml`、ホストプロファイル、`dck doctor --json` のスキーマ（インターフェース 2）、そしてレンダリング契約、すなわち `dck init` が書き込み所有するファイル、それが保持する `dck:managed` マーカーとユーザーブロック、エントリポイントが読み取る環境です。`v0.3.7` からの移行で壊れるものはありません。`dck init` と `dck rebuild` を実行し、イメージに新しい固定バージョン（herdr-peers、coding-agents-kit、DeepWorkPlan Vim、いずれも `v1.0.0`）を反映させてください。
 
 ## レイヤー
 
@@ -112,4 +114,4 @@ copy_keys = true              # default false
 
 ## 補足
 
-任意であり、必須となることはありません。リポジトリはオプションアドオンがゼロでも完全に適合します。v0.2 は Linux と macOS のホストをサポートします。コンテナ間のメッシュには Docker Desktop が必要です。
+任意であり、必須となることはありません。リポジトリはオプションアドオンがゼロでも完全に適合します。Linux と macOS のホストがサポートされています。コンテナ間のメッシュには Docker Desktop が必要です。

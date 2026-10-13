@@ -14,22 +14,24 @@ It is an optional addon of **DWP v7** (`v7.0.0`). The methodology works the same
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v0.3.2`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.0.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v0.3.2`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
 | Requires | the plan contract's `agent_delegation` grant |
+
+**Stable since `v1.0.0`.** The public interface follows semantic versioning: the CLI verbs and their documented flags, exit codes `0`–`7`, the documented `HERDR_PEERS_*`, `DWP_PLAN` and `DWP_TASK` variables, protocol 1, and the JSON contracts `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` and the delegation record. A breaking change to any of them bumps the major version, and a wire-format change also bumps the protocol number. `v1.0.0` changes no behavior from `v0.3.3`, and 0.x releases are no longer supported.
 
 ## Install
 
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -56,7 +58,7 @@ herdr-peers does not authenticate the sender: the `from=` field in a stamp is a 
 
 ## Containers and the host
 
-With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v0.3.7`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
+With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.0.0`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
 
 ## Herdr or agentkit
 
@@ -73,7 +75,7 @@ For a lead running many lanes at once — panes on the host, in containers and o
 
 ## Notices and leadership
 
-herdr-peers `v0.3.2` adds what lets a swarm outlive its lead ([Swarm autonomy](/methodology/07-swarm-autonomy)):
+herdr-peers (`v0.3.2`) adds what lets a swarm outlive its lead ([Swarm autonomy](/methodology/07-swarm-autonomy)):
 
 - **Notices.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` sends a one-way message stamped `reply=no`. The receiver's `check` classifies it as a notice, records it as data and never answers. Notices cost no fan-out slot and may be sent while an ask is open; use them for handoff announcements, lead changes and release broadcasts.
 - **A lead record per plan.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` makes an agent the lead of one plan; `lead show` prints the record (schema `herdr-peers/lead-v1`: plan, lead, epoch, succession, lanes, updated time). `lead handover <addr> --plan <P>` passes the leadership on, `lead takeover --plan <P>` lets the first reachable deputy take it when the lead is gone, and `lead release --plan <P>` ends it. Each change raises the epoch and notifies every lane. Claim the plan before launching its lanes: `lead` resolves only once a record exists. From `v0.3.2` the record keeps the claiming repository locally and refuses a claim of the same plan id from another repository; name that plan `--plan <repo>/<id>`.
