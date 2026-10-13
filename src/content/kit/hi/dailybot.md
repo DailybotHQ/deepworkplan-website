@@ -69,7 +69,7 @@ Payload योजना की state परत (`state.json`) से निक�
 
 | घटक | कमांड / पथ |
 |-----------|----------------|
-| **Dailybot agent skill** (अनुशंसित) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot -y` |
+| **Dailybot agent skill** (अनुशंसित) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot -y` |
 | **मौजूदा स्किल अपडेट** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (पैक बेसलाइन `>= 3.9.0`; Plan के लिए `>= 3.25.0`) | स्किल द्वारा पहले उपयोग पर `shared/auth.md` के माध्यम से; या `pip install 'dailybot-cli>=3.9.0'`, Homebrew, या [cli.dailybot.com](https://cli.dailybot.com) पर checksum-verified installer |

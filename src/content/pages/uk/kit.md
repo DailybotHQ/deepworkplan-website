@@ -10,7 +10,7 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; міграція потребує явного запиту.
@@ -70,7 +70,7 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.
 - **[devcontainer](/uk/kit/devcontainer)** — Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, SSH-ключі лише за явного ввімкнення. Закріплено на `devcontainer-kit@v1.0.0`.
 - **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v1.0.0`.
 
-Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.7.1`
+Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.8.0`
 
 ### Приклади
 

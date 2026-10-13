@@ -10,7 +10,7 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill` 安装：
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；迁移必须明确请求。
@@ -70,7 +70,7 @@ onboard 流程向仓库叠加的各项能力。其中七个是可选的，绝非
 - **[devcontainer](/zh/kit/devcontainer)** — 用一个模板生成每个仓库自己的开发容器：代理经由 ak 运行，Herdr 双向互通，仅在选择启用时才放入 SSH 密钥。固定于：`devcontainer-kit@v1.0.0`。
 - **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v1.0.0`。
 
-附加组件注册表和描述文件随 Deep Work Plan v7 发布： `v7.7.1`
+附加组件注册表和描述文件随 Deep Work Plan v7 发布： `v7.8.0`
 
 ### 示例
 

@@ -10,7 +10,7 @@ The kit is everything you need to run the methodology in practice. It is install
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 The current 7.x pack creates new plans with v7 by default. Existing plans retain their recorded generation; migration requires an explicit request.
@@ -70,7 +70,7 @@ Capabilities the onboard flow layers onto a repo. Seven are optional and never p
 - **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, SSH keys only on opt-in. Pinned at `devcontainer-kit@v1.0.0`.
 - **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v1.0.0`.
 
-The addon registry and descriptors ship in Deep Work Plan v7: `v7.7.1`
+The addon registry and descriptors ship in Deep Work Plan v7: `v7.8.0`
 
 ### Examples
 

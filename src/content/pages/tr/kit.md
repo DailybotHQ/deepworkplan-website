@@ -10,7 +10,7 @@ Kit, metodolojiyi uygulamada çalıştırmak için ihtiyacınız olan her şeydi
 `DailybotHQ/deepworkplan-skill` üzerinden kurulur:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir.
@@ -68,7 +68,7 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Yedisi isteğe ba
 - **[devcontainer](/tr/kit/devcontainer)** — Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, SSH anahtarları yalnızca açıkça etkinleştirilirse. Sabitlenen sürüm `devcontainer-kit@v1.0.0`.
 - **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v1.0.0`.
 
-Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.7.1`
+Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.8.0`
 
 ### Örnekler
 

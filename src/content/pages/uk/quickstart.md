@@ -78,10 +78,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.7.1
+  git checkout v7.8.0
   # Завантажте контрольні суми цього релізу й перевірте їх за дайджестом нижче:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.7.1/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.0/SHA256SUMS
   shasum -a 256 SHA256SUMS # має дорівнювати дайджесту deepworkplan-skill у Закріплених релізах
   ./setup.sh --verify        # ненульовий вихід означає невідповідність файлу — зупиніться
   ```
@@ -94,13 +94,13 @@ lastUpdated: 2026-10-11
 
   | Репозиторій (github.com/DailybotHQ) | Тег | sha256 його `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.7.1` | `c03ed3cb44ceafb267267b889e480a793bfe70ecd11e3668f326b3a543e773b5` |
+  | deepworkplan-skill | `v7.8.0` | `a43fc0f2996b2edd5e68850f62742486e1d7475314351ba3e25771fd198453e5` |
   | coding-agents-kit | `v1.0.0` | `8995e737862c5486b3ec3d0235e82f358dbf9c20879f44afa506cf8e0721973e` |
   | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
   | devcontainer-kit | `v1.0.0` | `060d16db41214bc91b05089bc7201cf499d21e5571731954a0bb766edd7cb605` |
   | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
-  | ai-diff-reviewer | `v3.3.12` | `3a30a2127df1cf035e6eadce768b8a6f0773b19521a2b6c4ace3552b0c0f6f48` |
-  | agent-skill | `v3.23.15` | не публікується — CLI skills записує хеш вмісту в `skills-lock.json` |
+  | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
+  | agent-skill | `v3.23.17` | не публікується — CLI skills записує хеш вмісту в `skills-lock.json` |
 - **Повідомте про проблему.** Питання безпеки повідомляйте **приватно через звітування про вразливості GitHub** у відповідному репозиторії — `https://github.com/DailybotHQ/deepworkplan-skill/security` або `https://github.com/DailybotHQ/deepworkplan-website/security` — не як публічне питання. Дивіться також `SECURITY.md` кожного репозиторію, `https://deepworkplan.com/.well-known/security.txt` і сторінку довіри `https://deepworkplan.com/trust`.
 
 ## 2. Встановіть скіл Deep Work Plan
@@ -112,7 +112,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 Або встановіть через OpenClaw:
@@ -134,7 +134,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 роутер і дев'ять суб-скілів: `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` та `upgrade`.
 
-Встановлений реліз скіла: **7.7.1**. Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; перенесення плану v5 на v6 потребує явної міграції з попереднім переглядом.
+Встановлений реліз скіла: **7.8.0**. Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; перенесення плану v5 на v6 потребує явної міграції з попереднім переглядом.
 
 Стандарт навмисно пропорційний, і ця пропорційність є властивістю плану, а не
 дисципліни розробника. План буває або **Lite** — записи завдань інлайн у README
@@ -161,7 +161,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 репозиторію, узгоджує скіли, використані завданнями, і фіксує докази та
 обмеження. Скіл локальної перевірки встановлюється на закріпленій версії;
 поточна документована команда встановлює
-`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12`. GitHub Action — це окрема, опційна
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14`. GitHub Action — це окрема, опційна
 CI-поверхня, ніколи не обов'язкова для базової методології.
 
 Огляд, який відпрацював і нічого не повідомив, — це не те саме, що огляд, який узагалі не видав жодної знахідки. Другий випадок — **незавершений огляд**: він так і фіксується, ніколи не зараховується як доказ того, що набір змін чистий, і ніколи не є підставою закрити Final Review — те саме червоне рішення, що отримує огляд `timeout` за блокуючої суворості (BC-04). Разом із відсутнім рецензентом і викликом, що зазнав помилки, це три різні стани — і жоден із них не означає, що диф переглянули і він виявився чистим. Тіло, яке каже `Recommendation: approve`, також не доводить, що перевірка пройшла. Спочатку прочитайте блок Highest severity / Strictness gate / Check status у маркері відстеження — середовище переписує модельний `approve`, коли шлюз не проходить.
@@ -230,8 +230,8 @@ CI-поверхня, ніколи не обов'язкова для базово
 
 | Компонент | Визначити встановлену версію | Встановити або оновити (закріплено) |
 | --- | --- | --- |
-| AI Diff Reviewer (обовʼязковий) | `version:` у `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12 --skill ai-diff-reviewer --force -y` |
-| Dailybot | `version:` у `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot --force -y` |
+| AI Diff Reviewer (обовʼязковий) | `version:` у `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `version:` у `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` у встановленому скілі herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |

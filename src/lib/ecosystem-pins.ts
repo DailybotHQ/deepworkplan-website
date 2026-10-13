@@ -26,9 +26,9 @@ export interface EcosystemPin {
 export const ECOSYSTEM_PINS = {
   pack: {
     repo: 'deepworkplan-skill',
-    tag: 'v7.7.1',
+    tag: 'v7.8.0',
     sha256sums:
-      'c03ed3cb44ceafb267267b889e480a793bfe70ecd11e3668f326b3a543e773b5',
+      'a43fc0f2996b2edd5e68850f62742486e1d7475314351ba3e25771fd198453e5',
     role: 'the Deep Work Plan skill (pack)',
   },
   agentkit: {
@@ -61,14 +61,14 @@ export const ECOSYSTEM_PINS = {
   },
   reviewer: {
     repo: 'ai-diff-reviewer',
-    tag: 'v3.3.12',
+    tag: 'v3.3.14',
     sha256sums:
-      '3a30a2127df1cf035e6eadce768b8a6f0773b19521a2b6c4ace3552b0c0f6f48',
+      '57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4',
     role: 'required local review (AI Diff Reviewer)',
   },
   dailybot: {
     repo: 'agent-skill',
-    tag: 'v3.23.15',
+    tag: 'v3.23.17',
     sha256sums: null,
     role: 'Dailybot addon (agent skill)',
   },

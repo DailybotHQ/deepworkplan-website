@@ -9,7 +9,7 @@ lastUpdated: 2026-10-09
 किट वह सब कुछ है जिसकी आपको पद्धति को व्यवहार में चलाने के लिए आवश्यकता है। इसे `DailybotHQ/deepworkplan-skill` से स्थापित किया जाता है:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 वर्तमान 7.x पैक नए प्लान डिफ़ॉल्ट रूप से v7 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन के लिए स्पष्ट अनुरोध आवश्यक है।
@@ -67,7 +67,7 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 - **[devcontainer](/hi/kit/devcontainer)** — एक टेम्पलेट से हर रिपॉज़िटरी का अपना dev container: ak के ज़रिए एजेंट, दोनों दिशाओं में Herdr, SSH कुंजियाँ केवल opt-in पर। पिन किया गया `devcontainer-kit@v1.0.0`।
 - **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v1.0.0`।
 
-ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं: `v7.7.1`
+ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं: `v7.8.0`
 
 ### उदाहरण
 

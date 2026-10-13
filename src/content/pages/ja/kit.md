@@ -9,7 +9,7 @@ lastUpdated: 2026-10-09
 キットは、この方法論を実際に実行するために必要なものすべてです。`DailybotHQ/deepworkplan-skill` からインストールします。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、移行には明示的な依頼が必要です。
@@ -67,7 +67,7 @@ onboard フローがリポジトリに重ねる各機能です。七つはオプ
 - **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、SSH 鍵はオプトイン時のみ。固定バージョン：`devcontainer-kit@v1.0.0`。
 - **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v1.0.0`。
 
-アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.7.1`
+アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.8.0`
 
 ### 事例
 

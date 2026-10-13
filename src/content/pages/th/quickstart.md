@@ -77,10 +77,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.7.1
+  git checkout v7.8.0
   # ดาวน์โหลด checksum ของรีลีสนั้นแล้วตรวจกับ digest ด้านล่าง:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.7.1/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.0/SHA256SUMS
   shasum -a 256 SHA256SUMS # ต้องตรงกับ digest ของ deepworkplan-skill ในรีลีสที่ตรึงไว้
   ./setup.sh --verify        # exit ที่ไม่ใช่ศูนย์หมายความว่าไฟล์ไม่ตรงกัน หยุด
   ```
@@ -92,13 +92,13 @@ lastUpdated: 2026-10-11
 
   | Repository (github.com/DailybotHQ) | แท็ก | sha256 ของ `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.7.1` | `c03ed3cb44ceafb267267b889e480a793bfe70ecd11e3668f326b3a543e773b5` |
+  | deepworkplan-skill | `v7.8.0` | `a43fc0f2996b2edd5e68850f62742486e1d7475314351ba3e25771fd198453e5` |
   | coding-agents-kit | `v1.0.0` | `8995e737862c5486b3ec3d0235e82f358dbf9c20879f44afa506cf8e0721973e` |
   | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
   | devcontainer-kit | `v1.0.0` | `060d16db41214bc91b05089bc7201cf499d21e5571731954a0bb766edd7cb605` |
   | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
-  | ai-diff-reviewer | `v3.3.12` | `3a30a2127df1cf035e6eadce768b8a6f0773b19521a2b6c4ace3552b0c0f6f48` |
-  | agent-skill | `v3.23.15` | ไม่มีการเผยแพร่ — skills CLI บันทึก content hash ไว้ใน `skills-lock.json` |
+  | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
+  | agent-skill | `v3.23.17` | ไม่มีการเผยแพร่ — skills CLI บันทึก content hash ไว้ใน `skills-lock.json` |
 - **รายงานปัญหา** รายงานปัญหาด้านความปลอดภัย**เป็นการส่วนตัวผ่านระบบรายงานช่องโหว่ของ GitHub** ใน repository ที่เกี่ยวข้อง — `https://github.com/DailybotHQ/deepworkplan-skill/security` หรือ `https://github.com/DailybotHQ/deepworkplan-website/security` — ไม่ใช่ในรูปแบบ issue สาธารณะ ดูเพิ่มเติมที่ `SECURITY.md` ของแต่ละ repository, `https://deepworkplan.com/.well-known/security.txt` และหน้าความไว้วางใจ `https://deepworkplan.com/trust`
 
 ## 2. ติดตั้ง skill ของ Deep Work Plan
@@ -110,7 +110,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.7.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
 ```
 
 หรือติดตั้งผ่าน OpenClaw:
@@ -132,7 +132,7 @@ skill Deep Work Plan ที่ติดตั้งไว้ข้างต้�
 และ sub-skill เก้าตัว ได้แก่ `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` และ `upgrade`
 
-รุ่น skill ที่ติดตั้งคือ **7.7.1** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
+รุ่น skill ที่ติดตั้งคือ **7.8.0** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
 
 มาตรฐานนี้ถูกออกแบบให้ได้สัดส่วนโดยเจตนา และทำให้สัดส่วนนั้นเป็นคุณสมบัติของ
 แผน ไม่ใช่วินัยของผู้พัฒนา แผนหนึ่งเป็นได้ทั้ง **Lite** — บันทึกงานแบบ inline
@@ -180,7 +180,7 @@ git คือ `.dwp/config.json` (https://deepworkplan.com/schema/dwp-config/v1.
 Reviewer ที่จำเป็น ตรวจสอบสถานะสุดท้ายของ repository ให้ถูกต้อง ตรวจสอบความ
 สอดคล้องของ skill ที่งานต่างๆ ใช้ และบันทึกหลักฐานกับข้อจำกัด skill สำหรับ
 รีวิวเฉพาะที่ถูกติดตั้งที่รุ่นที่ตรึงไว้ คำสั่งที่บันทึกไว้ในปัจจุบันติดตั้ง
-`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
 ที่เป็นทางเลือก และไม่เคยจำเป็นสำหรับระเบียบวิธีหลัก
 
 การตรวจสอบที่ทำงานแล้วไม่รายงานอะไรเลย ไม่เหมือนกับการตรวจสอบที่ไม่เคยผลิตข้อค้นพบใด ๆ ออกมาได้เลย กรณีหลังคือ**การตรวจสอบที่ไม่สมบูรณ์** ซึ่งจะถูกบันทึกไว้ตามนั้น ไม่เคยถูกนับเป็นหลักฐานว่าชุดการเปลี่ยนแปลงสะอาด และไม่เคยเป็นเหตุผลให้ปิด Final Review ได้ — การถูกทำเครื่องหมายสีแดงเช่นเดียวกับที่การตรวจสอบ `timeout` ได้รับภายใต้ความเข้มงวดแบบบล็อก (BC-04) เมื่อรวมกับการไม่มีตัวตรวจทานและการเรียกใช้ที่ผิดพลาด นี่คือสามสถานะที่ต่างกัน และไม่มีสถานะใดเลยที่หมายความว่า diff ได้รับการตรวจแล้วและสะอาด เนื้อหาที่ว่า `Recommendation: approve` ก็ไม่ใช่หลักฐานว่า check ผ่านเช่นกัน อ่านบล็อก Highest severity / Strictness gate / Check status บนตัวทำเครื่องหมายติดตามก่อน — เมื่อเกตกำลังล้มเหลว รันไทม์จะเขียน `approve` ของโมเดลใหม่
@@ -238,8 +238,8 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 
 | คอมโพเนนต์ | ตรวจหาเวอร์ชันที่ติดตั้ง | ติดตั้งหรืออัปเกรด (ตรึงไว้) |
 | --- | --- | --- |
-| AI Diff Reviewer (จำเป็น) | `version:` ใน `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12 --skill ai-diff-reviewer --force -y` |
-| Dailybot | `version:` ใน `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot --force -y` |
+| AI Diff Reviewer (จำเป็น) | `version:` ใน `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `version:` ใน `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` ใน skill herdr-peers ที่ติดตั้งไว้ | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
