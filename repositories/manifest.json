@@ -17,7 +17,7 @@
       "role": "addon",
       "visibility": "public",
       "gate": "bash tests/run.sh",
-      "summary": "Peer-to-peer coordination for agents running side by side."
+      "summary": "Ask an agent in another Herdr pane, on any machine, and get one authorized reply (the herdr addon)."
     },
     {
       "name": "coding-agents-kit",
@@ -26,7 +26,7 @@
       "role": "addon",
       "visibility": "public",
       "gate": "bash tests/run.sh",
-      "summary": "Installer and configuration kit for coding agents."
+      "summary": "One ak command for every terminal coding agent: accounts, quota, ak pick and headless runs (the agentkit addon)."
     },
     {
       "name": "devcontainer-kit",
@@ -35,7 +35,7 @@
       "role": "addon",
       "visibility": "public",
       "gate": "bash tests/run.sh",
-      "summary": "Development-container images and installer for agent-ready repositories."
+      "summary": "A reproducible dev container per repository, rendered from one template and wired to Herdr and the host accounts (the devcontainer addon)."
     },
     {
       "name": "deepworkplan-vim",
@@ -44,7 +44,7 @@
       "role": "addon",
       "visibility": "public",
       "gate": "bash tests/smoke/run.sh",
-      "summary": "DeepWorkPlan Vim: a Neovim distribution with a DWP plan reader and sidebar."
+      "summary": "DeepWorkPlan Vim: the terminal editor for plans, with a plan browser, a lanes view and a Markdown viewer (the vim addon)."
     },
     {
       "name": "ai-diff-reviewer",

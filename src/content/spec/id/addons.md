@@ -82,7 +82,7 @@ Upgrade dependensi agnostik package manager, bertahap, tervalidasi, dan dapat di
 
 ### Herdr (addon keenam)
 
-Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v0.3.2`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
+Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok `v1.0.0`, protokol `1`), transport delegasi **interaktif** untuk rencana v7.
 
 - **Halaman kit:** [Herdr](/kit/herdr)
 - **Yang ditambahkan:** sebuah rencana dapat menyerahkan tugas terbatas kepada coding agent di pane [Herdr](https://herdr.dev) lain, di mesin yang sama atau mesin yang dijangkau Herdr melalui SSH, dan mencatat satu-satunya balasan yang diizinkan di jurnal
@@ -91,7 +91,7 @@ Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (
 
 ### DeepWorkPlan Vim (addon ketujuh)
 
-Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v0.7.0`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
+Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v1.0.0`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
 
 - **Halaman kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Yang ditambahkan:** permukaan editor opsional tingkat mesin untuk agen dan manusia — indeks perintah yang dihasilkan, penjelajah rencana hanya-baca, dan penampil Markdown; setiap klaim dibaca dari permukaan produk yang dapat dibaca mesin dan telah dipatok
@@ -100,7 +100,7 @@ Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkp
 
 ### Agentkit (addon kedelapan)
 
-Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v0.7.1`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
+Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v1.0.0`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
 
 - **Halaman kit:** [Agentkit](/kit/agentkit)
 - **Yang ditambahkan:** satu permukaan perintah `ak` di atas coding agent terminal, digunakan untuk menjalankan tugas rencana terbatas secara headless; addon ini menyumbangkan kemampuan `subagents`, `cancel_children`, dan `model_routing` hanya saat runtime, ketika diaktifkan, terdeteksi, dan berada pada antarmuka yang kompatibel

@@ -82,7 +82,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Herdr (छठा ऐडऑन)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v0.3.2`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers) (पिन `v1.0.0`, प्रोटोकॉल `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **इंटरैक्टिव** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Herdr](/kit/herdr)
 - **क्या जोड़ता है:** एक योजना किसी सीमित कार्य को दूसरे [Herdr](https://herdr.dev) पेन में किसी कोडिंग एजेंट को सौंप सकती है, उसी मशीन पर या ऐसी मशीन पर जिस तक Herdr SSH से पहुँचता है, और उसका एकमात्र अधिकृत उत्तर जर्नल में दर्ज कर सकती है
@@ -91,7 +91,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### DeepWorkPlan Vim (सातवाँ ऐडऑन)
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v0.7.0`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v1.0.0`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
 
 - **Kit पृष्ठ:** [DeepWorkPlan Vim](/kit/vim)
 - **क्या जोड़ता है:** एजेंटों और मनुष्यों के लिए एक वैकल्पिक, मशीन-स्तरीय एडिटर सतह — एक जनरेट किया गया कमांड इंडेक्स, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर; हर दावा उत्पाद की पिन की गई मशीन-पठनीय सतह से पढ़ा जाता है
@@ -100,7 +100,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### Agentkit (आठवाँ ऐडऑन)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, पिन `v0.7.1`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, पिन `v1.0.0`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, v7 योजनाओं का **हेडलेस** डेलिगेशन ट्रांसपोर्ट।
 
 - **Kit पृष्ठ:** [Agentkit](/kit/agentkit)
 - **क्या जोड़ता है:** टर्मिनल कोडिंग एजेंटों पर एक `ak` कमांड सतह, जिसका उपयोग किसी सीमित योजना कार्य को हेडलेस चलाने के लिए होता है; यह `subagents`, `cancel_children` और `model_routing` क्षमताएँ केवल रनटाइम पर देता है, जब यह सक्षम हो, पहचाना गया हो और संगत इंटरफ़ेस पर हो

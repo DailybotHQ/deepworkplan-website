@@ -99,10 +99,10 @@ finché non è stato controllato.
   | Repository (github.com/DailybotHQ) | Tag | sha256 del suo `SHA256SUMS` |
   | --- | --- | --- |
   | deepworkplan-skill | `v7.7.1` | `c03ed3cb44ceafb267267b889e480a793bfe70ecd11e3668f326b3a543e773b5` |
-  | coding-agents-kit | `v0.7.1` | `ccf0919eed80bede48fba9b91539c9671b30e2dc0f017fe1d4bde7a7f044f7cc` |
-  | herdr-peers | `v0.3.2` | `8a8112ee216598d85b4b3ef335c1beab3b02a258230b31aa9221cd3b6cd889a5` |
+  | coding-agents-kit | `v1.0.0` | `8995e737862c5486b3ec3d0235e82f358dbf9c20879f44afa506cf8e0721973e` |
+  | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
   | devcontainer-kit | `v0.3.7` | `2961922dc3d8c0096dc85403d77665614873732fc45814dc534eadff7c294c4f` |
-  | deepworkplan-vim | `v0.7.0` | `24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2` |
+  | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
   | ai-diff-reviewer | `v3.3.12` | `3a30a2127df1cf035e6eadce768b8a6f0773b19521a2b6c4ace3552b0c0f6f48` |
   | agent-skill | `v3.23.15` | nessuno pubblicato — la CLI skills registra un hash del contenuto in `skills-lock.json` |
 - **Segnala un problema.** Segnala i problemi di sicurezza **privatamente tramite il sistema di segnalazione delle vulnerabilità di GitHub** nel repository pertinente — `https://github.com/DailybotHQ/deepworkplan-skill/security` o `https://github.com/DailybotHQ/deepworkplan-website/security` — non come una issue pubblica. Vedi anche il `SECURITY.md` di ogni repository, `https://deepworkplan.com/.well-known/security.txt` e la pagina di fiducia `https://deepworkplan.com/trust`.
@@ -241,10 +241,10 @@ La tabella è un riferimento, non una checklist: esegui una riga solo per la rev
 | --- | --- | --- |
 | AI Diff Reviewer (richiesto) | `version:` in `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.12 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` in `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.15 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | `scripts/herdr-peers --version` nella skill herdr-peers installata | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | `scripts/herdr-peers --version` nella skill herdr-peers installata | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v0.3.7 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | l’installer verificato su https://deepworkplan.com/vim/install.sh (fissa `v0.7.0`; scaricalo, `shasum -a 256 -c install.sh.sha256`, poi eseguilo) |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | l’installer verificato su https://deepworkplan.com/vim/install.sh (fissa `v1.0.0`; scaricalo, `shasum -a 256 -c install.sh.sha256`, poi eseguilo) |
 
 Verifica ogni download rispetto al `SHA256SUMS` della sua release e al digest in *Release fissate* qui sopra
 prima di eseguirlo.
@@ -265,9 +265,9 @@ repository è pienamente conforme con **zero** addon opzionali — non installar
   rilevata (non offerto per librerie pure, servizi headless o repository solo infra). Tre profili si
   sovrappongono in un unico file: visual-ui (fortemente raccomandato quando rilevato; installazione subordinata a un'accettazione), cli-output e
   conversational — gli ultimi due vengono sempre chiesti, mai applicati automaticamente.
-- **agentkit** — un'installazione a livello di macchina di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fissato a `v0.7.1`): un comando per ogni agente di codice, un account per profilo, `ak usage` e `ak pick` per scegliere l’account con più margine, e `ak run` headless per i piani che affidano task `parallel_safe` delimitati ad altri agenti di codice (un delegato per worktree). Il kit avvia gli agenti in autonomia per impostazione predefinita e il suo opt-out (`--ask` o `AGENTKIT_PERMISSIONS=ask`) prevale sempre.
-- **Herdr** — un'installazione a livello di macchina di [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fissato a `v0.3.2`, più la skill ufficiale di Herdr) per i piani che chiedono a un agente peer in un pannello Herdr, su qualsiasi macchina, un'unica risposta autorizzata, e per un lead che sorveglia le sue corsie.
-- **DeepWorkPlan Vim** — l'editor da terminale ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), fissato a `v0.7.0`), un'installazione a livello di macchina che non sovrascrive mai una configurazione Neovim esistente senza consenso esplicito.
+- **agentkit** — un'installazione a livello di macchina di [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fissato a `v1.0.0`): un comando per ogni agente di codice, un account per profilo, `ak usage` e `ak pick` per scegliere l’account con più margine, e `ak run` headless per i piani che affidano task `parallel_safe` delimitati ad altri agenti di codice (un delegato per worktree). Il kit avvia gli agenti in autonomia per impostazione predefinita e il suo opt-out (`--ask` o `AGENTKIT_PERMISSIONS=ask`) prevale sempre.
+- **Herdr** — un'installazione a livello di macchina di [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fissato a `v1.0.0`, più la skill ufficiale di Herdr) per i piani che chiedono a un agente peer in un pannello Herdr, su qualsiasi macchina, un'unica risposta autorizzata, e per un lead che sorveglia le sue corsie.
+- **DeepWorkPlan Vim** — l'editor da terminale ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), fissato a `v1.0.0`), un'installazione a livello di macchina che non sovrascrive mai una configurazione Neovim esistente senza consenso esplicito.
 - **AI Diff Reviewer** — la revisione locale richiesta (non un opt-in): il passaggio di sicurezza di
   ogni Final Review esegue [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
   `.review/extension.md` obbligatorio) sull’insieme di modifiche accumulato dal piano. Una skill o un’estensione
@@ -339,7 +339,7 @@ addon agentkit e Herdr sono installati:
   distruttive, le schermate di pagamento o di piano, le schermate sconosciute e i pannelli che non hai creato. Con
   `AGENTKIT_PERMISSIONS=ask`, le corsie chiedono prima di agire; non aggirare mai quei prompt. Registra ogni
   intervento nel piano padre.
-- **Mantieni attivo lo sciame.** Con coding-agents-kit `v0.7.1` e herdr-peers `v0.3.2`, ogni agente
+- **Mantieni attivo lo sciame.** Con coding-agents-kit `v1.0.0` e herdr-peers `v1.0.0`, ogni agente
   controlla `ak capacity --self --json` a ogni confine di task; a `critical` scrive un pacchetto di consegna
   (https://deepworkplan.com/schema/dwp-handoff/v1.json) e il lead avvia un successore nello
   stesso checkout. Il lead rivendica il proprio piano con `herdr-peers lead claim`, le corsie lo indirizzano come `lead`,

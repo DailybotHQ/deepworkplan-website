@@ -82,7 +82,7 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 
 ### Herdr (szósty addon)
 
-Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v0.3.2`, protokół `1`), **interaktywny** transport delegowania planów v7.
+Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v1.0.0`, protokół `1`), **interaktywny** transport delegowania planów v7.
 
 - **Strona kit:** [Herdr](/kit/herdr)
 - **Co dodaje:** plan może przekazać ograniczone zadanie agentowi kodującemu w innym panelu [Herdr](https://herdr.dev), na tej samej maszynie lub na takiej, do której Herdr sięga przez SSH, i zapisać jego jedną autoryzowaną odpowiedź w dzienniku
@@ -91,7 +91,7 @@ Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przy
 
 ### DeepWorkPlan Vim (siódmy addon)
 
-Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v0.7.0`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
+Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v1.0.0`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
 
 - **Strona kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Co dodaje:** opcjonalną powierzchnię edytora na poziomie maszyny dla agentów i ludzi — generowany indeks poleceń, przeglądarkę planów tylko do odczytu i przeglądarkę Markdown; każde twierdzenie jest odczytywane z przypiętej, czytelnej maszynowo powierzchni produktu
@@ -100,7 +100,7 @@ Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-
 
 ### Agentkit (ósmy addon)
 
-Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v0.7.1`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
+Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v1.0.0`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
 
 - **Strona kit:** [Agentkit](/kit/agentkit)
 - **Co dodaje:** jedną powierzchnię poleceń `ak` nad terminalowymi agentami kodującymi, używaną do bezgłowego wykonania ograniczonego zadania planu; wnosi możliwości `subagents`, `cancel_children` i `model_routing` wyłącznie w czasie działania, gdy jest włączony, wykryty i na zgodnym interfejsie

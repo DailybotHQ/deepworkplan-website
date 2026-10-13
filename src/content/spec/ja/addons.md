@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr（第 6 アドオン）
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v0.3.2` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.0.0` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
 
 - **キットページ：** [Herdr](/kit/herdr)
 - **追加内容：** 計画は範囲の限られたタスクを、別の [Herdr](https://herdr.dev) ペインにいるコーディングエージェント——同じマシン上、または Herdr が SSH で到達できるマシン上——に渡し、認可された返信を一つだけジャーナルに記録できる
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第 7 アドオン）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v0.7.0` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.0.0` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
 
 - **キットページ：** [DeepWorkPlan Vim](/kit/vim)
 - **追加内容：** エージェントと人間のための任意のマシンレベルのエディターサーフェス——生成されるコマンドインデックス、読み取り専用の計画ブラウザー、Markdown ビューア；すべての記述は製品の固定された機械可読サーフェスから読み取られる
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第 8 アドオン）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v0.7.1` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.0.0` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
 
 - **キットページ：** [Agentkit](/kit/agentkit)
 - **追加内容：** ターミナル型コーディングエージェント全体にわたる一つの `ak` コマンドサーフェスで、範囲の限られた計画タスクをヘッドレスで実行するために使う；`subagents`、`cancel_children`、`model_routing` の能力は、有効化され、検出され、互換性のあるインターフェース上にある場合にのみ、実行時に提供される

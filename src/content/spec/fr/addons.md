@@ -82,7 +82,7 @@ L’**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 
 ### Herdr (sixième addon)
 
-Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v0.3.2`, protocole `1`), le transport de délégation **interactif** des plans v7.
+Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v1.0.0`, protocole `1`), le transport de délégation **interactif** des plans v7.
 
 - **Page kit :** [Herdr](/kit/herdr)
 - **Ce qu'il ajoute :** un plan peut confier une tâche bornée à un agent de code dans un autre panneau [Herdr](https://herdr.dev), sur la même machine ou sur une machine que Herdr atteint via SSH, et enregistrer son unique réponse autorisée dans le journal
@@ -91,7 +91,7 @@ Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 
 ### DeepWorkPlan Vim (septième addon)
 
-Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v0.7.0`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
+Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v1.0.0`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
 
 - **Page kit :** [DeepWorkPlan Vim](/kit/vim)
 - **Ce qu'il ajoute :** une surface d’édition optionnelle, au niveau de la machine, pour les agents et les humains — un index des commandes généré, un navigateur de plans en lecture seule et une visionneuse Markdown ; chaque affirmation est lue depuis la surface lisible par machine épinglée du produit
@@ -100,7 +100,7 @@ Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepw
 
 ### Agentkit (huitième addon)
 
-Un intégrateur léger de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, épinglé à `v0.7.1`, interface `1`), le transport de délégation **headless** (sans interface) des plans v7.
+Un intégrateur léger de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, épinglé à `v1.0.0`, interface `1`), le transport de délégation **headless** (sans interface) des plans v7.
 
 - **Page kit :** [Agentkit](/kit/agentkit)
 - **Ce qu'il ajoute :** une surface de commande `ak` unique au-dessus des agents de code en terminal, utilisée pour exécuter une tâche de plan bornée en mode headless ; il n’apporte les capacités `subagents`, `cancel_children` et `model_routing` qu’à l’exécution, lorsqu’il est activé, détecté et sur une interface compatible

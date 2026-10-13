@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr (addon ที่หก)
 
-ตัวผสานรวมแบบบางของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ปักหมุดที่ `v0.3.2`, protocol `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **โต้ตอบ** ของแผน v7
+ตัวผสานรวมแบบบางของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ปักหมุดที่ `v1.0.0`, protocol `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **โต้ตอบ** ของแผน v7
 
 - **หน้า kit:** [Herdr](/kit/herdr)
 - **สิ่งที่เพิ่ม:** แผนสามารถส่งงานที่มีขอบเขตให้ coding agent ใน pane อื่นของ [Herdr](https://herdr.dev) บนเครื่องเดียวกันหรือเครื่องที่ Herdr เข้าถึงผ่าน SSH และบันทึกการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียวลงใน journal
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim (addon ที่เจ็ด)
 
-ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v0.7.0`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
+ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v1.0.0`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
 
 - **หน้า kit:** [DeepWorkPlan Vim](/kit/vim)
 - **สิ่งที่เพิ่ม:** พื้นผิวตัวแก้ไขระดับเครื่องแบบเลือกได้สำหรับ agent และมนุษย์ — ดัชนีคำสั่งที่สร้างขึ้น ตัวเรียกดูแผนแบบอ่านอย่างเดียว และตัวแสดง Markdown ทุกข้อกล่าวอ้างอ่านจากพื้นผิวที่เครื่องอ่านได้ซึ่งปักหมุดไว้ของผลิตภัณฑ์
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit (addon ที่แปด)
 
-ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ปักหมุดที่ `v0.7.1`, interface `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
+ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ปักหมุดที่ `v1.0.0`, interface `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
 
 - **หน้า kit:** [Agentkit](/kit/agentkit)
 - **สิ่งที่เพิ่ม:** พื้นผิวคำสั่ง `ak` เดียวครอบ coding agent บนเทอร์มินัล ใช้รันงานในแผนที่มีขอบเขตแบบ headless โดยมอบความสามารถ `subagents`, `cancel_children` และ `model_routing` เฉพาะในขณะรันเมื่อเปิดใช้ ตรวจพบ และ interface เข้ากันได้เท่านั้น

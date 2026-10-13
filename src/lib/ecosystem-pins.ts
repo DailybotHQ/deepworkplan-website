@@ -33,16 +33,16 @@ export const ECOSYSTEM_PINS = {
   },
   agentkit: {
     repo: 'coding-agents-kit',
-    tag: 'v0.7.1',
+    tag: 'v1.0.0',
     sha256sums:
-      'ccf0919eed80bede48fba9b91539c9671b30e2dc0f017fe1d4bde7a7f044f7cc',
+      '8995e737862c5486b3ec3d0235e82f358dbf9c20879f44afa506cf8e0721973e',
     role: 'agentkit addon (`ak`)',
   },
   herdr: {
     repo: 'herdr-peers',
-    tag: 'v0.3.2',
+    tag: 'v1.0.0',
     sha256sums:
-      '8a8112ee216598d85b4b3ef335c1beab3b02a258230b31aa9221cd3b6cd889a5',
+      '11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2',
     role: 'Herdr addon (herdr-peers)',
   },
   devcontainer: {
@@ -54,9 +54,9 @@ export const ECOSYSTEM_PINS = {
   },
   vim: {
     repo: 'deepworkplan-vim',
-    tag: 'v0.7.0',
+    tag: 'v1.0.0',
     sha256sums:
-      '24c0a036f8988d2c2a484c4153cddde7ffe563b12709df3f4b5a2150970e08d2',
+      'aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779',
     role: 'DeepWorkPlan Vim addon',
   },
   reviewer: {

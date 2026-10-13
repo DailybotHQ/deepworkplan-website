@@ -82,7 +82,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 ### Herdr (altıncı eklenti)
 
-v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v0.3.2`, protokol `1`) için ince bir entegrasyon katmanı.
+v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v1.0.0`, protokol `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Herdr](/kit/herdr)
 - **Ne ekler:** bir plan, sınırlı bir görevi aynı makinede veya Herdr'ın SSH üzerinden ulaştığı bir makinede, başka bir [Herdr](https://herdr.dev) panelindeki bir kodlama agent'ına devredebilir ve onun tek yetkili yanıtını journal'a kaydedebilir
@@ -91,7 +91,7 @@ v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https:
 
 ### DeepWorkPlan Vim (yedinci eklenti)
 
-Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v0.7.0`, arayüz `1`) için ince bir entegrasyon katmanı.
+Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v1.0.0`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [DeepWorkPlan Vim](/kit/vim)
 - **Ne ekler:** agent'lar ve insanlar için isteğe bağlı, makine düzeyinde bir düzenleyici yüzeyi — üretilmiş bir komut dizini, salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi; her iddia ürünün sabitlenmiş, makine tarafından okunabilir yüzeyinden okunur
@@ -100,7 +100,7 @@ Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](
 
 ### Agentkit (sekizinci eklenti)
 
-v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v0.7.1`, arayüz `1`) için ince bir entegrasyon katmanı.
+v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v1.0.0`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Agentkit](/kit/agentkit)
 - **Ne ekler:** terminal kodlama agent'ları üzerinde tek bir `ak` komut yüzeyi; sınırlı bir plan görevini arayüzsüz çalıştırmak için kullanılır; `subagents`, `cancel_children` ve `model_routing` yeteneklerini yalnızca çalışma zamanında, etkinleştirildiğinde, tespit edildiğinde ve uyumlu bir arayüz üzerinde olduğunda sağlar

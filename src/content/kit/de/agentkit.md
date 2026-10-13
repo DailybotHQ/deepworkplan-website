@@ -14,7 +14,7 @@ Dieses Addon integriert das Kit in **DWP v7** (Paket `v7.7.1`) als **headless** 
 
 ## Was das Kit bietet
 
-- **Eine Grammatik für jede CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` und `ak grok`, dazu Provider-Varianten (GLM, Azure, xAI), mit denselben Sitzungs-Flags: `-c` setzt fort, `-r <id>` nimmt wieder auf.
+- **Eine Grammatik für jede CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` und `ak antigravity`, dazu Provider-Routen (Z.AI GLM, Azure OpenAI, xAI und die Gemini API), mit denselben Sitzungs-Flags: `-c` setzt fort, `-r <id>` nimmt wieder auf.
 - **Profile.** `ak claude @work` führt ein zweites Konto in einem eigenen Home-Verzeichnis aus, getrennt vom ersten.
 - **Headless-Läufe.** `ak run <kind> -- "<prompt>"` führt einen Prompt nicht interaktiv aus und gibt einen dokumentierten Exit-Code zurück, optional als ein JSON-Objekt.
 - **Ein Doctor.** `ak doctor --json` meldet, welche CLIs installiert sind, die Profile und die Namen der gesetzten Schlüssel — nie deren Werte.
@@ -65,19 +65,21 @@ Arbeit bewegt sich nur zwischen den Konten, die Sie für den Plan deklariert hab
 ## Installation
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v0.7.1`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
+Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v1.0.0`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v0.7.1`, Schnittstelle 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v1.0.0`, Schnittstelle 1 |
 | Registry-Schlüssel | `agentkit` in `.dwp/config.json` |
 | Transport | headless: ein `ak run` pro Delegiertem in einem eigenen Git-Worktree |
 | Stellt bereit | `subagents`, `cancel_children`, `model_routing` |
 | Erfordert | die `agent_delegation`-Freigabe des Plan-Vertrags |
+
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle des Kits folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version: die Befehlsoberfläche (`ak <kind> [@profile]` für jede Art in `providers.toml` sowie jedes Verb mit seinen dokumentierten Flags), die Berechtigungshaltung, Schnittstelle 1 (`ak doctor --json`, `ak env`, die Grammatik und der Umschlag von `ak run`), die JSON-Schemas (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`) sowie das installierte Layout und die Variablennamen der Env-Datei. `v1.0.0` ändert keinen Befehl, kein Flag, keinen Schlüssel und kein Schema gegenüber `v0.7.1`.
 
 ## Autonomie standardmäßig, mit einem Opt-out, das immer gewinnt
 

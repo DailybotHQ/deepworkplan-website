@@ -14,22 +14,24 @@ Bu, **DWP v7**'nin (`v7.0.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v0.3.2`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.0.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v0.3.2` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v1.0.0` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
 | Gerektirdiği | plan sözleşmesinin `agent_delegation` yetkisi |
+
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler: CLI fiilleri ve belgelenmiş bayrakları, `0`–`7` çıkış kodları, belgelenmiş `HERDR_PEERS_*`, `DWP_PLAN` ve `DWP_TASK` değişkenleri, protokol 1 ve `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` JSON sözleşmeleri ile devretme kaydı. Bunlardan herhangi birindeki uyumsuz bir değişiklik ana sürümü yükseltir; kablo biçimindeki bir değişiklik ayrıca protokol numarasını da yükseltir. `v1.0.0`, `v0.3.3` sürümüne göre hiçbir davranışı değiştirmez ve 0.x sürümleri artık desteklenmez.
 
 ## Kurulum
 
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,7 +75,7 @@ Aynı anda birçok şerit çalıştıran bir lider için — ana makinede, konte
 
 ## Bildirimler ve liderlik
 
-herdr-peers `v0.3.2`, bir sürünün liderinden daha uzun yaşamasını sağlayan şeyleri ekler ([Sürü özerkliği](/tr/methodology/07-swarm-autonomy)):
+herdr-peers (`v0.3.2`), bir sürünün liderinden daha uzun yaşamasını sağlayan şeyleri ekler ([Sürü özerkliği](/tr/methodology/07-swarm-autonomy)):
 
 - **Bildirimler.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>`, `reply=no` damgalı tek yönlü bir mesaj gönderir. Alıcının `check` komutu onu bir bildirim olarak sınıflandırır, veri olarak kaydeder ve asla yanıtlamaz. Bildirimler yayılma kotasından yer harcamaz ve açık bir ask varken de gönderilebilir; devir duyuruları, lider değişiklikleri ve sürüm yayınları için kullanın.
 - **Plan başına bir lider kaydı.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>`, bir agent'ı tek bir planın lideri yapar; `lead show` kaydı yazdırır (şema `herdr-peers/lead-v1`: plan, lider, epoch, halef listesi, şeritler, güncelleme zamanı). `lead handover <addr> --plan <P>` liderliği devreder, `lead takeover --plan <P>` lider gittiğinde ulaşılabilen ilk vekilin liderliği almasını sağlar ve `lead release --plan <P>` onu sona erdirir. Her değişiklik epoch'u yükseltir ve her şeride bildirim gönderir. Planı, şeritlerini başlatmadan önce sahiplenin: `lead` ancak bir kayıt var olduğunda çözümlenir. `v0.3.2` sürümünden itibaren kayıt, sahiplenen depoyu yerel olarak tutar ve aynı plan kimliğinin başka bir depodan sahiplenilmesini reddeder; o planı `--plan <repo>/<id>` olarak adlandırın.

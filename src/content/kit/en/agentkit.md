@@ -14,7 +14,7 @@ This addon integrates the kit into **DWP v7** (pack `v7.7.1`) as the **headless*
 
 ## What the kit gives you
 
-- **One grammar for every CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` and `ak grok`, plus provider variants (GLM, Azure, xAI), with the same session flags: `-c` continues, `-r <id>` resumes.
+- **One grammar for every CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` and `ak antigravity`, plus provider routes (Z.AI GLM, Azure OpenAI, xAI and the Gemini API), with the same session flags: `-c` continues, `-r <id>` resumes.
 - **Profiles.** `ak claude @work` runs a second account in its own home, kept apart from the first.
 - **Headless runs.** `ak run <kind> -- "<prompt>"` runs one prompt non-interactively and returns a documented exit code, optionally as one JSON object.
 - **A doctor.** `ak doctor --json` reports which CLIs are installed, the profiles, and the names of the keys that are set — never their values.
@@ -65,19 +65,21 @@ Work moves only among the accounts you declared for the plan, within each vendor
 ## Install
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v0.7.1`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v1.0.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v1.0.0`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |
 | Requires | the plan contract's `agent_delegation` grant |
+
+**Stable since `v1.0.0`.** The kit's public interface follows semantic versioning and changes incompatibly only in a new major version: the command surface (`ak <kind> [@profile]` for every kind in `providers.toml`, and every verb with its documented flags), the permission posture, interface 1 (`ak doctor --json`, `ak env`, the `ak run` grammar and envelope), the JSON schemas (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), and the installed layout and env-file variable names. `v1.0.0` changes no command, flag, key or schema from `v0.7.1`.
 
 ## Autonomy by default, with an opt-out that always wins
 

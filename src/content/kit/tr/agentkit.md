@@ -14,7 +14,7 @@ Bu eklenti, kiti **DWP v7**'ye (paket `v7.7.1`) **başsız** devretme taşımas�
 
 ## Kitin size sundukları
 
-- **Her CLI için tek bir söz dizimi.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` ve `ak grok`, ayrıca sağlayıcı varyantları (GLM, Azure, xAI), aynı oturum bayraklarıyla: `-c` sürdürür, `-r <id>` devam ettirir.
+- **Her CLI için tek bir söz dizimi.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` ve `ak antigravity`, ayrıca sağlayıcı rotaları (Z.AI GLM, Azure OpenAI, xAI ve Gemini API), aynı oturum bayraklarıyla: `-c` sürdürür, `-r <id>` devam ettirir.
 - **Profiller.** `ak claude @work`, ikinci bir hesabı birincisinden ayrı tutulan kendi ana dizininde çalıştırır.
 - **Başsız çalıştırmalar.** `ak run <kind> -- "<prompt>"` tek bir istemi etkileşimsiz olarak çalıştırır ve belgelenmiş bir çıkış kodu döndürür; isteğe bağlı olarak tek bir JSON nesnesi biçiminde.
 - **Bir doktor.** `ak doctor --json`, hangi CLI'ların kurulu olduğunu, profilleri ve ayarlanmış anahtarların adlarını raporlar — değerlerini asla.
@@ -65,19 +65,21 @@ ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış he
 ## Kurulum
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v0.7.1` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.0.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v0.7.1` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v1.0.0` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |
 | Gerektirdiği | plan sözleşmesinin `agent_delegation` yetkisi |
+
+**`v1.0.0` sürümünden beri kararlı.** Kitin genel arayüzü anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde uyumsuz biçimde değişir: komut yüzeyi (`providers.toml` içindeki her tür için `ak <kind> [@profile]` ve belgelenmiş bayraklarıyla her fiil), izin duruşu, arayüz 1 (`ak doctor --json`, `ak env`, `ak run` söz dizimi ve zarfı), JSON şemaları (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`) ile kurulu düzen ve env dosyası değişken adları. `v1.0.0`, `v0.7.1` sürümüne göre hiçbir komutu, bayrağı, anahtarı ya da şemayı değiştirmez.
 
 ## Varsayılan olarak özerklik, her zaman üstün gelen bir devre dışı bırakma seçeneğiyle
 

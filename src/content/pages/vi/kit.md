@@ -65,10 +65,10 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bảy addon là 
 **Phương pháp hoạt động độc lập. Tiện ích bổ sung khuếch đại nó.** Mỗi addon là một lớp tích hợp mỏng bên trong skill Deep Work Plan, được ghim theo tag vào một sản phẩm có repository, bản phát hành và phiên bản giao diện riêng. Mọi sản phẩm đều hoạt động mà không cần Deep Work Plan, và không addon nào là bắt buộc.
 
 - **Skill Deep Work Plan** — Tạo, thực thi, xác minh, tiếp tục và tinh chỉnh kế hoạch. Không cần addon nào.
-- **[herdr](/vi/kit/herdr)** — Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền. Ghim tại `herdr-peers@v0.3.2`.
-- **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v0.7.1`.
+- **[herdr](/vi/kit/herdr)** — Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền. Ghim tại `herdr-peers@v1.0.0`.
+- **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v1.0.0`.
 - **[devcontainer](/vi/kit/devcontainer)** — Dev container riêng của mỗi repository từ một template: agent qua ak, Herdr hai chiều, khóa SSH chỉ khi chủ động bật. Ghim tại `devcontainer-kit@v0.3.7`.
-- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v0.7.0`.
+- **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v1.0.0`.
 
 Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.7.1`
 

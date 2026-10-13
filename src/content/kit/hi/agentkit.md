@@ -14,7 +14,7 @@ order: 8
 
 ## kit आपको क्या देता है
 
-- **हर CLI के लिए एक व्याकरण।** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` और `ak grok`, साथ ही प्रदाता वेरिएंट (GLM, Azure, xAI), एक जैसे सत्र फ़्लैग के साथ: `-c` जारी रखता है, `-r <id>` फिर से शुरू करता है।
+- **हर CLI के लिए एक व्याकरण।** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` और `ak antigravity`, साथ ही प्रदाता रूट (Z.AI GLM, Azure OpenAI, xAI और Gemini API), एक जैसे सत्र फ़्लैग के साथ: `-c` जारी रखता है, `-r <id>` फिर से शुरू करता है।
 - **प्रोफ़ाइल।** `ak claude @work` एक दूसरे खाते को उसकी अपनी home में चलाता है, पहले खाते से अलग।
 - **headless रन।** `ak run <kind> -- "<prompt>"` एक प्रॉम्प्ट को गैर-इंटरैक्टिव रूप से चलाता है और एक प्रलेखित exit code लौटाता है, वैकल्पिक रूप से एक JSON ऑब्जेक्ट के रूप में।
 - **एक doctor।** `ak doctor --json` बताता है कि कौन-से CLI इंस्टॉल हैं, कौन-सी प्रोफ़ाइलें हैं, और सेट की गई कुंजियों के नाम — उनके मान कभी नहीं।
@@ -65,19 +65,21 @@ ak pick codex --owner local:w1:p1 --count 2      # दूसरों को ल
 ## इंस्टॉल
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v0.7.1` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
+आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v1.0.0` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, इंटरफ़ेस 1 |
+| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.0.0`, इंटरफ़ेस 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `agentkit` |
 | ट्रांसपोर्ट | headless: हर प्रत्यायोजित एजेंट के लिए एक समर्पित git worktree में एक `ak run` |
 | प्रदान करता है | `subagents`, `cancel_children`, `model_routing` |
 | आवश्यकता | योजना अनुबंध की `agent_delegation` अनुमति |
+
+**`v1.0.0` से स्थिर।** kit का सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और केवल नए मेजर संस्करण में ही असंगत रूप से बदलता है: कमांड सतह (`providers.toml` के हर kind के लिए `ak <kind> [@profile]`, और हर क्रिया अपने प्रलेखित फ़्लैग के साथ), अनुमति व्यवस्था, इंटरफ़ेस 1 (`ak doctor --json`, `ak env`, `ak run` का व्याकरण और envelope), JSON स्कीमा (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1` और `setup-verify-v1`), तथा इंस्टॉल किया गया लेआउट और env-फ़ाइल के वेरिएबल नाम। `v1.0.0`, `v0.7.1` की तुलना में कोई कमांड, फ़्लैग, कुंजी या स्कीमा नहीं बदलता।
 
 ## डिफ़ॉल्ट रूप से स्वायत्तता, ऐसे opt-out के साथ जो हमेशा प्रभावी रहता है
 

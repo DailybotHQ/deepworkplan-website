@@ -82,7 +82,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 ### Herdr (addon thứ sáu)
 
-Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v0.3.2`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
+Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v1.0.0`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
 
 - **Trang kit:** [Herdr](/kit/herdr)
 - **Bổ sung:** một kế hoạch có thể giao một tác vụ có giới hạn cho một coding agent trong một pane [Herdr](https://herdr.dev) khác, trên cùng máy hoặc trên một máy mà Herdr kết nối tới qua SSH, và ghi lại phản hồi được ủy quyền duy nhất của nó vào nhật ký
@@ -91,7 +91,7 @@ Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-
 
 ### DeepWorkPlan Vim (addon thứ bảy)
 
-Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v0.7.0`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
+Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v1.0.0`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
 
 - **Trang kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Bổ sung:** một bề mặt trình soạn thảo tùy chọn ở cấp máy cho agent và con người — chỉ mục lệnh được sinh tự động, trình duyệt kế hoạch chỉ đọc và trình xem Markdown; mọi tuyên bố đều được đọc từ bề mặt máy đọc được đã ghim của sản phẩm
@@ -100,7 +100,7 @@ Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/d
 
 ### Agentkit (addon thứ tám)
 
-Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v0.7.1`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
+Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v1.0.0`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
 
 - **Trang kit:** [Agentkit](/kit/agentkit)
 - **Bổ sung:** một bề mặt lệnh `ak` duy nhất cho các coding agent trên terminal, dùng để chạy headless một tác vụ kế hoạch có giới hạn; nó chỉ đóng góp các khả năng `subagents`, `cancel_children` và `model_routing` khi chạy, lúc được bật, được phát hiện và ở trên một giao diện tương thích

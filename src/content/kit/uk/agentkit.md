@@ -14,7 +14,7 @@ order: 8
 
 ## Що дає kit
 
-- **Одна граматика для кожного CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` і `ak grok`, а також варіанти провайдерів (GLM, Azure, xAI), з тими самими прапорцями сесії: `-c` продовжує, `-r <id>` відновлює.
+- **Одна граматика для кожного CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` і `ak antigravity`, а також маршрути провайдерів (Z.AI GLM, Azure OpenAI, xAI і Gemini API), з тими самими прапорцями сесії: `-c` продовжує, `-r <id>` відновлює.
 - **Профілі.** `ak claude @work` запускає другий обліковий запис у власному домашньому каталозі, відокремленому від першого.
 - **Headless-запуски.** `ak run <kind> -- "<prompt>"` виконує один промпт неінтерактивно й повертає задокументований код виходу, за бажанням як один JSON-об’єкт.
 - **Doctor.** `ak doctor --json` повідомляє, які CLI встановлено, профілі та назви заданих ключів — ніколи їхні значення.
@@ -65,19 +65,21 @@ ak pick codex --owner local:w1:p1 --count 2      # пропустити облі
 ## Встановлення
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v0.7.1`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
+Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v1.0.0`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/coding-agents-kit`, тег `v0.7.1`, інтерфейс 1 |
+| Продукт | `DailybotHQ/coding-agents-kit`, тег `v1.0.0`, інтерфейс 1 |
 | Ключ реєстру | `agentkit` у `.dwp/config.json` |
 | Транспорт | headless: один `ak run` на делегата в окремому git worktree |
 | Надає | `subagents`, `cancel_children`, `model_routing` |
 | Потребує | дозволу `agent_delegation` у контракті плану |
+
+**Стабільний починаючи з `v1.0.0`.** Публічний інтерфейс kit дотримується семантичного версіонування й змінюється несумісно лише в новій мажорній версії: командна поверхня (`ak <kind> [@profile]` для кожного виду в `providers.toml` і кожне дієслово з його задокументованими прапорцями), політика дозволів, інтерфейс 1 (`ak doctor --json`, `ak env`, граматика та конверт `ak run`), JSON-схеми (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), а також встановлена структура файлів і назви змінних в env-файлі. `v1.0.0` не змінює жодної команди, прапорця, ключа чи схеми порівняно з `v0.7.1`.
 
 ## Автономія за замовчуванням із відмовою, яка завжди перемагає
 

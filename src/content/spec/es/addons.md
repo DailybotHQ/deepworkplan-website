@@ -82,7 +82,7 @@ El **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marke
 
 ### Herdr (sexto addon)
 
-Un integrador ligero de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fijado en `v0.3.2`, protocolo `1`), el transporte de delegación **interactiva** de los planes v7.
+Un integrador ligero de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fijado en `v1.0.0`, protocolo `1`), el transporte de delegación **interactiva** de los planes v7.
 
 - **Página del kit:** [Herdr](/kit/herdr)
 - **Qué añade:** un plan puede entregar una tarea acotada a un agente de codificación en otro panel de [Herdr](https://herdr.dev), en la misma máquina o en una que Herdr alcance por SSH, y registrar en el diario su única respuesta autorizada
@@ -91,7 +91,7 @@ Un integrador ligero de [herdr-peers](https://github.com/DailybotHQ/herdr-peers)
 
 ### DeepWorkPlan Vim (séptimo addon)
 
-Un integrador ligero de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fijado en `v0.7.0`, interfaz `1`), el editor de terminal para Deep Work Plan (Neovim 0.12+).
+Un integrador ligero de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fijado en `v1.0.0`, interfaz `1`), el editor de terminal para Deep Work Plan (Neovim 0.12+).
 
 - **Página del kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Qué añade:** una superficie de editor opcional, a nivel de máquina, para agentes y humanos — un índice de comandos generado, un explorador de planes de solo lectura y un visor de Markdown; cada afirmación se lee de la superficie legible por máquina fijada del producto
@@ -100,7 +100,7 @@ Un integrador ligero de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepwor
 
 ### Agentkit (octavo addon)
 
-Un integrador ligero de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v0.7.1`, interfaz `1`), el transporte de delegación **sin interfaz** (headless) de los planes v7.
+Un integrador ligero de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v1.0.0`, interfaz `1`), el transporte de delegación **sin interfaz** (headless) de los planes v7.
 
 - **Página del kit:** [Agentkit](/kit/agentkit)
 - **Qué añade:** una única superficie de comandos `ak` sobre los agentes de codificación de terminal, usada para ejecutar sin interfaz una tarea acotada del plan; aporta las capacidades `subagents`, `cancel_children` y `model_routing` solo en tiempo de ejecución, cuando está habilitado, detectado y sobre una interfaz compatible

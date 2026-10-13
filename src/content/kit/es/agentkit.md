@@ -14,7 +14,7 @@ Este addon integra el kit en **DWP v7** (pack `v7.7.1`) como transporte de deleg
 
 ## Qué te da el kit
 
-- **Una gramática para cada CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` y `ak grok`, más variantes de proveedor (GLM, Azure, xAI), con las mismas opciones de sesión: `-c` continúa, `-r <id>` reanuda.
+- **Una gramática para cada CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` y `ak antigravity`, más rutas de proveedor (Z.AI GLM, Azure OpenAI, xAI y la API de Gemini), con las mismas opciones de sesión: `-c` continúa, `-r <id>` reanuda.
 - **Perfiles.** `ak claude @work` ejecuta una segunda cuenta en su propio directorio home, separada de la primera.
 - **Ejecuciones sin interfaz.** `ak run <kind> -- "<prompt>"` ejecuta un prompt de forma no interactiva y devuelve un código de salida documentado, opcionalmente como un único objeto JSON.
 - **Un diagnóstico.** `ak doctor --json` informa qué CLI están instaladas, los perfiles y los nombres de las claves configuradas, nunca sus valores.
@@ -65,19 +65,21 @@ El trabajo se mueve solo entre las cuentas que declaraste para el plan, dentro d
 ## Instalación
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v0.7.1`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
+Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v1.0.0`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, interfaz 1 |
+| Producto | `DailybotHQ/coding-agents-kit`, tag `v1.0.0`, interfaz 1 |
 | Clave de registro | `agentkit` en `.dwp/config.json` |
 | Transporte | sin interfaz: un `ak run` por delegado en un worktree de git dedicado |
 | Proporciona | `subagents`, `cancel_children`, `model_routing` |
 | Requiere | la concesión `agent_delegation` del contrato del plan |
+
+**Estable desde `v1.0.0`.** La interfaz pública del kit sigue el versionado semántico y solo cambia de forma incompatible en una nueva versión mayor: la superficie de comandos (`ak <kind> [@profile]` para cada tipo definido en `providers.toml`, y cada verbo con sus opciones documentadas), la postura de permisos, la interfaz 1 (`ak doctor --json`, `ak env`, la gramática y el sobre de `ak run`), los esquemas JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), y la estructura de instalación y los nombres de las variables del archivo de entorno. `v1.0.0` no cambia ningún comando, opción, clave ni esquema respecto de `v0.7.1`.
 
 ## Autonomía por defecto, con una exclusión que siempre prevalece
 

@@ -14,7 +14,7 @@ Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.7.1`) làm phương th
 
 ## Bộ kit mang lại cho bạn những gì
 
-- **Một cú pháp cho mọi CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` và `ak grok`, cùng các biến thể nhà cung cấp (GLM, Azure, xAI), với cùng các cờ phiên: `-c` để tiếp tục, `-r <id>` để khôi phục.
+- **Một cú pháp cho mọi CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` và `ak antigravity`, cùng các tuyến nhà cung cấp (Z.AI GLM, Azure OpenAI, xAI và Gemini API), với cùng các cờ phiên: `-c` để tiếp tục, `-r <id>` để khôi phục.
 - **Hồ sơ.** `ak claude @work` chạy một tài khoản thứ hai trong thư mục home riêng, tách biệt với tài khoản thứ nhất.
 - **Chạy headless.** `ak run <kind> -- "<prompt>"` chạy một prompt ở chế độ không tương tác và trả về một mã thoát đã được tài liệu hóa, tùy chọn dưới dạng một đối tượng JSON duy nhất.
 - **Công cụ chẩn đoán.** `ak doctor --json` báo cáo những CLI nào đã được cài, các hồ sơ, và tên của các khóa đã được thiết lập — không bao giờ là giá trị của chúng.
@@ -65,19 +65,21 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v0.7.1`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.0.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.0.0`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |
 | Yêu cầu | quyền `agent_delegation` trong hợp đồng của kế hoạch |
+
+**Ổn định từ `v1.0.0`.** Giao diện công khai của bộ kit tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới: bề mặt lệnh (`ak <kind> [@profile]` cho mọi kind trong `providers.toml`, và mọi động từ cùng các cờ được tài liệu hóa), chế độ cấp quyền, giao diện 1 (`ak doctor --json`, `ak env`, cú pháp và envelope của `ak run`), các schema JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1` và `setup-verify-v1`), cùng bố cục cài đặt và tên biến trong tệp env. `v1.0.0` không thay đổi lệnh, cờ, khóa hay schema nào so với `v0.7.1`.
 
 ## Tự chủ theo mặc định, với lựa chọn opt-out luôn được ưu tiên
 

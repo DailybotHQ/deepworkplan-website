@@ -14,22 +14,24 @@ order: 7
 
 ## 何を統合するか
 
-このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v0.3.2`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
+このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v1.0.0`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/herdr-peers`、タグ `v0.3.2`、プロトコル 1 |
+| プロダクト | `DailybotHQ/herdr-peers`、タグ `v1.0.0`、プロトコル 1 |
 | レジストリキー | `.dwp/config.json` 内の `herdr` |
 | トランスポート | 対話型：Herdr ペイン内のピア |
 | 提供するもの | `subagents`、`cancel_children` |
 | 必要なもの | 計画コントラクトの `agent_delegation` 付与 |
+
+**`v1.0.0` 以降は安定版です。** 公開インターフェースはセマンティックバージョニングに従います。対象は、CLI の動詞とドキュメント化されたフラグ、終了コード `0`–`7`、ドキュメント化された `HERDR_PEERS_*`、`DWP_PLAN`、`DWP_TASK` 変数、プロトコル 1、そして JSON コントラクト `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` と委任レコードです。これらのいずれかに対する破壊的変更はメジャーバージョンを上げ、ワイヤーフォーマットの変更はさらにプロトコル番号も上げます。`v1.0.0` は `v0.3.3` から動作を一切変えておらず、0.x 系のリリースはサポート対象外になりました。
 
 ## インストール
 
 herdr-peers と、それが依存する Herdr 公式のスキル をインストールします。エージェントに回答させたいすべてのマシンにも、このスキル が必要です。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v0.3.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -73,7 +75,7 @@ devcontainer-kit `v0.3.7` 上の [devcontainer](/kit/devcontainer) アドオン�
 
 ## 通知とリーダーシップ
 
-herdr-peers `v0.3.2` は、スウォームがリードを失っても続けられるようにする機能を加えます（[スウォームの自律性](/ja/methodology/07-swarm-autonomy)）。
+herdr-peers (`v0.3.2`) は、スウォームがリードを失っても続けられるようにする機能を加えます（[スウォームの自律性](/ja/methodology/07-swarm-autonomy)）。
 
 - **通知。** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` は、`reply=no` のスタンプが付いた一方向のメッセージを送ります。受け手の `check` はそれを通知として分類し、データとして記録し、決して返信しません。通知はファンアウトの枠を消費せず、ask が開いている間でも送れます。ハンドオフの告知、リードの交代、リリースの一斉通知に使います。
 - **計画ごとのリードレコード。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` は、あるエージェントを一つの計画のリードにします。`lead show` はそのレコードを表示します（スキーマ `herdr-peers/lead-v1`：計画、リード、エポック、継承順、レーン、更新時刻）。`lead handover <addr> --plan <P>` はリーダーシップを引き渡し、`lead takeover --plan <P>` はリードがいなくなったときに最初に到達できる代理がそれを引き継ぐようにし、`lead release --plan <P>` はそれを終えます。変更のたびにエポックが上がり、すべてのレーンに通知されます。レーンを起動する前に計画を claim します。`lead` はレコードが存在して初めて解決されます。`v0.3.2` からレコードは claim したリポジトリをローカルに保持し、別のリポジトリからの同じ計画 id の claim を拒否します。その計画は `--plan <repo>/<id>` と指定します。

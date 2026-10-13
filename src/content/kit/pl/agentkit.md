@@ -14,7 +14,7 @@ Ten addon integruje kit z **DWP v7** (pakiet `v7.7.1`) jako transport delegowani
 
 ## Co daje kit
 
-- **Jedna składnia dla każdego CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline` i `ak grok`, a także warianty dostawców (GLM, Azure, xAI), z tymi samymi flagami sesji: `-c` kontynuuje, `-r <id>` wznawia.
+- **Jedna składnia dla każdego CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` i `ak antigravity`, a także trasy dostawców (Z.AI GLM, Azure OpenAI, xAI i Gemini API), z tymi samymi flagami sesji: `-c` kontynuuje, `-r <id>` wznawia.
 - **Profile.** `ak claude @work` uruchamia drugie konto we własnym katalogu domowym, oddzielone od pierwszego.
 - **Uruchomienia headless.** `ak run <kind> -- "<prompt>"` wykonuje jeden prompt nieinteraktywnie i zwraca udokumentowany kod wyjścia, opcjonalnie jako jeden obiekt JSON.
 - **Doctor.** `ak doctor --json` raportuje, które CLI są zainstalowane, profile oraz nazwy ustawionych kluczy — nigdy ich wartości.
@@ -65,19 +65,21 @@ Praca przemieszcza się wyłącznie między kontami, które zadeklarowałeś dla
 ## Instalacja
 
 ```bash
-git clone --branch v0.7.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v0.7.1`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
+Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v1.0.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, tag `v0.7.1`, interfejs 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, tag `v1.0.0`, interfejs 1 |
 | Klucz rejestru | `agentkit` w `.dwp/config.json` |
 | Transport | headless: jedno `ak run` na delegata w dedykowanym git worktree |
 | Zapewnia | `subagents`, `cancel_children`, `model_routing` |
 | Wymaga | uprawnienia `agent_delegation` w kontrakcie planu |
+
+**Stabilny od `v1.0.0`.** Publiczny interfejs kitu stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie tylko w nowej wersji głównej: powierzchnia poleceń (`ak <kind> [@profile]` dla każdego rodzaju w `providers.toml` oraz każdy czasownik z udokumentowanymi flagami), polityka uprawnień, interfejs 1 (`ak doctor --json`, `ak env`, składnia i koperta `ak run`), schematy JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`) oraz zainstalowany układ i nazwy zmiennych w pliku env. `v1.0.0` nie zmienia żadnego polecenia, flagi, klucza ani schematu względem `v0.7.1`.
 
 ## Autonomia domyślnie, z rezygnacją, która zawsze wygrywa
 
