@@ -118,6 +118,37 @@ pnpm run astro:check
 pnpm run build
 ```
 
+### Step 5: Prove currency, not just existence (all 17 languages)
+
+`pnpm run i18n:check` proves that every file exists and uses the right script.
+It does **not** prove that a translation carries the current English content: in
+PLAN_020 four kit command pages passed it while 8–14 languages still held the
+pre-v7 text. After an English change, check every language against English:
+
+```bash
+# Same number of ##/### headings as English (a missing section is a stale translation)
+python3 - <<'PY'
+import glob, os, re
+for en in glob.glob('src/content/<collection>/en/*'):
+    h = len(re.findall(r'^#{2,3} ', open(en).read(), re.M))
+    for f in glob.glob(en.replace('/en/', '/*/')):
+        n = len(re.findall(r'^#{2,3} ', open(f).read(), re.M))
+        if n != h: print(f, n, 'vs en', h)
+PY
+```
+
+Also confirm that each language's file changed in the same commit range as the
+English edit (`git diff --numstat <base>..HEAD -- src/content/<collection>`).
+The frontmatter `description` must stay within 130–160 characters (60–90 for zh/ja/ko).
+
+### Fan-out for large syncs (Claude Code)
+
+For a change that touches many files in all 16 non-English languages, commit the
+English change first, then give one helper agent four languages each (for
+example es/pt/fr/it, de/ru/uk/pl, zh/ja/ko/th, tr/id/vi/hi). Each helper applies
+`git show <en-commit>` to its own language folders only. The lead reviews the
+helpers' self-checks, reruns the checks above, commits, and owns the result.
+
 ## Output Format
 
 ### Success Output
