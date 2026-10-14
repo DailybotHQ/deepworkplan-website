@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -88,5 +88,48 @@ describe('public/_redirects', () => {
       to: 'vim/install.sh.sha256',
       status: 301,
     });
+  });
+});
+
+describe('kit examples live only under /examples', () => {
+  // Kit entries of kind `example` are served at /examples/<slug>. The kit
+  // routes must not render them a second time (duplicate pages and meta
+  // descriptions), and the old /kit/<slug> URLs must 301 to /examples/<slug>.
+  const kitDir = resolve(process.cwd(), 'src/content/kit/en');
+  const exampleSlugs = readdirSync(kitDir)
+    .filter((file) =>
+      /^kind:\s*example\s*$/m.test(readFileSync(resolve(kitDir, file), 'utf8'))
+    )
+    .map((file) => file.replace(/\.mdx?$/, ''));
+
+  it('finds the example entries', () => {
+    expect(exampleSlugs.length).toBeGreaterThan(0);
+  });
+
+  it('redirects every /kit/<example> page and Markdown twin to /examples', () => {
+    for (const slug of exampleSlugs) {
+      expect(REDIRECT_PAIRS).toContainEqual({
+        from: `kit/${slug}`,
+        to: `examples/${slug}`,
+        status: 301,
+      });
+      expect(REDIRECT_PAIRS).toContainEqual({
+        from: `kit/${slug}.md`,
+        to: `examples/${slug}.md`,
+        status: 301,
+      });
+    }
+  });
+
+  it('keeps example entries out of every kit route', () => {
+    for (const route of [
+      'src/pages/kit/[slug].astro',
+      'src/pages/kit/[slug].md.ts',
+      'src/pages/[lang]/kit/[slug].astro',
+      'src/pages/[lang]/kit/[slug].md.ts',
+    ]) {
+      const source = readFileSync(resolve(process.cwd(), route), 'utf8');
+      expect(source, route).toMatch(/kind !== 'example'/);
+    }
   });
 });

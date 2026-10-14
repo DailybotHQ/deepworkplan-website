@@ -137,7 +137,7 @@ Adapters DWP कमांड्स को विशिष्ट agent की क
 
 ## Examples
 
-Examples DWP को व्यवहार में दर्शाते हैं: before/after तुलना, नमूना योजनाएँ, case studies। [Examples](/examples) और [Dogfood this site](/kit/dogfood-this-site) देखें।
+Examples DWP को व्यवहार में दर्शाते हैं: before/after तुलना, नमूना योजनाएँ, case studies। [Examples](/examples) और [Dogfood this site](/examples/dogfood-this-site) देखें।
 
 ## अनुरूपता अनुस्मारक
 

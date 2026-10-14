@@ -5,8 +5,11 @@ import { serializeReaderEntryToAgentMarkdown } from '@/lib/markdown-for-agents';
 
 export const getStaticPaths: GetStaticPaths = async () => {
   const entries = await getCollection('kit');
+  // Examples are served once, at /examples/<slug> (redirects in redirect-map.ts).
   return entries
-    .filter((entry) => entry.data.lang === 'en')
+    .filter(
+      (entry) => entry.data.lang === 'en' && entry.data.kind !== 'example'
+    )
     .map((entry) => ({
       params: { slug: entry.id.replace(/^en\//, '') },
       props: { entry },

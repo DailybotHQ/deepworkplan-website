@@ -137,7 +137,7 @@ Adapters แมปคำสั่ง DWP ไปยังระบบคำสั
 
 ## Examples
 
-Examples แสดง DWP ในทางปฏิบัติ: เปรียบเทียบก่อน/หลัง แผนตัวอย่าง กรณีศึกษา ดู [Examples](/examples) และ [Dogfood this site](/kit/dogfood-this-site)
+Examples แสดง DWP ในทางปฏิบัติ: เปรียบเทียบก่อน/หลัง แผนตัวอย่าง กรณีศึกษา ดู [Examples](/examples) และ [Dogfood this site](/examples/dogfood-this-site)
 
 ## การเตือนเรื่องการสอดคล้อง
 

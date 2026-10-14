@@ -137,7 +137,7 @@ Adapters map DWP commands to a specific agent's command system (Claude Code, Cur
 
 ## Examples
 
-Examples demonstrate DWP in practice: before/after comparisons, sample plans, case studies. See [Examples](/examples) and [Dogfood this site](/kit/dogfood-this-site).
+Examples demonstrate DWP in practice: before/after comparisons, sample plans, case studies. See [Examples](/examples) and [Dogfood this site](/examples/dogfood-this-site).
 
 ## Conformance reminder
 

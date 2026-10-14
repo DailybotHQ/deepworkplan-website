@@ -137,7 +137,7 @@ Adapter memetakan perintah DWP ke sistem perintah agen tertentu (Claude Code, Cu
 
 ## Contoh
 
-Contoh mendemonstrasikan DWP dalam praktik: perbandingan sebelum/sesudah, rencana contoh, studi kasus. Lihat [Examples](/examples) dan [Dogfood this site](/kit/dogfood-this-site).
+Contoh mendemonstrasikan DWP dalam praktik: perbandingan sebelum/sesudah, rencana contoh, studi kasus. Lihat [Examples](/examples) dan [Dogfood this site](/examples/dogfood-this-site).
 
 ## Pengingat konformitas
 

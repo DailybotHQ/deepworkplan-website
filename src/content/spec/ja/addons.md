@@ -137,7 +137,7 @@ section: Addons
 
 ## 例
 
-例は DWP の実践を示す：前後比較、サンプルプラン、ケーススタディ。[Examples](/examples) と [Dogfood this site](/kit/dogfood-this-site) を参照。
+例は DWP の実践を示す：前後比較、サンプルプラン、ケーススタディ。[Examples](/examples) と [Dogfood this site](/examples/dogfood-this-site) を参照。
 
 ## 適合リマインダー
 

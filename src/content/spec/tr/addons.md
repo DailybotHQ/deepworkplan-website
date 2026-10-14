@@ -137,7 +137,7 @@ Adapter'lar DWP komutlarını belirli bir agent'ın komut sistemine eşler (Clau
 
 ## Örnekler
 
-Örnekler DWP'yi uygulamada gösterir: önce/sonra karşılaştırmaları, örnek planlar, vaka çalışmaları. [Examples](/examples) ve [Dogfood this site](/kit/dogfood-this-site)'e bakın.
+Örnekler DWP'yi uygulamada gösterir: önce/sonra karşılaştırmaları, örnek planlar, vaka çalışmaları. [Examples](/examples) ve [Dogfood this site](/examples/dogfood-this-site)'e bakın.
 
 ## Uyumluluk hatırlatması
 
