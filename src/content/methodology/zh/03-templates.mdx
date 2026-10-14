@@ -18,7 +18,7 @@ import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
 
 一份计划是 `.dwp/plans/` 下一个名为 `PLAN_001_<slug>/` 的目录。它包含：
 
-- `manifest.json` —— 计划标识及指向实时合约的指针（在实例化时最先写入）。
+- `manifest.json` —— 计划的标识以及指向其实时合约的指针，在实例化时最先写入。
 - `contract.json` —— 不可变且内容寻址的成果契约（验收标准、范围、不变量）。
 - `journal.ndjson` —— 仅追加的账本事件执行日志。
 - `state.json` —— 从 journal 投射出的快照，绝不可手动编辑。
@@ -37,11 +37,11 @@ import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
 
 每份计划都必须以唯一一项强制任务收尾：**Final Review**。它按五个严格顺序环节闭环整个计划——安全审查和验证关卡绝不放宽：
 
-1. **安全审查** —— 审计计划改动的一切内容以排查密钥泄露、注入风险与新攻击面，并保持 `docs/SECURITY.md` 最新；若存在 `.agents/skills/ai-diff-reviewer/` 及扩展文件，执行必需的本地审查。每份计划都对自身改动完成审计，阻断级严重缺陷阻止完成。
+1. **安全审查** —— 审计计划改动的一切内容以排查密钥、注入风险与新攻击面，保持 `docs/SECURITY.md` 最新，并在计划的全部范围内运行必需的本地 AI Diff Reviewer 审查（缺少审查器会被记录为 `local reviewer not installed` 发现项，绝不能静默跳过）。阻断级严重缺陷阻止完成。
 2. **最终状态验证** —— 仓库全部适用的测试、代码检查与类型检查套件在最终状态下运行并通过。审查过程中的任何修复都会使受影响结果失效并触发重新运行。
 3. **技能决策核对** —— 验证每项任务均已记录任务局部的技能处置，并在 `analysis_results/SKILLS_CANDIDATES.md` 中核对所有合理的技能编写事项。
 4. **文档对齐核对** —— 将每项改变行为的任务的触及面与登记该特性的文档（`docs/TESTING_GUIDE.md`、架构文档与 `AGENTS.md`）进行对齐比对并补齐。
-5. **完成** —— 计划记录保持一致（任务列表、进度日志，以及在 v6/v7 计划中由 journal 衍生的快照与收据）；报告交付成果、证据与局限性，并提供一次 Executive Report。
+5. **完成** —— 计划记录保持一致（任务列表、进度日志，以及在 v6 与 v7 计划中由 journal 衍生的快照与收据）；报告交付成果、证据与局限性，并提供一次 Executive Report。
 
 ## README 与 PROGRESS 约定
 

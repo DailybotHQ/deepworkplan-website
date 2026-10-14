@@ -18,10 +18,10 @@ Un Deep Work Plan est un répertoire de fichiers Markdown. La forme de ce réper
 
 Un plan est un répertoire sous `.dwp/plans/` nommé `PLAN_001_<slug>/`. Il contient :
 
-- `manifest.json` — identité du plan et pointeur vers le contrat actif (écrit en premier lors de la matérialisation).
+- `manifest.json` — l'identité du plan et le pointeur vers son contrat actif, écrit en premier lors de la matérialisation.
 - `contract.json` — contrat de spécification et périmètre du plan.
 - `journal.ndjson` — journal d’événements en ajout seul.
-- `state.json` — instantané projeté depuis le journal, jamais modifié manuellement.
+- `state.json` — un instantané projeté depuis le journal, jamais modifié manuellement.
 - `README.md` — vue d’ensemble du plan : objectif, tableau des tâches et statut.
 - `PROGRESS.md` — journal d’exécution chronologique lisible par l’humain.
 - `<n>.task_<slug>.md` — fichier de spécification en dix sections par tâche.
@@ -37,11 +37,11 @@ Chaque fichier de tâche est nommé `<n>.task_<slug>.md` et suit les dix section
 
 Tout plan doit se terminer par exactement une tâche obligatoire : le **Final Review**. Il clôt le plan en cinq étapes strictement ordonnées — les contrôles de sécurité et portes de validation ne sont en aucun cas relâchés :
 
-1. **Passe de sécurité** — auditer tout ce que le plan a changé à la recherche de secrets, risques d’injection et nouvelle surface d’attaque, et garder `docs/SECURITY.md` à jour ; si `.agents/skills/ai-diff-reviewer/` et son extension existent, exécuter la revue locale obligatoire. Les découvertes critiques bloquent l’achèvement.
+1. **Passe de sécurité** — auditer tout ce que le plan a changé à la recherche de secrets, risques d'injection et nouvelle surface d'attaque, garder `docs/SECURITY.md` à jour et exécuter la revue locale obligatoire AI Diff Reviewer sur l'ensemble de la portée du plan (un examinateur manquant est consigné comme un résultat `local reviewer not installed`, jamais ignoré silencieusement). Une découverte critique bloque l'achèvement.
 2. **Validation de l’état final** — les suites complètes de tests, linting et vérification de types du dépôt s’exécutent et réussissent sur l’état final. Tout correctif intervenu lors de la revue invalide les résultats affectés et déclenche une réexécution.
 3. **Réconciliation des compétences** — vérifier que chaque tâche a consigné sa disposition locale de compétences, et rapprocher les opportunités de rédaction dans `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Réconciliation documentaire** — rapprocher la surface touchée de chaque tâche modifiant le comportement avec la documentation (`docs/TESTING_GUIDE.md`, architecture, `AGENTS.md`) qui consigne cette fonctionnalité.
-5. **Achèvement** — les registres du plan concordent (liste des tâches, journal de progression et, pour les plans v6/v7, instantané et reçu dérivés du journal) ; présenter les livrables, preuves et limites, et proposer l'Executive Report une seule fois.
+5. **Achèvement** — les registres du plan concordent (liste des tâches, journal de progression et, pour les plans v6 et v7, l'instantané et le reçu dérivés du journal) ; présenter les livrables, preuves et limites, et proposer l'Executive Report une seule fois.
 
 ## Conventions README et PROGRESS
 

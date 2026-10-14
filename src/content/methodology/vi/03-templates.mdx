@@ -19,10 +19,10 @@ Một Deep Work Plan là một thư mục các tệp markdown. Hình dạng củ
 Một kế hoạch là một thư mục dưới `.dwp/plans/` được đặt tên `PLAN_001_<slug>/`. Nó chứa:
 
 
-- `manifest.json` — danh tính kế hoạch và con trỏ tới hợp đồng trực tiếp (được ghi đầu tiên khi hiện thực hóa).
+- `manifest.json` — danh tính của kế hoạch và con trỏ tới hợp đồng trực tiếp của nó, được ghi đầu tiên khi hiện thực hóa.
 - `contract.json` — hợp đồng thực thi chính thức.
 - `journal.ndjson` — nhật ký sự kiện chỉ ghi thêm bất biến.
-- `state.json` — ảnh chụp nhanh được chiếu từ journal, không bao giờ chỉnh sửa thủ công.
+- `state.json` — ảnh chụp nhanh được chiếu từ journal, không bao giờ chỉnh sửa bằng tay.
 - `README.md` — tổng quan kế hoạch: mục tiêu, tài liệu nguồn, bảng tác vụ và trạng thái.
 - Các tệp tác vụ, đặt tên `<n>.task_<slug>.md`.
 - `PROGRESS.md` — nhật ký thực thi chỉ ghi thêm.
@@ -39,11 +39,11 @@ Mỗi tệp tác vụ được đặt tên `<n>.task_<slug>.md` và tuân theo c
 
 Mọi kế hoạch phải kết thúc bằng đúng một tác vụ bắt buộc: **Final Review**. Nó khép lại kế hoạch qua năm bước tuần tự — không có gì trong bước rà soát bảo mật bị nới lỏng:
 
-1. **Lượt rà soát bảo mật với đánh giá cục bộ bắt buộc** — kiểm toán mọi thứ kế hoạch đã thay đổi để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới bằng cách chạy đánh giá cục bộ AI Diff Reviewer và giữ `docs/SECURITY.md` luôn cập nhật.
+1. **Lượt rà soát bảo mật với đánh giá cục bộ bắt buộc** — kiểm toán mọi thứ kế hoạch đã thay đổi để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới, giữ `docs/SECURITY.md` luôn cập nhật, và chạy đánh giá cục bộ AI Diff Reviewer bắt buộc trên toàn bộ phạm vi của kế hoạch (người đánh giá bị thiếu được ghi lại dưới dạng phát hiện `local reviewer not installed`, không bao giờ bị bỏ qua trong im lặng). Một phát hiện nghiêm trọng sẽ chặn việc hoàn thành.
 2. **Kiểm chứng trạng thái cuối cùng** — toàn bộ bộ kiểm thử, linter và kiểm tra kiểu của repository chạy và vượt qua trên trạng thái cuối cùng sau sửa đổi cuối.
 3. **Đối chiếu quyết định về skill** — xác minh rằng mỗi tác vụ đã ghi lại quyết định skill cục bộ, đối chiếu các ứng viên trong `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Đối chiếu tài liệu** — liên kết bề mặt chạm tới của mỗi tác vụ làm thay đổi hành vi với tài liệu (`docs/TESTING_GUIDE.md`, kiến trúc, `AGENTS.md`).
-5. **Hoàn thành** — các bản ghi của kế hoạch đồng nhất (danh sách nhiệm vụ, nhật ký tiến độ và trong kế hoạch v6/v7 là ảnh chụp nhanh cùng biên nhận phái sinh từ journal); báo cáo kết quả bàn giao, bằng chứng và giới hạn, đồng thời đề xuất Executive Report một lần.
+5. **Hoàn thành** — các bản ghi của kế hoạch đồng nhất (danh sách nhiệm vụ, nhật ký tiến độ và trong kế hoạch v6 và v7 là ảnh chụp nhanh cùng biên nhận phái sinh từ journal); báo cáo kết quả bàn giao, bằng chứng và giới hạn, đồng thời đề xuất Executive Report một lần.
 
 ## Các quy ước README và PROGRESS
 

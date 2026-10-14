@@ -19,10 +19,10 @@ Bir Deep Work Plan, Markdown dosyalarından oluşan bir dizindir. O dizinin — 
 Bir plan, `.dwp/plans/` altında `PLAN_001_<slug>/` olarak adlandırılmış bir dizindir. Şunları içerir:
 
 
-- `manifest.json` — plan kimliği ve etkin sözleşmeye yönelik işaretçi (somutlaştırmada ilk yazılan).
+- `manifest.json` — planın kimliği ve etkin sözleşmesine yönelik işaretçi, somutlaştırmada ilk yazılan.
 - `contract.json` — resmi yürütme sözleşmesi.
 - `journal.ndjson` — değişmez olay günlüğü.
-- `state.json` — journal üzerinden yansıtılan anlık görüntü, asla elle düzenlenmez.
+- `state.json` — journal üzerinden yansıtılan bir anlık görüntü, asla elle düzenlenmez.
 - `README.md` — plan genel görünümü: hedef, kaynak materyal, görev tablosu ve durum.
 - Görev dosyaları, `<n>.task_<slug>.md` olarak adlandırılır.
 - `PROGRESS.md` — yalnızca ekleme yapılan yürütme günlüğü.
@@ -39,11 +39,11 @@ Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılır ve [Çekirdek d�
 
 Her plan, tam olarak tek bir zorunlu görevle bitmelidir: **Final Review**. Planı beş sıralı adımda kapatır — güvenlik incelemesinde hiçbir şey gevşetilmez:
 
-1. **Gerekli yerel incelemeyle güvenlik geçişi** — AI Diff Reviewer yerel incelemesini çalıştırarak ve `docs/SECURITY.md` dosyasını güncel tutarak, planın değiştirdiği her şeyi sırlar, enjeksiyon riskleri ve saldırı yüzeyi açısından denetler.
+1. **Gerekli yerel incelemeyle güvenlik geçişi** — planın değiştirdiği her şeyi sırlar, enjeksiyon riskleri ve yeni saldırı yüzeyi açısından denetleyin, `docs/SECURITY.md` dosyasını güncel tutun ve planın tüm kapsamı üzerinde gerekli yerel AI Diff Reviewer incelemesini çalıştırın (eksik bir incelemeci sessizce atlanmaz, `local reviewer not installed` bulgusu olarak kaydedilir). Kritik bir bulgu tamamlamayı engeller.
 2. **Son durum doğrulaması** — deponun tam test, linter ve tip denetim paketleri, son düzeltmeden sonra son durum üzerinde çalışır ve geçer.
 3. **Yetenek kararlarının uzlaştırılması** — her görevin yerel bir yetenek kararı kaydettiğini doğrular ve `analysis_results/SKILLS_CANDIDATES.md` içindeki adayları uzlaştırır.
 4. **Belgelendirme uzlaştırması** — davranış değiştiren her görevin dokunduğu yüzeyi belgeleyen kılavuzlarla (`docs/TESTING_GUIDE.md`, mimari, `AGENTS.md`) eşleştirir.
-5. **Tamamlama** — plan kayıtları birbiriyle uyumludur (görev listesi, ilerleme günlüğü ve v6/v7 planlarında journal türevli anlık görüntü ve makbuz); teslimatları, kanıtları ve sınırlamaları bildirin ve Executive Report'u bir kez sunun.
+5. **Tamamlama** — plan kayıtları birbiriyle uyumludur (görev listesi, ilerleme günlüğü ve v6 ile v7 planlarında journal türevli anlık görüntü ve makbuz); teslimatları, kanıtları ve sınırlamaları bildirin ve Executive Report'u bir kez sunun.
 
 ## README ve PROGRESS kuralları
 
