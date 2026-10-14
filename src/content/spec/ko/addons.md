@@ -137,7 +137,7 @@ section: Addons
 
 ## 예제
 
-예제는 DWP 실천을 보여줍니다: 전후 비교, 샘플 플랜, 사례 연구. [Examples](/examples) 및 [Dogfood this site](/kit/dogfood-this-site)를 참조하세요.
+예제는 DWP 실천을 보여줍니다: 전후 비교, 샘플 플랜, 사례 연구. [Examples](/examples) 및 [Dogfood this site](/examples/dogfood-this-site)를 참조하세요.
 
 ## 적합성 알림
 

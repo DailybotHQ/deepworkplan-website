@@ -56,7 +56,7 @@ async function readRedirectPairs() {
   // from/to may contain dots or slashes (asset paths such as install.sh),
   // so the character classes are broader than the per-language pairs.
   const entryPattern =
-    /\{\s*from:\s*'([^']+)',\s*to:\s*'([^']+)',\s*status:\s*(\d+)\s*\}/g;
+    /\{\s*from:\s*'([^']+)',\s*to:\s*'([^']+)',\s*status:\s*(\d+),?\s*\}/g;
   const listMatch = src.match(/REDIRECT_PAIRS[^=]*=\s*\[([\s\S]*?)\n\];/);
   if (!listMatch) {
     throw new Error(

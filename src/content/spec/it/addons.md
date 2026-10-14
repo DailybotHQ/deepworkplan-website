@@ -137,7 +137,7 @@ Gli adapter mappano i comandi DWP al sistema di comandi di un agente specifico (
 
 ## Esempi
 
-Gli esempi dimostrano DWP nella pratica: confronti prima/dopo, piani di esempio, casi studio. Vedi [Examples](/examples) e [Dogfood this site](/kit/dogfood-this-site).
+Gli esempi dimostrano DWP nella pratica: confronti prima/dopo, piani di esempio, casi studio. Vedi [Examples](/examples) e [Dogfood this site](/examples/dogfood-this-site).
 
 ## Promemoria sulla conformità
 

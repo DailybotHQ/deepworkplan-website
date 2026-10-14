@@ -137,7 +137,7 @@ Adapter mappen DWP-Befehle auf das Befehlssystem eines bestimmten Agenten (Claud
 
 ## Beispiele
 
-Beispiele demonstrieren DWP in der Praxis: Vorher/Nachher-Vergleiche, Beispielpläne, Fallstudien. Siehe [Examples](/examples) und [Dogfood this site](/kit/dogfood-this-site).
+Beispiele demonstrieren DWP in der Praxis: Vorher/Nachher-Vergleiche, Beispielpläne, Fallstudien. Siehe [Examples](/examples) und [Dogfood this site](/examples/dogfood-this-site).
 
 ## Konformitätserinnerung
 

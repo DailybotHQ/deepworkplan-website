@@ -137,7 +137,7 @@ Los adaptadores mapean los comandos de DWP al sistema de comandos de un agente c
 
 ## Ejemplos
 
-Los ejemplos demuestran DWP en la práctica: comparaciones antes/después, planes de muestra, casos de estudio. Ver [Examples](/examples) y [Dogfood this site](/kit/dogfood-this-site).
+Los ejemplos demuestran DWP en la práctica: comparaciones antes/después, planes de muestra, casos de estudio. Ver [Examples](/examples) y [Dogfood this site](/examples/dogfood-this-site).
 
 ## Recordatorio de conformidad
 

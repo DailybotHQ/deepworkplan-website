@@ -137,7 +137,7 @@ Adapter ánh xạ lệnh DWP sang hệ thống lệnh của agent cụ thể (Cl
 
 ## Ví dụ
 
-Ví dụ minh họa DWP trong thực tế: so sánh trước/sau, kế hoạch mẫu, nghiên cứu điển hình. Xem [Examples](/examples) và [Dogfood this site](/kit/dogfood-this-site).
+Ví dụ minh họa DWP trong thực tế: so sánh trước/sau, kế hoạch mẫu, nghiên cứu điển hình. Xem [Examples](/examples) và [Dogfood this site](/examples/dogfood-this-site).
 
 ## Nhắc tuân thủ
 

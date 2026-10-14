@@ -137,7 +137,7 @@ section: Addons
 
 ## Примеры
 
-Примеры демонстрируют DWP на практике: сравнения до/после, образцовые планы, кейс-стади. См. [Examples](/examples) и [Dogfood this site](/kit/dogfood-this-site).
+Примеры демонстрируют DWP на практике: сравнения до/после, образцовые планы, кейс-стади. См. [Examples](/examples) и [Dogfood this site](/examples/dogfood-this-site).
 
 ## Напоминание о соответствии
 

@@ -137,7 +137,7 @@ Adaptery mapują polecenia DWP na system poleceń konkretnego agenta (Claude Cod
 
 ## Przykłady
 
-Przykłady pokazują DWP w praktyce: porównania przed/po, przykładowe plany, studia przypadków. Zobacz [Examples](/examples) i [Dogfood this site](/kit/dogfood-this-site).
+Przykłady pokazują DWP w praktyce: porównania przed/po, przykładowe plany, studia przypadków. Zobacz [Examples](/examples) i [Dogfood this site](/examples/dogfood-this-site).
 
 ## Przypomnienie o zgodności
 

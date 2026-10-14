@@ -137,7 +137,7 @@ section: Addons
 
 ## 示例
 
-示例演示 DWP 实践：前后对比、示例计划、案例研究。参见 [Examples](/examples) 与 [Dogfood this site](/kit/dogfood-this-site)。
+示例演示 DWP 实践：前后对比、示例计划、案例研究。参见 [Examples](/examples) 与 [Dogfood this site](/examples/dogfood-this-site)。
 
 ## 符合性提醒
 
