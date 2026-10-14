@@ -24,7 +24,7 @@ DWP komutları, ajanın çağrıldığında okuduğu markdown prosedürleri olar
 İsteğe bağlı: [coding-agents-kit](/kit/agentkit) bu CLI’yi kurabilir ve `ak codex` ile başlatabilir. Sağlayıcının kendi resmi kurulum aracı da aynı şekilde çalışır.
 
 ```bash
-git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

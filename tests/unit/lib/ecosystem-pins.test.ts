@@ -59,7 +59,17 @@ const tagPatterns = (repo: string): RegExp[] => {
       `--branch (v\\d+\\.\\d+\\.\\d+) https://github\\.com/DailybotHQ/${r}\\b`,
       'g'
     ),
-    new RegExp(`\`DailybotHQ/${r}\`, tag \`(v\\d+\\.\\d+\\.\\d+)\``, 'g'),
+    // The kit product table, in every language (`, tag`, `, Tag`, `、タグ`, …).
+    new RegExp(
+      `\`DailybotHQ/${r}\`[,、] ?[^\`|\\n]{1,12}\`(v\\d+\\.\\d+\\.\\d+)\``,
+      'g'
+    ),
+    // A linked product with its pin in the parenthetical, in every language
+    // (spec addons: `(\`dck\`, pinned \`v…\`` / `fijado en \`v…\``).
+    new RegExp(
+      `\\[${r}\\]\\([^)]*\\) [(（][^)）\\n]*?\`(v\\d+\\.\\d+\\.\\d+)\``,
+      'g'
+    ),
     new RegExp(
       `\\[${r}\\]\\([^)]*\\)[^\\n]*?pinned \`(v\\d+\\.\\d+\\.\\d+)\``,
       'g'
@@ -69,8 +79,9 @@ const tagPatterns = (repo: string): RegExp[] => {
     new RegExp(`\\b${r} (v\\d+\\.\\d+\\.\\d+)\\b`, 'g'),
     new RegExp(`\\[${r}\\]\\([^)]*\\) (v\\d+\\.\\d+\\.\\d+)\\b`, 'g'),
     new RegExp(`\\b${r}@(v\\d+\\.\\d+\\.\\d+)`, 'g'),
-    // A table row that starts with the repository (init.md, ECOSYSTEM_CONTEXT).
-    new RegExp(`^\\| ${r} \\|[^\\n]*?\\| \`(v\\d+\\.\\d+\\.\\d+)\``, 'gm'),
+    // A table row that starts with the repository (init.md, ECOSYSTEM_CONTEXT,
+    // the indented quickstart table).
+    new RegExp(`^ *\\| ${r} \\|[^\\n]*?\\| \`(v\\d+\\.\\d+\\.\\d+)\``, 'gm'),
   ];
 };
 

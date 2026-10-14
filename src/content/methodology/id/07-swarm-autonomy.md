@@ -41,7 +41,7 @@ Setiap lane memiliki rencana, setidaknya rencana Lite di repositorinya sendiri, 
 
 ## Loop kapasitas
 
-Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah gate atau langkah apa pun yang berjalan lebih dari 20 menit, setiap kali CLI-nya menampilkan peringatan batas penggunaan, dan sebelum menerima handoff atau kepemimpinan. Pemeriksaannya adalah `ak capacity --self --json` dari coding-agents-kit `v1.0.0`, yang diubah helper pack menjadi sebuah keputusan:
+Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah gate atau langkah apa pun yang berjalan lebih dari 20 menit, setiap kali CLI-nya menampilkan peringatan batas penggunaan, dan sebelum menerima handoff atau kepemimpinan. Pemeriksaannya adalah `ak capacity --self --json` dari coding-agents-kit `v1.0.1`, yang diubah helper pack menjadi sebuah keputusan:
 
 | Verdict | Keputusan | Sebuah lane | Sebuah lead, untuk dirinya sendiri |
 | --- | --- | --- | --- |

@@ -31,7 +31,7 @@ Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wa
 
 ### Devcontainer (addon pertama)
 
-Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v1.0.0`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
+Integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v1.0.1`, antarmuka `2`): template Dev Containers yang dirender `dck init` ke dalam repositori sebagai container miliknya sendiri, ditambah skill `dck-dockerfile`.
 
 - **Halaman kit:** [Devcontainer](/kit/devcontainer)
 - **Yang ditambahkan:** `docker/local/<service>/Dockerfile` dari image resmi runtime yang dipatok dengan digest (`python-3.13`, `node-24`, atau `debian`, tanpa image dasar bersama), `dev.sh` di atas launcher `dck` (`up`, `shell`, `rebuild`, `doctor`), agen coding sebagai lapisan opt-in, port khusus loopback, git melalui SSH lewat agen milik host tanpa kunci di dalamnya kecuali pengembang mengaktifkannya dengan `[ssh] copy_keys` di profil host miliknya, dan mesin Herdr per container dengan tata letak standar
@@ -100,7 +100,7 @@ Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkp
 
 ### Agentkit (addon kedelapan)
 
-Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v1.0.0`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
+Integrator tipis dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok `v1.0.1`, antarmuka `1`), transport delegasi **headless** untuk rencana v7.
 
 - **Halaman kit:** [Agentkit](/kit/agentkit)
 - **Yang ditambahkan:** satu permukaan perintah `ak` di atas coding agent terminal, digunakan untuk menjalankan tugas rencana terbatas secara headless; addon ini menyumbangkan kemampuan `subagents`, `cancel_children`, dan `model_routing` hanya saat runtime, ketika diaktifkan, terdeteksi, dan berada pada antarmuka yang kompatibel

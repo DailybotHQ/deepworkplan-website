@@ -8,7 +8,7 @@ order: 1
 
 # Аддон Devcontainer
 
-Надайте репозиторію відтворюваний, ізольований контейнер для розробки — такий, яким можуть користуватися люди, редактори та агенти для програмування. У **DWP v7** (пакет `v7.8.0`) цей аддон інтегрує **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** — продукт за ліцензією MIT, що працює без Deep Work Plan. Він опційний: репозиторій без нього повністю відповідає вимогам.
+Надайте репозиторію відтворюваний, ізольований контейнер для розробки — такий, яким можуть користуватися люди, редактори та агенти для програмування. У **DWP v7** (пакет `v7.8.1`) цей аддон інтегрує **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** — продукт за ліцензією MIT, що працює без Deep Work Plan. Він опційний: репозиторій без нього повністю відповідає вимогам.
 
 ## Що надає devcontainer-kit
 
@@ -21,15 +21,15 @@ order: 1
 ## Встановлення
 
 ```bash
-git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Вимоги: `bash` 3.2 або новіший і `python3` 3.11 або новіший на хості з Linux чи macOS, а також Docker з Compose v2 для команд контейнера. Перевірте реліз за його ресурсом `SHA256SUMS`. Закріпіть `v1.0.0`: `v0.2.0` не підтримується.
+Вимоги: `bash` 3.2 або новіший і `python3` 3.11 або новіший на хості з Linux чи macOS, а також Docker з Compose v2 для команд контейнера. Перевірте реліз за його ресурсом `SHA256SUMS`. Закріпіть `v1.0.1`: `v0.2.0` не підтримується.
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/devcontainer-kit`, тег `v1.0.0`, інтерфейс 2 |
+| Продукт | `DailybotHQ/devcontainer-kit`, тег `v1.0.1`, інтерфейс 2 |
 | Ключ реєстру | `devcontainer` у `.dwp/config.json` |
 | Конфігурація репозиторію | `.devcontainer/dck.toml` |
 | Виявлення | `dck doctor --json` |

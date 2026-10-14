@@ -42,9 +42,11 @@ services:
       - grok:/home/node/.dck/volumes/grok
       - antigravity:/home/node/.dck/volumes/antigravity
       # The host's SSH agent (git over SSH, signing) — never a key file. Docker
-      # Desktop exposes it at this path; on a Linux host set DCK_HOST_SSH_AUTH_SOCK
-      # (dck up and dck rebuild do it from $SSH_AUTH_SOCK). A missing host path
-      # fails the start instead of being created.
+      # Desktop and OrbStack expose it at this path; dck up/rebuild and dev.sh's
+      # plain-compose fallback set DCK_HOST_SSH_AUTH_SOCK by provider ($SSH_AUTH_SOCK
+      # on a native Linux engine, /dev/null elsewhere). A missing host path fails
+      # the start instead of being created: a bare `docker compose up` on another
+      # provider needs DCK_HOST_SSH_AUTH_SOCK=/dev/null (or ssh_agent = false).
       - type: bind
         source: ${DCK_HOST_SSH_AUTH_SOCK:-/run/host-services/ssh-auth.sock}
         target: /run/dck/ssh-agent.sock

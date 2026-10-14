@@ -41,10 +41,10 @@ Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prü
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- git checkout v7.8.0
+ git checkout v7.8.1
  # Prüfsummen dieses Releases herunterladen und gegen den Digest unten prüfen:
  curl -fsSL -o SHA256SUMS \
- https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.0/SHA256SUMS
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
  shasum -a 256 SHA256SUMS # muss dem deepworkplan-skill-Digest unter Gepinnte Releases entsprechen
  ./setup.sh --verify # Ein Exit-Code ungleich null bedeutet, dass eine Datei nicht übereinstimmt — stoppen
  ```
@@ -56,10 +56,10 @@ Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prü
 
   | Repository (github.com/DailybotHQ) | Tag | sha256 seiner `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.8.0` | `a43fc0f2996b2edd5e68850f62742486e1d7475314351ba3e25771fd198453e5` |
-  | coding-agents-kit | `v1.0.0` | `8995e737862c5486b3ec3d0235e82f358dbf9c20879f44afa506cf8e0721973e` |
+  | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
+  | coding-agents-kit | `v1.0.1` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
   | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
-  | devcontainer-kit | `v1.0.0` | `060d16db41214bc91b05089bc7201cf499d21e5571731954a0bb766edd7cb605` |
+  | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
   | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
   | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
   | agent-skill | `v3.23.17` | keiner veröffentlicht — die skills-CLI hält einen Inhalts-Hash in `skills-lock.json` fest |
@@ -104,7 +104,7 @@ plus neun Sub-Skills — `create`, `execute`, `refine`, `resume`, `status`, `ver
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
 ```
 
 Oder installiere über OpenClaw:
@@ -126,7 +126,7 @@ installierte Deep Work Plan Skill-Version. Das aktuelle Skill-Paket umfasst den 
 und neun Sub-Skills: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` und `upgrade`.
 
-Installierte Skill-Version: **7.8.0**. Das aktuelle 7.x-Paket erstellt neue Pläne standardmäßig mit v7. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
+Installierte Skill-Version: **7.8.1**. Das aktuelle 7.x-Paket erstellt neue Pläne standardmäßig mit v7. Bestehende Pläne behalten ihre aufgezeichnete Generation; die Migration eines v5-Plans zu v6 erfordert einen ausdrücklichen Auftrag mit Vorschau.
 
 Der Standard ist bewusst proportional und macht diese Proportionalität zu einer
 Eigenschaft des Plans, nicht der Disziplin des Entwicklers. Ein Plan ist entweder
@@ -226,9 +226,9 @@ Die Tabelle ist ein Nachschlagewerk, keine Checkliste: Führen Sie eine Zeile nu
 | --- | --- | --- |
 | AI Diff Reviewer (erforderlich) | `version:` in `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` in `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` in der installierten herdr-peers-Skill | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | der verifizierte Installer unter https://deepworkplan.com/vim/install.sh (er pinnt `v1.0.0`; herunterladen, `shasum -a 256 -c install.sh.sha256`, dann ausführen) |
 
 Verifizieren Sie jeden Download gegen die `SHA256SUMS` seines Releases und den Digest unter *Gepinnte Releases* oben,
@@ -242,7 +242,7 @@ Standard 2.3.0 erforderlich): die oben tag-gepinnte Skill plus eine repo-zugesch
 Design System, agentkit, Herdr, DeepWorkPlan Vim) und bieten Sie nur die an, die zu diesem Repository passen, jedes als explizites Opt-in. Ein
 Repository ist mit **null** optionalen Addons vollständig konform — installieren Sie diese niemals automatisch.
 
-- **Devcontainer-Unterstützung** — ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, gepinnt auf `v1.0.0`, mit seinem Skill `dck-dockerfile`): `dck init` rendert den eigenen Container des Repositorys — offizielles Image per Digest gepinnt, kein gemeinsames Basis-Image, `bash dev.sh up` — und gleicht einen bestehenden Devcontainer erst ab, nachdem dessen Diff angenommen wurde. Wenn angenommen, folgen Sie *Der Devcontainer-Pfad* unten bis zum vollständigen Stack.
+- **Devcontainer-Unterstützung** — ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, gepinnt auf `v1.0.1`, mit seinem Skill `dck-dockerfile`): `dck init` rendert den eigenen Container des Repositorys — offizielles Image per Digest gepinnt, kein gemeinsames Basis-Image, `bash dev.sh up` — und gleicht einen bestehenden Devcontainer erst ab, nachdem dessen Diff angenommen wurde. Wenn angenommen, folgen Sie *Der Devcontainer-Pfad* unten bis zum vollständigen Stack.
 - **Dailybot-Integration** — vier Lifecycle-Events (Kickoff, bedeutende Aufgabe, Blockiert, Abschluss) als Best-Effort-Fortschrittsberichte für Teams, die Dailybot bereits nutzen, mit optionaler autonomer Hook-Durchsetzung (`dailybot-cli >= 3.9.0`). Die Installation der gepaarten Dailybot-Agenten-Skill (3.23.14) bietet zusätzlich Chat, Check-ins, Formular-Erstellung, KI-Abfrage, Plan-Boards und -Aufgaben, Per-Repo-API-Keys und mehr — das Addon verbindet lediglich die Berichterstattung mit der DWP-Ausführung. Die zentrale Methodik hat keine Dailybot-Abhängigkeit.
 - **Dependency-Upgrade** — paketmanager-agnostische, chargenweise, validierte, rücknehmbare Upgrades. Wenn
   angenommen, installiert es den `/lib-upgrade`-Befehl.
@@ -250,7 +250,7 @@ Repository ist mit **null** optionalen Addons vollständig konform — installie
   (nicht angeboten für reine Bibliotheken, Headless-Dienste oder reine Infrastruktur-Repos). Drei Profile
   werden in einer Datei gestapelt: visual-ui (bei Erkennung dringend empfohlen; Installation zustimmungsgesteuert), cli-output und
   conversational — die letzten beiden werden immer gefragt, niemals automatisch angewendet.
-- **agentkit** — eine maschinenweite Installation von [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, gepinnt auf `v1.0.0`): ein Befehl für jeden Coding-Agenten, ein Konto pro Profil, `ak usage` und `ak pick`, um das Konto mit dem meisten Spielraum zu wählen, und headless `ak run` für Pläne, die abgegrenzte `parallel_safe`-Aufgaben an andere Coding-Agenten übergeben (ein Delegat pro Worktree). Das Kit startet Agenten standardmäßig in Autonomie, und sein Opt-out (`--ask` oder `AGENTKIT_PERMISSIONS=ask`) gewinnt immer.
+- **agentkit** — eine maschinenweite Installation von [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, gepinnt auf `v1.0.1`): ein Befehl für jeden Coding-Agenten, ein Konto pro Profil, `ak usage` und `ak pick`, um das Konto mit dem meisten Spielraum zu wählen, und headless `ak run` für Pläne, die abgegrenzte `parallel_safe`-Aufgaben an andere Coding-Agenten übergeben (ein Delegat pro Worktree). Das Kit startet Agenten standardmäßig in Autonomie, und sein Opt-out (`--ask` oder `AGENTKIT_PERMISSIONS=ask`) gewinnt immer.
 - **Herdr** — eine maschinenweite Installation von [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (gepinnt auf `v1.0.0`, plus die offizielle Herdr-Skill) für Pläne, die einen Peer-Agenten in einem Herdr-Pane auf einem beliebigen Rechner um genau eine autorisierte Antwort bitten, und für einen Lead, der seine Lanes beobachtet.
 - **DeepWorkPlan Vim** — der Terminal-Editor ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), gepinnt auf `v1.0.0`), eine maschinenweite Installation, die eine bestehende Neovim-Konfiguration niemals ohne ausdrückliche Zustimmung überschreibt.
 - **AI Diff Reviewer** — die erforderliche lokale Überprüfung (kein Opt-in): der Sicherheitstest jedes Final Review führt
@@ -322,7 +322,7 @@ Addons agentkit und Herdr installiert sind:
   Schritte, Zahlungs- oder Tarifabfragen, unbekannte Bildschirme und Panes, die Sie nicht erstellt haben. Mit
   `AGENTKIT_PERMISSIONS=ask` fragen Lanes, bevor sie handeln; umgehen Sie diese Abfragen nie. Protokollieren Sie jeden
   Eingriff im übergeordneten Plan.
-- **Den Schwarm am Laufen halten.** Mit coding-agents-kit `v1.0.0` und herdr-peers `v1.0.0` prüft jeder Agent
+- **Den Schwarm am Laufen halten.** Mit coding-agents-kit `v1.0.1` und herdr-peers `v1.0.0` prüft jeder Agent
   `ak capacity --self --json` an jeder Aufgabengrenze; bei `critical` schreibt er ein Übergabepaket
   (https://deepworkplan.com/schema/dwp-handoff/v1.json), und der Lead startet einen Nachfolger im selben
   Checkout. Der Lead beansprucht seinen Plan mit `herdr-peers lead claim`, Lanes adressieren ihn als `lead`,

@@ -2,13 +2,13 @@
   "addons": {
     "agentkit": {
       "enabled": true,
-      "note": "the dck v1.0.0 render pins coding-agents-kit v1.0.0 (with its three skills) in this container",
-      "version": "v1.0.0"
+      "note": "the dck v1.0.1 render pins coding-agents-kit v1.0.1 (with its three skills) in this container; every ak profile, @default included, is its own account",
+      "version": "v1.0.1"
     },
     "ai-diff-reviewer": {
       "enabled": true,
       "note": "required local review: vendored skill + CI self-review (.review/extension.md)",
-      "version": "v3.3.14"
+      "version": "v3.3.15"
     },
     "dailybot": {
       "enabled": true,
@@ -18,21 +18,21 @@
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.8.0"
+      "version": "v7.8.1"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.8.0"
+      "version": "v7.8.1"
     },
     "devcontainer": {
       "enabled": true,
-      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v1.0.0)",
-      "version": "v1.0.0"
+      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v1.0.1)",
+      "version": "v1.0.1"
     },
     "herdr": {
       "enabled": true,
-      "note": "herdr-peers v1.0.0 in the dck v1.0.0 image; Herdr runs in this container",
+      "note": "herdr-peers v1.0.0 in the dck v1.0.1 image; Herdr runs in this container",
       "version": "v1.0.0"
     },
     "vim": {

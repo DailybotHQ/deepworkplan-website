@@ -31,7 +31,7 @@ Oito addons são distribuídos hoje — sete opcionais mais a revisão local obr
 
 ### Devcontainer (primeiro addon)
 
-Um integrador leve do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v1.0.0`, interface `2`): um modelo de Dev Containers que `dck init` gera no repositório como o seu próprio contentor, mais a skill `dck-dockerfile`.
+Um integrador leve do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v1.0.1`, interface `2`): um modelo de Dev Containers que `dck init` gera no repositório como o seu próprio contentor, mais a skill `dck-dockerfile`.
 
 - **Página do kit:** [Devcontainer](/kit/devcontainer)
 - **O que adiciona:** `docker/local/<service>/Dockerfile` a partir da imagem oficial do runtime fixada por digest (`python-3.13`, `node-24` ou `debian`, sem imagem base partilhada), `dev.sh` sobre o lançador `dck` (`up`, `shell`, `rebuild`, `doctor`), agentes de programação como camada opcional, portas apenas de loopback, git sobre SSH através do agente do anfitrião sem nenhuma chave lá dentro, salvo se o programador o ativar com `[ssh] copy_keys` no seu perfil do anfitrião, e máquinas Herdr por contentor com o layout padrão
@@ -100,7 +100,7 @@ Um integrador leve do [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkp
 
 ### Agentkit (oitavo addon)
 
-Um integrador leve do [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixado em `v1.0.0`, interface `1`), o transporte de delegação **sem interface** (headless) dos planos v7.
+Um integrador leve do [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixado em `v1.0.1`, interface `1`), o transporte de delegação **sem interface** (headless) dos planos v7.
 
 - **Página do kit:** [Agentkit](/kit/agentkit)
 - **O que adiciona:** uma única superfície de comandos `ak` sobre os agentes de codificação de terminal, usada para executar sem interface uma tarefa delimitada do plano; contribui com as capacidades `subagents`, `cancel_children` e `model_routing` apenas em tempo de execução, quando ativado, detetado e numa interface compatível

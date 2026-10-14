@@ -16,7 +16,7 @@
 
 # >>> dck:devsh >>>
 set -euo pipefail
-DCK_RENDERED_WITH="v1.0.0"
+DCK_RENDERED_WITH="v1.0.1"
 # sha256 of that release's SHA256SUMS, when the rendering dck knew it (else empty).
 DCK_SUMS_SHA256=""
 # The compose project dck uses, so plain compose never acts on another checkout.
@@ -170,9 +170,26 @@ if [ -z "$dck_bin" ]; then
   esac
   svc="dwpwebsite" user="node" workdir="/app"
   compose=(docker compose -p "$DCK_PROJECT" -f docker/local/docker-compose.yaml)
-  # Docker Desktop exposes the host SSH agent itself; a Linux host passes its own.
-  if [ -z "${DCK_HOST_SSH_AUTH_SOCK:-}" ] && [ "$(uname -s)" = Linux ] && [ -n "${SSH_AUTH_SOCK:-}" ]; then
-    export DCK_HOST_SSH_AUTH_SOCK="$SSH_AUTH_SOCK"
+  # The host SSH agent the compose file binds, chosen by Docker provider as dck
+  # does: Docker Desktop and OrbStack share it at the compose default; a native
+  # Linux engine gets $SSH_AUTH_SOCK; any other provider (colima, podman, …)
+  # gets /dev/null, so the bind (which never creates a missing host path)
+  # cannot fail the start: exec sessions then have no agent.
+  if [ -z "${DCK_HOST_SSH_AUTH_SOCK:-}" ] && grep -q 'ssh-agent\.sock' docker/local/docker-compose.yaml 2>/dev/null; then
+    case "$verb" in
+      up|rebuild)
+        engine="$( { docker info 2>/dev/null; docker context show 2>/dev/null; } | tr '[:upper:]' '[:lower:]' || true)"
+        case "$engine" in
+          *"docker desktop"*|*docker-desktop*|*desktop-linux*|*orbstack*) ;;
+          *)
+            if [ "$(uname -s)" = Linux ] && [ -S "${SSH_AUTH_SOCK:-}" ]; then
+              export DCK_HOST_SSH_AUTH_SOCK="$SSH_AUTH_SOCK"
+            else
+              export DCK_HOST_SSH_AUTH_SOCK=/dev/null
+              echo "dev.sh: the host's ssh-agent is not shared with this Docker provider: exec sessions inside have no agent" >&2
+            fi ;;
+        esac ;;
+    esac
   fi
   # Missing .env files from their examples: regular files inside the repository
   # only, never through a symlink, never over an existing file.

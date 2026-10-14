@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.8.0`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
+Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.8.1`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
 ## Yang disediakan devcontainer-kit
 
@@ -21,15 +21,15 @@ Berikan repositori sebuah dev container yang reproducible dan terisolasi — yan
 ## Instalasi
 
 ```bash
-git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.0.0`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.0.1`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.0.0`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.0.1`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
