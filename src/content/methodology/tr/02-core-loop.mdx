@@ -1,6 +1,6 @@
 ---
 title: Çekirdek döngü
-description: "create, execute, refine, resume, status ve verify iş akışı, gitignore’lanmış .dwp çıktı dizini, on bölümlü görev anatomisi ve doğrulamanın nasıl çalıştığı."
+description: "Dokuz DWP alt yeteneğinin çekirdek döngüsü, config.json içeren .dwp dizini, on bölümlü görev anatomisi ile doğrulama ve kaldığı yerden sürdürme."
 order: 2
 lang: tr
 summary: Çekirdek DWP işlemlerinin bir planı hedeften doğrulanmış tamamlanmaya nasıl götürdüğü.
@@ -11,7 +11,7 @@ import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
 
 # Çekirdek döngü
 
-DWP, bir planı hedeften tamamlanmış, gözden geçirilebilir işe taşıyan küçük bir işlemler kümesi tanımlar: **create → execute → refine → resume → status**, sonucu doğrulayan uyumluluk denetimi olarak **verify** ile birlikte. Birlikte, bir ajanın bir planın ömrü boyunca izlediği döngüyü oluştururlar. Ajanlar her seferinde tek bir görev yürütür ve devam etmeden önce her adımı doğrular.
+DWP, bir planı hedeften tamamlanmaya taşıyan bir işlemler kümesi tanımlar: **create → execute → refine → resume → status → verify**, yaşam döngüsü yardımcıları **onboard** ve **upgrade** ile **author** alt yeteneği (toplam dokuz alt yetenek) ile desteklenir. Birlikte, bir ajanın bir planın ömrü boyunca izlediği döngüyü oluştururlar. Ajanlar her seferinde tek bir görev yürütür ve devam etmeden önce her adımı doğrular.
 
 Bu döngü, spec odaklı geliştirmenin işlevsel biçimidir. Plan, bir ajanın karşısında çalıştığı spesifikasyondur, her görev açık kabul kriterleri taşır ve doğrulama adımı, bir tamamlanma iddiasını onun kanıtına dönüştüren kapıdır. Plan ve ilerleme günlüğü depoda yaşadığı için döngü, oturumlar ve ajanlar arasında kaldığı yerden sürdürülebilir.
 
@@ -25,6 +25,9 @@ Bu döngü, spec odaklı geliştirmenin işlevsel biçimidir. Plan, bir ajanın 
 - **resume** — Kesintiye uğramış bir planı sürdürür. Ajan, durumu yeniden oluşturmak için ilerleme günlüğünü ve görev dosyalarını okur, ardından ilk tamamlanmamış görevden devam eder.
 - **status** — Yürütmeden ilerlemeyi raporlar. Ajan, tamamlanan, devam eden ve bekleyen görevleri özetler ve hiçbir şeyi değiştirmez.
 - **verify** — Hiçbir şeyi değiştirmeden uyumluluğu denetler. Ajan, deponun standardı karşılayıp karşılamadığını ve bir planın iyi biçimlendirilmiş olup olmadığını — her görevin kabul kriterleri ve bir doğrulama kapısı taşıyıp taşımadığını — raporlar. [Spesifikasyonun Uyumluluk belgesine](/spec) bakın.
+- **onboard** — AGENTS.md, docs/ kılavuzları ve .agents/ yapısı oluşturarak ajanı akıl yürütmeye dayalı olarak depoya dahil eder.
+- **upgrade** — Depo harness'ını veya mevcut planları daha yeni DWP standart sürümlerine günceller.
+- **author** — Belge kataloğunu senkronize tutarak, deponun kurallarına uygun yeni yetenekler, ajanlar veya komutlar yazar.
 
 ## `.dwp/` çıktı dizini
 
@@ -34,23 +37,29 @@ Tüm DWP yapıları, depo kökündeki gitignore’lanmış bir `.dwp/` dizini al
 .dwp/
 ├── plans/
 │   └── PLAN_001_<slug>/
+│       ├── manifest.json
+│       ├── contract.json
+│       ├── journal.ndjson
+│       ├── state.json
 │       ├── README.md
 │       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+│       ├── 1.task_<slug>.md
+│       ├── 2.task_<slug>.md
+│       └── analysis_results/
+└── config.json
 ```
 
 ## On bölümlü görev anatomisi
 
 <TaskAnatomy lang="tr" class="not-prose my-10" />
 
-Her görev dosyası, sırasıyla bu on bölümü içerir. Bu yapı, her iş biriminin kendi kendine yeten ve gözden geçirilebilir olmasını garanti eder:
+Yukarıdaki diyagramın on bölümü, Full plandaki her görev dosyasının anatomik yapısını tanımlar. Bu sıra, her iş biriminin tamamen bağımsız, net ve denetlenebilir olmasını sağlar:
 
 1. **Hedef** — görevin neyi başardığını belirten bir paragraf.
 2. **Bağlam** — arka plan, bağlantılar ve bu görevin neden var olduğu.
-3. **Dokunulan Yüzey** — görevin neyi değiştirdiği ile neyin doğrulanması gerektiği arasındaki sözleşme.
+3. **Dokunulan Yüzey** — görevin neyi değiştirdiği ve doğrulamasını seçen risk sınıfı.
 4. **Adımlar** — gerçekleştirilecek sıralı, somut eylemler.
-5. **Kabul kriterleri** — “bitti”yi tanımlayan koşulların bir kontrol listesi.
+5. **Kabul Kriterleri** — tamamlanmayı tanımlayan koşulların bir kontrol listesi.
 6. **Doğrulama** — işi doğrulamak için çalıştırılacak komutlar veya testler.
 7. **Dosyalar** — oluşturulması veya değiştirilmesi beklenen yollar.
 8. **Bağımlılıklar** — diğer görevler veya harici ön koşullar.

@@ -1,6 +1,6 @@
 ---
 title: Skill’ler ve ajanlar
-description: "Skill’ler ile ajanlar arasındaki fark, akıl yürütmeye dayalı depo kuruluma alması ve .agents dizini ile .claude → .agents sembolik bağ kuralı."
+description: "Skill’ler ile ajanlar arasındaki fark, akıl yürütmeye dayalı depo oryantasyonu ve geriye dönük uyumluluk sembolik bağlarına sahip .agents dizini."
 order: 4
 lang: tr
 summary: Yeniden kullanılabilir skill’lerin, uzman ajanların ve depo kuruluma almasının nasıl bir araya geldiği.
@@ -37,19 +37,20 @@ Yazımın ötesinde, DWP **eklentilerle** gelir. Yedisi tercihe dayalıdır — 
 
 Bir planı oluşturmadan veya yürütmeden önce, bir ajan depoya kuruluma alınır. Kuruluma alma **betiğe değil, akıl yürütmeye dayalıdır**: ajan, sabit bir kurulum betiği çalıştırmak yerine bir zihinsel model oluşturmak için deponun yapısını, dokümantasyonunu ve yapılandırmasını okur.
 
-Kuruluma alma sırasında ajan, depo arketipini (bireysel ile orkestratör), derleme, test ve lint komutlarını, stil, yapı ve adlandırmaya ilişkin mevcut kuralları ve zaten mevcut olan skill’ler ile ajanları belirler. Bu anlayış, ajanın depoya karşı savaşmak yerine ona uyacak biçimde planlamasını ve yürütmesini sağlayan şeydir.
+Kuruluma alma sırasında ajan, depo arketipini (tekil repo, orkestratör hub veya ajan çalışma alanı), derleme, test ve lint komutlarını, stil, yapı ve adlandırmaya ilişkin mevcut kuralları ve zaten mevcut olan skill’ler ile ajanları belirler. Bu anlayış, ajanın depoya karşı savaşmak yerine ona uyacak biçimde planlamasını ve yürütmesini sağlayan şeydir.
 
 Test ve doğrulama araç zinciri özel bir ilgi görür, çünkü bir planın çıktısını güvenilir kılan şey doğrulama kapılarıdır. Bir depoda zaten testler ve linter’lar varsa, kuruluma alma onların gerçek komutlarını ve kurallarını kaydeder. Hiçbiri yoksa, kuruluma alma boşluğu yalnızca not etmez — yığına uygun bir kurulum önerir ve onu deponun test etme kılavuzuna yazar, böylece gelecekteki her planın çalıştıracağı tanımsız değil, gerçek bir kapısı olur.
 
-## `.agents/` dizini ve `.claude → .agents` sembolik bağı
+## `.agents/` dizini ve uyumluluk sembolik bağları
 
 DWP, ajan davranışını tanımlayan her şeyi — skill’ler, komutlar, ajan tanımları, dahili dokümantasyon ve ayarlar — tek bir kanonik dizin, `.agents/` altında toplar. İsim, içeriğin herhangi bir araca bağlı olmaktan çok ajanlar arasında paylaşıldığını gösterir.
 
-Geçmişte `.claude/` üzerinden okuyan araçlarla geriye dönük uyumluluk için, o yol `.agents/` dizinine bir sembolik bağdır:
+Geçmişte `.claude/` veya `.cursor/` üzerinden okuyan araçlarla geriye dönük uyumluluk için, bu yollar `.agents/` dizinine birer sembolik bağdır:
 
 ```bash
-ls -la .claude
+ls -la .claude .cursor
 # .claude -> .agents
+# .cursor -> .agents
 ```
 
-Her `.claude/...` yolu, şeffaf biçimde `.agents/...` karşılığına çözümlenir; böylece eski araçlar çalışmaya devam ederken yeni içerik kanonik `.agents/` konumuna başvurur. Skill’ler ve ajanlar, sembolik bağ üzerinden değil, `.agents/` altındaki gerçek dosyalar aracılığıyla düzenlenir.
+Her `.claude/...` ve `.cursor/...` yolu, şeffaf biçimde `.agents/...` karşılığına çözümlenir; böylece eski araçlar çalışmaya devam ederken yeni içerik kanonik `.agents/` konumuna başvurur. Skill’ler ve ajanlar, sembolik bağ üzerinden değil, `.agents/` altındaki gerçek dosyalar aracılığıyla düzenlenir.
