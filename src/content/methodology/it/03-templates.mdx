@@ -1,6 +1,6 @@
 ---
 title: Template di piani e attività
-description: "La struttura dei file di piano e di attività, il Final Review con cui ogni piano deve concludersi e le convenzioni di README e PROGRESS che mantengono un piano leggibile."
+description: "La struttura dei file di piano e di attività, il Final Review a cinque parti e le convenzioni README e PROGRESS per mantenere un piano leggibile."
 order: 3
 lang: it
 summary: Come piani e attività sono strutturati su disco e le convenzioni che li mantengono leggibili.
@@ -18,25 +18,30 @@ Un Deep Work Plan è una directory di file Markdown. La forma di quella director
 
 Un piano è una directory sotto `.dwp/plans/` denominata `PLAN_001_<slug>/`. Contiene:
 
+- `manifest.json` — l'identità del piano e il puntatore al suo contratto attivo, scritto per primo durante la materializzazione.
+- `contract.json` — contratto di specifica e ambito del piano.
+- `journal.ndjson` — giornale degli eventi a sola aggiunta.
+- `state.json` — uno snapshot proiettato dal journal, mai modificato a mano.
+- `README.md` — panoramica del piano: obiettivo, tabella delle attività e stato.
+- `PROGRESS.md` — log di esecuzione cronologico leggibile dall'uomo.
+- `<n>.task_<slug>.md` — file di specifica in dieci sezioni per ciascuna attività.
+- `analysis_results/` — directory per artefatti di analisi, report e log dei gate.
 
-- `README.md` — la panoramica del piano: obiettivo, materiale di origine, tabella delle attività e stato.
-- Un file per attività, denominato `<n>.task_<slug>.md`.
-- `PROGRESS.md` — un log di esecuzione continuo.
-
-
-Il pacchetto 7.x attuale crea i piani v7 per impostazione predefinita. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita. I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v7, come quelli v6, ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
+Il pacchetto 7.x attuale crea i piani v7 per impostazione predefinita, con 2–5 parole nello slug come per v6. Il flusso v5 conservato utilizza 2–4 parole (poiché il relativo schema congelato conta l’ID numerico come una parola). I nuovi piani ricevono ID numerici crescenti con almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Le directory non numerate esistenti `PLAN_<slug>/` restano leggibili e non vengono mai rinominate; nessun piano esistente viene migrato implicitamente. Se esistono piani numerati, `latest` punta al piano con l’ID numerico più alto.
 
 ## Struttura del file di attività
 
-Ogni file di attività è denominato `<n>.task_<slug>.md` e segue l’anatomia in dieci sezioni: Goal, Context, Superficie toccata, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks e Completion & Log. Le sezioni compaiono sempre in quell’ordine, così ogni lettore sa dove guardare. Ogni attività si riancora all’obiettivo del piano prima di agire, il che impedisce a un agente di andare alla deriva su un orizzonte lungo, di più ore.
+Ogni file di attività è denominato `<n>.task_<slug>.md` e segue le dieci sezioni normative definite dalla skill installata (per i dettagli anatomici si veda [Il core loop](/it/methodology/02-core-loop)). Ogni attività si riancora all’obiettivo del piano prima di agire, il che impedisce a un agente di andare alla deriva su un orizzonte lungo, di più ore.
 
 ## Il Final Review
 
-Ogni piano deve concludersi con esattamente un’attività obbligatoria: il **Final Review**. Chiude il piano in tre passaggi ordinati — nulla del passaggio di sicurezza viene allentato:
+Ogni piano deve concludersi con esattamente un’attività obbligatoria: il **Final Review**. Chiude il piano in cinque passaggi rigorosamente ordinati — i controlli di sicurezza e i validation gate non vengono in alcun caso indeboliti:
 
-1. **Passaggio di sicurezza** — verificare tutto ciò che il piano ha modificato alla ricerca di segreti, rischi di injection e nuova superficie di attacco, e mantenere aggiornato `docs/SECURITY.md`. La sicurezza non è un flusso di lavoro separato aggiunto alla fine: ogni piano lascia le proprie modifiche verificate, e un rilievo critico blocca il completamento.
-2. **Validazione dello stato finale** — la validazione completa del repository viene eseguita e superata sull’ultimo stato rilevante, dopo l’ultima correzione.
-3. **Riconciliazione delle skill** — ogni attività ha registrato la propria disposizione sulle skill mentre la sua evidenza era fresca; la revisione riconcilia il registro. L’Executive Report resta disponibile su richiesta.
+1. **Passaggio di sicurezza** — verificare tutto ciò che il piano ha modificato per individuare segreti, rischi di injection e nuove superfici di attacco, mantenere aggiornato `docs/SECURITY.md` ed eseguire la review locale richiesta di AI Diff Reviewer sull'intero ambito del piano (un reviewer mancante viene registrato come rilievo `local reviewer not installed`, mai ignorato silenziosamente). Un rilievo critico blocca il completamento.
+2. **Validazione dello stato finale** — le suite complete di test, lint e controllo tipi del repository vengono eseguite e superate sullo stato finale. Eventuali correzioni durante la revisione invalidano i risultati correlati e richiedono una nuova esecuzione.
+3. **Riconciliazione delle skill** — verificare che ogni attività abbia registrato la propria disposizione locale delle skill e riconciliare i candidati in `analysis_results/SKILLS_CANDIDATES.md`.
+4. **Riconciliazione della documentazione** — allineare la superficie toccata di ogni attività che modifica il comportamento con i documenti (`docs/TESTING_GUIDE.md`, architettura, `AGENTS.md`) che registrano tale funzionalità.
+5. **Completamento** — i registri del piano concordano (elenco delle attività, log di avanzamento e, nei piani v6 e v7, snapshot e ricevuta derivati dal journal); segnalare deliverable, prove e limitazioni, e proporre l'Executive Report una sola volta.
 
 ## Convenzioni di README e PROGRESS
 

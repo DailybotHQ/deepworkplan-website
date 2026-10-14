@@ -1,6 +1,6 @@
 ---
 title: O loop central
-description: "O fluxo de create, execute, refine, resume, status e verify, o diretório de saída .dwp ignorado pelo git, a anatomia de dez seções da tarefa e como a validação funciona."
+description: "O fluxo create, execute, refine, resume, status e verify, o diretório .dwp, a anatomia de dez seções da tarefa e como a validação funciona."
 order: 2
 lang: pt
 summary: Como as operações centrais do DWP conduzem um plano do objetivo à conclusão verificada.
@@ -19,25 +19,36 @@ Esse loop é a forma operacional do desenvolvimento orientado a especificação.
 
 <CoreLoop lang="pt" class="not-prose my-10" />
 
-- **create** — Gera um novo plano a partir de um objetivo. O agente analisa o objetivo, decompõe-o em tarefas sequenciais e escreve os arquivos do plano. Ele deve fazer perguntas de esclarecimento antes de escrever quando o objetivo for ambíguo. No modo guiado, o agente materializa diretamente um [plano Lite](/spec/lite-plans) — uma proposta compacta e já executável — e o desenvolvedor decide mantê-lo, promovê-lo a um plano Full por arquivo de tarefa, editá-lo ou parar; no modo trust, o agente materializa diretamente a representação escolhida (Lite ou Full), sem etapa de revisão. Veja a [especificação](/spec/dwp-specification) para ambas as representações. A análise de requisitos e a verificação de qualidade do plano são executadas em ambos os casos.
-- **execute** — Executa o plano tarefa a tarefa. O agente atualiza o registro de progresso após cada tarefa e marca o status de conclusão da tarefa. Ele não deve pular tarefas sem registrar o motivo.
-- **refine** — Modifica um plano existente. O agente pode adicionar, remover ou reordenar tarefas, mas deve preservar o trabalho concluído e atualizar a tabela de tarefas.
-- **resume** — Continua um plano interrompido. O agente lê o registro de progresso e os arquivos de tarefa para reconstruir o estado, e então continua a partir da primeira tarefa incompleta.
-- **status** — Relata o progresso sem executar. O agente resume as tarefas concluídas, em andamento e pendentes e não altera nada.
-- **verify** — Verifica a conformidade sem alterar nada. O agente relata se o repositório atende ao padrão e se um plano está bem formado — cada tarefa carregando critérios de aceitação e um validation gate. Veja o [documento de Conformidade da especificação](/spec).
+A skill de metodologia delega a intenção a nove sub-skills especializadas: seis operações centrais de execução, dois auxiliares de ciclo de vida e um motor de autoria:
+
+- **create** — Gera um novo plano a partir de um objetivo. O agente analisa o objetivo, decompõe-o em tarefas sequenciais e escreve os arquivos do plano. No modo guiado, materializa diretamente um [plano Lite](/pt/spec/lite-plans) (compacto e em linha no README.md), permitindo ao desenvolvedor mantê-lo, promovê-lo a plano Full ou editá-lo; no modo trust, materializa diretamente a representação solicitada sem confirmações interativas. A análise de requisitos e a verificação de qualidade ocorrem em ambos os modos.
+- **execute** — Executa o plano tarefa a tarefa de forma sequencial. O agente atualiza o registro de progresso, executa os gates de validação e confirma cada tarefa no git. No modo trust, a execução continua de forma não supervisionada sem perguntas entre tarefas.
+- **refine** — Modifica um plano existente (adicionando, editando, dividindo ou reordenando tarefas, ou promovendo um plano Lite a Full) preservando estritamente a evidência concluída e proibindo o enfraquecimento de critérios sem confirmação.
+- **resume** — Continua um plano interrompido. O agente lê o journal de apenas anexação e os arquivos de tarefas para reconstruir o estado, continuando a partir da primeira tarefa incompleta sem repetir trabalho concluído.
+- **status** — Relata o progresso sem executar nada (estritamente somente leitura). Resume as tarefas concluídas, em andamento e pendentes sem alterar arquivos.
+- **verify** — Verifica a conformidade sem alterar nada (estritamente somente leitura). Relata se o repositório atende ao padrão AI-first e se as tarefas do plano possuem critérios explícitos e gates de validação.
+- **onboard** — Inspeciona o repositório para raciocinar —nunca copiar e colar— um `AGENTS.md` adaptado, a hierarquia padrão de `docs/`, documentação por módulo e o kit `.agents/` com links simbólicos de compatibilidade.
+- **upgrade** — Verifica versões publicadas upstream, solicita consentimento antes do download, instala tags estáveis fixadas e reconcilia adaptações locais deixando os planos `.dwp/` intactos.
+- **author** — Cria ou evolui skills, agentes ou comandos locais do repositório para atender a fluxos de trabalho recorrentes reais, mantendo sincronizado o catálogo em `.agents/docs/`.
 
 ## O diretório de saída `.dwp/`
 
-Todos os artefatos do DWP vivem em um diretório `.dwp/` ignorado pelo git, na raiz do repositório. Manter o espaço de trabalho fora do controle de versão significa que o estado de trabalho de um plano nunca polui o histórico do projeto.
+Todos os artefatos do DWP vivem em um diretório `.dwp/` ignorado pelo git, na raiz do repositório. Manter o espaço de trabalho fora do controle de versão significa que o estado de trabalho de um plano nunca polui o histórico do projeto. A configuração de extensões no nível do repositório é gravada em `.dwp/config.json` (`dwp-config/v1`), enquanto os planos residem em diretórios numerados:
 
 ```
 .dwp/
-├── plans/
-│   └── PLAN_001_<slug>/
-│       ├── README.md
-│       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+├── config.json
+└── plans/
+    └── PLAN_001_<slug>/
+        ├── manifest.json
+        ├── contract.json
+        ├── journal.ndjson
+        ├── state.json
+        ├── README.md
+        ├── PROGRESS.md
+        ├── 1.task_<slug>.md
+        ├── 2.task_<slug>.md
+        └── analysis_results/
 ```
 
 ## A anatomia de dez seções da tarefa

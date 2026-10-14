@@ -1,6 +1,6 @@
 ---
 title: Il core loop
-description: "Il flusso create, execute, refine, resume, status e verify, la directory di output .dwp esclusa da git, l’anatomia in dieci sezioni di un’attività e come funziona la validazione."
+description: "Il ciclo fondamentale DWP in nove sotto-skill, la directory .dwp con config.json, l’anatomia dell’attività in dieci sezioni e la validazione."
 order: 2
 lang: it
 summary: Come le operazioni fondamentali di DWP guidano un piano dall’obiettivo al completamento verificato.
@@ -19,32 +19,43 @@ Questo ciclo è la forma operativa dello spec-driven development. Il piano è la
 
 <CoreLoop lang="it" class="not-prose my-10" />
 
-- **create** — Genera un nuovo piano da un obiettivo. L’agente analizza l’obiettivo, lo scompone in attività sequenziali e scrive i file del piano. Dovrebbe porre domande di chiarimento prima di scrivere quando l’obiettivo è ambiguo. In modalità guidata, l’agente materializza direttamente un [piano Lite](/spec/lite-plans) — una proposta compatta e già eseguibile — e lo sviluppatore decide se mantenerlo, promuoverlo a un piano Full a file di attività, modificarlo o fermarsi; in modalità trust, l’agente materializza direttamente la rappresentazione scelta (Lite o Full), senza passaggio di revisione. Vedi la [specifica](/spec/dwp-specification) per entrambe le rappresentazioni. L’analisi dei requisiti e il controllo di qualità del piano vengono eseguiti in entrambi i casi.
-- **execute** — Esegue il piano attività per attività. L’agente aggiorna il log dei progressi dopo ogni attività e ne segna lo stato di completamento. Non deve saltare attività senza registrarne il motivo.
-- **refine** — Modifica un piano esistente. L’agente può aggiungere, rimuovere o riordinare attività, ma deve preservare il lavoro completato e aggiornare la tabella delle attività.
-- **resume** — Continua un piano interrotto. L’agente legge il log dei progressi e i file delle attività per ricostruire lo stato, poi prosegue dalla prima attività incompleta.
-- **status** — Riferisce sui progressi senza eseguire. L’agente riassume le attività completate, in corso e in sospeso e non cambia nulla.
-- **verify** — Verifica la conformità senza cambiare nulla. L’agente riferisce se il repository soddisfa lo standard e se un piano è ben formato — con ogni attività che porta con sé criteri di accettazione e un validation gate. Veda il [documento di conformità della specifica](/spec).
+La skill metodologica delega l’intento a nove sotto-skill specializzate: sei operazioni centrali di esecuzione, due assistenti del ciclo di vita e un motore di authoring:
+
+- **create** — Genera un nuovo piano da un obiettivo. L’agente analizza l’obiettivo, lo scompone in attività sequenziali e scrive i file del piano. In modalità guidata, l’agente materializza direttamente un [piano Lite](/it/spec/lite-plans) — una proposta compatta e già eseguibile —, che lo sviluppatore può mantenere, promuovere a un piano Full, modificare o annullare; in modalità trust, l’agente materializza direttamente la rappresentazione scelta (Lite o Full) senza richiedere conferme. L’analisi dei requisiti e il controllo di qualità del piano vengono eseguiti in entrambe le modalità.
+- **execute** — Esegue il piano attività per attività in modo sequenziale. L’agente aggiorna il log dei progressi, esegue i validation gate e committa dopo ogni attività. In modalità trust, l’esecuzione prosegue in modo autonomo senza pause tra le attività.
+- **refine** — Modifica un piano esistente (aggiungere, modificare, dividere o riordinare attività, o promuovere un piano Lite a Full). Le prove già convalidate vengono rigorosamente preservate e l’indebolimento non confermato dei criteri è vietato.
+- **resume** — Continua un piano interrotto. L’agente legge il journal in solo accodamento e i file delle attività per ricostruire lo stato, poi prosegue dalla prima attività incompleta senza ripetere il lavoro completato.
+- **status** — Riferisce sui progressi senza eseguire (rigorosamente in sola lettura). L’agente riassume le attività completate, in corso e in sospeso e non cambia nulla.
+- **verify** — Verifica la conformità senza cambiare nulla (rigorosamente in sola lettura). L’agente riferisce se il repository soddisfa lo standard AI-first e se le attività hanno criteri espliciti e validation gate.
+- **onboard** — Ispeziona il repository di destinazione per ricavare tramite ragionamento — mai tramite copia-incolla — un `AGENTS.md` adattato, una gerarchia `docs/`, documentazione dei moduli e il kit `.agents/` con symlink.
+- **upgrade** — Controlla i rilasci a monte, richiede il consenso esplicito dello sviluppatore prima del download, installa tag stabili fissati e concilia gli adattamenti locali senza toccare i piani `.dwp/` esistenti.
+- **author** — Crea ed evolve skill, agenti o comandi slash locali del repository per coprire flussi ricorrenti reali, e mantiene sincronizzato il catalogo `.agents/docs/`.
 
 ## La directory di output `.dwp/`
 
-Tutti gli artefatti DWP vivono in una directory `.dwp/` esclusa da git nella radice del repository. Tenere il workspace fuori dal controllo di versione significa che lo stato di lavoro di un piano non inquina mai la storia del progetto.
+Tutti gli artefatti DWP vivono in una directory `.dwp/` esclusa da git nella radice del repository. Tenere il workspace fuori dal controllo di versione significa che lo stato di lavoro di un piano non inquina mai la storia del progetto. Le configurazioni degli addon a livello di repository sono registrate in `.dwp/config.json` (`dwp-config/v1`), mentre i piani risiedono in directory numerate piatte:
 
 ```
 .dwp/
-├── plans/
-│   └── PLAN_001_<slug>/
-│       ├── README.md
-│       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+├── config.json
+└── plans/
+    └── PLAN_001_<slug>/
+        ├── manifest.json
+        ├── contract.json
+        ├── journal.ndjson
+        ├── state.json
+        ├── README.md
+        ├── PROGRESS.md
+        ├── 1.task_<slug>.md
+        ├── 2.task_<slug>.md
+        └── analysis_results/
 ```
 
 ## L’anatomia in dieci sezioni di un’attività
 
 <TaskAnatomy lang="it" class="not-prose my-10" />
 
-Ogni file di attività contiene queste dieci sezioni, nell’ordine. La struttura garantisce che ogni unità di lavoro sia autosufficiente e revisionabile:
+Ogni file di attività segue le dieci sezioni normative presentate sopra, nell’ordine definito dalla skill installata.
 
 1. **Goal** — un paragrafo che dichiara cosa l’attività realizza.
 2. **Context** — contesto, link e il perché questa attività esiste.
