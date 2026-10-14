@@ -18,25 +18,30 @@ import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
 
 一份计划是 `.dwp/plans/` 下一个名为 `PLAN_001_<slug>/` 的目录。它包含：
 
-
+- `manifest.json` —— 计划元数据、状态以及契约指针。
+- `contract.json` —— 不可变且内容寻址的成果契约（验收标准、范围、不变量）。
+- `journal.ndjson` —— 仅追加的账本事件执行日志。
+- `state.json` —— 从契约与日志计算得出的派生状态缓存。
 - `README.md` —— 计划概览：目标、源材料、任务表与状态。
-- 每项任务一个文件，命名为 `<n>.task_<slug>.md`。
-- `PROGRESS.md` —— 一份持续的执行日志。
+- `PROGRESS.md` —— 人类可读的持续执行日志。
+- `1.task_<slug>.md`、`2.task_<slug>.md` —— 单独的任务 Markdown 文件。
+- `analysis_results/` —— 任务产物、分析报告与验证关卡证据目录。
 
-
-当前 7.x 技能包默认创建 v7 计划。现有计划保留记录的代际；迁移必须明确请求。 新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v7 slug 与 v6 计划一样为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
+当前 7.x 技能包默认创建 v7 计划，其 slug 与 v6 计划一样为 2–5 个单词。保留的 v5 流程使用 2–4 个单词，因为其冻结的 schema 会把数字 ID 计作一个单词。新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。现有未编号的 `PLAN_<slug>/` 文件夹继续可读且绝不重命名；现有计划绝不隐式迁移。存在编号计划时，`latest` 解析为数字 ID 最大的计划。
 
 ## 任务文件结构
 
-每个任务文件命名为 `<n>.task_<slug>.md`，并遵循十段式结构：Goal、Context、Touched Surface（触及面）、Steps、Acceptance criteria、Validation、Files、Dependencies、Risks 以及 Completion & Log。这些段落始终按该顺序出现，于是任何读者都知道该往哪里看。每项任务在行动之前都会重新锚定到计划的目标，这能防止代理在漫长的、长达数小时的周期里发生漂移。
+每个任务文件命名为 `<n>.task_<slug>.md`，并遵循已安装技能所定义的十个规范章节（参见[核心循环](/zh/methodology/02-core-loop)了解任务结构）。每项任务在行动前都会重新锚定到计划的目标，防止代理在长达数小时的任务中发生目标漂移。
 
 ## Final Review
 
-每份计划都必须恰好以一项强制任务收尾：**Final Review**。它以三个有序的环节为计划收尾——安全审查环节没有任何放松：
+每份计划都必须以唯一一项强制任务收尾：**Final Review**。它按五个严格顺序环节闭环整个计划——安全审查和验证关卡绝不放宽：
 
-1. **安全审查** —— 审计计划改动的一切，检查机密信息、注入风险与新的攻击面，并让 `docs/SECURITY.md` 保持最新。安全不是在结尾才拼接上去的独立工作流：每份计划都让自己的改动经过审计，且一项严重发现会阻止完成。
-2. **最终状态验证** —— 代码仓库的完整验证在最后一次修复之后的最后相关状态上运行并通过。
-3. **技能决策核对** —— 每项任务都在其证据尚且新鲜时记录了自己的技能处置；Final Review 负责核对这本台账。Executive Report 仍可按需提供。
+1. **安全审查** —— 审计计划改动的一切内容以排查密钥泄露、注入风险与新攻击面，并保持 `docs/SECURITY.md` 最新；若存在 `.agents/skills/ai-diff-reviewer/` 及扩展文件，执行必需的本地审查。每份计划都对自身改动完成审计，阻断级严重缺陷阻止完成。
+2. **最终状态验证** —— 仓库全部适用的测试、代码检查与类型检查套件在最终状态下运行并通过。审查过程中的任何修复都会使受影响结果失效并触发重新运行。
+3. **技能决策核对** —— 验证每项任务均已记录任务局部的技能处置，并在 `analysis_results/SKILLS_CANDIDATES.md` 中核对所有合理的技能编写事项。
+4. **文档对齐核对** —— 将每项改变行为的任务的触及面与登记该特性的文档（`docs/TESTING_GUIDE.md`、架构文档与 `AGENTS.md`）进行对齐比对并补齐。
+5. **完成与闭环** —— 验证终态投射与实际产物的一致性，写入 `analysis_results/FINALIZATION.json` 收尾凭证并正式闭环。
 
 ## README 与 PROGRESS 约定
 
