@@ -1355,6 +1355,9 @@ export const th: SiteTranslations = {
     vimNote:
       'กฎเดียวกันนี้ใช้กับตัวติดตั้งของ DeepWorkPlan Vim: หน้าของมันแสดง SHA-256 ของสคริปต์ที่ให้บริการอยู่ตอนนี้ พร้อมขั้นตอนดาวน์โหลด ตรวจสอบ ยืนยัน และรัน',
     vimLinkLabel: 'ตรวจสอบตัวติดตั้งของ DeepWorkPlan Vim',
+    ecosystemPinsLead:
+      'สำหรับ checksum และรีลีสที่ปักหมุดไว้ของผลิตภัณฑ์แต่ละตัวในระบบนิเวศ (agentkit, Herdr, devcontainer, Vim และ AI Diff Reviewer) โปรดดู',
+    ecosystemPinsLinkLabel: 'ตารางการตรวจสอบระบบนิเวศใน /init.md',
     betaNote:
       'Pre-release ตรวจสอบได้ด้วยวิธีเดียวกัน: pre-release แต่ละรายการบน GitHub มี SHA256SUMS ของตัวเอง และไม่เคยเป็น release เวอร์ชันเสถียร ขณะที่เว็บไซต์นี้นำ pre-release มาใช้เพื่อทดสอบในการใช้งานจริง บรรทัดคำสั่งติดตั้งที่ปักหมุดไว้ของมันจะแสดงอยู่ด้านล่าง',
     disclosureTitle: 'รายงานช่องโหว่',

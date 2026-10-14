@@ -1380,6 +1380,9 @@ export const ja: SiteTranslations = {
     vimNote:
       '同じ原則は DeepWorkPlan Vim のインストーラにも当てはまります。そのページには、現在配信しているスクリプトの SHA-256 と、ダウンロード、確認、検証、実行の手順が示されています。',
     vimLinkLabel: 'DeepWorkPlan Vim のインストーラを確認する',
+    ecosystemPinsLead:
+      'エコシステムの各製品（agentkit、Herdr、devcontainer、Vim、AI Diff Reviewer）のチェックサムと固定リリースについては、',
+    ecosystemPinsLinkLabel: '/init.md のエコシステム検証表を参照してください',
     betaNote:
       'プレリリースも同じ方法で検証できます。GitHub の各プレリリースは独自の SHA256SUMS を持ち、安定版リリースになることはありません。このサイトが実地テストのためにプレリリースを取り込んでいる間は、その固定されたインストール行が下に表示されます。',
     disclosureTitle: '脆弱性を報告する',

@@ -1364,6 +1364,9 @@ export const hi: SiteTranslations = {
     vimNote:
       'यही नियम DeepWorkPlan Vim इंस्टॉलर पर भी लागू होता है: उसका पृष्ठ अभी परोसी जा रही स्क्रिप्ट का SHA-256 दिखाता है, साथ में डाउनलोड, जाँच, सत्यापन और चलाने के चरण भी।',
     vimLinkLabel: 'DeepWorkPlan Vim इंस्टॉलर की जाँच करें',
+    ecosystemPinsLead:
+      'इकोसिस्टम के हर उत्पाद (agentkit, Herdr, devcontainer, Vim और AI Diff Reviewer) के checksum और पिन किए गए रिलीज़ के लिए देखें',
+    ecosystemPinsLinkLabel: '/init.md में इकोसिस्टम सत्यापन तालिका',
     betaNote:
       'प्री-रिलीज़ का सत्यापन भी इसी तरह होता है: हर GitHub प्री-रिलीज़ के साथ उसके अपने SHA256SUMS होते हैं और वह कभी स्थिर रिलीज़ नहीं होती। जब यह साइट किसी प्री-रिलीज़ को वास्तविक उपयोग में परखने के लिए शामिल करती है, तब उसकी पिन की गई इंस्टॉल लाइन नीचे दिखाई देती है।',
     disclosureTitle: 'भेद्यता की रिपोर्ट करें',

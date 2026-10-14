@@ -1383,6 +1383,10 @@ export const tr: SiteTranslations = {
     vimNote:
       'Aynı kural DeepWorkPlan Vim kurulum programı için de geçerlidir: sayfası, şu anda sunulan betiğin SHA-256 değerini ve indirme, inceleme, doğrulama ve çalıştırma adımlarını gösterir.',
     vimLinkLabel: 'DeepWorkPlan Vim kurulum programını inceleyin',
+    ecosystemPinsLead:
+      'Ekosistemdeki her ürünün (agentkit, Herdr, devcontainer, Vim ve AI Diff Reviewer) sağlama toplamları ve sabitlenmiş sürümleri için',
+    ecosystemPinsLinkLabel:
+      '/init.md içindeki ekosistem doğrulama tablosuna bakın',
     betaNote:
       'Ön sürümler de aynı şekilde doğrulanır: her GitHub ön sürümü kendi SHA256SUMS dosyasını taşır ve asla kararlı sürüm değildir. Bu site bir ön sürümü sahada denemek için içerdiği sürece, onun sabitlenmiş kurulum satırı aşağıda görünür.',
     disclosureTitle: 'Güvenlik açığı bildirin',

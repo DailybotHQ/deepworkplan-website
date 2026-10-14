@@ -1371,6 +1371,9 @@ export const ko: SiteTranslations = {
     vimNote:
       '같은 원칙이 DeepWorkPlan Vim 설치 프로그램에도 적용돼요. 해당 페이지에는 지금 제공 중인 스크립트의 SHA-256과 내려받기, 확인, 검증, 실행 순서가 나와 있어요.',
     vimLinkLabel: 'DeepWorkPlan Vim 설치 프로그램 확인하기',
+    ecosystemPinsLead:
+      '생태계의 각 제품(agentkit, Herdr, devcontainer, Vim, AI Diff Reviewer)의 체크섬과 고정 릴리스는',
+    ecosystemPinsLinkLabel: '/init.md의 생태계 검증 표를 참고하세요',
     betaNote:
       '프리릴리스도 같은 방식으로 검증합니다. 각 GitHub 프리릴리스는 자체 SHA256SUMS를 갖추며 결코 안정 릴리스가 아닙니다. 이 사이트가 실사용 테스트를 위해 프리릴리스를 포함하는 동안에는 고정된 설치 명령줄이 아래에 표시됩니다.',
     disclosureTitle: '취약점 신고',

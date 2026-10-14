@@ -1365,6 +1365,9 @@ export const en: SiteTranslations = {
     vimNote:
       'The same rule applies to the DeepWorkPlan Vim installer: its page shows the SHA-256 of the script as served, with a download, inspect, verify and run recipe.',
     vimLinkLabel: 'Inspect the DeepWorkPlan Vim installer',
+    ecosystemPinsLead:
+      'For checksums and release pins of every ecosystem product (agentkit, Herdr, devcontainer, Vim and the AI Diff Reviewer), see the',
+    ecosystemPinsLinkLabel: 'ecosystem verification table in /init.md',
     betaNote:
       'Pre-releases verify the same way: each GitHub pre-release carries its own SHA256SUMS and is never the stable release. While this site vendors one to field-test it, its pinned install line appears below.',
     disclosureTitle: 'Report a vulnerability',

@@ -1392,6 +1392,10 @@ export const fr: SiteTranslations = {
     vimNote:
       'La même règle vaut pour l’installateur de DeepWorkPlan Vim : sa page affiche le SHA-256 du script tel qu’il est servi, avec une marche à suivre pour télécharger, inspecter, vérifier et exécuter.',
     vimLinkLabel: 'Inspecter l’installateur de DeepWorkPlan Vim',
+    ecosystemPinsLead:
+      'Pour les sommes de contrôle et les versions épinglées de chaque produit de l’écosystème (agentkit, Herdr, devcontainer, Vim et l’AI Diff Reviewer), consultez le',
+    ecosystemPinsLinkLabel:
+      'tableau de vérification de l’écosystème dans /init.md',
     betaNote:
       'Les préversions se vérifient de la même manière : chaque préversion GitHub fournit son propre SHA256SUMS et n’est jamais la version stable. Lorsque ce site en intègre une pour la tester en conditions réelles, sa ligne d’installation épinglée apparaît ci-dessous.',
     disclosureTitle: 'Signaler une vulnérabilité',

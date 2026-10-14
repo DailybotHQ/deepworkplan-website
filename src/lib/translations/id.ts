@@ -1380,6 +1380,9 @@ export const id: SiteTranslations = {
     vimNote:
       'Aturan yang sama berlaku untuk pemasang DeepWorkPlan Vim: halamannya menampilkan SHA-256 skrip yang disajikan sekarang, beserta langkah unduh, periksa, verifikasi, dan jalankan.',
     vimLinkLabel: 'Periksa pemasang DeepWorkPlan Vim',
+    ecosystemPinsLead:
+      'Untuk checksum dan rilis yang dipatok dari setiap produk ekosistem (agentkit, Herdr, devcontainer, Vim, dan AI Diff Reviewer), lihat',
+    ecosystemPinsLinkLabel: 'tabel verifikasi ekosistem di /init.md',
     betaNote:
       'Pra-rilis diverifikasi dengan cara yang sama: setiap pra-rilis GitHub membawa SHA256SUMS-nya sendiri dan tidak pernah menjadi rilis stabil. Selama situs ini menyertakan salah satunya untuk mengujinya di lapangan, baris instalasinya yang dipatok ditampilkan di bawah.',
     disclosureTitle: 'Laporkan kerentanan',

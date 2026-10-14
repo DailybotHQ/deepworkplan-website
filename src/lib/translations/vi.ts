@@ -1381,6 +1381,9 @@ export const vi: SiteTranslations = {
     vimNote:
       'Quy tắc tương tự áp dụng cho trình cài đặt DeepWorkPlan Vim: trang của nó hiển thị SHA-256 của tập lệnh đang được phân phát, kèm các bước tải, kiểm tra, xác minh và chạy.',
     vimLinkLabel: 'Kiểm tra trình cài đặt DeepWorkPlan Vim',
+    ecosystemPinsLead:
+      'Để xem checksum và các bản phát hành được ghim của từng sản phẩm trong hệ sinh thái (agentkit, Herdr, devcontainer, Vim và AI Diff Reviewer), hãy xem',
+    ecosystemPinsLinkLabel: 'bảng xác minh hệ sinh thái trong /init.md',
     betaNote:
       'Các bản phát hành trước được xác minh theo cùng cách: mỗi bản phát hành trước trên GitHub có SHA256SUMS riêng và không bao giờ là bản phát hành ổn định. Khi trang web này tích hợp một bản để thử nghiệm thực tế, dòng lệnh cài đặt đã ghim của nó sẽ hiển thị bên dưới.',
     disclosureTitle: 'Báo cáo lỗ hổng',

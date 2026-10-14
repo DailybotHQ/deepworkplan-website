@@ -616,6 +616,9 @@ export interface SiteTranslations {
     /** Pointer from the verify section to the DeepWorkPlan Vim installer page. */
     vimNote: string;
     vimLinkLabel: string;
+    /** Lead-in sentence before the link to the ecosystem pin table in /init.md. */
+    ecosystemPinsLead: string;
+    ecosystemPinsLinkLabel: string;
     /** Pre-release note in the verify section, shown only while a pre-release is vendored. */
     betaNote: string;
     disclosureTitle: string;

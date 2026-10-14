@@ -27,6 +27,7 @@ const packPin = ECOSYSTEM_PINS.pack;
 // the /init prompt, and the skill repo PUBLISHING.md so all surfaces agree.
 const verifyCommand = `git clone ${REPO_URLS.skill}.git
 cd deepworkplan-skill
+git checkout ${packPin.tag}
 # Download the checksums for the release you intend to install (current release: ${packPin.tag}):
 curl -fsSL -o SHA256SUMS \\
   ${REPO_URLS.skill}/releases/download/${packPin.tag}/SHA256SUMS
@@ -175,11 +176,11 @@ const breadcrumbSchema = {
         >
       </p>
       <p class="mt-4 leading-relaxed" style="color: var(--color-gray-600);">
-        For checksums and release pins of every ecosystem product (agentkit, Herdr, devcontainer, Vim, and AI Diff Reviewer), see the
+        {p.ecosystemPinsLead}
         <a
           href="/init.md#trust-and-verification"
           class="underline underline-offset-4 hover:opacity-80"
-          style="color: var(--color-secondary);">ecosystem verification table in /init.md</a
+          style="color: var(--color-secondary);">{p.ecosystemPinsLinkLabel}</a
         >.
       </p>
       {

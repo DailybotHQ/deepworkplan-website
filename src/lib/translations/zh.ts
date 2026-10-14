@@ -1346,6 +1346,9 @@ export const zh: SiteTranslations = {
     vimNote:
       '同样的规则也适用于 DeepWorkPlan Vim 的安装程序：其页面会显示当前提供的脚本的 SHA-256，并给出下载、检查、验证、运行的步骤。',
     vimLinkLabel: '检查 DeepWorkPlan Vim 安装程序',
+    ecosystemPinsLead:
+      '如需生态系统中每个产品（agentkit、Herdr、devcontainer、Vim 和 AI Diff Reviewer）的校验和与固定版本，请参阅',
+    ecosystemPinsLinkLabel: '/init.md 中的生态系统验证表',
     betaNote:
       '预发布版本的验证方式相同：每个 GitHub 预发布版本都带有自己的 SHA256SUMS，且绝不是稳定版本。当本站内置某个预发布版本以进行实地测试时，其固定版本的安装命令会显示在下方。',
     disclosureTitle: '报告漏洞',

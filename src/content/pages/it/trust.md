@@ -23,6 +23,7 @@ Tratta la skill come non attendibile finché non l'hai verificata. Ogni release 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
+git checkout v7.8.1
 # Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
   https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
