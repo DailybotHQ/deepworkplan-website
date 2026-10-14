@@ -110,7 +110,7 @@ A changed file is not always covered by the test that shares its name:
 
 ### Load-sensitive tests
 
-`tests/unit/lib/schema-urls.test.ts` scans every file under `.agents/skills`, `docs` and `src` synchronously. It takes 2–3 s on an idle machine and over 6 s on a busy shared one, so its first case carries an explicit 30 s timeout; a timeout there under load is not a regression — rerun it alone before investigating. `tests/unit/lib/install-surface-pins.test.ts` scans every public install surface the same way and carries the same explicit 30 s timeout on its scan cases.
+`tests/unit/lib/schema-urls.test.ts` scans every file under `.agents/skills`, `docs` and `src` synchronously. It takes 2–3 s on an idle machine and over 6 s on a busy shared one, so its first case carries an explicit 30 s timeout; a timeout there under load is not a regression — rerun it alone before investigating. `tests/unit/lib/install-surface-pins.test.ts`, `tests/unit/lib/ecosystem-pins.test.ts` and `tests/unit/lib/hub-isolation.test.ts` scan many files the same way and carry the same explicit 30 s timeout.
 
 ### Escalation
 
