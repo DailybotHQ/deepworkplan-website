@@ -1,6 +1,6 @@
 ---
 title: Plantillas de plan y tarea
-description: "La estructura de los archivos de plan y de tarea, el Final Review con el que todo plan debe terminar y las convenciones de README y PROGRESS que mantienen legible el plan."
+description: "La estructura de los archivos de plan y de tarea, el Final Review de cinco partes y las convenciones de README y PROGRESS para mantener legible el plan."
 order: 3
 lang: es
 summary: Cómo se estructuran los planes y las tareas en disco, y las convenciones que los mantienen legibles.
@@ -18,25 +18,30 @@ Un Deep Work Plan es un directorio de archivos Markdown. La forma de ese directo
 
 Un plan es un directorio bajo `.dwp/plans/` llamado `PLAN_001_<slug>/`. Contiene:
 
+- `manifest.json`: metadatos del plan, estado y puntero al contrato.
+- `contract.json`: contrato inmutable y direccionado por contenido de resultados (criterios de aceptación, alcance, invariantes).
+- `journal.ndjson`: registro de eventos de solo adición del ledger.
+- `state.json`: caché de estado derivado calculada a partir del contrato y del journal.
+- `README.md`: resumen del plan: objetivo, material de origen, tabla de tareas y estado.
+- `PROGRESS.md`: registro de ejecución legible para humanos.
+- `1.task_<slug>.md`, `2.task_<slug>.md`: archivos individuales de tarea en Markdown.
+- `analysis_results/`: directorio para artefactos de tareas, informes de análisis y evidencia de puertas.
 
-- `README.md`: el resumen del plan: objetivo, material de origen, tabla de tareas y estado.
-- Un archivo por tarea, con el nombre `<n>.task_<slug>.md`.
-- `PROGRESS.md`: un registro continuo de la ejecución.
-
-
-El paquete actual 7.x crea planes v7 de forma predeterminada, con slugs de 2–5 palabras, igual que los planes v6. El flujo v5 conservado usa 2–4 palabras porque sus esquemas congelados cuentan el ID numérico como una palabra. Los planes existentes conservan la generación registrada y nunca se migran en silencio. Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v6 y v7 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
+El paquete actual 7.x crea planes v7 de forma predeterminada, con slugs de 2–5 palabras, igual que los planes v6. El flujo v5 conservado usa 2–4 palabras porque sus esquemas congelados cuentan el ID numérico como una palabra. Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran; los planes existentes nunca se migran de forma implícita. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
 
 ## Estructura del archivo de tarea
 
-Cada archivo de tarea se llama `<n>.task_<slug>.md` y sigue la anatomía de diez secciones: Objetivo, Contexto, Superficie tocada, Pasos, Criterios de aceptación, Validación, Archivos, Dependencias, Riesgos y Finalización y registro. Las secciones aparecen siempre en ese orden para que cualquier lector sepa dónde mirar. Cada tarea se reancla al objetivo del plan antes de actuar, lo que evita que un agente se desvíe en un horizonte largo de varias horas.
+Cada archivo de tarea se llama `<n>.task_<slug>.md` y sigue las diez secciones normativas definidas por la skill instalada (consulta [El ciclo central](/es/methodology/02-core-loop) para la anatomía de tarea). Cada tarea se reancla al objetivo del plan antes de actuar, lo que evita que un agente se desvíe en un horizonte largo de varias horas.
 
 ## El Final Review
 
-Todo plan debe terminar con exactamente una tarea obligatoria: el **Final Review**. Cierra el plan en tres pases ordenados — nada del pase de seguridad se relaja:
+Todo plan debe terminar con exactamente una tarea obligatoria: el **Final Review**. Cierra el plan en cinco partes ordenadas — nada del pase de seguridad ni de las puertas se relaja:
 
-1. **Pase de seguridad**: auditar todo lo que el plan cambió en busca de secretos, riesgos de inyección y nueva superficie de ataque, y mantener `docs/SECURITY.md` al día. La seguridad no es un flujo de trabajo aparte añadido al final: cada plan deja sus propios cambios auditados, y un hallazgo crítico bloquea la finalización.
-2. **Validación de estado final**: la validación completa del repositorio se ejecuta y pasa sobre el último estado relevante, tras la corrección final.
-3. **Reconciliación de skills**: cada tarea registró su propia disposición de skills mientras su evidencia estaba fresca; la revisión reconcilia el registro. El Reporte Ejecutivo sigue disponible a petición.
+1. **Pase de seguridad**: auditar todo lo que el plan cambió en busca de secretos, riesgos de inyección y nueva superficie de ataque, y mantener `docs/SECURITY.md` al día; ejecutar la revisión local requerida si existe `.agents/skills/ai-diff-reviewer/` y un archivo de extensión. Cada plan deja sus propios cambios auditados, y un hallazgo crítico bloquea la finalización.
+2. **Validación de estado final**: la validación completa aplicable del repositorio (pruebas, linter y verificación de tipos) se ejecuta y pasa sobre el último estado. Cualquier corrección efectuada durante la revisión invalida los resultados afectados y exige volver a ejecutarlos.
+3. **Reconciliación de skills**: verificar que cada tarea haya registrado su disposición de skills local y reconciliar cualquier autoría justificada en `analysis_results/SKILLS_CANDIDATES.md`.
+4. **Reconciliación de documentación**: contrastar la superficie tocada de cada tarea que cambia comportamiento con los documentos que la registran (`docs/TESTING_GUIDE.md`, documentos de arquitectura y `AGENTS.md`).
+5. **Finalización y cierre**: comprobar la proyección terminal contra los artefactos reales, registrar `analysis_results/FINALIZATION.json` y cerrar.
 
 ## Convenciones de README y PROGRESS
 

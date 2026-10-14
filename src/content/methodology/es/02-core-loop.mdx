@@ -1,6 +1,6 @@
 ---
 title: El ciclo central
-description: "El flujo de crear, ejecutar, refinar, reanudar, estado y verificar; el directorio .dwp ignorado por git; la anatomía de tarea en diez secciones y la validación."
+description: "El flujo de create, execute, refine, resume, status y verify, el directorio .dwp ignorado por git, la anatomía de tarea en diez secciones y la validación."
 order: 2
 lang: es
 summary: Cómo las operaciones centrales de DWP llevan un plan desde el objetivo hasta su finalización verificada.
@@ -19,25 +19,36 @@ Este ciclo es la forma operativa del desarrollo guiado por especificación. El p
 
 <CoreLoop lang="es" class="not-prose my-10" />
 
-- **crear**: generar un plan nuevo a partir de un objetivo. El agente analiza el objetivo, lo descompone en tareas secuenciales y escribe los archivos del plan. Debe formular preguntas aclaratorias antes de escribir cuando el objetivo es ambiguo. En modo guiado, el agente materializa directamente un [plan Lite](/es/spec/lite-plans) — una propuesta compacta y ya ejecutable — y el desarrollador decide conservarlo, promoverlo a un plan Full de archivo por tarea, editarlo o detenerse; en modo trust, el agente materializa directamente la representación elegida (Lite o Full), sin paso de revisión. Consulta la [especificación](/es/spec/dwp-specification) para ambas representaciones. El análisis de requisitos y la comprobación de calidad del plan se ejecutan en ambos casos.
-- **ejecutar**: recorrer el plan tarea por tarea. El agente actualiza el registro de avance tras cada tarea y marca su estado de finalización. No debe omitir tareas sin registrar el motivo.
-- **refinar**: modificar un plan existente. El agente puede agregar, quitar o reordenar tareas, pero debe preservar el trabajo completado y actualizar la tabla de tareas.
-- **reanudar**: continuar un plan interrumpido. El agente lee el registro de avance y los archivos de tarea para reconstruir el estado, y luego continúa desde la primera tarea incompleta.
-- **estado**: reportar el avance sin ejecutar. El agente resume las tareas completadas, en curso y pendientes, y no cambia nada.
-- **verificar**: comprobar la conformidad sin cambiar nada. El agente reporta si el repositorio cumple el estándar y si un plan está bien formado — cada tarea con criterios de aceptación y una puerta de validación. Consulta el [documento de Conformidad de la especificación](/es/spec).
+La skill de metodología delega la intención en nueve sub-skills especializadas: seis operaciones centrales de ejecución, dos asistentes de ciclo de vida y un motor de autoría:
+
+- **create** (crear) — Genera un plan nuevo a partir de un objetivo. El agente analiza el objetivo, lo descompone en tareas secuenciales y escribe los archivos del plan. En modo guiado materializa directamente un [plan Lite](/es/spec/lite-plans) (compacto y en línea en README.md), permitiendo al desarrollador conservarlo, promoverlo a plan Full o editarlo; en modo trust materializa directamente la representación solicitada sin confirmación interactiva. El análisis de requisitos y la verificación de calidad se ejecutan en ambos modos.
+- **execute** (ejecutar) — Recorre el plan tarea por tarea de forma secuencial. El agente actualiza el registro de progreso, ejecuta las puertas de validación y confirma cada tarea en git. En modo trust, la ejecución continúa de forma desatendida sin preguntas entre tareas.
+- **refine** (refinar) — Modifica un plan existente (agregando, editando, dividiendo o reordenando tareas, o promoviendo un plan Lite a Full) preservando estrictamente la evidencia completada y prohibiendo debilitar criterios sin confirmación.
+- **resume** (reanudar) — Continúa un plan interrumpido. El agente lee el journal de solo adición y los archivos de tarea para reconstruir el estado, continuando desde la primera tarea incompleta sin repetir trabajo concluido.
+- **status** (estado) — Informa del progreso sin ejecutar nada (estrictamente de solo lectura). Resume las tareas completadas, en curso y pendientes sin modificar archivos.
+- **verify** (verificar) — Comprueba la conformidad sin alterar nada (estrictamente de solo lectura). Informa si el repositorio cumple el estándar AI-first y si las tareas llevan criterios explícitos y puertas de validación.
+- **onboard** (incorporar) — Inspecciona el repositorio objetivo para razonar —nunca copiar y pegar— un `AGENTS.md` adaptado, la jerarquía estándar de `docs/`, documentación por módulo y el kit `.agents/` con enlaces simbólicos.
+- **upgrade** (actualizar) — Comprueba versiones publicadas upstream, solicita consentimiento antes de descargar, instala etiquetas estables fijadas y reconcilia adaptaciones locales sin tocar los planes `.dwp/` existentes.
+- **author** (autoría) — Crea o evoluciona skills, agentes o comandos locales del repositorio adaptados a flujos de trabajo recurrentes reales, y mantiene sincronizado el catálogo en `.agents/docs/`.
 
 ## El directorio de salida `.dwp/`
 
-Todos los artefactos de DWP viven bajo un directorio `.dwp/` ignorado por git en la raíz del repositorio. Mantener el espacio de trabajo fuera del control de versiones implica que el estado de trabajo de un plan nunca contamina el historial del proyecto.
+Todos los artefactos de DWP viven bajo un directorio `.dwp/` ignorado por git en la raíz del repositorio. Mantener el espacio de trabajo fuera del control de versiones implica que el estado de trabajo de un plan nunca contamina el historial del proyecto. La configuración de extensiones a nivel de repositorio se registra en `.dwp/config.json` (`dwp-config/v1`), mientras que los planes residen en carpetas numeradas:
 
 ```
 .dwp/
-├── plans/
-│   └── PLAN_001_<slug>/
-│       ├── README.md
-│       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+├── config.json
+└── plans/
+    └── PLAN_001_<slug>/
+        ├── manifest.json
+        ├── contract.json
+        ├── journal.ndjson
+        ├── state.json
+        ├── README.md
+        ├── PROGRESS.md
+        ├── 1.task_<slug>.md
+        ├── 2.task_<slug>.md
+        └── analysis_results/
 ```
 
 ## La anatomía de tarea de diez secciones
