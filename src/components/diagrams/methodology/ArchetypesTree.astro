@@ -115,7 +115,11 @@ const i18n = {
     edgeWs: '平台特征信号',
     indPoints: ['单一代码库', '计划修改本地文件', '.dwp/ 位于仓库根目录'],
     orcPoints: ['协调子仓库', '计划委派给子计划', '跨仓库的 .dwp/ 状态'],
-    wsPoints: ['自主代理运行环境', 'OpenClaw / Hermes 信号', 'git 可选 · 必需 state.json'],
+    wsPoints: [
+      '自主代理运行环境',
+      'OpenClaw / Hermes 信号',
+      'git 可选 · 必需 state.json',
+    ],
     caption:
       '首先对目标分类：独立仓库将计划限定在本地文件；编排中心在子仓库间协调；代理工作区支撑自主代理运行。',
   },
@@ -130,9 +134,21 @@ const i18n = {
     edgeInd: '単一コードベース',
     edgeOrc: '入れ子リポジトリ',
     edgeWs: 'プラットフォームシグナル',
-    indPoints: ['単一コードベース', '計画はローカルファイルを変更', 'リポジトリルートに .dwp/'],
-    orcPoints: ['サブリポジトリを統括', '子計画へ作業を委譲', 'リポジトリを跨ぐ .dwp/ 状態'],
-    wsPoints: ['自律エージェントの拠点', 'OpenClaw / Hermes のシグナル', 'git 任意 ・ state.json 必須'],
+    indPoints: [
+      '単一コードベース',
+      '計画はローカルファイルを変更',
+      'リポジトリルートに .dwp/',
+    ],
+    orcPoints: [
+      'サブリポジトリを統括',
+      '子計画へ作業を委譲',
+      'リポジトリを跨ぐ .dwp/ 状態',
+    ],
+    wsPoints: [
+      '自律エージェントの拠点',
+      'OpenClaw / Hermes のシグナル',
+      'git 任意 ・ state.json 必須',
+    ],
     caption:
       '対象をまず分類します。個別リポジトリは計画をローカルに限定し、オーケストレーターハブはサブリポジトリを統括し、エージェントワークスペースは自律稼働を支えます。',
   },
@@ -141,7 +157,7 @@ const i18n = {
       'Entscheidungsbaum: Einstufung als Einzel-Repository (einzelne Codebasis), Orchestrator-Hub (koordiniert Sub-Repositories) oder Agenten-Arbeitsbereich (autonome Laufzeit).',
     root: 'Zielverzeichnis',
     question: 'Welche Signale sind auf der Festplatte verifiziert?',
-    individual: 'Einzel-Repository' ,
+    individual: 'Einzel-Repository',
     orchestrator: 'Orchestrator-Hub',
     workspace: 'Agenten-Arbeitsbereich',
     edgeInd: 'Einzelne Codebasis',
@@ -206,8 +222,16 @@ const i18n = {
     edgeOrc: '중첩 리포지토리',
     edgeWs: '플랫폼 신호',
     indPoints: ['단일 코드베이스', '플랜이 로컬 파일 수정', '루트에 .dwp/'],
-    orcPoints: ['서브 리포지토리 조정', '하위 플랜으로 위임', '리포지토리 간 .dwp/ 상태'],
-    wsPoints: ['자율 에이전트 실행 환경', 'OpenClaw / Hermes 신호', 'git 선택 사항 · state.json 필수'],
+    orcPoints: [
+      '서브 리포지토리 조정',
+      '하위 플랜으로 위임',
+      '리포지토리 간 .dwp/ 상태',
+    ],
+    wsPoints: [
+      '자율 에이전트 실행 환경',
+      'OpenClaw / Hermes 신호',
+      'git 선택 사항 · state.json 필수',
+    ],
     caption:
       '대상을 먼저 분류하세요. 개별 리포지토리는 로컬 파일에 집중하고, 오케스트레이터 허브는 서브 리포지토리를 조정하며, 에이전트 워크스페이스는 자율 실행을 구동합니다.',
   },
@@ -454,11 +478,7 @@ const i18n = {
     edgeInd: 'ฐานโค้ดเดียว',
     edgeOrc: 'ที่เก็บซ้อนกัน',
     edgeWs: 'สัญญาณแพลตฟอร์ม',
-    indPoints: [
-      'ฐานโค้ดเดียว',
-      'แผนแก้ไขไฟล์ในเครื่อง',
-      '.dwp/ ที่รูทของที่เก็บ',
-    ],
+    indPoints: ['ฐานโค้ดเดียว', 'แผนแก้ไขไฟล์ในเครื่อง', '.dwp/ ที่รูทของที่เก็บ'],
     orcPoints: [
       'ประสานงานที่เก็บย่อย',
       'แผนมอบหมายงานให้แผนย่อย',
