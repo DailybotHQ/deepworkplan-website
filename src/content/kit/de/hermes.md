@@ -1,8 +1,6 @@
 ---
 title: Hermes
-description: "Der DWP-Adapter für Hermes: AgentSkills-Standard-Skill-Laden, episodische Gedächtnis-Synergie über Ergebnis-Einträge in state.json und cron-gesteuerte."
-
-In v6- und v7-Plänen wird der Status über `ledger.py project` aus dem reinen Anhangsjournal (`journal.ndjson`) projiziert, anstatt Statusdateien manuell neu zu schreiben.
+description: "Der DWP-Adapter für Hermes: AgentSkills-Standard-Skill-Laden, episodische Gedächtnis-Synergie über Ergebnis-Einträge in state.json und cron-gesteuerte Plan-Fortsetzung."
 kind: adapter
 lang: de
 order: 11

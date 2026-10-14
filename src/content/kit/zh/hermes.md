@@ -1,8 +1,6 @@
 ---
 title: Hermes
-description: "面向 Hermes 的 DWP 适配器：AgentSkills 标准技能加载、通过 state.json 中 outcome 记录实现的情节记忆协同，以及由 cron 驱动的。"
-
-在 v6 与 v7 计划中，状态是通过 `ledger.py project` 从仅追加日志（`journal.ndjson`）中投影出来的，而不是手动重写状态文件。
+description: "面向 Hermes 的 DWP 适配器：AgentSkills 标准技能加载、通过 state.json 中 outcome 记录实现的情节记忆协同，以及由 cron 驱动的计划续行。"
 kind: adapter
 lang: zh
 order: 11

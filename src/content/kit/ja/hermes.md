@@ -1,8 +1,6 @@
 ---
 title: Hermes
-description: "DWP の Hermes アダプター。AgentSkills 標準のスキルロード、state.json のアウトカムレコードによるエピソード記憶のシナジー、そしてクロン駆動な。"
-
-v6 および v7 プランでは、状態ファイルを手動で書き換えるのではなく、追記専用ジャーナル（`journal.ndjson`）から `ledger.py project` を介して状態を投影します。
+description: "DWP の Hermes アダプター。AgentSkills 標準のスキルロード、state.json のアウトカムレコードによるエピソード記憶のシナジー、そしてクロン駆動な計画継続。"
 kind: adapter
 lang: ja
 order: 11

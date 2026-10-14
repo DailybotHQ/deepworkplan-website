@@ -1,8 +1,6 @@
 ---
 title: Hermes
-description: "Adapter DWP untuk Hermes: pemuatan skill standar AgentSkills, sinergi memori episodik melalui catatan outcome di state.json, dan kelanjutan rencana berbasis."
-
-Dalam rencana v6 dan v7, status diproyeksikan dari jurnal append-only (`journal.ndjson`) melalui `ledger.py project` alih-alih menulis ulang file status secara manual.
+description: "Adapter DWP untuk Hermes: pemuatan skill standar AgentSkills, sinergi memori episodik melalui catatan outcome di state.json, dan kelanjutan rencana berbasis cron."
 kind: adapter
 lang: id
 order: 11

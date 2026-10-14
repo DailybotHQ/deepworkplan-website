@@ -1,8 +1,6 @@
 ---
 title: Hermes
-description: "adapter DWP สำหรับ Hermes: การโหลด skill ตามมาตรฐาน AgentSkills ความสอดประสานของหน่วยความจำเชิงลำดับเหตุการณ์ผ่านบันทึกผลลัพธ์ใน state.json."
-
-ในแผนงาน v6 และ v7 สถานะจะถูกฉายจากเจอร์นัลแบบเพิ่มต่อท้ายเท่านั้น (`journal.ndjson`) ผ่าน `ledger.py project` แทนที่จะเขียนไฟล์สถานะใหม่ด้วยตนเอง
+description: "adapter DWP สำหรับ Hermes: การโหลด skill ตามมาตรฐาน AgentSkills ความสอดประสานของหน่วยความจำเชิงลำดับเหตุการณ์ผ่านบันทึกผลลัพธ์ใน state.json และการดำเนินแผนต่อด้วย cron"
 kind: adapter
 lang: th
 order: 11

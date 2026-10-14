@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "DWP'nin Hermes adaptörü: AgentSkills standardı skill yüklemesi, state.json'daki sonuç kayıtları aracılığıyla bölümsel bellek sinerjisi ve cron tabanlı plan."
+description: "DWP'nin Hermes adaptörü: AgentSkills standardı skill yüklemesi, state.json'daki sonuç kayıtları aracılığıyla bölümsel bellek sinerjisi ve cron tabanlı plan devamı."
 kind: adapter
 lang: tr
 order: 11
