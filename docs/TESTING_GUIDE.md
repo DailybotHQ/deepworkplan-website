@@ -89,6 +89,7 @@ The tree is **mirrored**, not co-located:
 - Editorial/home components → `tests/unit/components/<topic>.test.ts`, which
   assert narrative and parity across plates rather than one component each
 - `scripts/repositories.sh` (ecosystem hub sync) → `tests/scripts/repositories.test.sh`, a bash test against offline fixture repositories run under `/bin/bash` — bash 3.2 on macOS pins 3.2 compatibility there, Linux CI runs bash 5 plus a check for bash 4+ constructs — `bash tests/scripts/repositories.test.sh`; it runs in the `public hygiene` job of `.github/workflows/ci.yml`
+- Static agent surfaces → guard tests: `public/llms.txt` / `public/llms-full.txt` and every install surface → `tests/unit/lib/install-surface-pins.test.ts` (vendored pack pins, tree-URL installs, the DeepWorkPlan Vim release and canonical `/quickstart` links); `public/.well-known/dwp.json` and `dwp-trust.json` → `tests/unit/lib/trust-manifest.test.ts` (DWP standard from `AGENTS.md`, archetype, vendored install, current plan schemas); `src/lib/mcp/**` → `tests/unit/lib/mcp-handler.test.ts`, and `SITE_SECTIONS` → `tests/unit/lib/api-v1.test.ts`, which requires `public/api/v1/sections.json` to mirror it field for field
 - Hub isolation (`tsconfig.json`, `astro.config.mjs` watch, `biome.json`, `vitest.config.ts`, `.gitignore`) → `tests/unit/lib/hub-isolation.test.ts`; touching any of those configs means running it
 
 ### Consumers and blind spots
@@ -109,7 +110,7 @@ A changed file is not always covered by the test that shares its name:
 
 ### Load-sensitive tests
 
-`tests/unit/lib/schema-urls.test.ts` scans every file under `.agents/skills`, `docs` and `src` synchronously. It takes 2–3 s on an idle machine and over 6 s on a busy shared one, so its first case carries an explicit 30 s timeout; a timeout there under load is not a regression — rerun it alone before investigating.
+`tests/unit/lib/schema-urls.test.ts` scans every file under `.agents/skills`, `docs` and `src` synchronously. It takes 2–3 s on an idle machine and over 6 s on a busy shared one, so its first case carries an explicit 30 s timeout; a timeout there under load is not a regression — rerun it alone before investigating. `tests/unit/lib/install-surface-pins.test.ts` scans every public install surface the same way and carries the same explicit 30 s timeout on its scan cases.
 
 ### Escalation
 
