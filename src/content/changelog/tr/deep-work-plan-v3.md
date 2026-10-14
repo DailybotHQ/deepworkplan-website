@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: token verimliliği baştan tasarlanmış hâliyle"
-description: "Deep Work Plan v3, çalışma ortamını bağlam maliyeti etrafında yeniden kuruyor — kademeli bilgi açığa çıkarma, yalnızca etkilenen yüzeyin doğrulanması ve tek zorunlu bir nihai inceleme — ve aynı zamanda güven ile uygunluk tabanını yükseltiyor."
+description: "Deep Work Plan v3 bağlam maliyetini optimize eder: kademeli bilgi açığa çıkarma, yalnızca etkilenen yüzeyin doğrulanması ve zorunlu nihai inceleme."
 date: 2026-09-10
 version: "v3 · Token verimliliği"
 kind: release

@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: dari siklus penulisan rencana menjadi harness portabel"
-description: "Deep Work Plan berkembang dari satu siklus penulisan rencana menjadi kit adopsi portabel — kepercayaan dan asal-usul, cakupan host agen yang lebih luas, dan pemeriksa kepatuhan yang dapat dijalankan repositori mana pun."
+description: "Deep Work Plan v1 berkembang menjadi kit adopsi portabel: asal-usul terpercaya, dukungan agen yang lebih luas, dan pemeriksa kepatuhan repositori."
 date: 2026-06-12
 version: "v1 · Fondasi"
 kind: foundation

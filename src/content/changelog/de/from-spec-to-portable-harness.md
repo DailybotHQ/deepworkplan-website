@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: vom Plan-Loop zum portablen Harness"
-description: "Deep Work Plan wächst von einem einzelnen Plan-Loop zu einem portablen Adoptions-Kit heran — Vertrauen und Herkunftsnachweis, breitere Unterstützung für Agenten-Hosts und ein Konformitätsprüfer, den jedes Repository ausführen kann."
+description: "Deep Work Plan v1 wird zum portablen Adoptions-Kit: Herkunftsnachweis, breite Agenten-Unterstützung und Konformitätsprüfer für jedes Repository."
 date: 2026-06-12
 version: "v1 · Fundament"
 kind: foundation

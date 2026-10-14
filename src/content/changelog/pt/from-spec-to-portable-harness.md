@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: de um ciclo de planos a um harness portátil"
-description: "O Deep Work Plan evolui de um único ciclo de planos escritos para um kit de adoção portátil — confiança e proveniência, cobertura mais ampla de hosts de agentes e um verificador de conformidade que qualquer repositório pode executar."
+description: "O Deep Work Plan v1 evolui para um kit de adoção portátil: proveniência verificável, cobertura ampla de agentes e verificador de conformidade."
 date: 2026-06-12
 version: "v1 · Fundação"
 kind: foundation

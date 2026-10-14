@@ -1,6 +1,6 @@
 ---
 title: "DWP v2: el repositorio se convierte en el arnés"
-description: "El primer lanzamiento oficial de Deep Work Plan convierte al propio repositorio en el arnés de trabajo del agente: contexto, barreras de seguridad, validación y estado, todo nativo del repositorio."
+description: "Deep Work Plan v2 convierte al repositorio en el entorno de trabajo del agente: contexto, reglas, validación y estado integrados en el código."
 date: 2026-07-16
 version: "v2 · Lanzamiento oficial"
 kind: foundation

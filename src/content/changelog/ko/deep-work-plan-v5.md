@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: 이제 보장되는 약속들"
-description: "Deep Work Plan v5는 오랜 여덟 가지 약속을 테스트되고 버전이 관리되는 계약으로 바꿉니다 — 정직한 검증기, 안전한 오케스트레이션, 그리고 검증된 업그레이드 경로."
+description: "Deep Work Plan v5는 여덟 가지 약속을 버전 관리 계약으로 바꿉니다: 정직한 검증기, 안전한 오케스트레이션, 검증된 업그레이드 경로."
 date: 2026-09-12
 version: "v5 · 테스트로 보장"
 kind: release

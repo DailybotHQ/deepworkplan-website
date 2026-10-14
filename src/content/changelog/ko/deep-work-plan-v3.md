@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: 설계로 실현하는 토큰 효율성"
-description: "Deep Work Plan v3는 점진적 정보 공개, 영향 범위에 한정된 검증, 단일 필수 Final Review를 통해 컨텍스트 비용을 중심으로 하니스를 재구성하는 동시에 신뢰와 적합성의 최저 기준을 끌어올립니다."
+description: "Deep Work Plan v3는 컨텍스트 비용을 중심으로 재구축되어 점진적 공개, 영향 범위 검증, 단일 필수 최종 검토를 도입합니다."
 date: 2026-09-10
 version: "v3 · 토큰 효율성"
 kind: release

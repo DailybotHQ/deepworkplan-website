@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: 계획 루프에서 이식 가능한 하니스로"
-description: "Deep Work Plan은 단일 계획 작성 루프에서, 신뢰와 출처, 더 폭넓은 에이전트 호스트 지원, 어떤 저장소에서든 실행할 수 있는 적합성 검사기를 갖춘 이식 가능한 도입 키트로 성장합니다."
+description: "Deep Work Plan v1은 단일 계획 루프에서 출처 검증, 에이전트 호스트 지원, 적합성 검사기를 갖춘 도입 키트로 확장됩니다."
 date: 2026-06-12
 version: "v1 · 기반"
 kind: foundation

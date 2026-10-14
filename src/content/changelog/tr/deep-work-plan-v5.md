@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: vaatler, artık garanti altında"
-description: "Deep Work Plan v5, köklü sekiz vaadi test edilmiş ve sürümlenmiş sözleşmelere dönüştürüyor — dürüst bir doğrulayıcı, güvenli orkestrasyon ve kanıtlanmış bir yükseltme yolu."
+description: "Deep Work Plan v5, sekiz vaadi sürümlenmiş sözleşmelere dönüştürüyor: dürüst bir doğrulayıcı, güvenli orkestrasyon ve kanıtlanmış yükseltme yolu."
 date: 2026-09-12
 version: "v5 · Testlerle garanti altında"
 kind: release

@@ -30,4 +30,6 @@ Keputusan arsitektur adalah GO: v6 mempertahankan metodologi yang sama dengan st
 
 Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
 
-Rilis skill yang dipasang: **6.0.2**. Paket 6.x membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi yang tercatat; migrasi memerlukan permintaan eksplisit yang ditinjau terlebih dahulu.
+Rilis 6.1.0 (2026-10-06) memperkenalkan metrik lapangan tolok ukur opsional dan pembelajaran rencana.
+
+Rilis skill yang dipasang: **6.1.0** (rilis 6.x terakhir). Paket 6.x membuat rencana baru menggunakan v6 secara default. Rencana yang ada mempertahankan generasi yang tercatat; migrasi memerlukan permintaan eksplisit yang ditinjau terlebih dahulu.
