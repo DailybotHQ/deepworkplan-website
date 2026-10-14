@@ -1,6 +1,6 @@
 ---
 title: dwp-create
-description: "Créez un Deep Work Plan depuis un objectif, avec grammaire d'options de frontière, propositions Lite, dossiers numérotés et contrats v7."
+description: "Créez un Deep Work Plan à partir d’un objectif, avec la grammaire complète des options de frontière, propositions Lite, dossiers numérotés et contrats v7."
 kind: command
 lang: fr
 order: 1
@@ -18,7 +18,7 @@ Créer un nouveau Deep Work Plan à partir d’un objectif de haut niveau.
 
 ## Ce qu’il fait
 
-`dwp-create` prend un objectif de haut niveau et le transforme en un plan structuré. Il analyse l’objectif, pose des questions de clarification si nécessaire, décompose le travail en tâches séquentielles et écrit les fichiers du plan.
+`dwp-create` prend un objectif de haut niveau et le transforme en un Deep Work Plan structuré et exécutable. Il analyse les exigences, pose des questions de clarification en cas d’ambiguïté et matérialise un plan Lite ou Full directement sous `.dwp/plans/PLAN_<id>_<slug>/`.
 
 ## Utilisation
 
@@ -28,28 +28,26 @@ Créer un nouveau Deep Work Plan à partir d’un objectif de haut niveau.
 /dwp-create <goal> full trust
 ```
 
-## Modes
+## Modes et options de frontière
 
-`dwp-create` fonctionne par défaut en mode **guidé** : il rassemble le contexte, exécute l’analyse, et matérialise directement un plan Lite — une proposition compacte déjà exécutable, pas une ébauche jetable — **vous la présente et vous demande si vous souhaitez la conserver telle quelle (Lite), la promouvoir vers un plan Full à fichiers de tâche, la modifier, ou arrêter** — afin que vous lisiez toujours le plan réel avant de décider. C’est la valeur par défaut recommandée, surtout les premières fois.
+Les options de frontière configurent le comportement de relecture et le format du plan. Elles peuvent apparaître sous forme de jetons au début ou à la fin de la commande, dans n’importe quel ordre :
 
-Ajoutez **`trust`** (ou `auto`) comme dernier mot pour sauter cette relecture — l’agent passe directement à un plan pré-approuvé et prêt à l’exécution (Lite ou Full, choisi selon les mêmes signaux) :
-
-```
-/dwp-create <goal> trust
-```
-
-Le mode trust est le raccourci pour utilisateurs avertis une fois que vous avez confiance dans le flux ; le mode guidé garde par défaut un humain dans la boucle.
+- **Modes de relecture :**
+  - **Guidé (par défaut) :** matérialise une proposition de plan Lite exécutable, présente les signaux observés et la justification du format, puis demande s’il faut conserver Lite, promouvoir vers Full, modifier ou arrêter.
+  - **Trust (`trust` ou `auto`) :** saute la relecture et passe directement à un plan pré-approuvé, prêt à l’exécution.
+- **Préférences de format :**
+  - **`lite` :** exprime une préférence pour un plan compact en un seul fichier, `README.md`, avec des enregistrements de tâche ancrés (`#task-N`).
+  - **`full` :** exprime une préférence pour des fichiers de tâche numérotés et décomposés (`N.task_<slug>.md`).
+  - Indiquer à la fois `lite` et `full` constitue un conflit explicite.
+- **Terminateur :** `--` met fin à l’analyse des options ; tout ce qui suit `--` est interprété comme contexte littéral de l’objectif.
 
 ## Comportement
-1. Analyser l’objectif et le contexte du dépôt.
-2. Poser des questions de clarification en cas d’ambiguïté.
-3. Matérialiser le plan directement sous `.dwp/plans/PLAN_<id>_<slug>/` — un plan Lite par défaut, ou Full pour les travaux plus importants (en mode guidé, le relire et choisir de le conserver en Lite, de le promouvoir vers Full, de le modifier, ou d’arrêter).
-4. Décomposer en tâches séquentielles et écrire le README, les fichiers de tâche et PROGRESS.
-4. `ledger.py materialize` -> `contract.json` (v7).
-5. Terminer par le Final Review (passe de sécurité, validation de l’état final, réconciliation des skills).
 
-Le pack 7.x crée les plans v7 par défaut. Les plans existants conservent leur génération enregistrée ; une migration nécessite une demande explicite. Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v7, 2 à 4. `ledger.py materialize` -> `contract.json` (v7).
-5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
+1. **Analyse des exigences :** examine le contexte du dépôt, l’architecture et les commandes de test documentées.
+2. **Clarification :** pose des questions de clarification si le périmètre ou les exigences sont ambigus.
+3. **Allocation monotone :** alloue un nom de dossier complété par des zéros `PLAN_<id>_<slug>/` sous `.dwp/plans/` à l’aide de `.next-plan-id`, sous verrou de fichier POSIX (`fcntl`). Les ID numériques sont monotones et jamais réutilisés.
+4. **Matérialisation du contrat :** exécute `ledger.py materialize` pour écrire `manifest.json`, apposer le `contract.json` adressé par contenu (génération v7 avec marqueurs de tâche `parallel_safe`) et enregistrer l’événement initial `approval`.
+5. **Final Review :** les plans se terminent par une tâche obligatoire de Final Review en cinq parties (passe de sécurité avec relecture locale obligatoire, validation de l’état final, réconciliation des skills, réconciliation de la documentation, achèvement).
 
 ## Alias
 

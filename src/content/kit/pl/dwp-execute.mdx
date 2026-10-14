@@ -1,6 +1,6 @@
 ---
 title: dwp-execute
-description: "Wykonuj istniejący Deep Work Plan sekwencyjnie z pętlą księgi v7, opcjonalnym trybem trust, delegowaniem i domknięciem Final Review."
+description: "Wykonuje istniejący Deep Work Plan sekwencyjnie z pętlą księgi v7, opcjonalnym trybem trust bez nadzoru, delegowaniem parallel_safe i domknięciem Final Review."
 kind: command
 lang: pl
 order: 2
@@ -12,29 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Wykonaj istniejący Deep Work Plan.
+Wykonaj istniejący Deep Work Plan zadanie po zadaniu.
 
 <CmdExecute lang="pl" class="not-prose my-8" />
 
 ## Co robi
 
-`dwp-execute` wykonuje istniejący plan zadanie po zadaniu. Czyta cały plan, wykonuje każde zadanie po kolei, aktualizuje `PROGRESS.md` i odnotowuje status ukończenia każdego zadania.
+`dwp-execute` wykonuje istniejący plan zadanie po zadaniu za pośrednictwem deterministycznej warstwy zapisów. Rozpoznaje plan docelowy, ocenia zależności, wykonuje każde zadanie w zadeklarowanej kolejności, uruchamia bramki walidacji i rejestruje niezmienny postęp.
 
 ## Użycie
 
 ```
-/dwp-execute
-/dwp-execute [plan]
-/dwp-execute [plan] trust
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Tryby
+
+- **Prowadzony (domyślny):** prosi o potwierdzenie między zadaniami, umożliwiając przegląd dowodów i decyzji na każdej granicy zadania.
+- **Trust (`auto`):** dopisanie `trust` wykonuje kwalifikujące się zadania sekwencyjnie do końca bez zatrzymywania się na rutynowe potwierdzenia i zatrzymuje się tylko przy rzeczywistej blokadzie (klasy eskalacji C1–C7).
 
 ## Zachowanie
 
-1. Przeczytanie całego planu przed rozpoczęciem.
-2. `ledger.py ready` & `ledger.py start` -> Wykonywanie zadań po kolei.
-3. `ledger.py gate` -> `observed` evidence; Aktualizacja `PROGRESS.md` po każdym zadaniu.
-4. `parallel_safe` delegation; Wierne odnotowanie statusu zadania.
-5. `ledger.py complete` & Final Review; Zatrzymanie się i zapytanie w razie zablokowania.
+1. **Rozpoznanie planu:** rozpoznaje plan po dokładnej nazwie folderu, identyfikatorze numerycznym, unikalnym slugu lub `latest` (plan o najwyższym identyfikatorze numerycznym).
+2. **Pętla księgi:** uruchamia `ledger.py ready`, aby ocenić DAG zależności i niezmienniki, `ledger.py start`, aby zweryfikować warunki wstępne, oraz `ledger.py gate`, aby wykonać polecenia walidacji i wytworzyć dowody `observed`.
+3. **Chronione zakończenie:** `ledger.py complete` egzekwuje kontrole przeciw przebiegom bez testów, świeżą ocenę niezmienników oraz lokalne dla zadania decyzje dotyczące skilli i dokumentacji.
+4. **Delegowanie w obrębie planu:** zadania oznaczone jako `parallel_safe` w kontraktach v7 mogą być delegowane do subagentów przez transport headless (`ak run` w worktree) lub interaktywny (panel `herdr`). Wyniki pozostają `asserted`, dopóki nie zaobserwuje ich wykonawca bramek planu.
+5. **Kontrole pojemności:** na granicach zadań, przed przekazaniem, ocenia pozostały zapas konta.
+6. **Final Review:** kończy się obowiązkowym, pięcioczęściowym zadaniem zamykającym (przegląd bezpieczeństwa z wymaganym przeglądem lokalnym, walidacja stanu końcowego, uzgodnienie skilli, uzgodnienie dokumentacji, zakończenie).
 
 ## Aliasy
 

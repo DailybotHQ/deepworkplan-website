@@ -1,6 +1,6 @@
 ---
 title: dwp-execute
-description: "Thực thi tuần tự một Deep Work Plan với vòng lặp sổ cái v7, chế độ trust không giám sát, ủy quyền parallel_safe và Final Review với xác minh đầy đủ."
+description: "Thực thi tuần tự một Deep Work Plan sẵn có với vòng lặp sổ cái v7, chế độ trust không giám sát tùy chọn, ủy quyền parallel_safe và khép lại bằng Final Review."
 kind: command
 lang: vi
 order: 2
@@ -12,29 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Thực thi một Deep Work Plan sẵn có.
+Thực thi một Deep Work Plan sẵn có theo từng tác vụ.
 
 <CmdExecute lang="vi" class="not-prose my-8" />
 
 ## Tác dụng
 
-`dwp-execute` chạy một kế hoạch sẵn có theo từng tác vụ. Nó đọc toàn bộ kế hoạch, thực thi từng tác vụ theo thứ tự, cập nhật `PROGRESS.md`, và đánh dấu trạng thái hoàn thành của mỗi tác vụ.
+`dwp-execute` chạy một kế hoạch sẵn có theo từng tác vụ thông qua lớp ghi nhận tất định. Nó xác định kế hoạch đích, đánh giá các phụ thuộc, thực thi từng tác vụ theo thứ tự đã khai báo, chạy các cổng xác thực và ghi lại tiến độ bất biến.
 
 ## Cách dùng
 
 ```
-/dwp-execute
-/dwp-execute [plan]
-/dwp-execute [plan] trust
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Chế độ
+
+- **Có hướng dẫn (mặc định):** yêu cầu xác nhận giữa các tác vụ, cho phép bạn xem xét bằng chứng và quyết định tại mọi ranh giới tác vụ.
+- **Trust (`auto`):** thêm `trust` vào cuối sẽ chạy tuần tự các tác vụ đủ điều kiện đến khi hoàn tất mà không dừng lại để xác nhận thường lệ, chỉ dừng khi thực sự bị chặn (các lớp leo thang C1–C7).
 
 ## Hành vi
 
-1. Đọc toàn bộ kế hoạch trước khi bắt đầu.
-2. `ledger.py ready` & `ledger.py start` -> Thực thi các tác vụ theo thứ tự.
-3. `ledger.py gate` -> `observed` evidence; Cập nhật `PROGRESS.md` sau mỗi tác vụ.
-4. `parallel_safe` delegation; Đánh dấu trạng thái tác vụ chính xác.
-5. `ledger.py complete` & Final Review; Dừng lại và hỏi khi bị chặn.
+1. **Xác định kế hoạch:** xác định theo tên thư mục chính xác, ID số, slug duy nhất hoặc `latest` (kế hoạch có ID số cao nhất).
+2. **Vòng lặp sổ cái:** chạy `ledger.py ready` để đánh giá DAG phụ thuộc và các bất biến, `ledger.py start` để xác minh điều kiện tiên quyết, và `ledger.py gate` để thực thi các lệnh xác thực và tạo bằng chứng `observed`.
+3. **Hoàn tất có bảo vệ:** `ledger.py complete` áp đặt các kiểm soát không-có-kiểm-thử, đánh giá lại các bất biến, cùng các quyết định về skill và tài liệu cục bộ theo tác vụ.
+4. **Ủy quyền trong kế hoạch:** các tác vụ được đánh dấu `parallel_safe` trong hợp đồng v7 có thể ủy quyền cho tác tử con qua kênh headless (`ak run` trong một worktree) hoặc tương tác (ô `herdr`). Kết quả giữ trạng thái `asserted` cho đến khi được trình chạy cổng của kế hoạch quan sát.
+5. **Kiểm tra năng lực:** đánh giá dư địa tài khoản còn lại tại các ranh giới tác vụ trước khi điều phối.
+6. **Final Review:** kết thúc bằng một tác vụ khép lại bắt buộc gồm năm phần (lượt kiểm tra bảo mật với bước xem xét cục bộ bắt buộc, xác thực trạng thái cuối, đối chiếu skill, đối chiếu tài liệu, hoàn tất).
 
 ## Bí danh
 

@@ -1,6 +1,6 @@
 ---
 title: dwp-execute
-description: "v7 元帳ループ、オプションの自動 trust モード、parallel_safe 委任、最終レビュー終了により順次実行します。"
+description: "v7 台帳ループ、任意の無人 trust モード、parallel_safe 委任、Final Review による締めで既存の Deep Work Plan を順次実行します。"
 kind: command
 lang: ja
 order: 2
@@ -12,29 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-既存の Deep Work Plan を実行します。
+既存の Deep Work Plan をタスクごとに実行します。
 
 <CmdExecute lang="ja" class="not-prose my-8" />
 
 ## 何をするか
 
-`dwp-execute` は既存の計画をタスクごとに実行します。計画全体を読み、各タスクを順序どおりに実行し、`PROGRESS.md` を更新し、各タスクの完了状態を記します。
+`dwp-execute` は決定論的な記録層を通じて、既存の計画をタスクごとに実行します。対象の計画を解決し、依存関係を評価し、宣言された順序で各タスクを実行し、検証ゲートを走らせ、不変の進捗を記録します。
 
 ## 使い方
 
 ```
-/dwp-execute
-/dwp-execute [plan]
-/dwp-execute [plan] trust
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## モード
+
+- **ガイド付き（既定）：** タスクの間で確認を求め、タスクの境界ごとに証拠と決定をレビューできるようにします。
+- **Trust（`auto`）：** `trust` を付け加えると、対象となるタスクを順次完了まで実行し、定型的な確認のために止まることはなく、本当に阻害されたとき（エスカレーション区分 C1–C7）にのみ停止します。
 
 ## 振る舞い
 
-1. 開始前に計画全体を読む。
-2. `ledger.py ready` & `ledger.py start` -> タスクを順序どおりに実行する。
-3. `ledger.py gate` -> `observed` evidence; 各タスクのあとに `PROGRESS.md` を更新する。
-4. `parallel_safe` delegation; タスクの状態を正確に記す。
-5. `ledger.py complete` & Final Review; 阻害されたときは止まって尋ねる。
+1. **計画の解決：** 正確なフォルダ名、数値 ID、一意の slug、または `latest`（数値 ID が最も大きい計画）で解決する。
+2. **台帳ループ：** `ledger.py ready` で依存 DAG と不変条件を評価し、`ledger.py start` で前提条件を確認し、`ledger.py gate` で検証コマンドを実行して `observed` の証拠を発行する。
+3. **ガード付きの完了：** `ledger.py complete` が、テストゼロへの統制、不変条件の再評価、タスク単位のスキルとドキュメントの決定を強制する。
+4. **計画内の委任：** v7 契約で `parallel_safe` とマークされたタスクは、ヘッドレス（worktree 内での `ak run`）または対話型（`herdr` ペイン）のトランスポートでサブエージェントに委任できる。結果は計画のゲートランナーが観測するまで `asserted` のままとなる。
+5. **容量チェック：** ディスパッチの前に、タスクの境界でアカウントの残り余力を評価する。
+6. **Final Review：** 必須の 5 部構成の締めくくりタスク（必須のローカルレビューを含むセキュリティパス、最終状態の検証、スキルの突き合わせ、ドキュメントの突き合わせ、完了）で終了する。
 
 ## エイリアス
 

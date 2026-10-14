@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "追加専用ジャーナルと契約から ledger.py project を通じて決定論的に再開し、引き継ぎパケットを処理して検証します。"
+description: "ledger.py project でジャーナルと契約から中断した Deep Work Plan を決定論的に再開し、swarm 引き継ぎパケットを取り込みゲートを実行します。"
 kind: command
 lang: ja
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-中断された Deep Work Plan を再開します。
+中断された Deep Work Plan を永続的な記録から再開します。
 
 <CmdResume lang="ja" class="not-prose my-8" />
 
 ## 何をするか
 
-`dwp-resume` は中断された計画を続行します。`PROGRESS.md` とタスクファイルから状態を再構築し、最初の未完了タスクから続行します。
+`dwp-resume` は、ワークスペースの成果物だけを頼りに、中断された計画を重複実行なしで安全に続行します。`journal.ndjson` と `contract.json` から状態を決定論的に再構築し、保留中の引き継ぎパケットを読み、最初の未完了タスクから続行します。
 
 ## 使い方
 
@@ -28,10 +28,11 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 ## 振る舞い
 
-1. `PROGRESS.md` とタスクファイルを読む。
-2. 実行状態を再構築する。
-3. 最初の未完了タスクから続行する。
-4. 進行に応じて進捗を更新する。
+1. **記録の読み取り：** `.dwp/plans/PLAN_<id>_<slug>/` の下の `contract.json` と `journal.ndjson` を調べる。
+2. **状態の投影：** `ledger.py project` を実行し、追記専用のジャーナルから `state.json` を決定論的に再生成する。食い違いはジャーナルを優先して解決する。
+3. **引き継ぎの取り込み：** 保留中の swarm 引き継ぎパケット（`dwp-handoff-v1`）を確認し、進行中の意図、未検証のゲート、未解決のピアへの依頼を回復する。
+4. **継ぎ目の検証：** 再開前に git の状態を確認し、変更対象の箇所でスモークチェックを実行する。
+5. **続行：** 最初の未完了タスクを標準の実行ループで実行する。旧来の v5 計画は、強制的な移行なしに記録された `PROGRESS.md` のフローで続行する。
 
 ## エイリアス
 

@@ -8,10 +8,13 @@ usage: /dwp-status [plan]
 aliases:
   - dwp:status
 ---
+import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
 
 # dwp-status
 
-Informa del estado del Deep Work Plan sin ejecutar cambios.
+Informa del estado de un Deep Work Plan sin ejecutarlo.
+
+<CmdStatus lang="es" class="not-prose my-8" />
 
 ## Qué hace
 
@@ -20,8 +23,8 @@ Informa del estado del Deep Work Plan sin ejecutar cambios.
 ## Uso
 
 ```
-/dwp-status                      # listar y resumir todos los planes
-/dwp-status [plan]               # detallar un plan específico
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Comportamiento

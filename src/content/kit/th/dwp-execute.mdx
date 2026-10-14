@@ -1,6 +1,6 @@
 ---
 title: dwp-execute
-description: "ดำเนินการ Deep Work Plan ตามลำดับด้วยลูปบัญชีแยกประเภท v7 โหมด trust ที่ไม่ต้องควบคุม การมอบหมายงาน และการปิด Final Review พร้อมการตรวจสอบเต็มรูปแบบ"
+description: "ดำเนิน Deep Work Plan ที่มีอยู่ตามลำดับด้วยลูปบัญชี v7 โหมด trust แบบไม่ต้องเฝ้าที่เลือกใช้ได้ การมอบหมายงาน parallel_safe และการปิดด้วย Final Review"
 kind: command
 lang: th
 order: 2
@@ -12,29 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-ดำเนิน Deep Work Plan ที่มีอยู่
+ดำเนิน Deep Work Plan ที่มีอยู่ทีละ task
 
 <CmdExecute lang="th" class="not-prose my-8" />
 
 ## สิ่งที่มันทำ
 
-`dwp-execute` รันแผนที่มีอยู่ทีละ task มันอ่านแผนทั้งหมด ดำเนินแต่ละ task ตามลำดับ อัปเดต `PROGRESS.md` และทำเครื่องหมายสถานะความเสร็จของแต่ละ task
+`dwp-execute` รันแผนที่มีอยู่ทีละ task ผ่านชั้นบันทึกแบบกำหนดผลได้ มันระบุแผนเป้าหมาย ประเมินการพึ่งพา ดำเนินแต่ละ task ตามลำดับที่ประกาศไว้ รันเกตการตรวจสอบ และบันทึกความคืบหน้าที่แก้ไขไม่ได้
 
 ## วิธีใช้
 
 ```
-/dwp-execute
-/dwp-execute [plan]
-/dwp-execute [plan] trust
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## โหมด
+
+- **Guided (ค่าเริ่มต้น):** ขอการยืนยันระหว่าง task เพื่อให้คุณทบทวนหลักฐานและการตัดสินใจได้ทุกขอบเขตของ task
+- **Trust (`auto`):** การต่อท้ายด้วย `trust` จะรัน task ที่เข้าเกณฑ์ตามลำดับจนเสร็จโดยไม่หยุดเพื่อขอการยืนยันตามปกติ และจะหยุดเฉพาะเมื่อติดขัดจริงเท่านั้น (ระดับการยกระดับ C1–C7)
 
 ## พฤติกรรม
 
-1. อ่านแผนทั้งหมดก่อนเริ่ม
-2. `ledger.py ready` & `ledger.py start` -> ดำเนิน task ตามลำดับ
-3. `ledger.py gate` -> `observed` evidence; อัปเดต `PROGRESS.md` หลังแต่ละ task
-4. `parallel_safe` delegation; ทำเครื่องหมายสถานะ task อย่างแม่นยำ
-5. `ledger.py complete` & Final Review; หยุดและถามเมื่อติดขัด
+1. **การระบุแผน:** ระบุด้วยชื่อโฟลเดอร์ที่ตรงกันทุกตัวอักษร ID ตัวเลข slug ที่ไม่ซ้ำ หรือ `latest` (แผนที่มี ID ตัวเลขสูงสุด)
+2. **ลูปบัญชี:** รัน `ledger.py ready` เพื่อประเมิน DAG ของการพึ่งพาและค่าคงตัว `ledger.py start` เพื่อตรวจเงื่อนไขก่อนเริ่ม และ `ledger.py gate` เพื่อรันคำสั่งตรวจสอบและออกหลักฐาน `observed`
+3. **การปิดงานแบบมีการป้องกัน:** `ledger.py complete` บังคับใช้การควบคุมกรณีไม่มีการทดสอบ การประเมินค่าคงตัวใหม่ และการตัดสินใจเรื่อง skill และเอกสารในระดับ task
+4. **การมอบหมายงานภายในแผน:** task ที่ทำเครื่องหมาย `parallel_safe` ในสัญญา v7 สามารถมอบหมายให้ subagent ผ่านช่องทางแบบ headless (`ak run` ใน worktree) หรือแบบโต้ตอบ (pane ของ `herdr`) ผลลัพธ์จะคงเป็น `asserted` จนกว่าตัวรันเกตของแผนจะสังเกตเห็น
+5. **การตรวจสอบความจุ:** ประเมินโควตาที่เหลือของบัญชีที่ขอบเขตของ task ก่อนส่งงานออกไป
+6. **Final Review:** ปิดท้ายด้วย task ปิดงานห้าส่วนที่บังคับ (การตรวจความปลอดภัยพร้อมการรีวิวในเครื่องที่จำเป็น การตรวจสอบสถานะสุดท้าย การกระทบยอดเรื่อง skill การกระทบยอดเอกสาร และการปิดงาน)
 
 ## ชื่อแทน
 

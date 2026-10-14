@@ -1,6 +1,6 @@
 ---
 title: dwp-create
-description: "Crea un Deep Work Plan da un obiettivo, con grammatica delle opzioni limite, proposte Lite iniziali, cartelle numerate e contratti v7."
+description: "Crea un Deep Work Plan da un obiettivo, con la grammatica completa delle opzioni limite, proposte Lite iniziali, cartelle numerate e contratti v7."
 kind: command
 lang: it
 order: 1
@@ -18,7 +18,7 @@ Crea un nuovo Deep Work Plan da un obiettivo di alto livello.
 
 ## Cosa fa
 
-`dwp-create` prende un obiettivo di alto livello e lo trasforma in un piano strutturato. Analizza l’obiettivo, pone domande di chiarimento se necessario, scompone il lavoro in attività sequenziali e scrive i file del piano.
+`dwp-create` prende un obiettivo di alto livello e lo trasforma in un Deep Work Plan strutturato ed eseguibile. Analizza i requisiti, pone domande di chiarimento in caso di ambiguità e materializza un piano Lite o Full direttamente sotto `.dwp/plans/PLAN_<id>_<slug>/`.
 
 ## Uso
 
@@ -28,28 +28,26 @@ Crea un nuovo Deep Work Plan da un obiettivo di alto livello.
 /dwp-create <goal> full trust
 ```
 
-## Modalità
+## Modalità e opzioni limite
 
-`dwp-create` usa per impostazione predefinita la modalità **guidata**: raccoglie il contesto, esegue l’analisi e materializza direttamente un piano Lite — una proposta compatta e già eseguibile, non una bozza usa e getta — **glielo mostra e chiede se mantenerlo come Lite, promuoverlo a un piano Full a file di attività, modificarlo o fermarsi** — così Lei legge sempre il piano reale prima di decidere. È l’impostazione predefinita consigliata, soprattutto le prime volte.
+Le opzioni limite configurano il comportamento della revisione e il formato del piano. Possono comparire come token all’inizio o alla fine del comando, in qualsiasi ordine:
 
-Aggiunga **`trust`** (o `auto`) come ultima parola per saltare questa revisione — l’agente passa direttamente a un piano pre-approvato e pronto all’esecuzione (Lite o Full, scelto in base agli stessi segnali):
-
-```
-/dwp-create <goal> trust
-```
-
-La modalità trust è la scorciatoia per utenti esperti, una volta che si fida del flusso; la modalità guidata mantiene per impostazione predefinita una persona nel ciclo.
+- **Modalità di revisione:**
+  - **Guidata (predefinita):** materializza una proposta di piano Lite eseguibile, mostra i segnali osservati e la motivazione del formato, e chiede se mantenere Lite, promuovere a Full, modificare o fermarsi.
+  - **Trust (`trust` o `auto`):** salta la revisione e passa direttamente a un piano pre-approvato e pronto all’esecuzione.
+- **Preferenze di formato:**
+  - **`lite`:** esprime la preferenza per un piano compatto in un unico file, `README.md`, con record di attività ancorati (`#task-N`).
+  - **`full`:** esprime la preferenza per file di attività numerati e scomposti (`N.task_<slug>.md`).
+  - Specificare sia `lite` sia `full` costituisce un conflitto esplicito.
+- **Terminatore:** `--` termina l’analisi delle opzioni; tutto ciò che segue `--` viene interpretato come contesto letterale dell’obiettivo.
 
 ## Comportamento
-1. Analizza l’obiettivo e il contesto del repository.
-2. Pone domande di chiarimento se ambiguo.
-3. Materializza il piano direttamente sotto `.dwp/plans/PLAN_<id>_<slug>/` — un piano Lite per impostazione predefinita, o Full per lavori più grandi (in modalità guidata, lo revisiona e sceglie se mantenerlo come Lite, promuoverlo a Full, modificarlo o fermarsi).
-4. Scompone in attività sequenziali e scrive il README, i file delle attività e PROGRESS.
-4. `ledger.py materialize` -> `contract.json` (v7).
-5. Conclude con il Final Review (passaggio di sicurezza, validazione dello stato finale, riconciliazione delle skill).
 
-Il pacchetto 7.x crea i piani v7 per impostazione predefinita. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita. I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v7 ne hanno 2–4. `ledger.py materialize` -> `contract.json` (v7).
-5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
+1. **Analisi dei requisiti:** esamina il contesto del repository, l’architettura e i comandi di test documentati.
+2. **Chiarimento:** pone domande di chiarimento se l’ambito o i requisiti sono ambigui.
+3. **Allocazione monotona:** assegna un nome di cartella con riempimento di zeri `PLAN_<id>_<slug>/` sotto `.dwp/plans/` tramite `.next-plan-id`, sotto lock di file POSIX (`fcntl`). Gli ID numerici sono monotoni e non vengono mai riutilizzati.
+4. **Materializzazione del contratto:** esegue `ledger.py materialize` per scrivere `manifest.json`, apporre il `contract.json` indirizzato per contenuto (generazione v7 con marcatori di attività `parallel_safe`) e registrare l’evento iniziale `approval`.
+5. **Final Review:** i piani terminano con un’attività obbligatoria di Final Review in cinque parti (passaggio di sicurezza con revisione locale obbligatoria, validazione dello stato finale, riconciliazione delle skill, riconciliazione della documentazione, completamento).
 
 ## Alias
 

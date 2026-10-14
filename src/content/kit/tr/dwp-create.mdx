@@ -1,6 +1,6 @@
 ---
 title: dwp-create
-description: "Sınır seçeneği dilbilgisi, Lite teklifler, numaralandırılmış klasörler ve v7 sözleşmeleri ile hedeften Deep Work Plan oluşturun tam doğrulama ile."
+description: "Üst düzey bir hedeften tam sınır seçeneği dilbilgisi, Lite öncelikli öneriler, numaralı klasör tahsisi ve v7 sözleşmeleriyle bir Deep Work Plan oluşturun."
 kind: command
 lang: tr
 order: 1
@@ -18,7 +18,7 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ## Ne yapar
 
-`dwp-create`, üst düzey bir hedefi alır ve onu yapılandırılmış bir plana dönüştürür. Hedefi analiz eder, gerekirse açıklayıcı sorular sorar, işi sıralı görevlere ayrıştırır ve plan dosyalarını yazar.
+`dwp-create`, üst düzey bir hedefi alır ve onu yapılandırılmış, yürütülebilir bir Deep Work Plan’e dönüştürür. Gereksinimleri analiz eder, belirsizlik varsa açıklayıcı sorular sorar ve bir Lite ya da Full planı doğrudan `.dwp/plans/PLAN_<id>_<slug>/` altında somutlaştırır.
 
 ## Kullanım
 
@@ -28,27 +28,26 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 /dwp-create <goal> full trust
 ```
 
-## Modlar
+## Modlar ve sınır seçenekleri
 
-`dwp-create`, varsayılan olarak **rehberli** modda çalışır: bağlamı toplar, analizi çalıştırır ve doğrudan bir Lite plan somutlaştırır — atılacak bir taslak değil, zaten yürütülebilir kompakt bir öneri — **bunu size gösterir ve Lite olarak tutmak mı, görev dosyalı bir Full plana yükseltmek mi, düzenlemek mi yoksa durdurmak mı istediğinizi sorar** — böylece karar vermeden önce her zaman gerçek planı okursunuz. Bu, özellikle ilk birkaç kullanımda önerilen varsayılandır.
+Sınır seçenekleri inceleme davranışını ve plan biçimini yapılandırır. Komutun başında ya da sonunda, herhangi bir sırayla belirteç olarak yer alabilirler:
 
-Bu incelemeyi atlamak için son sözcük olarak **`trust`** (ya da `auto`) ekleyin — ajan doğrudan önceden onaylanmış, çalıştırmaya hazır bir plana geçer (aynı sinyallerle seçilen Lite veya Full):
-
-```
-/dwp-create <goal> trust
-```
-
-Trust modu, akışa güvendiğinizde güçlü kullanıcılara yönelik bir kısayoldur; rehberli mod ise varsayılan olarak döngüde bir insan tutar.
+- **İnceleme modları:**
+  - **Rehberli (varsayılan):** yürütülebilir bir Lite plan önerisi somutlaştırır, gözlemlenen sinyalleri ve biçim gerekçesini gösterir; ardından Lite olarak tutmak mı, Full’a yükseltmek mi, düzenlemek mi yoksa durdurmak mı istediğinizi sorar.
+  - **Trust (`trust` ya da `auto`):** incelemeyi atlar ve doğrudan önceden onaylanmış, çalıştırmaya hazır bir plana geçer.
+- **Biçim tercihleri:**
+  - **`lite`:** `README.md` içinde sabitlenmiş görev kayıtları (`#task-N`) bulunan kompakt, tek dosyalı bir plan tercihini belirtir.
+  - **`full`:** ayrıştırılmış, numaralı görev dosyaları (`N.task_<slug>.md`) tercihini belirtir.
+  - Hem `lite` hem `full` belirtmek açık bir çelişkidir.
+- **Sonlandırıcı:** `--` seçenek ayrıştırmasını sonlandırır; `--` sonrasındaki her şey düz hedef bağlamı olarak yorumlanır.
 
 ## Davranış
-1. Hedefi ve depo bağlamını analiz edin.
-2. Belirsizse açıklayıcı sorular sorun.
-3. Planı doğrudan `.dwp/plans/PLAN_<id>_<slug>/` altına somutlaştırın — varsayılan olarak bir Lite plan, daha büyük işler için Full plan (rehberli modda inceleyip Lite olarak tutmayı, Full’a yükseltmeyi, düzenlemeyi ya da durdurmayı seçin).
-4. Sıralı görevlere ayrıştırın ve README, görev dosyaları ile PROGRESS dosyasını yazın.
-4. `ledger.py materialize` -> `contract.json` (v7).
-5. Final Review ile tamamlayın (güvenlik incelemesi, son-durum doğrulaması, skill uzlaştırması).
 
-7.x paketi varsayılan olarak v7 planları oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir. Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v7 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
+1. **Gereksinim analizi:** depo bağlamını, mimariyi ve belgelenmiş test komutlarını inceler.
+2. **Açıklama:** kapsam ya da gereksinimler belirsizse açıklayıcı sorular sorar.
+3. **Monoton tahsis:** POSIX dosya kilidi (`fcntl`) altında `.next-plan-id` kullanarak `.dwp/plans/` altında sıfırla doldurulmuş bir `PLAN_<id>_<slug>/` klasör adı tahsis eder. Sayısal kimlikler monoton artar ve asla yeniden kullanılmaz.
+4. **Sözleşme somutlaştırma:** `manifest.json` dosyasını yazmak, içerik adresli `contract.json` dosyasını damgalamak (`parallel_safe` görev işaretçileriyle v7 nesli) ve ilk `approval` olayını kaydetmek için `ledger.py materialize` komutunu çalıştırır.
+5. **Final Review:** planlar zorunlu, beş bölümlü bir Final Review göreviyle biter (zorunlu yerel inceleme içeren güvenlik geçişi, son durum doğrulaması, skill uzlaştırması, dokümantasyon uzlaştırması, tamamlama).
 
 ## Takma adlar
 

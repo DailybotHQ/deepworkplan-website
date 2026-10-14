@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Raportuj stan Deep Work Plan w czterech wymiarach cyklu życia, limitach zasobów, blokerach i delegacjach bez modyfikowania plików."
+description: "Raportuje stan Deep Work Plan w czterech wymiarach cyklu życia, limitach obwiedni zasobów, blokerach i delegacjach, bez modyfikowania jakichkolwiek plików."
 kind: command
 lang: pl
 order: 5
@@ -18,22 +18,22 @@ Zgłoś status Deep Work Plan bez jego wykonywania.
 
 ## Co robi
 
-`dwp-status` podsumowuje postęp planu bez wprowadzania zmian. Zgłasza zadania ukończone, w toku i oczekujące.
+`dwp-status` z mocy kontraktu działa wyłącznie w trybie odczytu. Podsumowuje postęp, aktywne blokery, punkty kontrolne i obwiednie zasobów, nie zmieniając żadnego pliku.
 
 ## Użycie
 
 ```
-/dwp-status
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Zachowanie
 
-1. 4 lifecycle dimensions (format, materialization, review, progress); Przeczytanie planu i `PROGRESS.md`.
-2. Podsumowanie ukończonych zadań.
-3. Podsumowanie zadań w toku.
-4. Resource envelope & blockers (C1–C7); Podsumowanie zadań oczekujących.
-5. Delegations observation; Zgłoszenie bez modyfikowania czegokolwiek.
+1. **Cztery wymiary cyklu życia:** raportuje format (`lite` lub `full`), stan materializacji (`materializing`, `ready` lub `promoting`), zatwierdzenie przeglądu (`pending`, `approved` lub `pre_approved`) oraz postęp wykonania (`pending`, `in_progress`, `blocked` lub `completed`).
+2. **Przegląd całego repozytorium:** wywołane bez argumentów wyświetla wszystkie plany w `.dwp/plans/` wraz z procentem ukończenia, lokalizatorami aktywnych zadań i podsumowaniami blokerów.
+3. **Obwiednia zasobów:** pokazuje zużycie względem pułapów w śledzonych wymiarach (`wall_clock`, ponowienia, przekazania, wydatki, tokeny) i wskazuje, czy limity są aktywnie egzekwowane, czy mają charakter doradczy.
+4. **Diagnoza blokerów:** przedstawia szczegóły aktywnych blokerów z `state.json.blocked`, sklasyfikowane według standardowej taksonomii eskalacji (klasy C1–C7).
+5. **Obserwacja delegacji:** podsumowuje otwarte i ukończone delegacje do subagentów oraz zarejestrowane wymiany z peerami.
 
 ## Aliasy
 

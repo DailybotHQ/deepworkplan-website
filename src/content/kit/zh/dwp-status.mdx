@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "在四个生命周期维度、资源包络配额、阻塞诊断与委派观察中全面报告 Deep Work Plan 状态，完全只读，支持端到端验证与执行。"
+description: "在不修改任何文件的前提下，从四个生命周期维度、资源包络上限、阻塞项与委派等方面报告 Deep Work Plan 的状态。"
 kind: command
 lang: zh
 order: 5
@@ -18,22 +18,22 @@ import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
 
 ## 它做了什么
 
-`dwp-status` 汇总计划的进展而不做任何改动。它会报告已完成、进行中与待办的任务。
+`dwp-status` 按契约严格只读。它汇总进度、当前阻塞项、检查点与资源包络，不对任何文件做改动。
 
 ## 用法
 
 ```
-/dwp-status
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## 行为
 
-1. 4 lifecycle dimensions (format, materialization, review, progress); 阅读计划与 `PROGRESS.md`。
-2. 汇总已完成的任务。
-3. 汇总进行中的任务。
-4. Resource envelope & blockers (C1–C7); 汇总待办的任务。
-5. Delegations observation; 报告而不修改任何东西。
+1. **四个生命周期维度：** 报告格式（`lite` 或 `full`）、物化状态（`materializing`、`ready` 或 `promoting`）、审阅批准（`pending`、`approved` 或 `pre_approved`）以及执行进度（`pending`、`in_progress`、`blocked` 或 `completed`）。
+2. **仓库级概览：** 不带参数调用时，列出 `.dwp/plans/` 下的所有计划，并附完成百分比、当前任务定位与阻塞摘要。
+3. **资源包络：** 展示各跟踪维度（`wall_clock`、重试、派发、花费、token）的已用量与上限，并指明这些上限是在强制执行还是仅作参考。
+4. **阻塞诊断：** 呈现 `state.json.blocked` 中的当前阻塞详情，按标准升级分类（类别 C1–C7）归类。
+5. **委派观察：** 汇总进行中与已完成的子代理委派，以及已记录的同伴交流。
 
 ## 别名
 
