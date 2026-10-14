@@ -18,10 +18,10 @@ Ein Deep Work Plan ist ein Verzeichnis von Markdown-Dateien. Die Form dieses Ver
 
 Ein Plan ist ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_001_<slug>/`. Es enthält:
 
-- `manifest.json` — Planmanifest und Metadaten.
+- `manifest.json` — Plan-Identität und Zeiger auf den aktiven Vertrag (bei der Materialisierung zuerst geschrieben).
 - `contract.json` — Spezifikationsvertrag und Scope des Plans.
 - `journal.ndjson` — Reines Append-Only-Ereignisjournal.
-- `state.json` — Aktueller Ausführungszustand und Cache.
+- `state.json` — aus dem Journal projizierter Snapshot, niemals manuell editiert.
 - `README.md` — Planübersicht: Ziel, Aufgabentabelle und Status.
 - `PROGRESS.md` — Menschenlesbares chronologisches Ausführungsprotokoll.
 - `<n>.task_<slug>.md` — Zehnteilige Spezifikationsdatei je Aufgabe.
@@ -41,7 +41,7 @@ Jeder Plan muss mit genau einer verpflichtenden Aufgabe abschließen: dem **Fina
 2. **Validierung des Endzustands** — Die vollständigen Test-, Lint- und Typecheck-Suiten des Repositorys laufen auf dem Endzustand und bestehen. Korrekturen während des Reviews invalidieren betroffene Ergebnisse und erzwingen einen erneuten Durchlauf.
 3. **Abgleich der Skills** — Verifizieren, dass jede Aufgabe ihre task-lokale Skill-Disposition erfasst hat, und umsetzbare Skill-Kandidaten in `analysis_results/SKILLS_CANDIDATES.md` abgleichen.
 4. **Dokumentationsabgleich** — Die Touched Surface jeder verhaltensändernden Aufgabe mit den Dokumenten abgleichen (`docs/TESTING_GUIDE.md`, Architektur, `AGENTS.md`), die diese Funktion festhalten.
-5. **Abschluss und Schließung** — Die Konsistenz zwischen Endzustand und Artefakten prüfen, den `analysis_results/FINALIZATION.json`-Receipt schreiben und den Plan offiziell abschließen.
+5. **Abschluss** — die Datensätze des Plans stimmen überein (Aufgabenliste, Fortschrittsprotokoll und bei v6/v7-Plänen der aus dem Journal abgeleitete Snapshot und Beleg); Lieferbestandteile, Nachweise und Einschränkungen melden und den Executive Report einmalig anbieten.
 
 ## README- und PROGRESS-Konventionen
 

@@ -19,10 +19,10 @@ Một Deep Work Plan là một thư mục các tệp markdown. Hình dạng củ
 Một kế hoạch là một thư mục dưới `.dwp/plans/` được đặt tên `PLAN_001_<slug>/`. Nó chứa:
 
 
-- `manifest.json` — manifest kế hoạch và siêu dữ liệu.
+- `manifest.json` — danh tính kế hoạch và con trỏ tới hợp đồng trực tiếp (được ghi đầu tiên khi hiện thực hóa).
 - `contract.json` — hợp đồng thực thi chính thức.
 - `journal.ndjson` — nhật ký sự kiện chỉ ghi thêm bất biến.
-- `state.json` — trạng thái thực thi hiện tại và hình chiếu.
+- `state.json` — ảnh chụp nhanh được chiếu từ journal, không bao giờ chỉnh sửa thủ công.
 - `README.md` — tổng quan kế hoạch: mục tiêu, tài liệu nguồn, bảng tác vụ và trạng thái.
 - Các tệp tác vụ, đặt tên `<n>.task_<slug>.md`.
 - `PROGRESS.md` — nhật ký thực thi chỉ ghi thêm.
@@ -43,7 +43,7 @@ Mọi kế hoạch phải kết thúc bằng đúng một tác vụ bắt buộc
 2. **Kiểm chứng trạng thái cuối cùng** — toàn bộ bộ kiểm thử, linter và kiểm tra kiểu của repository chạy và vượt qua trên trạng thái cuối cùng sau sửa đổi cuối.
 3. **Đối chiếu quyết định về skill** — xác minh rằng mỗi tác vụ đã ghi lại quyết định skill cục bộ, đối chiếu các ứng viên trong `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Đối chiếu tài liệu** — liên kết bề mặt chạm tới của mỗi tác vụ làm thay đổi hành vi với tài liệu (`docs/TESTING_GUIDE.md`, kiến trúc, `AGENTS.md`).
-5. **Hoàn tất và khép lại** — kiểm tra tính nhất quán giữa hình chiếu cuối cùng và các thành phần đã tạo, ghi biên nhận `analysis_results/FINALIZATION.json`, và chính thức khép lại kế hoạch.
+5. **Hoàn thành** — các bản ghi của kế hoạch đồng nhất (danh sách nhiệm vụ, nhật ký tiến độ và trong kế hoạch v6/v7 là ảnh chụp nhanh cùng biên nhận phái sinh từ journal); báo cáo kết quả bàn giao, bằng chứng và giới hạn, đồng thời đề xuất Executive Report một lần.
 
 ## Các quy ước README và PROGRESS
 

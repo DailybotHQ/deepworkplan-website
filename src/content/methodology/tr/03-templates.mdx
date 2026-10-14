@@ -19,10 +19,10 @@ Bir Deep Work Plan, Markdown dosyalarından oluşan bir dizindir. O dizinin — 
 Bir plan, `.dwp/plans/` altında `PLAN_001_<slug>/` olarak adlandırılmış bir dizindir. Şunları içerir:
 
 
-- `manifest.json` — plan bildirimi ve meta verileri.
+- `manifest.json` — plan kimliği ve etkin sözleşmeye yönelik işaretçi (somutlaştırmada ilk yazılan).
 - `contract.json` — resmi yürütme sözleşmesi.
 - `journal.ndjson` — değişmez olay günlüğü.
-- `state.json` — mevcut yürütme durumu ve projeksiyon.
+- `state.json` — journal üzerinden yansıtılan anlık görüntü, asla elle düzenlenmez.
 - `README.md` — plan genel görünümü: hedef, kaynak materyal, görev tablosu ve durum.
 - Görev dosyaları, `<n>.task_<slug>.md` olarak adlandırılır.
 - `PROGRESS.md` — yalnızca ekleme yapılan yürütme günlüğü.
@@ -43,7 +43,7 @@ Her plan, tam olarak tek bir zorunlu görevle bitmelidir: **Final Review**. Plan
 2. **Son durum doğrulaması** — deponun tam test, linter ve tip denetim paketleri, son düzeltmeden sonra son durum üzerinde çalışır ve geçer.
 3. **Yetenek kararlarının uzlaştırılması** — her görevin yerel bir yetenek kararı kaydettiğini doğrular ve `analysis_results/SKILLS_CANDIDATES.md` içindeki adayları uzlaştırır.
 4. **Belgelendirme uzlaştırması** — davranış değiştiren her görevin dokunduğu yüzeyi belgeleyen kılavuzlarla (`docs/TESTING_GUIDE.md`, mimari, `AGENTS.md`) eşleştirir.
-5. **Tamamlama ve kapanış** — son projeksiyon ile üretilen yapılar arasındaki tutarlılığı doğrular, `analysis_results/FINALIZATION.json` makbuzunu yazar ve planı resmi olarak kapatır.
+5. **Tamamlama** — plan kayıtları birbiriyle uyumludur (görev listesi, ilerleme günlüğü ve v6/v7 planlarında journal türevli anlık görüntü ve makbuz); teslimatları, kanıtları ve sınırlamaları bildirin ve Executive Report'u bir kez sunun.
 
 ## README ve PROGRESS kuralları
 

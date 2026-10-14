@@ -18,10 +18,10 @@ A Deep Work Plan is a directory of markdown files. The shape of that directory �
 
 A plan is a directory under `.dwp/plans/` named `PLAN_001_<slug>/`. It contains:
 
-- `manifest.json` — plan metadata, status, and contract pointer.
+- `manifest.json` — plan identity and the pointer to the live contract (written first at materialization).
 - `contract.json` — immutable, content-addressed outcome contract (acceptance criteria, scope, invariants).
 - `journal.ndjson` — append-only execution log of ledger events.
-- `state.json` — derived state cache computed from contract and journal.
+- `state.json` — snapshot projected from the journal, never hand-edited.
 - `README.md` — plan overview: goal, source material, task table, and status.
 - `PROGRESS.md` — human-readable running log of execution.
 - `1.task_<slug>.md`, `2.task_<slug>.md` — individual task markdown files.
@@ -41,7 +41,7 @@ Every plan must end with exactly one mandatory task: the **Final Review**. It cl
 2. **Final-state validation** — the repository's complete applicable test, lint, and type-check suites run and pass on the final state. Any fix made during review invalidates affected results and triggers a rerun.
 3. **Skills reconciliation** — verify every task recorded its task-local skills disposition and reconcile any warranted authoring in `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Documentation reconciliation** — sweep every behavior-changing task's touched surface against the docs that register it (`docs/TESTING_GUIDE.md`, architecture docs, and `AGENTS.md`).
-5. **Completion and closure** — verify the terminal projection against actual artifacts, record `analysis_results/FINALIZATION.json`, and close.
+5. **Completion** — the plan's records agree (task list, progress log and, in v6/v7 plans, the journal-derived snapshot and receipt); report deliverables, evidence and limitations, and offer the Executive Report once.
 
 ## README and PROGRESS conventions
 

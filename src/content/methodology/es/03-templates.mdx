@@ -18,10 +18,10 @@ Un Deep Work Plan es un directorio de archivos Markdown. La forma de ese directo
 
 Un plan es un directorio bajo `.dwp/plans/` llamado `PLAN_001_<slug>/`. Contiene:
 
-- `manifest.json`: metadatos del plan, estado y puntero al contrato.
+- `manifest.json`: identidad del plan y puntero al contrato activo (escrito primero en la materialización).
 - `contract.json`: contrato inmutable y direccionado por contenido de resultados (criterios de aceptación, alcance, invariantes).
 - `journal.ndjson`: registro de eventos de solo adición del ledger.
-- `state.json`: caché de estado derivado calculada a partir del contrato y del journal.
+- `state.json`: instantánea proyectada desde el journal, nunca editada a mano.
 - `README.md`: resumen del plan: objetivo, material de origen, tabla de tareas y estado.
 - `PROGRESS.md`: registro de ejecución legible para humanos.
 - `1.task_<slug>.md`, `2.task_<slug>.md`: archivos individuales de tarea en Markdown.
@@ -41,7 +41,7 @@ Todo plan debe terminar con exactamente una tarea obligatoria: el **Final Review
 2. **Validación de estado final**: la validación completa aplicable del repositorio (pruebas, linter y verificación de tipos) se ejecuta y pasa sobre el último estado. Cualquier corrección efectuada durante la revisión invalida los resultados afectados y exige volver a ejecutarlos.
 3. **Reconciliación de skills**: verificar que cada tarea haya registrado su disposición de skills local y reconciliar cualquier autoría justificada en `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Reconciliación de documentación**: contrastar la superficie tocada de cada tarea que cambia comportamiento con los documentos que la registran (`docs/TESTING_GUIDE.md`, documentos de arquitectura y `AGENTS.md`).
-5. **Finalización y cierre**: comprobar la proyección terminal contra los artefactos reales, registrar `analysis_results/FINALIZATION.json` y cerrar.
+5. **Finalización**: los registros del plan concuerdan (lista de tareas, registro de progreso y, en planes v6/v7, la instantánea y recibo derivados del journal); reportar entregables, evidencia y limitaciones, y ofrecer el Executive Report una vez.
 
 ## Convenciones de README y PROGRESS
 

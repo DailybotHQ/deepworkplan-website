@@ -18,10 +18,10 @@ Un Deep Work Plan est un répertoire de fichiers Markdown. La forme de ce réper
 
 Un plan est un répertoire sous `.dwp/plans/` nommé `PLAN_001_<slug>/`. Il contient :
 
-- `manifest.json` — manifeste du plan et métadonnées.
+- `manifest.json` — identité du plan et pointeur vers le contrat actif (écrit en premier lors de la matérialisation).
 - `contract.json` — contrat de spécification et périmètre du plan.
 - `journal.ndjson` — journal d’événements en ajout seul.
-- `state.json` — état d’exécution actuel et cache.
+- `state.json` — instantané projeté depuis le journal, jamais modifié manuellement.
 - `README.md` — vue d’ensemble du plan : objectif, tableau des tâches et statut.
 - `PROGRESS.md` — journal d’exécution chronologique lisible par l’humain.
 - `<n>.task_<slug>.md` — fichier de spécification en dix sections par tâche.
@@ -41,7 +41,7 @@ Tout plan doit se terminer par exactement une tâche obligatoire : le **Final Re
 2. **Validation de l’état final** — les suites complètes de tests, linting et vérification de types du dépôt s’exécutent et réussissent sur l’état final. Tout correctif intervenu lors de la revue invalide les résultats affectés et déclenche une réexécution.
 3. **Réconciliation des compétences** — vérifier que chaque tâche a consigné sa disposition locale de compétences, et rapprocher les opportunités de rédaction dans `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Réconciliation documentaire** — rapprocher la surface touchée de chaque tâche modifiant le comportement avec la documentation (`docs/TESTING_GUIDE.md`, architecture, `AGENTS.md`) qui consigne cette fonctionnalité.
-5. **Achèvement et clôture** — vérifier la cohérence entre projection finale et artefacts réels, consigner le reçu `analysis_results/FINALIZATION.json` et clore officiellement le plan.
+5. **Achèvement** — les registres du plan concordent (liste des tâches, journal de progression et, pour les plans v6/v7, instantané et reçu dérivés du journal) ; présenter les livrables, preuves et limites, et proposer l'Executive Report une seule fois.
 
 ## Conventions README et PROGRESS
 

@@ -18,10 +18,10 @@ Um Deep Work Plan é um diretório de arquivos markdown. O formato desse diretó
 
 Um plano é um diretório em `.dwp/plans/` chamado `PLAN_001_<slug>/`. Ele contém:
 
-- `manifest.json` — metadados do plano, status e ponteiro para o contrato.
+- `manifest.json` — identidade do plano e ponteiro para o contrato ativo (escrito primeiro na materialização).
 - `contract.json` — contrato imutável e endereçado por conteúdo de resultados (critérios de aceitação, escopo, invariantes).
 - `journal.ndjson` — registro de eventos de apenas anexação do ledger.
-- `state.json` — cache de estado derivado calculado a partir do contrato e do journal.
+- `state.json` — instantâneo projetado a partir do journal, nunca editado manualmente.
 - `README.md` — visão geral do plano: objetivo, material de origem, tabela de tarefas e status.
 - `PROGRESS.md` — registro contínuo de execução legível por humanos.
 - `1.task_<slug>.md`, `2.task_<slug>.md` — arquivos individuais de tarefa em Markdown.
@@ -41,7 +41,7 @@ Todo plano deve terminar com exatamente uma tarefa obrigatória: o **Final Revie
 2. **Validação do estado final** — a suíte completa de testes, linter e verificação de tipos do repositório é executada e passa sobre o último estado. Qualquer correção feita durante a revisão invalida os resultados afetados e exige nova execução.
 3. **Reconciliação de skills** — verificar se cada tarefa registrou sua disposição de skills local e reconciliar qualquer autoria necessária em `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Reconciliação de documentação** — verificar a superfície tocada de cada tarefa que altera comportamento contra os documentos que a registram (`docs/TESTING_GUIDE.md`, documentos de arquitetura e `AGENTS.md`).
-5. **Conclusão e encerramento** — validar a projeção terminal contra os artefatos reais, registrar `analysis_results/FINALIZATION.json` e concluir.
+5. **Conclusão** — os registros do plano concordam (lista de tarefas, registro de progresso e, em planos v6/v7, o instantâneo e recibo derivados do journal); relatar entregas, evidências e limitações, e oferecer o Executive Report uma vez.
 
 ## Convenções de README e PROGRESS
 

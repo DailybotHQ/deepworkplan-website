@@ -18,10 +18,10 @@ Un Deep Work Plan è una directory di file Markdown. La forma di quella director
 
 Un piano è una directory sotto `.dwp/plans/` denominata `PLAN_001_<slug>/`. Contiene:
 
-- `manifest.json` — manifesto del piano e metadati.
+- `manifest.json` — identità del piano e puntatore al contratto attivo (scritto per primo durante la materializzazione).
 - `contract.json` — contratto di specifica e ambito del piano.
 - `journal.ndjson` — giornale degli eventi a sola aggiunta.
-- `state.json` — stato di esecuzione corrente e cache.
+- `state.json` — snapshot proiettato dal journal, mai modificato manualmente.
 - `README.md` — panoramica del piano: obiettivo, tabella delle attività e stato.
 - `PROGRESS.md` — log di esecuzione cronologico leggibile dall'uomo.
 - `<n>.task_<slug>.md` — file di specifica in dieci sezioni per ciascuna attività.
@@ -41,7 +41,7 @@ Ogni piano deve concludersi con esattamente un’attività obbligatoria: il **Fi
 2. **Validazione dello stato finale** — le suite complete di test, lint e controllo tipi del repository vengono eseguite e superate sullo stato finale. Eventuali correzioni durante la revisione invalidano i risultati correlati e richiedono una nuova esecuzione.
 3. **Riconciliazione delle skill** — verificare che ogni attività abbia registrato la propria disposizione locale delle skill e riconciliare i candidati in `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Riconciliazione della documentazione** — allineare la superficie toccata di ogni attività che modifica il comportamento con i documenti (`docs/TESTING_GUIDE.md`, architettura, `AGENTS.md`) che registrano tale funzionalità.
-5. **Completamento e chiusura** — verificare la coerenza tra la proiezione finale e gli artefatti prodotti, registrare la ricevuta `analysis_results/FINALIZATION.json` e chiudere formalmente il piano.
+5. **Completamento** — i registri del piano concordano (elenco delle attività, log di avanzamento e, nei piani v6/v7, snapshot e ricevuta derivati dal journal); segnalare deliverable, prove e limitazioni, e proporre l'Executive Report una sola volta.
 
 ## Convenzioni di README e PROGRESS
 

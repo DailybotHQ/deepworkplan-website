@@ -19,10 +19,10 @@ Deep Work Plan to katalog plików Markdown. Kształt tego katalogu — i każdeg
 Plan to katalog w `.dwp/plans/` o nazwie `PLAN_001_<slug>/`. Zawiera:
 
 
-- `manifest.json` — manifest planu i metadane.
+- `manifest.json` — tożsamość planu i wskaźnik do aktywnego kontraktu (zapisywany jako pierwszy podczas materializacji).
 - `contract.json` — formalny kontrakt wykonawczy.
 - `journal.ndjson` — niezmienny dziennik zdarzeń.
-- `state.json` — bieżący stan wykonania i projekcja.
+- `state.json` — migawka rzutowana z dziennika (journal), nigdy nieedytowana ręcznie.
 - `README.md` — przegląd planu: cel, materiały źródłowe, tabelę zadań i status.
 - Pliki zadań, nazwane `<n>.task_<slug>.md`.
 - `PROGRESS.md` — bieżący dziennik realizacji dopisywany wyłącznie na bieżąco.
@@ -43,7 +43,7 @@ Każdy plan musi kończyć się dokładnie jednym obowiązkowym zadaniem: **Fina
 2. **Walidacja stanu końcowego** — pełne pakiety testów, linterów i sprawdzania typów uruchamiają się i przechodzą na ostatecznym stanie po ostatniej poprawce.
 3. **Uzgodnienie decyzji dotyczących skilli** — weryfikacja, że każde zadanie zapisało lokalną decyzję o skillach, z uzgodnieniem kandydatów w `analysis_results/SKILLS_CANDIDATES.md`.
 4. **Uzgodnienie dokumentacji** — powiązanie dotkniętej powierzchni każdego zadania zmieniającego zachowanie z dokumentacją (`docs/TESTING_GUIDE.md`, architektura, `AGENTS.md`).
-5. **Ukończenie i zamknięcie** — sprawdzenie spójności między końcową projekcją a wygenerowanymi artefaktami, zapisanie pokwitowania `analysis_results/FINALIZATION.json` i formalne zamknięcie planu.
+5. **Ukończenie** — rejestry planu są zgodne (lista zadań, dziennik postępu oraz w planach v6/v7 migawka i pokwitowanie pochodzące z journal); zaraportowanie wyników, dowodów i ograniczeń oraz jednorazowe zaoferowanie Executive Report.
 
 ## Konwencje README i PROGRESS
 

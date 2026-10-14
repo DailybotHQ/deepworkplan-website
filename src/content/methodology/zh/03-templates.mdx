@@ -18,10 +18,10 @@ import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
 
 一份计划是 `.dwp/plans/` 下一个名为 `PLAN_001_<slug>/` 的目录。它包含：
 
-- `manifest.json` —— 计划元数据、状态以及契约指针。
+- `manifest.json` —— 计划标识及指向实时合约的指针（在实例化时最先写入）。
 - `contract.json` —— 不可变且内容寻址的成果契约（验收标准、范围、不变量）。
 - `journal.ndjson` —— 仅追加的账本事件执行日志。
-- `state.json` —— 从契约与日志计算得出的派生状态缓存。
+- `state.json` —— 从 journal 投射出的快照，绝不可手动编辑。
 - `README.md` —— 计划概览：目标、源材料、任务表与状态。
 - `PROGRESS.md` —— 人类可读的持续执行日志。
 - `1.task_<slug>.md`、`2.task_<slug>.md` —— 单独的任务 Markdown 文件。
@@ -41,7 +41,7 @@ import PlanTree from '@/components/diagrams/methodology/PlanTree.astro';
 2. **最终状态验证** —— 仓库全部适用的测试、代码检查与类型检查套件在最终状态下运行并通过。审查过程中的任何修复都会使受影响结果失效并触发重新运行。
 3. **技能决策核对** —— 验证每项任务均已记录任务局部的技能处置，并在 `analysis_results/SKILLS_CANDIDATES.md` 中核对所有合理的技能编写事项。
 4. **文档对齐核对** —— 将每项改变行为的任务的触及面与登记该特性的文档（`docs/TESTING_GUIDE.md`、架构文档与 `AGENTS.md`）进行对齐比对并补齐。
-5. **完成与闭环** —— 验证终态投射与实际产物的一致性，写入 `analysis_results/FINALIZATION.json` 收尾凭证并正式闭环。
+5. **完成** —— 计划记录保持一致（任务列表、进度日志，以及在 v6/v7 计划中由 journal 衍生的快照与收据）；报告交付成果、证据与局限性，并提供一次 Executive Report。
 
 ## README 与 PROGRESS 约定
 
