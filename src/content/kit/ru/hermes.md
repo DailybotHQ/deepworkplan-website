@@ -1,8 +1,6 @@
 ---
 title: Hermes
 description: "Адаптер DWP для Hermes: загрузка навыков по стандарту AgentSkills, синергия эпизодической памяти через записи outcome в state.json и cron-продолжение планов."
-
-В планах v6 и v7 состояние проецируется из журнала только для добавления (`journal.ndjson`) с помощью `ledger.py project`, а не переписывается вручную.
 kind: adapter
 lang: ru
 order: 11

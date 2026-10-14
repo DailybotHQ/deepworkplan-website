@@ -1,8 +1,6 @@
 ---
 title: Hermes
-description: "O adaptador DWP para o Hermes: carregamento de skill pelo padrão AgentSkills, sinergia de memória episódica via registros de resultado no state.json e."
-
-Em planos v6 e v7, o estado é projetado a partir do diário somente de adição (`journal.ndjson`) via `ledger.py project` em vez de reescrever manualmente os arquivos de estado.
+description: "O adaptador DWP para o Hermes: carregamento de skill pelo padrão AgentSkills, sinergia de memória episódica via registros de resultado no state.json e continuação do plano via cron."
 kind: adapter
 lang: pt
 order: 11
