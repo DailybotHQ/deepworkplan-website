@@ -1,6 +1,6 @@
 ---
 title: "DWP v4：作業に合わせた計画"
-description: "Deep Work Plan v4 は、計画の形式が作業に合わせて決まるようにします——その逆ではありません。Lite 計画は、範囲が限定されたタスクに対する完全で実行可能な提案となり、独立したドラフト段階は廃止されました。"
+description: "Deep Work Plan v4 は形式を作業に合わせ、Lite プランを有界タスク向けの完全で実行可能な提案とし、下書き手順を廃止しました。"
 date: 2026-09-11
 version: "v4 · Lite-first な計画"
 kind: release

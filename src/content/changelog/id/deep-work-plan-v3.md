@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: efisiensi token sebagai bagian dari desain"
-description: "Deep Work Plan v3 membangun ulang harness di sekitar biaya konteks — pengungkapan bertahap, validasi yang hanya menyasar bagian terdampak, dan satu tinjauan akhir wajib — sekaligus menaikkan standar kepercayaan dan kepatuhan."
+description: "Deep Work Plan v3 menata ulang harness sesuai biaya konteks: keterbukaan bertahap, validasi area terdampak, dan satu Tinjauan Akhir yang wajib."
 date: 2026-09-10
 version: "v3 · Efisiensi token"
 kind: release

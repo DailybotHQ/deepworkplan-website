@@ -1,6 +1,6 @@
 ---
 title: "DWP v2: repozytorium staje się harnessem"
-description: "Pierwsze oficjalne wydanie Deep Work Plan sprawia, że samo repozytorium staje się roboczym harnessem agenta — kontekst, zasady ochronne, walidacja i stan, wszystko natywne dla repozytorium."
+description: "Deep Work Plan v2 czyni samo repozytorium harnessem agenta: kontekst, zasady ochronne, walidacja i stan stają się natywne dla repozytorium."
 date: 2026-07-16
 version: "v2 · Wydanie oficjalne"
 kind: foundation

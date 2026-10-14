@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: hiệu quả token được xây dựng ngay từ kiến trúc"
-description: "Deep Work Plan v3 tái cấu trúc harness xoay quanh chi phí ngữ cảnh — tiết lộ thông tin theo từng cấp, chỉ xác thực phần bị ảnh hưởng, và một bước đánh giá cuối cùng bắt buộc duy nhất — đồng thời nâng chuẩn tin cậy và tuân thủ."
+description: "Deep Work Plan v3 tái cấu trúc harness theo chi phí ngữ cảnh: công bố thông tin từng cấp, xác thực phần bị ảnh hưởng và đánh giá cuối cùng bắt buộc."
 date: 2026-09-10
 version: "v3 · Hiệu quả token"
 kind: release

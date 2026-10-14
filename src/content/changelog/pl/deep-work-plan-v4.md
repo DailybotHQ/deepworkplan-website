@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: plany dopasowane do pracy"
-description: "Deep Work Plan v4 sprawia, że format planu podąża za pracą, a nie odwrotnie — Lite plan jest teraz kompletną, wykonalną propozycją dla zadań o ograniczonym zakresie, a osobny etap tworzenia szkicu znika."
+description: "Deep Work Plan v4 dostosowuje format do pracy: plany Lite stają się kompletnymi, wykonywalnymi propozycjami dla ograniczonych zadań, bez etapu szkicu."
 date: 2026-09-11
 version: "v4 · Plany Lite-first"
 kind: release

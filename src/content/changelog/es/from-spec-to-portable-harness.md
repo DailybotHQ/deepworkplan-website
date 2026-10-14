@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: de un bucle de planes a un arnés portátil"
-description: "Deep Work Plan pasa de ser un único bucle de planes escritos a un kit de adopción portátil: confianza y procedencia verificable, mayor cobertura de hosts de agentes y un verificador de conformidad que cualquier repositorio puede ejecutar."
+description: "Deep Work Plan v1 pasa de un bucle de planes a un kit de adopción portátil: procedencia verificable, cobertura de agentes y chequeos de conformidad."
 date: 2026-06-12
 version: "v1 · Fundamentos"
 kind: foundation

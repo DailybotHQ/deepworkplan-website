@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: plans that fit the work"
-description: "Deep Work Plan v4 makes plan format follow the work, not the other way around — a Lite plan is now a complete, executable proposal for bounded tasks, and the separate draft-staging step is gone."
+description: "Deep Work Plan v4 shapes plan format around the work: Lite plans become complete, executable proposals for bounded tasks, removing the draft step."
 date: 2026-09-11
 version: "v4 · Lite-first plans"
 kind: release

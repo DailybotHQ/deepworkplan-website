@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: da un ciclo di piani a un harness portabile"
-description: "Deep Work Plan passa da un singolo ciclo di piani scritti a un kit di adozione portabile: trust e provenienza, un supporto più ampio per gli agenti e un controllo di conformità eseguibile da qualsiasi repository."
+description: "Deep Work Plan v1 evolve in un kit di adozione portabile: tracciabilità, supporto esteso per gli agenti e verifica di conformità per repository."
 date: 2026-06-12
 version: "v1 · Fondamenta"
 kind: foundation

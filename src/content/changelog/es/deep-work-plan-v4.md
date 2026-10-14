@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: planes a la medida del trabajo"
-description: "Deep Work Plan v4 hace que el formato del plan siga al trabajo, y no al revés: un plan Lite es ahora una propuesta completa y ejecutable para tareas acotadas, y el paso independiente de borrador desaparece."
+description: "Deep Work Plan v4 adapta el formato al trabajo: los planes Lite son propuestas completas y ejecutables para tareas acotadas, eliminando borradores."
 date: 2026-09-11
 version: "v4 · Planes Lite primero"
 kind: release

@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: işe uygun planlar"
-description: "Deep Work Plan v4, plan biçimini işe göre şekillendiriyor, tam tersini değil — Lite plan artık sınırlı kapsamlı görevler için eksiksiz, doğrudan çalıştırılabilir bir öneri ve ayrı taslak aşaması kaldırıldı."
+description: "Deep Work Plan v4 plan biçimini işe göre şekillendirir: Lite planlar sınırlı görevler için doğrudan çalıştırılabilir önerilere dönüşür ve taslak kalkar."
 date: 2026-09-11
 version: "v4 · Lite öncelikli planlar"
 kind: release

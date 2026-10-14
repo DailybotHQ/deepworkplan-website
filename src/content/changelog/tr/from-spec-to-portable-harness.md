@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: plan döngüsünden taşınabilir çalışma ortamına"
-description: "Deep Work Plan, tek seferlik bir plan yazma döngüsünden taşınabilir bir benimseme kitine dönüşüyor — güven ve köken bilgisi, daha geniş ajan-host desteği ve her deponun çalıştırabileceği bir uygunluk denetleyicisi."
+description: "Deep Work Plan v1 taşınabilir bir benimseme kitine dönüşür: güvenilir köken bilgisi, geniş ajan desteği ve her depoda çalışan uygunluk denetimi."
 date: 2026-06-12
 version: "v1 · Temel"
 kind: foundation
