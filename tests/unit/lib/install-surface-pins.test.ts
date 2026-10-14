@@ -65,7 +65,12 @@ const older = (pin: string, base: string): boolean => {
   return false;
 };
 
-describe('public install surfaces', () => {
+// Each case scans every install surface synchronously (several thousand
+// files); like schema-urls.test.ts it is load-sensitive, so it carries an
+// explicit timeout instead of vitest's 5 s default (docs/TESTING_GUIDE.md).
+const SCAN_TIMEOUT = 30_000;
+
+describe('public install surfaces', { timeout: SCAN_TIMEOUT }, () => {
   it('reads the vendored pack version', () => {
     expect(vendored).toMatch(/^\d+\.\d+\.\d+$/);
     expect(files.length).toBeGreaterThan(100);
