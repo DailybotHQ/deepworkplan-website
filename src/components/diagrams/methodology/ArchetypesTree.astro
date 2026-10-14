@@ -1,6 +1,6 @@
 ---
 /**
- * ArchetypesTree (ME-06) — classify a repository: individual vs orchestrator hub.
+ * ArchetypesTree (ME-06) — classify a target: individual repository, orchestrator hub, or agent workspace.
  * Spec: docs/visuals/prompts/02-methodology.md#me-06. HTML/CSS decision diagram;
  * the orchestrator branch carries the oxblood accent. Language-keyed i18n (en
  * fallback); role="img"; dark mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
@@ -17,13 +17,15 @@ const { lang = 'en', class: className = '' } = Astro.props;
 const i18n = {
   en: {
     ariaLabel:
-      'Decision tree: a repository is either an Individual Repository (single codebase) or an Orchestrator Hub (coordinates sub-repositories).',
-    root: 'Repository',
-    question: 'Multiple nested repos or a hub registry?',
-    no: 'No',
-    yes: 'Yes',
+      'Decision tree: classify as an Individual Repository (single codebase), an Orchestrator Hub (coordinates sub-repositories), or an Agent Workspace (autonomous agent runtime).',
+    root: 'Target directory',
+    question: 'Which signals are verified on disk?',
     individual: 'Individual repository',
     orchestrator: 'Orchestrator hub',
+    workspace: 'Agent workspace',
+    edgeInd: 'Single codebase',
+    edgeOrc: 'Nested repos',
+    edgeWs: 'Platform signals',
     indPoints: [
       'single codebase',
       'plans modify local files',
@@ -34,18 +36,25 @@ const i18n = {
       'plans delegate to child plans',
       'cross-repo .dwp/ state',
     ],
+    wsPoints: [
+      'autonomous agent home',
+      'OpenClaw / Hermes signals',
+      'git optional · state.json required',
+    ],
     caption:
-      'Classify the repository first: an Individual Repository scopes plans to its own files; an Orchestrator Hub coordinates plans across sub-repositories.',
+      'Classify the target first: an Individual Repository scopes plans to local files, an Orchestrator Hub coordinates across sub-repositories, and an Agent Workspace powers autonomous agent runtimes.',
   },
   es: {
     ariaLabel:
-      'Árbol de decisión: un repositorio es un Repositorio Individual (código base único) o un Hub Orquestador (coordina sub-repositorios).',
-    root: 'Repositorio',
-    question: '¿Múltiples repositorios anidados o un registro de hub?',
-    no: 'No',
-    yes: 'Sí',
+      'Árbol de decisión: clasificar como Repositorio Individual (código base único), Hub Orquestador (coordina sub-repositorios) o Espacio de Trabajo de Agente (entorno autónomo).',
+    root: 'Directorio destino',
+    question: '¿Qué señales se comprueban en disco?',
     individual: 'Repositorio individual',
     orchestrator: 'Hub orquestador',
+    workspace: 'Espacio de trabajo de agente',
+    edgeInd: 'Código base único',
+    edgeOrc: 'Repos anidados',
+    edgeWs: 'Señales de plataforma',
     indPoints: [
       'código base único',
       'los planes modifican archivos locales',
@@ -56,18 +65,25 @@ const i18n = {
       'los planes delegan en planes hijos',
       'estado .dwp/ entre repositorios',
     ],
+    wsPoints: [
+      'entorno de agente autónomo',
+      'señales de OpenClaw / Hermes',
+      'git opcional · state.json obligatorio',
+    ],
     caption:
-      'Clasifica primero el repositorio: un Repositorio Individual delimita los planes a sus propios archivos; un Hub Orquestador coordina planes entre múltiples sub-repositorios.',
+      'Clasifica primero el destino: un Repositorio Individual delimita los planes a archivos locales; un Hub Orquestador coordina sub-repositorios; un Espacio de Trabajo aloja entornos de agentes autónomos.',
   },
   pt: {
     ariaLabel:
-      'Árvore de decisão: um repositório é um Repositório Individual (base de código única) ou um Hub Orquestrador (coordena sub-repositórios).',
-    root: 'Repositório',
-    question: 'Vários repositórios aninhados ou um registro de hub?',
-    no: 'Não',
-    yes: 'Sim',
+      'Árvore de decisão: classificar como Repositório Individual (base de código única), Hub Orquestrador (coordena sub-repositórios) ou Espaço de Trabalho de Agente (ambiente autônomo).',
+    root: 'Diretório de destino',
+    question: 'Quais sinais são verificados em disco?',
     individual: 'Repositório individual',
     orchestrator: 'Hub orquestrador',
+    workspace: 'Espaço de trabalho de agente',
+    edgeInd: 'Base única',
+    edgeOrc: 'Repos aninhados',
+    edgeWs: 'Sinais de plataforma',
     indPoints: [
       'base de código única',
       'os planos modificam arquivos locais',
@@ -78,122 +94,136 @@ const i18n = {
       'os planos delegam a planos filhos',
       'estado .dwp/ entre repositórios',
     ],
+    wsPoints: [
+      'ambiente de agente autônomo',
+      'sinais do OpenClaw / Hermes',
+      'git opcional · state.json obrigatório',
+    ],
     caption:
-      'Classifique o repositório primeiro: um Repositório Individual delimita os planos a seus próprios arquivos; um Hub Orquestrador coordena planos entre sub-repositórios.',
+      'Classifique o destino primeiro: um Repositório Individual delimita planos a arquivos locais; um Hub Orquestrador coordena sub-repositórios; um Espaço de Trabalho acolhe ambientes de agentes autônomos.',
   },
   zh: {
     ariaLabel:
-      '决策树：仓库要么是独立仓库（单一代码库），要么是编排中心（协调多个子仓库）。',
-    root: '仓库',
-    question: '是多个嵌套仓库或中心注册表吗？',
-    no: '否',
-    yes: '是',
+      '决策树：归类为独立仓库（单一代码库）、编排中心（协调子仓库）或代理工作区（自主代理运行时）。',
+    root: '目标目录',
+    question: '磁盘上验证了哪些特征信号？',
     individual: '独立仓库',
     orchestrator: '编排中心',
+    workspace: '代理工作区',
+    edgeInd: '单一代码库',
+    edgeOrc: '嵌套仓库',
+    edgeWs: '平台特征信号',
     indPoints: ['单一代码库', '计划修改本地文件', '.dwp/ 位于仓库根目录'],
     orcPoints: ['协调子仓库', '计划委派给子计划', '跨仓库的 .dwp/ 状态'],
+    wsPoints: ['自主代理运行环境', 'OpenClaw / Hermes 信号', 'git 可选 · 必需 state.json'],
     caption:
-      '先对仓库进行分类：独立仓库将计划限定在自身文件范围内；编排中心则在多个子仓库之间协调计划。',
+      '首先对目标分类：独立仓库将计划限定在本地文件；编排中心在子仓库间协调；代理工作区支撑自主代理运行。',
   },
   ja: {
     ariaLabel:
-      '決定木：リポジトリは個別リポジトリ（単一のコードベース）か、オーケストレーターハブ（サブリポジトリを統括する）のいずれかです。',
-    root: 'リポジトリ',
-    question: '複数の入れ子リポジトリ、またはハブのレジストリですか。',
-    no: 'いいえ',
-    yes: 'はい',
+      '決定木：個別リポジトリ（単一コードベース）、オーケストレーターハブ（サブリポジトリ統括）、またはエージェントワークスペース（自律エージェント環境）に分類。',
+    root: '対象ディレクトリ',
+    question: 'ディスク上で検証されるシグナルは？',
     individual: '個別リポジトリ',
     orchestrator: 'オーケストレーターハブ',
-    indPoints: [
-      '単一のコードベース',
-      '計画はローカルファイルを変更します',
-      '.dwp/ はリポジトリのルートに配置します',
-    ],
-    orcPoints: [
-      'サブリポジトリを統括します',
-      '計画は子の計画へ委譲します',
-      'リポジトリ間で .dwp/ の状態を保持します',
-    ],
+    workspace: 'エージェントワークスペース',
+    edgeInd: '単一コードベース',
+    edgeOrc: '入れ子リポジトリ',
+    edgeWs: 'プラットフォームシグナル',
+    indPoints: ['単一コードベース', '計画はローカルファイルを変更', 'リポジトリルートに .dwp/'],
+    orcPoints: ['サブリポジトリを統括', '子計画へ作業を委譲', 'リポジトリを跨ぐ .dwp/ 状態'],
+    wsPoints: ['自律エージェントの拠点', 'OpenClaw / Hermes のシグナル', 'git 任意 ・ state.json 必須'],
     caption:
-      'まずリポジトリを分類します。個別リポジトリは計画を自身のファイルに限定し、オーケストレーターハブはサブリポジトリ間で計画を統括します。',
+      '対象をまず分類します。個別リポジトリは計画をローカルに限定し、オーケストレーターハブはサブリポジトリを統括し、エージェントワークスペースは自律稼働を支えます。',
   },
   de: {
     ariaLabel:
-      'Entscheidungsbaum: Ein Repository ist entweder ein Einzel-Repository (eine einzelne Codebasis) oder ein Orchestrator-Hub (koordiniert Unter-Repositories).',
-    root: 'Repository',
-    question: 'Mehrere verschachtelte Repositories oder eine Hub-Registry?',
-    no: 'Nein',
-    yes: 'Ja',
-    individual: 'Einzel-Repository',
+      'Entscheidungsbaum: Einstufung als Einzel-Repository (einzelne Codebasis), Orchestrator-Hub (koordiniert Sub-Repositories) oder Agenten-Arbeitsbereich (autonome Laufzeit).',
+    root: 'Zielverzeichnis',
+    question: 'Welche Signale sind auf der Festplatte verifiziert?',
+    individual: 'Einzel-Repository' ,
     orchestrator: 'Orchestrator-Hub',
+    workspace: 'Agenten-Arbeitsbereich',
+    edgeInd: 'Einzelne Codebasis',
+    edgeOrc: 'Verschachtelte Repos',
+    edgeWs: 'Plattform-Signale',
     indPoints: [
       'einzelne Codebasis',
       'Pläne ändern lokale Dateien',
-      '.dwp/ im Stammverzeichnis des Repositorys',
+      '.dwp/ an der Repository-Wurzel',
     ],
     orcPoints: [
-      'koordiniert Unter-Repositories',
-      'Pläne delegieren an untergeordnete Pläne',
-      '.dwp/-Zustand über Repositories hinweg',
+      'koordiniert Sub-Repos',
+      'Pläne delegieren an Teilpläne',
+      'Repo-übergreifender .dwp/-Status',
+    ],
+    wsPoints: [
+      'Heimat autonomer Agenten',
+      'OpenClaw / Hermes-Signale',
+      'Git optional · state.json erforderlich',
     ],
     caption:
-      'Klassifizieren Sie das Repository zuerst: Ein Einzel-Repository begrenzt Pläne auf seine eigenen Dateien; ein Orchestrator-Hub koordiniert Pläne über mehrere Unter-Repositories hinweg.',
+      'Zuerst das Ziel klassifizieren: Ein Einzel-Repository beschränkt Pläne auf lokale Dateien, ein Orchestrator-Hub koordiniert Sub-Repositories, ein Agenten-Arbeitsbereich treibt autonome Runtimes an.',
   },
   fr: {
     ariaLabel:
-      'Arbre de décision : un dépôt est soit un Dépôt individuel (base de code unique), soit un Hub orchestrateur (coordonne des sous-dépôts).',
-    root: 'Dépôt',
-    question: 'Plusieurs dépôts imbriqués ou un registre de hub ?',
-    no: 'Non',
-    yes: 'Oui',
+      'Arbre de décision : classifier en dépôt individuel (codebase unique), hub orchestrateur (coordonne les sous-dépôts) ou espace de travail d’agent (runtime autonome).',
+    root: 'Répertoire cible',
+    question: 'Quels signaux sont vérifiés sur disque ?',
     individual: 'Dépôt individuel',
     orchestrator: 'Hub orchestrateur',
+    workspace: 'Espace de travail d’agent',
+    edgeInd: 'Codebase unique',
+    edgeOrc: 'Sous-dépôts imbriqués',
+    edgeWs: 'Signaux de plateforme',
     indPoints: [
-      'base de code unique',
-      'les plans modifient des fichiers locaux',
+      'codebase unique',
+      'les plans modifient les fichiers locaux',
       '.dwp/ à la racine du dépôt',
     ],
     orcPoints: [
       'coordonne les sous-dépôts',
-      'les plans délèguent à des plans enfants',
-      'état .dwp/ partagé entre dépôts',
+      'les plans délèguent à des sous-plans',
+      'état .dwp/ multi-dépôts',
+    ],
+    wsPoints: [
+      'foyer d’agent autonome',
+      'signaux OpenClaw / Hermes',
+      'git facultatif · state.json obligatoire',
     ],
     caption:
-      'Classez d’abord le dépôt : un Dépôt individuel limite les plans à ses propres fichiers ; un Hub orchestrateur coordonne les plans entre plusieurs sous-dépôts.',
+      'Classifier la cible d’abord : un dépôt individuel limite les plans aux fichiers locaux, un hub coordonne les sous-dépôts, et un espace de travail propulse les runtimes autonomes.',
   },
   ko: {
     ariaLabel:
-      '결정 트리: 저장소는 개별 저장소(단일 코드베이스)이거나 오케스트레이터 허브(하위 저장소를 조율)입니다.',
-    root: '저장소',
-    question: '중첩된 여러 저장소인가요, 아니면 허브 레지스트리인가요?',
-    no: '아니요',
-    yes: '예',
-    individual: '개별 저장소',
+      '의사결정 트리: 개별 리포지토리(단일 코드베이스), 오케스트레이터 허브(서브 리포지토리 조정), 에이전트 워크스페이스(자율 에이전트 런타임)로 분류.',
+    root: '대상 디렉터리',
+    question: '디스크에서 어떤 신호가 확인되나요?',
+    individual: '개별 리포지토리',
     orchestrator: '오케스트레이터 허브',
-    indPoints: [
-      '단일 코드베이스',
-      '계획이 로컬 파일을 수정해요',
-      '.dwp/ 가 저장소 루트에 있어요',
-    ],
-    orcPoints: [
-      '하위 저장소를 조율해요',
-      '계획이 하위 계획에 위임해요',
-      '저장소 간에 .dwp/ 상태를 공유해요',
-    ],
+    workspace: '에이전트 워크스페이스',
+    edgeInd: '단일 코드베이스',
+    edgeOrc: '중첩 리포지토리',
+    edgeWs: '플랫폼 신호',
+    indPoints: ['단일 코드베이스', '플랜이 로컬 파일 수정', '루트에 .dwp/'],
+    orcPoints: ['서브 리포지토리 조정', '하위 플랜으로 위임', '리포지토리 간 .dwp/ 상태'],
+    wsPoints: ['자율 에이전트 실행 환경', 'OpenClaw / Hermes 신호', 'git 선택 사항 · state.json 필수'],
     caption:
-      '먼저 저장소를 분류하세요. 개별 저장소는 계획을 자신의 파일로 한정하고, 오케스트레이터 허브는 여러 하위 저장소에 걸쳐 계획을 조율해요.',
+      '대상을 먼저 분류하세요. 개별 리포지토리는 로컬 파일에 집중하고, 오케스트레이터 허브는 서브 리포지토리를 조정하며, 에이전트 워크스페이스는 자율 실행을 구동합니다.',
   },
   ru: {
     ariaLabel:
-      'Дерево решений: репозиторий — это либо индивидуальный репозиторий (единая кодовая база), либо хаб-оркестратор (координирует подрепозитории).',
-    root: 'Репозиторий',
-    question: 'Несколько вложенных репозиториев или реестр хаба?',
-    no: 'Нет',
-    yes: 'Да',
+      'Дерево решений: классификация как индивидуальный репозиторий (одна база кода), координатор-хаб (подрепозитории) или рабочее пространство агента (автономная среда).',
+    root: 'Целевой каталог',
+    question: 'Какие сигналы обнаружены на диске?',
     individual: 'Индивидуальный репозиторий',
     orchestrator: 'Хаб-оркестратор',
+    workspace: 'Рабочее пространство агента',
+    edgeInd: 'Единая база',
+    edgeOrc: 'Вложенные репозитории',
+    edgeWs: 'Сигналы платформы',
     indPoints: [
-      'единая кодовая база',
+      'единая база кода',
       'планы изменяют локальные файлы',
       '.dwp/ в корне репозитория',
     ],
@@ -202,150 +232,199 @@ const i18n = {
       'планы делегируют дочерним планам',
       'состояние .dwp/ между репозиториями',
     ],
+    wsPoints: [
+      'среда автономного агента',
+      'сигналы OpenClaw / Hermes',
+      'git опционален · state.json обязателен',
+    ],
     caption:
-      'Сначала классифицируйте репозиторий: индивидуальный репозиторий ограничивает планы своими файлами, а хаб-оркестратор координирует планы между несколькими подрепозиториями.',
+      'Сначала классифицируйте цель: индивидуальный репозиторий ограничивает планы локальными файлами, хаб координирует подрепозитории, а рабочее пространство обеспечивает автономную работу.',
   },
   it: {
     ariaLabel:
-      'Albero decisionale: un repository è un Repository individuale (codice base unico) oppure un Hub orchestratore (coordina sotto-repository).',
-    root: 'Repository',
-    question: 'Più repository annidati o un registro di hub?',
-    no: 'No',
-    yes: 'Sì',
+      'Albero decisionale: classificare come repository individuale (singola codebase), hub orchestratore (coordina sub-repository) o spazio di lavoro dell’agente (runtime autonomo).',
+    root: 'Directory di destinazione',
+    question: 'Quali segnali sono verificati su disco?',
     individual: 'Repository individuale',
     orchestrator: 'Hub orchestratore',
+    workspace: 'Spazio di lavoro dell’agente',
+    edgeInd: 'Singola codebase',
+    edgeOrc: 'Repo nidificati',
+    edgeWs: 'Segnali piattaforma',
     indPoints: [
-      'codice base unico',
+      'singola codebase',
       'i piani modificano file locali',
-      '.dwp/ nella radice del repository',
+      '.dwp/ alla radice del repository',
     ],
     orcPoints: [
-      'coordina i sotto-repository',
+      'coordina sub-repository',
       'i piani delegano a piani figli',
-      'stato .dwp/ condiviso tra repository',
+      'stato .dwp/ tra repository',
+    ],
+    wsPoints: [
+      'casa dell’agente autonomo',
+      'segnali OpenClaw / Hermes',
+      'git opzionale · state.json obbligatorio',
     ],
     caption:
-      'Classifichi prima il repository: un Repository individuale delimita i piani ai propri file; un Hub orchestratore coordina i piani tra più sotto-repository.',
+      'Classifica prima la destinazione: un repository individuale limita i piani ai file locali, un hub coordina i sub-repository e uno spazio di lavoro alimenta i runtime autonomi.',
   },
   tr: {
     ariaLabel:
-      'Karar ağacı: bir depo ya Bireysel Depodur (tek bir kod tabanı) ya da Orkestratör Merkezidir (alt depoları koordine eder).',
-    root: 'Depo',
-    question: 'Birden çok iç içe depo mu, yoksa bir merkez kaydı mı?',
-    no: 'Hayır',
-    yes: 'Evet',
+      'Karar ağacı: Bireysel depo (tek kod tabanı), orkestratör merkezi (alt depoları koordine eder) veya ajan çalışma alanı (otonom ajan çalışma ortamı) olarak sınıflandırın.',
+    root: 'Hedef dizin',
+    question: 'Diskte hangi sinyaller doğrulandı?',
     individual: 'Bireysel depo',
     orchestrator: 'Orkestratör merkezi',
+    workspace: 'Ajan çalışma alanı',
+    edgeInd: 'Tek kod tabanı',
+    edgeOrc: 'İç içe depolar',
+    edgeWs: 'Platform sinyalleri',
     indPoints: [
-      'tek bir kod tabanı',
+      'tek kod tabanı',
       'planlar yerel dosyaları değiştirir',
-      '.dwp/ depo kökünde bulunur',
+      'depo kökünde .dwp/',
     ],
     orcPoints: [
       'alt depoları koordine eder',
-      'planlar alt planlara yetki devreder',
-      'depolar arasında .dwp/ durumu',
+      'planlar alt planlara delege eder',
+      'depolar arası .dwp/ durumu',
+    ],
+    wsPoints: [
+      'otonom ajan yuvası',
+      'OpenClaw / Hermes sinyalleri',
+      'git isteğe bağlı · state.json zorunlu',
     ],
     caption:
-      'Önce depoyu sınıflandırın: Bireysel Depo, planları kendi dosyalarıyla sınırlar; Orkestratör Merkezi ise planları birden çok alt depo arasında koordine eder.',
+      'Önce hedefi sınıflandırın: Bireysel bir depo planları yerel dosyalarla sınırlar; bir orkestratör alt depoları koordine eder; bir ajan çalışma alanı otonom ajanları çalıştırır.',
   },
   id: {
     ariaLabel:
-      'Pohon keputusan: sebuah repositori adalah Repositori Individual (basis kode tunggal) atau Hub Orkestrator (mengoordinasikan sub-repositori).',
-    root: 'Repositori',
-    question: 'Beberapa repositori bersarang atau registri hub?',
-    no: 'Tidak',
-    yes: 'Ya',
-    individual: 'Repositori individual',
+      'Pohon keputusan: klasifikasikan sebagai Repositori Individu (basis kode tunggal), Hub Orkestrator (mengoordinasikan sub-repositori), atau Ruang Kerja Agen (runtime agen otonom).',
+    root: 'Direktori target',
+    question: 'Sinyal apa yang terverifikasi di disk?',
+    individual: 'Repositori individu',
     orchestrator: 'Hub orkestrator',
+    workspace: 'Ruang kerja agen',
+    edgeInd: 'Basis kode tunggal',
+    edgeOrc: 'Repo bertingkat',
+    edgeWs: 'Sinyal platform',
     indPoints: [
       'basis kode tunggal',
       'rencana mengubah berkas lokal',
-      '.dwp/ pada akar repositori',
+      '.dwp/ di akar repositori',
     ],
     orcPoints: [
-      'mengoordinasikan sub-repositori',
-      'rencana mendelegasikan ke rencana anak',
-      'status .dwp/ lintas repositori',
+      'mengoordinasikan sub-repo',
+      'rencana mendelegasikan ke sub-rencana',
+      'status .dwp/ lintas-repo',
+    ],
+    wsPoints: [
+      'rumah agen otonom',
+      'sinyal OpenClaw / Hermes',
+      'git opsional · state.json wajib',
     ],
     caption:
-      'Klasifikasikan repositori terlebih dahulu: Repositori Individual membatasi rencana pada berkasnya sendiri; Hub Orkestrator mengoordinasikan rencana di antara beberapa sub-repositori.',
+      'Klasifikasikan target terlebih dahulu: Repositori Individu membatasi rencana ke berkas lokal; Hub Orkestrator mengoordinasikan sub-repo; Ruang Kerja Agen menjalankan agen otonom.',
   },
   vi: {
     ariaLabel:
-      'Cây quyết định: một kho lưu trữ là Kho lưu trữ Cá nhân (một mã nguồn duy nhất) hoặc Trung tâm Điều phối (điều phối các kho con).',
-    root: 'Kho lưu trữ',
-    question: 'Nhiều kho lưu trữ lồng nhau hay một sổ đăng ký trung tâm?',
-    no: 'Không',
-    yes: 'Có',
+      'Cây quyết định: phân loại là Kho lưu trữ cá nhân (một mã nguồn), Trung tâm điều phối (điều phối kho con) hoặc Không gian làm việc của agent (môi trường agent tự hành).',
+    root: 'Thư mục mục tiêu',
+    question: 'Tín hiệu nào được xác minh trên đĩa?',
     individual: 'Kho lưu trữ cá nhân',
     orchestrator: 'Trung tâm điều phối',
+    workspace: 'Không gian làm việc của agent',
+    edgeInd: 'Một mã nguồn',
+    edgeOrc: 'Kho lồng nhau',
+    edgeWs: 'Tín hiệu nền tảng',
     indPoints: [
       'một mã nguồn duy nhất',
-      'kế hoạch chỉnh sửa tệp cục bộ',
-      '.dwp/ tại thư mục gốc của kho',
+      'kế hoạch sửa đổi tệp cục bộ',
+      '.dwp/ tại gốc kho lưu trữ',
     ],
     orcPoints: [
-      'điều phối các kho con',
+      'điều phối nhiều kho con',
       'kế hoạch ủy quyền cho kế hoạch con',
-      'trạng thái .dwp/ xuyên suốt các kho',
+      'trạng thái .dwp/ giữa các kho',
+    ],
+    wsPoints: [
+      'ngôi nhà của agent tự hành',
+      'tín hiệu OpenClaw / Hermes',
+      'git tùy chọn · bắt buộc có state.json',
     ],
     caption:
-      'Hãy phân loại kho lưu trữ trước: Kho lưu trữ Cá nhân giới hạn kế hoạch trong tệp của chính nó; Trung tâm Điều phối điều phối kế hoạch giữa nhiều kho con.',
+      'Phân loại mục tiêu trước: Kho lưu trữ cá nhân giới hạn kế hoạch trong tệp cục bộ, Trung tâm điều phối quản lý các kho con, và Không gian làm việc vận hành agent tự hành.',
   },
   hi: {
     ariaLabel:
-      'निर्णय वृक्ष: एक रिपॉज़िटरी या तो व्यक्तिगत रिपॉज़िटरी (एकल कोडबेस) है या ऑर्केस्ट्रेटर हब (उप-रिपॉज़िटरियों का समन्वय करता है)।',
-    root: 'रिपॉज़िटरी',
-    question: 'क्या कई नेस्टेड रिपॉज़िटरी हैं या एक हब रजिस्ट्री है?',
-    no: 'नहीं',
-    yes: 'हाँ',
-    individual: 'व्यक्तिगत रिपॉज़िटरी',
+      'निर्णय ट्री: व्यक्तिगत रिपॉजिटरी (एकल कोडबेस), ऑर्केस्ट्रेटर हब (उप-रिपॉजिटरी समन्वय), या एजेंट कार्यक्षेत्र (स्वायत्त एजेंट रनटाइम) के रूप में वर्गीकृत करें।',
+    root: 'लक्षित निर्देशिका',
+    question: 'डिस्क पर किन संकेतों की पुष्टि हुई है?',
+    individual: 'व्यक्तिगत रिपॉजिटरी',
     orchestrator: 'ऑर्केस्ट्रेटर हब',
+    workspace: 'एजेंट कार्यक्षेत्र',
+    edgeInd: 'एकल कोडबेस',
+    edgeOrc: 'नेस्टेड रिपॉजिटरी',
+    edgeWs: 'प्लेटफ़ॉर्म संकेत',
     indPoints: [
       'एकल कोडबेस',
-      'योजनाएँ स्थानीय फ़ाइलों को संशोधित करती हैं',
-      '.dwp/ रिपॉज़िटरी की जड़ में',
+      'योजनाएं स्थानीय फ़ाइलों को बदलती हैं',
+      'रिपॉजिटरी रूट पर .dwp/',
     ],
     orcPoints: [
-      'उप-रिपॉज़िटरियों का समन्वय करता है',
-      'योजनाएँ चाइल्ड योजनाओं को सौंपती हैं',
-      'रिपॉज़िटरियों के बीच .dwp/ स्थिति',
+      'उप-रिपॉजिटरी का समन्वय',
+      'योजनाएं बाल योजनाओं को सौंपती हैं',
+      'क्रॉस-रिपो .dwp/ स्थिति',
+    ],
+    wsPoints: [
+      'स्वायत्त एजेंट का घर',
+      'OpenClaw / Hermes संकेत',
+      'git वैकल्पिक · state.json अनिवार्य',
     ],
     caption:
-      'पहले रिपॉज़िटरी को वर्गीकृत करें: व्यक्तिगत रिपॉज़िटरी योजनाओं को उसकी अपनी फ़ाइलों तक सीमित रखती है; ऑर्केस्ट्रेटर हब कई उप-रिपॉज़िटरियों के बीच योजनाओं का समन्वय करता है।',
+      'पहले लक्ष्य को वर्गीकृत करें: एक व्यक्तिगत रिपॉजिटरी योजनाओं को स्थानीय फ़ाइलों तक सीमित रखती है, एक ऑर्केस्ट्रेटर हब समन्वय करता है, और एक एजेंट कार्यक्षेत्र स्वायत्त एजेंट चलाता है।',
   },
   pl: {
     ariaLabel:
-      'Drzewo decyzyjne: repozytorium jest albo repozytorium indywidualnym (pojedyncza baza kodu), albo hubem orkiestratora (koordynuje pod-repozytoria).',
-    root: 'Repozytorium',
-    question: 'Wiele zagnieżdżonych repozytoriów czy rejestr huba?',
-    no: 'Nie',
-    yes: 'Tak',
-    individual: 'Repozytorium indywidualne',
+      'Drzewo decyzyjne: klasyfikacja jako pojedyncze repozytorium (jedna baza kodu), hub orkiestratora (koordynuje subrepozytoria) lub przestrzeń robocza agenta (środowisko autonomiczne).',
+    root: 'Katalog docelowy',
+    question: 'Jakie sygnały zostały zweryfikowane na dysku?',
+    individual: 'Pojedyncze repozytorium',
     orchestrator: 'Hub orkiestratora',
+    workspace: 'Przestrzeń robocza agenta',
+    edgeInd: 'Jedna baza',
+    edgeOrc: 'Zagnieżdżone repozytoria',
+    edgeWs: 'Sygnały platformy',
     indPoints: [
-      'pojedyncza baza kodu',
+      'jedna baza kodu',
       'plany modyfikują pliki lokalne',
       '.dwp/ w katalogu głównym repozytorium',
     ],
     orcPoints: [
-      'koordynuje pod-repozytoria',
+      'koordynuje subrepozytoria',
       'plany delegują do planów podrzędnych',
-      'stan .dwp/ pomiędzy repozytoriami',
+      'stan .dwp/ między repozytoriami',
+    ],
+    wsPoints: [
+      'środowisko autonomicznego agenta',
+      'sygnały OpenClaw / Hermes',
+      'git opcjonalny · wymagany state.json',
     ],
     caption:
-      'Najpierw sklasyfikuj repozytorium: repozytorium indywidualne ogranicza plany do własnych plików; hub orkiestratora koordynuje plany pomiędzy wieloma pod-repozytoriami.',
+      'Najpierw sklasyfikuj cel: pojedyncze repozytorium ogranicza plany do plików lokalnych, hub orkiestratora koordynuje subrepozytoria, a przestrzeń robocza napędza agentów autonomicznych.',
   },
   uk: {
     ariaLabel:
-      'Дерево рішень: репозиторій — це або індивідуальний репозиторій (єдина кодова база), або хаб-оркестратор (координує підрепозиторії).',
-    root: 'Репозиторій',
-    question: 'Декілька вкладених репозиторіїв чи реєстр хаба?',
-    no: 'Ні',
-    yes: 'Так',
-    individual: 'Індивідуальний репозиторій',
+      'Дерево рішень: класифікація як окремий репозиторій (єдина кодова база), координатор-хаб (підрепозиторії) або робочий простір агента (автономне середовище).',
+    root: 'Цільовий каталог',
+    question: 'Які сигнали перевірено на диску?',
+    individual: 'Окремий репозиторій',
     orchestrator: 'Хаб-оркестратор',
+    workspace: 'Робочий простір агента',
+    edgeInd: 'Єдина база',
+    edgeOrc: 'Вкладені репозиторії',
+    edgeWs: 'Сигнали платформи',
     indPoints: [
       'єдина кодова база',
       'плани змінюють локальні файли',
@@ -356,26 +435,42 @@ const i18n = {
       'плани делегують дочірнім планам',
       'стан .dwp/ між репозиторіями',
     ],
+    wsPoints: [
+      'осередок автономного агента',
+      'сигнали OpenClaw / Hermes',
+      'git необовʼязковий · state.json обовʼязковий',
+    ],
     caption:
-      'Спершу класифікуйте репозиторій: індивідуальний репозиторій обмежує плани власними файлами; хаб-оркестратор координує плани між кількома підрепозиторіями.',
+      'Спочатку класифікуйте ціль: окремий репозиторій обмежує плани локальними файлами, хаб координує підрепозиторії, а робочий простір забезпечує роботу автономних агентів.',
   },
   th: {
     ariaLabel:
-      'แผนภาพการตัดสินใจ: ที่เก็บโค้ดเป็นได้ทั้งที่เก็บโค้ดเดี่ยว (โค้ดเบสเดียว) หรือศูนย์กลางผู้ประสานงาน (ประสานงานที่เก็บโค้ดย่อย)',
-    root: 'ที่เก็บโค้ด',
-    question: 'มีที่เก็บโค้ดซ้อนกันหลายชุด หรือเป็นทะเบียนของศูนย์กลาง',
-    no: 'ไม่ใช่',
-    yes: 'ใช่',
-    individual: 'ที่เก็บโค้ดเดี่ยว',
-    orchestrator: 'ศูนย์กลางผู้ประสานงาน',
-    indPoints: ['โค้ดเบสเดียว', 'แผนงานแก้ไขไฟล์ในเครื่อง', '.dwp/ อยู่ที่รากของที่เก็บโค้ด'],
+      'แผนผังการตัดสินใจ: จัดประเภทเป็นที่เก็บเดี่ยว (ฐานโค้ดเดียว) ฮับผู้ประสานงาน (ประสานงานที่เก็บย่อย) หรือพื้นที่ทำงานของเอเจนต์ (รันไทม์เอเจนต์อัตโนมัติ)',
+    root: 'ไดเรกทอรีเป้าหมาย',
+    question: 'สัญญาณใดที่ได้รับการตรวจสอบบนดิสก์?',
+    individual: 'ที่เก็บเดี่ยว',
+    orchestrator: 'ฮับผู้ประสานงาน',
+    workspace: 'พื้นที่ทำงานของเอเจนต์',
+    edgeInd: 'ฐานโค้ดเดียว',
+    edgeOrc: 'ที่เก็บซ้อนกัน',
+    edgeWs: 'สัญญาณแพลตฟอร์ม',
+    indPoints: [
+      'ฐานโค้ดเดียว',
+      'แผนแก้ไขไฟล์ในเครื่อง',
+      '.dwp/ ที่รูทของที่เก็บ',
+    ],
     orcPoints: [
-      'ประสานงานที่เก็บโค้ดย่อย',
-      'แผนงานมอบหมายให้แผนงานย่อย',
-      'สถานะ .dwp/ ข้ามที่เก็บโค้ด',
+      'ประสานงานที่เก็บย่อย',
+      'แผนมอบหมายงานให้แผนย่อย',
+      'สถานะ .dwp/ ข้ามที่เก็บ',
+    ],
+    wsPoints: [
+      'แหล่งกำเนิดเอเจนต์อิสระ',
+      'สัญญาณ OpenClaw / Hermes',
+      'git ไม่บังคับ · ต้องมี state.json',
     ],
     caption:
-      'จัดประเภทที่เก็บโค้ดก่อน: ที่เก็บโค้ดเดี่ยวจำกัดแผนงานไว้กับไฟล์ของตนเอง ขณะที่ศูนย์กลางผู้ประสานงานจะประสานงานแผนงานข้ามที่เก็บโค้ดย่อยหลายชุด',
+      'จัดประเภทเป้าหมายก่อน: ที่เก็บเดี่ยวจำกัดขอบเขตแผนไว้ที่ไฟล์ในเครื่อง ฮับประสานงานดูแลที่เก็บย่อย และพื้นที่ทำงานขับเคลื่อนเอเจนต์อัตโนมัติ',
   },
 } as const;
 
@@ -385,20 +480,30 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 <figure class={`editorial-asset arch ${className}`} role="img" aria-label={t.ariaLabel}>
   <div class="editorial-asset__grid" aria-hidden="true"></div>
   <div class="editorial-asset__body">
-    <div class="arch-root">{t.root}</div>
+    <!-- Root node: Target directory -->
+    <div class="arch-root">
+      <code>{t.root}</code>
+    </div>
+
     <div class="arch-stem" aria-hidden="true"></div>
+
+    <!-- Question node -->
     <div class="arch-question">
       <span class="arch-q-mark" aria-hidden="true">?</span>
-      <span>{t.question}</span>
+      <span class="arch-q-text">{t.question}</span>
     </div>
+
+    <!-- Fork connector: question -> drop -> bar across 3 branches -->
     <div class="arch-fork" aria-hidden="true">
       <span class="arch-fork-drop"></span>
       <span class="arch-fork-bar"></span>
     </div>
+
+    <!-- Branches: Individual vs Orchestrator Hub vs Agent Workspace -->
     <div class="arch-branches">
       <div class="arch-branch">
         <span class="arch-leg" aria-hidden="true"></span>
-        <span class="ea-label arch-edge arch-edge--no">{t.no}</span>
+        <span class="ea-label arch-edge">{t.edgeInd}</span>
         <div class="arch-leaf">
           <p class="arch-h">{t.individual}</p>
           <ul class="arch-points">
@@ -408,11 +513,21 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
       </div>
       <div class="arch-branch">
         <span class="arch-leg" aria-hidden="true"></span>
-        <span class="ea-label arch-edge arch-edge--yes">{t.yes}</span>
+        <span class="ea-label arch-edge arch-edge--accent">{t.edgeOrc}</span>
         <div class="arch-leaf arch-leaf--accent">
           <p class="arch-h">{t.orchestrator}</p>
           <ul class="arch-points">
             {t.orcPoints.map((p) => <li>{p}</li>)}
+          </ul>
+        </div>
+      </div>
+      <div class="arch-branch">
+        <span class="arch-leg" aria-hidden="true"></span>
+        <span class="ea-label arch-edge">{t.edgeWs}</span>
+        <div class="arch-leaf">
+          <p class="arch-h">{t.workspace}</p>
+          <ul class="arch-points">
+            {t.wsPoints.map((p) => <li>{p}</li>)}
           </ul>
         </div>
       </div>
@@ -488,13 +603,13 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
   .arch-fork-bar {
     display: none;
   }
-  @media (min-width: 560px) {
+  @media (min-width: 680px) {
     .arch-fork-bar {
       display: block;
       position: absolute;
       top: 0.6rem;
-      left: 25%;
-      right: 25%;
+      left: 16.66%;
+      right: 16.66%;
       height: 1px;
       background-color: var(--color-line);
     }
@@ -504,9 +619,9 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
     grid-template-columns: 1fr;
     gap: 0.9rem;
   }
-  @media (min-width: 560px) {
+  @media (min-width: 680px) {
     .arch-branches {
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1fr 1fr 1fr;
     }
   }
   .arch-branch {
@@ -530,7 +645,7 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
     padding: 0.05rem 0.6rem;
     background-color: var(--color-paper);
   }
-  .arch-edge--yes {
+  .arch-edge--accent {
     color: var(--color-secondary);
     border-color: var(--color-secondary);
   }
