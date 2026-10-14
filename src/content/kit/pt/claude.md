@@ -1,6 +1,6 @@
 ---
 title: Claude Code
-description: "O adaptador DWP para o Claude Code, com suporte completo por meio de slash commands e skills nativos, incluindo subagents e team agents para o conjunto completo de recursos."
+description: "O adaptador DWP para o Claude Code, com suporte total por slash commands e skills nativos, incluindo subagents e team agents para o conjunto completo de."
 kind: adapter
 lang: pt
 order: 1
@@ -15,7 +15,7 @@ O Claude Code tem suporte **completo** ao DWP por meio de slash commands e skill
 
 ## Nível de suporte
 
-**Completo** — todos os cinco comandos do DWP mapeiam para slash commands nativos do Claude Code.
+**Completo** (Comprovado por comportamento) — o conjunto completo de sub-skills e comandos de ciclo de vida do DWP mapeia para comandos slash nativos do Claude Code, comprovado em benchmarks bidirecionais de transição.
 
 ## Instalação
 

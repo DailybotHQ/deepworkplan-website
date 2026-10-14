@@ -15,7 +15,7 @@ Cline, coding agent sumber terbuka, mendukung DWP melalui aturan markdown dan pr
 
 ## Tingkat dukungan
 
-**Penuh** — Cline membaca aturan markdown dan menjalankan setiap command dwp-* dari file prosedurnya.
+**Penuh** (Teruji instalasi) — Cline membaca aturan markdown dan menjalankan setiap perintah dwp-* dari file prosedurnya. Rute dipastikan oleh rangkaian pengujian otomatis.
 
 ## Instalasi
 

@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Execute an existing Deep Work Plan task by task. The agent reads the full plan, runs each task in order, updates progress, and marks completion accurately."
+description: "Execute an existing Deep Work Plan sequentially with the v7 ledger loop, optional unattended trust mode, parallel_safe delegation, and Final Review closure."
 kind: command
 lang: en
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -12,27 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Execute an existing Deep Work Plan.
+Execute an existing Deep Work Plan task by task.
 
 <CmdExecute lang="en" class="not-prose my-8" />
 
 ## What it does
 
-`dwp-execute` runs an existing plan task by task. It reads the full plan, executes each task in order, updates `PROGRESS.md`, and marks each task's completion status.
+`dwp-execute` runs an existing plan task by task through the deterministic record layer. It resolves the target plan, evaluates dependencies, executes each task in declared order, runs validation gates, and records immutable progress.
 
 ## Usage
 
 ```
-/dwp-execute [plan]
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Modes
+
+- **Guided (default):** prompts for confirmation between tasks, allowing you to review evidence and decisions at every task boundary.
+- **Trust (`auto`):** appending `trust` runs eligible tasks sequentially to completion without pausing for routine confirmation, stopping only when genuinely blocked (escalation classes C1–C7).
 
 ## Behavior
 
-1. Read the full plan before starting.
-2. Execute tasks in order.
-3. Update `PROGRESS.md` after each task.
-4. Mark task status accurately.
-5. Stop and ask when blocked.
+1. **Plan resolution:** resolves by exact folder name, numeric ID, unique slug, or `latest` (the plan with highest numeric ID).
+2. **Ledger loop:** runs `ledger.py ready` to evaluate dependency DAG and invariants, `ledger.py start` to verify prerequisites, and `ledger.py gate` to execute validation commands and mint `observed` evidence.
+3. **Guarded completion:** `ledger.py complete` enforces zero-test controls, fresh evaluation of invariants, and task-local skills and documentation decisions.
+4. **Intra-plan delegation:** tasks marked `parallel_safe` in v7 contracts can delegate to subagents via headless (`ak run` in a worktree) or interactive (`herdr` pane) transports. Results remain `asserted` until observed by the plan's gate runner.
+5. **Capacity checks:** evaluates remaining account headroom at task boundaries before dispatch.
+6. **Final Review:** terminates in a mandatory five-part closing task (security pass with required local review, final-state validation, skills reconciliation, documentation reconciliation, completion).
 
 ## Aliases
 

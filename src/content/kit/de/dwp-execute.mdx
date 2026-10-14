@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Einen bestehenden Deep Work Plan Aufgabe für Aufgabe ausführen. Der Agent liest den vollständigen Plan, führt jede Aufgabe der Reihe nach aus, aktualisiert den Fortschritt und markiert den Abschluss akkurat."
+description: "Führen Sie einen Deep Work Plan sequenziell mit der v7-Ledger-Schleife, optionalem Trust-Modus, parallel_safe-Delegation und Final Review aus."
 kind: command
 lang: de
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -23,16 +23,18 @@ Einen bestehenden Deep Work Plan ausführen.
 ## Verwendung
 
 ```
+/dwp-execute
 /dwp-execute [plan]
+/dwp-execute [plan] trust
 ```
 
 ## Verhalten
 
 1. Den vollständigen Plan lesen, bevor begonnen wird.
-2. Aufgaben der Reihe nach ausführen.
-3. `PROGRESS.md` nach jeder Aufgabe aktualisieren.
-4. Den Aufgabenstatus akkurat markieren.
-5. Bei Blockaden anhalten und nachfragen.
+2. `ledger.py ready` & `ledger.py start` -> Aufgaben der Reihe nach ausführen.
+3. `ledger.py gate` -> `observed` evidence; `PROGRESS.md` nach jeder Aufgabe aktualisieren.
+4. `parallel_safe` delegation; Den Aufgabenstatus akkurat markieren.
+5. `ledger.py complete` & Final Review; Bei Blockaden anhalten und nachfragen.
 
 ## Aliase
 

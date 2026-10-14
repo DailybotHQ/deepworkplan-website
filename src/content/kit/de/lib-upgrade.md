@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Die Abhängigkeiten eines Repositorys sicher in validierten, rücknehmbaren Chargen über das dependency-upgrade-Addon aktualisieren. Nur installiert, wenn dieses Addon angenommen wird."
+description: "Die Abhängigkeiten eines Repositorys sicher in validierten, rücknehmbaren Chargen über das dependency-upgrade-Addon aktualisieren. Nur installiert, wenn dieses."
 kind: command
 lang: de
 order: 9

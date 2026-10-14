@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "从一个高层目标创建一份新的 Deep Work Plan。代理分析目标、把工作分解为任务，并在 .dwp 之下写出计划文件。"
+description: "从高层目标创建 Deep Work Plan，具备完备的边界选项语法、精简提案、单调递增编号文件夹与 v7 契约物化，支持端到端验证与执行。"
 kind: command
 lang: zh
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## 模式
@@ -41,8 +43,9 @@ trust 模式是你信任这套流程之后的进阶用户捷径；引导模式�
 ## 行为
 1. 分析目标与仓库上下文。
 2. 若含糊则提出澄清性的问题。
-3. 直接在 `.dwp/plans/PLAN_001_<slug>/` 下物化计划——默认是 Lite 计划，较大的工作则是 Full 计划（在引导模式下，审阅它并选择保留为 Lite、晋升为 Full、编辑或停止）。
+3. 直接在 `.dwp/plans/PLAN_<id>_<slug>/` 下物化计划——默认是 Lite 计划，较大的工作则是 Full 计划（在引导模式下，审阅它并选择保留为 Lite、晋升为 Full、编辑或停止）。
 4. 分解为一系列连续的任务，并写出 README、任务文件与 PROGRESS。
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. 以 Final Review 作结（安全审查、最终状态验证、技能决策核对）。
 
 7.x 技能包默认创建 v7 计划。现有计划保留记录的代际；迁移必须明确请求。 新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v7 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。

@@ -10,7 +10,7 @@ order: 7
 
 O [Herdr](https://herdr.dev) coloca agentes de programação em painéis, na sua máquina e nas máquinas que ele alcança por SSH. Este addon permite que um Deep Work Plan use esses agentes como **pares**: um plano pode passar uma tarefa delimitada a um agente em outro painel, receber exatamente uma resposta autorizada e manter um registro da troca.
 
-É um addon opcional do **DWP v7** (`v7.0.0`). A metodologia funciona da mesma forma sem ele: com o addon ausente ou desativado, cada tarefa é executada na sessão atual, exatamente como antes.
+É um addon opcional do **DWP v7** (pack `v7.8.1`). A metodologia funciona da mesma forma sem ele: com o addon ausente ou desativado, cada tarefa é executada na sessão atual, exatamente como antes.
 
 ## O que ele integra
 
@@ -71,7 +71,7 @@ Os dois addons implementam a mesma interface de delegação — `launch`, `obser
 
 Para um líder que executa muitas frentes ao mesmo tempo — painéis no host, em contêineres e em outras máquinas, cada um na própria conta —, `herdr-peers lanes` lista cada frente com seu estado, `herdr-peers status <pane>` classifica a tela em que uma frente bloqueada está, e cada registro de delegação nomeia a conta e o fornecedor que o realizaram. Veja [Executar muitos agentes](/methodology/06-orchestration).
 
-**Lanes do Codex nomeiam seu painel.** O Codex executa os comandos de uma lane a partir de um servidor em segundo plano compartilhado por todas as sessões daquela conta, então o id de painel herdado pode ser de outra lane. Uma lane do Codex passa o próprio painel, tirado do briefing do líder, com `--pane <pane>` em cada verbo do herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Cada lane nomeia seu painel.** Sob as regras de autonomia de swarm (Guide §17.2), cada lane passa seu próprio painel com  em cada verbo de herdr-peers (, , , , , , ) para evitar atribuição incorreta de mensagens e saturação de slots de distribuição. Os lanes do Codex exigem isso com rigor especial devido ao compartilhamento de servidor em segundo plano entre sessões.
 
 ## Avisos e liderança
 

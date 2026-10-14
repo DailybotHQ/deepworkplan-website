@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "Utwórz nowy Deep Work Plan na podstawie ogólnego celu. Agent analizuje cel, rozkłada pracę na zadania i zapisuje pliki planu w katalogu .dwp."
+description: "Twórz Deep Work Plan z celu wysokiego poziomu, z pełną gramatyką opcji granicznych, propozycjami Lite, folderami i kontraktami v7."
 kind: command
 lang: pl
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ Utwórz nowy Deep Work Plan na podstawie ogólnego celu.
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## Tryby
@@ -41,11 +43,13 @@ Tryb trust to skrót dla zaawansowanych użytkowników, gdy już ufasz przepływ
 ## Zachowanie
 1. Analiza celu i kontekstu repozytorium.
 2. Zadanie pytań doprecyzowujących, jeśli cel jest niejednoznaczny.
-3. Materializacja planu bezpośrednio w `.dwp/plans/PLAN_001_<slug>/` — domyślnie plan Lite, lub Full dla większych prac (w trybie prowadzonym przejrzyj go i wybierz: zachować jako Lite, podnieść do Full, edytować, czy zatrzymać się).
+3. Materializacja planu bezpośrednio w `.dwp/plans/PLAN_<id>_<slug>/` — domyślnie plan Lite, lub Full dla większych prac (w trybie prowadzonym przejrzyj go i wybierz: zachować jako Lite, podnieść do Full, edytować, czy zatrzymać się).
 4. Rozłożenie na sekwencyjne zadania oraz zapis README, plików zadań i PROGRESS.
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. Zakończenie Final Review (przegląd bezpieczeństwa, walidacja stanu końcowego, uzgodnienie decyzji dotyczących skilli).
 
-Pakiet 7.x domyślnie tworzy plany v7. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia. Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v7 ma 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
+Pakiet 7.x domyślnie tworzy plany v7. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia. Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v7 ma 2–4. `ledger.py materialize` -> `contract.json` (v7).
+5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
 
 ## Aliasy
 

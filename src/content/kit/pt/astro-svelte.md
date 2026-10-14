@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "Um preset de onboarding para sites Astro, opcionalmente com ilhas Svelte, com pistas de raciocínio para content collections, validação de schema e hidratação de ilhas."
+description: "Um preset de onboarding para sites Astro, opcionalmente com ilhas Svelte, com pistas de raciocínio para content collections, validação de schema e hidratação."
 kind: preset
 lang: pt
 order: 3

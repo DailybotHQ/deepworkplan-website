@@ -1,6 +1,6 @@
 ---
 title: Dependency-Upgrade
-description: "Ein Opt-in-, paketmanager-agnostisches Addon, das die Abhängigkeiten eines Repositorys in validierten, rücknehmbaren Chargen aktualisiert und den echten Manager erkennt, statt npm anzunehmen."
+description: "Ein Opt-in-, paketmanager-agnostisches Addon, das die Abhängigkeiten eines Repositorys in validierten, rücknehmbaren Chargen aktualisiert und den echten."
 kind: addon
 lang: de
 order: 3
@@ -23,6 +23,16 @@ Die Abhängigkeiten eines Repositorys mit einem chargenweisen, validierten, rüc
 4. Nach jeder Charge das echte Validierungs-Gate des Repositorys ausführen; jede fehlgeschlagene Charge rückgängig machen.
 5. Zusammenfassen, was aktualisiert, übersprungen und rückgängig gemacht wurde; den Entwickler committen lassen.
 
+
+## v7-Spezifikation
+
+| Element | Wert |
+|---|---|
+| Produkt | DeepWorkPlan dependency-upgrade-Addon |
+| Registrierungsschlüssel | `dependency-upgrade` in `.dwp/config.json` |
+| Deskriptor | `addons/dependency-upgrade/addon.json` (Schnittstelle 1) |
+| Befehl | `/lib-upgrade` installiert in `.agents/commands/` bei Annahme |
+| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v7.8.1`) |
 ## Hinweise
 
 Paketmanager-agnostisch — führt niemals npm/ncu in einem Nicht-JS-Repository aus. Opt-in, nie erforderlich, und committet niemals automatisch.

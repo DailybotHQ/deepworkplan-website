@@ -1,0 +1,35 @@
+---
+title: dwp-upgrade
+description: "Comprueba actualizaciones de Deep Work Plan, revisa adaptaciones locales e instala versiones etiquetadas estables con consentimiento explícito."
+kind: command
+lang: es
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Mantén actualizados la skill de Deep Work Plan instalada y el estándar declarado con consentimiento explícito.
+
+## Qué hace
+
+`dwp-upgrade` inspecciona los lanzamientos ascendentes en busca de versiones más recientes del paquete de skills y del estándar. Informa sobre las diferencias, muestra adaptaciones locales, requiere aprobación explícita antes de aplicar cambios e instala versiones etiquetadas estables sin alterar los planes existentes en `.dwp/`.
+
+## Uso
+
+```
+/dwp-upgrade
+```
+
+## Comportamiento
+
+1. **Comprobación (solo lectura)** — lee la versión instalada en `SKILL.md` y consulta las etiquetas de git ascendentes para la versión estable más reciente. Informa de la versión actual frente a la última.
+2. **Consentimiento** — muestra cualquier modificación o adaptación local mediante un diff; nunca descarga ni sobrescribe archivos sin confirmación explícita.
+3. **Actualización** — instala la etiqueta estable exacta en `.agents/skills/deepworkplan/`, registra los addons configurados en `.dwp/config.json` y reconcilia el arnés.
+4. **Preservar el historial** — los planes existentes, la evidencia y los registros bajo `.dwp/plans/` son historial inmutable y nunca se modifican ni migran durante una actualización.
+
+## Alias
+
+- `dwp:upgrade`

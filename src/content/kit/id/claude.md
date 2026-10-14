@@ -15,7 +15,7 @@ Claude Code memiliki dukungan DWP **penuh** melalui slash command dan skill nati
 
 ## Tingkat dukungan
 
-**Penuh** — kelima command DWP dipetakan ke slash command native Claude Code.
+**Penuh** (Teruji perilaku) — rangkaian lengkap sub-skill dan perintah siklus hidup DWP dipetakan ke perintah garis miring bawaan Claude Code, terbukti dalam benchmark serah terima dua arah.
 
 ## Instalasi
 

@@ -1,6 +1,6 @@
 ---
 title: Flutter
-description: "Preset onboarding cho dự án Flutter và Dart, với gợi ý suy luận về widget, analyzer, quản lý state, sinh mã và flutter test."
+description: "Preset onboarding cho dự án Flutter và Dart, với gợi ý suy luận về widget, analyzer, quản lý state, sinh mã và flutter test với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 17

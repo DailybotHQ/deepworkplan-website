@@ -1,6 +1,6 @@
 ---
 title: React Native
-description: "Un preset d'onboarding pour les projets React Native et Expo, avec des indices de raisonnement sur la navigation, la configuration native, le test runner et bare vs managed."
+description: "Un preset d'onboarding pour les projets React Native et Expo, avec des indices de raisonnement sur la navigation, la configuration native, le test runner et."
 kind: preset
 lang: fr
 order: 16

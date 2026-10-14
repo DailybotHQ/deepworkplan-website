@@ -1,6 +1,6 @@
 ---
 title: Terraform
-description: "Um preset de onboarding para projetos Terraform e IaC, com pistas de raciocínio para módulos, providers, estado do backend, ambientes e o gate fmt/validate/plan."
+description: "Um preset de onboarding para projetos Terraform e IaC, com pistas de raciocínio para módulos, providers, estado do backend, ambientes e o gate."
 kind: preset
 lang: pt
 order: 21

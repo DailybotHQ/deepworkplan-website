@@ -15,7 +15,7 @@ OpenClaw는 예약된 턴으로 장기 실행 작업 공간을 운영하는 자�
 
 ## 지원 수준
 
-**Full** — OpenClaw는 `AGENTS.md`를 읽고 AgentSkills 표준을 통해 스킬을 로드합니다. 모든 DWP 하위 스킬(`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`)을 사용할 수 있습니다.
+**완전 지원** (문서화됨) — OpenClaw는 `AGENTS.md`를 읽고 AgentSkills 표준을 통해 스킬을 로드합니다. 모든 DWP 하위 스킬(`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`)을 사용할 수 있습니다.
 
 ## 설치
 
@@ -50,7 +50,7 @@ OpenClaw의 스케줄링 프리미티브는 DWP의 계속 실행 모델에 직�
 운영상:
 
 1. 사람이 대화형으로 계획을 생성하고 승인합니다. 승인이 제어 지점입니다 — 무인 턴은 한 턴에 생성과 실행을 동시에 하지 않습니다.
-2. 계획은 기계 가독 상태 레이어(`manifest.json` + `state.json`)를 담아야 합니다. git이 없는 작업 공간에서는 `state.json`이 충돌 안전 재개를 가능하게 합니다. 참고: [계획 상태](/spec/plan-state).
+2. 계획은 기계 가독 상태 레이어(`manifest.json` + `state.json`)를 담아야 합니다. git이 없는 작업 공간에서는 `state.json`이 충돌 안전 재개를 가능하게 합니다. 참고: [계획 상태](/spec/plan-state). v6 및 v7 계획에서 상태는 상태 파일을 수동으로 다시 작성하는 대신 `ledger.py project`를 통해 추가 전용 저널(`journal.ndjson`)에서 프로젝션됩니다.
 3. 각 하트비트 또는 크론 턴은 최대 하나의 작업을 실행하고, 검증 게이트를 통과하며, `state.json`을 원자적으로 갱신하고, 양보합니다.
 4. 정지 조건이 발생하면 에이전트는 `state.json`의 `blocked` 필드를 작성하고 작업 공간의 일반 채널을 통해 보고합니다. 다음 사람의 확인 — 또는 하트비트 보고 — 에서 필요한 것이 정확히 표시됩니다.
 

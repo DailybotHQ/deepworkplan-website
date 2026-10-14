@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Var olan bir Deep Work Plan’i görev görev yürütür. Ajan planın tamamını okur, her görevi sırayla çalıştırır, ilerlemeyi günceller ve tamamlanmayı doğru biçimde işaretler."
+description: "Mevcut bir Deep Work Plan'ı v7 defter döngüsü, gözetimsiz trust modu, parallel_safe delegasyonu ve Final Review ile sırayla yürütün."
 kind: command
 lang: tr
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -23,16 +23,18 @@ Var olan bir Deep Work Plan’i yürütün.
 ## Kullanım
 
 ```
+/dwp-execute
 /dwp-execute [plan]
+/dwp-execute [plan] trust
 ```
 
 ## Davranış
 
 1. Başlamadan önce planın tamamını okuyun.
-2. Görevleri sırayla yürütün.
-3. Her görevden sonra `PROGRESS.md` dosyasını güncelleyin.
-4. Görev durumunu doğru biçimde işaretleyin.
-5. Engellendiğinizde durup sorun.
+2. `ledger.py ready` & `ledger.py start` -> Görevleri sırayla yürütün.
+3. `ledger.py gate` -> `observed` evidence; Her görevden sonra `PROGRESS.md` dosyasını güncelleyin.
+4. `parallel_safe` delegation; Görev durumunu doğru biçimde işaretleyin.
+5. `ledger.py complete` & Final Review; Engellendiğinizde durup sorun.
 
 ## Takma adlar
 

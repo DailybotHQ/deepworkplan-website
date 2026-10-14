@@ -15,7 +15,7 @@ Claude Code has **full** DWP support via native slash commands and skills.
 
 ## Support level
 
-**Full** — all five DWP commands map to native Claude Code slash commands.
+**Full** (Behavior-tested) — the full suite of DWP sub-skills and lifecycle commands map to native Claude Code slash commands, proven in bidirectional handoff benchmarks.
 
 ## Installation
 

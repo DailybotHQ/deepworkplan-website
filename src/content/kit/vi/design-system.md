@@ -1,6 +1,6 @@
 ---
 title: Hệ thống thiết kế
-description: "Một addon tự nguyện trao cho bất kỳ repo nào có bề mặt giao diện hướng tới người dùng một DESIGN.md (dưới docs/, được lập chỉ mục từ AGENTS.md) — bao quát các profile UI trực quan, đầu ra CLI và hội thoại trong một tệp duy nhất."
+description: "Addon tùy chọn cung cấp DESIGN.md trong docs/ cho các kho có giao diện, được lập chỉ mục từ AGENTS.md, bao gồm UI, đầu ra CLI và hồ sơ hội thoại."
 kind: addon
 lang: vi
 order: 4
@@ -39,6 +39,28 @@ Nó không bao giờ bắt buộc — một repository với không có addon t�
 ## Command tùy chọn
 
 Khi được chấp nhận, addon có thể cài một bộ ủy thác `/design-system` vào `.agents/commands/` của repo để tái sinh hay làm mới `DESIGN.md` về sau. Việc cài command là tùy chọn; một addon bị từ chối không cài gì cả.
+
+
+## Đặc tả v7
+
+| Mục | Giá trị |
+|---|---|
+| Sản phẩm | Addon design-system của DeepWorkPlan |
+| Khóa đăng ký |  trong  |
+| Bộ mô tả |  (giao diện 1) |
+| Tệp đích |  được lập chỉ mục từ  |
+| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng () |
+
+
+## Đặc tả v7
+
+| Mục | Giá trị |
+|---|---|
+| Sản phẩm | Addon design-system của DeepWorkPlan |
+| Khóa đăng ký | `design-system` trong `.dwp/config.json` |
+| Bộ mô tả | `addons/design-system/addon.json` (giao diện 1) |
+| Tệp đích | `docs/DESIGN.md` được lập chỉ mục từ `AGENTS.md` |
+| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.8.1`) |
 
 ## Quan hệ với các tài liệu thiết kế theo tính năng
 

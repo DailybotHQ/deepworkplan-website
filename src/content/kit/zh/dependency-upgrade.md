@@ -1,6 +1,6 @@
 ---
 title: Dependency upgrade
-description: "一个可选、包管理器无关的附加组件，以经验证、可回退的批次升级仓库的依赖，检测真实的包管理器，而非假定 npm。"
+description: "一个可选、包管理器无关的附加组件，以经验证、可回退的批次升级仓库的依赖，检测真实的包管理器，而非假定 npm，支持端到端验证与执行。"
 kind: addon
 lang: zh
 order: 3
@@ -23,6 +23,16 @@ order: 3
 4. 在每个批次后运行仓库真实的验证关卡；回退任何失败的批次。
 5. 总结升级了什么、跳过了什么、回退了什么；交由开发者提交。
 
+
+## v7 规范
+
+| 条目 | 值 |
+|---|---|
+| 产品 | DeepWorkPlan dependency-upgrade 附加组件 |
+| 注册键 | `.dwp/config.json` 中的 `dependency-upgrade` |
+| 描述符 | `addons/dependency-upgrade/addon.json`（接口 1） |
+| 命令 | 接受后安装至 `.agents/commands/` 的 `/lib-upgrade` |
+| 版本控制 | 随技能包固定并控制版本（`v7.8.1`） |
 ## 备注
 
 包管理器无关——绝不在一个非 JS 仓库中运行 npm/ncu。可选，绝非必需，且绝不自动提交。

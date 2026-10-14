@@ -1,6 +1,6 @@
 ---
 title: Node / TS service
-description: "พรีเซ็ต onboarding สำหรับบริการ Node และ TypeScript และ serverless API พร้อมแนวคิดเรื่องวงจรของ request จุดเชื่อมต่อ และการทดสอบ"
+description: "พรีเซ็ต onboarding สำหรับบริการ Node และ TypeScript และ serverless API พร้อมแนวคิดเรื่องวงจรของ request จุดเชื่อมต่อ และการทดสอบ พร้อมการตรวจสอบเต็มรูปแบบ"
 kind: preset
 lang: th
 order: 4

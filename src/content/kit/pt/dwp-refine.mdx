@@ -1,6 +1,6 @@
 ---
 title: dwp-refine
-description: "Refinar um Deep Work Plan existente adicionando, removendo ou reordenando tarefas, preservando o trabalho concluído e atualizando a tabela de tarefas para refletir as mudanças."
+description: "Refine um Deep Work Plan via emendas atômicas em contracts/, conjunto fechado de adaptações, preservação de critérios e promoção Lite para Full."
 kind: command
 lang: pt
 order: 3
@@ -16,29 +16,29 @@ Refina um Deep Work Plan existente.
 
 <CmdRefine lang="pt" class="not-prose my-8" />
 
+
 ## O que faz
 
-O `dwp-refine` modifica um plano existente. Ele pode adicionar, remover ou reordenar tarefas, preservando o trabalho concluído e atualizando a tabela de tarefas.
+`dwp-refine` modifica um plano existente com segurança. Pode adicionar, remover ou reordenar tarefas preservando estritamente evidências concluídas, proibindo o enfraquecimento não confirmado de critérios e registrando revisões atômicas de contrato.
 
 ## Uso
 
 ```
 /dwp-refine [plan]
+/dwp-refine promote [plan]
 ```
 
 ## Comportamento
 
-1. Ler o plano existente.
-2. Adicionar, remover ou reordenar tarefas.
-3. Preservar o trabalho concluído.
-4. Atualizar a tabela de tarefas.
-5. Registrar o que mudou e por quê.
+1. **Leitura do plano:** lê o plano alvo e inspeciona histórico de contrato e diário.
+2. **Emendas de contrato:** em planos v7, alterações de contrato passam por `ledger.py amend`. A revisão é mantida em `contracts/`, um evento `amendment` é adicionado a `journal.ndjson` e uma nova aprovação é registrada.
+3. **Conjunto fechado de adaptações:** adaptações durante a execução são restritas a cinco operações autorizadas: `split`, `reorder`, `insert`, `change_strategy` e `retry`. Propostas que expandem escopo, permissões ou orçamento são rejeitadas.
+4. **Preservar evidências:** evidências de tarefas concluídas nunca são alteradas ou invalidadas. Enfraquecimento não confirmado de critérios é proibido.
+5. **Promoção Lite para Full:** `/dwp-refine promote {plan}` expande registros de tarefas inline do README em arquivos de tarefas numerados separados sem alterar IDs de tarefa ou invalidar evidências existentes.
 
-> Os planos existentes mantêm a geração registrada quando a skill é atualizada. A migração nunca é automática: um encerramento legado de três tarefas pode ser migrado explicitamente para o formato Final Review mantido do v5; um plano v5 passa para v6 somente por uma migração explícita com prévia. Um plano v6 mantém sua geração e é executado sem alterações; novos planos usam a geração v7 atual, e um plano v6 nunca é movido para v7 implicitamente.
+## Migração explícita
 
-## Promover um plano Lite a Full
-
-`/dwp-refine promote {plan_name}` muda a representação autorizada de um plano Lite dos registros de tarefa em linha no README para arquivos por tarefa, preservando o trabalho concluído e os IDs de tarefa sem alterar o escopo. A promoção é apenas de representação: nunca chama o execute. Planos Full não são rebaixados automaticamente a Lite.
+Planos existentes mantêm sua geração registrada quando o pacote de skills é atualizado. A migração nunca é automática. Um plano v5 passa para v6 somente por migração explícita e pré-visualizada (`shared/migrate_v6.py`). Um plano v6 mantém sua geração e roda inalterado; novos planos usam a geração v7 atual, e um plano existente nunca é migrado implicitamente.
 
 ## Aliases
 

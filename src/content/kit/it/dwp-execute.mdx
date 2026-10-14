@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Esegue un Deep Work Plan esistente attività per attività. L’agente legge l’intero piano, esegue ogni attività in ordine, aggiorna i progressi e segna il completamento in modo accurato."
+description: "Esegui un Deep Work Plan in sequenza con il ciclo ledger v7, modalità trust non presidiata, delega parallel_safe e chiusura Final Review."
 kind: command
 lang: it
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -23,16 +23,18 @@ Esegue un Deep Work Plan esistente.
 ## Uso
 
 ```
+/dwp-execute
 /dwp-execute [plan]
+/dwp-execute [plan] trust
 ```
 
 ## Comportamento
 
 1. Legge l’intero piano prima di iniziare.
-2. Esegue le attività in ordine.
-3. Aggiorna `PROGRESS.md` dopo ogni attività.
-4. Segna lo stato dell’attività in modo accurato.
-5. Si ferma e chiede quando è bloccato.
+2. `ledger.py ready` & `ledger.py start` -> Esegue le attività in ordine.
+3. `ledger.py gate` -> `observed` evidence; Aggiorna `PROGRESS.md` dopo ogni attività.
+4. `parallel_safe` delegation; Segna lo stato dell’attività in modo accurato.
+5. `ledger.py complete` & Final Review; Si ferma e chiede quando è bloccato.
 
 ## Alias
 

@@ -15,7 +15,7 @@ Cursor, DWP’yi proje kuralları ve komut dosyaları aracılığıyla destekler
 
 ## Destek düzeyi
 
-**Tam** — DWP komutları Cursor’ın kurallar sistemi aracılığıyla çalışır.
+**Tam** (Kurulum testli) — DWP komutları Cursor'ın kural sistemi üzerinden çalışır. Dizin yolları otomatik test paketleriyle doğrulanmıştır; davranışsal iş akışları sıralı olarak yürütülür.
 
 ## Kurulum
 

@@ -1,6 +1,6 @@
 ---
 title: 디자인 시스템
-description: "사용자 대면 인터페이스 표면을 가진 어떤 리포지토리든 DESIGN.md(docs/ 아래, AGENTS.md에서 색인됨)를 부여하는 선택형 애드온 — 비주얼 UI, CLI 출력, 대화형 프로필을 하나의 파일에 담습니다."
+description: "UI가 있는 저장소의 docs/에 AGENTS.md에서 색인되는 DESIGN.md를 제공하여 시각적 UI, CLI 출력 및 대화형 프로필을 다루는 선택형 애드온."
 kind: addon
 lang: ko
 order: 4
@@ -40,6 +40,16 @@ order: 4
 
 채택되면, 애드온은 나중에 `DESIGN.md`를 재생성하거나 갱신할 수 있도록 리포지토리의 `.agents/commands/`에 `/design-system` 위임자를 설치할 수 있습니다. 명령 설치는 선택적이며, 거절된 애드온은 아무것도 설치하지 않습니다.
 
+
+## v7 사양
+
+| 항목 | 값 |
+|---|---|
+| 제품 | DeepWorkPlan design-system 애드온 |
+| 레지스트리 키 | `.dwp/config.json`의 `design-system` |
+| 기술자 | `addons/design-system/addon.json` (인터페이스 1) |
+| 대상 파일 | `AGENTS.md`에서 색인된 `docs/DESIGN.md` |
+| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v7.8.1`) |
 ## 기능별 디자인 문서와의 관계
 
 이것은 **리포지토리 수준의 영속적인** 디자인 시스템 파일입니다 — 도구에 묶인 스펙 주도 워크플로의 기능별 기술 디자인 문서("요구사항 → 디자인 → 작업"의 `design.md`)와는 구별됩니다. Deep Work Plan은 의도적으로 별도의 기능별 디자인 문서 아키타입을 제공하지 않습니다. 계획의 README, 각 작업의 인수 기준, 그리고 검증 게이트가 이미 그 역할을 담당합니다. 이 애드온은 그 역할이 채우지 못하는 한 가지 공백을 메웁니다: 지속적이고 리포지토리 고유의 인터페이스 디자인 컨텍스트.

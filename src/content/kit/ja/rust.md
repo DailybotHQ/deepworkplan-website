@@ -1,6 +1,6 @@
 ---
 title: Rust
-description: "Rust プロジェクト向けのオンボーディングプリセット。クレート、モジュール、Cargo ワークスペース、フィーチャー、cargo test／clippy／build ゲートに関する推論の手がかりを備える。"
+description: "Rust プロジェクト向けのオンボーディングプリセット。クレート、モジュール、Cargo ワークスペース、フィーチャー、cargo test／clippy／build ゲート。"
 kind: preset
 lang: ja
 order: 19

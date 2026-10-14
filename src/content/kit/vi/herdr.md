@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) đặt các coding agent vào các pane, trên máy của bạn và trên các máy mà nó kết nối tới qua SSH. Addon này cho phép một Deep Work Plan sử dụng các agent đó như **peer** (tác tử ngang hàng): một kế hoạch có thể giao một tác vụ có giới hạn cho một agent trong pane khác, nhận đúng một phản hồi được ủy quyền và lưu lại bản ghi của lần trao đổi đó.
 
-Đây là một addon tùy chọn của **DWP v7** (`v7.0.0`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
+Đây là một addon tùy chọn của **DWP v7** (pack `v7.8.1`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
 
 ## Addon tích hợp những gì
 
@@ -71,7 +71,7 @@ Cả hai addon đều triển khai cùng một giao diện ủy thác — `launc
 
 Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, trong container và trên máy khác, mỗi lane trên tài khoản riêng — `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, `herdr-peers status <pane>` phân loại màn hình mà một lane bị chặn đang ở, và mỗi bản ghi ủy thác nêu tài khoản và nhà cung cấp đã đảm nhận nó. Xem [Chạy nhiều agent](/methodology/06-orchestration).
 
-**Lane Codex tự nêu pane của mình.** Codex chạy lệnh của một lane từ một máy chủ nền dùng chung cho mọi phiên của tài khoản đó, nên id pane mà nó kế thừa có thể thuộc về lane khác. Một lane Codex truyền pane của chính nó, lấy từ chỉ dẫn của lead, bằng `--pane <pane>` trên mọi lệnh herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Mỗi lane tự nêu pane của mình.** Theo quy tắc tự chủ swarm (Guide §17.2), mỗi lane truyền pane riêng của mình qua  trên mọi lệnh herdr-peers (, , , , , , ) để ngăn phân bổ sai tin nhắn và bão hòa khe cắm phân phối. Các lane Codex yêu cầu điều này đặc biệt nghiêm ngặt do máy chủ nền được chia sẻ giữa các phiên.
 
 ## Thông báo và quyền lead
 

@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "高レベルの目標から新しい Deep Work Plan を作成する。エージェントは目標を分析し、作業をタスクへと分解し、.dwp の配下に計画ファイルを書く。"
+description: "高レベルの目標から、境界オプション構文、Lite 提案、番号付きフォルダ割り当て、v7 契約の具現化を備えたプランを作成します。"
 kind: command
 lang: ja
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## モード
@@ -41,8 +43,9 @@ trust モードは、フローを信頼できるようになったうえでの�
 ## 振る舞い
 1. 目標とリポジトリのコンテキストを分析する。
 2. 曖昧なら明確化のための質問をする。
-3. `.dwp/plans/PLAN_001_<slug>/` の下に計画を直接マテリアライズする——既定では Lite 計画、より大きな作業では Full 計画（ガイド付きモードでは、レビューして Lite のまま維持するか、Full へ昇格させるか、編集するか、中止するかを選ぶ）。
+3. `.dwp/plans/PLAN_<id>_<slug>/` の下に計画を直接マテリアライズする——既定では Lite 計画、より大きな作業では Full 計画（ガイド付きモードでは、レビューして Lite のまま維持するか、Full へ昇格させるか、編集するか、中止するかを選ぶ）。
 4. 逐次的なタスクへと分解し、README、タスクファイル、PROGRESS を書く。
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. Final Review（セキュリティパス、最終状態検証、スキルの突き合わせ）で締めくくる。
 
 7.x パックは v7 計画を既定で作成します。既存の計画は記録された世代を維持し、移行には明示的な依頼が必要です。新しい計画には、3桁以上の単調増加する数値 ID を付けます（例：`PLAN_001_add_payment_webhooks/`）。凍結された v5 スキーマでは数値 ID も1語として数えるため、v5 の slug は2〜4語、v7 の slug は2〜5語です。既存の番号なし `PLAN_<slug>/` フォルダーは引き続き読み取り可能で、名前は変更しません。番号付き計画がある場合、`latest` は数値 ID が最も大きい計画を指します。

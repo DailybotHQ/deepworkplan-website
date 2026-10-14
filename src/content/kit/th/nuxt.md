@@ -1,6 +1,6 @@
 ---
 title: Nuxt
-description: "พรีเซ็ต onboarding สำหรับโครงการ Nuxt พร้อมแนวคิดสำหรับ page, server API route, composable, Nitro server engine และการทดสอบ"
+description: "พรีเซ็ต onboarding สำหรับโครงการ Nuxt พร้อมแนวคิดสำหรับ page, server API route, composable, Nitro server engine และการทดสอบ พร้อมการตรวจสอบเต็มรูปแบบ"
 kind: preset
 lang: th
 order: 14

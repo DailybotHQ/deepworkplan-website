@@ -1,6 +1,6 @@
 ---
 title: TypeScript Lambda
-description: "Sunucusuz TypeScript Lambda projeleri için işleyiciler, Serverless/SAM/CDK araç zinciri ve IAM en az ayrıcalık ilkesine yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Sunucusuz TypeScript Lambda projeleri için işleyiciler, Serverless/SAM/CDK araç zinciri ve IAM en az ayrıcalık ilkesine yönelik akıl yürütme ipuçları içeren."
 kind: preset
 lang: tr
 order: 22

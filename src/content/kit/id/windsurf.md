@@ -15,7 +15,7 @@ Windsurf mendukung DWP melalui sistem aturannya dan prosedur command markdown.
 
 ## Tingkat dukungan
 
-**Penuh** — Windsurf membaca aturan proyek dan menjalankan setiap command dwp-* dari file prosedurnya.
+**Penuh** (Teruji instalasi) — Windsurf membaca aturan proyek dan menjalankan setiap perintah dwp-* dari file prosedurnya. Rute dipastikan oleh rangkaian pengujian otomatis.
 
 ## Instalasi
 

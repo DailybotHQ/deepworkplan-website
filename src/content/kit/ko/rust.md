@@ -1,6 +1,6 @@
 ---
 title: Rust
-description: "Rust 프로젝트를 위한 온보딩 프리셋으로, 크레이트, 모듈, Cargo 워크스페이스, 피처, cargo test/clippy/build 게이트에 대한 추론 단서를 제공합니다."
+description: "Rust 프로젝트를 위한 온보딩 프리셋으로, 크레이트, 모듈, Cargo 워크스페이스, 피처, cargo test/clippy/build 게이트에 대한 추론."
 kind: preset
 lang: ko
 order: 19

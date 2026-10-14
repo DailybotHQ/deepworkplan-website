@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "Der DWP-Adapter für OpenCode, den Open-Source-Agenten, mit vollständiger Unterstützung über natives AGENTS.md und Markdown-Befehlsprozeduren, die mit dem Hash-Präfix aufgerufen werden."
+description: "Der DWP-Adapter für OpenCode, den Open-Source-Agenten, mit voller Unterstützung via natives AGENTS.md und Markdown-Prozeduren, die mit dem Hash-Präfix."
 kind: adapter
 lang: de
 order: 7
@@ -15,7 +15,7 @@ OpenCode, der Open-Source-Coding-Agent, unterstützt DWP über natives AGENTS.md
 
 ## Unterstützungsstufe
 
-**Vollständig** — OpenCode liest AGENTS.md nativ und führt jeden dwp-*-Befehl aus seiner Prozedurdatei aus.
+**Vollständig** (Installationsgeprüft) — OpenCode liest AGENTS.md nativ und führt jeden dwp-*-Befehl aus seiner Prozedurdatei aus. Route durch automatisierte Testsuiten bestätigt.
 
 ## Installation
 

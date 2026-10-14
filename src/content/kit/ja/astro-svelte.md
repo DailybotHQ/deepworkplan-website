@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "Astro サイト（任意で Svelte アイランドを伴う）向けのオンボーディングプリセット。コンテンツコレクション、スキーマ検証、アイランドのハイドレーションについての推論の手がかりを備える。"
+description: "Astro サイト（任意で Svelte アイランドを伴う）向けのオンボーディングプリセット。コンテンツコレクション、スキーマ検証、アイランドのハイドレーションについての推論。"
 kind: preset
 lang: ja
 order: 3

@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Отчёт о статусе Deep Work Plan без его выполнения. Агент читает план и журнал прогресса, затем резюмирует завершённую, выполняемую и ожидающую работу."
+description: "Отчет о состоянии Deep Work Plan по четырем измерениям жизненного цикла, лимитам ресурсов, блокировкам и делегированию без правки файлов."
 kind: command
 lang: ru
 order: 5
@@ -23,16 +23,17 @@ import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
 ## Использование
 
 ```
+/dwp-status
 /dwp-status [plan]
 ```
 
 ## Поведение
 
-1. Прочитать план и `PROGRESS.md`.
+1. 4 lifecycle dimensions (format, materialization, review, progress); Прочитать план и `PROGRESS.md`.
 2. Резюмировать завершённые задачи.
 3. Резюмировать выполняемые задачи.
-4. Резюмировать ожидающие задачи.
-5. Отчитаться, ничего не изменяя.
+4. Resource envelope & blockers (C1–C7); Резюмировать ожидающие задачи.
+5. Delegations observation; Отчитаться, ничего не изменяя.
 
 ## Псевдонимы
 

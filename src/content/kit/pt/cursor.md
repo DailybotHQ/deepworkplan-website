@@ -1,6 +1,6 @@
 ---
 title: Cursor
-description: "O adaptador DWP para o Cursor AI, com suporte completo por meio do sistema de project rules e o prefixo de comando hash, já que o Cursor reserva a barra para si."
+description: "O adaptador DWP para o Cursor AI, com suporte completo por meio do sistema de project rules e o prefixo de comando hash, já que o Cursor reserva a barra para."
 kind: adapter
 lang: pt
 order: 2
@@ -15,7 +15,7 @@ O Cursor oferece suporte ao DWP por meio de project rules e arquivos de comando.
 
 ## Nível de suporte
 
-**Completo** — os comandos do DWP funcionam por meio do sistema de rules do Cursor.
+**Completo** (Comprovado por instalação) — os comandos do DWP funcionam através do sistema de regras do Cursor. Rotas de diretório verificadas por suítes de testes automatizados; fluxos de comportamento rodam sequencialmente.
 
 ## Instalação
 

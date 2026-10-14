@@ -1,6 +1,6 @@
 ---
 title: Sistem desain
-description: "Sebuah addon opt-in yang memberi repo mana pun dengan permukaan antarmuka yang menghadap pengguna sebuah DESIGN.md (di bawah docs/, terindeks dari AGENTS.md) — mencakup profil UI visual, output CLI, dan percakapan dalam satu berkas."
+description: "Addon opsional yang memberikan DESIGN.md di docs/ bagi repo berantarmuka, diindeks dari AGENTS.md, mencakup UI visual, output CLI, dan profil percakapan."
 kind: addon
 lang: id
 order: 4
@@ -40,6 +40,16 @@ Ia tidak pernah wajib — sebuah repositori dengan nol addon opsional sepenuhnya
 
 Ketika diterima, addon dapat memasang sebuah delegator `/design-system` ke dalam `.agents/commands/` repo untuk menghasilkan ulang atau menyegarkan `DESIGN.md` di kemudian hari. Memasang command bersifat opsional; sebuah addon yang ditolak tidak memasang apa pun.
 
+
+## Spesifikasi v7
+
+| Item | Nilai |
+|---|---|
+| Produk | Addon design-system DeepWorkPlan |
+| Kunci registri | `design-system` di `.dwp/config.json` |
+| Deskriptor | `addons/design-system/addon.json` (antarmuka 1) |
+| File target | `docs/DESIGN.md` diindeks dari `AGENTS.md` |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.8.1`) |
 ## Hubungan dengan dokumen desain per-fitur
 
 Ini adalah sebuah berkas sistem desain **tingkat-repo, persisten** — berbeda dari sebuah dokumen desain teknis per-fitur ("requirements → design → tasks" `design.md` dari alur kerja spec-driven yang terikat tooling). Deep Work Plan sengaja tidak membawa archetype dokumen-desain per-fitur terpisah: README sebuah rencana, acceptance criteria setiap tugas, dan validation gate sudah mencakup peran itu. Addon ini mengisi satu celah yang tidak dicakup peran tersebut: konteks desain antarmuka yang tahan lama dan repo-native.

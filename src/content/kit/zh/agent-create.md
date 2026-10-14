@@ -1,6 +1,6 @@
 ---
 title: agent-create
-description: "通过 author 子技能在当前仓库中创建一个新代理——一个有自己的模型档位与工具的专职工作者——并让目录保持同步。"
+description: "通过 author 子技能在当前仓库中创建一个新代理——一个有自己的模型档位与工具的专职工作者——并让目录保持同步，支持端到端验证与执行。"
 kind: command
 lang: zh
 order: 8

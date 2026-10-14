@@ -1,6 +1,6 @@
 ---
 title: "Studi kasus: situs ini"
-description: "Bagaimana deepworkplan.com sendiri berjalan di atas Deep Work Plan — kisah nyata repositori Astro produksi yang dijadikan AI-first dengan metodologi yang didokumentasikannya."
+description: "Bagaimana deepworkplan.com sendiri berjalan di atas Deep Work Plan — kisah nyata repositori Astro produksi yang dijadikan AI-first dengan metodologi yang."
 kind: example
 lang: id
 order: 2

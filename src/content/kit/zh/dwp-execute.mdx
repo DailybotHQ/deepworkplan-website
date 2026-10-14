@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "逐任务执行一份现有的 Deep Work Plan。代理阅读完整的计划、按顺序运行每项任务、更新进展，并准确标记完成情况。"
+description: "通过 v7 分账循环、可选无人值守 trust 模式、parallel_safe 委派与最终审查闭环，按序执行既有计划。"
 kind: command
 lang: zh
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -23,16 +23,18 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 ## 用法
 
 ```
+/dwp-execute
 /dwp-execute [plan]
+/dwp-execute [plan] trust
 ```
 
 ## 行为
 
 1. 在开始之前阅读完整的计划。
-2. 按顺序执行任务。
-3. 在每项任务后更新 `PROGRESS.md`。
-4. 准确标记任务状态。
-5. 受阻时停下并询问。
+2. `ledger.py ready` & `ledger.py start` -> 按顺序执行任务。
+3. `ledger.py gate` -> `observed` evidence; 在每项任务后更新 `PROGRESS.md`。
+4. `parallel_safe` delegation; 准确标记任务状态。
+5. `ledger.py complete` & Final Review; 受阻时停下并询问。
 
 ## 别名
 

@@ -1,6 +1,6 @@
 ---
 title: Vue + Vite
-description: "Vue + Vite प्रोजेक्ट्स के लिए एक ऑनबोर्डिंग प्रीसेट, जिसमें single-file components, Composition API, Pinia stores, और Vitest testing के लिए तर्क संकेत शामिल हैं।"
+description: "Vue + Vite प्रोजेक्ट्स के लिए एक ऑनबोर्डिंग प्रीसेट, जिसमें single-file components, Composition API, Pinia stores, और Vitest testing के लिए तर्क संकेत शामिल."
 kind: preset
 lang: hi
 order: 2

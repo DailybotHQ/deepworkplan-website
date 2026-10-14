@@ -1,6 +1,6 @@
 ---
 title: OpenClaw
-description: "adapter DWP สำหรับ OpenClaw: การสแกน .agents/skills แบบ native การจับคู่การดำเนินงานแบบไม่มีผู้ดูแล และการดำเนินแผนต่อด้วย cron สำหรับ agent workspace แบบอัตโนมัติ"
+description: "adapter DWP สำหรับ OpenClaw: การสแกน .agents/skills แบบ native การจับคู่การดำเนินงานแบบไม่มีผู้ดูแล และการดำเนินแผนต่อด้วย cron สำหรับ agent workspace."
 kind: adapter
 lang: th
 order: 10
@@ -15,7 +15,7 @@ OpenClaw คือแพลตฟอร์มเอเจนต์อัตโ�
 
 ## ระดับการสนับสนุน
 
-**Full** — OpenClaw อ่าน `AGENTS.md` และโหลด skill ผ่านมาตรฐาน AgentSkills sub-skill DWP ทั้งหมด (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`) พร้อมใช้งาน
+**สมบูรณ์** (มีเอกสารประกอบ) — OpenClaw อ่าน `AGENTS.md` และโหลดสกิลผ่านมาตรฐาน AgentSkills มีสกิลย่อยทั้งหมดของ DWP (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`) พร้อมใช้งาน
 
 ## การติดตั้ง
 
@@ -50,7 +50,7 @@ primitives การกำหนดเวลาของ OpenClaw จับค�
 ในทางปฏิบัติ:
 
 1. มนุษย์สร้างและอนุมัติแผนแบบโต้ตอบ การอนุมัติคือจุดควบคุม — รอบไม่มีผู้ดูแลไม่เคยสร้างและดำเนินการในรอบเดียว
-2. แผนต้องพกชั้นสถานะที่เครื่องอ่านได้ (`manifest.json` + `state.json`) ใน workspace ที่ไม่มี git `state.json` คือสิ่งที่ทำให้ resume แบบปลอดภัยจากการขัดจังหวะเป็นไปได้ ดู [สถานะแผน](/spec/plan-state)
+2. แผนต้องพกชั้นสถานะที่เครื่องอ่านได้ (`manifest.json` + `state.json`) ใน workspace ที่ไม่มี git `state.json` คือสิ่งที่ทำให้ resume แบบปลอดภัยจากการขัดจังหวะเป็นไปได้ ดู [สถานะแผน](/spec/plan-state) ในแผนงาน v6 และ v7 สถานะจะถูกฉายจากเจอร์นัลแบบเพิ่มต่อท้ายเท่านั้น (`journal.ndjson`) ผ่าน `ledger.py project` แทนที่จะเขียนไฟล์สถานะใหม่ด้วยตนเอง
 3. แต่ละรอบ heartbeat หรือ cron ดำเนินงานอย่างมากหนึ่งงาน ผ่าน validation gate อัปเดต `state.json` แบบ atomic และ yield
 4. เมื่อเจอเงื่อนไขหยุด เอเจนต์เขียนฟิลด์ `blocked` ของ `state.json` และรายงานผ่านช่องทางปกติของ workspace การมองแวบถัดไปของมนุษย์ — หรือรายงาน heartbeat — เห็นสิ่งที่จำเป็นพอดี
 

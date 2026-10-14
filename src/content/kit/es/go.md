@@ -1,6 +1,6 @@
 ---
 title: Go
-description: "Preset de incorporación para proyectos Go, con pistas de razonamiento para módulos, la estructura cmd/internal, pruebas dirigidas por tabla y la compuerta go test/vet/build."
+description: "Preset de incorporación para proyectos Go, con pistas para módulos, la estructura cmd/internal, pruebas dirigidas por tabla y la compuerta go test/vet/build."
 kind: preset
 lang: es
 order: 20

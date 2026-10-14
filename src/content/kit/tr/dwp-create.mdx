@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "Üst düzey bir hedeften yeni bir Deep Work Plan oluşturur. Ajan hedefi analiz eder, işi görevlere ayrıştırır ve plan dosyalarını .dwp altına yazar."
+description: "Sınır seçeneği dilbilgisi, Lite teklifler, numaralandırılmış klasörler ve v7 sözleşmeleri ile hedeften Deep Work Plan oluşturun tam doğrulama ile."
 kind: command
 lang: tr
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## Modlar
@@ -41,8 +43,9 @@ Trust modu, akışa güvendiğinizde güçlü kullanıcılara yönelik bir kısa
 ## Davranış
 1. Hedefi ve depo bağlamını analiz edin.
 2. Belirsizse açıklayıcı sorular sorun.
-3. Planı doğrudan `.dwp/plans/PLAN_001_<slug>/` altına somutlaştırın — varsayılan olarak bir Lite plan, daha büyük işler için Full plan (rehberli modda inceleyip Lite olarak tutmayı, Full’a yükseltmeyi, düzenlemeyi ya da durdurmayı seçin).
+3. Planı doğrudan `.dwp/plans/PLAN_<id>_<slug>/` altına somutlaştırın — varsayılan olarak bir Lite plan, daha büyük işler için Full plan (rehberli modda inceleyip Lite olarak tutmayı, Full’a yükseltmeyi, düzenlemeyi ya da durdurmayı seçin).
 4. Sıralı görevlere ayrıştırın ve README, görev dosyaları ile PROGRESS dosyasını yazın.
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. Final Review ile tamamlayın (güvenlik incelemesi, son-durum doğrulaması, skill uzlaştırması).
 
 7.x paketi varsayılan olarak v7 planları oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir. Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v7 slug’ları 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.

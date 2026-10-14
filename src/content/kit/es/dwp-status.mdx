@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Reporta el estado de un Deep Work Plan sin ejecutarlo. El agente lee el plan y el registro de avance, y resume las tareas completadas, en curso y pendientes."
+description: "Informa del estado de un Deep Work Plan en cuatro dimensiones de ciclo de vida, límites de envolvente, bloqueos y delegaciones sin modificar archivos."
 kind: command
 lang: es
 order: 5
@@ -8,31 +8,29 @@ usage: /dwp-status [plan]
 aliases:
   - dwp:status
 ---
-import CmdStatus from '@/components/diagrams/kit/CmdStatus.astro';
 
 # dwp-status
 
-Reporta el estado de un Deep Work Plan sin ejecutar.
-
-<CmdStatus lang="es" class="not-prose my-8" />
+Informa del estado del Deep Work Plan sin ejecutar cambios.
 
 ## Qué hace
 
-`dwp-status` resume el avance del plan sin hacer cambios. Reporta las tareas completadas, en curso y pendientes.
+`dwp-status` es estrictamente de solo lectura por contrato. Resume el progreso, los bloqueadores activos, los puntos de control y los envolventes de recursos sin realizar cambios en ningún archivo.
 
 ## Uso
 
 ```
-/dwp-status [plan]
+/dwp-status                      # listar y resumir todos los planes
+/dwp-status [plan]               # detallar un plan específico
 ```
 
 ## Comportamiento
 
-1. Lee el plan y `PROGRESS.md`.
-2. Resume las tareas completadas.
-3. Resume las tareas en curso.
-4. Resume las tareas pendientes.
-5. Reporta sin modificar nada.
+1. **Cuatro dimensiones de ciclo de vida:** informa el formato (`lite` o `full`), el estado de materialización (`materializing`, `ready` o `promoting`), la aprobación de revisión (`pending`, `approved` o `pre_approved`) y el progreso de ejecución (`pending`, `in_progress`, `blocked` o `completed`).
+2. **Visión general del repositorio:** cuando se invoca sin argumentos, enumera todos los planes bajo `.dwp/plans/` con porcentajes de finalización, localizadores de tareas activas y resúmenes de bloqueos.
+3. **Envolvente de recursos:** muestra contadores de consumo frente a límites en dimensiones monitorizadas (`wall_clock`, reintentos, despachos, gasto, tokens) e indica si los límites son obligatorios o informativos.
+4. **Diagnóstico de bloqueos:** expone detalles de bloqueos activos desde `state.json.blocked` clasificados según la taxonomía estándar de escalada (clases C1–C7).
+5. **Observación de delegaciones:** resume las delegaciones de subagentes abiertas y completadas y los intercambios registrados entre pares.
 
 ## Alias
 

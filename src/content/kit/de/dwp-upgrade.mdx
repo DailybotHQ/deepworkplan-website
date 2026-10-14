@@ -1,0 +1,33 @@
+---
+title: dwp-upgrade
+description: "Deep Work Plan-Releases prüfen, lokale Anpassungen prüfen und stabile Tags mit ausdrücklicher Zustimmung installieren, bestehende Pläne bewahren."
+kind: command
+lang: de
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Halten Sie den installierten Deep Work Plan-Skill und den deklarierten Standard mit ausdrücklicher Zustimmung auf dem neuesten Stand.
+
+## Was es tut
+
+ prüft Upstream-Releases auf neuere Versionen des Skill-Pakets und des Standards. Es meldet Unterschiede, zeigt lokale Anpassungen auf, erfordert eine ausdrückliche Entwicklerbestätigung vor Änderungen und installiert gepinnte stabile Tags, ohne bestehende Pläne unter  zu verändern.
+
+## Verwendung
+
+
+
+## Verhalten
+
+1. **Prüfung (schreibgeschützt)** — liest die installierte Version aus  und fragt Upstream-Git-Tags nach dem neuesten stabilen Release ab. Meldet aktuelle Version versus neueste.
+2. **Zustimmung** — zeigt lokale Modifikationen oder Anpassungen per Diff an; lädt oder überschreibt niemals Dateien ohne ausdrückliche Bestätigung.
+3. **Upgrade** — installiert den exakten stabilen Tag in , ergänzt konfigurierte Addons in  und gleicht das Harness ab.
+4. **Verlauf bewahren** — bestehende Pläne, Nachweise und Protokolle unter  sind unveränderlicher Verlauf und werden bei einem Upgrade nie migriert.
+
+## Aliase
+
+- 

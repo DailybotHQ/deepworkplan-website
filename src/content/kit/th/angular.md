@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: "พรีเซ็ต onboarding สำหรับโครงการ Angular พร้อมแนวคิดสำหรับ component, module หรือ standalone API, service, RxJS และ test runner"
+description: "พรีเซ็ต onboarding สำหรับโครงการ Angular พร้อมแนวคิดสำหรับ component, module หรือ standalone API, service, RxJS และ test runner พร้อมการตรวจสอบเต็มรูปแบบ"
 kind: preset
 lang: th
 order: 15

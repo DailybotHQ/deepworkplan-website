@@ -1,6 +1,6 @@
 ---
 title: TypeScript Lambda
-description: "서버리스 TypeScript Lambda 프로젝트를 위한 온보딩 프리셋으로, 핸들러, Serverless/SAM/CDK 툴체인, IAM 최소 권한에 대한 추론 단서를 제공합니다."
+description: "서버리스 TypeScript Lambda 프로젝트를 위한 온보딩 프리셋으로, 핸들러, Serverless/SAM/CDK 툴체인, IAM 최소 권한에 대한 추."
 kind: preset
 lang: ko
 order: 22

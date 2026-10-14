@@ -15,7 +15,7 @@ OpenCode, agent lập trình mã nguồn mở, hỗ trợ DWP thông qua AGENTS.
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — OpenCode đọc AGENTS.md bản địa và chạy mọi lệnh dwp-* từ file quy trình của nó.
+**Đầy đủ** (Đã kiểm thử cài đặt) — OpenCode đọc AGENTS.md một cách tự nhiên và chạy mọi lệnh dwp-* từ tệp quy trình của nó. Tuyến đường được xác nhận bởi các bộ kiểm thử tự động.
 
 ## Cài đặt
 

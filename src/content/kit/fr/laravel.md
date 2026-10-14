@@ -1,6 +1,6 @@
 ---
 title: Laravel
-description: "Un preset d'onboarding pour les projets Laravel, avec des indices de raisonnement sur les modèles Eloquent, contrôleurs, routes, migrations, commandes Artisan et le test runner."
+description: "Un preset d'onboarding pour les projets Laravel, avec des indices de raisonnement sur les modèles Eloquent, contrôleurs, routes, migrations, commandes Artisan."
 kind: preset
 lang: fr
 order: 11

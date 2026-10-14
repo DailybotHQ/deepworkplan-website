@@ -1,6 +1,6 @@
 ---
 title: React Native
-description: "React Native 및 Expo 프로젝트를 위한 온보딩 프리셋으로, 내비게이션, 네이티브 설정, 테스트 러너, bare 대 managed 방식에 대한 추론 단서를 제공합니다."
+description: "React Native 및 Expo 프로젝트를 위한 온보딩 프리셋으로, 내비게이션, 네이티브 설정, 테스트 러너, bare 대 managed 방식에 대한 추."
 kind: preset
 lang: ko
 order: 16

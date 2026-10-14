@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "Tạo một skill tái sử dụng mới trong repository hiện tại — một quy trình tham số hóa, chạy trong phiên — thông qua sub-skill author, giữ cho catalog luôn đồng bộ."
+description: "Tạo một skill tái sử dụng mới trong repository hiện tại — một quy trình tham số hóa, chạy trong phiên — thông qua sub-skill author, giữ cho catalog luôn đồng."
 kind: command
 lang: vi
 order: 7

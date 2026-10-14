@@ -15,7 +15,7 @@ Cursor admite DWP mediante reglas de proyecto y archivos de comando.
 
 ## Nivel de soporte
 
-**Completo**: los comandos de DWP funcionan mediante el sistema de reglas de Cursor.
+**Completo** (Comprobado por instalación) — los comandos de DWP funcionan a través del sistema de reglas de Cursor. Rutas de directorios verificadas mediante suites de pruebas automatizadas; los flujos de comportamiento se ejecutan secuencialmente.
 
 ## Instalación
 

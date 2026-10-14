@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails
-description: "Ruby on Rails 애플리케이션을 위한 온보딩 프리셋으로, MVC 레이아웃, 마이그레이션, 테스트 프레임워크, 애셋 및 설정 파이프라인에 대한 추론 단서를 제공합니다."
+description: "Ruby on Rails 애플리케이션을 위한 온보딩 프리셋으로, MVC 레이아웃, 마이그레이션, 테스트 프레임워크, 애셋 및 설정 파이프라인에 대한 추론 단."
 kind: preset
 lang: ko
 order: 10

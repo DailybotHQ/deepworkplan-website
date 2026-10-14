@@ -1,6 +1,6 @@
 ---
 title: Swift / iOS
-description: "Un preset d'onboarding pour les projets Swift et iOS, avec des indices de raisonnement sur SwiftUI ou UIKit, le gestionnaire de dépendances, XCTest, le lint et xcodebuild."
+description: "Un preset d'onboarding pour les projets Swift et iOS, avec des indices de raisonnement sur SwiftUI ou UIKit, le gestionnaire de dépendances, XCTest, le lint et."
 kind: preset
 lang: fr
 order: 18

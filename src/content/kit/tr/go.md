@@ -1,6 +1,6 @@
 ---
 title: Go
-description: "Go projeleri için modüller, cmd/internal düzeni, tablo güdümlü testler ve go test/vet/build kapısına yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Go projeleri için modüller, cmd/internal düzeni, tablo güdümlü testler ve go test/vet/build kapısına yönelik akıl yürütme ipuçları içeren bir onboarding ön."
 kind: preset
 lang: tr
 order: 20

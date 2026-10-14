@@ -1,6 +1,6 @@
 ---
 title: Genérico
-description: "O preset de onboarding de fallback para qualquer projeto, com pistas de raciocínio independentes de stack que detectam os comandos de build e teste a partir do repositório."
+description: "O preset de onboarding de fallback para qualquer projeto, com pistas de raciocínio independentes de stack que detectam os comandos de build e teste a partir do."
 kind: preset
 lang: pt
 order: 100

@@ -1,6 +1,6 @@
 ---
 title: Windsurf
-description: "L'adaptateur DWP pour Windsurf, avec une prise en charge complète via son système de règles et des procédures de commande en Markdown invoquées avec le préfixe dièse."
+description: "L'adaptateur DWP pour Windsurf, avec une support complet via son système de règles et des procédures de commande en Markdown invoquées avec le préfixe dièse."
 kind: adapter
 lang: fr
 order: 8
@@ -15,7 +15,7 @@ Windsurf prend en charge DWP via son système de règles et des procédures de c
 
 ## Niveau de prise en charge
 
-**Complet** — Windsurf lit les règles du projet et exécute chaque commande dwp-* depuis son fichier de procédure.
+**Complet** (Validé par l'installation) — Windsurf lit les règles du projet et exécute chaque commande dwp-* depuis son fichier de procédure. Itinéraire validé par des suites de tests automatisées.
 
 ## Installation
 

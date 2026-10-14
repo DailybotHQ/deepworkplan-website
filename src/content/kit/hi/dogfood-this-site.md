@@ -1,6 +1,6 @@
 ---
 title: "Case study: this website"
-description: "कैसे deepworkplan.com स्वयं Deep Work Plan पर चलता है — एक प्रोडक्शन Astro रिपॉज़िटरी का वास्तविक विवरण, जिसे उसी पद्धति से AI-first बनाया गया है जिसका वह दस्तावेज़ीकरण करता है।"
+description: "कैसे deepworkplan.com स्वयं Deep Work Plan पर चलता है — एक प्रोडक्शन Astro रिपॉज़िटरी का वास्तविक विवरण, जिसे उसी पद्धति से AI-first बनाया गया है जिसका वह."
 kind: example
 lang: hi
 order: 2

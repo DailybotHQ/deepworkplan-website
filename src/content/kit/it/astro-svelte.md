@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "Un preset di onboarding per siti Astro, facoltativamente con island Svelte, con spunti di ragionamento per content collection, validazione degli schemi e idratazione delle island."
+description: "Un preset di onboarding per siti Astro, facoltativamente con island Svelte, con spunti di ragionamento per content collection, validazione degli schemi e."
 kind: preset
 lang: it
 order: 3

@@ -1,6 +1,6 @@
 ---
 title: Cursor
-description: "L’adapter DWP per Cursor AI, con supporto completo tramite il sistema di project rules e il prefisso di comando cancelletto, poiché Cursor riserva la slash a sé."
+description: "L’adapter DWP per Cursor AI, con supporto totale via il sistema di project rules e il prefisso di comando cancelletto, poiché Cursor riserva la slash a sé."
 kind: adapter
 lang: it
 order: 2
@@ -15,7 +15,7 @@ Cursor supporta DWP tramite project rules e file di comando.
 
 ## Livello di supporto
 
-**Completo** — i comandi DWP funzionano tramite il sistema di rules di Cursor.
+**Completo** (Testato per installazione) — i comandi DWP funzionano tramite il sistema di regole di Cursor. Percorsi di directory verificati da suite di test automatizzate; i flussi comportamentali operano in modo sequenziale.
 
 ## Installazione
 

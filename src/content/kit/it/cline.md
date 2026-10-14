@@ -15,7 +15,7 @@ Cline, l'agente di coding open source, supporta DWP tramite regole Markdown e pr
 
 ## Livello di supporto
 
-**Completo** — Cline legge le regole Markdown ed esegue ogni comando dwp-* dal suo file di procedura.
+**Completo** (Testato per installazione) — Cline legge le regole markdown ed esegue ogni comando dwp-* dal rispettivo file di procedura. Percorso verificato da suite di test automatizzate.
 
 ## Installazione
 

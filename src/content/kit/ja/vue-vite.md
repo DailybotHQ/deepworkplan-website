@@ -1,6 +1,6 @@
 ---
 title: Vue + Vite
-description: "Vue + Vite プロジェクト向けのオンボーディングプリセット。単一ファイルコンポーネント、Composition API、Pinia ストア、Vitest によるテストについての推論の手がかりを備える。"
+description: "Vue + Vite プロジェクト向けのオンボーディングプリセット。単一ファイルコンポーネント、Composition API、Pinia ストア、Vitest によるテスト。"
 kind: preset
 lang: ja
 order: 2

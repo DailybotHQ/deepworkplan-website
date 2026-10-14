@@ -1,6 +1,6 @@
 ---
 title: TypeScript Lambda
-description: "Preset de incorporación para proyectos serverless TypeScript Lambda, con pistas de razonamiento para handlers, la cadena de herramientas Serverless/SAM/CDK y el principio de mínimo privilegio IAM."
+description: "Preset de incorporación para proyectos serverless TypeScript Lambda, con pistas para handlers, la cadena de herramientas Serverless/SAM/CDK y el principio de."
 kind: preset
 lang: es
 order: 22

@@ -15,7 +15,7 @@ GitHub Copilot unterstützt DWP über AGENTS.md und Markdown-Befehlsprozeduren.
 
 ## Unterstützungsstufe
 
-**Vollständig** — Copilot liest AGENTS.md und die dwp-*-Prozedurdateien und führt jeden Befehl daraus aus.
+**Vollständig** (Installationsgeprüft) — Copilot liest AGENTS.md sowie die dwp-*-Prozedurdateien und führt jeden Befehl daraus aus. Route durch automatisierte Testsuiten bestätigt.
 
 ## Installation
 

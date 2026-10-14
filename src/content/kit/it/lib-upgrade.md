@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Aggiorna in sicurezza le dipendenze di un repository a lotti validati e annullabili tramite l’addon dependency-upgrade. Installato solo quando quell’addon è accettato."
+description: "Aggiorna in sicurezza le dipendenze di un repository a lotti validati e annullabili tramite l’addon dependency-upgrade. Installato solo quando quell’addon è."
 kind: command
 lang: it
 order: 9

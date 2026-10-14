@@ -15,7 +15,7 @@ Hermes는 AgentSkills 표준을 통해 스킬을 로드하고 세션 간에 에�
 
 ## 지원 수준
 
-**Full** — Hermes는 `AGENTS.md`를 읽고 AgentSkills 표준 로딩을 통해 스킬을 로드합니다. 모든 DWP 하위 스킬을 사용할 수 있습니다.
+**완전 지원** (문서화됨) — Hermes는 `AGENTS.md`를 읽고 AgentSkills 표준 로딩을 통해 스킬을 로드합니다. 모든 DWP 하위 스킬을 사용할 수 있습니다.
 
 ## 설치
 
@@ -32,9 +32,9 @@ resume the open plan
 
 ## 에피소드 메모리 시너지
 
-Hermes는 에이전트 메모리를 인덱싱하여 과거 작업을 미래 세션에서 검색 가능하게 합니다. DWP의 `state.json` 결과 기록은 정확히 이 용도로 설계되었습니다: 완료된 각 작업은 구조화된 JSON 필드에 `tried`(시도한 것), `failed`(실패한 것), `worked`(작동한 것), 그리고 자유 형식 메모를 담습니다. Hermes가 작업 공간의 `.dwp/plans/` 상태 파일을 인덱싱하면, 완료된 계획은 검색 가능한 에피소드 메모리가 됩니다 — 에이전트가 나중에 계획이 실행되었다는 것만이 아니라 특정 문제가 어떻게 해결되었는지를 회상할 수 있습니다.
+v6 및 v7 계획에서 DWP의 결정론적 검증 영수증(`outcomes.py receipt`)과 결과 레코드는 Hermes의 메모리 인덱스에 직접 공급됩니다. 완료된 각 작업은 시도된 내용, 실패한 내용, 성공한 내용을 구조화된 JSON 스키마로 전달합니다. 완료된 계획은 검색 가능한 일화 기억이 되어 에이전트가 문제가 어떻게 해결되었는지 상기할 수 있습니다.
 
-이것은 DWP 계획이 Hermes에서 두 가지 방식으로 내구성을 가진다는 것을 의미합니다: Markdown 파일이 사람이 읽는 기록이고, `state.json` 결과 기록이 기계 인덱싱 가능한 메모리입니다. 참고: [계획 상태](/spec/plan-state#outcome-records-as-episodic-memory).
+임시 세션은 상태 파일을 수동으로 다시 작성하는 대신 `journal.ndjson`에 이벤트를 추가하고 `ledger.py project`를 통해 `state.json`을 투영합니다. [계획 상태](/spec/plan-state#outcome-records-as-episodic-memory)를 참조하세요.
 
 ## 크론 기반 계속 실행
 

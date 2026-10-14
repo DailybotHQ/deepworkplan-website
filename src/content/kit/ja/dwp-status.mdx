@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Deep Work Plan を実行せずにその状態を報告する。エージェントは計画と進捗ログを読み、完了済み、進行中、保留中の作業を要約する。"
+description: "4 つのライフサイクル次元、リソース制約、ブロッカー診断、委任観察にわたり、ファイル変更なしで計画状況を報告します、エンドツーエンドの検証と実行に対応。"
 kind: command
 lang: ja
 order: 5
@@ -23,16 +23,17 @@ Deep Work Plan の状態を実行せずに報告します。
 ## 使い方
 
 ```
+/dwp-status
 /dwp-status [plan]
 ```
 
 ## 振る舞い
 
-1. 計画と `PROGRESS.md` を読む。
+1. 4 lifecycle dimensions (format, materialization, review, progress); 計画と `PROGRESS.md` を読む。
 2. 完了済みのタスクを要約する。
 3. 進行中のタスクを要約する。
-4. 保留中のタスクを要約する。
-5. 何も変更せずに報告する。
+4. Resource envelope & blockers (C1–C7); 保留中のタスクを要約する。
+5. Delegations observation; 何も変更せずに報告する。
 
 ## エイリアス
 

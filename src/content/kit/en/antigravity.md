@@ -15,7 +15,7 @@ Antigravity supports DWP through markdown command procedures.
 
 ## Support level
 
-**Full** — every dwp-* command runs from its procedure file through the native command surface.
+**Full** (Install-tested) — every dwp-* command runs from its procedure file. Route asserted by automated test suites; behavioral workflows run on the sequential baseline.
 
 ## Installation
 

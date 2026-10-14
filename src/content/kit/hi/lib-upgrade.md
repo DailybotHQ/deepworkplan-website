@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "dependency-upgrade ऐडऑन के माध्यम से रिपॉज़िटरी की dependencies को मान्य, प्रत्यावर्तनीय बैचों में सुरक्षित रूप से अपग्रेड करें। केवल वह ऐडऑन स्वीकृत होने पर इंस्टॉल होता है।"
+description: "dependency-upgrade ऐडऑन के माध्यम से रिपॉज़िटरी की dependencies को मान्य, प्रत्यावर्तनीय बैचों में सुरक्षित रूप से अपग्रेड करें। केवल वह ऐडऑन स्वीकृत होने पर."
 kind: command
 lang: hi
 order: 9

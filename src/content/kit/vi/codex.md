@@ -15,7 +15,7 @@ Codex hỗ trợ DWP thông qua các quy trình lệnh dạng markdown.
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — mọi lệnh dwp-* đều chạy từ file quy trình của nó.
+**Đầy đủ** (Đã kiểm thử hành vi) — mọi lệnh dwp-* đều chạy từ tệp quy trình của nó, được chứng minh trong các benchmark tạo/tiếp tục hai chiều giữa các mô hình.
 
 ## Cài đặt
 

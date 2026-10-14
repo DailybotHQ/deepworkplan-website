@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Nâng cấp dependency của repository một cách an toàn theo từng đợt đã kiểm chứng và có thể hoàn tác qua addon dependency-upgrade. Chỉ cài khi addon đó được chấp nhận."
+description: "Nâng cấp dependency của repository một cách an toàn theo từng đợt đã kiểm chứng và có thể hoàn tác qua addon dependency-upgrade. Chỉ cài khi addon đó được chấp."
 kind: command
 lang: vi
 order: 9

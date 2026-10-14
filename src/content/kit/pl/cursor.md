@@ -15,7 +15,7 @@ Cursor obsługuje DWP poprzez reguły projektu i pliki komend.
 
 ## Poziom wsparcia
 
-**Pełny** — komendy DWP działają przez system reguł Cursor.
+**Pełne** (Przetestowane instalacyjnie) — polecenia DWP działają za pośrednictwem systemu reguł Cursor. Trasy katalogów zweryfikowane przez automatyczne zestawy testów; przepływy behawioralne wykonują się sekwencyjnie.
 
 ## Instalacja
 

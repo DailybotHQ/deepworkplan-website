@@ -1,6 +1,6 @@
 ---
 title: Cloud-Agenten
-description: "Der DWP-Adapter für Cloud- und Hintergrund-Agenten: Claude Code Remote-Tasks, Codex Cloud, Jules-Klasse — ephemere Sitzungen, die gegen einen dauerhaften .dwp/-Plan ausführen."
+description: "Der DWP-Adapter für Cloud- und Hintergrund-Agenten: Claude Code Remote-Tasks, Codex Cloud, Jules-Klasse — ephemere Sitzungen, die gegen einen dauerhaften."
 kind: adapter
 lang: de
 order: 12
@@ -19,17 +19,17 @@ Das `.dwp/`-Verzeichnis des Repositorys ist die **dauerhafte Spezifikations- und
 
 ## Support-Level
 
-**Vollständig** — jeder Cloud-Agent, der das Repository liest, `AGENTS.md` befolgt und Shell-Befehle ausführen kann, unterstützt DWP ohne plattformspezifischen Adapter.
+**Vollständig** (Dokumentiert) — Cloud-Agent-Plattformen lesen `AGENTS.md` oder native Anweisungen und führen Befehle über ihre Terminal- oder Containerumgebung aus.
 
 ## Die Wake-Resume-Yield-Schleife
 
 Jeder Cloud-Agenten-Turn folgt dem Muster:
 
 1. **Aufwachen** — die Sitzung startet (ausgelöst durch einen Cron-Schedule, ein CI-Ereignis oder eine Nutzeraktion).
-2. **DWP-Wiederaufnahme-Protokoll ausführen** — den Plan-README lesen, den Checkpoint lokalisieren, `state.json` gegen das Markdown abgleichen, die Naht prüfen, einen Smoke-Test durchführen. Siehe [DWP-Spezifikation](/spec/dwp-specification#the-dwp-resume-protocol).
+2. **DWP-Wiederaufnahme-Protokoll ausführen** — den Plan-README lesen, den Checkpoint lokalisieren, den Zustand über `ledger.py project` aus `journal.ndjson` rekonstruieren, die Naht prüfen, einen Smoke-Test durchführen. Siehe [DWP-Spezifikation](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Auf blockierten Zustand prüfen** — wenn `state.json.blocked` gesetzt ist, den Grund berichten und ohne Ausführung freigeben.
 4. **Die nächste atomare Aufgabe ausführen** — eine Aufgabe, die ihr vollständiges Validierungs-Gate besteht.
-5. **Die Zustandsschicht aktualisieren** — `state.json` atomar mit dem neuen Aufgabenstatus, Gate-Einträgen, Ergebnis-Eintrag und Commit-Hash neu schreiben.
+5. **Im Journal aufzeichnen** — Ereignisse über `ledger.py`-Verben (`start`, `gate`, `complete`) an `journal.ndjson` anhängen; `ledger.py project` aktualisiert die abgeleitete `state.json`-Snapshot-Projektion atomar. In bestehenden v5-Plänen bleibt die direkte Aktualisierung der Statusdatei erhalten.
 6. **Freigeben** — die Sitzung endet sauber; der nächste Turn nimmt vom aktualisierten Zustand auf.
 
 ## Anforderungen

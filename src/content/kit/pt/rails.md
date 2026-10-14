@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails
-description: "Um preset de onboarding para aplicações Ruby on Rails, com pistas de raciocínio para o layout MVC, migrations, o framework de testes e o pipeline de assets e configuração."
+description: "Um preset de onboarding para aplicações Ruby on Rails, com pistas de raciocínio para o layout MVC, migrations, o framework de testes e o pipeline de assets e."
 kind: preset
 lang: pt
 order: 10

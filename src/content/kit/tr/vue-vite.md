@@ -1,6 +1,6 @@
 ---
 title: Vue + Vite
-description: "Vue + Vite projeleri için bir onboarding ön ayarı; tek dosyalı bileşenler, Composition API, Pinia store’ları ve Vitest testleri için akıl yürütme ipuçları sunar."
+description: "Vue + Vite projeleri için bir onboarding ön ayarı; tek dosyalı bileşenler, Composition API, Pinia store’ları ve Vitest testleri için akıl yürütme ipuçları."
 kind: preset
 lang: tr
 order: 2

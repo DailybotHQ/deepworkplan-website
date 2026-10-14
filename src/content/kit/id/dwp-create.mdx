@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "Buat Deep Work Plan baru dari tujuan tingkat tinggi. Agent menganalisis tujuan, menguraikan pekerjaan menjadi tugas, dan menulis file rencana di bawah .dwp."
+description: "Buat Deep Work Plan dari tujuan tingkat tinggi, dengan tata bahasa opsi batas, proposal Lite, alokasi folder, dan kontrak v7 dengan verifikasi penuh."
 kind: command
 lang: id
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ Buat Deep Work Plan baru dari tujuan tingkat tinggi.
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## Mode
@@ -41,8 +43,9 @@ Mode trust adalah pintasan bagi power user setelah Anda memercayai alurnya; mode
 ## Perilaku
 1. Analisis tujuan dan konteks repositori.
 2. Ajukan pertanyaan klarifikasi bila ambigu.
-3. Lakukan materialisasi rencana langsung di bawah `.dwp/plans/PLAN_001_<slug>/` — rencana Lite secara default, atau Full untuk pekerjaan yang lebih besar (dalam mode guided, tinjau dan pilih mempertahankan sebagai Lite, mempromosikan ke Full, mengedit, atau berhenti).
+3. Lakukan materialisasi rencana langsung di bawah `.dwp/plans/PLAN_<id>_<slug>/` — rencana Lite secara default, atau Full untuk pekerjaan yang lebih besar (dalam mode guided, tinjau dan pilih mempertahankan sebagai Lite, mempromosikan ke Full, mengedit, atau berhenti).
 4. Uraikan menjadi tugas-tugas sekuensial dan tulis README, file tugas, serta PROGRESS.
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. Akhiri dengan Final Review (pemeriksaan keamanan, validasi status akhir, rekonsiliasi skills).
 
 Paket 7.x membuat rencana v7 secara default. Rencana yang ada mempertahankan generasi yang tercatat; migrasi memerlukan permintaan eksplisit. Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v7 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.

@@ -1,6 +1,6 @@
 ---
 title: Spring Boot
-description: "Spring Boot uygulamaları için Maven ile Gradle arasındaki fark, kontrolörler, servisler, depolar ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Spring Boot uygulamaları için Maven ile Gradle arasındaki fark, kontrolörler, servisler, depolar ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir."
 kind: preset
 lang: tr
 order: 9

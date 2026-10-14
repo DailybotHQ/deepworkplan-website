@@ -1,6 +1,6 @@
 ---
 title: Laravel
-description: "Preset de incorporación para proyectos Laravel, con pistas de razonamiento para modelos Eloquent, controladores, rutas, migraciones, comandos Artisan y el test runner."
+description: "Preset de incorporación para proyectos Laravel, con pistas para modelos Eloquent, controladores, rutas, migraciones, comandos Artisan y el test runner."
 kind: preset
 lang: es
 order: 11

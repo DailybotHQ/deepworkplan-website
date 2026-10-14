@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "Reanuda un Deep Work Plan interrumpido reconstruyendo el estado desde el registro de avance y los archivos de tarea, y sigue desde la primera tarea incompleta."
+description: "Reanuda un Deep Work Plan de forma determinista desde el diario y contrato con ledger.py project, ingiriendo paquetes de relevo y ejecutando puertas."
 kind: command
 lang: es
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-Reanuda un Deep Work Plan interrumpido.
+Reanuda un Deep Work Plan interrumpido a partir de registros duraderos.
 
 <CmdResume lang="es" class="not-prose my-8" />
 
 ## Qué hace
 
-`dwp-resume` continúa un plan interrumpido. Reconstruye el estado a partir de `PROGRESS.md` y los archivos de tarea, y luego continúa desde la primera tarea incompleta.
+`dwp-resume` continúa de forma segura un plan interrumpido únicamente a partir de los artefactos del espacio de trabajo sin ejecución duplicada. Reconstruye determinísticamente el estado a partir de `journal.ndjson` y `contract.json`, lee paquetes de relevo pendientes y continúa desde la primera tarea incompleta.
 
 ## Uso
 
@@ -28,10 +28,11 @@ Reanuda un Deep Work Plan interrumpido.
 
 ## Comportamiento
 
-1. Lee `PROGRESS.md` y los archivos de tarea.
-2. Reconstruye el estado de ejecución.
-3. Continúa desde la primera tarea incompleta.
-4. Actualiza el avance a medida que progresa.
+1. **Leer registros:** inspecciona `contract.json` y `journal.ndjson` bajo `.dwp/plans/PLAN_<id>_<slug>/`.
+2. **Proyectar estado:** ejecuta `ledger.py project` para regenerar determinísticamente `state.json` desde el diario de solo adición. Cualquier discrepancia se resuelve a favor del diario.
+3. **Ingestión de relevo:** comprueba paquetes de relevo de enjambre pendientes (`dwp-handoff-v1`) para recuperar la intención en vuelo, puertas no verificadas y peticiones abiertas entre pares.
+4. **Verificar costura:** comprueba el estado de git y ejecuta pruebas de humo en las superficies tocadas antes de reanudar.
+5. **Continuar:** ejecuta la primera tarea abierta mediante el bucle de ejecución estándar. Los planes v5 heredados continúan utilizando su flujo registrado en `PROGRESS.md` sin migración forzada.
 
 ## Alias
 

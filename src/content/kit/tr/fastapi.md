@@ -1,6 +1,6 @@
 ---
 title: FastAPI
-description: "FastAPI servisleri için yönlendiriciler, Pydantic modelleri, asenkron uç noktalar, bağımlılık enjeksiyonu ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "FastAPI servisleri için yönlendiriciler, Pydantic modelleri, asenkron uç noktalar, bağımlılık enjeksiyonu ve test koşucusuna yönelik akıl yürütme ipuçları."
 kind: preset
 lang: tr
 order: 7

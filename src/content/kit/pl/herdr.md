@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) umieszcza agentów kodujących w panelach, na Twojej maszynie i na maszynach, do których dociera przez SSH. Ten addon pozwala Deep Work Plan używać tych agentów jako **peerów**: plan może przekazać ograniczone zadanie agentowi w innym panelu, otrzymać dokładnie jedną autoryzowaną odpowiedź i zachować zapis tej wymiany.
 
-Jest to opcjonalny addon **DWP v7** (`v7.0.0`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
+Jest to opcjonalny addon **DWP v7** (pack `v7.8.1`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
 
 ## Co integruje
 
@@ -71,7 +71,7 @@ Oba addony implementują ten sam interfejs delegowania — `launch`, `observe`, 
 
 Jeśli prowadzący uruchamia wiele torów naraz — panele na hoście, w kontenerach i na innych maszynach, każdy na własnym koncie — `herdr-peers lanes` wyświetla każdy tor z jego stanem, `herdr-peers status <pane>` klasyfikuje ekran, na którym stoi zablokowany tor, a każdy zapis delegacji podaje konto i dostawcę, które ją wykonały. Zobacz [Uruchamianie wielu agentów](/methodology/06-orchestration).
 
-**Lane’y Codexa podają swój panel.** Codex uruchamia polecenia lane’a z serwera w tle wspólnego dla wszystkich sesji danego konta, więc odziedziczony identyfikator panelu może należeć do innego lane’a. Lane Codexa przekazuje własny panel, wskazany w zleceniu lidera, przez `--pane <pane>` przy każdym poleceniu herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Każdy lane podaje swój panel.** Zgodnie z zasadami autonomii roju (Guide §17.2) każdy lane przekazuje własny panel za pomocą  przy każdym czasowniku herdr-peers (, , , , , , ), aby zapobiec błędnemu przypisaniu wiadomości i nasyceniu slotów. Lane'y Codexa wymagają tego szczególnie rygorystycznie ze względu na współdzielenie serwera w tle między sesjami.
 
 ## Powiadomienia i przywództwo
 

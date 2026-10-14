@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Mutakhirkan dependensi repositori secara aman dalam batch tervalidasi yang dapat dibatalkan melalui addon dependency-upgrade. Dipasang hanya ketika addon itu diterima."
+description: "Mutakhirkan dependensi repositori secara aman dalam batch tervalidasi yang dapat dibatalkan melalui addon dependency-upgrade. Dipasang hanya ketika addon itu."
 kind: command
 lang: id
 order: 9

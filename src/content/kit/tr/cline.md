@@ -1,6 +1,6 @@
 ---
 title: Cline
-description: "Açık kaynak ajan Cline için DWP adaptörü; markdown kuralları ve hash öneki ile komut prosedürleri aracılığıyla tam destek sunar."
+description: "Açık kaynak ajan Cline için DWP adaptörü; markdown kuralları ve hash öneki ile komut prosedürleri aracılığıyla tam destek sunar tam doğrulama ile."
 kind: adapter
 lang: tr
 order: 9
@@ -15,7 +15,7 @@ Açık kaynak kodlama ajanı Cline, DWP'yi markdown kuralları ve komut prosedü
 
 ## Destek düzeyi
 
-**Tam** — Cline, markdown kurallarını okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır.
+**Tam** (Kurulum testli) — Cline, markdown kurallarını okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır. Yol, otomatik test paketleriyle onaylanmıştır.
 
 ## Kurulum
 

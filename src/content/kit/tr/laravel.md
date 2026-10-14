@@ -1,6 +1,6 @@
 ---
 title: Laravel
-description: "Laravel projeleri için Eloquent modelleri, kontrolörler, rotalar, taşımalar, Artisan komutları ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Laravel projeleri için Eloquent modelleri, kontrolörler, rotalar, taşımalar, Artisan komutları ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir."
 kind: preset
 lang: tr
 order: 11

@@ -44,6 +44,11 @@ v7 योजनाओं के लिए — जो वर्तमान 7.x �
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (`delegation` इवेंट जोड़ता है)
 - **Plan snapshot (लाइव प्रोजेक्शन, v6 के साथ साझा):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (v6 के साथ साझा):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **रिपॉजिटरी कॉन्फ़िगरेशन:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **ऐडऑन डिस्क्रिप्टर:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **झुंड हैंडऑफ़ पैकेट:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **बेंचमार्क रिकॉर्ड:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **सीख रिकॉर्ड:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 v6 योजनाएँ अपने v6 स्कीमा बनाए रखती हैं ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contract](https://deepworkplan.com/schema/plan-contract/v6.json), [journal event](https://deepworkplan.com/schema/journal-event/v6.json)); मौजूदा v5 योजनाएँ v5 state स्कीमा का उपयोग करती रहेंगी और पुरानी योजनाएँ कभी चुपचाप फिर से नहीं लिखी जातीं।
 

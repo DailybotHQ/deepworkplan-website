@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Báo cáo trạng thái của một Deep Work Plan mà không thực thi. Agent đọc kế hoạch và nhật ký tiến độ, rồi tổng kết công việc đã xong, đang làm và còn chờ."
+description: "Báo cáo trạng thái của Deep Work Plan trên bốn chiều vòng đời, giới hạn tài nguyên, yếu tố chặn và ủy quyền mà không sửa đổi tệp với xác minh đầy đủ."
 kind: command
 lang: vi
 order: 5
@@ -23,16 +23,17 @@ Báo cáo trạng thái Deep Work Plan mà không thực thi.
 ## Cách dùng
 
 ```
+/dwp-status
 /dwp-status [plan]
 ```
 
 ## Hành vi
 
-1. Đọc kế hoạch và `PROGRESS.md`.
+1. 4 lifecycle dimensions (format, materialization, review, progress); Đọc kế hoạch và `PROGRESS.md`.
 2. Tổng kết các tác vụ đã hoàn thành.
 3. Tổng kết các tác vụ đang thực hiện.
-4. Tổng kết các tác vụ còn chờ.
-5. Báo cáo mà không sửa đổi bất cứ thứ gì.
+4. Resource envelope & blockers (C1–C7); Tổng kết các tác vụ còn chờ.
+5. Delegations observation; Báo cáo mà không sửa đổi bất cứ thứ gì.
 
 ## Bí danh
 

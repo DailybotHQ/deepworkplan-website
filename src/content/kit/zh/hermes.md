@@ -1,6 +1,8 @@
 ---
 title: Hermes
-description: "面向 Hermes 的 DWP 适配器：AgentSkills 标准技能加载、通过 state.json 中 outcome 记录实现的情节记忆协同，以及由 cron 驱动的计划续行。"
+description: "面向 Hermes 的 DWP 适配器：AgentSkills 标准技能加载、通过 state.json 中 outcome 记录实现的情节记忆协同，以及由 cron 驱动的。"
+
+在 v6 与 v7 计划中，状态是通过 `ledger.py project` 从仅追加日志（`journal.ndjson`）中投影出来的，而不是手动重写状态文件。
 kind: adapter
 lang: zh
 order: 11
@@ -13,9 +15,11 @@ prefix: plain text
 
 Hermes 是一个自主代理平台，通过 AgentSkills 标准加载技能，并在会话之间维护情节记忆。DWP 与这两个层面均有集成：技能套件从 `.agents/skills/` 加载，方式与任何其他 AgentSkills 兼容套件相同；而 `state.json` 的 outcome 记录则直接馈送到 Hermes 的记忆索引中。
 
+在 v6 与 v7 计划中，状态是通过 `ledger.py project` 从仅追加日志（`journal.ndjson`）中投影出来的，而不是手动重写状态文件。
+
 ## 支持级别
 
-**完整** —— Hermes 读取 `AGENTS.md` 并通过 AgentSkills 标准加载技能。所有 DWP 子技能均可使用。
+**完整**（已文档化）—— Hermes 读取 `AGENTS.md` 并通过 AgentSkills 标准加载技能。所有 DWP 子技能均可使用。
 
 ## 安装
 
@@ -32,9 +36,9 @@ resume the open plan
 
 ## 情节记忆协同
 
-Hermes 为代理记忆建立索引，使过去的工作可在未来的会话中检索。DWP 的 `state.json` outcome 记录正是为此而设计：每项已完成的任务都在一个结构化 JSON 字段中记录了尝试了什么（`tried`）、失败了什么（`failed`）、有效的是什么（`worked`）以及自由格式的备注。当 Hermes 对工作区的 `.dwp/plans/` 状态文件建立索引时，已完成的计划便成为可检索的情节记忆——代理日后可以回想起某个特定问题是如何解决的，而不仅仅是知道一份计划运行过。
+在 v6 与 v7 计划中，DWP 的确定性验证凭证（`outcomes.py receipt`）和 outcome 记录直接馈入 Hermes 的记忆索引：每个完成的任务都在结构化 JSON 模式中携带尝试过的内容、失败的内容以及有效的内容。完成的计划成为可检索的情节记忆——代理可以回忆起具体问题是如何解决的。
 
-这意味着 DWP 计划在 Hermes 上以两种方式持久存在：Markdown 文件是人类可读的记录，而 `state.json` 的 outcome 记录是机器可索引的记忆。参见 [Plan state](/spec/plan-state#outcome-records-as-episodic-memory)。
+临时会话将事件追加到 `journal.ndjson` 并通过 `ledger.py project` 投影 `state.json`，而不是手动重写状态文件。参见 [Plan state](/spec/plan-state#outcome-records-as-episodic-memory)。
 
 ## Cron 驱动的续行
 

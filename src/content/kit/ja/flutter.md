@@ -1,6 +1,6 @@
 ---
 title: Flutter
-description: "Flutter および Dart プロジェクト向けのオンボーディングプリセット。ウィジェット、アナライザー、状態管理、コード生成、flutter test に関する推論の手がかりを備える。"
+description: "Flutter および Dart プロジェクト向けのオンボーディングプリセット。ウィジェット、アナライザー、状態管理、コード生成、flutter test に関する推論の手が。"
 kind: preset
 lang: ja
 order: 17

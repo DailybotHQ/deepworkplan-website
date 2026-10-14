@@ -44,6 +44,11 @@ Para los planes v7 — el valor predeterminado del paquete 7.x actual — el cat
 - **Evento del diario:** https://deepworkplan.com/schema/journal-event/v7.json (añade el evento `delegation`)
 - **Snapshot del plan (proyección activa, compartida con v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Manifiesto de contexto (compartido con v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Configuración del repositorio:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Descriptor de addon:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Paquete de relevo de enjambre:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Registro de benchmark:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Registro de aprendizajes:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 Los planes v6 conservan sus esquemas v6 ([manifiesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrato](https://deepworkplan.com/schema/plan-contract/v6.json), [evento del diario](https://deepworkplan.com/schema/journal-event/v6.json)); los planes v5 existentes siguen usando el esquema de estado v5, y los planes antiguos nunca se reescriben silenciosamente.
 

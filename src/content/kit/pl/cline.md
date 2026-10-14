@@ -1,6 +1,6 @@
 ---
 title: Cline
-description: "Adapter DWP dla Cline, agenta open source, z pełnym wsparciem przez reguły markdown i procedury komend wywoływane prefiksem hash."
+description: "Adapter DWP dla Cline, agenta open source, z pełnym wsparciem przez reguły markdown i procedury komend wywoływane prefiksem hash z pełną weryfikacją."
 kind: adapter
 lang: pl
 order: 9
@@ -15,7 +15,7 @@ Cline, open-source'owy agent kodujący, obsługuje DWP poprzez reguły markdown 
 
 ## Poziom wsparcia
 
-**Pełny** — Cline odczytuje reguły markdown i uruchamia każdą komendę dwp-* z jej pliku procedury.
+**Pełne** (Przetestowane instalacyjnie) — Cline odczytuje reguły markdown i uruchamia każde polecenie dwp-* ze swojego pliku procedury. Trasa potwierdzona przez automatyczne zestawy testów.
 
 ## Instalacja
 

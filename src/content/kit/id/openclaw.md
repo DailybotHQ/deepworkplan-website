@@ -1,6 +1,6 @@
 ---
 title: OpenClaw
-description: "Adapter DWP untuk OpenClaw: pemindaian .agents/skills/ native, pemetaan eksekusi tanpa pengawasan, dan kelanjutan rencana berbasis cron untuk ruang kerja agent otonom."
+description: "Adapter DWP untuk OpenClaw: pemindaian .agents/skills/ native, pemetaan eksekusi tanpa pengawasan, dan kelanjutan rencana berbasis cron untuk ruang kerja agent."
 kind: adapter
 lang: id
 order: 10
@@ -15,7 +15,7 @@ OpenClaw adalah platform agent otonom yang menjalankan ruang kerja long-lived de
 
 ## Tingkat dukungan
 
-**Penuh** — OpenClaw membaca `AGENTS.md` dan memuat skill melalui standar AgentSkills. Semua sub-skill DWP (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`) tersedia.
+**Penuh** (Terdokumentasi) — OpenClaw membaca `AGENTS.md` dan memuat skill melalui standar AgentSkills. Semua sub-skill DWP (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`) tersedia.
 
 ## Instalasi
 
@@ -50,7 +50,7 @@ Primitif penjadwalan OpenClaw dipetakan langsung ke model kelanjutan DWP:
 Secara operasional:
 
 1. Manusia membuat dan menyetujui rencana secara interaktif. Persetujuan adalah titik kontrol — giliran tanpa pengawasan tidak pernah membuat dan mengeksekusi dalam satu giliran.
-2. Rencana harus membawa lapisan status yang dapat dibaca mesin (`manifest.json` + `state.json`). Di ruang kerja tanpa git, `state.json` adalah yang membuat resume aman terhadap crash menjadi mungkin. Lihat [Status rencana](/spec/plan-state).
+2. Rencana harus membawa lapisan status yang dapat dibaca mesin (`manifest.json` + `state.json`). Di ruang kerja tanpa git, `state.json` adalah yang membuat resume aman terhadap crash menjadi mungkin. Lihat [Status rencana](/spec/plan-state). Dalam rencana v6 dan v7, status diproyeksikan dari jurnal append-only (`journal.ndjson`) melalui `ledger.py project` alih-alih menulis ulang file status secara manual.
 3. Setiap giliran heartbeat atau cron mengeksekusi paling banyak satu tugas, melewati validation gate-nya, memperbarui `state.json` secara atomik, dan yield.
 4. Pada kondisi berhenti apapun, agent menulis kolom `blocked` di `state.json` dan melapor melalui saluran normal ruang kerja. Sekilas pandang manusia berikutnya — atau laporan heartbeat — melihat persis apa yang diperlukan.
 

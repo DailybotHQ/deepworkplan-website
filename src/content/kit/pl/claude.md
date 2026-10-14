@@ -15,7 +15,7 @@ Claude Code zapewnia **pełne** wsparcie DWP poprzez natywne komendy slash i ski
 
 ## Poziom wsparcia
 
-**Pełny** — wszystkie pięć komend DWP odpowiada natywnym komendom slash w Claude Code.
+**Pełne** (Przetestowane behawioralnie) — pełny zestaw podumiejętności i poleceń cyklu życia DWP mapuje się na natywne polecenia ukośnika Claude Code, potwierdzone w dwukierunkowych benchmarkach przekazania.
 
 ## Instalacja
 

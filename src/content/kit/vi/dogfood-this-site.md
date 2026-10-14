@@ -1,6 +1,6 @@
 ---
 title: "Case study: chính website này"
-description: "Cách deepworkplan.com tự vận hành trên Deep Work Plan — một tường thuật thực về một repository Astro production được biến thành AI-first bằng chính phương pháp luận nó ghi lại."
+description: "Cách deepworkplan.com tự vận hành trên Deep Work Plan — một tường thuật thực về một repository Astro production được biến thành AI-first bằng chính phương pháp."
 kind: example
 lang: vi
 order: 2

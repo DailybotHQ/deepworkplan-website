@@ -44,6 +44,11 @@ v7 计划（当前 7.x 技能包的默认代际）的机器可读架构目录发
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json（新增 `delegation` 事件）
 - **Plan snapshot（实时投影，与 v6 共用）:** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest（与 v6 共用）:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **仓库配置：** https://deepworkplan.com/schema/dwp-config/v1.json
+- **附加组件描述符：** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **群集交接包：** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **基准测试记录：** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **经验记录：** https://deepworkplan.com/schema/learnings-record/v1.json
 
 v6 计划保留其 v6 架构（[清单](https://deepworkplan.com/schema/plan-manifest/v6.json)、[契约](https://deepworkplan.com/schema/plan-contract/v6.json)、[日志事件](https://deepworkplan.com/schema/journal-event/v6.json)）；现有 v5 计划继续使用 v5 状态架构，旧计划不会被静默重写。
 

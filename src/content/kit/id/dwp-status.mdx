@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Laporkan status Deep Work Plan tanpa mengeksekusinya. Agent membaca rencana dan log progres, lalu merangkum pekerjaan yang selesai, sedang berjalan, dan tertunda."
+description: "Laporkan status Deep Work Plan di empat dimensi siklus hidup, batas amplop sumber daya, pemblokir, dan delegasi tanpa memodifikasi file."
 kind: command
 lang: id
 order: 5
@@ -23,16 +23,17 @@ Laporkan status Deep Work Plan tanpa mengeksekusi.
 ## Penggunaan
 
 ```
+/dwp-status
 /dwp-status [plan]
 ```
 
 ## Perilaku
 
-1. Baca rencana dan `PROGRESS.md`.
+1. 4 lifecycle dimensions (format, materialization, review, progress); Baca rencana dan `PROGRESS.md`.
 2. Rangkum tugas yang selesai.
 3. Rangkum tugas yang sedang berjalan.
-4. Rangkum tugas yang tertunda.
-5. Laporkan tanpa mengubah apa pun.
+4. Resource envelope & blockers (C1–C7); Rangkum tugas yang tertunda.
+5. Delegations observation; Laporkan tanpa mengubah apa pun.
 
 ## Alias
 

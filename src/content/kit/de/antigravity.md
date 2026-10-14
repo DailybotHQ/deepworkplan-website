@@ -1,6 +1,6 @@
 ---
 title: Antigravity
-description: "Der DWP-Adapter für Antigravity, mit vollständiger Unterstützung über Markdown-Befehlsprozeduren und das Hash-Präfix, die den gesamten Deep Work Plan Loop steuern."
+description: "Der DWP-Adapter für Antigravity, mit voller Unterstützung via Markdown-Befehlsprozeduren und das Hash-Präfix, die den gesamten Deep Work Plan Loop steuern."
 kind: adapter
 lang: de
 order: 6
@@ -15,7 +15,7 @@ Antigravity unterstützt DWP über Markdown-Befehlsprozeduren.
 
 ## Unterstützungsstufe
 
-**Vollständig** — jeder dwp-*-Befehl läuft aus seiner Prozedurdatei über die native Befehlsoberfläche.
+**Vollständig** (Installationsgeprüft) — jeder dwp-*-Befehl läuft aus seiner Prozedurdatei. Route durch automatisierte Testsuiten bestätigt; Verhaltens-Workflows laufen auf der sequenziellen Baseline.
 
 ## Installation
 

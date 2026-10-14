@@ -1,6 +1,6 @@
 ---
 title: deepworkplan-onboard
-description: "리포지토리의 스택과 아키타입을 추론해 AI-first로 만든 뒤, 적응된 AGENTS.md, docs/, .agents/, gitignore된 .dwp/를 생성합니다."
+description: "리포지토리의 스택과 아키타입을 추론해 AI-first로 만든 뒤, 적응된 AGENTS.md, docs/, .agents/, gitignore된 .dwp/를."
 kind: command
 lang: ko
 order: 6
@@ -44,6 +44,11 @@ v7 계획(현재 7.x 팩의 기본값)의 기계 판독 가능 스키마 카탈�
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (`delegation` 이벤트 추가)
 - **Plan snapshot (라이브 프로젝션, v6과 공유):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (v6과 공유):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **저장소 구성:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **애드온 기술자:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **군집 인계 패킷:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **벤치마크 기록:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **학습 기록:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 v6 계획은 v6 스키마([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contract](https://deepworkplan.com/schema/plan-contract/v6.json), [journal event](https://deepworkplan.com/schema/journal-event/v6.json))를 유지합니다. 기존 v5 계획은 계속 v5 상태 스키마를 사용하며, 이전 계획은 조용히 다시 작성되지 않습니다.
 

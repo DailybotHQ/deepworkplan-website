@@ -15,7 +15,7 @@ Google Gemini obsługuje DWP poprzez procedury komend w markdown.
 
 ## Poziom wsparcia
 
-**Pełny** — każda komenda dwp-* uruchamiana jest z jej pliku procedury. Wymaga Gemini 2.5 Pro lub nowszego dla natywnego WebFetch.
+**Pełne** (Przetestowane instalacyjnie) — każde polecenie dwp-* działa z pliku procedury. Trasa potwierdzona przez automatyczne zestawy testów; przepływy behawioralne działają na sekwencyjnej linii bazowej. Wymaga wykonywania narzędzi i dostępu do plików obszaru roboczego.
 
 ## Instalacja
 
