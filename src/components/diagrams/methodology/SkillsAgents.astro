@@ -1,7 +1,7 @@
 ---
 /**
- * SkillsAgents (ME-05) — skills (how) vs agents (who) + the .claude → .agents
- * symlink. Spec: docs/visuals/prompts/02-methodology.md#me-05. Two-panel HTML/CSS;
+ * SkillsAgents (ME-05) — skills (how) vs agents (who) + the .claude and .cursor → .agents
+ * symlinks. Spec: docs/visuals/prompts/02-methodology.md#me-05. Two-panel HTML/CSS;
  * skill/agent names + paths are technical (stay English), headings localized.
  * role="img"; dark mode; zero JS. See docs/DIAGRAM_COMPONENTS.md.
  */
@@ -17,43 +17,43 @@ const { lang = 'en', class: className = '' } = Astro.props;
 const i18n = {
   en: {
     ariaLabel:
-      'Skills are reusable procedures (how); agents are specialized workers (who). Both live under .agents/, which .claude aliases via symlink.',
+      'Skills are reusable procedures (how); agents are specialized workers (who). Both live under .agents/, which .claude and .cursor alias via symlinks.',
     blocks: 'Building blocks',
     skill: 'Skill',
     skillSub: 'how — a reusable procedure',
     agent: 'Agent',
     agentSub: 'who — a specialized worker',
-    symlink: 'symlink → backward compatibility',
+    symlink: 'symlinks → backward compatibility',
     caption:
-      'Skills define how to do recurring work; agents define who is responsible. Both live under `.agents/`, which `.claude` aliases for backward compatibility.',
+      'Skills define how to do recurring work; agents define who is responsible. Both live under `.agents/`, which `.claude` and `.cursor` alias for backward compatibility.',
   },
   es: {
     ariaLabel:
-      'Los skills son procedimientos reutilizables (cómo); los agentes son trabajadores especializados (quién). Ambos residen en .agents/, al que .claude apunta como alias mediante un enlace simbólico.',
+      'Los skills son procedimientos reutilizables (cómo); los agentes son trabajadores especializados (quién). Ambos residen en .agents/, al que .claude y .cursor apuntan mediante enlaces simbólicos.',
     blocks: 'Componentes',
     skill: 'Skill',
     skillSub: 'cómo — un procedimiento reutilizable',
     agent: 'Agente',
     agentSub: 'quién — un trabajador especializado',
-    symlink: 'enlace simbólico → compatibilidad retroactiva',
+    symlink: 'enlaces simbólicos → compatibilidad retroactiva',
     caption:
-      'Los skills definen cómo realizar el trabajo recurrente; los agentes definen quién es responsable. Ambos residen en `.agents/`, al que `.claude` apunta como alias para compatibilidad retroactiva.',
+      'Los skills definen cómo realizar el trabajo recurrente; los agentes definen quién es responsable. Ambos residen en `.agents/`, al que `.claude` y `.cursor` apuntan para compatibilidad retroactiva.',
   },
   pt: {
     ariaLabel:
-      'Skills são procedimentos reutilizáveis (como); agentes são trabalhadores especializados (quem). Ambos residem em .agents/, ao qual .claude aponta como alias por meio de um link simbólico.',
+      'Skills são procedimentos reutilizáveis (como); agentes são trabalhadores especializados (quem). Ambos residem em .agents/, ao qual .claude e .cursor apontam por meio de links simbólicos.',
     blocks: 'Componentes',
     skill: 'Skill',
     skillSub: 'como — um procedimento reutilizável',
     agent: 'Agente',
     agentSub: 'quem — um trabalhador especializado',
-    symlink: 'link simbólico → compatibilidade retroativa',
+    symlink: 'links simbólicos → compatibilidade retroativa',
     caption:
-      'Os skills definem como realizar o trabalho recorrente; os agentes definem quem é responsável. Ambos residem em `.agents/`, ao qual `.claude` aponta como alias para compatibilidade retroativa.',
+      'Os skills definem como realizar o trabalho recorrente; os agentes definem quem é responsável. Ambos residem em `.agents/`, aos quais `.claude` e `.cursor` apontam para compatibilidade retroativa.',
   },
   zh: {
     ariaLabel:
-      '技能是可复用的流程（如何做），代理是专职的执行者（由谁做）。两者都位于 .agents/ 之下，.claude 通过符号链接作为其别名。',
+      '技能是可复用的流程（如何做），代理是专职的执行者（由谁做）。两者都位于 .agents/ 之下，.claude 与 .cursor 通过符号链接作为其别名。',
     blocks: '构建模块',
     skill: '技能',
     skillSub: '如何做——一项可复用的流程',
@@ -61,11 +61,11 @@ const i18n = {
     agentSub: '由谁做——一位专职的执行者',
     symlink: '符号链接 → 向后兼容',
     caption:
-      '技能定义如何完成重复性工作，代理定义由谁负责。两者都位于 `.agents/` 之下，`.claude` 作为别名指向它以保持向后兼容。',
+      '技能定义如何完成重复性工作，代理定义由谁负责。两者都位于 `.agents/` 之下，`.claude` 和 `.cursor` 作为别名指向它以保持向后兼容。',
   },
   ja: {
     ariaLabel:
-      'スキルは再利用可能な手順（どのように）であり、エージェントは専門化された担当者（誰が）です。両者は .agents/ に置かれ、.claude はシンボリックリンクによってそのエイリアスとなります。',
+      'スキルは再利用可能な手順（どのように）であり、エージェントは専門化された担当者（誰が）です。両者は .agents/ に置かれ、.claude と .cursor はシンボリックリンクによってそのエイリアスとなります。',
     blocks: '構成要素',
     skill: 'スキル',
     skillSub: 'どのように — 再利用可能な手順',
@@ -73,143 +73,143 @@ const i18n = {
     agentSub: '誰が — 専門化された担当者',
     symlink: 'シンボリックリンク → 後方互換性',
     caption:
-      'スキルは反復作業の進め方を定義し、エージェントは誰が責任を負うかを定義します。両者は `.agents/` に置かれ、`.claude` は後方互換性のためのエイリアスとして機能します。',
+      'スキルは反復作業の進め方を定義し、エージェントは誰が責任を負うかを定義します。両者は `.agents/` に置かれ、`.claude` と `.cursor` は後方互換性のためのエイリアスとして機能します。',
   },
   de: {
     ariaLabel:
-      'Skills sind wiederverwendbare Verfahren (wie); Agenten sind spezialisierte Akteure (wer). Beide liegen unter .agents/, auf das .claude per Symlink als Alias verweist.',
+      'Skills sind wiederverwendbare Verfahren (wie); Agenten sind spezialisierte Akteure (wer). Beide liegen unter .agents/, auf das .claude und .cursor per Symlink als Alias verweisen.',
     blocks: 'Bausteine',
     skill: 'Skill',
     skillSub: 'wie — ein wiederverwendbares Verfahren',
     agent: 'Agent',
     agentSub: 'wer — ein spezialisierter Akteur',
-    symlink: 'Symlink → Abwärtskompatibilität',
+    symlink: 'Symlinks → Abwärtskompatibilität',
     caption:
-      'Skills definieren, wie wiederkehrende Arbeit erledigt wird; Agenten definieren, wer dafür verantwortlich ist. Beide liegen unter `.agents/`, auf das `.claude` als Alias zur Abwärtskompatibilität verweist.',
+      'Skills definieren, wie wiederkehrende Arbeit erledigt wird; Agenten definieren, wer dafür verantwortlich ist. Beide liegen unter `.agents/`, auf das `.claude` und `.cursor` als Aliase zur Abwärtskompatibilität verweisen.',
   },
   fr: {
     ariaLabel:
-      'Les skills sont des procédures réutilisables (comment) ; les agents sont des intervenants spécialisés (qui). Tous deux résident sous .agents/, auquel .claude renvoie comme alias via un lien symbolique.',
+      'Les skills sont des procédures réutilisables (comment) ; les agents sont des intervenants spécialisés (qui). Tous deux résident sous .agents/, auquel .claude et .cursor renvoient via des liens symboliques.',
     blocks: 'Composants',
     skill: 'Skill',
     skillSub: 'comment — une procédure réutilisable',
     agent: 'Agent',
     agentSub: 'qui — un intervenant spécialisé',
-    symlink: 'lien symbolique → rétrocompatibilité',
+    symlink: 'liens symboliques → rétrocompatibilité',
     caption:
-      'Les skills définissent comment réaliser le travail récurrent ; les agents définissent qui en est responsable. Tous deux résident sous `.agents/`, auquel `.claude` renvoie comme alias pour la rétrocompatibilité.',
+      'Les skills définissent comment réaliser le travail récurrent ; les agents définissent qui en est responsable. Tous deux résident sous `.agents/`, auxquels `.claude` et `.cursor` renvoient comme alias pour la rétrocompatibilité.',
   },
   ko: {
     ariaLabel:
-      '스킬은 재사용 가능한 절차(어떻게)이고, 에이전트는 전문화된 작업자(누가)예요. 둘 다 .agents/ 아래에 있으며, .claude는 심볼릭 링크를 통해 그 별칭으로 연결돼요.',
+      '스킬은 재사용 가능한 절차(방법)이고, 에이전트는 특화된 작업자(주체)입니다. 둘 다 .agents/ 아래에 위치하며, .claude와 .cursor가 심볼릭 링크를 통해 별칭으로 연결됩니다.',
     blocks: '구성 요소',
     skill: '스킬',
-    skillSub: '어떻게 — 재사용 가능한 절차',
+    skillSub: '방법 — 재사용 가능한 절차',
     agent: '에이전트',
-    agentSub: '누가 — 전문화된 작업자',
+    agentSub: '주체 — 특화된 작업자',
     symlink: '심볼릭 링크 → 하위 호환성',
     caption:
-      '스킬은 반복 작업을 어떻게 수행할지를 정의하고, 에이전트는 누가 책임지는지를 정의해요. 둘 다 `.agents/` 아래에 있으며, `.claude`는 하위 호환성을 위한 별칭으로 그곳을 가리켜요.',
+      '스킬은 반복되는 작업 수행 방법을 정의하고, 에이전트는 누가 담당하는지 정의합니다. 둘 다 `.agents/` 아래에 위치하며, `.claude`와 `.cursor`가 하위 호환성을 위해 별칭으로 연결됩니다.',
   },
   ru: {
     ariaLabel:
-      'Навыки — это переиспользуемые процедуры (как); агенты — это специализированные исполнители (кто). Оба расположены в .agents/, на который .claude указывает как псевдоним через символическую ссылку.',
-    blocks: 'Составные части',
-    skill: 'Навык',
+      'Скилы — это переиспользуемые процедуры (как); агенты — специализированные исполнители (кто). Оба находятся в .agents/, на который .claude и .cursor ссылаются через симлинки.',
+    blocks: 'Компоненты',
+    skill: 'Скил',
     skillSub: 'как — переиспользуемая процедура',
     agent: 'Агент',
     agentSub: 'кто — специализированный исполнитель',
-    symlink: 'символическая ссылка → обратная совместимость',
+    symlink: 'симлинки → обратная совместимость',
     caption:
-      'Навыки определяют, как выполнять повторяющуюся работу; агенты определяют, кто за неё отвечает. Оба расположены в `.agents/`, на который `.claude` указывает как псевдоним для обратной совместимости.',
+      'Скилы определяют, как выполнять повторяющуюся работу; агенты определяют, кто за нее отвечает. Оба находятся в `.agents/`, на который `.claude` и `.cursor` ссылаются для обратной совместимости.',
   },
   it: {
     ariaLabel:
-      'Le skill sono procedure riutilizzabili (come); gli agenti sono operatori specializzati (chi). Entrambi risiedono in .agents/, a cui .claude punta come alias tramite un collegamento simbolico.',
+      'Le skill sono procedure riutilizzabili (come); gli agenti sono operatori specializzati (chi). Entrambi risiedono sotto .agents/, a cui .claude e .cursor puntano tramite collegamenti simbolici.',
     blocks: 'Componenti',
     skill: 'Skill',
     skillSub: 'come — una procedura riutilizzabile',
     agent: 'Agente',
     agentSub: 'chi — un operatore specializzato',
-    symlink: 'collegamento simbolico → compatibilità retroattiva',
+    symlink: 'collegamenti simbolici → retrocompatibilità',
     caption:
-      'Le skill definiscono come svolgere il lavoro ricorrente; gli agenti definiscono chi ne è responsabile. Entrambi risiedono in `.agents/`, a cui `.claude` punta come alias per garantire la compatibilità retroattiva.',
+      'Le skill definiscono come svolgere il lavoro ricorrente; gli agenti definiscono chi ne è responsabile. Entrambi risiedono in `.agents/`, a cui `.claude` e `.cursor` puntano per retrocompatibilità.',
   },
   tr: {
     ariaLabel:
-      'Beceriler yeniden kullanılabilir prosedürlerdir (nasıl); ajanlar uzmanlaşmış çalışanlardır (kim). Her ikisi de .agents/ altında bulunur ve .claude buna sembolik bağ aracılığıyla takma ad olarak işaret eder.',
+      'Yetenekler yeniden kullanılabilir prosedürlerdir (nasıl); ajanlar ise uzmanlaşmış çalışanlardır (kim). Her ikisi de .agents/ altında bulunur ve .claude ile .cursor sembolik bağlantılarla buraya yönlendirir.',
     blocks: 'Yapı taşları',
-    skill: 'Beceri',
-    skillSub: 'nasıl — yeniden kullanılabilir bir prosedür',
+    skill: 'Yetenek',
+    skillSub: 'nasıl — yeniden kullanılabilir prosedür',
     agent: 'Ajan',
-    agentSub: 'kim — uzmanlaşmış bir çalışan',
-    symlink: 'sembolik bağ → geriye dönük uyumluluk',
+    agentSub: 'kim — uzmanlaşmış çalışan',
+    symlink: 'sembolik bağlantılar → geriye dönük uyumluluk',
     caption:
-      'Beceriler yinelenen işin nasıl yapılacağını tanımlar; ajanlar ise kimin sorumlu olduğunu tanımlar. Her ikisi de `.agents/` altında bulunur ve `.claude` geriye dönük uyumluluk için ona takma ad olarak işaret eder.',
+      'Yetenekler yinelenen işin nasıl yapılacağını, ajanlar ise kimin sorumlu olduğunu tanımlar. Her ikisi de `.agents/` altında yaşar; `.claude` ve `.cursor` geriye dönük uyumluluk için takma ad sağlar.',
   },
   id: {
     ariaLabel:
-      'Skill adalah prosedur yang dapat digunakan kembali (bagaimana); agen adalah pekerja khusus (siapa). Keduanya berada di bawah .agents/, yang ditunjuk .claude sebagai alias melalui tautan simbolik.',
-    blocks: 'Komponen',
+      'Skill adalah prosedur yang dapat digunakan kembali (bagaimana); agen adalah pekerja terspesialisasi (siapa). Keduanya berada di bawah .agents/, yang dirujuk oleh .claude dan .cursor melalui symlink.',
+    blocks: 'Blok bangunan',
     skill: 'Skill',
     skillSub: 'bagaimana — prosedur yang dapat digunakan kembali',
     agent: 'Agen',
-    agentSub: 'siapa — pekerja khusus',
-    symlink: 'tautan simbolik → kompatibilitas mundur',
+    agentSub: 'siapa — pekerja terspesialisasi',
+    symlink: 'symlink → kompatibilitas mundur',
     caption:
-      'Skill menetapkan bagaimana pekerjaan berulang dilakukan; agen menetapkan siapa yang bertanggung jawab. Keduanya berada di bawah `.agents/`, yang ditunjuk `.claude` sebagai alias untuk kompatibilitas mundur.',
+      'Skill menentukan cara melakukan pekerjaan berulang; agen menentukan siapa yang bertanggung jawab. Keduanya berada di bawah `.agents/`, yang dialiaskan oleh `.claude` dan `.cursor` untuk kompatibilitas mundur.',
   },
   vi: {
     ariaLabel:
-      'Skill là các quy trình có thể tái sử dụng (cách làm); agent là các nhân sự chuyên trách (ai làm). Cả hai đều nằm trong .agents/, mà .claude trỏ tới như một bí danh thông qua liên kết tượng trưng.',
+      'Kỹ năng là quy trình có thể tái sử dụng (cách làm); agent là nhân sự chuyên biệt (ai làm). Cả hai đều nằm trong .agents/, được .claude và .cursor liên kết bí danh qua symlink.',
     blocks: 'Thành phần',
-    skill: 'Skill',
-    skillSub: 'cách làm — một quy trình có thể tái sử dụng',
+    skill: 'Kỹ năng',
+    skillSub: 'cách làm — quy trình tái sử dụng',
     agent: 'Agent',
-    agentSub: 'ai làm — một nhân sự chuyên trách',
-    symlink: 'liên kết tượng trưng → tương thích ngược',
+    agentSub: 'ai làm — nhân sự chuyên biệt',
+    symlink: 'symlink → tương thích ngược',
     caption:
-      'Skill định nghĩa cách thực hiện công việc lặp lại; agent định nghĩa ai chịu trách nhiệm. Cả hai đều nằm trong `.agents/`, mà `.claude` trỏ tới như một bí danh để bảo đảm tương thích ngược.',
+      'Kỹ năng xác định cách thực hiện công việc định kỳ; agent xác định ai chịu trách nhiệm. Cả hai nằm trong `.agents/`, được `.claude` và `.cursor` đặt bí danh để tương thích ngược.',
   },
   hi: {
     ariaLabel:
-      'स्किल पुन: उपयोग योग्य प्रक्रियाएँ हैं (कैसे); एजेंट विशेषज्ञ कार्यकर्ता हैं (कौन)। दोनों .agents/ के अंतर्गत रहते हैं, जिसे .claude सांकेतिक लिंक के माध्यम से उपनाम के रूप में संदर्भित करता है।',
-    blocks: 'घटक',
+      'स्किल पुन: प्रयोज्य प्रक्रियाएं हैं (कैसे); एजेंट विशेषज्ञ कार्यकर्ता हैं (कौन)। दोनों .agents/ के अंतर्गत रहते हैं, जिसे .claude और .cursor सांकेतिक लिंक द्वारा संदर्भित करते हैं।',
+    blocks: 'निर्माण खंड',
     skill: 'स्किल',
-    skillSub: 'कैसे — एक पुन: उपयोग योग्य प्रक्रिया',
+    skillSub: 'कैसे — एक पुन: प्रयोज्य प्रक्रिया',
     agent: 'एजेंट',
     agentSub: 'कौन — एक विशेषज्ञ कार्यकर्ता',
     symlink: 'सांकेतिक लिंक → पश्चगामी संगतता',
     caption:
-      'स्किल यह परिभाषित करते हैं कि आवर्ती कार्य कैसे किया जाए; एजेंट यह परिभाषित करते हैं कि कौन उत्तरदायी है। दोनों `.agents/` के अंतर्गत रहते हैं, जिसे `.claude` पश्चगामी संगतता के लिए उपनाम के रूप में संदर्भित करता है।',
+      'स्किल यह परिभाषित करते हैं कि आवर्ती कार्य कैसे किया जाए; एजेंट यह परिभाषित करते हैं कि कौन उत्तरदायी है। दोनों `.agents/` के अंतर्गत रहते हैं, जिसे `.claude` और `.cursor` पश्चगामी संगतता के लिए उपनाम के रूप में संदर्भित करते हैं।',
   },
   pl: {
     ariaLabel:
-      'Umiejętności to procedury wielokrotnego użytku (jak); agenci to wyspecjalizowani wykonawcy (kto). Oba znajdują się w .agents/, do którego .claude odwołuje się jako alias poprzez dowiązanie symboliczne.',
+      'Umiejętności to procedury wielokrotnego użytku (jak); agenci to wyspecjalizowani wykonawcy (kto). Oba znajdują się w .agents/, do którego .claude i .cursor odwołują się poprzez dowiązania symboliczne.',
     blocks: 'Elementy składowe',
     skill: 'Umiejętność',
     skillSub: 'jak — procedura wielokrotnego użytku',
     agent: 'Agent',
     agentSub: 'kto — wyspecjalizowany wykonawca',
-    symlink: 'dowiązanie symboliczne → zgodność wsteczna',
+    symlink: 'dowiązania symboliczne → zgodność wsteczna',
     caption:
-      'Umiejętności definiują, jak wykonywać powtarzalną pracę; agenci definiują, kto jest za nią odpowiedzialny. Oba znajdują się w `.agents/`, do którego `.claude` odwołuje się jako alias dla zachowania zgodności wstecznej.',
+      'Umiejętności definiują, jak wykonywać powtarzalną pracę; agenci definiują, kto jest za nią odpowiedzialny. Oba znajdują się w `.agents/`, do którego `.claude` i `.cursor` odwołują się jako aliasy dla zachowania zgodności wstecznej.',
   },
   uk: {
     ariaLabel:
-      'Навички — це повторно використовувані процедури (як); агенти — це спеціалізовані виконавці (хто). Обидва розташовані в .agents/, на який .claude посилається як псевдонім через символічне посилання.',
+      'Навички — це повторно використовувані процедури (як); агенти — це спеціалізовані виконавці (хто). Обидва розташовані в .agents/, на який .claude та .cursor посилаються через символічні посилання.',
     blocks: 'Складники',
     skill: 'Навичка',
     skillSub: 'як — повторно використовувана процедура',
     agent: 'Агент',
     agentSub: 'хто — спеціалізований виконавець',
-    symlink: 'символічне посилання → зворотна сумісність',
+    symlink: 'символічні посилання → зворотна сумісність',
     caption:
-      'Навички визначають, як виконувати повторювану роботу; агенти визначають, хто за неї відповідає. Обидва розташовані в `.agents/`, на який `.claude` посилається як псевдонім задля зворотної сумісності.',
+      'Навички визначають, як виконувати повторювану роботу; агенти визначають, хто за неї відповідає. Обидва розташовані в `.agents/`, на який `.claude` та `.cursor` посилаються як псевдоніми задля зворотної сумісності.',
   },
   th: {
     ariaLabel:
-      'สกิลคือกระบวนการที่นำกลับมาใช้ซ้ำได้ (ทำอย่างไร) เอเจนต์คือผู้ปฏิบัติงานเฉพาะทาง (ใครทำ) ทั้งสองอยู่ภายใต้ .agents/ ซึ่ง .claude อ้างถึงเป็นนามแฝงผ่านลิงก์สัญลักษณ์',
+      'สกิลคือกระบวนการที่นำกลับมาใช้ซ้ำได้ (ทำอย่างไร) เอเจนต์คือผู้ปฏิบัติงานเฉพาะทาง (ใครทำ) ทั้งสองอยู่ภายใต้ .agents/ ซึ่ง .claude และ .cursor อ้างถึงเป็นนามแฝงผ่านลิงก์สัญลักษณ์',
     blocks: 'องค์ประกอบ',
     skill: 'สกิล',
     skillSub: 'ทำอย่างไร — กระบวนการที่นำกลับมาใช้ซ้ำได้',
@@ -217,7 +217,7 @@ const i18n = {
     agentSub: 'ใครทำ — ผู้ปฏิบัติงานเฉพาะทาง',
     symlink: 'ลิงก์สัญลักษณ์ → ความเข้ากันได้ย้อนหลัง',
     caption:
-      'สกิลกำหนดวิธีดำเนินงานที่เกิดซ้ำ ส่วนเอเจนต์กำหนดผู้รับผิดชอบ ทั้งสองอยู่ภายใต้ `.agents/` ซึ่ง `.claude` อ้างถึงเป็นนามแฝงเพื่อความเข้ากันได้ย้อนหลัง',
+      'สกิลกำหนดวิธีดำเนินงานที่เกิดซ้ำ ส่วนเอเจนต์กำหนดผู้รับผิดชอบ ทั้งสองอยู่ภายใต้ `.agents/` ซึ่ง `.claude` และ `.cursor` อ้างถึงเป็นนามแฝงเพื่อความเข้ากันได้ย้อนหลัง',
   },
 } as const;
 
@@ -252,10 +252,17 @@ const agentExamples = ['reviewer', 'executor', 'architect', 'i18n-guardian'];
         </ul>
       </div>
     </div>
-    <div class="skagents-symlink">
-      <code>.claude</code>
-      <span class="skagents-arrow ea-accent" aria-hidden="true">→</span>
-      <code>.agents</code>
+    <div class="skagents-symlinks">
+      <div class="skagents-symlink-item">
+        <code>.claude</code>
+        <span class="skagents-arrow ea-accent" aria-hidden="true">→</span>
+        <code>.agents</code>
+      </div>
+      <div class="skagents-symlink-item">
+        <code>.cursor</code>
+        <span class="skagents-arrow ea-accent" aria-hidden="true">→</span>
+        <code>.agents</code>
+      </div>
       <span class="skagents-note">{t.symlink}</span>
     </div>
   </div>
@@ -315,16 +322,21 @@ const agentExamples = ['reviewer', 'executor', 'architect', 'i18n-guardian'];
     border-radius: 3px;
     padding: 0.1rem 0.4rem;
   }
-  .skagents-symlink {
+  .skagents-symlinks {
     display: flex;
     align-items: center;
     flex-wrap: wrap;
-    gap: 0.5rem;
+    gap: 0.75rem 1.25rem;
     margin-top: 0.85rem;
     padding-top: 0.75rem;
     border-top: 1px solid var(--color-line);
   }
-  .skagents-symlink code {
+  .skagents-symlink-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .skagents-symlink-item code {
     font-family: var(--font-mono);
     font-size: 0.85rem;
   }
