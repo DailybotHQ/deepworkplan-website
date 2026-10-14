@@ -23,11 +23,14 @@ Traktuj skill jako niezaufany, dopóki go nie sprawdzisz. Każde wydanie dołąc
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
+
+Tabela przypięć ekosystemu w [/init.md#trust-and-verification](/init.md#trust-and-verification) zawiera skróty dla pakietu i dodatków.
 
 Wydania są **sumowane kontrolnie, nie podpisywane** — podpisywanie (cosign lub GPG opiekuna) to udokumentowany kolejny krok, a nie bieżące twierdzenie. Ponieważ wszystko jest otwarte, możesz też diffować dowolny plik względem repozytorium przy jego tagu.
 
@@ -59,4 +62,4 @@ Problemy z bezpieczeństwem zgłaszaj **prywatnie przez prywatne raportowanie po
 - [Polityka bezpieczeństwa witryny](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Polityka bezpieczeństwa skilla i model zagrożeń](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Przeczytaj metodykę](/methodology)
-- [Adopcja (init)](/init)
+- [Adopcja (init)](/pl/quickstart)

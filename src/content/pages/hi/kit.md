@@ -32,7 +32,7 @@ Deep Work Plan स्किल एक राउटर और नौ सब-स�
 
 पतले स्लैश कमांड्स सब-स्किल्स और ऐडऑन को सौंपते हैं:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — योजना-निष्पादन-सत्यापन लूप।
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — योजना-निष्पादन-सत्यापन लूप।
 - `skill-create`, `agent-create` — author सब-स्किल को सौंपते हैं।
 - `lib-upgrade` — dependency-upgrade ऐडऑन को सौंपता है (केवल तभी स्थापित होता है जब वह ऐडऑन स्वीकार किया जाए)।
 

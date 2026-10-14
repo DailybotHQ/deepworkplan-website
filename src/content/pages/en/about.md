@@ -19,6 +19,8 @@ It is deliberately agnostic about which AI agent or stack you use — adapters t
 - **Plan before execution** — No code is written until the plan is agreed. The plan is a contract between you and the agent. [Read the methodology](/methodology)
 - **Tasks are atomic** — Each task is scoped so it can be executed and verified on its own, then committed atomically. [See the specification](/spec)
 - **Verify everything** — Every task ends with an explicit check before the next one begins, with progress recorded in git. [Explore the kit](/kit)
+- **Verified evidence over narrative** — Completion is proven through executable gates, cryptographic receipts, and an append-only journal — never an agent’s self-reported claim. [Read the record layer](/spec/record-layer)
+- Ecosystem 1.0 optional companion addons (agentkit, Herdr, devcontainer, Vim, reviewer)
 
 ---
 

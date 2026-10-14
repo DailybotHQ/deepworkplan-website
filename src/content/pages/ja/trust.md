@@ -23,11 +23,14 @@ lastUpdated: 2026-06-05
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
+
+[/init.md#trust-and-verification](/init.md#trust-and-verification) のエコシステム固定表に、パックとアドオンの検証済みダイジェストが記載されています。
 
 リリースは**チェックサム付きですが、署名はされていません** — 署名（cosign またはメンテナー GPG）は文書化された次のステップであり、現在の主張ではありません。すべてが公開されているため、任意のファイルをそのタグのリポジトリと diff で比較することもできます。
 
@@ -59,4 +62,4 @@ curl -fsSL -o SHA256SUMS \
 - [ウェブサイトのセキュリティポリシー](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [スキルのセキュリティポリシーと脅威モデル](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [方法論を読む](/methodology)
-- [採用（Init）](/init)
+- [採用（Init）](/ja/quickstart)

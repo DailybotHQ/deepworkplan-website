@@ -19,6 +19,8 @@ Hangi yapay zeka ajanını ya da yığını kullandığınız konusunda kasıtl�
 - **Yürütmeden önce plan** — Plan üzerinde uzlaşılana kadar hiç kod yazılmaz. Plan, sizinle ajan arasında bir sözleşmedir. [Metodolojiyi okuyun](/methodology)
 - **Görevler atomiktir** — Her görev, tek başına yürütülüp doğrulanabilecek ve ardından atomik olarak commit edilebilecek biçimde kapsamlanır. [Spesifikasyonu görün](/spec)
 - **Her şeyi doğrulayın** — Her görev, bir sonraki başlamadan önce açık bir denetimle biter ve ilerleme git’te kaydedilir. [Kiti keşfedin](/kit)
+- **Anlatı yerine doğrulanmış kanıt** — Tamamlanma, ajanın kendi ifadesiyle değil; çalıştırılabilir geçitler, kriptografik makbuzlar ve yalnızca ekleme yapılabilen bir günlükle kanıtlanır. [Kayıt katmanını okuyun](/tr/spec/record-layer)
+- Ekosistem 1.0 isteğe bağlı yardımcı eklentileri (agentkit, Herdr, devcontainer, Vim, denetleyici)
 
 ---
 

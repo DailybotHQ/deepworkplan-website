@@ -23,9 +23,10 @@ Trate a skill como não confiável até tê-la verificado. Cada versão anexa um
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Baixe os checksums para a versão que pretende instalar (substitua vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # saída diferente de zero significa que um arquivo não corresponde — pare
 ```
 
@@ -59,4 +60,4 @@ Reporte problemas de segurança **de forma privada pelo sistema de reporte priva
 - [Política de segurança do site](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Política de segurança e modelo de ameaças da skill](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Leia a metodologia](/methodology)
-- [Adoção (init)](/init)
+- [Adoção (init)](/pt/quickstart)

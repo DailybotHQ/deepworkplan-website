@@ -33,7 +33,7 @@ Skill Deep Work Plan là một bộ định tuyến cùng chín sub-skill:
 
 Các slash command mỏng ủy thác tới các sub-skill và addon:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — vòng lặp lập kế hoạch–thực thi–kiểm chứng.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — vòng lặp lập kế hoạch–thực thi–kiểm chứng.
 - `skill-create`, `agent-create` — ủy thác tới sub-skill author.
 - `lib-upgrade` — ủy thác tới addon dependency-upgrade (chỉ được cài khi addon đó được chấp nhận).
 

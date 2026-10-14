@@ -23,9 +23,10 @@ lastUpdated: 2026-06-05
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
@@ -59,4 +60,4 @@ Release ถูก**ตรวจสอบด้วย checksum ไม่ใช่
 - [นโยบายความปลอดภัยของเว็บไซต์](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [นโยบายความปลอดภัยของสกิลและแบบจำลองภัยคุกคาม](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [อ่านระเบียบวิธี](/methodology)
-- [การนำไปใช้ (init)](/init)
+- [การนำไปใช้ (init)](/th/quickstart)

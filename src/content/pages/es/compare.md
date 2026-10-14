@@ -1,7 +1,7 @@
 ---
-title: "Deep Work Plan comparado con las alternativas"
-description: "Cómo se relaciona Deep Work Plan con herramientas guiadas por especificación, frameworks de agentes y modos de plan nativos, con fuentes y fecha de revisión."
-lastUpdated: 2026-09-11
+title: "Comparativa de Deep Work Plan frente a alternativas guiadas por especificación"
+description: "Cómo se compara Deep Work Plan con herramientas guiadas por especificaciones, marcos de agentes y modos de planificación: con fuentes y fecha de revisión."
+lastUpdated: 2026-10-14
 ---
 
 ## Deep Work Plan y las alternativas
@@ -16,7 +16,7 @@ Tres valores describen cada capacidad. Indican dónde vive una capacidad en una 
 - **Opcional o mediante extensión**
 - **Fuera del alcance**
 
-Última revisión: 2026-09-11
+Última revisión: 2026-10-14
 
 ## Las alternativas, en sus propios términos
 
@@ -74,6 +74,8 @@ Dónde vive cada capacidad, por herramienta. Integrado, opcional o mediante exte
 - **Estado que sobrevive a sesiones y agentes.** Las casillas del README, los registros de tareas, un índice de trabajo acotado y un archivo de estado legible por máquina se escriben en cada límite, de modo que otra sesión u otro agente continúa desde el disco. Incluso una creación de plan interrumpida es recuperable.
 - **Un comprobador de conformidad para el propio repositorio.** Un script de solo lectura verifica el harness y cada plan contra la especificación, entiende ambos ciclos de vida del plan y termina con un código apto para CI.
 - **Carga de instrucciones medida y publicada.** Un script versionado publica dos mediciones por flujo — el paquete de entrada que carga al inicio de una sesión y la ruta de extremo a extremo una vez que se activan sus disparadores reales —, además de lo que excluye cada una, de modo que la cifra de entrada nunca se lea como el costo total de una ejecución. Los resultados, incluidos los aumentos, se publican como bytes, nunca como porcentajes de tokens o de costo.
+- **Una capa de registro respaldada por evidencia.** Un contrato inmutable (contract.json), diario de eventos solo agregable (journal.ndjson), recibos criptográficos y puertas observadas garantizan que la finalización se demuestre en vez de afirmarse.
+- **Delegación multiagente segura y autonomía de enjambre.** La ejecución de tareas seguras en paralelo en árboles de trabajo dedicados, hallazgos afirmados hasta su validación en puertas, paquetes estructurados de traspaso y sucesión de líderes con épocas evitan la desviación.
 
 ## Límites honestos
 

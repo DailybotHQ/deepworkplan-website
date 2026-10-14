@@ -33,7 +33,7 @@ Deep Work Plan skill'i, bir yönlendirici ile dokuz alt skill'den oluşur:
 
 İnce eğik çizgi komutları, alt skill'lere ve eklentilere yetki devreder:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — plan-yürüt-doğrula döngüsü.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — plan-yürüt-doğrula döngüsü.
 - `skill-create`, `agent-create` — author alt skill'ine yetki devreder.
 - `lib-upgrade` — dependency-upgrade eklentisine yetki devreder (yalnızca o eklenti kabul edildiğinde kurulur).
 

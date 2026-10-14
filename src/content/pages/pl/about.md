@@ -19,6 +19,8 @@ Jest celowo agnostyczny co do tego, którego agenta AI czy stosu używasz — ad
 - **Plan przed wykonaniem** — Żaden kod nie powstaje, dopóki plan nie zostanie uzgodniony. Plan jest umową między tobą a agentem. [Przeczytaj metodykę](/methodology)
 - **Zadania są atomowe** — Każde zadanie ma taki zakres, by można je było wykonać i zweryfikować samodzielnie, a następnie zacommitować atomowo. [Zobacz specyfikację](/spec)
 - **Weryfikuj wszystko** — Każde zadanie kończy się jawną kontrolą, zanim rozpocznie się następne, a postęp jest zapisywany w git. [Poznaj kit](/kit)
+- **Zweryfikowane dowody zamiast deklaracji** — Ukończenie prac jest dowodzone wykonywalnymi bramkami, kryptograficznymi pokwitowaniami i dziennikiem append-only. [Przeczytaj o warstwie rejestru](/pl/spec/record-layer)
+- Opcjonalne dodatki Ekosystemu 1.0 (agentkit, Herdr, devcontainer, Vim, recenzent)
 
 ---
 

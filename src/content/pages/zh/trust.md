@@ -23,11 +23,14 @@ lastUpdated: 2026-06-05
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
+
+[/init.md#trust-and-verification](/init.md#trust-and-verification) 中的生态系统固定版本表列出了核心包及配套插件的校验和。
 
 发布版本有**校验和，但未经签名**——签名（cosign 或维护者 GPG）是已记录的下一步计划，而非当前的承诺。由于一切都是公开的，你也可以将任意文件与仓库在其 tag 处的内容进行比对。
 
@@ -59,4 +62,4 @@ curl -fsSL -o SHA256SUMS \
 - [网站安全政策](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [技能安全政策与威胁模型](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [阅读方法论](/methodology)
-- [采纳（Init）](/init)
+- [采纳（Init）](/zh/quickstart)

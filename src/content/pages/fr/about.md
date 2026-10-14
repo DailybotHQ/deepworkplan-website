@@ -19,6 +19,8 @@ Elle est délibérément indépendante de l’agent IA ou de la stack que vous u
 - **Planifier avant d’exécuter** — Aucun code n’est écrit tant que le plan n’est pas convenu. Le plan est un contrat entre vous et l’agent. [Lire la méthodologie](/methodology)
 - **Les tâches sont atomiques** — Chaque tâche est cadrée pour pouvoir être exécutée et vérifiée seule, puis validée de façon atomique. [Voir la spécification](/spec)
 - **Tout vérifier** — Chaque tâche se termine par une vérification explicite avant que la suivante ne commence, avec une progression enregistrée dans git. [Explorer le kit](/kit)
+- **Preuves vérifiées plutôt que récits** — L achèvement est prouvé par des portes exécutables, des reçus cryptographiques et un journal immuable — jamais sur la simple parole d un agent. [Lire la couche de registre](/fr/spec/record-layer)
+- Extensions complémentaires optionnelles de l’Écosystème 1.0 (agentkit, Herdr, devcontainer, Vim, réviseur)
 
 ---
 

@@ -19,6 +19,8 @@ Deep Work Plan (DWP) è una metodologia, non un prodotto. Definisce come trasfor
 - **Pianificare prima di eseguire** — Non si scrive codice finché il piano non è concordato. Il piano è un contratto tra Lei e l’agente. [Leggi la metodologia](/methodology)
 - **Le attività sono atomiche** — Ogni attività ha un ambito tale da poter essere eseguita e verificata da sola, poi sottoposta a commit in modo atomico. [Consulta la specifica](/spec)
 - **Verificare tutto** — Ogni attività termina con una verifica esplicita prima che inizi la successiva, con i progressi registrati in git. [Esplora il kit](/kit)
+- **Evidenza verificata anziché narrazione** — Il completamento è provato da gate eseguibili, ricevute crittografiche e un journal append-only — mai dalla sola dichiarazione dell agente. [Leggi il livello di registro](/it/spec/record-layer)
+- Addon opzionali dell’Ecosistema 1.0 (agentkit, Herdr, devcontainer, Vim, reviewer)
 
 ---
 

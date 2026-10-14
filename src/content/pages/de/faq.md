@@ -1,7 +1,7 @@
 ---
 title: "Häufig gestellte Fragen — Deep Work Plan"
 description: "Antworten auf häufige Fragen zu Deep Work Plan: Was es tut, wie Gates und Wiederaufnahme funktionieren, der Vergleich mit anderen Werkzeugen und die Adoption."
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-14
 ---
 
 ## Häufig gestellte Fragen
@@ -36,7 +36,7 @@ Eine Methodik, verpackt als installierbare Skill. Es gibt keinen Server, kein Ko
 
 ### Mit welchen Coding-Agenten funktioniert es?
 
-Jeder Agent, der Repository-Dateien liest. Die Skill folgt dem offenen Agent-Skills-Standard und der `AGENTS.md`-Konvention, sodass Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot und andere sie über ihr gewöhnliches Laden von Skills und Anweisungen aufnehmen. Die eigene Evaluation der Methodik zeigt einen Plan, der vom Agenten eines Anbieters gestartet und vom Agenten eines anderen wieder aufgenommen wurde — in beide Richtungen. Installationsabdeckung und Verhaltensevidenz stehen je Agent in der Kompatibilitätsmatrix, und beides wird nie vermischt.
+Mit jedem Agenten, der Repository-Dateien liest. Claude Code und OpenAI Codex sind verhaltenstypisch für bidirektionale Ausführung und Handoffs getestet; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline und Antigravity besitzen installationsgetestete Adapter. Die Methodik trennt Verhaltenserprobung strikt von Installationsabdeckung.
 
 [Das Kit durchstöbern](https://deepworkplan.com/de/kit)
 
@@ -50,7 +50,7 @@ Drei Schritte. Installieren Sie zuerst die Deep Work Plan-Skill in Ihrem Coding-
 
 Die Agenten-Skill wird dort installiert, wo Ihr Agent Projekt- oder Benutzer-Skills lädt. Das Onboarding passt anschließend das Repository selbst an: Es erstellt oder gleicht `AGENTS.md`, `docs/`, `.agents/` und den per gitignore ausgeschlossenen `.dwp/`-Arbeitsbereich ab. Die Skill lehrt den Agenten die Methode; das Repository bewahrt den Kontext, das Kit und die Plan-Evidenz, die andere Agenten zum Fortsetzen benötigen.
 
-[Den Adoptionsablauf ansehen](https://deepworkplan.com/de/init)
+[Den Adoptionsablauf ansehen](https://deepworkplan.com/de/quickstart)
 
 ### Erfordert Deep Work Plan Git?
 
@@ -126,13 +126,51 @@ Ja, wenn der Plan im Voraus genehmigt wurde, die erforderliche Zustandsebene tr�
 
 [Protokoll für unbeaufsichtigte Durchläufe lesen](https://deepworkplan.com/de/spec/agent-protocol)
 
+## Viele Agenten & v7
+
+### Können mehrere Agenten parallel an einem Plan arbeiten und wie bleibt das sicher?
+
+Ja. Als `parallel_safe: yes` deklarierte Aufgaben laufen parallel in eigenen Git-Worktrees. Jede Aufgabe schreibt strikt auf ihre deklarierte Touched Surface auf isolierten Branches. Ein Append-Only-Journal serialisiert Ereignisse unter Lock, und Ergebnisse werden ohne Spurüberschneidung integriert.
+
+[Über Delegation lesen](https://deepworkplan.com/de/spec/delegation)
+
+### Wird das Ergebnis eines delegierten Subagenten automatisch übernommen?
+
+Nein. Ergebnisse delegierter Agenten gelten als reine Behauptung („asserted“), bis das deklarierte Validierungs-Gate des Elternplans sie ausführt und beobachtet („observed“). Scheitert das Gate oder werden nicht deklarierte Dateien berührt, schlägt die Aufgabe fehl.
+
+[Spezifikation der Aufzeichnungsschicht](https://deepworkplan.com/de/spec/record-layer)
+
+### Was passiert, wenn ein Agent mitten im Plan an Nutzungs- oder Token-Limits stößt?
+
+Die Schwarm-Autonomie überwacht die Restkapazität. Nahen Grenzwerte, stoppt der aktive Lead neue Aufgaben, erstellt ein strukturiertes Handoff-Paket (`dwp-handoff-v1`) mit Belegen und übergibt die Leitung an einen Nachfolge-Agenten mit monotonen Epochen.
+
+[Methodik lesen](https://deepworkplan.com/de/methodology)
+
+### Wann unterbricht ein autonomer Agent die Arbeit, um einen Menschen zu fragen?
+
+DWP definiert eine strenge Eskalationstaxonomie mit sieben Klassen (AGENT_PROTOCOL §7.5): C1 ungenehmigte Aktionen, C2 Authentifizierung/Consent, C3 irreduzible Ambiguität, C4 unlösbar fehlschlagende Gates, C5 destruktive Operationen, C6 Lizenzänderungen und C7 erschöpfte Kapazität.
+
+[Agenten-Protokoll lesen](https://deepworkplan.com/de/spec/agent-protocol)
+
+### Wie wird Fertigstellung jenseits reiner Agenten-Behauptungen bewiesen?
+
+Abschluss erfordert einen unveränderlichen Vertrag, kryptografische Belege und binäre Gate-Ergebnisse im Journal. Reine Behauptungen erfordern explizite menschliche Freigabemarker. Der Plan schließt erst mit bestandenem Final Review.
+
+[Spezifikation der Aufzeichnungsschicht](https://deepworkplan.com/de/spec/record-layer)
+
+### Laufen v6-Pläne unter v7 unverändert weiter?
+
+Ja. Plankontrakte deklarieren ihre Schema-Generation explizit (`plan-contract/v6.json` vs. `plan-contract/v7.json`). Ein laufender Plan migriert niemals mittendrin. Bestehende v6-Pläne behalten ihr Format und ihre Semantik unter v7-Tools bei.
+
+[Über Kontrakte lesen](https://deepworkplan.com/de/spec/record-layer)
+
+## Im Vergleich
+
 ### Kann ein Plan mehrere Repositories umspannen?
 
 Ja — genau dafür existiert das Orchestrator-Hub-Archetyp. Ein Hub-Repository hält den koordinierenden Plan, und jedes Kind-Repository führt seinen eigenen Plan in seinem eigenen isolierten `.dwp/`-Arbeitsbereich aus, sodass ein Kind niemals in den Plan-Zustand des Hubs schreibt. Die Vollständigkeit eines Kindes wird aus dem Top-Level-Zustand seines eigenen Plans gelesen, nicht durch String-Suche darin, und der Hub verzeichnet, wo er steht, bevor er irgendwohin navigiert. Jedes Kind bleibt ein gewöhnliches DWP-Repository, das auch für sich allein gesteuert werden kann.
 
 [Repository-Archetypen](https://deepworkplan.com/de/spec/archetypes)
-
-## Im Vergleich
 
 ### Wie unterscheidet es sich von spec-driven Werkzeugen wie Spec Kit, OpenSpec oder Kiro?
 
@@ -158,13 +196,13 @@ Eingebaute Plan-Modi sind nützlich, und Deep Work Plan baut auf demselben Subst
 
 Das Onboarding ist nicht-destruktiv: Es erkennt eine bestehende `AGENTS.md`, `docs/`, `.agents/` oder `CLAUDE.md`, gleicht ab, statt zu überschreiben, und fragt nach, bevor es etwas ersetzt. Es schreibt den `AGENTS.md`-Index mit echten Befehlen, einen durchdachten `docs/`-Baum, Dokumentation je Modul, das `.agents/`-Kit mit schlanken `dwp-*`-Befehlen, einen per gitignore ausgeschlossenen `.dwp/`-Ausgabebereich, eine verifizierte Testkarte und das erforderliche lokale Code-Review (die AI Diff Reviewer-Skill plus eine auf das Repository zugeschnittene Review-Erweiterung). Anschließend führt es einen Selbstcheck und den Konformitätsprüfer aus, damit Sie sehen, was erzeugt wurde. Ein unter einem früheren Standard geonboardetes Repository erhält ein gezieltes Harness-Upgrade, das nur abgleicht, was fehlt oder veraltet ist.
 
-[Der Adoptions-Endpunkt](https://deepworkplan.com/de/init)
+[Der Adoptions-Endpunkt](https://deepworkplan.com/de/quickstart)
 
 ### Wie upgrade ich die Skill in einem bereits geonboardeten Repository?
 
 Es sind zwei verschiedene Upgrades, und der Ablauf hält sie getrennt. Der Harness des Repositories — `AGENTS.md`, `docs/`, das `.agents/`-Kit — wird durch erneutes Onboarding abgeglichen, das nur fehlende oder veraltete Teile ergänzt. Die Skill selbst wandert über `/dwp-upgrade`: eine nur-lesende Prüfung des neuesten veröffentlichten Releases, die Installation des exakten Tags, das Sie akzeptiert haben, verifiziert, und danach das Onboarding erneut als frischer Durchlauf. Der Ablauf ist durchweg zustimmungspflichtig, lokale Anpassungen werden per Diff verglichen und bewahrt statt überschrieben, und `.dwp/` wird niemals migriert — bestehende Pläne behalten ihre aufgezeichnete Form und laufen weiter.
 
-[Der Adoptions-Endpunkt](https://deepworkplan.com/de/init)
+[Der Adoptions-Endpunkt](https://deepworkplan.com/de/quickstart)
 
 ### Kann ich die Kernmethodik nutzen, ohne Add-ons zu installieren?
 
@@ -180,7 +218,7 @@ DWP behandelt das Fehlen einer Toolchain nicht als Freifahrtschein. Während des
 
 ### Was kostet es, und wie wird Effizienz gemessen?
 
-Die Methodik und die Skill sind MIT-lizenziert und kostenlos; es gibt keinen Dienst, keinen API-Schlüssel und keine Telemetrie in den Kern-Flows. Effizienz wird als Anzahl der Instruktions-Bytes berichtet, die jeder Flow **beim Einstieg** lädt — sein Bundle zu Beginn einer Sitzung —, veröffentlicht zusammen mit benannten **End-to-End-Pfaden**, die hinzurechnen, was die eigenen Trigger des Flows laden, sobald die eigentliche Arbeit fortgesetzt wird (zum Beispiel lädt ein Resume, das anschließend zur Ausführung übergeht, typischerweise ein Mehrfaches seines Einstiegs-Bundles). Keiner der beiden Werte begrenzt eine Sitzung: Ein realer Lauf liest zusätzlich die eigenen Dateien des Repositorys, Tool-Ausgaben und die Arbeitsdateien des Plans, von denen dieses Ledger keine zählt. Beide Zahlen werden von einem Skript gemessen, das mit der Skill committet, über Release-Baselines hinweg neu gemessen und in einem Evaluations-Ledger veröffentlicht wird, wobei Zunahmen so offen berichtet werden wie Abnahmen. Nicht berichtet wird in Token-Prozenten oder eingesparten Kosten, weil eine Byte-Bestandsaufnahme das nicht belegen kann. Eine öffentliche Evaluation mit frischen Agenten ist unter einem eingefrorenen Protokoll bereits gelaufen: dieselben zwei Features, gebaut aus sauberen Klonen ohne Harness, mit der vorherigen Major-Version und mit der aktuellen. Sie ergab, dass Agenten auf einem Harness-tragenden Baum in beiden Aufgaben weniger Bytes lasen und dass die Feature-Sitzungen der aktuellen Version in beiden Aufgaben weniger Modell-Ein- und -Ausgabe verbrauchten als die der vorherigen Major-Version — vom Harness berichtet, auf einer einzelnen Workload. Sie benannte auch die ehrlichen Grenzen: Onboarding ist ein einmaliger Aufwand, der sich nur zurückzahlt, wenn die Flows genutzt werden; die Netto-Token-Richtung je Workload war gemischt; kein Wanduhr-Vorteil wird beansprucht; und ein frischer Agent betritt die Flows nicht von selbst — die Flows sind Befehle, die Sie oder ein Agent, der sie kennt, aufrufen.
+Die Methodik und die Skill sind MIT-lizenziert und kostenlos; es gibt keinen Dienst, keinen API-Schlüssel und keine Telemetrie in den Kern-Flows. Effizienz wird als Anzahl der Instruktions-Bytes berichtet, die jeder Flow beim Einstieg lädt — sein Bundle zu Beginn einer Sitzung —, veröffentlicht zusammen mit benannten End-to-End-Pfaden, die hinzurechnen, was die eigenen Trigger des Flows laden, sobald die eigentliche Arbeit fortgesetzt wird (zum Beispiel lädt ein Resume, das anschließend zur Ausführung übergeht, typischerweise ein Mehrfaches seines Einstiegs-Bundles). Keiner der beiden Werte begrenzt eine Sitzung: Ein realer Lauf liest zusätzlich die eigenen Dateien des Repositorys, Tool-Ausgaben und die Arbeitsdateien des Plans, von denen dieses Ledger keine zählt. Beide Zahlen werden von einem Skript gemessen, das mit der Skill committet, über Release-Baselines hinweg neu gemessen und in einem Evaluations-Ledger veröffentlicht wird, wobei Zunahmen so offen berichtet werden wie Abnahmen. Nicht berichtet wird in Token-Prozenten oder eingesparten Kosten, weil eine Byte-Bestandsaufnahme das nicht belegen kann. Eine öffentliche Evaluation mit frischen Agenten ist unter einem eingefrorenen Protokoll bereits gelaufen: dieselben zwei Features, gebaut aus sauberen Klonen ohne Harness, mit der vorherigen Major-Version und mit der aktuellen. Sie ergab, dass Agenten auf einem Harness-tragenden Baum in beiden Aufgaben weniger Bytes lasen und dass die Feature-Sitzungen der aktuellen Version in beiden Aufgaben weniger Modell-Ein- und -Ausgabe verbrauchten als die der vorherigen Major-Version — vom Harness berichtet, auf einer einzelnen Workload. Sie benannte auch die ehrlichen Grenzen: Onboarding ist ein einmaliger Aufwand, der sich nur zurückzahlt, wenn die Flows genutzt werden; die Netto-Token-Richtung je Workload war gemischt; kein Wanduhr-Vorteil wird beansprucht; und ein frischer Agent betritt die Flows nicht von selbst — die Flows sind Befehle, die Sie oder ein Agent, der sie kennt, aufrufen.
 
 [Vertrauen und Offenlegung](https://deepworkplan.com/de/trust)
 

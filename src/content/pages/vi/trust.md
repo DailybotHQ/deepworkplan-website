@@ -23,11 +23,14 @@ Hãy coi skill là không đáng tin cho đến khi bạn đã kiểm tra nó. M
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Tải checksum cho bản phát hành bạn định cài (thay vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # lối thoát khác không nghĩa là file không khớp — dừng lại
 ```
+
+Bảng ghim hệ sinh thái tại [/init.md#trust-and-verification](/init.md#trust-and-verification) liệt kê mã băm cho gói và tiện ích bổ sung.
 
 Các bản phát hành **có checksum, không có chữ ký** — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.
 
@@ -59,4 +62,4 @@ Báo cáo các vấn đề bảo mật **riêng tư qua tính năng báo cáo l�
 - [Chính sách bảo mật trang web](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Chính sách bảo mật skill & mô hình mối đe dọa](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Đọc phương pháp luận](/methodology)
-- [Áp dụng (init)](/init)
+- [Áp dụng (init)](/vi/quickstart)

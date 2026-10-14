@@ -1,7 +1,7 @@
 ---
-title: "Deep Work Plan im Vergleich mit den Alternativen"
-description: "Wie Deep Work Plan zu spec-driven Werkzeugen, Agenten-Frameworks und hersteller-nativen Plan-Modi steht: in eigenen Begriffen, mit Quellen und Prüfdatum."
-lastUpdated: 2026-09-11
+title: "Deep Work Plan im Vergleich mit spezifikationsgetriebenen Alternativen"
+description: "Wie sich Deep Work Plan zu spezifikationsbasierten Werkzeugen, Agenten-Frameworks und Plan-Modi verhält: mit Primärquellen und aktuellem Prüfdatum."
+lastUpdated: 2026-10-14
 ---
 
 ## Deep Work Plan und die Alternativen
@@ -16,7 +16,7 @@ Drei Werte beschreiben jede Fähigkeit. Sie sagen, wo eine Fähigkeit in einem W
 - **Optional oder über Erweiterung**
 - **Nicht im Umfang**
 
-Zuletzt geprüft: 2026-09-11
+Zuletzt geprüft: 2026-10-14
 
 ## Die Alternativen, in ihren eigenen Begriffen
 
@@ -74,6 +74,8 @@ Wo jede Fähigkeit liegt, je Werkzeug. Integriert, optional oder über Erweiteru
 - **Zustand, der Sitzungen und Agenten übersteht.** README-Checkboxen, Aufgabenprotokolle, ein begrenzter Arbeitsindex und eine maschinenlesbare Zustandsdatei werden an jeder Grenze geschrieben, sodass eine andere Sitzung oder ein anderer Agent von der Festplatte aus weitermacht. Selbst eine unterbrochene Planerstellung ist wiederherstellbar.
 - **Ein Konformitätsprüfer für das Repository selbst.** Ein nur lesendes Skript verifiziert das Harness und jeden Plan gegen die Spezifikation, versteht beide Plan-Lebenszyklen und beendet sich mit einem CI-freundlichen Code.
 - **Instruktionslast gemessen und veröffentlicht.** Ein committetes Skript veröffentlicht zwei Messwerte pro Flow — das Einstiegs-Bundle, das er zu Beginn einer Sitzung lädt, und den End-to-End-Pfad, sobald seine eigentlichen Trigger auslösen — dazu, was jeder Wert ausschließt, sodass die Einstiegszahl allein nie als Gesamtkosten eines Laufs gelesen wird. Die Ergebnisse, Zunahmen eingeschlossen, werden als Bytes veröffentlicht, niemals als Token- oder Kostenprozente.
+- **Eine evidenzbasierte Aufzeichnungsschicht.** Unveränderlicher Vertrag (contract.json), Append-Only-Event-Journal (journal.ndjson), Belege und beobachtete Gates garantieren echten Nachweis.
+- **Sichere Multi-Agenten-Delegation & Schwarm-Autonomie.** Parallele Aufgabenausführung in getrennten Worktrees, Handoff-Pakete und epochengeschützte Stafette ermöglichen Koordination ohne Drift.
 
 ## Ehrliche Grenzen
 

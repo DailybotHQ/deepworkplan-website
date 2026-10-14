@@ -33,7 +33,7 @@ skill ของ Deep Work Plan คือตัวกำหนดเส้นท�
 
 คำสั่ง slash บาง ๆ ส่งต่อไปยัง sub-skill และส่วนเสริม
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — ลูปวางแผน-ดำเนินการ-ตรวจสอบ
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — ลูปวางแผน-ดำเนินการ-ตรวจสอบ
 - `skill-create`, `agent-create` — ส่งต่อไปยัง sub-skill ชื่อ author
 - `lib-upgrade` — ส่งต่อไปยังส่วนเสริม dependency-upgrade (ติดตั้งก็ต่อเมื่อยอมรับส่วนเสริมนั้นเท่านั้น)
 

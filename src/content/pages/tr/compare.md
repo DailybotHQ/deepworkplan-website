@@ -1,7 +1,7 @@
 ---
-title: "Deep Work Plan alternatiflerle karşılaştırıldığında"
-description: "Deep Work Plan’in spec araçları, ajan çerçeveleri ve satıcı plan modlarıyla ilişkisi: kendi terimleriyle, kaynaklar ve inceleme tarihiyle."
-lastUpdated: 2026-09-11
+title: "Deep Work Plan in Spesifikasyon Odaklı Araçlarla Karşılaştırması"
+description: "Deep Work Plan in spesifikasyon odaklı araçlar, ajan çerçeveleri ve sağlayıcı plan modlarıyla ilişkisi: resmi kaynaklar ve inceleme tarihi."
+lastUpdated: 2026-10-14
 ---
 
 ## Deep Work Plan ve alternatifler
@@ -16,7 +16,7 @@ Her yetenek üç değerle tanımlanır. Bir yeteneğin bir araçta nerede olduğ
 - **İsteğe bağlı veya eklentiyle**
 - **Kapsam dışı**
 
-Son incelenme: 2026-09-11
+Son incelenme: 2026-10-14
 
 ## Alternatifler, kendi terimleriyle
 
@@ -74,6 +74,8 @@ Her yetenek araç başına nerede. Yerleşik, isteğe bağlı veya eklentiyle, v
 - **Oturumları ve ajanları atlatan durum.** README onay kutuları, görev günlükleri, sınırlı çalışma indeksi ve makine tarafından okunabilir durum dosyası her sınırda yazılır; böylece başka bir oturum veya ajan diskten devam eder. Yarıda kesilen plan oluşturma bile kurtarılabilir.
 - **Reponun kendisi için uyumluluk denetleyicisi.** Salt okunur bir betik harness’ı ve her planı spesifikasyona karşı doğrular, her iki plan yaşam döngüsünü anlar ve CI-dostu kodla çıkar.
 - **Ölçülen ve yayımlanan talimat yükü.** Commit edilmiş bir betik her akış için iki ölçüm yayımlar — bir oturumun başında yüklenen giriş paketi ve gerçek tetikleyiciler devreye girdiğinde ortaya çıkan uçtan uca yol — ayrıca her ölçümün neyi hariç tuttuğunu da; böylece yalnızca giriş rakamı bir çalışmanın toplam maliyeti olarak okunmaz. Sonuçlar, artışlar dahil, byte olarak yayımlanır — asla token veya maliyet yüzdesi olarak değil.
+- **Kanıt destekli kayıt katmanı.** Değişmez sözleşme (contract.json), salt-eklenir olay günlüğü (journal.ndjson) ve gözlemlenen geçitler tamamlanmayı objektif olarak kanıtlar.
+- **Güvenli çoklu ajan delegasyonu ve sürü otonomisi.** Ayrılmış worktree lerde paralel görevler, doğrulanana kadar bekletilen bulgular ve yapılandırılmış devirler sapmaları önler.
 
 ## Dürüst sınırlar
 

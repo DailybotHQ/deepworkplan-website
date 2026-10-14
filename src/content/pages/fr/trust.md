@@ -23,11 +23,14 @@ Traitez la skill comme non fiable tant que vous ne l'avez pas vérifiée. Chaque
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Téléchargez les checksums pour la version à installer (remplacez vX.Y.Z) :
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # une sortie non nulle signifie qu'un fichier ne correspond pas — arrêtez
 ```
+
+Le tableau des versions épinglées de l’écosystème dans [/init.md#trust-and-verification](/init.md#trust-and-verification) répertorie les empreintes vérifiées.
 
 Les versions sont **checksummées, pas signées** — la signature (cosign ou GPG du mainteneur) est la prochaine étape documentée, pas une garantie actuelle. Comme tout est ouvert, vous pouvez aussi comparer n'importe quel fichier avec le dépôt à son tag.
 
@@ -59,4 +62,4 @@ Signalez les problèmes de sécurité **en privé via le système de signalement
 - [Politique de sécurité du site web](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Politique de sécurité et modèle de menaces de la skill](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Lire la méthodologie](/methodology)
-- [Adoption (init)](/init)
+- [Adoption (init)](/fr/quickstart)

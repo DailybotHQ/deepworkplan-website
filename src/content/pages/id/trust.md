@@ -23,11 +23,14 @@ Perlakukan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Setiap 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Unduh checksum untuk rilis yang ingin Anda pasang (ganti vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # keluaran non-zero berarti file tidak cocok — berhenti
 ```
+
+Tabel pin ekosistem di [/init.md#trust-and-verification](/init.md#trust-and-verification) mencantumkan digest tersemat untuk paket dan addon.
 
 Rilis **ber-checksum, bukan ditandatangani** — penandatanganan (cosign atau GPG pengelola) adalah langkah berikutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file mana pun terhadap repositori pada tag-nya.
 
@@ -59,4 +62,4 @@ Laporkan masalah keamanan **secara pribadi melalui pelaporan kerentanan privat G
 - [Kebijakan keamanan situs web](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Kebijakan keamanan skill & model ancaman](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Baca metodologinya](/methodology)
-- [Adopsi (init)](/init)
+- [Adopsi (init)](/id/quickstart)

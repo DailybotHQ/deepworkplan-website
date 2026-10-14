@@ -33,7 +33,7 @@ La skill de Deep Work Plan es un enrutador más nueve sub-skills:
 
 Comandos de barra ligeros delegan en las sub-skills y los addons:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — el bucle planificar-ejecutar-verificar.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — el bucle planificar-ejecutar-verificar.
 - `skill-create`, `agent-create` — delegan en la sub-skill author.
 - `lib-upgrade` — delega en el addon dependency-upgrade (se instala solo cuando se acepta ese addon).
 

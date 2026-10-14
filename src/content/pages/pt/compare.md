@@ -1,7 +1,7 @@
 ---
-title: "Deep Work Plan comparado com as alternativas"
-description: "O Deep Work Plan frente a ferramentas de especificação, frameworks de agentes e modos de plano nativos: cada qual em seus termos, com fontes e data de revisão."
-lastUpdated: 2026-09-11
+title: "Deep Work Plan comparado a ferramentas guiadas por especificações e agentes"
+description: "Como o Deep Work Plan se compara com ferramentas guiadas por especificação, frameworks de agentes e modos de plano: fontes públicas e data de revisão."
+lastUpdated: 2026-10-14
 ---
 
 ## O Deep Work Plan e as alternativas
@@ -16,7 +16,7 @@ Três valores descrevem cada capacidade. Eles dizem onde uma capacidade vive em 
 - **Opcional ou por extensão**
 - **Fora do escopo**
 
-Última revisão: 2026-09-11
+Última revisão: 2026-10-14
 
 ## As alternativas, em seus próprios termos
 
@@ -74,6 +74,8 @@ Onde cada capacidade vive, por ferramenta. Integrado, opcional ou por extensão,
 - **Estado que sobrevive a sessões e agentes.** Caixas de seleção do README, logs de tarefa, um índice de trabalho delimitado e um arquivo de estado legível por máquina são escritos em cada fronteira, então outra sessão ou outro agente continua a partir do disco. Até mesmo uma criação de plano interrompida é recuperável.
 - **Um verificador de conformidade para o próprio repositório.** Um script somente leitura verifica o harness e cada plano contra a especificação, entende os dois ciclos de vida do plano e sai com um código amigável a CI.
 - **Carga de instrução medida e publicada.** Um script comitado publica duas medições por fluxo — o pacote de entrada que carrega no início de uma sessão, e o caminho de ponta a ponta quando seus gatilhos reais disparam —, além do que cada uma exclui, de modo que o número de entrada nunca seja lido como o custo total de uma execução. Os resultados, incluindo os aumentos, são publicados como bytes, nunca como porcentagens de tokens ou de custo.
+- **Uma camada de registro respaldada por evidências.** Contrato imutável (contract.json), diário de eventos append-only (journal.ndjson), recibos criptográficos e gates observados provam a conclusão do trabalho.
+- **Delegação multiagente segura e autonomia de enxame.** Execução paralela segura em worktrees dedicadas, achados afirmados até a validação em gates, pacotes de handoff e sucessão de líderes evitam desvios.
 
 ## Limitações honestas
 

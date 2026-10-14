@@ -33,7 +33,7 @@ Skill Deep Work Plan to router oraz dziewięć sub-skilli:
 
 Cienkie komendy slash delegują do sub-skilli i dodatków:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — pętla plan-wykonanie-weryfikacja.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — pętla plan-wykonanie-weryfikacja.
 - `skill-create`, `agent-create` — delegują do sub-skilla author.
 - `lib-upgrade` — deleguje do dodatku dependency-upgrade (instalowanego tylko wtedy, gdy ten dodatek zostanie zaakceptowany).
 
