@@ -19,24 +19,31 @@ Một Deep Work Plan là một thư mục các tệp markdown. Hình dạng củ
 Một kế hoạch là một thư mục dưới `.dwp/plans/` được đặt tên `PLAN_001_<slug>/`. Nó chứa:
 
 
+- `manifest.json` — manifest kế hoạch và siêu dữ liệu.
+- `contract.json` — hợp đồng thực thi chính thức.
+- `journal.ndjson` — nhật ký sự kiện chỉ ghi thêm bất biến.
+- `state.json` — trạng thái thực thi hiện tại và hình chiếu.
 - `README.md` — tổng quan kế hoạch: mục tiêu, tài liệu nguồn, bảng tác vụ và trạng thái.
-- Một tệp cho mỗi tác vụ, đặt tên `<n>.task_<slug>.md`.
-- `PROGRESS.md` — một nhật ký chạy của quá trình thực thi.
+- Các tệp tác vụ, đặt tên `<n>.task_<slug>.md`.
+- `PROGRESS.md` — nhật ký thực thi chỉ ghi thêm.
+- `analysis_results/` — kết quả phân tích, báo cáo kiểm toán và bằng chứng.
 
 
 Gói 7.x hiện tại mặc định tạo kế hoạch v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; việc di chuyển cần yêu cầu rõ ràng. Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v6 và v7 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
 
 ## Cấu trúc tệp tác vụ
 
-Mỗi tệp tác vụ được đặt tên `<n>.task_<slug>.md` và tuân theo cấu trúc mười phần: Goal, Context, Touched Surface, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, và Completion & Log. Các phần luôn xuất hiện theo thứ tự đó để bất kỳ người đọc nào cũng biết tìm ở đâu. Mỗi tác vụ neo lại vào mục tiêu của kế hoạch trước khi nó hành động, điều này giữ cho agent không trôi dạt qua một chân trời dài, nhiều giờ.
+Mỗi tệp tác vụ được đặt tên `<n>.task_<slug>.md` và tuân theo cấu trúc mười phần được trình bày chi tiết trong [Vòng lặp lõi](/methodology/core-loop#c%E1%BA%A5u-tr%C3%BAc-t%C3%A1c-v%E1%BB%A5-m%C6%B0%E1%BB%9Di-ph%E1%BA%A7n). Các phần luôn xuất hiện theo cùng thứ tự để người đọc lập tức biết tìm ở đâu. Mỗi tác vụ neo lại vào mục tiêu của kế hoạch trước khi hành động, giúp agent không bị trôi dạt qua một chân trời dài.
 
 ## Final Review
 
-Mọi kế hoạch phải kết thúc bằng đúng một tác vụ bắt buộc: **Final Review**. Nó khép lại kế hoạch bằng ba lượt đi có thứ tự — không gì trong bước rà soát bảo mật bị nới lỏng:
+Mọi kế hoạch phải kết thúc bằng đúng một tác vụ bắt buộc: **Final Review**. Nó khép lại kế hoạch qua năm bước tuần tự — không có gì trong bước rà soát bảo mật bị nới lỏng:
 
-1. **Bước rà soát bảo mật** — kiểm toán mọi thứ kế hoạch đã thay đổi để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới, và giữ `docs/SECURITY.md` luôn cập nhật. Bảo mật không phải là một luồng công việc riêng được gắn vào cuối: mỗi kế hoạch để lại các thay đổi của chính nó đã được kiểm toán, và một phát hiện nghiêm trọng chặn việc hoàn tất.
-2. **Kiểm chứng trạng thái cuối cùng** — kiểm chứng đầy đủ của repository chạy và đạt trên trạng thái liên quan cuối cùng, sau lần sửa cuối cùng.
-3. **Đối chiếu skill** — mỗi tác vụ đã ghi lại kết luận về skill của riêng nó trong khi bằng chứng còn mới; bước rà soát đối chiếu sổ cái. Executive Report vẫn khả dụng theo yêu cầu.
+1. **Lượt rà soát bảo mật với đánh giá cục bộ bắt buộc** — kiểm toán mọi thứ kế hoạch đã thay đổi để tìm bí mật, rủi ro tiêm nhiễm và bề mặt tấn công mới bằng cách chạy đánh giá cục bộ AI Diff Reviewer và giữ `docs/SECURITY.md` luôn cập nhật.
+2. **Kiểm chứng trạng thái cuối cùng** — toàn bộ bộ kiểm thử, linter và kiểm tra kiểu của repository chạy và vượt qua trên trạng thái cuối cùng sau sửa đổi cuối.
+3. **Đối chiếu quyết định về skill** — xác minh rằng mỗi tác vụ đã ghi lại quyết định skill cục bộ, đối chiếu các ứng viên trong `analysis_results/SKILLS_CANDIDATES.md`.
+4. **Đối chiếu tài liệu** — liên kết bề mặt chạm tới của mỗi tác vụ làm thay đổi hành vi với tài liệu (`docs/TESTING_GUIDE.md`, kiến trúc, `AGENTS.md`).
+5. **Hoàn tất và khép lại** — kiểm tra tính nhất quán giữa hình chiếu cuối cùng và các thành phần đã tạo, ghi biên nhận `analysis_results/FINALIZATION.json`, và chính thức khép lại kế hoạch.
 
 ## Các quy ước README và PROGRESS
 
