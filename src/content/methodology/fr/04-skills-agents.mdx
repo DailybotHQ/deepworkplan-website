@@ -1,6 +1,6 @@
 ---
 title: Skills et agents
-description: "La différence entre skills et agents, l’onboarding de dépôt fondé sur le raisonnement, et le répertoire .agents avec sa convention de lien symbolique .claude vers .agents."
+description: "La distinction entre skills et agents, l’onboarding fondé sur le raisonnement, et le répertoire .agents avec liens symboliques de compatibilité."
 order: 4
 lang: fr
 summary: Comment les skills réutilisables, les agents spécialisés et l’onboarding de dépôt s’articulent.
@@ -37,19 +37,20 @@ Au-delà de la rédaction, DWP fournit des **add-ons**. Sept sont facultatifs �
 
 Avant de créer ou d’exécuter un plan, un agent s’intègre au dépôt. L’onboarding est **fondé sur le raisonnement, pas sur un script** : l’agent lit la structure, la documentation et la configuration du dépôt pour bâtir un modèle mental plutôt que d’exécuter un script d’installation figé.
 
-Pendant l’onboarding, l’agent identifie l’archétype du dépôt (individuel versus orchestrateur), les commandes de build, de test et de lint, les conventions existantes de style, de structure et de nommage, ainsi que les skills et agents déjà disponibles. Cette compréhension est ce qui permet à l’agent de planifier et d’exécuter d’une manière qui épouse le dépôt au lieu de le contrarier.
+Pendant l’onboarding, l’agent identifie l’archétype du dépôt (dépôt individuel, hub orchestrateur ou espace de travail d’agent), les commandes de build, de test et de lint, les conventions existantes de style, de structure et de nommage, ainsi que les skills et agents déjà disponibles. Cette compréhension est ce qui permet à l’agent de planifier et d’exécuter d’une manière qui épouse le dépôt au lieu de le contrarier.
 
 La chaîne d’outils de test et de validation reçoit une attention particulière, parce que les portes de validation sont ce qui rend fiable le résultat d’un plan. Lorsqu’un dépôt possède déjà des tests et des linters, l’onboarding consigne leurs véritables commandes et conventions. Lorsqu’il n’en a aucun, l’onboarding ne se contente pas de noter le manque — il propose une configuration adaptée à la stack et l’inscrit dans le guide de tests du dépôt, afin que chaque plan futur ait une véritable porte à exécuter plutôt qu’une porte indéfinie.
 
-## Le répertoire `.agents/` et le lien symbolique `.claude → .agents`
+## Le répertoire `.agents/` et liens symboliques de compatibilité
 
 DWP rassemble tout ce qui définit le comportement des agents — skills, commandes, définitions d’agents, documentation interne et réglages — sous un seul répertoire canonique, `.agents/`. Le nom signale que le contenu est partagé entre agents plutôt que lié à un seul outil.
 
-Pour la rétrocompatibilité avec les outils qui lisaient historiquement depuis `.claude/`, ce chemin est un lien symbolique vers `.agents/` :
+Pour la rétrocompatibilité avec les outils qui lisaient historiquement depuis `.claude/` ou `.cursor/`, ces chemins sont des liens symboliques vers `.agents/` :
 
 ```bash
-ls -la .claude
+ls -la .claude .cursor
 # .claude -> .agents
+# .cursor -> .agents
 ```
 
-Chaque chemin `.claude/...` se résout de façon transparente vers son équivalent `.agents/...`, de sorte que les anciens outils continuent de fonctionner tandis que le nouveau contenu référence l’emplacement canonique `.agents/`. Les skills et les agents s’éditent via les vrais fichiers sous `.agents/`, jamais via le lien symbolique.
+Chaque chemin `.claude/...` et `.cursor/...` se résout de façon transparente vers son équivalent `.agents/...`, de sorte que les anciens outils continuent de fonctionner tandis que le nouveau contenu référence l’emplacement canonique `.agents/`. Les skills et les agents s’éditent via les vrais fichiers sous `.agents/`, jamais via le lien symbolique.
