@@ -242,11 +242,16 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 
 const rows = [
   { depth: 0, path: '.dwp/', ann: t.ann.root, accent: true },
+  { depth: 1, path: 'config.json', ann: '' },
   { depth: 1, path: 'plans/', ann: '' },
   { depth: 2, path: 'PLAN_001_<slug>/', ann: '' },
   { depth: 3, path: 'README.md', ann: '' },
   { depth: 3, path: 'PROGRESS.md', ann: '' },
   { depth: 3, path: '<n>.task_<slug>.md', ann: '' },
+  { depth: 3, path: 'manifest.json', ann: '' },
+  { depth: 3, path: 'contract.json', ann: '' },
+  { depth: 3, path: 'journal.ndjson', ann: '' },
+  { depth: 3, path: 'state.json', ann: '' },
   { depth: 3, path: 'analysis_results/', ann: t.ann.results },
   { depth: 4, path: 'SECURITY_REVIEW.md', ann: t.ann.review },
   { depth: 4, path: 'EXECUTIVE_REPORT.md', ann: t.ann.report },

@@ -49,7 +49,7 @@ New plans receive monotonically increasing numeric IDs with at least three digit
 
 <TaskAnatomy lang="en" class="not-prose my-10" />
 
-Every task file follows the ten normative sections rendered above, in the order defined by the installed skill.
+Every task file follows the ten normative sections rendered above, in the order defined by the installed skill. In a v7 plan the outcome contract can also mark a task `parallel_safe`: an assertion, set at creation, that the task can run in a delegate without interleaving with sibling work. The marker authorizes nothing without the contract's `agent_delegation` grant ([Delegation](/spec/delegation)).
 ## The Touched Surface
 
 The Touched Surface is the contract between what a task changes and what must be validated. It exists so that validation is **selected by effect**, not by habit, and so a later reader can see why a gate was chosen. A behavior-changing task MUST record:
@@ -122,13 +122,15 @@ Every conformant plan authored under this version ends with exactly **one** mand
 
 The Final Review MUST, in order:
 
-**(a) Security pass** — review the plan's full accumulated change set for hardcoded secrets, injection risks, new attack surface, weakened auth, and sensitive data in logs or docs; audit introduced dependencies; verify `docs/SECURITY.md` still reflects reality; write the security review report even when clean. A critical finding is fixed — or explicitly accepted by the user — before the plan completes.
+**(a) Security pass** — review the plan's full accumulated change set for hardcoded secrets, injection risks, new attack surface, weakened auth, and sensitive data in logs or docs; audit introduced dependencies; verify `docs/SECURITY.md` still reflects reality; write the security review report even when clean. A critical finding is fixed — or explicitly accepted by the user — before the plan completes The pass includes the required local AI Diff Reviewer review of the plan's full range; a missing reviewer is a recorded `local reviewer not installed` finding, never a silent skip.
 
 **(b) Final-state validation** — the repository's complete applicable validation runs and passes on the final relevant state.
 
 **(c) Skills reconciliation** — every task carries a skills disposition and every recorded candidate has a disposition; no second discovery report.
 
-**(d) Completion** — report completion with deliverables, validation evidence, and limitations; offer the Executive Report once. The plan is complete whether or not the offer is answered.
+**(d) Documentation reconciliation** — every behavior-changing task's touched surface is checked against the documents that register it (the gate registry first, then architecture and module docs, then the `AGENTS.md` index); misses are fixed inside the review and the affected validations rerun.
+
+**(e) Completion** — the plan's records agree (task list, progress log and, in v6 and v7 plans, the journal-derived snapshot and receipt); report completion with deliverables, validation evidence, and limitations; offer the Executive Report once. The plan is complete whether or not the offer is answered.
 
 The Final Review runs sequentially after all other tasks and is never placed in a parallel group.
 
@@ -165,13 +167,16 @@ The agent MUST trust completed (`[x]`) marks and MUST NOT re-validate completed 
 
 <CoreLoop lang="en" class="not-prose my-10" />
 
-DWP defines five operations:
+DWP defines six plan operations:
 
 - **create** — Generate a new plan from a goal.
 - **execute** — Execute the plan task by task.
 - **refine** — Modify an existing plan.
 - **resume** — Resume an interrupted plan.
 - **status** — Report plan status without executing.
+- **verify** — Check repository and plan conformance, read-only.
+
+Three more sub-skills complete the installed pack: **onboard** (make a repository AI-first), **author** (create or update the repository's own skills, agents and commands) and **upgrade** (move the installed skill to a newer release with consent, never migrating existing plans). The router and these nine sub-skills ship as one skill pack.
 
 ## Output workspace
 
