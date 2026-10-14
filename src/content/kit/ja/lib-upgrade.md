@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "dependency-upgrade アドオンを通じて、リポジトリの依存関係を検証され取り消し可能なバッチで安全に更新する。そのアドオンが受け入れられたときにのみインストールされる。"
+description: "dependency-upgrade アドオンを通じて、リポジトリの依存関係を検証され取り消し可能なバッチで安全に更新する。そのアドオンが受け入れられたときにのみインストール。"
 kind: command
 lang: ja
 order: 9

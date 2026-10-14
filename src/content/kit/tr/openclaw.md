@@ -15,7 +15,7 @@ OpenClaw, zamanlanmış dönüşlerle uzun ömürlü çalışma alanları çalı
 
 ## Destek düzeyi
 
-**Tam** — OpenClaw, `AGENTS.md`'yi okur ve skill'i AgentSkills standardı aracılığıyla yükler. Tüm DWP alt skill'leri (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`) kullanılabilir.
+**Tam** (Belgelenmiş) — OpenClaw, `AGENTS.md` dosyasını okur ve beceriyi AgentSkills standardı üzerinden yükler. Tüm DWP alt becerileri (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`) mevcuttur.
 
 ## Kurulum
 
@@ -50,7 +50,7 @@ OpenClaw'ın zamanlama ilkelkeleri doğrudan DWP'nin devam modeline eşlenir:
 Operasyonel olarak:
 
 1. Bir insan etkileşimli olarak bir plan oluşturur ve onaylar. Onay kontrol noktasıdır — gözetimsiz dönüşler tek dönüşte oluşturup yürütemez.
-2. Plan, makine tarafından okunabilir durum katmanını (`manifest.json` + `state.json`) taşımak ZORUNDADIR. Git olmayan bir çalışma alanında, `state.json` çökmeden güvenli devamı mümkün kılandır. Bkz. [Plan durumu](/spec/plan-state).
+2. Plan, makine tarafından okunabilir durum katmanını (`manifest.json` + `state.json`) taşımak ZORUNDADIR. Git olmayan bir çalışma alanında, `state.json` çökmeden güvenli devamı mümkün kılandır. Bkz. [Plan durumu](/spec/plan-state). v6 ve v7 planlarında durum, durum dosyalarını manuel olarak yeniden yazmak yerine `ledger.py project` aracılığıyla yalnızca ekleme günlüğünden (`journal.ndjson`) yansıtılır.
 3. Her kalp atışı veya cron dönüşü en fazla bir görev yürütür, doğrulama kapısını geçer, `state.json`'u atomik olarak günceller ve verir.
 4. Herhangi bir durma koşulunda ajan, `state.json`'un `blocked` alanını yazar ve çalışma alanının normal kanalı aracılığıyla bildirir. Sonraki insan bakışı — veya kalp atışı raporu — tam olarak neye ihtiyaç duyulduğunu görür.
 

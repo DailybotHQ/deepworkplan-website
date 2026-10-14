@@ -1,6 +1,6 @@
 ---
 title: SvelteKit
-description: "Preset onboarding cho dự án SvelteKit, với gợi ý suy luận về route, hàm load, server endpoint, adapter được chọn và testing."
+description: "Preset onboarding cho dự án SvelteKit, với gợi ý suy luận về route, hàm load, server endpoint, adapter được chọn và testing với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 13

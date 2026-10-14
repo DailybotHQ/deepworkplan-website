@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "Mevcut depoda yeni, yeniden kullanılabilir bir skill — parametreli, oturum içi bir prosedür — oluşturur; bunu author alt skill’i aracılığıyla yapar ve kataloğu eşitler."
+description: "Mevcut depoda yeni, yeniden kullanılabilir bir skill — parametreli, oturum içi bir prosedür — oluşturur; bunu author alt skill’i aracılığıyla yapar ve kataloğu."
 kind: command
 lang: tr
 order: 7

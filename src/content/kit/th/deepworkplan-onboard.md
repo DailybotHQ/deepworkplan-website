@@ -44,6 +44,11 @@ repository หนึ่งสอดคล้องกับมาตรฐาน
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (เพิ่มเหตุการณ์ `delegation`)
 - **Plan snapshot (live projection ที่ใช้ร่วมกับ v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (ใช้ร่วมกับ v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **การกำหนดค่าคลังเก็บโค้ด:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **ตัวอธิบายแอดออน:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **แพ็กเกจส่งมอบงานสวอร์ม:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **บันทึกการวัดประสิทธิภาพ:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **บันทึกสิ่งที่ได้เรียนรู้:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 แผน v6 ยังคงใช้สคีมา v6 ของตน ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contract](https://deepworkplan.com/schema/plan-contract/v6.json), [journal event](https://deepworkplan.com/schema/journal-event/v6.json)); แผน v5 ที่มีอยู่ยังคงใช้สคีมาสถานะ v5 และแผนเก่าจะไม่ถูกเขียนทับโดยไม่มีการแจ้ง
 

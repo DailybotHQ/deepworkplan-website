@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: piani su misura per il lavoro"
-description: "Deep Work Plan v4 fa sì che il formato del piano segua il lavoro, e non il contrario: un piano Lite è ora una proposta completa ed eseguibile per i task delimitati, e la fase separata di bozza è stata eliminata."
+description: "Deep Work Plan v4 adatta il formato al lavoro: i piani Lite diventano proposte complete ed eseguibili per compiti circoscritti, senza bozze separate."
 date: 2026-09-11
 version: "v4 · Piani Lite-first"
 kind: release

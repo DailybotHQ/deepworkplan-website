@@ -30,4 +30,6 @@ La decisione architetturale è GO: v6 mantiene la stessa metodologia con una str
 
 I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
 
-Versione installata della skill: **6.0.2**. Il pacchetto 6.x crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita con anteprima.
+La versione 6.1.0 (2026-10-06) ha introdotto metriche di campo di benchmark opzionali e apprendimenti del piano.
+
+Versione installata della skill: **6.1.0** (versione finale di 6.x). Il pacchetto 6.x crea per impostazione predefinita i nuovi piani in v6. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita con anteprima.

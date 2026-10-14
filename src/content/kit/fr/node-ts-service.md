@@ -1,6 +1,6 @@
 ---
 title: Service Node / TS
-description: "Un preset d’onboarding pour les services Node et TypeScript et les API serverless, avec des indices de raisonnement pour le cycle de vie des requêtes, les intégrations et les tests."
+description: "Un preset d’onboarding pour les services Node et TypeScript et les API serverless, avec des indices pour le cycle de vie des requêtes, les intégrations et les."
 kind: preset
 lang: fr
 order: 4

@@ -1,6 +1,6 @@
 ---
 title: Lite 계획
-description: "Lite 계획: README.md 안에 인라인으로 존재하는 간결하고 완전히 실행 가능한 작업 레코드, 그 생성과 형식 선택, 그리고 Full 계획으로의 승격을 규정한다."
+description: "Lite 계획: README.md 안에 인라인으로 담긴 간결하고 실행 가능한 작업 기록, 형식 선택, Full 계획으로의 승격."
 order: 3
 lang: ko
 section: Workflow
@@ -52,4 +52,4 @@ Lite 계획은 `/dwp-refine promote {plan_name}`을 통해 언제든 Full로 **�
 
 승격은 반대 방향으로 자동으로 실행되는 일이 결코 없습니다: Full 계획이 조용히 Lite로 축소되지 않습니다. 이전 스펙 버전에서 작성된 계획 — `plan_format` 필드가 전혀 없는 v1 Full 계획을 포함 — 은 기록된 형태를 그대로 유지하며 적합한 상태로 남습니다; `refine` 세션이 의도적으로 그것을 마이그레이션할 수(MAY) 있지만, 암묵적으로 그렇게 하는 장치는 없습니다.
 
-`manifest.json`의 `plan_format`은 한 번 작성되면 불변입니다; 승격은 `state.json`의 `format`을 변경하고 그 `promotion` 마커를 지우며, 매니페스트를 다시 쓰는 일은 결코 없습니다. 정확한 `plan_format`, `format`, `materialization`, `approval`, `promotion`, `locator` 필드와 그 v2 스키마 URL은 [계획 상태](/spec/plan-state)를 참고하십시오.
+`manifest.json`의 `plan_format`은 한 번 작성되면 불변입니다; 승격은 `state.json`의 `format`을 변경하고 그 `promotion` 마커를 지우며, 매니페스트를 다시 쓰는 일은 결코 없습니다. 정확한 `plan_format`, `format`, `materialization`, `approval`, `promotion`, `locator` 필드와 그 스키마 URL(v2에서 도입되었으며, v5 계획은 `plan-manifest/v5`와 `plan-state/v5`를 사용)은 [계획 상태](/spec/plan-state)를 참고하십시오. v6 및 v7 계획에서는 이 축들이 저널에 기록되고 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 스냅샷으로 투영됩니다([기록 레이어](/spec/record-layer)).

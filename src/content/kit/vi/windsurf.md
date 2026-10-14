@@ -1,6 +1,6 @@
 ---
 title: Windsurf
-description: "Adapter DWP cho Windsurf, với hỗ trợ đầy đủ qua hệ thống quy tắc và các quy trình lệnh markdown được gọi bằng tiền tố dấu thăng."
+description: "Adapter DWP cho Windsurf, với hỗ trợ đầy đủ qua hệ thống quy tắc và các quy trình lệnh markdown được gọi bằng tiền tố dấu thăng với xác minh đầy đủ."
 kind: adapter
 lang: vi
 order: 8
@@ -15,7 +15,7 @@ Windsurf hỗ trợ DWP thông qua hệ thống quy tắc và các quy trình l�
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — Windsurf đọc quy tắc dự án và chạy mọi lệnh dwp-* từ file quy trình của nó.
+**Đầy đủ** (Đã kiểm thử cài đặt) — Windsurf đọc các quy tắc của dự án và chạy mọi lệnh dwp-* từ tệp quy trình của nó. Tuyến đường được xác nhận bởi các bộ kiểm thử tự động.
 
 ## Cài đặt
 

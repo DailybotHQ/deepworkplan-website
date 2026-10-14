@@ -1,6 +1,6 @@
 ---
 title: Rust
-description: "Preset onboarding cho dự án Rust, với gợi ý suy luận về crate, module, Cargo workspace, feature và cổng cargo test/clippy/build."
+description: "Preset onboarding cho dự án Rust, với gợi ý suy luận về crate, module, Cargo workspace, feature và cổng cargo test/clippy/build với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 19

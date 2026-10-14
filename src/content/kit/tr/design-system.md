@@ -1,6 +1,6 @@
 ---
 title: Tasarım sistemi
-description: "Kullanıcıya dönük bir arayüz yüzeyi olan herhangi bir depoya DESIGN.md (docs/ altında, AGENTS.md’den dizinlenen) kazandıran, tercihe dayalı bir eklenti — görsel UI, CLI çıktısı ve konuşma profillerini tek dosyada kapsar."
+description: "Arayüzü olan depolara docs/ altında AGENTS.md'den dizinlenen, görsel UI, CLI çıktısı ve konuşma profillerini kapsayan bir DESIGN.md sunan eklenti."
 kind: addon
 lang: tr
 order: 4
@@ -39,6 +39,28 @@ Asla gerekli değildir — sıfır isteğe bağlı eklentili bir depo tamamen uy
 ## İsteğe bağlı komut
 
 Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya tazelemek için deponun `.agents/commands/` dizinine bir `/design-system` yönlendiricisi kurabilir. Komutu kurmak isteğe bağlıdır; reddedilen bir eklenti hiçbirini kurmaz.
+
+
+## v7 belirtimi
+
+| Öğe | Değer |
+|---|---|
+| Ürün | DeepWorkPlan design-system eklentisi |
+| Kayıt anahtarı |  içinde  |
+| Tanımlayıcı |  (arayüz 1) |
+| Hedef dosya |  üzerinden dizine eklenen  |
+| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş () |
+
+
+## v7 belirtimi
+
+| Öğe | Değer |
+|---|---|
+| Ürün | DeepWorkPlan design-system eklentisi |
+| Kayıt anahtarı | `.dwp/config.json` içinde `design-system` |
+| Tanımlayıcı | `addons/design-system/addon.json` (arayüz 1) |
+| Hedef dosya | `AGENTS.md` üzerinden dizine eklenen `docs/DESIGN.md` |
+| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.8.1`) |
 
 ## Özellik bazlı tasarım belgeleriyle ilişkisi
 

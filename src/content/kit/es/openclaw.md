@@ -1,6 +1,6 @@
 ---
 title: OpenClaw
-description: "El adaptador DWP para OpenClaw: escaneo nativo de .agents/skills, mapeo de ejecución desatendida y continuación de planes por cron para espacios de trabajo de agente autónomos."
+description: "El adaptador DWP para OpenClaw: escaneo nativo de .agents/skills, mapeo de ejecución desatendida y continuación de planes por cron para espacios de trabajo."
 kind: adapter
 lang: es
 order: 10
@@ -15,7 +15,7 @@ OpenClaw es una plataforma de agentes autónomos que ejecuta espacios de trabajo
 
 ## Nivel de soporte
 
-**Completo** — OpenClaw lee `AGENTS.md` y carga la skill mediante el estándar AgentSkills. Todas las sub-skills de DWP (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`) están disponibles.
+**Completo** (Documentado) — OpenClaw lee `AGENTS.md` y carga la skill mediante el estándar AgentSkills. Todas las sub-skills de DWP (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`) están disponibles.
 
 ## Instalación
 
@@ -50,7 +50,7 @@ Las primitivas de programación de OpenClaw se corresponden directamente con el 
 En la práctica:
 
 1. Un ser humano crea y aprueba un plan de forma interactiva. La aprobación es el punto de control — los turnos desatendidos nunca crean y ejecutan en un mismo turno.
-2. El plan debe llevar la capa de estado legible por máquina (`manifest.json` + `state.json`). En un workspace sin git, `state.json` es lo que hace posible la reanudación segura ante fallos. Véase [Estado del plan](/spec/plan-state).
+2. El plan debe llevar la capa de estado legible por máquina (`manifest.json` + `state.json`). En un workspace sin git, `state.json` es lo que hace posible la reanudación segura ante fallos. Véase [Estado del plan](/spec/plan-state). En planes v6 y v7, el estado se proyecta desde el diario de solo adición (`journal.ndjson`) mediante `ledger.py project` en lugar de reescribir manualmente los archivos de estado.
 3. Cada turno de latido o cron ejecuta como máximo una tarea, pasa su puerta de validación, actualiza `state.json` de forma atómica y cede.
 4. Ante cualquier condición de parada, el agente escribe el campo `blocked` de `state.json` e informa a través del canal habitual del workspace. La próxima revisión humana — o el informe del latido — verá exactamente lo que se necesita.
 

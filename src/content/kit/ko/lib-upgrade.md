@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "dependency-upgrade 애드온을 통해 리포지토리의 의존성을 검증되고 되돌릴 수 있는 배치 단위로 안전하게 업그레이드합니다. 그 애드온이 채택될 때만 설치됩니다."
+description: "dependency-upgrade 애드온을 통해 리포지토리의 의존성을 검증되고 되돌릴 수 있는 배치 단위로 안전하게 업그레이드합니다. 그 애드온이 채택될 때."
 kind: command
 lang: ko
 order: 9

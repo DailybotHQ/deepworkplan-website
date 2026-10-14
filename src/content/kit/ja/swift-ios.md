@@ -1,6 +1,6 @@
 ---
 title: Swift / iOS
-description: "Swift および iOS プロジェクト向けのオンボーディングプリセット。SwiftUI または UIKit、依存関係マネージャー、XCTest、リント、xcodebuild に関する推論の手がかりを備える。"
+description: "Swift および iOS プロジェクト向けのオンボーディングプリセット。SwiftUI または UIKit、依存関係マネージャー、XCTest、リント、xcodebuild。"
 kind: preset
 lang: ja
 order: 18

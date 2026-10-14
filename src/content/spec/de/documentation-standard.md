@@ -1,6 +1,6 @@
 ---
 title: Dokumentationsstandard
-description: "Normativer Standard dafür, wie Deep Work Plans ihre Struktur, Aufgaben und Fortschritte dokumentieren: README-Regeln, Statusmarkierungen, die zehnteilige Aufgaben-Anatomie und das Final Review."
+description: "Wie Deep Work Plans Struktur, Aufgaben und Fortschritt dokumentieren: README-Regeln, Statusmarkierungen, die zehnteilige Aufgaben-Anatomie und das Final Review."
 order: 1
 lang: de
 section: Standard
@@ -54,7 +54,7 @@ Alle Überschriften MÜSSEN Satzschreibweise (sentence case) verwenden. Dokument
 
 ## Das Final Review, Aufgaben-lokale Skills-Entscheidungen und der optionale Bericht
 
-Jeder Plan, der unter dieser Version verfasst wird, MUSS mit genau einer verpflichtenden Aufgabe enden: dem **Final Review** — dem Sicherheitstest über den vollständigen Änderungssatz des Plans, der Validierung des Endzustands auf dem letzten relevanten Zustand und dem Abgleich der Skills-Entscheidungen. Ein kritischer Sicherheitsbefund blockiert den Abschluss.
+Jeder Plan, der unter dieser Version verfasst wird, MUSS mit genau einer verpflichtenden Aufgabe enden: dem **Final Review**. Es führt der Reihe nach aus: (a) den Sicherheitstest über den vollständigen Änderungssatz des Plans, einschließlich der erforderlichen lokalen Überprüfung durch den AI Diff Reviewer; (b) die Validierung des Endzustands auf dem letzten relevanten Zustand; (c) den Abgleich der Skills-Entscheidungen; (d) den Dokumentationsabgleich jeder berührten Oberfläche; und (e) den Abschluss, bei dem die Aufzeichnungen des Plans übereinstimmen. Ein kritischer Sicherheitsbefund blockiert den Abschluss.
 
 - **Aufgaben-lokale Skills-Entscheidungen.** Der Completion-&-Log-Abschnitt jeder Aufgabe trägt eine **Skills-Disposition** — `none`, ein Update einer bestehenden Skill oder eines bestehenden Agenten, eine benannte Neuerstellung oder eine Verschiebung mit Begründung und Verantwortlichem. Berechtigte Autorenschaft geschieht innerhalb der erzeugenden Aufgabe, vor ihrem Validierungs-Gate, nach einer Duplikatprüfung gegen den `.agents/`-Katalog; berechtigte Einträge werden als stabile Kandidaten (`T{task}-{seq}`) im Skills-Kandidaten-Ledger des Plans erfasst.
 - **Der Executive Report ist optional, auf Anfrage.** Er wird einmal beim Abschluss angeboten und nur auf explizite Anfrage aus dauerhaften Belegen erzeugt. Bleibt die Antwort aus oder läuft der Plan unbeaufsichtigt, bleibt der Plan ohne ihn abgeschlossen.

@@ -1,0 +1,33 @@
+---
+title: dwp-upgrade
+description: "Controlla aggiornamenti di Deep Work Plan, esamina adattamenti locali e installa tag stabili con consenso esplicito, preservando i piani esistenti."
+kind: command
+lang: it
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Mantieni aggiornati la skill installata di Deep Work Plan e lo standard dichiarato con consenso esplicito.
+
+## Cosa fa
+
+ ispeziona i rilasci a monte alla ricerca di versioni più recenti del pacchetto di skill e dello standard. Segnala le differenze, evidenzia gli adattamenti locali, richiede l'approvazione esplicita prima di apportare modifiche e installa tag stabili senza modificare i piani esistenti in .
+
+## Utilizzo
+
+
+
+## Comportamento
+
+1. **Controllo (sola lettura)** — legge la versione installata da  e interroga i tag git a monte per la versione stabile più recente. Segnala la versione corrente rispetto alla più recente.
+2. **Consenso** — mostra eventuali modifiche o adattamenti locali tramite diff; non scarica né sovrascrive mai file senza conferma esplicita dello sviluppatore.
+3. **Aggiornamento** — installa il tag stabile esatto in , aggiorna gli addon configurati in  e riconcilia l'harness.
+4. **Preservare la cronologia** — i piani esistenti, le prove e i log in  sono una cronologia immutabile e non vengono mai modificati né migrati.
+
+## Alias
+
+- 

@@ -1,6 +1,6 @@
 ---
 title: Nuxt
-description: "Preset onboarding cho dự án Nuxt, với gợi ý suy luận về page, server API route, composable, Nitro server engine và testing."
+description: "Preset onboarding cho dự án Nuxt, với gợi ý suy luận về page, server API route, composable, Nitro server engine và testing với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 14

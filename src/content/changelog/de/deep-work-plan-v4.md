@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: Pläne, die zur Arbeit passen"
-description: "Deep Work Plan v4 sorgt dafür, dass sich das Planformat nach der Arbeit richtet, nicht umgekehrt — ein Lite-Plan ist jetzt ein vollständiger, ausführbarer Vorschlag für begrenzte Aufgaben, und der separate Entwurfsschritt entfällt."
+description: "Deep Work Plan v4 passt das Format der Arbeit an: Lite-Pläne werden zu vollständigen, ausführbaren Vorschlägen für abgegrenzte Aufgaben ohne Entwurf."
 date: 2026-09-11
 version: "v4 · Lite-first-Pläne"
 kind: release

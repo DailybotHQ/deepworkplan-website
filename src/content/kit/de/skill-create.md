@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "Eine neue wiederverwendbare Skill im aktuellen Repository erstellen — eine parametrisierte, in-Sitzung ausgeführte Prozedur — über die author-Sub-Skill, mit synchronem Katalog."
+description: "Eine neue wiederverwendbare Skill im aktuellen Repository erstellen — eine parametrisierte, in-Sitzung ausgeführte Prozedur — über die author-Sub-Skill, mit."
 kind: command
 lang: de
 order: 7

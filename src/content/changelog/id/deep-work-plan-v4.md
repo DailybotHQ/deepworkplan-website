@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: rencana yang sesuai dengan bobot pekerjaannya"
-description: "Deep Work Plan v4 membuat format rencana mengikuti bobot pekerjaan, bukan sebaliknya — rencana Lite kini menjadi proposal lengkap dan langsung dapat dijalankan untuk tugas berbatas, dan tahap draf terpisah dihapuskan."
+description: "Deep Work Plan v4 menyesuaikan format rencana: rencana Lite menjadi proposal lengkap yang dapat dieksekusi untuk tugas terbatas tanpa langkah draf terpisah."
 date: 2026-09-11
 version: "v4 · Rencana Lite-first"
 kind: release

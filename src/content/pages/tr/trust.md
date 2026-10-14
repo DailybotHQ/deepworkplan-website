@@ -23,11 +23,15 @@ Skill'i kontrol edene kadar güvenilmez olarak değerlendirin. Her sürüm, gön
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Kurmayı planladığınız sürümün sağlama toplamlarını indirin (vX.Y.Z ile değiştirin):
+git checkout v7.8.1
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # sıfırdan farklı çıkış, bir dosyanın eşleşmediği anlamına gelir — durun
 ```
+
+[/init.md](/init.md) içindeki ekosistem sabitleme tablosu paket ve eklentilerin özetlerini listeler.
 
 Sürümler **sağlama toplamlarına sahiptir, imzalı değildir** — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.
 
@@ -46,7 +50,7 @@ Güvenlik sorunlarını ilgili depoda **GitHub'ın özel güvenlik açığı bil
 
 ## Dürüst sınırlamalar
 
-- Sürümler sağlama toplamlarına sahiptir, henüz kriptografik olarak imzalanmamıştır — imzalama planlandı, tamamlanmadı.
+- Sürümler sağlama toplamlarına sahiptir, henüz imzalanmamıştır — imzalama planlandı, tamamlanmadı.
 - Deep Work Plan, deponuza karşı otonom bir kodlama ajanı çalıştırır. Önerilen planı ve farklarını gözden geçirin; metodoloji bu inceleme için tasarlanmıştır, onun yerini almak için değil.
 - Buradaki güven iddiaları yalnızca resmi kaynakları tanımlar. Depolardan sapan değiştirilmiş veya üçüncü taraf bir kopya, bu garantilerin hiçbirini taşımaz — önce doğrulayın.
 
@@ -59,4 +63,4 @@ Güvenlik sorunlarını ilgili depoda **GitHub'ın özel güvenlik açığı bil
 - [Web sitesi güvenlik politikası](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Skill güvenlik politikası ve tehdit modeli](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Metodolojiyi okuyun](/methodology)
-- [Benimseme (init)](/init)
+- [Benimseme (init)](/tr/quickstart)

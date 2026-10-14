@@ -1,6 +1,6 @@
 ---
 title: agent-create
-description: "Criar um novo agent no repositório atual — um trabalhador especializado com seu próprio nível de modelo e ferramentas — via a sub-skill author, mantendo o catálogo em sincronia."
+description: "Criar um novo agent no repositório atual — um trabalhador especializado com seu próprio nível de modelo e ferramentas — via a sub-skill author, mantendo o."
 kind: command
 lang: pt
 order: 8

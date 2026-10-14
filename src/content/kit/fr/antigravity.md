@@ -1,6 +1,6 @@
 ---
 title: Antigravity
-description: "L’adaptateur DWP pour Antigravity, avec une prise en charge complète via des procédures de commande en Markdown et le préfixe dièse qui pilotent l’intégralité de la boucle Deep Work Plan."
+description: "L’adaptateur DWP pour Antigravity, avec une support complet via des procédures Markdown et le préfixe dièse qui pilotent l’intégralité de la boucle Deep Work."
 kind: adapter
 lang: fr
 order: 6
@@ -15,7 +15,7 @@ Antigravity prend en charge DWP via des procédures de commande en Markdown.
 
 ## Niveau de prise en charge
 
-**Complet** — chaque commande dwp-* s’exécute depuis son fichier de procédure via la surface de commandes native.
+**Complet** (Validé par l'installation) — chaque commande dwp-* s’exécute depuis son fichier de procédure. Itinéraire validé par des suites de tests automatisées ; les flux comportementaux s'exécutent sur la référence séquentielle.
 
 ## Installation
 

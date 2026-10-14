@@ -1,6 +1,6 @@
 ---
 title: Cline
-description: "O adaptador DWP para o Cline, o agente de código aberto, com suporte completo por meio de regras em markdown e procedimentos de comando invocados com o prefixo hash."
+description: "O adaptador DWP para o Cline, o agente de código aberto, com suporte total por regras em markdown e procedimentos de comando invocados com o prefixo hash."
 kind: adapter
 lang: pt
 order: 9
@@ -15,7 +15,7 @@ O Cline, o agente de código aberto, oferece suporte ao DWP por meio de regras e
 
 ## Nível de suporte
 
-**Completo** — o Cline lê as regras em markdown e executa todos os comandos dwp-* a partir do respectivo arquivo de procedimento.
+**Completo** (Comprovado por instalação) — O Cline lê as regras markdown e executa cada comando dwp-* a partir de seu arquivo de procedimento. Rota confirmada por suítes de testes automatizados.
 
 ## Instalação
 

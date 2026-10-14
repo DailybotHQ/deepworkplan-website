@@ -15,7 +15,7 @@ Cline, agent lập trình mã nguồn mở, hỗ trợ DWP thông qua các quy t
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — Cline đọc các quy tắc markdown và chạy mọi lệnh dwp-* từ file quy trình của nó.
+**Đầy đủ** (Đã kiểm thử cài đặt) — Cline đọc các quy tắc markdown và chạy mọi lệnh dwp-* từ tệp quy trình của nó. Tuyến đường được xác nhận bởi các bộ kiểm thử tự động.
 
 ## Cài đặt
 

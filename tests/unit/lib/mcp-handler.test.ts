@@ -264,6 +264,27 @@ describe('handleMcpRequest — tools/call', () => {
     expect(text).not.toContain('(/vim)');
   });
 
+  it('list_site_sections lists the changelog and the v7 addon pages', async () => {
+    const out = await rpc({
+      jsonrpc: '2.0',
+      id: 14,
+      method: 'tools/call',
+      params: { name: 'list_site_sections', arguments: {} },
+    });
+    const text = parseBody(out).result.content[0].text as string;
+    for (const path of [
+      '/changelog',
+      '/kit/herdr',
+      '/kit/agentkit',
+      '/kit/devcontainer',
+      '/kit/vim',
+      '/spec/record-layer',
+      '/spec/delegation',
+    ]) {
+      expect(text).toContain(`(${path})`);
+    }
+  });
+
   it('read_page returns isError with recovery hints for unknown pages', async () => {
     const out = await rpc({
       jsonrpc: '2.0',
@@ -369,5 +390,35 @@ describe('handleMcpRequest — protocol edge cases', () => {
     const out = await rpc({ jsonrpc: '2.0', id: 42, method: 'resources/list' });
     expect(out.status).toBe(200);
     expect(parseBody(out).error.code).toBe(-32601);
+  });
+});
+
+describe('request body size cap', () => {
+  const fetchAssetText = async (): Promise<string | null> => null;
+
+  it('rejects a body over 64 KiB with 413 and a JSON-RPC error', async () => {
+    const out = await handleMcpRequest({
+      bodyText: JSON.stringify({
+        jsonrpc: '2.0',
+        id: 1,
+        method: 'tools/list',
+        padding: 'x'.repeat(70 * 1024),
+      }),
+      protocolVersionHeader: null,
+      fetchAssetText,
+    });
+    expect(out.status).toBe(413);
+    const body = JSON.parse(out.body as string);
+    expect(body.jsonrpc).toBe('2.0');
+    expect(body.error.message).toMatch(/64 KiB/);
+  });
+
+  it('still accepts an ordinary request', async () => {
+    const out = await handleMcpRequest({
+      bodyText: JSON.stringify({ jsonrpc: '2.0', id: 2, method: 'tools/list' }),
+      protocolVersionHeader: null,
+      fetchAssetText,
+    });
+    expect(out.status).toBe(200);
   });
 });

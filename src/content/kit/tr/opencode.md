@@ -15,7 +15,7 @@ Açık kaynak kodlama ajanı OpenCode, DWP'yi yerel AGENTS.md ve markdown komut 
 
 ## Destek düzeyi
 
-**Tam** — OpenCode, AGENTS.md'yi yerel olarak okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır.
+**Tam** (Kurulum testli) — OpenCode, AGENTS.md'yi yerel olarak okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır. Yol, otomatik test paketleriyle onaylanmıştır.
 
 ## Kurulum
 

@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: eficiência de tokens desde a concepção"
-description: "O Deep Work Plan v3 reconstrói o harness em torno do custo de contexto — divulgação progressiva, validação limitada ao que foi afetado e uma única revisão final obrigatória — ao mesmo tempo em que eleva o piso de confiança e conformidade."
+description: "O Deep Work Plan v3 reconstrói o harness pelo custo de contexto: revelação progressiva, validação do que foi afetado e uma Revisão Final obrigatória."
 date: 2026-09-10
 version: "v3 · Eficiência de tokens"
 kind: release

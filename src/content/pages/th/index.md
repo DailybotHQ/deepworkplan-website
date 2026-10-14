@@ -14,7 +14,7 @@ Deep Work Plan (DWP) คือระเบียบวิธีและ kit แ
 
 > Deep Work Plan คือ spec-driven development ที่ repository เองกลายเป็น harness
 
-- [เปิดพรอมต์ /init](/init)
+- [เปิดพรอมต์ /init](/th/quickstart)
 - [อ่านระเบียบวิธี](/methodology)
 
 ---
@@ -87,6 +87,7 @@ Deep Work Plan ตอบด้วยการพัฒนาแบบขับ�
 - ไดเรกทอรี `.agents/` (skill, agent, คำสั่ง) พร้อม symlink จาก `.claude` ไปยัง `.agents`
 - skill ของ Deep Work Plan ติดตั้งครั้งเดียวสำหรับทุกเอเจนต์ — รวมถึง sub-skill ชื่อ author เพื่อให้ repository ปลูก skill, agent และคำสั่งของตัวเองได้ พร้อมส่วนเสริมแบบเลือกเข้าร่วมอย่าง dependency-upgrade และส่วนเสริม design-system สำหรับพื้นผิวอินเทอร์เฟซที่ผู้ใช้มองเห็นทุกแบบ
 - แผนระยะยาวที่ดำเนินต่อได้ในโฟลเดอร์ `.dwp/` ที่ถูก gitignore
+- การมอบหมายงานหลายเอเจนต์และ Ecosystem 1.0 — ประสานงานเอเจนต์คู่ขนานอย่างปลอดภัยด้วย git worktree ที่แยกเฉพาะ, หลักฐานที่สังเกตได้ และส่วนเสริมระบบนิเวศ
 
 ---
 

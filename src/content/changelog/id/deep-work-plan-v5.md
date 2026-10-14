@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: janji-janji, kini terjamin"
-description: "Deep Work Plan v5 mengubah delapan janji lama menjadi kontrak yang teruji dan memiliki versi — verifikator yang jujur, orkestrasi yang aman, dan jalur pembaruan yang terbukti."
+description: "Deep Work Plan v5 mengubah delapan janji menjadi kontrak berversi: verifikator yang jujur, orkestrasi yang aman, dan jalur pembaruan yang terbukti."
 date: 2026-09-12
 version: "v5 · Dijamin oleh pengujian"
 kind: release

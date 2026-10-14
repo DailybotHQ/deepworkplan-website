@@ -1,6 +1,6 @@
 ---
 title: Go
-description: "Go プロジェクト向けのオンボーディングプリセット。モジュール、cmd／internal レイアウト、テーブル駆動テスト、go test／vet／build ゲートに関する推論の手がかりを備える。"
+description: "Go プロジェクト向けのオンボーディングプリセット。モジュール、cmd／internal レイアウト、テーブル駆動テスト、go test／vet／build ゲートに関する推。"
 kind: preset
 lang: ja
 order: 20

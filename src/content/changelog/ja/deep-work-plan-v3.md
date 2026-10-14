@@ -1,6 +1,6 @@
 ---
 title: "DWP v3：構造によるトークン効率化"
-description: "Deep Work Plan v3 は、段階的な情報開示、影響範囲のみを対象とした検証、そして単一の必須 Final Review によって、コンテキストコストを軸にハーネスを再構築すると同時に、トラストと適合性の下限を引き上げます。"
+description: "Deep Work Plan v3 はコンテキストコストを中心に再構築し、段階的開示、影響範囲の検証、必須の最終レビューを導入しました。"
 date: 2026-09-10
 version: "v3 · トークン効率化"
 kind: release

@@ -1,6 +1,6 @@
 ---
 title: dwp-refine
-description: "Tinh chỉnh một Deep Work Plan sẵn có bằng cách thêm, bớt hoặc sắp xếp lại tác vụ trong khi giữ nguyên công việc đã hoàn thành và cập nhật bảng tác vụ cho khớp."
+description: "Tinh chỉnh Deep Work Plan thông qua sửa đổi hợp đồng nguyên tử trong contracts/, điều chỉnh khép kín và nâng cấp từ Lite lên Full."
 kind: command
 lang: vi
 order: 3
@@ -24,14 +24,16 @@ Tinh chỉnh một Deep Work Plan sẵn có.
 
 ```
 /dwp-refine [plan]
+/dwp-refine promote [plan]
 ```
 
 ## Hành vi
 
 1. Đọc kế hoạch sẵn có.
-2. Thêm, bớt hoặc sắp xếp lại tác vụ.
+2. `ledger.py amend` (v7 contracts/); Thêm, bớt hoặc sắp xếp lại tác vụ.
 3. Giữ nguyên công việc đã hoàn thành.
 4. Cập nhật bảng tác vụ.
+4. Closed adaptations (split, reorder, insert, change_strategy, retry).
 5. Ghi lại những gì đã thay đổi và lý do.
 
 > Sau khi nâng cấp skill, các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận. Di chuyển không bao giờ tự động: phần kết thúc cũ gồm ba tác vụ có thể được chuyển rõ ràng sang dạng Final Review v5 được giữ lại; kế hoạch v5 chỉ chuyển sang v6 qua yêu cầu rõ ràng và xem trước. Kế hoạch v6 giữ nguyên thế hệ và chạy không thay đổi; kế hoạch mới dùng thế hệ v7 hiện tại, và kế hoạch v6 không bao giờ bị chuyển sang v7 một cách ngầm định.

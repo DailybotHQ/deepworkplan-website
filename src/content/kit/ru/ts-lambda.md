@@ -1,6 +1,6 @@
 ---
 title: TypeScript Lambda
-description: "Пресет онбординга для бессерверных TypeScript Lambda проектов с подсказками для рассуждений об обработчиках, инструментах Serverless/SAM/CDK и принципе минимальных привилегий IAM."
+description: "Пресет онбординга для бессерверных TypeScript Lambda проектов с подсказками дляб обработчиках, инструментах Serverless/SAM/CDK и принципе минимальных."
 kind: preset
 lang: ru
 order: 22

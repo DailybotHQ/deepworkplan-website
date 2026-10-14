@@ -33,7 +33,7 @@ The Deep Work Plan skill is a router plus nine sub-skills:
 
 Thin slash commands delegate to the sub-skills and addons:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — the plan-execute-verify loop.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — the plan-execute-verify loop.
 - `skill-create`, `agent-create` — delegate to the author sub-skill.
 - `lib-upgrade` — delegates to the dependency-upgrade addon (installed only when that addon is accepted).
 

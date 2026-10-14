@@ -1,6 +1,6 @@
 ---
 title: Laravel
-description: "Preset onboardingowy dla projektów Laravel, ze wskazówkami do rozumowania o modelach Eloquent, kontrolerach, trasach, migracjach, komendach Artisan i narzędziu testowym."
+description: "Preset onboardingowy dla projektów Laravel, ze wskazówkami do rozumowania o modelach Eloquent, kontrolerach, trasach, migracjach, komendach Artisan i narzędziu."
 kind: preset
 lang: pl
 order: 11

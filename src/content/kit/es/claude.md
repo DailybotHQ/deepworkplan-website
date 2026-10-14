@@ -15,7 +15,7 @@ Claude Code tiene soporte **completo** de DWP mediante comandos slash nativos y 
 
 ## Nivel de soporte
 
-**Completo**: los cinco comandos de DWP se asignan a comandos slash nativos de Claude Code.
+**Completo** (Comprobado por comportamiento) — la suite completa de subhabilidades y comandos del ciclo de vida de DWP se asigna a comandos slash nativos de Claude Code, demostrado en pruebas de referencia bidireccionales de transferencia.
 
 ## Instalación
 

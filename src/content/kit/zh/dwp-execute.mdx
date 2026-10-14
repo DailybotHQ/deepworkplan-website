@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "逐任务执行一份现有的 Deep Work Plan。代理阅读完整的计划、按顺序运行每项任务、更新进展，并准确标记完成情况。"
+description: "通过 v7 账本循环、可选的无人值守 trust 模式、parallel_safe 委派与 Final Review 收尾，按序执行现有的 Deep Work Plan。"
 kind: command
 lang: zh
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -12,27 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-执行一份现有的 Deep Work Plan。
+逐任务执行一份现有的 Deep Work Plan。
 
 <CmdExecute lang="zh" class="not-prose my-8" />
 
 ## 它做了什么
 
-`dwp-execute` 逐任务运行一份现有的计划。它会阅读完整的计划、按顺序执行每项任务、更新 `PROGRESS.md`，并标记每项任务的完成状态。
+`dwp-execute` 通过确定性的记录层逐任务运行一份现有的计划。它会解析目标计划、评估依赖、按声明的顺序执行每项任务、运行验证关卡，并记录不可变的进度。
 
 ## 用法
 
 ```
-/dwp-execute [plan]
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## 模式
+
+- **引导（默认）：** 在任务之间请求确认，让你在每个任务边界审阅证据与决策。
+- **Trust（`auto`）：** 追加 `trust` 后会按顺序把符合条件的任务运行至完成，不为例行确认而暂停，只在真正受阻时停下（升级类别 C1–C7）。
 
 ## 行为
 
-1. 在开始之前阅读完整的计划。
-2. 按顺序执行任务。
-3. 在每项任务后更新 `PROGRESS.md`。
-4. 准确标记任务状态。
-5. 受阻时停下并询问。
+1. **计划解析：** 按精确的文件夹名、数字 ID、唯一 slug 或 `latest`（数字 ID 最大的计划）进行解析。
+2. **账本循环：** 运行 `ledger.py ready` 评估依赖 DAG 与不变量，运行 `ledger.py start` 校验前置条件，运行 `ledger.py gate` 执行验证命令并生成 `observed` 证据。
+3. **受控完成：** `ledger.py complete` 强制执行零测试管控、对不变量的重新评估，以及任务本地的技能与文档决策。
+4. **计划内委派：** v7 契约中标记为 `parallel_safe` 的任务可以通过无头（在 worktree 中运行 `ak run`）或交互式（`herdr` 窗格）传输方式委派给子代理。结果在被计划的关卡执行器观察到之前保持为 `asserted`。
+5. **容量检查：** 在任务边界派发之前评估账户剩余的余量。
+6. **Final Review：** 以一项必需的五部分收尾任务作结（含必需本地审查的安全审查、最终状态验证、技能核对、文档核对、完成）。
 
 ## 别名
 

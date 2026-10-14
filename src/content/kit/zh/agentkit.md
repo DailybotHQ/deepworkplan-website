@@ -23,7 +23,7 @@ order: 8
 
 ## 账户、配额与账户选择
 
-工具包把你持有的每个登录或密钥都视为一个**账户**：一个 CLI × 一个配置文件。`@default`（或 `@1`）是 CLI 自己的 home；`@2`、`@work` 或 `@client-x` 是独立的登录，各自位于配置文件根目录下的单独目录中，可同时运行。`ak profiles` 列出它们及其登录状态和密钥名称；`ak profiles --json` 为工具提供同一份列表（schema `profiles-v1`）。自 `v0.5.1` 起，它会报告 Claude Code 令牌的实际位置——`file`、`keychain`（macOS）、`none` 或 `unknown`——仅检测其是否存在，从不读取机密；并且能识别 Linux 上的 Cursor 登录，无论是在容器中还是在 Linux 主机上。自 `v0.5.2` 起，`AGENTKIT_DEFAULT_PROFILE_<CLI>` 指定不带参数的 `ak <cli>` 所使用的账户（位置参数 `@profile` 仍然优先），开发容器正是借此选择它所共享的主机账户。自 `v0.5.3` 起，当与另一台机器共享的 Codex home 记录了一个不在本机上的后台守护进程时，`ak codex` 会添加 `--no-daemon`。
+自 `v1.0.1` 起，每个配置档（包括 `@default`）都是配置文件根目录下独立目录中的独立账户，可防止状态泄漏与凭据冲突。 `ak profiles` 列出它们及其登录状态和密钥名称；`ak profiles --json` 为工具提供同一份列表（schema `profiles-v1`）。自 `v0.5.1` 起，它会报告 Claude Code 令牌的实际位置——`file`、`keychain`（macOS）、`none` 或 `unknown`——仅检测其是否存在，从不读取机密；并且能识别 Linux 上的 Cursor 登录，无论是在容器中还是在 Linux 主机上。自 `v0.5.2` 起，`AGENTKIT_DEFAULT_PROFILE_<CLI>` 指定不带参数的 `ak <cli>` 所使用的账户（位置参数 `@profile` 仍然优先），开发容器正是借此选择它所共享的主机账户。自 `v0.5.3` 起，当与另一台机器共享的 Codex home 记录了一个不在本机上的后台守护进程时，`ak codex` 会添加 `--no-daemon`。
 
 `ak usage`（也可用 `ak status`）列出工具包所知的每个 CLI 的每个账户，在其所属 CLI 下每个账户和配置文件一行：Claude Code 订阅（5 小时、每周和按模型的窗口）、通过 ChatGPT 登录的 Codex、Z.AI 编程套餐密钥，以及自 `v0.7.0` 起在 Linux 和容器中通过 Google 登录的 Antigravity（agy 自身 `/usage` 面板中的五小时和每周窗口）均显示实时配额。无法读取配额的账户仍有自己的一行：显示 `n/d` 并附上其连接方式和原因——Cursor、Grok、xAI、Azure OpenAI、Gemini API 密钥，或保存在 macOS 钥匙串中的 Antigravity 登录——或者显示 `no login` 并附上用于登录的命令，因此该表也能显示每个 CLI 的哪些账户已连接。该命令只读：从不刷新登录、从不打印令牌，也从不在配置文件中写入任何内容。`--json` 为工具提供同一份列表（schema `usage-v1`）。这些用量端点属于厂商内部接口，并非官方接口。
 

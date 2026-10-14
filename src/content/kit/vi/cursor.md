@@ -15,7 +15,7 @@ Cursor hỗ trợ DWP thông qua project rules và các file lệnh.
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — các lệnh DWP hoạt động thông qua hệ thống rules của Cursor.
+**Đầy đủ** (Đã kiểm thử cài đặt) — các lệnh DWP hoạt động thông qua hệ thống quy tắc của Cursor. Các tuyến thư mục được xác minh bởi các bộ kiểm thử tự động; quy trình làm việc hành vi thực thi tuần tự.
 
 ## Cài đặt
 

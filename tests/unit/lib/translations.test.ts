@@ -190,7 +190,7 @@ describe('faqPage and comparePage copy', () => {
         expect(alt.name.trim().length, lang).toBeGreaterThan(0);
         expect(alt.whatItDoesWell.trim().length, lang).toBeGreaterThan(0);
       }
-      expect(comparePage.dwpStrengths.items.length, lang).toBe(6);
+      expect(comparePage.dwpStrengths.items.length, lang).toBe(8);
     }
   });
 });

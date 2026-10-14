@@ -1,6 +1,6 @@
 ---
 title: Vue + Vite
-description: "Un preset d’onboarding pour les projets Vue + Vite, avec des indices de raisonnement pour les composants monofichiers, la Composition API, les stores Pinia et les tests Vitest."
+description: "Un preset d’onboarding pour les projets Vue + Vite, avec des indices pour les composants monofichiers, la Composition API, les stores Pinia et les tests Vitest."
 kind: preset
 lang: fr
 order: 2

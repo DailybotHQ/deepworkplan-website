@@ -10,7 +10,10 @@ lastUpdated: 2026-09-28
 
 La spécification est la définition précise et lisible de la méthodologie — les structures et protocoles que les humains et les agents partagent. Elle énonce, en termes normatifs RFC 2119, comment un plan piloté par la spécification est structuré et comment un agent doit s'exécuter face à lui : le plan est la source de vérité, les portes de validation sont binaires, et le dépôt lui-même porte le harness dont un agent a besoin. Elle est organisée en documents ordonnés :
 
-- **Standard de documentation** — la structure de dépôt AI-first.
+- **Couche de registre** — la couche de registre fondée sur des preuves : contrat, journal, classes de preuves (affirmées vs observées), approbations et reçus.
+- **Ressources et capacités** — exécution bornée : manifeste de contexte, enveloppe de ressources, capacités de l hôte, registre d extensions et capacités.
+- **Délégation** — exécution multi-agents et en essaim : worktrees parallèles, événements de délégation, transports et succession par époques.
+- **État du plan** — la couche d état lisible par machine : instantané dérivé du journal en v6/v7 (`ledger.py project`), couche d état historique v5 et réconciliation.
 - **Spécification DWP** — la structure du plan, l'anatomie d'une tâche, la boucle d'exécution, la section Delta pour les changements sur du code existant, le Protocole de reprise DWP, les niveaux de rigueur proportionnelle (micro/standard/deep) et la couche d'état du plan lisible par machine.
 - **Protocole de l'agent** — le comportement inter-agents requis, le mappage des commandes, les agents supportés (dont OpenClaw et Hermes) et les profils d'exécution (interactif vs sans surveillance) avec les conditions d'arrêt et la continuation planifiée.
 - **Archétypes** — dépôts individuels, hubs orchestrateurs et espace de travail d'agent (le foyer durable d'un agent autonome : espace de travail OpenClaw, répertoire de service Hermes, volume d'agent cloud) ; l'heuristique de classification et en quoi l'onboarding diffère.

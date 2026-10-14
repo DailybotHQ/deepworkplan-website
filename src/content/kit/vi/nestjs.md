@@ -1,6 +1,6 @@
 ---
 title: NestJS
-description: "Preset onboarding cho ứng dụng NestJS, với gợi ý suy luận về module, controller, provider, DTO, mô hình decorator và test runner."
+description: "Preset onboarding cho ứng dụng NestJS, với gợi ý suy luận về module, controller, provider, DTO, mô hình decorator và test runner với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 8

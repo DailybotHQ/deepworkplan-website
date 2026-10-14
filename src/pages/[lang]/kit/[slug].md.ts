@@ -7,8 +7,13 @@ import { serializeReaderEntryToAgentMarkdown } from '@/lib/markdown-for-agents';
 export const getStaticPaths: GetStaticPaths = async () => {
   const langs = getActiveNonDefaultLanguages();
   const entries = await getCollection('kit');
+  // Examples are served once, at /examples/<slug> (redirects in redirect-map.ts).
   return entries
-    .filter((entry) => langs.includes(entry.data.lang as Language))
+    .filter(
+      (entry) =>
+        langs.includes(entry.data.lang as Language) &&
+        entry.data.kind !== 'example'
+    )
     .map((entry) => ({
       params: {
         lang: entry.data.lang,

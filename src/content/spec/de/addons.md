@@ -44,7 +44,7 @@ Eine optionale Verbindung zum **Dailybot-Team** des Entwicklers für Agenten-For
 
 - **Kit-Seite:** [Dailybot](/kit/dailybot) — vollständige Fähigkeitsreferenz
 - **Was das DWP-Addon verdrahtet:** vier Plan-Lifecycle-Reports (Kickoff, signifikante Aufgabe, blockiert, Abschluss) via dailybot-`report`-Sub-Skill; optionale deterministische Hook-Durchsetzung (`dailybot hook`, CLI `>= 3.9.0`)
-- **Gepaarte Skill:** Installation von [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (aktuell **3.23.14**) exponiert **17 Fähigkeiten** — Chat in Slack/Teams/Discord/Google Chat, Check-ins, Formularerstellung, Ask AI, Kudos, Plan-Boards und -Aufgaben, Organisations-Labels, Per-Repo-API-Keys (`.dailybot/env.json`), E-Mail und mehr. Das DWP-Addon verdrahtet nur **report**; andere Fähigkeiten werden direkt über die Dailybot-Skill aufgerufen
+- **Gepaarte Skill:** Installation von [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (fixiert auf **v3.23.17**) exponiert **17 Fähigkeiten** — Chat in Slack/Teams/Discord/Google Chat, Check-ins, Formularerstellung, Ask AI, Kudos, Plan-Boards und -Aufgaben, Organisations-Labels, Per-Repo-API-Keys (`.dailybot/env.json`), E-Mail und mehr. Das DWP-Addon verdrahtet nur **report**; andere Fähigkeiten werden direkt über die Dailybot-Skill aufgerufen
 - **Auth:** vollständig an die Dailybot-Skill delegiert (`dailybot login` oder `DAILYBOT_API_KEY`); dieses Addon speichert niemals Credentials
 - **Vendor-neutrale Leitplanke:** zentrales DWP hat **null** Dailybot-Abhängigkeit; niemals für alle automatisch installieren
 - **Wann angeboten:** Entwickler oder Team nutzt bereits Dailybot oder fragt explizit nach Team-Reporting
@@ -137,7 +137,7 @@ Adapter mappen DWP-Befehle auf das Befehlssystem eines bestimmten Agenten (Claud
 
 ## Beispiele
 
-Beispiele demonstrieren DWP in der Praxis: Vorher/Nachher-Vergleiche, Beispielpläne, Fallstudien. Siehe [Examples](/examples) und [Dogfood this site](/kit/dogfood-this-site).
+Beispiele demonstrieren DWP in der Praxis: Vorher/Nachher-Vergleiche, Beispielpläne, Fallstudien. Siehe [Examples](/examples) und [Dogfood this site](/examples/dogfood-this-site).
 
 ## Konformitätserinnerung
 

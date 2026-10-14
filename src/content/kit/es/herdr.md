@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) coloca agentes de programación en paneles, en tu máquina y en las máquinas a las que llega por SSH. Este addon permite que un Deep Work Plan use esos agentes como **pares**: un plan puede pasar una tarea acotada a un agente en otro panel, recibir exactamente una respuesta autorizada y conservar un registro del intercambio.
 
-Es un addon opcional de **DWP v7** (`v7.0.0`). La metodología funciona igual sin él: con el addon ausente o deshabilitado, cada tarea se ejecuta en la sesión actual, exactamente como antes.
+Es un addon opcional de **DWP v7** (pack `v7.8.1`). La metodología funciona igual sin él: con el addon ausente o deshabilitado, cada tarea se ejecuta en la sesión actual, exactamente como antes.
 
 ## Qué integra
 
@@ -71,7 +71,7 @@ Ambos addons implementan la misma interfaz de delegación —`launch`, `observe`
 
 Para un líder que ejecuta muchos carriles a la vez — paneles en el host, en contenedores y en otras máquinas, cada uno con su propia cuenta —, `herdr-peers lanes` enumera cada carril con su estado, `herdr-peers status <pane>` clasifica la pantalla en la que está un carril bloqueado, y cada registro de delegación nombra la cuenta y el proveedor que lo llevaron. Consulta [Ejecutar muchos agentes](/methodology/06-orchestration).
 
-**Los lanes de Codex nombran su panel.** Codex ejecuta los comandos de un lane desde un servidor en segundo plano compartido por todas las sesiones de esa cuenta, así que el id de panel que hereda puede ser de otro lane. Un lane de Codex pasa su propio panel, tomado del encargo del líder, con `--pane <pane>` en cada verbo de herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Cada lane nombra su panel.** Bajo las reglas de autonomía del enjambre (Guide §17.2), cada lane pasa su propio panel con  en cada verbo de herdr-peers (, , , , , , ) para evitar la atribución errónea de mensajes y la saturación de ranuras de dispersión. Los lanes de Codex lo requieren con especial rigor debido al servidor en segundo plano compartido entre sesiones.
 
 ## Avisos y liderazgo
 

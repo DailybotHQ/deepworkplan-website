@@ -1,6 +1,6 @@
 ---
 title: Rust
-description: "Preset de incorporación para proyectos Rust, con pistas de razonamiento para crates, módulos, workspaces de Cargo, features y la compuerta cargo test/clippy/build."
+description: "Preset de incorporación para proyectos Rust, con pistas para crates, módulos, workspaces de Cargo, features y la compuerta cargo test/clippy/build."
 kind: preset
 lang: es
 order: 19

@@ -1,6 +1,6 @@
 ---
 title: Plan-Zustand
-description: "Die maschinenlesbare Plan-Zustandsschicht: manifest.json und state.json, Gate-Einträge, Ergebnis-Einträge als episodisches Gedächtnis, Abgleich und wann sie erforderlich ist."
+description: "Die v5-Zustandsschicht (manifest.json, state.json, Gate-Einträge, Abgleich) und wie v6- und v7-Pläne sie durch einen journalbasierten Snapshot ersetzen."
 order: 8
 lang: de
 section: State
@@ -8,9 +8,16 @@ section: State
 
 # Plan-Zustand
 
-> **Versionsumfang:** Die folgenden Abschnitte bilden die beibehaltene v5.0.0-Zustandsschicht. Der aktuelle Standard, DWP 7.0.0, verwendet den v7-Vertrag, ein nur anhängbares Journal und eine Snapshot-Projektion; v5-Pläne verwenden weiterhin die Regeln dieses Dokuments für `manifest.json` und `state.json`.
+> **Versionsumfang:** Diese Seite spezifiziert die **v5-Zustandsschicht**, die v5-Pläne während ihrer gesamten Lebensdauer behalten. Pläne, die mit dem aktuellen Paket (DWP 7.0.0, Release `v7.8.1`) erstellt werden, verwenden stattdessen die [Aufzeichnungsschicht](/spec/record-layer). In einem v6- oder v7-Plan ist der Ergebnisvertrag (`contract.json`) die Autorität, das nur anhängbare Journal (`journal.ndjson`) die Quelle der Wahrheit, und `state.json` ist ein **abgeleiteter Snapshot** gemäß [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Er wird von `ledger.py project` neu erzeugt und DARF NICHT manuell bearbeitet werden.
 
-**Aktueller Standard: v7 (DWP 7.0.0).** Die folgenden Dokumente bilden die beibehaltene Basis; v6 ergänzte Vertrag, nur anhängbares Journal, Aufgabenkontext, Ressourcenregeln und Lebenszyklus, und v7 behält diese Aufzeichnungsschicht bei und ergänzt eine optionale Task-Markierung `parallel_safe`, ein Journal-Ereignis `delegation`, die Addon-Registry `.dwp/config.json` und von Addons bereitgestellte Fähigkeiten. [Manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [Vertrag v7](https://deepworkplan.com/schema/plan-contract/v7.json) und [Live-Snapshot](https://deepworkplan.com/schema/plan-snapshot/v6.json) (mit v6 geteilt). Bestehende v5- und v6-Pläne behalten ihre Regeln. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## Welche Zustandsschicht gilt
+
+| Plan-Generation | Quelle der Wahrheit | `state.json` | Schemas |
+| --- | --- | --- | --- |
+| v5 (und ältere v1/v2-Pläne) | der Markdown-Plan, mit dieser JSON-Schicht als Projektion | vom Agenten an den unten genannten Protokollpunkten geschrieben | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 und v2 bleiben für ältere Pläne gültig) |
+| v6 und v7 | der Vertrag plus das nur anhängbare Journal | ein aus dem Journal projizierter Snapshot, nie manuell geschrieben | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (oder ihre v6-Entsprechungen) |
+
+Ein Plan wechselt nie implizit die Generation: v5-Pläne behalten diese Regeln, und der Wechsel eines Plans zu v6 ist eine ausdrückliche Migration mit Vorschau ([Aufzeichnungsschicht](/spec/record-layer#coexistence-and-migration)). Kanonische Quellen: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Version 5.0.0. Status: Stabil.** Dieses Dokument spezifiziert die maschinenlesbare Plan-Zustandsschicht der Deep Work Plan Methodik, nun an die eigene Version des DWP-Standards angeglichen — keine bestehende Anforderung wird durch die Neunummerierung abgeschwächt. Diese Revision dokumentiert außerdem den abgesicherten Zustands-Updater, die verifizierte Plan-Veröffentlichung und die Nachweis-Wahrheitsregeln, die ein abgeschlossener Plan erfüllen muss (siehe unten). Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
@@ -53,9 +60,9 @@ Beide Dateien MÜSSEN atomar geschrieben werden: in eine temporäre Datei im sel
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ Beide Dateien MÜSSEN atomar geschrieben werden: in eine temporäre Datei im sel
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",

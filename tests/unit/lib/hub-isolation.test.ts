@@ -16,7 +16,10 @@ const root = process.cwd();
 const read = (path: string): string =>
   readFileSync(resolve(root, path), 'utf8');
 
-describe('ecosystem hub isolation', () => {
+// The import scan walks every site and edge source file synchronously; like
+// schema-urls.test.ts it is load-sensitive (6 s under a load average of 15),
+// so the suite carries an explicit 30 s timeout (docs/TESTING_GUIDE.md).
+describe('ecosystem hub isolation', { timeout: 30_000 }, () => {
   it('git-ignores every clone but tracks the index and the manifest', () => {
     const lines = read('.gitignore')
       .split('\n')

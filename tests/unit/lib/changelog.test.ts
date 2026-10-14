@@ -1,3 +1,6 @@
+import { readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -6,6 +9,7 @@ import {
   getFeaturedChangelogEntry,
   sortChangelogEntries,
 } from '@/lib/changelog';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 
 const entry = (
   id: string,
@@ -51,5 +55,19 @@ describe('changelog display helpers', () => {
     expect(getChangelogUrl('es', 'deep-work-plan-v3')).toBe(
       '/es/changelog/deep-work-plan-v3'
     );
+  });
+
+  it('ensures the v7 changelog installed release matches ECOSYSTEM_PINS.pack.tag', () => {
+    const v7Content = readFileSync(
+      join(process.cwd(), 'src/content/changelog/en/deep-work-plan-v7.md'),
+      'utf-8'
+    );
+    const match = v7Content.match(/Installed skill release:\s*\*\*([^*]+)\*\*/);
+    expect(match).not.toBeNull();
+    const rawVersion = match?.[1]?.trim() ?? '';
+    const installedTag = rawVersion.startsWith('v')
+      ? rawVersion
+      : `v${rawVersion}`;
+    expect(installedTag).toBe(ECOSYSTEM_PINS.pack.tag);
   });
 });

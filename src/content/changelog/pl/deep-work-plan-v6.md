@@ -30,4 +30,6 @@ Decyzja architektoniczna to GO: v6 zachowuje tę samą metodykę przy ściślejs
 
 Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slug v6 ma 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
 
-Zainstalowana wersja skilla: **6.0.2**. Pakiet 6.x domyślnie tworzy nowe plany w v6. Istniejące plany zachowują zapisaną generację; migracja wymaga jawnego polecenia z podglądem.
+Wydanie 6.1.0 (2026-10-06) wprowadziło opcjonalne metryki terenowe benchmarków i wnioski z planów.
+
+Zainstalowana wersja skilla: **6.1.0** (ostatnie wydanie 6.x). Pakiet 6.x domyślnie tworzy nowe plany w v6. Istniejące plany zachowują zapisaną generację; migracja wymaga jawnego polecenia z podglądem.

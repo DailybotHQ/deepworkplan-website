@@ -1,6 +1,6 @@
 ---
 title: "DWP v2 : le dépôt devient le harness"
-description: "La première version officielle de Deep Work Plan fait du dépôt lui-même le harness de travail de l'agent — contexte, garde-fous, validation et état, tous natifs au dépôt."
+description: "Deep Work Plan v2 fait du dépôt le harness de travail de l'agent: contexte, garde-fous, validation et état sont tous natifs au dépôt."
 date: 2026-07-16
 version: "v2 · Version officielle"
 kind: foundation

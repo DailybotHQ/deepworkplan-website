@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: le promesse, ora garantite"
-description: "Deep Work Plan v5 trasforma otto promesse di lunga data in contratti testati e versionati — un verificatore onesto, un'orchestrazione sicura e un percorso di aggiornamento collaudato."
+description: "Deep Work Plan v5 trasforma otto promesse in contratti versionati: un verificatore onesto, un'orchestrazione sicura e un aggiornamento collaudato."
 date: 2026-09-12
 version: "v5 · Garantito dai test"
 kind: release

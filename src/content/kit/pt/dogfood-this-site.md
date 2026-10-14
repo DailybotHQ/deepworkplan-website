@@ -1,6 +1,6 @@
 ---
 title: "Estudo de caso: este site"
-description: "Como o próprio deepworkplan.com funciona com o Deep Work Plan — um relato real de um repositório Astro de produção tornado AI-first com a metodologia que ele documenta."
+description: "Como o próprio deepworkplan.com funciona com o Deep Work Plan — um relato real de um repositório Astro de produção tornado AI-first com a metodologia que ele."
 kind: example
 lang: pt
 order: 2

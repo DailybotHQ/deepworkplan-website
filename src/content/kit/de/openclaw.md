@@ -1,6 +1,6 @@
 ---
 title: OpenClaw
-description: "Der DWP-Adapter für OpenClaw: natives .agents/skills-Scanning, Mapping für unbeaufsichtigte Ausführung und cron-gesteuerter Plan-Fortsetzung für autonome Agenten-Arbeitsbereiche."
+description: "Der DWP-Adapter für OpenClaw: natives .agents/skills-Scanning, Mapping für unbeaufsichtigte Ausführung und cron-gesteuerter Plan-Fortsetzung für autonome."
 kind: adapter
 lang: de
 order: 10
@@ -15,7 +15,7 @@ OpenClaw ist eine autonome Agenten-Plattform, die langlebige Arbeitsbereiche mit
 
 ## Support-Level
 
-**Vollständig** — OpenClaw liest `AGENTS.md` und lädt das Skill über den AgentSkills-Standard. Alle DWP-Sub-Skills (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`) sind verfügbar.
+**Vollständig** (Dokumentiert) — OpenClaw liest `AGENTS.md` und lädt den Skill über den AgentSkills-Standard. Alle DWP-Sub-Skills (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`) sind verfügbar.
 
 ## Installation
 
@@ -50,7 +50,7 @@ OpenClaws Scheduling-Primitive bilden sich direkt auf DWPs Fortsetzungsmodell ab
 Operativ:
 
 1. Ein Mensch erstellt und genehmigt einen Plan interaktiv. Die Genehmigung ist der Kontrollpunkt — unbeaufsichtigte Turns erstellen und führen in einem Turn niemals aus.
-2. Der Plan muss die maschinenlesbare Zustandsschicht tragen (`manifest.json` + `state.json`). In einem Arbeitsbereich ohne git ermöglicht `state.json` erst die absturzsichere Wiederaufnahme. Siehe [Plan-Zustand](/spec/plan-state).
+2. Der Plan muss die maschinenlesbare Zustandsschicht tragen (`manifest.json` + `state.json`). In einem Arbeitsbereich ohne git ermöglicht `state.json` erst die absturzsichere Wiederaufnahme. Siehe [Plan-Zustand](/spec/plan-state). In v6- und v7-Plänen wird der Status über `ledger.py project` aus dem reinen Anhangsjournal (`journal.ndjson`) projiziert, anstatt Statusdateien manuell neu zu schreiben.
 3. Jeder Heartbeat- oder Cron-Turn führt höchstens eine Aufgabe aus, besteht sein Validierungs-Gate, aktualisiert `state.json` atomar und gibt frei.
 4. Bei jeder Stopbedingung schreibt der Agent das `blocked`-Feld von `state.json` und meldet über den normalen Kanal des Arbeitsbereichs. Der nächste menschliche Blick — oder Heartbeat-Bericht — sieht genau das, was benötigt wird.
 

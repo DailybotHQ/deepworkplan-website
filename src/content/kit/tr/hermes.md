@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "DWP'nin Hermes adaptörü: AgentSkills standardı skill yüklemesi, state.json'daki sonuç kayıtları aracılığıyla bölümsel bellek sinerjisi ve cron tabanlı plan devamı."
+description: "Hermes için DWP adaptörü: AgentSkills standardıyla skill yükleme, plan sonuçlarından epizodik bellek ve cron ile yürütülen plan devamlılığı."
 kind: adapter
 lang: tr
 order: 11
@@ -15,7 +15,7 @@ Hermes, skill'leri AgentSkills standardı aracılığıyla yükleyen ve oturumla
 
 ## Destek düzeyi
 
-**Tam** — Hermes, `AGENTS.md`'yi okur ve skill'i AgentSkills standardı yüklemesi aracılığıyla yükler. Tüm DWP alt skill'leri kullanılabilir.
+**Tam** (Belgelenmiş) — Hermes, `AGENTS.md` dosyasını okur ve beceriyi AgentSkills standart yüklemesiyle yükler. Tüm DWP alt becerileri mevcuttur.
 
 ## Kurulum
 
@@ -32,9 +32,9 @@ resume the open plan
 
 ## Bölümsel bellek sinerjisi
 
-Hermes, geçmiş çalışmayı ilerideki oturumlar genelinde erişilebilir kılmak için ajan belleğini dizinler. DWP'nin `state.json` sonuç kayıtları tam da bu kullanım için tasarlanmıştır: tamamlanan her görev, nelerin `tried` (denendiğini), nelerin `failed` (başarısız olduğunu), nelerin `worked` (işe yaradığını) ve yapılandırılmış bir JSON alanında serbest biçimli notları taşır. Hermes, çalışma alanının `.dwp/plans/` durum dosyalarını dizinlediğinde, tamamlanmış planlar erişilebilir bölümsel bellek hâline gelir — bir ajan daha sonra belirli bir sorunun yalnızca bir planın çalıştığını değil, nasıl çözüldüğünü hatırlayabilir.
+v6 ve v7 planlarında, DWP'nin deterministik doğrulama makbuzları (`outcomes.py receipt`) ve sonuç kayıtları doğrudan Hermes'in bellek indeksine beslenir: tamamlanan her görev denenen, başarısız olan ve çalışan şeyleri yapılandırılmış bir JSON şemasında taşır. Tamamlanan planlar alınabilir epizodik bellek haline gelir — bir ajan bir sorunun nasıl çözüldüğünü hatırlayabilir.
 
-Bu, Hermes üzerindeki DWP planlarının iki şekilde kalıcı olduğu anlamına gelir: Markdown dosyaları insan tarafından okunabilir kayıttır ve `state.json` sonuç kayıtları makine tarafından dizinlenebilir bellektir. Bkz. [Plan durumu](/spec/plan-state#outcome-records-as-episodic-memory).
+Kısa ömürlü oturumlar olayları `journal.ndjson` dosyasına ekler ve durum dosyalarını manuel olarak yeniden yazmak yerine `ledger.py project` aracılığıyla `state.json` dosyasını yansıtır. Bkz. [Plan durumu](/spec/plan-state#outcome-records-as-episodic-memory).
 
 ## Cron tabanlı devam
 

@@ -1,6 +1,6 @@
 ---
 title: "DWP v3：构造出的令牌效率"
-description: "Deep Work Plan v3 围绕上下文成本重构运行框架——渐进式披露、仅针对受影响范围的验证，以及单一的强制性 Final Review——同时提高了信任与合规的最低门槛。"
+description: "Deep Work Plan v3 围绕上下文成本重构运行环境：实现渐进式披露、仅验证受影响面，并引入单次强制最终审查。"
 date: 2026-09-10
 version: "v3 · 令牌效率"
 kind: release

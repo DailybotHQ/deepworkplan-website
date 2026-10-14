@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: token efficiency by construction"
-description: "Deep Work Plan v3 rebuilds the harness around context cost — progressive disclosure, affected-only validation, and a single mandatory Final Review — while raising the trust and conformance floor."
+description: "Deep Work Plan v3 rebuilds the harness around context cost: progressive disclosure, affected-only validation, and a mandatory Final Review."
 date: 2026-09-10
 version: "v3 · Token efficiency"
 kind: release

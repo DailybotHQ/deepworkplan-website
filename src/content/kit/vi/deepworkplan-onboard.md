@@ -44,6 +44,11 @@ Danh mục schema máy đọc được cho kế hoạch v7 — mặc định c�
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (bổ sung sự kiện `delegation`)
 - **Plan snapshot (projection trực tiếp, dùng chung với v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (dùng chung với v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Cấu hình kho lưu trữ:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Bộ mô tả addon:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Gói chuyển giao swarm:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Bản ghi chuẩn đối sánh:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Bản ghi bài học rút ra:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 Kế hoạch v6 giữ các schema v6 của nó ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [hợp đồng](https://deepworkplan.com/schema/plan-contract/v6.json), [sự kiện nhật ký](https://deepworkplan.com/schema/journal-event/v6.json)); kế hoạch v5 hiện có tiếp tục dùng schema trạng thái v5 và kế hoạch cũ không bao giờ bị viết lại âm thầm.
 

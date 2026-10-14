@@ -1,6 +1,6 @@
 ---
 title: "Vaka çalışması: bu web sitesi"
-description: "deepworkplan.com’un kendisinin Deep Work Plan üzerinde nasıl çalıştığı — belgelediği metodolojiyle AI-first hâle getirilmiş gerçek bir üretim Astro deposunun gerçek anlatımı."
+description: "deepworkplan.com’un kendisinin Deep Work Plan üzerinde nasıl çalıştığı — belgelediği metodolojiyle AI-first hâle getirilmiş gerçek bir üretim Astro deposunun."
 kind: example
 lang: tr
 order: 2

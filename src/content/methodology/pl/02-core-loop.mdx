@@ -1,6 +1,6 @@
 ---
 title: Podstawowa pętla
-description: "Przepływ create, execute, refine, resume, status i verify, ignorowany przez git katalog wynikowy .dwp, dziesięciosekcyjna anatomia zadania oraz to, jak działa walidacja."
+description: "Podstawowa pętla dziewięciu pod-skilli DWP, katalog .dwp z config.json, dziesięciosekcyjna anatomia zadania oraz walidacja i wznawianie."
 order: 2
 lang: pl
 summary: Jak podstawowe operacje DWP prowadzą plan od celu do zweryfikowanego ukończenia.
@@ -11,7 +11,7 @@ import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
 
 # Podstawowa pętla
 
-DWP definiuje niewielki zestaw operacji, które prowadzą plan od celu do ukończonej, podatnej na przegląd pracy: **create → execute → refine → resume → status**, z **verify** jako sprawdzeniem zgodności potwierdzającym wynik. Razem tworzą pętlę, którą agent podąża przez całe życie planu. Agenci wykonują jedno zadanie naraz, walidując każdy krok przed przejściem dalej.
+DWP definiuje zestaw operacji prowadzących plan od celu do ukończenia: **create → execute → refine → resume → status → verify**, wspieranych przez pomocników cyklu życia **onboard** i **upgrade** oraz pod-skill **author** (łącznie dziewięć pod-skilli). Razem tworzą pętlę, którą agent podąża przez całe życie planu. Agenci wykonują jedno zadanie naraz, walidując każdy krok przed przejściem dalej.
 
 Ta pętla jest operacyjną formą spec-driven development. Plan jest specyfikacją, w odniesieniu do której agent pracuje, każde zadanie niesie jawne kryteria akceptacji, a krok walidacji jest bramką, która zamienia deklarację ukończenia w jego dowód. Ponieważ plan i jego dziennik postępu żyją w repozytorium, pętla jest wznawialna między sesjami i agentami.
 
@@ -25,6 +25,9 @@ Ta pętla jest operacyjną formą spec-driven development. Plan jest specyfikacj
 - **resume** — Kontynuuj przerwany plan. Agent czyta dziennik postępu i pliki zadań, by zrekonstruować stan, a następnie kontynuuje od pierwszego nieukończonego zadania.
 - **status** — Raportuj postęp bez realizacji. Agent podsumowuje zadania ukończone, w toku i oczekujące i niczego nie zmienia.
 - **verify** — Sprawdź zgodność bez wprowadzania zmian. Agent raportuje, czy repozytorium spełnia standard i czy plan jest poprawnie sformułowany — czy każde zadanie niesie kryteria akceptacji i bramkę walidacyjną. Zobacz [dokument o zgodności w specyfikacji](/spec).
+- **onboard** — Wprowadź agenta do repozytorium na podstawie rozumowania, tworząc AGENTS.md, przewodniki w docs/ i strukturę .agents/.
+- **upgrade** — Zaktualizuj harness repozytorium lub istniejące plany do nowszych wersji standardu DWP.
+- **author** — Twórz nowe skille, agentów lub polecenia dopasowane do konwencji repozytorium, utrzymując katalog dokumentacji w synchronizacji.
 
 ## Katalog wynikowy `.dwp/`
 
@@ -34,17 +37,23 @@ Wszystkie artefakty DWP żyją w ignorowanym przez git katalogu `.dwp/` w głów
 .dwp/
 ├── plans/
 │   └── PLAN_001_<slug>/
+│       ├── manifest.json
+│       ├── contract.json
+│       ├── journal.ndjson
+│       ├── state.json
 │       ├── README.md
 │       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+│       ├── 1.task_<slug>.md
+│       ├── 2.task_<slug>.md
+│       └── analysis_results/
+└── config.json
 ```
 
 ## Dziesięciosekcyjna anatomia zadania
 
 <TaskAnatomy lang="pl" class="not-prose my-10" />
 
-Każdy plik zadania zawiera te dziesięć sekcji, w kolejności. Struktura gwarantuje, że każda jednostka pracy jest samowystarczalna i podatna na przegląd:
+Dziesięć sekcji powyższego diagramu definiuje anatomiczną strukturę każdego pliku zadania w planie Full. Ta kolejność zapewnia, że każda jednostka pracy jest w pełni samowystarczalna, jednoznaczna i podatna na niezależny audyt:
 
 1. **Cel** — jeden akapit określający, co zadanie osiąga.
 2. **Kontekst** — tło, odnośniki i powód istnienia tego zadania.

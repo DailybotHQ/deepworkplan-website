@@ -1,6 +1,6 @@
 ---
 title: "DWP v4：贴合工作的计划"
-description: "Deep Work Plan v4 让计划的形式服从于工作本身，而不是反过来——Lite 计划现在是面向范围明确任务的完整、可执行提案，独立的草稿暂存环节已被取消。"
+description: "Deep Work Plan v4 让计划形式顺应工作：Lite 计划成为针对有界任务的完整可执行提案，移除了单独的草稿暂存步骤。"
 date: 2026-09-11
 version: "v4 · Lite 优先的计划"
 kind: release

@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: "Preset onboarding cho dự án Angular, với gợi ý suy luận về component, module hoặc standalone API, service, RxJS và test runner."
+description: "Preset onboarding cho dự án Angular, với gợi ý suy luận về component, module hoặc standalone API, service, RxJS và test runner với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 15

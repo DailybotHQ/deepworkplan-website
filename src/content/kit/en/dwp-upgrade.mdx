@@ -1,0 +1,35 @@
+---
+title: dwp-upgrade
+description: "Check for upstream Deep Work Plan releases, review local adaptations, and install pinned stable tags with explicit developer consent, preserving existing plans."
+kind: command
+lang: en
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Keep the installed Deep Work Plan skill and declared standard up to date with explicit consent.
+
+## What it does
+
+`dwp-upgrade` inspects upstream releases for newer versions of the skill pack and standard. It reports differences, surfaces local adaptations, requires explicit developer approval before making changes, and installs pinned stable release tags without altering existing plans under `.dwp/`.
+
+## Usage
+
+```
+/dwp-upgrade
+```
+
+## Behavior
+
+1. **Check (read-only)** — read installed version from `SKILL.md` and query upstream git tags for the latest stable release. Report current vs latest.
+2. **Consent** — surface any local modifications or adaptations via diff; never download or overwrite files without explicit developer confirmation.
+3. **Upgrade** — install the exact stable tag into `.agents/skills/deepworkplan/`, backfill configured addons in `.dwp/config.json`, and reconcile the harness.
+4. **Preserve history** — existing plans, evidence, and logs under `.dwp/plans/` are immutable history and are never modified or migrated during an upgrade.
+
+## Aliases
+
+- `dwp:upgrade`

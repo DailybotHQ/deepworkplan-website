@@ -2,10 +2,55 @@
   Cache-Control: public, max-age=0, must-revalidate
 
 /
-  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby"
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
 
 /es/
-  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby"
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/pt/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/zh/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/ja/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/de/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/fr/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/ko/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/ru/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/it/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/tr/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/id/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/vi/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/hi/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/pl/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/uk/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
+
+/th/
+  Link: </.well-known/api-catalog>; rel="api-catalog", </openapi.json>; rel="service-desc", </.well-known/mcp.json>; rel="describedby", </llms.txt>; rel="alternate"; type="text/plain"
 
 # OpenAPI 3.1 spec of the agent API (read-only, zero-auth)
 /openapi.json

@@ -1,6 +1,6 @@
 ---
 title: NestJS
-description: "พรีเซ็ต onboarding สำหรับแอปพลิเคชัน NestJS พร้อมแนวคิดสำหรับ module, controller, provider, DTO, decorator model และ test runner"
+description: "พรีเซ็ต onboarding สำหรับแอปพลิเคชัน NestJS พร้อมแนวคิดสำหรับ module, controller, provider, DTO, decorator model และ test runner พร้อมการตรวจสอบเต็มรูปแบบ"
 kind: preset
 lang: th
 order: 8

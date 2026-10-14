@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "L'adapter DWP per OpenCode, l'agente open source, con supporto completo tramite AGENTS.md nativo e procedure di comando in Markdown invocate con il prefisso cancelletto."
+description: "L'adapter DWP per OpenCode, l'agente open source, con supporto totale via AGENTS.md nativo e procedure Markdown invocate con il prefisso cancelletto."
 kind: adapter
 lang: it
 order: 7
@@ -15,7 +15,7 @@ OpenCode, l'agente di coding open source, supporta DWP tramite AGENTS.md nativo 
 
 ## Livello di supporto
 
-**Completo** — OpenCode legge AGENTS.md in modo nativo ed esegue ogni comando dwp-* dal suo file di procedura.
+**Completo** (Testato per installazione) — OpenCode legge AGENTS.md in modo nativo ed esegue ogni comando dwp-* dal rispettivo file di procedura. Percorso verificato da suite di test automatizzate.
 
 ## Installazione
 

@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) colloca gli agenti di codice in pannelli, sulla tua macchina e sulle macchine che raggiunge via SSH. Questo addon consente a un Deep Work Plan di usare quegli agenti come **peer**: un piano può affidare un task delimitato a un agente in un altro pannello, ricevere esattamente una risposta autorizzata e conservare una traccia dello scambio.
 
-È un addon opzionale di **DWP v7** (`v7.0.0`). La metodologia funziona allo stesso modo senza di esso: con l’addon assente o disattivato, ogni task viene eseguito nella sessione corrente, esattamente come prima.
+È un addon opzionale di **DWP v7** (pack `v7.8.1`). La metodologia funziona allo stesso modo senza di esso: con l’addon assente o disattivato, ogni task viene eseguito nella sessione corrente, esattamente come prima.
 
 ## Cosa integra
 
@@ -71,7 +71,7 @@ Entrambi gli addon implementano la stessa interfaccia di delega — `launch`, `o
 
 Per un lead che esegue molte corsie insieme — pannelli sull’host, nei container e su altre macchine, ciascuno sul proprio account — `herdr-peers lanes` elenca ogni corsia con il suo stato, `herdr-peers status <pane>` classifica la schermata in cui si trova una corsia bloccata, e ogni record di delega indica l’account e il fornitore che l’hanno svolta. Vedi [Eseguire molti agenti](/methodology/06-orchestration).
 
-**Le lane Codex indicano il proprio pannello.** Codex esegue i comandi di una lane da un server in background condiviso da tutte le sessioni di quell’account, quindi l’id di pannello ereditato può appartenere a un’altra lane. Una lane Codex passa il proprio pannello, indicato nel brief del lead, con `--pane <pane>` su ogni verbo di herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Ogni lane indica il proprio pannello.** In base alle regole di autonomia dello swarm (Guide §17.2), ogni lane passa il proprio pannello con  su ogni verbo herdr-peers (, , , , , , ) per evitare attribuzioni errate dei messaggi e saturazione degli slot di distribuzione. Le lane Codex lo richiedono con particolare rigore a causa della condivisione del server in background tra le sessioni.
 
 ## Notifiche e guida
 

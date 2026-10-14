@@ -15,7 +15,7 @@ Antigravity hỗ trợ DWP thông qua các quy trình lệnh dạng markdown.
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — mọi lệnh dwp-* đều chạy từ file quy trình của nó qua bề mặt lệnh bản địa.
+**Đầy đủ** (Đã kiểm thử cài đặt) — mọi lệnh dwp-* đều chạy từ tệp quy trình của nó. Tuyến đường được xác nhận bởi các bộ kiểm thử tự động; quy trình làm việc hành vi chạy trên đường cơ sở tuần tự.
 
 ## Cài đặt
 

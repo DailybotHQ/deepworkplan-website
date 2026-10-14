@@ -1,6 +1,6 @@
 ---
 title: "DWP v2: 저장소가 하니스가 되다"
-description: "Deep Work Plan의 첫 공식 릴리스는 저장소 자체를 에이전트의 작업 하니스로 만듭니다——컨텍스트, 가드레일, 검증, 상태가 모두 저장소에 네이티브하게 내장됩니다."
+description: "Deep Work Plan v2는 컨텍스트, 가드레일, 검증, 상태를 저장소에 내장하여 저장소 자체를 에이전트 하니스로 만듭니다."
 date: 2026-07-16
 version: "v2 · 공식 릴리스"
 kind: foundation

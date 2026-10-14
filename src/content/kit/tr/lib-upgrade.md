@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Bir deponun bağımlılıklarını dependency-upgrade eklentisi aracılığıyla doğrulanmış, geri alınabilir gruplar hâlinde güvenle yükseltir. Yalnızca o eklenti kabul edildiğinde kurulur."
+description: "Bir deponun bağımlılıklarını dependency-upgrade eklentisi aracılığıyla doğrulanmış, geri alınabilir gruplar hâlinde güvenle yükseltir. Yalnızca o eklenti kabul."
 kind: command
 lang: tr
 order: 9

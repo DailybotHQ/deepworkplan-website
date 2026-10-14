@@ -1,6 +1,6 @@
 ---
 title: Nuxt
-description: "Un preset d'onboarding pour les projets Nuxt, avec des indices de raisonnement sur les pages, les routes API serveur, les composables, le moteur serveur Nitro et les tests."
+description: "Un preset d'onboarding pour les projets Nuxt, avec des indices de raisonnement sur les pages, les routes API serveur, les composables, le moteur serveur Nitro."
 kind: preset
 lang: fr
 order: 14

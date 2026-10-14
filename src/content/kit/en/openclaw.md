@@ -15,7 +15,7 @@ OpenClaw is an autonomous agent platform that runs long-lived workspaces with sc
 
 ## Support level
 
-**Full** — OpenClaw reads `AGENTS.md` and loads the skill via the AgentSkills standard. All DWP sub-skills (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`) are available.
+**Full** (Documented) — OpenClaw reads `AGENTS.md` and loads the skill via the AgentSkills standard. All DWP sub-skills (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`) are available.
 
 ## Installation
 
@@ -50,7 +50,7 @@ OpenClaw's scheduling primitives map directly to DWP's continuation model:
 Operationally:
 
 1. A human creates and approves a plan interactively. Approval is the control point — unattended turns never create-and-execute in one turn.
-2. The plan must carry the machine-readable state layer (`manifest.json` + `state.json`). In a workspace without git, `state.json` is what makes crash-safe resume possible. See [Plan state](/spec/plan-state).
+2. The plan must carry the machine-readable state layer (`manifest.json` + `state.json`). In a workspace without git, `state.json` is what makes crash-safe resume possible. In v6 and v7 plans, state is projected from the append-only journal (`journal.ndjson`) via `ledger.py project`. See [Plan state](/spec/plan-state).
 3. Each heartbeat or cron turn executes at most one task, passes its validation gate, updates `state.json` atomically, and yields.
 4. On any stop condition the agent writes `state.json`'s `blocked` field and reports through the workspace's normal channel. The next human glance — or heartbeat report — sees exactly what is needed.
 

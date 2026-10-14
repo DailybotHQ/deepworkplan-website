@@ -1,6 +1,6 @@
 ---
 title: "사례 연구: 이 웹사이트"
-description: "deepworkplan.com 자체가 Deep Work Plan으로 어떻게 운영되는지 — 자신이 문서화하는 방법론으로 AI-first가 된 프로덕션 Astro 리포지토리의 실제 기록."
+description: "deepworkplan.com 자체가 Deep Work Plan으로 어떻게 운영되는지 — 자신이 문서화하는 방법론으로 AI-first가 된 프로덕션 Astr."
 kind: example
 lang: ko
 order: 2

@@ -15,7 +15,7 @@ OpenAI Codex, DWP’yi markdown komut prosedürleri aracılığıyla destekler.
 
 ## Destek düzeyi
 
-**Tam** — her dwp-* komutu kendi prosedür dosyasından çalışır.
+**Tam** (Davranış testli) — her dwp-* komutu kendi prosedür dosyasından çalışır; modeller arası çift yönlü yazma/sürdürme devir kıyaslamalarında kanıtlanmıştır.
 
 ## Kurulum
 

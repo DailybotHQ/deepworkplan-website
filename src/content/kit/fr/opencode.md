@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "L'adaptateur DWP pour OpenCode, l'agent open source, avec une prise en charge complète via AGENTS.md natif et des procédures de commande en Markdown invoquées avec le préfixe dièse."
+description: "L'adaptateur DWP pour OpenCode, l'agent open source, avec une support complet via AGENTS.md natif et des procédures Markdown invoquées avec le préfixe dièse."
 kind: adapter
 lang: fr
 order: 7
@@ -15,7 +15,7 @@ OpenCode, l'agent de code open source, prend en charge DWP via AGENTS.md natif e
 
 ## Niveau de prise en charge
 
-**Complet** — OpenCode lit AGENTS.md nativement et exécute chaque commande dwp-* depuis son fichier de procédure.
+**Complet** (Validé par l'installation) — OpenCode lit AGENTS.md nativement et exécute chaque commande dwp-* depuis son fichier de procédure. Itinéraire validé par des suites de tests automatisées.
 
 ## Installation
 

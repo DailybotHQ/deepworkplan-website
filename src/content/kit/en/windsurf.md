@@ -15,7 +15,7 @@ Windsurf supports DWP through its rules system and markdown command procedures.
 
 ## Support level
 
-**Full** — Windsurf reads the project rules and runs every dwp-* command from its procedure file.
+**Full** (Install-tested) — Windsurf reads project rules and runs every dwp-* command from its procedure file. Route asserted by automated test suites.
 
 ## Installation
 

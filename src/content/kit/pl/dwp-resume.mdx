@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "Wznów przerwany Deep Work Plan, odtwarzając stan z dziennika postępu i plików zadań, a następnie kontynuując od pierwszego nieukończonego zadania."
+description: "Wznawia przerwany Deep Work Plan deterministycznie z dziennika i kontraktu przez ledger.py project, przyjmując pakiety przekazania roju i uruchamiając bramki."
 kind: command
 lang: pl
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-Wznów przerwany Deep Work Plan.
+Wznów przerwany Deep Work Plan na podstawie trwałych zapisów.
 
 <CmdResume lang="pl" class="not-prose my-8" />
 
 ## Co robi
 
-`dwp-resume` kontynuuje przerwany plan. Odtwarza stan z `PROGRESS.md` i plików zadań, a następnie kontynuuje od pierwszego nieukończonego zadania.
+`dwp-resume` bezpiecznie kontynuuje przerwany plan wyłącznie na podstawie artefaktów w obszarze roboczym, bez powtórnego wykonania. Deterministycznie odtwarza stan z `journal.ndjson` i `contract.json`, odczytuje oczekujące pakiety przekazania i kontynuuje od pierwszego nieukończonego zadania.
 
 ## Użycie
 
@@ -28,10 +28,11 @@ Wznów przerwany Deep Work Plan.
 
 ## Zachowanie
 
-1. Przeczytanie `PROGRESS.md` i plików zadań.
-2. Odtworzenie stanu wykonania.
-3. Kontynuowanie od pierwszego nieukończonego zadania.
-4. Aktualizowanie postępu na bieżąco.
+1. **Odczyt zapisów:** bada `contract.json` i `journal.ndjson` w `.dwp/plans/PLAN_<id>_<slug>/`.
+2. **Projekcja stanu:** uruchamia `ledger.py project`, aby deterministycznie odtworzyć `state.json` z dziennika, do którego można tylko dopisywać. Rozbieżności rozstrzygane są na korzyść dziennika.
+3. **Przyjęcie przekazania:** sprawdza oczekujące pakiety przekazania roju (`dwp-handoff-v1`), aby odzyskać intencje w toku, niezweryfikowane bramki i otwarte prośby peerów.
+4. **Weryfikacja styku:** sprawdza stan git i przed wznowieniem uruchamia testy dymne na zmienionych powierzchniach.
+5. **Kontynuacja:** wykonuje pierwsze otwarte zadanie w standardowej pętli wykonania. Starsze plany v5 są kontynuowane według zapisanego przepływu `PROGRESS.md`, bez wymuszonej migracji.
 
 ## Aliasy
 

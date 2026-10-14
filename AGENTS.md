@@ -372,7 +372,7 @@ Methodology documentation is the **primary content** of the site. It lives in mu
 **Collections:**
 
 - **`methodology/{en,es,pt,zh,…}/`** — The narrative methodology docs (what DWP is, how to adopt it, principles, workflow). Primary marketing-and-teaching content.
-- **`spec/{en,es,pt,zh,…}/`** — The readable specification (the normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, addons).
+- **`spec/{en,es,pt,zh,…}/`** — The readable specification (the normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, addons). The v6/v7 record layer, resources and abilities, and delegation have their own reader pages (`record-layer`, `resources-and-abilities`, `delegation`).
 - **`kit/{en,es,pt,zh,…}/`** — The kit catalog: presets, adapters, and commands available for installing DWP into a repo.
 
 **File naming:** `slug.md` (or `.mdx`) in the relevant `<lang>/` directory. **Slugs MUST be in English** in every language; all language versions share the same English slug.

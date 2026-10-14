@@ -15,7 +15,7 @@ Cursor mendukung DWP melalui project rules dan command file.
 
 ## Tingkat dukungan
 
-**Penuh** — command DWP berjalan melalui sistem rules milik Cursor.
+**Penuh** (Teruji instalasi) — perintah DWP bekerja melalui sistem aturan Cursor. Rute direktori diverifikasi oleh rangkaian pengujian otomatis; alur kerja perilaku dijalankan secara berurutan.
 
 ## Instalasi
 

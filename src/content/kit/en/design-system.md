@@ -1,6 +1,6 @@
 ---
 title: Design system
-description: "An opt-in addon that gives any repo with a user-facing interface surface a DESIGN.md (under docs/, indexed from AGENTS.md) — covering visual UI, CLI output, and conversational profiles in one file."
+description: "An opt-in addon giving repos with an interface a DESIGN.md in docs/, referenced from AGENTS.md, covering visual UI, CLI output, and conversational profiles."
 kind: addon
 lang: en
 order: 4
@@ -39,6 +39,16 @@ It is never required — a repository with zero optional addons is fully conform
 ## Optional command
 
 When accepted, the addon may install a `/design-system` delegator into the repo's `.agents/commands/` to regenerate or refresh `DESIGN.md` later. Installing the command is optional; a declined addon installs none.
+
+## v7 specification
+
+| Item | Value |
+|---|---|
+| Product | DeepWorkPlan design-system addon |
+| Registry key | `design-system` in `.dwp/config.json` |
+| Descriptor | `addons/design-system/addon.json` (interface 1) |
+| Target file | `docs/DESIGN.md` indexed from `AGENTS.md` |
+| Versioning | Pinned and versioned with the skill pack (`v7.8.1`) |
 
 ## Relationship to per-feature design docs
 

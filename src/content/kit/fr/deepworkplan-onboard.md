@@ -44,6 +44,11 @@ Pour les plans v7 — le défaut du pack 7.x actuel —, le catalogue des schém
 - **Événement du journal :** https://deepworkplan.com/schema/journal-event/v7.json (ajoute l’événement `delegation`)
 - **Instantané du plan (projection active, partagée avec v6) :** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Manifeste de contexte (partagé avec v6) :** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Configuration du dépôt :** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Descripteur d'addon :** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Paquet de relais de swarm :** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Enregistrement de benchmark :** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Enregistrement des apprentissages :** https://deepworkplan.com/schema/learnings-record/v1.json
 
 Les plans v6 conservent leurs schémas v6 ([manifeste](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrat](https://deepworkplan.com/schema/plan-contract/v6.json), [événement du journal](https://deepworkplan.com/schema/journal-event/v6.json)) ; les plans v5 existants continuent d’utiliser le schéma d’état v5, et les anciens plans ne sont jamais réécrits silencieusement.
 

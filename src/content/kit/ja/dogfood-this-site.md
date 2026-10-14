@@ -1,6 +1,6 @@
 ---
 title: "ケーススタディ: このウェブサイト"
-description: "deepworkplan.com そのものが Deep Work Plan の上で動いているしくみ。それが文書化する方法論によって AI-first になった本番 Astro リポジトリの実際の記録。"
+description: "deepworkplan.com そのものが Deep Work Plan の上で動いているしくみ。それが文書化する方法論によって AI-first になった本番 Astro。"
 kind: example
 lang: ja
 order: 2

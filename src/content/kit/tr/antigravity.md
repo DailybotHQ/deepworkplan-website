@@ -15,7 +15,7 @@ Antigravity, DWP’yi markdown komut prosedürleri aracılığıyla destekler.
 
 ## Destek düzeyi
 
-**Tam** — her dwp-* komutu, yerel komut yüzeyi aracılığıyla kendi prosedür dosyasından çalışır.
+**Tam** (Kurulum testli) — her dwp-* komutu kendi prosedür dosyasından çalışır. Yol, otomatik test paketleriyle onaylanmıştır; davranışsal iş akışları sıralı tabanda çalışır.
 
 ## Kurulum
 

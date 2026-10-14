@@ -33,7 +33,7 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.
 
 Тонкие слеш-команды делегируют под-навыкам и дополнениям:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — цикл «планирование — выполнение — проверка».
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — цикл «планирование — выполнение — проверка».
 - `skill-create`, `agent-create` — делегируют под-навыку author.
 - `lib-upgrade` — делегирует дополнению dependency-upgrade (устанавливается, только когда это дополнение принято).
 

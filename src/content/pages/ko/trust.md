@@ -23,11 +23,15 @@ lastUpdated: 2026-06-05
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+git checkout v7.8.1
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
+
+[/init.md](/init.md)의 에코시스템 고정 표에 팩 및 컴패니언 애드온의 다이제스트가 나열되어 있습니다.
 
 릴리스는 **체크섬으로 검증되며, 서명되지는 않았습니다** — 서명(cosign 또는 관리자 GPG)은 문서화된 다음 단계이지 현재의 주장이 아닙니다. 모든 것이 공개되어 있으므로, 임의의 파일을 해당 태그의 리포지토리와 diff로 비교할 수도 있습니다.
 
@@ -46,7 +50,7 @@ curl -fsSL -o SHA256SUMS \
 
 ## 솔직한 한계
 
-- 릴리스는 체크섬으로 검증되지만 아직 암호학적으로 서명되지 않았습니다 — 서명은 계획 중이며 아직 완료되지 않았습니다.
+- 릴리스는 체크섬으로 검증되지만 아직 서명되지 않았습니다 — 서명은 계획 중이며 아직 완료되지 않았습니다.
 - Deep Work Plan은 자율적인 코딩 에이전트를 리포지토리에 대해 실행합니다. 제안된 계획과 diff를 검토하세요. 방법론은 그 검토를 위해 설계된 것이지, 검토를 대체하려는 것이 아닙니다.
 - 여기의 신뢰 주장은 공식 소스만을 설명합니다. 리포지토리에서 벗어난 수정되거나 서드파티의 복사본에는 이러한 보증이 없습니다 — 먼저 검증하세요.
 
@@ -59,4 +63,4 @@ curl -fsSL -o SHA256SUMS \
 - [웹사이트 보안 정책](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [스킬 보안 정책 및 위협 모델](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [방법론 읽기](/methodology)
-- [채택(Init)](/init)
+- [채택(Init)](/ko/quickstart)

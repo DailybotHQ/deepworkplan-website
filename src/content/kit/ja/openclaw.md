@@ -1,6 +1,6 @@
 ---
 title: OpenClaw
-description: "DWP の OpenClaw アダプター。ネイティブな .agents/skills スキャン、無人実行のマッピング、そして自律エージェントワークスペース向けのクロン駆動な計画継続。"
+description: "DWP の OpenClaw アダプター。ネイティブな .agents/skills スキャン、無人実行のマッピング、そして自律エージェントワークスペース向けのクロン駆動な計。"
 kind: adapter
 lang: ja
 order: 10
@@ -15,7 +15,7 @@ OpenClaw は、スケジュールされたターンで長期的なワークス�
 
 ## サポートレベル
 
-**フル** — OpenClaw は `AGENTS.md` を読み込み、AgentSkills 標準でスキルをロードします。すべての DWP サブスキル（`onboard`、`create`、`execute`、`refine`、`resume`、`status`、`verify`）が利用可能です。
+**完全**（文書化済み）— OpenClaw は `AGENTS.md` を読み込み、AgentSkills 標準を介してスキルをロードします。すべての DWP サブスキル（`onboard`、`create`、`execute`、`refine`、`resume`、`status`、`verify`、`author`、`upgrade`）が利用可能です。
 
 ## インストール
 
@@ -50,7 +50,7 @@ OpenClaw のスケジューリングプリミティブは、DWP の継続モデ�
 実際の運用では：
 
 1. 人間がインタラクティブに計画を作成・承認します。承認がコントロールポイントです — 無人ターンは一ターンで計画を作成・実行しません。
-2. 計画は機械可読な状態レイヤー（`manifest.json` + `state.json`）を持たなければなりません。git のないワークスペースでは、`state.json` がクラッシュセーフな再開を可能にします。[計画の状態](/spec/plan-state) を参照してください。
+2. 計画は機械可読な状態レイヤー（`manifest.json` + `state.json`）を持たなければなりません。git のないワークスペースでは、`state.json` がクラッシュセーフな再開を可能にします。[計画の状態](/spec/plan-state) を参照してください。 v6 および v7 プランでは、状態ファイルを手動で書き換えるのではなく、追記専用ジャーナル（`journal.ndjson`）から `ledger.py project` を介して状態を投影します。
 3. ハートビートまたはクロンの各ターンは最大一タスクを実行し、バリデーションゲートを通過し、`state.json` をアトミックに更新し、終了します。
 4. 停止条件が発生した場合、エージェントは `state.json` の `blocked` フィールドに記録し、ワークスペースの通常のチャネルで報告します。次の人間の確認 — またはハートビートレポート — で、必要なことが正確にわかります。
 

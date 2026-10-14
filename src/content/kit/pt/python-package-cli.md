@@ -1,6 +1,6 @@
 ---
 title: Pacote / CLI Python
-description: "Um preset de onboarding para pacotes Python e ferramentas de CLI, com pistas de raciocínio para o layout do pacote, os entry points de console e o validation gate do pytest."
+description: "Um preset de onboarding para pacotes Python e ferramentas de CLI, com pistas de raciocínio para o layout do pacote, os entry points de console e o validation."
 kind: preset
 lang: pt
 order: 5

@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Riferisce sullo stato di un Deep Work Plan senza eseguirlo. L’agente legge il piano e il log dei progressi, poi riassume il lavoro completato, in corso e in sospeso."
+description: "Riporta lo stato di un Deep Work Plan su quattro dimensioni del ciclo di vita, limiti dell’envelope di risorse, blocchi e deleghe, senza modificare alcun file."
 kind: command
 lang: it
 order: 5
@@ -18,21 +18,22 @@ Riferisce sullo stato di un Deep Work Plan senza eseguirlo.
 
 ## Cosa fa
 
-`dwp-status` riassume i progressi del piano senza apportare modifiche. Riferisce sulle attività completate, in corso e in sospeso.
+`dwp-status` è rigorosamente di sola lettura per contratto. Riassume l’avanzamento, i blocchi attivi, i checkpoint e gli envelope di risorse senza apportare modifiche ad alcun file.
 
 ## Uso
 
 ```
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Comportamento
 
-1. Legge il piano e `PROGRESS.md`.
-2. Riassume le attività completate.
-3. Riassume le attività in corso.
-4. Riassume le attività in sospeso.
-5. Riferisce senza modificare nulla.
+1. **Quattro dimensioni del ciclo di vita:** riporta il formato (`lite` o `full`), lo stato di materializzazione (`materializing`, `ready` o `promoting`), l’approvazione della revisione (`pending`, `approved` o `pre_approved`) e l’avanzamento dell’esecuzione (`pending`, `in_progress`, `blocked` o `completed`).
+2. **Panoramica dell’intero repository:** se invocato senza argomenti, elenca tutti i piani sotto `.dwp/plans/` con le percentuali di completamento, i localizzatori delle attività attive e i riepiloghi dei blocchi.
+3. **Envelope di risorse:** mostra i contatori di consumo rispetto ai tetti sulle dimensioni monitorate (`wall_clock`, tentativi, invii, spesa, token) e indica se i limiti sono applicati attivamente o solo indicativi.
+4. **Diagnosi dei blocchi:** espone i dettagli dei blocchi attivi da `state.json.blocked`, classificati secondo la tassonomia di escalation standard (classi C1–C7).
+5. **Osservazione delle deleghe:** riassume le deleghe a subagenti aperte e completate e gli scambi tra pari registrati.
 
 ## Alias
 

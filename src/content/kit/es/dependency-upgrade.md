@@ -23,6 +23,16 @@ Pon al día las dependencias de un repositorio con un flujo por lotes, validado 
 4. Ejecuta la compuerta de validación real del repo tras cada lote; revierte cualquier lote que falle.
 5. Resume lo actualizado, lo omitido y lo revertido; deja que el desarrollador haga commit.
 
+
+## Especificación v7
+
+| Elemento | Valor |
+|---|---|
+| Producto | Addon dependency-upgrade de DeepWorkPlan |
+| Clave de registro | `dependency-upgrade` en `.dwp/config.json` |
+| Descriptor | `addons/dependency-upgrade/addon.json` (interfaz 1) |
+| Comando | `/lib-upgrade` instalado en `.agents/commands/` si se acepta |
+| Control de versiones | Fijado y versionado con el paquete de skills (`v7.8.1`) |
 ## Notas
 
 Agnóstico del gestor de paquetes — nunca ejecuta npm/ncu en un repo no-JS. Opcional, nunca obligatorio y nunca hace commit automático.

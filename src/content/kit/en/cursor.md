@@ -15,7 +15,7 @@ Cursor supports DWP through project rules and command files.
 
 ## Support level
 
-**Full** — DWP commands work through Cursor's rules system.
+**Full** (Install-tested) — DWP commands work through Cursor's rules system. Directory routes verified by automated test suites; behavioral workflows execute sequentially.
 
 ## Installation
 

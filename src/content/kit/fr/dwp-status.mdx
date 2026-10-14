@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Rendre compte du statut d’un Deep Work Plan sans l’exécuter. L’agent lit le plan et le journal de progression, puis résume le travail achevé, en cours et en attente."
+description: "Rendez compte du statut d’un Deep Work Plan selon quatre dimensions de cycle de vie, limites d’enveloppe, blocages et délégations, sans modifier de fichier."
 kind: command
 lang: fr
 order: 5
@@ -18,21 +18,22 @@ Rendre compte du statut d’un Deep Work Plan sans l’exécuter.
 
 ## Ce qu’il fait
 
-`dwp-status` résume la progression d’un plan sans apporter de changements. Il rend compte des tâches achevées, en cours et en attente.
+`dwp-status` est strictement en lecture seule par contrat. Il résume la progression, les blocages actifs, les points de contrôle et les enveloppes de ressources sans modifier aucun fichier.
 
 ## Utilisation
 
 ```
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Comportement
 
-1. Lire le plan et `PROGRESS.md`.
-2. Résumer les tâches achevées.
-3. Résumer les tâches en cours.
-4. Résumer les tâches en attente.
-5. Rendre compte sans rien modifier.
+1. **Quatre dimensions de cycle de vie :** indique le format (`lite` ou `full`), l’état de matérialisation (`materializing`, `ready` ou `promoting`), l’approbation de relecture (`pending`, `approved` ou `pre_approved`) et la progression de l’exécution (`pending`, `in_progress`, `blocked` ou `completed`).
+2. **Vue d’ensemble du dépôt :** appelé sans argument, liste tous les plans sous `.dwp/plans/` avec leurs pourcentages d’achèvement, les localisateurs des tâches actives et des résumés des blocages.
+3. **Enveloppe de ressources :** affiche les compteurs consommés par rapport aux plafonds sur les dimensions suivies (`wall_clock`, nouvelles tentatives, répartitions, dépenses, tokens) et indique si les limites sont effectivement appliquées ou seulement indicatives.
+4. **Diagnostic des blocages :** expose le détail des blocages actifs depuis `state.json.blocked`, classés selon la taxonomie d’escalade standard (classes C1–C7).
+5. **Observation des délégations :** résume les délégations à des sous-agents ouvertes et achevées, ainsi que les échanges entre pairs enregistrés.
 
 ## Alias
 

@@ -1,6 +1,6 @@
 ---
 title: Flutter
-description: "Flutter ve Dart projeleri için widget'lar, analizör, durum yönetimi, kod üretimi ve flutter test komutuna yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Flutter ve Dart projeleri için widget'lar, analizör, durum yönetimi, kod üretimi ve flutter test komutuna yönelik akıl yürütme ipuçları içeren bir onboarding."
 kind: preset
 lang: tr
 order: 17

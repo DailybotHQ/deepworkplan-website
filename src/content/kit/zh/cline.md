@@ -1,6 +1,6 @@
 ---
 title: Cline
-description: "面向 Cline（开源代理）的 DWP 适配器，通过 Markdown 规则与命令过程提供完整支持，使用井号前缀调用。"
+description: "面向 Cline（开源代理）的 DWP 适配器，通过 Markdown 规则与命令过程提供完整支持，使用井号前缀调用，支持端到端验证与执行。"
 kind: adapter
 lang: zh
 order: 9
@@ -15,7 +15,7 @@ Cline 是一款开源编码代理，通过 Markdown 规则与命令过程支持 
 
 ## 支持级别
 
-**完整** —— Cline 读取 Markdown 规则，并从其过程文件运行每一个 dwp-* 命令。
+**完整**（经过安装测试）—— Cline 读取 Markdown 规则并通过其过程文件运行每个 dwp-* 命令。路径已由自动化测试套件断言。
 
 ## 安装
 

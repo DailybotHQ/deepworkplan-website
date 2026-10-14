@@ -23,9 +23,11 @@ Tratta la skill come non attendibile finché non l'hai verificata. Ogni release 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Scarica i checksum per la release che intendi installare (sostituisci vX.Y.Z):
+git checkout v7.8.1
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # un'uscita diversa da zero significa che un file non corrisponde — fermati
 ```
 
@@ -46,7 +48,7 @@ Segnala i problemi di sicurezza **privatamente tramite il sistema di segnalazion
 
 ## Limitazioni oneste
 
-- Le release sono checksummate, ma non ancora firmate crittograficamente — la firma è pianificata, non ancora implementata.
+- Le release sono checksummate, ma non ancora firmate — la firma è pianificata, non ancora implementata.
 - Deep Work Plan esegue un agente di coding autonomo sul tuo repository. Rivedi il piano proposto e i suoi diff; la metodologia è progettata per quella revisione, non per sostituirla.
 - Queste affermazioni di fiducia descrivono solo le fonti ufficiali. Una copia modificata o di terze parti che si è allontanata dai repository non gode di nessuna di queste garanzie — verificala prima.
 
@@ -59,4 +61,4 @@ Segnala i problemi di sicurezza **privatamente tramite il sistema di segnalazion
 - [Politica di sicurezza del sito web](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Politica di sicurezza e modello di minacce della skill](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Leggi la metodologia](/methodology)
-- [Adozione (init)](/init)
+- [Adozione (init)](/it/quickstart)

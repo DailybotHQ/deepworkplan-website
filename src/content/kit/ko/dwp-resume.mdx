@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "진행 로그와 task 파일로부터 상태를 재구성한 뒤 완료되지 않은 첫 task부터 계속하여, 중단된 Deep Work Plan을 재개합니다."
+description: "ledger.py project로 저널과 계약에서 중단된 Deep Work Plan을 결정론적으로 재개하고, swarm 인계 패킷을 수집하며 게이트를 실행합니다."
 kind: command
 lang: ko
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-중단된 Deep Work Plan을 재개합니다.
+중단된 Deep Work Plan을 영속 기록으로부터 재개합니다.
 
 <CmdResume lang="ko" class="not-prose my-8" />
 
 ## 하는 일
 
-`dwp-resume`는 중단된 계획을 이어 갑니다. `PROGRESS.md`와 task 파일로부터 상태를 재구성한 뒤, 완료되지 않은 첫 task부터 계속합니다.
+`dwp-resume`는 작업 공간의 산출물만으로 중단된 계획을 중복 실행 없이 안전하게 이어 갑니다. `journal.ndjson`과 `contract.json`으로부터 상태를 결정론적으로 재구성하고, 대기 중인 인계 패킷을 읽은 뒤, 완료되지 않은 첫 task부터 계속합니다.
 
 ## 사용법
 
@@ -28,10 +28,11 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 ## 동작
 
-1. `PROGRESS.md`와 task 파일을 읽습니다.
-2. 실행 상태를 재구성합니다.
-3. 완료되지 않은 첫 task부터 계속합니다.
-4. 진행하면서 진행 상황을 갱신합니다.
+1. **기록 읽기:** `.dwp/plans/PLAN_<id>_<slug>/` 아래의 `contract.json`과 `journal.ndjson`을 살펴봅니다.
+2. **상태 투영:** `ledger.py project`를 실행해 추가 전용 저널로부터 `state.json`을 결정론적으로 재생성합니다. 불일치는 저널을 기준으로 해결합니다.
+3. **인계 수집:** 대기 중인 swarm 인계 패킷(`dwp-handoff-v1`)을 확인해 진행 중이던 의도, 검증되지 않은 게이트, 열려 있는 피어 요청을 복구합니다.
+4. **이음새 검증:** 재개하기 전에 git 상태를 확인하고 변경된 영역에 대해 스모크 점검을 실행합니다.
+5. **계속:** 표준 실행 루프를 통해 첫 번째 미완료 task를 실행합니다. 레거시 v5 계획은 강제 마이그레이션 없이 기록된 `PROGRESS.md` 흐름으로 계속합니다.
 
 ## 별칭
 

@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Relatar o status de um Deep Work Plan sem executá-lo. O agente lê o plano e o registro de progresso, e então resume o trabalho concluído, em andamento e pendente."
+description: "Relate o status de um Deep Work Plan em quatro dimensões de ciclo de vida, limites de envelope, bloqueios e delegações sem modificar arquivos."
 kind: command
 lang: pt
 order: 5
@@ -18,21 +18,22 @@ Relata o status de um Deep Work Plan sem executar.
 
 ## O que faz
 
-O `dwp-status` resume o progresso do plano sem fazer alterações. Ele relata as tarefas concluídas, em andamento e pendentes.
+`dwp-status` é estritamente somente leitura por contrato. Resume progresso, bloqueios ativos, checkpoints e envelopes de recursos sem alterar nenhum arquivo.
 
 ## Uso
 
 ```
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Comportamento
 
-1. Ler o plano e o `PROGRESS.md`.
-2. Resumir as tarefas concluídas.
-3. Resumir as tarefas em andamento.
-4. Resumir as tarefas pendentes.
-5. Relatar sem modificar nada.
+1. **Quatro dimensões de ciclo de vida:** relata formato (`lite` ou `full`), status de materialização (`materializing`, `ready` ou `promoting`), aprovação de revisão (`pending`, `approved` ou `pre_approved`) e progresso de execução (`pending`, `in_progress`, `blocked` ou `completed`).
+2. **Visão geral do repositório:** quando chamado sem argumentos, lista todos os planos em `.dwp/plans/` com porcentagens de conclusão, localizadores de tarefas ativas e resumos de bloqueios.
+3. **Envelope de recursos:** exibe contadores de consumo versus teto em dimensões monitoradas (`wall_clock`, retentativas, despachos, custo, tokens) e indica se os limites são mandatórios ou consultivos.
+4. **Diagnóstico de bloqueios:** exibe detalhes de bloqueios ativos de `state.json.blocked` categorizados pela taxonomia padrão de escalada (classes C1–C7).
+5. **Observação de delegações:** resume delegações de subagentes abertas e concluídas e trocas registradas de pares.
 
 ## Aliases
 

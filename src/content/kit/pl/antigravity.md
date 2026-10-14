@@ -15,7 +15,7 @@ Antigravity obsługuje DWP poprzez procedury komend w markdown.
 
 ## Poziom wsparcia
 
-**Pełny** — każda komenda dwp-* uruchamiana jest z jej pliku procedury przez natywną warstwę poleceń.
+**Pełne** (Przetestowane instalacyjnie) — każde polecenie dwp-* działa z pliku procedury. Trasa potwierdzona przez automatyczne zestawy testów; przepływy behawioralne działają na sekwencyjnej linii bazowej.
 
 ## Instalacja
 

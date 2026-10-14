@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "Astro siteleri için, isteğe bağlı Svelte adaları içeren bir onboarding ön ayarı; içerik koleksiyonları, şema doğrulama ve ada hidrasyonu için akıl yürütme ipuçları sunar."
+description: "Astro siteleri için, isteğe bağlı Svelte adaları içeren bir onboarding ön ayarı; içerik koleksiyonları, şema doğrulama ve ada hidrasyonu için akıl yürütme."
 kind: preset
 lang: tr
 order: 3

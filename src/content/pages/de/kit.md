@@ -33,7 +33,7 @@ Die Deep Work Plan Skill ist ein Router plus neun Sub-Skills:
 
 Schlanke Slash-Befehle delegieren an die Sub-Skills und Addons:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — die Plan-Ausführen-Verifizieren-Schleife.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — die Plan-Ausführen-Verifizieren-Schleife.
 - `skill-create`, `agent-create` — delegieren an die author-Sub-Skill.
 - `lib-upgrade` — delegiert an das dependency-upgrade-Addon (nur installiert, wenn dieses Addon angenommen wird).
 

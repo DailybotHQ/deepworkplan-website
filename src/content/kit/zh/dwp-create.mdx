@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "从一个高层目标创建一份新的 Deep Work Plan。代理分析目标、把工作分解为任务，并在 .dwp 之下写出计划文件。"
+description: "从高层目标创建 Deep Work Plan，具备完整的边界选项语法、Lite 优先的提案、编号文件夹分配与 v7 契约。"
 kind: command
 lang: zh
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -18,34 +18,36 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ## 它做了什么
 
-`dwp-create` 接收一个高层目标，并把它转化为一份结构化的计划。它会分析目标、在需要时提出澄清性的问题、把工作分解为一系列连续的任务，并写出计划文件。
+`dwp-create` 接收一个高层目标，并把它转化为一份结构化、可执行的 Deep Work Plan。它会分析需求，在含糊时提出澄清性的问题，并直接在 `.dwp/plans/PLAN_<id>_<slug>/` 下物化出 Lite 或 Full 计划。
 
 ## 用法
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
-## 模式
+## 模式与边界选项
 
-`dwp-create` 默认采用**引导**模式：它会收集上下文、执行分析，并直接物化出一份 Lite 计划——一份紧凑且已可执行的提案，而非可丢弃的草稿——**展示给你看，并询问是保留为 Lite、晋升为按任务分文件的 Full 计划、编辑，还是停止**——这样你在决定之前总能先读到真实的计划。这是推荐的默认方式，尤其是在最初的几次。
+边界选项用于配置审阅行为与计划格式。它们可以作为词元出现在命令的开头或末尾，顺序不限：
 
-把 **`trust`**（或 `auto`）作为最后一个词追加进去，即可跳过这次审阅——代理会直接进入一份预先批准、可直接运行的计划（Lite 或 Full，由相同的信号决定）：
-
-```
-/dwp-create <goal> trust
-```
-
-trust 模式是你信任这套流程之后的进阶用户捷径；引导模式则默认让人参与其中。
+- **审阅模式：**
+  - **引导（默认）：** 物化出一份可执行的 Lite 计划提案，展示观察到的信号与格式依据，并询问是保留为 Lite、晋升为 Full、编辑，还是停止。
+  - **Trust（`trust` 或 `auto`）：** 跳过审阅，直接进入一份预先批准、可直接运行的计划。
+- **格式偏好：**
+  - **`lite`：** 表示偏好紧凑的单文件计划，即 `README.md` 中带锚点的任务记录（`#task-N`）。
+  - **`full`：** 表示偏好拆分后的编号任务文件（`N.task_<slug>.md`）。
+  - 同时指定 `lite` 与 `full` 属于显式冲突。
+- **终止符：** `--` 终止选项解析；`--` 之后的所有内容都被视为字面的目标上下文。
 
 ## 行为
-1. 分析目标与仓库上下文。
-2. 若含糊则提出澄清性的问题。
-3. 直接在 `.dwp/plans/PLAN_001_<slug>/` 下物化计划——默认是 Lite 计划，较大的工作则是 Full 计划（在引导模式下，审阅它并选择保留为 Lite、晋升为 Full、编辑或停止）。
-4. 分解为一系列连续的任务，并写出 README、任务文件与 PROGRESS。
-5. 以 Final Review 作结（安全审查、最终状态验证、技能决策核对）。
 
-7.x 技能包默认创建 v7 计划。现有计划保留记录的代际；迁移必须明确请求。 新计划会获得至少三位数、单调递增的数字 ID（例如 `PLAN_001_add_payment_webhooks/`）。冻结的 v5 schema 会把数字 ID 计作一个单词，因此 v5 slug 为 2–4 个单词；v7 slug 为 2–5 个单词。现有未编号的 `PLAN_<slug>/` 文件夹继续可读，且永不重命名。存在编号计划时，`latest` 指向数字 ID 最大的计划。
+1. **需求分析：** 检查仓库上下文、架构以及文档中记载的测试命令。
+2. **澄清：** 当范围或需求含糊时提出澄清性的问题。
+3. **单调分配：** 在 POSIX 文件锁（`fcntl`）下借助 `.next-plan-id`，于 `.dwp/plans/` 下分配补零的文件夹名 `PLAN_<id>_<slug>/`。数字 ID 单调递增，永不复用。
+4. **契约物化：** 运行 `ledger.py materialize` 写出 `manifest.json`，生成按内容寻址的 `contract.json`（v7 代际，带 `parallel_safe` 任务标记），并记录初始的 `approval` 事件。
+5. **Final Review：** 计划以一项必需的五部分 Final Review 任务作结（含必需本地审查的安全审查、最终状态验证、技能核对、文档核对、完成）。
 
 ## 别名
 

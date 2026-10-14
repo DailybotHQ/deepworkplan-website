@@ -15,7 +15,7 @@ OpenAI Codex obsługuje DWP poprzez procedury komend w markdown.
 
 ## Poziom wsparcia
 
-**Pełny** — każda komenda dwp-* uruchamiania jest z jej pliku procedury.
+**Pełne** (Przetestowane behawioralnie) — każde polecenie dwp-* działa z pliku procedury, co udowodniono w dwukierunkowych benchmarkach tworzenia i wznawiania między modelami.
 
 ## Instalacja
 

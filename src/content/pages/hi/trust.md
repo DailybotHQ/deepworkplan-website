@@ -23,11 +23,15 @@ lastUpdated: 2026-06-05
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+git checkout v7.8.1
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
+
+इकोसिस्टम पिन तालिका [/init.md](/init.md) पैक और साथी ऐड-ऑन के लिए पिन किए गए डाइजेस्ट सूचीबद्ध करती है।
 
 रिलीज़ **चेकसम की गई हैं, हस्ताक्षरित नहीं** — हस्ताक्षर (cosign या maintainer GPG) एक दस्तावेज़ीकृत अगला चरण है, वर्तमान दावा नहीं। क्योंकि सब कुछ खुला है, आप किसी भी फ़ाइल को उसके tag पर रिपॉज़िटरी से diff भी कर सकते हैं।
 
@@ -59,4 +63,4 @@ curl -fsSL -o SHA256SUMS \
 - [वेबसाइट सुरक्षा नीति](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [स्किल सुरक्षा नीति और खतरा मॉडल](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [पद्धति पढ़ें](/methodology)
-- [अपनाना (init)](/init)
+- [अपनाना (init)](/hi/quickstart)

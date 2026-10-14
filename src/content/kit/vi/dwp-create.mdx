@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "Tạo một Deep Work Plan mới từ một mục tiêu tổng quát. Agent phân tích mục tiêu, phân rã công việc thành các tác vụ, và ghi các file kế hoạch vào .dwp."
+description: "Tạo Deep Work Plan từ mục tiêu cấp cao, với đầy đủ ngữ pháp tùy chọn biên, đề xuất ưu tiên Lite, cấp phát thư mục đánh số và hợp đồng v7."
 kind: command
 lang: vi
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -12,40 +12,42 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 # dwp-create
 
-Tạo một Deep Work Plan mới từ một mục tiêu tổng quát.
+Tạo một Deep Work Plan mới từ một mục tiêu cấp cao.
 
 <CmdCreate lang="vi" class="not-prose my-8" />
 
 ## Tác dụng
 
-`dwp-create` nhận một mục tiêu tổng quát và biến nó thành một kế hoạch có cấu trúc. Nó phân tích mục tiêu, đặt câu hỏi làm rõ nếu cần, phân rã công việc thành các tác vụ tuần tự, và ghi các file kế hoạch.
+`dwp-create` nhận một mục tiêu cấp cao và biến nó thành một Deep Work Plan có cấu trúc, có thể thực thi. Nó phân tích yêu cầu, đặt câu hỏi làm rõ khi có điểm mơ hồ, và hiện thực hóa một kế hoạch Lite hoặc Full trực tiếp dưới `.dwp/plans/PLAN_<id>_<slug>/`.
 
 ## Cách dùng
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
-## Các chế độ
+## Chế độ và tùy chọn biên
 
-`dwp-create` mặc định ở chế độ **có hướng dẫn**: nó thu thập bối cảnh, chạy phân tích, và vật liệu hóa trực tiếp một kế hoạch Lite — một đề xuất gọn nhẹ đã có thể thực thi, không phải một bản nháp để bỏ đi — **trình bày cho bạn, và hỏi bạn muốn giữ nguyên là Lite, nâng cấp lên kế hoạch Full theo tệp tác vụ, chỉnh sửa, hay dừng lại** — để bạn luôn đọc kế hoạch thật trước khi quyết định. Đây là mặc định được khuyến nghị, đặc biệt trong vài lần đầu.
+Tùy chọn biên cấu hình hành vi xem xét và định dạng kế hoạch. Chúng có thể xuất hiện dưới dạng token ở đầu hoặc cuối lệnh, theo bất kỳ thứ tự nào:
 
-Thêm **`trust`** (hoặc `auto`) làm từ cuối cùng để bỏ qua bước rà soát này — agent đi thẳng đến một kế hoạch đã được phê duyệt trước, sẵn sàng chạy (Lite hoặc Full, được chọn theo cùng các tín hiệu):
-
-```
-/dwp-create <goal> trust
-```
-
-Chế độ trust là lối tắt cho người dùng thành thạo một khi bạn đã tin vào luồng làm việc; chế độ có hướng dẫn giữ con người trong vòng lặp theo mặc định.
+- **Chế độ xem xét:**
+  - **Có hướng dẫn (mặc định):** hiện thực hóa một đề xuất kế hoạch Lite có thể thực thi, hiển thị các tín hiệu quan sát được và lý do chọn định dạng, rồi hỏi bạn muốn giữ Lite, nâng cấp lên Full, chỉnh sửa hay dừng lại.
+  - **Trust (`trust` hoặc `auto`):** bỏ qua bước xem xét và đi thẳng tới một kế hoạch đã được phê duyệt trước, sẵn sàng chạy.
+- **Ưu tiên định dạng:**
+  - **`lite`:** thể hiện ưu tiên cho một kế hoạch gọn trong một tệp `README.md` với các bản ghi tác vụ có neo (`#task-N`).
+  - **`full`:** thể hiện ưu tiên cho các tệp tác vụ đánh số được tách riêng (`N.task_<slug>.md`).
+  - Chỉ định cả `lite` và `full` là một xung đột tường minh.
+- **Ký hiệu kết thúc:** `--` kết thúc việc phân tích tùy chọn; mọi thứ sau `--` được hiểu là ngữ cảnh mục tiêu theo nghĩa đen.
 
 ## Hành vi
-1. Phân tích mục tiêu và bối cảnh của repository.
-2. Đặt câu hỏi làm rõ nếu còn mơ hồ.
-3. Vật liệu hóa kế hoạch trực tiếp dưới `.dwp/plans/PLAN_001_<slug>/` — mặc định là kế hoạch Lite, hoặc Full cho công việc lớn hơn (ở chế độ có hướng dẫn, hãy rà soát và chọn giữ nguyên là Lite, nâng cấp lên Full, chỉnh sửa, hoặc dừng lại).
-4. Phân rã thành các tác vụ tuần tự và ghi README, các file tác vụ, cùng PROGRESS.
-5. Kết thúc bằng Final Review (bước rà soát bảo mật, kiểm chứng trạng thái cuối cùng, đối chiếu skill).
 
-Gói 7.x mặc định tạo kế hoạch v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; việc di chuyển cần yêu cầu rõ ràng. Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v7 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.
+1. **Phân tích yêu cầu:** kiểm tra ngữ cảnh kho mã, kiến trúc và các lệnh kiểm thử đã được tài liệu hóa.
+2. **Làm rõ:** đặt câu hỏi làm rõ nếu phạm vi hoặc yêu cầu còn mơ hồ.
+3. **Cấp phát đơn điệu:** cấp phát tên thư mục có đệm số 0 `PLAN_<id>_<slug>/` dưới `.dwp/plans/` bằng `.next-plan-id` với khóa tệp POSIX (`fcntl`). ID số tăng đơn điệu và không bao giờ được dùng lại.
+4. **Hiện thực hóa hợp đồng:** chạy `ledger.py materialize` để ghi `manifest.json`, đóng dấu `contract.json` định địa chỉ theo nội dung (thế hệ v7 với các đánh dấu tác vụ `parallel_safe`) và ghi lại sự kiện `approval` ban đầu.
+5. **Final Review:** kế hoạch kết thúc bằng một tác vụ Final Review bắt buộc gồm năm phần (lượt kiểm tra bảo mật với bước xem xét cục bộ bắt buộc, xác thực trạng thái cuối, đối chiếu skill, đối chiếu tài liệu, hoàn tất).
 
 ## Bí danh
 

@@ -1,6 +1,6 @@
 ---
 title: Windsurf
-description: "El adaptador de DWP para Windsurf, con soporte completo a través de su sistema de reglas y procedimientos de comando en Markdown invocados con el prefijo almohadilla."
+description: "El adaptador de DWP para Windsurf, con soporte completo a través de su sistema de reglas y procedimientos Markdown invocados con el prefijo almohadilla."
 kind: adapter
 lang: es
 order: 8
@@ -15,7 +15,7 @@ Windsurf admite DWP a través de su sistema de reglas y procedimientos de comand
 
 ## Nivel de soporte
 
-**Completo** — Windsurf lee las reglas del proyecto y ejecuta cada comando dwp-* desde su archivo de procedimiento.
+**Completo** (Comprobado por instalación) — Windsurf lee las reglas del proyecto y ejecuta cada comando dwp-* desde su archivo de procedimiento. Ruta verificada mediante suites de pruebas automatizadas.
 
 ## Instalación
 

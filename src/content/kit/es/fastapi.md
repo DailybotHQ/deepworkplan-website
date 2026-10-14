@@ -1,6 +1,6 @@
 ---
 title: FastAPI
-description: "Preset de incorporación para servicios FastAPI, con pistas de razonamiento para routers, modelos Pydantic, endpoints async, inyección de dependencias y el test runner."
+description: "Preset de incorporación para servicios FastAPI, con pistas para routers, modelos Pydantic, endpoints async, inyección de dependencias y el test runner."
 kind: preset
 lang: es
 order: 7

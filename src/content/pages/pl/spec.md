@@ -10,7 +10,10 @@ lastUpdated: 2026-09-28
 
 Specyfikacja to precyzyjna, czytelna definicja metodyki — struktury i protokoły, które łączą ludzi i agentów. Określa, w normatywnych terminach RFC-2119, jak zbudowany jest plan oparty na specyfikacji i jak agent musi go wykonywać: plan jest źródłem prawdy, bramki walidacyjne są binarne, a samo repozytorium niesie harness, którego potrzebuje agent. Jest podzielona na uporządkowane dokumenty:
 
-- **Standard dokumentacji** — struktura repozytorium AI-first.
+- **Warstwa rejestru** — warstwa rejestru oparta na dowodach: kontrakt, dziennik, klasy dowodów (deklarowane vs zaobserwowane), zatwierdzenia i pokwitowania.
+- **Zasoby i umiejętności** — ograniczone wykonanie: manifest kontekstu, limit zasobów, możliwości hosta i rejestr dodatków.
+- **Delegacja** — wykonanie wieloagentowe i rojowe: bezpieczne drzewa robocze, zdarzenia delegacji, transporty i sukcesja liderów.
+- **Stan planu** — maszynowa warstwa stanu: pochodna migawka dziennika w v6/v7 (`ledger.py project`), historyczna warstwa stanu v5 i uzgadnianie.
 - **Specyfikacja DWP** — struktura planu, anatomia zadania, pętla realizacji, sekcja Delta dla zmian zachowania w systemach istniejących, Protokół Wznowienia DWP, poziomy proporcjonalnej rygorystyczności (micro/standard/deep) i warstwa stanu planu odczytywalnego maszynowo.
 - **Protokół agenta** — wymagane zachowanie między agentami, mapowanie komend, obsługiwani agenci (w tym OpenClaw i Hermes) oraz profile realizacji (interaktywny i nieobsługiwany) z warunkami zatrzymania i zaplanowaną kontynuacją.
 - **Archetypy** — pojedyncze repozytoria, huby orkiestratorów i przestrzeń robocza agenta (długotrwały dom autonomicznego agenta: przestrzeń robocza OpenClaw, katalog usług Hermes, wolumen agenta chmurowego); heurystyka klasyfikacji i to, czym różni się onboarding.

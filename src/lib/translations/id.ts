@@ -13,7 +13,7 @@ export const id: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — eksekusi terstruktur untuk AI coding agent',
   siteDescription:
-    'Deep Work Plan: metodologi terbuka dan kit referensi untuk eksekusi AI agent multijam yang terstruktur, tervalidasi, dan dapat dilanjutkan.',
+    'Deep Work Plan adalah pengembangan berbasis spesifikasi di mana repositori menjadi harness: tugas atomik, gerbang validasi, dan multi-agen yang aman.',
 
   // Navigation
   nav: {
@@ -50,9 +50,9 @@ export const id: SiteTranslations = {
   // Footer
   changelogPage: {
     meta: {
-      title: 'Log Perubahan Deep Work Plan',
+      title: 'Log Perubahan Deep Work Plan — Catatan Rilis dan Riwayat Versi',
       description:
-        'Pembaruan penting pada skill, metodologi, dan harness agen portabel Deep Work Plan.',
+        'Linimasa rilis dan keputusan arsitektur Deep Work Plan: eksekusi berbasis spesifikasi, harness portabel, lapisan rekaman, dan Ekosistem 1.0.',
     },
     eyebrow: 'Log perubahan',
     title: 'Pekerjaan di balik metode',
@@ -97,7 +97,7 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — eksekusi terstruktur untuk AI coding agent',
       description:
-        'Konteks lebih penting daripada model. Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur tempat coding agent menyelesaikan pekerjaan jangka panjang.',
+        'Deep Work Plan menghadirkan pengembangan berbasis spesifikasi ke agen AI. Ubah repositori menjadi harness tahan lama untuk eksekusi dan delegasi multi-agen.',
     },
     hero: {
       badge: 'Metodologi terbuka · MIT · Agnostik terhadap agent',
@@ -267,6 +267,11 @@ export const id: SiteTranslations = {
           detail:
             'Tanpa daemon dan tanpa status eksternal. Rencana tersimpan di folder .dwp/ yang di-gitignore, dan tugas apa pun dapat dilanjutkan hanya dari git — bahkan setelah konteks meluap.',
         },
+        {
+          label: 'Delegasi multi-agen dan Ekosistem 1.0',
+          detail:
+            'Koordinasikan agen paralel secara aman dengan worktree terisolasi, bukti terobservasi pada gerbang, dan addon ekosistem tersemat opsional.',
+        },
       ],
     },
     agents: {
@@ -281,47 +286,47 @@ export const id: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Implementasi referensi, dengan WebFetch native dan slash command.',
+          note: 'Implementasi referensi dengan perintah slash bawaan. Diuji secara perilaku.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Adapter penuh. Gunakan bundel offline jika WebFetch dibatasi.',
+          note: 'Adaptor lengkap melalui aturan proyek dan symlink .cursor → .agents. Diuji saat instalasi.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Bundel offline disarankan; aturan dipasang di bawah .codex/.',
+          note: 'Adaptor lengkap melalui AGENTS.md dan prosedur perintah #. Diuji secara perilaku.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Adapter penuh — command dwp-* berjalan melalui AGENTS.md dan prosedur #.',
+          note: 'Adaptor lengkap: perintah dwp-* berjalan melalui AGENTS.md dan prosedur #. Diuji saat instalasi.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Membutuhkan Gemini 2.5 Pro atau lebih baru, dengan WebFetch native.',
+          note: 'Adaptor lengkap melalui AGENTS.md dan prosedur perintah #. Diuji saat instalasi.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Sumber terbuka. Membaca AGENTS.md secara native dan menjalankan dwp-* melalui command #.',
+          note: 'Sumber terbuka. Membaca AGENTS.md secara bawaan dan menjalankan dwp-* melalui perintah #. Diuji saat instalasi.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Aturan ditambah prosedur command # menjalankan loop Deep Work Plan secara penuh.',
+          note: 'Aturan dan prosedur perintah # menggerakkan loop lengkap Deep Work Plan. Diuji saat instalasi.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Sumber terbuka. Aturan Markdown dan command # menjalankan setiap langkah dwp-*.',
+          note: 'Sumber terbuka. Aturan Markdown dan perintah # menjalankan setiap langkah dwp-*. Diuji saat instalasi.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Adapter penuh dengan permukaan command native.',
+          note: 'Adaptor lengkap dengan prosedur perintah markdown. Diuji saat instalasi.',
         },
       ],
     },
@@ -470,6 +475,13 @@ export const id: SiteTranslations = {
         icon: '✅',
         link: '/kit',
       },
+      {
+        title: 'Bukti terverifikasi di atas narasi',
+        description:
+          'Penyelesaian dibuktikan oleh gerbang yang dieksekusi dan jurnal append-only: tugas hanya ditutup jika bukti tercatat memenuhi kriteria penerimaan, bukan dari klaim sepihak agen.',
+        icon: '\u{1F4DC}',
+        link: '/spec/record-layer',
+      },
     ],
     quickFactsTitle: 'Sekilas',
     quickFacts: [
@@ -479,6 +491,7 @@ export const id: SiteTranslations = {
       'Mencakup spesifikasi, command, adapter, preset, dan contoh',
       'Hanya Markdown — tanpa runtime, tanpa lock-in',
       'Mengubah repositori apa pun menjadi basis kode AI-first yang dapat dikemudikan agent',
+      'Addon pendamping opsional Ekosistem 1.0 (agentkit, Herdr, devcontainer, Vim, reviewer)',
     ],
     ctaTitle: 'Siapa yang merawatnya',
     ctaDescription:
@@ -611,9 +624,9 @@ export const id: SiteTranslations = {
   // Deep Work Plan — Kit index + detail
   kitPage: {
     meta: {
-      title: 'Kit Deep Work Plan',
+      title: 'Kit Deep Work Plan — Perintah, Adaptor, Preset & Addon',
       description:
-        'Skill dan sembilan sub-skill-nya, command, adapter, preset, addon opt-in, dan contoh yang membuat Deep Work Plan dapat dijalankan lintas agent dan stack.',
+        'Keahlian inti dengan 9 sub-keahlian, adaptor agen, preset stack, dan addon opsional untuk menjalankan Deep Work Plan di berbagai lingkungan.',
     },
     eyebrow: 'Kit',
     title: 'Kit',
@@ -805,7 +818,7 @@ export const id: SiteTranslations = {
             id: 'which-agents',
             question: 'Dengan coding agent apa saja ia bekerja?',
             answer:
-              'Agent mana pun yang membaca file repositori. Skill ini mengikuti standar Agent Skills terbuka dan konvensi `AGENTS.md`, sehingga Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, dan lainnya memuatnya melalui pemuatan skill dan instruksi normal mereka. Evaluasi milik metodologi ini sendiri menunjukkan sebuah rencana yang dimulai oleh agent dari satu vendor dan dilanjutkan oleh agent vendor lain, di kedua arah. Cakupan instalasi dan bukti perilaku didaftar per agent dalam matriks kompatibilitas, dan keduanya tidak pernah dicampuradukkan.',
+              'Dengan agen pengodean apa pun yang membaca berkas repositori. Claude Code dan OpenAI Codex diuji secara perilaku untuk eksekusi dan serah terima dua arah; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline, dan Antigravity memiliki adaptor teruji instalasi. Metodologi memisahkan pengujian perilaku dari cakupan instalasi.',
             linkLabel: 'Telusuri kit',
             linkPath: '/kit',
           },
@@ -938,6 +951,66 @@ export const id: SiteTranslations = {
         ],
       },
       {
+        id: 'many-agents-v7',
+        title: 'Banyak agen & v7',
+        items: [
+          {
+            id: 'parallel-agents',
+            question:
+              'Bisakah beberapa agen bekerja pada satu rencana secara paralel dan bagaimana keamanannya terjaga?',
+            answer:
+              'Ya, dengan aturan eksplisit. Rencana v7 dapat menandai tugas sebagai `parallel_safe` jika permukaan yang disentuh tidak tumpang tindih dengan tugas lain dan output-nya terikat, serta hanya kontrak yang memberikan `agent_delegation` yang mengizinkan tugas tersebut dialihkan ke agen koding lain — headless di worktree git miliknya sendiri (agentkit) atau di panel Herdr lain (Herdr). Delegasi penulisan hanya bekerja di worktree-nya sendiri, sesi induk tetap menjadi satu-satunya penulis jurnal rencana, dan delegasi tidak pernah mendelegasikan lebih lanjut.',
+            linkLabel: 'Baca tentang delegasi',
+            linkPath: '/spec/delegation',
+          },
+          {
+            id: 'delegate-trust',
+            question:
+              'Apakah hasil dari sub-agen delegasi langsung dipercaya secara otomatis?',
+            answer:
+              'Tidak. Hasil delegasi dicatat sebagai `asserted` sampai rencana induk mengintegrasikan pekerjaan dan runner gerbangnya sendiri mengeksekusi gerbang tugas, yang merupakan satu-satunya hal yang mencatat bukti `observed`. Delegasi yang selesai tidak pernah menutup kriteria dengan sendirinya, sehingga delegasi memperluas jangkauan tanpa menurunkan standar penyelesaian.',
+            linkLabel: 'Baca spesifikasi lapisan rekaman',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'capacity-handoff-succession',
+            question:
+              'Apa yang terjadi ketika agen mencapai batas penggunaan atau token di tengah rencana?',
+            answer:
+              'Setiap agen memeriksa kapasitasnya sendiri di batas tugas. Jika masih ada ruang, ia melanjutkan; saat kapasitas menipis, ia hanya menyelesaikan tugas yang mampu ia selesaikan; saat kritis, ia mencapai titik aman, menulis paket serah terima kecil (`dwp-handoff-v1`: apa yang selesai, terverifikasi dan belum terverifikasi, serta langkah selanjutnya), memberi tahu pemimpin dan berhenti. Pemimpin meluncurkan penerus di akun lain, yang menerima paket dan melanjutkan rencana, menjalankan ulang setiap gerbang yang tercantum belum diverifikasi. Jika pemimpin itu sendiri kehabisan kapasitas, ia menyerahkan kepemimpinan kepada penerus; pergantian kepemimpinan membawa epoch yang terus bertambah sehingga hanya satu pemimpin yang bertindak pada satu waktu.',
+            linkLabel: 'Baca metodologi',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'escalation-taxonomy',
+            question:
+              'Kapan agen otonom berhenti untuk bertanya kepada manusia?',
+            answer:
+              'DWP mendefinisikan taksonomi eskalasi tujuh kelas yang ketat (AGENT_PROTOCOL §7.5): C1 tindakan tanpa persetujuan, C2 hambatan autentikasi/izin, C3 ambiguitas tak tereduksi, C4 kegagalan gerbang tanpa perbaikan yang diizinkan, C5 operasi destruktif, C6 lisensi, C7 kapasitas habis.',
+            linkLabel: 'Baca protokol agen',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'proven-done',
+            question:
+              'Bagaimana penyelesaian tugas dibuktikan di luar klaim naratif agen?',
+            answer:
+              'Tugas selesai hanya jika bukti tercatat memenuhi setiap kriteria penerimaannya. Kontrak hasil dialamatkan berdasarkan konten dan tidak dapat diubah setelah eksekusi dimulai, setiap peristiwa ditambahkan ke jurnal rencana, dan hanya runner gerbang yang mencatat bukti `observed`. Kriteria yang memerlukan penilaian manusia hanya ditutup melalui persetujuan manusia yang tercatat dengan penanda otoritas eksplisit; tanda terima dihitung ulang dari catatan, tidak pernah ditulis tangan. Tinjauan Akhir kemudian menjalankan pemeriksaan keamanan dan validasi penuh pada status akhir.',
+            linkLabel: 'Baca spesifikasi lapisan rekaman',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'v6-compatibility',
+            question: 'Apakah rencana v6 tetap berjalan di bawah v7?',
+            answer:
+              'Ya. Kontrak rencana secara eksplisit mendeklarasikan generasi skema (`plan-contract/v6.json` vs `plan-contract/v7.json`). Rencana yang sedang berjalan tidak pernah bermigrasi di tengah jalan. Rencana v6 mempertahankan bentuk dan semantik jurnalnya di bawah alat v7.',
+            linkLabel: 'Baca tentang kontrak',
+            linkPath: '/spec/record-layer',
+          },
+        ],
+      },
+
+      {
         id: 'compare',
         title: 'Perbandingannya dengan alat lain',
         items: [
@@ -1038,9 +1111,10 @@ export const id: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan dibandingkan dengan alternatifnya',
+      title:
+        'Perbandingan Deep Work Plan dengan Alternatif Berbasis Spesifikasi',
       description:
-        'Relasi Deep Work Plan dengan tool spec-driven, framework agent, dan mode rencana vendor: masing-masing menurut istilahnya, dengan sumber dan tanggal tinjauan.',
+        'Bagaimana Deep Work Plan dibandingkan dengan alat berbasis spesifikasi, kerangka kerja agen, dan mode rencana vendor: sumber resmi dan tanggal tinjauan.',
     },
     eyebrow: 'Perbandingan',
     title: 'Deep Work Plan dan alternatifnya',
@@ -1242,6 +1316,14 @@ export const id: SiteTranslations = {
           title: 'Beban instruksi diukur dan dipublikasikan',
           body: 'Script yang di-commit mempublikasikan dua pengukuran per alur — paket masuk yang dimuat di permulaan sesi, dan jalur end-to-end setelah pemicu nyatanya aktif — beserta apa yang dikecualikan masing-masing, sehingga angka masuk saja tidak pernah dibaca sebagai total biaya sebuah eksekusi. Hasilnya, termasuk kenaikan, dipublikasikan sebagai byte, tidak pernah sebagai persentase token atau biaya.',
         },
+        {
+          title: 'Lapisan rekaman yang didukung bukti nyata',
+          body: 'Kontrak yang tidak dapat diubah (contract.json), jurnal peristiwa append-only (journal.ndjson), tanda terima yang dihitung ulang, dan gerbang yang diamati memastikan penyelesaian terbukti alih-alih diklaim.',
+        },
+        {
+          title: 'Delegasi multi-agen yang aman & otonomi swarm',
+          body: 'Eksekusi tugas paralel di worktree khusus, paket serah terima terstruktur, dan suksesi pemimpin bertahap mencegah penyimpangan dan konflik.',
+        },
       ],
     },
     honestLimits: {
@@ -1260,7 +1342,7 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Kepercayaan dan keamanan — Deep Work Plan',
       description:
-        'Mengapa Deep Work Plan aman untuk diadopsi: sumber terbuka dan berlisensi MIT, Markdown-first tanpa panggilan jaringan atau telemetri, non-destruktif berdasarkan desain, dengan instalasi yang dapat diverifikasi dan kebijakan pengungkapan kerentanan yang jelas.',
+        'Keamanan Deep Work Plan: sumber terbuka MIT, Markdown tanpa telemetri, desain non-destruktif, checksum terverifikasi, dan pengungkapan privat.',
     },
     eyebrow: 'Kepercayaan & keamanan',
     title: 'Kepercayaan dan keamanan',
@@ -1294,10 +1376,13 @@ export const id: SiteTranslations = {
       'Perlakukan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Setiap rilis melampirkan file SHA256SUMS yang mencakup skill yang dikirimkan. Unduh untuk versi yang ingin Anda pasang, lalu verifikasi bahwa salinan Anda cocok — keluaran non-zero berarti sebuah file tidak cocok dan Anda harus berhenti.',
     codeLabel: 'shell',
     verifyNote:
-      'Rilis ber-checksum, bukan ditandatangani — penandatanganan (cosign atau GPG pengelola) adalah langkah berikutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file mana pun terhadap repositori pada tag-nya.',
+      'Rilis memiliki checksum, bukan tanda tangan — tanda tangan (cosign atau GPG pengelola) adalah langkah selanjutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file apa pun dengan repositori pada tag-nya.',
     vimNote:
       'Aturan yang sama berlaku untuk pemasang DeepWorkPlan Vim: halamannya menampilkan SHA-256 skrip yang disajikan sekarang, beserta langkah unduh, periksa, verifikasi, dan jalankan.',
     vimLinkLabel: 'Periksa pemasang DeepWorkPlan Vim',
+    ecosystemPinsLead:
+      'Untuk checksum dan rilis yang dipatok dari setiap produk ekosistem (agentkit, Herdr, devcontainer, Vim, dan AI Diff Reviewer), lihat',
+    ecosystemPinsLinkLabel: 'tabel verifikasi ekosistem di /init.md',
     betaNote:
       'Pra-rilis diverifikasi dengan cara yang sama: setiap pra-rilis GitHub membawa SHA256SUMS-nya sendiri dan tidak pernah menjadi rilis stabil. Selama situs ini menyertakan salah satunya untuk mengujinya di lapangan, baris instalasinya yang dipatok ditampilkan di bawah.',
     disclosureTitle: 'Laporkan kerentanan',
@@ -1310,7 +1395,7 @@ export const id: SiteTranslations = {
     linkSkillPolicy: 'Kebijakan keamanan skill & model ancaman',
     limitationsTitle: 'Keterbatasan yang jujur',
     limitations: [
-      'Rilis ber-checksum, belum ditandatangani secara kriptografis — penandatanganan direncanakan, belum dilakukan.',
+      'Rilis memiliki checksum, tetapi belum ditandatangani — penandatanganan direncanakan, belum dilakukan.',
       'Deep Work Plan menjalankan coding agent otonom terhadap repositori Anda. Tinjau rencana yang diusulkannya dan diff-nya; metodologi dirancang untuk tinjauan itu, bukan untuk menggantikannya.',
       'Klaim kepercayaan di sini hanya mendeskripsikan sumber resmi. Salinan yang dimodifikasi atau pihak ketiga yang telah menyimpang dari repositori tidak membawa satu pun dari jaminan ini — verifikasi dulu.',
     ],

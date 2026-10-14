@@ -1,6 +1,6 @@
 ---
 title: Google Gemini
-description: "El adaptador de DWP para Google Gemini, con soporte completo mediante procedimientos de comando en Markdown y el prefijo almohadilla que ejecutan el flujo completo de Deep Work Plan."
+description: "El adaptador de DWP para Google Gemini, con soporte total por procedimientos Markdown y el prefijo almohadilla que ejecutan el flujo completo de Deep Work Plan."
 kind: adapter
 lang: es
 order: 5
@@ -15,7 +15,7 @@ Gemini admite DWP mediante procedimientos de comando en Markdown.
 
 ## Nivel de soporte
 
-**Completo** — cada comando dwp-* se ejecuta desde su archivo de procedimiento. Requiere Gemini 2.5 Pro o superior para WebFetch nativo.
+**Completo** (Comprobado por instalación) — cada comando dwp-* se ejecuta desde su archivo de procedimiento. Ruta verificada mediante suites de pruebas automatizadas; los flujos de comportamiento se ejecutan en la línea base secuencial. Requiere ejecución de herramientas y acceso a archivos del espacio de trabajo.
 
 ## Instalación
 

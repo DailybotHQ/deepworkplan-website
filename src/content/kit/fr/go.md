@@ -1,6 +1,6 @@
 ---
 title: Go
-description: "Un preset d'onboarding pour les projets Go, avec des indices de raisonnement sur les modules, la structure cmd/internal, les tests pilotés par table et la porte go test/vet/build."
+description: "Un preset d'onboarding pour les projets Go, avec des indices de raisonnement sur les modules, la structure cmd/internal, les tests pilotés par table et la."
 kind: preset
 lang: fr
 order: 20

@@ -1,6 +1,6 @@
 ---
 title: Standard de documentation
-description: "Standard normatif sur la façon dont les Deep Work Plans documentent leur structure, leurs tâches et leur progression : règles du README, marqueurs de statut, l’anatomie de tâche en dix sections et le Final Review."
+description: "Standard normatif de documentation des Deep Work Plans : règles du README, marqueurs de statut, tâche en dix sections et le Final Review en cinq parties."
 order: 1
 lang: fr
 section: Standard
@@ -54,7 +54,7 @@ Tous les titres MUST utiliser la casse de phrase. Les documents SHOULD éviter l
 
 ## Le Final Review, les décisions de skills par tâche et le rapport optionnel
 
-Tout plan rédigé sous cette version MUST se terminer par exactement une tâche obligatoire : le **Final Review** — la passe de sécurité sur l’ensemble des changements du plan, la validation de l’état final sur le dernier état pertinent, et la réconciliation des décisions de skills. Une découverte de sécurité critique bloque l’achèvement.
+Tout plan rédigé sous cette version MUST se terminer par exactement une tâche obligatoire : le **Final Review**. Dans l’ordre, il exécute (a) la passe de sécurité sur l’ensemble des changements du plan, y compris la revue locale AI Diff Reviewer requise ; (b) la validation de l’état final sur le dernier état pertinent ; (c) la réconciliation des décisions de skills ; (d) la réconciliation de la documentation de chaque surface touchée ; et (e) l’achèvement, avec des enregistrements du plan concordants. Une découverte de sécurité critique bloque l’achèvement.
 
 - **Décisions de skills par tâche.** Le Completion & Log de chaque tâche porte une **disposition de skills** — `aucune`, une mise à jour d’un skill ou d’un agent existant, une création nommée, ou un report avec motif et responsable. La rédaction justifiée a lieu à l’intérieur de la tâche qui la motive, avant sa porte de validation, après une vérification de doublons contre le catalogue `.agents/` ; les entrées justifiées sont enregistrées comme candidates stables (`T{task}-{seq}`) dans le registre des candidates de skills du plan.
 - **L’Executive Report est optionnel, sur demande.** Il est proposé une fois à l’achèvement ; il n’est généré que sur demande explicite, à partir de preuves durables. Sans réponse, ou lors d’une exécution non surveillée, le plan reste achevé sans lui.

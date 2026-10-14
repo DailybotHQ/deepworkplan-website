@@ -19,6 +19,7 @@ Es deliberadamente agnóstica respecto al agente de IA o stack que uses — los 
 - **Planificar antes de ejecutar** — No se escribe código hasta que el plan está acordado. El plan es un contrato entre tú y el agente. [Leer la metodología](/es/methodology)
 - **Las tareas son atómicas** — Cada tarea tiene un alcance que permite ejecutarla y verificarla por sí sola, y luego confirmarla de forma atómica. [Ver la especificación](/es/spec)
 - **Verificar todo** — Cada tarea termina con una verificación explícita antes de que comience la siguiente, con el progreso registrado en git. [Explorar el kit](/es/kit)
+- **Evidencia verificada sobre narrativa** — La finalización se demuestra mediante puertas ejecutadas y un diario solo agregable: una tarea concluye únicamente cuando la evidencia registrada cumple sus criterios de aceptación, nunca por la afirmación no comprobada de un agente. [Leer la capa de registro](/es/spec/record-layer)
 
 ---
 

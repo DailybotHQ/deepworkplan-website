@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: from a plan loop to a portable harness"
-description: "Deep Work Plan grows from a single written-plan loop into a portable adoption kit — trust and provenance, broader agent-host coverage, and a conformance checker any repository can run."
+description: "Deep Work Plan v1 expands from a single plan loop into a portable adoption kit with provenance, broader agent coverage, and conformance checks."
 date: 2026-06-12
 version: "v1 · Foundation"
 kind: foundation

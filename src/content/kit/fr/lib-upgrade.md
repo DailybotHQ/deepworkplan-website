@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Mettre à jour en toute sécurité les dépendances d’un dépôt par lots validés et réversibles via l’addon dependency-upgrade. Installé uniquement lorsque cet addon est accepté."
+description: "Mettre à jour en toute sécurité les dépendances d’un dépôt par lots validés et réversibles via l’addon dependency-upgrade. Installé uniquement lorsque cet."
 kind: command
 lang: fr
 order: 9

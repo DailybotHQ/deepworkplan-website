@@ -44,7 +44,7 @@ section: Addons
 
 - **套件页：** [Dailybot](/kit/dailybot)——完整能力参考
 - **DWP 附加组件接入的内容：** 通过 dailybot `report` 子技能的四个计划生命周期报告（kickoff、significant task、blocked、completion）；可选确定性钩子强制层（`dailybot hook`，CLI `>= 3.9.0`）
-- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（当前 **3.23.14**）暴露 **17 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、Plan 看板与任务、组织标签、每仓库 API 密钥（`.dailybot/env.json`）、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
+- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（固定为 **v3.23.17**）暴露 **17 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、Plan 看板与任务、组织标签、每仓库 API 密钥（`.dailybot/env.json`）、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
 - **认证：** 完全延后至 Dailybot 技能（`dailybot login` 或 `DAILYBOT_API_KEY`）；此附加组件从不存储凭据
 - **供应商中立护栏：** 核心 DWP 对 Dailybot **零**依赖；切勿为所有人自动安装
 - **何时提供：** 开发者或团队已在使用 Dailybot，或明确要求团队报告
@@ -137,7 +137,7 @@ section: Addons
 
 ## 示例
 
-示例演示 DWP 实践：前后对比、示例计划、案例研究。参见 [Examples](/examples) 与 [Dogfood this site](/kit/dogfood-this-site)。
+示例演示 DWP 实践：前后对比、示例计划、案例研究。参见 [Examples](/examples) 与 [Dogfood this site](/examples/dogfood-this-site)。
 
 ## 符合性提醒
 

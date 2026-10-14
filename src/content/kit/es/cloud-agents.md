@@ -1,6 +1,6 @@
 ---
 title: Cloud agents
-description: "El adaptador DWP para agentes en la nube y en segundo plano: tareas remotas de Claude Code, Codex en la nube, agentes tipo Jules — sesiones efímeras que ejecutan contra un plan .dwp/ duradero."
+description: "El adaptador DWP para agentes en la nube y en segundo plano: tareas remotas de Claude Code, Codex en la nube, agentes tipo Jules — sesiones efímeras que."
 kind: adapter
 lang: es
 order: 12
@@ -19,17 +19,17 @@ El directorio `.dwp/` del repositorio es la **capa de especificación y estado d
 
 ## Nivel de soporte
 
-**Completo** — cualquier agente en la nube que lea el repositorio, siga `AGENTS.md` y pueda ejecutar comandos de shell soporta DWP sin un adaptador específico de plataforma.
+**Completo** (Documentado) — las plataformas de agentes en la nube leen `AGENTS.md` o instrucciones nativas y ejecutan comandos a través de su entorno de terminal o contenedor.
 
 ## El bucle despertar-reanudar-ceder
 
 Cada turno de agente en la nube sigue este patrón:
 
 1. **Despertar** — la sesión arranca (activada por un horario cron, un evento de CI o una acción del usuario).
-2. **Ejecutar el Protocolo de Reanudación DWP** — leer el README del plan, localizar el punto de control, reconciliar `state.json` con el Markdown, inspeccionar la costura, ejecutar una prueba de humo. Véase [Especificación de DWP](/spec/dwp-specification#the-dwp-resume-protocol).
+2. **Ejecutar el Protocolo de Reanudación DWP** — leer el README del plan, localizar el punto de control, reconstruir el estado a partir de `journal.ndjson` mediante `ledger.py project`, inspeccionar la costura, ejecutar una prueba de humo. Véase [Especificación de DWP](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Comprobar el estado de bloqueo** — si `state.json.blocked` está establecido, reportar el motivo y ceder sin ejecutar.
 4. **Ejecutar la siguiente tarea atómica** — una tarea, pasando su puerta de validación completa.
-5. **Actualizar la capa de estado** — reescribir `state.json` de forma atómica con el nuevo estado de la tarea, los registros de puertas, el registro de resultados y el hash del commit.
+5. **Registrar en el diario** — añadir eventos a `journal.ndjson` mediante los verbos de `ledger.py` (`start`, `gate`, `complete`); `ledger.py project` actualiza la proyección de instantánea de `state.json` de forma atómica. En planes v5 heredados, se preserva la actualización directa del archivo de estado.
 6. **Ceder** — la sesión termina limpiamente; el siguiente turno continúa desde el estado actualizado.
 
 ## Requisitos

@@ -23,11 +23,15 @@ Treat the skill as untrusted until you have checked it. Each release attaches a 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+git checkout v7.8.1
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
+
+The ecosystem pin table in [/init.md](/init.md) lists pinned digests for the pack and companion addons.
 
 Releases are **checksummed, not signed** — signing (cosign or maintainer GPG) is a documented next step, not a current claim. Because everything is open, you can also diff any file against the repository at its tag.
 
@@ -46,7 +50,7 @@ Report security issues **privately through GitHub's private vulnerability report
 
 ## Honest limitations
 
-- Releases are checksummed, not yet cryptographically signed — signing is planned, not done.
+- Releases are checksummed, not yet signed — signing is planned, not done.
 - Deep Work Plan runs an autonomous coding agent against your repository. Review its proposed plan and its diffs; the methodology is designed for that review, not to replace it.
 - These trust claims describe the official sources only. A modified or third-party copy that has drifted from the repositories carries none of these guarantees — verify it first.
 
@@ -59,4 +63,4 @@ Report security issues **privately through GitHub's private vulnerability report
 - [Website security policy](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Skill security policy & threat model](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Read the methodology](/methodology)
-- [Adoption (init)](/init)
+- [Adoption (init)](/quickstart)

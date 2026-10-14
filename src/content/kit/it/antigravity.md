@@ -1,6 +1,6 @@
 ---
 title: Antigravity
-description: "L'adapter DWP per Antigravity, con supporto completo tramite procedure di comando in Markdown e il prefisso cancelletto che guidano l'intero ciclo Deep Work Plan."
+description: "L'adapter DWP per Antigravity, con supporto totale via procedure di comando in Markdown e il prefisso cancelletto che guidano l'intero ciclo Deep Work Plan."
 kind: adapter
 lang: it
 order: 6
@@ -15,7 +15,7 @@ Antigravity supporta DWP tramite procedure di comando in Markdown.
 
 ## Livello di supporto
 
-**Completo** — ogni comando dwp-* viene eseguito dal suo file di procedura tramite la superficie di comandi nativa.
+**Completo** (Testato per installazione) — ogni comando dwp-* viene eseguito dal rispettivo file di procedura. Percorso verificato da suite di test automatizzate; i flussi comportamentali operano sulla baseline sequenziale.
 
 ## Installazione
 

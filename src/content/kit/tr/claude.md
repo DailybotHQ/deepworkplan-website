@@ -15,7 +15,7 @@ Claude Code, yerel eğik çizgi komutları ve skill’ler aracılığıyla **tam
 
 ## Destek düzeyi
 
-**Tam** — beş DWP komutunun tümü yerel Claude Code eğik çizgi komutlarına eşlenir.
+**Tam** (Davranış testli) — DWP alt becerileri ve yaşam döngüsü komutlarının tam paketi, çift yönlü devir kıyaslamalarında kanıtlanmış olarak yerel Claude Code eğik çizgi komutlarına eşlenir.
 
 ## Kurulum
 

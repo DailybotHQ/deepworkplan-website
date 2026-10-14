@@ -1,6 +1,6 @@
 ---
 title: Laravel
-description: "Laravel プロジェクト向けのオンボーディングプリセット。Eloquent モデル、コントローラー、ルート、マイグレーション、Artisan コマンド、テストランナーに関する推論の手がかりを備える。"
+description: "Laravel プロジェクト向けのオンボーディングプリセット。Eloquent モデル、コントローラー、ルート、マイグレーション、Artisan コマンド、テストランナーに関。"
 kind: preset
 lang: ja
 order: 11

@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Var olan bir Deep Work Plan’i görev görev yürütür. Ajan planın tamamını okur, her görevi sırayla çalıştırır, ilerlemeyi günceller ve tamamlanmayı doğru biçimde işaretler."
+description: "Mevcut bir Deep Work Plan’i v7 defter döngüsü, isteğe bağlı gözetimsiz trust modu, parallel_safe delegasyonu ve Final Review kapanışıyla sırayla yürütün."
 kind: command
 lang: tr
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -12,27 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Var olan bir Deep Work Plan’i yürütün.
+Var olan bir Deep Work Plan’i görev görev yürütün.
 
 <CmdExecute lang="tr" class="not-prose my-8" />
 
 ## Ne yapar
 
-`dwp-execute`, var olan bir planı görev görev çalıştırır. Planın tamamını okur, her görevi sırayla yürütür, `PROGRESS.md` dosyasını günceller ve her görevin tamamlanma durumunu işaretler.
+`dwp-execute`, var olan bir planı deterministik kayıt katmanı üzerinden görev görev çalıştırır. Hedef planı çözümler, bağımlılıkları değerlendirir, her görevi bildirilen sırayla yürütür, doğrulama kapılarını çalıştırır ve değiştirilemez ilerleme kayıtları tutar.
 
 ## Kullanım
 
 ```
-/dwp-execute [plan]
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Modlar
+
+- **Rehberli (varsayılan):** görevler arasında onay ister; böylece her görev sınırında kanıtları ve kararları inceleyebilirsiniz.
+- **Trust (`auto`):** sona `trust` eklemek, uygun görevleri rutin onay için durmadan sırayla sonuna kadar çalıştırır; yalnızca gerçekten engellendiğinde durur (C1–C7 yükseltme sınıfları).
 
 ## Davranış
 
-1. Başlamadan önce planın tamamını okuyun.
-2. Görevleri sırayla yürütün.
-3. Her görevden sonra `PROGRESS.md` dosyasını güncelleyin.
-4. Görev durumunu doğru biçimde işaretleyin.
-5. Engellendiğinizde durup sorun.
+1. **Plan çözümleme:** planı tam klasör adına, sayısal kimliğe, benzersiz slug’a ya da `latest` değerine (sayısal kimliği en yüksek plan) göre çözümler.
+2. **Defter döngüsü:** bağımlılık DAG’ını ve değişmezleri değerlendirmek için `ledger.py ready`, ön koşulları doğrulamak için `ledger.py start`, doğrulama komutlarını yürütüp `observed` kanıt üretmek için `ledger.py gate` çalıştırır.
+3. **Korumalı tamamlama:** `ledger.py complete`, sıfır test denetimlerini, değişmezlerin yeniden değerlendirilmesini ve görev yerel skill ve dokümantasyon kararlarını zorunlu kılar.
+4. **Plan içi delegasyon:** v7 sözleşmelerinde `parallel_safe` olarak işaretlenen görevler, başsız (bir worktree içinde `ak run`) ya da etkileşimli (`herdr` bölmesi) taşıyıcılar aracılığıyla alt ajanlara devredilebilir. Sonuçlar, planın kapı çalıştırıcısı tarafından gözlemlenene kadar `asserted` olarak kalır.
+5. **Kapasite denetimleri:** dağıtımdan önce görev sınırlarında kalan hesap payını değerlendirir.
+6. **Final Review:** zorunlu, beş bölümlü bir kapanış göreviyle sona erer (zorunlu yerel inceleme içeren güvenlik geçişi, son durum doğrulaması, skill uzlaştırması, dokümantasyon uzlaştırması, tamamlama).
 
 ## Takma adlar
 

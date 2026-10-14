@@ -1,6 +1,6 @@
 ---
 title: TypeScript Lambda
-description: "サーバーレス TypeScript Lambda プロジェクト向けのオンボーディングプリセット。ハンドラー、Serverless／SAM／CDK ツールチェーン、IAM 最小権限に関する推論の手がかりを備える。"
+description: "サーバーレス TypeScript Lambda プロジェクト向けのオンボーディングプリセット。ハンドラー、Serverless／SAM／CDK ツールチェーン、IAM 最小。"
 kind: preset
 lang: ja
 order: 22

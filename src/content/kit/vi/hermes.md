@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "Bộ chuyển đổi DWP cho Hermes: tải skill theo chuẩn AgentSkills, hiệp lực bộ nhớ theo sự kiện qua bản ghi kết quả trong state.json, và tiếp tục kế hoạch theo lịch cron."
+description: "Bộ điều hợp DWP cho Hermes: nạp skill qua chuẩn AgentSkills, bộ nhớ theo sự kiện từ kết quả kế hoạch và tiếp tục kế hoạch theo lịch cron."
 kind: adapter
 lang: vi
 order: 11
@@ -15,7 +15,7 @@ Hermes là một nền tảng agent tự chủ tải skill qua chuẩn AgentSkil
 
 ## Mức độ hỗ trợ
 
-**Full** — Hermes đọc `AGENTS.md` và tải skill qua tải theo chuẩn AgentSkills. Tất cả các sub-skill DWP đều sẵn có.
+**Đầy đủ** (Đã lập tài liệu) — Hermes đọc `AGENTS.md` và tải kỹ năng qua cách tải tiêu chuẩn AgentSkills. Tất cả các kỹ năng phụ của DWP đều có sẵn.
 
 ## Cài đặt
 
@@ -32,9 +32,9 @@ resume the open plan
 
 ## Hiệp lực bộ nhớ theo sự kiện
 
-Hermes lập chỉ mục bộ nhớ agent để làm cho công việc trong quá khứ có thể truy xuất qua các phiên tương lai. Các bản ghi kết quả `state.json` của DWP được thiết kế chính xác cho mục đích sử dụng này: mỗi tác vụ đã hoàn tất mang những gì đã `tried`, những gì đã `failed`, những gì đã `worked`, và các ghi chú tự do trong một trường JSON có cấu trúc. Khi Hermes lập chỉ mục các tệp trạng thái `.dwp/plans/` của không gian làm việc, các kế hoạch đã hoàn tất trở thành bộ nhớ theo sự kiện có thể truy xuất — một agent có thể về sau nhớ lại cách một vấn đề cụ thể được giải quyết, không chỉ là một kế hoạch đã chạy.
+Trong các kế hoạch v6 và v7, biên nhận xác minh tất định của DWP (`outcomes.py receipt`) và các bản ghi kết quả được đưa trực tiếp vào chỉ mục bộ nhớ của Hermes: mỗi tác vụ hoàn thành mang theo những gì đã thử, thất bại và hiệu quả trong một lược đồ JSON có cấu trúc. Các kế hoạch đã hoàn thành trở thành bộ nhớ tình tiết có thể truy xuất — một agent có thể nhớ lại cách một vấn đề đã được giải quyết.
 
-Điều này có nghĩa là các kế hoạch DWP trên Hermes bền vững theo hai cách: các tệp markdown là bản ghi mà con người đọc được, và các bản ghi kết quả `state.json` là bộ nhớ có thể lập chỉ mục bằng máy. Xem [Trạng thái kế hoạch](/spec/plan-state#outcome-records-as-episodic-memory).
+Các phiên tạm thời nối thêm sự kiện vào `journal.ndjson` và chiếu `state.json` qua `ledger.py project` thay vì viết lại các tệp trạng thái theo cách thủ công. Xem [Trạng thái kế hoạch](/spec/plan-state#outcome-records-as-episodic-memory).
 
 ## Tiếp tục theo lịch cron
 

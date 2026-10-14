@@ -5,6 +5,7 @@ import Rule from '@/components/editorial/Rule.astro';
 import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { REPO_URLS } from '@/lib/constants/repos';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 import type { Language } from '@/lib/i18n';
 import { getUrlPrefix } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -20,13 +21,18 @@ const p = t.trustPage;
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 
+const packPin = ECOSYSTEM_PINS.pack;
+
 // The verify recipe is code — never localized. Mirrors analysis (verify_recipe.md),
 // the /init prompt, and the skill repo PUBLISHING.md so all surfaces agree.
 const verifyCommand = `git clone ${REPO_URLS.skill}.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+git checkout ${packPin.tag}
+# Download the checksums for the release you intend to install (current release: ${packPin.tag}):
 curl -fsSL -o SHA256SUMS \\
-  ${REPO_URLS.skill}/releases/download/vX.Y.Z/SHA256SUMS
+  ${REPO_URLS.skill}/releases/download/${packPin.tag}/SHA256SUMS
+# Confirm SHA256SUMS integrity (digest: ${packPin.sha256sums}):
+echo "${packPin.sha256sums}  SHA256SUMS" | sha256sum -c -
 ./setup.sh --verify        # non-zero exit means a file does not match — stop`;
 
 // The vendored pre-release's pinned install line — code, never localized. Read
@@ -168,6 +174,14 @@ const breadcrumbSchema = {
           class="underline underline-offset-4 hover:opacity-80"
           style="color: var(--color-secondary);">{p.vimLinkLabel}</a
         >
+      </p>
+      <p class="mt-4 leading-relaxed" style="color: var(--color-gray-600);">
+        {p.ecosystemPinsLead}
+        <a
+          href="/init.md"
+          class="underline underline-offset-4 hover:opacity-80"
+          style="color: var(--color-secondary);">{p.ecosystemPinsLinkLabel}</a
+        >.
       </p>
       {
         betaInstallCommand && (

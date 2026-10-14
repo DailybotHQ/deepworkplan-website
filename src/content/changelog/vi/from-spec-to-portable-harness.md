@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: từ vòng lặp lập kế hoạch đến harness có thể di chuyển"
-description: "Deep Work Plan phát triển từ một vòng lặp viết kế hoạch đơn lẻ thành một bộ công cụ áp dụng có thể di chuyển — có xác thực nguồn gốc và độ tin cậy, hỗ trợ nhiều nền tảng tác nhân hơn, cùng một bộ kiểm tra tuân thủ mà bất kỳ kho mã nào cũng có thể chạy."
+description: "Deep Work Plan v1 mở rộng thành bộ công cụ di chuyển được: xác thực nguồn gốc, hỗ trợ nhiều tác nhân và kiểm tra tuân thủ cho mọi kho mã nguồn."
 date: 2026-06-12
 version: "v1 · Nền tảng"
 kind: foundation

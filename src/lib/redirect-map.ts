@@ -36,6 +36,8 @@ export interface RedirectPair {
 // so earlier links (llms.txt, the product README, agent footers) keep working;
 // the installer itself lives at /vim/install.sh, a static file these exact-path
 // rules never touch.
+// Kit entries of kind `example` are served once, at /examples/<slug>; their
+// former /kit/<slug> pages and Markdown twins redirect there.
 export const REDIRECT_PAIRS: readonly RedirectPair[] = [
   { from: 'init', to: 'quickstart', status: 301 },
   { from: 'setup', to: 'quickstart', status: 301 },
@@ -43,6 +45,38 @@ export const REDIRECT_PAIRS: readonly RedirectPair[] = [
   { from: 'docs', to: 'developers', status: 301 },
   { from: 'vim', to: 'kit/vim', status: 301 },
   { from: 'vim.md', to: 'kit/vim.md', status: 301 },
+  { from: 'kit/before-after', to: 'examples/before-after', status: 301 },
+  { from: 'kit/before-after.md', to: 'examples/before-after.md', status: 301 },
+  {
+    from: 'kit/dogfood-this-site',
+    to: 'examples/dogfood-this-site',
+    status: 301,
+  },
+  {
+    from: 'kit/dogfood-this-site.md',
+    to: 'examples/dogfood-this-site.md',
+    status: 301,
+  },
+  {
+    from: 'kit/framework-migration',
+    to: 'examples/framework-migration',
+    status: 301,
+  },
+  {
+    from: 'kit/framework-migration.md',
+    to: 'examples/framework-migration.md',
+    status: 301,
+  },
+  {
+    from: 'kit/onboard-legacy-service',
+    to: 'examples/onboard-legacy-service',
+    status: 301,
+  },
+  {
+    from: 'kit/onboard-legacy-service.md',
+    to: 'examples/onboard-legacy-service.md',
+    status: 301,
+  },
 ];
 
 /**

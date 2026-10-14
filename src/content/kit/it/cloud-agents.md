@@ -1,6 +1,6 @@
 ---
 title: Cloud agents
-description: "L'adapter DWP per agenti cloud e in background: task remote di Claude Code, Codex cloud, agenti di classe Jules — sessioni effimere che eseguono contro un piano .dwp/ durevole."
+description: "L'adapter DWP per agenti cloud e in background: task remote di Claude Code, Codex cloud, agenti di classe Jules — sessioni effimere che eseguono contro un."
 kind: adapter
 lang: it
 order: 12
@@ -19,17 +19,17 @@ La directory `.dwp/` del repository è il **livello di spec e stato durevole**. 
 
 ## Livello di supporto
 
-**Completo** — qualsiasi agente cloud che legge il repository, segue `AGENTS.md` e può eseguire comandi shell supporta DWP senza un adapter specifico per la piattaforma.
+**Completo** (Documentato) — le piattaforme di agenti cloud leggono `AGENTS.md` o istruzioni native ed eseguono comandi attraverso il proprio ambiente terminale o contenitore.
 
 ## Il ciclo sveglia-riprendi-cedi
 
 Ogni turno di un agente cloud segue questo pattern:
 
 1. **Sveglia** — la sessione inizia (avviata da uno schedule cron, un evento CI o un'azione dell'utente).
-2. **Esegui il Protocollo di Ripresa DWP** — leggi il README del piano, individua il checkpoint, riconcilia `state.json` con il markdown, ispeziona la giuntura, esegui un smoke test. Vedi [Specifica DWP](/spec/dwp-specification#il-protocollo-di-ripresa-dwp).
+2. **Eseguire il Protocollo di Ripresa DWP** — leggere il README del piano, localizzare il checkpoint, ricostruire lo stato da `journal.ndjson` tramite `ledger.py project`, ispezionare la giunzione, eseguire uno smoke test. Vedi [Specifica DWP](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Verifica lo stato bloccato** — se `state.json.blocked` è impostato, notifica il motivo e cedi il controllo senza eseguire.
 4. **Esegui la prossima attività atomica** — un'attività, superando il suo validation gate completo.
-5. **Aggiorna il livello di stato** — riscrivi `state.json` atomicamente con il nuovo stato dell'attività, i gate record, l'outcome record e l'hash del commit.
+5. **Registrare nel giornale** — accodare eventi a `journal.ndjson` tramite i verbi di `ledger.py` (`start`, `gate`, `complete`); `ledger.py project` aggiorna la proiezione snapshot di `state.json` atomicamente. Nei piani v5 legacy, l'aggiornamento diretto del file di stato viene preservato.
 6. **Cedi il controllo** — la sessione termina in modo pulito; il turno successivo riprende dallo stato aggiornato.
 
 ## Requisiti

@@ -23,6 +23,16 @@ Bring a repository's dependencies up to date with a batched, validated, revertib
 4. Run the repo's real validation gate after each batch; revert any batch that fails.
 5. Summarize what was upgraded, skipped, and reverted; let the developer commit.
 
+## v7 specification
+
+| Item | Value |
+|---|---|
+| Product | DeepWorkPlan dependency-upgrade addon |
+| Registry key | `dependency-upgrade` in `.dwp/config.json` |
+| Descriptor | `addons/dependency-upgrade/addon.json` (interface 1) |
+| Command | `/lib-upgrade` installed into `.agents/commands/` when accepted |
+| Versioning | Pinned and versioned with the skill pack (`v7.8.1`) |
+
 ## Notes
 
 Package-manager agnostic — never runs npm/ncu in a non-JS repo. Opt-in, never required, and never auto-commits.

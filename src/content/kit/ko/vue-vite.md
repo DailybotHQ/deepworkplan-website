@@ -1,6 +1,6 @@
 ---
 title: Vue + Vite
-description: "Vue + Vite 프로젝트를 위한 온보딩 프리셋으로, 단일 파일 컴포넌트, Composition API, Pinia 스토어, Vitest 테스트에 대한 추론 단서를 제공합니다."
+description: "Vue + Vite 프로젝트를 위한 온보딩 프리셋으로, 단일 파일 컴포넌트, Composition API, Pinia 스토어, Vitest 테스트에 대한 추."
 kind: preset
 lang: ko
 order: 2
