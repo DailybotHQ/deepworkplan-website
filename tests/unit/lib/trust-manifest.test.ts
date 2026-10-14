@@ -49,3 +49,44 @@ describe('trust manifest', () => {
     );
   });
 });
+
+// The repository descriptor (public/.well-known/dwp.json) must state the DWP
+// standard AGENTS.md declares, the hub archetype this repository has, and the
+// schemas new plans actually use — a stale descriptor tells agents the wrong
+// standard.
+describe('repository descriptor', () => {
+  const descriptor = JSON.parse(
+    readFileSync(resolve(root, 'public/.well-known/dwp.json'), 'utf8')
+  ) as {
+    spec_version: string;
+    archetype: string;
+    skill: { install: string };
+    schemas: { plan_manifest: string; plan_state: string };
+  };
+  const declared = (readFileSync(resolve(root, 'AGENTS.md'), 'utf8').match(
+    /DWP standard: (\d+\.\d+\.\d+)/
+  ) ?? [])[1];
+
+  it('declares the standard AGENTS.md declares', () => {
+    expect(declared).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(descriptor.spec_version).toBe(declared);
+  });
+
+  it('names the orchestrator-hub archetype of this repository', () => {
+    expect(descriptor.archetype).toBe('orchestrator-hub');
+  });
+
+  it('installs the vendored skill release', () => {
+    expect(descriptor.skill.install).toContain(`/tree/v${vendored}`);
+  });
+
+  it('points at the schemas of the current plan generation', () => {
+    const major = Number.parseInt((declared as string).split('.')[0], 10);
+    expect(descriptor.schemas.plan_manifest).toBe(
+      `https://deepworkplan.com/schema/plan-manifest/v${major}.json`
+    );
+    expect(descriptor.schemas.plan_state).toBe(
+      'https://deepworkplan.com/schema/plan-snapshot/v6.json'
+    );
+  });
+});

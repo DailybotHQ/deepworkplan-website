@@ -6,7 +6,7 @@
 
 Deep Work Plan is the methodology that turns any repository into an AI-first, agent-pilotable codebase. It is a methodology, not a product. DWP is spec-driven development where the repository itself becomes the agent harness: it defines how to turn a goal into an agreed plan, decompose that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with an explicit validation gate before the next task begins. The methodology and kit install into the repository (AGENTS.md, docs, the .agents/ skills home, the DWP skill) so the work is durable and any agent can pilot the repo.
 
-DWP is deliberately agnostic about which AI agent or stack you use. Adapters translate the same core loop to Claude, Cursor, Copilot, Codex, Gemini, and more. The plan, the tasks, and the running log are all plain Markdown, so the work stays readable, reviewable, and version-controlled. There is no runtime and no lock-in.
+DWP is deliberately agnostic about which AI agent or stack you use. Adapters translate the same core loop to Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Antigravity, Windsurf, Cline, OpenCode, and more (Claude Code and Codex are behavior-tested; the other adapters are install-tested). The plan, the tasks, and the running log are all plain Markdown, so the work stays readable, reviewable, and version-controlled. There is no runtime and no lock-in.
 
 The methodology, specification, and kit are released under the MIT license — free to use, adapt, and build on.
 
@@ -35,6 +35,9 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 - Plan before execution — no code is written until the plan is agreed. The plan is a contract between you and the agent.
 - Tasks are atomic — each task is scoped so it can be executed and verified on its own, then committed atomically.
 - Verify everything — every task ends with an explicit validation gate before the next one begins, with progress recorded in git.
+- Evidence over narrative — a task closes only on recorded evidence that satisfies its acceptance criteria; a claim, including another agent's result, stays a claim until the plan's own gate observes it.
+- Delegation never lowers the bar — parallel agents work only on tasks marked safe for it, under an explicit grant, and their work is gated like anyone else's.
+- Escalate only what is critical — routine decisions are made and recorded; the agent stops only for approval, consent, irreducible ambiguity, quality conflicts, damage, terms or exhausted capacity.
 
 ## Site Structure
 
@@ -44,21 +47,31 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 - [Methodology](https://deepworkplan.com/methodology) — The narrative methodology: what DWP is, its principles, the workflow, and how to adopt it
 - [Specification](https://deepworkplan.com/spec) — The readable, normative DWP standard: task anatomy, validation gates, completion protocol, mandatory final tasks, archetypes, and addons
 - [Kit](https://deepworkplan.com/kit) — The kit catalog: presets, adapters, and commands available for installing DWP into a repository
-- [Changelog](https://deepworkplan.com/changelog) — A source-backed timeline of the releases and design decisions behind Deep Work Plan (e.g. v3's token efficiency, v4's Lite-first plans)
+- [Changelog](https://deepworkplan.com/changelog) — A source-backed timeline of the releases and design decisions behind Deep Work Plan (e.g. v3's token efficiency, v4's Lite-first plans, v6's verified closure on an append-only journal, v7's delegation with evidence, swarm autonomy and Ecosystem 1.0)
 - [Examples](https://deepworkplan.com/examples) — Worked examples that show the methodology applied to real engineering work
 - [Quickstart](https://deepworkplan.com/quickstart) — A short path to getting DWP running in a repository
-- [Vim](https://deepworkplan.com/kit/vim) — DeepWorkPlan Vim v1.0.0, the terminal editor for Deep Work Plan and the optional `vim` addon of Deep Work Plan v7: a generated command index (SPC h h), VS Code-shaped gestures, a read-only DWP plan browser (SPC P), a Markdown viewer (SPC m p / SPC m r), and a consent-first installer — download https://deepworkplan.com/vim/install.sh, compare its SHA-256 with the value on the page, then run `bash install.sh` (it installs its own release, v0.7.0, or the one `--version` names: an exact version, a `>=` floor or `latest`) (Neovim 0.12+, macOS/Linux, GPL-3.0).
+- [Vim](https://deepworkplan.com/kit/vim) — DeepWorkPlan Vim v1.0.0, the terminal editor for Deep Work Plan and the optional `vim` addon of Deep Work Plan v7: a generated command index (SPC h h), VS Code-shaped gestures, a read-only DWP plan browser (SPC P), a Markdown viewer (SPC m p / SPC m r), and a consent-first installer — download https://deepworkplan.com/vim/install.sh, compare its SHA-256 with the value on the page, then run `bash install.sh` (it installs its own release, v1.0.0, or the one `--version` names: an exact version, a `>=` floor or `latest`) (Neovim 0.12+, macOS/Linux, GPL-3.0).
 - [Herdr addon](https://deepworkplan.com/kit/herdr) — Optional v7 addon built on herdr-peers v1.0.0 (MIT): a plan with the `agent_delegation` grant hands a `parallel_safe` task to a peer agent in a Herdr pane, on any machine, and receives one authorized reply. Depth limit 1, fan-out cap 4, replies are data rather than instructions, every delegation recorded before it is relied on; the sender is not authenticated (`HERDR_PEERS_SCOPE` allow-list mitigates).
-- [Agentkit addon](https://deepworkplan.com/kit/agentkit) — Optional v7 addon built on coding-agents-kit v1.0.1 (MIT): `ak <kind> [@profile]` for claude, codex, cursor, opencode, pi, cline and grok (plus GLM/Azure/xAI variants), profiles, headless `ak run`, `ak doctor --json`; the headless delegation transport (one `ak run` per delegate in a git worktree). Agents run in autonomy by default (the CLI's own flag, added by `ak`); the opt-out — `--ask` on one command or `AGENTKIT_PERMISSIONS=ask` — always wins, also over `--auto`. Set it on a host; a dev container is the intended sandbox.
+- [Agentkit addon](https://deepworkplan.com/kit/agentkit) — Optional v7 addon built on coding-agents-kit v1.0.1 (MIT): `ak <kind> [@profile]` for claude, codex, cursor, opencode, pi, cline, grok and antigravity (plus GLM/Azure/xAI variants), profiles, headless `ak run`, `ak doctor --json`; the headless delegation transport (one `ak run` per delegate in a git worktree). Agents run in autonomy by default (the CLI's own flag, added by `ak`); the opt-out — `--ask` on one command or `AGENTKIT_PERMISSIONS=ask` — always wins, also over `--auto`. Set it on a host; a dev container is the intended sandbox.
 - [Devcontainer addon](https://deepworkplan.com/kit/devcontainer) — Optional addon built on devcontainer-kit v1.0.1 (MIT): each repository's own dev container rendered by `dck init` (reconciled, never clobbered) — `docker/local/<service>/Dockerfile` from the official `python-3.13` / `node-24` / `debian` image pinned by digest, no shared base image — `bash dev.sh up` over the `dck` launcher, opt-in layers (coding agents through `ak`, editor, Dailybot), loopback-only binds, git over SSH through the host agent with the developer's git aliases (key files inside only on the developer's `[ssh] copy_keys` opt-in, which makes the whole host `~/.ssh` readable inside), the `dck-dockerfile` skill, and Herdr machines per container with the standard layout.
 - [Compare](https://deepworkplan.com/compare) — Deep Work Plan compared with spec-driven tools, agent workflow frameworks and vendor-native plan modes: each described on its own terms, three neutral capability values, official sources, a review date and an invitation to correct
 - [FAQ](https://deepworkplan.com/faq) — Frequently asked questions: what Deep Work Plan does, how validation gates and resumption work, how it differs from other tools, and how to adopt or upgrade
-- [Init / Adoption](https://deepworkplan.com/init) — Make any repository AI-first: install the skill, onboard the repo, then plan and execute. Includes a self-contained onboarding prompt at [init.md](https://deepworkplan.com/init.md) to hand to an agent
+- [Quickstart / Adoption](https://deepworkplan.com/quickstart) — Make any repository AI-first: install the skill, onboard the repo, then plan and execute. Includes a self-contained onboarding prompt at [init.md](https://deepworkplan.com/init.md) to hand to an agent
 - [Developers](https://deepworkplan.com/developers) — The agent & developer surface: a read-only, zero-auth, versioned API described by an OpenAPI spec, a stateless MCP server at /api/mcp, per-page Markdown in 17 languages, the `npx skills` install CLI, and the official `deepworkplan` CLI. Alias: /docs redirects here
 - [Trust](https://deepworkplan.com/trust) — Why the skill is safe to adopt: open source, MIT, verifiable installs (SHA256SUMS), and a clear vulnerability-disclosure policy
 - [About](https://deepworkplan.com/about) — What Deep Work Plan is, its core principles, and who maintains it
 - [Contact](https://deepworkplan.com/contact) — How to engage with the project: source, issues, and discussions on GitHub
 - [Privacy](https://deepworkplan.com/privacy) — The site's privacy policy: static site, no accounts, cookieless analytics
+
+### What v7 adds
+
+Deep Work Plan v7 (pack `v7.8.1`) keeps the plan, task and gate loop and adds a verifiable record and safe parallelism:
+
+- **A record, not a narrative.** A plan carries an immutable outcome contract and an append-only journal; a task completes only when recorded evidence satisfies its criteria. Only the plan's own gate runner mints `observed` evidence; claims stay `asserted`, and a human judgment closes a criterion only through a recorded sign-off. Spec: [record layer](https://deepworkplan.com/spec/record-layer).
+- **Delegation with evidence.** A plan whose contract grants `agent_delegation` can hand `parallel_safe` tasks to other coding agents — headless in a git worktree (agentkit) or in another Herdr pane, on any machine (Herdr). A delegate's result stays a claim until the plan's gate observes it. Spec: [delegation](https://deepworkplan.com/spec/delegation).
+- **Many agents, one lead.** Orchestration at scale (one lane per repository or workstream) and swarm autonomy (capacity checks at task boundaries, handoff packets before a usage limit, lead succession with epochs and fencing) keep long efforts running past one account's limit or one agent's loss.
+- **Escalation only when it is critical.** Agents decide and record routine choices and stop only for seven classes: approval not granted, a consent or login screen, irreducible ambiguity, a quality conflict, damage, terms, or exhausted capacity.
+- **Optional, pinned ecosystem.** Every addon is opt-in and recorded in `.dwp/config.json`; the methodology works with none. Since 7.8.0 every integrated product is stable at 1.0 under semantic versioning.
 
 ### Ecosystem (v7)
 
@@ -81,7 +94,9 @@ Each language has its own full page set and its own Markdown mirrors.
 - Structured execution for AI coding agents
 - Planning and decomposing engineering work into atomic, verifiable tasks
 - Validation gates and completion protocols
-- Agent-agnostic workflows (Claude, Cursor, Copilot, Codex, Gemini, and more)
+- Agent-agnostic workflows (Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Antigravity, Windsurf, Cline, OpenCode, and more)
+- Verifiable completion: an outcome contract, an append-only journal and gated evidence
+- Delegating tasks to parallel agents with recorded, gated results
 - Markdown-based, version-controlled plans and running logs
 - Resumable multi-hour agent execution
 
