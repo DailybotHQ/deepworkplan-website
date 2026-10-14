@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # sıfırdan farklı çıkış, bir dosyanın eşleşmediği anlamına gelir — durun
 ```
 
-[/init.md#trust-and-verification](/init.md#trust-and-verification) içindeki ekosistem sabitleme tablosu paket ve eklentilerin özetlerini listeler.
+[/init.md](/init.md) içindeki ekosistem sabitleme tablosu paket ve eklentilerin özetlerini listeler.
 
 Sürümler **sağlama toplamlarına sahiptir, imzalı değildir** — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.
 

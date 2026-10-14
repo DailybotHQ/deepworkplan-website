@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
-[/init.md#trust-and-verification](/init.md#trust-and-verification) のエコシステム固定表に、パックとアドオンの検証済みダイジェストが記載されています。
+[/init.md](/init.md) のエコシステム固定表に、パックとアドオンの検証済みダイジェストが記載されています。
 
 リリースは**チェックサム付きですが、署名はされていません** — 署名（cosign またはメンテナー GPG）は文書化された次のステップであり、現在の主張ではありません。すべてが公開されているため、任意のファイルをそのタグのリポジトリと diff で比較することもできます。
 

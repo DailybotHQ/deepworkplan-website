@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # une sortie non nulle signifie qu'un fichier ne correspond pas — arrêtez
 ```
 
-Le tableau des versions épinglées de l’écosystème dans [/init.md#trust-and-verification](/init.md#trust-and-verification) répertorie les empreintes vérifiées.
+Le tableau des versions épinglées de l’écosystème dans [/init.md](/init.md) répertorie les empreintes vérifiées.
 
 Les versions sont **checksummées, pas signées** — la signature (cosign ou GPG du mainteneur) est la prochaine étape documentée, pas une garantie actuelle. Comme tout est ouvert, vous pouvez aussi comparer n'importe quel fichier avec le dépôt à son tag.
 

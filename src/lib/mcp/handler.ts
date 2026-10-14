@@ -106,7 +106,12 @@ export async function handleMcpRequest(
 
   // Cap the request size before parsing: every legitimate JSON-RPC call to
   // this read-only server is a few hundred bytes.
-  if (new TextEncoder().encode(input.bodyText).length > MAX_BODY_BYTES) {
+  // UTF-8 bytes >= UTF-16 code units, so the cheap length check rejects most
+  // oversized bodies before any encoding buffer is allocated.
+  if (
+    input.bodyText.length > MAX_BODY_BYTES ||
+    new TextEncoder().encode(input.bodyText).length > MAX_BODY_BYTES
+  ) {
     return json(
       413,
       errorResponse(

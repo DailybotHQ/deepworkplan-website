@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
-The ecosystem pin table in [/init.md#trust-and-verification](/init.md#trust-and-verification) lists pinned digests for the pack and companion addons.
+The ecosystem pin table in [/init.md](/init.md) lists pinned digests for the pack and companion addons.
 
 Releases are **checksummed, not signed** — signing (cosign or maintainer GPG) is a documented next step, not a current claim. Because everything is open, you can also diff any file against the repository at its tag.
 

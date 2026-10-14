@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
-Tabela przypięć ekosystemu w [/init.md#trust-and-verification](/init.md#trust-and-verification) zawiera skróty dla pakietu i dodatków.
+Tabela przypięć ekosystemu w [/init.md](/init.md) zawiera skróty dla pakietu i dodatków.
 
 Wydania są **sumowane kontrolnie, nie podpisywane** — podpisywanie (cosign lub GPG opiekuna) to udokumentowany kolejny krok, a nie bieżące twierdzenie. Ponieważ wszystko jest otwarte, możesz też diffować dowolny plik względem repozytorium przy jego tagu.
 

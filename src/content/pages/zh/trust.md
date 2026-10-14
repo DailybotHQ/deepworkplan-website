@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
-[/init.md#trust-and-verification](/init.md#trust-and-verification) 中的生态系统固定版本表列出了核心包及配套插件的校验和。
+[/init.md](/init.md) 中的生态系统固定版本表列出了核心包及配套插件的校验和。
 
 发布版本有**校验和，但未经签名**——签名（cosign 或维护者 GPG）是已记录的下一步计划，而非当前的承诺。由于一切都是公开的，你也可以将任意文件与仓库在其 tag 处的内容进行比对。
 

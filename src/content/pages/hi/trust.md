@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
-इकोसिस्टम पिन तालिका [/init.md#trust-and-verification](/init.md#trust-and-verification) पैक और साथी ऐड-ऑन के लिए पिन किए गए डाइजेस्ट सूचीबद्ध करती है।
+इकोसिस्टम पिन तालिका [/init.md](/init.md) पैक और साथी ऐड-ऑन के लिए पिन किए गए डाइजेस्ट सूचीबद्ध करती है।
 
 रिलीज़ **चेकसम की गई हैं, हस्ताक्षरित नहीं** — हस्ताक्षर (cosign या maintainer GPG) एक दस्तावेज़ीकृत अगला चरण है, वर्तमान दावा नहीं। क्योंकि सब कुछ खुला है, आप किसी भी फ़ाइल को उसके tag पर रिपॉज़िटरी से diff भी कर सकते हैं।
 

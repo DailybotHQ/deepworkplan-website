@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # lối thoát khác không nghĩa là file không khớp — dừng lại
 ```
 
-Bảng ghim hệ sinh thái tại [/init.md#trust-and-verification](/init.md#trust-and-verification) liệt kê mã băm cho gói và tiện ích bổ sung.
+Bảng ghim hệ sinh thái tại [/init.md](/init.md) liệt kê mã băm cho gói và tiện ích bổ sung.
 
 Các bản phát hành **có checksum, không có chữ ký** — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.
 

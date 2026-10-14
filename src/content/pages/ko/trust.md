@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
-[/init.md#trust-and-verification](/init.md#trust-and-verification)의 에코시스템 고정 표에 팩 및 컴패니언 애드온의 다이제스트가 나열되어 있습니다.
+[/init.md](/init.md)의 에코시스템 고정 표에 팩 및 컴패니언 애드온의 다이제스트가 나열되어 있습니다.
 
 릴리스는 **체크섬으로 검증되며, 서명되지는 않았습니다** — 서명(cosign 또는 관리자 GPG)은 문서화된 다음 단계이지 현재의 주장이 아닙니다. 모든 것이 공개되어 있으므로, 임의의 파일을 해당 태그의 리포지토리와 diff로 비교할 수도 있습니다.
 

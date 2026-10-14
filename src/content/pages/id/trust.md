@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # keluaran non-zero berarti file tidak cocok — berhenti
 ```
 
-Tabel pin ekosistem di [/init.md#trust-and-verification](/init.md#trust-and-verification) mencantumkan digest tersemat untuk paket dan addon.
+Tabel pin ekosistem di [/init.md](/init.md) mencantumkan digest tersemat untuk paket dan addon.
 
 Rilis **ber-checksum, bukan ditandatangani** — penandatanganan (cosign atau GPG pengelola) adalah langkah berikutnya yang terdokumentasi, bukan klaim saat ini. Karena semuanya terbuka, Anda juga dapat membandingkan file mana pun terhadap repositori pada tag-nya.
 

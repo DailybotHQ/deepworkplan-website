@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
 
-Die Ökosystem-Pin-Tabelle in [/init.md#trust-and-verification](/init.md#trust-and-verification) listet die Prüfsummen für das Paket und die Addons auf.
+Die Ökosystem-Pin-Tabelle in [/init.md](/init.md) listet die Prüfsummen für das Paket und die Addons auf.
 
 Releases sind mit **Prüfsummen versehen, aber nicht signiert** — Signierung (cosign oder Betreuer-GPG) ist ein dokumentierter nächster Schritt, keine aktuelle Aussage. Da alles offen ist, können Sie auch jede Datei gegen das Repository bei seinem Tag vergleichen.
 

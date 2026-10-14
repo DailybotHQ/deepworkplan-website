@@ -31,7 +31,7 @@ curl -fsSL -o SHA256SUMS \
 ./setup.sh --verify        # una salida distinta de cero significa que un archivo no coincide — detente
 ```
 
-La tabla de fijación del ecosistema en [/init.md#trust-and-verification](/init.md#trust-and-verification) lista las sumas de verificación del paquete y los complementos.
+La tabla de fijación del ecosistema en [/init.md](/init.md) lista las sumas de verificación del paquete y los complementos.
 
 Las versiones tienen **checksums, no firmas** — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.
 
