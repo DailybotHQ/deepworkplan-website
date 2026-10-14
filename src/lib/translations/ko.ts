@@ -13,7 +13,7 @@ export const ko: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — AI 코딩 에이전트를 위한 구조화된 실행',
   siteDescription:
-    'Deep Work Plan: 구조화되고 검증 가능하며 재개할 수 있는 장시간 AI 에이전트 실행을 위한 오픈 방법론이자 레퍼런스 키트.',
+    'Deep Work Plan은 사양 중심 개발 방법론입니다. 저장소 자체가 하네스가 되어 원자적 작업, 검증 게이트, 안전한 다중 에이전트 실행을 제공합니다.',
 
   // Navigation
   nav: {
@@ -50,9 +50,9 @@ export const ko: SiteTranslations = {
   // Footer
   changelogPage: {
     meta: {
-      title: 'Deep Work Plan 변경 기록',
+      title: 'Deep Work Plan 변경 기록 — 릴리스 노트 및 버전 히스토리',
       description:
-        'Deep Work Plan 스킬, 방법론, 이식 가능한 에이전트 하네스의 주요 업데이트입니다.',
+        'Deep Work Plan의 릴리스 및 설계 결정 타임라인: 사양 중심 실행, 이식 가능한 에이전트 하네스, 검증된 기록 레이어 및 에코시스템 1.0.',
     },
     eyebrow: '변경 기록',
     title: '방법론을 만든 작업',
@@ -97,7 +97,7 @@ export const ko: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — AI 코딩 에이전트를 위한 구조화된 실행',
       description:
-        '모델보다 컨텍스트가 더 중요합니다. Deep Work Plan은 어떤 리포지토리든 코딩 에이전트가 장시간 작업을 끝까지 완수하는 구조화된 환경으로 바꿉니다.',
+        'Deep Work Plan은 AI 코딩 에이전트에 사양 중심 개발을 제공합니다. 저장소를 견고한 하네스로 변환하여 장기 실행과 다중 에이전트 위임을 안전하게 지원합니다.',
     },
     hero: {
       badge: '오픈 방법론 · MIT · 에이전트 비종속',
@@ -266,6 +266,11 @@ export const ko: SiteTranslations = {
           detail:
             '데몬도 외부 상태도 없습니다. 계획은 gitignore된 .dwp/ 폴더에 저장되며, 컨텍스트가 넘쳐도 git만으로 어떤 작업이든 재개됩니다.',
         },
+        {
+          label: '다중 에이전트 위임 및 에코시스템 1.0',
+          detail:
+            '격리된 워크트리, 게이트를 통한 검증된 증거, 선택형 고정 에코시스템 애드온을 통해 병렬 에이전트를 안전하게 조율합니다.',
+        },
       ],
     },
     agents: {
@@ -280,47 +285,47 @@ export const ko: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: '네이티브 WebFetch와 슬래시 명령을 갖춘 레퍼런스 구현.',
+          note: '참조 구현체. 기본 슬래시 명령어와 WebFetch로 동작 검증 완료.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: '완전한 어댑터. WebFetch가 차단되면 오프라인 번들을 사용하세요.',
+          note: '설치 검증 완료. 프로젝트 규칙 및 .cursor/ 명령어 통합을 갖춘 완전한 어댑터.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: '오프라인 번들 권장. 규칙은 .codex/ 아래에 설치됩니다.',
+          note: '동작 검증 완료. 도구 호출 및 샌드박스를 갖춘 마크다운 지침.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: '완전한 어댑터 — dwp-* 명령이 AGENTS.md와 # 절차를 통해 실행됩니다.',
+          note: '설치 검증 완료. AGENTS.md 및 # 절차를 통해 명령어가 실행됩니다.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Gemini 2.5 Pro 이상이 필요하며 네이티브 WebFetch를 지원합니다.',
+          note: '설치 검증 완료. AGENTS.md 규칙과 기본 WebFetch 지원을 활용합니다.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: '오픈 소스. AGENTS.md를 네이티브로 읽고 # 명령으로 dwp-*를 실행합니다.',
+          note: '오픈소스 어댑터(설치 검증 완료). AGENTS.md를 읽고 # 명령어로 구동.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: '규칙과 # 명령 절차가 완전한 Deep Work Plan 루프를 구동합니다.',
+          note: '설치 검증 완료. Cascade 워크플로가 전체 DWP 라이프사이클을 구동합니다.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: '오픈 소스. Markdown 규칙과 # 명령이 모든 dwp-* 단계를 실행합니다.',
+          note: '오픈소스 어댑터(설치 검증 완료). 시스템 프롬프트 규칙으로 단계 실행.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: '네이티브 명령 표면을 갖춘 완전한 어댑터.',
+          note: '설치 검증 완료. 네이티브 AGY 명령 표면을 갖춘 완전한 어댑터.',
         },
       ],
     },
@@ -469,6 +474,13 @@ export const ko: SiteTranslations = {
         icon: '✅',
         link: '/kit',
       },
+      {
+        title: '서술보다 검증된 증거',
+        description:
+          '완료는 에이전트의 자기 보고가 아닌, 실행 가능한 게이트, 암호화 영수증, 추가 전용 저널을 통해 객관적으로 입증됩니다.',
+        icon: '\u{1F4DC}',
+        link: '/spec/record-layer',
+      },
     ],
     quickFactsTitle: '한눈에 보기',
     quickFacts: [
@@ -478,6 +490,7 @@ export const ko: SiteTranslations = {
       '스펙, 명령, 어댑터, 프리셋, 예시 포함',
       'Markdown 전용 — 런타임 없음, 종속 없음',
       '어떤 리포지토리든 AI-first이며 에이전트가 조종 가능한 코드베이스로 전환',
+      '에코시스템 1.0 선택형 컴패니언 애드온 (agentkit, Herdr, devcontainer, Vim, reviewer)',
     ],
     ctaTitle: '누가 관리하는가',
     ctaDescription:
@@ -609,9 +622,9 @@ export const ko: SiteTranslations = {
   // Deep Work Plan — Kit index + detail
   kitPage: {
     meta: {
-      title: 'Deep Work Plan 키트',
+      title: 'Deep Work Plan 키트 — 명령어, 어댑터, 프리셋 및 확장 기능',
       description:
-        '스킬과 아홉 개의 하위 스킬, 명령, 어댑터, 프리셋, 선택형 애드온, 예시 — Deep Work Plan을 여러 에이전트와 스택에서 실행 가능하게 만듭니다.',
+        '9개의 하위 스킬, 슬래시 명령어, 에이전트 어댑터, 기술 스택 프리셋, 선택형 확장 기능 및 실무 예제를 포함하여 모든 환경에서 실행 가능한 툴킷.',
     },
     eyebrow: '키트',
     title: '키트',
@@ -802,7 +815,7 @@ export const ko: SiteTranslations = {
             id: 'which-agents',
             question: '어떤 코딩 에이전트에서 작동하나요?',
             answer:
-              '리포지토리 파일을 읽을 수 있는 에이전트라면 어느 것이든 됩니다. 스킬은 개방형 Agent Skills 표준과 `AGENTS.md` 관례를 따르므로, Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot 등이 평소의 스킬·지시사항 로딩을 통해 이를 가져옵니다. 방법론 자체 평가에서는 한 벤더의 에이전트가 시작한 계획을 다른 벤더의 에이전트가 양방향으로 이어받는 것이 확인되었습니다. 설치 지원 범위와 행동 증거는 호환성 매트릭스에 에이전트별로 나열되며, 둘은 결코 혼동되지 않습니다.',
+              '저장소 파일을 읽는 모든 코딩 에이전트와 작동합니다. Claude Code와 OpenAI Codex는 양방향 실행 및 인수인계에 대해 동작 검증을 마쳤습니다. Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline, Antigravity는 설치 검증된 어댑터를 제공합니다.',
             linkLabel: '키트 둘러보기',
             linkPath: '/kit',
           },
@@ -933,6 +946,65 @@ export const ko: SiteTranslations = {
         ],
       },
       {
+        id: 'many-agents-v7',
+        title: '다중 에이전트 및 v7',
+        items: [
+          {
+            id: 'parallel-agents',
+            question:
+              '여러 에이전트가 하나의 계획에서 병렬로 안전하게 작업할 수 있나요?',
+            answer:
+              '네. `parallel_safe: yes`로 선언된 작업은 전용 git 워크트리에서 동시에 실행될 수 있습니다. 각 작업은 격리된 브랜치에서 선언된 변경 표면에만 엄격하게 작성됩니다. 잠금 상태의 추가 전용 저널이 이벤트를 순차적으로 기록하여 충돌을 방지합니다.',
+            linkLabel: '위임에 대해 읽기',
+            linkPath: '/spec/delegation',
+          },
+          {
+            id: 'delegate-trust',
+            question: '위임된 하위 에이전트의 결과는 자동으로 신뢰되나요?',
+            answer:
+              '아닙니다. 위임된 작업은 상위 계획의 선언된 검증 게이트가 실제로 실행하여 관찰할 때까지 "주장된" 증거로 기록됩니다. 게이트를 통과하지 못하거나 선언되지 않은 파일을 건드리면 작업이 완료될 수 없습니다.',
+            linkLabel: '기록 레이어 사양 읽기',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'capacity-handoff-succession',
+            question:
+              '에이전트가 계획 진행 중에 사용량 또는 토큰 한도에 도달하면 어떻게 되나요?',
+            answer:
+              '군집 자율성이 잔여 용량을 모니터링합니다. 한도에 가까워지면 활성 리더는 새 작업 수락을 중단하고 영수증이 포함된 구조화된 인수인계 패킷 (`dwp-handoff-v1`)을 생성한 후 후임 리더 에이전트에게 실행 권한을 위임합니다.',
+            linkLabel: '방법론 읽기',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'escalation-taxonomy',
+            question:
+              '자율 에이전트가 사람에게 확인하기 위해 작업을 멈추는 시점은 언제인가요?',
+            answer:
+              'DWP는 엄격한 7단계 에스컬레이션 분류를 정의합니다 (AGENT_PROTOCOL §7.5): C1 승인되지 않은 작업, C2 인증/동의 장벽, C3 해결할 수 없는 모호함, C4 게이트 실패, C5 파괴적 작업, C6 라이선스 변경, C7 용량 소진.',
+            linkLabel: '에이전트 프로토콜 읽기',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'proven-done',
+            question:
+              '에이전트의 구두 주장 외에 작업 완료를 어떻게 증명하나요?',
+            answer:
+              '완료에는 불변 결과 계약, 검증 가능한 영수증, 저널에 기록된 바이너리 게이트 결과가 필요합니다. 주장된 승인 기준은 권한 있는 사람의 명시적 서명이 필요합니다. 최종 검토(Final Review)를 통과해야만 계획이 완료됩니다.',
+            linkLabel: '기록 레이어 사양 읽기',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'v6-compatibility',
+            question: 'v6 계획이 v7에서도 계속 실행되나요?',
+            answer:
+              '네. 계획 계약은 스키마 세대를 명시적으로 선언합니다 (`plan-contract/v6.json` 대 `plan-contract/v7.json`). 계획은 중간에 세대를 변경하지 않습니다. 기존 v6 계획은 v7 도구 체인에서도 원본 형식과 의미를 유지하며 원활하게 실행됩니다.',
+            linkLabel: '계약에 대해 읽기',
+            linkPath: '/spec/record-layer',
+          },
+        ],
+      },
+
+      {
         id: 'compare',
         title: '비교',
         items: [
@@ -1031,9 +1103,9 @@ export const ko: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan과 대안들의 비교',
+      title: 'Deep Work Plan과 사양 중심 및 에이전트 대안 비교',
       description:
-        'Deep Work Plan이 스펙 주도 개발 도구, 에이전트 워크플로 프레임워크, 벤더 네이티브 계획 모드와 각각 어떻게 관련되는지 설명합니다. 모든 사실은 각 도구의 공식 문서로 거슬러 추적되고, 출처와 마지막 검토 날짜를 함께 밝힙니다.',
+        'Deep Work Plan이 사양 중심 도구, 에이전트 워크플로 프레임워크, 벤더 계획 모드와 어떻게 다른지 공식 문서 출처 및 검토 날짜와 함께 비교합니다.',
     },
     eyebrow: '비교',
     title: 'Deep Work Plan과 대안들',
@@ -1235,6 +1307,14 @@ export const ko: SiteTranslations = {
           title: '측정되고 공개되는 지시사항 로드량',
           body: '커밋된 스크립트가 플로우마다 두 가지 측정값을 공개합니다 — 세션 시작 시 로드하는 진입 번들과, 실제 트리거가 발동한 이후의 엔드투엔드 경로 — 그리고 각각이 무엇을 제외하는지도 함께 공개하여, 진입 수치만으로 실행의 총비용을 읽지 않도록 합니다. 증가를 포함한 결과는 바이트로 공개되며, 토큰이나 비용 백분율로는 결코 공개되지 않습니다.',
         },
+        {
+          title: '객관적 증거 기반의 기록 레이어',
+          body: '불변 계약 (contract.json), 추가 전용 이벤트 저널 (journal.ndjson), 관찰된 게이트가 확실한 완료를 증명합니다.',
+        },
+        {
+          title: '안전한 다중 에이전트 위임 및 군집 자율성',
+          body: '전용 워크트리에서의 병렬 작업, 게이트 검증 시까지 보류되는 결과, 구조화된 인수인계로 표류를 방지합니다.',
+        },
       ],
     },
     honestLimits: {
@@ -1253,7 +1333,7 @@ export const ko: SiteTranslations = {
     meta: {
       title: '신뢰와 보안 — Deep Work Plan',
       description:
-        'Deep Work Plan을 안심하고 채택할 수 있는 이유: 오픈 소스이자 MIT 라이선스, 네트워크 호출이나 텔레메트리 없는 Markdown-first, 비파괴적 설계, 검증 가능한 설치, 그리고 명확한 취약점 공개 정책.',
+        'Deep Work Plan을 신뢰할 수 있는 이유: MIT 오픈 소스, 원격 측정 없는 마크다운, 비파괴적 설계, 검증 가능한 체크섬 및 비공개 취약점 공개 정책.',
     },
     eyebrow: '신뢰 & 보안',
     title: '신뢰와 보안',

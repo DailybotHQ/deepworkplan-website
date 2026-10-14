@@ -14,7 +14,7 @@ export const pl: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — uporządkowana realizacja dla agentów kodujących AI',
   siteDescription:
-    'Deep Work Plan: otwarta metodyka i referencyjny zestaw narzędzi do uporządkowanej, weryfikowanej i wznawialnej, wielogodzinnej pracy agentów AI.',
+    'Deep Work Plan to rozwój oparty na specyfikacji, gdzie repozytorium jest uprzężą: zadania atomowe, bramki walidacji i bezpieczna koordynacja wielu agentów.',
 
   // Navigation
   nav: {
@@ -51,9 +51,10 @@ export const pl: SiteTranslations = {
   // Footer
   changelogPage: {
     meta: {
-      title: 'Dziennik zmian Deep Work Plan',
+      title:
+        'Dziennik zmian Deep Work Plan — Informacje o wydaniach i historia',
       description:
-        'Najważniejsze aktualizacje umiejętności, metodyki i przenośnego harnessu agentów Deep Work Plan.',
+        'Kalendarium wydań i decyzji projektowych Deep Work Plan: specyfikacja jako fundament, przenośna uprząż dla agentów, warstwa rejestru i Ekosystem 1.0.',
     },
     eyebrow: 'Dziennik zmian',
     title: 'Praca za metodyką',
@@ -99,7 +100,7 @@ export const pl: SiteTranslations = {
       title:
         'Deep Work Plan — uporządkowana realizacja dla agentów kodujących AI',
       description:
-        'Kontekst znaczy więcej niż modele. Deep Work Plan zamienia dowolne repozytorium w uporządkowane środowisko, w którym każdy agent kodujący kończy długodystansową pracę.',
+        'Deep Work Plan wprowadza rozwój oparty na specyfikacji do agentów AI. Zmień repozytorium w trwałą uprząż do długofalowej pracy i bezpiecznej delegacji.',
     },
     hero: {
       badge: 'Otwarta metodyka · MIT · Niezależna od agenta',
@@ -270,6 +271,11 @@ export const pl: SiteTranslations = {
           detail:
             'Bez demona i bez zewnętrznego stanu. Plany trafiają do ignorowanego przez git katalogu .dwp/, a każde zadanie wznawia się z samego git — nawet po przepełnieniu kontekstu.',
         },
+        {
+          label: 'Delegacja wielu agentów i Ekosystem 1.0',
+          detail:
+            'Bezpieczna koordynacja równoległych agentów w izolowanych drzewach roboczych git, weryfikacja bramkami i opcjonalne dodatki ekosystemu 1.0.',
+        },
       ],
     },
     agents: {
@@ -284,47 +290,47 @@ export const pl: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Implementacja referencyjna, z natywnym WebFetch i poleceniami slash.',
+          note: 'Wdrożenie referencyjne. Testy behawioralne z natywnymi komendami ukośnika i WebFetch.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Pełny adapter. Użyj pakietu offline, jeśli WebFetch jest zablokowany.',
+          note: 'Testy instalacji. Pełny adapter z regułami projektu i integracją w .cursor/.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Zalecany pakiet offline; reguły instalowane w .codex/.',
+          note: 'Testy behawioralne. Instrukcje Markdown z wywołaniami narzędzi i piaskownicą.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Pełny adapter — komendy dwp-* działają przez AGENTS.md i procedury #.',
+          note: 'Testy instalacji. Komendy i procedury wykonywane przez AGENTS.md i polecenia #.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Wymaga Gemini 2.5 Pro lub nowszego, z natywnym WebFetch.',
+          note: 'Testy instalacji. Adapter wykorzystuje reguły AGENTS.md i natywne WebFetch.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Open source. Natywnie odczytuje AGENTS.md i uruchamia dwp-* przez komendy #.',
+          note: 'Adapter open-source przetestowany instalacyjnie. Czyta AGENTS.md i steruje dwp-*.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Reguły i procedury komend # napędzają pełną pętlę Deep Work Plan.',
+          note: 'Testy instalacji. Przepływy Cascade i reguły sterują cyklem życia Deep Work Plan.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Open source. Reguły Markdown i komendy # wykonują każdy krok dwp-*.',
+          note: 'Adapter open-source przetestowany instalacyjnie. Regury promptu i procedury #.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Pełny adapter z natywną warstwą poleceń.',
+          note: 'Testy instalacji. Pełny adapter z natywną przestrzenią poleceń AGY.',
         },
       ],
     },
@@ -472,6 +478,13 @@ export const pl: SiteTranslations = {
         icon: '✅',
         link: '/kit',
       },
+      {
+        title: 'Zweryfikowane dowody zamiast deklaracji',
+        description:
+          'Ukończenie prac jest dowodzone wykonywalnymi bramkami, kryptograficznymi pokwitowaniami i dziennikiem append-only — nigdy samą deklaracją agenta.',
+        icon: '\u{1F4DC}',
+        link: '/spec/record-layer',
+      },
     ],
     quickFactsTitle: 'W skrócie',
     quickFacts: [
@@ -481,6 +494,7 @@ export const pl: SiteTranslations = {
       'Zawiera specyfikację, polecenia, adaptery, presety i przykłady',
       'Wyłącznie Markdown — bez środowiska uruchomieniowego, bez vendor lock-in',
       'Zamienia dowolne repozytorium w bazę kodu AI-first, pilotowalną przez agenta',
+      'Opcjonalne dodatki Ekosystemu 1.0 (agentkit, Herdr, devcontainer, Vim, recenzent)',
     ],
     ctaTitle: 'Kto ją utrzymuje',
     ctaDescription:
@@ -613,9 +627,9 @@ export const pl: SiteTranslations = {
   // Deep Work Plan — Kit index + detail
   kitPage: {
     meta: {
-      title: 'Zestaw Deep Work Plan',
+      title: 'Zestaw Deep Work Plan — Polecenia, adaptery, profile i dodatki',
       description:
-        'Skill i jego dziewięć sub-skilli, polecenia, adaptery, presety, dobrowolne dodatki oraz przykłady, dzięki którym Deep Work Plan działa w różnych agentach i stosach technologicznych.',
+        'Główna umiejętność i dziewięć pod-umiejętności, adaptery, profile konfiguracyjne i opcjonalne dodatki umożliwiające uruchomienie DWP na dowolnym stosie.',
     },
     eyebrow: 'Zestaw',
     title: 'Zestaw',
@@ -811,7 +825,7 @@ export const pl: SiteTranslations = {
             id: 'which-agents',
             question: 'Z jakimi agentami kodującymi to działa?',
             answer:
-              'Z każdym agentem, który czyta pliki repozytorium. Skill podąża za otwartym standardem Agent Skills i konwencją `AGENTS.md`, więc Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot i inne przejmują go przez zwykłe ładowanie skilli i instrukcji. Własna ewaluacja metodyki pokazuje plan rozpoczęty przez agenta jednego dostawcy i wznowiony przez agenta innego — w obie strony. Pokrycie instalacji i dowody behawioralne są wymienione per agent w macierzy kompatybilności, a oba aspekty nigdy nie są mieszane.',
+              'Z każdym agentem czytającym pliki repozytorium. Claude Code i OpenAI Codex przeszły testy behawioralne dla dwukierunkowej realizacji i przekazywania zadań; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline i Antigravity mają zweryfikowane adaptery instalacyjne. Metodologia rozróżnia testy zachowania od instalacji.',
             linkLabel: 'Przejrzyj zestaw',
             linkPath: '/kit',
           },
@@ -942,6 +956,66 @@ export const pl: SiteTranslations = {
         ],
       },
       {
+        id: 'many-agents-v7',
+        title: 'Wielu agentów i v7',
+        items: [
+          {
+            id: 'parallel-agents',
+            question:
+              'Czy wielu agentów może pracować nad jednym planem równolegle i jak zapewniane jest bezpieczeństwo?',
+            answer:
+              'Tak. Zadania oznaczone jako `parallel_safe: yes` mogą działać równolegle w dedykowanych drzewach roboczych git worktree. Każde zadanie zapisuje ściśle w zadeklarowanym obszarze na odrębnych gałęziach. Jeden dziennik zdarzeń append-only porządkuje zdarzenia, a prace są integrowane bez kolizji.',
+            linkLabel: 'Dowiedz się więcej o delegacji',
+            linkPath: '/spec/delegation',
+          },
+          {
+            id: 'delegate-trust',
+            question:
+              'Czy wyniki delegowanego podagenta są automatycznie akceptowane?',
+            answer:
+              'Nie. Wyniki delegata są oznaczane jako dowód „deklarowany”, dopóki zadeklarowana bramka walidacji planu nadrzędnego rzeczywiście ich nie wykona i nie zaobserwuje („dowód zaobserwowany”). Jeśli bramka nie przejdzie lub dotknie nieopisanych plików, zadanie nie zostanie zaliczone.',
+            linkLabel: 'Specyfikacja warstwy rejestru',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'capacity-handoff-succession',
+            question:
+              'Co się dzieje, gdy agent osiągnie limity tokenów lub zapytań w trakcie planu?',
+            answer:
+              'Autonomia roju monitoruje dostępne zasoby. Gdy limity się zbliżają, aktywny lider przestaje przyjmować nowe zadania, generuje ustrukturyzowany pakiet przekazania (`dwp-handoff-v1`) z trwałymi pokwitowaniami i przekazuje dowodzenie kolejnemu agentowi.',
+            linkLabel: 'Przeczytaj metodologię',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'escalation-taxonomy',
+            question:
+              'Kiedy autonomiczny agent zatrzymuje się, by skonsultować się z człowiekiem?',
+            answer:
+              'DWP definiuje ścisłą taksonomię eskalacji w siedmiu klasach (AGENT_PROTOCOL §7.5): C1 brak autoryzacji, C2 bariery uwierzytelniania/zgody, C3 nieredukowalna niejednoznaczność, C4 nieusuwalne błędy bramek, C5 operacje niszczące, C6 zmiany licencji, C7 wyczerpane zasoby.',
+            linkLabel: 'Przeczytaj protokół agenta',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'proven-done',
+            question:
+              'W jaki sposób ukończenie prac jest dowodzone poza narracją samego agenta?',
+            answer:
+              'Ukończenie wymaga niezmiennego kontraktu wyników, weryfikowalnych pokwitowań i binarnych rezultatów bramek w dzienniku. Zadeklarowane kryteria wymagają autoryzowanego podpisu człowieka. Plan nie może zakończyć się bez zaliczonego przeglądu końcowego (Final Review).',
+            linkLabel: 'Specyfikacja warstwy rejestru',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'v6-compatibility',
+            question: 'Czy plany v6 zachowują zgodność i działają pod v7?',
+            answer:
+              'Tak. Kontrakty planów jednoznacznie deklarują wersję schematu (`plan-contract/v6.json` vs `plan-contract/v7.json`). Rozpoczęty plan nigdy nie zmienia wersji w trakcie. Istniejące plany v6 zachowują swój format i semantykę pod narzędziami v7.',
+            linkLabel: 'Dowiedz się więcej o kontraktach',
+            linkPath: '/spec/record-layer',
+          },
+        ],
+      },
+
+      {
         id: 'compare',
         title: 'Porównanie',
         items: [
@@ -1042,9 +1116,9 @@ export const pl: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan w porównaniu z alternatywami',
+      title: 'Porównanie Deep Work Plan z narzędziami opartymi na specyfikacji',
       description:
-        'Jak Deep Work Plan odnosi się do narzędzi spec-driven, frameworków workflow agentów i trybów planowania dostawców: własne terminy, źródła i data przeglądu.',
+        'Zestawienie Deep Work Plan z narzędziami spec-driven, frameworkami workflow i trybami planowania vendorów: źródła publiczne i data weryfikacji.',
     },
     eyebrow: 'Porównanie',
     title: 'Deep Work Plan i alternatywy',
@@ -1246,6 +1320,14 @@ export const pl: SiteTranslations = {
           title: 'Obciążenie instrukcjami mierzone i publikowane',
           body: 'Commitowany skrypt publikuje dwa pomiary dla każdego przepływu — pakiet wejściowy ładowany na początku sesji oraz ścieżkę end-to-end po uruchomieniu jego właściwych wyzwalaczy — a także to, co każdy z nich wyklucza, dzięki czemu sama liczba wejściowa nigdy nie jest odczytywana jako całkowity koszt uruchomienia. Wyniki, w tym wzrosty, są publikowane jako bajty, nigdy jako procenty tokenów ani kosztów.',
         },
+        {
+          title: 'Warstwa rejestru oparta na twardych dowodach',
+          body: 'Niezmienny kontrakt (contract.json), dziennik zdarzeń append-only (journal.ndjson) i weryfikowane bramki gwarantują obiektywny dowód wykonania.',
+        },
+        {
+          title: 'Bezpieczna delegacja wielu agentów i autonomia roju',
+          body: 'Wykonywanie zadań w izolowanych worktree, pakiety przekazania prac i sukcesja liderów chronią przed rozbieżnościami i konfliktami.',
+        },
       ],
     },
     honestLimits: {
@@ -1264,7 +1346,7 @@ export const pl: SiteTranslations = {
     meta: {
       title: 'Zaufanie i bezpieczeństwo — Deep Work Plan',
       description:
-        'Dlaczego Deep Work Plan jest bezpieczny w adopcji: open source i MIT, Markdown-first bez połączeń sieciowych ani telemetrii, niedestrukcyjny z założenia, z weryfikowalnymi instalacjami i przejrzystą polityką ujawniania podatności.',
+        'Bezpieczeństwo Deep Work Plan: otwarta licencja MIT, Markdown bez telemetrii, brak operacji destrukcyjnych, weryfikowalne sumy kontrolne.',
     },
     eyebrow: 'Zaufanie i bezpieczeństwo',
     title: 'Zaufanie i bezpieczeństwo',

@@ -14,7 +14,7 @@ export const vi: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI',
   siteDescription:
-    'Deep Work Plan: một phương pháp luận mở và bộ kit tham chiếu để các agent AI thực thi nhiều giờ một cách có cấu trúc, được kiểm chứng và có thể tiếp tục.',
+    'Deep Work Plan là phát triển theo đặc tả nơi kho lưu trữ trở thành bộ khung: nhiệm vụ nguyên tử, cổng kiểm tra và điều phối đa tác tử an toàn.',
 
   // Navigation
   nav: {
@@ -51,9 +51,9 @@ export const vi: SiteTranslations = {
   // Footer
   changelogPage: {
     meta: {
-      title: 'Nhật ký thay đổi Deep Work Plan',
+      title: 'Nhật ký thay đổi Deep Work Plan — Ghi chú phát hành và lịch sử',
       description:
-        'Các cập nhật quan trọng cho skill, phương pháp luận và harness agent có thể mang theo của Deep Work Plan.',
+        'Dòng thời gian các bản phát hành và quyết định kiến trúc của Deep Work Plan: thực thi theo đặc tả, bộ khung di động, lớp bản ghi và Hệ sinh thái 1.0.',
     },
     eyebrow: 'Nhật ký thay đổi',
     title: 'Công việc phía sau phương pháp',
@@ -98,7 +98,7 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI',
       description:
-        'Ngữ cảnh quan trọng hơn mô hình. Deep Work Plan biến mọi repository thành một môi trường có cấu trúc nơi bất kỳ agent lập trình nào cũng hoàn thành công việc dài hơi.',
+        'Deep Work Plan mang quy trình phát triển theo đặc tả đến các tác tử lập trình AI. Biến kho mã thành bộ khung bền vững cho ủy quyền đa tác tử an toàn.',
     },
     hero: {
       badge: 'Phương pháp luận mở · MIT · Độc lập với agent',
@@ -267,6 +267,11 @@ export const vi: SiteTranslations = {
           detail:
             'Không daemon, không trạng thái ngoài. Kế hoạch nằm trong thư mục .dwp/ được gitignore, và mọi tác vụ tiếp tục chỉ từ git — kể cả sau khi ngữ cảnh tràn.',
         },
+        {
+          label: 'Ủy quyền đa tác tử và Hệ sinh thái 1.0',
+          detail:
+            'Điều phối an toàn các tác tử song song trên worktree git biệt lập, kiểm chứng qua cổng và tiện ích bổ sung hệ sinh thái được ghim tùy chọn.',
+        },
       ],
     },
     agents: {
@@ -281,47 +286,47 @@ export const vi: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Triển khai tham chiếu, với WebFetch và slash command bản địa.',
+          note: 'Bản triển khai tham chiếu. Đã kiểm thử hành vi với lệnh gạch chéo gốc và WebFetch.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Bộ chuyển đổi đầy đủ. Dùng gói ngoại tuyến nếu WebFetch bị chặn.',
+          note: 'Đã kiểm thử cài đặt. Bộ điều hợp đầy đủ với quy tắc dự án và tích hợp lệnh .cursor/.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Khuyến nghị gói ngoại tuyến; quy tắc cài dưới .codex/.',
+          note: 'Đã kiểm thử hành vi. Hướng dẫn Markdown với lời gọi công cụ gốc và sandbox.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Bộ chuyển đổi đầy đủ — các lệnh dwp-* chạy qua AGENTS.md và quy trình #.',
+          note: 'Đã kiểm thử cài đặt. Lệnh và quy trình được chạy qua AGENTS.md và câu lệnh #.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Yêu cầu Gemini 2.5 Pro trở lên, với WebFetch bản địa.',
+          note: 'Đã kiểm thử cài đặt. Bộ điều hợp tận dụng quy tắc AGENTS.md với WebFetch gốc.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Mã nguồn mở. Đọc AGENTS.md bản địa và chạy dwp-* qua lệnh #.',
+          note: 'Bộ điều hợp mã nguồn mở đã kiểm thử cài đặt. Đọc AGENTS.md và chạy dwp-* qua #.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Quy tắc cùng quy trình lệnh # điều khiển toàn bộ vòng lặp Deep Work Plan.',
+          note: 'Đã kiểm thử cài đặt. Quy trình làm việc Cascade điều phối toàn bộ vòng đời DWP.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Mã nguồn mở. Quy tắc Markdown và lệnh # thực thi mọi bước dwp-*.',
+          note: 'Bộ điều hợp mã nguồn mở đã kiểm thử cài đặt. Quy tắc prompt hệ thống và lệnh #.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Bộ chuyển đổi đầy đủ với bề mặt lệnh bản địa.',
+          note: 'Đã kiểm thử cài đặt. Bộ điều hợp đầy đủ với bề mặt lệnh AGY gốc.',
         },
       ],
     },
@@ -469,6 +474,13 @@ export const vi: SiteTranslations = {
         icon: '✅',
         link: '/kit',
       },
+      {
+        title: 'Bằng chứng đã xác minh thay vì lời nói suông',
+        description:
+          'Hoàn thành được chứng minh qua cổng thực thi, biên nhận mã hóa và nhật ký chỉ nối thêm — không bao giờ dựa vào tuyên bố tự báo cáo của tác tử.',
+        icon: '\u{1F4DC}',
+        link: '/spec/record-layer',
+      },
     ],
     quickFactsTitle: 'Nhìn tổng quan',
     quickFacts: [
@@ -478,6 +490,7 @@ export const vi: SiteTranslations = {
       'Bao gồm một đặc tả, các command, bộ chuyển đổi, preset và ví dụ',
       'Chỉ Markdown — không runtime, không khóa chặt',
       'Biến mọi repository thành một codebase AI-first, điều khiển được bằng agent',
+      'Tiện ích mở rộng tùy chọn của Hệ sinh thái 1.0 (agentkit, Herdr, devcontainer, Vim, reviewer)',
     ],
     ctaTitle: 'Ai duy trì nó',
     ctaDescription:
@@ -608,9 +621,10 @@ export const vi: SiteTranslations = {
   // Deep Work Plan — Kit index + detail
   kitPage: {
     meta: {
-      title: 'Bộ kit Deep Work Plan',
+      title:
+        'Bộ công cụ Deep Work Plan — Lệnh, Bộ điều hợp, Cài đặt sẵn & Addon',
       description:
-        'Skill cùng chín sub-skill, các command, bộ chuyển đổi, preset, addon tự nguyện và ví dụ giúp Deep Work Plan chạy được xuyên các agent và stack.',
+        'Kỹ năng chính cùng 9 kỹ năng phụ, lệnh gạch chéo, bộ điều hợp tác tử, cấu hình ngăn xếp và tiện ích mở rộng giúp DWP chạy trên mọi môi trường.',
     },
     eyebrow: 'Kit',
     title: 'Bộ kit',
@@ -804,7 +818,7 @@ export const vi: SiteTranslations = {
             id: 'which-agents',
             question: 'Nó hoạt động với những agent lập trình nào?',
             answer:
-              'Bất kỳ agent nào đọc được các tệp của repository. Skill tuân theo chuẩn mở Agent Skills và quy ước `AGENTS.md`, nên Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot và các agent khác nhận được nó qua cơ chế tải skill và hướng dẫn thông thường của mình. Chính đợt đánh giá của phương pháp luận cho thấy một kế hoạch do agent của nhà cung cấp này bắt đầu và được agent của nhà cung cấp khác tiếp tục, theo cả hai chiều. Độ phủ cài đặt và bằng chứng hành vi được liệt kê cho từng agent trong ma trận tương thích, và hai thứ đó không bao giờ bị trộn lẫn.',
+              'Với bất kỳ tác tử lập trình nào đọc được tệp trong kho mã. Claude Code và OpenAI Codex đã được kiểm thử hành vi cho thực thi hai chiều và bàn giao; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline và Antigravity có bộ điều hợp đã xác minh cài đặt. Phương pháp luận tách bạch kiểm thử hành vi khỏi cài đặt.',
             linkLabel: 'Xem bộ kit',
             linkPath: '/kit',
           },
@@ -937,6 +951,66 @@ export const vi: SiteTranslations = {
         ],
       },
       {
+        id: 'many-agents-v7',
+        title: 'Đa tác tử & v7',
+        items: [
+          {
+            id: 'parallel-agents',
+            question:
+              'Nhiều tác tử có thể làm việc song song trên một kế hoạch an toàn không?',
+            answer:
+              'Có. Các nhiệm vụ được khai báo `parallel_safe: yes` có thể chạy đồng thời trong các git worktree chuyên dụng. Mỗi nhiệm vụ chỉ ghi vào đúng Bề mặt Chạm được khai báo trên các nhánh biệt lập. Một nhật ký chỉ nối thêm duy nhất tuần tự hóa các sự kiện dưới khóa, tích hợp sạch sẽ.',
+            linkLabel: 'Tìm hiểu về ủy quyền',
+            linkPath: '/spec/delegation',
+          },
+          {
+            id: 'delegate-trust',
+            question:
+              'Kết quả từ một tác tử phụ được ủy quyền có tự động được tin cậy?',
+            answer:
+              'Không. Kết quả của bên được ủy quyền được ghi lại dưới dạng bằng chứng "khẳng định" cho đến khi cổng kiểm tra của kế hoạch cha thực sự thực thi và quan sát nó ("bằng chứng quan sát"). Nếu cổng không vượt qua hoặc chạm vào tệp không khai báo, nhiệm vụ không thể hoàn thành.',
+            linkLabel: 'Đọc đặc tả lớp bản ghi',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'capacity-handoff-succession',
+            question:
+              'Điều gì xảy ra khi một tác tử đạt đến giới hạn token hoặc tần suất giữa chừng?',
+            answer:
+              'Tính tự chủ của bầy đàn liên tục giám sát dung lượng còn lại. Khi gần chạm giới hạn, tác tử dẫn đầu sẽ ngừng nhận nhiệm vụ mới, tạo gói bàn giao có cấu trúc (`dwp-handoff-v1`) kèm biên nhận và chuyển giao quyền thực thi cho tác tử kế nhiệm.',
+            linkLabel: 'Đọc phương pháp luận',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'escalation-taxonomy',
+            question:
+              'Khi nào một tác tử tự chủ dừng lại để hỏi ý kiến con người?',
+            answer:
+              'DWP định nghĩa phân loại báo cáo nghiêm ngặt gồm 7 lớp (AGENT_PROTOCOL §7.5): C1 hành động chưa duyệt, C2 rào cản xác thực/đồng thuận, C3 mơ hồ không thể giải quyết, C4 cổng thất bại không thể sửa, C5 thao tác phá hủy, C6 thay đổi giấy phép, C7 cạn kiệt dung lượng.',
+            linkLabel: 'Đọc giao thức tác tử',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'proven-done',
+            question:
+              'Làm thế nào để chứng minh hoàn thành nhiệm vụ ngoài lời tự thuật của tác tử?',
+            answer:
+              'Hoàn thành đòi hỏi một hợp đồng kết quả bất biến, các biên nhận có thể xác minh và kết quả cổng nhị phân được ghi lại trong nhật ký chỉ nối thêm. Các tiêu chí khẳng định cần chữ ký duyệt rõ ràng của con người. Kế hoạch chỉ đóng lại khi vượt qua Đánh giá Cuối cùng.',
+            linkLabel: 'Đọc đặc tả lớp bản ghi',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'v6-compatibility',
+            question: 'Các kế hoạch v6 có tiếp tục chạy được dưới v7 không?',
+            answer:
+              'Có. Hợp đồng kế hoạch tuyên bố rõ ràng thế hệ lược đồ (`plan-contract/v6.json` so với `plan-contract/v7.json`). Kế hoạch không bao giờ chuyển đổi thế hệ giữa chừng. Các kế hoạch v6 hiện tại giữ nguyên cấu trúc và ngữ nghĩa nhật ký dưới các công cụ v7.',
+            linkLabel: 'Tìm hiểu về hợp đồng',
+            linkPath: '/spec/record-layer',
+          },
+        ],
+      },
+
+      {
         id: 'compare',
         title: 'So sánh với các công cụ khác',
         items: [
@@ -1038,9 +1112,10 @@ export const vi: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan so với các phương án khác',
+      title:
+        'So sánh Deep Work Plan với các giải pháp dựa trên đặc tả và tác tử',
       description:
-        'Deep Work Plan so với các công cụ theo đặc tả, framework quy trình agent và chế độ lập kế hoạch sẵn có: theo thuật ngữ từng bên, kèm nguồn và ngày rà soát.',
+        'So sánh khách quan Deep Work Plan với các công cụ spec-driven, khung tác tử và chế độ lập kế hoạch của nhà cung cấp: nguồn tài liệu và ngày đánh giá.',
     },
     eyebrow: 'So sánh',
     title: 'Deep Work Plan và các phương án khác',
@@ -1242,6 +1317,14 @@ export const vi: SiteTranslations = {
           title: 'Khối lượng hướng dẫn tải lên được đo và công bố',
           body: 'Một script được commit công bố hai phép đo cho mỗi luồng — gói dữ liệu ban đầu được tải lúc bắt đầu một phiên, và lộ trình đầu-cuối một khi các trigger thực sự kích hoạt — cùng với những gì mỗi phép đo loại trừ, để con số ban đầu không bao giờ bị đọc như tổng chi phí của một lượt chạy. Kết quả, kể cả mức tăng, được công bố theo byte, không bao giờ theo phần trăm token hay chi phí.',
         },
+        {
+          title: 'Lớp bản ghi được bảo đảm bằng bằng chứng xác thực',
+          body: 'Hợp đồng bất biến (contract.json), nhật ký sự kiện chỉ nối thêm (journal.ndjson) và các cổng quan sát đảm bảo chứng minh hoàn thành khách quan.',
+        },
+        {
+          title: 'Ủy quyền đa tác tử an toàn và tự chủ bầy đàn',
+          body: 'Thực thi song song trong các worktree riêng biệt, gói bàn giao có cấu trúc và kế thừa vị trí lãnh đạo giúp ngăn ngừa sai lệch và xung đột.',
+        },
       ],
     },
     honestLimits: {
@@ -1260,7 +1343,7 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Tin tưởng và bảo mật — Deep Work Plan',
       description:
-        'Tại sao Deep Work Plan an toàn để áp dụng: mã nguồn mở và MIT, Markdown-first không có lời gọi mạng hay telemetry, không phá hủy theo thiết kế, với các lần cài đặt có thể xác minh và chính sách công bố lỗ hổng rõ ràng.',
+        'Tại sao Deep Work Plan an toàn: mã nguồn mở MIT, Markdown không đo từ xa, thiết kế không phá hủy, mã băm kiểm tra và báo cáo bảo mật riêng.',
     },
     eyebrow: 'Tin tưởng & bảo mật',
     title: 'Tin tưởng và bảo mật',
