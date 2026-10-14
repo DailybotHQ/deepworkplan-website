@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer(첫 번째 애드온)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v1.0.0`로 고정, 인터페이스 `2`)의 얇은 통합 계층: `dck init`이 저장소 자체의 컨테이너로 저장소에 렌더링하는 Dev Containers 템플릿과 `dck-dockerfile` 스킬.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v1.0.1`로 고정, 인터페이스 `2`)의 얇은 통합 계층: `dck init`이 저장소 자체의 컨테이너로 저장소에 렌더링하는 Dev Containers 템플릿과 `dck-dockerfile` 스킬.
 
 - **키트 페이지:** [Devcontainer](/kit/devcontainer)
 - **추가 내용:** digest로 고정된 런타임 공식 이미지 기반의 `docker/local/<service>/Dockerfile`(`python-3.13`, `node-24` 또는 `debian`, 공유 베이스 이미지 없음), `dck` 런처(`up`, `shell`, `rebuild`, `doctor`) 위에서 동작하는 `dev.sh`, 옵트인 레이어로서의 코딩 에이전트, 루프백 전용 포트, 컨테이너 안에 키 없이(개발자가 호스트 프로필에서 `[ssh] copy_keys`로 옵트인한 경우 제외) 호스트의 에이전트를 통해 SSH로 사용하는 git, 표준 레이아웃을 갖춘 컨테이너별 Herdr 머신
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit(여덟 번째 애드온)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v1.0.0`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v1.0.1`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Agentkit](/kit/agentkit)
 - **추가하는 것:** 터미널 코딩 에이전트 위에 놓인 하나의 `ak` 명령 표면으로, 경계가 정해진 계획 작업을 헤드리스로 실행하는 데 사용됨; `subagents`, `cancel_children`, `model_routing` 능력은 런타임에, 활성화되고 감지되었으며 호환되는 인터페이스일 때만 제공함

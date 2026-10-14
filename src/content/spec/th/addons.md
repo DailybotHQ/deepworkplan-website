@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (addon แรก)
 
-ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v1.0.0` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
+ตัวผสานรวมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงไว้ที่ `v1.0.1` อินเทอร์เฟซ `2`): เทมเพลต Dev Containers ที่ `dck init` เรนเดอร์ลงในรีโพเป็นคอนเทนเนอร์ของรีโพเอง พร้อม skill `dck-dockerfile`
 
 - **หน้า kit:** [Devcontainer](/kit/devcontainer)
 - **สิ่งที่เพิ่ม:** `docker/local/<service>/Dockerfile` จากอิมเมจทางการของรันไทม์ที่ตรึงด้วย digest (`python-3.13` `node-24` หรือ `debian` ไม่มีอิมเมจพื้นฐานที่ใช้ร่วมกัน) `dev.sh` ที่ทำงานบนตัวเรียกใช้ `dck` (`up`, `shell`, `rebuild`, `doctor`) เอเจนต์เขียนโค้ดเป็นเลเยอร์แบบ opt-in พอร์ตเฉพาะ loopback git ผ่าน SSH โดยใช้ agent ของโฮสต์โดยไม่มีคีย์อยู่ภายใน เว้นแต่นักพัฒนาจะเลือกเปิดใช้ `[ssh] copy_keys` ในโปรไฟล์โฮสต์ของตน และเครื่อง Herdr ต่อคอนเทนเนอร์พร้อมเลย์เอาต์มาตรฐาน
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit (addon ที่แปด)
 
-ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ปักหมุดที่ `v1.0.0`, interface `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
+ตัวผสานรวมแบบบางของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ปักหมุดที่ `v1.0.1`, interface `1`) ซึ่งเป็นช่องทางการมอบหมายงานแบบ **headless** ของแผน v7
 
 - **หน้า kit:** [Agentkit](/kit/agentkit)
 - **สิ่งที่เพิ่ม:** พื้นผิวคำสั่ง `ak` เดียวครอบ coding agent บนเทอร์มินัล ใช้รันงานในแผนที่มีขอบเขตแบบ headless โดยมอบความสามารถ `subagents`, `cancel_children` และ `model_routing` เฉพาะในขณะรันเมื่อเปิดใช้ ตรวจพบ และ interface เข้ากันได้เท่านั้น

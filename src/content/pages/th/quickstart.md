@@ -93,9 +93,9 @@ lastUpdated: 2026-10-11
   | Repository (github.com/DailybotHQ) | แท็ก | sha256 ของ `SHA256SUMS` |
   | --- | --- | --- |
   | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
-  | coding-agents-kit | `v1.0.0` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
+  | coding-agents-kit | `v1.0.1` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
   | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
-  | devcontainer-kit | `v1.0.0` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
+  | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
   | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
   | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
   | agent-skill | `v3.23.17` | ไม่มีการเผยแพร่ — skills CLI บันทึก content hash ไว้ใน `skills-lock.json` |
@@ -251,7 +251,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 
 **ส่วนเสริมแบบเลือกได้** แจกแจงส่วนเสริมแบบเลือกได้เจ็ดอย่าง (devcontainer, Dailybot, dependency upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) และเสนอเฉพาะอย่างที่เหมาะกับ repository นี้ แต่ละอย่างเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง — อย่าติดตั้งส่วนเสริมเหล่านั้นอัตโนมัติ
 
-- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v1.0.0` พร้อมสกิล `dck-dockerfile`): `dck init` สร้างคอนเทนเนอร์ของ repository เอง — image ทางการตรึงด้วย digest ไม่มี base image ที่ใช้ร่วมกัน และ `bash dev.sh up` — และกระทบยอด devcontainer ที่มีอยู่หลังจากยอมรับ diff แล้วเท่านั้น เมื่อยอมรับแล้ว ให้ทำตาม *เส้นทาง devcontainer* ด้านล่างจนได้ stack ครบ
+- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v1.0.1` พร้อมสกิล `dck-dockerfile`): `dck init` สร้างคอนเทนเนอร์ของ repository เอง — image ทางการตรึงด้วย digest ไม่มี base image ที่ใช้ร่วมกัน และ `bash dev.sh up` — และกระทบยอด devcontainer ที่มีอยู่หลังจากยอมรับ diff แล้วเท่านั้น เมื่อยอมรับแล้ว ให้ทำตาม *เส้นทาง devcontainer* ด้านล่างจนได้ stack ครบ
 - **Dailybot integration** — สี่เหตุการณ์วงจรชีวิต (kickoff, งานสำคัญ, ถูกบล็อก, เสร็จสิ้น) เป็นรายงานความคืบหน้าแบบเต็มความสามารถสำหรับทีมที่ใช้ Dailybot อยู่แล้ว พร้อมการบังคับใช้ hook อัตโนมัติแบบเลือกได้ (`dailybot-cli >= 3.9.0`) การติดตั้ง skill เอเจนต์ Dailybot ที่จับคู่มา (3.23.14) ยังเปิดให้ใช้แชท เช็คอิน สร้างฟอร์ม ถาม AI บอร์ดและงาน Plan per-repo API keys และอื่น ๆ — ส่วนเสริมเชื่อมเฉพาะการรายงานเข้ากับการดำเนินการ DWP ระเบียบวิธีหลักไม่มีการพึ่งพิง Dailybot ใด ๆ
 - **Dependency upgrade** — การอัปเกรดที่เป็นกลางต่อตัวจัดการแพ็กเกจ ทำเป็นชุด ตรวจสอบแล้ว และย้อนกลับได้ เมื่อ
   ยอมรับ มันจะติดตั้งคำสั่ง `/lib-upgrade`
@@ -259,7 +259,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
   (ไม่เสนอสำหรับไลบรารีบริสุทธิ์ บริการ headless หรือ repo ที่มีแต่โครงสร้างพื้นฐาน) สามโปรไฟล์ซ้อนกัน
   ในไฟล์เดียว ได้แก่ visual-ui (แนะนำอย่างหนักแน่นเมื่อตรวจพบ; การติดตั้งควบคุมด้วยการยอมรับ), cli-output และสนทนา — สองโปรไฟล์หลัง
   จะถูกถามเสมอ ไม่เคยถูกใช้โดยอัตโนมัติ
-- **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v1.0.0`): คำสั่งเดียวสำหรับเอเจนต์เขียนโค้ดทุกตัว หนึ่งบัญชีต่อโปรไฟล์ `ak usage` และ `ak pick` สำหรับเลือกบัญชีที่มีพื้นที่เหลือมากที่สุด และ `ak run` แบบ headless สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตชัดเจนให้เอเจนต์เขียนโค้ดตัวอื่น (ผู้รับมอบหมายหนึ่งรายต่อหนึ่ง worktree) ชุดเครื่องมือเปิดเอเจนต์ในโหมดอัตโนมัติโดยค่าเริ่มต้น และการเลือกไม่ใช้ (`--ask` หรือ `AGENTKIT_PERMISSIONS=ask`) ชนะเสมอ
+- **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v1.0.1`): คำสั่งเดียวสำหรับเอเจนต์เขียนโค้ดทุกตัว หนึ่งบัญชีต่อโปรไฟล์ `ak usage` และ `ak pick` สำหรับเลือกบัญชีที่มีพื้นที่เหลือมากที่สุด และ `ak run` แบบ headless สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตชัดเจนให้เอเจนต์เขียนโค้ดตัวอื่น (ผู้รับมอบหมายหนึ่งรายต่อหนึ่ง worktree) ชุดเครื่องมือเปิดเอเจนต์ในโหมดอัตโนมัติโดยค่าเริ่มต้น และการเลือกไม่ใช้ (`--ask` หรือ `AGENTKIT_PERMISSIONS=ask`) ชนะเสมอ
 - **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v1.0.0` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งครั้งจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้ และสำหรับ lead ที่เฝ้าดู lane ของตัวเอง
 - **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v1.0.0`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
 - **AI Diff Reviewer** — การตรวจสอบในเครื่องที่จำเป็น (ไม่ใช่แบบเลือกเข้าร่วม): การตรวจความปลอดภัยของทุก Final Review รัน [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md` ที่ต้องการ) บนชุดการเปลี่ยนแปลงสะสมของแผน skill หรือส่วนขยายที่ขาดหายเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึกไว้ — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน ข้อผิดพลาดในการเรียกใช้เป็น soft-fail และผลลัพธ์ `critical` **ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสมบูรณ์ยังคงบล็อกการเสร็จสิ้น  (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด, BC-04) **Flow B** (CI gate กับ `pr-review.yml`) ถูกเสนอเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง และไม่เคยถูกติดตั้งโดยไม่ได้ร้องขอ ไม่มีโฟลว์ใดของ Deep Work Plan ที่ต้องการบริการเชิงพาณิชย์ ผู้ให้บริการ CI หรือ secret
