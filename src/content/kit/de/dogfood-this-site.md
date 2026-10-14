@@ -1,6 +1,6 @@
 ---
 title: "Fallstudie: diese Website"
-description: "Wie deepworkplan.com selbst auf Deep Work Plan läuft — ein realer Bericht über ein Produktions-Astro-Repository, das mit der von ihm dokumentierten Methodik AI-first gemacht wurde."
+description: "Wie deepworkplan.com selbst auf Deep Work Plan läuft — ein realer Bericht über ein Produktions-Astro-Repository, das mit der von ihm dokumentierten Methodik."
 kind: example
 lang: de
 order: 2

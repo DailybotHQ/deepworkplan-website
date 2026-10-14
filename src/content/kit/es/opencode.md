@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "El adaptador de DWP para OpenCode, el agente de código abierto, con soporte completo a través de AGENTS.md nativo y procedimientos de comando en Markdown invocados con el prefijo almohadilla."
+description: "El adaptador de DWP para OpenCode, el agente de código abierto, con soporte a través de AGENTS.md nativo y procedimientos Markdown invocados con el prefijo."
 kind: adapter
 lang: es
 order: 7
@@ -15,7 +15,7 @@ OpenCode, el agente de programación de código abierto, admite DWP a través de
 
 ## Nivel de soporte
 
-**Completo** — OpenCode lee AGENTS.md de forma nativa y ejecuta cada comando dwp-* desde su archivo de procedimiento.
+**Completo** (Comprobado por instalación) — OpenCode lee AGENTS.md de forma nativa y ejecuta cada comando dwp-* desde su archivo de procedimiento. Ruta verificada mediante suites de pruebas automatizadas.
 
 ## Instalación
 

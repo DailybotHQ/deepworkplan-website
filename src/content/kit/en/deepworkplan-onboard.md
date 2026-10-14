@@ -28,7 +28,7 @@ Turn a repository into an AI-first, spec-driven codebase. This is the onboard su
 3. Generate `AGENTS.md` + the `CLAUDE.md` symlink with a real Quick Commands block.
 4. Generate `docs/` (architecture, standards, testing, security, and more) and per-module docs.
 5. Generate `.agents/` (agents, thin `dwp-*` commands, stack-appropriate skills, catalog) + `.claude → .agents`.
-6. Install the skill and scaffold a gitignored `.dwp/` (plans, drafts) and a `tmp/` scratch space.
+6. Install the skill and scaffold a gitignored `.dwp/` (plans) and a `tmp/` scratch space.
 7. Install the required AI Diff Reviewer local review; detect every addon, upgrade the ones the repository uses and offer the ones that fit (never one just to complete the set); then self-check.
 
 ## Notes
@@ -44,6 +44,11 @@ For v7 plans — the default of the current 7.x pack — the machine-readable sc
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (adds the `delegation` event)
 - **Plan snapshot (live projection, shared with v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (shared with v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Repository configuration:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Addon descriptor:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Swarm handoff packet:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Benchmark record:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Learnings record:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 v6 plans keep their v6 schemas ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contract](https://deepworkplan.com/schema/plan-contract/v6.json), [journal event](https://deepworkplan.com/schema/journal-event/v6.json)); existing v5 plans continue to use the v5 state schema, and old plans are never silently rewritten.
 

@@ -1,6 +1,6 @@
 ---
 title: Terraform
-description: "Terraform および IaC プロジェクト向けのオンボーディングプリセット。モジュール、プロバイダー、バックエンド状態、環境、fmt／validate／plan ゲートに関する推論の手がかりを備える。"
+description: "Terraform および IaC プロジェクト向けのオンボーディングプリセット。モジュール、プロバイダー、バックエンド状態、環境、fmt／validate／plan ゲート。"
 kind: preset
 lang: ja
 order: 21

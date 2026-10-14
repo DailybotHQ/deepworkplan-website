@@ -1,6 +1,6 @@
 ---
 title: FastAPI
-description: "Um preset de onboarding para serviços FastAPI, com pistas de raciocínio para roteadores, modelos Pydantic, endpoints assíncronos, injeção de dependência e o test runner."
+description: "Um preset de onboarding para serviços FastAPI, com pistas de raciocínio para roteadores, modelos Pydantic, endpoints assíncronos, injeção de dependência e o."
 kind: preset
 lang: pt
 order: 7

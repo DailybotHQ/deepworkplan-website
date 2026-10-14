@@ -1,6 +1,6 @@
 ---
 title: Next.js
-description: "Next.js projeleri için App ve Pages Router arasındaki fark, Sunucu ve İstemci Bileşenleri, rota işleyicileri ve teste yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Next.js projeleri için App ve Pages Router arasındaki fark, Sunucu ve İstemci Bileşenleri, rota işleyicileri ve teste yönelik akıl yürütme ipuçları içeren bir."
 kind: preset
 lang: tr
 order: 12

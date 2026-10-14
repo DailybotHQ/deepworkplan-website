@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: "Angular プロジェクト向けのオンボーディングプリセット。コンポーネント、モジュールまたはスタンドアロン API、サービス、RxJS、テストランナーに関する推論の手がかりを備える。"
+description: "Angular プロジェクト向けのオンボーディングプリセット。コンポーネント、モジュールまたはスタンドアロン API、サービス、RxJS、テストランナーに関する推論の手がかり。"
 kind: preset
 lang: ja
 order: 15

@@ -15,7 +15,7 @@ Codex mendukung DWP melalui prosedur command markdown.
 
 ## Tingkat dukungan
 
-**Penuh** — setiap command dwp-* berjalan dari file prosedurnya.
+**Penuh** (Teruji perilaku) — setiap perintah dwp-* dijalankan dari file prosedurnya, terbukti dalam benchmark serah terima pembuatan dan pemulihan dua arah antar model.
 
 ## Instalasi
 

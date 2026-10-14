@@ -1,6 +1,6 @@
 ---
 title: 设计系统
-description: "一个可选的附加组件，为任何拥有面向用户界面表面的仓库提供一份 DESIGN.md（置于 docs/ 之下，从 AGENTS.md 建立索引）——在同一份文件中涵盖可视化 UI、CLI 输出与会话式三种配置档。"
+description: "可选附加组件，为含界面的仓库在 docs/ 中提供由 AGENTS.md 索引的 DESIGN.md，涵盖视觉 UI、CLI 与会话配置档。"
 kind: addon
 lang: zh
 order: 4
@@ -40,6 +40,16 @@ order: 4
 
 被采纳时，该附加组件可向仓库的 `.agents/commands/` 中安装一个 `/design-system` 委派器，以便日后重新生成或刷新 `DESIGN.md`。安装该命令是可选的；被拒绝的附加组件不安装任何东西。
 
+
+## v7 规范
+
+| 条目 | 值 |
+|---|---|
+| 产品 | DeepWorkPlan design-system 附加组件 |
+| 注册键 | `.dwp/config.json` 中的 `design-system` |
+| 描述符 | `addons/design-system/addon.json`（接口 1） |
+| 目标文件 | 从 `AGENTS.md` 建立索引的 `docs/DESIGN.md` |
+| 版本控制 | 随技能包固定并控制版本（`v7.8.1`） |
 ## 与按特性的设计文档的关系
 
 这是一份**仓库级、持久的**设计系统文件——区别于按特性的技术设计文档（工具绑定式规范驱动工作流中那种“需求 → 设计 → 任务”的 `design.md`）。Deep Work Plan 刻意不附带任何独立的按特性设计文档原型：一份计划的 README、每项任务的验收标准，以及各验证关卡，已经覆盖了那一角色。这个附加组件填补了那一角色未覆盖的唯一空白：持久的、仓库原生的界面设计上下文。

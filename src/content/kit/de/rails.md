@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails
-description: "Ein Onboarding-Preset für Ruby-on-Rails-Anwendungen mit Reasoning-Hinweisen zum MVC-Layout, Migrationen, dem Test-Framework sowie der Asset- und Konfigurations-Pipeline."
+description: "Ein Onboarding-Preset für Ruby-on-Rails-Anwendungen mit Hinweisen zum MVC-Layout, Migrationen, dem Test-Framework sowie der Asset- und Konfigurations-Pipeline."
 kind: preset
 lang: de
 order: 10

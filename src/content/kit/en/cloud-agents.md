@@ -19,17 +19,17 @@ The repository's `.dwp/` directory is the **durable spec and state layer**. Clou
 
 ## Support level
 
-**Full** — any cloud agent that reads the repository, follows `AGENTS.md`, and can execute shell commands supports DWP without a platform-specific adapter.
+**Full** (Documented) — any cloud agent that reads the repository, follows `AGENTS.md`, and can execute shell commands supports DWP without a platform-specific adapter.
 
 ## The wake-resume-yield loop
 
 Each cloud agent turn follows the pattern:
 
 1. **Wake** — the session starts (triggered by a cron schedule, a CI event, or a user action).
-2. **Run the DWP Resume Protocol** — read the plan README, locate the checkpoint, reconcile `state.json` against the markdown, inspect the seam, run a smoke test. See [DWP specification](/spec/dwp-specification#the-dwp-resume-protocol).
+2. **Run the DWP Resume Protocol** — read the plan README, locate the checkpoint, reconstruct state from `journal.ndjson` via `ledger.py project`, inspect the seam, run a smoke test. See [DWP specification](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Check for blocked state** — if `state.json.blocked` is set, report the reason and yield without executing.
 4. **Execute the next atomic task** — one task, passing its full validation gate.
-5. **Update the state layer** — rewrite `state.json` atomically with the new task status, gate records, outcome record, and commit hash.
+5. **Record in journal** — append events to `journal.ndjson` via `ledger.py` verbs (`start`, `gate`, `complete`); `ledger.py project` updates the derived `state.json` snapshot projection atomically. In legacy v5 plans, the direct state file update is preserved.
 6. **Yield** — the session terminates cleanly; the next turn picks up from the updated state.
 
 ## Requirements

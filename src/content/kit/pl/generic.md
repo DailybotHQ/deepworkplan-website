@@ -1,6 +1,6 @@
 ---
 title: Generic
-description: "Zapasowy preset onboardingowy dla dowolnego projektu, z niezależnymi od stacku wskazówkami do rozumowania, które wykrywają komendy builda i testów z repozytorium."
+description: "Zapasowy preset onboardingowy dla dowolnego projektu, z niezależnymi od stacku wskazówkami do rozumowania, które wykrywają komendy builda i testów z."
 kind: preset
 lang: pl
 order: 100

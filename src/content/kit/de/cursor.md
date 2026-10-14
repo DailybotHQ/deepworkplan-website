@@ -15,7 +15,7 @@ Cursor unterstützt DWP über Project Rules und Befehlsdateien.
 
 ## Unterstützungsstufe
 
-**Voll** — die DWP-Befehle funktionieren über das Rules-System von Cursor.
+**Vollständig** (Installationsgeprüft) — DWP-Befehle funktionieren über das Regelsystem von Cursor. Verzeichnisrouten durch automatisierte Testsuiten bestätigt; Verhaltens-Workflows laufen sequenziell ab.
 
 ## Installation
 

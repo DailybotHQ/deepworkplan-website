@@ -15,7 +15,7 @@ OpenCode 是一款开源编码代理，通过原生 AGENTS.md 与 Markdown 命�
 
 ## 支持级别
 
-**完整** —— OpenCode 原生读取 AGENTS.md，并从其过程文件运行每一个 dwp-* 命令。
+**完整**（经过安装测试）—— OpenCode 原生读取 AGENTS.md 并通过其过程文件运行每个 dwp-* 命令。路径已由自动化测试套件断言。
 
 ## 安装
 

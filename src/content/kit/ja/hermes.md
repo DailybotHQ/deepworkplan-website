@@ -1,6 +1,8 @@
 ---
 title: Hermes
-description: "DWP の Hermes アダプター。AgentSkills 標準のスキルロード、state.json のアウトカムレコードによるエピソード記憶のシナジー、そしてクロン駆動な計画継続。"
+description: "DWP の Hermes アダプター。AgentSkills 標準のスキルロード、state.json のアウトカムレコードによるエピソード記憶のシナジー、そしてクロン駆動な。"
+
+v6 および v7 プランでは、状態ファイルを手動で書き換えるのではなく、追記専用ジャーナル（`journal.ndjson`）から `ledger.py project` を介して状態を投影します。
 kind: adapter
 lang: ja
 order: 11
@@ -13,9 +15,11 @@ prefix: plain text
 
 Hermes は、AgentSkills 標準でスキルをロードし、セッションをまたいでエピソード記憶を維持する自律エージェントプラットフォームです。DWP は両方のサーフェスと統合します。スキルパックは他の AgentSkills 互換パックと同様に `.agents/skills/` からロードされ、`state.json` のアウトカムレコードは Hermes のメモリーインデックスに直接フィードされます。
 
+v6 および v7 プランでは、状態ファイルを手動で書き換えるのではなく、追記専用ジャーナル（`journal.ndjson`）から `ledger.py project` を介して状態を投影します。
+
 ## サポートレベル
 
-**フル** — Hermes は `AGENTS.md` を読み込み、AgentSkills 標準のローディングでスキルをロードします。すべての DWP サブスキルが利用可能です。
+**完全**（文書化済み）— Hermes は `AGENTS.md` を読み込み、AgentSkills 標準のローディングでスキルをロードします。すべての DWP サブスキルが利用可能です。
 
 ## インストール
 
@@ -32,9 +36,9 @@ resume the open plan
 
 ## エピソード記憶のシナジー
 
-Hermes はエージェントメモリーをインデックスして、過去の作業を将来のセッションをまたいで取り出し可能にします。DWP の `state.json` アウトカムレコードは、まさにこの用途のために設計されています。完了した各タスクは、`tried`（試みたこと）、`failed`（失敗したこと）、`worked`（うまくいったこと）、そして自由形式のメモを構造化された JSON フィールドに持ちます。Hermes がワークスペースの `.dwp/plans/` 状態ファイルをインデックスすると、完成した計画が取り出し可能なエピソード記憶になります。エージェントは後から、特定の問題がどのように解決されたかを、単に計画が実行されたことだけでなく、想起できます。
+v6 および v7 プランでは、DWP の決定論的検証レシート（`outcomes.py receipt`）と結果レコードが Hermes のメモリインデックスに直接供給されます。完了した各タスクには、試行されたこと、失敗したこと、成功したことが構造化された JSON スキーマで記録されます。完了したプランは検索可能なエピソード記憶となり、エージェントは問題がどのように解決されたかを思い出すことができます。
 
-つまり、Hermes 上の DWP 計画は二つの意味で耐久性があります。Markdown ファイルが人間が読める記録であり、`state.json` のアウトカムレコードが機械でインデックス可能なメモリーです。[計画の状態](/spec/plan-state#outcome-records-as-episodic-memory) を参照してください。
+エフェメラルセッションはイベントを `journal.ndjson` に追記し、状態ファイルを手動で書き換えるのではなく `ledger.py project` を介して `state.json` を投影します。[プラン状態](/spec/plan-state#outcome-records-as-episodic-memory)を参照してください。
 
 ## クロン駆動な継続
 

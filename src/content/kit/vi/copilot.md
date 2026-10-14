@@ -1,6 +1,6 @@
 ---
 title: GitHub Copilot
-description: "Adapter DWP cho GitHub Copilot, với hỗ trợ đầy đủ qua AGENTS.md và các quy trình lệnh markdown được gọi bằng tiền tố dấu thăng."
+description: "Adapter DWP cho GitHub Copilot, với hỗ trợ đầy đủ qua AGENTS.md và các quy trình lệnh markdown được gọi bằng tiền tố dấu thăng với xác minh đầy đủ."
 kind: adapter
 lang: vi
 order: 4
@@ -15,7 +15,7 @@ Copilot hỗ trợ DWP thông qua AGENTS.md và các quy trình lệnh dạng ma
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — Copilot đọc AGENTS.md và các file quy trình dwp-*, và chạy mọi lệnh từ chúng.
+**Đầy đủ** (Đã kiểm thử cài đặt) — Copilot đọc AGENTS.md và các tệp quy trình dwp-*, đồng thời chạy mọi lệnh từ đó. Tuyến đường được xác nhận bởi các bộ kiểm thử tự động.
 
 ## Cài đặt
 

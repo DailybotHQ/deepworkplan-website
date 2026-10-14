@@ -1,6 +1,6 @@
 ---
 title: Node / TS service
-description: "Node ve TypeScript servisleri ile serverless API’ler için bir onboarding ön ayarı; istek yaşam döngüsü, entegrasyonlar ve testler için akıl yürütme ipuçları sunar."
+description: "Node ve TypeScript servisleri ile serverless API’ler için bir onboarding ön ayarı; istek yaşam döngüsü, entegrasyonlar ve testler için akıl yürütme ipuçları."
 kind: preset
 lang: tr
 order: 4

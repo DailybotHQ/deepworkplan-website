@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "Tạo một Deep Work Plan mới từ một mục tiêu tổng quát. Agent phân tích mục tiêu, phân rã công việc thành các tác vụ, và ghi các file kế hoạch vào .dwp."
+description: "Tạo Deep Work Plan từ mục tiêu cấp cao, với ngữ pháp tùy chọn ranh giới, đề xuất Lite, cấp phát thư mục đánh số và hợp đồng v7 với xác minh đầy đủ."
 kind: command
 lang: vi
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ Tạo một Deep Work Plan mới từ một mục tiêu tổng quát.
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## Các chế độ
@@ -41,8 +43,9 @@ Chế độ trust là lối tắt cho người dùng thành thạo một khi b�
 ## Hành vi
 1. Phân tích mục tiêu và bối cảnh của repository.
 2. Đặt câu hỏi làm rõ nếu còn mơ hồ.
-3. Vật liệu hóa kế hoạch trực tiếp dưới `.dwp/plans/PLAN_001_<slug>/` — mặc định là kế hoạch Lite, hoặc Full cho công việc lớn hơn (ở chế độ có hướng dẫn, hãy rà soát và chọn giữ nguyên là Lite, nâng cấp lên Full, chỉnh sửa, hoặc dừng lại).
+3. Vật liệu hóa kế hoạch trực tiếp dưới `.dwp/plans/PLAN_<id>_<slug>/` — mặc định là kế hoạch Lite, hoặc Full cho công việc lớn hơn (ở chế độ có hướng dẫn, hãy rà soát và chọn giữ nguyên là Lite, nâng cấp lên Full, chỉnh sửa, hoặc dừng lại).
 4. Phân rã thành các tác vụ tuần tự và ghi README, các file tác vụ, cùng PROGRESS.
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. Kết thúc bằng Final Review (bước rà soát bảo mật, kiểm chứng trạng thái cuối cùng, đối chiếu skill).
 
 Gói 7.x mặc định tạo kế hoạch v7. Các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; việc di chuyển cần yêu cầu rõ ràng. Các kế hoạch mới nhận ID số tăng đơn điệu, có ít nhất ba chữ số (ví dụ `PLAN_001_add_payment_webhooks/`). Schema v5 đã cố định tính ID số là một từ, nên slug v5 có 2–4 từ; slug v7 có 2–5 từ. Các thư mục cũ không đánh số `PLAN_<slug>/` vẫn đọc được và không bao giờ bị đổi tên. Khi có kế hoạch được đánh số, `latest` trỏ đến kế hoạch có ID số cao nhất.

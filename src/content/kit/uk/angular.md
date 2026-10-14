@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: "Пресет онбордингу для Angular-проєктів із підказками для компонентів, модулів або standalone API, сервісів, RxJS та тест-раннера."
+description: "Пресет онбордингу для Angular-проєктів із підказками для компонентів, модулів або standalone API, сервісів, RxJS та тест-раннера з повною перевіркою."
 kind: preset
 lang: uk
 order: 15

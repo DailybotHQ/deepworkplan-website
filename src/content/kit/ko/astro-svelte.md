@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "Astro 사이트(선택적으로 Svelte 아일랜드 포함)를 위한 온보딩 프리셋으로, 콘텐츠 컬렉션, 스키마 검증, 아일랜드 하이드레이션에 대한 추론 단서를 제공합니다."
+description: "Astro 사이트(선택적으로 Svelte 아일랜드 포함)를 위한 온보딩 프리셋으로, 콘텐츠 컬렉션, 스키마 검증, 아일랜드 하이드레이션에 대한 추론 단서를."
 kind: preset
 lang: ko
 order: 3

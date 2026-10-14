@@ -15,7 +15,7 @@ Copilot mendukung DWP melalui AGENTS.md dan prosedur command markdown.
 
 ## Tingkat dukungan
 
-**Penuh** — Copilot membaca AGENTS.md dan file prosedur dwp-*, serta menjalankan setiap command dari sana.
+**Penuh** (Teruji instalasi) — Copilot membaca AGENTS.md dan file prosedur dwp-*, serta menjalankan setiap perintah darinya. Rute dipastikan oleh rangkaian pengujian otomatis.
 
 ## Instalasi
 

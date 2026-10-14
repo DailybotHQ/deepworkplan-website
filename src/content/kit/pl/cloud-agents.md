@@ -1,6 +1,6 @@
 ---
 title: Agenci chmurowi
-description: "Adapter DWP dla agentów chmurowych i działających w tle: zdalne zadania Claude Code, chmura Codex, agenci klasy Jules — efemeryczne sesje wykonywane w odniesieniu do trwałego planu .dwp/."
+description: "Adapter DWP dla agentów chmurowych i działających w tle: zdalne zadania Claude Code, chmura Codex, agenci klasy Jules — efemeryczne sesje wykonywane w."
 kind: adapter
 lang: pl
 order: 12
@@ -19,7 +19,7 @@ Katalog `.dwp/` repozytorium to **trwała warstwa specyfikacji i stanu**. Sesje 
 
 ## Poziom wsparcia
 
-**Pełny** — każdy agent chmurowy, który czyta repozytorium, stosuje się do `AGENTS.md` i może wykonywać polecenia powłoki, obsługuje DWP bez adaptera specyficznego dla platformy.
+**Pełne** (Udokumentowane) — platformy agentów w chmurze odczytują `AGENTS.md` lub natywne instrukcje i wykonują polecenia za pośrednictwem środowiska terminala lub kontenera.
 
 ## Pętla przebudzenie-wznowienie-yield
 
@@ -29,7 +29,7 @@ Każda tura agenta chmurowego przebiega według wzorca:
 2. **Uruchomienie Protokołu Wznowienia DWP** — odczytanie README planu, zlokalizowanie punktu kontrolnego, uzgodnienie `state.json` z Markdown, zbadanie szwu, uruchomienie testu dymnego. Zob. [Specyfikacja DWP](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Sprawdzenie stanu zablokowania** — jeśli ustawione jest `state.json.blocked`, zgłoszenie przyczyny i yield bez wykonywania.
 4. **Wykonanie następnego zadania atomowego** — jedno zadanie, przejście przez pełną bramkę walidacyjną.
-5. **Aktualizacja warstwy stanu** — atomowe nadpisanie `state.json` nowym statusem zadania, rekordami bramek, rekordem wyników i hashem commita.
+5. **Zapisz w dzienniku** — dopisz zdarzenia do `journal.ndjson` za pomocą czasowników `ledger.py` (`start`, `gate`, `complete`); `ledger.py project` atomowo aktualizuje projekcję migawki `state.json`. W starszych planach v5 zachowana jest bezpośrednia aktualizacja pliku stanu.
 6. **Yield** — sesja kończy się czysto; następna tura wznawia od zaktualizowanego stanu.
 
 ## Wymagania

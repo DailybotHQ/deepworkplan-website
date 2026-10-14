@@ -1,6 +1,6 @@
 ---
 title: OpenAI Codex
-description: "El adaptador de DWP para OpenAI Codex, con soporte completo mediante procedimientos de comando en Markdown y el prefijo almohadilla que ejecutan el flujo completo de Deep Work Plan."
+description: "El adaptador de DWP para OpenAI Codex, con soporte total por procedimientos Markdown y el prefijo almohadilla que ejecutan el flujo completo de Deep Work Plan."
 kind: adapter
 lang: es
 order: 3
@@ -15,7 +15,7 @@ Codex admite DWP mediante procedimientos de comando en Markdown.
 
 ## Nivel de soporte
 
-**Completo** — cada comando dwp-* se ejecuta desde su archivo de procedimiento.
+**Completo** (Comprobado por comportamiento) — cada comando dwp-* se ejecuta desde su archivo de procedimiento, demostrado en pruebas de referencia bidireccionales de autoría y reanudación entre modelos.
 
 ## Instalación
 

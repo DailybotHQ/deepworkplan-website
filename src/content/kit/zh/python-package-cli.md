@@ -1,6 +1,6 @@
 ---
 title: Python package / CLI
-description: "面向 Python 包与 CLI 工具的接入预设，附有关于包布局、控制台入口点与 pytest 验证关卡的推理提示。"
+description: "面向 Python 包与 CLI 工具的接入预设，附有关于包布局、控制台入口点与 pytest 验证关卡的推理提示，支持端到端验证与执行。"
 kind: preset
 lang: zh
 order: 5

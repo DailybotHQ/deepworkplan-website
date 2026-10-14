@@ -1,6 +1,6 @@
 ---
 title: NestJS
-description: "面向 NestJS 应用的接入预设，包含模块、控制器、提供者、DTO、装饰器模型与测试运行器的推理提示。"
+description: "面向 NestJS 应用的接入预设，包含模块、控制器、提供者、DTO、装饰器模型与测试运行器的推理提示，支持端到端验证与执行。"
 kind: preset
 lang: zh
 order: 8

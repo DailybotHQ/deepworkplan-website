@@ -1,6 +1,6 @@
 ---
 title: FastAPI
-description: "面向 FastAPI 服务的接入预设，包含路由、Pydantic 模型、异步端点、依赖注入与测试运行器的推理提示。"
+description: "面向 FastAPI 服务的接入预设，包含路由、Pydantic 模型、异步端点、依赖注入与测试运行器的推理提示，支持端到端验证与执行。"
 kind: preset
 lang: zh
 order: 7

@@ -1,6 +1,6 @@
 ---
 title: Spring Boot
-description: "Un preset d'onboarding pour les applications Spring Boot, avec des indices de raisonnement sur Maven vs Gradle, les contrôleurs, services, repositories et le test runner."
+description: "Un preset d'onboarding pour les applications Spring Boot, avec des indices de raisonnement sur Maven vs Gradle, les contrôleurs, services, repositories et le."
 kind: preset
 lang: fr
 order: 9

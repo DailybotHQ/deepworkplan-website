@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails
-description: "Ruby on Rails uygulamaları için MVC düzeni, taşımalar, test çerçevesi ve varlık ile yapılandırma hattına yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Ruby on Rails uygulamaları için MVC düzeni, taşımalar, test çerçevesi ve varlık ile yapılandırma hattına yönelik akıl yürütme ipuçları içeren bir onboarding ön."
 kind: preset
 lang: tr
 order: 10

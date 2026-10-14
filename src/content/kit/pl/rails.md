@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails
-description: "Preset onboardingowy dla aplikacji Ruby on Rails, ze wskazówkami do rozumowania o układzie MVC, migracjach, frameworku testowym i potoku zasobów oraz konfiguracji."
+description: "Preset onboardingowy dla aplikacji Ruby on Rails, ze wskazówkami do rozumowania o układzie MVC, migracjach, frameworku testowym i potoku zasobów oraz."
 kind: preset
 lang: pl
 order: 10

@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "สร้าง Deep Work Plan ใหม่จากเป้าหมายระดับสูง agent วิเคราะห์เป้าหมาย แยกงานออกเป็น task แล้วเขียนไฟล์แผนไว้ภายใต้ .dwp"
+description: "สร้าง Deep Work Plan จากเป้าหมายระดับสูง ด้วยไวยากรณ์ตัวเลือกขอบเขต ข้อเสนอ Lite การจัดสรรโฟลเดอร์แบบมีหมายเลข และสัญญา v7 พร้อมการตรวจสอบเต็มรูปแบบ"
 kind: command
 lang: th
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## โหมด
@@ -41,8 +43,9 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 ## พฤติกรรม
 1. วิเคราะห์เป้าหมายและบริบทของ repository
 2. ถามคำถามเพื่อความชัดเจนหากคลุมเครือ
-3. ทำให้แผนเป็นรูปธรรมโดยตรงภายใต้ `.dwp/plans/PLAN_001_<slug>/` — เป็นแผน Lite โดยค่าเริ่มต้น หรือ Full สำหรับงานที่ใหญ่กว่า (ในโหมด guided ให้ตรวจทานและเลือกว่าจะเก็บไว้เป็น Lite เลื่อนขั้นเป็น Full แก้ไข หรือหยุด)
+3. ทำให้แผนเป็นรูปธรรมโดยตรงภายใต้ `.dwp/plans/PLAN_<id>_<slug>/` — เป็นแผน Lite โดยค่าเริ่มต้น หรือ Full สำหรับงานที่ใหญ่กว่า (ในโหมด guided ให้ตรวจทานและเลือกว่าจะเก็บไว้เป็น Lite เลื่อนขั้นเป็น Full แก้ไข หรือหยุด)
 4. แยกออกเป็น task ตามลำดับ แล้วเขียน README ไฟล์ task และ PROGRESS
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. ปิดท้ายด้วย Final Review (การตรวจความปลอดภัย การตรวจสอบครบวงจรบนสถานะสุดท้าย และการกระทบยอดเรื่อง skill)
 
 แพ็ก 7.x สร้างแผน v7 เป็นค่าเริ่มต้น แผนเดิมยังคงรุ่นที่บันทึกไว้ การย้ายต้องมีคำขออย่างชัดเจน แผนใหม่จะได้รับ ID ตัวเลขที่เพิ่มขึ้นตามลำดับและมีอย่างน้อยสามหลัก (เช่น `PLAN_001_add_payment_webhooks/`) สคีมา v5 ที่ตรึงไว้จะนับ ID ตัวเลขเป็นหนึ่งคำ ดังนั้น slug ของ v5 จึงมี 2–4 คำ ส่วน slug ของ v7 มี 2–5 คำ โฟลเดอร์เดิมที่ไม่มีหมายเลข `PLAN_<slug>/` ยังคงอ่านได้และจะไม่มีการเปลี่ยนชื่อ หากมีแผนที่มีหมายเลข `latest` จะหมายถึงแผนที่มี ID ตัวเลขสูงสุด.

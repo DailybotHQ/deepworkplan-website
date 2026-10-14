@@ -1,6 +1,6 @@
 ---
 title: Swift / iOS
-description: "Swift 및 iOS 프로젝트를 위한 온보딩 프리셋으로, SwiftUI 또는 UIKit, 의존성 관리자, XCTest, 린팅, xcodebuild에 대한 추론 단서를 제공합니다."
+description: "Swift 및 iOS 프로젝트를 위한 온보딩 프리셋으로, SwiftUI 또는 UIKit, 의존성 관리자, XCTest, 린팅, xcodebuild에 대한 추."
 kind: preset
 lang: ko
 order: 18

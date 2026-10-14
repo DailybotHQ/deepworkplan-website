@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Eksekusi Deep Work Plan yang sudah ada, tugas demi tugas. Agent membaca seluruh rencana, menjalankan tiap tugas berurutan, memperbarui progres, dan menandai penyelesaian secara akurat."
+description: "Eksekusi Deep Work Plan yang ada secara berurutan dengan loop buku besar v7, mode trust tanpa pengawasan, dan penutupan Final Review."
 kind: command
 lang: id
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -23,16 +23,18 @@ Eksekusi Deep Work Plan yang sudah ada.
 ## Penggunaan
 
 ```
+/dwp-execute
 /dwp-execute [plan]
+/dwp-execute [plan] trust
 ```
 
 ## Perilaku
 
 1. Baca seluruh rencana sebelum memulai.
-2. Eksekusi tugas secara berurutan.
-3. Perbarui `PROGRESS.md` setelah tiap tugas.
-4. Tandai status tugas secara akurat.
-5. Berhenti dan bertanya saat terhambat.
+2. `ledger.py ready` & `ledger.py start` -> Eksekusi tugas secara berurutan.
+3. `ledger.py gate` -> `observed` evidence; Perbarui `PROGRESS.md` setelah tiap tugas.
+4. `parallel_safe` delegation; Tandai status tugas secara akurat.
+5. `ledger.py complete` & Final Review; Berhenti dan bertanya saat terhambat.
 
 ## Alias
 

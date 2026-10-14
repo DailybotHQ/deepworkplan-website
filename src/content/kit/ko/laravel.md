@@ -1,6 +1,6 @@
 ---
 title: Laravel
-description: "Laravel 프로젝트를 위한 온보딩 프리셋으로, Eloquent 모델, 컨트롤러, 라우트, 마이그레이션, Artisan 명령, 테스트 러너에 대한 추론 단서를 제공합니다."
+description: "Laravel 프로젝트를 위한 온보딩 프리셋으로, Eloquent 모델, 컨트롤러, 라우트, 마이그레이션, Artisan 명령, 테스트 러너에 대한 추론 단."
 kind: preset
 lang: ko
 order: 11

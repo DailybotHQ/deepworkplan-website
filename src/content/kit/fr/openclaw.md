@@ -1,6 +1,6 @@
 ---
 title: OpenClaw
-description: "L'adaptateur DWP pour OpenClaw : scan natif de .agents/skills, mappage de l'exécution sans surveillance, et continuation de plan pilotée par cron pour les espaces de travail d'agents autonomes."
+description: "L'adaptateur DWP pour OpenClaw : scan natif de .agents/skills, mappage de l'exécution sans surveillance, et continuation de plan pilotée par cron pour les."
 kind: adapter
 lang: fr
 order: 10
@@ -15,7 +15,7 @@ OpenClaw est une plateforme d'agents autonomes qui exécute des espaces de trava
 
 ## Niveau de support
 
-**Complet** — OpenClaw lit `AGENTS.md` et charge le skill via le standard AgentSkills. Tous les sous-skills DWP (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`) sont disponibles.
+**Complet** (Documenté) — OpenClaw lit `AGENTS.md` et charge la compétence via la norme AgentSkills. Tous les sous-skills DWP (`onboard`, `create`, `execute`, `refine`, `resume`, `status`, `verify`, `author`, `upgrade`) sont disponibles.
 
 ## Installation
 
@@ -50,7 +50,7 @@ Les primitives de planification d'OpenClaw correspondent directement au modèle 
 Opérationnellement :
 
 1. Un humain crée et approuve un plan de façon interactive. L'approbation est le point de contrôle — les tours sans surveillance ne créent et n'exécutent jamais en un seul tour.
-2. Le plan doit porter la couche d'état lisible par machine (`manifest.json` + `state.json`). Dans un espace de travail sans git, `state.json` est ce qui rend possible la reprise après crash. Voir [État du plan](/spec/plan-state).
+2. Le plan doit porter la couche d'état lisible par machine (`manifest.json` + `state.json`). Dans un espace de travail sans git, `state.json` est ce qui rend possible la reprise après crash. Voir [État du plan](/spec/plan-state). Dans les plans v6 et v7, l'état est projeté depuis le journal en ajout seul (`journal.ndjson`) via `ledger.py project` plutôt que de réécrire manuellement les fichiers d'état.
 3. Chaque tour heartbeat ou cron exécute au plus une tâche, passe sa porte de validation, met à jour `state.json` de façon atomique, et cède la main.
 4. En cas de condition d'arrêt, l'agent renseigne le champ `blocked` de `state.json` et signale via le canal normal de l'espace de travail. Le prochain regard humain — ou le rapport heartbeat — voit exactement ce qui est nécessaire.
 

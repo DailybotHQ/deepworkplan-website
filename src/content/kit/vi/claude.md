@@ -15,7 +15,7 @@ Claude Code có hỗ trợ DWP **đầy đủ** thông qua các slash command v�
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — cả năm lệnh DWP đều ánh xạ tới các slash command gốc của Claude Code.
+**Đầy đủ** (Đã kiểm thử hành vi) — toàn bộ bộ kỹ năng phụ và lệnh vòng đời DWP ánh xạ tới các lệnh dấu gạch chéo gốc của Claude Code, được chứng minh trong các benchmark chuyển giao hai chiều.
 
 ## Cài đặt
 

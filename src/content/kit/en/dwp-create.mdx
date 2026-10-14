@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "Create a new Deep Work Plan from a high-level goal. The agent analyzes the goal, decomposes the work into tasks, and writes the plan files under .dwp."
+description: "Create a Deep Work Plan from a high-level goal, with full boundary option grammar, Lite-first proposals, numbered folder allocation, and v7 contracts."
 kind: command
 lang: en
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -18,34 +18,36 @@ Create a new Deep Work Plan from a high-level goal.
 
 ## What it does
 
-`dwp-create` takes a high-level goal and turns it into a structured plan. It analyzes the goal, asks clarifying questions if needed, decomposes the work into sequential tasks, and writes the plan files.
+`dwp-create` takes a high-level goal and turns it into a structured, executable Deep Work Plan. It analyzes requirements, asks clarifying questions if ambiguous, and materializes a Lite or Full plan directly under `.dwp/plans/PLAN_<id>_<slug>/`.
 
 ## Usage
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
-## Modes
+## Modes and boundary options
 
-`dwp-create` defaults to **guided** mode: it gathers context, runs the analysis, and materializes a Lite plan directly — a compact proposal that is already executable, not a throwaway draft — **shows it to you, and asks whether to retain it as Lite, promote it to a Full task-file plan, edit it, or stop** — so you always read the real plan before deciding. This is the recommended default, especially the first few times.
+Boundary options configure review behavior and plan format. They can appear as tokens at the beginning or end of the command in either order:
 
-Append **`trust`** (or `auto`) as the last word to skip that review — the agent goes straight to a pre-approved, ready-to-run plan (Lite or Full, chosen by the same signals):
-
-```
-/dwp-create <goal> trust
-```
-
-Trust mode is the power-user shortcut once you trust the flow; guided mode keeps a human in the loop by default.
+- **Review modes:**
+  - **Guided (default):** materializes an executable Lite plan proposal, shows observed signals and format rationale, and asks whether to retain Lite, promote to Full, edit, or stop.
+  - **Trust (`trust` or `auto`):** skips review and goes straight to a pre-approved, ready-to-run plan.
+- **Format preferences:**
+  - **`lite`:** expresses a preference for a compact single-file plan in `README.md` with anchored task records (`#task-N`).
+  - **`full`:** expresses a preference for decomposed numbered task files (`N.task_<slug>.md`).
+  - Specifying both `lite` and `full` is an explicit conflict.
+- **Terminator:** `--` terminates option parsing; everything after `--` is interpreted as literal goal context.
 
 ## Behavior
-1. Analyze the goal and repository context.
-2. Ask clarifying questions if ambiguous.
-3. Materialize the plan directly under `.dwp/plans/PLAN_001_<slug>/` — a Lite plan by default, or Full for larger work (in guided mode, review it and choose to retain Lite, promote to Full, edit, or stop).
-4. Decompose into sequential tasks and write the README, task files, and PROGRESS.
-5. End with the Final Review (security pass, final-state validation, skills reconciliation).
 
-The current 7.x pack creates new v7 plans by default with slugs of 2–5 words. The retained v5 flow uses 2–4 words because its frozen schemas count the numeric ID as a word. New plans receive monotonically increasing numeric IDs of at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed; existing plans are never migrated implicitly. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.
+1. **Requirements analysis:** inspects repository context, architecture, and documented testing commands.
+2. **Clarification:** asks clarifying questions if scope or requirements are ambiguous.
+3. **Monotonic allocation:** allocates a zero-padded folder name `PLAN_<id>_<slug>/` under `.dwp/plans/` using `.next-plan-id` under POSIX file lock (`fcntl`). Numeric IDs are monotonic and never reused.
+4. **Contract materialization:** runs `ledger.py materialize` to write `manifest.json`, stamp content-addressed `contract.json` (v7 generation with `parallel_safe` task markers), and record the initial `approval` event.
+5. **Final Review:** plans end with a mandatory five-part Final Review task (security pass with required local review, final-state validation, skills reconciliation, documentation reconciliation, completion).
 
 ## Aliases
 

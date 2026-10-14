@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "Créer un nouveau skill réutilisable dans le dépôt courant — une procédure paramétrée exécutée en session — via le sous-skill author, en gardant le catalogue synchronisé."
+description: "Créer un nouveau skill réutilisable dans le dépôt courant — une procédure paramétrée exécutée en session — via le sous-skill author, en gardant le catalogue."
 kind: command
 lang: fr
 order: 7

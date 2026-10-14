@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "通过 author 子技能在当前仓库中创建一个新的可复用技能——一个带参数的、在会话中运行的过程——并让目录保持同步。"
+description: "通过 author 子技能在当前仓库中创建一个新的可复用技能——一个带参数的、在会话中运行的过程——并让目录保持同步，支持端到端验证与执行。"
 kind: command
 lang: zh
 order: 7

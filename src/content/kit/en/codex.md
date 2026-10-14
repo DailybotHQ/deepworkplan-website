@@ -15,7 +15,7 @@ Codex supports DWP through markdown command procedures.
 
 ## Support level
 
-**Full** — every dwp-* command runs from its procedure file.
+**Full** (Behavior-tested) — every dwp-* command runs from its procedure file, proven in bidirectional author/resume handoff benchmarks across models.
 
 ## Installation
 

@@ -15,7 +15,7 @@ O GitHub Copilot oferece suporte ao DWP por meio do AGENTS.md e de procedimentos
 
 ## Nível de suporte
 
-**Completo** — o Copilot lê o AGENTS.md e os arquivos de procedimento dwp-*, e executa todos os comandos a partir deles.
+**Completo** (Comprovado por instalação) — O Copilot lê o AGENTS.md e os arquivos de procedimento dwp-*, executando cada comando a partir deles. Rota confirmada por suítes de testes automatizados.
 
 ## Instalação
 

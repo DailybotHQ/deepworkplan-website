@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "एक मौजूदा Deep Work Plan को कार्य-दर-कार्य निष्पादित करें। एजेंट पूरी योजना पढ़ता है, हर कार्य क्रम में चलाता है, प्रगति अपडेट करता है, और पूर्णता को सटीकता से चिह्नित करता है।"
+description: "v7 लेज़र लूप, वैकल्पिक अनअटेंडेड ट्रस्ट मोड, parallel_safe प्रतिनिधिमंडल और फाइनल रिव्यू समापन के साथ डीप वर्क प्लान को क्रमिक रूप से निष्पादित करें।"
 kind: command
 lang: hi
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -23,16 +23,18 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 ## उपयोग
 
 ```
+/dwp-execute
 /dwp-execute [plan]
+/dwp-execute [plan] trust
 ```
 
 ## व्यवहार
 
 1. शुरू करने से पहले पूरी योजना पढ़ें।
-2. कार्यों को क्रम में निष्पादित करें।
-3. प्रत्येक कार्य के बाद `PROGRESS.md` अपडेट करें।
-4. कार्य स्थिति को सटीकता से चिह्नित करें।
-5. अवरुद्ध होने पर रुकें और पूछें।
+2. `ledger.py ready` & `ledger.py start` -> कार्यों को क्रम में निष्पादित करें।
+3. `ledger.py gate` -> `observed` evidence; प्रत्येक कार्य के बाद `PROGRESS.md` अपडेट करें।
+4. `parallel_safe` delegation; कार्य स्थिति को सटीकता से चिह्नित करें।
+5. `ledger.py complete` & Final Review; अवरुद्ध होने पर रुकें और पूछें।
 
 ## उपनाम
 

@@ -1,6 +1,6 @@
 ---
 title: Terraform
-description: "Preset onboardingowy dla projektów Terraform i IaC, ze wskazówkami do rozumowania o modułach, providerach, stanie backendu, środowiskach i bramce fmt/validate/plan."
+description: "Preset onboardingowy dla projektów Terraform i IaC, ze wskazówkami do rozumowania o modułach, providerach, stanie backendu, środowiskach i bramce."
 kind: preset
 lang: pl
 order: 21

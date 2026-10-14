@@ -1,6 +1,6 @@
 ---
 title: Next.js
-description: "Next.js プロジェクト向けのオンボーディングプリセット。App Router と Pages Router の違い、サーバーコンポーネントとクライアントコンポーネント、ルートハンドラー、テストに関する推論の手がかりを備える。"
+description: "Next.js プロジェクト向けのオンボーディングプリセット。App Router と Pages Router の違い、サーバーコンポーネントとクライアントコンポーネント。"
 kind: preset
 lang: ja
 order: 12

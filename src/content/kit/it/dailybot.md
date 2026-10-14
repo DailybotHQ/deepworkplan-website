@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Addon DWP opt-in: riporta il ciclo di vita del piano a un team Dailybot, hook opzionali e la skill agente Dailybot completa 3.23.14 (chat, moduli, Plan, altro)."
+description: "Addon DWP opt-in: riporta il ciclo di vita del piano a un team Dailybot, hook opzionali e la skill agente Dailybot completa v3.23.17 (chat, moduli, Plan."
 kind: addon
 lang: it
 order: 2
@@ -23,7 +23,7 @@ La metodologia Deep Work Plan di base ha **zero** dipendenze da Dailybot. Un rep
 
 ## Cosa collega questo addon (volutamente ristretto)
 
-L'addon DWP Dailybot **non** reinventa Dailybot. Collega l'esecuzione del piano alla sub-skill dailybot **`report`** e opzionalmente committa gli hook del harness. Tutto il resto — installazione, consenso, autenticazione, stile di scrittura — è **delegato** alla [skill agente Dailybot](https://github.com/DailybotHQ/agent-skill) ufficiale (attualmente **3.23.14**).
+L'addon DWP Dailybot **non** reinventa Dailybot. Collega l'esecuzione del piano alla sub-skill dailybot **`report`** e opzionalmente committa gli hook del harness. Tutto il resto — installazione, consenso, autenticazione, stile di scrittura — è **delegato** alla [skill agente Dailybot](https://github.com/DailybotHQ/agent-skill) ufficiale (attualmente **v3.23.17**).
 
 ### Quattro eventi del ciclo di vita
 
@@ -86,9 +86,9 @@ Questo addon **non** chiede mai email, OTP o API key e **non** memorizza credenz
 
 La risoluzione dell'auth è **Bearer-first**: un token di sessione ha la priorità, con un retry trasparente Bearer→API-key su `401`/`403` così che un token scaduto non blocchi mai una chiave valida. Se l'autenticazione viene rifiutata o non è disponibile, il reporting viene saltato in silenzio — il lavoro continua.
 
-## La skill Dailybot abbinata — 17 capacità (3.23.14)
+## La skill Dailybot abbinata — 17 capacità (v3.23.17)
 
-Installare la skill agente Dailybot porta molto più di quanto l'addon DWP collega. Il pacchetto skill ufficiale (skill **3.23.14**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, publish CLI corrente **3.25.2**) espone **17 sub-skill coordinate**:
+Installare la skill agente Dailybot porta molto più di quanto l'addon DWP collega. Il pacchetto skill ufficiale (skill **v3.23.17**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, publish CLI corrente **3.25.0**) espone **17 sub-skill coordinate**:
 
 | Sub-skill | Cosa fa |
 |-----------|--------------|

@@ -1,6 +1,6 @@
 ---
 title: Rust
-description: "Un preset d'onboarding pour les projets Rust, avec des indices de raisonnement sur les crates, modules, workspaces Cargo, les features et la porte cargo test/clippy/build."
+description: "Un preset d'onboarding pour les projets Rust, avec des indices de raisonnement sur les crates, modules, workspaces Cargo, les features et la porte cargo."
 kind: preset
 lang: fr
 order: 19

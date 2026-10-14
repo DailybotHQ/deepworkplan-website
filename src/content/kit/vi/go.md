@@ -1,6 +1,6 @@
 ---
 title: Go
-description: "Preset onboarding cho dự án Go, với gợi ý suy luận về module, bố cục cmd/internal, table-driven test và cổng go test/vet/build."
+description: "Preset onboarding cho dự án Go, với gợi ý suy luận về module, bố cục cmd/internal, table-driven test và cổng go test/vet/build với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 20

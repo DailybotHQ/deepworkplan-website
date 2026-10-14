@@ -1,6 +1,6 @@
 ---
 title: Cloud agents
-description: "Adapter DWP untuk cloud dan background agent: tugas remote Claude Code, Codex cloud, kelas Jules — sesi sementara yang mengeksekusi terhadap rencana .dwp/ yang tahan lama."
+description: "Adapter DWP untuk cloud dan background agent: tugas remote Claude Code, Codex cloud, kelas Jules — sesi sementara yang mengeksekusi terhadap rencana .dwp/ yang."
 kind: adapter
 lang: id
 order: 12
@@ -19,17 +19,17 @@ Direktori `.dwp/` repositori adalah **lapisan spec dan status yang tahan lama**.
 
 ## Tingkat dukungan
 
-**Penuh** — cloud agent mana pun yang membaca repositori, mengikuti `AGENTS.md`, dan dapat mengeksekusi perintah shell mendukung DWP tanpa adapter khusus platform.
+**Penuh** (Terdokumentasi) — platform agen cloud membaca `AGENTS.md` atau instruksi bawaan dan mengeksekusi perintah melalui lingkungan terminal atau kontainernya.
 
 ## Loop wake-resume-yield
 
 Setiap giliran cloud agent mengikuti pola:
 
 1. **Wake** — sesi dimulai (dipicu oleh jadwal cron, event CI, atau tindakan pengguna).
-2. **Jalankan Protokol Resume DWP** — baca README rencana, temukan checkpoint, rekonsiliasi `state.json` terhadap markdown, periksa seam, jalankan smoke test. Lihat [Spesifikasi DWP](/spec/dwp-specification#the-dwp-resume-protocol).
+2. **Jalankan Protokol Pemulihan DWP** — baca README rencana, cari titik pemeriksaan, rekonstruksi status dari `journal.ndjson` melalui `ledger.py project`, periksa sambungan, jalankan uji asap. Lihat [Spesifikasi DWP](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Periksa status terblokir** — jika `state.json.blocked` diisi, laporkan alasannya dan yield tanpa mengeksekusi.
 4. **Eksekusi tugas atomik berikutnya** — satu tugas, melewati validation gate penuhnya.
-5. **Perbarui lapisan status** — tulis ulang `state.json` secara atomik dengan status tugas baru, catatan gate, catatan outcome, dan hash commit.
+5. **Catat dalam jurnal** — tambahkan peristiwa ke `journal.ndjson` melalui kata kerja `ledger.py` (`start`, `gate`, `complete`); `ledger.py project` memperbarui proyeksi snapshot `state.json` secara atomik. Dalam rencana v5 lawas, pembaruan file status langsung dipertahankan.
 6. **Yield** — sesi berakhir dengan bersih; giliran berikutnya melanjutkan dari status yang diperbarui.
 
 ## Persyaratan

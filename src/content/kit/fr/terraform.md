@@ -1,6 +1,6 @@
 ---
 title: Terraform
-description: "Un preset d'onboarding pour les projets Terraform et IaC, avec des indices de raisonnement sur les modules, providers, l'état backend, les environnements et la porte fmt/validate/plan."
+description: "Un preset d'onboarding pour les projets Terraform et IaC, avec des indices de raisonnement sur les modules, providers, l'état backend, les environnements et la."
 kind: preset
 lang: fr
 order: 21

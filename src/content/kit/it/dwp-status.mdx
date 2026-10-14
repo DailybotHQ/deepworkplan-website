@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Riferisce sullo stato di un Deep Work Plan senza eseguirlo. L’agente legge il piano e il log dei progressi, poi riassume il lavoro completato, in corso e in sospeso."
+description: "Riporta lo stato di un Deep Work Plan su quattro dimensioni del ciclo di vita, limiti dell'envelope, blocchi e deleghe senza modificare file."
 kind: command
 lang: it
 order: 5
@@ -23,16 +23,17 @@ Riferisce sullo stato di un Deep Work Plan senza eseguirlo.
 ## Uso
 
 ```
+/dwp-status
 /dwp-status [plan]
 ```
 
 ## Comportamento
 
-1. Legge il piano e `PROGRESS.md`.
+1. 4 lifecycle dimensions (format, materialization, review, progress); Legge il piano e `PROGRESS.md`.
 2. Riassume le attività completate.
 3. Riassume le attività in corso.
-4. Riassume le attività in sospeso.
-5. Riferisce senza modificare nulla.
+4. Resource envelope & blockers (C1–C7); Riassume le attività in sospeso.
+5. Delegations observation; Riferisce senza modificare nulla.
 
 ## Alias
 

@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: "Un preset d'onboarding pour les projets Angular, avec des indices de raisonnement sur les composants, les modules ou APIs standalone, les services, RxJS et le test runner."
+description: "Un preset d'onboarding pour les projets Angular, avec des indices de raisonnement sur les composants, les modules ou APIs standalone, les services, RxJS et le."
 kind: preset
 lang: fr
 order: 15

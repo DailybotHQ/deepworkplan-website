@@ -44,6 +44,11 @@ Para planos v7 — o padrão do pacote 7.x atual — o catálogo de esquemas leg
 - **Evento do diário:** https://deepworkplan.com/schema/journal-event/v7.json (acrescenta o evento `delegation`)
 - **Snapshot do plano (projeção ativa, compartilhada com o v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Manifesto de contexto (compartilhado com o v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Configuração do repositório:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Descritor de addon:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Pacote de transição de swarm:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Registro de benchmark:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Registro de aprendizados:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 Planos v6 mantêm seus esquemas v6 ([manifesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrato](https://deepworkplan.com/schema/plan-contract/v6.json), [evento do diário](https://deepworkplan.com/schema/journal-event/v6.json)); planos v5 existentes continuam usando o esquema de estado v5, e planos antigos nunca são reescritos silenciosamente.
 

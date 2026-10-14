@@ -44,6 +44,11 @@ usage: /deepworkplan-onboard
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (добавляет событие `delegation`)
 - **Plan snapshot (активная проекция, общая с v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (общий с v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Конфигурация репозитория:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Дескриптор аддона:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Пакет передачи роя:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Запись бенчмарка:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Запись выводов:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 Планы v6 сохраняют свои схемы v6 ([манифест](https://deepworkplan.com/schema/plan-manifest/v6.json), [контракт](https://deepworkplan.com/schema/plan-contract/v6.json), [событие журнала](https://deepworkplan.com/schema/journal-event/v6.json)); существующие планы v5 продолжают использовать схему состояния v5, а старые планы никогда не переписываются незаметно.
 

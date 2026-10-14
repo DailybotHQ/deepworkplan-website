@@ -1,6 +1,6 @@
 ---
 title: Next.js
-description: "Un preset d'onboarding pour les projets Next.js, avec des indices de raisonnement sur App vs Pages Router, les Server et Client Components, les route handlers et les tests."
+description: "Un preset d'onboarding pour les projets Next.js, avec des indices de raisonnement sur App vs Pages Router, les Server et Client Components, les route handlers."
 kind: preset
 lang: fr
 order: 12

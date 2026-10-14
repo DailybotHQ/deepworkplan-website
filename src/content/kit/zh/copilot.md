@@ -15,7 +15,7 @@ GitHub Copilot 通过 AGENTS.md 与 Markdown 命令过程支持 DWP。
 
 ## 支持级别
 
-**完整** —— Copilot 读取 AGENTS.md 与 dwp-* 过程文件，并从中运行每一个命令。
+**完整**（经过安装测试）—— Copilot 读取 AGENTS.md 和 dwp-* 过程文件，并从中运行每个命令。路径已由自动化测试套件断言。
 
 ## 安装
 

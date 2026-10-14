@@ -1,6 +1,6 @@
 ---
 title: Cloud agents
-description: "Bộ chuyển đổi DWP cho cloud agent và background agent: tác vụ từ xa Claude Code, Codex cloud, lớp Jules — các phiên tạm thời thực thi dựa trên kế hoạch .dwp/ bền vững."
+description: "Bộ chuyển đổi DWP cho cloud agent và background agent: tác vụ từ xa Claude Code, Codex cloud, lớp Jules — các phiên tạm thời thực thi dựa trên kế hoạch .dwp/."
 kind: adapter
 lang: vi
 order: 12
@@ -19,17 +19,17 @@ Thư mục `.dwp/` của repository là **lớp spec và trạng thái bền v�
 
 ## Mức độ hỗ trợ
 
-**Full** — bất kỳ cloud agent nào đọc repository, tuân theo `AGENTS.md`, và có thể thực thi các lệnh shell đều hỗ trợ DWP mà không cần bộ chuyển đổi riêng cho nền tảng.
+**Đầy đủ** (Đã lập tài liệu) — các nền tảng agent đám mây đọc `AGENTS.md` hoặc các hướng dẫn gốc và thực thi các lệnh thông qua môi trường terminal hoặc container của chúng.
 
 ## Vòng lặp thức dậy–tiếp tục–nhường
 
 Mỗi lượt cloud agent tuân theo mô hình:
 
 1. **Thức dậy** — phiên khởi đầu (được kích hoạt bởi lịch cron, sự kiện CI, hay hành động người dùng).
-2. **Chạy Giao thức Tiếp tục DWP** — đọc README kế hoạch, định vị điểm kiểm tra, điều hòa `state.json` với markdown, kiểm tra đường nối, chạy smoke test. Xem [Đặc tả DWP](/spec/dwp-specification#the-dwp-resume-protocol).
+2. **Chạy Giao thức Tiếp tục DWP** — đọc README của kế hoạch, xác định điểm kiểm tra, tái tạo trạng thái từ `journal.ndjson` qua `ledger.py project`, kiểm tra mối nối, chạy thử nghiệm khói. Xem [Đặc tả DWP](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Kiểm tra trạng thái bị chặn** — nếu `state.json.blocked` được đặt, báo cáo lý do và nhường mà không thực thi.
 4. **Thực thi tác vụ nguyên tử tiếp theo** — một tác vụ, vượt qua cổng kiểm chứng đầy đủ của nó.
-5. **Cập nhật lớp trạng thái** — ghi lại `state.json` nguyên tử với trạng thái tác vụ mới, bản ghi cổng, bản ghi kết quả và băm commit.
+5. **Ghi vào nhật ký** — nối thêm sự kiện vào `journal.ndjson` qua các lệnh `ledger.py` (`start`, `gate`, `complete`); `ledger.py project` cập nhật phép chiếu ảnh chụp nhanh `state.json` nguyên tử. Trong các kế hoạch v5 cũ, việc cập nhật trực tiếp tệp trạng thái được bảo toàn.
 6. **Nhường** — phiên kết thúc gọn gàng; lượt tiếp theo tiếp tục từ trạng thái đã cập nhật.
 
 ## Yêu cầu

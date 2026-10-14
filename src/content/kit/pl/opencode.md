@@ -15,7 +15,7 @@ OpenCode, open-source'owy agent kodujący, obsługuje DWP poprzez natywny AGENTS
 
 ## Poziom wsparcia
 
-**Pełny** — OpenCode natywnie odczytuje AGENTS.md i uruchamia każdą komendę dwp-* z jej pliku procedury.
+**Pełne** (Przetestowane instalacyjnie) — OpenCode odczytuje AGENTS.md natywnie i uruchamia każde polecenie dwp-* ze swojego pliku procedury. Trasa potwierdzona przez automatyczne zestawy testów.
 
 ## Instalacja
 

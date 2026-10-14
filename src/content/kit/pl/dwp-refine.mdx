@@ -1,6 +1,6 @@
 ---
 title: dwp-refine
-description: "Dopracuj istniejący Deep Work Plan, dodając, usuwając lub zmieniając kolejność zadań, zachowując ukończoną pracę i aktualizując tabelę zadań zgodnie ze zmianami."
+description: "Udoskonalaj Deep Work Plan za pomocą atomowych poprawek w contracts/, zamkniętych adaptacji, ochrony kryteriów i awansu z Lite do Full."
 kind: command
 lang: pl
 order: 3
@@ -24,14 +24,16 @@ Dopracuj istniejący Deep Work Plan.
 
 ```
 /dwp-refine [plan]
+/dwp-refine promote [plan]
 ```
 
 ## Zachowanie
 
 1. Przeczytanie istniejącego planu.
-2. Dodanie, usunięcie lub zmiana kolejności zadań.
+2. `ledger.py amend` (v7 contracts/); Dodanie, usunięcie lub zmiana kolejności zadań.
 3. Zachowanie ukończonej pracy.
 4. Aktualizacja tabeli zadań.
+4. Closed adaptations (split, reorder, insert, change_strategy, retry).
 5. Odnotowanie, co się zmieniło i dlaczego.
 
 > Po aktualizacji skilla istniejące plany zachowują zapisaną generację. Migracja nigdy nie jest automatyczna: starsze zakończenie z trzema zadaniami można jawnie przenieść do zachowanego kształtu Final Review v5; plan v5 przechodzi do v6 wyłącznie przez jawne polecenie z podglądem. Plan v6 zachowuje swoją generację i działa bez zmian; nowe plany korzystają z aktualnej generacji v7, a plan v6 nigdy nie jest niejawnie przenoszony do v7.

@@ -1,6 +1,6 @@
 ---
 title: Spring Boot
-description: "Spring Boot 애플리케이션을 위한 온보딩 프리셋으로, Maven 대 Gradle, 컨트롤러, 서비스, 리포지토리, 테스트 러너에 대한 추론 단서를 제공합니다."
+description: "Spring Boot 애플리케이션을 위한 온보딩 프리셋으로, Maven 대 Gradle, 컨트롤러, 서비스, 리포지토리, 테스트 러너에 대한 추론 단서를 제."
 kind: preset
 lang: ko
 order: 9

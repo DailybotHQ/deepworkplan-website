@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Den Status eines Deep Work Plan berichten, ohne ihn auszuführen. Der Agent liest den Plan und das Fortschrittsprotokoll und fasst dann abgeschlossene, laufende und ausstehende Arbeit zusammen."
+description: "Berichten Sie über den Status eines Deep Work Plans über vier Lebenszyklusdimensionen, Ressourcengrenzen, Blocker und Delegationen ohne Änderungen."
 kind: command
 lang: de
 order: 5
@@ -23,16 +23,17 @@ Den Status eines Deep Work Plan berichten, ohne auszuführen.
 ## Verwendung
 
 ```
+/dwp-status
 /dwp-status [plan]
 ```
 
 ## Verhalten
 
-1. Den Plan und `PROGRESS.md` lesen.
+1. 4 lifecycle dimensions (format, materialization, review, progress); Den Plan und `PROGRESS.md` lesen.
 2. Abgeschlossene Aufgaben zusammenfassen.
 3. Laufende Aufgaben zusammenfassen.
-4. Ausstehende Aufgaben zusammenfassen.
-5. Berichten, ohne etwas zu verändern.
+4. Resource envelope & blockers (C1–C7); Ausstehende Aufgaben zusammenfassen.
+5. Delegations observation; Berichten, ohne etwas zu verändern.
 
 ## Aliase
 

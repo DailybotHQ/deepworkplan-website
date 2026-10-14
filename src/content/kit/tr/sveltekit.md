@@ -1,6 +1,6 @@
 ---
 title: SvelteKit
-description: "SvelteKit projeleri için rotalar, yükleme fonksiyonları, sunucu uç noktaları, seçilen adaptör ve teste yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "SvelteKit projeleri için rotalar, yükleme fonksiyonları, sunucu uç noktaları, seçilen adaptör ve teste yönelik akıl yürütme ipuçları içeren bir onboarding ön."
 kind: preset
 lang: tr
 order: 13

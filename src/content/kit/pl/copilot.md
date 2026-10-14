@@ -1,6 +1,6 @@
 ---
 title: GitHub Copilot
-description: "Adapter DWP dla GitHub Copilot z pełnym wsparciem przez AGENTS.md i procedury komend w markdown wywoływane prefiksem hash."
+description: "Adapter DWP dla GitHub Copilot z pełnym wsparciem przez AGENTS.md i procedury komend w markdown wywoływane prefiksem hash z pełną weryfikacją."
 kind: adapter
 lang: pl
 order: 4
@@ -15,7 +15,7 @@ GitHub Copilot obsługuje DWP poprzez AGENTS.md i procedury komend w markdown.
 
 ## Poziom wsparcia
 
-**Pełny** — Copilot odczytuje AGENTS.md i pliki procedur dwp-*, uruchamiając każdą komendę z nich.
+**Pełne** (Przetestowane instalacyjnie) — Copilot odczytuje AGENTS.md oraz pliki procedur dwp-* i uruchamia z nich każde polecenie. Trasa potwierdzona przez automatyczne zestawy testów.
 
 ## Instalacja
 

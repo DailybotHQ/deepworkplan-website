@@ -15,7 +15,7 @@ Windsurf unterstützt DWP über sein Regelwerk und Markdown-Befehlsprozeduren.
 
 ## Unterstützungsstufe
 
-**Vollständig** — Windsurf liest die Projektregeln und führt jeden dwp-*-Befehl aus seiner Prozedurdatei aus.
+**Vollständig** (Installationsgeprüft) — Windsurf liest Projektregeln und führt jeden dwp-*-Befehl aus seiner Prozedurdatei aus. Route durch automatisierte Testsuiten bestätigt.
 
 ## Installation
 

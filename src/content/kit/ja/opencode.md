@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "オープンソースエージェント OpenCode 向けの DWP アダプター。ネイティブの AGENTS.md と Markdown のコマンド手順を通じた完全なサポートを備え、ハッシュプレフィックスで呼び出します。"
+description: "オープンソースエージェント OpenCode 向けの DWP アダプター。ネイティブの AGENTS.md と Markdown のコマンド手順を通じた完全なサポートを備え。"
 kind: adapter
 lang: ja
 order: 7
@@ -15,7 +15,7 @@ prefix: '#'
 
 ## サポートレベル
 
-**完全** — OpenCode は AGENTS.md をネイティブに読み込み、すべての dwp-* コマンドをその手順ファイルから実行します。
+**完全**（インストールテスト済み）— OpenCode は AGENTS.md をネイティブに読み取り、手順ファイルからすべての dwp-* コマンドを実行します。自動テストスイートによりルートが確認されています。
 
 ## インストール
 

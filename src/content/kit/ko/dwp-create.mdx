@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "상위 수준 목표로부터 새 Deep Work Plan을 생성합니다. 에이전트가 목표를 분석하고 작업을 task로 분해한 뒤 .dwp 아래에 계획 파일을 작성합니다."
+description: "경계 옵션 문법, Lite 우선 제안, 번호 지정 폴더 할당, v7 계약 구체화를 통해 상위 목표에서 Deep Work Plan을 생성합니다."
 kind: command
 lang: ko
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -24,6 +24,8 @@ import CmdCreate from '@/components/diagrams/kit/CmdCreate.astro';
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
 ## 모드
@@ -41,8 +43,9 @@ trust 모드는 흐름을 신뢰하게 된 뒤의 파워 유저 단축 경로이
 ## 동작
 1. 목표와 리포지토리 컨텍스트를 분석합니다.
 2. 모호하면 명확히 하는 질문을 합니다.
-3. `.dwp/plans/PLAN_001_<slug>/` 아래에 계획을 직접 구체화합니다 — 기본은 Lite 계획이고, 더 큰 작업은 Full 계획입니다(가이드 모드에서는 검토하고 Lite 유지, Full 승격, 편집, 중단 중에서 선택합니다).
+3. `.dwp/plans/PLAN_<id>_<slug>/` 아래에 계획을 직접 구체화합니다 — 기본은 Lite 계획이고, 더 큰 작업은 Full 계획입니다(가이드 모드에서는 검토하고 Lite 유지, Full 승격, 편집, 중단 중에서 선택합니다).
 4. 순차적 task로 분해하고 README, task 파일, PROGRESS를 작성합니다.
+4. `ledger.py materialize` -> `contract.json` (v7).
 5. Final Review(보안 점검, 최종 상태 검증, 스킬 조정)로 끝맺습니다.
 
 7.x 팩은 v7 계획을 기본으로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다. 새 계획에는 최소 세 자리 숫자로 된 단조 증가 ID를 부여합니다(예: `PLAN_001_add_payment_webhooks/`). 고정된 v5 스키마는 숫자 ID를 한 단어로 세므로 v5 슬러그는 2~4단어이고 v7 슬러그는 2~5단어입니다. 기존의 번호 없는 `PLAN_<slug>/` 폴더는 계속 읽을 수 있으며 절대 이름을 바꾸지 않습니다. 번호가 있는 계획이 있으면 `latest`는 숫자 ID가 가장 큰 계획을 가리킵니다.

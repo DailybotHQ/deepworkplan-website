@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails
-description: "Ruby on Rails アプリケーション向けのオンボーディングプリセット。MVC レイアウト、マイグレーション、テストフレームワーク、アセットと設定のパイプラインに関する推論の手がかりを備える。"
+description: "Ruby on Rails アプリケーション向けのオンボーディングプリセット。MVC レイアウト、マイグレーション、テストフレームワーク、アセットと設定のパイプラインに関する。"
 kind: preset
 lang: ja
 order: 10

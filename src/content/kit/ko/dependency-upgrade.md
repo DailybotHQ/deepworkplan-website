@@ -1,6 +1,6 @@
 ---
 title: Dependency upgrade
-description: "리포지토리의 의존성을 검증되고 되돌릴 수 있는 배치 단위로 업그레이드하는 선택형, 패키지 관리자 비종속 애드온으로, npm을 가정하지 않고 실제 관리자를 감지합니다."
+description: "리포지토리의 의존성을 검증되고 되돌릴 수 있는 배치 단위로 업그레이드하는 선택형, 패키지 관리자 비종속 애드온으로, npm을 가정하지 않고 실제 관리자를 감."
 kind: addon
 lang: ko
 order: 3
@@ -23,6 +23,16 @@ order: 3
 4. 각 배치 후 리포지토리의 실제 검증 게이트를 실행하고, 실패한 배치는 되돌립니다.
 5. 업그레이드, 건너뜀, 되돌림 내역을 요약하고, 커밋은 개발자에게 맡깁니다.
 
+
+## v7 사양
+
+| 항목 | 값 |
+|---|---|
+| 제품 | DeepWorkPlan dependency-upgrade 애드온 |
+| 레지스트리 키 | `.dwp/config.json`의 `dependency-upgrade` |
+| 기술자 | `addons/dependency-upgrade/addon.json` (인터페이스 1) |
+| 명령 | 수락 시 `.agents/commands/`에 설치되는 `/lib-upgrade` |
+| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v7.8.1`) |
 ## 참고
 
 패키지 관리자 비종속 — JS가 아닌 리포지토리에서 npm/ncu를 결코 실행하지 않습니다. 선택형이며, 결코 필수가 아니고, 자동 커밋을 하지 않습니다.

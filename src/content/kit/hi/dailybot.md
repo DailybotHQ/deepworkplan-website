@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "ऑप्ट-इन DWP ऐडऑन: योजना जीवनचक्र की रिपोर्ट Dailybot टीम को, वैकल्पिक हुक प्रवर्तन, और पूर्ण Dailybot एजेंट स्किल 3.23.14 (चैट, फ़ॉर्म, Plan और अधिक)।"
+description: "ऑप्ट-इन DWP ऐडऑन: योजना जीवनचक्र की रिपोर्ट Dailybot टीम को, वैकल्पिक हुक प्रवर्तन, और पूर्ण Dailybot एजेंट स्किल v3.23.17 (चैट, फ़ॉर्म, Plan और अधिक)।"
 kind: addon
 lang: hi
 order: 2
@@ -23,7 +23,7 @@ Deep Work Plan निष्पादन को एक **Dailybot टीम** स
 
 ## यह ऐडऑन क्या जोड़ता है (जानबूझकर संकीर्ण)
 
-DWP Dailybot ऐडऑन Dailybot को **दोबारा नहीं बनाता**। यह योजना निष्पादन को dailybot **`report`** sub-skill से जोड़ता है और वैकल्पिक रूप से harness हुक कमिट करता है। बाकी सब — इंस्टॉल, सहमति, authentication, लेखन शैली — आधिकारिक [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **3.23.14**) को **सौंपा** जाता है।
+DWP Dailybot ऐडऑन Dailybot को **दोबारा नहीं बनाता**। यह योजना निष्पादन को dailybot **`report`** sub-skill से जोड़ता है और वैकल्पिक रूप से harness हुक कमिट करता है। बाकी सब — इंस्टॉल, सहमति, authentication, लेखन शैली — आधिकारिक [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **v3.23.17**) को **सौंपा** जाता है।
 
 ### चार जीवनचक्र घटनाएँ
 
@@ -86,9 +86,9 @@ Payload योजना की state परत (`state.json`) से निक�
 
 Auth resolution **Bearer-first** है: session token को प्राथमिकता मिलती है, `401`/`403` पर पारदर्शी Bearer→API-key retry के साथ, ताकि कोई बासी token किसी वैध key को कभी अवरुद्ध न करे। यदि auth अस्वीकृत या अनुपलब्ध हो, रिपोर्टिंग चुपचाप छोड़ दी जाती है — कार्य जारी रहता है।
 
-## जोड़ी गई Dailybot स्किल — 17 क्षमताएँ (3.23.14)
+## जोड़ी गई Dailybot स्किल — 17 क्षमताएँ (v3.23.17)
 
-Dailybot agent skill इंस्टॉल करने से DWP ऐडऑन से कहीं अधिक मिलता है। आधिकारिक स्किल पैक (स्किल **3.23.14**, CLI बेसलाइन **>= 3.9.0**, Plan **>= 3.25.0**, वर्तमान CLI publish **3.25.2**) **17 समन्वित sub-skills** प्रदान करता है:
+Dailybot agent skill इंस्टॉल करने से DWP ऐडऑन से कहीं अधिक मिलता है। आधिकारिक स्किल पैक (स्किल **v3.23.17**, CLI बेसलाइन **>= 3.9.0**, Plan **>= 3.25.0**, वर्तमान CLI publish **3.25.0**) **17 समन्वित sub-skills** प्रदान करता है:
 
 | Sub-skill | क्या करता है |
 |-----------|--------------|

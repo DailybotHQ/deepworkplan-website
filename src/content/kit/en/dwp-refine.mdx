@@ -1,6 +1,6 @@
 ---
 title: dwp-refine
-description: "Refine an existing Deep Work Plan by adding, removing, or reordering tasks while preserving completed work and updating the task table to reflect the changes."
+description: "Refine an existing Deep Work Plan via atomic contract amendments under contracts/, closed adaptations, criterion preservation, and Lite-to-Full promotion."
 kind: command
 lang: en
 order: 3
@@ -18,29 +18,26 @@ Refine an existing Deep Work Plan.
 
 ## What it does
 
-`dwp-refine` modifies an existing plan. It can add, remove, or reorder tasks while preserving completed work and updating the task table.
+`dwp-refine` modifies an existing plan safely. It can add, remove, or reorder tasks while strictly preserving completed evidence, prohibiting unconfirmed criterion weakening, and recording atomic contract revisions.
 
 ## Usage
 
 ```
 /dwp-refine [plan]
+/dwp-refine promote [plan]
 ```
 
 ## Behavior
 
-1. Read the existing plan.
-2. Add, remove, or reorder tasks.
-3. Preserve completed work.
-4. Update the task table.
-5. Record what changed and why.
+1. **Read plan:** reads the target plan and inspects existing contract and journal history.
+2. **Contract amendments:** in v7 plans, contract modifications run through `ledger.py amend`. The revision is persisted under `contracts/`, an `amendment` event is appended to `journal.ndjson`, and fresh approval is recorded.
+3. **Closed adaptation set:** mid-run plan adaptations are restricted to five authorized operations: `split`, `reorder`, `insert`, `change_strategy`, and `retry`. Proposals expanding scope, permissions, or budget are rejected.
+4. **Preserve evidence:** completed task evidence is never altered or invalidated. Unconfirmed criterion weakening is strictly prohibited.
+5. **Lite-to-Full promotion:** `/dwp-refine promote {plan}` expands inline anchored README task records into separate numbered task files without altering task IDs or invalidating existing evidence.
 
 ## Explicit migration
 
-Existing plans keep their recorded generation when the skill is upgraded. Migration is never automatic. A legacy three-task ending can be explicitly migrated to the retained v5 Final Review shape; a v5 plan can move to v6 only through an explicit, previewed v5-to-v6 migration. A v6 plan keeps its generation and runs unchanged; new plans use the current v7 generation, and a v6 plan is never moved to v7 implicitly.
-
-## Promoting a Lite plan to Full
-
-`/dwp-refine promote {plan_name}` switches a Lite plan's authoritative representation from inline README task records to per-task files, preserving completed work and task IDs without changing scope. Promotion is representation-only — it never calls execute. Full plans are not automatically demoted back to Lite.
+Existing plans keep their recorded generation when the skill pack is upgraded. Migration is never automatic. A v5 plan moves to v6 only through explicit, previewed migration (`shared/migrate_v6.py`). A v6 plan keeps its generation and runs unchanged; new plans use the current v7 generation, and an existing plan is never migrated implicitly.
 
 ## Aliases
 

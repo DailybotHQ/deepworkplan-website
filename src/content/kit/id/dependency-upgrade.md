@@ -1,6 +1,6 @@
 ---
 title: Dependency upgrade
-description: "Addon opsional yang agnostik package manager, memutakhirkan dependensi repositori dalam batch tervalidasi yang dapat dibatalkan, mendeteksi manager nyata, bukan mengasumsikan npm."
+description: "Addon opsional yang agnostik package manager, memutakhirkan dependensi repositori dalam batch tervalidasi yang dapat dibatalkan, mendeteksi manager nyata."
 kind: addon
 lang: id
 order: 3
@@ -23,6 +23,16 @@ Mutakhirkan dependensi repositori dengan alur kerja yang dibatch, tervalidasi, d
 4. Jalankan validation gate nyata repositori setelah setiap batch; batalkan batch mana pun yang gagal.
 5. Rangkum apa yang dimutakhirkan, dilewati, dan dibatalkan; biarkan developer yang melakukan commit.
 
+
+## Spesifikasi v7
+
+| Item | Nilai |
+|---|---|
+| Produk | Addon dependency-upgrade DeepWorkPlan |
+| Kunci registri | `dependency-upgrade` di `.dwp/config.json` |
+| Deskriptor | `addons/dependency-upgrade/addon.json` (antarmuka 1) |
+| Perintah | `/lib-upgrade` diinstal ke `.agents/commands/` jika diterima |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.8.1`) |
 ## Catatan
 
 Agnostik terhadap package manager — tidak pernah menjalankan npm/ncu di repositori non-JS. Opsional, tidak pernah wajib, dan tidak pernah commit otomatis.

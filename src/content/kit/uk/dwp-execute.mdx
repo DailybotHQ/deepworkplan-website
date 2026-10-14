@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Виконання наявного Deep Work Plan задача за задачею. Агент читає весь план, виконує кожну задачу по черзі, оновлює прогрес і точно фіксує завершення."
+description: "Послідовно виконуйте існуючий Deep Work Plan із циклом книги v7, режимом trust, делегуванням parallel_safe та закриттям Final Review."
 kind: command
 lang: uk
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -23,16 +23,18 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 ## Використання
 
 ```
+/dwp-execute
 /dwp-execute [plan]
+/dwp-execute [plan] trust
 ```
 
 ## Поведінка
 
 1. Прочитати весь план перед початком.
-2. Виконувати задачі по черзі.
-3. Оновлювати `PROGRESS.md` після кожної задачі.
-4. Точно фіксувати статус задачі.
-5. Зупинятися й запитувати в разі блокування.
+2. `ledger.py ready` & `ledger.py start` -> Виконувати задачі по черзі.
+3. `ledger.py gate` -> `observed` evidence; Оновлювати `PROGRESS.md` після кожної задачі.
+4. `parallel_safe` delegation; Точно фіксувати статус задачі.
+5. `ledger.py complete` & Final Review; Зупинятися й запитувати в разі блокування.
 
 ## Аліаси
 

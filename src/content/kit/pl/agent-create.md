@@ -1,6 +1,6 @@
 ---
 title: agent-create
-description: "Utwórz nowego agenta w bieżącym repozytorium — wyspecjalizowanego wykonawcę z własnym poziomem modelu i narzędziami — przez sub-skill author, utrzymując spójny katalog."
+description: "Utwórz nowego agenta w bieżącym repozytorium — wyspecjalizowanego wykonawcę z własnym poziomem modelu i narzędziami — przez sub-skill author, utrzymując spójny."
 kind: command
 lang: pl
 order: 8

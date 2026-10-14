@@ -44,6 +44,11 @@ Untuk rencana v7 — default paket 7.x saat ini — katalog skema yang dapat dib
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (menambahkan peristiwa `delegation`)
 - **Plan snapshot (proyeksi aktif, digunakan bersama dengan v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (digunakan bersama dengan v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Konfigurasi repositori:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Deskriptor addon:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Paket serah terima swarm:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Catatan benchmark:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Catatan pembelajaran:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 Rencana v6 mempertahankan skema v6-nya ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [kontrak](https://deepworkplan.com/schema/plan-contract/v6.json), [peristiwa jurnal](https://deepworkplan.com/schema/journal-event/v6.json)); rencana v5 yang ada tetap menggunakan skema status v5, dan rencana lama tidak pernah ditulis ulang secara diam-diam.
 

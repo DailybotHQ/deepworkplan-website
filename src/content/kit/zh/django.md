@@ -1,6 +1,6 @@
 ---
 title: Django
-description: "面向 Django 项目的接入预设，附有关于应用、迁移、设置、管理命令与测试运行器的推理提示。"
+description: "面向 Django 项目的规范接入预设，附有关于应用、迁移、设置、管理命令与测试运行器的推理提示，支持端到端验证与执行。"
 kind: preset
 lang: zh
 order: 1

@@ -15,7 +15,7 @@ OpenCode, the open-source coding agent, supports DWP through native AGENTS.md an
 
 ## Support level
 
-**Full** — OpenCode reads AGENTS.md natively and runs every dwp-* command from its procedure file.
+**Full** (Install-tested) — OpenCode reads AGENTS.md natively and runs every dwp-* command from its procedure file. Route asserted by automated test suites.
 
 ## Installation
 

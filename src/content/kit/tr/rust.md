@@ -1,6 +1,6 @@
 ---
 title: Rust
-description: "Rust projeleri için crate'ler, modüller, Cargo çalışma alanları, özellikler ve cargo test/clippy/build kapısına yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Rust projeleri için crate'ler, modüller, Cargo çalışma alanları, özellikler ve cargo test/clippy/build kapısına yönelik akıl yürütme ipuçları içeren bir."
 kind: preset
 lang: tr
 order: 19

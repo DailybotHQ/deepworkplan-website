@@ -1,6 +1,6 @@
 ---
 title: TypeScript Lambda
-description: "Preset di onboarding per progetti serverless TypeScript Lambda, con spunti di ragionamento per handler, il toolchain Serverless/SAM/CDK e il principio del minimo privilegio IAM."
+description: "Preset di onboarding per progetti serverless TypeScript Lambda, con spunti di ragionamento per handler, il toolchain Serverless/SAM/CDK e il principio del."
 kind: preset
 lang: it
 order: 22

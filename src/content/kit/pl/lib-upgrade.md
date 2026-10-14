@@ -1,6 +1,6 @@
 ---
 title: lib-upgrade
-description: "Bezpiecznie aktualizuj zależności repozytorium w zwalidowanych, odwracalnych partiach przez addon dependency-upgrade. Instalowane tylko po zaakceptowaniu tego addonu."
+description: "Bezpiecznie aktualizuj zależności repozytorium w zwalidowanych, odwracalnych partiach przez addon dependency-upgrade. Instalowane tylko po zaakceptowaniu tego."
 kind: command
 lang: pl
 order: 9

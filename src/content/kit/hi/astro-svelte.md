@@ -1,6 +1,6 @@
 ---
 title: Astro / Svelte
-description: "Astro साइटों के लिए एक ऑनबोर्डिंग प्रीसेट, वैकल्पिक रूप से Svelte islands के साथ, जिसमें content collections, schema validation, और island hydration के लिए तर्क संकेत शामिल हैं।"
+description: "Astro साइटों के लिए एक ऑनबोर्डिंग प्रीसेट, वैकल्पिक रूप से Svelte islands के साथ, जिसमें content collections, schema validation, और island hydration के लिए."
 kind: preset
 lang: hi
 order: 3

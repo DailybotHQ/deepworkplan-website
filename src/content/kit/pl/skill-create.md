@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "Utwórz nowy skill wielokrotnego użytku w bieżącym repozytorium — sparametryzowaną procedurę działającą w sesji — przez sub-skill author, utrzymując spójny katalog."
+description: "Utwórz nowy skill wielokrotnego użytku w bieżącym repozytorium — sparametryzowaną procedurę działającą w sesji — przez sub-skill author, utrzymując spójny."
 kind: command
 lang: pl
 order: 7

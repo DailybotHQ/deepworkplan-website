@@ -1,6 +1,6 @@
 ---
 title: Antigravity
-description: "Antigravity를 위한 DWP 어댑터로, Markdown 명령 절차와 전체 Deep Work Plan 루프를 구동하는 해시 명령 접두어를 통해 완전히 지원합니다."
+description: "Antigravity를 위한 DWP 어댑터로, Markdown 명령 절차와 전체 Deep Work Plan 루프를 구동하는 해시 명령 접두어를 통해 완전히."
 kind: adapter
 lang: ko
 order: 6
@@ -15,7 +15,7 @@ Antigravity는 Markdown 명령 절차를 통해 DWP를 지원합니다.
 
 ## 지원 수준
 
-**완전** — 모든 dwp-* 명령이 네이티브 명령 표면을 통해 절차 파일에서 실행됩니다.
+**완전 지원** (설치 검증됨) — 모든 dwp-* 명령은 프로시저 파일에서 실행됩니다. 자동화된 테스트 제품군에 의해 경로가 확인되었으며, 동작 워크플로는 순차적 기준선에서 실행됩니다.
 
 ## 설치
 
