@@ -1,6 +1,6 @@
 ---
 title: Standard di documentazione
-description: "Standard normativo su come i Deep Work Plan documentano struttura, attività e progressi: regole del README, marcatori di stato, l’anatomia in dieci sezioni e il Final Review."
+description: "Standard normativo su come i Deep Work Plan documentano struttura, attività e progressi: README, marcatori di stato, anatomia in dieci sezioni e Final Review."
 order: 1
 lang: it
 section: Standard
@@ -54,7 +54,7 @@ Tutte le intestazioni DEVONO usare lo stile a frase (sentence case). I documenti
 
 ## Il Final Review, le decisioni locali per attività e il report facoltativo
 
-Ogni piano redatto con questa versione DEVE concludersi con esattamente un’attività obbligatoria: il **Final Review** — il passaggio di sicurezza sull’intero insieme di modifiche del piano, la validazione dello stato finale sull’ultimo stato rilevante e la riconciliazione delle decisioni sulle skill. Un rilievo di sicurezza critico blocca il completamento.
+Ogni piano redatto con questa versione DEVE concludersi con esattamente un’attività obbligatoria: il **Final Review**. Nell’ordine, esegue (a) il passaggio di sicurezza sull’intero insieme di modifiche del piano, inclusa la revisione locale obbligatoria con AI Diff Reviewer; (b) la validazione dello stato finale sull’ultimo stato rilevante; (c) la riconciliazione delle decisioni sulle skill; (d) la riconciliazione della documentazione di ogni superficie toccata; e (e) il completamento, con i record del piano concordi tra loro. Un rilievo di sicurezza critico blocca il completamento.
 
 - **Decisioni locali per attività sulle skill.** Il Completion & Log di ogni attività porta una **disposizione delle skill** — `none`, un aggiornamento a una skill o un agente esistente, una creazione con nome o un rinvio con motivazione e proprietario. L’authoring giustificato avviene dentro l’attività proprietaria, prima del suo validation gate, dopo un controllo di duplicati contro il catalogo `.agents/`; le voci giustificate sono registrate come candidati stabili (`T{task}-{seq}`) nel registro dei candidati skill del piano.
 - **L’Executive Report è facoltativo, su richiesta.** Offerto una volta al completamento; generato solo su richiesta esplicita a partire da evidenze durevoli. Nessuna risposta o un’esecuzione non presidiata lascia il piano completato senza di esso.

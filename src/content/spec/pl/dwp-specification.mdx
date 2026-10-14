@@ -1,6 +1,6 @@
 ---
 title: Specyfikacja DWP
-description: "Normatywna specyfikacja Deep Work Plan: struktura planu, dziesięciosekcyjna anatomia zadania, dobór bramek według powierzchni dotkniętej, pięciooperacyjna pętla realizacji, przestrzeń robocza wyników oraz wersjonowanie."
+description: "Normatywna specyfikacja Deep Work Plan: struktura planu, anatomia zadania w dziesięciu sekcjach, dobór bramek, pętla realizacji, przestrzeń wyników i wersje."
 order: 2
 lang: pl
 section: Workflow
@@ -62,7 +62,7 @@ Każdy plik zadania MUSI zawierać te dziesięć sekcji, w kolejności:
 9. **Ryzyka** — co może pójść nie tak oraz środki zaradcze.
 10. **Ukończenie i dziennik** — znacznik statusu plus chronologiczne notatki.
 
-Zadanie MOŻE dodatkowo zawierać **sekcję Delta** (ZALECANA dla zmian zachowania w systemach istniejących — zob. poniżej) oraz **sekcję Rollback** (ZALECANA dla migracji, zmian infrastruktury lub wdrożeń).
+Zadanie MOŻE dodatkowo zawierać **sekcję Delta** (ZALECANA dla zmian zachowania w systemach istniejących — zob. poniżej) oraz **sekcję Rollback** (ZALECANA dla migracji, zmian infrastruktury lub wdrożeń). W planie v7 kontrakt wyników może dodatkowo oznaczyć zadanie jako `parallel_safe`: jest to asercja, ustalana przy tworzeniu, że zadanie może zostać wykonane przez delegata bez przeplatania się z pracą zadań równoległych. Znacznik niczego nie autoryzuje bez uprawnienia `agent_delegation` w kontrakcie ([Delegowanie](/spec/delegation)).
 
 ## Powierzchnia dotknięta
 
@@ -136,13 +136,15 @@ Każdy zgodny plan utworzony pod tę wersję kończy się dokładnie **jednym** 
 
 Final Review MUSI, w tej kolejności:
 
-**(a) Przegląd bezpieczeństwa** — przejrzeć pełny, skumulowany zestaw zmian planu pod kątem zakodowanych na sztywno sekretów, ryzyk iniekcji, nowej powierzchni ataku, osłabionego uwierzytelniania oraz danych wrażliwych w logach lub dokumentacji; zaudytować wprowadzone zależności; zweryfikować, że `docs/SECURITY.md` nadal odzwierciedla rzeczywistość; napisać raport z przeglądu bezpieczeństwa nawet wtedy, gdy jest czysto. Krytyczne ustalenie jest naprawiane — albo jawnie akceptowane przez użytkownika — zanim plan zostanie ukończony.
+**(a) Przegląd bezpieczeństwa** — przejrzeć pełny, skumulowany zestaw zmian planu pod kątem zakodowanych na sztywno sekretów, ryzyk iniekcji, nowej powierzchni ataku, osłabionego uwierzytelniania oraz danych wrażliwych w logach lub dokumentacji; zaudytować wprowadzone zależności; zweryfikować, że `docs/SECURITY.md` nadal odzwierciedla rzeczywistość; napisać raport z przeglądu bezpieczeństwa nawet wtedy, gdy jest czysto. Krytyczne ustalenie jest naprawiane — albo jawnie akceptowane przez użytkownika — zanim plan zostanie ukończony. Przegląd obejmuje wymagany lokalny przegląd AI Diff Reviewer pełnego zakresu planu; brakujący recenzent to zapisane ustalenie `local reviewer not installed`, nigdy ciche pominięcie.
 
 **(b) Walidacja stanu końcowego** — pełna stosowna walidacja repozytorium uruchamia się i przechodzi na końcowym istotnym stanie.
 
 **(c) Uzgodnienie decyzji dotyczących skilli** — każde zadanie niesie rozstrzygnięcie dotyczące skilli, a każdy zapisany kandydat ma rozstrzygnięcie; bez drugiego raportu z odkrywania.
 
-**(d) Ukończenie** — zgłoszenie ukończenia wraz z produktami pracy, dowodami walidacji i ograniczeniami; jednorazowa oferta raportu wykonawczego. Plan jest ukończony niezależnie od tego, czy oferta zostanie przyjęta.
+**(d) Uzgodnienie dokumentacji** — powierzchnia dotknięta każdego zadania zmieniającego zachowanie jest sprawdzana względem dokumentów, które ją rejestrują (najpierw rejestr bramek, potem dokumentacja architektury i modułów, a na końcu indeks `AGENTS.md`); braki są naprawiane w ramach przeglądu, a dotknięte walidacje uruchamiane ponownie.
+
+**(e) Ukończenie** — rekordy planu są ze sobą zgodne (lista zadań, dziennik postępu oraz, w planach v6 i v7, migawka wyprowadzona z dziennika i potwierdzenie wyniku); zgłoszenie ukończenia wraz z produktami pracy, dowodami walidacji i ograniczeniami; jednorazowa oferta raportu wykonawczego. Plan jest ukończony niezależnie od tego, czy oferta zostanie przyjęta.
 
 Final Review wykonuje się sekwencyjnie po wszystkich pozostałych zadaniach i nigdy nie jest umieszczany w grupie równoległej.
 
@@ -179,13 +181,16 @@ Agent MUSI ufać oznaczeniom ukończonym (`[x]`) i NIE MOŻE ponownie walidować
 
 <CoreLoop lang="pl" class="not-prose my-10" />
 
-DWP definiuje pięć operacji:
+DWP definiuje sześć operacji na planach:
 
 - **create** — Wygeneruj nowy plan na podstawie celu.
 - **execute** — Realizuj plan zadanie po zadaniu.
 - **refine** — Zmodyfikuj istniejący plan.
 - **resume** — Wznów przerwany plan.
 - **status** — Raportuj status planu bez realizacji.
+- **verify** — Sprawdź zgodność repozytorium i planu, tylko do odczytu.
+
+Trzy kolejne sub-skille uzupełniają zainstalowany pakiet: **onboard** (uczynienie repozytorium AI-first), **author** (tworzenie lub aktualizacja własnych skilli, agentów i komend repozytorium) oraz **upgrade** (przeniesienie zainstalowanego skilla do nowszego wydania za zgodą, bez migrowania istniejących planów). Router i te dziewięć sub-skilli są dostarczane jako jeden pakiet skilli.
 
 ## Przestrzeń robocza wyników
 

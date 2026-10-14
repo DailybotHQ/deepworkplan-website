@@ -1,6 +1,6 @@
 ---
 title: DWP spesifikasyonu
-description: "Normatif Deep Work Plan spesifikasyonu: plan yapısı, on bölümlü görev anatomisi, dokunulan yüzeye göre kapı seçimi, beş işlemli yürütme döngüsü, çıktı çalışma alanı ve sürümleme."
+description: "Normatif Deep Work Plan spesifikasyonu: plan yapısı, on bölümlü görev anatomisi, yüzeye göre kapı seçimi, altı işlemli döngü, çıktı alanı ve sürümleme."
 order: 2
 lang: tr
 section: Workflow
@@ -63,6 +63,8 @@ Her görev dosyası, sırasıyla bu on bölümü İÇERMELİDİR:
 10. **Tamamlama ve Günlük** — bir durum işareti ile kronolojik notlar.
 
 Bir görev ek olarak bir **Delta bölümü** (kahverengi alan davranış değişiklikleri için ÖNERİLİR — aşağıya bakın) ve bir **Geri alma bölümü** (geçişler, altyapı değişiklikleri veya dağıtımlar için ÖNERİLİR) İÇEREBİLİR.
+
+Bir v7 planında sonuç sözleşmesi ayrıca bir görevi `parallel_safe` olarak işaretleyebilir: oluşturma sırasında konan ve görevin kardeş işlerle iç içe geçmeden bir delegede çalışabileceğini belirten bir beyan. İşaretçi, sözleşmenin `agent_delegation` yetkisi olmadan hiçbir şeye izin vermez ([Devretme](/spec/delegation)).
 
 ## Dokunulan Yüzey
 
@@ -136,13 +138,15 @@ Bu sürüm altında yazılmış uyumlu her plan, tam olarak **bir** zorunlu gör
 
 Final Review, sırasıyla ŞUNLARI YAPMAK ZORUNDADIR:
 
-**(a) Güvenlik incelemesi** — planın birikmiş tüm değişiklik kümesini gömme sırlar, enjeksiyon riskleri, yeni saldırı yüzeyi, zayıflatılmış kimlik doğrulama ve günlüklerde ya da dokümantasyonda hassas veriler açısından inceler; tanıtılan bağımlılıkları denetler; `docs/SECURITY.md`'nin hâlâ gerçeği yansıttığını doğrular; temiz olsa bile güvenlik incelemesi raporunu yazar. Kritik bir bulgu, plan tamamlanmadan önce düzeltilir — ya da kullanıcı tarafından açıkça kabul edilir.
+**(a) Güvenlik incelemesi** — planın birikmiş tüm değişiklik kümesini gömme sırlar, enjeksiyon riskleri, yeni saldırı yüzeyi, zayıflatılmış kimlik doğrulama ve günlüklerde ya da dokümantasyonda hassas veriler açısından inceler; tanıtılan bağımlılıkları denetler; `docs/SECURITY.md`'nin hâlâ gerçeği yansıttığını doğrular; temiz olsa bile güvenlik incelemesi raporunu yazar. Kritik bir bulgu, plan tamamlanmadan önce düzeltilir — ya da kullanıcı tarafından açıkça kabul edilir. İnceleme, planın tüm aralığı üzerinde gerekli yerel AI Diff Reviewer incelemesini içerir; eksik bir inceleyici, kaydedilmiş bir `local reviewer not installed` bulgusudur, asla sessiz bir atlama değildir.
 
 **(b) Son-durum doğrulaması** — deponun eksiksiz geçerli doğrulaması, son ilgili durum üzerinde çalışır ve geçer.
 
 **(c) Skill uzlaştırması** — her görev bir skill kararı taşır ve kayıtlı her aday karara bağlanmıştır; ikinci bir keşif raporu yoktur.
 
-**(d) Tamamlanma** — tamamlanmayı, teslim edilenlerle, doğrulama kanıtıyla ve sınırlamalarla raporla; Executive Report'u bir kez sun. Plan, teklif yanıtlanıp yanıtlanmadan tamamlanmıştır.
+**(d) Dokümantasyon uzlaştırması** — davranış değiştiren her görevin dokunulan yüzeyi, onu kaydeden belgelerle karşılaştırılır (önce kapı kaydı, sonra mimari ve modül belgeleri, sonra `AGENTS.md` dizini); eksikler inceleme içinde düzeltilir ve etkilenen doğrulamalar yeniden çalıştırılır.
+
+**(e) Tamamlanma** — planın kayıtları uyum içindedir (görev listesi, ilerleme günlüğü ve v6 ile v7 planlarında günlükten türetilen anlık görüntü ve makbuz); tamamlanmayı, teslim edilenlerle, doğrulama kanıtıyla ve sınırlamalarla raporla; Executive Report'u bir kez sun. Plan, teklif yanıtlanıp yanıtlanmadan tamamlanmıştır.
 
 Final Review, diğer tüm görevlerden sonra ardışık olarak çalışır ve asla paralel bir gruba yerleştirilmez.
 
@@ -179,13 +183,16 @@ Ajan, tamamlandı (`[x]`) işaretlerine GÜVENMEK ZORUNDADIR ve tamamlanmış g�
 
 <CoreLoop lang="tr" class="not-prose my-10" />
 
-DWP beş işlem tanımlar:
+DWP altı plan işlemi tanımlar:
 
 - **create** — Bir hedeften yeni bir plan üretir.
 - **execute** — Planı görev görev yürütür.
 - **refine** — Mevcut bir planı değiştirir.
 - **resume** — Kesintiye uğramış bir planı sürdürür.
 - **status** — Yürütmeden plan durumunu raporlar.
+- **verify** — Depo ve plan uyumluluğunu salt okunur biçimde denetler.
+
+Üç alt skill daha kurulu paketi tamamlar: **onboard** (bir depoyu AI-first hâle getirir), **author** (deponun kendi skill'lerini, agent'larını ve komutlarını oluşturur veya günceller) ve **upgrade** (kurulu skill'i onayla daha yeni bir sürüme taşır, mevcut planları asla göç ettirmez). Yönlendirici ve bu dokuz alt skill tek bir skill paketi olarak sunulur.
 
 ## Çıktı çalışma alanı
 

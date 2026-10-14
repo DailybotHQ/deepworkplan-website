@@ -1,6 +1,6 @@
 ---
 title: Zgodność
-description: "Normatywna definicja repozytorium zgodnego z DWP, w pełni AI-first: artefakty, które MUSI i POWINNO mieć, co czyni plan dobrze sformułowanym i jak to zweryfikować."
+description: "Normatywna definicja repozytorium zgodnego z DWP i AI-first: artefakty, które MUSI i POWINNO mieć, cechy dobrze sformułowanego planu i sposób weryfikacji."
 order: 7
 lang: pl
 section: Conformance
@@ -19,11 +19,11 @@ Repozytorium zgodne z DWP MUSI spełniać wszystkie poniższe warunki. Każdy ar
 1. **`AGENTS.md` w katalogu głównym.** Repozytorium MUSI zawierać w katalogu głównym `AGENTS.md`, który obejmuje (a) indeks dokumentacji, (b) obowiązkowe reguły dla repozytorium oraz (c) blok Quick Commands, którego komendy są **rzeczywiste i uruchamialne** w tym repozytorium. Komendy będące placeholderami (na przykład `npm test` w repozytorium, które nie używa npm) NIE MOGĄ się pojawiać. Indeks NIE MOŻE linkować do pliku `docs/`, który nie istnieje, a plik POWINIEN mieścić się w budżecie 150–500 linii, przenosząc szczegóły do `docs/` i linkując je zamiast rosnąć bez ograniczeń.
 2. **`CLAUDE.md` rozwiązuje się do `AGENTS.md`.** `CLAUDE.md` MUSI istnieć i rozwiązywać się do `AGENTS.md` (jako dowiązanie symboliczne lub równoważne rozwiązanie gwarantujące jedno źródło prawdy). Te dwa pliki NIE MOGĄ się rozjechać.
 3. **Hierarchia `docs/`.** Repozytorium MUSI zawierać katalog `docs/` obejmujący standardowe kategorie (architektura, standardy, testowanie, komendy deweloperskie, bezpieczeństwo oraz onboarding agentów) z rzeczywistą, specyficzną dla repozytorium treścią. Złożone moduły POWINNY mieć własny `README.md`. Przewodnik testowania MUSI definiować rzeczywisty łańcuch narzędzi do testów, lintu i sprawdzania typów — lub, dla repozytorium, które go nie ma, konkretną konfigurację **zaproponowaną** na podstawie stosu technologicznego podczas onboardingu. Pusty przewodnik testowania lub „brak testów" nie spełnia tego kryterium: bez zdefiniowanego sposobu walidacji zachowania plan nie ma obiektywnej bramki walidacyjnej.
-4. **Dom `.agents/`.** Repozytorium MUSI zawierać katalog `.agents/` z `agents/`, `commands/` i `skills/`, a także katalog pod `.agents/docs/`, który **odpowiada temu, co znajduje się na dysku**. Komendy `dwp-*` MUSZĄ być cienkimi delegatorami do zainstalowanego skilla. Ścieżka `.claude` MUSI rozwiązywać się do `.agents`.
+4. **Dom `.agents/`.** Repozytorium MUSI zawierać katalog `.agents/` z `agents/`, `commands/` i `skills/`, a także katalog pod `.agents/docs/`, który **odpowiada temu, co znajduje się na dysku**. Komendy `dwp-*` MUSZĄ być cienkimi delegatorami do zainstalowanego skilla. Ścieżka `.claude` MUSI rozwiązywać się do `.agents`, podobnie jak ścieżka `.cursor` (obie są dowiązaniami symbolicznymi do `.agents`, zgodnie ze standardem dokumentacji).
 5. **Przestrzeń robocza `.dwp/` w gitignore.** Repozytorium MUSI zawierać katalog `.dwp/` z `plans/`, a `.dwp/` MUSI być w gitignore. Przestrzeń robocza `tmp/` POWINNA istnieć i POWINNA być w gitignore.
 6. **Skill metodyki jest rozwiązywalny.** Skill Deep Work Plan MUSI być zainstalowany lub do niego dowiązany w taki sposób, aby agent w repozytorium mógł wywoływać jego sub-skille.
 
-Repozytorium jest **w pełni zgodne przy zerowej liczbie opcjonalnych dodatków**. Opcjonalne dodatki (devcontainer, Dailybot, dependency-upgrade, design-system) NIE MOGĄ być wymagane do zgodności. Od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** (vendored skill + plik rozszerzenia) jest częścią linii bazowej: jego brak to niepowodzenie dla repozytorium deklarującego 2.3.0 lub nowszy oraz znalezisko wersji harnessu dla starszego repozytorium. Jego powierzchnia CI pozostaje opcjonalna.
+Repozytorium jest **w pełni zgodne przy zerowej liczbie opcjonalnych dodatków**. Opcjonalne dodatki (devcontainer, Dailybot, dependency-upgrade, design-system, agentkit, Herdr i DeepWorkPlan Vim) NIE MOGĄ być wymagane do zgodności, a włączenie któregoś z nich w rejestrze `.dwp/config.json` nigdy nie czyni go wymaganiem. Od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** (vendored skill + plik rozszerzenia) jest częścią linii bazowej: jego brak to niepowodzenie dla repozytorium deklarującego 2.3.0 lub nowszy oraz znalezisko wersji harnessu dla starszego repozytorium. Jego powierzchnia CI pozostaje opcjonalna.
 
 ## Dobrze sformułowany plan
 

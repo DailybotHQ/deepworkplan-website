@@ -1,6 +1,6 @@
 ---
 title: Đặc tả DWP
-description: "Đặc tả Deep Work Plan có tính quy phạm: cấu trúc kế hoạch, cấu trúc tác vụ mười phần, lựa chọn cổng theo bề mặt bị chạm tới, vòng lặp thực thi năm thao tác, không gian làm việc đầu ra và phiên bản hóa."
+description: "Đặc tả DWP quy phạm: cấu trúc kế hoạch, tác vụ mười phần, chọn cổng theo bề mặt bị chạm tới, vòng lặp sáu thao tác, không gian đầu ra và phiên bản hóa."
 order: 2
 lang: vi
 section: Workflow
@@ -63,6 +63,8 @@ Mỗi tệp tác vụ PHẢI chứa mười phần này, theo thứ tự:
 10. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
 
 Một tác vụ CÓ THỂ bổ sung bao gồm một **phần Delta** (ĐƯỢC KHUYẾN NGHỊ cho các thay đổi hành vi trong codebase hiện có — xem bên dưới) và một **phần Rollback** (ĐƯỢC KHUYẾN NGHỊ cho các lần di chuyển, thay đổi hạ tầng hay triển khai).
+
+Trong một kế hoạch v7, hợp đồng kết quả còn có thể đánh dấu một tác vụ là `parallel_safe`: một khẳng định, được đặt khi tạo kế hoạch, rằng tác vụ có thể chạy trong một delegate mà không đan xen với công việc của các tác vụ anh em. Dấu này không cho phép điều gì nếu hợp đồng không có quyền `agent_delegation` ([Ủy quyền](/spec/delegation)).
 
 ## Touched Surface
 
@@ -136,13 +138,15 @@ Mọi kế hoạch tuân thủ được viết dưới phiên bản này kết t
 
 Final Review PHẢI, theo thứ tự:
 
-**(a) Bước rà soát bảo mật** — rà soát toàn bộ tập thay đổi đã tích lũy của kế hoạch để tìm bí mật hardcode, rủi ro tiêm nhiễm, bề mặt tấn công mới, xác thực bị suy yếu, và dữ liệu nhạy cảm trong log hay tài liệu; kiểm toán các phụ thuộc được đưa vào; xác minh `docs/SECURITY.md` vẫn phản ánh thực tế; viết báo cáo rà soát bảo mật ngay cả khi sạch. Một phát hiện nghiêm trọng được sửa — hoặc được người dùng chấp nhận rõ ràng — trước khi kế hoạch hoàn tất.
+**(a) Bước rà soát bảo mật** — rà soát toàn bộ tập thay đổi đã tích lũy của kế hoạch để tìm bí mật hardcode, rủi ro tiêm nhiễm, bề mặt tấn công mới, xác thực bị suy yếu, và dữ liệu nhạy cảm trong log hay tài liệu; kiểm toán các phụ thuộc được đưa vào; xác minh `docs/SECURITY.md` vẫn phản ánh thực tế; viết báo cáo rà soát bảo mật ngay cả khi sạch. Một phát hiện nghiêm trọng được sửa — hoặc được người dùng chấp nhận rõ ràng — trước khi kế hoạch hoàn tất. Bước rà soát bao gồm lần đánh giá cục bộ AI Diff Reviewer bắt buộc trên toàn bộ phạm vi của kế hoạch; thiếu reviewer là một phát hiện `local reviewer not installed` được ghi lại, không bao giờ là một lần bỏ qua âm thầm.
 
 **(b) Kiểm chứng trạng thái cuối cùng** — kiểm chứng áp dụng đầy đủ của repository chạy và đạt trên trạng thái liên quan cuối cùng.
 
 **(c) Đối chiếu skill** — mỗi tác vụ mang một kết luận về skill và mọi ứng viên được ghi lại đều có một kết luận; không có báo cáo khám phá lần hai.
 
-**(d) Hoàn tất** — báo cáo hoàn tất với các sản phẩm bàn giao, bằng chứng kiểm chứng và các hạn chế; đề xuất Executive Report một lần. Kế hoạch hoàn tất bất kể đề xuất có được trả lời hay không.
+**(d) Đối chiếu tài liệu** — bề mặt bị chạm tới của mọi tác vụ thay đổi hành vi được đối chiếu với các tài liệu đăng ký nó (trước hết là registry cổng, sau đó là tài liệu kiến trúc và module, rồi đến chỉ mục `AGENTS.md`); các thiếu sót được sửa ngay trong lần rà soát và các bước kiểm chứng bị ảnh hưởng được chạy lại.
+
+**(e) Hoàn tất** — các bản ghi của kế hoạch nhất quán (danh sách tác vụ, nhật ký tiến độ và, trong kế hoạch v6 và v7, snapshot dẫn xuất từ nhật ký cùng biên nhận); báo cáo hoàn tất với các sản phẩm bàn giao, bằng chứng kiểm chứng và các hạn chế; đề xuất Executive Report một lần. Kế hoạch hoàn tất bất kể đề xuất có được trả lời hay không.
 
 Final Review chạy tuần tự sau mọi tác vụ khác và không bao giờ được đặt trong một nhóm song song.
 
@@ -179,13 +183,16 @@ Agent PHẢI tin vào các dấu đã hoàn tất (`[x]`) và KHÔNG ĐƯỢC t�
 
 <CoreLoop lang="vi" class="not-prose my-10" />
 
-DWP định nghĩa năm thao tác:
+DWP định nghĩa sáu thao tác kế hoạch:
 
 - **create** — Sinh ra một kế hoạch mới từ một mục tiêu.
 - **execute** — Thực thi kế hoạch từng tác vụ một.
 - **refine** — Sửa đổi một kế hoạch hiện có.
 - **resume** — Tiếp tục một kế hoạch bị gián đoạn.
 - **status** — Báo cáo trạng thái kế hoạch mà không thực thi.
+- **verify** — Kiểm tra tính tuân thủ của repository và kế hoạch, chỉ đọc.
+
+Ba sub-skill nữa hoàn thiện gói đã cài: **onboard** (biến một repository thành AI-first), **author** (tạo hoặc cập nhật skill, agent và command riêng của repository) và **upgrade** (chuyển skill đã cài sang một bản phát hành mới hơn khi có sự đồng ý, không bao giờ di chuyển các kế hoạch hiện có). Router và chín sub-skill này được phát hành cùng nhau thành một gói skill.
 
 ## Không gian làm việc đầu ra
 

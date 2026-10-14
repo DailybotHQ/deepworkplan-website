@@ -52,4 +52,4 @@ Lite 計画は、`/dwp-refine promote {plan_name}` を介して、いつでも F
 
 昇格が自動的に逆方向へ進むことは決してありません。Full 計画が静かに Lite へ折り畳まれることはありません。より前の仕様バージョンのもとで書かれた計画 — `plan_format` フィールドをまったく持たない v1 の Full 計画を含む — は、その記録された形をそのまま保持し、適合したままです。`refine` セッションが意図的にそれを移行することは MAY ありますが、暗黙のうちにそうする仕組みは何もありません。
 
-`manifest.json` の `plan_format` は一度書き込まれると不変です。昇格は `state.json` の `format` を変更し、その `promotion` マーカーを消去しますが、マニフェストを書き換えることは決してありません。正確な `plan_format`、`format`、`materialization`、`approval`、`promotion`、`locator` の各フィールドとその v2 スキーマ URL については、[計画の状態](/spec/plan-state) を参照してください。
+`manifest.json` の `plan_format` は一度書き込まれると不変です。昇格は `state.json` の `format` を変更し、その `promotion` マーカーを消去しますが、マニフェストを書き換えることは決してありません。正確な `plan_format`、`format`、`materialization`、`approval`、`promotion`、`locator` の各フィールドとそのスキーマ URL（v2 で導入され、v5 計画は `plan-manifest/v5` と `plan-state/v5` を使用します）については、[計画の状態](/spec/plan-state) を参照してください。v6 および v7 の計画では、これらの軸はジャーナルに記録され、[`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) スナップショットへ投影されます（[レコードレイヤー](/spec/record-layer)）。

@@ -1,6 +1,6 @@
 ---
 title: Padrão de documentação
-description: "Padrão normativo de como os Deep Work Plans documentam sua estrutura, tarefas e progresso: regras de README, marcadores de status, a anatomia de tarefa de dez seções e o Final Review."
+description: "Padrão normativo de como os Deep Work Plans documentam estrutura, tarefas e progresso: regras de README, marcadores de status, as dez seções e o Final Review."
 order: 1
 lang: pt
 section: Standard
@@ -54,7 +54,7 @@ Todos os títulos DEVEM (MUST) usar sentence case. Os documentos DEVERIAM (SHOUL
 
 ## O Final Review, as decisões de skills por tarefa e o relatório opcional
 
-Todo plano redigido sob esta versão DEVE (MUST) terminar com exatamente uma tarefa obrigatória: o **Final Review** — o passe de segurança sobre o conjunto completo de mudanças do plano, a validação de estado final sobre o último estado relevante e a reconciliação das decisões de skills. Um achado de segurança crítico bloqueia a conclusão.
+Todo plano redigido sob esta versão DEVE (MUST) terminar com exatamente uma tarefa obrigatória: o **Final Review**. Em ordem, ele executa (a) o passe de segurança sobre o conjunto completo de mudanças do plano, incluindo a revisão local obrigatória do AI Diff Reviewer; (b) a validação de estado final sobre o último estado relevante; (c) a reconciliação das decisões de skills; (d) a reconciliação da documentação de cada superfície tocada; e (e) a conclusão, com os registros do plano em concordância. Um achado de segurança crítico bloqueia a conclusão.
 
 - **Decisões de skills por tarefa.** O Completion & Log de cada tarefa carrega uma **disposição de skills** — `nenhuma`, uma atualização a uma skill ou agent existente, uma criação nomeada, ou um adiamento com motivo e responsável. A autoria justificada acontece dentro da tarefa que a origina, antes de seu validation gate, após uma verificação de duplicados contra o catálogo `.agents/`; as entradas justificadas são registradas como candidatas estáveis (`T{task}-{seq}`) no registro de candidatas a skills do plano.
 - **O Executive Report é opcional, mediante solicitação.** É oferecido uma vez na conclusão; é gerado apenas mediante solicitação explícita e a partir de evidência duradoura. Sem resposta, ou em uma execução desassistida, o plano fica concluído sem ele.

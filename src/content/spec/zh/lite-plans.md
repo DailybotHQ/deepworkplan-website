@@ -52,4 +52,4 @@ Lite 计划以与 Full 相同的方式携带并行化决策：`Execution: sequen
 
 晋升绝不会自动反向进行：一份 Full 计划不会被静默地收拢回 Lite。在更早的规范版本下编写的计划——包括完全没有 `plan_format` 字段的 v1 版 Full 计划——保留其已记录的形态并仍然符合规范；一次 `refine` 会话 MAY 有意迁移它，但没有任何机制会隐式地这样做。
 
-`manifest.json` 的 `plan_format` 一旦写入即不可变；一次晋升会更改 `state.json` 的 `format` 并清除其 `promotion` 标记，绝不重写清单。确切的 `plan_format`、`format`、`materialization`、`approval`、`promotion` 与 `locator` 字段及其 v2 模式 URL，参见 [Plan state](/spec/plan-state)。
+`manifest.json` 的 `plan_format` 一旦写入即不可变；一次晋升会更改 `state.json` 的 `format` 并清除其 `promotion` 标记，绝不重写清单。确切的 `plan_format`、`format`、`materialization`、`approval`、`promotion` 与 `locator` 字段及其模式 URL（由 v2 引入；v5 计划使用 `plan-manifest/v5` 与 `plan-state/v5`），参见 [Plan state](/spec/plan-state)。在 v6 与 v7 计划中，这些维度记录在日志中，并投影到 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 快照中（[记录层](/spec/record-layer)）。

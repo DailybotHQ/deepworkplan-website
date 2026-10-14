@@ -1,6 +1,6 @@
 ---
 title: État du plan
-description: "La couche d'état lisible par machine : manifest.json et state.json, enregistrements de portes, enregistrements de résultats comme mémoire épisodique, réconciliation, et quand elle est requise."
+description: "La couche d'état v5 (manifest.json, state.json, enregistrements de portes, réconciliation) et son remplacement en v6 et v7 par un instantané dérivé du journal."
 order: 8
 lang: fr
 section: State
@@ -8,9 +8,16 @@ section: State
 
 # État du plan
 
-> **Portée de version :** les sections ci-dessous constituent la couche d’état v5.0.0 conservée. La norme actuelle, DWP 7.0.0, utilise le contrat v7, un journal en ajout seul et une projection instantanée ; les plans v5 continuent d’utiliser les règles `manifest.json` et `state.json` de ce document.
+> **Portée de version :** cette page spécifie la **couche d'état v5**, que les plans v5 conservent toute leur vie. Les plans créés par le pack actuel (DWP 7.0.0, version `v7.8.1`) utilisent à la place la [couche d'enregistrement](/spec/record-layer). Dans un plan v6 ou v7, le contrat de résultat (`contract.json`) fait autorité, le journal en ajout seul (`journal.ndjson`) est la source de vérité, et `state.json` est un **instantané dérivé** conforme à [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Il est régénéré par `ledger.py project` et MUST NOT être édité à la main.
 
-**Norme actuelle : v7 (DWP 7.0.0).** Les documents ci-dessous forment la base conservée ; v6 a ajouté le contrat, le journal à ajout seul, le contexte par tâche, les contrôles de ressources et les règles de cycle de vie, et v7 conserve cette couche d’enregistrement en ajoutant un marqueur de tâche optionnel `parallel_safe`, un événement de journal `delegation`, le registre d’addons `.dwp/config.json` et des capacités fournies par les addons. [Manifeste v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [contrat v7](https://deepworkplan.com/schema/plan-contract/v7.json) et [instantané actif](https://deepworkplan.com/schema/plan-snapshot/v6.json) (partagé avec v6). Les plans v5 et v6 existants gardent leurs règles. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## Quelle couche d'état s'applique
+
+| Génération du plan | Source de vérité | `state.json` | Schémas |
+| --- | --- | --- | --- |
+| v5 (et plans v1/v2 antérieurs) | le plan markdown, avec cette couche JSON comme projection | écrit par l'agent aux points de protocole ci-dessous | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 et v2 restent valides pour les plans plus anciens) |
+| v6 et v7 | le contrat plus le journal en ajout seul | un instantané projeté depuis le journal, jamais écrit à la main | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (ou leurs équivalents v6) |
+
+Un plan ne change jamais de génération implicitement : les plans v5 conservent ces règles, et passer l'un d'eux en v6 est une migration explicite et prévisualisée ([Couche d'enregistrement](/spec/record-layer#coexistence-and-migration)). Sources canoniques : [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Version 5.0.0. Statut : stable.** Ce document spécifie la couche d'état lisible par machine de la méthodologie Deep Work Plan, désormais alignée sur le numéro de version propre du standard DWP — aucune exigence existante n'est affaiblie par cette renumérotation. Cette révision documente également le metteur à jour d'état sous garde, la publication vérifiée de plan, et les règles de vérité de preuve qu'un plan achevé doit satisfaire (voir ci-dessous). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
@@ -53,9 +60,9 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ Les deux fichiers MUST être écrits de façon atomique : écrire dans un fichie
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
