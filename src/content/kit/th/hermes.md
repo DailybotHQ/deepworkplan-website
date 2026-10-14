@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "adapter DWP สำหรับ Hermes: การโหลด skill ตามมาตรฐาน AgentSkills ความสอดประสานของหน่วยความจำเชิงลำดับเหตุการณ์ผ่านบันทึกผลลัพธ์ใน state.json และการดำเนินแผนต่อด้วย cron"
+description: "อะแดปเตอร์ DWP สำหรับ Hermes: โหลดสกิลผ่านมาตรฐาน AgentSkills หน่วยความจำแบบเหตุการณ์จากผลลัพธ์ของแผน และการทำแผนต่อโดยอัตโนมัติด้วย cron"
 kind: adapter
 lang: th
 order: 11

@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "Bộ chuyển đổi DWP cho Hermes: tải skill theo chuẩn AgentSkills, hiệp lực bộ nhớ theo sự kiện qua bản ghi kết quả trong state.json, và tiếp tục kế hoạch theo lịch cron."
+description: "Bộ điều hợp DWP cho Hermes: nạp skill qua chuẩn AgentSkills, bộ nhớ theo sự kiện từ kết quả kế hoạch và tiếp tục kế hoạch theo lịch cron."
 kind: adapter
 lang: vi
 order: 11

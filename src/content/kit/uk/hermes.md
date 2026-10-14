@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "Адаптер DWP для Hermes: завантаження скілів за стандартом AgentSkills, синергія епізодичної пам'яті через записи результатів у state.json та продовження плану за розкладом."
+description: "Адаптер DWP для Hermes: навички через стандарт AgentSkills, епізодична пам’ять із результатів плану та відновлення планів за розкладом cron."
 kind: adapter
 lang: uk
 order: 11

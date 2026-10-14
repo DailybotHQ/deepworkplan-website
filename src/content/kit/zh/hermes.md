@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "面向 Hermes 的 DWP 适配器：AgentSkills 标准技能加载、通过 state.json 中 outcome 记录实现的情节记忆协同，以及由 cron 驱动的计划续行。"
+description: "Hermes 的 DWP 适配器：通过 AgentSkills 标准加载技能，以计划结果形成情景记忆，并由 cron 驱动计划续跑。"
 kind: adapter
 lang: zh
 order: 11
