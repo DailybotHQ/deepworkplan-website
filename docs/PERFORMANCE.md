@@ -11,7 +11,7 @@ Performance optimization strategies for deepworkplan.com, an Astro static site.
 When working on this codebase, **always apply these principles:**
 
 1. **Prefer static over dynamic.** Use Astro components (`.astro`) for content that doesn't need interactivity. Only use Svelte with `client:*` directives when true interactivity is required.
-2. **Choose the laziest hydration possible.** Default to `client:visible` or `client:idle`. Only use `client:load` for components that need immediate interactivity (header, navigation). Never add `client:load` without justification.
+2. **Choose the laziest hydration possible.** Default to `client:visible` or `client:idle`. Use `client:load` only for a component that must be interactive before the browser is idle; the site header hydrates with `client:idle` (it renders fully as HTML first, and early hydration caused mobile Total Blocking Time spikes under 4× CPU throttling). Never add `client:load` without justification.
 3. **Minimize JavaScript payload.** Every byte of JS increases Time to Interactive. Avoid heavy libraries. Prefer CSS-only solutions (transitions, animations, scroll-behavior) over JS equivalents.
 4. **Use native browser features first.** CSS `scroll-behavior: smooth` over JS scroll libraries. IntersectionObserver over scroll event listeners. Native `<details>` over JS accordions. HTML `loading="lazy"` over JS lazy-loaders.
 5. **Optimize images.** Always include width/height to prevent layout shifts. Use `loading="lazy"` for below-fold images. Use the image optimization pipeline (`pnpm run images:optimize`).
@@ -102,15 +102,15 @@ Choose the right hydration directive:
 
 | Directive | When JS Loads | Use Case |
 |-----------|---------------|----------|
-| `client:load` | Page load | Critical interactivity (header, nav) |
+| `client:load` | Page load | Interactivity needed before idle (none on this site today) |
 | `client:visible` | Enters viewport | Below-fold components |
 | `client:idle` | Browser idle | Low-priority features |
 | `client:media` | Media query matches | Responsive features |
 | (none) | Never | Static content |
 
 ```astro
-<!-- Header needs immediate interactivity (includes the inline lamp theme toggle) -->
-<Header client:load />
+<!-- Header: server-rendered HTML first, hydrated when the browser is idle -->
+<Header client:idle />
 
 <!-- Below-fold section can wait until visible -->
 <ScrollSpyNav client:visible />
