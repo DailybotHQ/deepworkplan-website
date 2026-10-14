@@ -26,6 +26,7 @@ const details = c.alternatives[alternative.id];
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 const title = `${details.name} × Deep Work Plan`;
+const pageTitle = `${details.name} × Deep Work Plan — ${c.title}`;
 const description = `${details.whatItDoesWell} ${details.audience}`;
 const reviewedOn = new Date(
   `${COMPARE_REVIEWED_ON}T00:00:00Z`
@@ -38,14 +39,14 @@ const reviewedOn = new Date(
 const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: title,
+  name: pageTitle,
   description,
   url: `${siteUrl}${prefix}/compare/${alternative.id}`,
   dateModified: COMPARE_REVIEWED_ON,
 };
 ---
 
-<MainLayout lang={lang} title={title} description={description}>
+<MainLayout lang={lang} title={pageTitle} description={description}>
   <JsonLd slot="head" data={webPageSchema} />
   <article class="main-container py-16 md:py-24">
     <a
