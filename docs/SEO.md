@@ -286,7 +286,7 @@ When adding a machine-readable endpoint or agent surface:
 
 ### Current AI Crawlers Allowed
 
-GPTBot, ChatGPT-User, ClaudeBot, anthropic-ai, Google-Extended, Bytespider, CCBot, PerplexityBot, Applebot-Extended, Amazonbot, Meta-ExternalAgent, cohere-ai, OAI-SearchBot.
+GPTBot, ChatGPT-User, ClaudeBot, anthropic-ai, Google-Extended, Bytespider, CCBot, PerplexityBot, Applebot-Extended, Amazonbot, Meta-ExternalAgent, cohere-ai, OAI-SearchBot, DeepSeekBot, Claude-SearchBot, Perplexity-User.
 
 ## Images & Performance
 
