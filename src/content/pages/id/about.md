@@ -19,8 +19,7 @@ Ia sengaja dibuat agnostik terhadap AI agent atau stack yang Anda pakai — adap
 - **Rencanakan sebelum eksekusi** — Tidak ada kode yang ditulis sebelum rencana disepakati. Rencana adalah kontrak antara Anda dan agent. [Baca metodologinya](/methodology)
 - **Tugas bersifat atomik** — Setiap tugas dibatasi agar dapat dieksekusi dan diverifikasi secara mandiri, lalu di-commit secara atomik. [Lihat spesifikasinya](/spec)
 - **Verifikasi semuanya** — Setiap tugas diakhiri dengan pemeriksaan eksplisit sebelum tugas berikutnya dimulai, dengan kemajuan tercatat di git. [Jelajahi kit](/kit)
-- **Bukti terverifikasi di atas narasi** — Penyelesaian dibuktikan melalui gerbang yang dapat dieksekusi, tanda terima kriptografi, dan jurnal append-only. [Baca lapisan rekaman](/id/spec/record-layer)
-- Addon pendamping opsional Ekosistem 1.0 (agentkit, Herdr, devcontainer, Vim, reviewer)
+- **Bukti terverifikasi di atas narasi** — Penyelesaian dibuktikan oleh gerbang yang dieksekusi dan jurnal append-only: tugas hanya ditutup jika bukti tercatat memenuhi kriteria penerimaan, bukan dari klaim sepihak agen. [Baca lapisan rekaman](/id/spec/record-layer)
 
 ---
 

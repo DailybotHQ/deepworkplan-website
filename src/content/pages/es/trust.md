@@ -32,7 +32,7 @@ curl -fsSL -o SHA256SUMS \
 
 La tabla de fijación del ecosistema en [/init.md#trust-and-verification](/init.md#trust-and-verification) lista las sumas de verificación del paquete y los complementos.
 
-Las versiones tienen **checksums, no firmas criptográficas** — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.
+Las versiones tienen **checksums, no firmas** — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.
 
 La misma regla vale para el instalador de DeepWorkPlan Vim: su página muestra el SHA-256 del script tal como se sirve, con una receta para descargar, inspeccionar, verificar y ejecutar. [Inspeccionar el instalador de DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
 
@@ -49,7 +49,7 @@ Reporta los problemas de seguridad **de forma privada a través del sistema de r
 
 ## Limitaciones honestas
 
-- Las versiones tienen checksums, pero aún no están firmadas criptográficamente — las firmas están planificadas, no implementadas.
+- Las versiones tienen checksums, pero aún no están firmadas — las firmas están planificadas, no implementadas.
 - Deep Work Plan ejecuta un agente de programación autónomo en tu repositorio. Revisa el plan propuesto y sus diffs; la metodología está diseñada para esa revisión, no para reemplazarla.
 - Estas afirmaciones de confianza describen solo las fuentes oficiales. Una copia modificada o de terceros que se haya apartado de los repositorios no tiene ninguna de estas garantías — verifícala primero.
 

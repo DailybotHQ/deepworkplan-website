@@ -1,7 +1,7 @@
 ---
 title: "So sánh Deep Work Plan với các giải pháp dựa trên đặc tả và tác tử"
 description: "So sánh khách quan Deep Work Plan với các công cụ spec-driven, khung tác tử và chế độ lập kế hoạch của nhà cung cấp: nguồn tài liệu và ngày đánh giá."
-lastUpdated: 2026-10-14
+lastUpdated: 2026-09-11
 ---
 
 ## Deep Work Plan và các phương án khác
@@ -16,7 +16,7 @@ Ba giá trị mô tả mỗi khả năng. Chúng nói một khả năng nằm �
 - **Tùy chọn hoặc qua tiện ích mở rộng**
 - **Ngoài phạm vi**
 
-Rà soát lần cuối: 2026-10-14
+Rà soát lần cuối: 2026-09-11
 
 ## Các phương án khác, theo cách riêng của từng bên
 
@@ -74,7 +74,7 @@ Mỗi khả năng nằm ở đâu, theo từng công cụ. Tích hợp sẵn, t�
 - **Trạng thái sống sót qua các phiên và các agent.** Các ô đánh dấu README, nhật ký tác vụ, một chỉ mục làm việc có giới hạn và một tệp trạng thái đọc được bằng máy được ghi tại mỗi ranh giới, nên một phiên khác hay một agent khác tiếp tục ngay từ đĩa. Ngay cả một kế hoạch đang tạo bị gián đoạn cũng khôi phục được.
 - **Công cụ kiểm tra tính tuân thủ cho chính repository.** Một script chỉ đọc xác minh harness và mọi kế hoạch theo đặc tả, hiểu cả hai vòng đời kế hoạch và thoát với mã thân thiện CI.
 - **Khối lượng hướng dẫn tải lên được đo và công bố.** Một script được commit công bố hai phép đo cho mỗi luồng — gói dữ liệu ban đầu được tải lúc bắt đầu một phiên, và lộ trình đầu-cuối một khi các trigger thực sự kích hoạt — cùng với những gì mỗi phép đo loại trừ, để con số ban đầu không bao giờ bị đọc như tổng chi phí của một lượt chạy. Kết quả, kể cả mức tăng, được công bố theo byte, không bao giờ theo phần trăm token hay chi phí.
-- **Lớp bản ghi được bảo đảm bằng bằng chứng xác thực.** Hợp đồng bất biến (contract.json), nhật ký sự kiện chỉ nối thêm (journal.ndjson) và các cổng quan sát đảm bảo chứng minh hoàn thành khách quan.
+- **Lớp bản ghi được bảo đảm bằng bằng chứng xác thực.** Hợp đồng bất biến (contract.json), nhật ký sự kiện chỉ nối thêm (journal.ndjson), biên nhận được tính toán lại và các cổng được quan sát đảm bảo việc hoàn thành được chứng minh thay vì khẳng định.
 - **Ủy quyền đa tác tử an toàn và tự chủ bầy đàn.** Thực thi song song trong các worktree riêng biệt, gói bàn giao có cấu trúc và kế thừa vị trí lãnh đạo giúp ngăn ngừa sai lệch và xung đột.
 
 ## Những giới hạn thành thật

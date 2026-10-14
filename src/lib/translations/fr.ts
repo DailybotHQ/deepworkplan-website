@@ -289,47 +289,47 @@ export const fr: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Implémentation de référence. Validé en comportement avec commandes slash natives et WebFetch.',
+          note: 'Implémentation de référence avec commandes slash natives. Validé en comportement.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Validé à l installation. Adaptateur complet avec règles de projet et commandes dans .cursor/.',
+          note: "Adaptateur complet via les règles de projet et le lien symbolique .cursor → .agents. Validé à l'installation.",
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Validé en comportement. Instructions Markdown avec appels d outils natifs et bac à sable.',
+          note: 'Adaptateur complet via AGENTS.md et les procédures de commande #. Validé en comportement.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: "Adaptateur complet — les commandes dwp-* s'exécutent via AGENTS.md et les procédures #.",
+          note: "Adaptateur complet : les commandes dwp-* s'exécutent via AGENTS.md et les procédures #. Validé à l'installation.",
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Validé à l installation. L adaptateur exploite les règles d AGENTS.md avec WebFetch natif.',
+          note: "Adaptateur complet via AGENTS.md et les procédures de commande #. Validé à l'installation.",
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Adaptateur open source validé à l installation. Lit AGENTS.md et exécute dwp-* via commandes #.',
+          note: "Open source. Lit AGENTS.md nativement et exécute dwp-* via les commandes #. Validé à l'installation.",
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: "Les règles et les procédures de commande # pilotent l'intégralité de la boucle Deep Work Plan.",
+          note: "Les règles et procédures de commande # animent la boucle complète de Deep Work Plan. Validé à l'installation.",
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Adaptateur open source validé à l installation. Règles système et procédures # pour dwp-*.',
+          note: "Open source. Les règles Markdown et les commandes # exécutent chaque étape dwp-*. Validé à l'installation.",
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Validé à l installation. Adaptateur complet avec surface de commandes native AGY.',
+          note: "Adaptateur complet avec procédures de commande en Markdown. Validé à l'installation.",
         },
       ],
     },
@@ -480,7 +480,7 @@ export const fr: SiteTranslations = {
       {
         title: 'Preuves vérifiées plutôt que récits',
         description:
-          'L achèvement est prouvé par des portes exécutables, des reçus cryptographiques et un journal immuable — jamais sur la simple parole d un agent.',
+          "L'achèvement est prouvé par des portes exécutées et un journal en ajout seul : une tâche ne se termine que lorsque les preuves enregistrées satisfont à ses critères d'acceptation, jamais sur la simple déclaration d'un agent.",
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -971,7 +971,7 @@ export const fr: SiteTranslations = {
             question:
               'Plusieurs agents peuvent-ils travailler en parallèle sur un plan en toute sécurité ?',
             answer:
-              'Oui. Les tâches marquées `parallel_safe: yes` s exécutent simultanément dans des git worktrees dédiés. Chaque tâche écrit strictement dans sa Surface Modifiée déclarée sur des branches isolées, évitant tout conflit. Un journal d événements en ajout seul sous verrou sérialise l historique sans pollution entre voies.',
+              "Oui, selon des règles explicites. Un plan v7 peut marquer une tâche `parallel_safe` lorsque sa surface touchée ne chevauche pas celle d'une sœur et que sa sortie est délimitée, et seul un contrat accordant `agent_delegation` permet de confier cette tâche à un autre agent de code — headless dans son propre arbre de travail git (agentkit) ou dans un autre volet Herdr (Herdr). Un délégué en écriture travaille uniquement dans son propre arbre de travail, la session parente reste la seule rédactrice du journal du plan et un délégué ne délègue jamais plus loin.",
             linkLabel: 'En savoir plus sur la délégation',
             linkPath: '/spec/delegation',
           },
@@ -980,7 +980,7 @@ export const fr: SiteTranslations = {
             question:
               'Le résultat d un sous-agent délégué est-il automatiquement accepté ?',
             answer:
-              'Non. Le résultat d un délégué est consigné comme preuve « affirmée » tant que la porte de validation déclarée du plan parent ne l a pas exécutée et observée (« preuve observée »). Si la porte échoue ou touche des fichiers non déclarés, la tâche ne peut être validée.',
+              "Non. Le résultat d'un délégué est enregistré comme `asserted` jusqu'à ce que le plan parent intègre le travail et que son propre exécuteur de portes exécute la porte de la tâche, seule chose qui enregistre une preuve `observed`. Une délégation terminée ne clôture jamais un critère à elle seule, de sorte que la délégation étend la portée sans abaisser le niveau d'exigence.",
             linkLabel: 'Spécification de la couche de registre',
             linkPath: '/spec/record-layer',
           },
@@ -989,7 +989,7 @@ export const fr: SiteTranslations = {
             question:
               'Que se passe-t-il lorsqu un agent atteint ses limites de jetons ou de requêtes en cours de plan ?',
             answer:
-              'L autonomie en essaim surveille la capacité résiduelle. À l approche des limites, le responsable actif cesse d accepter de nouvelles tâches, génère un paquet de transmission structuré (`dwp-handoff-v1`) avec reçus durables, et transmet l exécution à un successeur avec époques monotones.',
+              "Chaque agent vérifie sa propre capacité aux limites des tâches. S'il lui reste de la marge, il continue ; quand la capacité faiblit, il ne termine que la tâche qu'il est capable de finir ; lorsqu'elle devient critique, il atteint un point sûr, écrit un petit paquet de transmission (`dwp-handoff-v1` : ce qui est fait, vérifié et non vérifié, et les étapes suivantes), notifie le meneur et s'arrête. Le meneur lance un successeur sur un autre compte, qui accepte le paquet et reprend le plan, en réexécutant chaque porte listée comme non vérifiée. Si le meneur lui-même épuise sa capacité, il transmet le leadership à un successeur ; les changements de leadership portent une époque croissante pour qu'un seul meneur agisse à la fois.",
             linkLabel: 'Lire la méthodologie',
             linkPath: '/methodology',
           },
@@ -1007,7 +1007,7 @@ export const fr: SiteTranslations = {
             question:
               'Comment l achèvement est-il prouvé au-delà du récit de l agent ?',
             answer:
-              'L achèvement requiert un contrat immuable, des reçus vérifiables et des résultats binaires enregistrés dans le journal. Les critères simplement affirmés nécessitent une signature humaine explicite. Le plan ne peut se clore sans un examen final (Final Review) réussi.',
+              "Une tâche ne s'achève que lorsque les preuves enregistrées satisfont à chacun de ses critères d'acceptation. Le contrat de résultat est adressé par son contenu et immuable dès le début de l'exécution, chaque événement est ajouté au journal du plan, et seul l'exécuteur de portes enregistre des preuves `observed`. Un critère nécessitant un jugement humain ne se clôture que par une approbation humaine enregistrée dotée d'un marqueur d'autorité explicite ; le reçu est recalculé à partir des registres, jamais rédigé à la main. La Revue Finale exécute ensuite la passe de sécurité et la validation complète sur l'état final.",
             linkLabel: 'Spécification de la couche de registre',
             linkPath: '/spec/record-layer',
           },
@@ -1330,7 +1330,7 @@ export const fr: SiteTranslations = {
         },
         {
           title: 'Une couche de registre appuyée sur des preuves',
-          body: 'Contrat immuable (contract.json), journal d événements en ajout seul (journal.ndjson), reçus cryptographiques et portes observées prouvent l achèvement.',
+          body: "Un contrat immuable (contract.json), un journal d'événements en ajout seul (journal.ndjson), des reçus recalculés et des portes observées garantissent que l'achèvement est prouvé plutôt qu'affirmé.",
         },
         {
           title: 'Délégation multi-agents sûre et autonomie en essaim',
@@ -1388,7 +1388,7 @@ export const fr: SiteTranslations = {
       "Traitez la skill comme non fiable tant que vous ne l'avez pas vérifiée. Chaque version joint un fichier SHA256SUMS couvrant la skill distribuée. Téléchargez-le pour la version que vous souhaitez installer, puis vérifiez que votre copie correspond — une sortie non nulle signifie qu'un fichier ne correspond pas et vous devez vous arrêter.",
     codeLabel: 'shell',
     verifyNote:
-      "Les versions sont checksummées, pas signées — la signature (cosign ou GPG du mainteneur) est la prochaine étape documentée, pas une garantie actuelle. Comme tout est ouvert, vous pouvez aussi comparer n'importe quel fichier avec le dépôt à son tag.",
+      "Les versions sont accompagnées de sommes de contrôle, pas de signatures — la signature (cosign ou GPG du mainteneur) est une prochaine étape documentée, pas une promesse actuelle. Tout étant ouvert, vous pouvez également comparer n'importe quel fichier avec le dépôt à sa version étiquetée.",
     vimNote:
       'La même règle vaut pour l’installateur de DeepWorkPlan Vim : sa page affiche le SHA-256 du script tel qu’il est servi, avec une marche à suivre pour télécharger, inspecter, vérifier et exécuter.',
     vimLinkLabel: 'Inspecter l’installateur de DeepWorkPlan Vim',
@@ -1404,7 +1404,7 @@ export const fr: SiteTranslations = {
     linkSkillPolicy: 'Politique de sécurité et modèle de menaces de la skill',
     limitationsTitle: 'Limitations honnêtes',
     limitations: [
-      'Les versions sont checksummées, mais pas encore signées cryptographiquement — la signature est prévue, pas encore réalisée.',
+      'Les versions sont checksummées, mais pas encore signées — la signature est prévue, pas encore réalisée.',
       'Deep Work Plan exécute un agent de coding autonome sur votre dépôt. Relisez son plan proposé et ses diffs ; la méthodologie est conçue pour cette relecture, pas pour la remplacer.',
       "Les affirmations de confiance ici décrivent uniquement les sources officielles. Une copie modifiée ou tierce qui s'est écartée des dépôts ne bénéficie d'aucune de ces garanties — vérifiez-la d'abord.",
     ],

@@ -49,7 +49,7 @@ Report security issues **privately through GitHub's private vulnerability report
 
 ## Honest limitations
 
-- Releases are checksummed, not yet cryptographically signed — signing is planned, not done.
+- Releases are checksummed, not yet signed — signing is planned, not done.
 - Deep Work Plan runs an autonomous coding agent against your repository. Review its proposed plan and its diffs; the methodology is designed for that review, not to replace it.
 - These trust claims describe the official sources only. A modified or third-party copy that has drifted from the repositories carries none of these guarantees — verify it first.
 

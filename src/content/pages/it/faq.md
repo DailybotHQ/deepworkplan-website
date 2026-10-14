@@ -130,19 +130,19 @@ Sì, quando il piano è stato approvato in anticipo, porta lo strato di stato ri
 
 ### Più agenti possono lavorare in parallelo su un piano in modo sicuro?
 
-Sì. Le attività dichiarate come `parallel_safe: yes` possono essere eseguite contemporaneamente in git worktree dedicati. Ciascuna scrive rigorosamente sulla Superficie Modificata dichiarata in rami isolati. Un journal append-only sotto lock serializza gli eventi evitando conflitti tra corsie.
+Sì, secondo regole esplicite. Un piano v7 può contrassegnare un task come `parallel_safe` quando la sua superficie toccata non si sovrappone a quella di un task fratello e il suo output è delimitato; solo un contratto che concede `agent_delegation` consente di affidare tale task a un altro agente di codice — headless nel proprio worktree git (agentkit) o in un altro riquadro Herdr (Herdr). Un delegato in scrittura opera esclusivamente nel proprio worktree, la sessione genitore rimane l'unica a scrivere nel journal del piano e un delegato non delega mai ulteriormente.
 
 [Leggi sulla delega](https://deepworkplan.com/it/spec/delegation)
 
 ### Il risultato di un sotto-agente delegato viene considerato attendibile in automatico?
 
-No. Il lavoro del delegato è registrato come evidenza "asserita" finché il gate di convalida dichiarato nel piano principale non lo esegue e lo osserva direttamente ("evidenza osservata"). Se il gate non passa o tocca file non dichiarati, l attività non può essere completata.
+No. Il risultato di un delegato viene registrato come `asserted` finché il piano genitore non integra il lavoro e il proprio esecutore di gate non esegue il gate del task, che è l'unica operazione a registrare prove `observed`. Una delegazione completata non chiude mai un criterio da sola, pertanto la delegazione amplia la portata senza abbassare gli standard di completamento.
 
 [Specifica del livello di registrazione](https://deepworkplan.com/it/spec/record-layer)
 
 ### Cosa accade se un agente esaurisce i token o i limiti di frequenza durante il piano?
 
-L autonomia dello sciame monitora la capacità residua. All avvicinarsi dei limiti, il leader attivo non accetta nuove attività, genera un pacchetto di handoff strutturato (`dwp-handoff-v1`) con ricevute e indice di lavoro, e trasferisce l esecuzione a un leader successore con epoche monotone.
+Ogni agente controlla la propria capacità ai confini dei task. Se c'è margine prosegue; quando la capacità scarseggia porta a termine solo il task che è in grado di completare; quando diventa critica raggiunge un punto sicuro, scrive un piccolo pacchetto di passaggio di consegne (`dwp-handoff-v1`: cosa è fatto, verificato e non verificato, e i passaggi successivi), avvisa il lead e si ferma. Il lead avvia un successore su un altro account, che accetta il pacchetto e riprende il piano, rieseguendo ogni gate elencato nel pacchetto come non verificato. Se lo stesso lead esaurisce la capacità, passa la guida a un successore; i cambi di leadership recano un'epoca crescente affinché un solo lead agisca per volta.
 
 [Leggi la metodologia](https://deepworkplan.com/it/methodology)
 
@@ -154,7 +154,7 @@ DWP definisce una rigorosa tassonomia di escalation in sette classi (AGENT_PROTO
 
 ### Come viene dimostrato il completamento al di là delle affermazioni dell agente?
 
-Il completamento richiede un contratto di risultato immutabile, ricevute verificabili ed esiti binari dei gate registrati nel journal append-only. I criteri solo asseriti richiedono un esplicito sign-off umano. Il piano non termina senza un Final Review superato.
+Un task si completa solo quando le prove registrate soddisfano ciascuno dei suoi criteri di accettazione. Il contratto di risultato è indirizzato per contenuto e immutabile una volta avviata l'esecuzione, ogni evento viene aggiunto al journal del piano e solo l'esecutore dei gate registra prove `observed`. Un criterio che richiede un giudizio umano si chiude solo attraverso un'approvazione umana registrata con un marcatore di autorità esplicito; la ricevuta viene ricalcolata dai registri, mai scritta a mano. La Final Review esegue quindi il passaggio di sicurezza e la convalida completa sullo stato finale.
 
 [Specifica del livello di registrazione](https://deepworkplan.com/it/spec/record-layer)
 

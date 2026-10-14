@@ -130,19 +130,19 @@ Sim, quando o plano foi aprovado com antecedência, carrega a camada de estado e
 
 ### Vários agentes podem trabalhar em um plano em paralelo e como isso é mantido seguro?
 
-Sim. Tarefas declaradas com `parallel_safe: yes` podem ser executadas concorrentemente em worktrees git dedicadas. Cada tarefa grava estritamente na sua Superfície Modificada declarada em branches isoladas, evitando conflitos. Um diário de eventos append-only serializa eventos sob bloqueio e o trabalho concluído é integrado sem poluição entre faixas.
+Sim, sob regras explícitas. Um plano v7 pode marcar uma tarefa como `parallel_safe` quando sua superfície afetada não se sobrepõe à de uma irmã e sua saída é delimitada, e somente um contrato que conceda `agent_delegation` permite que essa tarefa vá para outro agente de código — headless em seu próprio worktree do git (agentkit) ou em outro painel do Herdr (Herdr). Um delegado de escrita trabalha apenas em seu próprio worktree, a sessão pai permanece como a única escritora do diário do plano e um delegado nunca delega adiante.
 
 [Ler sobre delegação](https://deepworkplan.com/pt/spec/delegation)
 
 ### O resultado de um subagente delegado é confiado automaticamente?
 
-Não. O trabalho do delegado é gravado como evidência "afirmada" até que o gate de validação declarado no plano pai execute e o observe ("evidência observada"). Se o gate falhar ou tocar arquivos não declarados, a tarefa não pode ser concluída. A delegação expande a capacidade sem diminuir o rigor.
+Não. O resultado de um delegado é registrado como `asserted` até que o plano pai integre o trabalho e seu próprio executor de gates rode o gate da tarefa, que é a única coisa que registra evidência `observed`. Uma delegação concluída nunca encerra um critério por si só, portanto a delegação expande o alcance sem reduzir o rigor para a conclusão.
 
 [Ler a especificação da camada de registro](https://deepworkplan.com/pt/spec/record-layer)
 
 ### O que acontece quando um agente atinge limites de uso, tokens ou taxa durante o plano?
 
-A autonomia de enxame monitora a capacidade restante. Quando os limites se aproximam, o líder ativo para de aceitar novas tarefas, gera um pacote de handoff estruturado (`dwp-handoff-v1`) com recibos e índice de trabalho, e transfere a execução para um líder sucessor com épocas monotônicas para nunca travar pela metade.
+Cada agente verifica sua própria capacidade nos limites das tarefas. Com margem restante, continua; quando a capacidade diminui, conclui apenas a tarefa que pode finalizar; quando é crítica, atinge um ponto seguro, grava um pequeno pacote de transição (`dwp-handoff-v1`: o que foi feito, verificado e não verificado, e os próximos passos), notifica o líder e para. O líder inicia um sucessor em outra conta, que aceita o pacote e retoma o plano, reexecutando cada gate que o pacote lista como não verificado. Se o próprio líder esgotar sua capacidade, passa a liderança para um sucessor; as mudanças de liderança carregam uma época crescente para que apenas um líder atue por vez.
 
 [Ler a metodologia](https://deepworkplan.com/pt/methodology)
 
@@ -154,7 +154,7 @@ O DWP define uma taxonomia estrita de escalonamento em sete classes (AGENT_PROTO
 
 ### Como a conclusão da tarefa é comprovada além da afirmação narrativa do agente?
 
-A conclusão exige um contrato de resultados imutável, recibos verificáveis e resultados binários de gates gravados no diário append-only. Critérios de aceitação afirmados exigem sign-off humano explícito com autoridade verificada. O plano não conclui sem um Final Review aprovado.
+Uma tarefa é concluída apenas quando as evidências registradas satisfazem cada um de seus critérios de aceitação. O contrato de resultados é endereçado por conteúdo e imutável após o início da execução, cada evento é anexado ao diário do plano e somente o executor de gates registra evidências `observed`. Um critério que necessita de julgamento humano é encerrado apenas por meio de uma aprovação humana registrada com um marcador de autoridade explícito; o recibo é recalculado a partir dos registros, nunca escrito à mão. A Revisão Final então executa a etapa de segurança e a validação completa no estado final.
 
 [Ler a especificação da camada de registro](https://deepworkplan.com/pt/spec/record-layer)
 

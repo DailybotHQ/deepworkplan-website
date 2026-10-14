@@ -49,7 +49,7 @@ Melden Sie Sicherheitsprobleme **privat über GitHub's Private Vulnerability Rep
 
 ## Ehrliche Einschränkungen
 
-- Releases sind mit Prüfsummen versehen, aber noch nicht kryptographisch signiert — Signierung ist geplant, aber noch nicht umgesetzt.
+- Releases sind mit Prüfsummen versehen, aber noch nicht signiert — Signierung ist geplant, aber noch nicht umgesetzt.
 - Deep Work Plan führt einen autonomen Coding-Agenten gegen Ihr Repository aus. Überprüfen Sie den vorgeschlagenen Plan und die Diffs; die Methodik ist für diese Überprüfung konzipiert, nicht um sie zu ersetzen.
 - Diese Vertrauensaussagen beschreiben nur die offiziellen Quellen. Eine modifizierte oder von Drittanbietern stammende Kopie, die von den Repositories abgewichen ist, trägt keine dieser Garantien — verifizieren Sie sie zuerst.
 

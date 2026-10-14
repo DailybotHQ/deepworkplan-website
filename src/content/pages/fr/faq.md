@@ -130,19 +130,19 @@ Oui, quand le plan a été approuvé à l’avance, porte la couche d’état re
 
 ### Plusieurs agents peuvent-ils travailler en parallèle sur un plan en toute sécurité ?
 
-Oui. Les tâches marquées `parallel_safe: yes` s exécutent simultanément dans des git worktrees dédiés. Chaque tâche écrit strictement dans sa Surface Modifiée déclarée sur des branches isolées, évitant tout conflit. Un journal d événements en ajout seul sous verrou sérialise l historique sans pollution entre voies.
+Oui, selon des règles explicites. Un plan v7 peut marquer une tâche `parallel_safe` lorsque sa surface touchée ne chevauche pas celle d'une sœur et que sa sortie est délimitée, et seul un contrat accordant `agent_delegation` permet de confier cette tâche à un autre agent de code — headless dans son propre arbre de travail git (agentkit) ou dans un autre volet Herdr (Herdr). Un délégué en écriture travaille uniquement dans son propre arbre de travail, la session parente reste la seule rédactrice du journal du plan et un délégué ne délègue jamais plus loin.
 
 [En savoir plus sur la délégation](https://deepworkplan.com/fr/spec/delegation)
 
 ### Le résultat d un sous-agent délégué est-il automatiquement accepté ?
 
-Non. Le résultat d un délégué est consigné comme preuve « affirmée » tant que la porte de validation déclarée du plan parent ne l a pas exécutée et observée (« preuve observée »). Si la porte échoue ou touche des fichiers non déclarés, la tâche ne peut être validée.
+Non. Le résultat d'un délégué est enregistré comme `asserted` jusqu'à ce que le plan parent intègre le travail et que son propre exécuteur de portes exécute la porte de la tâche, seule chose qui enregistre une preuve `observed`. Une délégation terminée ne clôture jamais un critère à elle seule, de sorte que la délégation étend la portée sans abaisser le niveau d'exigence.
 
 [Spécification de la couche de registre](https://deepworkplan.com/fr/spec/record-layer)
 
 ### Que se passe-t-il lorsqu un agent atteint ses limites de jetons ou de requêtes en cours de plan ?
 
-L autonomie en essaim surveille la capacité résiduelle. À l approche des limites, le responsable actif cesse d accepter de nouvelles tâches, génère un paquet de transmission structuré (`dwp-handoff-v1`) avec reçus durables, et transmet l exécution à un successeur avec époques monotones.
+Chaque agent vérifie sa propre capacité aux limites des tâches. S'il lui reste de la marge, il continue ; quand la capacité faiblit, il ne termine que la tâche qu'il est capable de finir ; lorsqu'elle devient critique, il atteint un point sûr, écrit un petit paquet de transmission (`dwp-handoff-v1` : ce qui est fait, vérifié et non vérifié, et les étapes suivantes), notifie le meneur et s'arrête. Le meneur lance un successeur sur un autre compte, qui accepte le paquet et reprend le plan, en réexécutant chaque porte listée comme non vérifiée. Si le meneur lui-même épuise sa capacité, il transmet le leadership à un successeur ; les changements de leadership portent une époque croissante pour qu'un seul meneur agisse à la fois.
 
 [Lire la méthodologie](https://deepworkplan.com/fr/methodology)
 
@@ -154,7 +154,7 @@ DWP définit une taxonomie stricte d escalade en sept classes (AGENT_PROTOCOL §
 
 ### Comment l achèvement est-il prouvé au-delà du récit de l agent ?
 
-L achèvement requiert un contrat immuable, des reçus vérifiables et des résultats binaires enregistrés dans le journal. Les critères simplement affirmés nécessitent une signature humaine explicite. Le plan ne peut se clore sans un examen final (Final Review) réussi.
+Une tâche ne s'achève que lorsque les preuves enregistrées satisfont à chacun de ses critères d'acceptation. Le contrat de résultat est adressé par son contenu et immuable dès le début de l'exécution, chaque événement est ajouté au journal du plan, et seul l'exécuteur de portes enregistre des preuves `observed`. Un critère nécessitant un jugement humain ne se clôture que par une approbation humaine enregistrée dotée d'un marqueur d'autorité explicite ; le reçu est recalculé à partir des registres, jamais rédigé à la main. La Revue Finale exécute ensuite la passe de sécurité et la validation complète sur l'état final.
 
 [Spécification de la couche de registre](https://deepworkplan.com/fr/spec/record-layer)
 

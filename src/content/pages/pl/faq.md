@@ -130,19 +130,19 @@ Tak, gdy plan został wcześniej zatwierdzony, niesie wymaganą warstwę stanu i
 
 ### Czy wielu agentów może pracować nad jednym planem równolegle i jak zapewniane jest bezpieczeństwo?
 
-Tak. Zadania oznaczone jako `parallel_safe: yes` mogą działać równolegle w dedykowanych drzewach roboczych git worktree. Każde zadanie zapisuje ściśle w zadeklarowanym obszarze na odrębnych gałęziach. Jeden dziennik zdarzeń append-only porządkuje zdarzenia, a prace są integrowane bez kolizji.
+Tak, według wyraźnych reguł. Plan v7 może oznaczyć zadanie jako `parallel_safe`, gdy jego dotykana powierzchnia nie nakłada się na zadania równorzędne, a jego wyniki są ograniczone, i tylko kontrakt przyznający `agent_delegation` pozwala przekazać to zadanie innemu agentowi kodującemu — bezinterfejsowo we własnym worktree gita (agentkit) lub w innym panelu Herdr (Herdr). Delegat wykonujący zapis pracuje wyłącznie we własnym worktree, sesja nadrzędna pozostaje jedynym autorem dziennika planu, a delegat nigdy nie deleguje dalej.
 
 [Dowiedz się więcej o delegacji](https://deepworkplan.com/pl/spec/delegation)
 
 ### Czy wyniki delegowanego podagenta są automatycznie akceptowane?
 
-Nie. Wyniki delegata są oznaczane jako dowód „deklarowany”, dopóki zadeklarowana bramka walidacji planu nadrzędnego rzeczywiście ich nie wykona i nie zaobserwuje („dowód zaobserwowany”). Jeśli bramka nie przejdzie lub dotknie nieopisanych plików, zadanie nie zostanie zaliczone.
+Nie. Wynik delegata jest rejestrowany jako `asserted`, dopóki plan nadrzędny nie zintegruje prac, a jego własny mechanizm bramek nie uruchomi bramki zadania, co jest jedyną rzeczą rejestrującą dowód `observed`. Zakończona delegacja nigdy sama z siebie nie zamyka kryterium, więc delegowanie zwiększa zasięg bez obniżania poprzeczki dla ukończenia.
 
 [Specyfikacja warstwy rejestru](https://deepworkplan.com/pl/spec/record-layer)
 
 ### Co się dzieje, gdy agent osiągnie limity tokenów lub zapytań w trakcie planu?
 
-Autonomia roju monitoruje dostępne zasoby. Gdy limity się zbliżają, aktywny lider przestaje przyjmować nowe zadania, generuje ustrukturyzowany pakiet przekazania (`dwp-handoff-v1`) z trwałymi pokwitowaniami i przekazuje dowodzenie kolejnemu agentowi.
+Każdy agent sprawdza własną pojemność na granicach zadań. Gdy ma zapas, kontynuuje; gdy pojemność spada, kończy tylko to zadanie, które jest w stanie dokończyć; gdy stan jest krytyczny, osiąga bezpieczny punkt, zapisuje mały pakiet przekazania (`dwp-handoff-v1`: co zrobiono, zweryfikowano i nie zweryfikowano, oraz kolejne kroki), powiadamia lidera i zatrzymuje się. Lider uruchamia następcę na innym koncie, który przyjmuje pakiet i wznawia plan, ponownie uruchamiając każdą bramkę wymienioną w pakiecie jako niezweryfikowana. Jeśli sam lider wyczerpie zasoby, przekazuje przywództwo następcy; zmiany przywództwa niosą rosnącą epokę, więc w danym momencie działa tylko jeden lider.
 
 [Przeczytaj metodologię](https://deepworkplan.com/pl/methodology)
 
@@ -154,7 +154,7 @@ DWP definiuje ścisłą taksonomię eskalacji w siedmiu klasach (AGENT_PROTOCOL 
 
 ### W jaki sposób ukończenie prac jest dowodzone poza narracją samego agenta?
 
-Ukończenie wymaga niezmiennego kontraktu wyników, weryfikowalnych pokwitowań i binarnych rezultatów bramek w dzienniku. Zadeklarowane kryteria wymagają autoryzowanego podpisu człowieka. Plan nie może zakończyć się bez zaliczonego przeglądu końcowego (Final Review).
+Zadanie kończy się tylko wtedy, gdy zarejestrowane dowody spełniają każde z jego kryteriów akceptacji. Kontrakt wynikowy jest adresowany treścią i niezmienny po rozpoczęciu wykonywania, każde zdarzenie jest dopisywane do dziennika planu, a tylko mechanizm bramek rejestruje dowody `observed`. Kryterium wymagające ludzkiego osądu zamyka się wyłącznie poprzez zarejestrowaną akceptację człowieka z wyraźnym znacznikiem uprawnień; pokwitowanie jest przeliczane z zapisów, nigdy sporządzane ręcznie. Przegląd końcowy uruchamia następnie przebieg bezpieczeństwa i pełną walidację stanu końcowego.
 
 [Specyfikacja warstwy rejestru](https://deepworkplan.com/pl/spec/record-layer)
 

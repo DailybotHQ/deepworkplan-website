@@ -290,47 +290,47 @@ export const pl: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Wdrożenie referencyjne. Testy behawioralne z natywnymi komendami ukośnika i WebFetch.',
+          note: 'Wdrożenie referencyjne z natywnymi komendami ukośnika. Testowane behawioralnie.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Testy instalacji. Pełny adapter z regułami projektu i integracją w .cursor/.',
+          note: 'Pełny adapter przez reguły projektu i symlink .cursor → .agents. Testowany instalacyjnie.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Testy behawioralne. Instrukcje Markdown z wywołaniami narzędzi i piaskownicą.',
+          note: 'Pełny adapter przez AGENTS.md i procedury poleceń #. Testowany behawioralnie.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Testy instalacji. Komendy i procedury wykonywane przez AGENTS.md i polecenia #.',
+          note: 'Pełny adapter: polecenia dwp-* działają przez AGENTS.md i procedury #. Testowany instalacyjnie.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Testy instalacji. Adapter wykorzystuje reguły AGENTS.md i natywne WebFetch.',
+          note: 'Pełny adapter przez AGENTS.md i procedury poleceń #. Testowany instalacyjnie.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Adapter open-source przetestowany instalacyjnie. Czyta AGENTS.md i steruje dwp-*.',
+          note: 'Open source. Czyta AGENTS.md natywnie i uruchamia dwp-* przez polecenia #. Testowany instalacyjnie.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Testy instalacji. Przepływy Cascade i reguły sterują cyklem życia Deep Work Plan.',
+          note: 'Reguły i procedury poleceń # napędzają pełną pętlę Deep Work Plan. Testowany instalacyjnie.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Adapter open-source przetestowany instalacyjnie. Regury promptu i procedury #.',
+          note: 'Open source. Reguły Markdown i polecenia # uruchamiają każdy krok dwp-*. Testowany instalacyjnie.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Testy instalacji. Pełny adapter z natywną przestrzenią poleceń AGY.',
+          note: 'Pełny adapter z procedurami poleceń Markdown. Testowany instalacyjnie.',
         },
       ],
     },
@@ -481,7 +481,7 @@ export const pl: SiteTranslations = {
       {
         title: 'Zweryfikowane dowody zamiast deklaracji',
         description:
-          'Ukończenie prac jest dowodzone wykonywalnymi bramkami, kryptograficznymi pokwitowaniami i dziennikiem append-only — nigdy samą deklaracją agenta.',
+          'Ukończenie jest dowodzone wykonanymi bramkami i dziennikiem append-only: zadanie zamyka się tylko wtedy, gdy zarejestrowane dowody spełniają kryteria akceptacji, nigdy na podstawie samej deklaracji agenta.',
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -964,7 +964,7 @@ export const pl: SiteTranslations = {
             question:
               'Czy wielu agentów może pracować nad jednym planem równolegle i jak zapewniane jest bezpieczeństwo?',
             answer:
-              'Tak. Zadania oznaczone jako `parallel_safe: yes` mogą działać równolegle w dedykowanych drzewach roboczych git worktree. Każde zadanie zapisuje ściśle w zadeklarowanym obszarze na odrębnych gałęziach. Jeden dziennik zdarzeń append-only porządkuje zdarzenia, a prace są integrowane bez kolizji.',
+              'Tak, według wyraźnych reguł. Plan v7 może oznaczyć zadanie jako `parallel_safe`, gdy jego dotykana powierzchnia nie nakłada się na zadania równorzędne, a jego wyniki są ograniczone, i tylko kontrakt przyznający `agent_delegation` pozwala przekazać to zadanie innemu agentowi kodującemu — bezinterfejsowo we własnym worktree gita (agentkit) lub w innym panelu Herdr (Herdr). Delegat wykonujący zapis pracuje wyłącznie we własnym worktree, sesja nadrzędna pozostaje jedynym autorem dziennika planu, a delegat nigdy nie deleguje dalej.',
             linkLabel: 'Dowiedz się więcej o delegacji',
             linkPath: '/spec/delegation',
           },
@@ -973,7 +973,7 @@ export const pl: SiteTranslations = {
             question:
               'Czy wyniki delegowanego podagenta są automatycznie akceptowane?',
             answer:
-              'Nie. Wyniki delegata są oznaczane jako dowód „deklarowany”, dopóki zadeklarowana bramka walidacji planu nadrzędnego rzeczywiście ich nie wykona i nie zaobserwuje („dowód zaobserwowany”). Jeśli bramka nie przejdzie lub dotknie nieopisanych plików, zadanie nie zostanie zaliczone.',
+              'Nie. Wynik delegata jest rejestrowany jako `asserted`, dopóki plan nadrzędny nie zintegruje prac, a jego własny mechanizm bramek nie uruchomi bramki zadania, co jest jedyną rzeczą rejestrującą dowód `observed`. Zakończona delegacja nigdy sama z siebie nie zamyka kryterium, więc delegowanie zwiększa zasięg bez obniżania poprzeczki dla ukończenia.',
             linkLabel: 'Specyfikacja warstwy rejestru',
             linkPath: '/spec/record-layer',
           },
@@ -982,7 +982,7 @@ export const pl: SiteTranslations = {
             question:
               'Co się dzieje, gdy agent osiągnie limity tokenów lub zapytań w trakcie planu?',
             answer:
-              'Autonomia roju monitoruje dostępne zasoby. Gdy limity się zbliżają, aktywny lider przestaje przyjmować nowe zadania, generuje ustrukturyzowany pakiet przekazania (`dwp-handoff-v1`) z trwałymi pokwitowaniami i przekazuje dowodzenie kolejnemu agentowi.',
+              'Każdy agent sprawdza własną pojemność na granicach zadań. Gdy ma zapas, kontynuuje; gdy pojemność spada, kończy tylko to zadanie, które jest w stanie dokończyć; gdy stan jest krytyczny, osiąga bezpieczny punkt, zapisuje mały pakiet przekazania (`dwp-handoff-v1`: co zrobiono, zweryfikowano i nie zweryfikowano, oraz kolejne kroki), powiadamia lidera i zatrzymuje się. Lider uruchamia następcę na innym koncie, który przyjmuje pakiet i wznawia plan, ponownie uruchamiając każdą bramkę wymienioną w pakiecie jako niezweryfikowana. Jeśli sam lider wyczerpie zasoby, przekazuje przywództwo następcy; zmiany przywództwa niosą rosnącą epokę, więc w danym momencie działa tylko jeden lider.',
             linkLabel: 'Przeczytaj metodologię',
             linkPath: '/methodology',
           },
@@ -1000,7 +1000,7 @@ export const pl: SiteTranslations = {
             question:
               'W jaki sposób ukończenie prac jest dowodzone poza narracją samego agenta?',
             answer:
-              'Ukończenie wymaga niezmiennego kontraktu wyników, weryfikowalnych pokwitowań i binarnych rezultatów bramek w dzienniku. Zadeklarowane kryteria wymagają autoryzowanego podpisu człowieka. Plan nie może zakończyć się bez zaliczonego przeglądu końcowego (Final Review).',
+              'Zadanie kończy się tylko wtedy, gdy zarejestrowane dowody spełniają każde z jego kryteriów akceptacji. Kontrakt wynikowy jest adresowany treścią i niezmienny po rozpoczęciu wykonywania, każde zdarzenie jest dopisywane do dziennika planu, a tylko mechanizm bramek rejestruje dowody `observed`. Kryterium wymagające ludzkiego osądu zamyka się wyłącznie poprzez zarejestrowaną akceptację człowieka z wyraźnym znacznikiem uprawnień; pokwitowanie jest przeliczane z zapisów, nigdy sporządzane ręcznie. Przegląd końcowy uruchamia następnie przebieg bezpieczeństwa i pełną walidację stanu końcowego.',
             linkLabel: 'Specyfikacja warstwy rejestru',
             linkPath: '/spec/record-layer',
           },
@@ -1322,7 +1322,7 @@ export const pl: SiteTranslations = {
         },
         {
           title: 'Warstwa rejestru oparta na twardych dowodach',
-          body: 'Niezmienny kontrakt (contract.json), dziennik zdarzeń append-only (journal.ndjson) i weryfikowane bramki gwarantują obiektywny dowód wykonania.',
+          body: 'Niezmienny kontrakt (contract.json), dziennik zdarzeń append-only (journal.ndjson), przeliczane pokwitowania i zaobserwowane bramki gwarantują, że ukończenie jest udowodnione, a nie deklarowane.',
         },
         {
           title: 'Bezpieczna delegacja wielu agentów i autonomia roju',
@@ -1380,7 +1380,7 @@ export const pl: SiteTranslations = {
       'Traktuj skill jako niezaufany, dopóki go nie sprawdzisz. Każde wydanie dołącza plik SHA256SUMS obejmujący dostarczony skill. Pobierz go dla wersji, którą zamierzasz zainstalować, a następnie sprawdź, czy Twoja kopia pasuje — niezerowe wyjście oznacza, że plik nie pasuje i powinieneś się zatrzymać.',
     codeLabel: 'shell',
     verifyNote:
-      'Wydania są sumowane kontrolnie, nie podpisywane — podpisywanie (cosign lub GPG opiekuna) to udokumentowany kolejny krok, a nie bieżące twierdzenie. Ponieważ wszystko jest otwarte, możesz też diffować dowolny plik względem repozytorium przy jego tagu.',
+      'Wydania mają sumy kontrolne, a nie podpisy — podpisy (cosign lub GPG maintainera) to udokumentowany kolejny krok, a nie obecne twierdzenie. Ponieważ wszystko jest otwarte, można także porównać dowolny plik z repozytorium przy danym tagu.',
     vimNote:
       'Ta sama zasada dotyczy instalatora DeepWorkPlan Vim: jego strona pokazuje SHA-256 skryptu udostępnianego teraz oraz kroki: pobierz, sprawdź, zweryfikuj, uruchom.',
     vimLinkLabel: 'Sprawdź instalator DeepWorkPlan Vim',
@@ -1396,7 +1396,7 @@ export const pl: SiteTranslations = {
     linkSkillPolicy: 'Polityka bezpieczeństwa skilla i model zagrożeń',
     limitationsTitle: 'Uczciwe ograniczenia',
     limitations: [
-      'Wydania są sumowane kontrolnie, ale jeszcze nie podpisywane kryptograficznie — podpisywanie jest zaplanowane, nie wykonane.',
+      'Wydania są sumowane kontrolnie, ale jeszcze nie podpisywane — podpisywanie jest zaplanowane, nie wykonane.',
       'Deep Work Plan uruchamia autonomicznego agenta kodującego względem Twojego repozytorium. Przeglądaj jego proponowany plan i diffe; metodyka jest zaprojektowana do tego przeglądu, nie do jego zastąpienia.',
       'Twierdzenia dotyczące zaufania opisują wyłącznie oficjalne źródła. Zmodyfikowana lub zewnętrzna kopia, która odeszła od repozytoriów, nie niesie żadnej z tych gwarancji — najpierw ją zweryfikuj.',
     ],

@@ -49,7 +49,7 @@ Signalez les problèmes de sécurité **en privé via le système de signalement
 
 ## Limitations honnêtes
 
-- Les versions sont checksummées, mais pas encore signées cryptographiquement — la signature est prévue, pas encore réalisée.
+- Les versions sont checksummées, mais pas encore signées — la signature est prévue, pas encore réalisée.
 - Deep Work Plan exécute un agent de coding autonome sur votre dépôt. Relisez son plan proposé et ses diffs ; la méthodologie est conçue pour cette relecture, pas pour la remplacer.
 - Ces affirmations de confiance décrivent uniquement les sources officielles. Une copie modifiée ou tierce qui s'est écartée des dépôts ne bénéficie d'aucune de ces garanties — vérifiez-la d'abord.
 

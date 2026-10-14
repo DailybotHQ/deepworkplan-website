@@ -1,7 +1,7 @@
 ---
 title: "Confronto tra Deep Work Plan e le alternative guidate da specifiche o agenti"
 description: "Come Deep Work Plan si rapporta a strumenti guidati da specifiche, framework per agenti e modalità piano dei vendor: fonti verificate e data di revisione."
-lastUpdated: 2026-10-14
+lastUpdated: 2026-09-11
 ---
 
 ## Deep Work Plan e le alternative
@@ -16,7 +16,7 @@ Tre valori descrivono ogni capacità. Dicono dove vive una capacità in uno stru
 - **Opzionale o tramite estensione**
 - **Fuori ambito**
 
-Ultima revisione: 2026-10-14
+Ultima revisione: 2026-09-11
 
 ## Le alternative, nei loro termini
 
@@ -74,7 +74,7 @@ Dove vive ogni capacità, per strumento. Integrato, opzionale o tramite estensio
 - **Uno stato che sopravvive a sessioni e agenti.** Checkbox del README, log dei task, un indice di lavoro delimitato e un file di stato leggibile dalle macchine vengono scritti a ogni confine, così un’altra sessione o un altro agente prosegue da disco. Anche una creazione del piano interrotta è recuperabile.
 - **Un verificatore di conformità per il repository stesso.** Uno script in sola lettura verifica la harness e ogni piano rispetto alla specifica, riconosce entrambi i cicli di vita dei piani ed esce con un codice adatto alla CI.
 - **Carico di istruzioni misurato e pubblicato.** Uno script sottoposto a commit pubblica due misurazioni per ogni flusso — il pacchetto d’ingresso caricato all’avvio di una sessione e il percorso end-to-end una volta scattati i trigger reali — più ciò che ciascuna esclude, cosicché la sola cifra d’ingresso non sia mai letta come il costo totale di un’esecuzione. I risultati, aumenti inclusi, sono pubblicati in byte, mai come percentuali di token o di costo.
-- **Un livello di registrazione supportato da prove.** Contratto immutabile (contract.json), registro eventi append-only (journal.ndjson), ricevute e gate osservati garantiscono prove oggettive.
+- **Un livello di registrazione supportato da prove.** Un contratto immutabile (contract.json), journal eventi append-only (journal.ndjson), ricevute ricalcolate e gate osservati garantiscono che il completamento sia dimostrato anziché asserito.
 - **Delega multi-agente sicura e autonomia dello sciame.** Esecuzione parallela in worktree dedicati, pacchetti strutturati di handoff e successione ordinata dei leader prevengono derive e conflitti.
 
 ## Limiti onesti

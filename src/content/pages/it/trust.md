@@ -47,7 +47,7 @@ Segnala i problemi di sicurezza **privatamente tramite il sistema di segnalazion
 
 ## Limitazioni oneste
 
-- Le release sono checksummate, ma non ancora firmate crittograficamente — la firma è pianificata, non ancora implementata.
+- Le release sono checksummate, ma non ancora firmate — la firma è pianificata, non ancora implementata.
 - Deep Work Plan esegue un agente di coding autonomo sul tuo repository. Rivedi il piano proposto e i suoi diff; la metodologia è progettata per quella revisione, non per sostituirla.
 - Queste affermazioni di fiducia descrivono solo le fonti ufficiali. Una copia modificata o di terze parti che si è allontanata dai repository non gode di nessuna di queste garanzie — verificala prima.
 

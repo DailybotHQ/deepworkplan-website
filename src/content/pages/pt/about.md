@@ -19,8 +19,7 @@ O Deep Work Plan (DWP) é uma metodologia, não um produto. Ele define como tran
 - **Planejar antes de executar** — Nenhum código é escrito até que o plano seja acordado. O plano é um contrato entre você e o agente. [Leia a metodologia](/methodology)
 - **As tarefas são atômicas** — Cada tarefa tem escopo definido para que possa ser executada e verificada por si só, e então comitada de forma atômica. [Veja a especificação](/spec)
 - **Verifique tudo** — Cada tarefa termina com uma verificação explícita antes que a próxima comece, com o progresso registrado no git. [Explore o kit](/kit)
-- **Evidência verificada sobre narrativa** — A conclusão é comprovada por gates executáveis, recibos criptográficos e um journal append-only — nunca pela afirmação não verificada de um agente. [Ler a camada de registro](/pt/spec/record-layer)
-- Complementos opcionais do Ecossistema 1.0 (agentkit, Herdr, devcontainer, Vim, revisor)
+- **Evidência verificada sobre narrativa** — A conclusão é comprovada por gates executados e um diário append-only: uma tarefa só é encerrada quando as evidências registradas atendem aos seus critérios de aceitação, nunca pela declaração autorreferida de um agente. [Ler a camada de registro](/pt/spec/record-layer)
 
 ---
 

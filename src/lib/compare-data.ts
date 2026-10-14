@@ -11,7 +11,7 @@
  */
 
 /** ISO date of the last fact review; rendered on the page in the reader's locale. */
-export const COMPARE_REVIEWED_ON = '2026-10-14';
+export const COMPARE_REVIEWED_ON = '2026-09-11';
 
 /** The three neutral cell values. Never "no", "missing" or "lacks". */
 export type CellValue = 'built-in' | 'optional' | 'not-in-scope';

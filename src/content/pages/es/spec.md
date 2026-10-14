@@ -11,7 +11,7 @@ lastUpdated: 2026-09-28
 La especificación es la definición precisa y legible de la metodología — las estructuras y protocolos que comparten las personas y los agentes. Establece, en términos normativos RFC-2119, cómo se estructura un plan guiado por especificación y cómo un agente debe ejecutar contra él: el plan es la fuente de verdad, las puertas de validación son binarias y el propio repositorio lleva el harness que un agente necesita. Está organizada en documentos ordenados:
 
 - **Estándar de documentación** — la estructura de repositorio AI-first.
-- **Capa de registro** — la capa de registro respaldada por evidencia: contrato, diario, clases de evidencia (afirmada vs observada), aprobación, enmiendas y recibos criptográficos.
+- **Capa de registro** — la capa de registro respaldada por evidencia: contrato, diario, clases de evidencia (afirmada vs observada), aprobación, enmiendas y recibos.
 - **Recursos y habilidades** — ejecución acotada: manifiesto de contexto, envolvente de recursos, capacidades del host, registro de complementos y habilidades provistas por complementos.
 - **Delegación** — ejecución multiagente y en enjambre: árboles de trabajo seguros en paralelo, eventos de delegación, transportes y sucesión de líderes por épocas.
 - **Estado del plan** — la capa de estado legible por máquina: instantánea derivada del diario en v6/v7 (`ledger.py project`), capa de estado histórica de v5 (`manifest.json` y `state.json`) y reconciliación.

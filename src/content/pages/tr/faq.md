@@ -130,19 +130,19 @@ Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve aja
 
 ### Birden fazla ajan bir planda paralel olarak güvenle çalışabilir mi?
 
-Evet. `parallel_safe: yes` olarak bildirilen görevler ayrılmış git worktree lerinde eşzamanlı çalışır. Her görev yalnızca bildirilen Dokunulan Yüzeye izole dallarda yazar. Kilit altındaki salt-eklenir günlük olayları sıralar ve tamamlanan işler hatlar arası kirlenme olmadan entegre edilir.
+Evet, açık kurallar altında. Bir v7 planı, dokunulan yüzeyi kardeş bir görevle örtüşmediğinde ve çıktısı sınırlı olduğunda görevi `parallel_safe` olarak işaretleyebilir; yalnızca `agent_delegation` izni veren bir sözleşme bu görevin başka bir kodlama ajanına verilmesini sağlar — kendi git çalışma ağacında başsız olarak (agentkit) veya başka bir Herdr bölmesinde (Herdr). Yazma delegesi yalnızca kendi çalışma ağacında çalışır, üst oturum planın günlüğünün tek yazarı olarak kalır ve delege asla daha ileriye yetki devretmez.
 
 [Delegasyon hakkında okuyun](https://deepworkplan.com/tr/spec/delegation)
 
 ### Delege edilen bir alt ajanın sonucuna otomatik olarak güvenilir mi?
 
-Hayır. Bir delegenin çalışması, üst planın doğrulama geçidi çalıştırıp gözlemleyene kadar "iddia edilen" kanıt olarak kaydedilir. Geçit geçmezse veya bildirilmemiş dosyalara dokunursa görev tamamlanamaz. Delegasyon, doğrulama çıtasını düşürmeden kapasiteyi artırır.
+Hayır. Bir delegenin sonucu, üst plan çalışmayı entegre edene ve kendi geçit çalıştırıcısı görevin geçidini yürütüp `observed` kanıtı kaydedene kadar `asserted` olarak kaydedilir. Tamamlanmış bir yetki devri hiçbir zaman bir kriteri tek başına kapatmaz, dolayısıyla yetki devri tamamlama çıtasını düşürmeden erişim alanını genişletir.
 
 [Kayıt katmanı spesifikasyonunu okuyun](https://deepworkplan.com/tr/spec/record-layer)
 
 ### Bir ajan planın ortasında belirteç veya hız sınırına ulaşırsa ne olur?
 
-Sürü otonomisi kalan kapasiteyi izler. Sınırlara yaklaşıldığında aktif lider yeni görev kabulünü durdurur, makbuzlar ve çalışma dizini içeren yapılandırılmış bir devir paketi (`dwp-handoff-v1`) oluşturur ve yürütmeyi ardıl lider ajana devreder.
+Her ajan görev sınırlarında kendi kapasitesini kontrol eder. Boş yer kaldığında devam eder; kapasite azaldığında yalnızca bitirebileceği görevi tamamlar; kritik seviyeye geldiğinde güvenli bir noktaya ulaşır, küçük bir devir paketi yazar (`dwp-handoff-v1`: yapılanlar, doğrulananlar ve doğrulanmayanlar ile sonraki adımlar), lidere bildirir ve durur. Lider, başka bir hesapta halef başlatır; halef paketi kabul eder, pakette doğrulanmamış olarak listelenen her geçidi yeniden çalıştırarak planı sürdürür. Liderin kendisi tükenirse liderliği halefe devreder; liderlik değişiklikleri artan bir dönem (epoch) taşır, böylece aynı anda yalnızca bir lider hareket eder.
 
 [Metodolojiyi okuyun](https://deepworkplan.com/tr/methodology)
 
@@ -154,7 +154,7 @@ DWP yedi sınıflı katı bir eskalasyon taksonomisi tanımlar (AGENT_PROTOCOL �
 
 ### Görevin tamamlandığı ajanın anlatısal iddiasının ötesinde nasıl kanıtlanır?
 
-Tamamlanma, değişmez bir sonuç sözleşmesi, doğrulanabilir makbuzlar ve günlüğe kaydedilen ikili geçit sonuçları gerektirir. Yalnızca iddia edilen kabul kriterleri doğrulanmış yetkiye sahip insan onayı gerektirir. Plan, başarılı bir Final Review olmadan tamamlanamaz.
+Bir görev, yalnızca kaydedilen kanıtlar kabul kriterlerinin her birini karşıladığında tamamlanır. Yürütme başladığında sonuç sözleşmesi içerik adreslidir ve değiştirilemez, her olay planın günlüğüne eklenir ve yalnızca geçit çalıştırıcısı `observed` kanıtı kaydeder. İnsan muhakemesi gerektiren bir kriter, yalnızca açık bir yetki işaretçisine sahip kayıtlı bir insan onayıyla kapatılır; makbuz kayıtlardan yeniden hesaplanır, asla elle yazılmaz. Nihai İnceleme ardından güvenlik geçişini ve nihai durum üzerindeki tam doğrulamayı çalıştırır.
 
 [Kayıt katmanı spesifikasyonunu okuyun](https://deepworkplan.com/tr/spec/record-layer)
 

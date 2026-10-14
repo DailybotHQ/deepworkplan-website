@@ -130,19 +130,19 @@ Ja, wenn der Plan im Voraus genehmigt wurde, die erforderliche Zustandsebene tr�
 
 ### Können mehrere Agenten parallel an einem Plan arbeiten und wie bleibt das sicher?
 
-Ja. Als `parallel_safe: yes` deklarierte Aufgaben laufen parallel in eigenen Git-Worktrees. Jede Aufgabe schreibt strikt auf ihre deklarierte Touched Surface auf isolierten Branches. Ein Append-Only-Journal serialisiert Ereignisse unter Lock, und Ergebnisse werden ohne Spurüberschneidung integriert.
+Ja, unter expliziten Regeln. Ein v7-Plan kann eine Aufgabe als `parallel_safe` markieren, wenn sich ihre berührte Oberfläche nicht mit der einer Geschwisteraufgabe überschneidet und ihre Ausgabe begrenzt ist. Nur ein Vertrag mit `agent_delegation` erlaubt es, diese Aufgabe an einen weiteren Coding-Agenten zu übergeben — headless im eigenen Git-Worktree (agentkit) oder in einem anderen Herdr-Pane (Herdr). Ein schreibender Delegierter arbeitet nur im eigenen Worktree, die übergeordnete Sitzung bleibt der einzige Schreiber des Plan-Journals und ein Delegierter delegiert niemals weiter.
 
 [Über Delegation lesen](https://deepworkplan.com/de/spec/delegation)
 
 ### Wird das Ergebnis eines delegierten Subagenten automatisch übernommen?
 
-Nein. Ergebnisse delegierter Agenten gelten als reine Behauptung („asserted“), bis das deklarierte Validierungs-Gate des Elternplans sie ausführt und beobachtet („observed“). Scheitert das Gate oder werden nicht deklarierte Dateien berührt, schlägt die Aufgabe fehl.
+Nein. Das Ergebnis eines Delegierten wird als `asserted` erfasst, bis der übergeordnete Plan die Arbeit integriert und dessen eigener Gate-Runner das Gate der Aufgabe ausführt — das Einzige, was `observed`-Nachweise aufzeichnet. Eine abgeschlossene Delegation schließt ein Kriterium niemals von selbst; Delegation erweitert die Reichweite, ohne die Anforderungen an die Fertigstellung zu senken.
 
 [Spezifikation der Aufzeichnungsschicht](https://deepworkplan.com/de/spec/record-layer)
 
 ### Was passiert, wenn ein Agent mitten im Plan an Nutzungs- oder Token-Limits stößt?
 
-Die Schwarm-Autonomie überwacht die Restkapazität. Nahen Grenzwerte, stoppt der aktive Lead neue Aufgaben, erstellt ein strukturiertes Handoff-Paket (`dwp-handoff-v1`) mit Belegen und übergibt die Leitung an einen Nachfolge-Agenten mit monotonen Epochen.
+Jeder Agent überprüft seine eigene Kapazität an den Aufgabengrenzen. Ist noch Spielraum vorhanden, setzt er fort; wird die Kapazität knapp, schließt er nur die Aufgabe ab, die er noch schaffen kann; wird sie kritisch, steuert er einen sicheren Punkt an, schreibt ein kleines Übergabepaket (`dwp-handoff-v1`: was erledigt, verifiziert und nicht verifiziert ist, sowie die nächsten Schritte), benachrichtigt den Lead und stoppt. Der Lead startet einen Nachfolger auf einem anderen Konto, der das Paket übernimmt, den Plan wieder aufnimmt und jedes im Paket als nicht verifiziert aufgeführte Gate erneut ausführt. Geht dem Lead selbst die Kapazität aus, übergibt er die Leitung an einen Nachfolger; Führungswechsel tragen eine aufsteigende Epoche, sodass immer nur ein Lead gleichzeitig agiert.
 
 [Methodik lesen](https://deepworkplan.com/de/methodology)
 
@@ -154,7 +154,7 @@ DWP definiert eine strenge Eskalationstaxonomie mit sieben Klassen (AGENT_PROTOC
 
 ### Wie wird Fertigstellung jenseits reiner Agenten-Behauptungen bewiesen?
 
-Abschluss erfordert einen unveränderlichen Vertrag, kryptografische Belege und binäre Gate-Ergebnisse im Journal. Reine Behauptungen erfordern explizite menschliche Freigabemarker. Der Plan schließt erst mit bestandenem Final Review.
+Eine Aufgabe wird nur abgeschlossen, wenn aufgezeichnete Nachweise jedes ihrer Akzeptanzkriterien erfüllen. Der Ergebnisvertrag ist inhaltsadressiert und nach Beginn der Ausführung unveränderlich, jedes Ereignis wird an das Plan-Journal angehängt und nur der Gate-Runner zeichnet `observed`-Nachweise auf. Ein Kriterium, das menschliches Urteilsvermögen erfordert, schließt nur durch eine aufgezeichnete menschliche Freigabe mit explizitem Autorisierungsmarker; der Beleg wird aus den Aufzeichnungen neu berechnet, niemals handschriftlich erstellt. Das Final Review führt anschließend den Sicherheitsdurchlauf und die vollständige Validierung des Endzustands durch.
 
 [Spezifikation der Aufzeichnungsschicht](https://deepworkplan.com/de/spec/record-layer)
 

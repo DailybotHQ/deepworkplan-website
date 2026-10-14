@@ -49,7 +49,7 @@ Güvenlik sorunlarını ilgili depoda **GitHub'ın özel güvenlik açığı bil
 
 ## Dürüst sınırlamalar
 
-- Sürümler sağlama toplamlarına sahiptir, henüz kriptografik olarak imzalanmamıştır — imzalama planlandı, tamamlanmadı.
+- Sürümler sağlama toplamlarına sahiptir, henüz imzalanmamıştır — imzalama planlandı, tamamlanmadı.
 - Deep Work Plan, deponuza karşı otonom bir kodlama ajanı çalıştırır. Önerilen planı ve farklarını gözden geçirin; metodoloji bu inceleme için tasarlanmıştır, onun yerini almak için değil.
 - Buradaki güven iddiaları yalnızca resmi kaynakları tanımlar. Depolardan sapan değiştirilmiş veya üçüncü taraf bir kopya, bu garantilerin hiçbirini taşımaz — önce doğrulayın.
 

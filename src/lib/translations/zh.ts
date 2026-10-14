@@ -284,47 +284,47 @@ export const zh: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: '参考实现。已针对原生斜杠命令和 WebFetch 进行行为测试。',
+          note: '参考实现，具备原生斜杠命令。已通过行为测试。',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: '已完成安装测试。包含项目规则和 .cursor/ 命令集成的完整适配器。',
+          note: '通过项目规则与 .cursor → .agents 符号链接提供完整适配器。已通过安装测试。',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: '已完成行为测试。基于 Markdown 指令，支持原生工具调用和沙盒执行。',
+          note: '通过 AGENTS.md 与 # 命令流程提供完整适配器。已通过行为测试。',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: '已完成安装测试。命令和规范通过 AGENTS.md 和 # 指令执行。',
+          note: '完整适配器：通过 AGENTS.md 和 # 流程运行 dwp-* 命令。已通过安装测试。',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: '已完成安装测试。适配器结合 AGENTS.md 规则并提供原生 WebFetch 支持。',
+          note: '通过 AGENTS.md 与 # 命令流程提供完整适配器。已通过安装测试。',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: '已完成安装测试的开源适配器。原生读取 AGENTS.md 并通过 # 运行。',
+          note: '开源。原生读取 AGENTS.md 并通过 # 命令运行 dwp-*。已通过安装测试。',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: '已完成安装测试。Cascade 工作流驱动 Deep Work Plan 的完整生命周期。',
+          note: '规则结合 # 命令流程驱动完整的 Deep Work Plan 循环。已通过安装测试。',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: '已完成安装测试的开源适配器。系统提示词规则驱动 dwp-* 各步骤。',
+          note: '开源。Markdown 规则与 # 命令运行每一个 dwp-* 步骤。已通过安装测试。',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: '已完成安装测试。具备原生 AGY 命令界面的完整适配器。',
+          note: '具备 Markdown 命令流程的完整适配器。已通过安装测试。',
         },
       ],
     },
@@ -475,7 +475,7 @@ export const zh: SiteTranslations = {
       {
         title: '可验证证据重于口头陈述',
         description:
-          '完成度通过可执行关卡、加密凭证及仅追加日志证明，绝不依赖代理自身的叙述性汇报。',
+          '完成情况由执行过的关卡与只追加日志证明：只有当记录在案的证据满足验收标准时任务才算完成，绝不凭代理的口头声称。',
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -939,7 +939,7 @@ export const zh: SiteTranslations = {
             id: 'parallel-agents',
             question: '多个代理能否在同一计划中安全地并行工作？',
             answer:
-              '可以。声明为 `parallel_safe: yes` 的任务可以在专用的 git 工作树中并发执行。每个任务严格在隔离分支中写入其声明的修改范围，避免冲突。加锁的仅追加日志对事件进行排序，已完成的工作得以安全集成。',
+              '是的，在明确规则之下。当某项任务的触及面与同级任务不重叠且输出有界时，v7 计划可将其标记为 `parallel_safe`；并且只有授予了 `agent_delegation` 的契约才允许将该任务交给另一个编码代理——无论是在其专属 git 工作树中无界面运行（agentkit），还是在另一个 Herdr 面板中运行（Herdr）。负责写入的代理仅在其专属工作树中工作，父会话始终是计划日志的唯一写入者，且代理绝不再行委托。',
             linkLabel: '阅读关于委托的说明',
             linkPath: '/spec/delegation',
           },
@@ -947,7 +947,7 @@ export const zh: SiteTranslations = {
             id: 'delegate-trust',
             question: '被委托子代理的工作成果会自动被信任吗？',
             answer:
-              '不会。受委托代理的工作最初记录为“主张”证据，直到父计划声明的验证关卡实际执行并观察到它（“实测证据”）。如果关卡未通过或触碰了未声明的文件，任务将无法完成。',
+              '不是。代理的结果会被记录为 `asserted`，直到父计划集成该工作并且其自身的关卡运行器执行了该任务的关卡——这也是唯一能记录 `observed` 证据的方式。一次完成的委托绝不会自行关闭任何验收标准，因此委托扩展了执行范围，而从未降低完成门槛。',
             linkLabel: '阅读记录层规范',
             linkPath: '/spec/record-layer',
           },
@@ -955,7 +955,7 @@ export const zh: SiteTranslations = {
             id: 'capacity-handoff-succession',
             question: '当代理在执行中途遇到额度或速率限制时会发生什么？',
             answer:
-              '群体自主机制会监控剩余容量。接近限制时，主导代理停止接收新任务，生成包含持久凭单的结构化交接包 (`dwp-handoff-v1`)，并将执行权移交给后继主导代理，确保流程不中断。',
+              '每个代理在任务边界处检查自身容量。若尚有空间则继续；当容量偏低时仅完成它有把握完成的任务；当处于临界状态时，它会到达安全点，写入一份精简的交接包（`dwp-handoff-v1`：包含已完成、已验证与未验证的内容以及后续步骤），通知领导者并停止。领导者在另一个账户上启动继任者，继任者接受该交接包并恢复计划执行，重新运行包中列为未验证的所有关卡。若领导者自身的容量耗尽，它会将领导权移交给继任者；领导权变更附带递增的纪元（epoch），确保同一时刻只有一个领导者在行动。',
             linkLabel: '阅读方法论',
             linkPath: '/methodology',
           },
@@ -971,7 +971,7 @@ export const zh: SiteTranslations = {
             id: 'proven-done',
             question: '如何超越代理的叙述性汇报来证明任务确实完成？',
             answer:
-              '完成必须依赖不可变的成果契约、可验证的凭单以及记录在仅追加日志中的二进制关卡结果。主张的标准必须有人工签名。计划必须通过完整的最终审查 (Final Review) 方能关闭。',
+              '只有当记录的证据满足每项验收标准时任务才算完成。一旦执行开始，成果契约基于内容寻址且不可篡改，每个事件都会追加到计划日志中，并且只有关卡运行器能记录 `observed` 证据。需要人工判断的标准只能通过带有明确权限标记的记录化人工签核来关闭；收据是从记录中重新计算得出的，绝非手写。最终评审（Final Review）随后会在最终状态上执行安全检查与完整验证。',
             linkLabel: '阅读记录层规范',
             linkPath: '/spec/record-layer',
           },
@@ -1284,7 +1284,7 @@ export const zh: SiteTranslations = {
         },
         {
           title: '基于实证的记录层',
-          body: '不可变契约 (contract.json)、仅追加事件日志 (journal.ndjson) 与实测关卡确保交付可被客观证实。',
+          body: '不可篡改的契约（contract.json）、只追加的事件日志（journal.ndjson）、重新计算的收据和实际观察到的关卡确保完成是得到证明的而非自称的。',
         },
         {
           title: '安全的多代理委托与群体自主性',
@@ -1342,7 +1342,7 @@ export const zh: SiteTranslations = {
       '在完成核查之前，请将该技能视为不可信的。每个发布版本都会附带一份涵盖所有已发布技能文件的 SHA256SUMS 文件。下载你打算安装的版本所对应的文件，然后验证你的副本是否匹配——非零退出码意味着某个文件不匹配，此时应立即停止。',
     codeLabel: 'shell',
     verifyNote:
-      '发布版本有校验和，但未经签名——签名（cosign 或维护者 GPG）是已记录的下一步计划，而非当前的承诺。由于一切都是公开的，你也可以将任意文件与仓库在其 tag 处的内容进行比对。',
+      '发布版本附带校验和，而非签名——签名（cosign 或维护者 GPG）是已记录的下一步，而非当前的主张。由于一切都是开源的，你也可以将任何文件与该标签下的代码仓库进行比对。',
     vimNote:
       '同样的规则也适用于 DeepWorkPlan Vim 的安装程序：其页面会显示当前提供的脚本的 SHA-256，并给出下载、检查、验证、运行的步骤。',
     vimLinkLabel: '检查 DeepWorkPlan Vim 安装程序',
@@ -1358,7 +1358,7 @@ export const zh: SiteTranslations = {
     linkSkillPolicy: '技能安全政策与威胁模型',
     limitationsTitle: '诚实的局限性',
     limitations: [
-      '发布版本有校验和，但尚未经过密码学签名——签名已在计划之中，尚未完成。',
+      '发布版本有校验和，但尚未经过签名——签名已在计划之中，尚未完成。',
       'Deep Work Plan 对你的代码仓库运行一个自主编码代理。请审阅它提出的计划和 diff；该方法论正是为这种审阅而设计的，而非取代它。',
       '这里的信任声明仅描述官方来源。已偏离仓库的经修改或第三方副本不附带这些保证——请先验证。',
     ],

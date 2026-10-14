@@ -136,19 +136,19 @@ Yes — the orchestrator-hub archetype exists for exactly that. A hub repository
 
 ### Can several agents work on one plan in parallel, and how is it kept safe?
 
-Yes. Tasks declared with `parallel_safe: yes` can execute concurrently in dedicated git worktrees. Each task writes strictly to its declared Touched Surface with isolated working branches, preventing conflicting edits. A single append-only journal serializes events under a lock, and completed work is integrated without cross-lane pollution.
+Yes, under explicit rules. A v7 plan can mark a task `parallel_safe` when its touched surface does not overlap a sibling's and its output is bounded, and only a contract that grants `agent_delegation` lets that task go to another coding agent — headless in its own git worktree (agentkit) or in another Herdr pane (Herdr). A writing delegate works only in its own worktree, the parent session stays the only writer of the plan's journal, and a delegate never delegates further.
 
 [Read about delegation](https://deepworkplan.com/spec/delegation)
 
 ### Is a delegate subagent's result automatically trusted?
 
-No. A delegate's work is recorded as `asserted` evidence until the parent plan's declared validation gate actually executes and observes it (`observed` evidence). If the gate does not pass or touches undeclared files, the task cannot complete. Delegation expands capacity without lowering the verification bar.
+No. A delegate's result is recorded as `asserted` until the parent plan integrates the work and its own gate runner executes the task's gate, which is the only thing that records `observed` evidence. A completed delegation never closes a criterion by itself, so delegation adds reach without lowering the bar for completion.
 
 [Read the record layer spec](https://deepworkplan.com/spec/record-layer)
 
 ### What happens when an agent hits usage, token, or rate limits mid-plan?
 
-Swarm autonomy monitors remaining capacity. When limits approach, the active lead stops accepting new tasks, generates a structured handoff packet (`dwp-handoff-v1`) with durable receipts and working index, and transfers execution to a successor lead agent with monotonic epochs and fencing so execution never stalls halfway.
+Each agent checks its own capacity at task boundaries. With room left it continues; when capacity runs low it finishes only the task it can finish; when it is critical it reaches a safe point, writes a small handoff packet (`dwp-handoff-v1`: what is done, verified and not verified, and the next steps), notifies the lead and stops. The lead launches a successor on another account, which accepts the packet and resumes the plan, re-running every gate the packet lists as not verified. If the lead itself runs out, it hands the leadership to a successor; leadership changes carry an increasing epoch so only one lead acts at a time.
 
 [Read the methodology](https://deepworkplan.com/methodology)
 
@@ -160,7 +160,7 @@ DWP defines a strict seven-class escalation taxonomy (AGENT_PROTOCOL §7.5): C1 
 
 ### How is task completion proven beyond an agent's narrative claim?
 
-Completion requires an immutable outcome contract, verifiable receipts, and binary gate results recorded in the append-only journal. Asserted acceptance criteria require explicit human sign-off markers with verified authority. The plan cannot complete without a passing Final Review security and final-state pass.
+A task completes only when recorded evidence satisfies each of its acceptance criteria. The outcome contract is content-addressed and immutable once execution starts, every event is appended to the plan's journal, and only the gate runner records `observed` evidence. A criterion that needs human judgment closes only through a recorded human sign-off with an explicit authority marker; the receipt is recomputed from the records, never handwritten. The Final Review then runs the security pass and the full validation on the final state.
 
 [Read the record layer spec](https://deepworkplan.com/spec/record-layer)
 

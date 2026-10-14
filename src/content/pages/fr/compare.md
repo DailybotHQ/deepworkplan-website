@@ -1,7 +1,7 @@
 ---
 title: "Comparatif de Deep Work Plan face aux alternatives pilotées par les specs"
 description: "Positionnement de Deep Work Plan face aux outils basés sur les spécifications, frameworks d agents et modes plan natifs, avec sources et date de révision."
-lastUpdated: 2026-10-14
+lastUpdated: 2026-09-11
 ---
 
 ## Deep Work Plan et les alternatives
@@ -16,7 +16,7 @@ Trois valeurs décrivent chaque capacité. Elles disent où se trouve une capaci
 - **Optionnel ou via extension**
 - **Hors périmètre**
 
-Dernière révision: 2026-10-14
+Dernière révision: 2026-09-11
 
 ## Les alternatives, selon leurs propres termes
 
@@ -74,7 +74,7 @@ Où se trouve chaque capacité, par outil. Intégré, optionnel ou via extension
 - **Un état qui survit aux sessions et aux agents.** Cases à cocher du README, journaux de tâches, index de travail borné et fichier d’état lisible par machine sont écrits à chaque frontière, pour qu’une autre session ou un autre agent poursuive depuis le disque. Même une création de plan interrompue est récupérable.
 - **Un vérificateur de conformité pour le dépôt lui-même.** Un script en lecture seule vérifie le harness et chaque plan par rapport à la spécification, comprend les deux cycles de vie des plans et sort avec un code adapté à la CI.
 - **Charge d’instructions mesurée et publiée.** Un script livré dans le dépôt publie deux mesures par flux — le paquet d’entrée chargé au début d’une session, et le parcours de bout en bout une fois que ses déclencheurs réels se produisent — plus ce que chacun exclut, afin que le chiffre d’entrée seul ne soit jamais lu comme le coût total d’une exécution. Les résultats, hausses comprises, sont publiés en octets, jamais en pourcentages de tokens ou de coût.
-- **Une couche de registre appuyée sur des preuves.** Contrat immuable (contract.json), journal d événements en ajout seul (journal.ndjson), reçus cryptographiques et portes observées prouvent l achèvement.
+- **Une couche de registre appuyée sur des preuves.** Un contrat immuable (contract.json), un journal d'événements en ajout seul (journal.ndjson), des reçus recalculés et des portes observées garantissent que l'achèvement est prouvé plutôt qu'affirmé.
 - **Délégation multi-agents sûre et autonomie en essaim.** Exécution parallèle en worktrees dédiés, résultats affirmés jusqu à observation par porte, et transmission de relais évitent toute dérive.
 
 ## Limites assumées

@@ -49,7 +49,7 @@ Laporkan masalah keamanan **secara pribadi melalui pelaporan kerentanan privat G
 
 ## Keterbatasan yang jujur
 
-- Rilis ber-checksum, belum ditandatangani secara kriptografis — penandatanganan direncanakan, belum dilakukan.
+- Rilis ber-checksum, belum ditandatanganis — penandatanganan direncanakan, belum dilakukan.
 - Deep Work Plan menjalankan coding agent otonom terhadap repositori Anda. Tinjau rencana yang diusulkannya dan diff-nya; metodologi dirancang untuk tinjauan itu, bukan untuk menggantikannya.
 - Klaim kepercayaan di sini hanya mendeskripsikan sumber resmi. Salinan yang dimodifikasi atau pihak ketiga yang telah menyimpang dari repositori tidak membawa satu pun dari jaminan ini — verifikasi dulu.
 

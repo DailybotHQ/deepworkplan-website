@@ -10,7 +10,7 @@ lastUpdated: 2026-09-28
 
 The specification is the precise, readable definition of the methodology — the structures and protocols that humans and agents share. It states, in normative RFC-2119 terms, how a spec-driven plan is structured and how an agent must execute against it: the plan is the source of truth, validation gates are binary, and the repository itself carries the harness an agent needs. It is organized into ordered documents:
 
-- **Record layer** — the evidence-backed record layer: contract, journal, evidence classes (asserted vs observed), sign-off, amendments, and cryptographic receipts.
+- **Record layer** — the evidence-backed record layer: contract, journal, evidence classes (asserted vs observed), sign-off, amendments, and receipts.
 - **Resources and abilities** — bounded execution: context manifest, resource envelope, host capabilities, addon registry, and addon-provided abilities.
 - **Delegation** — multi-agent and swarm execution: parallel-safe worktrees, delegation events, transports, and epoch-fenced lead succession.
 - **Plan state** — the machine-readable state layer: derived snapshot of the journal in v6/v7 (`ledger.py project`), historical v5 state layer (`manifest.json` and `state.json`), and reconciliation.

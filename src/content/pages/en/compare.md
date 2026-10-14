@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan Compared with Spec-Driven & Agent Alternatives"
 description: "How Deep Work Plan relates to spec-driven tools, agent workflow frameworks and vendor plan modes: each on its own terms, with sources and a review date."
-lastUpdated: 2026-10-14
+lastUpdated: 2026-09-11
 ---
 
 ## Deep Work Plan and the alternatives
@@ -16,7 +16,7 @@ Three values describe each capability. They say where a capability lives in a to
 - **Optional or via extension**
 - **Not in scope**
 
-Last reviewed: 2026-10-14
+Last reviewed: 2026-09-11
 
 ## The alternatives, on their own terms
 
@@ -74,7 +74,7 @@ Where each capability lives, per tool. Built in, optional or via extension, or n
 - **State that survives sessions and agents.** README checkboxes, task logs, a bounded working index and a machine-readable state file are written at every boundary, so another session or another agent continues from disk. Even an interrupted plan creation is recoverable.
 - **A conformance checker for the repository itself.** A read-only script verifies the harness and every plan against the specification, understands both plan lifecycles and exits with a CI-friendly code.
 - **Instruction load measured and published.** A committed script publishes two measurements per flow — the entry bundle it loads at the start of a session, and the end-to-end path once its real triggers fire — plus what each excludes, so the entry figure alone is never read as a run's total cost. Results, including the increases, are published as bytes, never as token or cost percentages.
-- **An evidence-backed record layer.** An immutable contract (contract.json), append-only event journal (journal.ndjson), cryptographic receipts, and observed gates guarantee completion is proven rather than asserted.
+- **An evidence-backed record layer.** An immutable contract (contract.json), append-only event journal (journal.ndjson), recomputed receipts, and observed gates guarantee completion is proven rather than asserted.
 - **Safe multi-agent delegation & swarm autonomy.** Parallel-safe task execution in dedicated worktrees, asserted-until-gated findings, structured handoff packets, and epoch-fenced lead succession allow multi-agent coordination without drift.
 
 ## Honest limits

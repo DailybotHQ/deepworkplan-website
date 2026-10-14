@@ -288,47 +288,47 @@ export const pt: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Implementação de referência. Testado em comportamento com comandos slash nativos e WebFetch.',
+          note: 'Implementação de referência com comandos slash nativos. Testado em comportamento.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Testado em instalação. Adaptador completo usando regras de projeto e comandos em .cursor/.',
+          note: 'Adaptador completo por regras de projeto e o symlink .cursor → .agents. Testado em instalação.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Testado em comportamento. Instruções em Markdown com chamadas nativas de ferramentas e sandbox.',
+          note: 'Adaptador completo por AGENTS.md e procedimentos de comando #. Testado em comportamento.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Testado em instalação. Comandos e diretrizes executados via AGENTS.md e procedimentos #.',
+          note: 'Adaptador completo: comandos dwp-* executados via AGENTS.md e procedimentos #. Testado em instalação.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Testado em instalação. O adaptador aproveita as regras do AGENTS.md com suporte a WebFetch.',
+          note: 'Adaptador completo por AGENTS.md e procedimentos de comando #. Testado em instalação.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Adaptador open-source testado em instalação. Lê AGENTS.md e executa dwp-* via comandos #.',
+          note: 'Código aberto. Lê AGENTS.md nativamente e executa dwp-* por comandos #. Testado em instalação.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Testado em instalação. Fluxos Cascade e regras conduzem o ciclo completo do Deep Work Plan.',
+          note: 'Regras e procedimentos de comando # conduzem o loop completo do Deep Work Plan. Testado em instalação.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Adaptador open-source testado em instalação. Regras de sistema e procedimentos # para dwp-*.',
+          note: 'Código aberto. Regras em Markdown e comandos # executam cada etapa do dwp-*. Testado em instalação.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Testado em instalação. Adaptador completo com superfície nativa de comandos AGY.',
+          note: 'Adaptador completo com procedimentos de comando em Markdown. Testado em instalação.',
         },
       ],
     },
@@ -480,7 +480,7 @@ export const pt: SiteTranslations = {
       {
         title: 'Evidência verificada sobre narrativa',
         description:
-          'A conclusão é comprovada por gates executáveis, recibos criptográficos e um journal append-only — nunca pela afirmação não verificada de um agente.',
+          'A conclusão é comprovada por gates executados e um diário append-only: uma tarefa só é encerrada quando as evidências registradas atendem aos seus critérios de aceitação, nunca pela declaração autorreferida de um agente.',
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -968,7 +968,7 @@ export const pt: SiteTranslations = {
             question:
               'Vários agentes podem trabalhar em um plano em paralelo e como isso é mantido seguro?',
             answer:
-              'Sim. Tarefas declaradas com `parallel_safe: yes` podem ser executadas concorrentemente em worktrees git dedicadas. Cada tarefa grava estritamente na sua Superfície Modificada declarada em branches isoladas, evitando conflitos. Um diário de eventos append-only serializa eventos sob bloqueio e o trabalho concluído é integrado sem poluição entre faixas.',
+              'Sim, sob regras explícitas. Um plano v7 pode marcar uma tarefa como `parallel_safe` quando sua superfície afetada não se sobrepõe à de uma irmã e sua saída é delimitada, e somente um contrato que conceda `agent_delegation` permite que essa tarefa vá para outro agente de código — headless em seu próprio worktree do git (agentkit) ou em outro painel do Herdr (Herdr). Um delegado de escrita trabalha apenas em seu próprio worktree, a sessão pai permanece como a única escritora do diário do plano e um delegado nunca delega adiante.',
             linkLabel: 'Ler sobre delegação',
             linkPath: '/spec/delegation',
           },
@@ -977,7 +977,7 @@ export const pt: SiteTranslations = {
             question:
               'O resultado de um subagente delegado é confiado automaticamente?',
             answer:
-              'Não. O trabalho do delegado é gravado como evidência "afirmada" até que o gate de validação declarado no plano pai execute e o observe ("evidência observada"). Se o gate falhar ou tocar arquivos não declarados, a tarefa não pode ser concluída. A delegação expande a capacidade sem diminuir o rigor.',
+              'Não. O resultado de um delegado é registrado como `asserted` até que o plano pai integre o trabalho e seu próprio executor de gates rode o gate da tarefa, que é a única coisa que registra evidência `observed`. Uma delegação concluída nunca encerra um critério por si só, portanto a delegação expande o alcance sem reduzir o rigor para a conclusão.',
             linkLabel: 'Ler a especificação da camada de registro',
             linkPath: '/spec/record-layer',
           },
@@ -986,7 +986,7 @@ export const pt: SiteTranslations = {
             question:
               'O que acontece quando um agente atinge limites de uso, tokens ou taxa durante o plano?',
             answer:
-              'A autonomia de enxame monitora a capacidade restante. Quando os limites se aproximam, o líder ativo para de aceitar novas tarefas, gera um pacote de handoff estruturado (`dwp-handoff-v1`) com recibos e índice de trabalho, e transfere a execução para um líder sucessor com épocas monotônicas para nunca travar pela metade.',
+              'Cada agente verifica sua própria capacidade nos limites das tarefas. Com margem restante, continua; quando a capacidade diminui, conclui apenas a tarefa que pode finalizar; quando é crítica, atinge um ponto seguro, grava um pequeno pacote de transição (`dwp-handoff-v1`: o que foi feito, verificado e não verificado, e os próximos passos), notifica o líder e para. O líder inicia um sucessor em outra conta, que aceita o pacote e retoma o plano, reexecutando cada gate que o pacote lista como não verificado. Se o próprio líder esgotar sua capacidade, passa a liderança para um sucessor; as mudanças de liderança carregam uma época crescente para que apenas um líder atue por vez.',
             linkLabel: 'Ler a metodologia',
             linkPath: '/methodology',
           },
@@ -1004,7 +1004,7 @@ export const pt: SiteTranslations = {
             question:
               'Como a conclusão da tarefa é comprovada além da afirmação narrativa do agente?',
             answer:
-              'A conclusão exige um contrato de resultados imutável, recibos verificáveis e resultados binários de gates gravados no diário append-only. Critérios de aceitação afirmados exigem sign-off humano explícito com autoridade verificada. O plano não conclui sem um Final Review aprovado.',
+              'Uma tarefa é concluída apenas quando as evidências registradas satisfazem cada um de seus critérios de aceitação. O contrato de resultados é endereçado por conteúdo e imutável após o início da execução, cada evento é anexado ao diário do plano e somente o executor de gates registra evidências `observed`. Um critério que necessita de julgamento humano é encerrado apenas por meio de uma aprovação humana registrada com um marcador de autoridade explícito; o recibo é recalculado a partir dos registros, nunca escrito à mão. A Revisão Final então executa a etapa de segurança e a validação completa no estado final.',
             linkLabel: 'Ler a especificação da camada de registro',
             linkPath: '/spec/record-layer',
           },
@@ -1327,7 +1327,7 @@ export const pt: SiteTranslations = {
         },
         {
           title: 'Uma camada de registro respaldada por evidências',
-          body: 'Contrato imutável (contract.json), diário de eventos append-only (journal.ndjson), recibos criptográficos e gates observados provam a conclusão do trabalho.',
+          body: 'Um contrato imutável (contract.json), diário de eventos append-only (journal.ndjson), recibos recalculados e gates observados provam a conclusão do trabalho.',
         },
         {
           title: 'Delegação multiagente segura e autonomia de enxame',
@@ -1385,7 +1385,7 @@ export const pt: SiteTranslations = {
       'Trate a skill como não confiável até tê-la verificado. Cada versão anexa um arquivo SHA256SUMS cobrindo a skill distribuída. Baixe-o para a versão que pretende instalar e verifique se a sua cópia corresponde — uma saída diferente de zero significa que um arquivo não corresponde e você deve parar.',
     codeLabel: 'shell',
     verifyNote:
-      'As versões têm checksums, não assinaturas criptográficas — a assinatura (cosign ou GPG do mantenedor) é o próximo passo documentado, não uma garantia atual. Como tudo é aberto, você também pode comparar qualquer arquivo com o repositório na sua tag.',
+      'As versões têm checksums, não assinaturas — a assinatura (cosign ou GPG do mantenedor) é o próximo passo documentado, não uma garantia atual. Como tudo é aberto, você também pode comparar qualquer arquivo com o repositório na sua tag.',
     vimNote:
       'A mesma regra aplica-se ao instalador do DeepWorkPlan Vim: a sua página mostra o SHA-256 do script tal como é servido, com uma receita para obter, inspecionar, verificar e executar.',
     vimLinkLabel: 'Inspecionar o instalador do DeepWorkPlan Vim',
@@ -1401,7 +1401,7 @@ export const pt: SiteTranslations = {
     linkSkillPolicy: 'Política de segurança e modelo de ameaças da skill',
     limitationsTitle: 'Limitações honestas',
     limitations: [
-      'As versões têm checksums, mas ainda não estão criptograficamente assinadas — a assinatura está planejada, não implementada.',
+      'As versões têm checksums, mas ainda não estão assinadas — a assinatura está planejada, não implementada.',
       'O Deep Work Plan executa um agente de coding autônomo no seu repositório. Revise o plano proposto e seus diffs; a metodologia foi projetada para essa revisão, não para substituí-la.',
       'As afirmações de confiança aqui descrevem apenas as fontes oficiais. Uma cópia modificada ou de terceiros que tenha se afastado dos repositórios não tem nenhuma dessas garantias — verifique-a primeiro.',
     ],

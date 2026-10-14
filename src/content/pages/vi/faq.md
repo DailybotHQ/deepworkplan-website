@@ -130,19 +130,19 @@ Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng tr�
 
 ### Nhiều tác tử có thể làm việc song song trên một kế hoạch an toàn không?
 
-Có. Các nhiệm vụ được khai báo `parallel_safe: yes` có thể chạy đồng thời trong các git worktree chuyên dụng. Mỗi nhiệm vụ chỉ ghi vào đúng Bề mặt Chạm được khai báo trên các nhánh biệt lập. Một nhật ký chỉ nối thêm duy nhất tuần tự hóa các sự kiện dưới khóa, tích hợp sạch sẽ.
+Có, theo các quy tắc rõ ràng. Kế hoạch v7 có thể đánh dấu một nhiệm vụ là `parallel_safe` khi bề mặt tiếp xúc của nó không trùng lặp với nhiệm vụ cùng cấp và đầu ra được giới hạn, và chỉ hợp đồng cấp quyền `agent_delegation` mới cho phép giao nhiệm vụ đó cho một tác nhân viết mã khác — chạy không giao diện trong cây làm việc git riêng (agentkit) hoặc trong một khung Herdr khác (Herdr). Tác nhân ủy quyền ghi chỉ làm việc trong cây làm việc riêng của mình, phiên chính vẫn là phiên duy nhất ghi vào nhật ký của kế hoạch, và tác nhân ủy quyền không bao giờ ủy quyền thêm.
 
 [Tìm hiểu về ủy quyền](https://deepworkplan.com/vi/spec/delegation)
 
 ### Kết quả từ một tác tử phụ được ủy quyền có tự động được tin cậy?
 
-Không. Kết quả của bên được ủy quyền được ghi lại dưới dạng bằng chứng "khẳng định" cho đến khi cổng kiểm tra của kế hoạch cha thực sự thực thi và quan sát nó ("bằng chứng quan sát"). Nếu cổng không vượt qua hoặc chạm vào tệp không khai báo, nhiệm vụ không thể hoàn thành.
+Không. Kết quả của tác nhân ủy quyền được ghi nhận là `asserted` cho đến khi kế hoạch chính tích hợp công việc và bộ chạy cổng của chính nó thực thi cổng của nhiệm vụ, đó là điều duy nhất ghi nhận bằng chứng `observed`. Một ủy quyền hoàn thành không bao giờ tự đóng một tiêu chí, do đó việc ủy quyền mở rộng phạm vi mà không làm giảm tiêu chuẩn hoàn thành.
 
 [Đọc đặc tả lớp bản ghi](https://deepworkplan.com/vi/spec/record-layer)
 
 ### Điều gì xảy ra khi một tác tử đạt đến giới hạn token hoặc tần suất giữa chừng?
 
-Tính tự chủ của bầy đàn liên tục giám sát dung lượng còn lại. Khi gần chạm giới hạn, tác tử dẫn đầu sẽ ngừng nhận nhiệm vụ mới, tạo gói bàn giao có cấu trúc (`dwp-handoff-v1`) kèm biên nhận và chuyển giao quyền thực thi cho tác tử kế nhiệm.
+Mỗi tác nhân tự kiểm tra dung lượng của mình tại ranh giới nhiệm vụ. Khi còn dung lượng, nó tiếp tục; khi dung lượng cạn dần, nó chỉ hoàn thành nhiệm vụ có thể hoàn thành; khi ở mức tới hạn, nó đạt đến điểm an toàn, ghi một gói bàn giao nhỏ (`dwp-handoff-v1`: những gì đã làm, đã xác minh và chưa xác minh, cùng các bước tiếp theo), thông báo cho trưởng nhóm và dừng lại. Trưởng nhóm khởi chạy một tác nhân kế nhiệm trên một tài khoản khác, tác nhân này nhận gói và tiếp tục kế hoạch, chạy lại mọi cổng mà gói liệt kê là chưa xác minh. Nếu chính trưởng nhóm hết dung lượng, nó sẽ chuyển giao quyền lãnh đạo cho tác nhân kế nhiệm; các thay đổi lãnh đạo mang epoch tăng dần để chỉ một trưởng nhóm hành động tại một thời điểm.
 
 [Đọc phương pháp luận](https://deepworkplan.com/vi/methodology)
 
@@ -154,7 +154,7 @@ DWP định nghĩa phân loại báo cáo nghiêm ngặt gồm 7 lớp (AGENT_PR
 
 ### Làm thế nào để chứng minh hoàn thành nhiệm vụ ngoài lời tự thuật của tác tử?
 
-Hoàn thành đòi hỏi một hợp đồng kết quả bất biến, các biên nhận có thể xác minh và kết quả cổng nhị phân được ghi lại trong nhật ký chỉ nối thêm. Các tiêu chí khẳng định cần chữ ký duyệt rõ ràng của con người. Kế hoạch chỉ đóng lại khi vượt qua Đánh giá Cuối cùng.
+Một nhiệm vụ chỉ hoàn thành khi bằng chứng được ghi nhận thỏa mãn từng tiêu chí nghiệm thu của nó. Hợp đồng kết quả được định địa chỉ theo nội dung và không thể thay đổi sau khi bắt đầu thực thi, mọi sự kiện được nối vào nhật ký của kế hoạch, và chỉ bộ chạy cổng mới ghi nhận bằng chứng `observed`. Một tiêu chí cần sự phán đoán của con người chỉ khép lại thông qua phê duyệt bằng văn bản của con người với dấu hiệu thẩm quyền rõ ràng; biên nhận được tính toán lại từ các bản ghi, không bao giờ được viết tay. Đánh giá Cuối cùng sau đó chạy lượt kiểm tra bảo mật và xác thực đầy đủ trên trạng thái cuối cùng.
 
 [Đọc đặc tả lớp bản ghi](https://deepworkplan.com/vi/spec/record-layer)
 

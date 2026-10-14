@@ -288,47 +288,47 @@ export const tr: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Referans uygulama. Yerel eğik çizgi komutları ve WebFetch ile davranış odaklı test edildi.',
+          note: 'Yerel eğik çizgi komutlarına sahip referans uygulama. Davranış odaklı test edildi.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Kurulum testinden geçti. Proje kuralları ve .cursor/ komut entegrasyonu ile tam adaptör.',
+          note: 'Proje kuralları ve .cursor → .agents sembolik bağı üzerinden tam adaptör. Kurulum testinden geçti.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Davranış odaklı test edildi. Yerel araç çağrıları ve yalıtımlı ortamla Markdown yönergeleri.',
+          note: 'AGENTS.md ve # komut prosedürleri üzerinden tam adaptör. Davranış odaklı test edildi.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Kurulum testinden geçti. AGENTS.md ve # yönergeleriyle komutlar ve kurallar yürütülür.',
+          note: 'Tam adaptör: dwp-* komutları AGENTS.md ve # prosedürleri üzerinden çalışır. Kurulum testinden geçti.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Kurulum testinden geçti. Adaptör, yerel WebFetch ile AGENTS.md kurallarından yararlanır.',
+          note: 'AGENTS.md ve # komut prosedürleri üzerinden tam adaptör. Kurulum testinden geçti.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: "Açık kaynak. AGENTS.md'yi yerel olarak okur ve dwp-* komutlarını # ile çalıştırır.",
+          note: "Açık kaynak. AGENTS.md'yi yerel olarak okur ve dwp-*'yi # komutlarıyla çalıştırır. Kurulum testinden geçti.",
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Kurulum testinden geçti. Cascade iş akışları Deep Work Plan yaşam döngüsünü yürütür.',
+          note: 'Kurallar ve # komut prosedürleri, Deep Work Plan döngüsünün tamamını yürütür. Kurulum testinden geçti.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Kurulumu test edilmiş açık kaynak adaptör. Sistem kuralları ve # prosedürleri dwp-* adımlarını çalıştırır.',
+          note: 'Açık kaynak. Markdown kuralları ve # komutları her dwp-* adımını çalıştırır. Kurulum testinden geçti.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Kurulum testinden geçti. Yerel AGY komut yüzeyine sahip tam adaptör.',
+          note: 'Markdown komut prosedürlerine sahip tam adaptör. Kurulum testinden geçti.',
         },
       ],
     },
@@ -479,7 +479,7 @@ export const tr: SiteTranslations = {
       {
         title: 'Anlatı yerine doğrulanmış kanıt',
         description:
-          'Tamamlanma, ajanın kendi ifadesiyle değil; çalıştırılabilir geçitler, kriptografik makbuzlar ve yalnızca ekleme yapılabilen bir günlükle kanıtlanır.',
+          'Tamamlama, yürütülen geçitler ve yalnızca eklemeli bir günlükle kanıtlanır: bir görev, yalnızca kaydedilen kanıtlar kabul kriterlerini karşıladığında kapanır, asla bir ajanın kendi bildirdiği iddiaya dayanmaz.',
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -964,7 +964,7 @@ export const tr: SiteTranslations = {
             question:
               'Birden fazla ajan bir planda paralel olarak güvenle çalışabilir mi?',
             answer:
-              'Evet. `parallel_safe: yes` olarak bildirilen görevler ayrılmış git worktree lerinde eşzamanlı çalışır. Her görev yalnızca bildirilen Dokunulan Yüzeye izole dallarda yazar. Kilit altındaki salt-eklenir günlük olayları sıralar ve tamamlanan işler hatlar arası kirlenme olmadan entegre edilir.',
+              'Evet, açık kurallar altında. Bir v7 planı, dokunulan yüzeyi kardeş bir görevle örtüşmediğinde ve çıktısı sınırlı olduğunda görevi `parallel_safe` olarak işaretleyebilir; yalnızca `agent_delegation` izni veren bir sözleşme bu görevin başka bir kodlama ajanına verilmesini sağlar — kendi git çalışma ağacında başsız olarak (agentkit) veya başka bir Herdr bölmesinde (Herdr). Yazma delegesi yalnızca kendi çalışma ağacında çalışır, üst oturum planın günlüğünün tek yazarı olarak kalır ve delege asla daha ileriye yetki devretmez.',
             linkLabel: 'Delegasyon hakkında okuyun',
             linkPath: '/spec/delegation',
           },
@@ -973,7 +973,7 @@ export const tr: SiteTranslations = {
             question:
               'Delege edilen bir alt ajanın sonucuna otomatik olarak güvenilir mi?',
             answer:
-              'Hayır. Bir delegenin çalışması, üst planın doğrulama geçidi çalıştırıp gözlemleyene kadar "iddia edilen" kanıt olarak kaydedilir. Geçit geçmezse veya bildirilmemiş dosyalara dokunursa görev tamamlanamaz. Delegasyon, doğrulama çıtasını düşürmeden kapasiteyi artırır.',
+              'Hayır. Bir delegenin sonucu, üst plan çalışmayı entegre edene ve kendi geçit çalıştırıcısı görevin geçidini yürütüp `observed` kanıtı kaydedene kadar `asserted` olarak kaydedilir. Tamamlanmış bir yetki devri hiçbir zaman bir kriteri tek başına kapatmaz, dolayısıyla yetki devri tamamlama çıtasını düşürmeden erişim alanını genişletir.',
             linkLabel: 'Kayıt katmanı spesifikasyonunu okuyun',
             linkPath: '/spec/record-layer',
           },
@@ -982,7 +982,7 @@ export const tr: SiteTranslations = {
             question:
               'Bir ajan planın ortasında belirteç veya hız sınırına ulaşırsa ne olur?',
             answer:
-              'Sürü otonomisi kalan kapasiteyi izler. Sınırlara yaklaşıldığında aktif lider yeni görev kabulünü durdurur, makbuzlar ve çalışma dizini içeren yapılandırılmış bir devir paketi (`dwp-handoff-v1`) oluşturur ve yürütmeyi ardıl lider ajana devreder.',
+              'Her ajan görev sınırlarında kendi kapasitesini kontrol eder. Boş yer kaldığında devam eder; kapasite azaldığında yalnızca bitirebileceği görevi tamamlar; kritik seviyeye geldiğinde güvenli bir noktaya ulaşır, küçük bir devir paketi yazar (`dwp-handoff-v1`: yapılanlar, doğrulananlar ve doğrulanmayanlar ile sonraki adımlar), lidere bildirir ve durur. Lider, başka bir hesapta halef başlatır; halef paketi kabul eder, pakette doğrulanmamış olarak listelenen her geçidi yeniden çalıştırarak planı sürdürür. Liderin kendisi tükenirse liderliği halefe devreder; liderlik değişiklikleri artan bir dönem (epoch) taşır, böylece aynı anda yalnızca bir lider hareket eder.',
             linkLabel: 'Metodolojiyi okuyun',
             linkPath: '/methodology',
           },
@@ -1000,7 +1000,7 @@ export const tr: SiteTranslations = {
             question:
               'Görevin tamamlandığı ajanın anlatısal iddiasının ötesinde nasıl kanıtlanır?',
             answer:
-              'Tamamlanma, değişmez bir sonuç sözleşmesi, doğrulanabilir makbuzlar ve günlüğe kaydedilen ikili geçit sonuçları gerektirir. Yalnızca iddia edilen kabul kriterleri doğrulanmış yetkiye sahip insan onayı gerektirir. Plan, başarılı bir Final Review olmadan tamamlanamaz.',
+              'Bir görev, yalnızca kaydedilen kanıtlar kabul kriterlerinin her birini karşıladığında tamamlanır. Yürütme başladığında sonuç sözleşmesi içerik adreslidir ve değiştirilemez, her olay planın günlüğüne eklenir ve yalnızca geçit çalıştırıcısı `observed` kanıtı kaydeder. İnsan muhakemesi gerektiren bir kriter, yalnızca açık bir yetki işaretçisine sahip kayıtlı bir insan onayıyla kapatılır; makbuz kayıtlardan yeniden hesaplanır, asla elle yazılmaz. Nihai İnceleme ardından güvenlik geçişini ve nihai durum üzerindeki tam doğrulamayı çalıştırır.',
             linkLabel: 'Kayıt katmanı spesifikasyonunu okuyun',
             linkPath: '/spec/record-layer',
           },
@@ -1321,7 +1321,7 @@ export const tr: SiteTranslations = {
         },
         {
           title: 'Kanıt destekli kayıt katmanı',
-          body: 'Değişmez sözleşme (contract.json), salt-eklenir olay günlüğü (journal.ndjson) ve gözlemlenen geçitler tamamlanmayı objektif olarak kanıtlar.',
+          body: 'Değiştirilemez bir sözleşme (contract.json), yalnızca eklemeli olay günlüğü (journal.ndjson), yeniden hesaplanan makbuzlar ve gözlemlenen geçitler tamamlama durumunun iddia edilmek yerine kanıtlanmasını garanti eder.',
         },
         {
           title: 'Güvenli çoklu ajan delegasyonu ve sürü otonomisi',
@@ -1379,7 +1379,7 @@ export const tr: SiteTranslations = {
       "Skill'i kontrol edene kadar güvenilmez olarak değerlendirin. Her sürüm, gönderilen skill'i kapsayan bir SHA256SUMS dosyası ekler. Kurmayı planladığınız sürüm için indirin, ardından kopyanızın eşleştiğini doğrulayın — sıfırdan farklı bir çıkış, bir dosyanın eşleşmediği anlamına gelir ve durmanız gerekir.",
     codeLabel: 'shell',
     verifyNote:
-      "Sürümler sağlama toplamlarına sahiptir, imzalı değildir — imzalama (cosign veya yetkili kişi GPG'si) belgelenmiş bir sonraki adımdır, mevcut bir iddia değildir. Her şey açık olduğundan, herhangi bir dosyayı etiketindeki depoya göre de karşılaştırabilirsiniz.",
+      "Sürümler sağlama toplamlarına sahiptir, imzalara değil — imzalar (cosign veya sürdürücü GPG'si) belgelenmiş bir sonraki adımdır, geçerli bir iddia değildir. Her şey açık olduğu için herhangi bir dosyayı etiketindeki depoyla da karşılaştırabilirsiniz.",
     vimNote:
       'Aynı kural DeepWorkPlan Vim kurulum programı için de geçerlidir: sayfası, şu anda sunulan betiğin SHA-256 değerini ve indirme, inceleme, doğrulama ve çalıştırma adımlarını gösterir.',
     vimLinkLabel: 'DeepWorkPlan Vim kurulum programını inceleyin',
@@ -1395,7 +1395,7 @@ export const tr: SiteTranslations = {
     linkSkillPolicy: 'Skill güvenlik politikası ve tehdit modeli',
     limitationsTitle: 'Dürüst sınırlamalar',
     limitations: [
-      'Sürümler sağlama toplamlarına sahiptir, henüz kriptografik olarak imzalanmamıştır — imzalama planlandı, tamamlanmadı.',
+      'Sürümler sağlama toplamına sahiptir ancak henüz imzalanmamıştır — imzalama planlanmıştır, henüz yapılmamıştır.',
       'Deep Work Plan, deponuza karşı otonom bir kodlama ajanı çalıştırır. Önerilen planı ve farklarını gözden geçirin; metodoloji bu inceleme için tasarlanmıştır, onun yerini almak için değil.',
       'Buradaki güven iddiaları yalnızca resmi kaynakları tanımlar. Depolardan sapan değiştirilmiş veya üçüncü taraf bir kopya, bu garantilerin hiçbirini taşımaz — önce doğrulayın.',
     ],

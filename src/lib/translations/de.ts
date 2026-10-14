@@ -287,47 +287,47 @@ export const de: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Referenzimplementierung. Verhaltenstests mit nativen Slash-Befehlen und WebFetch.',
+          note: 'Referenzimplementierung mit nativen Slash-Befehlen. Verhaltenstests bestanden.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Installationstests. Vollständiger Adapter mit Projektregeln und .cursor/-Befehlen.',
+          note: 'Vollständiger Adapter über Projektregeln und den Symlink .cursor → .agents. Installationstests bestanden.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Verhaltenstests. Markdown-Instruktionen mit nativem Tool-Calling und Sandbox.',
+          note: 'Vollständiger Adapter über AGENTS.md und #-Befehlsprozeduren. Verhaltenstests bestanden.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Installationstests. Befehle und Richtlinien via AGENTS.md und #-Prompts.',
+          note: 'Vollständiger Adapter: dwp-*-Befehle laufen über AGENTS.md und #-Prozeduren. Installationstests bestanden.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Installationstests. Adapter nutzt AGENTS.md-Regeln mit nativem WebFetch.',
+          note: 'Vollständiger Adapter über AGENTS.md und #-Befehlsprozeduren. Installationstests bestanden.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Open-Source-Adapter mit Installationstests. Liest AGENTS.md und steuert dwp-*.',
+          note: 'Open Source. Liest AGENTS.md nativ und führt dwp-* über #-Befehle aus. Installationstests bestanden.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Installationstests. Cascade-Workflows und Regeln steuern den DWP-Zyklus.',
+          note: 'Regeln und #-Befehlsprozeduren treiben die vollständige Deep-Work-Plan-Schleife an. Installationstests bestanden.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Open-Source-Adapter mit Installationstests. System-Prompts steuern dwp-*.',
+          note: 'Open Source. Markdown-Regeln und #-Befehle führen jeden dwp-*-Schritt aus. Installationstests bestanden.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Installationstests. Vollständiger Adapter mit nativer AGY-Befehlsoberfläche.',
+          note: 'Vollständiger Adapter mit Markdown-Befehlsprozeduren. Installationstests bestanden.',
         },
       ],
     },
@@ -479,7 +479,7 @@ export const de: SiteTranslations = {
       {
         title: 'Verifizierte Evidenz statt bloßer Erzählung',
         description:
-          'Fertigstellung wird durch ausführbare Gates, kryptografische Belege und ein Append-Only-Journal bewiesen — niemals durch Behauptungen.',
+          'Die Fertigstellung wird durch ausgeführte Gates und ein Append-Only-Journal bewiesen: Eine Aufgabe schließt nur, wenn aufgezeichnete Nachweise ihre Akzeptanzkriterien erfüllen, niemals aufgrund der Selbstaussage eines Agenten.',
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -964,7 +964,7 @@ export const de: SiteTranslations = {
             question:
               'Können mehrere Agenten parallel an einem Plan arbeiten und wie bleibt das sicher?',
             answer:
-              'Ja. Als `parallel_safe: yes` deklarierte Aufgaben laufen parallel in eigenen Git-Worktrees. Jede Aufgabe schreibt strikt auf ihre deklarierte Touched Surface auf isolierten Branches. Ein Append-Only-Journal serialisiert Ereignisse unter Lock, und Ergebnisse werden ohne Spurüberschneidung integriert.',
+              'Ja, unter expliziten Regeln. Ein v7-Plan kann eine Aufgabe als `parallel_safe` markieren, wenn sich ihre berührte Oberfläche nicht mit der einer Geschwisteraufgabe überschneidet und ihre Ausgabe begrenzt ist. Nur ein Vertrag mit `agent_delegation` erlaubt es, diese Aufgabe an einen weiteren Coding-Agenten zu übergeben — headless im eigenen Git-Worktree (agentkit) oder in einem anderen Herdr-Pane (Herdr). Ein schreibender Delegierter arbeitet nur im eigenen Worktree, die übergeordnete Sitzung bleibt der einzige Schreiber des Plan-Journals und ein Delegierter delegiert niemals weiter.',
             linkLabel: 'Über Delegation lesen',
             linkPath: '/spec/delegation',
           },
@@ -973,7 +973,7 @@ export const de: SiteTranslations = {
             question:
               'Wird das Ergebnis eines delegierten Subagenten automatisch übernommen?',
             answer:
-              'Nein. Ergebnisse delegierter Agenten gelten als reine Behauptung („asserted“), bis das deklarierte Validierungs-Gate des Elternplans sie ausführt und beobachtet („observed“). Scheitert das Gate oder werden nicht deklarierte Dateien berührt, schlägt die Aufgabe fehl.',
+              'Nein. Das Ergebnis eines Delegierten wird als `asserted` erfasst, bis der übergeordnete Plan die Arbeit integriert und dessen eigener Gate-Runner das Gate der Aufgabe ausführt — das Einzige, was `observed`-Nachweise aufzeichnet. Eine abgeschlossene Delegation schließt ein Kriterium niemals von selbst; Delegation erweitert die Reichweite, ohne die Anforderungen an die Fertigstellung zu senken.',
             linkLabel: 'Spezifikation der Aufzeichnungsschicht',
             linkPath: '/spec/record-layer',
           },
@@ -982,7 +982,7 @@ export const de: SiteTranslations = {
             question:
               'Was passiert, wenn ein Agent mitten im Plan an Nutzungs- oder Token-Limits stößt?',
             answer:
-              'Die Schwarm-Autonomie überwacht die Restkapazität. Nahen Grenzwerte, stoppt der aktive Lead neue Aufgaben, erstellt ein strukturiertes Handoff-Paket (`dwp-handoff-v1`) mit Belegen und übergibt die Leitung an einen Nachfolge-Agenten mit monotonen Epochen.',
+              'Jeder Agent überprüft seine eigene Kapazität an den Aufgabengrenzen. Ist noch Spielraum vorhanden, setzt er fort; wird die Kapazität knapp, schließt er nur die Aufgabe ab, die er noch schaffen kann; wird sie kritisch, steuert er einen sicheren Punkt an, schreibt ein kleines Übergabepaket (`dwp-handoff-v1`: was erledigt, verifiziert und nicht verifiziert ist, sowie die nächsten Schritte), benachrichtigt den Lead und stoppt. Der Lead startet einen Nachfolger auf einem anderen Konto, der das Paket übernimmt, den Plan wieder aufnimmt und jedes im Paket als nicht verifiziert aufgeführte Gate erneut ausführt. Geht dem Lead selbst die Kapazität aus, übergibt er die Leitung an einen Nachfolger; Führungswechsel tragen eine aufsteigende Epoche, sodass immer nur ein Lead gleichzeitig agiert.',
             linkLabel: 'Methodik lesen',
             linkPath: '/methodology',
           },
@@ -1000,7 +1000,7 @@ export const de: SiteTranslations = {
             question:
               'Wie wird Fertigstellung jenseits reiner Agenten-Behauptungen bewiesen?',
             answer:
-              'Abschluss erfordert einen unveränderlichen Vertrag, kryptografische Belege und binäre Gate-Ergebnisse im Journal. Reine Behauptungen erfordern explizite menschliche Freigabemarker. Der Plan schließt erst mit bestandenem Final Review.',
+              'Eine Aufgabe wird nur abgeschlossen, wenn aufgezeichnete Nachweise jedes ihrer Akzeptanzkriterien erfüllen. Der Ergebnisvertrag ist inhaltsadressiert und nach Beginn der Ausführung unveränderlich, jedes Ereignis wird an das Plan-Journal angehängt und nur der Gate-Runner zeichnet `observed`-Nachweise auf. Ein Kriterium, das menschliches Urteilsvermögen erfordert, schließt nur durch eine aufgezeichnete menschliche Freigabe mit explizitem Autorisierungsmarker; der Beleg wird aus den Aufzeichnungen neu berechnet, niemals handschriftlich erstellt. Das Final Review führt anschließend den Sicherheitsdurchlauf und die vollständige Validierung des Endzustands durch.',
             linkLabel: 'Spezifikation der Aufzeichnungsschicht',
             linkPath: '/spec/record-layer',
           },
@@ -1324,7 +1324,7 @@ export const de: SiteTranslations = {
         },
         {
           title: 'Eine evidenzbasierte Aufzeichnungsschicht',
-          body: 'Unveränderlicher Vertrag (contract.json), Append-Only-Event-Journal (journal.ndjson), Belege und beobachtete Gates garantieren echten Nachweis.',
+          body: 'Ein unveränderlicher Vertrag (contract.json), ein Append-Only-Ereignisjournal (journal.ndjson), neu berechnete Belege und beobachtete Gates garantieren, dass Fertigstellung bewiesen statt behauptet wird.',
         },
         {
           title: 'Sichere Multi-Agenten-Delegation & Schwarm-Autonomie',
@@ -1382,7 +1382,7 @@ export const de: SiteTranslations = {
       'Behandeln Sie das Skill als nicht vertrauenswürdig, bis Sie es geprüft haben. Jedes Release fügt eine SHA256SUMS-Datei bei, die das ausgelieferte Skill abdeckt. Laden Sie sie für die Version herunter, die Sie installieren möchten, und verifizieren Sie dann, dass Ihre Kopie übereinstimmt — ein Exit-Code ungleich null bedeutet, dass eine Datei nicht übereinstimmt, und Sie sollten stoppen.',
     codeLabel: 'shell',
     verifyNote:
-      'Releases sind mit Prüfsummen versehen, aber nicht signiert — Signierung (cosign oder Betreuer-GPG) ist ein dokumentierter nächster Schritt, keine aktuelle Aussage. Da alles offen ist, können Sie auch jede Datei gegen das Repository bei seinem Tag vergleichen.',
+      'Releases sind mit Prüfsummen versehen, nicht mit Signaturen — Signaturen (cosign oder Maintainer-GPG) sind ein dokumentierter nächster Schritt, kein aktueller Anspruch. Da alles quelloffen ist, können Sie jede Datei mit dem Repository beim jeweiligen Tag abgleichen.',
     vimNote:
       'Dieselbe Regel gilt für den Installer von DeepWorkPlan Vim: Seine Seite zeigt das SHA-256 des aktuell ausgelieferten Skripts samt Anleitung zum Herunterladen, Prüfen, Verifizieren und Ausführen.',
     vimLinkLabel: 'Den Installer von DeepWorkPlan Vim prüfen',
@@ -1398,7 +1398,7 @@ export const de: SiteTranslations = {
     linkSkillPolicy: 'Skill-Sicherheitsrichtlinie & Bedrohungsmodell',
     limitationsTitle: 'Ehrliche Einschränkungen',
     limitations: [
-      'Releases sind mit Prüfsummen versehen, aber noch nicht kryptographisch signiert — Signierung ist geplant, aber noch nicht umgesetzt.',
+      'Releases sind mit Prüfsummen versehen, aber noch nicht signiert — Signierung ist geplant, aber noch nicht umgesetzt.',
       'Deep Work Plan führt einen autonomen Coding-Agenten gegen Ihr Repository aus. Überprüfen Sie den vorgeschlagenen Plan und die Diffs; die Methodik ist für diese Überprüfung konzipiert, nicht um sie zu ersetzen.',
       'Vertrauensaussagen hier beschreiben nur die offiziellen Quellen. Eine modifizierte oder von Drittanbietern stammende Kopie, die von den Repositories abgewichen ist, trägt keine dieser Garantien — verifizieren Sie sie zuerst.',
     ],

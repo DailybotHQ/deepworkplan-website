@@ -287,47 +287,47 @@ export const it: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Implementazione di riferimento. Test comportamentali con comandi slash nativi e WebFetch.',
+          note: 'Implementazione di riferimento con comandi slash nativi. Testato per comportamento.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Testato all installazione. Adattatore completo con regole di progetto e comandi in .cursor/.',
+          note: "Adattatore completo tramite regole di progetto e il symlink .cursor → .agents. Testato all'installazione.",
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Test comportamentali. Istruzioni Markdown con chiamate a strumenti nativi e sandbox.',
+          note: 'Adattatore completo tramite AGENTS.md e procedure di comando #. Testato per comportamento.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Testato all installazione. Comandi ed esecuzione guidata via AGENTS.md e prompt #.',
+          note: "Adattatore completo: i comandi dwp-* vengono eseguiti tramite AGENTS.md e procedure #. Testato all'installazione.",
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Testato all installazione. L adattatore sfrutta le regole di AGENTS.md con WebFetch nativo.',
+          note: "Adattatore completo tramite AGENTS.md e procedure di comando #. Testato all'installazione.",
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Adattatore open source testato all installazione. Legge AGENTS.md ed esegue comandi #.',
+          note: "Open source. Legge AGENTS.md nativamente ed esegue dwp-* tramite comandi #. Testato all'installazione.",
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: "Le regole e le procedure dei comandi # guidano l'intero ciclo Deep Work Plan.",
+          note: "Le regole e le procedure di comando # guidano il ciclo completo di Deep Work Plan. Testato all'installazione.",
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Adattatore open source testato all installazione. Regole di sistema e procedure #.',
+          note: "Open source. Le regole Markdown e i comandi # eseguono ogni passaggio di dwp-*. Testato all'installazione.",
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Testato all installazione. Adattatore completo con superficie comandi nativa AGY.',
+          note: "Adattatore completo con procedure di comando in Markdown. Testato all'installazione.",
         },
       ],
     },
@@ -479,7 +479,7 @@ export const it: SiteTranslations = {
       {
         title: 'Evidenza verificata anziché narrazione',
         description:
-          'Il completamento è provato da gate eseguibili, ricevute crittografiche e un journal append-only — mai dalla sola dichiarazione dell agente.',
+          "Il completamento è dimostrato da gate eseguiti e da un journal append-only: un task si chiude solo quando le prove registrate soddisfano i criteri di accettazione, mai su semplice auto-dichiarazione dell'agente.",
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -962,7 +962,7 @@ export const it: SiteTranslations = {
             question:
               'Più agenti possono lavorare in parallelo su un piano in modo sicuro?',
             answer:
-              'Sì. Le attività dichiarate come `parallel_safe: yes` possono essere eseguite contemporaneamente in git worktree dedicati. Ciascuna scrive rigorosamente sulla Superficie Modificata dichiarata in rami isolati. Un journal append-only sotto lock serializza gli eventi evitando conflitti tra corsie.',
+              "Sì, secondo regole esplicite. Un piano v7 può contrassegnare un task come `parallel_safe` quando la sua superficie toccata non si sovrappone a quella di un task fratello e il suo output è delimitato; solo un contratto che concede `agent_delegation` consente di affidare tale task a un altro agente di codice — headless nel proprio worktree git (agentkit) o in un altro riquadro Herdr (Herdr). Un delegato in scrittura opera esclusivamente nel proprio worktree, la sessione genitore rimane l'unica a scrivere nel journal del piano e un delegato non delega mai ulteriormente.",
             linkLabel: 'Leggi sulla delega',
             linkPath: '/spec/delegation',
           },
@@ -971,7 +971,7 @@ export const it: SiteTranslations = {
             question:
               'Il risultato di un sotto-agente delegato viene considerato attendibile in automatico?',
             answer:
-              'No. Il lavoro del delegato è registrato come evidenza "asserita" finché il gate di convalida dichiarato nel piano principale non lo esegue e lo osserva direttamente ("evidenza osservata"). Se il gate non passa o tocca file non dichiarati, l attività non può essere completata.',
+              "No. Il risultato di un delegato viene registrato come `asserted` finché il piano genitore non integra il lavoro e il proprio esecutore di gate non esegue il gate del task, che è l'unica operazione a registrare prove `observed`. Una delegazione completata non chiude mai un criterio da sola, pertanto la delegazione amplia la portata senza abbassare gli standard di completamento.",
             linkLabel: 'Specifica del livello di registrazione',
             linkPath: '/spec/record-layer',
           },
@@ -980,7 +980,7 @@ export const it: SiteTranslations = {
             question:
               'Cosa accade se un agente esaurisce i token o i limiti di frequenza durante il piano?',
             answer:
-              'L autonomia dello sciame monitora la capacità residua. All avvicinarsi dei limiti, il leader attivo non accetta nuove attività, genera un pacchetto di handoff strutturato (`dwp-handoff-v1`) con ricevute e indice di lavoro, e trasferisce l esecuzione a un leader successore con epoche monotone.',
+              "Ogni agente controlla la propria capacità ai confini dei task. Se c'è margine prosegue; quando la capacità scarseggia porta a termine solo il task che è in grado di completare; quando diventa critica raggiunge un punto sicuro, scrive un piccolo pacchetto di passaggio di consegne (`dwp-handoff-v1`: cosa è fatto, verificato e non verificato, e i passaggi successivi), avvisa il lead e si ferma. Il lead avvia un successore su un altro account, che accetta il pacchetto e riprende il piano, rieseguendo ogni gate elencato nel pacchetto come non verificato. Se lo stesso lead esaurisce la capacità, passa la guida a un successore; i cambi di leadership recano un'epoca crescente affinché un solo lead agisca per volta.",
             linkLabel: 'Leggi la metodologia',
             linkPath: '/methodology',
           },
@@ -998,7 +998,7 @@ export const it: SiteTranslations = {
             question:
               'Come viene dimostrato il completamento al di là delle affermazioni dell agente?',
             answer:
-              'Il completamento richiede un contratto di risultato immutabile, ricevute verificabili ed esiti binari dei gate registrati nel journal append-only. I criteri solo asseriti richiedono un esplicito sign-off umano. Il piano non termina senza un Final Review superato.',
+              "Un task si completa solo quando le prove registrate soddisfano ciascuno dei suoi criteri di accettazione. Il contratto di risultato è indirizzato per contenuto e immutabile una volta avviata l'esecuzione, ogni evento viene aggiunto al journal del piano e solo l'esecutore dei gate registra prove `observed`. Un criterio che richiede un giudizio umano si chiude solo attraverso un'approvazione umana registrata con un marcatore di autorità esplicito; la ricevuta viene ricalcolata dai registri, mai scritta a mano. La Final Review esegue quindi il passaggio di sicurezza e la convalida completa sullo stato finale.",
             linkLabel: 'Specifica del livello di registrazione',
             linkPath: '/spec/record-layer',
           },
@@ -1321,7 +1321,7 @@ export const it: SiteTranslations = {
         },
         {
           title: 'Un livello di registrazione supportato da prove',
-          body: 'Contratto immutabile (contract.json), registro eventi append-only (journal.ndjson), ricevute e gate osservati garantiscono prove oggettive.',
+          body: 'Un contratto immutabile (contract.json), journal eventi append-only (journal.ndjson), ricevute ricalcolate e gate osservati garantiscono che il completamento sia dimostrato anziché asserito.',
         },
         {
           title: 'Delega multi-agente sicura e autonomia dello sciame',
@@ -1379,7 +1379,7 @@ export const it: SiteTranslations = {
       "Tratta la skill come non attendibile finché non l'hai verificata. Ogni release allega un file SHA256SUMS che copre la skill distribuita. Scaricalo per la versione che intendi installare e verifica che la tua copia corrisponda — un'uscita diversa da zero significa che un file non corrisponde e devi fermarti.",
     codeLabel: 'shell',
     verifyNote:
-      'Le release sono checksummate, non firmate — la firma (cosign o GPG del maintainer) è il passo successivo documentato, non una garanzia attuale. Poiché tutto è aperto, puoi anche confrontare qualsiasi file con il repository alla sua tag.',
+      'Le release hanno checksum, non firme — le firme (cosign o GPG del manutentore) sono un passo successivo documentato, non una garanzia attuale. Poiché tutto è aperto, puoi anche confrontare qualsiasi file con il repository al suo tag.',
     vimNote:
       'La stessa regola vale per l’installer di DeepWorkPlan Vim: la sua pagina mostra lo SHA-256 dello script servito, con una procedura per scaricare, controllare, verificare ed eseguire.',
     vimLinkLabel: 'Controllare l’installer di DeepWorkPlan Vim',
@@ -1395,7 +1395,7 @@ export const it: SiteTranslations = {
     linkSkillPolicy: 'Politica di sicurezza e modello di minacce della skill',
     limitationsTitle: 'Limitazioni oneste',
     limitations: [
-      'Le release sono checksummate, ma non ancora firmate crittograficamente — la firma è pianificata, non ancora implementata.',
+      'Le release hanno checksum, ma non sono ancora firmate — la firma è pianificata, non implementata.',
       'Deep Work Plan esegue un agente di coding autonomo sul tuo repository. Rivedi il piano proposto e i suoi diff; la metodologia è progettata per quella revisione, non per sostituirla.',
       'Le affermazioni di fiducia qui descrivono solo le fonti ufficiali. Una copia modificata o di terze parti che si è allontanata dai repository non gode di nessuna di queste garanzie — verificala prima.',
     ],

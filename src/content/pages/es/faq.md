@@ -130,19 +130,19 @@ Sí, siempre que el plan se haya aprobado de antemano, incluya la capa de estado
 
 ### ¿Pueden varios agentes trabajar en un plan en paralelo y cómo se garantiza la seguridad?
 
-Sí. Las tareas declaradas con `parallel_safe: yes` pueden ejecutarse concurrentemente en árboles de trabajo de git dedicados. Cada tarea escribe estrictamente en su Superficie Modificada declarada en ramas de trabajo aisladas, evitando ediciones en conflicto. Un único diario de eventos solo agregable serializa los eventos bajo bloqueo y el trabajo completado se integra sin contaminación entre carriles.
+Sí, bajo reglas explícitas. Un plan v7 puede marcar una tarea como `parallel_safe` cuando su superficie afectada no se superpone con la de un hermano y su salida está acotada, y solo un contrato que otorgue `agent_delegation` permite que esa tarea pase a otro agente de código — headless en su propio árbol de trabajo de git (agentkit) o en otro panel de Herdr (Herdr). Un delegado de escritura trabaja solo en su propio árbol de trabajo, la sesión principal sigue siendo la única que escribe en el diario del plan y un delegado nunca delega más allá.
 
 [Leer sobre delegación](https://deepworkplan.com/es/spec/delegation)
 
 ### ¿Se confía automáticamente en el resultado de un subagente delegado?
 
-No. El trabajo de un delegado se registra como evidencia «afirmada» hasta que la puerta de validación declarada en el plan padre la ejecuta y observa efectivamente (evidencia «observada»). Si la puerta no pasa o toca archivos no declarados, la tarea no puede completarse. La delegación expande la capacidad sin rebajar el listón de verificación.
+No. El resultado de un delegado se registra como `asserted` hasta que el plan principal integra el trabajo y su propio ejecutor de puertas ejecuta la puerta de la tarea, que es lo único que registra evidencia `observed`. Una delegación completada nunca cierra un criterio por sí sola, por lo que la delegación amplía el alcance sin bajar el listón de finalización.
 
 [Leer la especificación de la capa de registro](https://deepworkplan.com/es/spec/record-layer)
 
 ### ¿Qué ocurre cuando un agente alcanza los límites de uso, tokens o tasa a mitad del plan?
 
-La autonomía del enjambre monitoriza la capacidad restante. Al acercarse a los límites, el agente líder activo deja de aceptar tareas nuevas, genera un paquete estructurado de traspaso (`dwp-handoff-v1`) con recibos duraderos e índice de trabajo, y transfiere la ejecución a un agente líder sucesor con épocas monotónicas y cercado para no detener la ejecución a mitad de camino.
+Cada agente comprueba su propia capacidad en los límites de cada tarea. Si le queda margen, continúa; cuando la capacidad es baja, termina solo la tarea que puede finalizar; cuando es crítica, alcanza un punto seguro, escribe un pequeño paquete de traspaso (`dwp-handoff-v1`: lo hecho, lo verificado y no verificado, y los siguientes pasos), notifica al líder y se detiene. El líder inicia un sucesor en otra cuenta, que acepta el paquete y reanuda el plan, volviendo a ejecutar cada puerta que el paquete lista como no verificada. Si el propio líder se queda sin capacidad, transfiere el liderazgo a un sucesor; los cambios de liderazgo llevan una época creciente para que solo actúe un líder a la vez.
 
 [Leer la metodología](https://deepworkplan.com/es/methodology)
 
@@ -154,7 +154,7 @@ DWP define una estricta taxonomía de escalamiento de siete clases (AGENT_PROTOC
 
 ### ¿Cómo se demuestra la finalización de una tarea más allá de la afirmación narrativa del agente?
 
-La finalización requiere un contrato inmutable de resultados, recibos verificables y resultados binarios de puertas registrados en el diario solo agregable. Los criterios de aceptación afirmados requieren marcadores de aprobación humana explícita con autoridad comprobada. El plan no puede completarse sin un pase exitoso de seguridad y estado final en el Final Review.
+Una tarea se completa únicamente cuando la evidencia registrada satisface cada uno de sus criterios de aceptación. El contrato de resultados está direccionado por contenido y es inmutable una vez iniciada la ejecución, cada evento se agrega al diario del plan y solo el ejecutor de puertas registra evidencia `observed`. Un criterio que requiere juicio humano se cierra únicamente mediante una aprobación humana registrada con un marcador de autoridad explícito; el recibo se recalcula a partir de los registros, nunca se escribe a mano. La Revisión Final ejecuta entonces la pasada de seguridad y la validación completa en el estado final.
 
 [Leer la especificación de la capa de registro](https://deepworkplan.com/es/spec/record-layer)
 

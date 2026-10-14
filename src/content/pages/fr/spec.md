@@ -10,7 +10,7 @@ lastUpdated: 2026-09-28
 
 La spécification est la définition précise et lisible de la méthodologie — les structures et protocoles que les humains et les agents partagent. Elle énonce, en termes normatifs RFC 2119, comment un plan piloté par la spécification est structuré et comment un agent doit s'exécuter face à lui : le plan est la source de vérité, les portes de validation sont binaires, et le dépôt lui-même porte le harness dont un agent a besoin. Elle est organisée en documents ordonnés :
 
-- **Couche de registre** — la couche de registre fondée sur des preuves : contrat, journal, classes de preuves (affirmées vs observées), approbations et reçus cryptographiques.
+- **Couche de registre** — la couche de registre fondée sur des preuves : contrat, journal, classes de preuves (affirmées vs observées), approbations et reçus.
 - **Ressources et capacités** — exécution bornée : manifeste de contexte, enveloppe de ressources, capacités de l hôte, registre d extensions et capacités.
 - **Délégation** — exécution multi-agents et en essaim : worktrees parallèles, événements de délégation, transports et succession par époques.
 - **État du plan** — la couche d état lisible par machine : instantané dérivé du journal en v6/v7 (`ledger.py project`), couche d état historique v5 et réconciliation.

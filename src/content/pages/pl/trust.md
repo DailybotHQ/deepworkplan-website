@@ -49,7 +49,7 @@ Problemy z bezpieczeństwem zgłaszaj **prywatnie przez prywatne raportowanie po
 
 ## Uczciwe ograniczenia
 
-- Wydania są sumowane kontrolnie, ale jeszcze nie podpisywane kryptograficznie — podpisywanie jest zaplanowane, nie wykonane.
+- Wydania są sumowane kontrolnie, ale jeszcze nie podpisywane — podpisywanie jest zaplanowane, nie wykonane.
 - Deep Work Plan uruchamia autonomicznego agenta kodującego względem Twojego repozytorium. Przeglądaj jego proponowany plan i diffe; metodyka jest zaprojektowana do tego przeglądu, nie do jego zastąpienia.
 - Twierdzenia dotyczące zaufania opisują wyłącznie oficjalne źródła. Zmodyfikowana lub zewnętrzna kopia, która odeszła od repozytoriów, nie niesie żadnej z tych gwarancji — najpierw ją zweryfikuj.
 

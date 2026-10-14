@@ -286,47 +286,47 @@ export const vi: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Bản triển khai tham chiếu. Đã kiểm thử hành vi với lệnh gạch chéo gốc và WebFetch.',
+          note: 'Bản triển khai tham chiếu với lệnh gạch chéo gốc. Đã kiểm thử hành vi.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Đã kiểm thử cài đặt. Bộ điều hợp đầy đủ với quy tắc dự án và tích hợp lệnh .cursor/.',
+          note: 'Bộ điều hợp đầy đủ thông qua quy tắc dự án và liên kết biểu tượng .cursor → .agents. Đã kiểm thử cài đặt.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Đã kiểm thử hành vi. Hướng dẫn Markdown với lời gọi công cụ gốc và sandbox.',
+          note: 'Bộ điều hợp đầy đủ thông qua AGENTS.md và quy trình lệnh #. Đã kiểm thử hành vi.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Đã kiểm thử cài đặt. Lệnh và quy trình được chạy qua AGENTS.md và câu lệnh #.',
+          note: 'Bộ điều hợp đầy đủ: các lệnh dwp-* chạy qua AGENTS.md và quy trình #. Đã kiểm thử cài đặt.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Đã kiểm thử cài đặt. Bộ điều hợp tận dụng quy tắc AGENTS.md với WebFetch gốc.',
+          note: 'Bộ điều hợp đầy đủ thông qua AGENTS.md và quy trình lệnh #. Đã kiểm thử cài đặt.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Bộ điều hợp mã nguồn mở đã kiểm thử cài đặt. Đọc AGENTS.md và chạy dwp-* qua #.',
+          note: 'Mã nguồn mở. Đọc AGENTS.md nguyên bản và chạy dwp-* qua các lệnh #. Đã kiểm thử cài đặt.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Đã kiểm thử cài đặt. Quy trình làm việc Cascade điều phối toàn bộ vòng đời DWP.',
+          note: 'Quy tắc cùng quy trình lệnh # vận hành toàn bộ vòng lặp Deep Work Plan. Đã kiểm thử cài đặt.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Bộ điều hợp mã nguồn mở đã kiểm thử cài đặt. Quy tắc prompt hệ thống và lệnh #.',
+          note: 'Mã nguồn mở. Quy tắc Markdown và các lệnh # chạy từng bước dwp-*. Đã kiểm thử cài đặt.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Đã kiểm thử cài đặt. Bộ điều hợp đầy đủ với bề mặt lệnh AGY gốc.',
+          note: 'Bộ điều hợp đầy đủ với quy trình lệnh markdown. Đã kiểm thử cài đặt.',
         },
       ],
     },
@@ -477,7 +477,7 @@ export const vi: SiteTranslations = {
       {
         title: 'Bằng chứng đã xác minh thay vì lời nói suông',
         description:
-          'Hoàn thành được chứng minh qua cổng thực thi, biên nhận mã hóa và nhật ký chỉ nối thêm — không bao giờ dựa vào tuyên bố tự báo cáo của tác tử.',
+          'Việc hoàn thành được chứng minh bằng các cổng đã thực thi và nhật ký chỉ nối thêm: một nhiệm vụ chỉ kết thúc khi bằng chứng được ghi nhận đáp ứng các tiêu chí nghiệm thu, không bao giờ dựa vào tuyên bố tự báo cáo của tác nhân.',
         icon: '\u{1F4DC}',
         link: '/spec/record-layer',
       },
@@ -959,7 +959,7 @@ export const vi: SiteTranslations = {
             question:
               'Nhiều tác tử có thể làm việc song song trên một kế hoạch an toàn không?',
             answer:
-              'Có. Các nhiệm vụ được khai báo `parallel_safe: yes` có thể chạy đồng thời trong các git worktree chuyên dụng. Mỗi nhiệm vụ chỉ ghi vào đúng Bề mặt Chạm được khai báo trên các nhánh biệt lập. Một nhật ký chỉ nối thêm duy nhất tuần tự hóa các sự kiện dưới khóa, tích hợp sạch sẽ.',
+              'Có, theo các quy tắc rõ ràng. Kế hoạch v7 có thể đánh dấu một nhiệm vụ là `parallel_safe` khi bề mặt tiếp xúc của nó không trùng lặp với nhiệm vụ cùng cấp và đầu ra được giới hạn, và chỉ hợp đồng cấp quyền `agent_delegation` mới cho phép giao nhiệm vụ đó cho một tác nhân viết mã khác — chạy không giao diện trong cây làm việc git riêng (agentkit) hoặc trong một khung Herdr khác (Herdr). Tác nhân ủy quyền ghi chỉ làm việc trong cây làm việc riêng của mình, phiên chính vẫn là phiên duy nhất ghi vào nhật ký của kế hoạch, và tác nhân ủy quyền không bao giờ ủy quyền thêm.',
             linkLabel: 'Tìm hiểu về ủy quyền',
             linkPath: '/spec/delegation',
           },
@@ -968,7 +968,7 @@ export const vi: SiteTranslations = {
             question:
               'Kết quả từ một tác tử phụ được ủy quyền có tự động được tin cậy?',
             answer:
-              'Không. Kết quả của bên được ủy quyền được ghi lại dưới dạng bằng chứng "khẳng định" cho đến khi cổng kiểm tra của kế hoạch cha thực sự thực thi và quan sát nó ("bằng chứng quan sát"). Nếu cổng không vượt qua hoặc chạm vào tệp không khai báo, nhiệm vụ không thể hoàn thành.',
+              'Không. Kết quả của tác nhân ủy quyền được ghi nhận là `asserted` cho đến khi kế hoạch chính tích hợp công việc và bộ chạy cổng của chính nó thực thi cổng của nhiệm vụ, đó là điều duy nhất ghi nhận bằng chứng `observed`. Một ủy quyền hoàn thành không bao giờ tự đóng một tiêu chí, do đó việc ủy quyền mở rộng phạm vi mà không làm giảm tiêu chuẩn hoàn thành.',
             linkLabel: 'Đọc đặc tả lớp bản ghi',
             linkPath: '/spec/record-layer',
           },
@@ -977,7 +977,7 @@ export const vi: SiteTranslations = {
             question:
               'Điều gì xảy ra khi một tác tử đạt đến giới hạn token hoặc tần suất giữa chừng?',
             answer:
-              'Tính tự chủ của bầy đàn liên tục giám sát dung lượng còn lại. Khi gần chạm giới hạn, tác tử dẫn đầu sẽ ngừng nhận nhiệm vụ mới, tạo gói bàn giao có cấu trúc (`dwp-handoff-v1`) kèm biên nhận và chuyển giao quyền thực thi cho tác tử kế nhiệm.',
+              'Mỗi tác nhân tự kiểm tra dung lượng của mình tại ranh giới nhiệm vụ. Khi còn dung lượng, nó tiếp tục; khi dung lượng cạn dần, nó chỉ hoàn thành nhiệm vụ có thể hoàn thành; khi ở mức tới hạn, nó đạt đến điểm an toàn, ghi một gói bàn giao nhỏ (`dwp-handoff-v1`: những gì đã làm, đã xác minh và chưa xác minh, cùng các bước tiếp theo), thông báo cho trưởng nhóm và dừng lại. Trưởng nhóm khởi chạy một tác nhân kế nhiệm trên một tài khoản khác, tác nhân này nhận gói và tiếp tục kế hoạch, chạy lại mọi cổng mà gói liệt kê là chưa xác minh. Nếu chính trưởng nhóm hết dung lượng, nó sẽ chuyển giao quyền lãnh đạo cho tác nhân kế nhiệm; các thay đổi lãnh đạo mang epoch tăng dần để chỉ một trưởng nhóm hành động tại một thời điểm.',
             linkLabel: 'Đọc phương pháp luận',
             linkPath: '/methodology',
           },
@@ -995,7 +995,7 @@ export const vi: SiteTranslations = {
             question:
               'Làm thế nào để chứng minh hoàn thành nhiệm vụ ngoài lời tự thuật của tác tử?',
             answer:
-              'Hoàn thành đòi hỏi một hợp đồng kết quả bất biến, các biên nhận có thể xác minh và kết quả cổng nhị phân được ghi lại trong nhật ký chỉ nối thêm. Các tiêu chí khẳng định cần chữ ký duyệt rõ ràng của con người. Kế hoạch chỉ đóng lại khi vượt qua Đánh giá Cuối cùng.',
+              'Một nhiệm vụ chỉ hoàn thành khi bằng chứng được ghi nhận thỏa mãn từng tiêu chí nghiệm thu của nó. Hợp đồng kết quả được định địa chỉ theo nội dung và không thể thay đổi sau khi bắt đầu thực thi, mọi sự kiện được nối vào nhật ký của kế hoạch, và chỉ bộ chạy cổng mới ghi nhận bằng chứng `observed`. Một tiêu chí cần sự phán đoán của con người chỉ khép lại thông qua phê duyệt bằng văn bản của con người với dấu hiệu thẩm quyền rõ ràng; biên nhận được tính toán lại từ các bản ghi, không bao giờ được viết tay. Đánh giá Cuối cùng sau đó chạy lượt kiểm tra bảo mật và xác thực đầy đủ trên trạng thái cuối cùng.',
             linkLabel: 'Đọc đặc tả lớp bản ghi',
             linkPath: '/spec/record-layer',
           },
@@ -1319,7 +1319,7 @@ export const vi: SiteTranslations = {
         },
         {
           title: 'Lớp bản ghi được bảo đảm bằng bằng chứng xác thực',
-          body: 'Hợp đồng bất biến (contract.json), nhật ký sự kiện chỉ nối thêm (journal.ndjson) và các cổng quan sát đảm bảo chứng minh hoàn thành khách quan.',
+          body: 'Hợp đồng bất biến (contract.json), nhật ký sự kiện chỉ nối thêm (journal.ndjson), biên nhận được tính toán lại và các cổng được quan sát đảm bảo việc hoàn thành được chứng minh thay vì khẳng định.',
         },
         {
           title: 'Ủy quyền đa tác tử an toàn và tự chủ bầy đàn',
@@ -1377,7 +1377,7 @@ export const vi: SiteTranslations = {
       'Hãy coi skill là không đáng tin cho đến khi bạn đã kiểm tra nó. Mỗi bản phát hành đính kèm một file SHA256SUMS bao gồm skill được giao. Tải xuống cho phiên bản bạn định cài đặt, rồi xác minh bản sao của bạn khớp — lối thoát khác không có nghĩa là một file không khớp và bạn nên dừng lại.',
     codeLabel: 'shell',
     verifyNote:
-      'Các bản phát hành có checksum, không có chữ ký — ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi lại, không phải tuyên bố hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ file nào với repository tại tag của nó.',
+      'Các bản phát hành có mã băm kiểm tra, không phải chữ ký — chữ ký (cosign hoặc GPG của người duy trì) là bước tiếp theo được ghi chép lại, không phải là cam kết hiện tại. Vì mọi thứ đều mở, bạn cũng có thể so sánh bất kỳ tệp nào với kho lưu trữ tại thẻ phát hành của nó.',
     vimNote:
       'Quy tắc tương tự áp dụng cho trình cài đặt DeepWorkPlan Vim: trang của nó hiển thị SHA-256 của tập lệnh đang được phân phát, kèm các bước tải, kiểm tra, xác minh và chạy.',
     vimLinkLabel: 'Kiểm tra trình cài đặt DeepWorkPlan Vim',
@@ -1393,7 +1393,7 @@ export const vi: SiteTranslations = {
     linkSkillPolicy: 'Chính sách bảo mật skill & mô hình mối đe dọa',
     limitationsTitle: 'Những hạn chế thành thật',
     limitations: [
-      'Các bản phát hành có checksum, nhưng chưa được ký mật mã — ký được lên kế hoạch, chưa thực hiện.',
+      'Các bản phát hành có mã băm kiểm tra, nhưng chưa được ký — việc ký đã được lên kế hoạch, chưa hoàn thành.',
       'Deep Work Plan chạy một coding agent tự chủ đối với repository của bạn. Xem xét kế hoạch được đề xuất và các diff của nó; phương pháp luận được thiết kế cho việc xem xét đó, không phải để thay thế nó.',
       'Các tuyên bố tin tưởng ở đây chỉ mô tả các nguồn chính thức. Một bản sao đã bị sửa đổi hoặc của bên thứ ba đã trôi dạt khỏi các repository không mang theo bất kỳ đảm bảo nào trong số này — hãy xác minh trước.',
     ],

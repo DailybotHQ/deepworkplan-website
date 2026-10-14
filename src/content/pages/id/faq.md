@@ -130,19 +130,19 @@ Bisa, ketika rencana sudah disetujui sebelumnya, membawa lapisan status yang diw
 
 ### Bisakah beberapa agen bekerja pada satu rencana secara paralel dan bagaimana keamanannya terjaga?
 
-Bisa. Tugas yang dinyatakan dengan `parallel_safe: yes` dapat dieksekusi bersamaan di git worktree khusus. Setiap tugas hanya menulis pada Permukaan Tersentuh yang dideklarasikan di cabang terisolasi. Jurnal append-only di bawah kunci menyerialkan peristiwa tanpa polusi antar jalur.
+Ya, dengan aturan eksplisit. Rencana v7 dapat menandai tugas sebagai `parallel_safe` jika permukaan yang disentuh tidak tumpang tindih dengan tugas lain dan output-nya terikat, serta hanya kontrak yang memberikan `agent_delegation` yang mengizinkan tugas tersebut dialihkan ke agen koding lain — headless di worktree git miliknya sendiri (agentkit) atau di panel Herdr lain (Herdr). Delegasi penulisan hanya bekerja di worktree-nya sendiri, sesi induk tetap menjadi satu-satunya penulis jurnal rencana, dan delegasi tidak pernah mendelegasikan lebih lanjut.
 
 [Baca tentang delegasi](https://deepworkplan.com/id/spec/delegation)
 
 ### Apakah hasil dari sub-agen delegasi langsung dipercaya secara otomatis?
 
-Tidak. Hasil delegasi dicatat sebagai bukti "ditegaskan" sampai gerbang validasi rencana induk benar-benar mengeksekusi dan mengamatinya ("bukti teramati"). Jika gerbang gagal atau menyentuh berkas yang tidak terdaftar, tugas tidak dapat selesai.
+Tidak. Hasil delegasi dicatat sebagai `asserted` sampai rencana induk mengintegrasikan pekerjaan dan runner gerbangnya sendiri mengeksekusi gerbang tugas, yang merupakan satu-satunya hal yang mencatat bukti `observed`. Delegasi yang selesai tidak pernah menutup kriteria dengan sendirinya, sehingga delegasi memperluas jangkauan tanpa menurunkan standar penyelesaian.
 
 [Baca spesifikasi lapisan rekaman](https://deepworkplan.com/id/spec/record-layer)
 
 ### Apa yang terjadi ketika agen mencapai batas penggunaan atau token di tengah rencana?
 
-Otonomi swarm memantau sisa kapasitas. Ketika batas mendekat, pemimpin aktif berhenti menerima tugas baru, membuat paket serah terima terstruktur (`dwp-handoff-v1`) dengan tanda terima, dan mengalihkan eksekusi ke agen pemimpin penerus.
+Setiap agen memeriksa kapasitasnya sendiri di batas tugas. Jika masih ada ruang, ia melanjutkan; saat kapasitas menipis, ia hanya menyelesaikan tugas yang mampu ia selesaikan; saat kritis, ia mencapai titik aman, menulis paket serah terima kecil (`dwp-handoff-v1`: apa yang selesai, terverifikasi dan belum terverifikasi, serta langkah selanjutnya), memberi tahu pemimpin dan berhenti. Pemimpin meluncurkan penerus di akun lain, yang menerima paket dan melanjutkan rencana, menjalankan ulang setiap gerbang yang tercantum belum diverifikasi. Jika pemimpin itu sendiri kehabisan kapasitas, ia menyerahkan kepemimpinan kepada penerus; pergantian kepemimpinan membawa epoch yang terus bertambah sehingga hanya satu pemimpin yang bertindak pada satu waktu.
 
 [Baca metodologi](https://deepworkplan.com/id/methodology)
 
@@ -154,7 +154,7 @@ DWP mendefinisikan taksonomi eskalasi tujuh kelas yang ketat (AGENT_PROTOCOL §7
 
 ### Bagaimana penyelesaian tugas dibuktikan di luar klaim naratif agen?
 
-Penyelesaian membutuhkan kontrak hasil yang tidak dapat diubah, tanda terima terverifikasi, dan hasil gerbang biner yang dicatat dalam jurnal append-only. Kriteria yang ditegaskan memerlukan persetujuan manusia eksplisit. Rencana ditutup hanya dengan Final Review yang lolos.
+Tugas selesai hanya jika bukti tercatat memenuhi setiap kriteria penerimaannya. Kontrak hasil dialamatkan berdasarkan konten dan tidak dapat diubah setelah eksekusi dimulai, setiap peristiwa ditambahkan ke jurnal rencana, dan hanya runner gerbang yang mencatat bukti `observed`. Kriteria yang memerlukan penilaian manusia hanya ditutup melalui persetujuan manusia yang tercatat dengan penanda otoritas eksplisit; tanda terima dihitung ulang dari catatan, tidak pernah ditulis tangan. Tinjauan Akhir kemudian menjalankan pemeriksaan keamanan dan validasi penuh pada status akhir.
 
 [Baca spesifikasi lapisan rekaman](https://deepworkplan.com/id/spec/record-layer)
 

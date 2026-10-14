@@ -10,7 +10,7 @@ lastUpdated: 2026-09-28
 
 Spesifikasi adalah definisi metodologi yang presisi dan mudah dibaca — struktur dan protokol yang dibagikan antara manusia dan agent. Ia menyatakan, dalam istilah normatif RFC-2119, bagaimana sebuah rencana spec-driven distrukturkan dan bagaimana agent harus mengeksekusi terhadapnya: rencana adalah sumber kebenaran, validation gate bersifat biner, dan repositori itu sendiri membawa harness yang dibutuhkan agent. Ia disusun ke dalam dokumen-dokumen berurutan:
 
-- **Lapisan rekaman** — lapisan rekaman berbasis bukti: kontrak, jurnal, kelas bukti (ditegaskan vs diamati), persetujuan, dan tanda terima kriptografi.
+- **Lapisan rekaman** — lapisan rekaman berbasis bukti: kontrak, jurnal, kelas bukti (ditegaskan vs diamati), persetujuan, dan tanda terima.
 - **Sumber daya dan kemampuan** — eksekusi terbatas: manifes konteks, batas sumber daya, kemampuan host, dan registri addon.
 - **Delegasi** — eksekusi multi-agen dan kawanan: worktree paralel yang aman, peristiwa delegasi, dan suksesi pemimpin bertahap.
 - **Status rencana** — lapisan status yang dapat dibaca mesin: snapshot turunan dari jurnal di v6/v7 (`ledger.py project`), lapisan status historis v5, dan rekonsiliasi.
