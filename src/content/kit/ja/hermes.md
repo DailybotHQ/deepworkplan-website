@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "DWP の Hermes アダプター。AgentSkills 標準のスキルロード、state.json のアウトカムレコードによるエピソード記憶のシナジー、そしてクロン駆動な計画継続。"
+description: "DWP の Hermes アダプター。AgentSkills 標準のスキル読み込み、計画結果によるエピソード記憶、cron による計画の継続。"
 kind: adapter
 lang: ja
 order: 11

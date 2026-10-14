@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "El adaptador DWP para Hermes: carga de skills mediante el estándar AgentSkills, sinergia de memoria episódica a través de los registros de resultados en state.json y continuación de planes por cron."
+description: "El adaptador DWP para Hermes: skills mediante el estándar AgentSkills, memoria episódica a partir de los resultados del plan y continuación de planes por cron."
 kind: adapter
 lang: es
 order: 11

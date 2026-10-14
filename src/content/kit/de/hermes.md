@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "Der DWP-Adapter für Hermes: AgentSkills-Standard-Skill-Laden, episodische Gedächtnis-Synergie über Ergebnis-Einträge in state.json und cron-gesteuerte Plan-Fortsetzung."
+description: "Der DWP-Adapter für Hermes: Skills über den AgentSkills-Standard, episodisches Gedächtnis aus Plan-Ergebnissen und cron-gesteuerte Fortsetzung von Plänen."
 kind: adapter
 lang: de
 order: 11

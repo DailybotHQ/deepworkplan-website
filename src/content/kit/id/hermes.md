@@ -1,6 +1,6 @@
 ---
 title: Hermes
-description: "Adapter DWP untuk Hermes: pemuatan skill standar AgentSkills, sinergi memori episodik melalui catatan outcome di state.json, dan kelanjutan rencana berbasis cron."
+description: "Adaptor DWP untuk Hermes: skill melalui standar AgentSkills, memori episodik dari catatan hasil rencana, dan kelanjutan rencana yang digerakkan cron."
 kind: adapter
 lang: id
 order: 11
