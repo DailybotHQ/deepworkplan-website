@@ -1,6 +1,6 @@
 ---
-title: "Deep Work Plan dibandingkan dengan alternatifnya"
-description: "Relasi Deep Work Plan dengan tool spec-driven, framework agent, dan mode rencana vendor: masing-masing menurut istilahnya, dengan sumber dan tanggal tinjauan."
+title: "Perbandingan Deep Work Plan dengan Alternatif Berbasis Spesifikasi"
+description: "Bagaimana Deep Work Plan dibandingkan dengan alat berbasis spesifikasi, kerangka kerja agen, dan mode rencana vendor: sumber resmi dan tanggal tinjauan."
 lastUpdated: 2026-09-11
 ---
 
@@ -74,6 +74,8 @@ Di mana setiap kapabilitas berada, per tool. Bawaan, opsional atau melalui ekste
 - **Status yang bertahan lintas sesi dan agent.** Centang README, log tugas, indeks kerja yang terbatas, dan berkas status terbaca mesin ditulis di setiap batas, sehingga sesi lain atau agent lain melanjutkan dari disk. Bahkan pembuatan rencana yang terputus bisa dipulihkan.
 - **Pemeriksa konformansi untuk repositorinya sendiri.** Script baca-saja memverifikasi harness dan setiap rencana terhadap spesifikasi, memahami kedua siklus hidup rencana, dan keluar dengan kode yang ramah CI.
 - **Beban instruksi diukur dan dipublikasikan.** Script yang di-commit mempublikasikan dua pengukuran per alur — paket masuk yang dimuat di permulaan sesi, dan jalur end-to-end setelah pemicu nyatanya aktif — beserta apa yang dikecualikan masing-masing, sehingga angka masuk saja tidak pernah dibaca sebagai total biaya sebuah eksekusi. Hasilnya, termasuk kenaikan, dipublikasikan sebagai byte, tidak pernah sebagai persentase token atau biaya.
+- **Lapisan rekaman yang didukung bukti nyata.** Kontrak yang tidak dapat diubah (contract.json), jurnal peristiwa append-only (journal.ndjson), tanda terima yang dihitung ulang, dan gerbang yang diamati memastikan penyelesaian terbukti alih-alih diklaim.
+- **Delegasi multi-agen yang aman & otonomi swarm.** Eksekusi tugas paralel di worktree khusus, paket serah terima terstruktur, dan suksesi pemimpin bertahap mencegah penyimpangan dan konflik.
 
 ## Keterbatasan yang jujur
 

@@ -10,7 +10,11 @@
  */
 import { writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
-import { ALTERNATIVES, CAPABILITY_IDS } from '../src/lib/compare-data.ts';
+import {
+  ALTERNATIVES,
+  CAPABILITY_IDS,
+  COMPARE_REVIEWED_ON,
+} from '../src/lib/compare-data.ts';
 
 const ROOT = resolve(import.meta.dirname, '..');
 
@@ -74,7 +78,7 @@ function buildMarkdown(t) {
   lines.push('---');
   lines.push(`title: "${c.meta.title.replace(/"/g, '\\"')}"`);
   lines.push(`description: "${c.meta.description.replace(/"/g, '\\"')}"`);
-  lines.push(`lastUpdated: 2026-09-11`);
+  lines.push(`lastUpdated: ${COMPARE_REVIEWED_ON}`);
   lines.push('---');
   lines.push('');
   lines.push(`## ${c.title}`);
@@ -89,7 +93,7 @@ function buildMarkdown(t) {
   lines.push(`- **${c.howToRead.values.optional}**`);
   lines.push(`- **${c.howToRead.values.notInScope}**`);
   lines.push('');
-  lines.push(`${c.reviewedOnLabel}: 2026-09-11`);
+  lines.push(`${c.reviewedOnLabel}: ${COMPARE_REVIEWED_ON}`);
   lines.push('');
   lines.push(`## ${c.alternativesTitle}`);
   lines.push('');

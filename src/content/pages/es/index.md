@@ -14,7 +14,7 @@ Deep Work Plan (DWP) es una metodología y un kit abiertos, con licencia MIT, pa
 
 > Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.
 
-- [Abrir el prompt de /init](/es/init)
+- [Abrir el prompt de /init](/es/quickstart)
 - [Leer la metodología](/es/methodology)
 
 ---
@@ -87,6 +87,7 @@ El contexto, las herramientas, los guardarraíles y el estado viven en tu reposi
 - Un directorio `.agents/` (skills, agentes, comandos) con el enlace simbólico `.claude` a `.agents`.
 - El skill de Deep Work Plan, instalado una sola vez para cada agente — incluida la subhabilidad author, para que el repositorio pueda crear sus propias habilidades, agentes y comandos, además de complementos opcionales como dependency-upgrade y el complemento design-system para cualquier superficie de interfaz orientada al usuario.
 - Planes de largo alcance y reanudables en una carpeta `.dwp/` ignorada por git.
+- Delegación multiagente y Ecosistema 1.0 — coordina agentes paralelos con seguridad mediante árboles de trabajo aislados, evidencia observada en puertas y complementos fijados opcionales.
 
 ---
 

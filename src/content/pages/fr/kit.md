@@ -33,7 +33,7 @@ Le skill Deep Work Plan est un routeur accompagné de neuf sous-skills :
 
 Des commandes slash légères délèguent aux sous-skills et aux addons :
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — la boucle planifier-exécuter-vérifier.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — la boucle planifier-exécuter-vérifier.
 - `skill-create`, `agent-create` — délèguent au sous-skill author.
 - `lib-upgrade` — délègue à l'addon dependency-upgrade (installé uniquement lorsque cet addon est accepté).
 

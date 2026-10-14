@@ -33,7 +33,7 @@ Deep Work Plan 技能是一个路由器外加九个子技能：
 
 轻量的斜杠命令委派给各子技能与附加组件：
 
-- `dwp-create`、`dwp-execute`、`dwp-refine`、`dwp-resume`、`dwp-status`、`dwp-verify` —— “规划-执行-验证”循环。
+- `dwp-create`、`dwp-execute`、`dwp-refine`、`dwp-resume`、`dwp-status`、`dwp-verify`、`dwp-upgrade` —— “规划-执行-验证”循环。
 - `skill-create`、`agent-create` —— 委派给 author 子技能。
 - `lib-upgrade` —— 委派给 dependency-upgrade 附加组件（仅在该附加组件被采纳时才安装）。
 

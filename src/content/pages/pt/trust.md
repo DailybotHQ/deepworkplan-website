@@ -23,13 +23,14 @@ Trate a skill como não confiável até tê-la verificado. Cada versão anexa um
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Baixe os checksums para a versão que pretende instalar (substitua vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # saída diferente de zero significa que um arquivo não corresponde — pare
 ```
 
-As versões têm **checksums, não assinaturas criptográficas** — a assinatura (cosign ou GPG do mantenedor) é o próximo passo documentado, não uma garantia atual. Como tudo é aberto, você também pode comparar qualquer arquivo com o repositório na sua tag.
+As versões têm **checksums, não assinaturas** — a assinatura (cosign ou GPG do mantenedor) é o próximo passo documentado, não uma garantia atual. Como tudo é aberto, você também pode comparar qualquer arquivo com o repositório na sua tag.
 
 A mesma regra aplica-se ao instalador do DeepWorkPlan Vim: a sua página mostra o SHA-256 do script tal como é servido, com uma receita para obter, inspecionar, verificar e executar. [Inspecionar o instalador do DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
 
@@ -46,7 +47,7 @@ Reporte problemas de segurança **de forma privada pelo sistema de reporte priva
 
 ## Limitações honestas
 
-- As versões têm checksums, mas ainda não estão criptograficamente assinadas — a assinatura está planejada, não implementada.
+- As versões têm checksums, mas ainda não estão assinadas — a assinatura está planejada, não implementada.
 - O Deep Work Plan executa um agente de coding autônomo no seu repositório. Revise o plano proposto e seus diffs; a metodologia foi projetada para essa revisão, não para substituí-la.
 - Estas afirmações de confiança descrevem apenas as fontes oficiais. Uma cópia modificada ou de terceiros que tenha se afastado dos repositórios não tem nenhuma dessas garantias — verifique-a primeiro.
 
@@ -59,4 +60,4 @@ Reporte problemas de segurança **de forma privada pelo sistema de reporte priva
 - [Política de segurança do site](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Política de segurança e modelo de ameaças da skill](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Leia a metodologia](/methodology)
-- [Adoção (init)](/init)
+- [Adoção (init)](/pt/quickstart)

@@ -33,7 +33,7 @@ Deep Work Plan 스킬은 라우터와 아홉 개의 하위 스킬입니다.
 
 얇은 슬래시 명령이 하위 스킬과 애드온에 위임합니다.
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — 계획-실행-검증 루프.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — 계획-실행-검증 루프.
 - `skill-create`, `agent-create` — author 하위 스킬에 위임합니다.
 - `lib-upgrade` — dependency-upgrade 애드온에 위임합니다(그 애드온이 채택될 때만 설치됨).
 

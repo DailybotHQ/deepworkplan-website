@@ -23,13 +23,16 @@ Trata la skill como no confiable hasta haberla comprobado. Cada versión adjunta
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Descarga los checksums para la versión que vas a instalar (reemplaza vX.Y.Z):
+# Descarga los checksums para la versión que vas a instalar (versión actual v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # una salida distinta de cero significa que un archivo no coincide — detente
 ```
 
-Las versiones tienen **checksums, no firmas criptográficas** — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.
+La tabla de fijación del ecosistema en [/init.md#trust-and-verification](/init.md#trust-and-verification) lista las sumas de verificación del paquete y los complementos.
+
+Las versiones tienen **checksums, no firmas** — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.
 
 La misma regla vale para el instalador de DeepWorkPlan Vim: su página muestra el SHA-256 del script tal como se sirve, con una receta para descargar, inspeccionar, verificar y ejecutar. [Inspeccionar el instalador de DeepWorkPlan Vim](/kit/vim#inspect-before-you-run)
 
@@ -46,7 +49,7 @@ Reporta los problemas de seguridad **de forma privada a través del sistema de r
 
 ## Limitaciones honestas
 
-- Las versiones tienen checksums, pero aún no están firmadas criptográficamente — las firmas están planificadas, no implementadas.
+- Las versiones tienen checksums, pero aún no están firmadas — las firmas están planificadas, no implementadas.
 - Deep Work Plan ejecuta un agente de programación autónomo en tu repositorio. Revisa el plan propuesto y sus diffs; la metodología está diseñada para esa revisión, no para reemplazarla.
 - Estas afirmaciones de confianza describen solo las fuentes oficiales. Una copia modificada o de terceros que se haya apartado de los repositorios no tiene ninguna de estas garantías — verifícala primero.
 
@@ -59,4 +62,4 @@ Reporta los problemas de seguridad **de forma privada a través del sistema de r
 - [Política de seguridad del sitio web](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Política de seguridad y modelo de amenazas de la skill](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Leer la metodología](/methodology)
-- [Adopción (init)](/init)
+- [Adopción (init)](/es/quickstart)

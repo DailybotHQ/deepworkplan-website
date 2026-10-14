@@ -14,7 +14,7 @@ Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk mere
 
 > Deep Work Plan adalah spec-driven development tempat repositori itu sendiri menjadi harness.
 
-- [Buka prompt /init](/init)
+- [Buka prompt /init](/id/quickstart)
 - [Baca metodologinya](/methodology)
 
 ---
@@ -87,6 +87,7 @@ Konteks, alat, pagar pengaman, dan status tinggal di repositori Anda sebagai ber
 - Sebuah direktori `.agents/` (skills, agents, commands) dengan symlink `.claude` ke `.agents`.
 - Skill Deep Work Plan, dipasang sekali untuk setiap agent — termasuk sub-skill author, sehingga repositori dapat menumbuhkan skill, agent, dan command-nya sendiri, ditambah addon opt-in seperti dependency-upgrade dan addon design-system untuk permukaan antarmuka apa pun yang menghadap pengguna.
 - Rencana jangka panjang yang dapat dilanjutkan di folder `.dwp/` yang di-gitignore.
+- Delegasi multi-agen dan Ekosistem 1.0 — koordinasikan agen paralel secara aman dengan worktree terisolasi, bukti terobservasi, dan addon ekosistem tersemat opsional.
 
 ---
 

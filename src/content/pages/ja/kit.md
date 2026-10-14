@@ -32,7 +32,7 @@ Deep Work Plan スキルは、ルーターと九つのサブスキルです。
 
 薄いスラッシュコマンドが、サブスキルとアドオンへ委譲します。
 
-- `dwp-create`、`dwp-execute`、`dwp-refine`、`dwp-resume`、`dwp-status`、`dwp-verify` — 計画・実行・検証のループ。
+- `dwp-create`、`dwp-execute`、`dwp-refine`、`dwp-resume`、`dwp-status`、`dwp-verify`、`dwp-upgrade` — 計画・実行・検証のループ。
 - `skill-create`、`agent-create` — author サブスキルへ委譲する。
 - `lib-upgrade` — dependency-upgrade アドオンへ委譲する（そのアドオンが受け入れられたときにのみインストールされる)。
 

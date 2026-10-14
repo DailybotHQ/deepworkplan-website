@@ -14,7 +14,7 @@ export const ja: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — AIコーディングエージェントのための構造化された実行',
   siteDescription:
-    'Deep Work Plan: 構造化され、検証可能で、再開できる複数時間にわたるAIエージェント実行のためのオープンな方法論とリファレンスキット。',
+    'Deep Work Plan は仕様駆動開発の手法です。リポジトリ自体がハーネスとなり、原子的タスク、検証ゲート、安全なマルチエージェント協調を実現します。',
 
   // Navigation
   nav: {
@@ -51,9 +51,9 @@ export const ja: SiteTranslations = {
   // Footer
   changelogPage: {
     meta: {
-      title: 'Deep Work Plan 変更履歴',
+      title: 'Deep Work Plan 変更履歴 — リリースノートと設計決定の記録',
       description:
-        'Deep Work Plan のスキル、方法論、ポータブルなエージェント用ハーネスに関する重要な更新。',
+        'Deep Work Plan のリリースと設計判断のタイムライン：仕様駆動実行、ポータブルなエージェントハーネス、検証済み記録層、およびエコシステム 1.0。',
     },
     eyebrow: '変更履歴',
     title: '方法論を支える仕事',
@@ -99,7 +99,7 @@ export const ja: SiteTranslations = {
       title:
         'Deep Work Plan — AIコーディングエージェントのための構造化された実行',
       description:
-        'モデルよりもコンテキストが重要です。Deep Work Plan はあらゆるリポジトリを、どのコーディングエージェントでも長期にわたる作業をやり遂げられる構造化された環境へと変えます。',
+        'Deep Work Plan は仕様駆動開発を AI コーディングエージェントにもたらします。リポジトリを持続可能なハーネスに変え、安全なマルチエージェント委任を実現。',
     },
     hero: {
       badge: 'オープンな方法論 · MIT · エージェント非依存',
@@ -270,6 +270,11 @@ export const ja: SiteTranslations = {
           detail:
             'デーモンも外部状態もありません。計画は gitignore された .dwp/ フォルダに置かれ、どのタスクも git だけから再開できます。コンテキストが溢れたあとでも。',
         },
+        {
+          label: 'マルチエージェント委任とエコシステム 1.0',
+          detail:
+            '独立したワークツリーで並行エージェントを安全に調整し、ゲートで検証された証拠とオプションのエコシステムアドオンを活用します。',
+        },
       ],
     },
     agents: {
@@ -284,47 +289,47 @@ export const ja: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'リファレンス実装。ネイティブの WebFetch とスラッシュコマンドを備えます。',
+          note: 'ネイティブのスラッシュコマンドを備えたリファレンス実装。動作検証済み。',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: '完全なアダプター。WebFetch が制限されている場合はオフラインバンドルを使用します。',
+          note: 'プロジェクトルールと .cursor → .agents シンボリックリンクによる完全アダプター。インストール検証済み。',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'オフラインバンドルを推奨。ルールは .codex/ 配下にインストールされます。',
+          note: 'AGENTS.md と # コマンドプロシージャによる完全アダプター。動作検証済み。',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: '完全なアダプター。dwp-* コマンドは AGENTS.md と # 手順を通じて実行されます。',
+          note: '完全アダプター：AGENTS.md と # プロシージャを通じて dwp-* コマンドを実行。インストール検証済み。',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Gemini 2.5 Pro 以降が必要で、ネイティブの WebFetch を備えます。',
+          note: 'AGENTS.md と # コマンドプロシージャによる完全アダプター。インストール検証済み。',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'オープンソース。AGENTS.md をネイティブに読み込み、dwp-* を # コマンドで実行します。',
+          note: 'オープンソース。AGENTS.md をネイティブに読み込み、# コマンドで dwp-* を実行。インストール検証済み。',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'ルールと # コマンド手順が Deep Work Plan の完全なループを駆動します。',
+          note: 'ルールと # コマンドプロシージャが Deep Work Plan の完全なループを駆動。インストール検証済み。',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'オープンソース。Markdown ルールと # コマンドがすべての dwp-* ステップを実行します。',
+          note: 'オープンソース。Markdown ルールと # コマンドで dwp-* の各ステップを実行。インストール検証済み。',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'ネイティブなコマンド面を備えた完全なアダプター。',
+          note: 'Markdown コマンドプロシージャを備えた完全アダプター。インストール検証済み。',
         },
       ],
     },
@@ -472,6 +477,13 @@ export const ja: SiteTranslations = {
         icon: '✅',
         link: '/kit',
       },
+      {
+        title: '言明よりも検証された証拠',
+        description:
+          '完了は実行されたゲートと追記専用ジャーナルによって証明されます。記録された証拠が受け入れ基準を満たした場合にのみタスクは完了し、エージェントの自己申告に基づくことは決してありません。',
+        icon: '\u{1F4DC}',
+        link: '/spec/record-layer',
+      },
     ],
     quickFactsTitle: '一目でわかる',
     quickFacts: [
@@ -481,6 +493,7 @@ export const ja: SiteTranslations = {
       '仕様、コマンド、アダプター、プリセット、事例を含む',
       'Markdown のみ — ランタイムなし、ロックインなし',
       'あらゆるリポジトリを AI-first でエージェントが操縦できるコードベースに変える',
+      'エコシステム 1.0 のオプションアドオン（agentkit、Herdr、devcontainer、Vim、reviewer）',
     ],
     ctaTitle: '誰が維持しているか',
     ctaDescription:
@@ -613,9 +626,10 @@ export const ja: SiteTranslations = {
   // Deep Work Plan — Kit index + detail
   kitPage: {
     meta: {
-      title: 'Deep Work Plan のキット',
+      title:
+        'Deep Work Plan キット — コマンド、アダプター、プリセットと拡張機能',
       description:
-        'スキルとその九つのサブスキル、コマンド、アダプター、プリセット、オプトイン式アドオン、そして事例。Deep Work Plan をエージェントとスタックをまたいで実行可能にします。',
+        '9つのサブスキル、スラッシュコマンド、各種エージェントアダプター、スタック別プリセット、オプション拡張機能、実装例を備えた包括的ツールキット。',
     },
     eyebrow: 'キット',
     title: 'キット',
@@ -807,7 +821,7 @@ export const ja: SiteTranslations = {
             id: 'which-agents',
             question: 'どのコーディングエージェントで動作しますか？',
             answer:
-              'リポジトリのファイルを読めるエージェントすべてです。スキルはオープンな Agent Skills 標準と `AGENTS.md` 規約に従うため、Claude Code、Codex、Cursor、Gemini CLI、GitHub Copilot などが、通常のスキルと指示の読み込みを通じて取り込みます。方法論自身の評価では、あるベンダーのエージェントが開始した計画を別ベンダーのエージェントが再開する様子が双方向で示されています。インストール対応状況と挙動の証拠はエージェントごとに互換性マトリクスへ列挙され、両者が混同されることはありません。',
+              'リポジトリファイルを読み取れるすべてのエージェントで動作します。Claude Code と OpenAI Codex は双方向実行と引き継ぎの動作検証済みです。Cursor、GitHub Copilot、Google Gemini CLI、OpenCode、Windsurf、Cline、Antigravity はインストール検証済みアダプターを備えています。',
             linkLabel: 'キットを見る',
             linkPath: '/kit',
           },
@@ -938,6 +952,66 @@ export const ja: SiteTranslations = {
         ],
       },
       {
+        id: 'many-agents-v7',
+        title: 'マルチエージェントと v7',
+        items: [
+          {
+            id: 'parallel-agents',
+            question:
+              '複数のエージェントが並行して1つの計画を安全に進められますか？',
+            answer:
+              'はい、明確なルールの下で行われます。v7 の計画では、対象領域が兄弟タスクと重複せず出力が制限されている場合にタスクを `parallel_safe` とマークでき、`agent_delegation` を付与する契約がある場合にのみ、そのタスクを別のコーディングエージェントに渡すことができます — 自身の git ワークツリー内でヘッドレスに（agentkit）、または別の Herdr ペインで（Herdr）。書き込みを行うデリゲートは自身のワークツリーでのみ作業し、親セッションが計画ジャーナルの唯一の書き手であり続け、デリゲートがさらに委譲することはありません。',
+            linkLabel: '委任について読む',
+            linkPath: '/spec/delegation',
+          },
+          {
+            id: 'delegate-trust',
+            question:
+              '委任されたサブエージェントの結果は自動的に信頼されますか？',
+            answer:
+              'いいえ。デリゲートの結果は、親計画が作業を統合し、独自のゲートランナーがタスクのゲートを実行するまで `asserted` として記録されます。これが `observed` の証拠を記録する唯一の方法です。委譲が完了しただけで基準が閉じることは決してないため、委譲によって完了の基準を下げることなく対応範囲を広げることができます。',
+            linkLabel: '記録層の仕様を読む',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'capacity-handoff-succession',
+            question:
+              'エージェントが実行途中でトークンや利用制限に達した場合はどうなりますか？',
+            answer:
+              '各エージェントはタスクの境界で自身のキャパシティを確認します。余裕があれば継続し、容量が少なくなると完了できるタスクのみを完了させ、危機的状況になると安全なポイントに到達して小さな引き継ぎパケット（`dwp-handoff-v1`：完了事項、検証済みおよび未検証の事項、次のステップ）を書き込み、リーダーに通知して停止します。リーダーは別のアカウントで後継者を起動し、後継者はパケットを受け取って計画を再開し、パケットに未検証と記載されているすべてのゲートを再実行します。リーダー自身のリソースが尽きた場合は後継者にリーダーシップを引き継ぎます。リーダーシップの変更には増加するエポックが付与され、一度に1つのリーダーのみが行動します。',
+            linkLabel: '方法論を読む',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'escalation-taxonomy',
+            question:
+              '自律エージェントが作業を停止して人間に確認するのはどのような場合ですか？',
+            answer:
+              'DWP は厳格な7クラスのエスカレーション分類を定めています (AGENT_PROTOCOL §7.5)：C1 未承認アクション、C2 認証・同意の障壁、C3 解決不能な曖昧さ、C4 修復不能なゲート失敗、C5 破壊的操作、C6 ライセンス変更、C7 容量枯渇。',
+            linkLabel: 'エージェントプロトコルを読む',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'proven-done',
+            question:
+              'エージェントの自己申告に頼らずにタスクの完了をどのように証明しますか？',
+            answer:
+              'タスクは、記録された証拠が各受け入れ基準を満たした場合にのみ完了します。実行が開始されると成果物契約はコンテンツアドレス指定され不変となり、すべてのイベントは計画のジャーナルに追加され、ゲートランナーのみが `observed` の証拠を記録します。人間の判断が必要な基準は、明示的な権限マーカーが付いた記録済みの人間の承認を通じてのみ閉じられます。領収書は記録から再計算され、手書きされることはありません。その後、最終レビューで最終状態に対するセキュリティチェックと完全な検証が実行されます。',
+            linkLabel: '記録層の仕様を読む',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'v6-compatibility',
+            question: 'v6 で作成された計画は v7 でも継続して実行できますか？',
+            answer:
+              'はい。計画契約にはスキーマ世代が明記されています (`plan-contract/v6.json` または `plan-contract/v7.json`)。実行中の計画が途中で世代移行することはありません。既存の v6 計画は v7 ツールでもそのまま動作します。',
+            linkLabel: '契約について読む',
+            linkPath: '/spec/record-layer',
+          },
+        ],
+      },
+
+      {
         id: 'compare',
         title: '他のツールとの比較',
         items: [
@@ -1038,9 +1112,9 @@ export const ja: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan と代替ツールの比較',
+      title: 'Deep Work Plan と仕様駆動ツールおよびエージェントの比較',
       description:
-        'Deep Work Plan と仕様駆動開発ツール、エージェントワークフローフレームワーク、各ベンダー純正のプランモードとの関係を、どのツールもそのツール自身の言葉で整理して並べる比較ページです。すべての事実は公式ドキュメントに出所をたどれ、最終確認日付も明記しています。',
+        '仕様駆動ツール、エージェントワークフロー、ベンダー固有の計画モードと Deep Work Plan の詳細な比較：一次情報源と検証日を明記。',
     },
     eyebrow: '比較',
     title: 'Deep Work Plan と代替ツール',
@@ -1242,6 +1316,14 @@ export const ja: SiteTranslations = {
           title: '計測され公開される指示読み込み',
           body: 'コミットされたスクリプトがフローごとに二つの測定値——セッション開始時に読み込まれる入口バンドルと、実際のトリガーが発火した後のエンドツーエンドのパス——を、それぞれの除外事項とともに公開するため、入口の数値だけが実行全体のコストとして読まれることはありません。増加を含む結果は常にバイトとして公開され、トークンやコストのパーセンテージとして公開されることはありません。',
         },
+        {
+          title: '客観的な証拠に基づく記録層',
+          body: '不変の契約（contract.json）、追記専用イベントジャーナル（journal.ndjson）、再計算された領収書、観測されたゲートにより、完了が言明ではなく証明されることを保証します。',
+        },
+        {
+          title: '安全なマルチエージェント委任と群知能の自律性',
+          body: '専用ワークツリーでの並行タスク、検証まで保留される結果、構造化された引き継ぎによりドリフトを防ぎます。',
+        },
       ],
     },
     honestLimits: {
@@ -1260,7 +1342,7 @@ export const ja: SiteTranslations = {
     meta: {
       title: '信頼とセキュリティ — Deep Work Plan',
       description:
-        'なぜ Deep Work Plan は安心して採用できるのか：Open Source かつ MIT ライセンス、ネットワーク呼び出しやテレメトリーのない Markdown-first、設計上の非破壊性、検証可能なインストール、そして明確な脆弱性開示ポリシー。',
+        'Deep Work Plan が安全な理由：MIT オープンソース、テレメトリのない Markdown、非破壊的設計、検証可能なチェックサム、脆弱性の非公開報告ポリシー。',
     },
     eyebrow: '信頼とセキュリティ',
     title: '信頼とセキュリティ',
@@ -1294,7 +1376,7 @@ export const ja: SiteTranslations = {
       '確認が済むまでスキルを信頼できないものとして扱ってください。各リリースには出荷されたスキルを対象とした SHA256SUMS ファイルが添付されています。インストールしたいバージョンのものをダウンロードし、コピーが一致することを確認してください — ゼロ以外の終了コードはファイルが一致しないことを意味するため、その場合は中止してください。',
     codeLabel: 'shell',
     verifyNote:
-      'リリースはチェックサム付きですが、署名はされていません — 署名（cosign またはメンテナー GPG）は文書化された次のステップであり、現在の主張ではありません。すべてが公開されているため、任意のファイルをそのタグのリポジトリと diff で比較することもできます。',
+      'リリースにはチェックサムが付与されており、署名ではありません — 署名（cosign またはメンテナーの GPG）は文書化された次のステップであり、現在の主張ではありません。すべてオープンであるため、タグ付けされたリポジトリと任意のファイルを比較することもできます。',
     vimNote:
       '同じ原則は DeepWorkPlan Vim のインストーラにも当てはまります。そのページには、現在配信しているスクリプトの SHA-256 と、ダウンロード、確認、検証、実行の手順が示されています。',
     vimLinkLabel: 'DeepWorkPlan Vim のインストーラを確認する',
@@ -1310,7 +1392,7 @@ export const ja: SiteTranslations = {
     linkSkillPolicy: 'スキルのセキュリティポリシーと脅威モデル',
     limitationsTitle: '正直な制限事項',
     limitations: [
-      'リリースはチェックサム付きですが、まだ暗号的に署名されていません — 署名は計画中であり、まだ完了していません。',
+      'リリースはチェックサム付きですが、まだ署名されていません — 署名は計画中であり、まだ完了していません。',
       'Deep Work Plan はリポジトリに対して自律的なコーディングエージェントを実行します。提案された計画と diff を確認してください。この方法論はそのレビューのために設計されており、レビューを省くためのものではありません。',
       'ここでの信頼の主張は公式ソースのみを対象としています。リポジトリから乖離した改変済みまたはサードパーティのコピーには、これらの保証は一切ありません — まず検証してください。',
     ],

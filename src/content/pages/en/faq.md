@@ -1,7 +1,7 @@
 ---
 title: "Frequently asked questions — Deep Work Plan"
 description: "Answers to the questions people ask about Deep Work Plan: what it does, how gates and resumption work, how it compares with other tools, and how to adopt it."
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-14
 ---
 
 ## Frequently asked questions
@@ -36,7 +36,7 @@ A methodology packaged as an installable skill. There is no server, no account, 
 
 ### Which coding agents does it work with?
 
-Any agent that reads repository files. The skill follows the open Agent Skills standard and the `AGENTS.md` convention, so Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot and others pick it up through their normal skill and instruction loading. The methodology's own evaluation shows a plan started by one vendor's agent and resumed by another's in both directions. Installation coverage and behavioral evidence are listed per agent in the compatibility matrix, and the two are never conflated.
+Any agent that reads repository files. Claude Code and OpenAI Codex are behavior-tested for bidirectional execution and handoffs; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline, and Antigravity have verified install-tested adapters. The methodology separates behavioral testing from installation coverage and never conflates them.
 
 [Browse the kit](https://deepworkplan.com/kit)
 
@@ -50,7 +50,7 @@ Three steps. First, install the Deep Work Plan skill into your coding agent — 
 
 The agent skill is installed wherever your agent loads project or user skills. Onboarding then adapts the repository itself: it creates or reconciles `AGENTS.md`, `docs/`, `.agents/` and the gitignored `.dwp/` workspace. The skill teaches the agent the method; the repository keeps the context, kit and plan evidence that other agents need to continue.
 
-[See the adoption flow](https://deepworkplan.com/init)
+[See the adoption flow](https://deepworkplan.com/quickstart)
 
 ### Does Deep Work Plan require Git?
 
@@ -132,13 +132,49 @@ Yes — the orchestrator-hub archetype exists for exactly that. A hub repository
 
 [Repository archetypes](https://deepworkplan.com/spec/archetypes)
 
+## Many agents & v7
+
+### Can several agents work on one plan in parallel, and how is it kept safe?
+
+Yes, under explicit rules. A v7 plan can mark a task `parallel_safe` when its touched surface does not overlap a sibling's and its output is bounded, and only a contract that grants `agent_delegation` lets that task go to another coding agent — headless in its own git worktree (agentkit) or in another Herdr pane (Herdr). A writing delegate works only in its own worktree, the parent session stays the only writer of the plan's journal, and a delegate never delegates further.
+
+[Read about delegation](https://deepworkplan.com/spec/delegation)
+
+### Is a delegate subagent's result automatically trusted?
+
+No. A delegate's result is recorded as `asserted` until the parent plan integrates the work and its own gate runner executes the task's gate, which is the only thing that records `observed` evidence. A completed delegation never closes a criterion by itself, so delegation adds reach without lowering the bar for completion.
+
+[Read the record layer spec](https://deepworkplan.com/spec/record-layer)
+
+### What happens when an agent hits usage, token, or rate limits mid-plan?
+
+Each agent checks its own capacity at task boundaries. With room left it continues; when capacity runs low it finishes only the task it can finish; when it is critical it reaches a safe point, writes a small handoff packet (`dwp-handoff-v1`: what is done, verified and not verified, and the next steps), notifies the lead and stops. The lead launches a successor on another account, which accepts the packet and resumes the plan, re-running every gate the packet lists as not verified. If the lead itself runs out, it hands the leadership to a successor; leadership changes carry an increasing epoch so only one lead acts at a time.
+
+[Read the methodology](https://deepworkplan.com/methodology)
+
+### When does an autonomous agent pause to ask a human?
+
+DWP defines a strict seven-class escalation taxonomy (AGENT_PROTOCOL §7.5): C1 unapproved actions, C2 authentication or consent barriers, C3 irreducible ambiguity, C4 gates failing without allowable fixes, C5 destructive operations, C6 licensing or terms changes, and C7 exhausted capacity. Routine progress proceeds autonomously.
+
+[Read the agent protocol](https://deepworkplan.com/spec/agent-protocol)
+
+### How is task completion proven beyond an agent's narrative claim?
+
+A task completes only when recorded evidence satisfies each of its acceptance criteria. The outcome contract is content-addressed and immutable once execution starts, every event is appended to the plan's journal, and only the gate runner records `observed` evidence. A criterion that needs human judgment closes only through a recorded human sign-off with an explicit authority marker; the receipt is recomputed from the records, never handwritten. The Final Review then runs the security pass and the full validation on the final state.
+
+[Read the record layer spec](https://deepworkplan.com/spec/record-layer)
+
+### Do v6 plans keep running under v7?
+
+Yes. Plan contracts declare their schema generation explicitly (`plan-contract/v6.json` vs `plan-contract/v7.json`). A plan never migrates its generation mid-flight. Existing v6 plans retain their recorded shape, state, and journal semantics, continuing uninterrupted under v7 tooling.
+
+[Read about contracts](https://deepworkplan.com/spec/record-layer)
+
 ## How it compares
 
 ### How is it different from spec-driven tools such as Spec Kit, OpenSpec or Kiro?
 
-They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. The comparison page lays the capabilities side by side, on each tool's own terms.
-
-Claude's AI-native SDLC playbook makes a related case for durable artifacts across Plan, Design, Build, Test, Deploy and Maintain; DWP covers the repository harness and execution loop, while continuous production evaluation remains a complementary practice.
+They solve adjacent problems. Spec-driven tools are excellent at capturing what should change: specifications, requirements and change proposals in a repeatable shape. Deep Work Plan is about how an agent executes for hours without drifting: the onboarded harness, per-task validation gates selected from the touched surface, on-disk resumable state, a mandatory Final Review with a security pass, and a conformance checker for the repository itself. The two can be combined, with a spec or change proposal feeding a plan. Claude's AI-native SDLC playbook makes a related case for durable artifacts across Plan, Design, Build, Test, Deploy and Maintain; DWP covers the repository harness and execution loop, while continuous production evaluation remains a complementary practice. The comparison page lays the capabilities side by side, on each tool's own terms.
 
 [See the comparison](https://deepworkplan.com/compare)
 
@@ -160,13 +196,13 @@ Built-in plan modes are useful and Deep Work Plan builds on the same substrate, 
 
 Onboarding is non-destructive: it detects an existing `AGENTS.md`, `docs/`, `.agents/` or `CLAUDE.md`, reconciles rather than overwrites, and asks before replacing anything. It writes the `AGENTS.md` index with real commands, a reasoned `docs/` tree, per-module docs, the `.agents/` kit with thin `dwp-*` commands, a gitignored `.dwp/` output area, a verified testing map, and the required local code review (the AI Diff Reviewer skill plus a repo-tailored review extension). It then runs a self-check and the conformance checker so you can see what was produced. A repository onboarded under an earlier standard gets a targeted harness upgrade that reconciles only what is missing or outdated.
 
-[The adoption endpoint](https://deepworkplan.com/init)
+[The adoption endpoint](https://deepworkplan.com/quickstart)
 
 ### How do I upgrade the skill in an already-onboarded repository?
 
 Two different upgrades are involved, and the flow keeps them apart. The repository harness — `AGENTS.md`, `docs/`, the `.agents/` kit — is reconciled by re-running onboarding, which fills only what is missing or outdated. The skill itself moves through `/dwp-upgrade`: a read-only check of the latest published release, an install of the exact tag you accepted, verified, and then onboarding again as a fresh pass. The flow is consent-gated throughout, local adaptations are diffed and preserved rather than overwritten, and `.dwp/` is never migrated — existing plans keep their recorded shape and keep running.
 
-[The adoption endpoint](https://deepworkplan.com/init)
+[The adoption endpoint](https://deepworkplan.com/quickstart)
 
 ### Can I use the core methodology without installing add-ons?
 
@@ -182,7 +218,7 @@ DWP does not treat the absence of a toolchain as a free pass. During onboarding 
 
 ### What does it cost, and how is efficiency measured?
 
-The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads **at entry** — its bundle at the start of a session — published alongside named **end-to-end paths** that add what the flow's own triggers load once real work continues (for example, a resume that goes on to execute typically loads several times its entry bundle). Neither figure caps a session: a real run also reads the repository's own files, tool output and the plan's working files, none of which this ledger counts. Both numbers are measured by a script committed with the skill, re-measured across release baselines, and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those. A public fresh-agent evaluation has now run under a frozen protocol: the same two features built from clean clones with no harness, with the previous major version and with the current one. It found that agents on a harness-bearing tree read fewer bytes in both tasks, and that the current version’s feature sessions consumed less model input and output than the previous major’s in both tasks — as reported by the harness, on a single workload. It also found the honest limits: onboarding is a one-time cost that only pays back when the flows are used, the net token direction per workload was mixed, no wall-clock advantage is claimed, and a fresh agent does not enter the flows unaided — the flows are commands you or the agent invoke.
+The methodology and the skill are MIT-licensed and free; there is no service, no API key and no telemetry in the core flows. Efficiency is reported as the number of instruction bytes each flow loads at entry — its bundle at the start of a session — published alongside named end-to-end paths that add what the flow's own triggers load once real work continues (for example, a resume that goes on to execute typically loads several times its entry bundle). Neither figure caps a session: a real run also reads the repository's own files, tool output and the plan's working files, none of which this ledger counts. Both numbers are measured by a script committed with the skill, re-measured across release baselines, and published in an evaluation ledger, with increases reported as plainly as decreases. It is not reported as token percentages or cost savings, because a byte inventory does not establish those. A public fresh-agent evaluation has now run under a frozen protocol: the same two features built from clean clones with no harness, with the previous major version and with the current one. It found that agents on a harness-bearing tree read fewer bytes in both tasks, and that the current version’s feature sessions consumed less model input and output than the previous major’s in both tasks — as reported by the harness, on a single workload. It also found the honest limits: onboarding is a one-time cost that only pays back when the flows are used, the net token direction per workload was mixed, no wall-clock advantage is claimed, and a fresh agent does not enter the flows unaided — the flows are commands you or the agent invoke.
 
 [Trust and disclosure](https://deepworkplan.com/trust)
 

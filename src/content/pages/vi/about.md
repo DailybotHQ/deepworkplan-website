@@ -19,6 +19,7 @@ Nó cố ý không phụ thuộc vào agent AI hay stack nào bạn dùng — c�
 - **Lập kế hoạch trước khi thực thi** — Không viết dòng mã nào cho tới khi kế hoạch được thống nhất. Kế hoạch là một hợp đồng giữa bạn và agent. [Đọc phương pháp luận](/methodology)
 - **Tác vụ mang tính nguyên tử** — Mỗi tác vụ được giới hạn phạm vi sao cho nó có thể được thực thi và kiểm chứng độc lập, rồi commit một cách nguyên tử. [Xem đặc tả](/spec)
 - **Kiểm chứng mọi thứ** — Mỗi tác vụ kết thúc bằng một bước kiểm tra rõ ràng trước khi tác vụ kế tiếp bắt đầu, với tiến độ được ghi lại trong git. [Khám phá bộ kit](/kit)
+- **Bằng chứng đã xác minh thay vì lời nói suông** — Việc hoàn thành được chứng minh bằng các cổng đã thực thi và nhật ký chỉ nối thêm: một nhiệm vụ chỉ kết thúc khi bằng chứng được ghi nhận đáp ứng các tiêu chí nghiệm thu, không bao giờ dựa vào tuyên bố tự báo cáo của tác nhân. [Đọc lớp bản ghi](/vi/spec/record-layer)
 
 ---
 

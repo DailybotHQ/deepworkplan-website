@@ -23,11 +23,14 @@ lastUpdated: 2026-06-05
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Загрузите контрольные суммы для нужного релиза (замените vX.Y.Z):
+# Download the checksums for the release you intend to install (current release v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # ненулевой код выхода означает несовпадение — остановитесь
 ```
+
+Таблица закрепленных версий экосистемы в [/init.md#trust-and-verification](/init.md#trust-and-verification) содержит контрольные суммы пакета и аддонов.
 
 Релизы снабжены **контрольными суммами, но не подписаны** — подпись (cosign или GPG сопровождающего) является задокументированным следующим шагом, а не текущим утверждением. Поскольку всё открыто, вы также можете сравнить любой файл с репозиторием по его тегу.
 
@@ -46,7 +49,7 @@ curl -fsSL -o SHA256SUMS \
 
 ## Честные ограничения
 
-- Релизы снабжены контрольными суммами, но ещё не криптографически подписаны — подпись запланирована, но не реализована.
+- Релизы снабжены контрольными суммами, но ещё не подписаны — подпись запланирована, но не реализована.
 - Deep Work Plan запускает автономного кодирующего агента на ваш репозиторий. Проверяйте предложенный им план и диффы; методология создана для такого ревью, а не для его замены.
 - Заявления о доверии здесь описывают только официальные источники. Изменённая или сторонняя копия, отклонившаяся от репозиториев, не несёт ни одной из этих гарантий — сначала проверьте её.
 
@@ -59,4 +62,4 @@ curl -fsSL -o SHA256SUMS \
 - [Политика безопасности сайта](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Политика безопасности навыка и модель угроз](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Читать методологию](/methodology)
-- [Внедрение (init)](/init)
+- [Внедрение (init)](/ru/quickstart)

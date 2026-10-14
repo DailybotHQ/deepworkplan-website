@@ -33,7 +33,7 @@ Skill Deep Work Plan adalah sebuah router ditambah sembilan sub-skill:
 
 Slash command tipis mendelegasikan ke sub-skill dan addon:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — loop plan-execute-verify.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — loop plan-execute-verify.
 - `skill-create`, `agent-create` — mendelegasikan ke sub-skill author.
 - `lib-upgrade` — mendelegasikan ke addon dependency-upgrade (dipasang hanya ketika addon itu diterima).
 
