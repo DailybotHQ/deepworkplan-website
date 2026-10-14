@@ -41,7 +41,7 @@ Cada carril tiene un plan, al menos un plan Lite en su propio repositorio, y ese
 
 ## El bucle de capacidad
 
-Un agente comprueba su propio margen antes de empezar cada tarea, después de cualquier puerta o paso que haya durado más de 20 minutos, siempre que su CLI muestre un aviso de límite de uso y antes de aceptar un traspaso o el liderazgo. La comprobación es `ak capacity --self --json` de coding-agents-kit `v1.0.0`, que el helper del pack convierte en una decisión:
+Un agente comprueba su propio margen antes de empezar cada tarea, después de cualquier puerta o paso que haya durado más de 20 minutos, siempre que su CLI muestre un aviso de límite de uso y antes de aceptar un traspaso o el liderazgo. La comprobación es `ak capacity --self --json` de coding-agents-kit `v1.0.1`, que el helper del pack convierte en una decisión:
 
 | Veredicto | Decisión | Un carril | Un líder, para sí mismo |
 | --- | --- | --- | --- |

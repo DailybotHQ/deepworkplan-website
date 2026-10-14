@@ -81,10 +81,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.8.0
+  git checkout v7.8.1
   # Скачайте контрольные суммы этого релиза и сверьте их с дайджестом ниже:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.0/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
   shasum -a 256 SHA256SUMS # должен совпадать с дайджестом deepworkplan-skill в Закреплённых релизах
   ./setup.sh --verify        # ненулевой выход означает несовпадение файла — остановитесь
   ```
@@ -97,10 +97,10 @@ lastUpdated: 2026-10-11
 
   | Репозиторий (github.com/DailybotHQ) | Тег | sha256 его `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.8.0` | `a43fc0f2996b2edd5e68850f62742486e1d7475314351ba3e25771fd198453e5` |
-  | coding-agents-kit | `v1.0.0` | `8995e737862c5486b3ec3d0235e82f358dbf9c20879f44afa506cf8e0721973e` |
+  | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
+  | coding-agents-kit | `v1.0.0` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
   | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
-  | devcontainer-kit | `v1.0.0` | `060d16db41214bc91b05089bc7201cf499d21e5571731954a0bb766edd7cb605` |
+  | devcontainer-kit | `v1.0.0` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
   | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
   | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
   | agent-skill | `v3.23.17` | не публикуется — CLI skills записывает хеш содержимого в `skills-lock.json` |
@@ -115,7 +115,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
 ```
 
 Или установите через OpenClaw:
@@ -137,7 +137,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 и девять под-навыков: `create`, `execute`, `refine`, `resume`, `status`, `verify`,
 `onboard`, `author` и `upgrade`.
 
-Установленная версия навыка: **7.8.0**. Текущий пакет 7.x по умолчанию создает новые планы в формате v7. Существующие планы сохраняют записанное поколение; перенос плана v5 на v6 требует явного запроса с предварительным просмотром.
+Установленная версия навыка: **7.8.1**. Текущий пакет 7.x по умолчанию создает новые планы в формате v7. Существующие планы сохраняют записанное поколение; перенос плана v5 на v6 требует явного запроса с предварительным просмотром.
 
 Стандарт намеренно пропорционален и делает эту пропорциональность свойством плана, а не
 дисциплины разработчика. План бывает либо **Lite** — записи задач находятся прямо в README
@@ -234,9 +234,9 @@ CI-поверхность, которая никогда не требуется
 | --- | --- | --- |
 | AI Diff Reviewer (обязательно) | `version:` в `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` в `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` в установленном навыке herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | проверенный установщик по адресу https://deepworkplan.com/vim/install.sh (закрепляет `v1.0.0`; скачайте, `shasum -a 256 -c install.sh.sha256`, затем запустите) |
 
 Прежде чем запускать любую загрузку, сверьте её с `SHA256SUMS` её релиза и дайджестом в *Закреплённых релизах*
@@ -324,7 +324,7 @@ agentkit и Herdr установлены:
   действий, запросы оплаты или тарифа, неизвестные экраны и панели, которые вы не создавали. При
   `AGENTKIT_PERMISSIONS=ask` линии спрашивают, прежде чем действовать; никогда не обходите эти запросы. Записывайте каждое
   вмешательство в родительский план.
-- **Поддерживайте работу роя.** С coding-agents-kit `v1.0.0` и herdr-peers `v1.0.0` каждый агент
+- **Поддерживайте работу роя.** С coding-agents-kit `v1.0.1` и herdr-peers `v1.0.0` каждый агент
   проверяет `ak capacity --self --json` на каждой границе задачи; при `critical` он пишет пакет передачи
   (https://deepworkplan.com/schema/dwp-handoff/v1.json), и ведущий агент запускает преемника в том же
   checkout. Ведущий агент закрепляет свой план через `herdr-peers lead claim`, линии обращаются к нему

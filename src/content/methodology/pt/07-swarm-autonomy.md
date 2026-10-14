@@ -41,7 +41,7 @@ Toda frente tem um plano, no mínimo um plano Lite no próprio repositório, e e
 
 ## O loop de capacidade
 
-Um agente verifica a própria folga antes de começar cada tarefa, depois de qualquer gate ou passo que tenha levado mais de 20 minutos, sempre que sua CLI mostra um aviso de limite de uso e antes de aceitar um repasse ou a liderança. A verificação é `ak capacity --self --json` do coding-agents-kit `v1.0.0`, que o helper do pack transforma em uma decisão:
+Um agente verifica a própria folga antes de começar cada tarefa, depois de qualquer gate ou passo que tenha levado mais de 20 minutos, sempre que sua CLI mostra um aviso de limite de uso e antes de aceitar um repasse ou a liderança. A verificação é `ak capacity --self --json` do coding-agents-kit `v1.0.1`, que o helper do pack transforma em uma decisão:
 
 | Veredito | Decisão | Uma frente | Um líder, para si mesmo |
 | --- | --- | --- | --- |

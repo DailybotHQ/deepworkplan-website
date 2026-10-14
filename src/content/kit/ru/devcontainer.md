@@ -8,7 +8,7 @@ order: 1
 
 # Аддон Devcontainer
 
-Дайте репозиторию воспроизводимый, изолированный контейнер для разработки — такой, которым могут пользоваться люди, редакторы и агенты для программирования. В **DWP v7** (пакет `v7.8.0`) этот аддон интегрирует **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** — продукт под лицензией MIT, работающий без Deep Work Plan. Он опционален: репозиторий без него полностью соответствует требованиям.
+Дайте репозиторию воспроизводимый, изолированный контейнер для разработки — такой, которым могут пользоваться люди, редакторы и агенты для программирования. В **DWP v7** (пакет `v7.8.1`) этот аддон интегрирует **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** — продукт под лицензией MIT, работающий без Deep Work Plan. Он опционален: репозиторий без него полностью соответствует требованиям.
 
 ## Что предоставляет devcontainer-kit
 
@@ -21,7 +21,7 @@ order: 1
 ## Установка
 
 ```bash
-git clone --branch v1.0.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 

@@ -24,7 +24,7 @@ Komendy DWP istnieją jako pliki markdown w projekcie. Cursor odczytuje je przez
 Opcjonalnie: [coding-agents-kit](/kit/agentkit) może zainstalować to CLI i uruchamiać je poleceniem `ak cursor`. Oficjalny instalator dostawcy działa równie dobrze.
 
 ```bash
-git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

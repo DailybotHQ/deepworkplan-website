@@ -10,7 +10,7 @@ order: 8
 
 Кожен термінальний агент для програмування має власні прапорці для продовження сесії, власний спосіб відокремити другий обліковий запис, власний headless-режим і власний перемикач для пропуску запитів дозволів. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** накладає на всіх них одну командну поверхню: `ak <kind> [@profile]`.
 
-Цей аддон інтегрує kit у **DWP v7** (пакет `v7.8.0`) як **headless**-транспорт делегування. Він опційний: без нього кожне завдання виконується в поточній сесії, як і раніше. Сам kit — це продукт за ліцензією MIT, який працює без Deep Work Plan.
+Цей аддон інтегрує kit у **DWP v7** (пакет `v7.8.1`) як **headless**-транспорт делегування. Він опційний: без нього кожне завдання виконується в поточній сесії, як і раніше. Сам kit — це продукт за ліцензією MIT, який працює без Deep Work Plan.
 
 ## Що дає kit
 
@@ -65,7 +65,7 @@ ak pick codex --owner local:w1:p1 --count 2      # пропустити облі
 ## Встановлення
 
 ```bash
-git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 

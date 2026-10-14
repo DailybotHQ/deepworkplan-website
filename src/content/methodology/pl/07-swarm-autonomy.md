@@ -41,7 +41,7 @@ Każdy tor ma plan, co najmniej plan Lite we własnym repozytorium, i ten plan j
 
 ## Pętla pojemności
 
-Agent sprawdza własny zapas przed rozpoczęciem każdego zadania, po każdej bramce lub kroku, który trwał dłużej niż 20 minut, za każdym razem, gdy jego CLI pokazuje ostrzeżenie o limicie zużycia, oraz przed przyjęciem przekazania lub przywództwa. Kontrolą jest `ak capacity --self --json` z coding-agents-kit `v1.0.0`, którą pomocnik pakietu zamienia na decyzję:
+Agent sprawdza własny zapas przed rozpoczęciem każdego zadania, po każdej bramce lub kroku, który trwał dłużej niż 20 minut, za każdym razem, gdy jego CLI pokazuje ostrzeżenie o limicie zużycia, oraz przed przyjęciem przekazania lub przywództwa. Kontrolą jest `ak capacity --self --json` z coding-agents-kit `v1.0.1`, którą pomocnik pakietu zamienia na decyzję:
 
 | Werdykt | Decyzja | Tor | Prowadzący, dla siebie |
 | --- | --- | --- | --- |

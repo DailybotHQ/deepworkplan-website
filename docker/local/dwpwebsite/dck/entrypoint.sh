@@ -484,6 +484,12 @@ dck_layer_persist() {
       done <<HOMES
 $(dck_agent_homes "$kind")
 HOMES
+      # @default is the directory dck_persist just linked ~/.claude at: the
+      # container's own copy on the claude volume, never the host's ~/.claude
+      # and never a named profile. Say so; the link itself stays.
+      if [ "$kind" = claude ]; then
+        dck_log "agents: ~/.claude is the container's own @default profile"
+      fi
     done
   fi
 }

@@ -10,7 +10,7 @@ order: 8
 
 हर टर्मिनल कोडिंग एजेंट के पास सत्र जारी रखने के अपने फ़्लैग, दूसरे खाते को अलग रखने का अपना तरीका, अपना headless मोड और अनुमति प्रॉम्प्ट छोड़ने का अपना स्विच होता है। **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** इन सभी के ऊपर एक ही कमांड सतह रखता है: `ak <kind> [@profile]`।
 
-यह ऐडऑन इस kit को **DWP v7** (पैक `v7.8.0`) में **headless** प्रत्यायोजन ट्रांसपोर्ट के रूप में एकीकृत करता है। यह वैकल्पिक है: इसके बिना हर कार्य वर्तमान सत्र में ही चलता है, ठीक पहले की तरह। kit स्वयं एक MIT उत्पाद है जो Deep Work Plan के बिना भी काम करता है।
+यह ऐडऑन इस kit को **DWP v7** (पैक `v7.8.1`) में **headless** प्रत्यायोजन ट्रांसपोर्ट के रूप में एकीकृत करता है। यह वैकल्पिक है: इसके बिना हर कार्य वर्तमान सत्र में ही चलता है, ठीक पहले की तरह। kit स्वयं एक MIT उत्पाद है जो Deep Work Plan के बिना भी काम करता है।
 
 ## kit आपको क्या देता है
 
@@ -65,7 +65,7 @@ ak pick codex --owner local:w1:p1 --count 2      # दूसरों को ल
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.0.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
@@ -73,7 +73,7 @@ ak doctor
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.0.0`, इंटरफ़ेस 1 |
+| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.0.1`, इंटरफ़ेस 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `agentkit` |
 | ट्रांसपोर्ट | headless: हर प्रत्यायोजित एजेंट के लिए एक समर्पित git worktree में एक `ak run` |
 | प्रदान करता है | `subagents`, `cancel_children`, `model_routing` |

@@ -15,28 +15,12 @@ if [ -r "$HOME/.dck/env.sh" ]; then . "$HOME/.dck/env.sh"; fi
 if [ "${DCK_NODE_FIRST:-0}" = "1" ] && [ -x /opt/dck/node/bin/node ]; then
   case ":${PATH}:" in *":/opt/dck/node/bin:"*) ;; *) PATH="/opt/dck/node/bin:${PATH}"; export PATH ;; esac
 fi
-# [agents] default_profile: a plain `claude` / `codex` — what Herdr's session
-# restore relaunches (`claude --resume <id>`, `codex resume`), without ak — uses
-# the default profile's config home, not the login screen of an empty one. ak
-# sets its own for each launch; a value already set wins.
-if [ -n "${AGENTKIT_DEFAULT_PROFILE_CLAUDE:-}" ] && [ -z "${CLAUDE_CONFIG_DIR:-}" ]; then
-  _p="${AGENTKIT_DEFAULT_PROFILE_CLAUDE#@}"
-  case "$_p" in
-    ''|default|*[!A-Za-z0-9._-]*) ;;
-    *) [ -d "${AGENTKIT_PROFILES_DIR:-$HOME/.dck/volumes/agentkit/profiles}/claude/$_p" ] && \
-         CLAUDE_CONFIG_DIR="${AGENTKIT_PROFILES_DIR:-$HOME/.dck/volumes/agentkit/profiles}/claude/$_p" && export CLAUDE_CONFIG_DIR ;;
-  esac
-  unset _p
-fi
-if [ -n "${AGENTKIT_DEFAULT_PROFILE_CODEX:-}" ] && [ -z "${CODEX_HOME:-}" ]; then
-  _p="${AGENTKIT_DEFAULT_PROFILE_CODEX#@}"
-  case "$_p" in
-    ''|default|*[!A-Za-z0-9._-]*) ;;
-    *) [ -d "${AGENTKIT_PROFILES_DIR:-$HOME/.dck/volumes/agentkit/profiles}/codex/$_p" ] && \
-         CODEX_HOME="${AGENTKIT_PROFILES_DIR:-$HOME/.dck/volumes/agentkit/profiles}/codex/$_p" && export CODEX_HOME ;;
-  esac
-  unset _p
-fi
+# [agents] default_profile names the account a bare `ak <cli>` uses
+# (AGENTKIT_DEFAULT_PROFILE_<CLI>). It does not move CLAUDE_CONFIG_DIR or
+# CODEX_HOME: those are how the CLI finds @default, and pointing them at a
+# named profile made @default that profile (ak usage hid it; a login landed
+# in the named profile). A plain `claude` / `codex` — including one Herdr
+# restores — uses the container's own @default home (~/.claude, ~/.codex).
 # herdr-peers' reply route: this container's machine id in the host's Herdr catalog
 # (written by `dck up` / `dck herdr add|mesh`; dck_herdr_self). Codex panes cannot
 # discover it, so asks from them failed with "no reply route" without it.
