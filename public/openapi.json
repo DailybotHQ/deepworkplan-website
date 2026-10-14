@@ -794,7 +794,7 @@
                 },
                 "example": {
                   "name": "deep-work-plan-site",
-                  "version": "5.0.2",
+                  "version": "5.0.58",
                   "protocolVersion": "2025-06-18",
                   "transport": {
                     "type": "streamable-http",
@@ -832,7 +832,7 @@
                 "example": {
                   "serverInfo": {
                     "name": "deep-work-plan-site",
-                    "version": "5.0.2"
+                    "version": "5.0.58"
                   },
                   "transport": {
                     "type": "streamable-http",
@@ -1077,7 +1077,7 @@
                 "example": {
                   "status": "ok",
                   "service": "deepworkplan.com",
-                  "version": "5.0.2",
+                  "version": "5.0.58",
                   "links": {
                     "openapi": "https://deepworkplan.com/openapi.json",
                     "developers": "https://deepworkplan.com/developers",
