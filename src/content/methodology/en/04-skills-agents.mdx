@@ -1,6 +1,6 @@
 ---
 title: Skills and agents
-description: "The difference between skills and agents, reasoning-based repository onboarding, and the .agents directory with its .claude to .agents symlink convention."
+description: "The difference between skills and agents, reasoning-based repository onboarding, and the .agents directory with its backward-compatibility symlinks."
 order: 4
 lang: en
 summary: How reusable skills, specialized agents, and repo onboarding fit together.
@@ -37,19 +37,20 @@ Beyond authoring, DWP ships **add-ons**. Seven are opt-in — never required for
 
 Before creating or executing a plan, an agent onboards to the repository. Onboarding is **reasoning-based, not script-based**: the agent reads the repository's structure, documentation, and configuration to build a mental model rather than running a fixed setup script.
 
-During onboarding the agent identifies the repository archetype (individual versus orchestrator), the build, test, and lint commands, the existing conventions for style, structure, and naming, and the skills and agents already available. This understanding is what lets the agent plan and execute in a way that fits the repository instead of fighting it.
+During onboarding the agent identifies the repository archetype (individual, orchestrator hub, or agent workspace), the build, test, and lint commands, the existing conventions for style, structure, and naming, and the skills and agents already available. This understanding is what lets the agent plan and execute in a way that fits the repository instead of fighting it.
 
 The testing and validation toolchain gets special attention, because validation gates are what make a plan's output reliable. When a repository already has tests and linters, onboarding records their real commands and conventions. When it has none, onboarding does not simply note the gap — it proposes a setup fit to the stack and writes it into the repository's testing guide, so every future plan has a real gate to run rather than an undefined one.
 
-## The `.agents/` directory and the `.claude → .agents` symlink
+## The `.agents/` directory and compatibility symlinks
 
 DWP collects everything that defines agent behavior — skills, commands, agent definitions, internal documentation, and settings — under a single canonical directory, `.agents/`. The name signals that the contents are shared across agents rather than tied to any one tool.
 
-For backward compatibility with tools that historically read from `.claude/`, that path is a symlink to `.agents/`:
+For backward compatibility with tools that historically read from `.claude/` or `.cursor/`, those paths are symlinks to `.agents/`:
 
 ```bash
-ls -la .claude
+ls -la .claude .cursor
 # .claude -> .agents
+# .cursor -> .agents
 ```
 
-Every `.claude/...` path resolves transparently to its `.agents/...` equivalent, so older tooling keeps working while new content references the canonical `.agents/` location. Skills and agents are edited through the real files under `.agents/`, never through the symlink.
+Every `.claude/...` and `.cursor/...` path resolves transparently to its `.agents/...` equivalent, so older tooling keeps working while new content references the canonical `.agents/` location. Skills and agents are edited through the real files under `.agents/`, never through a symlink.
