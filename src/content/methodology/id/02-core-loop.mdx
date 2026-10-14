@@ -1,6 +1,6 @@
 ---
 title: The core loop
-description: "Alur kerja create, execute, refine, resume, status, dan verify, direktori keluaran .dwp yang di-gitignore, anatomi tugas sepuluh bagian, dan cara validasi bekerja."
+description: "Loop inti sembilan sub-skill DWP, direktori .dwp dengan config.json, anatomi tugas sepuluh bagian, serta validasi dan cara pelanjutan."
 order: 2
 lang: id
 summary: Bagaimana operasi inti DWP menggerakkan rencana dari tujuan ke penyelesaian yang terverifikasi.
@@ -11,7 +11,7 @@ import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
 
 # The core loop
 
-DWP mendefinisikan sekumpulan kecil operasi yang memindahkan rencana dari sebuah tujuan ke pekerjaan yang selesai dan dapat ditinjau: **create → execute → refine → resume → status**, dengan **verify** sebagai pemeriksaan konformansi yang mengonfirmasi hasilnya. Bersama-sama keduanya membentuk loop yang diikuti agent sepanjang hidup sebuah rencana. Agent mengeksekusi satu tugas pada satu waktu, memvalidasi setiap langkah sebelum melanjutkan.
+DWP mendefinisikan serangkaian operasi yang menggerakkan rencana dari tujuan hingga penyelesaian: **create → execute → refine → resume → status → verify**, didukung oleh pembantu siklus hidup **onboard** dan **upgrade** serta sub-skill **author** (total sembilan sub-skill). Bersama-sama mereka membentuk loop yang diikuti agent sepanjang masa rencana. Agent mengeksekusi satu tugas pada satu waktu, memvalidasi setiap langkah sebelum melanjutkan.
 
 Loop ini adalah bentuk operasional dari spec-driven development. Rencana adalah spesifikasi yang menjadi acuan eksekusi agent, setiap tugas membawa acceptance criteria yang eksplisit, dan langkah validasi adalah gate yang mengubah klaim penyelesaian menjadi bukti penyelesaian. Karena rencana dan log kemajuannya berada di dalam repositori, loop ini dapat dilanjutkan lintas sesi dan agent.
 
@@ -25,6 +25,9 @@ Loop ini adalah bentuk operasional dari spec-driven development. Rencana adalah 
 - **resume** — Melanjutkan rencana yang terhenti. Agent membaca log kemajuan dan berkas tugas untuk merekonstruksi status, lalu melanjutkan dari tugas pertama yang belum selesai.
 - **status** — Melaporkan kemajuan tanpa mengeksekusi. Agent merangkum tugas yang selesai, sedang berjalan, dan tertunda serta tidak mengubah apa pun.
 - **verify** — Memeriksa konformansi tanpa mengubah apa pun. Agent melaporkan apakah repositori memenuhi standar dan apakah sebuah rencana terbentuk dengan baik — setiap tugas membawa acceptance criteria dan sebuah validation gate. Lihat [dokumen Konformansi spesifikasi](/spec).
+- **onboard** — Mengorientasikan agent ke repositori berbasis penalaran, membuat AGENTS.md, panduan di docs/, dan struktur .agents/.
+- **upgrade** — Memperbarui harness repositori atau rencana yang ada ke versi standar DWP yang lebih baru.
+- **author** — Menulis skill, agent, atau command baru yang sesuai dengan konvensi repositori, menjaga katalog dokumentasi tetap sinkron.
 
 ## Direktori keluaran `.dwp/`
 
@@ -34,24 +37,30 @@ Semua artefak DWP berada di bawah direktori `.dwp/` yang di-gitignore di akar re
 .dwp/
 ├── plans/
 │   └── PLAN_001_<slug>/
+│       ├── manifest.json
+│       ├── contract.json
+│       ├── journal.ndjson
+│       ├── state.json
 │       ├── README.md
 │       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+│       ├── 1.task_<slug>.md
+│       ├── 2.task_<slug>.md
+│       └── analysis_results/
+└── config.json
 ```
 
 ## Anatomi tugas sepuluh bagian
 
 <TaskAnatomy lang="id" class="not-prose my-10" />
 
-Setiap berkas tugas berisi sepuluh bagian ini, secara berurutan. Strukturnya menjamin bahwa setiap unit pekerjaan bersifat mandiri dan dapat ditinjau:
+Sepuluh bagian dari diagram di atas mendefinisikan struktur anatomis setiap berkas tugas dalam rencana Full. Urutan ini memastikan setiap unit kerja mandiri, tidak ambigu, dan dapat diaudit secara independen:
 
 1. **Goal** — satu paragraf yang menyatakan apa yang dicapai tugas.
 2. **Context** — latar belakang, tautan, dan mengapa tugas ini ada.
-3. **Touched Surface** — kontrak antara apa yang diubah tugas dan apa yang harus divalidasi.
+3. **Touched Surface** — apa yang diubah tugas dan kelas risiko yang memilih validasinya.
 4. **Steps** — tindakan konkret yang berurutan untuk dilakukan.
-5. **Acceptance criteria** — daftar periksa kondisi yang mendefinisikan selesai.
-6. **Validation** — perintah atau test yang dijalankan untuk memverifikasi pekerjaan.
+5. **Acceptance Criteria** — daftar periksa kondisi yang mendefinisikan selesai.
+6. **Validation** — perintah atau pengujian untuk memverifikasi pekerjaan.
 7. **Files** — path yang diperkirakan akan dibuat atau diubah.
 8. **Dependencies** — tugas lain atau prasyarat eksternal.
 9. **Risks** — apa yang bisa salah, dan mitigasinya.
