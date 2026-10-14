@@ -1,6 +1,6 @@
 ---
 title: Spécification DWP
-description: "Spécification normative du Deep Work Plan : structure du plan, anatomie d'une tâche en dix sections, sélection de porte par surface touchée, boucle d'exécution à cinq opérations, sortie et versionnage."
+description: "Spécification normative du Deep Work Plan : structure du plan, anatomie de tâche en dix sections, portes par surface touchée, six opérations de plan, sortie."
 order: 2
 lang: fr
 section: Workflow
@@ -63,6 +63,8 @@ Chaque fichier de tâche MUST contenir ces dix sections, dans l'ordre :
 10. **Completion & Log** — un marqueur de statut accompagné de notes chronologiques.
 
 Une tâche MAY également inclure une **section Delta** (RECOMMENDED pour les changements de comportement sur du code existant — voir ci-dessous) et une **section Rollback** (RECOMMENDED pour les migrations, les changements d'infrastructure ou les déploiements).
+
+Dans un plan v7, le contrat de résultat peut aussi marquer une tâche `parallel_safe` : une affirmation, posée à la création, selon laquelle la tâche peut s'exécuter dans un délégué sans s'entremêler avec le travail des tâches sœurs. Ce marqueur n'autorise rien sans l'autorisation `agent_delegation` du contrat ([Délégation](/spec/delegation)).
 
 ## La Surface touchée
 
@@ -136,13 +138,15 @@ Tout plan conforme rédigé sous cette version se termine par exactement **une**
 
 Le Final Review MUST, dans l'ordre :
 
-**(a) Passe de sécurité** — relire l'ensemble accumulé des changements du plan à la recherche de secrets en dur, de risques d'injection, de nouvelle surface d'attaque, d'authentification affaiblie et de données sensibles dans les journaux ou la documentation ; auditer les dépendances introduites ; vérifier que `docs/SECURITY.md` reflète toujours la réalité ; rédiger le rapport de revue de sécurité même lorsqu'il est vierge. Un constat critique est corrigé — ou explicitement accepté par l'utilisateur — avant que le plan ne s'achève.
+**(a) Passe de sécurité** — relire l'ensemble accumulé des changements du plan à la recherche de secrets en dur, de risques d'injection, de nouvelle surface d'attaque, d'authentification affaiblie et de données sensibles dans les journaux ou la documentation ; auditer les dépendances introduites ; vérifier que `docs/SECURITY.md` reflète toujours la réalité ; rédiger le rapport de revue de sécurité même lorsqu'il est vierge. Un constat critique est corrigé — ou explicitement accepté par l'utilisateur — avant que le plan ne s'achève. La passe inclut la revue locale AI Diff Reviewer requise sur l'ensemble de la plage du plan ; un reviewer absent est un constat consigné `local reviewer not installed`, jamais une omission silencieuse.
 
 **(b) Validation de l'état final** — la validation complète applicable du dépôt s'exécute et réussit sur l'état final pertinent.
 
 **(c) Réconciliation des skills** — chaque tâche porte une disposition de skills et chaque candidate consignée a une disposition ; pas de second rapport de découverte.
 
-**(d) Achèvement** — rendre compte de l'achèvement avec les livrables, les preuves de validation et les limites ; proposer l'Executive Report une seule fois. Le plan est achevé, que la proposition reçoive une réponse ou non.
+**(d) Réconciliation de la documentation** — la surface touchée de chaque tâche qui change le comportement est confrontée aux documents qui l'enregistrent (d'abord le registre des portes, puis la documentation d'architecture et de modules, puis l'index `AGENTS.md`) ; les manques sont corrigés au sein de la revue et les validations concernées sont réexécutées.
+
+**(e) Achèvement** — les enregistrements du plan concordent (liste des tâches, journal de progression et, dans les plans v6 et v7, l'instantané dérivé du journal et le reçu) ; rendre compte de l'achèvement avec les livrables, les preuves de validation et les limites ; proposer l'Executive Report une seule fois. Le plan est achevé, que la proposition reçoive une réponse ou non.
 
 Le Final Review s'exécute séquentiellement après toutes les autres tâches et n'est jamais placé dans un groupe parallèle.
 
@@ -179,13 +183,16 @@ L'agent MUST faire confiance aux marqueurs `[x]` achevés et MUST NOT re-valider
 
 <CoreLoop lang="fr" class="not-prose my-10" />
 
-DWP définit cinq opérations :
+DWP définit six opérations de plan :
 
 - **create** — Génère un nouveau plan à partir d'un objectif.
 - **execute** — Exécute le plan tâche par tâche.
 - **refine** — Modifie un plan existant.
 - **resume** — Reprend un plan interrompu.
 - **status** — Rend compte du statut du plan sans exécuter.
+- **verify** — Vérifie la conformité du dépôt et du plan, en lecture seule.
+
+Trois autres sous-skills complètent le pack installé : **onboard** (rendre un dépôt AI-first), **author** (créer ou mettre à jour les skills, agents et commandes propres au dépôt) et **upgrade** (faire passer la skill installée à une version plus récente avec consentement, sans jamais migrer les plans existants). Le routeur et ces neuf sous-skills sont livrés comme un seul pack de skills.
 
 ## Espace de travail de sortie
 

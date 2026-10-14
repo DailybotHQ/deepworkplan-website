@@ -1,6 +1,6 @@
 ---
 title: Estándar de documentación
-description: "Estándar normativo de cómo los Deep Work Plans documentan estructura, tareas y avance: README, marcadores de estado, la anatomía de tarea de diez secciones y el Final Review."
+description: "Estándar de cómo los Deep Work Plans documentan estructura, tareas y avance: README, marcadores de estado, anatomía de tarea de diez secciones y Final Review."
 order: 1
 lang: es
 section: Standard
@@ -54,7 +54,7 @@ Todos los encabezados DEBEN usar mayúscula inicial al estilo de oración. Los d
 
 ## El Final Review, las decisiones de skills por tarea y el reporte opcional
 
-Todo plan redactado bajo esta versión DEBE terminar con exactamente una tarea obligatoria: el **Final Review** — el pase de seguridad sobre el conjunto completo de cambios del plan, la validación de estado final sobre el último estado relevante y la reconciliación de las decisiones de skills. Un hallazgo de seguridad crítico bloquea la finalización.
+Todo plan redactado bajo esta versión DEBE terminar con exactamente una tarea obligatoria: el **Final Review**. En orden, ejecuta (a) el pase de seguridad sobre el conjunto completo de cambios del plan, incluida la revisión local requerida de AI Diff Reviewer; (b) la validación de estado final sobre el último estado relevante; (c) la reconciliación de las decisiones de skills; (d) la reconciliación de la documentación de cada superficie tocada; y (e) la finalización, con los registros del plan en concordancia. Un hallazgo de seguridad crítico bloquea la finalización.
 
 - **Decisiones de skills por tarea.** La Finalización y registro de cada tarea lleva una **disposición de skills** — `ninguna`, una actualización a una skill o agente existente, una creación con nombre, o un aplazamiento con motivo y responsable. La autoría justificada ocurre dentro de la tarea que la origina, antes de su puerta de validación, tras una comprobación de duplicados contra el catálogo `.agents/`; las entradas justificadas se registran como candidatas estables (`T{task}-{seq}`) en el registro de candidatas de skills del plan.
 - **El Reporte Ejecutivo es opcional, a petición.** Se ofrece una vez al completar; se genera solo bajo petición explícita y a partir de evidencia duradera. Sin respuesta, o en una ejecución desatendida, el plan queda completo sin él.

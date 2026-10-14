@@ -1,6 +1,6 @@
 ---
 title: Documentation standard
-description: "Normative standard for how Deep Work Plans document their structure, tasks, and progress: README rules, status markers, the ten-section task anatomy, and the Final Review."
+description: "Normative standard for how Deep Work Plans document their structure, tasks and progress: README rules, status markers, the task anatomy and the Final Review."
 order: 1
 lang: en
 section: Standard

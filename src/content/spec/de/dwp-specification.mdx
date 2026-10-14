@@ -1,6 +1,6 @@
 ---
 title: DWP-Spezifikation
-description: "Normative Deep Work Plan Spezifikation: Planstruktur, die zehnteilige Aufgaben-Anatomie, Gate-Auswahl nach Touched Surface, die Ausführungsschleife aus fünf Operationen, der Ausgabe-Arbeitsbereich und die Versionierung."
+description: "Die normative DWP-Spezifikation: Planstruktur, zehnteilige Aufgaben-Anatomie, Gate-Auswahl nach Touched Surface, Ausführungsschleife und Versionierung."
 order: 2
 lang: de
 section: Workflow
@@ -63,6 +63,8 @@ Jede Aufgabendatei MUSS diese zehn Abschnitte enthalten, in dieser Reihenfolge:
 10. **Completion & Log** — eine Statusmarkierung plus chronologische Notizen.
 
 Eine Aufgabe KANN zusätzlich einen **Delta-Abschnitt** enthalten (EMPFOHLEN für Brownfield-Verhaltensänderungen — siehe unten) sowie einen **Rollback-Abschnitt** (EMPFOHLEN für Migrationen, Infrastrukturänderungen oder Deployments).
+
+In einem v7-Plan kann der Ergebnisvertrag eine Aufgabe zusätzlich als `parallel_safe` markieren: eine bei der Erstellung gesetzte Zusicherung, dass die Aufgabe in einem Delegierten laufen kann, ohne sich mit paralleler Arbeit an Geschwisteraufgaben zu überschneiden. Die Markierung autorisiert nichts ohne die Berechtigung `agent_delegation` des Vertrags ([Delegation](/spec/delegation)).
 
 ## Die Touched Surface
 
@@ -136,13 +138,15 @@ Jeder konforme Plan, der unter dieser Version verfasst wird, endet mit genau **e
 
 Das Final Review MUSS, in dieser Reihenfolge:
 
-**(a) Sicherheitstest** — den vollständigen akkumulierten Änderungssatz des Plans auf hartkodierte Secrets, Injection-Risiken, neue Angriffsfläche, geschwächte Authentifizierung und sensible Daten in Logs oder Dokumenten prüfen; eingeführte Abhängigkeiten auditieren; verifizieren, dass `docs/SECURITY.md` weiterhin die Realität widerspiegelt; den Sicherheitsbericht auch dann schreiben, wenn er sauber ist. Ein kritischer Befund wird behoben — oder vom Nutzer explizit akzeptiert —, bevor der Plan abschließt.
+**(a) Sicherheitstest** — den vollständigen akkumulierten Änderungssatz des Plans auf hartkodierte Secrets, Injection-Risiken, neue Angriffsfläche, geschwächte Authentifizierung und sensible Daten in Logs oder Dokumenten prüfen; eingeführte Abhängigkeiten auditieren; verifizieren, dass `docs/SECURITY.md` weiterhin die Realität widerspiegelt; den Sicherheitsbericht auch dann schreiben, wenn er sauber ist. Ein kritischer Befund wird behoben — oder vom Nutzer explizit akzeptiert —, bevor der Plan abschließt. Der Test umfasst die erforderliche lokale Überprüfung des gesamten Plan-Bereichs durch den AI Diff Reviewer; ein fehlender Reviewer ist ein aufgezeichneter Befund `local reviewer not installed`, niemals ein stilles Überspringen.
 
 **(b) Validierung des Endzustands** — die vollständige zutreffende Validierung des Repositorys läuft auf dem finalen relevanten Zustand und besteht.
 
 **(c) Abgleich der Skills** — jede Aufgabe trägt eine Skills-Disposition, und jeder aufgezeichnete Kandidat hat eine Disposition; kein zweiter Discovery-Bericht.
 
-**(d) Abschluss** — den Abschluss mit Lieferungen, Validierungsbeweisen und Einschränkungen berichten; den Executive Report einmal anbieten. Der Plan ist abgeschlossen, ob das Angebot beantwortet wird oder nicht.
+**(d) Dokumentationsabgleich** — die berührte Oberfläche jeder verhaltensändernden Aufgabe wird gegen die Dokumente geprüft, die sie registrieren (zuerst die Gate-Registry, dann Architektur- und Moduldokumentation, dann der Index in `AGENTS.md`); Lücken werden innerhalb des Reviews behoben und die betroffenen Validierungen erneut ausgeführt.
+
+**(e) Abschluss** — die Aufzeichnungen des Plans stimmen überein (Aufgabenliste, Fortschrittsprotokoll und, in v6- und v7-Plänen, der aus dem Journal abgeleitete Snapshot und die Quittung); den Abschluss mit Lieferungen, Validierungsbeweisen und Einschränkungen berichten; den Executive Report einmal anbieten. Der Plan ist abgeschlossen, ob das Angebot beantwortet wird oder nicht.
 
 Das Final Review läuft sequenziell nach allen anderen Aufgaben und wird niemals in eine parallele Gruppe platziert.
 
@@ -179,13 +183,16 @@ Der Agent MUSS abgeschlossenen (`[x]`) Markierungen vertrauen und DARF abgeschlo
 
 <CoreLoop lang="de" class="not-prose my-10" />
 
-DWP definiert fünf Operationen:
+DWP definiert sechs Plan-Operationen:
 
 - **create** — Einen neuen Plan aus einem Ziel erzeugen.
 - **execute** — Den Plan Aufgabe für Aufgabe ausführen.
 - **refine** — Einen bestehenden Plan ändern.
 - **resume** — Einen unterbrochenen Plan wiederaufnehmen.
 - **status** — Den Planstatus berichten, ohne auszuführen.
+- **verify** — Die Konformität von Repository und Plan prüfen, nur lesend.
+
+Drei weitere Sub-Skills vervollständigen das installierte Paket: **onboard** (ein Repository AI-first machen), **author** (die eigenen Skills, Agenten und Befehle des Repositorys erstellen oder aktualisieren) und **upgrade** (die installierte Skill mit Zustimmung auf ein neueres Release heben, ohne bestehende Pläne je zu migrieren). Der Router und diese neun Sub-Skills werden als ein Skill-Paket ausgeliefert.
 
 ## Ausgabe-Arbeitsbereich
 

@@ -1,6 +1,6 @@
 ---
 title: Especificação do DWP
-description: "Especificação normativa do Deep Work Plan: estrutura do plano, a anatomia de dez seções da tarefa, a seleção de gate pela superfície tocada, o loop de execução de cinco operações, a saída e o versionamento."
+description: "Especificação normativa do Deep Work Plan: estrutura do plano, anatomia de tarefa em dez seções, gates pela superfície tocada, operações, saída e versionamento."
 order: 2
 lang: pt
 section: Workflow
@@ -63,6 +63,8 @@ Cada arquivo de tarefa DEVE (MUST) conter estas dez seções, em ordem:
 10. **Completion & Log** — um marcador de status mais notas cronológicas.
 
 Uma tarefa PODE (MAY) adicionalmente incluir uma **seção Delta** (RECOMENDADA para alterações de comportamento em brownfield — veja abaixo) e uma **seção Rollback** (RECOMENDADA para migrações, alterações de infraestrutura ou implantações).
+
+Em um plano v7, o contrato de resultado também pode marcar uma tarefa como `parallel_safe`: uma afirmação, definida na criação, de que a tarefa pode rodar em um delegado sem se intercalar com o trabalho das tarefas irmãs. O marcador não autoriza nada sem a concessão `agent_delegation` do contrato ([Delegação](/spec/delegation)).
 
 ## A Superfície tocada
 
@@ -136,13 +138,15 @@ Todo plano conforme redigido sob esta versão termina com exatamente **uma** tar
 
 O Final Review DEVE (MUST), em ordem:
 
-**(a) Passe de segurança** — revisar todo o conjunto acumulado de alterações do plano em busca de secrets embutidos, riscos de injeção, nova superfície de ataque, autenticação enfraquecida e dados sensíveis em logs ou documentação; auditar as dependências introduzidas; verificar que o `docs/SECURITY.md` ainda reflete a realidade; escrever o relatório de revisão de segurança mesmo quando estiver limpo. Uma descoberta crítica é corrigida — ou explicitamente aceita pelo usuário — antes de o plano se completar.
+**(a) Passe de segurança** — revisar todo o conjunto acumulado de alterações do plano em busca de secrets embutidos, riscos de injeção, nova superfície de ataque, autenticação enfraquecida e dados sensíveis em logs ou documentação; auditar as dependências introduzidas; verificar que o `docs/SECURITY.md` ainda reflete a realidade; escrever o relatório de revisão de segurança mesmo quando estiver limpo. Uma descoberta crítica é corrigida — ou explicitamente aceita pelo usuário — antes de o plano se completar. O passe inclui a revisão local obrigatória do AI Diff Reviewer sobre o intervalo completo do plano; um revisor ausente é um achado registrado `local reviewer not installed`, nunca uma omissão silenciosa.
 
 **(b) Validação de estado final** — a validação completa aplicável do repositório executa e passa sobre o estado final relevante.
 
 **(c) Reconciliação de skills** — cada tarefa carrega uma disposição de skills e cada candidata registrada tem uma disposição; não há um segundo relatório de descoberta.
 
-**(d) Conclusão** — reportar a conclusão com entregáveis, evidência de validação e limitações; oferecer o Executive Report uma única vez. O plano fica completo independentemente de a oferta ser respondida.
+**(d) Reconciliação da documentação** — a superfície tocada de cada tarefa que altera comportamento é conferida com os documentos que a registram (primeiro o registro de gates, depois a documentação de arquitetura e de módulos, depois o índice do `AGENTS.md`); as omissões são corrigidas dentro da revisão e as validações afetadas são executadas novamente.
+
+**(e) Conclusão** — os registros do plano concordam (lista de tarefas, log de progresso e, nos planos v6 e v7, o snapshot derivado do diário e o recibo); reportar a conclusão com entregáveis, evidência de validação e limitações; oferecer o Executive Report uma única vez. O plano fica completo independentemente de a oferta ser respondida.
 
 O Final Review executa sequencialmente após todas as demais tarefas e nunca é colocado em um grupo paralelo.
 
@@ -179,13 +183,16 @@ O agente DEVE (MUST) confiar nas marcações `completed` (`[x]`) e NÃO DEVE (MU
 
 <CoreLoop lang="pt" class="not-prose my-10" />
 
-O DWP define cinco operações:
+O DWP define seis operações de plano:
 
 - **create** — Gerar um novo plano a partir de um objetivo.
 - **execute** — Executar o plano tarefa a tarefa.
 - **refine** — Modificar um plano existente.
 - **resume** — Retomar um plano interrompido.
 - **status** — Relatar o status do plano sem executar.
+- **verify** — Verificar a conformidade do repositório e do plano, somente leitura.
+
+Três sub-skills adicionais completam o pacote instalado: **onboard** (tornar um repositório AI-first), **author** (criar ou atualizar as próprias skills, agentes e comandos do repositório) e **upgrade** (mover a skill instalada para uma versão mais recente com consentimento, sem nunca migrar planos existentes). O roteador e essas nove sub-skills são distribuídos como um único pacote de skills.
 
 ## Espaço de trabalho de saída
 

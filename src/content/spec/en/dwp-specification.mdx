@@ -1,6 +1,6 @@
 ---
 title: DWP specification
-description: "Normative Deep Work Plan specification: plan structure, the ten-section task anatomy, gate selection by touched surface, the five-operation execution loop, the output workspace, and versioning."
+description: "Normative Deep Work Plan specification: plan structure, the ten-section task anatomy, gate selection by touched surface, the six operations, and versioning."
 order: 2
 lang: en
 section: Workflow
@@ -122,7 +122,7 @@ Every conformant plan authored under this version ends with exactly **one** mand
 
 The Final Review MUST, in order:
 
-**(a) Security pass** — review the plan's full accumulated change set for hardcoded secrets, injection risks, new attack surface, weakened auth, and sensitive data in logs or docs; audit introduced dependencies; verify `docs/SECURITY.md` still reflects reality; write the security review report even when clean. A critical finding is fixed — or explicitly accepted by the user — before the plan completes The pass includes the required local AI Diff Reviewer review of the plan's full range; a missing reviewer is a recorded `local reviewer not installed` finding, never a silent skip.
+**(a) Security pass** — review the plan's full accumulated change set for hardcoded secrets, injection risks, new attack surface, weakened auth, and sensitive data in logs or docs; audit introduced dependencies; verify `docs/SECURITY.md` still reflects reality; write the security review report even when clean. A critical finding is fixed — or explicitly accepted by the user — before the plan completes. The pass includes the required local AI Diff Reviewer review of the plan's full range; a missing reviewer is a recorded `local reviewer not installed` finding, never a silent skip.
 
 **(b) Final-state validation** — the repository's complete applicable validation runs and passes on the final relevant state.
 

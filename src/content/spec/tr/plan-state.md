@@ -1,6 +1,6 @@
 ---
 title: Plan durumu
-description: "Makine tarafından okunabilir plan durum katmanı: manifest.json ve state.json, kapı kayıtları, bölümsel bellek olarak sonuç kayıtları, uzlaştırma ve ne zaman gerekli olduğu."
+description: "v5 plan durum katmanı (manifest.json, state.json, kapı kayıtları, uzlaştırma) ve v6 ile v7 planlarının onu günlükten türetilen anlık görüntüyle değiştirmesi."
 order: 8
 lang: tr
 section: State
@@ -8,13 +8,20 @@ section: State
 
 # Plan durumu
 
-> **Sürüm kapsamı:** Aşağıdaki bölümler korunan v5.0.0 durum katmanıdır. Güncel standart DWP 7.0.0; v7 sözleşmesini, yalnızca eklemeli bir günlüğü ve bir anlık görüntü projeksiyonunu kullanır; v5 planları bu belgedeki `manifest.json` ve `state.json` kurallarını kullanmaya devam eder.
+> **Sürüm kapsamı:** Bu sayfa, v5 planlarının tüm ömürleri boyunca koruduğu **v5 durum katmanını** belirtir. Güncel paketin (DWP 7.0.0, `v7.8.1` sürümü) oluşturduğu planlar bunun yerine [kayıt katmanını](/spec/record-layer) kullanır. Bir v6 veya v7 planında sonuç sözleşmesi (`contract.json`) otoritedir, yalnızca eklemeli günlük (`journal.ndjson`) doğruluk kaynağıdır ve `state.json`, [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) şemasına uyan **türetilmiş bir anlık görüntüdür**. `ledger.py project` tarafından yeniden üretilir ve elle düzenlenMEMELİDİR.
 
-**Güncel standart: v7 (DWP 7.0.0).** Aşağıdaki belgeler korunan temeldir; v6 sözleşme, yalnızca eklemeli günlük, görev bağlamı, kaynak denetimleri ve yaşam döngüsü kurallarını ekledi; v7 ise bu kayıt katmanını korurken isteğe bağlı bir `parallel_safe` görev işaretçisi, bir `delegation` günlük olayı, `.dwp/config.json` eklenti kaydı ve eklentilerin sağladığı yetenekler ekler. [v7 manifesto şemasını](https://deepworkplan.com/schema/plan-manifest/v7.json), [sözleşme şemasını](https://deepworkplan.com/schema/plan-contract/v7.json) ve [canlı anlık görüntü şemasını](https://deepworkplan.com/schema/plan-snapshot/v6.json) (v6 ile ortak) okuyun. Mevcut v5 ve v6 planları kendi kurallarını korur. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## Hangi durum katmanı geçerlidir
+
+| Plan nesli | Doğruluk kaynağı | `state.json` | Şemalar |
+| --- | --- | --- | --- |
+| v5 (ve daha eski v1/v2 planları) | Markdown planı; bu JSON katmanı onun projeksiyonudur | aşağıdaki protokol noktalarında ajan tarafından yazılır | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 ve v2 eski planlar için geçerli kalır) |
+| v6 ve v7 | sözleşme artı yalnızca eklemeli günlük | günlükten yansıtılan bir anlık görüntü, asla elle yazılmaz | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (veya v6 karşılıkları) |
+
+Bir plan neslini asla örtük olarak değiştirmez: v5 planları bu kuralları korur ve birini v6'ya taşımak açık, önizlenen bir göçtür ([Kayıt katmanı](/spec/record-layer#coexistence-and-migration)). Kanonik kaynaklar: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Sürüm 5.0.0. Durum: Kararlı.** Bu belge, Deep Work Plan metodolojisinin makine tarafından okunabilir plan durum katmanını belirtir; artık DWP standardının kendi sürümüyle hizalıdır — yeniden numaralandırma mevcut hiçbir gereksinimi zayıflatmaz. Bu revizyon ayrıca korumalı durum güncelleyicisini, doğrulanmış plan yayınlamasını ve tamamlanmış bir planın karşılaması gereken kanıt-doğruluğu kurallarını belgeler (aşağıya bakın). MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
-İki JSON yapısı — `manifest.json` (planın statik kimliği) ve `state.json` (doğrulama kapısı sonuçları dahil canlı, görev bazında yürütme durumu) — her planın Markdown dosyalarının yanında TASIYABİLECEĞİ ve gözetimsiz yürütmenin (bkz. [Ajan protokolü](/spec/agent-protocol#execution-profiles)) ile git içermeyen çalışma alanlarının (bkz. [Arketipler](/spec/archetypes) §3) TAŞIMAK ZORUNDA OLDUĞU yapılardır.
+İki JSON yapısı — `manifest.json` (planın statik kimliği) ve `state.json` (doğrulama kapısı sonuçları dahil canlı, görev bazında yürütme durumu) — her planın Markdown dosyalarının yanında TAŞIYABİLECEĞİ ve gözetimsiz yürütmenin (bkz. [Ajan protokolü](/spec/agent-protocol#execution-profiles)) ile git içermeyen çalışma alanlarının (bkz. [Arketipler](/spec/archetypes) §3) TAŞIMAK ZORUNDA OLDUĞU yapılardır.
 
 Markdown planı, **insan tarafından okunabilir doğruluk kaynağı** olmaya devam eder. JSON katmanı, **türetilmiş bir projeksiyon**dur: ajan tarafından tanımlı protokol noktalarında yeniden oluşturulur, elle düzenlenmez ve Markdown ile sessizce çelişmesine izin verilmez. Amacı birlikte çalışabilirliktir — linting, uyumluluk denetimi, fark alma, gösterge tabloları, kayıt defteri keşfi ve harici oturum altyapısıyla senkronizasyon — bunların hiçbiri düz yazı üzerine güvenilir biçimde inşa edilemez.
 
@@ -53,9 +60,9 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ Her iki dosya da atomik olarak YAZILMALIDIR: aynı dizinde geçici bir dosyaya y
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",
