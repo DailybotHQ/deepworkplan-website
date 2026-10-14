@@ -1,6 +1,6 @@
 ---
 title: dwp-execute
-description: "Eksekusi Deep Work Plan yang ada secara berurutan dengan loop buku besar v7, mode trust tanpa pengawasan, dan penutupan Final Review."
+description: "Eksekusi Deep Work Plan yang ada secara berurutan dengan loop ledger v7, mode trust tanpa pengawasan opsional, delegasi parallel_safe, dan penutup Final Review."
 kind: command
 lang: id
 order: 2
@@ -12,29 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Eksekusi Deep Work Plan yang sudah ada.
+Eksekusi Deep Work Plan yang sudah ada, tugas demi tugas.
 
 <CmdExecute lang="id" class="not-prose my-8" />
 
 ## Fungsinya
 
-`dwp-execute` menjalankan rencana yang sudah ada, tugas demi tugas. Ia membaca seluruh rencana, mengeksekusi tiap tugas secara berurutan, memperbarui `PROGRESS.md`, dan menandai status penyelesaian setiap tugas.
+`dwp-execute` menjalankan rencana yang sudah ada tugas demi tugas melalui lapisan pencatatan deterministik. Ia menentukan rencana target, mengevaluasi dependensi, mengeksekusi setiap tugas sesuai urutan yang dideklarasikan, menjalankan gerbang validasi, dan mencatat kemajuan secara permanen.
 
 ## Penggunaan
 
 ```
-/dwp-execute
-/dwp-execute [plan]
-/dwp-execute [plan] trust
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Mode
+
+- **Terpandu (default):** meminta konfirmasi di antara tugas sehingga Anda dapat meninjau bukti dan keputusan di setiap batas tugas.
+- **Trust (`auto`):** menambahkan `trust` menjalankan tugas yang memenuhi syarat secara berurutan hingga selesai tanpa berhenti untuk konfirmasi rutin, dan hanya berhenti saat benar-benar terblokir (kelas eskalasi C1–C7).
 
 ## Perilaku
 
-1. Baca seluruh rencana sebelum memulai.
-2. `ledger.py ready` & `ledger.py start` -> Eksekusi tugas secara berurutan.
-3. `ledger.py gate` -> `observed` evidence; Perbarui `PROGRESS.md` setelah tiap tugas.
-4. `parallel_safe` delegation; Tandai status tugas secara akurat.
-5. `ledger.py complete` & Final Review; Berhenti dan bertanya saat terhambat.
+1. **Penentuan rencana:** menentukan rencana berdasarkan nama folder persis, ID numerik, slug unik, atau `latest` (rencana dengan ID numerik tertinggi).
+2. **Loop ledger:** menjalankan `ledger.py ready` untuk mengevaluasi DAG dependensi dan invarian, `ledger.py start` untuk memverifikasi prasyarat, dan `ledger.py gate` untuk mengeksekusi perintah validasi serta menghasilkan bukti `observed`.
+3. **Penyelesaian terjaga:** `ledger.py complete` menegakkan kontrol nol-tes, evaluasi ulang invarian, serta keputusan skill dan dokumentasi yang bersifat lokal per tugas.
+4. **Delegasi dalam rencana:** tugas yang ditandai `parallel_safe` dalam kontrak v7 dapat didelegasikan ke subagen melalui transport headless (`ak run` di dalam worktree) atau interaktif (panel `herdr`). Hasilnya tetap berstatus `asserted` sampai diamati oleh pelari gerbang milik rencana.
+5. **Pemeriksaan kapasitas:** mengevaluasi sisa kapasitas akun di setiap batas tugas sebelum pengiriman.
+6. **Final Review:** diakhiri dengan tugas penutup wajib lima bagian (pemeriksaan keamanan dengan peninjauan lokal wajib, validasi keadaan akhir, rekonsiliasi skill, rekonsiliasi dokumentasi, penyelesaian).
 
 ## Alias
 

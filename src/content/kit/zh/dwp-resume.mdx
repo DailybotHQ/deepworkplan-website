@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "通过 ledger.py project 从追加日志与契约中确定性恢复中断的 Deep Work Plan，吸收交接包并执行关卡。"
+description: "通过 ledger.py project 从日志与契约确定性地恢复中断的 Deep Work Plan，吸收 swarm 交接包并运行关卡。"
 kind: command
 lang: zh
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-恢复一份被中断的 Deep Work Plan。
+从持久记录恢复一份被中断的 Deep Work Plan。
 
 <CmdResume lang="zh" class="not-prose my-8" />
 
 ## 它做了什么
 
-`dwp-resume` 继续一份被中断的计划。它会从 `PROGRESS.md` 与任务文件重建状态，然后从第一项未完成的任务继续。
+`dwp-resume` 仅凭工作区产物安全地继续一份被中断的计划，不会重复执行。它从 `journal.ndjson` 与 `contract.json` 确定性地重建状态，读取待处理的交接包，然后从第一项未完成的任务继续。
 
 ## 用法
 
@@ -28,10 +28,11 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 ## 行为
 
-1. 阅读 `PROGRESS.md` 与任务文件。
-2. 重建执行状态。
-3. 从第一项未完成的任务继续。
-4. 随进展更新进度。
+1. **读取记录：** 检查 `.dwp/plans/PLAN_<id>_<slug>/` 下的 `contract.json` 与 `journal.ndjson`。
+2. **投影状态：** 运行 `ledger.py project`，从仅追加的日志确定性地重新生成 `state.json`。出现分歧时以日志为准。
+3. **吸收交接：** 检查待处理的 swarm 交接包（`dwp-handoff-v1`），以恢复进行中的意图、未验证的关卡与未结的同伴请求。
+4. **校验衔接：** 在恢复之前检查 git 状态，并对涉及的表面运行冒烟检查。
+5. **继续：** 通过标准执行循环执行第一项未完成的任务。旧版 v5 计划继续使用其记录的 `PROGRESS.md` 流程，不会被强制迁移。
 
 ## 别名
 

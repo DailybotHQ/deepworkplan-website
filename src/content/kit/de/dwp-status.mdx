@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Berichten Sie über den Status eines Deep Work Plans über vier Lebenszyklusdimensionen, Ressourcengrenzen, Blocker und Delegationen ohne Änderungen."
+description: "Berichtet den Status eines Deep Work Plans über vier Lebenszyklusdimensionen, Grenzen des Ressourcenrahmens, Blocker und Delegationen, ohne Dateien zu ändern."
 kind: command
 lang: de
 order: 5
@@ -18,22 +18,22 @@ Den Status eines Deep Work Plan berichten, ohne auszuführen.
 
 ## Was es tut
 
-`dwp-status` fasst den Planfortschritt zusammen, ohne Änderungen vorzunehmen. Es berichtet abgeschlossene, laufende und ausstehende Aufgaben.
+`dwp-status` ist per Vertrag strikt schreibgeschützt. Es fasst Fortschritt, aktive Blocker, Checkpoints und Ressourcenrahmen zusammen, ohne eine Datei zu verändern.
 
 ## Verwendung
 
 ```
-/dwp-status
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Verhalten
 
-1. 4 lifecycle dimensions (format, materialization, review, progress); Den Plan und `PROGRESS.md` lesen.
-2. Abgeschlossene Aufgaben zusammenfassen.
-3. Laufende Aufgaben zusammenfassen.
-4. Resource envelope & blockers (C1–C7); Ausstehende Aufgaben zusammenfassen.
-5. Delegations observation; Berichten, ohne etwas zu verändern.
+1. **Vier Lebenszyklusdimensionen:** berichtet das Format (`lite` oder `full`), den Materialisierungsstatus (`materializing`, `ready` oder `promoting`), die Prüfgenehmigung (`pending`, `approved` oder `pre_approved`) und den Ausführungsfortschritt (`pending`, `in_progress`, `blocked` oder `completed`).
+2. **Repository-weiter Überblick:** listet bei Aufruf ohne Argumente alle Pläne unter `.dwp/plans/` mit Abschlussprozentsätzen, Lokatoren der aktiven Aufgabe und Blocker-Zusammenfassungen auf.
+3. **Ressourcenrahmen:** zeigt verbrauchte Werte gegenüber den Obergrenzen für die erfassten Dimensionen (`wall_clock`, Wiederholungen, Weitergaben, Ausgaben, Tokens) und gibt an, ob die Grenzen aktiv durchgesetzt werden oder nur empfehlend sind.
+4. **Blocker-Diagnose:** zeigt Details aktiver Blocker aus `state.json.blocked`, eingeordnet nach der Standard-Eskalationstaxonomie (Klassen C1–C7).
+5. **Beobachtung von Delegationen:** fasst offene und abgeschlossene Subagenten-Delegationen sowie aufgezeichnete Austausche mit Peers zusammen.
 
 ## Aliase
 

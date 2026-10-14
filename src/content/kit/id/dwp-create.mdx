@@ -1,6 +1,6 @@
 ---
 title: dwp-create
-description: "Buat Deep Work Plan dari tujuan tingkat tinggi, dengan tata bahasa opsi batas, proposal Lite, alokasi folder, dan kontrak v7 dengan verifikasi penuh."
+description: "Buat Deep Work Plan dari tujuan tingkat tinggi, dengan tata bahasa opsi batas lengkap, proposal Lite-first, alokasi folder bernomor, dan kontrak v7."
 kind: command
 lang: id
 order: 1
@@ -18,7 +18,7 @@ Buat Deep Work Plan baru dari tujuan tingkat tinggi.
 
 ## Fungsinya
 
-`dwp-create` mengambil tujuan tingkat tinggi dan mengubahnya menjadi rencana terstruktur. Ia menganalisis tujuan, mengajukan pertanyaan klarifikasi bila perlu, menguraikan pekerjaan menjadi tugas-tugas sekuensial, dan menulis file rencana.
+`dwp-create` mengambil tujuan tingkat tinggi dan mengubahnya menjadi Deep Work Plan yang terstruktur dan dapat dieksekusi. Ia menganalisis kebutuhan, mengajukan pertanyaan klarifikasi bila ada ambiguitas, dan mewujudkan rencana Lite atau Full langsung di bawah `.dwp/plans/PLAN_<id>_<slug>/`.
 
 ## Penggunaan
 
@@ -28,27 +28,26 @@ Buat Deep Work Plan baru dari tujuan tingkat tinggi.
 /dwp-create <goal> full trust
 ```
 
-## Mode
+## Mode dan opsi batas
 
-`dwp-create` secara default berjalan dalam mode **guided**: ia mengumpulkan konteks, menjalankan analisis, dan langsung melakukan materialisasi sebuah rencana Lite — proposal ringkas yang sudah dapat dieksekusi, bukan draf yang akan dibuang — **menunjukkannya kepada Anda, dan menanyakan apakah ingin mempertahankannya sebagai Lite, mempromosikannya menjadi rencana Full berbasis berkas tugas, mengeditnya, atau berhenti** — sehingga Anda selalu membaca rencana yang sebenarnya sebelum memutuskan. Ini adalah default yang direkomendasikan, terutama pada beberapa kali pertama.
+Opsi batas mengatur perilaku peninjauan dan format rencana. Opsi ini dapat muncul sebagai token di awal atau di akhir perintah, dalam urutan apa pun:
 
-Tambahkan **`trust`** (atau `auto`) sebagai kata terakhir untuk melewati tinjauan ini — agent langsung menuju rencana yang telah disetujui sebelumnya dan siap dijalankan (Lite atau Full, dipilih berdasarkan sinyal yang sama):
-
-```
-/dwp-create <goal> trust
-```
-
-Mode trust adalah pintasan bagi power user setelah Anda memercayai alurnya; mode guided menjaga manusia tetap terlibat secara default.
+- **Mode peninjauan:**
+  - **Terpandu (default):** mewujudkan proposal rencana Lite yang dapat dieksekusi, menampilkan sinyal yang teramati beserta alasan pemilihan format, lalu menanyakan apakah Anda ingin mempertahankan Lite, mempromosikannya ke Full, menyuntingnya, atau berhenti.
+  - **Trust (`trust` atau `auto`):** melewati peninjauan dan langsung menghasilkan rencana yang sudah disetujui sebelumnya dan siap dijalankan.
+- **Preferensi format:**
+  - **`lite`:** menyatakan preferensi untuk rencana ringkas dalam satu berkas `README.md` dengan catatan tugas berjangkar (`#task-N`).
+  - **`full`:** menyatakan preferensi untuk berkas tugas bernomor yang terurai (`N.task_<slug>.md`).
+  - Menyebutkan `lite` dan `full` sekaligus merupakan konflik eksplisit.
+- **Terminator:** `--` mengakhiri penguraian opsi; semua yang muncul setelah `--` ditafsirkan sebagai konteks tujuan literal.
 
 ## Perilaku
-1. Analisis tujuan dan konteks repositori.
-2. Ajukan pertanyaan klarifikasi bila ambigu.
-3. Lakukan materialisasi rencana langsung di bawah `.dwp/plans/PLAN_<id>_<slug>/` — rencana Lite secara default, atau Full untuk pekerjaan yang lebih besar (dalam mode guided, tinjau dan pilih mempertahankan sebagai Lite, mempromosikan ke Full, mengedit, atau berhenti).
-4. Uraikan menjadi tugas-tugas sekuensial dan tulis README, file tugas, serta PROGRESS.
-4. `ledger.py materialize` -> `contract.json` (v7).
-5. Akhiri dengan Final Review (pemeriksaan keamanan, validasi status akhir, rekonsiliasi skills).
 
-Paket 7.x membuat rencana v7 secara default. Rencana yang ada mempertahankan generasi yang tercatat; migrasi memerlukan permintaan eksplisit. Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v7 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
+1. **Analisis kebutuhan:** memeriksa konteks repositori, arsitektur, dan perintah pengujian yang terdokumentasi.
+2. **Klarifikasi:** mengajukan pertanyaan klarifikasi bila cakupan atau kebutuhan ambigu.
+3. **Alokasi monoton:** mengalokasikan nama folder berisi nol di depan `PLAN_<id>_<slug>/` di bawah `.dwp/plans/` menggunakan `.next-plan-id` dengan kunci berkas POSIX (`fcntl`). ID numerik bersifat monoton dan tidak pernah digunakan ulang.
+4. **Materialisasi kontrak:** menjalankan `ledger.py materialize` untuk menulis `manifest.json`, mencap `contract.json` yang beralamat konten (generasi v7 dengan penanda tugas `parallel_safe`), dan mencatat peristiwa `approval` awal.
+5. **Final Review:** rencana diakhiri dengan tugas Final Review wajib lima bagian (pemeriksaan keamanan dengan peninjauan lokal wajib, validasi keadaan akhir, rekonsiliasi skill, rekonsiliasi dokumentasi, penyelesaian).
 
 ## Alias
 

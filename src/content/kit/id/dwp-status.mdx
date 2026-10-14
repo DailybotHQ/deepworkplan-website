@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Laporkan status Deep Work Plan di empat dimensi siklus hidup, batas amplop sumber daya, pemblokir, dan delegasi tanpa memodifikasi file."
+description: "Laporkan status Deep Work Plan di empat dimensi siklus hidup, batas amplop sumber daya, pemblokir, dan delegasi tanpa memodifikasi berkas apa pun."
 kind: command
 lang: id
 order: 5
@@ -18,22 +18,22 @@ Laporkan status Deep Work Plan tanpa mengeksekusi.
 
 ## Fungsinya
 
-`dwp-status` merangkum progres rencana tanpa membuat perubahan. Ia melaporkan tugas yang selesai, sedang berjalan, dan tertunda.
+`dwp-status` secara kontrak sepenuhnya hanya-baca. Ia merangkum kemajuan, pemblokir aktif, titik periksa, dan amplop sumber daya tanpa mengubah berkas apa pun.
 
 ## Penggunaan
 
 ```
-/dwp-status
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Perilaku
 
-1. 4 lifecycle dimensions (format, materialization, review, progress); Baca rencana dan `PROGRESS.md`.
-2. Rangkum tugas yang selesai.
-3. Rangkum tugas yang sedang berjalan.
-4. Resource envelope & blockers (C1–C7); Rangkum tugas yang tertunda.
-5. Delegations observation; Laporkan tanpa mengubah apa pun.
+1. **Empat dimensi siklus hidup:** melaporkan format (`lite` atau `full`), status materialisasi (`materializing`, `ready`, atau `promoting`), persetujuan peninjauan (`pending`, `approved`, atau `pre_approved`), dan kemajuan eksekusi (`pending`, `in_progress`, `blocked`, atau `completed`).
+2. **Ikhtisar seluruh repositori:** bila dipanggil tanpa argumen, mencantumkan semua rencana di bawah `.dwp/plans/` beserta persentase penyelesaian, penunjuk tugas aktif, dan ringkasan pemblokir.
+3. **Amplop sumber daya:** menampilkan penghitung yang terpakai dibandingkan batas atas pada dimensi yang dilacak (`wall_clock`, percobaan ulang, pengiriman, biaya, token) dan menunjukkan apakah batas tersebut ditegakkan secara aktif atau hanya bersifat anjuran.
+4. **Diagnosis pemblokir:** menampilkan detail pemblokir aktif dari `state.json.blocked` yang dikategorikan menurut taksonomi eskalasi standar (kelas C1–C7).
+5. **Pengamatan delegasi:** merangkum delegasi subagen yang terbuka dan yang telah selesai, serta pertukaran peer yang tercatat.
 
 ## Alias
 

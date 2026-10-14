@@ -1,6 +1,6 @@
 ---
 title: dwp-execute
-description: "Führen Sie einen Deep Work Plan sequenziell mit der v7-Ledger-Schleife, optionalem Trust-Modus, parallel_safe-Delegation und Final Review aus."
+description: "Führt einen bestehenden Deep Work Plan sequenziell aus: v7-Ledger-Schleife, optionaler unbeaufsichtigter Trust-Modus, parallel_safe-Delegation, Final Review."
 kind: command
 lang: de
 order: 2
@@ -12,29 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Einen bestehenden Deep Work Plan ausführen.
+Einen bestehenden Deep Work Plan Aufgabe für Aufgabe ausführen.
 
 <CmdExecute lang="de" class="not-prose my-8" />
 
 ## Was es tut
 
-`dwp-execute` führt einen bestehenden Plan Aufgabe für Aufgabe aus. Es liest den vollständigen Plan, führt jede Aufgabe der Reihe nach aus, aktualisiert `PROGRESS.md` und markiert den Abschlussstatus jeder Aufgabe.
+`dwp-execute` führt einen bestehenden Plan Aufgabe für Aufgabe über die deterministische Aufzeichnungsschicht aus. Es löst den Zielplan auf, wertet Abhängigkeiten aus, führt jede Aufgabe in der deklarierten Reihenfolge aus, durchläuft die Validierungs-Gates und zeichnet unveränderlichen Fortschritt auf.
 
 ## Verwendung
 
 ```
-/dwp-execute
-/dwp-execute [plan]
-/dwp-execute [plan] trust
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Modi
+
+- **Geführt (Standard):** fragt zwischen den Aufgaben nach einer Bestätigung, sodass Sie Nachweise und Entscheidungen an jeder Aufgabengrenze prüfen können.
+- **Trust (`auto`):** das angehängte `trust` führt berechtigte Aufgaben sequenziell bis zum Abschluss aus, ohne für Routinebestätigungen anzuhalten, und stoppt nur bei echten Blockaden (Eskalationsklassen C1–C7).
 
 ## Verhalten
 
-1. Den vollständigen Plan lesen, bevor begonnen wird.
-2. `ledger.py ready` & `ledger.py start` -> Aufgaben der Reihe nach ausführen.
-3. `ledger.py gate` -> `observed` evidence; `PROGRESS.md` nach jeder Aufgabe aktualisieren.
-4. `parallel_safe` delegation; Den Aufgabenstatus akkurat markieren.
-5. `ledger.py complete` & Final Review; Bei Blockaden anhalten und nachfragen.
+1. **Planauflösung:** löst über den exakten Ordnernamen, die numerische ID, einen eindeutigen Slug oder `latest` (den Plan mit der höchsten numerischen ID) auf.
+2. **Ledger-Schleife:** führt `ledger.py ready` aus, um den Abhängigkeits-DAG und die Invarianten auszuwerten, `ledger.py start`, um die Voraussetzungen zu prüfen, und `ledger.py gate`, um die Validierungsbefehle auszuführen und `observed`-Nachweise zu erzeugen.
+3. **Abgesicherter Abschluss:** `ledger.py complete` erzwingt Kontrollen gegen Null-Test-Läufe, eine frische Auswertung der Invarianten sowie aufgabenlokale Entscheidungen zu Skills und Dokumentation.
+4. **Delegation innerhalb des Plans:** in v7-Verträgen als `parallel_safe` markierte Aufgaben können über headless (`ak run` in einem Worktree) oder interaktive (`herdr`-Pane) Transporte an Subagenten delegiert werden. Die Ergebnisse bleiben `asserted`, bis der Gate-Runner des Plans sie beobachtet.
+5. **Kapazitätsprüfungen:** wertet vor der Weitergabe an Aufgabengrenzen den verbleibenden Spielraum des Kontos aus.
+6. **Final Review:** endet mit einer verpflichtenden fünfteiligen Abschlussaufgabe (Sicherheitsdurchlauf mit verpflichtendem lokalem Review, Validierung des Endzustands, Abgleich der Skills, Abgleich der Dokumentation, Abschluss).
 
 ## Aliase
 

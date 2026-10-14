@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-Riprende un Deep Work Plan interrotto.
+Riprende un Deep Work Plan interrotto a partire da registrazioni durevoli.
 
 <CmdResume lang="it" class="not-prose my-8" />
 
 ## Cosa fa
 
-`dwp-resume` continua un piano interrotto. Ricostruisce lo stato da `PROGRESS.md` e dai file delle attività, poi prosegue dalla prima attività incompleta.
+`dwp-resume` prosegue in sicurezza un piano interrotto a partire dai soli artefatti dello spazio di lavoro, senza esecuzioni duplicate. Ricostruisce lo stato in modo deterministico da `journal.ndjson` e `contract.json`, legge i pacchetti di passaggio in sospeso e prosegue dalla prima attività incompleta.
 
 ## Uso
 
@@ -28,10 +28,11 @@ Riprende un Deep Work Plan interrotto.
 
 ## Comportamento
 
-1. Legge `PROGRESS.md` e i file delle attività.
-2. Ricostruisce lo stato di esecuzione.
-3. Prosegue dalla prima attività incompleta.
-4. Aggiorna i progressi man mano che procede.
+1. **Lettura delle registrazioni:** esamina `contract.json` e `journal.ndjson` sotto `.dwp/plans/PLAN_<id>_<slug>/`.
+2. **Proiezione dello stato:** esegue `ledger.py project` per rigenerare in modo deterministico `state.json` dal giornale in sola aggiunta. Le discrepanze si risolvono a favore del giornale.
+3. **Acquisizione dei passaggi:** verifica la presenza di pacchetti di passaggio dello sciame in sospeso (`dwp-handoff-v1`) per recuperare l’intento in corso, i gate non verificati e le richieste aperte tra pari.
+4. **Verifica della giunzione:** controlla lo stato di git ed esegue smoke test sulle superfici toccate prima di riprendere.
+5. **Prosecuzione:** esegue la prima attività aperta tramite il ciclo di esecuzione standard. I piani v5 legacy continuano a usare il flusso `PROGRESS.md` registrato, senza migrazione forzata.
 
 ## Alias
 

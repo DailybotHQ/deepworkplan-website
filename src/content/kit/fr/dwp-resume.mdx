@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "Reprenez un Deep Work Plan de façon déterministe depuis le journal et le contrat via ledger.py project, en traitant les paquets de relais."
+description: "Reprenez un Deep Work Plan de façon déterministe depuis journal et contrat via ledger.py project, en ingérant les paquets de relais et en exécutant les portes."
 kind: command
 lang: fr
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-Reprendre un Deep Work Plan interrompu.
+Reprendre un Deep Work Plan interrompu à partir d’enregistrements durables.
 
 <CmdResume lang="fr" class="not-prose my-8" />
 
 ## Ce qu’il fait
 
-`dwp-resume` poursuit un plan interrompu. Il reconstruit l’état à partir de `PROGRESS.md` et des fichiers de tâche, puis poursuit à partir de la première tâche inachevée.
+`dwp-resume` poursuit en toute sécurité un plan interrompu à partir des seuls artefacts de l’espace de travail, sans exécution en double. Il reconstruit l’état de manière déterministe à partir de `journal.ndjson` et `contract.json`, lit les paquets de relais en attente et reprend à partir de la première tâche inachevée.
 
 ## Utilisation
 
@@ -28,10 +28,11 @@ Reprendre un Deep Work Plan interrompu.
 
 ## Comportement
 
-1. Lire `PROGRESS.md` et les fichiers de tâche.
-2. Reconstruire l’état d’exécution.
-3. Poursuivre à partir de la première tâche inachevée.
-4. Mettre à jour la progression au fil de l’avancement.
+1. **Lire les enregistrements :** examine `contract.json` et `journal.ndjson` sous `.dwp/plans/PLAN_<id>_<slug>/`.
+2. **Projeter l’état :** exécute `ledger.py project` pour régénérer de manière déterministe `state.json` à partir du journal en ajout seul. Les désaccords sont tranchés en faveur du journal.
+3. **Ingestion des relais :** recherche les paquets de relais d’essaim en attente (`dwp-handoff-v1`) pour récupérer l’intention en cours, les portes non vérifiées et les demandes ouvertes entre pairs.
+4. **Vérifier la jonction :** contrôle l’état git et exécute des tests de fumée sur les surfaces touchées avant de reprendre.
+5. **Poursuivre :** exécute la première tâche ouverte via la boucle d’exécution standard. Les plans v5 hérités continuent avec leur flux `PROGRESS.md` enregistré, sans migration forcée.
 
 ## Alias
 

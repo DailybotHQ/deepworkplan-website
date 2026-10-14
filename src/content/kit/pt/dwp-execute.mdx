@@ -1,6 +1,6 @@
 ---
 title: dwp-execute
-description: "Execute um Deep Work Plan sequencialmente com o loop de ledger v7, modo trust autônomo opcional, delegação parallel_safe e fecho Final Review."
+description: "Execute um Deep Work Plan sequencialmente com o loop de ledger v7, modo trust autônomo opcional, delegação parallel_safe e encerramento com Final Review."
 kind: command
 lang: pt
 order: 2
@@ -12,10 +12,9 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Executa um Deep Work Plan existente.
+Executa um Deep Work Plan existente tarefa por tarefa.
 
 <CmdExecute lang="pt" class="not-prose my-8" />
-
 
 ## O que faz
 
@@ -24,9 +23,9 @@ Executa um Deep Work Plan existente.
 ## Uso
 
 ```
-/dwp-execute                     # executar plano mais recente
-/dwp-execute [plan]              # por pasta exata, id ou slug
-/dwp-execute [plan] trust        # execução autônoma sem prompts por tarefa
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
 
 ## Modos

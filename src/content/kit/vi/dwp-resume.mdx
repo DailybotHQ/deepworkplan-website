@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "Khôi phục Deep Work Plan bị gián đoạn một cách tất định từ nhật ký và hợp đồng qua ledger.py project, tiếp nhận các gói chuyển giao."
+description: "Tiếp tục một Deep Work Plan bị gián đoạn một cách tất định từ nhật ký và hợp đồng qua ledger.py project, tiếp nhận gói chuyển giao swarm và chạy các cổng."
 kind: command
 lang: vi
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-Tiếp tục một Deep Work Plan bị gián đoạn.
+Tiếp tục một Deep Work Plan bị gián đoạn từ các bản ghi bền vững.
 
 <CmdResume lang="vi" class="not-prose my-8" />
 
 ## Tác dụng
 
-`dwp-resume` tiếp tục một kế hoạch bị gián đoạn. Nó dựng lại trạng thái từ `PROGRESS.md` và các file tác vụ, rồi tiếp tục từ tác vụ chưa hoàn thành đầu tiên.
+`dwp-resume` tiếp tục một cách an toàn một kế hoạch bị gián đoạn chỉ từ các tạo phẩm trong không gian làm việc, không thực thi trùng lặp. Nó tái dựng trạng thái một cách tất định từ `journal.ndjson` và `contract.json`, đọc các gói chuyển giao đang chờ và tiếp tục từ tác vụ chưa hoàn thành đầu tiên.
 
 ## Cách dùng
 
@@ -28,10 +28,11 @@ Tiếp tục một Deep Work Plan bị gián đoạn.
 
 ## Hành vi
 
-1. Đọc `PROGRESS.md` và các file tác vụ.
-2. Dựng lại trạng thái thực thi.
-3. Tiếp tục từ tác vụ chưa hoàn thành đầu tiên.
-4. Cập nhật tiến độ trong quá trình thực hiện.
+1. **Đọc bản ghi:** kiểm tra `contract.json` và `journal.ndjson` dưới `.dwp/plans/PLAN_<id>_<slug>/`.
+2. **Chiếu trạng thái:** chạy `ledger.py project` để tái tạo `state.json` một cách tất định từ nhật ký chỉ-ghi-thêm. Khi có bất đồng, nhật ký được ưu tiên.
+3. **Tiếp nhận chuyển giao:** kiểm tra các gói chuyển giao swarm đang chờ (`dwp-handoff-v1`) để khôi phục ý định đang dở dang, các cổng chưa được xác minh và các yêu cầu ngang hàng còn mở.
+4. **Xác minh điểm nối:** kiểm tra trạng thái git và chạy smoke check trên các bề mặt bị tác động trước khi tiếp tục.
+5. **Tiếp tục:** thực thi tác vụ mở đầu tiên qua vòng lặp thực thi tiêu chuẩn. Các kế hoạch v5 cũ tiếp tục theo luồng `PROGRESS.md` đã ghi nhận mà không bị buộc di chuyển.
 
 ## Bí danh
 
