@@ -17,207 +17,292 @@ const { lang = 'en', class: className = '' } = Astro.props;
 const i18n = {
   en: {
     ariaLabel:
-      'The .dwp/plans/PLAN_001_slug/ directory: a README, a PROGRESS log, and numbered task files.',
+      'The .dwp/ directory and v7 plan folder: config.json, manifest, contract, journal, state, README, task files, and analysis results.',
     title: 'Plan directory',
     ann: {
+      config: 'addon registry · config',
+      manifest: 'metadata · lifecycle status',
+      contract: 'immutable outcome contract',
+      journal: 'append-only ledger events',
+      state: 'derived state cache',
       readme: 'goal · task table · status',
-      progress: 'append-only execution log',
       task: 'task file (ten sections)',
+      analysis: 'task artifacts · gate evidence',
     },
     caption:
-      'A DWP plan is a directory of Markdown files: a README overview, an append-only PROGRESS log, and one file per task.',
+      'A v7 DWP plan directory pairs machine-readable contract and journal files with human-readable Markdown and task artifacts.',
   },
   es: {
     ariaLabel:
-      'El directorio .dwp/plans/PLAN_001_slug/: un README, un registro PROGRESS y archivos de tarea numerados.',
+      'El directorio .dwp/ y la carpeta de plan v7: config.json, manifest, contract, journal, state, README, archivos de tarea y resultados de análisis.',
     title: 'Directorio del plan',
     ann: {
+      config: 'registro de extensiones · config',
+      manifest: 'metadatos · estado de ciclo de vida',
+      contract: 'contrato inmutable de resultados',
+      journal: 'registro de eventos (solo anexar)',
+      state: 'caché de estado derivado',
       readme: 'objetivo · tabla de tareas · estado',
-      progress: 'registro de ejecución (solo anexar)',
       task: 'archivo de tarea (diez secciones)',
+      analysis: 'artefactos de tarea · evidencia',
     },
     caption:
-      'Un plan de DWP es un directorio de archivos Markdown: un README de resumen, un registro PROGRESS de solo anexar y un archivo por tarea.',
+      'Un plan DWP v7 combina registros estructurados para agentes (contract, journal, state) con documentos Markdown legibles y artefactos de tarea.',
   },
   pt: {
     ariaLabel:
-      'O diretório .dwp/plans/PLAN_001_slug/: um README, um registro PROGRESS e arquivos de tarefa numerados.',
+      'O diretório .dwp/ e a pasta do plano v7: config.json, manifest, contract, journal, state, README, arquivos de tarefa e resultados de análise.',
     title: 'Diretório do plano',
     ann: {
+      config: 'registro de extensões · config',
+      manifest: 'metadados · status do ciclo de vida',
+      contract: 'contrato imutável de resultados',
+      journal: 'registro de eventos (somente anexar)',
+      state: 'cache de estado derivado',
       readme: 'objetivo · tabela de tarefas · status',
-      progress: 'registro de execução (somente anexar)',
       task: 'arquivo de tarefa (dez seções)',
+      analysis: 'artefatos de tarefa · evidência',
     },
     caption:
-      'Um plano de DWP é um diretório de arquivos Markdown: um README de visão geral, um registro PROGRESS somente anexar e um arquivo por tarefa.',
+      'Um plano DWP v7 combina registros estruturados para agentes (contract, journal, state) com documentos Markdown legíveis e artefatos de tarefa.',
   },
   zh: {
     ariaLabel:
-      '.dwp/plans/PLAN_001_slug/ 目录：一个 README、一份 PROGRESS 日志，以及按编号排列的任务文件。',
+      '.dwp/ 目录与 v7 计划文件夹：config.json、manifest、contract、journal、state、README、任务文件及分析结果。',
     title: '计划目录',
     ann: {
+      config: '插件注册表 · 配置',
+      manifest: '元数据 · 生命周期状态',
+      contract: '不可变的成果契约',
+      journal: '仅追加的账本事件',
+      state: '派生的状态缓存',
       readme: '目标 · 任务表 · 状态',
-      progress: '仅追加的执行日志',
       task: '任务文件（十个章节）',
+      analysis: '任务产物 · 门禁证据',
     },
     caption:
-      'DWP 计划是一个 Markdown 文件目录：一个 README 概览、一份仅追加的 PROGRESS 日志，以及每个任务对应的一个文件。',
+      'v7 DWP 计划将机器可读的契约与日志（contract、journal、state）与人类可读的 Markdown 文档及任务产物相结合。',
   },
   ja: {
     ariaLabel:
-      '.dwp/plans/PLAN_001_slug/ ディレクトリです。README、PROGRESS ログ、番号付きのタスクファイルが含まれます。',
+      '.dwp/ ディレクトリと v7 プランフォルダ：config.json、manifest、contract、journal、state、README、タスクファイル、および分析結果。',
     title: 'プランのディレクトリ',
     ann: {
+      config: 'アドオン登録簿 ・ 設定',
+      manifest: 'メタデータ ・ 状態',
+      contract: '不変の成果物契約',
+      journal: '追記専用イベント台帳',
+      state: '派生状態キャッシュ',
       readme: '目的 ・ タスク表 ・ ステータス',
-      progress: '追記のみの実行ログ',
       task: 'タスクファイル（十のセクション）',
+      analysis: 'タスク成果物 ・ 検証証拠',
     },
     caption:
-      'DWP プランは Markdown ファイルのディレクトリです。概要を示す README、追記のみの PROGRESS ログ、そしてタスクごとに一つのファイルで構成されます。',
+      'v7 DWP プランは、機械可読な契約・台帳（contract、journal、state）と、人間が確認できる Markdown 文書およびタスク成果物を統合します。',
   },
   de: {
     ariaLabel:
-      'Das Verzeichnis .dwp/plans/PLAN_001_slug/: eine README, ein PROGRESS-Protokoll und nummerierte Aufgabendateien.',
+      'Das .dwp/-Verzeichnis und v7-Plan-Ordner: config.json, manifest, contract, journal, state, README, Aufgabendateien und Analyseergebnisse.',
     title: 'Plan-Verzeichnis',
     ann: {
+      config: 'Addon-Registry · Konfiguration',
+      manifest: 'Metadaten · Lebenszyklusstatus',
+      contract: 'unveränderlicher Ergebnisvertrag',
+      journal: 'Ereignisprotokoll (nur anfügen)',
+      state: 'abgeleiteter Status-Cache',
       readme: 'Ziel · Aufgabentabelle · Status',
-      progress: 'Ausführungsprotokoll (nur anfügen)',
       task: 'Aufgabendatei (zehn Abschnitte)',
+      analysis: 'Aufgabenartefakte · Nachweise',
     },
     caption:
-      'Ein DWP-Plan ist ein Verzeichnis aus Markdown-Dateien: eine README als Übersicht, ein PROGRESS-Protokoll im Anfügemodus und eine Datei pro Aufgabe.',
+      'Ein v7-DWP-Plan kombiniert maschinenlesbare Verträge und Protokolle (contract, journal, state) mit lesbaren Markdown-Dokumenten und Aufgabenartefakten.',
   },
   fr: {
     ariaLabel:
-      'Le répertoire .dwp/plans/PLAN_001_slug/ : un README, un journal PROGRESS et des fichiers de tâches numérotés.',
+      'Le répertoire .dwp/ et le dossier de plan v7 : config.json, manifest, contract, journal, state, README, fichiers de tâches et résultats d’analyse.',
     title: 'Répertoire du plan',
     ann: {
+      config: 'registre d’addons · config',
+      manifest: 'métadonnées · statut du cycle',
+      contract: 'contrat immuable de résultats',
+      journal: 'journal d’événements (ajout seul)',
+      state: 'cache d’état dérivé',
       readme: 'objectif · table des tâches · statut',
-      progress: 'journal d’exécution (ajout uniquement)',
       task: 'fichier de tâche (dix sections)',
+      analysis: 'artefacts de tâche · preuves',
     },
     caption:
-      'Un plan DWP est un répertoire de fichiers Markdown : un README de présentation, un journal PROGRESS en ajout uniquement et un fichier par tâche.',
+      'Un plan DWP v7 associe des enregistrements structurés lisibles par machine (contract, journal, state) à des documents Markdown lisibles et des artefacts de tâche.',
   },
   ko: {
     ariaLabel:
-      '.dwp/plans/PLAN_001_slug/ 디렉터리입니다. README 한 개, PROGRESS 로그 한 개, 번호가 매겨진 작업 파일들이 들어 있어요.',
+      '.dwp/ 디렉터리와 v7 플랜 폴더: config.json, manifest, contract, journal, state, README, 작업 파일 및 분석 결과.',
     title: '플랜 디렉터리',
     ann: {
+      config: '애드온 레지스트리 · 설정',
+      manifest: '메타데이터 · 수명주기 상태',
+      contract: '불변의 결과 계약',
+      journal: '추가 전용 원장 이벤트',
+      state: '파생 상태 캐시',
       readme: '목표 · 작업 표 · 상태',
-      progress: '추가 전용 실행 로그',
       task: '작업 파일(열 개 섹션)',
+      analysis: '작업 산출물 · 게이트 증거',
     },
     caption:
-      'DWP 플랜은 Markdown 파일들로 이루어진 디렉터리예요. 개요를 담은 README, 추가만 가능한 PROGRESS 로그, 그리고 작업마다 한 개의 파일로 구성됩니다.',
+      'v7 DWP 플랜은 기계 가독형 계약 및 원장(contract, journal, state)과 사람이 검토 가능한 Markdown 문서 및 작업 산출물을 결합합니다.',
   },
   ru: {
     ariaLabel:
-      'Каталог .dwp/plans/PLAN_001_slug/: README, журнал PROGRESS и пронумерованные файлы задач.',
+      'Каталог .dwp/ и папка плана v7: config.json, manifest, contract, journal, state, README, файлы задач и результаты анализа.',
     title: 'Каталог плана',
     ann: {
+      config: 'реестр дополнений · конфиг',
+      manifest: 'метаданные · статус цикла',
+      contract: 'неизменяемый контракт результата' ,
+      journal: 'журнал событий (только добавление)',
+      state: 'кэш производного состояния',
       readme: 'цель · таблица задач · статус',
-      progress: 'журнал выполнения (только добавление)',
       task: 'файл задачи (десять разделов)',
+      analysis: 'артефакты задачи · свидетельства',
     },
     caption:
-      'План DWP — это каталог Markdown-файлов: README с обзором, журнал PROGRESS, в который записи только добавляются, и по одному файлу на каждую задачу.',
+      'План DWP v7 объединяет машиночитаемые контракт и журнал (contract, journal, state) с понятными человеку Markdown-документами и артефактами задач.',
   },
   it: {
     ariaLabel:
-      'La directory .dwp/plans/PLAN_001_slug/: un README, un registro PROGRESS e file di attività numerati.',
+      'La directory .dwp/ e la cartella del piano v7: config.json, manifest, contract, journal, state, README, file di attività e risultati delle analisi.',
     title: 'Directory del piano',
     ann: {
-      readme: 'obiettivo · tabella delle attività · stato',
-      progress: 'registro di esecuzione (solo accodamento)',
+      config: 'registro addon · configurazione',
+      manifest: 'metadati · stato del ciclo di vita',
+      contract: 'contratto immutabile di esito',
+      journal: 'registro eventi (solo accodamento)',
+      state: 'cache di stato derivata',
+      readme: 'obiettivo · tabella attività · stato',
       task: 'file di attività (dieci sezioni)',
+      analysis: 'artefatti di attività · verifiche',
     },
     caption:
-      'Un piano DWP è una directory di file Markdown: un README di sintesi, un registro PROGRESS in sola aggiunta e un file per ciascuna attività.',
+      'Un piano DWP v7 combina record strutturati per macchine (contract, journal, state) con documenti Markdown leggibili e artefatti delle attività.',
   },
   tr: {
     ariaLabel:
-      '.dwp/plans/PLAN_001_slug/ dizini: bir README, bir PROGRESS günlüğü ve numaralandırılmış görev dosyaları.',
+      '.dwp/ dizini ve v7 plan klasörü: config.json, manifest, contract, journal, state, README, görev dosyaları ve analiz sonuçları.',
     title: 'Plan dizini',
     ann: {
+      config: 'eklenti kaydı · yapılandırma',
+      manifest: 'meta veri · yaşam döngüsü durumu',
+      contract: 'değişmez sonuç sözleşmesi',
+      journal: 'yalnızca eklenen olay günlüğü',
+      state: 'türetilmiş durum önbelleği',
       readme: 'amaç · görev tablosu · durum',
-      progress: 'yalnızca ekleme yapılan yürütme günlüğü',
       task: 'görev dosyası (on bölüm)',
+      analysis: 'görev çıktıları · geçit kanıtı',
     },
     caption:
-      'Bir DWP planı, Markdown dosyalarından oluşan bir dizindir: genel bakış sunan bir README, yalnızca ekleme yapılan bir PROGRESS günlüğü ve her görev için bir dosya.',
+      'Bir v7 DWP planı, makine tarafından okunabilen sözleşme ve günlükleri (contract, journal, state), okunabilir Markdown belgeleri ve görev çıktılarıyla birleştirir.',
   },
   id: {
     ariaLabel:
-      'Direktori .dwp/plans/PLAN_001_slug/: sebuah README, log PROGRESS, dan berkas tugas bernomor.',
+      'Direktori .dwp/ dan folder rencana v7: config.json, manifest, contract, journal, state, README, berkas tugas, dan hasil analisis.',
     title: 'Direktori rencana',
     ann: {
+      config: 'registri addon · konfigurasi',
+      manifest: 'metadata · status siklus hidup',
+      contract: 'kontrak hasil yang tidak dapat diubah',
+      journal: 'log peristiwa buku besar (hanya tambah)',
+      state: 'cache status turunan',
       readme: 'tujuan · tabel tugas · status',
-      progress: 'log eksekusi (hanya tambah)',
       task: 'berkas tugas (sepuluh bagian)',
+      analysis: 'artefak tugas · bukti gerbang',
     },
     caption:
-      'Rencana DWP adalah direktori berkas Markdown: README sebagai ringkasan, log PROGRESS yang hanya bisa ditambah, dan satu berkas untuk setiap tugas.',
+      'Rencana DWP v7 menggabungkan rekaman terstruktur yang dapat dibaca mesin (contract, journal, state) dengan dokumen Markdown yang mudah dibaca dan artefak tugas.',
   },
   vi: {
     ariaLabel:
-      'Thư mục .dwp/plans/PLAN_001_slug/: một README, một nhật ký PROGRESS và các tệp tác vụ được đánh số.',
+      'Thư mục .dwp/ và thư mục kế hoạch v7: config.json, manifest, contract, journal, state, README, các tệp tác vụ và kết quả phân tích.',
     title: 'Thư mục kế hoạch',
     ann: {
+      config: 'sổ đăng ký addon · cấu hình',
+      manifest: 'siêu dữ liệu · trạng thái vòng đời',
+      contract: 'hợp đồng kết quả bất biến',
+      journal: 'nhật ký sự kiện sổ cái (chỉ ghi thêm)',
+      state: 'bộ nhớ đệm trạng thái phái sinh',
       readme: 'mục tiêu · bảng tác vụ · trạng thái',
-      progress: 'nhật ký thực thi (chỉ ghi thêm)',
       task: 'tệp tác vụ (mười mục)',
+      analysis: 'tạo tác tác vụ · bằng chứng cổng',
     },
     caption:
-      'Một kế hoạch DWP là một thư mục gồm các tệp Markdown: một README tổng quan, một nhật ký PROGRESS chỉ ghi thêm và một tệp cho mỗi tác vụ.',
+      'Kế hoạch DWP v7 kết hợp các bản ghi máy đọc có cấu trúc (contract, journal, state) với tài liệu Markdown dễ đọc và các tạo tác tác vụ.',
   },
   hi: {
     ariaLabel:
-      '.dwp/plans/PLAN_001_slug/ निर्देशिका: एक README, एक PROGRESS लॉग और क्रमांकित कार्य फ़ाइलें।',
+      '.dwp/ निर्देशिका और v7 योजना फ़ोल्डर: config.json, manifest, contract, journal, state, README, कार्य फ़ाइलें और विश्लेषण परिणाम।',
     title: 'योजना निर्देशिका',
     ann: {
+      config: 'ऐडऑन रजिस्ट्री · कॉन्फ़िगरेशन',
+      manifest: 'मेटाडेटा · जीवनचक्र स्थिति',
+      contract: 'अपरिवर्तनीय परिणाम अनुबंध',
+      journal: 'केवल जोड़ने वाला लेज़र इवेंट लॉग',
+      state: 'व्युत्पन्न स्थिति कैश',
       readme: 'लक्ष्य · कार्य तालिका · स्थिति',
-      progress: 'केवल जोड़ने वाला निष्पादन लॉग',
       task: 'कार्य फ़ाइल (दस खंड)',
+      analysis: 'कार्य कलाकृतियाँ · गेट साक्ष्य',
     },
     caption:
-      'DWP योजना Markdown फ़ाइलों की एक निर्देशिका है: एक संक्षिप्त README, केवल जोड़ने योग्य PROGRESS लॉग और प्रत्येक कार्य के लिए एक फ़ाइल।',
+      'एक v7 DWP योजना मशीन-पठनीय अनुबंध और लेज़र फ़ाइलों (contract, journal, state) को समीक्षा-योग्य Markdown दस्तावेज़ों और कार्य कलाकृतियों के साथ जोड़ती है।',
   },
   pl: {
     ariaLabel:
-      'Katalog .dwp/plans/PLAN_001_slug/: plik README, dziennik PROGRESS oraz ponumerowane pliki zadań.',
+      'Katalog .dwp/ oraz folder planu v7: config.json, manifest, contract, journal, state, README, pliki zadań i wyniki analiz.',
     title: 'Katalog planu',
     ann: {
+      config: 'rejestr dodatków · konfiguracja',
+      manifest: 'metadane · stan cyklu życia',
+      contract: 'niezmienny kontrakt wynikowy',
+      journal: 'dziennik zdarzeń (tylko dopisywanie)',
+      state: 'pochodna pamięć podręczna stanu',
       readme: 'cel · tabela zadań · status',
-      progress: 'dziennik wykonania (tylko dopisywanie)',
       task: 'plik zadania (dziesięć sekcji)',
+      analysis: 'artefakty zadania · dowody bramki',
     },
     caption:
-      'Plan DWP to katalog plików Markdown: README z opisem ogólnym, dziennik PROGRESS prowadzony wyłącznie przez dopisywanie oraz po jednym pliku na każde zadanie.',
+      'Plan DWP v7 łączy maszynowo czytelne kontrakty i dzienniki (contract, journal, state) z czytelnymi dla człowieka dokumentami Markdown i artefaktami zadań.',
   },
   uk: {
     ariaLabel:
-      'Каталог .dwp/plans/PLAN_001_slug/: README, журнал PROGRESS та пронумеровані файли завдань.',
+      'Каталог .dwp/ та папка плану v7: config.json, manifest, contract, journal, state, README, файли завдань і результати аналізу.',
     title: 'Каталог плану',
     ann: {
+      config: 'реєстр додатків · конфігурація',
+      manifest: 'метадані · стан життєвого циклу',
+      contract: 'незмінний контракт результату',
+      journal: 'журнал подій (лише додавання)',
+      state: 'кеш похідного стану',
       readme: 'мета · таблиця завдань · статус',
-      progress: 'журнал виконання (лише додавання)',
       task: 'файл завдання (десять розділів)',
+      analysis: 'артефакти завдання · докази шлюзу',
     },
     caption:
-      'План DWP — це каталог файлів Markdown: README з оглядом, журнал PROGRESS, до якого можна лише дописувати, та по одному файлу на кожне завдання.',
+      'План DWP v7 поєднує машинозчитувані контракти й журнали (contract, journal, state) зі зрозумілими людині документами Markdown та артефактами завдань.',
   },
   th: {
     ariaLabel:
-      'ไดเรกทอรี .dwp/plans/PLAN_001_slug/ ประกอบด้วยไฟล์ README หนึ่งไฟล์ บันทึก PROGRESS หนึ่งไฟล์ และไฟล์งานที่มีหมายเลขกำกับ',
+      'ไดเรกทอรี .dwp/ และโฟลเดอร์แผน v7: config.json, manifest, contract, journal, state, README, ไฟล์งาน และผลการวิเคราะห์',
     title: 'ไดเรกทอรีของแผน',
     ann: {
+      config: 'รีจิสทรีส่วนเสริม · การกำหนดค่า',
+      manifest: 'ข้อมูลเมตา · สถานะวงจรชีวิต',
+      contract: 'สัญญาผลลัพธ์ที่ไม่สามารถแก้ไขได้',
+      journal: 'บันทึกเหตุการณ์แบบต่อท้ายเท่านั้น',
+      state: 'แคชสถานะที่ได้รับมา',
       readme: 'เป้าหมาย · ตารางงาน · สถานะ',
-      progress: 'บันทึกการดำเนินงานแบบต่อท้ายเท่านั้น',
       task: 'ไฟล์งาน (สิบหัวข้อ)',
+      analysis: 'ผลงานของงาน · หลักฐานเกต',
     },
     caption:
-      'แผน DWP คือไดเรกทอรีของไฟล์ Markdown ประกอบด้วย README ที่สรุปภาพรวม บันทึก PROGRESS ที่ต่อท้ายได้อย่างเดียว และไฟล์หนึ่งไฟล์ต่อหนึ่งงาน',
+      'แผน DWP v7 รวมระเบียนที่มีโครงสร้างที่เครื่องอ่านได้ (contract, journal, state) เข้ากับเอกสาร Markdown และผลงานของงานที่ตรวจสอบได้',
   },
 } as const;
 
@@ -226,12 +311,17 @@ const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 // depth: indentation level; accent: highlight the PLAN_ grouping node.
 const rows = [
   { depth: 0, path: '.dwp/', ann: '' },
+  { depth: 1, path: 'config.json', ann: t.ann.config },
   { depth: 1, path: 'plans/', ann: '' },
   { depth: 2, path: 'PLAN_001_<slug>/', ann: '', accent: true },
+  { depth: 3, path: 'manifest.json', ann: t.ann.manifest },
+  { depth: 3, path: 'contract.json', ann: t.ann.contract },
+  { depth: 3, path: 'journal.ndjson', ann: t.ann.journal },
+  { depth: 3, path: 'state.json', ann: t.ann.state },
   { depth: 3, path: 'README.md', ann: t.ann.readme },
-  { depth: 3, path: 'PROGRESS.md', ann: t.ann.progress },
   { depth: 3, path: '1.task_<slug>.md', ann: t.ann.task },
   { depth: 3, path: '2.task_<slug>.md', ann: '' },
+  { depth: 3, path: 'analysis_results/', ann: t.ann.analysis },
 ];
 ---
 
