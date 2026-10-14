@@ -1,6 +1,6 @@
 ---
 title: Plan- und Aufgabenvorlagen
-description: "Die Struktur von Plan- und Aufgabendateien, das Final Review, mit dem jeder Plan enden muss, und die README- und PROGRESS-Konventionen, die einen Plan lesbar halten."
+description: "Die Struktur von Plan- und Aufgabendateien, das fünfstufige Final Review sowie die README- und PROGRESS-Konventionen, die Pläne lesbar halten."
 order: 3
 lang: de
 summary: Wie Pläne und Aufgaben auf der Festplatte strukturiert sind und die Konventionen, die sie lesbar halten.
@@ -18,25 +18,30 @@ Ein Deep Work Plan ist ein Verzeichnis von Markdown-Dateien. Die Form dieses Ver
 
 Ein Plan ist ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_001_<slug>/`. Es enthält:
 
+- `manifest.json` — Planmanifest und Metadaten.
+- `contract.json` — Spezifikationsvertrag und Scope des Plans.
+- `journal.ndjson` — Reines Append-Only-Ereignisjournal.
+- `state.json` — Aktueller Ausführungszustand und Cache.
+- `README.md` — Planübersicht: Ziel, Aufgabentabelle und Status.
+- `PROGRESS.md` — Menschenlesbares chronologisches Ausführungsprotokoll.
+- `<n>.task_<slug>.md` — Zehnteilige Spezifikationsdatei je Aufgabe.
+- `analysis_results/` — Verzeichnis für Analyseartefakte, Berichte und Gate-Logs.
 
-- `README.md` — die Planübersicht: Ziel, Quellmaterial, Aufgabentabelle und Status.
-- Eine Datei je Aufgabe, benannt `<n>.task_<slug>.md`.
-- `PROGRESS.md` — ein laufendes Protokoll der Ausführung.
-
-
-Das aktuelle 7.x-Paket erstellt standardmäßig v7-Pläne. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag. Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v6- und v7-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
+Das aktuelle 7.x-Paket erstellt standardmäßig v7-Pläne mit 2–5 Wörtern im Slug, wie schon bei v6. Der beibehaltene v5-Ablauf verwendet 2–4 Wörter (da dessen Schema die numerische ID als Wort zählt). Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Ziffern (z. B. `PLAN_001_add_payment_webhooks/`). Bestehende unnummerierte `PLAN_<slug>/`-Ordner bleiben lesbar und werden niemals umbenannt; bestehende Pläne werden niemals stillschweigend migriert. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
 
 ## Struktur der Aufgabendatei
 
-Jede Aufgabendatei trägt den Namen `<n>.task_<slug>.md` und folgt der zehnteiligen Anatomie: Goal, Context, Touched Surface, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks und Completion & Log. Die Abschnitte erscheinen stets in dieser Reihenfolge, sodass jeder Leser weiß, wo er nachschauen muss. Jede Aufgabe verankert sich vor dem Handeln erneut am Ziel des Plans, was einen Agenten daran hindert, über einen langen, mehrstündigen Horizont abzudriften.
+Jede Aufgabendatei trägt den Namen `<n>.task_<slug>.md` und folgt den zehn normativen Abschnitten des installierten Skills (Details zur Aufgabenstruktur siehe [Die Kernschleife](/de/methodology/02-core-loop)). Jede Aufgabe verankert sich vor dem Handeln erneut am Ziel des Plans, was einen Agenten daran hindert, über einen langen, mehrstündigen Horizont abzudriften.
 
 ## Das Final Review
 
-Jeder Plan muss mit genau einer verpflichtenden Aufgabe enden: dem **Final Review**. Es schließt den Plan in drei geordneten Durchgängen — nichts am Sicherheitstest wird abgeschwächt:
+Jeder Plan muss mit genau einer verpflichtenden Aufgabe abschließen: dem **Final Review**. Es beendet den Plan in fünf streng geordneten Schritten — Sicherheitsprüfungen und Validierungs-Gates werden keinesfalls aufgeweicht:
 
-1. **Sicherheitstest** — alles, was der Plan geändert hat, auf Geheimnisse, Injection-Risiken und neue Angriffsfläche prüfen und `docs/SECURITY.md` aktuell halten. Sicherheit ist kein separater Arbeitsstrang, der am Ende angeflanscht wird: Jeder Plan hinterlässt seine eigenen Änderungen auditiert, und ein kritischer Befund blockiert den Abschluss.
-2. **Validierung des Endzustands** — die vollständige Validierung des Repositorys läuft auf dem letzten relevanten Zustand und besteht, nach der finalen Korrektur.
-3. **Abgleich der Skills** — jede Aufgabe hat ihre eigene Skills-Disposition aufgezeichnet, während ihre Beweise frisch waren; das Review gleicht das Ledger ab. Der Executive Report bleibt auf Anfrage verfügbar.
+1. **Sicherheitspass** — Alles prüfen, was der Plan geändert hat, auf Secrets, Injection-Risiken und neue Angriffsflächen untersuchen und `docs/SECURITY.md` aktuell halten; falls `.agents/skills/ai-diff-reviewer/` und Extension vorhanden sind, das vorgeschriebene lokale Review ausführen. Kritische Befunde blockieren den Abschluss.
+2. **Validierung des Endzustands** — Die vollständigen Test-, Lint- und Typecheck-Suiten des Repositorys laufen auf dem Endzustand und bestehen. Korrekturen während des Reviews invalidieren betroffene Ergebnisse und erzwingen einen erneuten Durchlauf.
+3. **Abgleich der Skills** — Verifizieren, dass jede Aufgabe ihre task-lokale Skill-Disposition erfasst hat, und umsetzbare Skill-Kandidaten in `analysis_results/SKILLS_CANDIDATES.md` abgleichen.
+4. **Dokumentationsabgleich** — Die Touched Surface jeder verhaltensändernden Aufgabe mit den Dokumenten abgleichen (`docs/TESTING_GUIDE.md`, Architektur, `AGENTS.md`), die diese Funktion festhalten.
+5. **Abschluss und Schließung** — Die Konsistenz zwischen Endzustand und Artefakten prüfen, den `analysis_results/FINALIZATION.json`-Receipt schreiben und den Plan offiziell abschließen.
 
 ## README- und PROGRESS-Konventionen
 
