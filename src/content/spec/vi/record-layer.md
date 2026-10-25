@@ -8,7 +8,7 @@ section: Record layer
 
 # Lớp bản ghi
 
-> **Phạm vi phiên bản:** Trang này trình bày lại lớp bản ghi v6 có tính quy phạm mà tiêu chuẩn hiện tại, DWP 7.0.0, xây dựng trên đó. Nguồn chính thức tại bản phát hành `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) và [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên. Kế hoạch v5 giữ lớp [trạng thái kế hoạch](/spec/plan-state) và không bao giờ được di chuyển một cách ngầm định.
+> **Phạm vi phiên bản:** Trang này trình bày lại lớp bản ghi v6 có tính quy phạm mà tiêu chuẩn hiện tại, DWP 7.0.0, xây dựng trên đó. Nguồn chính thức tại bản phát hành `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) và [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên. Kế hoạch v5 giữ lớp [trạng thái kế hoạch](/spec/plan-state) và không bao giờ được di chuyển một cách ngầm định.
 
 **Phiên bản 6.0.0, mở rộng trong 7.0.0. Trạng thái: Ổn định.** Lớp bản ghi thay thế việc hoàn tất bằng lời tường thuật bằng các bản ghi: hợp đồng là thẩm quyền, nhật ký là bộ nhớ, các helper thực hiện việc ghi, và mọi tệp được sinh ra đều là một phép chiếu. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 

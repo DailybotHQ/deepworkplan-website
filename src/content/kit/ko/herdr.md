@@ -18,7 +18,7 @@ order: 7
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/herdr-peers`, 태그 `v1.0.0`, 프로토콜 1 |
+| 제품 | `DailybotHQ/herdr-peers`, 태그 `v1.1.0`, 프로토콜 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `herdr` |
 | 전송 방식 | 대화형: Herdr 페인 안의 피어 |
 | 제공 | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 herdr-peers와, 그것이 의존하는 Herdr 공식 skill을 설치합니다. 에이전트가 응답해야 하는 모든 머신에도 이 skill이 필요합니다.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

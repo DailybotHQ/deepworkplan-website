@@ -69,7 +69,7 @@ DWP `create` / `execute` 中、アドオンは**4 つのベストエフォート
 
 | コンポーネント | コマンド / パス |
 |----------------|-----------------|
-| **Dailybot エージェントスキル**（推奨） | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot -y` |
+| **Dailybot エージェントスキル**（推奨） | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot -y` |
 | **既存スキルの更新** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI**（パックのベースライン `>= 3.9.0`；Plan は `>= 3.25.0` が必要） | 初回利用時にスキルが検証済み `shared/auth.md` 経由でインストール；または `pip install 'dailybot-cli>=3.9.0'`、Homebrew、または [cli.dailybot.com](https://cli.dailybot.com) のチェックサム検証インストーラー |

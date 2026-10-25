@@ -31,7 +31,7 @@ order: 7
 ติดตั้ง herdr-peers และ skill ทางการของ Herdr ที่มันต้องพึ่งพา ทุกเครื่องที่ต้องการให้เอเจนต์ของตนตอบได้ก็ต้องมี skill นี้ด้วย
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

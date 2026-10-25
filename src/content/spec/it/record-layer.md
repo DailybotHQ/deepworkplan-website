@@ -8,7 +8,7 @@ section: Record layer
 
 # Livello di registrazione
 
-> **Ambito della versione:** questa pagina riformula il livello di registrazione normativo v6 su cui si basa lo standard attuale, DWP 7.0.0. Fonti canoniche alla release `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) e [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Dove questa pagina e quei file divergono, prevalgono i file. I piani v5 mantengono il livello di [stato del piano](/spec/plan-state) e non vengono mai migrati implicitamente.
+> **Ambito della versione:** questa pagina riformula il livello di registrazione normativo v6 su cui si basa lo standard attuale, DWP 7.0.0. Fonti canoniche alla release `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) e [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Dove questa pagina e quei file divergono, prevalgono i file. I piani v5 mantengono il livello di [stato del piano](/spec/plan-state) e non vengono mai migrati implicitamente.
 
 **Versione 6.0.0, estesa nella 7.0.0. Stato: Stabile.** Il livello di registrazione sostituisce il completamento narrativo con dei record: il contratto è l'autorità, il journal è la memoria, gli helper si occupano della scrittura e ogni file generato è una proiezione. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 

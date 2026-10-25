@@ -9,7 +9,7 @@ lastUpdated: 2026-10-09
 किट वह सब कुछ है जिसकी आपको पद्धति को व्यवहार में चलाने के लिए आवश्यकता है। इसे `DailybotHQ/deepworkplan-skill` से स्थापित किया जाता है:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
 ```
 
 वर्तमान 7.x पैक नए प्लान डिफ़ॉल्ट रूप से v7 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन के लिए स्पष्ट अनुरोध आवश्यक है।
@@ -62,10 +62,10 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 **पद्धति अकेले काम करती है। ऐडऑन इसे और सशक्त बनाते हैं।** प्रत्येक ऐडऑन Deep Work Plan स्किल के भीतर एक हल्का इंटीग्रेटर है, जो tag द्वारा ऐसे उत्पाद पर पिन किया गया है जिसकी अपनी रिपॉज़िटरी, रिलीज़ और इंटरफ़ेस संस्करण है। हर उत्पाद Deep Work Plan के बिना काम करता है, और कोई भी ऐडऑन आवश्यक नहीं है।
 
 - **Deep Work Plan स्किल** — योजनाएँ बनाएँ, निष्पादित करें, सत्यापित करें, फिर से शुरू करें और परिष्कृत करें। किसी ऐडऑन की आवश्यकता नहीं।
-- **[herdr](/hi/kit/herdr)** — किसी भी मशीन पर Herdr पेन में पीयर: एक अधिकृत उत्तर के साथ इंटरैक्टिव डेलिगेशन। पिन किया गया `herdr-peers@v1.0.0`।
-- **[agentkit](/hi/kit/agentkit)** — हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: opt-out के साथ डिफ़ॉल्ट स्वायत्तता, और worktree में हेडलेस डेलिगेशन। पिन किया गया `coding-agents-kit@v1.0.1`।
+- **[herdr](/hi/kit/herdr)** — किसी भी मशीन पर Herdr पेन में पीयर: एक अधिकृत उत्तर के साथ इंटरैक्टिव डेलिगेशन। पिन किया गया `herdr-peers@v1.1.0`।
+- **[agentkit](/hi/kit/agentkit)** — हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: opt-out के साथ डिफ़ॉल्ट स्वायत्तता, और worktree में हेडलेस डेलिगेशन। पिन किया गया `coding-agents-kit@v1.1.0`।
 - **[devcontainer](/hi/kit/devcontainer)** — एक टेम्पलेट से हर रिपॉज़िटरी का अपना dev container: ak के ज़रिए एजेंट, दोनों दिशाओं में Herdr, SSH कुंजियाँ केवल opt-in पर। पिन किया गया `devcontainer-kit@v1.0.1`।
-- **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v1.0.0`।
+- **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v1.0.1`।
 
 ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं: `v7.8.1`
 

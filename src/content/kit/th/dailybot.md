@@ -69,7 +69,7 @@ Addon **เสนอ** เส้นทางติดตั้ง skill Dailybot
 
 | ส่วนประกอบ | คำสั่ง / path |
 |-----------|----------------|
-| **Dailybot agent skill** (แนะนำ) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot -y` |
+| **Dailybot agent skill** (แนะนำ) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot -y` |
 | **อัปเดต skill ที่มี** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (baseline ของชุด `>= 3.9.0`; Plan ต้องใช้ `>= 3.25.0`) | ติดตั้งโดย skill ครั้งแรกผ่าน `shared/auth.md`; หรือ `pip install 'dailybot-cli>=3.9.0'` Homebrew หรือ installer ที่ตรวจ checksum ที่ [cli.dailybot.com](https://cli.dailybot.com) |

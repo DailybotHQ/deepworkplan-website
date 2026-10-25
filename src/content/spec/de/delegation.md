@@ -8,7 +8,7 @@ section: Record layer
 
 # Delegation
 
-> **Versionsumfang:** Diese Seite gibt die v7-Vertragsgeneration im Release `v7.8.1` wieder. Kanonische Quellen: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md) und die Datei [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md) des Ausführungsablaufs. Wo diese Seite und diese Dateien voneinander abweichen, gelten die Dateien.
+> **Versionsumfang:** Diese Seite gibt die v7-Vertragsgeneration im Release `v7.8.1` wieder. Kanonische Quellen: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) und die Datei [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) des Ausführungsablaufs. Wo diese Seite und diese Dateien voneinander abweichen, gelten die Dateien.
 
 **Version 7.0.0. Status: Stabil.** v7 ist eine neue Vertragsgeneration der [Aufzeichnungsschicht](/spec/record-layer), kein neuer Lebenszyklus: Alles in den v6-Dokumenten zu Vertrag, Lebenszyklus, Kontext und Ressourcen gilt, sofern diese Seite nichts anderes sagt. Nicht zu delegieren ist immer korrekt. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 

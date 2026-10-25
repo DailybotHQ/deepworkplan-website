@@ -8,7 +8,7 @@ section: Record layer
 
 # Warstwa rekordów
 
-> **Zakres wersji:** Ta strona streszcza normatywną warstwę rekordów v6, na której opiera się aktualny standard, DWP 7.0.0. Źródła kanoniczne w wydaniu `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) i [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Tam, gdzie ta strona i te pliki się różnią, rozstrzygają pliki. Plany v5 zachowują warstwę [stanu planu](/spec/plan-state) i nigdy nie są migrowane niejawnie.
+> **Zakres wersji:** Ta strona streszcza normatywną warstwę rekordów v6, na której opiera się aktualny standard, DWP 7.0.0. Źródła kanoniczne w wydaniu `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) i [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Tam, gdzie ta strona i te pliki się różnią, rozstrzygają pliki. Plany v5 zachowują warstwę [stanu planu](/spec/plan-state) i nigdy nie są migrowane niejawnie.
 
 **Wersja 6.0.0, rozszerzona w 7.0.0. Status: stabilna.** Warstwa rekordów zastępuje narracyjne ukończenie rekordami: kontrakt jest autorytetem, dziennik jest pamięcią, zapisy wykonują helpery, a każdy wygenerowany plik jest projekcją. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 

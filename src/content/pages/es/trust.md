@@ -26,7 +26,7 @@ cd deepworkplan-skill
 git checkout v7.8.1
 # Descarga los checksums para la versión que vas a instalar (versión actual v7.8.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
 # SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # una salida distinta de cero significa que un archivo no coincide — detente
 ```

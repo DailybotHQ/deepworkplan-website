@@ -69,7 +69,7 @@ Das Addon **bietet** Installationspfade; die Dailybot-Skill besitzt Einwilligung
 
 | Komponente | Befehl / Pfad |
 |-----------|----------------|
-| **Dailybot-Agent-Skill** (empfohlen) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot -y` |
+| **Dailybot-Agent-Skill** (empfohlen) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot -y` |
 | **Bestehende Skill aktualisieren** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (Pack-Baseline `>= 3.9.0`; Plan benötigt `>= 3.25.0`) | Von der Skill bei erster Nutzung via verifiziertem `shared/auth.md` installiert; oder `pip install 'dailybot-cli>=3.9.0'`, Homebrew oder Installer mit Prüfsumme unter [cli.dailybot.com](https://cli.dailybot.com) |

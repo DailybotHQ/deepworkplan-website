@@ -41,7 +41,7 @@ lastUpdated: 2026-10-11
  git checkout v7.8.1
  # 下载该发布版本的校验和，并与下方的摘要比对：
  curl -fsSL -o SHA256SUMS \
- https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
  shasum -a 256 SHA256SUMS # 必须等于“锁定的发布版本”中 deepworkplan-skill 的摘要
  ./setup.sh --verify # 非零退出码表示某个文件不匹配——停止操作
  ```
@@ -97,7 +97,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
 ```
 
 或通过 OpenClaw 安装：
@@ -157,7 +157,7 @@ v5 计划继续使用 https://deepworkplan.com/schema/plan-state/v5.json 作为 
 每份计划都有一项强制性的收尾任务：**Final Review**。它对累积的整个变更集
 运行安全检查（包括必需的本地 AI Diff Reviewer 审查），验证仓库的最终状态，
 核对各任务所使用的技能，并记录证据与局限。本地审查技能安装在固定版本；
-当前文档记录的命令安装 `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14`。GitHub Action
+当前文档记录的命令安装 `https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16`。GitHub Action
 是一个独立的、可选的 CI 层面，核心方法论从不要求使用它。
 
 一次执行了却没有报告任何问题的审查，与一次根本没能产出结果的审查并不相同。后者属于**不完整的审查**：它会被如实记录，绝不被当作变更集干净的凭据，也绝不构成关闭 Final Review 的理由——与 `timeout` 审查在阻断性严格度下得到的红色处理相同（BC-04）。连同审查器缺失与调用出错，这是三种彼此不同的状态——而它们当中没有任何一种意味着这份 diff 被审查过且是干净的。写着 `Recommendation: approve` 的正文也不能证明检查已通过。请先阅读跟踪标记中的 Highest severity / Strictness gate / Check status 块——当门控失败时，运行时会改写模型的 `approve`。
@@ -213,10 +213,10 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 
 | 组件 | 检测已安装的版本 | 安装或升级（锁定） |
 | --- | --- | --- |
-| AI Diff Reviewer（必备） | `.agents/skills/ai-diff-reviewer/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer --force -y` |
-| Dailybot | `.agents/skills/dailybot/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | 已安装的 herdr-peers 技能中的 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
+| AI Diff Reviewer（必备） | `.agents/skills/ai-diff-reviewer/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `.agents/skills/dailybot/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | 已安装的 herdr-peers 技能中的 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | 位于 https://deepworkplan.com/vim/install.sh 的经校验安装器（锁定 `v1.0.0`；下载后执行 `shasum -a 256 -c install.sh.sha256`，再运行） |
 
@@ -267,7 +267,7 @@ devcontainer 附加组件的终点是一套可运行的环境，而不是一组�
 - **观察。** `herdr-peers lanes` 显示每条通道的状态；对于受阻的通道，`herdr-peers status <pane>` 对其界面进行分类，`herdr pane read <pane>` 则显示该界面。
 - **一种按键，一种情况。** 你唯一可以通过 `herdr pane send-keys` 发送的按键，是对文件夹信任界面的应答，且仅限于你自己启动的窗格、在 `--trust-cwd` 不可用的情况下。发送前后都读取界面，并发送最少的按键。
 - **其余一律读取、记录并上报**给开发者：Claude 的绕过权限确认、登录与凭据提示、逐项操作的权限请求、破坏性确认、付款或套餐提示、未知界面，以及不是你创建的窗格。设置 `AGENTKIT_PERMISSIONS=ask` 时，通道在行动前先询问；绝不绕过这些提示。把每一次干预记录在父计划中。
-- **让代理集群持续运行。** 借助 coding-agents-kit `v1.0.1` 和 herdr-peers `v1.0.0`，每个代理在每个任务边界检查 `ak capacity --self --json`；在 `critical` 时，它写好一份交接包（https://deepworkplan.com/schema/dwp-handoff/v1.json），主导者在同一个检出中启动一个继任者。主导者用 `herdr-peers lead claim` 认领其计划，通道以 `lead` 为地址联系它，若主导者消失，则由副手接管（`herdr-peers lead takeover`）。每个例行选择都自行决定并记录；只上报关键类别 C1–C7——参见 https://deepworkplan.com/methodology/07-swarm-autonomy.md。
+- **让代理集群持续运行。** 借助 coding-agents-kit `v1.1.0` 和 herdr-peers `v1.1.0`，每个代理在每个任务边界检查 `ak capacity --self --json`；在 `critical` 时，它写好一份交接包（https://deepworkplan.com/schema/dwp-handoff/v1.json），主导者在同一个检出中启动一个继任者。主导者用 `herdr-peers lead claim` 认领其计划，通道以 `lead` 为地址联系它，若主导者消失，则由副手接管（`herdr-peers lead takeover`）。每个例行选择都自行决定并记录；只上报关键类别 C1–C7——参见 https://deepworkplan.com/methodology/07-swarm-autonomy.md。
 
 ## 5. 演化套件（author 子技能）
 

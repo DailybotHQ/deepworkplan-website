@@ -65,7 +65,7 @@ ak pick codex --owner local:w1:p1 --count 2      # пропустить учёт
 ## Установка
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
@@ -73,7 +73,7 @@ ak doctor
 
 | Элемент | Значение |
 |---|---|
-| Продукт | `DailybotHQ/coding-agents-kit`, тег `v1.0.1`, интерфейс 1 |
+| Продукт | `DailybotHQ/coding-agents-kit`, тег `v1.1.0`, интерфейс 1 |
 | Ключ реестра | `agentkit` в `.dwp/config.json` |
 | Транспорт | headless: один `ak run` на делегата в отдельном git worktree |
 | Предоставляет | `subagents`, `cancel_children`, `model_routing` |

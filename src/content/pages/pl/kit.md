@@ -10,7 +10,7 @@ Kit to wszystko, czego potrzebujesz, aby stosować metodykę w praktyce. Instalu
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
 ```
 
 Aktualny pakiet 7.x domyślnie tworzy nowe plany w v7. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia.
@@ -65,10 +65,10 @@ Możliwości, które przepływ onboardingu nakłada na repozytorium. Siedem jest
 **Metodyka działa samodzielnie. Dodatki ją wzmacniają.** Każdy dodatek to cienki integrator wewnątrz skilla Deep Work Plan, przypięty tagiem do produktu z własnym repozytorium, wydaniem i wersją interfejsu. Każdy produkt działa bez Deep Work Plan i żaden dodatek nie jest wymagany.
 
 - **Skill Deep Work Plan** — Tworzy, wykonuje, weryfikuje, wznawia i dopracowuje plany. Nie potrzebuje żadnego dodatku.
-- **[herdr](/pl/kit/herdr)** — Równorzędni agenci w panelach Herdr, na dowolnej maszynie: interaktywne delegowanie z jedną autoryzowaną odpowiedzią. Przypięty do `herdr-peers@v1.0.0`.
-- **[agentkit](/pl/kit/agentkit)** — Jedno polecenie ak dla każdego terminalowego agenta kodującego: autonomia domyślnie z możliwością rezygnacji i delegowanie bez interfejsu w worktree. Przypięty do `coding-agents-kit@v1.0.1`.
+- **[herdr](/pl/kit/herdr)** — Równorzędni agenci w panelach Herdr, na dowolnej maszynie: interaktywne delegowanie z jedną autoryzowaną odpowiedzią. Przypięty do `herdr-peers@v1.1.0`.
+- **[agentkit](/pl/kit/agentkit)** — Jedno polecenie ak dla każdego terminalowego agenta kodującego: autonomia domyślnie z możliwością rezygnacji i delegowanie bez interfejsu w worktree. Przypięty do `coding-agents-kit@v1.1.0`.
 - **[devcontainer](/pl/kit/devcontainer)** — Własny kontener deweloperski każdego repozytorium z jednego szablonu: agenci przez ak, Herdr w obie strony, klucze SSH tylko po jawnym włączeniu. Przypięty do `devcontainer-kit@v1.0.1`.
-- **[vim](/pl/kit/vim)** — Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown. Przypięty do `deepworkplan-vim@v1.0.0`.
+- **[vim](/pl/kit/vim)** — Edytor terminalowy z przeglądarką planów tylko do odczytu i podglądem Markdown. Przypięty do `deepworkplan-vim@v1.0.1`.
 
 Rejestr dodatków i deskryptory są dostarczane w Deep Work Plan v7: `v7.8.1`
 

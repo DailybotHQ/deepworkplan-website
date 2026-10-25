@@ -8,7 +8,7 @@ section: Record layer
 
 # Zasoby i możliwości
 
-> **Zakres wersji:** Ta strona streszcza cztery normatywne dokumenty aktualnego standardu, DWP 7.0.0, w wydaniu `v7.8.1`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/CONFIG.md) i [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_ABILITIES.md). Tam, gdzie ta strona i te pliki się różnią, rozstrzygają pliki.
+> **Zakres wersji:** Ta strona streszcza cztery normatywne dokumenty aktualnego standardu, DWP 7.0.0, w wydaniu `v7.8.1`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) i [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Tam, gdzie ta strona i te pliki się różnią, rozstrzygają pliki.
 
 **Status: stabilna (kontekst i zasoby od 6.0.0; konfiguracja i możliwości od 7.0.0).** Te reguły wiążą plany linii v6 ([Warstwa rekordów](/spec/record-layer)); standard v5 pozostaje nienaruszony. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 

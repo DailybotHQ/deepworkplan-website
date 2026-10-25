@@ -10,7 +10,7 @@ The kit is everything you need to run the methodology in practice. It is install
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
 ```
 
 The current 7.x pack creates new plans with v7 by default. Existing plans retain their recorded generation; migration requires an explicit request.
@@ -65,10 +65,10 @@ Capabilities the onboard flow layers onto a repo. Seven are optional and never p
 **The methodology works alone. Addons amplify it.** Each addon is a thin integrator inside the Deep Work Plan skill, pinned by tag to a product with its own repository, release and interface version. Every product works without Deep Work Plan, and no addon is required.
 
 - **Deep Work Plan skill** — Create, execute, verify, resume and refine plans. Needs no addon.
-- **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v1.0.0`.
-- **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: autonomy by default with an opt-out, and headless delegation in a worktree. Pinned at `coding-agents-kit@v1.0.1`.
+- **[herdr](/kit/herdr)** — Peers in Herdr panes, on any machine: interactive delegation with one authorized reply. Pinned at `herdr-peers@v1.1.0`.
+- **[agentkit](/kit/agentkit)** — One ak command for every terminal coding agent: autonomy by default with an opt-out, and headless delegation in a worktree. Pinned at `coding-agents-kit@v1.1.0`.
 - **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, SSH keys only on opt-in. Pinned at `devcontainer-kit@v1.0.1`.
-- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v1.0.0`.
+- **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v1.0.1`.
 
 The addon registry and descriptors ship in Deep Work Plan v7: `v7.8.1`
 

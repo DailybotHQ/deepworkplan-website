@@ -18,7 +18,7 @@ order: 7
 
 | Элемент | Значение |
 |---|---|
-| Продукт | `DailybotHQ/herdr-peers`, тег `v1.0.0`, протокол 1 |
+| Продукт | `DailybotHQ/herdr-peers`, тег `v1.1.0`, протокол 1 |
 | Ключ реестра | `herdr` в `.dwp/config.json` |
 | Транспорт | интерактивный: peer-агент в панели Herdr |
 | Предоставляет | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 Установите herdr-peers и официальный навык Herdr, от которого он зависит. Каждой машине, агенты которой должны отвечать, этот навык тоже нужен.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

@@ -26,23 +26,23 @@ export interface EcosystemPin {
 export const ECOSYSTEM_PINS = {
   pack: {
     repo: 'deepworkplan-skill',
-    tag: 'v7.8.1',
+    tag: 'v7.9.0',
     sha256sums:
-      '5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779',
+      '96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2',
     role: 'the Deep Work Plan skill (pack)',
   },
   agentkit: {
     repo: 'coding-agents-kit',
-    tag: 'v1.0.1',
+    tag: 'v1.1.0',
     sha256sums:
-      'de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f',
+      '0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629',
     role: 'agentkit addon (`ak`)',
   },
   herdr: {
     repo: 'herdr-peers',
-    tag: 'v1.0.0',
+    tag: 'v1.1.0',
     sha256sums:
-      '11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2',
+      'ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022',
     role: 'Herdr addon (herdr-peers)',
   },
   devcontainer: {
@@ -54,21 +54,21 @@ export const ECOSYSTEM_PINS = {
   },
   vim: {
     repo: 'deepworkplan-vim',
-    tag: 'v1.0.0',
+    tag: 'v1.0.1',
     sha256sums:
-      'aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779',
+      '304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7',
     role: 'DeepWorkPlan Vim addon',
   },
   reviewer: {
     repo: 'ai-diff-reviewer',
-    tag: 'v3.3.14',
+    tag: 'v3.3.16',
     sha256sums:
-      '57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4',
+      'af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398',
     role: 'required local review (AI Diff Reviewer)',
   },
   dailybot: {
     repo: 'agent-skill',
-    tag: 'v3.23.17',
+    tag: 'v3.23.20',
     sha256sums: null,
     role: 'Dailybot addon (agent skill)',
   },

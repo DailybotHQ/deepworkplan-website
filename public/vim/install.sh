@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# DeepWorkPlan Vim — self-contained installer for release v1.0.0.
+# DeepWorkPlan Vim — self-contained installer for release v1.0.1.
 #
 # Published at  : https://deepworkplan.com/vim/install.sh
 #                 and as the install.sh asset (with SHA256SUMS) of each
@@ -18,7 +18,7 @@
 # line of SHA256SUMS on the GitHub release (release tags are immutable).
 #
 # Images and CI (non-root, no terminal) — one step after the download:
-#   bash install.sh --version 1.0.0 --nvim 0.12.5 --skip-packages --strict
+#   bash install.sh --version 1.0.1 --nvim 0.12.5 --skip-packages --strict
 #
 # What it does, in order:
 #   1. Preflight — detects OS and package manager; installs git, curl, and
@@ -60,7 +60,7 @@
 # Windows: use winget plus Git Bash, or run the steps above inside WSL,
 # where they work as-is:
 #   winget install -e --id Neovim.Neovim --accept-package-agreements --accept-source-agreements
-#   git clone --branch v1.0.0 https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
+#   git clone --branch v1.0.1 https://github.com/DailybotHQ/deepworkplan-vim.git "$LOCALAPPDATA/nvim"
 #   cd "$LOCALAPPDATA/nvim" && lua install.lua
 #
 set -euo pipefail
@@ -74,7 +74,7 @@ main() {
 REPO_URL="https://github.com/DailybotHQ/deepworkplan-vim.git"
 # The release this script belongs to: with no version or ref requested it
 # installs exactly that tag.
-RELEASE_REF="v1.0.0"
+RELEASE_REF="v1.0.1"
 
 say() { printf '%s\n' "$*"; }
 die() { printf 'install.sh: %s\n' "$*" >&2; exit 1; }
@@ -111,7 +111,7 @@ Switch values: 1/true/yes/on or 0/false/no/off (any case); anything else
 is an error.
 
 Images and CI (download, verify, then run):
-  bash install.sh --version 1.0.0 --nvim 0.12.5 --skip-packages --strict
+  bash install.sh --version 1.0.1 --nvim 0.12.5 --skip-packages --strict
 USAGE
 }
 

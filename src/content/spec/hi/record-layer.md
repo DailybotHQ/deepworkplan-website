@@ -8,7 +8,7 @@ section: Record layer
 
 # रिकॉर्ड परत
 
-> **संस्करण दायरा:** यह पृष्ठ उस मानक v6 रिकॉर्ड परत को पुनः प्रस्तुत करता है जिस पर वर्तमान मानक, DWP 7.0.0, आधारित है। रिलीज़ `v7.8.1` पर प्रामाणिक स्रोत: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) और [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं। v5 योजनाएँ [योजना-स्थिति](/spec/plan-state) परत बनाए रखती हैं और कभी परोक्ष रूप से माइग्रेट नहीं की जातीं।
+> **संस्करण दायरा:** यह पृष्ठ उस मानक v6 रिकॉर्ड परत को पुनः प्रस्तुत करता है जिस पर वर्तमान मानक, DWP 7.0.0, आधारित है। रिलीज़ `v7.8.1` पर प्रामाणिक स्रोत: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) और [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं। v5 योजनाएँ [योजना-स्थिति](/spec/plan-state) परत बनाए रखती हैं और कभी परोक्ष रूप से माइग्रेट नहीं की जातीं।
 
 **संस्करण 6.0.0, 7.0.0 में विस्तारित। स्थिति: स्थिर।** रिकॉर्ड परत वर्णनात्मक पूर्णता को रिकॉर्ड से प्रतिस्थापित करती है: अनुबंध प्राधिकार है, जर्नल स्मृति है, सहायक टूल लेखन करते हैं, और हर जनित फ़ाइल एक प्रक्षेपण है। कीवर्ड MUST, MUST NOT, SHOULD, SHOULD NOT और MAY की व्याख्या RFC 2119 में वर्णित अनुसार की जानी है।
 

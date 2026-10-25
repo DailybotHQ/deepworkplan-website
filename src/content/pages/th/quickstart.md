@@ -80,7 +80,7 @@ lastUpdated: 2026-10-11
   git checkout v7.8.1
   # ดาวน์โหลด checksum ของรีลีสนั้นแล้วตรวจกับ digest ด้านล่าง:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
   shasum -a 256 SHA256SUMS # ต้องตรงกับ digest ของ deepworkplan-skill ในรีลีสที่ตรึงไว้
   ./setup.sh --verify        # exit ที่ไม่ใช่ศูนย์หมายความว่าไฟล์ไม่ตรงกัน หยุด
   ```
@@ -110,7 +110,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
 ```
 
 หรือติดตั้งผ่าน OpenClaw:
@@ -180,7 +180,7 @@ git คือ `.dwp/config.json` (https://deepworkplan.com/schema/dwp-config/v1.
 Reviewer ที่จำเป็น ตรวจสอบสถานะสุดท้ายของ repository ให้ถูกต้อง ตรวจสอบความ
 สอดคล้องของ skill ที่งานต่างๆ ใช้ และบันทึกหลักฐานกับข้อจำกัด skill สำหรับ
 รีวิวเฉพาะที่ถูกติดตั้งที่รุ่นที่ตรึงไว้ คำสั่งที่บันทึกไว้ในปัจจุบันติดตั้ง
-`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
+`https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16` GitHub Action เป็นพื้นผิว CI แยกต่างหาก
 ที่เป็นทางเลือก และไม่เคยจำเป็นสำหรับระเบียบวิธีหลัก
 
 การตรวจสอบที่ทำงานแล้วไม่รายงานอะไรเลย ไม่เหมือนกับการตรวจสอบที่ไม่เคยผลิตข้อค้นพบใด ๆ ออกมาได้เลย กรณีหลังคือ**การตรวจสอบที่ไม่สมบูรณ์** ซึ่งจะถูกบันทึกไว้ตามนั้น ไม่เคยถูกนับเป็นหลักฐานว่าชุดการเปลี่ยนแปลงสะอาด และไม่เคยเป็นเหตุผลให้ปิด Final Review ได้ — การถูกทำเครื่องหมายสีแดงเช่นเดียวกับที่การตรวจสอบ `timeout` ได้รับภายใต้ความเข้มงวดแบบบล็อก (BC-04) เมื่อรวมกับการไม่มีตัวตรวจทานและการเรียกใช้ที่ผิดพลาด นี่คือสามสถานะที่ต่างกัน และไม่มีสถานะใดเลยที่หมายความว่า diff ได้รับการตรวจแล้วและสะอาด เนื้อหาที่ว่า `Recommendation: approve` ก็ไม่ใช่หลักฐานว่า check ผ่านเช่นกัน อ่านบล็อก Highest severity / Strictness gate / Check status บนตัวทำเครื่องหมายติดตามก่อน — เมื่อเกตกำลังล้มเหลว รันไทม์จะเขียน `approve` ของโมเดลใหม่
@@ -238,10 +238,10 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 
 | คอมโพเนนต์ | ตรวจหาเวอร์ชันที่ติดตั้ง | ติดตั้งหรืออัปเกรด (ตรึงไว้) |
 | --- | --- | --- |
-| AI Diff Reviewer (จำเป็น) | `version:` ใน `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer --force -y` |
-| Dailybot | `version:` ใน `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.17 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | `scripts/herdr-peers --version` ใน skill herdr-peers ที่ติดตั้งไว้ | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g --force -y` |
+| AI Diff Reviewer (จำเป็น) | `version:` ใน `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
+| Dailybot | `version:` ใน `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | `scripts/herdr-peers --version` ใน skill herdr-peers ที่ติดตั้งไว้ | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | ตัวติดตั้งที่ผ่านการตรวจสอบที่ https://deepworkplan.com/vim/install.sh (ตรึง `v1.0.0`; ดาวน์โหลด รัน `shasum -a 256 -c install.sh.sha256` แล้วจึงรัน) |
 
@@ -259,8 +259,8 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
   (ไม่เสนอสำหรับไลบรารีบริสุทธิ์ บริการ headless หรือ repo ที่มีแต่โครงสร้างพื้นฐาน) สามโปรไฟล์ซ้อนกัน
   ในไฟล์เดียว ได้แก่ visual-ui (แนะนำอย่างหนักแน่นเมื่อตรวจพบ; การติดตั้งควบคุมด้วยการยอมรับ), cli-output และสนทนา — สองโปรไฟล์หลัง
   จะถูกถามเสมอ ไม่เคยถูกใช้โดยอัตโนมัติ
-- **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v1.0.1`): คำสั่งเดียวสำหรับเอเจนต์เขียนโค้ดทุกตัว หนึ่งบัญชีต่อโปรไฟล์ `ak usage` และ `ak pick` สำหรับเลือกบัญชีที่มีพื้นที่เหลือมากที่สุด และ `ak run` แบบ headless สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตชัดเจนให้เอเจนต์เขียนโค้ดตัวอื่น (ผู้รับมอบหมายหนึ่งรายต่อหนึ่ง worktree) ชุดเครื่องมือเปิดเอเจนต์ในโหมดอัตโนมัติโดยค่าเริ่มต้น และการเลือกไม่ใช้ (`--ask` หรือ `AGENTKIT_PERMISSIONS=ask`) ชนะเสมอ
-- **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v1.0.0` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งครั้งจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้ และสำหรับ lead ที่เฝ้าดู lane ของตัวเอง
+- **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v1.1.0`): คำสั่งเดียวสำหรับเอเจนต์เขียนโค้ดทุกตัว หนึ่งบัญชีต่อโปรไฟล์ `ak usage` และ `ak pick` สำหรับเลือกบัญชีที่มีพื้นที่เหลือมากที่สุด และ `ak run` แบบ headless สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตชัดเจนให้เอเจนต์เขียนโค้ดตัวอื่น (ผู้รับมอบหมายหนึ่งรายต่อหนึ่ง worktree) ชุดเครื่องมือเปิดเอเจนต์ในโหมดอัตโนมัติโดยค่าเริ่มต้น และการเลือกไม่ใช้ (`--ask` หรือ `AGENTKIT_PERMISSIONS=ask`) ชนะเสมอ
+- **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v1.1.0` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งครั้งจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้ และสำหรับ lead ที่เฝ้าดู lane ของตัวเอง
 - **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v1.0.0`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
 - **AI Diff Reviewer** — การตรวจสอบในเครื่องที่จำเป็น (ไม่ใช่แบบเลือกเข้าร่วม): การตรวจความปลอดภัยของทุก Final Review รัน [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md` ที่ต้องการ) บนชุดการเปลี่ยนแปลงสะสมของแผน skill หรือส่วนขยายที่ขาดหายเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึกไว้ — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน ข้อผิดพลาดในการเรียกใช้เป็น soft-fail และผลลัพธ์ `critical` **ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสมบูรณ์ยังคงบล็อกการเสร็จสิ้น  (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด, BC-04) **Flow B** (CI gate กับ `pr-review.yml`) ถูกเสนอเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง และไม่เคยถูกติดตั้งโดยไม่ได้ร้องขอ ไม่มีโฟลว์ใดของ Deep Work Plan ที่ต้องการบริการเชิงพาณิชย์ ผู้ให้บริการ CI หรือ secret
 
@@ -293,7 +293,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 - **เฝ้าดู** `herdr-peers lanes` แสดงสถานะของทุก lane สำหรับ lane ที่ถูกบล็อก `herdr-peers status <pane>` จะจำแนกหน้าจอ และ `herdr pane read <pane>` จะแสดงหน้าจอนั้น
 - **กดแป้นได้กรณีเดียว** แป้นเดียวที่คุณส่งได้ด้วย `herdr pane send-keys` คือคำตอบของหน้าจอยืนยันความเชื่อถือโฟลเดอร์ บน pane ที่คุณเปิดเอง เมื่อใช้ `--trust-cwd` ไม่ได้ อ่านหน้าจอทั้งก่อนและหลัง และส่งแป้นให้น้อยที่สุด
 - **อ่าน บันทึก และส่งต่อทุกอย่างที่เหลือ** ให้นักพัฒนา: การรับทราบ bypass-permissions ของ Claude, prompt สำหรับล็อกอินและข้อมูลรับรอง คำขอสิทธิ์รายการกระทำ การยืนยันที่ทำลายข้อมูล prompt เกี่ยวกับการชำระเงินหรือแพ็กเกจ หน้าจอที่ไม่รู้จัก และ pane ที่คุณไม่ได้สร้าง เมื่อตั้ง `AGENTKIT_PERMISSIONS=ask` lane จะถามก่อนลงมือ ห้ามหาทางเลี่ยง prompt เหล่านั้น บันทึกทุกการแทรกแซงไว้ในแผนแม่
-- **ทำให้ swarm ทำงานต่อไป** ด้วย coding-agents-kit `v1.0.1` และ herdr-peers `v1.0.0` เอเจนต์แต่ละตัวตรวจ `ak capacity --self --json` ที่ทุกขอบเขตของงาน เมื่อถึง `critical` มันจะเขียน handoff packet (https://deepworkplan.com/schema/dwp-handoff/v1.json) และ lead เปิดผู้สืบทอดใน checkout เดียวกัน lead claim แผนของตัวเองด้วย `herdr-peers lead claim` lane เรียก lead ด้วยที่อยู่ `lead` และผู้แทนจะรับตำแหน่ง (`herdr-peers lead takeover`) หาก lead หายไป ตัดสินใจและบันทึกทุกทางเลือกตามปกติเอง ส่งต่อเพื่อแก้ไขเฉพาะประเภทวิกฤต C1–C7 — ดู https://deepworkplan.com/methodology/07-swarm-autonomy.md
+- **ทำให้ swarm ทำงานต่อไป** ด้วย coding-agents-kit `v1.1.0` และ herdr-peers `v1.1.0` เอเจนต์แต่ละตัวตรวจ `ak capacity --self --json` ที่ทุกขอบเขตของงาน เมื่อถึง `critical` มันจะเขียน handoff packet (https://deepworkplan.com/schema/dwp-handoff/v1.json) และ lead เปิดผู้สืบทอดใน checkout เดียวกัน lead claim แผนของตัวเองด้วย `herdr-peers lead claim` lane เรียก lead ด้วยที่อยู่ `lead` และผู้แทนจะรับตำแหน่ง (`herdr-peers lead takeover`) หาก lead หายไป ตัดสินใจและบันทึกทุกทางเลือกตามปกติเอง ส่งต่อเพื่อแก้ไขเฉพาะประเภทวิกฤต C1–C7 — ดู https://deepworkplan.com/methodology/07-swarm-autonomy.md
 
 ## 5. พัฒนา kit (sub-skill ชื่อ author)
 

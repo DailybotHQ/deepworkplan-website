@@ -65,7 +65,7 @@ ak pick codex --owner local:w1:p1 --count 2      # ข้ามบัญชี�
 ## การติดตั้ง
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 

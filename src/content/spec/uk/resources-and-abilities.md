@@ -8,7 +8,7 @@ section: Record layer
 
 # Ресурси й можливості
 
-> **Обсяг версії:** Ця сторінка переказує чотири нормативні документи поточного стандарту DWP 7.0.0 у релізі `v7.8.1`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/CONFIG.md) і [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_ABILITIES.md). Якщо ця сторінка й ці файли розходяться, перевагу мають файли.
+> **Обсяг версії:** Ця сторінка переказує чотири нормативні документи поточного стандарту DWP 7.0.0 у релізі `v7.8.1`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) і [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Якщо ця сторінка й ці файли розходяться, перевагу мають файли.
 
 **Статус: стабільний (контекст і ресурси — з 6.0.0; конфігурація й можливості — з 7.0.0).** Ці правила обовʼязкові для планів лінії v6 ([Шар записів](/spec/record-layer)); стандарт v5 не змінюється. Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаться згідно з RFC 2119.
 

@@ -8,7 +8,7 @@ section: Record layer
 
 # 委任
 
-> **バージョンの適用範囲:** このページは、リリース `v7.8.1` 時点の v7 契約世代を要約したものです。正規の情報源は [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md) と、実行フローの [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md) です。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。
+> **バージョンの適用範囲:** このページは、リリース `v7.8.1` 時点の v7 契約世代を要約したものです。正規の情報源は [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) と、実行フローの [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) です。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。
 
 **バージョン 7.0.0。状態: 安定。** v7 は [レコードレイヤー](/spec/record-layer) の新しい契約世代であり、新しいライフサイクルではありません。このページで別段の定めがない限り、v6 の契約、ライフサイクル、コンテキスト、リソースの各文書の内容はすべて適用されます。委任しないことは常に正しい選択です。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
