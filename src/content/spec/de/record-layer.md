@@ -8,7 +8,7 @@ section: Record layer
 
 # Aufzeichnungsschicht
 
-> **Versionsumfang:** Diese Seite gibt die normative v6-Aufzeichnungsschicht wieder, auf der der aktuelle Standard, DWP 7.0.0, aufbaut. Kanonische Quellen im Release `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) und [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Wo diese Seite und diese Dateien voneinander abweichen, gelten die Dateien. v5-Pläne behalten die Schicht des [Plan-Zustands](/spec/plan-state) und werden niemals implizit migriert.
+> **Versionsumfang:** Diese Seite gibt die normative v6-Aufzeichnungsschicht wieder, auf der der aktuelle Standard, DWP 7.0.0, aufbaut. Kanonische Quellen im Release `v7.9.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) und [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Wo diese Seite und diese Dateien voneinander abweichen, gelten die Dateien. v5-Pläne behalten die Schicht des [Plan-Zustands](/spec/plan-state) und werden niemals implizit migriert.
 
 **Version 6.0.0, erweitert in 7.0.0. Status: Stabil.** Die Aufzeichnungsschicht ersetzt erzählten Abschluss durch Aufzeichnungen: Der Vertrag ist die Autorität, das Journal ist das Gedächtnis, Helfer übernehmen das Schreiben, und jede erzeugte Datei ist eine Projektion. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 

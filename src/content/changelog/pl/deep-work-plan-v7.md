@@ -40,4 +40,4 @@ Wydanie 7.7.0 (2026-10-12) przyniosło autonomię roju (Przewodnik §17): pętl�
 
 Wydanie 7.8.0 (2026-10-13) ustanowiło Ecosystem 1.0: każdy produkt integrowany przez pakiet osiągnął pierwsze stabilne wydanie i jest przypięty do v1.0.0 zgodnie z wersjonowaniem semantycznym (coding-agents-kit, herdr-peers, devcontainer-kit i deepworkplan-vim, każdy ze zweryfikowanym skrótem `SHA256SUMS`), obok przypiętych wersji AI Diff Reviewer v3.3.14 i Dailybot agent-skill v3.23.17; następnie 7.8.1 (2026-10-14) przypięło wydania poprawek v1.0.1 dla coding-agents-kit i devcontainer-kit.
 
-Zainstalowana wersja skilla: **7.8.1**, stabilna od 7.0.0.
+Zainstalowana wersja skilla: **7.9.0**, stabilna od 7.0.0.

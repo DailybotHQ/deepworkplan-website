@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
 
-Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 (pack `v7.8.1`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v1.0.0**, rilis stabil pertama: sejak rilis ini, pemasang beserta flag-nya (dengan variabel `DWP_VIM_*` yang sesuai), permukaan addon (`addon/surface.json`, antarmuka 1), perintah editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands`, dan `:DwpConfig`, kunci `dwpvim.json`, serta keybinding yang dipatok oleh kontrak pemetaan hanya berubah secara tidak kompatibel pada versi mayor baru.
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 (pack `v7.9.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v1.0.1**, rilis pemeliharaan dari rilis stabil pertama, `v1.0.0`: sejak `v1.0.0`, pemasang beserta flag-nya (dengan variabel `DWP_VIM_*` yang sesuai), permukaan addon (`addon/surface.json`, antarmuka 1), perintah editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands`, dan `:DwpConfig`, kunci `dwpvim.json`, serta keybinding yang dipatok oleh kontrak pemetaan hanya berubah secara tidak kompatibel pada versi mayor baru.
 
 ## Mengapa editor terminal untuk Deep Work Plan
 
@@ -101,11 +101,11 @@ Versi 0.6.0 menghapus apa yang tidak dipakai siapa pun, sehingga ada lebih sedik
 - Entri pemformat prettier dihapus, karena tidak ada yang memasang prettier. `:Format` tetap memakai biome, black, shfmt, dan stylua.
 - marksman tetap ada untuk mengikuti tautan, melengkapi tautan dan judul, serta kerangka dokumen, dengan diagnostiknya dibungkam. Markdown sengaja tetap tanpa pemformat.
 
-Hanya server yang tercantum dalam konfigurasi yang diaktifkan, bahkan ketika Mason masih menyimpan server lain dari penyiapan sebelumnya. Setiap plugin, server, dan alat, beserta alasan keberadaannya, tercantum di [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v1.0.0/docs/PLUGINS.md).
+Hanya server yang tercantum dalam konfigurasi yang diaktifkan, bahkan ketika Mason masih menyimpan server lain dari penyiapan sebelumnya. Setiap plugin, server, dan alat, beserta alasan keberadaannya, tercantum di [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v1.0.1/docs/PLUGINS.md).
 
 ## Instalasi
 
-Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v1.0.0`, rilis yang dijelaskan halaman ini, kecuali Anda [memilih versi lain](#choose-a-version).
+Instalasi terdiri dari tiga perintah: unduh skrip, periksa terhadap SHA-256 berkas yang disajikan situs ini, lalu jalankan. Pemasang mematok rilisnya sendiri, sehingga ia memasang tepat `v1.0.1`, rilis yang dijelaskan halaman ini, kecuali Anda [memilih versi lain](#choose-a-version).
 
 <VimInstall lang="id" />
 
@@ -119,13 +119,13 @@ Secara berurutan, pemasang:
 6. Menjalankan `lua install.lua` milik repositori itu sendiri.
 7. Memasang plugin secara headless lalu memeriksanya, sehingga tidak ada langkah keluar lalu membuka ulang. Dengan `--strict`, pemasangan plugin yang gagal atau tidak lengkap dianggap sebagai galat.
 
-Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v1.0.0`. Checksum-nya disajikan di sebelahnya, di `https://deepworkplan.com/vim/install.sh.sha256`, sehingga Anda dapat memverifikasi unduhan dengan `shasum -a 256 -c install.sh.sha256` (di Linux, `sha256sum -c install.sh.sha256`). Untuk pemeriksaan dari sumber kedua, bandingkan dengan baris `install.sh` di `SHA256SUMS` pada rilis GitHub. Jalankan `bash install.sh --help` untuk menampilkan semua opsi.
+Skrip yang disajikan di sini adalah salinan identik byte demi byte dari `install.sh` pada tag `v1.0.1`. Checksum-nya disajikan di sebelahnya, di `https://deepworkplan.com/vim/install.sh.sha256`, sehingga Anda dapat memverifikasi unduhan dengan `shasum -a 256 -c install.sh.sha256` (di Linux, `sha256sum -c install.sh.sha256`). Untuk pemeriksaan dari sumber kedua, bandingkan dengan baris `install.sh` di `SHA256SUMS` pada rilis GitHub. Jalankan `bash install.sh --help` untuk menampilkan semua opsi.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Memilih versi
 
-Secara bawaan, pemasang memasang rilisnya sendiri, `v1.0.0`. Untuk memilih versi lain, setel `DWP_VIM_VERSION` atau berikan `--version`: keduanya melakukan hal yang sama, jadi gunakan yang lebih mudah dibaca, dan flag lebih diutamakan daripada variabel lingkungan. Masing-masing menerima:
+Secara bawaan, pemasang memasang rilisnya sendiri, `v1.0.1`. Untuk memilih versi lain, setel `DWP_VIM_VERSION` atau berikan `--version`: keduanya melakukan hal yang sama, jadi gunakan yang lebih mudah dibaca, dan flag lebih diutamakan daripada variabel lingkungan. Masing-masing menerima:
 
 | Bentuk | Contoh | Yang dipasang |
 |---|---|---|
@@ -171,7 +171,7 @@ Setiap flag memiliki padanan variabel lingkungan (`DWP_VIM_VERSION`, `DWP_VIM_NV
 
 - Neovim 0.12 atau lebih baru. Pasang sendiri, atau biarkan pemasang menambahkan rilis terverifikasi dengan `--nvim X.Y.Z` (Linux dan macOS).
 - Lua: `lua`, `lua5.4`, atau `luajit`. Pemasang menambahkannya jika belum ada.
-- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone tag `v1.0.0` ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
+- macOS, Linux, dan WSL menjalankan pemasang. Windows memiliki jalur manual yang terdokumentasi di README repositori: pasang Neovim dengan winget, clone tag `v1.0.1` ke `%LOCALAPPDATA%\nvim`, dan jalankan `lua install.lua` dari Git Bash.
 - Berlisensi GPL-3.0: bebas digunakan, dipelajari, dan dimodifikasi.
 
 ## Memperbarui, mengunci versi, dan mencopot
@@ -218,7 +218,7 @@ Ia dibuat untuk manusia dan untuk agen pemrograman yang hidup di terminal. Pemet
 
 ### Versi mana yang saya dapatkan?
 
-Pemasang memasang rilis tempat ia berasal — `v1.0.0` saat ini — kecuali Anda memilih versi lain dengan `--version` atau `DWP_VIM_VERSION`: versi persis, batas `>=`, atau `latest`. `DWP_VIM_REF` menerima cabang atau commit; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v1.0.0`, yang memuat setiap fitur yang tercantum di sini.
+Pemasang memasang rilis tempat ia berasal — `v1.0.1` saat ini — kecuali Anda memilih versi lain dengan `--version` atau `DWP_VIM_VERSION`: versi persis, batas `>=`, atau `latest`. `DWP_VIM_REF` menerima cabang atau commit; `DWP_VIM_REF=main` mengikuti `main`. Halaman ini menjelaskan rilis `v1.0.1`, yang memuat setiap fitur yang tercantum di sini.
 
 ### Di bawah lisensi apa dan dari mana asalnya?
 

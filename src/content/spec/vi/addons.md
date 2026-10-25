@@ -44,7 +44,7 @@ Kết nối opt-in tới **nhóm Dailybot** của nhà phát triển để hiể
 
 - **Trang kit:** [Dailybot](/kit/dailybot) — tham chiếu khả năng đầy đủ
 - **Addon DWP kết nối:** bốn báo cáo vòng đời kế hoạch (kickoff, significant task, blocked, completion) qua sub-skill dailybot `report`; thực thi hook xác định tùy chọn (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill đi kèm:** cài [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ghim **v3.23.17**) mở **17 khả năng** — chat trên Slack/Teams/Discord/Google Chat, check-in, tạo biểu mẫu, ask AI, kudos, board và tác vụ Plan, nhãn tổ chức, API key theo repo (`.dailybot/env.json`), email và hơn thế. Addon DWP chỉ kết nối **report**; khả năng khác được gọi trực tiếp qua skill Dailybot
+- **Skill đi kèm:** cài [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ghim **v3.23.20**) mở **17 khả năng** — chat trên Slack/Teams/Discord/Google Chat, check-in, tạo biểu mẫu, ask AI, kudos, board và tác vụ Plan, nhãn tổ chức, API key theo repo (`.dailybot/env.json`), email và hơn thế. Addon DWP chỉ kết nối **report**; khả năng khác được gọi trực tiếp qua skill Dailybot
 - **Auth:** hoàn toàn hoãn sang skill Dailybot (`dailybot login` hoặc `DAILYBOT_API_KEY`); addon này không bao giờ lưu thông tin xác thực
 - **Rào vendor-neutral:** DWP cốt lõi **không** phụ thuộc Dailybot; không bao giờ tự cài cho mọi người
 - **Khi đề xuất:** nhà phát triển hoặc nhóm đã dùng Dailybot, hoặc yêu cầu rõ ràng báo cáo nhóm
@@ -72,7 +72,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**) trao cho bước rà soát bảo mật của Final Review bắt buộc một đánh giá cục bộ có cấu trúc, và tùy chọn kiểm soát các pull request trong CI. Kể từ chuẩn 2.3.0, **đánh giá cục bộ là một phần của chuẩn cơ sở**; chỉ bề mặt CI là opt-in. Addon này được tự động cập nhật theo mỗi bản phát hành, nên tag hiển thị bên dưới là tag hiện hành tại thời điểm viết và có thể đi sau bản sao đang được vendor — `SKILL.md` riêng của addon và các bản phát hành GitHub của nó mới là nguồn chuẩn cho tag thực sự được cài. Việc cài đặt luôn được ghim vào một tag đã phát hành, không bao giờ vào một nhánh di động.
 
 - **Trang kit:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tài liệu tham khảo khả năng đầy đủ
-- **Bắt buộc tại onboarding (Giai đoạn 7a):** cài đặt skill vendored được ghim theo tag (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer -y`) cùng `.review/extension.md` được điều chỉnh riêng cho repo (qua `generate-extension`), dưới sự chấp thuận của onboarding; một nâng cấp harness có mục tiêu đối chiếu cả hai khi thiếu; một lần từ chối được ghi lại như một ngoại lệ được khai báo và được `verify` báo cáo cho đến khi được cài đặt
+- **Bắt buộc tại onboarding (Giai đoạn 7a):** cài đặt skill vendored được ghim theo tag (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer -y`) cùng `.review/extension.md` được điều chỉnh riêng cho repo (qua `generate-extension`), dưới sự chấp thuận của onboarding; một nâng cấp harness có mục tiêu đối chiếu cả hai khi thiếu; một lần từ chối được ghi lại như một ngoại lệ được khai báo và được `verify` báo cáo cho đến khi được cài đặt
 - **Bắt buộc trong mọi Final Review:** bước rà soát bảo mật chạy luồng mặc định cha của skill thượng nguồn trên toàn bộ tập thay đổi đã tích lũy và nối thêm kết quả vào `analysis_results/SECURITY_REVIEW.md` nội bộ của plan (bên trong thư mục riêng của plan, không bao giờ ở thư mục gốc của repo); một skill hoặc tiện ích mở rộng bị thiếu là một phát hiện `local reviewer not installed` được ghi lại — không bao giờ là một lần bỏ qua âm thầm, và không bao giờ là một bootstrap bất ngờ: việc cài đặt thuộc về sự chấp thuận của onboarding hoặc một lời gọi addon rõ ràng; các **phát hiện nghiêm trọng đã xác minh** từ một lượt hoàn tất chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận rõ ràng (v3, BC-07 — các xác nhận nghiêm trọng chưa xác minh xuất hiện dưới dạng cảnh báo có chú thích, và một lượt đánh giá `incomplete`/`timeout` không phải là một lượt sạch, BC-04)
 - **Bề mặt CI tùy chọn (Flow B):** `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`) qua sub-skill `setup` thượng nguồn, cùng các công cụ đồng hành `apply-review` (chỉ đọc) và `address-review` (thực hiện commit, push và kích hoạt lại; mới trong v3.1.1) như các tiện ích do nhà phát triển gọi — được đề xuất rõ ràng, không bao giờ cài khi chưa được yêu cầu, không bao giờ là mặc định, không bao giờ là một tệp nhiệm vụ kế hoạch
 - **Không bao giờ chặn (chỉ đối với lỗi gọi):** một đánh giá cục bộ có thể khởi động nhưng gặp lỗi thì cảnh báo một lần, ghi lại và tiếp tục; nó không bao giờ làm thất bại tác vụ
@@ -82,7 +82,7 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 ### Herdr (addon thứ sáu)
 
-Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v1.0.0`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
+Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v1.1.0`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
 
 - **Trang kit:** [Herdr](/kit/herdr)
 - **Bổ sung:** một kế hoạch có thể giao một tác vụ có giới hạn cho một coding agent trong một pane [Herdr](https://herdr.dev) khác, trên cùng máy hoặc trên một máy mà Herdr kết nối tới qua SSH, và ghi lại phản hồi được ủy quyền duy nhất của nó vào nhật ký
@@ -91,7 +91,7 @@ Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-
 
 ### DeepWorkPlan Vim (addon thứ bảy)
 
-Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v1.0.0`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
+Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v1.0.1`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
 
 - **Trang kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Bổ sung:** một bề mặt trình soạn thảo tùy chọn ở cấp máy cho agent và con người — chỉ mục lệnh được sinh tự động, trình duyệt kế hoạch chỉ đọc và trình xem Markdown; mọi tuyên bố đều được đọc từ bề mặt máy đọc được đã ghim của sản phẩm
@@ -100,7 +100,7 @@ Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/d
 
 ### Agentkit (addon thứ tám)
 
-Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v1.0.1`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
+Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v1.1.0`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
 
 - **Trang kit:** [Agentkit](/kit/agentkit)
 - **Bổ sung:** một bề mặt lệnh `ak` duy nhất cho các coding agent trên terminal, dùng để chạy headless một tác vụ kế hoạch có giới hạn; nó chỉ đóng góp các khả năng `subagents`, `cancel_children` và `model_routing` khi chạy, lúc được bật, được phát hiện và ở trên một giao diện tương thích

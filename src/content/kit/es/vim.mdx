@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** es el editor de terminal de Deep Work Plan: una configuración de Neovim para personas, y para agentes de programación, que trabajan en una terminal. Tus planes, tu documentación y un índice de todos los comandos quedan a una tecla de distancia.
 
-Es un producto aparte, ofrecido como el addon opcional `vim` de Deep Work Plan v7 (pack `v7.8.1`). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v1.0.0**, la primera versión estable: a partir de ella, el instalador y sus opciones (con las variables `DWP_VIM_*` correspondientes), la superficie del addon (`addon/surface.json`, interfaz 1), los comandos del editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands` y `:DwpConfig`, las claves de `dwpvim.json` y los atajos de teclado fijados por el contrato de mapeos solo cambian de forma incompatible en una nueva versión mayor.
+Es un producto aparte, ofrecido como el addon opcional `vim` de Deep Work Plan v7 (pack `v7.9.0`). Deep Work Plan funciona con cualquier editor o con ninguno, y el editor no requiere Deep Work Plan: lo añades a una máquina por separado y funciona como editor haya o no un plan. Esta página describe la versión **v1.0.1**, una versión de mantenimiento de la primera versión estable, `v1.0.0`: a partir de `v1.0.0`, el instalador y sus opciones (con las variables `DWP_VIM_*` correspondientes), la superficie del addon (`addon/surface.json`, interfaz 1), los comandos del editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands` y `:DwpConfig`, las claves de `dwpvim.json` y los atajos de teclado fijados por el contrato de mapeos solo cambian de forma incompatible en una nueva versión mayor.
 
 ## Por qué un editor de terminal para Deep Work Plan
 
@@ -101,11 +101,11 @@ La versión 0.6.0 elimina lo que nadie usaba, así que hay menos plugins que fij
 - Se eliminan las entradas del formateador prettier, porque nada instalaba prettier. `:Format` conserva biome, black, shfmt y stylua.
 - marksman se queda para seguir enlaces, completar enlaces y encabezados, y el esquema del documento, con sus diagnósticos silenciados. Markdown se queda sin formateador a propósito.
 
-Solo se activan los servidores que la configuración enumera, aunque Mason conserve otros de una instalación anterior. Cada plugin, servidor y herramienta, con el motivo por el que está, se enumera en [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v1.0.0/docs/PLUGINS.md).
+Solo se activan los servidores que la configuración enumera, aunque Mason conserve otros de una instalación anterior. Cada plugin, servidor y herramienta, con el motivo por el que está, se enumera en [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v1.0.1/docs/PLUGINS.md).
 
 ## Instalación
 
-La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. El instalador fija su propia versión, así que instala exactamente `v1.0.0`, la versión que describe esta página, salvo que [elijas otra versión](#choose-a-version).
+La instalación son tres comandos: descarga el script, compruébalo con el SHA-256 del archivo que sirve este sitio y luego ejecútalo. El instalador fija su propia versión, así que instala exactamente `v1.0.1`, la versión que describe esta página, salvo que [elijas otra versión](#choose-a-version).
 
 <VimInstall lang="es" />
 
@@ -119,13 +119,13 @@ En orden, el instalador:
 6. Ejecuta el propio `lua install.lua` del repositorio.
 7. Instala los plugins sin interfaz y los comprueba, así que no hace falta salir y volver a abrir. Con `--strict`, una instalación de plugins fallida o incompleta es un error.
 
-El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v1.0.0`. Su suma de comprobación se sirve a su lado, en `https://deepworkplan.com/vim/install.sh.sha256`, así que puedes verificar la descarga con `shasum -a 256 -c install.sh.sha256` (en Linux, `sha256sum -c install.sh.sha256`). Para una comprobación desde un segundo origen, compárala con la línea de `install.sh` de `SHA256SUMS` en la versión publicada en GitHub. Ejecuta `bash install.sh --help` para ver todas las opciones.
+El script que se sirve aquí es una copia idéntica byte a byte de `install.sh` en la etiqueta `v1.0.1`. Su suma de comprobación se sirve a su lado, en `https://deepworkplan.com/vim/install.sh.sha256`, así que puedes verificar la descarga con `shasum -a 256 -c install.sh.sha256` (en Linux, `sha256sum -c install.sh.sha256`). Para una comprobación desde un segundo origen, compárala con la línea de `install.sh` de `SHA256SUMS` en la versión publicada en GitHub. Ejecuta `bash install.sh --help` para ver todas las opciones.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Elegir una versión
 
-Por defecto, el instalador instala su propia versión, `v1.0.0`. Para elegir otra, define `DWP_VIM_VERSION` o pasa `--version`: ambos hacen lo mismo, así que usa el que se lea mejor; una opción tiene prioridad sobre el entorno. Cada uno acepta:
+Por defecto, el instalador instala su propia versión, `v1.0.1`. Para elegir otra, define `DWP_VIM_VERSION` o pasa `--version`: ambos hacen lo mismo, así que usa el que se lea mejor; una opción tiene prioridad sobre el entorno. Cada uno acepta:
 
 | Forma | Ejemplo | Instala |
 |---|---|---|
@@ -171,7 +171,7 @@ Cada opción tiene una variable de entorno equivalente (`DWP_VIM_VERSION`, `DWP_
 
 - Neovim 0.12 o más reciente. Instálalo tú mismo, o deja que el instalador añada una versión verificada con `--nvim X.Y.Z` (Linux y macOS).
 - Lua: `lua`, `lua5.4` o `luajit`. El instalador añade uno si falta.
-- macOS, Linux y WSL ejecutan el instalador. Windows tiene una ruta manual documentada en el README del repositorio: instala Neovim con winget, clona la etiqueta `v1.0.0` en `%LOCALAPPDATA%\nvim` y ejecuta `lua install.lua` desde Git Bash.
+- macOS, Linux y WSL ejecutan el instalador. Windows tiene una ruta manual documentada en el README del repositorio: instala Neovim con winget, clona la etiqueta `v1.0.1` en `%LOCALAPPDATA%\nvim` y ejecuta `lua install.lua` desde Git Bash.
 - Licencia GPL-3.0: libre de usar, estudiar y modificar.
 
 ## Actualizar, fijar versión y desinstalar
@@ -218,7 +218,7 @@ Está pensado para personas y para agentes de programación que viven en una ter
 
 ### ¿Qué versión obtengo?
 
-El instalador instala la versión a la que pertenece —hoy, `v1.0.0`— salvo que elijas otra con `--version` o `DWP_VIM_VERSION`: una versión exacta, un mínimo `>=` o `latest`. `DWP_VIM_REF` acepta una rama o un commit; `DWP_VIM_REF=main` sigue `main`. Esta página describe la versión `v1.0.0`, que incluye todas las funciones enumeradas aquí.
+El instalador instala la versión a la que pertenece —hoy, `v1.0.1`— salvo que elijas otra con `--version` o `DWP_VIM_VERSION`: una versión exacta, un mínimo `>=` o `latest`. `DWP_VIM_REF` acepta una rama o un commit; `DWP_VIM_REF=main` sigue `main`. Esta página describe la versión `v1.0.1`, que incluye todas las funciones enumeradas aquí.
 
 ### ¿Bajo qué licencia está y de dónde viene?
 

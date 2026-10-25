@@ -8,7 +8,7 @@ section: Record layer
 
 # 记录层
 
-> **版本范围：** 本页重述当前标准 DWP 7.0.0 所依托的规范性 v6 记录层。发布版本 `v7.8.1` 的规范来源：[`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) 与 [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md)。本页与这些文件不一致时，以文件为准。v5 计划保留 [plan state](/spec/plan-state) 状态层，绝不会被隐式迁移。
+> **版本范围：** 本页重述当前标准 DWP 7.0.0 所依托的规范性 v6 记录层。发布版本 `v7.9.0` 的规范来源：[`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) 与 [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md)。本页与这些文件不一致时，以文件为准。v5 计划保留 [plan state](/spec/plan-state) 状态层，绝不会被隐式迁移。
 
 **版本 6.0.0，在 7.0.0 中扩展。状态：稳定。** 记录层以记录取代叙述式的完成声明：契约是权威，日志是记忆，由辅助工具负责写入，每个生成的文件都是一份投影。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 

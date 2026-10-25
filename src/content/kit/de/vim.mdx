@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** ist der Terminal-Editor für Deep Work Plan: eine Neovim-Konfiguration für Menschen und für Coding-Agenten, die im Terminal arbeiten. Ihre Pläne, Ihre Dokumentation und ein Index aller Befehle sind einen Tastendruck entfernt.
 
-Es ist ein eigenständiges Produkt, angeboten als optionales `vim`-Addon von Deep Work Plan v7 (pack `v7.8.1`). Deep Work Plan funktioniert mit jedem Editor oder ganz ohne, und der Editor setzt Deep Work Plan nicht voraus: Sie fügen ihn einer Maschine separat hinzu, und er funktioniert als Editor, ob ein Plan existiert oder nicht. Diese Seite beschreibt Release **v1.0.0**, das erste stabile Release: Ab ihm ändern sich der Installer und seine Flags (mit den passenden `DWP_VIM_*`-Variablen), die Addon-Oberfläche (`addon/surface.json`, Schnittstelle 1), die Editor-Befehle `:DwpPlans`, `:DwpLanes`, `:DwpCommands` und `:DwpConfig`, die Schlüssel von `dwpvim.json` und die vom Mapping-Vertrag festgelegten Tastenbelegungen inkompatibel nur in einer neuen Major-Version.
+Es ist ein eigenständiges Produkt, angeboten als optionales `vim`-Addon von Deep Work Plan v7 (pack `v7.9.0`). Deep Work Plan funktioniert mit jedem Editor oder ganz ohne, und der Editor setzt Deep Work Plan nicht voraus: Sie fügen ihn einer Maschine separat hinzu, und er funktioniert als Editor, ob ein Plan existiert oder nicht. Diese Seite beschreibt Release **v1.0.1**, ein Wartungsrelease des ersten stabilen Release `v1.0.0`: Ab `v1.0.0` ändern sich der Installer und seine Flags (mit den passenden `DWP_VIM_*`-Variablen), die Addon-Oberfläche (`addon/surface.json`, Schnittstelle 1), die Editor-Befehle `:DwpPlans`, `:DwpLanes`, `:DwpCommands` und `:DwpConfig`, die Schlüssel von `dwpvim.json` und die vom Mapping-Vertrag festgelegten Tastenbelegungen inkompatibel nur in einer neuen Major-Version.
 
 ## Warum ein Terminal-Editor für Deep Work Plan
 
@@ -101,11 +101,11 @@ Version 0.6.0 entfernt, was niemand nutzte, sodass weniger Plugins festzulegen s
 - Die prettier-Formatter-Einträge sind entfernt, weil nichts prettier installierte. `:Format` behält biome, black, shfmt und stylua.
 - marksman bleibt für das Folgen von Links, das Vervollständigen von Links und Überschriften sowie die Gliederung, mit stummgeschalteten Diagnosen. Markdown bleibt bewusst ohne Formatter.
 
-Nur die Server, die die Konfiguration aufführt, sind aktiviert, auch wenn Mason aus einer früheren Einrichtung noch weitere enthält. Jedes Plugin, jeder Server und jedes Werkzeug samt Begründung ist in [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v1.0.0/docs/PLUGINS.md) aufgeführt.
+Nur die Server, die die Konfiguration aufführt, sind aktiviert, auch wenn Mason aus einer früheren Einrichtung noch weitere enthält. Jedes Plugin, jeder Server und jedes Werkzeug samt Begründung ist in [PLUGINS.md](https://github.com/DailybotHQ/deepworkplan-vim/blob/v1.0.1/docs/PLUGINS.md) aufgeführt.
 
 ## Installation
 
-Die Installation besteht aus drei Befehlen: Laden Sie das Skript herunter, prüfen Sie es gegen das SHA-256 der Datei, die diese Website ausliefert, und führen Sie es dann aus. Der Installer legt sein eigenes Release fest und installiert daher genau `v1.0.0`, das Release, das diese Seite beschreibt, sofern Sie nicht [eine andere Version wählen](#choose-a-version).
+Die Installation besteht aus drei Befehlen: Laden Sie das Skript herunter, prüfen Sie es gegen das SHA-256 der Datei, die diese Website ausliefert, und führen Sie es dann aus. Der Installer legt sein eigenes Release fest und installiert daher genau `v1.0.1`, das Release, das diese Seite beschreibt, sofern Sie nicht [eine andere Version wählen](#choose-a-version).
 
 <VimInstall lang="de" />
 
@@ -119,13 +119,13 @@ Der Installer erledigt der Reihe nach:
 6. Er führt das eigene `lua install.lua` des Repositorys aus.
 7. Er installiert die Plugins headless und prüft sie, sodass kein Beenden und erneutes Öffnen nötig ist. Mit `--strict` ist eine fehlgeschlagene oder unvollständige Plugin-Installation ein Fehler.
 
-Das hier ausgelieferte Skript ist eine byte-identische Kopie von `install.sh` beim Tag `v1.0.0`. Seine Prüfsumme wird daneben ausgeliefert, unter `https://deepworkplan.com/vim/install.sh.sha256`, sodass Sie den Download mit `shasum -a 256 -c install.sh.sha256` verifizieren können (unter Linux mit `sha256sum -c install.sh.sha256`). Für eine Prüfung aus einer zweiten Quelle vergleichen Sie sie mit der `install.sh`-Zeile von `SHA256SUMS` im GitHub-Release. Führen Sie `bash install.sh --help` aus, um alle Optionen aufzulisten.
+Das hier ausgelieferte Skript ist eine byte-identische Kopie von `install.sh` beim Tag `v1.0.1`. Seine Prüfsumme wird daneben ausgeliefert, unter `https://deepworkplan.com/vim/install.sh.sha256`, sodass Sie den Download mit `shasum -a 256 -c install.sh.sha256` verifizieren können (unter Linux mit `sha256sum -c install.sh.sha256`). Für eine Prüfung aus einer zweiten Quelle vergleichen Sie sie mit der `install.sh`-Zeile von `SHA256SUMS` im GitHub-Release. Führen Sie `bash install.sh --help` aus, um alle Optionen aufzulisten.
 
 <a id="choose-a-version" class="scroll-mt-24"></a>
 
 ## Version wählen
 
-Standardmäßig installiert der Installer sein eigenes Release, `v1.0.0`. Um ein anderes zu wählen, setzen Sie `DWP_VIM_VERSION` oder übergeben Sie `--version`: Beide bewirken dasselbe, verwenden Sie also, was sich besser liest; ein Flag hat Vorrang vor der Umgebung. Beide akzeptieren:
+Standardmäßig installiert der Installer sein eigenes Release, `v1.0.1`. Um ein anderes zu wählen, setzen Sie `DWP_VIM_VERSION` oder übergeben Sie `--version`: Beide bewirken dasselbe, verwenden Sie also, was sich besser liest; ein Flag hat Vorrang vor der Umgebung. Beide akzeptieren:
 
 | Form | Beispiel | Installiert |
 |---|---|---|
@@ -171,7 +171,7 @@ Jedes Flag hat ein Gegenstück als Umgebungsvariable (`DWP_VIM_VERSION`, `DWP_VI
 
 - Neovim 0.12 oder neuer. Installieren Sie es selbst, oder lassen Sie den Installer mit `--nvim X.Y.Z` ein verifiziertes Release hinzufügen (Linux und macOS).
 - Lua: `lua`, `lua5.4` oder `luajit`. Der Installer ergänzt eines, falls es fehlt.
-- macOS, Linux und WSL führen den Installer aus. Für Windows gibt es einen dokumentierten manuellen Weg in der README des Repositorys: Neovim mit winget installieren, den Tag `v1.0.0` nach `%LOCALAPPDATA%\nvim` klonen und `lua install.lua` aus Git Bash ausführen.
+- macOS, Linux und WSL führen den Installer aus. Für Windows gibt es einen dokumentierten manuellen Weg in der README des Repositorys: Neovim mit winget installieren, den Tag `v1.0.1` nach `%LOCALAPPDATA%\nvim` klonen und `lua install.lua` aus Git Bash ausführen.
 - GPL-3.0-lizenziert: frei nutzbar, studierbar und veränderbar.
 
 ## Aktualisieren, festlegen und deinstallieren
@@ -218,7 +218,7 @@ Es ist für Menschen und für Coding-Agenten gebaut, die im Terminal leben. Sein
 
 ### Welche Version bekomme ich?
 
-Der Installer installiert das Release, zu dem er gehört – derzeit `v1.0.0` –, sofern Sie nicht mit `--version` oder `DWP_VIM_VERSION` ein anderes wählen: eine exakte Version, eine `>=`-Mindestversion oder `latest`. `DWP_VIM_REF` nimmt einen Branch oder einen Commit; `DWP_VIM_REF=main` folgt `main`. Diese Seite beschreibt Release `v1.0.0`, das jede hier aufgeführte Funktion enthält.
+Der Installer installiert das Release, zu dem er gehört – derzeit `v1.0.1` –, sofern Sie nicht mit `--version` oder `DWP_VIM_VERSION` ein anderes wählen: eine exakte Version, eine `>=`-Mindestversion oder `latest`. `DWP_VIM_REF` nimmt einen Branch oder einen Commit; `DWP_VIM_REF=main` folgt `main`. Diese Seite beschreibt Release `v1.0.1`, das jede hier aufgeführte Funktion enthält.
 
 ### Unter welcher Lizenz steht es und woher stammt es?
 

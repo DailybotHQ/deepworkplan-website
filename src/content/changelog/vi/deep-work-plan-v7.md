@@ -40,4 +40,4 @@ Bản phát hành 7.7.0 (2026-10-12) mang đến khả năng tự chủ theo b�
 
 Bản phát hành 7.8.0 (2026-10-13) thiết lập Ecosystem 1.0: mọi sản phẩm mà gói tích hợp đều đạt bản phát hành ổn định đầu tiên và được ghim ở v1.0.0 theo quy tắc đánh phiên bản ngữ nghĩa (coding-agents-kit, herdr-peers, devcontainer-kit và deepworkplan-vim, mỗi sản phẩm kèm mã băm `SHA256SUMS` đã xác minh), cùng với các bản ghim AI Diff Reviewer v3.3.14 và Dailybot agent-skill v3.23.17; sau đó 7.8.1 (2026-10-14) ghim các bản vá v1.0.1 của coding-agents-kit và devcontainer-kit.
 
-Phiên bản skill đã cài: **7.8.1**, ổn định từ 7.0.0.
+Phiên bản skill đã cài: **7.9.0**, ổn định từ 7.0.0.

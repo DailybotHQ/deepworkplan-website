@@ -32,7 +32,7 @@ Porta le dipendenze di un repository allo stato aggiornato con un workflow a lot
 | Chiave di registro | `dependency-upgrade` in `.dwp/config.json` |
 | Descrittore | `addons/dependency-upgrade/addon.json` (interfaccia 1) |
 | Comando | `/lib-upgrade` installato in `.agents/commands/` se accettato |
-| Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.8.1`) |
+| Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.9.0`) |
 ## Note
 
 Indipendente dal package manager — non esegue mai npm/ncu in un repo non-JS. Opt-in, mai richiesto e non esegue mai il commit automaticamente.

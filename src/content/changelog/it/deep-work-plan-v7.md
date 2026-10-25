@@ -40,4 +40,4 @@ La versione 7.7.0 (2026-10-12) ha introdotto l'autonomia dello sciame (Guida §1
 
 La versione 7.8.0 (2026-10-13) ha stabilito Ecosystem 1.0: ogni prodotto integrato dal pacchetto ha raggiunto la prima versione stabile ed è fissato a v1.0.0 secondo il versionamento semantico (coding-agents-kit, herdr-peers, devcontainer-kit e deepworkplan-vim, ciascuno con un digest `SHA256SUMS` verificato), insieme alle versioni fissate AI Diff Reviewer v3.3.14 e Dailybot agent-skill v3.23.17; la 7.8.1 (2026-10-14) ha poi fissato le patch v1.0.1 di coding-agents-kit e devcontainer-kit.
 
-Versione installata della skill: **7.8.1**, stabile dalla 7.0.0.
+Versione installata della skill: **7.9.0**, stabile dalla 7.0.0.

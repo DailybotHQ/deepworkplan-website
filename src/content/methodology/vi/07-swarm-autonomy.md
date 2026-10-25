@@ -41,7 +41,7 @@ Mỗi lane có một kế hoạch, tối thiểu là một kế hoạch Lite tro
 
 ## Vòng lặp năng lực
 
-Một agent kiểm tra chỗ còn lại của chính nó trước khi bắt đầu mỗi tác vụ, sau bất kỳ cổng hay bước nào chạy lâu hơn 20 phút, bất cứ khi nào CLI của nó hiển thị cảnh báo giới hạn sử dụng, và trước khi nhận một lần bàn giao hoặc quyền lead. Việc kiểm tra là `ak capacity --self --json` từ coding-agents-kit `v1.0.1`, được trình trợ giúp của gói chuyển thành một quyết định:
+Một agent kiểm tra chỗ còn lại của chính nó trước khi bắt đầu mỗi tác vụ, sau bất kỳ cổng hay bước nào chạy lâu hơn 20 phút, bất cứ khi nào CLI của nó hiển thị cảnh báo giới hạn sử dụng, và trước khi nhận một lần bàn giao hoặc quyền lead. Việc kiểm tra là `ak capacity --self --json` từ coding-agents-kit `v1.1.0`, được trình trợ giúp của gói chuyển thành một quyết định:
 
 | Kết luận | Quyết định | Một lane | Một lead, cho chính nó |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Một agent kiểm tra chỗ còn lại của chính nó trước khi bắt đ�
 
 ## Kế nhiệm lead
 
-herdr-peers `v1.0.0` giữ một bản ghi lead cho mỗi kế hoạch — lead, epoch, danh sách kế nhiệm và các lane — và phân giải địa chỉ `lead` thành lead hiện tại, nên không chỉ dẫn lane nào phải ghi cứng pane của lead.
+herdr-peers `v1.1.0` giữ một bản ghi lead cho mỗi kế hoạch — lead, epoch, danh sách kế nhiệm và các lane — và phân giải địa chỉ `lead` thành lead hiện tại, nên không chỉ dẫn lane nào phải ghi cứng pane của lead.
 
 - **Claim trước, rồi mới khởi chạy.** Lead chạy `herdr-peers lead claim --plan <P> --succession <A,B>` trước khi khởi chạy bất kỳ lane nào — địa chỉ `lead` chỉ phân giải được khi đã có một bản ghi — làm mới bản ghi bằng `--lanes <A,B>` khi các lane bắt đầu, và chạy `lead release` khi kế hoạch hoàn tất. Từ herdr-peers (`v0.3.2`), bản ghi lưu cục bộ repository đã claim nó, và một kế hoạch có cùng id trong repository khác được đặt tên là `--plan <repo>/<id>`. Danh sách kế nhiệm mặc định là người kế nhiệm đã lên kế hoạch của nó, rồi tới các lane trong chính checkout của kế hoạch theo thứ tự khởi chạy, rồi tới bất kỳ lane nào trên cùng máy host; các lane trong container hoặc trên máy khác xếp cuối.
 - **Handover, có kế hoạch.** Ở mức `low`, lead chỉ định một người kế nhiệm dự kiến. Ở mức `critical`, nó viết một gói lead — bảng lane, các ask đang mở, thứ tự phát hành, các lần merge đang chờ, các quyết định — chạy `herdr-peers lead handover <addr> --plan <P>`, lệnh này tăng epoch và thông báo cho mọi lane, rồi dừng lại. Agent kế nhiệm chấp nhận gói, tiếp tục kế hoạch điều phối và kiểm tra lại mọi lane.

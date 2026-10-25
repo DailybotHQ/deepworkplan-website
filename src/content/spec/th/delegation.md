@@ -8,7 +8,7 @@ section: Record layer
 
 # การมอบหมายงาน
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงรุ่นสัญญา v7 ในรุ่น `v7.8.1` แหล่งอ้างอิงหลัก: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md) และ [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md) ของ flow execute หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก
+> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงรุ่นสัญญา v7 ในรุ่น `v7.9.0` แหล่งอ้างอิงหลัก: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) และ [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) ของ flow execute หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก
 
 **เวอร์ชัน 7.0.0 สถานะ: เสถียร** v7 เป็นรุ่นสัญญาใหม่ของ [ชั้นบันทึก](/spec/record-layer) ไม่ใช่วงจรชีวิตใหม่: ทุกสิ่งในเอกสารสัญญา วงจรชีวิต บริบท และทรัพยากรของ v6 ยังคงใช้บังคับ เว้นแต่หน้านี้จะระบุไว้เป็นอย่างอื่น การไม่มอบหมายงานถูกต้องเสมอ คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 

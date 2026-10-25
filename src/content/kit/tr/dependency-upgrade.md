@@ -32,7 +32,7 @@ Bir deponun bağımlılıklarını gruplanmış, doğrulanmış, geri alınabili
 | Kayıt anahtarı | `.dwp/config.json` içinde `dependency-upgrade` |
 | Tanımlayıcı | `addons/dependency-upgrade/addon.json` (arayüz 1) |
 | Komut | Kabul edildiğinde `.agents/commands/` içine kurulan `/lib-upgrade` |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.8.1`) |
+| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.9.0`) |
 ## Notlar
 
 Paket yöneticisinden bağımsızdır — JS dışı bir depoda asla npm/ncu çalıştırmaz. İsteğe bağlıdır, hiçbir zaman zorunlu değildir ve asla otomatik commit yapmaz.

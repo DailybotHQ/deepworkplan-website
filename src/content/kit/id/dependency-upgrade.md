@@ -32,7 +32,7 @@ Mutakhirkan dependensi repositori dengan alur kerja yang dibatch, tervalidasi, d
 | Kunci registri | `dependency-upgrade` di `.dwp/config.json` |
 | Deskriptor | `addons/dependency-upgrade/addon.json` (antarmuka 1) |
 | Perintah | `/lib-upgrade` diinstal ke `.agents/commands/` jika diterima |
-| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.8.1`) |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.9.0`) |
 ## Catatan
 
 Agnostik terhadap package manager — tidak pernah menjalankan npm/ncu di repositori non-JS. Opsional, tidak pernah wajib, dan tidak pernah commit otomatis.

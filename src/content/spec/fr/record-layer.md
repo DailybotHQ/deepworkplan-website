@@ -8,7 +8,7 @@ section: Record layer
 
 # Couche d'enregistrement
 
-> **Portée de version :** cette page reformule la couche d'enregistrement normative v6 sur laquelle s'appuie la norme actuelle, DWP 7.0.0. Sources canoniques à la version `v7.8.1` : [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) et [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). En cas de divergence entre cette page et ces fichiers, les fichiers prévalent. Les plans v5 conservent la couche d'[état du plan](/spec/plan-state) et ne sont jamais migrés implicitement.
+> **Portée de version :** cette page reformule la couche d'enregistrement normative v6 sur laquelle s'appuie la norme actuelle, DWP 7.0.0. Sources canoniques à la version `v7.9.0` : [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) et [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). En cas de divergence entre cette page et ces fichiers, les fichiers prévalent. Les plans v5 conservent la couche d'[état du plan](/spec/plan-state) et ne sont jamais migrés implicitement.
 
 **Version 6.0.0, étendue en 7.0.0. Statut : stable.** La couche d'enregistrement remplace l'achèvement narratif par des enregistrements : le contrat fait autorité, le journal est la mémoire, les helpers écrivent, et chaque fichier généré est une projection. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 

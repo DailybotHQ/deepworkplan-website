@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) coloca agentes de programación en paneles, en tu máquina y en las máquinas a las que llega por SSH. Este addon permite que un Deep Work Plan use esos agentes como **pares**: un plan puede pasar una tarea acotada a un agente en otro panel, recibir exactamente una respuesta autorizada y conservar un registro del intercambio.
 
-Es un addon opcional de **DWP v7** (pack `v7.8.1`). La metodología funciona igual sin él: con el addon ausente o deshabilitado, cada tarea se ejecuta en la sesión actual, exactamente como antes.
+Es un addon opcional de **DWP v7** (pack `v7.9.0`). La metodología funciona igual sin él: con el addon ausente o deshabilitado, cada tarea se ejecuta en la sesión actual, exactamente como antes.
 
 ## Qué integra
 
-El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill independiente con licencia MIT fijada en **`v1.0.0`** que es útil sin Deep Work Plan. Define lo que Herdr deja abierto: quién puede responder, cómo vuelve la respuesta a través de máquinas, cómo evitan dos agentes responderse indefinidamente y dónde vive el registro de "pregunté, respondió".
+El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill independiente con licencia MIT fijada en **`v1.1.0`** que es útil sin Deep Work Plan. Define lo que Herdr deja abierto: quién puede responder, cómo vuelve la respuesta a través de máquinas, cómo evitan dos agentes responderse indefinidamente y dónde vive el registro de "pregunté, respondió".
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protocolo 1 |
+| Producto | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocolo 1 |
 | Clave de registro | `herdr` en `.dwp/config.json` |
 | Transporte | interactivo: un par en un panel de Herdr |
 | Proporciona | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://gi
 Instala herdr-peers y la skill oficial de Herdr, de la que depende. Toda máquina cuyos agentes deban responder también necesita la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

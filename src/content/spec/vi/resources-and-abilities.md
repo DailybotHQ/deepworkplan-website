@@ -8,7 +8,7 @@ section: Record layer
 
 # Tài nguyên và khả năng
 
-> **Phạm vi phiên bản:** Trang này trình bày lại bốn tài liệu quy phạm của tiêu chuẩn hiện tại, DWP 7.0.0, tại bản phát hành `v7.8.1`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/CONFIG.md) và [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_ABILITIES.md). Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên.
+> **Phạm vi phiên bản:** Trang này trình bày lại bốn tài liệu quy phạm của tiêu chuẩn hiện tại, DWP 7.0.0, tại bản phát hành `v7.9.0`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) và [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên.
 
 **Trạng thái: Ổn định (ngữ cảnh và tài nguyên từ 6.0.0; cấu hình và khả năng từ 7.0.0).** Các quy tắc này ràng buộc các kế hoạch dòng v6 ([Lớp bản ghi](/spec/record-layer)); tiêu chuẩn v5 không bị thay đổi. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 

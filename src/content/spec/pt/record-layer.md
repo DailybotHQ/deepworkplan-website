@@ -8,7 +8,7 @@ section: Record layer
 
 # Camada de registros
 
-> **Escopo da versão:** Esta página reapresenta a camada de registros normativa v6 sobre a qual o padrão atual, DWP 7.0.0, é construído. Fontes canônicas na release `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) e [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Onde esta página e esses arquivos divergirem, os arquivos prevalecem. Os planos v5 mantêm a camada de [estado do plano](/spec/plan-state) e nunca são migrados implicitamente.
+> **Escopo da versão:** Esta página reapresenta a camada de registros normativa v6 sobre a qual o padrão atual, DWP 7.0.0, é construído. Fontes canônicas na release `v7.9.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) e [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Onde esta página e esses arquivos divergirem, os arquivos prevalecem. Os planos v5 mantêm a camada de [estado do plano](/spec/plan-state) e nunca são migrados implicitamente.
 
 **Versão 6.0.0, estendida na 7.0.0. Status: Estável.** A camada de registros substitui a conclusão narrativa por registros: o contrato é a autoridade, o diário é a memória, os helpers fazem a escrita e todo arquivo gerado é uma projeção. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 

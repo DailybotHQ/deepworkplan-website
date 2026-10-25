@@ -8,7 +8,7 @@ section: Record layer
 
 # Ủy quyền
 
-> **Phạm vi phiên bản:** Trang này trình bày lại thế hệ hợp đồng v7 tại bản phát hành `v7.8.1`. Nguồn chính thức: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md) và [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md) của luồng execute. Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên.
+> **Phạm vi phiên bản:** Trang này trình bày lại thế hệ hợp đồng v7 tại bản phát hành `v7.9.0`. Nguồn chính thức: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) và [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) của luồng execute. Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên.
 
 **Phiên bản 7.0.0. Trạng thái: Ổn định.** v7 là một thế hệ hợp đồng mới của [lớp bản ghi](/spec/record-layer), không phải một vòng đời mới: mọi điều trong các tài liệu hợp đồng, vòng đời, ngữ cảnh và tài nguyên của v6 đều áp dụng trừ khi trang này nói khác. Không ủy quyền luôn là đúng. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 

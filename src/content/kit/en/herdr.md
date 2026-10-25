@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) puts coding agents in panes, on your machine and on machines it reaches over SSH. This addon lets a Deep Work Plan use those agents as **peers**: a plan can hand a bounded task to an agent in another pane, receive exactly one authorized reply, and keep a record of the exchange.
 
-It is an optional addon of **DWP v7** (pack `v7.8.1`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
+It is an optional addon of **DWP v7** (pack `v7.9.0`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.0.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.1.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

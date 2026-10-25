@@ -8,7 +8,7 @@ section: State
 
 # 計画の状態
 
-> **バージョンの適用範囲:** このページは **v5 の状態レイヤー** を規定します。v5 計画はその全期間にわたってこのレイヤーを維持します。現在のパック（DWP 7.0.0、リリース `v7.8.1`）が作成する計画は、代わりに [レコードレイヤー](/spec/record-layer) を使用します。v6 または v7 の計画では、アウトカム契約（`contract.json`）が権威であり、追記専用ジャーナル（`journal.ndjson`）が信頼できる情報源であり、`state.json` は [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) に準拠する **導出されたスナップショット** です。これは `ledger.py project` によって再生成され、手で編集してはなりません（MUST NOT）。
+> **バージョンの適用範囲:** このページは **v5 の状態レイヤー** を規定します。v5 計画はその全期間にわたってこのレイヤーを維持します。現在のパック（DWP 7.0.0、リリース `v7.9.0`）が作成する計画は、代わりに [レコードレイヤー](/spec/record-layer) を使用します。v6 または v7 の計画では、アウトカム契約（`contract.json`）が権威であり、追記専用ジャーナル（`journal.ndjson`）が信頼できる情報源であり、`state.json` は [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) に準拠する **導出されたスナップショット** です。これは `ledger.py project` によって再生成され、手で編集してはなりません（MUST NOT）。
 
 ## どの状態レイヤーが適用されるか
 
@@ -17,7 +17,7 @@ section: State
 | v5（およびそれ以前の v1/v2 計画） | Markdown の計画と、その投影としてのこの JSON レイヤー | 下記のプロトコルポイントでエージェントが書き込む | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json)、[`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json)（古い計画では v1 と v2 も引き続き有効） |
 | v6 と v7 | 契約と追記専用ジャーナル | ジャーナルから投影されるスナップショットで、手で書かれることは決してない | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json)、[`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json)、[`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)（またはそれらの v6 相当） |
 
-計画が暗黙のうちに世代を変えることは決してありません。v5 計画はこれらの規則を維持し、v6 への移行は明示的でプレビュー付きのマイグレーションです（[レコードレイヤー](/spec/record-layer#coexistence-and-migration)）。正規の情報源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md)。
+計画が暗黙のうちに世代を変えることは決してありません。v5 計画はこれらの規則を維持し、v6 への移行は明示的でプレビュー付きのマイグレーションです（[レコードレイヤー](/spec/record-layer#coexistence-and-migration)）。正規の情報源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md)。
 
 **バージョン 5.0.0。状態: 安定。** この文書は Deep Work Plan 方法論の機械可読な計画状態レイヤーを規定するもので、いまや DWP 標準自身のバージョンと整合しています——この番号の付け替えによって既存の要件が弱められることはありません。この改訂はまた、ガードされた状態アップデーター、検証済みの計画公開、そして完了した計画が満たさなければならない証拠の真実性に関するルール(下記参照)を文書化します。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 

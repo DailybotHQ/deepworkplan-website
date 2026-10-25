@@ -32,7 +32,7 @@ Atualiza as dependências de um repositório com um fluxo de trabalho em lotes, 
 | Chave de registro | `dependency-upgrade` em `.dwp/config.json` |
 | Descritor | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Comando | `/lib-upgrade` instalado em `.agents/commands/` quando aceito |
-| Controle de versão | Fixado e versionado com o pacote de skills (`v7.8.1`) |
+| Controle de versão | Fixado e versionado com o pacote de skills (`v7.9.0`) |
 ## Notas
 
 Independente do gerenciador de pacotes — nunca executa npm/ncu em um repositório que não é JS. Opcional, nunca obrigatório e nunca comita automaticamente.

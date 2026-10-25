@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) 把编码代理放进窗格中，既可在你的机器上，也可在它通过 SSH 连接到的机器上。这个附加组件让 Deep Work Plan 把这些代理当作**对等方**来使用：计划可以把一项有边界的任务交给另一个窗格中的代理，接收恰好一条获授权的回复，并保留这次交互的记录。
 
-它是 **DWP v7**（pack `v7.8.1`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
+它是 **DWP v7**（pack `v7.9.0`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v1.0.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v1.1.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v1.0.0`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v1.1.0`，协议 1 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

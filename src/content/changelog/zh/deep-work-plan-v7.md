@@ -40,4 +40,4 @@ v7 是编排与可审计性方面的一次跃升，但尚不是完全无人值�
 
 7.8.0 版本（2026-10-13）确立了 Ecosystem 1.0：该技能包整合的每款产品都达到了首个稳定版本，并按语义化版本固定在 v1.0.0（coding-agents-kit、herdr-peers、devcontainer-kit 和 deepworkplan-vim，各自附带经过验证的 `SHA256SUMS` 摘要），同时固定了 AI Diff Reviewer v3.3.14 与 Dailybot agent-skill v3.23.17；随后 7.8.1（2026-10-14）固定了 coding-agents-kit 和 devcontainer-kit 的 v1.0.1 补丁版本。
 
-已安装的技能版本：**7.8.1**，自 7.0.0 起保持稳定。
+已安装的技能版本：**7.9.0**，自 7.0.0 起保持稳定。

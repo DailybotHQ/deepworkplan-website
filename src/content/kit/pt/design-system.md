@@ -49,7 +49,7 @@ Quando aceito, o addon pode instalar um delegador `/design-system` no `.agents/c
 | Chave de registro | `design-system` em `.dwp/config.json` |
 | Descritor | `addons/design-system/addon.json` (interface 1) |
 | Arquivo de destino | `docs/DESIGN.md` indexado a partir de `AGENTS.md` |
-| Controle de versão | Fixado e versionado com o pacote de skills (`v7.8.1`) |
+| Controle de versão | Fixado e versionado com o pacote de skills (`v7.9.0`) |
 ## Relação com documentos de design por funcionalidade
 
 Este é um arquivo de design system **em nível de repositório, persistente** — distinto de um documento de design técnico por funcionalidade (o `design.md` de "requisitos → design → tarefas" dos fluxos de desenvolvimento orientados a especificação vinculados a ferramentas). O Deep Work Plan deliberadamente não fornece um arquétipo separado de documento de design por funcionalidade: o README de um plano, os critérios de aceitação de cada tarefa e os validation gates já cobrem esse papel. Este addon preenche a única lacuna que esse papel não cobre: contexto de design de interface durável e nativo do repositório.

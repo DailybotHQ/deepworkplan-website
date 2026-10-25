@@ -24,7 +24,7 @@ Cline ซึ่งเป็น coding agent โอเพนซอร์ส ร�
 ไม่บังคับ: [coding-agents-kit](/kit/agentkit) สามารถติดตั้ง CLI นี้และเรียกใช้ด้วย `ak cline` ได้ ตัวติดตั้งทางการของผู้พัฒนาก็ใช้ได้เช่นกัน
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cline
 ```
 

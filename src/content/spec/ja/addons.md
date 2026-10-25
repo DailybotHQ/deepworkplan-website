@@ -44,7 +44,7 @@ section: Addons
 
 - **キットページ：** [Dailybot](/kit/dailybot)——完全な能力リファレンス
 - **DWP アドオンが接続するもの：** dailybot `report` サブスキル経由の 4 つのプランライフサイクルレポート（kickoff、significant task、blocked、completion）；オプションの決定論的フック強制（`dailybot hook`、CLI `>= 3.9.0`）
-- **ペアスキル：** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（**v3.23.17** に固定）のインストールで **17 の能力**——Slack/Teams/Discord/Google Chat チャット、チェックイン、フォーム作成、Ask AI、kudos、Plan のボードとタスク、組織ラベル、リポジトリごとの API キー（`.dailybot/env.json`）、メールなど。DWP アドオンは **report** のみ接続；他の能力は Dailybot スキルを直接呼び出す
+- **ペアスキル：** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（**v3.23.20** に固定）のインストールで **17 の能力**——Slack/Teams/Discord/Google Chat チャット、チェックイン、フォーム作成、Ask AI、kudos、Plan のボードとタスク、組織ラベル、リポジトリごとの API キー（`.dailybot/env.json`）、メールなど。DWP アドオンは **report** のみ接続；他の能力は Dailybot スキルを直接呼び出す
 - **認証：** Dailybot スキルに完全委譲（`dailybot login` または `DAILYBOT_API_KEY`）；このアドオンは認証情報を保存しない
 - **ベンダーニュートラルガードレール：** コア DWP は Dailybot 依存**ゼロ**；全員に自動インストールしない
 - **提供タイミング：** 開発者またはチームが既に Dailybot を利用、またはチームレポートを明示的に要求
@@ -72,7 +72,7 @@ section: Addons
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)**（marketplace **"AI Diff Reviewer"**）は、必須の Final Review セキュリティパスに構造化されたローカルレビューを与え、オプションで CI 内の pull request をゲートします。標準 2.3.0 以降、**ローカルレビューはベースラインの一部**です；オプションなのは CI サーフェスだけです。このアドオンはリリースごとに自動更新されるため、下記に示すタグは本稿執筆時点のものであり、ベンダリング済みのコピーより古い場合があります——実際にインストールされているタグについては、アドオン自身の `SKILL.md` とその GitHub リリースが正となります。インストールは常に公開済みのタグに固定され、移動するブランチを指すことはありません。
 
 - **キットページ：** [AI Diff Reviewer](/kit/ai-diff-reviewer) — 完全な機能リファレンス
-- **オンボーディングで必須（フェーズ 7a）：** オンボーディングの同意の下で、タグ固定の vendored スキル（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer -y`）と、`generate-extension` 経由のリポジトリ調整 `.review/extension.md` をインストール；欠落時は対象を絞ったハーネスアップグレードが両方を調和；拒否は明言された例外として記録され、インストールされるまで `verify` が報告し続ける
+- **オンボーディングで必須（フェーズ 7a）：** オンボーディングの同意の下で、タグ固定の vendored スキル（`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer -y`）と、`generate-extension` 経由のリポジトリ調整 `.review/extension.md` をインストール；欠落時は対象を絞ったハーネスアップグレードが両方を調和；拒否は明言された例外として記録され、インストールされるまで `verify` が報告し続ける
 - **すべての Final Review で必須：** セキュリティパスが累積変更セットに対して upstream 親デフォルトフローを実行し、その出力をプランローカルの `analysis_results/SECURITY_REVIEW.md`（プラン自身のフォルダー内であり、リポジトリルートではない）に追記；スキルまたは拡張の欠落は `local reviewer not installed` の発見として記録され——黙ってスキップされることは決してなく、決してサプライズブートストラップでもない：インストールはオンボーディングの同意または明示的なアドオン呼び出しに属する；完了したパスからの**検証済み `critical` 結果**は、修正または明示的に受け入れられるまで完了を阻止する（v3、BC-07 —— 未検証のクリティカル主張は注釈付き警告として現れ、`incomplete`/`timeout` のレビューはクリーンなパスではない、BC-04）
 - **オプションの CI サーフェス（Flow B）：** upstream `setup` サブスキル経由の `pr-review.yml`（`DailybotHQ/ai-diff-reviewer@v3`）に加え、開発者が呼び出すコンパニオンとしての `apply-review`（読み取り専用）と `address-review`（コミット・プッシュを行いレビュアーを再武装する、v3.1.1 で新登場）——明示的に提供され、無断ではインストールされず、デフォルトにされることなく、プランタスクには決してならない
 - **決してブロックしない（呼び出しのみ）：** 開始できたにもかかわらずエラーになったローカルレビューは、一度警告して記録し、続行；その失敗でタスクを落とすことは決してない
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr（第 6 アドオン）
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.0.0` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.1.0` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
 
 - **キットページ：** [Herdr](/kit/herdr)
 - **追加内容：** 計画は範囲の限られたタスクを、別の [Herdr](https://herdr.dev) ペインにいるコーディングエージェント——同じマシン上、または Herdr が SSH で到達できるマシン上——に渡し、認可された返信を一つだけジャーナルに記録できる
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第 7 アドオン）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.0.0` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.0.1` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
 
 - **キットページ：** [DeepWorkPlan Vim](/kit/vim)
 - **追加内容：** エージェントと人間のための任意のマシンレベルのエディターサーフェス——生成されるコマンドインデックス、読み取り専用の計画ブラウザー、Markdown ビューア；すべての記述は製品の固定された機械可読サーフェスから読み取られる
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第 8 アドオン）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.0.1` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.1.0` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
 
 - **キットページ：** [Agentkit](/kit/agentkit)
 - **追加内容：** ターミナル型コーディングエージェント全体にわたる一つの `ak` コマンドサーフェスで、範囲の限られた計画タスクをヘッドレスで実行するために使う；`subagents`、`cancel_children`、`model_routing` の能力は、有効化され、検出され、互換性のあるインターフェース上にある場合にのみ、実行時に提供される

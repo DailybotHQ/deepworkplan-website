@@ -8,7 +8,7 @@ section: Record layer
 
 # 委派
 
-> **版本范围：** 本页重述发布版本 `v7.8.1` 中的 v7 契约代际。规范来源：[`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md) 以及执行流程的 [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md)。本页与这些文件不一致时，以文件为准。
+> **版本范围：** 本页重述发布版本 `v7.9.0` 中的 v7 契约代际。规范来源：[`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) 以及执行流程的 [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md)。本页与这些文件不一致时，以文件为准。
 
 **版本 7.0.0。状态：稳定。** v7 是[记录层](/spec/record-layer)的一个新契约代际，而不是新的生命周期：除非本页另有说明，v6 的契约、生命周期、上下文与资源文档中的一切内容都适用。不进行委派始终是正确的。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 

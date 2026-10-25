@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev)는 코딩 에이전트를 페인(pane)에 배치합니다. 여러분의 머신뿐 아니라 SSH로 연결되는 머신에서도 가능합니다. 이 애드온은 Deep Work Plan이 그 에이전트들을 **피어**로 사용할 수 있게 합니다. 계획은 범위가 정해진 작업을 다른 페인의 에이전트에 넘기고, 승인된 정확히 하나의 응답을 받고, 그 교환의 기록을 남길 수 있습니다.
 
-이것은 **DWP v7**(pack `v7.8.1`)의 선택형 애드온입니다. 방법론은 이것 없이도 똑같이 동작합니다. 애드온이 없거나 비활성화되어 있으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다.
+이것은 **DWP v7**(pack `v7.9.0`)의 선택형 애드온입니다. 방법론은 이것 없이도 똑같이 동작합니다. 애드온이 없거나 비활성화되어 있으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다.
 
 ## 무엇을 통합하는가
 
-이 애드온은 얇은 통합 계층입니다. 실제 작업은 [**herdr-peers**](https://github.com/DailybotHQ/herdr-peers)가 수행합니다. 이는 **`v1.0.0`** 태그에 고정된 독립형 MIT skill이며, Deep Work Plan 없이도 유용합니다. Herdr 자체가 열어 둔 부분을 정의합니다. 누가 응답할 수 있는지, 응답이 머신을 넘어 어떻게 돌아오는지, 두 에이전트가 서로에게 끝없이 응답하는 일을 어떻게 피하는지, 그리고 "내가 물었고, 그것이 답했다"는 기록이 어디에 남는지입니다.
+이 애드온은 얇은 통합 계층입니다. 실제 작업은 [**herdr-peers**](https://github.com/DailybotHQ/herdr-peers)가 수행합니다. 이는 **`v1.1.0`** 태그에 고정된 독립형 MIT skill이며, Deep Work Plan 없이도 유용합니다. Herdr 자체가 열어 둔 부분을 정의합니다. 누가 응답할 수 있는지, 응답이 머신을 넘어 어떻게 돌아오는지, 두 에이전트가 서로에게 끝없이 응답하는 일을 어떻게 피하는지, 그리고 "내가 물었고, 그것이 답했다"는 기록이 어디에 남는지입니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/herdr-peers`, 태그 `v1.0.0`, 프로토콜 1 |
+| 제품 | `DailybotHQ/herdr-peers`, 태그 `v1.1.0`, 프로토콜 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `herdr` |
 | 전송 방식 | 대화형: Herdr 페인 안의 피어 |
 | 제공 | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 herdr-peers와, 그것이 의존하는 Herdr 공식 skill을 설치합니다. 에이전트가 응답해야 하는 모든 머신에도 이 skill이 필요합니다.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

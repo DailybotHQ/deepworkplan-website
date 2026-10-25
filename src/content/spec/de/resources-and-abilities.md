@@ -8,7 +8,7 @@ section: Record layer
 
 # Ressourcen und Fähigkeiten
 
-> **Versionsumfang:** Diese Seite gibt vier normative Dokumente des aktuellen Standards, DWP 7.0.0, im Release `v7.8.1` wieder: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/CONFIG.md) und [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_ABILITIES.md). Wo diese Seite und diese Dateien voneinander abweichen, gelten die Dateien.
+> **Versionsumfang:** Diese Seite gibt vier normative Dokumente des aktuellen Standards, DWP 7.0.0, im Release `v7.9.0` wieder: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) und [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Wo diese Seite und diese Dateien voneinander abweichen, gelten die Dateien.
 
 **Status: Stabil (Kontext und Ressourcen seit 6.0.0; Konfiguration und Fähigkeiten seit 7.0.0).** Diese Regeln binden Pläne der v6-Linie ([Aufzeichnungsschicht](/spec/record-layer)); der v5-Standard bleibt unberührt. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 

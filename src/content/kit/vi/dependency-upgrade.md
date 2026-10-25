@@ -32,7 +32,7 @@ order: 3
 | Khóa đăng ký | `dependency-upgrade` trong `.dwp/config.json` |
 | Bộ mô tả | `addons/dependency-upgrade/addon.json` (giao diện 1) |
 | Lệnh | `/lib-upgrade` được cài đặt vào `.agents/commands/` khi được chấp nhận |
-| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.8.1`) |
+| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.9.0`) |
 ## Ghi chú
 
 Không phụ thuộc trình quản lý gói — không bao giờ chạy npm/ncu trong một repo không phải JS. Tùy chọn, không bao giờ bắt buộc, và không bao giờ tự động commit.

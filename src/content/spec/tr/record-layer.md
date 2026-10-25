@@ -8,7 +8,7 @@ section: Record layer
 
 # Kayıt katmanı
 
-> **Sürüm kapsamı:** Bu sayfa, güncel standart DWP 7.0.0'ın üzerine kurulduğu normatif v6 kayıt katmanını yeniden ifade eder. `v7.8.1` sürümündeki kanonik kaynaklar: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) ve [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir. v5 planları [plan durumu](/spec/plan-state) katmanını korur ve asla örtük olarak göç ettirilmez.
+> **Sürüm kapsamı:** Bu sayfa, güncel standart DWP 7.0.0'ın üzerine kurulduğu normatif v6 kayıt katmanını yeniden ifade eder. `v7.9.0` sürümündeki kanonik kaynaklar: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) ve [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir. v5 planları [plan durumu](/spec/plan-state) katmanını korur ve asla örtük olarak göç ettirilmez.
 
 **Sürüm 6.0.0, 7.0.0'da genişletildi. Durum: Kararlı.** Kayıt katmanı, anlatıya dayalı tamamlanmanın yerine kayıtları koyar: sözleşme otoritedir, günlük bellektir, yazma işini yardımcı araçlar yapar ve üretilen her dosya bir projeksiyondur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 

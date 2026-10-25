@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) は、コーディングエージェントをペインに配置します。あなたのマシン上でも、SSH 経由で到達できるマシン上でも可能です。このアドオンにより、Deep Work Plan はそれらのエージェントを**ピア**として使えるようになります。計画は範囲の限定されたタスクを別のペインのエージェントに渡し、認可されたちょうど一つの返信を受け取り、そのやり取りの記録を残せます。
 
-これは **DWP v7**（pack `v7.8.1`）の任意のアドオンです。方法論はこれがなくても同じように機能します。アドオンが存在しない、または無効化されている場合、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。
+これは **DWP v7**（pack `v7.9.0`）の任意のアドオンです。方法論はこれがなくても同じように機能します。アドオンが存在しない、または無効化されている場合、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。
 
 ## 何を統合するか
 
-このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v1.0.0`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
+このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v1.1.0`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/herdr-peers`、タグ `v1.0.0`、プロトコル 1 |
+| プロダクト | `DailybotHQ/herdr-peers`、タグ `v1.1.0`、プロトコル 1 |
 | レジストリキー | `.dwp/config.json` 内の `herdr` |
 | トランスポート | 対話型：Herdr ペイン内のピア |
 | 提供するもの | `subagents`、`cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 herdr-peers と、それが依存する Herdr 公式のスキル をインストールします。エージェントに回答させたいすべてのマシンにも、このスキル が必要です。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

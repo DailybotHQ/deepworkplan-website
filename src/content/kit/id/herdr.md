@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) menempatkan coding agent di dalam panel, di mesin Anda dan di mesin yang dijangkaunya melalui SSH. Addon ini memungkinkan sebuah Deep Work Plan menggunakan agen-agen tersebut sebagai **rekan** (peer): sebuah rencana dapat menyerahkan tugas yang terbatas kepada agen di panel lain, menerima tepat satu balasan yang diotorisasi, dan menyimpan catatan pertukaran tersebut.
 
-Ini adalah addon opsional dari **DWP v7** (pack `v7.8.1`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
+Ini adalah addon opsional dari **DWP v7** (pack `v7.9.0`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.0.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.1.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protokol 1 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protokol 1 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

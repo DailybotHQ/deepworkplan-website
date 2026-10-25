@@ -8,7 +8,7 @@ section: Record layer
 
 # 资源与能力
 
-> **版本范围：** 本页重述当前标准 DWP 7.0.0 在发布版本 `v7.8.1` 中的四份规范性文档：[`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTEXT.md)、[`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_RESOURCES.md)、[`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/CONFIG.md) 与 [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_ABILITIES.md)。本页与这些文件不一致时，以文件为准。
+> **版本范围：** 本页重述当前标准 DWP 7.0.0 在发布版本 `v7.9.0` 中的四份规范性文档：[`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md)、[`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md)、[`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) 与 [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md)。本页与这些文件不一致时，以文件为准。
 
 **状态：稳定（上下文与资源自 6.0.0 起；配置与能力自 7.0.0 起）。** 这些规则约束 v6 系列计划（[记录层](/spec/record-layer)）；v5 标准不受影响。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 

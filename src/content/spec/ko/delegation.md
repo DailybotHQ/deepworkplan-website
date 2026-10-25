@@ -8,7 +8,7 @@ section: Record layer
 
 # 위임
 
-> **버전 범위:** 이 페이지는 릴리스 `v7.8.1` 기준 v7 계약 세대를 다시 서술합니다. 정식 출처: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md)와 execute 플로우의 [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다.
+> **버전 범위:** 이 페이지는 릴리스 `v7.9.0` 기준 v7 계약 세대를 다시 서술합니다. 정식 출처: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md)와 execute 플로우의 [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다.
 
 **버전 7.0.0. 상태: 안정(Stable).** v7은 새로운 수명 주기가 아니라 [기록 레이어](/spec/record-layer)의 새로운 계약 세대입니다: 이 페이지가 달리 말하지 않는 한 v6의 계약, 수명 주기, 컨텍스트, 리소스 문서의 모든 내용이 적용됩니다. 위임하지 않는 것은 언제나 올바릅니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 

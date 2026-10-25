@@ -40,4 +40,4 @@ Rilis 7.7.0 (2026-10-12) menghadirkan otonomi swarm (Panduan §17): loop kapasit
 
 Rilis 7.8.0 (2026-10-13) menetapkan Ecosystem 1.0: setiap produk yang diintegrasikan paket mencapai rilis stabil pertamanya dan disematkan pada v1.0.0 sesuai penomoran versi semantik (coding-agents-kit, herdr-peers, devcontainer-kit, dan deepworkplan-vim, masing-masing dengan digest `SHA256SUMS` terverifikasi), bersama sematan AI Diff Reviewer v3.3.14 dan Dailybot agent-skill v3.23.17; kemudian 7.8.1 (2026-10-14) menyematkan rilis patch v1.0.1 dari coding-agents-kit dan devcontainer-kit.
 
-Rilis skill yang dipasang: **7.8.1**, stabil sejak 7.0.0.
+Rilis skill yang dipasang: **7.9.0**, stabil sejak 7.0.0.

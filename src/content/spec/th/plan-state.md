@@ -8,7 +8,7 @@ section: State
 
 # สถานะแผน
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 7.0.0 รุ่น `v7.8.1`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 หรือ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น **snapshot ที่ได้รับมา** ซึ่งสอดคล้องกับ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) มันถูกสร้างใหม่โดย `ledger.py project` และ MUST NOT ถูกแก้ไขด้วยมือ
+> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 7.0.0 รุ่น `v7.9.0`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 หรือ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น **snapshot ที่ได้รับมา** ซึ่งสอดคล้องกับ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) มันถูกสร้างใหม่โดย `ledger.py project` และ MUST NOT ถูกแก้ไขด้วยมือ
 
 ## ชั้นสถานะใดที่ใช้บังคับ
 
@@ -17,7 +17,7 @@ section: State
 | v5 (และแผน v1/v2 ที่เก่ากว่า) | แผน markdown โดยมีชั้น JSON นี้เป็นการฉายภาพ | เขียนโดยเอเจนต์ที่จุดโปรโตคอลด้านล่าง | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 และ v2 ยังใช้ได้สำหรับแผนที่เก่ากว่า) |
 | v6 และ v7 | สัญญาร่วมกับ journal แบบเพิ่มข้อมูลอย่างเดียว | snapshot ที่ฉายจาก journal ไม่เคยเขียนด้วยมือ | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (หรือรุ่น v6 ที่เทียบเท่ากัน) |
 
-แผนไม่เคยเปลี่ยนรุ่นโดยปริยาย: แผน v5 คงกฎเหล่านี้ไว้ และการย้ายแผนหนึ่งไปเป็น v6 คือการย้ายที่ชัดเจนและแสดงตัวอย่างก่อน ([ชั้นบันทึก](/spec/record-layer#coexistence-and-migration)) แหล่งอ้างอิงหลัก: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md)
+แผนไม่เคยเปลี่ยนรุ่นโดยปริยาย: แผน v5 คงกฎเหล่านี้ไว้ และการย้ายแผนหนึ่งไปเป็น v6 คือการย้ายที่ชัดเจนและแสดงตัวอย่างก่อน ([ชั้นบันทึก](/spec/record-layer#coexistence-and-migration)) แหล่งอ้างอิงหลัก: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md)
 
 **เวอร์ชัน 5.0.0. สถานะ: เสถียร** เอกสารนี้ระบุชั้นสถานะแผนที่เครื่องอ่านได้ของระเบียบวิธี Deep Work Plan ซึ่งตอนนี้ปรับให้สอดคล้องกับเวอร์ชันของมาตรฐาน DWP เอง — ไม่มีข้อกำหนดเดิมใดถูกทำให้อ่อนลงจากการเปลี่ยนหมายเลขนี้ ฉบับแก้ไขนี้ยังบันทึกเรื่องตัวอัปเดตสถานะที่มีการป้องกัน การเผยแพร่แผนที่ผ่านการตรวจสอบ และกฎความจริงของหลักฐานที่แผนที่เสร็จสมบูรณ์ต้องปฏิบัติตาม (ดูด้านล่าง) คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 

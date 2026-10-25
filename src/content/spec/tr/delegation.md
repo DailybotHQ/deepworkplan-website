@@ -8,7 +8,7 @@ section: Record layer
 
 # Devretme
 
-> **Sürüm kapsamı:** Bu sayfa, `v7.8.1` sürümündeki v7 sözleşme neslini yeniden ifade eder. Kanonik kaynaklar: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md) ve yürütme akışının [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md) dosyası. Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir.
+> **Sürüm kapsamı:** Bu sayfa, `v7.9.0` sürümündeki v7 sözleşme neslini yeniden ifade eder. Kanonik kaynaklar: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) ve yürütme akışının [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) dosyası. Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir.
 
 **Sürüm 7.0.0. Durum: Kararlı.** v7, yeni bir yaşam döngüsü değil, [kayıt katmanının](/spec/record-layer) yeni bir sözleşme neslidir: bu sayfa aksini söylemedikçe v6 sözleşmesi, yaşam döngüsü, bağlam ve kaynak belgelerindeki her şey geçerlidir. Devretmemek her zaman doğrudur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 

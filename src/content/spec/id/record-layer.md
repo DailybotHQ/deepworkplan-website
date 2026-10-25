@@ -8,7 +8,7 @@ section: Record layer
 
 # Lapisan catatan
 
-> **Cakupan versi:** Halaman ini menyatakan ulang lapisan catatan v6 yang normatif, yang menjadi dasar standar saat ini, DWP 7.0.0. Sumber kanonis pada rilis `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) dan [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku. Rencana v5 tetap memakai lapisan [status rencana](/spec/plan-state) dan tidak pernah dimigrasikan secara implisit.
+> **Cakupan versi:** Halaman ini menyatakan ulang lapisan catatan v6 yang normatif, yang menjadi dasar standar saat ini, DWP 7.0.0. Sumber kanonis pada rilis `v7.9.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) dan [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku. Rencana v5 tetap memakai lapisan [status rencana](/spec/plan-state) dan tidak pernah dimigrasikan secara implisit.
 
 **Versi 6.0.0, diperluas di 7.0.0. Status: Stabil.** Lapisan catatan menggantikan penyelesaian naratif dengan catatan: kontrak adalah otoritasnya, jurnal adalah memorinya, helper yang melakukan penulisan, dan setiap berkas yang dihasilkan adalah sebuah proyeksi. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 

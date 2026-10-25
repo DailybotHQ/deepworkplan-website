@@ -8,7 +8,7 @@ section: State
 
 # Стан плану
 
-> **Обсяг версії:** Ця сторінка специфікує **шар стану v5**, який плани v5 зберігають упродовж усього життя. Плани, створені поточним пакетом (DWP 7.0.0, реліз `v7.8.1`), натомість використовують [шар записів](/spec/record-layer). У плані v6 чи v7 авторитетом є контракт результату (`contract.json`), джерелом істини — журнал лише для додавання (`journal.ndjson`), а `state.json` — це **похідний знімок**, що відповідає [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Його перегенеровує `ledger.py project`, і він MUST NOT редагуватися вручну.
+> **Обсяг версії:** Ця сторінка специфікує **шар стану v5**, який плани v5 зберігають упродовж усього життя. Плани, створені поточним пакетом (DWP 7.0.0, реліз `v7.9.0`), натомість використовують [шар записів](/spec/record-layer). У плані v6 чи v7 авторитетом є контракт результату (`contract.json`), джерелом істини — журнал лише для додавання (`journal.ndjson`), а `state.json` — це **похідний знімок**, що відповідає [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Його перегенеровує `ledger.py project`, і він MUST NOT редагуватися вручну.
 
 ## Який шар стану застосовується
 
@@ -17,7 +17,7 @@ section: State
 | v5 (і раніші плани v1/v2) | markdown-план, а цей JSON-шар — його проєкція | записується агентом у точках протоколу, описаних нижче | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 і v2 лишаються чинними для старіших планів) |
 | v6 і v7 | контракт плюс журнал лише для додавання | знімок, спроєктований із журналу, ніколи не записується вручну | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (або їхні відповідники v6) |
 
-План ніколи не змінює покоління неявно: плани v5 зберігають ці правила, а перенесення плану на v6 — це явна міграція з попереднім переглядом ([Шар записів](/spec/record-layer#coexistence-and-migration)). Канонічні джерела: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md).
+План ніколи не змінює покоління неявно: плани v5 зберігають ці правила, а перенесення плану на v6 — це явна міграція з попереднім переглядом ([Шар записів](/spec/record-layer#coexistence-and-migration)). Канонічні джерела: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Версія 5.0.0. Статус: стабільний.** Цей документ специфікує машиночитаний рівень стану плану методології Deep Work Plan, тепер узгоджений із власною версією стандарту DWP — жодна наявна вимога не послаблюється через перенумерацію. Ця редакція також документує захищений оновлювач стану, перевірену публікацію плану та правила істинності доказів, яким має відповідати завершений план (див. нижче). Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаються згідно з RFC 2119.
 

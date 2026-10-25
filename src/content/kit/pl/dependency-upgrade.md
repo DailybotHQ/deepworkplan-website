@@ -32,7 +32,7 @@ Zaktualizuj zależności repozytorium w przepływie partii — zwalidowanym i od
 | Klucz rejestru | `dependency-upgrade` w `.dwp/config.json` |
 | Deskryptor | `addons/dependency-upgrade/addon.json` (interfejs 1) |
 | Polecenie | `/lib-upgrade` instalowane w `.agents/commands/` po zaakceptowaniu |
-| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v7.8.1`) |
+| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v7.9.0`) |
 ## Uwagi
 
 Niezależny od menedżera pakietów — nigdy nie uruchamia npm/ncu w repozytorium spoza świata JS. Opcjonalny, nigdy wymagany i nigdy nie commituje automatycznie.

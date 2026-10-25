@@ -10,7 +10,7 @@ order: 8
 
 Ogni agente di codice da terminale ha i propri flag per continuare una sessione, il proprio modo di tenere separato un secondo account, la propria modalità headless e il proprio interruttore per saltare le richieste di autorizzazione. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** mette un’unica superficie di comandi sopra tutti loro: `ak <kind> [@profile]`.
 
-Questo addon integra il kit in **DWP v7** (pack `v7.8.1`) come trasporto di delega **headless**. È opzionale: senza di esso, ogni task viene eseguito nella sessione corrente, esattamente come prima. Il kit stesso è un prodotto MIT che funziona senza Deep Work Plan.
+Questo addon integra il kit in **DWP v7** (pack `v7.9.0`) come trasporto di delega **headless**. È opzionale: senza di esso, ogni task viene eseguito nella sessione corrente, esattamente come prima. Il kit stesso è un prodotto MIT che funziona senza Deep Work Plan.
 
 ## Cosa ti offre il kit
 
@@ -65,15 +65,15 @@ Il lavoro si sposta solo tra gli account che hai dichiarato per il piano, nel ri
 ## Installazione
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisiti: `bash` su macOS o Linux e `python3` 3.9 o successivo; nient’altro. Windows usa `install.ps1`. Fissa `v1.0.1`: `v0.2.0` e `v0.2.1` non sono supportate. Verifica una release con il suo asset `SHA256SUMS`.
+Requisiti: `bash` su macOS o Linux e `python3` 3.9 o successivo; nient’altro. Windows usa `install.ps1`. Fissa `v1.1.0`: `v0.2.0` e `v0.2.1` non sono supportate. Verifica una release con il suo asset `SHA256SUMS`.
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/coding-agents-kit`, tag `v1.0.1`, interfaccia 1 |
+| Prodotto | `DailybotHQ/coding-agents-kit`, tag `v1.1.0`, interfaccia 1 |
 | Chiave di registro | `agentkit` in `.dwp/config.json` |
 | Trasporto | headless: un `ak run` per delegato in un worktree git dedicato |
 | Fornisce | `subagents`, `cancel_children`, `model_routing` |

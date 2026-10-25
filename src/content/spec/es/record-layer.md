@@ -8,7 +8,7 @@ section: Record layer
 
 # Capa de registros
 
-> **Alcance de versión:** Esta página reformula la capa de registros normativa v6 sobre la que se construye el estándar actual, DWP 7.0.0. Fuentes canónicas en la release `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) y [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Donde esta página y esos archivos difieran, prevalecen los archivos. Los planes v5 conservan la capa de [estado del plan](/spec/plan-state) y nunca se migran de forma implícita.
+> **Alcance de versión:** Esta página reformula la capa de registros normativa v6 sobre la que se construye el estándar actual, DWP 7.0.0. Fuentes canónicas en la release `v7.9.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) y [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Donde esta página y esos archivos difieran, prevalecen los archivos. Los planes v5 conservan la capa de [estado del plan](/spec/plan-state) y nunca se migran de forma implícita.
 
 **Versión 6.0.0, ampliada en 7.0.0. Estado: estable.** La capa de registros sustituye la finalización narrativa por registros: el contrato es la autoridad, el diario es la memoria, los helpers hacen la escritura y todo archivo generado es una proyección. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 

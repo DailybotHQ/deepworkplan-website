@@ -8,7 +8,7 @@ section: State
 
 # Plan state
 
-> **版本范围：** 本页规定 **v5 状态层**，v5 计划在其整个生命周期内都保留它。当前技能包（DWP 7.0.0，发布版本 `v7.8.1`）创建的计划改用[记录层](/spec/record-layer)。在 v6 或 v7 计划中，结果契约（`contract.json`）是权威，仅追加日志（`journal.ndjson`）是事实来源，而 `state.json` 是一份符合 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 的**派生快照**。它由 `ledger.py project` 重新生成，MUST NOT 手动编辑。
+> **版本范围：** 本页规定 **v5 状态层**，v5 计划在其整个生命周期内都保留它。当前技能包（DWP 7.0.0，发布版本 `v7.9.0`）创建的计划改用[记录层](/spec/record-layer)。在 v6 或 v7 计划中，结果契约（`contract.json`）是权威，仅追加日志（`journal.ndjson`）是事实来源，而 `state.json` 是一份符合 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 的**派生快照**。它由 `ledger.py project` 重新生成，MUST NOT 手动编辑。
 
 ## 适用哪一个状态层
 
@@ -17,7 +17,7 @@ section: State
 | v5（以及更早的 v1/v2 计划） | Markdown 计划，本 JSON 层是其投影 | 由代理在下文的协议节点处写入 | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json)、[`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json)（v1 与 v2 对较旧的计划仍然有效） |
 | v6 与 v7 | 契约加上仅追加日志 | 从日志投影出的快照，绝不手动写入 | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json)、[`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json)、[`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)（或其 v6 对应版本） |
 
-计划绝不会隐式地改变代际：v5 计划保留这些规则，而将其迁移到 v6 是一次明确的、可预览的迁移（[记录层](/spec/record-layer#coexistence-and-migration)）。规范来源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md)。
+计划绝不会隐式地改变代际：v5 计划保留这些规则，而将其迁移到 v6 是一次明确的、可预览的迁移（[记录层](/spec/record-layer#coexistence-and-migration)）。规范来源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md)。
 
 **版本 5.0.0。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层，现已与 DWP 标准自身的版本号对齐——此次重新编号不削弱任何既有要求。本次修订还记录了受保护的状态更新器、经验证的计划发布，以及一份已完成计划必须满足的证据真实性规则（见下文）。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 

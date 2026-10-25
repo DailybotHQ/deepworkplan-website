@@ -8,7 +8,7 @@ section: Record layer
 
 # Делегирование
 
-> **Область версии:** эта страница излагает поколение контракта v7 в релизе `v7.8.1`. Канонические источники: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V7_CONTRACT.md) и [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/execute/delegation.md) потока execute. Если эта страница расходится с этими файлами, приоритет у файлов.
+> **Область версии:** эта страница излагает поколение контракта v7 в релизе `v7.9.0`. Канонические источники: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) и [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) потока execute. Если эта страница расходится с этими файлами, приоритет у файлов.
 
 **Версия 7.0.0. Статус: стабильная.** v7 — это новое поколение контракта [слоя записей](/spec/record-layer), а не новый жизненный цикл: всё, что содержится в документах v6 о контракте, жизненном цикле, контексте и ресурсах, применяется, если эта страница не говорит иного. Отказ от делегирования всегда корректен. Ключевые слова MUST, MUST NOT, SHOULD, SHOULD NOT и MAY следует трактовать так, как описано в RFC 2119.
 

@@ -8,7 +8,7 @@ section: Record layer
 
 # Шар записів
 
-> **Обсяг версії:** Ця сторінка переказує нормативний шар записів v6, на якому будується поточний стандарт DWP 7.0.0. Канонічні джерела в релізі `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_CONTRACT.md) і [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.8.1/skills/deepworkplan/spec/V6_LIFECYCLE.md). Якщо ця сторінка й ці файли розходяться, перевагу мають файли. Плани v5 зберігають рівень [стану плану](/spec/plan-state) і ніколи не мігрують неявно.
+> **Обсяг версії:** Ця сторінка переказує нормативний шар записів v6, на якому будується поточний стандарт DWP 7.0.0. Канонічні джерела в релізі `v7.9.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) і [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Якщо ця сторінка й ці файли розходяться, перевагу мають файли. Плани v5 зберігають рівень [стану плану](/spec/plan-state) і ніколи не мігрують неявно.
 
 **Версія 6.0.0, розширена у 7.0.0. Статус: стабільний.** Шар записів замінює наративне завершення записами: контракт є авторитетом, журнал — памʼяттю, записи виконують допоміжні скрипти, а кожен згенерований файл є проєкцією. Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаться згідно з RFC 2119.
 
