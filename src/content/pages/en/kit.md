@@ -70,7 +70,7 @@ Capabilities the onboard flow layers onto a repo. Seven are optional and never p
 - **[devcontainer](/kit/devcontainer)** — Each repository's own dev container from one template: agents through ak, Herdr both ways, SSH keys only on opt-in. Pinned at `devcontainer-kit@v1.0.1`.
 - **[vim](/kit/vim)** — The terminal editor, with a read-only plan browser and a Markdown viewer. Pinned at `deepworkplan-vim@v1.0.1`.
 
-The addon registry and descriptors ship in Deep Work Plan v7: `v7.8.1`
+The addon registry and descriptors ship in Deep Work Plan v7: `v7.9.0`
 
 ### Examples
 

@@ -60,7 +60,7 @@ Khi được chấp nhận, addon có thể cài một bộ ủy thác `/design-
 | Khóa đăng ký | `design-system` trong `.dwp/config.json` |
 | Bộ mô tả | `addons/design-system/addon.json` (giao diện 1) |
 | Tệp đích | `docs/DESIGN.md` được lập chỉ mục từ `AGENTS.md` |
-| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.8.1`) |
+| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.9.0`) |
 
 ## Quan hệ với các tài liệu thiết kế theo tính năng
 

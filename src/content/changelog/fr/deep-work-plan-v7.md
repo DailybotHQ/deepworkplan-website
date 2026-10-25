@@ -40,4 +40,4 @@ La version 7.7.0 (2026-10-12) a apporté l'autonomie en essaim (Guide §17) : la
 
 La version 7.8.0 (2026-10-13) a établi Ecosystem 1.0 : chaque produit intégré par le pack a atteint sa première version stable et est épinglé en v1.0.0 selon le versionnage sémantique (coding-agents-kit, herdr-peers, devcontainer-kit et deepworkplan-vim, chacun avec un condensé `SHA256SUMS` vérifié), aux côtés des versions épinglées AI Diff Reviewer v3.3.14 et Dailybot agent-skill v3.23.17 ; la 7.8.1 (2026-10-14) a ensuite épinglé les versions correctives v1.0.1 de coding-agents-kit et devcontainer-kit.
 
-Version installée du skill : **7.8.1**, stable depuis 7.0.0.
+Version installée du skill : **7.9.0**, stable depuis 7.0.0.

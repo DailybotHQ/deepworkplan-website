@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Addon DWP opt-in: báo cáo vòng đời kế hoạch tới nhóm Dailybot, hook tùy chọn và skill agent Dailybot đầy đủ v3.23.17 (chat, biểu mẫu, Plan và hơn thế nữa)."
+description: "Addon DWP opt-in: báo cáo vòng đời kế hoạch tới nhóm Dailybot, hook tùy chọn và skill agent Dailybot đầy đủ v3.23.20 (chat, biểu mẫu, Plan và hơn thế nữa)."
 kind: addon
 lang: vi
 order: 2
@@ -23,7 +23,7 @@ Phương pháp Deep Work Plan cốt lõi có **không** phụ thuộc Dailybot. 
 
 ## Addon này kết nối gì (cố ý hẹp)
 
-Addon DWP Dailybot **không** tái phát minh Dailybot. Nó kết nối thực thi kế hoạch với sub-skill dailybot **`report`** và tùy chọn commit hook harness. Mọi thứ khác — cài đặt, đồng ý, xác thực, phong cách viết — được **hoãn** sang [skill agent Dailybot](https://github.com/DailybotHQ/agent-skill) chính thức (hiện tại **v3.23.17**).
+Addon DWP Dailybot **không** tái phát minh Dailybot. Nó kết nối thực thi kế hoạch với sub-skill dailybot **`report`** và tùy chọn commit hook harness. Mọi thứ khác — cài đặt, đồng ý, xác thực, phong cách viết — được **hoãn** sang [skill agent Dailybot](https://github.com/DailybotHQ/agent-skill) chính thức (hiện tại **v3.23.20**).
 
 ### Bốn sự kiện vòng đời
 
@@ -86,9 +86,9 @@ Addon này **không bao giờ** nhắc email, OTP hay API key và **không bao g
 
 Phân giải xác thực theo **Bearer-first**: token phiên được ưu tiên, với việc thử lại Bearer→API-key minh bạch khi gặp `401`/`403` nên token cũ không bao giờ chặn một khóa hợp lệ. Nếu xác thực bị từ chối hoặc không có, báo cáo bị bỏ qua im lặng — công việc tiếp tục.
 
-## Skill Dailybot đi kèm — 17 khả năng (v3.23.17)
+## Skill Dailybot đi kèm — 17 khả năng (v3.23.20)
 
-Cài skill agent Dailybot mang lại nhiều hơn nhiều so với addon DWP kết nối. Gói skill chính thức (skill **v3.23.17**, CLI cơ sở **>= 3.9.0**, Plan **>= 3.25.0**, bản publish CLI hiện tại **3.25.0**) mở **17 sub-skill phối hợp**:
+Cài skill agent Dailybot mang lại nhiều hơn nhiều so với addon DWP kết nối. Gói skill chính thức (skill **v3.23.20**, CLI cơ sở **>= 3.9.0**, Plan **>= 3.25.0**, bản publish CLI hiện tại **3.25.0**) mở **17 sub-skill phối hợp**:
 
 | Sub-skill | Chức năng |
 |-----------|--------------|

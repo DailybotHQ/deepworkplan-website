@@ -44,7 +44,7 @@ section: Addons
 
 - **Kit पृष्ठ:** [Dailybot](/kit/dailybot) — पूर्ण क्षमता संदर्भ
 - **DWP ऐडऑन क्या जोड़ता है:** dailybot `report` sub-skill के माध्यम से चार योजना-जीवनचक्र रिपोर्ट (kickoff, significant task, blocked, completion); वैकल्पिक deterministic हुक प्रवर्तन (`dailybot hook`, CLI `>= 3.9.0`)
-- **जोड़ी गई स्किल:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (पिन किया गया **v3.23.17**) इंस्टॉल करने से **17 क्षमताएँ** — Slack/Teams/Discord/Google Chat पर chat, check-ins, forms authoring, ask AI, kudos, Plan boards और tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, और अधिक। DWP ऐडऑन केवल **report** जोड़ता है; अन्य क्षमताएँ Dailybot स्किल के माध्यम से सीधे invoke होती हैं
+- **जोड़ी गई स्किल:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (पिन किया गया **v3.23.20**) इंस्टॉल करने से **17 क्षमताएँ** — Slack/Teams/Discord/Google Chat पर chat, check-ins, forms authoring, ask AI, kudos, Plan boards और tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, और अधिक। DWP ऐडऑन केवल **report** जोड़ता है; अन्य क्षमताएँ Dailybot स्किल के माध्यम से सीधे invoke होती हैं
 - **Auth:** पूर्णतः Dailybot स्किल को सौंपा (`dailybot login` या `DAILYBOT_API_KEY`); यह ऐडऑन कभी credentials संग्रहीत नहीं करता
 - **Vendor-neutral guardrail:** कोर DWP की Dailybot पर **शून्य** निर्भरता; कभी सभी के लिए स्वतः इंस्टॉल न करें
 - **कब प्रस्तावित:** डेवलपर या टीम पहले से Dailybot उपयोग करती हो, या स्पष्ट रूप से टीम रिपोर्टिंग माँगे
@@ -91,7 +91,7 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 
 ### DeepWorkPlan Vim (सातवाँ ऐडऑन)
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v1.0.0`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v1.0.1`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।
 
 - **Kit पृष्ठ:** [DeepWorkPlan Vim](/kit/vim)
 - **क्या जोड़ता है:** एजेंटों और मनुष्यों के लिए एक वैकल्पिक, मशीन-स्तरीय एडिटर सतह — एक जनरेट किया गया कमांड इंडेक्स, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर; हर दावा उत्पाद की पिन की गई मशीन-पठनीय सतह से पढ़ा जाता है

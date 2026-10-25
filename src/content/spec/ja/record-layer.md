@@ -8,7 +8,7 @@ section: Record layer
 
 # レコードレイヤー
 
-> **バージョンの適用範囲:** このページは、現在の標準である DWP 7.0.0 が土台とする規範的な v6 レコードレイヤーを要約したものです。リリース `v7.8.1` における正規の情報源は [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) と [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) です。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。v5 計画は [計画の状態](/spec/plan-state) レイヤーを維持し、暗黙のうちに移行されることは決してありません。
+> **バージョンの適用範囲:** このページは、現在の標準である DWP 7.0.0 が土台とする規範的な v6 レコードレイヤーを要約したものです。リリース `v7.9.0` における正規の情報源は [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) と [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) です。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。v5 計画は [計画の状態](/spec/plan-state) レイヤーを維持し、暗黙のうちに移行されることは決してありません。
 
 **バージョン 6.0.0、7.0.0 で拡張。状態: 安定。** レコードレイヤーは、物語的な完了報告をレコードで置き換えます。契約が権威であり、ジャーナルが記憶であり、ヘルパーが書き込みを行い、生成されるすべてのファイルは投影です。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 

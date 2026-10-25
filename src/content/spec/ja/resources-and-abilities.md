@@ -8,7 +8,7 @@ section: Record layer
 
 # リソースと能力
 
-> **バージョンの適用範囲:** このページは、現在の標準である DWP 7.0.0 の四つの規範文書をリリース `v7.8.1` 時点で要約したものです：[`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md)、[`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md)、[`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md)、[`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md)。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。
+> **バージョンの適用範囲:** このページは、現在の標準である DWP 7.0.0 の四つの規範文書をリリース `v7.9.0` 時点で要約したものです：[`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md)、[`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md)、[`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md)、[`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md)。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。
 
 **状態: 安定（コンテキストとリソースは 6.0.0 から、設定と能力は 7.0.0 から）。** これらの規則は v6 系の計画（[レコードレイヤー](/spec/record-layer)）を拘束し、v5 の標準には影響しません。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 

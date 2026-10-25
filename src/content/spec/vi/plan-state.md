@@ -8,7 +8,7 @@ section: State
 
 # Trạng thái kế hoạch
 
-> **Phạm vi phiên bản:** Trang này đặc tả **lớp trạng thái v5**, mà các kế hoạch v5 giữ trong suốt vòng đời của chúng. Các kế hoạch được tạo bởi gói hiện tại (DWP 7.0.0, bản phát hành `v7.8.1`) dùng [lớp bản ghi](/spec/record-layer) thay thế. Trong một kế hoạch v6 hoặc v7, hợp đồng kết quả (`contract.json`) là thẩm quyền, nhật ký chỉ ghi thêm (`journal.ndjson`) là nguồn chân lý, và `state.json` là một **snapshot dẫn xuất** tuân theo [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Nó được tái tạo bởi `ledger.py project` và KHÔNG ĐƯỢC (MUST NOT) chỉnh sửa bằng tay.
+> **Phạm vi phiên bản:** Trang này đặc tả **lớp trạng thái v5**, mà các kế hoạch v5 giữ trong suốt vòng đời của chúng. Các kế hoạch được tạo bởi gói hiện tại (DWP 7.0.0, bản phát hành `v7.9.0`) dùng [lớp bản ghi](/spec/record-layer) thay thế. Trong một kế hoạch v6 hoặc v7, hợp đồng kết quả (`contract.json`) là thẩm quyền, nhật ký chỉ ghi thêm (`journal.ndjson`) là nguồn chân lý, và `state.json` là một **snapshot dẫn xuất** tuân theo [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Nó được tái tạo bởi `ledger.py project` và KHÔNG ĐƯỢC (MUST NOT) chỉnh sửa bằng tay.
 
 ## Lớp trạng thái nào áp dụng
 

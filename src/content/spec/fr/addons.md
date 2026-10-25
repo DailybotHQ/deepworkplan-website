@@ -44,7 +44,7 @@ Une connexion optionnelle à l'**équipe Dailybot** du développeur pour la visi
 
 - **Page kit :** [Dailybot](/kit/dailybot) — référence complète des capacités
 - **Ce que l'addon DWP connecte :** quatre rapports du cycle de vie du plan (kickoff, tâche significative, bloqué, achèvement) via la sous-skill `report` de dailybot ; application déterministe optionnelle par hooks (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill jumelée :** installer [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (épinglée en **v3.23.17**) expose **17 capacités** — chat sur Slack/Teams/Discord/Google Chat, check-ins, création de formulaires, ask AI, kudos, tableaux et tâches Plan, labels d'organisation, clés API par dépôt (`.dailybot/env.json`), e-mail et plus. L'addon DWP ne connecte que **report** ; les autres capacités sont invoquées directement via la skill Dailybot
+- **Skill jumelée :** installer [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (épinglée en **v3.23.20**) expose **17 capacités** — chat sur Slack/Teams/Discord/Google Chat, check-ins, création de formulaires, ask AI, kudos, tableaux et tâches Plan, labels d'organisation, clés API par dépôt (`.dailybot/env.json`), e-mail et plus. L'addon DWP ne connecte que **report** ; les autres capacités sont invoquées directement via la skill Dailybot
 - **Auth :** entièrement reportée à la skill Dailybot (`dailybot login` ou `DAILYBOT_API_KEY`) ; cet addon ne stocke jamais de credentials
 - **Garde-fou neutre vis-à-vis du fournisseur :** le DWP central a **zéro** dépendance à Dailybot ; ne jamais installer automatiquement pour tout le monde
 - **Quand proposé :** le développeur ou l'équipe utilise déjà Dailybot, ou demande explicitement des rapports d'équipe
@@ -91,7 +91,7 @@ Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 
 ### DeepWorkPlan Vim (septième addon)
 
-Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v1.0.0`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
+Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v1.0.1`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).
 
 - **Page kit :** [DeepWorkPlan Vim](/kit/vim)
 - **Ce qu'il ajoute :** une surface d’édition optionnelle, au niveau de la machine, pour les agents et les humains — un index des commandes généré, un navigateur de plans en lecture seule et une visionneuse Markdown ; chaque affirmation est lue depuis la surface lisible par machine épinglée du produit

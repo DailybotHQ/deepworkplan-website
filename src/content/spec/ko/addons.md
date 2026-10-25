@@ -44,7 +44,7 @@ section: Addons
 
 - **키트 페이지:** [Dailybot](/kit/dailybot) — 전체 기능 참조
 - **DWP 애드온이 연결하는 것:** dailybot `report` 서브스킬을 통한 네 가지 플랜 라이프사이클 보고(kickoff, significant task, blocked, completion); 선택적 결정론적 훅 강제(`dailybot hook`, CLI `>= 3.9.0`)
-- **페어링 스킬:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)(고정 버전 **v3.23.17**) 설치 시 **17가지 기능** — Slack/Teams/Discord/Google Chat 채팅, 체크인, 폼 작성, Ask AI, kudos, Plan 보드와 작업, 조직 라벨, 저장소별 API 키(`.dailybot/env.json`), 이메일 등. DWP 애드온은 **report**만 연결; 다른 기능은 Dailybot 스킬을 직접 호출
+- **페어링 스킬:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)(고정 버전 **v3.23.20**) 설치 시 **17가지 기능** — Slack/Teams/Discord/Google Chat 채팅, 체크인, 폼 작성, Ask AI, kudos, Plan 보드와 작업, 조직 라벨, 저장소별 API 키(`.dailybot/env.json`), 이메일 등. DWP 애드온은 **report**만 연결; 다른 기능은 Dailybot 스킬을 직접 호출
 - **인증:** Dailybot 스킬에 완전 위임(`dailybot login` 또는 `DAILYBOT_API_KEY`); 이 애드온은 자격 증명을 저장하지 않음
 - **벤더 중립 가드레일:** 핵심 DWP는 Dailybot 의존성 **제로**; 모든 사람에게 자동 설치하지 않음
 - **제안 시점:** 개발자나 팀이 이미 Dailybot을 사용하거나 팀 보고를 명시적으로 요청
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr(여섯 번째 애드온)
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v1.0.0`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)(고정 버전 `v1.1.0`, 프로토콜 `1`)의 얇은 통합 계층으로, v7 계획의 **대화형** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Herdr](/kit/herdr)
 - **추가하는 것:** 계획이 경계가 정해진 작업을 같은 머신 또는 Herdr가 SSH로 도달하는 머신의 다른 [Herdr](https://herdr.dev) 페인에 있는 코딩 에이전트에게 넘기고, 승인된 단일 응답을 저널에 기록할 수 있음
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim(일곱 번째 애드온)
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)(고정 버전 `v1.0.0`, 인터페이스 `1`)의 얇은 통합 계층으로, Deep Work Plan을 위한 터미널 편집기입니다(Neovim 0.12+).
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)(고정 버전 `v1.0.1`, 인터페이스 `1`)의 얇은 통합 계층으로, Deep Work Plan을 위한 터미널 편집기입니다(Neovim 0.12+).
 
 - **키트 페이지:** [DeepWorkPlan Vim](/kit/vim)
 - **추가하는 것:** 에이전트와 사람을 위한 선택적인 머신 수준 편집기 표면 — 생성된 명령 색인, 읽기 전용 계획 브라우저, Markdown 뷰어; 모든 주장은 제품의 고정된 기계 판독 가능 표면에서 읽음
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit(여덟 번째 애드온)
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v1.0.1`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, 고정 버전 `v1.1.0`, 인터페이스 `1`)의 얇은 통합 계층으로, v7 계획의 **헤드리스** 위임 전송 수단입니다.
 
 - **키트 페이지:** [Agentkit](/kit/agentkit)
 - **추가하는 것:** 터미널 코딩 에이전트 위에 놓인 하나의 `ak` 명령 표면으로, 경계가 정해진 계획 작업을 헤드리스로 실행하는 데 사용됨; `subagents`, `cancel_children`, `model_routing` 능력은 런타임에, 활성화되고 감지되었으며 호환되는 인터페이스일 때만 제공함

@@ -8,7 +8,7 @@ section: Record layer
 
 # Ресурсы и возможности
 
-> **Область версии:** эта страница излагает четыре нормативных документа текущего стандарта DWP 7.0.0 в релизе `v7.8.1`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) и [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Если эта страница расходится с этими файлами, приоритет у файлов.
+> **Область версии:** эта страница излагает четыре нормативных документа текущего стандарта DWP 7.0.0 в релизе `v7.9.0`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) и [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Если эта страница расходится с этими файлами, приоритет у файлов.
 
 **Статус: стабильный (контекст и ресурсы — с 6.0.0; конфигурация и возможности — с 7.0.0).** Эти правила обязательны для планов линии v6 ([Слой записей](/spec/record-layer)); стандарт v5 не затрагивается. Ключевые слова MUST, MUST NOT, SHOULD, SHOULD NOT и MAY следует трактовать так, как описано в RFC 2119.
 

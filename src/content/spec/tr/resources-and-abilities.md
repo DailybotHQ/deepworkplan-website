@@ -8,7 +8,7 @@ section: Record layer
 
 # Kaynaklar ve yetenekler
 
-> **Sürüm kapsamı:** Bu sayfa, güncel standart DWP 7.0.0'ın `v7.8.1` sürümündeki dört normatif belgeyi yeniden ifade eder: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) ve [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir.
+> **Sürüm kapsamı:** Bu sayfa, güncel standart DWP 7.0.0'ın `v7.9.0` sürümündeki dört normatif belgeyi yeniden ifade eder: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) ve [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md). Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir.
 
 **Durum: Kararlı (bağlam ve kaynaklar 6.0.0'dan beri; yapılandırma ve yetenekler 7.0.0'dan beri).** Bu kurallar v6 hattı planları bağlar ([Kayıt katmanı](/spec/record-layer)); v5 standardına dokunulmaz. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 

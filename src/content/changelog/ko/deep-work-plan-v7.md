@@ -40,4 +40,4 @@ v7은 오케스트레이션과 감사 가능성에서의 큰 진전이지만, �
 
 릴리스 7.8.0 (2026-10-13)은 Ecosystem 1.0을 구축했습니다: 팩이 통합하는 모든 제품이 첫 번째 안정 릴리스에 도달해 시맨틱 버저닝에 따라 v1.0.0으로 고정되었으며(coding-agents-kit, herdr-peers, devcontainer-kit, deepworkplan-vim, 각각 검증된 `SHA256SUMS` 다이제스트 포함), AI Diff Reviewer v3.3.14와 Dailybot agent-skill v3.23.17도 함께 고정되었습니다. 이어서 7.8.1 (2026-10-14)이 coding-agents-kit와 devcontainer-kit의 v1.0.1 패치 릴리스를 고정했습니다.
 
-설치된 skill 릴리스: **7.8.1**, 7.0.0 이후 안정적입니다.
+설치된 skill 릴리스: **7.9.0**, 7.0.0 이후 안정적입니다.

@@ -8,7 +8,7 @@ section: State
 
 # Estado do plano
 
-> **Escopo da versão:** Esta página especifica a **camada de estado v5**, que os planos v5 mantêm por toda a sua vida. Os planos criados pelo pacote atual (DWP 7.0.0, release `v7.8.1`) usam a [camada de registros](/spec/record-layer) em seu lugar. Em um plano v6 ou v7, o contrato de resultado (`contract.json`) é a autoridade, o diário somente de acréscimo (`journal.ndjson`) é a fonte de verdade e `state.json` é um **snapshot derivado** conforme [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Ele é regenerado por `ledger.py project` e NÃO DEVE (MUST NOT) ser editado manualmente.
+> **Escopo da versão:** Esta página especifica a **camada de estado v5**, que os planos v5 mantêm por toda a sua vida. Os planos criados pelo pacote atual (DWP 7.0.0, release `v7.9.0`) usam a [camada de registros](/spec/record-layer) em seu lugar. Em um plano v6 ou v7, o contrato de resultado (`contract.json`) é a autoridade, o diário somente de acréscimo (`journal.ndjson`) é a fonte de verdade e `state.json` é um **snapshot derivado** conforme [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Ele é regenerado por `ledger.py project` e NÃO DEVE (MUST NOT) ser editado manualmente.
 
 ## Qual camada de estado se aplica
 

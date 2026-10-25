@@ -8,7 +8,7 @@ section: State
 
 # Estado del plan
 
-> **Alcance de versión:** Esta página especifica la **capa de estado v5**, que los planes v5 conservan durante toda su vida. Los planes creados por el paquete actual (DWP 7.0.0, release `v7.8.1`) usan en su lugar la [capa de registros](/spec/record-layer). En un plan v6 o v7, el contrato de resultados (`contract.json`) es la autoridad, el diario de solo anexado (`journal.ndjson`) es la fuente de verdad y `state.json` es un **snapshot derivado** conforme a [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Lo regenera `ledger.py project` y NO DEBE editarse manualmente.
+> **Alcance de versión:** Esta página especifica la **capa de estado v5**, que los planes v5 conservan durante toda su vida. Los planes creados por el paquete actual (DWP 7.0.0, release `v7.9.0`) usan en su lugar la [capa de registros](/spec/record-layer). En un plan v6 o v7, el contrato de resultados (`contract.json`) es la autoridad, el diario de solo anexado (`journal.ndjson`) es la fuente de verdad y `state.json` es un **snapshot derivado** conforme a [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Lo regenera `ledger.py project` y NO DEBE editarse manualmente.
 
 ## Qué capa de estado aplica
 

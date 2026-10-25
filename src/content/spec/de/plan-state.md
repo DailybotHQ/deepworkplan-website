@@ -8,7 +8,7 @@ section: State
 
 # Plan-Zustand
 
-> **Versionsumfang:** Diese Seite spezifiziert die **v5-Zustandsschicht**, die v5-Pläne während ihrer gesamten Lebensdauer behalten. Pläne, die mit dem aktuellen Paket (DWP 7.0.0, Release `v7.8.1`) erstellt werden, verwenden stattdessen die [Aufzeichnungsschicht](/spec/record-layer). In einem v6- oder v7-Plan ist der Ergebnisvertrag (`contract.json`) die Autorität, das nur anhängbare Journal (`journal.ndjson`) die Quelle der Wahrheit, und `state.json` ist ein **abgeleiteter Snapshot** gemäß [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Er wird von `ledger.py project` neu erzeugt und DARF NICHT manuell bearbeitet werden.
+> **Versionsumfang:** Diese Seite spezifiziert die **v5-Zustandsschicht**, die v5-Pläne während ihrer gesamten Lebensdauer behalten. Pläne, die mit dem aktuellen Paket (DWP 7.0.0, Release `v7.9.0`) erstellt werden, verwenden stattdessen die [Aufzeichnungsschicht](/spec/record-layer). In einem v6- oder v7-Plan ist der Ergebnisvertrag (`contract.json`) die Autorität, das nur anhängbare Journal (`journal.ndjson`) die Quelle der Wahrheit, und `state.json` ist ein **abgeleiteter Snapshot** gemäß [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Er wird von `ledger.py project` neu erzeugt und DARF NICHT manuell bearbeitet werden.
 
 ## Welche Zustandsschicht gilt
 

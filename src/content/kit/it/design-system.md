@@ -49,7 +49,7 @@ Quando accettato, l’addon può installare un delegatore `/design-system` nella
 | Chiave di registro | `design-system` in `.dwp/config.json` |
 | Descrittore | `addons/design-system/addon.json` (interfaccia 1) |
 | File di destinazione | `docs/DESIGN.md` indicizzato da `AGENTS.md` |
-| Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.8.1`) |
+| Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.9.0`) |
 ## Relazione con i documenti di design per funzionalità
 
 Questo è un file di design system **a livello di repository, persistente** — distinto da un documento di design tecnico per funzionalità (il `design.md` del flusso «requisiti → design → attività» dei workflow spec-driven legati a uno strumento). Deep Work Plan deliberatamente non include un archetipo separato di documento di design per funzionalità: il README di un piano, i criteri di accettazione di ogni attività e i validation gate coprono già quel ruolo. Questo addon colma l’unica lacuna che quel ruolo non copre: un contesto di design dell’interfaccia durevole e nativo del repo.

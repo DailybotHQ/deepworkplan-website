@@ -10,11 +10,11 @@ order: 7
 
 [Herdr](https://herdr.dev) colloca gli agenti di codice in pannelli, sulla tua macchina e sulle macchine che raggiunge via SSH. Questo addon consente a un Deep Work Plan di usare quegli agenti come **peer**: un piano può affidare un task delimitato a un agente in un altro pannello, ricevere esattamente una risposta autorizzata e conservare una traccia dello scambio.
 
-È un addon opzionale di **DWP v7** (pack `v7.8.1`). La metodologia funziona allo stesso modo senza di esso: con l’addon assente o disattivato, ogni task viene eseguito nella sessione corrente, esattamente come prima.
+È un addon opzionale di **DWP v7** (pack `v7.9.0`). La metodologia funziona allo stesso modo senza di esso: con l’addon assente o disattivato, ogni task viene eseguito nella sessione corrente, esattamente come prima.
 
 ## Cosa integra
 
-L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.0.0`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
+L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.1.0`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
 
 | Elemento | Valore |
 |---|---|

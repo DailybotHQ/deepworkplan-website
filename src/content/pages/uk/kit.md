@@ -70,7 +70,7 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.
 - **[devcontainer](/uk/kit/devcontainer)** — Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, SSH-ключі лише за явного ввімкнення. Закріплено на `devcontainer-kit@v1.0.1`.
 - **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v1.0.1`.
 
-Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.8.1`
+Реєстр аддонів і дескриптори постачаються в Deep Work Plan v7: `v7.9.0`
 
 ### Приклади
 

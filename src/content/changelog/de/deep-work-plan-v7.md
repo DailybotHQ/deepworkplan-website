@@ -40,4 +40,4 @@ Release 7.7.0 (2026-10-12) lieferte Schwarm-Autonomie (Guide §17): die Kapazit�
 
 Release 7.8.0 (2026-10-13) etablierte Ecosystem 1.0: Jedes vom Paket integrierte Produkt erreichte sein erstes stabiles Release und ist unter semantischer Versionierung auf v1.0.0 festgelegt (coding-agents-kit, herdr-peers, devcontainer-kit und deepworkplan-vim, jeweils mit verifiziertem `SHA256SUMS`-Digest), neben den festgelegten Versionen AI Diff Reviewer v3.3.14 und Dailybot agent-skill v3.23.17; 7.8.1 (2026-10-14) legte anschließend die Patch-Releases v1.0.1 von coding-agents-kit und devcontainer-kit fest.
 
-Installierte Skill-Version: **7.8.1**, stabil seit 7.0.0.
+Installierte Skill-Version: **7.9.0**, stabil seit 7.0.0.

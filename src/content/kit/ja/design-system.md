@@ -60,7 +60,7 @@ order: 4
 | レジストリキー | `design-system` in `.dwp/config.json` |
 | 記述子 | `addons/design-system/addon.json`（インターフェース 1） |
 | 対象ファイル | `AGENTS.md` からインデックスされた `docs/DESIGN.md` |
-| バージョン管理 | スキルパックと連動して固定およびバージョン管理（`v7.8.1`） |
+| バージョン管理 | スキルパックと連動して固定およびバージョン管理（`v7.9.0`） |
 
 ## 機能ごとのデザイン文書との関係
 

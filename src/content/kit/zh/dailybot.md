@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "可选 DWP 附加组件：向 Dailybot 团队报告计划生命周期，可选钩子强制层，以及完整的 Dailybot 代理技能 v3.23.17（聊天、表单、Plan 等）。"
+description: "可选 DWP 附加组件：向 Dailybot 团队报告计划生命周期，可选钩子强制层，以及完整的 Dailybot 代理技能 v3.23.20（聊天、表单、Plan 等）。"
 kind: addon
 lang: zh
 order: 2
@@ -23,7 +23,7 @@ order: 2
 
 ## 此附加组件接入的内容（刻意保持精简）
 
-DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连接到 dailybot **`report`** 子技能，并可选择提交 harness 钩子。其余一切——安装、同意、认证、书写风格——均**延后**至官方 [Dailybot 代理技能](https://github.com/DailybotHQ/agent-skill)（当前 **v3.23.17**）。
+DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连接到 dailybot **`report`** 子技能，并可选择提交 harness 钩子。其余一切——安装、同意、认证、书写风格——均**延后**至官方 [Dailybot 代理技能](https://github.com/DailybotHQ/agent-skill)（当前 **v3.23.20**）。
 
 ### 四个生命周期事件
 
@@ -86,9 +86,9 @@ DWP Dailybot 附加组件**不会**重新发明 Dailybot。它将计划执行连
 
 认证解析采用 **Bearer 优先**：会话令牌优先，并在遇到 `401`/`403` 时透明地从 Bearer→API 密钥重试，因此过期令牌绝不会阻塞有效密钥。若拒绝认证或认证不可用，则静默跳过报告——工作继续进行。
 
-## 配套的 Dailybot 技能——17 项能力（v3.23.17）
+## 配套的 Dailybot 技能——17 项能力（v3.23.20）
 
-安装 Dailybot 代理技能带来的远不止 DWP 附加组件所接入的内容。官方技能包（技能 **v3.23.17**，CLI 基线 **>= 3.9.0**，Plan **>= 3.25.0**，CLI 当前发布 **3.25.0**）暴露 **17 个协调子技能**：
+安装 Dailybot 代理技能带来的远不止 DWP 附加组件所接入的内容。官方技能包（技能 **v3.23.20**，CLI 基线 **>= 3.9.0**，Plan **>= 3.25.0**，CLI 当前发布 **3.25.0**）暴露 **17 个协调子技能**：
 
 | 子技能 | 功能 |
 |--------|------|

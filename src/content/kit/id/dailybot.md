@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Addon DWP opt-in: melaporkan siklus hidup rencana ke tim Dailybot, hook opsional, dan skill agen Dailybot lengkap v3.23.17 (chat, formulir, Plan, dan lainnya)."
+description: "Addon DWP opt-in: melaporkan siklus hidup rencana ke tim Dailybot, hook opsional, dan skill agen Dailybot lengkap v3.23.20 (chat, formulir, Plan, dan lainnya)."
 kind: addon
 lang: id
 order: 2
@@ -23,7 +23,7 @@ Metodologi Deep Work Plan inti memiliki **nol** ketergantungan pada Dailybot. Re
 
 ## Yang dihubungkan addon ini (sengaja sempit)
 
-Addon DWP Dailybot **tidak** menciptakan ulang Dailybot. Addon ini menghubungkan eksekusi rencana ke sub-skill dailybot **`report`** dan secara opsional meng-commit hook harness. Segala hal lain — instalasi, persetujuan, autentikasi, gaya penulisan — **ditunda** ke [skill agen Dailybot](https://github.com/DailybotHQ/agent-skill) resmi (saat ini **v3.23.17**).
+Addon DWP Dailybot **tidak** menciptakan ulang Dailybot. Addon ini menghubungkan eksekusi rencana ke sub-skill dailybot **`report`** dan secara opsional meng-commit hook harness. Segala hal lain — instalasi, persetujuan, autentikasi, gaya penulisan — **ditunda** ke [skill agen Dailybot](https://github.com/DailybotHQ/agent-skill) resmi (saat ini **v3.23.20**).
 
 ### Empat peristiwa siklus hidup
 
@@ -86,9 +86,9 @@ Addon ini **tidak pernah** meminta email, OTP, atau API key, dan **tidak pernah*
 
 Resolusi auth bersifat **Bearer-first**: token sesi diprioritaskan, dengan retry transparan Bearer→API-key pada `401`/`403` sehingga token basi tidak pernah memblokir key yang valid. Jika autentikasi ditolak atau tidak tersedia, pelaporan dilewati secara diam-diam — pekerjaan berlanjut.
 
-## Skill Dailybot yang dipasangkan — 17 kemampuan (v3.23.17)
+## Skill Dailybot yang dipasangkan — 17 kemampuan (v3.23.20)
 
-Menginstal skill agen Dailybot membawa jauh lebih banyak daripada yang dihubungkan addon DWP. Paket skill resmi (skill **v3.23.17**, baseline CLI **>= 3.9.0**, Plan **>= 3.25.0**, publish CLI saat ini **3.25.0**) mengekspos **17 sub-skill terkoordinasi**:
+Menginstal skill agen Dailybot membawa jauh lebih banyak daripada yang dihubungkan addon DWP. Paket skill resmi (skill **v3.23.20**, baseline CLI **>= 3.9.0**, Plan **>= 3.25.0**, publish CLI saat ini **3.25.0**) mengekspos **17 sub-skill terkoordinasi**:
 
 | Sub-skill | Fungsinya |
 |-----------|--------------|

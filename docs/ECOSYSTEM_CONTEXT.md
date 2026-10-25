@@ -20,7 +20,11 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 
 Versions are the release each surface pins today; the site may only claim a
 released tag (`tests/unit/lib/install-surface-pins.test.ts` guards the
-deepworkplan-skill pins).
+deepworkplan-skill pins). The pins last moved on 2026-10-25: pack `v7.9.0`,
+herdr-peers `v1.1.0` (native debates), coding-agents-kit `v1.1.0`,
+deepworkplan-vim `v1.0.1`, ai-diff-reviewer `v3.3.16` and agent-skill
+`v3.23.20`, with the pack, the reviewer and the Dailybot skill vendored at
+those tags; devcontainer-kit stays at `v1.0.1` until its next release.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|

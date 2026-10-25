@@ -10,11 +10,11 @@ order: 7
 
 [Herdr](https://herdr.dev) đặt các coding agent vào các pane, trên máy của bạn và trên các máy mà nó kết nối tới qua SSH. Addon này cho phép một Deep Work Plan sử dụng các agent đó như **peer** (tác tử ngang hàng): một kế hoạch có thể giao một tác vụ có giới hạn cho một agent trong pane khác, nhận đúng một phản hồi được ủy quyền và lưu lại bản ghi của lần trao đổi đó.
 
-Đây là một addon tùy chọn của **DWP v7** (pack `v7.8.1`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
+Đây là một addon tùy chọn của **DWP v7** (pack `v7.9.0`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
 
 ## Addon tích hợp những gì
 
-Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.0.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
+Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.1.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
 
 | Mục | Giá trị |
 |---|---|

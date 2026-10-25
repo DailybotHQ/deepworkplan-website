@@ -8,7 +8,7 @@ section: State
 
 # Stato del piano
 
-> **Ambito della versione:** questa pagina specifica il **livello di stato v5**, che i piani v5 mantengono per tutta la loro vita. I piani creati dal pack attuale (DWP 7.0.0, release `v7.8.1`) usano invece il [livello di registrazione](/spec/record-layer). In un piano v6 o v7 il contratto di risultato (`contract.json`) è l'autorità, il journal append-only (`journal.ndjson`) è la fonte di verità e `state.json` è uno **snapshot derivato** conforme a [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Viene rigenerato da `ledger.py project` e NON DEVE essere modificato a mano.
+> **Ambito della versione:** questa pagina specifica il **livello di stato v5**, che i piani v5 mantengono per tutta la loro vita. I piani creati dal pack attuale (DWP 7.0.0, release `v7.9.0`) usano invece il [livello di registrazione](/spec/record-layer). In un piano v6 o v7 il contratto di risultato (`contract.json`) è l'autorità, il journal append-only (`journal.ndjson`) è la fonte di verità e `state.json` è uno **snapshot derivato** conforme a [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Viene rigenerato da `ledger.py project` e NON DEVE essere modificato a mano.
 
 ## Quale livello di stato si applica
 

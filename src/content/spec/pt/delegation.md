@@ -8,7 +8,7 @@ section: Record layer
 
 # Delegação
 
-> **Escopo da versão:** Esta página reapresenta a geração de contrato v7 na release `v7.8.1`. Fontes canônicas: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) e o [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) do fluxo de execução. Onde esta página e esses arquivos divergirem, os arquivos prevalecem.
+> **Escopo da versão:** Esta página reapresenta a geração de contrato v7 na release `v7.9.0`. Fontes canônicas: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) e o [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) do fluxo de execução. Onde esta página e esses arquivos divergirem, os arquivos prevalecem.
 
 **Versão 7.0.0. Status: Estável.** A v7 é uma nova geração de contrato da [camada de registros](/spec/record-layer), não um novo ciclo de vida: tudo o que está nos documentos v6 de contrato, ciclo de vida, contexto e recursos se aplica, salvo indicação contrária nesta página. Não delegar é sempre correto. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 

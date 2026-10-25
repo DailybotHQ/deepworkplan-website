@@ -8,7 +8,7 @@ section: Record layer
 
 # Слой записей
 
-> **Область версии:** эта страница излагает нормативный слой записей v6, на котором строится текущий стандарт DWP 7.0.0. Канонические источники в релизе `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) и [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Если эта страница расходится с этими файлами, приоритет у файлов. Планы v5 сохраняют слой [состояния плана](/spec/plan-state) и никогда не мигрируются неявно.
+> **Область версии:** эта страница излагает нормативный слой записей v6, на котором строится текущий стандарт DWP 7.0.0. Канонические источники в релизе `v7.9.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) и [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Если эта страница расходится с этими файлами, приоритет у файлов. Планы v5 сохраняют слой [состояния плана](/spec/plan-state) и никогда не мигрируются неявно.
 
 **Версия 6.0.0, расширена в 7.0.0. Статус: стабильная.** Слой записей заменяет повествовательное завершение записями: контракт — это источник полномочий, журнал — память, запись выполняют вспомогательные утилиты (helpers), а каждый генерируемый файл — это проекция. Ключевые слова MUST, MUST NOT, SHOULD, SHOULD NOT и MAY следует трактовать так, как описано в RFC 2119.
 

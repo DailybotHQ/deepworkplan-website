@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "DWP addon แบบ opt-in: รายงาน lifecycle ของแผนไปยังทีม Dailybot การบังคับใช้ hook แบบเลือกได้ และ Dailybot agent skill v3.23.17 ครบชุด (แชท ฟอร์ม Plan และอื่นๆ)"
+description: "DWP addon แบบ opt-in: รายงาน lifecycle ของแผนไปยังทีม Dailybot การบังคับใช้ hook แบบเลือกได้ และ Dailybot agent skill v3.23.20 ครบชุด (แชท ฟอร์ม Plan และอื่นๆ)"
 kind: addon
 lang: th
 order: 2
@@ -23,7 +23,7 @@ order: 2
 
 ## สิ่งที่ addon นี้เชื่อม (ออกแบบให้แคบโดยเจตนา)
 
-DWP Dailybot addon **ไม่สร้าง** Dailybot ใหม่ มันเชื่อมการดำเนินแผนกับ sub-skill dailybot **`report`** และอาจ commit hook ของ harness ส่วนอื่น — การติดตั้ง ความยินยอม authentication สไตล์การเขียน — **มอบหมาย** ให้ [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) อย่างเป็นทางการ (ปัจจุบัน **v3.23.17**)
+DWP Dailybot addon **ไม่สร้าง** Dailybot ใหม่ มันเชื่อมการดำเนินแผนกับ sub-skill dailybot **`report`** และอาจ commit hook ของ harness ส่วนอื่น — การติดตั้ง ความยินยอม authentication สไตล์การเขียน — **มอบหมาย** ให้ [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) อย่างเป็นทางการ (ปัจจุบัน **v3.23.20**)
 
 ### สี่เหตุการณ์ lifecycle
 
@@ -86,9 +86,9 @@ Addon นี้ **ไม่** ถาม email OTP หรือ API keys แล�
 
 การแก้ปัญหา auth เป็นแบบ **Bearer-first**: session token มีความสำคัญก่อน พร้อม retry แบบโปร่งใสจาก Bearer→API-key เมื่อเจอ `401`/`403` เพื่อไม่ให้ token ที่หมดอายุบล็อกคีย์ที่ใช้ได้ หาก auth ถูกปฏิเสธหรือไม่พร้อม การรายงานจะข้ามเงียบๆ — งานดำเนินต่อ
 
-## Dailybot skill คู่กัน — 17 ความสามารถ (v3.23.17)
+## Dailybot skill คู่กัน — 17 ความสามารถ (v3.23.20)
 
-การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **v3.23.17** CLI baseline **>= 3.9.0** Plan **>= 3.25.0** publish CLI ปัจจุบัน **3.25.0**) เปิด **17 sub-skill ที่ประสานกัน**:
+การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **v3.23.20** CLI baseline **>= 3.9.0** Plan **>= 3.25.0** publish CLI ปัจจุบัน **3.25.0**) เปิด **17 sub-skill ที่ประสานกัน**:
 
 | Sub-skill | ทำอะไร |
 |-----------|--------------|

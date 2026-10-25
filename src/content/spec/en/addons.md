@@ -44,7 +44,7 @@ An opt-in connection to the developer's **Dailybot team** for agent progress vis
 
 - **Kit page:** [Dailybot](/kit/dailybot) — full capability reference
 - **What the DWP addon wires:** four plan-lifecycle reports (kickoff, significant task, blocked, completion) via the dailybot `report` sub-skill; optional deterministic hook enforcement (`dailybot hook`, CLI `>= 3.9.0`)
-- **Paired skill:** installing [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (pinned **v3.23.17**) exposes **17 capabilities** — chat on Slack/Teams/Discord/Google Chat, check-ins, forms authoring, ask AI, kudos, Plan boards and tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, and more. The DWP addon wires only **report**; other capabilities are invoked through the Dailybot skill directly
+- **Paired skill:** installing [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (pinned **v3.23.20**) exposes **17 capabilities** — chat on Slack/Teams/Discord/Google Chat, check-ins, forms authoring, ask AI, kudos, Plan boards and tasks, organization labels, per-repo API keys (`.dailybot/env.json`), email, and more. The DWP addon wires only **report**; other capabilities are invoked through the Dailybot skill directly
 - **Auth:** fully deferred to the Dailybot skill (`dailybot login` or `DAILYBOT_API_KEY`); this addon never stores credentials
 - **Vendor-neutral guardrail:** core DWP has **zero** Dailybot dependency; never auto-install for everyone
 - **When offered:** developer or team already uses Dailybot, or explicitly asks for team reporting
@@ -91,7 +91,7 @@ A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (p
 
 ### DeepWorkPlan Vim (seventh addon)
 
-A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v1.0.0`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).
+A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v1.0.1`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).
 
 - **Kit page:** [DeepWorkPlan Vim](/kit/vim)
 - **What it adds:** an optional, machine-level editor surface for agents and humans — a generated command index, a read-only plan browser, and a Markdown viewer; every claim is read from the product's pinned machine-readable surface

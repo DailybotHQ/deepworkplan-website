@@ -8,7 +8,7 @@ section: State
 
 # État du plan
 
-> **Portée de version :** cette page spécifie la **couche d'état v5**, que les plans v5 conservent toute leur vie. Les plans créés par le pack actuel (DWP 7.0.0, version `v7.8.1`) utilisent à la place la [couche d'enregistrement](/spec/record-layer). Dans un plan v6 ou v7, le contrat de résultat (`contract.json`) fait autorité, le journal en ajout seul (`journal.ndjson`) est la source de vérité, et `state.json` est un **instantané dérivé** conforme à [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Il est régénéré par `ledger.py project` et MUST NOT être édité à la main.
+> **Portée de version :** cette page spécifie la **couche d'état v5**, que les plans v5 conservent toute leur vie. Les plans créés par le pack actuel (DWP 7.0.0, version `v7.9.0`) utilisent à la place la [couche d'enregistrement](/spec/record-layer). Dans un plan v6 ou v7, le contrat de résultat (`contract.json`) fait autorité, le journal en ajout seul (`journal.ndjson`) est la source de vérité, et `state.json` est un **instantané dérivé** conforme à [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Il est régénéré par `ledger.py project` et MUST NOT être édité à la main.
 
 ## Quelle couche d'état s'applique
 

@@ -8,7 +8,7 @@ section: State
 
 # Status rencana
 
-> **Cakupan versi:** Halaman ini menetapkan **lapisan status v5**, yang dipertahankan rencana v5 sepanjang hidupnya. Rencana yang dibuat oleh paket saat ini (DWP 7.0.0, rilis `v7.8.1`) menggunakan [lapisan catatan](/spec/record-layer) sebagai gantinya. Dalam rencana v6 atau v7, kontrak hasil (`contract.json`) adalah otoritasnya, jurnal append-only (`journal.ndjson`) adalah sumber kebenarannya, dan `state.json` adalah **snapshot turunan** yang sesuai dengan [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Snapshot ini dibuat ulang oleh `ledger.py project` dan MUST NOT diedit secara manual.
+> **Cakupan versi:** Halaman ini menetapkan **lapisan status v5**, yang dipertahankan rencana v5 sepanjang hidupnya. Rencana yang dibuat oleh paket saat ini (DWP 7.0.0, rilis `v7.9.0`) menggunakan [lapisan catatan](/spec/record-layer) sebagai gantinya. Dalam rencana v6 atau v7, kontrak hasil (`contract.json`) adalah otoritasnya, jurnal append-only (`journal.ndjson`) adalah sumber kebenarannya, dan `state.json` adalah **snapshot turunan** yang sesuai dengan [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Snapshot ini dibuat ulang oleh `ledger.py project` dan MUST NOT diedit secara manual.
 
 ## Lapisan status mana yang berlaku
 

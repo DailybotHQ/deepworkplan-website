@@ -67,7 +67,7 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 - **[devcontainer](/hi/kit/devcontainer)** — एक टेम्पलेट से हर रिपॉज़िटरी का अपना dev container: ak के ज़रिए एजेंट, दोनों दिशाओं में Herdr, SSH कुंजियाँ केवल opt-in पर। पिन किया गया `devcontainer-kit@v1.0.1`।
 - **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v1.0.1`।
 
-ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं: `v7.8.1`
+ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v7 में आते हैं: `v7.9.0`
 
 ### उदाहरण
 

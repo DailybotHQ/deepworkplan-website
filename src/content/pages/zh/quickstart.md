@@ -38,7 +38,7 @@ lastUpdated: 2026-10-11
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- git checkout v7.8.1
+ git checkout v7.9.0
  # 下载该发布版本的校验和，并与下方的摘要比对：
  curl -fsSL -o SHA256SUMS \
  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
@@ -52,13 +52,13 @@ lastUpdated: 2026-10-11
 
   | 仓库（github.com/DailybotHQ） | 标签 | 其 `SHA256SUMS` 的 sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
-  | coding-agents-kit | `v1.0.1` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
-  | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
+  | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
+  | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
+  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
   | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
-  | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
-  | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
-  | agent-skill | `v3.23.17` | 未发布——skills CLI 会在 `skills-lock.json` 中记录内容哈希 |
+  | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
+  | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
+  | agent-skill | `v3.23.20` | 未发布——skills CLI 会在 `skills-lock.json` 中记录内容哈希 |
 - **报告问题。** 请通过 **GitHub 的漏洞报告功能**，在相关仓库私密报告安全问题 — `https://github.com/DailybotHQ/deepworkplan-skill/security` 或 `https://github.com/DailybotHQ/deepworkplan-website/security` — 而非公开提交 issue。另请参阅各仓库的 `SECURITY.md`、`https://deepworkplan.com/.well-known/security.txt` 以及信任页面 `https://deepworkplan.com/trust`。
 
 ## 0. 阅读方法论与规范
@@ -118,7 +118,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 当前技能包包含路由器和九个子技能：`create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author` 和 `upgrade`。
 
-已安装的技能版本：**7.8.1**。当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
+已安装的技能版本：**7.9.0**。当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；将 v5 计划迁移到 v6 需要明确请求并先行预览。
 
 该标准刻意保持比例性，并将这种比例性变成计划本身的属性，而不是开发者自律的
 结果。一份计划要么是 **Lite**——任务记录以内联形式存放在计划的 README
@@ -218,7 +218,7 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | 已安装的 herdr-peers 技能中的 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | 位于 https://deepworkplan.com/vim/install.sh 的经校验安装器（锁定 `v1.0.0`；下载后执行 `shasum -a 256 -c install.sh.sha256`，再运行） |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | 位于 https://deepworkplan.com/vim/install.sh 的经校验安装器（锁定 `v1.0.1`；下载后执行 `shasum -a 256 -c install.sh.sha256`，再运行） |
 
 运行每个下载内容之前，先用其发布版本的 `SHA256SUMS` 以及上文*锁定的发布版本*中的摘要进行校验。
 
@@ -233,9 +233,9 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 - **Design system** —— 可选的 `docs/DESIGN.md`，仅面向具备被检测到的界面表面的仓库
  （不会向纯库、无头服务或纯基础设施仓库提供）。三个配置档堆叠在一个文件中：visual-ui
  （检测到时受到强烈推荐；安装以明确接受为前提）、cli-output 与 conversational——后两者始终会被询问，绝不会被自动应用。
-- **agentkit** —— [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，锁定 `v1.0.1`）的机器级安装：一条命令驱动所有编码代理，每个配置档一个账户，用 `ak usage` 与 `ak pick` 选出余量最多的账户，并以无头方式运行 `ak run`，面向把有边界的 `parallel_safe` 任务交给其他编码代理的计划（每个 worktree 一个受托代理）。该工具包默认以自主模式启动代理，其退出选项（`--ask` 或 `AGENTKIT_PERMISSIONS=ask`）始终优先。
-- **Herdr** —— [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（锁定 `v1.0.0`，外加 Herdr 的官方技能）的机器级安装，面向在任意机器上向 Herdr 窗格中的对等代理请求一条获授权回复的计划，也面向关注其各条通道的主导者。
-- **DeepWorkPlan Vim** —— 终端编辑器（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)，锁定 `v1.0.0`），属于机器级安装，未经明确同意绝不覆盖现有的 Neovim 配置。
+- **agentkit** —— [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，锁定 `v1.1.0`）的机器级安装：一条命令驱动所有编码代理，每个配置档一个账户，用 `ak usage` 与 `ak pick` 选出余量最多的账户，并以无头方式运行 `ak run`，面向把有边界的 `parallel_safe` 任务交给其他编码代理的计划（每个 worktree 一个受托代理）。该工具包默认以自主模式启动代理，其退出选项（`--ask` 或 `AGENTKIT_PERMISSIONS=ask`）始终优先。
+- **Herdr** —— [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（锁定 `v1.1.0`，外加 Herdr 的官方技能）的机器级安装，面向在任意机器上向 Herdr 窗格中的对等代理请求一条获授权回复的计划，也面向关注其各条通道的主导者。
+- **DeepWorkPlan Vim** —— 终端编辑器（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)，锁定 `v1.0.1`），属于机器级安装，未经明确同意绝不覆盖现有的 Neovim 配置。
 - **AI Diff Reviewer** —— 必备的本地审查（并非可选项）：每份 Final Review 的安全审查环节都会在计划累计的变更集上运行 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必需的 `.review/extension.md`）。缺失的 skill 或扩展会成为一项被记录的 `local reviewer not installed` 发现——绝不静默跳过，也绝不意外引导安装：安装属于接入授权或一次显式的 addon 调用；调用错误软失败；已完成通道中的 **经验证的 `critical` 发现**在修复或被明确接受之前仍会阻止完成（v3，BC-07——未经验证的关键发现断言会以带注解的警告出现，而 `incomplete`/`timeout` 的审查不算干净的通过，BC-04）。**Flow B**（带 `pr-review.yml` 的 CI 门控）作为一项明确的可选项提供，绝不未经请求安装。没有任何 Deep Work Plan 流程需要商业服务、CI 提供商或机密。
 
 ### Devcontainer 路径（被采纳时）

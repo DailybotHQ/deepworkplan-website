@@ -99,7 +99,7 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.8.1
+  git checkout v7.9.0
   # Download the checksums for that release and check them against the digest below:
   curl -fsSL -o SHA256SUMS \
     https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
@@ -181,7 +181,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 ### Current standard and execution model
 
 The current repository-facing standard is **DWP 7.0.0**, implemented by the
-Deep Work Plan skill release **7.8.1** installed above. The current skill pack includes
+Deep Work Plan skill release **7.9.0** installed above. The current skill pack includes
 the router and nine sub-skills: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, and `upgrade`.
 
@@ -345,7 +345,7 @@ The table is a lookup, not a checklist: run a row only for the required local re
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` in the installed herdr-peers skill | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | the verified installer at https://deepworkplan.com/vim/install.sh (it pins `v1.0.0`; download, `shasum -a 256 -c install.sh.sha256`, then run) |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | the verified installer at https://deepworkplan.com/vim/install.sh (it pins `v1.0.1`; download, `shasum -a 256 -c install.sh.sha256`, then run) |
 
 Verify each download against its release's `SHA256SUMS` and the digest in *Pinned releases* above
 before running it.

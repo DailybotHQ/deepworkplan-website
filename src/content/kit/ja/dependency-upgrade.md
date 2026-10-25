@@ -43,7 +43,7 @@ order: 3
 | レジストリキー | `dependency-upgrade` in `.dwp/config.json` |
 | 記述子 | `addons/dependency-upgrade/addon.json`（インターフェース 1） |
 | コマンド | 承認時に `.agents/commands/` にインストールされる `/lib-upgrade` |
-| バージョン管理 | スキルパックと連動して固定およびバージョン管理（`v7.8.1`） |
+| バージョン管理 | スキルパックと連動して固定およびバージョン管理（`v7.9.0`） |
 
 ## 補足
 

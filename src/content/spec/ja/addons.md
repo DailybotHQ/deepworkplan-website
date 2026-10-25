@@ -44,7 +44,7 @@ section: Addons
 
 - **キットページ：** [Dailybot](/kit/dailybot)——完全な能力リファレンス
 - **DWP アドオンが接続するもの：** dailybot `report` サブスキル経由の 4 つのプランライフサイクルレポート（kickoff、significant task、blocked、completion）；オプションの決定論的フック強制（`dailybot hook`、CLI `>= 3.9.0`）
-- **ペアスキル：** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（**v3.23.17** に固定）のインストールで **17 の能力**——Slack/Teams/Discord/Google Chat チャット、チェックイン、フォーム作成、Ask AI、kudos、Plan のボードとタスク、組織ラベル、リポジトリごとの API キー（`.dailybot/env.json`）、メールなど。DWP アドオンは **report** のみ接続；他の能力は Dailybot スキルを直接呼び出す
+- **ペアスキル：** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（**v3.23.20** に固定）のインストールで **17 の能力**——Slack/Teams/Discord/Google Chat チャット、チェックイン、フォーム作成、Ask AI、kudos、Plan のボードとタスク、組織ラベル、リポジトリごとの API キー（`.dailybot/env.json`）、メールなど。DWP アドオンは **report** のみ接続；他の能力は Dailybot スキルを直接呼び出す
 - **認証：** Dailybot スキルに完全委譲（`dailybot login` または `DAILYBOT_API_KEY`）；このアドオンは認証情報を保存しない
 - **ベンダーニュートラルガードレール：** コア DWP は Dailybot 依存**ゼロ**；全員に自動インストールしない
 - **提供タイミング：** 開発者またはチームが既に Dailybot を利用、またはチームレポートを明示的に要求
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr（第 6 アドオン）
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.0.0` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.1.0` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
 
 - **キットページ：** [Herdr](/kit/herdr)
 - **追加内容：** 計画は範囲の限られたタスクを、別の [Herdr](https://herdr.dev) ペインにいるコーディングエージェント——同じマシン上、または Herdr が SSH で到達できるマシン上——に渡し、認可された返信を一つだけジャーナルに記録できる
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第 7 アドオン）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.0.0` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.0.1` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
 
 - **キットページ：** [DeepWorkPlan Vim](/kit/vim)
 - **追加内容：** エージェントと人間のための任意のマシンレベルのエディターサーフェス——生成されるコマンドインデックス、読み取り専用の計画ブラウザー、Markdown ビューア；すべての記述は製品の固定された機械可読サーフェスから読み取られる
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第 8 アドオン）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.0.1` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.1.0` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
 
 - **キットページ：** [Agentkit](/kit/agentkit)
 - **追加内容：** ターミナル型コーディングエージェント全体にわたる一つの `ak` コマンドサーフェスで、範囲の限られた計画タスクをヘッドレスで実行するために使う；`subagents`、`cancel_children`、`model_routing` の能力は、有効化され、検出され、互換性のあるインターフェース上にある場合にのみ、実行時に提供される

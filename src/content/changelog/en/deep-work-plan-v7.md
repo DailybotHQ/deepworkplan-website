@@ -40,4 +40,4 @@ Release 7.7.0 (2026-10-12) delivered swarm autonomy (Guide §17): the capacity l
 
 Release 7.8.0 (2026-10-13) established Ecosystem 1.0: every product the pack integrates reached its first stable release and is pinned at v1.0.0 under semantic versioning (coding-agents-kit, herdr-peers, devcontainer-kit and deepworkplan-vim, each with a verified `SHA256SUMS` digest), alongside the AI Diff Reviewer v3.3.14 and Dailybot agent-skill v3.23.17 pins; 7.8.1 (2026-10-14) then pinned the coding-agents-kit and devcontainer-kit v1.0.1 patch releases.
 
-Installed skill release: **7.8.1**, stable since 7.0.0.
+Installed skill release: **7.9.0**, stable since 7.0.0.

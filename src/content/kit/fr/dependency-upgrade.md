@@ -32,7 +32,7 @@ Mettre les dépendances d’un dépôt à jour avec un workflow par lots, valid�
 | Clé de registre | `dependency-upgrade` dans `.dwp/config.json` |
 | Descripteur | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Commande | `/lib-upgrade` installé dans `.agents/commands/` lorsqu'il est accepté |
-| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v7.8.1`) |
+| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v7.9.0`) |
 ## Notes
 
 Indépendant du gestionnaire de paquets — n’exécute jamais npm/ncu dans un dépôt non JS. Facultatif, jamais requis, et ne valide jamais automatiquement.

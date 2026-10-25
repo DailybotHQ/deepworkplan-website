@@ -40,4 +40,4 @@ A versão 7.7.0 (2026-10-12) entregou a autonomia de enxame (Guia §17): o loop 
 
 A versão 7.8.0 (2026-10-13) estabeleceu o Ecosystem 1.0: cada produto que o pacote integra atingiu sua primeira versão estável e está fixado em v1.0.0 sob versionamento semântico (coding-agents-kit, herdr-peers, devcontainer-kit e deepworkplan-vim, cada um com um resumo `SHA256SUMS` verificado), junto com as versões fixadas do AI Diff Reviewer v3.3.14 e do Dailybot agent-skill v3.23.17; depois, a 7.8.1 (2026-10-14) fixou as versões de patch v1.0.1 do coding-agents-kit e do devcontainer-kit.
 
-Versão da skill instalada: **7.8.1**, estável desde a 7.0.0.
+Versão da skill instalada: **7.9.0**, estável desde a 7.0.0.

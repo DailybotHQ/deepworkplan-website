@@ -68,7 +68,7 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Yedisi isteğe ba
 - **[devcontainer](/tr/kit/devcontainer)** — Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, SSH anahtarları yalnızca açıkça etkinleştirilirse. Sabitlenen sürüm `devcontainer-kit@v1.0.1`.
 - **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v1.0.1`.
 
-Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.8.1`
+Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.9.0`
 
 ### Örnekler
 

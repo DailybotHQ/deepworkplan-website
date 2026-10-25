@@ -70,7 +70,7 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bảy addon là 
 - **[devcontainer](/vi/kit/devcontainer)** — Dev container riêng của mỗi repository từ một template: agent qua ak, Herdr hai chiều, khóa SSH chỉ khi chủ động bật. Ghim tại `devcontainer-kit@v1.0.1`.
 - **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v1.0.1`.
 
-Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.8.1`
+Registry addon và các descriptor được phân phối trong Deep Work Plan v7: `v7.9.0`
 
 ### Ví dụ
 

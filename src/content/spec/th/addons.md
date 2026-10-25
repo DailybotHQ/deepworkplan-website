@@ -44,7 +44,7 @@ section: Addons
 
 - **หน้า kit:** [Dailybot](/kit/dailybot) — อ้างอิงความสามารถครบ
 - **สิ่งที่ DWP addon เชื่อม:** รายงาน lifecycle แผนสี่แบบ (kickoff, significant task, blocked, completion) ผ่าน sub-skill dailybot `report`; การบังคับใช้ hook แบบ deterministic แบบเลือกได้ (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill คู่กัน:** ติดตั้ง [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ปักหมุดที่ **v3.23.17**) เปิด **17 ความสามารถ** — แชทบน Slack/Teams/Discord/Google Chat check-in การเขียนฟอร์ม ask AI kudos บอร์ดและงาน Plan label ขององค์กร per-repo API keys (`.dailybot/env.json`) อีเมล และอื่นๆ DWP addon เชื่อมเฉพาะ **report** ความสามารถอื่นเรียกผ่าน skill Dailybot โดยตรง
+- **Skill คู่กัน:** ติดตั้ง [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (ปักหมุดที่ **v3.23.20**) เปิด **17 ความสามารถ** — แชทบน Slack/Teams/Discord/Google Chat check-in การเขียนฟอร์ม ask AI kudos บอร์ดและงาน Plan label ขององค์กร per-repo API keys (`.dailybot/env.json`) อีเมล และอื่นๆ DWP addon เชื่อมเฉพาะ **report** ความสามารถอื่นเรียกผ่าน skill Dailybot โดยตรง
 - **Auth:** มอบหมายทั้งหมดให้ skill Dailybot (`dailybot login` หรือ `DAILYBOT_API_KEY`) addon นี้ไม่เก็บ credentials
 - **Guardrail แบบ vendor-neutral:** DWP หลัก **ไม่พึ่งพา** Dailybot เลย อย่าติดตั้งอัตโนมัติให้ทุกคน
 - **เมื่อเสนอ:** นักพัฒนาหรือทีมใช้ Dailybot อยู่แล้ว หรือขอการรายงานทีมอย่างชัดเจน
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim (addon ที่เจ็ด)
 
-ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v1.0.0`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
+ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v1.0.1`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
 
 - **หน้า kit:** [DeepWorkPlan Vim](/kit/vim)
 - **สิ่งที่เพิ่ม:** พื้นผิวตัวแก้ไขระดับเครื่องแบบเลือกได้สำหรับ agent และมนุษย์ — ดัชนีคำสั่งที่สร้างขึ้น ตัวเรียกดูแผนแบบอ่านอย่างเดียว และตัวแสดง Markdown ทุกข้อกล่าวอ้างอ่านจากพื้นผิวที่เครื่องอ่านได้ซึ่งปักหมุดไว้ของผลิตภัณฑ์

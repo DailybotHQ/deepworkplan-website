@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Opcjonalny addon DWP: raportuj cykl życia planu zespołowi Dailybot, wymuszanie hooków i pełny skill agenta Dailybot v3.23.17 (czat, formularze, Plan i więcej)."
+description: "Opcjonalny addon DWP: raportuj cykl życia planu zespołowi Dailybot, wymuszanie hooków i pełny skill agenta Dailybot v3.23.20 (czat, formularze, Plan i więcej)."
 kind: addon
 lang: pl
 order: 2
@@ -23,7 +23,7 @@ Podstawowa metodyka Deep Work Plan ma **zero** zależności od Dailybot. Repozyt
 
 ## Co ten addon łączy (celowo wąsko)
 
-Addon DWP Dailybot **nie wymyśla** Dailybot na nowo. Łączy wykonanie planu z sub-skillem dailybot **`report`** i opcjonalnie commituje hooki harnessa. Reszta — instalacja, zgoda, uwierzytelnianie, styl pisania — jest **delegowana** do oficjalnego [skilla agenta Dailybot](https://github.com/DailybotHQ/agent-skill) (obecnie **v3.23.17**).
+Addon DWP Dailybot **nie wymyśla** Dailybot na nowo. Łączy wykonanie planu z sub-skillem dailybot **`report`** i opcjonalnie commituje hooki harnessa. Reszta — instalacja, zgoda, uwierzytelnianie, styl pisania — jest **delegowana** do oficjalnego [skilla agenta Dailybot](https://github.com/DailybotHQ/agent-skill) (obecnie **v3.23.20**).
 
 ### Cztery zdarzenia cyklu życia
 
@@ -86,9 +86,9 @@ Ten addon **nigdy** nie pyta o e-mail, OTP ani klucze API i **nigdy** nie przech
 
 Rozwiązywanie auth działa w trybie **Bearer-first**: token sesji ma priorytet, z przezroczystym ponowieniem Bearer→klucz API przy `401`/`403`, więc nieaktualny token nigdy nie blokuje ważnego klucza. Jeśli auth zostanie odrzucone lub jest niedostępne, raportowanie jest cicho pomijane — praca trwa dalej.
 
-## Sparowany skill Dailybot — 17 możliwości (v3.23.17)
+## Sparowany skill Dailybot — 17 możliwości (v3.23.20)
 
-Instalacja skilla agenta Dailybot daje znacznie więcej niż łączy addon DWP. Oficjalny pakiet skilli (skill **v3.23.17**, CLI baza **>= 3.9.0**, Plan **>= 3.25.0**, bieżąca publikacja CLI **3.25.0**) udostępnia **17 skoordynowanych sub-skilli**:
+Instalacja skilla agenta Dailybot daje znacznie więcej niż łączy addon DWP. Oficjalny pakiet skilli (skill **v3.23.20**, CLI baza **>= 3.9.0**, Plan **>= 3.25.0**, bieżąca publikacja CLI **3.25.0**) udostępnia **17 skoordynowanych sub-skilli**:
 
 | Sub-skill | Co robi |
 |-----------|--------------|

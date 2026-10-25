@@ -8,7 +8,7 @@ section: Record layer
 
 # 기록 레이어
 
-> **버전 범위:** 이 페이지는 현재 표준인 DWP 7.0.0이 기반으로 삼는 규범적 v6 기록 레이어를 다시 서술합니다. 릴리스 `v7.8.1` 기준 정식 출처: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md), [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다. v5 계획은 [계획 상태](/spec/plan-state) 레이어를 유지하며 암묵적으로 마이그레이션되는 일은 결코 없습니다.
+> **버전 범위:** 이 페이지는 현재 표준인 DWP 7.0.0이 기반으로 삼는 규범적 v6 기록 레이어를 다시 서술합니다. 릴리스 `v7.9.0` 기준 정식 출처: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md), [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다. v5 계획은 [계획 상태](/spec/plan-state) 레이어를 유지하며 암묵적으로 마이그레이션되는 일은 결코 없습니다.
 
 **버전 6.0.0, 7.0.0에서 확장. 상태: 안정(Stable).** 기록 레이어는 서술형 완료를 기록으로 대체합니다: 계약이 권한의 근거이고, 저널이 기억이며, 헬퍼가 기록을 작성하고, 생성된 모든 파일은 프로젝션입니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 

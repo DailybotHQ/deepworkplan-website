@@ -8,7 +8,7 @@ section: Record layer
 
 # संसाधन और क्षमताएँ
 
-> **संस्करण दायरा:** यह पृष्ठ वर्तमान मानक, DWP 7.0.0, के चार मानक दस्तावेज़ों को रिलीज़ `v7.8.1` पर पुनः प्रस्तुत करता है: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) और [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं।
+> **संस्करण दायरा:** यह पृष्ठ वर्तमान मानक, DWP 7.0.0, के चार मानक दस्तावेज़ों को रिलीज़ `v7.9.0` पर पुनः प्रस्तुत करता है: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/CONFIG.md) और [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_ABILITIES.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं।
 
 **स्थिति: स्थिर (संदर्भ और संसाधन 6.0.0 से; कॉन्फ़िगरेशन और क्षमताएँ 7.0.0 से)।** ये नियम v6-श्रृंखला योजनाओं पर लागू होते हैं ([रिकॉर्ड परत](/spec/record-layer)); v5 मानक अछूता है। कीवर्ड MUST, MUST NOT, SHOULD, SHOULD NOT और MAY की व्याख्या RFC 2119 में वर्णित अनुसार की जानी है।
 

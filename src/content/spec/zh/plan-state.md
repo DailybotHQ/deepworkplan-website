@@ -8,7 +8,7 @@ section: State
 
 # Plan state
 
-> **版本范围：** 本页规定 **v5 状态层**，v5 计划在其整个生命周期内都保留它。当前技能包（DWP 7.0.0，发布版本 `v7.8.1`）创建的计划改用[记录层](/spec/record-layer)。在 v6 或 v7 计划中，结果契约（`contract.json`）是权威，仅追加日志（`journal.ndjson`）是事实来源，而 `state.json` 是一份符合 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 的**派生快照**。它由 `ledger.py project` 重新生成，MUST NOT 手动编辑。
+> **版本范围：** 本页规定 **v5 状态层**，v5 计划在其整个生命周期内都保留它。当前技能包（DWP 7.0.0，发布版本 `v7.9.0`）创建的计划改用[记录层](/spec/record-layer)。在 v6 或 v7 计划中，结果契约（`contract.json`）是权威，仅追加日志（`journal.ndjson`）是事实来源，而 `state.json` 是一份符合 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 的**派生快照**。它由 `ledger.py project` 重新生成，MUST NOT 手动编辑。
 
 ## 适用哪一个状态层
 

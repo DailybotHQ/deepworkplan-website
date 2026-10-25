@@ -70,7 +70,7 @@ skill ของ Deep Work Plan คือตัวกำหนดเส้นท�
 - **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และคัดลอก SSH key เฉพาะเมื่อเลือกเปิดใช้ ปักหมุดที่ `devcontainer-kit@v1.0.1`
 - **[vim](/th/kit/vim)** — ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown ปักหมุดที่ `deepworkplan-vim@v1.0.1`
 
-รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7: `v7.8.1`
+รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7: `v7.9.0`
 
 ### ตัวอย่าง
 

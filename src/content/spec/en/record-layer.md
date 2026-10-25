@@ -8,7 +8,7 @@ section: Record layer
 
 # Record layer
 
-> **Version scope:** This page restates the normative v6 record layer that the current standard, DWP 7.0.0, builds on. Canonical sources at release `v7.8.1`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) and [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Where this page and those files differ, the files win. v5 plans keep the [plan state](/spec/plan-state) layer and are never migrated implicitly.
+> **Version scope:** This page restates the normative v6 record layer that the current standard, DWP 7.0.0, builds on. Canonical sources at release `v7.9.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_CONTRACT.md) and [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Where this page and those files differ, the files win. v5 plans keep the [plan state](/spec/plan-state) layer and are never migrated implicitly.
 
 **Version 6.0.0, extended in 7.0.0. Status: Stable.** The record layer replaces narrative completion with records: the contract is the authority, the journal is the memory, helpers do the writing, and every generated file is a projection. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 

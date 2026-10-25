@@ -44,7 +44,7 @@ section: Addons
 
 - **套件页：** [Dailybot](/kit/dailybot)——完整能力参考
 - **DWP 附加组件接入的内容：** 通过 dailybot `report` 子技能的四个计划生命周期报告（kickoff、significant task、blocked、completion）；可选确定性钩子强制层（`dailybot hook`，CLI `>= 3.9.0`）
-- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（固定为 **v3.23.17**）暴露 **17 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、Plan 看板与任务、组织标签、每仓库 API 密钥（`.dailybot/env.json`）、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
+- **配套技能：** 安装 [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill)（固定为 **v3.23.20**）暴露 **17 项能力**——在 Slack/Teams/Discord/Google Chat 上聊天、签到、表单编写、Ask AI、kudos、Plan 看板与任务、组织标签、每仓库 API 密钥（`.dailybot/env.json`）、电子邮件等。DWP 附加组件仅接入 **report**；其他能力通过 Dailybot 技能直接调用
 - **认证：** 完全延后至 Dailybot 技能（`dailybot login` 或 `DAILYBOT_API_KEY`）；此附加组件从不存储凭据
 - **供应商中立护栏：** 核心 DWP 对 Dailybot **零**依赖；切勿为所有人自动安装
 - **何时提供：** 开发者或团队已在使用 Dailybot，或明确要求团队报告
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr（第六个附加组件）
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（固定为 `v1.0.0`，协议 `1`）的轻量集成器，是 v7 计划的**交互式**委托传输。
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（固定为 `v1.1.0`，协议 `1`）的轻量集成器，是 v7 计划的**交互式**委托传输。
 
 - **套件页：** [Herdr](/kit/herdr)
 - **新增内容：** 计划可以把一项有界任务交给另一个 [Herdr](https://herdr.dev) 窗格中的编码代理——位于同一台机器，或 Herdr 通过 SSH 可达的机器——并在日志中记录其唯一一次获授权的回复
@@ -91,7 +91,7 @@ section: Addons
 
 ### DeepWorkPlan Vim（第七个附加组件）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v1.0.0`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v1.0.1`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。
 
 - **套件页：** [DeepWorkPlan Vim](/kit/vim)
 - **新增内容：** 一个可选的、机器级的编辑器层面，供代理与人类使用——生成的命令索引、只读计划浏览器和 Markdown 查看器；每一项说明都读取自该产品固定版本的机器可读层面
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第八个附加组件）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v1.0.1`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`，固定为 `v1.1.0`，接口 `1`）的轻量集成器，是 v7 计划的**无头**委托传输。
 
 - **套件页：** [Agentkit](/kit/agentkit)
 - **新增内容：** 一个覆盖各终端编码代理的 `ak` 命令层面，用于以无头方式运行有界的计划任务；仅在运行时、且已启用、已检测到并处于兼容接口时，才提供 `subagents`、`cancel_children` 与 `model_routing` 能力

@@ -60,7 +60,7 @@ Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya ta
 | Kayıt anahtarı | `.dwp/config.json` içinde `design-system` |
 | Tanımlayıcı | `addons/design-system/addon.json` (arayüz 1) |
 | Hedef dosya | `AGENTS.md` üzerinden dizine eklenen `docs/DESIGN.md` |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.8.1`) |
+| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.9.0`) |
 
 ## Özellik bazlı tasarım belgeleriyle ilişkisi
 

@@ -78,7 +78,7 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.8.1
+  git checkout v7.9.0
   # Завантажте контрольні суми цього релізу й перевірте їх за дайджестом нижче:
   curl -fsSL -o SHA256SUMS \
     https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
@@ -94,13 +94,13 @@ lastUpdated: 2026-10-11
 
   | Репозиторій (github.com/DailybotHQ) | Тег | sha256 його `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
-  | coding-agents-kit | `v1.0.1` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
-  | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
+  | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
+  | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
+  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
   | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
-  | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
-  | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
-  | agent-skill | `v3.23.17` | не публікується — CLI skills записує хеш вмісту в `skills-lock.json` |
+  | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
+  | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
+  | agent-skill | `v3.23.20` | не публікується — CLI skills записує хеш вмісту в `skills-lock.json` |
 - **Повідомте про проблему.** Питання безпеки повідомляйте **приватно через звітування про вразливості GitHub** у відповідному репозиторії — `https://github.com/DailybotHQ/deepworkplan-skill/security` або `https://github.com/DailybotHQ/deepworkplan-website/security` — не як публічне питання. Дивіться також `SECURITY.md` кожного репозиторію, `https://deepworkplan.com/.well-known/security.txt` і сторінку довіри `https://deepworkplan.com/trust`.
 
 ## 2. Встановіть скіл Deep Work Plan
@@ -134,7 +134,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 роутер і дев'ять суб-скілів: `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` та `upgrade`.
 
-Встановлений реліз скіла: **7.8.1**. Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; перенесення плану v5 на v6 потребує явної міграції з попереднім переглядом.
+Встановлений реліз скіла: **7.9.0**. Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; перенесення плану v5 на v6 потребує явної міграції з попереднім переглядом.
 
 Стандарт навмисно пропорційний, і ця пропорційність є властивістю плану, а не
 дисципліни розробника. План буває або **Lite** — записи завдань інлайн у README
@@ -235,7 +235,7 @@ CI-поверхня, ніколи не обов'язкова для базово
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` у встановленому скілі herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | перевірений інсталятор за адресою https://deepworkplan.com/vim/install.sh (закріплює `v1.0.0`; завантажте, `shasum -a 256 -c install.sh.sha256`, потім запустіть) |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | перевірений інсталятор за адресою https://deepworkplan.com/vim/install.sh (закріплює `v1.0.1`; завантажте, `shasum -a 256 -c install.sh.sha256`, потім запустіть) |
 
 Перш ніж запускати будь-яке завантаження, перевірте його за `SHA256SUMS` його релізу та дайджестом у *Закріплених релізах*
 вище.
@@ -258,7 +258,7 @@ design system, agentkit, Herdr, DeepWorkPlan Vim) і запропонуйте л
   останні два завжди запитуються, ніколи не застосовуються автоматично.
 - **agentkit** — встановлення на рівні машини [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено `v1.1.0`): одна команда для кожного кодового агента, обліковий запис на профіль, `ak usage` і `ak pick` для вибору облікового запису з найбільшим запасом і headless `ak run` для планів, що передають обмежені завдання `parallel_safe` іншим кодовим агентам (один делегат на worktree). Kit за замовчуванням запускає агентів в автономії, а його відмова (`--ask` або `AGENTKIT_PERMISSIONS=ask`) завжди перемагає.
 - **Herdr** — встановлення на рівні машини [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закріплено `v1.1.0`, плюс офіційний скіл Herdr) для планів, що просять peer-агента в панелі Herdr, на будь-якій машині, про одну авторизовану відповідь, і для провідного агента, який стежить за своїми лініями.
-- **DeepWorkPlan Vim** — термінальний редактор ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), закріплено на `v1.0.0`), встановлення на рівні машини, яке ніколи не перезаписує наявну конфігурацію Neovim без явної згоди.
+- **DeepWorkPlan Vim** — термінальний редактор ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), закріплено на `v1.0.1`), встановлення на рівні машини, яке ніколи не перезаписує наявну конфігурацію Neovim без явної згоди.
 - **AI Diff Reviewer** — обовʼязковий локальний огляд (не опційний): перевірка безпеки кожного Final Review проганяє [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + обовʼязковий
   `.review/extension.md`) над накопиченим набором змін плану. Відсутній скіл чи розширення — це зафіксована знахідка
   `local reviewer not installed`, — ніколи не мовчазний пропуск і

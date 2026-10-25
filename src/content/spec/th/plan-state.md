@@ -8,7 +8,7 @@ section: State
 
 # สถานะแผน
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 7.0.0 รุ่น `v7.8.1`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 หรือ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น **snapshot ที่ได้รับมา** ซึ่งสอดคล้องกับ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) มันถูกสร้างใหม่โดย `ledger.py project` และ MUST NOT ถูกแก้ไขด้วยมือ
+> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 7.0.0 รุ่น `v7.9.0`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 หรือ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น **snapshot ที่ได้รับมา** ซึ่งสอดคล้องกับ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) มันถูกสร้างใหม่โดย `ledger.py project` และ MUST NOT ถูกแก้ไขด้วยมือ
 
 ## ชั้นสถานะใดที่ใช้บังคับ
 

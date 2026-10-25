@@ -40,4 +40,4 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 
 7.8.0 sürümü (2026-10-13) Ecosystem 1.0'ı tesis etti: paketin entegre ettiği her ürün ilk kararlı sürümüne ulaştı ve anlamsal sürümleme kapsamında v1.0.0'a sabitlendi (coding-agents-kit, herdr-peers, devcontainer-kit ve deepworkplan-vim; her biri doğrulanmış bir `SHA256SUMS` özetiyle), AI Diff Reviewer v3.3.14 ve Dailybot agent-skill v3.23.17 sabitlemeleriyle birlikte; ardından 7.8.1 (2026-10-14) coding-agents-kit ve devcontainer-kit'in v1.0.1 yama sürümlerini sabitledi.
 
-Yüklü skill sürümü: **7.8.1**, 7.0.0'dan beri kararlı.
+Yüklü skill sürümü: **7.9.0**, 7.0.0'dan beri kararlı.

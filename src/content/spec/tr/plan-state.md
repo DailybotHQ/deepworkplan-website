@@ -8,7 +8,7 @@ section: State
 
 # Plan durumu
 
-> **Sürüm kapsamı:** Bu sayfa, v5 planlarının tüm ömürleri boyunca koruduğu **v5 durum katmanını** belirtir. Güncel paketin (DWP 7.0.0, `v7.8.1` sürümü) oluşturduğu planlar bunun yerine [kayıt katmanını](/spec/record-layer) kullanır. Bir v6 veya v7 planında sonuç sözleşmesi (`contract.json`) otoritedir, yalnızca eklemeli günlük (`journal.ndjson`) doğruluk kaynağıdır ve `state.json`, [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) şemasına uyan **türetilmiş bir anlık görüntüdür**. `ledger.py project` tarafından yeniden üretilir ve elle düzenlenMEMELİDİR.
+> **Sürüm kapsamı:** Bu sayfa, v5 planlarının tüm ömürleri boyunca koruduğu **v5 durum katmanını** belirtir. Güncel paketin (DWP 7.0.0, `v7.9.0` sürümü) oluşturduğu planlar bunun yerine [kayıt katmanını](/spec/record-layer) kullanır. Bir v6 veya v7 planında sonuç sözleşmesi (`contract.json`) otoritedir, yalnızca eklemeli günlük (`journal.ndjson`) doğruluk kaynağıdır ve `state.json`, [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) şemasına uyan **türetilmiş bir anlık görüntüdür**. `ledger.py project` tarafından yeniden üretilir ve elle düzenlenMEMELİDİR.
 
 ## Hangi durum katmanı geçerlidir
 

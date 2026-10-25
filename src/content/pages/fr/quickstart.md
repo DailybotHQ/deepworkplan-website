@@ -82,7 +82,7 @@ qu'il ait été contrôlé.
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- git checkout v7.8.1
+ git checkout v7.9.0
  # Téléchargez les checksums de cette version et comparez-les au digest ci-dessous :
  curl -fsSL -o SHA256SUMS \
  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
@@ -99,13 +99,13 @@ qu'il ait été contrôlé.
 
   | Dépôt (github.com/DailybotHQ) | Tag | sha256 de son `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
-  | coding-agents-kit | `v1.0.1` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
-  | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
+  | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
+  | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
+  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
   | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
-  | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
-  | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
-  | agent-skill | `v3.23.17` | aucun publié — la CLI skills enregistre un hash de contenu dans `skills-lock.json` |
+  | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
+  | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
+  | agent-skill | `v3.23.20` | aucun publié — la CLI skills enregistre un hash de contenu dans `skills-lock.json` |
 - **Signalez un problème.** Signalez les problèmes de sécurité **en privé via le système de signalement de vulnérabilités de GitHub** sur le dépôt concerné — `https://github.com/DailybotHQ/deepworkplan-skill/security` ou `https://github.com/DailybotHQ/deepworkplan-website/security` — et non comme un ticket public. Consultez également le `SECURITY.md` de chaque dépôt, `https://deepworkplan.com/.well-known/security.txt` et la page de confiance `https://deepworkplan.com/trust`.
 
 ## 2. Installer le skill Deep Work Plan
@@ -139,7 +139,7 @@ version du skill Deep Work Plan installée ci-dessus. Le pack de skill actuel
 inclut le routeur et neuf sous-skills : `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` et `upgrade`.
 
-Version installée du skill : **7.8.1**. Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; le passage d’un plan v5 à v6 exige une migration explicite avec aperçu.
+Version installée du skill : **7.9.0**. Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; le passage d’un plan v5 à v6 exige une migration explicite avec aperçu.
 
 La norme est délibérément proportionnelle, et elle fait de cette
 proportionnalité une propriété du plan plutôt que de la discipline du
@@ -246,7 +246,7 @@ Le tableau est une référence, pas une liste de contrôle : n’exécutez une l
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` dans la skill herdr-peers installée | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | l’installateur vérifié à https://deepworkplan.com/vim/install.sh (il épingle `v1.0.0` ; téléchargez-le, `shasum -a 256 -c install.sh.sha256`, puis exécutez-le) |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | l’installateur vérifié à https://deepworkplan.com/vim/install.sh (il épingle `v1.0.1` ; téléchargez-le, `shasum -a 256 -c install.sh.sha256`, puis exécutez-le) |
 
 Vérifiez chaque téléchargement par rapport au `SHA256SUMS` de sa version et au digest de *Versions épinglées*
 ci-dessus avant de l’exécuter.
@@ -270,7 +270,7 @@ dépôt est pleinement conforme avec **zéro** addon facultatif — ne les insta
  appliqués automatiquement.
 - **agentkit** — une installation au niveau de la machine de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, épinglé à `v1.1.0`) : une commande pour chaque agent de code, un compte par profil, `ak usage` et `ak pick` pour choisir le compte qui a le plus de marge, et `ak run` headless pour les plans qui confient des tâches `parallel_safe` délimitées à d’autres agents de code (un délégué par worktree). Le kit lance les agents en autonomie par défaut et son retrait (`--ask` ou `AGENTKIT_PERMISSIONS=ask`) l’emporte toujours.
 - **Herdr** — une installation au niveau de la machine de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v1.1.0`, plus la skill officielle de Herdr) pour les plans qui demandent à un agent pair, dans un panneau Herdr, sur toute machine, une seule réponse autorisée, et pour un coordinateur qui surveille ses couloirs.
-- **DeepWorkPlan Vim** — l’éditeur de terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), épinglé à `v1.0.0`), une installation au niveau de la machine qui n’écrase jamais une configuration Neovim existante sans consentement explicite.
+- **DeepWorkPlan Vim** — l’éditeur de terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), épinglé à `v1.0.1`), une installation au niveau de la machine qui n’écrase jamais une configuration Neovim existante sans consentement explicite.
 - **AI Diff Reviewer** — la revue locale requise (pas une option) : la passe de sécurité de chaque Final Review
  exécute [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md`
  requis) sur l'ensemble accumulé des changements du plan. Une skill ou une extension manquante est un résultat

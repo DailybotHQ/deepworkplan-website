@@ -32,7 +32,7 @@ Pon al día las dependencias de un repositorio con un flujo por lotes, validado 
 | Clave de registro | `dependency-upgrade` en `.dwp/config.json` |
 | Descriptor | `addons/dependency-upgrade/addon.json` (interfaz 1) |
 | Comando | `/lib-upgrade` instalado en `.agents/commands/` si se acepta |
-| Control de versiones | Fijado y versionado con el paquete de skills (`v7.8.1`) |
+| Control de versiones | Fijado y versionado con el paquete de skills (`v7.9.0`) |
 ## Notas
 
 Agnóstico del gestor de paquetes — nunca ejecuta npm/ncu en un repo no-JS. Opcional, nunca obligatorio y nunca hace commit automático.

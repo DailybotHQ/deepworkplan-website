@@ -28,7 +28,7 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.8.1
+  git checkout v7.9.0
   # そのリリースのチェックサムをダウンロードし、下のダイジェストと照合する:
   curl -fsSL -o SHA256SUMS \
     https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
@@ -43,13 +43,13 @@ lastUpdated: 2026-10-11
 
   | リポジトリ（github.com/DailybotHQ） | タグ | その `SHA256SUMS` の sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
-  | coding-agents-kit | `v1.0.1` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
-  | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
+  | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
+  | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
+  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
   | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
-  | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
-  | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
-  | agent-skill | `v3.23.17` | 公開なし — skills CLI が `skills-lock.json` にコンテンツハッシュを記録します |
+  | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
+  | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
+  | agent-skill | `v3.23.20` | 公開なし — skills CLI が `skills-lock.json` にコンテンツハッシュを記録します |
 - **問題を報告する。** セキュリティの問題は、該当リポジトリで **GitHub の脆弱性報告**を通じてプライベートに報告してください — `https://github.com/DailybotHQ/deepworkplan-skill/security` または `https://github.com/DailybotHQ/deepworkplan-website/security` — 公開 Issue としてではなく。各リポジトリの `SECURITY.md`、`https://deepworkplan.com/.well-known/security.txt`、そしてトラストページ `https://deepworkplan.com/trust` も参照してください。
 
 ## 0. 方法論と仕様を読む
@@ -102,7 +102,7 @@ Work Plan スキルのリリースによって実装されています。現在�
 ルーターと九つのサブスキル — `create`、`execute`、`refine`、`resume`、
 `status`、`verify`、`onboard`、`author`、`upgrade` — が含まれます。
 
-インストール済みスキルのリリースは **7.8.1** です。現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
+インストール済みスキルのリリースは **7.9.0** です。現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、v5 計画の v6 への移行には明示的な依頼と事前確認が必要です。
 
 この標準は意図的に比例的であり、その比例性を開発者の規律ではなく計画の性質
 にしています。計画は **Lite**（小さく限定された作業向けに、計画の README
@@ -195,7 +195,7 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | インストール済みの herdr-peers スキル内の `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh の検証済みインストーラー（`v1.0.0` に固定。ダウンロードし、`shasum -a 256 -c install.sh.sha256` を実行してから起動） |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh の検証済みインストーラー（`v1.0.1` に固定。ダウンロードし、`shasum -a 256 -c install.sh.sha256` を実行してから起動） |
 
 各ダウンロードは、実行する前にそのリリースの `SHA256SUMS` と、上の*固定されたリリース*にあるダイジェストで検証してください。
 
@@ -207,9 +207,9 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 - **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.14）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。受け入れられると、`/lib-upgrade` コマンドをインストールします。
 - **Design system** — 検出されたインターフェイス面を持つリポジトリのみを対象とした、オプトインの `docs/DESIGN.md`（純粋なライブラリ、ヘッドレスサービス、インフラ専用リポジトリには提案されません）。三つのプロファイルが一つのファイルに重ねられます：visual-ui（検出時に強く推奨；インストールは受け入れでゲート）、cli-output、conversational — 後者二つは常に尋ねられ、自動適用されることはありません。
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.0.1` に固定）のマシンレベルのインストール。すべてのコーディングエージェントを一つのコマンドで扱い、プロファイルごとにアカウントを持ち、`ak usage` と `ak pick` で余裕の最も大きいアカウントを選び、範囲の限られた `parallel_safe` タスクを他のコーディングエージェントに渡す計画のためにヘッドレスの `ak run` を提供します（worktree ごとに一つの委任先）。キットは既定でエージェントを自律モードで起動し、そのオプトアウト（`--ask` または `AGENTKIT_PERMISSIONS=ask`）が常に優先します。
-- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.0.0` に固定、Herdr の公式スキルも併せて）のマシンレベルのインストール。任意のマシン上の Herdr ペインにいるピアエージェントに、認可された返信を一つ求める計画のため、そして自分のレーンを見守るリードのためのものです。
-- **DeepWorkPlan Vim** — ターミナルエディタ（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)、`v1.0.0` に固定）。マシンレベルのインストールであり、明示的な同意なしに既存の Neovim 設定を上書きすることは決してありません。
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.1.0` に固定）のマシンレベルのインストール。すべてのコーディングエージェントを一つのコマンドで扱い、プロファイルごとにアカウントを持ち、`ak usage` と `ak pick` で余裕の最も大きいアカウントを選び、範囲の限られた `parallel_safe` タスクを他のコーディングエージェントに渡す計画のためにヘッドレスの `ak run` を提供します（worktree ごとに一つの委任先）。キットは既定でエージェントを自律モードで起動し、そのオプトアウト（`--ask` または `AGENTKIT_PERMISSIONS=ask`）が常に優先します。
+- **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.1.0` に固定、Herdr の公式スキルも併せて）のマシンレベルのインストール。任意のマシン上の Herdr ペインにいるピアエージェントに、認可された返信を一つ求める計画のため、そして自分のレーンを見守るリードのためのものです。
+- **DeepWorkPlan Vim** — ターミナルエディタ（[deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim)、`v1.0.1` に固定）。マシンレベルのインストールであり、明示的な同意なしに既存の Neovim 設定を上書きすることは決してありません。
 - **AI Diff Reviewer** — 必須のローカルレビューです（オプトインではありません）。すべての Final Review のセキュリティパスが、計画の累積した変更セットに対して [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**（skill + 必須の `.review/extension.md`）を実行します。スキルまたは拡張機能の欠落は `local reviewer not installed` の発見として記録されます。黙ってスキップされることは決してなく、決してサプライズブートストラップでもありません：インストールはオンボーディングの同意または明示的なアドオン呼び出しに属します。呼び出しのエラーはソフト失敗となり、完了したパスの **検証済み `critical` 結果**は引き続き完了をブロックします（v3、BC-07 —— 未検証のクリティカル主張は注釈付き警告として現れ、`incomplete`/`timeout` のレビューはクリーンなパスではない、BC-04）。**Flow B**（`pr-review.yml` を使った CI ゲート）は明示的なオプトインとして提案され、要求なしにインストールされることは決してありません。Deep Work Plan のどのフローも、商用サービス、CI プロバイダー、シークレットを必要としません。
 
 ### devcontainer の手順（受け入れられた場合）

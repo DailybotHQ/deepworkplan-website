@@ -8,7 +8,7 @@ section: Record layer
 
 # Delegowanie
 
-> **Zakres wersji:** Ta strona streszcza generację kontraktu v7 w wydaniu `v7.8.1`. Źródła kanoniczne: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) oraz plik [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) przepływu execute. Tam, gdzie ta strona i te pliki się różnią, rozstrzygają pliki.
+> **Zakres wersji:** Ta strona streszcza generację kontraktu v7 w wydaniu `v7.9.0`. Źródła kanoniczne: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md) oraz plik [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/execute/delegation.md) przepływu execute. Tam, gdzie ta strona i te pliki się różnią, rozstrzygają pliki.
 
 **Wersja 7.0.0. Status: stabilna.** v7 to nowa generacja kontraktu [warstwy rekordów](/spec/record-layer), a nie nowy cykl życia: wszystko, co zawierają dokumenty v6 o kontrakcie, cyklu życia, kontekście i zasobach, obowiązuje, chyba że ta strona stanowi inaczej. Rezygnacja z delegowania jest zawsze poprawna. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 

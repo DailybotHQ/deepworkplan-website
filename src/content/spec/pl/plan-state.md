@@ -8,7 +8,7 @@ section: State
 
 # Stan planu
 
-> **Zakres wersji:** Ta strona specyfikuje **warstwę stanu v5**, którą plany v5 zachowują przez cały cykl życia. Plany tworzone przez aktualny pakiet (DWP 7.0.0, wydanie `v7.8.1`) używają zamiast niej [warstwy rekordów](/spec/record-layer). W planie v6 lub v7 autorytetem jest kontrakt wyników (`contract.json`), źródłem prawdy jest dziennik tylko do dopisywania (`journal.ndjson`), a `state.json` jest **migawką pochodną** zgodną z [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Jest regenerowany przez `ledger.py project` i NIE MOŻE być edytowany ręcznie.
+> **Zakres wersji:** Ta strona specyfikuje **warstwę stanu v5**, którą plany v5 zachowują przez cały cykl życia. Plany tworzone przez aktualny pakiet (DWP 7.0.0, wydanie `v7.9.0`) używają zamiast niej [warstwy rekordów](/spec/record-layer). W planie v6 lub v7 autorytetem jest kontrakt wyników (`contract.json`), źródłem prawdy jest dziennik tylko do dopisywania (`journal.ndjson`), a `state.json` jest **migawką pochodną** zgodną z [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Jest regenerowany przez `ledger.py project` i NIE MOŻE być edytowany ręcznie.
 
 ## Która warstwa stanu ma zastosowanie
 

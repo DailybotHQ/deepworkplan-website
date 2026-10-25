@@ -32,7 +32,7 @@ order: 3
 | 레지스트리 키 | `.dwp/config.json`의 `dependency-upgrade` |
 | 기술자 | `addons/dependency-upgrade/addon.json` (인터페이스 1) |
 | 명령 | 수락 시 `.agents/commands/`에 설치되는 `/lib-upgrade` |
-| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v7.8.1`) |
+| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v7.9.0`) |
 ## 참고
 
 패키지 관리자 비종속 — JS가 아닌 리포지토리에서 npm/ncu를 결코 실행하지 않습니다. 선택형이며, 결코 필수가 아니고, 자동 커밋을 하지 않습니다.

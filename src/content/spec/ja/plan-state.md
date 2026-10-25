@@ -8,7 +8,7 @@ section: State
 
 # 計画の状態
 
-> **バージョンの適用範囲:** このページは **v5 の状態レイヤー** を規定します。v5 計画はその全期間にわたってこのレイヤーを維持します。現在のパック（DWP 7.0.0、リリース `v7.8.1`）が作成する計画は、代わりに [レコードレイヤー](/spec/record-layer) を使用します。v6 または v7 の計画では、アウトカム契約（`contract.json`）が権威であり、追記専用ジャーナル（`journal.ndjson`）が信頼できる情報源であり、`state.json` は [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) に準拠する **導出されたスナップショット** です。これは `ledger.py project` によって再生成され、手で編集してはなりません（MUST NOT）。
+> **バージョンの適用範囲:** このページは **v5 の状態レイヤー** を規定します。v5 計画はその全期間にわたってこのレイヤーを維持します。現在のパック（DWP 7.0.0、リリース `v7.9.0`）が作成する計画は、代わりに [レコードレイヤー](/spec/record-layer) を使用します。v6 または v7 の計画では、アウトカム契約（`contract.json`）が権威であり、追記専用ジャーナル（`journal.ndjson`）が信頼できる情報源であり、`state.json` は [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) に準拠する **導出されたスナップショット** です。これは `ledger.py project` によって再生成され、手で編集してはなりません（MUST NOT）。
 
 ## どの状態レイヤーが適用されるか
 

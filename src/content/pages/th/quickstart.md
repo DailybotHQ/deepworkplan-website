@@ -77,7 +77,7 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.8.1
+  git checkout v7.9.0
   # ดาวน์โหลด checksum ของรีลีสนั้นแล้วตรวจกับ digest ด้านล่าง:
   curl -fsSL -o SHA256SUMS \
     https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
@@ -92,13 +92,13 @@ lastUpdated: 2026-10-11
 
   | Repository (github.com/DailybotHQ) | แท็ก | sha256 ของ `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.8.1` | `5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779` |
-  | coding-agents-kit | `v1.0.1` | `de17573e57de9eeb44914189cbc1fd0b1322797cc398c710dadfecc08758db6f` |
-  | herdr-peers | `v1.0.0` | `11634ef2ad71ccdb26b08c785561e49af6cf1ccf8c26fec34d35b29414d239c2` |
+  | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
+  | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
+  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
   | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
-  | deepworkplan-vim | `v1.0.0` | `aa8e80f17b7a5d774846f435007ca0c9ff85d0ac108e1d60a8bc5b991fa76779` |
-  | ai-diff-reviewer | `v3.3.14` | `57e185bacc80eb3b423f929a7d91c6cd3c503095f1773c14dded07b702feb9c4` |
-  | agent-skill | `v3.23.17` | ไม่มีการเผยแพร่ — skills CLI บันทึก content hash ไว้ใน `skills-lock.json` |
+  | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
+  | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
+  | agent-skill | `v3.23.20` | ไม่มีการเผยแพร่ — skills CLI บันทึก content hash ไว้ใน `skills-lock.json` |
 - **รายงานปัญหา** รายงานปัญหาด้านความปลอดภัย**เป็นการส่วนตัวผ่านระบบรายงานช่องโหว่ของ GitHub** ใน repository ที่เกี่ยวข้อง — `https://github.com/DailybotHQ/deepworkplan-skill/security` หรือ `https://github.com/DailybotHQ/deepworkplan-website/security` — ไม่ใช่ในรูปแบบ issue สาธารณะ ดูเพิ่มเติมที่ `SECURITY.md` ของแต่ละ repository, `https://deepworkplan.com/.well-known/security.txt` และหน้าความไว้วางใจ `https://deepworkplan.com/trust`
 
 ## 2. ติดตั้ง skill ของ Deep Work Plan
@@ -132,7 +132,7 @@ skill Deep Work Plan ที่ติดตั้งไว้ข้างต้�
 และ sub-skill เก้าตัว ได้แก่ `create`, `execute`, `refine`, `resume`, `status`,
 `verify`, `onboard`, `author` และ `upgrade`
 
-รุ่น skill ที่ติดตั้งคือ **7.8.1** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
+รุ่น skill ที่ติดตั้งคือ **7.9.0** แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายแผน v5 ไป v6 ต้องมีคำขออย่างชัดเจนและดูตัวอย่างก่อน
 
 มาตรฐานนี้ถูกออกแบบให้ได้สัดส่วนโดยเจตนา และทำให้สัดส่วนนั้นเป็นคุณสมบัติของ
 แผน ไม่ใช่วินัยของผู้พัฒนา แผนหนึ่งเป็นได้ทั้ง **Lite** — บันทึกงานแบบ inline
@@ -243,7 +243,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` ใน skill herdr-peers ที่ติดตั้งไว้ | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | ตัวติดตั้งที่ผ่านการตรวจสอบที่ https://deepworkplan.com/vim/install.sh (ตรึง `v1.0.0`; ดาวน์โหลด รัน `shasum -a 256 -c install.sh.sha256` แล้วจึงรัน) |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | ตัวติดตั้งที่ผ่านการตรวจสอบที่ https://deepworkplan.com/vim/install.sh (ตรึง `v1.0.1`; ดาวน์โหลด รัน `shasum -a 256 -c install.sh.sha256` แล้วจึงรัน) |
 
 ตรวจสอบการดาวน์โหลดแต่ละรายการกับ `SHA256SUMS` ของรีลีสนั้นและ digest ใน *รีลีสที่ตรึงไว้* ข้างต้นก่อนรัน
 
@@ -261,7 +261,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
   จะถูกถามเสมอ ไม่เคยถูกใช้โดยอัตโนมัติ
 - **agentkit** — การติดตั้งระดับเครื่องของ [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak` ตรึงที่ `v1.1.0`): คำสั่งเดียวสำหรับเอเจนต์เขียนโค้ดทุกตัว หนึ่งบัญชีต่อโปรไฟล์ `ak usage` และ `ak pick` สำหรับเลือกบัญชีที่มีพื้นที่เหลือมากที่สุด และ `ak run` แบบ headless สำหรับแผนที่ส่งงาน `parallel_safe` ที่มีขอบเขตชัดเจนให้เอเจนต์เขียนโค้ดตัวอื่น (ผู้รับมอบหมายหนึ่งรายต่อหนึ่ง worktree) ชุดเครื่องมือเปิดเอเจนต์ในโหมดอัตโนมัติโดยค่าเริ่มต้น และการเลือกไม่ใช้ (`--ask` หรือ `AGENTKIT_PERMISSIONS=ask`) ชนะเสมอ
 - **Herdr** — การติดตั้งระดับเครื่องของ [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ตรึงที่ `v1.1.0` พร้อม skill ทางการของ Herdr) สำหรับแผนที่ขอคำตอบที่ได้รับอนุญาตหนึ่งครั้งจาก peer agent ใน pane ของ Herdr บนเครื่องใดก็ได้ และสำหรับ lead ที่เฝ้าดู lane ของตัวเอง
-- **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v1.0.0`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
+- **DeepWorkPlan Vim** — ตัวแก้ไขบนเทอร์มินัล ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) ตรึงที่ `v1.0.1`) เป็นการติดตั้งระดับเครื่องที่ไม่มีวันเขียนทับคอนฟิก Neovim ที่มีอยู่แล้วโดยไม่ได้รับความยินยอมอย่างชัดแจ้ง
 - **AI Diff Reviewer** — การตรวจสอบในเครื่องที่จำเป็น (ไม่ใช่แบบเลือกเข้าร่วม): การตรวจความปลอดภัยของทุก Final Review รัน [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md` ที่ต้องการ) บนชุดการเปลี่ยนแปลงสะสมของแผน skill หรือส่วนขยายที่ขาดหายเป็นข้อค้นพบ `local reviewer not installed` ที่ถูกบันทึกไว้ — ไม่เคยข้ามอย่างเงียบ ๆ และไม่เคยเป็นการบูตสแตรปโดยไม่แจ้งล่วงหน้า: การติดตั้งเป็นของความยินยอมของ onboarding หรือการเรียกใช้ addon อย่างชัดเจน ข้อผิดพลาดในการเรียกใช้เป็น soft-fail และผลลัพธ์ `critical` **ที่ผ่านการตรวจสอบแล้ว** จากการรันที่เสร็จสมบูรณ์ยังคงบล็อกการเสร็จสิ้น  (v3, BC-07 — การอ้างสิทธิ์ระดับ critical ที่ยังไม่ผ่านการตรวจสอบจะปรากฏเป็นคำเตือนพร้อมหมายเหตุ และการตรวจสอบ `incomplete`/`timeout` ไม่ถือเป็นการรันที่สะอาด, BC-04) **Flow B** (CI gate กับ `pr-review.yml`) ถูกเสนอเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง และไม่เคยถูกติดตั้งโดยไม่ได้ร้องขอ ไม่มีโฟลว์ใดของ Deep Work Plan ที่ต้องการบริการเชิงพาณิชย์ ผู้ให้บริการ CI หรือ secret
 
 ### เส้นทาง devcontainer (เมื่อได้รับการยอมรับ)

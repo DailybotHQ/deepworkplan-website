@@ -44,7 +44,7 @@ Koneksi opt-in ke **tim Dailybot** pengembang untuk visibilitas progres agen.
 
 - **Halaman kit:** [Dailybot](/kit/dailybot) — referensi kemampuan lengkap
 - **Yang dihubungkan addon DWP:** empat laporan siklus hidup rencana (kickoff, significant task, blocked, completion) melalui sub-skill dailybot `report`; penegakan hook deterministik opsional (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (dipin **v3.23.17**) mengekspos **17 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, board dan tugas Plan, label organisasi, API key per repo (`.dailybot/env.json`), email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
+- **Skill yang dipasangkan:** menginstal [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (dipin **v3.23.20**) mengekspos **17 kemampuan** — chat di Slack/Teams/Discord/Google Chat, check-in, authoring formulir, ask AI, kudos, board dan tugas Plan, label organisasi, API key per repo (`.dailybot/env.json`), email, dan lainnya. Addon DWP hanya menghubungkan **report**; kemampuan lain dipanggil melalui skill Dailybot secara langsung
 - **Auth:** sepenuhnya ditunda ke skill Dailybot (`dailybot login` atau `DAILYBOT_API_KEY`); addon ini tidak pernah menyimpan kredensial
 - **Pagar vendor-neutral:** DWP inti memiliki **nol** ketergantungan Dailybot; jangan pernah menginstal otomatis untuk semua orang
 - **Kapan ditawarkan:** pengembang atau tim sudah menggunakan Dailybot, atau secara eksplisit meminta pelaporan tim
@@ -91,7 +91,7 @@ Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (
 
 ### DeepWorkPlan Vim (addon ketujuh)
 
-Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v1.0.0`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
+Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v1.0.1`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).
 
 - **Halaman kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Yang ditambahkan:** permukaan editor opsional tingkat mesin untuk agen dan manusia — indeks perintah yang dihasilkan, penjelajah rencana hanya-baca, dan penampil Markdown; setiap klaim dibaca dari permukaan produk yang dapat dibaca mesin dan telah dipatok

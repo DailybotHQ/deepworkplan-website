@@ -71,7 +71,7 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Tujuh bersifat opsional 
 - **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, kunci SSH hanya lewat opt-in. Dipatok pada `devcontainer-kit@v1.0.1`.
 - **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v1.0.1`.
 
-Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.8.1`
+Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v7: `v7.9.0`
 
 ### Contoh
 

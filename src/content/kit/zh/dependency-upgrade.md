@@ -32,7 +32,7 @@ order: 3
 | 注册键 | `.dwp/config.json` 中的 `dependency-upgrade` |
 | 描述符 | `addons/dependency-upgrade/addon.json`（接口 1） |
 | 命令 | 接受后安装至 `.agents/commands/` 的 `/lib-upgrade` |
-| 版本控制 | 随技能包固定并控制版本（`v7.8.1`） |
+| 版本控制 | 随技能包固定并控制版本（`v7.9.0`） |
 ## 备注
 
 包管理器无关——绝不在一个非 JS 仓库中运行 npm/ncu。可选，绝非必需，且绝不自动提交。

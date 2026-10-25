@@ -49,7 +49,7 @@ Ketika diterima, addon dapat memasang sebuah delegator `/design-system` ke dalam
 | Kunci registri | `design-system` di `.dwp/config.json` |
 | Deskriptor | `addons/design-system/addon.json` (antarmuka 1) |
 | File target | `docs/DESIGN.md` diindeks dari `AGENTS.md` |
-| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.8.1`) |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.9.0`) |
 ## Hubungan dengan dokumen desain per-fitur
 
 Ini adalah sebuah berkas sistem desain **tingkat-repo, persisten** — berbeda dari sebuah dokumen desain teknis per-fitur ("requirements → design → tasks" `design.md` dari alur kerja spec-driven yang terikat tooling). Deep Work Plan sengaja tidak membawa archetype dokumen-desain per-fitur terpisah: README sebuah rencana, acceptance criteria setiap tugas, dan validation gate sudah mencakup peran itu. Addon ini mengisi satu celah yang tidak dicakup peran tersebut: konteks desain antarmuka yang tahan lama dan repo-native.

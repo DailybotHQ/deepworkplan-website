@@ -8,7 +8,7 @@ section: State
 
 # 계획 상태
 
-> **버전 범위:** 이 페이지는 v5 계획이 수명 전체 동안 유지하는 **v5 상태 레이어**를 명시합니다. 현재 팩(DWP 7.0.0, 릴리스 `v7.8.1`)이 생성하는 계획은 대신 [기록 레이어](/spec/record-layer)를 사용합니다. v6 또는 v7 계획에서는 결과 계약(`contract.json`)이 권한의 근거이고, 추가 전용 저널(`journal.ndjson`)이 진실 공급원이며, `state.json`은 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json)을 따르는 **파생 스냅샷**입니다. 이 스냅샷은 `ledger.py project`로 재생성되며 손으로 편집해서는 안 됩니다(MUST NOT).
+> **버전 범위:** 이 페이지는 v5 계획이 수명 전체 동안 유지하는 **v5 상태 레이어**를 명시합니다. 현재 팩(DWP 7.0.0, 릴리스 `v7.9.0`)이 생성하는 계획은 대신 [기록 레이어](/spec/record-layer)를 사용합니다. v6 또는 v7 계획에서는 결과 계약(`contract.json`)이 권한의 근거이고, 추가 전용 저널(`journal.ndjson`)이 진실 공급원이며, `state.json`은 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json)을 따르는 **파생 스냅샷**입니다. 이 스냅샷은 `ledger.py project`로 재생성되며 손으로 편집해서는 안 됩니다(MUST NOT).
 
 ## 어떤 상태 레이어가 적용되는가
 

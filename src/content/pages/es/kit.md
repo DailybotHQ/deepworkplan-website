@@ -75,7 +75,7 @@ AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar
 - **[devcontainer](/es/kit/devcontainer)** — El contenedor de desarrollo propio de cada repositorio desde una sola plantilla: agentes a través de ak, Herdr en ambos sentidos, claves SSH solo si se activa la opción. Fijado en `devcontainer-kit@v1.0.1`.
 - **[vim](/es/kit/vim)** — El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown. Fijado en `deepworkplan-vim@v1.0.1`.
 
-El registro de addons y los descriptores se distribuyen en Deep Work Plan v7: `v7.8.1`
+El registro de addons y los descriptores se distribuyen en Deep Work Plan v7: `v7.9.0`
 
 ### Ejemplos
 

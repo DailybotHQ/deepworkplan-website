@@ -23,8 +23,8 @@ Trata la skill como no confiable hasta haberla comprobado. Cada versión adjunta
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-git checkout v7.8.1
-# Descarga los checksums para la versión que vas a instalar (versión actual v7.8.1):
+git checkout v7.9.0
+# Descarga los checksums para la versión que vas a instalar (versión actual v7.9.0):
 curl -fsSL -o SHA256SUMS \
   https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
 # SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
