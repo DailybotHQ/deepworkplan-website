@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`), bir sürünün liderinden daha uzun yaşamasını sağla
 
 Şeritler bilgi ve koordinasyon için birbirlerine de soru sorabilir — bir arayüz, bir bayrak adı, bir dal durumu — ama işi yalnızca lider atar. Derinlik 1 ve yayılma sınırı yine geçerlidir. `v0.2.x` ile bildirimler ve lider kayıtları yoktur: şeritler liderin adresini görev tanımlarından sorar ve bir lider değişikliğini geliştirici aktarır.
 
+## Tartışmalar
+
+herdr-peers 1.1.0, yerel bir **debate** alt becerisi (`debate.md`) ekler: lider bir ajan, Herdr panellerindeki eşlerden oluşan bir paneli araştırma, kırmızı takım, çapraz sorgu ve sayılan bir oylama turlarından geçirir ve bir karar kaydıyla kapatır. Yalnızca insan bir tartışma, panel veya kırmızı takım istediğinde kullanın; tek bir ajanın görüşü tek bir ask'tir.
+
+- **Lider asla oy vermez.** Brifingleri yazar, alıntıları doğrular, her turu sentezler ve sayar; sayım `lead` adlı her seçmeni dışarıda bırakır.
+- **Görüşler diskte, yanıtlar tek satır.** Her panel görüşünü brifingin belirttiği yola yazar ve tek satırla yanıt verir (yol, hüküm, en güçlü nokta). Yanıtlar kaybolabilir; dosyalar kaybolmaz.
+- **Biçimler.** Şerit araştırması, klasik turlar, iddia iddia çapraz sorgu, taze bağlamla kör meydan okuma, şeytanın avukatı yargılaması, önce steelman sonra yargı, tekrarlama paneli ve adlandırma turu. Varsayılan, zorunlu bir hüküm alanıyla biten üç turdur.
+- **`herdr-peers debate` komutu.** `tally` bir oy pusulası dosyasını sayar (Borda, Copeland, ikili düellolar, Condorcet kazananı ve kaybedeni, madde başına hükümler); `anon` görüşleri anonim adlarla kopyalar ve eşlemeyi özel bir anahtarda tutar; `filings` mevcut, eksik ve kısa görüşleri listeler, böylece yalnızca eksik paneller yeniden sorulur; `panel` bir panel önerir ve hiçbir şey çalıştırmaz.
+- **Şablonlar.** `templates/debate/` altında dokuz şablon: insanın notu ve tur brifinglerinden oy pusulası dosyasına, karar kaydına, düzeltme günlüğüne ve bir ekip brifingine kadar.
+- **İsteğe bağlı agentkit hazırlığı.** agentkit (`ak`) kuruluysa `panel`, `ak pick`'in en üste koyduğu hesaplarda yeni paneller de önerir; kiralama, başlatma ve bırakma komutlarıyla birlikte. Lider, herhangi birini açmadan önce insana sorar. `ak` yoksa yalnızca boşta duran panelleri önerir ve yeni ajanlar elle başlatılır.
+
+Sürüm yalnızca ekleme yapar: protokol 1 ve tüm komutlar, bayraklar, çıkış kodları ve JSON sözleşmeleri değişmeden kalır.
+
 ## Notlar
 
 İsteğe bağlıdır ve hiçbir zaman zorunlu değildir. Bir depo, sıfır isteğe bağlı eklentiyle tümüyle uyumludur ve hiçbir akış bu eklentiye bağlı değildir. İki bölmeli, makineler arası gidiş-dönüş, simüle edilmiş bir Herdr'a karşı testlerle kapsanmaktadır; ilk çalıştırmayı gözetim altında planlayın.

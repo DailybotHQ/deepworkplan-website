@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) añade lo que permite a un enjambre sobrevivir a su líde
 
 Los carriles también pueden consultarse entre sí para obtener información y coordinarse — una interfaz, el nombre de una opción, el estado de una rama —, pero solo el líder asigna trabajo. La profundidad 1 y el límite de fan-out siguen vigentes. Con `v0.2.x` no hay avisos ni registros de líder: los carriles consultan la dirección del líder que figura en su encargo, y el desarrollador retransmite un cambio de líder.
 
+## Debates
+
+herdr-peers 1.1.0 agrega una sub-skill nativa de **debate** (`debate.md`): un agente líder conduce un panel de pares en paneles de Herdr a lo largo de rondas de investigación, equipos rojos, contrainterrogatorio y una votación contada, y cierra con un registro de decisión. Úsala solo cuando la persona pida un debate, un panel o un equipo rojo; la opinión de un solo agente es una sola consulta.
+
+- **El líder nunca vota.** Escribe los encargos, verifica las citas, sintetiza cada ronda y cuenta; el recuento descarta a cualquier votante llamado `lead`.
+- **Escritos en disco, respuestas de una línea.** Cada panel escribe su escrito en la ruta que indica su encargo y responde con una línea (ruta, veredicto, punto más fuerte). Las respuestas pueden perderse; los archivos no.
+- **Formatos.** Investigación por carriles, rondas clásicas, contrainterrogatorio afirmación por afirmación, desafío a ciegas con contexto nuevo, juicio de abogado del diablo, steelman y luego juicio, panel de replicación y ronda de nombres. Por defecto son tres rondas que terminan en un espacio de veredicto forzado.
+- **El verbo `herdr-peers debate`.** `tally` cuenta un archivo de papeletas (Borda, Copeland, duelos por pares, el ganador y el perdedor de Condorcet, veredictos por ítem); `anon` copia los escritos con nombres anónimos y guarda la correspondencia en una clave privada; `filings` lista los escritos presentes, faltantes y cortos para volver a consultar solo los paneles que faltan; `panel` propone un panel y no ejecuta nada.
+- **Plantillas.** Nueve plantillas en `templates/debate/`, desde la nota de la persona y los encargos de ronda hasta el archivo de papeletas, el registro de decisión, el registro de correcciones y un resumen para el equipo.
+- **Aprovisionamiento opcional con agentkit.** Cuando agentkit (`ak`) está instalado, `panel` también propone paneles nuevos en las cuentas que `ak pick` clasifica más alto, con los comandos de reserva, lanzamiento y liberación; el líder pregunta a la persona antes de crear alguno. Sin `ak`, propone solo paneles inactivos y los agentes nuevos se inician a mano.
+
+La versión es aditiva: el protocolo 1 y todos los verbos, flags, códigos de salida y contratos JSON no cambian.
+
 ## Notas
 
 Opcional y nunca obligatorio. Un repositorio es plenamente conforme con cero addons opcionales, y ningún flujo depende de este. El recorrido de ida y vuelta entre dos paneles y entre máquinas está cubierto por pruebas contra un Herdr simulado; planifica una primera ejecución supervisada.

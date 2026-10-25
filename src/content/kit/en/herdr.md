@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) adds what lets a swarm outlive its lead ([Swarm autonomy]
 
 Lanes may also ask each other for information and coordination — an interface, a flag name, a branch state — but only the lead assigns work. Depth 1 and the fan-out cap still hold. With `v0.2.x` there are no notices or lead records: lanes ask the lead's address from their brief, and a lead change is relayed by the developer.
 
+## Debates
+
+herdr-peers 1.1.0 adds a native **debate** sub-skill (`debate.md`): a lead agent runs a panel of peers in Herdr panes through rounds of research, red teams, cross-examination and a counted vote, and closes with a decision record. Use it only when the human asks for a debate, a panel or a red team; one agent's opinion is a single ask.
+
+- **The lead never votes.** It writes the briefs, checks citations, synthesizes each round and counts; the tally drops any voter named `lead`.
+- **Filings on disk, replies one line.** Each pane writes its filing to the path its brief names and replies with one line (path, verdict, strongest point). Replies can get lost; files do not.
+- **Formats.** Lane research, classic rounds, claim-by-claim cross-exam, blind fresh-context challenge, devil's-advocate trial, steelman then judge, replication panel and naming round. The default is three rounds that end in a forced verdict space.
+- **The `herdr-peers debate` verb.** `tally` counts a ballots file (Borda, Copeland, pairwise duels, the Condorcet winner and loser, per-item verdicts); `anon` copies filings under anonymous names, with the mapping in a private key; `filings` lists present, missing and short filings so only missing panes are re-asked; `panel` proposes a panel and runs nothing.
+- **Templates.** Nine templates under `templates/debate/`, from the human's note and the round briefs to the ballots file, the decision record, the fix log and a team brief.
+- **Optional agentkit provisioning.** When agentkit (`ak`) is installed, `panel` also proposes new panes on the accounts `ak pick` ranks highest, with the lease, launch and release commands; the lead asks the human before spawning any. Without `ak`, it proposes idle panes only and new agents are started by hand.
+
+The release is additive: protocol 1 and every verb, flag, exit code and JSON contract stay unchanged.
+
 ## Notes
 
 Optional and never required. A repository is fully conformant with zero optional addons, and no flow depends on this one. The two-pane, cross-machine round trip is covered by tests against a simulated Herdr; plan a supervised first run.

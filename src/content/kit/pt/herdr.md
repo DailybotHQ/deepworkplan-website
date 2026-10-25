@@ -85,6 +85,19 @@ O herdr-peers (`v0.3.2`) acrescenta o que permite a um enxame sobreviver ao seu 
 
 As frentes também podem consultar umas às outras para obter informação e coordenação — uma interface, o nome de uma flag, o estado de um branch —, mas só o líder atribui trabalho. A profundidade 1 e o limite de fan-out continuam valendo. Com a `v0.2.x` não há avisos nem registros de líder: as frentes consultam o endereço do líder que consta no seu briefing, e uma mudança de líder é retransmitida pelo desenvolvedor.
 
+## Debates
+
+O herdr-peers 1.1.0 adiciona uma sub-skill nativa de **debate** (`debate.md`): um agente líder conduz um painel de pares em painéis do Herdr por rodadas de pesquisa, red teams, interrogatório cruzado e uma votação contada, e encerra com um registro de decisão. Use-a apenas quando a pessoa pedir um debate, um painel ou um red team; a opinião de um único agente é uma única consulta.
+
+- **O líder nunca vota.** Ele escreve os briefings, confere as citações, sintetiza cada rodada e conta os votos; a apuração descarta qualquer votante chamado `lead`.
+- **Pareceres em disco, respostas de uma linha.** Cada painel grava seu parecer no caminho indicado pelo briefing e responde com uma linha (caminho, veredito, ponto mais forte). Respostas podem se perder; arquivos não.
+- **Formatos.** Pesquisa por raias, rodadas clássicas, interrogatório cruzado afirmação por afirmação, desafio às cegas com contexto novo, julgamento de advogado do diabo, steelman e depois julgamento, painel de replicação e rodada de nomes. O padrão são três rodadas que terminam em um espaço de veredito forçado.
+- **O verbo `herdr-peers debate`.** `tally` conta um arquivo de cédulas (Borda, Copeland, duelos par a par, o vencedor e o perdedor de Condorcet, vereditos por item); `anon` copia os pareceres com nomes anônimos, com o mapeamento em uma chave privada; `filings` lista pareceres presentes, ausentes e curtos para reconsultar apenas os painéis que faltam; `panel` propõe um painel e não executa nada.
+- **Modelos.** Nove modelos em `templates/debate/`, da nota da pessoa e dos briefings de rodada ao arquivo de cédulas, ao registro de decisão, ao registro de correções e a um resumo para a equipe.
+- **Provisionamento opcional com agentkit.** Quando o agentkit (`ak`) está instalado, `panel` também propõe novos painéis nas contas que `ak pick` classifica mais alto, com os comandos de reserva, lançamento e liberação; o líder pergunta à pessoa antes de criar qualquer um. Sem `ak`, propõe apenas painéis ociosos e novos agentes são iniciados à mão.
+
+A versão é aditiva: o protocolo 1 e todos os verbos, flags, códigos de saída e contratos JSON permanecem inalterados.
+
 ## Notas
 
 Opcional e nunca obrigatório. Um repositório é totalmente conforme com zero addons opcionais, e nenhum fluxo depende deste. A ida e volta entre dois painéis e entre máquinas é coberta por testes contra um Herdr simulado; planeje uma primeira execução supervisionada.

@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) ajoute ce qui permet à un essaim de survivre à son coor
 
 Les couloirs peuvent aussi s’interroger entre eux pour obtenir des informations et se coordonner — une interface, un nom d’option, l’état d’une branche —, mais seul le coordinateur attribue le travail. La profondeur 1 et le plafond de fan-out s’appliquent toujours. Avec `v0.2.x`, il n’y a ni notifications ni enregistrements de coordinateur : les couloirs interrogent l’adresse du coordinateur indiquée dans leur consigne, et un changement de coordinateur est relayé par le développeur.
 
+## Débats
+
+herdr-peers 1.1.0 ajoute une sous-skill native de **débat** (`debate.md`) : un agent lead conduit un panel de pairs dans des panneaux Herdr au fil de tours de recherche, de red teams, de contre-interrogatoire et d'un vote compté, puis conclut par un registre de décision. Ne l'utilisez que lorsque l'humain demande un débat, un panel ou une red team ; l'avis d'un seul agent tient en une seule demande.
+
+- **Le lead ne vote jamais.** Il rédige les briefs, vérifie les citations, synthétise chaque tour et compte ; le décompte écarte tout votant nommé `lead`.
+- **Contributions sur disque, réponses d'une ligne.** Chaque panneau écrit sa contribution au chemin indiqué par son brief et répond en une ligne (chemin, verdict, argument le plus fort). Les réponses peuvent se perdre ; les fichiers, non.
+- **Formats.** Recherche par voies, tours classiques, contre-interrogatoire affirmation par affirmation, défi à l'aveugle avec un contexte neuf, procès de l'avocat du diable, steelman puis jugement, panel de réplication et tour de nommage. Par défaut, trois tours qui se terminent par un espace de verdict imposé.
+- **Le verbe `herdr-peers debate`.** `tally` dépouille un fichier de bulletins (Borda, Copeland, duels par paires, gagnant et perdant de Condorcet, verdicts par point) ; `anon` copie les contributions sous des noms anonymes, la correspondance étant gardée dans une clé privée ; `filings` liste les contributions présentes, manquantes et trop courtes pour ne relancer que les panneaux manquants ; `panel` propose un panel et n'exécute rien.
+- **Modèles.** Neuf modèles dans `templates/debate/`, de la note de l'humain et des briefs de tour jusqu'au fichier de bulletins, au registre de décision, au journal de corrections et à un brief d'équipe.
+- **Provisionnement agentkit optionnel.** Lorsque agentkit (`ak`) est installé, `panel` propose aussi de nouveaux panneaux sur les comptes que `ak pick` classe en tête, avec les commandes de bail, de lancement et de libération ; le lead demande à l'humain avant d'en créer un. Sans `ak`, il ne propose que des panneaux inactifs et les nouveaux agents se lancent à la main.
+
+La version est purement additive : le protocole 1 et l'ensemble des verbes, options, codes de sortie et contrats JSON restent inchangés.
+
 ## Notes
 
 Facultatif et jamais requis. Un dépôt est pleinement conforme avec zéro addon optionnel, et aucun flux ne dépend de celui-ci. L’aller-retour entre deux panneaux et entre machines est couvert par des tests contre un Herdr simulé ; prévoyez une première exécution supervisée.

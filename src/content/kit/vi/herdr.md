@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) bổ sung những gì giúp một bầy agent tồn tại
 
 Các lane cũng có thể hỏi nhau để lấy thông tin và phối hợp — một giao diện, một tên cờ, trạng thái một nhánh — nhưng chỉ lead mới giao việc. Độ sâu 1 và giới hạn phân nhánh vẫn giữ nguyên. Với `v0.2.x` không có thông báo hay bản ghi lead: các lane hỏi địa chỉ của lead lấy từ chỉ dẫn của chúng, và việc thay đổi lead do nhà phát triển chuyển tiếp.
 
+## Tranh luận
+
+herdr-peers 1.1.0 bổ sung sub-skill **debate** gốc (`debate.md`): một agent lead điều hành một hội đồng gồm các peer trong pane Herdr qua các vòng nghiên cứu, red team, chất vấn chéo và bỏ phiếu có kiểm đếm, rồi khép lại bằng một bản ghi quyết định. Chỉ dùng khi con người yêu cầu một cuộc tranh luận, một hội đồng hoặc một red team; ý kiến của một agent chỉ cần một lần ask.
+
+- **Lead không bao giờ bỏ phiếu.** Lead viết brief, kiểm tra trích dẫn, tổng hợp từng vòng và kiểm phiếu; việc kiểm phiếu loại mọi người bỏ phiếu tên `lead`.
+- **Bài nộp trên đĩa, phản hồi một dòng.** Mỗi pane ghi bài nộp vào đường dẫn mà brief chỉ định và trả lời bằng một dòng (đường dẫn, phán quyết, luận điểm mạnh nhất). Phản hồi có thể thất lạc; tệp thì không.
+- **Hình thức.** Nghiên cứu theo lane, các vòng cổ điển, chất vấn chéo từng luận điểm, thử thách mù với ngữ cảnh mới, phiên tòa luật sư của quỷ, steelman rồi mới phán xét, hội đồng tái lập và vòng đặt tên. Mặc định là ba vòng, kết thúc bằng một tập phán quyết bắt buộc.
+- **Lệnh `herdr-peers debate`.** `tally` kiểm một tệp phiếu (Borda, Copeland, đối đầu từng cặp, người thắng và người thua Condorcet, phán quyết theo từng mục); `anon` sao chép bài nộp dưới tên ẩn danh, bảng ánh xạ nằm trong một khóa riêng; `filings` liệt kê bài nộp đã có, còn thiếu và quá ngắn để chỉ hỏi lại các pane còn thiếu; `panel` đề xuất hội đồng và không chạy gì cả.
+- **Mẫu.** Chín mẫu trong `templates/debate/`, từ ghi chú của con người và brief từng vòng đến tệp phiếu, bản ghi quyết định, nhật ký sửa lỗi và brief cho nhóm.
+- **Cấp phát agentkit tùy chọn.** Khi agentkit (`ak`) được cài, `panel` còn đề xuất pane mới trên những tài khoản mà `ak pick` xếp hạng cao nhất, kèm lệnh thuê, khởi chạy và giải phóng; lead hỏi con người trước khi tạo bất kỳ pane nào. Không có `ak`, nó chỉ đề xuất pane đang rảnh và agent mới được khởi động thủ công.
+
+Bản phát hành chỉ bổ sung: giao thức 1 cùng mọi lệnh, flag, mã thoát và hợp đồng JSON đều giữ nguyên.
+
 ## Ghi chú
 
 Tùy chọn và không bao giờ bắt buộc. Một repo hoàn toàn tuân thủ ngay cả khi không có addon tùy chọn nào, và không luồng nào phụ thuộc vào addon này. Vòng khứ hồi hai pane, xuyên máy được kiểm thử với một Herdr mô phỏng; hãy lên kế hoạch cho lần chạy đầu tiên có giám sát.
