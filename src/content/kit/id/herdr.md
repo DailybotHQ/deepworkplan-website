@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) menambahkan hal yang memungkinkan sebuah swarm bertahan l
 
 Lane juga boleh saling bertanya untuk informasi dan koordinasi — sebuah antarmuka, nama flag, status branch — tetapi hanya lead yang menugaskan pekerjaan. Kedalaman 1 dan batas fan-out tetap berlaku. Dengan `v0.2.x` tidak ada pemberitahuan maupun catatan lead: lane menanyakan alamat lead dari arahannya, dan pergantian lead diteruskan oleh pengembang.
 
+## Debat
+
+herdr-peers 1.1.0 menambahkan sub-skill **debate** bawaan (`debate.md`): agen lead menjalankan panel peer di pane Herdr melalui putaran riset, red team, pemeriksaan silang, dan pemungutan suara yang dihitung, lalu menutupnya dengan catatan keputusan. Gunakan hanya saat manusia meminta debat, panel, atau red team; pendapat satu agen cukup dengan satu ask.
+
+- **Lead tidak pernah memilih.** Lead menulis brief, memeriksa kutipan, menyintesis setiap putaran, dan menghitung suara; penghitungan membuang setiap pemilih bernama `lead`.
+- **Berkas di disk, balasan satu baris.** Setiap pane menulis berkasnya ke path yang disebut brief-nya dan membalas dengan satu baris (path, putusan, poin terkuat). Balasan bisa hilang; berkas tidak.
+- **Format.** Riset per lane, putaran klasik, pemeriksaan silang klaim demi klaim, tantangan buta dengan konteks baru, sidang advokat setan, steelman lalu menilai, panel replikasi, dan putaran penamaan. Bawaannya tiga putaran yang berakhir pada ruang putusan yang ditetapkan.
+- **Perintah `herdr-peers debate`.** `tally` menghitung berkas surat suara (Borda, Copeland, duel berpasangan, pemenang dan pecundang Condorcet, putusan per butir); `anon` menyalin berkas dengan nama anonim, dengan pemetaannya di kunci privat; `filings` mendaftar berkas yang ada, hilang, dan terlalu pendek sehingga hanya pane yang hilang yang ditanya ulang; `panel` mengusulkan panel dan tidak menjalankan apa pun.
+- **Templat.** Sembilan templat di `templates/debate/`, dari catatan manusia dan brief putaran hingga berkas surat suara, catatan keputusan, log perbaikan, dan brief tim.
+- **Penyediaan agentkit opsional.** Bila agentkit (`ak`) terpasang, `panel` juga mengusulkan pane baru di akun yang diperingkat tertinggi oleh `ak pick`, lengkap dengan perintah sewa, peluncuran, dan pelepasan; lead bertanya kepada manusia sebelum membuat pane baru. Tanpa `ak`, hanya pane yang menganggur yang diusulkan dan agen baru dijalankan secara manual.
+
+Rilis ini hanya menambah: protokol 1 serta semua perintah, flag, kode keluar, dan kontrak JSON tetap tidak berubah.
+
 ## Catatan
 
 Opsional dan tidak pernah wajib. Sebuah repositori sepenuhnya konform tanpa addon opsional sama sekali, dan tidak ada alur yang bergantung pada addon ini. Perjalanan pulang-pergi dua panel lintas mesin dicakup oleh pengujian terhadap Herdr yang disimulasikan; rencanakan eksekusi pertama dengan pengawasan.

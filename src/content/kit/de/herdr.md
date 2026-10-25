@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) ergänzt, was einen Schwarm seinen Lead überdauern läss
 
 Lanes dürfen einander auch um Informationen und Koordination bitten — eine Schnittstelle, einen Flag-Namen, einen Branch-Zustand —, aber nur der Lead weist Arbeit zu. Tiefe eins und die Fan-out-Grenze gelten weiterhin. Mit `v0.2.x` gibt es weder Notices noch Lead-Einträge: Lanes fragen die Adresse des Leads aus ihrem Auftrag, und einen Lead-Wechsel gibt der Entwickler weiter.
 
+## Debatten
+
+herdr-peers 1.1.0 ergänzt einen nativen **debate**-Sub-Skill (`debate.md`): Ein Lead-Agent führt ein Panel von Peers in Herdr-Panes durch Runden aus Recherche, Red Teams, Kreuzverhör und gezählter Abstimmung und schließt mit einem Entscheidungsprotokoll ab. Nutzen Sie ihn nur, wenn der Mensch eine Debatte, ein Panel oder ein Red Team verlangt; die Meinung eines einzelnen Agenten ist ein einzelnes Ask.
+
+- **Der Lead stimmt nie ab.** Er schreibt die Briefings, prüft Belege, fasst jede Runde zusammen und zählt; die Auszählung lässt jeden Wähler namens `lead` weg.
+- **Eingaben auf der Platte, Antworten in einer Zeile.** Jedes Pane schreibt seine Eingabe an den Pfad, den sein Briefing nennt, und antwortet mit einer Zeile (Pfad, Urteil, stärkstes Argument). Antworten können verloren gehen, Dateien nicht.
+- **Formate.** Lane-Recherche, klassische Runden, Kreuzverhör Behauptung für Behauptung, blinde Challenge mit frischem Kontext, Advocatus-Diaboli-Verfahren, erst Steelman, dann Urteil, Replikationspanel und Namensrunde. Standard sind drei Runden, die in einem erzwungenen Urteilsraum enden.
+- **Das Verb `herdr-peers debate`.** `tally` zählt eine Stimmzetteldatei aus (Borda, Copeland, paarweise Duelle, Condorcet-Sieger und -Verlierer, Urteile je Punkt); `anon` kopiert Eingaben unter anonymen Namen, die Zuordnung liegt in einem privaten Schlüssel; `filings` listet vorhandene, fehlende und zu kurze Eingaben, sodass nur fehlende Panes erneut gefragt werden; `panel` schlägt ein Panel vor und führt nichts aus.
+- **Vorlagen.** Neun Vorlagen unter `templates/debate/`, von der Notiz des Menschen und den Rundenbriefings bis zur Stimmzetteldatei, zum Entscheidungsprotokoll, zum Korrekturlog und zu einem Team-Briefing.
+- **Optionale Bereitstellung mit agentkit.** Ist agentkit (`ak`) installiert, schlägt `panel` zusätzlich neue Panes auf den Konten vor, die `ak pick` am höchsten einstuft, mit den Befehlen für Lease, Start und Freigabe; der Lead fragt den Menschen, bevor er eines startet. Ohne `ak` schlägt es nur freie Panes vor, und neue Agenten werden von Hand gestartet.
+
+Die Version ist rein additiv: Protokoll 1 und alle Verben, Flags, Exit-Codes und JSON-Verträge bleiben unverändert.
+
 ## Hinweise
 
 Optional und nie erforderlich. Ein Repository ist mit null optionalen Addons vollständig konform, und kein Ablauf hängt von diesem ab. Der Round-Trip über zwei Panes und Rechnergrenzen hinweg ist durch Tests gegen ein simuliertes Herdr abgedeckt; planen Sie einen beaufsichtigten ersten Lauf ein.

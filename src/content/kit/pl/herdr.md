@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) dodaje to, co pozwala rojowi przetrwać swojego prowadzą
 
 Tory mogą też prosić się nawzajem o informacje i koordynację — interfejs, nazwę flagi, stan gałęzi — ale tylko prowadzący przydziela pracę. Głębokość jeden i limit rozgałęzienia nadal obowiązują. W `v0.2.x` nie ma powiadomień ani rekordów prowadzącego: tory pytają adres prowadzącego ze swojego zlecenia, a zmianę prowadzącego przekazuje deweloper.
 
+## Debaty
+
+herdr-peers 1.1.0 dodaje natywny podskill **debate** (`debate.md`): agent prowadzący przeprowadza panel peerów w panelach Herdr przez rundy researchu, red teamów, przesłuchania krzyżowego i liczonego głosowania, a na koniec spisuje zapis decyzji. Używaj go tylko wtedy, gdy człowiek prosi o debatę, panel lub red team; opinia jednego agenta to jedno zapytanie.
+
+- **Prowadzący nigdy nie głosuje.** Pisze briefy, sprawdza cytowania, syntetyzuje każdą rundę i liczy głosy; liczenie pomija każdego głosującego o nazwie `lead`.
+- **Stanowiska na dysku, odpowiedzi w jednym wierszu.** Każdy panel zapisuje swoje stanowisko pod ścieżką wskazaną w briefie i odpowiada jednym wierszem (ścieżka, werdykt, najmocniejszy argument). Odpowiedzi mogą zginąć, pliki nie.
+- **Formaty.** Research w torach, klasyczne rundy, przesłuchanie krzyżowe teza po tezie, ślepe wyzwanie ze świeżym kontekstem, proces adwokata diabła, najpierw steelman, potem ocena, panel replikacyjny i runda nazewnicza. Domyślnie są trzy rundy zakończone wymuszonym zbiorem werdyktów.
+- **Polecenie `herdr-peers debate`.** `tally` liczy plik kart do głosowania (Borda, Copeland, pojedynki parami, zwycięzca i przegrany Condorceta, werdykty dla każdego punktu); `anon` kopiuje stanowiska pod anonimowymi nazwami, a mapowanie trzyma w prywatnym kluczu; `filings` wypisuje stanowiska złożone, brakujące i zbyt krótkie, by ponownie pytać tylko brakujące panele; `panel` proponuje skład panelu i niczego nie uruchamia.
+- **Szablony.** Dziewięć szablonów w `templates/debate/`, od notatki człowieka i briefów rund po plik kart, zapis decyzji, dziennik poprawek i brief dla zespołu.
+- **Opcjonalne przydzielanie przez agentkit.** Gdy agentkit (`ak`) jest zainstalowany, `panel` proponuje też nowe panele na kontach, które `ak pick` ocenia najwyżej, wraz z poleceniami dzierżawy, uruchomienia i zwolnienia; prowadzący pyta człowieka przed utworzeniem któregokolwiek. Bez `ak` proponuje tylko bezczynne panele, a nowych agentów uruchamia się ręcznie.
+
+Wydanie jest wyłącznie addytywne: protokół 1 oraz wszystkie polecenia, flagi, kody wyjścia i kontrakty JSON pozostają bez zmian.
+
 ## Uwagi
 
 Opcjonalny i nigdy niewymagany. Repozytorium bez opcjonalnych addonów jest w pełni zgodne i żaden przepływ nie zależy od tego addonu. Pełny cykl między dwoma panelami i maszynami jest pokryty testami na symulowanym Herdr; zaplanuj pierwsze uruchomienie pod nadzorem.

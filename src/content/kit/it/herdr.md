@@ -85,6 +85,19 @@ herdr-peers (`v0.3.2`) aggiunge ciò che permette a uno sciame di sopravvivere a
 
 Le corsie possono anche chiedersi a vicenda informazioni e coordinarsi — un’interfaccia, il nome di un flag, lo stato di un branch —, ma solo il lead assegna il lavoro. La profondità 1 e il limite di fan-out restano validi. Con `v0.2.x` non esistono notifiche né record di lead: le corsie interpellano l’indirizzo del lead indicato nel loro brief, e un cambio di lead viene inoltrato dallo sviluppatore.
 
+## Dibattiti
+
+herdr-peers 1.1.0 aggiunge una sub-skill nativa di **dibattito** (`debate.md`): un agente lead guida un panel di peer nei pannelli di Herdr attraverso round di ricerca, red team, controinterrogatorio e un voto conteggiato, e chiude con un registro della decisione. Usala solo quando la persona chiede un dibattito, un panel o un red team; l'opinione di un singolo agente è una singola richiesta.
+
+- **Il lead non vota mai.** Scrive i brief, verifica le citazioni, sintetizza ogni round e conta; lo spoglio scarta qualsiasi votante chiamato `lead`.
+- **Contributi su disco, risposte di una riga.** Ogni pannello scrive il proprio contributo nel percorso indicato dal brief e risponde con una riga (percorso, verdetto, argomento più forte). Le risposte possono andare perse; i file no.
+- **Formati.** Ricerca per corsie, round classici, controinterrogatorio affermazione per affermazione, sfida alla cieca con contesto nuovo, processo dell'avvocato del diavolo, prima steelman poi giudizio, panel di replica e round di naming. L'impostazione predefinita è di tre round che terminano in uno spazio di verdetto obbligato.
+- **Il verbo `herdr-peers debate`.** `tally` conta un file di schede (Borda, Copeland, duelli a coppie, vincitore e perdente di Condorcet, verdetti per voce); `anon` copia i contributi con nomi anonimi, con la corrispondenza in una chiave privata; `filings` elenca i contributi presenti, mancanti e troppo brevi, così da richiedere di nuovo solo ai pannelli mancanti; `panel` propone un panel e non esegue nulla.
+- **Modelli.** Nove modelli in `templates/debate/`, dalla nota della persona e dai brief di round fino al file di schede, al registro della decisione, al registro delle correzioni e a un brief per il team.
+- **Provisioning opzionale con agentkit.** Quando agentkit (`ak`) è installato, `panel` propone anche nuovi pannelli sugli account che `ak pick` classifica più in alto, con i comandi di lease, avvio e rilascio; il lead chiede alla persona prima di crearne uno. Senza `ak`, propone solo pannelli inattivi e i nuovi agenti si avviano a mano.
+
+La versione è solo additiva: il protocollo 1 e tutti i verbi, flag, codici di uscita e contratti JSON restano invariati.
+
 ## Note
 
 Opzionale e mai richiesto. Un repository è pienamente conforme con zero addon opzionali, e nessun flusso dipende da questo. Il percorso di andata e ritorno tra due pannelli e tra macchine è coperto da test contro un Herdr simulato; pianifica una prima esecuzione supervisionata.
