@@ -87,14 +87,15 @@ Lanes may also ask each other for information and coordination — an interface,
 
 ## Debates
 
-herdr-peers 1.1.0 adds a native **debate** sub-skill (`debate.md`): a lead agent runs a panel of peers in Herdr panes through rounds of research, red teams, cross-examination and a counted vote, and closes with a decision record. Use it only when the human asks for a debate, a panel or a red team; one agent's opinion is a single ask.
+herdr-peers 1.1.0 adds a native **debate** sub-skill (`debate.md`): a lead agent runs a panel of peers in Herdr panes through rounds and closes with one result the human can trust, with its evidence and its dissent. Use it only when the human asks for a debate, a panel, a red team, research from several agents or angles, or a second panel on a result; one agent's opinion is a single ask.
 
-- **The lead never votes.** It writes the briefs, checks citations, synthesizes each round and counts; the tally drops any voter named `lead`.
-- **Filings on disk, replies one line.** Each pane writes its filing to the path its brief names and replies with one line (path, verdict, strongest point). Replies can get lost; files do not.
-- **Formats.** Lane research, classic rounds, claim-by-claim cross-exam, blind fresh-context challenge, devil's-advocate trial, steelman then judge, replication panel and naming round. The default is three rounds that end in a forced verdict space.
-- **The `herdr-peers debate` verb.** `tally` counts a ballots file (Borda, Copeland, pairwise duels, the Condorcet winner and loser, per-item verdicts); `anon` copies filings under anonymous names, with the mapping in a private key; `filings` lists present, missing and short filings so only missing panes are re-asked; `panel` proposes a panel and runs nothing.
-- **Templates.** Nine templates under `templates/debate/`, from the human's note and the round briefs to the ballots file, the decision record, the fix log and a team brief.
-- **Optional agentkit provisioning.** When agentkit (`ak`) is installed, `panel` also proposes new panes on the accounts `ak pick` ranks highest, with the lease, launch and release commands; the lead asks the human before spawning any. Without `ak`, it proposes idle panes only and new agents are started by hand.
+- **Purpose first.** The lead chooses the purpose — **decide**, **research** the state of the art, **stress-test**, **verify** or **generate** — and each has its formats, its counting and its deliverable. Purposes chain (research → decide, decide → verify), and a debate is sized quick, standard or deep.
+- **The lead's contract.** The lead never votes; the human's words are copied verbatim; briefs reach the panel through one channel; each pane writes its filing to disk and replies with one line; no pane takes external actions.
+- **Formats.** Angle research, classic rounds, draft package, claim-by-claim cross-exam, red team then defenders, steelman then judge, blind fresh-context challenge, replication panel and divergent proposals. A decision always ends in a forced verdict space.
+- **The `herdr-peers debate` verb.** `tally` counts ranked ballots and per-item verdicts (Borda, Copeland, pairwise duels, the Condorcet winner and loser); `claims` merges the lanes' claims ledgers into statuses such as established, contested or refuted, which are a quorum, not a verification; `anon` copies filings under anonymous names, with the mapping in a private key; `filings` lists present, missing and short filings so only missing panes are re-asked.
+- **Seating the panel.** `panel` proposes a panel and runs nothing. Seats go round-robin over model providers, and within a provider the seat with the most quota goes first, drawn from idle panes and, when agentkit (`ak`) is installed, from the accounts `ak pick` proposes. Without `ak`, it recommends coding-agents-kit (optional, `v1.0.1` or later).
+- **Templates.** Sixteen templates under `templates/debate/`, from the human's note and the research, stress-test and round briefs to the ballots and claims files, the lead's handoff packet, and the decision, state-of-the-art, stress-test and replication records.
+- **Delivery to a blocked peer.** `reply` and `notify` retry delivery to a peer blocked at a question for up to `--wait-blocked` seconds; it is still exactly one reply.
 
 The release is additive: protocol 1 and every verb, flag, exit code and JSON contract stay unchanged.
 
