@@ -9,6 +9,14 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.59] - 2026-10-14
+
+### Changed
+
+- chore: dogfood vendored skills to dailybot v3.23.18, ai-diff-reviewer v3.3.16
+- fix: move the agentkit and dck 1.0.1 pins in every language
+- chore: vendor DWP pack v7.8.1 and pin the ecosystem 1.0.1 patches
+
 ## [5.0.58] - 2026-10-13
 
 ### Changed
@@ -1329,7 +1337,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.58...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.59...HEAD
+[5.0.59]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.59
 [5.0.58]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.58
 [5.0.57]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.57
 [5.0.56]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.56
