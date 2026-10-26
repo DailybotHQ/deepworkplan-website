@@ -136,7 +136,7 @@ The content routes are static and build-time generated; the only runtime code is
 | `/{page}.md`, `/es/{page}.md` | Agent-friendly Markdown for pages | Public, cached |
 | `/methodology/{slug}.md`, `/spec/{slug}.md`, `/kit/{slug}.md` | Agent-friendly Markdown for docs | Public, cached |
 | `/sitemap-index.xml` | Sitemap | Public |
-| `POST /api/mcp` (`functions/api/mcp.ts`, `src/lib/mcp/`) | Stateless MCP server (JSON-RPC 2.0) with three read-only tools | Public, zero-auth, read-only and site-scoped. POST and OPTIONS only (other methods 405), `Content-Type: application/json` required (415), request bodies over 64 KiB rejected with a 413 JSON-RPC error, `read_page` paths sanitized (length cap, no scheme, no `..`, no encoded traversal), RFC 9331 rate limit per isolate, `Access-Control-Allow-Origin: *` with no credentials |
+| `POST /api/mcp` (`functions/api/mcp.ts`, `src/lib/mcp/`) | Stateless MCP server (JSON-RPC 2.0) with three read-only tools | Public, zero-auth, read-only and site-scoped. POST and OPTIONS only (other methods 405), `Content-Type: application/json` required (415), request bodies over 64 KiB rejected with a 413 JSON-RPC error before the body is read (`Content-Length` gate at the edge, streamed cap when the header is absent, handler re-check as a second line), `read_page` paths sanitized (length cap, no scheme, no `..`, no encoded traversal), RFC 9331 rate limit per isolate, `Access-Control-Allow-Origin: *` with no credentials |
 | `functions/_middleware.ts` | Markdown content negotiation, agent-friendly 404s, rate limiting for `/api/*`, robots rewrite for Lighthouse | No secrets, no outbound network calls; reads only the static `ASSETS` binding |
 
 ### API Route Best Practices
