@@ -99,6 +99,12 @@ export const SITE_SECTIONS: {
       'The v6/v7 record layer: outcome contract, append-only journal, evidence classes, sign-off, amendments, invariants and receipts.',
   },
   {
+    name: 'Specification — resources and abilities',
+    path: '/spec/resources-and-abilities',
+    description:
+      'The v6/v7 resources and abilities: per-task context manifests, the resource envelope, host capabilities, the .dwp/config.json addon registry and addon-provided abilities.',
+  },
+  {
     name: 'Specification — delegation',
     path: '/spec/delegation',
     description:
