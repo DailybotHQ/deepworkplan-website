@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer（第一个附加组件）
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`，固定为 `v1.0.1`，接口 `2`）的轻量集成器：一个由 `dck init` 渲染到仓库中、作为仓库自有容器的 Dev Containers 模板，外加 `dck-dockerfile` 技能。
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`，固定为 `v1.1.1`，接口 `2`）的轻量集成器：一个由 `dck init` 渲染到仓库中、作为仓库自有容器的 Dev Containers 模板，外加 `dck-dockerfile` 技能。
 
 - **套件页：** [Devcontainer](/kit/devcontainer)
 - **新增内容：** 基于按 digest 固定的运行时官方镜像生成的 `docker/local/<service>/Dockerfile`（`python-3.13`、`node-24` 或 `debian`，无共享基础镜像）、构建在 `dck` 启动器（`up`、`shell`、`rebuild`、`doctor`）之上的 `dev.sh`、作为可选启用层的编码代理、仅限回环地址的端口、经由宿主机 agent 通过 SSH 使用的 git（容器内不放任何密钥，除非开发者在其主机配置文件中通过 `[ssh] copy_keys` 选择启用），以及每个容器采用标准布局的 Herdr 机器
