@@ -24,7 +24,9 @@ deepworkplan-skill pins). The pins last moved on 2026-10-25: pack `v7.9.0`,
 herdr-peers `v1.1.0` (native debates), coding-agents-kit `v1.1.0`,
 deepworkplan-vim `v1.0.1`, ai-diff-reviewer `v3.3.16` and agent-skill
 `v3.23.20`, with the pack, the reviewer and the Dailybot skill vendored at
-those tags; devcontainer-kit stays at `v1.0.1` until its next release.
+those tags; devcontainer-kit `v1.1.1` (interface 2 unchanged) bakes
+herdr-peers `v1.1.0`, coding-agents-kit `v1.1.0` and deepworkplan-vim `v1.0.1`
+into its image.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|

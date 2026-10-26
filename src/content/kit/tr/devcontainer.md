@@ -25,7 +25,7 @@ git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./de
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.0.1` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.1.1` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
@@ -34,7 +34,7 @@ Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
-**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın yeni sabitlenmiş sürümleri (herdr-peers, coding-agents-kit ve DeepWorkPlan Vim; her biri `v1.0.0` sürümünde) içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın.
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın yeni sabitlenmiş sürümleri (herdr-peers `v1.1.0`, coding-agents-kit `v1.1.0` ve DeepWorkPlan Vim `v1.0.1`) içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın.
 
 ## Katmanlar
 

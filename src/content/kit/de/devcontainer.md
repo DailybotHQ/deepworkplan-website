@@ -25,7 +25,7 @@ git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./de
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.0.1`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.1.1`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
@@ -34,7 +34,7 @@ Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem L
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
 
-**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die neuen fixierten Versionen enthält (herdr-peers, coding-agents-kit und DeepWorkPlan Vim, jeweils auf `v1.0.0`).
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die neuen fixierten Versionen enthält (herdr-peers `v1.1.0`, coding-agents-kit `v1.1.0` und DeepWorkPlan Vim `v1.0.1`).
 
 ## Layer
 

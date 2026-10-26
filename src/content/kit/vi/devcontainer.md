@@ -25,7 +25,7 @@ git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./de
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.0.1`: `v0.2.0` không được hỗ trợ.
+Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.1.1`: `v0.2.0` không được hỗ trợ.
 
 | Mục | Giá trị |
 |---|---|
@@ -34,7 +34,7 @@ Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host 
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
 
-**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim mới (herdr-peers, coding-agents-kit và DeepWorkPlan Vim, mỗi thành phần ở `v1.0.0`).
+**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim mới (herdr-peers `v1.1.0`, coding-agents-kit `v1.1.0` và DeepWorkPlan Vim `v1.0.1`).
 
 ## Các lớp
 

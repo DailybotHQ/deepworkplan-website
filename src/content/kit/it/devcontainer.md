@@ -25,7 +25,7 @@ git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./de
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v1.0.1`: `v0.2.0` non è supportata.
+Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linux o macOS, e Docker con Compose v2 per i comandi del container. Verifica una release con il suo asset `SHA256SUMS`. Fissa `v1.1.1`: `v0.2.0` non è supportata.
 
 | Elemento | Valore |
 |---|---|
@@ -34,7 +34,7 @@ Requisiti: `bash` 3.2 o successivo e `python3` 3.11 o successivo su un host Linu
 | Configurazione per repository | `.devcontainer/dck.toml` |
 | Rilevamento | `dck doctor --json` |
 
-**Stabile da `v1.0.0`.** L’interfaccia pubblica segue il versionamento semantico e cambia in modo incompatibile solo in una nuova versione major (e, per i file, con un nuovo numero di interfaccia): i verbi di `dck` con i relativi flag documentati e codici di uscita (`0` ok, `1` fallito, `2` uso, `3` configurazione, `4` ambiente, `5` rifiutato), gli schemi di `dck.toml`, del profilo host e di `dck doctor --json` (interfaccia 2), e il contratto di rendering — i file che `dck init` scrive e possiede, i marcatori `dck:managed` e i blocchi utente che preserva, e l’ambiente che legge l’entrypoint. Nulla si rompe da `v0.3.7`: esegui `dck init` e `dck rebuild` perché l’immagine includa le nuove versioni fissate (herdr-peers, coding-agents-kit e DeepWorkPlan Vim, ciascuno a `v1.0.0`).
+**Stabile da `v1.0.0`.** L’interfaccia pubblica segue il versionamento semantico e cambia in modo incompatibile solo in una nuova versione major (e, per i file, con un nuovo numero di interfaccia): i verbi di `dck` con i relativi flag documentati e codici di uscita (`0` ok, `1` fallito, `2` uso, `3` configurazione, `4` ambiente, `5` rifiutato), gli schemi di `dck.toml`, del profilo host e di `dck doctor --json` (interfaccia 2), e il contratto di rendering — i file che `dck init` scrive e possiede, i marcatori `dck:managed` e i blocchi utente che preserva, e l’ambiente che legge l’entrypoint. Nulla si rompe da `v0.3.7`: esegui `dck init` e `dck rebuild` perché l’immagine includa le nuove versioni fissate (herdr-peers `v1.1.0`, coding-agents-kit `v1.1.0` e DeepWorkPlan Vim `v1.0.1`).
 
 ## Livelli
 

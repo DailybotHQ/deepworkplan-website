@@ -101,7 +101,7 @@ finché non è stato controllato.
   | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
   | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
   | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
-  | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
+  | devcontainer-kit | `v1.1.1` | `410fe708e9abc536bd8744b25306dc54e44f52cf6ce61013fa7d19c8052da792` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | nessuno pubblicato — la CLI skills registra un hash del contenuto in `skills-lock.json` |

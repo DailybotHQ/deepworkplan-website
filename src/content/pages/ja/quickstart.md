@@ -46,7 +46,7 @@ lastUpdated: 2026-10-11
   | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
   | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
   | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
-  | devcontainer-kit | `v1.0.1` | `90d8ff62281c3671b1f800dd8de06ac14404069e032876648500b066419393a2` |
+  | devcontainer-kit | `v1.1.1` | `410fe708e9abc536bd8744b25306dc54e44f52cf6ce61013fa7d19c8052da792` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | 公開なし — skills CLI が `skills-lock.json` にコンテンツハッシュを記録します |
@@ -203,7 +203,7 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 
 **オプションのアドオン。** 七つのオプションのアドオン（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim）を列挙し、このリポジトリに合うものだけを、それぞれ明示的なオプトインとして提案します。オプションのアドオンが**一つもなくても**、リポジトリは完全に適合します。これらを自動でインストールしてはいけません。
 
-- **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v1.0.1` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ独自のコンテナを生成し（公式イメージをダイジェストで固定、共有ベースイメージなし、`bash dev.sh up`）、既存の devcontainer は差分が受け入れられた後にのみ調整します。受け入れられたら、下の*devcontainer の手順*に従って完全なスタックまで仕上げます。
+- **Devcontainer サポート** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v1.1.1` に固定、`dck-dockerfile` スキル付き）の薄い統合レイヤー。`dck init` がリポジトリ独自のコンテナを生成し（公式イメージをダイジェストで固定、共有ベースイメージなし、`bash dev.sh up`）、既存の devcontainer は差分が受け入れられた後にのみ調整します。受け入れられたら、下の*devcontainer の手順*に従って完全なスタックまで仕上げます。
 - **Dailybot 連携** — 四つのライフサイクルイベント（キックオフ、重要なタスク、ブロック、完了）を、すでに Dailybot を使っているチームのための最善努力での進捗報告として、任意で自律的なフック強制層（`dailybot-cli >= 3.9.0`）付きで提供します。ペアの Dailybot エージェントスキル（3.23.14）をインストールすると、チャット、チェックイン、フォーム作成、AI への質問、Plan のボードとタスク、リポジトリごとの API キーなども利用可能になります。このアドオンは DWP 実行へのレポーティングの接続のみを行います。中核となる方法論は Dailybot への依存がゼロです。
 - **Dependency upgrade** — パッケージマネージャー非依存で、バッチ化され、検証され、取り消し可能な更新。受け入れられると、`/lib-upgrade` コマンドをインストールします。
 - **Design system** — 検出されたインターフェイス面を持つリポジトリのみを対象とした、オプトインの `docs/DESIGN.md`（純粋なライブラリ、ヘッドレスサービス、インフラ専用リポジトリには提案されません）。三つのプロファイルが一つのファイルに重ねられます：visual-ui（検出時に強く推奨；インストールは受け入れでゲート）、cli-output、conversational — 後者二つは常に尋ねられ、自動適用されることはありません。
