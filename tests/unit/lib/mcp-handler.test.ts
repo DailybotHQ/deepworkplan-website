@@ -279,6 +279,7 @@ describe('handleMcpRequest — tools/call', () => {
       '/kit/devcontainer',
       '/kit/vim',
       '/spec/record-layer',
+      '/spec/resources-and-abilities',
       '/spec/delegation',
     ]) {
       expect(text).toContain(`(${path})`);
