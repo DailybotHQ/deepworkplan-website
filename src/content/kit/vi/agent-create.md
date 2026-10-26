@@ -1,6 +1,6 @@
 ---
 title: agent-create
-description: "Tạo một agent mới trong repository hiện tại — một worker chuyên biệt với tầng mô hình và bộ công cụ riêng — thông qua sub-skill author, giữ cho catalog luôn đồng bộ."
+description: "Tạo một agent mới trong repository hiện tại — một worker chuyên biệt với tầng mô hình và bộ công cụ riêng — thông qua sub-skill author, giữ cho catalog luôn."
 kind: command
 lang: vi
 order: 8

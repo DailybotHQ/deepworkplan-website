@@ -19,24 +19,31 @@ Deep Work Plan to katalog plików Markdown. Kształt tego katalogu — i każdeg
 Plan to katalog w `.dwp/plans/` o nazwie `PLAN_001_<slug>/`. Zawiera:
 
 
+- `manifest.json` — tożsamość planu i wskaźnik do jego aktywnego kontraktu, zapisywany jako pierwszy podczas materializacji.
+- `contract.json` — formalny kontrakt wykonawczy.
+- `journal.ndjson` — niezmienny dziennik zdarzeń.
+- `state.json` — migawka rzutowana z dziennika (journal), nigdy nieedytowana ręcznie.
 - `README.md` — przegląd planu: cel, materiały źródłowe, tabelę zadań i status.
-- Jeden plik na zadanie, o nazwie `<n>.task_<slug>.md`.
-- `PROGRESS.md` — bieżący dziennik realizacji.
+- Pliki zadań, nazwane `<n>.task_<slug>.md`.
+- `PROGRESS.md` — bieżący dziennik realizacji dopisywany wyłącznie na bieżąco.
+- `analysis_results/` — wyniki analiz, raporty audytowe i dowody.
 
 
 Aktualny pakiet 7.x domyślnie tworzy plany v7, ze slugami 2–5 słów, tak jak plany v6. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia. Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slugi v6 i v7 mają 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
 
 ## Struktura pliku zadania
 
-Każdy plik zadania nosi nazwę `<n>.task_<slug>.md` i podąża za dziesięciosekcyjną anatomią: Cel, Kontekst, Powierzchnia dotknięta, Kroki, Kryteria akceptacji, Walidacja, Pliki, Zależności, Ryzyka oraz Ukończenie i dziennik. Sekcje zawsze pojawiają się w tej kolejności, więc każdy czytelnik wie, gdzie szukać. Każde zadanie ponownie zakotwicza się w celu planu, zanim zacznie działać, co chroni agenta przed dryfem na długim, wielogodzinnym dystansie.
+Każdy plik zadania nosi nazwę `<n>.task_<slug>.md` i podąża za dziesięciosekcyjną anatomią szczegółowo opisaną w [Podstawowej pętli](/pl/methodology/02-core-loop#dziesięciosekcyjna-anatomia-zadania). Sekcje zawsze pojawiają się w tej samej kolejności, dzięki czemu czytelnik natychmiast wie, gdzie szukać. Każde zadanie ponownie zakotwicza się w celu planu, zanim zacznie działać, co chroni agenta przed dryfem na długim dystansie.
 
 ## Final Review
 
-Każdy plan musi kończyć się dokładnie jednym obowiązkowym zadaniem: **Final Review**. Zamyka on plan w trzech uporządkowanych przebiegach — nic w przeglądzie bezpieczeństwa nie zostaje złagodzone:
+Każdy plan musi kończyć się dokładnie jednym obowiązkowym zadaniem: **Final Review**. Zamyka on plan w pięciu uporządkowanych etapach — nic w przeglądzie bezpieczeństwa nie zostaje złagodzone:
 
-1. **Przegląd bezpieczeństwa** — przeprowadź audyt wszystkiego, co plan zmienił, pod kątem sekretów, ryzyk iniekcji i nowej powierzchni ataku, oraz utrzymuj `docs/SECURITY.md` w aktualności. Bezpieczeństwo nie jest osobnym strumieniem pracy doklejanym na końcu: każdy plan pozostawia własne zmiany poddane audytowi, a krytyczne znalezisko blokuje ukończenie.
-2. **Walidacja stanu końcowego** — pełna walidacja repozytorium uruchamia się i przechodzi na ostatnim istotnym stanie, po ostatniej poprawce.
-3. **Uzgodnienie decyzji dotyczących skilli** — każde zadanie zapisało własne rozstrzygnięcie dotyczące skilli, gdy dowody były świeże; przegląd uzgadnia ten rejestr. Raport wykonawczy pozostaje dostępny na życzenie.
+1. **Przejście bezpieczeństwa z wymaganym przeglądem lokalnym** — audyt wszystkiego, co plan zmienił, pod kątem sekretów, ryzyk iniekcji i nowej powierzchni ataku, utrzymywanie `docs/SECURITY.md` w aktualności oraz uruchomienie wymaganego lokalnego przeglądu AI Diff Reviewer w pełnym zakresie planu (brakujący recenzent jest rejestrowany jako ustalenie `local reviewer not installed`, nigdy niepomijany po cichu). Krytyczne ustalenie blokuje ukończenie.
+2. **Walidacja stanu końcowego** — pełne pakiety testów, linterów i sprawdzania typów uruchamiają się i przechodzą na ostatecznym stanie po ostatniej poprawce.
+3. **Uzgodnienie decyzji dotyczących skilli** — weryfikacja, że każde zadanie zapisało lokalną decyzję o skillach, z uzgodnieniem kandydatów w `analysis_results/SKILLS_CANDIDATES.md`.
+4. **Uzgodnienie dokumentacji** — powiązanie dotkniętej powierzchni każdego zadania zmieniającego zachowanie z dokumentacją (`docs/TESTING_GUIDE.md`, architektura, `AGENTS.md`).
+5. **Ukończenie** — rejestry planu są zgodne (lista zadań, dziennik postępu oraz w planach v6 i v7 migawka i pokwitowanie pochodzące z journal); zaraportowanie wyników, dowodów i ograniczeń oraz jednorazowe zaoferowanie Executive Report.
 
 ## Konwencje README i PROGRESS
 

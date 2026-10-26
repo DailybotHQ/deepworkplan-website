@@ -1,6 +1,6 @@
 ---
 title: Skills and agents
-description: "Perbedaan antara skill dan agent, onboarding repositori berbasis penalaran, dan direktori .agents dengan konvensi symlink .claude ke .agents."
+description: "Perbedaan antara skill dan agent, onboarding repositori berbasis penalaran, dan direktori .agents dengan symlink kompatibilitas mundur."
 order: 4
 lang: id
 summary: Bagaimana skill yang dapat dipakai ulang, agent terspesialisasi, dan onboarding repo saling melengkapi.
@@ -37,19 +37,20 @@ Selain authoring, DWP membawa **addon**. Tujuh bersifat opt-in — tidak pernah 
 
 Sebelum membuat atau mengeksekusi sebuah rencana, agent meng-onboard ke repositori. Onboarding bersifat **berbasis penalaran, bukan berbasis skrip**: agent membaca struktur, dokumentasi, dan konfigurasi repositori untuk membangun model mental alih-alih menjalankan skrip penyiapan yang tetap.
 
-Selama onboarding, agent mengidentifikasi arketipe repositori (individual versus orchestrator), perintah build, test, dan lint, konvensi yang ada untuk gaya, struktur, dan penamaan, serta skill dan agent yang sudah tersedia. Pemahaman inilah yang memungkinkan agent merencanakan dan mengeksekusi dengan cara yang sesuai dengan repositori alih-alih melawannya.
+Selama onboarding, agent mengidentifikasi arketipe repositori (repositori individual, orchestrator hub, atau ruang kerja agent), perintah build, test, dan lint, konvensi yang ada untuk gaya, struktur, dan penamaan, serta skill dan agent yang sudah tersedia. Pemahaman inilah yang memungkinkan agent merencanakan dan mengeksekusi dengan cara yang sesuai dengan repositori alih-alih melawannya.
 
 Toolchain pengujian dan validasi mendapat perhatian khusus, karena validation gate adalah yang membuat keluaran sebuah rencana andal. Ketika sebuah repositori sudah memiliki test dan linter, onboarding mencatat perintah dan konvensinya yang nyata. Ketika ia tidak memiliki satu pun, onboarding tidak sekadar mencatat celahnya — ia mengusulkan sebuah penyiapan yang sesuai dengan stack dan menuliskannya ke dalam panduan pengujian repositori, sehingga setiap rencana di masa depan memiliki gate nyata untuk dijalankan ketimbang yang tidak terdefinisi.
 
-## Direktori `.agents/` dan symlink `.claude → .agents`
+## Direktori `.agents/` dan symlink kompatibilitas mundur
 
 DWP mengumpulkan segala sesuatu yang mendefinisikan perilaku agent — skill, command, definisi agent, dokumentasi internal, dan pengaturan — di bawah satu direktori kanonis, `.agents/`. Nama itu menandakan bahwa isinya dibagikan lintas agent ketimbang terikat pada satu alat mana pun.
 
-Demi kompatibilitas mundur dengan alat yang secara historis membaca dari `.claude/`, path itu adalah sebuah symlink ke `.agents/`:
+Demi kompatibilitas mundur dengan alat yang secara historis membaca dari `.claude/` atau `.cursor/`, path-path tersebut adalah symlink ke `.agents/`:
 
 ```bash
-ls -la .claude
+ls -la .claude .cursor
 # .claude -> .agents
+# .cursor -> .agents
 ```
 
-Setiap path `.claude/...` me-resolve secara transparan ke padanan `.agents/...`-nya, sehingga perkakas lama tetap bekerja sementara konten baru merujuk ke lokasi kanonis `.agents/`. Skill dan agent disunting melalui berkas nyata di bawah `.agents/`, tidak pernah melalui symlink.
+Setiap path `.claude/...` dan `.cursor/...` me-resolve secara transparan ke padanan `.agents/...`-nya, sehingga perkakas lama tetap bekerja sementara konten baru merujuk ke lokasi kanonis `.agents/`. Skill dan agent disunting melalui berkas nyata di bawah `.agents/`, tidak pernah melalui symlink.

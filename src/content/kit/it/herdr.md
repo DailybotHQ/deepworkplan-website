@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) colloca gli agenti di codice in pannelli, sulla tua macchina e sulle macchine che raggiunge via SSH. Questo addon consente a un Deep Work Plan di usare quegli agenti come **peer**: un piano può affidare un task delimitato a un agente in un altro pannello, ricevere esattamente una risposta autorizzata e conservare una traccia dello scambio.
 
-È un addon opzionale di **DWP v7** (`v7.0.0`). La metodologia funziona allo stesso modo senza di esso: con l’addon assente o disattivato, ogni task viene eseguito nella sessione corrente, esattamente come prima.
+È un addon opzionale di **DWP v7** (pack `v7.9.0`). La metodologia funziona allo stesso modo senza di esso: con l’addon assente o disattivato, ogni task viene eseguito nella sessione corrente, esattamente come prima.
 
 ## Cosa integra
 
-L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.0.0`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
+L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.1.0`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protocollo 1 |
+| Prodotto | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocollo 1 |
 | Chiave di registro | `herdr` in `.dwp/config.json` |
 | Trasporto | interattivo: un peer in un pannello Herdr |
 | Fornisce | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](http
 Installa herdr-peers e la skill ufficiale di Herdr, da cui dipende. Ogni macchina i cui agenti devono rispondere ha bisogno anch’essa della skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +58,7 @@ herdr-peers non autentica il mittente: il campo `from=` di un timbro è un’aff
 
 ## Container e host
 
-Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v1.0.1`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai. Da herdr-peers (`v0.2.3`), ogni macchina mantiene il proprio stato (`$XDG_STATE_HOME/herdr-peers/<server>/`), quindi un checkout condiviso dall’host e da un container non mescola più i loro registri, e da devcontainer-kit (`v0.3.3`) il container esporta `HERDR_PEERS_SELF` da sé, così gli agenti Codex al suo interno raggiungono altre macchine senza passaggi manuali.
+Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v1.1.1`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai. Da herdr-peers (`v0.2.3`), ogni macchina mantiene il proprio stato (`$XDG_STATE_HOME/herdr-peers/<server>/`), quindi un checkout condiviso dall’host e da un container non mescola più i loro registri, e da devcontainer-kit (`v0.3.3`) il container esporta `HERDR_PEERS_SELF` da sé, così gli agenti Codex al suo interno raggiungono altre macchine senza passaggi manuali.
 
 ## Herdr o agentkit
 
@@ -71,7 +71,7 @@ Entrambi gli addon implementano la stessa interfaccia di delega — `launch`, `o
 
 Per un lead che esegue molte corsie insieme — pannelli sull’host, nei container e su altre macchine, ciascuno sul proprio account — `herdr-peers lanes` elenca ogni corsia con il suo stato, `herdr-peers status <pane>` classifica la schermata in cui si trova una corsia bloccata, e ogni record di delega indica l’account e il fornitore che l’hanno svolta. Vedi [Eseguire molti agenti](/methodology/06-orchestration).
 
-**Le lane Codex indicano il proprio pannello.** Codex esegue i comandi di una lane da un server in background condiviso da tutte le sessioni di quell’account, quindi l’id di pannello ereditato può appartenere a un’altra lane. Una lane Codex passa il proprio pannello, indicato nel brief del lead, con `--pane <pane>` su ogni verbo di herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Ogni lane indica il proprio pannello.** In base alle regole di autonomia dello swarm (Guide §17.2), ogni lane passa il proprio pannello con  su ogni verbo herdr-peers (, , , , , , ) per evitare attribuzioni errate dei messaggi e saturazione degli slot di distribuzione. Le lane Codex lo richiedono con particolare rigore a causa della condivisione del server in background tra le sessioni.
 
 ## Notifiche e guida
 
@@ -84,6 +84,20 @@ herdr-peers (`v0.3.2`) aggiunge ciò che permette a uno sciame di sopravvivere a
 - **Schermate `usage_limit`.** `status` e `lanes` riconoscono il messaggio di limite d’uso di una CLI come la classe di schermata `usage_limit`, il cui passo successivo è un passaggio di consegne. Non vi si inviano mai tasti. `lanes --json` aggiunge il piano, il suo lead, l’epoca e l’ultima capacità riportata da ogni corsia.
 
 Le corsie possono anche chiedersi a vicenda informazioni e coordinarsi — un’interfaccia, il nome di un flag, lo stato di un branch —, ma solo il lead assegna il lavoro. La profondità 1 e il limite di fan-out restano validi. Con `v0.2.x` non esistono notifiche né record di lead: le corsie interpellano l’indirizzo del lead indicato nel loro brief, e un cambio di lead viene inoltrato dallo sviluppatore.
+
+## Dibattiti
+
+herdr-peers 1.1.0 aggiunge una sub-skill nativa di **dibattito** (`debate.md`): un agente lead guida un panel di peer nei pannelli di Herdr attraverso una serie di round e chiude con un unico risultato di cui la persona può fidarsi, con le sue prove e il suo dissenso. Usala solo quando la persona chiede un dibattito, un panel, un red team, una ricerca da più agenti o angolazioni, o un secondo panel su un risultato; l'opinione di un singolo agente è una singola richiesta.
+
+- **Prima lo scopo.** Il lead sceglie lo scopo — **decidere**, **ricercare** lo stato dell'arte, **mettere sotto stress**, **verificare** o **generare** — e ognuno ha i suoi formati, il suo conteggio e il suo deliverable. Gli scopi si concatenano (ricercare → decidere, decidere → verificare) e un dibattito si dimensiona come rapido, standard o approfondito.
+- **Il contratto del lead.** Il lead non vota mai; le parole della persona sono copiate alla lettera; i brief arrivano al panel attraverso un solo canale; ogni pannello scrive il proprio contributo su disco e risponde con una riga; nessun pannello compie azioni esterne.
+- **Formati.** Ricerca per angolazioni, round classici, pacchetto di bozza, controinterrogatorio affermazione per affermazione, prima red team poi difensori, prima steelman poi giudizio, sfida alla cieca con contesto nuovo, panel di replica e proposte divergenti. Una decisione termina sempre in uno spazio di verdetto obbligato.
+- **Il verbo `herdr-peers debate`.** `tally` conta schede a preferenze ordinate e verdetti per voce (Borda, Copeland, duelli a coppie, vincitore e perdente di Condorcet); `claims` unisce i registri di affermazioni delle corsie in stati come stabilita, contestata o confutata, che sono un quorum, non una verifica; `anon` copia i contributi con nomi anonimi, con la corrispondenza in una chiave privata; `filings` elenca i contributi presenti, mancanti e troppo brevi, così da richiedere di nuovo solo ai pannelli mancanti.
+- **Comporre il panel.** `panel` propone un panel e non esegue nulla. I posti vengono assegnati a rotazione tra i fornitori di modelli e, all'interno di un fornitore, viene prima il posto con più quota, scelto tra i pannelli inattivi e, quando agentkit (`ak`) è installato, tra gli account che `ak pick` propone. Senza `ak`, raccomanda coding-agents-kit (opzionale, `v1.0.1` o successiva).
+- **Modelli.** Sedici modelli in `templates/debate/`, dalla nota della persona e dai brief di ricerca, di stress test e di round fino ai file di schede e di affermazioni, al pacchetto di passaggio di consegne del lead e ai registri di decisione, stato dell'arte, stress test e replica.
+- **Consegna a un peer bloccato.** `reply` e `notify` ritentano la consegna a un peer fermo su una domanda per un massimo di `--wait-blocked` secondi; resta esattamente una risposta.
+
+La versione è solo additiva: il protocollo 1 e tutti i verbi, flag, codici di uscita e contratti JSON restano invariati.
 
 ## Note
 

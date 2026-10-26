@@ -1,6 +1,6 @@
 ---
 title: Python package / CLI
-description: "Python パッケージと CLI ツール向けのオンボーディングプリセット。パッケージのレイアウト、コンソールのエントリーポイント、pytest による検証ゲートについての推論の手がかりを備える。"
+description: "Python パッケージと CLI ツール向けのオンボーディングプリセット。パッケージのレイアウト、コンソールのエントリーポイント、pytest による検証ゲートについての推。"
 kind: preset
 lang: ja
 order: 5

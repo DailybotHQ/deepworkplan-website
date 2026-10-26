@@ -14,7 +14,7 @@ Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件�
 
 > Deep Work Plan 是一种规范驱动的开发方式，在其中代码仓库本身成为执行的 harness（运行支架）。
 
-- [打开 /init 提示](/init)
+- [打开 /init 提示](/zh/quickstart)
 - [阅读方法论](/methodology)
 
 ---
@@ -87,6 +87,7 @@ Deep Work Plan 以规范驱动开发应对：一份持久的计划、原子任�
 - 一个 `.agents/` 目录（技能、代理、命令），含 `.claude` 到 `.agents` 的符号链接。
 - Deep Work Plan 技能，为每个代理一次性安装——包括 author 子技能，使代码仓库得以培育自己的技能、代理与命令，外加诸如 dependency-upgrade 与适用于任何面向用户界面表面的 design-system 附加组件这样的可选附加组件。
 - 存放于被 gitignore 的 `.dwp/` 目录中的长周期、可恢复的计划。
+- 多代理委托与 1.0 生态系统 — 通过独立的 git 工作区安全协调并行代理，验证关卡观察到的证据，支持容量交接以及可选的固定版本生态插件。
 
 ---
 

@@ -23,11 +23,15 @@ Behandeln Sie das Skill als nicht vertrauenswürdig, bis Sie es geprüft haben. 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-# Download the checksums for the release you intend to install (replace vX.Y.Z):
+git checkout v7.9.0
+# Download the checksums for the release you intend to install (current release v7.9.0):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/vX.Y.Z/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
+# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
 ```
+
+Die Ökosystem-Pin-Tabelle in [/init.md](/init.md) listet die Prüfsummen für das Paket und die Addons auf.
 
 Releases sind mit **Prüfsummen versehen, aber nicht signiert** — Signierung (cosign oder Betreuer-GPG) ist ein dokumentierter nächster Schritt, keine aktuelle Aussage. Da alles offen ist, können Sie auch jede Datei gegen das Repository bei seinem Tag vergleichen.
 
@@ -46,7 +50,7 @@ Melden Sie Sicherheitsprobleme **privat über GitHub's Private Vulnerability Rep
 
 ## Ehrliche Einschränkungen
 
-- Releases sind mit Prüfsummen versehen, aber noch nicht kryptographisch signiert — Signierung ist geplant, aber noch nicht umgesetzt.
+- Releases sind mit Prüfsummen versehen, aber noch nicht signiert — Signierung ist geplant, aber noch nicht umgesetzt.
 - Deep Work Plan führt einen autonomen Coding-Agenten gegen Ihr Repository aus. Überprüfen Sie den vorgeschlagenen Plan und die Diffs; die Methodik ist für diese Überprüfung konzipiert, nicht um sie zu ersetzen.
 - Diese Vertrauensaussagen beschreiben nur die offiziellen Quellen. Eine modifizierte oder von Drittanbietern stammende Kopie, die von den Repositories abgewichen ist, trägt keine dieser Garantien — verifizieren Sie sie zuerst.
 
@@ -59,4 +63,4 @@ Melden Sie Sicherheitsprobleme **privat über GitHub's Private Vulnerability Rep
 - [Website-Sicherheitsrichtlinie](https://github.com/DailybotHQ/deepworkplan-website/blob/main/SECURITY.md)
 - [Skill-Sicherheitsrichtlinie & Bedrohungsmodell](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/SECURITY.md)
 - [Methodik lesen](/methodology)
-- [Adoption (Init)](/init)
+- [Adoption (Init)](/de/quickstart)

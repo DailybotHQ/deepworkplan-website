@@ -1,6 +1,6 @@
 ---
 title: Go
-description: "Go 프로젝트를 위한 온보딩 프리셋으로, 모듈, cmd/internal 레이아웃, 테이블 주도 테스트, go test/vet/build 게이트에 대한 추론 단서를 제공합니다."
+description: "Go 프로젝트를 위한 온보딩 프리셋으로, 모듈, cmd/internal 레이아웃, 테이블 주도 테스트, go test/vet/build 게이트에 대한 추론."
 kind: preset
 lang: ko
 order: 20

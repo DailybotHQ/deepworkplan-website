@@ -15,7 +15,7 @@ Cursor hỗ trợ DWP thông qua project rules và các file lệnh.
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — các lệnh DWP hoạt động thông qua hệ thống rules của Cursor.
+**Đầy đủ** (Đã kiểm thử cài đặt) — các lệnh DWP hoạt động thông qua hệ thống quy tắc của Cursor. Các tuyến thư mục được xác minh bởi các bộ kiểm thử tự động; quy trình làm việc hành vi thực thi tuần tự.
 
 ## Cài đặt
 
@@ -24,7 +24,7 @@ Các lệnh DWP tồn tại dưới dạng markdown trong dự án. Cursor đọ
 Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak cursor`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

@@ -19,17 +19,17 @@ Cloud และ background agent — Claude Code remote tasks, OpenAI Codex clou
 
 ## ระดับการสนับสนุน
 
-**Full** — cloud agent ใดก็ตามที่อ่าน repository ปฏิบัติตาม `AGENTS.md` และสามารถดำเนินคำสั่ง shell รองรับ DWP โดยไม่ต้องมี adapter เฉพาะแพลตฟอร์ม
+**สมบูรณ์** (มีเอกสารประกอบ) — แพลตฟอร์มเอเจนต์บนคลาวด์อ่าน `AGENTS.md` หรือคำแนะนำดั้งเดิม และดำเนินการตามคำสั่งผ่านสภาพแวดล้อมเทอร์มินัลหรือคอนเทนเนอร์
 
 ## ลูป wake-resume-yield
 
 แต่ละรอบ cloud agent ปฏิบัติตามรูปแบบ:
 
 1. **Wake** — เซสชันเริ่มต้น (ทริกเกอร์โดยกำหนดเวลา cron เหตุการณ์ CI หรือการกระทำของผู้ใช้)
-2. **รัน DWP Resume Protocol** — อ่าน README ของแผน ระบุ checkpoint ปรับประสาน `state.json` กับ markdown ตรวจสอบรอยต่อ รัน smoke test ดู [ข้อกำหนด DWP](/spec/dwp-specification#the-dwp-resume-protocol)
+2. **รันโปรโตคอลทำต่อของ DWP** — อ่าน README ของแผนงาน ค้นหาจุดตรวจสอบ สร้างสถานะใหม่จาก `journal.ndjson` ผ่าน `ledger.py project` ตรวจสอบรอยต่อ รันการทดสอบเบื้องต้น ดู [ข้อมูลจำเพาะ DWP](/spec/dwp-specification#the-dwp-resume-protocol)
 3. **ตรวจสอบสถานะ blocked** — ถ้า `state.json.blocked` ถูกตั้งค่าไว้ รายงานเหตุผลและ yield โดยไม่ดำเนินการ
 4. **ดำเนินงาน atomic ถัดไป** — หนึ่งงาน ผ่าน validation gate เต็มรูปแบบ
-5. **อัปเดตชั้นสถานะ** — เขียน `state.json` แบบ atomic ใหม่พร้อมสถานะงานใหม่ บันทึก gate บันทึกผลลัพธ์ และ commit hash
+5. **บันทึกลงในเจอร์นัล** — เพิ่มเหตุการณ์ต่อท้าย `journal.ndjson` ผ่านคำกริยา `ledger.py` (`start`, `gate`, `complete`); `ledger.py project` จะอัปเดตภาพรวมสแนปช็อต `state.json` ที่ได้รับมาโดยอัตโนมัติ ในแผนงาน v5 ดั้งเดิม การอัปเดตไฟล์สถานะโดยตรงจะยังคงอยู่
 6. **Yield** — เซสชันสิ้นสุดอย่างสะอาด รอบถัดไปรับต่อจากสถานะที่อัปเดต
 
 ## ข้อกำหนด

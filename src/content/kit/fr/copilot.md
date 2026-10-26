@@ -15,7 +15,7 @@ Copilot prend en charge DWP via AGENTS.md et des procédures de commande en Mark
 
 ## Niveau de prise en charge
 
-**Complet** — Copilot lit AGENTS.md et les fichiers de procédure dwp-*, et exécute chaque commande depuis ceux-ci.
+**Complet** (Validé par l'installation) — Copilot lit AGENTS.md et les fichiers de procédure dwp-*, et exécute chaque commande à partir d'eux. Itinéraire validé par des suites de tests automatisées.
 
 ## Installation
 

@@ -1,6 +1,6 @@
 ---
 title: Mise à jour des dépendances
-description: "Un addon facultatif, indépendant du gestionnaire de paquets, qui met à jour les dépendances d’un dépôt par lots validés et réversibles, en détectant le vrai gestionnaire, sans supposer npm."
+description: "Un addon facultatif, indépendant du gestionnaire de paquets, qui met à jour les dépendances d’un dépôt par lots validés et réversibles, en détectant le vrai."
 kind: addon
 lang: fr
 order: 3
@@ -23,6 +23,16 @@ Mettre les dépendances d’un dépôt à jour avec un workflow par lots, valid�
 4. Exécuter la vraie porte de validation du dépôt après chaque lot ; annuler tout lot qui échoue.
 5. Résumer ce qui a été mis à jour, ignoré et annulé ; laisser le développeur valider.
 
+
+## Spécification v7
+
+| Élément | Valeur |
+|---|---|
+| Produit | Addon dependency-upgrade de DeepWorkPlan |
+| Clé de registre | `dependency-upgrade` dans `.dwp/config.json` |
+| Descripteur | `addons/dependency-upgrade/addon.json` (interface 1) |
+| Commande | `/lib-upgrade` installé dans `.agents/commands/` lorsqu'il est accepté |
+| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v7.9.0`) |
 ## Notes
 
 Indépendant du gestionnaire de paquets — n’exécute jamais npm/ncu dans un dépôt non JS. Facultatif, jamais requis, et ne valide jamais automatiquement.

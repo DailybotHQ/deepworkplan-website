@@ -1,6 +1,6 @@
 ---
 title: GitHub Copilot
-description: "El adaptador de DWP para GitHub Copilot, con soporte completo a través de AGENTS.md y procedimientos de comando en Markdown invocados con el prefijo almohadilla."
+description: "El adaptador de DWP para GitHub Copilot, con soporte completo a través de AGENTS.md y procedimientos Markdown invocados con el prefijo almohadilla."
 kind: adapter
 lang: es
 order: 4
@@ -15,7 +15,7 @@ Copilot admite DWP a través de AGENTS.md y procedimientos de comando en Markdow
 
 ## Nivel de soporte
 
-**Completo** — Copilot lee AGENTS.md y los archivos de procedimiento dwp-*, y ejecuta cada comando desde ellos.
+**Completo** (Comprobado por instalación) — Copilot lee AGENTS.md y los archivos de procedimiento dwp-*, y ejecuta cada comando desde ellos. Ruta verificada mediante suites de pruebas automatizadas.
 
 ## Instalación
 

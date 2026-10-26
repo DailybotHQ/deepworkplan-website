@@ -1,6 +1,6 @@
 ---
 title: Flutter
-description: "Preset de incorporación para proyectos Flutter y Dart, con pistas de razonamiento para widgets, el analizador, la gestión de estado, la generación de código y flutter test."
+description: "Preset de incorporación para proyectos Flutter y Dart, con pistas para widgets, el analizador, la gestión de estado, la generación de código y flutter test."
 kind: preset
 lang: es
 order: 17

@@ -41,7 +41,7 @@ Her şeridin bir planı vardır, en azından kendi deposunda bir Lite plan, ve b
 
 ## Kapasite döngüsü
 
-Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren herhangi bir kapı ya da adımdan sonra, CLI'ı bir kullanım sınırı uyarısı gösterdiğinde ve bir devri ya da liderliği kabul etmeden önce kontrol eder. Kontrol, coding-agents-kit `v1.0.1` ile gelen `ak capacity --self --json` komutudur; paketin yardımcısı onu bir karara dönüştürür:
+Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren herhangi bir kapı ya da adımdan sonra, CLI'ı bir kullanım sınırı uyarısı gösterdiğinde ve bir devri ya da liderliği kabul etmeden önce kontrol eder. Kontrol, coding-agents-kit `v1.1.0` ile gelen `ak capacity --self --json` komutudur; paketin yardımcısı onu bir karara dönüştürür:
 
 | Sonuç | Karar | Bir şerit | Bir lider, kendisi için |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Bir ajan kendi yerini her görevi başlatmadan önce, 20 dakikadan uzun süren h
 
 ## Lider halefiyeti
 
-herdr-peers `v1.0.0`, plan başına bir lider kaydı tutar — lider, epoch, halef listesi ve şeritler — ve `lead` adresini mevcut lidere çözer; böylece hiçbir şerit görev tanımı liderin bölmesini sabit olarak yazmaz.
+herdr-peers `v1.1.0`, plan başına bir lider kaydı tutar — lider, epoch, halef listesi ve şeritler — ve `lead` adresini mevcut lidere çözer; böylece hiçbir şerit görev tanımı liderin bölmesini sabit olarak yazmaz.
 
 - **Önce sahiplen, sonra başlat.** Lider, herhangi bir şeridi başlatmadan önce `herdr-peers lead claim --plan <P> --succession <A,B>` komutunu çalıştırır — `lead` adresi ancak bir kayıt var olduğunda çözümlenir —, şeritler başladıkça kaydı `--lanes <A,B>` ile yeniler ve plan bittiğinde `lead release` komutunu çalıştırır. herdr-peers (`v0.3.2`) sürümünden itibaren kayıt, sahiplenen depoyu yerel olarak tutar ve başka bir depoda aynı kimliğe sahip bir plan `--plan <repo>/<id>` olarak adlandırılır. Varsayılan halef listesi, önce planlanmış halefi, sonra başlatma sırasına göre planın kendi çalışma kopyasındaki şeritleri, sonra aynı ana makinedeki herhangi bir şeridi içerir; konteynerlerdeki ya da başka makinelerdeki şeritler en sona gelir.
 - **Planlı devir.** `low` durumunda lider bir aday halef belirler. `critical` durumunda bir lider paketi yazar — şerit tablosu, açık sorular, sürüm sırası, bekleyen birleştirmeler, kararlar — epoch'u yükselten ve her şeride bildirim gönderen `herdr-peers lead handover <addr> --plan <P>` komutunu çalıştırır ve durur. Halef paketi kabul eder, orkestratör planını sürdürür ve her şeridi yeniden kontrol eder.

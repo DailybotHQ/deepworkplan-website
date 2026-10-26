@@ -44,6 +44,11 @@ v7 planları için — güncel 7.x paketinin varsayılanı — makine tarafında
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (`delegation` olayını ekler)
 - **Plan snapshot (canlı görünüm, v6 ile ortak):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (v6 ile ortak):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Depo yapılandırması:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Eklenti tanımlayıcısı:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Sürü devir paketi:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Kıyaslama kaydı:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Öğrenimler kaydı:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 v6 planları kendi v6 şemalarını korur ([manifesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [sözleşme](https://deepworkplan.com/schema/plan-contract/v6.json), [günlük olayı](https://deepworkplan.com/schema/journal-event/v6.json)); mevcut v5 planları v5 durum şemasını kullanmaya devam eder ve eski planlar sessizce yeniden yazılmaz.
 

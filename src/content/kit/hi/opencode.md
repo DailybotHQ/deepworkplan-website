@@ -15,7 +15,7 @@ OpenCode, ओपन-सोर्स कोडिंग एजेंट, ने�
 
 ## समर्थन स्तर
 
-**पूर्ण** — OpenCode AGENTS.md को नेटिव रूप से पढ़ता है और हर dwp-* कमांड को उसकी प्रक्रिया फ़ाइल से चलाता है।
+**पूर्ण** (स्थापना-परीक्षित) — OpenCode मूल रूप से AGENTS.md को पढ़ता है और अपनी प्रक्रिया फ़ाइल से प्रत्येक dwp-* कमांड चलाता है। स्वचालित परीक्षण सुइट्स द्वारा मार्ग की पुष्टि की गई है।
 
 ## इंस्टॉलेशन
 
@@ -24,7 +24,7 @@ DWP, AGENTS.md और कमांड प्रक्रियाएँ रि�
 वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak opencode` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

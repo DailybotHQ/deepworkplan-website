@@ -1,6 +1,6 @@
 ---
 title: Node / TS service
-description: "Node と TypeScript のサービスおよびサーバーレス API 向けのオンボーディングプリセット。リクエストのライフサイクル、連携、テストについての推論の手がかりを備える。"
+description: "Node と TypeScript のサービスおよびサーバーレス API 向けのオンボーディングプリセット。リクエストのライフサイクル、連携、テストについての推論の手がかりを。"
 kind: preset
 lang: ja
 order: 4

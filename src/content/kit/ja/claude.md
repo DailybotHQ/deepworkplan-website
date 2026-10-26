@@ -15,7 +15,7 @@ Claude Code は、ネイティブのスラッシュコマンドとスキルを�
 
 ## サポートレベル
 
-**完全** — 五つの DWP コマンドはすべて、ネイティブの Claude Code スラッシュコマンドに対応します。
+**完全**（動作テスト済み）— DWP サブスキルとライフサイクルコマンドの全スイートがネイティブの Claude Code スラッシュコマンドにマッピングされ、双方向の引き継ぎベンチマークで実証されています。
 
 ## インストール
 
@@ -24,7 +24,7 @@ DWP は `.agents/skills/` 配下のスキルとして配布されます（`.clau
 任意：[coding-agents-kit](/kit/agentkit) はこの CLI をインストールし、`ak claude` で起動できます。ベンダー公式のインストーラーでも同様に使えます。
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 

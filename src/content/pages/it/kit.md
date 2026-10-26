@@ -10,7 +10,7 @@ Il kit è tutto ciò che serve per eseguire la metodologia nella pratica. Si ins
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
 ```
 
 Il pacchetto 7.x attuale crea per impostazione predefinita i nuovi piani in v7. I piani esistenti mantengono la generazione registrata; la migrazione richiede una richiesta esplicita.
@@ -33,7 +33,7 @@ La skill Deep Work Plan è un router più nove sub-skill:
 
 I sottili slash command delegano alle sub-skill e agli addon:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — il ciclo pianifica-esegui-verifica.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — il ciclo pianifica-esegui-verifica.
 - `skill-create`, `agent-create` — delegano alla sub-skill author.
 - `lib-upgrade` — delega all’addon dependency-upgrade (installato solo quando quell’addon è accettato).
 
@@ -65,12 +65,12 @@ Capacità che il flusso di onboard aggiunge a un repo. Sette sono opzionali e ma
 **La metodologia funziona da sola. Gli addon la amplificano.** Ogni addon è un integratore leggero all’interno della skill Deep Work Plan, fissato tramite tag a un prodotto con il proprio repository, la propria release e la propria versione di interfaccia. Ogni prodotto funziona senza Deep Work Plan, e nessun addon è obbligatorio.
 
 - **Skill Deep Work Plan** — Crea, esegue, verifica, riprende e affina i piani. Non richiede alcun addon.
-- **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v1.0.0`.
-- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v1.0.1`.
-- **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, chiavi SSH solo su opt-in. Fissato a `devcontainer-kit@v1.0.1`.
-- **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v1.0.0`.
+- **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v1.1.0`.
+- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v1.1.0`.
+- **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, chiavi SSH solo su opt-in. Fissato a `devcontainer-kit@v1.1.1`.
+- **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v1.0.1`.
 
-Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.8.1`
+Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v7: `v7.9.0`
 
 ### Esempi
 

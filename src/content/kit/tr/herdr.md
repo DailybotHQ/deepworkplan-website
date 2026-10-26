@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev), kodlama agent'larını hem kendi makinenizde hem de SSH üzerinden eriştiği makinelerde bölmelere yerleştirir. Bu eklenti, bir Deep Work Plan'ın bu agent'ları **eş** (peer) olarak kullanmasını sağlar: bir plan, sınırları belirli bir görevi başka bir bölmedeki bir agent'a devredebilir, tam olarak bir yetkili yanıt alabilir ve bu alışverişin kaydını tutabilir.
 
-Bu, **DWP v7**'nin (`v7.0.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
+Bu, **DWP v7**'nin (pack `v7.9.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.0.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.1.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v1.0.0` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v1.1.0` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +58,7 @@ herdr-peers göndereni doğrulamaz: bir damgadaki `from=` alanı bir iddiadır. 
 
 ## Konteynerler ve ana makine
 
-devcontainer-kit `v1.0.1` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
+devcontainer-kit `v1.1.1` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
 
 ## Herdr mı agentkit mi
 
@@ -84,6 +84,20 @@ herdr-peers (`v0.3.2`), bir sürünün liderinden daha uzun yaşamasını sağla
 - **`usage_limit` ekranları.** `status` ve `lanes`, bir CLI'ın kullanım sınırı mesajını, bir sonraki adımı devir olan `usage_limit` ekran sınıfı olarak tanır. Ona asla tuş gönderilmez. `lanes --json`, planı, liderini, epoch'u ve her şeridin en son bildirdiği kapasiteyi ekler.
 
 Şeritler bilgi ve koordinasyon için birbirlerine de soru sorabilir — bir arayüz, bir bayrak adı, bir dal durumu — ama işi yalnızca lider atar. Derinlik 1 ve yayılma sınırı yine geçerlidir. `v0.2.x` ile bildirimler ve lider kayıtları yoktur: şeritler liderin adresini görev tanımlarından sorar ve bir lider değişikliğini geliştirici aktarır.
+
+## Tartışmalar
+
+herdr-peers 1.1.0, yerel bir **debate** alt becerisi (`debate.md`) ekler: lider bir ajan, Herdr panellerindeki eşlerden oluşan bir paneli turlar boyunca yönetir ve insanın güvenebileceği tek bir sonuçla, kanıtları ve muhalefet görüşleriyle birlikte kapatır. Yalnızca insan bir tartışma, panel, kırmızı takım, birden çok ajan ya da açıdan araştırma veya bir sonuç üzerine ikinci bir panel istediğinde kullanın; tek bir ajanın görüşü tek bir ask'tir.
+
+- **Önce amaç.** Lider amacı seçer — **karar vermek**, en güncel durumu **araştırmak**, **stres testi** yapmak, **doğrulamak** veya **üretmek** — ve her amacın kendi biçimleri, sayım yöntemi ve çıktısı vardır. Amaçlar zincirlenebilir (araştır → karar ver, karar ver → doğrula) ve bir tartışma hızlı, standart ya da derin olarak boyutlandırılır.
+- **Liderin sözleşmesi.** Lider asla oy vermez; insanın sözleri aynen aktarılır; brifingler panele tek bir kanaldan ulaşır; her panel görüşünü diske yazar ve tek satırla yanıt verir; hiçbir panel dış eylem yapmaz.
+- **Biçimler.** Açı araştırması, klasik turlar, taslak paketi, iddia iddia çapraz sorgu, önce kırmızı takım sonra savunucular, önce steelman sonra yargı, taze bağlamla kör meydan okuma, tekrarlama paneli ve ıraksak öneriler. Bir karar her zaman zorunlu bir hüküm alanıyla biter.
+- **`herdr-peers debate` komutu.** `tally` sıralı oy pusulalarını ve madde başına hükümleri sayar (Borda, Copeland, ikili düellolar, Condorcet kazananı ve kaybedeni); `claims` şeritlerin iddia defterlerini kanıtlanmış, tartışmalı veya çürütülmüş gibi durumlarda birleştirir ve bu durumlar bir doğrulama değil, bir yeter sayıdır; `anon` görüşleri anonim adlarla kopyalar ve eşlemeyi özel bir anahtarda tutar; `filings` mevcut, eksik ve kısa görüşleri listeler, böylece yalnızca eksik paneller yeniden sorulur.
+- **Paneli oluşturmak.** `panel` bir panel önerir ve hiçbir şey çalıştırmaz. Koltuklar model sağlayıcıları arasında sırayla dağıtılır; aynı sağlayıcıda en çok kotaya sahip koltuk önce gelir ve boşta duran panellerden ve agentkit (`ak`) kuruluysa `ak pick`'in önerdiği hesaplardan seçilir. `ak` yoksa coding-agents-kit'i (isteğe bağlı, `v1.0.1` veya üstü) önerir.
+- **Şablonlar.** `templates/debate/` altında on altı şablon: insanın notu ile araştırma, stres testi ve tur brifinglerinden oy pusulası ve iddia dosyalarına, liderin devir paketine ve karar, en güncel durum, stres testi ve tekrarlama kayıtlarına kadar.
+- **Engellenmiş bir eşe teslim.** `reply` ve `notify`, bir soruda takılmış eşe teslimi en fazla `--wait-blocked` saniye boyunca yeniden dener; yanıt yine tam olarak birdir.
+
+Sürüm yalnızca ekleme yapar: protokol 1 ve tüm komutlar, bayraklar, çıkış kodları ve JSON sözleşmeleri değişmeden kalır.
 
 ## Notlar
 

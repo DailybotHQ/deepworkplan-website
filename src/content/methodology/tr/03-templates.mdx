@@ -19,24 +19,31 @@ Bir Deep Work Plan, Markdown dosyalarından oluşan bir dizindir. O dizinin — 
 Bir plan, `.dwp/plans/` altında `PLAN_001_<slug>/` olarak adlandırılmış bir dizindir. Şunları içerir:
 
 
+- `manifest.json` — planın kimliği ve etkin sözleşmesine yönelik işaretçi, somutlaştırmada ilk yazılan.
+- `contract.json` — resmi yürütme sözleşmesi.
+- `journal.ndjson` — değişmez olay günlüğü.
+- `state.json` — journal üzerinden yansıtılan bir anlık görüntü, asla elle düzenlenmez.
 - `README.md` — plan genel görünümü: hedef, kaynak materyal, görev tablosu ve durum.
-- Görev başına bir dosya, `<n>.task_<slug>.md` olarak adlandırılır.
-- `PROGRESS.md` — yürütmenin çalışan bir günlüğü.
+- Görev dosyaları, `<n>.task_<slug>.md` olarak adlandırılır.
+- `PROGRESS.md` — yalnızca ekleme yapılan yürütme günlüğü.
+- `analysis_results/` — analiz çıktıları, denetim raporları ve kanıtlar.
 
 
 Güncel 7.x paketi varsayılan olarak v7 planları oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir. Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v7 slug’ları ise v6’daki gibi 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
 
 ## Görev dosyası yapısı
 
-Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılır ve on bölümlü anatomiyi izler: Hedef, Bağlam, Dokunulan Yüzey, Adımlar, Kabul kriterleri, Doğrulama, Dosyalar, Bağımlılıklar, Riskler ve Tamamlama ve Günlük. Bölümler her zaman bu sırayla görünür; böylece her okuyucu nereye bakacağını bilir. Her görev, harekete geçmeden önce planın hedefine yeniden bağlanır; bu da bir ajanın uzun, çok saatlik bir ufukta yönünü kaybetmesini önler.
+Her görev dosyası `<n>.task_<slug>.md` olarak adlandırılır ve [Çekirdek döngü](/tr/methodology/02-core-loop#on-bölümlü-görev-anatomisi) içinde ayrıntıları verilen on bölümlü anatomiyi izler. Bölümler her zaman aynı sırada görünür; böylece okuyucu nereye bakacağını hemen bilir. Her görev, harekete geçmeden önce planın hedefine yeniden bağlanır; bu da ajanın uzun bir ufukta sapmasını önler.
 
 ## Final Review
 
-Her plan, tam olarak tek bir zorunlu görevle bitmelidir: **Final Review**. Planı üç sıralı geçişle kapatır — güvenlik incelemesinde hiçbir şey gevşetilmez:
+Her plan, tam olarak tek bir zorunlu görevle bitmelidir: **Final Review**. Planı beş sıralı adımda kapatır — güvenlik incelemesinde hiçbir şey gevşetilmez:
 
-1. **Güvenlik incelemesi** — planın değiştirdiği her şeyi sırlar, enjeksiyon riskleri ve yeni saldırı yüzeyi açısından denetler ve `docs/SECURITY.md` dosyasını güncel tutar. Güvenlik, sona iliştirilen ayrı bir iş kolu değildir: her plan kendi değişikliklerini denetlenmiş bırakır ve kritik bir bulgu tamamlanmayı engeller.
-2. **Son-durum doğrulaması** — deponun eksiksiz doğrulaması, son düzeltmeden sonra, son ilgili durum üzerinde çalışır ve geçer.
-3. **Skill uzlaştırması** — her görev, kendi skill kararını kanıtı tazeyken kaydetti; inceleme defteri uzlaştırır. Executive Report talep üzerine kullanılabilir kalır.
+1. **Gerekli yerel incelemeyle güvenlik geçişi** — planın değiştirdiği her şeyi sırlar, enjeksiyon riskleri ve yeni saldırı yüzeyi açısından denetleyin, `docs/SECURITY.md` dosyasını güncel tutun ve planın tüm kapsamı üzerinde gerekli yerel AI Diff Reviewer incelemesini çalıştırın (eksik bir incelemeci sessizce atlanmaz, `local reviewer not installed` bulgusu olarak kaydedilir). Kritik bir bulgu tamamlamayı engeller.
+2. **Son durum doğrulaması** — deponun tam test, linter ve tip denetim paketleri, son düzeltmeden sonra son durum üzerinde çalışır ve geçer.
+3. **Yetenek kararlarının uzlaştırılması** — her görevin yerel bir yetenek kararı kaydettiğini doğrular ve `analysis_results/SKILLS_CANDIDATES.md` içindeki adayları uzlaştırır.
+4. **Belgelendirme uzlaştırması** — davranış değiştiren her görevin dokunduğu yüzeyi belgeleyen kılavuzlarla (`docs/TESTING_GUIDE.md`, mimari, `AGENTS.md`) eşleştirir.
+5. **Tamamlama** — plan kayıtları birbiriyle uyumludur (görev listesi, ilerleme günlüğü ve v6 ile v7 planlarında journal türevli anlık görüntü ve makbuz); teslimatları, kanıtları ve sınırlamaları bildirin ve Executive Report'u bir kez sunun.
 
 ## README ve PROGRESS kuralları
 

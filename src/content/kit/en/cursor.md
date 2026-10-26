@@ -15,7 +15,7 @@ Cursor supports DWP through project rules and command files.
 
 ## Support level
 
-**Full** — DWP commands work through Cursor's rules system.
+**Full** (Install-tested) — DWP commands work through Cursor's rules system. Directory routes verified by automated test suites; behavioral workflows execute sequentially.
 
 ## Installation
 
@@ -24,7 +24,7 @@ DWP commands live as markdown under the project. Cursor reads them through its r
 Optional: [coding-agents-kit](/kit/agentkit) can install this CLI and launch it with `ak cursor`. The vendor’s own installer works just as well.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

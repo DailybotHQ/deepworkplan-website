@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Báo cáo trạng thái của một Deep Work Plan mà không thực thi. Agent đọc kế hoạch và nhật ký tiến độ, rồi tổng kết công việc đã xong, đang làm và còn chờ."
+description: "Báo cáo trạng thái của Deep Work Plan theo bốn chiều vòng đời, giới hạn phong bì tài nguyên, yếu tố chặn và các ủy quyền mà không sửa đổi tệp nào."
 kind: command
 lang: vi
 order: 5
@@ -18,21 +18,22 @@ Báo cáo trạng thái Deep Work Plan mà không thực thi.
 
 ## Tác dụng
 
-`dwp-status` tổng kết tiến độ của kế hoạch mà không tạo ra thay đổi nào. Nó báo cáo các tác vụ đã hoàn thành, đang thực hiện và còn chờ.
+`dwp-status` theo hợp đồng là hoàn toàn chỉ-đọc. Nó tóm tắt tiến độ, các yếu tố chặn đang hoạt động, các điểm kiểm tra và phong bì tài nguyên mà không thay đổi bất kỳ tệp nào.
 
 ## Cách dùng
 
 ```
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Hành vi
 
-1. Đọc kế hoạch và `PROGRESS.md`.
-2. Tổng kết các tác vụ đã hoàn thành.
-3. Tổng kết các tác vụ đang thực hiện.
-4. Tổng kết các tác vụ còn chờ.
-5. Báo cáo mà không sửa đổi bất cứ thứ gì.
+1. **Bốn chiều vòng đời:** báo cáo định dạng (`lite` hoặc `full`), trạng thái hiện thực hóa (`materializing`, `ready` hoặc `promoting`), phê duyệt xem xét (`pending`, `approved` hoặc `pre_approved`) và tiến độ thực thi (`pending`, `in_progress`, `blocked` hoặc `completed`).
+2. **Tổng quan toàn kho mã:** khi được gọi không có đối số, liệt kê mọi kế hoạch dưới `.dwp/plans/` cùng tỷ lệ hoàn thành, định vị tác vụ đang hoạt động và tóm tắt yếu tố chặn.
+3. **Phong bì tài nguyên:** hiển thị bộ đếm đã tiêu thụ so với mức trần trên các chiều được theo dõi (`wall_clock`, số lần thử lại, số lần điều phối, chi phí, token) và cho biết các giới hạn đang được áp đặt thực sự hay chỉ mang tính khuyến nghị.
+4. **Chẩn đoán yếu tố chặn:** nêu chi tiết yếu tố chặn đang hoạt động từ `state.json.blocked`, được phân loại theo hệ phân loại leo thang tiêu chuẩn (các lớp C1–C7).
+5. **Quan sát ủy quyền:** tóm tắt các ủy quyền tác tử con đang mở và đã hoàn tất cùng các trao đổi ngang hàng đã được ghi nhận.
 
 ## Bí danh
 

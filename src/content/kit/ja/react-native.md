@@ -1,6 +1,6 @@
 ---
 title: React Native
-description: "React Native および Expo プロジェクト向けのオンボーディングプリセット。ナビゲーション、ネイティブ設定、テストランナー、ベアと管理下の違いに関する推論の手がかりを備える。"
+description: "React Native および Expo プロジェクト向けのオンボーディングプリセット。ナビゲーション、ネイティブ設定、テストランナー、ベアと管理下の違いに関する推論の手が。"
 kind: preset
 lang: ja
 order: 16

@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: 작업에 꼭 맞는 계획"
-description: "Deep Work Plan v4는 계획의 형식이 작업을 따르도록 만듭니다——그 반대가 아닙니다. Lite 계획은 이제 범위가 한정된 작업을 위한 완전하고 실행 가능한 제안이 되며, 별도의 초안 단계는 사라졌습니다."
+description: "Deep Work Plan v4는 형식을 작업에 맞춥니다: Lite 계획은 유계 작업을 위한 완전한 실행 제안서가 되며 초안 단계가 제거됩니다."
 date: 2026-09-11
 version: "v4 · Lite 우선 계획"
 kind: release

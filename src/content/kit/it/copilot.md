@@ -15,7 +15,7 @@ Copilot supporta DWP tramite AGENTS.md e procedure di comando in Markdown.
 
 ## Livello di supporto
 
-**Completo** — Copilot legge AGENTS.md e i file di procedura dwp-* ed esegue ogni comando da essi.
+**Completo** (Testato per installazione) — Copilot legge AGENTS.md e i file di procedura dwp-*, eseguendo ogni comando da essi. Percorso verificato da suite di test automatizzate.
 
 ## Installazione
 

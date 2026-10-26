@@ -1,6 +1,6 @@
 ---
 title: Protokół agenta
-description: "Normatywny kontrakt behawioralny dla agentów kodujących AI: onboarding, planowanie, realizacja, bezpieczeństwo i profile realizacji — praca interaktywna i nieobsługiwana."
+description: "Normatywny kontrakt behawioralny agentów kodujących AI: onboarding, planowanie, realizacja, bezpieczeństwo i profile pracy interaktywnej oraz nieobsługiwanej."
 order: 4
 lang: pl
 section: Protocol
@@ -32,7 +32,7 @@ Ta metodyka MUSI obsługiwać następujących agentów kodujących AI. Każdy pr
 | **OpenClaw** | Natywnie skanuje `<workspace>/.agents/skills/` (standard AgentSkills) | plain text |
 | **Hermes** | Ładowanie skilla zgodne ze standardem AgentSkills; czyta `AGENTS.md` | plain text |
 
-Pierwsze sześć to interaktywni agenci kodujący z człowiekiem w sesji. OpenClaw i Hermes to **autonomiczne platformy agentów** — długotrwałe demony z zaplanowanymi turami — i zazwyczaj wykonują plany pod profilem nieobsługiwanym (zob. [Profile realizacji](#execution-profiles)) wewnątrz przestrzeni roboczej agenta (zob. [Archetypy](/spec/archetypes) §3).
+Pierwsze sześć to interaktywni agenci kodujący z człowiekiem w sesji. OpenClaw i Hermes to **autonomiczne platformy agentów** — długotrwałe demony z zaplanowanymi turami — i zazwyczaj wykonują plany pod profilem nieobsługiwanym (zob. [Profile realizacji](#profile-realizacji)) wewnątrz przestrzeni roboczej agenta (zob. [Archetypy](/spec/archetypes) §3).
 
 Każdy obsługiwany agent MUSI traktować `AGENTS.md` jako jedyne źródło prawdy dla konwencji repozytorium. Plik konfiguracyjny specyficzny dla agenta MUSI się do niego odwoływać i NIE MOŻE powielać jego zawartości.
 

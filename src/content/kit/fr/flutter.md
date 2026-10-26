@@ -1,6 +1,6 @@
 ---
 title: Flutter
-description: "Un preset d'onboarding pour les projets Flutter et Dart, avec des indices de raisonnement sur les widgets, l'analyseur, la gestion d'état, la génération de code et flutter test."
+description: "Un preset d'onboarding pour les projets Flutter et Dart, avec des indices de raisonnement sur les widgets, l'analyseur, la gestion d'état, la génération de."
 kind: preset
 lang: fr
 order: 17

@@ -1,6 +1,6 @@
 ---
 title: DWP specification
-description: "Spesifikasi normatif Deep Work Plan: struktur rencana, anatomi tugas sepuluh bagian, pemilihan gate berdasarkan touched surface, loop eksekusi lima operasi, ruang kerja keluaran, dan pemberian versi."
+description: "Spesifikasi normatif Deep Work Plan: struktur rencana, anatomi tugas, pemilihan gate dari touched surface, operasi rencana, ruang kerja keluaran, dan versi."
 order: 2
 lang: id
 section: Workflow
@@ -63,6 +63,8 @@ Setiap berkas tugas MUST berisi sepuluh bagian ini, secara berurutan:
 10. **Completion & Log** — penanda status ditambah catatan kronologis.
 
 Sebuah tugas MAY juga menyertakan **bagian Delta** (RECOMMENDED untuk perubahan perilaku brownfield — lihat di bawah) dan **bagian Rollback** (RECOMMENDED untuk migrasi, perubahan infrastruktur, atau deployment).
+
+Dalam rencana v7, kontrak hasil juga dapat menandai sebuah tugas sebagai `parallel_safe`: sebuah pernyataan, yang ditetapkan saat pembuatan, bahwa tugas tersebut dapat dijalankan dalam sebuah delegasi tanpa saling bersilangan dengan pekerjaan saudaranya. Penanda ini tidak mengotorisasi apa pun tanpa grant `agent_delegation` dari kontrak ([Delegasi](/spec/delegation)).
 
 ## Touched Surface
 
@@ -136,13 +138,15 @@ Setiap rencana konforman yang ditulis di bawah versi ini berakhir dengan tepat *
 
 Final Review MUST, secara berurutan:
 
-**(a) Pemeriksaan keamanan** — meninjau seluruh kumpulan perubahan rencana yang terakumulasi untuk secret yang di-hardcode, risiko injeksi, permukaan serangan baru, auth yang melemah, dan data sensitif di dalam log atau dokumen; mengaudit dependensi yang diperkenalkan; memverifikasi bahwa `docs/SECURITY.md` masih mencerminkan kenyataan; menulis laporan tinjauan keamanan bahkan ketika bersih. Sebuah temuan kritis diperbaiki — atau diterima secara eksplisit oleh pengguna — sebelum rencana selesai.
+**(a) Pemeriksaan keamanan** — meninjau seluruh kumpulan perubahan rencana yang terakumulasi untuk secret yang di-hardcode, risiko injeksi, permukaan serangan baru, auth yang melemah, dan data sensitif di dalam log atau dokumen; mengaudit dependensi yang diperkenalkan; memverifikasi bahwa `docs/SECURITY.md` masih mencerminkan kenyataan; menulis laporan tinjauan keamanan bahkan ketika bersih. Sebuah temuan kritis diperbaiki — atau diterima secara eksplisit oleh pengguna — sebelum rencana selesai. Pemeriksaan ini mencakup tinjauan lokal AI Diff Reviewer yang diwajibkan atas seluruh rentang perubahan rencana; reviewer yang tidak terpasang adalah temuan `local reviewer not installed` yang dicatat, tidak pernah dilewati diam-diam.
 
 **(b) Validasi status akhir** — validasi lengkap yang berlaku milik repositori dijalankan dan lulus pada status relevan terakhir.
 
 **(c) Rekonsiliasi skills** — setiap tugas membawa sebuah disposisi skills dan setiap kandidat yang tercatat memiliki disposisi; tidak ada laporan penemuan kedua.
 
-**(d) Penyelesaian** — melaporkan penyelesaian beserta deliverable, bukti validasi, dan keterbatasan; menawarkan Executive Report satu kali. Rencana selesai, terjawab atau tidak tawaran itu.
+**(d) Rekonsiliasi dokumentasi** — permukaan yang tersentuh dari setiap tugas yang mengubah perilaku diperiksa terhadap dokumen yang mendaftarkannya (registri gate terlebih dahulu, lalu dokumen arsitektur dan modul, lalu indeks `AGENTS.md`); yang terlewat diperbaiki di dalam tinjauan dan validasi yang terdampak dijalankan ulang.
+
+**(e) Penyelesaian** — catatan-catatan rencana selaras (daftar tugas, log kemajuan dan, dalam rencana v6 dan v7, snapshot turunan jurnal serta receipt); melaporkan penyelesaian beserta deliverable, bukti validasi, dan keterbatasan; menawarkan Executive Report satu kali. Rencana selesai, terjawab atau tidak tawaran itu.
 
 Final Review berjalan secara berurutan setelah semua tugas lain dan tidak pernah ditempatkan dalam kelompok paralel.
 
@@ -179,13 +183,16 @@ Agent MUST mempercayai tanda selesai (`[x]`) dan MUST NOT memvalidasi ulang tuga
 
 <CoreLoop lang="id" class="not-prose my-10" />
 
-DWP mendefinisikan lima operasi:
+DWP mendefinisikan enam operasi rencana:
 
 - **create** — Menghasilkan rencana baru dari sebuah tujuan.
 - **execute** — Mengeksekusi rencana tugas demi tugas.
 - **refine** — Memodifikasi rencana yang ada.
 - **resume** — Melanjutkan rencana yang terhenti.
 - **status** — Melaporkan status rencana tanpa mengeksekusi.
+- **verify** — Memeriksa konformansi repositori dan rencana, hanya-baca.
+
+Tiga sub-skill lagi melengkapi paket yang terpasang: **onboard** (menjadikan repositori AI-first), **author** (membuat atau memperbarui skill, agent, dan command milik repositori sendiri) dan **upgrade** (memindahkan skill yang terpasang ke rilis yang lebih baru dengan persetujuan, tanpa pernah memigrasikan rencana yang ada). Router dan sembilan sub-skill ini dikirim sebagai satu paket skill.
 
 ## Ruang kerja keluaran
 

@@ -14,7 +14,7 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 
 > Deep Work Plan, deponun kendisinin harness haline geldiği spec odaklı geliştirmedir.
 
-- [/init istemini açın](/init)
+- [/init istemini açın](/tr/quickstart)
 - [Metodolojiyi okuyun](/methodology)
 
 ---
@@ -87,6 +87,7 @@ Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabilece
 - `.claude → .agents` sembolik bağıyla bir `.agents/` dizini (skill’ler, ajanlar, komutlar).
 - Her ajan için bir kez kurulan Deep Work Plan skill’i — author alt skill’i dahil; böylece depo kendi skill’lerini, ajanlarını ve komutlarını büyütebilir, ayrıca dependency-upgrade ve kullanıcıya dönük herhangi bir arayüz yüzeyi için design-system eklentisi gibi tercihe dayalı eklentiler.
 - Gitignore’lanmış bir `.dwp/` klasöründe uzun soluklu, kaldığı yerden sürdürülebilir planlar.
+- Çoklu ajan delegasyonu ve Ekosistem 1.0 — izole git worktree lerinde paralel ajanları güvenle koordine edin; doğrulanmış kanıtlar ve ekosistem eklentileriyle çalışın.
 
 ---
 

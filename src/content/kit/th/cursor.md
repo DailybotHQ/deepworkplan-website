@@ -15,7 +15,7 @@ Cursor รองรับ DWP ผ่าน project rules และไฟล์�
 
 ## ระดับการรองรับ
 
-**เต็มรูปแบบ** คำสั่ง DWP ทำงานได้ผ่านระบบ rules ของ Cursor
+**สมบูรณ์** (ผ่านการทดสอบการติดตั้ง) — คำสั่ง DWP ทำงานผ่านระบบกฎของ Cursor เส้นทางไดเรกทอรีได้รับการตรวจสอบโดยชุดการทดสอบอัตโนมัติ เวิร์กโฟลว์พฤติกรรมดำเนินการตามลำดับ
 
 ## การติดตั้ง
 
@@ -24,7 +24,7 @@ Cursor รองรับ DWP ผ่าน project rules และไฟล์�
 ไม่บังคับ: [coding-agents-kit](/kit/agentkit) สามารถติดตั้ง CLI นี้และเรียกใช้ด้วย `ak cursor` ได้ ตัวติดตั้งทางการของผู้พัฒนาก็ใช้ได้เช่นกัน
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

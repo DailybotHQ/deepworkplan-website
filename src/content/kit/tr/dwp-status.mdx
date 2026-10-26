@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Bir Deep Work Plan’i yürütmeden durumunu raporlar. Ajan planı ve ilerleme günlüğünü okur, ardından tamamlanan, süren ve bekleyen işleri özetler."
+description: "Bir Deep Work Plan’in durumunu dört yaşam döngüsü boyutu, kaynak zarfı sınırları, engeller ve delegasyonlar genelinde dosyaları değiştirmeden raporlayın."
 kind: command
 lang: tr
 order: 5
@@ -18,21 +18,22 @@ Bir Deep Work Plan durumunu yürütmeden raporlayın.
 
 ## Ne yapar
 
-`dwp-status`, değişiklik yapmadan plan ilerlemesini özetler. Tamamlanan, süren ve bekleyen görevleri raporlar.
+`dwp-status`, sözleşme gereği kesinlikle salt okunurdur. Hiçbir dosyada değişiklik yapmadan ilerlemeyi, etkin engelleri, kontrol noktalarını ve kaynak zarflarını özetler.
 
 ## Kullanım
 
 ```
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Davranış
 
-1. Planı ve `PROGRESS.md` dosyasını okuyun.
-2. Tamamlanan görevleri özetleyin.
-3. Süren görevleri özetleyin.
-4. Bekleyen görevleri özetleyin.
-5. Hiçbir şeyi değiştirmeden raporlayın.
+1. **Dört yaşam döngüsü boyutu:** biçimi (`lite` ya da `full`), somutlaştırma durumunu (`materializing`, `ready` ya da `promoting`), inceleme onayını (`pending`, `approved` ya da `pre_approved`) ve yürütme ilerlemesini (`pending`, `in_progress`, `blocked` ya da `completed`) raporlar.
+2. **Depo geneli genel bakış:** bağımsız değişken olmadan çağrıldığında `.dwp/plans/` altındaki tüm planları tamamlanma yüzdeleri, etkin görev konumlayıcıları ve engel özetleriyle listeler.
+3. **Kaynak zarfı:** izlenen boyutlarda (`wall_clock`, yeniden denemeler, dağıtımlar, harcama, token’lar) tüketilen ve tavan sayaçlarını gösterir; sınırların etkin biçimde uygulanıp uygulanmadığını ya da yalnızca tavsiye niteliğinde olduğunu belirtir.
+4. **Engel teşhisi:** `state.json.blocked` içindeki etkin engel ayrıntılarını standart yükseltme sınıflandırmasına (C1–C7 sınıfları) göre kategorize ederek öne çıkarır.
+5. **Delegasyon gözlemi:** açık ve tamamlanmış alt ajan delegasyonlarını ve kaydedilmiş eş alışverişlerini özetler.
 
 ## Takma adlar
 

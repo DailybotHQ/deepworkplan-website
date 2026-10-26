@@ -1,6 +1,6 @@
 ---
 title: Claude Code
-description: "Адаптер DWP для Claude Code з повною підтримкою через нативні slash-команди та скіли, включно з субагентами й командними агентами для повного набору можливостей."
+description: "Адаптер DWP для Claude Code з повною підтримкою через нативні slash-команди та скіли, включно з субагентами й командними агентами для повного набору."
 kind: adapter
 lang: uk
 order: 1
@@ -15,7 +15,7 @@ Claude Code має **повну** підтримку DWP через нативн
 
 ## Рівень підтримки
 
-**Повний** — усі п'ять команд DWP зіставляються з нативними slash-командами Claude Code.
+**Повна** (Перевірено поведінкою) — повний набір суб-навичок та команд життєвого циклу DWP зіставляється з нативними слеш-командами Claude Code, що доведено у двонаправлених бенчмарках передачі.
 
 ## Встановлення
 
@@ -24,7 +24,7 @@ DWP постачається як скіли в `.agents/skills/` (розв'яз
 Необов’язково: [coding-agents-kit](/kit/agentkit) може встановити цей CLI і запускати його командою `ak claude`. Офіційний інсталятор постачальника працює так само добре.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: Documentation standard
-description: "Standar normatif tentang bagaimana Deep Work Plan mendokumentasikan struktur, tugas, dan kemajuannya: aturan README, penanda status, anatomi tugas sepuluh bagian, dan Final Review."
+description: "Standar normatif cara Deep Work Plan mendokumentasikan struktur, tugas, dan kemajuannya: aturan README, penanda status, anatomi tugas, dan Final Review."
 order: 1
 lang: id
 section: Standard
@@ -54,7 +54,7 @@ Semua judul MUST menggunakan sentence case. Dokumen SHOULD menghindari bahasa pe
 
 ## Final Review, keputusan skills per-tugas, dan laporan opsional
 
-Setiap rencana yang ditulis di bawah versi ini MUST diakhiri dengan tepat satu tugas wajib: **Final Review** — pemeriksaan keamanan atas seluruh set perubahan rencana, validasi status akhir pada status relevan terakhir, dan rekonsiliasi keputusan skills. Sebuah temuan keamanan kritis memblokir penyelesaian.
+Setiap rencana yang ditulis di bawah versi ini MUST diakhiri dengan tepat satu tugas wajib: **Final Review**. Secara berurutan, tugas ini menjalankan (a) pemeriksaan keamanan atas seluruh set perubahan rencana, termasuk tinjauan lokal AI Diff Reviewer yang diwajibkan; (b) validasi status akhir pada status relevan terakhir; (c) rekonsiliasi keputusan skills; (d) rekonsiliasi dokumentasi atas setiap permukaan yang tersentuh; dan (e) penyelesaian, dengan catatan-catatan rencana dalam keadaan selaras. Sebuah temuan keamanan kritis memblokir penyelesaian.
 
 - **Keputusan skills per-tugas.** Completion & Log setiap tugas membawa sebuah **disposisi skills** — `none`, pembaruan atas skill atau agent yang ada, sebuah penciptaan yang dinamai, atau penundaan disertai alasan dan pemiliknya. Penulisan yang beralasan terjadi di dalam tugas pemiliknya, sebelum validation gate-nya, setelah pemeriksaan duplikat terhadap katalog `.agents/`; entri yang beralasan dicatat sebagai kandidat stabil (`T{task}-{seq}`) dalam ledger kandidat skills rencana.
 - **Executive Report bersifat opsional, atas permintaan.** Ditawarkan sekali saat penyelesaian; dihasilkan hanya atas permintaan eksplisit dari bukti yang tahan lama. Tanpa jawaban, atau pada eksekusi tanpa pengawasan, rencana tetap selesai tanpanya.

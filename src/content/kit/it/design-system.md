@@ -1,6 +1,6 @@
 ---
 title: Design system
-description: "Un addon opt-in che dota qualsiasi repo con una superficie di interfaccia rivolta all'utente di un DESIGN.md (sotto docs/, indicizzato da AGENTS.md) — con i profili UI visuale, output CLI e conversazionale in un unico file."
+description: "Addon opzionale che fornisce ai repo con interfaccia un DESIGN.md in docs/, indicizzato da AGENTS.md, che copre UI, output CLI e profili di dialogo."
 kind: addon
 lang: it
 order: 4
@@ -40,6 +40,16 @@ Non è mai obbligatorio — un repository con zero addon opzionali è pienamente
 
 Quando accettato, l’addon può installare un delegatore `/design-system` nella cartella `.agents/commands/` del repo per rigenerare o aggiornare `DESIGN.md` in seguito. Installare il comando è opzionale; un addon rifiutato non ne installa alcuno.
 
+
+## Specifica v7
+
+| Elemento | Valore |
+|---|---|
+| Prodotto | Addon design-system di DeepWorkPlan |
+| Chiave di registro | `design-system` in `.dwp/config.json` |
+| Descrittore | `addons/design-system/addon.json` (interfaccia 1) |
+| File di destinazione | `docs/DESIGN.md` indicizzato da `AGENTS.md` |
+| Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.9.0`) |
 ## Relazione con i documenti di design per funzionalità
 
 Questo è un file di design system **a livello di repository, persistente** — distinto da un documento di design tecnico per funzionalità (il `design.md` del flusso «requisiti → design → attività» dei workflow spec-driven legati a uno strumento). Deep Work Plan deliberatamente non include un archetipo separato di documento di design per funzionalità: il README di un piano, i criteri di accettazione di ogni attività e i validation gate coprono già quel ruolo. Questo addon colma l’unica lacuna che quel ruolo non copre: un contesto di design dell’interfaccia durevole e nativo del repo.

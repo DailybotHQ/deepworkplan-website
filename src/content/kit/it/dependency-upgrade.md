@@ -1,6 +1,6 @@
 ---
 title: Dependency upgrade
-description: "Un addon opt-in e indipendente dal package manager che aggiorna le dipendenze di un repo a lotti validati e annullabili, rilevando il manager reale, senza assumere npm."
+description: "Un addon opt-in e indipendente dal package manager che aggiorna le dipendenze di un repo a lotti validati e annullabili, rilevando il manager reale, senza."
 kind: addon
 lang: it
 order: 3
@@ -23,6 +23,16 @@ Porta le dipendenze di un repository allo stato aggiornato con un workflow a lot
 4. Esegue il validation gate reale del repo dopo ogni lotto; annulla qualsiasi lotto che fallisce.
 5. Riassume cosa è stato aggiornato, saltato e annullato; lascia che sia lo sviluppatore a eseguire il commit.
 
+
+## Specifica v7
+
+| Elemento | Valore |
+|---|---|
+| Prodotto | Addon dependency-upgrade di DeepWorkPlan |
+| Chiave di registro | `dependency-upgrade` in `.dwp/config.json` |
+| Descrittore | `addons/dependency-upgrade/addon.json` (interfaccia 1) |
+| Comando | `/lib-upgrade` installato in `.agents/commands/` se accettato |
+| Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.9.0`) |
 ## Note
 
 Indipendente dal package manager — non esegue mai npm/ncu in un repo non-JS. Opt-in, mai richiesto e non esegue mai il commit automaticamente.

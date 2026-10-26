@@ -9,7 +9,7 @@ export const es: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — ejecución estructurada para agentes de IA',
   siteDescription:
-    'Deep Work Plan: una metodología abierta y kit de referencia para ejecución estructurada, validada y reanudable de agentes de IA durante varias horas.',
+    'Deep Work Plan es desarrollo guiado por especificaciones donde el repositorio es el arnés: tareas atómicas, puertas de validación y ejecución multiagente segura.',
 
   // Navigation
   nav: {
@@ -46,9 +46,10 @@ export const es: SiteTranslations = {
   // Footer
   changelogPage: {
     meta: {
-      title: 'Cambios de Deep Work Plan',
+      title:
+        'Registro de cambios de Deep Work Plan — Notas de versiones e historial',
       description:
-        'Actualizaciones importantes de la skill, la metodología y el arnés portátil de agentes de Deep Work Plan.',
+        'Cronología de versiones y decisiones de diseño de Deep Work Plan: ejecución guiada por especificaciones, arnés portátil, capa de registro y Ecosistema 1.0.',
     },
     eyebrow: 'Cambios',
     title: 'El trabajo detrás del método',
@@ -93,7 +94,7 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — ejecución estructurada para agentes de IA',
       description:
-        'El contexto importa más que el modelo. Deep Work Plan hace de cualquier repositorio un entorno estructurado donde un agente completa trabajo de largo aliento.',
+        'Deep Work Plan lleva el desarrollo guiado por especificaciones a los agentes de IA. Convierte tu repositorio en un arnés duradero para delegación multiagente.',
     },
     hero: {
       badge: 'Metodología abierta · MIT · Independiente del agente',
@@ -262,6 +263,11 @@ export const es: SiteTranslations = {
           detail:
             'Sin demonios ni estado externo. Los planes quedan en una carpeta .dwp/ ignorada por git, y cualquier tarea se reanuda solo desde git, incluso tras un desbordamiento de contexto.',
         },
+        {
+          label: 'Delegación multiagente y Ecosistema 1.0',
+          detail:
+            'Coordina agentes paralelos con seguridad mediante árboles de trabajo aislados, evidencia afirmada hasta su verificación en gates, traspaso de capacidad y complementos fijados opcionales (agentkit, Herdr, devcontainer, Vim, AI Diff Reviewer).',
+        },
       ],
     },
     agents: {
@@ -276,47 +282,47 @@ export const es: SiteTranslations = {
         {
           name: 'Claude Code',
           support: 'full',
-          note: 'Implementación de referencia, con WebFetch nativo y comandos de barra.',
+          note: 'Implementación de referencia con comandos slash nativos. Evaluación de comportamiento.',
         },
         {
           name: 'Cursor',
           support: 'full',
-          note: 'Adaptador completo. Usa el paquete sin conexión si WebFetch está restringido.',
+          note: 'Adaptador completo mediante reglas de proyecto y el enlace simbólico .cursor → .agents. Evaluación de instalación.',
         },
         {
           name: 'OpenAI Codex',
           support: 'full',
-          note: 'Se recomienda el paquete sin conexión; las reglas se instalan en .codex/.',
+          note: 'Adaptador completo mediante AGENTS.md y procedimientos de comandos #. Evaluación de comportamiento.',
         },
         {
           name: 'GitHub Copilot',
           support: 'full',
-          note: 'Adaptador completo — los comandos dwp-* se ejecutan a través de AGENTS.md y procedimientos #.',
+          note: 'Adaptador completo: los comandos dwp-* se ejecutan mediante AGENTS.md y procedimientos #. Evaluación de instalación.',
         },
         {
           name: 'Gemini',
           support: 'full',
-          note: 'Requiere Gemini 2.5 Pro o superior, con WebFetch nativo.',
+          note: 'Adaptador completo mediante AGENTS.md y procedimientos de comandos #. Evaluación de instalación.',
         },
         {
           name: 'OpenCode',
           support: 'full',
-          note: 'Código abierto. Lee AGENTS.md de forma nativa y ejecuta dwp-* mediante comandos #.',
+          note: 'Código abierto. Lee AGENTS.md de forma nativa y ejecuta dwp-* mediante comandos #. Evaluación de instalación.',
         },
         {
           name: 'Windsurf',
           support: 'full',
-          note: 'Las reglas y los procedimientos de comandos # impulsan el bucle completo de Deep Work Plan.',
+          note: 'Reglas y procedimientos de comandos # impulsan el bucle completo de Deep Work Plan. Evaluación de instalación.',
         },
         {
           name: 'Cline',
           support: 'full',
-          note: 'Código abierto. Las reglas en Markdown y los comandos # ejecutan cada paso de dwp-*.',
+          note: 'Código abierto. Reglas en Markdown y comandos # ejecutan cada paso de dwp-*. Evaluación de instalación.',
         },
         {
           name: 'Antigravity',
           support: 'full',
-          note: 'Adaptador completo con una superficie de comandos nativa.',
+          note: 'Adaptador completo con procedimientos de comandos en Markdown. Evaluación de instalación.',
         },
       ],
     },
@@ -465,6 +471,13 @@ export const es: SiteTranslations = {
         icon: '\u2705',
         link: '/kit',
       },
+      {
+        title: 'Evidencia verificada sobre narrativa',
+        description:
+          'La finalización se demuestra mediante puertas ejecutadas y un diario solo agregable: una tarea concluye únicamente cuando la evidencia registrada cumple sus criterios de aceptación, nunca por la afirmación no comprobada de un agente.',
+        icon: '\u{1F4DC}',
+        link: '/spec/record-layer',
+      },
     ],
     quickFactsTitle: 'De un vistazo',
     quickFacts: [
@@ -474,6 +487,7 @@ export const es: SiteTranslations = {
       'Incluye especificación, comandos, adaptadores, presets y ejemplos',
       'Solo Markdown — sin runtime, sin lock-in',
       'Convierte cualquier repositorio en un código AI-first, pilotable por agentes',
+      'Complementos complementarios opcionales del Ecosistema 1.0 (agentkit, Herdr, devcontainer, Vim, revisor)',
     ],
     ctaTitle: 'Quién la mantiene',
     ctaDescription:
@@ -605,9 +619,10 @@ export const es: SiteTranslations = {
   // Deep Work Plan — Kit (índice + detalle)
   kitPage: {
     meta: {
-      title: 'El Kit de Deep Work Plan',
+      title:
+        'El kit de Deep Work Plan — Comandos, adaptadores, ajustes y complementos',
       description:
-        'La skill y sus nueve sub-skills, comandos, adaptadores, presets, addons opcionales y ejemplos que hacen ejecutable Deep Work Plan en cualquier agente y stack.',
+        'La skill y sus nueve subhabilidades, comandos, adaptadores, ajustes, complementos opcionales y ejemplos para ejecutar Deep Work Plan en cualquier stack.',
     },
     eyebrow: 'Kit',
     title: 'El Kit',
@@ -693,7 +708,7 @@ export const es: SiteTranslations = {
         description:
           'Trata el prompt y el skill como no confiables hasta haberlos comprobado. Ambos son de código abierto y con licencia MIT; el skill es Markdown-first sin llamadas de red ni telemetría. Cada versión publica un SHA256SUMS sobre los archivos del skill, así que puedes confirmar que tu copia coincide antes de ejecutarlo. Las versiones tienen checksums, no firmas (las firmas son el próximo paso documentado).',
         commands: [
-          'git clone --branch v7.8.1 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.8.1/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v7.9.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -701,7 +716,7 @@ export const es: SiteTranslations = {
         description:
           'Añade la skill de Deep Work Plan para que cualquier agente pueda planificar y ejecutar trabajo estructurado. La skill incluye un enrutador y nueve sub-skills: create, execute, refine, resume, status, verify, onboard, author y upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -802,7 +817,7 @@ export const es: SiteTranslations = {
             id: 'which-agents',
             question: '¿Con qué agentes de código funciona?',
             answer:
-              'Con cualquier agente que lea archivos del repositorio. La skill sigue el estándar abierto Agent Skills y la convención `AGENTS.md`, de modo que Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot y otros la reconocen a través de su carga normal de skills e instrucciones. La propia evaluación de la metodología muestra un plan iniciado por el agente de un proveedor y reanudado por el de otro, en ambas direcciones. La cobertura de instalación y la evidencia de comportamiento se listan por agente en la matriz de compatibilidad, y ambas nunca se confunden.',
+              'Con cualquier agente que lea archivos del repositorio. Claude Code y OpenAI Codex cuentan con pruebas de comportamiento para ejecución bidireccional y traspasos; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline y Antigravity disponen de adaptadores con pruebas de instalación verificadas. La metodología separa la evaluación de comportamiento de la cobertura de instalación y nunca las confunde.',
             linkLabel: 'Explorar el kit',
             linkPath: '/kit',
           },
@@ -810,7 +825,7 @@ export const es: SiteTranslations = {
             id: 'how-to-use',
             question: '¿Cómo lo uso?',
             answer:
-              'Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad; `/dwp-upgrade` mueve una skill instalada a una versión más reciente sin tocar los planes existentes. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.',
+              'Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad; `/dwp-upgrade` mueve una skill instalada a una versión más reciente sin tocar los planes existentes. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.',
             linkLabel: 'Inicio rápido',
             linkPath: '/quickstart',
           },
@@ -935,6 +950,66 @@ export const es: SiteTranslations = {
         ],
       },
       {
+        id: 'many-agents-v7',
+        title: 'Múltiples agentes y v7',
+        items: [
+          {
+            id: 'parallel-agents',
+            question:
+              '¿Pueden varios agentes trabajar en un plan en paralelo y cómo se garantiza la seguridad?',
+            answer:
+              'Sí, bajo reglas explícitas. Un plan v7 puede marcar una tarea como `parallel_safe` cuando su superficie afectada no se superpone con la de un hermano y su salida está acotada, y solo un contrato que otorgue `agent_delegation` permite que esa tarea pase a otro agente de código — headless en su propio árbol de trabajo de git (agentkit) o en otro panel de Herdr (Herdr). Un delegado de escritura trabaja solo en su propio árbol de trabajo, la sesión principal sigue siendo la única que escribe en el diario del plan y un delegado nunca delega más allá.',
+            linkLabel: 'Leer sobre delegación',
+            linkPath: '/spec/delegation',
+          },
+          {
+            id: 'delegate-trust',
+            question:
+              '¿Se confía automáticamente en el resultado de un subagente delegado?',
+            answer:
+              'No. El resultado de un delegado se registra como `asserted` hasta que el plan principal integra el trabajo y su propio ejecutor de puertas ejecuta la puerta de la tarea, que es lo único que registra evidencia `observed`. Una delegación completada nunca cierra un criterio por sí sola, por lo que la delegación amplía el alcance sin bajar el listón de finalización.',
+            linkLabel: 'Leer la especificación de la capa de registro',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'capacity-handoff-succession',
+            question:
+              '¿Qué ocurre cuando un agente alcanza los límites de uso, tokens o tasa a mitad del plan?',
+            answer:
+              'Cada agente comprueba su propia capacidad en los límites de cada tarea. Si le queda margen, continúa; cuando la capacidad es baja, termina solo la tarea que puede finalizar; cuando es crítica, alcanza un punto seguro, escribe un pequeño paquete de traspaso (`dwp-handoff-v1`: lo hecho, lo verificado y no verificado, y los siguientes pasos), notifica al líder y se detiene. El líder inicia un sucesor en otra cuenta, que acepta el paquete y reanuda el plan, volviendo a ejecutar cada puerta que el paquete lista como no verificada. Si el propio líder se queda sin capacidad, transfiere el liderazgo a un sucesor; los cambios de liderazgo llevan una época creciente para que solo actúe un líder a la vez.',
+            linkLabel: 'Leer la metodología',
+            linkPath: '/methodology',
+          },
+          {
+            id: 'escalation-taxonomy',
+            question:
+              '¿Cuándo se detiene un agente autónomo para consultar a un humano?',
+            answer:
+              'DWP define una estricta taxonomía de escalamiento de siete clases (AGENT_PROTOCOL §7.5): C1 acciones no aprobadas, C2 barreras de autenticación o consentimiento, C3 ambigüedad irreducible, C4 puertas fallidas sin correcciones permitidas, C5 operaciones destructivas, C6 cambios en licencias o términos, y C7 capacidad agotada. El progreso rutinario avanza de forma autónoma.',
+            linkLabel: 'Leer el protocolo del agente',
+            linkPath: '/spec/agent-protocol',
+          },
+          {
+            id: 'proven-done',
+            question:
+              '¿Cómo se demuestra la finalización de una tarea más allá de la afirmación narrativa del agente?',
+            answer:
+              'Una tarea se completa únicamente cuando la evidencia registrada satisface cada uno de sus criterios de aceptación. El contrato de resultados está direccionado por contenido y es inmutable una vez iniciada la ejecución, cada evento se agrega al diario del plan y solo el ejecutor de puertas registra evidencia `observed`. Un criterio que requiere juicio humano se cierra únicamente mediante una aprobación humana registrada con un marcador de autoridad explícito; el recibo se recalcula a partir de los registros, nunca se escribe a mano. La Revisión Final ejecuta entonces la pasada de seguridad y la validación completa en el estado final.',
+            linkLabel: 'Leer la especificación de la capa de registro',
+            linkPath: '/spec/record-layer',
+          },
+          {
+            id: 'v6-compatibility',
+            question: '¿Los planes v6 siguen ejecutándose bajo v7?',
+            answer:
+              'Sí. Los contratos de planes declaran explícitamente su generación de esquema (`plan-contract/v6.json` frente a `plan-contract/v7.json`). Un plan nunca migra su generación a mitad de ejecución. Los planes v6 existentes conservan su estructura, estado y semántica de diario registrados, continuando sin interrupciones con las herramientas de v7.',
+            linkLabel: 'Leer sobre contratos',
+            linkPath: '/spec/record-layer',
+          },
+        ],
+      },
+
+      {
         id: 'compare',
         title: 'Cómo se compara',
         items: [
@@ -1035,9 +1110,10 @@ export const es: SiteTranslations = {
 
   comparePage: {
     meta: {
-      title: 'Deep Work Plan comparado con las alternativas',
+      title:
+        'Comparativa de Deep Work Plan frente a alternativas guiadas por especificación',
       description:
-        'Cómo se relaciona Deep Work Plan con herramientas guiadas por especificación, frameworks de agentes y modos de plan nativos, con fuentes y fecha de revisión.',
+        'Cómo se compara Deep Work Plan con herramientas guiadas por especificaciones, marcos de agentes y modos de planificación: con fuentes y fecha de revisión.',
     },
     eyebrow: 'Comparativa',
     title: 'Deep Work Plan y las alternativas',
@@ -1239,6 +1315,14 @@ export const es: SiteTranslations = {
           title: 'Carga de instrucciones medida y publicada',
           body: 'Un script versionado publica dos mediciones por flujo — el paquete de entrada que carga al inicio de una sesión y la ruta de extremo a extremo una vez que se activan sus disparadores reales —, además de lo que excluye cada una, de modo que la cifra de entrada nunca se lea como el costo total de una ejecución. Los resultados, incluidos los aumentos, se publican como bytes, nunca como porcentajes de tokens o de costo.',
         },
+        {
+          title: 'Una capa de registro respaldada por evidencia',
+          body: 'Un contrato inmutable (contract.json), diario de eventos solo agregable (journal.ndjson), recibos recalculados y puertas observadas garantizan que la finalización se demuestre en vez de afirmarse.',
+        },
+        {
+          title: 'Delegación multiagente segura y autonomía de enjambre',
+          body: 'La ejecución de tareas seguras en paralelo en árboles de trabajo dedicados, hallazgos afirmados hasta su validación en puertas, paquetes estructurados de traspaso y sucesión de líderes con épocas evitan la desviación.',
+        },
       ],
     },
     honestLimits: {
@@ -1257,7 +1341,7 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Confianza y seguridad — Deep Work Plan',
       description:
-        'Por qué Deep Work Plan es seguro de adoptar: código abierto y MIT, Markdown-first sin llamadas de red ni telemetría, no destructivo por diseño, con instalaciones verificables y una política clara de divulgación de vulnerabilidades.',
+        'Por qué Deep Work Plan es seguro: código abierto MIT, Markdown sin telemetría, diseño no destructivo, sumas de verificación comprobables y divulgación privada.',
     },
     eyebrow: 'Confianza y seguridad',
     title: 'Confianza y seguridad',
@@ -1291,10 +1375,13 @@ export const es: SiteTranslations = {
       'Trata la skill como no confiable hasta haberla comprobado. Cada versión adjunta un archivo SHA256SUMS que cubre la skill distribuida. Descárgalo para la versión que vayas a instalar y verifica que tu copia coincide — una salida distinta de cero significa que un archivo no coincide y debes detenerte.',
     codeLabel: 'shell',
     verifyNote:
-      'Las versiones tienen checksums, no firmas criptográficas — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.',
+      'Las versiones tienen checksums, no firmas — las firmas (cosign o GPG del mantenedor) son el próximo paso documentado, no una garantía actual. Dado que todo es abierto, también puedes comparar cualquier archivo con el repositorio en su etiqueta.',
     vimNote:
       'La misma regla vale para el instalador de DeepWorkPlan Vim: su página muestra el SHA-256 del script tal como se sirve, con una receta para descargar, inspeccionar, verificar y ejecutar.',
     vimLinkLabel: 'Inspeccionar el instalador de DeepWorkPlan Vim',
+    ecosystemPinsLead:
+      'Para los checksums y las versiones fijadas de cada producto del ecosistema (agentkit, Herdr, devcontainer, Vim y el AI Diff Reviewer), consulta la',
+    ecosystemPinsLinkLabel: 'tabla de verificación del ecosistema en /init.md',
     betaNote:
       'Las versiones preliminares se verifican de la misma forma: cada versión preliminar (pre-release) de GitHub incluye su propio SHA256SUMS y nunca es la versión estable. Mientras este sitio incorpora una para probarla en uso real, su línea de instalación fijada aparece a continuación.',
     disclosureTitle: 'Reportar una vulnerabilidad',
@@ -1307,7 +1394,7 @@ export const es: SiteTranslations = {
     linkSkillPolicy: 'Política de seguridad y modelo de amenazas de la skill',
     limitationsTitle: 'Limitaciones honestas',
     limitations: [
-      'Las versiones tienen checksums, pero aún no están firmadas criptográficamente — las firmas están planificadas, no implementadas.',
+      'Las versiones tienen checksums, pero aún no están firmadas — las firmas están planificadas, no implementadas.',
       'Deep Work Plan ejecuta un agente de programación autónomo en tu repositorio. Revisa el plan propuesto y sus diffs; la metodología está diseñada para esa revisión, no para reemplazarla.',
       'Las afirmaciones de confianza aquí describen solo las fuentes oficiales. Una copia modificada o de terceros que se haya apartado de los repositorios no tiene ninguna de estas garantías — verifícala primero.',
     ],

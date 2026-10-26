@@ -44,6 +44,11 @@ Per i piani v7 — il valore predefinito dell’attuale pacchetto 7.x — il cat
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (aggiunge l’evento `delegation`)
 - **Plan snapshot (proiezione attiva, condivisa con v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (condiviso con v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Configurazione del repository:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Descrittore dell'addon:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Pacchetto di passaggio dello swarm:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Record di benchmark:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Record degli apprendimenti:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 I piani v6 mantengono i loro schemi v6 ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contratto](https://deepworkplan.com/schema/plan-contract/v6.json), [evento del journal](https://deepworkplan.com/schema/journal-event/v6.json)); i piani v5 esistenti continuano a usare lo schema di stato v5 e i vecchi piani non vengono mai riscritti silenziosamente.
 

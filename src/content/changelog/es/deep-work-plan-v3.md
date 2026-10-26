@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: eficiencia de tokens desde el diseño"
-description: "Deep Work Plan v3 reconstruye el arnés en torno al costo de contexto: divulgación progresiva, validación limitada a lo afectado y una única revisión final obligatoria, mientras eleva el nivel de confianza y conformidad."
+description: "Deep Work Plan v3 reconstruye el harness según el coste de contexto: revelación progresiva, validación de lo afectado y una revisión final obligatoria."
 date: 2026-09-10
 version: "v3 · Eficiencia de tokens"
 kind: release

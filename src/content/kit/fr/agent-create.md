@@ -1,6 +1,6 @@
 ---
 title: agent-create
-description: "Créer un nouvel agent dans le dépôt courant — un travailleur spécialisé doté de son propre palier de modèle et de ses outils — via le sous-skill author, en gardant le catalogue synchronisé."
+description: "Créer un nouvel agent dans le dépôt courant — un travailleur spécialisé doté de son propre palier de modèle et de ses outils — via le sous-skill author, en."
 kind: command
 lang: fr
 order: 8

@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "Retomar um Deep Work Plan interrompido reconstruindo o estado a partir do registro de progresso e dos arquivos de tarefa, e então continuando da primeira tarefa incompleta."
+description: "Retome um Deep Work Plan de forma determinística do diário e contrato via ledger.py project, ingerindo pacotes de transição e rodando gates."
 kind: command
 lang: pt
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-Retoma um Deep Work Plan interrompido.
+Retoma um Deep Work Plan interrompido a partir de registros duráveis.
 
 <CmdResume lang="pt" class="not-prose my-8" />
 
 ## O que faz
 
-O `dwp-resume` continua um plano interrompido. Ele reconstrói o estado a partir do `PROGRESS.md` e dos arquivos de tarefa, e então continua da primeira tarefa incompleta.
+`dwp-resume` continua com segurança um plano interrompido apenas a partir de artefatos do workspace, sem execução duplicada. Reconstrói deterministicamente o estado a partir de `journal.ndjson` e `contract.json`, lê pacotes de transição pendentes e continua da primeira tarefa incompleta.
 
 ## Uso
 
@@ -28,10 +28,11 @@ O `dwp-resume` continua um plano interrompido. Ele reconstrói o estado a partir
 
 ## Comportamento
 
-1. Ler o `PROGRESS.md` e os arquivos de tarefa.
-2. Reconstruir o estado de execução.
-3. Continuar da primeira tarefa incompleta.
-4. Atualizar o progresso à medida que avança.
+1. **Leitura de registros:** inspeciona `contract.json` e `journal.ndjson` sob `.dwp/plans/PLAN_<id>_<slug>/`.
+2. **Projeção de estado:** executa `ledger.py project` para regenerar deterministicamente `state.json` a partir do diário somente de adição. Divergências resolvem a favor do diário.
+3. **Ingestão de transição:** verifica pacotes de transição de swarm pendentes (`dwp-handoff-v1`) para recuperar intenção em voo, gates não verificados e solicitações abertas de pares.
+4. **Verificação de costura:** confere status do git e executa smoke tests nas superfícies tocadas antes de retomar.
+5. **Continuação:** executa a primeira tarefa aberta pelo loop de execução padrão. Planos v5 legados continuam usando o fluxo registrado em `PROGRESS.md` sem migração forçada.
 
 ## Aliases
 

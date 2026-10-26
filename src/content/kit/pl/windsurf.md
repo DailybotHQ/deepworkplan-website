@@ -1,6 +1,6 @@
 ---
 title: Windsurf
-description: "Adapter DWP dla Windsurf z pełnym wsparciem przez system reguł i procedury komend w markdown wywoływane prefiksem hash."
+description: "Adapter DWP dla Windsurf z pełnym wsparciem przez system reguł i procedury komend w markdown wywoływane prefiksem hash z pełną weryfikacją."
 kind: adapter
 lang: pl
 order: 8
@@ -15,7 +15,7 @@ Windsurf obsługuje DWP poprzez system reguł i procedury komend w markdown.
 
 ## Poziom wsparcia
 
-**Pełny** — Windsurf odczytuje reguły projektu i uruchamia każdą komendę dwp-* z jej pliku procedury.
+**Pełne** (Przetestowane instalacyjnie) — Windsurf odczytuje reguły projektu i uruchamia każde polecenie dwp-* ze swojego pliku procedury. Trasa potwierdzona przez automatyczne zestawy testów.
 
 ## Instalacja
 

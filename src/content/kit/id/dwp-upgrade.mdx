@@ -1,0 +1,33 @@
+---
+title: dwp-upgrade
+description: "Periksa rilis Deep Work Plan hulu, tinjau adaptasi lokal, dan instal tag rilis stabil dengan persetujuan eksplisit, menjaga paket rencana."
+kind: command
+lang: id
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Pertahankan skill Deep Work Plan yang terpasang dan standar yang dideklarasikan tetap mutakhir dengan persetujuan eksplisit.
+
+## Fungsi
+
+ memeriksa rilis hulu untuk versi paket skill dan standar yang lebih baru. Perintah ini melaporkan perbedaan, menampilkan adaptasi lokal, memerlukan persetujuan eksplisit sebelum perubahan, dan memasang tag rilis stabil tanpa mengubah rencana yang ada di .
+
+## Penggunaan
+
+
+
+## Perilaku
+
+1. **Pemeriksaan (hanya baca)** — membaca versi terpasang dari  dan menanyakan tag git hulu untuk rilis stabil terbaru.
+2. **Persetujuan** — menampilkan modifikasi atau adaptasi lokal melalui diff; tidak pernah mengunduh atau menimpa file tanpa konfirmasi eksplisit.
+3. **Peningkatan** — memasang tag stabil ke , mengisi addon yang dikonfigurasi di , dan merekonsiliasi harness.
+4. **Pertahankan riwayat** — rencana yang ada, bukti, dan log di  adalah riwayat yang tidak dapat diubah dan tidak pernah dimigrasikan.
+
+## Alias
+
+- 

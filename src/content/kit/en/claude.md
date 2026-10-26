@@ -15,7 +15,7 @@ Claude Code has **full** DWP support via native slash commands and skills.
 
 ## Support level
 
-**Full** — all five DWP commands map to native Claude Code slash commands.
+**Full** (Behavior-tested) — the full suite of DWP sub-skills and lifecycle commands map to native Claude Code slash commands, proven in bidirectional handoff benchmarks.
 
 ## Installation
 
@@ -24,7 +24,7 @@ DWP ships as skills under `.agents/skills/` (resolved through the `.claude/` sym
 Optional: [coding-agents-kit](/kit/agentkit) can install this CLI and launch it with `ak claude`. The vendor’s own installer works just as well.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 

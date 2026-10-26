@@ -1,6 +1,6 @@
 ---
 title: SvelteKit
-description: "面向 SvelteKit 项目的接入预设，包含路由、load 函数、服务端端点、所选适配器与测试的推理提示。"
+description: "面向 SvelteKit 项目的接入预设，包含路由、load 函数、服务端端点、所选适配器与测试的推理提示，支持端到端验证与执行。"
 kind: preset
 lang: zh
 order: 13

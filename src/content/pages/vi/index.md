@@ -14,7 +14,7 @@ Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp ph
 
 > Deep Work Plan là phát triển dựa trên đặc tả, nơi chính repository trở thành harness.
 
-- [Mở lời nhắc /init](/init)
+- [Mở lời nhắc /init](/vi/quickstart)
 - [Đọc phương pháp luận](/methodology)
 
 ---
@@ -87,6 +87,7 @@ Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository c
 - Một thư mục `.agents/` (skill, agent, command) cùng symlink `.claude` tới `.agents`.
 - Skill Deep Work Plan, cài một lần cho mọi agent — gồm cả sub-skill author, để repository có thể nuôi lớn skill, agent và command của riêng nó, cùng các addon tự nguyện như dependency-upgrade và addon design-system cho bất kỳ bề mặt giao diện hướng tới người dùng nào.
 - Các kế hoạch dài hơi, tiếp tục được, trong một thư mục `.dwp/` được gitignore.
+- Ủy quyền đa tác tử và Hệ sinh thái 1.0 — điều phối an toàn các tác tử song song trên worktree git biệt lập, kiểm chứng qua cổng và tiện ích bổ sung hệ sinh thái.
 
 ---
 

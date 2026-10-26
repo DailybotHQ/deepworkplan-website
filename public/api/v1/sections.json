@@ -24,6 +24,41 @@
       "description": "Presets, adapters, and commands for installing DWP into a repository."
     },
     {
+      "name": "Specification — record layer",
+      "path": "/spec/record-layer",
+      "description": "The v6/v7 record layer: outcome contract, append-only journal, evidence classes, sign-off, amendments, invariants and receipts."
+    },
+    {
+      "name": "Specification — resources and abilities",
+      "path": "/spec/resources-and-abilities",
+      "description": "The v6/v7 resources and abilities: per-task context manifests, the resource envelope, host capabilities, the .dwp/config.json addon registry and addon-provided abilities."
+    },
+    {
+      "name": "Specification — delegation",
+      "path": "/spec/delegation",
+      "description": "How a v7 plan hands parallel_safe tasks to other coding agents under the agent_delegation grant, with gated evidence."
+    },
+    {
+      "name": "Herdr addon",
+      "path": "/kit/herdr",
+      "description": "Optional v7 addon (herdr-peers): delegate a task to a peer agent in a Herdr pane, on any machine; lanes and lead succession."
+    },
+    {
+      "name": "Agentkit addon",
+      "path": "/kit/agentkit",
+      "description": "Optional v7 addon (coding-agents-kit): one ak command for every terminal coding agent, accounts, capacity and headless delegation."
+    },
+    {
+      "name": "Devcontainer addon",
+      "path": "/kit/devcontainer",
+      "description": "Optional addon (devcontainer-kit): each repository's own dev container, with coding agents as an opt-in layer."
+    },
+    {
+      "name": "DeepWorkPlan Vim",
+      "path": "/kit/vim",
+      "description": "Optional v7 addon: the terminal editor for Deep Work Plan, with a plan browser and a consent-first installer."
+    },
+    {
       "name": "Examples",
       "path": "/examples",
       "description": "Worked examples of the methodology in practice."
@@ -32,6 +67,11 @@
       "name": "Quickstart",
       "path": "/quickstart",
       "description": "Get DWP running in a repository quickly."
+    },
+    {
+      "name": "Changelog",
+      "path": "/changelog",
+      "description": "A source-backed timeline of Deep Work Plan releases and design decisions, from v1 to v7 and Ecosystem 1.0."
     },
     {
       "name": "Compare",

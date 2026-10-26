@@ -1,6 +1,6 @@
 ---
 title: Claude Code
-description: "Claude Code के लिए DWP अडैप्टर, जो नेटिव slash commands और skills के माध्यम से पूर्ण समर्थन देता है, जिसमें संपूर्ण फ़ीचर सेट हेतु subagents और team agents शामिल हैं।"
+description: "Claude Code के लिए DWP अडैप्टर, जो नेटिव slash commands और skills के माध्यम से पूर्ण समर्थन देता है, जिसमें संपूर्ण फ़ीचर सेट हेतु subagents और team agents."
 kind: adapter
 lang: hi
 order: 1
@@ -15,7 +15,7 @@ Claude Code के पास नेटिव slash commands और skills के
 
 ## समर्थन स्तर
 
-**पूर्ण** — सभी पाँच DWP कमांड नेटिव Claude Code slash commands से मैप होते हैं।
+**पूर्ण** (व्यवहार-परीक्षित) — डीडब्ल्यूपी उप-कौशलों और जीवनचक्र आदेशों का पूरा सूट क्लॉड कोड स्लैश कमांड पर मैप होता है, जो द्विदिश हैंडऑफ़ बेंचमार्क में सिद्ध है।
 
 ## इंस्टॉलेशन
 
@@ -24,7 +24,7 @@ DWP `.agents/skills/` के अंतर्गत skills के रूप म�
 वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak claude` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: Standard dokumentacji
-description: "Normatywny standard sposobu dokumentowania struktury, zadań i postępu Deep Work Planów: reguły README, znaczniki statusu, dziesięciosekcyjna anatomia zadania oraz Final Review."
+description: "Normatywny standard dokumentowania struktury, zadań i postępu Deep Work Planów: reguły README, znaczniki statusu, anatomia zadania i Final Review."
 order: 1
 lang: pl
 section: Standard
@@ -54,7 +54,7 @@ Wszystkie nagłówki MUSZĄ używać zapisu zdaniowego (sentence case). Dokument
 
 ## Final Review, lokalne decyzje dotyczące skilli i opcjonalny raport
 
-Każdy plan utworzony pod tę wersję MUSI kończyć się dokładnie jednym obowiązkowym zadaniem: **Final Review** — przeglądem bezpieczeństwa pełnego zestawu zmian planu, walidacją stanu końcowego na ostatnim istotnym stanie i uzgodnieniem decyzji dotyczących skilli. Krytyczne znalezisko bezpieczeństwa blokuje ukończenie.
+Każdy plan utworzony pod tę wersję MUSI kończyć się dokładnie jednym obowiązkowym zadaniem: **Final Review**. W tej kolejności obejmuje ono (a) przegląd bezpieczeństwa pełnego zestawu zmian planu, w tym wymagany lokalny przegląd AI Diff Reviewer; (b) walidację stanu końcowego na ostatnim istotnym stanie; (c) uzgodnienie decyzji dotyczących skilli; (d) uzgodnienie dokumentacji każdej dotkniętej powierzchni; oraz (e) ukończenie, przy wzajemnie zgodnych rekordach planu. Krytyczne znalezisko bezpieczeństwa blokuje ukończenie.
 
 - **Lokalne decyzje dotyczące skilli.** Sekcja Ukończenie i dziennik każdego zadania niesie **rozstrzygnięcie dotyczące skilli** — `none`, aktualizację istniejącego skilla lub agenta, nazwane utworzenie albo odroczenie z powodem i właścicielem. Uzasadnione tworzenie odbywa się w zadaniu będącym właścicielem, przed jego bramką walidacyjną, po sprawdzeniu duplikatów w katalogu `.agents/`; uzasadnione wpisy są rejestrowane jako stabilni kandydaci (`T{task}-{seq}`) w rejestrze kandydatów na skille planu.
 - **Raport wykonawczy jest opcjonalny, na życzenie.** Oferowany raz przy ukończeniu; generowany wyłącznie na wyraźną prośbę z trwałych dowodów. Brak odpowiedzi lub nieobsługiwany przebieg pozostawia plan ukończonym bez raportu.

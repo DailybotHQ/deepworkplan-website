@@ -15,7 +15,7 @@ Codex hỗ trợ DWP thông qua các quy trình lệnh dạng markdown.
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — mọi lệnh dwp-* đều chạy từ file quy trình của nó.
+**Đầy đủ** (Đã kiểm thử hành vi) — mọi lệnh dwp-* đều chạy từ tệp quy trình của nó, được chứng minh trong các benchmark tạo/tiếp tục hai chiều giữa các mô hình.
 
 ## Cài đặt
 
@@ -24,7 +24,7 @@ Các lệnh DWP tồn tại dưới dạng quy trình markdown mà agent đọc 
 Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak codex`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

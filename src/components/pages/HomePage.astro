@@ -15,7 +15,6 @@ import Outcomes from '@/components/home/Outcomes.astro';
 import Pitch from '@/components/home/Pitch.astro';
 import Quickstart from '@/components/home/Quickstart.astro';
 import Stacks from '@/components/home/Stacks.astro';
-import JsonLd from '@/components/JsonLd.astro';
 import MainLayout from '@/layouts/MainLayout.astro';
 import { type Language } from '@/lib/i18n';
 import { getTranslations } from '@/lib/translations';
@@ -27,28 +26,9 @@ interface Props {
 const { lang } = Astro.props;
 const t = getTranslations(lang);
 const m = t.home.meta;
-
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? '';
-
-const schema = {
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Deep Work Plan',
-  applicationCategory: 'DeveloperApplication',
-  operatingSystem: 'Any',
-  description: m.description,
-  ...(siteUrl ? { url: siteUrl } : {}),
-  license: 'https://opensource.org/licenses/MIT',
-  offers: {
-    '@type': 'Offer',
-    price: '0',
-    priceCurrency: 'USD',
-  },
-};
 ---
 
 <MainLayout lang={lang} title={m.title} description={m.description}>
-  <JsonLd slot="head" data={schema} />
   <Hero lang={lang} />
   <Pitch lang={lang} />
   <ActHumansSteer lang={lang} />

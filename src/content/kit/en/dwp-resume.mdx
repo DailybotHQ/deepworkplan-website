@@ -1,6 +1,6 @@
 ---
 title: dwp-resume
-description: "Resume an interrupted Deep Work Plan by reconstructing state from the progress log and task files, then continuing from the first incomplete task."
+description: "Resume an interrupted Deep Work Plan deterministically from the journal and contract via ledger.py project, ingesting swarm handoff packets and running gates."
 kind: command
 lang: en
 order: 4
@@ -12,13 +12,13 @@ import CmdResume from '@/components/diagrams/kit/CmdResume.astro';
 
 # dwp-resume
 
-Resume an interrupted Deep Work Plan.
+Resume an interrupted Deep Work Plan from durable records.
 
 <CmdResume lang="en" class="not-prose my-8" />
 
 ## What it does
 
-`dwp-resume` continues an interrupted plan. It reconstructs state from `PROGRESS.md` and the task files, then continues from the first incomplete task.
+`dwp-resume` safely continues an interrupted plan from workspace artifacts alone without duplicate execution. It deterministically reconstructs state from `journal.ndjson` and `contract.json`, reads pending handoff packets, and continues from the first incomplete task.
 
 ## Usage
 
@@ -28,10 +28,11 @@ Resume an interrupted Deep Work Plan.
 
 ## Behavior
 
-1. Read `PROGRESS.md` and the task files.
-2. Reconstruct execution state.
-3. Continue from the first incomplete task.
-4. Update progress as it goes.
+1. **Read records:** inspects `contract.json` and `journal.ndjson` under `.dwp/plans/PLAN_<id>_<slug>/`.
+2. **Project state:** runs `ledger.py project` to deterministically regenerate `state.json` from the append-only journal. Disagreements resolve in favor of the journal.
+3. **Handoff ingestion:** checks for pending swarm handoff packets (`dwp-handoff-v1`) to recover in-flight intent, unverified gates, and open peer asks.
+4. **Verify seam:** checks git status and runs smoke checks on touched surfaces before resuming.
+5. **Continue:** executes the first open task through the standard execution loop. Legacy v5 plans continue using their recorded `PROGRESS.md` flow without forced migration.
 
 ## Aliases
 

@@ -1,6 +1,6 @@
 ---
 title: Cline
-description: "L'adaptateur DWP pour Cline, l'agent open source, avec une prise en charge complète via des règles Markdown et des procédures de commande invoquées avec le préfixe dièse."
+description: "L'adaptateur DWP pour Cline, l'agent open source, avec une support complet via des règles Markdown et des procédures de commande invoquées avec le préfixe."
 kind: adapter
 lang: fr
 order: 9
@@ -15,7 +15,7 @@ Cline, l'agent de code open source, prend en charge DWP via des règles Markdown
 
 ## Niveau de prise en charge
 
-**Complet** — Cline lit les règles Markdown et exécute chaque commande dwp-* depuis son fichier de procédure.
+**Complet** (Validé par l'installation) — Cline lit les règles markdown et exécute chaque commande dwp-* depuis son fichier de procédure. Itinéraire validé par des suites de tests automatisées.
 
 ## Installation
 
@@ -24,7 +24,7 @@ Les commandes DWP existent sous forme de procédures en Markdown que l'agent lit
 Facultatif : [coding-agents-kit](/kit/agentkit) peut installer cette CLI et la lancer avec `ak cline`. L’installateur officiel de l’éditeur fonctionne tout aussi bien.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cline
 ```
 

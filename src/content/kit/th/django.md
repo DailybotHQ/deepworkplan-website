@@ -1,6 +1,6 @@
 ---
 title: Django
-description: "พรีเซ็ต onboarding สำหรับโครงการ Django พร้อมแนวคิดเรื่อง apps, migrations, settings, management commands และตัวรันเทสต์"
+description: "พรีเซ็ต onboarding สำหรับโครงการ Django พร้อมแนวคิดเรื่อง apps, migrations, settings, management commands และตัวรันเทสต์ พร้อมการตรวจสอบเต็มรูปแบบ"
 kind: preset
 lang: th
 order: 1

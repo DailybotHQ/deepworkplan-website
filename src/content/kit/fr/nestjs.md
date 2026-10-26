@@ -1,6 +1,6 @@
 ---
 title: NestJS
-description: "Un preset d'onboarding pour les applications NestJS, avec des indices de raisonnement sur les modules, contrôleurs, providers, DTOs, le modèle de décorateurs et le test runner."
+description: "Un preset d'onboarding pour les applications NestJS, avec des indices de raisonnement sur les modules, contrôleurs, providers, DTOs, le modèle de décorateurs."
 kind: preset
 lang: fr
 order: 8

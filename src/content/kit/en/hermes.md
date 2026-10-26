@@ -15,7 +15,7 @@ Hermes is an autonomous agent platform that loads skills via the AgentSkills sta
 
 ## Support level
 
-**Full** — Hermes reads `AGENTS.md` and loads the skill via AgentSkills-standard loading. All DWP sub-skills are available.
+**Full** (Documented) — Hermes reads `AGENTS.md` and loads the skill via AgentSkills-standard loading. All DWP sub-skills are available.
 
 ## Installation
 
@@ -32,9 +32,9 @@ resume the open plan
 
 ## Episodic memory synergy
 
-Hermes indexes agent memory to make past work retrievable across future sessions. DWP's `state.json` outcome records are designed for exactly this use: each completed task carries what was `tried`, what `failed`, what `worked`, and free-form notes in a structured JSON field. When Hermes indexes the workspace's `.dwp/plans/` state files, completed plans become retrievable episodic memory — an agent can later recall how a specific problem was solved, not just that a plan ran.
+Hermes indexes agent memory to make past work retrievable across future sessions. In v6 and v7 plans, DWP's deterministic verification receipts (`outcomes.py receipt`) and outcome records feed directly into Hermes's memory index: each completed task carries what was tried, failed, and worked in a structured JSON schema. Completed plans become retrievable episodic memory — an agent can recall how a problem was solved.
 
-This means DWP plans on Hermes are durable in two ways: the markdown files are the human-readable record, and the `state.json` outcome records are the machine-indexable memory. See [Plan state](/spec/plan-state#outcome-records-as-episodic-memory).
+Ephemeral sessions append events to `journal.ndjson` and project `state.json` via `ledger.py project` rather than manually rewriting state files. See [Plan state](/spec/plan-state#outcome-records-as-episodic-memory).
 
 ## Cron-driven continuation
 

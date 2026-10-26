@@ -41,7 +41,7 @@ Każdy tor ma plan, co najmniej plan Lite we własnym repozytorium, i ten plan j
 
 ## Pętla pojemności
 
-Agent sprawdza własny zapas przed rozpoczęciem każdego zadania, po każdej bramce lub kroku, który trwał dłużej niż 20 minut, za każdym razem, gdy jego CLI pokazuje ostrzeżenie o limicie zużycia, oraz przed przyjęciem przekazania lub przywództwa. Kontrolą jest `ak capacity --self --json` z coding-agents-kit `v1.0.1`, którą pomocnik pakietu zamienia na decyzję:
+Agent sprawdza własny zapas przed rozpoczęciem każdego zadania, po każdej bramce lub kroku, który trwał dłużej niż 20 minut, za każdym razem, gdy jego CLI pokazuje ostrzeżenie o limicie zużycia, oraz przed przyjęciem przekazania lub przywództwa. Kontrolą jest `ak capacity --self --json` z coding-agents-kit `v1.1.0`, którą pomocnik pakietu zamienia na decyzję:
 
 | Werdykt | Decyzja | Tor | Prowadzący, dla siebie |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Agent sprawdza własny zapas przed rozpoczęciem każdego zadania, po każdej br
 
 ## Sukcesja prowadzącego
 
-herdr-peers `v1.0.0` przechowuje rekord prowadzącego dla każdego planu — prowadzący, epoka, lista sukcesji i tory — i rozwiązuje adres `lead` na bieżącego prowadzącego, więc żadne zlecenie toru nie zapisuje na sztywno panelu prowadzącego.
+herdr-peers `v1.1.0` przechowuje rekord prowadzącego dla każdego planu — prowadzący, epoka, lista sukcesji i tory — i rozwiązuje adres `lead` na bieżącego prowadzącego, więc żadne zlecenie toru nie zapisuje na sztywno panelu prowadzącego.
 
 - **Najpierw objęcie, potem uruchomienie.** Prowadzący uruchamia `herdr-peers lead claim --plan <P> --succession <A,B>`, zanim uruchomi jakikolwiek tor — adres `lead` rozwiązuje się dopiero, gdy istnieje rekord — odświeża rekord przez `--lanes <A,B>` w miarę startu torów i uruchamia `lead release`, gdy plan jest ukończony. Od herdr-peers (`v0.3.2`) rekord przechowuje lokalnie repozytorium, które objęło plan, a plan o tym samym identyfikatorze w innym repozytorium nazywa się `--plan <repo>/<id>`. Domyślna sukcesja to jego planowany następca, potem tory w checkoucie samego planu w kolejności uruchomienia, potem dowolny tor na tym samym hoście; tory w kontenerach lub na innych maszynach są na końcu.
 - **Przekazanie, planowane.** Przy `low` prowadzący wyznacza następcę. Przy `critical` pisze pakiet prowadzącego — tabelę torów, otwarte aski, kolejność wydań, oczekujące scalenia, decyzje — uruchamia `herdr-peers lead handover <addr> --plan <P>`, co podnosi epokę i powiadamia każdy tor, i zatrzymuje się. Następca przyjmuje pakiet, wznawia plan orkiestratora i ponownie sprawdza każdy tor.

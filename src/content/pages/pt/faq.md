@@ -1,7 +1,7 @@
 ---
 title: "Perguntas frequentes — Deep Work Plan"
 description: "Respostas às perguntas mais comuns sobre o Deep Work Plan: o que ele faz, como funcionam gates e retomada, comparação com outras ferramentas e como adotá-lo."
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-14
 ---
 
 ## Perguntas frequentes
@@ -36,13 +36,13 @@ Uma metodologia empacotada como uma skill instalável. Não há servidor, conta,
 
 ### Com quais agentes de código ele funciona?
 
-Qualquer agente que leia arquivos do repositório. A skill segue o padrão aberto Agent Skills e a convenção `AGENTS.md`, então Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot e outros a assumem pelo carregamento normal de skills e instruções. A própria avaliação da metodologia mostra um plano iniciado pelo agente de um fornecedor e retomado pelo de outro, nas duas direções. A cobertura de instalação e as evidências comportamentais estão listadas por agente na matriz de compatibilidade, e as duas nunca são confundidas.
+Com qualquer agente que leia arquivos do repositório. Claude Code e OpenAI Codex possuem testes comportamentais de execução e handoffs bidirecionais; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline e Antigravity possuem adaptadores com testes de instalação verificados. A metodologia separa testes comportamentais de cobertura de instalação e nunca os confunde.
 
 [Explore o kit](https://deepworkplan.com/pt/kit)
 
 ### Como uso?
 
-Três passos. Primeiro, instale a skill Deep Work Plan no seu agente de código — o caminho mais rápido é `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y` (ou clone o repositório da skill e execute `./setup.sh`). Segundo, faça o onboarding do repositório uma vez para que o agente adapte `AGENTS.md`, `docs/`, o kit `.agents/` e uma área `.dwp/` ignorada pelo git ao seu stack: aponte para https://deepworkplan.com/init.md, ou execute `/deepworkplan-onboard`. Terceiro, planeje e execute o trabalho com os comandos enxutos: `/dwp-create <goal>` constrói um plano; `/dwp-execute` executa tarefa por tarefa em cada gate; `/dwp-refine` edita um plano em andamento (escopo, tarefas, ou promover um plano Lite para Full); `/dwp-resume` continua após uma interrupção; `/dwp-status` informa o progresso sem executar; `/dwp-verify` produz um relatório objetivo de conformidade; `/dwp-upgrade` move uma skill instalada para uma versão mais recente sem tocar nos planos existentes. Agentes que interceptam `/` costumam usar `#` em vez disso (por exemplo `#dwp-execute`). O endpoint de adoção e o início rápido seguem o mesmo caminho com mais detalhes.
+Três passos. Primeiro, instale a skill Deep Work Plan no seu agente de código — o caminho mais rápido é `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y` (ou clone o repositório da skill e execute `./setup.sh`). Segundo, faça o onboarding do repositório uma vez para que o agente adapte `AGENTS.md`, `docs/`, o kit `.agents/` e uma área `.dwp/` ignorada pelo git ao seu stack: aponte para https://deepworkplan.com/init.md, ou execute `/deepworkplan-onboard`. Terceiro, planeje e execute o trabalho com os comandos enxutos: `/dwp-create <goal>` constrói um plano; `/dwp-execute` executa tarefa por tarefa em cada gate; `/dwp-refine` edita um plano em andamento (escopo, tarefas, ou promover um plano Lite para Full); `/dwp-resume` continua após uma interrupção; `/dwp-status` informa o progresso sem executar; `/dwp-verify` produz um relatório objetivo de conformidade; `/dwp-upgrade` move uma skill instalada para uma versão mais recente sem tocar nos planos existentes. Agentes que interceptam `/` costumam usar `#` em vez disso (por exemplo `#dwp-execute`). O endpoint de adoção e o início rápido seguem o mesmo caminho com mais detalhes.
 
 [Início rápido](https://deepworkplan.com/pt/quickstart)
 
@@ -50,7 +50,7 @@ Três passos. Primeiro, instale a skill Deep Work Plan no seu agente de código 
 
 A skill do agente é instalada onde quer que o seu agente carregue skills de projeto ou de usuário. O onboarding então adapta o próprio repositório: cria ou reconcilia `AGENTS.md`, `docs/`, `.agents/` e a área `.dwp/` ignorada pelo git. A skill ensina o método ao agente; o repositório mantém o contexto, o kit e a evidência do plano que os outros agentes precisam para continuar.
 
-[Veja o fluxo de adoção](https://deepworkplan.com/pt/init)
+[Veja o fluxo de adoção](https://deepworkplan.com/pt/quickstart)
 
 ### O Deep Work Plan exige Git?
 
@@ -126,13 +126,51 @@ Sim, quando o plano foi aprovado com antecedência, carrega a camada de estado e
 
 [Leia o protocolo de execução sem supervisão](https://deepworkplan.com/pt/spec/agent-protocol)
 
+## Múltiplos agentes e v7
+
+### Vários agentes podem trabalhar em um plano em paralelo e como isso é mantido seguro?
+
+Sim, sob regras explícitas. Um plano v7 pode marcar uma tarefa como `parallel_safe` quando sua superfície afetada não se sobrepõe à de uma irmã e sua saída é delimitada, e somente um contrato que conceda `agent_delegation` permite que essa tarefa vá para outro agente de código — headless em seu próprio worktree do git (agentkit) ou em outro painel do Herdr (Herdr). Um delegado de escrita trabalha apenas em seu próprio worktree, a sessão pai permanece como a única escritora do diário do plano e um delegado nunca delega adiante.
+
+[Ler sobre delegação](https://deepworkplan.com/pt/spec/delegation)
+
+### O resultado de um subagente delegado é confiado automaticamente?
+
+Não. O resultado de um delegado é registrado como `asserted` até que o plano pai integre o trabalho e seu próprio executor de gates rode o gate da tarefa, que é a única coisa que registra evidência `observed`. Uma delegação concluída nunca encerra um critério por si só, portanto a delegação expande o alcance sem reduzir o rigor para a conclusão.
+
+[Ler a especificação da camada de registro](https://deepworkplan.com/pt/spec/record-layer)
+
+### O que acontece quando um agente atinge limites de uso, tokens ou taxa durante o plano?
+
+Cada agente verifica sua própria capacidade nos limites das tarefas. Com margem restante, continua; quando a capacidade diminui, conclui apenas a tarefa que pode finalizar; quando é crítica, atinge um ponto seguro, grava um pequeno pacote de transição (`dwp-handoff-v1`: o que foi feito, verificado e não verificado, e os próximos passos), notifica o líder e para. O líder inicia um sucessor em outra conta, que aceita o pacote e retoma o plano, reexecutando cada gate que o pacote lista como não verificado. Se o próprio líder esgotar sua capacidade, passa a liderança para um sucessor; as mudanças de liderança carregam uma época crescente para que apenas um líder atue por vez.
+
+[Ler a metodologia](https://deepworkplan.com/pt/methodology)
+
+### Quando um agente autônomo para para consultar um humano?
+
+O DWP define uma taxonomia estrita de escalonamento em sete classes (AGENT_PROTOCOL §7.5): C1 ações não aprovadas, C2 barreiras de autenticação/consentimento, C3 ambiguidade irredutível, C4 gates que falham sem correção permitida, C5 operações destrutivas, C6 alterações de licença e C7 capacidade esgotada. O progresso rotineiro segue autônomo.
+
+[Ler o protocolo de agentes](https://deepworkplan.com/pt/spec/agent-protocol)
+
+### Como a conclusão da tarefa é comprovada além da afirmação narrativa do agente?
+
+Uma tarefa é concluída apenas quando as evidências registradas satisfazem cada um de seus critérios de aceitação. O contrato de resultados é endereçado por conteúdo e imutável após o início da execução, cada evento é anexado ao diário do plano e somente o executor de gates registra evidências `observed`. Um critério que necessita de julgamento humano é encerrado apenas por meio de uma aprovação humana registrada com um marcador de autoridade explícito; o recibo é recalculado a partir dos registros, nunca escrito à mão. A Revisão Final então executa a etapa de segurança e a validação completa no estado final.
+
+[Ler a especificação da camada de registro](https://deepworkplan.com/pt/spec/record-layer)
+
+### Os planos v6 continuam sendo executados sob a v7?
+
+Sim. Os contratos de planos declaram explicitamente sua geração de esquema (`plan-contract/v6.json` vs `plan-contract/v7.json`). Um plano nunca migra de geração no meio da execução. Os planos v6 existentes retêm sua estrutura, estado e semântica de diário, continuando normalmente sob as ferramentas da v7.
+
+[Ler sobre contratos](https://deepworkplan.com/pt/spec/record-layer)
+
+## Como ele se compara
+
 ### Um plano pode abranger vários repositórios?
 
 Sim — o arquétipo de hub orquestrador existe exatamente para isso. Um repositório hub mantém o plano que coordena, e cada repositório filho executa o próprio plano dentro da sua própria área `.dwp/` isolada, de modo que um filho nunca escreve no estado de planos do hub. A completude do filho é lida do estado de nível superior do próprio plano de cada um, não por busca de strings dentro dele, e o hub registra onde está antes de navegar para qualquer lugar. Cada filho continua um repositório DWP comum, que também pode ser pilotado sozinho.
 
 [Arquétipos de repositório](https://deepworkplan.com/pt/spec/archetypes)
-
-## Como ele se compara
 
 ### Como ele difere de ferramentas orientadas a especificação como Spec Kit, OpenSpec ou Kiro?
 
@@ -158,13 +196,13 @@ Os modos de planejamento nativos são úteis, e o Deep Work Plan se apoia no mes
 
 O onboarding é não destrutivo: ele detecta um `AGENTS.md`, `docs/`, `.agents/` ou `CLAUDE.md` existente, reconcilia em vez de sobrescrever e pergunta antes de substituir qualquer coisa. Ele escreve o índice `AGENTS.md` com comandos reais, uma árvore `docs/` fundamentada, docs por módulo, o kit `.agents/` com comandos enxutos `dwp-*`, uma área de saída `.dwp/` ignorada pelo git, um mapa de testes verificado e a revisão local de código obrigatória (a skill AI Diff Reviewer mais uma extensão de revisão adaptada ao repositório). Ele então executa uma autoverificação e o verificador de conformidade, para que você veja o que foi produzido. Um repositório integrado sob um padrão anterior recebe uma atualização direcionada do harness que reconcilia apenas o que falta ou está desatualizado.
 
-[O endpoint de adoção](https://deepworkplan.com/pt/init)
+[O endpoint de adoção](https://deepworkplan.com/pt/quickstart)
 
 ### Como faço o upgrade da skill em um repositório já integrado?
 
 São dois upgrades diferentes, e o fluxo os mantém separados. O harness do repositório — `AGENTS.md`, `docs/`, o kit `.agents/` — é reconciliado reexecutando o onboarding, que preenche apenas o que falta ou está desatualizado. A skill em si avança com `/dwp-upgrade`: uma verificação somente leitura da última versão publicada, a instalação da tag exata que você aceitou, verificada, e depois o onboarding novamente como uma passada nova. O fluxo é condicionado a consentimento explícito do início ao fim, as adaptações locais são comparadas e preservadas em vez de sobrescritas, e `.dwp/` nunca é migrado — os planos existentes mantêm a forma registrada e continuam rodando.
 
-[O endpoint de adoção](https://deepworkplan.com/pt/init)
+[O endpoint de adoção](https://deepworkplan.com/pt/quickstart)
 
 ### Posso usar a metodologia principal sem instalar add-ons?
 
@@ -180,7 +218,7 @@ O DWP não trata a ausência de um toolchain como um passe livre. Durante o onbo
 
 ### Quanto custa e como a eficiência é medida?
 
-A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega **na entrada** — seu pacote de entrada no início de uma sessão —, publicado ao lado de **caminhos de ponta a ponta** nomeados que somam o que os próprios gatilhos do fluxo carregam quando o trabalho real continua (por exemplo, um resume que segue para execute costuma carregar várias vezes seu pacote de entrada). Nenhum dos dois números limita uma sessão: uma execução real também lê os próprios arquivos do repositório, a saída das ferramentas e os arquivos de trabalho do plano, nada disso contado por este registro. Ambos os números são medidos por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas. Uma avaliação pública com agentes novos já foi executada sob um protocolo congelado: os mesmos dois recursos construídos a partir de clones limpos sem harness, com a versão maior anterior e com a atual. Ela constatou que os agentes em uma árvore com harness leram menos bytes nas duas tarefas, e que as sessões de recurso da versão atual consumiram menos entrada e saída de modelo do que as da versão maior anterior nas duas tarefas — conforme reportado pelo harness, em uma única carga de trabalho. Ela também constatou os limites honestos: o onboarding é um custo único que só se paga quando os fluxos são usados, a direção líquida de tokens por carga de trabalho foi mista, não se reivindica vantagem de tempo de relógio, e um agente novo não entra nos fluxos sozinho — os fluxos são comandos que você ou o agente invocam.
+A metodologia e a skill são licenciadas sob MIT e gratuitas; não há serviço, chave de API nem telemetria nos fluxos centrais. A eficiência é relatada como o número de bytes de instrução que cada fluxo carrega na entrada — seu pacote de entrada no início de uma sessão —, publicado ao lado de caminhos de ponta a ponta nomeados que somam o que os próprios gatilhos do fluxo carregam quando o trabalho real continua (por exemplo, um resume que segue para execute costuma carregar várias vezes seu pacote de entrada). Nenhum dos dois números limita uma sessão: uma execução real também lê os próprios arquivos do repositório, a saída das ferramentas e os arquivos de trabalho do plano, nada disso contado por este registro. Ambos os números são medidos por um script comitado junto com a skill, remedido em cada linha de base de lançamento e publicado em um registro de avaliação, com aumentos relatados com a mesma franqueza das reduções. Ela não é relatada como porcentagens de tokens ou economias de custo, porque um inventário de bytes não estabelece essas coisas. Uma avaliação pública com agentes novos já foi executada sob um protocolo congelado: os mesmos dois recursos construídos a partir de clones limpos sem harness, com a versão maior anterior e com a atual. Ela constatou que os agentes em uma árvore com harness leram menos bytes nas duas tarefas, e que as sessões de recurso da versão atual consumiram menos entrada e saída de modelo do que as da versão maior anterior nas duas tarefas — conforme reportado pelo harness, em uma única carga de trabalho. Ela também constatou os limites honestos: o onboarding é um custo único que só se paga quando os fluxos são usados, a direção líquida de tokens por carga de trabalho foi mista, não se reivindica vantagem de tempo de relógio, e um agente novo não entra nos fluxos sozinho — os fluxos são comandos que você ou o agente invocam.
 
 [Confiança e divulgação](https://deepworkplan.com/pt/trust)
 

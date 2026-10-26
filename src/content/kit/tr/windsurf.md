@@ -1,6 +1,6 @@
 ---
 title: Windsurf
-description: "Windsurf için DWP adaptörü; kurallar sistemi ve hash komut öneki ile markdown komut prosedürleri aracılığıyla tam destek sunar."
+description: "Windsurf için DWP adaptörü; kurallar sistemi ve hash komut öneki ile markdown komut prosedürleri aracılığıyla tam destek sunar tam doğrulama ile."
 kind: adapter
 lang: tr
 order: 8
@@ -15,7 +15,7 @@ Windsurf, DWP'yi kurallar sistemi ve markdown komut prosedürleri aracılığıy
 
 ## Destek düzeyi
 
-**Tam** — Windsurf, proje kurallarını okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır.
+**Tam** (Kurulum testli) — Windsurf, proje kurallarını okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır. Yol, otomatik test paketleriyle onaylanmıştır.
 
 ## Kurulum
 

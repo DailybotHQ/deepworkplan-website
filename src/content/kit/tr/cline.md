@@ -1,6 +1,6 @@
 ---
 title: Cline
-description: "Açık kaynak ajan Cline için DWP adaptörü; markdown kuralları ve hash öneki ile komut prosedürleri aracılığıyla tam destek sunar."
+description: "Açık kaynak ajan Cline için DWP adaptörü; markdown kuralları ve hash öneki ile komut prosedürleri aracılığıyla tam destek sunar tam doğrulama ile."
 kind: adapter
 lang: tr
 order: 9
@@ -15,7 +15,7 @@ Açık kaynak kodlama ajanı Cline, DWP'yi markdown kuralları ve komut prosedü
 
 ## Destek düzeyi
 
-**Tam** — Cline, markdown kurallarını okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır.
+**Tam** (Kurulum testli) — Cline, markdown kurallarını okur ve her dwp-* komutunu kendi prosedür dosyasından çalıştırır. Yol, otomatik test paketleriyle onaylanmıştır.
 
 ## Kurulum
 
@@ -24,7 +24,7 @@ DWP komutları, ajanın Cline'ın kuralları aracılığıyla okuduğu markdown 
 İsteğe bağlı: [coding-agents-kit](/kit/agentkit) bu CLI’yi kurabilir ve `ak cline` ile başlatabilir. Sağlayıcının kendi resmi kurulum aracı da aynı şekilde çalışır.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cline
 ```
 

@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tem suas próprias flags para continuar uma sessão, sua própria forma de manter separada uma segunda conta, seu próprio modo headless e sua própria opção para pular os pedidos de permissão. O **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** coloca uma única superfície de comandos sobre todos eles: `ak <kind> [@profile]`.
 
-Este addon integra o kit ao **DWP v7** (pack `v7.8.1`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
+Este addon integra o kit ao **DWP v7** (pack `v7.9.0`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
 
 ## O que o kit oferece
 
@@ -23,7 +23,7 @@ Este addon integra o kit ao **DWP v7** (pack `v7.8.1`) como transporte de delega
 
 ## Contas, cota e escolha de conta
 
-O kit trata cada login ou chave que você tem como uma **conta**: uma CLI × um perfil. `@default` (ou `@1`) é o home da própria CLI; `@2`, `@work` ou `@client-x` são logins independentes, cada um no próprio diretório sob a raiz de perfis, que rodam lado a lado. `ak profiles` os lista com o estado de login e os nomes das chaves; `ak profiles --json` entrega a mesma lista às ferramentas (schema `profiles-v1`). Desde a `v0.5.1`, ele informa onde o token do Claude Code realmente está — `file`, `keychain` (macOS), `none` ou `unknown` — apenas pela presença, sem nunca ler o segredo, e reconhece um login do Cursor no Linux, seja em um contêiner ou em um host Linux. Desde a `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` define a conta que um `ak <cli>` sem argumentos usa (um `@profile` posicional continua tendo prioridade), e é assim que um contêiner de desenvolvimento escolhe a conta do host que compartilha. Desde a `v0.5.3`, `ak codex` adiciona `--no-daemon` quando um home do Codex compartilhado com outra máquina registra um daemon em segundo plano que não está nesta.
+Desde `v1.0.1`, cada perfil — `@default` incluído — é uma conta independente em seu próprio diretório sob a raiz de perfis, evitando vazamento de estado e colisões de credenciais. `ak profiles` os lista com o estado de login e os nomes das chaves; `ak profiles --json` entrega a mesma lista às ferramentas (schema `profiles-v1`). Desde a `v0.5.1`, ele informa onde o token do Claude Code realmente está — `file`, `keychain` (macOS), `none` ou `unknown` — apenas pela presença, sem nunca ler o segredo, e reconhece um login do Cursor no Linux, seja em um contêiner ou em um host Linux. Desde a `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` define a conta que um `ak <cli>` sem argumentos usa (um `@profile` posicional continua tendo prioridade), e é assim que um contêiner de desenvolvimento escolhe a conta do host que compartilha. Desde a `v0.5.3`, `ak codex` adiciona `--no-daemon` quando um home do Codex compartilhado com outra máquina registra um daemon em segundo plano que não está nesta.
 
 `ak usage` (também `ak status`) lista todas as contas de cada CLI que o kit conhece, uma linha por conta e perfil, sob a sua CLI: cota ao vivo para as assinaturas do Claude Code (janelas de 5 horas, semanal e por modelo), os logins do Codex com ChatGPT, as chaves do plano de programação da Z.AI e, desde a `v0.7.0`, os logins do Antigravity com Google no Linux e em contêineres (as janelas de cinco horas e semanal do próprio painel `/usage` do agy). Uma conta cuja cota não pode ser lida mantém a sua linha: `n/d` com a forma como está conectada e o motivo — Cursor, Grok, xAI, Azure OpenAI, uma chave de API do Gemini ou um login do Antigravity guardado no Keychain do macOS — ou `no login` com o comando que faz o login dela, então a tabela também mostra quais contas de cada CLI estão conectadas. É somente leitura: nunca renova um login, nunca imprime um token e nunca grava dentro de um perfil. `--json` entrega a mesma lista às ferramentas (schema `usage-v1`). Os endpoints de uso são internos do fornecedor e não oficiais.
 
@@ -65,15 +65,15 @@ O trabalho só circula entre as contas que você declarou para o plano, dentro d
 ## Instalação
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v1.0.1`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
+Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v1.1.0`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.0.1`, interface 1 |
+| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.1.0`, interface 1 |
 | Chave de registro | `agentkit` em `.dwp/config.json` |
 | Transporte | headless: um `ak run` por delegado em uma worktree git dedicada |
 | Fornece | `subagents`, `cancel_children`, `model_routing` |

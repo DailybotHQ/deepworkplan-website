@@ -18,25 +18,30 @@ A Deep Work Plan is a directory of markdown files. The shape of that directory �
 
 A plan is a directory under `.dwp/plans/` named `PLAN_001_<slug>/`. It contains:
 
-
-- `README.md` — the plan overview: goal, source material, task table, and status.
-Each task file is named `<n>.task_<slug>.md` and follows the ten normative sections rendered above, in the order defined by the installed skill.
-- `PROGRESS.md` — a running log of execution.
-
+- `manifest.json` — the plan's identity and the pointer to its live contract, written first at materialization.
+- `contract.json` — immutable, content-addressed outcome contract (acceptance criteria, scope, invariants).
+- `journal.ndjson` — append-only execution log of ledger events.
+- `state.json` — a snapshot projected from the journal, never edited by hand.
+- `README.md` — plan overview: goal, source material, task table, and status.
+- `PROGRESS.md` — human-readable running log of execution.
+- `1.task_<slug>.md`, `2.task_<slug>.md` — individual task markdown files.
+- `analysis_results/` — directory for task artifacts, analysis reports, and gate evidence.
 
 The current 7.x pack creates new v7 plans by default with slugs of 2–5 words, as v6 plans have. The retained v5 flow uses 2–4 words because its frozen schemas count the numeric ID as a word. New plans receive monotonically increasing numeric IDs of at least three digits (for example, `PLAN_001_add_payment_webhooks/`). Existing unnumbered `PLAN_<slug>/` folders remain readable and are never renamed; existing plans are never migrated implicitly. When numbered plans exist, `latest` resolves to the plan with the highest numeric ID.
 
 ## Task file structure
 
-Each task file is named `<n>.task_<slug>.md` and follows the ten normative sections rendered above, in the order defined by the installed skill. Each task re-anchors to the plan's goal before it acts, which keeps an agent from drifting over a long, multi-hour horizon.
+Each task file is named `<n>.task_<slug>.md` and follows the ten normative sections defined by the installed skill (see [The core loop](/methodology/02-core-loop) for the task anatomy). Each task re-anchors to the plan's goal before it acts, which keeps an agent from drifting over a long, multi-hour horizon.
 
 ## The Final Review
 
-Every plan must end with exactly one mandatory task: the **Final Review**. It closes the plan in three ordered passes — nothing in the security pass is relaxed:
+Every plan must end with exactly one mandatory task: the **Final Review**. It closes the plan in five ordered parts — nothing in the security pass or gates is relaxed:
 
-1. **Security pass** — audit everything the plan changed for secrets, injection risks, and new attack surface, and keep `docs/SECURITY.md` current. Security is not a separate workstream bolted on at the end: every plan leaves its own changes audited, and a critical finding blocks completion.
-2. **Final-state validation** — the repository's full validation runs and passes on the last relevant state, after the final fix.
-3. **Skills reconciliation** — every task recorded its own skills disposition while its evidence was fresh; the review reconciles the ledger. The Executive Report remains available on request.
+1. **Security pass** — audit everything the plan changed for secrets, injection risks and new attack surface, keep `docs/SECURITY.md` current, and run the required local AI Diff Reviewer review over the plan's full range (a missing reviewer is recorded as a `local reviewer not installed` finding, never skipped silently). A critical finding blocks completion.
+2. **Final-state validation** — the repository's complete applicable test, lint, and type-check suites run and pass on the final state. Any fix made during review invalidates affected results and triggers a rerun.
+3. **Skills reconciliation** — verify every task recorded its task-local skills disposition and reconcile any warranted authoring in `analysis_results/SKILLS_CANDIDATES.md`.
+4. **Documentation reconciliation** — sweep every behavior-changing task's touched surface against the docs that register it (`docs/TESTING_GUIDE.md`, architecture docs, and `AGENTS.md`).
+5. **Completion** — the plan's records agree (task list, progress log and, in v6 and v7 plans, the journal-derived snapshot and receipt); report deliverables, evidence and limitations, and offer the Executive Report once.
 
 ## README and PROGRESS conventions
 

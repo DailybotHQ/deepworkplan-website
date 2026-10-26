@@ -1,0 +1,33 @@
+---
+title: dwp-upgrade
+description: "Deep Work Plan sürümlerini denetleyin, yerel uyarlamaları inceleyin ve açık onay ile kararlı etiketleri yükleyip mevcut planları koruyun."
+kind: command
+lang: tr
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Yüklü Deep Work Plan becerisini ve bildirilen standardı açık onay ile güncel tutun.
+
+## Ne yapar
+
+, beceri paketinin ve standardın daha yeni sürümleri için yukarı akış sürümlerini inceler. Farklılıkları bildirir, yerel uyarlamaları gösterir, değişiklik yapmadan önce açık geliştirici onayı gerektirir ve  altındaki mevcut planları değiştirmeden sabitlenmiş kararlı sürüm etiketlerini yükler.
+
+## Kullanım
+
+
+
+## Davranış
+
+1. **Denetim (salt okunur)** —  dosyasından yüklü sürümü okur ve en son kararlı sürüm için yukarı akış git etiketlerini sorgular.
+2. **Onay** — yerel değişiklikleri veya uyarlamaları fark (diff) aracılığıyla gösterir; açık onay olmadan asla dosya indirmez veya üzerine yazmaz.
+3. **Yükseltme** — tam kararlı etiketi  içine yükler,  içindeki eklentileri tamamlar ve donanımı uzlaştırır.
+4. **Geçmişi koruma** —  altındaki mevcut planlar, kanıtlar ve günlükler değişmez geçmiş olup yükseltme sırasında asla değiştirilmez.
+
+## Diğer adlar
+
+- 

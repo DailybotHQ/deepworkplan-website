@@ -15,7 +15,7 @@ Claude Code 通过原生斜杠命令与技能提供**完整**的 DWP 支持。
 
 ## 支持级别
 
-**完整** —— 全部五个 DWP 命令都映射到原生的 Claude Code 斜杠命令。
+**完整**（经过行为测试）—— DWP 子技能与生命周期命令的完整套件均映射到原生的 Claude Code 斜杠命令，在双向交接基准测试中得到验证。
 
 ## 安装
 
@@ -24,7 +24,7 @@ DWP 以技能的形式存放于 `.agents/skills/` 之下（通过 `.claude/` 符
 可选：[coding-agents-kit](/kit/agentkit) 可以安装此 CLI，并用 `ak claude` 启动它。使用供应商自己的官方安装程序同样可行。
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 

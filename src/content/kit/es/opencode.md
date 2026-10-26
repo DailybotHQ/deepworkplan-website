@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "El adaptador de DWP para OpenCode, el agente de código abierto, con soporte completo a través de AGENTS.md nativo y procedimientos de comando en Markdown invocados con el prefijo almohadilla."
+description: "El adaptador de DWP para OpenCode, el agente de código abierto, con soporte a través de AGENTS.md nativo y procedimientos Markdown invocados con el prefijo."
 kind: adapter
 lang: es
 order: 7
@@ -15,7 +15,7 @@ OpenCode, el agente de programación de código abierto, admite DWP a través de
 
 ## Nivel de soporte
 
-**Completo** — OpenCode lee AGENTS.md de forma nativa y ejecuta cada comando dwp-* desde su archivo de procedimiento.
+**Completo** (Comprobado por instalación) — OpenCode lee AGENTS.md de forma nativa y ejecuta cada comando dwp-* desde su archivo de procedimiento. Ruta verificada mediante suites de pruebas automatizadas.
 
 ## Instalación
 
@@ -24,7 +24,7 @@ DWP distribuye AGENTS.md y los procedimientos de comando en el repositorio; Open
 Opcional: [coding-agents-kit](/kit/agentkit) puede instalar esta CLI y lanzarla con `ak opencode`. El instalador oficial del proveedor funciona igual de bien.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

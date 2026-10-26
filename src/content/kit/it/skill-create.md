@@ -1,6 +1,6 @@
 ---
 title: skill-create
-description: "Crea una nuova skill riutilizzabile nel repository corrente — una procedura parametrizzata, eseguita in sessione — tramite la sub-skill author, mantenendo il catalogo allineato."
+description: "Crea una nuova skill riutilizzabile nel repository corrente — una procedura parametrizzata, eseguita in sessione — tramite la sub-skill author, mantenendo il."
 kind: command
 lang: it
 order: 7

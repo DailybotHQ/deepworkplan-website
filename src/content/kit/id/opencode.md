@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "Adapter DWP untuk OpenCode, agent sumber terbuka, dengan dukungan penuh melalui AGENTS.md native dan prosedur command markdown yang dipanggil dengan prefix hash."
+description: "Adapter DWP untuk OpenCode, agent sumber terbuka, dengan dukungan penuh melalui AGENTS.md native dan prosedur command markdown yang dipanggil dengan prefix."
 kind: adapter
 lang: id
 order: 7
@@ -15,7 +15,7 @@ OpenCode, coding agent sumber terbuka, mendukung DWP melalui AGENTS.md native da
 
 ## Tingkat dukungan
 
-**Penuh** — OpenCode membaca AGENTS.md secara native dan menjalankan setiap command dwp-* dari file prosedurnya.
+**Penuh** (Teruji instalasi) — OpenCode membaca AGENTS.md secara native dan menjalankan setiap perintah dwp-* dari file prosedurnya. Rute dipastikan oleh rangkaian pengujian otomatis.
 
 ## Instalasi
 
@@ -24,7 +24,7 @@ DWP mengirimkan AGENTS.md dan prosedur command di dalam repositori; OpenCode men
 Opsional: [coding-agents-kit](/kit/agentkit) dapat memasang CLI ini dan menjalankannya dengan `ak opencode`. Penginstal resmi dari vendor juga sama baiknya.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

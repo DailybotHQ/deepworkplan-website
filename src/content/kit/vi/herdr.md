@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) đặt các coding agent vào các pane, trên máy của bạn và trên các máy mà nó kết nối tới qua SSH. Addon này cho phép một Deep Work Plan sử dụng các agent đó như **peer** (tác tử ngang hàng): một kế hoạch có thể giao một tác vụ có giới hạn cho một agent trong pane khác, nhận đúng một phản hồi được ủy quyền và lưu lại bản ghi của lần trao đổi đó.
 
-Đây là một addon tùy chọn của **DWP v7** (`v7.0.0`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
+Đây là một addon tùy chọn của **DWP v7** (pack `v7.9.0`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
 
 ## Addon tích hợp những gì
 
-Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.0.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
+Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.1.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v1.0.0`, giao thức 1 |
+| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v1.1.0`, giao thức 1 |
 | Khóa registry | `herdr` trong `.dwp/config.json` |
 | Phương thức truyền | tương tác: một peer trong pane Herdr |
 | Cung cấp | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[he
 Cài đặt herdr-peers và skill chính thức của Herdr mà nó phụ thuộc vào. Mọi máy có agent cần trả lời cũng phải có skill này.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +58,7 @@ herdr-peers không xác thực bên gửi: trường `from=` trong một con d�
 
 ## Container và máy host
 
-Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v1.0.1`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
+Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v1.1.1`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
 
 ## Herdr hay agentkit
 
@@ -71,7 +71,7 @@ Cả hai addon đều triển khai cùng một giao diện ủy thác — `launc
 
 Với một lead chạy nhiều lane cùng lúc — các pane trên máy host, trong container và trên máy khác, mỗi lane trên tài khoản riêng — `herdr-peers lanes` liệt kê mọi lane cùng trạng thái của nó, `herdr-peers status <pane>` phân loại màn hình mà một lane bị chặn đang ở, và mỗi bản ghi ủy thác nêu tài khoản và nhà cung cấp đã đảm nhận nó. Xem [Chạy nhiều agent](/methodology/06-orchestration).
 
-**Lane Codex tự nêu pane của mình.** Codex chạy lệnh của một lane từ một máy chủ nền dùng chung cho mọi phiên của tài khoản đó, nên id pane mà nó kế thừa có thể thuộc về lane khác. Một lane Codex truyền pane của chính nó, lấy từ chỉ dẫn của lead, bằng `--pane <pane>` trên mọi lệnh herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Mỗi lane tự nêu pane của mình.** Theo quy tắc tự chủ swarm (Guide §17.2), mỗi lane truyền pane riêng của mình qua  trên mọi lệnh herdr-peers (, , , , , , ) để ngăn phân bổ sai tin nhắn và bão hòa khe cắm phân phối. Các lane Codex yêu cầu điều này đặc biệt nghiêm ngặt do máy chủ nền được chia sẻ giữa các phiên.
 
 ## Thông báo và quyền lead
 
@@ -84,6 +84,20 @@ herdr-peers (`v0.3.2`) bổ sung những gì giúp một bầy agent tồn tại
 - **Màn hình `usage_limit`.** `status` và `lanes` nhận diện thông báo giới hạn sử dụng của một CLI là lớp màn hình `usage_limit`, với bước tiếp theo là bàn giao. Nó không bao giờ được gửi phím. `lanes --json` bổ sung kế hoạch, lead của nó, epoch và năng lực được báo cáo gần nhất của mỗi lane.
 
 Các lane cũng có thể hỏi nhau để lấy thông tin và phối hợp — một giao diện, một tên cờ, trạng thái một nhánh — nhưng chỉ lead mới giao việc. Độ sâu 1 và giới hạn phân nhánh vẫn giữ nguyên. Với `v0.2.x` không có thông báo hay bản ghi lead: các lane hỏi địa chỉ của lead lấy từ chỉ dẫn của chúng, và việc thay đổi lead do nhà phát triển chuyển tiếp.
+
+## Tranh luận
+
+herdr-peers 1.1.0 bổ sung sub-skill **debate** gốc (`debate.md`): một agent lead điều hành một hội đồng gồm các peer trong pane Herdr qua nhiều vòng và khép lại bằng một kết quả duy nhất mà con người có thể tin cậy, kèm bằng chứng và ý kiến bất đồng. Chỉ dùng khi con người yêu cầu một cuộc tranh luận, một hội đồng, một red team, một nghiên cứu từ nhiều agent hoặc nhiều góc nhìn, hoặc một hội đồng thứ hai về một kết quả; ý kiến của một agent chỉ cần một lần ask.
+
+- **Mục đích trước tiên.** Lead chọn mục đích — **quyết định**, **nghiên cứu** hiện trạng, **kiểm tra sức chịu đựng**, **xác minh** hoặc **tạo ra** — và mỗi mục đích có hình thức, cách kiểm đếm và sản phẩm riêng. Các mục đích có thể nối tiếp nhau (nghiên cứu → quyết định, quyết định → xác minh), và quy mô tranh luận có thể là nhanh, tiêu chuẩn hoặc chuyên sâu.
+- **Cam kết của lead.** Lead không bao giờ bỏ phiếu; lời của con người được chép nguyên văn; brief đến hội đồng qua một kênh duy nhất; mỗi pane ghi bài nộp lên đĩa và trả lời bằng một dòng; không pane nào thực hiện hành động bên ngoài.
+- **Hình thức.** Nghiên cứu theo góc nhìn, các vòng cổ điển, gói bản nháp, chất vấn chéo từng luận điểm, red team rồi đến người bảo vệ, steelman rồi mới phán xét, thử thách mù với ngữ cảnh mới, hội đồng tái lập và đề xuất phân kỳ. Một quyết định luôn kết thúc bằng một tập phán quyết bắt buộc.
+- **Lệnh `herdr-peers debate`.** `tally` kiểm phiếu xếp hạng và phán quyết theo từng mục (Borda, Copeland, đối đầu từng cặp, người thắng và người thua Condorcet); `claims` gộp sổ luận điểm của các lane thành các trạng thái như đã xác lập, còn tranh cãi hoặc bị bác bỏ, vốn là một ngưỡng đồng thuận chứ không phải sự xác minh; `anon` sao chép bài nộp dưới tên ẩn danh, bảng ánh xạ nằm trong một khóa riêng; `filings` liệt kê bài nộp đã có, còn thiếu và quá ngắn để chỉ hỏi lại các pane còn thiếu.
+- **Lập hội đồng.** `panel` đề xuất hội đồng và không chạy gì cả. Các ghế được chia lần lượt giữa các nhà cung cấp mô hình, và trong cùng một nhà cung cấp, ghế có nhiều hạn mức nhất được ưu tiên, lấy từ các pane đang rảnh và, khi agentkit (`ak`) được cài, từ những tài khoản mà `ak pick` đề xuất. Không có `ak`, nó khuyến nghị coding-agents-kit (tùy chọn, `v1.0.1` trở lên).
+- **Mẫu.** Mười sáu mẫu trong `templates/debate/`, từ ghi chú của con người và brief nghiên cứu, kiểm tra sức chịu đựng và từng vòng đến tệp phiếu và tệp luận điểm, gói bàn giao của lead, cùng các bản ghi quyết định, hiện trạng, kiểm tra sức chịu đựng và tái lập.
+- **Gửi đến peer đang bị chặn.** `reply` và `notify` thử gửi lại cho peer đang dừng ở một câu hỏi trong tối đa `--wait-blocked` giây; vẫn chỉ đúng một phản hồi.
+
+Bản phát hành chỉ bổ sung: giao thức 1 cùng mọi lệnh, flag, mã thoát và hợp đồng JSON đều giữ nguyên.
 
 ## Ghi chú
 

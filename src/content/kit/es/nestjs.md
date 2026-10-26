@@ -1,6 +1,6 @@
 ---
 title: NestJS
-description: "Preset de incorporación para aplicaciones NestJS, con pistas de razonamiento para módulos, controladores, providers, DTOs, el modelo de decoradores y el test runner."
+description: "Preset de incorporación para aplicaciones NestJS, con pistas para módulos, controladores, providers, DTOs, el modelo de decoradores y el test runner."
 kind: preset
 lang: es
 order: 8

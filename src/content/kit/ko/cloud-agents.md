@@ -1,6 +1,6 @@
 ---
 title: 클라우드 에이전트
-description: "클라우드 및 백그라운드 에이전트용 DWP 어댑터: Claude Code 원격 작업, Codex 클라우드, Jules 클래스 — 내구성 있는 .dwp/ 계획에 맞춰 실행하는 일시적 세션."
+description: "클라우드 및 백그라운드 에이전트용 DWP 어댑터: Claude Code 원격 작업, Codex 클라우드, Jules 클래스 — 내구성 있는 .dwp/ 계획에."
 kind: adapter
 lang: ko
 order: 12
@@ -19,17 +19,17 @@ prefix: plain text
 
 ## 지원 수준
 
-**Full** — 리포지토리를 읽고, `AGENTS.md`를 따르며, 셸 명령을 실행할 수 있는 모든 클라우드 에이전트는 플랫폼별 어댑터 없이 DWP를 지원합니다.
+**완전 지원** (문서화됨) — 클라우드 에이전트 플랫폼은 `AGENTS.md` 또는 기본 지침을 읽고 터미널이나 컨테이너 환경을 통해 명령을 실행합니다.
 
 ## 깨어남-재개-양보 루프
 
 각 클라우드 에이전트 턴은 다음 패턴을 따릅니다.
 
 1. **깨어남** — 세션이 시작됩니다(크론 일정, CI 이벤트, 또는 사용자 작업에 의해 트리거됨).
-2. **DWP 재개 프로토콜 실행** — 계획 README를 읽고, 체크포인트를 찾고, `state.json`을 Markdown과 조정하고, 이음새를 점검하고, 스모크 테스트를 실행합니다. 참고: [DWP 스펙](/spec/dwp-specification#the-dwp-resume-protocol).
+2. **DWP 재개 프로토콜 실행** — 계획 README를 읽고, 체크포인트를 찾고, `ledger.py project`를 통해 `journal.ndjson`에서 상태를 재구성하고, 이음새를 검사하고, 스모크 테스트를 실행합니다. [DWP 사양](/spec/dwp-specification#the-dwp-resume-protocol)을 참조하세요.
 3. **차단 상태 확인** — `state.json.blocked`가 설정되어 있으면, 이유를 보고하고 실행하지 않고 양보합니다.
 4. **다음 원자적 작업 실행** — 하나의 작업을 전체 검증 게이트를 통과하여 실행합니다.
-5. **상태 레이어 갱신** — 새 작업 상태, 게이트 기록, 결과 기록, 커밋 해시로 `state.json`을 원자적으로 재작성합니다.
+5. **저널에 기록** — `ledger.py` 동사(`start`, `gate`, `complete`)를 통해 `journal.ndjson`에 이벤트를 추가합니다. `ledger.py project`는 파생된 `state.json` 스냅샷 프로젝션을 원자적으로 업데이트합니다. 레거시 v5 계획에서는 직접 상태 파일 업데이트가 유지됩니다.
 6. **양보** — 세션이 깔끔하게 종료됩니다; 다음 턴이 갱신된 상태에서 이어받습니다.
 
 ## 요구 사항

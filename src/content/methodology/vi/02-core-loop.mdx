@@ -1,6 +1,6 @@
 ---
 title: Vòng lặp lõi
-description: "Quy trình create, execute, refine, resume, status và verify, thư mục đầu ra .dwp được gitignore, cấu trúc tác vụ mười phần, và cách kiểm chứng hoạt động."
+description: "Vòng lặp lõi chín sub-skill DWP, thư mục .dwp chứa config.json, cấu trúc tác vụ mười phần cùng các cơ chế kiểm chứng và tiếp tục kế hoạch."
 order: 2
 lang: vi
 summary: Cách các thao tác lõi của DWP đưa một kế hoạch từ mục tiêu tới hoàn tất đã kiểm chứng.
@@ -11,7 +11,7 @@ import TaskAnatomy from '@/components/diagrams/methodology/TaskAnatomy.astro';
 
 # Vòng lặp lõi
 
-DWP định nghĩa một tập hợp nhỏ các thao tác đưa một kế hoạch từ một mục tiêu tới công việc đã hoàn tất, rà soát được: **create → execute → refine → resume → status**, với **verify** là bước kiểm tra tuân thủ xác nhận kết quả. Cùng nhau, chúng tạo thành vòng lặp mà agent tuân theo suốt vòng đời của một kế hoạch. Các agent thực thi từng tác vụ một, kiểm chứng mỗi bước trước khi đi tiếp.
+DWP định nghĩa một tập hợp các thao tác đưa một kế hoạch từ mục tiêu tới hoàn tất: **create → execute → refine → resume → status → verify**, được hỗ trợ bởi các trình trợ giúp vòng đời **onboard** và **upgrade** cùng sub-skill **author** (tổng cộng chín sub-skill). Cùng nhau, chúng tạo thành vòng lặp mà agent tuân theo suốt vòng đời của một kế hoạch. Các agent thực thi từng tác vụ một, kiểm chứng mỗi bước trước khi đi tiếp.
 
 Vòng lặp này là hình thức vận hành của phát triển dựa trên đặc tả. Kế hoạch là đặc tả mà agent thực thi dựa vào, mỗi tác vụ mang tiêu chí chấp nhận rõ ràng, và bước kiểm chứng là cổng biến một tuyên bố hoàn tất thành bằng chứng của nó. Vì kế hoạch và nhật ký tiến độ của nó sống trong repository, vòng lặp có thể tiếp tục qua các phiên và các agent.
 
@@ -25,6 +25,9 @@ Vòng lặp này là hình thức vận hành của phát triển dựa trên đ
 - **resume** — Tiếp tục một kế hoạch bị gián đoạn. Agent đọc nhật ký tiến độ và các tệp tác vụ để tái dựng trạng thái, rồi tiếp tục từ tác vụ chưa hoàn tất đầu tiên.
 - **status** — Báo cáo tiến độ mà không thực thi. Agent tóm tắt các tác vụ đã xong, đang làm và đang chờ, và không thay đổi gì.
 - **verify** — Kiểm tra tuân thủ mà không thay đổi gì. Agent báo cáo liệu repository có đạt tiêu chuẩn hay không và liệu một kế hoạch có chỉnh dạng hay không — mỗi tác vụ mang tiêu chí chấp nhận và một cổng kiểm chứng. Xem [tài liệu Tuân thủ của đặc tả](/spec).
+- **onboard** — Hướng dẫn agent tiếp cận repository dựa trên lập luận, thiết lập AGENTS.md, tài liệu hướng dẫn trong docs/ và cấu trúc .agents/.
+- **upgrade** — Nâng cấp harness repository hoặc các kế hoạch hiện có lên các phiên bản tiêu chuẩn DWP mới hơn.
+- **author** — Soạn thảo các skill, agent hoặc lệnh mới phù hợp với quy ước của repository, giữ cho danh mục tài liệu luôn đồng bộ.
 
 ## Thư mục đầu ra `.dwp/`
 
@@ -34,28 +37,34 @@ Tất cả thành phần DWP sống dưới một thư mục `.dwp/` được gi
 .dwp/
 ├── plans/
 │   └── PLAN_001_<slug>/
+│       ├── manifest.json
+│       ├── contract.json
+│       ├── journal.ndjson
+│       ├── state.json
 │       ├── README.md
 │       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+│       ├── 1.task_<slug>.md
+│       ├── 2.task_<slug>.md
+│       └── analysis_results/
+└── config.json
 ```
 
 ## Cấu trúc tác vụ mười phần
 
 <TaskAnatomy lang="vi" class="not-prose my-10" />
 
-Mỗi tệp tác vụ chứa mười phần này, theo thứ tự. Cấu trúc bảo đảm rằng mỗi đơn vị công việc đều khép kín và rà soát được:
+Mười phần trong sơ đồ trên định nghĩa cấu trúc giải phẫu của mỗi tệp tác vụ trong một kế hoạch Full. Trình tự này bảo đảm rằng mỗi đơn vị công việc hoàn toàn khép kín, rõ ràng và có thể kiểm toán độc lập:
 
-1. **Goal** — một đoạn nêu rõ tác vụ đạt được điều gì.
-2. **Context** — bối cảnh, liên kết và lý do tác vụ này tồn tại.
-3. **Touched Surface** — hợp đồng giữa những gì tác vụ thay đổi và những gì phải được kiểm chứng.
-4. **Steps** — các hành động cụ thể, có thứ tự cần thực hiện.
-5. **Acceptance criteria** — một danh sách kiểm các điều kiện định nghĩa thế nào là xong.
-6. **Validation** — các lệnh hoặc test cần chạy để kiểm chứng công việc.
-7. **Files** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
-8. **Dependencies** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
-9. **Risks** — điều gì có thể sai, và các biện pháp giảm thiểu.
-10. **Completion & Log** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
+1. **Mục tiêu** — một đoạn nêu rõ tác vụ đạt được điều gì.
+2. **Bối cảnh** — bối cảnh, liên kết và lý do tác vụ này tồn tại.
+3. **Bề mặt chạm tới** — những gì tác vụ thay đổi và lớp rủi ro lựa chọn bước kiểm chứng.
+4. **Các bước** — các hành động cụ thể, có thứ tự cần thực hiện.
+5. **Tiêu chí chấp nhận** — danh sách kiểm tra các điều kiện định nghĩa thế nào là hoàn tất.
+6. **Kiểm chứng** — các lệnh hoặc kiểm thử cần chạy để xác minh công việc.
+7. **Tệp** — các đường dẫn dự kiến được tạo hoặc sửa đổi.
+8. **Phụ thuộc** — các tác vụ khác hoặc điều kiện tiên quyết bên ngoài.
+9. **Rủi ro** — điều gì có thể xảy ra sai sót và biện pháp giảm thiểu.
+10. **Hoàn tất và nhật ký** — một dấu trạng thái cùng các ghi chú theo trình tự thời gian.
 
 ## Kiểm chứng, hoàn tất và tiếp tục
 

@@ -15,7 +15,7 @@ OpenCode, the open-source coding agent, supports DWP through native AGENTS.md an
 
 ## Support level
 
-**Full** — OpenCode reads AGENTS.md natively and runs every dwp-* command from its procedure file.
+**Full** (Install-tested) — OpenCode reads AGENTS.md natively and runs every dwp-* command from its procedure file. Route asserted by automated test suites.
 
 ## Installation
 
@@ -24,7 +24,7 @@ DWP ships AGENTS.md and the command procedures in the repository; OpenCode disco
 Optional: [coding-agents-kit](/kit/agentkit) can install this CLI and launch it with `ak opencode`. The vendor’s own installer works just as well.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

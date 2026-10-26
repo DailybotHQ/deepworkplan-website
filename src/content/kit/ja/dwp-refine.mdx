@@ -1,6 +1,6 @@
 ---
 title: dwp-refine
-description: "完了済みの作業を保持し、変更を反映するようタスク表を更新しながら、タスクの追加、削除、並べ替えによって既存の Deep Work Plan を改良する。"
+description: "contracts/ 配下の契約修正、閉じた適応セット、基準の維持、Lite から Full への昇格により計画を安全に調整します。"
 kind: command
 lang: ja
 order: 3
@@ -24,14 +24,16 @@ import CmdRefine from '@/components/diagrams/kit/CmdRefine.astro';
 
 ```
 /dwp-refine [plan]
+/dwp-refine promote [plan]
 ```
 
 ## 振る舞い
 
 1. 既存の計画を読む。
-2. タスクを追加、削除、または並べ替える。
+2. `ledger.py amend` (v7 contracts/); タスクを追加、削除、または並べ替える。
 3. 完了済みの作業を保持する。
 4. タスク表を更新する。
+4. Closed adaptations (split, reorder, insert, change_strategy, retry).
 5. 何が、なぜ変わったかを記録する。
 
 > スキルをアップグレードしても、既存の計画は記録された世代を維持します。移行は自動ではありません。旧形式の3つの最終タスクは、明示的に保持された v5 Final Review 形式へ移行できます。v5 計画を v6 に移行するには、明示的な依頼と事前確認が必要です。v6 計画は世代を維持したまま変更なく実行されます。新しい計画は現在の v7 世代を使い、v6 計画が暗黙に v7 へ移行されることはありません。

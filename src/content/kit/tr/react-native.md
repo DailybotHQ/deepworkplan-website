@@ -1,6 +1,6 @@
 ---
 title: React Native
-description: "React Native ve Expo projeleri için navigasyon, yerel yapılandırma, test koşucusu ve bare ile managed arasındaki farka yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "React Native ve Expo projeleri için navigasyon, yerel yapılandırma, test koşucusu ve bare ile managed arasındaki farka yönelik akıl yürütme ipuçları içeren bir."
 kind: preset
 lang: tr
 order: 16

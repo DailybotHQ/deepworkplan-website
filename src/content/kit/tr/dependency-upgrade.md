@@ -1,6 +1,6 @@
 ---
 title: Dependency upgrade
-description: "Bir deponun bağımlılıklarını doğrulanmış, geri alınabilir gruplar hâlinde yükselten, npm varsaymak yerine gerçek yöneticiyi saptayan, paket yöneticisinden bağımsız isteğe bağlı bir eklenti."
+description: "Bir deponun bağımlılıklarını doğrulanmış, geri alınabilir gruplar hâlinde yükselten, npm varsaymak yerine gerçek yöneticiyi saptayan, paket yöneticisinden."
 kind: addon
 lang: tr
 order: 3
@@ -23,6 +23,16 @@ Bir deponun bağımlılıklarını gruplanmış, doğrulanmış, geri alınabili
 4. Her gruptan sonra deponun gerçek doğrulama geçidini çalıştırın; başarısız olan herhangi bir grubu geri alın.
 5. Neyin yükseltildiğini, atlandığını ve geri alındığını özetleyin; commit etmeyi geliştiriciye bırakın.
 
+
+## v7 belirtimi
+
+| Öğe | Değer |
+|---|---|
+| Ürün | DeepWorkPlan dependency-upgrade eklentisi |
+| Kayıt anahtarı | `.dwp/config.json` içinde `dependency-upgrade` |
+| Tanımlayıcı | `addons/dependency-upgrade/addon.json` (arayüz 1) |
+| Komut | Kabul edildiğinde `.agents/commands/` içine kurulan `/lib-upgrade` |
+| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.9.0`) |
 ## Notlar
 
 Paket yöneticisinden bağımsızdır — JS dışı bir depoda asla npm/ncu çalıştırmaz. İsteğe bağlıdır, hiçbir zaman zorunlu değildir ve asla otomatik commit yapmaz.

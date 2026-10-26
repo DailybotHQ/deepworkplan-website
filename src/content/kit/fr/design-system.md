@@ -1,6 +1,6 @@
 ---
 title: Système de conception
-description: "Un addon facultatif qui dote tout dépôt ayant une surface d’interface destinée aux utilisateurs d’un DESIGN.md (sous docs/, indexé depuis AGENTS.md) — couvrant les profils UI visuelle, sortie CLI et conversationnel dans un seul fichier."
+description: "Addon optionnel fournissant aux dépôts avec interface un DESIGN.md dans docs/, indexé depuis AGENTS.md, couvrant UI, sortie CLI et profils de dialogue."
 kind: addon
 lang: fr
 order: 4
@@ -40,6 +40,16 @@ Il n’est jamais requis — un dépôt sans aucun addon optionnel est pleinemen
 
 Lorsqu’il est accepté, l’addon peut installer un délégateur `/design-system` dans le `.agents/commands/` du dépôt pour régénérer ou rafraîchir `DESIGN.md` plus tard. L’installation de la commande est optionnelle ; un addon refusé n’en installe aucune.
 
+
+## Spécification v7
+
+| Élément | Valeur |
+|---|---|
+| Produit | Addon design-system de DeepWorkPlan |
+| Clé de registre | `design-system` dans `.dwp/config.json` |
+| Descripteur | `addons/design-system/addon.json` (interface 1) |
+| Fichier cible | `docs/DESIGN.md` indexé depuis `AGENTS.md` |
+| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v7.9.0`) |
 ## Relation avec les documents de conception par fonctionnalité
 
 Il s’agit d’un fichier de système de conception **au niveau du dépôt, persistant** — distinct d’un document de conception technique par fonctionnalité (le `design.md` « exigences → conception → tâches » des workflows spec-driven liés à un outil). Deep Work Plan ne fournit délibérément aucun archétype de document de conception par fonctionnalité séparé : le README d’un plan, les critères d’acceptation de chaque tâche et les portes de validation couvrent déjà ce rôle. Cet addon comble la seule lacune que ce rôle ne couvre pas : un contexte de conception d’interface durable et natif au dépôt.

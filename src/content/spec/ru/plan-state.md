@@ -1,6 +1,6 @@
 ---
 title: Состояние плана
-description: "Машиночитаемый слой состояния плана: manifest.json и state.json, записи gate, записи outcome как эпизодическая память, согласование и когда он обязателен."
+description: "Слой состояния плана v5 (manifest.json, state.json, записи gate, согласование) и то, как планы v6 и v7 заменяют его снимком, производным от журнала."
 order: 8
 lang: ru
 section: State
@@ -8,9 +8,16 @@ section: State
 
 # Состояние плана
 
-> **Область версии:** разделы ниже — сохраненный слой состояния v5.0.0. Текущий стандарт, DWP 7.0.0, использует контракт v7, журнал только для добавления и проекцию snapshot; планы v5 продолжают использовать правила `manifest.json` и `state.json` из этого документа.
+> **Область версии:** эта страница специфицирует **слой состояния v5**, который планы v5 сохраняют на протяжении всей своей жизни. Планы, созданные текущим пакетом (DWP 7.0.0, релиз `v7.9.0`), вместо него используют [слой записей](/spec/record-layer). В плане v6 или v7 источником полномочий служит контракт результата (`contract.json`), источником истины — журнал только для добавления (`journal.ndjson`), а `state.json` — это **производный снимок**, соответствующий [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Он регенерируется командой `ledger.py project` и MUST NOT редактироваться вручную.
 
-**Текущий стандарт: v7 (DWP 7.0.0).** Документы ниже остаются базой; v6 добавил контракт, журнал только для добавления, контекст задач, контроль ресурсов и правила жизненного цикла, а v7 сохраняет этот слой записей и добавляет необязательный маркер задачи `parallel_safe`, событие журнала `delegation`, реестр аддонов `.dwp/config.json` и возможности, предоставляемые аддонами. [Схема манифеста v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [схема контракта](https://deepworkplan.com/schema/plan-contract/v7.json) и [схема активного снимка](https://deepworkplan.com/schema/plan-snapshot/v6.json) (общая с v6). Существующие планы v5 и v6 сохраняют свои правила. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## Какой слой состояния применяется
+
+| Поколение плана | Источник истины | `state.json` | Схемы |
+| --- | --- | --- | --- |
+| v5 (и более ранние планы v1/v2) | markdown-план, проекцией которого служит этот слой JSON | записывается агентом в протокольных точках, описанных ниже | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 и v2 остаются валидными для старых планов) |
+| v6 и v7 | контракт плюс журнал только для добавления | снимок, проецируемый из журнала, никогда не пишется вручную | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (или их эквиваленты v6) |
+
+План никогда не меняет поколение неявно: планы v5 сохраняют эти правила, а перевод плана на v6 — это явная миграция с предварительным просмотром ([Слой записей](/spec/record-layer#coexistence-and-migration)). Канонические источники: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Версия 5.0.0. Статус: стабильная.** Этот документ специфицирует машиночитаемый слой состояния плана методологии Deep Work Plan, теперь приведённый в соответствие с собственной версией стандарта DWP — перенумерация не ослабляет ни одно существующее требование. Эта редакция также документирует защищённый обновитель состояния, верифицированную публикацию плана и правила истинности доказательств, которым должен удовлетворять завершённый план (см. ниже). Ключевые слова MUST, MUST NOT, SHOULD, SHOULD NOT и MAY следует трактовать так, как описано в RFC 2119.
 
@@ -53,9 +60,9 @@ Markdown-план остаётся **человекочитаемым источ
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ Markdown-план остаётся **человекочитаемым источ
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",

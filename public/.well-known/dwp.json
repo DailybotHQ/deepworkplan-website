@@ -1,16 +1,16 @@
 {
   "schema": "https://deepworkplan.com/schema/repo-descriptor/v1.json",
-  "spec_version": "2.2.0",
-  "archetype": "individual",
+  "spec_version": "7.0.0",
+  "archetype": "orchestrator-hub",
   "conformance": {
     "verified": true,
-    "last_verified": "2026-06-09",
-    "checker": "conformance.sh (deepworkplan-skill verify sub-skill)"
+    "last_verified": "2026-10-14",
+    "checker": "conformance.sh repository checks (deepworkplan-skill verify sub-skill, pack v7.9.0)"
   },
   "agents_md": "https://github.com/DailybotHQ/deepworkplan-website/blob/main/AGENTS.md",
   "skill": {
     "name": "deepworkplan",
-    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y",
+    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y",
     "repository": "https://github.com/DailybotHQ/deepworkplan-skill"
   },
   "endpoints": {
@@ -20,7 +20,7 @@
     "trust": "/.well-known/dwp-trust.json"
   },
   "schemas": {
-    "plan_manifest": "https://deepworkplan.com/schema/plan-manifest/v1.json",
-    "plan_state": "https://deepworkplan.com/schema/plan-state/v1.json"
+    "plan_manifest": "https://deepworkplan.com/schema/plan-manifest/v7.json",
+    "plan_state": "https://deepworkplan.com/schema/plan-snapshot/v6.json"
   }
 }

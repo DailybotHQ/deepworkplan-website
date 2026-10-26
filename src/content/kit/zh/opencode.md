@@ -15,7 +15,7 @@ OpenCode 是一款开源编码代理，通过原生 AGENTS.md 与 Markdown 命�
 
 ## 支持级别
 
-**完整** —— OpenCode 原生读取 AGENTS.md，并从其过程文件运行每一个 dwp-* 命令。
+**完整**（经过安装测试）—— OpenCode 原生读取 AGENTS.md 并通过其过程文件运行每个 dwp-* 命令。路径已由自动化测试套件断言。
 
 ## 安装
 
@@ -24,7 +24,7 @@ DWP 将 AGENTS.md 与命令过程存放于仓库中；OpenCode 将其作为项�
 可选：[coding-agents-kit](/kit/agentkit) 可以安装此 CLI，并用 `ak opencode` 启动它。使用供应商自己的官方安装程序同样可行。
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

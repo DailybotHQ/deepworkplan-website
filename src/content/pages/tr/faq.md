@@ -1,7 +1,7 @@
 ---
 title: "Sıkça sorulan sorular — Deep Work Plan"
 description: "Deep Work Plan hakkında sorulan soruların yanıtları: ne yaptığı, doğrulama kapıları ve sürdürme, araçlarla karşılaştırma ve benimseme."
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-14
 ---
 
 ## Sıkça sorulan sorular
@@ -12,7 +12,7 @@ Deep Work Plan hakkında en çok sorulanlara kısa yanıtlar; her biri, konuyu d
 
 ### Deep Work Plan gerçekte ne yapar?
 
-Deep Work Plan, bir depoyu, bir kodlama ajanının uzun işi güvenilir biçimde yürütebileceği yapılandırılmış bir ortama dönüştürür. Bir ajan skill'i olarak kurulur, depoyu bir kez kuruluma alır (bir `AGENTS.md` dizini, bir `docs/` ağacı, skill ve komutlardan oluşan bir `.agents/` kiti, gitignore'lanmış bir `.dwp/` çıktı alanı) ve o andan itibaren her hedef bir plana dönüşür: her biri kabul kriterleri ve bir doğrulama kapısı taşıyan atomik görevler; tek tek yürütülür, geçtikçe işlenir ve herhangi bir ajan tarafından diskten sürdürülebilir. Plan, güvenliği denetleyen ve son durumu doğrulayan bir Final Review ile kapanır. Metodoloji MIT lisanslıdır ve depo okuyan her kodlama ajanıyla çalışır.
+Deep Work Plan, bir depoyu, bir kodlama ajanının uzun işi güvenilir biçimde yürütebileceği yapılandırılmış bir ortama dönüştürür. Bir ajan skill’i olarak kurulur, depoyu bir kez kuruluma alır (bir `AGENTS.md` dizini, bir `docs/` ağacı, skill ve komutlardan oluşan bir `.agents/` kiti, gitignore’lanmış bir `.dwp/` çıktı alanı) ve o andan itibaren her hedef bir plana dönüşür: her biri kabul kriterleri ve bir doğrulama kapısı taşıyan atomik görevler; tek tek yürütülür, geçtikçe işlenir ve herhangi bir ajan tarafından diskten sürdürülebilir. Plan, güvenliği denetleyen ve son durumu doğrulayan bir Final Review ile kapanır. Metodoloji MIT lisanslıdır ve depo okuyan her kodlama ajanıyla çalışır.
 
 [Metodolojiyi okuyun](https://deepworkplan.com/tr/methodology)
 
@@ -24,33 +24,33 @@ Kodlama ajanlarına gerçek, çok adımlı işler veren ve bu işin bitmesini is
 
 ### Lite plan ile Full plan arasındaki fark nedir?
 
-Bir gösterim tercihidir, titizlik ödünleşmesi değil. Planlar varsayılan olarak Lite'tır: sabitlenmiş görev kayıtları içeren, zaten yürütülebilir kompakt bir README — kısmi bir taslak değil. Baştan bir Full plan isterseniz `create` Full görev dosyalarını doğrudan yazar; bir görevin talimat ayrıntısı, bağımlılıkları veya sözleşmeleri incelenebilir kompakt bir kayda sığmadığında da planı Full'e genişletir. Sonraki yükseltme tamamlanmış her görevi korur. Her iki biçim de aynı kabul kriterlerini, doğrulama kapılarını, kanıtı ve zorunlu Final Review'yi taşır.
+Bir gösterim tercihidir, titizlik ödünleşmesi değil. Planlar varsayılan olarak Lite’tır: sabitlenmiş görev kayıtları içeren, zaten yürütülebilir kompakt bir README — kısmi bir taslak değil. Baştan bir Full plan isterseniz `create` Full görev dosyalarını doğrudan yazar; bir görevin talimat ayrıntısı, bağımlılıkları veya sözleşmeleri incelenebilir kompakt bir kayda sığmadığında da planı Full’e genişletir. Sonraki yükseltme tamamlanmış her görevi korur. Her iki biçim de aynı kabul kriterlerini, doğrulama kapılarını, kanıtı ve zorunlu Final Review’yi taşır.
 
 [Metodolojiyi okuyun](https://deepworkplan.com/tr/methodology)
 
 ### Bir araç mı, çerçeve mi yoksa metodoloji mi?
 
-Kurulabilir bir skill olarak paketlenmiş bir metodoloji. Sunucu yok, hesap yok, tescilli biçim yok ve zaten kullandığınız kodlama ajanının ötesinde bir çalışma zamanı yok. Kurulan şey, ajanın okuduğu talimatlar; bağlam tespiti ve uyumluluk denetimi için küçük bir shell betiği kümesi; ve deponuzun benimsediği kurallardır. Planın ürettiği her şey deponuzdaki Markdown ve JSON'dur; hiçbir araç olmadan okunabilir.
+Kurulabilir bir skill olarak paketlenmiş bir metodoloji. Sunucu yok, hesap yok, tescilli biçim yok ve zaten kullandığınız kodlama ajanının ötesinde bir çalışma zamanı yok. Kurulan şey, ajanın okuduğu talimatlar; bağlam tespiti ve uyumluluk denetimi için küçük bir shell betiği kümesi; ve deponuzun benimsediği kurallardır. Planın ürettiği her şey deponuzdaki Markdown ve JSON’dur; hiçbir araç olmadan okunabilir.
 
 [Spesifikasyonu okuyun](https://deepworkplan.com/tr/spec)
 
 ### Hangi kodlama ajanlarıyla çalışır?
 
-Depo dosyalarını okuyan herhangi bir ajan. Skill, açık Agent Skills standardını ve `AGENTS.md` kuralını izler; bu yüzden Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot ve diğerleri onu normal skill ve talimat yükleme süreçleri üzerinden edinir. Metodolojinin kendi değerlendirmesi, bir satıcının ajanının başlattığı bir planın diğer satıcının ajanı tarafından her iki yönde sürdürüldüğünü gösterir. Kurulum kapsamı ve davranışsal kanıt uyumluluk matrisinde ajan başına listelenir ve ikisi asla birbirine karıştırılmaz.
+Depo dosyalarını okuyan tüm ajanlarla çalışır. Claude Code ve OpenAI Codex, çift yönlü yürütme ve görev devri için davranış odaklı test edilmiştir; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline ve Antigravity kurulumu doğrulanmış adaptörlere sahiptir. Metodoloji, davranış testini kurulum kapsamından ayırır.
 
 [Kite göz atın](https://deepworkplan.com/tr/kit)
 
 ### Nasıl kullanılır?
 
-Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
+Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
 
 [Hızlı başlangıç](https://deepworkplan.com/tr/quickstart)
 
 ### Tam olarak ne kurulur ve nereye?
 
-Ajan skill'i, ajanınızın proje veya kullanıcı skill'lerini yüklediği her yere kurulur. Kuruluma alma daha sonra deponun kendisini uyarlar: `AGENTS.md`, `docs/`, `.agents/` ve gitignore'lanmış `.dwp/` çalışma alanını oluşturur veya uzlaştırır. Skill ajana metodu öğretir; depo ise diğer ajanların devam edebilmesi için gereken bağlamı, kiti ve plan kanıtını tutar.
+Ajan skill’i, ajanınızın proje veya kullanıcı skill’lerini yüklediği her yere kurulur. Kuruluma alma daha sonra deponun kendisini uyarlar: `AGENTS.md`, `docs/`, `.agents/` ve gitignore’lanmış `.dwp/` çalışma alanını oluşturur veya uzlaştırır. Skill ajana metodu öğretir; depo ise diğer ajanların devam edebilmesi için gereken bağlamı, kiti ve plan kanıtını tutar.
 
-[Benimseme akışına bakın](https://deepworkplan.com/tr/init)
+[Benimseme akışına bakın](https://deepworkplan.com/tr/quickstart)
 
 ### Deep Work Plan Git gerektirir mi?
 
@@ -60,7 +60,7 @@ Depolar için Git önerilir, çünkü geçmişi kurtarma ve inceleme yüzeyinin 
 
 ### Bir skill, bir plan ve bir ürün spesifikasyonu arasındaki fark nedir?
 
-Bir skill, ajanın tekrarlanabilir bir prosedürü nasıl gerçekleştirdiğini tanımlar. Bir DWP planı, kapsam, kabul kriterleri, doğrulama kapıları ve kanıt yoluyla somut bir değişikliği tanımlar. Bir ürün spesifikasyonu ürünün mevcut davranışını tanımlar ve uygulamadan sonra delta'lar yoluyla evrilir; skill'ler ve planlar da birer spesifikasyondur, ancak bu kanonik ürün sözleşmesini sürdürmek yerine prosedürleri ve değişiklikleri tanımlarlar.
+Bir skill, ajanın tekrarlanabilir bir prosedürü nasıl gerçekleştirdiğini tanımlar. Bir DWP planı, kapsam, kabul kriterleri, doğrulama kapıları ve kanıt yoluyla somut bir değişikliği tanımlar. Bir ürün spesifikasyonu ürünün mevcut davranışını tanımlar ve uygulamadan sonra delta’lar yoluyla evrilir; skill’ler ve planlar da birer spesifikasyondur, ancak bu kanonik ürün sözleşmesini sürdürmek yerine prosedürleri ve değişiklikleri tanımlarlar.
 
 [Spesifikasyonu okuyun](https://deepworkplan.com/tr/spec/dwp-specification)
 
@@ -68,7 +68,7 @@ Bir skill, ajanın tekrarlanabilir bir prosedürü nasıl gerçekleştirdiğini 
 
 ### Doğrulama kapıları nasıl uygulanır? İnsan onayı gerekir mi?
 
-Yürütülebilir onaylamalardır ve ajan bunları kendisi çalıştırır. İnsan onayı çalışmayı iki uçtan çerçeveler: bir kişi yürütmeden önce planı onaylar ve pull request sırasında son diff'i inceler; aradaki yürütme otonomdur. Her görev, genellikle deponun kendi kalite kapısı olan somut komutları adlandırır; bunlar görevin dokunduğu yüzeyden seçilir: değişen davranışın testleri ve tüketicileri, değişiklik paylaşıldığında veya sınırlandırılamadığında tam suite'e genişletilir. Bir görev, yalnızca bu komutlar başarıyla çıktığında tamamlanmış sayılır ve davranışı değiştiren görevler testleri genişletmelidir. Bir başarısızlıkta ajan önce görevin kendi kapsamına düşen şeyi onarır ve kapıyı yeniden çalıştırır; bu kapsamda onarılamayan bir başarısızlık görevi engellenmiş olarak işaretler ve çalışmayı durdurur.
+Yürütülebilir onaylamalardır ve ajan bunları kendisi çalıştırır. İnsan onayı çalışmayı iki uçtan çerçeveler: bir kişi yürütmeden önce planı onaylar ve pull request sırasında son diff’i inceler; aradaki yürütme otonomdur. Her görev, genellikle deponun kendi kalite kapısı olan somut komutları adlandırır; bunlar görevin dokunduğu yüzeyden seçilir: değişen davranışın testleri ve tüketicileri, değişiklik paylaşıldığında veya sınırlandırılamadığında tam suite’e genişletilir. Bir görev, yalnızca bu komutlar başarıyla çıktığında tamamlanmış sayılır ve davranışı değiştiren görevler testleri genişletmelidir. Bir başarısızlıkta ajan önce görevin kendi kapsamına düşen şeyi onarır ve kapıyı yeniden çalıştırır; bu kapsamda onarılamayan bir başarısızlık görevi engellenmiş olarak işaretler ve çalışmayı durdurur.
 
 [Çekirdek döngü](https://deepworkplan.com/tr/methodology/02-core-loop)
 
@@ -92,7 +92,7 @@ Plan sürekli bir kontroldür. Ajan bir seferde bir küçük görevle çalışı
 
 ### Plan bir kez üretilip elle sürdürülür mü, yoksa kodla birlikte evrilir mi?
 
-Hiçbiri. Bir hedeften bir kez üretilir ve sonra işin parçası olarak sürdürülür. Plan kasıtlı olarak kod diff'lerinden yeniden yazılmaz; çünkü kodu kovalayan bir spec gecikmeli bir ayna olur — metodolojinin ortadan kaldırmak için var olduğu sapma budur. Kasıtlı olarak evrilir: kapılar güncel repoya karşı yeniden çalışır, başarısız bir kapı iyileştirmeyi tetikler ve ajan bu iyileştirmeyi çalışma sırasında yapar; siz önden onaylar, sonda incelersiniz. Dokümantasyon ve testler, güncellemek her görevin kapısının içinde olduğu için yapı gereği kodla birlikte evrilir.
+Hiçbiri. Bir hedeften bir kez üretilir ve sonra işin parçası olarak sürdürülür. Plan kasıtlı olarak kod diff’lerinden yeniden yazılmaz; çünkü kodu kovalayan bir spec gecikmeli bir ayna olur — metodolojinin ortadan kaldırmak için var olduğu sapma budur. Kasıtlı olarak evrilir: kapılar güncel repoya karşı yeniden çalışır, başarısız bir kapı iyileştirmeyi tetikler ve ajan bu iyileştirmeyi çalışma sırasında yapar; siz önden onaylar, sonda incelersiniz. Dokümantasyon ve testler, güncellemek her görevin kapısının içinde olduğu için yapı gereği kodla birlikte evrilir.
 
 [Metodolojiyi okuyun](https://deepworkplan.com/tr/methodology)
 
@@ -104,7 +104,7 @@ Hiçbiri. Bir hedeften bir kez üretilir ve sonra işin parçası olarak sürdü
 
 ### Final Review nedir?
 
-Her planın zorunlu tek kapanış görevi. Sırayla: planın birikmiş tam değişiklik kümesi üzerinde bir güvenlik geçişi, AI Diff Reviewer skill'iyle diff'in zorunlu yerel incelemesi dahil; kritik bulgular düzeltilene veya açıkça kabul edilene kadar tamamlamayı engeller; son durum doğrulaması, yani nihai kodda deponun geçerli test, lint, type-check ve format suite'lerinin tamamı; ve her görevin kaydettiği skills kararlarının uzlaştırması. Ajan sonra teslim edilenleri, kanıtları ve sınırlamaları raporlar ve yalnızca siz istediğinizde oluşturarak bir kez Executive Report sunar.
+Her planın zorunlu tek kapanış görevi. Sırayla: planın birikmiş tam değişiklik kümesi üzerinde bir güvenlik geçişi, AI Diff Reviewer skill’iyle diff’in zorunlu yerel incelemesi dahil; kritik bulgular düzeltilene veya açıkça kabul edilene kadar tamamlamayı engeller; son durum doğrulaması, yani nihai kodda deponun geçerli test, lint, type-check ve format suite’lerinin tamamı; ve her görevin kaydettiği skills kararlarının uzlaştırması. Ajan sonra teslim edilenleri, kanıtları ve sınırlamaları raporlar ve yalnızca siz istediğinizde oluşturarak bir kez Executive Report sunar.
 
 [Spesifikasyon](https://deepworkplan.com/tr/spec/dwp-specification)
 
@@ -126,13 +126,51 @@ Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve aja
 
 [Gözetimsiz protokolü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
 
+## Çoklu ajanlar ve v7
+
+### Birden fazla ajan bir planda paralel olarak güvenle çalışabilir mi?
+
+Evet, açık kurallar altında. Bir v7 planı, dokunulan yüzeyi kardeş bir görevle örtüşmediğinde ve çıktısı sınırlı olduğunda görevi `parallel_safe` olarak işaretleyebilir; yalnızca `agent_delegation` izni veren bir sözleşme bu görevin başka bir kodlama ajanına verilmesini sağlar — kendi git çalışma ağacında başsız olarak (agentkit) veya başka bir Herdr bölmesinde (Herdr). Yazma delegesi yalnızca kendi çalışma ağacında çalışır, üst oturum planın günlüğünün tek yazarı olarak kalır ve delege asla daha ileriye yetki devretmez.
+
+[Delegasyon hakkında okuyun](https://deepworkplan.com/tr/spec/delegation)
+
+### Delege edilen bir alt ajanın sonucuna otomatik olarak güvenilir mi?
+
+Hayır. Bir delegenin sonucu, üst plan çalışmayı entegre edene ve kendi geçit çalıştırıcısı görevin geçidini yürütüp `observed` kanıtı kaydedene kadar `asserted` olarak kaydedilir. Tamamlanmış bir yetki devri hiçbir zaman bir kriteri tek başına kapatmaz, dolayısıyla yetki devri tamamlama çıtasını düşürmeden erişim alanını genişletir.
+
+[Kayıt katmanı spesifikasyonunu okuyun](https://deepworkplan.com/tr/spec/record-layer)
+
+### Bir ajan planın ortasında belirteç veya hız sınırına ulaşırsa ne olur?
+
+Her ajan görev sınırlarında kendi kapasitesini kontrol eder. Boş yer kaldığında devam eder; kapasite azaldığında yalnızca bitirebileceği görevi tamamlar; kritik seviyeye geldiğinde güvenli bir noktaya ulaşır, küçük bir devir paketi yazar (`dwp-handoff-v1`: yapılanlar, doğrulananlar ve doğrulanmayanlar ile sonraki adımlar), lidere bildirir ve durur. Lider, başka bir hesapta halef başlatır; halef paketi kabul eder, pakette doğrulanmamış olarak listelenen her geçidi yeniden çalıştırarak planı sürdürür. Liderin kendisi tükenirse liderliği halefe devreder; liderlik değişiklikleri artan bir dönem (epoch) taşır, böylece aynı anda yalnızca bir lider hareket eder.
+
+[Metodolojiyi okuyun](https://deepworkplan.com/tr/methodology)
+
+### Otonom bir ajan bir insana danışmak için ne zaman duraklar?
+
+DWP yedi sınıflı katı bir eskalasyon taksonomisi tanımlar (AGENT_PROTOCOL §7.5): C1 onaysız eylemler, C2 kimlik doğrulama/onay engelleri, C3 giderilemeyen belirsizlik, C4 izin verilen düzeltmeler olmadan başarısız olan geçitler, C5 yıkıcı işlemler, C6 lisans değişiklikleri, C7 tükenmiş kapasite.
+
+[Ajan protokolünü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
+
+### Görevin tamamlandığı ajanın anlatısal iddiasının ötesinde nasıl kanıtlanır?
+
+Bir görev, yalnızca kaydedilen kanıtlar kabul kriterlerinin her birini karşıladığında tamamlanır. Yürütme başladığında sonuç sözleşmesi içerik adreslidir ve değiştirilemez, her olay planın günlüğüne eklenir ve yalnızca geçit çalıştırıcısı `observed` kanıtı kaydeder. İnsan muhakemesi gerektiren bir kriter, yalnızca açık bir yetki işaretçisine sahip kayıtlı bir insan onayıyla kapatılır; makbuz kayıtlardan yeniden hesaplanır, asla elle yazılmaz. Nihai İnceleme ardından güvenlik geçişini ve nihai durum üzerindeki tam doğrulamayı çalıştırır.
+
+[Kayıt katmanı spesifikasyonunu okuyun](https://deepworkplan.com/tr/spec/record-layer)
+
+### v6 planları v7 altında çalışmaya devam eder mi?
+
+Evet. Plan sözleşmeleri şema neslini açıkça bildirir (`plan-contract/v6.json` veya `plan-contract/v7.json`). Bir plan asla uçuş ortasında nesil değiştirmez. Mevcut v6 planları biçimlerini ve semantiklerini koruyarak v7 araçları altında kesintisiz devam eder.
+
+[Sözleşmeler hakkında okuyun](https://deepworkplan.com/tr/spec/record-layer)
+
+## Diğerleriyle karşılaştırma
+
 ### Tek bir plan birden fazla repoya yayılabilir mi?
 
 Evet — orkestratör hub arketipi tam olarak bunun için vardır. Bir hub repo koordine eden planı tutar ve her alt repo kendi planını kendi izole `.dwp/` çalışma alanında yürütür; böylece bir alt repo asla hub’ın plan durumuna yazmaz. Alt repoların tamamlanmışlığı her planın kendi en üst düzey durumundan okunur, içeride dizgi araması yapılmaz ve hub herhangi bir yere geçmeden önce nerede olduğunu kaydeder. Her alt repo, tek başına da pilotlanabilen sıradan bir DWP repo olarak kalır.
 
 [Repo arketipleri](https://deepworkplan.com/tr/spec/archetypes)
-
-## Diğerleriyle karşılaştırma
 
 ### Spec Kit, OpenSpec veya Kiro gibi spec odaklı araçlardan nasıl farklıdır?
 
@@ -156,19 +194,19 @@ Yerleşik plan modları kullanışlıdır ve Deep Work Plan aynı alt yapı üze
 
 ### Kuruluma alma repoma ne yazar ve mevcut dosyalara dokunur mu?
 
-Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore'lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill'i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır.
+Kuruluma alma yıkıcı değildir: mevcut `AGENTS.md`, `docs/`, `.agents/` veya `CLAUDE.md` dosyasını algılar, üzerine yazmak yerine uzlaştırır ve bir şeyi değiştirmeden önce sorar. Gerçek komutlarla `AGENTS.md` dizini, akıl yürütülmüş bir `docs/` ağacı, modül başına docs, ince `dwp-*` komutlarıyla `.agents/` kiti, gitignore’lanmış bir `.dwp/` çıktı alanı, doğrulanmış bir test haritası ve zorunlu yerel kod incelemesi (AI Diff Reviewer skill’i artı repoya uyarlanmış inceleme eklentisi) yazar. Sonra ne üretildiğini görebilmeniz için self-check ve uyumluluk denetleyicisini çalıştırır. Daha önceki bir standartla kuruluma alınmış bir repo, yalnızca eksik veya güncel olmayan şeyleri uzlaştıran hedefli bir harness yükseltmesi alır.
 
-[Benimseme uç noktası](https://deepworkplan.com/tr/init)
+[Benimseme uç noktası](https://deepworkplan.com/tr/quickstart)
 
 ### Zaten kuruluma alınmış bir repoda skill’i nasıl yükseltirim?
 
 Burada iki farklı yükseltme vardır ve akış onları ayrı tutar. Repo’nun harness’i — `AGENTS.md`, `docs/`, `.agents/` kiti — onboarding’i yeniden çalıştırarak uzlaştırılır; yalnızca eksik veya güncel olmayan kısımları doldurur. Skill’in kendisi `/dwp-upgrade` ile ilerler: son yayımlanmış sürümün salt okunur denetimi, kabul ettiğiniz etiketin doğrulanarak kurulması ve ardından onboarding’in taze bir geçiş olarak yeniden çalıştırılması. Akış boyunca her adım açık onaya bağlıdır, yerel uyarlamalar üzerine yazılmak yerine karşılaştırılır ve korunur, `.dwp/` asla göçürülmez — mevcut planlar kayıtlı biçimlerini korur ve çalışmaya devam eder.
 
-[Benimseme uç noktası](https://deepworkplan.com/tr/init)
+[Benimseme uç noktası](https://deepworkplan.com/tr/quickstart)
 
 ### Eklentileri kurmadan çekirdek metodolojiyi kullanabilir miyim?
 
-Evet. Eklentiler isteğe bağlı katmanlardır ve hiçbirini içermeyen bir depo tamamen DWP uyumludur. Devcontainer'lar, Dailybot raporlaması, bağımlılık yükseltmeleri, tasarım sistemi desteği ve isteğe bağlı CI incelemesi yalnızca deponuza uyduğunda ve bunları açıkça kabul ettiğinizde sunulur.
+Evet. Eklentiler isteğe bağlı katmanlardır ve hiçbirini içermeyen bir depo tamamen DWP uyumludur. Devcontainer’lar, Dailybot raporlaması, bağımlılık yükseltmeleri, tasarım sistemi desteği ve isteğe bağlı CI incelemesi yalnızca deponuza uyduğunda ve bunları açıkça kabul ettiğinizde sunulur.
 
 [Eklentilere göz atın](https://deepworkplan.com/tr/spec/addons)
 
@@ -180,7 +218,7 @@ DWP, bir araç zincirinin yokluğunu bir muafiyet olarak görmez. Kuruluma alma 
 
 ### Maliyeti nedir ve verimlilik nasıl ölçülür?
 
-Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın **girişte** yüklediği talimat byte sayısı olarak raporlanır — bir oturumun başındaki paket — ve buna ek olarak, işin gerçekten sürdüğünde akışın kendi tetikleyicilerinin yüklediklerini de ekleyen adlandırılmış **uçtan uca yollar** ile birlikte yayımlanır (örneğin yürütmeye devam eden bir sürdürme akışı genellikle giriş paketinin birkaç katını yükler). Bu iki rakamdan hiçbiri bir oturumu sınırlamaz: gerçek bir çalışma ayrıca deponun kendi dosyalarını, araç çıktısını ve planın çalışma dosyalarını da okur; bunların hiçbiri bu defterde sayılmaz. Her iki sayı da skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.
+Metodoloji ve skill MIT lisanslı ve ücretsizdir; core akışlarda hizmet, API anahtarı ve telemetri yoktur. Verimlilik, her akışın girişte yüklediği talimat byte sayısı olarak raporlanır — bir oturumun başındaki paket — ve buna ek olarak, işin gerçekten sürdüğünde akışın kendi tetikleyicilerinin yüklediklerini de ekleyen adlandırılmış uçtan uca yollar ile birlikte yayımlanır (örneğin yürütmeye devam eden bir sürdürme akışı genellikle giriş paketinin birkaç katını yükler). Bu iki rakamdan hiçbiri bir oturumu sınırlamaz: gerçek bir çalışma ayrıca deponun kendi dosyalarını, araç çıktısını ve planın çalışma dosyalarını da okur; bunların hiçbiri bu defterde sayılmaz. Her iki sayı da skill ile commit edilen bir betikle ölçülür, her yayın temel çizgisinde yeniden ölçülür ve bir değerlendirme defterinde yayımlanır; artışlar azalışlar kadar açıkça raporlanır. Token yüzdeleri veya maliyet tasarrufu olarak raporlanmaz; çünkü byte envanteri bunları kanıtlamaz. Donmuş bir protokol altında taze aracılarla bir kamu değerlendirmesi artık yürütüldü: aynı iki özellik; harness olmadan, önceki ana sürümle ve geçerli sürümle — her biri temiz klonlardan inşa edildi. Harness taşıyan ağaçtaki aracıların her iki görevde daha az byte okuduğunu ve geçerli sürümün özellik oturumlarının her iki görevde önceki ana sürümünkinden daha az model girdi ve çıktısı tükettiğini buldu — harness tarafından raporlandığı şekliyle, tek bir iş yükünde. Dürüst sınırları da buldu: onboarding, akışlar kullanıldığında geri ödeyen tek seferlik bir maliyettir; iş yükü başına net token yönü karışıktı; duvar saati avantajı iddia edilmez; ve taze bir aracı akışlara kendi başına girmez — akışlar sizin ya da onları çağırmayı bilen bir aracının çalıştırdığı komutlardır.
 
 [Güven ve açıklama](https://deepworkplan.com/tr/trust)
 

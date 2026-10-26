@@ -1,6 +1,6 @@
 ---
 title: SvelteKit
-description: "Un preset d'onboarding pour les projets SvelteKit, avec des indices de raisonnement sur les routes, les fonctions load, les endpoints serveur, l'adaptateur choisi et les tests."
+description: "Un preset d'onboarding pour les projets SvelteKit, avec des indices de raisonnement sur les routes, les fonctions load, les endpoints serveur, l'adaptateur."
 kind: preset
 lang: fr
 order: 13

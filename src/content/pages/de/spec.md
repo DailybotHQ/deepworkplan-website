@@ -10,7 +10,10 @@ lastUpdated: 2026-09-28
 
 Die Spezifikation ist die präzise, lesbare Definition der Methodik — die Strukturen und Protokolle, die Menschen und Agenten teilen. Sie legt in normativen RFC-2119-Begriffen fest, wie ein spec-driven Plan strukturiert ist und wie ein Agent gegen ihn ausführen muss: Der Plan ist die Quelle der Wahrheit, Validierungs-Gates sind binär, und das Repository selbst trägt das Harness, das ein Agent braucht. Sie ist in geordnete Dokumente gegliedert:
 
-- **Dokumentationsstandard** — die AI-first Repository-Struktur.
+- **Aufzeichnungsschicht** — die evidenzbasierte Aufzeichnungsschicht: Vertrag, Journal, Evidenzklassen (behauptet vs. beobachtet), Freigaben, Änderungen und Belege.
+- **Ressourcen und Fähigkeiten** — begrenzte Ausführung: Kontextmanifest, Ressourcengrenzen, Host-Fähigkeiten, Addon-Registry und Fähigkeiten.
+- **Delegation** — Multi-Agenten- und Schwarmausführung: parallele Worktrees, Delegationsereignisse, Transporte und Epochenstafette.
+- **Plan-Status** — maschinenlesbare Statusschicht: abgeleiteter Journal-Snapshot in v6/v7 (`ledger.py project`), historische v5-Statusschicht (`manifest.json`/`state.json`) und Abgleich.
 - **DWP-Spezifikation** — Planstruktur, Aufgaben-Anatomie, die Ausführungsschleife, der Delta-Abschnitt für Brownfield-Änderungen, das DWP-Wiederaufnahme-Protokoll, proportionale Rigor-Stufen (micro/standard/deep) und die maschinenlesbare Plan-Zustandsschicht.
 - **Agentenprotokoll** — erforderliches agentenübergreifendes Verhalten, Befehlszuordnung, unterstützte Agenten (einschließlich OpenClaw und Hermes) sowie Ausführungsprofile (interaktiv vs. unbeaufsichtigt) mit Stopbedingungen und geplanter Fortsetzung.
 - **Archetypen** — Einzel-Repositorys, Orchestrator-Hubs und der Agenten-Arbeitsbereich (das langlebige Zuhause eines autonomen Agenten: OpenClaw-Arbeitsbereich, Hermes-Service-Verzeichnis, Cloud-Agenten-Volume); die Klassifizierungsheuristik und wie sich das Onboarding unterscheidet.

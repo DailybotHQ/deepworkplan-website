@@ -1,6 +1,6 @@
 ---
 title: "Étude de cas : ce site web"
-description: "Comment deepworkplan.com lui-même fonctionne avec Deep Work Plan — un compte rendu réel d’un dépôt Astro de production rendu AI-first avec la méthodologie qu’il documente."
+description: "Comment deepworkplan.com lui-même fonctionne avec Deep Work Plan — un compte rendu réel d’un dépôt Astro de production rendu AI-first avec la méthodologie."
 kind: example
 lang: fr
 order: 2

@@ -1,6 +1,6 @@
 ---
 title: "DWP v2: repositori menjadi harness"
-description: "Rilis resmi pertama Deep Work Plan menjadikan repositori itu sendiri sebagai harness kerja agen — konteks, pagar pengaman, validasi, dan status, semuanya menyatu dengan repositori."
+description: "Deep Work Plan v2 menjadikan repositori itu sendiri sebagai harness agen: konteks, pengaman, validasi, dan status menyatu dengan repositori."
 date: 2026-07-16
 version: "v2 · Rilis resmi"
 kind: foundation

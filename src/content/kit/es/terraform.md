@@ -1,6 +1,6 @@
 ---
 title: Terraform
-description: "Preset de incorporación para proyectos Terraform e IaC, con pistas de razonamiento para módulos, providers, estado del backend, entornos y la compuerta fmt/validate/plan."
+description: "Preset de incorporación para proyectos Terraform e IaC, con pistas para módulos, providers, estado del backend, entornos y la compuerta fmt/validate/plan."
 kind: preset
 lang: es
 order: 21

@@ -1,6 +1,6 @@
 ---
 title: GitHub Copilot
-description: "GitHub Copilot için DWP adaptörü; AGENTS.md ve hash komut öneki ile markdown komut prosedürleri aracılığıyla tam destek sunar."
+description: "GitHub Copilot için DWP adaptörü; AGENTS.md ve hash komut öneki ile markdown komut prosedürleri aracılığıyla tam destek sunar tam doğrulama ile."
 kind: adapter
 lang: tr
 order: 4
@@ -15,7 +15,7 @@ GitHub Copilot, DWP’yi AGENTS.md ve markdown komut prosedürleri aracılığı
 
 ## Destek düzeyi
 
-**Tam** — Copilot, AGENTS.md ve dwp-* prosedür dosyalarını okur ve her komutu bunlar üzerinden çalıştırır.
+**Tam** (Kurulum testli) — Copilot, AGENTS.md ve dwp-* prosedür dosyalarını okur ve her komutu bunlardan çalıştırır. Yol, otomatik test paketleriyle onaylanmıştır.
 
 ## Kurulum
 

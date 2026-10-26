@@ -15,7 +15,7 @@ OpenAI Codex รองรับ DWP ผ่านขั้นตอนคำส�
 
 ## ระดับการรองรับ
 
-**เต็มรูปแบบ** — ทุกคำสั่ง dwp-* รันจากไฟล์ขั้นตอน กฎถูกติดตั้งไว้ใต้ `.codex/`
+**สมบูรณ์** (ผ่านการทดสอบพฤติกรรม) — ทุกคำสั่ง dwp-* รันจากไฟล์ขั้นตอนการทำงาน ได้รับการพิสูจน์ในการทดสอบประสิทธิภาพการส่งมอบงานสร้าง/ทำต่อแบบสองทิศทางข้ามโมเดล
 
 ## การติดตั้ง
 
@@ -24,7 +24,7 @@ OpenAI Codex รองรับ DWP ผ่านขั้นตอนคำส�
 ไม่บังคับ: [coding-agents-kit](/kit/agentkit) สามารถติดตั้ง CLI นี้และเรียกใช้ด้วย `ak codex` ได้ ตัวติดตั้งทางการของผู้พัฒนาก็ใช้ได้เช่นกัน
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

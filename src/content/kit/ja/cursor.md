@@ -1,6 +1,6 @@
 ---
 title: Cursor
-description: "Cursor AI 向けの DWP アダプター。プロジェクトルールの仕組みとハッシュのコマンドプレフィックスを通じた完全なサポートを備える。Cursor がスラッシュを自ら予約しているため。"
+description: "Cursor AI 向けの DWP アダプター。プロジェクトルールの仕組みとハッシュのコマンドプレフィックスを通じた完全なサポートを備える。Cursor がスラッシュを自ら予。"
 kind: adapter
 lang: ja
 order: 2
@@ -15,7 +15,7 @@ Cursor は、プロジェクトルールとコマンドファイルを通じて 
 
 ## サポートレベル
 
-**完全** — DWP コマンドは Cursor のルールの仕組みを通じて機能します。
+**完全**（インストールテスト済み）— DWP コマンドは Cursor のルールシステムを通じて動作します。ディレクトリのルートは自動テストスイートによって検証されており、動作ワークフローは逐次実行されます。
 
 ## インストール
 
@@ -24,7 +24,7 @@ DWP コマンドはプロジェクトの配下に Markdown として存在しま
 任意：[coding-agents-kit](/kit/agentkit) はこの CLI をインストールし、`ak cursor` で起動できます。ベンダー公式のインストーラーでも同様に使えます。
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

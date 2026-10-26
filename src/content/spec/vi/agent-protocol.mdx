@@ -1,6 +1,6 @@
 ---
 title: Giao thức agent
-description: "Hợp đồng hành vi quy phạm cho các agent lập trình AI: khởi tạo, lập kế hoạch, thực thi, an toàn và các hồ sơ thực thi — vận hành tương tác so với không có giám sát."
+description: "Hợp đồng hành vi quy phạm cho các agent lập trình AI: khởi tạo, lập kế hoạch, thực thi, an toàn và hồ sơ thực thi — vận hành tương tác hay không giám sát."
 order: 4
 lang: vi
 section: Protocol
@@ -32,7 +32,7 @@ Phương pháp luận này PHẢI hỗ trợ các agent lập trình AI sau. B�
 | **OpenClaw** | Quét gốc `<workspace>/.agents/skills/` (chuẩn AgentSkills) | văn bản thuần |
 | **Hermes** | Tải skill theo chuẩn AgentSkills; đọc `AGENTS.md` | văn bản thuần |
 
-Sáu agent đầu là các agent lập trình tương tác với một con người trong phiên. OpenClaw và Hermes là **nền tảng agent tự chủ** — các daemon tồn tại lâu dài với các lượt theo lịch — và thường thực thi các kế hoạch dưới hồ sơ không có giám sát (xem [Hồ sơ thực thi](#execution-profiles)) bên trong một không gian làm việc agent (xem [Các kiểu hình](/spec/archetypes) §3).
+Sáu agent đầu là các agent lập trình tương tác với một con người trong phiên. OpenClaw và Hermes là **nền tảng agent tự chủ** — các daemon tồn tại lâu dài với các lượt theo lịch — và thường thực thi các kế hoạch dưới hồ sơ không có giám sát (xem [Hồ sơ thực thi](#hồ-sơ-thực-thi)) bên trong một không gian làm việc agent (xem [Các kiểu hình](/spec/archetypes) §3).
 
 Mọi agent được hỗ trợ PHẢI coi `AGENTS.md` là nguồn chân lý duy nhất về các quy ước repository. Một tệp cấu hình cho từng agent PHẢI tham chiếu nó và KHÔNG ĐƯỢC sao chép nội dung của nó.
 

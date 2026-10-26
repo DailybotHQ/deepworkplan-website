@@ -1,10 +1,10 @@
 ---
 title: dwp-create
-description: "Crea un Deep Work Plan a partir de un objetivo de alto nivel. El agente analiza el objetivo, lo descompone en tareas y escribe los archivos del plan en .dwp."
+description: "Crea un Deep Work Plan a partir de un objetivo, con gramática de opciones de contorno, propuestas Lite iniciales, carpetas numeradas y contratos v7."
 kind: command
 lang: es
 order: 1
-usage: /dwp-create <goal>
+usage: /dwp-create <goal> [trust|auto] [lite|full]
 aliases:
   - dwp:create
 ---
@@ -18,34 +18,36 @@ Crea un nuevo Deep Work Plan a partir de un objetivo de alto nivel.
 
 ## Qué hace
 
-`dwp-create` toma un objetivo de alto nivel y lo convierte en un plan estructurado. Analiza el objetivo, formula preguntas aclaratorias si hace falta, descompone el trabajo en tareas secuenciales y escribe los archivos del plan.
+`dwp-create` toma un objetivo de alto nivel y lo convierte en un Deep Work Plan estructurado y ejecutable. Analiza los requisitos, formula preguntas aclaratorias si es ambiguo y materializa un plan Lite o Full directamente bajo `.dwp/plans/PLAN_<id>_<slug>/`.
 
 ## Uso
 
 ```
 /dwp-create <goal>
+/dwp-create trust lite <goal>
+/dwp-create <goal> full trust
 ```
 
-## Modos
+## Modos y opciones de contorno
 
-`dwp-create` usa por defecto el modo **guiado**: reúne contexto, ejecuta el análisis, y materializa directamente un plan Lite — una propuesta compacta que ya es ejecutable, no un borrador desechable — **te lo muestra y te pregunta si quieres conservarlo como Lite, promoverlo a un plan Full de archivo por tarea, editarlo o detenerte** — de modo que siempre lees el plan real antes de decidir. Es el valor por defecto recomendado, sobre todo las primeras veces.
+Las opciones de contorno configuran el comportamiento de revisión y el formato del plan. Pueden aparecer como tokens al principio o al final del comando en cualquier orden:
 
-Añade **`trust`** (o `auto`) como última palabra para omitir esa revisión — el agente pasa directo a un plan preaprobado y listo para ejecutar (Lite o Full, elegido por las mismas señales):
-
-```
-/dwp-create <goal> trust
-```
-
-El modo trust es el atajo para usuarios avanzados una vez que confías en el flujo; el modo guiado mantiene a una persona en el bucle por defecto.
+- **Modos de revisión:**
+  - **Guiado (por defecto):** materializa una propuesta ejecutable de plan Lite, muestra las señales observadas y la justificación del formato, y pregunta si conservar Lite, promover a Full, editar o detenerse.
+  - **Trust (`trust` o `auto`):** omite la revisión y pasa directamente a un plan preaprobado y listo para ejecutar.
+- **Preferencias de formato:**
+  - **`lite`:** expresa preferencia por un plan compacto de un solo archivo en `README.md` con registros de tareas anclados (`#task-N`).
+  - **`full`:** expresa preferencia por archivos de tareas numerados individuales (`N.task_<slug>.md`).
+  - Especificar tanto `lite` como `full` constituye un conflicto explícito.
+- **Terminador:** `--` finaliza el análisis de opciones; todo lo posterior a `--` se interpreta como contexto literal del objetivo.
 
 ## Comportamiento
-1. Analiza el objetivo y el contexto del repositorio.
-2. Formula preguntas aclaratorias si es ambiguo.
-3. Materializa el plan directamente bajo `.dwp/plans/PLAN_001_<slug>/` — un plan Lite por defecto, o Full para trabajos más grandes (en modo guiado, revísalo y elige conservarlo como Lite, promoverlo a Full, editarlo o detenerte).
-4. Descompone en tareas secuenciales y escribe el README, los archivos de tarea y PROGRESS.
-5. Termina con el Final Review (pase de seguridad, validación de estado final, reconciliación de skills).
 
-El paquete actual 7.x crea planes v7 de forma predeterminada, con slugs de 2–5 palabras. El flujo v5 conservado usa 2–4 palabras porque sus esquemas congelados cuentan el ID numérico como una palabra. Los planes existentes conservan la generación registrada y nunca se migran en silencio. Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v7 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
+1. **Análisis de requisitos:** inspecciona el contexto del repositorio, la arquitectura y los comandos de prueba documentados.
+2. **Aclaración:** formula preguntas aclaratorias si el alcance o los requisitos resultan ambiguos.
+3. **Asignación monotónica:** asigna una carpeta con relleno de ceros `PLAN_<id>_<slug>/` bajo `.dwp/plans/` usando `.next-plan-id` bajo bloqueo de archivos POSIX (`fcntl`). Los ID numéricos son monotónicos y nunca se reutilizan.
+4. **Materialización del contrato:** ejecuta `ledger.py materialize` para escribir `manifest.json`, estampar `contract.json` direccionado por contenido (generación v7 con marcadores `parallel_safe`) y registrar el evento inicial de `approval`.
+5. **Final Review:** los planes concluyen con una tarea obligatoria de cinco partes de Final Review (pase de seguridad con revisión local obligatoria, validación del estado final, reconciliación de habilidades, reconciliación de documentación y finalización).
 
 ## Alias
 

@@ -83,6 +83,9 @@ function badRequest(
   return json(400, errorResponse(null, code, message), protocolVersion);
 }
 
+/** Largest accepted request body, in bytes (64 KiB). */
+export const MAX_BODY_BYTES = 64 * 1024;
+
 export async function handleMcpRequest(
   input: McpHandlerInput
 ): Promise<McpHandlerOutput> {
@@ -100,6 +103,25 @@ export async function handleMcpRequest(
   }
   const headerVersion = header !== null && header !== '' ? header : null;
   const effectiveVersion = headerVersion ?? ASSUMED_PROTOCOL_VERSION;
+
+  // Cap the request size before parsing: every legitimate JSON-RPC call to
+  // this read-only server is a few hundred bytes.
+  // UTF-8 bytes >= UTF-16 code units, so the cheap length check rejects most
+  // oversized bodies before any encoding buffer is allocated.
+  if (
+    input.bodyText.length > MAX_BODY_BYTES ||
+    new TextEncoder().encode(input.bodyText).length > MAX_BODY_BYTES
+  ) {
+    return json(
+      413,
+      errorResponse(
+        null,
+        JsonRpcErrorCode.INVALID_REQUEST,
+        'Request body exceeds the 64 KiB limit of this endpoint.'
+      ),
+      headerVersion ?? LATEST_PROTOCOL_VERSION
+    );
+  }
 
   // Parse the body.
   let parsed: unknown;

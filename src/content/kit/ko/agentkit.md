@@ -10,7 +10,7 @@ order: 8
 
 터미널 코딩 에이전트는 저마다 세션을 이어 가는 고유한 플래그, 두 번째 계정을 분리하는 고유한 방식, 고유한 헤드리스 모드, 그리고 권한 프롬프트를 건너뛰는 고유한 스위치를 갖고 있습니다. [**coding-agents-kit**](https://github.com/DailybotHQ/coding-agents-kit)는 그 모두 위에 하나의 명령 체계를 얹습니다: `ak <kind> [@profile]`.
 
-이 애드온은 이 키트를 **DWP v7**(팩 `v7.8.1`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
+이 애드온은 이 키트를 **DWP v7**(팩 `v7.9.0`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
 
 ## 키트가 제공하는 것
 
@@ -23,7 +23,7 @@ order: 8
 
 ## 계정, 할당량, 계정 선택
 
-키트는 여러분이 가진 모든 로그인이나 키를 하나의 **계정**으로 취급합니다. CLI 하나 × 프로필 하나입니다. `@default`(또는 `@1`)는 CLI 자체의 home이고, `@2`, `@work`, `@client-x`는 별도의 로그인으로, 각각 프로필 루트 아래의 자체 디렉터리에 있으며 나란히 실행됩니다. `ak profiles`는 이들을 로그인 상태 및 키 이름과 함께 나열하고, `ak profiles --json`은 도구에 같은 목록을 제공합니다(스키마 `profiles-v1`). `v0.5.1`부터는 Claude Code 토큰이 실제로 어디에 있는지 — `file`, `keychain`(macOS), `none`, `unknown` — 를 비밀 값을 읽지 않고 존재 여부만으로 보고하며, 컨테이너 안이든 Linux 호스트든 Linux의 Cursor 로그인도 인식합니다. `v0.5.2`부터는 `AGENTKIT_DEFAULT_PROFILE_<CLI>`가 인자 없는 `ak <cli>`가 사용할 계정을 지정하며(위치 인자 `@profile`이 여전히 우선합니다), 개발 컨테이너는 이 방식으로 공유하는 호스트 계정을 고릅니다. `v0.5.3`부터는 다른 머신과 공유하는 Codex home에 이 머신에 없는 백그라운드 데몬이 기록되어 있으면 `ak codex`가 `--no-daemon`을 추가합니다.
+`v1.0.1`부터 `@default`를 포함한 모든 프로필은 프로필 루트 아래의 독립된 디렉터리에 있는 별도의 계정으로 처리되어 상태 누출과 자격 증명 충돌을 방지합니다. `ak profiles`는 이들을 로그인 상태 및 키 이름과 함께 나열하고, `ak profiles --json`은 도구에 같은 목록을 제공합니다(스키마 `profiles-v1`). `v0.5.1`부터는 Claude Code 토큰이 실제로 어디에 있는지 — `file`, `keychain`(macOS), `none`, `unknown` — 를 비밀 값을 읽지 않고 존재 여부만으로 보고하며, 컨테이너 안이든 Linux 호스트든 Linux의 Cursor 로그인도 인식합니다. `v0.5.2`부터는 `AGENTKIT_DEFAULT_PROFILE_<CLI>`가 인자 없는 `ak <cli>`가 사용할 계정을 지정하며(위치 인자 `@profile`이 여전히 우선합니다), 개발 컨테이너는 이 방식으로 공유하는 호스트 계정을 고릅니다. `v0.5.3`부터는 다른 머신과 공유하는 Codex home에 이 머신에 없는 백그라운드 데몬이 기록되어 있으면 `ak codex`가 `--no-daemon`을 추가합니다.
 
 `ak usage`(`ak status`로도 실행 가능)는 키트가 아는 모든 CLI의 모든 계정을 해당 CLI 아래에 계정과 프로필마다 한 줄씩 보여 줍니다. Claude Code 구독(5시간, 주간, 모델별 창), ChatGPT로 로그인한 Codex, Z.AI 코딩 플랜 키, 그리고 `v0.7.0`부터는 Linux와 컨테이너에서 Google로 로그인한 Antigravity(agy 자체 `/usage` 패널의 5시간 및 주간 창)의 할당량을 실시간으로 조회합니다. 할당량을 읽을 수 없는 계정도 자체 행을 가지며, 연결 방식과 이유와 함께 `n/d`로 표시되거나(Cursor, Grok, xAI, Azure OpenAI, Gemini API 키, 또는 macOS 키체인에 보관된 Antigravity 로그인) 로그인에 쓸 명령과 함께 `no login`으로 표시되므로, 이 표로 각 CLI의 어떤 계정이 연결되어 있는지도 알 수 있습니다.읽기 전용이므로 로그인을 갱신하지 않고, 토큰을 출력하지 않으며, 프로필 안에 아무것도 쓰지 않습니다. `--json`은 도구에 같은 목록을 제공합니다(스키마 `usage-v1`). 사용량 엔드포인트는 공급업체 내부용이며 비공식입니다.
 
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 다른 소유자에게 리스
 ## 설치
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.0.1`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
+요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.1.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.0.1`, 인터페이스 1 |
+| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.1.0`, 인터페이스 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `agentkit` |
 | 전송 방식 | 헤드리스: 위임 대상마다 전용 git worktree에서 `ak run` 한 번 |
 | 제공 | `subagents`, `cancel_children`, `model_routing` |

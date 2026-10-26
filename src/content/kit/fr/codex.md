@@ -1,6 +1,6 @@
 ---
 title: OpenAI Codex
-description: "L’adaptateur DWP pour OpenAI Codex, avec une prise en charge complète via des procédures de commande en Markdown et le préfixe dièse qui pilotent l’intégralité de la boucle Deep Work Plan."
+description: "L’adaptateur DWP pour OpenAI Codex, avec une support complet via des procédures Markdown et le préfixe dièse qui pilotent l’intégralité de la boucle Deep Work."
 kind: adapter
 lang: fr
 order: 3
@@ -15,7 +15,7 @@ Codex prend en charge DWP via des procédures de commande en Markdown.
 
 ## Niveau de prise en charge
 
-**Complet** — chaque commande dwp-* s’exécute depuis son fichier de procédure.
+**Complet** (Validé par le comportement) — chaque commande dwp-* s’exécute depuis son fichier de procédure, prouvé dans des benchmarks bidirectionnels d’auteur et de reprise entre modèles.
 
 ## Installation
 
@@ -24,7 +24,7 @@ Les commandes DWP existent sous forme de procédures en Markdown que l’agent l
 Facultatif : [coding-agents-kit](/kit/agentkit) peut installer cette CLI et la lancer avec `ak codex`. L’installateur officiel de l’éditeur fonctionne tout aussi bien.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

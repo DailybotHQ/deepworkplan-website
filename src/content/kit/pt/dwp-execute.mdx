@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Executar um Deep Work Plan existente tarefa a tarefa. O agente lê o plano completo, executa cada tarefa em ordem, atualiza o progresso e marca a conclusão com precisão."
+description: "Execute um Deep Work Plan sequencialmente com o loop de ledger v7, modo trust autônomo opcional, delegação parallel_safe e encerramento com Final Review."
 kind: command
 lang: pt
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -12,27 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Executa um Deep Work Plan existente.
+Executa um Deep Work Plan existente tarefa por tarefa.
 
 <CmdExecute lang="pt" class="not-prose my-8" />
 
 ## O que faz
 
-O `dwp-execute` executa um plano existente tarefa a tarefa. Ele lê o plano completo, executa cada tarefa em ordem, atualiza o `PROGRESS.md` e marca o status de conclusão de cada tarefa.
+`dwp-execute` executa um plano existente tarefa por tarefa por meio da camada de registro determinística. Resolve o plano alvo, avalia dependências, executa cada tarefa na ordem declarada, roda gates de validação e registra progresso imutável.
 
 ## Uso
 
 ```
-/dwp-execute [plan]
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Modos
+
+- **Guiado (padrão):** solicita confirmação entre tarefas, permitindo revisar evidências e decisões em cada fronteira de tarefa.
+- **Trust (`auto`):** adicionar `trust` executa tarefas elegíveis sequencialmente até a conclusão sem pausas para confirmação rotineira, parando apenas diante de bloqueios genuínos (classes de escalada C1–C7).
 
 ## Comportamento
 
-1. Ler o plano completo antes de começar.
-2. Executar as tarefas em ordem.
-3. Atualizar o `PROGRESS.md` após cada tarefa.
-4. Marcar o status da tarefa com precisão.
-5. Parar e perguntar quando estiver bloqueado.
+1. **Resolução de plano:** resolve por nome exato da pasta, ID numérico, slug exclusivo ou `latest` (plano com o maior ID numérico).
+2. **Loop de ledger:** roda `ledger.py ready` para avaliar DAG de dependências e invariantes, `ledger.py start` para verificar pré-requisitos e `ledger.py gate` para executar comandos de validação e emitir evidência `observed`.
+3. **Conclusão protegida:** `ledger.py complete` aplica controles de teste zero, avaliação fresca de invariantes e decisões de skills e documentação locais da tarefa.
+4. **Delegação intra-plano:** tarefas marcadas como `parallel_safe` em contratos v7 podem delegar a subagentes via transportes headless (`ak run` em worktree) ou interativos (painel `herdr`). Resultados permanecem como `asserted` até serem observados pelo executor de gates do plano.
+5. **Verificações de capacidade:** avalia o limite restante da conta nas fronteiras de tarefas antes do despacho.
+6. **Final Review:** encerra em uma tarefa de fechamento obrigatória de cinco partes (revisão de segurança com revisão local obrigatória, validação de estado final, reconciliação de skills, reconciliação de documentação e conclusão).
 
 ## Aliases
 

@@ -15,7 +15,7 @@ Google Gemini, DWP’yi markdown komut prosedürleri aracılığıyla destekler.
 
 ## Destek düzeyi
 
-**Tam** — her dwp-* komutu kendi prosedür dosyasından çalışır. Yerel WebFetch için Gemini 2.5 Pro veya daha yenisi gerekir.
+**Tam** (Kurulum testli) — her dwp-* komutu kendi prosedür dosyasından çalışır. Yol, otomatik test paketleriyle onaylanmıştır; davranışsal iş akışları sıralı tabanda çalışır. Araç çalıştırma ve çalışma alanı dosya erişimi gerektirir.
 
 ## Kurulum
 

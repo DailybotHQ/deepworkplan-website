@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) puts coding agents in panes, on your machine and on machines it reaches over SSH. This addon lets a Deep Work Plan use those agents as **peers**: a plan can hand a bounded task to an agent in another pane, receive exactly one authorized reply, and keep a record of the exchange.
 
-It is an optional addon of **DWP v7** (`v7.0.0`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
+It is an optional addon of **DWP v7** (pack `v7.9.0`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.0.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.1.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +58,7 @@ herdr-peers does not authenticate the sender: the `from=` field in a stamp is a 
 
 ## Containers and the host
 
-With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.0.1`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
+With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.1.1`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
 
 ## Herdr or agentkit
 
@@ -71,7 +71,7 @@ Both addons implement the same delegation interface — `launch`, `observe`, `co
 
 For a lead running many lanes at once — panes on the host, in containers and on other machines, each on its own account — `herdr-peers lanes` lists every lane with its state, `herdr-peers status <pane>` classifies the screen a blocked lane is on, and every delegation record names the account and vendor that carried it. See [Running many agents](/methodology/06-orchestration).
 
-**Codex lanes name their pane.** Codex runs a lane's commands from a background server shared by every session on that account, so the pane id it inherits can belong to another lane. A Codex lane passes its own pane, from the lead's brief, with `--pane <pane>` on every herdr-peers verb (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Every lane names its pane.** Under swarm autonomy rules (Guide §17.2), every lane passes its own pane with `--pane <pane>` on every herdr-peers verb (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`) to prevent message misattribution and fan-out slot saturation. Codex lanes require it especially strictly due to background server sharing across sessions.
 
 ## Notices and leadership
 
@@ -84,6 +84,20 @@ herdr-peers (`v0.3.2`) adds what lets a swarm outlive its lead ([Swarm autonomy]
 - **`usage_limit` screens.** `status` and `lanes` recognize a CLI's usage-limit message as the screen class `usage_limit`, whose next step is a handoff. It is never keyed. `lanes --json` adds the plan, its lead, the epoch and each lane's last reported capacity.
 
 Lanes may also ask each other for information and coordination — an interface, a flag name, a branch state — but only the lead assigns work. Depth 1 and the fan-out cap still hold. With `v0.2.x` there are no notices or lead records: lanes ask the lead's address from their brief, and a lead change is relayed by the developer.
+
+## Debates
+
+herdr-peers 1.1.0 adds a native **debate** sub-skill (`debate.md`): a lead agent runs a panel of peers in Herdr panes through rounds and closes with one result the human can trust, with its evidence and its dissent. Use it only when the human asks for a debate, a panel, a red team, research from several agents or angles, or a second panel on a result; one agent's opinion is a single ask.
+
+- **Purpose first.** The lead chooses the purpose — **decide**, **research** the state of the art, **stress-test**, **verify** or **generate** — and each has its formats, its counting and its deliverable. Purposes chain (research → decide, decide → verify), and a debate is sized quick, standard or deep.
+- **The lead's contract.** The lead never votes; the human's words are copied verbatim; briefs reach the panel through one channel; each pane writes its filing to disk and replies with one line; no pane takes external actions.
+- **Formats.** Angle research, classic rounds, draft package, claim-by-claim cross-exam, red team then defenders, steelman then judge, blind fresh-context challenge, replication panel and divergent proposals. A decision always ends in a forced verdict space.
+- **The `herdr-peers debate` verb.** `tally` counts ranked ballots and per-item verdicts (Borda, Copeland, pairwise duels, the Condorcet winner and loser); `claims` merges the lanes' claims ledgers into statuses such as established, contested or refuted, which are a quorum, not a verification; `anon` copies filings under anonymous names, with the mapping in a private key; `filings` lists present, missing and short filings so only missing panes are re-asked.
+- **Seating the panel.** `panel` proposes a panel and runs nothing. Seats go round-robin over model providers, and within a provider the seat with the most quota goes first, drawn from idle panes and, when agentkit (`ak`) is installed, from the accounts `ak pick` proposes. Without `ak`, it recommends coding-agents-kit (optional, `v1.0.1` or later).
+- **Templates.** Sixteen templates under `templates/debate/`, from the human's note and the research, stress-test and round briefs to the ballots and claims files, the lead's handoff packet, and the decision, state-of-the-art, stress-test and replication records.
+- **Delivery to a blocked peer.** `reply` and `notify` retry delivery to a peer blocked at a question for up to `--wait-blocked` seconds; it is still exactly one reply.
+
+The release is additive: protocol 1 and every verb, flag, exit code and JSON contract stay unchanged.
 
 ## Notes
 

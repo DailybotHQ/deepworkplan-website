@@ -1,6 +1,6 @@
 ---
 title: Terraform
-description: "Terraform ve IaC projeleri için modüller, sağlayıcılar, arka uç durumu, ortamlar ve fmt/validate/plan kapısına yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Terraform ve IaC projeleri için modüller, sağlayıcılar, arka uç durumu, ortamlar ve fmt/validate/plan kapısına yönelik akıl yürütme ipuçları içeren bir."
 kind: preset
 lang: tr
 order: 21

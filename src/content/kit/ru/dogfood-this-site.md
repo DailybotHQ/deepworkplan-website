@@ -1,6 +1,6 @@
 ---
 title: "Разбор случая: этот сайт"
-description: "Как сам deepworkplan.com работает на Deep Work Plan — реальный рассказ о продакшен-репозитории Astro, сделанном AI-first той методологией, которую он документирует."
+description: "Как сам deepworkplan.com работает на Deep Work Plan — реальный рассказ о продакшен-репозитории Astro, сделанном AI-first той методологией, которую он."
 kind: example
 lang: ru
 order: 2

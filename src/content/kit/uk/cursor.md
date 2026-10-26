@@ -15,7 +15,7 @@ Cursor підтримує DWP через правила проєкту й фай
 
 ## Рівень підтримки
 
-**Повний** — команди DWP працюють через систему правил Cursor.
+**Повна** (Перевірено встановленням) — команди DWP працюють через систему правил Cursor. Маршрути каталогів перевірені автоматизованими тестами; робочі процеси виконуються послідовно.
 
 ## Встановлення
 
@@ -24,7 +24,7 @@ Cursor підтримує DWP через правила проєкту й фай
 Необов’язково: [coding-agents-kit](/kit/agentkit) може встановити цей CLI і запускати його командою `ak cursor`. Офіційний інсталятор постачальника працює так само добре.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

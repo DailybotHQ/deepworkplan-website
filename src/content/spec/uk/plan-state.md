@@ -1,6 +1,6 @@
 ---
 title: Стан плану
-description: "Машиночитаний рівень стану плану: manifest.json та state.json, записи gate, записи результатів як епізодична памʼять, узгодження й умови застосування."
+description: "Шар стану плану v5 (manifest.json, state.json, записи gate, узгодження) і те, як плани v6 та v7 замінюють його знімком, похідним від журналу."
 order: 8
 lang: uk
 section: State
@@ -8,9 +8,16 @@ section: State
 
 # Стан плану
 
-> **Обсяг версії:** Розділи нижче — збережений шар стану v5.0.0. Поточний стандарт, DWP 7.0.0, використовує контракт v7, журнал лише для додавання та проєкцію-знімок; плани v5 і далі використовують правила `manifest.json` і `state.json` цього документа.
+> **Обсяг версії:** Ця сторінка специфікує **шар стану v5**, який плани v5 зберігають упродовж усього життя. Плани, створені поточним пакетом (DWP 7.0.0, реліз `v7.9.0`), натомість використовують [шар записів](/spec/record-layer). У плані v6 чи v7 авторитетом є контракт результату (`contract.json`), джерелом істини — журнал лише для додавання (`journal.ndjson`), а `state.json` — це **похідний знімок**, що відповідає [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Його перегенеровує `ledger.py project`, і він MUST NOT редагуватися вручну.
 
-**Поточний стандарт: v7 (DWP 7.0.0).** Документи нижче є збереженою основою; v6 додав контракт, журнал лише для додавання, контекст завдань, контроль ресурсів і правила життєвого циклу, а v7 зберігає цей шар записів і додає необовʼязковий маркер завдання `parallel_safe`, подію журналу `delegation`, реєстр аддонів `.dwp/config.json` і можливості, які надають аддони. [Схема маніфесту v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [схема контракту](https://deepworkplan.com/schema/plan-contract/v7.json) і [схема активного знімка](https://deepworkplan.com/schema/plan-snapshot/v6.json) (спільна з v6). Наявні плани v5 і v6 зберігають свої правила. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## Який шар стану застосовується
+
+| Покоління плану | Джерело істини | `state.json` | Схеми |
+| --- | --- | --- | --- |
+| v5 (і раніші плани v1/v2) | markdown-план, а цей JSON-шар — його проєкція | записується агентом у точках протоколу, описаних нижче | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 і v2 лишаються чинними для старіших планів) |
+| v6 і v7 | контракт плюс журнал лише для додавання | знімок, спроєктований із журналу, ніколи не записується вручну | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (або їхні відповідники v6) |
+
+План ніколи не змінює покоління неявно: плани v5 зберігають ці правила, а перенесення плану на v6 — це явна міграція з попереднім переглядом ([Шар записів](/spec/record-layer#coexistence-and-migration)). Канонічні джерела: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Версія 5.0.0. Статус: стабільний.** Цей документ специфікує машиночитаний рівень стану плану методології Deep Work Plan, тепер узгоджений із власною версією стандарту DWP — жодна наявна вимога не послаблюється через перенумерацію. Ця редакція також документує захищений оновлювач стану, перевірену публікацію плану та правила істинності доказів, яким має відповідати завершений план (див. нижче). Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаються згідно з RFC 2119.
 
@@ -53,9 +60,9 @@ Markdown-план залишається **людиночитаним джере
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ Markdown-план залишається **людиночитаним джере
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",

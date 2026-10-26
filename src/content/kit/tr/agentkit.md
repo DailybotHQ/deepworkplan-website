@@ -10,7 +10,7 @@ order: 8
 
 Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayrakları, ikinci bir hesabı ayrı tutmak için kendi yolu, kendi başsız (headless) modu ve izin istemlerini atlamak için kendi anahtarı vardır. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)**, hepsinin üzerine tek bir komut yüzeyi koyar: `ak <kind> [@profile]`.
 
-Bu eklenti, kiti **DWP v7**'ye (paket `v7.8.1`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
+Bu eklenti, kiti **DWP v7**'ye (paket `v7.9.0`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
 ## Kitin size sundukları
 
@@ -23,7 +23,7 @@ Bu eklenti, kiti **DWP v7**'ye (paket `v7.8.1`) **başsız** devretme taşımas�
 
 ## Hesaplar, kota ve hesap seçimi
 
-Kit, sahip olduğunuz her oturumu veya anahtarı bir **hesap** olarak ele alır: bir CLI × bir profil. `@default` (veya `@1`) CLI'ın kendi home dizinidir; `@2`, `@work` ya da `@client-x` ise her biri profiller kökü altında kendi dizininde bulunan ve yan yana çalışan ayrı oturumlardır. `ak profiles` bunları oturum durumları ve anahtarlarının adlarıyla listeler; `ak profiles --json` aynı listeyi araçlara verir (şema `profiles-v1`). `v0.5.1` sürümünden itibaren Claude Code token'ının gerçekte nerede olduğunu — `file`, `keychain` (macOS), `none` ya da `unknown` — yalnızca varlığına bakarak, gizli bilgiyi asla okumadan bildirir; ayrıca Linux'ta, bir konteynerde ya da bir Linux ana makinesinde bir Cursor oturumunu tanır. `v0.5.2` sürümünden itibaren `AGENTKIT_DEFAULT_PROFILE_<CLI>`, yalın bir `ak <cli>` komutunun kullandığı hesabı belirler (konumsal bir `@profile` yine önceliklidir); bir dev container, paylaştığı ana makine hesabını bu şekilde seçer. `v0.5.3` sürümünden itibaren, başka bir makineyle paylaşılan bir Codex home dizini bu makinede olmayan bir arka plan daemon'u kaydettiğinde `ak codex`, `--no-daemon` ekler.
+`v1.0.1` sürümünden itibaren her profil — `@default` dahil — profiller kökü altındaki kendi dizininde bağımsız bir hesaptır; bu da durum sızıntısını ve kimlik bilgisi çakışmalarını önler. `ak profiles` bunları oturum durumları ve anahtarlarının adlarıyla listeler; `ak profiles --json` aynı listeyi araçlara verir (şema `profiles-v1`). `v0.5.1` sürümünden itibaren Claude Code token'ının gerçekte nerede olduğunu — `file`, `keychain` (macOS), `none` ya da `unknown` — yalnızca varlığına bakarak, gizli bilgiyi asla okumadan bildirir; ayrıca Linux'ta, bir konteynerde ya da bir Linux ana makinesinde bir Cursor oturumunu tanır. `v0.5.2` sürümünden itibaren `AGENTKIT_DEFAULT_PROFILE_<CLI>`, yalın bir `ak <cli>` komutunun kullandığı hesabı belirler (konumsal bir `@profile` yine önceliklidir); bir dev container, paylaştığı ana makine hesabını bu şekilde seçer. `v0.5.3` sürümünden itibaren, başka bir makineyle paylaşılan bir Codex home dizini bu makinede olmayan bir arka plan daemon'u kaydettiğinde `ak codex`, `--no-daemon` ekler.
 
 `ak usage` (ayrıca `ak status`), kitin tanıdığı her CLI'nin her hesabını, kendi CLI'sinin altında hesap ve profil başına bir satırla listeler: Claude Code abonelikleri (5 saatlik, haftalık ve model başına pencereler), ChatGPT ile Codex oturumları, Z.AI kodlama planı anahtarları ve `v0.7.0` sürümünden beri Linux'ta ve konteynerlerde Antigravity Google oturumları (agy'nin kendi `/usage` panelindeki beş saatlik ve haftalık pencereler) için canlı kota gösterir. Kotası okunamayan bir hesabın da satırı vardır: nasıl bağlandığı ve nedeniyle birlikte `n/d` — Cursor, Grok, xAI, Azure OpenAI, bir Gemini API anahtarı ya da macOS Anahtar Zinciri'nde tutulan bir Antigravity oturumu — veya oturumunu açan komutla birlikte `no login`; böylece tablo her CLI'nin hangi hesaplarının bağlı olduğunu da gösterir. Salt okunurdur: hiçbir oturumu yenilemez, hiçbir token yazdırmaz ve bir profilin altına hiçbir şey yazmaz. `--json` aynı listeyi araçlara verir (şema `usage-v1`). Kullanım uç noktaları sağlayıcılara özgü ve resmî olmayan uç noktalardır.
 
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış he
 ## Kurulum
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.0.1` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.1.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v1.0.1` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v1.1.0` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |

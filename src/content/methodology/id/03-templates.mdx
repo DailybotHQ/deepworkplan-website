@@ -1,6 +1,6 @@
 ---
 title: Plan and task templates
-description: "Struktur berkas rencana dan tugas, Final Review yang harus mengakhiri setiap rencana, serta konvensi README dan PROGRESS yang menjaga rencana tetap mudah dibaca."
+description: "Struktur berkas rencana dan tugas, Final Review penutup setiap rencana, serta konvensi README dan PROGRESS yang menjaga rencana tetap mudah dibaca."
 order: 3
 lang: id
 summary: Bagaimana rencana dan tugas distrukturkan di disk, dan konvensi yang menjaganya tetap mudah dibaca.
@@ -19,24 +19,31 @@ Sebuah Deep Work Plan adalah sebuah direktori berkas Markdown. Bentuk direktori 
 Sebuah rencana adalah sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_001_<slug>/`. Ia berisi:
 
 
+- `manifest.json` — identitas rencana dan penunjuk ke kontrak aktifnya, ditulis pertama kali saat materialisasi.
+- `contract.json` — kontrak eksekusi formal.
+- `journal.ndjson` — log peristiwa append-only yang tidak dapat diubah.
+- `state.json` — snapshot yang diproyeksikan dari journal, tidak pernah diedit dengan tangan.
 - `README.md` — ikhtisar rencana: tujuan, materi sumber, tabel tugas, dan status.
-- Satu berkas per tugas, bernama `<n>.task_<slug>.md`.
-- `PROGRESS.md` — log eksekusi yang berjalan.
+- Berkas tugas, bernama `<n>.task_<slug>.md`.
+- `PROGRESS.md` — log eksekusi append-only yang berjalan.
+- `analysis_results/` — keluaran analisis, laporan audit, dan bukti.
 
 
 Paket 7.x saat ini membuat rencana v7 secara default. Rencana yang ada mempertahankan generasi yang tercatat; migrasi memerlukan permintaan eksplisit. Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dan v7 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
 
 ## Struktur berkas tugas
 
-Setiap berkas tugas bernama `<n>.task_<slug>.md` dan mengikuti anatomi sepuluh bagian: Goal, Context, Touched Surface, Steps, Acceptance criteria, Validation, Files, Dependencies, Risks, dan Completion & Log. Bagian-bagian itu selalu muncul dalam urutan tersebut sehingga setiap pembaca tahu di mana harus mencari. Setiap tugas berlabuh kembali ke tujuan rencana sebelum ia bertindak, yang mencegah agent menyimpang sepanjang rentang panjang yang berjam-jam.
+Setiap berkas tugas bernama `<n>.task_<slug>.md` dan mengikuti anatomi sepuluh bagian yang dirinci dalam [The core loop](/id/methodology/02-core-loop#anatomi-tugas-sepuluh-bagian). Bagian-bagian itu selalu muncul dalam urutan yang sama sehingga pembaca langsung tahu di mana harus mencari. Setiap tugas berlabuh kembali ke tujuan rencana sebelum ia bertindak, yang mencegah agent menyimpang sepanjang rentang panjang.
 
 ## Final Review
 
-Setiap rencana harus diakhiri dengan tepat satu tugas wajib: **Final Review**. Ia menutup rencana dalam tiga tahap berurutan — tidak ada bagian dari pemeriksaan keamanan yang dilonggarkan:
+Setiap rencana harus diakhiri dengan tepat satu tugas wajib: **Final Review**. Ia menutup rencana dalam lima tahap berurutan — tidak ada bagian dari pemeriksaan keamanan yang dilonggarkan:
 
-1. **Pemeriksaan keamanan** — mengaudit segala sesuatu yang diubah rencana untuk secret, risiko injeksi, dan permukaan serangan baru, serta menjaga `docs/SECURITY.md` tetap mutakhir. Keamanan bukanlah alur kerja terpisah yang ditempelkan di akhir: setiap rencana meninggalkan perubahannya sendiri dalam keadaan teraudit, dan sebuah temuan kritis memblokir penyelesaian.
-2. **Validasi status akhir** — validasi penuh repositori berjalan dan lulus pada status relevan terakhir, setelah perbaikan final.
-3. **Rekonsiliasi skills** — setiap tugas telah mencatat disposisi skills-nya sendiri selagi buktinya masih segar; tinjauan ini merekonsiliasi catatannya. Executive Report tetap tersedia atas permintaan.
+1. **Pemeriksaan keamanan dengan tinjauan lokal yang diwajibkan** — mengaudit segala sesuatu yang diubah rencana untuk secret, risiko injeksi, dan permukaan serangan baru, menjaga `docs/SECURITY.md` tetap mutakhir, serta menjalankan tinjauan lokal AI Diff Reviewer yang diwajibkan di seluruh rentang rencana (reviewer yang hilang dicatat sebagai temuan `local reviewer not installed`, tidak pernah dilewati secara diam-diam). Temuan kritis memblokir penyelesaian.
+2. **Validasi status akhir** — rangkaian pengujian, linter, dan pemeriksaan tipe lengkap repositori berjalan dan lulus pada status akhir setelah perbaikan terakhir.
+3. **Rekonsiliasi keputusan skill** — memverifikasi bahwa setiap tugas mencatat keputusan skill lokal, dengan merekonsiliasi kandidat di `analysis_results/SKILLS_CANDIDATES.md`.
+4. **Rekonsiliasi dokumentasi** — memetakan permukaan yang disentuh dari setiap tugas yang mengubah perilaku ke dokumentasi (`docs/TESTING_GUIDE.md`, arsitektur, `AGENTS.md`).
+5. **Penyelesaian** — catatan rencana selaras (daftar tugas, log kemajuan, dan pada rencana v6 dan v7, snapshot serta tanda terima turunan journal); laporkan hasil kerja, bukti, dan batasan, serta tawarkan Executive Report satu kali.
 
 ## Konvensi README dan PROGRESS
 

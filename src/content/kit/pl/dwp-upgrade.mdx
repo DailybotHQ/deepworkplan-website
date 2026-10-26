@@ -1,0 +1,33 @@
+---
+title: dwp-upgrade
+description: "Sprawdzaj wydania Deep Work Plan, przeglądaj lokalne adaptacje i instaluj stabilne tagi za wyraźną zgodą, zachowując istniejące plany."
+kind: command
+lang: pl
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Utrzymuj zainstalowaną umiejętność Deep Work Plan i zadeklarowany standard w stanie aktualnym za wyraźną zgodą.
+
+## Co robi
+
+ sprawdza wydania nadrzędne pod kątem nowszych wersji pakietu umiejętności i standardu. Zgłasza różnice, ujawnia lokalne adaptacje, wymaga wyraźnej zgody programisty przed wprowadzeniem zmian i instaluje przypięte stabilne tagi wydań bez modyfikowania istniejących planów w .
+
+## Użycie
+
+
+
+## Zachowanie
+
+1. **Sprawdzenie (tylko do odczytu)** — odczytuje zainstalowaną wersję z  i sprawdza nadrzędne tagi git pod kątem najnowszego stabilnego wydania.
+2. **Zgoda** — ujawnia wszelkie lokalne modyfikacje lub adaptacje za pomocą diff; nigdy nie pobiera ani nie nadpisuje plików bez wyraźnego potwierdzenia.
+3. **Aktualizacja** — instaluje dokładny stabilny tag w , uzupełnia skonfigurowane dodatki w  i rekoncyliuje uprząż.
+4. **Zachowanie historii** — istniejące plany, dowody i dzienniki w  stanowią niezmienną historię i nigdy nie są modyfikowane.
+
+## Aliasy
+
+- 

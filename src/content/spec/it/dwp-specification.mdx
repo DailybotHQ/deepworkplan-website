@@ -1,6 +1,6 @@
 ---
 title: Specifica DWP
-description: "Specifica normativa di Deep Work Plan: struttura del piano, anatomia in dieci sezioni di un'attività, selezione del gate per superficie toccata, ciclo di esecuzione a cinque operazioni, workspace di output e versionamento."
+description: "Specifica normativa di Deep Work Plan: struttura del piano, anatomia delle attività, gate per superficie toccata, ciclo di esecuzione, workspace e versioni."
 order: 2
 lang: it
 section: Workflow
@@ -63,6 +63,8 @@ Ogni file di attività DEVE contenere queste dieci sezioni, nell'ordine:
 10. **Completion & Log** — un marcatore di stato più note cronologiche.
 
 Un'attività PUÒ includere in aggiunta una **sezione Delta** (RACCOMANDATA per le modifiche al comportamento brownfield — vedi di seguito) e una **sezione Rollback** (RACCOMANDATA per migrazioni, modifiche infrastrutturali o deployment).
+
+In un piano v7 il contratto di risultato può inoltre marcare un'attività come `parallel_safe`: un'asserzione, fissata alla creazione, che l'attività può essere eseguita in un delegato senza intrecciarsi con il lavoro delle attività sorelle. Il marcatore non autorizza nulla senza la concessione `agent_delegation` del contratto ([Delega](/spec/delegation)).
 
 ## La Superficie toccata
 
@@ -136,13 +138,15 @@ Ogni piano conforme redatto con questa versione termina con esattamente **un'uni
 
 Il Final Review DEVE, nell'ordine:
 
-**(a) Passaggio di sicurezza** — esaminare l'intero insieme di modifiche accumulato dal piano alla ricerca di segreti hardcoded, rischi di injection, nuova superficie di attacco, auth indebolita e dati sensibili nei log o nei documenti; verificare le dipendenze introdotte; accertare che `docs/SECURITY.md` rifletta ancora la realtà; scrivere il report di revisione di sicurezza anche quando è pulito. Un rilievo critico viene corretto — o esplicitamente accettato dall'utente — prima che il piano sia completato.
+**(a) Passaggio di sicurezza** — esaminare l'intero insieme di modifiche accumulato dal piano alla ricerca di segreti hardcoded, rischi di injection, nuova superficie di attacco, auth indebolita e dati sensibili nei log o nei documenti; verificare le dipendenze introdotte; accertare che `docs/SECURITY.md` rifletta ancora la realtà; scrivere il report di revisione di sicurezza anche quando è pulito. Un rilievo critico viene corretto — o esplicitamente accettato dall'utente — prima che il piano sia completato. Il passaggio include la revisione locale obbligatoria con AI Diff Reviewer sull'intervallo completo del piano; un reviewer mancante è un rilievo registrato `local reviewer not installed`, mai un'omissione silenziosa.
 
 **(b) Validazione dello stato finale** — la validazione completa applicabile del repository viene eseguita e superata sullo stato finale rilevante.
 
 **(c) Riconciliazione delle skill** — ogni attività porta una disposizione delle skill e ogni candidato registrato ha una disposizione; nessun secondo report di discovery.
 
-**(d) Completamento** — riferire il completamento con deliverable, evidenze di validazione e limitazioni; offrire l'Executive Report una volta. Il piano è completo sia che l'offerta riceva risposta sia che rimanga senza risposta.
+**(d) Riconciliazione della documentazione** — la superficie toccata di ogni attività che modifica il comportamento viene confrontata con i documenti che la registrano (prima il registro dei gate, poi i documenti di architettura e dei moduli, poi l'indice di `AGENTS.md`); le mancanze vengono corrette all'interno della revisione e le validazioni interessate rieseguite.
+
+**(e) Completamento** — i record del piano concordano (elenco delle attività, log di avanzamento e, nei piani v6 e v7, lo snapshot derivato dal journal e la ricevuta); riferire il completamento con deliverable, evidenze di validazione e limitazioni; offrire l'Executive Report una volta. Il piano è completo sia che l'offerta riceva risposta sia che rimanga senza risposta.
 
 Il Final Review viene eseguito sequenzialmente dopo tutte le altre attività e non è mai collocato in un gruppo parallelo.
 
@@ -179,13 +183,16 @@ L'agente DEVE fidarsi dei segni completati (`[x]`) e NON DEVE rivalidare le atti
 
 <CoreLoop lang="it" class="not-prose my-10" />
 
-DWP definisce cinque operazioni:
+DWP definisce sei operazioni sul piano:
 
 - **create** — Genera un nuovo piano da un obiettivo.
 - **execute** — Esegue il piano attività per attività.
 - **refine** — Modifica un piano esistente.
 - **resume** — Riprende un piano interrotto.
 - **status** — Riferisce sullo stato del piano senza eseguire.
+- **verify** — Verifica la conformità del repository e del piano, in sola lettura.
+
+Altre tre sub-skill completano il pack installato: **onboard** (rende un repository AI-first), **author** (crea o aggiorna le skill, gli agenti e i comandi propri del repository) e **upgrade** (porta la skill installata a una release più recente con consenso, senza mai migrare i piani esistenti). Il router e queste nove sub-skill vengono distribuiti come un unico skill pack.
 
 ## Workspace di output
 

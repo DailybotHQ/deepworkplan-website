@@ -1,6 +1,6 @@
 ---
 title: Skille i agenci
-description: "Różnica między skillami a agentami, onboarding repozytorium oparty na rozumowaniu oraz katalog .agents wraz z konwencją dowiązania .claude do .agents."
+description: "Różnica między skillami a agentami, onboarding repozytorium oparty na rozumowaniu oraz katalog .agents z dowiązaniami wstecznej zgodności."
 order: 4
 lang: pl
 summary: Jak wielokrotnego użytku skille, wyspecjalizowani agenci i onboarding repo łączą się ze sobą.
@@ -37,19 +37,20 @@ Poza tworzeniem zestawu DWP dostarcza **dodatki**. Siedem jest dobrowolnych — 
 
 Przed utworzeniem lub realizacją planu agent przeprowadza onboarding repozytorium. Onboarding jest **oparty na rozumowaniu, nie na skrypcie**: agent czyta strukturę, dokumentację i konfigurację repozytorium, by zbudować model myślowy, zamiast uruchamiać sztywny skrypt konfiguracyjny.
 
-Podczas onboardingu agent identyfikuje archetyp repozytorium (pojedyncze kontra orkiestrator), polecenia budowania, testów i lintowania, istniejące konwencje stylu, struktury i nazewnictwa oraz skille i agentów już dostępnych. To zrozumienie pozwala agentowi planować i realizować w sposób pasujący do repozytorium, zamiast z nim walczyć.
+Podczas onboardingu agent identyfikuje archetyp repozytorium (pojedyncze repozytorium, hub orkiestratora lub przestrzeń robocza agenta), polecenia budowania, testów i lintowania, istniejące konwencje stylu, struktury i nazewnictwa oraz skille i agentów już dostępnych. To zrozumienie pozwala agentowi planować i realizować w sposób pasujący do repozytorium, zamiast z nim walczyć.
 
 Łańcuch narzędzi do testowania i walidacji otrzymuje szczególną uwagę, ponieważ to bramki walidacyjne sprawiają, że wynik planu jest niezawodny. Gdy repozytorium ma już testy i lintery, onboarding zapisuje ich rzeczywiste polecenia i konwencje. Gdy nie ma żadnych, onboarding nie poprzestaje na odnotowaniu luki — proponuje konfigurację dopasowaną do stosu technologicznego i wpisuje ją do przewodnika testowania repozytorium, tak aby każdy przyszły plan miał rzeczywistą bramkę do uruchomienia, a nie niezdefiniowaną.
 
-## Katalog `.agents/` i dowiązanie `.claude → .agents`
+## Katalog `.agents/` i dowiązania wstecznej zgodności
 
 DWP gromadzi wszystko, co definiuje zachowanie agenta — skille, polecenia, definicje agentów, dokumentację wewnętrzną i ustawienia — w jednym kanonicznym katalogu `.agents/`. Nazwa sygnalizuje, że zawartość jest współdzielona między agentami, a nie związana z jednym narzędziem.
 
-Dla zachowania wstecznej zgodności z narzędziami, które historycznie czytały z `.claude/`, ta ścieżka jest dowiązaniem symbolicznym do `.agents/`:
+Dla zachowania wstecznej zgodności z narzędziami, które historycznie czytały z `.claude/` lub `.cursor/`, te ścieżki są dowiązaniami symbolicznymi do `.agents/`:
 
 ```bash
-ls -la .claude
+ls -la .claude .cursor
 # .claude -> .agents
+# .cursor -> .agents
 ```
 
-Każda ścieżka `.claude/...` rozwija się przezroczyście do swojego odpowiednika `.agents/...`, więc starsze narzędzia działają nadal, podczas gdy nowa zawartość odwołuje się do kanonicznej lokalizacji `.agents/`. Skille i agenci edytowani są poprzez rzeczywiste pliki w `.agents/`, nigdy poprzez dowiązanie.
+Każda ścieżka `.claude/...` i `.cursor/...` rozwija się przezroczyście do swojego odpowiednika `.agents/...`, więc starsze narzędzia działają nadal, podczas gdy nowa zawartość odwołuje się do kanonicznej lokalizacji `.agents/`. Skille i agenci edytowani są poprzez rzeczywiste pliki w `.agents/`, nigdy poprzez dowiązanie.

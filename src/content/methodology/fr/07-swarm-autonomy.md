@@ -41,7 +41,7 @@ Chaque couloir a un plan, au moins un plan Lite dans son propre dépôt, et ce p
 
 ## La boucle de capacité
 
-Un agent vérifie sa propre marge avant de commencer chaque tâche, après toute porte de validation ou étape qui a duré plus de 20 minutes, chaque fois que sa CLI affiche un avertissement de limite d’utilisation, et avant d’accepter une passation ou le leadership. La vérification est `ak capacity --self --json` de coding-agents-kit `v1.0.1`, que le helper du pack traduit en décision :
+Un agent vérifie sa propre marge avant de commencer chaque tâche, après toute porte de validation ou étape qui a duré plus de 20 minutes, chaque fois que sa CLI affiche un avertissement de limite d’utilisation, et avant d’accepter une passation ou le leadership. La vérification est `ak capacity --self --json` de coding-agents-kit `v1.1.0`, que le helper du pack traduit en décision :
 
 | Verdict | Décision | Un couloir | Un coordinateur, pour lui-même |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Le **paquet de passation** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/d
 
 ## Succession du coordinateur
 
-herdr-peers `v1.0.0` conserve un enregistrement de coordinateur par plan — coordinateur, époque, liste de succession et couloirs — et résout l’adresse `lead` vers le coordinateur actuel, si bien qu’aucune consigne de couloir ne code en dur le panneau du coordinateur.
+herdr-peers `v1.1.0` conserve un enregistrement de coordinateur par plan — coordinateur, époque, liste de succession et couloirs — et résout l’adresse `lead` vers le coordinateur actuel, si bien qu’aucune consigne de couloir ne code en dur le panneau du coordinateur.
 
 - **Revendiquer d’abord, lancer ensuite.** Le coordinateur exécute `herdr-peers lead claim --plan <P> --succession <A,B>` avant de lancer le moindre couloir — l’adresse `lead` ne se résout qu’une fois un enregistrement créé —, actualise l’enregistrement avec `--lanes <A,B>` à mesure que les couloirs démarrent et exécute `lead release` lorsque le plan est terminé. Depuis herdr-peers (`v0.3.2`), l’enregistrement conserve localement le dépôt qui revendique, et un plan portant le même identifiant dans un autre dépôt est nommé `--plan <repo>/<id>`. La succession par défaut est son successeur prévu, puis les couloirs du checkout propre au plan par ordre de lancement, puis tout couloir sur le même hôte ; les couloirs dans des conteneurs ou sur d’autres machines viennent en dernier.
 - **Transmission, planifiée.** Au niveau `low`, le coordinateur désigne un successeur pressenti. Au niveau `critical`, il écrit un paquet de coordinateur — tableau des couloirs, demandes ouvertes, ordre de publication, fusions en attente, décisions —, exécute `herdr-peers lead handover <addr> --plan <P>`, qui incrémente l’époque et notifie chaque couloir, et s’arrête. Le successeur accepte le paquet, reprend le plan orchestrateur et revérifie chaque couloir.

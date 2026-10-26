@@ -1,6 +1,6 @@
 ---
 title: 계획 상태
-description: "기계 가독 계획 상태 레이어: manifest.json과 state.json, 게이트 기록, 에피소드 메모리로서의 결과 기록, 조정, 그리고 필요한 시점."
+description: "v5 계획 상태 레이어(manifest.json, state.json, 게이트 기록, 조정)와 v6·v7 계획이 이를 저널 파생 스냅샷으로 대체하는 방식."
 order: 8
 lang: ko
 section: State
@@ -8,9 +8,16 @@ section: State
 
 # 계획 상태
 
-> **버전 범위:** 아래 섹션은 보존된 v5.0.0 상태 계층입니다. 현재 표준인 DWP 7.0.0은 v7 contract, 추가 전용 저널, 스냅샷 프로젝션을 사용합니다. v5 계획은 계속 이 문서의 `manifest.json` 및 `state.json` 규칙을 사용합니다.
+> **버전 범위:** 이 페이지는 v5 계획이 수명 전체 동안 유지하는 **v5 상태 레이어**를 명시합니다. 현재 팩(DWP 7.0.0, 릴리스 `v7.9.0`)이 생성하는 계획은 대신 [기록 레이어](/spec/record-layer)를 사용합니다. v6 또는 v7 계획에서는 결과 계약(`contract.json`)이 권한의 근거이고, 추가 전용 저널(`journal.ndjson`)이 진실 공급원이며, `state.json`은 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json)을 따르는 **파생 스냅샷**입니다. 이 스냅샷은 `ledger.py project`로 재생성되며 손으로 편집해서는 안 됩니다(MUST NOT).
 
-**현재 표준: v7(DWP 7.0.0).** 아래 문서는 유지되는 기본 사양입니다. v6는 계약, 추가 전용 저널, 작업별 컨텍스트, 리소스 제어 및 수명 주기 규칙을 더했고, v7은 그 기록 계층을 유지하면서 선택적 `parallel_safe` 작업 표시, `delegation` 저널 이벤트, `.dwp/config.json` 애드온 레지스트리, 애드온이 제공하는 능력을 추가합니다. [v7 manifest 스키마](https://deepworkplan.com/schema/plan-manifest/v7.json), [contract 스키마](https://deepworkplan.com/schema/plan-contract/v7.json), [live snapshot 스키마](https://deepworkplan.com/schema/plan-snapshot/v6.json)(v6과 공유)를 참고하세요. 기존 v5 및 v6 계획은 기록된 규칙을 유지합니다. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## 어떤 상태 레이어가 적용되는가
+
+| 계획 세대 | 진실 공급원 | `state.json` | 스키마 |
+| --- | --- | --- | --- |
+| v5(및 이전의 v1/v2 계획) | Markdown 계획, 이 JSON 레이어는 그 프로젝션 | 아래 프로토콜 지점에서 에이전트가 작성 | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json)(이전 계획에는 v1과 v2가 계속 유효) |
+| v6 및 v7 | 계약과 추가 전용 저널 | 저널에서 투영된 스냅샷, 손으로 작성하는 일은 결코 없음 | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)(또는 그 v6 대응 스키마) |
+
+계획은 암묵적으로 세대를 바꾸는 일이 결코 없습니다: v5 계획은 이 규칙을 유지하며, v6으로 옮기는 것은 명시적이고 미리 보기가 제공되는 마이그레이션입니다([기록 레이어](/spec/record-layer#coexistence-and-migration)). 정식 출처: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **버전 5.0.0. 상태: 안정(Stable).** 이 문서는 Deep Work Plan 방법론의 기계 가독 계획 상태 레이어를 명시하며, 이제 DWP 표준 자체의 버전과 맞춰져 있습니다 — 이 재번호 매기기로 인해 기존 요건이 약화되는 일은 없습니다. 이번 개정은 또한 보호된 상태 업데이터, 검증된 계획 발행, 그리고 완료된 계획이 충족해야 하는 증거-진실 규칙(아래 참고)을 문서화합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
@@ -53,9 +60,9 @@ v1.1까지 계획은 산문 Markdown만이었습니다. 그것은 감사 가능�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ v1.1까지 계획은 산문 Markdown만이었습니다. 그것은 감사 가능�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",

@@ -19,17 +19,17 @@ Deponun `.dwp/` dizini, **kalıcı spec ve durum katmanıdır**. Bulut oturumlar
 
 ## Destek düzeyi
 
-**Tam** — depoyu okuyan, `AGENTS.md`'yi izleyen ve kabuk komutları yürütebilen herhangi bir bulut ajanı, platforma özgü bir adaptör olmadan DWP'yi destekler.
+**Tam** (Belgelenmiş) — bulut ajan platformları `AGENTS.md` veya yerel talimatları okur ve komutları terminal veya konteyner ortamları üzerinden yürütür.
 
 ## Uyan-devam et-ver döngüsü
 
 Her bulut ajanı dönüşü şu kalıbı izler:
 
 1. **Uyan** — oturum başlar (bir cron zamanlaması, bir CI olayı veya kullanıcı eylemi tarafından tetiklenir).
-2. **DWP Resume Protocol'ü çalıştır** — plan README'sini oku, kontrol noktasını bul, `state.json`'u Markdown ile uzlaştır, ek yeri incele, duman testi yürüt. Bkz. [DWP spesifikasyonu](/spec/dwp-specification#the-dwp-resume-protocol).
+2. **DWP Sürdürme Protokolünü Çalıştırın** — plan README dosyasını okuyun, kontrol noktasını bulun, `journal.ndjson` dosyasından `ledger.py project` aracılığıyla durumu yeniden oluşturun, dikişi inceleyin, duman testi çalıştırın. Bkz. [DWP belirtimi](/spec/dwp-specification#the-dwp-resume-protocol).
 3. **Engellenmiş durumu kontrol et** — `state.json.blocked` ayarlıysa, nedeni raporla ve yürütmeden ver.
 4. **Sonraki atomik görevi yürüt** — bir görev, tam doğrulama kapısını geçerek.
-5. **Durum katmanını güncelle** — `state.json`'u yeni görev durumu, kapı kayıtları, sonuç kaydı ve commit karması ile atomik olarak yeniden yaz.
+5. **Günlüğe kaydedin** — `ledger.py` eylemleri (`start`, `gate`, `complete`) aracılığıyla `journal.ndjson` dosyasına olayları ekleyin; `ledger.py project` türetilmiş `state.json` anlık görüntü projeksiyonunu atomik olarak günceller. Eski v5 planlarında doğrudan durum dosyası güncellemesi korunur.
 6. **Ver** — oturum temiz bir şekilde sona erer; sonraki dönüş güncellenmiş durumdan devam eder.
 
 ## Gereksinimler

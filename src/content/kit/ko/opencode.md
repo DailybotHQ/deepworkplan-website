@@ -1,6 +1,6 @@
 ---
 title: OpenCode
-description: "오픈 소스 에이전트인 OpenCode를 위한 DWP 어댑터로, 네이티브 AGENTS.md와 해시 접두어로 호출하는 Markdown 명령 절차를 통해 완전히 지원합니다."
+description: "오픈 소스 에이전트인 OpenCode를 위한 DWP 어댑터로, 네이티브 AGENTS.md와 해시 접두어로 호출하는 Markdown 명령 절차를 통해 완전히."
 kind: adapter
 lang: ko
 order: 7
@@ -15,7 +15,7 @@ prefix: '#'
 
 ## 지원 수준
 
-**완전** — OpenCode는 AGENTS.md를 네이티브로 읽고 모든 dwp-* 명령을 절차 파일에서 실행합니다.
+**완전 지원** (설치 검증됨) — OpenCode는 AGENTS.md를 기본적으로 읽고 프로시저 파일에서 모든 dwp-* 명령을 실행합니다. 자동화된 테스트 제품군에 의해 경로가 확인되었습니다.
 
 ## 설치
 
@@ -24,7 +24,7 @@ DWP는 리포지토리에 AGENTS.md와 명령 절차를 제공합니다. OpenCod
 선택 사항: [coding-agents-kit](/kit/agentkit)로 이 CLI를 설치하고 `ak opencode`로 실행할 수 있습니다. 공급업체의 공식 설치 프로그램도 똑같이 사용할 수 있습니다.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

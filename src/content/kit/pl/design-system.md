@@ -1,6 +1,6 @@
 ---
 title: System projektowy
-description: "Dobrowolny dodatek, który nadaje każdemu repozytorium z powierzchnią interfejsu skierowaną do użytkownika plik DESIGN.md (w docs/, indeksowany z AGENTS.md) — obejmujący w jednym pliku profile wizualnego UI, wyjścia CLI i konwersacyjny."
+description: "Opcjonalny dodatek dający repozytoriom z interfejsem DESIGN.md w docs/, indeksowany z AGENTS.md, obejmujący wizualne UI, CLI i profile dialogowe."
 kind: addon
 lang: pl
 order: 4
@@ -39,6 +39,28 @@ Nigdy nie jest wymagany — repozytorium z zerową liczbą opcjonalnych dodatkó
 ## Opcjonalna komenda
 
 Po zaakceptowaniu dodatek może zainstalować delegator `/design-system` w katalogu `.agents/commands/` repozytorium, aby później ponownie wygenerować lub odświeżyć `DESIGN.md`. Instalacja komendy jest opcjonalna; odrzucony dodatek nie instaluje żadnej.
+
+
+## Specyfikacja v7
+
+| Element | Wartość |
+|---|---|
+| Produkt | Dodatek design-system dla DeepWorkPlan |
+| Klucz rejestru |  w  |
+| Deskryptor |  (interfejs 1) |
+| Plik docelowy |  indeksowany z  |
+| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności () |
+
+
+## Specyfikacja v7
+
+| Element | Wartość |
+|---|---|
+| Produkt | Dodatek design-system dla DeepWorkPlan |
+| Klucz rejestru | `design-system` w `.dwp/config.json` |
+| Deskryptor | `addons/design-system/addon.json` (interfejs 1) |
+| Plik docelowy | `docs/DESIGN.md` indeksowany z `AGENTS.md` |
+| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v7.9.0`) |
 
 ## Związek z dokumentami projektowymi per funkcja
 

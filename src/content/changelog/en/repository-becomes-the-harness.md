@@ -1,6 +1,6 @@
 ---
 title: "DWP v2: the repository becomes the harness"
-description: "The first official Deep Work Plan release makes the repository itself the agent's working harness — context, guardrails, validation, and state, all native to the repo."
+description: "Deep Work Plan v2 makes the repository itself the agent's working harness: context, guardrails, validation, and state live natively in the repo."
 date: 2026-07-16
 version: "v2 · Official release"
 kind: foundation

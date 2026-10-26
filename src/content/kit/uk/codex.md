@@ -15,7 +15,7 @@ Codex підтримує DWP через процедури команд у фо�
 
 ## Рівень підтримки
 
-**Повний** — кожна команда dwp-* виконується зі свого файлу процедур.
+**Повна** (Перевірено поведінкою) — кожна команда dwp-* запускається зі свого файлу процедури, що доведено у двонаправлених бенчмарках створення та відновлення між моделями.
 
 ## Встановлення
 
@@ -24,7 +24,7 @@ Codex підтримує DWP через процедури команд у фо�
 Необов’язково: [coding-agents-kit](/kit/agentkit) може встановити цей CLI і запускати його командою `ak codex`. Офіційний інсталятор постачальника працює так само добре.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

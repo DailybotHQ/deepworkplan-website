@@ -1,6 +1,6 @@
 ---
 title: Package / CLI Python
-description: "Un preset d’onboarding pour les packages et outils CLI Python, avec des indices de raisonnement pour l’organisation du package, les points d’entrée console et la porte de validation pytest."
+description: "Un preset d’onboarding pour les packages et outils CLI Python, avec des indices pour l’organisation du package, les points d’entrée console et la porte de."
 kind: preset
 lang: fr
 order: 5

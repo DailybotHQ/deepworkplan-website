@@ -1,6 +1,6 @@
 ---
-title: "Deep Work Plan w porównaniu z alternatywami"
-description: "Jak Deep Work Plan odnosi się do narzędzi spec-driven, frameworków workflow agentów i trybów planowania dostawców: własne terminy, źródła i data przeglądu."
+title: "Porównanie Deep Work Plan z narzędziami opartymi na specyfikacji"
+description: "Zestawienie Deep Work Plan z narzędziami spec-driven, frameworkami workflow i trybami planowania vendorów: źródła publiczne i data weryfikacji."
 lastUpdated: 2026-09-11
 ---
 
@@ -74,6 +74,8 @@ Gdzie każda możliwość żyje, per narzędzie. Wbudowane, opcjonalnie lub prze
 - **Stan przetrwający sesje i agentów.** Checkboxy README, logi zadań, ograniczony indeks roboczy i maszynowo czytelny plik stanu są zapisywane na każdej granicy, więc inna sesja lub inny agent kontynuuje z dysku. Nawet przerwane tworzenie planu jest odzyskiwalne.
 - **Sprawdzacz zgodności dla samego repozytorium.** Skrypt tylko do odczytu weryfikuje harness i każdy plan względem specyfikacji, rozumie oba cykle życia planu i kończy się kodem przyjaznym dla CI.
 - **Obciążenie instrukcjami mierzone i publikowane.** Commitowany skrypt publikuje dwa pomiary dla każdego przepływu — pakiet wejściowy ładowany na początku sesji oraz ścieżkę end-to-end po uruchomieniu jego właściwych wyzwalaczy — a także to, co każdy z nich wyklucza, dzięki czemu sama liczba wejściowa nigdy nie jest odczytywana jako całkowity koszt uruchomienia. Wyniki, w tym wzrosty, są publikowane jako bajty, nigdy jako procenty tokenów ani kosztów.
+- **Warstwa rejestru oparta na twardych dowodach.** Niezmienny kontrakt (contract.json), dziennik zdarzeń append-only (journal.ndjson), przeliczane pokwitowania i zaobserwowane bramki gwarantują, że ukończenie jest udowodnione, a nie deklarowane.
+- **Bezpieczna delegacja wielu agentów i autonomia roju.** Wykonywanie zadań w izolowanych worktree, pakiety przekazania prac i sukcesja liderów chronią przed rozbieżnościami i konfliktami.
 
 ## Uczciwe ograniczenia
 

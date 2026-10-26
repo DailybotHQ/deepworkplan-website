@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import '../styles/global.css';
 import JsonLd from '@/components/JsonLd.astro';
 import { ANALYTICS, SITE_DESCRIPTION, SITE_TITLE } from '@/lib/constances';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 import {
   DEFAULT_LANGUAGE,
   getActiveLanguages,
@@ -217,6 +218,7 @@ const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
     alternateName: "DWP",
     applicationCategory: "DeveloperApplication",
     operatingSystem: "Any",
+    softwareVersion: ECOSYSTEM_PINS.pack.tag.replace(/^v/, ''),
     url: Astro.site?.href,
     description: SITE_DESCRIPTION,
     isAccessibleForFree: true,
@@ -226,13 +228,14 @@ const inLanguage = getActiveLanguages().map((l) => getHreflang(l));
     featureList: [
       "Spec-driven development: the plan is the durable source of truth",
       "Atomic, independently verifiable tasks with explicit validation gates",
-      "Tool-agnostic and repo-native: works with Claude, Cursor, Copilot, Codex, Gemini, and more",
+      "Tool-agnostic and repo-native: works with Claude, Cursor, Copilot, Codex, Gemini, Antigravity, and more",
       "Installs the harness into the repository itself (AGENTS.md, docs, .agents/ skills, the DWP skill)",
       "Resumable, version-controlled, Markdown-based plans and running logs",
+      "Delegation to parallel agents with recorded, gated evidence",
     ],
     softwareHelp: {
       "@type": "CreativeWork",
-      url: new URL("init", Astro.site ?? Astro.url).href,
+      url: new URL("quickstart", Astro.site ?? Astro.url).href,
     },
     codeRepository: "https://github.com/DailybotHQ/deepworkplan-skill",
     offers: {

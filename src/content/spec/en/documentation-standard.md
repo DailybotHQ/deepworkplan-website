@@ -1,6 +1,6 @@
 ---
 title: Documentation standard
-description: "Normative standard for how Deep Work Plans document their structure, tasks, and progress: README rules, status markers, the ten-section task anatomy, and the Final Review."
+description: "Normative standard for how Deep Work Plans document their structure, tasks and progress: README rules, status markers, the task anatomy and the Final Review."
 order: 1
 lang: en
 section: Standard
@@ -54,7 +54,7 @@ All headings MUST use sentence case. Documents SHOULD avoid marketing language a
 
 ## The Final Review, task-local skills, and the optional report
 
-Every plan authored under this version MUST end with exactly one mandatory task: the **Final Review** — the security pass over the plan's full change set, the final-state validation on the last relevant state, and the reconciliation of skills decisions. A critical security finding blocks completion.
+Every plan authored under this version MUST end with exactly one mandatory task: the **Final Review**. In order, it runs (a) the security pass over the plan's full change set, including the required local AI Diff Reviewer review; (b) the final-state validation on the last relevant state; (c) the reconciliation of skills decisions; (d) the documentation reconciliation of every touched surface; and (e) completion, with the plan's records in agreement. A critical security finding blocks completion.
 
 - **Task-local skills decisions.** Every task's Completion & Log carries a **skills disposition** — `none`, an update to an existing skill or agent, a named creation, or a deferral with a reason and owner. Warranted authoring happens inside the owning task, before its validation gate, after a duplicate check against the `.agents/` catalog; warranted entries are recorded as stable candidates (`T{task}-{seq}`) in the plan's skills-candidates ledger.
 - **The Executive Report is optional, on request.** Offered once at completion; generated only on explicit request from durable evidence. No answer or an unattended run leaves the plan complete without it.

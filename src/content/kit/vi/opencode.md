@@ -15,7 +15,7 @@ OpenCode, agent lập trình mã nguồn mở, hỗ trợ DWP thông qua AGENTS.
 
 ## Mức độ hỗ trợ
 
-**Đầy đủ** — OpenCode đọc AGENTS.md bản địa và chạy mọi lệnh dwp-* từ file quy trình của nó.
+**Đầy đủ** (Đã kiểm thử cài đặt) — OpenCode đọc AGENTS.md một cách tự nhiên và chạy mọi lệnh dwp-* từ tệp quy trình của nó. Tuyến đường được xác nhận bởi các bộ kiểm thử tự động.
 
 ## Cài đặt
 
@@ -24,7 +24,7 @@ DWP cung cấp AGENTS.md và các quy trình lệnh trong repository; OpenCode p
 Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak opencode`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install opencode
 ```
 

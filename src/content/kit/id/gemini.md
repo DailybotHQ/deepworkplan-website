@@ -15,7 +15,7 @@ Gemini mendukung DWP melalui prosedur command markdown.
 
 ## Tingkat dukungan
 
-**Penuh** — setiap command dwp-* berjalan dari file prosedurnya. Membutuhkan Gemini 2.5 Pro atau lebih baru untuk WebFetch native.
+**Penuh** (Teruji instalasi) — setiap perintah dwp-* dijalankan dari file prosedurnya. Rute dipastikan oleh rangkaian pengujian otomatis; alur kerja perilaku berjalan pada baseline sekuensial. Memerlukan eksekusi alat dan akses file ruang kerja.
 
 ## Instalasi
 

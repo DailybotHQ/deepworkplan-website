@@ -1,6 +1,6 @@
 ---
 title: Next.js
-description: "Next.js 프로젝트를 위한 온보딩 프리셋으로, App 라우터 대 Pages 라우터, 서버 및 클라이언트 컴포넌트, 라우트 핸들러, 테스트에 대한 추론 단서를 제공합니다."
+description: "Next.js 프로젝트를 위한 온보딩 프리셋으로, App 라우터 대 Pages 라우터, 서버 및 클라이언트 컴포넌트, 라우트 핸들러, 테스트에 대한 추론 단."
 kind: preset
 lang: ko
 order: 12

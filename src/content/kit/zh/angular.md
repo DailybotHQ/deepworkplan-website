@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: "面向 Angular 项目的接入预设，包含组件、模块或独立 API、服务、RxJS 与测试运行器的推理提示。"
+description: "面向 Angular 项目的接入预设，包含组件、模块或独立 API、服务、RxJS 与测试运行器的推理提示，支持端到端验证与执行。"
 kind: preset
 lang: zh
 order: 15

@@ -2,6 +2,8 @@ import { readdirSync, readFileSync, statSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { describe, expect, it } from 'vitest';
 
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
+
 // Install-surface drift guard. Every public surface that tells a person or an
 // agent how to install the Deep Work Plan skill must pin the release this site
 // vendors (or a newer one) — never an older tag — and every pinned
@@ -63,7 +65,12 @@ const older = (pin: string, base: string): boolean => {
   return false;
 };
 
-describe('public install surfaces', () => {
+// Each case scans every install surface synchronously (several thousand
+// files); like schema-urls.test.ts it is load-sensitive, so it carries an
+// explicit timeout instead of vitest's 5 s default (docs/TESTING_GUIDE.md).
+const SCAN_TIMEOUT = 30_000;
+
+describe('public install surfaces', { timeout: SCAN_TIMEOUT }, () => {
   it('reads the vendored pack version', () => {
     expect(vendored).toMatch(/^\d+\.\d+\.\d+$/);
     expect(files.length).toBeGreaterThan(100);
@@ -119,5 +126,33 @@ describe('public install surfaces', () => {
       ignored,
       `owner/repo@tag pins the skills CLI ignores:\n${ignored.join('\n')}`
     ).toEqual([]);
+  });
+});
+
+describe('LLM guidance files', () => {
+  const guidance = ['public/llms.txt', 'public/llms-full.txt'].map((path) => ({
+    path,
+    text: readFileSync(join(ROOT, path), 'utf8'),
+  }));
+
+  it('name the pinned DeepWorkPlan Vim release as the one install.sh installs', () => {
+    const stale: string[] = [];
+    const claim = /installs its own release,? (v\d+\.\d+\.\d+)/g;
+    for (const { path, text } of guidance) {
+      for (const match of text.matchAll(claim)) {
+        if (match[1] !== ECOSYSTEM_PINS.vim.tag)
+          stale.push(`${path}: ${match[1]}`);
+      }
+    }
+    expect(
+      stale,
+      `vim release drift (pin ${ECOSYSTEM_PINS.vim.tag}):\n${stale.join('\n')}`
+    ).toEqual([]);
+  });
+
+  it('link the canonical quickstart page, not the /init redirect', () => {
+    for (const { path, text } of guidance) {
+      expect(text, path).not.toMatch(/\(https:\/\/deepworkplan\.com\/init\)/);
+    }
   });
 });

@@ -1,0 +1,33 @@
+---
+title: dwp-upgrade
+description: "Kiểm tra bản phát hành Deep Work Plan, xem lại sửa đổi cục bộ và cài đặt thẻ ổn định với sự đồng ý rõ ràng, bảo toàn toàn bộ kế hoạch."
+kind: command
+lang: vi
+order: 5.6
+usage: /dwp-upgrade
+aliases:
+  - dwp:upgrade
+---
+
+# dwp-upgrade
+
+Duy trì kỹ năng Deep Work Plan đã cài đặt và tiêu chuẩn đã khai báo luôn cập nhật với sự đồng ý rõ ràng.
+
+## Chức năng
+
+ kiểm tra các bản phát hành thượng nguồn để tìm phiên bản mới hơn của gói kỹ năng và tiêu chuẩn. Nó báo cáo sự khác biệt, làm nổi bật các điều chỉnh cục bộ, yêu cầu phê duyệt rõ ràng trước khi thực hiện thay đổi và cài đặt các thẻ phát hành ổn định mà không sửa đổi các kế hoạch hiện có trong .
+
+## Cách dùng
+
+
+
+## Hành vi
+
+1. **Kiểm tra (chỉ đọc)** — đọc phiên bản đã cài đặt từ  và truy vấn các thẻ git thượng nguồn để tìm bản phát hành ổn định mới nhất.
+2. **Đồng thuận** — hiển thị mọi sửa đổi hoặc điều chỉnh cục bộ qua diff; không bao giờ tải xuống hoặc ghi đè tệp mà không có xác nhận rõ ràng.
+3. **Nâng cấp** — cài đặt thẻ ổn định chính xác vào , bổ sung các addon đã cấu hình trong  và điều hòa harness.
+4. **Bảo toàn lịch sử** — các kế hoạch, bằng chứng và nhật ký hiện có trong  là lịch sử bất biến và không bao giờ bị thay đổi khi nâng cấp.
+
+## Bí danh
+
+- 

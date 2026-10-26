@@ -15,7 +15,7 @@ GitHub Copilot은 AGENTS.md와 Markdown 명령 절차를 통해 DWP를 지원합
 
 ## 지원 수준
 
-**완전** — Copilot은 AGENTS.md와 dwp-* 절차 파일을 읽고 모든 명령을 실행합니다.
+**완전 지원** (설치 검증됨) — Copilot은 AGENTS.md와 dwp-* 프로시저 파일을 읽고 해당 파일에서 모든 명령을 실행합니다. 자동화된 테스트 제품군에 의해 경로가 확인되었습니다.
 
 ## 설치
 

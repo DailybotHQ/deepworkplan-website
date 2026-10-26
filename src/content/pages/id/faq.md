@@ -1,7 +1,7 @@
 ---
 title: "Pertanyaan yang sering diajukan — Deep Work Plan"
 description: "Jawaban atas pertanyaan seputar Deep Work Plan: apa yang dilakukannya, cara kerja gerbang dan pelanjutan, perbandingan dengan alat lain, dan cara adopsinya."
-lastUpdated: 2026-09-12
+lastUpdated: 2026-10-14
 ---
 
 ## Pertanyaan yang sering diajukan
@@ -36,13 +36,13 @@ Sebuah metodologi yang dikemas sebagai skill yang dapat dipasang. Tidak ada serv
 
 ### Dengan coding agent apa saja ia bekerja?
 
-Agent mana pun yang membaca file repositori. Skill ini mengikuti standar Agent Skills terbuka dan konvensi `AGENTS.md`, sehingga Claude Code, Codex, Cursor, Gemini CLI, GitHub Copilot, dan lainnya memuatnya melalui pemuatan skill dan instruksi normal mereka. Evaluasi milik metodologi ini sendiri menunjukkan sebuah rencana yang dimulai oleh agent dari satu vendor dan dilanjutkan oleh agent vendor lain, di kedua arah. Cakupan instalasi dan bukti perilaku didaftar per agent dalam matriks kompatibilitas, dan keduanya tidak pernah dicampuradukkan.
+Dengan agen pengodean apa pun yang membaca berkas repositori. Claude Code dan OpenAI Codex diuji secara perilaku untuk eksekusi dan serah terima dua arah; Cursor, GitHub Copilot, Google Gemini CLI, OpenCode, Windsurf, Cline, dan Antigravity memiliki adaptor teruji instalasi. Metodologi memisahkan pengujian perilaku dari cakupan instalasi.
 
 [Telusuri kit](https://deepworkplan.com/id/kit)
 
 ### Bagaimana cara menggunakannya?
 
-Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
+Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
 
 [Mulai Cepat](https://deepworkplan.com/id/quickstart)
 
@@ -50,7 +50,7 @@ Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalu
 
 Skill agent terpasang di mana pun agent Anda memuat skill project atau user. Onboarding kemudian menyesuaikan repositori itu sendiri: ia membuat atau merekonsiliasi `AGENTS.md`, `docs/`, `.agents/`, dan area kerja `.dwp/` yang di-gitignore. Skill mengajari agent metodenya; repositori menyimpan konteks, kit, dan bukti rencana yang dibutuhkan agent lain untuk melanjutkan.
 
-[Lihat alur adopsinya](https://deepworkplan.com/id/init)
+[Lihat alur adopsinya](https://deepworkplan.com/id/quickstart)
 
 ### Apakah Deep Work Plan memerlukan Git?
 
@@ -126,13 +126,51 @@ Bisa, ketika rencana sudah disetujui sebelumnya, membawa lapisan status yang diw
 
 [Baca protokol tanpa pengawasan](https://deepworkplan.com/id/spec/agent-protocol)
 
+## Banyak agen & v7
+
+### Bisakah beberapa agen bekerja pada satu rencana secara paralel dan bagaimana keamanannya terjaga?
+
+Ya, dengan aturan eksplisit. Rencana v7 dapat menandai tugas sebagai `parallel_safe` jika permukaan yang disentuh tidak tumpang tindih dengan tugas lain dan output-nya terikat, serta hanya kontrak yang memberikan `agent_delegation` yang mengizinkan tugas tersebut dialihkan ke agen koding lain — headless di worktree git miliknya sendiri (agentkit) atau di panel Herdr lain (Herdr). Delegasi penulisan hanya bekerja di worktree-nya sendiri, sesi induk tetap menjadi satu-satunya penulis jurnal rencana, dan delegasi tidak pernah mendelegasikan lebih lanjut.
+
+[Baca tentang delegasi](https://deepworkplan.com/id/spec/delegation)
+
+### Apakah hasil dari sub-agen delegasi langsung dipercaya secara otomatis?
+
+Tidak. Hasil delegasi dicatat sebagai `asserted` sampai rencana induk mengintegrasikan pekerjaan dan runner gerbangnya sendiri mengeksekusi gerbang tugas, yang merupakan satu-satunya hal yang mencatat bukti `observed`. Delegasi yang selesai tidak pernah menutup kriteria dengan sendirinya, sehingga delegasi memperluas jangkauan tanpa menurunkan standar penyelesaian.
+
+[Baca spesifikasi lapisan rekaman](https://deepworkplan.com/id/spec/record-layer)
+
+### Apa yang terjadi ketika agen mencapai batas penggunaan atau token di tengah rencana?
+
+Setiap agen memeriksa kapasitasnya sendiri di batas tugas. Jika masih ada ruang, ia melanjutkan; saat kapasitas menipis, ia hanya menyelesaikan tugas yang mampu ia selesaikan; saat kritis, ia mencapai titik aman, menulis paket serah terima kecil (`dwp-handoff-v1`: apa yang selesai, terverifikasi dan belum terverifikasi, serta langkah selanjutnya), memberi tahu pemimpin dan berhenti. Pemimpin meluncurkan penerus di akun lain, yang menerima paket dan melanjutkan rencana, menjalankan ulang setiap gerbang yang tercantum belum diverifikasi. Jika pemimpin itu sendiri kehabisan kapasitas, ia menyerahkan kepemimpinan kepada penerus; pergantian kepemimpinan membawa epoch yang terus bertambah sehingga hanya satu pemimpin yang bertindak pada satu waktu.
+
+[Baca metodologi](https://deepworkplan.com/id/methodology)
+
+### Kapan agen otonom berhenti untuk bertanya kepada manusia?
+
+DWP mendefinisikan taksonomi eskalasi tujuh kelas yang ketat (AGENT_PROTOCOL §7.5): C1 tindakan tanpa persetujuan, C2 hambatan autentikasi/izin, C3 ambiguitas tak tereduksi, C4 kegagalan gerbang tanpa perbaikan yang diizinkan, C5 operasi destruktif, C6 lisensi, C7 kapasitas habis.
+
+[Baca protokol agen](https://deepworkplan.com/id/spec/agent-protocol)
+
+### Bagaimana penyelesaian tugas dibuktikan di luar klaim naratif agen?
+
+Tugas selesai hanya jika bukti tercatat memenuhi setiap kriteria penerimaannya. Kontrak hasil dialamatkan berdasarkan konten dan tidak dapat diubah setelah eksekusi dimulai, setiap peristiwa ditambahkan ke jurnal rencana, dan hanya runner gerbang yang mencatat bukti `observed`. Kriteria yang memerlukan penilaian manusia hanya ditutup melalui persetujuan manusia yang tercatat dengan penanda otoritas eksplisit; tanda terima dihitung ulang dari catatan, tidak pernah ditulis tangan. Tinjauan Akhir kemudian menjalankan pemeriksaan keamanan dan validasi penuh pada status akhir.
+
+[Baca spesifikasi lapisan rekaman](https://deepworkplan.com/id/spec/record-layer)
+
+### Apakah rencana v6 tetap berjalan di bawah v7?
+
+Ya. Kontrak rencana secara eksplisit mendeklarasikan generasi skema (`plan-contract/v6.json` vs `plan-contract/v7.json`). Rencana yang sedang berjalan tidak pernah bermigrasi di tengah jalan. Rencana v6 mempertahankan bentuk dan semantik jurnalnya di bawah alat v7.
+
+[Baca tentang kontrak](https://deepworkplan.com/id/spec/record-layer)
+
+## Perbandingannya dengan alat lain
+
 ### Bisakah satu rencana mencakup beberapa repositori?
 
 Bisa — arketipe hub orkestrator ada persis untuk itu. Repositori hub memegang rencana yang mengoordinasikan, dan setiap repositori anak menjalankan rencananya sendiri di dalam area `.dwp/` terisolasinya sendiri, sehingga anak tidak pernah menulis ke status rencana hub. Kelengkapan anak dibaca dari status tingkat atas dari rencananya sendiri, bukan dengan pencocokan string di dalamnya, dan hub mencatat posisinya sebelum menavigasi ke mana pun. Setiap anak tetap repositori DWP biasa yang juga bisa dipiloti sendirian.
 
 [Arketipe repositori](https://deepworkplan.com/id/spec/archetypes)
-
-## Perbandingannya dengan alat lain
 
 ### Apa bedanya dengan tool spec-driven seperti Spec Kit, OpenSpec, atau Kiro?
 
@@ -158,13 +196,13 @@ Mode rencana bawaan berguna, dan Deep Work Plan membangun di atas substrat yang 
 
 Onboarding bersifat non-destruktif: ia mendeteksi `AGENTS.md`, `docs/`, `.agents/`, atau `CLAUDE.md` yang sudah ada, merekonsiliasi alih-alih menimpa, dan bertanya sebelum mengganti apa pun. Ia menulis indeks `AGENTS.md` dengan command nyata, pohon `docs/` yang beralasan, dokumentasi per modul, kit `.agents/` dengan command `dwp-*` yang tipis, area keluaran `.dwp/` yang di-gitignore, peta pengujian yang terverifikasi, dan tinjauan kode lokal yang diwajibkan (skill AI Diff Reviewer plus ekstensi review yang disesuaikan repo). Ia kemudian menjalankan self-check dan pemeriksa konformansi agar Anda bisa melihat apa yang dihasilkan. Repositori yang di-onboard di bawah standar sebelumnya mendapat upgrade harness tertarget yang merekonsiliasi hanya apa yang kurang atau usang.
 
-[Endpoint adopsi](https://deepworkplan.com/id/init)
+[Endpoint adopsi](https://deepworkplan.com/id/quickstart)
 
 ### Bagaimana saya meng-upgrade skill di repositori yang sudah di-onboard?
 
 Ada dua upgrade berbeda, dan alurnya menjaga keduanya tetap terpisah. Harness repositori — `AGENTS.md`, `docs/`, kit `.agents/` — direkonsiliasi dengan menjalankan kembali onboarding, yang hanya mengisi apa yang kurang atau usang. Skill itu sendiri bergerak lewat `/dwp-upgrade`: pemeriksaan read-only atas rilis terbaru yang dipublikasikan, instalasi tag persis yang Anda terima, terverifikasi, lalu onboarding kembali sebagai satu proses segar. Alur bergantung pada persetujuan eksplisit di setiap langkah, adaptasi lokal dibandingkan dan dipertahankan alih-alih ditimpa, dan `.dwp/` tidak pernah dimigrasi — rencana yang ada mempertahankan bentuk tercatatnya dan terus berjalan.
 
-[Endpoint adopsi](https://deepworkplan.com/id/init)
+[Endpoint adopsi](https://deepworkplan.com/id/quickstart)
 
 ### Bisakah saya memakai metodologi inti tanpa memasang add-on?
 
@@ -180,7 +218,7 @@ DWP tidak memperlakukan absennya toolchain sebagai jalan bebas. Selama onboardin
 
 ### Berapa biayanya, dan bagaimana efisiensi diukur?
 
-Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur **saat masuk** — paket awalnya di permulaan sesi — dipublikasikan berdampingan dengan **jalur end-to-end** bernama yang menambahkan apa yang benar-benar dimuat oleh pemicu alur itu sendiri saat pekerjaan sungguh berlanjut (misalnya, resume yang berlanjut ke eksekusi biasanya memuat beberapa kali lipat paket masuknya). Tak satu pun dari kedua angka ini membatasi sebuah sesi: eksekusi nyata juga membaca file repositori itu sendiri, keluaran tool, dan file kerja rencana, yang tak satu pun dihitung dalam ledger ini. Kedua angka diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.
+Metodologi dan skill-nya berlisensi MIT dan gratis; tidak ada service, tidak ada kunci API, dan tidak ada telemetri di alur inti. Efisiensi dilaporkan sebagai jumlah byte instruksi yang dimuat setiap alur saat masuk — paket awalnya di permulaan sesi — dipublikasikan berdampingan dengan jalur end-to-end bernama yang menambahkan apa yang benar-benar dimuat oleh pemicu alur itu sendiri saat pekerjaan sungguh berlanjut (misalnya, resume yang berlanjut ke eksekusi biasanya memuat beberapa kali lipat paket masuknya). Tak satu pun dari kedua angka ini membatasi sebuah sesi: eksekusi nyata juga membaca file repositori itu sendiri, keluaran tool, dan file kerja rencana, yang tak satu pun dihitung dalam ledger ini. Kedua angka diukur oleh script yang di-commit bersama skill, diukur ulang pada setiap baseline rilis dan dipublikasikan dalam ledger evaluasi, dengan kenaikan dilaporkan sejujur penurunannya. Efisiensi tidak dilaporkan sebagai persentase token atau penghematan biaya, karena inventarisasi byte tidak menetapkan hal itu. Evaluasi publik dengan agen segar kini telah dijalankan di bawah protokol beku: dua fitur yang sama dibangun dari klon bersih tanpa harness, dengan versi mayor sebelumnya, dan dengan versi saat ini. Evaluasi menemukan bahwa agen pada pohon berkemampuan-harness membaca lebih sedikit byte pada kedua tugas, dan bahwa sesi fitur versi saat ini mengonsumsi lebih sedikit masukan dan keluaran model daripada versi mayor sebelumnya pada kedua tugas — sebagaimana dilaporkan harness, pada satu beban kerja. Evaluasi juga menemukan batas-batasnya yang jujur: onboarding adalah biaya sekali bayar yang hanya terbayar kembali saat alurnya digunakan, arah token bersih per beban kerja bersifat campuran, tidak ada klaim keunggulan waktu dinding, dan agen segar tidak memasuki alur dengan sendirinya — alur adalah perintah yang Anda atau agen yang tahu memanggilnya.
 
 [Kepercayaan dan pengungkapan](https://deepworkplan.com/id/trust)
 

@@ -19,6 +19,7 @@ Sie ist bewusst agnostisch gegenüber dem verwendeten KI-Agenten oder Stack — 
 - **Planen vor dem Ausführen** — Es wird kein Code geschrieben, bevor der Plan vereinbart ist. Der Plan ist ein Vertrag zwischen Ihnen und dem Agenten. [Methodik lesen](/methodology)
 - **Aufgaben sind atomar** — Jede Aufgabe ist so zugeschnitten, dass sie eigenständig ausgeführt und verifiziert und anschließend atomar committet werden kann. [Spezifikation ansehen](/spec)
 - **Alles verifizieren** — Jede Aufgabe endet mit einer expliziten Prüfung, bevor die nächste beginnt, wobei der Fortschritt in git festgehalten wird. [Das Kit erkunden](/kit)
+- **Verifizierte Evidenz statt bloßer Erzählung** — Die Fertigstellung wird durch ausgeführte Gates und ein Append-Only-Journal bewiesen: Eine Aufgabe schließt nur, wenn aufgezeichnete Nachweise ihre Akzeptanzkriterien erfüllen, niemals aufgrund der Selbstaussage eines Agenten. [Aufzeichnungsschicht lesen](/de/spec/record-layer)
 
 ---
 

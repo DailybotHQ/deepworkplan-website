@@ -1,6 +1,6 @@
 ---
 title: "DWP v5: những lời hứa, giờ được đảm bảo"
-description: "Deep Work Plan v5 biến tám lời hứa lâu nay thành các hợp đồng đã kiểm thử và có phiên bản — trình kiểm chứng trung thực, điều phối an toàn và đường nâng cấp đã được chứng minh."
+description: "Deep Work Plan v5 biến tám lời hứa thành hợp đồng có phiên bản: trình kiểm chứng trung thực, điều phối an toàn và đường nâng cấp được chứng minh."
 date: 2026-09-12
 version: "v5 · Đảm bảo bằng kiểm thử"
 kind: release

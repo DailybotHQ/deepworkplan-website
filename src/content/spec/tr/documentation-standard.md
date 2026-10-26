@@ -1,6 +1,6 @@
 ---
 title: Dokümantasyon standardı
-description: "Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğine ilişkin normatif standart: README kuralları, durum işaretleri, on bölümlü görev anatomisi ve Final Review."
+description: "Deep Work Plan’lerin yapıyı, görevleri ve ilerlemeyi belgeleme biçimine dair normatif standart: README kuralları, durum işaretleri ve Final Review."
 order: 1
 lang: tr
 section: Standard
@@ -54,7 +54,7 @@ Tüm başlıklar cümle düzenini KULLANMALIDIR. Belgeler, pazarlama dilinden ve
 
 ## Final Review, görev-yerel skill kararları ve isteğe bağlı rapor
 
-Bu sürüm altında yazılmış her plan, tam olarak tek bir zorunlu görevle bitMELİDİR: **Final Review** — planın tüm değişiklik kümesi üzerindeki güvenlik incelemesi, son ilgili durum üzerindeki son-durum doğrulaması ve skill kararlarının uzlaştırılması. Kritik bir güvenlik bulgusu tamamlanmayı engeller.
+Bu sürüm altında yazılmış her plan, tam olarak tek bir zorunlu görevle bitMELİDİR: **Final Review**. Sırasıyla şunları çalıştırır: (a) gerekli yerel AI Diff Reviewer incelemesi dahil, planın tüm değişiklik kümesi üzerindeki güvenlik incelemesi; (b) son ilgili durum üzerindeki son-durum doğrulaması; (c) skill kararlarının uzlaştırılması; (d) dokunulan her yüzeyin dokümantasyon uzlaştırması; ve (e) planın kayıtları uyum içindeyken tamamlanma. Kritik bir güvenlik bulgusu tamamlanmayı engeller.
 
 - **Görev-yerel skill kararları.** Her görevin Tamamlama ve Günlük bölümü bir **skill kararı** taşır — `none`, mevcut bir skill veya ajana güncelleme, adlandırılmış bir oluşturma ya da gerekçesi ve sahibiyle birlikte bir erteleme. Gerekçeli yazma, sahipli görevin içinde, onun doğrulama kapısından önce, `.agents/` kataloğuna karşı bir yinelenen denetiminden sonra gerçekleşir; gerekçeli girişler, planın skill-adayları defterinde kararlı adaylar (`T{task}-{seq}`) olarak kaydedilir.
 - **Executive Report isteğe bağlıdır, talep üzerine.** Tamamlanmada bir kez sunulur; yalnızca açık bir istek üzerine, kalıcı kanıtlardan üretilir. Yanıt gelmemesi veya gözetimsiz bir çalışma, planı onsuz tamamlanmış bırakır.

@@ -15,7 +15,7 @@ Cursor mendukung DWP melalui project rules dan command file.
 
 ## Tingkat dukungan
 
-**Penuh** — command DWP berjalan melalui sistem rules milik Cursor.
+**Penuh** (Teruji instalasi) — perintah DWP bekerja melalui sistem aturan Cursor. Rute direktori diverifikasi oleh rangkaian pengujian otomatis; alur kerja perilaku dijalankan secara berurutan.
 
 ## Instalasi
 
@@ -24,7 +24,7 @@ Command DWP tersimpan sebagai markdown di dalam proyek. Cursor membacanya melalu
 Opsional: [coding-agents-kit](/kit/agentkit) dapat memasang CLI ini dan menjalankannya dengan `ak cursor`. Penginstal resmi dari vendor juga sama baiknya.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

@@ -41,7 +41,7 @@ Jede Lane hat einen Plan, mindestens einen Lite-Plan in ihrem eigenen Repository
 
 ## Die Kapazitätsschleife
 
-Ein Agent prüft seinen eigenen Spielraum vor dem Beginn jeder Aufgabe, nach jedem Gate oder Schritt, der länger als 20 Minuten lief, immer wenn seine CLI eine Nutzungslimit-Warnung zeigt, und bevor er eine Übergabe oder die Leitung annimmt. Die Prüfung ist `ak capacity --self --json` aus coding-agents-kit `v1.0.1`, die der Helfer des Pakets in eine Entscheidung übersetzt:
+Ein Agent prüft seinen eigenen Spielraum vor dem Beginn jeder Aufgabe, nach jedem Gate oder Schritt, der länger als 20 Minuten lief, immer wenn seine CLI eine Nutzungslimit-Warnung zeigt, und bevor er eine Übergabe oder die Leitung annimmt. Die Prüfung ist `ak capacity --self --json` aus coding-agents-kit `v1.1.0`, die der Helfer des Pakets in eine Entscheidung übersetzt:
 
 | Urteil | Entscheidung | Eine Lane | Ein Lead, für sich selbst |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Das **Übergabepaket** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/dwp-h
 
 ## Lead-Nachfolge
 
-herdr-peers `v1.0.0` führt pro Plan einen Lead-Eintrag — Lead, Epoche, Nachfolgeliste und Lanes — und löst die Adresse `lead` zum aktuellen Lead auf, sodass kein Lane-Auftrag das Pane des Leads fest einträgt.
+herdr-peers `v1.1.0` führt pro Plan einen Lead-Eintrag — Lead, Epoche, Nachfolgeliste und Lanes — und löst die Adresse `lead` zum aktuellen Lead auf, sodass kein Lane-Auftrag das Pane des Leads fest einträgt.
 
 - **Erst beanspruchen, dann starten.** Der Lead führt `herdr-peers lead claim --plan <P> --succession <A,B>` aus, bevor er irgendeine Lane startet — die Adresse `lead` wird erst aufgelöst, sobald ein Eintrag existiert —, aktualisiert den Eintrag mit `--lanes <A,B>`, während Lanes starten, und führt `lead release` aus, wenn der Plan fertig ist. Ab herdr-peers (`v0.3.2`) hält der Eintrag das beanspruchende Repository lokal fest, und ein Plan mit derselben ID in einem anderen Repository wird `--plan <repo>/<id>` genannt. Die Standardnachfolge ist sein geplanter Nachfolger, dann die Lanes im eigenen Checkout des Plans in Startreihenfolge, dann jede Lane auf demselben Host; Lanes in Containern oder auf anderen Rechnern kommen zuletzt.
 - **Übergabe, geplant.** Bei `low` benennt der Lead einen designierten Nachfolger. Bei `critical` schreibt er ein Lead-Paket — Lane-Tabelle, offene asks, Release-Reihenfolge, ausstehende Merges, Entscheidungen —, führt `herdr-peers lead handover <addr> --plan <P>` aus, das die Epoche erhöht und jede Lane benachrichtigt, und hält an. Der Nachfolger nimmt das Paket an, nimmt den Orchestrator-Plan wieder auf und prüft jede Lane erneut.

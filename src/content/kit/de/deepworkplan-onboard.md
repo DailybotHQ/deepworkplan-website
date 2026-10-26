@@ -1,6 +1,6 @@
 ---
 title: deepworkplan-onboard
-description: "Ein Repository AI-first machen, indem über seinen Stack und Archetyp geschlussfolgert und dann eine angepasste AGENTS.md, docs/, .agents/ und ein gitignore-ausgeschlossenes .dwp/ erzeugt wird."
+description: "Ein Repository AI-first machen, indem über seinen Stack und Archetyp geschlussfolgert und dann eine angepasste AGENTS.md, docs/, .agents/ und ein."
 kind: command
 lang: de
 order: 6
@@ -44,6 +44,11 @@ Für v7-Pläne — der Standard des aktuellen 7.x-Pakets — ist der maschinenle
 - **Journal-Ereignis:** https://deepworkplan.com/schema/journal-event/v7.json (ergänzt das Ereignis `delegation`)
 - **Plan-Snapshot (Live-Projektion, mit v6 geteilt):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Kontextmanifest (mit v6 geteilt):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Repository-Konfiguration:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Addon-Deskriptor:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Swarm-Handoff-Paket:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Benchmark-Datensatz:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Erkenntnis-Datensatz:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 v6-Pläne behalten ihre v6-Schemas ([Manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [Vertrag](https://deepworkplan.com/schema/plan-contract/v6.json), [Journal-Ereignis](https://deepworkplan.com/schema/journal-event/v6.json)); bestehende v5-Pläne verwenden weiterhin das v5-State-Schema, und ältere Pläne werden nie stillschweigend umgeschrieben.
 

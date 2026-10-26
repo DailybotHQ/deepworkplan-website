@@ -1,6 +1,6 @@
 ---
 title: "DWP v2: kho mã trở thành harness"
-description: "Bản phát hành chính thức đầu tiên của Deep Work Plan biến chính kho mã thành harness làm việc của tác nhân — ngữ cảnh, rào chắn, xác thực và trạng thái, tất cả đều gắn liền với kho mã."
+description: "Deep Work Plan v2 biến kho mã thành harness làm việc của tác nhân: ngữ cảnh, rào chắn, xác thực và trạng thái đều gắn liền trực tiếp với kho mã."
 date: 2026-07-16
 version: "v2 · Phát hành chính thức"
 kind: foundation

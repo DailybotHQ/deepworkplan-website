@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) menempatkan coding agent di dalam panel, di mesin Anda dan di mesin yang dijangkaunya melalui SSH. Addon ini memungkinkan sebuah Deep Work Plan menggunakan agen-agen tersebut sebagai **rekan** (peer): sebuah rencana dapat menyerahkan tugas yang terbatas kepada agen di panel lain, menerima tepat satu balasan yang diotorisasi, dan menyimpan catatan pertukaran tersebut.
 
-Ini adalah addon opsional dari **DWP v7** (`v7.0.0`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
+Ini adalah addon opsional dari **DWP v7** (pack `v7.9.0`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.0.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.1.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v1.0.0`, protokol 1 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protokol 1 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +58,7 @@ herdr-peers tidak mengautentikasi pengirim: kolom `from=` dalam cap adalah sebua
 
 ## Container dan host
 
-Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.0.1`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual.
+Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.1.1`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual.
 
 ## Herdr atau agentkit
 
@@ -71,7 +71,7 @@ Kedua addon mengimplementasikan antarmuka delegasi yang sama — `launch`, `obse
 
 Untuk lead yang menjalankan banyak lane sekaligus — panel di host, di container, dan di mesin lain, masing-masing pada akunnya sendiri — `herdr-peers lanes` mencantumkan setiap lane beserta statusnya, `herdr-peers status <pane>` mengklasifikasikan layar tempat lane yang blocked berada, dan setiap catatan delegasi menyebut akun dan vendor yang mengerjakannya. Lihat [Menjalankan banyak agent](/methodology/06-orchestration).
 
-**Lane Codex menyebut panelnya sendiri.** Codex menjalankan perintah sebuah lane dari server latar yang dipakai bersama oleh semua sesi pada akun itu, sehingga id panel yang diwarisinya bisa milik lane lain. Lane Codex meneruskan panelnya sendiri, dari arahan lead, dengan `--pane <pane>` pada setiap perintah herdr-peers (`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`).
+**Setiap lane menyebut panelnya sendiri.** Di bawah aturan otonomi swarm (Guide §17.2), setiap lane meneruskan panelnya sendiri dengan  pada setiap kata kerja herdr-peers (, , , , , , ) untuk mencegah salah atribusi pesan dan saturasi slot distribusi. Lane Codex mewajibkannya secara khusus karena berbagi server latar belakang antar sesi.
 
 ## Pemberitahuan dan kepemimpinan
 
@@ -84,6 +84,20 @@ herdr-peers (`v0.3.2`) menambahkan hal yang memungkinkan sebuah swarm bertahan l
 - **Layar `usage_limit`.** `status` dan `lanes` mengenali pesan batas penggunaan sebuah CLI sebagai kelas layar `usage_limit`, yang langkah berikutnya adalah handoff. Layar ini tidak pernah dijawab dengan tombol. `lanes --json` menambahkan rencana, lead-nya, epoch, dan kapasitas terakhir yang dilaporkan setiap lane.
 
 Lane juga boleh saling bertanya untuk informasi dan koordinasi — sebuah antarmuka, nama flag, status branch — tetapi hanya lead yang menugaskan pekerjaan. Kedalaman 1 dan batas fan-out tetap berlaku. Dengan `v0.2.x` tidak ada pemberitahuan maupun catatan lead: lane menanyakan alamat lead dari arahannya, dan pergantian lead diteruskan oleh pengembang.
+
+## Debat
+
+herdr-peers 1.1.0 menambahkan sub-skill **debate** bawaan (`debate.md`): agen lead menjalankan panel peer di pane Herdr melalui beberapa putaran dan menutupnya dengan satu hasil yang dapat dipercaya manusia, lengkap dengan bukti dan pendapat yang berbeda. Gunakan hanya saat manusia meminta debat, panel, red team, riset dari beberapa agen atau sudut pandang, atau panel kedua atas suatu hasil; pendapat satu agen cukup dengan satu ask.
+
+- **Tujuan lebih dulu.** Lead memilih tujuannya — **memutuskan**, **meriset** kondisi terkini, **menguji ketahanan**, **memverifikasi**, atau **menghasilkan** — dan tiap tujuan punya format, cara hitung, dan hasil akhirnya sendiri. Tujuan dapat dirangkai (riset → putuskan, putuskan → verifikasi), dan ukuran debat bisa cepat, standar, atau mendalam.
+- **Kontrak lead.** Lead tidak pernah memilih; kata-kata manusia disalin apa adanya; brief sampai ke panel lewat satu saluran; setiap pane menulis berkasnya ke disk dan membalas dengan satu baris; tidak ada pane yang melakukan tindakan eksternal.
+- **Format.** Riset per sudut pandang, putaran klasik, paket draf, pemeriksaan silang klaim demi klaim, red team lalu pembela, steelman lalu menilai, tantangan buta dengan konteks baru, panel replikasi, dan usulan divergen. Sebuah keputusan selalu berakhir pada ruang putusan yang ditetapkan.
+- **Perintah `herdr-peers debate`.** `tally` menghitung surat suara berperingkat dan putusan per butir (Borda, Copeland, duel berpasangan, pemenang dan pecundang Condorcet); `claims` menggabungkan buku klaim dari tiap lane menjadi status seperti mapan, diperdebatkan, atau terbantah, yang merupakan kuorum, bukan verifikasi; `anon` menyalin berkas dengan nama anonim, dengan pemetaannya di kunci privat; `filings` mendaftar berkas yang ada, hilang, dan terlalu pendek sehingga hanya pane yang hilang yang ditanya ulang.
+- **Menyusun panel.** `panel` mengusulkan panel dan tidak menjalankan apa pun. Kursi dibagi bergiliran antar penyedia model, dan di dalam satu penyedia kursi dengan kuota terbanyak didahulukan, diambil dari pane yang menganggur dan, bila agentkit (`ak`) terpasang, dari akun yang diusulkan `ak pick`. Tanpa `ak`, ia merekomendasikan coding-agents-kit (opsional, `v1.0.1` atau lebih baru).
+- **Templat.** Enam belas templat di `templates/debate/`, dari catatan manusia serta brief riset, uji ketahanan, dan putaran hingga berkas surat suara dan klaim, paket serah terima lead, serta catatan keputusan, kondisi terkini, uji ketahanan, dan replikasi.
+- **Pengiriman ke peer yang terhambat.** `reply` dan `notify` mencoba ulang pengiriman ke peer yang tertahan di sebuah pertanyaan hingga `--wait-blocked` detik; tetap tepat satu balasan.
+
+Rilis ini hanya menambah: protokol 1 serta semua perintah, flag, kode keluar, dan kontrak JSON tetap tidak berubah.
 
 ## Catatan
 

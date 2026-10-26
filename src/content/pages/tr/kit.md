@@ -10,7 +10,7 @@ Kit, metodolojiyi uygulamada çalıştırmak için ihtiyacınız olan her şeydi
 `DailybotHQ/deepworkplan-skill` üzerinden kurulur:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.8.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
 ```
 
 Güncel 7.x paketi yeni planları varsayılan olarak v7 ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir.
@@ -33,7 +33,7 @@ Deep Work Plan skill'i, bir yönlendirici ile dokuz alt skill'den oluşur:
 
 İnce eğik çizgi komutları, alt skill'lere ve eklentilere yetki devreder:
 
-- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify` — plan-yürüt-doğrula döngüsü.
+- `dwp-create`, `dwp-execute`, `dwp-refine`, `dwp-resume`, `dwp-status`, `dwp-verify`, `dwp-upgrade` — plan-yürüt-doğrula döngüsü.
 - `skill-create`, `agent-create` — author alt skill'ine yetki devreder.
 - `lib-upgrade` — dependency-upgrade eklentisine yetki devreder (yalnızca o eklenti kabul edildiğinde kurulur).
 
@@ -63,12 +63,12 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Yedisi isteğe ba
 **Metodoloji tek başına çalışır. Eklentiler onu güçlendirir.** Her eklenti, Deep Work Plan skill'i içinde ince bir entegrasyon katmanıdır; kendi deposu, sürümü ve arayüz sürümü olan bir ürüne etiketle sabitlenir. Her ürün Deep Work Plan olmadan çalışır ve hiçbir eklenti zorunlu değildir.
 
 - **Deep Work Plan skill'i** — Planları oluşturur, yürütür, doğrular, sürdürür ve iyileştirir. Hiçbir eklenti gerektirmez.
-- **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v1.0.0`.
-- **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: devre dışı bırakılabilen varsayılan özerklik ve bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v1.0.1`.
-- **[devcontainer](/tr/kit/devcontainer)** — Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, SSH anahtarları yalnızca açıkça etkinleştirilirse. Sabitlenen sürüm `devcontainer-kit@v1.0.1`.
-- **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v1.0.0`.
+- **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v1.1.0`.
+- **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: devre dışı bırakılabilen varsayılan özerklik ve bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v1.1.0`.
+- **[devcontainer](/tr/kit/devcontainer)** — Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, SSH anahtarları yalnızca açıkça etkinleştirilirse. Sabitlenen sürüm `devcontainer-kit@v1.1.1`.
+- **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v1.0.1`.
 
-Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.8.1`
+Eklenti kayıt defteri ve tanımlayıcılar Deep Work Plan v7 ile sunulur: `v7.9.0`
 
 ### Örnekler
 

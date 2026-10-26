@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: Tokeneffizienz von Grund auf"
-description: "Deep Work Plan v3 baut den Harness rund um die Kontextkosten neu auf – progressive Offenlegung, wirkungsbezogene Validierung und ein einziger verpflichtender Final Review – und hebt gleichzeitig die Vertrauens- und Konformitätsgrenze an."
+description: "Deep Work Plan v3 baut das Harness um Kontextkosten neu auf: progressive Offenlegung, Validierung betroffener Bereiche und ein obligatorisches Final Review."
 date: 2026-09-10
 version: "v3 · Tokeneffizienz"
 kind: release

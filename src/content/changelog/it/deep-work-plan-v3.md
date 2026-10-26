@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: efficienza dei token per costruzione"
-description: "Deep Work Plan v3 ricostruisce l'harness attorno al costo del contesto — divulgazione progressiva, validazione mirata alla sola superficie interessata e un'unica Final Review obbligatoria — alzando al contempo il livello minimo di trust e conformità."
+description: "Deep Work Plan v3 ottimizza l'harness sul costo del contesto: divulgazione progressiva, validazione mirata e una revisione finale obbligatoria."
 date: 2026-09-10
 version: "v3 · Efficienza dei token"
 kind: release

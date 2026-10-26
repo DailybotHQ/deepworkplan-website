@@ -1,6 +1,6 @@
 ---
 title: Ruby on Rails
-description: "Preset de incorporación para aplicaciones Ruby on Rails, con pistas de razonamiento para la estructura MVC, migraciones, el framework de pruebas y el pipeline de assets y config."
+description: "Preset de incorporación para aplicaciones Ruby on Rails, con pistas para la estructura MVC, migraciones, el framework de pruebas y el pipeline de assets y."
 kind: preset
 lang: es
 order: 10

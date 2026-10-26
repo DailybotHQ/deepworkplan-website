@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.8.1`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
+रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.9.0`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
 
 ## devcontainer-kit क्या प्रदान करता है
 
@@ -21,20 +21,20 @@ order: 1
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.0.1` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.1.1` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.0.1`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.1.1`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
 
-**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में नए पिन आ जाएँ (herdr-peers, coding-agents-kit और DeepWorkPlan Vim, प्रत्येक `v1.0.0` पर)।
+**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में नए पिन आ जाएँ (herdr-peers `v1.1.0`, coding-agents-kit `v1.1.0` और DeepWorkPlan Vim `v1.0.1` पर)।
 
 ## परतें
 

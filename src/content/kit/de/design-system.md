@@ -1,6 +1,6 @@
 ---
 title: Design system
-description: "Ein optionales Addon, das jedem Repo mit einer nutzerseitigen Interface-Oberfläche eine DESIGN.md gibt (unter docs/, von AGENTS.md indexiert) — mit Profilen für visuelle UI, CLI-Ausgabe und konversationale Oberflächen in einer Datei."
+description: "Optionales Addon, das Repos mit UI ein DESIGN.md in docs/ gibt, indexiert von AGENTS.md, für visuelle UI, CLI-Ausgabe und Konversationsprofile."
 kind: addon
 lang: de
 order: 4
@@ -39,6 +39,28 @@ Es ist nie erforderlich — ein Repository mit null optionalen Addons ist vollst
 ## Optionaler Befehl
 
 Wenn angenommen, kann das Addon einen `/design-system`-Delegator in das `.agents/commands/`-Verzeichnis des Repos installieren, um `DESIGN.md` später neu zu erzeugen oder zu aktualisieren. Die Installation des Befehls ist optional; ein abgelehntes Addon installiert keinen.
+
+
+## v7-Spezifikation
+
+| Element | Wert |
+|---|---|
+| Produkt | DeepWorkPlan design-system-Addon |
+| Registrierungsschlüssel |  in  |
+| Deskriptor |  (Schnittstelle 1) |
+| Zieldatei |  indexiert von  |
+| Versionierung | Gepinnt und versioniert mit dem Skill-Paket () |
+
+
+## v7-Spezifikation
+
+| Element | Wert |
+|---|---|
+| Produkt | DeepWorkPlan design-system-Addon |
+| Registrierungsschlüssel | `design-system` in `.dwp/config.json` |
+| Deskriptor | `addons/design-system/addon.json` (Schnittstelle 1) |
+| Zieldatei | `docs/DESIGN.md` indexiert von `AGENTS.md` |
+| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v7.9.0`) |
 
 ## Verhältnis zu featurebezogenen Design-Dokumenten
 

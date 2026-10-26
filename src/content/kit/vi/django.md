@@ -1,6 +1,6 @@
 ---
 title: Django
-description: "Preset onboarding cho các dự án Django, với gợi ý suy luận về app, migration, settings, lệnh quản trị và trình chạy test."
+description: "Preset onboarding cho các dự án Django, với gợi ý suy luận về app, migration, settings, lệnh quản trị và trình chạy test với xác minh đầy đủ."
 kind: preset
 lang: vi
 order: 1

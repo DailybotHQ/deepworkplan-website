@@ -15,7 +15,7 @@ Cursor 通过项目规则与命令文件支持 DWP。
 
 ## 支持级别
 
-**完整** —— DWP 命令通过 Cursor 的规则系统运作。
+**完整**（经过安装测试）—— DWP 命令通过 Cursor 的规则系统运行。目录路径已由自动化测试套件验证；行为工作流按顺序执行。
 
 ## 安装
 
@@ -24,7 +24,7 @@ DWP 命令以 Markdown 的形式存在于项目中。Cursor 通过其规则系�
 可选：[coding-agents-kit](/kit/agentkit) 可以安装此 CLI，并用 `ak cursor` 启动它。使用供应商自己的官方安装程序同样可行。
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

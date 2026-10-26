@@ -1,6 +1,6 @@
 ---
 title: Cursor
-description: "L’adapter DWP per Cursor AI, con supporto completo tramite il sistema di project rules e il prefisso di comando cancelletto, poiché Cursor riserva la slash a sé."
+description: "L’adapter DWP per Cursor AI, con supporto totale via il sistema di project rules e il prefisso di comando cancelletto, poiché Cursor riserva la slash a sé."
 kind: adapter
 lang: it
 order: 2
@@ -15,7 +15,7 @@ Cursor supporta DWP tramite project rules e file di comando.
 
 ## Livello di supporto
 
-**Completo** — i comandi DWP funzionano tramite il sistema di rules di Cursor.
+**Completo** (Testato per installazione) — i comandi DWP funzionano tramite il sistema di regole di Cursor. Percorsi di directory verificati da suite di test automatizzate; i flussi comportamentali operano in modo sequenziale.
 
 ## Installazione
 
@@ -24,7 +24,7 @@ I comandi DWP vivono come Markdown nel progetto. Cursor li legge tramite il suo 
 Facoltativo: [coding-agents-kit](/kit/agentkit) può installare questa CLI e avviarla con `ak cursor`. Anche l’installer ufficiale del fornitore funziona altrettanto bene.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

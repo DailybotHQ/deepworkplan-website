@@ -1,6 +1,6 @@
 ---
 title: deepworkplan-onboard
-description: "リポジトリのスタックとアーキタイプを推論し、適応された AGENTS.md、docs/、.agents/、そして gitignore された .dwp/ を生成することで、リポジトリを AI-first にする。"
+description: "リポジトリのスタックとアーキタイプを推論し、適応された AGENTS.md、docs/、.agents/、そして gitignore された .dwp/ を生成することで、リ。"
 kind: command
 lang: ja
 order: 6
@@ -44,6 +44,11 @@ v7 計画（現在の 7.x パックの既定）の機械可読スキーマ一覧
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json（`delegation` イベントを追加）
 - **Plan snapshot（ライブ投影、v6 と共有）:** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest（v6 と共有）:** https://deepworkplan.com/schema/context-manifest/v6.json
+- **リポジトリ設定：** https://deepworkplan.com/schema/dwp-config/v1.json
+- **アドオン記述子：** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **群知能引き継ぎパケット：** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **ベンチマークレコード：** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **学習記録：** https://deepworkplan.com/schema/learnings-record/v1.json
 
 v6 計画は v6 のスキーマ（[manifest](https://deepworkplan.com/schema/plan-manifest/v6.json)、[contract](https://deepworkplan.com/schema/plan-contract/v6.json)、[journal event](https://deepworkplan.com/schema/journal-event/v6.json)）を維持します。既存の v5 計画は引き続き v5 の state スキーマを使用し、古い計画が暗黙に書き換えられることはありません。
 

@@ -1,6 +1,6 @@
 ---
 title: SvelteKit
-description: "Preset de incorporación para proyectos SvelteKit, con pistas de razonamiento para rutas, funciones load, endpoints de servidor, el adaptador elegido y las pruebas."
+description: "Preset de incorporación para proyectos SvelteKit, con pistas para rutas, funciones load, endpoints de servidor, el adaptador elegido y las pruebas."
 kind: preset
 lang: es
 order: 13

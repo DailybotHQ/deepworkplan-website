@@ -1,6 +1,6 @@
 ---
 title: Terraform
-description: "Terraform 및 IaC 프로젝트를 위한 온보딩 프리셋으로, 모듈, 프로바이더, 백엔드 상태, 환경, fmt/validate/plan 게이트에 대한 추론 단서를 제공합니다."
+description: "Terraform 및 IaC 프로젝트를 위한 온보딩 프리셋으로, 모듈, 프로바이더, 백엔드 상태, 환경, fmt/validate/plan 게이트에 대한 추론."
 kind: preset
 lang: ko
 order: 21

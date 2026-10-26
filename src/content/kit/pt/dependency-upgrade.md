@@ -1,6 +1,6 @@
 ---
 title: Atualização de dependências
-description: "Um addon opcional e independente do gerenciador de pacotes que atualiza as dependências de um repositório em lotes validados e reversíveis, detectando o gerenciador real, sem presumir npm."
+description: "Um addon opcional e independente do gerenciador de pacotes que atualiza as dependências de um repositório em lotes validados e reversíveis, detectando o."
 kind: addon
 lang: pt
 order: 3
@@ -23,6 +23,16 @@ Atualiza as dependências de um repositório com um fluxo de trabalho em lotes, 
 4. Executar o validation gate real do repositório após cada lote; reverter qualquer lote que falhe.
 5. Resumir o que foi atualizado, ignorado e revertido; deixar o desenvolvedor comitar.
 
+
+## Especificação v7
+
+| Item | Valor |
+|---|---|
+| Produto | Addon dependency-upgrade do DeepWorkPlan |
+| Chave de registro | `dependency-upgrade` em `.dwp/config.json` |
+| Descritor | `addons/dependency-upgrade/addon.json` (interface 1) |
+| Comando | `/lib-upgrade` instalado em `.agents/commands/` quando aceito |
+| Controle de versão | Fixado e versionado com o pacote de skills (`v7.9.0`) |
 ## Notas
 
 Independente do gerenciador de pacotes — nunca executa npm/ncu em um repositório que não é JS. Opcional, nunca obrigatório e nunca comita automaticamente.

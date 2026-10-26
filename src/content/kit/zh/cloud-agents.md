@@ -19,17 +19,17 @@ prefix: plain text
 
 ## 支持级别
 
-**完整** —— 任何能够读取代码仓库、遵循 `AGENTS.md` 并可执行 shell 命令的云端代理，均无需特定于平台的适配器即可支持 DWP。
+**完整**（已文档化）—— 云端代理平台读取 `AGENTS.md` 或原生指令，并通过其终端或容器环境执行命令。
 
 ## 唤醒-续行-让出循环
 
 每次云端代理轮次遵循以下模式：
 
 1. **唤醒** —— 会话启动（由 cron 计划、CI 事件或用户操作触发）。
-2. **运行 DWP 恢复协议** —— 读取计划 README，定位检查点，将 `state.json` 与 Markdown 对照核对，检查接缝，运行冒烟测试。参见 [DWP specification](/spec/dwp-specification#the-dwp-resume-protocol)。
+2. **运行 DWP 恢复协议** —— 读取计划 README，定位检查点，通过 `ledger.py project` 从 `journal.ndjson` 重构状态，检查接缝，运行冒烟测试。参见 [DWP specification](/spec/dwp-specification#the-dwp-resume-protocol)。
 3. **检查阻塞状态** —— 若 `state.json.blocked` 已设置，报告原因并让出，不执行任何操作。
 4. **执行下一个原子任务** —— 一项任务，通过其完整的验证关卡。
-5. **更新状态层** —— 以新的任务状态、关卡记录、outcome 记录和提交哈希原子性地重写 `state.json`。
+5. **记录至日志** —— 通过 `ledger.py` 动词（`start`、`gate`、`complete`）向 `journal.ndjson` 追加事件；`ledger.py project` 原子性更新派生的 `state.json` 快照投影。在旧版 v5 计划中，保留直接的状态文件更新方式。
 6. **让出** —— 会话干净地终止；下一轮次从更新后的状态继续。
 
 ## 要求

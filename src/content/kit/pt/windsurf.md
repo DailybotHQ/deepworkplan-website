@@ -15,7 +15,7 @@ O Windsurf oferece suporte ao DWP por meio do seu sistema de regras e de procedi
 
 ## Nível de suporte
 
-**Completo** — o Windsurf lê as regras do projeto e executa todos os comandos dwp-* a partir do respectivo arquivo de procedimento.
+**Completo** (Comprovado por instalação) — O Windsurf lê as regras do projeto e executa cada comando dwp-* a partir de seu arquivo de procedimento. Rota confirmada por suítes de testes automatizados.
 
 ## Instalação
 

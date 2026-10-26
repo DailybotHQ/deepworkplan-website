@@ -1,6 +1,6 @@
 ---
 title: dwp-status
-description: "Report the status of a Deep Work Plan without executing it. The agent reads the plan and progress log, then summarizes completed, in-progress, and pending work."
+description: "Report the status of a Deep Work Plan across four lifecycle dimensions, resource envelope limits, blockers, and delegations without modifying files."
 kind: command
 lang: en
 order: 5
@@ -18,21 +18,22 @@ Report Deep Work Plan status without executing.
 
 ## What it does
 
-`dwp-status` summarizes plan progress without making changes. It reports completed, in-progress, and pending tasks.
+`dwp-status` is strictly read-only by contract. It summarizes progress, active blockers, checkpoints, and resource envelopes without making changes to any file.
 
 ## Usage
 
 ```
-/dwp-status [plan]
+/dwp-status                      # list and summarize all plans
+/dwp-status [plan]               # report details for a specific plan
 ```
 
 ## Behavior
 
-1. Read the plan and `PROGRESS.md`.
-2. Summarize completed tasks.
-3. Summarize in-progress tasks.
-4. Summarize pending tasks.
-5. Report without modifying anything.
+1. **Four lifecycle dimensions:** reports format (`lite` or `full`), materialization status (`materializing`, `ready`, or `promoting`), review approval (`pending`, `approved`, or `pre_approved`), and execution progress (`pending`, `in_progress`, `blocked`, or `completed`).
+2. **Repository-wide overview:** when called without arguments, lists all plans under `.dwp/plans/` with completion percentages, active task locators, and blocker summaries.
+3. **Resource envelope:** displays consumed vs ceiling counters across tracked dimensions (`wall_clock`, retries, dispatches, spend, tokens) and indicates whether limits are actively enforced or advisory.
+4. **Blocker diagnosis:** surfaces active blocker details from `state.json.blocked` categorized by the standard escalation taxonomy (classes C1–C7).
+5. **Delegation observation:** summarizes open and completed subagent delegations and recorded peer exchanges.
 
 ## Aliases
 

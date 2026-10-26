@@ -32,7 +32,7 @@ Metodologi ini MUST mendukung AI coding agent berikut. Agent masa depan mana pun
 | **OpenClaw** | Secara native memindai `<workspace>/.agents/skills/` (standar AgentSkills) | plain text |
 | **Hermes** | Pemuatan skill standar AgentSkills; membaca `AGENTS.md` | plain text |
 
-Enam yang pertama adalah interactive coding agent dengan manusia dalam sesi. OpenClaw dan Hermes adalah **platform agent otonom** — daemon long-lived dengan giliran terjadwal — dan biasanya mengeksekusi rencana di bawah profil tanpa pengawasan (lihat [Profil eksekusi](#execution-profiles)) di dalam ruang kerja agent (lihat [Arketipe](/spec/archetypes) §3).
+Enam yang pertama adalah interactive coding agent dengan manusia dalam sesi. OpenClaw dan Hermes adalah **platform agent otonom** — daemon long-lived dengan giliran terjadwal — dan biasanya mengeksekusi rencana di bawah profil tanpa pengawasan (lihat [Profil eksekusi](#profil-eksekusi)) di dalam ruang kerja agent (lihat [Arketipe](/spec/archetypes) §3).
 
 Setiap supported agent MUST memperlakukan `AGENTS.md` sebagai satu-satunya sumber kebenaran untuk konvensi repositori. Berkas konfigurasi per-agent MUST merujuknya dan MUST NOT menduplikasi isinya.
 

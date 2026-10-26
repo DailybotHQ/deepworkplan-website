@@ -1,7 +1,7 @@
 ---
 title: "DWP v7: 위임하고 모든 것을 기록하는 계획"
 description: "Deep Work Plan v7은 v6의 계약과 저널을 유지하고, 계획이 범위가 정해진 작업을 다른 에이전트에 위임하게 하며 선택 애드온 4개를 더합니다."
-date: 2026-10-10
+date: 2026-10-09
 version: "v7 · 증거를 갖춘 위임"
 kind: release
 lang: ko
@@ -16,16 +16,32 @@ sourceLinks:
     url: "https://deepworkplan.com/schema/plan-manifest/v7.json"
   - label: "Journal event schema v7"
     url: "https://deepworkplan.com/schema/journal-event/v7.json"
+  - label: "Skill release v7.7.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.7.0"
+  - label: "Skill release v7.8.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
+  - label: "Skill release v7.8.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7은 v6의 방식을 유지합니다. 계약이 권한의 근거이고, 추가 전용 저널이 기억이며, 스케줄러가 다음에 실행할 작업을 정하고, 기록된 증거가 작업의 기준을 충족할 때만 작업이 종료됩니다. v7은 위임 기능을 더하면서 그 결과에 대해서도 같은 규율을 유지합니다.
 
 `agent_delegation`을 부여한 계획은 작업을 `parallel_safe`로 표시하여 다른 에이전트에 넘길 수 있습니다. 위임받은 쪽의 응답은 지시가 아니라 데이터로 기록되며, 계획 자체의 게이트 러너가 결과를 관찰할 때까지 `asserted` 상태로 남습니다. `observed` 증거는 러너만 생성하므로, 위임은 완료 기준을 낮추지 않으면서 도달 범위를 넓힙니다.
 
-선택 애드온 4개가 위임을 실용적인 자율성으로 바꿉니다. Herdr는 어떤 머신에 있든 패널의 에이전트에게 작업을 넘깁니다. Agentkit은 모든 터미널 코딩 에이전트 위에 `ak` 명령 하나를 두고, 기본적으로 자율 동작하되 끌 수 있으며, 범위가 정해진 작업을 git worktree에서 헤드리스로 실행합니다. Devcontainer는 SSH 키가 전혀 들어 있지 않은 재현 가능한 컨테이너를 각 저장소에 제공합니다. DeepWorkPlan Vim은 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기입니다. 각각 자체 저장소를 가진 제품에 태그로 고정되어 있으며 Deep Work Plan 없이도 동작합니다. 저장소는 이 중 어느 것도 없이 완전히 적합할 수 있고, `.dwp/config.json`의 레지스트리가 어떤 것이 활성화되었는지 기록합니다.
+선택 애드온 4개가 위임을 실용적인 자율성으로 바꿉니다. Herdr는 어떤 머신에 있든 패널의 에이전트에게 작업을 넘깁니다. Agentkit은 모든 터미널 코딩 에이전트 위에 `ak` 명령 하나를 두고, 기본적으로 자율 동작하되 끌 수 있으며, 범위가 정해진 작업을 git worktree에서 헤드리스로 실행합니다. Devcontainer는 기본적으로 SSH 키가 전혀 들어 있지 않은 재현 가능한 컨테이너를 각 저장소에 제공합니다(호스트 에이전트를 통한 SSH 기반 git, 키 파일은 명시적인 `[ssh] copy_keys` 선택 시에만 포함). DeepWorkPlan Vim은 계획 브라우저와 Markdown 뷰어를 갖춘 터미널 편집기입니다. 각각 자체 저장소를 가진 제품에 태그로 고정되어 있으며 Deep Work Plan 없이도 동작합니다. 저장소는 이 중 어느 것도 없이 완전히 적합할 수 있고, `.dwp/config.json`의 레지스트리가 어떤 것이 활성화되었는지 기록합니다.
 
 벤치마크 및 학습 모드는 각 계획이 알려 주는 내용을 기록하여 결과를 나중에 분석할 수 있게 합니다. 저장소마다 에이전트 하나를 두고 v7 오케스트레이터 계획으로 수행한 전체 생태계 감사에서는 v6 대비 동작 회귀가 발견되지 않았습니다. 팩 테스트 스위트는 깨끗한 환경에서 807개 중 807개를 통과했고, 명령어 로드는 흐름별로 0.1%에서 3.9% 증가했으며(팩 전체로는 4.6%), 이는 토큰으로 추정한 것이 아니라 두 태그의 바이트 수로 측정한 값입니다.
 
 v7은 오케스트레이션과 감사 가능성에서의 큰 진전이지만, 아직 완전한 무인 자율성은 아닙니다. 릴리스 7.2.0은 그 감사에서 발견된 공백을 메웁니다. 벤치마크와 학습이 이제 v7 계획을 측정하고, 선행 조건이 완료되기 전에 작업을 시작하는 것은 거부되며, 테스트 스위트는 밀폐된 방식으로 실행됩니다(깨끗한 환경에서 815개 중 815개). 에이전트 결과의 비열등성은 측정되지 않았습니다. 기존 계획은 기록된 세대를 유지하며 암묵적으로 마이그레이션되지 않습니다. 새 계획은 기본적으로 v7 계약을 사용합니다.
 
-설치된 skill 릴리스: **7.5.1**, 7.0.0 이후 안정적입니다.
+릴리스 7.6.0 (2026-10-11)은 대규모 오케스트레이션을 도입했습니다: 저장소 또는 작업 흐름마다 하나의 레인, 여유 용량에 따라 선택되는 계정(`ak usage`, `ak pick`), 무인 실행, 그리고 모든 애드온을 감지해 사용 중인 애드온은 업그레이드하고 적합한 애드온은 제안하는 온보딩.
+
+릴리스 7.7.0 (2026-10-12)은 군집 자율성(가이드 §17)을 제공했습니다: 수용 능력 루프(`shared/swarm.py`), 핸드오프 패킷(`dwp-handoff-v1`), 에포크 및 펜싱을 통한 리드 승계, 레인 간 요청, AGENT_PROTOCOL §7.5 에스컬레이션 분류 체계(C1–C7: 그 외 모든 것은 결정하고 기록), 품질 기준(게이트는 가설이며 주장되는 것이 아니라 검증됨), 23개 저장소에서 실행된 313개 계획의 방법론적 교훈. 알려진 한계: v7 저널에는 레인 핸드오프나 리드 승계를 위한 전용 이벤트가 없습니다(취소된 위임과 관찰로 기록됨).
+
+릴리스 7.8.0 (2026-10-13)은 Ecosystem 1.0을 구축했습니다: 팩이 통합하는 모든 제품이 첫 번째 안정 릴리스에 도달해 시맨틱 버저닝에 따라 v1.0.0으로 고정되었으며(coding-agents-kit, herdr-peers, devcontainer-kit, deepworkplan-vim, 각각 검증된 `SHA256SUMS` 다이제스트 포함), AI Diff Reviewer v3.3.14와 Dailybot agent-skill v3.23.17도 함께 고정되었습니다. 이어서 7.8.1 (2026-10-14)이 coding-agents-kit와 devcontainer-kit의 v1.0.1 패치 릴리스를 고정했습니다.
+
+릴리스 7.9.0(2026-10-25)은 Herdr 애드온을 herdr-peers v1.1.0에 고정했습니다. 이 버전의 네이티브 debate 하위 스킬로 리드가 피어 패널을 여러 라운드에 걸쳐 진행하고 결정 기록으로 마무리할 수 있습니다. 또한 AI Diff Reviewer를 v3.3.16에 고정했으며, 팩의 CI는 이제 Python 3.9 하한 작업을 ubuntu-24.04에서 실행합니다.
+
+설치된 skill 릴리스: **7.9.0**, 7.0.0 이후 안정적입니다.

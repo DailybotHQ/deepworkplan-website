@@ -1,6 +1,6 @@
 ---
 title: "DWP v3: efektywność tokenowa dzięki konstrukcji"
-description: "Deep Work Plan v3 przebudowuje harness wokół kosztu kontekstu — stopniowe ujawnianie informacji, walidacja ograniczona do dotkniętego obszaru i jeden obowiązkowy Final Review — jednocześnie podnosząc poprzeczkę zaufania i zgodności."
+description: "Deep Work Plan v3 optymalizuje harness pod kątem kosztu kontekstu: stopniowe ujawnianie danych, walidacja zmian i obowiązkowy Przegląd Końcowy."
 date: 2026-09-10
 version: "v3 · Efektywność tokenowa"
 kind: release

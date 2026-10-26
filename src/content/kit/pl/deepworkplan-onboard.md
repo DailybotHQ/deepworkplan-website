@@ -44,6 +44,11 @@ Dla planów v7 — domyślnych w aktualnym pakiecie 7.x — katalog schematów c
 - **Zdarzenie dziennika:** https://deepworkplan.com/schema/journal-event/v7.json (dodaje zdarzenie `delegation`)
 - **Migawka planu (aktywna projekcja, współdzielona z v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Manifest kontekstu (współdzielony z v6):** https://deepworkplan.com/schema/context-manifest/v6.json
+- **Konfiguracja repozytorium:** https://deepworkplan.com/schema/dwp-config/v1.json
+- **Deskryptor dodatku:** https://deepworkplan.com/schema/addon-descriptor/v1.json
+- **Pakiet przekazania roju:** https://deepworkplan.com/schema/dwp-handoff/v1.json
+- **Rekord benchmarku:** https://deepworkplan.com/schema/benchmark-record/v1.json
+- **Rekord wniosków:** https://deepworkplan.com/schema/learnings-record/v1.json
 
 Plany v6 zachowują swoje schematy v6 ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [kontrakt](https://deepworkplan.com/schema/plan-contract/v6.json), [zdarzenie dziennika](https://deepworkplan.com/schema/journal-event/v6.json)); istniejące plany v5 nadal korzystają ze schematu stanu v5, a starsze plany nigdy nie są po cichu przepisywane.
 

@@ -11,7 +11,10 @@ lastUpdated: 2026-09-28
 Đặc tả là định nghĩa chính xác, rà soát được của phương pháp luận — các cấu trúc và giao thức mà con người và agent chia sẻ. Nó nêu rõ, bằng các thuật ngữ quy phạm RFC-2119, cách một kế hoạch dựa trên đặc tả được cấu trúc và cách một agent phải thực thi dựa trên nó: kế hoạch là nguồn chân lý, các cổng kiểm chứng có tính nhị phân, và chính repository mang theo harness mà một agent cần. Nó được tổ chức thành các tài liệu theo thứ tự:
 
 - **Chuẩn tài liệu** — cấu trúc repository AI-first.
-- **Đặc tả DWP** — cấu trúc kế hoạch, cấu trúc tác vụ, vòng lặp thực thi, phần Delta cho các thay đổi trong codebase hiện có, Giao thức Tiếp tục DWP, các bậc rigor tỷ lệ (micro/standard/deep) và lớp trạng thái kế hoạch có thể đọc bằng máy.
+- **Lớp bản ghi** — lớp bản ghi dựa trên bằng chứng: hợp đồng, nhật ký, phân loại bằng chứng (khẳng định so với quan sát), phê duyệt và biên nhận.
+- **Tài nguyên và năng lực** — thực thi có giới hạn: tệp khai báo ngữ cảnh, giới hạn tài nguyên, khả năng máy chủ và sổ đăng ký tiện ích.
+- **Ủy quyền** — thực thi đa tác tử và bầy đàn: worktree song song an toàn, sự kiện ủy quyền và kế thừa lãnh đạo theo giai đoạn.
+- **Trạng thái kế hoạch** — lớp trạng thái máy có thể đọc: ảnh chụp nhanh phái sinh từ nhật ký trong v6/v7 (`ledger.py project`), lớp trạng thái v5 cũ và đối soát.
 - **Giao thức agent** — hành vi xuyên agent bắt buộc, ánh xạ command, các agent được hỗ trợ (bao gồm OpenClaw và Hermes), và các hồ sơ thực thi (tương tác so với không có giám sát) với các điều kiện dừng và tiếp tục theo lịch.
 - **Các kiểu hình** — repo độc lập, trung tâm điều phối và không gian làm việc agent (ngôi nhà tồn tại lâu dài của một agent tự chủ: không gian làm việc OpenClaw, thư mục dịch vụ Hermes, volume cloud agent); phép suy đoán phân loại và cách khởi tạo khác nhau.
 - **Addon** — cơ chế tự nguyện để bổ sung các năng lực tùy chọn, gồm sub-skill author (để một repository nuôi lớn bộ kit của riêng nó), các addon bảo trì như dependency-upgrade, và addon design-system (một `docs/DESIGN.md` được suy luận từ nguồn thiết kế thực của repo, với các profile cho UI trực quan, đầu ra CLI và các bề mặt hội thoại).

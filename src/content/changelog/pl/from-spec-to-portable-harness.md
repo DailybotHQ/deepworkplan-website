@@ -1,6 +1,6 @@
 ---
 title: "DWP v1: od pętli planowania do przenośnego harnessu"
-description: "Deep Work Plan przechodzi od prostej pętli pisania planów do przenośnego zestawu wdrożeniowego — zaufania i pochodzenia, szerszego wsparcia dla hostów agentów oraz kontrolera zgodności, który może uruchomić każde repozytorium."
+description: "Deep Work Plan v1 staje się przenośnym zestawem wdrożeniowym: weryfikowalne pochodzenie, wsparcie dla agentów i kontroler zgodności repozytorium."
 date: 2026-06-12
 version: "v1 · Fundament"
 kind: foundation

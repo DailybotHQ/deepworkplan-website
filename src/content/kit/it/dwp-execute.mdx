@@ -1,10 +1,10 @@
 ---
 title: dwp-execute
-description: "Esegue un Deep Work Plan esistente attività per attività. L’agente legge l’intero piano, esegue ogni attività in ordine, aggiorna i progressi e segna il completamento in modo accurato."
+description: "Esegui un Deep Work Plan in sequenza con il ciclo ledger v7, modalità trust non presidiata opzionale, delega parallel_safe e chiusura con Final Review."
 kind: command
 lang: it
 order: 2
-usage: /dwp-execute [plan]
+usage: /dwp-execute [plan] [trust]
 aliases:
   - dwp:execute
 ---
@@ -12,27 +12,35 @@ import CmdExecute from '@/components/diagrams/kit/CmdExecute.astro';
 
 # dwp-execute
 
-Esegue un Deep Work Plan esistente.
+Esegue un Deep Work Plan esistente attività per attività.
 
 <CmdExecute lang="it" class="not-prose my-8" />
 
 ## Cosa fa
 
-`dwp-execute` esegue un piano esistente attività per attività. Legge l’intero piano, esegue ogni attività in ordine, aggiorna `PROGRESS.md` e segna lo stato di completamento di ciascuna attività.
+`dwp-execute` esegue un piano esistente attività per attività attraverso il livello di registrazione deterministico. Risolve il piano di destinazione, valuta le dipendenze, esegue ogni attività nell’ordine dichiarato, esegue i gate di validazione e registra un avanzamento immutabile.
 
 ## Uso
 
 ```
-/dwp-execute [plan]
+/dwp-execute                     # execute latest plan
+/dwp-execute [plan]              # by exact folder, id, or slug
+/dwp-execute [plan] trust        # unattended execution without per-task prompts
 ```
+
+## Modalità
+
+- **Guidata (predefinita):** chiede conferma tra un’attività e l’altra, consentendo di esaminare evidenze e decisioni a ogni confine di attività.
+- **Trust (`auto`):** aggiungendo `trust` le attività idonee vengono eseguite in sequenza fino al completamento senza pause per le conferme di routine, fermandosi solo in caso di blocco reale (classi di escalation C1–C7).
 
 ## Comportamento
 
-1. Legge l’intero piano prima di iniziare.
-2. Esegue le attività in ordine.
-3. Aggiorna `PROGRESS.md` dopo ogni attività.
-4. Segna lo stato dell’attività in modo accurato.
-5. Si ferma e chiede quando è bloccato.
+1. **Risoluzione del piano:** risolve per nome esatto della cartella, ID numerico, slug univoco o `latest` (il piano con l’ID numerico più alto).
+2. **Ciclo ledger:** esegue `ledger.py ready` per valutare il DAG delle dipendenze e gli invarianti, `ledger.py start` per verificare i prerequisiti e `ledger.py gate` per eseguire i comandi di validazione e produrre evidenze `observed`.
+3. **Completamento protetto:** `ledger.py complete` applica i controlli zero test, una valutazione aggiornata degli invarianti e le decisioni su skill e documentazione locali all’attività.
+4. **Delega intra-piano:** le attività marcate `parallel_safe` nei contratti v7 possono essere delegate a subagenti tramite trasporti headless (`ak run` in un worktree) o interattivi (pannello `herdr`). I risultati restano `asserted` finché non vengono osservati dall’esecutore dei gate del piano.
+5. **Controlli di capacità:** valuta il margine residuo dell’account ai confini delle attività prima dell’invio.
+6. **Final Review:** termina con un’attività di chiusura obbligatoria in cinque parti (passaggio di sicurezza con revisione locale obbligatoria, validazione dello stato finale, riconciliazione delle skill, riconciliazione della documentazione, completamento).
 
 ## Alias
 

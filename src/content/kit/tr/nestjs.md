@@ -1,6 +1,6 @@
 ---
 title: NestJS
-description: "NestJS uygulamaları için modüller, kontrolörler, sağlayıcılar, DTO'lar, dekoratör modeli ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "NestJS uygulamaları için modüller, kontrolörler, sağlayıcılar, DTO'lar, dekoratör modeli ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir onboarding."
 kind: preset
 lang: tr
 order: 8

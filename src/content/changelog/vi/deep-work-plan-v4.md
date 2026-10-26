@@ -1,6 +1,6 @@
 ---
 title: "DWP v4: kế hoạch vừa vặn với khối lượng công việc"
-description: "Deep Work Plan v4 khiến định dạng kế hoạch đi theo khối lượng công việc, chứ không phải ngược lại — một kế hoạch Lite giờ đây là một đề xuất hoàn chỉnh, có thể thực thi ngay cho các tác vụ có giới hạn rõ ràng, và bước soạn nháp riêng biệt đã được loại bỏ."
+description: "Deep Work Plan v4 điều chỉnh định dạng theo công việc: kế hoạch Lite là đề xuất hoàn chỉnh, thực thi được cho các tác vụ có giới hạn mà không cần soạn nháp."
 date: 2026-09-11
 version: "v4 · Ưu tiên kế hoạch Lite"
 kind: release

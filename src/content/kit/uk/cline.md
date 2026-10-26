@@ -15,7 +15,7 @@ Cline, відкритий агент програмування, підтрим�
 
 ## Рівень підтримки
 
-**Повний** — Cline читає правила markdown і виконує кожну команду dwp-* зі свого файлу процедур.
+**Повна** (Перевірено встановленням) — Cline читає правила markdown і запускає кожну команду dwp-* зі свого файлу процедури. Маршрут підтверджено автоматизованими тестами.
 
 ## Встановлення
 
@@ -24,7 +24,7 @@ Cline, відкритий агент програмування, підтрим�
 Необов’язково: [coding-agents-kit](/kit/agentkit) може встановити цей CLI і запускати його командою `ak cline`. Офіційний інсталятор постачальника працює так само добре.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cline
 ```
 

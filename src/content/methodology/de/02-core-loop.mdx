@@ -1,6 +1,6 @@
 ---
 title: Die Kernschleife
-description: "Der Workflow aus create, execute, refine, resume, status und verify, das per gitignore ausgeschlossene .dwp-Ausgabeverzeichnis, die zehnteilige Aufgaben-Anatomie und wie Validierung funktioniert."
+description: "Der DWP-Kernzyklus aus neun Sub-Skills, das git-ignorierte .dwp-Verzeichnis mit config.json, die Aufgaben-Anatomie sowie Verifikation und Resumption."
 order: 2
 lang: de
 summary: Wie die zentralen DWP-Operationen einen Plan vom Ziel zum verifizierten Abschluss treiben.
@@ -19,32 +19,43 @@ Diese Schleife ist die operative Form von spec-driven Development. Der Plan ist 
 
 <CoreLoop lang="de" class="not-prose my-10" />
 
-- **create** — Einen neuen Plan aus einem Ziel erzeugen. Der Agent analysiert das Ziel, zerlegt es in aufeinanderfolgende Aufgaben und schreibt die Plandateien. Bei einem mehrdeutigen Ziel sollte er vor dem Schreiben klärende Fragen stellen. Im geführten Modus materialisiert der Agent direkt einen [Lite-Plan](/spec/lite-plans) — einen kompakten, bereits ausführbaren Vorschlag —, den man behalten, zu einem Full-Plan mit Aufgabendateien befördern, bearbeiten oder abbrechen kann; im Trust-Modus materialisiert der Agent die gewählte Darstellung (Lite oder Full) direkt, ohne Review-Schritt. Siehe die [Spezifikation](/spec/dwp-specification) für beide Darstellungen. Die Anforderungsanalyse und die Plan-Qualitätsprüfung laufen in jedem Fall.
-- **execute** — Den Plan Aufgabe für Aufgabe ausführen. Der Agent aktualisiert nach jeder Aufgabe das Fortschrittsprotokoll und markiert den Abschlussstatus der Aufgabe. Er darf keine Aufgaben überspringen, ohne festzuhalten, warum.
-- **refine** — Einen bestehenden Plan ändern. Der Agent darf Aufgaben hinzufügen, entfernen oder umordnen, muss aber abgeschlossene Arbeit bewahren und die Aufgabentabelle aktualisieren.
-- **resume** — Einen unterbrochenen Plan fortsetzen. Der Agent liest das Fortschrittsprotokoll und die Aufgabendateien, um den Zustand zu rekonstruieren, und setzt dann ab der ersten unvollständigen Aufgabe fort.
-- **status** — Über den Fortschritt berichten, ohne auszuführen. Der Agent fasst abgeschlossene, laufende und ausstehende Aufgaben zusammen und ändert nichts.
-- **verify** — Konformität prüfen, ohne etwas zu ändern. Der Agent berichtet, ob das Repository den Standard erfüllt und ob ein Plan wohlgeformt ist — jede Aufgabe mit Akzeptanzkriterien und einem Validierungs-Gate. Siehe das [Konformitätsdokument der Spezifikation](/spec).
+Der Methodik-Skill delegiert die Entwicklerabsicht an neun spezialisierte Sub-Skills: sechs Kernausführungs-Operationen, zwei Lebenszyklus-Helfer und eine Authoring-Engine:
+
+- **create** — Einen neuen Plan aus einem Ziel erzeugen. Der Agent analysiert das Ziel, zerlegt es in aufeinanderfolgende Aufgaben und schreibt die Plandateien. Im geführten Modus materialisiert der Agent direkt einen [Lite-Plan](/de/spec/lite-plans) — einen kompakten, bereits ausführbaren Vorschlag —, den man behalten, zu einem Full-Plan befördern, bearbeiten oder abbrechen kann; im Trust-Modus materialisiert der Agent die gewählte Darstellung (Lite oder Full) direkt ohne Review-Schritt. Anforderungsanalyse und Plan-Qualitätsprüfung laufen in beiden Modi.
+- **execute** — Den Plan Aufgabe für Aufgabe sequenziell ausführen. Der Agent aktualisiert nach jeder Aufgabe das Fortschrittsprotokoll, führt Validierungs-Gates aus und committet. Im Trust-Modus läuft die Ausführung unbeaufsichtigt ohne Nachfragen zwischen Aufgaben weiter.
+- **refine** — Einen bestehenden Plan anpassen (Aufgaben hinzufügen, bearbeiten, teilen oder umordnen oder einen Lite-Plan zu Full befördern). Abgeschlossene Nachweise bleiben strikt erhalten und unbestätigte Kriterienaufweichungen sind verboten.
+- **resume** — Einen unterbrochenen Plan fortsetzen. Der Agent liest das Append-Only-Journal und die Aufgabendateien, rekonstruiert den Zustand und setzt ab der ersten unvollständigen Aufgabe fort, ohne fertige Arbeit zu wiederholen.
+- **status** — Den Fortschritt berichten, ohne auszuführen (strikt schreibgeschützt). Der Agent fasst erledigte, laufende und offene Aufgaben zusammen und ändert nichts.
+- **verify** — Konformität prüfen, ohne etwas zu ändern (strikt schreibgeschützt). Der Agent berichtet, ob das Repository den AI-first-Standard erfüllt und ob Planaufgaben explizite Kriterien und Validierungs-Gates tragen.
+- **onboard** — Das Ziel-Repository analysieren und durch Reasoning — niemals per Copy-Paste — ein angepasstes `AGENTS.md`, eine `docs/`-Hierarchie, Moduldokumentation und das `.agents/`-Kit mit Symlinks aufbauen.
+- **upgrade** — Upstream-Releases prüfen, Entwicklerzustimmung vor dem Download einholen, gepinnte stabile Tags installieren und lokale Anpassungen abgleichen, ohne bestehende `.dwp/`-Pläne zu verändern.
+- **author** — Repository-lokale Skills, Agenten oder Slash-Befehle für reale wiederkehrende Workflows erstellen und weiterentwickeln sowie den `.agents/docs/`-Katalog synchron halten.
 
 ## Das `.dwp/`-Ausgabeverzeichnis
 
-Alle DWP-Artefakte liegen unter einem per gitignore ausgeschlossenen `.dwp/`-Verzeichnis im Repository-Stammverzeichnis. Den Arbeitsbereich aus der Versionskontrolle herauszuhalten bedeutet, dass der Arbeitszustand eines Plans niemals den Projektverlauf verunreinigt.
+Alle DWP-Artefakte liegen unter einem per gitignore ausgeschlossenen `.dwp/`-Verzeichnis im Repository-Stammverzeichnis. Den Arbeitsbereich aus der Versionskontrolle herauszuhalten bedeutet, dass der Arbeitszustand eines Plans niemals den Projektverlauf verunreinigt. Addon-Konfigurationen auf Repository-Ebene werden in `.dwp/config.json` (`dwp-config/v1`) festgehalten, während Pläne in flachen nummerierten Verzeichnissen liegen:
 
 ```
 .dwp/
-├── plans/
-│   └── PLAN_001_<slug>/
-│       ├── README.md
-│       ├── PROGRESS.md
-│       └── <n>.task_<slug>.md
-└── config.yaml
+├── config.json
+└── plans/
+    └── PLAN_001_<slug>/
+        ├── manifest.json
+        ├── contract.json
+        ├── journal.ndjson
+        ├── state.json
+        ├── README.md
+        ├── PROGRESS.md
+        ├── 1.task_<slug>.md
+        ├── 2.task_<slug>.md
+        └── analysis_results/
 ```
 
 ## Die zehnteilige Aufgaben-Anatomie
 
 <TaskAnatomy lang="de" class="not-prose my-10" />
 
-Jede Aufgabendatei enthält diese zehn Abschnitte, in dieser Reihenfolge. Die Struktur garantiert, dass jede Arbeitseinheit in sich geschlossen und prüfbar ist:
+Jede Aufgabendatei folgt den oben dargestellten zehn normativen Abschnitten in der vom installierten Skill definierten Reihenfolge.
 
 1. **Goal** — ein Absatz, der festhält, was die Aufgabe erreicht.
 2. **Context** — Hintergrund, Links und warum diese Aufgabe existiert.

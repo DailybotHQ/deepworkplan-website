@@ -15,7 +15,7 @@ Antigravity mendukung DWP melalui prosedur command markdown.
 
 ## Tingkat dukungan
 
-**Penuh** — setiap command dwp-* berjalan dari file prosedurnya melalui permukaan command native.
+**Penuh** (Teruji instalasi) — setiap perintah dwp-* dijalankan dari file prosedurnya. Rute dipastikan oleh rangkaian pengujian otomatis; alur kerja perilaku berjalan pada baseline sekuensial.
 
 ## Instalasi
 

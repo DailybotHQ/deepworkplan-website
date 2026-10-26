@@ -1,6 +1,6 @@
 ---
 title: Spring Boot
-description: "Spring Boot アプリケーション向けのオンボーディングプリセット。Maven と Gradle の違い、コントローラー、サービス、リポジトリ、テストランナーに関する推論の手がかりを備える。"
+description: "Spring Boot アプリケーション向けのオンボーディングプリセット。Maven と Gradle の違い、コントローラー、サービス、リポジトリ、テストランナーに関する推。"
 kind: preset
 lang: ja
 order: 9

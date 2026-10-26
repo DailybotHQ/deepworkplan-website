@@ -1,6 +1,6 @@
 ---
 title: Trạng thái kế hoạch
-description: "Lớp trạng thái kế hoạch có thể đọc bằng máy: manifest.json và state.json, bản ghi cổng, bản ghi kết quả là bộ nhớ theo sự kiện, điều hòa, và khi nào lớp này là bắt buộc."
+description: "Lớp trạng thái v5 (manifest.json, state.json, bản ghi cổng, điều hòa) và cách kế hoạch v6, v7 thay thế nó bằng một snapshot dẫn xuất từ nhật ký."
 order: 8
 lang: vi
 section: State
@@ -8,9 +8,16 @@ section: State
 
 # Trạng thái kế hoạch
 
-> **Phạm vi phiên bản:** Các phần bên dưới là lớp trạng thái v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 7.0.0, dùng hợp đồng v7, nhật ký chỉ ghi thêm và projection snapshot; kế hoạch v5 tiếp tục dùng các quy tắc `manifest.json` và `state.json` của tài liệu này.
+> **Phạm vi phiên bản:** Trang này đặc tả **lớp trạng thái v5**, mà các kế hoạch v5 giữ trong suốt vòng đời của chúng. Các kế hoạch được tạo bởi gói hiện tại (DWP 7.0.0, bản phát hành `v7.9.0`) dùng [lớp bản ghi](/spec/record-layer) thay thế. Trong một kế hoạch v6 hoặc v7, hợp đồng kết quả (`contract.json`) là thẩm quyền, nhật ký chỉ ghi thêm (`journal.ndjson`) là nguồn chân lý, và `state.json` là một **snapshot dẫn xuất** tuân theo [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Nó được tái tạo bởi `ledger.py project` và KHÔNG ĐƯỢC (MUST NOT) chỉnh sửa bằng tay.
 
-**Tiêu chuẩn hiện tại: v7 (DWP 7.0.0).** Các tài liệu bên dưới là nền tảng được giữ lại; v6 đã bổ sung hợp đồng, nhật ký chỉ ghi thêm, ngữ cảnh tác vụ, kiểm soát tài nguyên và quy tắc vòng đời, còn v7 giữ nguyên lớp bản ghi đó đồng thời bổ sung dấu đánh tác vụ `parallel_safe` tùy chọn, sự kiện nhật ký `delegation`, sổ đăng ký addon `.dwp/config.json` và các khả năng do addon cung cấp. Đọc [schema manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [schema hợp đồng](https://deepworkplan.com/schema/plan-contract/v7.json) và [schema snapshot trực tiếp](https://deepworkplan.com/schema/plan-snapshot/v6.json) (dùng chung với v6). Các kế hoạch v5 và v6 hiện có vẫn giữ quy tắc đã ghi. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## Lớp trạng thái nào áp dụng
+
+| Thế hệ kế hoạch | Nguồn chân lý | `state.json` | Schema |
+| --- | --- | --- | --- |
+| v5 (và các kế hoạch v1/v2 cũ hơn) | kế hoạch markdown, với lớp JSON này là phép chiếu của nó | được agent ghi tại các điểm giao thức bên dưới | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 và v2 vẫn hợp lệ cho các kế hoạch cũ hơn) |
+| v6 và v7 | hợp đồng cộng với nhật ký chỉ ghi thêm | một snapshot được chiếu từ nhật ký, không bao giờ ghi bằng tay | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (hoặc các bản tương đương v6) |
+
+Một kế hoạch không bao giờ đổi thế hệ một cách ngầm định: kế hoạch v5 giữ các quy tắc này, và việc chuyển một kế hoạch sang v6 là một lần di chuyển tường minh, có xem trước ([Lớp bản ghi](/spec/record-layer#coexistence-and-migration)). Nguồn chính thức: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả lớp trạng thái kế hoạch có thể đọc bằng máy của phương pháp luận Deep Work Plan, nay đã được căn chỉnh với phiên bản riêng của chuẩn DWP — việc đánh số lại không làm suy yếu bất kỳ yêu cầu hiện có nào. Bản sửa đổi này cũng ghi lại bộ cập nhật trạng thái được bảo vệ, việc công bố kế hoạch đã kiểm chứng, và các quy tắc về tính trung thực của bằng chứng mà một kế hoạch đã hoàn tất phải thỏa mãn (xem bên dưới). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
@@ -53,9 +60,9 @@ Cả hai tệp PHẢI được ghi nguyên tử: ghi vào một tệp tạm th�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ Cả hai tệp PHẢI được ghi nguyên tử: ghi vào một tệp tạm th�
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",

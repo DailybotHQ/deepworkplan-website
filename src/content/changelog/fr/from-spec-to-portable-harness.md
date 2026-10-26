@@ -1,6 +1,6 @@
 ---
 title: "DWP v1 : d'une boucle de plans à un harness portable"
-description: "Deep Work Plan passe d'une unique boucle de plans écrits à un kit d'adoption portable — confiance et provenance, prise en charge élargie des hôtes d'agents, et un vérificateur de conformité que tout dépôt peut exécuter."
+description: "Deep Work Plan v1 devient un kit d'adoption portable: traçabilité vérifiable, prise en charge élargie des agents et vérificateur de conformité."
 date: 2026-06-12
 version: "v1 · Fondations"
 kind: foundation

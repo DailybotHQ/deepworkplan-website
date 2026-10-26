@@ -15,7 +15,7 @@ Claude Code는 네이티브 슬래시 명령과 스킬을 통해 DWP를 **완전
 
 ## 지원 수준
 
-**완전** — 다섯 개의 DWP 명령 모두가 네이티브 Claude Code 슬래시 명령에 매핑됩니다.
+**완전 지원** (동작 검증됨) — DWP 하위 스킬 및 수명 주기 명령 전체 제품군이 기본 Claude Code 슬래시 명령에 매핑되며, 양방향 인계 벤치마크에서 입증되었습니다.
 
 ## 설치
 
@@ -24,7 +24,7 @@ DWP는 `.agents/skills/` 아래의 스킬로 제공됩니다(`.claude/` 심링�
 선택 사항: [coding-agents-kit](/kit/agentkit)로 이 CLI를 설치하고 `ak claude`로 실행할 수 있습니다. 공급업체의 공식 설치 프로그램도 똑같이 사용할 수 있습니다.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 

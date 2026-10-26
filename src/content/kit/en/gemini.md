@@ -15,7 +15,7 @@ Gemini supports DWP through markdown command procedures.
 
 ## Support level
 
-**Full** — every dwp-* command runs from its procedure file. Requires Gemini 2.5 Pro or newer for native WebFetch.
+**Full** (Install-tested) — every dwp-* command runs from its procedure file. Route asserted by automated test suites; behavioral workflows run on the sequential baseline. Requires tool execution and workspace file access.
 
 ## Installation
 

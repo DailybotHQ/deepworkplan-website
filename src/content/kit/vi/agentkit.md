@@ -10,7 +10,7 @@ order: 8
 
 Mỗi coding agent trên terminal đều có các cờ riêng để tiếp tục một phiên, cách riêng để tách biệt tài khoản thứ hai, chế độ headless riêng và công tắc riêng để bỏ qua các lời nhắc cấp quyền. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** đặt một bề mặt lệnh duy nhất lên tất cả chúng: `ak <kind> [@profile]`.
 
-Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.8.1`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
+Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.9.0`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
 
 ## Bộ kit mang lại cho bạn những gì
 
@@ -23,7 +23,7 @@ Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.8.1`) làm phương th
 
 ## Tài khoản, hạn mức và chọn tài khoản
 
-Bộ kit coi mỗi phiên đăng nhập hoặc khóa bạn nắm giữ là một **tài khoản**: một CLI × một hồ sơ. `@default` (hoặc `@1`) là home riêng của CLI; `@2`, `@work` hay `@client-x` là các phiên đăng nhập riêng, mỗi phiên trong thư mục riêng dưới thư mục gốc của hồ sơ, chạy song song. `ak profiles` liệt kê chúng cùng trạng thái đăng nhập và tên các khóa; `ak profiles --json` cung cấp cùng danh sách đó cho các công cụ (schema `profiles-v1`). Từ `v0.5.1`, lệnh này báo cáo token của Claude Code thực sự nằm ở đâu — `file`, `keychain` (macOS), `none` hoặc `unknown` — chỉ dựa trên sự hiện diện, không bao giờ đọc secret, và nhận diện được phiên đăng nhập Cursor trên Linux, trong container hoặc trên máy host Linux. Từ `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` chỉ định tài khoản mà lệnh `ak <cli>` không kèm tham số sử dụng (một `@profile` theo vị trí vẫn được ưu tiên), và đó là cách một dev container chọn tài khoản host mà nó dùng chung. Từ `v0.5.3`, `ak codex` thêm `--no-daemon` khi một home Codex dùng chung với máy khác ghi nhận một daemon chạy nền không có trên máy này.
+Kể từ `v1.0.1`, mọi profile — bao gồm cả `@default` — là một tài khoản độc lập trong thư mục riêng dưới thư mục gốc profile, ngăn rò rỉ trạng thái và xung đột chứng chỉ. `ak profiles` liệt kê chúng cùng trạng thái đăng nhập và tên các khóa; `ak profiles --json` cung cấp cùng danh sách đó cho các công cụ (schema `profiles-v1`). Từ `v0.5.1`, lệnh này báo cáo token của Claude Code thực sự nằm ở đâu — `file`, `keychain` (macOS), `none` hoặc `unknown` — chỉ dựa trên sự hiện diện, không bao giờ đọc secret, và nhận diện được phiên đăng nhập Cursor trên Linux, trong container hoặc trên máy host Linux. Từ `v0.5.2`, `AGENTKIT_DEFAULT_PROFILE_<CLI>` chỉ định tài khoản mà lệnh `ak <cli>` không kèm tham số sử dụng (một `@profile` theo vị trí vẫn được ưu tiên), và đó là cách một dev container chọn tài khoản host mà nó dùng chung. Từ `v0.5.3`, `ak codex` thêm `--no-daemon` khi một home Codex dùng chung với máy khác ghi nhận một daemon chạy nền không có trên máy này.
 
 `ak usage` (hoặc `ak status`) liệt kê mọi tài khoản của mọi CLI mà kit biết, mỗi tài khoản và hồ sơ một dòng, nằm dưới CLI của nó: hạn mức trực tiếp cho các gói đăng ký Claude Code (cửa sổ 5 giờ, hằng tuần và theo từng mô hình), các lần đăng nhập Codex qua ChatGPT, khóa của gói lập trình Z.AI và, từ `v0.7.0`, các lần đăng nhập Google của Antigravity trên Linux và trong container (cửa sổ năm giờ và hằng tuần của chính bảng `/usage` của agy). Tài khoản không đọc được hạn mức vẫn có dòng của mình: `n/d` kèm cách nó được kết nối và lý do — Cursor, Grok, xAI, Azure OpenAI, một khóa API Gemini, hoặc một lần đăng nhập Antigravity được lưu trong Keychain của macOS — hoặc `no login` kèm lệnh để đăng nhập, nên bảng cũng cho thấy những tài khoản nào của mỗi CLI đã được kết nối. Lệnh này chỉ đọc: không bao giờ làm mới phiên đăng nhập, không bao giờ in token và không bao giờ ghi vào bên trong một hồ sơ. `--json` cung cấp cùng danh sách đó cho các công cụ (schema `usage-v1`). Các endpoint sử dụng là nội bộ của nhà cung cấp và không chính thức.
 
@@ -65,15 +65,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.0.1`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.1.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.0.1`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.1.0`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |

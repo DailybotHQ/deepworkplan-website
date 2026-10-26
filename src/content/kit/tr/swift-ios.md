@@ -1,6 +1,6 @@
 ---
 title: Swift / iOS
-description: "Swift ve iOS projeleri için SwiftUI ya da UIKit, bağımlılık yöneticisi, XCTest, linting ve xcodebuild komutuna yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Swift ve iOS projeleri için SwiftUI ya da UIKit, bağımlılık yöneticisi, XCTest, linting ve xcodebuild komutuna yönelik akıl yürütme ipuçları içeren bir."
 kind: preset
 lang: tr
 order: 18

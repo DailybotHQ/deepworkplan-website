@@ -1,6 +1,6 @@
 ---
 title: OpenAI Codex
-description: "OpenAI Codex를 위한 DWP 어댑터로, Markdown 명령 절차와 전체 Deep Work Plan 루프를 실행하는 해시 명령 접두어를 통해 완전히 지원합니다."
+description: "OpenAI Codex를 위한 DWP 어댑터로, Markdown 명령 절차와 전체 Deep Work Plan 루프를 실행하는 해시 명령 접두어를 통해 완전히."
 kind: adapter
 lang: ko
 order: 3
@@ -15,7 +15,7 @@ Codex는 Markdown 명령 절차를 통해 DWP를 지원합니다.
 
 ## 지원 수준
 
-**완전** — 모든 dwp-* 명령이 절차 파일에서 실행됩니다.
+**완전 지원** (동작 검증됨) — 모든 dwp-* 명령은 프로시저 파일에서 실행되며, 모델 간 양방향 작성/재개 인계 벤치마크에서 입증되었습니다.
 
 ## 설치
 
@@ -24,7 +24,7 @@ DWP 명령은 에이전트가 호출 시 읽는 Markdown 절차로 존재합니�
 선택 사항: [coding-agents-kit](/kit/agentkit)로 이 CLI를 설치하고 `ak codex`로 실행할 수 있습니다. 공급업체의 공식 설치 프로그램도 똑같이 사용할 수 있습니다.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install codex
 ```
 

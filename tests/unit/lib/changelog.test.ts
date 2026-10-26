@@ -1,3 +1,6 @@
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { describe, expect, it } from 'vitest';
 
 import {
@@ -6,6 +9,7 @@ import {
   getFeaturedChangelogEntry,
   sortChangelogEntries,
 } from '@/lib/changelog';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 
 const entry = (
   id: string,
@@ -51,5 +55,19 @@ describe('changelog display helpers', () => {
     expect(getChangelogUrl('es', 'deep-work-plan-v3')).toBe(
       '/es/changelog/deep-work-plan-v3'
     );
+  });
+
+  it('ensures every v7 changelog locale names ECOSYSTEM_PINS.pack.tag as its installed release', () => {
+    // Labels are translated, so anchor on the bold version rather than the
+    // English phrase: every locale must state the pinned pack release.
+    const dir = join(process.cwd(), 'src/content/changelog');
+    const files = readdirSync(dir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => join(dir, entry.name, 'deep-work-plan-v7.md'));
+    expect(files.length).toBeGreaterThan(1);
+    const bold = `**${ECOSYSTEM_PINS.pack.tag.replace(/^v/, '')}**`;
+    for (const file of files) {
+      expect(readFileSync(file, 'utf-8'), file).toContain(bold);
+    }
   });
 });

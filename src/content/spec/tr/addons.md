@@ -31,7 +31,7 @@ Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme
 
 ### Devcontainer (birinci eklenti)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v1.0.1` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v1.1.1` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
 
 - **Kit sayfası:** [Devcontainer](/kit/devcontainer)
 - **Ne ekler:** çalışma zamanının digest ile sabitlenmiş resmi imajından üretilen `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` veya `debian`, paylaşılan temel imaj yok), `dck` başlatıcısı (`up`, `shell`, `rebuild`, `doctor`) üzerine kurulu `dev.sh`, opt-in bir katman olarak kodlama agent'ları, yalnızca loopback portları, içeride hiçbir anahtar olmadan (geliştirici host profilinde `[ssh] copy_keys` ile bunu açıkça seçmedikçe) host'un agent'ı üzerinden SSH ile git ve standart düzene sahip container başına Herdr makineleri
@@ -44,7 +44,7 @@ Agent ilerleme görünürlüğü için geliştiricinin **Dailybot ekibine** opt-
 
 - **Kit sayfası:** [Dailybot](/kit/dailybot) — tam yetenek referansı
 - **DWP eklentisinin bağladıkları:** dailybot `report` alt-skill'i ile dört plan yaşam döngüsü raporu (kickoff, significant task, blocked, completion); isteğe bağlı deterministik hook zorlaması (`dailybot hook`, CLI `>= 3.9.0`)
-- **Eşleşen skill:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) kurulumu (şu an **3.23.14**) **17 yetenek** sunar — Slack/Teams/Discord/Google Chat sohbeti, check-in'ler, form authoring, ask AI, kudos, Plan panoları ve görevleri, organizasyon etiketleri, depo başına API anahtarları (`.dailybot/env.json`), e-posta ve daha fazlası. DWP eklentisi yalnızca **report**'u bağlar; diğer yetenekler doğrudan Dailybot skill üzerinden çağrılır
+- **Eşleşen skill:** [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) kurulumu (sabitlenmiş **v3.23.20**) **17 yetenek** sunar — Slack/Teams/Discord/Google Chat sohbeti, check-in'ler, form authoring, ask AI, kudos, Plan panoları ve görevleri, organizasyon etiketleri, depo başına API anahtarları (`.dailybot/env.json`), e-posta ve daha fazlası. DWP eklentisi yalnızca **report**'u bağlar; diğer yetenekler doğrudan Dailybot skill üzerinden çağrılır
 - **Auth:** tamamen Dailybot skill'e ertelenmiş (`dailybot login` veya `DAILYBOT_API_KEY`); bu eklenti asla kimlik bilgisi saklamaz
 - **Vendor-neutral koruma:** temel DWP'nin Dailybot'a **sıfır** bağımlılığı vardır; herkes için otomatik kurmayın
 - **Ne zaman sunulur:** geliştirici veya ekip zaten Dailybot kullanıyor veya açıkça ekip raporlaması istiyor
@@ -72,7 +72,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (marketplace **"AI Diff Reviewer"**), zorunlu Final Review güvenlik incelemesine yapılandırılmış bir yerel inceleme kazandırır ve isteğe bağlı olarak CI'da pull request'leri kapı altına alır. 2.3.0 standardından itibaren **yerel inceleme temelin bir parçasıdır**; yalnızca CI yüzeyi isteğe bağlıdır. Bu eklenti her yayında otomatik olarak güncellenir; bu yüzden aşağıda gösterilen etiket yazım anındaki geçerli etikettir ve vendored edilmiş kopyanın gerisinde kalabilir — gerçekte kurulu olan etiket için eklentinin kendi `SKILL.md`'si ve GitHub sürümleri esastır. Kurulum her zaman yayımlanmış bir etikete sabitlenir, asla hareketli bir dala değil.
 
 - **Kit sayfası:** [AI Diff Reviewer](/kit/ai-diff-reviewer) — tam yetenek referansı
-- **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.14 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır
+- **Onboarding'de gerekli (Faz 7a):** vendored skill'in etikete sabitlenmiş kurulumu (`npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer -y`) artı depoya uyarlanmış bir `.review/extension.md` (`generate-extension` aracılığıyla), onboarding onayı altında; hedeflenmiş bir harness yükseltmesi her ikisini de eksik olduğunda uzlaştırır; bir reddediş, beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` tarafından raporlanır
 - **Her Final Review'da gerekli:** güvenlik incelemesi, upstream üst varsayılan akışını birikmiş değişiklik kümesi üzerinde çalıştırır ve çıktısını plana yerel `analysis_results/SECURITY_REVIEW.md` dosyasına (planın kendi klasörü içinde, asla depo kökünde değil) ekler; eksik bir skill veya uzantı, kaydedilmiş bir `local reviewer not installed` bulgusudur — asla sessiz bir atlama değildir ve asla sürpriz bir önyükleme değil: kurulum, onboarding onayına veya açık bir addon çağrısına aittir; tamamlanmış bir geçişten gelen **doğrulanmış kritik bulgular**, düzeltilene veya açıkça kabul edilene kadar tamamlanmayı bloke eder (v3, BC-07 — doğrulanmamış kritik iddialar ek açıklamalı uyarı olarak gelir ve bir `incomplete`/`timeout` incelemesi temiz bir geçiş değildir, BC-04)
 - **İsteğe bağlı CI yüzeyi (Flow B):** upstream `setup` alt-skill'i aracılığıyla `pr-review.yml` (`DailybotHQ/ai-diff-reviewer@v3`), artı geliştirici tarafından çağrılabilir kolaylıklar olarak `apply-review` (salt okunur) ve `address-review` (commit yapar, push eder ve yeniden kurar; v3.1.1'de yeni) — açıkça sunulur, istenmeden asla kurulmaz, asla varsayılan değildir, asla bir plan görevi değildir
 - **Asla bloke etmeme (yalnızca çağrı):** başlayabilen ama hata veren bir yerel inceleme bir kez uyarır, kaydedilir ve devam edilir; görevi asla başarısız kılmaz
@@ -82,7 +82,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 ### Herdr (altıncı eklenti)
 
-v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v1.0.0`, protokol `1`) için ince bir entegrasyon katmanı.
+v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v1.1.0`, protokol `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Herdr](/kit/herdr)
 - **Ne ekler:** bir plan, sınırlı bir görevi aynı makinede veya Herdr'ın SSH üzerinden ulaştığı bir makinede, başka bir [Herdr](https://herdr.dev) panelindeki bir kodlama agent'ına devredebilir ve onun tek yetkili yanıtını journal'a kaydedebilir
@@ -91,7 +91,7 @@ v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https:
 
 ### DeepWorkPlan Vim (yedinci eklenti)
 
-Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v1.0.0`, arayüz `1`) için ince bir entegrasyon katmanı.
+Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v1.0.1`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [DeepWorkPlan Vim](/kit/vim)
 - **Ne ekler:** agent'lar ve insanlar için isteğe bağlı, makine düzeyinde bir düzenleyici yüzeyi — üretilmiş bir komut dizini, salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi; her iddia ürünün sabitlenmiş, makine tarafından okunabilir yüzeyinden okunur
@@ -100,7 +100,7 @@ Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](
 
 ### Agentkit (sekizinci eklenti)
 
-v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v1.0.1`, arayüz `1`) için ince bir entegrasyon katmanı.
+v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v1.1.0`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Agentkit](/kit/agentkit)
 - **Ne ekler:** terminal kodlama agent'ları üzerinde tek bir `ak` komut yüzeyi; sınırlı bir plan görevini arayüzsüz çalıştırmak için kullanılır; `subagents`, `cancel_children` ve `model_routing` yeteneklerini yalnızca çalışma zamanında, etkinleştirildiğinde, tespit edildiğinde ve uyumlu bir arayüz üzerinde olduğunda sağlar
@@ -137,7 +137,7 @@ Adapter'lar DWP komutlarını belirli bir agent'ın komut sistemine eşler (Clau
 
 ## Örnekler
 
-Örnekler DWP'yi uygulamada gösterir: önce/sonra karşılaştırmaları, örnek planlar, vaka çalışmaları. [Examples](/examples) ve [Dogfood this site](/kit/dogfood-this-site)'e bakın.
+Örnekler DWP'yi uygulamada gösterir: önce/sonra karşılaştırmaları, örnek planlar, vaka çalışmaları. [Examples](/examples) ve [Dogfood this site](/examples/dogfood-this-site)'e bakın.
 
 ## Uyumluluk hatırlatması
 

@@ -15,7 +15,7 @@ Cursor, DWP’yi proje kuralları ve komut dosyaları aracılığıyla destekler
 
 ## Destek düzeyi
 
-**Tam** — DWP komutları Cursor’ın kurallar sistemi aracılığıyla çalışır.
+**Tam** (Kurulum testli) — DWP komutları Cursor'ın kural sistemi üzerinden çalışır. Dizin yolları otomatik test paketleriyle doğrulanmıştır; davranışsal iş akışları sıralı olarak yürütülür.
 
 ## Kurulum
 
@@ -24,7 +24,7 @@ DWP komutları, proje altında markdown olarak bulunur. Cursor bunları kurallar
 İsteğe bağlı: [coding-agents-kit](/kit/agentkit) bu CLI’yi kurabilir ve `ak cursor` ile başlatabilir. Sağlayıcının kendi resmi kurulum aracı da aynı şekilde çalışır.
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

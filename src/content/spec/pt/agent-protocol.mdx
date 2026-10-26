@@ -1,6 +1,6 @@
 ---
 title: Protocolo do agente
-description: "O contrato comportamental normativo para agentes de código de IA que trabalham com Deep Work Plans: onboarding, planejamento, execução, refinamento, retomada e segurança."
+description: "Contrato comportamental normativo para agentes de código de IA que trabalham com Deep Work Plans: onboarding, planejamento, execução, refinamento e segurança."
 order: 4
 lang: pt
 section: Protocol
@@ -32,7 +32,7 @@ Esta metodologia DEVE (MUST) suportar os seguintes agentes de código de IA. Qua
 | **OpenClaw** | Varre nativamente `<workspace>/.agents/skills/` (padrão AgentSkills) | texto simples |
 | **Hermes** | Carregamento de skill padrão AgentSkills; lê `AGENTS.md` | texto simples |
 
-Os primeiros seis são agentes de código interativos com um humano na sessão. OpenClaw e Hermes são **plataformas de agentes autônomos** — daemons de longa duração com turnos agendados — e tipicamente executam planos sob o perfil não supervisionado (veja [Perfis de execução](#execution-profiles)) dentro de um espaço de trabalho de agente (veja [Arquétipos](/spec/archetypes) §3).
+Os primeiros seis são agentes de código interativos com um humano na sessão. OpenClaw e Hermes são **plataformas de agentes autônomos** — daemons de longa duração com turnos agendados — e tipicamente executam planos sob o perfil não supervisionado (veja [Perfis de execução](#perfis-de-execução)) dentro de um espaço de trabalho de agente (veja [Arquétipos](/spec/archetypes) §3).
 
 Todo agente suportado DEVE (MUST) tratar o `AGENTS.md` como a única fonte de verdade para as convenções do repositório. Um arquivo de configuração por agente DEVE (MUST) referenciá-lo e NÃO DEVE (MUST NOT) duplicar seu conteúdo.
 

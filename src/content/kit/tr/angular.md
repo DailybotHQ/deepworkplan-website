@@ -1,6 +1,6 @@
 ---
 title: Angular
-description: "Angular projeleri için bileşenler, modüller veya bağımsız API'ler, servisler, RxJS ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir onboarding ön ayarı."
+description: "Angular projeleri için bileşenler, modüller veya bağımsız API'ler, servisler, RxJS ve test koşucusuna yönelik akıl yürütme ipuçları içeren bir onboarding ön."
 kind: preset
 lang: tr
 order: 15

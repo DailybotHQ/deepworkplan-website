@@ -1,6 +1,6 @@
 ---
 title: Status rencana
-description: "Lapisan status rencana yang dapat dibaca mesin: manifest.json dan state.json, catatan gate, catatan outcome sebagai memori episodik, rekonsiliasi, dan kapan lapisan ini diwajibkan."
+description: "Lapisan status rencana v5 (manifest.json, state.json, catatan gate, rekonsiliasi) dan bagaimana rencana v6 dan v7 menggantinya dengan snapshot turunan jurnal."
 order: 8
 lang: id
 section: State
@@ -8,9 +8,16 @@ section: State
 
 # Status rencana
 
-> **Cakupan versi:** Bagian-bagian di bawah adalah lapisan status v5.0.0 yang dipertahankan. Standar saat ini, DWP 7.0.0, menggunakan kontrak v7, jurnal append-only, dan proyeksi snapshot; rencana v5 tetap menggunakan aturan `manifest.json` dan `state.json` dari dokumen ini.
+> **Cakupan versi:** Halaman ini menetapkan **lapisan status v5**, yang dipertahankan rencana v5 sepanjang hidupnya. Rencana yang dibuat oleh paket saat ini (DWP 7.0.0, rilis `v7.9.0`) menggunakan [lapisan catatan](/spec/record-layer) sebagai gantinya. Dalam rencana v6 atau v7, kontrak hasil (`contract.json`) adalah otoritasnya, jurnal append-only (`journal.ndjson`) adalah sumber kebenarannya, dan `state.json` adalah **snapshot turunan** yang sesuai dengan [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Snapshot ini dibuat ulang oleh `ledger.py project` dan MUST NOT diedit secara manual.
 
-**Standar saat ini: v7 (DWP 7.0.0).** Dokumen di bawah adalah dasar yang dipertahankan; v6 menambahkan kontrak, jurnal khusus tambah, konteks per tugas, kontrol sumber daya, dan aturan siklus hidup, dan v7 mempertahankan lapisan catatan tersebut sambil menambahkan penanda tugas `parallel_safe` opsional, peristiwa jurnal `delegation`, registri addon `.dwp/config.json`, dan kemampuan yang disediakan addon. Baca [skema manifes v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [skema kontrak](https://deepworkplan.com/schema/plan-contract/v7.json), dan [skema snapshot aktif](https://deepworkplan.com/schema/plan-snapshot/v6.json) (digunakan bersama dengan v6). Rencana v5 dan v6 yang ada tetap memakai aturan aslinya. [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/V7_CONTRACT.md).
+## Lapisan status mana yang berlaku
+
+| Generasi rencana | Sumber kebenaran | `state.json` | Skema |
+| --- | --- | --- | --- |
+| v5 (dan rencana v1/v2 yang lebih lama) | rencana markdown, dengan lapisan JSON ini sebagai proyeksinya | ditulis oleh agent pada titik-titik protokol di bawah | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 dan v2 tetap valid untuk rencana lama) |
+| v6 dan v7 | kontrak ditambah jurnal append-only | snapshot yang diproyeksikan dari jurnal, tidak pernah ditulis secara manual | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (atau padanan v6-nya) |
+
+Sebuah rencana tidak pernah berganti generasi secara implisit: rencana v5 tetap memakai aturan ini, dan memindahkannya ke v6 adalah migrasi eksplisit yang dipratinjau terlebih dahulu ([Lapisan catatan](/spec/record-layer#coexistence-and-migration)). Sumber kanonis: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Versi 5.0.0. Status: Stabil.** Dokumen ini menetapkan lapisan status rencana yang dapat dibaca mesin dari metodologi Deep Work Plan, kini diselaraskan dengan versi standar DWP itu sendiri — tidak ada persyaratan yang ada dilemahkan oleh penomoran ulang ini. Revisi ini juga mendokumentasikan updater status yang dijaga, publikasi rencana yang terverifikasi, dan aturan kebenaran-bukti yang harus dipenuhi sebuah rencana yang selesai (lihat di bawah). Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
@@ -53,9 +60,9 @@ Kedua berkas MUST ditulis secara atomik: tulis ke berkas sementara di direktori 
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-manifest/v2.json",
-  "spec_version": "2.4.0",
-  "name": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-manifest/v5.json",
+  "spec_version": "5.0.0",
+  "name": "PLAN_001_payment_webhooks",
   "title": "Add payment webhook handling",
   "archetype": "individual",
   "rigor": "standard",
@@ -84,8 +91,8 @@ Kedua berkas MUST ditulis secara atomik: tulis ke berkas sementara di direktori 
 
 ```json
 {
-  "schema": "https://deepworkplan.com/schema/plan-state/v2.json",
-  "plan": "PLAN_payment_webhooks",
+  "schema": "https://deepworkplan.com/schema/plan-state/v5.json",
+  "plan": "PLAN_001_payment_webhooks",
   "updated_at": "2026-06-09T16:42:10Z",
   "updated_by": { "agent": "claude-code", "model": "claude-fable-5" },
   "status": "in_progress",

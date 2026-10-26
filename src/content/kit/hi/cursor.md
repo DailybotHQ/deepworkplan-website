@@ -1,6 +1,6 @@
 ---
 title: Cursor
-description: "Cursor AI के लिए DWP अडैप्टर, जो प्रोजेक्ट rules सिस्टम और हैश कमांड प्रीफ़िक्स के माध्यम से पूर्ण समर्थन देता है, क्योंकि Cursor स्वयं slash को आरक्षित रखता है।"
+description: "Cursor AI के लिए DWP अडैप्टर, जो प्रोजेक्ट rules सिस्टम और हैश कमांड प्रीफ़िक्स के माध्यम से पूर्ण समर्थन देता है, क्योंकि Cursor स्वयं slash को आरक्षित रखता."
 kind: adapter
 lang: hi
 order: 2
@@ -15,7 +15,7 @@ Cursor प्रोजेक्ट rules और कमांड फ़ाइल�
 
 ## समर्थन स्तर
 
-**पूर्ण** — DWP कमांड Cursor के rules सिस्टम के माध्यम से काम करते हैं।
+**पूर्ण** (स्थापना-परीक्षित) — DWP कमांड Cursor की नियम प्रणाली के माध्यम से काम करते हैं। निर्देशिका मार्गों को स्वचालित परीक्षण सुइट्स द्वारा सत्यापित किया गया है; व्यवहार वर्कफ़्लो क्रमिक रूप से निष्पादित होते हैं।
 
 ## इंस्टॉलेशन
 
@@ -24,7 +24,7 @@ DWP कमांड प्रोजेक्ट के अंतर्गत mar
 वैकल्पिक: [coding-agents-kit](/kit/agentkit) इस CLI को इंस्टॉल कर सकता है और `ak cursor` से चला सकता है। विक्रेता का अपना आधिकारिक इंस्टॉलर भी उतना ही अच्छा काम करता है।
 
 ```bash
-git clone --branch v1.0.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install cursor
 ```
 

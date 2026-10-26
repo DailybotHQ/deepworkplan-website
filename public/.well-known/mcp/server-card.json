@@ -16,7 +16,7 @@
     },
     {
       "name": "list_site_sections",
-      "description": "List the main sections of deepworkplan.com (methodology, specification, kit, examples, init, developers) with their paths.",
+      "description": "List the main sections of deepworkplan.com (methodology, specification, kit and its v7 addons, changelog, examples, init, developers) with their paths.",
       "annotations": {
         "readOnlyHint": true,
         "destructiveHint": false,
