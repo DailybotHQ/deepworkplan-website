@@ -42,7 +42,7 @@ Le sessioni effimere aggiungono eventi a `journal.ndjson` e proiettano `state.js
 
 Sulle piattaforme con scheduling cron, la continuazione segue lo stesso pattern delle altre piattaforme autonome: ogni turno pianificato si sveglia, esegue il Protocollo di Ripresa DWP, esegue al massimo un'attività, aggiorna `state.json` e cede il controllo. Il piano, non la sessione, è l'unità di continuità.
 
-Il livello di stato leggibile dalle macchine (`manifest.json` + `state.json`) è OBBLIGATORIO per l'esecuzione non presidiata. Vedi [Protocollo degli agenti](/spec/agent-protocol#profili-di-esecuzione) per il protocollo completo di stop condition ed escalation.
+Il livello di stato leggibile dalle macchine (`manifest.json` + `state.json`) è OBBLIGATORIO per l'esecuzione non presidiata. Vedi [Protocollo degli agenti](/it/spec/agent-protocol#profili-di-esecuzione) per il protocollo completo di stop condition ed escalation.
 
 ## Note
 

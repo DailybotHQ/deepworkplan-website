@@ -32,7 +32,7 @@ Esta metodología DEBE soportar los siguientes agentes de programación con IA. 
 | **OpenClaw** | Escanea nativamente `<workspace>/.agents/skills/` (estándar AgentSkills) | texto plano |
 | **Hermes** | Carga de skill mediante estándar AgentSkills; lee `AGENTS.md` | texto plano |
 
-Los primeros seis son agentes de programación interactivos con un ser humano en la sesión. OpenClaw y Hermes son **plataformas de agentes autónomos** — demonios de larga duración con turnos programados — y típicamente ejecutan planes bajo el perfil desatendido (véase [Perfiles de ejecución](#execution-profiles)) dentro de un espacio de trabajo de agente (véase [Arquetipos](/spec/archetypes) §3).
+Los primeros seis son agentes de programación interactivos con un ser humano en la sesión. OpenClaw y Hermes son **plataformas de agentes autónomos** — demonios de larga duración con turnos programados — y típicamente ejecutan planes bajo el perfil desatendido (véase [Perfiles de ejecución](#perfiles-de-ejecución)) dentro de un espacio de trabajo de agente (véase [Arquetipos](/spec/archetypes) §3).
 
 Todo agente compatible DEBE tratar `AGENTS.md` como la única fuente de verdad de las convenciones del repositorio. Un archivo de configuración por agente DEBE referenciarlo y NO DEBE duplicar su contenido.
 

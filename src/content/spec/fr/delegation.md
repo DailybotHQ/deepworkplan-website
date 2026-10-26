@@ -25,7 +25,7 @@ Les octets des schémas v1, v2, v5 et v6 sont inchangés. Un plan qui ne délèg
 
 `parallel_safe` (booléen, `false` par défaut) affirme qu'une tâche peut s'exécuter dans un délégué sans s'entremêler avec le travail des tâches sœurs. Il est défini par `create`, jamais déduit pendant l'exécution, et seulement lorsque toutes ces conditions sont réunies :
 
-- le dépôt active un addon de délégation (agentkit ou Herdr) dans son [registre d'addons](/spec/resources-and-abilities#the-configuration-file-and-addon-registry) ;
+- le dépôt active un addon de délégation (agentkit ou Herdr) dans son [registre d'addons](/fr/spec/resources-and-abilities#le-fichier-de-configuration-et-le-registre-daddons) ;
 - la surface touchée de la tâche ne recoupe pas celle d'une tâche sœur susceptible d'être en cours au même moment ;
 - la tâche déclare une sortie bornée ;
 - les portes de la tâche s'exécutent dans ce plan.
@@ -73,7 +73,7 @@ Une délégation ne porte ni étiquette de confiance ni chemin de preuve, et auc
 3. la tâche existe, a démarré et n'est pas achevée ;
 4. la tâche est `parallel_safe`, **ou** le délégué est en lecture seule (sans worktree) ;
 5. le descripteur de l'addon nommé déclare le transport demandé ;
-6. les capacités effectives listent cet addon comme source de `subagents` ([Ressources et capacités](/spec/resources-and-abilities#addon-provided-abilities)).
+6. les capacités effectives listent cet addon comme source de `subagents` ([Ressources et capacités](/fr/spec/resources-and-abilities#capacités-fournies-par-les-addons)).
 
 `collect` et `cancel` MUST être refusés pour une délégation inconnue, une délégation d'une autre tâche ou une délégation déjà terminale. Un lancement refusé n'est pas un blocage : la tâche s'exécute séquentiellement.
 

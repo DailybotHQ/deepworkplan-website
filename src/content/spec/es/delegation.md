@@ -25,7 +25,7 @@ Los bytes de los esquemas v1, v2, v5 y v6 no cambian. Un plan que nunca delega e
 
 `parallel_safe` (booleano, `false` por defecto) afirma que una tarea puede ejecutarse en un delegado sin intercalarse con el trabajo de sus tareas hermanas. Lo fija `create`, nunca se infiere durante la ejecución, y solo cuando se cumple todo lo siguiente:
 
-- el repositorio habilita un addon de delegación (agentkit o Herdr) en su [registro de addons](/spec/resources-and-abilities#the-configuration-file-and-addon-registry);
+- el repositorio habilita un addon de delegación (agentkit o Herdr) en su [registro de addons](/es/spec/resources-and-abilities#el-archivo-de-configuración-y-el-registro-de-addons);
 - la superficie tocada de la tarea no se solapa con la de una tarea hermana que pueda estar en curso al mismo tiempo;
 - la tarea declara una salida acotada;
 - las puertas de la tarea se ejecutan en este plan.
@@ -73,7 +73,7 @@ Una delegación no lleva etiqueta de confianza ni ruta de evidencia, y ningún c
 3. la tarea existe, se ha iniciado y no está completa;
 4. la tarea es `parallel_safe`, **o** el delegado es de solo lectura (sin worktree);
 5. el descriptor del addon nombrado declara el transporte solicitado;
-6. las capacidades efectivas listan ese addon como fuente de `subagents` ([Recursos y capacidades](/spec/resources-and-abilities#addon-provided-abilities)).
+6. las capacidades efectivas listan ese addon como fuente de `subagents` ([Recursos y capacidades](/es/spec/resources-and-abilities#capacidades-aportadas-por-addons)).
 
 `collect` y `cancel` DEBEN rechazarse para una delegación desconocida, una de otra tarea o una que ya sea terminal. Un lanzamiento rechazado no es un bloqueo: la tarea se ejecuta de forma secuencial.
 

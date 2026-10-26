@@ -25,7 +25,7 @@ v1, v2, v5, v6 스키마의 바이트는 변경되지 않습니다. 위임하지
 
 `parallel_safe`(불리언, 기본값 `false`)는 작업이 형제 작업과 뒤섞이지 않고 위임 대상(delegate)에서 실행될 수 있다는 주장입니다. 이 값은 실행 중에 추론되는 일 없이 `create`가 설정하며, 다음 조건이 모두 충족될 때만 설정됩니다:
 
-- 리포지토리가 [애드온 레지스트리](/spec/resources-and-abilities#the-configuration-file-and-addon-registry)에서 위임 애드온(agentkit 또는 Herdr)을 활성화했습니다.
+- 리포지토리가 [애드온 레지스트리](/ko/spec/resources-and-abilities#구성-파일과-애드온-레지스트리)에서 위임 애드온(agentkit 또는 Herdr)을 활성화했습니다.
 - 작업의 변경 표면이 동시에 진행 중일 수 있는 형제 작업과 겹치지 않습니다.
 - 작업이 한정된 출력을 선언합니다.
 - 작업의 게이트가 이 계획 안에서 실행됩니다.
@@ -73,7 +73,7 @@ v1, v2, v5, v6 스키마의 바이트는 변경되지 않습니다. 위임하지
 3. 작업이 존재하고, 시작되었으며, 완료되지 않았습니다.
 4. 작업이 `parallel_safe`이거나, **또는** 위임 대상이 읽기 전용(워크트리 없음)입니다.
 5. 명명된 애드온의 디스크립터가 요청된 전송 방식을 선언합니다.
-6. 유효 능력이 해당 애드온을 `subagents`의 출처로 나열합니다([리소스와 능력](/spec/resources-and-abilities#addon-provided-abilities)).
+6. 유효 능력이 해당 애드온을 `subagents`의 출처로 나열합니다([리소스와 능력](/ko/spec/resources-and-abilities#애드온이-제공하는-능력)).
 
 `collect`와 `cancel`은 알 수 없는 위임, 다른 작업의 위임, 또는 이미 종단 상태인 위임에 대해 거부되어야(MUST) 합니다. 거부된 시작은 차단 요인이 아닙니다: 작업은 순차적으로 실행됩니다.
 

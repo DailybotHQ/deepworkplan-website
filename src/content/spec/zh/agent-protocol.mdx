@@ -32,7 +32,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 | **OpenClaw** | 原生扫描 `<workspace>/.agents/skills/`（AgentSkills 标准） | 纯文本 |
 | **Hermes** | AgentSkills 标准技能加载；读取 `AGENTS.md` | 纯文本 |
 
-前六个是有人类参与会话的交互式编码代理。OpenClaw 与 Hermes 是**自主代理平台**——具有计划轮次的长期守护进程——通常在代理工作区内以无人值守配置文件执行计划（参见[执行配置文件](#execution-profiles)）（参见 [原型](/spec/archetypes) §3）。
+前六个是有人类参与会话的交互式编码代理。OpenClaw 与 Hermes 是**自主代理平台**——具有计划轮次的长期守护进程——通常在代理工作区内以无人值守配置文件执行计划（参见[执行配置文件](#执行配置文件)）（参见 [原型](/spec/archetypes) §3）。
 
 每个受支持的代理 MUST 将 `AGENTS.md` 视为代码仓库约定的单一事实来源。每个代理的配置文件 MUST 引用它，MUST NOT 复制其内容。
 

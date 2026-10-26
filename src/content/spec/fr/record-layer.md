@@ -92,7 +92,7 @@ Un changement de périmètre, de critères d'acceptation, de permissions ou d'en
 
 ## Surfaces en lecture seule et reprise
 
-`status` et `verify` n'écrivent jamais dans un plan de la lignée v6 ; ils rendent compte au moyen de commandes pures et des projections générées. Un hôte qui reprend récupère dans un ordre fixe (inspecter, valider, projeter, rendre avec une autorité consignée) et traite une empreinte périmée comme une preuve invalidée à réexécuter, jamais comme un résultat réutilisable. Le journal n'est jamais rejoué comme contexte de conversation : le travail reprend par la boucle d'exécution avec un [manifeste de contexte](/spec/resources-and-abilities#the-per-task-context-manifest) par tâche.
+`status` et `verify` n'écrivent jamais dans un plan de la lignée v6 ; ils rendent compte au moyen de commandes pures et des projections générées. Un hôte qui reprend récupère dans un ordre fixe (inspecter, valider, projeter, rendre avec une autorité consignée) et traite une empreinte périmée comme une preuve invalidée à réexécuter, jamais comme un résultat réutilisable. Le journal n'est jamais rejoué comme contexte de conversation : le travail reprend par la boucle d'exécution avec un [manifeste de contexte](/fr/spec/resources-and-abilities#le-manifeste-de-contexte-par-tâche) par tâche.
 
 ## Coexistence et migration
 

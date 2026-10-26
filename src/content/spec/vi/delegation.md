@@ -25,7 +25,7 @@ Các byte schema v1, v2, v5 và v6 không thay đổi. Một kế hoạch không
 
 `parallel_safe` (boolean, mặc định `false`) khẳng định rằng một tác vụ có thể chạy trong một delegate mà không đan xen với công việc của các tác vụ anh em. Nó được đặt bởi `create`, không bao giờ được suy ra trong lúc thực thi, và chỉ khi tất cả các điều sau đều đúng:
 
-- repository bật một addon ủy quyền (agentkit hoặc Herdr) trong [registry addon](/spec/resources-and-abilities#the-configuration-file-and-addon-registry) của nó;
+- repository bật một addon ủy quyền (agentkit hoặc Herdr) trong [registry addon](/vi/spec/resources-and-abilities#tệp-cấu-hình-và-registry-addon) của nó;
 - bề mặt bị chạm tới của tác vụ không chồng lấn với một tác vụ anh em có thể đang chạy cùng lúc;
 - tác vụ khai báo một đầu ra có giới hạn;
 - các cổng của tác vụ chạy trong kế hoạch này.
@@ -73,7 +73,7 @@ Một lần ủy quyền không mang nhãn tin cậy và đường dẫn bằng 
 3. tác vụ tồn tại, đã bắt đầu và chưa hoàn tất;
 4. tác vụ là `parallel_safe`, **hoặc** delegate là chỉ đọc (không có worktree);
 5. bộ mô tả của addon được nêu tên khai báo phương thức truyền được yêu cầu;
-6. các khả năng hiệu lực liệt kê addon đó là một nguồn của `subagents` ([Tài nguyên và khả năng](/spec/resources-and-abilities#addon-provided-abilities)).
+6. các khả năng hiệu lực liệt kê addon đó là một nguồn của `subagents` ([Tài nguyên và khả năng](/vi/spec/resources-and-abilities#khả-năng-do-addon-cung-cấp)).
 
 `collect` và `cancel` PHẢI (MUST) bị từ chối đối với một lần ủy quyền không xác định, một lần ủy quyền của tác vụ khác, hoặc một lần ủy quyền đã ở trạng thái kết thúc. Một lần khởi chạy bị từ chối không phải là một trở ngại: tác vụ chạy tuần tự.
 

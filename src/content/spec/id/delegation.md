@@ -25,7 +25,7 @@ Byte skema v1, v2, v5, dan v6 tidak berubah. Rencana yang tidak pernah mendelega
 
 `parallel_safe` (boolean, default `false`) menyatakan bahwa sebuah tugas dapat dijalankan dalam sebuah delegasi tanpa saling bersilangan dengan pekerjaan saudaranya. Bidang ini ditetapkan oleh `create`, tidak pernah disimpulkan selama eksekusi, dan hanya ketika semua kondisi ini terpenuhi:
 
-- repositori mengaktifkan addon delegasi (agentkit atau Herdr) di [registri addon](/spec/resources-and-abilities#the-configuration-file-and-addon-registry)-nya;
+- repositori mengaktifkan addon delegasi (agentkit atau Herdr) di [registri addon](/id/spec/resources-and-abilities#berkas-konfigurasi-dan-registri-addon)-nya;
 - touched surface tugas tidak tumpang tindih dengan tugas saudara yang dapat sedang berjalan pada saat yang sama;
 - tugas mendeklarasikan keluaran yang terbatas;
 - gate tugas dijalankan di dalam rencana ini.
@@ -73,7 +73,7 @@ Delegasi tidak membawa label trust dan tidak membawa path bukti, dan tidak ada p
 3. tugas ada, sudah dimulai, dan belum selesai;
 4. tugas berstatus `parallel_safe`, **atau** delegasi bersifat hanya-baca (tanpa worktree);
 5. deskriptor addon yang disebut mendeklarasikan transport yang diminta;
-6. kemampuan efektif mencantumkan addon tersebut sebagai sumber `subagents` ([Sumber daya dan kemampuan](/spec/resources-and-abilities#addon-provided-abilities)).
+6. kemampuan efektif mencantumkan addon tersebut sebagai sumber `subagents` ([Sumber daya dan kemampuan](/id/spec/resources-and-abilities#kemampuan-yang-disediakan-addon)).
 
 `collect` dan `cancel` MUST ditolak untuk delegasi yang tidak dikenal, delegasi milik tugas lain, atau delegasi yang sudah terminal. Peluncuran yang ditolak bukanlah blocker: tugas dijalankan secara berurutan.
 

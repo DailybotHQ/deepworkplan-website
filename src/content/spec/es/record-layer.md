@@ -92,7 +92,7 @@ Un cambio de alcance, criterios de aceptación, permisos o envolvente es una **e
 
 ## Superficies de solo lectura y reanudación
 
-`status` y `verify` nunca escriben en un plan de la línea v6; reportan mediante comandos puros y las proyecciones generadas. Un host que reanuda se recupera en un orden fijo (inspeccionar, validar, proyectar, renderizar con autoridad registrada) y trata una huella obsoleta como evidencia invalidada que debe volver a ejecutarse, nunca como un resultado reutilizable. El diario nunca se reproduce como contexto de conversación: el trabajo se reanuda mediante el ciclo de ejecución con un [manifiesto de contexto](/spec/resources-and-abilities#the-per-task-context-manifest) por tarea.
+`status` y `verify` nunca escriben en un plan de la línea v6; reportan mediante comandos puros y las proyecciones generadas. Un host que reanuda se recupera en un orden fijo (inspeccionar, validar, proyectar, renderizar con autoridad registrada) y trata una huella obsoleta como evidencia invalidada que debe volver a ejecutarse, nunca como un resultado reutilizable. El diario nunca se reproduce como contexto de conversación: el trabajo se reanuda mediante el ciclo de ejecución con un [manifiesto de contexto](/es/spec/resources-and-abilities#el-manifiesto-de-contexto-por-tarea) por tarea.
 
 ## Coexistencia y migración
 

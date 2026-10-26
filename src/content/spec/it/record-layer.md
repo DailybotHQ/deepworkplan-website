@@ -92,7 +92,7 @@ Una modifica ad ambito, criteri di accettazione, permessi o envelope è un **eme
 
 ## Superfici di sola lettura e ripresa
 
-`status` e `verify` non scrivono mai su un piano della linea v6; riferiscono tramite comandi puri e le proiezioni generate. Un host che riprende recupera in un ordine fisso (ispezionare, validare, proiettare, eseguire il rendering con l'autorità registrata) e tratta un'impronta obsoleta come evidenza invalidata da rieseguire, mai come risultato riutilizzabile. Il journal non viene mai riprodotto come contesto di conversazione: il lavoro riprende attraverso il ciclo di execute con un [manifest di contesto](/spec/resources-and-abilities#il-manifest-di-contesto-per-attività) per attività.
+`status` e `verify` non scrivono mai su un piano della linea v6; riferiscono tramite comandi puri e le proiezioni generate. Un host che riprende recupera in un ordine fisso (ispezionare, validare, proiettare, eseguire il rendering con l'autorità registrata) e tratta un'impronta obsoleta come evidenza invalidata da rieseguire, mai come risultato riutilizzabile. Il journal non viene mai riprodotto come contesto di conversazione: il lavoro riprende attraverso il ciclo di execute con un [manifest di contesto](/it/spec/resources-and-abilities#il-manifest-di-contesto-per-attività) per attività.
 
 ## Coesistenza e migrazione
 

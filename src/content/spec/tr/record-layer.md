@@ -92,7 +92,7 @@ Kapsamda, kabul kriterlerinde, izinlerde veya zarfta yapılan bir değişiklik b
 
 ## Salt okunur yüzeyler ve sürdürme
 
-`status` ve `verify` bir v6 hattı plana asla yazmaz; saf komutlar ve üretilen projeksiyonlar aracılığıyla raporlar. Sürdüren bir ana makine sabit bir sırayla toparlanır (incele, doğrula, yansıt, kaydedilmiş otoriteyle üret) ve eski bir parmak izini yeniden kullanılabilir bir sonuç olarak değil, yeniden çalıştırılacak geçersiz kanıt olarak ele alır. Günlük asla konuşma bağlamı olarak yeniden oynatılmaz: iş, görev başına bir [bağlam manifestosu](/spec/resources-and-abilities#the-per-task-context-manifest) ile yürütme döngüsü üzerinden sürer.
+`status` ve `verify` bir v6 hattı plana asla yazmaz; saf komutlar ve üretilen projeksiyonlar aracılığıyla raporlar. Sürdüren bir ana makine sabit bir sırayla toparlanır (incele, doğrula, yansıt, kaydedilmiş otoriteyle üret) ve eski bir parmak izini yeniden kullanılabilir bir sonuç olarak değil, yeniden çalıştırılacak geçersiz kanıt olarak ele alır. Günlük asla konuşma bağlamı olarak yeniden oynatılmaz: iş, görev başına bir [bağlam manifestosu](/tr/spec/resources-and-abilities#görev-başına-bağlam-manifestosu) ile yürütme döngüsü üzerinden sürer.
 
 ## Bir arada bulunma ve göç
 

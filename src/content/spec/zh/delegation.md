@@ -25,7 +25,7 @@ v1、v2、v5 与 v6 的模式字节保持不变。一份从不委派的计划，
 
 `parallel_safe`（布尔值，默认 `false`）断言一项任务可以在委派代理中运行，而不会与同级工作交错。它由 `create` 设定，绝不在执行期间推断，并且只在以下条件全部成立时设定：
 
-- 仓库在其[附加组件注册表](/spec/resources-and-abilities#the-configuration-file-and-addon-registry)中启用了一个委派附加组件（agentkit 或 Herdr）；
+- 仓库在其[附加组件注册表](/zh/spec/resources-and-abilities#配置文件与附加组件注册表)中启用了一个委派附加组件（agentkit 或 Herdr）；
 - 该任务的触及面与可能同时进行的同级任务没有重叠；
 - 该任务声明了有界的输出；
 - 该任务的关卡在本计划中运行。
@@ -73,7 +73,7 @@ v1、v2、v5 与 v6 的模式字节保持不变。一份从不委派的计划，
 3. 该任务存在、已经开始且尚未完成；
 4. 该任务是 `parallel_safe`，**或者**委派代理是只读的（没有工作树）；
 5. 所指定附加组件的描述符声明了所请求的传输方式；
-6. 有效能力将该附加组件列为 `subagents` 的来源（[资源与能力](/spec/resources-and-abilities#addon-provided-abilities)）。
+6. 有效能力将该附加组件列为 `subagents` 的来源（[资源与能力](/zh/spec/resources-and-abilities#附加组件提供的能力)）。
 
 对于未知的委派、属于另一项任务的委派或已处于终止状态的委派，`collect` 与 `cancel` MUST 被拒绝。被拒绝的启动不是阻塞：该任务按顺序运行。
 
