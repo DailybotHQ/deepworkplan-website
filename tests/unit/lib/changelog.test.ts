@@ -1,4 +1,4 @@
-import { readFileSync } from 'node:fs';
+import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
@@ -57,17 +57,17 @@ describe('changelog display helpers', () => {
     );
   });
 
-  it('ensures the v7 changelog installed release matches ECOSYSTEM_PINS.pack.tag', () => {
-    const v7Content = readFileSync(
-      join(process.cwd(), 'src/content/changelog/en/deep-work-plan-v7.md'),
-      'utf-8'
-    );
-    const match = v7Content.match(/Installed skill release:\s*\*\*([^*]+)\*\*/);
-    expect(match).not.toBeNull();
-    const rawVersion = match?.[1]?.trim() ?? '';
-    const installedTag = rawVersion.startsWith('v')
-      ? rawVersion
-      : `v${rawVersion}`;
-    expect(installedTag).toBe(ECOSYSTEM_PINS.pack.tag);
+  it('ensures every v7 changelog locale names ECOSYSTEM_PINS.pack.tag as its installed release', () => {
+    // Labels are translated, so anchor on the bold version rather than the
+    // English phrase: every locale must state the pinned pack release.
+    const dir = join(process.cwd(), 'src/content/changelog');
+    const files = readdirSync(dir, { withFileTypes: true })
+      .filter((entry) => entry.isDirectory())
+      .map((entry) => join(dir, entry.name, 'deep-work-plan-v7.md'));
+    expect(files.length).toBeGreaterThan(1);
+    const bold = `**${ECOSYSTEM_PINS.pack.tag.replace(/^v/, '')}**`;
+    for (const file of files) {
+      expect(readFileSync(file, 'utf-8'), file).toContain(bold);
+    }
   });
 });

@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 mempertahankan metode v6: kontrak adalah otoritas, jurnal append-only adalah memori, penjadwal menentukan apa yang berjalan berikutnya, dan sebuah tugas baru ditutup ketika bukti yang tercatat memenuhi kriterianya. v7 menambahkan kemampuan mendelegasikan dan menjaga disiplin yang sama terhadap hasilnya.
@@ -39,5 +41,7 @@ Rilis 7.6.0 (2026-10-11) memperkenalkan orkestrasi berskala besar: satu jalur (l
 Rilis 7.7.0 (2026-10-12) menghadirkan otonomi swarm (Panduan §17): loop kapasitas (`shared/swarm.py`), paket serah terima (`dwp-handoff-v1`), suksesi lead dengan epoch dan fencing, permintaan antar-jalur, taksonomi eskalasi AGENT_PROTOCOL §7.5 (C1–C7: putuskan dan catat hal lainnya), standar kualitas (gerbang adalah hipotesis, diverifikasi bukan sekadar diklaim), dan pembelajaran metodologi dari 313 rencana yang dijalankan di 23 repositori. Batasan yang diketahui: jurnal v7 tidak memiliki event khusus untuk serah terima jalur atau suksesi lead (keduanya dicatat sebagai delegasi yang dibatalkan ditambah sebuah pengamatan).
 
 Rilis 7.8.0 (2026-10-13) menetapkan Ecosystem 1.0: setiap produk yang diintegrasikan paket mencapai rilis stabil pertamanya dan disematkan pada v1.0.0 sesuai penomoran versi semantik (coding-agents-kit, herdr-peers, devcontainer-kit, dan deepworkplan-vim, masing-masing dengan digest `SHA256SUMS` terverifikasi), bersama sematan AI Diff Reviewer v3.3.14 dan Dailybot agent-skill v3.23.17; kemudian 7.8.1 (2026-10-14) menyematkan rilis patch v1.0.1 dari coding-agents-kit dan devcontainer-kit.
+
+Rilis 7.9.0 (2026-10-25) mematok addon Herdr ke herdr-peers v1.1.0, yang sub-skill debat bawaannya memungkinkan lead menjalankan panel peer melalui beberapa putaran dan menutupnya dengan catatan keputusan, serta mematok AI Diff Reviewer di v3.3.16; CI paket kini menjalankan job batas minimum Python 3.9 di ubuntu-24.04.
 
 Rilis skill yang dipasang: **7.9.0**, stabil sejak 7.0.0.

@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 conserva el método de v6: el contrato es la autoridad, el diario de solo anexado es la memoria, el planificador decide qué se ejecuta a continuación y una tarea solo se cierra cuando la evidencia registrada cumple sus criterios. v7 añade la capacidad de delegar y mantiene la misma disciplina sobre el resultado.
@@ -39,5 +41,7 @@ La versión 7.6.0 (2026-10-11) introdujo la orquestación a escala: un carril po
 La versión 7.7.0 (2026-10-12) entregó la autonomía de enjambre (Guía §17): el bucle de capacidad (`shared/swarm.py`), paquetes de traspaso (`dwp-handoff-v1`), sucesión de líderes con épocas y aislamiento, peticiones entre carriles, la taxonomía de escalado de AGENT_PROTOCOL §7.5 (C1–C7: decidir y registrar todo lo demás), el listón de calidad (las puertas son hipótesis, verificadas no afirmadas) y los aprendizajes metodológicos de 313 planes ejecutados en 23 repositorios. Límite conocido: el diario v7 no tiene un evento dedicado para el traspaso de un carril ni para la sucesión de un líder (se registran como una delegación cancelada más una observación).
 
 La versión 7.8.0 (2026-10-13) estableció Ecosystem 1.0: cada producto que integra el paquete alcanzó su primera versión estable y queda fijado en v1.0.0 bajo versionado semántico (coding-agents-kit, herdr-peers, devcontainer-kit y deepworkplan-vim, cada uno con un resumen `SHA256SUMS` verificado), junto con las versiones fijadas de AI Diff Reviewer v3.3.14 y Dailybot agent-skill v3.23.17; después, 7.8.1 (2026-10-14) fijó las versiones de parche v1.0.1 de coding-agents-kit y devcontainer-kit.
+
+La versión 7.9.0 (2026-10-25) fija el addon de Herdr en herdr-peers v1.1.0, cuya sub-skill nativa de debate permite que un líder conduzca un panel de pares a lo largo de rondas y cierre con un registro de decisión, y fija el AI Diff Reviewer en v3.3.16; la CI del paquete ejecuta ahora su trabajo con el mínimo de Python 3.9 en ubuntu-24.04.
 
 Versión del skill instalada: **7.9.0**, estable desde 7.0.0.

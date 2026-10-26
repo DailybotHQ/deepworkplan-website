@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7, v6 yöntemini korur: sözleşme otoritedir, yalnızca eklemeli günlük bellektir, zamanlayıcı sıradaki işin ne olacağına karar verir ve bir görev ancak kaydedilmiş kanıt ölçütlerini karşıladığında kapanır. v7 görev devretme yeteneğini ekler ve sonuç etrafında aynı disiplini sürdürür.
@@ -39,5 +41,7 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 7.7.0 sürümü (2026-10-12) sürü özerkliğini sundu (Kılavuz §17): kapasite döngüsü (`shared/swarm.py`), devir paketleri (`dwp-handoff-v1`), dönemler ve yalıtımla lider ardıllığı, kulvarlar arası talepler, AGENT_PROTOCOL §7.5 yükseltme sınıflandırması (C1–C7: diğer her şeye karar verin ve kaydedin), kalite çıtası (geçitler hipotezdir, iddia edilmez, doğrulanır) ve 23 depoda yürütülen 313 plandan çıkarılan metodolojik öğrenimler. Bilinen sınır: v7 günlüğünde kulvar devri veya lider ardıllığı için özel bir olay yoktur (bunlar iptal edilen bir delegasyon artı bir gözlem olarak kaydedilir).
 
 7.8.0 sürümü (2026-10-13) Ecosystem 1.0'ı tesis etti: paketin entegre ettiği her ürün ilk kararlı sürümüne ulaştı ve anlamsal sürümleme kapsamında v1.0.0'a sabitlendi (coding-agents-kit, herdr-peers, devcontainer-kit ve deepworkplan-vim; her biri doğrulanmış bir `SHA256SUMS` özetiyle), AI Diff Reviewer v3.3.14 ve Dailybot agent-skill v3.23.17 sabitlemeleriyle birlikte; ardından 7.8.1 (2026-10-14) coding-agents-kit ve devcontainer-kit'in v1.0.1 yama sürümlerini sabitledi.
+
+7.9.0 sürümü (2026-10-25), Herdr eklentisini herdr-peers v1.1.0'a sabitler; bu sürümün yerel tartışma alt becerisi, bir liderin eşlerden oluşan bir paneli turlar boyunca yönetmesini ve bir karar kaydıyla kapatmasını sağlar. AI Diff Reviewer ise v3.3.16'ya sabitlenir; paketin CI'ı artık Python 3.9 alt sınır işini ubuntu-24.04 üzerinde çalıştırır.
 
 Yüklü skill sürümü: **7.9.0**, 7.0.0'dan beri kararlı.

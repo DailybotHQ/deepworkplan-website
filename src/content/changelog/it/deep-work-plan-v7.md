@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 mantiene il metodo di v6: il contratto è l'autorità, il registro append-only è la memoria, lo scheduler decide cosa eseguire dopo e un'attività si chiude solo quando le evidenze registrate soddisfano i suoi criteri. v7 aggiunge la possibilità di delegare e mantiene la stessa disciplina sul risultato.
@@ -39,5 +41,7 @@ La versione 7.6.0 (2026-10-11) ha introdotto l'orchestrazione su larga scala: un
 La versione 7.7.0 (2026-10-12) ha introdotto l'autonomia dello sciame (Guida §17): il ciclo di capacità (`shared/swarm.py`), pacchetti di passaggio consegne (`dwp-handoff-v1`), successione dei lead con epoche e isolamento, richieste tra corsie, la tassonomia di escalation di AGENT_PROTOCOL §7.5 (C1–C7: decidere e registrare tutto il resto), il livello di qualità (i gate sono ipotesi, verificati non asseriti) e gli apprendimenti metodologici derivanti da 313 piani eseguiti su 23 repository. Limite noto: il registro v7 non dispone di un evento dedicato per il passaggio di consegne di una corsia o la successione di un lead (vengono registrati come una delega annullata più un'osservazione).
 
 La versione 7.8.0 (2026-10-13) ha stabilito Ecosystem 1.0: ogni prodotto integrato dal pacchetto ha raggiunto la prima versione stabile ed è fissato a v1.0.0 secondo il versionamento semantico (coding-agents-kit, herdr-peers, devcontainer-kit e deepworkplan-vim, ciascuno con un digest `SHA256SUMS` verificato), insieme alle versioni fissate AI Diff Reviewer v3.3.14 e Dailybot agent-skill v3.23.17; la 7.8.1 (2026-10-14) ha poi fissato le patch v1.0.1 di coding-agents-kit e devcontainer-kit.
+
+La versione 7.9.0 (2026-10-25) fissa l’addon Herdr a herdr-peers v1.1.0, la cui sub-skill nativa di dibattito permette a un lead di guidare un panel di peer attraverso una serie di round e di chiudere con un registro della decisione, e fissa l’AI Diff Reviewer a v3.3.16; la CI del pacchetto esegue ora il job con la versione minima di Python 3.9 su ubuntu-24.04.
 
 Versione installata della skill: **7.9.0**, stabile dalla 7.0.0.
