@@ -17,11 +17,11 @@ section: State
 | v5 (e i precedenti piani v1/v2) | il piano in markdown, con questo livello JSON come sua proiezione | scritto dall'agente nei punti di protocollo descritti sotto | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 e v2 restano validi per i piani più vecchi) |
 | v6 e v7 | il contratto più il journal append-only | uno snapshot proiettato dal journal, mai scritto a mano | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (o i loro equivalenti v6) |
 
-Un piano non cambia mai generazione implicitamente: i piani v5 mantengono queste regole, e portarne uno alla v6 è una migrazione esplicita e con anteprima ([Livello di registrazione](/spec/record-layer#coesistenza-e-migrazione)). Fonti canoniche: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
+Un piano non cambia mai generazione implicitamente: i piani v5 mantengono queste regole, e portarne uno alla v6 è una migrazione esplicita e con anteprima ([Livello di registrazione](/it/spec/record-layer#coesistenza-e-migrazione)). Fonti canoniche: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.9.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Versione 5.0.0. Stato: Stabile.** Questo documento specifica il livello di stato del piano leggibile dalle macchine della metodologia Deep Work Plan, ora allineato alla versione dello standard DWP stesso — nessun requisito esistente viene indebolito dalla rinumerazione. Questa revisione documenta anche l'aggiornatore di stato protetto, la pubblicazione verificata del piano e le regole di verità dell'evidenza che un piano completato deve soddisfare (vedi sotto). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
-Due artefatti JSON — `manifest.json` (l'identità statica del piano) e `state.json` (lo stato di esecuzione live per attività, inclusi i risultati dei validation gate) — che ogni piano PUÒ portare insieme ai suoi file markdown, e che l'esecuzione non presidiata (vedi [Protocollo degli agenti](/spec/agent-protocol#profili-di-esecuzione)) e i workspace senza git (vedi [Archetipi](/spec/archetypes) §3) DEVONO portare.
+Due artefatti JSON — `manifest.json` (l'identità statica del piano) e `state.json` (lo stato di esecuzione live per attività, inclusi i risultati dei validation gate) — che ogni piano PUÒ portare insieme ai suoi file markdown, e che l'esecuzione non presidiata (vedi [Protocollo degli agenti](/it/spec/agent-protocol#profili-di-esecuzione)) e i workspace senza git (vedi [Archetipi](/spec/archetypes) §3) DEVONO portare.
 
 Il piano in markdown rimane la **fonte di verità leggibile dagli esseri umani**. Il livello JSON è una **proiezione derivata**: viene rigenerato dall'agente nei punti di protocollo definiti, non modificato manualmente e non lasciato mai in silenzioso disaccordo con il markdown. Il suo scopo è l'interoperabilità — linting, verifica della conformità, diff, dashboard, scoperta nel registro e sincronizzazione con un'infrastruttura di sessione esterna — nessuna delle quali può essere costruita in modo affidabile sulla prosa.
 
@@ -46,7 +46,7 @@ Un piano che utilizza il livello di stato ha questa struttura:
 
 `manifest.json` DEVE essere scritto esattamente una volta, quando il flusso `create` materializza il piano, e NON DEVE cambiare in seguito, tranne per una migrazione della versione della spec registrata in `PROGRESS.md`.
 
-`state.json` DEVE essere riscritto dall'agente in ciascuno di questi punti di protocollo: materializzazione del piano (tutte le attività `pending`), avvio di un'attività (`in_progress`), ogni esecuzione di un validation gate (gate record aggiunto o aggiornato) e completamento di un'attività (`completed`, come parte del protocollo di completamento dell'attività nella [Specifica DWP](/spec/dwp-specification#protocollo-di-completamento-dellattivita)), un checkpoint prima di qualsiasi interruzione pianificata, e uno stop `blocked`.
+`state.json` DEVE essere riscritto dall'agente in ciascuno di questi punti di protocollo: materializzazione del piano (tutte le attività `pending`), avvio di un'attività (`in_progress`), ogni esecuzione di un validation gate (gate record aggiunto o aggiornato) e completamento di un'attività (`completed`, come parte del protocollo di completamento dell'attività nella [Specifica DWP](/it/spec/dwp-specification#protocollo-di-completamento-dellattività)), un checkpoint prima di qualsiasi interruzione pianificata, e uno stop `blocked`.
 
 Entrambi i file DEVONO essere scritti atomicamente: scrivere in un file temporaneo nella stessa directory, poi rinominare sovrascrivendo il target. Una scrittura interrotta NON DEVE lasciare un file JSON troncato al suo posto.
 
@@ -79,7 +79,7 @@ Entrambi i file DEVONO essere scritti atomicamente: scrivere in un file temporan
 
 `archetype` DEVE essere uno tra `individual`, `orchestrator-hub`, `agent-workspace`.
 
-`rigor` DEVE essere uno tra `micro`, `standard`, `deep` (vedi [Rigore proporzionale](/spec/dwp-specification#rigore-proporzionale)).
+`rigor` DEVE essere uno tra `micro`, `standard`, `deep` (vedi [Rigore proporzionale](/it/spec/dwp-specification#rigore-proporzionale)).
 
 `plan_format` DEVE essere uno tra `lite`, `full` — la rappresentazione scelta alla creazione (vedi [Piani Lite](/spec/lite-plans)). È immutabile a livello di manifest: una successiva promozione da Lite a Full viene registrata in `state.json`, mai riscrivendo il manifest.
 

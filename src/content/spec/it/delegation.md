@@ -25,7 +25,7 @@ I byte degli schemi v1, v2, v5 e v6 sono invariati. Un piano che non delega mai 
 
 `parallel_safe` (booleano, default `false`) afferma che un'attività può essere eseguita in un delegato senza intrecciarsi con il lavoro delle attività sorelle. Viene impostato da `create`, mai dedotto durante l'esecuzione, e solo quando valgono tutte queste condizioni:
 
-- il repository abilita un addon di delega (agentkit o Herdr) nel proprio [registro degli addon](/spec/resources-and-abilities#il-file-di-configurazione-e-il-registro-degli-addon);
+- il repository abilita un addon di delega (agentkit o Herdr) nel proprio [registro degli addon](/it/spec/resources-and-abilities#il-file-di-configurazione-e-il-registro-degli-addon);
 - la superficie toccata dell'attività non si sovrappone a quella di un'attività sorella che potrebbe essere in corso nello stesso momento;
 - l'attività dichiara un output delimitato;
 - i gate dell'attività vengono eseguiti in questo piano.
@@ -73,7 +73,7 @@ Una delega non porta alcuna etichetta di fiducia né alcun percorso di evidenza,
 3. l'attività esiste, è stata avviata e non è completa;
 4. l'attività è `parallel_safe`, **oppure** il delegato è di sola lettura (senza worktree);
 5. il descrittore dell'addon indicato dichiara il trasporto richiesto;
-6. le capacità effettive elencano quell'addon come fonte di `subagents` ([Risorse e capacità](/spec/resources-and-abilities#capacità-fornite-dagli-addon)).
+6. le capacità effettive elencano quell'addon come fonte di `subagents` ([Risorse e capacità](/it/spec/resources-and-abilities#capacità-fornite-dagli-addon)).
 
 `collect` e `cancel` DEVONO essere rifiutati per una delega sconosciuta, per una di un'altra attività o per una già terminale. Un avvio rifiutato non è un blocco: l'attività viene eseguita in sequenza.
 

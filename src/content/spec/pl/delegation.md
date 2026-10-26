@@ -25,7 +25,7 @@ Bajty schematów v1, v2, v5 i v6 pozostają niezmienione. Plan, który nigdy nie
 
 `parallel_safe` (wartość logiczna, domyślnie `false`) stwierdza, że zadanie może zostać wykonane przez delegata bez przeplatania się z pracą zadań równoległych. Ustawia je `create`, nigdy nie jest wnioskowane w trakcie realizacji, i tylko wtedy, gdy spełnione są wszystkie poniższe warunki:
 
-- repozytorium włącza addon delegowania (agentkit lub Herdr) w swoim [rejestrze addonów](/spec/resources-and-abilities#the-configuration-file-and-addon-registry);
+- repozytorium włącza addon delegowania (agentkit lub Herdr) w swoim [rejestrze addonów](/pl/spec/resources-and-abilities#plik-konfiguracyjny-i-rejestr-addonów);
 - powierzchnia dotknięta zadania nie nakłada się na zadanie równoległe, które mogłoby być w toku w tym samym czasie;
 - zadanie deklaruje ograniczony wynik;
 - bramki zadania są uruchamiane w tym planie.
@@ -73,7 +73,7 @@ Delegowanie nie niesie etykiety zaufania ani ścieżki dowodu i żadne zamknięc
 3. zadanie istnieje, zostało rozpoczęte i nie jest ukończone;
 4. zadanie jest `parallel_safe` **lub** delegat działa tylko do odczytu (bez worktree);
 5. deskryptor wskazanego addonu deklaruje żądany transport;
-6. efektywne możliwości wymieniają ten addon jako źródło `subagents` ([Zasoby i możliwości](/spec/resources-and-abilities#addon-provided-abilities)).
+6. efektywne możliwości wymieniają ten addon jako źródło `subagents` ([Zasoby i możliwości](/pl/spec/resources-and-abilities#możliwości-dostarczane-przez-addony)).
 
 `collect` i `cancel` MUSZĄ zostać odrzucone dla nieznanego delegowania, delegowania innego zadania lub delegowania już zakończonego. Odrzucone uruchomienie nie jest blokadą: zadanie jest wtedy wykonywane sekwencyjnie.
 

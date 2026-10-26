@@ -92,7 +92,7 @@ Perubahan pada cakupan, kriteria penerimaan, izin, atau envelope adalah sebuah *
 
 ## Permukaan hanya-baca dan melanjutkan
 
-`status` dan `verify` tidak pernah menulis ke rencana lini v6; keduanya melapor melalui command murni dan proyeksi yang dihasilkan. Host yang melanjutkan pekerjaan memulihkan diri dalam urutan tetap (inspeksi, validasi, proyeksi, render dengan otoritas yang dicatat) dan memperlakukan fingerprint yang usang sebagai bukti yang tidak berlaku untuk dijalankan ulang, tidak pernah sebagai hasil yang dapat digunakan ulang. Jurnal tidak pernah diputar ulang sebagai konteks percakapan: pekerjaan dilanjutkan melalui loop execute dengan [manifest konteks](/spec/resources-and-abilities#the-per-task-context-manifest) per tugas.
+`status` dan `verify` tidak pernah menulis ke rencana lini v6; keduanya melapor melalui command murni dan proyeksi yang dihasilkan. Host yang melanjutkan pekerjaan memulihkan diri dalam urutan tetap (inspeksi, validasi, proyeksi, render dengan otoritas yang dicatat) dan memperlakukan fingerprint yang usang sebagai bukti yang tidak berlaku untuk dijalankan ulang, tidak pernah sebagai hasil yang dapat digunakan ulang. Jurnal tidak pernah diputar ulang sebagai konteks percakapan: pekerjaan dilanjutkan melalui loop execute dengan [manifest konteks](/id/spec/resources-and-abilities#manifest-konteks-per-tugas) per tugas.
 
 ## Koeksistensi dan migrasi
 

@@ -25,7 +25,7 @@ Os bytes dos esquemas v1, v2, v5 e v6 não mudam. Um plano que nunca delega é i
 
 `parallel_safe` (booleano, padrão `false`) afirma que uma tarefa pode rodar em um delegado sem se intercalar com o trabalho das tarefas irmãs. Ele é definido por `create`, nunca inferido durante a execução, e somente quando todas estas condições se cumprem:
 
-- o repositório habilita um addon de delegação (agentkit ou Herdr) no seu [registro de addons](/spec/resources-and-abilities#the-configuration-file-and-addon-registry);
+- o repositório habilita um addon de delegação (agentkit ou Herdr) no seu [registro de addons](/pt/spec/resources-and-abilities#o-arquivo-de-configuração-e-o-registro-de-addons);
 - a superfície tocada da tarefa não se sobrepõe à de uma tarefa irmã que possa estar em andamento ao mesmo tempo;
 - a tarefa declara uma saída delimitada;
 - os gates da tarefa rodam neste plano.
@@ -73,7 +73,7 @@ Uma delegação não carrega rótulo de confiança nem caminho de evidência, e 
 3. a tarefa existe, foi iniciada e não está concluída;
 4. a tarefa é `parallel_safe`, **ou** o delegado é somente leitura (sem worktree);
 5. o descritor do addon nomeado declara o transporte solicitado;
-6. as capacidades efetivas listam esse addon como fonte de `subagents` ([Recursos e capacidades](/spec/resources-and-abilities#addon-provided-abilities)).
+6. as capacidades efetivas listam esse addon como fonte de `subagents` ([Recursos e capacidades](/pt/spec/resources-and-abilities#capacidades-fornecidas-por-addons)).
 
 `collect` e `cancel` DEVEM (MUST) ser recusados para uma delegação desconhecida, de outra tarefa ou já terminal. Um lançamento recusado não é um bloqueio: a tarefa roda sequencialmente.
 

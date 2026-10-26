@@ -92,7 +92,7 @@ Zmiana zakresu, kryteriów akceptacji, uprawnień lub koperty jest **poprawką k
 
 ## Powierzchnie tylko do odczytu i wznowienie
 
-`status` i `verify` nigdy nie zapisują do planu linii v6; raportują przez czyste polecenia i wygenerowane projekcje. Wznawiający host odtwarza stan w ustalonej kolejności (inspekcja, walidacja, projekcja, renderowanie z zapisanym autorytetem) i traktuje nieaktualny odcisk jako unieważniony dowód do ponownego uruchomienia, nigdy jako wynik do ponownego użycia. Dziennik nigdy nie jest odtwarzany jako kontekst rozmowy: praca jest wznawiana przez pętlę execute z [manifestem kontekstu](/spec/resources-and-abilities#the-per-task-context-manifest) dla każdego zadania.
+`status` i `verify` nigdy nie zapisują do planu linii v6; raportują przez czyste polecenia i wygenerowane projekcje. Wznawiający host odtwarza stan w ustalonej kolejności (inspekcja, walidacja, projekcja, renderowanie z zapisanym autorytetem) i traktuje nieaktualny odcisk jako unieważniony dowód do ponownego uruchomienia, nigdy jako wynik do ponownego użycia. Dziennik nigdy nie jest odtwarzany jako kontekst rozmowy: praca jest wznawiana przez pętlę execute z [manifestem kontekstu](/pl/spec/resources-and-abilities#manifest-kontekstu-dla-każdego-zadania) dla każdego zadania.
 
 ## Współistnienie i migracja
 

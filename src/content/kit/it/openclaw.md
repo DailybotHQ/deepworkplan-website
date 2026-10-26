@@ -43,7 +43,7 @@ Le primitive di scheduling di OpenClaw si mappano direttamente sul modello di co
 |--------------------|-----------|
 | Radice del workspace | Archetipo [Agent workspace](/spec/archetypes): `AGENTS.md`, `.agents/`, `.dwp/` nella radice del workspace |
 | `<workspace>/.agents/skills/` (scansione nativa tier-2) | Dove vive questo pack — non è necessario alcun adapter shim |
-| Heartbeat o turno cron | Un turno di [continuazione pianificata](/spec/agent-protocol#continuazione-pianificata): sveglia → Protocollo di Ripresa DWP → prossima attività atomica → aggiorna lo stato → cede il controllo |
+| Heartbeat o turno cron | Un turno di [continuazione pianificata](/it/spec/agent-protocol#continuazione-pianificata): sveglia → Protocollo di Ripresa DWP → prossima attività atomica → aggiorna lo stato → cede il controllo |
 | Controlli `HEARTBEAT.md` | Aggiungere una riga: "If `.dwp/plans/` has an open plan, resume it for one task." |
 | Standing orders | Il confine di approvazione del piano e l'autorità limitata del profilo non presidiato |
 

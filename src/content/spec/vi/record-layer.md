@@ -92,7 +92,7 @@ Một thay đổi về phạm vi, tiêu chí chấp nhận, quyền hoặc giớ
 
 ## Bề mặt chỉ đọc và tiếp tục
 
-`status` và `verify` không bao giờ ghi vào một kế hoạch dòng v6; chúng báo cáo thông qua các lệnh thuần túy và các phép chiếu được sinh ra. Một host đang tiếp tục phục hồi theo một thứ tự cố định (kiểm tra, kiểm định, chiếu, hiển thị với thẩm quyền được ghi lại) và coi một dấu vân tay cũ là bằng chứng đã bị vô hiệu cần chạy lại, không bao giờ là một kết quả có thể tái sử dụng. Nhật ký không bao giờ được phát lại như ngữ cảnh hội thoại: công việc tiếp tục qua vòng lặp execute với một [context manifest](/spec/resources-and-abilities#the-per-task-context-manifest) cho từng tác vụ.
+`status` và `verify` không bao giờ ghi vào một kế hoạch dòng v6; chúng báo cáo thông qua các lệnh thuần túy và các phép chiếu được sinh ra. Một host đang tiếp tục phục hồi theo một thứ tự cố định (kiểm tra, kiểm định, chiếu, hiển thị với thẩm quyền được ghi lại) và coi một dấu vân tay cũ là bằng chứng đã bị vô hiệu cần chạy lại, không bao giờ là một kết quả có thể tái sử dụng. Nhật ký không bao giờ được phát lại như ngữ cảnh hội thoại: công việc tiếp tục qua vòng lặp execute với một [context manifest](/vi/spec/resources-and-abilities#context-manifest-theo-từng-tác-vụ) cho từng tác vụ.
 
 ## Cùng tồn tại và di chuyển
 

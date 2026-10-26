@@ -25,7 +25,7 @@ v1, v2, v5 ve v6 şema baytları değişmemiştir. Hiç devretme yapmayan bir pl
 
 `parallel_safe` (boolean, varsayılan `false`), bir görevin kardeş işlerle iç içe geçmeden bir delegede çalışabileceğini beyan eder. `create` tarafından konur, yürütme sırasında asla çıkarsanmaz ve yalnızca aşağıdakilerin tümü sağlandığında konur:
 
-- depo, [eklenti kaydında](/spec/resources-and-abilities#the-configuration-file-and-addon-registry) bir devretme eklentisini (agentkit veya Herdr) etkinleştirir;
+- depo, [eklenti kaydında](/tr/spec/resources-and-abilities#yapılandırma-dosyası-ve-eklenti-kaydı) bir devretme eklentisini (agentkit veya Herdr) etkinleştirir;
 - görevin dokunulan yüzeyi, aynı anda sürüyor olabilecek bir kardeş görevle çakışmaz;
 - görev sınırlı bir çıktı beyan eder;
 - görevin kapıları bu planda çalışır.
@@ -73,7 +73,7 @@ Aşağıdakilerin **tümü** sağlanmadıkça `launch` reddedilMELİ ve ret kayd
 3. görev vardır, başlamıştır ve tamamlanmamıştır;
 4. görev `parallel_safe` olarak işaretlidir **veya** delege salt okunurdur (worktree yoktur);
 5. adı verilen eklentinin tanımlayıcısı istenen taşıyıcıyı beyan eder;
-6. etkin yetenekler o eklentiyi bir `subagents` kaynağı olarak listeler ([Kaynaklar ve yetenekler](/spec/resources-and-abilities#addon-provided-abilities)).
+6. etkin yetenekler o eklentiyi bir `subagents` kaynağı olarak listeler ([Kaynaklar ve yetenekler](/tr/spec/resources-and-abilities#eklentilerin-sağladığı-yetenekler)).
 
 `collect` ve `cancel`; bilinmeyen bir devretme, başka bir göreve ait bir devretme veya zaten uç durumda olan bir devretme için reddedilMELİDİR. Reddedilen bir başlatma bir engelleyici değildir: görev ardışık olarak çalışır.
 

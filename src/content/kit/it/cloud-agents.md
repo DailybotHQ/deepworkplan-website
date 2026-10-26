@@ -36,7 +36,7 @@ Ogni turno di un agente cloud segue questo pattern:
 
 - Il piano DEVE portare il livello di stato leggibile dalle macchine (`manifest.json` + `state.json`). Senza di esso, una sessione effimera non ha un modo affidabile per determinare la posizione di ripresa. Vedi [Stato del piano](/spec/plan-state).
 - Il piano DEVE essere stato approvato da un essere umano prima di qualsiasi turno cloud non presidiato. L'approvazione del piano è il punto di controllo.
-- L'agente opera con autorità limitata: NON DEVE espandere l'ambito, eseguire azioni distruttive che il piano non autorizza esplicitamente, né improvvisare al di là delle istruzioni dell'attività corrente. Vedi [Protocollo degli agenti](/spec/agent-protocol#profili-di-esecuzione).
+- L'agente opera con autorità limitata: NON DEVE espandere l'ambito, eseguire azioni distruttive che il piano non autorizza esplicitamente, né improvvisare al di là delle istruzioni dell'attività corrente. Vedi [Protocollo degli agenti](/it/spec/agent-protocol#profili-di-esecuzione).
 
 ## Note
 

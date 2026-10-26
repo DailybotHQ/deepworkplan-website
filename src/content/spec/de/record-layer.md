@@ -92,7 +92,7 @@ Eine Änderung an Umfang, Akzeptanzkriterien, Berechtigungen oder Rahmen ist ein
 
 ## Nur lesende Oberflächen und Wiederaufnahme
 
-`status` und `verify` schreiben niemals in einen Plan der v6-Linie; sie berichten über reine Befehle und die erzeugten Projektionen. Ein wiederaufnehmender Host stellt in fester Reihenfolge wieder her (prüfen, validieren, projizieren, mit aufgezeichneter Autorität rendern) und behandelt einen veralteten Fingerabdruck als ungültige Evidenz, die erneut auszuführen ist, niemals als wiederverwendbares Ergebnis. Das Journal wird niemals als Gesprächskontext wiedergegeben: Die Arbeit wird über die Ausführungsschleife mit einem [Kontextmanifest](/spec/resources-and-abilities#the-per-task-context-manifest) pro Aufgabe fortgesetzt.
+`status` und `verify` schreiben niemals in einen Plan der v6-Linie; sie berichten über reine Befehle und die erzeugten Projektionen. Ein wiederaufnehmender Host stellt in fester Reihenfolge wieder her (prüfen, validieren, projizieren, mit aufgezeichneter Autorität rendern) und behandelt einen veralteten Fingerabdruck als ungültige Evidenz, die erneut auszuführen ist, niemals als wiederverwendbares Ergebnis. Das Journal wird niemals als Gesprächskontext wiedergegeben: Die Arbeit wird über die Ausführungsschleife mit einem [Kontextmanifest](/de/spec/resources-and-abilities#das-kontextmanifest-pro-aufgabe) pro Aufgabe fortgesetzt.
 
 ## Koexistenz und Migration
 

@@ -92,7 +92,7 @@ Uma mudança de escopo, critérios de aceitação, permissões ou envelope é um
 
 ## Superfícies somente leitura e retomada
 
-`status` e `verify` nunca escrevem em um plano da linha v6; eles reportam por meio de comandos puros e das projeções geradas. Um host que retoma o trabalho se recupera em uma ordem fixa (inspecionar, validar, projetar, renderizar com autoridade registrada) e trata uma impressão digital desatualizada como evidência invalidada a ser executada novamente, nunca como um resultado reutilizável. O diário nunca é reproduzido como contexto de conversa: o trabalho é retomado pelo loop de execução com um [manifesto de contexto](/spec/resources-and-abilities#the-per-task-context-manifest) por tarefa.
+`status` e `verify` nunca escrevem em um plano da linha v6; eles reportam por meio de comandos puros e das projeções geradas. Um host que retoma o trabalho se recupera em uma ordem fixa (inspecionar, validar, projetar, renderizar com autoridade registrada) e trata uma impressão digital desatualizada como evidência invalidada a ser executada novamente, nunca como um resultado reutilizável. O diário nunca é reproduzido como contexto de conversa: o trabalho é retomado pelo loop de execução com um [manifesto de contexto](/pt/spec/resources-and-abilities#o-manifesto-de-contexto-por-tarefa) por tarefa.
 
 ## Coexistência e migração
 

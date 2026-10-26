@@ -32,7 +32,7 @@ import AgentLifecycle from '@/components/diagrams/spec/AgentLifecycle.astro';
 | **OpenClaw** | สแกน `<workspace>/.agents/skills/` แบบ native (มาตรฐาน AgentSkills) | ข้อความธรรมดา |
 | **Hermes** | การโหลด skill ตามมาตรฐาน AgentSkills อ่าน `AGENTS.md` | ข้อความธรรมดา |
 
-หกตัวแรกเป็นเอเจนต์เขียนโค้ดแบบโต้ตอบที่มีมนุษย์อยู่ใน session OpenClaw และ Hermes เป็น**แพลตฟอร์มเอเจนต์อัตโนมัติ** — daemon ที่มีอายุยาวนานพร้อมรอบตามกำหนดเวลา — และโดยทั่วไปดำเนินแผนภายใต้โปรไฟล์ไม่มีผู้ดูแล (ดู [โปรไฟล์การดำเนินงาน](#execution-profiles)) ภายใน agent workspace (ดู [Archetype](/spec/archetypes) §3)
+หกตัวแรกเป็นเอเจนต์เขียนโค้ดแบบโต้ตอบที่มีมนุษย์อยู่ใน session OpenClaw และ Hermes เป็น**แพลตฟอร์มเอเจนต์อัตโนมัติ** — daemon ที่มีอายุยาวนานพร้อมรอบตามกำหนดเวลา — และโดยทั่วไปดำเนินแผนภายใต้โปรไฟล์ไม่มีผู้ดูแล (ดู [โปรไฟล์การดำเนินงาน](#โปรไฟล์การดำเนินงาน)) ภายใน agent workspace (ดู [Archetype](/spec/archetypes) §3)
 
 เอเจนต์ที่รองรับทุกตัว MUST ถือว่า `AGENTS.md` เป็นแหล่งความจริงเดียวสำหรับข้อตกลงของ repository ไฟล์ config ต่อเอเจนต์ MUST อ้างอิงมันและ MUST NOT ทำซ้ำเนื้อหา
 

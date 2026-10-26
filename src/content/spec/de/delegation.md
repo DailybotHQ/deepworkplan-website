@@ -25,7 +25,7 @@ Die Schema-Bytes von v1, v2, v5 und v6 sind unverändert. Ein Plan, der nie dele
 
 `parallel_safe` (boolesch, Standard `false`) sichert zu, dass eine Aufgabe in einem Delegierten laufen kann, ohne sich mit paralleler Arbeit an Geschwisteraufgaben zu überschneiden. Das Feld wird von `create` gesetzt, niemals während der Ausführung abgeleitet, und nur, wenn all dies zutrifft:
 
-- das Repository aktiviert ein Delegations-Addon (agentkit oder Herdr) in seiner [Addon-Registry](/spec/resources-and-abilities#the-configuration-file-and-addon-registry);
+- das Repository aktiviert ein Delegations-Addon (agentkit oder Herdr) in seiner [Addon-Registry](/de/spec/resources-and-abilities#die-konfigurationsdatei-und-die-addon-registry);
 - die Touched Surface der Aufgabe überschneidet sich nicht mit einer Geschwisteraufgabe, die gleichzeitig in Arbeit sein könnte;
 - die Aufgabe deklariert eine begrenzte Ausgabe;
 - die Gates der Aufgabe laufen in diesem Plan.
@@ -73,7 +73,7 @@ Eine Delegation trägt kein Vertrauens-Label und keinen Evidenzpfad, und keine S
 3. die Aufgabe existiert, wurde gestartet und ist nicht abgeschlossen;
 4. die Aufgabe ist `parallel_safe`, **oder** der Delegierte ist nur lesend (kein Worktree);
 5. der Deskriptor des genannten Addons deklariert den angeforderten Transport;
-6. die wirksamen Fähigkeiten führen dieses Addon als Quelle von `subagents` ([Ressourcen und Fähigkeiten](/spec/resources-and-abilities#addon-provided-abilities)).
+6. die wirksamen Fähigkeiten führen dieses Addon als Quelle von `subagents` ([Ressourcen und Fähigkeiten](/de/spec/resources-and-abilities#von-addons-bereitgestellte-fähigkeiten)).
 
 `collect` und `cancel` MÜSSEN für eine unbekannte Delegation, eine Delegation einer anderen Aufgabe oder eine bereits beendete abgelehnt werden. Ein abgelehnter Start ist kein Blocker: Die Aufgabe läuft sequenziell.
 
