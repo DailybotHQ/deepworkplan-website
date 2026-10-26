@@ -222,50 +222,8 @@ Phương pháp luận và skill cấp phép MIT và miễn phí; không có dị
 
 [Tin tưởng và công bố](https://deepworkplan.com/vi/trust)
 
-## Cách một kế hoạch vận hành
+## Vẫn còn câu hỏi?
 
-### Các cổng kiểm chứng được triển khai thế nào? Chúng có cần con người phê duyệt không?
+Mở một thảo luận hoặc một issue trên GitHub. Các câu hỏi được hỏi đi hỏi lại sẽ được thêm vào trang này.
 
-Chúng là các assertion thực thi được, do chính agent chạy. Việc phê duyệt của con người chỉ đóng khung hai đầu lượt chạy: một người duyệt kế hoạch trước khi thực thi và xem xét diff cuối cùng lúc mở pull request; phần thực thi ở giữa là tự chủ. Mỗi tác vụ nêu tên các lệnh cụ thể, thường là chính cổng chất lượng của repository, được chọn từ Touched Surface của tác vụ: các test của hành vi bị thay đổi và các bên tiêu thụ nó, mở rộng ra toàn bộ bộ test khi thay đổi dùng chung hoặc không thể giới hạn. Một tác vụ chỉ được đánh dấu xong khi các lệnh đó thoát thành công, và các tác vụ thay đổi hành vi phải mở rộng test. Khi thất bại, agent sửa chữa trước những gì nằm trong phạm vi của chính tác vụ và chạy lại cổng; một thất bại không thể sửa trong phạm vi đó để tác vụ bị đánh dấu là bị chặn và dừng lượt chạy.
-
-[Vòng lặp lõi](https://deepworkplan.com/vi/methodology/02-core-loop)
-
-### Kế hoạch tránh lỗi thời thế nào khi mọi người thay đổi mã giữa các lượt chạy?
-
-Trên ba mặt trận. Các tác vụ được viết theo hành vi, không phải theo các bước sửa: một tiêu chí chấp nhận nói rõ hệ thống phải làm gì, nên một tệp được đổi tên hay một bản triển khai bị thay không làm nó vô hiệu. Mỗi cổng chạy lại trên repository như nó đang tồn tại, nên một giả định sai sẽ hỏng ầm ĩ ở lượt chạy tiếp theo thay vì trôi dạt âm thầm, và chính thất bại đó là tín hiệu để tinh chỉnh. Và việc giữ tài liệu đồng bộ là một phần của công việc: một tác vụ thay đổi hành vi cũng cập nhật tài liệu và bộ kit dành cho agent mô tả hành vi đó, ngay trong cổng của chính nó. Mỗi lượt chạy nên để lại repository sẵn sàng cho agent hơn khi nó bắt đầu.
-
-[Đọc phương pháp luận](https://deepworkplan.com/vi/methodology)
-
-### Tôi có thể thay đổi kế hoạch giữa lượt chạy mà không mất công việc đã xong không?
-
-Có; tinh chỉnh một kế hoạch đã thực thi một phần là một thao tác được hỗ trợ đầy đủ. Định nghĩa tác vụ và trạng thái thực thi được giữ tách biệt: kế hoạch là một danh sách kiểm tra trên đĩa cộng với một tệp trạng thái nhỏ, nên những gì đã xong vẫn được ghi lại độc lập với nội dung tác vụ. Khi một tác vụ hóa ra sai, agent đánh dấu nó bị chặn và dừng lại thay vì cố đẩy tiếp. Sau đó bạn sửa, sắp xếp lại, tách hoặc bỏ các tác vụ chưa chạy, trong khi các tác vụ đã hoàn thành vẫn giữ nguyên. Việc tiếp tục dựng lại trạng thái từ đĩa và từ repository thực tế rồi chạy lại các cổng liên quan, nên không có gì thay đổi bên dưới lượt qua được.
-
-[Vòng lặp lõi](https://deepworkplan.com/vi/methodology/02-core-loop)
-
-### Nó có liên tục đối chiếu công việc với kế hoạch, hay kế hoạch chỉ là thứ lập sẵn từ đầu?
-
-Kế hoạch là một phép kiểm tra liên tục. Agent làm việc theo từng tác vụ nhỏ và phải kiểm chứng trước khi đi tiếp, nên nó chỉ có thể lạc một bước, chứ không phải ba bước. Mỗi tác vụ mang tiêu chí chấp nhận cùng các lệnh chính xác chứng minh chúng, và tiến trình được ghi vào repository khi làm việc, kèm trạng thái từng tác vụ, nên độ trôi dạt trở nên nhìn thấy được với bạn, với phiên tiếp theo và với agent tiếp theo. Một kế hoạch chưa xong cho đến khi mọi thứ kiểm chứng đạt, kể cả Final Review. Lời nói thành thật: phương pháp luận không thể ngăn agent viết một tiêu chí chấp nhận yếu ngay từ đầu; nó làm cho trôi dạt bị lộ rõ thay vì âm thầm.
-
-[Vòng lặp lõi](https://deepworkplan.com/vi/methodology/02-core-loop)
-
-### Kế hoạch được sinh một lần và duy trì bằng tay, hay nó tiến hóa cùng mã?
-
-Cả hai đều không. Nó được sinh một lần từ một mục tiêu, rồi được duy trì như một phần của công việc. Kế hoạch cố tình không được viết lại từ code diff, vì một đặc tả chạy theo mã sẽ trở thành tấm gương phản chiếu muộn màng — chính là độ trôi dạt mà phương pháp luận tồn tại để diệt. Nó tiến hóa một cách có chủ đích: các cổng chạy lại trên repository hiện tại, một cổng thất bại kích hoạt một lượt tinh chỉnh, và agent thực hiện lượt tinh chỉnh đó trong lúc chạy, còn bạn duyệt từ đầu và xem xét ở cuối. Tài liệu và test tiến hóa song song với mã một cách tự nhiên, vì việc cập nhật chúng nằm ngay trong cổng của từng tác vụ.
-
-[Đọc phương pháp luận](https://deepworkplan.com/vi/methodology)
-
-### Điều gì xảy ra nếu phiên chết giữa chừng?
-
-Tiến trình nằm trên đĩa, không nằm trong hội thoại. Các ô đánh dấu trong README, nhật ký của từng tác vụ, một chỉ mục làm việc có giới hạn và một tệp trạng thái đọc được bằng máy được cập nhật tại mỗi ranh giới tác vụ, và tệp trạng thái ghi một điểm kiểm tra trước mọi khoảng dừng theo kế hoạch. Một phiên mới, hoặc một agent khác, đọc chỉ mục gọn gàng đó, đối chiếu nó với repository và lịch sử git, rồi tiếp tục tại tác vụ chưa hoàn thành đầu tiên mà không làm lại công việc đã xong. Ngay cả một kế hoạch đang tạo bị gián đoạn cũng khôi phục được: định danh của kế hoạch và danh sách tác vụ dự kiến được ghi trước mọi tệp tác vụ, nên một kế hoạch tạo dở có thể được hoàn tất hoặc bỏ đi thay vì phải đoán.
-
-[Vòng lặp lõi](https://deepworkplan.com/vi/methodology/02-core-loop)
-
-### Final Review là gì?
-
-Tác vụ kết thúc bắt buộc duy nhất của mọi kế hoạch. Theo thứ tự: một bước rà soát bảo mật trên toàn bộ tập thay đổi tích lũy của kế hoạch, gồm cả lượt review diff cục bộ bắt buộc bởi skill AI Diff Reviewer, với các phát hiện nghiêm trọng chặn việc hoàn tất cho đến khi được sửa hoặc được chấp nhận rõ ràng; kiểm chứng trạng thái cuối, nghĩa là chạy đầy đủ các bộ test, lint, kiểm tra kiểu và định dạng áp dụng được của repository trên mã cuối cùng; và một bước đối chiếu các quyết định về skill mà từng tác vụ đã ghi. Sau đó agent báo cáo sản phẩm bàn giao, bằng chứng và giới hạn, rồi đề xuất Executive Report đúng một lần, chỉ tạo khi bạn yêu cầu.
-
-[Đặc tả](https://deepworkplan.com/vi/spec/dwp-specification)
-
-### Điều gì xảy ra khi một cổng kiểm chứng thất bại?
-
-Một cổng thất bại trước hết là tín hiệu sửa chữa: agent khắc phục những gì nằm trong phạm vi của chính tác vụ và chạy lại cổng. Một thất bại vượt quá phạm vi đó khiến tác vụ được ghi nhận là bị chặn, và agent dừng lại trước khi tuyên bố hoàn thành. Bạn có thể kiểm tra bằng chứng, sửa mã hoặc tinh chỉnh tác vụ, rồi tiếp tục; một lệnh thất bại là tín hiệu để giải
+[Hỏi trên GitHub](https://github.com/DailybotHQ/deepworkplan-website/issues)
