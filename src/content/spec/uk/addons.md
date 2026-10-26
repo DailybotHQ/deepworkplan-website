@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (перший аддон)
 
-Тонкий інтегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закріплено на `v1.0.1`, інтерфейс `2`): шаблон Dev Containers, який `dck init` розгортає в репозиторії як його власний контейнер, а також скіл `dck-dockerfile`.
+Тонкий інтегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закріплено на `v1.1.1`, інтерфейс `2`): шаблон Dev Containers, який `dck init` розгортає в репозиторії як його власний контейнер, а також скіл `dck-dockerfile`.
 
 - **Сторінка kit:** [Devcontainer](/kit/devcontainer)
 - **Що додає:** `docker/local/<service>/Dockerfile` на основі офіційного образу середовища виконання, закріпленого за digest (`python-3.13`, `node-24` або `debian`, без спільного базового образу), `dev.sh` поверх лаунчера `dck` (`up`, `shell`, `rebuild`, `doctor`), агентів для програмування як шар, який вмикається за бажанням, порти лише на loopback, git через SSH за допомогою агента хоста без жодного ключа всередині, якщо тільки розробник сам не ввімкне `[ssh] copy_keys` у своєму профілі хоста, та машини Herdr для кожного контейнера зі стандартним розкладом

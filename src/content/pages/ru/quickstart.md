@@ -236,7 +236,7 @@ CI-поверхность, которая никогда не требуется
 | Dailybot | `version:` в `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` в установленном навыке herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.0.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | проверенный установщик по адресу https://deepworkplan.com/vim/install.sh (закрепляет `v1.0.1`; скачайте, `shasum -a 256 -c install.sh.sha256`, затем запустите) |
 
 Прежде чем запускать любую загрузку, сверьте её с `SHA256SUMS` её релиза и дайджестом в *Закреплённых релизах*
@@ -250,7 +250,7 @@ CI-поверхность, которая никогда не требуется
 design system, agentkit, Herdr, DeepWorkPlan Vim) и предложите только те, что подходят этому репозиторию, каждое как явный opt-in. Репозиторий
 полностью соответствует стандарту и с **нулём** опциональных дополнений — никогда не устанавливайте их автоматически.
 
-- **Поддержка Devcontainer** — тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён `v1.0.1`, с навыком `dck-dockerfile`): `dck init` генерирует собственный контейнер репозитория — официальный образ, закреплённый по digest, без общего базового образа, `bash dev.sh up` — и согласует существующий devcontainer только после того, как его diff принят. После принятия пройдите *Путь devcontainer* ниже до полного стека.
+- **Поддержка Devcontainer** — тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён `v1.1.1`, с навыком `dck-dockerfile`): `dck init` генерирует собственный контейнер репозитория — официальный образ, закреплённый по digest, без общего базового образа, `bash dev.sh up` — и согласует существующий devcontainer только после того, как его diff принят. После принятия пройдите *Путь devcontainer* ниже до полного стека.
 - **Интеграция Dailybot** — четыре события жизненного цикла (kickoff, значимая задача, блокировка, завершение) как отчётность о прогрессе по принципу best-effort для команд, уже использующих Dailybot, с опциональным автономным обеспечением хуков (`dailybot-cli >= 3.9.0`). Установка парного навыка агента Dailybot (3.23.14) также открывает чат, чек-ины, создание форм, вопросы к AI, доски и задачи Plan, API-ключи на репозиторий и многое другое — дополнение подключает только отчётность к выполнению DWP. Основная методология имеет ноль зависимости от Dailybot.
 - **Dependency upgrade** — независимые от менеджера пакетов, партийные, проверяемые, обратимые обновления. При
   принятии оно устанавливает команду `/lib-upgrade`.

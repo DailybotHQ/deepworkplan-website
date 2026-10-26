@@ -58,7 +58,7 @@ herdr-peers는 발신자를 인증하지 않습니다. 스탬프의 `from=` 필�
 
 ## 컨테이너와 호스트
 
-devcontainer-kit `v1.0.1` 기반의 [devcontainer](/kit/devcontainer) 애드온을 사용하면, 모든 dck 컨테이너가 herdr-peers를 포함하고 `dck up` 시점에 메시에 합류합니다. 그 에이전트는 호스트, 다른 컨테이너, 호스트의 다른 루프백 컨테이너에 있는 에이전트에게 질문하고 응답을 받을 수 있습니다. `dck setup`은 호스트에 검증된 herdr-peers를 설치하므로 호스트 에이전트도 응답합니다. 호스트 리스너와 다른 컨테이너의 접근을 허용하는 추가 키는 키트의 호스트 프로필에서 사용자가 결정하는 사항이며, 이 애드온은 이를 결코 설정하지 않습니다. herdr-peers (`v0.2.3`)부터 각 머신은 자체 상태(`$XDG_STATE_HOME/herdr-peers/<server>/`)를 유지하므로 호스트와 컨테이너가 공유하는 체크아웃에서도 서로의 기록이 더 이상 섞이지 않으며, devcontainer-kit (`v0.3.3`)부터는 컨테이너가 `HERDR_PEERS_SELF`를 스스로 export하므로 컨테이너 안의 Codex 에이전트가 수작업 없이 다른 머신에 접근합니다.
+devcontainer-kit `v1.1.1` 기반의 [devcontainer](/kit/devcontainer) 애드온을 사용하면, 모든 dck 컨테이너가 herdr-peers를 포함하고 `dck up` 시점에 메시에 합류합니다. 그 에이전트는 호스트, 다른 컨테이너, 호스트의 다른 루프백 컨테이너에 있는 에이전트에게 질문하고 응답을 받을 수 있습니다. `dck setup`은 호스트에 검증된 herdr-peers를 설치하므로 호스트 에이전트도 응답합니다. 호스트 리스너와 다른 컨테이너의 접근을 허용하는 추가 키는 키트의 호스트 프로필에서 사용자가 결정하는 사항이며, 이 애드온은 이를 결코 설정하지 않습니다. herdr-peers (`v0.2.3`)부터 각 머신은 자체 상태(`$XDG_STATE_HOME/herdr-peers/<server>/`)를 유지하므로 호스트와 컨테이너가 공유하는 체크아웃에서도 서로의 기록이 더 이상 섞이지 않으며, devcontainer-kit (`v0.3.3`)부터는 컨테이너가 `HERDR_PEERS_SELF`를 스스로 export하므로 컨테이너 안의 Codex 에이전트가 수작업 없이 다른 머신에 접근합니다.
 
 ## Herdr 또는 agentkit
 
