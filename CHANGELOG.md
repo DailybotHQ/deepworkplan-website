@@ -9,6 +9,60 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.60] - 2026-10-26
+
+### Changed
+
+- fix(i18n): resolve translated-heading anchor fragments across locales
+- fix(i18n): repair duplicated and truncated Vietnamese FAQ markdown
+- fix(mcp): reject oversize request bodies before reading them at the edge
+- fix(mcp): add /spec/resources-and-abilities to the agent section list
+- fix(changelog): add the 7.9.0 release to the v7 entry in every locale
+- docs: move devcontainer-kit prose to v1.1.1 and its baked pins
+- feat(pins): pin devcontainer-kit v1.1.1
+- docs: move version prose to the 2026-10-25 release train
+- feat(pins): move the ecosystem pins to the herdr-peers 1.1.0 release train
+- chore(skill): vendor the Dailybot skill v3.23.20
+- chore(skill): vendor deepworkplan v7.9.0 and AI Diff Reviewer v3.3.16
+- docs(kit): align the /kit/herdr debate section with herdr-peers v1.1.0
+- docs(kit): describe the herdr-peers 1.1.0 debate sub-skill on /kit/herdr
+- test: give the hub-isolation import scan an explicit load-safe timeout
+- fix: address the second-vendor review (init.md link, cheaper body cap)
+- docs(skills): teach translate-sync to prove translation currency and fan out
+- fix(trust): localize the ecosystem-pins note and check out the verified tag
+- docs(kit): resync the v7 command pages in every language
+- docs(changelog): correct the 7.6 and 7.8 release notes and drop an internal id
+- docs(changelog): update v7 and v6 release entries and align descriptions across 17 languages
+- docs(methodology): align 03-templates.mdx with claims ledger across all 17 languages (L-25, MS-5, B-3)
+- docs: register the v7 spec pages, idle header hydration and /examples-only kit examples
+- fix(seo): serve kit examples once, at /examples, with 301s from /kit
+- fix(content): align FAQ, Home, About, Trust, and Compare claims with v7 claims ledger
+- docs(methodology): refine manifest, state, and Final Review item 5 across all 17 languages (L-25, MS-5, B-3)
+- style(methodology): format ArchetypesTree and PlanTree diagrams with biome
+- fix(kit): finish the Hermes description range fix for th, tr, uk, vi and zh
+- fix(kit): bring the restored Hermes adapter descriptions within the meta-description range
+- docs(methodology): update Thai methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- docs(methodology): update Hindi methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- fix(seo,perf): update BaseHead schema, layout text colors, and static llms headers
+- fix(kit): restore valid YAML frontmatter in hermes.md translations from T11
+- docs(methodology): update Vietnamese methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- docs(methodology): update Indonesian methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- docs(methodology): update Turkish methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- docs(pages): synchronize Markdown page twins across 17 languages
+- docs(methodology): update Ukrainian methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- docs(i18n): update FAQ, Compare, Home, About, Trust translation strings across 17 languages
+- docs(methodology): update Polish methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- feat(pages): update Compare, Trust, and Home page components for v7
+- docs(methodology): update Russian methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- docs(methodology): update Italian methodology chapters for v7 (L-25, L-27, L-32, L-33, L-35, MS-3, MS-4, MS-5, MS-10, MS-11, MS-12, MS-14, MS-17, B-1, B-2, B-3, B-6, B-7, B-9, B-10)
+- test(kit): give the ecosystem-pins surface scan an explicit load-safe timeout
+- docs(kit): update kit catalog and ecosystem pins for DWP v7.8.1
+- docs: register the MCP edge controls, AI crawlers and agent-surface guard tests
+- docs(spec): translate the v6/v7 spec pages and fixes into all 16 languages
+- test(agent-surface): give the install-surface scan an explicit load-safe timeout
+- feat(agent-surface): bring llms, dwp.json and the MCP server up to v7
+- docs(spec): add v6/v7 record layer, resources and delegation pages (en)
+
 ## [5.0.59] - 2026-10-14
 
 ### Changed
@@ -1337,7 +1391,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.59...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.60...HEAD
+[5.0.60]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.60
 [5.0.59]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.59
 [5.0.58]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.58
 [5.0.57]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.57
