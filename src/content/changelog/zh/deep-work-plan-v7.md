@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 沿用 v6 的方法：契约是权威，仅追加的日志是记忆，调度器决定接下来运行什么，只有当记录在案的证据满足任务的标准时，任务才会关闭。v7 增加了委派能力，并对委派结果保持同样的纪律。
@@ -39,5 +41,7 @@ v7 是编排与可审计性方面的一次跃升，但尚不是完全无人值�
 7.7.0 版本（2026-10-12）交付了集群自主性（指南 §17）：容量循环（`shared/swarm.py`）、交接数据包（`dwp-handoff-v1`）、带纪元与隔离的组长接替、泳道间请求、AGENT_PROTOCOL §7.5 升级分类（C1–C7：其余一切由智能体自行决策并记录）、质量门槛（关卡是假说，必须经过验证而非断言），以及来自 23 个仓库中 313 个已执行计划的方法论经验。已知限制：v7 日志没有专门记录泳道交接或组长接替的事件（二者记录为一次已取消的委派加一项观察）。
 
 7.8.0 版本（2026-10-13）确立了 Ecosystem 1.0：该技能包整合的每款产品都达到了首个稳定版本，并按语义化版本固定在 v1.0.0（coding-agents-kit、herdr-peers、devcontainer-kit 和 deepworkplan-vim，各自附带经过验证的 `SHA256SUMS` 摘要），同时固定了 AI Diff Reviewer v3.3.14 与 Dailybot agent-skill v3.23.17；随后 7.8.1（2026-10-14）固定了 coding-agents-kit 和 devcontainer-kit 的 v1.0.1 补丁版本。
+
+7.9.0 版本（2026-10-25）将 Herdr 附加组件固定到 herdr-peers v1.1.0，其原生辩论子技能让主导者组织对等智能体评审团进行多轮讨论，并以决策记录收尾；同时将 AI Diff Reviewer 固定在 v3.3.16。技能包的 CI 现在在 ubuntu-24.04 上运行 Python 3.9 最低版本任务。
 
 已安装的技能版本：**7.9.0**，自 7.0.0 起保持稳定。

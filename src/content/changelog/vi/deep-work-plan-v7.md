@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 giữ phương pháp của v6: hợp đồng là thẩm quyền, nhật ký chỉ-ghi-thêm là bộ nhớ, bộ lập lịch quyết định việc gì chạy tiếp theo, và một tác vụ chỉ đóng khi bằng chứng đã ghi nhận đáp ứng tiêu chí của nó. v7 bổ sung khả năng ủy quyền và giữ nguyên kỷ luật đó đối với kết quả.
@@ -39,5 +41,7 @@ Bản phát hành 7.6.0 (2026-10-11) đã giới thiệu khả năng điều ph�
 Bản phát hành 7.7.0 (2026-10-12) mang đến khả năng tự chủ theo bầy đàn (Hướng dẫn §17): vòng lặp năng lực (`shared/swarm.py`), các gói bàn giao (`dwp-handoff-v1`), sự kế nhiệm của trưởng nhóm với các kỷ nguyên và rào chắn, yêu cầu giữa các làn, phân loại báo cáo leo thang AGENT_PROTOCOL §7.5 (C1–C7: quyết định và ghi lại mọi việc còn lại), tiêu chuẩn chất lượng (cổng kiểm tra là giả thuyết, được xác minh chứ không chỉ khẳng định) và bài học phương pháp luận từ 313 kế hoạch được thực thi trên 23 kho mã. Hạn chế đã biết: nhật ký v7 không có sự kiện riêng cho việc bàn giao làn hoặc kế nhiệm trưởng nhóm (chúng được ghi nhận là một ủy quyền bị hủy cộng với một quan sát).
 
 Bản phát hành 7.8.0 (2026-10-13) thiết lập Ecosystem 1.0: mọi sản phẩm mà gói tích hợp đều đạt bản phát hành ổn định đầu tiên và được ghim ở v1.0.0 theo quy tắc đánh phiên bản ngữ nghĩa (coding-agents-kit, herdr-peers, devcontainer-kit và deepworkplan-vim, mỗi sản phẩm kèm mã băm `SHA256SUMS` đã xác minh), cùng với các bản ghim AI Diff Reviewer v3.3.14 và Dailybot agent-skill v3.23.17; sau đó 7.8.1 (2026-10-14) ghim các bản vá v1.0.1 của coding-agents-kit và devcontainer-kit.
+
+Bản phát hành 7.9.0 (2026-10-25) ghim addon Herdr vào herdr-peers v1.1.0, với sub-skill tranh luận gốc cho phép lead điều hành một hội đồng peer qua nhiều vòng và khép lại bằng một bản ghi quyết định, đồng thời ghim AI Diff Reviewer ở v3.3.16; CI của gói nay chạy job phiên bản Python 3.9 tối thiểu trên ubuntu-24.04.
 
 Phiên bản skill đã cài: **7.9.0**, ổn định từ 7.0.0.

@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 は v6 の方法を維持します。契約が権威であり、追記専用のジャーナルが記憶であり、スケジューラが次に実行するものを決め、記録された証拠がタスクの基準を満たしたときにのみタスクが完了します。v7 は委任の能力を加え、その結果に対しても同じ規律を保ちます。
@@ -39,5 +41,7 @@ v7 はオーケストレーションと監査可能性における大きな前�
 リリース 7.7.0（2026-10-12）では、群衆自律性（ガイド §17）が提供されました。キャパシティループ（`shared/swarm.py`）、ハンドオフパケット（`dwp-handoff-v1`）、エポックとフェンシングによるリード継承、レーン間リクエスト、AGENT_PROTOCOL §7.5 のエスカレーション分類（C1–C7：それ以外はすべて判断して記録）、品質基準（ゲートは仮説であり主張ではなく検証されるもの）、23 リポジトリで実行された 313 件の計画からの方法論的知見を含みます。既知の制限：v7 ジャーナルにはレーンのハンドオフやリードの継承専用のイベントがありません（取り消された委任と観察として記録されます）。
 
 リリース 7.8.0（2026-10-13）では Ecosystem 1.0 が確立されました。パックが統合するすべての製品が初の安定リリースに達し、セマンティックバージョニングのもとで v1.0.0 に固定されました（coding-agents-kit、herdr-peers、devcontainer-kit、deepworkplan-vim。それぞれ検証済みの `SHA256SUMS` ダイジェスト付き）。あわせて AI Diff Reviewer v3.3.14 と Dailybot agent-skill v3.23.17 も固定されています。続いて 7.8.1（2026-10-14）で coding-agents-kit と devcontainer-kit の v1.0.1 パッチリリースが固定されました。
+
+リリース 7.9.0（2026-10-25）は Herdr アドオンを herdr-peers v1.1.0 に固定しました。そのネイティブの debate サブスキルにより、リードがピアのパネルをラウンドに沿って進め、意思決定記録で締めくくれます。また AI Diff Reviewer を v3.3.16 に固定しました。パックの CI は Python 3.9 の下限ジョブを ubuntu-24.04 で実行するようになりました。
 
 インストール済みスキルのリリースは **7.9.0** です。7.0.0 以降、安定しています。

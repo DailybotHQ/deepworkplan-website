@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 keeps the v6 method: the contract is the authority, the append-only journal is the memory, the scheduler decides what runs next, and a task closes only when recorded evidence satisfies its criteria. v7 adds the ability to delegate, and keeps the same discipline around the result.
@@ -39,5 +41,7 @@ Release 7.6.0 (2026-10-11) introduced orchestration at scale: one lane per repos
 Release 7.7.0 (2026-10-12) delivered swarm autonomy (Guide §17): the capacity loop (`shared/swarm.py`), handoff packets (`dwp-handoff-v1`), lead succession with epochs and fencing, lane-to-lane asks, the AGENT_PROTOCOL §7.5 escalation taxonomy (C1–C7: decide and record everything else), the quality bar (gates are hypotheses, verified not asserted), and methodology learnings from 313 executed plans across 23 repositories. Known limit: the v7 journal has no dedicated event for a lane handoff or a lead succession (they are recorded as a cancelled delegation plus an observation).
 
 Release 7.8.0 (2026-10-13) established Ecosystem 1.0: every product the pack integrates reached its first stable release and is pinned at v1.0.0 under semantic versioning (coding-agents-kit, herdr-peers, devcontainer-kit and deepworkplan-vim, each with a verified `SHA256SUMS` digest), alongside the AI Diff Reviewer v3.3.14 and Dailybot agent-skill v3.23.17 pins; 7.8.1 (2026-10-14) then pinned the coding-agents-kit and devcontainer-kit v1.0.1 patch releases.
+
+Release 7.9.0 (2026-10-25) pins the Herdr addon to herdr-peers v1.1.0, whose native debate sub-skill lets a lead run a panel of peers through rounds and close with a decision record, and pins the AI Diff Reviewer at v3.3.16; the pack's CI now runs its Python 3.9 floor job on ubuntu-24.04.
 
 Installed skill release: **7.9.0**, stable since 7.0.0.

@@ -22,6 +22,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.0"
   - label: "Skill release v7.8.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
+  - label: "Skill release v7.9.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
 ---
 
 Deep Work Plan v7 conserve la méthode de v6 : le contrat fait autorité, le journal en ajout seul est la mémoire, l'ordonnanceur décide de ce qui s'exécute ensuite, et une tâche ne se clôt que lorsque des preuves enregistrées satisfont ses critères. v7 ajoute la possibilité de déléguer et maintient la même discipline autour du résultat.
@@ -39,5 +41,7 @@ La version 7.6.0 (2026-10-11) a introduit l'orchestration à grande échelle : u
 La version 7.7.0 (2026-10-12) a apporté l'autonomie en essaim (Guide §17) : la boucle de capacité (`shared/swarm.py`), les paquets de transmission (`dwp-handoff-v1`), la succession des leads avec époques et cloisonnement, les requêtes entre couloirs, la taxonomie d'escalade d'AGENT_PROTOCOL §7.5 (C1–C7 : décider et enregistrer tout le reste), le niveau d'exigence qualité (les portes sont des hypothèses, vérifiées et non affirmées) et les enseignements méthodologiques tirés de 313 plans exécutés sur 23 dépôts. Limite connue : le journal v7 ne dispose d'aucun événement dédié à la transmission d'un couloir ou à la succession d'un lead (elles sont enregistrées comme une délégation annulée assortie d'une observation).
 
 La version 7.8.0 (2026-10-13) a établi Ecosystem 1.0 : chaque produit intégré par le pack a atteint sa première version stable et est épinglé en v1.0.0 selon le versionnage sémantique (coding-agents-kit, herdr-peers, devcontainer-kit et deepworkplan-vim, chacun avec un condensé `SHA256SUMS` vérifié), aux côtés des versions épinglées AI Diff Reviewer v3.3.14 et Dailybot agent-skill v3.23.17 ; la 7.8.1 (2026-10-14) a ensuite épinglé les versions correctives v1.0.1 de coding-agents-kit et devcontainer-kit.
+
+La version 7.9.0 (2026-10-25) épingle l’addon Herdr sur herdr-peers v1.1.0, dont la sous-skill native de débat permet à un lead de conduire un panel de pairs au fil de tours et de conclure par un registre de décision, et épingle l’AI Diff Reviewer en v3.3.16 ; la CI du pack exécute désormais son job de version minimale Python 3.9 sur ubuntu-24.04.
 
 Version installée du skill : **7.9.0**, stable depuis 7.0.0.
