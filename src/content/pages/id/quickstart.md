@@ -144,7 +144,7 @@ oleh rilis skill Deep Work Plan yang dipasang di atas. Paket skill saat ini menc
 router ditambah sembilan sub-skill: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, dan `upgrade`.
 
-Rilis skill yang dipasang: **7.10.1**. Paket 7.x saat ini membuat rencana baru menggunakan v7 secara default. Rencana yang ada mempertahankan generasi tercatat; pemindahan rencana v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
+Rilis skill yang dipasang: **7.10.2**. Paket 7.x saat ini membuat rencana baru menggunakan v7 secara default. Rencana yang ada mempertahankan generasi tercatat; pemindahan rencana v5 ke v6 memerlukan migrasi eksplisit yang ditinjau sebelumnya.
 
 Standar ini sengaja dibuat proporsional, dan menjadikan proporsi tersebut sebagai
 properti dari rencana, bukan disiplin pengembang. Sebuah rencana adalah **Lite** —

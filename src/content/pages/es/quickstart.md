@@ -140,7 +140,7 @@ la versión del skill de Deep Work Plan instalada arriba. El paquete actual del
 skill incluye el enrutador y nueve sub-skills: `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` y `upgrade`.
 
-Versión instalada del skill: **7.10.1**. El paquete 7.x actual crea planes nuevos con v7 de forma predeterminada. Los planes existentes conservan su generación registrada; pasar un plan v5 a v6 requiere una migración explícita y con vista previa.
+Versión instalada del skill: **7.10.2**. El paquete 7.x actual crea planes nuevos con v7 de forma predeterminada. Los planes existentes conservan su generación registrada; pasar un plan v5 a v6 requiere una migración explícita y con vista previa.
 
 El estándar es deliberadamente proporcional, y convierte esa proporción en una
 propiedad del plan, no de la disciplina del desarrollador. Un plan es **Lite**
