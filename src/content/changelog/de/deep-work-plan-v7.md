@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7 behält die Methode von v6 bei: Der Vertrag ist die Autorität, das nur anhängbare Journal ist das Gedächtnis, der Scheduler entscheidet, was als Nächstes läuft, und eine Aufgabe wird erst abgeschlossen, wenn aufgezeichnete Nachweise ihre Kriterien erfüllen. v7 ergänzt die Möglichkeit zu delegieren und hält dieselbe Disziplin beim Ergebnis ein.
@@ -52,4 +54,6 @@ Release 7.10.0 (2026-10-26) macht aus tragenden Entscheidungen Team-Entscheidung
 
 Release 7.10.1 (2026-11-15) pinnt das Herdr-Addon auf herdr-peers v1.2.1, dessen 1.2.x-Linie Autopilot hinzufügt: einen optionalen Daemon, den nur ein Mensch startet und der für jeden wartenden Agenten die empfohlene Option annimmt, mehrstufige Dialoge bis zum Ende verfolgt und niemals einen Login oder die Bestätigung einer Berechtigungsumgehung berührt. Protokoll 1 bleibt unverändert.
 
-Installierte Skill-Version: **7.10.1**, stabil seit 7.0.0.
+Release 7.10.2 (2026-11-15) zieht die Ökosystem-Pins mit den Releases des Tages nach: das Herdr-Addon auf herdr-peers v1.2.2, einen reinen Fix-Patch, dessen Autopilot nun eine Frage beantwortet, die mit einer Vorschau neben ihren Optionen angezeigt wird, und die Empfehlungsmarkierung auf Spanisch, Französisch, Deutsch und Italienisch erkennt; agentkit auf coding-agents-kit v1.2.0, dessen `ak last` die neueste Sitzung eines Arbeitsverzeichnisses in jedem Terminal fortsetzt und dessen Starts innerhalb eines Herdr-Panes den Pane nach einem Herdr-Neustart oder Reboot wiederherstellen; devcontainer-kit auf v1.1.2, deepworkplan-vim bleibt v1.0.1; die Release-Workflow wiederholt jetzt den Push des Release-Tags, um vorübergehende Ablehnungen abzufangen.
+
+Installierte Skill-Version: **7.10.2**, stabil seit 7.0.0.

@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7, v6 yöntemini korur: sözleşme otoritedir, yalnızca eklemeli günlük bellektir, zamanlayıcı sıradaki işin ne olacağına karar verir ve bir görev ancak kaydedilmiş kanıt ölçütlerini karşıladığında kapanır. v7 görev devretme yeteneğini ekler ve sonuç etrafında aynı disiplini sürdürür.
@@ -52,4 +54,6 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 
 7.10.1 sürümü (2026-11-15), Herdr eklentisini herdr-peers v1.2.1'e sabitler; bu sürümün 1.2.x hattı autopilot'u ekler: yalnızca bir insanın başlattığı, isteğe bağlı bir arka plan hizmeti; bekleyen her ajan için önerilen seçeneği kabul eder, çok adımlı diyalogları sonuna kadar izler ve asla bir oturum açmaya ya da izin atlatma onayına dokunmaz. Protokol 1 değişmedi.
 
-Yüklü skill sürümü: **7.10.1**, 7.0.0'dan beri kararlı.
+7.10.2 sürümü (2026-11-15), günün çıkışlarıyla ekosistem sabitlemelerini taşır: Herdr eklentisi herdr-peers v1.2.2'ye — yalnızca düzeltme içeren bir yama; bu sürümün autopilot'u artık seçeneklerinin yanında önizlemeyle gösterilen bir soruyu yanıtlıyor ve önerilen işaretini İspanyolca, Fransızca, Almanca ve İtalyancada tanıyor; agentkit coding-agents-kit v1.2.0'a — bu sürümün `ak last`'ı bir çalışma dizininin en yeni oturumunu herhangi bir terminalde sürdürür ve bir Herdr bölmesi içindeki başlatmalar, Herdr veya makine yeniden başladığında bölmeyi geri getirir; devcontainer-kit v1.1.2'ye, deepworkplan-vim v1.0.1'de kalıyor; release iş akışı artık geçici reddilmeleri emmek için release etiketi pushesini yeniden deniyor.
+
+Yüklü skill sürümü: **7.10.2**, 7.0.0'dan beri kararlı.

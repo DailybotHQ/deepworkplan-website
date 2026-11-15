@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7 keeps the v6 method: the contract is the authority, the append-only journal is the memory, the scheduler decides what runs next, and a task closes only when recorded evidence satisfies its criteria. v7 adds the ability to delegate, and keeps the same discipline around the result.
@@ -52,4 +54,6 @@ Release 7.10.0 (2026-10-26) turns consequential decisions into team decisions: w
 
 Release 7.10.1 (2026-11-15) pins the Herdr addon to herdr-peers v1.2.1, whose 1.2.x line adds autopilot: an optional daemon that only a human starts, which accepts the recommended option for every waiting agent, follows multi-step dialogs to their end and never touches a login or a permission-bypass acknowledgement. Protocol 1 is unchanged.
 
-Installed skill release: **7.10.1**, stable since 7.0.0.
+Release 7.10.2 (2026-11-15) moves the ecosystem pins with the day's releases: the Herdr addon to herdr-peers v1.2.2, a fix-only patch whose autopilot now answers a question shown with a preview beside its options and recognises the recommended mark in Spanish, French, German and Italian; agentkit to coding-agents-kit v1.2.0, whose `ak last` resumes the newest session of a working directory in any terminal and whose launches inside a Herdr pane restore that pane after a Herdr restart or a reboot; devcontainer-kit to v1.1.2 and deepworkplan-vim stays v1.0.1; the release workflow now retries the release tag push to absorb transient rejections.
+
+Installed skill release: **7.10.2**, stable since 7.0.0.

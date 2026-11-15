@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7 giữ phương pháp của v6: hợp đồng là thẩm quyền, nhật ký chỉ-ghi-thêm là bộ nhớ, bộ lập lịch quyết định việc gì chạy tiếp theo, và một tác vụ chỉ đóng khi bằng chứng đã ghi nhận đáp ứng tiêu chí của nó. v7 bổ sung khả năng ủy quyền và giữ nguyên kỷ luật đó đối với kết quả.
@@ -52,4 +54,6 @@ Bản phát hành 7.10.0 (2026-10-26) biến các quyết định trọng đại
 
 Bản phát hành 7.10.1 (2026-11-15) ghim addon Herdr vào herdr-peers v1.2.1, với dòng 1.2.x thêm autopilot: một trình nền tùy chọn chỉ do con người khởi động, chấp nhận phương án được khuyên cho mọi agent đang chờ, đi theo các hội thoại nhiều bước đến cùng và không bao giờ chạm vào đăng nhập hay xác nhận bỏ qua quyền hạn. Giao thức 1 không đổi.
 
-Phiên bản skill đã cài: **7.10.1**, ổn định từ 7.0.0.
+Bản phát hành 7.10.2 (2026-11-15) chuyển các ghim của hệ sinh thái theo các bản phát hành trong ngày: addon Herdr lên herdr-peers v1.2.2 — một bản vá chỉ sửa lỗi, autopilot của nó giờ trả lời câu hỏi được hiển thị với bản xem trước bên cạnh các phương án và nhận diện dấu đề xuất bằng tiếng Tây Ban Nha, Pháp, Đức và Ý; agentkit lên coding-agents-kit v1.2.0, với `ak last` tiếp tục phiên mới nhất của một thư mục làm việc trong bất kỳ terminal nào và các lần khởi động bên trong pane Herdr khôi phục pane đó sau khi Herdr hoặc máy khởi động lại; devcontainer-kit lên v1.1.2 và deepworkplan-vim vẫn ở v1.0.1; workflow phát hành giờ thử lại việc push tag phát hành để hấp thụ các lần từ chối tạm thời.
+
+Phiên bản skill đã cài: **7.10.2**, ổn định từ 7.0.0.

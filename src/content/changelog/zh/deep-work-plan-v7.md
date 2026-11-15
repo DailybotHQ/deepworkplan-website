@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7 沿用 v6 的方法：契约是权威，仅追加的日志是记忆，调度器决定接下来运行什么，只有当记录在案的证据满足任务的标准时，任务才会关闭。v7 增加了委派能力，并对委派结果保持同样的纪律。
@@ -52,4 +54,6 @@ v7 是编排与可审计性方面的一次跃升，但尚不是完全无人值�
 
 7.10.1 版本（2026-11-15）将 Herdr 附加组件固定到 herdr-peers v1.2.1，其 1.2.x 系列加入 autopilot：一个仅由人类启动的可选守护进程，为每个等待中的智能体接受推荐选项，把多步对话跟进到底，且从不触碰登录或权限绕过确认。协议 1 保持不变。
 
-已安装的技能版本：**7.10.1**，自 7.0.0 起保持稳定。
+7.10.2 版本（2026-11-15）随当日发布更新生态系统固定：Herdr 附加组件移至 herdr-peers v1.2.2——一个纯修复补丁，其 autopilot 现在能回答选项旁带有预览的问题，并识别西班牙语、法语、德语和意大利语的推荐标记；agentkit 移至 coding-agents-kit v1.2.0，其 `ak last` 可在任意终端恢复某工作目录的最新会话，在 Herdr 面板内的启动可在 Herdr 重启或机器重启后恢复该面板；devcontainer-kit 移至 v1.1.2，deepworkplan-vim 仍为 v1.0.1；发布工作流现在会重试 release tag 推送以吸收瞬时拒绝。
+
+已安装的技能版本：**7.10.2**，自 7.0.0 起保持稳定。

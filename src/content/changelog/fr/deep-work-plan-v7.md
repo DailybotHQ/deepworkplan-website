@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7 conserve la méthode de v6 : le contrat fait autorité, le journal en ajout seul est la mémoire, l'ordonnanceur décide de ce qui s'exécute ensuite, et une tâche ne se clôt que lorsque des preuves enregistrées satisfont ses critères. v7 ajoute la possibilité de déléguer et maintient la même discipline autour du résultat.
@@ -52,4 +54,6 @@ La version 7.10.0 (2026-10-26) transforme les décisions structurantes en décis
 
 La version 7.10.1 (2026-11-15) épingle l'addon Herdr sur herdr-peers v1.2.1, dont la ligne 1.2.x ajoute l'autopilot : un démon optionnel que seul un humain démarre, qui accepte l'option recommandée pour chaque agent en attente, mène les dialogues en plusieurs étapes jusqu'à leur terme et ne touche jamais à une connexion ni à la confirmation d'un contournement de permissions. Le protocole 1 est inchangé.
 
-Version installée du skill : **7.10.1**, stable depuis 7.0.0.
+La version 7.10.2 (2026-11-15) déplace les épingles de l'écosystème avec les sorties du jour : l'addon Herdr vers herdr-peers v1.2.2, un correctif pur dont l'autopilot répond désormais à une question affichée avec un aperçu à côté de ses options et reconnaît la marque de recommandation en espagnol, français, allemand et italien ; agentkit vers coding-agents-kit v1.2.0, dont `ak last` reprend la session la plus récente d'un répertoire de travail dans n'importe quel terminal et dont les lancements dans un panneau Herdr restaurent ce panneau après un redémarrage de Herdr ou de la machine ; devcontainer-kit vers v1.1.2 et deepworkplan-vim reste en v1.0.1 ; le workflow de release retente désormais le push du tag de release pour absorber les refus transitoires.
+
+Version installée du skill : **7.10.2**, stable depuis 7.0.0.
