@@ -9,6 +9,14 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.63] - 2026-11-15
+
+### Changed
+
+- fix: name the installed release 7.10.2 on the quickstart mirrors
+- docs(changelog): add the 7.10.2 release to the v7 entry in every locale
+- feat: pin the pack at v7.10.2, herdr-peers at v1.2.2 and agentkit at v1.2.0
+
 ## [5.0.62] - 2026-11-15
 
 ### Changed
@@ -1410,7 +1418,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.62...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.63...HEAD
+[5.0.63]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.63
 [5.0.62]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.62
 [5.0.61]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.61
 [5.0.60]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.60
