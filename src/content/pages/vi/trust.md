@@ -27,7 +27,7 @@ git checkout v7.10.1
 # Download the checksums for the release you intend to install (current release v7.10.1):
 curl -fsSL -o SHA256SUMS \
   https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.10.1/SHA256SUMS
-# Expected SHA256SUMS digest: 5b288fad7cd0cee810092d30f8a502e73e0b04b69510510faa649e1270671779
+# Expected SHA256SUMS digest: 80be3b01a54dc6d78465a62584dfea07d60187217ddd35153b4940ff23d094ee
 ./setup.sh --verify        # lối thoát khác không nghĩa là file không khớp — dừng lại
 ```
 
