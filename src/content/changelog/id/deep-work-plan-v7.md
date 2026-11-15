@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7 mempertahankan metode v6: kontrak adalah otoritas, jurnal append-only adalah memori, penjadwal menentukan apa yang berjalan berikutnya, dan sebuah tugas baru ditutup ketika bukti yang tercatat memenuhi kriterianya. v7 menambahkan kemampuan mendelegasikan dan menjaga disiplin yang sama terhadap hasilnya.
@@ -44,4 +48,8 @@ Rilis 7.8.0 (2026-10-13) menetapkan Ecosystem 1.0: setiap produk yang diintegras
 
 Rilis 7.9.0 (2026-10-25) mematok addon Herdr ke herdr-peers v1.1.0, yang sub-skill debat bawaannya memungkinkan lead menjalankan panel peer melalui beberapa putaran dan menutupnya dengan catatan keputusan, serta mematok AI Diff Reviewer di v3.3.16; CI paket kini menjalankan job batas minimum Python 3.9 di ubuntu-24.04.
 
-Rilis skill yang dipasang: **7.9.0**, stabil sejak 7.0.0.
+Rilis 7.10.0 (2026-10-26) mengubah keputusan penting menjadi keputusan tim: dengan addon Herdr aktif dan herdr-peers 1.1.0 atau yang lebih baru digunakan, `create` merencanakan setiap keputusan penting — dua opsi layak dengan hasil yang berbeda secara material, sulit dibalik atau melintasi bagian, dan tidak diputuskan oleh apa pun di repositori — sebagai tugas keputusan yang didaftarkan, dan `execute` memimpin debat `decide` herdr-peers untuknya tanpa memberikan suara, mencatat setiap kursi dalam jurnal sebagai delegasi baca-saja, dan merekam pilihan bersama catatan keputusannya. Tanpa Herdr tidak ada yang berubah: prasyarat yang hilang atau debat yang gagal kembali ke catatan keputusan agen itu sendiri, dan `config.py decisions debate off` mengembalikan pertimbangan satu agen. Pin addon Dailybot berpindah ke agent-skill v3.23.20, rilis yang di-vendored.
+
+Rilis 7.10.1 (2026-11-15) mematok addon Herdr ke herdr-peers v1.2.1, yang lini 1.2.x-nya menambahkan autopilot: daemon opsional yang hanya dijalankan oleh manusia, yang menerima opsi yang disarankan untuk setiap agen yang menunggu, mengikuti dialog multi-langkah sampai tuntas, dan tidak pernah menyentuh login atau konfirmasi pengabaian izin. Protokol 1 tidak berubah.
+
+Rilis skill yang dipasang: **7.10.1**, stabil sejak 7.0.0.

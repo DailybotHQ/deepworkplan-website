@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7 沿用 v6 的方法：契约是权威，仅追加的日志是记忆，调度器决定接下来运行什么，只有当记录在案的证据满足任务的标准时，任务才会关闭。v7 增加了委派能力，并对委派结果保持同样的纪律。
@@ -44,4 +48,8 @@ v7 是编排与可审计性方面的一次跃升，但尚不是完全无人值�
 
 7.9.0 版本（2026-10-25）将 Herdr 附加组件固定到 herdr-peers v1.1.0，其原生辩论子技能让主导者组织对等智能体评审团进行多轮讨论，并以决策记录收尾；同时将 AI Diff Reviewer 固定在 v3.3.16。技能包的 CI 现在在 ubuntu-24.04 上运行 Python 3.9 最低版本任务。
 
-已安装的技能版本：**7.9.0**，自 7.0.0 起保持稳定。
+7.10.0 版本（2026-10-26）让重大决策成为团队决策：在启用 Herdr 附加组件且使用 herdr-peers 1.1.0 或更高版本时，`create` 将每个重大决策——两个可行选项、结果实质不同、难以逆转或横切多个部分、且仓库中没有任何内容能对其裁定——规划为一项列出的决策任务，`execute` 则为其主持一场 herdr-peers 的 `decide` 辩论且不投票，把每个席位记录为只读委托，并连同决策记录一起记录所选选项。没有 Herdr 时一切照旧：前提缺失或辩论失败时回退到智能体自己的决策记录，`config.py decisions debate off` 可恢复单智能体判断。Dailybot 附加组件的固定版本移至 agent-skill v3.23.20，即内置的发行版本。
+
+7.10.1 版本（2026-11-15）将 Herdr 附加组件固定到 herdr-peers v1.2.1，其 1.2.x 系列加入 autopilot：一个仅由人类启动的可选守护进程，为每个等待中的智能体接受推荐选项，把多步对话跟进到底，且从不触碰登录或权限绕过确认。协议 1 保持不变。
+
+已安装的技能版本：**7.10.1**，自 7.0.0 起保持稳定。

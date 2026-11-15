@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7 giữ phương pháp của v6: hợp đồng là thẩm quyền, nhật ký chỉ-ghi-thêm là bộ nhớ, bộ lập lịch quyết định việc gì chạy tiếp theo, và một tác vụ chỉ đóng khi bằng chứng đã ghi nhận đáp ứng tiêu chí của nó. v7 bổ sung khả năng ủy quyền và giữ nguyên kỷ luật đó đối với kết quả.
@@ -44,4 +48,8 @@ Bản phát hành 7.8.0 (2026-10-13) thiết lập Ecosystem 1.0: mọi sản ph
 
 Bản phát hành 7.9.0 (2026-10-25) ghim addon Herdr vào herdr-peers v1.1.0, với sub-skill tranh luận gốc cho phép lead điều hành một hội đồng peer qua nhiều vòng và khép lại bằng một bản ghi quyết định, đồng thời ghim AI Diff Reviewer ở v3.3.16; CI của gói nay chạy job phiên bản Python 3.9 tối thiểu trên ubuntu-24.04.
 
-Phiên bản skill đã cài: **7.9.0**, ổn định từ 7.0.0.
+Bản phát hành 7.10.0 (2026-10-26) biến các quyết định trọng đại thành quyết định của nhóm: khi addon Herdr được bật và herdr-peers 1.1.0 trở lên đang được dùng, `create` lập kế hoạch cho mỗi quyết định trọng đại — hai phương án khả thi với kết quả khác nhau một cách thực chất, khó đảo ngược hoặc xuyên cắt, và không có gì trong kho quyết định — thành một tác vụ quyết định được liệt kê, còn `execute` chủ trì một cuộc tranh luận `decide` herdr-peers cho nó mà không bỏ phiếu, ghi nhật ký mọi ghế như một ủy quyền chỉ đọc và ghi lại lựa chọn cùng bản ghi quyết định của nó. Không có Herdr thì không gì thay đổi: tiền điều kiện thiếu hoặc tranh luận thất bại sẽ quay về bản ghi quyết định của chính agent, và `config.py decisions debate off` khôi phục phán đoán của một agent duy nhất. Ghim addon Dailybot chuyển sang agent-skill v3.23.20, bản phát hành đã vendored.
+
+Bản phát hành 7.10.1 (2026-11-15) ghim addon Herdr vào herdr-peers v1.2.1, với dòng 1.2.x thêm autopilot: một trình nền tùy chọn chỉ do con người khởi động, chấp nhận phương án được khuyên cho mọi agent đang chờ, đi theo các hội thoại nhiều bước đến cùng và không bao giờ chạm vào đăng nhập hay xác nhận bỏ qua quyền hạn. Giao thức 1 không đổi.
+
+Phiên bản skill đã cài: **7.10.1**, ổn định từ 7.0.0.

@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7 behält die Methode von v6 bei: Der Vertrag ist die Autorität, das nur anhängbare Journal ist das Gedächtnis, der Scheduler entscheidet, was als Nächstes läuft, und eine Aufgabe wird erst abgeschlossen, wenn aufgezeichnete Nachweise ihre Kriterien erfüllen. v7 ergänzt die Möglichkeit zu delegieren und hält dieselbe Disziplin beim Ergebnis ein.
@@ -44,4 +48,8 @@ Release 7.8.0 (2026-10-13) etablierte Ecosystem 1.0: Jedes vom Paket integrierte
 
 Release 7.9.0 (2026-10-25) pinnt das Herdr-Addon auf herdr-peers v1.1.0, dessen nativer Debatten-Sub-Skill einen Lead ein Panel von Peers durch Runden führen und mit einem Entscheidungsprotokoll abschließen lässt, und pinnt den AI Diff Reviewer auf v3.3.16; die CI des Pakets führt ihren Python-3.9-Mindestversionsjob jetzt auf ubuntu-24.04 aus.
 
-Installierte Skill-Version: **7.9.0**, stabil seit 7.0.0.
+Release 7.10.0 (2026-10-26) macht aus tragenden Entscheidungen Team-Entscheidungen: mit aktiviertem Herdr-Addon und herdr-peers 1.1.0 oder neuer plant `create` jede tragende Entscheidung — zwei lebensfähige Optionen mit materiell verschiedenen Ergebnissen, schwer umzukehren oder quer liegend, und von nichts im Repository entschieden — als gelistete Entscheidungsaufgabe, und `execute` leitet dafür eine herdr-peers-`decide`-Debatte ohne eigene Stimme, journalisiert jeden Sitz als schreibgeschützte Delegation und hält die Wahl mit ihrem Entscheidungsprotokoll fest. Ohne Herdr ändert sich nichts: eine fehlende Voraussetzung oder eine gescheiterte Debatte fällt auf das eigene Entscheidungsprotokoll des Agenten zurück, und `config.py decisions debate off` stellt das Urteil eines einzelnen Agenten wieder her. Das Addon-Pin von Dailybot zieht auf agent-skill v3.23.20, die vendored Version.
+
+Release 7.10.1 (2026-11-15) pinnt das Herdr-Addon auf herdr-peers v1.2.1, dessen 1.2.x-Linie Autopilot hinzufügt: einen optionalen Daemon, den nur ein Mensch startet und der für jeden wartenden Agenten die empfohlene Option annimmt, mehrstufige Dialoge bis zum Ende verfolgt und niemals einen Login oder die Bestätigung einer Berechtigungsumgehung berührt. Protokoll 1 bleibt unverändert.
+
+Installierte Skill-Version: **7.10.1**, stabil seit 7.0.0.
