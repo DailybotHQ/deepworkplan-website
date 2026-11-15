@@ -9,6 +9,12 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.64] - 2026-11-15
+
+### Changed
+
+- ci: fall back to github.token when the automation PAT is unavailable
+
 ## [5.0.63] - 2026-11-15
 
 ### Changed
@@ -1418,7 +1424,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.63...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.64...HEAD
+[5.0.64]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.64
 [5.0.63]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.63
 [5.0.62]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.62
 [5.0.61]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.61
