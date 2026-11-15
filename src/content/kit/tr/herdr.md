@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev), kodlama agent'larını hem kendi makinenizde hem de SSH üzerinden eriştiği makinelerde bölmelere yerleştirir. Bu eklenti, bir Deep Work Plan'ın bu agent'ları **eş** (peer) olarak kullanmasını sağlar: bir plan, sınırları belirli bir görevi başka bir bölmedeki bir agent'a devredebilir, tam olarak bir yetkili yanıt alabilir ve bu alışverişin kaydını tutabilir.
 
-Bu, **DWP v7**'nin (pack `v7.9.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
+Bu, **DWP v7**'nin (pack `v7.10.1`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
 
 ## Neyi entegre eder
 
@@ -26,7 +26,6 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 
 **`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler: CLI fiilleri ve belgelenmiş bayrakları, `0`–`7` çıkış kodları, belgelenmiş `HERDR_PEERS_*`, `DWP_PLAN` ve `DWP_TASK` değişkenleri, protokol 1 ve `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` JSON sözleşmeleri ile devretme kaydı. Bunlardan herhangi birindeki uyumsuz bir değişiklik ana sürümü yükseltir; kablo biçimindeki bir değişiklik ayrıca protokol numarasını da yükseltir. `v1.0.0`, `v0.3.3` sürümüne göre hiçbir davranışı değiştirmez ve 0.x sürümleri artık desteklenmez.
 
-**Pack tanımlayıcısının ilerisinde.** Pack `v7.9.0`, Herdr eklenti tanımlayıcısında herdr-peers 1.1.0 sürümünü kaydeder; bu site ise daha yeni olan `v1.2.1` sürümüne sabitlenmiştir (2026-11-15). 1.2.0 ve 1.2.1 sürümleri yalnızca ekleme yapar ve protokol 1'i korur; dolayısıyla entegrasyon değişmez.
 
 ## Kurulum
 
@@ -60,7 +59,7 @@ herdr-peers göndereni doğrulamaz: bir damgadaki `from=` alanı bir iddiadır. 
 
 ## Konteynerler ve ana makine
 
-devcontainer-kit `v1.1.1` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır. devcontainer-kit `v1.1.1` imajı, kitin bir sonraki sürümüne kadar, autopilot içermeyen herdr-peers 1.1.0 ile gelir.
+devcontainer-kit `v1.1.2` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
 
 ## Herdr mı agentkit mi
 

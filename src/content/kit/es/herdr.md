@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) coloca agentes de programación en paneles, en tu máquina y en las máquinas a las que llega por SSH. Este addon permite que un Deep Work Plan use esos agentes como **pares**: un plan puede pasar una tarea acotada a un agente en otro panel, recibir exactamente una respuesta autorizada y conservar un registro del intercambio.
 
-Es un addon opcional de **DWP v7** (pack `v7.9.0`). La metodología funciona igual sin él: con el addon ausente o deshabilitado, cada tarea se ejecuta en la sesión actual, exactamente como antes.
+Es un addon opcional de **DWP v7** (pack `v7.10.1`). La metodología funciona igual sin él: con el addon ausente o deshabilitado, cada tarea se ejecuta en la sesión actual, exactamente como antes.
 
 ## Qué integra
 
@@ -26,7 +26,6 @@ El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://gi
 
 **Estable desde `v1.0.0`.** La interfaz pública sigue el versionado semántico: los verbos de la CLI y sus opciones documentadas, los códigos de salida `0`–`7`, las variables documentadas `HERDR_PEERS_*`, `DWP_PLAN` y `DWP_TASK`, el protocolo 1 y los contratos JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` y el registro de delegación. Un cambio incompatible en cualquiera de ellos incrementa la versión mayor, y un cambio en el formato de transmisión también incrementa el número de protocolo. `v1.0.0` no cambia ningún comportamiento respecto de `v0.3.3`, y las versiones 0.x ya no tienen soporte.
 
-**Por delante del descriptor del pack.** El pack `v7.9.0` registra herdr-peers 1.1.0 en su descriptor del addon de Herdr; este sitio fija la versión posterior `v1.2.1` (2026-11-15). Las versiones 1.2.0 y 1.2.1 son aditivas y mantienen el protocolo 1, así que la integración no cambia.
 
 ## Instalación
 
@@ -60,7 +59,7 @@ herdr-peers no autentica al remitente: el campo `from=` de un sello es una afirm
 
 ## Contenedores y el host
 
-Con el addon [devcontainer](/kit/devcontainer) sobre devcontainer-kit `v1.1.1`, cada contenedor dck incluye herdr-peers y se une a la malla en `dck up`: sus agentes pueden consultar a agentes del host, de los demás contenedores y de los otros contenedores loopback del host, y recibir la respuesta. `dck setup` instala un herdr-peers verificado en el host, así que los agentes del host también responden. El listener del host y las claves adicionales que dejan entrar a otros contenedores son decisiones tuyas en el perfil del host del kit; este addon nunca los configura. Desde herdr-peers (`v0.2.3`), cada máquina mantiene su propio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), así que un checkout compartido por el host y un contenedor ya no mezcla sus registros, y desde devcontainer-kit (`v0.3.3`) el propio contenedor exporta `HERDR_PEERS_SELF`, así que los agentes Codex de dentro llegan a otras máquinas sin ningún paso manual. La imagen de devcontainer-kit `v1.1.1` incluye herdr-peers 1.1.0, que no tiene autopilot, hasta la próxima versión del kit.
+Con el addon [devcontainer](/kit/devcontainer) sobre devcontainer-kit `v1.1.2`, cada contenedor dck incluye herdr-peers y se une a la malla en `dck up`: sus agentes pueden consultar a agentes del host, de los demás contenedores y de los otros contenedores loopback del host, y recibir la respuesta. `dck setup` instala un herdr-peers verificado en el host, así que los agentes del host también responden. El listener del host y las claves adicionales que dejan entrar a otros contenedores son decisiones tuyas en el perfil del host del kit; este addon nunca los configura. Desde herdr-peers (`v0.2.3`), cada máquina mantiene su propio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), así que un checkout compartido por el host y un contenedor ya no mezcla sus registros, y desde devcontainer-kit (`v0.3.3`) el propio contenedor exporta `HERDR_PEERS_SELF`, así que los agentes Codex de dentro llegan a otras máquinas sin ningún paso manual.
 
 ## Herdr o agentkit
 

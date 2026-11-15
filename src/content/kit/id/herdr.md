@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) menempatkan coding agent di dalam panel, di mesin Anda dan di mesin yang dijangkaunya melalui SSH. Addon ini memungkinkan sebuah Deep Work Plan menggunakan agen-agen tersebut sebagai **rekan** (peer): sebuah rencana dapat menyerahkan tugas yang terbatas kepada agen di panel lain, menerima tepat satu balasan yang diotorisasi, dan menyimpan catatan pertukaran tersebut.
 
-Ini adalah addon opsional dari **DWP v7** (pack `v7.9.0`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
+Ini adalah addon opsional dari **DWP v7** (pack `v7.10.1`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
 
 ## Apa yang diintegrasikan
 
@@ -26,7 +26,6 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 
 **Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning: verb CLI beserta flag yang terdokumentasi, kode keluar `0`–`7`, variabel `HERDR_PEERS_*`, `DWP_PLAN`, dan `DWP_TASK` yang terdokumentasi, protokol 1, serta kontrak JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1`, dan catatan delegasi. Perubahan yang merusak kompatibilitas pada salah satunya menaikkan versi mayor, dan perubahan format wire juga menaikkan nomor protokol. `v1.0.0` tidak mengubah perilaku apa pun dari `v0.3.3`, dan rilis 0.x tidak lagi didukung.
 
-**Lebih baru daripada deskriptor pack.** Pack `v7.9.0` mencatat herdr-peers 1.1.0 dalam deskriptor addon Herdr miliknya; situs ini mematok `v1.2.1` yang lebih baru (2026-11-15). Rilis 1.2.0 dan 1.2.1 bersifat aditif dan mempertahankan protokol 1, sehingga integrasinya tidak berubah.
 
 ## Instalasi
 
@@ -60,7 +59,7 @@ herdr-peers tidak mengautentikasi pengirim: kolom `from=` dalam cap adalah sebua
 
 ## Container dan host
 
-Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.1.1`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual. Image devcontainer-kit `v1.1.1` menyertakan herdr-peers 1.1.0, yang tidak memiliki autopilot, sampai rilis kit berikutnya.
+Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.1.2`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual.
 
 ## Herdr atau agentkit
 

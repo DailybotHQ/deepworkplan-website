@@ -20,24 +20,26 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 
 Versions are the release each surface pins today; the site may only claim a
 released tag (`tests/unit/lib/install-surface-pins.test.ts` guards the
-deepworkplan-skill pins). The pins last moved on 2026-10-25: pack `v7.9.0`,
-herdr-peers 1.1.0 (native debates), coding-agents-kit `v1.1.0`,
-deepworkplan-vim `v1.0.1`, ai-diff-reviewer `v3.3.16` and agent-skill
-`v3.23.20`, with the pack, the reviewer and the Dailybot skill vendored at
-those tags; devcontainer-kit `v1.1.1` (interface 2 unchanged) bakes
-herdr-peers 1.1.0, coding-agents-kit 1.1.0 and deepworkplan-vim 1.0.1
-into its image. On 2026-11-15 the herdr-peers pin alone moved to `v1.2.1`
-(autopilot, an optional daemon only a human starts; protocol 1 unchanged) and
-the skill is vendored at that tag; pack `v7.9.0` and the devcontainer-kit
-`v1.1.1` image still carry herdr-peers 1.1.0 until their next releases.
+deepworkplan-skill pins). The pins last moved on 2026-11-15: pack `v7.10.1`
+(7.10.0 settles each consequential decision through a herdr-peers `decide`
+debate by default; 7.10.1 pins the Herdr addon to herdr-peers `v1.2.1`),
+herdr-peers `v1.2.1` (1.1.0 adds native debates, 1.2.x adds autopilot, an
+optional daemon only a human starts; protocol 1 unchanged),
+coding-agents-kit `v1.1.0`, deepworkplan-vim `v1.0.1`, ai-diff-reviewer
+`v3.3.16` and agent-skill `v3.23.20`, with the pack, the reviewer and the
+Dailybot skill vendored at those tags. The pack `v7.10.1` Herdr addon
+descriptor records herdr-peers `v1.2.1`, so the site pin and the pack
+descriptor agree; devcontainer-kit `v1.1.2` (interface 2 unchanged) bakes
+herdr-peers 1.2.1, coding-agents-kit 1.1.0 and deepworkplan-vim 1.0.1
+into its image.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
-| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v7.9.0` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
+| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v7.10.1` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
 | ai-diff-reviewer | Required local review: reviews a change set locally and in CI; every Final Review runs it | Public | `v3.3.16` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
 | agent-skill | Addon (dailybot): progress reports, check-ins, chat and more | Public | `v3.23.20` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |
-| devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.1.1` | `/kit/devcontainer`, `/init.md` | Documented only |
+| devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.1.2` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon (agentkit): one `ak` command for every coding agent — accounts, quota, `ak pick`, headless runs | Public | `v1.1.0` | `/kit/agentkit`, `/init.md` | Documented only |
 | deepworkplan-vim | Addon (vim): the terminal editor for plans — plan browser, lanes view, Markdown viewer | Public | `v1.0.1` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
 | herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v1.2.1` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
@@ -50,7 +52,7 @@ additions arrive in minor versions. herdr-peers `v1.2.1` (CLI verbs, exit
 codes, protocol 1, the `lanes-v1` and `lead-v1` contracts),
 coding-agents-kit `v1.1.0` (the `ak` command surface, interface 1, the JSON
 schemas), deepworkplan-vim `v1.0.1` (installer, addon surface, editor
-commands, `dwpvim.json`, keybindings) and devcontainer-kit `v1.1.1` (the `dck`
+commands, `dwpvim.json`, keybindings) and devcontainer-kit `v1.1.2` (the `dck`
 verbs, flags and exit codes, the `dck.toml`, host-profile and doctor schemas,
 interface 2, the render contract) are released; each 1.0.0 changes no
 behavior from its last 0.x release beyond what its CHANGELOG lists. The pack,

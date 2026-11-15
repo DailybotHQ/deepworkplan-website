@@ -82,10 +82,10 @@ qu'il ait été contrôlé.
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- git checkout v7.9.0
+ git checkout v7.10.1
  # Téléchargez les checksums de cette version et comparez-les au digest ci-dessous :
  curl -fsSL -o SHA256SUMS \
- https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.9.0/SHA256SUMS
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.10.1/SHA256SUMS
  shasum -a 256 SHA256SUMS # doit être égal au digest de deepworkplan-skill dans Versions épinglées
  ./setup.sh --verify # une sortie non nulle signifie qu'un fichier ne correspond pas — arrêtez
  ```
@@ -99,10 +99,10 @@ qu'il ait été contrôlé.
 
   | Dépôt (github.com/DailybotHQ) | Tag | sha256 de son `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
+  | deepworkplan-skill | `v7.10.1` | `80be3b01a54dc6d78465a62584dfea07d60187217ddd35153b4940ff23d094ee` |
   | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
   | herdr-peers | `v1.2.1` | `aef2c64cae04e2e3dc5de0f8e664905edc2cd4c04465f04fc40856a0a0b94720` |
-  | devcontainer-kit | `v1.1.1` | `410fe708e9abc536bd8744b25306dc54e44f52cf6ce61013fa7d19c8052da792` |
+  | devcontainer-kit | `v1.1.2` | `c7a5ffb737777473f08932f9a2de153518d923f5d7edeb4ab97fdd7537bf2374` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | aucun publié — la CLI skills enregistre un hash de contenu dans `skills-lock.json` |
@@ -117,7 +117,7 @@ accompagné de neuf sous-skills — `create`, `execute`, `refine`, `resume`, `st
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.9.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.10.1 --skill deepworkplan -y
 ```
 
 Ou installez via OpenClaw :
@@ -139,7 +139,7 @@ version du skill Deep Work Plan installée ci-dessus. Le pack de skill actuel
 inclut le routeur et neuf sous-skills : `create`, `execute`, `refine`,
 `resume`, `status`, `verify`, `onboard`, `author` et `upgrade`.
 
-Version installée du skill : **7.9.0**. Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; le passage d’un plan v5 à v6 exige une migration explicite avec aperçu.
+Version installée du skill : **7.10.1**. Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; le passage d’un plan v5 à v6 exige une migration explicite avec aperçu.
 
 La norme est délibérément proportionnelle, et elle fait de cette
 proportionnalité une propriété du plan plutôt que de la discipline du
@@ -245,7 +245,7 @@ Le tableau est une référence, pas une liste de contrôle : n’exécutez une l
 | Dailybot | `version:` dans `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` dans la skill herdr-peers installée | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | l’installateur vérifié à https://deepworkplan.com/vim/install.sh (il épingle `v1.0.1` ; téléchargez-le, `shasum -a 256 -c install.sh.sha256`, puis exécutez-le) |
 
 Vérifiez chaque téléchargement par rapport au `SHA256SUMS` de sa version et au digest de *Versions épinglées*
@@ -259,7 +259,7 @@ depuis le standard 2.3.0) : la skill épinglée par tag ci-dessus plus un `.revi
 dépendances, design system, agentkit, Herdr, DeepWorkPlan Vim) et proposez uniquement ceux qui conviennent à ce dépôt, chacun comme un choix explicite. Un
 dépôt est pleinement conforme avec **zéro** addon facultatif — ne les installez jamais automatiquement.
 
-- **Prise en charge du devcontainer** — un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v1.1.1`, avec sa skill `dck-dockerfile`) : `dck init` génère le conteneur propre au dépôt (image officielle épinglée par digest, aucune image de base partagée, `bash dev.sh up`) et ne réconcilie un devcontainer existant qu’après acceptation de son diff. Une fois accepté, suivez *Le parcours devcontainer* ci-dessous jusqu’à la pile complète.
+- **Prise en charge du devcontainer** — un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v1.1.2`, avec sa skill `dck-dockerfile`) : `dck init` génère le conteneur propre au dépôt (image officielle épinglée par digest, aucune image de base partagée, `bash dev.sh up`) et ne réconcilie un devcontainer existant qu’après acceptation de son diff. Une fois accepté, suivez *Le parcours devcontainer* ci-dessous jusqu’à la pile complète.
 - **Intégration Dailybot** — quatre événements du cycle de vie (kickoff, tâche significative, bloqué, achèvement) comme rapports de progression au mieux pour les équipes utilisant déjà Dailybot, avec une couche facultative d’application autonome des hooks (`dailybot-cli >= 3.9.0`). L’installation du skill d’agent Dailybot apparié (3.23.14) expose aussi le chat, les check-ins, la création de formulaires, la consultation IA, les tableaux et tâches Plan, les clés API par dépôt et plus — l’addon ne raccorde que le reporting à l’exécution DWP. La méthodologie de base n’a aucune dépendance à Dailybot.
 - **Mise à jour des dépendances** — des mises à jour indépendantes du gestionnaire de paquets, par lots, validées et réversibles. Lorsqu’elle est
  acceptée, elle installe la commande `/lib-upgrade`.

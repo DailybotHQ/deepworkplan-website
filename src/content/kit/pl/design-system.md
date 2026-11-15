@@ -60,7 +60,7 @@ Po zaakceptowaniu dodatek może zainstalować delegator `/design-system` w katal
 | Klucz rejestru | `design-system` w `.dwp/config.json` |
 | Deskryptor | `addons/design-system/addon.json` (interfejs 1) |
 | Plik docelowy | `docs/DESIGN.md` indeksowany z `AGENTS.md` |
-| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v7.9.0`) |
+| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v7.10.1`) |
 
 ## Związek z dokumentami projektowymi per funkcja
 
