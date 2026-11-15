@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7 keeps the v6 method: the contract is the authority, the append-only journal is the memory, the scheduler decides what runs next, and a task closes only when recorded evidence satisfies its criteria. v7 adds the ability to delegate, and keeps the same discipline around the result.
@@ -44,4 +48,8 @@ Release 7.8.0 (2026-10-13) established Ecosystem 1.0: every product the pack int
 
 Release 7.9.0 (2026-10-25) pins the Herdr addon to herdr-peers v1.1.0, whose native debate sub-skill lets a lead run a panel of peers through rounds and close with a decision record, and pins the AI Diff Reviewer at v3.3.16; the pack's CI now runs its Python 3.9 floor job on ubuntu-24.04.
 
-Installed skill release: **7.9.0**, stable since 7.0.0.
+Release 7.10.0 (2026-10-26) turns consequential decisions into team decisions: with the Herdr addon enabled and herdr-peers 1.1.0 or later in use, `create` plans each consequential decision — two viable options with materially different outcomes, hard to reverse or cross-cutting, and settled by nothing in the repository — as a listed decision task, and `execute` leads a herdr-peers `decide` debate for it without voting, journaling every seat as a read-only delegation and recording the choice with its decision record. Nothing changes without Herdr: a missing precondition or a failed debate falls back to the agent's own decision record, and `config.py decisions debate off` restores one-agent judgment. The Dailybot addon pin moves to agent-skill v3.23.20, the vendored release.
+
+Release 7.10.1 (2026-11-15) pins the Herdr addon to herdr-peers v1.2.1, whose 1.2.x line adds autopilot: an optional daemon that only a human starts, which accepts the recommended option for every waiting agent, follows multi-step dialogs to their end and never touches a login or a permission-bypass acknowledgement. Protocol 1 is unchanged.
+
+Installed skill release: **7.10.1**, stable since 7.0.0.

@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7 は v6 の方法を維持します。契約が権威であり、追記専用のジャーナルが記憶であり、スケジューラが次に実行するものを決め、記録された証拠がタスクの基準を満たしたときにのみタスクが完了します。v7 は委任の能力を加え、その結果に対しても同じ規律を保ちます。
@@ -44,4 +48,8 @@ v7 はオーケストレーションと監査可能性における大きな前�
 
 リリース 7.9.0（2026-10-25）は Herdr アドオンを herdr-peers v1.1.0 に固定しました。そのネイティブの debate サブスキルにより、リードがピアのパネルをラウンドに沿って進め、意思決定記録で締めくくれます。また AI Diff Reviewer を v3.3.16 に固定しました。パックの CI は Python 3.9 の下限ジョブを ubuntu-24.04 で実行するようになりました。
 
-インストール済みスキルのリリースは **7.9.0** です。7.0.0 以降、安定しています。
+リリース 7.10.0（2026-10-26）は、重大な意思決定をチームの決定に変えます。Herdr アドオンが有効で herdr-peers 1.1.0 以降を使用している場合、`create` は各重大な意思決定——実現可能な2つの選択肢のどちらを選んでも結果が実質的に異なり、取り消しが難しいか複数の領域にまたがり、リポジトリ内の何ものも決めていないもの——を、リストされた決定タスクとして計画し、`execute` はそのために herdr-peers の `decide` ディベートを投票なしで主催し、各席を読み取り専用の委任としてジャーナルに記録し、選択を選択記録とともに書き留めます。Herdr がなければ何も変わりません。前提条件の欠落やディベートの失敗はエージェント自身の決定記録にフォールバックし、`config.py decisions debate off` で単一エージェントの判断に戻せます。Dailybot アドオンの固定は、vendored 済みのリリースである agent-skill v3.23.20 に移動します。
+
+リリース 7.10.1（2026-11-15）は Herdr アドオンを herdr-peers v1.2.1 に固定しました。その 1.2.x 系列は autopilot を追加します。人間だけが起動する任意のデーモンで、待機中の各エージェントの推奨オプションを受け入れ、複数ステップの対話を最後までたどり、ログインや権限バイパスの承認には決して触れません。プロトコル1は不変です。
+
+インストール済みスキルのリリースは **7.10.1** です。7.0.0 以降、安定しています。

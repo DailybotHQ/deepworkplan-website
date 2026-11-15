@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7은 v6의 방식을 유지합니다. 계약이 권한의 근거이고, 추가 전용 저널이 기억이며, 스케줄러가 다음에 실행할 작업을 정하고, 기록된 증거가 작업의 기준을 충족할 때만 작업이 종료됩니다. v7은 위임 기능을 더하면서 그 결과에 대해서도 같은 규율을 유지합니다.
@@ -44,4 +48,8 @@ v7은 오케스트레이션과 감사 가능성에서의 큰 진전이지만, �
 
 릴리스 7.9.0(2026-10-25)은 Herdr 애드온을 herdr-peers v1.1.0에 고정했습니다. 이 버전의 네이티브 debate 하위 스킬로 리드가 피어 패널을 여러 라운드에 걸쳐 진행하고 결정 기록으로 마무리할 수 있습니다. 또한 AI Diff Reviewer를 v3.3.16에 고정했으며, 팩의 CI는 이제 Python 3.9 하한 작업을 ubuntu-24.04에서 실행합니다.
 
-설치된 skill 릴리스: **7.9.0**, 7.0.0 이후 안정적입니다.
+릴리스 7.10.0(2026-10-26)은 중대한 결정을 팀의 결정으로 바꿉니다. Herdr 애드온이 활성화되어 있고 herdr-peers 1.1.0 이상을 사용 중이라면, `create`는 각 중대한 결정—실행 가능한 두 가지 선택지가 실질적으로 다른 결과를 낳고, 되돌리기 어렵거나 여러 영역에 걸쳐 있으며, 저장소 안의 어떤 것도 결정하지 않은—를 목록에 올린 결정 작업으로 계획하고, `execute`는 이를 위해 herdr-peers의 `decide` 토론을 투표 없이 진행하며, 모든 좌석을 읽기 전용 위임으로 저널에 기록하고 선택을 결정 기록과 함께 남깁니다. Herdr가 없으면 아무것도 바뀌지 않습니다. 전제 조건이 없거나 토론이 실패하면 에이전트 자신의 결정 기록으로 되돌아가고, `config.py decisions debate off`로 단일 에이전트 판단을 복원합니다. Dailybot 애드온 고정은 vendored 릴리스인 agent-skill v3.23.20으로 이동합니다.
+
+릴리스 7.10.1(2026-11-15)은 Herdr 애드온을 herdr-peers v1.2.1에 고정했습니다. 이 버전의 1.2.x 계열은 autopilot을 추가합니다. 사람만이 시작하는 선택적 데몬으로, 대기 중인 모든 에이전트의 권장 옵션을 수락하고, 여러 단계의 대화를 끝까지 따라가며, 로그인이나 권한 우회 확인은 결코 건드리지 않습니다. 프로토콜 1은 변함없습니다.
+
+설치된 skill 릴리스: **7.10.1**, 7.0.0 이후 안정적입니다.

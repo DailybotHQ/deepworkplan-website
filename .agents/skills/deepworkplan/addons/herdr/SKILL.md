@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-addon-herdr
-description: Optional DeepWorkPlan addon that integrates herdr-peers (DailybotHQ/herdr-peers pinned at v1.1.0, protocol 1) as the interactive delegation transport - a thin integrator that detects the herdr-peers helper, offers it (never imposes it) from onboard Phase 7b, documents the pinned skill installs (herdr-peers and Herdr's official skill), records the acceptance in the .dwp/config.json addon registry, and maps a v7 plan's delegation operations onto one herdr-peers ask to a peer pane on any machine, with every delegation recorded in the plan journal. The message protocol lives in herdr-peers, never here. Never required, never a conformance gate.
-version: "7.9.0"
+description: Optional DeepWorkPlan addon that integrates herdr-peers (DailybotHQ/herdr-peers pinned at v1.2.1, protocol 1) as the interactive delegation transport - a thin integrator that detects the herdr-peers helper, offers it (never imposes it) from onboard Phase 7b, documents the pinned skill installs (herdr-peers and Herdr's official skill), records the acceptance in the .dwp/config.json addon registry, and maps a v7 plan's delegation operations onto one herdr-peers ask to a peer pane on any machine, with every delegation recorded in the plan journal. The message protocol lives in herdr-peers, never here. Never required, never a conformance gate.
+version: "7.10.1"
 documentation_url: https://deepworkplan.com/kit/herdr
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -26,7 +26,7 @@ the install lines, the transport mapping and the journaling rule.
 | Pin | Value |
 |-----|-------|
 | Product | `DailybotHQ/herdr-peers` |
-| Tag | `v1.1.0` (adds native debates while keeping protocol 1; the first stable release, `v1.0.0`, committed the interface to semantic versioning) |
+| Tag | `v1.2.1` (protocol 1 unchanged; native debates since `v1.1.0`, the optional autopilot since `v1.2.0`; the first stable release, `v1.0.0`, committed the interface to semantic versioning) |
 | Interface | `1` (`herdr-peers --version` → `(protocol 1)`; `metadata.protocol: 1` in its `SKILL.md`) |
 | Depends on | Herdr's official skill, pinned `herdrdev/herdr@v0.9.3` |
 | Registry key | `herdr` (`.dwp/config.json` → `addons.herdr`) |
@@ -58,7 +58,10 @@ the install lines, the transport mapping and the journaling rule.
 - **Writes (only after explicit acceptance):** the two pinned skill
   installs, the `addons.herdr` registry entry, and — during a delegation —
   a dedicated worktree for a writing peer plus the collected reply under the
-  plan's `analysis_results/delegations/<id>/`.
+  plan's `analysis_results/delegations/<id>/`; and — only for a decision
+  task an approved plan lists — the debate folder
+  `analysis_results/debates/<topic>/` (`HUMAN_NOTE.md`, the seats' filings,
+  `DECISION.md`).
 - **It MUST NOT:** hand-build a peer message (the helper stamps it); answer
   a reply; delegate from a delegate (depth 1); exceed the helper's fan-out
   cap; close a pane it did not create; change SSH host trust, `~/.ssh` or
@@ -78,8 +81,13 @@ not usable in this session (record it, continue sequentially).
 
 What it adds: a plan can ask an agent in another pane — another provider,
 another machine — to take a task, and get one authorized reply back,
-recorded in the plan. What it costs: Herdr itself, the two skills, and
-per-plan consent (`agent_delegation`). Declining is a complete answer.
+recorded in the plan; and, by default, a plan settles each consequential
+decision through a small debate among agents instead of one agent's
+judgment (see "Decision debates" below). What it costs: Herdr itself, the
+two skills, per-plan consent (`agent_delegation`), and for each debate the
+turns of the agents seated on it. Debates can be turned off at any time:
+`config.py decisions debate off --repo <repo>`. Declining is a complete
+answer.
 
 ### Step 2 — Install (pinned; point-don't-run by default)
 
@@ -89,7 +97,7 @@ its own documented paths, never a piped installer.
 
 ### Step 3 — Record
 
-`python3 ../../shared/config.py enable herdr --version v1.1.0 --repo <repo>`.
+`python3 ../../shared/config.py enable herdr --version v1.2.1 --repo <repo>`.
 Enabling grants nothing: delegation still needs the plan's grant.
 
 ### Step 4 — Transport (during execute)
@@ -174,9 +182,9 @@ With `v0.2.x` there are no notices or lead records: lanes send asks to the
 lead's address from their brief, and a lead change is relayed by the
 developer.
 
-## Native debates (herdr-peers `v1.1.0`)
+## Native debates (herdr-peers `v1.1.0` and later)
 
-The pinned skill adds a native debate sub-skill (`debate.md`): a lead runs a
+The pinned skill carries a native debate sub-skill (`debate.md`): a lead runs a
 panel of peers through rounds and closes with one result. The lead picks the
 purpose first (decide, research, stress-test, verify, generate) and a
 format such as classic rounds, claim-by-claim cross-exam, red team then
@@ -191,6 +199,40 @@ agents. `reply` and `notify` also retry delivery to a peer blocked at a
 question (`--wait-blocked`), still exactly one reply. The release is
 additive: protocol/interface `1` is unchanged.
 
+## Autopilot (herdr-peers `v1.2.0` and later)
+
+The pinned skill also ships `herdr-peers autopilot` (its `autopilot.md`): an
+optional daemon that only a human starts. It watches every agent on every
+enabled Herdr machine, accepts the recommended option on a waiting question
+or approval screen, and tells an agent that stopped to ask to continue; it
+never touches a login, and no message, peer or plan can start it. DWP never
+requires it, and an agent executing a plan **MUST NOT** start it on its own.
+Reference:
+`https://github.com/DailybotHQ/herdr-peers/blob/v1.2.1/skills/herdr-peers/autopilot.md`.
+
+## Decision debates (the default decision mode)
+
+With this addon in use, a plan settles each **consequential decision** —
+two viable options with materially different outcomes, hard to reverse or
+cross-cutting, settled by nothing in the repository — through a herdr-peers
+*decide* debate, not one agent's judgment (SPEC §6.4):
+
+- **Planned.** `create` makes each one a decision task, listed in the plan's
+  "Decision debates" section with its question, options, shape and seat cap
+  (`../../create/decisions.md`); approving the plan is the consent to seat
+  agents. Quick (3–4 seats, one round) by default.
+- **Run.** `execute` leads the debate and never votes; every seat is a
+  read-only delegation journaled before its ask; the count lands in
+  `analysis_results/debates/<topic>/DECISION.md` and the choice in
+  `PROGRESS.md` "Decisions" (`../../execute/debate.md`).
+- **Bounded.** Only with this addon enabled, herdr-peers `1.1.0`+, inside
+  Herdr, the plan's grant and `decisions.debate` at `auto` (absent is
+  `auto`; `config.py decisions debate off` turns it off). The verdict is a
+  recommendation, never an authority; a split on an outcome-changing
+  question goes to the developer as C3.
+- **Never blocking.** Without any precondition, or when a debate fails, the
+  decision is the agent's own record with `debate: not run — <reason>`.
+
 ## Failure-mode guardrails
 
 - **Never required, never blocking.** Not inside Herdr, helper missing,
@@ -202,7 +244,7 @@ additive: protocol/interface `1` is unchanged.
 
 1. `SKILL.md`, `SPEC.md`, `install.md`, `addon.json`,
    `templates/INTEGRATION.md` exist; no protocol copy ships here.
-2. The descriptor pins `DailybotHQ/herdr-peers` `v1.1.0`, interface 1,
+2. The descriptor pins `DailybotHQ/herdr-peers` `v1.2.1`, interface 1,
    transport `interactive`.
 3. Every install line names an exact tag.
 4. The registry entry exists only after acceptance.

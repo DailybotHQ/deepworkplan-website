@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) 把编码代理放进窗格中，既可在你的机器上，也可在它通过 SSH 连接到的机器上。这个附加组件让 Deep Work Plan 把这些代理当作**对等方**来使用：计划可以把一项有边界的任务交给另一个窗格中的代理，接收恰好一条获授权的回复，并保留这次交互的记录。
 
-它是 **DWP v7**（pack `v7.9.0`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
+它是 **DWP v7**（pack `v7.10.1`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
 
 ## 它集成了什么
 
@@ -26,7 +26,6 @@ order: 7
 
 **自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 1，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
 
-**领先于 pack 的描述符。** Pack `v7.9.0` 在其 Herdr 附加组件描述符中记录的是 herdr-peers 1.1.0；本站固定的是更新的 `v1.2.1`（2026-11-15）。1.2.0 和 1.2.1 两个版本只做增量并保留协议 1，因此集成保持不变。
 
 ## 安装
 
@@ -60,7 +59,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 容器与主机
 
-借助基于 devcontainer-kit `v1.1.1` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers (`v0.2.3`) 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。devcontainer-kit `v1.1.1` 镜像自带的是 herdr-peers 1.1.0，其中没有 autopilot，这一情况会持续到该工具包的下一个版本发布。
+借助基于 devcontainer-kit `v1.1.2` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers (`v0.2.3`) 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。
 
 ## Herdr 还是 agentkit
 

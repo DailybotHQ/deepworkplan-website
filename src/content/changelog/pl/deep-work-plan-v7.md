@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7 zachowuje metodę z v6: kontrakt jest autorytetem, dziennik tylko do dopisywania jest pamięcią, harmonogram decyduje, co uruchomić dalej, a zadanie zamyka się dopiero wtedy, gdy zapisane dowody spełniają jego kryteria. v7 dodaje możliwość delegowania i zachowuje tę samą dyscyplinę wobec wyniku.
@@ -44,4 +48,8 @@ Wydanie 7.8.0 (2026-10-13) ustanowiło Ecosystem 1.0: każdy produkt integrowany
 
 Wydanie 7.9.0 (2026-10-25) przypina addon Herdr do herdr-peers v1.1.0, którego natywny podskill debat pozwala prowadzącemu przeprowadzić panel peerów przez kolejne rundy i zakończyć go zapisem decyzji, oraz przypina AI Diff Reviewer do v3.3.16; CI pakietu uruchamia teraz zadanie z minimalną wersją Pythona 3.9 na ubuntu-24.04.
 
-Zainstalowana wersja skilla: **7.9.0**, stabilna od 7.0.0.
+Wydanie 7.10.0 (2026-10-26) zamienia istotne decyzje w decyzje zespołu: przy włączonym addonie Herdr i herdr-peers 1.1.0 lub nowszym w użyciu `create` planuje każdą istotną decyzję — dwie wykonalne opcje o istotnie różnych skutkach, trudne do odwrócenia lub przekrojowe, których nic w repozytorium nie rozstrzyga — jako wypisane zadanie decyzyjne, a `execute` prowadzi dla niej debatę `decide` herdr-peers bez głosowania, zapisując każde miejsce w dzienniku jako delegację tylko do odczytu i odnotowując wybór wraz z zapisem decyzji. Bez Herdr nic się nie zmienia: brakujący warunek wstępny lub nieudana debata wracają do własnego zapisu decyzji agenta, a `config.py decisions debate off` przywraca osąd jednego agenta. Pin addonu Dailybot przechodzi na agent-skill v3.23.20 — wydanie vendored.
+
+Wydanie 7.10.1 (2026-11-15) przypina addon Herdr do herdr-peers v1.2.1, którego linia 1.2.x dodaje autopilota: opcjonalnego demona, którego uruchamia tylko człowiek, przyjmującego zalecaną opcję dla każdego czekającego agenta, doprowadzającego wieloetapowe dialogi do końca i nigdy nie dotykającego logowania ani potwierdzenia obejścia uprawnień. Protokół 1 bez zmian.
+
+Zainstalowana wersja skilla: **7.10.1**, stabilna od 7.0.0.

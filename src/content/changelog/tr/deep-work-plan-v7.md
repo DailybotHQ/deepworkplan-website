@@ -24,6 +24,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.8.1"
   - label: "Skill release v7.9.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.9.0"
+  - label: "Skill release v7.10.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
+  - label: "Skill release v7.10.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
 ---
 
 Deep Work Plan v7, v6 yöntemini korur: sözleşme otoritedir, yalnızca eklemeli günlük bellektir, zamanlayıcı sıradaki işin ne olacağına karar verir ve bir görev ancak kaydedilmiş kanıt ölçütlerini karşıladığında kapanır. v7 görev devretme yeteneğini ekler ve sonuç etrafında aynı disiplini sürdürür.
@@ -44,4 +48,8 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 
 7.9.0 sürümü (2026-10-25), Herdr eklentisini herdr-peers v1.1.0'a sabitler; bu sürümün yerel tartışma alt becerisi, bir liderin eşlerden oluşan bir paneli turlar boyunca yönetmesini ve bir karar kaydıyla kapatmasını sağlar. AI Diff Reviewer ise v3.3.16'ya sabitlenir; paketin CI'ı artık Python 3.9 alt sınır işini ubuntu-24.04 üzerinde çalıştırır.
 
-Yüklü skill sürümü: **7.9.0**, 7.0.0'dan beri kararlı.
+7.10.0 sürümü (2026-10-26), kritik kararları ekip kararlarına dönüştürür: Herdr eklentisi etkin ve herdr-peers 1.1.0 veya daha yenisi kullanımdayken `create`, her kritik kararı — sonuçları maddi olarak farklı iki uygulanabilir seçenek, geri alınması zor veya yatay kesen, ve depoda hiçbir şeyin karara bağlamadığı — listelenmiş bir karar görevi olarak planlar; `execute` ise bunun için herdr-peers `decide` tartışmasını oylamadan yönetir, her koltuğu salt okunur bir devir olarak günlüğe yazar ve seçimi karar kaydıyla birlikte kaydeder. Herdr olmadan hiçbir şey değişmez: eksik bir ön koşul veya başarısız bir tartışma, ajanın kendi karar kaydına döner; `config.py decisions debate off` tek ajan yargısını geri getirir. Dailybot eklenti sabitlemesi, vendored sürüm olan agent-skill v3.23.20'ye taşınır.
+
+7.10.1 sürümü (2026-11-15), Herdr eklentisini herdr-peers v1.2.1'e sabitler; bu sürümün 1.2.x hattı autopilot'u ekler: yalnızca bir insanın başlattığı, isteğe bağlı bir arka plan hizmeti; bekleyen her ajan için önerilen seçeneği kabul eder, çok adımlı diyalogları sonuna kadar izler ve asla bir oturum açmaya ya da izin atlatma onayına dokunmaz. Protokol 1 değişmedi.
+
+Yüklü skill sürümü: **7.10.1**, 7.0.0'dan beri kararlı.

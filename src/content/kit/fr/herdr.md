@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) place des agents de code dans des panneaux, sur votre machine et sur les machines qu’il atteint via SSH. Cet addon permet à un Deep Work Plan d’utiliser ces agents comme **pairs** : un plan peut confier une tâche délimitée à un agent situé dans un autre panneau, recevoir exactement une réponse autorisée et conserver une trace de l’échange.
 
-C’est un addon facultatif de **DWP v7** (pack `v7.9.0`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
+C’est un addon facultatif de **DWP v7** (pack `v7.10.1`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
 
 ## Ce qu’il intègre
 
@@ -26,7 +26,6 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 
 **Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique : les verbes de la CLI et leurs options documentées, les codes de sortie `0`–`7`, les variables documentées `HERDR_PEERS_*`, `DWP_PLAN` et `DWP_TASK`, le protocole 1 et les contrats JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` et l’enregistrement de délégation. Un changement incompatible de l’un d’eux incrémente la version majeure, et un changement du format de transmission incrémente aussi le numéro de protocole. `v1.0.0` ne modifie aucun comportement par rapport à `v0.3.3`, et les versions 0.x ne sont plus prises en charge.
 
-**En avance sur le descripteur du pack.** Le pack `v7.9.0` consigne herdr-peers 1.1.0 dans son descripteur de l’addon Herdr ; ce site épingle la version ultérieure `v1.2.1` (2026-11-15). Les versions 1.2.0 et 1.2.1 sont additives et conservent le protocole 1, si bien que l’intégration est inchangée.
 
 ## Installation
 
@@ -60,7 +59,7 @@ herdr-peers n’authentifie pas l’expéditeur : le champ `from=` d’une estam
 
 ## Les conteneurs et l’hôte
 
-Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v1.1.1`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers (`v0.2.3`), chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle. L’image de devcontainer-kit `v1.1.1` embarque herdr-peers 1.1.0, qui n’a pas d’autopilot, jusqu’à la prochaine version du kit.
+Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v1.1.2`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers (`v0.2.3`), chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle.
 
 ## Herdr ou agentkit
 
