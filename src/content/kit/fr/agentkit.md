@@ -10,7 +10,7 @@ order: 8
 
 Chaque agent de code en terminal a ses propres options pour reprendre une session, sa propre manière d’isoler un second compte, son propre mode headless et son propre interrupteur pour ignorer les demandes d’autorisation. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** place une seule surface de commandes au-dessus de tous : `ak <kind> [@profile]`.
 
-Cet addon intègre le kit dans **DWP v7** (pack `v7.10.1`) comme transport de délégation **headless**. Il est facultatif : sans lui, chaque tâche s’exécute dans la session courante, exactement comme avant. Le kit lui-même est un produit MIT qui fonctionne sans Deep Work Plan.
+Cet addon intègre le kit dans **DWP v7** (pack `v7.10.2`) comme transport de délégation **headless**. Il est facultatif : sans lui, chaque tâche s’exécute dans la session courante, exactement comme avant. Le kit lui-même est un produit MIT qui fonctionne sans Deep Work Plan.
 
 ## Ce que vous apporte le kit
 
@@ -65,21 +65,23 @@ Le travail ne circule qu’entre les comptes que vous avez déclarés pour le pl
 ## Installation
 
 ```bash
-git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v1.1.0` : `v0.2.0` et `v0.2.1` ne sont pas prises en charge. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
+Prérequis : `bash` sous macOS ou Linux, et `python3` 3.9 ou ultérieur ; rien d’autre. Windows utilise `install.ps1`. Épinglez `v1.2.0` : `v0.2.0` et `v0.2.1` ne sont pas prises en charge. Vérifiez une version à l’aide de son asset `SHA256SUMS`.
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/coding-agents-kit`, tag `v1.1.0`, interface 1 |
+| Produit | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, interface 1 |
 | Clé de registre | `agentkit` dans `.dwp/config.json` |
 | Transport | headless : un `ak run` par délégué dans un worktree git dédié |
 | Fournit | `subagents`, `cancel_children`, `model_routing` |
 | Requiert | l’octroi `agent_delegation` du contrat du plan |
 
 **Stable depuis `v1.0.0`.** L’interface publique du kit suit le versionnage sémantique et ne change de façon incompatible que dans une nouvelle version majeure : la surface de commandes (`ak <kind> [@profile]` pour chaque type défini dans `providers.toml`, et chaque verbe avec ses options documentées), la posture de permissions, l’interface 1 (`ak doctor --json`, `ak env`, la grammaire et l’enveloppe de `ak run`), les schémas JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), ainsi que l’arborescence installée et les noms des variables du fichier d’environnement. `v1.0.0` ne modifie aucune commande, option, clé ni aucun schéma par rapport à `v0.7.1`.
+
+La version 1.2.0 ajoute **`ak last`** : chaque lancement interactif enregistre son kind et son profil par répertoire de travail ; `ak last` le relance avec `-c` (y poursuit la session la plus récente) dans n'importe quel terminal, `ak last -r` ouvre le sélecteur du CLI dans ce compte, et `ak last ls` liste l'enregistrement. Un lancement dans un panneau Herdr survit aussi à un redémarrage de Herdr ou de la machine : le panneau revient via `ak --resume` dans le même compte, avec sa clé du fichier d'environnement et sa posture de permissions intacte (`AGENTKIT_HERDR_RESUME=0` le désactive).
 
 ## L’autonomie par défaut, avec un retrait qui l’emporte toujours
 

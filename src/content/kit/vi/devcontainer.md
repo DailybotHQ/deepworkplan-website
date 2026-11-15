@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.10.1`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
+Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.10.2`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
 
 ## devcontainer-kit cung cấp những gì
 
@@ -34,7 +34,7 @@ Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host 
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
 
-**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim mới (herdr-peers `v1.2.1`, coding-agents-kit `v1.1.0` và DeepWorkPlan Vim `v1.0.1`).
+**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim mới (herdr-peers 1.2.1, coding-agents-kit 1.1.0 và DeepWorkPlan Vim 1.0.1).
 
 ## Các lớp
 

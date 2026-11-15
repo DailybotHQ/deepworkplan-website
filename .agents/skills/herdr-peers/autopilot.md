@@ -58,7 +58,8 @@ re-read; a dialog of several steps is followed to its end.
 The option it accepts, in this order:
 
 1. the one a known screen needs (an update prompt: **Skip**);
-2. the one marked `(Recommended)`;
+2. the one marked `(Recommended)` — or its mark in Spanish, French, German
+   or Italian, as agents write it in the language of the conversation;
 3. the one the CLI itself pre-selected;
 4. the first one.
 

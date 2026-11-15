@@ -10,7 +10,7 @@ order: 8
 
 Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caranya sendiri untuk memisahkan akun kedua, mode headless-nya sendiri, dan sakelarnya sendiri untuk melewati prompt izin. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** menyatukan semuanya di bawah satu permukaan perintah: `ak <kind> [@profile]`.
 
-Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.10.1`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
+Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.10.2`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
 ## Yang diberikan kit ini
 
@@ -65,21 +65,23 @@ Pekerjaan hanya berpindah di antara akun yang Anda deklarasikan untuk rencana, d
 ## Instalasi
 
 ```bash
-git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.1.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.2.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.1.0`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |
 | Membutuhkan | izin `agent_delegation` dari kontrak rencana |
 
 **Stabil sejak `v1.0.0`.** Antarmuka publik kit ini mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru: permukaan perintah (`ak <kind> [@profile]` untuk setiap kind di `providers.toml`, serta setiap verb beserta flag yang terdokumentasi), postur izin, antarmuka 1 (`ak doctor --json`, `ak env`, tata bahasa dan envelope `ak run`), skema JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, dan `setup-verify-v1`), serta tata letak instalasi dan nama variabel di berkas env. `v1.0.0` tidak mengubah perintah, flag, kunci, atau skema apa pun dari `v0.7.1`.
+
+Rilis 1.2.0 menambahkan **`ak last`**: setiap peluncuran interaktif mencatat kind dan profilnya per direktori kerja; `ak last` meluncurkannya kembali dengan `-c` (melanjutkan sesi terbaru di sana) di terminal mana pun, `ak last -r` membuka pemilih CLI di akun itu, dan `ak last ls` menampilkan rekamannya. Peluncuran di dalam pane Herdr juga bertahan setelah Herdr atau mesin dijalankan ulang: pane kembali melalui `ak --resume` di akun yang sama, dengan kunci dari file env dan postur izinnya utuh (`AGENTKIT_HERDR_RESUME=0` mematikannya).
 
 ## Otonomi secara default, dengan opt-out yang selalu menang
 

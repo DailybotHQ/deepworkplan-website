@@ -10,7 +10,7 @@ order: 8
 
 Każdy terminalowy agent kodujący ma własne flagi do kontynuowania sesji, własny sposób oddzielenia drugiego konta, własny tryb headless i własny przełącznik pomijania pytań o uprawnienia. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** nakłada na nie wszystkie jedną powierzchnię poleceń: `ak <kind> [@profile]`.
 
-Ten addon integruje kit z **DWP v7** (pakiet `v7.10.1`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
+Ten addon integruje kit z **DWP v7** (pakiet `v7.10.2`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
 
 ## Co daje kit
 
@@ -65,21 +65,23 @@ Praca przemieszcza się wyłącznie między kontami, które zadeklarowałeś dla
 ## Instalacja
 
 ```bash
-git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v1.1.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
+Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v1.2.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, tag `v1.1.0`, interfejs 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, interfejs 1 |
 | Klucz rejestru | `agentkit` w `.dwp/config.json` |
 | Transport | headless: jedno `ak run` na delegata w dedykowanym git worktree |
 | Zapewnia | `subagents`, `cancel_children`, `model_routing` |
 | Wymaga | uprawnienia `agent_delegation` w kontrakcie planu |
 
 **Stabilny od `v1.0.0`.** Publiczny interfejs kitu stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie tylko w nowej wersji głównej: powierzchnia poleceń (`ak <kind> [@profile]` dla każdego rodzaju w `providers.toml` oraz każdy czasownik z udokumentowanymi flagami), polityka uprawnień, interfejs 1 (`ak doctor --json`, `ak env`, składnia i koperta `ak run`), schematy JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`) oraz zainstalowany układ i nazwy zmiennych w pliku env. `v1.0.0` nie zmienia żadnego polecenia, flagi, klucza ani schematu względem `v0.7.1`.
+
+Wydanie 1.2.0 dodaje **`ak last`**: każde interaktywne uruchomienie zapisuje swój kind i profil per katalog roboczy; `ak last` uruchamia je ponownie z `-c` (kontynuuje tam najnowszą sesję) w dowolnym terminalu, `ak last -r` otwiera selektor CLI na tym koncie, a `ak last ls` wyświetla wpis. Uruchomienie wewnątrz panela Herdr przeżywa też restart Herdra i restart maszyny: panel wraca przez `ak --resume` na tym samym koncie, z kluczem z pliku env i nietkniętą postawą uprawnień (`AGENTKIT_HERDR_RESUME=0` wyłącza to).
 
 ## Autonomia domyślnie, z rezygnacją, która zawsze wygrywa
 

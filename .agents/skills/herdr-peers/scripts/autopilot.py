@@ -62,7 +62,12 @@ RULE = re.compile(r'^[\s─━═╌▔▀▄_\-╭╮╰╯]{6,}$')
 
 HINT = re.compile(r'(?i)enter\s*(?:to\s+)?(?:select|confirm|submit)|enter:\s*(?:select|submit|confirm)|'
                   r'press enter')
-RECOMMENDED = re.compile(r'\(recommended\)', re.I)
+# The marker a CLI puts on the option it recommends; agents write it in the
+# language of the conversation.
+RECOMMENDED = re.compile(r'\((?:recommended|recomendad[oa]|recommand[ée]e?|empfohlen|consigliat[oa])\)', re.I)
+# A label ends where a wide gap starts: text further right on the same line
+# belongs to a preview shown beside the options.
+GAP = re.compile(r'\s{3,}.*$')
 # Rows that refuse, leave, or open free text: never chosen.
 NEGATIVE = re.compile(
     r'^(?:\[[a-z]\]\s+)?(?:no\b|never\b|cancel\b|quit\b|exit\b|skip &|do not\b|don\'t\b|deny\b|'
@@ -162,9 +167,10 @@ def first_match(patterns, text):
 
 
 def _row(label, selected, num=None):
+    label = GAP.sub('', label)
     check = CHECK.match(label)
     return {'label': check.group('rest') if check else label, 'selected': selected, 'num': num,
-            'checked': None if not check else check.group('mark') != ' '}
+            'checked': None if not check else check.group('mark') != ' ', 'more': ''}
 
 
 def parse_menu(text):
@@ -237,13 +243,17 @@ def _collect(lines, at, style, column=None):
                 span[0], span[1] = min(span[0], index), max(span[1], index)
             else:
                 misses += 1  # a wrapped label or a description line
+                if step == 1:
+                    owner = found[-1] if found else here
+                    owner['more'] += ' ' + GAP.sub('', line.strip())
             index += step
         return found
 
     here = parse(at)
     if not here:
         return None
-    rows = list(reversed(walk(-1))) + [here] + walk(1)
+    above = walk(-1)
+    rows = list(reversed(above)) + [here] + walk(1)
     if style == 'numbered':
         rows = _ascending(rows)
     if len(rows) < 2:
@@ -253,6 +263,9 @@ def _collect(lines, at, style, column=None):
     under = [ln for ln in lines[span[1] + 1:] if ln.strip()]
     return {'style': style, 'rows': rows, 'first': span[0], 'last': span[1],
             'below': len(under), 'hint': any(HINT.search(ln) for ln in under[:5]),
+            # Enter named anywhere under the block: what lets a block with a
+            # preview beside it (more lines under the last option) count.
+            'hint_far': any(HINT.search(ln) for ln in under[:PREVIEW_MAX]),
             # An agent's input line under the block: these rows are not a dialog.
             'input_below': any(INPUT_ROW.match(ln) for ln in under)}
 
@@ -284,7 +297,7 @@ def choose(menu, prefer=None):
     order = []
     if prefer:
         order += [i for i, r in enumerate(rows) if prefer.search(r['label'])]
-    order += [i for i, r in enumerate(rows) if RECOMMENDED.search(r['label'])]
+    order += [i for i, r in enumerate(rows) if RECOMMENDED.search(r['label'] + r['more'])]
     order += [i for i, r in enumerate(rows) if r['selected']]
     order += list(range(len(rows)))
     for index in order:
@@ -313,6 +326,7 @@ def menu_decision(menu, cls, why, prefer=None):
 
 NEAR = 14          # an anchor counts only this close above its menu
 FOOTER_MAX = 6     # a live menu sits at the bottom: few lines under it
+PREVIEW_MAX = 16   # ...or more, when a preview is drawn beside it and Enter is named below
 QUEUED_TAIL = 12   # the queued-question hint counts only this low on the screen
 
 
@@ -325,7 +339,9 @@ def live(menu, state, lines=()):
     what an agent's input line with wrapped or numbered text looks like, and
     an Enter there would send a human's half-written message.
     """
-    if menu['below'] > FOOTER_MAX or menu['input_below']:
+    if menu['input_below']:
+        return False
+    if menu['below'] > FOOTER_MAX and not (menu['hint_far'] and menu['below'] <= PREVIEW_MAX):
         return False
     if state == 'blocked':
         return True
@@ -430,8 +446,7 @@ def engaged(text):
     """A dialog autopilot is already inside: the next step of what it just
     keyed. It must still be a live block at the bottom of the screen."""
     menu = parse_menu(text)
-    return bool(menu) and menu['below'] <= FOOTER_MAX and not menu['input_below'] \
-        and (menu['style'] != 'plain' or menu['hint'])
+    return bool(menu) and live(menu, 'blocked') and (menu['style'] != 'plain' or menu['hint'])
 
 
 class Pane(object):
