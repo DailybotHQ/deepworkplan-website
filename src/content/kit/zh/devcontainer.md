@@ -34,7 +34,7 @@ cd your-repo && dck init && bash dev.sh up
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |
 
-**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上新的固定版本（herdr-peers `v1.1.0`、coding-agents-kit `v1.1.0` 和 DeepWorkPlan Vim `v1.0.1`）。
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上新的固定版本（herdr-peers 1.1.0、coding-agents-kit 1.1.0 和 DeepWorkPlan Vim 1.0.1）。
 
 ## 层
 

@@ -14,11 +14,11 @@ order: 7
 
 ## Addon tích hợp những gì
 
-Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.1.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
+Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.2.1`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v1.1.0`, giao thức 1 |
+| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v1.2.1`, giao thức 1 |
 | Khóa registry | `herdr` trong `.dwp/config.json` |
 | Phương thức truyền | tương tác: một peer trong pane Herdr |
 | Cung cấp | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[he
 Cài đặt herdr-peers và skill chính thức của Herdr mà nó phụ thuộc vào. Mọi máy có agent cần trả lời cũng phải có skill này.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

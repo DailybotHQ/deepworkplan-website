@@ -14,11 +14,11 @@ Ini adalah addon opsional dari **DWP v7** (pack `v7.9.0`). Metodologinya bekerja
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.1.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.2.1`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protokol 1 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v1.2.1`, protokol 1 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

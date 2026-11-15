@@ -14,11 +14,11 @@ It is an optional addon of **DWP v7** (pack `v7.9.0`). The methodology works the
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.1.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.2.1`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v1.2.1`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -26,12 +26,14 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 
 **Stable since `v1.0.0`.** The public interface follows semantic versioning: the CLI verbs and their documented flags, exit codes `0`–`7`, the documented `HERDR_PEERS_*`, `DWP_PLAN` and `DWP_TASK` variables, protocol 1, and the JSON contracts `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` and the delegation record. A breaking change to any of them bumps the major version, and a wire-format change also bumps the protocol number. `v1.0.0` changes no behavior from `v0.3.3`, and 0.x releases are no longer supported.
 
+**Ahead of the pack's descriptor.** Pack `v7.9.0` records herdr-peers 1.1.0 in its Herdr addon descriptor; this site pins the later `v1.2.1` (2026-11-15). Releases 1.2.0 and 1.2.1 are additive and keep protocol 1, so the integration is unchanged.
+
 ## Install
 
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +60,7 @@ herdr-peers does not authenticate the sender: the `from=` field in a stamp is a 
 
 ## Containers and the host
 
-With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.1.1`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
+With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.1.1`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step. The devcontainer-kit `v1.1.1` image ships herdr-peers 1.1.0, which has no autopilot, until the kit's next release.
 
 ## Herdr or agentkit
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0 adds a native **debate** sub-skill (`debate.md`): a lead agent
 - **Delivery to a blocked peer.** `reply` and `notify` retry delivery to a peer blocked at a question for up to `--wait-blocked` seconds; it is still exactly one reply.
 
 The release is additive: protocol 1 and every verb, flag, exit code and JSON contract stay unchanged.
+
+## Autopilot
+
+herdr-peers 1.2.0 adds **autopilot** (`autopilot.md`): an optional daemon, `herdr-peers autopilot`, that a human starts so that a long plan does not stop at an approval screen. It watches every agent on every enabled Herdr machine and, when one waits at a screen, accepts an option. Release 1.2.1 fixes a case in which a question whose options have long descriptions was left unanswered.
+
+- **Only a human starts it.** No message, peer or plan can start it, stop it or change what it does. An agent starts it only when its human asked for it directly in the session.
+- **What it accepts.** A question with options, a tool approval, a plan approval, folder trust and an update prompt, which it skips. It takes the option marked recommended, else the one the CLI pre-selected, else the first, and follows a multi-step dialog to its end, re-reading the screen after every key.
+- **Agents that stop to ask.** An agent that ended its turn asking in prose receives one fixed prompt to continue, at most three times per pane per hour. A usage limit is retried every 30 minutes, for at most a day.
+- **What it never touches.** A login, sign-in, API-key or device-code prompt; an option that refuses; an option that widens an agent's standing permissions, such as `always allow` or auto mode; a pane with no menu it recognises; a pane whose input line holds a human's draft.
+- **Controls.** `--dry-run` records what it would do and sends nothing; `--scope` and `--exclude` keep it away from a machine or a pane; `herdr-peers autopilot status` and `herdr-peers autopilot stop` report on it and end it. Every action is one line in the delegation log, without screen text.
+- **Verified CLIs.** Claude Code, Codex, Cursor, Grok, Pi and Antigravity, on real panes. OpenCode's screens have not been verified.
+
+**What you accept by running it.** With autopilot on, an agent's request is approved without the human seeing it, including a command the human would have refused. There is no deny-list: autopilot does not judge what a command does. The controls that remain are each agent's own permission mode and guardrails, what its account and machine can reach, the repository's rules, and code review before a merge.
+
+Autopilot is outside the delegation protocol: it sends no ask, reply or notice, and the rule for agents and leads is unchanged — the only screen they key is folder trust, on panes they launched. Release 1.2.0 also documents, in `launcher.md`, how a lead opens several agents at once with `ak`.
 
 ## Notes
 

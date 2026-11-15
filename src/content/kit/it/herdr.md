@@ -14,11 +14,11 @@ order: 7
 
 ## Cosa integra
 
-L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.1.0`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
+L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.2.1`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocollo 1 |
+| Prodotto | `DailybotHQ/herdr-peers`, tag `v1.2.1`, protocollo 1 |
 | Chiave di registro | `herdr` in `.dwp/config.json` |
 | Trasporto | interattivo: un peer in un pannello Herdr |
 | Fornisce | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](http
 Installa herdr-peers e la skill ufficiale di Herdr, da cui dipende. Ogni macchina i cui agenti devono rispondere ha bisogno anch’essa della skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

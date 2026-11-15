@@ -104,7 +104,7 @@ teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenil
   | --- | --- | --- |
   | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
   | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
-  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
+  | herdr-peers | `v1.2.1` | `aef2c64cae04e2e3dc5de0f8e664905edc2cd4c04465f04fc40856a0a0b94720` |
   | devcontainer-kit | `v1.1.1` | `410fe708e9abc536bd8744b25306dc54e44f52cf6ce61013fa7d19c8052da792` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
@@ -264,7 +264,7 @@ Tablo bir kontrol listesi değil, bir başvuru tablosudur: bir satırı yalnızc
 | AI Diff Reviewer (gerekli) | `.agents/skills/ai-diff-reviewer/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | kurulu herdr-peers skill’i içindeki `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
+| Herdr | kurulu herdr-peers skill’i içindeki `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh adresindeki doğrulanmış kurucu (`v1.0.1` sürümüne sabitler; indirin, `shasum -a 256 -c install.sh.sha256`, ardından çalıştırın) |
 
@@ -288,7 +288,7 @@ olarak sunun. Bir depo, **sıfır** isteğe bağlı eklentiyle tümüyle uyumlud
   dosyada katmanlanır: visual-ui (saptandığında güçlü biçimde önerilir; kurulum kabul ile sınırlı), cli-output ve conversational —
   son ikisi her zaman sorulur, asla otomatik uygulanmaz.
 - **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v1.1.0` sürümüne sabitlenmiş) aracının makine düzeyinde kurulumu: her kodlama agent’ı için tek komut, profil başına bir hesap, en çok boş kapasiteye sahip hesabı seçmek için `ak usage` ve `ak pick`, ve sınırlı `parallel_safe` görevleri başka kodlama agent’larına devreden planlar için başsız `ak run` (her worktree için bir delege). Kit, agent’ları varsayılan olarak özerk başlatır ve devre dışı bırakma seçeneği (`--ask` ya da `AGENTKIT_PERMISSIONS=ask`) her zaman üstün gelir.
-- **Herdr** — herhangi bir makinedeki Herdr bölmesinde bulunan eş bir agent’tan tek bir yetkili yanıt isteyen planlar ve şeritlerini izleyen bir lider için [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (`v1.1.0` sürümüne sabitlenmiş, artı Herdr’ın resmî skill’i) aracının makine düzeyinde kurulumu.
+- **Herdr** — herhangi bir makinedeki Herdr bölmesinde bulunan eş bir agent’tan tek bir yetkili yanıt isteyen planlar ve şeritlerini izleyen bir lider için [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (`v1.2.1` sürümüne sabitlenmiş, artı Herdr’ın resmî skill’i) aracının makine düzeyinde kurulumu.
 - **DeepWorkPlan Vim** — terminal düzenleyicisi ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v1.0.1` sürümüne sabitlenmiş); mevcut bir Neovim yapılandırmasının üzerine açık onay olmadan asla yazmayan, makine düzeyinde bir kurulum.
 - **AI Diff Reviewer** — gerekli yerel inceleme (bir opt-in değil): her Final Review’in güvenlik
   incelemesi, planın birikmiş değişiklik kümesi üzerinde [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**’yi (skill + gerekli
@@ -358,7 +358,7 @@ ile Herdr eklentileri kurulu olduğunda:
   ya da plan istemleri, bilinmeyen ekranlar ve sizin oluşturmadığınız bölmeler.
   `AGENTKIT_PERMISSIONS=ask` ayarlıyken şeritler harekete geçmeden önce sorar; bu istemleri asla
   dolanmayın. Her müdahaleyi üst planda kayda geçirin.
-- **Sürüyü çalışır tutun.** coding-agents-kit `v1.1.0` ve herdr-peers `v1.1.0` ile her ajan her görev
+- **Sürüyü çalışır tutun.** coding-agents-kit `v1.1.0` ve herdr-peers `v1.2.1` ile her ajan her görev
   sınırında `ak capacity --self --json` komutunu kontrol eder; `critical` durumunda bir devir paketi yazar
   (https://deepworkplan.com/schema/dwp-handoff/v1.json) ve lider aynı çalışma kopyasında bir halef
   başlatır. Lider planını `herdr-peers lead claim` ile sahiplenir, şeritler ona `lead` olarak hitap eder

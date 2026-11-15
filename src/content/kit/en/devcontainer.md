@@ -34,7 +34,7 @@ Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macO
 | Per-repository config | `.devcontainer/dck.toml` |
 | Detection | `dck doctor --json` |
 
-**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the new pins (herdr-peers `v1.1.0`, coding-agents-kit `v1.1.0` and DeepWorkPlan Vim `v1.0.1`).
+**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the new pins (herdr-peers 1.1.0, coding-agents-kit 1.1.0 and DeepWorkPlan Vim 1.0.1).
 
 ## Layers
 

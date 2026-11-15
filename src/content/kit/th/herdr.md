@@ -14,11 +14,11 @@ order: 7
 
 ## สิ่งที่ผสานรวมเข้ามา
 
-แอดออนนี้เป็นเพียงตัวเชื่อมบาง ๆ งานจริงทำโดย **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** ซึ่งเป็น skill แบบ MIT ที่แยกเป็นอิสระ ตรึงไว้ที่ **`v1.1.0`** และใช้งานได้แม้ไม่มี Deep Work Plan มันกำหนดสิ่งที่ Herdr เองเปิดทิ้งไว้ ได้แก่ ใครมีสิทธิ์ตอบ คำตอบเดินทางกลับข้ามเครื่องได้อย่างไร เอเจนต์สองตัวจะหลีกเลี่ยงการตอบกันไปมาไม่รู้จบได้อย่างไร และบันทึกว่า "ฉันถามแล้ว มันตอบแล้ว" เก็บไว้ที่ใด
+แอดออนนี้เป็นเพียงตัวเชื่อมบาง ๆ งานจริงทำโดย **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** ซึ่งเป็น skill แบบ MIT ที่แยกเป็นอิสระ ตรึงไว้ที่ **`v1.2.1`** และใช้งานได้แม้ไม่มี Deep Work Plan มันกำหนดสิ่งที่ Herdr เองเปิดทิ้งไว้ ได้แก่ ใครมีสิทธิ์ตอบ คำตอบเดินทางกลับข้ามเครื่องได้อย่างไร เอเจนต์สองตัวจะหลีกเลี่ยงการตอบกันไปมาไม่รู้จบได้อย่างไร และบันทึกว่า "ฉันถามแล้ว มันตอบแล้ว" เก็บไว้ที่ใด
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/herdr-peers` แท็ก `v1.1.0` โปรโตคอล 1 |
+| ผลิตภัณฑ์ | `DailybotHQ/herdr-peers` แท็ก `v1.2.1` โปรโตคอล 1 |
 | คีย์ใน registry | `herdr` ใน `.dwp/config.json` |
 | ช่องทางการส่ง | แบบโต้ตอบ: peer ใน pane ของ Herdr |
 | สิ่งที่มอบให้ | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 ติดตั้ง herdr-peers และ skill ทางการของ Herdr ที่มันต้องพึ่งพา ทุกเครื่องที่ต้องการให้เอเจนต์ของตนตอบได้ก็ต้องมี skill นี้ด้วย
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

@@ -14,11 +14,11 @@ Es ist ein optionales Addon von **DWP v7** (pack `v7.9.0`). Die Methodik funktio
 
 ## Was es integriert
 
-Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v1.1.0`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
+Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v1.2.1`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, Tag `v1.1.0`, Protokoll 1 |
+| Produkt | `DailybotHQ/herdr-peers`, Tag `v1.2.1`, Protokoll 1 |
 | Registry-Schlüssel | `herdr` in `.dwp/config.json` |
 | Transport | interaktiv: ein Peer in einem Herdr-Pane |
 | Stellt bereit | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](http
 Installieren Sie herdr-peers und den offiziellen Skill von Herdr, von dem es abhängt. Jeder Rechner, dessen Agenten antworten sollen, braucht den Skill ebenfalls.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

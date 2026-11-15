@@ -14,11 +14,11 @@ order: 7
 
 ## यह क्या एकीकृत करता है
 
-यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v1.1.0`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
+यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v1.2.1`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/herdr-peers`, tag `v1.1.0`, प्रोटोकॉल 1 |
+| उत्पाद | `DailybotHQ/herdr-peers`, tag `v1.2.1`, प्रोटोकॉल 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `herdr` |
 | ट्रांसपोर्ट | इंटरैक्टिव: Herdr पेन में एक पीयर |
 | प्रदान करता है | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 herdr-peers और Herdr की आधिकारिक skill इंस्टॉल करें, जिस पर यह निर्भर है। जिस भी मशीन के एजेंटों को उत्तर देना है, उस पर भी यह skill होनी चाहिए।
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

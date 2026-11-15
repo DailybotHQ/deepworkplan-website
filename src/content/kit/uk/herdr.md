@@ -14,11 +14,11 @@ order: 7
 
 ## Що він інтегрує
 
-Аддон — це тонкий інтегратор. Роботу виконує **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** — самостійний скіл за ліцензією MIT, закріплений на **`v1.1.0`**, корисний і без Deep Work Plan. Він визначає те, що сам Herdr залишає відкритим: хто може відповідати, як відповідь повертається між машинами, як двом агентам уникнути нескінченних відповідей одне одному і де зберігається запис «я запитав, він відповів».
+Аддон — це тонкий інтегратор. Роботу виконує **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** — самостійний скіл за ліцензією MIT, закріплений на **`v1.2.1`**, корисний і без Deep Work Plan. Він визначає те, що сам Herdr залишає відкритим: хто може відповідати, як відповідь повертається між машинами, як двом агентам уникнути нескінченних відповідей одне одному і де зберігається запис «я запитав, він відповів».
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/herdr-peers`, тег `v1.1.0`, протокол 1 |
+| Продукт | `DailybotHQ/herdr-peers`, тег `v1.2.1`, протокол 1 |
 | Ключ реєстру | `herdr` у `.dwp/config.json` |
 | Транспорт | інтерактивний: peer-агент у панелі Herdr |
 | Надає | `subagents`, `cancel_children` |
@@ -31,7 +31,7 @@ order: 7
 Встановіть herdr-peers та офіційний скіл Herdr, від якого він залежить. Кожна машина, агенти якої мають відповідати, також потребує цього скілу.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
