@@ -14,11 +14,11 @@ order: 7
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v1.1.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v1.2.1`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v1.1.0`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v1.2.1`，协议 1 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
@@ -26,12 +26,14 @@ order: 7
 
 **自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 1，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
 
+**领先于 pack 的描述符。** Pack `v7.9.0` 在其 Herdr 附加组件描述符中记录的是 herdr-peers 1.1.0；本站固定的是更新的 `v1.2.1`（2026-11-15）。1.2.0 和 1.2.1 两个版本只做增量并保留协议 1，因此集成保持不变。
+
 ## 安装
 
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +60,7 @@ herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只�
 
 ## 容器与主机
 
-借助基于 devcontainer-kit `v1.1.1` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers (`v0.2.3`) 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。
+借助基于 devcontainer-kit `v1.1.1` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers (`v0.2.3`) 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。devcontainer-kit `v1.1.1` 镜像自带的是 herdr-peers 1.1.0，其中没有 autopilot，这一情况会持续到该工具包的下一个版本发布。
 
 ## Herdr 还是 agentkit
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0 新增原生的 **debate** 子技能（`debate.md`）：由一
 - **向受阻对等方投递。** `reply` 和 `notify` 会在最长 `--wait-blocked` 秒内，重试向卡在提问处的对等方投递；回复仍然只有一次。
 
 此版本只做增量：协议 1 以及所有命令、参数、退出码和 JSON 契约均保持不变。
+
+## Autopilot
+
+herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守护进程 `herdr-peers autopilot`，由用户启动，使长时间运行的计划不会停在审批界面上。它监视每台已启用的 Herdr 机器上的每个代理，当某个代理停在某个界面上等待时，就接受一个选项。1.2.1 版本修复了一种情况：选项带有较长描述的问题会得不到回答。
+
+- **只有用户能启动它。** 任何消息、对等方或计划都无法启动它、停止它或改变它的行为。代理只有在其用户于会话中直接提出要求时才会启动它。
+- **它接受什么。** 带选项的问题、工具审批、计划审批、文件夹信任，以及更新提示（它会跳过更新提示）。它选择标记为推荐的选项，否则选择 CLI 预先选中的选项，再否则选择第一个，并把多步对话一路跟到结束，每次按键后都重新读取界面。
+- **停下来提问的代理。** 以文字提问结束其回合的代理会收到一条固定的继续提示，每个窗格每小时最多三次。用量限额每 30 分钟重试一次，最长持续一天。
+- **它从不触碰什么。** 登录、账号验证、API 密钥或设备码提示；Claude 的 bypass-permissions 模式确认；表示拒绝的选项；会扩大代理常设权限的选项，例如 `always allow` 或自动模式；没有它能识别的菜单的窗格；输入行中留有用户草稿的窗格。
+- **控制手段。** `--dry-run` 记录它本会执行的操作，但不发送任何内容；`--scope` 和 `--exclude` 让它避开某台机器或某个窗格；`herdr-peers autopilot status` 和 `herdr-peers autopilot stop` 分别报告其状态和终止它。每个动作都在委派日志中占一行，不含界面文本。
+- **已验证的 CLI。** Claude Code、Codex、Cursor、Grok、Pi 和 Antigravity，均在真实窗格上验证。OpenCode 的界面尚未经过验证。
+
+**运行它即意味着你接受什么。** 开启 autopilot 后，代理的请求会在用户没有看到的情况下获得批准，其中包括用户本会拒绝的命令。没有拒绝列表：autopilot 不判断一条命令做了什么。仍然有效的控制手段是每个代理自身的权限模式和护栏、其账户和机器所能触及的范围、仓库的规则，以及合并前的代码审查。
+
+Autopilot 不属于委派协议：它不发送询问、回复或通知，针对代理和主导者的规则保持不变——它们唯一会发送按键的界面是文件夹信任，且仅限于它们自己启动的窗格。1.2.0 版本还在 `launcher.md` 中说明了主导者如何用 `ak` 一次打开多个代理。
 
 ## 备注
 

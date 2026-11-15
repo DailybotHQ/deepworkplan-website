@@ -96,7 +96,7 @@ lastUpdated: 2026-10-11
   | --- | --- | --- |
   | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
   | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
-  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
+  | herdr-peers | `v1.2.1` | `aef2c64cae04e2e3dc5de0f8e664905edc2cd4c04465f04fc40856a0a0b94720` |
   | devcontainer-kit | `v1.1.1` | `410fe708e9abc536bd8744b25306dc54e44f52cf6ce61013fa7d19c8052da792` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
@@ -233,7 +233,7 @@ CI-поверхня, ніколи не обов'язкова для базово
 | AI Diff Reviewer (обовʼязковий) | `version:` у `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` у `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | `scripts/herdr-peers --version` у встановленому скілі herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
+| Herdr | `scripts/herdr-peers --version` у встановленому скілі herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | перевірений інсталятор за адресою https://deepworkplan.com/vim/install.sh (закріплює `v1.0.1`; завантажте, `shasum -a 256 -c install.sh.sha256`, потім запустіть) |
 
@@ -257,7 +257,7 @@ design system, agentkit, Herdr, DeepWorkPlan Vim) і запропонуйте л
   складаються в одному файлі: visual-ui (наполегливо рекомендується при виявленні; установка захищена явною згодою), cli-output та розмовний —
   останні два завжди запитуються, ніколи не застосовуються автоматично.
 - **agentkit** — встановлення на рівні машини [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено `v1.1.0`): одна команда для кожного кодового агента, обліковий запис на профіль, `ak usage` і `ak pick` для вибору облікового запису з найбільшим запасом і headless `ak run` для планів, що передають обмежені завдання `parallel_safe` іншим кодовим агентам (один делегат на worktree). Kit за замовчуванням запускає агентів в автономії, а його відмова (`--ask` або `AGENTKIT_PERMISSIONS=ask`) завжди перемагає.
-- **Herdr** — встановлення на рівні машини [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закріплено `v1.1.0`, плюс офіційний скіл Herdr) для планів, що просять peer-агента в панелі Herdr, на будь-якій машині, про одну авторизовану відповідь, і для провідного агента, який стежить за своїми лініями.
+- **Herdr** — встановлення на рівні машини [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закріплено `v1.2.1`, плюс офіційний скіл Herdr) для планів, що просять peer-агента в панелі Herdr, на будь-якій машині, про одну авторизовану відповідь, і для провідного агента, який стежить за своїми лініями.
 - **DeepWorkPlan Vim** — термінальний редактор ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), закріплено на `v1.0.1`), встановлення на рівні машини, яке ніколи не перезаписує наявну конфігурацію Neovim без явної згоди.
 - **AI Diff Reviewer** — обовʼязковий локальний огляд (не опційний): перевірка безпеки кожного Final Review проганяє [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + обовʼязковий
   `.review/extension.md`) над накопиченим набором змін плану. Відсутній скіл чи розширення — це зафіксована знахідка
@@ -327,7 +327,7 @@ agentkit і Herdr встановлено:
   дій, запити оплати чи тарифу, невідомі екрани та панелі, яких ви не створювали. З
   `AGENTKIT_PERMISSIONS=ask` лінії питають, перш ніж діяти; ніколи не обходьте ці запити. Записуйте кожне
   втручання в батьківський план.
-- **Підтримуйте роботу рою.** З coding-agents-kit `v1.1.0` і herdr-peers `v1.1.0` кожен агент
+- **Підтримуйте роботу рою.** З coding-agents-kit `v1.1.0` і herdr-peers `v1.2.1` кожен агент
   перевіряє `ak capacity --self --json` на кожній межі завдання; за `critical` він пише пакет передавання
   (https://deepworkplan.com/schema/dwp-handoff/v1.json), і провідний агент запускає наступника в тому самому
   checkout. Провідний агент закріплює свій план через `herdr-peers lead claim`, лінії звертаються до нього

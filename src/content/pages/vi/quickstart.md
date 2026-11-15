@@ -105,7 +105,7 @@ nó đã được kiểm tra.
   | --- | --- | --- |
   | deepworkplan-skill | `v7.9.0` | `96aba583874ff5d52c222ab0fc6b5fee21567f61fa5933006021f54805f06ac2` |
   | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
-  | herdr-peers | `v1.1.0` | `ba37ea34d3ea6af029c0b708fc42dc9d0aad435e58456937aa6b13280f2a0022` |
+  | herdr-peers | `v1.2.1` | `aef2c64cae04e2e3dc5de0f8e664905edc2cd4c04465f04fc40856a0a0b94720` |
   | devcontainer-kit | `v1.1.1` | `410fe708e9abc536bd8744b25306dc54e44f52cf6ce61013fa7d19c8052da792` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
@@ -267,7 +267,7 @@ Bảng này là tài liệu tra cứu, không phải danh sách kiểm tra: ch�
 | AI Diff Reviewer (bắt buộc) | `version:` trong `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` trong `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | `scripts/herdr-peers --version` trong skill herdr-peers đã cài | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g --force -y` |
+| Herdr | `scripts/herdr-peers --version` trong skill herdr-peers đã cài | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | trình cài đặt đã xác minh tại https://deepworkplan.com/vim/install.sh (nó ghim `v1.0.1`; tải xuống, `shasum -a 256 -c install.sh.sha256`, rồi chạy) |
 
@@ -291,7 +291,7 @@ repository hoàn toàn tuân thủ với **không** addon tùy chọn nào — �
   một tệp: visual-ui (được khuyến nghị mạnh mẽ khi phát hiện; cài đặt kiểm soát bằng sự chấp nhận), cli-output và hội thoại — hai profile sau
   luôn được hỏi, không bao giờ tự động áp dụng.
 - **agentkit** — bản cài đặt cấp máy của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim ở `v1.1.0`): một lệnh cho mọi coding agent, một tài khoản cho mỗi hồ sơ, `ak usage` và `ak pick` để chọn tài khoản còn nhiều chỗ nhất, và `ak run` headless cho các kế hoạch giao những tác vụ `parallel_safe` có giới hạn cho coding agent khác (mỗi worktree một bên được ủy thác). Bộ kit khởi chạy agent ở chế độ tự chủ theo mặc định và lựa chọn opt-out của nó (`--ask` hoặc `AGENTKIT_PERMISSIONS=ask`) luôn được ưu tiên.
-- **Herdr** — bản cài đặt cấp máy của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim ở `v1.1.0`, cùng skill chính thức của Herdr) cho các kế hoạch yêu cầu một agent ngang hàng trong một pane Herdr, trên bất kỳ máy nào, gửi một phản hồi được ủy quyền, và cho một lead theo dõi các lane của mình.
+- **Herdr** — bản cài đặt cấp máy của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim ở `v1.2.1`, cùng skill chính thức của Herdr) cho các kế hoạch yêu cầu một agent ngang hàng trong một pane Herdr, trên bất kỳ máy nào, gửi một phản hồi được ủy quyền, và cho một lead theo dõi các lane của mình.
 - **DeepWorkPlan Vim** — trình soạn thảo terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), ghim ở `v1.0.1`), một bản cài đặt cấp máy không bao giờ ghi đè cấu hình Neovim có sẵn khi chưa có sự đồng ý rõ ràng.
 - **AI Diff Reviewer** — đánh giá cục bộ bắt buộc (không phải tùy chọn): bước rà soát bảo mật của mọi
   Final Review chạy [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill +
@@ -363,7 +363,7 @@ agentkit và Herdr đã được cài:
   phá hủy, lời nhắc thanh toán hoặc gói dịch vụ, màn hình không xác định và các pane bạn không tạo. Với
   `AGENTKIT_PERMISSIONS=ask`, các lane hỏi trước khi hành động; không bao giờ lách qua những lời nhắc
   đó. Ghi lại mọi lần can thiệp trong kế hoạch cha.
-- **Giữ cho bầy agent tiếp tục chạy.** Với coding-agents-kit `v1.1.0` và herdr-peers `v1.1.0`, mỗi agent
+- **Giữ cho bầy agent tiếp tục chạy.** Với coding-agents-kit `v1.1.0` và herdr-peers `v1.2.1`, mỗi agent
   kiểm tra `ak capacity --self --json` tại mỗi ranh giới tác vụ; ở mức `critical`, nó viết một gói bàn
   giao (https://deepworkplan.com/schema/dwp-handoff/v1.json) và lead khởi chạy một agent kế nhiệm trong
   cùng checkout. Lead claim kế hoạch của nó bằng `herdr-peers lead claim`, các lane gọi nó bằng địa chỉ

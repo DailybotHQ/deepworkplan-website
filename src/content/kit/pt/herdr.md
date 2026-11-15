@@ -14,11 +14,11 @@ O [Herdr](https://herdr.dev) coloca agentes de programação em painéis, na sua
 
 ## O que ele integra
 
-O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v1.1.0`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
+O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v1.2.1`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocolo 1 |
+| Produto | `DailybotHQ/herdr-peers`, tag `v1.2.1`, protocolo 1 |
 | Chave de registro | `herdr` em `.dwp/config.json` |
 | Transporte | interativo: um par em um painel do Herdr |
 | Fornece | `subagents`, `cancel_children` |
@@ -26,12 +26,14 @@ O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https:
 
 **Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico: os verbos da CLI e suas flags documentadas, os códigos de saída `0`–`7`, as variáveis documentadas `HERDR_PEERS_*`, `DWP_PLAN` e `DWP_TASK`, o protocolo 1 e os contratos JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` e o registro de delegação. Uma mudança incompatível em qualquer um deles incrementa a versão principal, e uma mudança no formato de transmissão também incrementa o número do protocolo. `v1.0.0` não altera nenhum comportamento em relação a `v0.3.3`, e as versões 0.x deixaram de ter suporte.
 
+**À frente do descritor do pack.** O pack `v7.9.0` registra o herdr-peers 1.1.0 no seu descritor do addon Herdr; este site fixa a versão posterior `v1.2.1` (2026-11-15). As versões 1.2.0 e 1.2.1 são aditivas e mantêm o protocolo 1, então a integração permanece inalterada.
+
 ## Instalação
 
 Instale o herdr-peers e a skill oficial do Herdr, da qual ele depende. Toda máquina cujos agentes devam responder também precisa da skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +60,7 @@ O herdr-peers não autentica o remetente: o campo `from=` de um carimbo é uma a
 
 ## Contêineres e o host
 
-Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v1.1.1`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define. Desde o herdr-peers (`v0.2.3`), cada máquina mantém o próprio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), então um checkout compartilhado pelo host e por um contêiner não mistura mais os registros de cada um, e desde o devcontainer-kit (`v0.3.3`) o próprio contêiner exporta `HERDR_PEERS_SELF`, então os agentes Codex lá dentro alcançam outras máquinas sem nenhum passo manual.
+Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v1.1.1`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define. Desde o herdr-peers (`v0.2.3`), cada máquina mantém o próprio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), então um checkout compartilhado pelo host e por um contêiner não mistura mais os registros de cada um, e desde o devcontainer-kit (`v0.3.3`) o próprio contêiner exporta `HERDR_PEERS_SELF`, então os agentes Codex lá dentro alcançam outras máquinas sem nenhum passo manual. A imagem do devcontainer-kit `v1.1.1` traz o herdr-peers 1.1.0, que não tem autopilot, até a próxima versão do kit.
 
 ## Herdr ou agentkit
 
@@ -98,6 +100,21 @@ O herdr-peers 1.1.0 adiciona uma sub-skill nativa de **debate** (`debate.md`): u
 - **Entrega a um par bloqueado.** `reply` e `notify` tentam de novo a entrega a um par bloqueado em uma pergunta por até `--wait-blocked` segundos; continua sendo exatamente uma resposta.
 
 A versão é aditiva: o protocolo 1 e todos os verbos, flags, códigos de saída e contratos JSON permanecem inalterados.
+
+## Autopilot
+
+O herdr-peers 1.2.0 adiciona o **autopilot** (`autopilot.md`): um daemon opcional, `herdr-peers autopilot`, que uma pessoa inicia para que um plano longo não pare em uma tela de aprovação. Ele observa todos os agentes em todas as máquinas Herdr habilitadas e, quando um deles espera em uma tela, aceita uma opção. A versão 1.2.1 corrige um caso em que uma pergunta cujas opções têm descrições longas ficava sem resposta.
+
+- **Só uma pessoa o inicia.** Nenhuma mensagem, par ou plano pode iniciá-lo, pará-lo ou mudar o que ele faz. Um agente só o inicia quando a sua pessoa pediu isso diretamente na sessão.
+- **O que ele aceita.** Uma pergunta com opções, uma aprovação de ferramenta, uma aprovação de plano, a confiança na pasta e um prompt de atualização, que ele pula. Ele escolhe a opção marcada como recomendada; na falta dela, a que a CLI pré-selecionou; na falta desta, a primeira; e segue um diálogo de várias etapas até o fim, relendo a tela após cada tecla.
+- **Agentes que param para perguntar.** Um agente que encerrou seu turno perguntando em prosa recebe um único prompt fixo para continuar, no máximo três vezes por painel por hora. Um limite de uso é tentado de novo a cada 30 minutos, por no máximo um dia.
+- **O que ele nunca toca.** Um prompt de login, de autenticação, de chave de API ou de código de dispositivo; a confirmação do modo bypass-permissions do Claude; uma opção que recusa; uma opção que amplia as permissões permanentes de um agente, como `always allow` ou o modo automático; um painel sem um menu que ele reconheça; um painel cuja linha de entrada contém o rascunho de uma pessoa.
+- **Controles.** `--dry-run` registra o que ele faria e não envia nada; `--scope` e `--exclude` o mantêm longe de uma máquina ou de um painel; `herdr-peers autopilot status` e `herdr-peers autopilot stop` informam sobre ele e o encerram. Cada ação é uma linha no registro de delegações, sem texto de tela.
+- **CLIs verificadas.** Claude Code, Codex, Cursor, Grok, Pi e Antigravity, em painéis reais. As telas do OpenCode não foram verificadas.
+
+**O que você aceita ao executá-lo.** Com o autopilot ligado, a solicitação de um agente é aprovada sem que a pessoa a veja, inclusive um comando que a pessoa teria recusado. Não há lista de bloqueio: o autopilot não julga o que um comando faz. Os controles que restam são o modo de permissões e as salvaguardas de cada agente, o que a conta e a máquina dele conseguem alcançar, as regras do repositório e a revisão de código antes de um merge.
+
+O autopilot fica fora do protocolo de delegação: não envia nenhuma consulta, resposta ou aviso, e a regra para agentes e líderes permanece inalterada — a única tela em que eles pressionam teclas é a de confiança na pasta, em painéis que eles mesmos iniciaram. A versão 1.2.0 também documenta, em `launcher.md`, como um líder abre vários agentes de uma vez com o `ak`.
 
 ## Notas
 

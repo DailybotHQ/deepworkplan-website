@@ -14,11 +14,11 @@ order: 7
 
 ## Cosa integra
 
-L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.1.0`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
+L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.2.1`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/herdr-peers`, tag `v1.1.0`, protocollo 1 |
+| Prodotto | `DailybotHQ/herdr-peers`, tag `v1.2.1`, protocollo 1 |
 | Chiave di registro | `herdr` in `.dwp/config.json` |
 | Trasporto | interattivo: un peer in un pannello Herdr |
 | Fornisce | `subagents`, `cancel_children` |
@@ -26,12 +26,14 @@ L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](http
 
 **Stabile da `v1.0.0`.** L’interfaccia pubblica segue il versionamento semantico: i verbi della CLI e i relativi flag documentati, i codici di uscita `0`–`7`, le variabili documentate `HERDR_PEERS_*`, `DWP_PLAN` e `DWP_TASK`, il protocollo 1 e i contratti JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` e il record di delega. Una modifica incompatibile a uno qualsiasi di essi incrementa la versione major, e una modifica al formato di trasmissione incrementa anche il numero di protocollo. `v1.0.0` non cambia alcun comportamento rispetto a `v0.3.3`, e le release 0.x non sono più supportate.
 
+**In anticipo sul descrittore del pack.** Il pack `v7.9.0` registra herdr-peers 1.1.0 nel proprio descrittore dell’addon Herdr; questo sito fissa la successiva `v1.2.1` (2026-11-15). Le release 1.2.0 e 1.2.1 sono additive e mantengono il protocollo 1, quindi l’integrazione resta invariata.
+
 ## Installazione
 
 Installa herdr-peers e la skill ufficiale di Herdr, da cui dipende. Ogni macchina i cui agenti devono rispondere ha bisogno anch’essa della skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +60,7 @@ herdr-peers non autentica il mittente: il campo `from=` di un timbro è un’aff
 
 ## Container e host
 
-Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v1.1.1`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai. Da herdr-peers (`v0.2.3`), ogni macchina mantiene il proprio stato (`$XDG_STATE_HOME/herdr-peers/<server>/`), quindi un checkout condiviso dall’host e da un container non mescola più i loro registri, e da devcontainer-kit (`v0.3.3`) il container esporta `HERDR_PEERS_SELF` da sé, così gli agenti Codex al suo interno raggiungono altre macchine senza passaggi manuali.
+Con l’addon [devcontainer](/kit/devcontainer) su devcontainer-kit `v1.1.1`, ogni container dck include herdr-peers ed entra nella mesh al `dck up`: i suoi agenti possono interrogare gli agenti sull’host, negli altri container e negli altri container loopback dell’host, e ricevere la risposta. `dck setup` installa un herdr-peers verificato sull’host, quindi rispondono anche gli agenti dell’host. Il listener dell’host e le chiavi aggiuntive che lasciano entrare altri container sono decisioni tue nel profilo host del kit; questo addon non le imposta mai. Da herdr-peers (`v0.2.3`), ogni macchina mantiene il proprio stato (`$XDG_STATE_HOME/herdr-peers/<server>/`), quindi un checkout condiviso dall’host e da un container non mescola più i loro registri, e da devcontainer-kit (`v0.3.3`) il container esporta `HERDR_PEERS_SELF` da sé, così gli agenti Codex al suo interno raggiungono altre macchine senza passaggi manuali. L’immagine di devcontainer-kit `v1.1.1` include herdr-peers 1.1.0, che non ha autopilot, fino alla prossima release del kit.
 
 ## Herdr o agentkit
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0 aggiunge una sub-skill nativa di **dibattito** (`debate.md`): 
 - **Consegna a un peer bloccato.** `reply` e `notify` ritentano la consegna a un peer fermo su una domanda per un massimo di `--wait-blocked` secondi; resta esattamente una risposta.
 
 La versione è solo additiva: il protocollo 1 e tutti i verbi, flag, codici di uscita e contratti JSON restano invariati.
+
+## Autopilot
+
+herdr-peers 1.2.0 aggiunge **autopilot** (`autopilot.md`): un daemon opzionale, `herdr-peers autopilot`, che una persona avvia perché un piano lungo non si fermi a una schermata di approvazione. Osserva ogni agente su ogni macchina Herdr abilitata e, quando uno attende a una schermata, accetta un’opzione. La release 1.2.1 corregge un caso in cui una domanda le cui opzioni hanno descrizioni lunghe restava senza risposta.
+
+- **Lo avvia solo una persona.** Nessun messaggio, peer o piano può avviarlo, fermarlo o cambiare ciò che fa. Un agente lo avvia solo quando la sua persona lo ha chiesto direttamente nella sessione.
+- **Cosa accetta.** Una domanda con opzioni, l’approvazione di uno strumento, l’approvazione di un piano, la fiducia nella cartella e una richiesta di aggiornamento, che salta. Sceglie l’opzione contrassegnata come consigliata, altrimenti quella preselezionata dalla CLI, altrimenti la prima, e segue un dialogo in più passaggi fino alla fine, rileggendo la schermata dopo ogni tasto.
+- **Agenti che si fermano a chiedere.** Un agente che ha chiuso il proprio turno chiedendo in prosa riceve un unico prompt fisso per continuare, al massimo tre volte per pannello all’ora. Un limite d’uso viene ritentato ogni 30 minuti, per un giorno al massimo.
+- **Cosa non tocca mai.** Una richiesta di login, di accesso, di chiave API o di codice dispositivo; la conferma della modalità bypass-permissions di Claude; un’opzione che rifiuta; un’opzione che amplia i permessi permanenti di un agente, come `always allow` o la modalità automatica; un pannello senza un menu che riconosca; un pannello la cui riga di input contiene la bozza di una persona.
+- **Controlli.** `--dry-run` registra ciò che farebbe e non invia nulla; `--scope` e `--exclude` lo tengono lontano da una macchina o da un pannello; `herdr-peers autopilot status` e `herdr-peers autopilot stop` ne riportano lo stato e lo terminano. Ogni azione è una riga nel log delle deleghe, senza testo della schermata.
+- **CLI verificate.** Claude Code, Codex, Cursor, Grok, Pi e Antigravity, su pannelli reali. Le schermate di OpenCode non sono state verificate.
+
+**Cosa accetti eseguendolo.** Con autopilot attivo, la richiesta di un agente viene approvata senza che la persona la veda, compreso un comando che la persona avrebbe rifiutato. Non esiste una deny-list: autopilot non giudica ciò che fa un comando. I controlli che restano sono la modalità di permessi e i guardrail propri di ogni agente, ciò che il suo account e la sua macchina possono raggiungere, le regole del repository e la code review prima di un merge.
+
+Autopilot è esterno al protocollo di delega: non invia alcuna richiesta, risposta o notifica, e la regola per agenti e lead resta invariata — l’unica schermata su cui premono tasti è quella della fiducia nella cartella, sui pannelli che hanno avviato loro. La release 1.2.0 documenta inoltre, in `launcher.md`, come un lead apre più agenti insieme con `ak`.
 
 ## Note
 

@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# herdr-peers — ask any agent in any Herdr pane and get one authorized reply.
+# Entry point only: the protocol logic lives in herdr_peers.py next to this
+# file (python3 standard library). Run `herdr-peers --help`.
+set -u
+
+src=${BASH_SOURCE[0]}
+while [ -L "$src" ]; do
+  dir=$(cd -P "$(dirname "$src")" && pwd)
+  src=$(readlink "$src")
+  case $src in /*) ;; *) src="$dir/$src" ;; esac
+done
+here=$(cd -P "$(dirname "$src")" && pwd)
+
+py=${HERDR_PEERS_PYTHON:-python3}
+if ! command -v "$py" >/dev/null 2>&1; then
+  echo "herdr-peers: $py not found; python3 >= 3.9 is required" >&2
+  exit 6
+fi
+# -B: never write __pycache__ into the skill directory (it would embed this
+# checkout's absolute path in an installed skill).
+exec "$py" -B "$here/herdr_peers.py" "$@"

@@ -14,11 +14,11 @@ Bu, **DWP v7**'nin (pack `v7.9.0`) isteğe bağlı bir eklentisidir. Metodoloji 
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.1.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.2.1`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v1.1.0` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v1.2.1` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -26,12 +26,14 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 
 **`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler: CLI fiilleri ve belgelenmiş bayrakları, `0`–`7` çıkış kodları, belgelenmiş `HERDR_PEERS_*`, `DWP_PLAN` ve `DWP_TASK` değişkenleri, protokol 1 ve `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` JSON sözleşmeleri ile devretme kaydı. Bunlardan herhangi birindeki uyumsuz bir değişiklik ana sürümü yükseltir; kablo biçimindeki bir değişiklik ayrıca protokol numarasını da yükseltir. `v1.0.0`, `v0.3.3` sürümüne göre hiçbir davranışı değiştirmez ve 0.x sürümleri artık desteklenmez.
 
+**Pack tanımlayıcısının ilerisinde.** Pack `v7.9.0`, Herdr eklenti tanımlayıcısında herdr-peers 1.1.0 sürümünü kaydeder; bu site ise daha yeni olan `v1.2.1` sürümüne sabitlenmiştir (2026-11-15). 1.2.0 ve 1.2.1 sürümleri yalnızca ekleme yapar ve protokol 1'i korur; dolayısıyla entegrasyon değişmez.
+
 ## Kurulum
 
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.1.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -58,7 +60,7 @@ herdr-peers göndereni doğrulamaz: bir damgadaki `from=` alanı bir iddiadır. 
 
 ## Konteynerler ve ana makine
 
-devcontainer-kit `v1.1.1` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
+devcontainer-kit `v1.1.1` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır. devcontainer-kit `v1.1.1` imajı, kitin bir sonraki sürümüne kadar, autopilot içermeyen herdr-peers 1.1.0 ile gelir.
 
 ## Herdr mı agentkit mi
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0, yerel bir **debate** alt becerisi (`debate.md`) ekler: lider 
 - **Engellenmiş bir eşe teslim.** `reply` ve `notify`, bir soruda takılmış eşe teslimi en fazla `--wait-blocked` saniye boyunca yeniden dener; yanıt yine tam olarak birdir.
 
 Sürüm yalnızca ekleme yapar: protokol 1 ve tüm komutlar, bayraklar, çıkış kodları ve JSON sözleşmeleri değişmeden kalır.
+
+## Autopilot
+
+herdr-peers 1.2.0, **autopilot** özelliğini (`autopilot.md`) ekler: uzun bir planın bir onay ekranında durmaması için bir insanın başlattığı, isteğe bağlı bir arka plan süreci (daemon), `herdr-peers autopilot`. Etkinleştirilmiş her Herdr makinesindeki her agent'ı izler ve biri bir ekranda beklediğinde bir seçeneği kabul eder. 1.2.1 sürümü, seçeneklerinin açıklamaları uzun olan bir sorunun yanıtsız bırakıldığı bir durumu düzeltir.
+
+- **Yalnızca bir insan başlatır.** Hiçbir mesaj, eş ya da plan onu başlatamaz, durduramaz veya yaptığı şeyi değiştiremez. Bir agent onu yalnızca insanı bunu oturumda doğrudan istediğinde başlatır.
+- **Neleri kabul eder.** Seçenekli bir soru, bir araç onayı, bir plan onayı, klasör güveni ve atladığı bir güncelleme istemi. Önerilen olarak işaretlenmiş seçeneği, yoksa CLI'ın önceden seçtiğini, o da yoksa ilkini alır ve çok adımlı bir diyaloğu, her tuştan sonra ekranı yeniden okuyarak sonuna kadar izler.
+- **Sormak için duran agent'lar.** Sırasını düz metinle soru sorarak bitiren bir agent, devam etmesi için sabit tek bir istem alır; bölme başına saatte en fazla üç kez. Bir kullanım sınırı 30 dakikada bir, en fazla bir gün boyunca yeniden denenir.
+- **Asla dokunmadıkları.** Bir oturum açma, giriş yapma, API anahtarı ya da cihaz kodu istemi; Claude'un bypass-permissions modu onayı; reddeden bir seçenek; `always allow` veya otomatik mod gibi, bir agent'ın kalıcı izinlerini genişleten bir seçenek; tanıdığı bir menü bulunmayan bir bölme; giriş satırında bir insanın taslağı duran bir bölme.
+- **Denetimler.** `--dry-run` ne yapacağını kaydeder ve hiçbir şey göndermez; `--scope` ve `--exclude` onu bir makineden ya da bir bölmeden uzak tutar; `herdr-peers autopilot status` durumunu bildirir, `herdr-peers autopilot stop` ise onu sonlandırır. Her eylem, ekran metni olmadan, devretme günlüğünde tek bir satırdır.
+- **Doğrulanmış CLI'lar.** Gerçek bölmelerde Claude Code, Codex, Cursor, Grok, Pi ve Antigravity. OpenCode'un ekranları doğrulanmamıştır.
+
+**Çalıştırarak neyi kabul edersiniz.** Autopilot açıkken bir agent'ın isteği, insan onu görmeden onaylanır; insanın reddedeceği bir komut da buna dahildir. Bir ret listesi (deny-list) yoktur: autopilot bir komutun ne yaptığını değerlendirmez. Geriye kalan denetimler, her agent'ın kendi izin modu ve koruma önlemleri, hesabının ve makinesinin erişebildikleri, deponun kuralları ve birleştirme öncesindeki kod incelemesidir.
+
+Autopilot devretme protokolünün dışındadır: ask, yanıt ya da bildirim göndermez; agent'lar ve liderler için kural da değişmez — tuş gönderdikleri tek ekran, kendi başlattıkları bölmelerdeki klasör güvenidir. 1.2.0 sürümü ayrıca, bir liderin `ak` ile aynı anda birkaç agent'ı nasıl açtığını `launcher.md` içinde belgeler.
 
 ## Notlar
 

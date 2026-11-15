@@ -170,6 +170,8 @@ describe('ecosystem pins', { timeout: 30_000 }, () => {
     };
     // The pack is repo-adapted and moves only by an explicit change: exact.
     expect(`v${vendored('deepworkplan')}`).toBe(ECOSYSTEM_PINS.pack.tag);
+    // herdr-peers is pinned: the vendored copy moves only with the site's pin.
+    expect(`v${vendored('herdr-peers')}`).toBe(ECOSYSTEM_PINS.herdr.tag);
     // The release workflow refreshes these two on every merge to main, so
     // the vendored copy may run ahead of the published pin, never behind it.
     for (const [skill, key] of [
