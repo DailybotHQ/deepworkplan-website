@@ -1,0 +1,9 @@
+{
+  "schema": "herdr-peers/ballots-v1",
+  "options": ["T1", "T2", "T3"],
+  "items": ["V1", "V2"],
+  "ballots": [
+    {"voter": "w1:p2", "ranking": ["T2", "T1", "T3"], "confidence": 75, "items": {"V1": "ACCEPT", "V2": "AMEND"}},
+    {"voter": "w1:p3", "ranking": ["T1", "T2"], "confidence": 60, "items": {"V1": "ACCEPT", "V2": "REJECT"}}
+  ]
+}

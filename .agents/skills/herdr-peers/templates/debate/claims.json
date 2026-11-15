@@ -1,0 +1,24 @@
+{
+  "schema": "herdr-peers/claims-v1",
+  "lane": "w1:p4",
+  "angle": "industry practice and production reports",
+  "vendor": "anthropic",
+  "claims": [
+    {
+      "key": "example-claim-key",
+      "text": "One line another lane can check.",
+      "stance": "supports",
+      "evidence": "FACT",
+      "confidence": 80,
+      "sources": ["https://example.org/report (read 2026-10-25)", "path/to/file.py:42"]
+    },
+    {
+      "key": "another-claim-key",
+      "text": "A claim this lane disputes, with why in the report.",
+      "stance": "disputes",
+      "evidence": "INFERENCE",
+      "confidence": 60,
+      "sources": []
+    }
+  ]
+}
