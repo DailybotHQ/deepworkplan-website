@@ -26,6 +26,8 @@ El addon es un integrador delgado. El trabajo lo hace **[herdr-peers](https://gi
 
 **Estable desde `v1.0.0`.** La interfaz pública sigue el versionado semántico: los verbos de la CLI y sus opciones documentadas, los códigos de salida `0`–`7`, las variables documentadas `HERDR_PEERS_*`, `DWP_PLAN` y `DWP_TASK`, el protocolo 1 y los contratos JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` y el registro de delegación. Un cambio incompatible en cualquiera de ellos incrementa la versión mayor, y un cambio en el formato de transmisión también incrementa el número de protocolo. `v1.0.0` no cambia ningún comportamiento respecto de `v0.3.3`, y las versiones 0.x ya no tienen soporte.
 
+**Por delante del descriptor del pack.** El pack `v7.9.0` registra herdr-peers 1.1.0 en su descriptor del addon de Herdr; este sitio fija la versión posterior `v1.2.1` (2026-11-15). Las versiones 1.2.0 y 1.2.1 son aditivas y mantienen el protocolo 1, así que la integración no cambia.
+
 ## Instalación
 
 Instala herdr-peers y la skill oficial de Herdr, de la que depende. Toda máquina cuyos agentes deban responder también necesita la skill.
@@ -58,7 +60,7 @@ herdr-peers no autentica al remitente: el campo `from=` de un sello es una afirm
 
 ## Contenedores y el host
 
-Con el addon [devcontainer](/kit/devcontainer) sobre devcontainer-kit `v1.1.1`, cada contenedor dck incluye herdr-peers y se une a la malla en `dck up`: sus agentes pueden consultar a agentes del host, de los demás contenedores y de los otros contenedores loopback del host, y recibir la respuesta. `dck setup` instala un herdr-peers verificado en el host, así que los agentes del host también responden. El listener del host y las claves adicionales que dejan entrar a otros contenedores son decisiones tuyas en el perfil del host del kit; este addon nunca los configura. Desde herdr-peers (`v0.2.3`), cada máquina mantiene su propio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), así que un checkout compartido por el host y un contenedor ya no mezcla sus registros, y desde devcontainer-kit (`v0.3.3`) el propio contenedor exporta `HERDR_PEERS_SELF`, así que los agentes Codex de dentro llegan a otras máquinas sin ningún paso manual.
+Con el addon [devcontainer](/kit/devcontainer) sobre devcontainer-kit `v1.1.1`, cada contenedor dck incluye herdr-peers y se une a la malla en `dck up`: sus agentes pueden consultar a agentes del host, de los demás contenedores y de los otros contenedores loopback del host, y recibir la respuesta. `dck setup` instala un herdr-peers verificado en el host, así que los agentes del host también responden. El listener del host y las claves adicionales que dejan entrar a otros contenedores son decisiones tuyas en el perfil del host del kit; este addon nunca los configura. Desde herdr-peers (`v0.2.3`), cada máquina mantiene su propio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), así que un checkout compartido por el host y un contenedor ya no mezcla sus registros, y desde devcontainer-kit (`v0.3.3`) el propio contenedor exporta `HERDR_PEERS_SELF`, así que los agentes Codex de dentro llegan a otras máquinas sin ningún paso manual. La imagen de devcontainer-kit `v1.1.1` incluye herdr-peers 1.1.0, que no tiene autopilot, hasta la próxima versión del kit.
 
 ## Herdr o agentkit
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0 agrega una sub-skill nativa de **debate** (`debate.md`): un ag
 - **Entrega a un par bloqueado.** `reply` y `notify` reintentan la entrega a un par bloqueado en una pregunta durante hasta `--wait-blocked` segundos; sigue siendo exactamente una respuesta.
 
 La versión es aditiva: el protocolo 1 y todos los verbos, flags, códigos de salida y contratos JSON no cambian.
+
+## Autopilot
+
+herdr-peers 1.2.0 agrega **autopilot** (`autopilot.md`): un daemon opcional, `herdr-peers autopilot`, que una persona inicia para que un plan largo no se detenga en una pantalla de aprobación. Vigila a todos los agentes de todas las máquinas de Herdr habilitadas y, cuando uno espera en una pantalla, acepta una opción. La versión 1.2.1 corrige un caso en el que una pregunta cuyas opciones tienen descripciones largas quedaba sin responder.
+
+- **Solo una persona lo inicia.** Ningún mensaje, par o plan puede iniciarlo, detenerlo ni cambiar lo que hace. Un agente lo inicia solo cuando su persona se lo pidió directamente en la sesión.
+- **Qué acepta.** Una pregunta con opciones, una aprobación de herramienta, una aprobación de plan, la confianza en la carpeta y una solicitud de actualización, que omite. Toma la opción marcada como recomendada; si no la hay, la que la CLI preseleccionó; si tampoco, la primera, y sigue un diálogo de varios pasos hasta el final, releyendo la pantalla después de cada tecla.
+- **Agentes que se detienen a preguntar.** Un agente que terminó su turno preguntando en prosa recibe un único mensaje fijo para continuar, como máximo tres veces por panel y por hora. Un límite de uso se reintenta cada 30 minutos, durante un día como máximo.
+- **Lo que nunca toca.** Una solicitud de inicio de sesión, de autenticación, de clave de API o de código de dispositivo; una opción que rechaza; una opción que amplía los permisos permanentes de un agente, como `always allow` o el modo automático; un panel sin un menú que reconozca; un panel cuya línea de entrada contiene el borrador de una persona.
+- **Controles.** `--dry-run` registra lo que haría y no envía nada; `--scope` y `--exclude` lo mantienen alejado de una máquina o de un panel; `herdr-peers autopilot status` y `herdr-peers autopilot stop` informan de su estado y lo terminan. Cada acción es una línea en el registro de delegaciones, sin texto de pantalla.
+- **CLI verificadas.** Claude Code, Codex, Cursor, Grok, Pi y Antigravity, en paneles reales. Las pantallas de OpenCode no se han verificado.
+
+**Lo que aceptas al ejecutarlo.** Con autopilot activo, la solicitud de un agente se aprueba sin que la persona la vea, incluido un comando que la persona habría rechazado. No hay lista de denegación: autopilot no juzga lo que hace un comando. Los controles que quedan son el modo de permisos y las salvaguardas propios de cada agente, aquello a lo que su cuenta y su máquina pueden acceder, las reglas del repositorio y la revisión de código antes de un merge.
+
+Autopilot queda fuera del protocolo de delegación: no envía ninguna consulta, respuesta ni aviso, y la regla para agentes y líderes no cambia — la única pantalla en la que pulsan teclas es la de confianza en la carpeta, en paneles que ellos lanzaron. La versión 1.2.0 también documenta, en `launcher.md`, cómo un líder abre varios agentes a la vez con `ak`.
 
 ## Notas
 

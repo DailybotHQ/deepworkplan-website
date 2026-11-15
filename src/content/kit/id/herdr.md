@@ -26,6 +26,8 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 
 **Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning: verb CLI beserta flag yang terdokumentasi, kode keluar `0`–`7`, variabel `HERDR_PEERS_*`, `DWP_PLAN`, dan `DWP_TASK` yang terdokumentasi, protokol 1, serta kontrak JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1`, dan catatan delegasi. Perubahan yang merusak kompatibilitas pada salah satunya menaikkan versi mayor, dan perubahan format wire juga menaikkan nomor protokol. `v1.0.0` tidak mengubah perilaku apa pun dari `v0.3.3`, dan rilis 0.x tidak lagi didukung.
 
+**Lebih baru daripada deskriptor pack.** Pack `v7.9.0` mencatat herdr-peers 1.1.0 dalam deskriptor addon Herdr miliknya; situs ini mematok `v1.2.1` yang lebih baru (2026-11-15). Rilis 1.2.0 dan 1.2.1 bersifat aditif dan mempertahankan protokol 1, sehingga integrasinya tidak berubah.
+
 ## Instalasi
 
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
@@ -58,7 +60,7 @@ herdr-peers tidak mengautentikasi pengirim: kolom `from=` dalam cap adalah sebua
 
 ## Container dan host
 
-Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.1.1`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual.
+Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.1.1`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual. Image devcontainer-kit `v1.1.1` menyertakan herdr-peers 1.1.0, yang tidak memiliki autopilot, sampai rilis kit berikutnya.
 
 ## Herdr atau agentkit
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0 menambahkan sub-skill **debate** bawaan (`debate.md`): agen le
 - **Pengiriman ke peer yang terhambat.** `reply` dan `notify` mencoba ulang pengiriman ke peer yang tertahan di sebuah pertanyaan hingga `--wait-blocked` detik; tetap tepat satu balasan.
 
 Rilis ini hanya menambah: protokol 1 serta semua perintah, flag, kode keluar, dan kontrak JSON tetap tidak berubah.
+
+## Autopilot
+
+herdr-peers 1.2.0 menambahkan **autopilot** (`autopilot.md`): sebuah daemon opsional, `herdr-peers autopilot`, yang dijalankan oleh manusia agar rencana yang panjang tidak berhenti di layar persetujuan. Daemon ini mengawasi setiap agen di setiap mesin Herdr yang diaktifkan dan, ketika ada agen yang menunggu di sebuah layar, menerima salah satu opsi. Rilis 1.2.1 memperbaiki kasus ketika pertanyaan yang opsinya memiliki deskripsi panjang dibiarkan tidak terjawab.
+
+- **Hanya manusia yang memulainya.** Tidak ada pesan, rekan, atau rencana yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. Agen memulainya hanya ketika manusianya memintanya secara langsung di dalam sesi.
+- **Yang diterimanya.** Pertanyaan dengan opsi, persetujuan tool, persetujuan rencana, kepercayaan folder, dan prompt pembaruan, yang dilewatinya. Ia mengambil opsi yang ditandai sebagai rekomendasi, jika tidak ada maka opsi yang sudah dipilih lebih dulu oleh CLI, jika tidak ada maka opsi pertama, dan mengikuti dialog multi-langkah sampai selesai dengan membaca ulang layar setelah setiap penekanan tombol.
+- **Agen yang berhenti untuk bertanya.** Agen yang mengakhiri gilirannya dengan bertanya dalam bentuk prosa menerima satu prompt tetap untuk melanjutkan, paling banyak tiga kali per panel per jam. Batas penggunaan dicoba ulang setiap 30 menit, paling lama satu hari.
+- **Yang tidak pernah disentuhnya.** Prompt login, sign-in, kunci API, atau kode perangkat; opsi yang menolak; opsi yang memperluas izin tetap sebuah agen, seperti `always allow` atau mode otomatis; panel tanpa menu yang dikenalinya; panel yang baris inputnya berisi draf milik manusia.
+- **Kontrol.** `--dry-run` mencatat apa yang akan dilakukannya dan tidak mengirim apa pun; `--scope` dan `--exclude` menjauhkannya dari sebuah mesin atau panel; `herdr-peers autopilot status` melaporkan keadaannya dan `herdr-peers autopilot stop` mengakhirinya. Setiap tindakan menjadi satu baris di log delegasi, tanpa teks layar.
+- **CLI yang terverifikasi.** Claude Code, Codex, Cursor, Grok, Pi, dan Antigravity, pada panel nyata. Layar OpenCode belum diverifikasi.
+
+**Yang Anda terima dengan menjalankannya.** Dengan autopilot aktif, permintaan sebuah agen disetujui tanpa dilihat oleh manusia, termasuk perintah yang sebenarnya akan ditolak oleh manusia itu. Tidak ada daftar tolak (deny-list): autopilot tidak menilai apa yang dilakukan sebuah perintah. Kontrol yang tersisa adalah mode izin dan guardrail milik tiap agen, apa yang dapat dijangkau oleh akun dan mesinnya, aturan repositori, dan code review sebelum merge.
+
+Autopilot berada di luar protokol delegasi: ia tidak mengirim ask, balasan, atau pemberitahuan, dan aturan bagi agen dan lead tidak berubah — satu-satunya layar yang mereka jawab dengan tombol adalah kepercayaan folder, pada panel yang mereka luncurkan sendiri. Rilis 1.2.0 juga mendokumentasikan, di `launcher.md`, cara lead membuka beberapa agen sekaligus dengan `ak`.
 
 ## Catatan
 

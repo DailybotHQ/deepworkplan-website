@@ -26,6 +26,8 @@ Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[he
 
 **Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning: các động từ CLI cùng các cờ được tài liệu hóa, mã thoát `0`–`7`, các biến `HERDR_PEERS_*`, `DWP_PLAN` và `DWP_TASK` được tài liệu hóa, giao thức 1, và các hợp đồng JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` cùng bản ghi ủy thác. Một thay đổi phá vỡ tương thích ở bất kỳ thành phần nào trong số đó sẽ tăng phiên bản chính, và một thay đổi định dạng truyền tải còn tăng cả số giao thức. `v1.0.0` không thay đổi hành vi nào so với `v0.3.3`, và các bản phát hành 0.x không còn được hỗ trợ.
 
+**Đi trước descriptor của pack.** Pack `v7.9.0` ghi nhận herdr-peers 1.1.0 trong descriptor addon Herdr của nó; trang này ghim bản mới hơn là `v1.2.1` (2026-11-15). Các bản phát hành 1.2.0 và 1.2.1 chỉ bổ sung và giữ nguyên giao thức 1, nên phần tích hợp không thay đổi.
+
 ## Cài đặt
 
 Cài đặt herdr-peers và skill chính thức của Herdr mà nó phụ thuộc vào. Mọi máy có agent cần trả lời cũng phải có skill này.
@@ -58,7 +60,7 @@ herdr-peers không xác thực bên gửi: trường `from=` trong một con d�
 
 ## Container và máy host
 
-Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v1.1.1`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
+Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v1.1.1`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào. Image devcontainer-kit `v1.1.1` đi kèm herdr-peers 1.1.0, vốn không có autopilot, cho đến bản phát hành tiếp theo của bộ kit.
 
 ## Herdr hay agentkit
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0 bổ sung sub-skill **debate** gốc (`debate.md`): một agen
 - **Gửi đến peer đang bị chặn.** `reply` và `notify` thử gửi lại cho peer đang dừng ở một câu hỏi trong tối đa `--wait-blocked` giây; vẫn chỉ đúng một phản hồi.
 
 Bản phát hành chỉ bổ sung: giao thức 1 cùng mọi lệnh, flag, mã thoát và hợp đồng JSON đều giữ nguyên.
+
+## Autopilot
+
+herdr-peers 1.2.0 bổ sung **autopilot** (`autopilot.md`): một daemon tùy chọn, `herdr-peers autopilot`, do con người khởi chạy để một kế hoạch dài không dừng lại ở màn hình phê duyệt. Nó theo dõi mọi agent trên mọi máy Herdr đã được bật và, khi một agent đang chờ ở một màn hình, chấp nhận một lựa chọn. Bản phát hành 1.2.1 sửa một trường hợp trong đó câu hỏi có các lựa chọn kèm mô tả dài bị bỏ lại không được trả lời.
+
+- **Chỉ con người mới khởi chạy nó.** Không tin nhắn, peer hay kế hoạch nào có thể khởi chạy nó, dừng nó hoặc thay đổi việc nó làm. Một agent chỉ khởi chạy nó khi con người của agent đó yêu cầu trực tiếp trong phiên.
+- **Những gì nó chấp nhận.** Một câu hỏi có lựa chọn, một yêu cầu phê duyệt công cụ, một yêu cầu phê duyệt kế hoạch, việc tin cậy thư mục và một lời nhắc cập nhật, thứ mà nó bỏ qua. Nó chọn lựa chọn được đánh dấu là khuyến nghị, nếu không có thì lựa chọn mà CLI đã chọn sẵn, nếu không có thì lựa chọn đầu tiên, và đi theo một hộp thoại nhiều bước đến hết, đọc lại màn hình sau mỗi lần gửi phím.
+- **Agent dừng lại để hỏi.** Một agent kết thúc lượt của mình bằng một câu hỏi viết dưới dạng văn xuôi sẽ nhận một lời nhắc cố định để tiếp tục, tối đa ba lần mỗi pane mỗi giờ. Giới hạn sử dụng được thử lại sau mỗi 30 phút, trong tối đa một ngày.
+- **Những gì nó không bao giờ đụng tới.** Lời nhắc đăng nhập, sign-in, khóa API hoặc mã thiết bị; một lựa chọn từ chối; một lựa chọn mở rộng quyền thường trực của agent, chẳng hạn `always allow` hoặc chế độ tự động; một pane không có menu nào mà nó nhận ra; một pane mà dòng nhập đang chứa bản nháp của con người.
+- **Điều khiển.** `--dry-run` ghi lại những gì nó sẽ làm và không gửi gì cả; `--scope` và `--exclude` giữ nó tránh xa một máy hoặc một pane; `herdr-peers autopilot status` báo cáo về nó và `herdr-peers autopilot stop` kết thúc nó. Mỗi hành động là một dòng trong nhật ký ủy thác, không kèm nội dung màn hình.
+- **Các CLI đã được xác minh.** Claude Code, Codex, Cursor, Grok, Pi và Antigravity, trên các pane thật. Các màn hình của OpenCode chưa được xác minh.
+
+**Bạn chấp nhận điều gì khi chạy nó.** Khi autopilot đang bật, yêu cầu của một agent được phê duyệt mà con người không nhìn thấy nó, kể cả một lệnh mà con người lẽ ra đã từ chối. Không có danh sách từ chối (deny-list): autopilot không đánh giá một lệnh làm gì. Các biện pháp kiểm soát còn lại là chế độ quyền và rào chắn bảo vệ riêng của từng agent, những gì tài khoản và máy của nó có thể tiếp cận, các quy tắc của repository và việc review mã trước khi merge.
+
+Autopilot nằm ngoài giao thức ủy thác: nó không gửi ask, phản hồi hay thông báo nào, và quy tắc dành cho agent và lead không thay đổi — màn hình duy nhất mà chúng gửi phím là màn hình tin cậy thư mục, trên các pane do chính chúng khởi chạy. Bản phát hành 1.2.0 cũng ghi lại, trong `launcher.md`, cách một lead mở nhiều agent cùng lúc bằng `ak`.
 
 ## Ghi chú
 

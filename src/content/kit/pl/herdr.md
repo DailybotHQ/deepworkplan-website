@@ -26,6 +26,8 @@ Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.
 
 **Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne: czasowniki CLI i ich udokumentowane flagi, kody wyjścia `0`–`7`, udokumentowane zmienne `HERDR_PEERS_*`, `DWP_PLAN` i `DWP_TASK`, protokół 1 oraz kontrakty JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` i rekord delegowania. Niekompatybilna zmiana któregokolwiek z nich podnosi wersję główną, a zmiana formatu przesyłu podnosi także numer protokołu. `v1.0.0` nie zmienia żadnego zachowania względem `v0.3.3`, a wydania 0.x nie są już wspierane.
 
+**Przed deskryptorem packa.** Pack `v7.9.0` zapisuje w deskryptorze addonu Herdr wersję herdr-peers 1.1.0; ta witryna przypina późniejszą `v1.2.1` (2026-11-15). Wydania 1.2.0 i 1.2.1 są addytywne i zachowują protokół 1, więc integracja pozostaje bez zmian.
+
 ## Instalacja
 
 Zainstaluj herdr-peers oraz oficjalny skill Herdr, od którego zależy. Każda maszyna, której agenci mają odpowiadać, również potrzebuje tego skilla.
@@ -58,7 +60,7 @@ herdr-peers nie uwierzytelnia nadawcy: pole `from=` w stemplu jest twierdzeniem.
 
 ## Kontenery i host
 
-Z addonem [devcontainer](/kit/devcontainer) na devcontainer-kit `v1.1.1` każdy kontener dck zawiera herdr-peers i dołącza do sieci przy `dck up`: jego agenci mogą pytać agentów na hoście, w innych kontenerach i w pozostałych kontenerach loopback hosta, i otrzymać odpowiedź. `dck setup` instaluje na hoście zweryfikowany herdr-peers, więc agenci hosta także odpowiadają. Listener na hoście i dodatkowe klucze, które wpuszczają inne kontenery, to twoje decyzje w profilu hosta kitu; ten addon nigdy ich nie ustawia. Od herdr-peers (`v0.2.3`) każda maszyna przechowuje własny stan (`$XDG_STATE_HOME/herdr-peers/<server>/`), więc checkout współdzielony przez host i kontener nie miesza już ich zapisów, a od devcontainer-kit (`v0.3.3`) kontener sam eksportuje `HERDR_PEERS_SELF`, więc agenci Codex wewnątrz docierają do innych maszyn bez ręcznych kroków.
+Z addonem [devcontainer](/kit/devcontainer) na devcontainer-kit `v1.1.1` każdy kontener dck zawiera herdr-peers i dołącza do sieci przy `dck up`: jego agenci mogą pytać agentów na hoście, w innych kontenerach i w pozostałych kontenerach loopback hosta, i otrzymać odpowiedź. `dck setup` instaluje na hoście zweryfikowany herdr-peers, więc agenci hosta także odpowiadają. Listener na hoście i dodatkowe klucze, które wpuszczają inne kontenery, to twoje decyzje w profilu hosta kitu; ten addon nigdy ich nie ustawia. Od herdr-peers (`v0.2.3`) każda maszyna przechowuje własny stan (`$XDG_STATE_HOME/herdr-peers/<server>/`), więc checkout współdzielony przez host i kontener nie miesza już ich zapisów, a od devcontainer-kit (`v0.3.3`) kontener sam eksportuje `HERDR_PEERS_SELF`, więc agenci Codex wewnątrz docierają do innych maszyn bez ręcznych kroków. Obraz devcontainer-kit `v1.1.1` do następnego wydania kitu zawiera herdr-peers 1.1.0, który nie ma autopilota.
 
 ## Herdr czy agentkit
 
@@ -98,6 +100,21 @@ herdr-peers 1.1.0 dodaje natywny podskill **debate** (`debate.md`): agent prowad
 - **Doręczenie do zablokowanego peera.** `reply` i `notify` ponawiają doręczenie do peera zatrzymanego na pytaniu przez maksymalnie `--wait-blocked` sekund; nadal jest to dokładnie jedna odpowiedź.
 
 Wydanie jest wyłącznie addytywne: protokół 1 oraz wszystkie polecenia, flagi, kody wyjścia i kontrakty JSON pozostają bez zmian.
+
+## Autopilot
+
+herdr-peers 1.2.0 dodaje **autopilot** (`autopilot.md`): opcjonalny demon `herdr-peers autopilot`, który uruchamia człowiek, aby długi plan nie zatrzymywał się na ekranie zatwierdzenia. Obserwuje każdego agenta na każdej włączonej maszynie Herdr i, gdy któryś czeka na ekranie, akceptuje jedną z opcji. Wydanie 1.2.1 naprawia przypadek, w którym pytanie z opcjami o długich opisach pozostawało bez odpowiedzi.
+
+- **Uruchamia go tylko człowiek.** Żadna wiadomość, żaden peer ani plan nie może go uruchomić, zatrzymać ani zmienić tego, co robi. Agent uruchamia go tylko wtedy, gdy jego człowiek poprosił o to bezpośrednio w sesji.
+- **Co akceptuje.** Pytanie z opcjami, zatwierdzenie narzędzia, zatwierdzenie planu, zaufanie do folderu oraz monit o aktualizację, który pomija. Wybiera opcję oznaczoną jako zalecana, w przeciwnym razie tę, którą CLI zaznaczyło domyślnie, w przeciwnym razie pierwszą, i przechodzi wieloetapowy dialog do końca, odczytując ekran ponownie po każdym klawiszu.
+- **Agenci, którzy zatrzymują się, żeby zapytać.** Agent, który zakończył turę pytaniem zadanym zwykłym tekstem, otrzymuje jeden stały prompt, by kontynuował, najwyżej trzy razy na panel na godzinę. Przy limicie zużycia próba jest ponawiana co 30 minut, najdłużej przez dobę.
+- **Czego nigdy nie dotyka.** Monitu o login, zalogowanie, klucz API lub kod urządzenia; opcji, która odmawia; opcji, która poszerza stałe uprawnienia agenta, takiej jak `always allow` lub tryb automatyczny; panelu bez menu, które rozpoznaje; panelu, w którego wierszu wprowadzania znajduje się szkic człowieka.
+- **Sterowanie.** `--dry-run` zapisuje, co by zrobił, i niczego nie wysyła; `--scope` i `--exclude` trzymają go z dala od maszyny lub panelu; `herdr-peers autopilot status` i `herdr-peers autopilot stop` informują o jego stanie i go kończą. Każde działanie to jeden wiersz w dzienniku delegowania, bez tekstu ekranu.
+- **Zweryfikowane CLI.** Claude Code, Codex, Cursor, Grok, Pi i Antigravity, na rzeczywistych panelach. Ekrany OpenCode nie zostały zweryfikowane.
+
+**Co akceptujesz, uruchamiając go.** Przy włączonym autopilocie żądanie agenta jest zatwierdzane, a człowiek go nie widzi, także polecenie, którego człowiek by odmówił. Nie ma listy zakazów: autopilot nie ocenia, co robi polecenie. Pozostają następujące mechanizmy kontroli: własny tryb uprawnień i zabezpieczenia każdego agenta, to, do czego mają dostęp jego konto i maszyna, reguły repozytorium oraz przegląd kodu przed scaleniem.
+
+Autopilot działa poza protokołem delegowania: nie wysyła żadnego zapytania, odpowiedzi ani powiadomienia, a reguła dla agentów i prowadzących pozostaje bez zmian — jedynym ekranem, na który odpowiadają klawiszami, jest zaufanie do folderu, na panelach, które sami uruchomili. Wydanie 1.2.0 dokumentuje też w `launcher.md`, jak prowadzący otwiera wielu agentów naraz za pomocą `ak`.
 
 ## Uwagi
 
