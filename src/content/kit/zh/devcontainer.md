@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 附加组件
 
-为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v7**（技能包 `v7.10.1`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
+为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v7**（技能包 `v7.10.2`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
 
 ## devcontainer-kit 提供什么
 
@@ -34,7 +34,7 @@ cd your-repo && dck init && bash dev.sh up
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |
 
-**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上新的固定版本（herdr-peers `v1.2.1`、coding-agents-kit `v1.1.0` 和 DeepWorkPlan Vim `v1.0.1`）。
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上新的固定版本（herdr-peers 1.2.1、coding-agents-kit 1.1.0 和 DeepWorkPlan Vim 1.0.1）。
 
 ## 层
 

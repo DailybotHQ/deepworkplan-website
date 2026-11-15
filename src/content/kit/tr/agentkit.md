@@ -10,7 +10,7 @@ order: 8
 
 Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayrakları, ikinci bir hesabı ayrı tutmak için kendi yolu, kendi başsız (headless) modu ve izin istemlerini atlamak için kendi anahtarı vardır. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)**, hepsinin üzerine tek bir komut yüzeyi koyar: `ak <kind> [@profile]`.
 
-Bu eklenti, kiti **DWP v7**'ye (paket `v7.10.1`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
+Bu eklenti, kiti **DWP v7**'ye (paket `v7.10.2`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
 ## Kitin size sundukları
 
@@ -65,21 +65,23 @@ ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış he
 ## Kurulum
 
 ```bash
-git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.1.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.2.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v1.1.0` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v1.2.0` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |
 | Gerektirdiği | plan sözleşmesinin `agent_delegation` yetkisi |
 
 **`v1.0.0` sürümünden beri kararlı.** Kitin genel arayüzü anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde uyumsuz biçimde değişir: komut yüzeyi (`providers.toml` içindeki her tür için `ak <kind> [@profile]` ve belgelenmiş bayraklarıyla her fiil), izin duruşu, arayüz 1 (`ak doctor --json`, `ak env`, `ak run` söz dizimi ve zarfı), JSON şemaları (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`) ile kurulu düzen ve env dosyası değişken adları. `v1.0.0`, `v0.7.1` sürümüne göre hiçbir komutu, bayrağı, anahtarı ya da şemayı değiştirmez.
+
+1.2.0 sürümü **`ak last`** ekler: her etkileşimli başlatma, çalışma dizinine göre kendi kind ve profilini kaydeder; `ak last` onu herhangi bir terminalde `-c` ile yeniden başlatır (orada en yeni oturumu sürdürür), `ak last -r` o hesapta CLI seçicisini açar, `ak last ls` kaydı listeler. Bir Herdr bölmesi içinde yapılan başlatma, Herdr'in veya makinenin yeniden başlamasını da atlatır: bölme aynı hesapla `ak --resume` üzerinden geri gelir, anahtarı env dosyasından gelir ve izin durumu korunur (`AGENTKIT_HERDR_RESUME=0` kapatır).
 
 ## Varsayılan olarak özerklik, her zaman üstün gelen bir devre dışı bırakma seçeneğiyle
 

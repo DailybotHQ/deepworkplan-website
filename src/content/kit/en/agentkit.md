@@ -10,7 +10,7 @@ order: 8
 
 Every terminal coding agent has its own flags for continuing a session, its own way to keep a second account apart, its own headless mode and its own switch for skipping permission prompts. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** puts one command surface over all of them: `ak <kind> [@profile]`.
 
-This addon integrates the kit into **DWP v7** (pack `v7.10.1`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
+This addon integrates the kit into **DWP v7** (pack `v7.10.2`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
 
 ## What the kit gives you
 
@@ -65,21 +65,23 @@ Work moves only among the accounts you declared for the plan, within each vendor
 ## Install
 
 ```bash
-git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v1.1.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v1.2.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v1.1.0`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |
 | Requires | the plan contract's `agent_delegation` grant |
 
 **Stable since `v1.0.0`.** The kit's public interface follows semantic versioning and changes incompatibly only in a new major version: the command surface (`ak <kind> [@profile]` for every kind in `providers.toml`, and every verb with its documented flags), the permission posture, interface 1 (`ak doctor --json`, `ak env`, the `ak run` grammar and envelope), the JSON schemas (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), and the installed layout and env-file variable names. `v1.0.0` changes no command, flag, key or schema from `v0.7.1`.
+
+Release 1.2.0 adds **`ak last`**: every interactive launch records its kind and profile per working directory; `ak last` relaunches it with `-c` (continue the newest session there) in any terminal, `ak last -r` opens the CLI's picker in that account, and `ak last ls` lists the record. A launch inside a Herdr pane also survives a Herdr restart or a reboot: the pane comes back through `ak --resume` in the same account, with its key from the env file and its permission posture intact (`AGENTKIT_HERDR_RESUME=0` turns it off).
 
 ## Autonomy by default, with an opt-out that always wins
 

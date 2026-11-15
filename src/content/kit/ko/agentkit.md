@@ -10,7 +10,7 @@ order: 8
 
 터미널 코딩 에이전트는 저마다 세션을 이어 가는 고유한 플래그, 두 번째 계정을 분리하는 고유한 방식, 고유한 헤드리스 모드, 그리고 권한 프롬프트를 건너뛰는 고유한 스위치를 갖고 있습니다. [**coding-agents-kit**](https://github.com/DailybotHQ/coding-agents-kit)는 그 모두 위에 하나의 명령 체계를 얹습니다: `ak <kind> [@profile]`.
 
-이 애드온은 이 키트를 **DWP v7**(팩 `v7.10.1`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
+이 애드온은 이 키트를 **DWP v7**(팩 `v7.10.2`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
 
 ## 키트가 제공하는 것
 
@@ -65,21 +65,23 @@ ak pick codex --owner local:w1:p1 --count 2      # 다른 소유자에게 리스
 ## 설치
 
 ```bash
-git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.1.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
+요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.2.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.1.0`, 인터페이스 1 |
+| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.2.0`, 인터페이스 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `agentkit` |
 | 전송 방식 | 헤드리스: 위임 대상마다 전용 git worktree에서 `ak run` 한 번 |
 | 제공 | `subagents`, `cancel_children`, `model_routing` |
 | 요구 | 계획 계약의 `agent_delegation` 부여 |
 
 **`v1.0.0`부터 안정 버전입니다.** 키트의 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환되지 않는 변경은 새 메이저 버전에서만 이루어집니다. 명령 표면(`providers.toml`의 모든 종류에 대한 `ak <kind> [@profile]`, 그리고 문서화된 플래그를 포함한 모든 동사), 권한 정책, 인터페이스 1(`ak doctor --json`, `ak env`, `ak run` 문법과 엔벨로프), JSON 스키마(`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), 그리고 설치 레이아웃과 env 파일 변수 이름이 그 대상입니다. `v1.0.0`은 `v0.7.1`에서 명령, 플래그, 키, 스키마를 하나도 바꾸지 않습니다.
+
+릴리스 1.2.0은 `ak last`를 추가합니다. 모든 대화형 실행은 작업 디렉터리별로 kind와 프로필을 기록하고, `ak last`는 아무 터미널에서나 `-c`와 함께 다시 실행(그 디렉터리에서 최신 세션 계속)하며, `ak last -r`은 해당 계정의 CLI 피커를 열고, `ak last ls`는 기록을 나열합니다. Herdr 패인 안의 실행도 Herdr 재시작이나 재부팅을 견딥니다. 패인은 같은 계정으로 `ak --resume`를 통해 돌아오고, 키는 env 파일에서, 권한 자세도 그대로입니다(`AGENTKIT_HERDR_RESUME=0`으로 끌 수 있습니다).
 
 ## 기본은 자율 실행, 옵트아웃이 항상 우선한다
 

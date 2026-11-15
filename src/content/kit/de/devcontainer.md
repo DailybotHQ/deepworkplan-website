@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer-Addon
 
-Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.10.1`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
+Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.10.2`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
 ## Was devcontainer-kit bereitstellt
 
@@ -34,7 +34,7 @@ Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem L
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
 
-**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die neuen fixierten Versionen enthält (herdr-peers `v1.2.1`, coding-agents-kit `v1.1.0` und DeepWorkPlan Vim `v1.0.1`).
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die neuen fixierten Versionen enthält (herdr-peers 1.2.1, coding-agents-kit 1.1.0 und DeepWorkPlan Vim 1.0.1).
 
 ## Layer
 

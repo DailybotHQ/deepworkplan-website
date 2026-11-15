@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7 は v6 の方法を維持します。契約が権威であり、追記専用のジャーナルが記憶であり、スケジューラが次に実行するものを決め、記録された証拠がタスクの基準を満たしたときにのみタスクが完了します。v7 は委任の能力を加え、その結果に対しても同じ規律を保ちます。
@@ -52,4 +54,6 @@ v7 はオーケストレーションと監査可能性における大きな前�
 
 リリース 7.10.1（2026-11-15）は Herdr アドオンを herdr-peers v1.2.1 に固定しました。その 1.2.x 系列は autopilot を追加します。人間だけが起動する任意のデーモンで、待機中の各エージェントの推奨オプションを受け入れ、複数ステップの対話を最後までたどり、ログインや権限バイパスの承認には決して触れません。プロトコル1は不変です。
 
-インストール済みスキルのリリースは **7.10.1** です。7.0.0 以降、安定しています。
+リリース 7.10.2（2026-11-15）は、当日のリリースに合わせてエコシステムの固定を動かしました。Herdr アドオンを herdr-peers v1.2.2 へ。修正のみのパッチで、autopilot が選択肢の横にプレビュー付きで表示される質問に回答し、スペイン語・フランス語・ドイツ語・イタリア語の推奨マークを認識します。agentkit を coding-agents-kit v1.2.0 へ。その `ak last` は作業ディレクトリの最新セッションを任意のターミナルで再開し、Herdr ペイン内の起動は Herdr 再起動やマシン再起動の後にペインを復元します。devcontainer-kit を v1.1.2 へ、deepworkplan-vim は v1.0.1 のまま。リリースワークフローは一時的な拒否を吸収するため release tag のプッシュをリトライするようになりました。
+
+インストール済みスキルのリリースは **7.10.2** です。7.0.0 以降、安定しています。

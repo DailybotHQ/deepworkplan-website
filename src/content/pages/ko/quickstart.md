@@ -77,10 +77,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.10.1
+  git checkout v7.10.2
   # 그 릴리스의 체크섬을 다운로드하고 아래 다이제스트와 대조하세요:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.10.1/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.10.2/SHA256SUMS
   shasum -a 256 SHA256SUMS # 고정된 릴리스의 deepworkplan-skill 다이제스트와 같아야 합니다
   ./setup.sh --verify        # 0이 아닌 종료 코드는 파일이 일치하지 않음을 의미합니다 — 중단하세요
   ```
@@ -93,9 +93,9 @@ lastUpdated: 2026-10-11
 
   | 리포지토리(github.com/DailybotHQ) | 태그 | 해당 `SHA256SUMS`의 sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.10.1` | `80be3b01a54dc6d78465a62584dfea07d60187217ddd35153b4940ff23d094ee` |
-  | coding-agents-kit | `v1.1.0` | `0de0d54a5aaab64961b67d535888cda34d4521217b5a44c8ea5a250fb1ed0629` |
-  | herdr-peers | `v1.2.1` | `aef2c64cae04e2e3dc5de0f8e664905edc2cd4c04465f04fc40856a0a0b94720` |
+  | deepworkplan-skill | `v7.10.2` | `e011b7e863911bcd1cc895af810b51fa89f1dac5987da856525749eaad1c8456` |
+  | coding-agents-kit | `v1.2.0` | `424cd430846608bc5c4a8a6bfde535ddb9e8251373160ddb8257106c38acc8de` |
+  | herdr-peers | `v1.2.2` | `72cf2cf7e8d027cc8da48f52a9b5ffa21ae6eb2f0946a8bd0d58b51ed57f8d5f` |
   | devcontainer-kit | `v1.1.2` | `c7a5ffb737777473f08932f9a2de153518d923f5d7edeb4ab97fdd7537bf2374` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
@@ -111,7 +111,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.10.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.10.2 --skill deepworkplan -y
 ```
 
 또는 OpenClaw를 통해 설치:
@@ -133,7 +133,7 @@ Plan 스킬 릴리스로 구현됩니다. 현재 스킬 팩에는 라우터와 �
 하위 스킬이 포함됩니다: `create`, `execute`, `refine`, `resume`,
 `status`, `verify`, `onboard`, `author`, `upgrade`.
 
-설치된 skill 릴리스: **7.10.1**. 현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, v5 계획을 v6으로 옮기려면 명시적 요청과 미리보기가 필요합니다.
+설치된 skill 릴리스: **7.10.2**. 현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, v5 계획을 v6으로 옮기려면 명시적 요청과 미리보기가 필요합니다.
 
 이 표준은 의도적으로 비례적이며, 그 비례성을 개발자의 규율이 아니라
 계획의 속성으로 만듭니다. 계획은 작고 한정된 작업을 위해 계획의
@@ -241,8 +241,8 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 | --- | --- | --- |
 | AI Diff Reviewer(필수) | `.agents/skills/ai-diff-reviewer/SKILL.md`의 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md`의 `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | 설치된 herdr-peers 스킬의 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g --force -y` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | 설치된 herdr-peers 스킬의 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh 의 검증된 설치 프로그램(`v1.0.1`로 고정; 다운로드 후 `shasum -a 256 -c install.sh.sha256`을 실행하고 나서 실행) |
 
@@ -260,8 +260,8 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
   하나의 파일에 쌓입니다: visual-ui(감지되면 강력히 권장; 설치는 수락으로 제어), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v1.1.0`로 고정)의 머신 수준 설치: 모든 코딩 에이전트를 위한 하나의 명령, 프로필마다 하나의 계정, 여유가 가장 많은 계정을 고르는 `ak usage`와 `ak pick`, 그리고 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 헤드리스 `ak run`(worktree마다 위임 대상 하나). 키트는 기본적으로 에이전트를 자율 모드로 시작하며, 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선합니다.
-- **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획, 그리고 자신의 레인을 지켜보는 리드를 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v1.2.1`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v1.2.0`로 고정)의 머신 수준 설치: 모든 코딩 에이전트를 위한 하나의 명령, 프로필마다 하나의 계정, 여유가 가장 많은 계정을 고르는 `ak usage`와 `ak pick`, 그리고 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 헤드리스 `ak run`(worktree마다 위임 대상 하나). 키트는 기본적으로 에이전트를 자율 모드로 시작하며, 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선합니다.
+- **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획, 그리고 자신의 레인을 지켜보는 리드를 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v1.2.2`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
 - **DeepWorkPlan Vim** — 터미널 에디터([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v1.0.1`로 고정)로, 명시적 동의 없이 기존 Neovim 설정을 절대 덮어쓰지 않는 머신 수준 설치입니다.
 - **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 **검증된 `critical` 결과**는 여전히 완료를 차단합니다 (v3, BC-07 — 검증되지 않은 크리티컬 주장은 주석 달린 경고로 표시되며, `incomplete`/`timeout` 검토는 깨끗한 패스가 아님, BC-04). **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
@@ -294,7 +294,7 @@ devcontainer 애드온의 끝은 생성된 파일 묶음이 아니라 동작하�
 - **지켜보기.** `herdr-peers lanes`는 모든 레인의 상태를 보여 주고, 차단된 레인에 대해서는 `herdr-peers status <pane>`가 화면을 분류하며 `herdr pane read <pane>`가 그 화면을 보여 줍니다.
 - **키 입력은 한 가지 경우뿐.** `herdr pane send-keys`로 보낼 수 있는 키는 폴더 신뢰 화면에 대한 응답뿐이며, 그것도 직접 시작한 페인에서 `--trust-cwd`를 쓸 수 없었던 경우로 한정됩니다. 보내기 전과 후에 화면을 읽고, 키는 최소한만 보내세요.
 - **나머지는 모두 읽고, 기록하고,** 개발자에게 **에스컬레이션**하세요: Claude의 권한 우회 확인, 로그인과 자격 증명 프롬프트, 작업별 권한 요청, 파괴적인 확인, 결제나 요금제 프롬프트, 알 수 없는 화면, 직접 만들지 않은 페인. `AGENTKIT_PERMISSIONS=ask`가 설정되어 있으면 레인은 행동하기 전에 묻습니다. 그 프롬프트를 절대 우회하지 마세요. 모든 개입을 상위 계획에 기록하세요.
-- **스웜을 계속 돌아가게 하기.** coding-agents-kit `v1.1.0`과 herdr-peers `v1.2.1`을 쓰면 각 에이전트는 모든 작업 경계에서 `ak capacity --self --json`을 확인합니다. `critical`이 되면 핸드오프 패킷(https://deepworkplan.com/schema/dwp-handoff/v1.json)을 쓰고, 리드가 같은 체크아웃에서 후임을 시작합니다. 리드는 `herdr-peers lead claim`으로 자신의 계획을 claim하고, 레인은 리드를 `lead`라는 주소로 부르며, 리드가 사라지면 대리가 넘겨받습니다(`herdr-peers lead takeover`). 일상적인 선택은 모두 스스로 결정하고 기록하며, 치명적 클래스 C1–C7만 에스컬레이션하세요. 참고: https://deepworkplan.com/methodology/07-swarm-autonomy.md.
+- **스웜을 계속 돌아가게 하기.** coding-agents-kit `v1.2.0`과 herdr-peers `v1.2.2`을 쓰면 각 에이전트는 모든 작업 경계에서 `ak capacity --self --json`을 확인합니다. `critical`이 되면 핸드오프 패킷(https://deepworkplan.com/schema/dwp-handoff/v1.json)을 쓰고, 리드가 같은 체크아웃에서 후임을 시작합니다. 리드는 `herdr-peers lead claim`으로 자신의 계획을 claim하고, 레인은 리드를 `lead`라는 주소로 부르며, 리드가 사라지면 대리가 넘겨받습니다(`herdr-peers lead takeover`). 일상적인 선택은 모두 스스로 결정하고 기록하며, 치명적 클래스 C1–C7만 에스컬레이션하세요. 참고: https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 

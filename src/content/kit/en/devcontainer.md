@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.10.1`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
+Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.10.2`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
 
 ## What devcontainer-kit provides
 
@@ -34,7 +34,7 @@ Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macO
 | Per-repository config | `.devcontainer/dck.toml` |
 | Detection | `dck doctor --json` |
 
-**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the new pins (herdr-peers `v1.2.1`, coding-agents-kit `v1.1.0` and DeepWorkPlan Vim `v1.0.1`).
+**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the new pins (herdr-peers 1.2.1, coding-agents-kit 1.1.0 and DeepWorkPlan Vim 1.0.1).
 
 ## Layers
 

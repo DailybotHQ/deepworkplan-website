@@ -28,6 +28,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.0"
   - label: "Skill release v7.10.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
+  - label: "Skill release v7.10.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
 ---
 
 Deep Work Plan v7 mempertahankan metode v6: kontrak adalah otoritas, jurnal append-only adalah memori, penjadwal menentukan apa yang berjalan berikutnya, dan sebuah tugas baru ditutup ketika bukti yang tercatat memenuhi kriterianya. v7 menambahkan kemampuan mendelegasikan dan menjaga disiplin yang sama terhadap hasilnya.
@@ -52,4 +54,6 @@ Rilis 7.10.0 (2026-10-26) mengubah keputusan penting menjadi keputusan tim: deng
 
 Rilis 7.10.1 (2026-11-15) mematok addon Herdr ke herdr-peers v1.2.1, yang lini 1.2.x-nya menambahkan autopilot: daemon opsional yang hanya dijalankan oleh manusia, yang menerima opsi yang disarankan untuk setiap agen yang menunggu, mengikuti dialog multi-langkah sampai tuntas, dan tidak pernah menyentuh login atau konfirmasi pengabaian izin. Protokol 1 tidak berubah.
 
-Rilis skill yang dipasang: **7.10.1**, stabil sejak 7.0.0.
+Rilis 7.10.2 (2026-11-15) memindahkan pin ekosistem mengikuti rilis hari itu: addon Herdr ke herdr-peers v1.2.2, patch yang hanya berisi perbaikan yang autopilot-nya kini menjawab pertanyaan yang ditampilkan dengan pratinjau di samping opsinya dan mengenali tanda rekomendasi dalam bahasa Spanyol, Prancis, Jerman, dan Italia; agentkit ke coding-agents-kit v1.2.0, yang `ak last`-nya melanjutkan sesi terbaru sebuah direktori kerja di terminal mana pun dan peluncurannya di dalam pane Herdr memulihkan pane itu setelah Herdr atau mesin dijalankan ulang; devcontainer-kit ke v1.1.2 dan deepworkplan-vim tetap v1.0.1; workflow release kini mencoba ulang push tag release untuk menyerap penolakan sementara.
+
+Rilis skill yang dipasang: **7.10.2**, stabil sejak 7.0.0.

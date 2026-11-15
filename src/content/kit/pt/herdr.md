@@ -10,15 +10,15 @@ order: 7
 
 O [Herdr](https://herdr.dev) coloca agentes de programação em painéis, na sua máquina e nas máquinas que ele alcança por SSH. Este addon permite que um Deep Work Plan use esses agentes como **pares**: um plano pode passar uma tarefa delimitada a um agente em outro painel, receber exatamente uma resposta autorizada e manter um registro da troca.
 
-É um addon opcional do **DWP v7** (pack `v7.10.1`). A metodologia funciona da mesma forma sem ele: com o addon ausente ou desativado, cada tarefa é executada na sessão atual, exatamente como antes.
+É um addon opcional do **DWP v7** (pack `v7.10.2`). A metodologia funciona da mesma forma sem ele: com o addon ausente ou desativado, cada tarefa é executada na sessão atual, exatamente como antes.
 
 ## O que ele integra
 
-O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v1.2.1`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
+O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v1.2.2`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/herdr-peers`, tag `v1.2.1`, protocolo 1 |
+| Produto | `DailybotHQ/herdr-peers`, tag `v1.2.2`, protocolo 1 |
 | Chave de registro | `herdr` em `.dwp/config.json` |
 | Transporte | interativo: um par em um painel do Herdr |
 | Fornece | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https:
 Instale o herdr-peers e a skill oficial do Herdr, da qual ele depende. Toda máquina cujos agentes devam responder também precisa da skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ A versão é aditiva: o protocolo 1 e todos os verbos, flags, códigos de saída
 
 ## Autopilot
 
-O herdr-peers 1.2.0 adiciona o **autopilot** (`autopilot.md`): um daemon opcional, `herdr-peers autopilot`, que uma pessoa inicia para que um plano longo não pare em uma tela de aprovação. Ele observa todos os agentes em todas as máquinas Herdr habilitadas e, quando um deles espera em uma tela, aceita uma opção. A versão 1.2.1 corrige um caso em que uma pergunta cujas opções têm descrições longas ficava sem resposta.
+O herdr-peers 1.2.0 adiciona o **autopilot** (`autopilot.md`): um daemon opcional, `herdr-peers autopilot`, que uma pessoa inicia para que um plano longo não pare em uma tela de aprovação. Ele observa todos os agentes em todas as máquinas Herdr habilitadas e, quando um deles espera em uma tela, aceita uma opção. A versão 1.2.1 corrige um caso em que uma pergunta cujas opções têm descrições longas ficava sem resposta. A versão 1.2.2 responde uma pergunta exibida com uma prévia ao lado das opções e reconhece a marca de recomendado em espanhol, francês, alemão e italiano.
 
 - **Só uma pessoa o inicia.** Nenhuma mensagem, par ou plano pode iniciá-lo, pará-lo ou mudar o que ele faz. Um agente só o inicia quando a sua pessoa pediu isso diretamente na sessão.
 - **O que ele aceita.** Uma pergunta com opções, uma aprovação de ferramenta, uma aprovação de plano, a confiança na pasta e um prompt de atualização, que ele pula. Ele escolhe a opção marcada como recomendada; na falta dela, a que a CLI pré-selecionou; na falta desta, a primeira; e segue um diálogo de várias etapas até o fim, relendo a tela após cada tecla.

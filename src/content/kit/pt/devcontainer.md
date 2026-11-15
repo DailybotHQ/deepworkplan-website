@@ -8,7 +8,7 @@ order: 1
 
 # Addon devcontainer
 
-Dê ao repositório um contêiner de desenvolvimento reproduzível e isolado, que pessoas, editores e agentes de código possam usar igualmente. No **DWP v7** (pack `v7.10.1`), este addon integra o **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, um produto MIT que funciona sem o Deep Work Plan. É opcional: um repositório é totalmente conforme sem ele.
+Dê ao repositório um contêiner de desenvolvimento reproduzível e isolado, que pessoas, editores e agentes de código possam usar igualmente. No **DWP v7** (pack `v7.10.2`), este addon integra o **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, um produto MIT que funciona sem o Deep Work Plan. É opcional: um repositório é totalmente conforme sem ele.
 
 ## O que o devcontainer-kit fornece
 
@@ -34,7 +34,7 @@ Requisitos: `bash` 3.2 ou mais recente e `python3` 3.11 ou mais recente em um ho
 | Configuração por repositório | `.devcontainer/dck.toml` |
 | Detecção | `dck doctor --json` |
 
-**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico e só muda de forma incompatível em uma nova versão principal (e, para os arquivos, com um novo número de interface): os verbos do `dck` com suas flags documentadas e seus códigos de saída (`0` ok, `1` falha, `2` uso, `3` configuração, `4` ambiente, `5` recusado), os esquemas do `dck.toml`, do perfil do host e do `dck doctor --json` (interface 2), e o contrato de renderização: os arquivos que `dck init` escreve e gerencia, os marcadores `dck:managed` e os blocos de usuário que ele preserva, e o ambiente que o entrypoint lê. Nada quebra a partir da `v0.3.7`: execute `dck init` e `dck rebuild` para que a imagem traga as novas versões fixadas (herdr-peers `v1.2.1`, coding-agents-kit `v1.1.0` e DeepWorkPlan Vim `v1.0.1`).
+**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico e só muda de forma incompatível em uma nova versão principal (e, para os arquivos, com um novo número de interface): os verbos do `dck` com suas flags documentadas e seus códigos de saída (`0` ok, `1` falha, `2` uso, `3` configuração, `4` ambiente, `5` recusado), os esquemas do `dck.toml`, do perfil do host e do `dck doctor --json` (interface 2), e o contrato de renderização: os arquivos que `dck init` escreve e gerencia, os marcadores `dck:managed` e os blocos de usuário que ele preserva, e o ambiente que o entrypoint lê. Nada quebra a partir da `v0.3.7`: execute `dck init` e `dck rebuild` para que a imagem traga as novas versões fixadas (herdr-peers 1.2.1, coding-agents-kit 1.1.0 e DeepWorkPlan Vim 1.0.1).
 
 ## Camadas
 

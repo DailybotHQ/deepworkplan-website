@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer eklentisi
 
-Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.10.1`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
+Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.10.2`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
 ## devcontainer-kit'in sağladıkları
 
@@ -34,7 +34,7 @@ Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
-**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın yeni sabitlenmiş sürümleri (herdr-peers `v1.2.1`, coding-agents-kit `v1.1.0` ve DeepWorkPlan Vim `v1.0.1`) içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın.
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın yeni sabitlenmiş sürümleri (herdr-peers 1.2.1, coding-agents-kit 1.1.0 ve DeepWorkPlan Vim 1.0.1) içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın.
 
 ## Katmanlar
 

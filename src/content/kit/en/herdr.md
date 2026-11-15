@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) puts coding agents in panes, on your machine and on machines it reaches over SSH. This addon lets a Deep Work Plan use those agents as **peers**: a plan can hand a bounded task to an agent in another pane, receive exactly one authorized reply, and keep a record of the exchange.
 
-It is an optional addon of **DWP v7** (pack `v7.10.1`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
+It is an optional addon of **DWP v7** (pack `v7.10.2`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.2.1`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.2.2`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v1.2.1`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v1.2.2`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ The release is additive: protocol 1 and every verb, flag, exit code and JSON con
 
 ## Autopilot
 
-herdr-peers 1.2.0 adds **autopilot** (`autopilot.md`): an optional daemon, `herdr-peers autopilot`, that a human starts so that a long plan does not stop at an approval screen. It watches every agent on every enabled Herdr machine and, when one waits at a screen, accepts an option. Release 1.2.1 fixes a case in which a question whose options have long descriptions was left unanswered.
+herdr-peers 1.2.0 adds **autopilot** (`autopilot.md`): an optional daemon, `herdr-peers autopilot`, that a human starts so that a long plan does not stop at an approval screen. It watches every agent on every enabled Herdr machine and, when one waits at a screen, accepts an option. Release 1.2.1 fixes a case in which a question whose options have long descriptions was left unanswered. Release 1.2.2 answers a question shown with a preview beside its options and recognises the recommended mark in Spanish, French, German and Italian.
 
 - **Only a human starts it.** No message, peer or plan can start it, stop it or change what it does. An agent starts it only when its human asked for it directly in the session.
 - **What it accepts.** A question with options, a tool approval, a plan approval, folder trust and an update prompt, which it skips. It takes the option marked recommended, else the one the CLI pre-selected, else the first, and follows a multi-step dialog to its end, re-reading the screen after every key.
