@@ -4,7 +4,7 @@ description: "Skill và chín sub-skill của nó, các command, bộ chuyển �
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan có bốn trụ cột: kế hoạch spec-first, kho mã nguồn làm harness, loop engineering và hiệu quả có thể đo lường. Addon và tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
 ## Bộ kit Deep Work Plan
 

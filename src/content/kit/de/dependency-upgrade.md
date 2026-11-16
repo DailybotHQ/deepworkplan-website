@@ -10,7 +10,7 @@ order: 3
 
 Die Abhängigkeiten eines Repositorys mit einem chargenweisen, validierten, rücknehmbaren Workflow auf den neuesten Stand bringen. Das dritte Opt-in-Addon von Deep Work Plan.
 
-Deep Work Plan hat vier Säulen: spec-first-Pläne, das Repository als Harness, Loop Engineering und messbare Effizienz. Add-ons und Integrationen können Harness und Ablauf erweitern; die Methode funktioniert eigenständig.
+Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
 ## Was es hinzufügt
 

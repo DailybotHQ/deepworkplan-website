@@ -10,7 +10,7 @@ order: 3
 
 Porta le dipendenze di un repository allo stato aggiornato con un workflow a lotti, validato e annullabile. Il terzo addon opt-in di Deep Work Plan.
 
-Deep Work Plan ha quattro pilastri: piani spec-first, il repository come harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere l’harness e il ciclo; la metodologia funziona da sola.
+Deep Work Plan ha quattro pilastri: prima la specifica, il repository è la harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere la harness e il loop; la metodologia funziona da sola.
 
 ## Cosa aggiunge
 

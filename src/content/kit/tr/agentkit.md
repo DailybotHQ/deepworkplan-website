@@ -12,7 +12,7 @@ Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayraklar�
 
 Bu eklenti, kiti **DWP v7**'ye (paket `v7.12.2`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
-Deep Work Plan’in dört temel ilkesi vardır: spec-first planlar, harness olarak depo, loop engineering ve ölçülen verimlilik. Eklentiler ve entegrasyonlar harness ile döngüyü genişletebilir; metodoloji tek başına çalışır.
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
 ## Kitin size sundukları
 
@@ -110,7 +110,7 @@ Sözleşmesi `agent_delegation` yetkisi veren bir v7 planında `execute`, `paral
 
 İkisi birlikte kullanılabilir: herdr-peers, bir bölmede `ak env <kind> @profile` komutunun yazdırdığı ortamla bir eş başlatabilir. Aynı anda birçok şerit için [Birçok ajanı çalıştırmak](/methodology/06-orchestration) bölümüne bakın.
 
-herdr-peers v2.0.0, isteğe bağlı autopilot brain için bu arayüzü kullanır: `ak pick --kinds ... --json` pick-v2 başlatma sözleşmesini döndürür; Herdr bunu doğrular, `launch.permissions: ask` koşulunu arar ve ardından dönen `launch.argv` değerini başlatır. Brain, autonomy veya bypass işaretlerini etkinleştiremez. `ak update` insan tarafından çalıştırılmaya devam eder; brain CLI'ları güncellemez.
+herdr-peers v2.0.0, isteğe bağlı autopilot beyni için bu arayüzü kullanır: `ak pick --kinds ... --json` pick-v2 başlatma sözleşmesini döndürür; Herdr bunu doğrular, `launch.permissions: ask` koşulunu şart koşar ve ardından dönen `launch.argv` değerini başlatır. Beyin, otonomi veya bypass bayraklarını etkinleştiremez. `ak update` insan tarafından çalıştırılmaya devam eder; beyin CLI'ları asla güncellemez.
 
 ## Notlar
 

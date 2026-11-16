@@ -12,7 +12,7 @@ Deep Work Plan 실행을 **Dailybot 팀**에 연결하여 사람들이 에이전
 
 핵심 Deep Work Plan 방법론은 Dailybot에 대한 의존성이 **제로**입니다. 선택적 애드온이 없는 저장소도 완전히 적합합니다. 개발자나 팀이 이미 Dailybot을 사용할 때만 이 애드온을 제공하고, 모든 사람에게 자동 설치하지 마세요.
 
-Deep Work Plan의 네 가지 축은 spec-first 계획, harness 역할을 하는 저장소, loop engineering, 측정 가능한 효율입니다. 애드온과 통합 기능은 harness와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
+Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하니스, Loop engineering, 측정된 효율입니다. 애드온과 통합 기능은 하니스와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
 
 ## 사용 시점
 

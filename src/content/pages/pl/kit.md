@@ -4,7 +4,7 @@ description: "Skill i jego dziewięć sub-skilli, komendy, adaptery agentów, pr
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan ma cztery filary: plany spec-first, repozytorium jako harness, loop engineering i mierzoną wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa samodzielnie.
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
 ## Kit Deep Work Plan
 

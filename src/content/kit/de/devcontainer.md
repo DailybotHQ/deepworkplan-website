@@ -10,7 +10,7 @@ order: 1
 
 Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v7** (Paket `v7.12.2`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
-Deep Work Plan hat vier Säulen: spec-first-Pläne, das Repository als Harness, Loop Engineering und messbare Effizienz. Add-ons und Integrationen können Harness und Ablauf erweitern; die Methode funktioniert eigenständig.
+Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
 ## Was devcontainer-kit bereitstellt
 

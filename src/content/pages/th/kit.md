@@ -4,7 +4,7 @@ description: "skill และ sub-skill เก้าตัว คำสั่ง
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan มีเสาหลักสี่ประการ ได้แก่ แผนแบบ spec-first, repository ในฐานะ harness, loop engineering และประสิทธิภาพที่วัดผลได้ ส่วนเสริมและการผสานการทำงานช่วยขยาย harness และวงจรได้ แต่วิธีการนี้ทำงานได้ด้วยตัวเอง
+Deep Work Plan มีเสาหลักสี่ประการ ได้แก่ สเปกมาก่อน, repository คือ harness, Loop engineering และประสิทธิภาพที่วัดได้ ส่วนเสริมและการผสานการทำงานช่วยขยาย harness และลูปได้ แต่ระเบียบวิธีนี้ทำงานได้ด้วยตัวเอง
 
 ## Kit ของ Deep Work Plan
 

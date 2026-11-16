@@ -12,7 +12,7 @@ order: 4
 
 Bir “arayüz yüzeyi” çoğuldur: işlenen bir **görsel UI**, stilize **CLI çıktısı** ve bir **konuşma** yüzeyi (ürünün sohbet veya e-posta üzerinden konuşması) ayrı ayrı sayılır. Eklenti her birini bağımsız olarak bir **profil** olarak saptar ve kabul edilen profiller aynı tek `DESIGN.md` içinde üst üste eklenir.
 
-Deep Work Plan’in dört temel ilkesi vardır: spec-first planlar, harness olarak depo, loop engineering ve ölçülen verimlilik. Eklentiler ve entegrasyonlar harness ile döngüyü genişletebilir; metodoloji tek başına çalışır.
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
 ## Neler ekler
 

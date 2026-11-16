@@ -12,7 +12,7 @@ Dota un repository con una **superficie di interfaccia rivolta all’utente** di
 
 Una «superficie di interfaccia» è plurale: una **UI visuale** renderizzata, un **output CLI** stilizzato e una superficie **conversazionale** (il prodotto parla via chat o email) contano ciascuna. L’addon rileva ognuna in modo indipendente come **profilo**, e i profili accettati si impilano nello stesso unico `DESIGN.md`.
 
-Deep Work Plan ha quattro pilastri: piani spec-first, il repository come harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere l’harness e il ciclo; la metodologia funziona da sola.
+Deep Work Plan ha quattro pilastri: prima la specifica, il repository è la harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere la harness e il loop; la metodologia funziona da sola.
 
 ## Cosa aggiunge
 

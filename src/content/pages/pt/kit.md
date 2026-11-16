@@ -4,7 +4,7 @@ description: "A skill e suas nove sub-skills, commands, adaptadores de agente, p
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan tem quatro pilares: planos spec-first, o repositório como harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o ciclo; a metodologia funciona por conta própria.
+O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é o harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o loop; a metodologia funciona por conta própria.
 
 ## O Kit do Deep Work Plan
 

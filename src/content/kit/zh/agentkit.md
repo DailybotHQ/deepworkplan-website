@@ -12,7 +12,7 @@ order: 8
 
 这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.12.2`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
 
-Deep Work Plan 有四大支柱：spec-first 计划、作为 harness 的代码库、loop engineering 和可衡量的效率。插件与集成可以扩展 harness 和执行循环；方法本身可以独立使用。
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
 ## 工具包为你提供什么
 

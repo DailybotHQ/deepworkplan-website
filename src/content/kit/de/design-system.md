@@ -12,7 +12,7 @@ Gib einem Repository mit einer **nutzerseitigen Interface-Oberfläche** eine `DE
 
 Eine „Interface-Oberfläche" ist Plural: eine gerenderte **visuelle UI**, gestylte **CLI-Ausgabe** und eine **konversationale** Oberfläche (das Produkt kommuniziert über Chat oder E-Mail) zählen jeweils einzeln. Das Addon erkennt jede davon unabhängig als **Profil**, und die akzeptierten Profile stapeln sich in dieselbe einzelne `DESIGN.md`.
 
-Deep Work Plan hat vier Säulen: spec-first-Pläne, das Repository als Harness, Loop Engineering und messbare Effizienz. Add-ons und Integrationen können Harness und Ablauf erweitern; die Methode funktioniert eigenständig.
+Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
 ## Was es hinzufügt
 

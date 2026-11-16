@@ -10,7 +10,7 @@ order: 3
 
 Bir deponun bağımlılıklarını gruplanmış, doğrulanmış, geri alınabilir bir iş akışıyla güncel hâle getirin. Üçüncü isteğe bağlı Deep Work Plan eklentisi.
 
-Deep Work Plan’in dört temel ilkesi vardır: spec-first planlar, harness olarak depo, loop engineering ve ölçülen verimlilik. Eklentiler ve entegrasyonlar harness ile döngüyü genişletebilir; metodoloji tek başına çalışır.
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
 ## Neler ekler
 

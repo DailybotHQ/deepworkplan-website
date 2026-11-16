@@ -12,7 +12,7 @@ Mỗi coding agent trên terminal đều có các cờ riêng để tiếp tục
 
 Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.12.2`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
 
-Deep Work Plan có bốn trụ cột: kế hoạch spec-first, kho mã nguồn làm harness, loop engineering và hiệu quả có thể đo lường. Addon và tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
 ## Bộ kit mang lại cho bạn những gì
 
@@ -110,7 +110,7 @@ Trên một kế hoạch v7 có hợp đồng cấp quyền `agent_delegation`, 
 
 Hai addon có thể kết hợp với nhau: herdr-peers có thể khởi chạy một peer trong pane với môi trường mà `ak env <kind> @profile` in ra. Để chạy nhiều lane cùng lúc, xem [Chạy nhiều agent](/methodology/06-orchestration).
 
-herdr-peers v2.0.0 dùng giao diện này cho brain autopilot tùy chọn: `ak pick --kinds ... --json` trả về hợp đồng khởi chạy pick-v2; Herdr xác thực hợp đồng, yêu cầu `launch.permissions: ask`, rồi khởi chạy `launch.argv` được trả về. Brain không thể bật các cờ autonomy hoặc bypass. `ak update` vẫn do con người gọi; brain không cập nhật CLI.
+herdr-peers v2.0.0 dùng giao diện này cho bộ não autopilot tùy chọn: `ak pick --kinds ... --json` trả về hợp đồng khởi chạy pick-v2; Herdr xác thực hợp đồng, yêu cầu `launch.permissions: ask`, rồi khởi chạy `launch.argv` được trả về. Bộ não không thể bật các cờ tự chủ hoặc bypass. `ak update` vẫn do con người gọi; bộ não không bao giờ cập nhật CLI.
 
 ## Ghi chú
 

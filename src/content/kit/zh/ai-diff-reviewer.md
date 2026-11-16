@@ -16,7 +16,7 @@ order: 5
 
 让它可以放心采用的边界是刻意收窄的。该审查器是一个采用 MIT 许可、按标签固定版本的 skill，由你本就在使用的编码 agent 执行，因此没有任何 Deep Work Plan 流程依赖商业服务、CI 提供方或密钥。**Flow A**（仅本地）是每个完成接入的仓库都会获得的；**Flow B** 只会被明确提出，绝不会在未经请求时安装。开发者也可以完全拒绝该审查器——这一拒绝会被记录为一项声明的例外，并且 `verify` 会在该项上将该仓库报告为不合规，直到它被安装为止。
 
-Deep Work Plan 有四大支柱：spec-first 计划、作为 harness 的代码库、loop engineering 和可衡量的效率。插件与集成可以扩展 harness 和执行循环；方法本身可以独立使用。
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
 ## 何时使用
 

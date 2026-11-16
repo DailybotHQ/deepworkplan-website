@@ -10,7 +10,7 @@ order: 3
 
 以一套分批次、经验证、可回退的工作流，把仓库的依赖更新到最新。Deep Work Plan 的第三个可选附加组件。
 
-Deep Work Plan 有四大支柱：spec-first 计划、作为 harness 的代码库、loop engineering 和可衡量的效率。插件与集成可以扩展 harness 和执行循环；方法本身可以独立使用。
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
 ## 它添加了什么
 

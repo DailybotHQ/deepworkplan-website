@@ -4,7 +4,7 @@ description: "Die Skill und ihre neun Sub-Skills, Befehle, Agenten-Adapter, Onbo
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan hat vier Säulen: spec-first-Pläne, das Repository als Harness, Loop Engineering und messbare Effizienz. Add-ons und Integrationen können Harness und Ablauf erweitern; die Methode funktioniert eigenständig.
+Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
 ## Das Deep Work Plan Kit
 

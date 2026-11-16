@@ -12,7 +12,7 @@ order: 4
 
 “界面表面”是复数的：一个渲染出来的**可视化 UI**、带样式的 **CLI 输出**，以及一个**会话式**表面（产品在聊天或电子邮件上说话）都各自算数。该附加组件把每一种都作为一个**配置档**（profile）独立检测，被采纳的各配置档则叠加进同一份单一的 `DESIGN.md`。
 
-Deep Work Plan 有四大支柱：spec-first 计划、作为 harness 的代码库、loop engineering 和可衡量的效率。插件与集成可以扩展 harness 和执行循环；方法本身可以独立使用。
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
 ## 它添加了什么
 

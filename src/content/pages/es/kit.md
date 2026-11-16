@@ -4,7 +4,7 @@ description: "La skill y sus nueve sub-skills, comandos, adaptadores, presets de
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan se apoya en cuatro pilares: planes con enfoque spec-first, el repositorio como arnés, loop engineering y eficiencia medida. Los addons y las integraciones pueden ampliar el arnés y el ciclo; la metodología funciona por sí sola.
+Deep Work Plan se apoya en cuatro pilares: primero la especificación, el repositorio es el harness, loop engineering y eficiencia medida. Los addons y las integraciones pueden ampliar el harness y el bucle; la metodología funciona por sí sola.
 
 ## El Kit de Deep Work Plan
 

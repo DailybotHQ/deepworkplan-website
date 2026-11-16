@@ -10,7 +10,7 @@ order: 3
 
 Mutakhirkan dependensi repositori dengan alur kerja yang dibatch, tervalidasi, dan dapat dibatalkan. Addon Deep Work Plan opsional yang ketiga.
 
-Deep Work Plan memiliki empat pilar: rencana spec-first, repositori sebagai harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
 ## Yang ditambahkan
 

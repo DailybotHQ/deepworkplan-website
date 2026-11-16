@@ -12,7 +12,7 @@ Beri sebuah repositori dengan **permukaan antarmuka yang menghadap pengguna** se
 
 Sebuah "permukaan antarmuka" bersifat jamak: sebuah **UI visual** yang dirender, **output CLI** yang bergaya, dan sebuah permukaan **percakapan** (produk berbicara lewat chat atau email) masing-masing terhitung. Addon mendeteksi masing-masing secara independen sebagai sebuah **profil**, dan profil-profil yang diterima ditumpuk ke dalam satu `DESIGN.md` yang sama.
 
-Deep Work Plan memiliki empat pilar: rencana spec-first, repositori sebagai harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
 ## Apa yang ditambahkannya
 

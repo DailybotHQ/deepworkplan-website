@@ -10,7 +10,7 @@ order: 3
 
 Mettre les dépendances d’un dépôt à jour avec un workflow par lots, validé et réversible. Le troisième addon facultatif de Deep Work Plan.
 
-Deep Work Plan repose sur quatre piliers : des plans spec-first, le dépôt comme harness, le loop engineering et une efficacité mesurée. Les addons et intégrations peuvent étendre le harness et la boucle ; la méthode fonctionne seule.
+Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dépôt est le harness, le loop engineering et l’efficacité mesurée. Les addons et les intégrations peuvent étendre le harness et la boucle ; la méthodologie fonctionne seule.
 
 ## Ce qu’il ajoute
 

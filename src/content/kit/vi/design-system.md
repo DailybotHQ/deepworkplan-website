@@ -12,7 +12,7 @@ Trao cho một repository có **bề mặt giao diện hướng tới người d
 
 Một "bề mặt giao diện" mang nghĩa số nhiều: một **UI trực quan** được render, **đầu ra CLI** có phong cách, và một bề mặt **hội thoại** (sản phẩm trò chuyện qua chat hay email) đều được tính. Addon phát hiện từng bề mặt một cách độc lập như một **profile**, và các profile được chấp nhận xếp chồng vào cùng một `DESIGN.md` duy nhất.
 
-Deep Work Plan có bốn trụ cột: kế hoạch spec-first, kho mã nguồn làm harness, loop engineering và hiệu quả có thể đo lường. Addon và tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
 ## Nó thêm những gì
 

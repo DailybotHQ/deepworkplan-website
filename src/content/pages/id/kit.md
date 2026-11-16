@@ -4,7 +4,7 @@ description: "Skill dan sembilan sub-skill-nya, command, adapter agent, preset o
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan memiliki empat pilar: rencana spec-first, repositori sebagai harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
 ## Kit Deep Work Plan
 

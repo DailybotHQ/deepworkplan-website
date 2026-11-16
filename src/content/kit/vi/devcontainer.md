@@ -10,7 +10,7 @@ order: 1
 
 Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.12.2`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
 
-Deep Work Plan có bốn trụ cột: kế hoạch spec-first, kho mã nguồn làm harness, loop engineering và hiệu quả có thể đo lường. Addon và tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
 ## devcontainer-kit cung cấp những gì
 

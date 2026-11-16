@@ -10,7 +10,7 @@ order: 1
 
 Zapewnij repozytorium powtarzalny, odizolowany kontener deweloperski — taki, z którego mogą korzystać ludzie, edytory i agenci kodujący. W **DWP v7** (pakiet `v7.12.2`) ten addon integruje **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produkt na licencji MIT działający bez Deep Work Plan. Jest opcjonalny: repozytorium bez niego jest w pełni zgodne.
 
-Deep Work Plan ma cztery filary: plany spec-first, repozytorium jako harness, loop engineering i mierzoną wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa samodzielnie.
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
 ## Co zapewnia devcontainer-kit
 

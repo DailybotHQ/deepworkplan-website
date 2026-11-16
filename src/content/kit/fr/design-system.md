@@ -12,7 +12,7 @@ Dotez un dépôt possédant une **surface d’interface destinée aux utilisateu
 
 Une « surface d’interface » est plurielle : une **UI visuelle** rendue, une **sortie CLI** stylée et une surface **conversationnelle** (le produit parle par chat ou par e-mail) comptent chacune. L’addon détecte chacune indépendamment comme un **profil**, et les profils acceptés s’empilent dans le même et unique `DESIGN.md`.
 
-Deep Work Plan repose sur quatre piliers : des plans spec-first, le dépôt comme harness, le loop engineering et une efficacité mesurée. Les addons et intégrations peuvent étendre le harness et la boucle ; la méthode fonctionne seule.
+Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dépôt est le harness, le loop engineering et l’efficacité mesurée. Les addons et les intégrations peuvent étendre le harness et la boucle ; la méthodologie fonctionne seule.
 
 ## Ce qu’il ajoute
 

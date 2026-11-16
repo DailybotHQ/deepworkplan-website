@@ -1,4 +1,11 @@
 ---
+/**
+ * HerdrLoop — the Herdr kit page's plan-loop plate: register → a human starts
+ * the daemon → read plan state and queue → prompt the lead or successor →
+ * report events, gates in control → next approved plan. Stages trace to
+ * herdr-peers at the pinned tag (autopilot.md §5, §8). HTML/CSS, inline
+ * 17-language i18n (en fallback), role="img", tokens for dark mode, zero JS.
+ */
 import type { Language } from '@/lib/i18n';
 
 interface Props {
@@ -247,7 +254,7 @@ const i18n = {
     caption:
       'daemon อ่านสถานะแผนและคิว แจ้งเตือน lead หรือผู้สืบทอด และรายงานเหตุการณ์ตลอดวงจร โดยยังคงใช้ gates ของแผน',
   },
-};
+} as const;
 
 const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
 const steps = t.steps;
@@ -270,9 +277,9 @@ const steps = t.steps;
 </figure>
 
 <style>
+  /* Static HTML text: the plate sizes to its content (no CLS), so no fixed
+     aspect ratio that long labels (de, hi, th) could overflow. */
   .herdr-loop {
-    aspect-ratio: 16 / 7;
-    min-height: 13rem;
     color: var(--color-ink);
   }
 
@@ -326,11 +333,6 @@ const steps = t.steps;
   }
 
   @media (max-width: 640px) {
-    .herdr-loop {
-      aspect-ratio: 1 / 1;
-      min-height: 22rem;
-    }
-
     .herdr-loop__steps {
       grid-template-columns: repeat(2, minmax(0, 1fr));
     }

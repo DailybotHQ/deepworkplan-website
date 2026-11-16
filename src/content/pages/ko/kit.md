@@ -4,7 +4,7 @@ description: "Deep Work Plan을 어디서든 실행 가능하게 만드는 스�
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan의 네 가지 축은 spec-first 계획, harness 역할을 하는 저장소, loop engineering, 측정 가능한 효율입니다. 애드온과 통합 기능은 harness와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
+Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하니스, Loop engineering, 측정된 효율입니다. 애드온과 통합 기능은 하니스와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
 
 ## Deep Work Plan 키트
 

@@ -10,7 +10,7 @@ order: 3
 
 Atualiza as dependências de um repositório com um fluxo de trabalho em lotes, validado e reversível. O terceiro addon opcional do Deep Work Plan.
 
-Deep Work Plan tem quatro pilares: planos spec-first, o repositório como harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o ciclo; a metodologia funciona por conta própria.
+O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é o harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o loop; a metodologia funciona por conta própria.
 
 ## O que ele adiciona
 

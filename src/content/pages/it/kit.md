@@ -4,7 +4,7 @@ description: "La skill e le sue nove sub-skill, i comandi, gli adapter per gli a
 lastUpdated: 2026-11-16
 ---
 
-Deep Work Plan ha quattro pilastri: piani spec-first, il repository come harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere l’harness e il ciclo; la metodologia funziona da sola.
+Deep Work Plan ha quattro pilastri: prima la specifica, il repository è la harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere la harness e il loop; la metodologia funziona da sola.
 
 ## Il kit Deep Work Plan
 

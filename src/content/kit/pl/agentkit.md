@@ -12,7 +12,7 @@ Każdy terminalowy agent kodujący ma własne flagi do kontynuowania sesji, wła
 
 Ten addon integruje kit z **DWP v7** (pakiet `v7.12.2`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
 
-Deep Work Plan ma cztery filary: plany spec-first, repozytorium jako harness, loop engineering i mierzoną wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa samodzielnie.
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
 ## Co daje kit
 
@@ -110,7 +110,7 @@ W planie v7, którego kontrakt przyznaje `agent_delegation`, `execute` może prz
 
 Oba można łączyć: herdr-peers może uruchomić peera w panelu ze środowiskiem, które wypisuje `ak env <kind> @profile`. Przy wielu torach naraz zobacz [Uruchamianie wielu agentów](/methodology/06-orchestration).
 
-herdr-peers v2.0.0 używa tego interfejsu dla opcjonalnego brain autopilota: `ak pick --kinds ... --json` zwraca kontrakt uruchomienia pick-v2; Herdr go weryfikuje, wymaga `launch.permissions: ask`, a następnie uruchamia zwrócone `launch.argv`. Brain nie może włączyć flag autonomii ani bypass. `ak update` nadal uruchamia człowiek; brain nie aktualizuje CLI.
+herdr-peers v2.0.0 używa tego interfejsu dla opcjonalnego mózgu autopilota: `ak pick --kinds ... --json` zwraca kontrakt uruchomienia pick-v2; Herdr go weryfikuje, wymaga `launch.permissions: ask`, a następnie uruchamia zwrócone `launch.argv`. Mózg nie może włączyć flag autonomii ani obejścia uprawnień. `ak update` nadal uruchamia wyłącznie człowiek; mózg nigdy nie aktualizuje CLI.
 
 ## Uwagi
 
