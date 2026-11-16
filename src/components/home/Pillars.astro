@@ -1,0 +1,52 @@
+---
+/**
+ * Pillars — the four pillars of the methodology, one line each, directly under
+ * the hero: spec-first · the repository is the harness · loop engineering ·
+ * measured efficiency. Static, zero JS.
+ */
+import Kicker from '@/components/editorial/Kicker.astro';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const p = getTranslations(lang).home.pillars;
+---
+
+<section class="border-b py-12 md:py-14" style="border-color: var(--color-line);">
+  <div class="main-container">
+    <Kicker>{p.badge}</Kicker>
+    <h2
+      class="font-display mt-3 text-2xl font-bold md:text-3xl"
+      style="color: var(--color-ink);"
+    >
+      {p.title}
+    </h2>
+    <ol class="mt-8 grid gap-px sm:grid-cols-2 lg:grid-cols-4" role="list">
+      {
+        p.items.map((item, i) => (
+          <li class="flex flex-col gap-2 border p-5" style="border-color: var(--color-line);">
+            <span
+              class="nums-tabular text-sm font-semibold"
+              style="color: var(--color-secondary);"
+            >
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <h3
+              class="font-display text-lg font-semibold"
+              style="color: var(--color-ink);"
+            >
+              {item.name}
+            </h3>
+            <p class="leading-relaxed" style="color: var(--color-muted);">
+              {item.line}
+            </p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>

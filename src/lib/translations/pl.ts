@@ -100,14 +100,14 @@ export const pl: SiteTranslations = {
       title:
         'Deep Work Plan — uporządkowana realizacja dla agentów kodujących AI',
       description:
-        'Deep Work Plan wprowadza rozwój oparty na specyfikacji do agentów AI. Zmień repozytorium w trwałą uprząż do długofalowej pracy i bezpiecznej delegacji.',
+        'Spec-first, z zamkniętą pętlą: Deep Work Plan czyni repozytorium harnessem dla agentów AI, a każdy plan działa do końca w pętli uruchomionej przez człowieka.',
     },
     hero: {
       badge: 'Otwarta metodyka · MIT · Niezależna od agenta',
-      title: 'Modele mają znaczenie.',
-      titleEmphasis: 'Kontekst znaczy więcej.',
+      leadSentence:
+        'Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.',
       subtitle:
-        'Deep Work Plan przekształca każde repozytorium w ustrukturyzowane środowisko — kontekst, zabezpieczenia i trwały plan — w którym każdy agent kodowania pracuje precyzyjnie i wydajnie oraz kończy pracę długoterminową.',
+        'Deep Work Plan zamienia każde repozytorium w harness — kontekst, zabezpieczenia i trwały plan z bramkami walidacyjnymi — w którym każdy agent kodowania wykonuje pracę długoterminową. Dodaj opcjonalną pętlę, a otwarty plan będzie działał aż do końca, bez potrzeby ciągłego sprawdzania go przez kogokolwiek.',
       instructionLabel: 'Skopiuj do swojego agenta',
       instruction:
         'Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.',
@@ -115,19 +115,38 @@ export const pl: SiteTranslations = {
       copiedLabel: 'Skopiowano',
       viewInitCta: 'Zobacz, jak to działa',
       pullQuote:
-        'Deep Work Plan to spec-driven development, w którym samo repozytorium staje się harness (rusztowaniem agenta).',
+        'Spec-first mówi, co robić; harness — gdzie; Loop engineering — jak to się kończy.',
       primaryCta: 'Przeczytaj metodykę',
       secondaryCta: 'Przeczytaj specyfikację',
-      illustrationAlt:
-        'Latarnia morska na skalistym brzegu rzuca pojedynczy snop światła prowadzący niewielki statek — rycina przywołująca repozytorium jako stabilny harness, który prowadzi każdego agenta.',
-      scrollCta: 'Zobacz, jak to działa',
+    },
+    pillars: {
+      badge: 'Cztery filary',
+      title: 'Na czym opiera się metodyka.',
+      items: [
+        {
+          name: 'Spec-first',
+          line: 'Plan jest trwałym źródłem prawdy: zadania atomowe, kryteria akceptacji i bramki walidacyjne, które agent musi przejść.',
+        },
+        {
+          name: 'Repozytorium jest harnessem',
+          line: 'Kontekst, narzędzia, zabezpieczenia i stan żyją w repozytorium jako zwykłe pliki, które może odczytać każdy agent.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Plany działają do końca: rejestracja, demon uruchamiany przez człowieka, przypomnienia, które nie dają żadnych uprawnień, failover i zdarzenia planu.',
+        },
+        {
+          name: 'Mierzona wydajność',
+          line: 'Bajty instrukcji na przepływ, zmierzone i opublikowane wraz z metodą — nigdy wymyślone procenty tokenów.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Problem i odpowiedź',
       problem:
         'W krótkich seriach agenci kodowania są imponujący. Powierz im długą misję — migrację, nowy podsystem, refaktoryzację dziesiątek plików — a zaczną dryfować: kontekst się zapełnia, wcześniejsze decyzje blakną, a wielogodzinna praca zatrzymuje się w połowie.',
       answer:
-        'Deep Work Plan odpowiada programowaniem sterowanym specyfikacją: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. „Skończone” przestaje być odczuciem — staje się dowodem: zweryfikowanym i możliwym do przejrzenia.',
+        'Deep Work Plan odpowiada podejściem spec-first: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. „Skończone” przestaje być odczuciem — staje się dowodem: zweryfikowanym i możliwym do przejrzenia. Loop engineering utrzymuje następnie plan w ruchu, dopóki agent nie przejdzie tych bramek.',
       efficiency:
         'Kontekst to najcenniejszy zasób agenta, dlatego harness utrzymuje własne instrukcje w niewielkim, audytowalnym zakresie. Instrukcje są ładowane stopniowo, walidacja skupia się na zmianach, a każde zadanie otrzymuje potrzebny kontekst. Publikujemy rozmiar instrukcji dla każdego przepływu w bajtach, aby ten narzut był widoczny. Plany również dopasowują się do pracy: Lite do ograniczonej poprawki, Full do zadań trwających wiele godzin. Format wynika z zakresu pracy, dzięki czemu proces pozostaje skupiony i możliwy do prześledzenia.',
       illustrationAlt:
@@ -164,6 +183,72 @@ export const pl: SiteTranslations = {
         deepLinkLabel: 'Przeczytaj metodologię',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Plany działają do końca. Uprawnienia pozostają przy ludziach.',
+      subtitle:
+        'Loop engineering to sposób, w jaki plan dobiega końca bez człowieka, który stale go sprawdza. Każdy wiersz poniżej to wydany kontrakt herdr-peers, opcjonalnego dodatku Herdr: metodyka działa bez niego, a pętla jedynie ją wzmacnia.',
+      colContract: 'Kontrakt',
+      colGuarantee: 'Co gwarantuje',
+      colSource: 'Źródło',
+      contracts: [
+        {
+          name: 'Rejestracja planu',
+          detail:
+            'Plan obserwowany przez pętlę ma rekord leada z epoką i sukcesją. Jako lead działa wyłącznie posiadacz najwyższej epoki.',
+        },
+        {
+          name: 'Start wyłącznie przez człowieka',
+          detail:
+            'Tylko człowiek uruchamia demona, własnymi słowami. Żadne zapytanie, odpowiedź ani powiadomienie nie może go uruchomić, zatrzymać ani zmienić tego, co robi.',
+        },
+        {
+          name: 'Przypomnienia nie dają uprawnień',
+          detail:
+            'Bezczynny lead otwartego planu otrzymuje jeden stały prompt, by kontynuować. Bramki, warunki zatrzymania i eskalacje obowiązują jak wcześniej; trzy prompty bez postępu oznaczają plan jako utknięty.',
+        },
+        {
+          name: 'Failover na następców',
+          detail:
+            'Gdy lead znika, pierwszy osiągalny następca zostaje poproszony o przejęcie roli, a pomocnik ponownie sprawdza dowody. Tor pracy (lane) przejmuje rolę leada tylko na podstawie zgody, którą człowiek zapisał z wyprzedzeniem.',
+        },
+        {
+          name: 'Zdarzenia planu',
+          detail:
+            'Gdy plan utknie, zostanie zablokowany, straci leada, wystartuje z kolejki lub się zakończy, wybrane przez człowieka polecenie otrzymuje jeden obiekt plan-event-v1. Pakiet zawiera do tego notyfikator Dailybot.',
+        },
+        {
+          name: 'Mapa floty',
+          detail:
+            'Każda maszyna raportuje swoje plany jako plans-v1; demon utrzymuje mapę fleet-v1 wszystkich maszyn, agentów, repozytoriów i planów, a fleet ui pokazuje ją w trybie tylko do odczytu.',
+        },
+        {
+          name: 'Kolejka planów',
+          detail:
+            'Gdy plan repozytorium się kończy, następny zatwierdzony plan z jego kolejki startuje z jednym stałym promptem do swojego leada. Demon czyta kolejkę i nigdy jej nie zapisuje.',
+        },
+        {
+          name: 'Weryfikacja leada',
+          detail:
+            'Przed każdym scaleniem, tagiem czy wydaniem lead potwierdza, że nadal utrzymuje plan na każdej maszynie. Nowszy lead ją odrzuca; nieosiągalna maszyna ją zatrzymuje, chyba że to ryzyko zostało zaakceptowane i odnotowane.',
+        },
+      ],
+      note: 'Mózg decyzyjny (--brain) i wyznaczanie leada (--appoint) to opcjonalne flagi tego samego demona, a każdą z nich włącza człowiek. Demon nigdy nie scala, nie publikuje wydań, nie loguje się ani nie zmienia uprawnień.',
+      deepLinkLabel: 'Przeczytaj o dodatku Herdr',
+    },
+    efficiency: {
+      badge: 'Mierzona wydajność',
+      title: 'Bajty instrukcji na przepływ, zmierzone.',
+      subtitle:
+        'Harness publikuje, co każdy przepływ musi przeczytać przed startem: router, sub-skill i współdzielone zasoby, do których ten odsyła. To obowiązkowe zestawy lektury wydanego pakietu.',
+      colFlow: 'Przepływ',
+      colBytes: 'Pakiet wejściowy (bajty)',
+      caption:
+        'Jednostka: bajty systemu plików. Zmierzone na wydanym pakiecie poleceniem poniżej.',
+      absent:
+        'Tokeny dostawcy, koszt i statystyki domykania pętli nie są pokazane: żadne źródło oznaczone tagiem jeszcze ich nie mierzy, więc nie mają wiersza. Liczba tokenów ze skryptu (bajty ÷ 4) to oznaczony szacunek, nigdy pomiar.',
+      deepLinkLabel: 'Przeczytaj rejestr ewaluacji',
     },
     onboarding: {
       badge: 'Onboarding oparty na rozumowaniu',
@@ -221,6 +306,11 @@ export const pl: SiteTranslations = {
           description:
             'Generuj długodystansowe Deep Work Plans dla dowolnego zadania i realizuj je krok po kroku, z jawnymi kryteriami akceptacji, bramkami walidacyjnymi i wznawialnym stanem — autonomicznie, godzinami.',
         },
+        {
+          title: 'Człowiek uruchamia pętlę',
+          description:
+            'Opcjonalnie, z dodatkiem Herdr: to Ty — nigdy agent — uruchamiasz herdr-peers autopilot start --loop. Każdy otwarty plan z rekordem leada działa aż do końca, a Twój notyfikator dowiaduje się, gdy któryś utknie, zostanie zablokowany lub się zakończy.',
+        },
       ],
       note: 'Skill instalowany jest wszędzie identycznie; dostosowywane jest Twoje repozytorium — AGENTS.md, dokumentacja i przemyślany zestaw .agents/ wygenerowane dla Twojego stosu technologicznego. Ten podział sprawia, że metodyka jest standardem wielokrotnego użytku, a nie jednorazowym rusztowaniem.',
     },
@@ -269,7 +359,7 @@ export const pl: SiteTranslations = {
         {
           label: 'Natywny dla git, wznawialny, .dwp/',
           detail:
-            'Bez demona i bez zewnętrznego stanu. Plany trafiają do ignorowanego przez git katalogu .dwp/, a każde zadanie wznawia się z samego git — nawet po przepełnieniu kontekstu.',
+            'Sama metodyka nie potrzebuje demona ani zewnętrznego stanu. Plany trafiają do ignorowanego przez git katalogu .dwp/, a każde zadanie wznawia się z samego git — nawet po przepełnieniu kontekstu. Opcjonalny demon pętli dodaje ciągłość, nigdy zależność.',
         },
         {
           label: 'Delegacja wielu agentów i Ekosystem 1.0',

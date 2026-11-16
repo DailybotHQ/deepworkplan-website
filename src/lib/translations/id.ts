@@ -97,14 +97,14 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — eksekusi terstruktur untuk AI coding agent',
       description:
-        'Deep Work Plan menghadirkan pengembangan berbasis spesifikasi ke agen AI. Ubah repositori menjadi harness tahan lama untuk eksekusi dan delegasi multi-agen.',
+        'Spec-first, loop tertutup: Deep Work Plan menjadikan repositori Anda harness bagi AI coding agent; tiap rencana berjalan tuntas di loop yang dimulai manusia.',
     },
     hero: {
       badge: 'Metodologi terbuka · MIT · Agnostik terhadap agent',
-      title: 'Model itu penting.',
-      titleEmphasis: 'Konteks lebih penting.',
+      leadSentence:
+        'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
       subtitle:
-        'Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur — konteks, pagar pengaman, dan rencana yang tahan lama — tempat agen coding mana pun mengeksekusi dengan presisi dan efisien serta menyelesaikan kerja jangka panjang.',
+        'Deep Work Plan mengubah repositori apa pun menjadi harness — konteks, pagar pengaman, dan rencana yang tahan lama dengan gerbang validasi — tempat agen coding mana pun mengeksekusi pekerjaan jangka panjang. Tambahkan loop opsional, dan rencana yang terbuka terus berjalan hingga akhir tanpa ada yang perlu memantaunya.',
       instructionLabel: 'Salin ke agent Anda',
       instruction:
         'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',
@@ -112,19 +112,38 @@ export const id: SiteTranslations = {
       copiedLabel: 'Tersalin',
       viewInitCta: 'Lihat cara kerjanya',
       pullQuote:
-        'Deep Work Plan adalah spec-driven development tempat repositori itu sendiri menjadi harness.',
+        'Spec-first menyatakan apa; harness menyatakan di mana; Loop engineering menyatakan bagaimana pekerjaan selesai.',
       primaryCta: 'Baca metodologinya',
       secondaryCta: 'Baca spesifikasinya',
-      illustrationAlt:
-        'Sebuah mercusuar di pesisir berbatu memancarkan satu berkas cahaya yang memandu kapal kecil — ukiran yang menggambarkan repositori sebagai harness mantap yang memandu agent mana pun.',
-      scrollCta: 'Lihat cara kerjanya',
+    },
+    pillars: {
+      badge: 'Empat pilar',
+      title: 'Landasan metodologi ini.',
+      items: [
+        {
+          name: 'Spec-first',
+          line: 'Rencana adalah sumber kebenaran yang tahan lama: tugas atomik, kriteria penerimaan, dan gerbang validasi yang harus dilalui agen.',
+        },
+        {
+          name: 'Repositori adalah harness',
+          line: 'Konteks, alat, pagar pengaman, dan status berada di repositori sebagai file biasa yang dapat dibaca agen mana pun.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Rencana berjalan hingga akhir: registrasi, daemon yang dimulai manusia, dorongan yang tidak menambah wewenang, failover, dan event rencana.',
+        },
+        {
+          name: 'Efisiensi terukur',
+          line: 'Byte instruksi per alur, diukur dan dipublikasikan beserta metodenya — tidak pernah persentase token yang dikarang.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Masalah dan jawabannya',
       problem:
         'Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang — sebuah migrasi, subsistem baru, refaktor puluhan file — dan mereka menyimpang: konteks penuh, keputusan sebelumnya memudar, dan kerja berjam-jam mandek di tengah jalan.',
       answer:
-        'Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau.',
+        'Deep Work Plan menjawabnya secara spec-first: rencana yang tahan lama, tugas atomik, dan gerbang validasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau. Loop engineering kemudian menjaga rencana tetap bergerak hingga gerbang-gerbang itu terlewati.',
       efficiency:
         'Konteks adalah sumber daya agen Anda yang paling langka. Karena itu, harness menjaga instruksinya sendiri tetap ringkas dan dapat diaudit. Instruksi dimuat secara bertahap, validasi berfokus pada perubahan, dan setiap tugas menerima konteks yang relevan. Kami menerbitkan ukuran instruksi tiap alur dalam byte agar bebannya terlihat. Rencana juga menyesuaikan bentuk dengan pekerjaan: Lite untuk perbaikan terbatas dan Full untuk pekerjaan yang berlangsung berjam-jam. Format mengikuti cakupan pekerjaan sehingga proses tetap fokus dan mudah ditelusuri.',
       illustrationAlt:
@@ -161,6 +180,72 @@ export const id: SiteTranslations = {
         deepLinkLabel: 'Baca metodologi',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Rencana berjalan hingga akhir. Wewenang tetap di tangan manusia.',
+      subtitle:
+        'Loop engineering adalah cara sebuah rencana selesai tanpa ada manusia yang terus memantaunya. Setiap baris di bawah adalah kontrak rilis dari herdr-peers, addon Herdr yang opsional: metodologi tetap berjalan tanpanya, dan loop hanya memperkuatnya.',
+      colContract: 'Kontrak',
+      colGuarantee: 'Yang dijaminnya',
+      colSource: 'Sumber',
+      contracts: [
+        {
+          name: 'Registrasi rencana',
+          detail:
+            'Rencana yang diawasi loop memiliki catatan lead dengan epoch dan urutan suksesi. Hanya pemegang epoch tertinggi yang bertindak sebagai lead-nya.',
+        },
+        {
+          name: 'Hanya manusia yang memulai',
+          detail:
+            'Hanya manusia yang memulai daemon, dengan kata-katanya sendiri. Tidak ada permintaan, balasan, atau pemberitahuan yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya.',
+        },
+        {
+          name: 'Dorongan tanpa wewenang tambahan',
+          detail:
+            'Lead yang menganggur dari rencana terbuka menerima satu prompt tetap untuk melanjutkan. Gerbang, kondisi berhenti, dan eskalasi tetap mengikat seperti sebelumnya; tiga prompt tanpa kemajuan menandai rencana sebagai macet.',
+        },
+        {
+          name: 'Failover ke penerus',
+          detail:
+            'Saat lead hilang, penerus pertama yang dapat dijangkau diminta mengambil alih, dan helper memeriksa ulang buktinya. Sebuah lane hanya menjadi lead berdasarkan izin yang telah dicatat manusia sebelumnya.',
+        },
+        {
+          name: 'Event rencana',
+          detail:
+            'Saat rencana macet, terblokir, kehilangan lead, dimulai dari antrean, atau selesai, perintah yang dipilih manusia menerima satu objek plan-event-v1. Pack ini menyertakan notifier Dailybot untuk itu.',
+        },
+        {
+          name: 'Peta armada',
+          detail:
+            'Setiap mesin melaporkan rencananya sebagai plans-v1; daemon menyimpan peta fleet-v1 dari setiap mesin, agen, repositori, dan rencana, dan fleet ui menampilkannya secara baca-saja.',
+        },
+        {
+          name: 'Antrean rencana',
+          detail:
+            'Saat rencana sebuah repositori selesai, rencana berikutnya yang telah disetujui dalam antreannya dimulai dengan satu prompt tetap ke lead-nya. Daemon membaca antrean dan tidak pernah menulisnya.',
+        },
+        {
+          name: 'Verifikasi lead',
+          detail:
+            'Sebelum merge, tag, atau rilis apa pun, lead memastikan bahwa ia masih memegang rencana di setiap mesin. Lead yang lebih baru menolaknya; mesin yang tidak dapat dijangkau menghentikannya kecuali risiko itu diterima secara tercatat.',
+        },
+      ],
+      note: 'Otak keputusan (--brain) dan penunjukan lead (--appoint) adalah flag opt-in dari daemon yang sama, masing-masing diaktifkan oleh manusia. Daemon tidak pernah melakukan merge, merilis, masuk ke akun, atau mengubah izin.',
+      deepLinkLabel: 'Baca addon Herdr',
+    },
+    efficiency: {
+      badge: 'Efisiensi terukur',
+      title: 'Byte instruksi per alur, terukur.',
+      subtitle:
+        'Harness memublikasikan apa yang harus dibaca setiap alur sebelum dimulai: router, sub-skill, dan sumber daya bersama yang ditautkannya. Inilah set bacaan wajib dari pack yang dirilis.',
+      colFlow: 'Alur',
+      colBytes: 'Bundel awal (byte)',
+      caption:
+        'Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah.',
+      absent:
+        'Token penyedia, biaya, dan statistik penutupan loop tidak ditampilkan: belum ada sumber bertag yang mengukurnya, jadi semuanya tidak memiliki baris. Angka token byte ÷ 4 dari skrip adalah estimasi berlabel, bukan pengukuran.',
+      deepLinkLabel: 'Baca catatan evaluasi',
     },
     onboarding: {
       badge: 'Onboarding berbasis penalaran',
@@ -218,6 +303,11 @@ export const id: SiteTranslations = {
           description:
             'Hasilkan Deep Work Plan jangka panjang untuk tugas apa pun dan jalankan langkah demi langkah, dengan acceptance criteria yang eksplisit, validation gate, dan status yang dapat dilanjutkan — secara otonom, selama berjam-jam.',
         },
+        {
+          title: 'Manusia memulai loop',
+          description:
+            'Opsional, dengan addon Herdr: Anda — bukan agen — menjalankan herdr-peers autopilot start --loop. Setiap rencana terbuka yang memiliki catatan lead terus berjalan hingga akhir, dan notifier Anda diberi tahu saat ada rencana yang macet, terblokir, atau selesai.',
+        },
       ],
       note: 'Skill dipasang secara identik di mana saja; yang disesuaikan adalah repositori Anda — AGENTS.md, docs, dan kit .agents/ yang dipikirkan matang dan dihasilkan untuk stack Anda. Pemisahan itulah yang menjadikan metodologi sebagai standar yang dapat dipakai ulang, bukan perancah sekali pakai.',
     },
@@ -265,7 +355,7 @@ export const id: SiteTranslations = {
         {
           label: 'Git-native, dapat dilanjutkan, .dwp/',
           detail:
-            'Tanpa daemon dan tanpa status eksternal. Rencana tersimpan di folder .dwp/ yang di-gitignore, dan tugas apa pun dapat dilanjutkan hanya dari git — bahkan setelah konteks meluap.',
+            'Metodologi itu sendiri tidak memerlukan daemon maupun status eksternal. Rencana tersimpan di folder .dwp/ yang di-gitignore, dan tugas apa pun dapat dilanjutkan hanya dari git — bahkan setelah konteks meluap. Daemon loop yang opsional menambah kesinambungan, tidak pernah menjadi dependensi.',
         },
         {
           label: 'Delegasi multi-agen dan Ekosistem 1.0',

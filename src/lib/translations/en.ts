@@ -93,14 +93,14 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — structured execution for AI coding agents',
       description:
-        'Deep Work Plan brings spec-driven development to AI coding agents. Turn your repository into a durable harness for long-horizon execution and multi-agent delegation.',
+        'Spec-first, loop-closed: Deep Work Plan makes your repository the harness for AI coding agents, and each plan runs to done under a human-started loop.',
     },
     hero: {
       badge: 'Open methodology · MIT · Agent-agnostic',
-      title: 'Models matter.',
-      titleEmphasis: 'Context matters more.',
+      leadSentence:
+        'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.',
       subtitle:
-        'Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes and finishes long-horizon work with precision and efficiency.',
+        'Deep Work Plan turns any repository into the harness — context, guardrails, and a durable plan with validation gates — where any coding agent executes long-horizon work. Add the optional loop, and an open plan keeps running to its end without anyone polling it.',
       instructionLabel: 'Copy into your agent',
       instruction:
         'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',
@@ -108,19 +108,38 @@ export const en: SiteTranslations = {
       copiedLabel: 'Copied',
       viewInitCta: 'See how it works',
       pullQuote:
-        'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
+        'Spec-first says what; the harness says where; loop engineering says how it finishes.',
       primaryCta: 'Read the methodology',
       secondaryCta: 'Read the spec',
-      illustrationAlt:
-        'A lighthouse on a rocky shore casts a single beam guiding a small vessel — an engraving evoking the repository as a steady harness that guides any agent.',
-      scrollCta: 'See how it works',
+    },
+    pillars: {
+      badge: 'Four pillars',
+      title: 'What the methodology stands on.',
+      items: [
+        {
+          name: 'Spec-first',
+          line: 'The plan is the durable source of truth: atomic tasks, acceptance criteria, and validation gates the agent must pass.',
+        },
+        {
+          name: 'The repository is the harness',
+          line: 'Context, tools, guardrails, and state live in the repository as plain files any agent can read.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Plans run to their end: registration, a human-started daemon, nudges that add no authority, failover, and plan events.',
+        },
+        {
+          name: 'Measured efficiency',
+          line: 'Instruction bytes per flow, measured and published with their method — never invented token percentages.',
+        },
+      ],
     },
     pitch: {
       kicker: 'The problem and the answer',
       problem:
         'A coding agent performs beautifully on short tasks. But hand it a long-horizon mission — a migration, a new subsystem, a refactor at scale — and drift sets in: the context window fills, earlier decisions fade, and hours of work stall halfway through.',
       answer:
-        'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence.',
+        'Deep Work Plan answers spec-first: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence. Loop engineering then keeps the plan moving until those gates are passed.',
       efficiency:
         'Context is your agent’s scarcest resource, so the harness keeps its own instructions lean and auditable. Instructions load progressively, validation follows the changes, and each task gets the context relevant to its work. We publish the instruction load for each flow in bytes, making that overhead visible. Plans scale to the work too: Lite for a bounded fix, Full for work that spans hours. The format follows the scope, keeping the process focused and traceable.',
       illustrationAlt:
@@ -157,6 +176,72 @@ export const en: SiteTranslations = {
         deepLinkLabel: 'Read the methodology',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Plans run to their end. Authority stays with people.',
+      subtitle:
+        'Loop engineering is how a plan finishes without a human polling it. Each row below is a released contract of herdr-peers, the optional Herdr addon: the methodology works without it, and the loop only amplifies it.',
+      colContract: 'Contract',
+      colGuarantee: 'What it guarantees',
+      colSource: 'Source',
+      contracts: [
+        {
+          name: 'Plan registration',
+          detail:
+            'A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead.',
+        },
+        {
+          name: 'Human-only start',
+          detail:
+            'Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does.',
+        },
+        {
+          name: 'Nudges add no authority',
+          detail:
+            'The idle lead of an open plan gets one fixed prompt to continue. Gates, stop conditions, and escalations bind as before; three prompts without progress mark the plan stalled.',
+        },
+        {
+          name: 'Failover to successors',
+          detail:
+            'When the lead is gone, the first reachable successor is asked to take over, and the helper checks the evidence again. A lane takes the lead only under a grant the human recorded in advance.',
+        },
+        {
+          name: 'Plan events',
+          detail:
+            'When a plan stalls, blocks, loses its lead, starts from the queue, or completes, a command the human chose receives one plan-event-v1 object. The pack ships a Dailybot notifier for it.',
+        },
+        {
+          name: 'Fleet map',
+          detail:
+            'Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only.',
+        },
+        {
+          name: 'Plan queue',
+          detail:
+            "When a repository's plan completes, the next approved plan in its queue starts with one fixed prompt to its lead. The daemon reads the queue and never writes it.",
+        },
+        {
+          name: 'Lead verify',
+          detail:
+            'Before any merge, tag, or release, the lead confirms it still holds the plan on every machine. A newer lead refuses it; an unreachable machine stops it unless that risk is accepted on record.',
+        },
+      ],
+      note: 'The decision brain (--brain) and lead appointment (--appoint) are opt-in flags of the same daemon, each switched on by a human. The daemon never merges, releases, signs in, or changes a permission.',
+      deepLinkLabel: 'Read the Herdr addon',
+    },
+    efficiency: {
+      badge: 'Measured efficiency',
+      title: 'Instruction bytes per flow, measured.',
+      subtitle:
+        'The harness publishes what each flow must read before it starts: the router, the sub-skill, and the shared resources it links. These are the compulsory read sets of the released pack.',
+      colFlow: 'Flow',
+      colBytes: 'Entry bundle (bytes)',
+      caption:
+        'Unit: filesystem bytes. Measured on the released pack with the command below.',
+      absent:
+        'Provider tokens, cost, and loop-closure statistics are not shown: no tagged source measures them yet, so they have no row. The script’s bytes ÷ 4 token figure is a labeled estimate, never a measurement.',
+      deepLinkLabel: 'Read the evaluation ledger',
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',
@@ -212,6 +297,11 @@ export const en: SiteTranslations = {
           description:
             'Generate long-horizon Deep Work Plans for any task and run them step by step, with explicit acceptance criteria, validation gates, and resumable state — autonomously, for hours.',
         },
+        {
+          title: 'A human starts the loop',
+          description:
+            'Optional, with the Herdr addon: you — never an agent — run herdr-peers autopilot start --loop. Every open plan with a lead record keeps running to its end, and your notifier hears when one stalls, blocks, or completes.',
+        },
       ],
       note: 'The skill is installed identically everywhere; what is adapted is your repository — the AGENTS.md, docs, and reasoned .agents/ kit generated for your stack. That split is what makes the methodology a reusable standard rather than a one-off scaffold.',
     },
@@ -259,7 +349,7 @@ export const en: SiteTranslations = {
         {
           label: 'Git-native, resumable, .dwp/',
           detail:
-            'No daemon and no external state. Plans land in a gitignored .dwp/ folder, and any task resumes from git alone — even after context overflows.',
+            'The methodology itself needs no daemon and no external state. Plans land in a gitignored .dwp/ folder, and any task resumes from git alone — even after context overflows. The optional loop daemon adds continuity, never a dependency.',
         },
         {
           label: 'Multi-agent delegation and Ecosystem 1.0',

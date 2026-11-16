@@ -94,14 +94,14 @@ export const es: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — ejecución estructurada para agentes de IA',
       description:
-        'Deep Work Plan lleva el desarrollo guiado por especificaciones a los agentes de IA. Convierte tu repositorio en un arnés duradero para delegación multiagente.',
+        'Especificación primero, bucle cerrado: Deep Work Plan hace del repositorio el harness de los agentes de IA y cada plan acaba en un bucle iniciado por humanos.',
     },
     hero: {
       badge: 'Metodología abierta · MIT · Independiente del agente',
-      title: 'Los modelos importan.',
-      titleEmphasis: 'El contexto importa más.',
+      leadSentence:
+        'Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar.',
       subtitle:
-        'Deep Work Plan convierte cualquier repositorio en un entorno estructurado — contexto, guardarraíles y un plan duradero — donde cualquier agente de código ejecuta con precisión y eficiencia y completa el trabajo de largo alcance.',
+        'Deep Work Plan convierte cualquier repositorio en el harness — contexto, guardarraíles y un plan duradero con puertas de validación — donde cualquier agente de código ejecuta trabajo de largo alcance. Añade el bucle opcional y un plan abierto sigue ejecutándose hasta su fin sin que nadie tenga que vigilarlo.',
       instructionLabel: 'Copia en tu agente',
       instruction:
         'Copia el prompt de init.md y pégalo en tu agente de código — Claude Code, Cursor, Codex, o cualquier otro — para hacer de cualquier repositorio uno AI-first.',
@@ -109,19 +109,38 @@ export const es: SiteTranslations = {
       copiedLabel: 'Copiado',
       viewInitCta: 'Ve cómo funciona',
       pullQuote:
-        'Deep Work Plan es desarrollo guiado por especificación donde el propio repositorio se convierte en el harness.',
+        'La especificación dice qué; el harness dice dónde; el loop engineering dice cómo termina.',
       primaryCta: 'Leer la metodología',
       secondaryCta: 'Leer la especificación',
-      illustrationAlt:
-        'Un faro en una costa rocosa proyecta un único haz que guía a una pequeña embarcación — un grabado que evoca el repositorio como un harness estable que guía a cualquier agente.',
-      scrollCta: 'Ve cómo funciona',
+    },
+    pillars: {
+      badge: 'Cuatro pilares',
+      title: 'En qué se apoya la metodología.',
+      items: [
+        {
+          name: 'Primero la especificación',
+          line: 'El plan es la fuente de verdad duradera: tareas atómicas, criterios de aceptación y puertas de validación que el agente debe pasar.',
+        },
+        {
+          name: 'El repositorio es el harness',
+          line: 'El contexto, las herramientas, los guardarraíles y el estado viven en el repositorio como archivos planos que cualquier agente puede leer.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Los planes llegan a su fin: registro, un daemon que inicia una persona, recordatorios que no añaden autoridad, relevo y eventos del plan.',
+        },
+        {
+          name: 'Eficiencia medida',
+          line: 'Bytes de instrucciones por flujo, medidos y publicados con su método — nunca porcentajes de tokens inventados.',
+        },
+      ],
     },
     pitch: {
       kicker: 'El problema y la respuesta',
       problem:
         'Un agente de programación rinde de maravilla en tareas cortas. Pero en una misión de largo alcance — una migración, un subsistema nuevo, una refactorización a escala — la deriva llega: el contexto se llena, las decisiones se olvidan y las tareas de varias horas se quedan a medio camino.',
       answer:
-        'Deep Work Plan responde con desarrollo guiado por especificación: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. «Hecho» deja de ser una sensación — se convierte en evidencia verificable y revisable.',
+        'Deep Work Plan responde con la especificación primero: un plan duradero, tareas atómicas y puertas de validación que el agente debe pasar. «Hecho» deja de ser una sensación — se convierte en evidencia verificable y revisable. Después, el loop engineering mantiene el plan en marcha hasta que se superan esas puertas.',
       efficiency:
         'El contexto es el recurso más escaso de tu agente. Por eso, el harness mantiene su propia carga de instrucciones liviana y auditable. Las instrucciones se cargan progresivamente, la validación se concentra en los cambios y cada tarea recibe el contexto pertinente. Publicamos en bytes la carga de instrucciones de cada flujo para que ese esfuerzo sea visible. Los planes también se ajustan al trabajo: Lite para una corrección acotada y Full para tareas que se extienden durante horas. El formato sigue el alcance y mantiene el proceso enfocado y trazable.',
       illustrationAlt:
@@ -158,6 +177,73 @@ export const es: SiteTranslations = {
         deepLinkLabel: 'Lee la metodología',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title:
+        'Los planes llegan a su fin. La autoridad sigue en manos de las personas.',
+      subtitle:
+        'El loop engineering es la forma en que un plan termina sin que una persona tenga que vigilarlo. Cada fila de esta tabla es un contrato publicado de herdr-peers, el complemento opcional de Herdr: la metodología funciona sin él, y el bucle solo la amplifica.',
+      colContract: 'Contrato',
+      colGuarantee: 'Qué garantiza',
+      colSource: 'Fuente',
+      contracts: [
+        {
+          name: 'Registro del plan',
+          detail:
+            'Un plan que el bucle vigila tiene un registro de lead con una época y una sucesión. Solo quien tiene la época más alta actúa como su lead.',
+        },
+        {
+          name: 'Inicio solo humano',
+          detail:
+            'Solo una persona inicia el daemon, con sus propias palabras. Ninguna consulta, respuesta o aviso puede iniciarlo, detenerlo ni cambiar lo que hace.',
+        },
+        {
+          name: 'Los recordatorios no añaden autoridad',
+          detail:
+            'El lead inactivo de un plan abierto recibe un único prompt fijo para continuar. Las puertas, las condiciones de parada y las escaladas siguen vigentes como antes; tres prompts sin avance marcan el plan como estancado.',
+        },
+        {
+          name: 'Relevo a los sucesores',
+          detail:
+            'Cuando el lead desaparece, se pide al primer sucesor disponible que tome el relevo, y el helper vuelve a comprobar la evidencia. Un carril asume el lead solo con una concesión que la persona registró de antemano.',
+        },
+        {
+          name: 'Eventos del plan',
+          detail:
+            'Cuando un plan se estanca, se bloquea, pierde su lead, arranca desde la cola o termina, un comando elegido por la persona recibe un objeto plan-event-v1. El paquete incluye un notificador de Dailybot para ello.',
+        },
+        {
+          name: 'Mapa de la flota',
+          detail:
+            'Cada máquina informa sus planes como plans-v1; el daemon mantiene el mapa fleet-v1 de cada máquina, agente, repositorio y plan, y fleet ui lo muestra en solo lectura.',
+        },
+        {
+          name: 'Cola de planes',
+          detail:
+            'Cuando el plan de un repositorio termina, el siguiente plan aprobado de su cola arranca con un único prompt fijo dirigido a su lead. El daemon lee la cola y nunca la escribe.',
+        },
+        {
+          name: 'Verificación del lead',
+          detail:
+            'Antes de cualquier merge, tag o release, el lead confirma que sigue teniendo el plan en todas las máquinas. Un lead más reciente lo rechaza; una máquina inalcanzable lo detiene, salvo que ese riesgo se acepte y quede registrado.',
+        },
+      ],
+      note: 'El cerebro de decisión (--brain) y el nombramiento de lead (--appoint) son opciones del mismo daemon que se activan de forma explícita, cada una por una persona. El daemon nunca hace merge, publica releases, inicia sesión ni cambia un permiso.',
+      deepLinkLabel: 'Lee el complemento Herdr',
+    },
+    efficiency: {
+      badge: 'Eficiencia medida',
+      title: 'Bytes de instrucciones por flujo, medidos.',
+      subtitle:
+        'El harness publica lo que cada flujo debe leer antes de empezar: el router, el sub-skill y los recursos compartidos que enlaza. Son los conjuntos de lectura obligatoria del paquete publicado.',
+      colFlow: 'Flujo',
+      colBytes: 'Paquete de entrada (bytes)',
+      caption:
+        'Unidad: bytes del sistema de archivos. Medido sobre el paquete publicado con el comando siguiente.',
+      absent:
+        'No se muestran tokens del proveedor, costes ni estadísticas de cierre del bucle: ninguna fuente etiquetada los mide todavía, así que no tienen fila. La cifra de tokens del script, bytes ÷ 4, es una estimación rotulada, nunca una medición.',
+      deepLinkLabel: 'Lee el registro de evaluación',
     },
     onboarding: {
       badge: 'Incorporación basada en razonamiento',
@@ -214,6 +300,11 @@ export const es: SiteTranslations = {
           description:
             'Genera Deep Work Plans de largo alcance para cualquier tarea y ejecútalos paso a paso, con criterios de aceptación explícitos, puertas de validación y estado reanudable — de forma autónoma, durante horas.',
         },
+        {
+          title: 'Una persona inicia el bucle',
+          description:
+            'Opcional, con el complemento Herdr: tú — nunca un agente — ejecutas herdr-peers autopilot start --loop. Cada plan abierto con registro de lead sigue ejecutándose hasta su fin, y tu notificador se entera cuando uno se estanca, se bloquea o termina.',
+        },
       ],
       note: 'El skill se instala idéntico en todas partes; lo que se adapta es tu repositorio — el AGENTS.md, los docs y el kit .agents/ razonado generados para tu stack. Esa separación es lo que hace de la metodología un estándar reutilizable y no un andamiaje de una sola vez.',
     },
@@ -261,7 +352,7 @@ export const es: SiteTranslations = {
         {
           label: 'Nativo de git, reanudable, .dwp/',
           detail:
-            'Sin demonios ni estado externo. Los planes quedan en una carpeta .dwp/ ignorada por git, y cualquier tarea se reanuda solo desde git, incluso tras un desbordamiento de contexto.',
+            'La metodología en sí no necesita ningún daemon ni estado externo. Los planes quedan en una carpeta .dwp/ ignorada por git, y cualquier tarea se reanuda solo desde git, incluso tras un desbordamiento de contexto. El daemon opcional del bucle añade continuidad, nunca una dependencia.',
         },
         {
           label: 'Delegación multiagente y Ecosistema 1.0',

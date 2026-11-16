@@ -99,14 +99,14 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — strukturierte Ausführung für KI-Coding-Agenten',
       description:
-        'Deep Work Plan bringt spezifikationsgetriebene Entwicklung zu KI-Agenten: Machen Sie Ihr Repository zum robusten Harness für Multi-Agenten-Delegation.',
+        'Spec-first, mit geschlossenem Loop: Deep Work Plan macht Ihr Repository zum Harness für KI-Coding-Agenten, und jeder Plan läuft im Loop bis zum Ende.',
     },
     hero: {
       badge: 'Offene Methodik · MIT · Agenten-agnostisch',
-      title: 'Modelle zählen.',
-      titleEmphasis: 'Kontext zählt mehr.',
+      leadSentence:
+        'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.',
       subtitle:
-        'Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung — Kontext, Guardrails und einen dauerhaften Plan — in der jeder Coding-Agent präzise und effizient arbeitet und langlaufende Arbeit abschließt.',
+        'Deep Work Plan macht jedes Repository zum Harness — Kontext, Guardrails und ein dauerhafter Plan mit Validierungs-Gates —, in dem jeder Coding-Agent langlaufende Arbeit ausführt. Fügen Sie den optionalen Loop hinzu, und ein offener Plan läuft bis zu seinem Ende weiter, ohne dass jemand nachfragen muss.',
       instructionLabel: 'In Ihren Agenten kopieren',
       instruction:
         'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',
@@ -114,19 +114,38 @@ export const de: SiteTranslations = {
       copiedLabel: 'Kopiert',
       viewInitCta: 'So funktioniert es',
       pullQuote:
-        'Deep Work Plan ist spec-driven Development, bei der das Repository selbst zum Harness wird.',
+        'Spec-first sagt, was; das Harness, wo; Loop engineering, wie es zu Ende geht.',
       primaryCta: 'Methodik lesen',
       secondaryCta: 'Spezifikation lesen',
-      illustrationAlt:
-        'Ein Leuchtturm an felsiger Küste wirft einen einzelnen Strahl, der ein kleines Schiff lenkt — ein Stich, der das Repository als stabilen Anker („harness“) zeigt, der jeden Agenten führt.',
-      scrollCta: 'So funktioniert es',
+    },
+    pillars: {
+      badge: 'Vier Säulen',
+      title: 'Worauf die Methodik aufbaut.',
+      items: [
+        {
+          name: 'Spec-first',
+          line: 'Der Plan ist die dauerhafte Quelle der Wahrheit: atomare Aufgaben, Akzeptanzkriterien und Validierungs-Gates, die der Agent bestehen muss.',
+        },
+        {
+          name: 'Das Repository ist das Harness',
+          line: 'Kontext, Werkzeuge, Guardrails und Zustand liegen als einfache Dateien im Repository, die jeder Agent lesen kann.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Pläne laufen bis zu ihrem Ende: Registrierung, ein von einem Menschen gestarteter Daemon, Anstöße ohne zusätzliche Befugnis, Failover und Plan-Ereignisse.',
+        },
+        {
+          name: 'Gemessene Effizienz',
+          line: 'Instruktions-Bytes pro Flow, gemessen und mit ihrer Methode veröffentlicht — niemals erfundene Token-Prozentsätze.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Das Problem und die Antwort',
       problem:
         'In kurzen Spitzen sind Coding-Agenten beeindruckend. Übergeben Sie ihnen eine langlaufende Mission — eine Migration, ein neues Subsystem, eine Refaktorierung über Dutzende Dateien —, driftet der Agent ab: Der Kontext füllt sich, frühere Entscheidungen verblassen und stundenlange Arbeit bleibt auf halbem Weg liegen.',
       answer:
-        'Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. „Fertig“ ist kein Gefühl mehr — es wird zu überprüfbarer, reviewbarer Evidenz.',
+        'Deep Work Plan antwortet spec-first: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. „Fertig“ ist kein Gefühl mehr — es wird zu überprüfbarer, reviewbarer Evidenz. Loop engineering hält den Plan dann in Bewegung, bis diese Gates bestanden sind.',
       efficiency:
         'Kontext ist die knappste Ressource Ihres Agenten. Deshalb hält das Harness seine eigenen Anweisungen bewusst schlank und nachvollziehbar. Anweisungen werden schrittweise geladen, die Validierung konzentriert sich auf Änderungen, und jede Aufgabe erhält den passenden Kontext. Wir veröffentlichen den Instruktionsumfang jedes Ablaufs in Bytes, damit dieser Aufwand sichtbar bleibt. Auch Pläne passen sich der Arbeit an: Lite für eine klar abgegrenzte Korrektur, Full für Aufgaben, die Stunden dauern. Das Format richtet sich nach dem Umfang und hält den Prozess fokussiert und nachvollziehbar.',
       illustrationAlt:
@@ -163,6 +182,73 @@ export const de: SiteTranslations = {
         deepLinkLabel: 'Lesen Sie die Methodik',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title:
+        'Pläne laufen bis zu ihrem Ende. Die Befugnis bleibt bei Menschen.',
+      subtitle:
+        'Loop engineering beschreibt, wie ein Plan zu Ende kommt, ohne dass ein Mensch ständig nachfragt. Jede Zeile unten ist ein veröffentlichter Vertrag von herdr-peers, dem optionalen Herdr-Addon: Die Methodik funktioniert auch ohne dieses Addon, und der Loop verstärkt sie nur.',
+      colContract: 'Vertrag',
+      colGuarantee: 'Was er garantiert',
+      colSource: 'Quelle',
+      contracts: [
+        {
+          name: 'Plan-Registrierung',
+          detail:
+            'Ein Plan, den der Loop beobachtet, hat einen Lead-Eintrag mit einer Epoche und einer Nachfolge. Nur der Inhaber der höchsten Epoche handelt als sein Lead.',
+        },
+        {
+          name: 'Start nur durch Menschen',
+          detail:
+            'Nur ein Mensch startet den Daemon, in eigenen Worten. Keine Anfrage, Antwort oder Mitteilung kann ihn starten, stoppen oder ändern, was er tut.',
+        },
+        {
+          name: 'Anstöße verleihen keine Befugnis',
+          detail:
+            'Der untätige Lead eines offenen Plans erhält einen festen Prompt, um fortzufahren. Gates, Stoppbedingungen und Eskalationen gelten wie zuvor; drei Prompts ohne Fortschritt markieren den Plan als festgefahren.',
+        },
+        {
+          name: 'Failover auf Nachfolger',
+          detail:
+            'Ist der Lead weg, wird der erste erreichbare Nachfolger gebeten, zu übernehmen, und der Helper prüft die Evidenz erneut. Eine Lane übernimmt den Lead nur mit einer Freigabe, die der Mensch vorab festgehalten hat.',
+        },
+        {
+          name: 'Plan-Ereignisse',
+          detail:
+            'Wenn ein Plan festhängt, blockiert, seinen Lead verliert, aus der Warteschlange startet oder abgeschlossen wird, erhält ein vom Menschen gewählter Befehl ein plan-event-v1-Objekt. Das Pack liefert dafür einen Dailybot-Notifier mit.',
+        },
+        {
+          name: 'Flottenkarte',
+          detail:
+            'Jede Maschine meldet ihre Pläne als plans-v1; der Daemon führt die fleet-v1-Karte aller Maschinen, Agenten, Repositories und Pläne, und fleet ui zeigt sie schreibgeschützt an.',
+        },
+        {
+          name: 'Plan-Warteschlange',
+          detail:
+            'Wird der Plan eines Repositorys abgeschlossen, startet der nächste genehmigte Plan seiner Warteschlange mit einem festen Prompt an seinen Lead. Der Daemon liest die Warteschlange und schreibt sie nie.',
+        },
+        {
+          name: 'Lead-Prüfung',
+          detail:
+            'Vor jedem Merge, Tag oder Release bestätigt der Lead, dass er den Plan auf jeder Maschine noch hält. Ein neuerer Lead lässt sie scheitern; eine nicht erreichbare Maschine hält sie an, es sei denn, dieses Risiko wurde nachweislich akzeptiert.',
+        },
+      ],
+      note: 'Die Entscheidungslogik (--brain) und die Lead-Ernennung (--appoint) sind Opt-in-Flags desselben Daemons, die jeweils ein Mensch einschaltet. Der Daemon führt nie einen Merge oder ein Release durch, meldet sich nie an und ändert keine Berechtigung.',
+      deepLinkLabel: 'Das Herdr-Addon lesen',
+    },
+    efficiency: {
+      badge: 'Gemessene Effizienz',
+      title: 'Instruktions-Bytes pro Flow, gemessen.',
+      subtitle:
+        'Das Harness veröffentlicht, was jeder Flow vor dem Start lesen muss: den Router, die Sub-Skill und die gemeinsamen Ressourcen, die sie verlinkt. Das sind die Pflichtlektüren des veröffentlichten Packs.',
+      colFlow: 'Flow',
+      colBytes: 'Einstiegsbündel (Bytes)',
+      caption:
+        'Einheit: Dateisystem-Bytes. Gemessen am veröffentlichten Pack mit dem Befehl unten.',
+      absent:
+        'Provider-Tokens, Kosten und Statistiken zum Schließen des Loops werden nicht gezeigt: Noch keine getaggte Quelle misst sie, daher haben sie keine Zeile. Die Token-Zahl des Skripts (Bytes ÷ 4) ist eine gekennzeichnete Schätzung, niemals eine Messung.',
+      deepLinkLabel: 'Das Evaluations-Ledger lesen',
     },
     onboarding: {
       badge: 'Reasoning-basiertes Onboarding',
@@ -219,6 +305,11 @@ export const de: SiteTranslations = {
           description:
             'Erzeugen Sie langfristige Deep Work Plans für jede Aufgabe und führen Sie diese Schritt für Schritt aus — mit expliziten Akzeptanzkriterien, Validierungs-Gates und wiederaufnehmbarem Zustand — autonom, über Stunden hinweg.',
         },
+        {
+          title: 'Ein Mensch startet den Loop',
+          description:
+            'Optional, mit dem Herdr-Addon: Sie — niemals ein Agent — führen herdr-peers autopilot start --loop aus. Jeder offene Plan mit Lead-Eintrag läuft bis zu seinem Ende weiter, und Ihr Notifier erfährt, wenn einer festhängt, blockiert oder abgeschlossen wird.',
+        },
       ],
       note: 'Die Skill wird überall identisch installiert; angepasst wird Ihr Repository — die AGENTS.md, die Dokumentation und das für Ihren Stack erzeugte, durchdachte .agents/-Kit. Diese Trennung macht die Methodik zu einem wiederverwendbaren Standard und nicht zu einem einmaligen Gerüst.',
     },
@@ -266,7 +357,7 @@ export const de: SiteTranslations = {
         {
           label: 'Git-nativ, wiederaufnehmbar, .dwp/',
           detail:
-            'Kein Daemon und kein externer Zustand. Pläne landen in einem per gitignore ausgeschlossenen .dwp/-Ordner, und jede Aufgabe setzt allein aus git wieder auf — selbst nach einem Kontextüberlauf.',
+            'Die Methodik selbst braucht keinen Daemon und keinen externen Zustand. Pläne landen in einem per gitignore ausgeschlossenen .dwp/-Ordner, und jede Aufgabe setzt allein aus git wieder auf — selbst nach einem Kontextüberlauf. Der optionale Loop-Daemon fügt Kontinuität hinzu, niemals eine Abhängigkeit.',
         },
         {
           label: 'Multi-Agenten-Delegation und Ökosystem 1.0',

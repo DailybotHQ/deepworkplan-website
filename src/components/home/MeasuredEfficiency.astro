@@ -1,0 +1,131 @@
+---
+/**
+ * MeasuredEfficiency — the homepage's measured-efficiency table (D4: no metric
+ * without a unit and a measurement path).
+ *
+ * The numbers are the "Compulsory read set per flow" block printed by
+ * `bash tests/efficiency/measure-instruction-load.sh` on a clean export of the
+ * deepworkplan-skill tag pinned in src/lib/ecosystem-pins.ts (v7.12.2; unit:
+ * filesystem bytes). When the pack pin moves, re-run the script on the new tag
+ * and replace FLOW_BYTES and MEASURED_AT together — a figure measured on one
+ * tag must never be shown under another. Metrics no tagged source measures
+ * (provider tokens, cost, loop-closure statistics) have no row. A pack pin
+ * bump fails the build until the table is re-measured. Static, zero JS.
+ */
+import Kicker from '@/components/editorial/Kicker.astro';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
+import type { Language } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const e = getTranslations(lang).home.efficiency;
+const pack = ECOSYSTEM_PINS.pack;
+
+/** The tag FLOW_BYTES was measured on. */
+const MEASURED_AT = 'v7.12.2';
+/** Entry bundle per flow, filesystem bytes, at MEASURED_AT. */
+const FLOW_BYTES = [
+  { flow: 'create', bytes: 74979 },
+  { flow: 'execute', bytes: 55124 },
+  { flow: 'resume', bytes: 32021 },
+  { flow: 'refine', bytes: 76356 },
+  { flow: 'onboard', bytes: 82049 },
+  { flow: 'status', bytes: 27309 },
+  { flow: 'verify', bytes: 36596 },
+] as const;
+const COMMAND = 'bash tests/efficiency/measure-instruction-load.sh';
+
+// Never show a figure under a pin it was not measured on: a pack pin bump
+// fails the build here until the table is re-measured on the new tag.
+if (pack.tag !== MEASURED_AT) {
+  throw new Error(
+    `MeasuredEfficiency: FLOW_BYTES was measured on ${MEASURED_AT} but the pack pin is ${pack.tag}. Re-run "${COMMAND}" on the new tag and update FLOW_BYTES and MEASURED_AT.`
+  );
+}
+const fmt = new Intl.NumberFormat(lang);
+const repoBase = `https://github.com/DailybotHQ/${pack.repo}/blob/${MEASURED_AT}/`;
+---
+
+<section
+  id="measured-efficiency"
+  class="border-b py-16 md:py-20"
+  style="border-color: var(--color-line);"
+>
+  <div class="main-container lg:grid lg:grid-cols-[minmax(0,5fr)_minmax(0,6fr)] lg:gap-12">
+    <div>
+      <Kicker>{e.badge}</Kicker>
+      <h2
+        class="font-display mt-3 text-3xl font-bold md:text-4xl"
+        style="color: var(--color-ink);"
+      >
+        {e.title}
+      </h2>
+      <p class="lead mt-4">{e.subtitle}</p>
+      <p
+        class="mt-6 border-l-2 pl-4 leading-relaxed"
+        style="border-color: var(--color-secondary); color: var(--color-muted);"
+      >
+        {e.absent}
+      </p>
+      <a
+        href={`${repoBase}docs/EVALUATION.md`}
+        class="mt-6 inline-flex items-center text-base font-semibold transition hover:opacity-70"
+        style="color: var(--color-secondary);"
+        rel="noopener"
+      >
+        {e.deepLinkLabel} &rarr;
+      </a>
+    </div>
+    <figure class="mt-10 lg:mt-0">
+      <table class="w-full border-collapse text-left">
+        <thead>
+          <tr class="border-b" style="border-color: var(--color-ink);">
+            <th scope="col" class="kicker py-3 pr-4" style="color: var(--color-muted);">
+              {e.colFlow}
+            </th>
+            <th
+              scope="col"
+              class="kicker py-3 text-right"
+              style="color: var(--color-muted);"
+            >
+              {e.colBytes}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            FLOW_BYTES.map((row) => (
+              <tr class="border-b" style="border-color: var(--color-line);">
+                <th scope="row" class="py-3 pr-4 font-normal">
+                  <code style="color: var(--color-ink);">{row.flow}</code>
+                </th>
+                <td
+                  class="nums-tabular py-3 text-right font-display text-lg"
+                  style="color: var(--color-ink);"
+                >
+                  {fmt.format(row.bytes)}
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+      <figcaption class="mt-4 text-sm leading-relaxed" style="color: var(--color-muted);">
+        {e.caption}
+        <code class="mt-2 block break-all" style="color: var(--color-ink);">{COMMAND}</code>
+        <a
+          href={`${repoBase}tests/efficiency/measure-instruction-load.sh`}
+          class="mt-1 inline-block underline underline-offset-2 transition hover:opacity-70"
+          style="color: var(--color-secondary);"
+          rel="noopener"
+        >
+          {pack.repo} {MEASURED_AT}
+        </a>
+      </figcaption>
+    </figure>
+  </div>
+</section>

@@ -9,9 +9,12 @@ import Archetypes from '@/components/home/Archetypes.astro';
 import Comparison from '@/components/home/Comparison.astro';
 import FinalCta from '@/components/home/FinalCta.astro';
 import Hero from '@/components/home/Hero.astro';
+import LoopEngineering from '@/components/home/LoopEngineering.astro';
+import MeasuredEfficiency from '@/components/home/MeasuredEfficiency.astro';
 import Onboarding from '@/components/home/Onboarding.astro';
 import Origin from '@/components/home/Origin.astro';
 import Outcomes from '@/components/home/Outcomes.astro';
+import Pillars from '@/components/home/Pillars.astro';
 import Pitch from '@/components/home/Pitch.astro';
 import Quickstart from '@/components/home/Quickstart.astro';
 import Stacks from '@/components/home/Stacks.astro';
@@ -30,12 +33,15 @@ const m = t.home.meta;
 
 <MainLayout lang={lang} title={m.title} description={m.description}>
   <Hero lang={lang} />
+  <Pillars lang={lang} />
   <Pitch lang={lang} />
+  <LoopEngineering lang={lang} />
   <ActHumansSteer lang={lang} />
   <ActPlanNoDrift lang={lang} />
   <ActDoneIsAContract lang={lang} />
   <ActRepoAsHarness lang={lang} />
   <ActContextEconomy lang={lang} />
+  <MeasuredEfficiency lang={lang} />
   <Onboarding lang={lang} />
   <Quickstart lang={lang} />
   <Outcomes lang={lang} />

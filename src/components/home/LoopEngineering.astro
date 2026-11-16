@@ -1,0 +1,158 @@
+---
+/**
+ * LoopEngineering — the homepage section that names the real loop contracts.
+ *
+ * Claims ledger: every row is a released contract of herdr-peers at the tag
+ * pinned in src/lib/ecosystem-pins.ts, and its source cell links the file at
+ * that tag. The command/schema codes and source paths are literal and never
+ * translated; names and guarantees come from translations (home.loop), in the
+ * same order as LOOP_CONTRACTS below. Static, zero JS.
+ */
+import Kicker from '@/components/editorial/Kicker.astro';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
+import type { Language } from '@/lib/i18n';
+import { getUrlPrefix } from '@/lib/i18n';
+import { getTranslations } from '@/lib/translations';
+
+interface Props {
+  lang: Language;
+}
+
+const { lang } = Astro.props;
+const l = getTranslations(lang).home.loop;
+const prefix = getUrlPrefix(lang);
+const herdr = ECOSYSTEM_PINS.herdr;
+const base = `https://github.com/DailybotHQ/${herdr.repo}/blob/${herdr.tag}/`;
+
+/** Literal code and tagged source per contract, in translation order. */
+const LOOP_CONTRACTS = [
+  {
+    code: 'herdr-peers lead claim',
+    path: 'skills/herdr-peers/protocol.md',
+    section: '§12',
+  },
+  {
+    code: 'herdr-peers autopilot start --loop',
+    path: 'skills/herdr-peers/autopilot.md',
+    section: '§1',
+  },
+  {
+    code: 'plan_stalled',
+    path: 'skills/herdr-peers/autopilot.md',
+    section: '§5.2–5.3',
+  },
+  {
+    code: 'herdr-peers lead takeover',
+    path: 'skills/herdr-peers/autopilot.md',
+    section: '§5.2, §7',
+  },
+  {
+    code: 'plan-event-v1',
+    path: 'docs/schema/plan-event-v1.json',
+    section: '',
+  },
+  {
+    code: 'plans-v1 · fleet-v1',
+    path: 'docs/schema/fleet-v1.json',
+    section: '',
+  },
+  {
+    code: 'dwp-queue-v1',
+    path: 'skills/herdr-peers/autopilot.md',
+    section: '§5.4',
+  },
+  {
+    code: 'herdr-peers lead verify',
+    path: 'skills/herdr-peers/protocol.md',
+    section: '§12',
+  },
+] as const;
+
+const rows = l.contracts.map((c, i) => ({ ...c, ...LOOP_CONTRACTS[i] }));
+---
+
+<section
+  id="loop-engineering"
+  class="border-b py-16 md:py-20"
+  style="border-color: var(--color-line);"
+>
+  <div class="main-container">
+    <div class="max-w-3xl">
+      <Kicker>{l.badge}</Kicker>
+      <h2
+        class="font-display mt-3 text-3xl font-bold md:text-4xl"
+        style="color: var(--color-ink);"
+      >
+        {l.title}
+      </h2>
+      <p class="lead mt-4">{l.subtitle}</p>
+    </div>
+
+    <div class="mt-10 overflow-x-auto">
+      <table class="w-full min-w-[40rem] border-collapse text-left">
+        <thead>
+          <tr class="border-b" style="border-color: var(--color-ink);">
+            <th scope="col" class="kicker py-3 pr-4" style="color: var(--color-muted);">
+              {l.colContract}
+            </th>
+            <th scope="col" class="kicker py-3 pr-4" style="color: var(--color-muted);">
+              {l.colGuarantee}
+            </th>
+            <th scope="col" class="kicker py-3" style="color: var(--color-muted);">
+              {l.colSource}
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          {
+            rows.map((row) => (
+              <tr class="border-b align-top" style="border-color: var(--color-line);">
+                <th scope="row" class="w-[26%] py-4 pr-4 font-normal">
+                  <span
+                    class="font-display block text-base font-semibold"
+                    style="color: var(--color-ink);"
+                  >
+                    {row.name}
+                  </span>
+                  <code class="mt-1 block text-xs" style="color: var(--color-ink);">
+                    {row.code}
+                  </code>
+                </th>
+                <td class="py-4 pr-4 leading-relaxed" style="color: var(--color-muted);">
+                  {row.detail}
+                </td>
+                <td class="w-[22%] py-4 text-xs">
+                  <a
+                    href={`${base}${row.path}`}
+                    class="break-all underline underline-offset-2 transition hover:opacity-70"
+                    style="color: var(--color-secondary);"
+                    rel="noopener"
+                  >
+                    {herdr.repo} {herdr.tag}
+                    <br />
+                    {row.path}
+                    {row.section && ` ${row.section}`}
+                  </a>
+                </td>
+              </tr>
+            ))
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <p
+      class="mt-8 max-w-3xl border-l-2 pl-4 leading-relaxed"
+      style="border-color: var(--color-secondary); color: var(--color-muted);"
+    >
+      {l.note}
+    </p>
+    <a
+      href={`${prefix}/kit/herdr`}
+      class="mt-6 inline-flex items-center text-base font-semibold transition hover:opacity-70"
+      style="color: var(--color-secondary);"
+    >
+      {l.deepLinkLabel} &rarr;
+    </a>
+  </div>
+</section>

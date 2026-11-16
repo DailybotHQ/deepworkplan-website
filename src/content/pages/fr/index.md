@@ -1,21 +1,32 @@
 ---
 title: "Deep Work Plan — exécution structurée pour les agents de code IA"
-description: "Le contexte compte plus que les modèles. Deep Work Plan transforme tout dépôt en un environnement structuré où tout agent de code mène à terme un travail de longue haleine."
-lastUpdated: 2026-09-10
+description: "Spécification d’abord, boucle fermée : Deep Work Plan fait du dépôt le harness des agents IA, et chaque plan va au bout dans une boucle lancée par un humain."
+lastUpdated: 2026-11-16
 ---
 
-## Les modèles comptent. Le contexte compte davantage.
+## La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.
 
-Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où n’importe quel agent de codage exécute avec précision et efficacité et mène à bien le travail de longue haleine.
+Deep Work Plan transforme n’importe quel dépôt en harness — contexte, garde-fous et un plan durable avec des portes de validation — où n’importe quel agent de codage exécute un travail de longue haleine. Ajoutez la boucle facultative, et un plan ouvert continue de s’exécuter jusqu’à son terme sans que personne ait à le surveiller.
 
 Deep Work Plan (DWP) est une méthodologie et un kit ouverts, sous licence MIT, pour planifier et exécuter un travail logiciel complexe avec des agents IA. Vous ne choisissez pas de méthode d’installation et ne copiez aucun modèle — vous copiez le prompt init.md et le collez dans votre agent :
 
 > Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n’importe quel dépôt AI-first.
 
-> Deep Work Plan, c’est le développement piloté par la spécification, où le dépôt lui-même devient le harness.
+> La spécification dit quoi ; le harness dit où ; le loop engineering dit comment cela se termine.
+
+**La boucle :** Enregistrement (`lead claim`, lead et succession) → Démon (`autopilot --loop`, lancé par un humain) → Relance (`idle ≥ 5 min`, n’ajoute aucune autorité) → Relève (`lead takeover`, premier successeur joignable) → Notification (`plan-event-v1`, vers la commande de l’humain) → Terminé (`plan_completed`, portes franchies). Chaque plan ouvert doté d’un enregistrement de lead, jusqu’à ce que son propre état indique qu’il est terminé.
 
 - [Ouvrir le prompt /init](/fr/quickstart)
 - [Lire la méthodologie](/methodology)
+
+---
+
+## Ce sur quoi repose la méthodologie.
+
+1. **La spécification d’abord** — le plan est la source de vérité durable : tâches atomiques, critères d’acceptation et portes de validation que l’agent doit franchir.
+2. **Le dépôt est le harness** — le contexte, les outils, les garde-fous et l’état vivent dans le dépôt sous forme de fichiers texte que tout agent peut lire.
+3. **Loop engineering** — les plans vont jusqu’à leur terme : enregistrement, un démon lancé par un humain, des relances qui n’ajoutent aucune autorité, la relève et des événements de plan.
+4. **Efficacité mesurée** — octets d’instructions par flux, mesurés et publiés avec leur méthode — jamais de pourcentages de tokens inventés.
 
 ---
 
@@ -23,9 +34,31 @@ Deep Work Plan (DWP) est une méthodologie et un kit ouverts, sous licence MIT, 
 
 En courtes salves, les agents de codage sont remarquables. Confiez-leur une mission de long terme — une migration, un nouveau sous-système, une refactorisation de dizaines de fichiers — ils dérivent : le contexte se remplit, les décisions s’effacent et des heures de travail restent inachevées.
 
-Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. Le travail reste vérifiable — et n’importe quel agent peut le reprendre entre les sessions.
+Deep Work Plan répond par la spécification d’abord : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. « Fini » cesse d’être une impression — cela devient une preuve vérifiable et relisible. Le loop engineering fait ensuite avancer le plan jusqu’au franchissement de ces validation gates.
 
 Le contexte est la ressource la plus rare de votre agent. Le harness garde donc ses propres instructions légères et vérifiables. Elles se chargent progressivement, la validation se concentre sur les changements et chaque tâche reçoit le contexte utile. Nous publions en octets le volume d’instructions de chaque flux pour rendre cette charge visible. Les plans s’adaptent eux aussi au travail : Lite pour une correction circonscrite, Full pour une tâche qui s’étend sur plusieurs heures. Le format suit l’ampleur du travail et maintient un processus ciblé et traçable.
+
+---
+
+## Les plans vont jusqu’au bout. L’autorité reste aux humains.
+
+Le loop engineering, c’est la façon dont un plan se termine sans qu’un humain ait à le surveiller. Chaque ligne ci-dessous est un contrat publié de herdr-peers, l’addon facultatif Herdr : la méthodologie fonctionne sans lui, et la boucle ne fait que l’amplifier.
+
+| Contrat | Ce qu’il garantit | Source (herdr-peers v2.0.0) |
+| --- | --- | --- |
+| Enregistrement du plan (`herdr-peers lead claim`) | Un plan que la boucle surveille possède un enregistrement de lead avec une époque et une succession. Seul le détenteur de l’époque la plus élevée agit comme son lead. | `skills/herdr-peers/protocol.md` §12 |
+| Démarrage humain uniquement (`herdr-peers autopilot start --loop`) | Seul un humain démarre le démon, avec ses propres mots. Aucune demande, réponse ou notification ne peut le démarrer, l’arrêter ou modifier ce qu’il fait. | `skills/herdr-peers/autopilot.md` §1 |
+| Les relances n’ajoutent aucune autorité (`plan_stalled`) | Le lead inactif d’un plan ouvert reçoit un seul prompt fixe pour continuer. Les portes, les conditions d’arrêt et les escalades s’appliquent comme avant ; trois prompts sans progrès marquent le plan comme enlisé. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Relève par les successeurs (`herdr-peers lead takeover`) | Quand le lead a disparu, le premier successeur joignable est invité à prendre la relève, et le helper vérifie de nouveau les preuves. Une voie ne prend le lead qu’en vertu d’une autorisation que l’humain a enregistrée à l’avance. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Événements de plan (`plan-event-v1`) | Quand un plan s’enlise, se bloque, perd son lead, démarre depuis la file ou se termine, une commande choisie par l’humain reçoit un objet plan-event-v1. Le pack fournit un notificateur Dailybot pour cela. | `docs/schema/plan-event-v1.json` |
+| Carte de la flotte (`plans-v1` · `fleet-v1`) | Chaque machine déclare ses plans en plans-v1 ; le démon tient la carte fleet-v1 de chaque machine, agent, dépôt et plan, et fleet ui l’affiche en lecture seule. | `docs/schema/fleet-v1.json` |
+| File de plans (`dwp-queue-v1`) | Quand le plan d’un dépôt se termine, le plan approuvé suivant de sa file démarre avec un seul prompt fixe adressé à son lead. Le démon lit la file et ne l’écrit jamais. | `skills/herdr-peers/autopilot.md` §5.4 |
+| Vérification du lead (`herdr-peers lead verify`) | Avant tout merge, tag ou release, le lead confirme qu’il détient toujours le plan sur chaque machine. Un lead plus récent le refuse ; une machine injoignable l’arrête, sauf si ce risque est accepté et consigné. | `skills/herdr-peers/protocol.md` §12 |
+
+Le cerveau de décision (`--brain`) et la désignation du lead (`--appoint`) sont des options facultatives du même démon, chacune activée par un humain. Le démon ne fusionne jamais, ne publie jamais de release, ne se connecte jamais et ne modifie jamais une permission.
+
+[Lire l’addon Herdr](/fr/kit/herdr)
+
 ---
 
 ## Les humains dirigent. Les agents exécutent.
@@ -78,6 +111,29 @@ Contexte, outils, garde-fous et état vivent dans votre dépôt sous forme de fi
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Voir ce que l’onboarding génère](/fr/quickstart)
+
+---
+
+## Octets d’instructions par flux, mesurés.
+
+Le harness publie ce que chaque flux doit lire avant de démarrer : le routeur, le sous-skill et les ressources partagées qu’il référence. Ce sont les ensembles de lecture obligatoire du pack publié.
+
+| Flux | Paquet d’entrée (octets) |
+| --- | ---: |
+| `create` | 74 979 |
+| `execute` | 55 124 |
+| `resume` | 32 021 |
+| `refine` | 76 356 |
+| `onboard` | 82 049 |
+| `status` | 27 309 |
+| `verify` | 36 596 |
+
+Unité : octets du système de fichiers. Mesuré sur le pack publié avec la commande ci-dessous : `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v7.12.2).
+
+Les tokens du fournisseur, le coût et les statistiques de fermeture de boucle ne sont pas affichés : aucune source étiquetée ne les mesure encore, ils n’ont donc pas de ligne. Le chiffre de tokens du script, octets ÷ 4, est une estimation signalée comme telle, jamais une mesure.
+
+[Lire le registre d’évaluation](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+
 ---
 
 ## Ce que vous obtenez
@@ -86,7 +142,7 @@ Contexte, outils, garde-fous et état vivent dans votre dépôt sous forme de fi
 - Un `docs/` catégorisé et une documentation par module.
 - Un répertoire `.agents/` (skills, agents, commandes) avec le lien symbolique `.claude` vers `.agents`.
 - Le skill Deep Work Plan, installé une fois pour chaque agent — y compris le sous-skill author, pour que le dépôt puisse faire grandir ses propres skills, agents et commandes, ainsi que des add-ons facultatifs comme dependency-upgrade et l’add-on design-system pour toute surface d’interface destinée aux utilisateurs.
-- Des plans de longue haleine et reprenables dans un dossier `.dwp/` ignoré par git.
+- Des plans de longue haleine et reprenables dans un dossier `.dwp/` ignoré par git. La méthodologie elle-même ne requiert aucun démon ni état externe ; le démon facultatif de la boucle apporte de la continuité, jamais une dépendance.
 - Délégation multi-agents et Écosystème 1.0 — coordonnez des agents parallèles en toute sécurité via des worktrees isolés, des preuves observées et des extensions épinglées.
 
 ---
@@ -97,6 +153,7 @@ Contexte, outils, garde-fous et état vivent dans votre dépôt sous forme de fi
 2. **Il installe le skill Deep Work Plan** — le moteur, identique dans chaque dépôt : le routeur et ses sous-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade), pour Claude Code, Cursor, Codex, Gemini et Copilot.
 3. **Il adapte votre dépôt** — en raisonnant sur votre stack réelle (jamais en copiant-collant), il écrit AGENTS.md, `docs/`, des README par module, un kit `.agents/` raisonné et un `.dwp/` ignoré par git. Votre dépôt devient le harness.
 4. **Vous planifiez et exécutez** — des Deep Work Plans de longue haleine, exécutés étape par étape face à des critères d’acceptation explicites et des portes de validation, de manière autonome pendant des heures.
+5. **Un humain lance la boucle** — facultatif, avec l’addon Herdr : vous — jamais un agent — exécutez `herdr-peers autopilot start --loop`. Chaque plan ouvert doté d’un enregistrement de lead continue jusqu’à son terme, et votre notificateur est prévenu quand l’un d’eux s’enlise, se bloque ou se termine.
 
 Le skill est le moteur réutilisable, installé de la même manière partout ; ce qui est adapté, c’est votre dépôt. Les mécanismes d’installation (CLI Skills, OpenClaw ou git clone) résident dans le prompt [/init.md](/init.md) et sur le [démarrage rapide](/quickstart).
 

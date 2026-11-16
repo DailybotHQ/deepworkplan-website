@@ -98,14 +98,14 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI',
       description:
-        'Deep Work Plan mang quy trình phát triển theo đặc tả đến các tác tử lập trình AI. Biến kho mã thành bộ khung bền vững cho ủy quyền đa tác tử an toàn.',
+        'Đặc tả trước, vòng lặp khép kín: Deep Work Plan biến kho mã thành harness cho agent lập trình AI; mỗi kế hoạch chạy xong trong vòng lặp do người khởi động.',
     },
     hero: {
       badge: 'Phương pháp luận mở · MIT · Độc lập với agent',
-      title: 'Mô hình quan trọng.',
-      titleEmphasis: 'Ngữ cảnh quan trọng hơn.',
+      leadSentence:
+        'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
       subtitle:
-        'Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, rào chắn và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hiệu quả, và hoàn thành công việc dài hơi.',
+        'Deep Work Plan biến mọi repository thành harness — ngữ cảnh, rào chắn và một kế hoạch bền vững với các cổng kiểm chứng — nơi bất kỳ agent lập trình nào cũng thực thi công việc dài hơi. Thêm vòng lặp tùy chọn, và một kế hoạch đang mở sẽ tiếp tục chạy đến cùng mà không cần ai theo dõi.',
       instructionLabel: 'Sao chép vào agent của bạn',
       instruction:
         'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',
@@ -113,19 +113,38 @@ export const vi: SiteTranslations = {
       copiedLabel: 'Đã sao chép',
       viewInitCta: 'Xem cách hoạt động',
       pullQuote:
-        'Deep Work Plan là phát triển dựa trên đặc tả, nơi bản thân repository trở thành harness.',
+        'Đặc tả trước cho biết làm gì; harness cho biết ở đâu; Loop engineering cho biết công việc kết thúc thế nào.',
       primaryCta: 'Đọc phương pháp luận',
       secondaryCta: 'Đọc đặc tả',
-      illustrationAlt:
-        'Một ngọn hải đăng trên bờ đá phát ra một luồng sáng duy nhất dẫn đường cho con tàu nhỏ — bản khắc gợi hình ảnh repository như một harness vững vàng dẫn lối cho mọi agent.',
-      scrollCta: 'Xem cách hoạt động',
+    },
+    pillars: {
+      badge: 'Bốn trụ cột',
+      title: 'Nền tảng của phương pháp luận.',
+      items: [
+        {
+          name: 'Đặc tả trước',
+          line: 'Kế hoạch là nguồn sự thật bền vững: các tác vụ nguyên tử, tiêu chí chấp nhận và cổng kiểm chứng mà agent buộc phải qua.',
+        },
+        {
+          name: 'Repository là harness',
+          line: 'Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository dưới dạng tệp thuần mà mọi agent đều đọc được.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Kế hoạch chạy đến cùng: đăng ký, một daemon do con người khởi động, lời nhắc không thêm quyền hạn, chuyển giao dự phòng và sự kiện kế hoạch.',
+        },
+        {
+          name: 'Hiệu quả đo được',
+          line: 'Số byte chỉ dẫn cho mỗi luồng, được đo và công bố cùng phương pháp — không bao giờ là tỷ lệ phần trăm token bịa ra.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Vấn đề và lời giải',
       problem:
         'Trong những đợt ngắn, agent lập trình rất ấn tượng. Giao cho nó một nhiệm vụ dài hơi — một bản di chuyển, một phân hệ mới, một bản refactor hàng chục tệp — nó sẽ trôi dạt: ngữ cảnh đầy lên, các quyết định trước đó phai nhạt và hàng giờ công việc dở dang giữa chừng.',
       answer:
-        'Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được.',
+        'Deep Work Plan trả lời bằng cách đặt đặc tả lên trước: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được. Sau đó Loop engineering giữ cho kế hoạch tiếp tục tiến lên cho đến khi các cổng ấy được vượt qua.',
       efficiency:
         'Ngữ cảnh là tài nguyên khan hiếm nhất của agent, vì vậy harness giữ phần hướng dẫn của chính nó gọn nhẹ và dễ kiểm tra. Hướng dẫn được tải dần, bước xác thực tập trung vào phần đã thay đổi, và mỗi tác vụ nhận đúng ngữ cảnh liên quan. Chúng tôi công bố dung lượng hướng dẫn của từng luồng bằng byte để phần tải này luôn minh bạch. Kế hoạch cũng tùy theo công việc: Lite cho một sửa đổi có phạm vi rõ ràng, Full cho công việc kéo dài nhiều giờ. Định dạng theo sát phạm vi công việc, giúp quy trình tập trung và dễ theo dõi.',
       illustrationAlt:
@@ -162,6 +181,72 @@ export const vi: SiteTranslations = {
         deepLinkLabel: 'Đọc phương pháp luận',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Kế hoạch chạy đến cùng. Quyền hạn vẫn thuộc về con người.',
+      subtitle:
+        'Loop engineering là cách một kế hoạch hoàn thành mà không cần con người liên tục theo dõi. Mỗi hàng dưới đây là một hợp đồng đã phát hành của herdr-peers, addon Herdr tùy chọn: phương pháp luận vẫn hoạt động khi không có nó, và vòng lặp chỉ khuếch đại phương pháp luận.',
+      colContract: 'Hợp đồng',
+      colGuarantee: 'Điều nó bảo đảm',
+      colSource: 'Nguồn',
+      contracts: [
+        {
+          name: 'Đăng ký kế hoạch',
+          detail:
+            'Một kế hoạch mà vòng lặp theo dõi có bản ghi lead với một epoch và thứ tự kế nhiệm. Chỉ bên giữ epoch cao nhất mới hành động với vai trò lead của nó.',
+        },
+        {
+          name: 'Chỉ con người khởi động',
+          detail:
+            'Chỉ con người khởi động daemon, bằng chính lời của mình. Không yêu cầu, phản hồi hay thông báo nào có thể khởi động, dừng hoặc thay đổi việc nó làm.',
+        },
+        {
+          name: 'Lời nhắc không thêm quyền hạn',
+          detail:
+            'Lead đang rảnh của một kế hoạch mở nhận một lời nhắc cố định để tiếp tục. Các cổng, điều kiện dừng và cơ chế leo thang vẫn ràng buộc như trước; ba lời nhắc không có tiến triển sẽ đánh dấu kế hoạch là bị đình trệ.',
+        },
+        {
+          name: 'Chuyển giao cho người kế nhiệm',
+          detail:
+            'Khi lead không còn, người kế nhiệm đầu tiên liên lạc được sẽ được yêu cầu tiếp quản, và trình trợ giúp kiểm tra lại bằng chứng. Một lane chỉ nhận vai trò lead theo quyền mà con người đã ghi nhận từ trước.',
+        },
+        {
+          name: 'Sự kiện kế hoạch',
+          detail:
+            'Khi một kế hoạch bị đình trệ, bị chặn, mất lead, bắt đầu từ hàng đợi hoặc hoàn thành, một lệnh do con người chọn sẽ nhận một đối tượng plan-event-v1. Gói skill kèm sẵn một trình thông báo Dailybot cho việc này.',
+        },
+        {
+          name: 'Bản đồ đội máy',
+          detail:
+            'Mỗi máy báo cáo các kế hoạch của mình dưới dạng plans-v1; daemon duy trì bản đồ fleet-v1 của mọi máy, agent, repository và kế hoạch, và fleet ui hiển thị nó ở chế độ chỉ đọc.',
+        },
+        {
+          name: 'Hàng đợi kế hoạch',
+          detail:
+            'Khi kế hoạch của một repository hoàn thành, kế hoạch đã được duyệt tiếp theo trong hàng đợi bắt đầu bằng một lời nhắc cố định gửi tới lead của nó. Daemon đọc hàng đợi và không bao giờ ghi vào đó.',
+        },
+        {
+          name: 'Xác minh lead',
+          detail:
+            'Trước mọi lần merge, gắn tag hay phát hành, lead xác nhận rằng nó vẫn giữ kế hoạch trên mọi máy. Một lead mới hơn sẽ từ chối; một máy không liên lạc được sẽ dừng thao tác trừ khi rủi ro đó được chấp nhận và ghi nhận.',
+        },
+      ],
+      note: 'Bộ não quyết định (--brain) và việc chỉ định lead (--appoint) là các cờ tùy chọn của cùng một daemon, mỗi cờ do con người bật. Daemon không bao giờ merge, phát hành, đăng nhập hay thay đổi quyền truy cập.',
+      deepLinkLabel: 'Đọc về addon Herdr',
+    },
+    efficiency: {
+      badge: 'Hiệu quả đo được',
+      title: 'Số byte chỉ dẫn cho mỗi luồng, đã được đo.',
+      subtitle:
+        'Harness công bố những gì mỗi luồng phải đọc trước khi bắt đầu: bộ định tuyến, sub-skill và các tài nguyên dùng chung mà nó liên kết. Đây là các tập đọc bắt buộc của gói đã phát hành.',
+      colFlow: 'Luồng',
+      colBytes: 'Gói đầu vào (byte)',
+      caption:
+        'Đơn vị: byte hệ thống tệp. Đo trên gói đã phát hành bằng lệnh bên dưới.',
+      absent:
+        'Token của nhà cung cấp, chi phí và thống kê khép vòng lặp không được hiển thị: chưa có nguồn gắn tag nào đo chúng, nên chúng không có hàng. Con số token bằng byte ÷ 4 của script là ước tính có ghi nhãn, không bao giờ là phép đo.',
+      deepLinkLabel: 'Đọc sổ đánh giá',
     },
     onboarding: {
       badge: 'Khởi tạo dựa trên suy luận',
@@ -218,6 +303,11 @@ export const vi: SiteTranslations = {
           description:
             'Sinh ra các Deep Work Plan dài hơi cho mọi tác vụ và chạy chúng từng bước, với tiêu chí chấp nhận rõ ràng, các cổng kiểm chứng và trạng thái có thể tiếp tục — tự chủ, trong nhiều giờ.',
         },
+        {
+          title: 'Con người khởi động vòng lặp',
+          description:
+            'Tùy chọn, với addon Herdr: bạn — không bao giờ là agent — chạy herdr-peers autopilot start --loop. Mọi kế hoạch mở có bản ghi lead sẽ tiếp tục chạy đến cùng, và trình thông báo của bạn được báo khi một kế hoạch bị đình trệ, bị chặn hoặc hoàn thành.',
+        },
       ],
       note: 'Skill được cài giống hệt nhau ở mọi nơi; thứ được thích ứng là repository của bạn — AGENTS.md, tài liệu và bộ kit .agents/ được suy luận cho stack của bạn. Chính sự phân tách đó biến phương pháp luận thành một tiêu chuẩn tái sử dụng được thay vì một bộ khung dùng một lần.',
     },
@@ -265,7 +355,7 @@ export const vi: SiteTranslations = {
         {
           label: 'Thuần git, có thể tiếp tục, .dwp/',
           detail:
-            'Không daemon, không trạng thái ngoài. Kế hoạch nằm trong thư mục .dwp/ được gitignore, và mọi tác vụ tiếp tục chỉ từ git — kể cả sau khi ngữ cảnh tràn.',
+            'Bản thân phương pháp luận không cần daemon, không cần trạng thái ngoài. Kế hoạch nằm trong thư mục .dwp/ được gitignore, và mọi tác vụ tiếp tục chỉ từ git — kể cả sau khi ngữ cảnh tràn. Daemon vòng lặp tùy chọn bổ sung tính liên tục, không bao giờ là một phụ thuộc.',
         },
         {
           label: 'Ủy quyền đa tác tử và Hệ sinh thái 1.0',
