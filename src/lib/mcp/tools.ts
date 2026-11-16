@@ -114,13 +114,13 @@ export const SITE_SECTIONS: {
     name: 'Herdr addon',
     path: '/kit/herdr',
     description:
-      'Optional v7 addon (herdr-peers): delegate a task to a peer agent in a Herdr pane, on any machine; lanes and lead succession.',
+      'Optional addon (herdr-peers) for DWP v8: delegate a task to a peer agent in a Herdr pane, on any machine; lanes and lead succession.',
   },
   {
     name: 'Agentkit addon',
     path: '/kit/agentkit',
     description:
-      'Optional v7 addon (coding-agents-kit): one ak command for every terminal coding agent, accounts, capacity and headless delegation.',
+      'Optional addon (coding-agents-kit) for DWP v8: one ak command for every terminal coding agent, accounts, capacity and headless delegation.',
   },
   {
     name: 'Devcontainer addon',
@@ -132,7 +132,7 @@ export const SITE_SECTIONS: {
     name: 'DeepWorkPlan Vim',
     path: '/kit/vim',
     description:
-      'Optional v7 addon: the terminal editor for Deep Work Plan, with a plan browser and a consent-first installer.',
+      'Optional addon for DWP v8: the terminal editor for Deep Work Plan, with a plan browser and a consent-first installer.',
   },
   {
     name: 'Examples',
@@ -148,7 +148,7 @@ export const SITE_SECTIONS: {
     name: 'Changelog',
     path: '/changelog',
     description:
-      'A source-backed timeline of Deep Work Plan releases and design decisions, from v1 to v7 and Ecosystem 1.0.',
+      'A source-backed timeline of Deep Work Plan releases and design decisions, from v1 to v8 and Ecosystem 1.0.',
   },
   {
     name: 'Compare',
@@ -213,7 +213,7 @@ export const TOOL_DEFINITIONS: McpToolDefinition[] = [
     name: 'list_site_sections',
     title: 'List the sections of deepworkplan.com',
     description:
-      'List the main sections of deepworkplan.com (methodology, specification, kit and its v7 addons, changelog, examples, init, developers) with their paths and one-line descriptions.',
+      'List the main sections of deepworkplan.com (methodology, specification, kit and its v8 addons, changelog, examples, init, developers) with their paths and one-line descriptions.',
     inputSchema: {
       type: 'object',
       properties: {},

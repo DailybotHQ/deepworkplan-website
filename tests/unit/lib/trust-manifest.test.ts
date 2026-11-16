@@ -61,7 +61,12 @@ describe('repository descriptor', () => {
     spec_version: string;
     archetype: string;
     skill: { install: string };
-    schemas: { plan_manifest: string; plan_state: string };
+    schemas: {
+      plan_contract: string;
+      plan_snapshot: string;
+      plan_manifest: string;
+      journal_event_v7: string;
+    };
   };
   const declared = (readFileSync(resolve(root, 'AGENTS.md'), 'utf8').match(
     /DWP standard: (\d+\.\d+\.\d+)/
@@ -81,12 +86,17 @@ describe('repository descriptor', () => {
   });
 
   it('points at the schemas of the current plan generation', () => {
-    const major = Number.parseInt((declared as string).split('.')[0], 10);
-    expect(descriptor.schemas.plan_manifest).toBe(
-      `https://deepworkplan.com/schema/plan-manifest/v${major}.json`
+    expect(descriptor.schemas.plan_contract).toBe(
+      'https://deepworkplan.com/schema/plan-contract/v8.json'
     );
-    expect(descriptor.schemas.plan_state).toBe(
-      'https://deepworkplan.com/schema/plan-snapshot/v6.json'
+    expect(descriptor.schemas.plan_snapshot).toBe(
+      'https://deepworkplan.com/schema/plan-snapshot/v8.json'
+    );
+    expect(descriptor.schemas.plan_manifest).toBe(
+      'https://deepworkplan.com/schema/plan-manifest/v7.json'
+    );
+    expect(descriptor.schemas.journal_event_v7).toBe(
+      'https://deepworkplan.com/schema/journal-event/v7.json'
     );
   });
 });

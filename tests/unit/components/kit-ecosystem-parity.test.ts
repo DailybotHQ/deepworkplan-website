@@ -1,16 +1,13 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 import { getSupportedLanguages } from '@/lib/i18n';
 
 // Source-contract test for the kit index ecosystem plate (KitEcosystem.astro):
 // the 17-language i18n contract of docs/DIAGRAM_COMPONENTS.md §4 (identical key
 // sets and array lengths in every language, an `en` fallback, no blank values,
 // no eager hydration), plus its facts: every row links an existing kit page in
-// every language and pins exactly the tags of the v7 claims ledger
-// (PLAN_004_v7_kit_pages_and_vendor, rows C-11/C-21/C-31/C-39; amendments A2,
-// A4, A7 and A8; moved to the pack v7.1.4 pins by PLAN_009_dwpwebsite_dockerfile_pilot). The pins come from src/lib/ecosystem-pins.ts; changing one is a claims decision, not a formatting choice.
+// every language and pins exactly the pack 8.0.0 descriptor tags verified for this release stage.
 
 const SOURCE_PATH = resolve(
   process.cwd(),
@@ -19,12 +16,14 @@ const SOURCE_PATH = resolve(
 const source = readFileSync(SOURCE_PATH, 'utf8');
 const languages = getSupportedLanguages();
 
-const PINS: Record<string, string> = Object.fromEntries(
-  (['herdr', 'agentkit', 'devcontainer', 'vim'] as const).map((key) => [
-    key,
-    `${ECOSYSTEM_PINS[key].repo}@${ECOSYSTEM_PINS[key].tag}`,
-  ])
-);
+const PINS: Record<string, string> = {
+  herdr: 'herdr-peers@v2.1.0',
+  agentkit: 'coding-agents-kit@v1.5.0',
+  devcontainer: 'devcontainer-kit@v1.3.0',
+  dailybot: 'dailybot@v3.23.20',
+  'ai-diff-reviewer': 'ai-diff-reviewer@v3.3.16',
+  vim: 'deepworkplan-vim@v1.0.1',
+};
 
 type Entry = Record<string, string | string[]>;
 
@@ -101,7 +100,7 @@ describe('KitEcosystem facts', () => {
   const products = loadProducts();
   const map = loadMap();
 
-  it('pins exactly the ledger tags, one role per product', () => {
+  it('pins exactly the pack descriptor tags, one role per product', () => {
     expect(
       Object.fromEntries(products.map((p) => [p.key, `${p.product}@${p.tag}`]))
     ).toEqual(PINS);
@@ -121,6 +120,6 @@ describe('KitEcosystem facts', () => {
   });
 
   it('names the stable pack release', () => {
-    expect(source).toContain(`const packTag = '${ECOSYSTEM_PINS.pack.tag}';`);
+    expect(source).toContain("const packTag = 'v8.0.0';");
   });
 });
