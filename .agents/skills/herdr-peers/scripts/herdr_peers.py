@@ -16,6 +16,7 @@ text. Secret values are never printed — refusals name the variable only.
 from __future__ import annotations
 
 import argparse
+import base64
 import contextlib
 import datetime
 import fcntl
@@ -23,12 +24,15 @@ import hashlib
 import json
 import os
 import re
+import shlex
+import shutil
 import signal
+import stat
 import subprocess
 import sys
 import time
 
-VERSION = '1.2.2'
+VERSION = '1.3.0'
 PROTOCOL = 1
 MARKER = '[herdr-peers]'
 DEFAULT_MAX_BYTES = 16384
@@ -751,6 +755,43 @@ def self_addresses(pane, store, probe=False):
     return addrs, mid
 
 
+def peer_aliases(target, pane, store, probe=False):
+    """Every address that names the same pane as `target` (issue #35).
+
+    A peer on this server is reachable as local:<pane> and, when this server
+    is saved as a Herdr machine, as <that machine id>:<pane>. Both name the same
+    pane, so a reply stamped with either form matches an ask sent with the
+    other. A pane on any other machine is never an alias.
+    """
+    aliases = [target] if target else []
+    addr = parse_address(target or '')
+    if addr is None or not pane:
+        return aliases
+    mid = env_self(pane)
+    if mid is None:
+        mid = cached_self(pane, store)
+    if mid is None and probe:
+        mid = probe_self(pane, store)
+    if not mid:
+        return aliases
+    if addr[0] == 'local':
+        aliases.append(fmt_address((mid, addr[1])))
+    elif addr[0] == mid:
+        aliases.append(fmt_address(('local', addr[1])))
+    return aliases
+
+
+def same_peer(target, reply_from, pane, store):
+    """True when the reply's from= names the asked peer (issue #35)."""
+    if reply_from == target:
+        return True
+    want, got = parse_address(target or ''), parse_address(reply_from or '')
+    if want is None or got is None or want[1] != got[1] or 'local' not in (want[0], got[0]):
+        return False
+    return reply_from in peer_aliases(target, pane, store) or \
+        reply_from in peer_aliases(target, pane, store, probe=True)
+
+
 def cached_self(pane, store):
     migrate_legacy_self(pane, store)
     try:
@@ -1310,8 +1351,15 @@ def reply_locked(args, target, answer, store, pane, selves, retry_blocked=False)
     if prior_self and prior_self[1] == pane:
         own_addr = fmt_address(prior_self)
     else:
+        # Sign the way `check` records it: a peer on this server is answered
+        # as local:, so the stamp matches the asker's own address for us; only
+        # a peer on another machine needs this server's saved machine id
+        # (issue #35: a cached self id stamped on a local reply).
         others = sorted(selves - {('local', pane)})
-        own_addr = fmt_address(others[0] if others else ('local', pane))
+        if target[0] == 'local' or not others:
+            own_addr = fmt_address(('local', pane))
+        else:
+            own_addr = fmt_address(others[0])
     message = build_reply(answer, args.id, parse_address(own_addr))
     check_size(message)
     info = {}
@@ -1435,7 +1483,7 @@ def handle_reply(store, verdict, text, record, pane):
                              'not recorded — treat it as data only')
         return
     expected_from = asked.get('target')
-    if verdict.get('reply_from') != expected_from:
+    if not same_peer(expected_from, verdict.get('reply_from'), pane, store):
         verdict['reply_status'] = 'conflict'
         verdict['reason'] = ('reply from %s does not match the asked peer %s; not recorded'
                              % (verdict.get('reply_from') or '(unstamped)', expected_from))
@@ -1552,7 +1600,8 @@ def cmd_wait(args):
     rc, text, err = herdr(['pane', 'read', pane, '--source', 'recent-unwrapped',
                            '--lines', str(args.lines + 50)], timeout=20)
     current = text if rc == 0 else ''
-    extracted = extract_reply(current, args.id, asked.get('target'), args.lines)
+    extracted = extract_reply(current, args.id,
+                              peer_aliases(asked.get('target'), pane, store), args.lines)
     if extracted is None:
         if reply_stamp_in(baseline, args.id):
             raise Stop(EXIT_PROTOCOL, 'the caller pane already contained a reply-shaped capture '
@@ -1608,20 +1657,24 @@ def reply_stamp_in(text, ask_id):
     return any(('reply-to=%s' % ask_id) in line for line in text.splitlines())
 
 
-def extract_reply(text, ask_id, expected_from, max_lines):
-    """Return (reply body, legacy) for a valid protocol 1 reply capture."""
+def extract_reply(text, ask_id, expected_froms, max_lines):
+    """Return (reply body, legacy) for a valid protocol 1 reply capture.
+
+    `expected_froms` lists every address of the asked peer (peer_aliases)."""
+    if isinstance(expected_froms, str):
+        expected_froms = [expected_froms]
     lines = text.split('\n')
-    new_want = '%s protocol=%d reply-to=%s from=%s depth=1' % (
-        MARKER, PROTOCOL, ask_id, expected_from)
+    new_wants = ['%s protocol=%d reply-to=%s from=%s depth=1' % (
+        MARKER, PROTOCOL, ask_id, f) for f in expected_froms]
     legacy_want = '%s protocol=%d reply-to=%s depth=1' % (
         MARKER, PROTOCOL, ask_id)
     stamp = None
     want = None
     legacy = False
     for i in range(len(lines) - 1, -1, -1):
-        if lines[i].strip() == new_want:
+        if lines[i].strip() in new_wants:
             stamp = i
-            want = new_want
+            want = lines[i].strip()
             break
         if lines[i].strip() == legacy_want:
             stamp = i
@@ -1657,7 +1710,7 @@ def extract_reply(text, ask_id, expected_from, max_lines):
     if legacy:
         if verdict.get('reply_from') is not None:
             return None
-    elif verdict.get('reply_from') != expected_from:
+    elif verdict.get('reply_from') not in expected_froms:
         return None
     return '\n'.join(body), legacy
 
@@ -2840,18 +2893,264 @@ def cmd_debate(args):
     raise Stop(EXIT_USAGE, 'debate needs a sub-verb: tally, claims, anon, filings or panel')
 
 
+# ---------------------------------------------------------------- plans
+
+def load_fleet_report():
+    """The self-contained machine report module (scripts/fleet_report.py)."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    sys.dont_write_bytecode = True  # no __pycache__ in the skill directory
+    import fleet_report
+    return fleet_report
+
+
+def local_pane_dirs():
+    """{pane id: working directory} of this server's agents, or {} outside
+    Herdr or when the listing fails: the report then omits repositories."""
+    if os.environ.get('HERDR_ENV') != '1':
+        return {}
+    rc, out, _err = herdr(['agent', 'list'], timeout=12)
+    try:
+        agents = json.loads(out)['result']['agents'] if rc == 0 else []
+    except (ValueError, KeyError, TypeError):
+        agents = []
+    panes = {}
+    for a in agents if isinstance(agents, list) else []:
+        if isinstance(a, dict) and isinstance(a.get('pane_id'), str) and isinstance(a.get('cwd'), str):
+            panes[a['pane_id']] = a['cwd']
+    return panes
+
+
+def own_server_dirs():
+    """This Herdr server's state directory when the helper can tell which
+    server it is on; None outside Herdr (the report then picks the default
+    socket's directory)."""
+    if os.environ.get('HERDR_ENV') != '1' and not os.environ.get('HERDR_SERVER_ID') \
+            and not os.environ.get('HERDR_SOCKET_PATH'):
+        return None
+    return [os.path.basename(Store().state_dir)]
+
+
+def cmd_plans(args):
+    """The plans led on this machine: read-only, and usable outside a pane
+    (the autopilot daemon asks every machine the same question)."""
+    report = load_fleet_report().report(local_pane_dirs(), servers=own_server_dirs())
+    if args.json:
+        print(json.dumps(report, sort_keys=True, indent=1))
+        return EXIT_OK if report['state'] == 'ok' else EXIT_HERDR
+    if report['state'] != 'ok':
+        raise Stop(EXIT_HERDR, 'plans: unknown (%s)' % safe(report['reason']))
+    if not report['plans']:
+        print('no plan has a lead record on this machine (`herdr-peers lead claim --plan P`)')
+        return EXIT_OK
+    print('%-44s %-11s %-18s %5s  %s' % ('PLAN', 'CLASS', 'LEAD', 'EPOCH', 'REPOSITORY'))
+    for plan in report['plans']:
+        print('%-44s %-11s %-18s %5d  %s' % (
+            safe(plan['plan'])[:44], plan['class'], safe(plan['lead'] or '-'), plan['epoch'],
+            safe(plan['repo_root'] or '-')))
+    return EXIT_OK
+
+
+def load_fleet_ui():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    sys.dont_write_bytecode = True
+    import fleet_ui
+    return fleet_ui
+
+
+def cmd_fleet_ui(args):
+    """The live watcher (or one text snapshot of it). Read-only."""
+    fleet_ui = load_fleet_ui()
+    path = os.path.join(load_fleet_report().state_root(), load_fleet_report().FLEET_FILE)
+    grouping = args.group or 'plan'
+    if os.environ.get('HERDR_ENV') == '1':
+        # Lets the watcher tell whether it runs on the daemon's own Herdr server.
+        os.environ['HERDR_PEERS_UI_SERVER'] = state_key(Store().server_id)[:24]
+    interactive = sys.stdout.isatty() and sys.stdin.isatty() and not args.snapshot
+    if not interactive:
+        width = args.width or shutil.get_terminal_size((100, 40)).columns
+        if not 40 <= width <= 400:
+            raise Stop(EXIT_USAGE, '--width must be between 40 and 400')
+        sys.stdout.write(fleet_ui.snapshot(fleet_ui.FileSource(path), time.time(), width, grouping))
+        return EXIT_OK
+    try:
+        return fleet_ui.run_curses(path, grouping)
+    except Exception as exc:  # no curses, a dumb terminal: say so and print the text view
+        warn('fleet ui: cannot start the live view (%s); printing a snapshot' % safe(type(exc).__name__))
+        sys.stdout.write(fleet_ui.snapshot(fleet_ui.FileSource(path), time.time(), 100, grouping))
+        return EXIT_OK
+
+
+def cmd_fleet(args):
+    """The map the autopilot loop keeps: read-only, from this machine's
+    copy, and usable outside a pane. Stale or missing is said, not hidden."""
+    if getattr(args, 'fleet_verb', None) == 'ui':
+        return cmd_fleet_ui(args)
+    fleet, age = load_fleet_report().read_fleet()
+    if fleet is None:
+        raise Stop(EXIT_NONE, 'no map on this machine: no `herdr-peers autopilot --loop` has '
+                   'reported here yet')
+    stale = age > FLEET_STALE
+    if args.json:
+        print(json.dumps(dict(fleet, age_seconds=age, stale=stale), sort_keys=True, indent=1))
+        return EXIT_TIMEOUT if stale else EXIT_OK
+    print('map as of %s (synced %ds ago%s)' % (safe(fleet.get('generated_at')), age,
+                                              '; STALE: no autopilot loop is syncing this '
+                                              'machine' if stale else ''))
+    for machine in fleet.get('machines') or []:
+        if not isinstance(machine, dict):
+            continue
+        print('%s  %s  agents: %s, plans: %s' % (
+            safe(machine.get('machine')), safe(machine.get('label') or ''),
+            safe(machine.get('agents_state')), safe(machine.get('plans_state'))))
+        for plan in machine.get('plans') or []:
+            done, total = plan.get('tasks_done'), plan.get('tasks_total')
+            current = plan.get('current_task') or {}
+            print('  plan  %-40s %-10s lead %s%s%s%s' % (
+                safe(plan.get('plan'))[:40], safe(plan.get('class')), safe(plan.get('lead') or '-'),
+                ('  %s/%s tasks' % (done, total)) if isinstance(done, int) and isinstance(total, int) else '',
+                ('  now: %s' % safe(current.get('title') or current.get('id'))[:60])
+                if (current.get('title') or current.get('id')) else '',
+                ('  [%s]' % safe(plan['situation'])) if plan.get('situation') else ''))
+        for agent in machine.get('agents') or []:
+            roles = ', '.join('%s of %s' % (safe(r.get('role')), safe(r.get('plan')))
+                              for r in agent.get('plans') or [])
+            print('  agent %-10s %-8s %-8s %s%s%s%s' % (
+                safe(agent.get('pane')), safe(agent.get('kind') or '-'), safe(agent.get('state') or '-'),
+                safe(agent.get('repo_root') or agent.get('cwd') or '-'),
+                (' @' + safe(agent['branch'])) if agent.get('branch') else '',
+                ('  (%s)' % roles) if roles else '',
+                ('  "%s"' % safe(agent['title'])[:60]) if agent.get('title') else ''))
+    return EXIT_TIMEOUT if stale else EXIT_OK
+
+
 # ---------------------------------------------------------------- autopilot
+
+# The one command autopilot runs that is not `herdr`: the machine report over
+# a saved machine's own SSH target. Fixed argv; the target must match.
+SSH_ARGV = ['ssh', '-o', 'BatchMode=yes', '-o', 'ConnectTimeout=8']
+SSH_TARGET_RE = re.compile(r'[A-Za-z0-9][A-Za-z0-9._@-]{0,127}')
+SSH_TIMEOUT = 25
+MAX_REPORT_BYTES = 2 * 1024 * 1024
+NOTIFY_TIMEOUT = 20
+NOTIFY_BUDGET = 20       # seconds of notify commands per pass, in all
+NOTIFY_QUEUE_MAX = 200
+NOTIFY_ENV = ('PATH', 'HOME', 'USER', 'LOGNAME', 'LANG', 'LC_ALL', 'LC_CTYPE', 'TMPDIR', 'TZ',
+              'XDG_CONFIG_HOME', 'XDG_DATA_HOME', 'XDG_STATE_HOME', 'XDG_CACHE_HOME')
+
+
+def notify_timeout():
+    """Seconds one notify command may take, and the notify budget of a pass
+    (HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT, 1-60, default 20)."""
+    try:
+        value = float(os.environ.get('HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT') or NOTIFY_TIMEOUT)
+    except ValueError:
+        return NOTIFY_TIMEOUT
+    return value if 1 <= value <= 60 else NOTIFY_TIMEOUT
+
+
+def notify_env(keep=()):
+    """The notify command's environment: the basics, plus the variables the
+    human named with --notify-env. Tokens and keys are not passed by default."""
+    return dict((k, v) for k, v in os.environ.items() if k in NOTIFY_ENV or k in keep)
+
+
+def bounded_run(argv, data, limit, timeout, env=None):
+    """Run argv with `data` on standard input, in a new session; read at most
+    `limit` bytes of standard output (0: discard it); kill the whole process
+    group at `timeout` seconds or when the output exceeds the limit. Returns
+    (exit status or None, output or None)."""
+    import select
+    import threading
+    try:
+        proc = subprocess.Popen(argv, stdin=subprocess.PIPE,
+                                stdout=subprocess.PIPE if limit else subprocess.DEVNULL,
+                                stderr=subprocess.DEVNULL, start_new_session=True, env=env)
+    except OSError:
+        return None, None
+
+    def feed():
+        try:
+            proc.stdin.write(data)
+        except OSError:
+            pass
+        finally:
+            try:
+                proc.stdin.close()
+            except OSError:
+                pass
+    writer = threading.Thread(target=feed)
+    writer.daemon = True
+    writer.start()
+    deadline = time.time() + timeout
+    chunks, size, ok = [], 0, True
+    try:
+        if limit:
+            fd = proc.stdout.fileno()
+            while True:
+                left = deadline - time.time()
+                if left <= 0:
+                    ok = False
+                    break
+                ready, _, _ = select.select([fd], [], [], min(left, 1.0))
+                if not ready:
+                    continue
+                chunk = os.read(fd, 65536)
+                if not chunk:
+                    break
+                size += len(chunk)
+                if size > limit:
+                    ok = False
+                    break
+                chunks.append(chunk)
+        try:
+            rc = proc.wait(timeout=max(0.1, deadline - time.time()) if ok else 0.1)
+        except subprocess.TimeoutExpired:
+            ok, rc = False, None
+    finally:
+        if proc.poll() is None:
+            try:
+                os.killpg(proc.pid, signal.SIGKILL)
+            except OSError:
+                pass
+            proc.wait()
+        if proc.stdout is not None:
+            proc.stdout.close()
+    return (rc if ok else None), (b''.join(chunks) if ok and limit else None)
+
+
+def ssh_timeout():
+    """Seconds one machine report may take (HERDR_PEERS_AUTOPILOT_SSH_TIMEOUT, 1-120)."""
+    try:
+        value = float(os.environ.get('HERDR_PEERS_AUTOPILOT_SSH_TIMEOUT') or SSH_TIMEOUT)
+    except ValueError:
+        return SSH_TIMEOUT
+    return value if 1 <= value <= 120 else SSH_TIMEOUT
+FLEET_STALE = 900  # seconds after which a machine's copy of the map is called stale
+
 
 class AutopilotIO(object):
     """Herdr and the record writer, as the autopilot loop needs them."""
 
-    def __init__(self, store, pane, terminal, scope, quiet=False):
+    def __init__(self, store, pane, terminal, scope, quiet=False, notify=None, notify_keep=()):
         self.store, self.pane, self.terminal, self.scope = store, pane, terminal, scope
         self.quiet = quiet
         self.self_machine = None
+        self.notify = notify        # argv of the human's notify command, or None
+        self.notify_failed = False
+        self.notify_keep = tuple(notify_keep)
+        self.notify_queue = []
+        self.saved = {}             # machine id -> {'label', 'target'} (enabled machines)
+        self.report_source = None
+        # A foreground autopilot runs in its own pane and never keys it. A
+        # background one has no pane: the pane it was started from is an
+        # ordinary agent pane, watched like any other.
+        self.skip_own = True
 
     def sources(self):
-        out = ['local'] + [m['id'] for m in enabled_machines()]
+        machines = enabled_machines()
+        self.saved = dict((m['id'], {'label': m.get('label'), 'target': m.get('target')})
+                          for m in machines)
+        out = ['local'] + [m['id'] for m in machines]
         if self.scope is not None:
             out = [m for m in out if any(s[0] == m for s in self.scope)]
         return [m for m in out if m != self.self_machine]
@@ -2873,11 +3172,14 @@ class AutopilotIO(object):
             pane = a.get('pane_id') if isinstance(a, dict) else None
             if not (isinstance(pane, str) and re.fullmatch(PANE_RE, pane)):
                 continue
-            if not in_scope((machine, pane), self.scope):
-                continue
-            rows.append({'pane': pane, 'state': a.get('agent_status'), 'agent': kind_of(a),
+            rows.append({'pane': pane, 'in_scope': in_scope((machine, pane), self.scope),
+                         'state': a.get('agent_status'), 'agent': kind_of(a),
+                         'cwd': a.get('cwd') if isinstance(a.get('cwd'), str) else None,
+                         'title': a.get('terminal_title_stripped')
+                         if isinstance(a.get('terminal_title_stripped'), str) else None,
                          'seq': a.get('state_change_seq'), 'turn': a.get('completion_seq'),
-                         'you': machine == 'local' and pane == self.pane})
+                         'you': self.skip_own and machine == 'local' and pane == self.pane and
+                         (not self.terminal or a.get('terminal_id') in (None, self.terminal))})
         return rows
 
     def read(self, machine, pane):
@@ -2901,49 +3203,393 @@ class AutopilotIO(object):
     def warn(self, addr, exc):
         warn('autopilot: skipped %s this pass (%s)' % (addr, safe(type(exc).__name__)))
 
-    def record(self, addr, kind, choice, outcome, dry_run):
+    # -- the plan loop (autopilot --loop) -----------------------------------
+    def label(self, machine):
+        label = (self.saved.get(machine) or {}).get('label')
+        return safe(label)[:80] if isinstance(label, str) else None
+
+    def identity(self):
+        """Where the daemon runs, for readers of the map on other machines."""
+        return {'pane': self.pane, 'local_is': self.self_machine,
+                'server': state_key(self.store.server_id)[:24]}
+
+    def plans(self, machine, panes, fleet_text):
+        """(state, report) for one machine: `ok` with a validated plans-v1
+        report, `unknown` (no answer this time), `unsupported` (no python3
+        there) or `bad_target` (a saved target this helper will not pass to
+        ssh). The local machine is read in-process; another machine runs the
+        same module, sent on standard input over its saved SSH target."""
+        fleet_report = load_fleet_report()
+        if machine == 'local':
+            report = fleet_report.report(panes, servers=[os.path.basename(self.store.state_dir)])
+            if fleet_text:
+                report['fleet'] = fleet_report.store_fleet(fleet_report.state_root(), fleet_text)
+            return ('ok' if report['state'] == 'ok' else 'unknown'), report
+        target = (self.saved.get(machine) or {}).get('target')
+        if not isinstance(target, str) or not SSH_TARGET_RE.fullmatch(target):
+            return 'bad_target', None
+        if self.report_source is None:
+            with open(fleet_report.__file__, 'r', encoding='utf-8') as fh:
+                self.report_source = fh.read()
+        script = self.report_source
+        for name, value in (('PANES_B64', json.dumps(panes)), ('FLEET_B64', fleet_text)):
+            line = '%s = None  # replaced by the daemon' % name
+            if value is None or line not in script:
+                continue
+            encoded = base64.b64encode(value.encode('utf-8')).decode('ascii')
+            script = script.replace(line, "%s = '%s'  #" % (name, encoded), 1)
+        rc, out = bounded_run(SSH_ARGV + ['--', target, 'python3', '-'], script.encode('utf-8'),
+                              MAX_REPORT_BYTES, ssh_timeout())
+        if rc == 127:
+            return 'unsupported', None
+        if rc != 0 or out is None:
+            return 'unknown', None
+        try:
+            report = json.loads(out.decode('utf-8'))
+        except (ValueError, UnicodeDecodeError, RecursionError):
+            return 'unknown', None
+        if not fleet_report.valid_report(report) or report['state'] != 'ok':
+            return 'unknown', None
+        return 'ok', report
+
+    def load_fleet(self):
+        """This machine's last map, or None."""
+        return load_fleet_report().read_fleet()[0]
+
+    def save_fleet(self, text):
+        """Keep this machine's copy of the map current (see `plans`)."""
+        if text:
+            fleet_report = load_fleet_report()
+            fleet_report.store_fleet(fleet_report.state_root(), text)
+
+    def event(self, event, dry_run):
+        """Tell the developer through the command they gave with --notify:
+        one JSON object on its standard input, no shell, a timeout. A failure
+        is recorded once and never stops the pass."""
+        if not self.notify:
+            return
+        event = dict(event, at=now_iso())
+        if not self.quiet:
+            print('%s %s notify %s %s' % (now_iso(), 'would' if dry_run else 'did',
+                                         safe(event['event']), safe(event['plan'])))
+            sys.stdout.flush()
+        if dry_run:
+            return
+        if len(self.notify_queue) < NOTIFY_QUEUE_MAX:
+            self.notify_queue.append(event)
+
+    def flush_events(self):
+        """Run the notify command for queued events within this pass's budget
+        (NOTIFY_BUDGET seconds in all); what does not fit waits for the next
+        pass. Each run is its own process group, killed whole on timeout, with
+        a minimal environment."""
+        deadline = time.time() + notify_timeout()
+        while self.notify_queue and self.notify:
+            left = deadline - time.time()
+            if left <= 0.5:
+                return
+            event = self.notify_queue.pop(0)
+            rc, _out = bounded_run(self.notify, (json.dumps(event, sort_keys=True) + '\n').encode('utf-8'),
+                                   0, min(notify_timeout(), left), env=notify_env(self.notify_keep))
+            self.note_notify(rc != 0)
+
+    def note_notify(self, failed):
+        if failed and not self.notify_failed:
+            self.notify_failed = True
+            self.store.append(make_record('left', 'autopilot', new_ulid(), 'local:%s' % self.pane,
+                                          'local:%s' % self.pane, reason='notify_failed',
+                                          note='the notify command failed or timed out'))
+
+    def record(self, addr, kind, choice, outcome, dry_run, plan=None):
         note = ' '.join(filter(None, [
             'keys=%s' % ','.join(choice.keys) if choice.keys else None,
             'option=%d' % choice.option if choice.option is not None else None,
             'action=%s' % choice.action, 'dry_run' if dry_run else None]))
         self.store.append(make_record(outcome, 'autopilot', new_ulid(), addr,
                                       'local:%s' % self.pane, kind=kind, reason=choice.cls,
-                                      note=note))
+                                      note=note, plan=plan))
         if not self.quiet:
             print('%s %s %s %s %s' % (now_iso(), 'would' if dry_run else 'did', outcome,
                                       addr, safe(note + ' class=' + choice.cls)))
             sys.stdout.flush()
 
 
+AUTOPILOT_LOG_CAP = 1024 * 1024  # autopilot.out rotates to autopilot.out.1 past this
+AUTOPILOT_START_WAIT = 5.0      # `start` waits this long for the daemon to hold the lock
+AUTOPILOT_STOP_WAIT = 10.0      # `stop` waits this long for it to exit
+
+
 def autopilot_paths(store):
     return os.path.join(store.dir, 'autopilot.lock'), os.path.join(store.dir, 'autopilot.pid')
+
+
+def autopilot_files(store):
+    """The background log and the options file, next to the pid file."""
+    return os.path.join(store.dir, 'autopilot.out'), os.path.join(store.dir, 'autopilot.json')
+
+
+def autopilot_lock_held(store):
+    """True while an autopilot holds this server's lock."""
+    lock_path, _ = autopilot_paths(store)
+    try:
+        fd = os.open(lock_path, os.O_RDWR | os.O_CREAT | NOFOLLOW, 0o600)
+    except OSError:
+        return False
+    try:
+        fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+    except OSError:
+        return True
+    else:
+        fcntl.flock(fd, fcntl.LOCK_UN)
+        return False
+    finally:
+        os.close(fd)
 
 
 def autopilot_pid(store):
     """The pid of the autopilot running on this server, or None. The lock is
     the truth: a pid file left by a dead autopilot may name another process
     by now, and `stop` must never signal that one."""
-    lock_path, pid_path = autopilot_paths(store)
-    try:
-        fd = os.open(lock_path, os.O_RDWR | os.O_CREAT | NOFOLLOW, 0o600)
-    except OSError:
-        return None
-    try:
-        fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-    except OSError:
-        held = True
-    else:
-        held = False
-        fcntl.flock(fd, fcntl.LOCK_UN)
-    finally:
-        os.close(fd)
-    if not held:
+    _, pid_path = autopilot_paths(store)
+    if not autopilot_lock_held(store):
         return None
     try:
         with open(pid_path, 'r', encoding='utf-8') as fh:
             return int(fh.read().strip())
     except (OSError, ValueError):
         return None
+
+
+def open_autopilot_log(store):
+    """Open autopilot.out for appending (0600, never through a symlink),
+    rotating it to autopilot.out.1 once it reaches AUTOPILOT_LOG_CAP."""
+    path, _ = autopilot_files(store)
+    try:
+        st = os.lstat(path)
+        if stat.S_ISREG(st.st_mode) and st.st_size >= AUTOPILOT_LOG_CAP:
+            os.replace(path, path + '.1')
+    except OSError:
+        pass
+    try:
+        fd = os.open(path, os.O_WRONLY | os.O_APPEND | os.O_CREAT | NOFOLLOW, 0o600)
+    except OSError as exc:
+        raise Stop(EXIT_POLICY, 'cannot open the autopilot log %s (%s); a symlinked or '
+                   'unwritable file is refused' % (path, exc.strerror))
+    if not stat.S_ISREG(os.fstat(fd).st_mode):
+        os.close(fd)
+        raise Stop(EXIT_POLICY, 'the autopilot log %s is not a regular file' % path)
+    os.fchmod(fd, 0o600)
+    return fd
+
+
+def rotate_autopilot_output(store):
+    """In the background daemon: once the log (fd 1) is past the cap, rotate
+    it and point stdout and stderr at the fresh file."""
+    try:
+        if os.fstat(1).st_size < AUTOPILOT_LOG_CAP:
+            return
+    except OSError:
+        return
+    sys.stdout.flush()
+    sys.stderr.flush()
+    fd = open_autopilot_log(store)
+    os.dup2(fd, 1)
+    os.dup2(fd, 2)
+    os.close(fd)
+
+
+def autopilot_option_argv(opts):
+    """The command-line form of the options a daemon was started with."""
+    argv = ['--interval', str(opts.get('interval'))]
+    for flag in ('dry_run', 'no_nudge', 'catch_up'):
+        if opts.get(flag):
+            argv.append('--' + flag.replace('_', '-'))
+    for addr in opts.get('exclude') or []:
+        argv += ['--exclude', addr]
+    if opts.get('scope'):
+        argv += ['--scope', opts['scope']]
+    if opts.get('loop'):
+        argv.append('--loop')
+    if opts.get('notify'):
+        argv += ['--notify', opts['notify']]
+    for name in opts.get('notify_env') or []:
+        argv += ['--notify-env', name]
+    return argv
+
+
+def autopilot_options(store, pid):
+    """The options file of the running autopilot, or None if it is not its own."""
+    _, opts_path = autopilot_files(store)
+    try:
+        fd = os.open(opts_path, os.O_RDONLY | NOFOLLOW)
+        with os.fdopen(fd, 'r', encoding='utf-8') as fh:
+            data = json.loads(fh.read(65536))
+    except (OSError, ValueError):
+        return None
+    if not isinstance(data, dict) or data.get('pid') != pid or \
+            not isinstance(data.get('options'), dict):
+        return None
+    return data
+
+
+def autopilot_status(store):
+    pid = autopilot_pid(store)
+    log_path, _ = autopilot_files(store)
+    if not pid:
+        print('autopilot: not running (start it with `herdr-peers autopilot start`)')
+    else:
+        print('autopilot: running (pid %d)' % pid)
+        info = autopilot_options(store, pid)
+        if info:
+            opts = info['options']
+            print('  mode: %s, since %s, started from pane %s' % (
+                safe(info.get('mode')), safe(info.get('since')), safe(info.get('pane'))))
+            print('  options: %s' % safe(' '.join(autopilot_option_argv(opts))))
+            if info.get('mode') == 'background':
+                print('  log: %s' % log_path)
+    for rec in [r for r in store.records() if r.get('role') == 'autopilot'][-10:]:
+        print('%s %s %s %s %s' % (safe(rec.get('ts')), safe(rec.get('state')),
+                                  safe(rec.get('target')), safe(rec.get('reason')),
+                                  safe(rec.get('note'))))
+    return EXIT_OK
+
+
+def autopilot_stop(store):
+    pid = autopilot_pid(store)
+    if not pid:
+        print('autopilot: not running')
+        return EXIT_OK
+    os.kill(pid, signal.SIGTERM)
+    print('autopilot: stop sent to pid %d' % pid)
+    sys.stdout.flush()
+    deadline = time.monotonic() + AUTOPILOT_STOP_WAIT
+    while time.monotonic() < deadline:
+        if not autopilot_lock_held(store):
+            print('autopilot: stopped (pid %d)' % pid)
+            return EXIT_OK
+        time.sleep(0.1)
+    raise Stop(EXIT_TIMEOUT, 'autopilot (pid %d) is still running %ds after the stop; check '
+               '`herdr-peers autopilot status`' % (pid, AUTOPILOT_STOP_WAIT))
+
+
+def log_tail(path, count=20):
+    """The last `count` lines of a log, each through safe(); '' if unreadable."""
+    try:
+        fd = os.open(path, os.O_RDONLY | NOFOLLOW)
+        with os.fdopen(fd, 'rb') as fh:
+            fh.seek(0, os.SEEK_END)
+            fh.seek(max(0, fh.tell() - 2 * AUTOPILOT_LOG_CAP))
+            text = fh.read().decode('utf-8', 'replace')
+    except OSError:
+        return ''
+    lines = text.splitlines()
+    return '\n'.join(safe(l) for l in (lines[-count:] if count > 0 else []))
+
+
+AUTOPILOT_FOLLOW_POLL = 0.25  # `logs -f` looks for new lines this often
+
+
+def autopilot_logs(store, count, follow):
+    """Print the background log's last lines, and with --follow every line
+    written after them, across rotation and truncation. Read-only."""
+    path, _ = autopilot_files(store)
+    if not autopilot_pid(store):
+        sys.stderr.write('autopilot: not running\n')
+    tail = log_tail(path, count)
+    if tail:
+        print(tail)
+    elif not os.path.exists(path):
+        sys.stderr.write('autopilot: no log yet at %s\n' % path)
+    sys.stdout.flush()
+    if not follow:
+        return EXIT_OK
+
+    def opened(at_end):
+        try:
+            fd = os.open(path, os.O_RDONLY | NOFOLLOW)
+        except OSError:
+            return None, None
+        fh = os.fdopen(fd, 'rb')
+        if at_end:
+            fh.seek(0, os.SEEK_END)
+        return fh, os.fstat(fh.fileno()).st_ino
+
+    def emit(data, pending):
+        pending += data
+        *done, pending = pending.split(b'\n')
+        for line in done:
+            print(safe(line.decode('utf-8', 'replace')))
+        sys.stdout.flush()
+        return pending
+
+    fh, ino = opened(at_end=True)
+    pending = b''
+    try:
+        while True:
+            data = fh.read() if fh else b''
+            if data:
+                pending = emit(data, pending)
+                continue
+            try:
+                st = os.lstat(path)
+            except OSError:
+                st = None
+            if fh is None:
+                if st is not None:
+                    fh, ino = opened(at_end=False)
+            elif st is None or st.st_ino != ino:
+                pending = emit(fh.read(), pending)  # the rest of the rotated file
+                fh.close()
+                fh, ino = opened(at_end=False) if st is not None else (None, None)
+            elif st.st_size < fh.tell():
+                fh.seek(0)  # truncated in place
+            time.sleep(AUTOPILOT_FOLLOW_POLL)
+    except KeyboardInterrupt:
+        return EXIT_OK
+    finally:
+        if fh:
+            fh.close()
+
+
+def autopilot_start(args, store, opts):
+    """Spawn this very helper as a detached `autopilot run --detached`."""
+    if autopilot_lock_held(store):
+        raise Stop(EXIT_POLICY, 'autopilot is already running on this server '
+                   '(`herdr-peers autopilot status`, `herdr-peers autopilot stop`)')
+    log_path, _ = autopilot_files(store)
+    fd = open_autopilot_log(store)
+    os.write(fd, ('%s autopilot start requested\n' % now_iso()).encode('utf-8'))
+    env = dict(os.environ)
+    if env.get('HERDR_PEERS_LOG'):  # the daemon runs from the state directory
+        env['HERDR_PEERS_LOG'] = os.path.abspath(env['HERDR_PEERS_LOG'])
+    argv = [sys.executable, '-B', os.path.abspath(__file__), 'autopilot', 'run', '--detached']
+    argv += autopilot_option_argv(opts)
+    try:
+        child = subprocess.Popen(argv, stdin=subprocess.DEVNULL, stdout=fd, stderr=fd,
+                                 cwd=store.dir, env=env, close_fds=True,
+                                 start_new_session=True)
+    finally:
+        os.close(fd)
+    deadline = time.monotonic() + AUTOPILOT_START_WAIT
+    while True:
+        if autopilot_pid(store) == child.pid:
+            print('autopilot: started in the background (pid %d)' % child.pid)
+            print('  options: %s' % safe(' '.join(autopilot_option_argv(opts))))
+            print('  log: %s' % log_path)
+            print('  status: `herdr-peers autopilot status`; stop: `herdr-peers autopilot stop`')
+            return EXIT_OK
+        code = child.poll()
+        if code is not None:
+            tail = log_tail(log_path)
+            if tail:
+                sys.stderr.write('--- %s (tail) ---\n%s\n' % (log_path, tail))
+            raise Stop(EXIT_HERDR, 'autopilot did not start (it exited with %d); see %s'
+                       % (code, log_path))
+        if time.monotonic() >= deadline:
+            raise Stop(EXIT_TIMEOUT, 'autopilot (pid %d) did not confirm within %ds; check '
+                       '`herdr-peers autopilot status` and %s'
+                       % (child.pid, AUTOPILOT_START_WAIT, log_path))
+        time.sleep(0.1)
 
 
 def cmd_autopilot(args):
@@ -2954,23 +3600,20 @@ def cmd_autopilot(args):
     import autopilot
     store = Store()
     store.ensure()
-    verb = args.autopilot_verb or 'run'
+    verb = {'on': 'start', 'off': 'stop'}.get(args.autopilot_verb, args.autopilot_verb or 'run')
     if verb == 'status':
-        pid = autopilot_pid(store)
-        print('autopilot: %s' % ('running (pid %d)' % pid if pid else 'not running'))
-        for rec in [r for r in store.records() if r.get('role') == 'autopilot'][-10:]:
-            print('%s %s %s %s %s' % (safe(rec.get('ts')), safe(rec.get('state')),
-                                      safe(rec.get('target')), safe(rec.get('reason')),
-                                      safe(rec.get('note'))))
-        return EXIT_OK
+        return autopilot_status(store)
     if verb == 'stop':
-        pid = autopilot_pid(store)
-        if not pid:
-            print('autopilot: not running')
-            return EXIT_OK
-        os.kill(pid, signal.SIGTERM)
-        print('autopilot: stop sent to pid %d' % pid)
-        return EXIT_OK
+        return autopilot_stop(store)
+    if verb == 'logs':
+        if args.lines is not None and args.lines < 0:
+            raise Stop(EXIT_USAGE, '--lines is at least 0')
+        return autopilot_logs(store, 50 if args.lines is None else args.lines, args.follow)
+    if args.follow or args.lines is not None:
+        raise Stop(EXIT_USAGE, '--follow and --lines are for `autopilot logs`')
+    if verb == 'start' and (args.once or args.passes is not None or args.detached):
+        raise Stop(EXIT_USAGE, 'autopilot start runs until stopped; --once and --passes are '
+                   'for the foreground run')
     interval = args.interval if args.interval is not None else autopilot.DEFAULT_INTERVAL
     passes = 1 if args.once else args.passes
     if passes is not None and passes < 1:
@@ -2981,6 +3624,12 @@ def cmd_autopilot(args):
         raise Stop(EXIT_USAGE, 'HERDR_PEERS_AUTOPILOT_CONFIRM must be a number of seconds')
     if not 0 <= confirm <= 30:
         raise Stop(EXIT_USAGE, 'HERDR_PEERS_AUTOPILOT_CONFIRM must be between 0 and 30 seconds')
+    try:
+        grace = float(os.environ.get('HERDR_PEERS_AUTOPILOT_GRACE') or autopilot.LEAD_GRACE)
+    except ValueError:
+        raise Stop(EXIT_USAGE, 'HERDR_PEERS_AUTOPILOT_GRACE must be a number of seconds')
+    if not 0 <= grace <= 86400:
+        raise Stop(EXIT_USAGE, 'HERDR_PEERS_AUTOPILOT_GRACE must be between 0 and 86400 seconds')
     if interval < autopilot.MIN_INTERVAL and passes is None:
         raise Stop(EXIT_USAGE, '--interval is at least %d seconds' % autopilot.MIN_INTERVAL)
     exclude = set()
@@ -2989,34 +3638,79 @@ def cmd_autopilot(args):
         if addr is None:
             raise Stop(EXIT_USAGE, '--exclude takes <machine_id>:<pane_id>')
         exclude.add(fmt_address(resolve_machine(addr)))
+    # The only call that needs the starting pane alive; the loop never makes it.
     current = herdr_json(['pane', 'current', '--current'], timeout=8)
     me = ((current.get('result') or {}).get('pane') or {})
     if not (isinstance(me.get('pane_id'), str) and re.fullmatch(PANE_RE, me['pane_id'])):
         raise Stop(EXIT_ENV, 'cannot tell which pane this is; run autopilot inside a Herdr pane')
-    io = AutopilotIO(store, me.get('pane_id'), me.get('terminal_id'), scope_from(args))
-    lock_path, pid_path = autopilot_paths(store)
-    fd = os.open(lock_path, os.O_RDWR | os.O_CREAT | NOFOLLOW, 0o600)
-    for attempt in (1, 2):
+    notify = None
+    if args.notify is not None:
+        if not args.loop:
+            raise Stop(EXIT_USAGE, '--notify needs --loop: it reports what the plan loop finds')
         try:
-            fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
-            break
-        except OSError:
-            if attempt == 1:
-                time.sleep(0.3)  # a `status` or `stop` probing the lock holds it for an instant
-                continue
+            notify = shlex.split(args.notify)
+        except ValueError:
+            raise Stop(EXIT_USAGE, '--notify: unbalanced quotes in the command')
+        if not notify or not shutil.which(notify[0]):
+            raise Stop(EXIT_USAGE, '--notify needs a command whose program exists '
+                       '(it is run without a shell)')
+    keep = []
+    for name in args.notify_env or []:
+        if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,63}', name):
+            raise Stop(EXIT_USAGE, '--notify-env takes a variable name')
+        if not args.notify:
+            raise Stop(EXIT_USAGE, '--notify-env needs --notify')
+        keep.append(name)
+    opts = {'interval': interval, 'dry_run': bool(args.dry_run),
+            'no_nudge': bool(args.no_nudge), 'catch_up': bool(args.catch_up),
+            'exclude': sorted(exclude), 'scope': args.scope or None,
+            'loop': bool(args.loop), 'notify': args.notify, 'notify_env': keep}
+    if verb == 'start':
+        return autopilot_start(args, store, opts)
+    io = AutopilotIO(store, me.get('pane_id'), me.get('terminal_id'), scope_from(args),
+                     notify=notify, notify_keep=keep)
+    io.skip_own = not args.detached
+    lock_path, pid_path = autopilot_paths(store)
+    _, opts_path = autopilot_files(store)
+    # A bounded dry run sends nothing and keeps no state: it may run beside
+    # the developer's own autopilot, so it takes no lock and writes no pid.
+    probe = args.dry_run and passes is not None and not args.detached
+    fd = None
+    if not probe:
+        fd = os.open(lock_path, os.O_RDWR | os.O_CREAT | NOFOLLOW, 0o600)
+        for attempt in (1, 2):
+            try:
+                fcntl.flock(fd, fcntl.LOCK_EX | fcntl.LOCK_NB)
+                break
+            except OSError:
+                if attempt == 1:
+                    time.sleep(0.3)  # a `status` or `stop` probing the lock holds it for an instant
+                    continue
+                os.close(fd)
+                raise Stop(EXIT_POLICY, 'autopilot is already running on this server '
+                           '(`herdr-peers autopilot status`, `herdr-peers autopilot stop`)')
+        try:
+            write_private(pid_path, '%d\n' % os.getpid())  # at once: `stop` reads it under the lock
+            write_private(opts_path, json.dumps({
+                'pid': os.getpid(), 'since': now_iso(),
+                'mode': 'background' if args.detached else 'foreground',
+                'pane': 'local:%s' % me['pane_id'], 'options': opts}, sort_keys=True) + '\n')
+        except Stop:
+            fcntl.flock(fd, fcntl.LOCK_UN)
             os.close(fd)
-            raise Stop(EXIT_POLICY, 'autopilot is already running on this server '
-                       '(`herdr-peers autopilot status`, `herdr-peers autopilot stop`)')
-    write_private(pid_path, '%d\n' % os.getpid())  # at once: `stop` reads it while the lock is held
+            raise
 
-    class Halt(Exception):
+    class Halt(BaseException):
+        # Not an Exception: a pass catches Exception per pane and per machine,
+        # and a stop that lands mid-pass must end the loop, not one pane.
         pass
 
     def halt(_signum, _frame):
         raise Halt()
 
     loop = autopilot.Autopilot(io, dry_run=args.dry_run, nudge=not args.no_nudge,
-                               catch_up=args.catch_up, exclude=exclude, confirm=confirm)
+                               catch_up=args.catch_up, exclude=exclude, confirm=confirm,
+                               loop=args.loop, grace=grace)
     previous = signal.signal(signal.SIGTERM, halt)
     try:
         if passes is None:
@@ -3026,8 +3720,16 @@ def cmd_autopilot(args):
             sys.stdout.flush()
         done = 0
         while True:
+            if args.detached:
+                rotate_autopilot_output(store)
             try:
-                loop.run_pass()
+                summary = loop.run_pass()
+                # Alive, not noisy: a line when something happened, else every 10th pass.
+                if summary['actions'] or summary['pass'] % 10 == 1:
+                    print('%s pass %d: %d machines, %d agents, %d actions, %.1f s' % (
+                        now_iso(), summary['pass'], summary['machines'], summary['agents'],
+                        summary['actions'], summary['seconds']))
+                    sys.stdout.flush()
             except (Stop, OSError) as exc:
                 if passes is not None:
                     raise
@@ -3042,12 +3744,14 @@ def cmd_autopilot(args):
         print('autopilot: stopped')
     finally:
         signal.signal(signal.SIGTERM, previous)
-        try:
-            os.unlink(pid_path)
-        except OSError:
-            pass
-        fcntl.flock(fd, fcntl.LOCK_UN)
-        os.close(fd)
+        if fd is not None:
+            for path in (opts_path, pid_path):
+                try:
+                    os.unlink(path)
+                except OSError:
+                    pass
+            fcntl.flock(fd, fcntl.LOCK_UN)
+            os.close(fd)
     if passes is not None:
         print('autopilot: %d pass(es), %d action(s)%s' % (
             passes, loop.actions, ' (dry run: nothing was sent)' if args.dry_run else ''))
@@ -3234,8 +3938,15 @@ def build_parser():
     ap = sub.add_parser('autopilot', help='answer every waiting agent on every enabled machine: '
                         'accept the recommended option, continue an agent that stopped to ask '
                         '(started by a human only)')
-    ap.add_argument('autopilot_verb', nargs='?', choices=['run', 'stop', 'status'],
-                    help='run (default), stop the running autopilot, or show its last actions')
+    ap.add_argument('autopilot_verb', nargs='?',
+                    choices=['run', 'start', 'on', 'stop', 'off', 'status', 'logs'],
+                    help='run in this pane (default); start (on) in the background; stop (off) '
+                    'the running autopilot; status: whether it runs, how, and its last actions; '
+                    'logs: the background log')
+    ap.add_argument('--lines', type=int, help='logs: how many last lines (default 50)')
+    ap.add_argument('-f', '--follow', action='store_true',
+                    help='logs: keep printing new lines until Ctrl-C')
+    ap.add_argument('--detached', action='store_true', help=argparse.SUPPRESS)
     ap.add_argument('--once', action='store_true', help='one pass, then exit')
     ap.add_argument('--dry-run', action='store_true',
                     help='decide and record, send nothing')
@@ -3250,6 +3961,29 @@ def build_parser():
                     'started')
     ap.add_argument('--scope', help='allow-list: *, <machine>, <machine>:<workspace>, '
                     'comma-separated (default: every enabled machine)')
+    ap.add_argument('--loop', action='store_true',
+                    help='also keep every open plan running: ask the idle lead of a plan that '
+                    'is not finished to continue it, on every enabled machine')
+    ap.add_argument('--notify', metavar='COMMAND',
+                    help='with --loop: a command run (no shell) with a plan-event-v1 JSON object '
+                    'on standard input when a plan stalls, is blocked, loses its lead or completes')
+    ap.add_argument('--notify-env', action='append', metavar='NAME',
+                    help='with --notify: also pass this environment variable to the command '
+                    '(repeatable); by default it gets only PATH, HOME, the locale and XDG '
+                    'directories, never tokens or keys')
+    fl = sub.add_parser('fleet', help='every machine, agent, repository and plan the autopilot '
+                        'loop knows, from this machine\'s copy of its map (read-only)')
+    fl.add_argument('fleet_verb', nargs='?', choices=['ui'],
+                    help='ui: a live watcher of every agent and plan (read-only)')
+    fl.add_argument('--json', action='store_true', help='herdr-peers/fleet-v1 JSON')
+    fl.add_argument('--snapshot', action='store_true',
+                    help='with ui: draw the view once as text and exit')
+    fl.add_argument('--group', choices=['plan', 'repo', 'machine'],
+                    help='with ui: how agents are grouped first (default plan)')
+    fl.add_argument('--width', type=int, help='with ui --snapshot: columns (40-400)')
+    pl = sub.add_parser('plans', help='the plans led on this machine, with each plan\'s state '
+                        '(read-only; works outside a Herdr pane)')
+    pl.add_argument('--json', action='store_true', help='herdr-peers/plans-v1 JSON')
     for sp in (dt, da, dc, df, dp):
         sp.add_argument('--pane', help="this session's pane id (w1:p2); wins over HERDR_PANE_ID")
     dp.add_argument('--json', action='store_true', help='herdr-peers/panel-v1 JSON')
@@ -3259,7 +3993,8 @@ def build_parser():
 VERBS = {'ask': cmd_ask, 'reply': cmd_reply, 'check': cmd_check, 'wait': cmd_wait,
          'list': cmd_list, 'log': cmd_log, 'cancel': cmd_cancel, 'status': cmd_status,
          'lanes': cmd_lanes, 'notify': cmd_notify, 'lead': cmd_lead,
-         'debate': cmd_debate, 'autopilot': cmd_autopilot}
+         'debate': cmd_debate, 'autopilot': cmd_autopilot, 'plans': cmd_plans,
+         'fleet': cmd_fleet}
 
 
 def main(argv=None):

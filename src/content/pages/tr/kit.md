@@ -63,7 +63,7 @@ Onboarding akışının bir depoya katmanladığı yetenekler. Yedisi isteğe ba
 **Metodoloji tek başına çalışır. Eklentiler onu güçlendirir.** Her eklenti, Deep Work Plan skill'i içinde ince bir entegrasyon katmanıdır; kendi deposu, sürümü ve arayüz sürümü olan bir ürüne etiketle sabitlenir. Her ürün Deep Work Plan olmadan çalışır ve hiçbir eklenti zorunlu değildir.
 
 - **Deep Work Plan skill'i** — Planları oluşturur, yürütür, doğrular, sürdürür ve iyileştirir. Hiçbir eklenti gerektirmez.
-- **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v1.2.2`.
+- **[herdr](/tr/kit/herdr)** — Herhangi bir makinede Herdr panellerindeki eşler: tek bir yetkili yanıtla etkileşimli devretme. Sabitlenen sürüm `herdr-peers@v1.3.0`.
 - **[agentkit](/tr/kit/agentkit)** — Her terminal kodlama ajanı için tek bir ak komutu: devre dışı bırakılabilen varsayılan özerklik ve bir worktree içinde başsız devretme. Sabitlenen sürüm `coding-agents-kit@v1.2.0`.
 - **[devcontainer](/tr/kit/devcontainer)** — Tek bir şablondan her deponun kendi geliştirme konteyneri: ajanlar ak üzerinden, iki yönlü Herdr, SSH anahtarları yalnızca açıkça etkinleştirilirse. Sabitlenen sürüm `devcontainer-kit@v1.1.2`.
 - **[vim](/tr/kit/vim)** — Salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi içeren terminal düzenleyicisi. Sabitlenen sürüm `deepworkplan-vim@v1.0.1`.

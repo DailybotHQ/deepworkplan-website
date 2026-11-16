@@ -434,3 +434,10 @@ through the protocol.
 3. Autopilot records each action in the delegation log with
    `role: autopilot` (states `keyed`, `nudged`, `left`, `gave_up`); the
    record holds a screen class and key names, never screen text.
+4. The plan loop (`autopilot --loop`) reads lead records; it never writes
+   one, and it sends no lead notice. When a plan's lead is gone it sends a
+   listed successor a fixed `[autopilot]` prompt naming `lead takeover`
+   without `--reason`; that prompt is ordinary input (rule 1), and the
+   takeover it names is accepted or refused by §12 — the helper's own gone
+   check included — exactly as if the successor had decided it alone. A
+   prompt from autopilot never makes anyone a lead.

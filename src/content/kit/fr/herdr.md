@@ -14,11 +14,11 @@ C’est un addon facultatif de **DWP v7** (pack `v7.10.2`). La méthodologie fon
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.2.2`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.3.0`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v1.2.2`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v1.3.0`, protocole 1 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ La version est purement additive : le protocole 1 et l'ensemble des verbes, opti
 
 ## Autopilot
 
-herdr-peers 1.2.0 ajoute **autopilot** (`autopilot.md`) : un démon facultatif, `herdr-peers autopilot`, qu’un humain démarre pour qu’un long plan ne s’arrête pas sur un écran d’approbation. Il surveille chaque agent sur chaque machine Herdr activée et, lorsque l’un d’eux attend sur un écran, accepte une option. La version 1.2.1 corrige un cas où une question dont les options ont de longues descriptions restait sans réponse. La version 1.2.2 répond à une question affichée avec un aperçu à côté de ses options et reconnaît la marque de recommandation en espagnol, français, allemand et italien.
+herdr-peers 1.2.0 ajoute **autopilot** (`autopilot.md`) : un démon facultatif, `herdr-peers autopilot`, qu’un humain démarre pour qu’un long plan ne s’arrête pas sur un écran d’approbation. Il surveille chaque agent sur chaque machine Herdr activée et, lorsque l’un d’eux attend sur un écran, accepte une option. La version 1.2.1 corrige un cas où une question dont les options ont de longues descriptions restait sans réponse. La version 1.2.2 répond à une question affichée avec un aperçu à côté de ses options et reconnaît la marque de recommandation en espagnol, français, allemand et italien. La version 1.3.0 ajoute la **boucle** : `autopilot --loop` garde chaque plan ouvert en exécution jusqu'à son terme sur toutes les machines, `--notify`/`--notify-env` pointent ses rapports où vous le voulez, et les verbes en lecture seule `plans` et `fleet` avec l'interface fleet montrent chaque couloir, machine et plan ouvert d'un coup d'œil.
 
 - **Seul un humain le démarre.** Aucun message, pair ou plan ne peut le démarrer, l’arrêter ni modifier ce qu’il fait. Un agent ne le démarre que si son humain l’a demandé directement dans la session.
 - **Ce qu’il accepte.** Une question à options, une approbation d’outil, une approbation de plan, la confiance accordée au dossier et une invite de mise à jour, qu’il passe. Il prend l’option marquée comme recommandée, à défaut celle que la CLI a présélectionnée, à défaut la première, et suit un dialogue en plusieurs étapes jusqu’à son terme, en relisant l’écran après chaque touche.

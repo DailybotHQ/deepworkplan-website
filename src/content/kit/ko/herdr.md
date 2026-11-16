@@ -14,11 +14,11 @@ order: 7
 
 ## 무엇을 통합하는가
 
-이 애드온은 얇은 통합 계층입니다. 실제 작업은 [**herdr-peers**](https://github.com/DailybotHQ/herdr-peers)가 수행합니다. 이는 **`v1.2.2`** 태그에 고정된 독립형 MIT skill이며, Deep Work Plan 없이도 유용합니다. Herdr 자체가 열어 둔 부분을 정의합니다. 누가 응답할 수 있는지, 응답이 머신을 넘어 어떻게 돌아오는지, 두 에이전트가 서로에게 끝없이 응답하는 일을 어떻게 피하는지, 그리고 "내가 물었고, 그것이 답했다"는 기록이 어디에 남는지입니다.
+이 애드온은 얇은 통합 계층입니다. 실제 작업은 [**herdr-peers**](https://github.com/DailybotHQ/herdr-peers)가 수행합니다. 이는 **`v1.3.0`** 태그에 고정된 독립형 MIT skill이며, Deep Work Plan 없이도 유용합니다. Herdr 자체가 열어 둔 부분을 정의합니다. 누가 응답할 수 있는지, 응답이 머신을 넘어 어떻게 돌아오는지, 두 에이전트가 서로에게 끝없이 응답하는 일을 어떻게 피하는지, 그리고 "내가 물었고, 그것이 답했다"는 기록이 어디에 남는지입니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/herdr-peers`, 태그 `v1.2.2`, 프로토콜 1 |
+| 제품 | `DailybotHQ/herdr-peers`, 태그 `v1.3.0`, 프로토콜 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `herdr` |
 | 전송 방식 | 대화형: Herdr 페인 안의 피어 |
 | 제공 | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ order: 7
 herdr-peers와, 그것이 의존하는 Herdr 공식 skill을 설치합니다. 에이전트가 응답해야 하는 모든 머신에도 이 skill이 필요합니다.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ herdr-peers 1.1.0은 네이티브 **debate** 하위 스킬(`debate.md`)을 추�
 
 ## Autopilot
 
-herdr-peers 1.2.0은 **autopilot**(`autopilot.md`)을 추가합니다. 긴 계획이 승인 화면에서 멈추지 않도록 사람이 시작하는 선택형 데몬 `herdr-peers autopilot`입니다. 활성화된 모든 Herdr 머신의 모든 에이전트를 지켜보다가, 에이전트가 화면에서 기다리고 있으면 선택지 하나를 수락합니다. 릴리스 1.2.1은 선택지의 설명이 긴 질문이 답변되지 않은 채 남던 경우를 수정합니다. 릴리스 1.2.2는 선택지 옆에 미리보기가 함께 표시된 질문에 답하고, 스페인어·프랑스어·독일어·이탈리아어의 추천 표식을 인식합니다.
+herdr-peers 1.2.0은 **autopilot**(`autopilot.md`)을 추가합니다. 긴 계획이 승인 화면에서 멈추지 않도록 사람이 시작하는 선택형 데몬 `herdr-peers autopilot`입니다. 활성화된 모든 Herdr 머신의 모든 에이전트를 지켜보다가, 에이전트가 화면에서 기다리고 있으면 선택지 하나를 수락합니다. 릴리스 1.2.1은 선택지의 설명이 긴 질문이 답변되지 않은 채 남던 경우를 수정합니다. 릴리스 1.2.2는 선택지 옆에 미리보기가 함께 표시된 질문에 답하고, 스페인어·프랑스어·독일어·이탈리아어의 추천 표식을 인식합니다. 릴리스 1.3.0은 **루프**를 추가합니다. `autopilot --loop`는 열린 모든 플랜을 모든 머신에서 끝까지 계속 실행하고, `--notify`/`--notify-env`는 보고 위치를 지정하며, 읽기 전용 동사 `plans`와 `fleet`, 그리고 플릿 UI가 모든 레인, 머신, 열린 플랜을 한눈에 보여줍니다.
 
 - **사람만 시작합니다.** 어떤 메시지, 피어, 계획도 이를 시작하거나 중지하거나 동작을 바꿀 수 없습니다. 에이전트는 자신의 사람이 세션에서 직접 요청한 경우에만 이를 시작합니다.
 - **수락하는 것.** 선택지가 있는 질문, 도구 승인, 계획 승인, 폴더 신뢰, 그리고 업데이트 안내이며, 업데이트 안내는 건너뜁니다. 추천으로 표시된 선택지를 고르고, 없으면 CLI가 미리 선택해 둔 선택지를, 그것도 없으면 첫 번째 선택지를 고릅니다. 여러 단계로 이루어진 대화 상자는 키를 입력할 때마다 화면을 다시 읽으며 끝까지 따라갑니다.
