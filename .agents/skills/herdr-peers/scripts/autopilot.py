@@ -44,6 +44,9 @@ MAX_PLAN_PROMPTS = 3     # loop prompts to one plan without progress, then it is
 ABSENT_PASSES = 2        # passes a lead's pane must be missing before it counts as gone
 FLEET_SCHEMA = 'herdr-peers/fleet-v1'
 EVENT_SCHEMA = 'herdr-peers/plan-event-v1'
+# The map lists at most this many excluded brain profiles (fleet-v1's limit; the
+# daemon's own exclusion set is not capped, only what it publishes).
+EXCLUDED_SHOWN = 16
 
 NUDGE_TEXT = (
     '[autopilot] The developer is away and has pre-approved the recommended option for every '
@@ -53,6 +56,11 @@ NUDGE_TEXT = (
     'again. If an item truly needs something only the developer can provide (a credential, a '
     'login, a fact you cannot verify), leave only that item pending, finish everything else, '
     'and list it at the end.')
+DENIED_TEXT = (
+    '[autopilot] Your last request was declined: it offered only options the autopilot never '
+    'approves (one that widens your permissions, or a refusal). Continue your task another '
+    'way, within your plan\'s gates and recorded authority; if it truly cannot go on without '
+    'that permission, record it as a blocker and stop.')
 RESUME_TEXT = (
     '[autopilot] Your usage limit may have reset. Continue the pending plan to its end from '
     'where you stopped, taking the recommended option at every decision. If the limit is '
@@ -81,7 +89,9 @@ MAX_APPOINTMENTS = 2       # appointments one daemon prompts per plan; then only
 
 # Reasons that are usually a passing state (the lead has not marked the queue yet,
 # it is finishing another plan, its directory is not listed this pass).
-QUEUE_TRANSIENT = ('started, queue not updated', 'lead busy with another plan', 'lead directory unknown')
+# 'started, queue not updated' is not here: a plan that began while the queue still says queued
+# (the pack leaves it so outside Herdr) is running, never reported.
+QUEUE_TRANSIENT = ('lead busy with another plan', 'lead directory unknown')
 # The repository path is quoted as JSON data: it is never read as words of the prompt.
 QUEUE_TEXT = ("Plan %s is next in the queue of the repository at %s and approved. In that repository, "
               "run the plan tool's execute flow for it (its start gate checks the approval again) and "
@@ -354,6 +364,45 @@ def keys_for(menu, target):
     return move + ['enter']
 
 
+EXIT_ROW = re.compile(r'\b(?:exit|quit)\b', re.I)   # anywhere: 'Cancel and exit' leaves the agent too
+REFUSAL_ROW = re.compile(r'^(?:\[[a-z]\]\s+)?(?:no\b|deny\b|reject\b|cancel\b|don\'t\b|do not\b)', re.I)
+
+
+def no_esc(kind):
+    """CLIs where Esc on a dialog aborts the whole turn rather than refusing it."""
+    return kind == 'codex'
+
+
+def deny_decision(text, state, cls, why):
+    """Keys that refuse what a pane waits for: its refusal row when the menu has
+    one, else Esc. Never a Yes, a row that widens permissions, auto mode, or a row
+    that exits the agent. Pure."""
+    lines = tail_lines(text)
+    menu = parse_menu(text)
+    if menu and not live(menu, state, lines):
+        menu = None
+    if menu:
+        rows = menu['rows']
+        for i, r in enumerate(rows):
+            label = r['label']
+            if REFUSAL_ROW.match(label) and not WIDENING.search(label) and not EXIT_ROW.search(label) \
+                    and not RECOMMENDED.search(label + r['more']):
+                current = next((n for n, x in enumerate(rows) if x['selected']), 0)
+                move = ['down'] * (i - current) if i >= current else ['up'] * (current - i)
+                return Decision('keys', cls, why, move + ['enter'], i + 1)
+    return Decision('keys', cls, why, ['esc'])
+
+
+# What a pane may wait at that a denial resolves: a permission or a plan approval the
+# daemon cannot accept. An agent's own question is a decision about the work: it is left
+# waiting for the human, never answered "No" by the daemon. Login, the
+# bypass-permissions consent, folder trust, a usage limit and an unknown screen stay the
+# human's (or have their own path).
+DENIABLE = ('permission', 'plan_approval')
+# In the brain's pane everything but its own answer command is denied.
+BRAIN_DENIABLE = ('permission', 'plan_approval', 'question', 'question_review')
+
+
 def menu_decision(menu, cls, why, prefer=None):
     target = choose(menu, prefer)
     if target is None:
@@ -501,6 +550,7 @@ class Pane(object):
         self.tries = 0         # key rounds spent on that screen
         self.left = None       # digest of a screen autopilot gave up on or left
         self.since = None      # when its state was last seen to change
+        self.denied = False    # a refusal was keyed: tell it once, when it is idle again
 
 
 class Autopilot(object):
@@ -612,17 +662,26 @@ class Autopilot(object):
                 return True
             # Once a dialog was keyed, its next step is part of the same
             # dialog even when Herdr briefly reports another state.
-            choice = decide(kind, 'blocked' if step and engaged(text) else state, text)
-            if choice.action == 'keys' and self.brain is not None and self.brain.is_brain(addr) \
-                    and choice.cls not in ('folder_trust', 'update_prompt') \
+            seen = 'blocked' if step and engaged(text) else state   # the state decide reads, and deny too
+            choice = decide(kind, seen, text)
+            brain = self.brain is not None and self.brain.is_brain(addr)
+            if brain and choice.cls not in ('folder_trust', 'update_prompt', 'login', 'bypass_ack',
+                                            'usage_limit', 'unknown', 'none') \
+                    and (choice.action == 'keys' or choice.cls in BRAIN_DENIABLE) \
                     and not (choice.cls == 'permission' and brain_mod().approval_is_answer(kind, text)):
                 # The brain reads text other agents wrote: the daemon approves
-                # nothing in its pane but its own answer command.
-                memo.left = digest
-                self.record(addr, kind, Decision('leave', 'brain_permission_refused', choice.cls),
-                            'left')
-                self.brain.refused(addr)
-                return True
+                # nothing in its pane but its own answer command. What it asked for
+                # is denied — never left waiting — and the brain is reminded once.
+                choice = deny_decision(text, seen, 'brain_permission_denied', choice.cls)
+            elif choice.action == 'leave' and choice.cls in DENIABLE and choice.why == 'no acceptable option':
+                # A permission or plan approval whose every row widens permissions or
+                # refuses: refused, not left blocked; the agent is told once it is idle.
+                denial = deny_decision(text, seen, 'denied', choice.cls)
+                if denial.keys != ['esc'] or not no_esc(kind):
+                    choice = denial
+            if choice.action == 'keys' and choice.keys == ['esc'] and no_esc(kind):
+                # Esc in a Codex approval aborts the whole turn: leave it instead.
+                choice = Decision('leave', choice.cls, 'no refusal row; esc would abort the turn')
             if choice.action == 'keys':
                 if digest == memo.stuck:
                     memo.tries += 1
@@ -632,11 +691,18 @@ class Autopilot(object):
                     memo.left = digest
                     self.record(addr, kind, Decision('leave', 'stuck', 'no progress'), 'gave_up')
                     return True
+                if memo.tries == MAX_ATTEMPTS and choice.cls in ('denied', 'brain_permission_denied') \
+                        and not no_esc(kind):
+                    choice = Decision('keys', choice.cls, choice.why, ['esc'])   # the row did not take: Esc
                 self.record(addr, kind, choice, 'keyed')
                 if self.dry_run:
                     return True
                 if not self.io.keys(machine, pane, choice.keys):
                     return False
+                if memo.tries == 1 and choice.cls == 'brain_permission_denied':
+                    self.brain.denied(addr)
+                elif memo.tries == 1 and choice.cls == 'denied':
+                    memo.denied = True
                 self.sleep(self.confirm)
                 continue
             if choice.cls == 'usage_limit':
@@ -649,6 +715,13 @@ class Autopilot(object):
                 if choice.cls == 'unknown' and self.brain is not None:
                     self.brain.ask('screen_unknown', machine, None, {'addr': addr})
             elif state in ('idle', 'done'):
+                if memo.denied and self.nudge and not has_draft(text, state) and not brain:
+                    memo.denied = False
+                    self.record(addr, kind, Decision('prompt', 'denied_told', 'continue another way'),
+                                'nudged')
+                    if not self.dry_run:
+                        self.io.prompt(machine, pane, DENIED_TEXT)
+                    return True
                 self.maybe_nudge(machine, pane, addr, kind, memo, text, stale)
             return True
         return True
@@ -836,9 +909,19 @@ class PlanLoop(object):
                     self.consider(machine, plan, by_pane, now, prompted)
                 except Exception as exc:  # one plan never stops the pass
                     self.io.warn('%s:%s' % (machine, plan.get('plan')), exc)
-            for queue in info['report'].get('queues') or []:
+            seen = set()
+            queues = info['report'].get('queues') or []
+            # A queue reported invalid (a queue.json caught mid-write, say) lists
+            # no items: its repository keeps its state until a valid read.
+            unread = set(q.get('repo_root') for q in queues if q.get('invalid'))
+            for queue in queues:
+                for item in queue.get('items') or []:
+                    seen.add((machine, queue.get('repo_root'), item.get('plan')))
+            if info.get('state') == 'ok':  # a machine that could not answer keeps its state
+                self.forget_queues(machine, seen, unread)
+            for queue in queues:
                 try:
-                    self.consider_queue(machine, queue, by_pane, now, prompted)
+                    self.consider_queue(machine, queue, by_pane, now, prompted, seen)
                 except Exception as exc:  # one queue never stops the pass
                     self.io.warn('%s:queue' % machine, exc)
         self.publish(listed, now)
@@ -961,7 +1044,7 @@ class PlanLoop(object):
         if not self.ap.dry_run:
             self.io.prompt(machine, pane, LOOP_TEXT % plan['plan'])
 
-    def consider_queue(self, machine, queue, by_pane, now, prompted):
+    def consider_queue(self, machine, queue, by_pane, now, prompted, seen=None):
         """Start the next ready item of a repository's queue: one fixed prompt to
         its named lead, once. The queue is the pack's; the daemon only reads it.
         In a sequential queue nothing after a queued item that cannot start
@@ -970,8 +1053,10 @@ class PlanLoop(object):
         reported only once it has held for the appointment grace."""
         repo = queue.get('repo_root')
         sequential = not queue.get('parallel')
+        seen = set() if seen is None else seen
         for item in queue.get('items') or []:
             key = (machine, repo, item['plan'])
+            seen.add(key)
             if item.get('state') != 'queued':
                 self.queued.discard(key)
                 self.queue_told.pop(key, None)
@@ -981,9 +1066,14 @@ class PlanLoop(object):
             pane = local_pane(item.get('lead'))
             if not reason and item.get('ready') and pane is None:
                 reason = 'lead on another machine'  # this daemon can prompt only its own panes
+            in_flight = bool(reason) and reason.startswith('started')   # began; the queue not updated (outside Herdr)
+            if not reason or in_flight or reason.startswith('waiting for') or reason.startswith('another plan'):
+                # Its reason cleared: a reason that returns later is reported again.
+                self.queue_told.pop(key, None)
+                self.queue_since.pop(key, None)
             if reason:
-                if reason.startswith('waiting for'):
-                    continue  # its `after` plan decides; the queue's order is the pack's
+                if reason.startswith('waiting for') or in_flight:
+                    continue  # its `after` plan decides; or it runs already: never reported
                 if not reason.startswith('another plan'):
                     self.tell_queue(machine, repo, item, key, reason, now)
                 if sequential:
@@ -1007,6 +1097,19 @@ class PlanLoop(object):
                                'repo_root': repo, 'blocker_class': None}, self.ap.dry_run)
             if sequential:
                 return  # one at a time per repository
+
+    def forget_queues(self, machine, seen, unread=()):
+        """Drop the queue state of this machine's items that its current report
+        no longer lists (an item removed, a queue deleted). A repository whose
+        queue was reported invalid (`unread`) keeps its state: no items were read,
+        so nothing is known to be gone, and forgetting `queued` would prompt its
+        lead a second time."""
+        def gone(k):
+            return k[0] == machine and k not in seen and k[1] not in unread
+        for store in (self.queue_told, self.queue_since):
+            for key in [k for k in store if gone(k)]:
+                del store[key]
+        self.queued -= set(k for k in self.queued if gone(k))
 
     def tell_queue(self, machine, repo, item, key, reason, now):
         """Report a queued item that cannot start, once per reason; a passing
@@ -1145,12 +1248,14 @@ class PlanLoop(object):
         return False
 
     def leads_elsewhere(self, machine, pane, plan_id):
-        """True when `pane` leads or succeeds another open plan on `machine`."""
+        """True when `pane` leads, succeeds or is a lane of another open plan on
+        `machine` (the same membership the queue checks)."""
         report = (self.machines.get(machine) or {}).get('report') or {}
         for other in report.get('plans', []):
             if other['plan'] == plan_id or other['class'] not in ('open', 'blocked'):
                 continue
-            if local_pane(other['lead']) == pane or pane in [local_pane(a) for a in other['succession']]:
+            members = [other.get('lead')] + list(other.get('succession') or []) + list(other.get('lanes') or [])
+            if pane in [local_pane(a) for a in members]:
                 return True
         return False
 
@@ -1209,6 +1314,8 @@ class PlanLoop(object):
                               'lanes': plan['lanes'], 'repo_root': plan['repo_root'],
                               'blocker_class': plan['blocker_class'],
                               'progress': plan.get('progress'), 'updated_at': plan.get('updated_at'),
+                              'state_updated_at': plan.get('state_updated_at'),
+                              'unreadable_reason': plan.get('unreadable_reason'),
                               'tasks_done': plan.get('tasks_done'),
                               'tasks_total': plan.get('tasks_total'),
                               'current_task': plan.get('current_task'),
@@ -1253,7 +1360,7 @@ class PlanLoop(object):
 
 MAP_MAX_BYTES = 2 * 1024 * 1024 - 4096   # under the store's 2 MB cap, with room to spare
 REMOTE_PLAN_KEYS = ('plan', 'class', 'blocker_class', 'progress', 'lead', 'lanes', 'succession',
-                    'epoch', 'updated_at', 'repo_root', 'situation',
+                    'epoch', 'updated_at', 'state_updated_at', 'unreadable_reason', 'repo_root', 'situation',
                     'tasks_done', 'tasks_total', 'current_task')
 
 
@@ -1273,6 +1380,9 @@ class BrainKeeper(object):
         self.b = brain_mod().Brain()
         self.excluded = set()   # profiles whose default mode skips approvals
         self.last = None   # the brain's last decision, for the map and the watcher
+        self.retired = None  # why the last brain was retired, for the map and status
+        self.denials = []    # times of this brain's denied requests (an hour is kept)
+        self.remind = False  # a denial happened: remind it of the one allowed command
 
     # -- lifecycle ---------------------------------------------------------
     def tick(self, listed, now):
@@ -1307,7 +1417,9 @@ class BrainKeeper(object):
                     # Its profile starts in a mode that skips approvals: the
                     # daemon's approval guard would never see them. Not this one.
                     addr = 'local:%s' % b.pane
-                    self.excluded.add(b.profile)
+                    if b.profile and B.PROFILE_RE.fullmatch(b.profile):
+                        self.excluded.add(b.profile)
+                        self.ap.record(addr, b.kind, Decision('leave', 'brain_profile_excluded', b.profile), 'left')
                     self.retire('permission_mode')
                     self.refused(addr)
                     return
@@ -1316,6 +1428,12 @@ class BrainKeeper(object):
                 b.state, b.briefed = 'ready', True
                 self.ap.record('local:%s' % b.pane, row.get('agent'),
                                Decision('prompt', 'brain_briefed', 'brain ready'), 'nudged')
+            elif b.state == 'ready' and self.remind and row is not None and row.get('state') in ('idle', 'done'):
+                self.remind = False
+                if not self.ap.dry_run:
+                    self.io.prompt('local', b.pane, B.REMINDER)
+                self.ap.record('local:%s' % b.pane, row.get('agent'),
+                               Decision('prompt', 'brain_reminded', 'only the answer command'), 'nudged')
             elif b.state == 'ready' and now - b.lease_at >= B.LEASE_RENEW:
                 if not self.ap.dry_run and self.io.brain_lease(b.kind, b.profile):
                     b.lease_at = now
@@ -1331,7 +1449,7 @@ class BrainKeeper(object):
                            'left')
             return
         try:
-            info = self.io.brain_launch(self.opts.get('kinds') or ('claude', 'codex', 'grok'),
+            info = self.io.brain_launch(self.opts.get('kinds') or brain_mod().DEFAULT_KINDS,
                                         self.opts.get('models') or {}, sorted(self.excluded))
         except Exception as exc:  # a refusal or a tool failure: recorded, retried within the cap
             b.state = 'failed'
@@ -1346,9 +1464,22 @@ class BrainKeeper(object):
         self.ap.record('local:%s' % b.pane, b.kind, Decision('prompt', 'brain_launched',
                                                              '%s %s' % (b.kind, b.profile)), 'nudged')
 
+    def denied(self, addr):
+        """A request of the brain's was denied: remind it once; three in an hour and
+        it is retired as misbehaving (a replacement launches within the cap)."""
+        now = self.ap.clock()
+        self.denials = [t for t in self.denials if now - t < 3600] + [now]
+        if len(self.denials) >= brain_mod().MAX_DENIALS:
+            self.retire('misbehaving')
+            return
+        self.remind = True
+
     def retire(self, why):
         b = self.b
+        self.denials, self.remind = [], False
         self.ap.record('local:%s' % b.pane, b.kind, Decision('leave', 'brain_replaced', why), 'left')
+        self.retired = {'why': why, 'profile': b.profile,
+                        'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(self.ap.clock()))}
         self.close()
         b.state = 'none'
 
@@ -1422,7 +1553,7 @@ class BrainKeeper(object):
                 'pane': ('local:%s' % b.pane) if b.pane else None,
                 'asked_last_hour': len([t for t in b.asked if now - t < 3600]),
                 'open_questions': sum(1 for q in b.questions.values() if not q['answered']),
-                'last': self.last}
+                'last': self.last, 'excluded': sorted(self.excluded)[:EXCLUDED_SHOWN], 'retired': self.retired}
 
     def act(self, q, action):
         """Run one allowed action through the daemon's own paths."""

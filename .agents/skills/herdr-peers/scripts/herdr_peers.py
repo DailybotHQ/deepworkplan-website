@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""herdr-peers — protocol 1 over the Herdr CLI (python3 standard library only).
+"""herdr-peers — protocol 2 (lead notices of granted plans; every other message stays protocol 1)
+over the Herdr CLI (python3 standard library only).
 
 Verbs: ask, notify, reply, list, wait, log, check, cancel, status, lanes, lead,
 debate (debate.py). See ../protocol.md for the
@@ -33,7 +34,7 @@ import subprocess
 import sys
 import time
 
-VERSION = '2.0.0'
+VERSION = '2.1.0'
 PROTOCOL = 2          # the highest protocol this helper speaks (metadata.protocol)
 BASE_PROTOCOL = 1     # what every message is stamped with, except a granted lead notice
 SUPPORTED_PROTOCOLS = ('1', '2')
@@ -54,7 +55,7 @@ CROCKFORD = '0123456789ABCDEFGHJKMNPQRSTVWXYZ'
 ULID_RE = re.compile(r'^[0-7][0-9A-HJKMNP-TV-Z]{25}$')
 MACHINE_RE = r'(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63})'  # never starts with '-'
 PANE_RE = r'[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}'
-ADDR_RE = re.compile(r'^(%s):(%s)$' % (MACHINE_RE, PANE_RE))
+ADDR_RE = re.compile(r'^(%s):(%s)\Z' % (MACHINE_RE, PANE_RE))  # \Z: no trailing newline
 TOKEN_RE = re.compile(r'([a-z][a-z-]*)=(\S+)')
 DEPTH_RE = re.compile(r'[0-9]{1,3}')
 ASK_KEYS = frozenset(['protocol', 'from', 'reply', 'depth', 'id'])
@@ -3302,6 +3303,7 @@ def cmd_fleet_ui(args):
     fleet_ui = load_fleet_ui()
     path = os.path.join(load_fleet_report().state_root(), load_fleet_report().FLEET_FILE)
     grouping = args.group or 'plan'
+    facet = args.filter or fleet_ui.FOCUS
     if os.environ.get('HERDR_ENV') == '1':
         # Lets the watcher tell whether it runs on the daemon's own Herdr server.
         os.environ['HERDR_PEERS_UI_SERVER'] = state_key(Store().server_id)[:24]
@@ -3310,13 +3312,13 @@ def cmd_fleet_ui(args):
         width = args.width or shutil.get_terminal_size((100, 40)).columns
         if not 40 <= width <= 400:
             raise Stop(EXIT_USAGE, '--width must be between 40 and 400')
-        sys.stdout.write(fleet_ui.snapshot(fleet_ui.FileSource(path), time.time(), width, grouping))
+        sys.stdout.write(fleet_ui.snapshot(fleet_ui.FileSource(path), time.time(), width, grouping, facet))
         return EXIT_OK
     try:
-        return fleet_ui.run_curses(path, grouping)
+        return fleet_ui.run_curses(path, grouping, facet)
     except Exception as exc:  # no curses, a dumb terminal: say so and print the text view
         warn('fleet ui: cannot start the live view (%s); printing a snapshot' % safe(type(exc).__name__))
-        sys.stdout.write(fleet_ui.snapshot(fleet_ui.FileSource(path), time.time(), 100, grouping))
+        sys.stdout.write(fleet_ui.snapshot(fleet_ui.FileSource(path), time.time(), 100, grouping, facet))
         return EXIT_OK
 
 
@@ -3809,7 +3811,15 @@ class AutopilotIO(object):
         note = ' '.join(filter(None, [
             'keys=%s' % ','.join(choice.keys) if choice.keys else None,
             'option=%d' % choice.option if choice.option is not None else None,
-            'action=%s' % choice.action, 'dry_run' if dry_run else None]))
+            'action=%s' % choice.action, 'dry_run' if dry_run else None,
+            # Why a brain was retired and which profile was excluded: fixed words or a
+            # checked profile name, never free text.
+            'why=%s' % choice.why if choice.cls in BRAIN_WHY_CLASSES and isinstance(choice.why, str)
+            and BRAIN_WHY_RE.fullmatch(choice.why) else None,
+            # The likely cause of a brain that started without approvals: a coding-agents-kit
+            # that does not pass the CLI's own ask flag (fixed in 1.5.0, with token metering).
+            'hint=upgrade_coding_agents_kit' if choice.cls == 'brain_replaced'
+            and choice.why == 'permission_mode' else None]))
         self.store.append(make_record(outcome, 'autopilot', new_ulid(), addr,
                                       'local:%s' % self.pane, kind=kind, reason=choice.cls,
                                       note=note, plan=plan))
@@ -3945,6 +3955,10 @@ def autopilot_options(store, pid):
     return data
 
 
+BRAIN_WHY_CLASSES = ('brain_replaced', 'brain_profile_excluded')
+BRAIN_WHY_RE = re.compile(r'[a-z_]{1,32}|@[A-Za-z0-9._-]{1,40}')
+
+
 def autopilot_status(store):
     pid = autopilot_pid(store)
     log_path, _ = autopilot_files(store)
@@ -3960,6 +3974,20 @@ def autopilot_status(store):
             print('  options: %s' % safe(' '.join(autopilot_option_argv(opts))))
             if info.get('mode') == 'background':
                 print('  log: %s' % log_path)
+            brain = ((load_fleet_report().read_fleet()[0] or {}).get('daemon') or {}).get('brain') \
+                if opts.get('brain') else None
+            if isinstance(brain, dict):
+                retired = brain.get('retired') if isinstance(brain.get('retired'), dict) else {}
+                print('  brain: %s %s %s; excluded profiles: %s; last retired: %s' % (
+                    safe(brain.get('state')), safe(brain.get('kind') or '-'), safe(brain.get('profile') or '-'),
+                    safe(', '.join(str(p) for p in brain.get('excluded') or []) or 'none'),
+                    safe('%s (%s, %s)' % (retired.get('why'), retired.get('profile') or '-', retired.get('at'))
+                         if retired else 'never')))
+                if retired.get('why') == 'permission_mode' or brain.get('excluded'):
+                    print('  brain: a profile started in a mode that skips approvals; coding-agents-kit '
+                          'before 1.5.0 does not pass the CLI\'s own ask flag, so upgrade it '
+                          '(`ak update`), or give the profile an ask-mode default, then restart '
+                          'autopilot')
     for rec in [r for r in store.records() if r.get('role') == 'autopilot'][-10:]:
         print('%s %s %s %s %s' % (safe(rec.get('ts')), safe(rec.get('state')),
                                   safe(rec.get('target')), safe(rec.get('reason')),
@@ -4272,10 +4300,10 @@ def cmd_autopilot(args):
         if not args.brain:
             raise Stop(EXIT_USAGE, '--brain-kinds and --brain-model need --brain')
         import brain as brain_module
-        kinds = [k for k in (args.brain_kinds or 'claude,codex,grok').split(',') if k]
+        kinds = [k for k in (args.brain_kinds or ','.join(brain_module.DEFAULT_KINDS)).split(',') if k]
         if not kinds or len(kinds) > 8 or not all(brain_module.KIND_RE.fullmatch(k) for k in kinds):
             raise Stop(EXIT_USAGE, '--brain-kinds takes agent kinds in priority order, e.g. '
-                       'claude,codex,grok')
+                       'claude,codex')
         models = {}
         for raw in args.brain_model or []:
             kind, _, model = raw.partition('=')
@@ -4421,7 +4449,8 @@ def build_parser():
     p = argparse.ArgumentParser(
         prog='herdr-peers',
         description='Ask any agent in any Herdr pane, on any machine, and get one '
-                    'authorized reply back (protocol 1).')
+                    'authorized reply back (protocol 2; every message but a granted '
+                    'plan\'s lead notice stays protocol 1).')
     p.add_argument('--version', action='version',
                    version='herdr-peers %s (protocol %d)' % (VERSION, PROTOCOL))
     p.add_argument('--skill', action='store_true', help='print SKILL.md and exit')
@@ -4645,7 +4674,8 @@ def build_parser():
                     help='with --loop: launch and keep a dedicated decision agent (ask mode) and '
                     'ask it what the rules cannot decide; it chooses among fixed actions only')
     ap.add_argument('--brain-kinds', metavar='KINDS',
-                    help='with --brain: agent kinds in priority order (default claude,codex,grok)')
+                    help='with --brain: agent kinds in priority order (default claude: the only kind whose '
+                         'answers the daemon approves for now)')
     ap.add_argument('--brain-model', action='append', metavar='KIND=MODEL',
                     help='with --brain: the model for a kind, e.g. claude=sonnet (repeatable)')
     ap.add_argument('--notify-env', action='append', metavar='NAME',
@@ -4659,8 +4689,10 @@ def build_parser():
     fl.add_argument('--json', action='store_true', help='herdr-peers/fleet-v1 JSON')
     fl.add_argument('--snapshot', action='store_true',
                     help='with ui: draw the view once as text and exit')
-    fl.add_argument('--group', choices=['plan', 'repo', 'machine'],
+    fl.add_argument('--group', choices=['plan', 'repo', 'machine', 'queue'],
                     help='with ui: how agents are grouped first (default plan)')
+    fl.add_argument('--filter', choices=['attention', 'active', 'waiting', 'done', 'all'],
+                    help='with ui: the view to show (default: attention and active together)')
     fl.add_argument('--width', type=int, help='with ui --snapshot: columns (40-400)')
     pl = sub.add_parser('plans', help='the plans led on this machine, with each plan\'s state '
                         '(read-only; works outside a Herdr pane)')

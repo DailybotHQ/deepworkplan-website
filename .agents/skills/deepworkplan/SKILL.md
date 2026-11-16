@@ -1,7 +1,7 @@
 ---
 name: deepworkplan
 description: DeepWorkPlan — turn any repo AI-first and run Deep Work Plans. Routes to create, execute, refine, resume, status, verify, upgrade, and repo-onboarding sub-skills based on intent. Use when the developer wants to plan, execute, manage, or verify structured multi-task work, or make a repository AI-agent-ready.
-version: "8.0.0-beta.1"
+version: "8.0.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -11,7 +11,7 @@ metadata: {"openclaw":{"emoji":"🧠","homepage":"https://deepworkplan.com","req
 # DeepWorkPlan — Methodology Skill (Router)
 
 The repository is the harness.
-**Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.** Deep Work Plans are Lite (bounded work) or Full (task files, longer work). Planning is spec-first per episode: the plan precedes the code, with acceptance criteria, as git-ignored, exportable `.dwp/plans/` state any agent can resume, not a maintained specification. Loop engineering registers a lead and its succession; an optional daemon a human starts nudges without adding authority. Plans run within their recorded authority and gates; the method works alone.
+**Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.** Plans are Lite (bounded work) or Full (task files, longer work). Planning is spec-first per episode: the plan precedes the code, with acceptance criteria, as git-ignored, exportable `.dwp/plans/` state any agent can resume, not a maintained specification. Loop engineering registers a lead and its succession; an optional daemon a human starts nudges without adding authority. Plans run within their recorded authority and gates; the method works alone.
 
 DWP measures the instruction bytes each flow loads. It has not shown a general saving in provider tokens.
 

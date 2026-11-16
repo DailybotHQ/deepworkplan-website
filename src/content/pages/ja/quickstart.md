@@ -45,10 +45,10 @@ lastUpdated: 2026-10-11
 
   | リポジトリ（github.com/DailybotHQ） | タグ | その `SHA256SUMS` の sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v8.0.0` | `8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea` |
-  | coding-agents-kit | `v1.5.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
-  | herdr-peers | `v2.1.0` | `97509f91c5463be190307731d8417aaab2742d17850638fcc6fb0d1a9eddd011` |
-  | devcontainer-kit | `v1.3.0` | `5aaf1113734d3d4308b6ffd256a4e10e60116370ad23bdfd2573f7a3a914e349` |
+  | deepworkplan-skill | `v8.0.0` | `cb877b165b94fb8a23561ffb6dcc71e7ab9e92ad44c2f2eeef2378cc62a91408` |
+  | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
+  | herdr-peers | `v2.1.0` | `02837b819e79033cc9ea1fa0498c2fcd5966f86117080e16a7e44fb976966787` |
+  | devcontainer-kit | `v1.3.0` | `663b06f3be1108b93d401e8b9ec9da77b1f6953b86a98729bf54a8bfc5fae969` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | 公開なし — skills CLI が `skills-lock.json` にコンテンツハッシュを記録します |

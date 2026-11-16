@@ -122,13 +122,13 @@ Harness công bố những gì mỗi luồng phải đọc trước khi bắt đ
 
 | Luồng | Gói đầu vào (byte) |
 | --- | ---: |
-| `create` | 75.008|
-| `execute` | 55.160|
-| `resume` | 32.047|
-| `refine` | 76.821|
-| `onboard` | 82.075|
-| `status` | 27.335|
-| `verify` | 36.725|
+| `create` | 74.974|
+| `execute` | 55.136|
+| `resume` | 32.023|
+| `refine` | 76.797|
+| `onboard` | 82.051|
+| `status` | 27.311|
+| `verify` | 36.701|
 
 Đơn vị: byte hệ thống tệp. Đo trên gói đã phát hành bằng lệnh bên dưới: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 

@@ -156,6 +156,8 @@ one of those, it moves to the first row that is not.
 | A usage limit (the CLI's own banner; a `429` in a command's output is not one) | Leaves it; every 30 minutes accepts the option shown (if any) and asks the agent to continue its pending plan — for at most a day, never over a draft on the input line, and not with `--no-nudge`. |
 | A login, a sign-in, an API-key or device-code prompt | **Never touched.** A human signs in. |
 | Claude's bypass-permissions acknowledgement | **Never touched.** The developer accepts it once per profile. |
+| A permission or plan approval where every row refuses or widens permissions | **Denied, never left blocked** (a change in 2.1.0: it used to wait for a human): its first refusal row (`No`, `Deny`, `Cancel` — never a row naming exit or quit), else `esc` — except on Codex, where `esc` aborts the whole turn, so the dialog is left. Recorded `denied`. Once the agent is idle again it is told once, with a fixed prompt, to continue another way within its plan's gates or record a blocker. |
+| An agent's own question whose rows all refuse or open free text | Left waiting for the human: it is a decision about the work, never answered "No" by the daemon (no prose nudge either: nudges go only to idle panes). |
 | A blocked pane with no menu it recognises | Left, and recorded as `unknown`. |
 
 Verified on real panes of Claude Code, Codex, Cursor, Grok, Pi and
@@ -181,7 +183,9 @@ selected; otherwise it is left alone.
 - Touch its own pane, an excluded pane, or a machine outside the scope.
 - Read, store or print screen text. The record holds the screen class, the
   option number and the keys.
-- Send `esc`: on a working agent it interrupts the turn.
+- Send `esc` to a working agent: it would interrupt the turn. `esc` goes only
+  to a blocked dialog being denied, when it has no refusal row or the
+  refusal row did not take.
 
 ## 5. The plan loop (`--loop`)
 
@@ -312,14 +316,23 @@ starts next or why it cannot; a plan's own row shows its place (`queue 2/3`).
 ## 6. The brain (`--brain`)
 
 ```bash
-herdr-peers autopilot start --loop --brain                         # brain on claude, then codex, then grok
-herdr-peers autopilot start --loop --brain --brain-kinds codex,claude --brain-model claude=sonnet
+herdr-peers autopilot start --loop --brain                         # a Claude brain (the default)
+herdr-peers autopilot start --loop --brain --brain-model claude=sonnet
 ```
 
 The rules of §5 decide almost everything. For the few cases they cannot,
 the daemon keeps a **brain**: one dedicated agent it launches itself, asks,
 and obeys only within a closed list of actions. Nothing is asked of you to
 set it up beyond the flag; it needs coding-agents-kit 1.3.0 or later (`ak`).
+The default kind is Claude only: it is, for now, the only kind whose answer
+the daemon approves (§6.2), so a brain of another kind would only spend the
+launch cap. `--brain-kinds` can still name others, in priority order.
+**coding-agents-kit before 1.5.0** does not pass Claude's own ask flag, so a
+profile whose default is auto mode starts in auto mode even through `ak
+--ask`; the daemon sees it, retires that brain (`why=permission_mode
+hint=upgrade_coding_agents_kit`), excludes the profile and tells you —
+fail-closed, but it spends a launch. Upgrade the kit (`ak update`), or give
+the profile an ask-mode default.
 **Fail-closed:** with `--brain`, a missing `ak` or one older than 1.3.0
 makes the daemon refuse to start at all, with a message naming the version
 it needs — it never runs a brainless daemon you asked to have a brain.
@@ -334,7 +347,10 @@ Start it without `--brain` to run without one.
    that qualifies, `launch.permissions == ask`. The line to type is `ak`'s own
    argv, every element matched against its pattern, the resolved path of the
    `ak` the daemon ran first, and only `--ask` and `--trust-cwd` added — never
-   an autonomy or bypass flag.
+   an autonomy or bypass flag. coding-agents-kit 1.5.0 ends an ask-mode argv
+   with one `--ask` of its own: exactly one, as the last element, is accepted
+   and dropped (the daemon adds `--ask` once); an `--ask` anywhere else, a
+   CLI's own permission flags and anything after `--` are refused.
 3. The account is leased (`ak lease … --purpose brain`, renewed every two
    hours) so no lead or second daemon books it.
 4. The daemon creates a workspace of its own, `autopilot brain`, whose
@@ -371,14 +387,17 @@ it marks it so the brain is replaced on the next pass;
 the brain is never nudged in prose and never
 treated as a plan's lead. On `autopilot stop` its lease is released and its
 workspace closed. The fleet map and `fleet ui` show it: state, account,
-questions in the last hour and its last decision.
+questions in the last hour and its last decision; when a brain was retired,
+why (`gone`, `usage_limit`, `start_timeout`, `permission_mode`) and which
+profiles are excluded. Each retirement is recorded with `why=`, and
+`autopilot status` prints the brain's line.
 
 ### 6.2 What it is asked, and what it may answer
 
 | Case | Allowed actions | Default (no valid answer in 3 minutes) |
 | --- | --- | --- |
 | A plan is stalled (three prompts without progress) | `nudge_once_more` (one more prompt to its lead, once per plan), `notify_human`, `leave` | `leave` |
-| A plan is blocked, its state records the blocker as one its lead may resolve (`"resolver": "lead"` in the blocker record — a field the plan writes, not prose), and the blocker names no escalation class and no sensitive subject (credential, login, consent, payment, a push to main, a merge, a release, a deletion, a secret, production — in English and Spanish) | `ask_lead_to_resolve` (one fixed prompt asking the lead to resolve it within its recorded authority), `notify_human`, `leave` | `leave` |
+| A plan is blocked, its state records the blocker as one its lead may resolve (`"resolver": "lead"` in the blocker record — a field the plan writes, not prose), its class is none or one a lead may handle (C3, C4, C7 — never C1 approval, C2 consent or login, C5 damage, C6 terms, nor a class outside C1–C7; an explicit `class` in the blocker record, as pack 8.0.0's plan-snapshot/v8 always writes, wins over a class named in its prose), and it names no sensitive subject (credential, login, consent, payment, a push to main, a merge, a release, a deletion, a secret, production — in English and Spanish) | `ask_lead_to_resolve` (one fixed prompt asking the lead to resolve it within its recorded authority), `notify_human`, `leave` | `leave` |
 | An agent waits at a screen autopilot does not recognise | `leave`, `notify_human` | `leave` |
 
 The question is one fixed prompt: the case, the plan and machine, the
@@ -408,8 +427,16 @@ the lines between the two rules right above "Do you want to proceed?" — is
 exactly one line, `herdr-peers autopilot answer q-<12 hex> <word>`, by name
 and nothing else, with "Yes" as its first option. Any other layout, any
 other kind of agent (until it has its own verified fixture), any extra or
-wrapped line, any path, refuses: the approval is left, recorded
-(`brain_permission_refused`) and you are told once. For now that makes
+wrapped line, any path, is **denied, never left waiting**: the
+dialog's refusal row (else `esc`; never Yes, a widening row or auto mode),
+recorded `brain_permission_denied`. Once idle, the brain is reminded once,
+with a fixed prompt, that the only command it may run is `herdr-peers
+autopilot answer <qid> <action>` and that the question carries all it
+needs. Three denials in an hour retire it as misbehaving (`brain_replaced
+why=misbehaving`), and a replacement is launched within the hourly cap. Its
+brief says so up front: one command, nothing else approved. A Codex brain
+whose dialog has no refusal row is left blocked, since `esc` would abort its
+turn — one more reason the default brain kind is Claude. For now that makes
 Claude the only kind whose brain can answer; others are launched but their
 answers are never approved. An injected brain can
 still choose any allowed action for an open question — that is the
@@ -532,32 +559,83 @@ written. Above 2 MB the map drops plan details first and records
 ```
  ◉ herdr-peers fleet   updated 40 s ago                     54 agents · 14 machines (13 answering)
  ● 8 working   ◆ 1 waiting   ○ 45 idle   ? 0 unknown   │ plans: 1 need you · 5 running · 14 done
-  p Plans   r Repos   m Machines
+  p Plans   r Repos   m Machines   u Queues
+  1 Attention 2  ·  2 Active 5  ·  3 Waiting 3  ·  4 Done 14  ·  5 All 24    needs you + moving   ←→ 1-5
 ──────────────────────────────────────────────────────────────────────────────────────────────────
 ▌ STALLED  PLAN_009_billing  Billing v2                         ████░░░░░░░░ 12/37  32%  API · WS brain
     ▶ now: Webhook retries
   ★ ○ claude idle 12m    w2:p1    app @feature/billing   API · WS brain   Billing lead
+▌ OPEN  PLAN_014_search  Search index                           ██████░░░░░░ 9/18  50%   Mac
+    ◷ no movement for 2d 4h
 ▌ OPEN  PLAN_001_prototypes  Rebuild all of v4                  ███████░░░░░ 56/97  57%  Mac
   ★ ● claude working 3m  wG:p16   protoyard @dev          Mac              Protoyard lead
   · ○ codex  done        wG:p20   protoyard @dev          Mac              Judge the prototypes
-▌ ○ Doing nothing — free to take work (31)
-    ○ codex  idle        w4:p1    open-source             Mac Air
 ```
+
+### The views: one facet model in every grouping
+
+Under the grouping tabs, a second row filters what each grouping shows. The
+same five views exist everywhere, so there is one thing to learn: does it
+need me, is it moving, is it waiting, is it done.
+
+| View | Plans | Agents (by repository or machine) | Queue items |
+| --- | --- | --- | --- |
+| **Attention** | something you can act on now: blocked; situation `plan_stalled`, `plan_no_lead`, `plan_blocked` or a moved lead; or open with **no movement for 24 h** (its `state.json` unchanged, shown as `◷ no movement for 2d 4h`) | waiting at a question or approval, a state the map could not read, and (by machine) a machine that did not answer | queued with a reason that blocks it (`no lead named`, `not approved`, …) |
+| **Active** | open and moving | working | started |
+| **Waiting** | queued, not started (also a queued plan with no lead record yet, as `QUEUED`) | free (idle or done) | queued: ready, or waiting its turn (`waiting for …`, `another plan …`) |
+| **Done** | completed | — an agent is never done (always empty) | done or skipped |
+| **All** | everything, unreadable plans last | everything | everything |
+
+- **The default is Attention and Active together** — what needs you and
+  what is moving. It never opens on Done.
+- **Attention means you can act on it now.** Inside it: NO LEAD and blocked
+  plans first, then the daemon's other judgments (stalled, a moved lead),
+  then the plans with no movement; each sorted by progress (nearest to done
+  first) or by how long they have been still (longest first).
+- **Unreadable plans are not Attention.** They show only under All, as a
+  dimmed group at the very end, each saying why when its machine's report
+  knows (`unreadable_reason`): no `state.json` where its lead record points,
+  a `state.json` that does not parse, or a shape this helper does not read
+  (an older or newer plan generation). Attention shows one quiet line for
+  them: `14 unreadable plans: see All (5)`.
+- Every view shows a live count: `Attention 2 · Active 5 · Waiting 3 · Done
+  14`. Plans count plans (and queued plans not yet on the map); repositories
+  and machines count agents (by machine, an unreachable machine counts once,
+  as Attention); queues count items (an invalid queue file counts once, as
+  Attention). Unreadable plans count under All only. Only Attention takes
+  the alert colour, and only when it holds something. A narrow terminal
+  shows `A2 Ac5 W3 D14 All24`.
+- The header's counts row degrades the same way: the brain's details go
+  first, then the agent states compact (`●7 ◆0 ○35 ?0`), then the brain; the
+  plans summary (`3 need you · 1 running · 15 done`) is never cut.
+- `←` `→` or `[` `]` cycle the views (the default, then each one); `1`–`5`
+  jump to one; a click on the row picks it. The view combines with the
+  search (`/`), and each grouping keeps its own view for the session.
+- An empty view says why and where the rest is: `Nothing needs you · 7
+  plans moving`.
+- In the Plans grouping, the agents outside any plan follow their own
+  facet: the working ones under Active, the free ones under Waiting.
+- `fleet ui --snapshot --filter attention|active|waiting|done|all` prints
+  one view as text; `--filter` also picks the view the live watcher opens
+  on, and `--group plan|repo|machine|queue` the grouping.
+
+The stale threshold reads `state_updated_at`, and the unreadable reason
+`unreadable_reason`; the map carries both since 2.1.0 (optional fields: a
+map written by an older daemon has none, its open plans are never called
+stale, and its unreadable plans say the report does not say why). Each classification is a pure
+function (`plan_facet`, `agent_facet`, `queue_item_facet`), the counts are
+built when the map, the grouping, the view or the search changes — never
+per frame — and nothing new is read from disk or from Herdr.
 
 It redraws by itself when the map changes, keeps your selection, and ticks
 the age every second (amber after 3 minutes, STALE after 15). Keys: `p`, `r`,
-`m` group by plan, repository or machine; `/` filters; `↑↓` and the mouse
-move; Enter or a click opens a plan or an agent; `f` focuses the agent's
-pane; `?` help; `q` quit. It only reads: the map, and an open agent's screen
-(at most every 2 s, on the machine where that pane lives, when this
-machine's Herdr can reach it). `--snapshot` prints the view once as text.
-
-`herdr-peers fleet ui` draws the same map live in your terminal (groups by
-plan, repository or machine; plans that need you first; open a plan or an
-agent with Enter or a click; `f` focuses an agent in Herdr). It is
-read-only: it writes nothing and prompts nobody, and every string it draws
-is cleaned first. Without a terminal it prints one text snapshot
-(`--snapshot`).
+`m`, `u` group by plan, repository, machine or queue; `←→ [ ] 1-5` pick the
+view; `/` filters; `↑↓` and the mouse move; Enter or a click opens a plan or
+an agent; `f` focuses the agent's pane; `?` help; `q` quit. It only reads:
+the map, and an open agent's screen (at most every 2 s, on the machine where
+that pane lives, when this machine's Herdr can reach it). It writes nothing
+and prompts nobody, and every string it draws is cleaned first. `--snapshot`,
+or no terminal, prints the view once as text.
 
 ## 10. The record
 
@@ -665,7 +743,7 @@ Use `--scope` to keep it to some machines.
 | An agent at its usage limit is not continued | the retry runs every 30 minutes, at most 48 times | wait for the reset, or move the lane (orchestra.md) |
 | A plan is reported `plan_stalled`, `plan_blocked` or `plan_no_lead` | three prompts without progress, a blocker in its state, or a gone lead with no successor to ask | look at the plan; `--brain` may decide stalls and some blockers; `--appoint` covers a lost lead if you granted it |
 | `start --brain` refuses to start | `ak` is missing or older than 1.3.0 (`--brain` is fail-closed) | install or upgrade coding-agents-kit, or start without `--brain` |
-| The brain is retired at once | its account's profile defaults to a mode that skips approvals (auto, bypass, accept edits), or its agent did not come up within two minutes | change that profile's default, or exclude it with `--brain-kinds`; read `autopilot logs` |
+| The brain is retired at once | its account's profile defaults to a mode that skips approvals (auto, bypass, accept edits), or its agent did not come up within two minutes | `autopilot status` (its brain line) or `autopilot logs` names why (`why=permission_mode`, the excluded `@profile`, or `why=start_timeout`); change that profile's default, or exclude it with `--brain-kinds` |
 | A queued plan does not start | it waits for its `after` plan or another plan of its repository; or `queue_blocked` named why: not approved (or edited or amended since), no lead, its lead works elsewhere, on another machine, in a directory this machine cannot see, or on another plan, it already began, or it is a `launch` item; in a sequential queue the items after it wait too | fix what the reason names; the daemon reads the queue again on the next report |
 | `lead verify` exits 5 | a machine of the plan could not be reached | wait until it answers, or pass `--allow-unreached` to accept the risk (recorded) |
 | `autopilot logs -f` shows nothing | only the background daemon writes `autopilot.out`; an idle daemon writes one pass line every tenth pass | `autopilot status` to see whether it runs, and how |
@@ -686,3 +764,21 @@ Every rule above is pinned by the suite (`bash tests/run.sh <scope>`):
 | Lead appointment: the grant, `--as-lane`, fence F10 and the one order, `lead verify`, protocol 2 vs a frozen 1.3.0 receiver | `lead` (`appoint.sh`) and `autopilot` (the drill) |
 | `fleet ui`: hostile maps, cleaned text, read-only | `fleet_ui` |
 | No secret, prompt or screen text in any record | `security`, `autopilot` |
+
+## 16. Environment reference
+
+Every variable is optional; each default is the code's.
+
+| Variable | Default | Effect |
+| --- | --- | --- |
+| `HERDR_PEERS_AUTOPILOT_CONFIRM` | 1.5 | Seconds between a key and the re-read that confirms it (0–30). |
+| `HERDR_PEERS_AUTOPILOT_GRACE` | 300 | Seconds a lead's pane must stay unchanged before a loop prompt (§5). |
+| `HERDR_PEERS_AUTOPILOT_SSH_TIMEOUT` | 25 | Seconds one machine's plans report may take (1–120). |
+| `HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT` | 20 | Seconds one `--notify` command may run (1–60; §8). |
+| `HERDR_PEERS_AUTOPILOT_NOTIFY_BUDGET` | 20 | Seconds all `--notify` commands of one pass may run together (1–120). |
+| `HERDR_PEERS_AUTOPILOT_APPOINT_GRACE` | 900 | Seconds lead and successors must be gone, the plan frozen, before `--appoint` asks a lane (0–86400; §7). |
+| `HERDR_PEERS_APPOINT_PROBE_GAP` | 60 | Seconds between the two probes of `lead takeover --as-lane` (0–600; §7). **0 is for tests only**: it collapses the two probes protocol §12 spaces apart into one moment; never set it below the default on a real fleet. |
+| `HERDR_PEERS_SCOPE` | every enabled machine | The allow-list, as for every verb. |
+| `HERDR_PEERS_UI_SERVER` | — | Set by the helper for `fleet ui` (this server's key) — never by hand. |
+| `HERDR_PEERS_BRAIN_KEY_FILE` | — | Set by the daemon in the brain's environment (its answer-key file) — never by hand. |
+

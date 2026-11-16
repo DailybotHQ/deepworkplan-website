@@ -122,13 +122,13 @@ El harness publica lo que cada flujo debe leer antes de empezar: el router, el s
 
 | Flujo | Paquete de entrada (bytes) |
 | --- | ---: |
-| `create` | 75.008|
-| `execute` | 55.160|
-| `resume` | 32.047|
-| `refine` | 76.821|
-| `onboard` | 82.075|
-| `status` | 27.335|
-| `verify` | 36.725|
+| `create` | 74.974|
+| `execute` | 55.136|
+| `resume` | 32.023|
+| `refine` | 76.797|
+| `onboard` | 82.051|
+| `status` | 27.311|
+| `verify` | 36.701|
 
 Unidad: bytes del sistema de archivos. Medido sobre el paquete publicado con el comando siguiente: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 

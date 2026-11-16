@@ -8,22 +8,22 @@
     "ai-diff-reviewer": {
       "enabled": true,
       "note": "required local review: vendored skill + CI self-review (.review/extension.md)",
-      "version": "v3.3.15"
+      "version": "v3.3.16"
     },
     "dailybot": {
       "enabled": true,
       "note": "repo-level: vendored skill + lifecycle hooks in .agents/settings.json (AGENTS.md)",
-      "version": "v3.23.17"
+      "version": "v3.23.20"
     },
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.12.2"
+      "version": "v8.0.0"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.12.2"
+      "version": "v8.0.0"
     },
     "devcontainer": {
       "enabled": true,
@@ -32,8 +32,8 @@
     },
     "herdr": {
       "enabled": true,
-      "note": "herdr-peers v1.3.1 vendored at .agents/skills/herdr-peers (skills-lock.json, SHA256SUMS verified); the dck v1.0.1 image in this container still bakes v1.0.0 until it is re-rendered",
-      "version": "v1.3.1"
+      "note": "herdr-peers v2.1.0 vendored at .agents/skills/herdr-peers (skills-lock.json, SHA256SUMS verified); the dck v1.0.1 image in this container still bakes v1.0.0 until it is re-rendered",
+      "version": "v2.1.0"
     },
     "vim": {
       "enabled": true,

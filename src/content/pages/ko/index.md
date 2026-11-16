@@ -122,13 +122,13 @@ Loop engineering은 사람이 계속 확인하지 않아도 계획이 완료되�
 
 | 플로우 | 진입 번들(바이트) |
 | --- | ---: |
-| `create` | 75,008|
-| `execute` | 55,160|
-| `resume` | 32,047|
-| `refine` | 76,821|
-| `onboard` | 82,075|
-| `status` | 27,335|
-| `verify` | 36,725|
+| `create` | 74,974|
+| `execute` | 55,136|
+| `resume` | 32,023|
+| `refine` | 76,797|
+| `onboard` | 82,051|
+| `status` | 27,311|
+| `verify` | 36,701|
 
 단위: 파일 시스템 바이트. 릴리스된 팩에서 다음 명령으로 측정했습니다: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 

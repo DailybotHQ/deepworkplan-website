@@ -243,3 +243,38 @@ and is waiting for an incoming ask, end the turn and let the ask arrive
 as the next input. A long-running tool loop can leave queued input
 unhandled. Check each incoming message with `herdr-peers check` before
 using it, then answer only a recorded ask with its reply grant.
+
+## 10. Leading on 2.0
+
+What changes for a lead when the fleet runs herdr-peers 2.0 and the human's
+daemon runs `autopilot --loop` (the operator's manual is
+[autopilot.md](autopilot.md)).
+
+- **Appointment is the human's grant, not yours.** Run `herdr-peers lead
+  claim --plan P --allow-appointment` only when your human asked for it in
+  their own words: when you and every successor are gone, the plan's first
+  live lane may then take the lead. Upgrade every lane and successor to 2.0
+  first — a granted plan's lead notices are protocol 2, which a 1.x peer
+  ignores ([protocol.md](protocol.md) §12). `--no-appointment` withdraws it.
+- **`lead verify --plan P` before every merge, tag or release.** It
+  re-reads your record here and asks the plan's other machines for theirs
+  (read-only). Exit 4: you are not the lead (anymore) — step down, do not
+  merge. Exit 5: a machine could not be reached — wait, or accept the risk
+  with `--allow-unreached` (recorded). After a usage limit or a sleep, run it
+  before anything else.
+- **As a lane of a granted plan**, you may be asked by the daemon to run
+  `herdr-peers lead takeover --plan P --as-lane`. Run exactly that; the
+  helper checks the grant, your repository and, twice, that the lead, every
+  successor and every earlier lane are gone, and refuses otherwise. Never
+  pass `--reason` to it, and never run it on your own initiative.
+- **A stalled plan under `--appoint`** is not appointed around: appointment
+  is only for a plan whose lead and every successor are gone. A stalled plan
+  (three loop prompts without progress) is reported to the human; with
+  `--brain`, the brain may allow one more prompt to you.
+- **The plan queue.** The plan tool writes the queue (`queue.json` beside its
+  plans); the daemon only reads it. When your plan finishes, the next approved plan in
+  the queue starts with one fixed prompt to the lead it names, in that
+  repository. Mark your plan done through the plan tool so the queue moves.
+- **The brain is not a lane.** The daemon's brain lives in a workspace of its
+  own, answers only the daemon, and is never a plan's lead, successor or
+  lane: do not ask it, notify it, or list it in a lead record.

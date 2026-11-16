@@ -27,7 +27,7 @@ git checkout v8.0.0
 # Download the checksums for the release you intend to install (current release v8.0.0):
 curl -fsSL -o SHA256SUMS \
   https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS
-# Expected SHA256SUMS digest: 8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea
+# Expected SHA256SUMS digest: cb877b165b94fb8a23561ffb6dcc71e7ab9e92ad44c2f2eeef2378cc62a91408
 ./setup.sh --verify        # saída diferente de zero significa que um arquivo não corresponde — pare
 ```
 

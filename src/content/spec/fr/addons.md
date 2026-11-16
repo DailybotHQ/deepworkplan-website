@@ -31,7 +31,7 @@ Huit addons sont actifs aujourd’hui — sept opt-in plus la revue locale requi
 
 ### Devcontainer (premier addon)
 
-Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v1.2.0`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
+Un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v1.3.0`, interface `2`) : un modèle Dev Containers que `dck init` génère dans le dépôt comme son propre conteneur, plus la skill `dck-dockerfile`.
 
 - **Page kit :** [Devcontainer](/kit/devcontainer)
 - **Ce qu'il ajoute :** `docker/local/<service>/Dockerfile` à partir de l'image officielle du runtime épinglée par digest (`python-3.13`, `node-24` ou `debian`, sans image de base partagée), `dev.sh` au-dessus du lanceur `dck` (`up`, `shell`, `rebuild`, `doctor`), les agents de code comme couche optionnelle, des ports limités au loopback, git via SSH à travers l'agent de l'hôte sans aucune clé à l'intérieur sauf si le développeur l'active avec `[ssh] copy_keys` dans son profil d'hôte, et des machines Herdr par conteneur avec la disposition standard
@@ -82,7 +82,7 @@ L’**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 
 ### Herdr (sixième addon)
 
-Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v2.0.0`, protocole `2`), le transport de délégation **interactif** des plans v7.
+Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (épinglé à `v2.1.0`, protocole `2`), le transport de délégation **interactif** des plans v7.
 
 - **Page kit :** [Herdr](/kit/herdr)
 - **Ce qu'il ajoute :** un plan peut confier une tâche bornée à un agent de code dans un autre panneau [Herdr](https://herdr.dev), sur la même machine ou sur une machine que Herdr atteint via SSH, et enregistrer son unique réponse autorisée dans le journal
@@ -102,7 +102,7 @@ Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepw
 
 ### Agentkit (huitième addon)
 
-Un intégrateur léger de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, épinglé à `v1.4.0`, interface `1`), le transport de délégation **headless** (sans interface) des plans v7.
+Un intégrateur léger de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, épinglé à `v1.5.0`, interface `1`), le transport de délégation **headless** (sans interface) des plans v7.
 
 - **Page kit :** [Agentkit](/kit/agentkit)
 - **Ce qu'il ajoute :** une surface de commande `ak` unique au-dessus des agents de code en terminal, utilisée pour exécuter une tâche de plan bornée en mode headless ; il n’apporte les capacités `subagents`, `cancel_children` et `model_routing` qu’à l’exécution, lorsqu’il est activé, détecté et sur une interface compatible

@@ -101,9 +101,10 @@ describe('repository descriptor', () => {
       'https://deepworkplan.com/schema/journal-event/v8.json'
     );
     const major = Number.parseInt((declared as string).split('.')[0], 10);
-    // LOOP_ENGINEERING.md §5 keeps plan-manifest/v7 for v8 plans.
+    // LOOP_ENGINEERING.md §5: v8 plans keep the v7 manifest line, so the
+    // manifest generation is the standard's major capped at 7.
     expect(descriptor.schemas.plan_manifest).toBe(
-      `https://deepworkplan.com/schema/plan-manifest/v${major}.json`
+      `https://deepworkplan.com/schema/plan-manifest/v${Math.min(major, 7)}.json`
     );
     expect(descriptor.schemas.journal_event_v7).toBe(
       'https://deepworkplan.com/schema/journal-event/v7.json'

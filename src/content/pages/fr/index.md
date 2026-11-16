@@ -122,13 +122,13 @@ Le harness publie ce que chaque flux doit lire avant de démarrer : le routeur, 
 
 | Flux | Paquet d’entrée (octets) |
 | --- | ---: |
-| `create` | 75 008|
-| `execute` | 55 160|
-| `resume` | 32 047|
-| `refine` | 76 821|
-| `onboard` | 82 075|
-| `status` | 27 335|
-| `verify` | 36 725|
+| `create` | 74 974|
+| `execute` | 55 136|
+| `resume` | 32 023|
+| `refine` | 76 797|
+| `onboard` | 82 051|
+| `status` | 27 311|
+| `verify` | 36 701|
 
 Unité : octets du système de fichiers. Mesuré sur le pack publié avec la commande ci-dessous : `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 
