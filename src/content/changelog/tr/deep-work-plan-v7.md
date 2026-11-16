@@ -64,7 +64,7 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 
 7.11.0 sürümü (2026-11-16), geliştiricinin v7 sağlamlaştırma serisini indirir: dayanıklılık sözlüğü ve görünür kontrol kuralları kılavuza girer, `verify` bitmiş planların salt okunur bir uyum denetimini kazanır, paket belgeleri dayanıklılık ve token iddialarını tam olarak ifade eder, README sloganı anlama testinin kazananıyla değişir ve canlı create yolu Lite paketini komut bütçesi içinde tutar.
 
-7.12.0 sürümü (2026-11-16), planları herdr-peers döngüsüne kaydeder: bir plan, bir halef listesiyle liderliğini talep eder; böylece `autopilot --loop` ve fleet arayüzü her açık planı görür ve onu sonuna kadar çalışır tutar; bir Dailybot bildiricisi kilometre taşlarını raporlar. Eklenti tanımlayıcıları herdr-peers v1.3.1 ve coding-agents-kit v1.3.0.'a taşınır
+7.12.0 sürümü (2026-11-16), planları herdr-peers döngüsüne kaydeder: bir plan, bir halef listesiyle liderliğini talep eder; böylece `autopilot --loop` ve fleet arayüzü her açık planı görür ve onu sonuna kadar çalışır tutar; bir Dailybot bildiricisi kilometre taşlarını raporlar. Eklenti tanımlayıcıları herdr-peers v1.3.1 ve coding-agents-kit v1.3.0'a taşınır.
 
 7.12.1 sürümü (2026-11-16), Herdr eklentisinin Dailybot bildiricisini düzeltir: artık herdr-peers'in ürettiği `herdr-peers/plan-event-v1` olay adını kabul eder, bildiricinin stdin'ini 64 KiB ile sınırlar ve `plan_lead_moved`'ı eşler; eklenti tanımlayıcıları coding-agents-kit v1.4.0'a taşınır — bu sürümün `ak update`'i yalnızca insan tarafından çağrılan olarak belgelenir.
 
