@@ -10,6 +10,8 @@ order: 1
 
 มอบ dev container ที่ทำซ้ำได้และแยกสภาพแวดล้อมให้กับ repository ซึ่งทั้งคน editor และ coding agent ใช้ร่วมกันได้ ใน **DWP v7** (แพ็ก `v7.12.2`) แอดออนนี้ผสาน **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** เข้ามา ซึ่งเป็นผลิตภัณฑ์ MIT ที่ทำงานได้แม้ไม่มี Deep Work Plan แอดออนนี้เป็นแบบเลือกใช้ repository หนึ่งสอดคล้องกับมาตรฐานได้อย่างสมบูรณ์แม้ไม่มีมัน
 
+Deep Work Plan มีเสาหลักสี่ประการ ได้แก่ แผนแบบ spec-first, repository ในฐานะ harness, loop engineering และประสิทธิภาพที่วัดผลได้ ส่วนเสริมและการผสานการทำงานช่วยขยาย harness และวงจรได้ แต่วิธีการนี้ทำงานได้ด้วยตัวเอง
+
 ## สิ่งที่ devcontainer-kit มอบให้
 
 - **เทมเพลต** ที่สร้างบนข้อกำหนด [Dev Containers](https://containers.dev) ซึ่ง `dck init` จะเรนเดอร์ลงใน repository ในโครงสร้างตายตัวแบบเดียว ได้แก่ `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` และ `dev.sh` หากรันอีกครั้งภายหลัง มันจะปรับให้สอดคล้องกันและไม่เขียนทับสิ่งที่คุณแก้ไขไว้เลย การเปลี่ยนแปลงใด ๆ ต่อไฟล์ที่มีอยู่จะแสดงให้เห็นก่อนและต้องได้รับความยินยอม

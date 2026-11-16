@@ -12,6 +12,8 @@ Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caran
 
 Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.12.2`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori sebagai harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
 ## Yang diberikan kit ini
 
 - **Satu tata bahasa untuk setiap CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok`, dan `ak antigravity`, ditambah rute penyedia (Z.AI GLM, Azure OpenAI, xAI, dan Gemini API), dengan flag sesi yang sama: `-c` melanjutkan, `-r <id>` memulihkan.
@@ -107,6 +109,8 @@ Pada rencana v7 yang kontraknya memberikan izin `agent_delegation`, `execute` da
 | Tugas memerlukan interaksi, berjalan lama, atau berada di mesin lain | [Herdr](/kit/herdr) (rekan di panel) |
 
 Keduanya dapat dipadukan: herdr-peers dapat meluncurkan rekan di sebuah panel dengan environment yang dicetak oleh `ak env <kind> @profile`. Untuk banyak lane sekaligus, lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+
+herdr-peers v2.0.0 menggunakan antarmuka ini untuk brain autopilot opsional: `ak pick --kinds ... --json` mengembalikan kontrak peluncuran pick-v2; Herdr memvalidasinya, mewajibkan `launch.permissions: ask`, lalu menjalankan `launch.argv` yang dikembalikan. Brain tidak dapat mengaktifkan flag autonomy atau bypass. `ak update` tetap dijalankan manusia; brain tidak pernah memperbarui CLI.
 
 ## Catatan
 

@@ -12,6 +12,8 @@ order: 8
 
 这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.12.2`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
 
+Deep Work Plan 有四大支柱：spec-first 计划、作为 harness 的代码库、loop engineering 和可衡量的效率。插件与集成可以扩展 harness 和执行循环；方法本身可以独立使用。
+
 ## 工具包为你提供什么
 
 - **所有 CLI 共用一套语法。** `ak claude`、`ak codex`、`ak cursor`、`ak opencode`、`ak pi`、`ak cline`、`ak grok` 和 `ak antigravity`，以及各提供方路由（Z.AI GLM、Azure OpenAI、xAI 和 Gemini API），使用相同的会话参数：`-c` 继续，`-r <id>` 恢复。
@@ -107,6 +109,8 @@ ak doctor
 | 任务需要交互、运行时间长，或位于另一台机器上 | [Herdr](/kit/herdr)（窗格中的一个对等方） |
 
 二者可以组合：herdr-peers 可以使用 `ak env <kind> @profile` 输出的环境，在窗格中启动一个对等方。同时运行多条通道时，请参阅[运行多个代理](/methodology/06-orchestration)。
+
+herdr-peers v2.0.0 使用此接口运行可选的 autopilot brain：`ak pick --kinds ... --json` 返回 pick-v2 启动契约；Herdr 会验证该契约，要求 `launch.permissions: ask`，然后启动返回的 `launch.argv`。brain 不能启用 autonomy 或 bypass 标志。`ak update` 仍只能由人调用；brain 不会更新 CLI。
 
 ## 备注
 

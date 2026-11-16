@@ -10,6 +10,8 @@ order: 1
 
 Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.12.2`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
+Deep Work Plan’in dört temel ilkesi vardır: spec-first planlar, harness olarak depo, loop engineering ve ölçülen verimlilik. Eklentiler ve entegrasyonlar harness ile döngüyü genişletebilir; metodoloji tek başına çalışır.
+
 ## devcontainer-kit'in sağladıkları
 
 - [Dev Containers](https://containers.dev) spesifikasyonu üzerine kurulu, `dck init` komutunun depoya tek bir sabit düzende oluşturduğu **bir şablon**: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` ve `dev.sh`. Daha sonra yeniden çalıştırıldığında uzlaştırır ve düzenlemelerinizin üzerine asla yazmaz; var olan bir dosyadaki her değişiklik önce gösterilir ve onay gerektirir.

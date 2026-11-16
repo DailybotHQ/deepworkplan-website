@@ -6,11 +6,17 @@ lang: zh
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Herdr 附加组件
 
 [Herdr](https://herdr.dev) 把编码代理放进窗格中，既可在你的机器上，也可在它通过 SSH 连接到的机器上。这个附加组件让 Deep Work Plan 把这些代理当作**对等方**来使用：计划可以把一项有边界的任务交给另一个窗格中的代理，接收恰好一条获授权的回复，并保留这次交互的记录。
 
 它是 **DWP v7**（pack `v7.12.2`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
+
+Deep Work Plan 有四大支柱：spec-first 计划、作为 harness 的代码库、loop engineering 和可衡量的效率。插件与集成可以扩展 harness 和执行循环；方法本身可以独立使用。
+
+<HerdrLoop lang="zh" class="not-prose my-10" />
 
 ## 它集成了什么
 
@@ -25,7 +31,6 @@ order: 7
 | 要求 | 计划契约中的 `agent_delegation` 授权 |
 
 **自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 2，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
-
 
 ## 安装
 
@@ -102,7 +107,7 @@ herdr-peers 1.1.0 新增原生的 **debate** 子技能（`debate.md`）：由一
 
 ## Autopilot
 
-herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守护进程 `herdr-peers autopilot`，由用户启动，使长时间运行的计划不会停在审批界面上。它监视每台已启用的 Herdr 机器上的每个代理，当某个代理停在某个界面上等待时，就接受一个选项。1.2.1 版本修复了一种情况：选项带有较长描述的问题会得不到回答。1.2.2 版本会回答选项旁带有预览的问题，并能识别西班牙语、法语、德语和意大利语的推荐标记。1.3.0 版本加入了**循环**：`autopilot --loop` 让每个打开的计划在所有机器上一直运行到结束，`--notify`/`--notify-env` 把它的报告指向你指定的位置，只读动词 `plans` 和 `fleet` 加上 fleet UI 一览每条通道、每台机器和每个打开的计划。
+herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守护进程 `herdr-peers autopilot`，由用户启动，使长时间运行的计划不会停在审批界面上。它监视每台已启用的 Herdr 机器上的每个代理，当某个代理停在某个界面上等待时，就接受一个选项。1.2.1 版本修复了一种情况：选项带有较长描述的问题会得不到回答。1.2.2 版本会回答选项旁带有预览的问题，并能识别西班牙语、法语、德语和意大利语的推荐标记。1.3.0 版本加入了**循环**：`autopilot --loop` 让每个打开的计划在所有机器上一直运行到结束，`--notify` 把它的报告指向你指定的位置，只读动词 `plans` 和 `fleet` 加上 fleet UI 一览每条通道、每台机器和每个打开的计划。
 
 2.0.0 版本将线路移至**协议 2**并新增三项功能：**lead 任命**——仅在人类明确发话时（`lead claim --allow-appointment`），一个已授权的计划在其 lead 和所有继任者都消失后，可以任命其第一条存活通道为新 lead（`lead takeover --as-lane`，探测两次，每个计划至多任命两次）；**`lead verify`** 是在任何 merge、tag 或 release 之前运行的只读检查；**autopilot 大脑**——使用 `--brain` 时，由人类启动的守护进程会启动一个专属智能体（coding-agents-kit 1.3.0 或更高），且只在封闭的动作列表内服从它，当 `ak` 缺失或过旧时拒绝启动；以及**计划队列**——pack 写出 `.dwp/queue.json`（模式 `dwp-queue-v1`），使用 `--loop` 时守护进程会自动启动下一个已排队、已批准的计划。在已授权的计划上，每条通道和继任者都必须运行 2.0 或更高版本。
 
@@ -116,6 +121,14 @@ herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守�
 **运行它即意味着你接受什么。** 开启 autopilot 后，代理的请求会在用户没有看到的情况下获得批准，其中包括用户本会拒绝的命令。没有拒绝列表：autopilot 不判断一条命令做了什么。仍然有效的控制手段是每个代理自身的权限模式和护栏、其账户和机器所能触及的范围、仓库的规则，以及合并前的代码审查。
 
 Autopilot 不属于委派协议：它不发送询问、回复或通知，针对代理和主导者的规则保持不变——它们唯一会发送按键的界面是文件夹信任，且仅限于它们自己启动的窗格。1.2.0 版本还在 `launcher.md` 中说明了主导者如何用 `ak` 一次打开多个代理。
+
+### Daemon 控制与 v2 执行循环
+
+`autopilot run` 在前台运行；`start` 在后台运行；`stop`、`status` 和 `logs` 用于控制或检查它。只有人可以启动它。启用 `--loop` 后，它只提醒空闲计划 lead，让受阻计划保持原状；连续三次提醒仍无进展时停止；lead 不可用时请求已记录的继任者接任；并通过向 lead 发送提示来消费已批准的计划队列。Herdr 只读取队列。`--notify "<command>"` 发送计划事件，不会扩大权限。
+
+`--notify-env NAME` 还会将指定的环境变量传给命令；默认情况下不会传递其他环境变量。
+
+启用 `--brain` 后，Herdr 使用 coding-agents-kit 1.3.0 或更高版本：`ak pick` 在 ask 模式下提供经过验证的 pick-v2 启动契约。`--brain-kinds codex,claude` 设置提供方优先级，`--brain-model claude=sonnet` 选择模型。brain 只能返回封闭列表中的操作；缺少 `ak` 或版本过旧时会安全地拒绝启动。lead 任命既需要计划授权（`lead claim --allow-appointment`），也需要由人启动 daemon 时指定 `--appoint`；lane 使用 `lead takeover --as-lane`。合并、打标签或发布前运行 `lead verify`。`plans`、`fleet` 和 `fleet ui` 仅提供只读视图。daemon 不会自行启动、无授权任命、写入队列或 lead 记录、执行自由文本指令，也不会扩大权限。
 
 ## 备注
 

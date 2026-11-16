@@ -16,6 +16,8 @@ Od standardu 2.3.0 ów lokalny przegląd **należy do linii bazowej, nie jest do
 
 Granica, która czyni to bezpiecznym do przyjęcia, została wytyczona celowo wąsko. Recenzent to skill na licencji MIT, przypięty do taga i wykonywany przez agenta kodu, którego i tak już uruchamiasz — żaden przepływ Deep Work Plan nie zależy więc od komercyjnej usługi, dostawcy CI ani sekretu. **Flow A** (tylko lokalnie) dostaje każde repozytorium po onboardingu; **Flow B** jest proponowany wprost i nigdy nie instaluje się bez prośby. Osoba rozwijająca może też odrzucić recenzenta w całości — taka odmowa zostaje zapisana jako zadeklarowany wyjątek, a `verify` raportuje repozytorium jako niezgodne w tym punkcie, dopóki recenzent nie zostanie zainstalowany.
 
+Deep Work Plan ma cztery filary: plany spec-first, repozytorium jako harness, loop engineering i mierzoną wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa samodzielnie.
+
 ## Kiedy używać
 
 | Sygnał | Działanie |

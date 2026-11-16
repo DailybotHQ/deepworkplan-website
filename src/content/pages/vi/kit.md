@@ -1,8 +1,10 @@
 ---
 title: "Bộ kit Deep Work Plan"
 description: "Skill và chín sub-skill của nó, các command, bộ chuyển đổi agent, preset khởi tạo, các addon tự nguyện và ví dụ giúp Deep Work Plan chạy được ở mọi nơi."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan có bốn trụ cột: kế hoạch spec-first, kho mã nguồn làm harness, loop engineering và hiệu quả có thể đo lường. Addon và tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
 ## Bộ kit Deep Work Plan
 

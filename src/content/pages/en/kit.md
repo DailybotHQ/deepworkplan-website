@@ -1,8 +1,10 @@
 ---
 title: "The Deep Work Plan Kit"
 description: "The skill and its nine sub-skills, commands, agent adapters, onboarding presets, opt-in add-ons, and examples that make Deep Work Plan runnable anywhere."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
 
 ## The Deep Work Plan Kit
 

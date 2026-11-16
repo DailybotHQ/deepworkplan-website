@@ -10,6 +10,8 @@ order: 1
 
 사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.12.2`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
 
+Deep Work Plan의 네 가지 축은 spec-first 계획, harness 역할을 하는 저장소, loop engineering, 측정 가능한 효율입니다. 애드온과 통합 기능은 harness와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
+
 ## devcontainer-kit이 제공하는 것
 
 - **템플릿.** [Dev Containers](https://containers.dev) 사양을 기반으로 하며, `dck init`이 하나의 고정된 레이아웃으로 리포지토리에 렌더링합니다: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml`, `dev.sh`. 나중에 다시 실행하면 조정할 뿐 여러분의 수정 사항을 결코 덮어쓰지 않습니다. 기존 파일에 대한 모든 변경은 먼저 표시되며 동의가 필요합니다.

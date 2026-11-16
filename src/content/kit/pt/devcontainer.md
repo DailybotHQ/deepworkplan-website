@@ -10,6 +10,8 @@ order: 1
 
 Dê ao repositório um contêiner de desenvolvimento reproduzível e isolado, que pessoas, editores e agentes de código possam usar igualmente. No **DWP v7** (pack `v7.12.2`), este addon integra o **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, um produto MIT que funciona sem o Deep Work Plan. É opcional: um repositório é totalmente conforme sem ele.
 
+Deep Work Plan tem quatro pilares: planos spec-first, o repositório como harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o ciclo; a metodologia funciona por conta própria.
+
 ## O que o devcontainer-kit fornece
 
 - **Um template**, baseado na especificação [Dev Containers](https://containers.dev), que `dck init` renderiza no repositório em uma estrutura fixa: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml` e `dev.sh`. Executado novamente depois, ele reconcilia e nunca sobrescreve suas edições; qualquer mudança em um arquivo existente é mostrada antes e exige consentimento.

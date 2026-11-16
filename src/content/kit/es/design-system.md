@@ -12,6 +12,8 @@ Da a un repositorio con una **superficie de interfaz orientada al usuario** un `
 
 Una "superficie de interfaz" es plural: una **UI visual** renderizada, una **salida de CLI** con estilo y una superficie **conversacional** (el producto habla por chat o correo) cuentan cada una. El addon detecta cada una de forma independiente como un **perfil**, y los perfiles aceptados se apilan en el mismo y único `DESIGN.md`.
 
+Deep Work Plan se apoya en cuatro pilares: planes con enfoque spec-first, el repositorio como arnés, loop engineering y eficiencia medida. Los addons y las integraciones pueden ampliar el arnés y el ciclo; la metodología funciona por sí sola.
+
 ## Qué añade
 
 - Un `DESIGN.md` en `docs/DESIGN.md` (junto a las demás especificaciones del repositorio; la raíz del repositorio solo cuando no existe un árbol `docs/`), **referenciado desde `AGENTS.md`** para que los agentes lo descubran igual que el resto de la documentación. Un repo, un archivo — nunca archivos hermanos por superficie.
@@ -40,7 +42,6 @@ Nunca es obligatorio — un repositorio con cero addons opcionales es plenamente
 
 Cuando se acepta, el addon puede instalar un delegador `/design-system` en el `.agents/commands/` del repositorio para regenerar o refrescar `DESIGN.md` más adelante. Instalar el comando es opcional; un addon declinado no instala ninguno.
 
-
 ## Especificación v7
 
 | Elemento | Valor |
@@ -50,6 +51,7 @@ Cuando se acepta, el addon puede instalar un delegador `/design-system` en el `.
 | Descriptor | `addons/design-system/addon.json` (interfaz 1) |
 | Archivo de destino | `docs/DESIGN.md` indexado desde `AGENTS.md` |
 | Control de versiones | Fijado y versionado con el paquete de skills (`v7.12.2`) |
+
 ## Relación con los documentos de diseño por funcionalidad
 
 Este es un archivo de sistema de diseño **a nivel de repositorio y persistente** — distinto de un documento de diseño técnico por funcionalidad (el `design.md` de "requisitos → diseño → tareas" de los flujos de spec-driven atados a una herramienta). Deep Work Plan deliberadamente no incluye un arquetipo separado de documento de diseño por funcionalidad: el README de un plan, los criterios de aceptación de cada tarea y las puertas de validación ya cubren ese rol. Este addon llena el único hueco que ese rol no cubre: contexto de diseño de interfaz duradero y nativo del repositorio.

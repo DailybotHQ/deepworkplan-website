@@ -10,6 +10,8 @@ order: 1
 
 Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.12.2`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori sebagai harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
 ## Yang disediakan devcontainer-kit
 
 - **Sebuah template**, dibangun di atas spesifikasi [Dev Containers](https://containers.dev), yang dirender oleh `dck init` ke dalam repositori dengan satu tata letak tetap: `.devcontainer/devcontainer.json`, `docker/local/<service>/Dockerfile`, `docker/local/docker-compose.yaml`, dan `dev.sh`. Jika dijalankan lagi nanti, ia melakukan rekonsiliasi dan tidak pernah menimpa suntingan Anda; setiap perubahan pada file yang sudah ada ditampilkan terlebih dahulu dan memerlukan persetujuan.

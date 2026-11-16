@@ -6,11 +6,17 @@ lang: de
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Herdr-Addon
 
 [Herdr](https://herdr.dev) bringt Coding-Agenten in Panes unter, auf Ihrem Rechner und auf Rechnern, die es über SSH erreicht. Dieses Addon lässt einen Deep Work Plan diese Agenten als **Peers** nutzen: Ein Plan kann eine abgegrenzte Aufgabe an einen Agenten in einem anderen Pane übergeben, genau eine autorisierte Antwort erhalten und einen Nachweis des Austauschs aufbewahren.
 
 Es ist ein optionales Addon von **DWP v7** (pack `v7.12.2`). Die Methodik funktioniert ohne es genauso: Fehlt das Addon oder ist es deaktiviert, läuft jede Aufgabe wie bisher in der aktuellen Sitzung.
+
+Deep Work Plan hat vier Säulen: spec-first-Pläne, das Repository als Harness, Loop Engineering und messbare Effizienz. Add-ons und Integrationen können Harness und Ablauf erweitern; die Methode funktioniert eigenständig.
+
+<HerdrLoop lang="de" class="not-prose my-10" />
 
 ## Was es integriert
 
@@ -25,7 +31,6 @@ Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](http
 | Erfordert | die `agent_delegation`-Freigabe des Plan-Vertrags |
 
 **Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung: die CLI-Verben und ihre dokumentierten Flags, die Exit-Codes `0`–`7`, die dokumentierten Variablen `HERDR_PEERS_*`, `DWP_PLAN` und `DWP_TASK`, Protokoll 2 sowie die JSON-Verträge `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` und der Delegationsdatensatz. Eine inkompatible Änderung an einem davon erhöht die Major-Version, und eine Änderung des Wire-Formats erhöht zusätzlich die Protokollnummer. `v1.0.0` ändert kein Verhalten gegenüber `v0.3.3`, und 0.x-Releases werden nicht mehr unterstützt.
-
 
 ## Installation
 
@@ -102,7 +107,7 @@ Die Version ist rein additiv: Protokoll 1 und alle Verben, Flags, Exit-Codes und
 
 ## Autopilot
 
-herdr-peers 1.2.0 ergänzt **autopilot** (`autopilot.md`): einen optionalen Daemon, `herdr-peers autopilot`, den ein Mensch startet, damit ein langer Plan nicht an einem Freigabebildschirm stehen bleibt. Er beobachtet jeden Agenten auf jedem aktivierten Herdr-Rechner und nimmt, wenn einer an einem Bildschirm wartet, eine Option an. Release 1.2.1 behebt einen Fall, in dem eine Frage, deren Optionen lange Beschreibungen haben, unbeantwortet blieb. Release 1.2.2 beantwortet eine Frage, die mit einer Vorschau neben ihren Optionen angezeigt wird, und erkennt die Empfehlungsmarkierung auf Spanisch, Französisch, Deutsch und Italienisch. Release 1.3.0 fügt die **Schleife** hinzu: `autopilot --loop` hält jeden offenen Plan auf jedem Rechner bis zu seinem Ende am Laufen, `--notify`/`--notify-env` richten seine Berichte dorthin, wo Sie sie haben wollen, und die schreibgeschützten Verben `plans` und `fleet` zeigen mit der Fleet-UI jede Lane, jeden Rechner und jeden offenen Plan auf einen Blick.
+herdr-peers 1.2.0 ergänzt **autopilot** (`autopilot.md`): einen optionalen Daemon, `herdr-peers autopilot`, den ein Mensch startet, damit ein langer Plan nicht an einem Freigabebildschirm stehen bleibt. Er beobachtet jeden Agenten auf jedem aktivierten Herdr-Rechner und nimmt, wenn einer an einem Bildschirm wartet, eine Option an. Release 1.2.1 behebt einen Fall, in dem eine Frage, deren Optionen lange Beschreibungen haben, unbeantwortet blieb. Release 1.2.2 beantwortet eine Frage, die mit einer Vorschau neben ihren Optionen angezeigt wird, und erkennt die Empfehlungsmarkierung auf Spanisch, Französisch, Deutsch und Italienisch. Release 1.3.0 fügt die **Schleife** hinzu: `autopilot --loop` hält jeden offenen Plan auf jedem Rechner bis zu seinem Ende am Laufen, `--notify` richten seine Berichte dorthin, wo Sie sie haben wollen, und die schreibgeschützten Verben `plans` und `fleet` zeigen mit der Fleet-UI jede Lane, jeden Rechner und jeden offenen Plan auf einen Blick.
 
 Release 2.0.0 verlegt die Leitung auf **Protokoll 2** und fügt drei Dinge hinzu: **die Lead-Ernennung** — nur auf das ausdrückliche Wort des Menschen (`lead claim --allow-appointment`) darf ein garantierter Plan, dessen Lead und sämtliche Nachfolger verschwunden sind, seine erste lebende Spur zum neuen Lead ernennen (`lead takeover --as-lane`, zweimal abgefragt, höchstens zwei Ernennungen pro Plan), und **`lead verify`** ist die schreibgeschützte Prüfung vor jedem Merge, Tag oder Release; das **Autopilot-Gehirn** — mit `--brain` startet der vom Menschen gestartete Daemon einen eigenen Agenten (coding-agents-kit 1.3.0 oder neuer) und gehorcht ihm nur innerhalb einer geschlossenen Liste von Aktionen, verweigert den Start ganz, wenn `ak` fehlt oder älter ist; und die **Plan-Warteschlange** — das Pack schreibt `.dwp/queue.json` (Schema `dwp-queue-v1`), und mit `--loop` startet der Daemon den nächsten eingereihten, genehmigten Plan ohne dich. Auf einem garantierten Plan müssen jede Spur und jeder Nachfolger 2.0 oder neuer laufen.
 
@@ -116,6 +121,14 @@ Release 2.0.0 verlegt die Leitung auf **Protokoll 2** und fügt drei Dinge hinzu
 **Was Sie akzeptieren, wenn Sie ihn laufen lassen.** Bei eingeschaltetem Autopilot wird die Anfrage eines Agenten freigegeben, ohne dass der Mensch sie sieht, auch ein Befehl, den der Mensch abgelehnt hätte. Es gibt keine Deny-Liste: Autopilot beurteilt nicht, was ein Befehl tut. Als Kontrollen bleiben der eigene Berechtigungsmodus und die Guardrails jedes Agenten, das, was sein Konto und sein Rechner erreichen können, die Regeln des Repositorys und das Code-Review vor einem Merge.
 
 Autopilot liegt außerhalb des Delegationsprotokolls: Er sendet weder Ask noch Antwort noch Notice, und die Regel für Agenten und Leads bleibt unverändert — der einzige Bildschirm, den sie per Tastendruck beantworten, ist das Ordnervertrauen, auf Panes, die sie selbst gestartet haben. Release 1.2.0 dokumentiert außerdem in `launcher.md`, wie ein Lead mit `ak` mehrere Agenten auf einmal öffnet.
+
+### Daemon-Steuerung und Loop in Version 2
+
+`autopilot run` läuft im Vordergrund; `start` startet den Hintergrunddienst; `stop`, `status` und `logs` steuern oder prüfen ihn. Starten darf ihn nur ein Mensch. Mit `--loop` erinnert er nur einen untätigen Plan-Lead, lässt blockierte Pläne unangetastet, beendet sich nach drei Erinnerungen ohne Fortschritt, bittet einen registrierten Nachfolger um die Übernahme eines fehlenden Leads und verarbeitet die freigegebene Plan-Warteschlange, indem er den Lead auffordert. Herdr liest die Warteschlange nur. `--notify "<command>"` sendet Planereignisse, ohne Befugnisse zu erweitern.
+
+`--notify-env NAME` übergibt dem Befehl zusätzlich diese benannte Umgebungsvariable; standardmäßig werden keine weiteren Variablen übergeben.
+
+Mit `--brain` verwendet Herdr coding-agents-kit ab Version 1.3.0: `ak pick` liefert im ask-Modus einen validierten pick-v2-Startvertrag. `--brain-kinds codex,claude` legt die Anbieterpriorität fest, `--brain-model claude=sonnet` wählt ein Modell. Das Brain darf nur eine Aktion aus einer geschlossenen Liste zurückgeben; fehlt `ak` oder ist es zu alt, wird der Start fail-closed abgelehnt. Eine Ernennung braucht sowohl die Planfreigabe (`lead claim --allow-appointment`) als auch `--appoint` beim menschlich gestarteten Daemon; die Lane verwendet `lead takeover --as-lane`. Vor Merge, Tag oder Release `lead verify` ausführen. `plans`, `fleet` und `fleet ui` sind schreibgeschützte Ansichten. Der Daemon startet sich nie selbst, ernennt niemanden ohne Freigabe, schreibt weder Warteschlange noch Lead-Datensatz, führt keinen freien Text aus und erweitert keine Berechtigungen.
 
 ## Hinweise
 

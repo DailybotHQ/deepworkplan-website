@@ -1,8 +1,10 @@
 ---
 title: "Kit ของ Deep Work Plan"
 description: "skill และ sub-skill เก้าตัว คำสั่ง adapter สำหรับเอเจนต์ preset สำหรับการออนบอร์ด ส่วนเสริมแบบเลือกเข้าร่วม และตัวอย่างที่ทำให้ Deep Work Plan รันได้ทุกที่"
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan มีเสาหลักสี่ประการ ได้แก่ แผนแบบ spec-first, repository ในฐานะ harness, loop engineering และประสิทธิภาพที่วัดผลได้ ส่วนเสริมและการผสานการทำงานช่วยขยาย harness และวงจรได้ แต่วิธีการนี้ทำงานได้ด้วยตัวเอง
 
 ## Kit ของ Deep Work Plan
 

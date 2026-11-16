@@ -12,6 +12,8 @@ order: 4
 
 Bir “arayüz yüzeyi” çoğuldur: işlenen bir **görsel UI**, stilize **CLI çıktısı** ve bir **konuşma** yüzeyi (ürünün sohbet veya e-posta üzerinden konuşması) ayrı ayrı sayılır. Eklenti her birini bağımsız olarak bir **profil** olarak saptar ve kabul edilen profiller aynı tek `DESIGN.md` içinde üst üste eklenir.
 
+Deep Work Plan’in dört temel ilkesi vardır: spec-first planlar, harness olarak depo, loop engineering ve ölçülen verimlilik. Eklentiler ve entegrasyonlar harness ile döngüyü genişletebilir; metodoloji tek başına çalışır.
+
 ## Neler ekler
 
 - `docs/DESIGN.md` konumunda bir `DESIGN.md` (deponun diğer spesifikasyonlarının yanında; yalnızca bir `docs/` ağacı olmadığında depo kökünde), **`AGENTS.md`’den başvurulan**; böylece ajanlar onu belgelerin geri kalanı gibi keşfeder. Bir depo, bir dosya — asla yüzey başına kardeş dosyalar değil.
@@ -40,7 +42,6 @@ Asla gerekli değildir — sıfır isteğe bağlı eklentili bir depo tamamen uy
 
 Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya tazelemek için deponun `.agents/commands/` dizinine bir `/design-system` yönlendiricisi kurabilir. Komutu kurmak isteğe bağlıdır; reddedilen bir eklenti hiçbirini kurmaz.
 
-
 ## v7 belirtimi
 
 | Öğe | Değer |
@@ -50,7 +51,6 @@ Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya ta
 | Tanımlayıcı |  (arayüz 1) |
 | Hedef dosya |  üzerinden dizine eklenen  |
 | Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş () |
-
 
 ## v7 belirtimi
 

@@ -1,8 +1,10 @@
 ---
 title: "Das Deep Work Plan Kit"
 description: "Die Skill und ihre neun Sub-Skills, Befehle, Agenten-Adapter, Onboarding-Presets, Opt-in-Addons und Beispiele, die Deep Work Plan überall ausführbar machen."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan hat vier Säulen: spec-first-Pläne, das Repository als Harness, Loop Engineering und messbare Effizienz. Add-ons und Integrationen können Harness und Ablauf erweitern; die Methode funktioniert eigenständig.
 
 ## Das Deep Work Plan Kit
 

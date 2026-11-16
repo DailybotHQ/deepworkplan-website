@@ -12,6 +12,8 @@ order: 8
 
 このアドオンは、このキットを **DWP v7**（パック `v7.12.2`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
+Deep Work Plan には4つの柱があります。spec-first の計画、ハーネスとしてのリポジトリ、loop engineering、測定可能な効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論は単独でも機能します。
+
 ## キットが提供するもの
 
 - **すべての CLI に共通の文法。** `ak claude`、`ak codex`、`ak cursor`、`ak opencode`、`ak pi`、`ak cline`、`ak grok`、`ak antigravity`、さらにプロバイダーごとのルート（Z.AI GLM、Azure OpenAI、xAI、Gemini API）が、同じセッションフラグを使います。`-c` で継続し、`-r <id>` で再開します。
@@ -107,6 +109,8 @@ ak doctor
 | タスクに対話が必要、長時間実行される、または別のマシン上にある | [Herdr](/kit/herdr)（ペイン内のピア） |
 
 二つは組み合わせられます。herdr-peers は、`ak env <kind> @profile` が出力する環境を使って、ペイン内にピアを起動できます。多数のレーンを同時に動かす場合は、[多数のエージェントを動かす](/methodology/06-orchestration)を参照してください。
+
+herdr-peers v2.0.0 の任意機能である autopilot brain はこのインターフェースを使います。`ak pick --kinds ... --json` が pick-v2 の起動契約を返し、Herdr はそれを検証して `launch.permissions: ask` を必須とし、返された `launch.argv` を実行します。brain が autonomy や bypass のフラグを有効にすることはありません。`ak update` は引き続き人が実行し、brain は CLI を更新しません。
 
 ## 補足
 

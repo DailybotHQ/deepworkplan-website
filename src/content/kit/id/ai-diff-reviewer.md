@@ -16,6 +16,8 @@ Sejak standar 2.3.0 tinjauan lokal itu **bagian dari baseline, bukan tambahan**.
 
 Batas yang membuat ini aman diadopsi sengaja dibuat sempit. Peninjau adalah skill berlisensi MIT yang dipatok ke sebuah tag dan dijalankan oleh coding agent yang sudah Anda pakai, sehingga tidak ada alur Deep Work Plan yang bergantung pada layanan komersial, penyedia CI, atau sebuah secret. **Flow A** (hanya lokal) adalah yang diterima setiap repositori yang telah di-onboarding; **Flow B** ditawarkan secara eksplisit dan tidak pernah dipasang tanpa diminta. Pengembang juga boleh menolak peninjau itu sama sekali — penolakan tersebut dicatat sebagai pengecualian yang dinyatakan, dan `verify` melaporkan repositori sebagai tidak sesuai pada poin itu sampai peninjau dipasang.
 
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori sebagai harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
 ## Kapan Menggunakannya
 
 | Sinyal | Tindakan |

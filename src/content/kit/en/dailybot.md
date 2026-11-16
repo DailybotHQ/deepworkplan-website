@@ -12,6 +12,8 @@ Connect Deep Work Plan execution to a **Dailybot team** so humans see what agent
 
 The core Deep Work Plan methodology has **zero** Dailybot dependency. A repository with zero optional addons is fully conformant. Offer this addon only when the developer or team already uses Dailybot; never auto-install for everyone.
 
+Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
+
 ## When to use it
 
 | Signal | Action |

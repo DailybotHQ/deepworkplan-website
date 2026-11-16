@@ -12,6 +12,8 @@ order: 8
 
 यह ऐडऑन इस kit को **DWP v7** (पैक `v7.12.2`) में **headless** प्रत्यायोजन ट्रांसपोर्ट के रूप में एकीकृत करता है। यह वैकल्पिक है: इसके बिना हर कार्य वर्तमान सत्र में ही चलता है, ठीक पहले की तरह। kit स्वयं एक MIT उत्पाद है जो Deep Work Plan के बिना भी काम करता है।
 
+Deep Work Plan के चार स्तंभ हैं: spec-first योजनाएँ, harness के रूप में रिपॉज़िटरी, loop engineering और मापी गई दक्षता। ऐडऑन और एकीकरण harness तथा लूप का विस्तार कर सकते हैं; कार्यविधि अकेले भी काम करती है।
+
 ## kit आपको क्या देता है
 
 - **हर CLI के लिए एक व्याकरण।** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` और `ak antigravity`, साथ ही प्रदाता रूट (Z.AI GLM, Azure OpenAI, xAI और Gemini API), एक जैसे सत्र फ़्लैग के साथ: `-c` जारी रखता है, `-r <id>` फिर से शुरू करता है।
@@ -107,6 +109,8 @@ ak doctor
 | कार्य को इंटरैक्शन चाहिए, वह लंबा चलता है, या किसी दूसरी मशीन पर है | [Herdr](/kit/herdr) (पेन में एक पीयर) |
 
 दोनों साथ मिलकर काम करते हैं: herdr-peers किसी पेन में उस environment के साथ पीयर लॉन्च कर सकता है जिसे `ak env <kind> @profile` प्रिंट करता है। एक साथ कई लेन के लिए, [कई एजेंट चलाना](/methodology/06-orchestration) देखें।
+
+herdr-peers v2.0.0 अपने वैकल्पिक autopilot brain के लिए इस इंटरफ़ेस का उपयोग करता है: `ak pick --kinds ... --json` pick-v2 launch contract देता है; Herdr इसे सत्यापित करता है, `launch.permissions: ask` अनिवार्य रखता है और फिर लौटे हुए `launch.argv` को चलाता है। brain autonomy या bypass flags सक्षम नहीं कर सकता। `ak update` इंसान द्वारा ही चलाया जाता है; brain CLI अपडेट नहीं करता।
 
 ## टिप्पणियाँ
 

@@ -6,11 +6,17 @@ lang: fr
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Addon Herdr
 
 [Herdr](https://herdr.dev) place des agents de code dans des panneaux, sur votre machine et sur les machines qu’il atteint via SSH. Cet addon permet à un Deep Work Plan d’utiliser ces agents comme **pairs** : un plan peut confier une tâche délimitée à un agent situé dans un autre panneau, recevoir exactement une réponse autorisée et conserver une trace de l’échange.
 
 C’est un addon facultatif de **DWP v7** (pack `v7.12.2`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
+
+Deep Work Plan repose sur quatre piliers : des plans spec-first, le dépôt comme harness, le loop engineering et une efficacité mesurée. Les addons et intégrations peuvent étendre le harness et la boucle ; la méthode fonctionne seule.
+
+<HerdrLoop lang="fr" class="not-prose my-10" />
 
 ## Ce qu’il intègre
 
@@ -25,7 +31,6 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 | Requiert | l’octroi `agent_delegation` du contrat du plan |
 
 **Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique : les verbes de la CLI et leurs options documentées, les codes de sortie `0`–`7`, les variables documentées `HERDR_PEERS_*`, `DWP_PLAN` et `DWP_TASK`, le protocole 2 et les contrats JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` et l’enregistrement de délégation. Un changement incompatible de l’un d’eux incrémente la version majeure, et un changement du format de transmission incrémente aussi le numéro de protocole. `v1.0.0` ne modifie aucun comportement par rapport à `v0.3.3`, et les versions 0.x ne sont plus prises en charge.
-
 
 ## Installation
 
@@ -102,7 +107,7 @@ La version est purement additive : le protocole 1 et l'ensemble des verbes, opti
 
 ## Autopilot
 
-herdr-peers 1.2.0 ajoute **autopilot** (`autopilot.md`) : un démon facultatif, `herdr-peers autopilot`, qu’un humain démarre pour qu’un long plan ne s’arrête pas sur un écran d’approbation. Il surveille chaque agent sur chaque machine Herdr activée et, lorsque l’un d’eux attend sur un écran, accepte une option. La version 1.2.1 corrige un cas où une question dont les options ont de longues descriptions restait sans réponse. La version 1.2.2 répond à une question affichée avec un aperçu à côté de ses options et reconnaît la marque de recommandation en espagnol, français, allemand et italien. La version 1.3.0 ajoute la **boucle** : `autopilot --loop` garde chaque plan ouvert en exécution jusqu'à son terme sur toutes les machines, `--notify`/`--notify-env` pointent ses rapports où vous le voulez, et les verbes en lecture seule `plans` et `fleet` avec l'interface fleet montrent chaque couloir, machine et plan ouvert d'un coup d'œil.
+herdr-peers 1.2.0 ajoute **autopilot** (`autopilot.md`) : un démon facultatif, `herdr-peers autopilot`, qu’un humain démarre pour qu’un long plan ne s’arrête pas sur un écran d’approbation. Il surveille chaque agent sur chaque machine Herdr activée et, lorsque l’un d’eux attend sur un écran, accepte une option. La version 1.2.1 corrige un cas où une question dont les options ont de longues descriptions restait sans réponse. La version 1.2.2 répond à une question affichée avec un aperçu à côté de ses options et reconnaît la marque de recommandation en espagnol, français, allemand et italien. La version 1.3.0 ajoute la **boucle** : `autopilot --loop` garde chaque plan ouvert en exécution jusqu'à son terme sur toutes les machines, `--notify` pointent ses rapports où vous le voulez, et les verbes en lecture seule `plans` et `fleet` avec l'interface fleet montrent chaque couloir, machine et plan ouvert d'un coup d'œil.
 
 La version 2.0.0 déplace le fil vers le **protocole 2** et ajoute trois choses : **la nomination de lead** — sur le mot explicite de l'humain (`lead claim --allow-appointment`), un plan granti dont le lead et tous les successeurs ont disparu peut nommer son premier couloir vivant comme nouveau lead (`lead takeover --as-lane`, sondé deux fois, au maximum deux nominations par plan), et **`lead verify`** est la vérification en lecture seule à exécuter avant tout merge, tag ou release ; le **cerveau de l'autopilot** — avec `--brain`, le démon démarré par l'humain lance un agent dédié (coding-agents-kit 1.3.0 ou ultérieur) et ne lui obéit que dans une liste fermée d'actions, refusant de démarrer si `ak` manque ou est plus ancien ; et la **file d'attente de plans** — le pack écrit `.dwp/queue.json` (schéma `dwp-queue-v1`) et avec `--loop` le démarre le prochain plan en file et approuvé sans vous. Sur un plan granti, chaque couloir et chaque successeur doit exécuter 2.0 ou ultérieur.
 
@@ -116,6 +121,14 @@ La version 2.0.0 déplace le fil vers le **protocole 2** et ajoute trois choses 
 **Ce que vous acceptez en l’exécutant.** Avec autopilot activé, la requête d’un agent est approuvée sans que l’humain la voie, y compris une commande que l’humain aurait refusée. Il n’y a pas de liste d’interdiction : autopilot ne juge pas ce que fait une commande. Les contrôles qui subsistent sont le mode de permission et les garde-fous propres à chaque agent, ce que son compte et sa machine peuvent atteindre, les règles du dépôt et la revue de code avant un merge.
 
 Autopilot est en dehors du protocole de délégation : il n’envoie ni demande, ni réponse, ni notification, et la règle pour les agents et les coordinateurs est inchangée — le seul écran sur lequel ils envoient des touches est celui de la confiance accordée au dossier, sur les panneaux qu’ils ont lancés. La version 1.2.0 documente aussi, dans `launcher.md`, comment un coordinateur ouvre plusieurs agents à la fois avec `ak`.
+
+### Commandes du démon et boucle v2
+
+`autopilot run` s’exécute au premier plan ; `start` le lance en arrière-plan ; `stop`, `status` et `logs` permettent de l’arrêter ou de l’inspecter. Seul un humain peut le démarrer. Avec `--loop`, il relance uniquement le lead inactif d’un plan, laisse les plans bloqués intacts, s’arrête après trois relances sans progrès, demande à un successeur enregistré de reprendre un lead absent et consomme la file des plans approuvés en envoyant une consigne à leur lead. Herdr ne fait que lire la file. `--notify "<command>"` envoie des événements de plan sans ajouter d’autorité.
+
+`--notify-env NAME` transmet également cette variable d’environnement nommée à la commande ; aucune autre variable n’est transmise par défaut.
+
+Avec `--brain`, Herdr utilise coding-agents-kit 1.3.0 ou ultérieur : `ak pick` fournit un contrat de lancement pick-v2 vérifié en mode ask. `--brain-kinds codex,claude` définit la priorité des fournisseurs et `--brain-model claude=sonnet` choisit un modèle. Le brain ne peut renvoyer qu’une action d’une liste fermée ; si `ak` manque ou est trop ancien, le démarrage échoue de manière fermée. La nomination exige l’autorisation du plan (`lead claim --allow-appointment`) et l’option `--appoint` du démon démarré par un humain ; la lane utilise `lead takeover --as-lane`. Exécutez `lead verify` avant un merge, un tag ou une release. `plans`, `fleet` et `fleet ui` sont des vues en lecture seule. Le démon ne se démarre jamais lui-même, ne nomme personne sans autorisation, n’écrit ni la file ni le registre du lead, n’exécute pas de texte libre et n’élargit pas les permissions.
 
 ## Notes
 

@@ -10,6 +10,8 @@ order: 1
 
 リポジトリに、再現可能で隔離された開発コンテナを用意します。人、エディター、コーディングエージェントのいずれもが使えるコンテナです。**DWP v7**（パック `v7.12.2`）では、このアドオンが **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** を統合します。これは Deep Work Plan がなくても動作する MIT のプロダクトです。任意のアドオンであり、リポジトリはこれがなくても完全に適合します。
 
+Deep Work Plan には4つの柱があります。spec-first の計画、ハーネスとしてのリポジトリ、loop engineering、測定可能な効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論は単独でも機能します。
+
 ## devcontainer-kit が提供するもの
 
 - **テンプレート。** [Dev Containers](https://containers.dev) 仕様に基づき、`dck init` が一つの固定レイアウトでリポジトリに展開します：`.devcontainer/devcontainer.json`、`docker/local/<service>/Dockerfile`、`docker/local/docker-compose.yaml`、`dev.sh`。後から再実行すると調整を行い、あなたの編集を上書きすることはありません。既存ファイルへの変更はすべて事前に提示され、同意が必要です。

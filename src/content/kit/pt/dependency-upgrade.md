@@ -10,6 +10,8 @@ order: 3
 
 Atualiza as dependências de um repositório com um fluxo de trabalho em lotes, validado e reversível. O terceiro addon opcional do Deep Work Plan.
 
+Deep Work Plan tem quatro pilares: planos spec-first, o repositório como harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o ciclo; a metodologia funciona por conta própria.
+
 ## O que ele adiciona
 
 - Detecção do gerenciador de pacotes **real** do repositório (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer e mais) a partir do manifesto e do lockfile existentes.
@@ -23,7 +25,6 @@ Atualiza as dependências de um repositório com um fluxo de trabalho em lotes, 
 4. Executar o validation gate real do repositório após cada lote; reverter qualquer lote que falhe.
 5. Resumir o que foi atualizado, ignorado e revertido; deixar o desenvolvedor comitar.
 
-
 ## Especificação v7
 
 | Item | Valor |
@@ -33,6 +34,7 @@ Atualiza as dependências de um repositório com um fluxo de trabalho em lotes, 
 | Descritor | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Comando | `/lib-upgrade` instalado em `.agents/commands/` quando aceito |
 | Controle de versão | Fixado e versionado com o pacote de skills (`v7.12.2`) |
+
 ## Notas
 
 Independente do gerenciador de pacotes — nunca executa npm/ncu em um repositório que não é JS. Opcional, nunca obrigatório e nunca comita automaticamente.

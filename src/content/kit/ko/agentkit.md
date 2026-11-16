@@ -12,6 +12,8 @@ order: 8
 
 이 애드온은 이 키트를 **DWP v7**(팩 `v7.12.2`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
 
+Deep Work Plan의 네 가지 축은 spec-first 계획, harness 역할을 하는 저장소, loop engineering, 측정 가능한 효율입니다. 애드온과 통합 기능은 harness와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
+
 ## 키트가 제공하는 것
 
 - **모든 CLI에 하나의 문법.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok`, `ak antigravity`, 그리고 제공자 경로(Z.AI GLM, Azure OpenAI, xAI, Gemini API)가 같은 세션 플래그를 사용합니다. `-c`는 이어 가고, `-r <id>`는 재개합니다.
@@ -107,6 +109,8 @@ ak doctor
 | 작업에 상호작용이 필요하거나, 오래 실행되거나, 다른 머신에 있음 | [Herdr](/kit/herdr)(페인 안의 피어) |
 
 둘은 함께 쓸 수 있습니다. herdr-peers는 `ak env <kind> @profile`이 출력하는 환경으로 페인 안에 피어를 실행할 수 있습니다. 여러 레인을 한꺼번에 운영하려면 [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
+
+herdr-peers v2.0.0은 선택적 autopilot brain에 이 인터페이스를 사용합니다. `ak pick --kinds ... --json`이 pick-v2 실행 계약을 반환하면 Herdr가 이를 검증하고 `launch.permissions: ask`를 요구한 뒤 반환된 `launch.argv`를 실행합니다. brain은 autonomy 또는 bypass 플래그를 활성화할 수 없습니다. `ak update`는 계속 사람이 직접 실행하며 brain은 CLI를 업데이트하지 않습니다.
 
 ## 참고
 

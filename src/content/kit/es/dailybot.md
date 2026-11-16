@@ -12,6 +12,8 @@ Conecta la ejecución de Deep Work Plan con un **equipo de Dailybot** para que l
 
 La metodología central de Deep Work Plan tiene **cero** dependencia de Dailybot. Un repositorio sin addons opcionales es plenamente conforme. Ofrece este addon solo cuando el desarrollador o el equipo ya usan Dailybot; nunca lo instales automáticamente para todos.
 
+Deep Work Plan se apoya en cuatro pilares: planes con enfoque spec-first, el repositorio como arnés, loop engineering y eficiencia medida. Los addons y las integraciones pueden ampliar el arnés y el ciclo; la metodología funciona por sí sola.
+
 ## Cuándo usarlo
 
 | Señal | Acción |

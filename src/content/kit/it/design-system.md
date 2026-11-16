@@ -12,6 +12,8 @@ Dota un repository con una **superficie di interfaccia rivolta all’utente** di
 
 Una «superficie di interfaccia» è plurale: una **UI visuale** renderizzata, un **output CLI** stilizzato e una superficie **conversazionale** (il prodotto parla via chat o email) contano ciascuna. L’addon rileva ognuna in modo indipendente come **profilo**, e i profili accettati si impilano nello stesso unico `DESIGN.md`.
 
+Deep Work Plan ha quattro pilastri: piani spec-first, il repository come harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere l’harness e il ciclo; la metodologia funziona da sola.
+
 ## Cosa aggiunge
 
 - Un `DESIGN.md` in `docs/DESIGN.md` (accanto alle altre specifiche del repo; la radice del repo solo quando non esiste un albero `docs/`), **referenziato da `AGENTS.md`** così che gli agenti lo scoprano come il resto della documentazione. Un repo, un file — mai file fratelli per superficie.
@@ -40,7 +42,6 @@ Non è mai obbligatorio — un repository con zero addon opzionali è pienamente
 
 Quando accettato, l’addon può installare un delegatore `/design-system` nella cartella `.agents/commands/` del repo per rigenerare o aggiornare `DESIGN.md` in seguito. Installare il comando è opzionale; un addon rifiutato non ne installa alcuno.
 
-
 ## Specifica v7
 
 | Elemento | Valore |
@@ -50,6 +51,7 @@ Quando accettato, l’addon può installare un delegatore `/design-system` nella
 | Descrittore | `addons/design-system/addon.json` (interfaccia 1) |
 | File di destinazione | `docs/DESIGN.md` indicizzato da `AGENTS.md` |
 | Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.12.2`) |
+
 ## Relazione con i documenti di design per funzionalità
 
 Questo è un file di design system **a livello di repository, persistente** — distinto da un documento di design tecnico per funzionalità (il `design.md` del flusso «requisiti → design → attività» dei workflow spec-driven legati a uno strumento). Deep Work Plan deliberatamente non include un archetipo separato di documento di design per funzionalità: il README di un piano, i criteri di accettazione di ogni attività e i validation gate coprono già quel ruolo. Questo addon colma l’unica lacuna che quel ruolo non copre: un contesto di design dell’interfaccia durevole e nativo del repo.

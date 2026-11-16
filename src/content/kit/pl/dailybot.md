@@ -12,6 +12,8 @@ Połącz wykonanie Deep Work Plan z **zespołem Dailybot**, aby ludzie widzieli,
 
 Podstawowa metodyka Deep Work Plan ma **zero** zależności od Dailybot. Repozytorium bez opcjonalnych addonów jest w pełni zgodne. Proponuj ten addon tylko wtedy, gdy programista lub zespół już korzysta z Dailybot; nigdy nie instaluj go automatycznie dla wszystkich.
 
+Deep Work Plan ma cztery filary: plany spec-first, repozytorium jako harness, loop engineering i mierzoną wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa samodzielnie.
+
 ## Kiedy używać
 
 | Sygnał | Działanie |

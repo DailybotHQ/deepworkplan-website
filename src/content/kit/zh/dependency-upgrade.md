@@ -10,6 +10,8 @@ order: 3
 
 以一套分批次、经验证、可回退的工作流，把仓库的依赖更新到最新。Deep Work Plan 的第三个可选附加组件。
 
+Deep Work Plan 有四大支柱：spec-first 计划、作为 harness 的代码库、loop engineering 和可衡量的效率。插件与集成可以扩展 harness 和执行循环；方法本身可以独立使用。
+
 ## 它添加了什么
 
 - 从存在的清单与锁文件中检测仓库的**真实**包管理器（npm/pnpm/yarn + ncu、pip/poetry/uv、cargo、go mod、bundler、composer 等）。
@@ -23,7 +25,6 @@ order: 3
 4. 在每个批次后运行仓库真实的验证关卡；回退任何失败的批次。
 5. 总结升级了什么、跳过了什么、回退了什么；交由开发者提交。
 
-
 ## v7 规范
 
 | 条目 | 值 |
@@ -33,6 +34,7 @@ order: 3
 | 描述符 | `addons/dependency-upgrade/addon.json`（接口 1） |
 | 命令 | 接受后安装至 `.agents/commands/` 的 `/lib-upgrade` |
 | 版本控制 | 随技能包固定并控制版本（`v7.12.2`） |
+
 ## 备注
 
 包管理器无关——绝不在一个非 JS 仓库中运行 npm/ncu。可选，绝非必需，且绝不自动提交。

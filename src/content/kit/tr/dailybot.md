@@ -12,6 +12,8 @@ Deep Work Plan yürütmesini bir **Dailybot ekibine** bağlayın; böylece insan
 
 Temel Deep Work Plan metodolojisinin Dailybot'a **sıfır** bağımlılığı vardır. Sıfır isteğe bağlı eklentili bir depo tamamen uyumludur. Bu eklentiyi yalnızca geliştirici veya ekip zaten Dailybot kullanıyorsa önerin; herkes için otomatik kurmayın.
 
+Deep Work Plan’in dört temel ilkesi vardır: spec-first planlar, harness olarak depo, loop engineering ve ölçülen verimlilik. Eklentiler ve entegrasyonlar harness ile döngüyü genişletebilir; metodoloji tek başına çalışır.
+
 ## Ne zaman kullanılır
 
 | Sinyal | Eylem |

@@ -1,0 +1,344 @@
+---
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+
+const { lang = 'en', class: className = '' } = Astro.props;
+
+const i18n = {
+  en: {
+    aria: 'Herdr plan loop: register a plan, let a human start the daemon, read plan state, prompt its lead or successor, report events, then continue with the next approved plan.',
+    title: 'The plan loop',
+    steps: [
+      'Register the plan',
+      'A human starts the daemon',
+      'Read plan state and queue',
+      'Prompt the lead or successor',
+      'Report events; respect gates',
+      'Continue with the next approved plan',
+    ],
+    caption:
+      'The daemon reads plan state and the queue. It prompts a lead or successor, reports lifecycle events, and leaves plan gates in control.',
+  },
+  es: {
+    aria: 'Ciclo de planes de Herdr: registrar un plan, dejar que una persona inicie el daemon, leer el estado, avisar al lead o sucesor, informar eventos y continuar con el siguiente plan aprobado.',
+    title: 'El ciclo del plan',
+    steps: [
+      'Registrar el plan',
+      'Una persona inicia el daemon',
+      'Leer el estado y la cola',
+      'Avisar al lead o sucesor',
+      'Informar eventos; respetar las validaciones',
+      'Continuar con el siguiente plan aprobado',
+    ],
+    caption:
+      'El daemon lee el estado del plan y la cola. Avisa al lead o sucesor, informa eventos del ciclo de vida y respeta las validaciones del plan.',
+  },
+  pt: {
+    aria: 'Loop de planos do Herdr: registrar um plano, deixar uma pessoa iniciar o daemon, ler o estado, avisar o lead ou sucessor, informar eventos e continuar com o próximo plano aprovado.',
+    title: 'O loop do plano',
+    steps: [
+      'Registrar o plano',
+      'Uma pessoa inicia o daemon',
+      'Ler o estado e a fila',
+      'Avisar o lead ou sucessor',
+      'Informar eventos; respeitar os gates',
+      'Continuar com o próximo plano aprovado',
+    ],
+    caption:
+      'O daemon lê o estado do plano e a fila. Ele avisa o lead ou sucessor, informa eventos do ciclo e respeita os gates do plano.',
+  },
+  zh: {
+    aria: 'Herdr 计划循环：登记计划，由人启动 daemon，读取计划状态，提示 lead 或继任者，报告事件，然后继续下一个已批准的计划。',
+    title: '计划循环',
+    steps: [
+      '登记计划',
+      '由人启动 daemon',
+      '读取状态和队列',
+      '提示 lead 或继任者',
+      '报告事件；遵守关卡',
+      '继续下一个已批准的计划',
+    ],
+    caption:
+      'daemon 读取计划状态和队列，提示 lead 或继任者，报告生命周期事件，并遵守计划关卡。',
+  },
+  ja: {
+    aria: 'Herdr の計画ループ。計画を登録し、人がデーモンを起動し、状態を読み取り、lead または後継者に通知し、イベントを報告して、次の承認済み計画へ進みます。',
+    title: '計画のループ',
+    steps: [
+      '計画を登録',
+      '人がデーモンを起動',
+      '状態とキューを読む',
+      'lead または後継者に通知',
+      'イベントを報告し、ゲートを守る',
+      '次の承認済み計画へ進む',
+    ],
+    caption:
+      'デーモンは計画の状態とキューを読み、lead または後継者に通知し、ライフサイクルイベントを報告します。計画のゲートはそのまま適用されます。',
+  },
+  de: {
+    aria: 'Herdr-Planzyklus: Plan registrieren, den Daemon von einem Menschen starten lassen, Status lesen, Lead oder Nachfolger auffordern, Ereignisse melden und mit dem nächsten freigegebenen Plan fortfahren.',
+    title: 'Der Planzyklus',
+    steps: [
+      'Plan registrieren',
+      'Ein Mensch startet den Daemon',
+      'Status und Warteschlange lesen',
+      'Lead oder Nachfolger auffordern',
+      'Ereignisse melden; Gates beachten',
+      'Mit dem nächsten freigegebenen Plan fortfahren',
+    ],
+    caption:
+      'Der Daemon liest Planstatus und Warteschlange. Er fordert Lead oder Nachfolger auf, meldet Lebenszyklusereignisse und beachtet die Plan-Gates.',
+  },
+  fr: {
+    aria: 'Boucle des plans Herdr : enregistrer un plan, laisser un humain démarrer le démon, lire son état, solliciter le lead ou son successeur, signaler les événements, puis passer au prochain plan approuvé.',
+    title: 'La boucle du plan',
+    steps: [
+      'Enregistrer le plan',
+      'Un humain démarre le démon',
+      'Lire l’état et la file',
+      'Solliciter le lead ou son successeur',
+      'Signaler les événements ; respecter les gates',
+      'Passer au prochain plan approuvé',
+    ],
+    caption:
+      'Le démon lit l’état du plan et la file. Il sollicite le lead ou son successeur, signale les événements du cycle et respecte les gates du plan.',
+  },
+  ko: {
+    aria: 'Herdr 계획 루프: 계획을 등록하고 사람이 데몬을 시작한 뒤 상태를 읽고 lead 또는 successor에게 알리며 이벤트를 보고하고 다음 승인된 계획을 이어서 처리합니다.',
+    title: '계획 루프',
+    steps: [
+      '계획 등록',
+      '사람이 데몬 시작',
+      '상태와 큐 읽기',
+      'lead 또는 successor에게 알림',
+      '이벤트 보고; 게이트 준수',
+      '다음 승인된 계획으로 진행',
+    ],
+    caption:
+      '데몬은 계획 상태와 큐를 읽고 lead 또는 successor에게 알리며 수명 주기 이벤트를 보고합니다. 계획 게이트는 그대로 적용됩니다.',
+  },
+  ru: {
+    aria: 'Цикл планов Herdr: зарегистрировать план, дождаться запуска демона человеком, прочитать состояние, обратиться к lead или преемнику, сообщить о событиях и перейти к следующему утверждённому плану.',
+    title: 'Цикл плана',
+    steps: [
+      'Зарегистрировать план',
+      'Человек запускает демон',
+      'Прочитать состояние и очередь',
+      'Обратиться к lead или преемнику',
+      'Сообщить о событиях; соблюдать gates',
+      'Перейти к следующему утверждённому плану',
+    ],
+    caption:
+      'Демон читает состояние плана и очередь, обращается к lead или преемнику и сообщает о событиях жизненного цикла. Gates плана остаются в силе.',
+  },
+  it: {
+    aria: 'Loop dei piani Herdr: registrare un piano, far avviare il daemon da una persona, leggere lo stato, sollecitare il lead o il successore, segnalare gli eventi e proseguire con il prossimo piano approvato.',
+    title: 'Il loop del piano',
+    steps: [
+      'Registrare il piano',
+      'Una persona avvia il daemon',
+      'Leggere stato e coda',
+      'Sollecitare il lead o il successore',
+      'Segnalare gli eventi; rispettare i gate',
+      'Proseguire con il prossimo piano approvato',
+    ],
+    caption:
+      'Il daemon legge lo stato del piano e la coda, sollecita il lead o il successore e segnala gli eventi del ciclo. I gate del piano restano validi.',
+  },
+  tr: {
+    aria: 'Herdr plan döngüsü: planı kaydetmek, daemonı bir insanın başlatması, durumu okumak, lead veya halefi uyarmak, olayları bildirmek ve sıradaki onaylı planla devam etmek.',
+    title: 'Plan döngüsü',
+    steps: [
+      'Planı kaydet',
+      'Daemonı bir insan başlatır',
+      'Durumu ve kuyruğu oku',
+      'Lead veya halefi uyar',
+      'Olayları bildir; kapılara uy',
+      'Sıradaki onaylı planla devam et',
+    ],
+    caption:
+      'Daemon plan durumunu ve kuyruğu okur, lead veya halefi uyarır ve yaşam döngüsü olaylarını bildirir. Plan kapıları geçerliliğini korur.',
+  },
+  id: {
+    aria: 'Loop rencana Herdr: daftarkan rencana, biarkan manusia memulai daemon, baca status, beri prompt kepada lead atau penerus, laporkan peristiwa, lalu lanjutkan ke rencana disetujui berikutnya.',
+    title: 'Loop rencana',
+    steps: [
+      'Daftarkan rencana',
+      'Manusia memulai daemon',
+      'Baca status dan antrean',
+      'Prompt lead atau penerus',
+      'Laporkan peristiwa; patuhi gerbang',
+      'Lanjutkan ke rencana disetujui berikutnya',
+    ],
+    caption:
+      'Daemon membaca status rencana dan antrean, memberi prompt kepada lead atau penerus, serta melaporkan peristiwa siklus. Gerbang rencana tetap berlaku.',
+  },
+  vi: {
+    aria: 'Vòng lặp kế hoạch Herdr: đăng ký kế hoạch, để con người khởi động daemon, đọc trạng thái, nhắc lead hoặc người kế nhiệm, báo sự kiện rồi tiếp tục kế hoạch đã duyệt tiếp theo.',
+    title: 'Vòng lặp kế hoạch',
+    steps: [
+      'Đăng ký kế hoạch',
+      'Con người khởi động daemon',
+      'Đọc trạng thái và hàng đợi',
+      'Nhắc lead hoặc người kế nhiệm',
+      'Báo sự kiện; tuân thủ cổng kiểm chứng',
+      'Tiếp tục kế hoạch đã duyệt tiếp theo',
+    ],
+    caption:
+      'Daemon đọc trạng thái kế hoạch và hàng đợi, nhắc lead hoặc người kế nhiệm, rồi báo sự kiện vòng đời. Các cổng kiểm chứng của kế hoạch vẫn được giữ nguyên.',
+  },
+  hi: {
+    aria: 'Herdr योजना लूप: योजना दर्ज करें, इंसान से daemon शुरू करवाएँ, स्थिति पढ़ें, lead या उत्तराधिकारी को आगे बढ़ने का संकेत दें, घटनाएँ रिपोर्ट करें और अगली स्वीकृत योजना जारी रखें।',
+    title: 'योजना लूप',
+    steps: [
+      'योजना दर्ज करें',
+      'इंसान daemon शुरू करता है',
+      'स्थिति और queue पढ़ें',
+      'lead या उत्तराधिकारी को संकेत दें',
+      'घटनाएँ रिपोर्ट करें; gates मानें',
+      'अगली स्वीकृत योजना जारी रखें',
+    ],
+    caption:
+      'Daemon योजना की स्थिति और queue पढ़ता है, lead या उत्तराधिकारी को संकेत देता है और lifecycle घटनाएँ रिपोर्ट करता है। योजना के gates लागू रहते हैं।',
+  },
+  pl: {
+    aria: 'Pętla planu Herdr: zarejestrować plan, uruchomić demona ręcznie, odczytać stan, ponaglić lead lub następcę, zgłosić zdarzenia i przejść do następnego zatwierdzonego planu.',
+    title: 'Pętla planu',
+    steps: [
+      'Zarejestruj plan',
+      'Człowiek uruchamia demona',
+      'Odczytaj stan i kolejkę',
+      'Ponaglij lead lub następcę',
+      'Zgłoś zdarzenia; przestrzegaj gates',
+      'Przejdź do następnego zatwierdzonego planu',
+    ],
+    caption:
+      'Demon odczytuje stan planu i kolejkę, ponagla lead lub następcę oraz zgłasza zdarzenia cyklu. Gates planu pozostają w mocy.',
+  },
+  uk: {
+    aria: 'Цикл плану Herdr: зареєструвати план, дочекатися запуску демона людиною, прочитати стан, звернутися до lead або наступника, повідомити про події та перейти до наступного схваленого плану.',
+    title: 'Цикл плану',
+    steps: [
+      'Зареєструвати план',
+      'Людина запускає демон',
+      'Прочитати стан і чергу',
+      'Звернутися до lead або наступника',
+      'Повідомити про події; дотримуватися gates',
+      'Перейти до наступного схваленого плану',
+    ],
+    caption:
+      'Демон читає стан плану й чергу, звертається до lead або наступника та повідомляє про події життєвого циклу. Gates плану залишаються чинними.',
+  },
+  th: {
+    aria: 'วงจรแผนของ Herdr: ลงทะเบียนแผน ให้มนุษย์เริ่ม daemon อ่านสถานะ เตือน lead หรือผู้สืบทอด รายงานเหตุการณ์ แล้วดำเนินแผนที่อนุมัติถัดไป',
+    title: 'วงจรแผน',
+    steps: [
+      'ลงทะเบียนแผน',
+      'มนุษย์เริ่ม daemon',
+      'อ่านสถานะและคิว',
+      'เตือน lead หรือผู้สืบทอด',
+      'รายงานเหตุการณ์และเคารพ gates',
+      'ดำเนินแผนที่อนุมัติถัดไป',
+    ],
+    caption:
+      'daemon อ่านสถานะแผนและคิว แจ้งเตือน lead หรือผู้สืบทอด และรายงานเหตุการณ์ตลอดวงจร โดยยังคงใช้ gates ของแผน',
+  },
+};
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+const steps = t.steps;
+---
+
+<figure class:list={['editorial-asset herdr-loop', className]} role="img" aria-label={t.aria}>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <p class="herdr-loop__title">{t.title}</p>
+    <ol class="herdr-loop__steps">
+      {steps.map((step, index) => (
+        <li class="herdr-loop__step">
+          <span class="herdr-loop__number">0{index + 1}</span>
+          <span>{step}</span>
+        </li>
+      ))}
+    </ol>
+    <figcaption class="fig-caption">{t.caption}</figcaption>
+  </div>
+</figure>
+
+<style>
+  .herdr-loop {
+    aspect-ratio: 16 / 7;
+    min-height: 13rem;
+    color: var(--color-ink);
+  }
+
+  .herdr-loop__title {
+    margin: 0 0 1rem;
+    color: var(--color-secondary);
+    font-family: var(--font-serif);
+    font-size: 0.78rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .herdr-loop__steps {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--color-line);
+    border-left: 1px solid var(--color-line);
+  }
+
+  .herdr-loop__step {
+    display: flex;
+    min-height: 4.5rem;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.8rem 0.9rem;
+    border-right: 1px solid var(--color-line);
+    border-bottom: 1px solid var(--color-line);
+    font-family: var(--font-serif);
+    line-height: 1.35;
+  }
+
+  .herdr-loop__number {
+    flex: 0 0 auto;
+    color: var(--color-muted);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .fig-caption {
+    margin-top: 0.75rem;
+    color: var(--color-muted);
+    font-family: var(--font-serif);
+    font-size: 0.875rem;
+    line-height: 1.45;
+  }
+
+  @media (max-width: 640px) {
+    .herdr-loop {
+      aspect-ratio: 1 / 1;
+      min-height: 22rem;
+    }
+
+    .herdr-loop__steps {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .herdr-loop__step {
+      min-height: 4.75rem;
+      padding: 0.7rem 0.55rem;
+      font-size: 0.9rem;
+    }
+  }
+</style>

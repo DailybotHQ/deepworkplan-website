@@ -12,6 +12,8 @@ Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayraklar�
 
 Bu eklenti, kiti **DWP v7**'ye (paket `v7.12.2`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
+Deep Work Plan’in dört temel ilkesi vardır: spec-first planlar, harness olarak depo, loop engineering ve ölçülen verimlilik. Eklentiler ve entegrasyonlar harness ile döngüyü genişletebilir; metodoloji tek başına çalışır.
+
 ## Kitin size sundukları
 
 - **Her CLI için tek bir söz dizimi.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` ve `ak antigravity`, ayrıca sağlayıcı rotaları (Z.AI GLM, Azure OpenAI, xAI ve Gemini API), aynı oturum bayraklarıyla: `-c` sürdürür, `-r <id>` devam ettirir.
@@ -107,6 +109,8 @@ Sözleşmesi `agent_delegation` yetkisi veren bir v7 planında `execute`, `paral
 | Görev etkileşim gerektiriyor, uzun sürüyor ya da başka bir makinede bulunuyor | [Herdr](/kit/herdr) (bir bölmedeki eş) |
 
 İkisi birlikte kullanılabilir: herdr-peers, bir bölmede `ak env <kind> @profile` komutunun yazdırdığı ortamla bir eş başlatabilir. Aynı anda birçok şerit için [Birçok ajanı çalıştırmak](/methodology/06-orchestration) bölümüne bakın.
+
+herdr-peers v2.0.0, isteğe bağlı autopilot brain için bu arayüzü kullanır: `ak pick --kinds ... --json` pick-v2 başlatma sözleşmesini döndürür; Herdr bunu doğrular, `launch.permissions: ask` koşulunu arar ve ardından dönen `launch.argv` değerini başlatır. Brain, autonomy veya bypass işaretlerini etkinleştiremez. `ak update` insan tarafından çalıştırılmaya devam eder; brain CLI'ları güncellemez.
 
 ## Notlar
 

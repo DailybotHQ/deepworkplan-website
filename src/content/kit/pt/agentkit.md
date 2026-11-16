@@ -12,6 +12,8 @@ Cada agente de código de terminal tem suas próprias flags para continuar uma s
 
 Este addon integra o kit ao **DWP v7** (pack `v7.12.2`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
 
+Deep Work Plan tem quatro pilares: planos spec-first, o repositório como harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o ciclo; a metodologia funciona por conta própria.
+
 ## O que o kit oferece
 
 - **Uma gramática para toda CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` e `ak antigravity`, além de rotas de provedor (Z.AI GLM, Azure OpenAI, xAI e a API do Gemini), com as mesmas flags de sessão: `-c` continua, `-r <id>` retoma.
@@ -107,6 +109,8 @@ Em um plano v7 cujo contrato concede `agent_delegation`, o `execute` pode passar
 | A tarefa precisa de interação, é longa ou fica em outra máquina | [Herdr](/kit/herdr) (um par em um painel) |
 
 Os dois se combinam: o herdr-peers pode iniciar um par em um painel com o ambiente que `ak env <kind> @profile` imprime. Para muitas frentes ao mesmo tempo, veja [Executar muitos agentes](/methodology/06-orchestration).
+
+O herdr-peers v2.0.0 usa esta interface para seu cérebro opcional do autopilot: `ak pick --kinds ... --json` retorna o contrato de inicialização pick-v2; o Herdr o valida, exige `launch.permissions: ask` e então executa `launch.argv`. O cérebro não pode ativar autonomia nem opções de bypass. `ak update` continua sendo iniciado por uma pessoa; o cérebro nunca atualiza CLIs.
 
 ## Notas
 

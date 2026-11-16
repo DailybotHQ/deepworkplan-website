@@ -10,6 +10,8 @@ order: 3
 
 Mutakhirkan dependensi repositori dengan alur kerja yang dibatch, tervalidasi, dan dapat dibatalkan. Addon Deep Work Plan opsional yang ketiga.
 
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori sebagai harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
 ## Yang ditambahkan
 
 - Deteksi package manager **nyata** repositori (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, dan lainnya) dari manifest serta lockfile yang ada.
@@ -23,7 +25,6 @@ Mutakhirkan dependensi repositori dengan alur kerja yang dibatch, tervalidasi, d
 4. Jalankan validation gate nyata repositori setelah setiap batch; batalkan batch mana pun yang gagal.
 5. Rangkum apa yang dimutakhirkan, dilewati, dan dibatalkan; biarkan developer yang melakukan commit.
 
-
 ## Spesifikasi v7
 
 | Item | Nilai |
@@ -33,6 +34,7 @@ Mutakhirkan dependensi repositori dengan alur kerja yang dibatch, tervalidasi, d
 | Deskriptor | `addons/dependency-upgrade/addon.json` (antarmuka 1) |
 | Perintah | `/lib-upgrade` diinstal ke `.agents/commands/` jika diterima |
 | Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.12.2`) |
+
 ## Catatan
 
 Agnostik terhadap package manager — tidak pernah menjalankan npm/ncu di repositori non-JS. Opsional, tidak pernah wajib, dan tidak pernah commit otomatis.
