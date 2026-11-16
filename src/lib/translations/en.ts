@@ -9,7 +9,7 @@ export const en: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — structured execution for AI coding agents',
   siteDescription:
-    'Deep Work Plan is spec-driven development where the repository becomes the harness: atomic tasks, validation gates, and safe multi-agent execution.',
+    'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done. Measured efficiency is tracked in instruction bytes per flow.',
 
   // Navigation
   nav: {
@@ -204,7 +204,7 @@ export const en: SiteTranslations = {
         {
           name: 'Failover to successors',
           detail:
-            'When the lead is gone, the first reachable successor is asked to take over, and the helper checks the evidence again. A lane takes the lead only under a grant the human recorded in advance.',
+            'Successors take over through the fenced lead-takeover check. A lane can be appointed only with a grant the human recorded in advance.',
         },
         {
           name: 'Plan events',
@@ -215,11 +215,6 @@ export const en: SiteTranslations = {
           name: 'Fleet map',
           detail:
             'Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only.',
-        },
-        {
-          name: 'Plan queue',
-          detail:
-            "When a repository's plan completes, the next approved plan in its queue starts with one fixed prompt to its lead. The daemon reads the queue and never writes it.",
         },
         {
           name: 'Lead verify',
@@ -673,12 +668,12 @@ export const en: SiteTranslations = {
     meta: {
       title: 'The Deep Work Plan Methodology',
       description:
-        'Seven chapters from manifesto to swarm autonomy: principles, core loop, templates, skills and agents, archetypes, many agents, and swarms that outlive a limit.',
+        'Eight chapters from manifesto to Loop engineering: principles, core loop, templates, skills and agents, archetypes, multi-agent work, and loop closure.',
     },
     eyebrow: 'Methodology',
     title: 'The Deep Work Plan Methodology',
     intro:
-      'Seven chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, adaptations, running many agents at once, and keeping a swarm running.',
+      'Eight chapters take you from Deep Work Plan’s principles through its practical loop, templates, adaptations, multi-agent work, and Loop engineering.',
     chapterLabel: 'Chapter',
     readChapter: 'Read chapter',
     prev: 'Previous',
@@ -782,8 +777,8 @@ export const en: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'What this does',
     whatBody: [
-      'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
+      'The adoption path puts these four pillars into practice in your repository.',
+      'Four pillars guide adoption: spec-first plans, the repository as the harness, Loop engineering, and measured efficiency. The plan is the durable source of truth; the repository carries the context, tools, guardrails, and state. The optional, human-started loop helps registered plans reach completion, while instruction load is measured in bytes per flow.',
     ],
     sequenceTitle: 'The adoption path',
     orLabel: 'or',
@@ -834,7 +829,7 @@ export const en: SiteTranslations = {
     ],
     outcomeTitle: 'The outcome',
     outcome:
-      'The repository becomes spec-driven and agent-pilotable: the plan is the durable source of truth, and the repository itself becomes the harness any agent runs against.',
+      'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.',
     nextStepsTitle: 'Next steps',
     nextSteps: [
       { label: 'Read the methodology', href: '/methodology' },

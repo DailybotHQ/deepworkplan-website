@@ -14,7 +14,7 @@ export const it: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — esecuzione strutturata per agenti di coding AI',
   siteDescription:
-    'Deep Work Plan è sviluppo guidato dalle specifiche in cui il repository fa da harness: attività atomiche, gate di convalida ed esecuzione multi-agente.',
+    'Prima la specifica, loop chiuso: il repository è la harness e il piano si esegue da solo fino alla fine. L’efficienza misurata è espressa in byte di istruzioni per flusso.',
 
   // Navigation
   nav: {
@@ -210,7 +210,7 @@ export const it: SiteTranslations = {
         {
           name: 'Subentro dei successori',
           detail:
-            'Quando il lead non c’è più, al primo successore raggiungibile viene chiesto di subentrare, e l’helper ricontrolla le evidenze. Una corsia assume il ruolo di lead solo con un’autorizzazione che la persona ha registrato in anticipo.',
+            'I successori subentrano tramite la verifica di lead takeover. Una lane può essere nominata solo con un’autorizzazione registrata in anticipo da una persona.',
         },
         {
           name: 'Eventi del piano',
@@ -221,11 +221,6 @@ export const it: SiteTranslations = {
           name: 'Mappa della flotta',
           detail:
             'Ogni macchina riporta i propri piani come plans-v1; il daemon mantiene la mappa fleet-v1 di ogni macchina, agente, repository e piano, e fleet ui la mostra in sola lettura.',
-        },
-        {
-          name: 'Coda dei piani',
-          detail:
-            'Quando il piano di un repository si completa, il piano approvato successivo nella sua coda parte con un unico prompt fisso al suo lead. Il daemon legge la coda e non la scrive mai.',
         },
         {
           name: 'Verifica del lead',
@@ -682,12 +677,12 @@ export const it: SiteTranslations = {
     meta: {
       title: 'La metodologia Deep Work Plan',
       description:
-        'Sette capitoli dal manifesto all’autonomia dello sciame: principi, core loop, template, skill e agenti, archetipi, molti agenti e sciami che durano.',
+        'Otto capitoli dal manifesto a Loop engineering: principi, loop centrale, modelli, skill e agenti, archetipi, lavoro multi-agente e chiusura del loop.',
     },
     eyebrow: 'Metodologia',
     title: 'La metodologia Deep Work Plan',
     intro:
-      'Sette capitoli che La accompagnano dalla filosofia dietro Deep Work Plan al ciclo pratico, ai template, agli adattamenti, all’esecuzione di molti agenti insieme e alla continuità di uno sciame.',
+      'Otto capitoli presentano i principi di Deep Work Plan, il loop pratico, i modelli, gli adattamenti, il lavoro multi-agente e Loop engineering.',
     chapterLabel: 'Capitolo',
     readChapter: 'Leggi il capitolo',
     prev: 'Precedente',
@@ -791,8 +786,8 @@ export const it: SiteTranslations = {
     codeLabel: 'Terminale',
     whatTitle: 'Cosa fa',
     whatBody: [
-      'L’adozione cambia il repository in due modi duraturi — i pilastri della metodologia.',
-      'Primo, il repository diventa spec-driven: il lavoro parte da un piano e una specifica scritti, non da prompt estemporanei. Secondo, il repository stesso diventa la harness dell’agente — un AGENTS.md, una knowledge base docs/, documentazione per modulo e una home di skill .agents/ (con i symlink .claude → .agents e .cursor → .agents) forniscono a ogni agente il contesto e i comandi di cui ha bisogno.',
+      'Il percorso di adozione mette in pratica questi quattro pilastri nel tuo repository.',
+      'L’adozione si basa su quattro pilastri: piani spec-first, repository come harness, Loop engineering ed efficienza misurata. Il piano è la fonte di verità durevole; il repository contiene contesto, strumenti, protezioni e stato. Il loop facoltativo, avviato da una persona, aiuta i piani registrati ad arrivare al completamento; il carico di istruzioni si misura in byte per flusso.',
     ],
     sequenceTitle: 'Il percorso di adozione',
     orLabel: 'oppure',
@@ -843,7 +838,7 @@ export const it: SiteTranslations = {
     ],
     outcomeTitle: 'Il risultato',
     outcome:
-      'Il repository diventa spec-driven e il repository stesso diventa la harness dell’agente — il contesto e i comandi viaggiano con il codice.',
+      'Prima la specifica, loop chiuso: il repository è la harness e il piano si esegue da solo fino alla fine.',
     nextStepsTitle: 'Prossimi passi',
     nextSteps: [
       { label: 'Leggi la metodologia', href: '/methodology' },

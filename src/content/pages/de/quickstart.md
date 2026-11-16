@@ -69,7 +69,7 @@ Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prü
 
 ## 0. Die Methodik und Spezifikation lesen
 
-Die Methodik ruht auf drei Pfeilern: **spec-driven Development** (die geschriebene Spezifikation ist die Quelle der Wahrheit), **Harness Engineering** (das Repository trägt Kontext, Werkzeuge, Leitplanken und Zustand) und **Token-Effizienz** (der Harness lädt schrittweise nach, und die Validierung berührt nur das Geänderte — Arbeit über lange Horizonte ist von Anfang an eingeplant, Effizienz durch Konstruktion).
+Die Methodik hat vier Säulen: **spec-first** (Plan und Spezifikation sind die dauerhafte Quelle der Wahrheit), **das Repository ist das Harness** (es trägt Kontext, Werkzeuge, Schutzregeln und Status), **Loop engineering** (der optionale, von einem Menschen gestartete Loop unterstützt registrierte Pläne bis zum Abschluss) und **gemessene Effizienz** (Instruktionsumfang wird in Bytes pro Ablauf gemessen; Token-Einsparungen werden nicht abgeleitet).
 
 Bevor Sie etwas ändern, lesen Sie die kanonischen Quellen, damit Sie den Standard verstehen, den Sie übernehmen:
 

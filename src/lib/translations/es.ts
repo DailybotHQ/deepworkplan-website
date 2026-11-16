@@ -9,7 +9,7 @@ export const es: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — ejecución estructurada para agentes de IA',
   siteDescription:
-    'Deep Work Plan es desarrollo guiado por especificaciones donde el repositorio es el arnés: tareas atómicas, puertas de validación y ejecución multiagente segura.',
+    'Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar. La eficiencia medida se expresa en bytes de instrucciones por flujo.',
 
   // Navigation
   nav: {
@@ -206,7 +206,7 @@ export const es: SiteTranslations = {
         {
           name: 'Relevo a los sucesores',
           detail:
-            'Cuando el lead desaparece, se pide al primer sucesor disponible que tome el relevo, y el helper vuelve a comprobar la evidencia. Un carril asume el lead solo con una concesión que la persona registró de antemano.',
+            'Los sucesores asumen el relevo mediante la verificación de lead takeover. Un carril solo puede ser nombrado si la persona registró esa autorización de antemano.',
         },
         {
           name: 'Eventos del plan',
@@ -217,11 +217,6 @@ export const es: SiteTranslations = {
           name: 'Mapa de la flota',
           detail:
             'Cada máquina informa sus planes como plans-v1; el daemon mantiene el mapa fleet-v1 de cada máquina, agente, repositorio y plan, y fleet ui lo muestra en solo lectura.',
-        },
-        {
-          name: 'Cola de planes',
-          detail:
-            'Cuando el plan de un repositorio termina, el siguiente plan aprobado de su cola arranca con un único prompt fijo dirigido a su lead. El daemon lee la cola y nunca la escribe.',
         },
         {
           name: 'Verificación del lead',
@@ -677,12 +672,12 @@ export const es: SiteTranslations = {
     meta: {
       title: 'La Metodología Deep Work Plan',
       description:
-        'Siete capítulos del manifiesto a la autonomía del enjambre: principios, bucle central, plantillas, skills y agentes, arquetipos, muchos agentes y enjambres.',
+        'Ocho capítulos del manifiesto a Loop engineering: principios, bucle central, plantillas, skills y agentes, arquetipos, trabajo con agentes y cierre del bucle.',
     },
     eyebrow: 'Metodología',
     title: 'La Metodología Deep Work Plan',
     intro:
-      'Siete capítulos que te llevan desde la filosofía detrás de Deep Work Plan hasta el bucle práctico, las plantillas, las adaptaciones, la ejecución de muchos agentes a la vez y el mantenimiento de un enjambre en marcha.',
+      'Ocho capítulos recorren Deep Work Plan desde sus principios y su bucle práctico hasta las plantillas, adaptaciones, el trabajo multiagente y Loop engineering.',
     chapterLabel: 'Capítulo',
     readChapter: 'Leer capítulo',
     prev: 'Anterior',
@@ -786,8 +781,8 @@ export const es: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Qué hace esto',
     whatBody: [
-      'La adopción cambia el repositorio de dos maneras duraderas: los pilares de la metodología.',
-      'Primero, el repositorio se vuelve guiado por especificación: el trabajo comienza desde un plan y una especificación escritos, no desde prompts improvisados. Segundo, el repositorio mismo se convierte en el harness del agente: un AGENTS.md, una base de conocimiento docs/, docs por módulo y un hogar de skills .agents/ (con los enlaces simbólicos .claude → .agents y .cursor → .agents) dan a cada agente el contexto y los comandos que necesita.',
+      'El proceso de adopción lleva estos cuatro pilares a la práctica en tu repositorio.',
+      'Cuatro pilares guían la adopción: planes spec-first, el repositorio como harness, Loop engineering y eficiencia medida. El plan es la fuente de verdad duradera; el repositorio reúne el contexto, las herramientas, las protecciones y el estado. El bucle opcional, iniciado por una persona, ayuda a completar los planes registrados; la carga de instrucciones se mide en bytes por flujo.',
     ],
     sequenceTitle: 'El camino de adopción',
     orLabel: 'o',
@@ -838,7 +833,7 @@ export const es: SiteTranslations = {
     ],
     outcomeTitle: 'El resultado',
     outcome:
-      'El repositorio se vuelve guiado por especificación y el repositorio mismo se convierte en el harness del agente: el contexto y los comandos viajan con el código.',
+      'Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar.',
     nextStepsTitle: 'Próximos pasos',
     nextSteps: [
       { label: 'Leer la metodología', href: '/methodology' },

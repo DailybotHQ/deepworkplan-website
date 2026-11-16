@@ -14,7 +14,7 @@ export const fr: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — exécution structurée pour les agents de code IA',
   siteDescription:
-    'Deep Work Plan est le développement piloté par les specs où le dépôt devient le harnais : tâches atomiques, portes de validation et exécution multi-agents.',
+    'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout. L’efficacité mesurée est exprimée en octets d’instructions par flux.',
 
   // Navigation
   nav: {
@@ -210,7 +210,7 @@ export const fr: SiteTranslations = {
         {
           name: 'Relève par les successeurs',
           detail:
-            'Quand le lead a disparu, le premier successeur joignable est invité à prendre la relève, et le helper vérifie de nouveau les preuves. Une voie ne prend le lead qu’en vertu d’une autorisation que l’humain a enregistrée à l’avance.',
+            'Les successeurs reprennent le rôle via la vérification de lead takeover. Une lane ne peut être nommée qu’avec une autorisation consignée à l’avance par un humain.',
         },
         {
           name: 'Événements de plan',
@@ -221,11 +221,6 @@ export const fr: SiteTranslations = {
           name: 'Carte de la flotte',
           detail:
             'Chaque machine déclare ses plans en plans-v1 ; le démon tient la carte fleet-v1 de chaque machine, agent, dépôt et plan, et fleet ui l’affiche en lecture seule.',
-        },
-        {
-          name: 'File de plans',
-          detail:
-            'Quand le plan d’un dépôt se termine, le plan approuvé suivant de sa file démarre avec un seul prompt fixe adressé à son lead. Le démon lit la file et ne l’écrit jamais.',
         },
         {
           name: 'Vérification du lead',
@@ -686,12 +681,12 @@ export const fr: SiteTranslations = {
     meta: {
       title: 'La méthodologie Deep Work Plan',
       description:
-        'Sept chapitres, du manifeste à l’autonomie de l’essaim : principes, boucle centrale, modèles, skills, archétypes, nombreux agents et essaims qui durent.',
+        'Huit chapitres, du manifeste à Loop engineering : principes, boucle centrale, modèles, skills et agents, archétypes, travail multi-agents et boucle fermée.',
     },
     eyebrow: 'Méthodologie',
     title: 'La méthodologie Deep Work Plan',
     intro:
-      'Sept chapitres qui vous mènent de la philosophie derrière Deep Work Plan à la boucle pratique, aux modèles, aux adaptations, à l’exécution de nombreux agents à la fois et à la continuité d’un essaim.',
+      'Huit chapitres présentent les principes de Deep Work Plan, sa boucle pratique, les modèles, les adaptations, le travail multi-agents et Loop engineering.',
     chapterLabel: 'Chapitre',
     readChapter: 'Lire le chapitre',
     prev: 'Précédent',
@@ -795,8 +790,8 @@ export const fr: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Ce que cela fait',
     whatBody: [
-      'L’adoption change le dépôt de deux manières durables — les piliers de la méthodologie.',
-      'D’abord, le dépôt devient piloté par la spécification : le travail part d’un plan et d’une spécification écrits, et non de prompts ponctuels. Ensuite, le dépôt lui-même devient le harness de l’agent — un AGENTS.md, une base de connaissances docs/, une doc par module et un foyer de skills .agents/ (avec les liens symboliques .claude → .agents et .cursor → .agents) donnent à chaque agent le contexte et les commandes dont il a besoin.',
+      'Le parcours d’adoption met ces quatre piliers en pratique dans votre dépôt.',
+      'L’adoption repose sur quatre piliers : les plans spec-first, le dépôt comme harness, Loop engineering et l’efficacité mesurée. Le plan est la source de vérité durable ; le dépôt porte le contexte, les outils, les garde-fous et l’état. La boucle facultative, démarrée par une personne, aide les plans enregistrés à aller jusqu’au bout ; la charge d’instructions se mesure en octets par flux.',
     ],
     sequenceTitle: 'Le parcours d’adoption',
     orLabel: 'ou',
@@ -847,7 +842,7 @@ export const fr: SiteTranslations = {
     ],
     outcomeTitle: 'Le résultat',
     outcome:
-      'Le dépôt devient piloté par la spécification et le dépôt lui-même devient le harness de l’agent — le contexte et les commandes voyagent avec le code.',
+      'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.',
     nextStepsTitle: 'Étapes suivantes',
     nextSteps: [
       { label: 'Lire la méthodologie', href: '/methodology' },

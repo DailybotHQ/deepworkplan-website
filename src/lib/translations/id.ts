@@ -13,7 +13,7 @@ export const id: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — eksekusi terstruktur untuk AI coding agent',
   siteDescription:
-    'Deep Work Plan adalah pengembangan berbasis spesifikasi di mana repositori menjadi harness: tugas atomik, gerbang validasi, dan multi-agen yang aman.',
+    'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai. Efisiensi terukur dinyatakan dalam byte instruksi per alur.',
 
   // Navigation
   nav: {
@@ -208,7 +208,7 @@ export const id: SiteTranslations = {
         {
           name: 'Failover ke penerus',
           detail:
-            'Saat lead hilang, penerus pertama yang dapat dijangkau diminta mengambil alih, dan helper memeriksa ulang buktinya. Sebuah lane hanya menjadi lead berdasarkan izin yang telah dicatat manusia sebelumnya.',
+            'Penerus mengambil alih melalui pemeriksaan lead takeover. Sebuah lane hanya dapat ditunjuk dengan izin yang telah dicatat manusia sebelumnya.',
         },
         {
           name: 'Event rencana',
@@ -219,11 +219,6 @@ export const id: SiteTranslations = {
           name: 'Peta armada',
           detail:
             'Setiap mesin melaporkan rencananya sebagai plans-v1; daemon menyimpan peta fleet-v1 dari setiap mesin, agen, repositori, dan rencana, dan fleet ui menampilkannya secara baca-saja.',
-        },
-        {
-          name: 'Antrean rencana',
-          detail:
-            'Saat rencana sebuah repositori selesai, rencana berikutnya yang telah disetujui dalam antreannya dimulai dengan satu prompt tetap ke lead-nya. Daemon membaca antrean dan tidak pernah menulisnya.',
         },
         {
           name: 'Verifikasi lead',
@@ -681,12 +676,12 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Metodologi Deep Work Plan',
       description:
-        'Tujuh bab dari manifesto hingga otonomi swarm: prinsip, core loop, template, skill dan agent, arketipe, banyak agent, dan swarm yang tahan batas kuota.',
+        'Delapan bab dari manifesto hingga Loop engineering: prinsip, loop inti, templat, skill dan agen, arketipe, kerja multi-agen, dan penutupan loop.',
     },
     eyebrow: 'Metodologi',
     title: 'Metodologi Deep Work Plan',
     intro:
-      'Tujuh bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, adaptasi, menjalankan banyak agent sekaligus, dan menjaga swarm tetap berjalan.',
+      'Delapan bab menguraikan prinsip Deep Work Plan, loop praktis, templat, adaptasi, kerja multi-agen, hingga Loop engineering.',
     chapterLabel: 'Bab',
     readChapter: 'Baca bab',
     prev: 'Sebelumnya',
@@ -789,8 +784,8 @@ export const id: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Apa yang dilakukannya',
     whatBody: [
-      'Adopsi mengubah repositori dengan dua cara yang tahan lama — kedua pilar metodologi.',
-      'Pertama, repositori menjadi spec-driven: pekerjaan dimulai dari rencana dan spesifikasi tertulis, bukan dari prompt dadakan. Kedua, repositori itu sendiri menjadi agent harness — AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah skill .agents/ (dengan symlink .claude → .agents dan .cursor → .agents) memberi setiap agent konteks dan command yang dibutuhkannya.',
+      'Jalur adopsi menerapkan keempat pilar ini di repositori Anda.',
+      'Adopsi bertumpu pada empat pilar: rencana spec-first, repositori sebagai harness, Loop engineering, dan efisiensi terukur. Rencana adalah sumber kebenaran yang tahan lama; repositori memuat konteks, alat, pagar pengaman, dan status. Loop opsional yang dimulai manusia membantu rencana terdaftar mencapai penyelesaian; beban instruksi diukur dalam byte per alur.',
     ],
     sequenceTitle: 'Jalur adopsi',
     orLabel: 'atau',
@@ -841,7 +836,7 @@ export const id: SiteTranslations = {
     ],
     outcomeTitle: 'Hasilnya',
     outcome:
-      'Repositori menjadi spec-driven dan repositori itu sendiri menjadi agent harness — konteks dan command ikut bersama kode.',
+      'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
     nextStepsTitle: 'Langkah berikutnya',
     nextSteps: [
       { label: 'Baca metodologinya', href: '/methodology' },

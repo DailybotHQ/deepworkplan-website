@@ -30,8 +30,7 @@ const p = getTranslations(lang).home.pillars;
         p.items.map((item, i) => (
           <li class="flex flex-col gap-2 border p-5" style="border-color: var(--color-line);">
             <span
-              class="nums-tabular text-sm font-semibold"
-              style="color: var(--color-secondary);"
+              class="nums-tabular text-sm font-semibold text-secondary dark:text-muted"
             >
               {String(i + 1).padStart(2, '0')}
             </span>

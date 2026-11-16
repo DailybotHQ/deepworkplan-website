@@ -34,7 +34,7 @@ Você é um agente de código de IA. Leia este prompt inteiro primeiro e, então
 
 ## 0. Leia a metodologia e a especificação
 
-A metodologia se apoia em três pilares: **desenvolvimento guiado por especificação** (a especificação escrita é a fonte da verdade), **engenharia de harness** (o repositório carrega o contexto, as ferramentas, os guardrails e o estado) e **eficiência de tokens** (o harness carrega progressivamente e a validação toca apenas o que mudou — trabalho de longo alcance por design, eficiente por construção).
+A metodologia tem quatro pilares: **spec-first** (o plano e a especificação são a fonte duradoura da verdade), **o repositório é o harness** (reúne contexto, ferramentas, proteções e estado), **Loop engineering** (o loop opcional iniciado por uma pessoa ajuda os planos registrados a chegar à conclusão) e **eficiência medida** (a carga de instruções é medida em bytes por fluxo; nunca se inferem economias de tokens).
 
 Antes de alterar qualquer coisa, leia as fontes canônicas para entender o padrão que você está adotando:
 

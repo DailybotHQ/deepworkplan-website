@@ -34,7 +34,7 @@ methodology. Treat this as a structured engineering task — a Deep Work Plan �
 
 ## 0. Read the methodology and specification
 
-The methodology stands on three pillars: **spec-driven development** (the written spec is the source of truth), **harness engineering** (the repository carries the context, tools, guardrails, and state), and **token efficiency** (the harness loads progressively and validation touches what changed — long-horizon work by design, efficient by construction).
+The methodology has four pillars: **spec-first** (the plan/spec is the durable source of truth), **the repository is the harness** (it carries context, tools, guardrails, and state), **Loop engineering** (the optional human-started loop helps registered plans run to completion), and **measured efficiency** (instruction load is measured in bytes per flow, never inferred as token savings).
 
 
 Before changing anything, read the canonical sources so you understand the standard you are adopting:

@@ -13,7 +13,7 @@ export const zh: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — 面向 AI 编码代理的结构化执行',
   siteDescription:
-    'Deep Work Plan 是一种规范驱动开发方法，仓库本身即为治理框架：通过原子任务、确定性验证关卡和安全的多代理协同实现长时间自主执行。',
+    '规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。效率以每个流程的指令字节数衡量。',
 
   // Navigation
   nav: {
@@ -208,7 +208,7 @@ export const zh: SiteTranslations = {
         {
           name: '故障转移至继任者',
           detail:
-            '当主导者不在时，第一个可联系到的继任者会被请求接管，辅助程序会再次核查证据。一条通道只有在人类事先记录的授权下才能接任主导者。',
+            '继任者通过带有围栏校验的 lead takeover 流程接任。只有在人类事先记录授权时，才可任命一条通道接任。',
         },
         {
           name: '计划事件',
@@ -216,14 +216,9 @@ export const zh: SiteTranslations = {
             '当计划停滞、受阻、失去主导者、从队列启动或完成时，由人类选定的命令会收到一个 plan-event-v1 对象。技能包为此附带一个 Dailybot 通知器。',
         },
         {
-          name: '集群视图',
+          name: '设备舰队视图',
           detail:
             '每台机器以 plans-v1 报告其计划；守护进程维护覆盖每台机器、代理、代码仓库与计划的 fleet-v1 视图，fleet ui 以只读方式展示它。',
-        },
-        {
-          name: '计划队列',
-          detail:
-            '当一个代码仓库的计划完成时，其队列中下一份已批准的计划会通过发给其主导者的一条固定提示启动。守护进程只读取队列，从不写入。',
         },
         {
           name: '主导者核验',
@@ -674,12 +669,12 @@ export const zh: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 方法论',
       description:
-        '从宣言到集群自主，共七章：原则、核心循环、模板、技能与代理、代码仓库原型、同时运行多个代理，以及能跨越限额持续运行的代理集群。',
+        '八章内容从宣言讲到 Loop engineering，涵盖原则、核心循环、模板、技能与代理、多代理协作、闭环执行与实践指南。',
     },
     eyebrow: '方法论',
     title: 'Deep Work Plan 方法论',
     intro:
-      '七章内容，带你从 Deep Work Plan 背后的理念，走到实操循环、模板、适配、同时运行多个代理，以及让代理集群持续运行。',
+      '八章内容介绍 Deep Work Plan 的原则、实操循环、模板、适配方式、多代理协作，最终讲到 Loop engineering。',
     chapterLabel: '章',
     readChapter: '阅读本章',
     prev: '上一章',
@@ -779,8 +774,8 @@ export const zh: SiteTranslations = {
     codeLabel: '终端',
     whatTitle: '它做了什么',
     whatBody: [
-      '采纳会以两种持久的方式改变代码仓库——这正是方法论的两大支柱。',
-      '其一，代码仓库变得规范驱动：工作从一份书面的计划与规范开始，而非从临时提示开始。其二，代码仓库本身成为代理的 harness（运行支架）——一份 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个 .agents/ 技能目录（含 .claude → .agents 和 .cursor → .agents 符号链接）,为每个代理提供它所需的上下文与命令。',
+      '采用流程会在你的代码仓库中落实这四个支柱。',
+      '采用方法论有四个支柱：spec-first 计划、作为 harness 的代码仓库、Loop engineering 和可测量的效率。计划是持久的事实来源；代码仓库承载上下文、工具、防护措施和状态。由人启动的可选循环帮助已登记的计划运行至完成，指令负载按每个流程的字节数衡量。',
     ],
     sequenceTitle: '采纳路径',
     orLabel: '或',
@@ -830,8 +825,7 @@ export const zh: SiteTranslations = {
       },
     ],
     outcomeTitle: '成果',
-    outcome:
-      '代码仓库变得规范驱动，而代码仓库本身成为代理的 harness（运行支架）——上下文与命令随代码一同传递。',
+    outcome: '规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。',
     nextStepsTitle: '后续步骤',
     nextSteps: [
       { label: '阅读方法论', href: '/methodology' },

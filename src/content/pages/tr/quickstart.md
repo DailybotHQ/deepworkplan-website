@@ -37,7 +37,7 @@ olarak ele alın.
 
 ## 0. Metodolojiyi ve spesifikasyonu okuyun
 
-Metodoloji, üç temel direk üzerinde durur: **spec odaklı geliştirme** (yazılı spesifikasyon doğruluk kaynağıdır), **harness mühendisliği** (depo, bağlamı, araçları, güvenlik bariyerlerini ve durumu taşır) ve **token verimliliği** (harness kademeli olarak yüklenir ve doğrulama yalnızca değişene dokunur — uzun ufuklu iş tasarım gereği, verimlilik yapı gereği).
+Metodolojinin dört sütunu vardır: **spec-first** (plan ve spesifikasyon kalıcı doğruluk kaynağıdır), **depo harness’tir** (bağlamı, araçları, korumaları ve durumu taşır), **Loop engineering** (insan tarafından başlatılan isteğe bağlı döngü, kayıtlı planların tamamlanmasına yardımcı olur) ve **ölçülen verimlilik** (talimat yükü akış başına byte olarak ölçülür; token tasarrufu çıkarımı yapılmaz).
 
 Herhangi bir şeyi değiştirmeden önce, benimsediğiniz standardı anlamanız için kanonik kaynakları okuyun:
 

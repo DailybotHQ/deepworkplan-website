@@ -14,7 +14,7 @@ export const de: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — strukturierte Ausführung für KI-Coding-Agenten',
   siteDescription:
-    'Deep Work Plan ist spezifikationsgetriebene Entwicklung mit dem Repository als Harness: atomare Aufgaben, Validierungs-Gates und sichere Multi-Agenten.',
+    'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende. Die gemessene Effizienz wird in Instruktionsbytes pro Ablauf erfasst.',
 
   // Navigation
   nav: {
@@ -211,7 +211,7 @@ export const de: SiteTranslations = {
         {
           name: 'Failover auf Nachfolger',
           detail:
-            'Ist der Lead weg, wird der erste erreichbare Nachfolger gebeten, zu übernehmen, und der Helper prüft die Evidenz erneut. Eine Lane übernimmt den Lead nur mit einer Freigabe, die der Mensch vorab festgehalten hat.',
+            'Nachfolger übernehmen über die geprüfte lead takeover-Funktion. Eine Lane darf nur mit einer zuvor vom Menschen festgehaltenen Ernennung übernehmen.',
         },
         {
           name: 'Plan-Ereignisse',
@@ -222,11 +222,6 @@ export const de: SiteTranslations = {
           name: 'Flottenkarte',
           detail:
             'Jede Maschine meldet ihre Pläne als plans-v1; der Daemon führt die fleet-v1-Karte aller Maschinen, Agenten, Repositories und Pläne, und fleet ui zeigt sie schreibgeschützt an.',
-        },
-        {
-          name: 'Plan-Warteschlange',
-          detail:
-            'Wird der Plan eines Repositorys abgeschlossen, startet der nächste genehmigte Plan seiner Warteschlange mit einem festen Prompt an seinen Lead. Der Daemon liest die Warteschlange und schreibt sie nie.',
         },
         {
           name: 'Lead-Prüfung',
@@ -683,12 +678,12 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Die Deep Work Plan Methodik',
       description:
-        'Sieben Kapitel vom Manifest bis zur Schwarmautonomie: Prinzipien, Kernschleife, Vorlagen, Skills und Agenten, Archetypen, viele Agenten und robuste Schwärme.',
+        'Acht Kapitel vom Manifest bis Loop engineering: Prinzipien, Kernschleife, Vorlagen, Skills und Agenten, Archetypen, Multi-Agenten-Arbeit und Loop-Schluss.',
     },
     eyebrow: 'Methodik',
     title: 'Die Deep Work Plan Methodik',
     intro:
-      'Sieben Kapitel, die Sie von der Philosophie hinter Deep Work Plan zur praktischen Schleife, den Vorlagen, den Anpassungen, vielen Agenten gleichzeitig und einem Schwarm führen, der weiterläuft.',
+      'Acht Kapitel führen von den Prinzipien und der praktischen Schleife von Deep Work Plan über Vorlagen, Anpassungen und Multi-Agenten-Arbeit bis zu Loop engineering.',
     chapterLabel: 'Kapitel',
     readChapter: 'Kapitel lesen',
     prev: 'Zurück',
@@ -791,8 +786,8 @@ export const de: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Was dies bewirkt',
     whatBody: [
-      'Die Adoption verändert das Repository auf zwei dauerhafte Weisen — die Pfeiler der Methodik.',
-      'Erstens wird das Repository spec-driven: Die Arbeit beginnt mit einem geschriebenen Plan und einer Spezifikation, nicht mit Ad-hoc-Prompts. Zweitens wird das Repository selbst zum Agenten-Harness — eine AGENTS.md, eine docs/-Wissensbasis, Dokumentation je Modul und ein .agents/ Skill-Verzeichnis (mit den .claude → .agents- und .cursor → .agents-Symlinks) geben jedem Agenten den Kontext und die Befehle, die er braucht.',
+      'Der Einführungsweg setzt diese vier Säulen in Ihrem Repository um.',
+      'Die Einführung folgt vier Säulen: spec-first-Pläne, das Repository als Harness, Loop engineering und gemessene Effizienz. Der Plan ist die dauerhafte Quelle der Wahrheit; das Repository trägt Kontext, Werkzeuge, Schutzregeln und Status. Der optionale, von einem Menschen gestartete Loop unterstützt registrierte Pläne bis zum Abschluss; der Instruktionsumfang wird in Bytes pro Ablauf gemessen.',
     ],
     sequenceTitle: 'Der Adoptionspfad',
     orLabel: 'oder',
@@ -843,7 +838,7 @@ export const de: SiteTranslations = {
     ],
     outcomeTitle: 'Das Ergebnis',
     outcome:
-      'Das Repository wird spec-driven, und das Repository selbst wird zum Agenten-Harness — Kontext und Befehle reisen mit dem Code.',
+      'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.',
     nextStepsTitle: 'Nächste Schritte',
     nextSteps: [
       { label: 'Methodik lesen', href: '/methodology' },

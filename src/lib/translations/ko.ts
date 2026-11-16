@@ -13,7 +13,7 @@ export const ko: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — AI 코딩 에이전트를 위한 구조화된 실행',
   siteDescription:
-    'Deep Work Plan은 사양 중심 개발 방법론입니다. 저장소 자체가 하네스가 되어 원자적 작업, 검증 게이트, 안전한 다중 에이전트 실행을 제공합니다.',
+    '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다. 측정된 효율은 흐름별 지침 바이트로 나타냅니다.',
 
   // Navigation
   nav: {
@@ -208,7 +208,7 @@ export const ko: SiteTranslations = {
         {
           name: '승계자로 페일오버',
           detail:
-            '리드가 사라지면 처음으로 연결 가능한 승계자에게 인계가 요청되고, 헬퍼가 증거를 다시 확인합니다. 레인은 사람이 미리 기록한 허가가 있을 때만 리드를 맡습니다.',
+            '승계자는 검증된 lead takeover 절차로 역할을 이어받습니다. lane 임명은 사람이 사전에 기록한 허가가 있을 때만 가능합니다.',
         },
         {
           name: '계획 이벤트',
@@ -219,11 +219,6 @@ export const ko: SiteTranslations = {
           name: '플릿 맵',
           detail:
             '각 머신은 자신의 계획을 plans-v1으로 보고하고, 데몬은 모든 머신, 에이전트, 리포지토리, 계획의 fleet-v1 맵을 유지하며, fleet ui가 이를 읽기 전용으로 보여줍니다.',
-        },
-        {
-          name: '계획 큐',
-          detail:
-            '리포지토리의 계획이 완료되면, 큐에 있는 다음 승인된 계획이 리드에게 보내는 고정 프롬프트 하나로 시작됩니다. 데몬은 큐를 읽기만 하고 절대 쓰지 않습니다.',
         },
         {
           name: '리드 검증',
@@ -679,12 +674,12 @@ export const ko: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 방법론',
       description:
-        '매니페스토부터 스웜 자율까지 일곱 장: 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 아키타입, 여러 에이전트, 한도를 넘어 계속 도는 스웜.',
+        '매니페스토부터 Loop engineering까지 여덟 장: 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 다중 에이전트 작업, 루프 완결을 다룹니다.',
     },
     eyebrow: '방법론',
     title: 'Deep Work Plan 방법론',
     intro:
-      'Deep Work Plan의 철학에서 출발해 실전 루프, 템플릿, 적응 방식, 여러 에이전트를 동시에 운영하는 방법, 그리고 스웜을 계속 돌아가게 하는 방법까지 안내하는 일곱 장.',
+      'Deep Work Plan의 원칙과 실전 루프부터 템플릿, 적응 방식, 다중 에이전트 작업, Loop engineering까지 여덟 장으로 설명합니다.',
     chapterLabel: '장',
     readChapter: '장 읽기',
     prev: '이전',
@@ -786,8 +781,8 @@ export const ko: SiteTranslations = {
     codeLabel: '터미널',
     whatTitle: '이것이 하는 일',
     whatBody: [
-      '채택은 리포지토리를 두 가지 견고한 방식으로 바꿉니다 — 방법론의 두 기둥입니다.',
-      '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
+      '도입 과정은 이 네 가지 기둥을 리포지토리에 구현합니다.',
+      '도입에는 네 가지 기둥이 있습니다. spec-first 계획, 하니스인 리포지토리, Loop engineering, 측정된 효율입니다. 계획은 지속 가능한 기준 정보이며 리포지토리는 컨텍스트, 도구, 보호 장치, 상태를 담습니다. 사람이 시작하는 선택적 루프는 등록된 계획의 완료를 돕고, 지침 부하는 흐름별 바이트로 측정합니다.',
     ],
     sequenceTitle: '채택 경로',
     orLabel: '또는',
@@ -838,7 +833,7 @@ export const ko: SiteTranslations = {
     ],
     outcomeTitle: '결과',
     outcome:
-      '리포지토리가 스펙 주도가 되고 리포지토리 자체가 에이전트 하니스가 됩니다 — 컨텍스트와 명령이 코드와 함께 움직입니다.',
+      '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
     nextStepsTitle: '다음 단계',
     nextSteps: [
       { label: '방법론 읽기', href: '/methodology' },

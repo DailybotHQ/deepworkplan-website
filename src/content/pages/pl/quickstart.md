@@ -34,7 +34,7 @@ Potraktuj to jako ustrukturyzowane zadanie inżynierskie — Deep Work Plan — 
 
 ## 0. Przeczytaj metodykę i specyfikację
 
-Metodyka opiera się na trzech filarach: **spec-driven development** (spisana specyfikacja jest źródłem prawdy), **harness engineering** (repozytorium niesie kontekst, narzędzia, zabezpieczenia i stan) oraz **efektywność tokenów** (harness ładuje się stopniowo, a walidacja dotyka tylko tego, co zmienione — praca na długi dystans z założenia, wydajna z samej konstrukcji).
+Metodyka ma cztery filary: **spec-first** (plan i specyfikacja są trwałym źródłem prawdy), **repozytorium jest harnessem** (przechowuje kontekst, narzędzia, zabezpieczenia i stan), **Loop engineering** (opcjonalna pętla uruchamiana przez człowieka pomaga zarejestrowanym planom dojść do końca) oraz **mierzona efektywność** (obciążenie instrukcjami mierzymy w bajtach na przepływ; nie wyliczamy oszczędności tokenów).
 
 Zanim cokolwiek zmienisz, przeczytaj kanoniczne źródła, aby zrozumieć standard, który przyjmujesz:
 

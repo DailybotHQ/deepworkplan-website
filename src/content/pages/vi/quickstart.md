@@ -35,7 +35,7 @@ Hãy coi đây như một tác vụ kỹ thuật có cấu trúc — một Deep 
 
 ## 0. Đọc phương pháp luận và đặc tả
 
-Phương pháp luận đứng trên ba trụ cột: **phát triển dựa trên đặc tả** (đặc tả viết ra là nguồn chân lý), **kỹ thuật harness** (repository mang theo ngữ cảnh, công cụ, hàng rào bảo vệ và trạng thái), và **hiệu quả token** (harness được nạp theo kiểu tiệm tiến và việc kiểm chứng chỉ chạm vào những gì đã thay đổi — công việc tầm xa ngay từ thiết kế, hiệu quả ngay từ cách dựng).
+Phương pháp luận có bốn trụ cột: **spec-first** (kế hoạch và đặc tả là nguồn sự thật lâu dài), **repository là harness** (lưu ngữ cảnh, công cụ, rào chắn và trạng thái), **Loop engineering** (vòng lặp tùy chọn do con người khởi chạy giúp kế hoạch đã đăng ký đi đến hoàn tất), và **hiệu quả được đo lường** (tải chỉ dẫn được đo bằng byte trên mỗi luồng; không suy diễn mức tiết kiệm token).
 
 Trước khi thay đổi bất cứ thứ gì, hãy đọc các nguồn chuẩn để bạn hiểu tiêu chuẩn mình đang áp dụng:
 

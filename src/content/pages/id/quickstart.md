@@ -35,7 +35,7 @@ Perlakukan ini sebagai tugas teknik yang terstruktur — sebuah Deep Work Plan �
 
 ## 0. Baca metodologi dan spesifikasi
 
-Metodologi ini berdiri di atas tiga pilar: **spec-driven development** (spec tertulis adalah sumber kebenaran), **harness engineering** (repositori membawa konteks, alat, pengaman, dan status), dan **efisiensi token** (harness memuat secara progresif dan validasi menyentuh apa yang berubah — pekerjaan horizon panjang sejak rancangan, efisien secara konstruksi).
+Metodologi ini memiliki empat pilar: **spec-first** (rencana dan spesifikasi adalah sumber kebenaran yang tahan lama), **repositori adalah harness** (memuat konteks, alat, pagar pengaman, dan status), **Loop engineering** (loop opsional yang dimulai manusia membantu rencana terdaftar mencapai penyelesaian), dan **efisiensi terukur** (beban instruksi diukur dalam byte per alur; penghematan token tidak disimpulkan).
 
 Sebelum mengubah apa pun, baca sumber kanonis agar Anda memahami standar yang Anda adopsi:
 

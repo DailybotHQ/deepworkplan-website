@@ -14,7 +14,7 @@ export const vi: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI',
   siteDescription:
-    'Deep Work Plan là phát triển theo đặc tả nơi kho lưu trữ trở thành bộ khung: nhiệm vụ nguyên tử, cổng kiểm tra và điều phối đa tác tử an toàn.',
+    'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành. Hiệu quả được đo bằng byte chỉ dẫn trên mỗi luồng.',
 
   // Navigation
   nav: {
@@ -209,7 +209,7 @@ export const vi: SiteTranslations = {
         {
           name: 'Chuyển giao cho người kế nhiệm',
           detail:
-            'Khi lead không còn, người kế nhiệm đầu tiên liên lạc được sẽ được yêu cầu tiếp quản, và trình trợ giúp kiểm tra lại bằng chứng. Một lane chỉ nhận vai trò lead theo quyền mà con người đã ghi nhận từ trước.',
+            'Người kế nhiệm tiếp quản qua bước kiểm tra lead takeover. Chỉ có thể bổ nhiệm một lane khi con người đã ghi nhận quyền đó từ trước.',
         },
         {
           name: 'Sự kiện kế hoạch',
@@ -220,11 +220,6 @@ export const vi: SiteTranslations = {
           name: 'Bản đồ đội máy',
           detail:
             'Mỗi máy báo cáo các kế hoạch của mình dưới dạng plans-v1; daemon duy trì bản đồ fleet-v1 của mọi máy, agent, repository và kế hoạch, và fleet ui hiển thị nó ở chế độ chỉ đọc.',
-        },
-        {
-          name: 'Hàng đợi kế hoạch',
-          detail:
-            'Khi kế hoạch của một repository hoàn thành, kế hoạch đã được duyệt tiếp theo trong hàng đợi bắt đầu bằng một lời nhắc cố định gửi tới lead của nó. Daemon đọc hàng đợi và không bao giờ ghi vào đó.',
         },
         {
           name: 'Xác minh lead',
@@ -678,12 +673,12 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Phương pháp luận Deep Work Plan',
       description:
-        'Bảy chương từ tuyên ngôn tới tự chủ của bầy agent: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, các kiểu hình, nhiều agent và bầy agent vượt qua giới hạn.',
+        'Tám chương từ tuyên ngôn đến Loop engineering: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, kiểu hình, công việc đa agent và khép kín vòng lặp.',
     },
     eyebrow: 'Phương pháp luận',
     title: 'Phương pháp luận Deep Work Plan',
     intro:
-      'Bảy chương đưa bạn từ triết lý đằng sau Deep Work Plan tới vòng lặp thực hành, các mẫu, những thích ứng, cách chạy nhiều agent cùng lúc và cách giữ cho một bầy agent tiếp tục chạy.',
+      'Tám chương trình bày nguyên tắc Deep Work Plan, vòng lặp thực hành, các mẫu, cách thích ứng, công việc đa agent và Loop engineering.',
     chapterLabel: 'Chương',
     readChapter: 'Đọc chương',
     prev: 'Trước',
@@ -787,8 +782,8 @@ export const vi: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Điều này làm gì',
     whatBody: [
-      'Việc áp dụng thay đổi repository theo hai cách bền vững — hai trụ cột của phương pháp luận.',
-      'Thứ nhất, repository trở thành dựa trên đặc tả: công việc bắt đầu từ một kế hoạch và đặc tả được viết ra, không phải từ những lời nhắc tùy hứng. Thứ hai, bản thân repository trở thành harness của agent — một AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục skill .agents/ (với các symlink .claude → .agents và .cursor → .agents) trao cho mọi agent ngữ cảnh và các command nó cần.',
+      'Lộ trình áp dụng hiện thực hóa bốn trụ cột này trong repository của bạn.',
+      'Việc áp dụng dựa trên bốn trụ cột: kế hoạch spec-first, repository làm harness, Loop engineering và hiệu quả được đo lường. Kế hoạch là nguồn sự thật lâu dài; repository lưu ngữ cảnh, công cụ, rào chắn và trạng thái. Vòng lặp tùy chọn do con người khởi chạy giúp kế hoạch đã đăng ký đi đến hoàn tất; tải chỉ dẫn được đo bằng byte trên mỗi luồng.',
     ],
     sequenceTitle: 'Lộ trình áp dụng',
     orLabel: 'hoặc',
@@ -839,7 +834,7 @@ export const vi: SiteTranslations = {
     ],
     outcomeTitle: 'Kết quả',
     outcome:
-      'Repository trở thành dựa trên đặc tả và bản thân repository trở thành harness của agent — ngữ cảnh và các command đi theo mã nguồn.',
+      'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
     nextStepsTitle: 'Bước tiếp theo',
     nextSteps: [
       { label: 'Đọc phương pháp luận', href: '/methodology' },

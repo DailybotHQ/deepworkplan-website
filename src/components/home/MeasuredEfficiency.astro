@@ -73,8 +73,7 @@ const repoBase = `https://github.com/DailybotHQ/${pack.repo}/blob/${MEASURED_AT}
       </p>
       <a
         href={`${repoBase}docs/EVALUATION.md`}
-        class="mt-6 inline-flex items-center text-base font-semibold transition hover:opacity-70"
-        style="color: var(--color-secondary);"
+        class="mt-6 inline-flex items-center text-base font-semibold text-secondary underline-offset-2 hover:underline dark:text-muted"
         rel="noopener"
       >
         {e.deepLinkLabel} &rarr;
@@ -119,8 +118,7 @@ const repoBase = `https://github.com/DailybotHQ/${pack.repo}/blob/${MEASURED_AT}
         <code class="mt-2 block break-all" style="color: var(--color-ink);">{COMMAND}</code>
         <a
           href={`${repoBase}tests/efficiency/measure-instruction-load.sh`}
-          class="mt-1 inline-block underline underline-offset-2 transition hover:opacity-70"
-          style="color: var(--color-secondary);"
+          class="mt-1 inline-block text-secondary underline underline-offset-2 dark:text-muted"
           rel="noopener"
         >
           {pack.repo} {MEASURED_AT}

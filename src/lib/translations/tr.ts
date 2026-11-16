@@ -14,7 +14,7 @@ export const tr: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — yapay zeka kodlama ajanları için yapılandırılmış yürütme',
   siteDescription:
-    'Deep Work Plan, deponun harness görevi gördüğü spesifikasyon odaklı geliştirmedir: atomik görevler, doğrulama geçitleri ve güvenli çoklu ajanlar.',
+    'Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır. Ölçülen verimlilik, akış başına talimat byte sayısıyla ifade edilir.',
 
   // Navigation
   nav: {
@@ -210,7 +210,7 @@ export const tr: SiteTranslations = {
         {
           name: 'Haleflere devir',
           detail:
-            'Lider ortadan kalktığında, erişilebilen ilk haleften devralması istenir ve yardımcı kanıtı yeniden denetler. Bir kulvar liderliği yalnızca insanın önceden kaydettiği bir yetkiyle alır.',
+            'Halefler, doğrulamalı lead takeover akışıyla görevi devralır. Bir lane ancak insanın önceden kaydettiği bir yetkiyle atanabilir.',
         },
         {
           name: 'Plan olayları',
@@ -221,11 +221,6 @@ export const tr: SiteTranslations = {
           name: 'Filo haritası',
           detail:
             'Her makine planlarını plans-v1 olarak bildirir; daemon her makinenin, ajanın, deponun ve planın fleet-v1 haritasını tutar ve fleet ui bunu salt okunur olarak gösterir.',
-        },
-        {
-          name: 'Plan kuyruğu',
-          detail:
-            'Bir deponun planı tamamlandığında, kuyruğundaki bir sonraki onaylı plan, liderine verilen tek bir sabit istemle başlar. Daemon kuyruğu okur ve ona asla yazmaz.',
         },
         {
           name: 'Lider doğrulaması',
@@ -682,12 +677,12 @@ export const tr: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan Metodolojisi',
       description:
-        'Manifestodan sürü özerkliğine yedi bölüm: ilkeler, çekirdek döngü, şablonlar, skill’ler ve ajanlar, arketipler, birçok ajan ve bir sınırı atlatan sürüler.',
+        'Manifestodan Loop engineering’e sekiz bölüm: ilkeler, temel döngü, şablonlar, skill ve ajanlar, arketipler, çoklu ajan çalışması ve döngünün kapanışı.',
     },
     eyebrow: 'Metodoloji',
     title: 'Deep Work Plan Metodolojisi',
     intro:
-      'Deep Work Plan’in arkasındaki felsefeden pratik döngüye, şablonlara, uyarlamalara, aynı anda birçok ajanı çalıştırmaya ve bir sürüyü çalışır tutmaya götüren yedi bölüm.',
+      'Sekiz bölüm Deep Work Plan’in ilkelerini ve pratik döngüsünü; şablonları, uyarlamaları, çoklu ajan çalışmasını ve Loop engineering’i anlatır.',
     chapterLabel: 'Bölüm',
     readChapter: 'Bölümü oku',
     prev: 'Önceki',
@@ -791,8 +786,8 @@ export const tr: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Bu ne yapar',
     whatBody: [
-      'Benimseme, depoyu kalıcı iki şekilde değiştirir — metodolojinin temel direkleri.',
-      'İlk olarak, depo spec odaklı hale gelir: iş, gelişigüzel istemlerden değil, yazılı bir plan ve spesifikasyondan başlar. İkinci olarak, deponun kendisi ajan harness’ı haline gelir — bir AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve bir .agents/ skill yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla), her ajana ihtiyaç duyduğu bağlamı ve komutları verir.',
+      'Benimseme yolu bu dört sütunu deponuzda uygulamaya geçirir.',
+      'Benimseme dört sütuna dayanır: spec-first planlar, harness olarak depo, Loop engineering ve ölçülen verimlilik. Plan kalıcı doğruluk kaynağıdır; depo bağlamı, araçları, korumaları ve durumu taşır. İnsan tarafından başlatılan isteğe bağlı döngü, kayıtlı planların tamamlanmasına yardımcı olur; talimat yükü akış başına byte olarak ölçülür.',
     ],
     sequenceTitle: 'Benimseme yolu',
     orLabel: 'veya',
@@ -843,7 +838,7 @@ export const tr: SiteTranslations = {
     ],
     outcomeTitle: 'Sonuç',
     outcome:
-      'Depo spec odaklı hale gelir ve deponun kendisi ajan harness’ı haline gelir — bağlam ve komutlar kodla birlikte gezer.',
+      'Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.',
     nextStepsTitle: 'Sonraki adımlar',
     nextSteps: [
       { label: 'Metodolojiyi okuyun', href: '/methodology' },

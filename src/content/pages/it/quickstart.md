@@ -35,7 +35,7 @@ Sei un agente di coding AI. Leggi per intero questo prompt, poi rendi il reposit
 
 ## 0. Leggi la metodologia e la specifica
 
-La metodologia si regge su tre pilastri: **sviluppo guidato dalla specifica** (la specifica scritta è la fonte della verità), **ingegneria della harness** (il repository porta contesto, strumenti, guardrail e stato) ed **efficienza dei token** (l’harness carica progressivamente e la validazione tocca solo ciò che è cambiato — lavoro di lungo corso by design, efficiente per costruzione).
+La metodologia ha quattro pilastri: **spec-first** (piano e specifica sono la fonte di verità durevole), **il repository è la harness** (contiene contesto, strumenti, protezioni e stato), **Loop engineering** (il loop facoltativo avviato da una persona aiuta i piani registrati ad arrivare al completamento) ed **efficienza misurata** (il carico di istruzioni si misura in byte per flusso; non si deducono risparmi di token).
 
 Prima di cambiare qualsiasi cosa, leggi le fonti canoniche così da comprendere lo standard che stai adottando:
 

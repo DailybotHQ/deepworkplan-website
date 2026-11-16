@@ -36,7 +36,7 @@ et non comme une retouche rapide.
 
 ## 0. Lire la méthodologie et la spécification
 
-La méthodologie s’appuie sur trois piliers : le **développement piloté par la spécification** (la spécification écrite est la source de vérité), l’**ingénierie du harness** (le dépôt porte le contexte, les outils, les garde-fous et l’état) et l’**efficacité des tokens** (le harness charge progressivement et la validation ne touche que ce qui a changé — un travail long terme par conception, efficace par construction).
+La méthodologie repose sur quatre piliers : **spec-first** (le plan et la spécification sont la source de vérité durable), **le dépôt est le harness** (il porte le contexte, les outils, les garde-fous et l’état), **Loop engineering** (la boucle facultative, démarrée par une personne, aide les plans enregistrés à aller jusqu’au bout) et **l’efficacité mesurée** (la charge d’instructions se mesure en octets par flux ; aucune économie de tokens n’est déduite).
 
 Avant de modifier quoi que ce soit, lisez les sources canoniques pour comprendre le standard que vous adoptez :
 

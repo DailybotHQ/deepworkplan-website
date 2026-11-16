@@ -88,7 +88,7 @@ const rows = l.contracts.map((c, i) => ({ ...c, ...LOOP_CONTRACTS[i] }));
       <p class="lead mt-4">{l.subtitle}</p>
     </div>
 
-    <div class="mt-10 overflow-x-auto">
+    <div class="mt-10 overflow-x-auto" role="region" tabindex="0" aria-label={l.title}>
       <table class="w-full min-w-[40rem] border-collapse text-left">
         <thead>
           <tr class="border-b" style="border-color: var(--color-ink);">
@@ -124,8 +124,7 @@ const rows = l.contracts.map((c, i) => ({ ...c, ...LOOP_CONTRACTS[i] }));
                 <td class="w-[22%] py-4 text-xs">
                   <a
                     href={`${base}${row.path}`}
-                    class="break-all underline underline-offset-2 transition hover:opacity-70"
-                    style="color: var(--color-secondary);"
+                    class="break-all text-secondary underline underline-offset-2 dark:text-muted"
                     rel="noopener"
                   >
                     {herdr.repo} {herdr.tag}

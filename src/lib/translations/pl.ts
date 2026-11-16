@@ -14,7 +14,7 @@ export const pl: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — uporządkowana realizacja dla agentów kodujących AI',
   siteDescription:
-    'Deep Work Plan to rozwój oparty na specyfikacji, gdzie repozytorium jest uprzężą: zadania atomowe, bramki walidacji i bezpieczna koordynacja wielu agentów.',
+    'Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca. Mierzoną efektywność wyrażamy w bajtach instrukcji na przepływ.',
 
   // Navigation
   nav: {
@@ -211,7 +211,7 @@ export const pl: SiteTranslations = {
         {
           name: 'Failover na następców',
           detail:
-            'Gdy lead znika, pierwszy osiągalny następca zostaje poproszony o przejęcie roli, a pomocnik ponownie sprawdza dowody. Tor pracy (lane) przejmuje rolę leada tylko na podstawie zgody, którą człowiek zapisał z wyprzedzeniem.',
+            'Następcy przejmują rolę przez weryfikację lead takeover. Lane można wyznaczyć tylko na podstawie zgody wcześniej zapisanej przez człowieka.',
         },
         {
           name: 'Zdarzenia planu',
@@ -222,11 +222,6 @@ export const pl: SiteTranslations = {
           name: 'Mapa floty',
           detail:
             'Każda maszyna raportuje swoje plany jako plans-v1; demon utrzymuje mapę fleet-v1 wszystkich maszyn, agentów, repozytoriów i planów, a fleet ui pokazuje ją w trybie tylko do odczytu.',
-        },
-        {
-          name: 'Kolejka planów',
-          detail:
-            'Gdy plan repozytorium się kończy, następny zatwierdzony plan z jego kolejki startuje z jednym stałym promptem do swojego leada. Demon czyta kolejkę i nigdy jej nie zapisuje.',
         },
         {
           name: 'Weryfikacja leada',
@@ -684,12 +679,12 @@ export const pl: SiteTranslations = {
     meta: {
       title: 'Metodyka Deep Work Plan',
       description:
-        'Siedem rozdziałów od manifestu po autonomię roju: zasady, podstawowa pętla, szablony, skille i agenci, archetypy, wielu agentów naraz i odporne roje.',
+        'Osiem rozdziałów od manifestu po Loop engineering: zasady, podstawowa pętla, szablony, skille i agenci, archetypy, praca wielu agentów i zamknięcie pętli.',
     },
     eyebrow: 'Metodyka',
     title: 'Metodyka Deep Work Plan',
     intro:
-      'Siedem rozdziałów, które prowadzą od filozofii stojącej za Deep Work Plan do praktycznej pętli, szablonów, adaptacji, uruchamiania wielu agentów naraz i utrzymywania roju w ruchu.',
+      'Osiem rozdziałów przedstawia zasady Deep Work Plan, praktyczną pętlę, szablony, adaptacje, pracę wielu agentów i Loop engineering.',
     chapterLabel: 'Rozdział',
     readChapter: 'Przeczytaj rozdział',
     prev: 'Poprzedni',
@@ -792,8 +787,8 @@ export const pl: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Co to robi',
     whatBody: [
-      'Adopcja zmienia repozytorium na dwa trwałe sposoby — to filary metodyki.',
-      'Po pierwsze, repozytorium staje się spec-driven: praca zaczyna się od spisanego planu i specyfikacji, a nie od doraźnych promptów. Po drugie, samo repozytorium staje się harness agenta — AGENTS.md, baza wiedzy docs/, dokumentacja per moduł i katalog skilli .agents/ (z dowiązaniami .claude → .agents i .cursor → .agents) dają każdemu agentowi potrzebny kontekst i polecenia.',
+      'Ścieżka wdrożenia przekłada te cztery filary na praktykę w repozytorium.',
+      'Adopcja opiera się na czterech filarach: planach spec-first, repozytorium jako harnessie, Loop engineering i mierzonej efektywności. Plan jest trwałym źródłem prawdy; repozytorium przechowuje kontekst, narzędzia, zabezpieczenia i stan. Opcjonalna pętla uruchamiana przez człowieka pomaga zarejestrowanym planom dojść do końca; obciążenie instrukcjami mierzymy w bajtach na przepływ.',
     ],
     sequenceTitle: 'Ścieżka adopcji',
     orLabel: 'lub',
@@ -844,7 +839,7 @@ export const pl: SiteTranslations = {
     ],
     outcomeTitle: 'Efekt',
     outcome:
-      'Repozytorium staje się spec-driven, a samo repozytorium staje się harness agenta — kontekst i polecenia podróżują razem z kodem.',
+      'Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.',
     nextStepsTitle: 'Kolejne kroki',
     nextSteps: [
       { label: 'Przeczytaj metodykę', href: '/methodology' },

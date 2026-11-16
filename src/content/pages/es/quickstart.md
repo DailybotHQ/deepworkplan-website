@@ -37,7 +37,7 @@ Plan — no como una edición rápida.
 
 ## 0. Lee la metodología y la especificación
 
-La metodología se apoya en tres pilares: **desarrollo guiado por especificación** (la especificación escrita es la fuente de la verdad), **ingeniería de harness** (el repositorio lleva el contexto, las herramientas, los guardarraíles y el estado) y **eficiencia de tokens** (el harness carga progresivamente y la validación toca solo lo que cambió — trabajo de largo alcance por diseño, eficiente por construcción).
+La metodología tiene cuatro pilares: **spec-first** (el plan y la especificación son la fuente de verdad duradera), **el repositorio es el harness** (reúne contexto, herramientas, protecciones y estado), **Loop engineering** (el bucle opcional iniciado por una persona ayuda a que los planes registrados lleguen a completarse) y **eficiencia medida** (la carga de instrucciones se mide en bytes por flujo; nunca se infieren ahorros de tokens).
 
 Antes de cambiar nada, lee las fuentes canónicas para entender el estándar que estás adoptando:
 
