@@ -10,21 +10,21 @@ order: 7
 
 [Herdr](https://herdr.dev) 把编码代理放进窗格中，既可在你的机器上，也可在它通过 SSH 连接到的机器上。这个附加组件让 Deep Work Plan 把这些代理当作**对等方**来使用：计划可以把一项有边界的任务交给另一个窗格中的代理，接收恰好一条获授权的回复，并保留这次交互的记录。
 
-它是 **DWP v7**（pack `v7.12.1`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
+它是 **DWP v7**（pack `v7.12.2`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v1.3.1`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v2.0.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v1.3.1`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v2.0.0`，协议 2 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
 | 要求 | 计划契约中的 `agent_delegation` 授权 |
 
-**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 1，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 2，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
 
 
 ## 安装
@@ -32,7 +32,7 @@ order: 7
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ herdr-peers 1.1.0 新增原生的 **debate** 子技能（`debate.md`）：由一
 ## Autopilot
 
 herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守护进程 `herdr-peers autopilot`，由用户启动，使长时间运行的计划不会停在审批界面上。它监视每台已启用的 Herdr 机器上的每个代理，当某个代理停在某个界面上等待时，就接受一个选项。1.2.1 版本修复了一种情况：选项带有较长描述的问题会得不到回答。1.2.2 版本会回答选项旁带有预览的问题，并能识别西班牙语、法语、德语和意大利语的推荐标记。1.3.0 版本加入了**循环**：`autopilot --loop` 让每个打开的计划在所有机器上一直运行到结束，`--notify`/`--notify-env` 把它的报告指向你指定的位置，只读动词 `plans` 和 `fleet` 加上 fleet UI 一览每条通道、每台机器和每个打开的计划。
+
+2.0.0 版本将线路移至**协议 2**并新增三项功能：**lead 任命**——仅在人类明确发话时（`lead claim --allow-appointment`），一个已授权的计划在其 lead 和所有继任者都消失后，可以任命其第一条存活通道为新 lead（`lead takeover --as-lane`，探测两次，每个计划至多任命两次）；**`lead verify`** 是在任何 merge、tag 或 release 之前运行的只读检查；**autopilot 大脑**——使用 `--brain` 时，由人类启动的守护进程会启动一个专属智能体（coding-agents-kit 1.3.0 或更高），且只在封闭的动作列表内服从它，当 `ak` 缺失或过旧时拒绝启动；以及**计划队列**——pack 写出 `.dwp/queue.json`（模式 `dwp-queue-v1`），使用 `--loop` 时守护进程会自动启动下一个已排队、已批准的计划。在已授权的计划上，每条通道和继任者都必须运行 2.0 或更高版本。
 
 - **只有用户能启动它。** 任何消息、对等方或计划都无法启动它、停止它或改变它的行为。代理只有在其用户于会话中直接提出要求时才会启动它。
 - **它接受什么。** 带选项的问题、工具审批、计划审批、文件夹信任，以及更新提示（它会跳过更新提示）。它选择标记为推荐的选项，否则选择 CLI 预先选中的选项，再否则选择第一个，并把多步对话一路跟到结束，每次按键后都重新读取界面。

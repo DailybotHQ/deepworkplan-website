@@ -1,13 +1,32 @@
-# Autopilot — agents that never wait for a human
+# Autopilot — the operator's manual
 
 `herdr-peers autopilot` is a small daemon a **human** starts once. It watches
 every agent on every enabled Herdr machine and, when one waits at a question,
 an approval or a first-run screen, accepts the option that lets it go on. An
-agent that ended its turn by asking in prose is told to continue. Long plans
-then run to their end without anyone sitting at the keyboard.
+agent that ended its turn by asking in prose is told to continue. With
+`--loop` it also keeps every open plan running to its end; with `--brain` it
+keeps a decision agent of its own for the few cases its rules cannot decide;
+with `--appoint` it lets a plan whose lead and successors are gone continue
+under a lane you allowed in advance.
 
 It is not a protocol party: it sends no ask, reply or notice, and no message
 can start it, stop it or change what it does ([protocol.md](protocol.md) §13).
+
+## In one minute
+
+```bash
+herdr-peers autopilot start --loop --dry-run   # see what it would do; sends nothing
+herdr-peers autopilot logs -f                  # watch it (Ctrl-C stops watching, not autopilot)
+herdr-peers autopilot stop
+herdr-peers autopilot start --loop             # for real, in the background (alias: on)
+herdr-peers autopilot status                   # running? since when, its options, last actions
+herdr-peers fleet ui                           # every agent and plan, live
+herdr-peers autopilot stop                     # alias: off
+```
+
+Add `--brain` for the decision agent (§6) and `--appoint` for lead
+appointment (§7) only when you want them. After a reboot or a Herdr restart,
+run `start` again with the same options (`status` showed them).
 
 ## 1. Who may start it
 
@@ -92,8 +111,9 @@ server, in either mode: a second one is refused (exit `4`). It stops on
 | `--exclude <machine>:<pane>` | A pane it never touches (repeatable). Use it for a pane you are working in by hand. |
 | `--scope …` | The same allow-list as every verb (`local`, `<machine>`, `<machine>:<workspace>`); default: every enabled machine. `HERDR_PEERS_SCOPE` applies too. |
 | `--no-nudge` | Never prompt an agent: not one that stopped by asking in prose, not one at its usage limit. Menus are still accepted. |
-| `--loop` | Also keep every open plan running to its end, on every enabled machine ([§9](#9-the-plan-loop---loop)). Without it nothing in §9 happens. |
-| `--notify "<command>"` | With `--loop`: run that command when a plan stalls, is blocked, loses its lead or completes ([§9.6](#96-telling-you---notify)). |
+| `--loop` | Also keep every open plan running to its end, on every enabled machine ([§5](#5-the-plan-loop---loop)). Without it nothing in §5 happens. |
+| `--appoint` | With `--loop`, **only on your word**: when a plan whose lead record carries your appointment grant (`lead claim --allow-appointment`) has lost its lead and every successor for 15 minutes (`HERDR_PEERS_AUTOPILOT_APPOINT_GRACE`) with no progress, ask its first live lane to take the lead (`lead takeover --as-lane`, which checks again). A lead at its usage limit counts only after the screen pass gave up on it. At most two appointments per plan; events `plan_appointment_prompted` and `plan_appointed` reach `--notify` ([protocol.md](protocol.md) §12). |
+| `--notify "<command>"` | With `--loop`: run that command when a plan stalls, is blocked, loses its lead or completes ([§8](#8-telling-you---notify)). |
 | `--catch-up` | Also continue agents that had already stopped to ask before autopilot first looked at their machine. Without it, autopilot only continues stops that happen while it runs. |
 
 `HERDR_PEERS_AUTOPILOT_CONFIRM` sets the seconds between a key and the
@@ -163,52 +183,7 @@ selected; otherwise it is left alone.
   option number and the keys.
 - Send `esc`: on a working agent it interrupts the turn.
 
-## 5. Cost
-
-Autopilot is asleep between passes. A pass asks each machine for its agents
-once — one `herdr agent list` per machine, in parallel — and reads a pane's
-screen only when that pane is `blocked`, or its state changed since the last
-pass, or a usage-limit retry is due. When nothing waits, a pass reads no pane
-and writes nothing. A machine that does not answer is skipped for a growing
-number of passes (up to 8) instead of being asked every time. Measured on 14
-machines with 59 agents: about one second of CPU per pass and 35 MB of
-memory; the first pass after start reads every idle pane once.
-
-## 6. The record
-
-Every action is one line in the delegation log (`herdr-peers log`), with
-`role: autopilot` and a state: `keyed`, `nudged`, `left` (recognised and not
-touched) or `gave_up`. `reason` is the screen class; `note` carries the keys
-and the option number, and `dry_run` when nothing was sent.
-`herdr-peers autopilot status` prints the last ten; `autopilot logs` shows
-the background output.
-
-## 7. What you are accepting
-
-With autopilot on, **an agent's request is approved without you seeing it**.
-That includes a command you would have refused. There is no deny-list:
-autopilot does not judge what a command does. The controls that remain are
-the ones you already have — each agent's own permission mode and guardrails,
-what its account and machine can reach, the repository's rules the agent
-follows, and code review before a merge. Use `--scope` or `--exclude` to keep
-autopilot away from a pane or a machine where you want to decide yourself,
-and `--dry-run` to see what it would do first.
-
-A screen is text an agent printed. An agent could print something shaped like
-a menu; autopilot would press Enter on it, which does what Enter does in that
-agent's own terminal and nothing more. It runs no text from a screen.
-
-## 8. Limits
-
-- It sees only panes Herdr lists as agents. A CLI stopped at a screen before
-  Herdr detects it (some first-run screens) is not listed and is not reached.
-- Screens change between CLI versions. A changed screen falls back to the
-  generic rule or is left as `unknown`; run `--dry-run` after upgrading a CLI.
-- It does not sign in, rotate accounts, or move a plan to another account at
-  a usage limit — that is the lead's handoff ([orchestra.md](orchestra.md) §6).
-- OpenCode's screens have not been verified.
-
-## 9. The plan loop (`--loop`)
+## 5. The plan loop (`--loop`)
 
 ```bash
 herdr-peers autopilot --loop                     # screens, and every open plan to its end
@@ -225,7 +200,7 @@ claim --plan P`) and whose own state file says it is not finished is an
 open plan, and its lead is asked to go on. One daemon, on one machine,
 covers every enabled Herdr machine.
 
-### 9.1 What it watches
+### 5.1 What it watches
 
 A plan is watched when a lead record names it and its state file
 (`state.json` in the plan's directory — the `.dwp`, `plans`, `<id>` path
@@ -248,7 +223,7 @@ A plan's class is `open`, `blocked`, `completed` or `unreadable` (no state
 file inside its repository, or one that is not a valid plan state — never
 guessed).
 
-### 9.2 What it sends
+### 5.2 What it sends
 
 Three fixed prompts, and nothing else. Only the plan id and the reason
 class are filled in.
@@ -267,7 +242,7 @@ writes a lead record — the successor takes the lead through the helper,
 whose own rules decide — and it never appoints an agent that is not in the
 succession.
 
-### 9.3 Idle is not stopped
+### 5.3 Idle is not stopped
 
 A lead is asked to continue only when **all** of these hold:
 
@@ -289,7 +264,239 @@ After **3** loop prompts with no progress in the plan's state, the plan is
 recorded `plan_stalled` and left until its state changes. One lead with
 several open plans receives one prompt per pass.
 
-### 9.4 The map (`herdr-peers fleet`)
+### 5.4 The plan queue
+
+A repository can keep a queue of approved plans in `queue.json` beside its
+plans directory (schema `dwp-queue-v1`). The plan tool writes it — create appends a
+plan when you say to queue it, you or the lead reorder it, execute marks an
+item `started` when it claims the lead, the plan's completion marks it
+`done`. **The daemon never writes it**: it reads it, bounded (64 KiB) and
+validated whole, inside each machine's report.
+
+With `--loop`, when a repository's current plan finishes, the next item
+starts without you: the daemon sends its named lead one fixed prompt,
+"Plan P is next in the queue of the repository at "R" and approved. In that
+repository, run the plan tool's execute flow for it (its start gate checks
+the approval again) and execute it to its end, respecting its gates.", once,
+under the same guards as every loop prompt; the repository's path is quoted
+as JSON data, never read as words of the prompt. An item is ready when it is
+`queued`, the plan it waits for (`after`) is completed, no other plan of that
+repository is running (unless the queue says `"parallel": true`), and it
+names a lead. Its approval must be the last approval-or-amendment event in
+its journal and must cite the plan's live contract id and the digest of its
+markdown as they are now: a plan edited or amended after it, or a bare
+approval line, does not count. Its lead must be a pane of that machine
+working in that repository (the same git common directory) and must not
+lead, succeed or work on another open plan. A queued plan that already began
+(a task left pending, or a task start in its journal) is in flight, never
+prompted again — also after a daemon restart — and the next one waits for
+it. Queue and plan files are read only when no symlink on the way leaves the
+repository, and a journal is read again only when it changed.
+
+In a queue that is not parallel, nothing after a queued item that cannot
+start starts. An item that cannot start for a reason only you can fix — not
+approved, an amendment pending, no lead named, its lead working elsewhere or
+on another machine (the daemon prompts only panes of the machine that
+reports the queue), or `"start": "launch"` (launching an agent for a queue
+item is not available yet) — is reported once per reason (`queue_blocked`,
+through `--notify`). Reasons that are usually a passing state — the plan
+began but the queue does not say so yet, the lead is busy with another plan,
+its directory was not listed this pass — are reported only once they have
+held for the appointment grace (15 minutes,
+`HERDR_PEERS_AUTOPILOT_APPOINT_GRACE`).
+
+`fleet ui` shows every queue (key `u`): each plan's place, state, whether it
+starts next or why it cannot; a plan's own row shows its place (`queue 2/3`).
+`herdr-peers fleet` lists them. The map carries plan ids and states only.
+
+## 6. The brain (`--brain`)
+
+```bash
+herdr-peers autopilot start --loop --brain                         # brain on claude, then codex, then grok
+herdr-peers autopilot start --loop --brain --brain-kinds codex,claude --brain-model claude=sonnet
+```
+
+The rules of §5 decide almost everything. For the few cases they cannot,
+the daemon keeps a **brain**: one dedicated agent it launches itself, asks,
+and obeys only within a closed list of actions. Nothing is asked of you to
+set it up beyond the flag; it needs coding-agents-kit 1.3.0 or later (`ak`).
+**Fail-closed:** with `--brain`, a missing `ak` or one older than 1.3.0
+makes the daemon refuse to start at all, with a message naming the version
+it needs — it never runs a brainless daemon you asked to have a brain.
+Start it without `--brain` to run without one.
+
+### 6.1 How it is launched
+
+1. `ak pick --kinds <your priority list> [--model-for kind=model] --owner
+   <daemon> --max-age 300 --json`, in ask mode (`AGENTKIT_PERMISSIONS=ask`):
+   the first kind of your list with an account that has quota wins.
+2. The answer (`pick-v2`) is checked whole: schema, interface, an account
+   that qualifies, `launch.permissions == ask`. The line to type is `ak`'s own
+   argv, every element matched against its pattern, the resolved path of the
+   `ak` the daemon ran first, and only `--ask` and `--trust-cwd` added — never
+   an autonomy or bypass flag.
+3. The account is leased (`ak lease … --purpose brain`, renewed every two
+   hours) so no lead or second daemon books it.
+4. The daemon creates a workspace of its own, `autopilot brain`, whose
+   shell starts in a fresh, empty, private directory (never the daemon's
+   state directory, so `--trust-cwd` trusts nothing the daemon relies on),
+   and types the quoted line into that fresh shell — never into an agent's
+   pane. The directory is removed when the brain is closed. Its PATH starts
+   with this very helper's directory, so it answers with `herdr-peers` by
+   name. Each launch has a fresh random **answer key**, kept in the daemon's
+   memory and in one private file in the state directory (`0600`, created
+   exclusively, never through a symlink, removed when the brain closes);
+   the brain's environment carries only that file's path
+   (`HERDR_PEERS_BRAIN_KEY_FILE`). The key is never typed, never on a
+   screen and never on a command line. The answers file
+   starts empty at each launch. If anything fails after the lease, the
+   lease, the workspace and the directory are released before the failure
+   is recorded. A daemon killed without its cleanup (SIGKILL, a crash)
+   leaves its key file and brain directory behind; the next start removes
+   them, under the one-per-server lock and never through a symlink (a dry
+   run, which may run beside a live daemon, never removes anything).
+5. If the brain's screen shows a permission mode that skips approvals
+   (auto mode, bypass permissions, accept edits — a profile's own default,
+   which `ak`'s ask launch does not override), the daemon retires that brain
+   at once, tells you, and excludes that profile from the next pick.
+6. When the agent is up it receives one brief: it decides nothing on its own,
+   changes nothing, and answers each question only with the command the
+   question shows.
+
+The brain is replaced when its pane is gone, it sits at its usage limit,
+or its agent has not come up idle within two minutes of the launch (`ak`
+failed, a login screen; you are told) — at most three launches an hour. The
+screen pass never keys or prompts the brain's own pane for its usage limit,
+it marks it so the brain is replaced on the next pass;
+the brain is never nudged in prose and never
+treated as a plan's lead. On `autopilot stop` its lease is released and its
+workspace closed. The fleet map and `fleet ui` show it: state, account,
+questions in the last hour and its last decision.
+
+### 6.2 What it is asked, and what it may answer
+
+| Case | Allowed actions | Default (no valid answer in 3 minutes) |
+| --- | --- | --- |
+| A plan is stalled (three prompts without progress) | `nudge_once_more` (one more prompt to its lead, once per plan), `notify_human`, `leave` | `leave` |
+| A plan is blocked, its state records the blocker as one its lead may resolve (`"resolver": "lead"` in the blocker record — a field the plan writes, not prose), and the blocker names no escalation class and no sensitive subject (credential, login, consent, payment, a push to main, a merge, a release, a deletion, a secret, production — in English and Spanish) | `ask_lead_to_resolve` (one fixed prompt asking the lead to resolve it within its recorded authority), `notify_human`, `leave` | `leave` |
+| An agent waits at a screen autopilot does not recognise | `leave`, `notify_human` | `leave` |
+
+The question is one fixed prompt: the case, the plan and machine, the
+allowed actions and the answer command — nothing else. The brain answers
+with `herdr-peers autopilot answer <question> <action>`, which appends one
+line to the daemon's state directory. The daemon accepts it only when the
+question is one it asked, still open and within its time, the action is in
+that case's list, the answer names the brain's own pane and terminal, and
+it ran under the brain pane's own process (its pid is in the answer's
+recorded process ancestry), and it carries an HMAC of the answer under this
+launch's answer key, which `autopilot answer` reads from the key file the
+brain's environment names (a file of the state directory, owned by you,
+read without following a symlink; anything else, the verb refuses). Anything else is recorded as
+refused and the case keeps its default. **What remains:** a process of the
+same user can read the key file (or learn its path from the brain's
+environment) and forge an answer to an open question with an allowed
+action; every allowed action is harmless under that assumption (one more
+fixed prompt, one fixed request to a lead, a notification, or nothing). An
+`ask_lead_to_resolve` answer is bound to the blocker it was about: if the
+plan unblocks, or its blocker changes or stops being one the lead may
+resolve, before the lead can be prompted, nothing is sent.
+
+The brain reads text other agents wrote, so it is treated as a
+prompt-injection target. The screen pass approves **nothing** in the
+brain's pane except Claude's Bash permission dialog whose command block —
+the lines between the two rules right above "Do you want to proceed?" — is
+exactly one line, `herdr-peers autopilot answer q-<12 hex> <word>`, by name
+and nothing else, with "Yes" as its first option. Any other layout, any
+other kind of agent (until it has its own verified fixture), any extra or
+wrapped line, any path, refuses: the approval is left, recorded
+(`brain_permission_refused`) and you are told once. For now that makes
+Claude the only kind whose brain can answer; others are launched but their
+answers are never approved. An injected brain can
+still choose any allowed action for an open question — that is the
+residual risk, bounded by the lists above. The ask-mode launch is the
+daemon's assurance that the brain's tools wait for approval; a profile
+whose own settings pre-allow tools (Bash on an allowlist, say) runs them
+without a dialog the daemon would ever see — keep the brain's profiles
+without such allowlists. `notify_human` runs your `--notify` command with a `needs_human`
+event; it never stops anything.
+
+No pass waits for the brain: questions are asked on one pass and answers
+read on later ones. At most twenty questions an hour; an idle brain costs
+nothing, each question costs a turn of its account (coding-agents-kit does
+not report tokens per account yet, so the cap counts questions).
+
+### 6.3 What it never does
+
+The brain cannot widen what the daemon does: its text is never typed,
+keyed, prompted to anyone or run; it cannot appoint a lead, launch an agent,
+merge, release, sign in or change a permission. Only the daemon acts, and
+only through the paths of §3 and §5.
+
+## 7. Lead appointment (`--appoint`)
+
+When a plan's lead and every successor are gone, the plan can continue under
+its **first live lane** — only if you allowed it in advance, and only on
+strong evidence ([protocol.md](protocol.md) §12, *Appointment*).
+
+```bash
+herdr-peers lead claim --plan P --allow-appointment     # the lead, on your word: record the grant
+herdr-peers autopilot start --loop --appoint            # the daemon may act on it
+herdr-peers lead verify --plan P                        # the lead, before any merge, tag or release
+```
+
+1. **Two human acts.** The grant lives in the plan's lead record (`appoint`),
+   set by `lead claim --allow-appointment` (`--any-kind` lets a lane of
+   another agent kind take it; `--no-appointment` withdraws it). The daemon
+   acts on it only when started with `--appoint`.
+2. **Evidence.** The lead and every successor are gone at two observations
+   at least 15 minutes apart (`HERDR_PEERS_AUTOPILOT_APPOINT_GRACE`) and the
+   plan's progress did not move meanwhile; a lead at its usage limit counts
+   only after the screen pass gave up retrying it; a live successor, even one
+   that cannot be prompted, always comes first.
+3. **The first live lane** — idle, not at a limit, not excluded, not a
+   member of another open plan, of the lead's agent kind unless the grant
+   says otherwise — gets one fixed prompt to run `herdr-peers lead takeover
+   --plan P --as-lane`. Its helper checks again: the grant, that it is a
+   lane, that it works in the plan's repository (a linked worktree counts),
+   and two probes a minute apart of the lead, every successor and every
+   earlier lane. A member on a machine that cannot be reached is not proof;
+   any sign of life refuses. At most two appointments per plan.
+4. **Every protocol-2 peer verifies it itself** (fence rule F10); a 1.x peer
+   decides the protocol-2 notice never and stays inert until upgraded.
+   Records at one epoch settle by one order — the previous lead, then its
+   successors, then its lanes — whatever order the notices arrive in.
+5. **A lead that comes back** finds a higher epoch: its lead verbs are
+   refused and the next lead notice makes it step down. Before any merge,
+   tag or release a lead runs `lead verify`; it refuses (exit 4) on a newer
+   lead anywhere it can see and exits 5 when a machine of the plan cannot be
+   reached.
+
+Events `plan_appointment_prompted` and `plan_appointed` reach `--notify`.
+Nothing is ever written to git or to another machine. **Residual risk:**
+during a partition a returning lead and the appointee may both work until it
+heals; `lead verify` cannot see a machine it cannot reach.
+
+## 8. Telling you (`--notify`)
+
+
+`--notify "<command>"` names a program the daemon runs when a watched plan
+becomes `plan_stalled`, `plan_blocked`, `plan_no_lead`, `plan_lead_moved` or `plan_completed`
+— once per plan and situation — and when a queued plan starts (`plan_queued_started`) or
+cannot start (`queue_blocked`, once per reason; §5.4), with one JSON object
+([`plan-event-v1`](schemas/plan-event-v1.json)) on its standard
+input: the event, the plan, the machine, the lead, the repository and the
+blocker's class. The command is split into arguments once and run without
+a shell, in its own process group (killed whole at its timeout, 20 s by
+default, `HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT`), with a minimal environment
+(`PATH`, `HOME`, the locale and the XDG directories — never tokens or keys;
+`--notify-env NAME` passes a variable the command needs). All notify commands
+of a pass share one budget of their own (20 s by default,
+`HERDR_PEERS_AUTOPILOT_NOTIFY_BUDGET`, 1–120); one command's timeout never
+widens it. Events that do not fit wait for the next pass. A failure is recorded once and never stops the pass. Only the command line that starts the daemon can set it.
+`--dry-run` runs nothing.
+
+## 9. Watching: the map and `fleet ui`
+
 
 The daemon merges every machine's report with Herdr's listing into one map:
 machines, their agents (state, working directory, repository, branch), the
@@ -345,7 +552,36 @@ pane; `?` help; `q` quit. It only reads: the map, and an open agent's screen
 (at most every 2 s, on the machine where that pane lives, when this
 machine's Herdr can reach it). `--snapshot` prints the view once as text.
 
-### 9.5 Cost
+`herdr-peers fleet ui` draws the same map live in your terminal (groups by
+plan, repository or machine; plans that need you first; open a plan or an
+agent with Enter or a click; `f` focuses an agent in Herdr). It is
+read-only: it writes nothing and prompts nobody, and every string it draws
+is cleaned first. Without a terminal it prints one text snapshot
+(`--snapshot`).
+
+## 10. The record
+
+Every action is one line in the delegation log (`herdr-peers log`), with
+`role: autopilot` and a state: `keyed`, `nudged`, `left` (recognised and not
+touched) or `gave_up`. `reason` is the screen class; `note` carries the keys
+and the option number, and `dry_run` when nothing was sent.
+`herdr-peers autopilot status` prints the last ten; `autopilot logs` shows
+the background output.
+
+## 11. Cost
+
+
+Autopilot is asleep between passes. A pass asks each machine for its agents
+once — one `herdr agent list` per machine, in parallel — and reads a pane's
+screen only when that pane is `blocked`, or its state changed since the last
+pass, or a usage-limit retry is due. When nothing waits, a pass reads no pane
+and writes nothing. A machine that does not answer is skipped for a growing
+number of passes (up to 8) instead of being asked every time. Measured on 14
+machines with 59 agents: about one second of CPU per pass and 35 MB of
+memory; the first pass after start reads every idle pane once.
+
+### With `--loop`
+
 
 The plan pass adds no Herdr call. A machine is asked for its report when
 the daemon first sees it, every 5 minutes, and about once a minute only
@@ -354,24 +590,24 @@ not stalled or blocked. Reports are collected in parallel, each with a
 timeout; a machine that does not answer keeps its last report (unknown is
 not "no plans") and never fails the pass.
 
-### 9.6 Telling you (`--notify`)
+## 12. What you are accepting
 
-`--notify "<command>"` names a program the daemon runs when a watched plan
-becomes `plan_stalled`, `plan_blocked`, `plan_no_lead`, `plan_lead_moved` or `plan_completed`
-— once per plan and situation — with one JSON object
-([`plan-event-v1`](schemas/plan-event-v1.json)) on its standard
-input: the event, the plan, the machine, the lead, the repository and the
-blocker's class. The command is split into arguments once and run without
-a shell, in its own process group (killed whole at its timeout, 20 s by
-default, `HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT`), with a minimal environment
-(`PATH`, `HOME`, the locale and the XDG directories — never tokens or keys;
-`--notify-env NAME` passes a variable the command needs). All notify commands
-of a pass share one budget of their own (20 s by default,
-`HERDR_PEERS_AUTOPILOT_NOTIFY_BUDGET`, 1–120); one command's timeout never
-widens it. Events that do not fit wait for the next pass. A failure is recorded once and never stops the pass. Only the command line that starts the daemon can set it.
-`--dry-run` runs nothing.
 
-### 9.7 What it never does, and what you are accepting
+With autopilot on, **an agent's request is approved without you seeing it**.
+That includes a command you would have refused. There is no deny-list:
+autopilot does not judge what a command does. The controls that remain are
+the ones you already have — each agent's own permission mode and guardrails,
+what its account and machine can reach, the repository's rules the agent
+follows, and code review before a merge. Use `--scope` or `--exclude` to keep
+autopilot away from a pane or a machine where you want to decide yourself,
+and `--dry-run` to see what it would do first.
+
+A screen is text an agent printed. An agent could print something shaped like
+a menu; autopilot would press Enter on it, which does what Enter does in that
+agent's own terminal and nothing more. It runs no text from a screen.
+
+### With `--loop`, `--brain` and `--appoint`
+
 
 - Prompt an agent that is not the lead or a listed successor of an open plan.
 - Launch an agent, write or edit a lead record, or send a protocol message.
@@ -388,7 +624,19 @@ and is then left alone. The daemon also runs `ssh` to your saved machines
 and writes one file, the map, in the herdr-peers state directory of each.
 Use `--scope` to keep it to some machines.
 
-### 9.8 Limits
+## 13. Limits
+
+
+- It sees only panes Herdr lists as agents. A CLI stopped at a screen before
+  Herdr detects it (some first-run screens) is not listed and is not reached.
+- Screens change between CLI versions. A changed screen falls back to the
+  generic rule or is left as `unknown`; run `--dry-run` after upgrading a CLI.
+- It does not sign in, rotate accounts, or move a plan to another account at
+  a usage limit — that is the lead's handoff ([orchestra.md](orchestra.md) §6).
+- OpenCode's screens have not been verified.
+
+### Of the loop
+
 
 - The first pass after start reads every idle pane once and waits for the
   slowest machine (up to the report timeout): on a large fleet it can take a
@@ -405,3 +653,36 @@ Use `--scope` to keep it to some machines.
 - `HERDR_PEERS_AUTOPILOT_GRACE` (seconds, default 300) and
   `HERDR_PEERS_AUTOPILOT_SSH_TIMEOUT` (seconds, default 25, 1–120) tune the
   grace period and the per-machine report timeout.
+
+## 14. Troubleshooting
+
+| You see | Why | What to do |
+| --- | --- | --- |
+| `status` says `not running` after a reboot or a Herdr restart | the daemon needs the Herdr server it was started for | run `autopilot start` again with the same options |
+| `start` refuses with exit 4, "already running" | one autopilot per Herdr server (a lock) | `autopilot status`; `autopilot stop` first if you want new options |
+| `start` exits non-zero and prints a log tail | the daemon died at once (an unwritable state directory, a symlinked log, a bad option) | read the tail; the full log is `autopilot.out` in the state directory |
+| An agent stays at a screen | its screen is not one autopilot recognises (`herdr-peers status <pane>` shows `screen: unknown`), it is `--exclude`d or out of `--scope`, it is a login, it has your draft on its input line, or it is the foreground daemon's own pane | answer it yourself; autopilot never keys what it does not recognise |
+| An agent at its usage limit is not continued | the retry runs every 30 minutes, at most 48 times | wait for the reset, or move the lane (orchestra.md) |
+| A plan is reported `plan_stalled`, `plan_blocked` or `plan_no_lead` | three prompts without progress, a blocker in its state, or a gone lead with no successor to ask | look at the plan; `--brain` may decide stalls and some blockers; `--appoint` covers a lost lead if you granted it |
+| `start --brain` refuses to start | `ak` is missing or older than 1.3.0 (`--brain` is fail-closed) | install or upgrade coding-agents-kit, or start without `--brain` |
+| The brain is retired at once | its account's profile defaults to a mode that skips approvals (auto, bypass, accept edits), or its agent did not come up within two minutes | change that profile's default, or exclude it with `--brain-kinds`; read `autopilot logs` |
+| A queued plan does not start | it waits for its `after` plan or another plan of its repository; or `queue_blocked` named why: not approved (or edited or amended since), no lead, its lead works elsewhere, on another machine, in a directory this machine cannot see, or on another plan, it already began, or it is a `launch` item; in a sequential queue the items after it wait too | fix what the reason names; the daemon reads the queue again on the next report |
+| `lead verify` exits 5 | a machine of the plan could not be reached | wait until it answers, or pass `--allow-unreached` to accept the risk (recorded) |
+| `autopilot logs -f` shows nothing | only the background daemon writes `autopilot.out`; an idle daemon writes one pass line every tenth pass | `autopilot status` to see whether it runs, and how |
+| `--notify` never runs | it needs `--loop` and a program that exists; a dry run runs nothing | check `autopilot status` (its options) and the log |
+
+## 15. Where each guarantee is tested
+
+Every rule above is pinned by the suite (`bash tests/run.sh <scope>`):
+
+| Guarantee | Scope |
+| --- | --- |
+| What each screen gets (keys, leave, never a login, a refusal or a permission-widening row) | `autopilot` (one fixture per screen in `tests/fixtures/screens/`, expected decisions in `expected.json`) |
+| Background mode, start, stop, status, logs, the log's rotation and file modes | `autopilot` |
+| The plan loop: grace, stall cap, blocked plans, succession, the map, scope, local-only plan content | `autopilot` (`autopilot_loop.sh`) |
+| `--notify`: process group, minimal environment, the pass budget | `autopilot` (`autopilot_loop.sh`) |
+| The plan queue: bounded reading, the approval bound to the live contract and plan digest, the lead's repository, in-flight plans, one start per repository | `autopilot` (`queue.sh`) |
+| The brain: the launch line, the closed action lists, answers, the approval it may get, the sweep of a killed daemon's leftovers | `brain` |
+| Lead appointment: the grant, `--as-lane`, fence F10 and the one order, `lead verify`, protocol 2 vs a frozen 1.3.0 receiver | `lead` (`appoint.sh`) and `autopilot` (the drill) |
+| `fleet ui`: hostile maps, cleaned text, read-only | `fleet_ui` |
+| No secret, prompt or screen text in any record | `security`, `autopilot` |

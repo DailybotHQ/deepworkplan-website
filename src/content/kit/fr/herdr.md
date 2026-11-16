@@ -10,21 +10,21 @@ order: 7
 
 [Herdr](https://herdr.dev) place des agents de code dans des panneaux, sur votre machine et sur les machines qu’il atteint via SSH. Cet addon permet à un Deep Work Plan d’utiliser ces agents comme **pairs** : un plan peut confier une tâche délimitée à un agent situé dans un autre panneau, recevoir exactement une réponse autorisée et conserver une trace de l’échange.
 
-C’est un addon facultatif de **DWP v7** (pack `v7.12.1`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
+C’est un addon facultatif de **DWP v7** (pack `v7.12.2`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.3.1`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v2.0.0`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v2.0.0`, protocole 2 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
 | Requiert | l’octroi `agent_delegation` du contrat du plan |
 
-**Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique : les verbes de la CLI et leurs options documentées, les codes de sortie `0`–`7`, les variables documentées `HERDR_PEERS_*`, `DWP_PLAN` et `DWP_TASK`, le protocole 1 et les contrats JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` et l’enregistrement de délégation. Un changement incompatible de l’un d’eux incrémente la version majeure, et un changement du format de transmission incrémente aussi le numéro de protocole. `v1.0.0` ne modifie aucun comportement par rapport à `v0.3.3`, et les versions 0.x ne sont plus prises en charge.
+**Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique : les verbes de la CLI et leurs options documentées, les codes de sortie `0`–`7`, les variables documentées `HERDR_PEERS_*`, `DWP_PLAN` et `DWP_TASK`, le protocole 2 et les contrats JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` et l’enregistrement de délégation. Un changement incompatible de l’un d’eux incrémente la version majeure, et un changement du format de transmission incrémente aussi le numéro de protocole. `v1.0.0` ne modifie aucun comportement par rapport à `v0.3.3`, et les versions 0.x ne sont plus prises en charge.
 
 
 ## Installation
@@ -32,7 +32,7 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ La version est purement additive : le protocole 1 et l'ensemble des verbes, opti
 ## Autopilot
 
 herdr-peers 1.2.0 ajoute **autopilot** (`autopilot.md`) : un démon facultatif, `herdr-peers autopilot`, qu’un humain démarre pour qu’un long plan ne s’arrête pas sur un écran d’approbation. Il surveille chaque agent sur chaque machine Herdr activée et, lorsque l’un d’eux attend sur un écran, accepte une option. La version 1.2.1 corrige un cas où une question dont les options ont de longues descriptions restait sans réponse. La version 1.2.2 répond à une question affichée avec un aperçu à côté de ses options et reconnaît la marque de recommandation en espagnol, français, allemand et italien. La version 1.3.0 ajoute la **boucle** : `autopilot --loop` garde chaque plan ouvert en exécution jusqu'à son terme sur toutes les machines, `--notify`/`--notify-env` pointent ses rapports où vous le voulez, et les verbes en lecture seule `plans` et `fleet` avec l'interface fleet montrent chaque couloir, machine et plan ouvert d'un coup d'œil.
+
+La version 2.0.0 déplace le fil vers le **protocole 2** et ajoute trois choses : **la nomination de lead** — sur le mot explicite de l'humain (`lead claim --allow-appointment`), un plan granti dont le lead et tous les successeurs ont disparu peut nommer son premier couloir vivant comme nouveau lead (`lead takeover --as-lane`, sondé deux fois, au maximum deux nominations par plan), et **`lead verify`** est la vérification en lecture seule à exécuter avant tout merge, tag ou release ; le **cerveau de l'autopilot** — avec `--brain`, le démon démarré par l'humain lance un agent dédié (coding-agents-kit 1.3.0 ou ultérieur) et ne lui obéit que dans une liste fermée d'actions, refusant de démarrer si `ak` manque ou est plus ancien ; et la **file d'attente de plans** — le pack écrit `.dwp/queue.json` (schéma `dwp-queue-v1`) et avec `--loop` le démarre le prochain plan en file et approuvé sans vous. Sur un plan granti, chaque couloir et chaque successeur doit exécuter 2.0 ou ultérieur.
 
 - **Seul un humain le démarre.** Aucun message, pair ou plan ne peut le démarrer, l’arrêter ni modifier ce qu’il fait. Un agent ne le démarre que si son humain l’a demandé directement dans la session.
 - **Ce qu’il accepte.** Une question à options, une approbation d’outil, une approbation de plan, la confiance accordée au dossier et une invite de mise à jour, qu’il passe. Il prend l’option marquée comme recommandée, à défaut celle que la CLI a présélectionnée, à défaut la première, et suit un dialogue en plusieurs étapes jusqu’à son terme, en relisant l’écran après chaque touche.

@@ -10,21 +10,21 @@ order: 7
 
 [Herdr](https://herdr.dev) bringt Coding-Agenten in Panes unter, auf Ihrem Rechner und auf Rechnern, die es über SSH erreicht. Dieses Addon lässt einen Deep Work Plan diese Agenten als **Peers** nutzen: Ein Plan kann eine abgegrenzte Aufgabe an einen Agenten in einem anderen Pane übergeben, genau eine autorisierte Antwort erhalten und einen Nachweis des Austauschs aufbewahren.
 
-Es ist ein optionales Addon von **DWP v7** (pack `v7.12.1`). Die Methodik funktioniert ohne es genauso: Fehlt das Addon oder ist es deaktiviert, läuft jede Aufgabe wie bisher in der aktuellen Sitzung.
+Es ist ein optionales Addon von **DWP v7** (pack `v7.12.2`). Die Methodik funktioniert ohne es genauso: Fehlt das Addon oder ist es deaktiviert, läuft jede Aufgabe wie bisher in der aktuellen Sitzung.
 
 ## Was es integriert
 
-Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v1.3.1`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
+Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v2.0.0`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, Tag `v1.3.1`, Protokoll 1 |
+| Produkt | `DailybotHQ/herdr-peers`, Tag `v2.0.0`, Protokoll 2 |
 | Registry-Schlüssel | `herdr` in `.dwp/config.json` |
 | Transport | interaktiv: ein Peer in einem Herdr-Pane |
 | Stellt bereit | `subagents`, `cancel_children` |
 | Erfordert | die `agent_delegation`-Freigabe des Plan-Vertrags |
 
-**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung: die CLI-Verben und ihre dokumentierten Flags, die Exit-Codes `0`–`7`, die dokumentierten Variablen `HERDR_PEERS_*`, `DWP_PLAN` und `DWP_TASK`, Protokoll 1 sowie die JSON-Verträge `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` und der Delegationsdatensatz. Eine inkompatible Änderung an einem davon erhöht die Major-Version, und eine Änderung des Wire-Formats erhöht zusätzlich die Protokollnummer. `v1.0.0` ändert kein Verhalten gegenüber `v0.3.3`, und 0.x-Releases werden nicht mehr unterstützt.
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung: die CLI-Verben und ihre dokumentierten Flags, die Exit-Codes `0`–`7`, die dokumentierten Variablen `HERDR_PEERS_*`, `DWP_PLAN` und `DWP_TASK`, Protokoll 2 sowie die JSON-Verträge `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` und der Delegationsdatensatz. Eine inkompatible Änderung an einem davon erhöht die Major-Version, und eine Änderung des Wire-Formats erhöht zusätzlich die Protokollnummer. `v1.0.0` ändert kein Verhalten gegenüber `v0.3.3`, und 0.x-Releases werden nicht mehr unterstützt.
 
 
 ## Installation
@@ -32,7 +32,7 @@ Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](http
 Installieren Sie herdr-peers und den offiziellen Skill von Herdr, von dem es abhängt. Jeder Rechner, dessen Agenten antworten sollen, braucht den Skill ebenfalls.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ Die Version ist rein additiv: Protokoll 1 und alle Verben, Flags, Exit-Codes und
 ## Autopilot
 
 herdr-peers 1.2.0 ergänzt **autopilot** (`autopilot.md`): einen optionalen Daemon, `herdr-peers autopilot`, den ein Mensch startet, damit ein langer Plan nicht an einem Freigabebildschirm stehen bleibt. Er beobachtet jeden Agenten auf jedem aktivierten Herdr-Rechner und nimmt, wenn einer an einem Bildschirm wartet, eine Option an. Release 1.2.1 behebt einen Fall, in dem eine Frage, deren Optionen lange Beschreibungen haben, unbeantwortet blieb. Release 1.2.2 beantwortet eine Frage, die mit einer Vorschau neben ihren Optionen angezeigt wird, und erkennt die Empfehlungsmarkierung auf Spanisch, Französisch, Deutsch und Italienisch. Release 1.3.0 fügt die **Schleife** hinzu: `autopilot --loop` hält jeden offenen Plan auf jedem Rechner bis zu seinem Ende am Laufen, `--notify`/`--notify-env` richten seine Berichte dorthin, wo Sie sie haben wollen, und die schreibgeschützten Verben `plans` und `fleet` zeigen mit der Fleet-UI jede Lane, jeden Rechner und jeden offenen Plan auf einen Blick.
+
+Release 2.0.0 verlegt die Leitung auf **Protokoll 2** und fügt drei Dinge hinzu: **die Lead-Ernennung** — nur auf das ausdrückliche Wort des Menschen (`lead claim --allow-appointment`) darf ein garantierter Plan, dessen Lead und sämtliche Nachfolger verschwunden sind, seine erste lebende Spur zum neuen Lead ernennen (`lead takeover --as-lane`, zweimal abgefragt, höchstens zwei Ernennungen pro Plan), und **`lead verify`** ist die schreibgeschützte Prüfung vor jedem Merge, Tag oder Release; das **Autopilot-Gehirn** — mit `--brain` startet der vom Menschen gestartete Daemon einen eigenen Agenten (coding-agents-kit 1.3.0 oder neuer) und gehorcht ihm nur innerhalb einer geschlossenen Liste von Aktionen, verweigert den Start ganz, wenn `ak` fehlt oder älter ist; und die **Plan-Warteschlange** — das Pack schreibt `.dwp/queue.json` (Schema `dwp-queue-v1`), und mit `--loop` startet der Daemon den nächsten eingereihten, genehmigten Plan ohne dich. Auf einem garantierten Plan müssen jede Spur und jeder Nachfolger 2.0 oder neuer laufen.
 
 - **Nur ein Mensch startet ihn.** Keine Nachricht, kein Peer und kein Plan kann ihn starten, stoppen oder ändern, was er tut. Ein Agent startet ihn nur, wenn sein Mensch direkt in der Sitzung darum gebeten hat.
 - **Was er annimmt.** Eine Frage mit Optionen, eine Tool-Freigabe, eine Plan-Freigabe, das Ordnervertrauen und eine Update-Aufforderung, die er überspringt. Er nimmt die als empfohlen markierte Option, sonst die von der CLI vorausgewählte, sonst die erste, und folgt einem mehrstufigen Dialog bis zum Ende, wobei er den Bildschirm nach jedem Tastendruck neu liest.

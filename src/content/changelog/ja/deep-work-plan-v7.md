@@ -36,6 +36,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
   - label: "Skill release v7.12.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
+  - label: "Skill release v7.12.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.2"
 ---
 
 Deep Work Plan v7 は v6 の方法を維持します。契約が権威であり、追記専用のジャーナルが記憶であり、スケジューラが次に実行するものを決め、記録された証拠がタスクの基準を満たしたときにのみタスクが完了します。v7 は委任の能力を加え、その結果に対しても同じ規律を保ちます。
@@ -68,4 +70,6 @@ v7 はオーケストレーションと監査可能性における大きな前�
 
 リリース 7.12.1（2026-11-16）は Herdr アドオンの Dailybot ノティファイアを修正します。herdr-peers が発する `herdr-peers/plan-event-v1` というイベント名を受け入れ、ノティファイアの stdin を 64 KiB に制限し、`plan_lead_moved` をマッピングします。アドオンの記述子は coding-agents-kit v1.4.0 に移り、その `ak update` は人間が呼び出すことだけを意図したものとして文書化されます。
 
-インストール済みスキルのリリースは **7.12.1** です。7.0.0 以降、安定しています。
+リリース 7.12.2（2026-11-16）では、Herdr アドオンが herdr-peers のプロトコル 1 と 2 の両方を受け入れ、herdr-peers v2.0.0 に固定されます。プロトコル 2 の環境でも検出が黙って失敗することはなくなり、アドオンは委任機能を維持します。
+
+インストール済みスキルのリリースは **7.12.2** です。7.0.0 以降、安定しています。

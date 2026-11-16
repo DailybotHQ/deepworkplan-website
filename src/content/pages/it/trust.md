@@ -23,11 +23,11 @@ Tratta la skill come non attendibile finché non l'hai verificata. Ogni release 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-git checkout v7.12.1
-# Download the checksums for the release you intend to install (current release v7.12.1):
+git checkout v7.12.2
+# Download the checksums for the release you intend to install (current release v7.12.2):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.1/SHA256SUMS
-# Expected SHA256SUMS digest: a8b737d97c57091807f598206d5ef98b2d65af3fee7b5af5dc87a806db92fc97
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS
+# Expected SHA256SUMS digest: 8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea
 ./setup.sh --verify        # un'uscita diversa da zero significa che un file non corrisponde — fermati
 ```
 

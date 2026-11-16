@@ -10,21 +10,21 @@ order: 7
 
 [Herdr](https://herdr.dev) puts coding agents in panes, on your machine and on machines it reaches over SSH. This addon lets a Deep Work Plan use those agents as **peers**: a plan can hand a bounded task to an agent in another pane, receive exactly one authorized reply, and keep a record of the exchange.
 
-It is an optional addon of **DWP v7** (pack `v7.12.1`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
+It is an optional addon of **DWP v7** (pack `v7.12.2`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.3.1`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v2.0.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v2.0.0`, protocol 2 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
 | Requires | the plan contract's `agent_delegation` grant |
 
-**Stable since `v1.0.0`.** The public interface follows semantic versioning: the CLI verbs and their documented flags, exit codes `0`–`7`, the documented `HERDR_PEERS_*`, `DWP_PLAN` and `DWP_TASK` variables, protocol 1, and the JSON contracts `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` and the delegation record. A breaking change to any of them bumps the major version, and a wire-format change also bumps the protocol number. `v1.0.0` changes no behavior from `v0.3.3`, and 0.x releases are no longer supported.
+**Stable since `v1.0.0`.** The public interface follows semantic versioning: the CLI verbs and their documented flags, exit codes `0`–`7`, the documented `HERDR_PEERS_*`, `DWP_PLAN` and `DWP_TASK` variables, protocol 2, and the JSON contracts `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` and the delegation record. A breaking change to any of them bumps the major version, and a wire-format change also bumps the protocol number. `v1.0.0` changes no behavior from `v0.3.3`, and 0.x releases are no longer supported.
 
 
 ## Install
@@ -32,7 +32,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ The release is additive: protocol 1 and every verb, flag, exit code and JSON con
 ## Autopilot
 
 herdr-peers 1.2.0 adds **autopilot** (`autopilot.md`): an optional daemon, `herdr-peers autopilot`, that a human starts so that a long plan does not stop at an approval screen. It watches every agent on every enabled Herdr machine and, when one waits at a screen, accepts an option. Release 1.2.1 fixes a case in which a question whose options have long descriptions was left unanswered. Release 1.2.2 answers a question shown with a preview beside its options and recognises the recommended mark in Spanish, French, German and Italian. Release 1.3.0 adds the **loop**: `autopilot --loop` keeps every open plan running to its end on every machine, `--notify`/`--notify-env` point its reports where you want them, and the read-only `plans` and `fleet` verbs plus the fleet UI show every lane, machine and open plan at a glance.
+
+Release 2.0.0 moves the wire to **protocol 2** and adds three things: **lead appointment** — on the human's explicit word (`lead claim --allow-appointment`), a granted plan whose lead and every successor are gone may appoint its first live lane as the new lead (`lead takeover --as-lane`, probed twice, at most two appointments per plan), and **`lead verify`** is the read-only check to run before any merge, tag or release; the **autopilot brain** — with `--brain` the human-started daemon launches one dedicated agent (coding-agents-kit 1.3.0 or later) and obeys it only within a closed list of actions, refusing to start at all when `ak` is missing or older; and the **plan queue** — the pack writes `.dwp/queue.json` (schema `dwp-queue-v1`) and with `--loop` the daemon starts the next queued, approved plan without you. On a granted plan every lane and successor must run 2.0 or later.
 
 - **Only a human starts it.** No message, peer or plan can start it, stop it or change what it does. An agent starts it only when its human asked for it directly in the session.
 - **What it accepts.** A question with options, a tool approval, a plan approval, folder trust and an update prompt, which it skips. It takes the option marked recommended, else the one the CLI pre-selected, else the first, and follows a multi-step dialog to its end, re-reading the screen after every key.

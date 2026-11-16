@@ -36,6 +36,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
   - label: "Skill release v7.12.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
+  - label: "Skill release v7.12.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.2"
 ---
 
 Deep Work Plan v7 behält die Methode von v6 bei: Der Vertrag ist die Autorität, das nur anhängbare Journal ist das Gedächtnis, der Scheduler entscheidet, was als Nächstes läuft, und eine Aufgabe wird erst abgeschlossen, wenn aufgezeichnete Nachweise ihre Kriterien erfüllen. v7 ergänzt die Möglichkeit zu delegieren und hält dieselbe Disziplin beim Ergebnis ein.
@@ -68,4 +70,6 @@ Release 7.12.0 (2026-11-16) registriert Pläne in der herdr-peers-Schleife: Ein 
 
 Release 7.12.1 (2026-11-16) repariert den Dailybot-Notifier des Herdr-Addons: Er akzeptiert nun den von herdr-peers ausgegebenen Ereignisnamen `herdr-peers/plan-event-v1`, begrenzt den Stdin des Notifiers auf 64 KiB und bildet `plan_lead_moved` ab; die Addon-Deskriptoren ziehen auf coding-agents-kit v1.4.0, dessen `ak update` als nur von Menschen aufgerufen dokumentiert ist.
 
-Installierte Skill-Version: **7.12.1**, stabil seit 7.0.0.
+Release 7.12.2 (2026-11-16) lässt das Herdr-Addon die herdr-peers-Protokolle 1 und 2 akzeptieren und pinnt es auf herdr-peers v2.0.0: Bei einer Installation mit Protokoll 2 schlägt die Erkennung nicht mehr stillschweigend fehl, und das Addon behält seine Delegationsfähigkeiten.
+
+Installierte Skill-Version: **7.12.2**, stabil seit 7.0.0.

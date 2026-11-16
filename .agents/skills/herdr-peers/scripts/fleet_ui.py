@@ -40,7 +40,8 @@ TICK = 1.0                 # seconds between two header redraws
 SCREEN_EVERY = 2.0         # seconds between two live screen reads in a detail panel
 SCREEN_LINES = 20
 MIN_W, MIN_H = 50, 12
-GROUPINGS = ('plan', 'repo', 'machine')
+GROUPINGS = ('plan', 'repo', 'machine', 'queue')
+QUEUE_MARK = {'queued': ('○', 'dim'), 'started': ('▶', 'accent'), 'done': ('✓', 'ok'), 'skipped': ('–', 'dim')}
 
 # Agent states as the map reports them, folded into what a human reads.
 STATES = {
@@ -269,7 +270,9 @@ class Index(object):
 
     def __init__(self, fleet):
         self.agents, self.plans, self.machines = [], [], []
+        self.queue_pos = {}    # machine/plan -> (position, length, state) in its repository's queue
         self.generated_at = parse_ts((fleet or {}).get('generated_at'))
+        self.daemon = (fleet or {}).get('daemon') if isinstance((fleet or {}).get('daemon'), dict) else {}
         by_key = {}
         daemon = (fleet or {}).get('daemon') if isinstance((fleet or {}).get('daemon'), dict) else {}
         mirror = daemon.get('local_is') if isinstance(daemon.get('local_is'), str) else None
@@ -286,10 +289,23 @@ class Index(object):
                 (default or 'daemon host') if machine == 'local' else machine[:12])
             agents = [Agent(machine, label, a) for a in m.get('agents') or [] if isinstance(a, dict)]
             plans = [Plan(machine, label, p) for p in m.get('plans') or [] if isinstance(p, dict)]
+            queues = []
+            for q in m.get('queues') or []:
+                if not isinstance(q, dict):
+                    continue
+                items = [{'plan': clean(it.get('plan'), 128), 'state': clean(it.get('state'), 12),
+                          'after': clean(it.get('after'), 128) or None, 'lead': clean(it.get('lead'), 120) or None,
+                          'ready': it.get('ready') is True, 'blocked': clean(it.get('blocked_reason'), 120) or None}
+                         for it in q.get('items') or [] if isinstance(it, dict)]
+                queues.append({'repo': clean(q.get('repo_root'), 400), 'parallel': q.get('parallel') is True,
+                               'invalid': q.get('invalid') is True, 'items': items})
             self.machines.append({'machine': machine, 'label': label,
                                   'agents_state': clean(m.get('agents_state'), 20),
                                   'plans_state': clean(m.get('plans_state'), 20),
-                                  'agents': agents, 'plans': plans})
+                                  'agents': agents, 'plans': plans, 'queues': queues})
+            for q in queues:
+                for n, it in enumerate(q['items']):
+                    self.queue_pos['%s/%s' % (machine, it['plan'])] = (n + 1, len(q['items']), it['state'])
             self.agents.extend(agents)
             self.plans.extend(plans)
             for a in agents:
@@ -323,11 +339,12 @@ class Index(object):
 
 
 class Group(object):
-    __slots__ = ('key', 'kind', 'title', 'subtitle', 'plan', 'members', 'tone')
+    __slots__ = ('key', 'kind', 'title', 'subtitle', 'plan', 'members', 'tone', 'queue_pos')
 
     def __init__(self, key, kind, title, subtitle='', plan=None, members=None, tone='normal'):
         self.key, self.kind, self.title, self.subtitle = key, kind, title, subtitle
         self.plan, self.members, self.tone = plan, members or [], tone
+        self.queue_pos = None
 
 
 def _matches(text, needle):
@@ -350,7 +367,9 @@ def build_view(index, grouping='plan', needle=''):
             for _, a in plan.members:
                 in_plan.add(a.key)
             tone = 'bad' if plan.needs_you else ('dim' if plan.cls == 'completed' else 'normal')
-            groups.append(Group(plan.key, 'plan', plan.plan, plan.label, plan, members, tone))
+            group = Group(plan.key, 'plan', plan.plan, plan.label, plan, members, tone)
+            group.queue_pos = index.queue_pos.get(plan.key)
+            groups.append(group)
         busy = [('', a) for a in index.agents if a.key not in in_plan and a.state != 'idle'
                 and _matches(a.search, needle)]
         idle = [('', a) for a in index.agents if a.key not in in_plan and a.state == 'idle'
@@ -361,6 +380,19 @@ def build_view(index, grouping='plan', needle=''):
         if idle:
             groups.append(Group('idle', 'idle', 'Doing nothing — free to take work', '', None,
                                 sorted(idle, key=lambda m: m[1].key), 'free'))
+    elif grouping == 'queue':
+        for m in index.machines:
+            for q in m.get('queues') or []:
+                if needle and not any(needle in it['plan'].lower() for it in q['items']) \
+                        and needle not in (q['repo'] + ' ' + m['label']).lower():
+                    continue
+                name = os.path.basename(q['repo'].rstrip('/')) or '(repository)'
+                sub = '%s · %s%s' % (m['label'], 'parallel' if q['parallel'] else 'one at a time',
+                                      ' · INVALID queue file' if q['invalid'] else '')
+                g = Group('queue:%s:%s' % (m['machine'], q['repo']), 'queue', name, sub, None, [],
+                          'bad' if q['invalid'] else 'normal')
+                g.plan = (m['machine'], q['items'])
+                groups.append(g)
     elif grouping == 'repo':
         repos = {}
         for a in index.agents:
@@ -461,6 +493,8 @@ def group_header(g, width):
             pct = int(100 * (p.done or 0) / float(p.total))
             right.append(('%s %d/%d %3d%% ' % (bar(p.done, p.total, 12), p.done or 0, p.total, pct),
                           'ok' if p.done == p.total else 'accent'))
+        if getattr(g, 'queue_pos', None):
+            right.append(('  queue %d/%d' % g.queue_pos[:2], 'dim'))
         right.append(('  ' + fit(p.label, 24) + ' ', 'dim'))
         room = width - sum(width_of(t) for t, _ in line.segs) - sum(width_of(t) for t, _ in right) - 1
         name = fit(p.plan, max(8, room))
@@ -475,10 +509,10 @@ def group_header(g, width):
         for text, style in right:
             line.add(text, style)
     else:
-        mark = {'idle': '○', 'busy': '●', 'repo': '▤', 'machine': '▣'}.get(g.kind, '▸')
+        mark = {'idle': '○', 'busy': '●', 'repo': '▤', 'machine': '▣', 'queue': '☰'}.get(g.kind, '▸')
         line.add('▌', 'free' if g.tone == 'free' else 'accent')
         line.add(' %s %s ' % (mark, g.title), 'group_title')
-        line.add('(%d)' % len(g.members), 'dim')
+        line.add('(%d)' % (len(g.plan[1]) if g.kind == 'queue' else len(g.members)), 'dim')
         if g.subtitle:
             line.add('  ' + g.subtitle, 'dim')
     return line
@@ -500,6 +534,21 @@ def render_list(groups, now, width):
                     clean(block.get('needs') or block.get('reason'), 200), 'bad'))
             if not g.members:
                 lines.append(Line(target=('plan', g.key)).add('    nobody on the map works on this plan', 'dim'))
+        if g.kind == 'queue':
+            machine, items = g.plan
+            for n, it in enumerate(items):
+                mark, style = QUEUE_MARK.get(it['state'], ('?', 'dim'))
+                line = Line(target=('plan', '%s/%s' % (machine, it['plan'])))
+                line.add('    %2d. ' % (n + 1), 'dim').add(mark + ' ', style).add(pad(it['plan'], 44), 'group_title')
+                line.add(pad(it['state'], 9), style)
+                if it['ready']:
+                    line.add('ready — starts next', 'ok')
+                elif it['blocked'] and it['state'] == 'queued':
+                    waiting = it['blocked'].startswith('waiting') or it['blocked'].startswith('another plan')
+                    line.add(it['blocked'], 'dim' if waiting else 'bad')
+                if it['lead']:
+                    line.add('  lead ' + it['lead'], 'dim')
+                lines.append(line)
         for role, a in g.members:
             lines.append(agent_cells(a, now, width, role))
         lines.append(Line())
@@ -531,13 +580,25 @@ def render_header(index, age, grouping, needle, width, error=None):
         n = counts.get(state, 0)
         mark = {'working': '●', 'waiting': '◆', 'idle': '○', 'unknown': '?'}[state]
         second.add('%s %d %s   ' % (mark, n, label), state if n else 'dim')
+    brain = ((index.daemon or {}).get('brain') if index else None)
+    if isinstance(brain, dict):
+        bstate = clean(brain.get('state'), 12)
+        second.add('│ brain ', 'dim').add('◎ ', 'working' if bstate == 'ready' else 'warn')
+        second.add('%s %s %s' % (clean(brain.get('kind'), 12) or '-', clean(brain.get('profile'), 24) or '',
+                                 bstate), 'accent')
+        last = brain.get('last') if isinstance(brain.get('last'), dict) else None
+        if isinstance(brain.get('asked_last_hour'), int):
+            second.add(' · %d asked/h' % brain['asked_last_hour'], 'dim')
+        if last:
+            second.add(' · last: %s %s' % (clean(last.get('action'), 24), clean(last.get('plan'), 40)), 'dim')
+        second.add('   ')
     second.add('│ plans: ', 'dim')
     second.add('%d need you' % plans.get('needs_you', 0), 'bad' if plans.get('needs_you') else 'dim')
     second.add(' · %d running · %d done' % (plans.get('open', 0), plans.get('completed', 0)), 'dim')
     tabs = Line().add(' ')
-    for key, label in (('plan', 'Plans'), ('repo', 'Repos'), ('machine', 'Machines')):
+    for key, label in (('plan', 'Plans'), ('repo', 'Repos'), ('machine', 'Machines'), ('queue', 'Queues')):
         style = 'tab_on' if key == grouping else 'tab'
-        tabs.add(' %s %s ' % (label[0].lower(), label), style).add(' ')
+        tabs.add(' %s %s ' % ({'queue': 'u'}.get(key, label[0].lower()), label), style).add(' ')
     if needle:
         tabs.add('   filter: ', 'dim').add(needle, 'accent')
     return [fit_line(l, width) for l in (top, second, tabs)]
@@ -644,7 +705,7 @@ HELP = [
     '',
     'p  group by plan: each plan with its lead (★), lanes (·) and successors (↳);',
     '   plans that need you first; agents working outside plans; agents doing nothing.',
-    'r  group by repository     m  group by machine',
+    'r  group by repository     m  group by machine     u  each repository\'s plan queue',
     '/  filter (pane, plan, repository, branch, title, machine)   esc clears it',
     '⏎ or click  open a plan or an agent      f  focus that agent\'s pane (Herdr)',
     '↑↓ j k  move   PgUp PgDn  page   g G  top / bottom   q  quit',
@@ -916,8 +977,8 @@ class App(object):
             self.move(-10 ** 6)
         elif key == 'G':
             self.move(10 ** 6)
-        elif key in ('p', 'r', 'm') and self.mode == 'list':
-            self.grouping = {'p': 'plan', 'r': 'repo', 'm': 'machine'}[key]
+        elif key in ('p', 'r', 'm', 'u') and self.mode == 'list':
+            self.grouping = {'p': 'plan', 'r': 'repo', 'm': 'machine', 'u': 'queue'}[key]
             self.sel_target, self.sel, self.scroll, self.dirty = None, 0, 0, True
         elif key == '/' and self.mode == 'list':
             self.typing, self.dirty = True, True

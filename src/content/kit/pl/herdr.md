@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) umieszcza agentów kodujących w panelach, na Twojej maszynie i na maszynach, do których dociera przez SSH. Ten addon pozwala Deep Work Plan używać tych agentów jako **peerów**: plan może przekazać ograniczone zadanie agentowi w innym panelu, otrzymać dokładnie jedną autoryzowaną odpowiedź i zachować zapis tej wymiany.
 
-Jest to opcjonalny addon **DWP v7** (pack `v7.12.1`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
+Jest to opcjonalny addon **DWP v7** (pack `v7.12.2`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
 
 ## Co integruje
 
-Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v1.3.1`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
+Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v2.0.0`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protokół 1 |
+| Produkt | `DailybotHQ/herdr-peers`, tag `v2.0.0`, protokół 1 |
 | Klucz rejestru | `herdr` w `.dwp/config.json` |
 | Transport | interaktywny: peer w panelu Herdr |
 | Zapewnia | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.
 Zainstaluj herdr-peers oraz oficjalny skill Herdr, od którego zależy. Każda maszyna, której agenci mają odpowiadać, również potrzebuje tego skilla.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ Wydanie jest wyłącznie addytywne: protokół 1 oraz wszystkie polecenia, flagi
 ## Autopilot
 
 herdr-peers 1.2.0 dodaje **autopilot** (`autopilot.md`): opcjonalny demon `herdr-peers autopilot`, który uruchamia człowiek, aby długi plan nie zatrzymywał się na ekranie zatwierdzenia. Obserwuje każdego agenta na każdej włączonej maszynie Herdr i, gdy któryś czeka na ekranie, akceptuje jedną z opcji. Wydanie 1.2.1 naprawia przypadek, w którym pytanie z opcjami o długich opisach pozostawało bez odpowiedzi. Wydanie 1.2.2 odpowiada na pytanie pokazane z podglądem obok opcji i rozpoznaje znacznik rekomendacji po hiszpańsku, francusku, niemiecku i włosku. Wydanie 1.3.0 dodaje **pętlę**: `autopilot --loop` utrzymuje każdy otwarty plan w biegu do jego końca na wszystkich maszynach, `--notify`/`--notify-env` kierują jego raporty tam, gdzie chcesz, a czasowniki tylko do odczytu `plans` i `fleet` oraz fleet UI pokazują każdy tor, maszynę i otwarty plan w jednym spojrzeniu.
+
+Wydanie 2.0.0 przenosi łącze na **protokół 2** i dodaje trzy rzeczy: **mianowanie leada** — tylko na wyraźne słowo człowieka (`lead claim --allow-appointment`), plan z grantem, którego lead i wszyscy następcy zniknęli, może mianować swoją pierwszą żywą ścieżkę nowym leadem (`lead takeover --as-lane`, odpytywana dwukrotnie, najwyżej dwa mianowania na plan), a **`lead verify`** to sprawdzenie tylko do odczytu wykonywane przed każdym merge, tagiem i wydaniem; **mózg autopilota** — z `--brain` demon uruchomiony przez człowieka lanzuje dedykowanego agenta (coding-agents-kit 1.3.0 lub nowszy) i słucha go tylko w zamkniętej liście akcji, odmawiając startu w ogóle, gdy `ak` brakuje lub jest starsze; oraz **kolejka planów** — pakiet pisze `.dwp/queue.json` (schemat `dwp-queue-v1`), a z `--loop` demon uruchamia następny zakolejkowany, zatwierdzony plan bez ciebie. Na planie z grantem każda ścieżka i każdy następca muszą działać na 2.0 lub nowszym.
 
 - **Uruchamia go tylko człowiek.** Żadna wiadomość, żaden peer ani plan nie może go uruchomić, zatrzymać ani zmienić tego, co robi. Agent uruchamia go tylko wtedy, gdy jego człowiek poprosił o to bezpośrednio w sesji.
 - **Co akceptuje.** Pytanie z opcjami, zatwierdzenie narzędzia, zatwierdzenie planu, zaufanie do folderu oraz monit o aktualizację, który pomija. Wybiera opcję oznaczoną jako zalecana, w przeciwnym razie tę, którą CLI zaznaczyło domyślnie, w przeciwnym razie pierwszą, i przechodzi wieloetapowy dialog do końca, odczytując ekran ponownie po każdym klawiszu.
