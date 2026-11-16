@@ -24,9 +24,9 @@ Kemampuan sebuah AI coding agent lebih bergantung pada kualitas arah yang diberi
 
 Ini membingkai ulang arti mendelegasikan dengan baik. Delegasi yang baik bukanlah meminta pekerjaan dari agent — melainkan mendefinisikan pekerjaan dengan cukup jelas sehingga dapat dieksekusi dengan benar: tujuan, batasan, konteks yang tanpanya agent akan kekurangan, dan kriteria yang menentukan apakah ia berhasil. Sebagian besar nilai diciptakan sebelum eksekusi dimulai.
 
-Deep Work Plan adalah disiplin melakukan pekerjaan hulu itu dalam bentuk yang tahan lama dan dapat diulang. Kedua pilar pendirinya adalah dua paruh dari arah yang baik: sebuah **spesifikasi** menyatakan seperti apa "benar" itu, dan sebuah **harness** memberi agent konteks dan alat untuk mencapainya. Disiplin ketiga menjaga kombinasi itu tetap terjangkau pada skala besar: **efisiensi token** — karena harness yang benar-benar bekerja adalah harness yang dapat dibawa agent menempuh horizon yang panjang. Bersama-sama keduanya mengubah kemampuan mentah sebuah model menjadi rekayasa yang dapat diandalkan — dipertahankan sepanjang tugas yang berjalan berjam-jam, dan dilestarikan lintas agent yang berganti antar sesi.
+Deep Work Plan adalah disiplin melakukan pekerjaan hulu itu dalam bentuk yang tahan lama dan dapat diulang. Ia berdiri di atas empat pilar. Dua yang pertama adalah dua paruh dari arah yang baik: **spec-first** — sebuah spesifikasi menyatakan seperti apa "benar" itu — dan **repositori adalah harness** — repositori memberi agent konteks dan alat untuk mencapainya. Pilar ketiga membuat pekerjaan selesai: **loop engineering** menjaga rencana yang disetujui terus bergerak menuju akhir yang ditetapkan tanpa manusia yang terus memeriksanya. Pilar keempat menjaga kombinasi itu tetap terjangkau dan jujur tentang hal itu: **efisiensi terukur** — karena harness yang benar-benar bekerja adalah harness yang dapat dibawa agent menempuh horizon yang panjang, dan biayanya diukur, bukan sekadar diklaim. Dalam satu kalimat: *Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.* Bersama-sama keempatnya mengubah kemampuan mentah sebuah model menjadi rekayasa yang dapat diandalkan — dipertahankan sepanjang tugas yang berjalan berjam-jam, dan dilestarikan lintas agent yang berganti antar sesi.
 
-## Spec-driven sejak rancangan
+## Spec-first
 
 Ini adalah pilar pertama metodologi, dan seperti "harness", ia layak didefinisikan secara gamblang.
 
@@ -38,7 +38,7 @@ Ini adalah pilar pertama metodologi, dan seperti "harness", ia layak didefinisik
 
 **Bagaimana DWP berbeda.** Sebuah gerakan spec-driven yang lebih luas telah terbentuk di seputar gagasan ini, termasuk GitHub Spec Kit, Amazon Kiro, dan Tessl. Pendekatan-pendekatan itu cenderung terikat pada alat atau platform tertentu. DWP sengaja berbeda: ia agnostik terhadap alat dan repo-native. Spesifikasi berada di dalam repositori sebagai Markdown polos, sehingga ia ikut bersama kode alih-alih bersama produk vendor — dan ia menyatu langsung dengan pilar kedua, karena spec itu sendiri adalah bagian dari harness yang dibawa repositori.
 
-## Repositori menjadi harness
+## Repositori adalah harness
 
 Ini adalah pilar kedua metodologi, dan ia pantas mendapat definisi yang gamblang — "harness" telah menjadi istilah yang sarat makna, dan sebagian besar industri memakainya tanpa menyatakan apa artinya.
 
@@ -60,9 +60,15 @@ Ini adalah pilar kedua metodologi, dan ia pantas mendapat definisi yang gamblang
 
 Karena setiap elemen adalah berkas di dalam repositori, bukan fitur sebuah alat, harness ini portabel secara konstruksi: agent mana pun yang dapat membaca Markdown dan menjalankan perintah shell dapat membuka berkas yang sama, tanpa framework buatan per-alat. Itulah klaim satu baris yang menjadi landasan seluruh sisa metodologi: *repositori itu sendiri menjadi harness*. Ini adalah klaim tentang apa yang dibawa repositori, bukan jaminan bahwa sebuah model akan menemukan alur yang tepat secara andal tanpa bantuan pada sebuah permintaan baru — itulah sebabnya kit juga menyediakan titik masuk `dwp-*` yang eksplisit dan sebuah `SKILL.md` router: portabilitas berkas dan perutean yang andal adalah properti yang berbeda, dan hanya yang pertama yang dibangun secara konstruksi semata.
 
-## Efisien secara konstruksi
+## Loop engineering
 
-Pilar pertama membuat pekerjaan menjadi benar; pilar kedua membuatnya portabel. Pilar ketiga menjaganya tetap **terjangkau** — karena konteks adalah sumber daya paling langka yang dimiliki sebuah coding agent, dan metodologi yang menyia-nyiakannya justru gagal tepat ketika pekerjaan mulai menjadi panjang.
+Ini adalah pilar ketiga. Spesifikasi dan harness membuat pekerjaan benar dan portabel; dengan sendirinya keduanya tidak membuatnya selesai. Rencana yang panjang macet ketika agent-nya berhenti di akhir sebuah giliran, menunggu di sebuah layar, kehabisan kapasitas, atau menghilang — dan obat yang lazim adalah manusia yang memeriksanya setiap dua puluh menit. Loop engineering menghapus pengawasan terus-menerus itu tanpa menyerahkan kendali.
+
+Dengan addon Herdr yang opsional, rencana mendaftarkan sebuah lead dan, bila rencana menyebutkannya, para penerus. Sebuah daemon yang hanya dimulai oleh manusia mengamati setiap rencana terdaftar: daemon mendorong lead yang menganggur untuk melanjutkan, meminta penerus pertama yang dapat dijangkau untuk mengambil alih lead yang hilang, dan melaporkan ketika sebuah rencana macet, terhambat, atau selesai. Dorongan tidak menambah wewenang — gate, kondisi berhenti, dan eskalasi rencana tetap mengikat persis seperti sebelumnya, dan kredensial, login, serta checkpoint manusia milik rencana itu sendiri tetap berada di tangan manusia. Metodologi bekerja tanpa loop; loop hanya memperkuatnya. Lihat [Loop engineering](/id/methodology/08-loop-engineering).
+
+## Efisiensi terukur
+
+Pilar pertama membuat pekerjaan menjadi benar; pilar kedua membuatnya portabel; pilar ketiga membuatnya selesai. Pilar keempat menjaganya tetap **terjangkau** — karena konteks adalah sumber daya paling langka yang dimiliki sebuah coding agent, dan metodologi yang menyia-nyiakannya justru gagal tepat ketika pekerjaan mulai menjadi panjang — dan menjaga klaim itu tetap **terukur**: byte instruksi per alur, tidak pernah persentase token yang dikarang.
 
 Tiga mekanisme yang mengerjakan hal itu:
 
@@ -85,8 +91,4 @@ DWP memberlakukan struktur ringan yang menangani setiap kegagalan secara langsun
 
 ## Markdown sampai ke dasar
 
-DWP mendefinisikan struktur, bukan perangkat lunak. Tidak ada runtime untuk dipasang, tidak ada pohon dependensi, dan tidak ada lock-in. Rencana, tugas, dan log eksekusi semuanya berupa Markdown polos yang dapat dibaca agent mana pun, ditinjau orang mana pun, dan dilacak dengan rapi oleh sistem kendali versi mana pun. Hasilnya adalah eksekusi yang dapat Anda baca, audit, dan percayai.
-
-## Loop engineering
-
-Loop engineering adalah pilar tersendiri: repositori membawa mekanisme opsional dan terbatas yang menjaga rencana yang disetujui tetap berjalan menuju akhir yang ditetapkan. Registrasi, suksesi, dan notifikasi menjaga kesinambungan; semuanya tidak pernah memperluas wewenang rencana. Lihat [Loop engineering](/id/methodology/08-loop-engineering).
+DWP mendefinisikan struktur, bukan perangkat lunak. Tidak ada runtime untuk dipasang, tidak ada pohon dependensi, dan tidak ada lock-in; daemon loop yang opsional milik sebuah addon, bukan milik metodologi. Rencana, tugas, dan log eksekusi semuanya berupa Markdown polos yang dapat dibaca agent mana pun, ditinjau orang mana pun, dan dilacak dengan rapi oleh sistem kendali versi mana pun. Hasilnya adalah eksekusi yang dapat Anda baca, audit, dan percayai.

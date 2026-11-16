@@ -24,9 +24,9 @@ Die Leistungsfähigkeit eines KI-Coding-Agenten hängt weniger vom Modell ab als
 
 Das stellt neu dar, was es bedeutet, gut zu delegieren. Gute Delegation heißt nicht, einen Agenten um Arbeit zu bitten — sie heißt, die Arbeit klar genug zu definieren, sodass sie korrekt ausgeführt werden kann: das Ziel, die Rahmenbedingungen, den Kontext, der dem Agenten sonst fehlen würde, und die Kriterien, die entscheiden, ob er erfolgreich war. Der größte Teil des Werts entsteht, bevor die Ausführung beginnt.
 
-Deep Work Plan ist die Disziplin, diese vorgelagerte Arbeit in einer dauerhaften, wiederholbaren Form zu leisten. Seine zwei Gründungspfeiler sind die beiden Hälften guter Richtung: Eine **Spezifikation** legt fest, wie „korrekt“ aussieht, und ein **Harness** gibt dem Agenten den Kontext und die Werkzeuge, um es zu erreichen. Eine dritte Disziplin hält die Kombination in großem Maßstab bezahlbar: die **Token-Effizienz** — denn ein Harness, der funktioniert, ist einer, den der Agent über einen langen Horizont tragen kann. Gemeinsam verwandeln sie die rohe Fähigkeit eines Modells in verlässliches Engineering — über eine Aufgabe hinweg aufrechterhalten, die stundenlang läuft, und über Agenten hinweg bewahrt, die zwischen Sitzungen wechseln.
+Deep Work Plan ist die Disziplin, diese vorgelagerte Arbeit in einer dauerhaften, wiederholbaren Form zu leisten. Es ruht auf vier Pfeilern. Die ersten beiden sind die beiden Hälften guter Richtung: **Spec-first** — eine Spezifikation legt fest, wie „korrekt“ aussieht — und **das Repository ist das Harness** — das Repository gibt dem Agenten den Kontext und die Werkzeuge, um es zu erreichen. Der dritte bringt die Arbeit zum Abschluss: **Loop engineering** hält einen genehmigten Plan bis zu seinem definierten Ende in Bewegung, ohne dass ein Mensch ihn ständig abfragen muss. Der vierte hält die Kombination bezahlbar und ehrlich darüber: **gemessene Effizienz** — denn ein Harness, das funktioniert, ist einer, den der Agent über einen langen Horizont tragen kann, und seine Kosten werden gemessen statt behauptet. In einem Satz: *Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.* Gemeinsam verwandeln sie die rohe Fähigkeit eines Modells in verlässliches Engineering — über eine Aufgabe hinweg aufrechterhalten, die stundenlang läuft, und über Agenten hinweg bewahrt, die zwischen Sitzungen wechseln.
 
-## Spec-driven von Grund auf
+## Spec-first
 
 Dies ist der erste Pfeiler der Methodik, und wie „harness“ verdient er eine klare Definition.
 
@@ -38,7 +38,7 @@ Dies ist der erste Pfeiler der Methodik, und wie „harness“ verdient er eine 
 
 **Wie sich DWP unterscheidet.** Um diese Idee herum hat sich eine breitere spec-driven Bewegung gebildet, darunter GitHub Spec Kit, Amazon Kiro und Tessl. Diese Ansätze sind tendenziell an ein bestimmtes Werkzeug oder eine bestimmte Plattform gebunden. DWP ist bewusst anders: Es ist werkzeugunabhängig und repo-nativ. Die Spezifikation lebt als reines Markdown im Repository, sodass sie mit dem Code reist statt mit dem Produkt eines Anbieters — und sie verbindet sich unmittelbar mit dem zweiten Pfeiler, da die Spezifikation selbst Teil des Harness ist, das das Repository mit sich trägt.
 
-## Das Repository wird zum Harness
+## Das Repository ist das Harness
 
 Dies ist der zweite Pfeiler der Methodik, und er verdient eine klare Definition — „harness“ ist zu einem überladenen Begriff geworden, und ein Großteil der Branche verwendet ihn, ohne zu sagen, was er bedeutet.
 
@@ -60,9 +60,15 @@ Dies ist der zweite Pfeiler der Methodik, und er verdient eine klare Definition 
 
 Weil jedes Element eine Datei im Repository ist statt ein Feature eines Werkzeugs, ist das Harness von Natur aus portabel: Jeder Agent, der Markdown liest und Shell-Befehle ausführt, kann dieselben Dateien öffnen — ohne maßgeschneidertes Framework je Werkzeug. Das ist die einzeilige Behauptung, auf der der Rest der Methodik ruht: *Das Repository selbst wird zum Harness*. Das ist eine Aussage darüber, was das Repository trägt, keine Garantie, dass ein Modell bei einer neuen Anfrage unbeaufsichtigt zuverlässig den richtigen Flow findet — weshalb das Kit zusätzlich explizite `dwp-*`-Einstiegspunkte und ein Router-`SKILL.md` mitliefert: Dateiportabilität und zuverlässiges Routing sind unterschiedliche Eigenschaften, und nur die erste entsteht allein durch Konstruktion.
 
-## Effizient durch Konstruktion
+## Loop engineering
 
-Der erste Pfeiler macht die Arbeit korrekt; der zweite macht sie portabel. Der dritte hält sie **bezahlbar** — denn Kontext ist die knappste Ressource, über die ein KI-Coding-Agent verfügt, und eine Methodik, die ihn verschwendet, scheitert genau dann, wenn die Arbeit lang wird.
+Dies ist der dritte Pfeiler. Eine Spezifikation und ein Harness machen die Arbeit korrekt und portabel; für sich allein bringen sie sie nicht zum Abschluss. Ein langer Plan gerät ins Stocken, wenn sein Agent am Ende einer Antwortrunde anhält, an einem Bildschirm wartet, keine Kapazität mehr hat oder verschwindet — und das übliche Gegenmittel ist ein Mensch, der alle zwanzig Minuten nachsieht. Loop engineering beseitigt dieses Babysitting, ohne die Kontrolle abzugeben.
+
+Mit dem optionalen Herdr-Addon registriert der Plan einen Lead und, sofern er sie benennt, Nachfolger. Ein Daemon, den nur ein Mensch startet, beobachtet jeden registrierten Plan: Er stößt einen untätigen Lead zum Weitermachen an, bittet den ersten erreichbaren Nachfolger, einen verschwundenen Lead abzulösen, und meldet, wenn ein Plan ins Stocken gerät, blockiert oder abgeschlossen ist. Ein Anstoß fügt keine Befugnis hinzu — die Gates, Abbruchbedingungen und Eskalationen des Plans gelten genau wie zuvor, und Zugangsdaten, Anmeldungen und die menschlichen Kontrollpunkte des Plans bleiben bei Menschen. Die Methodik funktioniert ohne den Loop; der Loop verstärkt sie nur. Siehe [Loop engineering](/de/methodology/08-loop-engineering).
+
+## Gemessene Effizienz
+
+Der erste Pfeiler macht die Arbeit korrekt; der zweite macht sie portabel; der dritte bringt sie zum Abschluss. Der vierte hält sie **bezahlbar** — denn Kontext ist die knappste Ressource, über die ein KI-Coding-Agent verfügt, und eine Methodik, die ihn verschwendet, scheitert genau dann, wenn die Arbeit lang wird — und hält diese Aussage **gemessen**: Instruction-Bytes pro Ablauf, niemals erfundene Token-Prozentwerte.
 
 Drei Mechanismen leisten diese Arbeit:
 
@@ -85,8 +91,4 @@ DWP legt eine leichtgewichtige Struktur auf, die jedes Versagen direkt adressier
 
 ## Markdown bis ganz nach unten
 
-DWP definiert Struktur, keine Software. Es gibt keine Laufzeitumgebung zu installieren, keinen Abhängigkeitsbaum und kein Lock-in. Der Plan, die Aufgaben und das laufende Protokoll sind allesamt reines Markdown, das jeder Agent lesen, jeder Mensch prüfen und jedes Versionskontrollsystem sauber nachverfolgen kann. Das Ergebnis ist eine Ausführung, die Sie lesen, prüfen und der Sie vertrauen können.
-
-## Loop engineering
-
-Loop engineering ist eine eigene Säule: Das Repository enthält einen optionalen, begrenzten Mechanismus, der einen genehmigten Plan bis zu seinem definierten Ende in Bewegung hält. Registrierung, Nachfolge und Benachrichtigungen sichern die Kontinuität; sie erweitern nie die Befugnisse des Plans. Siehe [Loop engineering](/de/methodology/08-loop-engineering).
+DWP definiert Struktur, keine Software. Es gibt keine Laufzeitumgebung zu installieren, keinen Abhängigkeitsbaum und kein Lock-in; der optionale Loop-Daemon gehört zu einem Addon, nicht zur Methodik. Der Plan, die Aufgaben und das laufende Protokoll sind allesamt reines Markdown, das jeder Agent lesen, jeder Mensch prüfen und jedes Versionskontrollsystem sauber nachverfolgen kann. Das Ergebnis ist eine Ausführung, die Sie lesen, prüfen und der Sie vertrauen können.

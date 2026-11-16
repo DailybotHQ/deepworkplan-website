@@ -24,9 +24,9 @@ Năng lực của một agent lập trình AI phụ thuộc vào chất lượng
 
 Điều này định hình lại ý nghĩa của việc ủy thác tốt. Ủy thác tốt không phải là yêu cầu agent làm việc — mà là định nghĩa công việc đủ rõ ràng để nó được thực thi đúng đắn: mục tiêu, các ràng buộc, ngữ cảnh mà agent ắt sẽ thiếu, và các tiêu chí quyết định nó thành công hay không. Phần lớn giá trị được tạo ra trước khi việc thực thi bắt đầu.
 
-Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đó dưới một hình thức bền vững, lặp lại được. Hai trụ cột nền tảng của nó là hai nửa của một định hướng tốt: một **đặc tả** nói rõ "đúng" trông như thế nào, và một **harness** trao cho agent ngữ cảnh và công cụ để đạt tới đó. Một kỷ luật thứ ba giữ cho tổ hợp này vẫn khả thi về chi phí khi mở rộng quy mô: **hiệu quả token** — vì một harness thực sự dùng được là harness mà agent có thể mang theo suốt một chân trời dài. Cùng nhau, chúng chuyển hóa năng lực thô của mô hình thành kỹ thuật đáng tin cậy — được duy trì xuyên suốt một tác vụ chạy hàng giờ, và được bảo toàn qua các agent thay đổi giữa các phiên.
+Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đó dưới một hình thức bền vững, lặp lại được. Nó đứng trên bốn trụ cột. Hai trụ cột đầu là hai nửa của một định hướng tốt: **đặc tả trước** — một đặc tả nói rõ "đúng" trông như thế nào — và **repository là harness** — repository trao cho agent ngữ cảnh và công cụ để đạt tới đó. Trụ cột thứ ba làm cho công việc hoàn thành: **loop engineering** giữ cho một kế hoạch đã duyệt tiếp tục tiến tới điểm kết thúc xác định mà không cần con người liên tục kiểm tra. Trụ cột thứ tư giữ cho tổ hợp này khả thi về chi phí và trung thực về điều đó: **hiệu quả đo được** — vì một harness thực sự dùng được là harness mà agent có thể mang theo suốt một chân trời dài, và chi phí của nó được đo lường thay vì chỉ được khẳng định. Tóm lại trong một câu: *Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.* Cùng nhau, chúng chuyển hóa năng lực thô của mô hình thành kỹ thuật đáng tin cậy — được duy trì xuyên suốt một tác vụ chạy hàng giờ, và được bảo toàn qua các agent thay đổi giữa các phiên.
 
-## Dựa trên đặc tả ngay từ thiết kế
+## Đặc tả trước
 
 Đây là trụ cột thứ nhất của phương pháp luận, và giống như "harness", nó đáng được định nghĩa một cách rõ ràng.
 
@@ -38,7 +38,7 @@ Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đ�
 
 **DWP khác biệt như thế nào.** Một phong trào dựa trên đặc tả rộng hơn đã hình thành quanh ý tưởng này, gồm GitHub Spec Kit, Amazon Kiro và Tessl. Các cách tiếp cận đó thường bị ràng buộc vào một công cụ hay nền tảng cụ thể. DWP cố ý khác biệt: nó độc lập với công cụ và thuần repo. Đặc tả sống trong repository dưới dạng markdown thuần, nên nó đi theo mã nguồn chứ không theo sản phẩm của một nhà cung cấp — và nó kết hợp trực tiếp với trụ cột thứ hai, bởi bản thân đặc tả là một phần của harness mà repository mang theo.
 
-## Repository trở thành harness
+## Repository là harness
 
 Đây là trụ cột thứ hai của phương pháp luận, và nó xứng đáng có một định nghĩa rõ ràng — "harness" đã trở thành một thuật ngữ nặng nề, và phần lớn ngành dùng nó mà không nói rõ nó nghĩa là gì.
 
@@ -60,9 +60,15 @@ Deep Work Plan là kỷ luật thực hiện phần việc thượng nguồn đ�
 
 Vì mỗi thành phần là một tệp trong repository chứ không phải một tính năng của một công cụ, harness có tính di động ngay từ cách dựng: bất kỳ agent nào đọc được markdown và chạy được lệnh shell đều có thể mở cùng những tệp đó, không cần framework đặt riêng cho từng công cụ. Đó là tuyên bố một dòng mà phần còn lại của phương pháp luận đặt nền tảng lên: *bản thân repository trở thành harness*. Đây là một tuyên bố về những gì repository mang theo, không phải một sự bảo đảm rằng một mô hình sẽ đáng tin cậy tìm ra đúng luồng công việc mà không cần trợ giúp trên một yêu cầu hoàn toàn mới — đó là lý do vì sao bộ kit cũng cung cấp các điểm vào `dwp-*` rõ ràng và một `SKILL.md` định tuyến: tính di động của tệp và việc định tuyến đáng tin cậy là hai đặc tính khác nhau, và chỉ cái đầu tiên được xây dựng sẵn chỉ nhờ cách dựng.
 
-## Hiệu quả ngay từ cách dựng
+## Loop engineering
 
-Trụ cột thứ nhất làm cho công việc đúng đắn; trụ cột thứ hai làm nó di động. Trụ cột thứ ba giữ cho nó **dễ chi trả** — vì ngữ cảnh là tài nguyên khan hiếm nhất mà một agent lập trình có, và một phương pháp luận lãng phí nó sẽ thất bại đúng lúc công việc bắt đầu dài ra.
+Đây là trụ cột thứ ba. Một đặc tả và một harness làm cho công việc đúng đắn và di động; tự chúng không làm cho công việc hoàn thành. Một kế hoạch dài bị đình trệ khi agent của nó dừng ở cuối một lượt, chờ ở một màn hình, cạn năng lực, hoặc biến mất — và cách chữa thường thấy là một con người ghé kiểm tra mỗi hai mươi phút. Loop engineering loại bỏ việc trông chừng đó mà không trao đi quyền kiểm soát.
+
+Với addon Herdr tùy chọn, kế hoạch đăng ký một lead và, khi kế hoạch nêu tên, những người kế nhiệm. Một daemon chỉ do con người khởi động theo dõi mọi kế hoạch đã đăng ký: nó nhắc lead đang rảnh tiếp tục, yêu cầu người kế nhiệm đầu tiên liên lạc được tiếp quản một lead đã không còn, và báo khi một kế hoạch bị đình trệ, bị chặn hoặc hoàn thành. Một lời nhắc không thêm quyền hạn — các cổng, điều kiện dừng và các mức leo thang của kế hoạch vẫn ràng buộc đúng như trước, còn thông tin xác thực, đăng nhập và các điểm kiểm tra của con người trong chính kế hoạch vẫn thuộc về con người. Phương pháp luận hoạt động mà không cần vòng lặp; vòng lặp chỉ khuếch đại nó. Xem [Loop engineering](/vi/methodology/08-loop-engineering).
+
+## Hiệu quả đo được
+
+Trụ cột thứ nhất làm cho công việc đúng đắn; trụ cột thứ hai làm nó di động; trụ cột thứ ba làm nó hoàn thành. Trụ cột thứ tư giữ cho nó **dễ chi trả** — vì ngữ cảnh là tài nguyên khan hiếm nhất mà một agent lập trình có, và một phương pháp luận lãng phí nó sẽ thất bại đúng lúc công việc bắt đầu dài ra — và giữ cho tuyên bố đó **được đo lường**: số byte hướng dẫn trên mỗi luồng, không bao giờ là những con số phần trăm token bịa ra.
 
 Ba cơ chế làm nên điều đó:
 
@@ -85,8 +91,4 @@ DWP áp đặt một cấu trúc nhẹ nhàng giải quyết trực tiếp từn
 
 ## Markdown từ trên xuống dưới
 
-DWP định nghĩa cấu trúc, không phải phần mềm. Không có runtime nào để cài, không có cây phụ thuộc, và không có sự khóa chặt. Kế hoạch, các tác vụ và nhật ký chạy đều là markdown thuần mà mọi agent đều đọc được, mọi người đều rà soát được, và mọi hệ thống kiểm soát phiên bản đều theo dõi gọn gàng được. Kết quả là một quá trình thực thi mà bạn có thể đọc, kiểm toán và tin tưởng.
-
-## Loop engineering
-
-Loop engineering là một trụ cột riêng: repository mang theo một cơ chế tùy chọn, có giới hạn, giữ cho kế hoạch đã duyệt tiếp tục chạy đến điểm kết thúc xác định. Đăng ký, kế nhiệm và thông báo duy trì tính liên tục; chúng không bao giờ mở rộng quyền hạn của kế hoạch. Xem [Loop engineering](/vi/methodology/08-loop-engineering).
+DWP định nghĩa cấu trúc, không phải phần mềm. Không có runtime nào để cài, không có cây phụ thuộc, và không có sự khóa chặt; daemon vòng lặp tùy chọn thuộc về một addon, không thuộc về phương pháp luận. Kế hoạch, các tác vụ và nhật ký chạy đều là markdown thuần mà mọi agent đều đọc được, mọi người đều rà soát được, và mọi hệ thống kiểm soát phiên bản đều theo dõi gọn gàng được. Kết quả là một quá trình thực thi mà bạn có thể đọc, kiểm toán và tin tưởng.
