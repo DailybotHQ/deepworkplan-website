@@ -14,11 +14,11 @@ order: 7
 
 ## 它集成了什么
 
-该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v1.2.2`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v1.3.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v1.2.2`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v1.3.0`，协议 1 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
@@ -32,7 +32,7 @@ order: 7
 安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ herdr-peers 1.1.0 新增原生的 **debate** 子技能（`debate.md`）：由一
 
 ## Autopilot
 
-herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守护进程 `herdr-peers autopilot`，由用户启动，使长时间运行的计划不会停在审批界面上。它监视每台已启用的 Herdr 机器上的每个代理，当某个代理停在某个界面上等待时，就接受一个选项。1.2.1 版本修复了一种情况：选项带有较长描述的问题会得不到回答。1.2.2 版本会回答选项旁带有预览的问题，并能识别西班牙语、法语、德语和意大利语的推荐标记。
+herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守护进程 `herdr-peers autopilot`，由用户启动，使长时间运行的计划不会停在审批界面上。它监视每台已启用的 Herdr 机器上的每个代理，当某个代理停在某个界面上等待时，就接受一个选项。1.2.1 版本修复了一种情况：选项带有较长描述的问题会得不到回答。1.2.2 版本会回答选项旁带有预览的问题，并能识别西班牙语、法语、德语和意大利语的推荐标记。1.3.0 版本加入了**循环**：`autopilot --loop` 让每个打开的计划在所有机器上一直运行到结束，`--notify`/`--notify-env` 把它的报告指向你指定的位置，只读动词 `plans` 和 `fleet` 加上 fleet UI 一览每条通道、每台机器和每个打开的计划。
 
 - **只有用户能启动它。** 任何消息、对等方或计划都无法启动它、停止它或改变它的行为。代理只有在其用户于会话中直接提出要求时才会启动它。
 - **它接受什么。** 带选项的问题、工具审批、计划审批、文件夹信任，以及更新提示（它会跳过更新提示）。它选择标记为推荐的选项，否则选择 CLI 预先选中的选项，再否则选择第一个，并把多步对话一路跟到结束，每次按键后都重新读取界面。

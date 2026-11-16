@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 다른 소유자에게 리스
 ## 설치
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.2.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
+요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.3.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.2.0`, 인터페이스 1 |
+| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.3.0`, 인터페이스 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `agentkit` |
 | 전송 방식 | 헤드리스: 위임 대상마다 전용 git worktree에서 `ak run` 한 번 |
 | 제공 | `subagents`, `cancel_children`, `model_routing` |
@@ -82,6 +82,8 @@ ak doctor
 **`v1.0.0`부터 안정 버전입니다.** 키트의 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환되지 않는 변경은 새 메이저 버전에서만 이루어집니다. 명령 표면(`providers.toml`의 모든 종류에 대한 `ak <kind> [@profile]`, 그리고 문서화된 플래그를 포함한 모든 동사), 권한 정책, 인터페이스 1(`ak doctor --json`, `ak env`, `ak run` 문법과 엔벨로프), JSON 스키마(`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), 그리고 설치 레이아웃과 env 파일 변수 이름이 그 대상입니다. `v1.0.0`은 `v0.7.1`에서 명령, 플래그, 키, 스키마를 하나도 바꾸지 않습니다.
 
 릴리스 1.2.0은 `ak last`를 추가합니다. 모든 대화형 실행은 작업 디렉터리별로 kind와 프로필을 기록하고, `ak last`는 아무 터미널에서나 `-c`와 함께 다시 실행(그 디렉터리에서 최신 세션 계속)하며, `ak last -r`은 해당 계정의 CLI 피커를 열고, `ak last ls`는 기록을 나열합니다. Herdr 패인 안의 실행도 Herdr 재시작이나 재부팅을 견딥니다. 패인은 같은 계정으로 `ak --resume`를 통해 돌아오고, 키는 env 파일에서, 권한 자세도 그대로입니다(`AGENTKIT_HERDR_RESUME=0`으로 끌 수 있습니다).
+
+킷 v1.3.0(인터페이스 1 불변)은 **pick-v2**를 추가합니다. `ak pick --kinds codex,claude`는 kind를 가로질러 순위를 매기고, `--model-for KIND=NAME`은 kind별로 모델을 재정의하며, `--json`은 실행 계약을 반환합니다. `launch.argv`와 `launch.permissions`(`auto` 또는 `ask`), 그리고 `qualifies: false` 형태입니다. `--model`은 각 CLI 고유의 플래그(codex는 `-m`)로 매핑되는 헤드 플래그가 되어, `--model`을 그대로 전달하던 스크립트에는 동작 변화입니다.
 
 ## 기본은 자율 실행, 옵트아웃이 항상 우선한다
 

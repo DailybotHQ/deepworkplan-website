@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # пропустити облі
 ## Встановлення
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v1.2.0`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
+Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v1.3.0`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/coding-agents-kit`, тег `v1.2.0`, інтерфейс 1 |
+| Продукт | `DailybotHQ/coding-agents-kit`, тег `v1.3.0`, інтерфейс 1 |
 | Ключ реєстру | `agentkit` у `.dwp/config.json` |
 | Транспорт | headless: один `ak run` на делегата в окремому git worktree |
 | Надає | `subagents`, `cancel_children`, `model_routing` |
@@ -82,6 +82,8 @@ ak doctor
 **Стабільний починаючи з `v1.0.0`.** Публічний інтерфейс kit дотримується семантичного версіонування й змінюється несумісно лише в новій мажорній версії: командна поверхня (`ak <kind> [@profile]` для кожного виду в `providers.toml` і кожне дієслово з його задокументованими прапорцями), політика дозволів, інтерфейс 1 (`ak doctor --json`, `ak env`, граматика та конверт `ak run`), JSON-схеми (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), а також встановлена структура файлів і назви змінних в env-файлі. `v1.0.0` не змінює жодної команди, прапорця, ключа чи схеми порівняно з `v0.7.1`.
 
 Реліз 1.2.0 додає **`ak last`**: кожен інтерактивний запуск записує свій kind і профіль для робочого каталогу; `ak last` перезапускає його з `-c` (продовжує там найновішу сесію) у будь-якому терміналі, `ak last -r` відкриває селектор CLI в тому акаунті, а `ak last ls` показує запис. Запуск у панелі Herdr переживає і перезапуск Herdr, і перезавантаження машини: панель повертається через `ak --resume` в тому самому акаунті, з ключом з env-файлу та недоторканою позицією дозволів (`AGENTKIT_HERDR_RESUME=0` вимикає це).
+
+Версія набору 1.3.0 (інтерфейс 1 без змін) додає **pick-v2**: `ak pick --kinds codex,claude` ранжує між kind, `--model-for KIND=NAME` перевизначає модель для кожного kind, а `--json` повертає контракт запуску — `launch.argv` з `launch.permissions` (`auto` або `ask`) та формою `qualifies: false`. `--model` стає прапорцем голови, відображеним на власний прапорець кожного CLI (codex `-m`) — зміна поведінки для скриптів, що пропускали `--model` наскрізь.
 
 ## Автономія за замовчуванням із відмовою, яка завжди перемагає
 

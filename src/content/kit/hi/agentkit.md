@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # दूसरों को ल
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v1.2.0` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
+आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v1.3.0` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, इंटरफ़ेस 1 |
+| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, इंटरफ़ेस 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `agentkit` |
 | ट्रांसपोर्ट | headless: हर प्रत्यायोजित एजेंट के लिए एक समर्पित git worktree में एक `ak run` |
 | प्रदान करता है | `subagents`, `cancel_children`, `model_routing` |
@@ -82,6 +82,8 @@ ak doctor
 **`v1.0.0` से स्थिर।** kit का सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और केवल नए मेजर संस्करण में ही असंगत रूप से बदलता है: कमांड सतह (`providers.toml` के हर kind के लिए `ak <kind> [@profile]`, और हर क्रिया अपने प्रलेखित फ़्लैग के साथ), अनुमति व्यवस्था, इंटरफ़ेस 1 (`ak doctor --json`, `ak env`, `ak run` का व्याकरण और envelope), JSON स्कीमा (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1` और `setup-verify-v1`), तथा इंस्टॉल किया गया लेआउट और env-फ़ाइल के वेरिएबल नाम। `v1.0.0`, `v0.7.1` की तुलना में कोई कमांड, फ़्लैग, कुंजी या स्कीमा नहीं बदलता।
 
 रिलीज़ 1.2.0 **`ak last`** जोड़ता है: हर इंटरैक्टिव लॉन्च अपना kind और प्रोफ़ाइल प्रति वर्किंग डायरेक्टरी रिकॉर्ड करता है; `ak last` उसे किसी भी टर्मिनल में `-c` के साथ फिर चलाता है (वहीं नवीनतम सेशन जारी रखता है), `ak last -r` उस खाते में CLI पिकर खोलता है, और `ak last ls` रिकॉर्ड सूचीबद्ध करता है। Herdr पैन के भीतर कोई लॉन्च Herdr के रीस्टार्ट या मशीन के रीबूट के बाद भी बचा रहता है: पैन उसी खाते में `ak --resume` के ज़रिए लौटता है, कुंजी env फ़ाइल से और अनुमति-स्थिति अछूती (`AGENTKIT_HERDR_RESUME=0` इसे बंद करता है)।
+
+किट 1.3.0 (इंटरफ़ेस 1 अपरिवर्तित) **pick-v2** जोड़ता है: `ak pick --kinds codex,claude` kinds के पार रैंक करता है, `--model-for KIND=NAME` प्रति kind मॉडल ओवरराइड करता है, और `--json` लॉन्च अनुबंध लौटाता है — `launch.permissions` (`auto` या `ask`) के साथ `launch.argv` और `qualifies: false` रूप। `--model` अब एक हेड फ़्लैग है जो हर CLI के अपने फ़्लैग (codex `-m`) पर मैप होता है — `--model` पास करने वाले स्क्रिप्ट के लिए व्यवहार परिवर्तन।
 
 ## डिफ़ॉल्ट रूप से स्वायत्तता, ऐसे opt-out के साथ जो हमेशा प्रभावी रहता है
 

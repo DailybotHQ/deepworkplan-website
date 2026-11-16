@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.2.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.3.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.2.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.3.0`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
@@ -82,6 +82,8 @@ ak doctor
 **`v1.0.0` 以降は安定版です。** キットの公開インターフェースはセマンティックバージョニングに従い、互換性のない変更は新しいメジャーバージョンでのみ行われます。対象は、コマンドサーフェス（`providers.toml` 内のすべての種別に対する `ak <kind> [@profile]`、およびすべての動詞とそのドキュメント化されたフラグ）、権限の方針、インターフェース 1（`ak doctor --json`、`ak env`、`ak run` の文法とエンベロープ）、JSON スキーマ（`doctor-v1`、`usage-v1`、`pick-v1`、`capacity-v1`、`leases-v1`、`profiles-v1`、`setup-probe-v1`、`setup-verify-v1`）、そしてインストールされるレイアウトと env ファイルの変数名です。`v1.0.0` は `v0.7.1` からコマンド、フラグ、キー、スキーマを一切変えていません。
 
 リリース 1.2.0 は **`ak last`** を追加します。対話式の起動は作業ディレクトリごとに kind とプロファイルを記録し、`ak last` で任意のターミナルから `-c` 付きで再起動（そこで最新のセッションを続行）、`ak last -r` でそのアカウントの CLI ピッカーを開き、`ak last ls` で記録を一覧します。Herdr ペイン内での起動は、Herdr の再起動やマシンの再起動後も復活します。ペインは同じアカウントで `ak --resume` 経由で戻り、キーは env ファイルから、権限ポストゥアもそのままです（`AGENTKIT_HERDR_RESUME=0` で無効化）。
+
+キット v1.3.0（インターフェース 1 は不変）は **pick-v2** を追加します。`ak pick --kinds codex,claude` が kind を横断してランク付けし、`--model-for KIND=NAME` が kind ごとにモデルを上書きし、`--json` は起動契約を返します。`launch.argv` と `launch.permissions`（`auto` または `ask`）、そして `qualifies: false` 形式です。`--model` は各 CLI 固有のフラグ（codex は `-m`）にマップされるヘッドフラグになり、`--model` を通していたスクリプトは動作が変わります。
 
 ## デフォルトは自律実行、オプトアウトが常に優先
 

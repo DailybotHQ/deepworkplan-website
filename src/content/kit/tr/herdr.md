@@ -14,11 +14,11 @@ Bu, **DWP v7**'nin (pack `v7.10.2`) isteğe bağlı bir eklentisidir. Metodoloji
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.2.2`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.3.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v1.2.2` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v1.3.0` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ Sürüm yalnızca ekleme yapar: protokol 1 ve tüm komutlar, bayraklar, çıkı�
 
 ## Autopilot
 
-herdr-peers 1.2.0, **autopilot** özelliğini (`autopilot.md`) ekler: uzun bir planın bir onay ekranında durmaması için bir insanın başlattığı, isteğe bağlı bir arka plan süreci (daemon), `herdr-peers autopilot`. Etkinleştirilmiş her Herdr makinesindeki her agent'ı izler ve biri bir ekranda beklediğinde bir seçeneği kabul eder. 1.2.1 sürümü, seçeneklerinin açıklamaları uzun olan bir sorunun yanıtsız bırakıldığı bir durumu düzeltir. 1.2.2 sürümü, seçeneklerinin yanında bir önizlemeyle gösterilen bir soruyu yanıtlar ve önerilen işaretini İspanyolca, Fransızca, Almanca ve İtalyancada tanır.
+herdr-peers 1.2.0, **autopilot** özelliğini (`autopilot.md`) ekler: uzun bir planın bir onay ekranında durmaması için bir insanın başlattığı, isteğe bağlı bir arka plan süreci (daemon), `herdr-peers autopilot`. Etkinleştirilmiş her Herdr makinesindeki her agent'ı izler ve biri bir ekranda beklediğinde bir seçeneği kabul eder. 1.2.1 sürümü, seçeneklerinin açıklamaları uzun olan bir sorunun yanıtsız bırakıldığı bir durumu düzeltir. 1.2.2 sürümü, seçeneklerinin yanında bir önizlemeyle gösterilen bir soruyu yanıtlar ve önerilen işaretini İspanyolca, Fransızca, Almanca ve İtalyancada tanır. 1.3.0 sürümü **döngüyü** ekler: `autopilot --loop`, açık her planı her makinede sonuna kadar çalışır durumda tutar; `--notify`/`--notify-env` raporlarını istediğiniz yere yönlendirir; salt okunur `plans` ve `fleet` fiilleri ve fleet arayüzü her rayı, makineyi ve açık planı tek bakışta gösterir.
 
 - **Yalnızca bir insan başlatır.** Hiçbir mesaj, eş ya da plan onu başlatamaz, durduramaz veya yaptığı şeyi değiştiremez. Bir agent onu yalnızca insanı bunu oturumda doğrudan istediğinde başlatır.
 - **Neleri kabul eder.** Seçenekli bir soru, bir araç onayı, bir plan onayı, klasör güveni ve atladığı bir güncelleme istemi. Önerilen olarak işaretlenmiş seçeneği, yoksa CLI'ın önceden seçtiğini, o da yoksa ilkini alır ve çok adımlı bir diyaloğu, her tuştan sonra ekranı yeniden okuyarak sonuna kadar izler.

@@ -14,11 +14,11 @@ Ini adalah addon opsional dari **DWP v7** (pack `v7.10.2`). Metodologinya bekerj
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.2.2`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.3.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v1.2.2`, protokol 1 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v1.3.0`, protokol 1 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ Rilis ini hanya menambah: protokol 1 serta semua perintah, flag, kode keluar, da
 
 ## Autopilot
 
-herdr-peers 1.2.0 menambahkan **autopilot** (`autopilot.md`): sebuah daemon opsional, `herdr-peers autopilot`, yang dijalankan oleh manusia agar rencana yang panjang tidak berhenti di layar persetujuan. Daemon ini mengawasi setiap agen di setiap mesin Herdr yang diaktifkan dan, ketika ada agen yang menunggu di sebuah layar, menerima salah satu opsi. Rilis 1.2.1 memperbaiki kasus ketika pertanyaan yang opsinya memiliki deskripsi panjang dibiarkan tidak terjawab. Rilis 1.2.2 menjawab pertanyaan yang ditampilkan dengan pratinjau di samping opsinya dan mengenali tanda rekomendasi dalam bahasa Spanyol, Prancis, Jerman, dan Italia.
+herdr-peers 1.2.0 menambahkan **autopilot** (`autopilot.md`): sebuah daemon opsional, `herdr-peers autopilot`, yang dijalankan oleh manusia agar rencana yang panjang tidak berhenti di layar persetujuan. Daemon ini mengawasi setiap agen di setiap mesin Herdr yang diaktifkan dan, ketika ada agen yang menunggu di sebuah layar, menerima salah satu opsi. Rilis 1.2.1 memperbaiki kasus ketika pertanyaan yang opsinya memiliki deskripsi panjang dibiarkan tidak terjawab. Rilis 1.2.2 menjawab pertanyaan yang ditampilkan dengan pratinjau di samping opsinya dan mengenali tanda rekomendasi dalam bahasa Spanyol, Prancis, Jerman, dan Italia. Rilis 1.3.0 menambahkan **loop**: `autopilot --loop` menjaga setiap plan yang terbuka tetap berjalan sampai selesai di semua mesin, `--notify`/`--notify-env` mengarahkan laporannya ke tempat yang Anda mau, dan kata kerja baca-saja `plans` serta `fleet` bersama fleet UI memperlihatkan setiap jalur, mesin, dan plan terbuka dalam sekali pandang.
 
 - **Hanya manusia yang memulainya.** Tidak ada pesan, rekan, atau rencana yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. Agen memulainya hanya ketika manusianya memintanya secara langsung di dalam sesi.
 - **Yang diterimanya.** Pertanyaan dengan opsi, persetujuan tool, persetujuan rencana, kepercayaan folder, dan prompt pembaruan, yang dilewatinya. Ia mengambil opsi yang ditandai sebagai rekomendasi, jika tidak ada maka opsi yang sudah dipilih lebih dulu oleh CLI, jika tidak ada maka opsi pertama, dan mengikuti dialog multi-langkah sampai selesai dengan membaca ulang layar setelah setiap penekanan tombol.

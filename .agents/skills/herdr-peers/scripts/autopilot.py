@@ -19,6 +19,7 @@ the name of what matched, the option index and the keys.
 from __future__ import annotations
 
 import hashlib
+import json
 import re
 import time
 from concurrent.futures import ThreadPoolExecutor
@@ -36,6 +37,13 @@ CONFIRM_DELAY = 1.5      # seconds between keys and the confirming re-read
 TAIL = 40                # screen lines a decision looks at
 DESCRIPTION_MAX = 12     # lines an option's description may take before the next row
 BACKOFF_MAX = 8          # passes an unreachable machine is skipped, at most
+PLAN_REFRESH = 300       # seconds between two reports of a machine with nothing to do
+PLAN_HOT_REFRESH = 55    # the same, while one of its open plans has a lead that is not working
+LEAD_GRACE = 300         # seconds a lead's pane must stay unchanged before a loop prompt
+MAX_PLAN_PROMPTS = 3     # loop prompts to one plan without progress, then it is stalled
+ABSENT_PASSES = 2        # passes a lead's pane must be missing before it counts as gone
+FLEET_SCHEMA = 'herdr-peers/fleet-v1'
+EVENT_SCHEMA = 'herdr-peers/plan-event-v1'
 
 NUDGE_TEXT = (
     '[autopilot] The developer is away and has pre-approved the recommended option for every '
@@ -49,6 +57,18 @@ RESUME_TEXT = (
     '[autopilot] Your usage limit may have reset. Continue the pending plan to its end from '
     'where you stopped, taking the recommended option at every decision. If the limit is '
     'still in force, stop and wait; you will be asked again later.')
+
+LOOP_TEXT = (
+    '[autopilot] Plan %s is not finished and you are its lead. Continue executing it to its '
+    'end, respecting its gates and the authority already recorded in the plan. Never weaken a '
+    'gate to pass it. If the plan cannot go on without something only the developer can '
+    'provide, record the blocker in the plan state and stop.')
+TAKEOVER_TEXT = (
+    '[autopilot] The lead of plan %s looks gone (%s) and you are in its succession. Run: '
+    'herdr-peers lead takeover --plan %s — the helper checks itself whether the lead is really '
+    'gone. If it accepts, continue executing the plan to its end, respecting its gates. If it '
+    'refuses, do nothing more.')
+GONE_REASONS = ('no_agent',)
 
 BOX = {ord(c): ' ' for c in '│┃█'}
 CURSORS = '❯›>→▶'
@@ -463,6 +483,7 @@ class Pane(object):
         self.stuck = None      # digest of the screen last keyed without progress
         self.tries = 0         # key rounds spent on that screen
         self.left = None       # digest of a screen autopilot gave up on or left
+        self.since = None      # when its state was last seen to change
 
 
 class Autopilot(object):
@@ -470,7 +491,8 @@ class Autopilot(object):
     testable and this module never imports the helper."""
 
     def __init__(self, io, dry_run=False, nudge=True, catch_up=False, exclude=(),
-                 clock=time.time, sleep=time.sleep, confirm=CONFIRM_DELAY):
+                 clock=time.time, sleep=time.sleep, confirm=CONFIRM_DELAY, loop=False,
+                 grace=LEAD_GRACE):
         self.io, self.dry_run, self.nudge, self.catch_up = io, dry_run, nudge, catch_up
         self.exclude = set(exclude)
         self.clock, self.sleep, self.confirm = clock, sleep, confirm
@@ -478,9 +500,16 @@ class Autopilot(object):
         self.backoff = {}      # machine -> [passes to skip, last penalty]
         self.known = set()     # machines that have answered at least once
         self.actions = 0
+        self.passes = 0
+        self.grace = grace
+        self.plans = PlanLoop(self) if loop else None
 
     # -- one pass ---------------------------------------------------------
     def run_pass(self):
+        """One look at every due machine. Returns the pass summary: machines
+        that answered, agents listed, actions taken, seconds spent."""
+        started, before = self.clock(), self.actions
+        self.passes += 1
         sources = self.io.sources()
         due = []
         for machine in sources:
@@ -502,7 +531,7 @@ class Autopilot(object):
             for agent in agents:
                 addr = '%s:%s' % (machine, agent['pane'])
                 seen.add(addr)
-                if agent.get('you') or addr in self.exclude:
+                if agent.get('you') or addr in self.exclude or not agent.get('in_scope', True):
                     continue
                 try:
                     self.visit(machine, agent, addr, first_look)
@@ -512,11 +541,23 @@ class Autopilot(object):
         for addr in [a for a in self.panes if a not in seen
                      and a.split(':', 1)[0] in due]:
             del self.panes[addr]
+        if self.plans:
+            try:
+                self.plans.run(dict(zip(due, listed)))
+            except Exception as exc:  # never stops the screen pass; a stop (Halt) is not an Exception
+                self.io.warn('plan loop', exc)
+        return {'pass': self.passes,
+                'machines': sum(1 for agents in listed if agents is not None),
+                'agents': sum(len(agents) for agents in listed if agents is not None),
+                'actions': self.actions - before,
+                'seconds': max(0.0, self.clock() - started)}
 
     def visit(self, machine, agent, addr, first_look):
         memo = self.panes.setdefault(addr, Pane())
         state, fresh = agent.get('state'), memo.state is None and memo.turn is None
         changed = state != memo.state or agent.get('seq') != memo.seq
+        if changed or memo.since is None:
+            memo.since = self.clock()
         if fresh:
             memo.turn = agent.get('turn')
         elif agent.get('turn') != memo.turn:
@@ -628,6 +669,367 @@ class Autopilot(object):
         if not self.dry_run:
             self.io.prompt(machine, pane, NUDGE_TEXT)
 
-    def record(self, addr, kind, choice, outcome):
+    def record(self, addr, kind, choice, outcome, plan=None):
         self.actions += 1
-        self.io.record(addr, kind, choice, outcome, self.dry_run)
+        if plan is None:
+            self.io.record(addr, kind, choice, outcome, self.dry_run)
+        else:
+            self.io.record(addr, kind, choice, outcome, self.dry_run, plan=plan)
+
+
+class PlanMemo(object):
+    """What the loop remembers about one plan between passes (memory only)."""
+
+    def __init__(self):
+        self.progress = None   # the plan's last reported progress digest
+        self.prompts = 0       # loop prompts sent since that digest last changed
+        self.epoch = None
+        self.takeover = False  # a successor was already asked at this epoch
+        self.situation = None  # plan_stalled, plan_blocked, plan_no_lead, plan_completed
+        self.seen_open = False
+        self.skip_seq = None   # the lead's state sequence when its screen ruled a prompt out
+        self.absent = 0        # consecutive reports in which the lead's pane was not listed
+
+
+class PlanLoop(object):
+    """The plan pass of `autopilot --loop`: learn every machine's plans, ask
+    the idle lead of an open plan to continue, leave a blocked plan, stop on
+    a stall, ask a successor to take over a lead that is gone, keep the map.
+
+    It decides from the machines' reports and Herdr's listing only. A report
+    is data: the daemon uses a field only after `valid_report` accepted the
+    whole answer, and only addresses the reporting machine calls `local:`
+    — its own panes — are ever prompted."""
+
+    def __init__(self, ap):
+        self.ap, self.io = ap, ap.io
+        self.machines = {}     # machine -> {'at', 'state', 'report'}
+        self.memos = {}        # (machine, plan id) -> PlanMemo
+        self.fleet_text = None      # the daemon's own map
+        self.remote_text = None     # the reduced copy left on other machines
+        self.fleet_key = None
+        self.too_large = False
+        # A daemon that restarts hands the machines the last map at once
+        # instead of waiting a full report cycle for its first one.
+        load = getattr(self.io, 'load_fleet', None)
+        last = load() if load is not None and not ap.dry_run else None
+        if isinstance(last, dict) and isinstance(last.get('machines'), list):
+            try:
+                self.remote_text = json.dumps(remote_copy(last), sort_keys=True)
+            except (TypeError, ValueError, AttributeError, KeyError):
+                self.remote_text = None
+
+    # -- reports -----------------------------------------------------------
+    def due(self, machine, rows, now):
+        info = self.machines.get(machine)
+        if info is None:
+            return True
+        age = now - info['at']
+        if age >= PLAN_REFRESH:
+            return True
+        return age >= PLAN_HOT_REFRESH and self.hot(machine, info, rows)
+
+    def hot(self, machine, info, rows):
+        """True while an open, unstalled plan of this machine has a lead
+        that is not working: the only case worth asking again soon."""
+        states = dict((r['pane'], r.get('state')) for r in rows)
+        for plan in (info.get('report') or {}).get('plans', []):
+            memo = self.memos.get((machine, plan['plan']))
+            if plan['class'] != 'open' or (memo and memo.situation):
+                continue
+            pane = local_pane(plan['lead'])
+            if pane and states.get(pane) != 'working':
+                return True
+        return False
+
+    def fetch(self, listed, now):
+        mirror = getattr(self.io, 'self_machine', None)  # a saved machine that is this server
+        need = [m for m, rows in listed.items()
+                if rows is not None and m != mirror and self.due(m, rows, now)]
+        if not need:
+            return
+
+        def ask(machine):
+            panes = dict((r['pane'], r['cwd']) for r in listed[machine]
+                         if r.get('cwd') and r.get('in_scope', True))
+            try:
+                return self.io.plans(machine, panes, None if self.ap.dry_run else self.remote_text)
+            except Exception as exc:  # one machine never stops the pass
+                self.io.warn(machine, exc)
+                return 'unknown', None
+        with ThreadPoolExecutor(max_workers=min(8, len(need))) as pool:
+            answers = list(pool.map(ask, need))
+        for machine, (state, report) in zip(need, answers):
+            info = self.machines.setdefault(machine, {'at': 0.0, 'state': None, 'report': None})
+            if state != info['state'] and state in ('unsupported', 'bad_target'):
+                self.ap.record('%s:-' % machine, None, Decision(
+                    'leave', 'machine_unsupported' if state == 'unsupported' else 'machine_target',
+                    'no report from this machine'), 'left')
+            info['at'], info['state'] = now, state
+            if state == 'ok':
+                info['report'] = report
+            # Otherwise the last good report stays: unknown is not "no plans".
+
+    # -- one pass ----------------------------------------------------------
+    def run(self, listed):
+        now = self.ap.clock()
+        self.fetch(listed, now)
+        prompted = set()
+        for machine in sorted(listed):
+            rows = listed[machine]
+            info = self.machines.get(machine)
+            if rows is None or not info or not info.get('report'):
+                continue
+            by_pane = dict((r['pane'], r) for r in rows)
+            for plan in info['report']['plans']:
+                try:
+                    self.consider(machine, plan, by_pane, now, prompted)
+                except Exception as exc:  # one plan never stops the pass
+                    self.io.warn('%s:%s' % (machine, plan.get('plan')), exc)
+        self.publish(listed, now)
+        flush = getattr(self.io, 'flush_events', None)
+        if flush is not None:
+            flush()  # notify commands run last, within their own budget
+
+    def consider(self, machine, plan, by_pane, now, prompted):
+        memo = self.memos.setdefault((machine, plan['plan']), PlanMemo())
+        if memo.epoch != plan['epoch']:
+            memo.epoch, memo.takeover = plan['epoch'], False
+            if memo.situation == 'plan_no_lead':
+                memo.situation = None
+        if plan['progress'] != memo.progress:
+            memo.progress, memo.prompts = plan['progress'], 0
+            if memo.situation == 'plan_stalled':
+                memo.situation = None
+        cls = plan['class']
+        if cls == 'unreadable':
+            return
+        pane = local_pane(plan['lead'])
+        addr = '%s:%s' % (machine, pane) if pane else '%s:-' % machine
+        if pane is not None and pane in by_pane:
+            memo.absent = 0
+        elif pane is not None:
+            memo.absent += 1  # judged on the full listing, scope or not
+        if cls == 'completed':
+            if memo.seen_open:  # only a plan this daemon watched while open
+                self.enter(memo, machine, plan, 'plan_completed', addr, None)
+            return
+        memo.seen_open = True
+        if cls == 'blocked':
+            self.enter(memo, machine, plan, 'plan_blocked', addr, 'left')
+            return
+        if memo.situation in ('plan_blocked', 'plan_completed'):
+            memo.situation = None
+        if pane is None:
+            return  # released, or led from another machine: not this daemon's to prompt
+        row = by_pane.get(pane)
+        pmemo = self.ap.panes.get(addr)
+        gone = None
+        if row is None:
+            if memo.absent < ABSENT_PASSES:
+                return  # one missing listing is not a gone lead
+            gone = 'no_agent'
+        # A lead at its usage limit is not gone: the screen pass retries it, and
+        # the helper refuses a takeover on that weak evidence without --reason.
+        if gone:
+            self.succeed(memo, machine, plan, by_pane, addr, gone, prompted)
+            return
+        if memo.situation in ('plan_no_lead', 'plan_lead_moved') and plan.get('lead_in_repo') is not False:
+            memo.situation = None
+        if row.get('you') or addr in self.ap.exclude or pmemo is None or not row.get('in_scope', True):
+            return
+        if plan.get('lead_in_repo') is False:
+            # The pane the record names works elsewhere now: a stale record
+            # (pane ids are reused after a Herdr restart). Never tell a stranger
+            # it leads a plan.
+            self.enter(memo, machine, plan, 'plan_lead_moved', addr, 'left')
+            return
+        if row.get('state') not in ('idle', 'done'):
+            memo.skip_seq = None
+            return
+        if memo.situation == 'plan_stalled' or not self.ap.nudge or addr in prompted:
+            return
+        if pmemo.since is None or now - pmemo.since < self.ap.grace:
+            return  # idle is not stopped: its own watcher may still wake it
+        if plan.get('open_asks') != 0:
+            return  # it awaits a reply (or its asks could not be counted)
+        for lane in plan['lanes']:
+            lane_pane = local_pane(lane)
+            if lane_pane and (by_pane.get(lane_pane) or {}).get('state') == 'working':
+                return  # its lanes are still working for it
+        if pmemo.nudges and not pmemo.seen_working:
+            return  # no turn of its own since the last prompt
+        pmemo.nudges = [t for t in pmemo.nudges if now - t < NUDGE_WINDOW]
+        if len(pmemo.nudges) >= MAX_NUDGES:
+            return
+        if memo.skip_seq is not None and memo.skip_seq == row.get('seq'):
+            return  # its screen ruled a prompt out and has not moved since
+        if memo.prompts >= MAX_PLAN_PROMPTS:
+            self.enter(memo, machine, plan, 'plan_stalled', addr, 'gave_up')
+            return
+        text = self.io.read(machine, pane)
+        if text is None:
+            return
+        choice = decide(row.get('agent'), row.get('state'), text)
+        if choice.action in ('keys', 'leave') or choice.cls == 'usage_limit' \
+                or has_draft(text, row.get('state')) or asks_in_prose(text):
+            memo.skip_seq = row.get('seq')  # a dialog, a login, a draft, or the prose nudge's case
+            return
+        memo.prompts += 1
+        pmemo.nudges.append(now)
+        pmemo.seen_working = False
+        prompted.add(addr)
+        self.ap.record(addr, row.get('agent'), Decision('prompt', 'plan_open', 'plan not finished'),
+                       'nudged', plan=plan['plan'])
+        if not self.ap.dry_run:
+            self.io.prompt(machine, pane, LOOP_TEXT % plan['plan'])
+
+    def succeed(self, memo, machine, plan, by_pane, addr, reason, prompted):
+        """The lead is gone: ask the first reachable successor to take over,
+        once per epoch. The daemon writes no lead record; the helper's own
+        takeover rules decide."""
+        if memo.takeover or not self.ap.nudge:
+            return
+        for candidate in plan['succession']:
+            pane = local_pane(candidate)
+            row = by_pane.get(pane) if pane else None
+            target = '%s:%s' % (machine, pane)
+            pmemo = self.ap.panes.get(target)
+            if row is None or row.get('you') or target in self.ap.exclude or target in prompted \
+                    or not row.get('in_scope', True):
+                continue
+            if row.get('state') not in ('idle', 'done') or (pmemo and pmemo.limit_at):
+                continue
+            text = self.io.read(machine, pane)
+            if text is None:
+                continue
+            choice = decide(row.get('agent'), row.get('state'), text)
+            if choice.action in ('keys', 'leave') or choice.cls == 'usage_limit' \
+                    or has_draft(text, row.get('state')):
+                continue
+            memo.takeover = True
+            prompted.add(target)
+            self.ap.record(target, row.get('agent'), Decision(
+                'prompt', 'plan_takeover_prompted', 'lead %s' % reason), 'nudged', plan=plan['plan'])
+            if not self.ap.dry_run:
+                self.io.prompt(machine, pane, TAKEOVER_TEXT % (plan['plan'], reason, plan['plan']))
+            return
+        self.enter(memo, machine, plan, 'plan_no_lead', addr, 'left')
+
+    def enter(self, memo, machine, plan, situation, addr, outcome):
+        """A plan arrives at a situation the developer should know about:
+        recorded once, and told once through the notify command."""
+        if memo.situation == situation:
+            return
+        memo.situation = situation
+        if outcome:
+            self.ap.record(addr, None, Decision('leave', situation, 'plan needs the developer'),
+                           outcome, plan=plan['plan'])
+        self.io.event({'schema': EVENT_SCHEMA, 'event': situation, 'plan': plan['plan'],
+                       'machine': machine, 'lead': plan['lead'], 'repo_root': plan['repo_root'],
+                       'blocker_class': plan['blocker_class']}, self.ap.dry_run)
+
+    # -- the map -----------------------------------------------------------
+    def publish(self, listed, now):
+        machines = []
+        for machine in sorted(set(listed) | set(self.machines)):
+            info = self.machines.get(machine) or {}
+            report = info.get('report') or {}
+            rows = listed.get(machine)
+            repos = dict((a['pane'], a) for a in report.get('agents', []))
+            roles = {}
+            for plan in report.get('plans', []):
+                for role, items in (('lead', [plan['lead']]), ('successor', plan['succession']),
+                                    ('lane', plan['lanes'])):
+                    for item in items:
+                        pane = local_pane(item)
+                        if pane:
+                            roles.setdefault(pane, []).append({'plan': plan['plan'], 'role': role})
+            agents = []
+            for row in [r for r in rows or [] if r.get('in_scope', True)]:  # never map what is out of scope
+                repo = repos.get(row['pane']) or {}
+                pmemo = self.ap.panes.get('%s:%s' % (machine, row['pane']))
+                since = pmemo.since if pmemo is not None else None
+                agents.append({'pane': row['pane'], 'kind': row.get('agent'),
+                               'state': row.get('state'), 'cwd': row.get('cwd'),
+                               'title': clean_title(row.get('title')),
+                               'state_since': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(since))
+                               if since else None,
+                               'repo_root': repo.get('repo_root'), 'branch': repo.get('branch'),
+                               'plans': roles.get(row['pane'], [])})
+            plans = []
+            for plan in report.get('plans', []):
+                memo = self.memos.get((machine, plan['plan']))
+                plans.append({'plan': plan['plan'], 'class': plan['class'], 'lead': plan['lead'],
+                              'epoch': plan['epoch'], 'succession': plan['succession'],
+                              'lanes': plan['lanes'], 'repo_root': plan['repo_root'],
+                              'blocker_class': plan['blocker_class'],
+                              'progress': plan.get('progress'), 'updated_at': plan.get('updated_at'),
+                              'tasks_done': plan.get('tasks_done'),
+                              'tasks_total': plan.get('tasks_total'),
+                              'current_task': plan.get('current_task'),
+                              'detail': plan.get('detail'),
+                              'situation': memo.situation if memo else None})
+            machines.append({'machine': machine, 'label': self.io.label(machine),
+                             'agents_state': 'unknown' if rows is None else 'ok',
+                             'plans_state': info.get('state') or 'unknown',
+                             'agents': agents, 'plans': plans})
+        body = {'schema': FLEET_SCHEMA, 'daemon': self.io.identity(), 'machines': machines}
+        key = hashlib.sha256(json.dumps(body, sort_keys=True).encode('utf-8')).hexdigest()
+        if key != self.fleet_key:
+            self.fleet_key = key
+            stamp = time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(now))
+            body['generated_at'] = stamp
+            text = json.dumps(body, sort_keys=True)
+            if len(text.encode('utf-8')) > MAP_MAX_BYTES:
+                # Too big for the map: plan details go first; the rest of the map stays.
+                for m in body['machines']:
+                    for p in m['plans']:
+                        p['detail'] = None
+                text = json.dumps(body, sort_keys=True)
+                if not self.too_large:
+                    self.too_large = True
+                    self.ap.record('local:-', None, Decision('leave', 'fleet_too_large',
+                                                             'plan details left out of the map'), 'left')
+            self.fleet_text = text  # this machine's own map, with plan details
+            self.remote_text = json.dumps(remote_copy(body), sort_keys=True)
+        if not self.ap.dry_run:
+            self.io.save_fleet(self.fleet_text)
+
+
+MAP_MAX_BYTES = 2 * 1024 * 1024 - 4096   # under the store's 2 MB cap, with room to spare
+REMOTE_PLAN_KEYS = ('plan', 'class', 'blocker_class', 'progress', 'lead', 'lanes', 'succession',
+                    'epoch', 'updated_at', 'repo_root', 'situation',
+                    'tasks_done', 'tasks_total', 'current_task')
+
+
+def remote_copy(body):
+    """The map as it is left on other machines: plan content stays on the
+    daemon's machine. Per plan its identity, class, blocker class, progress
+    digest and counts, current task, addresses, epoch, update time and
+    repository root — never its detail (summary, task list, blocker text);
+    per agent no session title and no working directory."""
+    out = dict(body, machines=[])
+    for m in body['machines']:
+        plans = []
+        for p in m.get('plans') or []:
+            q = dict((k, p.get(k)) for k in REMOTE_PLAN_KEYS)
+            q['detail'] = None  # the summary, task list and blocker text stay on the daemon's machine
+            plans.append(q)
+        agents = [dict(a, title=None, cwd=None) for a in m.get('agents') or []]
+        out['machines'].append(dict(m, plans=plans, agents=agents))
+    return out
+
+
+def clean_title(value, limit=120):
+    """An agent's session title, single line, safe to show and cut (the same
+    cleaner and token redactor as every free text on the map)."""
+    import fleet_report
+    return fleet_report.clean_text(value, limit)
+
+
+def local_pane(addr):
+    """The pane of an address the reporting machine calls its own, else None."""
+    if isinstance(addr, str) and addr.startswith('local:'):
+        return addr[len('local:'):]
+    return None

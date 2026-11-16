@@ -65,15 +65,15 @@ Arbeit bewegt sich nur zwischen den Konten, die Sie für den Plan deklariert hab
 ## Installation
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v1.2.0`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
+Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v1.3.0`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v1.2.0`, Schnittstelle 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v1.3.0`, Schnittstelle 1 |
 | Registry-Schlüssel | `agentkit` in `.dwp/config.json` |
 | Transport | headless: ein `ak run` pro Delegiertem in einem eigenen Git-Worktree |
 | Stellt bereit | `subagents`, `cancel_children`, `model_routing` |
@@ -82,6 +82,8 @@ Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; son
 **Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle des Kits folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version: die Befehlsoberfläche (`ak <kind> [@profile]` für jede Art in `providers.toml` sowie jedes Verb mit seinen dokumentierten Flags), die Berechtigungshaltung, Schnittstelle 1 (`ak doctor --json`, `ak env`, die Grammatik und der Umschlag von `ak run`), die JSON-Schemas (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`) sowie das installierte Layout und die Variablennamen der Env-Datei. `v1.0.0` ändert keinen Befehl, kein Flag, keinen Schlüssel und kein Schema gegenüber `v0.7.1`.
 
 Release 1.2.0 fügt **`ak last`** hinzu: Jeder interaktive Start zeichnet Kind und Profil pro Arbeitsverzeichnis auf; `ak last` startet ihn mit `-c` in jedem Terminal neu (setzt dort die neueste Sitzung fort), `ak last -r` öffnet den CLI-Auswahldialog in diesem Konto, und `ak last ls` listet den Eintrag. Ein Start innerhalb eines Herdr-Panes überlebt auch einen Herdr-Neustart oder Reboot: Der Pane kommt über `ak --resume` im selben Konto zurück, mit dem Schlüssel aus der Env-Datei und unveränderter Berechtigungsposition (`AGENTKIT_HERDR_RESUME=0` schaltet das ab).
+
+Kit v1.3.0 (Interface 1 unverändert) fügt **pick-v2** hinzu: `ak pick --kinds codex,claude` rankt über Kinds hinweg, `--model-for KIND=NAME` überschreibt das Modell je Kind, und `--json` liefert den Startvertrag — `launch.argv` mit `launch.permissions` (`auto` oder `ask`) und einer `qualifies: false`-Form. `--model` wird zu einem Kopf-Flag, das auf das eigene Flag jedes CLIs gemappt wird (codex `-m`) — eine Verhaltensänderung für Skripte, die `--model` durchreichten.
 
 ## Autonomie standardmäßig, mit einem Opt-out, das immer gewinnt
 

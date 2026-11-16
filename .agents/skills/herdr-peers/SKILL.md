@@ -1,11 +1,11 @@
 ---
 name: herdr-peers
 description: "Ask another coding agent in a Herdr pane — on this machine or another one — and get exactly one authorized reply back, with a loop guard, depth limit 1, a fan-out cap and a record of every delegation; send one-way notices; keep a plan's lead with epochs and succession; lead a multi-agent debate to decide, research the state of the art, stress-test or verify (rounds, angles, red teams, counted ballots and claims, a panel seated from idle panes or agentkit accounts); run autopilot, a human-started daemon that accepts the recommended option for every waiting agent. Use only when the user mentions Herdr, peers, autopilot, a debate, panel or research by several agents, or another agent, pane or machine, or when a plan you are executing delegates a task through Herdr. Do not use merely because parallel work could help. Requires HERDR_ENV=1 and Herdr's official herdr skill."
-version: "1.2.2"
+version: "1.3.0"
 license: MIT
 allowed-tools: Bash, Read
 metadata:
-  version: "1.2.2"
+  version: "1.3.0"
   protocol: 1
 ---
 
@@ -75,7 +75,10 @@ opinion nobody asked for, or to avoid doing the work yourself.
 | `lead takeover --plan P [--reason R]` | The first reachable successor takes over a lead that is gone (unreachable, no agent, usage limit) — or, with a recorded `--reason`, one whose asks timed out twice (epoch+1). |
 | `lead release --plan P` | The current lead leaves the plan without a lead (epoch+1). |
 | `cancel <id> [--reason R]` | Closes an open ask (yours, or one you decline). |
-| `autopilot [run\|stop\|status]` | **Started by a human only** ([autopilot.md](autopilot.md)). Watches every agent on every enabled machine and accepts the option that lets a waiting one go on — a question (the recommended option, then the pre-selected one, then the first), a tool approval, plan approval, folder trust, an update prompt (skipped); follows a dialog of several steps to its end; tells an agent that stopped by asking in prose to continue; retries a pane at its usage limit every 30 minutes. Never touches a login or Claude's bypass acknowledgement, never picks a refusal, free text or a row that widens permissions, never keys a pane without a recognised menu or with a human draft on its input line. Options: `--dry-run`, `--once`, `--passes N`, `--interval S` (default 60, minimum 15), `--exclude <machine>:<pane>`, `--scope`, `--no-nudge`, `--catch-up`. One per server; records every action. |
+| `autopilot [run\|start\|stop\|status\|logs]` | **Started by a human only** ([autopilot.md](autopilot.md)). `start` (alias `on`) runs it in the background, detached from the pane, logging to `autopilot.out` in the state directory; `stop` (alias `off`) stops it and waits; `status` shows whether it runs, since when, how, its options and last ten actions; `logs [--lines N] [-f]` prints or follows the background log; no verb runs it in the foreground. Watches every agent on every enabled machine and accepts the option that lets a waiting one go on — a question (the recommended option, then the pre-selected one, then the first), a tool approval, plan approval, folder trust, an update prompt (skipped); follows a dialog of several steps to its end; tells an agent that stopped by asking in prose to continue; retries a pane at its usage limit every 30 minutes. Never touches a login or Claude's bypass acknowledgement, never picks a refusal, free text or a row that widens permissions, never keys a pane without a recognised menu or with a human draft on its input line. Options: `--dry-run`, `--once`, `--passes N` (foreground only), `--interval S` (default 60, minimum 15), `--exclude <machine>:<pane>`, `--scope`, `--no-nudge`, `--catch-up`. One per server; records every action. With `--loop` it also keeps every open plan running: each enabled machine reports the plans that have a lead record, the idle lead of a plan that is not finished gets one fixed prompt to continue it (after 5 unchanged minutes, never while its lanes work or it awaits a reply), a blocked plan is left, three prompts without progress stop it (`plan_stalled`), and a lead that is gone has its first reachable successor asked to take over; `--notify "<command>"` runs a command (no shell) with a `plan-event-v1` object when a plan stalls, is blocked, loses its lead or completes. |
+| `plans [--json]` | The plans led on this machine (`herdr-peers/plans-v1`): lead, epoch, succession, lanes, class (`open`, `blocked`, `completed`, `unreadable`), progress digest. Read-only; works outside a Herdr pane. |
+| `fleet [--json]` | The map the autopilot loop keeps (`herdr-peers/fleet-v1`): every machine, its agents with repository and branch, the plans and each agent's role. Read-only, from this machine's copy, with its age; exit `7` without one, `5` when stale. Works outside a pane. |
+| `fleet ui [--group plan\|repo\|machine] [--snapshot] [--width N]` | A live terminal watcher of that map (read-only): a header with how old the picture is ("updated 3 min ago", STALE past 15 minutes) and counts by state; agents grouped by plan (lead ★, lanes ·, successors ↳, the plan's progress and current task; plans that need the human first), with the agents working outside plans and those doing nothing as their own groups — or by repository or machine. Enter or a click opens a plan (progress, current task, its tasks, blocker, the summary from its `PROGRESS.md`) or an agent (its plans, its live screen every 2 s; `f` focuses its pane). `--snapshot`, or no terminal, prints the view once as text. |
 | `debate tally\|claims\|anon\|filings\|panel` | A debate lead's tools ([debate.md](debate.md)) for every purpose — decide, research, stress-test, verify, generate: `tally FILE|DIR` counts a `herdr-peers/ballots-v1` file or a directory of per-pane `*.ballot.json` (Borda, first places, pairwise, Condorcet winner and loser, item verdicts; the lead never votes); `claims DIR…` merges lanes' `herdr-peers/claims-v1` ledgers into established / agreed / contested / partial / single / unsupported / disputed / refuted claims with coverage — a quorum count, not a verification (`--rounds` merges rounds in order, `--map` merges synonyms, `--anonymous` blinds lanes, angles, claim text and sources); `anon SRC DST --key K` copies filings to `Filing_A.md`… with identities redacted, in an order only the key can rebuild, refusing a filing that carries a secret; `filings DIR --expect a,b` lists missing or short filings (exit 5 when incomplete); `panel --seats N` proposes a panel and runs nothing: seats round-robin over model providers, most quota first (idle panes and `ak pick` accounts ranked together by known headroom), with the provider mix and two successors for the lead (another provider first on a tie). Every debate verb accepts `--pane`. |
 
 `ask`, `notify`, `reply`, `check`, `wait`, `status`, `lanes`, `cancel` and the `lead`
@@ -98,6 +101,8 @@ Environment (all optional):
 | `HERDR_PEERS_MAX_BYTES` | Message size limit (default 16384). |
 | `HERDR_PEERS_BLOCKED_WAIT` | Seconds `reply` and `notify` keep retrying the delivery to a peer blocked at a question or approval (default 600, at most 3600; 0 tries once; `--wait-blocked` per call). |
 | `HERDR_PEERS_AUTOPILOT_CONFIRM` | Seconds autopilot waits between a key and the re-read that confirms it (default 1.5; 0–30). |
+| `HERDR_PEERS_AUTOPILOT_GRACE` | Seconds a lead's pane must stay unchanged before the plan loop prompts it (default 300). |
+| `HERDR_PEERS_AUTOPILOT_SSH_TIMEOUT` | Seconds one machine's plans report may take (default 25; 1–120). |
 | `HERDR_PEERS_LOG` | Shared log file override (default is machine-scoped XDG state: `$XDG_STATE_HOME/herdr-peers/<server>/log.ndjson`). Records are filtered to the current server; use `log --all-machines` to inspect a shared override. |
 | `HERDR_PEERS_PYTHON` | Python interpreter for the helper (default `python3`). |
 | `HERDR_PEERS_BRIEFER` | The address that launched or briefed this pane (set by the launcher): the only sender whose *first* lead notice for a plan is accepted (a peer whose ask this pane recorded counts too). |
@@ -224,7 +229,18 @@ named here) and `Read`.
   limit — on every enabled machine inside the scope; a pid file and a lock in
   the state directory; one record per action ([autopilot.md](autopilot.md)).
 
-**Reads only:** `status` and `lanes` read Herdr's agent state and a waiting
+- `autopilot --loop`, **only when the human started it**: in addition, one
+  fixed prompt to the lead (or a listed successor) of a plan that is not
+  finished; one read-only command per enabled machine over its saved SSH
+  target (`ssh … python3 -`, the report module on standard input); the map
+  file `fleet.json` (`0600`) in the herdr-peers state root of this machine
+  and of each machine that answered; and, with `--notify`, the command the
+  human named ([autopilot.md](autopilot.md) §9).
+
+**Reads only:** `plans`, `fleet` and `fleet ui` read lead records, plan state
+files (and a plan's `PROGRESS.md`, contract or manifest title) and the stored
+map; `fleet ui` also reads an open agent's screen (`herdr pane read`) and, on
+the human's key, focuses it (`herdr agent focus`). `status` and `lanes` read Herdr's agent state and a waiting
 lane's visible screen; they print a screen class, never screen text, and
 never send keys. Keying through folder trust — the only screen an agent may
 answer, and only on a pane it launched itself — is the lead's own decision

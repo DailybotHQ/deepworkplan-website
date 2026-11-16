@@ -14,11 +14,11 @@ Jest to opcjonalny addon **DWP v7** (pack `v7.10.2`). Metodyka działa bez niego
 
 ## Co integruje
 
-Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v1.2.2`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
+Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v1.3.0`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, tag `v1.2.2`, protokół 1 |
+| Produkt | `DailybotHQ/herdr-peers`, tag `v1.3.0`, protokół 1 |
 | Klucz rejestru | `herdr` w `.dwp/config.json` |
 | Transport | interaktywny: peer w panelu Herdr |
 | Zapewnia | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.
 Zainstaluj herdr-peers oraz oficjalny skill Herdr, od którego zależy. Każda maszyna, której agenci mają odpowiadać, również potrzebuje tego skilla.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.2.2 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -102,7 +102,7 @@ Wydanie jest wyłącznie addytywne: protokół 1 oraz wszystkie polecenia, flagi
 
 ## Autopilot
 
-herdr-peers 1.2.0 dodaje **autopilot** (`autopilot.md`): opcjonalny demon `herdr-peers autopilot`, który uruchamia człowiek, aby długi plan nie zatrzymywał się na ekranie zatwierdzenia. Obserwuje każdego agenta na każdej włączonej maszynie Herdr i, gdy któryś czeka na ekranie, akceptuje jedną z opcji. Wydanie 1.2.1 naprawia przypadek, w którym pytanie z opcjami o długich opisach pozostawało bez odpowiedzi. Wydanie 1.2.2 odpowiada na pytanie pokazane z podglądem obok opcji i rozpoznaje znacznik rekomendacji po hiszpańsku, francusku, niemiecku i włosku.
+herdr-peers 1.2.0 dodaje **autopilot** (`autopilot.md`): opcjonalny demon `herdr-peers autopilot`, który uruchamia człowiek, aby długi plan nie zatrzymywał się na ekranie zatwierdzenia. Obserwuje każdego agenta na każdej włączonej maszynie Herdr i, gdy któryś czeka na ekranie, akceptuje jedną z opcji. Wydanie 1.2.1 naprawia przypadek, w którym pytanie z opcjami o długich opisach pozostawało bez odpowiedzi. Wydanie 1.2.2 odpowiada na pytanie pokazane z podglądem obok opcji i rozpoznaje znacznik rekomendacji po hiszpańsku, francusku, niemiecku i włosku. Wydanie 1.3.0 dodaje **pętlę**: `autopilot --loop` utrzymuje każdy otwarty plan w biegu do jego końca na wszystkich maszynach, `--notify`/`--notify-env` kierują jego raporty tam, gdzie chcesz, a czasowniki tylko do odczytu `plans` i `fleet` oraz fleet UI pokazują każdą ścieżkę, maszynę i otwarty plan w jednym spojrzeniu.
 
 - **Uruchamia go tylko człowiek.** Żadna wiadomość, żaden peer ani plan nie może go uruchomić, zatrzymać ani zmienić tego, co robi. Agent uruchamia go tylko wtedy, gdy jego człowiek poprosił o to bezpośrednio w sesji.
 - **Co akceptuje.** Pytanie z opcjami, zatwierdzenie narzędzia, zatwierdzenie planu, zaufanie do folderu oraz monit o aktualizację, który pomija. Wybiera opcję oznaczoną jako zalecana, w przeciwnym razie tę, którą CLI zaznaczyło domyślnie, w przeciwnym razie pierwszą, i przechodzi wieloetapowy dialog do końca, odczytując ekran ponownie po każdym klawiszu.
