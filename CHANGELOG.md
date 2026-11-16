@@ -9,6 +9,13 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.67] - 2026-11-16
+
+### Changed
+
+- feat: pin coding-agents-kit v1.3.0 with pick-v2 and the --model head flag
+- feat: pin herdr-peers v1.3.0 with the loop and the fleet UI
+
 ## [5.0.66] - 2026-11-16
 
 ### Changed
@@ -1436,7 +1443,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.66...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.67...HEAD
+[5.0.67]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.67
 [5.0.66]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.66
 [5.0.65]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.65
 [5.0.64]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.64
