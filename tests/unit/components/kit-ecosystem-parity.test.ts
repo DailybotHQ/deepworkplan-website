@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 import { getSupportedLanguages } from '@/lib/i18n';
 
 // Source-contract test for the kit index ecosystem plate (KitEcosystem.astro):
@@ -16,14 +17,20 @@ const SOURCE_PATH = resolve(
 const source = readFileSync(SOURCE_PATH, 'utf8');
 const languages = getSupportedLanguages();
 
-const PINS: Record<string, string> = {
-  herdr: 'herdr-peers@v2.1.0',
-  agentkit: 'coding-agents-kit@v1.5.0',
-  devcontainer: 'devcontainer-kit@v1.3.0',
-  dailybot: 'dailybot@v3.23.20',
-  'ai-diff-reviewer': 'ai-diff-reviewer@v3.3.16',
-  vim: 'deepworkplan-vim@v1.0.1',
+const PIN_KEYS: Record<string, keyof typeof ECOSYSTEM_PINS> = {
+  herdr: 'herdr',
+  agentkit: 'agentkit',
+  devcontainer: 'devcontainer',
+  dailybot: 'dailybot',
+  'ai-diff-reviewer': 'reviewer',
+  vim: 'vim',
 };
+const PINS: Record<string, string> = Object.fromEntries(
+  Object.entries(PIN_KEYS).map(([plateKey, pinKey]) => {
+    const pin = ECOSYSTEM_PINS[pinKey];
+    return [plateKey, pin.tag];
+  })
+);
 
 type Entry = Record<string, string | string[]>;
 
@@ -101,9 +108,9 @@ describe('KitEcosystem facts', () => {
   const map = loadMap();
 
   it('pins exactly the pack descriptor tags, one role per product', () => {
-    expect(
-      Object.fromEntries(products.map((p) => [p.key, `${p.product}@${p.tag}`]))
-    ).toEqual(PINS);
+    expect(Object.fromEntries(products.map((p) => [p.key, p.tag]))).toEqual(
+      PINS
+    );
     expect((map.en.roles as string[]).length).toBe(products.length);
   });
 
@@ -120,6 +127,6 @@ describe('KitEcosystem facts', () => {
   });
 
   it('names the stable pack release', () => {
-    expect(source).toContain("const packTag = 'v8.0.0';");
+    expect(source).toContain(`const packTag = '${ECOSYSTEM_PINS.pack.tag}';`);
   });
 });

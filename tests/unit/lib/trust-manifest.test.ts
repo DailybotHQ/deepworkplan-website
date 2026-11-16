@@ -64,6 +64,8 @@ describe('repository descriptor', () => {
     schemas: {
       plan_contract: string;
       plan_snapshot: string;
+      plan_state: string;
+      journal_event: string;
       plan_manifest: string;
       journal_event_v7: string;
     };
@@ -92,8 +94,16 @@ describe('repository descriptor', () => {
     expect(descriptor.schemas.plan_snapshot).toBe(
       'https://deepworkplan.com/schema/plan-snapshot/v8.json'
     );
+    expect(descriptor.schemas.plan_state).toBe(
+      'https://deepworkplan.com/schema/plan-snapshot/v8.json'
+    );
+    expect(descriptor.schemas.journal_event).toBe(
+      'https://deepworkplan.com/schema/journal-event/v8.json'
+    );
+    const major = Number.parseInt((declared as string).split('.')[0], 10);
+    // LOOP_ENGINEERING.md §5 keeps plan-manifest/v7 for v8 plans.
     expect(descriptor.schemas.plan_manifest).toBe(
-      'https://deepworkplan.com/schema/plan-manifest/v7.json'
+      `https://deepworkplan.com/schema/plan-manifest/v${major}.json`
     );
     expect(descriptor.schemas.journal_event_v7).toBe(
       'https://deepworkplan.com/schema/journal-event/v7.json'
