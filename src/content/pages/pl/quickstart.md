@@ -97,7 +97,7 @@ zalecane: ostrożny agent traktuje pobrany prompt jako niezaufany, dopóki nie z
   | deepworkplan-skill | `v7.12.1` | `a8b737d97c57091807f598206d5ef98b2d65af3fee7b5af5dc87a806db92fc97` |
   | coding-agents-kit | `v1.4.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
   | herdr-peers | `v1.3.1` | `c90bce908dc6d690c0273e8b664d84297aa16e3277bfd00fcf5003bfb6a30152` |
-  | devcontainer-kit | `v1.1.2` | `c7a5ffb737777473f08932f9a2de153518d923f5d7edeb4ab97fdd7537bf2374` |
+  | devcontainer-kit | `v1.2.0` | `5aaf1113734d3d4308b6ffd256a4e10e60116370ad23bdfd2573f7a3a914e349` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | nie opublikowano — CLI skills zapisuje skrót zawartości w `skills-lock.json` |
@@ -232,7 +232,7 @@ Tabela jest ściągą, a nie listą kontrolną: uruchom wiersz tylko dla wymagan
 | Dailybot | `version:` w `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` w zainstalowanym skillu herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | zweryfikowany instalator pod adresem https://deepworkplan.com/vim/install.sh (przypina `v1.0.1`; pobierz, `shasum -a 256 -c install.sh.sha256`, a potem uruchom) |
 
 Przed uruchomieniem zweryfikuj każde pobranie względem `SHA256SUMS` jego wydania i skrótu w *Przypiętych wydaniach*
@@ -246,7 +246,7 @@ standardu 2.3.0): powyższy skill przypięty do tagu plus dopasowany do repozyto
 design system, agentkit, Herdr, DeepWorkPlan Vim) i zaproponuj tylko te, które pasują do tego repozytorium, każdy jako wyraźną opcję do wyboru. Repozytorium
 jest w pełni zgodne przy **zerowej** liczbie opcjonalnych dodatków — nigdy nie instaluj ich automatycznie.
 
-- **Wsparcie devcontainera** — lekki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty `v1.1.2`, ze skillem `dck-dockerfile`): `dck init` generuje własny kontener repozytorium — oficjalny obraz przypięty po digeście, bez wspólnego obrazu bazowego, `bash dev.sh up` — i uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu. Po akceptacji przejdź *Ścieżkę devcontainera* poniżej aż do pełnego stosu.
+- **Wsparcie devcontainera** — lekki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty `v1.2.0`, ze skillem `dck-dockerfile`): `dck init` generuje własny kontener repozytorium — oficjalny obraz przypięty po digeście, bez wspólnego obrazu bazowego, `bash dev.sh up` — i uzgadnia istniejący devcontainer dopiero po zaakceptowaniu jego diffu. Po akceptacji przejdź *Ścieżkę devcontainera* poniżej aż do pełnego stosu.
 - **Integracja z Dailybot** — cztery zdarzenia cyklu życia (kickoff, istotne zadanie, blokada, zakończenie) jako raporty postępu w trybie najlepszego wysiłku dla zespołów już korzystających z Dailybot, z opcjonalnym autonomicznym wymuszaniem hooków (`dailybot-cli >= 3.9.0`). Instalacja sparowanego skilla agenta Dailybot (3.23.20) udostępnia również czat, check-iny, tworzenie formularzy, pytanie AI, tablice i zadania Plan, klucze API per-repo i więcej — dodatek łączy jedynie raportowanie z wykonywaniem DWP. Podstawowa metodyka nie ma żadnej zależności od Dailybot.
 - **Dependency upgrade** — aktualizacje niezależne od menedżera pakietów: partiami, zwalidowane i odwracalne. Po
   zaakceptowaniu instaluje komendę `/lib-upgrade`.

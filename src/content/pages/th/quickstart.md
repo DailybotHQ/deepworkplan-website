@@ -95,7 +95,7 @@ lastUpdated: 2026-10-11
   | deepworkplan-skill | `v7.12.1` | `a8b737d97c57091807f598206d5ef98b2d65af3fee7b5af5dc87a806db92fc97` |
   | coding-agents-kit | `v1.4.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
   | herdr-peers | `v1.3.1` | `c90bce908dc6d690c0273e8b664d84297aa16e3277bfd00fcf5003bfb6a30152` |
-  | devcontainer-kit | `v1.1.2` | `c7a5ffb737777473f08932f9a2de153518d923f5d7edeb4ab97fdd7537bf2374` |
+  | devcontainer-kit | `v1.2.0` | `5aaf1113734d3d4308b6ffd256a4e10e60116370ad23bdfd2573f7a3a914e349` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | ไม่มีการเผยแพร่ — skills CLI บันทึก content hash ไว้ใน `skills-lock.json` |
@@ -242,7 +242,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 | Dailybot | `version:` ใน `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` ใน skill herdr-peers ที่ติดตั้งไว้ | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | ตัวติดตั้งที่ผ่านการตรวจสอบที่ https://deepworkplan.com/vim/install.sh (ตรึง `v1.0.1`; ดาวน์โหลด รัน `shasum -a 256 -c install.sh.sha256` แล้วจึงรัน) |
 
 ตรวจสอบการดาวน์โหลดแต่ละรายการกับ `SHA256SUMS` ของรีลีสนั้นและ digest ใน *รีลีสที่ตรึงไว้* ข้างต้นก่อนรัน
@@ -251,7 +251,7 @@ validation gate อ่อนลงเพื่ออ้างว่าเสร�
 
 **ส่วนเสริมแบบเลือกได้** แจกแจงส่วนเสริมแบบเลือกได้เจ็ดอย่าง (devcontainer, Dailybot, dependency upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) และเสนอเฉพาะอย่างที่เหมาะกับ repository นี้ แต่ละอย่างเป็นการเลือกเข้าร่วมอย่างชัดแจ้ง repository สอดคล้องอย่างสมบูรณ์โดยมีส่วนเสริมแบบเลือกได้ **ศูนย์** อย่าง — อย่าติดตั้งส่วนเสริมเหล่านั้นอัตโนมัติ
 
-- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v1.1.2` พร้อมสกิล `dck-dockerfile`): `dck init` สร้างคอนเทนเนอร์ของ repository เอง — image ทางการตรึงด้วย digest ไม่มี base image ที่ใช้ร่วมกัน และ `bash dev.sh up` — และกระทบยอด devcontainer ที่มีอยู่หลังจากยอมรับ diff แล้วเท่านั้น เมื่อยอมรับแล้ว ให้ทำตาม *เส้นทาง devcontainer* ด้านล่างจนได้ stack ครบ
+- **Devcontainer support** — ตัวเชื่อมแบบบางของ [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck` ตรึงที่ `v1.2.0` พร้อมสกิล `dck-dockerfile`): `dck init` สร้างคอนเทนเนอร์ของ repository เอง — image ทางการตรึงด้วย digest ไม่มี base image ที่ใช้ร่วมกัน และ `bash dev.sh up` — และกระทบยอด devcontainer ที่มีอยู่หลังจากยอมรับ diff แล้วเท่านั้น เมื่อยอมรับแล้ว ให้ทำตาม *เส้นทาง devcontainer* ด้านล่างจนได้ stack ครบ
 - **Dailybot integration** — สี่เหตุการณ์วงจรชีวิต (kickoff, งานสำคัญ, ถูกบล็อก, เสร็จสิ้น) เป็นรายงานความคืบหน้าแบบเต็มความสามารถสำหรับทีมที่ใช้ Dailybot อยู่แล้ว พร้อมการบังคับใช้ hook อัตโนมัติแบบเลือกได้ (`dailybot-cli >= 3.9.0`) การติดตั้ง skill เอเจนต์ Dailybot ที่จับคู่มา (3.23.20) ยังเปิดให้ใช้แชท เช็คอิน สร้างฟอร์ม ถาม AI บอร์ดและงาน Plan per-repo API keys และอื่น ๆ — ส่วนเสริมเชื่อมเฉพาะการรายงานเข้ากับการดำเนินการ DWP ระเบียบวิธีหลักไม่มีการพึ่งพิง Dailybot ใด ๆ
 - **Dependency upgrade** — การอัปเกรดที่เป็นกลางต่อตัวจัดการแพ็กเกจ ทำเป็นชุด ตรวจสอบแล้ว และย้อนกลับได้ เมื่อ
   ยอมรับ มันจะติดตั้งคำสั่ง `/lib-upgrade`

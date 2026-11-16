@@ -21,20 +21,20 @@ order: 1
 ## 安装
 
 ```bash
-git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v1.1.2`：`v0.2.0` 不受支持。
+要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v1.2.0`：`v0.2.0` 不受支持。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v1.1.2`，接口 2 |
+| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v1.2.0`，接口 2 |
 | 注册表键 | `.dwp/config.json` 中的 `devcontainer` |
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |
 
-**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上新的固定版本（herdr-peers 1.2.1、coding-agents-kit 1.1.0 和 DeepWorkPlan Vim 1.0.1）。
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上新的固定版本（herdr-peers 1.3.1、coding-agents-kit 1.4.0 和 DeepWorkPlan Vim 1.0.1，镜像中还包括 vendored 的 pack 7.12.1）。
 
 ## 层
 
