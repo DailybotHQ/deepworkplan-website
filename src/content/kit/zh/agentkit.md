@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.2.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.3.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.2.0`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.3.0`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |
@@ -82,6 +82,8 @@ ak doctor
 **自 `v1.0.0` 起稳定。** 工具包的公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容的变更：命令面（`providers.toml` 中每种类型对应的 `ak <kind> [@profile]`，以及每个动词及其文档化的参数）、权限姿态、接口 1（`ak doctor --json`、`ak env`、`ak run` 的语法与信封）、JSON 模式（`doctor-v1`、`usage-v1`、`pick-v1`、`capacity-v1`、`leases-v1`、`profiles-v1`、`setup-probe-v1`、`setup-verify-v1`），以及安装布局和 env 文件中的变量名。`v1.0.0` 相对 `v0.7.1` 没有改动任何命令、参数、键或模式。
 
 1.2.0 版本新增 **`ak last`**：每个交互式启动都会按工作目录记录其 kind 和 profile；`ak last` 在任意终端用 `-c` 重新启动它（在该目录继续最近的会话），`ak last -r` 在该账号打开 CLI 的选择器，`ak last ls` 列出记录。在 Herdr 面板内的启动也能在 Herdr 重启或机器重启后恢复：面板通过 `ak --resume` 回到同一账号，密钥来自环境文件，权限姿态保持不变（`AGENTKIT_HERDR_RESUME=0` 可关闭）。
+
+套件 1.3.0 版（接口 1 不变）新增 **pick-v2**：`ak pick --kinds codex,claude` 跨 kind 排序，`--model-for KIND=NAME` 按 kind 覆盖模型，`--json` 返回启动契约——带 `launch.permissions`（`auto` 或 `ask`）的 `launch.argv` 以及 `qualifies: false` 形式。`--model` 成为映射到各 CLI 自身旗标的主旗标（codex 为 `-m`）——对透传 `--model` 的脚本来说是行为变更。
 
 ## 默认自主运行，退出选项始终优先
 

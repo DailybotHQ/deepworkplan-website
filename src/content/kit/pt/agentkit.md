@@ -65,15 +65,15 @@ O trabalho só circula entre as contas que você declarou para o plano, dentro d
 ## Instalação
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v1.2.0`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
+Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v1.3.0`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, interface 1 |
+| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, interface 1 |
 | Chave de registro | `agentkit` em `.dwp/config.json` |
 | Transporte | headless: um `ak run` por delegado em uma worktree git dedicada |
 | Fornece | `subagents`, `cancel_children`, `model_routing` |
@@ -82,6 +82,8 @@ Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais.
 **Estável desde `v1.0.0`.** A interface pública do kit segue o versionamento semântico e só muda de forma incompatível em uma nova versão principal: a superfície de comandos (`ak <kind> [@profile]` para cada tipo definido em `providers.toml`, e cada verbo com suas flags documentadas), a postura de permissões, a interface 1 (`ak doctor --json`, `ak env`, a gramática e o envelope de `ak run`), os esquemas JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, `setup-verify-v1`), e o layout instalado e os nomes das variáveis do arquivo de ambiente. `v1.0.0` não altera nenhum comando, flag, chave ou esquema em relação a `v0.7.1`.
 
 A versão 1.2.0 adiciona o **`ak last`**: cada lançamento interativo registra seu kind e perfil por diretório de trabalho; `ak last` o relança com `-c` (continua a sessão mais recente ali) em qualquer terminal, `ak last -r` abre o seletor do CLI nessa conta, e `ak last ls` lista o registro. Um lançamento dentro de um painel do Herdr também sobrevive a um reinício do Herdr ou da máquina: o painel volta através de `ak --resume` na mesma conta, com sua chave do arquivo de ambiente e sua postura de permissões intacta (`AGENTKIT_HERDR_RESUME=0` desativa isso).
+
+A versão 1.3.0 do kit (interface 1 inalterada) adiciona o **pick-v2**: `ak pick --kinds codex,claude` classifica entre kinds, `--model-for KIND=NAME` sobrescreve o modelo por kind, e `--json` retorna o contrato de lançamento — `launch.argv` com `launch.permissions` (`auto` ou `ask`) e uma forma `qualifies: false`. `--model` passa a ser um flag principal mapeado para o flag próprio de cada CLI (codex `-m`) — uma mudança de comportamento para scripts que passavam `--model` adiante.
 
 ## Autonomia por padrão, com um opt-out que sempre prevalece
 

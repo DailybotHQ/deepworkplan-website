@@ -101,7 +101,7 @@ lastUpdated: 2026-10-11
   | रिपॉज़िटरी (github.com/DailybotHQ) | Tag | उसके `SHA256SUMS` का sha256 |
   | --- | --- | --- |
   | deepworkplan-skill | `v7.10.2` | `e011b7e863911bcd1cc895af810b51fa89f1dac5987da856525749eaad1c8456` |
-  | coding-agents-kit | `v1.2.0` | `424cd430846608bc5c4a8a6bfde535ddb9e8251373160ddb8257106c38acc8de` |
+  | coding-agents-kit | `v1.3.0` | `5d9b215ff81c5662c4504f083c302d1ad5b02556d2a8714e8b65da1f7f9ef7e1` |
   | herdr-peers | `v1.3.0` | `135abb696a3e4b28b60c51369b3a0f9e91f7adafee9fb5ea08c6159d85c6c272` |
   | devcontainer-kit | `v1.1.2` | `c7a5ffb737777473f08932f9a2de153518d923f5d7edeb4ab97fdd7537bf2374` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
@@ -259,7 +259,7 @@ onboard सब-स्किल (`/deepworkplan-onboard`) आमंत्रि�
 | --- | --- | --- |
 | AI Diff Reviewer (आवश्यक) | `.agents/skills/ai-diff-reviewer/SKILL.md` में `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md` में `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | स्थापित herdr-peers स्किल में `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh पर सत्यापित इंस्टॉलर (यह `v1.0.1` पिन करता है; डाउनलोड करें, `shasum -a 256 -c install.sh.sha256`, फिर चलाएँ) |
@@ -283,7 +283,7 @@ agentkit, Herdr, DeepWorkPlan Vim) गिनाएँ और केवल वे
   (शुद्ध लाइब्रेरी, हेडलेस सेवाओं, या केवल-इन्फ़्रा रिपॉज़िटरी के लिए प्रस्तुत नहीं)। तीन प्रोफ़ाइल एक
   फ़ाइल में स्तरित होती हैं: visual-ui (पता लगाने पर पुरज़ोर सिफ़ारिश; इंस्टॉल स्पष्ट स्वीकृति से नियंत्रित), cli-output और संवादात्मक — अंतिम दो
   सदैव पूछे जाते हैं, कभी स्वतः-लागू नहीं।
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v1.2.0` पर पिन) का मशीन-स्तरीय इंस्टॉल: हर कोडिंग एजेंट के लिए एक कमांड, हर प्रोफ़ाइल के लिए एक खाता, सबसे अधिक गुंजाइश वाला खाता चुनने के लिए `ak usage` और `ak pick`, और उन योजनाओं के लिए headless `ak run` जो सीमित `parallel_safe` कार्य दूसरे कोडिंग एजेंटों को सौंपती हैं (हर worktree में एक प्रतिनिधि)। kit डिफ़ॉल्ट रूप से एजेंटों को स्वायत्तता में लॉन्च करता है और उसका opt-out (`--ask` या `AGENTKIT_PERMISSIONS=ask`) हमेशा प्रभावी रहता है।
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, `v1.3.0` पर पिन) का मशीन-स्तरीय इंस्टॉल: हर कोडिंग एजेंट के लिए एक कमांड, हर प्रोफ़ाइल के लिए एक खाता, सबसे अधिक गुंजाइश वाला खाता चुनने के लिए `ak usage` और `ak pick`, और उन योजनाओं के लिए headless `ak run` जो सीमित `parallel_safe` कार्य दूसरे कोडिंग एजेंटों को सौंपती हैं (हर worktree में एक प्रतिनिधि)। kit डिफ़ॉल्ट रूप से एजेंटों को स्वायत्तता में लॉन्च करता है और उसका opt-out (`--ask` या `AGENTKIT_PERMISSIONS=ask`) हमेशा प्रभावी रहता है।
 - **Herdr** — [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (`v1.3.0` पर पिन, साथ में Herdr की आधिकारिक स्किल) का मशीन-स्तरीय इंस्टॉल, उन योजनाओं के लिए जो किसी भी मशीन पर Herdr पेन में मौजूद एक सहकर्मी एजेंट से एक अधिकृत उत्तर माँगती हैं, और उस लीड के लिए जो अपनी लेन पर नज़र रखता है।
 - **DeepWorkPlan Vim** — टर्मिनल एडिटर ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v1.0.1` पर पिन), एक मशीन-स्तरीय इंस्टॉल जो स्पष्ट सहमति के बिना किसी मौजूदा Neovim कॉन्फ़िगरेशन को कभी अधिलेखित नहीं करता।
 - **AI Diff Reviewer** — आवश्यक स्थानीय समीक्षा (कोई ऑप्ट-इन नहीं): हर Final Review की सुरक्षा-जाँच योजना के संचित परिवर्तन-समुच्चय पर [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + आवश्यक `.review/extension.md`) चलाती है। अनुपस्थित skill या एक्सटेंशन एक दर्ज `local reviewer not installed` निष्कर्ष है — कभी चुपचाप नहीं छोड़ा जाता, और कभी अचानक बूटस्ट्रैप नहीं: इंस्टॉल onboarding की सहमति या addon की स्पष्ट invocation से संबंधित है; इनवोकेशन त्रुटियाँ सॉफ्ट-फेल होती हैं; पूर्ण पास के **सत्यापित `critical` निष्कर्ष** अब भी पूर्णता को ब्लॉक करते हैं (v3, BC-07 — असत्यापित गंभीर दावे एनोटेटेड चेतावनी के रूप में आते हैं, और `incomplete`/`timeout` समीक्षा एक स्वच्छ पास नहीं है, BC-04)। **Flow B** (`pr-review.yml` वाला CI गेट) एक स्पष्ट ऑप्ट-इन के रूप में प्रस्तुत होता है और बिना अनुरोध कभी स्थापित नहीं किया जाता। कोई भी Deep Work Plan प्रवाह किसी व्यावसायिक सेवा, CI प्रदाता या secret की आवश्यकता नहीं रखता।
@@ -349,7 +349,7 @@ Herdr ऐडऑन स्थापित हों:
   प्रॉम्प्ट, अज्ञात स्क्रीन, और वे पेन जिन्हें आपने नहीं बनाया। `AGENTKIT_PERMISSIONS=ask` के साथ,
   लेन कार्य करने से पहले पूछती हैं; उन प्रॉम्प्ट्स को कभी दरकिनार न करें। हर हस्तक्षेप को पैरेंट
   योजना में दर्ज करें।
-- **स्वार्म को चलता रखें।** coding-agents-kit `v1.2.0` और herdr-peers `v1.3.0` के साथ, हर एजेंट
+- **स्वार्म को चलता रखें।** coding-agents-kit `v1.3.0` और herdr-peers `v1.3.0` के साथ, हर एजेंट
   हर कार्य-सीमा पर `ak capacity --self --json` जाँचता है; `critical` पर वह एक हैंडऑफ़ पैकेट लिखता है
   (https://deepworkplan.com/schema/dwp-handoff/v1.json) और लीड उसी चेकआउट में एक उत्तराधिकारी
   लॉन्च करता है। लीड `herdr-peers lead claim` से अपनी योजना पर दावा करता है, लेन उसे `lead` पते से

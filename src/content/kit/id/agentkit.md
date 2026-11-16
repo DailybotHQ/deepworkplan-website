@@ -65,15 +65,15 @@ Pekerjaan hanya berpindah di antara akun yang Anda deklarasikan untuk rencana, d
 ## Instalasi
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.2.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.3.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |
@@ -82,6 +82,8 @@ Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tida
 **Stabil sejak `v1.0.0`.** Antarmuka publik kit ini mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru: permukaan perintah (`ak <kind> [@profile]` untuk setiap kind di `providers.toml`, serta setiap verb beserta flag yang terdokumentasi), postur izin, antarmuka 1 (`ak doctor --json`, `ak env`, tata bahasa dan envelope `ak run`), skema JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1`, dan `setup-verify-v1`), serta tata letak instalasi dan nama variabel di berkas env. `v1.0.0` tidak mengubah perintah, flag, kunci, atau skema apa pun dari `v0.7.1`.
 
 Rilis 1.2.0 menambahkan **`ak last`**: setiap peluncuran interaktif mencatat kind dan profilnya per direktori kerja; `ak last` meluncurkannya kembali dengan `-c` (melanjutkan sesi terbaru di sana) di terminal mana pun, `ak last -r` membuka pemilih CLI di akun itu, dan `ak last ls` menampilkan rekamannya. Peluncuran di dalam pane Herdr juga bertahan setelah Herdr atau mesin dijalankan ulang: pane kembali melalui `ak --resume` di akun yang sama, dengan kunci dari file env dan postur izinnya utuh (`AGENTKIT_HERDR_RESUME=0` mematikannya).
+
+Kit v1.3.0 (antarmuka 1 tidak berubah) menambahkan **pick-v2**: `ak pick --kinds codex,claude` memeringkat lintas kind, `--model-for KIND=NAME` menimpa model per kind, dan `--json` mengembalikan kontrak peluncuran — `launch.argv` dengan `launch.permissions` (`auto` atau `ask`) dan bentuk `qualifies: false`. `--model` menjadi flag utama yang dipetakan ke flag milik tiap CLI (codex `-m`) — perubahan perilaku untuk skrip yang meneruskan `--model`.
 
 ## Otonomi secara default, dengan opt-out yang selalu menang
 

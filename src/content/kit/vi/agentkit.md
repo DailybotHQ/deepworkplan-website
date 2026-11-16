@@ -65,15 +65,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.2.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.3.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.2.0`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |
@@ -82,6 +82,8 @@ Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; khôn
 **Ổn định từ `v1.0.0`.** Giao diện công khai của bộ kit tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới: bề mặt lệnh (`ak <kind> [@profile]` cho mọi kind trong `providers.toml`, và mọi động từ cùng các cờ được tài liệu hóa), chế độ cấp quyền, giao diện 1 (`ak doctor --json`, `ak env`, cú pháp và envelope của `ak run`), các schema JSON (`doctor-v1`, `usage-v1`, `pick-v1`, `capacity-v1`, `leases-v1`, `profiles-v1`, `setup-probe-v1` và `setup-verify-v1`), cùng bố cục cài đặt và tên biến trong tệp env. `v1.0.0` không thay đổi lệnh, cờ, khóa hay schema nào so với `v0.7.1`.
 
 Bản phát hành 1.2.0 thêm **`ak last`**: mỗi lần khởi động tương tác đều ghi lại kind và profile theo thư mục làm việc; `ak last` khởi động lại nó với `-c` (tiếp tục phiên mới nhất tại đó) trong bất kỳ terminal nào, `ak last -r` mở trình chọn của CLI trong tài khoản đó, và `ak last ls` liệt kê bản ghi. Một lần khởi động bên trong pane Herdr cũng sống sót qua việc Herdr hoặc máy khởi động lại: pane quay lại qua `ak --resume` với cùng tài khoản, khóa từ tệp env và tư thế quyền nguyên vẹn (`AGENTKIT_HERDR_RESUME=0` tắt nó).
+
+Kit bản 1.3.0 (giao diện 1 không đổi) thêm **pick-v2**: `ak pick --kinds codex,claude` xếp hạng qua các kind, `--model-for KIND=NAME` ghi đè mô hình theo từng kind, và `--json` trả về hợp đồng khởi động — `launch.argv` với `launch.permissions` (`auto` hoặc `ask`) và dạng `qualifies: false`. `--model` trở thành cờ đầu được ánh xạ sang cờ riêng của mỗi CLI (codex `-m`) — một thay đổi hành vi với các script truyền `--model` xuyên qua.
 
 ## Tự chủ theo mặc định, với lựa chọn opt-out luôn được ưu tiên
 
