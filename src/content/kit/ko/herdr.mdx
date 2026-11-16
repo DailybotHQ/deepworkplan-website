@@ -130,6 +130,12 @@ autopilot은 위임 프로토콜 밖에 있습니다. ask, 응답, 알림을 보
 
 `--brain`은 coding-agents-kit 1.3.0 이상을 사용합니다. `ak pick`은 ask 모드에서 검증된 pick-v2 실행 계약을 제공합니다. `--brain-kinds codex,claude`는 공급자 우선순위를, `--brain-model claude=sonnet`은 모델을 지정합니다. brain은 제한된 목록의 작업만 반환할 수 있습니다. `ak`가 없거나 오래된 버전이면 fail-closed로 시작을 거부합니다. lead 임명에는 계획의 허가(`lead claim --allow-appointment`)와 사람이 시작한 daemon의 `--appoint` 옵션이 모두 필요하며, lane은 `lead takeover --as-lane`을 사용합니다. merge, tag, release 전에 `lead verify`를 실행합니다. `plans`, `fleet`, `fleet ui`는 읽기 전용입니다. daemon은 스스로 시작하거나 허가 없이 임명하지 않고, 큐나 lead 기록을 쓰거나 자유 텍스트를 실행하거나 권한을 넓히지 않습니다.
 
+v2.0.1은 프로토콜 2를 유지합니다. `--brain-kinds` 기본값을 `claude`로 변경하며(다른 종류도 계속 지정 가능), brain 교체 이유와 제외된 프로필을 로그, 맵, 상태 출력에 기록합니다. `permission_mode` 교체에는 ask 모드의 가능한 원인을 표시합니다. 더 이상 필요하지 않은 큐 상태는 응답을 받은 machine report 뒤에만 삭제합니다. daemon은 맵에 표시하는 제외 프로필을 최대 16개로 제한하지만 전체 제외 집합은 유지합니다. 다른 열린 계획의 lane도 계획 멤버십으로 간주해 appointment를 검사합니다.
+
+v2.0.2는 프로토콜 2를 유지합니다. ask 모드 pick-v2 실행 인수에서는 선택적 `--model <name>` 뒤에 오는 마지막 `--ask` 하나만 받아 실행 전에 제거합니다. daemon이 자체적으로 `--ask --trust-cwd`를 추가합니다. 다른 위치의 `--ask`, CLI 고유 권한 플래그, `--` 뒤의 인수는 계속 거부됩니다. kit 1.4.x 실행 인수는 변경 없이 계속 허용됩니다. 끝에 줄바꿈이 붙은 pane 주소는 거부됩니다.
+
+v2.1.0은 프로토콜 2를 유지합니다. `fleet ui`에 모든 그룹의 `Attention`, `Active`, `Waiting`, `Done`, `All` 보기와 queue 그룹이 추가되고, 맵에는 선택 필드 `state_updated_at`과 `unreadable_reason`이 추가됩니다. 사람이 시작한 daemon은 안전하게 수락할 수 없는 권한 또는 계획 승인 대화상자를 거부합니다. agent 자신의 작업 질문은 거부하지 않으며, 로그인, 권한 우회 확인, 폴더 신뢰는 계속 사람이 처리합니다. brain의 거부는 명시적으로 처리되고, 한 시간에 세 번 거부하면 해당 brain을 교체합니다. 분류된 blocker는 `resolver: lead`이며 class가 none, C3, C4, C7일 때만 brain에 전달할 수 있습니다. C1, C2, C5, C6은 사람이 처리합니다. 이 버전은 pack 8.0.0의 journal-event/v8 blocker event와 plan-snapshot/v8 blocker data도 읽습니다.
+
 ## 참고
 
 선택형이며 결코 필수가 아닙니다. 리포지토리는 선택적 애드온이 하나도 없어도 완전히 적합하며, 어떤 플로우도 이 애드온에 의존하지 않습니다. 두 페인 간의 머신을 넘는 왕복은 시뮬레이션된 Herdr를 대상으로 한 테스트로 검증됩니다. 첫 실행은 사람이 감독하도록 계획하세요.
