@@ -15,6 +15,7 @@ const PLATES = [
   'DoneIsAContract.astro',
   'RepoAsHarnessPlate.astro',
   'ContextEconomy.astro',
+  'LoopDiagram.astro',
 ] as const;
 
 const languages = getSupportedLanguages();
