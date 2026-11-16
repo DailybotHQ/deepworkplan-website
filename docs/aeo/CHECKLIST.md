@@ -33,7 +33,7 @@
 
 ## 5. LLM Testing
 
-Test 5 target queries across AI engines (e.g. "what is spec-driven development", "how to make a repo AI-agent-ready", "Deep Work Plan methodology"):
+Test 5 target queries across AI engines (e.g. "what is spec-first planning per work episode", "how does loop engineering carry a plan to completion", "how to make a repo AI-agent-ready", "Deep Work Plan methodology"):
 
 - [ ] **ChatGPT**: Ask 5 queries. Note: Does it mention deepworkplan.com? Does it cite a specific URL?
 - [ ] **Claude**: Same 5 queries. Note results.
