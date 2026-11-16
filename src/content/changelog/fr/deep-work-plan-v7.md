@@ -64,7 +64,7 @@ La version 7.10.2 (2026-11-15) déplace les épingles de l'écosystème avec les
 
 La version 7.11.0 (2026-11-16) atterrit la série de durcissement v7 du développeur : le glossaire de durabilité et les règles de contrôle visibles entrent dans le guide, `verify` gagne un audit de conformité en lecture seule des plans terminés, les documents du pack énoncent précisément les affirmations de durabilité et de tokens, le slogan du README est remplacé par le vainqueur du test de compréhension, et le chemin de create en direct garde le bundle Lite dans son budget d'instructions.
 
-La version 7.12.0 (2026-11-16) inscrit les plans dans la boucle herdr-peers : un plan revendique son leadership avec une liste de succession, si bien que `autopilot --loop` et l'interface fleet voient chaque plan ouvert et le font courir jusqu'à son terme, et un notificateur Dailybot signale les jalons ; les descripteurs des addons passent à herdr-peers v1.3.1 et coding-agents-kit v1.3.0
+La version 7.12.0 (2026-11-16) inscrit les plans dans la boucle herdr-peers : un plan revendique son leadership avec une liste de succession, si bien que `autopilot --loop` et l'interface fleet voient chaque plan ouvert et le font courir jusqu'à son terme, et un notificateur Dailybot signale les jalons ; les descripteurs des addons passent à herdr-peers v1.3.1 et coding-agents-kit v1.3.0.
 
 La version 7.12.1 (2026-11-16) corrige le notificateur Dailybot de l'addon Herdr : il accepte désormais le nom d'événement `herdr-peers/plan-event-v1` que herdr-peers émet, plafonne le stdin du notificateur à 64 KiB et mappe `plan_lead_moved` ; les descripteurs des addons passent à coding-agents-kit v1.4.0, dont `ak update` est documenté comme invoqué uniquement par un humain.
 
