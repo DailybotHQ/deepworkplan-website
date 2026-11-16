@@ -30,6 +30,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
   - label: "Skill release v7.10.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
+  - label: "Skill release v7.11.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
+  - label: "Skill release v7.12.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
 ---
 
 Deep Work Plan v7 giữ phương pháp của v6: hợp đồng là thẩm quyền, nhật ký chỉ-ghi-thêm là bộ nhớ, bộ lập lịch quyết định việc gì chạy tiếp theo, và một tác vụ chỉ đóng khi bằng chứng đã ghi nhận đáp ứng tiêu chí của nó. v7 bổ sung khả năng ủy quyền và giữ nguyên kỷ luật đó đối với kết quả.
@@ -56,4 +60,8 @@ Bản phát hành 7.10.1 (2026-11-15) ghim addon Herdr vào herdr-peers v1.2.1, 
 
 Bản phát hành 7.10.2 (2026-11-15) chuyển các ghim của hệ sinh thái theo các bản phát hành trong ngày: addon Herdr lên herdr-peers v1.2.2 — một bản vá chỉ sửa lỗi, autopilot của nó giờ trả lời câu hỏi được hiển thị với bản xem trước bên cạnh các phương án và nhận diện dấu đề xuất bằng tiếng Tây Ban Nha, Pháp, Đức và Ý; agentkit lên coding-agents-kit v1.2.0, với `ak last` tiếp tục phiên mới nhất của một thư mục làm việc trong bất kỳ terminal nào và các lần khởi động bên trong pane Herdr khôi phục pane đó sau khi Herdr hoặc máy khởi động lại; devcontainer-kit lên v1.1.2 và deepworkplan-vim vẫn ở v1.0.1; workflow phát hành giờ thử lại việc push tag phát hành để hấp thụ các lần từ chối tạm thời.
 
-Phiên bản skill đã cài: **7.10.2**, ổn định từ 7.0.0.
+Bản phát hành 7.11.0 (2026-11-16) đưa loạt củng cố v7 của developer vào đúng chỗ: bảng thuật ngữ bền vững và các quy tắc kiểm soát hiển thị vào guide, `verify` có thêm một cuộc kiểm toán tuân thủ chỉ đọc cho các plan đã hoàn thành, tài liệu của gói phát biểu chính xác về độ bền và token, câu khẩu hiệu README được thay bằng câu thắng cuộc thi hiểu bài, và đường create trực tiếp giữ gói Lite trong ngân sách chỉ dẫn của nó.
+
+Bản phát hành 7.12.0 (2026-11-16) đăng ký các plan với vòng lặp herdr-peers: một plan yêu cầu quyền dẫn dắt của mình cùng danh sách kế nhiệm, nên `autopilot --loop` và fleet UI thấy mọi plan đang mở và giữ nó chạy đến cùng, và một bộ thông báo Dailybot báo các cột mốc; các bộ mô tả addon chuyển sang herdr-peers v1.3.1 và coding-agents-kit v1.3.0 — chính các bản phát hành mà trang này ghim.
+
+Phiên bản skill đã cài: **7.12.0**, ổn định từ 7.0.0.

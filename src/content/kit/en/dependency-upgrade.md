@@ -31,7 +31,7 @@ Bring a repository's dependencies up to date with a batched, validated, revertib
 | Registry key | `dependency-upgrade` in `.dwp/config.json` |
 | Descriptor | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Command | `/lib-upgrade` installed into `.agents/commands/` when accepted |
-| Versioning | Pinned and versioned with the skill pack (`v7.10.2`) |
+| Versioning | Pinned and versioned with the skill pack (`v7.12.0`) |
 
 ## Notes
 

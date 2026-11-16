@@ -23,11 +23,11 @@ Perlakukan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Setiap 
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-git checkout v7.10.2
-# Download the checksums for the release you intend to install (current release v7.10.2):
+git checkout v7.12.0
+# Download the checksums for the release you intend to install (current release v7.12.0):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.10.2/SHA256SUMS
-# Expected SHA256SUMS digest: e011b7e863911bcd1cc895af810b51fa89f1dac5987da856525749eaad1c8456
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.0/SHA256SUMS
+# Expected SHA256SUMS digest: 388cf53a16d913f4523af1444a74965f6bc248f35f17f10e5f7014df7b3dd782
 ./setup.sh --verify        # keluaran non-zero berarti file tidak cocok — berhenti
 ```
 

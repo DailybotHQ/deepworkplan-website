@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) place des agents de code dans des panneaux, sur votre machine et sur les machines qu’il atteint via SSH. Cet addon permet à un Deep Work Plan d’utiliser ces agents comme **pairs** : un plan peut confier une tâche délimitée à un agent situé dans un autre panneau, recevoir exactement une réponse autorisée et conserver une trace de l’échange.
 
-C’est un addon facultatif de **DWP v7** (pack `v7.10.2`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
+C’est un addon facultatif de **DWP v7** (pack `v7.12.0`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.3.0`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.3.1`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v1.3.0`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protocole 1 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

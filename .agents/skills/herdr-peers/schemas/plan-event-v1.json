@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "herdr-peers/plan-event-v1",
+  "title": "herdr-peers plan event (plan-event-v1)",
+  "description": "The one JSON object `herdr-peers autopilot --loop --notify <command>` writes to that command's standard input when a watched plan needs the developer or finishes. One event per plan and situation; a plan that leaves a situation and returns to it is reported again. Never carries screen text, file content, prompt text or secrets.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "event",
+    "plan",
+    "machine",
+    "lead",
+    "repo_root",
+    "blocker_class",
+    "at"
+  ],
+  "properties": {
+    "schema": {
+      "const": "herdr-peers/plan-event-v1"
+    },
+    "event": {
+      "enum": [
+        "plan_stalled",
+        "plan_blocked",
+        "plan_no_lead",
+        "plan_completed",
+        "plan_lead_moved"
+      ],
+      "description": "stalled: three loop prompts without progress; blocked: the plan state records a blocker; no_lead: the lead is gone and no successor could be asked; completed: a plan the loop watched while open has finished. lead_moved: the pane the lead record names now works outside the plan's repository (a stale record); nobody is prompted."
+    },
+    "plan": {
+      "type": "string",
+      "pattern": "^(?=.{1,128}$)[A-Za-z0-9][A-Za-z0-9._-]*(?:/[A-Za-z0-9][A-Za-z0-9._-]*)*$"
+    },
+    "machine": {
+      "type": "string",
+      "description": "`local` (the daemon's machine) or the saved-machine id where the plan lives."
+    },
+    "lead": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^(local|[A-Za-z0-9._-]{1,64}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}$",
+      "description": "As that machine names it."
+    },
+    "repo_root": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^/.{0,4095}$"
+    },
+    "blocker_class": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "pattern": "^C[1-7]$"
+    },
+    "at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$"
+    }
+  }
+}

@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-verify
 description: Verify that a repository is DeepWorkPlan-conformant (AI-first) and that its plans are well-formed, producing an objective pass/fail report. Use when the developer asks to verify, audit, or check conformance of a repo or a plan.
-version: "7.10.2"
+version: "7.12.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
@@ -53,6 +53,23 @@ never `CONFORMANT`, for missing tooling; do not install it inside this read-only
 flow. Repository-only checks still run without Python. The checker accepts both plan lifecycle shapes (the 2.3.0 single Final Review and the pre-2.3.0 three-final-task ending) and reports harness-version findings for repositories onboarded under an earlier standard. It also verifies the documentation architecture where it is mechanically knowable (`../spec/DOCUMENTATION_STANDARD.md` §§2.1.1, 2.2, 4, 4.1): an `AGENTS.md` over the 500-line lean-index budget is reported as an advisory (SHOULD — authorship is not mechanically knowable); an `AGENTS.md` index link to a file that does not exist **fails**; and when `.dwp/onboard/RECON.md` carries an onboarding docs registry, a registered module without its `README.md` **fails** while a feature area recorded major without its `docs/` and a stale registry path are advisories — the registry is the repository's own recorded judgment, and with no registry no tier judgment is available, so nothing is reported. Then layer
 the judgment checks (real commands, real toolchain, catalog-matches-disk) on
 top — the script verifies *structure*; you verify *substance*.
+
+## Compliance audit of finished plans (read-only)
+
+Conformance asks whether a plan is well-formed; the compliance audit asks
+whether finished v6/v7 work followed the rules the pack already ships:
+criteria closed on their declared evidence class, a completed Final Review,
+declared controls and their verdicts (dirty-start voids counted), §5.1.4
+`control missing` observations, a verbatim request kept, and re-anchoring
+(reported unmeasured — execution leaves no record of it). It never writes.
+
+```bash
+python3 {skill_dir}/verify/compliance_audit.py --plans-dir .dwp/plans   # every plan
+python3 {skill_dir}/verify/compliance_audit.py <plan-dir> --json        # one plan, JSON
+```
+
+Findings are data for the next roadmap, not conformance failures: the audit
+exits `0` when it ran and `2` on a usage error or an unreadable plan.
 
 ## Parameter support
 

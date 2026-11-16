@@ -30,6 +30,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
   - label: "Skill release v7.10.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
+  - label: "Skill release v7.11.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
+  - label: "Skill release v7.12.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
 ---
 
 Deep Work Plan v7 behält die Methode von v6 bei: Der Vertrag ist die Autorität, das nur anhängbare Journal ist das Gedächtnis, der Scheduler entscheidet, was als Nächstes läuft, und eine Aufgabe wird erst abgeschlossen, wenn aufgezeichnete Nachweise ihre Kriterien erfüllen. v7 ergänzt die Möglichkeit zu delegieren und hält dieselbe Disziplin beim Ergebnis ein.
@@ -56,4 +60,8 @@ Release 7.10.1 (2026-11-15) pinnt das Herdr-Addon auf herdr-peers v1.2.1, dessen
 
 Release 7.10.2 (2026-11-15) zieht die Ökosystem-Pins mit den Releases des Tages nach: das Herdr-Addon auf herdr-peers v1.2.2, einen reinen Fix-Patch, dessen Autopilot nun eine Frage beantwortet, die mit einer Vorschau neben ihren Optionen angezeigt wird, und die Empfehlungsmarkierung auf Spanisch, Französisch, Deutsch und Italienisch erkennt; agentkit auf coding-agents-kit v1.2.0, dessen `ak last` die neueste Sitzung eines Arbeitsverzeichnisses in jedem Terminal fortsetzt und dessen Starts innerhalb eines Herdr-Panes den Pane nach einem Herdr-Neustart oder Reboot wiederherstellen; devcontainer-kit auf v1.1.2, deepworkplan-vim bleibt v1.0.1; die Release-Workflow wiederholt jetzt den Push des Release-Tags, um vorübergehende Ablehnungen abzufangen.
 
-Installierte Skill-Version: **7.10.2**, stabil seit 7.0.0.
+Release 7.11.0 (2026-11-16) landet die v7-Härtungsserie des Entwicklers: Das Haltbarkeitsglossar und die sichtbaren Kontrollregeln ziehen in den Guide ein, `verify` erhält eine schreibgeschützte Compliance-Prüfung abgeschlossener Pläne, die Pack-Dokumente fassen Haltbarkeits- und Token-Aussagen präzise, der README-Tagline wird durch den Verständnistest-Sieger ersetzt, und der Live-Create-Pfad hält das Lite-Bundle innerhalb seinesInstruktionsbudgets.
+
+Release 7.12.0 (2026-11-16) registriert Pläne in der herdr-peers-Schleife: Ein Plan beansprucht seine Führung mit einer Nachfolgeliste, sodass `autopilot --loop` und die Fleet-UI jeden offenen Plan sehen und bis zu seinem Ende am Laufen halten, und ein Dailybot-Notifier meldet die Meilensteine; die Addon-Deskriptoren ziehen auf herdr-peers v1.3.1 und coding-agents-kit v1.3.0 — dieselben Releases, die diese Site festlegt.
+
+Installierte Skill-Version: **7.12.0**, stabil seit 7.0.0.

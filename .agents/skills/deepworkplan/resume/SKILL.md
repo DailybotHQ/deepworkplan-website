@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-resume
 description: Resume interrupted Lite or Full Deep Work Plans from durable Markdown and state, including safe recovery of promotions without duplicating completed work or gates.
-version: "7.10.2"
+version: "7.12.0"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -216,6 +216,11 @@ pointer**, never by replaying everything.
 7. **Smoke-test before building:** run the repo's cheapest standing check (from
    `AGENTS.md` Quick Commands) to confirm the world still works before adding to
    it. A failing smoke test is investigated first.
+8. **Re-register as the plan's lead (Herdr plan loop).** With
+   `HERDR_ENV=1` and the herdr addon enabled, refresh
+   `herdr-peers lead claim --plan <plan-id>` — adding
+   `--succession <…>` when the plan names successors — (never a gate;
+   `../../addons/herdr/SKILL.md` — "Plan loop").
 
 ### Step 3 — Report Resumption Status
 Report, compactly: the plan's standard and pre-approval; completed `[x]` /

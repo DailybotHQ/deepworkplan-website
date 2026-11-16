@@ -296,7 +296,7 @@ machines, their agents (state, working directory, repository, branch), the
 plans, and each agent's role in a plan (lead, successor, lane). It keeps it
 in `<state root>/herdr-peers/fleet.json` (`0600`) and, in the same
 connection in which it collects a machine's report, leaves that machine a
-copy. `herdr-peers fleet [--json]` ([`fleet-v1`](../../docs/schema/fleet-v1.json))
+copy. `herdr-peers fleet [--json]` ([`fleet-v1`](schemas/fleet-v1.json))
 prints the copy of the machine it runs on, in or out of a pane, with its
 age, and `herdr-peers fleet ui` shows it live (see below); it exits `7` when there is none and `5` when nobody has synced it for
 15 minutes. A machine's copy is as recent as the daemon's last report from
@@ -359,15 +359,16 @@ not "no plans") and never fails the pass.
 `--notify "<command>"` names a program the daemon runs when a watched plan
 becomes `plan_stalled`, `plan_blocked`, `plan_no_lead`, `plan_lead_moved` or `plan_completed`
 — once per plan and situation — with one JSON object
-([`plan-event-v1`](../../docs/schema/plan-event-v1.json)) on its standard
+([`plan-event-v1`](schemas/plan-event-v1.json)) on its standard
 input: the event, the plan, the machine, the lead, the repository and the
 blocker's class. The command is split into arguments once and run without
 a shell, in its own process group (killed whole at its timeout, 20 s by
 default, `HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT`), with a minimal environment
 (`PATH`, `HOME`, the locale and the XDG directories — never tokens or keys;
 `--notify-env NAME` passes a variable the command needs). All notify commands
-of a pass share that same budget; events that do not fit wait for the next
-pass. A failure is recorded once and never stops the pass. Only the command line that starts the daemon can set it.
+of a pass share one budget of their own (20 s by default,
+`HERDR_PEERS_AUTOPILOT_NOTIFY_BUDGET`, 1–120); one command's timeout never
+widens it. Events that do not fit wait for the next pass. A failure is recorded once and never stops the pass. Only the command line that starts the daemon can set it.
 `--dry-run` runs nothing.
 
 ### 9.7 What it never does, and what you are accepting

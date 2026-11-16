@@ -30,6 +30,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
   - label: "Skill release v7.10.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
+  - label: "Skill release v7.11.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
+  - label: "Skill release v7.12.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
 ---
 
 Deep Work Plan v7 conserve la méthode de v6 : le contrat fait autorité, le journal en ajout seul est la mémoire, l'ordonnanceur décide de ce qui s'exécute ensuite, et une tâche ne se clôt que lorsque des preuves enregistrées satisfont ses critères. v7 ajoute la possibilité de déléguer et maintient la même discipline autour du résultat.
@@ -56,4 +60,8 @@ La version 7.10.1 (2026-11-15) épingle l'addon Herdr sur herdr-peers v1.2.1, do
 
 La version 7.10.2 (2026-11-15) déplace les épingles de l'écosystème avec les sorties du jour : l'addon Herdr vers herdr-peers v1.2.2, un correctif pur dont l'autopilot répond désormais à une question affichée avec un aperçu à côté de ses options et reconnaît la marque de recommandation en espagnol, français, allemand et italien ; agentkit vers coding-agents-kit v1.2.0, dont `ak last` reprend la session la plus récente d'un répertoire de travail dans n'importe quel terminal et dont les lancements dans un panneau Herdr restaurent ce panneau après un redémarrage de Herdr ou de la machine ; devcontainer-kit vers v1.1.2 et deepworkplan-vim reste en v1.0.1 ; le workflow de release retente désormais le push du tag de release pour absorber les refus transitoires.
 
-Version installée du skill : **7.10.2**, stable depuis 7.0.0.
+La version 7.11.0 (2026-11-16) atterrit la série de durcissement v7 du développeur : le glossaire de durabilité et les règles de contrôle visibles entrent dans le guide, `verify` gagne un audit de conformité en lecture seule des plans terminés, les documents du pack énoncent précisément les affirmations de durabilité et de tokens, le slogan du README est remplacé par le vainqueur du test de compréhension, et le chemin de create en direct garde le bundle Lite dans son budget d'instructions.
+
+La version 7.12.0 (2026-11-16) inscrit les plans dans la boucle herdr-peers : un plan revendique son leadership avec une liste de succession, si bien que `autopilot --loop` et l'interface fleet voient chaque plan ouvert et le font courir jusqu'à son terme, et un notificateur Dailybot signale les jalons ; les descripteurs des addons passent à herdr-peers v1.3.1 et coding-agents-kit v1.3.0 — les mêmes versions que ce site épingle.
+
+Version installée du skill : **7.12.0**, stable depuis 7.0.0.

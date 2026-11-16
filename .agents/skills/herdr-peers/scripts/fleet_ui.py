@@ -75,69 +75,8 @@ def clean(value, limit=400):
     return ' '.join(text.split())[:limit]
 
 
-def _str(v):
-    return v is None or isinstance(v, str)
-
-
-def valid_fleet(doc):
-    """True when `doc` has the fleet-v1 shape the watcher reads: every
-    container the type it must be, every key a string. A copy of the map can
-    come from another machine's daemon: anything else is refused whole."""
-    if not isinstance(doc, dict) or doc.get('schema') != SCHEMA:
-        return False
-    if not isinstance(doc.get('machines'), list) or not isinstance(doc.get('daemon', {}), dict):
-        return False
-    for m in doc['machines']:
-        if not isinstance(m, dict) or not isinstance(m.get('machine'), str) or not _str(m.get('label')):
-            return False
-        if not isinstance(m.get('agents', []), list) or not isinstance(m.get('plans', []), list):
-            return False
-        for a in m.get('agents', []):
-            if not isinstance(a, dict) or not isinstance(a.get('pane'), str):
-                return False
-            if not all(_str(a.get(k)) for k in ('kind', 'state', 'cwd', 'repo_root', 'branch',
-                                                 'title', 'state_since')):
-                return False
-            roles = a.get('plans', [])
-            if not isinstance(roles, list) or not all(
-                    isinstance(r, dict) and isinstance(r.get('plan'), str) and _str(r.get('role'))
-                    for r in roles):
-                return False
-        for p in m.get('plans', []):
-            if not isinstance(p, dict) or not isinstance(p.get('plan'), str):
-                return False
-            if not all(_str(p.get(k)) for k in ('class', 'lead', 'repo_root', 'blocker_class',
-                                                 'situation')):
-                return False
-            for k in ('tasks_done', 'tasks_total', 'epoch'):
-                v = p.get(k)
-                if v is not None and (not isinstance(v, int) or isinstance(v, bool)):
-                    return False
-            cur = p.get('current_task')
-            if cur is not None and not (isinstance(cur, dict) and _str(cur.get('id'))
-                                        and _str(cur.get('title'))):
-                return False
-            d = p.get('detail')
-            if d is None:
-                continue
-            if not isinstance(d, dict) or not _str(d.get('title')) or not _str(d.get('summary_at')):
-                return False
-            if not isinstance(d.get('tasks', []), list) or not all(
-                    isinstance(t, dict) and _str(t.get('id')) and _str(t.get('title'))
-                    and _str(t.get('status')) for t in d.get('tasks', [])):
-                return False
-            summary = d.get('summary')
-            if summary is not None and not (isinstance(summary, list)
-                                            and all(isinstance(x, str) for x in summary)):
-                return False
-            b = d.get('blocker')
-            if b is not None and not (isinstance(b, dict) and _str(b.get('reason'))
-                                      and _str(b.get('needs'))):
-                return False
-            first = d.get('tasks_from', 0)
-            if not isinstance(first, int) or isinstance(first, bool):
-                return False
-    return True
+# One validator for the map, shared with `fleet` and the writer (fleet_report).
+from fleet_report import valid_fleet  # noqa: E402  (same directory, stdlib only)
 
 
 def width_of(text):

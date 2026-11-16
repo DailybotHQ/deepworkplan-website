@@ -68,7 +68,7 @@ El **paquete de traspaso** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/d
 
 ## Sucesión del líder
 
-herdr-peers `v1.3.0` mantiene un registro de líder por plan — líder, época, lista de sucesión y carriles — y resuelve la dirección `lead` al líder actual, de modo que ningún encargo de carril fija en el código el panel del líder.
+herdr-peers `v1.3.1` mantiene un registro de líder por plan — líder, época, lista de sucesión y carriles — y resuelve la dirección `lead` al líder actual, de modo que ningún encargo de carril fija en el código el panel del líder.
 
 - **Primero reclamar, después lanzar.** El líder ejecuta `herdr-peers lead claim --plan <P> --succession <A,B>` antes de lanzar cualquier carril —la dirección `lead` solo se resuelve cuando existe un registro—, actualiza el registro con `--lanes <A,B>` a medida que arrancan los carriles y ejecuta `lead release` cuando el plan termina. Desde herdr-peers (`v0.3.2`) el registro guarda localmente el repositorio que reclama, y un plan con el mismo id en otro repositorio se nombra `--plan <repo>/<id>`. La sucesión por defecto es su sucesor previsto, después los carriles del propio checkout del plan por orden de lanzamiento y después cualquier carril del mismo host; los carriles en contenedores o en otras máquinas van al final.
 - **Cesión, planificada.** En `low` el líder designa un sucesor. En `critical` escribe un paquete de líder — tabla de carriles, consultas abiertas, orden de publicación, merges pendientes, decisiones —, ejecuta `herdr-peers lead handover <addr> --plan <P>`, que incrementa la época y avisa a todos los carriles, y se detiene. El sucesor acepta el paquete, reanuda el plan orquestador y vuelve a comprobar cada carril.

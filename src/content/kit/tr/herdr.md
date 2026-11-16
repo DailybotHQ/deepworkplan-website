@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev), kodlama agent'larını hem kendi makinenizde hem de SSH üzerinden eriştiği makinelerde bölmelere yerleştirir. Bu eklenti, bir Deep Work Plan'ın bu agent'ları **eş** (peer) olarak kullanmasını sağlar: bir plan, sınırları belirli bir görevi başka bir bölmedeki bir agent'a devredebilir, tam olarak bir yetkili yanıt alabilir ve bu alışverişin kaydını tutabilir.
 
-Bu, **DWP v7**'nin (pack `v7.10.2`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
+Bu, **DWP v7**'nin (pack `v7.12.0`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.3.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.3.1`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v1.3.0` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v1.3.1` etiketi, protokol 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 

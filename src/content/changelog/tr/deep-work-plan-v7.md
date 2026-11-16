@@ -30,6 +30,10 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
   - label: "Skill release v7.10.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
+  - label: "Skill release v7.11.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
+  - label: "Skill release v7.12.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
 ---
 
 Deep Work Plan v7, v6 yöntemini korur: sözleşme otoritedir, yalnızca eklemeli günlük bellektir, zamanlayıcı sıradaki işin ne olacağına karar verir ve bir görev ancak kaydedilmiş kanıt ölçütlerini karşıladığında kapanır. v7 görev devretme yeteneğini ekler ve sonuç etrafında aynı disiplini sürdürür.
@@ -56,4 +60,8 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 
 7.10.2 sürümü (2026-11-15), günün çıkışlarıyla ekosistem sabitlemelerini taşır: Herdr eklentisi herdr-peers v1.2.2'ye — yalnızca düzeltme içeren bir yama; bu sürümün autopilot'u artık seçeneklerinin yanında önizlemeyle gösterilen bir soruyu yanıtlıyor ve önerilen işaretini İspanyolca, Fransızca, Almanca ve İtalyancada tanıyor; agentkit coding-agents-kit v1.2.0'a — bu sürümün `ak last`'ı bir çalışma dizininin en yeni oturumunu herhangi bir terminalde sürdürür ve bir Herdr bölmesi içindeki başlatmalar, Herdr veya makine yeniden başladığında bölmeyi geri getirir; devcontainer-kit v1.1.2'ye, deepworkplan-vim v1.0.1'de kalıyor; release iş akışı artık geçici reddilmeleri emmek için release etiketi pushesini yeniden deniyor.
 
-Yüklü skill sürümü: **7.10.2**, 7.0.0'dan beri kararlı.
+7.11.0 sürümü (2026-11-16), geliştiricinin v7 sağlamlaştırma serisini indirir: dayanıklılık sözlüğü ve görünür kontrol kuralları kılavuza girer, `verify` bitmiş planların salt okunur bir uyum denetimini kazanır, paket belgeleri dayanıklılık ve token iddialarını tam olarak ifade eder, README sloganı anlama testinin kazananıyla değişir ve canlı create yolu Lite paketini komut bütçesi içinde tutar.
+
+7.12.0 sürümü (2026-11-16), planları herdr-peers döngüsüne kaydeder: bir plan, bir halef listesiyle liderliğini talep eder; böylece `autopilot --loop` ve fleet arayüzü her açık planı görür ve onu sonuna kadar çalışır tutar; bir Dailybot bildiricisi kilometre taşlarını raporlar. Eklenti tanımlayıcıları herdr-peers v1.3.1 ve coding-agents-kit v1.3.0'a taşınır — bu sitenin sabitlediği sürümlerin aynısı.
+
+Yüklü skill sürümü: **7.12.0**, 7.0.0'dan beri kararlı.

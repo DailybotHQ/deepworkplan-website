@@ -68,7 +68,7 @@ The **handoff packet** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/dwp-h
 
 ## Lead succession
 
-herdr-peers `v1.3.0` keeps a lead record per plan — lead, epoch, succession list and lanes — and resolves the address `lead` to the current lead, so no lane brief hard-codes the lead's pane.
+herdr-peers `v1.3.1` keeps a lead record per plan — lead, epoch, succession list and lanes — and resolves the address `lead` to the current lead, so no lane brief hard-codes the lead's pane.
 
 - **Claim first, then launch.** The lead runs `herdr-peers lead claim --plan <P> --succession <A,B>` before it launches any lane — the `lead` address resolves only once a record exists — refreshes the record with `--lanes <A,B>` as lanes start, and runs `lead release` when the plan is done. From herdr-peers (`v0.3.2`) the record keeps the claiming repository locally, and a plan with the same id in another repository is named `--plan <repo>/<id>`. The default succession is its planned successor, then lanes in the plan's own checkout by launch order, then any lane on the same host; lanes in containers or on other machines come last.
 - **Handover, planned.** At `low` the lead names a successor-designate. At `critical` it writes a lead packet — lane table, open asks, release order, pending merges, decisions — runs `herdr-peers lead handover <addr> --plan <P>`, which raises the epoch and notifies every lane, and stops. The successor accepts the packet, resumes the orchestrator plan and re-checks every lane.
