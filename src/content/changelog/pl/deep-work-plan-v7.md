@@ -64,7 +64,7 @@ Wydanie 7.10.2 (2026-11-15) przesuwa pinning ekosystemu wraz z dzisiejszymi wyda
 
 Wydanie 7.11.0 (2026-11-16) wprowadza serię utwardzenia v7 od dewelopera: glosarium trwałości i widoczne reguły kontroli wchodzą do przewodnika, `verify` zyskuje read-only audyt zgodności ukończonych planów, dokumenty pakietu precyzyjnie formułują twierdzenia o trwałości i tokenach, tagline README zostaje zastąpiony zwycięzcą testu zrozumiałości, a żywa ścieżka create utrzymuje pakiet Lite w ramach jego budżetu instrukcji.
 
-Wydanie 7.12.0 (2026-11-16) rejestruje plany w pętli herdr-peers: plan roszczy sobie prowadzenie z listą następców, dzięki czemu `autopilot --loop` i fleet UI widzą każdy otwarty plan i utrzymują go w biegu do końca, a powiadamiacz Dailybot raportuje kamienie milowe; deskryptory addonów przechodzą na herdr-peers v1.3.1 i coding-agents-kit v1.3.0
+Wydanie 7.12.0 (2026-11-16) rejestruje plany w pętli herdr-peers: plan roszczy sobie prowadzenie z listą następców, dzięki czemu `autopilot --loop` i fleet UI widzą każdy otwarty plan i utrzymują go w biegu do końca, a powiadamiacz Dailybot raportuje kamienie milowe; deskryptory addonów przechodzą na herdr-peers v1.3.1 i coding-agents-kit v1.3.0.
 
 Wydanie 7.12.1 (2026-11-16) naprawia powiadamiacz Dailybot addonu Herdr: przyjmuje teraz nazwę zdarzenia `herdr-peers/plan-event-v1` emitowaną przez herdr-peers, ogranicza stdin powiadamiacza do 64 KiB i mapuje `plan_lead_moved`; deskryptory addonów przechodzą na coding-agents-kit v1.4.0, którego `ak update` jest udokumentowany jako wywoływany wyłącznie przez człowieka.
 

@@ -64,7 +64,7 @@ Release 7.10.2 (2026-11-15) moves the ecosystem pins with the day's releases: th
 
 Release 7.11.0 (2026-11-16) lands the developer's v7 hardening series: the durability glossary and the visible control rules enter the guide, `verify` gains a read-only compliance audit of finished plans, the pack docs state durability and token claims precisely, the README tagline is replaced by the comprehension-test winner, and the live create path keeps the Lite bundle inside its instruction budget.
 
-Release 7.12.0 (2026-11-16) registers plans with the herdr-peers loop: a plan claims its lead with a succession list, so `autopilot --loop` and the fleet UI can see every open plan and keep it running to its end, and a Dailybot notifier reports the milestones; the addon descriptors move to herdr-peers v1.3.1 and coding-agents-kit v1.3.0
+Release 7.12.0 (2026-11-16) registers plans with the herdr-peers loop: a plan claims its lead with a succession list, so `autopilot --loop` and the fleet UI can see every open plan and keep it running to its end, and a Dailybot notifier reports the milestones; the addon descriptors move to herdr-peers v1.3.1 and coding-agents-kit v1.3.0.
 
 Release 7.12.1 (2026-11-16) fixes the Herdr addon's Dailybot notifier: it now accepts the `herdr-peers/plan-event-v1` event name herdr-peers emits, caps the notifier's stdin at 64 KiB and maps `plan_lead_moved`; the addon descriptors move to coding-agents-kit v1.4.0, whose `ak update` is documented as human-invoked only.
 
