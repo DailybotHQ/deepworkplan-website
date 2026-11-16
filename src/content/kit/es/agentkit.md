@@ -69,7 +69,7 @@ git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./c
 ak doctor
 ```
 
-Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v1.3.0`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
+Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v1.4.0`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
 
 | Elemento | Valor |
 |---|---|
@@ -85,7 +85,7 @@ La versión 1.2.0 añade **`ak last`**: cada lanzamiento interactivo registra su
 
 La versión 1.3.0 del kit (interfaz 1 sin cambios) añade **pick-v2**: `ak pick --kinds codex,claude` ordena entre kinds, `--model-for KIND=NAME` sobrescribe el modelo por kind, y `--json` devuelve el contrato de lanzamiento — `launch.argv` con `launch.permissions` (`auto` o `ask`) y una forma `qualifies: false`. `--model` pasa a ser un flag principal mapeado al flag propio de cada CLI (codex `-m`) — un cambio de comportamiento para los scripts que pasaban `--model` a través.
 
-La versión 1.4.0 del kit (interfaz 1 sin cambios) añade **`ak update`**, de invocación solo humana: lleva un CLI a la versión más reciente del proveedor con la verificación de `ak install` — descubre, verifica, instala y vuelve a fijar el `providers.toml` de este kit de forma atómica (se conserva un `.bak`). `--take-over` sustituye un symlink gestionado por el proveedor, las descargas se rechazan salvo que se nombren, y la actualización solo cuenta cuando el PATH resuelve la nueva versión.
+La versión 1.4.0 del kit (interfaz 1 sin cambios) añade **`ak update`**, de invocación solo humana: lleva un CLI a la versión más reciente del proveedor con la verificación de `ak install` — descubre, verifica, instala y vuelve a fijar el `providers.toml` de este kit de forma atómica (se conserva un `.bak`). `--take-over` sustituye un symlink gestionado por el proveedor, las bajadas de versión se rechazan salvo que se nombren, y la actualización solo cuenta cuando el PATH resuelve la nueva versión.
 
 ## Autonomía por defecto, con una exclusión que siempre prevalece
 

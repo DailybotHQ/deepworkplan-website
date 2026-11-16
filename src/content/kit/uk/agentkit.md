@@ -69,7 +69,7 @@ git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./c
 ak doctor
 ```
 
-Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v1.3.0`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
+Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v1.4.0`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
 
 | Елемент | Значення |
 |---|---|
