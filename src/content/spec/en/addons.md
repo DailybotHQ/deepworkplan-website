@@ -89,6 +89,8 @@ A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (p
 - **Behavior:** the peer protocol (stamp, grant, reply, loop guard, depth and fan-out limits) lives in herdr-peers, never in the pack; any use needs the contract grant `agent_delegation`, and a delegate's result stays asserted until the plan's own runner observes it
 - **When offered:** explicit opt-in during Phase 7b; read-only detection of `herdr` and `herdr-peers`; the transport is usable only inside a Herdr session
 
+- **Loop:** Herdr v2.0.0 also provides the optional, human-started `herdr-peers autopilot --loop` for bounded plan continuation and successor takeover. See [Loop engineering](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (seventh addon)
 
 A thin integrator of [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (pinned `v1.0.1`, interface `1`), the terminal editor for Deep Work Plan (Neovim 0.12+).

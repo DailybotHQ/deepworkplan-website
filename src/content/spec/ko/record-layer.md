@@ -26,6 +26,7 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe`와 `delegation` 이벤트([위임](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` 및 루프 권한 |
 
 7.x 팩이 생성하는 새 계획은 기본적으로 v7입니다. 명시적으로 `v6`을 요청하면 여전히 v6 계약이 구체화됩니다. 계획은 세대를 바꾸는 일이 결코 없으며, 세대가 섞인 저널은 거부되어야(MUST) 합니다. 두 세대 모두 동일한 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 형태로 투영됩니다.
 

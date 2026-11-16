@@ -89,6 +89,8 @@ section: Addons
 - **동작:** 피어 프로토콜(스탬프, 승인, 응답, 루프 가드, 깊이 및 팬아웃 제한)은 팩이 아닌 herdr-peers에 존재함; 모든 사용에는 contract 권한 `agent_delegation`이 필요하며, 위임받은 에이전트의 결과는 계획 자체의 러너가 관찰할 때까지 주장된 상태로 남음
 - **제안 시점:** 7b 단계에서 명시적 옵트인; `herdr`와 `herdr-peers`의 읽기 전용 감지; 이 전송 수단은 Herdr 세션 안에서만 사용 가능
 
+- **루프:** Herdr v2.0.0은 범위 내 계획 지속과 후임자 인계를 위한 선택적 인간 시작 명령 `herdr-peers autopilot --loop`도 제공합니다. [루프 엔지니어링](/spec/loop-engineering)을 참조하세요.
+
 ### DeepWorkPlan Vim(일곱 번째 애드온)
 
 [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)(고정 버전 `v1.0.1`, 인터페이스 `1`)의 얇은 통합 계층으로, Deep Work Plan을 위한 터미널 편집기입니다(Neovim 0.12+).

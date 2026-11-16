@@ -26,6 +26,7 @@ URL `schema` milik kontrak menamai **generasinya**, dan manifest serta setiap pe
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` dan peristiwa `delegation` ([Delegasi](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` dan wewenang loop |
 
 Rencana baru yang dibuat oleh paket 7.x adalah v7 secara default; permintaan `v6` yang eksplisit tetap mematerialisasikan kontrak v6. Sebuah rencana tidak pernah berganti generasi, dan jurnal yang mencampur generasi MUST ditolak. Kedua generasi diproyeksikan ke bentuk [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) yang sama.
 

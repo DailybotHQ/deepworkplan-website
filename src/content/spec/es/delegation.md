@@ -100,3 +100,5 @@ Un orquestador nunca delega las tareas de un **plan hijo**: los hijos se ejecuta
 - [Capa de registros](/spec/record-layer) — el contrato y el diario que esta página amplía.
 - [Recursos y capacidades](/spec/resources-and-abilities) — capacidades, concesiones y el registro de addons.
 - [Addon Herdr](/kit/herdr) y [addon Agentkit](/kit/agentkit) — los dos transportes.
+
+- [Ingeniería del ciclo](/spec/loop-engineering) — the plan loop and its bounded autonomy.

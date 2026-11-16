@@ -26,6 +26,7 @@ A URL `schema` do contrato nomeia sua **geração**, e o manifesto e cada evento
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` e o evento `delegation` ([Delegação](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` e autoridade do ciclo |
 
 Os novos planos criados pelo pacote 7.x são v7 por padrão; um pedido explícito de `v6` ainda materializa um contrato v6. Um plano nunca muda de geração, e um diário que mistura gerações DEVE (MUST) ser recusado. Ambas as gerações são projetadas no mesmo formato [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 

@@ -89,6 +89,8 @@ Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (
 - **Perilaku:** protokol peer (stamp, grant, reply, loop guard, batas kedalaman dan fan-out) berada di herdr-peers, tidak pernah di dalam paket; setiap penggunaan memerlukan grant kontrak `agent_delegation`, dan hasil delegasi tetap berstatus klaim sampai runner milik rencana itu sendiri mengamatinya
 - **Kapan ditawarkan:** opt-in eksplisit selama Fase 7b; deteksi hanya-baca atas `herdr` dan `herdr-peers`; transport hanya dapat digunakan di dalam sesi Herdr
 
+- **Loop:** Herdr v2.0.0 juga menyediakan `herdr-peers autopilot --loop` opsional yang dimulai manusia untuk kelanjutan rencana terbatas dan pengambilalihan penerus. Lihat [Rekayasa loop](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (addon ketujuh)
 
 Integrator tipis dari [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (dipatok `v1.0.1`, antarmuka `1`), editor terminal untuk Deep Work Plan (Neovim 0.12+).

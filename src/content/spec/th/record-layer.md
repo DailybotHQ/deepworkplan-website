@@ -26,6 +26,7 @@ URL `schema` ของสัญญาระบุ **รุ่น** ของม�
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` และเหตุการณ์ `delegation` ([การมอบหมายงาน](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` และอำนาจของลูป |
 
 แผนใหม่ที่สร้างโดยแพ็ก 7.x เป็น v7 โดยค่าเริ่มต้น คำขอ `v6` ที่ระบุชัดยังคงสร้างสัญญา v6 แผนไม่เคยเปลี่ยนรุ่น และ journal ที่ผสมหลายรุ่น MUST ถูกปฏิเสธ ทั้งสองรุ่นฉายเข้าสู่รูปแบบ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) เดียวกัน
 

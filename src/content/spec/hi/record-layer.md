@@ -26,6 +26,7 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` और `delegation` घटना ([प्रत्यायोजन](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` और लूप अधिकार |
 
 7.x पैक द्वारा बनाई गई नई योजनाएँ डिफ़ॉल्ट रूप से v7 होती हैं; स्पष्ट `v6` अनुरोध अब भी v6 अनुबंध बनाता है। कोई योजना कभी पीढ़ी नहीं बदलती, और पीढ़ियों को मिलाने वाला जर्नल अस्वीकार MUST किया जाना चाहिए। दोनों पीढ़ियाँ एक ही [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) आकार में प्रक्षेपित होती हैं।
 

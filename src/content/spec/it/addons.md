@@ -82,12 +82,14 @@ L'**[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (market
 
 ### Herdr (sesto addon)
 
-Un integratore leggero di [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fissato a `v2.0.0`, protocollo `1`), il trasporto di delega **interattiva** dei piani v7.
+Un integratore leggero di [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fissato a `v2.0.0`, protocollo `2`), il trasporto di delega **interattiva** dei piani v7.
 
 - **Pagina kit:** [Herdr](/kit/herdr)
 - **Cosa aggiunge:** un piano può affidare un'attività delimitata a un agente di coding in un altro pannello [Herdr](https://herdr.dev), sulla stessa macchina o su una che Herdr raggiunge via SSH, e registrare nel journal la sua unica risposta autorizzata
 - **Comportamento:** il protocollo tra peer (stamp, grant, risposta, protezione dai loop, limiti di profondità e di fan-out) vive in herdr-peers, mai nel pacchetto; qualsiasi uso richiede la concessione del contratto `agent_delegation`, e il risultato di un delegato resta un'asserzione finché il runner del piano stesso non lo osserva
 - **Quando offerto:** opt-in esplicito durante la Fase 7b; rilevamento in sola lettura di `herdr` e `herdr-peers`; il trasporto è utilizzabile solo all'interno di una sessione Herdr
+
+- **Ciclo:** Herdr v2.0.0 offre anche `herdr-peers autopilot --loop`, facoltativo e avviato da una persona, per continuare i piani entro i limiti e passare a un successore. Vedi [Ingegneria del ciclo](/spec/loop-engineering).
 
 ### DeepWorkPlan Vim (settimo addon)
 

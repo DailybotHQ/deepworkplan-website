@@ -100,3 +100,5 @@ v1、v2、v5 与 v6 的模式字节保持不变。一份从不委派的计划，
 - [记录层](/spec/record-layer) —— 本页所扩展的契约与日志。
 - [资源与能力](/spec/resources-and-abilities) —— 能力、授予与附加组件注册表。
 - [Herdr 附加组件](/kit/herdr) 与 [Agentkit 附加组件](/kit/agentkit) —— 两种传输方式。
+
+- [循环工程](/spec/loop-engineering) — the plan loop and its bounded autonomy.

@@ -26,6 +26,7 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` 与 `delegation` 事件（[委派](/spec/delegation)） |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` 和循环权限 |
 
 7.x 技能包创建的新计划默认是 v7；明确的 `v6` 请求仍会物化一份 v6 契约。计划绝不改变代际，混合了不同代际的日志 MUST 被拒绝。两个代际都投影到同一个 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 形态。
 

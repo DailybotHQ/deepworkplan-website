@@ -89,6 +89,8 @@ Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przy
 - **Zachowanie:** protokół peerów (stempel, uprawnienie, odpowiedź, ochrona przed pętlą, limity głębokości i rozgałęzienia) znajduje się w herdr-peers, nigdy w pakiecie; każde użycie wymaga uprawnienia kontraktu `agent_delegation`, a wynik delegata pozostaje jedynie deklarowany, dopóki nie zaobserwuje go własny wykonawca planu
 - **Kiedy proponowany:** wyraźna zgoda w Phase 7b; wykrywanie `herdr` i `herdr-peers` tylko do odczytu; transport działa wyłącznie wewnątrz sesji Herdr
 
+- **Pętla:** Herdr v2.0.0 oferuje także opcjonalne, uruchamiane przez człowieka `herdr-peers autopilot --loop` do ograniczonej kontynuacji planu i przejęcia przez następcę. Zobacz [Inżynierię pętli](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (siódmy addon)
 
 Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v1.0.1`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).

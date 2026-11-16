@@ -100,3 +100,5 @@ v1, v2, v5, v6 스키마의 바이트는 변경되지 않습니다. 위임하지
 - [기록 레이어](/spec/record-layer) — 이 페이지가 확장하는 계약과 저널.
 - [리소스와 능력](/spec/resources-and-abilities) — 능력, 권한 부여, 애드온 레지스트리.
 - [Herdr 애드온](/kit/herdr)과 [Agentkit 애드온](/kit/agentkit) — 두 가지 전송 방식.
+
+- [루프 엔지니어링](/spec/loop-engineering) — 계획 루프와 제한된 자율성.

@@ -100,3 +100,5 @@ Ein Orchestrator delegiert niemals die Aufgaben eines **Kindplans**: Kindpläne 
 - [Aufzeichnungsschicht](/spec/record-layer) — der Vertrag und das Journal, die diese Seite erweitert.
 - [Ressourcen und Fähigkeiten](/spec/resources-and-abilities) — Fähigkeiten, Berechtigungen und die Addon-Registry.
 - [Herdr-Addon](/kit/herdr) und [Agentkit-Addon](/kit/agentkit) — die beiden Transporte.
+
+- [Loop Engineering](/spec/loop-engineering) — der Planzyklus und seine begrenzte Autonomie.

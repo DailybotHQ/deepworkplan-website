@@ -100,3 +100,5 @@ An orchestrator never delegates a **child plan's** tasks: children run in their 
 - [Record layer](/spec/record-layer) — the contract and journal this page extends.
 - [Resources and abilities](/spec/resources-and-abilities) — abilities, grants and the addon registry.
 - [Herdr addon](/kit/herdr) and [Agentkit addon](/kit/agentkit) — the two transports.
+
+- [Loop engineering](/spec/loop-engineering) — the plan loop and its bounded autonomy.

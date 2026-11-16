@@ -100,3 +100,5 @@ Bir orkestratör bir **alt planın** görevlerini asla devretmez: alt planlar, d
 - [Kayıt katmanı](/spec/record-layer) — bu sayfanın genişlettiği sözleşme ve günlük.
 - [Kaynaklar ve yetenekler](/spec/resources-and-abilities) — yetenekler, yetkiler ve eklenti kaydı.
 - [Herdr eklentisi](/kit/herdr) ve [Agentkit eklentisi](/kit/agentkit) — iki taşıyıcı.
+
+- [Döngü mühendisliği](/spec/loop-engineering) — plan döngüsü ve sınırlı özerkliği.

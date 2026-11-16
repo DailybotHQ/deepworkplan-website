@@ -26,6 +26,7 @@ Die `schema`-URL des Vertrags benennt seine **Generation**, und das Manifest sow
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` und das Ereignis `delegation` ([Delegation](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` und Loop-Berechtigungen |
 
 Neue Pläne, die das 7.x-Paket erstellt, sind standardmäßig v7; eine ausdrückliche `v6`-Anforderung materialisiert weiterhin einen v6-Vertrag. Ein Plan wechselt nie die Generation, und ein Journal, das Generationen mischt, MUSS abgelehnt werden. Beide Generationen projizieren in dieselbe Form [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
