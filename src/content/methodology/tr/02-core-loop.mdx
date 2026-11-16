@@ -78,4 +78,4 @@ v6 aynı plan → görev → doğrulama kapısı → tamamlama metodolojisini, s
 
 ## Çekirdek döngüden kapalı döngüye
 
-Herdr ile `execute`, lead ve halefiyeti kaydeder; insanın başlattığı `herdr-peers autopilot --loop` boşta lead'i hatırlatır, olayları bildirir ve lead kaybolursa kayıtlı halefinden devralmasını ister. Daemon yetki değil süreklilik sağlar. [Döngü mühendisliği](/methodology/08-loop-engineering) sayfasına bakın.
+Çekirdek işlemler bir planın nasıl yürütüldüğünü açıklar. İsteğe bağlı Herdr eklentisiyle `execute`, planın lider kaydını üstlenir (plan halefleri adlandırıyorsa bir halefiyet de ekler); böylece insanın başlattığı `herdr-peers autopilot --loop` boşta duran lideri dürtebilir, olayları bildirebilir ve lider ortadan kalktığında listedeki bir haleften devralmasını isteyebilir. Daemon yetki değil, süreklilik ekler; [Loop engineering](/tr/methodology/08-loop-engineering) sayfasına bakın.

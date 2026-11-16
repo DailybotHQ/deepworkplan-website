@@ -103,4 +103,4 @@ icon: network
 
 ## 루프를 위한 계획 등록
 
-Herdr가 켜져 있으면 pack의 `execute`가 계획 lead 기록을 확보하고 후계자를 기록합니다. 사람이 `herdr-peers autopilot --loop`을 시작해 열린 계획을 진행하고 lead가 사라지면 지정된 후계자에게 takeover를 요청할 수 있습니다. [루프 엔지니어링](/methodology/08-loop-engineering)을 참조하세요.
+선택적 Herdr 애드온이 활성화되면 팩의 `execute`가 계획의 lead 기록을 확보하고, 계획이 후계자를 지정한 경우 승계 순서를 추가합니다. 사람은 `herdr-peers autopilot --loop`을 시작해 열린 계획을 계속 진행하고, lead가 사라지면 목록의 후계자에게 takeover를 요청할 수 있습니다. daemon은 등록된 계획만 관찰합니다. [Loop engineering](/ko/methodology/08-loop-engineering)을 참조하세요.

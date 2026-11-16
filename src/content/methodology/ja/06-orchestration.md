@@ -103,4 +103,4 @@ icon: network
 
 ## ループのための計画登録
 
-Herdr アドオンが有効なら、pack の `execute` が計画の lead レコードを取得し、後継を記録します。人間は `herdr-peers autopilot --loop` を起動して未完了計画を進め、lead がいない場合に指定済み後継へ takeover を依頼できます。daemon は登録済み計画のみを監視します。[ループエンジニアリング](/methodology/08-loop-engineering)を参照してください。
+任意の Herdr アドオンが有効なら、パックの `execute` が計画の lead レコードを取得し、計画が後継者を指定している場合は後継の順序を追加します。人間は `herdr-peers autopilot --loop` を起動して未完了の計画を進め、lead がいない場合に指定済みの後継者へ takeover を依頼できます。daemon は登録済みの計画のみを監視します。[Loop engineering](/ja/methodology/08-loop-engineering)を参照してください。

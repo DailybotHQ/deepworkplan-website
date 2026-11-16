@@ -120,4 +120,4 @@ Udowodnij działanie pętli, zanim zaczniesz na niej polegać. Na repozytorium t
 
 ## Zamykanie pętli wykonania
 
-Opcjonalny daemon kontynuuje zatwierdzony plan z rekordu lead, ponagla bez dodawania uprawnień i prosi wskazanego następcę o przejęcie po zniknięciu lead. Uruchamia go człowiek; poświadczenia, logowanie i gates C1–C7 pozostają po stronie człowieka. Zobacz [Inżynieria pętli](/methodology/08-loop-engineering).
+Opcjonalny demon pętli kontynuuje zatwierdzony plan na podstawie jego rekordu prowadzącego, ponagla bez dodawania uprawnień i prosi następcę z listy o przejęcie, gdy prowadzącego zabraknie. Uruchamia go człowiek; poświadczenia, logowanie i bramki C1–C7 planu pozostają działaniami człowieka. Zobacz [Loop engineering](/pl/methodology/08-loop-engineering).

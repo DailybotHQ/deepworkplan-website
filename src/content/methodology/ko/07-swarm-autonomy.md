@@ -120,4 +120,4 @@ herdr-peers `v2.0.0`은 계획마다 리드 기록(리드, 에포크, 승계 목
 
 ## 실행 루프 닫기
 
-선택적 daemon은 lead 기록을 바탕으로 계획을 계속하고 권한을 추가하지 않은 채 알리며, lead가 사라지면 목록의 후계자에게 takeover를 요청합니다. 사람이 시작하며 자격 증명, 로그인, C1–C7 gates는 사람이 처리합니다. [루프 엔지니어링](/methodology/08-loop-engineering)을 참조하세요.
+선택적 루프 daemon은 lead 기록을 바탕으로 승인된 계획을 계속하고, 권한을 추가하지 않은 채 알리며, lead가 사라지면 목록의 후계자에게 takeover를 요청합니다. daemon은 사람이 시작하며, 자격 증명, 로그인, 계획의 C1–C7 gates는 계속 사람이 처리합니다. [Loop engineering](/ko/methodology/08-loop-engineering)을 참조하세요.

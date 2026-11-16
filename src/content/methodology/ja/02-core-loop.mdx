@@ -80,4 +80,4 @@ v6 は同じ計画 → タスク → 検証ゲート → 完了の方法論、�
 
 ## コアループから閉じたループへ
 
-コア操作は計画の実行方法を示します。Herdr アドオンが有効なら、`execute` が lead と後継を登録し、人間が起動する `herdr-peers autopilot --loop` がアイドル状態の lead に促し、イベントを報告し、lead がいなくなった際に指定済み後継へ takeover を依頼できます。daemon は権限ではなく継続性を加えます。[ループエンジニアリング](/methodology/08-loop-engineering)を参照してください。
+コア操作は計画の実行方法を示します。任意の Herdr アドオンが有効なら、`execute` が計画の lead レコードを取得し、計画が後継者を指定している場合は後継の順序を追加します。これにより、人間が起動する `herdr-peers autopilot --loop` がアイドル状態の lead に促し、イベントを報告し、lead がいなくなった際に指定済みの後継者へ takeover を依頼できます。daemon が加えるのは権限ではなく継続性です。[Loop engineering](/ja/methodology/08-loop-engineering)を参照してください。

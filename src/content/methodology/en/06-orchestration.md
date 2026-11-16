@@ -103,4 +103,4 @@ A long run outlives any one account. From coding-agents-kit (`v0.7.1`) and herdr
 
 ## Registering a plan for the loop
 
-When the optional Herdr addon is active, pack `execute` claims the plan’s lead record with a succession. The human may start `herdr-peers autopilot --loop` to continue open plans and ask the listed successor to take over a gone lead. The daemon observes registered plans only; see [Loop engineering](/methodology/08-loop-engineering).
+When the optional Herdr addon is active, pack `execute` claims the plan’s lead record, adding a succession when the plan names successors. The human may start `herdr-peers autopilot --loop` to continue open plans and ask the listed successor to take over a gone lead. The daemon observes registered plans only; see [Loop engineering](/methodology/08-loop-engineering).

@@ -120,4 +120,4 @@ Hãy chứng minh vòng lặp trước khi dựa vào nó. Trên một repositor
 
 ## Khép kín vòng thực thi
 
-Daemon tùy chọn tiếp tục kế hoạch đã duyệt, nhắc mà không thêm quyền hạn và yêu cầu người kế nhiệm tiếp quản khi lead biến mất. Con người khởi động daemon; thông tin xác thực, đăng nhập và gates C1–C7 vẫn do con người xử lý. Xem [Kỹ thuật vòng lặp](/methodology/08-loop-engineering).
+Daemon vòng lặp tùy chọn tiếp tục một kế hoạch đã duyệt từ bản ghi lead của nó, nhắc mà không thêm quyền hạn và yêu cầu một người kế nhiệm trong danh sách tiếp quản khi lead không còn. Con người khởi động daemon; thông tin xác thực, đăng nhập và các cổng C1–C7 của kế hoạch vẫn là việc của con người. Xem [Loop engineering](/vi/methodology/08-loop-engineering).

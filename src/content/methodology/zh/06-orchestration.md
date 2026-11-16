@@ -103,4 +103,4 @@ icon: network
 
 ## 为循环注册计划
 
-启用 Herdr 后，pack 的 `execute` 会认领计划 lead 记录并登记继任者。人类可启动 `herdr-peers autopilot --loop` 以继续未完成计划，并在 lead 消失时请已列出的继任者接管。daemon 只观察已注册计划；参见[循环工程](/methodology/08-loop-engineering)。
+启用可选的 Herdr 插件后，pack 的 `execute` 会认领计划的 lead 记录，并在计划指定了继任者时添加继任顺序。人类可启动 `herdr-peers autopilot --loop` 以继续未完成的计划，并在 lead 消失时请已列出的继任者接管。daemon 只观察已注册的计划；参见[Loop engineering](/zh/methodology/08-loop-engineering)。

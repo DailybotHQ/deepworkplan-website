@@ -1,40 +1,46 @@
 ---
-title: Döngü mühendisliği
-description: "İnsan tarafından başlatılan daemon, onaylı Deep Work Plan’ları kayıt, halefiyet, hatırlatma ve bildirimlerle kayıtlı yetki sınırlarında tamamlatır."
+title: Loop engineering
+description: "İnsanın başlattığı bir daemon’un onaylı Deep Work Plan’ları kayıt, halefiyet, dürtmeler, olaylar ve bildirimlerle kayıtlı yetki içinde nasıl ilerlettiği."
 order: 8
 lang: tr
-summary: Onaylı planı kayıtlı yetkisi içinde ilerleten uçtan uca döngü.
+summary: Onaylı bir planı kayıtlı yetkisi içinde ilerlemede tutan uçtan uca yaşam döngüsü.
 icon: repeat
 ---
 
-# Döngü mühendisliği
+# Loop engineering
 
-**Önce belirtim, kapalı döngü: depo harness'tir ve plan kendi kendine sonuna kadar yürür.** Bu bölüm, ilk yürütme turundan sonra planı ilerleten isteğe bağlı mekanizmayı açıklar. Plan kalıcı belirtimdir; döngü süreklilik sağlar, yeni yetki vermez.
+**Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.** Bu bölüm, ilk yürütme turundan sonra planı ilerlemede tutan isteğe bağlı mekanizmayı açıklar. Plan kalıcı spesifikasyon olarak kalır; döngü yeni yetki değil, süreklilik sağlar.
 
-## Planı kaydetme
+## Planı kaydedin
 
-Herdr eklentisi etkin olduğunda pack'in `execute` akışı planın lead kaydını üstlenir ve halefiyet sırasını kaydeder. Kayıt planı, mevcut lead'i, epoch'u ve döngünün izleyeceği sıralı halefleri belirtir. Lead kaydı olmayan planlar izlenmez. Eklenti isteğe bağlıdır; temel yöntem tek oturumda veya insan koordinasyonlu devirle çalışır. Kayıt işi onaylamaz ve yetkiyi genişletmez. v8'de onaylı plan, kendi kaydındaki yetki kapsamında sona kadar yürür; kabul ölçütleri ve gates geçerliliğini korur.
+Herdr eklentisi etkin olduğunda paketin `execute` akışı planın lider kaydını üstlenir (`resume` de onu yeniden üstlenir) ve plan halefleri adlandırıyorsa bir halefiyet ekler; haleflere devir yalnızca kaydedilmiş bir halefiyet için çalışır. Bu kayıt döngüye izleyeceği kesin planı, mevcut lideri, epoch’u ve sıralı halefleri verir. Lider kaydı olmayan planlar izlenmez. Eklenti isteğe bağlı kalır: o olmadan da temel metodoloji tek bir oturumda veya insanın koordine ettiği bir devirle çalışır.
 
-## Daemon'ı insan başlatır
+Plan kaydı işi onaylamaz ve planın yetkisini genişletmez. v8’de onaylı bir plan, o planda kayıtlı yetki içinde sonuna kadar çalışır. Kabul kriterleri ve kapıları yürütme boyunca bağlayıcı kalır.
 
-İnsan, Herdr ortamında `herdr-peers autopilot --loop` komutunu başlatır. Bu yerel bir arka plan daemon'ıdır; oturum açma öğesi veya sistem hizmeti değildir. Etkin makinelerdeki kayıtlı planları izler; plan açıksa, hiçbir lane çalışmıyorsa ve yanıt beklenmiyorsa boşta kalan lead'e devam etmesini hatırlatır. Sabit mesaj, kayıtlı yetki ve gates'e uyarak onaylı planı tamamlamasını ister.
+## Daemon’u elle başlatın
 
-Daemon oturum açmaya, kimlik bilgisi istemlerine veya Claude'un bypass-permissions onayına dokunmaz. Reddetme seçmez, ekrandaki serbest metni çalıştırmaz ve izin oluşturmaz. Hatırlatma yalnızca devam etmeyi ister, yetki eklemez. Lead engelleri kaydetmeye ve gates'e uymaya devam eder. İlerleme olmadan üç hatırlatmanın ardından daemon durur ve `plan_stalled` bildirir.
+Herdr ortamında `herdr-peers autopilot --loop` komutunu bir insan başlatır. Bu, yerel bir arka plan daemon’udur; oturum açma öğesi veya sistem hizmeti değildir. Etkin makinelerdeki kayıtlı planları izler ve planı açık kaldığında, hiçbir şerit çalışmadığında ve bekleyen bir yanıt olmadığında boşta duran lideri devam etmesi için dürter. İstem sabittir: kapılarına ve kayıtlı yetkisine uyarak onaylı planı sonuna kadar sürdürmek.
 
-## Liderliği koruma
+Daemon bir oturum açmaya, kimlik bilgisi istemine veya Claude’un bypass-permissions onayına dokunmaz. Bir reddetme seçeneğini, serbest metin seçeneğini veya bir ajanın izinlerini genişleten bir satırı asla seçmez. Bir dürtme yalnızca bir ajandan devam etmesini ister; yetki eklemez. Lider engelleri kaydetmeyi ve planın kapılarına uymayı sürdürür. İlerleme olmadan geçen üç istemden sonra daemon dürtmeyi bırakır ve `plan_stalled` bildirir.
 
-Lead kaybolursa daemon listedeki ilk erişilebilir halefinden takeover yordamını çalıştırmasını ister. Kaydın epoch'u artar ve alıcılar halefiyet sırasını uygular. Protocol 2 lead atamasını da destekler, ancak yalnızca insan plan üzerinde açıkça izin verirse; daemon bu izni kendisi veremez. Her merge, tag veya release öncesi mevcut lead `herdr-peers lead verify --plan <id>` çalıştırıp plan makinelerindeki kaydı doğrular. Halef planı ve gates'i devralır; ek yetki kazanmaz. C1–C7 kurallarına göre insan eylemi gerektiren gate'e gelinirse döngü ihtiyacı bildirir ve orada durur. Kimlik bilgileri ile oturum açma da insana aittir. Diğer ilerlemeler için her adımın gözetimi istenmeden insan bilgilendirilir.
+## Liderliği çitli tutun
 
-## İsteğe bağlı brain ve kuyruk
+Lider ortadan kalkarsa daemon, listedeki erişilebilen ilk haleften devralma prosedürünü çalıştırmasını ister. Lider kaydı epoch ile ilerler ve alıcılar halefiyet sırasını uygular. Protokol 2 lider atamasını da destekler, ancak yalnızca insan izni planda kaydetmişse (`lead claim --allow-appointment`) ve daemon’u `--appoint` ile başlatmışsa; daemon bu izni kendisi veremez. Herhangi bir birleştirme, etiket veya sürümden önce mevcut lider, kaydı planın makinelerinde denetlemek için `herdr-peers lead verify --plan <id>` komutunu çalıştırır.
 
-İsteğe bağlı `--brain`, daemon kurallarının çözemediği durumlar için ayrı bir karar agent'ı başlatır. Brain yalnızca planın izin verdiği kapalı eylem listesinden seçim yapabilir. Tek eyleyen daemon'dır: seçimi doğrular ve uygun eylemi gerçekleştirir; brain'in serbest metnini asla çalıştırmaz. Planda açık yetki yoksa brain plan üzerinde işlem yapmaz.
+Bir halef planı ve kapılarını devralır. Ne halefiyet ne de atama kabul kriterlerini değiştirir ya da kayıtlı yetkinin dışındaki işe izin verir. Plan, C1–C7 kurallarına göre insan eylemi gerektiren bir kapıya ulaşırsa döngü bu ihtiyacı bildirir ve o kapıda durur. Kimlik bilgileri ve oturum açmalar da insan eylemi olarak kalır. Diğer ilerlemelerde insandan her adımı gözetmesi istenmez; insan bilgilendirilir.
 
-Kuyruk, `.dwp/queue.json` içindeki `dwp-queue-v1` belgesini kullanır. Yalnızca pack yazar; daemon sınırlı, salt okunur tüketicidir. `after` bağımlılığı tamamlanmış veya yoksa ve onay geçerliyse plan hazırdır. Daemon yalnızca kayıtlı lead'e sabit mesaj göndererek başlatır: “P planı bu deponun kuyruğunda sıradaki ve onaylı; gates'e uyarak sonuna kadar yürüt.” Döngü `launch` girdilerini başlatmaz. Yürütme ve tamamlama sırasında kuyruk durumunu pack yönetir.
+## İsteğe bağlı beyin ve kuyruk
 
-## Bildirme ve gözlemleme
+İsteğe bağlı `--brain`, daemon kurallarının çözemediği durumlar için ayrılmış bir karar ajanı başlatır. coding-agents-kit 1.3.0 veya sonrasını gerektirir; o olmadan `--brain` ile başlatılan bir daemon başlamayı reddeder. Beyin yalnızca daemon’un her durum için belirlediği kapalı bir eylem listesinden seçim yapabilir: bir dürtme daha, planın liderce çözülebilir olarak işaretlediği bir engeli çözmesi için lidere tek bir sabit istek, insanı bilgilendirmek ya da durumu olduğu gibi bırakmak. Tek eyleyen daemon olarak kalır: bir seçimi doğrular ve uygun bir eylemi gerçekleştirir; beynin serbest metni asla yürütülmez. v8’de bir plan, bir beynin onun üzerinde hareket edip edemeyeceğini de otonomi bloğuna kaydeder.
 
-Plan olayları sıraya alınma, başlama, engellenme, duraklama, lead kaybı ve tamamlanmayı kaydeder. İsteğe bağlı `--notify`, desteklenen olaylar için `plan-event-v1` nesnesi alır; pack'in Dailybot bildiricisi bunları ekip güncellemelerine dönüştürür. Bildirimler ilerlemeyi veya engeli aktarır; işlem yetkilendirmez ve plan kaydının yerini almaz. Filo raporu ve `herdr-peers fleet ui` makineler arasındaki agent'ları ve planları gösterir. Arayüz salt okunurdur; plan durumunu yazmaz ve agent'ları dürtmez.
+Plan kuyruğu `.dwp/queue.json` konumundaki `dwp-queue-v1` belgesini kullanır. Onu plan aracı yazar; daemon sınırlı, salt okunur bir tüketicidir. Kuyruktaki bir plan, `after` bağımlılığı tamamlandığında (veya yoksa) ve onayı geçerli kaldığında uygun hâle gelir. Daemon onu yalnızca kuyruğun adlandırdığı lidere tek bir sabit istem göndererek başlatır: “Plan P is next in the queue of the repository at "R" and approved. In that repository, run the plan tool's execute flow for it (its start gate checks the approval again) and execute it to its end, respecting its gates.” Bir `launch` girdisi bu döngü tarafından başlatılmaz. Kuyruk durumu, yürütme ve sonlandırma ilerledikçe paket tarafından tutulur.
+
+## Bildirin ve gözlemleyin
+
+Plan olayları; takılan, engellenen, liderini kaybeden veya tamamlanan bir planı ve başlayan ya da başlayamayan kuyruktaki bir planı kapsar. İsteğe bağlı `--notify` komutu, desteklenen olaylar için bir `plan-event-v1` nesnesi alır; paketin Dailybot bildiricisi bunları ekip güncellemelerine dönüştürür. Bildirimler ilerlemeyi veya bir engeli raporlar; bir eylemi yetkilendirmez ve plan kaydının yerini almaz.
+
+Filo raporu ve `herdr-peers fleet ui`, dikkat gerektiren işler dâhil, makineler arasındaki ajanları ve planları gösterir. Arayüz salt okunurdur: plan durumu yazmaz ve hiçbir ajana istem göndermez. Bir insanın döngünün durumunu, başka bir kontrol düzlemine dönüşmeden görmesine yardım eder.
 
 ## Sınır
 
-Döngü mühendisliği yürütmeyi onaylı belirtimin çevresinde tamamlar. Plan yetkinin kaynağı, daemon sınırlı kalırken devam, halefiyet ve raporlama olağanlaşır. İnsan daemon'ı başlatır, kimlik bilgileri ve oturum açmayla ilgilenir, yalnızca planın C1–C7 gates'ini veya kayıtlı yetkinin karşılamadığı ihtiyaçları çözer. Amaç, onaylı planın sürekli insan gözetimi olmadan tanımlı sonuna ulaşmasıdır.
+Loop engineering, yürütme döngüsünü onaylı bir spesifikasyonun etrafında kapatır. Devam etmeyi, halefiyeti ve raporlamayı olağan hâle getirirken plan yetkinin kaynağı, daemon da sınırlı kalır. İnsan daemon’u başlatır, kimlik bilgileri ve oturum açmalarla ilgilenir ve yalnızca planın kendi C1–C7 kapılarını veya kayıtlı yetkinin karşılayamadığı diğer ihtiyaçları çözer. Döngünün amacı, onaylı bir planın insan gözetimi gerektirmeden tanımlı sonuna ulaşmasıdır.

@@ -118,6 +118,6 @@ Il journal del piano orchestratore registra lo sciame: avvii e risultati delle c
 
 Dimostra il ciclo prima di farci affidamento. Su un repository di prova con un piccolo piano orchestratore, esegui un lead e almeno tre corsie su account o fornitori diversi. Limita la capacità riportata da una corsia — `AGENTKIT_CAPACITY_CAP=@<profile>=8` abbassa la lettura e non può mai alzarla — e osservala scrivere un pacchetto, il lead avviare un successore che lo accetta e il successore superare il gate. Limita il lead allo stesso modo e osserva la cessione e il nuovo lead completare il piano. Poi registra le evidenze in `analysis_results/` del piano: nessun tasto premuto da una persona, ogni pacchetto, ogni epoca, una richiesta da corsia a corsia e i gate.
 
-## Chiudere il ciclo di esecuzione
+## Chiudere il loop di esecuzione
 
-Il daemon facoltativo continua un piano dal record di lead, sollecita senza aggiungere autorità e chiede al successore indicato di subentrare se il lead scompare. Lo avvia una persona; credenziali, login e gates C1–C7 restano azioni umane. Vedi [Ingegneria del ciclo](/methodology/08-loop-engineering).
+Il daemon facoltativo del loop continua un piano approvato a partire dal suo record di lead, sollecita senza aggiungere autorità e chiede a un successore della lista di subentrare quando il lead non c’è più. Lo avvia una persona; credenziali, login e i gate C1–C7 del piano restano azioni umane. Vedi [Loop engineering](/it/methodology/08-loop-engineering).

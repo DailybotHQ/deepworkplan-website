@@ -120,4 +120,4 @@ herdr-peers `v2.0.0` は計画ごとにリードレコード（リード、エ�
 
 ## 実行ループを閉じる
 
-任意のループ daemon は lead レコードから承認済み計画を続行し、権限を加えずに促し、lead がいない場合は指定済み後継へ takeover を依頼します。起動するのは人間です。認証情報、ログイン、C1–C7 gates は引き続き人間が扱います。[ループエンジニアリング](/methodology/08-loop-engineering)を参照してください。
+任意のループ daemon は lead レコードから承認済み計画を続行し、権限を加えずに促し、lead がいない場合は指定済みの後継者へ takeover を依頼します。起動するのは人間です。認証情報、ログイン、計画の C1–C7 gates は引き続き人間が扱います。[Loop engineering](/ja/methodology/08-loop-engineering)を参照してください。

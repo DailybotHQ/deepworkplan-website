@@ -103,4 +103,4 @@ Một lần chạy dài sống lâu hơn bất kỳ tài khoản đơn lẻ nào
 
 ## Đăng ký kế hoạch cho vòng lặp
 
-Khi Herdr bật, `execute` của pack đăng ký lead và người kế nhiệm. Con người có thể khởi động `herdr-peers autopilot --loop` để tiếp tục kế hoạch mở. Daemon chỉ theo dõi kế hoạch đã đăng ký. Xem [Kỹ thuật vòng lặp](/methodology/08-loop-engineering).
+Khi addon Herdr tùy chọn được bật, `execute` của gói skill nhận bản ghi lead của kế hoạch, thêm danh sách kế nhiệm khi kế hoạch nêu tên người kế nhiệm. Con người có thể khởi động `herdr-peers autopilot --loop` để tiếp tục các kế hoạch đang mở và yêu cầu người kế nhiệm trong danh sách tiếp quản một lead không còn. Daemon chỉ theo dõi các kế hoạch đã đăng ký; xem [Loop engineering](/vi/methodology/08-loop-engineering).

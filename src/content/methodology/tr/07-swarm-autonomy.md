@@ -120,4 +120,4 @@ Döngüye güvenmeden önce onu kanıtlayın. Küçük bir orkestratör planı o
 
 ## Yürütme döngüsünü kapatma
 
-İsteğe bağlı daemon onaylı planı sürdürür ve yetki eklemeden hatırlatır. Daemon'ı insan başlatır; kimlik bilgileri, oturum açma ve C1–C7 gates insan işidir. [Döngü mühendisliği](/methodology/08-loop-engineering) sayfasına bakın.
+İsteğe bağlı döngü daemon’u onaylı bir planı lider kaydından sürdürür, yetki eklemeden dürter ve lider ortadan kalktığında listedeki bir haleften devralmasını ister. Onu bir insan başlatır; kimlik bilgileri, oturum açmalar ve planın C1–C7 kapıları insan eylemi olarak kalır. [Loop engineering](/tr/methodology/08-loop-engineering) sayfasına bakın.

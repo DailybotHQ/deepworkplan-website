@@ -1,40 +1,46 @@
 ---
-title: Rekayasa loop
-description: "Cara daemon yang dimulai manusia menjaga Deep Work Plan yang disetujui tetap berjalan melalui pendaftaran, suksesi, pengingat, dan notifikasi sesuai kewenangan."
+title: Loop engineering
+description: "Cara daemon yang dimulai manusia menjaga Deep Work Plan yang disetujui berjalan lewat registrasi, suksesi, dorongan, event, dan notifikasi sesuai wewenang."
 order: 8
 lang: id
-summary: Siklus penuh yang menjaga rencana disetujui tetap berjalan dalam kewenangan tercatatnya.
+summary: Siklus hidup menyeluruh yang menjaga rencana yang disetujui tetap berjalan dalam wewenang tercatatnya.
 icon: repeat
 ---
 
-# Rekayasa loop
+# Loop engineering
 
-**Spesifikasi lebih dahulu, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.** Bab ini menjelaskan mekanisme opsional untuk melanjutkan rencana setelah giliran eksekusi pertama. Rencana tetap menjadi spesifikasi tahan lama; loop memberi kesinambungan, bukan kewenangan baru.
+**Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.** Bab ini menjelaskan mekanisme opsional yang menjaga rencana tetap berjalan setelah giliran eksekusi pertamanya. Rencana tetap menjadi spesifikasi yang tahan lama; loop memberi kesinambungan, bukan wewenang baru.
 
 ## Daftarkan rencana
 
-Saat addon Herdr aktif, alur `execute` pack mengklaim catatan lead rencana dan mencatat suksesi. Catatan itu menetapkan rencana, lead saat ini, epoch, dan urutan penerus yang diamati loop. Rencana tanpa catatan lead tidak dipantau. Addon ini opsional; metodologi inti tetap berjalan dalam satu sesi atau lewat serah-terima yang dikoordinasikan manusia. Pendaftaran tidak menyetujui pekerjaan atau memperluas otorisasi. Dalam v8, rencana yang disetujui berjalan sampai akhir dalam kewenangan yang tercatat di rencana; kriteria penerimaan dan gates tetap berlaku.
+Saat addon Herdr aktif, alur `execute` milik pack mengklaim catatan lead rencana (dan `resume` mengklaimnya lagi), serta menambahkan suksesi bila rencana menyebutkan penerus; failover hanya berfungsi untuk suksesi yang tercatat. Catatan itu memberi loop rencana yang pasti, lead saat ini, epoch, dan urutan penerus untuk diamati. Rencana tanpa catatan lead tidak dipantau. Addon tetap opsional: tanpanya, metodologi inti tetap berjalan dalam satu sesi atau melalui serah terima yang dikoordinasikan manusia.
 
-## Manusia memulai daemon
+Registrasi rencana tidak menyetujui pekerjaan atau memperluas otorisasi rencana. Dalam v8, rencana yang disetujui berjalan hingga akhir dalam wewenang yang tercatat di rencana itu. Kriteria penerimaan dan gate-nya tetap mengikat sepanjang eksekusi.
 
-Manusia memulai `herdr-peers autopilot --loop` di lingkungan Herdr. Ini daemon lokal di latar belakang, bukan item login atau layanan sistem. Daemon mengamati rencana terdaftar di mesin aktif dan mengingatkan lead yang idle untuk melanjutkan ketika rencana masih terbuka, tidak ada lane bekerja, dan tidak ada balasan tertunda. Prompt tetap meminta lead menyelesaikan rencana yang disetujui sambil mematuhi gates serta kewenangan tercatat.
+## Mulai daemon secara manual
 
-Daemon tidak menyentuh login, kredensial, atau pengakuan bypass-permissions Claude. Daemon tidak memilih penolakan, menjalankan teks bebas dari layar, atau menciptakan izin. Pengingat hanya meminta agent melanjutkan; tidak menambah kewenangan. Lead tetap mencatat blocker dan mengikuti gates. Setelah tiga pengingat tanpa kemajuan, daemon berhenti mengingatkan dan melaporkan `plan_stalled`.
+Manusia memulai `herdr-peers autopilot --loop` di lingkungan Herdr. Ini adalah daemon latar belakang lokal, bukan item login atau layanan sistem. Daemon mengamati rencana terdaftar di seluruh mesin yang diaktifkan dan mendorong lead yang menganggur untuk melanjutkan selama rencananya masih terbuka, tidak ada lane yang bekerja, dan tidak ada balasan yang tertunda. Prompt-nya tetap: lanjutkan rencana yang disetujui hingga akhir sambil mematuhi gate dan wewenang tercatatnya.
 
-## Jaga kepemimpinan
+Daemon tidak menyentuh login, prompt kredensial, atau konfirmasi bypass-permissions Claude. Daemon tidak pernah memilih penolakan, opsi teks bebas, atau baris yang memperluas izin agent. Dorongan hanya meminta agent melanjutkan; dorongan tidak menambah wewenang. Lead tetap mencatat hambatan dan mengikuti gate rencana. Setelah tiga prompt tanpa kemajuan, daemon berhenti mendorong dan melaporkan `plan_stalled`.
 
-Jika lead hilang, daemon meminta penerus pertama yang dapat dijangkau untuk menjalankan prosedur takeover. Epoch catatan bertambah dan penerima menegakkan urutan suksesi. Protocol 2 juga mendukung penunjukan lead, tetapi hanya setelah manusia mengizinkannya secara eksplisit pada rencana; daemon tidak dapat memberi izin itu sendiri. Sebelum merge, tag, atau release, lead saat ini menjalankan `herdr-peers lead verify --plan <id>` untuk memeriksa catatan di semua mesin rencana. Penerus mewarisi rencana dan gates tanpa kewenangan tambahan. Jika rencana mencapai gate yang memerlukan tindakan manusia menurut aturan C1–C7, loop melaporkan kebutuhan dan berhenti di sana. Kredensial dan login tetap ditangani manusia. Untuk kemajuan lain, manusia menerima notifikasi tanpa harus mengawasi tiap langkah.
+## Jaga kepemimpinan tetap berpagar
 
-## Brain dan antrean opsional
+Jika lead hilang, daemon meminta penerus pertama dalam daftar yang dapat dijangkau untuk menjalankan prosedur pengambilalihan. Catatan lead maju per epoch, dan penerima menegakkan urutan suksesi. Protokol 2 juga mendukung penunjukan lead, tetapi hanya bila manusia telah mencatat izinnya pada rencana (`lead claim --allow-appointment`) dan memulai daemon dengan `--appoint`; daemon tidak dapat memberikan izin itu sendiri. Sebelum merge, tag, atau rilis apa pun, lead saat ini menjalankan `herdr-peers lead verify --plan <id>` untuk memeriksa catatan di seluruh mesin rencana.
 
-`--brain` opsional memulai agent keputusan khusus untuk kasus yang tak dapat diputuskan oleh aturan daemon. Brain hanya boleh memilih dari daftar tindakan tertutup yang diizinkan rencana. Daemon tetap satu-satunya pelaku: daemon memvalidasi pilihan dan menjalankan tindakan yang memenuhi syarat; teks bebas brain tidak pernah dijalankan. Tanpa otorisasi eksplisit dalam rencana, brain tidak bertindak atas rencana.
+Penerus mewarisi rencana dan gate-nya. Baik suksesi maupun penunjukan tidak mengubah kriteria penerimaan atau mengizinkan pekerjaan di luar wewenang tercatat. Jika rencana mencapai gate yang menuntut tindakan manusia menurut aturan C1–C7-nya, loop melaporkan kebutuhan itu dan berhenti di gate tersebut. Kredensial dan login juga tetap menjadi tindakan manusia. Untuk kemajuan lainnya, manusia diberi notifikasi alih-alih diminta mengawasi setiap langkah.
 
-Antrean memakai dokumen `dwp-queue-v1` di `.dwp/queue.json`. Hanya pack yang menulis; daemon adalah konsumen berbatas yang hanya membaca. Rencana siap saat dependensi `after` selesai atau tidak ada dan persetujuan masih berlaku. Daemon memulainya hanya dengan mengirim prompt tetap kepada lead terdaftar: “Rencana P adalah berikutnya dalam antrean repositori ini dan telah disetujui; jalankan sampai selesai dengan mematuhi gates.” Loop ini tidak memulai entri `launch`. Pack mengelola status antrean selama eksekusi dan finalisasi.
+## Otak dan antrean opsional
+
+`--brain` yang opsional memulai agent keputusan khusus untuk kasus yang tidak dapat diselesaikan aturan daemon. Fitur ini memerlukan coding-agents-kit 1.3.0 atau lebih baru; tanpanya, daemon yang dimulai dengan `--brain` menolak untuk berjalan. Otak hanya boleh memilih dari daftar tindakan tertutup yang ditetapkan daemon untuk setiap kasus: satu dorongan lagi, satu permintaan tetap kepada lead untuk menyelesaikan hambatan yang ditandai rencana sebagai dapat diselesaikan lead, memberi tahu manusia, atau membiarkannya. Daemon tetap satu-satunya pelaku: daemon memvalidasi pilihan dan menjalankan tindakan yang memenuhi syarat; teks bebas dari otak tidak pernah dieksekusi. Dalam v8, rencana juga mencatat di blok otonominya apakah otak boleh bertindak atasnya.
+
+Antrean rencana memakai dokumen `dwp-queue-v1` di `.dwp/queue.json`. Alat rencana yang menulisnya; daemon adalah konsumen berbatas yang hanya membaca. Rencana dalam antrean memenuhi syarat saat dependensi `after`-nya selesai (atau tidak ada) dan persetujuannya masih berlaku. Daemon memulainya hanya dengan mengirim satu prompt tetap kepada lead yang disebut antrean: “Plan P is next in the queue of the repository at "R" and approved. In that repository, run the plan tool's execute flow for it (its start gate checks the approval again) and execute it to its end, respecting its gates.” Entri `launch` tidak diluncurkan oleh loop ini. Status antrean dikelola oleh pack seiring eksekusi dan finalisasi berjalan.
 
 ## Laporkan dan amati
 
-Peristiwa rencana mencatat antrean, mulai, terblokir, macet, kehilangan lead, dan selesai. Perintah opsional `--notify` menerima objek `plan-event-v1` untuk peristiwa yang didukung; notifier Dailybot dari pack mengubahnya menjadi pembaruan tim. Notifikasi melaporkan kemajuan atau blocker, bukan mengotorisasi tindakan atau menggantikan catatan rencana. Laporan armada dan `herdr-peers fleet ui` menampilkan agent serta rencana di berbagai mesin. UI hanya-baca: tidak menulis status rencana atau mengingatkan agent.
+Event rencana mencakup rencana yang macet, terblokir, kehilangan lead, atau selesai, serta rencana dalam antrean yang dimulai atau tidak dapat dimulai. Perintah opsional `--notify` menerima objek `plan-event-v1` untuk event yang didukung; notifier Dailybot milik pack mengubahnya menjadi pembaruan tim. Notifikasi melaporkan kemajuan atau hambatan; notifikasi tidak mengotorisasi tindakan atau menggantikan catatan rencana.
+
+Laporan armada dan `herdr-peers fleet ui` menampilkan agent dan rencana di berbagai mesin, termasuk pekerjaan yang perlu perhatian. UI ini hanya-baca: tidak menulis status rencana dan tidak mengirim prompt ke agent mana pun. UI membantu manusia melihat keadaan loop tanpa menjadi bidang kendali tambahan.
 
 ## Batasnya
 
-Rekayasa loop menutup eksekusi di sekitar spesifikasi yang disetujui. Kelanjutan, suksesi, dan pelaporan menjadi rutin, sementara rencana tetap menjadi sumber kewenangan dan daemon tetap terbatas. Manusia memulai daemon, menangani kredensial dan login, serta menyelesaikan hanya gates C1–C7 rencana atau kebutuhan yang tak tercakup kewenangan tercatat. Tujuannya agar rencana yang disetujui mencapai akhir yang ditetapkan tanpa pengawasan manusia terus-menerus.
+Loop engineering menutup loop eksekusi di sekitar spesifikasi yang disetujui. Ia menjadikan kelanjutan, suksesi, dan pelaporan sebagai rutinitas, sementara rencana tetap menjadi sumber wewenang dan daemon tetap terbatas. Manusia memulai daemon, menangani kredensial dan login, dan hanya menyelesaikan gate C1–C7 milik rencana itu sendiri atau kebutuhan lain yang tidak dapat dipenuhi wewenang tercatat. Tujuan loop adalah rencana yang disetujui mencapai akhir yang ditetapkan tanpa perlu diawasi manusia terus-menerus.

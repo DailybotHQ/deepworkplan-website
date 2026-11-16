@@ -80,4 +80,4 @@ v6 behält dieselbe Methodik aus Plan → Aufgaben → Validierungsschranken →
 
 ## Vom Kernloop zum geschlossenen Loop
 
-Mit dem optionalen Herdr-Addon registriert `execute` Lead und Nachfolge, damit das von einem Menschen gestartete `herdr-peers autopilot --loop` einen untätigen Lead anstößt, Ereignisse meldet und bei einem verschwundenen Lead den gelisteten Nachfolger um Übernahme bittet. Der Daemon schafft Kontinuität, keine Befugnis. Siehe [Loop Engineering](/methodology/08-loop-engineering).
+Die Kernoperationen beschreiben, wie ein Plan ausgeführt wird. Mit dem optionalen Herdr-Addon beansprucht `execute` den Lead-Eintrag des Plans — und fügt eine Nachfolge hinzu, wenn der Plan Nachfolger benennt —, damit ein von einem Menschen gestartetes `herdr-peers autopilot --loop` einen untätigen Lead anstoßen, Ereignisse melden und einen eingetragenen Nachfolger um Übernahme bitten kann, wenn der Lead verschwunden ist. Der Daemon bringt Kontinuität, keine Befugnis; siehe [Loop engineering](/de/methodology/08-loop-engineering).

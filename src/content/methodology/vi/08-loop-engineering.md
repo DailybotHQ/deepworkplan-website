@@ -1,40 +1,46 @@
 ---
-title: Kỹ thuật vòng lặp
-description: "Cách daemon do con người khởi động duy trì Deep Work Plan đã duyệt qua đăng ký, kế nhiệm, nhắc việc và thông báo trong phạm vi quyền hạn ghi nhận."
+title: Loop engineering
+description: "Cách daemon do con người khởi động giữ các Deep Work Plan đã duyệt tiếp tục chạy qua đăng ký, kế nhiệm, lời nhắc, sự kiện và thông báo trong quyền hạn đã ghi."
 order: 8
 lang: vi
-summary: Vòng đời đầy đủ giúp kế hoạch đã duyệt tiếp tục trong phạm vi quyền hạn đã ghi.
+summary: Vòng đời trọn vẹn giữ cho kế hoạch đã duyệt tiếp tục chạy trong phạm vi quyền hạn đã ghi.
 icon: repeat
 ---
 
-# Kỹ thuật vòng lặp
+# Loop engineering
 
-**Đặc tả trước, vòng lặp khép kín: kho mã là harness và kế hoạch tự chạy đến hoàn tất.** Chương này mô tả cơ chế tùy chọn giúp kế hoạch tiếp tục sau lượt thực thi đầu tiên. Kế hoạch vẫn là đặc tả bền vững; vòng lặp tạo tính liên tục, không tạo thêm quyền hạn.
+**Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.** Chương này mô tả cơ chế tùy chọn giữ cho kế hoạch tiếp tục chạy sau lượt thực thi đầu tiên. Kế hoạch vẫn là đặc tả bền vững; vòng lặp mang lại tính liên tục, không phải quyền hạn mới.
 
 ## Đăng ký kế hoạch
 
-Khi addon Herdr được bật, luồng `execute` của pack nhận quyền lead của kế hoạch và ghi lại danh sách kế nhiệm. Bản ghi xác định kế hoạch, lead hiện tại, epoch và thứ tự người kế nhiệm mà vòng lặp theo dõi. Kế hoạch không có bản ghi lead sẽ không được giám sát. Addon là tùy chọn; phương pháp cốt lõi vẫn hoạt động trong một phiên hoặc qua bàn giao do con người điều phối. Đăng ký không phê duyệt công việc hay mở rộng quyền hạn. Trong v8, kế hoạch đã duyệt chạy đến cùng trong phạm vi quyền hạn ghi trong kế hoạch; tiêu chí chấp nhận và gates vẫn ràng buộc.
+Khi addon Herdr được bật, luồng `execute` của gói skill nhận bản ghi lead của kế hoạch (và `resume` nhận lại bản ghi đó), đồng thời thêm danh sách kế nhiệm khi kế hoạch nêu tên người kế nhiệm; việc chuyển giao chỉ hoạt động khi có danh sách kế nhiệm đã được ghi. Bản ghi đó cho vòng lặp một kế hoạch cụ thể, lead hiện tại, epoch và thứ tự người kế nhiệm để theo dõi. Kế hoạch không có bản ghi lead sẽ không được theo dõi. Addon vẫn là tùy chọn: không có nó, phương pháp cốt lõi vẫn hoạt động trong một phiên hoặc qua bàn giao do con người điều phối.
 
-## Con người khởi động daemon
+Đăng ký kế hoạch không phê duyệt công việc và không mở rộng quyền hạn của kế hoạch. Trong v8, một kế hoạch đã duyệt chạy đến cùng trong phạm vi quyền hạn ghi trong chính kế hoạch đó. Tiêu chí chấp nhận và các cổng của nó vẫn ràng buộc suốt quá trình thực thi.
 
-Con người chạy `herdr-peers autopilot --loop` trong môi trường Herdr. Đây là daemon nền cục bộ, không phải mục đăng nhập hay dịch vụ hệ thống. Nó theo dõi các kế hoạch đã đăng ký trên máy được bật và nhắc lead nhàn rỗi tiếp tục khi kế hoạch còn mở, không lane nào đang làm việc và không có phản hồi chờ. Lời nhắc cố định yêu cầu hoàn tất kế hoạch đã duyệt, tuân thủ gates và quyền hạn đã ghi.
+## Khởi động daemon bằng tay
 
-Daemon không đụng đến đăng nhập, thông tin xác thực hay xác nhận bypass-permissions của Claude. Nó không chọn mục từ chối, chạy văn bản tự do trên màn hình hoặc tạo quyền. Lời nhắc chỉ yêu cầu agent tiếp tục, không thêm quyền hạn. Lead vẫn ghi lại blocker và tuân thủ gates. Sau ba lời nhắc không có tiến triển, daemon dừng nhắc và báo `plan_stalled`.
+Con người khởi động `herdr-peers autopilot --loop` trong môi trường Herdr. Đây là daemon nền cục bộ, không phải mục đăng nhập hay dịch vụ hệ thống. Nó theo dõi các kế hoạch đã đăng ký trên các máy được bật và nhắc lead đang rảnh tiếp tục khi kế hoạch còn mở, không lane nào đang làm việc và không có phản hồi nào đang chờ. Lời nhắc là cố định: tiếp tục kế hoạch đã duyệt đến cùng, tuân thủ các cổng và quyền hạn đã ghi của nó.
 
-## Bảo vệ vai trò lead
+Daemon không đụng đến đăng nhập, màn hình yêu cầu thông tin xác thực hay xác nhận bypass-permissions của Claude. Nó không bao giờ chọn một lựa chọn từ chối, một lựa chọn văn bản tự do, hay một dòng mở rộng quyền của agent. Lời nhắc chỉ yêu cầu agent tiếp tục; nó không thêm quyền hạn. Lead vẫn ghi lại các trở ngại và tuân thủ các cổng của kế hoạch. Sau ba lời nhắc không có tiến triển, daemon ngừng nhắc và báo `plan_stalled`.
 
-Nếu lead biến mất, daemon yêu cầu người kế nhiệm đầu tiên có thể liên lạc trong danh sách chạy quy trình takeover. Epoch của bản ghi tăng và bên nhận thực thi thứ tự kế nhiệm. Protocol 2 cũng hỗ trợ bổ nhiệm lead, nhưng chỉ sau khi con người cho phép rõ ràng trong kế hoạch; daemon không thể tự cấp quyền đó. Trước mọi merge, tag hoặc release, lead hiện tại chạy `herdr-peers lead verify --plan <id>` để kiểm tra bản ghi trên các máy của kế hoạch. Người kế nhiệm tiếp nhận kế hoạch và gates, không có thêm quyền. Nếu kế hoạch gặp gate cần con người xử lý theo quy tắc C1–C7, vòng lặp báo nhu cầu và dừng tại đó. Thông tin xác thực và đăng nhập cũng do con người xử lý. Với tiến độ khác, con người được thông báo thay vì phải theo dõi từng bước.
+## Giữ vai trò lead trong hàng rào
 
-## Brain và hàng đợi tùy chọn
+Nếu lead không còn, daemon yêu cầu người kế nhiệm đầu tiên liên lạc được trong danh sách chạy quy trình tiếp quản. Bản ghi lead tiến theo epoch, và bên nhận thực thi thứ tự kế nhiệm. Giao thức 2 cũng hỗ trợ chỉ định lead, nhưng chỉ khi con người đã ghi quyền đó vào kế hoạch (`lead claim --allow-appointment`) và khởi động daemon với `--appoint`; daemon không thể tự cấp quyền đó. Trước mọi lần merge, gắn tag hay phát hành, lead hiện tại chạy `herdr-peers lead verify --plan <id>` để kiểm tra bản ghi trên các máy của kế hoạch.
 
-`--brain` tùy chọn khởi chạy agent quyết định riêng cho trường hợp quy tắc daemon không giải quyết được. Brain chỉ chọn từ danh sách hành động đóng mà kế hoạch cho phép. Daemon vẫn là tác nhân duy nhất: nó xác thực lựa chọn và thực hiện hành động đủ điều kiện; không bao giờ chạy văn bản tự do của brain. Nếu kế hoạch không cho phép rõ ràng, brain không hành động thay kế hoạch.
+Người kế nhiệm thừa hưởng kế hoạch và các cổng của nó. Cả kế nhiệm lẫn chỉ định đều không thay đổi tiêu chí chấp nhận hay cho phép làm việc ngoài quyền hạn đã ghi. Nếu kế hoạch tới một cổng cần con người hành động theo quy tắc C1–C7 của nó, vòng lặp báo nhu cầu đó và dừng tại cổng ấy. Thông tin xác thực và đăng nhập cũng vẫn là việc của con người. Với các tiến triển khác, con người được thông báo thay vì phải trông chừng từng bước.
 
-Hàng đợi sử dụng tài liệu `dwp-queue-v1` tại `.dwp/queue.json`. Chỉ pack được ghi; daemon là bộ đọc có giới hạn. Kế hoạch đủ điều kiện khi phụ thuộc `after` đã hoàn tất hoặc không tồn tại và phê duyệt còn hiệu lực. Daemon chỉ bắt đầu bằng cách gửi một lời nhắc cố định cho lead đã đăng ký: “Kế hoạch P là mục tiếp theo trong hàng đợi của kho này và đã được duyệt; hãy thực thi đến cùng, tuân thủ gates.” Vòng lặp không khởi chạy mục `launch`. Pack quản lý trạng thái hàng đợi trong lúc thực thi và hoàn tất.
+## Bộ não và hàng đợi tùy chọn
+
+Tùy chọn `--brain` khởi chạy một agent quyết định chuyên trách cho những trường hợp mà quy tắc của daemon không giải quyết được. Nó cần coding-agents-kit 1.3.0 trở lên; nếu không có, daemon được khởi động với `--brain` sẽ từ chối khởi động. Bộ não chỉ được chọn từ một danh sách hành động đóng mà daemon cố định cho từng trường hợp: thêm một lời nhắc, một yêu cầu cố định gửi lead để gỡ một trở ngại mà kế hoạch đánh dấu là lead tự gỡ được, báo cho con người, hoặc để nguyên. Daemon vẫn là tác nhân duy nhất: nó xác thực lựa chọn và thực hiện hành động hợp lệ; văn bản tự do của bộ não không bao giờ được thực thi. Trong v8, kế hoạch còn ghi trong khối tự chủ của mình liệu bộ não có được phép hành động trên nó hay không.
+
+Hàng đợi kế hoạch dùng tài liệu `dwp-queue-v1` tại `.dwp/queue.json`. Công cụ kế hoạch ghi tài liệu này; daemon là bên tiêu thụ có giới hạn, chỉ đọc. Một kế hoạch trong hàng đợi đủ điều kiện khi phụ thuộc `after` của nó đã hoàn tất (hoặc không có) và phê duyệt vẫn còn hiệu lực. Daemon chỉ bắt đầu kế hoạch đó bằng cách gửi một lời nhắc cố định tới lead mà hàng đợi chỉ định: “Plan P is next in the queue of the repository at "R" and approved. In that repository, run the plan tool's execute flow for it (its start gate checks the approval again) and execute it to its end, respecting its gates.” Mục `launch` không được vòng lặp này khởi chạy. Trạng thái hàng đợi do gói skill duy trì trong suốt quá trình thực thi và hoàn tất.
 
 ## Báo cáo và quan sát
 
-Sự kiện kế hoạch ghi lại trạng thái xếp hàng, bắt đầu, bị chặn, đình trệ, mất lead và hoàn tất. Lệnh `--notify` tùy chọn nhận đối tượng `plan-event-v1` cho các sự kiện được hỗ trợ; notifier Dailybot của pack chuyển chúng thành cập nhật cho nhóm. Thông báo báo tiến độ hoặc blocker, không cấp quyền và không thay thế bản ghi kế hoạch. Báo cáo fleet và `herdr-peers fleet ui` hiển thị agent cùng kế hoạch trên nhiều máy. Giao diện chỉ đọc, không ghi trạng thái hoặc nhắc agent.
+Sự kiện kế hoạch bao gồm một kế hoạch bị đình trệ, bị chặn, mất lead hoặc hoàn thành, và một kế hoạch trong hàng đợi bắt đầu hoặc không thể bắt đầu. Lệnh `--notify` tùy chọn nhận một đối tượng `plan-event-v1` cho các sự kiện được hỗ trợ; trình thông báo Dailybot của gói skill chuyển chúng thành cập nhật cho nhóm. Thông báo chỉ báo cáo tiến độ hoặc trở ngại; chúng không cấp quyền cho hành động nào và không thay thế bản ghi kế hoạch.
+
+Báo cáo đội máy và `herdr-peers fleet ui` hiển thị agent và kế hoạch trên nhiều máy, kể cả công việc cần chú ý. Giao diện chỉ đọc: nó không ghi trạng thái kế hoạch và không nhắc agent nào. Nó giúp con người thấy trạng thái của vòng lặp mà không trở thành một mặt phẳng điều khiển khác.
 
 ## Ranh giới
 
-Kỹ thuật vòng lặp khép kín việc thực thi quanh đặc tả đã duyệt. Việc tiếp tục, kế nhiệm và báo cáo trở thành quy trình thường lệ, trong khi kế hoạch vẫn là nguồn quyền hạn và daemon vẫn bị giới hạn. Con người khởi động daemon, xử lý thông tin xác thực và đăng nhập, đồng thời chỉ giải quyết gates C1–C7 của kế hoạch hoặc nhu cầu vượt ngoài quyền hạn đã ghi. Mục tiêu là kế hoạch đã duyệt đạt điểm kết thúc xác định mà không cần con người giám sát liên tục.
+Loop engineering khép kín vòng thực thi quanh một đặc tả đã duyệt. Nó biến việc tiếp tục, kế nhiệm và báo cáo thành thường lệ, trong khi kế hoạch vẫn là nguồn quyền hạn và daemon vẫn bị giới hạn. Con người khởi động daemon, xử lý thông tin xác thực và đăng nhập, và chỉ giải quyết các cổng C1–C7 của chính kế hoạch hoặc những nhu cầu khác mà quyền hạn đã ghi không đáp ứng được. Mục tiêu của vòng lặp là một kế hoạch đã duyệt đạt tới điểm kết thúc xác định mà không cần con người trông chừng.

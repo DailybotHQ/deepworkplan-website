@@ -80,4 +80,4 @@ v6는 같은 계획 → 작업 → 검증 게이트 → 완료 방법론, 슬래
 
 ## 핵심 루프에서 폐쇄 루프로
 
-Herdr 애드온에서 `execute`가 lead와 승계자를 등록하면 사람이 시작한 `herdr-peers autopilot --loop`이 유휴 lead에게 알리고 이벤트를 보고하며 lead가 사라졌을 때 목록의 후계자에게 takeover를 요청합니다. daemon은 권한이 아닌 연속성을 더합니다. [루프 엔지니어링](/methodology/08-loop-engineering)을 참조하세요.
+핵심 작업은 계획이 어떻게 실행되는지를 설명합니다. 선택적 Herdr 애드온을 사용하면 `execute`가 계획의 lead 기록을 확보하고 계획이 후계자를 지정한 경우 승계 순서를 추가하므로, 사람이 시작한 `herdr-peers autopilot --loop`이 유휴 lead에게 알리고 이벤트를 보고하며 lead가 사라졌을 때 목록의 후계자에게 takeover를 요청할 수 있습니다. daemon은 권한이 아닌 연속성을 더합니다. [Loop engineering](/ko/methodology/08-loop-engineering)을 참조하세요.

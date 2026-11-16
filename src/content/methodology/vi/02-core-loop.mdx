@@ -76,6 +76,6 @@ Tiêu chuẩn DWP hiện tại là 7.0.0, được triển khai bởi dòng skil
 
 v6 giữ nguyên phương pháp kế hoạch → tác vụ → cổng xác thực → hoàn tất, các lệnh slash và vị trí `.dwp/plans/`. Cấu trúc kỹ thuật chặt chẽ hơn nhờ hợp đồng, nhật ký, manifest ngữ cảnh theo tác vụ, bộ lập lịch và việc từ chối danh sách cho phép rỗng. v7 giữ nguyên lớp bản ghi đó và bổ sung dấu đánh tác vụ `parallel_safe` tùy chọn, sự kiện nhật ký `delegation` cho công việc có giới hạn được giao cho một agent khác, và sổ đăng ký addon `.dwp/config.json`; khi không bật addon ủy quyền nào, mọi kế hoạch vẫn chạy tuần tự trong phiên hiện tại. Quyết định kiến trúc là GO; tính không kém hơn theo thực nghiệm của kết quả agent chưa được đo lường.
 
-## Từ vòng lặp cốt lõi đến vòng khép kín
+## Từ vòng lặp cốt lõi đến vòng lặp khép kín
 
-Với addon Herdr, `execute` đăng ký lead và kế nhiệm để `herdr-peers autopilot --loop` do con người khởi động nhắc lead nhàn rỗi, báo sự kiện và yêu cầu người kế nhiệm tiếp quản khi lead biến mất. Daemon tạo tính liên tục, không thêm quyền hạn. Xem [Kỹ thuật vòng lặp](/methodology/08-loop-engineering).
+Các thao tác cốt lõi mô tả cách một kế hoạch được thực thi. Với addon Herdr tùy chọn, `execute` nhận bản ghi lead của kế hoạch — thêm danh sách kế nhiệm khi kế hoạch nêu tên người kế nhiệm — để `herdr-peers autopilot --loop` do con người khởi động có thể nhắc lead đang rảnh, báo cáo sự kiện và yêu cầu một người kế nhiệm trong danh sách tiếp quản khi lead không còn. Daemon bổ sung tính liên tục, không phải quyền hạn; xem [Loop engineering](/vi/methodology/08-loop-engineering).

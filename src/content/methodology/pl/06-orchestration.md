@@ -103,4 +103,4 @@ Długi przebieg trwa dłużej niż którekolwiek pojedyncze konto. Od coding-age
 
 ## Rejestracja planu dla pętli
 
-Z addonem Herdr `execute` przejmuje rekord lead planu i zapisuje następców. Człowiek może uruchomić `herdr-peers autopilot --loop`, aby kontynuować otwarte plany i poprosić wskazanego następcę o przejęcie po zniknięciu lead. Daemon obserwuje tylko zarejestrowane plany. Zobacz [Inżynieria pętli](/methodology/08-loop-engineering).
+Gdy opcjonalny dodatek Herdr jest aktywny, `execute` pakietu przejmuje rekord prowadzącego planu, dodając sukcesję, gdy plan wskazuje następców. Człowiek może uruchomić `herdr-peers autopilot --loop`, aby kontynuować otwarte plany i poprosić następcę z listy o przejęcie roli prowadzącego, którego zabrakło. Demon obserwuje wyłącznie zarejestrowane plany; zobacz [Loop engineering](/pl/methodology/08-loop-engineering).

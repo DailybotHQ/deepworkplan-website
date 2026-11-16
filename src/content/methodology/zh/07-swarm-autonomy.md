@@ -120,4 +120,4 @@ herdr-peers `v2.0.0` 为每份计划保留一条主导者记录——主导者�
 
 ## 闭合执行循环
 
-可选循环 daemon 根据 lead 记录继续已批准计划，提醒不会增加权限；lead 消失时会请已列出的继任者接管。daemon 由人类启动；凭据、登录和计划的 C1–C7 gates 仍由人类处理。参见[循环工程](/methodology/08-loop-engineering)。
+可选的循环 daemon 根据 lead 记录继续已批准计划，提醒不会增加权限；lead 消失时会请已列出的继任者接管。daemon 由人类启动；凭据、登录和计划的 C1–C7 gates 仍由人类处理。参见[Loop engineering](/zh/methodology/08-loop-engineering)。

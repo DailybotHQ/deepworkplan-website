@@ -120,4 +120,4 @@ Erproben Sie die Schleife, bevor Sie sich auf sie verlassen. Betreiben Sie auf e
 
 ## Den Ausführungsloop schließen
 
-Der optionale Loop-Daemon setzt einen genehmigten Plan anhand seines Lead-Eintrags fort und stößt ohne zusätzliche Befugnisse an. Ein Mensch startet ihn; Zugangsdaten, Logins und C1–C7-Gates bleiben menschliche Aufgaben. Siehe [Loop Engineering](/methodology/08-loop-engineering).
+Der optionale Loop-Daemon setzt einen genehmigten Plan anhand seines Lead-Eintrags fort, stößt an, ohne Befugnisse hinzuzufügen, und bittet einen eingetragenen Nachfolger um Übernahme, wenn der Lead verschwunden ist. Ein Mensch startet ihn; Zugangsdaten, Anmeldungen und die C1–C7-Gates des Plans bleiben menschliche Aufgaben. Siehe [Loop engineering](/de/methodology/08-loop-engineering).

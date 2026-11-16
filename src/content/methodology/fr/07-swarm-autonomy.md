@@ -120,4 +120,4 @@ Le journal du plan orchestrateur consigne l’essaim : les lancements et résult
 
 ## Fermer la boucle d’exécution
 
-Le daemon facultatif poursuit le plan approuvé depuis son enregistrement de lead et relance sans ajouter d’autorité. Un humain le lance ; identifiants, connexions et gates C1–C7 restent des actions humaines. Voir [Ingénierie de boucle](/methodology/08-loop-engineering).
+Le daemon facultatif de la boucle poursuit un plan approuvé à partir de son enregistrement de lead, relance sans ajouter d’autorité et demande à un successeur listé de prendre la relève lorsque le lead a disparu. Un humain le lance ; les identifiants, les connexions et les portes C1–C7 du plan restent des actions humaines. Voir [Loop engineering](/fr/methodology/08-loop-engineering).

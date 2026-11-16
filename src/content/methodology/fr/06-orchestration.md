@@ -103,4 +103,4 @@ Une longue exécution survit à n’importe quel compte pris isolément. Depuis 
 
 ## Enregistrer un plan pour la boucle
 
-Avec Herdr, `execute` revendique l’enregistrement du lead et note les successeurs. Un humain peut lancer `herdr-peers autopilot --loop` pour poursuivre les plans ouverts et demander au successeur listé de prendre le relais si le lead disparaît. Voir [Ingénierie de boucle](/methodology/08-loop-engineering).
+Lorsque l’addon facultatif Herdr est actif, `execute` du pack revendique l’enregistrement de lead du plan, en ajoutant une succession lorsque le plan nomme des successeurs. L’humain peut lancer `herdr-peers autopilot --loop` pour poursuivre les plans ouverts et demander au successeur listé de prendre la relève d’un lead disparu. Le daemon n’observe que les plans enregistrés ; voir [Loop engineering](/fr/methodology/08-loop-engineering).

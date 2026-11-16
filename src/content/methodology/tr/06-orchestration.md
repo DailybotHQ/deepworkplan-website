@@ -103,4 +103,4 @@ Uzun bir çalıştırma herhangi bir hesaptan daha uzun sürer. coding-agents-ki
 
 ## Döngü için plan kaydı
 
-Herdr etkinse `execute` lead kaydını ve halefleri kaydeder. İnsan `herdr-peers autopilot --loop` başlatarak açık planları sürdürebilir. Daemon yalnızca kayıtlı planları izler. [Döngü mühendisliği](/methodology/08-loop-engineering) sayfasına bakın.
+İsteğe bağlı Herdr eklentisi etkin olduğunda paketin `execute` akışı planın lider kaydını üstlenir ve plan halefleri adlandırıyorsa bir halefiyet ekler. İnsan, açık planları sürdürmek ve ortadan kalkan bir liderin yerini listedeki halefin almasını istemek için `herdr-peers autopilot --loop` komutunu başlatabilir. Daemon yalnızca kayıtlı planları izler; [Loop engineering](/tr/methodology/08-loop-engineering) sayfasına bakın.

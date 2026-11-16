@@ -80,4 +80,4 @@ v6 保留相同的计划 → 任务 → 验证门 → 完成方法论、斜杠�
 
 ## 从核心循环到闭环
 
-核心操作描述计划如何执行。启用 Herdr 后，`execute` 会登记 lead 和继任者，使人工启动的 `herdr-peers autopilot --loop` 能提醒空闲 lead、报告事件，并在 lead 消失时请已列出的继任者接管。daemon 提供连续性，不增加权限；参见[循环工程](/methodology/08-loop-engineering)。
+核心操作描述计划如何执行。启用可选的 Herdr 插件后，`execute` 会认领计划的 lead 记录，并在计划指定了继任者时添加继任顺序，使人工启动的 `herdr-peers autopilot --loop` 能提醒空闲 lead、报告事件，并在 lead 消失时请已列出的继任者接管。daemon 提供连续性，不增加权限；参见[Loop engineering](/zh/methodology/08-loop-engineering)。

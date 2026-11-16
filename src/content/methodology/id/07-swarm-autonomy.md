@@ -120,4 +120,4 @@ Buktikan loop ini sebelum mengandalkannya. Pada repositori percobaan dengan renc
 
 ## Menutup loop eksekusi
 
-Daemon opsional melanjutkan rencana disetujui, mengingatkan tanpa menambah kewenangan, dan meminta penerus terdaftar mengambil alih bila lead hilang. Manusia memulainya; kredensial, login, dan gates C1–C7 tetap ditangani manusia. Lihat [Rekayasa loop](/methodology/08-loop-engineering).
+Daemon loop yang opsional melanjutkan rencana yang disetujui dari catatan lead-nya, mendorong tanpa menambah wewenang, dan meminta penerus dalam daftar mengambil alih saat lead hilang. Manusia yang memulainya; kredensial, login, dan gate C1–C7 milik rencana tetap menjadi tindakan manusia. Lihat [Loop engineering](/id/methodology/08-loop-engineering).

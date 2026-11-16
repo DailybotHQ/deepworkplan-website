@@ -78,6 +78,6 @@ Lo standard DWP attuale è 7.0.0, implementato dalla linea di skill 7.x. Quel pa
 
 v6 mantiene la stessa metodologia piano → attività → gate di validazione → completamento, i comandi slash e la posizione `.dwp/plans/`. Rende più rigorosa la struttura ingegneristica con un contratto, un journal, manifest di contesto per attività, uno scheduler e il rifiuto di una allowlist vuota. v7 mantiene questo livello di registrazione e aggiunge un marcatore di task opzionale `parallel_safe`, un evento del journal `delegation` per il lavoro delimitato affidato a un altro agente e il registro degli addon `.dwp/config.json`; senza alcun addon di delega abilitato, ogni piano viene comunque eseguito in sequenza nella sessione corrente. La decisione architetturale è GO; la non inferiorità empirica dei risultati degli agenti non è stata misurata.
 
-## Dal ciclo centrale al ciclo chiuso
+## Dal core loop al loop chiuso
 
-Con l’addon Herdr, `execute` registra lead e successori perché `herdr-peers autopilot --loop`, avviato da una persona, solleciti un lead inattivo, segnali eventi e chieda al successore indicato di subentrare se il lead scompare. Il daemon offre continuità, non autorità. Vedi [Ingegneria del ciclo](/methodology/08-loop-engineering).
+Le operazioni di base descrivono come viene eseguito un piano. Con l’addon facoltativo Herdr, `execute` acquisisce il record di lead del piano — aggiungendo una successione quando il piano nomina dei successori — perché `herdr-peers autopilot --loop`, avviato da una persona, possa sollecitare un lead inattivo, segnalare eventi e chiedere a un successore della lista di subentrare quando il lead non c’è più. Il daemon aggiunge continuità, non autorità; vedi [Loop engineering](/it/methodology/08-loop-engineering).

@@ -103,4 +103,4 @@ Eksekusi yang panjang bertahan lebih lama dari satu akun mana pun. Mulai coding-
 
 ## Mendaftarkan rencana untuk loop
 
-Dengan Herdr aktif, `execute` mengklaim catatan lead rencana dan mencatat suksesi. Manusia dapat memulai `herdr-peers autopilot --loop` untuk melanjutkan rencana terbuka. Daemon hanya mengamati rencana terdaftar. Lihat [Rekayasa loop](/methodology/08-loop-engineering).
+Saat addon Herdr yang opsional aktif, `execute` milik pack mengklaim catatan lead rencana dan menambahkan suksesi bila rencana menyebutkan penerus. Manusia dapat memulai `herdr-peers autopilot --loop` untuk melanjutkan rencana yang terbuka dan meminta penerus dalam daftar mengambil alih lead yang hilang. Daemon hanya mengamati rencana terdaftar; lihat [Loop engineering](/id/methodology/08-loop-engineering).
