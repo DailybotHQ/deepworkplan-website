@@ -41,6 +41,10 @@ services:
       - cline:/home/node/.dck/volumes/cline
       - grok:/home/node/.dck/volumes/grok
       - antigravity:/home/node/.dck/volumes/antigravity
+      # Container-only volumes (dck.toml [compose] container_only): a named
+      # volume over each path, so what the container builds there stays in the
+      # container and never reaches the host's checkout.
+      - co-app-node_modules:/app/node_modules
       # The host's SSH agent (git over SSH, signing) — never a key file. Docker
       # Desktop and OrbStack expose it at this path; dck up/rebuild and dev.sh's
       # plain-compose fallback set DCK_HOST_SSH_AUTH_SOCK by provider ($SSH_AUTH_SOCK
@@ -62,6 +66,10 @@ services:
     environment:
       DCK_USER: node
       DCK_WORKSPACE: /app
+      # The container-only mount points ([compose] container_only); the
+      # entrypoint gives each to the user at every start (Docker creates them
+      # root-owned).
+      DCK_CONTAINER_ONLY: "/app/node_modules"
       DCK_SSH: "1"
       DCK_EDITOR: "1"
       SSH_AUTH_SOCK: /run/dck/ssh-agent.sock
@@ -92,4 +100,5 @@ volumes:
   cline: {}
   grok: {}
   antigravity: {}
+  co-app-node_modules: {}
 # <<< dck:volumes <<<

@@ -45,3 +45,9 @@ layout = "standard"
 # `dck up` makes the other dck containers (and the host, with host_machine)
 # reachable from inside (Docker Desktop only; see docs/SECURITY.md).
 mesh = true
+
+[compose]
+# Keep the container's node_modules in its own named volume instead of the
+# /app bind: the container's pnpm never touches the host's install (and
+# vice versa). Requires devcontainer-kit 1.3.0.
+container_only = ["/app/node_modules"]
