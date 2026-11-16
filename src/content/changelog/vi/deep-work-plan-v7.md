@@ -64,7 +64,7 @@ Bản phát hành 7.10.2 (2026-11-15) chuyển các ghim của hệ sinh thái t
 
 Bản phát hành 7.11.0 (2026-11-16) đưa loạt củng cố v7 của developer vào đúng chỗ: bảng thuật ngữ bền vững và các quy tắc kiểm soát hiển thị vào guide, `verify` có thêm một cuộc kiểm toán tuân thủ chỉ đọc cho các plan đã hoàn thành, tài liệu của gói phát biểu chính xác về độ bền và token, câu khẩu hiệu README được thay bằng câu thắng cuộc thi hiểu bài, và đường create trực tiếp giữ gói Lite trong ngân sách chỉ dẫn của nó.
 
-Bản phát hành 7.12.0 (2026-11-16) đăng ký các plan với vòng lặp herdr-peers: một plan yêu cầu quyền dẫn dắt của mình cùng danh sách kế nhiệm, nên `autopilot --loop` và fleet UI thấy mọi plan đang mở và giữ nó chạy đến cùng, và một bộ thông báo Dailybot báo các cột mốc; các bộ mô tả addon chuyển sang herdr-peers v1.3.1 và coding-agents-kit v1.3.0 — chính các bản phát hành mà trang này ghim.
+Bản phát hành 7.12.0 (2026-11-16) đăng ký các plan với vòng lặp herdr-peers: một plan yêu cầu quyền dẫn dắt của mình cùng danh sách kế nhiệm, nên `autopilot --loop` và fleet UI thấy mọi plan đang mở và giữ nó chạy đến cùng, và một bộ thông báo Dailybot báo các cột mốc; các bộ mô tả addon chuyển sang herdr-peers v1.3.1 và coding-agents-kit v1.3.0
 
 Bản phát hành 7.12.1 (2026-11-16) sửa bộ thông báo Dailybot của addon Herdr: nó giờ chấp nhận tên sự kiện `herdr-peers/plan-event-v1` mà herdr-peers phát ra, giới hạn stdin của bộ thông báo ở 64 KiB và ánh xạ `plan_lead_moved`; các bộ mô tả addon chuyển sang coding-agents-kit v1.4.0, với `ak update` được ghi chú là chỉ do con người gọi.
 

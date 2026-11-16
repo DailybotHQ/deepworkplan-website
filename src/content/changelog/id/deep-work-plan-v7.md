@@ -64,7 +64,7 @@ Rilis 7.10.2 (2026-11-15) memindahkan pin ekosistem mengikuti rilis hari itu: ad
 
 Rilis 7.11.0 (2026-11-16) mendaratkan seri pengerasan v7 dari developer: glosarium daya tahan dan aturan kontrol yang terlihat masuk ke panduan, `verify` mendapat audit kepatuhan baca-saja untuk plan yang selesai, dokumen pack menyatakan klaim daya tahan dan token secara presisi, tagline README diganti dengan pemenang uji pemahaman, dan jalur create langsung menjaga bundle Lite dalam anggaran instruksinya.
 
-Rilis 7.12.0 (2026-11-16) mendaftarkan plan ke loop herdr-peers: sebuah plan mengklaim kepemimpinannya dengan daftar penerus, sehingga `autopilot --loop` dan fleet UI dapat melihat setiap plan terbuka dan menjaganya berjalan sampai selesai, dan notifikasi Dailybot melaporkan capaian; deskriptor addon pindah ke herdr-peers v1.3.1 dan coding-agents-kit v1.3.0 — rilis yang sama yang situs ini patokkan.
+Rilis 7.12.0 (2026-11-16) mendaftarkan plan ke loop herdr-peers: sebuah plan mengklaim kepemimpinannya dengan daftar penerus, sehingga `autopilot --loop` dan fleet UI dapat melihat setiap plan terbuka dan menjaganya berjalan sampai selesai, dan notifikasi Dailybot melaporkan capaian; deskriptor addon pindah ke herdr-peers v1.3.1 dan coding-agents-kit v1.3.0
 
 Rilis 7.12.1 (2026-11-16) memperbaiki notifikasi Dailybot addon Herdr: ia kini menerima nama peristiwa `herdr-peers/plan-event-v1` yang dipancarkan herdr-peers, membatasi stdin notifikator pada 64 KiB, dan memetakan `plan_lead_moved`; deskriptor addon pindah ke coding-agents-kit v1.4.0, yang `ak update`-nya didokumentasikan hanya dipanggil oleh manusia.
 

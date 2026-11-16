@@ -64,7 +64,7 @@ v7 是编排与可审计性方面的一次跃升，但尚不是完全无人值�
 
 7.11.0 版本（2026-11-16）落地 developer 的 v7 强化系列：耐久性词汇表与可见的控制规则进入指南，`verify` 新增对已完成计划的只读合规审计，pack 文档精确表述耐久性与 token 声明，README 标语替换为理解测试的胜出句，实时 create 路径让 Lite 包保持在指令预算之内。
 
-7.12.0 版本（2026-11-16）将计划注册进 herdr-peers 循环：计划以继任者列表认领其主导者，因此 `autopilot --loop` 与 fleet UI 能看到每个打开的计划并让它一直运行到结束，Dailybot 通知器报告各里程碑；附加组件描述符移至 herdr-peers v1.3.1 与 coding-agents-kit v1.3.0——正是本站固定的版本。
+7.12.0 版本（2026-11-16）将计划注册进 herdr-peers 循环：计划以继任者列表认领其主导者，因此 `autopilot --loop` 与 fleet UI 能看到每个打开的计划并让它一直运行到结束，Dailybot 通知器报告各里程碑；附加组件描述符移至 herdr-peers v1.3.1 与 coding-agents-kit v1.3.0。
 
 7.12.1 版本（2026-11-16）修复了 Herdr 附加组件的 Dailybot 通知器：它现在接受 herdr-peers 发出的 `herdr-peers/plan-event-v1` 事件名，将通知器的 stdin 限制为 64 KiB，并映射 `plan_lead_moved`；附加组件描述符移至 coding-agents-kit v1.4.0，其 `ak update` 被记录为仅可由人类调用。
 

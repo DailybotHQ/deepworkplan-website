@@ -33,7 +33,8 @@ the fleet UI and the read-only `plans`/`fleet` verbs; the 1.3.1 patch
 extends the loop files; protocol 1
 unchanged), coding-agents-kit `v1.4.0` (pick-v2: `ak pick --kinds` with per-kind model
 override and `--json` launch contracts; `--model` as a head flag; `ak
-last`, and Herdr pane restore through `ak`; interface 1 unchanged),
+last`, and Herdr pane restore through `ak`; 1.4.0 adds `ak update`, the
+verified vendor updater, human-invoked only; interface 1 unchanged),
 deepworkplan-vim `v1.0.1`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
 reviewer and the Dailybot skill vendored at those tags. The pack `v7.12.1`

@@ -64,7 +64,7 @@ Release 7.10.2 (2026-11-15) zieht die Ökosystem-Pins mit den Releases des Tages
 
 Release 7.11.0 (2026-11-16) landet die v7-Härtungsserie des Entwicklers: Das Haltbarkeitsglossar und die sichtbaren Kontrollregeln ziehen in den Guide ein, `verify` erhält eine schreibgeschützte Compliance-Prüfung abgeschlossener Pläne, die Pack-Dokumente fassen Haltbarkeits- und Token-Aussagen präzise, der README-Tagline wird durch den Verständnistest-Sieger ersetzt, und der Live-Create-Pfad hält das Lite-Bundle innerhalb seinesInstruktionsbudgets.
 
-Release 7.12.0 (2026-11-16) registriert Pläne in der herdr-peers-Schleife: Ein Plan beansprucht seine Führung mit einer Nachfolgeliste, sodass `autopilot --loop` und die Fleet-UI jeden offenen Plan sehen und bis zu seinem Ende am Laufen halten, und ein Dailybot-Notifier meldet die Meilensteine; die Addon-Deskriptoren ziehen auf herdr-peers v1.3.1 und coding-agents-kit v1.3.0 — dieselben Releases, die diese Site festlegt.
+Release 7.12.0 (2026-11-16) registriert Pläne in der herdr-peers-Schleife: Ein Plan beansprucht seine Führung mit einer Nachfolgeliste, sodass `autopilot --loop` und die Fleet-UI jeden offenen Plan sehen und bis zu seinem Ende am Laufen halten, und ein Dailybot-Notifier meldet die Meilensteine; die Addon-Deskriptoren ziehen auf herdr-peers v1.3.1 und coding-agents-kit v1.3.0
 
 Release 7.12.1 (2026-11-16) repariert den Dailybot-Notifier des Herdr-Addons: Er akzeptiert nun den von herdr-peers ausgegebenen Ereignisnamen `herdr-peers/plan-event-v1`, begrenzt den Stdin des Notifiers auf 64 KiB und bildet `plan_lead_moved` ab; die Addon-Deskriptoren ziehen auf coding-agents-kit v1.4.0, dessen `ak update` als nur von Menschen aufgerufen dokumentiert ist.
 
