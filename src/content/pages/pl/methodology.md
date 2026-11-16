@@ -1,7 +1,7 @@
 ---
 title: "Metodyka Deep Work Plan"
-description: "Siedem rozdziałów od manifestu po autonomię roju: zasady, podstawowa pętla, szablony, skille, archetypy, wielu agentów i roje w metodyce Deep Work Plan."
-lastUpdated: 2026-10-12
+description: "Osiem rozdziałów od manifestu po loop engineering: zasady, podstawowa pętla, szablony, skille, archetypy, wielu agentów, roje i pętla w metodyce DWP."
+lastUpdated: 2026-11-16
 ---
 
 ## Metodyka Deep Work Plan
@@ -9,15 +9,17 @@ lastUpdated: 2026-10-12
 Aktualny pakiet 7.x domyślnie tworzy nowe plany w v7. Istniejące plany zachowują zapisaną generację; migracja wymaga wyraźnego polecenia.
 Deep Work Plan (DWP) to otwarta, niezależna od frameworków metodyka prowadzenia ustrukturyzowanej, autonomicznej pracy inżynierskiej z agentami kodującymi AI. Zamienia mglisty cel w plan gotowy do recenzji, który agent może wykonać, wstrzymać, wznowić i o którym może raportować — bez utraty kontekstu.
 
-DWP opiera się na trzech filarach.
+DWP opiera się na czterech filarach — spec-first, repozytorium jest harnessem, loop engineering i mierzona wydajność. W jednym zdaniu: *Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.*
 
-**Rozwój oparty na specyfikacji (spec-driven development).** Zamiast traktować zapis rozmowy jako źródło prawdy, najpierw spisujesz, *co* powinno być prawdą — cel, zakres, kryteria akceptacji oraz kontrole dowodzące ukończenia — a agent wykonuje pracę względem tej specyfikacji. W DWP plan *jest* specyfikacją: plan → zadania atomowe → bramki walidacyjne → ukończenie. Spisanie specyfikacji najpierw ogranicza dryf (agent jest mierzony względem zadeklarowanych kryteriów), czyni pracę weryfikowalną (każda bramka przechodzi albo zawodzi) i wznawialną (specyfikacja przeżywa każdą sesję i każdego agenta). Niezależna od narzędzi i natywna dla repozytorium, różni się od systemów spec-driven związanych z konkretnym narzędziem, takich jak GitHub Spec Kit, Amazon Kiro czy Tessl.
+**Spec-first.** Zamiast traktować zapis rozmowy jako źródło prawdy, najpierw spisujesz, *co* powinno być prawdą — cel, zakres, kryteria akceptacji oraz kontrole dowodzące ukończenia — a agent wykonuje pracę względem tej specyfikacji. W DWP plan *jest* specyfikacją: plan → zadania atomowe → bramki walidacyjne → ukończenie. Spisanie specyfikacji najpierw ogranicza dryf (agent jest mierzony względem zadeklarowanych kryteriów), czyni pracę weryfikowalną (każda bramka przechodzi albo zawodzi) i wznawialną (specyfikacja przeżywa każdą sesję i każdego agenta). Niezależna od narzędzi i natywna dla repozytorium, różni się od systemów spec-driven związanych z konkretnym narzędziem, takich jak GitHub Spec Kit, Amazon Kiro czy Tessl.
 
-**Inżynieria harnessu — repozytorium staje się harnessem.** Sam model językowy to tylko predyktor tekstu; tym, co czyni z niego niezawodnego inżyniera, jest otaczający go *harness* (rusztowanie agenta) — kontekst, narzędzia, pętla sterująca, zabezpieczenia i trwały stan. Inżynieria harnessu polega na celowym projektowaniu tego rusztowania. Stanowisko DWP jest takie, że powinno ono żyć w repozytorium, a nie w narzędziu: kontekst jako `AGENTS.md` + `docs/`, narzędzia jako kit `.agents/`, pętla sterująca jako plan, zabezpieczenia jako bramki walidacyjne, a stan jako `.dwp/` w gitignore. Ponieważ każda część jest plikiem w repozytorium, harness jest przenośny — więc dowolny agent może sterować dowolnym repozytorium.
+**Repozytorium jest harnessem.** Sam model językowy to tylko predyktor tekstu; tym, co czyni z niego niezawodnego inżyniera, jest otaczający go *harness* (rusztowanie agenta) — kontekst, narzędzia, pętla sterująca, zabezpieczenia i trwały stan. Inżynieria harnessu polega na celowym projektowaniu tego rusztowania. Stanowisko DWP jest takie, że powinno ono żyć w repozytorium, a nie w narzędziu: kontekst jako `AGENTS.md` + `docs/`, narzędzia jako kit `.agents/`, pętla sterująca jako plan, zabezpieczenia jako bramki walidacyjne, a stan jako `.dwp/` w gitignore. Ponieważ każda część jest plikiem w repozytorium, harness jest przenośny — więc dowolny agent może sterować dowolnym repozytorium.
 
-**Efektywność tokenów — długi horyzont z założenia, wydajność z konstrukcji.** Kontekst to najrzadszy zasób, jakim dysponuje agent kodujący, a metodyka, która go marnuje, zawodzi dokładnie wtedy, gdy praca robi się długa. DWP ładuje instrukcje stopniowo — każdy przewodnik ładuje się, gdy zadziała jego wyzwalacz — dobiera walidację według tego, czego faktycznie dotyka każde zadanie, i decyduje o skillach lokalnie w zadaniu. Liczba bajtów instrukcji wymaganych przez każdy przepływ jest mierzona i publikowana; żadnych wymyślonych procentów tokenów.
+**Loop engineering.** Specyfikacja i harness czynią pracę poprawną i przenośną; loop engineering sprawia, że zostaje ukończona. Z opcjonalnym dodatkiem Herdr plan rejestruje swojego prowadzącego oraz, jeśli ich wskazuje, następców; demon, którego uruchamia wyłącznie człowiek, ponagla bezczynnego prowadzącego do kontynuacji, prosi pierwszego osiągalnego następcę o przejęcie roli prowadzącego, który zniknął, i zgłasza, gdy plan utknie, zostanie zablokowany lub ukończony. Ponaglenie nie dodaje żadnych uprawnień — bramki i eskalacje planu obowiązują jak dotąd. Metodyka działa bez pętli; pętla jedynie ją wzmacnia.
 
-Metodyka jest wyjaśniona w siedmiu rozdziałach:
+**Mierzona wydajność.** Kontekst to najrzadszy zasób, jakim dysponuje agent kodujący, a metodyka, która go marnuje, zawodzi dokładnie wtedy, gdy praca robi się długa. DWP ładuje instrukcje stopniowo — każdy przewodnik ładuje się, gdy zadziała jego wyzwalacz — dobiera walidację według tego, czego faktycznie dotyka każde zadanie, i decyduje o skillach lokalnie w zadaniu. Liczba bajtów instrukcji wymaganych przez każdy przepływ jest mierzona i publikowana; żadnych wymyślonych procentów tokenów.
+
+Metodyka jest wyjaśniona w ośmiu rozdziałach:
 
 1. **Manifest** — czym jest Deep Work Plan i dlaczego ustrukturyzowane wykonanie ma znaczenie.
 2. **Podstawowa pętla** — cykl plan-wykonanie-weryfikacja napędzający każde zadanie.
@@ -26,6 +28,7 @@ Metodyka jest wyjaśniona w siedmiu rozdziałach:
 5. **Archetypy** — dostosowanie metodyki do pojedynczych repozytoriów i centrów orkiestracji.
 6. **Uruchamianie wielu agentów** — prowadzący i jego tory w panelach, kontenerach, na maszynach i kontach, z jedną gałęzią i jednym wydaniem na repozytorium.
 7. **Autonomia roju** — kontrole pojemności na granicach zadań, pakiety przekazania, sukcesja prowadzącego z epokami i eskalacja wyłącznie spraw krytycznych, aby rój przetrwał limit jednego konta lub utratę jednego agenta.
+8. **Loop engineering** — rejestracja planu, demon uruchamiany przez człowieka, ponaglenia, które nie dodają uprawnień, przejęcie przez następców, zdarzenia planu, kolejka planów i mapa floty.
 
 - [Przeczytaj metodykę](/methodology)
 - [Przeczytaj specyfikację](/spec)
