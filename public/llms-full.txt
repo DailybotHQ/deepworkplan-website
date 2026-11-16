@@ -1,10 +1,12 @@
 # Deep Work Plan - Full Site Description
 
-> Context matters more than models. Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit that turns any repository into a structured, agent-pilotable environment — context, guardrails, and a durable plan — where the repository itself becomes the agent harness, so any coding agent can finish long-horizon work. Spec-driven, tool-agnostic, repo-native. Maintained by Dailybot and the open-source community.
+> Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.
+
+Deep Work Plan (DWP) is an open, MIT-licensed methodology and reference kit built on four pillars: spec-first plans as the durable source of truth; the repository as the agent harness; Loop engineering to carry approved plans through their recorded lifecycle; and measured efficiency in instruction bytes per flow, with a published measurement path. It is tool-agnostic, repo-native, and maintained by Dailybot with the open-source community.
 
 ## What Deep Work Plan Is
 
-Deep Work Plan is the methodology that turns any repository into an AI-first, agent-pilotable codebase. It is a methodology, not a product. DWP is spec-driven development where the repository itself becomes the agent harness: it defines how to turn a goal into an agreed plan, decompose that plan into atomic and independently verifiable tasks, and run each task in a focused loop that ends with an explicit validation gate before the next task begins. The methodology and kit install into the repository (AGENTS.md, docs, the .agents/ skills home, the DWP skill) so the work is durable and any agent can pilot the repo.
+Deep Work Plan turns any repository into an AI-first, agent-pilotable codebase through spec-first planning, a repository-native harness, Loop engineering, and measured efficiency. It defines how to turn a goal into an agreed plan, decompose it into atomic and independently verifiable tasks, and run each task through an explicit validation gate. The methodology and kit install into the repository (AGENTS.md, docs, the .agents/ skills home, and the DWP skill) so the work is durable and any agent can pilot the repo.
 
 DWP is deliberately agnostic about which AI agent or stack you use. Adapters translate the same core loop to Claude Code, Codex, Cursor, GitHub Copilot, Gemini CLI, Antigravity, Windsurf, Cline, OpenCode, and more (Claude Code and Codex are behavior-tested; the other adapters are install-tested). The plan, the tasks, and the running log are all plain Markdown, so the work stays readable, reviewable, and version-controlled. There is no runtime and no lock-in.
 
@@ -62,6 +64,32 @@ Deep Work Plan grew out of real engineering work at Dailybot and is now maintain
 - [About](https://deepworkplan.com/about) — What Deep Work Plan is, its core principles, and who maintains it
 - [Contact](https://deepworkplan.com/contact) — How to engage with the project: source, issues, and discussions on GitHub
 - [Privacy](https://deepworkplan.com/privacy) — The site's privacy policy: static site, no accounts, cookieless analytics
+
+### What v8 adds: spec-first, loop-closed
+
+Deep Work Plan v8 brings four pillars together: spec-first development, the repository as the agent
+harness, Loop engineering, and measured efficiency. The working sentence is: “Spec-first,
+loop-closed: the repository is the harness and the plan runs itself to done.” Spec-first makes the
+plan and its specification the durable source of truth. The repository carries context, tools,
+control rules, and resumable state. Loop engineering lets an approved plan move through its recorded
+lifecycle to completion. Efficiency is reported in instruction bytes per flow with a published
+measurement path; token percentages are not inferred.
+
+Loop engineering registers a lead and ordered succession. A human starts the optional Herdr daemon
+with `herdr-peers autopilot --loop`; its nudges ask the lead to continue without granting new
+authority. A listed successor can take over when the lead is gone. Plan events can reach the pack's
+Dailybot notifier, and the fleet view shows agents and plans on enabled machines. The Herdr addon is
+optional, and the human remains responsible for starting the daemon.
+
+The tagged pack releases v7.11.0 and v7.12.x carry hardening, plan registration, and notifications.
+herdr-peers v1.3.x carries the loop, reporting, and fleet view; v2.0.0 carries the protocol-2 brain
+and queue consumer. coding-agents-kit provides the pick-v2 launch contract and, in its currently
+pinned release, the verified vendor updater. These addons remain optional.
+
+The current `origin/feat/v8-line` draft adds the `autonomy` block to plan-contract/v8 and defines
+`dwp-queue-v1` for `.dwp/queue.json`. The pack writes queue state and Herdr consumes it. These
+contract details are provisional and must be re-verified against tagged 8.0.0 artifacts before
+publication.
 
 ### What v7 adds
 

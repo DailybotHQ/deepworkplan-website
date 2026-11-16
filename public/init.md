@@ -10,7 +10,7 @@ Markdown: send header `Accept: text/markdown` on any URL to receive Markdown ins
 ---
 
 You are an AI coding agent. Read this entire prompt first, then make the current repository
-**AI-first**, **spec-driven**, and **agent-pilotable** by adopting the Deep Work Plan (DWP)
+**AI-first**, **spec-first**, and **agent-pilotable** by adopting the Deep Work Plan (DWP)
 methodology. Treat this as a structured engineering task — a Deep Work Plan — not a quick edit.
 
 ## Operating principles (read before changing anything)
@@ -35,7 +35,7 @@ methodology. Treat this as a structured engineering task — a Deep Work Plan �
 
 ## 0. Read the methodology and specification
 
-The methodology stands on three pillars: **spec-driven development** (the written spec is the source of truth), **harness engineering** (the repository carries the context, tools, guardrails, and state), and **token efficiency** (the harness loads progressively and validation touches what changed — long-horizon work by design, efficient by construction).
+The methodology stands on four pillars: **spec-first** (the plan and specification are the durable source of truth), **the repository is the harness** (context, tools, guardrails, and resumable state live with the code), **Loop engineering** (an approved plan can run through its recorded lifecycle to completion), and **measured efficiency** (instruction bytes per flow, with a published measurement path and no inferred token percentages).
 
 
 Before changing anything, read the canonical sources so you understand the standard you are adopting:
@@ -446,6 +446,27 @@ agentkit and Herdr addons are installed:
   and a deputy takes over (`herdr-peers lead takeover`) if it disappears. Decide and record every
   routine choice; escalate only the critical classes C1–C7 — see
   https://deepworkplan.com/methodology/07-swarm-autonomy.md.
+
+### Finish with the Herdr loop (only when chosen)
+
+If the developer chose the optional Herdr addon and it is installed, finish onboarding by asking the
+human to start the loop after the repository's plan registration and lead succession are in place.
+The human starts the daemon; an agent must not start it on the human's behalf:
+
+```bash
+herdr-peers autopilot --loop
+```
+
+The human may add the pack's Dailybot notifier when notifications are configured:
+
+```bash
+herdr-peers autopilot --loop --notify 'python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py'
+```
+
+The notifier is optional. The Herdr addon and its daemon are never requirements for adopting or using
+Deep Work Plan. After the human starts the daemon, confirm it with `herdr-peers autopilot status` and
+`herdr-peers fleet`; if Herdr was not chosen, end onboarding with the repository ready for plans and
+do not install or start the daemon.
 
 ## 5. Evolve the kit (author sub-skill)
 
