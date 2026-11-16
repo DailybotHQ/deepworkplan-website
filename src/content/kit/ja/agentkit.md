@@ -10,7 +10,7 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.12.2`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v8**（パック `v8.0.0`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 Deep Work Plan には4つの柱があります。仕様ファースト、リポジトリこそがハーネス、Loop engineering、計測された効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論はそれ単体でも機能します。
 
@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.4.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.5.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.4.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.5.0`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
@@ -105,7 +105,7 @@ ak doctor
 
 ## 計画に追加されるもの
 
-コントラクトが `agent_delegation` を付与している v7 の計画では、`execute` が `parallel_safe` なタスクを別の CLI に渡せます。専用の git worktree を作成し、そこでタイムアウト付きで `ak run` を実行し、結果を計画の `analysis_results/delegations/` に収集します。結果は、計画自身のゲートランナーが観測するまで `asserted` な証拠です。委任先をキャンセルすると、そのプロセスツリー全体が停止します。
+コントラクトが `agent_delegation` を付与している v7 または v8 の計画では、`execute` が `parallel_safe` なタスクを別の CLI に渡せます。専用の git worktree を作成し、そこでタイムアウト付きで `ak run` を実行し、結果を計画の `analysis_results/delegations/` に収集します。結果は、計画自身のゲートランナーが観測するまで `asserted` な証拠です。委任先をキャンセルすると、そのプロセスツリー全体が停止します。
 
 ## Agentkit か Herdr か
 
@@ -116,7 +116,7 @@ ak doctor
 
 二つは組み合わせられます。herdr-peers は、`ak env <kind> @profile` が出力する環境を使って、ペイン内にピアを起動できます。多数のレーンを同時に動かす場合は、[多数のエージェントを動かす](/methodology/06-orchestration)を参照してください。
 
-herdr-peers v2.0.0 の任意機能である autopilot brain はこのインターフェースを使います。`ak pick --kinds ... --json` が pick-v2 の起動契約を返し、Herdr はそれを検証して `launch.permissions: ask` を必須とし、返された `launch.argv` を実行します。brain が autonomy や bypass のフラグを有効にすることはありません。`ak update` は引き続き人が実行し、brain は CLI を更新しません。
+herdr-peers 2.0.0 の任意機能である autopilot brain はこのインターフェースを使います。`ak pick --kinds ... --json` が pick-v2 の起動契約を返し、Herdr はそれを検証して `launch.permissions: ask` を必須とし、返された `launch.argv` を実行します。brain が autonomy や bypass のフラグを有効にすることはありません。`ak update` は引き続き人が実行し、brain は CLI を更新しません。
 
 ## 補足
 

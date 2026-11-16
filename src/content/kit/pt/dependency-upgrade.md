@@ -25,7 +25,7 @@ O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é
 4. Executar o validation gate real do repositório após cada lote; reverter qualquer lote que falhe.
 5. Resumir o que foi atualizado, ignorado e revertido; deixar o desenvolvedor comitar.
 
-## Especificação v7
+## Especificação v8
 
 | Item | Valor |
 |---|---|
@@ -33,7 +33,7 @@ O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é
 | Chave de registro | `dependency-upgrade` em `.dwp/config.json` |
 | Descritor | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Comando | `/lib-upgrade` instalado em `.agents/commands/` quando aceito |
-| Controle de versão | Fixado e versionado com o pacote de skills (`v7.12.2`) |
+| Controle de versão | Fixado e versionado com o pacote de skills (`v8.0.0`) |
 
 ## Notas
 

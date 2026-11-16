@@ -10,7 +10,7 @@ order: 8
 
 Mỗi coding agent trên terminal đều có các cờ riêng để tiếp tục một phiên, cách riêng để tách biệt tài khoản thứ hai, chế độ headless riêng và công tắc riêng để bỏ qua các lời nhắc cấp quyền. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** đặt một bề mặt lệnh duy nhất lên tất cả chúng: `ak <kind> [@profile]`.
 
-Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.12.2`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
+Addon này tích hợp bộ kit vào **DWP v8** (gói `v8.0.0`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
 
 Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
@@ -67,15 +67,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.4.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.5.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |
@@ -105,7 +105,7 @@ Addon không tự viết ra cờ tự chủ nào và không bao giờ truyền `
 
 ## Addon bổ sung gì cho một kế hoạch
 
-Trên một kế hoạch v7 có hợp đồng cấp quyền `agent_delegation`, `execute` có thể giao một tác vụ `parallel_safe` cho một CLI khác: nó tạo một git worktree riêng, chạy `ak run` ở đó với giới hạn thời gian và thu thập kết quả vào `analysis_results/delegations/` của kế hoạch. Kết quả là bằng chứng `asserted` cho đến khi trình chạy cổng của chính kế hoạch quan sát được nó. Việc hủy một agent được ủy thác sẽ dừng toàn bộ cây tiến trình của nó.
+Trên một kế hoạch v7 hoặc v8 có hợp đồng cấp quyền `agent_delegation`, `execute` có thể giao một tác vụ `parallel_safe` cho một CLI khác: nó tạo một git worktree riêng, chạy `ak run` ở đó với giới hạn thời gian và thu thập kết quả vào `analysis_results/delegations/` của kế hoạch. Kết quả là bằng chứng `asserted` cho đến khi trình chạy cổng của chính kế hoạch quan sát được nó. Việc hủy một agent được ủy thác sẽ dừng toàn bộ cây tiến trình của nó.
 
 ## Agentkit hay Herdr
 
@@ -116,7 +116,7 @@ Trên một kế hoạch v7 có hợp đồng cấp quyền `agent_delegation`, 
 
 Hai addon có thể kết hợp với nhau: herdr-peers có thể khởi chạy một peer trong pane với môi trường mà `ak env <kind> @profile` in ra. Để chạy nhiều lane cùng lúc, xem [Chạy nhiều agent](/methodology/06-orchestration).
 
-herdr-peers v2.0.0 dùng giao diện này cho bộ não autopilot tùy chọn: `ak pick --kinds ... --json` trả về hợp đồng khởi chạy pick-v2; Herdr xác thực hợp đồng, yêu cầu `launch.permissions: ask`, rồi khởi chạy `launch.argv` được trả về. Bộ não không thể bật các cờ tự chủ hoặc bypass. `ak update` vẫn do con người gọi; bộ não không bao giờ cập nhật CLI.
+herdr-peers 2.0.0 dùng giao diện này cho bộ não autopilot tùy chọn: `ak pick --kinds ... --json` trả về hợp đồng khởi chạy pick-v2; Herdr xác thực hợp đồng, yêu cầu `launch.permissions: ask`, rồi khởi chạy `launch.argv` được trả về. Bộ não không thể bật các cờ tự chủ hoặc bypass. `ak update` vẫn do con người gọi; bộ não không bao giờ cập nhật CLI.
 
 ## Ghi chú
 

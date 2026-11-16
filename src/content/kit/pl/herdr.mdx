@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) umieszcza agentów kodujących w panelach, na Twojej maszynie i na maszynach, do których dociera przez SSH. Ten addon pozwala Deep Work Plan używać tych agentów jako **peerów**: plan może przekazać ograniczone zadanie agentowi w innym panelu, otrzymać dokładnie jedną autoryzowaną odpowiedź i zachować zapis tej wymiany.
 
-Jest to opcjonalny addon **DWP v7** (pack `v7.12.2`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
+Jest to opcjonalny addon **DWP v8** (pack `v8.0.0`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
 
 Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
@@ -20,11 +20,11 @@ Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop e
 
 ## Co integruje
 
-Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v2.0.0`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
+Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v2.1.0`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, tag `v2.0.0`, protokół 1 |
+| Produkt | `DailybotHQ/herdr-peers`, tag `v2.1.0`, protokół 2 |
 | Klucz rejestru | `herdr` w `.dwp/config.json` |
 | Transport | interaktywny: peer w panelu Herdr |
 | Zapewnia | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.
 Zainstaluj herdr-peers oraz oficjalny skill Herdr, od którego zależy. Każda maszyna, której agenci mają odpowiadać, również potrzebuje tego skilla.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.1.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -45,9 +45,9 @@ Wymagania: Herdr 0.9.1 lub nowszy, `bash` oraz `python3` 3.9 lub nowszy (tylko b
 
 ## Co dodaje do planu
 
-- **Delegowanie do peera.** W planie v7, którego kontrakt przyznaje `agent_delegation`, `execute` może przekazać zadanie `parallel_safe` lub pytanie tylko do odczytu agentowi w innym panelu, na tej samej lub innej maszynie.
+- **Delegowanie do peera.** W planie v7 lub v8, którego kontrakt przyznaje `agent_delegation`, `execute` może przekazać zadanie `parallel_safe` lub pytanie tylko do odczytu agentowi w innym panelu, na tej samej lub innej maszynie.
 - **Jedna autoryzowana odpowiedź.** Żądanie niesie stempel, który autoryzuje dokładnie jedną odpowiedź. Peer odpowiada raz przez helper, a odpowiedź niesie własny stempel.
-- **Zapis przed użyciem.** Każde delegowanie jest zapisywane w `analysis_results/delegations.ndjson` planu, zanim odpowiedź zostanie użyta, i odpowiada zdarzeniu dziennika v7 `delegation`.
+- **Zapis przed użyciem.** Każde delegowanie jest zapisywane w `analysis_results/delegations.ndjson` planu, zanim odpowiedź zostanie użyta, i odpowiada zdarzeniu dziennika `delegation` planów v7 i v8.
 - **Wyniki pozostają twierdzeniami do czasu sprawdzenia.** Odpowiedź peera jest dowodem `asserted`, dopóki własny gate runner planu jej nie zaobserwuje. Nigdy sama nie zamyka zadania.
 
 ## Model bezpieczeństwa
@@ -64,7 +64,7 @@ herdr-peers nie uwierzytelnia nadawcy: pole `from=` w stemplu jest twierdzeniem.
 
 ## Kontenery i host
 
-Z addonem [devcontainer](/kit/devcontainer) na devcontainer-kit `v1.2.0` każdy kontener dck zawiera herdr-peers i dołącza do sieci przy `dck up`: jego agenci mogą pytać agentów na hoście, w innych kontenerach i w pozostałych kontenerach loopback hosta, i otrzymać odpowiedź. `dck setup` instaluje na hoście zweryfikowany herdr-peers, więc agenci hosta także odpowiadają. Listener na hoście i dodatkowe klucze, które wpuszczają inne kontenery, to twoje decyzje w profilu hosta kitu; ten addon nigdy ich nie ustawia. Od herdr-peers (`v0.2.3`) każda maszyna przechowuje własny stan (`$XDG_STATE_HOME/herdr-peers/<server>/`), więc checkout współdzielony przez host i kontener nie miesza już ich zapisów, a od devcontainer-kit (`v0.3.3`) kontener sam eksportuje `HERDR_PEERS_SELF`, więc agenci Codex wewnątrz docierają do innych maszyn bez ręcznych kroków.
+Z addonem [devcontainer](/kit/devcontainer) na devcontainer-kit `v1.3.0` każdy kontener dck zawiera herdr-peers i dołącza do sieci przy `dck up`: jego agenci mogą pytać agentów na hoście, w innych kontenerach i w pozostałych kontenerach loopback hosta, i otrzymać odpowiedź. `dck setup` instaluje na hoście zweryfikowany herdr-peers, więc agenci hosta także odpowiadają. Listener na hoście i dodatkowe klucze, które wpuszczają inne kontenery, to twoje decyzje w profilu hosta kitu; ten addon nigdy ich nie ustawia. Od herdr-peers (`v0.2.3`) każda maszyna przechowuje własny stan (`$XDG_STATE_HOME/herdr-peers/<server>/`), więc checkout współdzielony przez host i kontener nie miesza już ich zapisów, a od devcontainer-kit (`v0.3.3`) kontener sam eksportuje `HERDR_PEERS_SELF`, więc agenci Codex wewnątrz docierają do innych maszyn bez ręcznych kroków.
 
 ## Herdr czy agentkit
 

@@ -10,7 +10,7 @@ order: 8
 
 Jeder Terminal-Coding-Agent hat eigene Flags zum Fortsetzen einer Sitzung, eine eigene Art, ein zweites Konto getrennt zu halten, einen eigenen Headless-Modus und einen eigenen Schalter zum Überspringen von Berechtigungsabfragen. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** legt eine einzige Befehlsoberfläche über alle: `ak <kind> [@profile]`.
 
-Dieses Addon integriert das Kit in **DWP v7** (Paket `v7.12.2`) als **headless** Delegationstransport. Es ist optional: Ohne es läuft jede Aufgabe wie bisher in der aktuellen Sitzung. Das Kit selbst ist ein MIT-Produkt, das ohne Deep Work Plan funktioniert.
+Dieses Addon integriert das Kit in **DWP v8** (Paket `v8.0.0`) als **headless** Delegationstransport. Es ist optional: Ohne es läuft jede Aufgabe wie bisher in der aktuellen Sitzung. Das Kit selbst ist ein MIT-Produkt, das ohne Deep Work Plan funktioniert.
 
 Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
@@ -67,15 +67,15 @@ Arbeit bewegt sich nur zwischen den Konten, die Sie für den Plan deklariert hab
 ## Installation
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v1.4.0`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
+Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v1.5.0`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v1.4.0`, Schnittstelle 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v1.5.0`, Schnittstelle 1 |
 | Registry-Schlüssel | `agentkit` in `.dwp/config.json` |
 | Transport | headless: ein `ak run` pro Delegiertem in einem eigenen Git-Worktree |
 | Stellt bereit | `subagents`, `cancel_children`, `model_routing` |
@@ -105,7 +105,7 @@ Das Addon schreibt kein Autonomie-Flag aus und übergibt nie `--auto`. Es überg
 
 ## Was es einem Plan hinzufügt
 
-In einem v7-Plan, dessen Vertrag `agent_delegation` freigibt, darf `execute` eine `parallel_safe`-Aufgabe an eine andere CLI übergeben: Es legt einen eigenen Git-Worktree an, führt dort `ak run` mit einem Timeout aus und sammelt das Ergebnis in `analysis_results/delegations/` des Plans. Das Ergebnis ist `asserted`-Evidenz, bis der eigene Gate-Runner des Plans es beobachtet. Das Abbrechen eines Delegierten beendet seinen gesamten Prozessbaum.
+In einem v7- oder v8-Plan, dessen Vertrag `agent_delegation` freigibt, darf `execute` eine `parallel_safe`-Aufgabe an eine andere CLI übergeben: Es legt einen eigenen Git-Worktree an, führt dort `ak run` mit einem Timeout aus und sammelt das Ergebnis in `analysis_results/delegations/` des Plans. Das Ergebnis ist `asserted`-Evidenz, bis der eigene Gate-Runner des Plans es beobachtet. Das Abbrechen eines Delegierten beendet seinen gesamten Prozessbaum.
 
 ## Agentkit oder Herdr
 
@@ -116,7 +116,7 @@ In einem v7-Plan, dessen Vertrag `agent_delegation` freigibt, darf `execute` ein
 
 Beide lassen sich kombinieren: herdr-peers kann einen Peer in einem Pane mit der Umgebung starten, die `ak env <kind> @profile` ausgibt. Für viele Lanes gleichzeitig siehe [Viele Agenten betreiben](/methodology/06-orchestration).
 
-herdr-peers v2.0.0 verwendet diese Schnittstelle für sein optionales Autopilot-Gehirn: `ak pick --kinds ... --json` liefert den pick-v2-Startvertrag; Herdr validiert ihn, verlangt `launch.permissions: ask` und startet anschließend das zurückgegebene `launch.argv`. Das Gehirn kann keine Autonomie- oder Bypass-Flags aktivieren. `ak update` wird weiterhin nur von Menschen aufgerufen; das Gehirn aktualisiert nie CLIs.
+herdr-peers 2.0.0 verwendet diese Schnittstelle für sein optionales Autopilot-Gehirn: `ak pick --kinds ... --json` liefert den pick-v2-Startvertrag; Herdr validiert ihn, verlangt `launch.permissions: ask` und startet anschließend das zurückgegebene `launch.argv`. Das Gehirn kann keine Autonomie- oder Bypass-Flags aktivieren. `ak update` wird weiterhin nur von Menschen aufgerufen; das Gehirn aktualisiert nie CLIs.
 
 ## Hinweise
 

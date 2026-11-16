@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 附加组件
 
-为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v7**（技能包 `v7.12.2`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
+为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v8**（技能包 `v8.0.0`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
 
 Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
@@ -23,20 +23,20 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 ## 安装
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v1.2.0`：`v0.2.0` 不受支持。
+要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v1.3.0`：`v0.2.0` 不受支持。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v1.2.0`，接口 2 |
+| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v1.3.0`，接口 2 |
 | 注册表键 | `.dwp/config.json` 中的 `devcontainer` |
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |
 
-**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上新的固定版本（herdr-peers 1.3.1、coding-agents-kit 1.4.0 和 DeepWorkPlan Vim 1.0.1，镜像中还包括 vendored 的 pack 7.12.1）。
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上当前的固定版本。`v1.3.0` 镜像内置的版本与 `v1.2.0` 相同：herdr-peers 1.3.1、coding-agents-kit 1.4.0 和 DeepWorkPlan Vim 1.0.1，镜像中还包括 vendored 的 pack 7.12.1。
 
 ## 层
 
@@ -104,6 +104,14 @@ copy_keys = true              # default false
 ```
 
 启用期间，`dck up` 会把主机的 `~/.ssh` 以只读方式绑定到 `~/.ssh_host`，每次启动都会把其中的 `id_*` 密钥复制到容器的 `~/.ssh` 中（私钥权限为 `0600`），并与主机保持同步。agent 转发保持不变；关闭该选项后，副本会在下次启动时被移除。代价是：整个主机 `~/.ssh` 在容器内可读，私钥存放在状态卷中。
+
+## 自 devcontainer-kit 1.3.0 起（接口 2）
+
+1.3.0 版保持接口 2，并新增一个可选启用的键；未设置该键的仓库，渲染结果与以前完全相同。
+
+- **`[compose] container_only`。** 此处列出的工作区子路径会作为项目范围的具名卷（`co-<path-slug>`，例如覆盖 `/app/node_modules` 的 `co-app-node_modules`），以读写方式挂载到主服务上。容器在其中构建的内容永远不会到达主机的检出副本。它针对的情况是：工作区是绑定挂载，在 macOS 或 Windows 主机上，容器内的 `npm` 或 `pnpm` 安装会用容器自身平台的构建替换 `node_modules`，从而破坏主机上的安装。
+- **每次启动时设置所有权。** 每次容器启动时，入口点都会把每个挂载点交给配置的用户；一旦该用户已拥有它，这一步不做任何事。
+- **每个路径只挂载一次。** 用户块也挂载的路径会被拒绝；派生出的卷名若已被 `compose.state_volume` 或 `[compose] volumes` 使用，同样会被拒绝。`dck.toml` 模式（`dck-config-v2.json`）新增了该键。
 
 ## 安全默认值
 

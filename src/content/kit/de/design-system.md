@@ -42,17 +42,7 @@ Es ist nie erforderlich — ein Repository mit null optionalen Addons ist vollst
 
 Wenn angenommen, kann das Addon einen `/design-system`-Delegator in das `.agents/commands/`-Verzeichnis des Repos installieren, um `DESIGN.md` später neu zu erzeugen oder zu aktualisieren. Die Installation des Befehls ist optional; ein abgelehntes Addon installiert keinen.
 
-## v7-Spezifikation
-
-| Element | Wert |
-|---|---|
-| Produkt | DeepWorkPlan design-system-Addon |
-| Registrierungsschlüssel |  in  |
-| Deskriptor |  (Schnittstelle 1) |
-| Zieldatei |  indexiert von  |
-| Versionierung | Gepinnt und versioniert mit dem Skill-Paket () |
-
-## v7-Spezifikation
+## v8-Spezifikation
 
 | Element | Wert |
 |---|---|
@@ -60,7 +50,7 @@ Wenn angenommen, kann das Addon einen `/design-system`-Delegator in das `.agents
 | Registrierungsschlüssel | `design-system` in `.dwp/config.json` |
 | Deskriptor | `addons/design-system/addon.json` (Schnittstelle 1) |
 | Zieldatei | `docs/DESIGN.md` indexiert von `AGENTS.md` |
-| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v7.12.2`) |
+| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v8.0.0`) |
 
 ## Verhältnis zu featurebezogenen Design-Dokumenten
 

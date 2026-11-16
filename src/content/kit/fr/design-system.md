@@ -42,7 +42,7 @@ Il n’est jamais requis — un dépôt sans aucun addon optionnel est pleinemen
 
 Lorsqu’il est accepté, l’addon peut installer un délégateur `/design-system` dans le `.agents/commands/` du dépôt pour régénérer ou rafraîchir `DESIGN.md` plus tard. L’installation de la commande est optionnelle ; un addon refusé n’en installe aucune.
 
-## Spécification v7
+## Spécification v8
 
 | Élément | Valeur |
 |---|---|
@@ -50,7 +50,7 @@ Lorsqu’il est accepté, l’addon peut installer un délégateur `/design-syst
 | Clé de registre | `design-system` dans `.dwp/config.json` |
 | Descripteur | `addons/design-system/addon.json` (interface 1) |
 | Fichier cible | `docs/DESIGN.md` indexé depuis `AGENTS.md` |
-| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v7.12.2`) |
+| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v8.0.0`) |
 
 ## Relation avec les documents de conception par fonctionnalité
 

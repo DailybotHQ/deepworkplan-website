@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v7** (पैक `v7.12.2`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
+रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v8** (पैक `v8.0.0`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
 
 Deep Work Plan के चार स्तंभ हैं: स्पेक-फ़र्स्ट योजनाएँ, रिपॉज़िटरी ही हार्नेस है, Loop engineering और मापी गई दक्षता। ऐडऑन और एकीकरण हार्नेस तथा लूप का विस्तार कर सकते हैं; कार्यविधि अपने आप भी काम करती है।
 
@@ -23,20 +23,20 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.2.0` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.3.0` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.2.0`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.3.0`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
 
-**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में नए पिन आ जाएँ (herdr-peers 1.3.1, coding-agents-kit 1.4.0 और DeepWorkPlan Vim 1.0.1 पर)।
+**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.3.0` image में वही संस्करण शामिल हैं जो `v1.2.0` में थे: herdr-peers 1.3.1, coding-agents-kit 1.4.0 और DeepWorkPlan Vim 1.0.1, और vendored पैक 7.12.1 भी image में मौजूद है।
 
 ## परतें
 
@@ -104,6 +104,14 @@ copy_keys = true              # default false
 ```
 
 जब तक यह चालू है, `dck up` होस्ट के `~/.ssh` को `~/.ssh_host` पर read-only बाइंड करता है, और हर start उसकी `id_*` कुंजियों को container के `~/.ssh` में कॉपी करता है (निजी कुंजियाँ `0600`), होस्ट के साथ तालमेल में। Agent forwarding अपरिवर्तित रहता है, और इसे बंद करने पर अगले start पर प्रतियाँ हटा दी जाती हैं। इसकी कीमत: पूरा होस्ट `~/.ssh` container के अंदर पढ़ा जा सकता है, और निजी कुंजियाँ state volume में रहती हैं।
+
+## devcontainer-kit 1.3.0 से (इंटरफ़ेस 2)
+
+रिलीज़ 1.3.0 इंटरफ़ेस 2 को बनाए रखती है और एक opt-in कुंजी जोड़ती है; जो रिपॉज़िटरी इसे सेट नहीं करती, वह ठीक पहले की तरह render होती है।
+
+- **`[compose] container_only`.** यहाँ सूचीबद्ध workspace उप-पथ मुख्य service पर प्रोजेक्ट-स्कोप वाले named volumes (`co-<path-slug>`, उदाहरण के लिए `/app/node_modules` पर `co-app-node_modules`) के रूप में read-write mount किए जाते हैं। container वहाँ जो कुछ build करता है, वह कभी होस्ट के checkout तक नहीं पहुँचता। यह जिस स्थिति के लिए है: workspace एक bind mount है, और macOS या Windows होस्ट पर container के अंदर `npm` या `pnpm` install `node_modules` को अपने ही प्लेटफ़ॉर्म के build से बदल देता है, जिससे होस्ट का install टूट जाता है।
+- **हर start पर स्वामित्व।** entrypoint हर container start पर हर mount point कॉन्फ़िगर किए गए उपयोगकर्ता को सौंपता है; एक बार उपयोगकर्ता उसका स्वामी हो जाए, तो यह कुछ नहीं करता।
+- **हर पथ के लिए एक mount।** जिस पथ को user ब्लॉक भी mount करता है, उसे अस्वीकार कर दिया जाता है, और उसी तरह उस व्युत्पन्न volume नाम को भी जिसका उपयोग `compose.state_volume` या `[compose] volumes` पहले से कर रहे हैं। `dck.toml` स्कीमा (`dck-config-v2.json`) में यह कुंजी जुड़ जाती है।
 
 ## सुरक्षा डिफ़ॉल्ट
 

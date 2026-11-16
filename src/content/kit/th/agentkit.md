@@ -10,7 +10,7 @@ order: 8
 
 coding agent บนเทอร์มินัลแต่ละตัวมีแฟล็กของตัวเองสำหรับทำเซสชันต่อ มีวิธีของตัวเองในการแยกบัญชีที่สองออกจากกัน มีโหมด headless ของตัวเอง และมีสวิตช์ของตัวเองสำหรับข้ามการถามสิทธิ์ **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** ครอบทั้งหมดนั้นด้วยชุดคำสั่งเดียว: `ak <kind> [@profile]`
 
-แอดออนนี้ผสานชุดเครื่องมือดังกล่าวเข้ากับ **DWP v7** (แพ็ก `v7.12.2`) ในฐานะช่องทางการมอบหมายงานแบบ **headless** แอดออนนี้เป็นแบบเลือกใช้ หากไม่มีมัน ทุกงานจะรันในเซสชันปัจจุบันเหมือนที่เคยเป็นมาทุกประการ ตัวชุดเครื่องมือเองเป็นผลิตภัณฑ์ MIT ที่ทำงานได้แม้ไม่มี Deep Work Plan
+แอดออนนี้ผสานชุดเครื่องมือดังกล่าวเข้ากับ **DWP v8** (แพ็ก `v8.0.0`) ในฐานะช่องทางการมอบหมายงานแบบ **headless** แอดออนนี้เป็นแบบเลือกใช้ หากไม่มีมัน ทุกงานจะรันในเซสชันปัจจุบันเหมือนที่เคยเป็นมาทุกประการ ตัวชุดเครื่องมือเองเป็นผลิตภัณฑ์ MIT ที่ทำงานได้แม้ไม่มี Deep Work Plan
 
 Deep Work Plan มีเสาหลักสี่ประการ ได้แก่ สเปกมาก่อน, repository คือ harness, Loop engineering และประสิทธิภาพที่วัดได้ ส่วนเสริมและการผสานการทำงานช่วยขยาย harness และลูปได้ แต่ระเบียบวิธีนี้ทำงานได้ด้วยตัวเอง
 
@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # ข้ามบัญชี�
 ## การติดตั้ง
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-ข้อกำหนด: `bash` บน macOS หรือ Linux และ `python3` 3.9 ขึ้นไป ไม่ต้องมีอย่างอื่น Windows ใช้ `install.ps1` ให้ตรึงไว้ที่ `v1.4.0` เนื่องจาก `v0.2.0` และ `v0.2.1` ไม่ได้รับการสนับสนุน ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น
+ข้อกำหนด: `bash` บน macOS หรือ Linux และ `python3` 3.9 ขึ้นไป ไม่ต้องมีอย่างอื่น Windows ใช้ `install.ps1` ให้ตรึงไว้ที่ `v1.5.0` เนื่องจาก `v0.2.0` และ `v0.2.1` ไม่ได้รับการสนับสนุน ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/coding-agents-kit` แท็ก `v1.4.0` อินเทอร์เฟซ 1 |
+| ผลิตภัณฑ์ | `DailybotHQ/coding-agents-kit` แท็ก `v1.5.0` อินเทอร์เฟซ 1 |
 | คีย์ใน registry | `agentkit` ใน `.dwp/config.json` |
 | ช่องทางการส่ง | headless: `ak run` หนึ่งครั้งต่อผู้รับมอบหมายหนึ่งราย ใน git worktree เฉพาะ |
 | สิ่งที่มอบให้ | `subagents`, `cancel_children`, `model_routing` |
@@ -105,7 +105,7 @@ ak doctor
 
 ## สิ่งที่เพิ่มให้กับแผน
 
-ในแผน v7 ที่สัญญาให้สิทธิ์ `agent_delegation` คำสั่ง `execute` สามารถส่งงาน `parallel_safe` ให้ CLI อื่นได้ โดยจะสร้าง git worktree เฉพาะ รัน `ak run` ในนั้นพร้อม timeout และรวบรวมผลลัพธ์ไว้ใน `analysis_results/delegations/` ของแผน ผลลัพธ์เป็นหลักฐานแบบ `asserted` จนกว่า gate runner ของแผนเองจะสังเกตเห็นมัน การยกเลิกผู้รับมอบหมายจะหยุดทั้ง process tree ของมัน
+ในแผน v7 หรือ v8 ที่สัญญาให้สิทธิ์ `agent_delegation` คำสั่ง `execute` สามารถส่งงาน `parallel_safe` ให้ CLI อื่นได้ โดยจะสร้าง git worktree เฉพาะ รัน `ak run` ในนั้นพร้อม timeout และรวบรวมผลลัพธ์ไว้ใน `analysis_results/delegations/` ของแผน ผลลัพธ์เป็นหลักฐานแบบ `asserted` จนกว่า gate runner ของแผนเองจะสังเกตเห็นมัน การยกเลิกผู้รับมอบหมายจะหยุดทั้ง process tree ของมัน
 
 ## Agentkit หรือ Herdr
 
@@ -116,7 +116,7 @@ ak doctor
 
 ทั้งสองใช้ร่วมกันได้ herdr-peers สามารถเปิด peer ใน pane ด้วย environment ที่ `ak env <kind> @profile` พิมพ์ออกมา หากต้องการรันหลาย lane พร้อมกัน ดู [การรันเอเจนต์หลายตัว](/methodology/06-orchestration)
 
-herdr-peers v2.0.0 ใช้อินเทอร์เฟซนี้กับ autopilot brain ที่เลือกใช้ได้: `ak pick --kinds ... --json` ส่งคืนสัญญาการเปิดใช้ pick-v2 โดย Herdr จะตรวจสอบ กำหนดให้ `launch.permissions: ask` แล้วจึงเริ่ม `launch.argv` ที่ได้รับ brain ไม่สามารถเปิดใช้แฟล็ก autonomy หรือ bypass ได้ `ak update` ยังคงให้มนุษย์เป็นผู้เรียกใช้ และ brain จะไม่อัปเดต CLI
+herdr-peers 2.0.0 ใช้อินเทอร์เฟซนี้กับ autopilot brain ที่เลือกใช้ได้: `ak pick --kinds ... --json` ส่งคืนสัญญาการเปิดใช้ pick-v2 โดย Herdr จะตรวจสอบ กำหนดให้ `launch.permissions: ask` แล้วจึงเริ่ม `launch.argv` ที่ได้รับ brain ไม่สามารถเปิดใช้แฟล็ก autonomy หรือ bypass ได้ `ak update` ยังคงให้มนุษย์เป็นผู้เรียกใช้ และ brain จะไม่อัปเดต CLI
 
 ## หมายเหตุ
 

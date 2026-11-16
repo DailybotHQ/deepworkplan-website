@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** is the terminal editor for Deep Work Plan: a Neovim configuration for people, and for coding agents, that work in a terminal. Your plans, your documentation and an index of every command are one keystroke away.
 
-It is a separate product, offered as the optional `vim` addon of Deep Work Plan v7 (pack `v7.12.2`). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v1.0.1**, a maintenance release of the first stable release, `v1.0.0`: from `v1.0.0` on, the installer and its flags (with the matching `DWP_VIM_*` variables), the addon surface (`addon/surface.json`, interface 1), the editor commands `:DwpPlans`, `:DwpLanes`, `:DwpCommands` and `:DwpConfig`, the `dwpvim.json` keys and the keybindings pinned by the mapping contract change incompatibly only in a new major version.
+It is a separate product, offered as the optional `vim` addon of Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v1.0.1**, a maintenance release of the first stable release, `v1.0.0`: from `v1.0.0` on, the installer and its flags (with the matching `DWP_VIM_*` variables), the addon surface (`addon/surface.json`, interface 1), the editor commands `:DwpPlans`, `:DwpLanes`, `:DwpCommands` and `:DwpConfig`, the `dwpvim.json` keys and the keybindings pinned by the mapping contract change incompatibly only in a new major version.
 
 Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
 
@@ -210,9 +210,9 @@ The installer does not run on Windows. Use the manual path in the repository REA
 
 No. It is an editor first. It does not install or require the Deep Work Plan skill; the plan browser simply has nothing to list until a `.dwp/plans/` folder exists.
 
-### How does the v7 vim addon use it?
+### How does the vim addon use it?
 
-Deep Work Plan v7 offers the editor as the optional `vim` addon during onboarding. The addon detects an existing install read-only, through the editor's `addon/surface.json`, and offers the pinned, checksum-verified install only with your consent. It never overwrites an existing Neovim configuration without explicit approval, and it is never required.
+Deep Work Plan v8 offers the editor as the optional `vim` addon during onboarding. The addon detects an existing install read-only, through the editor's `addon/surface.json`, and offers the pinned, checksum-verified install only with your consent. It never overwrites an existing Neovim configuration without explicit approval, and it is never required.
 
 ### How do coding agents use it?
 
@@ -235,5 +235,5 @@ The source is the [DeepWorkPlan Vim repository](https://github.com/DailybotHQ/de
 - [Devcontainer](/kit/devcontainer) — reproducible dev environment (first addon)
 - [Dailybot](/kit/dailybot) — team-visible plan lifecycle reporting (second addon)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — local review during plan Final Reviews (fifth addon)
-- [Herdr](/kit/herdr) — delegate a task to a peer agent in a Herdr pane (v7)
-- [Agentkit](/kit/agentkit) — one command for every terminal coding agent, and headless delegation (v7)
+- [Herdr](/kit/herdr) — delegate a task to a peer agent in a Herdr pane (since v7)
+- [Agentkit](/kit/agentkit) — one command for every terminal coding agent, and headless delegation (since v7)

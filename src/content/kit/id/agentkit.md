@@ -10,7 +10,7 @@ order: 8
 
 Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caranya sendiri untuk memisahkan akun kedua, mode headless-nya sendiri, dan sakelarnya sendiri untuk melewati prompt izin. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** menyatukan semuanya di bawah satu permukaan perintah: `ak <kind> [@profile]`.
 
-Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.12.2`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
+Addon ini mengintegrasikan kit tersebut ke dalam **DWP v8** (paket `v8.0.0`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
 Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
@@ -67,15 +67,15 @@ Pekerjaan hanya berpindah di antara akun yang Anda deklarasikan untuk rencana, d
 ## Instalasi
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.4.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.5.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |
@@ -105,7 +105,7 @@ Addon ini tidak menuliskan flag otonomi apa pun dan tidak pernah meneruskan `--a
 
 ## Yang ditambahkan ke rencana
 
-Pada rencana v7 yang kontraknya memberikan izin `agent_delegation`, `execute` dapat menyerahkan tugas `parallel_safe` ke CLI lain: ia membuat worktree git khusus, menjalankan `ak run` di sana dengan batas waktu, dan mengumpulkan hasilnya ke `analysis_results/delegations/` milik rencana. Hasilnya adalah bukti `asserted` sampai penjalan gerbang (gate runner) milik rencana itu sendiri mengamatinya. Membatalkan sebuah agen delegasi menghentikan seluruh pohon prosesnya.
+Pada rencana v7 atau v8 yang kontraknya memberikan izin `agent_delegation`, `execute` dapat menyerahkan tugas `parallel_safe` ke CLI lain: ia membuat worktree git khusus, menjalankan `ak run` di sana dengan batas waktu, dan mengumpulkan hasilnya ke `analysis_results/delegations/` milik rencana. Hasilnya adalah bukti `asserted` sampai penjalan gerbang (gate runner) milik rencana itu sendiri mengamatinya. Membatalkan sebuah agen delegasi menghentikan seluruh pohon prosesnya.
 
 ## Agentkit atau Herdr
 
@@ -116,7 +116,7 @@ Pada rencana v7 yang kontraknya memberikan izin `agent_delegation`, `execute` da
 
 Keduanya dapat dipadukan: herdr-peers dapat meluncurkan rekan di sebuah panel dengan environment yang dicetak oleh `ak env <kind> @profile`. Untuk banyak lane sekaligus, lihat [Menjalankan banyak agent](/methodology/06-orchestration).
 
-herdr-peers v2.0.0 menggunakan antarmuka ini untuk otak autopilot opsional: `ak pick --kinds ... --json` mengembalikan kontrak peluncuran pick-v2; Herdr memvalidasinya, mewajibkan `launch.permissions: ask`, lalu menjalankan `launch.argv` yang dikembalikan. Otak tidak dapat mengaktifkan flag otonomi atau bypass. `ak update` tetap dijalankan manusia; otak tidak pernah memperbarui CLI.
+herdr-peers 2.0.0 menggunakan antarmuka ini untuk otak autopilot opsional: `ak pick --kinds ... --json` mengembalikan kontrak peluncuran pick-v2; Herdr memvalidasinya, mewajibkan `launch.permissions: ask`, lalu menjalankan `launch.argv` yang dikembalikan. Otak tidak dapat mengaktifkan flag otonomi atau bypass. `ak update` tetap dijalankan manusia; otak tidak pernah memperbarui CLI.
 
 ## Catatan
 

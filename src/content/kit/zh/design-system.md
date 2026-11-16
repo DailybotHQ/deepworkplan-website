@@ -42,7 +42,7 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 
 被采纳时，该附加组件可向仓库的 `.agents/commands/` 中安装一个 `/design-system` 委派器，以便日后重新生成或刷新 `DESIGN.md`。安装该命令是可选的；被拒绝的附加组件不安装任何东西。
 
-## v7 规范
+## v8 规范
 
 | 条目 | 值 |
 |---|---|
@@ -50,7 +50,7 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 | 注册键 | `.dwp/config.json` 中的 `design-system` |
 | 描述符 | `addons/design-system/addon.json`（接口 1） |
 | 目标文件 | 从 `AGENTS.md` 建立索引的 `docs/DESIGN.md` |
-| 版本控制 | 随技能包固定并控制版本（`v7.12.2`） |
+| 版本控制 | 随技能包固定并控制版本（`v8.0.0`） |
 
 ## 与按特性的设计文档的关系
 
