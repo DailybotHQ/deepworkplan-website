@@ -1,21 +1,32 @@
 ---
 title: "Deep Work Plan — structured execution for AI coding agents"
-description: "Context matters more than models. Deep Work Plan turns any repository into a structured environment where any coding agent finishes long-horizon work."
-lastUpdated: 2026-09-10
+description: "Spec-first, loop-closed: Deep Work Plan makes your repository the harness for AI coding agents, and each plan runs to done under a human-started loop."
+lastUpdated: 2026-11-16
 ---
 
-## Models matter. Context matters more.
+## Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.
 
-Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes with precision and efficiency and finishes long-horizon work.
+Deep Work Plan turns any repository into the harness — context, guardrails, and a durable plan with validation gates — where any coding agent executes long-horizon work. Add the optional loop, and an open plan keeps running to its end without anyone polling it.
 
 Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning and executing complex software work with AI agents. You do not pick an install method or copy a template — you copy the init.md prompt and paste it into your agent:
 
 > Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.
 
-> Deep Work Plan is spec-driven development where the repository itself becomes the harness.
+> Spec-first says what; the harness says where; loop engineering says how it finishes.
+
+**The loop:** Register (`lead claim`, lead and succession) → Daemon (`autopilot --loop`, started by a human) → Nudge (`idle ≥ 5 min`, adds no authority) → Failover (`lead takeover`, first reachable successor) → Notify (`plan-event-v1`, to the human's command) → Done (`plan_completed`, gates passed). Every open plan with a lead record, until its own state says done.
 
 - [Open the /init prompt](/quickstart)
 - [Read the methodology](/methodology)
+
+---
+
+## What the methodology stands on.
+
+1. **Spec-first** — the plan is the durable source of truth: atomic tasks, acceptance criteria, and validation gates the agent must pass.
+2. **The repository is the harness** — context, tools, guardrails, and state live in the repository as plain files any agent can read.
+3. **Loop engineering** — plans run to their end: registration, a human-started daemon, nudges that add no authority, failover, and plan events.
+4. **Measured efficiency** — instruction bytes per flow, measured and published with their method — never invented token percentages.
 
 ---
 
@@ -23,9 +34,31 @@ Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning a
 
 A coding agent performs beautifully on short tasks. But hand it a long-horizon mission — a migration, a new subsystem, a refactor at scale — and drift sets in: the context window fills, earlier decisions fade, and hours of work stall halfway through.
 
-Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Work stays verifiable — and any agent can resume it across sessions.
+Deep Work Plan answers spec-first: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence. Loop engineering then keeps the plan moving until those gates are passed.
 
 Context is your agent’s scarcest resource, so the harness keeps its own instructions lean and auditable. Instructions load progressively, validation follows the changes, and each task gets the context relevant to its work. We publish the instruction load for each flow in bytes, making that overhead visible. Plans scale to the work too: Lite for a bounded fix, Full for work that spans hours. The format follows the scope, keeping the process focused and traceable.
+
+---
+
+## Plans run to their end. Authority stays with people.
+
+Loop engineering is how a plan finishes without a human polling it. Each row below is a released contract of herdr-peers, the optional Herdr addon: the methodology works without it, and the loop only amplifies it.
+
+| Contract | What it guarantees | Source (herdr-peers v2.0.0) |
+| --- | --- | --- |
+| Plan registration (`herdr-peers lead claim`) | A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead. | `skills/herdr-peers/protocol.md` §12 |
+| Human-only start (`herdr-peers autopilot start --loop`) | Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does. | `skills/herdr-peers/autopilot.md` §1 |
+| Nudges add no authority (`plan_stalled`) | The idle lead of an open plan gets one fixed prompt to continue. Gates, stop conditions, and escalations bind as before; three prompts without progress mark the plan stalled. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Failover to successors (`herdr-peers lead takeover`) | When the lead is gone, the first reachable successor is asked to take over, and the helper checks the evidence again. A lane takes the lead only under a grant the human recorded in advance. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Plan events (`plan-event-v1`) | When a plan stalls, blocks, loses its lead, starts from the queue, or completes, a command the human chose receives one plan-event-v1 object. The pack ships a Dailybot notifier for it. | `docs/schema/plan-event-v1.json` |
+| Fleet map (`plans-v1` · `fleet-v1`) | Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only. | `docs/schema/fleet-v1.json` |
+| Plan queue (`dwp-queue-v1`) | When a repository's plan completes, the next approved plan in its queue starts with one fixed prompt to its lead. The daemon reads the queue and never writes it. | `skills/herdr-peers/autopilot.md` §5.4 |
+| Lead verify (`herdr-peers lead verify`) | Before any merge, tag, or release, the lead confirms it still holds the plan on every machine. A newer lead refuses it; an unreachable machine stops it unless that risk is accepted on record. | `skills/herdr-peers/protocol.md` §12 |
+
+The decision brain (`--brain`) and lead appointment (`--appoint`) are opt-in flags of the same daemon, each switched on by a human. The daemon never merges, releases, signs in, or changes a permission.
+
+[Read the Herdr addon](/kit/herdr)
+
 ---
 
 ## Humans steer. Agents execute.
@@ -78,6 +111,29 @@ Context, tools, guardrails, and state live in your repository as plain files any
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [See what onboarding generates](/quickstart)
+
+---
+
+## Instruction bytes per flow, measured.
+
+The harness publishes what each flow must read before it starts: the router, the sub-skill, and the shared resources it links. These are the compulsory read sets of the released pack.
+
+| Flow | Entry bundle (bytes) |
+| --- | ---: |
+| `create` | 74,979 |
+| `execute` | 55,124 |
+| `resume` | 32,021 |
+| `refine` | 76,356 |
+| `onboard` | 82,049 |
+| `status` | 27,309 |
+| `verify` | 36,596 |
+
+Unit: filesystem bytes. Measured on the released pack with the command below: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v7.12.2).
+
+Provider tokens, cost, and loop-closure statistics are not shown: no tagged source measures them yet, so they have no row. The script’s bytes ÷ 4 token figure is a labeled estimate, never a measurement.
+
+[Read the evaluation ledger](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+
 ---
 
 ## What you get
@@ -86,7 +142,7 @@ Context, tools, guardrails, and state live in your repository as plain files any
 - Categorized `docs/` and per-module documentation.
 - An `.agents/` directory (skills, agents, commands) with the `.claude` to `.agents` symlink.
 - The Deep Work Plan skill, installed once for every agent — including the author sub-skill, so the repository can grow its own skills, agents, and commands, plus opt-in add-ons such as dependency-upgrade and the design-system add-on for any user-facing interface surface.
-- Long-horizon, resumable plans in a gitignored `.dwp/` folder.
+- Long-horizon, resumable plans in a gitignored `.dwp/` folder. The methodology itself needs no daemon and no external state; the optional loop daemon adds continuity, never a dependency.
 - Multi-agent delegation and Ecosystem 1.0 — coordinate parallel agents safely with isolated worktrees, asserted-until-gated evidence, capacity handoff, and optional pinned ecosystem addons (agentkit, Herdr, devcontainer, Vim, AI Diff Reviewer).
 
 ---
@@ -97,6 +153,7 @@ Context, tools, guardrails, and state live in your repository as plain files any
 2. **It installs the Deep Work Plan skill** — the engine, identical in every repository: the router plus its sub-skills (create, execute, refine, resume, status, verify, onboard, author, upgrade), for Claude Code, Cursor, Codex, Gemini, and Copilot.
 3. **It adapts your repository** — reasoning about your real stack (never copy-pasting), it writes AGENTS.md, `docs/`, per-module READMEs, a reasoned `.agents/` kit, and a gitignored `.dwp/`. Your repository becomes the harness.
 4. **You plan and execute** — long-horizon Deep Work Plans, run step by step against explicit acceptance criteria and validation gates, autonomously for hours.
+5. **A human starts the loop** — optional, with the Herdr addon: you — never an agent — run `herdr-peers autopilot start --loop`. Every open plan with a lead record keeps running to its end, and your notifier hears when one stalls, blocks, or completes.
 
 The skill is the reusable engine, installed the same way everywhere; what gets adapted is your repository. Installation mechanics (Skills CLI, OpenClaw, or git clone) live in the [/init.md](/init.md) prompt and on the [quickstart](/quickstart).
 

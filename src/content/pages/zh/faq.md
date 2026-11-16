@@ -126,6 +126,18 @@ Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理�
 
 [阅读无人值守协议](https://deepworkplan.com/zh/spec/agent-protocol)
 
+### 什么是 loop engineering？
+
+Loop engineering 是闭合执行循环：计划登记 lead 后，由人启动的可选 Herdr daemon 可以推动开放计划继续运行直至完成，并报告停滞、阻塞、lead 缺失或完成事件。它遵守计划记录的权限范围。
+
+### Deep Work Plan 需要 daemon 吗？
+
+不需要。该方法及其计划无需 Herdr 或 daemon 也能运行。这个 addon 是可选的，只用于增加连续性，不是前置要求。
+
+### daemon 绝不会做什么？
+
+它绝不会登录、替 Claude 确认绕过权限、扩大 agent 的常驻权限，也不会执行 merge、tag 或 release。提醒只会发送固定的继续提示，不会授予任何权限。
+
 ## 多代理与 v7
 
 ### 多个代理能否在同一计划中安全地并行工作？

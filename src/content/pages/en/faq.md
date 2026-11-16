@@ -132,6 +132,18 @@ Yes — the orchestrator-hub archetype exists for exactly that. A hub repository
 
 [Repository archetypes](https://deepworkplan.com/spec/archetypes)
 
+### What is loop engineering?
+
+Loop engineering closes the execution loop: after a plan is registered with a lead, the optional, human-started Herdr daemon can keep its open plan moving to completion and report stalls, blockers, lost leads, or completion. It works within the plan’s recorded authority.
+
+### Does Deep Work Plan need the daemon?
+
+No. The methodology and its plans work without Herdr or a daemon. The addon is optional and adds continuity; it is never a requirement.
+
+### What can the daemon never do?
+
+It never signs in, accepts Claude’s bypass-permissions acknowledgement, widens an agent’s standing permissions, or performs merge, tag, or release operations. A nudge sends a fixed continue prompt and grants no authority.
+
 ## Many agents & v7
 
 ### Can several agents work on one plan in parallel, and how is it kept safe?

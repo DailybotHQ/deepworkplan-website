@@ -126,6 +126,18 @@ Bisa, ketika rencana sudah disetujui sebelumnya, membawa lapisan status yang diw
 
 [Baca protokol tanpa pengawasan](https://deepworkplan.com/id/spec/agent-protocol)
 
+### Apa itu loop engineering?
+
+Loop engineering menutup siklus eksekusi: setelah rencana didaftarkan dengan lead, daemon Herdr opsional yang dimulai manusia dapat menjaga rencana terbuka berjalan hingga selesai dan melaporkan kemacetan, hambatan, hilangnya lead, atau penyelesaian. Daemon tetap berada dalam kewenangan yang tercatat di rencana.
+
+### Apakah Deep Work Plan memerlukan daemon?
+
+Tidak. Metode dan rencananya dapat berjalan tanpa Herdr atau daemon. Addon ini opsional untuk menambah kesinambungan, bukan prasyarat.
+
+### Apa yang tidak pernah dapat dilakukan daemon?
+
+Daemon tidak pernah masuk ke akun, menyetujui pengakuan bypass-permissions Claude, memperluas izin tetap agen, atau menjalankan operasi merge, tag, maupun release. Nudge hanya mengirim prompt tetap untuk melanjutkan dan tidak memberikan kewenangan.
+
 ## Banyak agen & v7
 
 ### Bisakah beberapa agen bekerja pada satu rencana secara paralel dan bagaimana keamanannya terjaga?

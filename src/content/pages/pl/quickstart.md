@@ -4,6 +4,8 @@ description: "Wykonywalny prompt onboardingowy dla agentów AI: przyjmij Deep Wo
 lastUpdated: 2026-10-11
 ---
 
+Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.
+
 Jesteś agentem kodującym AI. Najpierw przeczytaj cały ten prompt, a następnie uczyń bieżące repozytorium
 **AI-first**, **spec-driven** i **sterowalnym przez agenta**, przyjmując metodykę Deep Work Plan (DWP).
 Potraktuj to jako ustrukturyzowane zadanie inżynierskie — Deep Work Plan — a nie szybką edycję.
@@ -32,7 +34,7 @@ Potraktuj to jako ustrukturyzowane zadanie inżynierskie — Deep Work Plan — 
 
 ## 0. Przeczytaj metodykę i specyfikację
 
-Metodyka opiera się na trzech filarach: **spec-driven development** (spisana specyfikacja jest źródłem prawdy), **harness engineering** (repozytorium niesie kontekst, narzędzia, zabezpieczenia i stan) oraz **efektywność tokenów** (harness ładuje się stopniowo, a walidacja dotyka tylko tego, co zmienione — praca na długi dystans z założenia, wydajna z samej konstrukcji).
+Metodyka ma cztery filary: **spec-first** (plan i specyfikacja są trwałym źródłem prawdy), **repozytorium jest harnessem** (przechowuje kontekst, narzędzia, zabezpieczenia i stan), **Loop engineering** (opcjonalna pętla uruchamiana przez człowieka pomaga zarejestrowanym planom dojść do końca) oraz **mierzona efektywność** (obciążenie instrukcjami mierzymy w bajtach na przepływ; nie wyliczamy oszczędności tokenów).
 
 Zanim cokolwiek zmienisz, przeczytaj kanoniczne źródła, aby zrozumieć standard, który przyjmujesz:
 
@@ -380,6 +382,15 @@ metodyki:
    weryfikowalnej pracy.
 
 Każdy może uruchomić ten prompt na dowolnym repozytorium — i zakończyć z bazą kodu, którą może sterować dowolny agent AI.
+
+## Człowiek uruchamia pętlę
+
+Opcjonalnie, z dodatkiem Herdr: to Ty — nigdy agent — uruchamiasz herdr-peers autopilot start --loop. Każdy otwarty plan z rekordem leada działa aż do końca, a Twój notyfikator dowiaduje się, gdy któryś utknie, zostanie zablokowany lub się zakończy. Jeśli chcesz otrzymywać raporty zdarzeń Dailybot, użyj drugiego polecenia. Dodaje ono notifier z pakietu przez --notify; powiadomienia są opcjonalne.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Kolejne kroki
 

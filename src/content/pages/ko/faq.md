@@ -126,6 +126,18 @@ Deep Work Plan은 리포지토리를 코딩 에이전트가 긴 작업을 안정
 
 [무인 실행 프로토콜 읽기](https://deepworkplan.com/ko/spec/agent-protocol)
 
+### loop engineering이란 무엇인가요?
+
+loop engineering은 실행 루프를 닫습니다. lead가 등록된 계획에 대해 사람이 시작하는 선택형 Herdr daemon이 열린 계획을 완료까지 진행하고 정체, 차단, lead 부재 또는 완료를 알릴 수 있습니다. 계획에 기록된 권한 범위 안에서만 작동합니다.
+
+### Deep Work Plan에 daemon이 필요한가요?
+
+아니요. 방법론과 계획은 Herdr나 daemon 없이도 작동합니다. addon은 연속성을 더하는 선택 사항이며 필수 요건이 아닙니다.
+
+### daemon이 절대 할 수 없는 일은 무엇인가요?
+
+로그인, Claude의 권한 우회 확인 승인, agent의 상시 권한 확대, merge·tag·release 작업을 절대 수행하지 않습니다. nudge는 고정된 계속 진행 프롬프트만 보내며 권한을 부여하지 않습니다.
+
 ## 다중 에이전트 및 v7
 
 ### 여러 에이전트가 하나의 계획에서 병렬로 안전하게 작업할 수 있나요?

@@ -50,29 +50,16 @@ import { Image } from 'astro:assets';
   if the collection supports MDX. Keep the matching agent-facing `.md` endpoint in
   `src/content/pages/{en,es}/` in sync (`pnpm run md:check`).
 
-## 3. The Hero right column (HP-01)
+## 3. The Hero right column (HP-01) — retired
 
-`src/components/home/Hero.astro` currently constrains content to `max-w-3xl` on
-the left, leaving the right side empty on `lg`. To place HP-01:
-
-1. Wrap the existing left content and a new right column in a responsive grid
-   (e.g. `lg:grid lg:grid-cols-[minmax(0,3xl)_1fr] lg:items-center`), keeping the
-   single-column stack on small screens.
-2. In the right column, render the illustration with a `<picture>` that swaps the
-   light/dark pair by color scheme (mirror how the brand logos swap):
-
-```astro
-<picture>
-  <source srcset="/images/visuals/home/hero-harness-dark.webp" media="(prefers-color-scheme: dark)" />
-  <img src="/images/visuals/home/hero-harness.webp" width="520" height="650"
-       alt={t.home.hero.illustrationAlt} class="hidden lg:block" />
-</picture>
-```
-
-   (If the site toggles theme via a class rather than `prefers-color-scheme`,
-   swap with the same mechanism the logos already use instead of the `media`
-   query.)
-3. HP-01 has no in-image text, so a single pair serves EN and ES.
+HP-01 is **retired**. The engraved hero illustration (a lighthouse guiding a
+vessel) was replaced on 2026-11-16 by the v8 loop diagram,
+`src/components/diagrams/home/LoopDiagram.astro`: an HTML/CSS editorial plate
+(registration → daemon → nudge → failover → notify → done) with an inline
+17-language i18n map, rendered in the hero's right column next to the lead
+sentence. The light/dark engraving pair was deleted from
+`public/images/visuals/home/`. Do not reintroduce a raster hero; change the
+diagram component instead.
 
 ## 4. Bilingual alt text & captions
 
@@ -101,7 +88,7 @@ the left, leaving the right side empty on `lg`. To place HP-01:
 
 ## 7. Per-area integration checklist
 
-- [ ] **Homepage** — HP-01 hero grid + `<picture>` swap; HP-02 pitch chart (right
+- [ ] **Homepage** — HP-01 retired (v8 loop diagram, see §3); HP-02 pitch chart (right
       column); HP-03/04/05 diagram components (already live); Comparison/Origin: no
       asset (skip).
 - [ ] **Methodology** — ME-01…ME-06 as `Figure`s in the methodology reader at the

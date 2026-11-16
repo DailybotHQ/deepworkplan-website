@@ -4,6 +4,8 @@ description: "Der ausführbare Onboarding-Prompt für KI-Agenten: Deep Work Plan
 lastUpdated: 2026-10-11
 ---
 
+Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.
+
 Sie sind ein KI-Coding-Agent. Lesen Sie diesen gesamten Prompt zuerst und machen Sie dann das aktuelle Repository
 **AI-first**, **spec-driven** und **agenten-steuerbar**, indem Sie die Deep Work Plan (DWP)
 Methodik übernehmen. Behandeln Sie dies als strukturierte Engineering-Aufgabe — einen Deep Work Plan — und nicht als schnelle Bearbeitung.
@@ -67,7 +69,7 @@ Sie sind dabei, Code in diesem Repository zu installieren und auszuführen. Prü
 
 ## 0. Die Methodik und Spezifikation lesen
 
-Die Methodik ruht auf drei Pfeilern: **spec-driven Development** (die geschriebene Spezifikation ist die Quelle der Wahrheit), **Harness Engineering** (das Repository trägt Kontext, Werkzeuge, Leitplanken und Zustand) und **Token-Effizienz** (der Harness lädt schrittweise nach, und die Validierung berührt nur das Geänderte — Arbeit über lange Horizonte ist von Anfang an eingeplant, Effizienz durch Konstruktion).
+Die Methodik hat vier Säulen: **spec-first** (Plan und Spezifikation sind die dauerhafte Quelle der Wahrheit), **das Repository ist das Harness** (es trägt Kontext, Werkzeuge, Schutzregeln und Status), **Loop engineering** (der optionale, von einem Menschen gestartete Loop unterstützt registrierte Pläne bis zum Abschluss) und **gemessene Effizienz** (Instruktionsumfang wird in Bytes pro Ablauf gemessen; Token-Einsparungen werden nicht abgeleitet).
 
 Bevor Sie etwas ändern, lesen Sie die kanonischen Quellen, damit Sie den Standard verstehen, den Sie übernehmen:
 
@@ -383,6 +385,15 @@ Methodik:
 
 Jeder kann diesen Prompt auf jedem Repository ausführen — und mit einer Codebasis enden, die jeder KI-Agent steuern kann.
 </content>
+
+## Ein Mensch startet den Loop
+
+Optional, mit dem Herdr-Addon: Sie — niemals ein Agent — führen herdr-peers autopilot start --loop aus. Jeder offene Plan mit Lead-Eintrag läuft bis zu seinem Ende weiter, und Ihr Notifier erfährt, wenn einer festhängt, blockiert oder abgeschlossen wird. Wenn du Dailybot-Ereignisberichte erhalten möchtest, verwende den zweiten Befehl. Er ergänzt den Paket-Notifier mit --notify; Benachrichtigungen sind optional.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Nächste Schritte
 

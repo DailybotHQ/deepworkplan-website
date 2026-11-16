@@ -4,6 +4,8 @@ description: "The executable onboarding prompt for AI agents: adopt Deep Work Pl
 lastUpdated: 2026-10-11
 ---
 
+Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.
+
 You are an AI coding agent. Read this entire prompt first, then make the current repository
 **AI-first**, **spec-driven**, and **agent-pilotable** by adopting the Deep Work Plan (DWP)
 methodology. Treat this as a structured engineering task — a Deep Work Plan — not a quick edit.
@@ -32,7 +34,7 @@ methodology. Treat this as a structured engineering task — a Deep Work Plan �
 
 ## 0. Read the methodology and specification
 
-The methodology stands on three pillars: **spec-driven development** (the written spec is the source of truth), **harness engineering** (the repository carries the context, tools, guardrails, and state), and **token efficiency** (the harness loads progressively and validation touches what changed — long-horizon work by design, efficient by construction).
+The methodology has four pillars: **spec-first** (the plan/spec is the durable source of truth), **the repository is the harness** (it carries context, tools, guardrails, and state), **Loop engineering** (the optional human-started loop helps registered plans run to completion), and **measured efficiency** (instruction load is measured in bytes per flow, never inferred as token savings).
 
 
 Before changing anything, read the canonical sources so you understand the standard you are adopting:
@@ -419,6 +421,15 @@ Then confirm:
 - [ ] `.dwp/` exists, is gitignored, and has `plans/`; `tmp/` exists and is gitignored.
 - [ ] Existing user content was preserved or reconciled with consent — nothing was destroyed silently.
 - [ ] You can generate a Deep Work Plan and execute it task by task, validating each gate.
+
+## A human starts the loop
+
+Optional, with the Herdr addon: you — never an agent — run herdr-peers autopilot start --loop. Every open plan with a lead record keeps running to its end, and your notifier hears when one stalls, blocks, or completes. If you want Dailybot event reports, use the second command. It adds the pack notifier with --notify; notifications are optional.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Outcome
 

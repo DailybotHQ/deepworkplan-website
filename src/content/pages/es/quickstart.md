@@ -4,6 +4,8 @@ description: "El prompt de incorporación ejecutable: adopta Deep Work Plan en c
 lastUpdated: 2026-10-11
 ---
 
+Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar.
+
 Eres un agente de programación de IA. Lee primero todo este prompt y luego haz que el repositorio
 actual sea **AI-first**, **guiado por especificación** y **pilotable por agentes** adoptando la
 metodología Deep Work Plan (DWP). Trátalo como una tarea de ingeniería estructurada — un Deep Work
@@ -35,7 +37,7 @@ Plan — no como una edición rápida.
 
 ## 0. Lee la metodología y la especificación
 
-La metodología se apoya en tres pilares: **desarrollo guiado por especificación** (la especificación escrita es la fuente de la verdad), **ingeniería de harness** (el repositorio lleva el contexto, las herramientas, los guardarraíles y el estado) y **eficiencia de tokens** (el harness carga progresivamente y la validación toca solo lo que cambió — trabajo de largo alcance por diseño, eficiente por construcción).
+La metodología tiene cuatro pilares: **spec-first** (el plan y la especificación son la fuente de verdad duradera), **el repositorio es el harness** (reúne contexto, herramientas, protecciones y estado), **Loop engineering** (el bucle opcional iniciado por una persona ayuda a que los planes registrados lleguen a completarse) y **eficiencia medida** (la carga de instrucciones se mide en bytes por flujo; nunca se infieren ahorros de tokens).
 
 Antes de cambiar nada, lee las fuentes canónicas para entender el estándar que estás adoptando:
 
@@ -404,6 +406,15 @@ metodología:
 
 Cualquiera puede ejecutar este prompt en cualquier repositorio — y terminar con una base de código que
 cualquier agente de IA puede pilotar.
+
+## Una persona inicia el bucle
+
+Opcional, con el complemento Herdr: tú — nunca un agente — ejecutas herdr-peers autopilot start --loop. Cada plan abierto con registro de lead sigue ejecutándose hasta su fin, y tu notificador se entera cuando uno se estanca, se bloquea o termina. Si quieres recibir informes de eventos en Dailybot, usa el segundo comando. Añade el notificador del paquete con --notify; las notificaciones son opcionales.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Próximos pasos
 

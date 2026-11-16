@@ -126,6 +126,18 @@ Sí, siempre que el plan se haya aprobado de antemano, incluya la capa de estado
 
 [Leer el protocolo sin supervisión](https://deepworkplan.com/es/spec/agent-protocol)
 
+### ¿Qué es loop engineering?
+
+Loop engineering cierra el ciclo de ejecución: cuando un plan se registra con un lead, el daemon opcional de Herdr, iniciado por una persona, puede mantener el plan abierto en marcha hasta completarlo e informar de bloqueos, falta de progreso, pérdida del lead o finalización. Respeta la autoridad registrada en el plan.
+
+### ¿Deep Work Plan necesita el daemon?
+
+No. La metodología y sus planes funcionan sin Herdr ni daemon. El addon es opcional y añade continuidad; nunca es un requisito.
+
+### ¿Qué cosas nunca puede hacer el daemon?
+
+Nunca inicia sesión, acepta el reconocimiento de Claude para omitir permisos, amplía los permisos permanentes de un agente ni realiza operaciones de merge, tag o release. Un aviso envía un mensaje fijo para continuar y no concede autoridad.
+
 ## Múltiples agentes y v7
 
 ### ¿Pueden varios agentes trabajar en un plan en paralelo y cómo se garantiza la seguridad?

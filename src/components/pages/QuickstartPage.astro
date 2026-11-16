@@ -22,6 +22,18 @@ const t = getTranslations(lang);
 const q = t.quickstartPage;
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
+const loopCommand = 'herdr-peers autopilot start --loop';
+const loopNotifyCommand =
+  'herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"';
+const homeLoopStep = t.home.quickstart.steps[4];
+const steps = [
+  ...q.steps,
+  {
+    title: homeLoopStep.title,
+    description: `${homeLoopStep.description} ${q.loopNotifyNote}`,
+    commands: [loopCommand, loopNotifyCommand],
+  },
+];
 // The bootstrap endpoint is always the root, English /init.md (canonical
 // first-class agent content) — never a localized variant.
 const mdHref = CANONICAL_INIT_MD_PATH;
@@ -39,7 +51,7 @@ const howToSchema = {
   name: q.meta.title,
   description: q.meta.description,
   url: `${siteUrl}${prefix}/quickstart`,
-  step: q.steps.map((step, i) => ({
+  step: steps.map((step, i) => ({
     '@type': 'HowToStep',
     position: i + 1,
     name: step.title,
@@ -60,7 +72,7 @@ const howToSchema = {
       >
         {q.title}
       </h1>
-      <Lead class="mt-6">{q.intro}</Lead>
+      <Lead class="mt-6">{t.home.hero.leadSentence}</Lead>
     </header>
 
     <Rule class="my-12" />
@@ -128,7 +140,7 @@ const howToSchema = {
       <Kicker>{q.sequenceTitle}</Kicker>
       <ol class="mt-8 space-y-12">
         {
-          q.steps.map((step, i) => (
+          steps.map((step, i) => (
             <li class="border-t pt-5" style="border-color: var(--color-secondary);">
               <span
                 class="font-display text-3xl font-bold"

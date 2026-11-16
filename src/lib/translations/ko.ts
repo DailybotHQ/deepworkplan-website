@@ -13,7 +13,7 @@ export const ko: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — AI 코딩 에이전트를 위한 구조화된 실행',
   siteDescription:
-    'Deep Work Plan은 사양 중심 개발 방법론입니다. 저장소 자체가 하네스가 되어 원자적 작업, 검증 게이트, 안전한 다중 에이전트 실행을 제공합니다.',
+    '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다. 측정된 효율은 흐름별 지침 바이트로 나타냅니다.',
 
   // Navigation
   nav: {
@@ -97,14 +97,14 @@ export const ko: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — AI 코딩 에이전트를 위한 구조화된 실행',
       description:
-        'Deep Work Plan은 AI 코딩 에이전트에 사양 중심 개발을 제공합니다. 저장소를 견고한 하네스로 변환하여 장기 실행과 다중 에이전트 위임을 안전하게 지원합니다.',
+        '스펙 우선, 루프로 완결: Deep Work Plan은 리포지토리를 AI 코딩 에이전트의 하니스로 만들고, 각 계획은 사람이 시작한 루프로 완료까지 실행됩니다.',
     },
     hero: {
       badge: '오픈 방법론 · MIT · 에이전트 비종속',
-      title: '모델은 중요합니다.',
-      titleEmphasis: '컨텍스트는 더 중요합니다.',
+      leadSentence:
+        '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
       subtitle:
-        'Deep Work Plan은 어떤 저장소든 구조화된 환경 — 컨텍스트, 가드레일, 지속되는 계획 — 으로 바꾸어, 어떤 코딩 에이전트든 정확하고 효율적으로 실행하며 장기 작업을 끝까지 완수합니다.',
+        'Deep Work Plan은 어떤 리포지토리든 하니스 — 컨텍스트, 가드레일, 검증 게이트를 갖춘 지속되는 계획 — 로 바꾸어, 어떤 코딩 에이전트든 그 안에서 장기 작업을 실행합니다. 선택형 루프를 더하면, 열린 계획은 누구도 폴링하지 않아도 끝까지 계속 실행됩니다.',
       instructionLabel: '에이전트에 복사하기',
       instruction:
         'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',
@@ -112,19 +112,38 @@ export const ko: SiteTranslations = {
       copiedLabel: '복사됨',
       viewInitCta: '작동 방식 보기',
       pullQuote:
-        'Deep Work Plan은 리포지토리 자체가 하니스(harness)가 되는 스펙 주도 개발입니다.',
+        '스펙 우선은 무엇을, 하니스는 어디서를, Loop engineering은 어떻게 끝나는지를 말합니다.',
       primaryCta: '방법론 읽기',
       secondaryCta: '스펙 읽기',
-      illustrationAlt:
-        '바위 해안의 등대가 한 줄기 빛을 비추어 작은 배를 인도하는 모습 — 어떤 에이전트든 이끄는 든든한 하니스로서의 리포지토리를 떠올리게 하는 판화.',
-      scrollCta: '작동 방식 보기',
+    },
+    pillars: {
+      badge: '네 가지 기둥',
+      title: '방법론을 떠받치는 것.',
+      items: [
+        {
+          name: '스펙 우선',
+          line: '계획은 지속되는 단일 진실 공급원입니다: 원자적 작업, 인수 기준, 그리고 에이전트가 통과해야 하는 검증 게이트.',
+        },
+        {
+          name: '리포지토리가 곧 하니스',
+          line: '컨텍스트, 도구, 가드레일, 상태가 어떤 에이전트든 읽을 수 있는 일반 파일로 리포지토리에 있습니다.',
+        },
+        {
+          name: 'Loop engineering',
+          line: '계획은 끝까지 실행됩니다: 등록, 사람이 시작하는 데몬, 권한을 더하지 않는 넛지, 페일오버, 그리고 계획 이벤트.',
+        },
+        {
+          name: '측정된 효율',
+          line: '플로우별 지시 바이트를 측정 방법과 함께 측정하고 공개합니다 — 지어낸 토큰 비율은 결코 없습니다.',
+        },
+      ],
     },
     pitch: {
       kicker: '문제와 해답',
       problem:
         '짧은 작업에서 코딩 에이전트는 놀라운 성능을 보입니다. 장기 미션 — 마이그레이션, 새 서브시스템, 수십 개 파일의 리팩터링 — 을 맡기면 표류합니다: 컨텍스트가 차고, 앞선 결정이 흐려지고, 수 시간의 작업이 한복간에서 멈춥니다.',
       answer:
-        'Deep Work Plan은 스펙 주도 개발로 답합니다. 지속되는 계획, 원자적 작업, 그리고 에이전트가 통과해야 하는 검증 게이트. 완료는 느낌이 아니라 — 검증 가능하고 리뷰 가능한 증거가 됩니다.',
+        'Deep Work Plan은 스펙 우선으로 답합니다. 지속되는 계획, 원자적 작업, 그리고 에이전트가 통과해야 하는 검증 게이트. 완료는 느낌이 아니라 — 검증 가능하고 리뷰 가능한 증거가 됩니다. 그런 다음 Loop engineering이 그 게이트를 통과할 때까지 계획을 계속 진행시킵니다.',
       efficiency:
         '컨텍스트는 에이전트에게 가장 귀한 자원입니다. 그래서 하네스는 자체 지시사항을 간결하고 감사할 수 있게 유지합니다. 지시사항은 단계적으로 로드되고, 검증은 변경된 부분에 집중하며, 각 작업에는 관련 컨텍스트가 제공됩니다. 플로우별 지시사항 용량을 바이트 단위로 공개해 그 부담을 확인할 수 있습니다. 계획도 작업에 맞춰 선택합니다. 범위가 정해진 수정에는 Lite, 몇 시간 걸리는 작업에는 Full을 사용합니다. 형식이 작업 범위를 따르므로 과정은 집중력을 유지하고 추적하기 쉽습니다.',
       illustrationAlt:
@@ -161,6 +180,67 @@ export const ko: SiteTranslations = {
         deepLinkLabel: '방법론 읽기',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: '계획은 끝까지 실행됩니다. 권한은 사람에게 남습니다.',
+      subtitle:
+        'Loop engineering은 사람이 폴링하지 않아도 계획이 완료되는 방식입니다. 아래 각 행은 선택형 Herdr 애드온인 herdr-peers의 릴리스된 계약입니다. 방법론은 이것 없이도 작동하며, 루프는 이를 증폭할 뿐입니다.',
+      colContract: '계약',
+      colGuarantee: '보장하는 것',
+      colSource: '출처',
+      contracts: [
+        {
+          name: '계획 등록',
+          detail:
+            '루프가 지켜보는 계획에는 에포크와 승계 목록을 가진 리드 기록이 있습니다. 가장 높은 에포크의 보유자만 그 리드로 행동합니다.',
+        },
+        {
+          name: '사람만 시작',
+          detail:
+            '데몬은 사람이 자신의 말로만 시작합니다. 어떤 요청, 답장, 알림도 데몬을 시작하거나 멈추거나 그 동작을 바꿀 수 없습니다.',
+        },
+        {
+          name: '넛지는 권한을 더하지 않음',
+          detail:
+            '열린 계획의 유휴 리드는 계속하라는 고정 프롬프트 하나를 받습니다. 게이트, 중지 조건, 에스컬레이션은 이전과 같이 구속력을 가지며, 진전 없는 프롬프트가 세 번이면 계획은 정체로 표시됩니다.',
+        },
+        {
+          name: '승계자로 페일오버',
+          detail:
+            '승계자는 검증된 lead takeover 절차로 역할을 이어받습니다. lane 임명은 사람이 사전에 기록한 허가가 있을 때만 가능합니다.',
+        },
+        {
+          name: '계획 이벤트',
+          detail:
+            '계획이 정체되거나, 차단되거나, 리드를 잃거나, 큐에서 시작되거나, 완료되면 사람이 선택한 명령이 plan-event-v1 객체 하나를 받습니다. 팩에는 이를 위한 Dailybot 알림기가 포함되어 있습니다.',
+        },
+        {
+          name: '플릿 맵',
+          detail:
+            '각 머신은 자신의 계획을 plans-v1으로 보고하고, 데몬은 모든 머신, 에이전트, 리포지토리, 계획의 fleet-v1 맵을 유지하며, fleet ui가 이를 읽기 전용으로 보여줍니다.',
+        },
+        {
+          name: '리드 검증',
+          detail:
+            '병합, 태그, 릴리스 전에 리드는 모든 머신에서 여전히 계획을 보유하고 있는지 확인합니다. 더 새로운 리드가 있으면 거부되고, 연결할 수 없는 머신이 있으면 그 위험이 기록상 수용되지 않는 한 중단됩니다.',
+        },
+      ],
+      note: '결정 브레인(--brain)과 리드 임명(--appoint)은 같은 데몬의 옵트인 플래그이며, 각각 사람이 켭니다. 데몬은 병합, 릴리스, 로그인, 권한 변경을 절대 하지 않습니다.',
+      deepLinkLabel: 'Herdr 애드온 읽기',
+    },
+    efficiency: {
+      badge: '측정된 효율',
+      title: '플로우별 지시 바이트, 측정됨.',
+      subtitle:
+        '하니스는 각 플로우가 시작 전에 읽어야 하는 것 — 라우터, 하위 스킬, 그리고 그것이 링크하는 공유 리소스 — 을 공개합니다. 이것이 릴리스된 팩의 필수 읽기 세트입니다.',
+      colFlow: '플로우',
+      colBytes: '진입 번들(바이트)',
+      caption:
+        '단위: 파일 시스템 바이트. 릴리스된 팩에서 아래 명령으로 측정했습니다.',
+      absent:
+        '제공자 토큰, 비용, 루프 완결 통계는 표시하지 않습니다. 이를 측정하는 태그된 출처가 아직 없으므로 행이 없습니다. 스크립트의 바이트 ÷ 4 토큰 수치는 표시된 추정치이며, 측정값이 아닙니다.',
+      deepLinkLabel: '평가 원장 읽기',
     },
     onboarding: {
       badge: '추론 기반 온보딩',
@@ -217,6 +297,11 @@ export const ko: SiteTranslations = {
           description:
             '어떤 작업이든 장시간 Deep Work Plan을 생성하고 단계별로 실행합니다. 명시적인 인수 기준, 검증 게이트, 재개 가능한 상태와 함께 수 시간 동안 자율적으로 진행됩니다.',
         },
+        {
+          title: '사람이 루프를 시작합니다',
+          description:
+            '선택 사항이며 Herdr 애드온과 함께 씁니다: 에이전트가 아닌 당신이 herdr-peers autopilot start --loop를 실행합니다. 리드 기록이 있는 모든 열린 계획이 끝까지 계속 실행되고, 계획이 정체되거나 차단되거나 완료되면 알림기가 이를 전달받습니다.',
+        },
       ],
       note: '스킬은 어디서나 동일하게 설치됩니다. 적응되는 것은 리포지토리입니다 — 스택에 맞게 생성된 AGENTS.md, 문서, 추론된 .agents/ 키트. 이 분리가 방법론을 일회성 스캐폴드가 아니라 재사용 가능한 표준으로 만듭니다.',
     },
@@ -264,7 +349,7 @@ export const ko: SiteTranslations = {
         {
           label: 'Git 네이티브, 재개 가능, .dwp/',
           detail:
-            '데몬도 외부 상태도 없습니다. 계획은 gitignore된 .dwp/ 폴더에 저장되며, 컨텍스트가 넘쳐도 git만으로 어떤 작업이든 재개됩니다.',
+            '방법론 자체에는 데몬도 외부 상태도 필요 없습니다. 계획은 gitignore된 .dwp/ 폴더에 저장되며, 컨텍스트가 넘쳐도 git만으로 어떤 작업이든 재개됩니다. 선택형 루프 데몬은 연속성을 더할 뿐, 의존성을 더하지 않습니다.',
         },
         {
           label: '다중 에이전트 위임 및 에코시스템 1.0',
@@ -589,12 +674,12 @@ export const ko: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 방법론',
       description:
-        '매니페스토부터 스웜 자율까지 일곱 장: 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 아키타입, 여러 에이전트, 한도를 넘어 계속 도는 스웜.',
+        '매니페스토부터 Loop engineering까지 여덟 장: 원칙, 핵심 루프, 템플릿, 스킬과 에이전트, 다중 에이전트 작업, 루프 완결을 다룹니다.',
     },
     eyebrow: '방법론',
     title: 'Deep Work Plan 방법론',
     intro:
-      'Deep Work Plan의 철학에서 출발해 실전 루프, 템플릿, 적응 방식, 여러 에이전트를 동시에 운영하는 방법, 그리고 스웜을 계속 돌아가게 하는 방법까지 안내하는 일곱 장.',
+      'Deep Work Plan의 원칙과 실전 루프부터 템플릿, 적응 방식, 다중 에이전트 작업, Loop engineering까지 여덟 장으로 설명합니다.',
     chapterLabel: '장',
     readChapter: '장 읽기',
     prev: '이전',
@@ -687,8 +772,6 @@ export const ko: SiteTranslations = {
     },
     eyebrow: '빠른 시작',
     title: '이 리포지토리를 AI-first로 만들기',
-    intro:
-      '어떤 리포지토리든 스펙 주도이며 에이전트가 준비된 코드베이스로 바꾸는 단일 엔드포인트. 스킬을 설치하고, 에이전트가 리포지토리를 온보딩하게 한 뒤, 어떤 코딩 에이전트로든 구조화된 작업을 계획하고 실행하세요.',
     handoffTitle: '에이전트에 복사하기',
     handoffBody:
       '완전한 init.md 프롬프트를 복사하여 AI 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣으세요. 방법론과 스펙을 읽고, 스킬을 설치하며, 이 리포지토리를 Deep Work Plan을 위해 온보딩합니다.',
@@ -698,11 +781,13 @@ export const ko: SiteTranslations = {
     codeLabel: '터미널',
     whatTitle: '이것이 하는 일',
     whatBody: [
-      '채택은 리포지토리를 두 가지 견고한 방식으로 바꿉니다 — 방법론의 두 기둥입니다.',
-      '첫째, 리포지토리가 스펙 주도가 됩니다. 작업이 즉흥적인 프롬프트가 아니라 작성된 계획과 스펙에서 시작됩니다. 둘째, 리포지토리 자체가 에이전트 하니스가 됩니다 — AGENTS.md, docs/ 지식 베이스, 모듈별 문서, .agents/ 스킬 홈(.claude → .agents 및 .cursor → .agents 심링크 포함)이 모든 에이전트에 필요한 컨텍스트와 명령을 제공합니다.',
+      '도입 과정은 이 네 가지 기둥을 리포지토리에 구현합니다.',
+      '도입에는 네 가지 기둥이 있습니다. spec-first 계획, 하니스인 리포지토리, Loop engineering, 측정된 효율입니다. 계획은 지속 가능한 기준 정보이며 리포지토리는 컨텍스트, 도구, 보호 장치, 상태를 담습니다. 사람이 시작하는 선택적 루프는 등록된 계획의 완료를 돕고, 지침 부하는 흐름별 바이트로 측정합니다.',
     ],
     sequenceTitle: '채택 경로',
     orLabel: '또는',
+    loopNotifyNote:
+      'Dailybot 이벤트 보고서를 받으려면 두 번째 명령을 사용하세요. --notify로 팩의 알림 스크립트를 추가하며 알림은 선택 사항입니다.',
     steps: [
       {
         title: '설치하기 전에 검증',
@@ -748,7 +833,7 @@ export const ko: SiteTranslations = {
     ],
     outcomeTitle: '결과',
     outcome:
-      '리포지토리가 스펙 주도가 되고 리포지토리 자체가 에이전트 하니스가 됩니다 — 컨텍스트와 명령이 코드와 함께 움직입니다.',
+      '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
     nextStepsTitle: '다음 단계',
     nextSteps: [
       { label: '방법론 읽기', href: '/methodology' },
@@ -942,6 +1027,25 @@ export const ko: SiteTranslations = {
               '예, 계획이 사전에 승인되었고 필요한 상태 계층을 갖추었으며 에이전트에 한정된 권한이 주어진 경우에 가능합니다. 무인 실행은 현실이 계획과 어긋나거나, 계획된 수리 범위 밖에서 게이트가 실패하거나, 새로운 승인이나 자격 증명이 필요할 때 멈추고 차단 사유를 기록해야 합니다.',
             linkLabel: '무인 실행 프로토콜 읽기',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering이란 무엇인가요?',
+            answer:
+              'loop engineering은 실행 루프를 닫습니다. lead가 등록된 계획에 대해 사람이 시작하는 선택형 Herdr daemon이 열린 계획을 완료까지 진행하고 정체, 차단, lead 부재 또는 완료를 알릴 수 있습니다. 계획에 기록된 권한 범위 안에서만 작동합니다.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan에 daemon이 필요한가요?',
+            answer:
+              '아니요. 방법론과 계획은 Herdr나 daemon 없이도 작동합니다. addon은 연속성을 더하는 선택 사항이며 필수 요건이 아닙니다.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'daemon이 절대 할 수 없는 일은 무엇인가요?',
+            answer:
+              '로그인, Claude의 권한 우회 확인 승인, agent의 상시 권한 확대, merge·tag·release 작업을 절대 수행하지 않습니다. nudge는 고정된 계속 진행 프롬프트만 보내며 권한을 부여하지 않습니다.',
           },
         ],
       },
@@ -1431,6 +1535,8 @@ export const ko: SiteTranslations = {
     planTitle: '스킬로 계획하고 실행하기',
     planIntro:
       '위의 API는 에이전트가 이 사이트를 읽을 수 있게 해줍니다. DWP 스킬은 에이전트가 방법론을 실행할 수 있게 해주는 것입니다 — 리포지토리에 한 번 설치하면 라우터와 아홉 개의 하위 스킬이 함께 제공되며, 슬래시 명령으로 호출됩니다(또는 이름으로 호출합니다. 슬래시를 가로채는 에이전트는 대부분 대신 #을 사용합니다. 예: #dwp-execute).',
+    loopWorkflow:
+      'Herdr에서는 계획 등록 시 lead와 승계 순서를 기록합니다. 사람이 herdr-peers autopilot start --loop를 시작하면 열린 계획을 계속 진행할 수 있습니다. merge, tag 또는 release 전에 herdr-peers lead verify --plan <plan-id>를 실행하세요.',
     formatTitle: '두 가지 독립적인 선택: 형식, 그리고 원하는 검토의 정도',
     formatIntro:
       '모든 계획은 각 축에서 하나의 값을 선택합니다. 이 두 축은 서로 독립적입니다 — Lite 계획도 trust로 실행할 수 있고, Full 계획도 guided로 실행할 수 있으며, 어느 쪽이든 형식을 바꾸지 않고 나중에 모드를 전환할 수 있습니다.',

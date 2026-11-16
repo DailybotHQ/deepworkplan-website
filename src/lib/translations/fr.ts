@@ -14,7 +14,7 @@ export const fr: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — exécution structurée pour les agents de code IA',
   siteDescription:
-    'Deep Work Plan est le développement piloté par les specs où le dépôt devient le harnais : tâches atomiques, portes de validation et exécution multi-agents.',
+    'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout. L’efficacité mesurée est exprimée en octets d’instructions par flux.',
 
   // Navigation
   nav: {
@@ -99,14 +99,14 @@ export const fr: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — exécution structurée pour les agents de code IA',
       description:
-        'Deep Work Plan apporte le développement piloté par les specs aux agents IA. Transformez votre dépôt en harnais durable pour la délégation multi-agents.',
+        'Spécification d’abord, boucle fermée : Deep Work Plan fait du dépôt le harness des agents IA, et chaque plan va au bout dans une boucle lancée par un humain.',
     },
     hero: {
       badge: 'Méthodologie ouverte · MIT · Indépendante de l’agent',
-      title: 'Les modèles comptent.',
-      titleEmphasis: 'Le contexte compte davantage.',
+      leadSentence:
+        'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.',
       subtitle:
-        'Deep Work Plan transforme n’importe quel dépôt en un environnement structuré — contexte, garde-fous et un plan durable — où n’importe quel agent de codage exécute avec précision et efficacité et mène à bien le travail de longue haleine.',
+        'Deep Work Plan transforme n’importe quel dépôt en harness — contexte, garde-fous et un plan durable avec des portes de validation — où n’importe quel agent de codage exécute un travail de longue haleine. Ajoutez la boucle facultative, et un plan ouvert continue de s’exécuter jusqu’à son terme sans que personne ait à le surveiller.',
       instructionLabel: 'Copier dans votre agent',
       instruction:
         "Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n'importe quel dépôt AI-first.",
@@ -114,19 +114,38 @@ export const fr: SiteTranslations = {
       copiedLabel: 'Copié',
       viewInitCta: 'Voir comment ça marche',
       pullQuote:
-        'Deep Work Plan, c’est le développement piloté par la spécification, où le dépôt lui-même devient le harness.',
+        'La spécification dit quoi ; le harness dit où ; le loop engineering dit comment cela se termine.',
       primaryCta: 'Lire la méthodologie',
       secondaryCta: 'Lire la spécification',
-      illustrationAlt:
-        'Un phare sur une côte rocheuse projette un faisceau unique qui guide un petit navire — une gravure évoquant le dépôt comme un harness stable qui guide tout agent.',
-      scrollCta: 'Voir comment ça marche',
+    },
+    pillars: {
+      badge: 'Quatre piliers',
+      title: 'Ce sur quoi repose la méthodologie.',
+      items: [
+        {
+          name: 'La spécification d’abord',
+          line: 'Le plan est la source de vérité durable : tâches atomiques, critères d’acceptation et portes de validation que l’agent doit franchir.',
+        },
+        {
+          name: 'Le dépôt est le harness',
+          line: 'Le contexte, les outils, les garde-fous et l’état vivent dans le dépôt sous forme de fichiers texte que tout agent peut lire.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Les plans vont jusqu’à leur terme : enregistrement, un démon lancé par un humain, des relances qui n’ajoutent aucune autorité, la relève et des événements de plan.',
+        },
+        {
+          name: 'Efficacité mesurée',
+          line: 'Octets d’instructions par flux, mesurés et publiés avec leur méthode — jamais de pourcentages de tokens inventés.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Le problème et la réponse',
       problem:
         'En courtes salves, les agents de codage sont remarquables. Confiez-leur une mission de long terme — une migration, un nouveau sous-système, une refactorisation de dizaines de fichiers — ils dérivent : le contexte se remplit, les décisions s’effacent et des heures de travail restent inachevées.',
       answer:
-        'Deep Work Plan répond par le développement piloté par la spécification : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. « Fini » cesse d’être une impression — cela devient une preuve vérifiable et relisible.',
+        'Deep Work Plan répond par la spécification d’abord : un plan durable, des tâches atomiques et des validation gates que l’agent doit franchir. « Fini » cesse d’être une impression — cela devient une preuve vérifiable et relisible. Le loop engineering fait ensuite avancer le plan jusqu’au franchissement de ces validation gates.',
       efficiency:
         'Le contexte est la ressource la plus rare de votre agent. Le harness garde donc ses propres instructions légères et vérifiables. Elles se chargent progressivement, la validation se concentre sur les changements et chaque tâche reçoit le contexte utile. Nous publions en octets le volume d’instructions de chaque flux pour rendre cette charge visible. Les plans s’adaptent eux aussi au travail : Lite pour une correction circonscrite, Full pour une tâche qui s’étend sur plusieurs heures. Le format suit l’ampleur du travail et maintient un processus ciblé et traçable.',
       illustrationAlt:
@@ -163,6 +182,67 @@ export const fr: SiteTranslations = {
         deepLinkLabel: 'Lire la méthodologie',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Les plans vont jusqu’au bout. L’autorité reste aux humains.',
+      subtitle:
+        'Le loop engineering, c’est la façon dont un plan se termine sans qu’un humain ait à le surveiller. Chaque ligne ci-dessous est un contrat publié de herdr-peers, l’addon facultatif Herdr : la méthodologie fonctionne sans lui, et la boucle ne fait que l’amplifier.',
+      colContract: 'Contrat',
+      colGuarantee: 'Ce qu’il garantit',
+      colSource: 'Source',
+      contracts: [
+        {
+          name: 'Enregistrement du plan',
+          detail:
+            'Un plan que la boucle surveille possède un enregistrement de lead avec une époque et une succession. Seul le détenteur de l’époque la plus élevée agit comme son lead.',
+        },
+        {
+          name: 'Démarrage humain uniquement',
+          detail:
+            'Seul un humain démarre le démon, avec ses propres mots. Aucune demande, réponse ou notification ne peut le démarrer, l’arrêter ou modifier ce qu’il fait.',
+        },
+        {
+          name: 'Les relances n’ajoutent aucune autorité',
+          detail:
+            'Le lead inactif d’un plan ouvert reçoit un seul prompt fixe pour continuer. Les portes, les conditions d’arrêt et les escalades s’appliquent comme avant ; trois prompts sans progrès marquent le plan comme enlisé.',
+        },
+        {
+          name: 'Relève par les successeurs',
+          detail:
+            'Les successeurs reprennent le rôle via la vérification de lead takeover. Une lane ne peut être nommée qu’avec une autorisation consignée à l’avance par un humain.',
+        },
+        {
+          name: 'Événements de plan',
+          detail:
+            'Quand un plan s’enlise, se bloque, perd son lead, démarre depuis la file ou se termine, une commande choisie par l’humain reçoit un objet plan-event-v1. Le pack fournit un notificateur Dailybot pour cela.',
+        },
+        {
+          name: 'Carte de la flotte',
+          detail:
+            'Chaque machine déclare ses plans en plans-v1 ; le démon tient la carte fleet-v1 de chaque machine, agent, dépôt et plan, et fleet ui l’affiche en lecture seule.',
+        },
+        {
+          name: 'Vérification du lead',
+          detail:
+            'Avant tout merge, tag ou release, le lead confirme qu’il détient toujours le plan sur chaque machine. Un lead plus récent le refuse ; une machine injoignable l’arrête, sauf si ce risque est accepté et consigné.',
+        },
+      ],
+      note: 'Le cerveau de décision (--brain) et la désignation du lead (--appoint) sont des options facultatives du même démon, chacune activée par un humain. Le démon ne fusionne jamais, ne publie jamais de release, ne se connecte jamais et ne modifie jamais une permission.',
+      deepLinkLabel: 'Lire l’addon Herdr',
+    },
+    efficiency: {
+      badge: 'Efficacité mesurée',
+      title: 'Octets d’instructions par flux, mesurés.',
+      subtitle:
+        'Le harness publie ce que chaque flux doit lire avant de démarrer : le routeur, le sous-skill et les ressources partagées qu’il référence. Ce sont les ensembles de lecture obligatoire du pack publié.',
+      colFlow: 'Flux',
+      colBytes: 'Paquet d’entrée (octets)',
+      caption:
+        'Unité : octets du système de fichiers. Mesuré sur le pack publié avec la commande ci-dessous.',
+      absent:
+        'Les tokens du fournisseur, le coût et les statistiques de fermeture de boucle ne sont pas affichés : aucune source étiquetée ne les mesure encore, ils n’ont donc pas de ligne. Le chiffre de tokens du script, octets ÷ 4, est une estimation signalée comme telle, jamais une mesure.',
+      deepLinkLabel: 'Lire le registre d’évaluation',
     },
     onboarding: {
       badge: 'Onboarding fondé sur le raisonnement',
@@ -220,6 +300,11 @@ export const fr: SiteTranslations = {
           description:
             'Générez des Deep Work Plans de longue haleine pour n’importe quelle tâche et exécutez-les étape par étape, avec des critères d’acceptation explicites, des portes de validation et un état reprenable — de manière autonome, pendant des heures.',
         },
+        {
+          title: 'Un humain lance la boucle',
+          description:
+            'Facultatif, avec l’addon Herdr : vous — jamais un agent — exécutez herdr-peers autopilot start --loop. Chaque plan ouvert doté d’un enregistrement de lead continue jusqu’à son terme, et votre notificateur est prévenu quand l’un d’eux s’enlise, se bloque ou se termine.',
+        },
       ],
       note: 'Le skill est installé à l’identique partout ; ce qui est adapté, c’est votre dépôt — l’AGENTS.md, les docs et le kit .agents/ raisonné générés pour votre stack. Cette séparation est ce qui fait de la méthodologie un standard réutilisable plutôt qu’un échafaudage ponctuel.',
     },
@@ -268,7 +353,7 @@ export const fr: SiteTranslations = {
         {
           label: 'Natif git, reprenable, .dwp/',
           detail:
-            'Aucun démon ni état externe. Les plans atterrissent dans un dossier .dwp/ ignoré par git, et toute tâche reprend à partir de git seul — même après un débordement de contexte.',
+            'La méthodologie elle-même ne requiert aucun démon ni état externe. Les plans atterrissent dans un dossier .dwp/ ignoré par git, et toute tâche reprend à partir de git seul — même après un débordement de contexte. Le démon facultatif de la boucle apporte de la continuité, jamais une dépendance.',
         },
         {
           label: 'Délégation multi-agents et Écosystème 1.0',
@@ -596,12 +681,12 @@ export const fr: SiteTranslations = {
     meta: {
       title: 'La méthodologie Deep Work Plan',
       description:
-        'Sept chapitres, du manifeste à l’autonomie de l’essaim : principes, boucle centrale, modèles, skills, archétypes, nombreux agents et essaims qui durent.',
+        'Huit chapitres, du manifeste à Loop engineering : principes, boucle centrale, modèles, skills et agents, archétypes, travail multi-agents et boucle fermée.',
     },
     eyebrow: 'Méthodologie',
     title: 'La méthodologie Deep Work Plan',
     intro:
-      'Sept chapitres qui vous mènent de la philosophie derrière Deep Work Plan à la boucle pratique, aux modèles, aux adaptations, à l’exécution de nombreux agents à la fois et à la continuité d’un essaim.',
+      'Huit chapitres présentent les principes de Deep Work Plan, sa boucle pratique, les modèles, les adaptations, le travail multi-agents et Loop engineering.',
     chapterLabel: 'Chapitre',
     readChapter: 'Lire le chapitre',
     prev: 'Précédent',
@@ -696,8 +781,6 @@ export const fr: SiteTranslations = {
     },
     eyebrow: 'Démarrage rapide',
     title: 'Rendez ce dépôt AI-first',
-    intro:
-      'Un seul endpoint pour transformer n’importe quel dépôt en une base de code pilotée par la spécification et prête pour les agents. Installez le skill, laissez un agent intégrer le dépôt, puis planifiez et exécutez un travail structuré avec n’importe quel agent de code.',
     handoffTitle: 'Copier dans votre agent',
     handoffBody:
       'Copiez le prompt init.md complet et collez-le dans votre agent de code IA — Claude Code, Cursor, Codex ou tout autre. Il lit la méthodologie et la spécification, installe le skill et intègre ce dépôt pour les Deep Work Plans.',
@@ -707,11 +790,13 @@ export const fr: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Ce que cela fait',
     whatBody: [
-      'L’adoption change le dépôt de deux manières durables — les piliers de la méthodologie.',
-      'D’abord, le dépôt devient piloté par la spécification : le travail part d’un plan et d’une spécification écrits, et non de prompts ponctuels. Ensuite, le dépôt lui-même devient le harness de l’agent — un AGENTS.md, une base de connaissances docs/, une doc par module et un foyer de skills .agents/ (avec les liens symboliques .claude → .agents et .cursor → .agents) donnent à chaque agent le contexte et les commandes dont il a besoin.',
+      'Le parcours d’adoption met ces quatre piliers en pratique dans votre dépôt.',
+      'L’adoption repose sur quatre piliers : les plans spec-first, le dépôt comme harness, Loop engineering et l’efficacité mesurée. Le plan est la source de vérité durable ; le dépôt porte le contexte, les outils, les garde-fous et l’état. La boucle facultative, démarrée par une personne, aide les plans enregistrés à aller jusqu’au bout ; la charge d’instructions se mesure en octets par flux.',
     ],
     sequenceTitle: 'Le parcours d’adoption',
     orLabel: 'ou',
+    loopNotifyNote:
+      'Pour recevoir les rapports d’événements Dailybot, utilisez la deuxième commande. Elle ajoute le notificateur du pack avec --notify ; les notifications sont facultatives.',
     steps: [
       {
         title: "Vérifiez avant d'installer",
@@ -757,7 +842,7 @@ export const fr: SiteTranslations = {
     ],
     outcomeTitle: 'Le résultat',
     outcome:
-      'Le dépôt devient piloté par la spécification et le dépôt lui-même devient le harness de l’agent — le contexte et les commandes voyagent avec le code.',
+      'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.',
     nextStepsTitle: 'Étapes suivantes',
     nextSteps: [
       { label: 'Lire la méthodologie', href: '/methodology' },
@@ -959,6 +1044,25 @@ export const fr: SiteTranslations = {
               'Oui, quand le plan a été approuvé à l’avance, porte la couche d’état requise et confère à l’agent une autorité bornée. Une exécution sans supervision doit s’arrêter et enregistrer un blocage quand la réalité diverge, quand une porte échoue en dehors de son périmètre de réparation prévu, ou quand une nouvelle approbation ou un identifiant est nécessaire.',
             linkLabel: 'Lire le protocole d’exécution sans supervision',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'Qu’est-ce que loop engineering ?',
+            answer:
+              'Loop engineering ferme la boucle d’exécution : après l’enregistrement d’un plan avec un lead, le daemon Herdr facultatif, démarré par une personne, peut faire avancer le plan ouvert jusqu’à son terme et signaler les blocages, l’absence de progrès, la perte du lead ou la fin. Il reste dans les limites d’autorité consignées dans le plan.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan a-t-il besoin du daemon ?',
+            answer:
+              'Non. La méthode et ses plans fonctionnent sans Herdr ni daemon. L’addon est facultatif et apporte de la continuité ; il n’est jamais requis.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Que ne peut jamais faire le daemon ?',
+            answer:
+              'Il ne se connecte jamais, ne valide jamais l’accusé de contournement des permissions de Claude, n’élargit jamais les permissions permanentes d’un agent et n’effectue aucune opération de merge, tag ou release. Une relance envoie un message fixe pour continuer et n’accorde aucune autorité.',
           },
         ],
       },
@@ -1454,6 +1558,8 @@ export const fr: SiteTranslations = {
     planTitle: 'Planifier et exécuter avec la skill',
     planIntro:
       'L’API ci-dessus permet à un agent de lire ce site. La skill DWP est ce qui permet à un agent d’exécuter la méthodologie — installez-la une fois dans un dépôt, et elle fournit un routeur plus neuf sub-skills, invoquées comme des commandes slash (ou par leur nom, pour les agents qui interceptent le slash — la plupart utilisent # à la place, par exemple #dwp-execute).',
+    loopWorkflow:
+      'Avec Herdr, l’enregistrement du plan consigne le lead et la succession. Une personne peut démarrer herdr-peers autopilot start --loop pour faire avancer les plans ouverts. Exécutez herdr-peers lead verify --plan <plan-id> avant tout merge, tag ou release.',
     formatTitle:
       'Deux choix indépendants : le format, et le niveau de relecture souhaité',
     formatIntro:

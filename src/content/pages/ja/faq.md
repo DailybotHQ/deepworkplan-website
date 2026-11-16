@@ -126,6 +126,18 @@ Deep Work Plan はリポジトリを、コーディングエージェントが�
 
 [無人実行プロトコルを読む](https://deepworkplan.com/ja/spec/agent-protocol)
 
+### loop engineering とは何ですか？
+
+loop engineering は実行ループを閉じる仕組みです。lead を登録した計画に対し、人が起動する任意の Herdr daemon がオープンな計画を完了まで進め、停滞、ブロック、lead の不在、完了を通知できます。計画に記録された権限の範囲内で動作します。
+
+### Deep Work Plan に daemon は必要ですか？
+
+いいえ。方法論と計画は Herdr や daemon がなくても機能します。この addon は任意で、継続性を加えるものであり、必須ではありません。
+
+### daemon が決してできないことは何ですか？
+
+ログイン、Claude の権限バイパス確認の承認、agent の恒常的な権限の拡大、merge・tag・release の実行は決して行いません。nudges は固定の続行プロンプトを送るだけで、権限を与えません。
+
 ## マルチエージェントと v7
 
 ### 複数のエージェントが並行して1つの計画を安全に進められますか？

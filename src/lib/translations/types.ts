@@ -132,8 +132,8 @@ export interface SiteTranslations {
     };
     hero: {
       badge: string;
-      title: string;
-      titleEmphasis: string;
+      /** The v8 lead sentence — the one place to swap the hero wording. */
+      leadSentence: string;
       subtitle: string;
       instructionLabel: string;
       instruction: string;
@@ -143,8 +143,11 @@ export interface SiteTranslations {
       pullQuote: string;
       primaryCta: string;
       secondaryCta: string;
-      illustrationAlt: string;
-      scrollCta: string;
+    };
+    pillars: {
+      badge: string;
+      title: string;
+      items: { name: string; line: string }[];
     };
     pitch: {
       kicker: string;
@@ -184,6 +187,27 @@ export interface SiteTranslations {
         deepLinkLabel: string;
         deepLinkHref: string;
       };
+    };
+    loop: {
+      badge: string;
+      title: string;
+      subtitle: string;
+      colContract: string;
+      colGuarantee: string;
+      colSource: string;
+      contracts: { name: string; detail: string }[];
+      note: string;
+      deepLinkLabel: string;
+    };
+    efficiency: {
+      badge: string;
+      title: string;
+      subtitle: string;
+      colFlow: string;
+      colBytes: string;
+      caption: string;
+      absent: string;
+      deepLinkLabel: string;
     };
     onboarding: {
       badge: string;
@@ -368,6 +392,7 @@ export interface SiteTranslations {
     accessPoints: { title: string; body: string }[];
     planTitle: string;
     planIntro: string;
+    loopWorkflow: string;
     formatTitle: string;
     formatIntro: string;
     // Four combinations: Lite, Full (the format axis) and Guided, Trust (the
@@ -503,7 +528,6 @@ export interface SiteTranslations {
     meta: { title: string; description: string };
     eyebrow: string;
     title: string;
-    intro: string;
     handoffTitle: string;
     handoffBody: string;
     /**
@@ -519,6 +543,7 @@ export interface SiteTranslations {
     whatBody: string[];
     sequenceTitle: string;
     orLabel: string;
+    loopNotifyNote: string;
     steps: {
       title: string;
       description: string;

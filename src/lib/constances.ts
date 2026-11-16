@@ -1,6 +1,10 @@
+import { en } from '@/lib/translations/en';
+
 export const SITE_TITLE: string = 'Deep Work Plan';
-export const SITE_DESCRIPTION: string =
-  'Context matters more than models. Deep Work Plan turns any repository into a structured, agent-pilotable environment. Open, MIT-licensed, tool-agnostic.';
+// Leads with the v8 sentence from its single swap point
+// (home.hero.leadSentence), so the WebSite / SoftwareApplication JSON-LD and
+// the default meta description move with the homepage hero.
+export const SITE_DESCRIPTION: string = `${en.home.hero.leadSentence} Open, MIT-licensed, tool-agnostic methodology for AI coding agents.`;
 
 // Analytics configuration — scripts load only when IDs are provided
 export const ANALYTICS = {

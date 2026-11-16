@@ -16,6 +16,8 @@ description: "Deep Work Plan'ın ajan yüzeyi: sürümlü, salt okunur ve kimlik
 
 Yukarıdaki API, bir ajanın bu siteyi okumasını sağlar. DWP skill'i ise bir ajanın metodolojiyi çalıştırmasını sağlayan şeydir — bir depoya bir kez kurulur ve bir yönlendirici ile dokuz alt skill getirir; bunlar eğik çizgi komutları olarak çağrılır (ya da isimle, eğik çizgiyi yakalayan ajanlar için — çoğu bunun yerine `#` kullanır, örn. `#dwp-execute`).
 
+Herdr ile plan kaydı lead ve halef sırasını tutar. İnsan, açık planları sürdürmek için `herdr-peers autopilot start --loop` komutunu başlatabilir. Herhangi bir merge, tag veya release işleminden önce `herdr-peers lead verify --plan <plan-id>` çalıştırın.
+
 Her plan, birbirinden bağımsız iki eksenin her birinden bir değer seçer:
 
 - **Lite** — Görev kayıtları, planın README'sinde, sabit `#task-N` çapaları arkasında yaşar. Küçük, sınırlı işler için tasarlanmıştır: tek bir konu, yaklaşık bir oturum.
