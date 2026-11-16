@@ -34,6 +34,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
   - label: "Skill release v7.12.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7 mantiene il metodo di v6: il contratto è l'autorità, il registro append-only è la memoria, lo scheduler decide cosa eseguire dopo e un'attività si chiude solo quando le evidenze registrate soddisfano i suoi criteri. v7 aggiunge la possibilità di delegare e mantiene la stessa disciplina sul risultato.
@@ -64,4 +66,6 @@ La versione 7.11.0 (2026-11-16) fa atterrare la serie di indurimento v7 dello sv
 
 La versione 7.12.0 (2026-11-16) registra i piani nel loop di herdr-peers: un piano rivendica la propria guida con una lista di successione, così che `autopilot --loop` e la fleet UI vedano ogni piano aperto e lo tengano in esecuzione fino alla fine, e un notificatore Dailybot riporta le tappe; i descrittori degli addon passano a herdr-peers v1.3.1 e coding-agents-kit v1.3.0 — le stesse versioni che questo site fissa.
 
-Versione installata della skill: **7.12.0**, stabile dalla 7.0.0.
+La versione 7.12.1 (2026-11-16) corregge il notificatore Dailybot dell'addon Herdr: ora accetta il nome di evento `herdr-peers/plan-event-v1` emesso da herdr-peers, limita lo stdin del notificatore a 64 KiB e mappa `plan_lead_moved`; i descrittori degli addon passano a coding-agents-kit v1.4.0, il cui `ak update` è documentato come invocato solo dall'umano.
+
+Versione installata della skill: **7.12.1**, stabile dalla 7.0.0.

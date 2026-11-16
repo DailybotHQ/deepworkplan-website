@@ -34,6 +34,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
   - label: "Skill release v7.12.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7 沿用 v6 的方法：契约是权威，仅追加的日志是记忆，调度器决定接下来运行什么，只有当记录在案的证据满足任务的标准时，任务才会关闭。v7 增加了委派能力，并对委派结果保持同样的纪律。
@@ -64,4 +66,6 @@ v7 是编排与可审计性方面的一次跃升，但尚不是完全无人值�
 
 7.12.0 版本（2026-11-16）将计划注册进 herdr-peers 循环：计划以继任者列表认领其主导者，因此 `autopilot --loop` 与 fleet UI 能看到每个打开的计划并让它一直运行到结束，Dailybot 通知器报告各里程碑；附加组件描述符移至 herdr-peers v1.3.1 与 coding-agents-kit v1.3.0——正是本站固定的版本。
 
-已安装的技能版本：**7.12.0**，自 7.0.0 起保持稳定。
+7.12.1 版本（2026-11-16）修复了 Herdr 附加组件的 Dailybot 通知器：它现在接受 herdr-peers 发出的 `herdr-peers/plan-event-v1` 事件名，将通知器的 stdin 限制为 64 KiB，并映射 `plan_lead_moved`；附加组件描述符移至 coding-agents-kit v1.4.0，其 `ak update` 被记录为仅可由人类调用。
+
+已安装的技能版本：**7.12.1**，自 7.0.0 起保持稳定。

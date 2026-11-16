@@ -99,10 +99,10 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.12.0
+  git checkout v7.12.1
   # Download the checksums for that release and check them against the digest below:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.0/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.1/SHA256SUMS
   shasum -a 256 SHA256SUMS   # must equal the deepworkplan-skill digest in Pinned releases
   ./setup.sh --verify        # non-zero exit means a file does not match — stop
   ```
@@ -115,8 +115,8 @@ is encouraged: a careful agent treats a fetched prompt as untrusted until it has
 
   | Repository (github.com/DailybotHQ) | Tag | sha256 of its `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.12.0` | `388cf53a16d913f4523af1444a74965f6bc248f35f17f10e5f7014df7b3dd782` |
-  | coding-agents-kit | `v1.3.0` | `5d9b215ff81c5662c4504f083c302d1ad5b02556d2a8714e8b65da1f7f9ef7e1` |
+  | deepworkplan-skill | `v7.12.1` | `a8b737d97c57091807f598206d5ef98b2d65af3fee7b5af5dc87a806db92fc97` |
+  | coding-agents-kit | `v1.4.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
   | herdr-peers | `v1.3.1` | `c90bce908dc6d690c0273e8b664d84297aa16e3277bfd00fcf5003bfb6a30152` |
   | devcontainer-kit | `v1.1.2` | `c7a5ffb737777473f08932f9a2de153518d923f5d7edeb4ab97fdd7537bf2374` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
@@ -156,14 +156,14 @@ your host. Branch on what you find:
   the `upgrade` sub-skill did not exist yet, so there is no in-place
   check-and-diff path available). Tell the user what you found, then run a
   fresh install with the force flag to replace it outright — e.g.
-  `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.0 --skill deepworkplan --force -y` — and continue to
+  `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.1 --skill deepworkplan --force -y` — and continue to
   section 3, which detects and reconciles the outdated harness content.
 
 Fresh-install commands (skip these if the skill is already installed — see above):
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.1 --skill deepworkplan -y
 ```
 
 Or install via OpenClaw:
@@ -342,7 +342,7 @@ The table is a lookup, not a checklist: run a row only for the required local re
 | --- | --- | --- |
 | AI Diff Reviewer (required) | `version:` in `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` in `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` in the installed herdr-peers skill | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | the verified installer at https://deepworkplan.com/vim/install.sh (it pins `v1.0.1`; download, `shasum -a 256 -c install.sh.sha256`, then run) |
@@ -366,7 +366,7 @@ repository is fully conformant with **zero** optional addons — never auto-inst
   (not offered for pure libraries, headless services, or infra-only repos). Three profiles stack in
   one file: visual-ui (strongly recommended when detected; installation acceptance-gated), cli-output, and conversational — the latter two
   are always asked, never auto-applied.
-- **agentkit** — a machine-level install of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v1.3.0`): one command for every coding agent, an account per profile, `ak usage` and `ak pick` to choose the account with the most room, and headless `ak run` for plans that hand bounded `parallel_safe` tasks to other coding agents (one delegate per worktree). The kit launches agents in autonomy by default and its opt-out (`--ask` or `AGENTKIT_PERMISSIONS=ask`) always wins.
+- **agentkit** — a machine-level install of [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, pinned `v1.4.0`): one command for every coding agent, an account per profile, `ak usage` and `ak pick` to choose the account with the most room, and headless `ak run` for plans that hand bounded `parallel_safe` tasks to other coding agents (one delegate per worktree). The kit launches agents in autonomy by default and its opt-out (`--ask` or `AGENTKIT_PERMISSIONS=ask`) always wins.
 - **Herdr** — a machine-level install of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v1.3.1`, plus Herdr's official skill) for plans that ask a peer agent in a Herdr pane, on any machine, for one authorized reply, and for a lead that watches its lanes.
 - **DeepWorkPlan Vim** — the terminal editor ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), pinned `v1.0.1`), a machine-level install that never overwrites an existing Neovim configuration without explicit consent.
 - **AI Diff Reviewer** — the required local review (not an opt-in): every Final Review's security
@@ -439,7 +439,7 @@ agentkit and Herdr addons are installed:
   confirmations, payment or plan prompts, unknown screens, and panes you did not create. With
   `AGENTKIT_PERMISSIONS=ask`, lanes ask before they act; never work around those prompts. Log every
   intervention in the parent plan.
-- **Keep the swarm running.** With coding-agents-kit `v1.3.0` and herdr-peers `v1.3.1`, each agent
+- **Keep the swarm running.** With coding-agents-kit `v1.4.0` and herdr-peers `v1.3.1`, each agent
   checks `ak capacity --self --json` at every task boundary; at `critical` it writes a handoff packet
   (https://deepworkplan.com/schema/dwp-handoff/v1.json) and the lead launches a successor in the
   same checkout. The lead claims its plan with `herdr-peers lead claim`, lanes address it as `lead`,

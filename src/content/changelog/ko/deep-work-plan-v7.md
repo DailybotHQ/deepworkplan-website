@@ -34,6 +34,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
   - label: "Skill release v7.12.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7은 v6의 방식을 유지합니다. 계약이 권한의 근거이고, 추가 전용 저널이 기억이며, 스케줄러가 다음에 실행할 작업을 정하고, 기록된 증거가 작업의 기준을 충족할 때만 작업이 종료됩니다. v7은 위임 기능을 더하면서 그 결과에 대해서도 같은 규율을 유지합니다.
@@ -64,4 +66,6 @@ v7은 오케스트레이션과 감사 가능성에서의 큰 진전이지만, �
 
 릴리스 7.12.0(2026-11-16)은 플랜을 herdr-peers 루프에 등록합니다. 플랜은 후계자 목록과 함께 리드를 청구하므로 `autopilot --loop`와 플릿 UI가 열린 모든 플랜을 보고 끝까지 계속 실행하며, Dailybot 통지기가 마일스톤을 보고합니다. 애드온 디스크립터는 herdr-peers v1.3.1과 coding-agents-kit v1.3.0으로 이동합니다 — 바로 이 사이트가 고정하는 릴리스입니다.
 
-설치된 skill 릴리스: **7.12.0**, 7.0.0 이후 안정적입니다.
+릴리스 7.12.1(2026-11-16)은 Herdr 애드온의 Dailybot 통지기를 수정합니다. 이제 herdr-peers가 내보내는 `herdr-peers/plan-event-v1` 이벤트 이름을 받아들이고, 통지기의 stdin을 64 KiB로 제한하며, `plan_lead_moved`를 매핑합니다. 애드온 디스크립터는 coding-agents-kit v1.4.0으로 이동하고, 이 버전의 `ak update`는 사람이 직접 호출하는 것으로만 문서화되어 있습니다.
+
+설치된 skill 릴리스: **7.12.1**, 7.0.0 이후 안정적입니다.

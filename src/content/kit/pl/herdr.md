@@ -10,7 +10,7 @@ order: 7
 
 [Herdr](https://herdr.dev) umieszcza agentów kodujących w panelach, na Twojej maszynie i na maszynach, do których dociera przez SSH. Ten addon pozwala Deep Work Plan używać tych agentów jako **peerów**: plan może przekazać ograniczone zadanie agentowi w innym panelu, otrzymać dokładnie jedną autoryzowaną odpowiedź i zachować zapis tej wymiany.
 
-Jest to opcjonalny addon **DWP v7** (pack `v7.12.0`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
+Jest to opcjonalny addon **DWP v7** (pack `v7.12.1`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
 
 ## Co integruje
 

@@ -34,6 +34,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
   - label: "Skill release v7.12.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7, v6 yöntemini korur: sözleşme otoritedir, yalnızca eklemeli günlük bellektir, zamanlayıcı sıradaki işin ne olacağına karar verir ve bir görev ancak kaydedilmiş kanıt ölçütlerini karşıladığında kapanır. v7 görev devretme yeteneğini ekler ve sonuç etrafında aynı disiplini sürdürür.
@@ -64,4 +66,6 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 
 7.12.0 sürümü (2026-11-16), planları herdr-peers döngüsüne kaydeder: bir plan, bir halef listesiyle liderliğini talep eder; böylece `autopilot --loop` ve fleet arayüzü her açık planı görür ve onu sonuna kadar çalışır tutar; bir Dailybot bildiricisi kilometre taşlarını raporlar. Eklenti tanımlayıcıları herdr-peers v1.3.1 ve coding-agents-kit v1.3.0'a taşınır — bu sitenin sabitlediği sürümlerin aynısı.
 
-Yüklü skill sürümü: **7.12.0**, 7.0.0'dan beri kararlı.
+7.12.1 sürümü (2026-11-16), Herdr eklentisinin Dailybot bildiricisini düzeltir: artık herdr-peers'in ürettiği `herdr-peers/plan-event-v1` olay adını kabul eder, bildiricinin stdin'ini 64 KiB ile sınırlar ve `plan_lead_moved`'ı eşler; eklenti tanımlayıcıları coding-agents-kit v1.4.0'a taşınır — bu sürümün `ak update`'i yalnızca insan tarafından çağrılan olarak belgelenir.
+
+Yüklü skill sürümü: **7.12.1**, 7.0.0'dan beri kararlı.

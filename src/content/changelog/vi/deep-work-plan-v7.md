@@ -34,6 +34,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
   - label: "Skill release v7.12.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7 giữ phương pháp của v6: hợp đồng là thẩm quyền, nhật ký chỉ-ghi-thêm là bộ nhớ, bộ lập lịch quyết định việc gì chạy tiếp theo, và một tác vụ chỉ đóng khi bằng chứng đã ghi nhận đáp ứng tiêu chí của nó. v7 bổ sung khả năng ủy quyền và giữ nguyên kỷ luật đó đối với kết quả.
@@ -64,4 +66,6 @@ Bản phát hành 7.11.0 (2026-11-16) đưa loạt củng cố v7 của develope
 
 Bản phát hành 7.12.0 (2026-11-16) đăng ký các plan với vòng lặp herdr-peers: một plan yêu cầu quyền dẫn dắt của mình cùng danh sách kế nhiệm, nên `autopilot --loop` và fleet UI thấy mọi plan đang mở và giữ nó chạy đến cùng, và một bộ thông báo Dailybot báo các cột mốc; các bộ mô tả addon chuyển sang herdr-peers v1.3.1 và coding-agents-kit v1.3.0 — chính các bản phát hành mà trang này ghim.
 
-Phiên bản skill đã cài: **7.12.0**, ổn định từ 7.0.0.
+Bản phát hành 7.12.1 (2026-11-16) sửa bộ thông báo Dailybot của addon Herdr: nó giờ chấp nhận tên sự kiện `herdr-peers/plan-event-v1` mà herdr-peers phát ra, giới hạn stdin của bộ thông báo ở 64 KiB và ánh xạ `plan_lead_moved`; các bộ mô tả addon chuyển sang coding-agents-kit v1.4.0, với `ak update` được ghi chú là chỉ do con người gọi.
+
+Phiên bản skill đã cài: **7.12.1**, ổn định từ 7.0.0.

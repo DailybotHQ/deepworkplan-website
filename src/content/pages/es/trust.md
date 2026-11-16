@@ -23,11 +23,11 @@ Trata la skill como no confiable hasta haberla comprobado. Cada versión adjunta
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-git checkout v7.12.0
-# Descarga los checksums para la versión que vas a instalar (versión actual v7.12.0):
+git checkout v7.12.1
+# Descarga los checksums para la versión que vas a instalar (versión actual v7.12.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.0/SHA256SUMS
-# SHA256SUMS digest: 388cf53a16d913f4523af1444a74965f6bc248f35f17f10e5f7014df7b3dd782
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.1/SHA256SUMS
+# SHA256SUMS digest: a8b737d97c57091807f598206d5ef98b2d65af3fee7b5af5dc87a806db92fc97
 ./setup.sh --verify        # una salida distinta de cero significa que un archivo no coincide — detente
 ```
 

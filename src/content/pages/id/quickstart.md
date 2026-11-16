@@ -87,10 +87,10 @@ sampai sudah diperiksa.
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.12.0
+  git checkout v7.12.1
   # Unduh checksum untuk rilis itu dan periksa terhadap digest di bawah:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.0/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.1/SHA256SUMS
   shasum -a 256 SHA256SUMS   # harus sama dengan digest deepworkplan-skill di Rilis yang dipatok
   ./setup.sh --verify        # keluaran bukan nol berarti ada berkas yang tidak cocok — hentikan
   ```
@@ -104,8 +104,8 @@ sampai sudah diperiksa.
 
   | Repositori (github.com/DailybotHQ) | Tag | sha256 dari `SHA256SUMS`-nya |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.12.0` | `388cf53a16d913f4523af1444a74965f6bc248f35f17f10e5f7014df7b3dd782` |
-  | coding-agents-kit | `v1.3.0` | `5d9b215ff81c5662c4504f083c302d1ad5b02556d2a8714e8b65da1f7f9ef7e1` |
+  | deepworkplan-skill | `v7.12.1` | `a8b737d97c57091807f598206d5ef98b2d65af3fee7b5af5dc87a806db92fc97` |
+  | coding-agents-kit | `v1.4.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
   | herdr-peers | `v1.3.1` | `c90bce908dc6d690c0273e8b664d84297aa16e3277bfd00fcf5003bfb6a30152` |
   | devcontainer-kit | `v1.1.2` | `c7a5ffb737777473f08932f9a2de153518d923f5d7edeb4ab97fdd7537bf2374` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
@@ -122,7 +122,7 @@ ditambah sembilan sub-skill — `create`, `execute`, `refine`, `resume`, `status
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.0 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.1 --skill deepworkplan -y
 ```
 
 Atau instal melalui OpenClaw:
@@ -268,7 +268,7 @@ Tabel ini adalah rujukan, bukan daftar periksa: jalankan sebuah baris hanya untu
 | --- | --- | --- |
 | AI Diff Reviewer (wajib) | `version:` di `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` di `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` di skill herdr-peers yang terpasang | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | installer terverifikasi di https://deepworkplan.com/vim/install.sh (mematok `v1.0.1`; unduh, `shasum -a 256 -c install.sh.sha256`, lalu jalankan) |
@@ -294,7 +294,7 @@ memasang yang itu secara otomatis.
   infrastruktur). Tiga profil ditumpuk dalam satu berkas: visual-ui (sangat direkomendasikan saat
   terdeteksi; instalasi dijaga oleh penerimaan), cli-output, dan conversational — dua yang terakhir selalu ditanyakan, tidak pernah
   diterapkan secara otomatis.
-- **agentkit** — instalasi tingkat mesin dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok pada `v1.3.0`): satu perintah untuk setiap coding agent, satu akun per profil, `ak usage` dan `ak pick` untuk memilih akun dengan ruang terbanyak, dan `ak run` headless untuk rencana yang menyerahkan tugas `parallel_safe` yang terbatas ke coding agent lain (satu delegasi per worktree). Kit meluncurkan agen dalam mode otonom secara default dan opt-out-nya (`--ask` atau `AGENTKIT_PERMISSIONS=ask`) selalu menang.
+- **agentkit** — instalasi tingkat mesin dari [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, dipatok pada `v1.4.0`): satu perintah untuk setiap coding agent, satu akun per profil, `ak usage` dan `ak pick` untuk memilih akun dengan ruang terbanyak, dan `ak run` headless untuk rencana yang menyerahkan tugas `parallel_safe` yang terbatas ke coding agent lain (satu delegasi per worktree). Kit meluncurkan agen dalam mode otonom secara default dan opt-out-nya (`--ask` atau `AGENTKIT_PERMISSIONS=ask`) selalu menang.
 - **Herdr** — instalasi tingkat mesin dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (dipatok pada `v1.3.1`, ditambah skill resmi Herdr) untuk rencana yang meminta satu balasan yang diotorisasi dari agent rekan di panel Herdr, di mesin mana pun, dan untuk lead yang mengawasi lane-nya.
 - **DeepWorkPlan Vim** — editor terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), dipatok pada `v1.0.1`), instalasi tingkat mesin yang tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit.
 - **AI Diff Reviewer** — tinjauan lokal yang wajib (bukan opt-in): pemeriksaan keamanan setiap Final
@@ -371,7 +371,7 @@ agentkit dan Herdr terpasang:
   pembayaran atau paket, layar yang tidak dikenal, dan panel yang tidak Anda buat. Dengan
   `AGENTKIT_PERMISSIONS=ask`, lane bertanya sebelum bertindak; jangan pernah mengakali prompt
   tersebut. Catat setiap intervensi di rencana induk.
-- **Jaga swarm tetap berjalan.** Dengan coding-agents-kit `v1.3.0` dan herdr-peers `v1.3.1`, setiap agent
+- **Jaga swarm tetap berjalan.** Dengan coding-agents-kit `v1.4.0` dan herdr-peers `v1.3.1`, setiap agent
   memeriksa `ak capacity --self --json` di setiap batas tugas; pada `critical` ia menulis paket handoff
   (https://deepworkplan.com/schema/dwp-handoff/v1.json) dan lead meluncurkan penerus di checkout yang
   sama. Lead mengklaim rencananya dengan `herdr-peers lead claim`, lane menyapanya sebagai `lead`,

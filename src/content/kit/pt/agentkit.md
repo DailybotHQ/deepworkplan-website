@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tem suas próprias flags para continuar uma sessão, sua própria forma de manter separada uma segunda conta, seu próprio modo headless e sua própria opção para pular os pedidos de permissão. O **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** coloca uma única superfície de comandos sobre todos eles: `ak <kind> [@profile]`.
 
-Este addon integra o kit ao **DWP v7** (pack `v7.12.0`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
+Este addon integra o kit ao **DWP v7** (pack `v7.12.1`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
 
 ## O que o kit oferece
 
@@ -65,7 +65,7 @@ O trabalho só circula entre as contas que você declarou para o plano, dentro d
 ## Instalação
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
@@ -73,7 +73,7 @@ Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, interface 1 |
+| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, interface 1 |
 | Chave de registro | `agentkit` em `.dwp/config.json` |
 | Transporte | headless: um `ak run` por delegado em uma worktree git dedicada |
 | Fornece | `subagents`, `cancel_children`, `model_routing` |
@@ -84,6 +84,8 @@ Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais.
 A versão 1.2.0 adiciona o **`ak last`**: cada lançamento interativo registra seu kind e perfil por diretório de trabalho; `ak last` o relança com `-c` (continua a sessão mais recente ali) em qualquer terminal, `ak last -r` abre o seletor do CLI nessa conta, e `ak last ls` lista o registro. Um lançamento dentro de um painel do Herdr também sobrevive a um reinício do Herdr ou da máquina: o painel volta através de `ak --resume` na mesma conta, com sua chave do arquivo de ambiente e sua postura de permissões intacta (`AGENTKIT_HERDR_RESUME=0` desativa isso).
 
 A versão 1.3.0 do kit (interface 1 inalterada) adiciona o **pick-v2**: `ak pick --kinds codex,claude` classifica entre kinds, `--model-for KIND=NAME` sobrescreve o modelo por kind, e `--json` retorna o contrato de lançamento — `launch.argv` com `launch.permissions` (`auto` ou `ask`) e uma forma `qualifies: false`. `--model` passa a ser um flag principal mapeado para o flag próprio de cada CLI (codex `-m`) — uma mudança de comportamento para scripts que passavam `--model` adiante.
+
+A versão 1.4.0 do kit (interface 1 inalterada) adiciona o **`ak update`**, de invocação apenas humana: ele leva um CLI à versão mais recente do fornecedor com a verificação do `ak install` — descobre, verifica, instala e refixa o `providers.toml` deste kit de forma atómica (um `.bak` é mantido). `--take-over` substitui um symlink gerido pelo fornecedor, downgrades são recusados salvo se nomeados, e a atualização só conta quando o PATH resolve a nova versão.
 
 ## Autonomia por padrão, com um opt-out que sempre prevalece
 

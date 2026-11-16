@@ -10,7 +10,7 @@ order: 8
 
 Every terminal coding agent has its own flags for continuing a session, its own way to keep a second account apart, its own headless mode and its own switch for skipping permission prompts. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** puts one command surface over all of them: `ak <kind> [@profile]`.
 
-This addon integrates the kit into **DWP v7** (pack `v7.12.0`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
+This addon integrates the kit into **DWP v7** (pack `v7.12.1`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
 
 ## What the kit gives you
 
@@ -65,15 +65,15 @@ Work moves only among the accounts you declared for the plan, within each vendor
 ## Install
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v1.3.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v1.4.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |
@@ -84,6 +84,8 @@ Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else
 Release 1.2.0 adds **`ak last`**: every interactive launch records its kind and profile per working directory; `ak last` relaunches it with `-c` (continue the newest session there) in any terminal, `ak last -r` opens the CLI's picker in that account, and `ak last ls` lists the record. A launch inside a Herdr pane also survives a Herdr restart or a reboot: the pane comes back through `ak --resume` in the same account, with its key from the env file and its permission posture intact (`AGENTKIT_HERDR_RESUME=0` turns it off).
 
 Kit v1.3.0 (interface 1 unchanged) adds **pick-v2**: `ak pick --kinds codex,claude` ranks across kinds, `--model-for KIND=NAME` overrides the model per kind, and `--json` returns the launch contract — `launch.argv` with `launch.permissions` (`auto` or `ask`) and a `qualifies: false` form. `--model` becomes a head flag mapped to each CLI's own flag (codex `-m`) — a behaviour change for scripts that passed `--model` through.
+
+Kit v1.4.0 (interface 1 unchanged) adds **`ak update`**, human-invoked only: it brings a CLI to the vendor's newest release with `ak install`'s verification — discover, verify, install and re-pin this kit's `providers.toml` atomically (a `.bak` is kept). `--take-over` replaces a vendor-managed symlink, downgrades are refused unless named, and the update only counts when PATH resolves the new release.
 
 ## Autonomy by default, with an opt-out that always wins
 
