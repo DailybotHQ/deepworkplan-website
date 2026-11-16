@@ -89,6 +89,8 @@ Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-
 - **Hành vi:** giao thức peer (stamp, grant, reply, loop guard, giới hạn độ sâu và fan-out) nằm trong herdr-peers, không bao giờ nằm trong gói; mọi lần sử dụng đều cần grant hợp đồng `agent_delegation`, và kết quả của agent được ủy quyền vẫn chỉ là khẳng định cho đến khi runner của chính kế hoạch quan sát được nó
 - **Khi đề xuất:** opt-in rõ ràng trong Giai đoạn 7b; phát hiện chỉ đọc `herdr` và `herdr-peers`; phương thức truyền chỉ dùng được bên trong một phiên Herdr
 
+- **Vòng lặp:** Herdr v2.0.0 còn cung cấp `herdr-peers autopilot --loop` tùy chọn do con người khởi chạy để tiếp tục kế hoạch trong phạm vi và chuyển giao cho người kế nhiệm. Xem [Kỹ thuật vòng lặp](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (addon thứ bảy)
 
 Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v1.0.1`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).

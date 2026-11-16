@@ -89,6 +89,8 @@ section: Addons
 - **動作：** ピアプロトコル（stamp、grant、reply、ループガード、深さとファンアウトの上限）は herdr-peers にあり、パックには決して含まれない；どの利用にも contract の権限付与 `agent_delegation` が必要で、委任先の結果は計画自身のランナーが観測するまで主張にとどまる
 - **提供タイミング：** フェーズ 7b での明示的なオプトイン；`herdr` と `herdr-peers` を読み取り専用で検出；このトランスポートは Herdr セッション内でのみ使用可能
 
+- **ループ：** Herdr v2.0.0 は、人が起動する任意の `herdr-peers autopilot --loop` も提供し、範囲内で計画を続行して後継者へ引き継ぎます。[ループエンジニアリング](/spec/loop-engineering)を参照。
+
 ### DeepWorkPlan Vim（第 7 アドオン）
 
 [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.0.1` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。

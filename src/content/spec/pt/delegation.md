@@ -100,3 +100,5 @@ Um orquestrador nunca delega as tarefas de um **plano filho**: os filhos rodam e
 - [Camada de registros](/spec/record-layer) — o contrato e o diário que esta página estende.
 - [Recursos e capacidades](/spec/resources-and-abilities) — capacidades, concessões e o registro de addons.
 - [Addon Herdr](/kit/herdr) e [Addon Agentkit](/kit/agentkit) — os dois transportes.
+
+- [Engenharia do ciclo](/spec/loop-engineering) — the plan loop and its bounded autonomy.

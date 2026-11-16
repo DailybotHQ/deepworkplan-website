@@ -26,6 +26,7 @@ URL `schema` của hợp đồng nêu tên **thế hệ** của nó, và manifes
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` và sự kiện `delegation` ([Ủy quyền](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` và thẩm quyền vòng lặp |
 
 Các kế hoạch mới do gói 7.x tạo ra mặc định là v7; một yêu cầu `v6` tường minh vẫn vật liệu hóa một hợp đồng v6. Một kế hoạch không bao giờ đổi thế hệ, và một nhật ký trộn lẫn các thế hệ PHẢI (MUST) bị từ chối. Cả hai thế hệ đều chiếu vào cùng một hình dạng [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 

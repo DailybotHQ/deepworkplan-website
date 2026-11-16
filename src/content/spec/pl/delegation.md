@@ -100,3 +100,5 @@ Orkiestrator nigdy nie deleguje zadań **planu podrzędnego**: plany podrzędne 
 - [Warstwa rekordów](/spec/record-layer) — kontrakt i dziennik, które ta strona rozszerza.
 - [Zasoby i możliwości](/spec/resources-and-abilities) — możliwości, uprawnienia i rejestr addonów.
 - [Addon Herdr](/kit/herdr) i [addon Agentkit](/kit/agentkit) — dwa transporty.
+
+- [Inżynieria pętli](/spec/loop-engineering) — pętla planu i jej ograniczona autonomia.

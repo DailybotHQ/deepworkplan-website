@@ -26,6 +26,7 @@ URL `schema` контракту називає його **покоління**, 
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` і подію `delegation` ([Делегування](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` і повноваження циклу |
 
 Нові плани, створені пакетом 7.x, за замовчуванням належать до v7; явний запит `v6` і далі матеріалізує контракт v6. План ніколи не змінює покоління, а журнал, що змішує покоління, MUST бути відхилений. Обидва покоління проєктуються в ту саму форму [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 

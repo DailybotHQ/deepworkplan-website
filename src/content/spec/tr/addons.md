@@ -89,6 +89,8 @@ v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https:
 - **Davranış:** eşler arası protokol (damga, yetki, yanıt, döngü koruması, derinlik ve yayılım sınırları) pakette değil, herdr-peers içinde yaşar; her kullanım `agent_delegation` sözleşme yetkisini gerektirir ve bir delegenin sonucu, planın kendi çalıştırıcısı onu gözlemleyene kadar bir iddia olarak kalır
 - **Ne zaman sunulur:** Faz 7b sırasında açık opt-in; `herdr` ve `herdr-peers` için salt okunur tespit; taşıyıcı yalnızca bir Herdr oturumu içinde kullanılabilir
 
+- **Döngü:** Herdr v2.0.0 ayrıca kapsamlı devam ve halefe devir için isteğe bağlı, insanın başlattığı `herdr-peers autopilot --loop` sunar. [Döngü mühendisliği](/spec/loop-engineering) sayfasına bakın.
+
 ### DeepWorkPlan Vim (yedinci eklenti)
 
 Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v1.0.1`, arayüz `1`) için ince bir entegrasyon katmanı.

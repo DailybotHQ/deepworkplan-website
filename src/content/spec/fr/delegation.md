@@ -100,3 +100,5 @@ Un orchestrateur ne délègue jamais les tâches d'un **plan enfant** : les enfa
 - [Couche d'enregistrement](/spec/record-layer) — le contrat et le journal que cette page étend.
 - [Ressources et capacités](/spec/resources-and-abilities) — capacités, autorisations et registre d'addons.
 - [Addon Herdr](/kit/herdr) et [addon Agentkit](/kit/agentkit) — les deux transports.
+
+- [Ingénierie de boucle](/spec/loop-engineering) — la boucle du plan et son autonomie limitée.

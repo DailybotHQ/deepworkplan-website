@@ -89,6 +89,8 @@ section: Addons
 - **行为：** 对等协议（stamp、grant、reply、循环防护、深度与扇出上限）位于 herdr-peers 中，绝不在技能包中；任何使用都需要契约授权 `agent_delegation`，且受托代理的结果在计划自己的运行器观察到之前始终只是断言
 - **何时提供：** 第 7b 阶段中明确的可选项；对 `herdr` 与 `herdr-peers` 进行只读检测；该传输仅能在 Herdr 会话内使用
 
+- **循环：** Herdr v2.0.0 还提供可选、由人启动的 `herdr-peers autopilot --loop`，用于在限定权限内继续计划并交接给继任者。参见[循环工程](/spec/loop-engineering)。
+
 ### DeepWorkPlan Vim（第七个附加组件）
 
 [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（固定为 `v1.0.1`，接口 `1`）的轻量集成器，是 Deep Work Plan 的终端编辑器（Neovim 0.12+）。

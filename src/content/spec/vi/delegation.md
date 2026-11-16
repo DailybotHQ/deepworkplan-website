@@ -100,3 +100,5 @@ Một orchestrator không bao giờ ủy quyền các tác vụ của một **k�
 - [Lớp bản ghi](/spec/record-layer) — hợp đồng và nhật ký mà trang này mở rộng.
 - [Tài nguyên và khả năng](/spec/resources-and-abilities) — khả năng, quyền được cấp và registry addon.
 - [Addon Herdr](/kit/herdr) và [addon Agentkit](/kit/agentkit) — hai phương thức truyền.
+
+- [Kỹ thuật vòng lặp](/spec/loop-engineering) — vòng lặp kế hoạch và quyền tự chủ có giới hạn.

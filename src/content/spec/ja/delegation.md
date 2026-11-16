@@ -100,3 +100,5 @@ v1、v2、v5、v6 のスキーマのバイト列は変わりません。一度�
 - [レコードレイヤー](/spec/record-layer) — このページが拡張する契約とジャーナル。
 - [リソースと能力](/spec/resources-and-abilities) — 能力、付与、アドオンレジストリ。
 - [Herdr アドオン](/kit/herdr) と [Agentkit アドオン](/kit/agentkit) — 二つのトランスポート。
+
+- [ループエンジニアリング](/spec/loop-engineering) — the plan loop and its bounded autonomy.

@@ -100,3 +100,5 @@ orchestrator ไม่เคยมอบหมายงานของ **แผ�
 - [ชั้นบันทึก](/spec/record-layer) — สัญญาและ journal ที่หน้านี้ขยายต่อ
 - [ทรัพยากรและความสามารถ](/spec/resources-and-abilities) — ความสามารถ สิทธิ์ และทะเบียน addon
 - [Herdr addon](/kit/herdr) และ [Agentkit addon](/kit/agentkit) — transport ทั้งสอง
+
+- [วิศวกรรมลูป](/spec/loop-engineering) — วงจรแผนและอิสระที่มีขอบเขต.

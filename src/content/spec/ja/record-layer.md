@@ -26,6 +26,7 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` と `delegation` イベント（[委任](/spec/delegation)） |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` とループ権限 |
 
 7.x パックが作成する新しい計画は既定で v7 です。明示的に `v6` を要求すれば、引き続き v6 の契約がマテリアライズされます。計画が世代を変えることは決してなく、世代が混在したジャーナルは拒否されなければなりません（MUST）。どちらの世代も同じ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) の形へ投影されます。
 

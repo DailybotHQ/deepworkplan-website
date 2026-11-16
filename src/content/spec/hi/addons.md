@@ -89,6 +89,8 @@ Package-manager-agnostic, बैच, सत्यापित, revertible depend
 - **व्यवहार:** पीयर प्रोटोकॉल (stamp, grant, reply, loop guard, गहराई और fan-out सीमाएँ) herdr-peers में रहता है, पैक में कभी नहीं; किसी भी उपयोग के लिए अनुबंध grant `agent_delegation` आवश्यक है, और किसी प्रतिनिधि का परिणाम तब तक केवल दावा रहता है जब तक योजना का अपना runner उसे स्वयं नहीं देख लेता
 - **कब प्रस्तावित:** Phase 7b के दौरान स्पष्ट ऑप्ट-इन; `herdr` और `herdr-peers` का केवल-पढ़ने वाला पता लगाना; ट्रांसपोर्ट केवल Herdr सत्र के भीतर उपयोग योग्य है
 
+- **लूप:** Herdr v2.0.0 सीमित योजना-निरंतरता और उत्तराधिकारी हस्तांतरण के लिए वैकल्पिक, मानव-द्वारा-शुरू `herdr-peers autopilot --loop` भी देता है। [लूप इंजीनियरिंग](/spec/loop-engineering) देखें।
+
 ### DeepWorkPlan Vim (सातवाँ ऐडऑन)
 
 [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (पिन `v1.0.1`, इंटरफ़ेस `1`) का एक पतला इंटीग्रेटर, Deep Work Plan के लिए टर्मिनल एडिटर (Neovim 0.12+)।

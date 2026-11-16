@@ -100,3 +100,5 @@ Orkestrator tidak pernah mendelegasikan tugas-tugas **rencana anak**: rencana an
 - [Lapisan catatan](/spec/record-layer) — kontrak dan jurnal yang diperluas oleh halaman ini.
 - [Sumber daya dan kemampuan](/spec/resources-and-abilities) — kemampuan, grant, dan registri addon.
 - [Addon Herdr](/kit/herdr) dan [addon Agentkit](/kit/agentkit) — dua transport tersebut.
+
+- [Rekayasa loop](/spec/loop-engineering) — loop rencana dan otonominya yang terbatas.

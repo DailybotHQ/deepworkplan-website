@@ -89,6 +89,8 @@ section: Addons
 - **พฤติกรรม:** protocol ของ peer (stamp, grant, reply, ตัวป้องกันลูป, ขีดจำกัดความลึกและการกระจายงาน) อยู่ใน herdr-peers ไม่เคยอยู่ในแพ็ก การใช้งานใด ๆ ต้องได้สิทธิ์ `agent_delegation` จากสัญญา และผลลัพธ์ของผู้รับมอบหมายยังคงเป็นเพียงข้อกล่าวอ้างจนกว่า runner ของแผนเองจะสังเกตเห็น
 - **เมื่อเสนอ:** เลือกเข้าร่วมอย่างชัดเจนระหว่าง Phase 7b ตรวจหา `herdr` และ `herdr-peers` แบบอ่านอย่างเดียว ช่องทางนี้ใช้ได้เฉพาะภายในเซสชัน Herdr
 
+- **ลูป:** Herdr v2.0.0 ยังมี `herdr-peers autopilot --loop` แบบเลือกใช้และมนุษย์เป็นผู้เริ่ม เพื่อทำแผนต่อภายในขอบเขตและส่งต่อให้ผู้สืบทอด ดู[วิศวกรรมลูป](/spec/loop-engineering)
+
 ### DeepWorkPlan Vim (addon ที่เจ็ด)
 
 ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v1.0.1`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)

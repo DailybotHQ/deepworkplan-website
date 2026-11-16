@@ -100,3 +100,5 @@ Un orchestratore non delega mai le attività di un **piano figlio**: i figli ven
 - [Livello di registrazione](/spec/record-layer) — il contratto e il journal che questa pagina estende.
 - [Risorse e capacità](/spec/resources-and-abilities) — capacità, concessioni e il registro degli addon.
 - [Addon Herdr](/kit/herdr) e [Addon Agentkit](/kit/agentkit) — i due trasporti.
+
+- [Ingegneria del ciclo](/spec/loop-engineering) — il ciclo del piano e la sua autonomia limitata.

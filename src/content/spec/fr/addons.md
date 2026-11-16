@@ -89,6 +89,8 @@ Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 - **Comportement :** le protocole entre pairs (estampille, autorisation, réponse, garde anti-boucle, limites de profondeur et de fan-out) réside dans herdr-peers, jamais dans le pack ; toute utilisation exige l’autorisation de contrat `agent_delegation`, et le résultat d’un délégué reste une simple affirmation tant que l’exécuteur propre du plan ne l’a pas observé
 - **Quand proposé :** opt-in explicite pendant la Phase 7b ; détection en lecture seule de `herdr` et `herdr-peers` ; le transport n’est utilisable qu’à l’intérieur d’une session Herdr
 
+- **Boucle :** Herdr v2.0.0 fournit aussi `herdr-peers autopilot --loop`, facultatif et démarré par un humain, pour poursuivre les plans dans leurs limites et passer le relais à un successeur. Voir [Ingénierie de boucle](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (septième addon)
 
 Un intégrateur léger de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (épinglé à `v1.0.1`, interface `1`), l’éditeur de terminal pour Deep Work Plan (Neovim 0.12+).

@@ -100,3 +100,5 @@ v1, v2, v5 और v6 स्कीमा के बाइट्स अपरि�
 - [रिकॉर्ड परत](/spec/record-layer) — वह अनुबंध और जर्नल जिसे यह पृष्ठ विस्तारित करता है।
 - [संसाधन और क्षमताएँ](/spec/resources-and-abilities) — क्षमताएँ, अनुदान और ऐडऑन रजिस्ट्री।
 - [Herdr ऐडऑन](/kit/herdr) और [Agentkit ऐडऑन](/kit/agentkit) — दो transports।
+
+- [लूप इंजीनियरिंग](/spec/loop-engineering) — योजना लूप और उसकी सीमित स्वायत्तता.
