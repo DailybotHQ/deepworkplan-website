@@ -89,6 +89,12 @@ ak doctor
 
 套件 1.4.0 版（接口 1 不变）新增 **`ak update`**，仅可由人类调用：它以 `ak install` 的验证方式将 CLI 带到供应商的最新版本——发现、验证、安装并原子性地重新固定本套件的 `providers.toml`（保留 `.bak`）。`--take-over` 用于替换供应商管理的符号链接，除非指名否则拒绝降级，且只有当 PATH 解析到新版本时更新才算生效。
 
+## coding-agents-kit 1.5.0 起（接口 1）
+
+此版本为 `ak run --json` 增加 `tokens` 字段，其中只包含 CLI 报告的计数（`input`、`output`、`cache_read`、`cache_write` 和 `total`）。未报告的值保持为 `null`；kit 不会推算。`ak usage --json` 增加包含 `runs`、`tokens` 和 `coverage` 的 `advisory` 块。该块仅供参考，不会改变供应商配额窗口、容量判定或 `ak pick` 的资格。
+
+启用 `--ask` 或 `AGENTKIT_PERMISSIONS=ask` 时，`ak` 现在会强制使用各 CLI 明确的 ask 模式；没有 ask 标志的 CLI 行为不变。启用此退出选项时，pick-v2 的 `launch.argv` 以 `--ask` 结尾。herdr-peers (v2.0.2) 或更高版本接受这个尾随参数；v2.0.1 会拒绝它。
+
 ## 默认自主运行，退出选项始终优先
 
 自 `v0.2.0` 起，`ak <kind>` 以**自主模式**启动每个代理：它会添加 CLI 自身的自主参数，该参数只保存在工具包的 `providers.toml` 中。自主模式面向可丢弃或沙箱化的环境，例如开发容器。

@@ -89,6 +89,12 @@ Kit v1.3.0 (antarmuka 1 tidak berubah) menambahkan **pick-v2**: `ak pick --kinds
 
 Kit v1.4.0 (antarmuka 1 tidak berubah) menambahkan **`ak update`**, hanya dipanggil oleh manusia: ia membawa CLI ke rilis terbaru dari vendor dengan verifikasi `ak install` — menemukan, memverifikasi, memasang, dan mematok ulang `providers.toml` kit ini secara atomik (`.bak` disimpan). `--take-over` diperlukan untuk mengganti symlink yang dikelola vendor, penurunan versi ditolak kecuali disebut namanya, dan pembaruan hanya dianggap sah ketika PATH menyelesaikan rilis baru.
 
+## Mulai coding-agents-kit 1.5.0 (antarmuka 1)
+
+Rilis ini menambahkan kolom `tokens` pada `ak run --json`, yang hanya berisi hitungan yang dilaporkan CLI (`input`, `output`, `cache_read`, `cache_write`, dan `total`). Nilai yang tidak dilaporkan tetap `null`; kit tidak pernah memperkirakannya. `ak usage --json` menambahkan blok `advisory` berisi `runs`, `tokens`, dan `coverage`. Blok ini hanya bersifat informatif dan tidak mengubah jendela kuota penyedia, putusan kapasitas, ataupun kelayakan `ak pick`.
+
+Saat `--ask` atau `AGENTKIT_PERMISSIONS=ask` aktif, `ak` kini memaksakan mode ask eksplisit milik tiap CLI; CLI tanpa flag ask tidak berubah. Dengan opt-out ini aktif, `launch.argv` pada pick-v2 diakhiri dengan `--ask`. herdr-peers (v2.0.2) atau lebih baru menerima argumen penutup ini; v2.0.1 menolaknya.
+
 ## Otonomi secara default, dengan opt-out yang selalu menang
 
 Sejak `v0.2.0`, `ak <kind>` meluncurkan setiap agen dalam mode **otonom**: ia menambahkan flag otonomi milik CLI itu sendiri, yang hanya disimpan di `providers.toml` milik kit. Otonomi ditujukan untuk lingkungan sekali pakai atau ber-sandbox, seperti dev container.

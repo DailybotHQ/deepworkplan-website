@@ -89,6 +89,12 @@ La versión 1.3.0 del kit (interfaz 1 sin cambios) añade **pick-v2**: `ak pick 
 
 La versión 1.4.0 del kit (interfaz 1 sin cambios) añade **`ak update`**, de invocación solo humana: lleva un CLI a la versión más reciente del proveedor con la verificación de `ak install` — descubre, verifica, instala y vuelve a fijar el `providers.toml` de este kit de forma atómica (se conserva un `.bak`). `--take-over` sustituye un symlink gestionado por el proveedor, las bajadas de versión se rechazan salvo que se nombren, y la actualización solo cuenta cuando el PATH resuelve la nueva versión.
 
+## Desde coding-agents-kit 1.5.0 (interfaz 1)
+
+Esta versión agrega el campo `tokens` a `ak run --json`, con únicamente los conteos que informa el CLI (`input`, `output`, `cache_read`, `cache_write` y `total`). Los valores no informados quedan como `null`; el kit nunca los imputa. `ak usage --json` agrega un bloque `advisory` con `runs`, `tokens` y `coverage`. Es informativo y nunca cambia las ventanas de cuota del proveedor, el veredicto de capacidad ni la elegibilidad de `ak pick`.
+
+Cuando está activo `--ask` o `AGENTKIT_PERMISSIONS=ask`, `ak` ahora fuerza el modo de confirmación explícito propio de cada CLI; los CLI sin una opción para pedir confirmación no cambian. Con esta exclusión activa, `launch.argv` de pick-v2 termina con `--ask`. herdr-peers (v2.0.2) o posterior acepta ese argumento final; v2.0.1 lo rechaza.
+
 ## Autonomía por defecto, con una exclusión que siempre prevalece
 
 Desde `v0.2.0`, `ak <kind>` lanza cada agente en **autonomía**: agrega la opción de autonomía propia de la CLI, que solo se guarda en el `providers.toml` del kit. La autonomía está pensada para entornos desechables o aislados, como un contenedor de desarrollo.

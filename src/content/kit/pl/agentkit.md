@@ -89,6 +89,12 @@ Wydanie zestawu 1.3.0 (interfejs 1 bez zmian) dodaje **pick-v2**: `ak pick --kin
 
 Zestaw 1.4.0 (interfejs 1 bez zmian) dodaje **`ak update`**, wywoływany wyłącznie przez człowieka: przenosi CLI do najnowszego wydania dostawcy z weryfikacją `ak install` — wykrywa, weryfikuje, instaluje i ponownie przypina `providers.toml` tego zestawu atomowo (zachowywany jest `.bak`). `--take-over` jest wymagany do zastąpienia dowiązania zarządzanego przez dostawcę, downgrade'y są odrzucane bez podania nazwy, a aktualizacja liczy się dopiero, gdy PATH rozwiąże nowe wydanie.
 
+## Od coding-agents-kit 1.5.0 (interfejs 1)
+
+To wydanie dodaje pole `tokens` do `ak run --json`; zawiera ono wyłącznie wartości zgłoszone przez CLI (`input`, `output`, `cache_read`, `cache_write` i `total`). Niepodane wartości pozostają `null`; kit ich nie szacuje. `ak usage --json` dodaje blok `advisory` z polami `runs`, `tokens` i `coverage`. Ma on charakter informacyjny i nie zmienia okien limitów dostawcy, oceny pojemności ani kwalifikacji w `ak pick`.
+
+Gdy aktywne jest `--ask` lub `AGENTKIT_PERMISSIONS=ask`, `ak` wymusza teraz jawny tryb ask danego CLI; CLI bez flagi ask pozostają bez zmian. Przy aktywnym opt-out `launch.argv` w pick-v2 kończy się na `--ask`. herdr-peers (v2.0.2) lub nowszy akceptuje ten końcowy argument; v2.0.1 go odrzuca.
+
 ## Autonomia domyślnie, z rezygnacją, która zawsze wygrywa
 
 Od `v0.2.0` `ak <kind>` uruchamia każdego agenta w trybie **autonomii**: dodaje własną flagę autonomii danego CLI, przechowywaną wyłącznie w pliku `providers.toml` kitu. Autonomia jest przeznaczona dla środowisk jednorazowych lub odizolowanych, takich jak kontener deweloperski.

@@ -89,6 +89,12 @@ Kit v1.3.0 (interface 1 unchanged) adds **pick-v2**: `ak pick --kinds codex,clau
 
 Kit v1.4.0 (interface 1 unchanged) adds **`ak update`**, human-invoked only: it brings a CLI to the vendor's newest release with `ak install`'s verification — discover, verify, install and re-pin this kit's `providers.toml` atomically (a `.bak` is kept). `--take-over` replaces a vendor-managed symlink, downgrades are refused unless named, and the update only counts when PATH resolves the new release.
 
+## From coding-agents-kit 1.5.0 (interface 1)
+
+This release adds a `tokens` field to `ak run --json`, containing only counts reported by the CLI (`input`, `output`, `cache_read`, `cache_write` and `total`). Unreported values remain `null`; the kit never imputes them. `ak usage --json` adds an `advisory` block with `runs`, `tokens` and `coverage`. It is informational and never changes vendor quota windows, the capacity verdict or `ak pick` eligibility.
+
+When `--ask` or `AGENTKIT_PERMISSIONS=ask` is active, `ak` now enforces each CLI's explicit ask mode; CLIs without an ask flag are unchanged. Under this opt-out, pick-v2's `launch.argv` ends with `--ask`. herdr-peers (v2.0.2) or later accepts that trailing argument; v2.0.1 refuses it.
+
 ## Autonomy by default, with an opt-out that always wins
 
 Since `v0.2.0`, `ak <kind>` launches every agent in **autonomy**: it adds the CLI's own autonomy flag, kept only in the kit's `providers.toml`. Autonomy is meant for disposable or sandboxed environments, such as a development container.

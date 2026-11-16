@@ -89,6 +89,12 @@ Kit v1.3.0 (Interface 1 unverändert) fügt **pick-v2** hinzu: `ak pick --kinds 
 
 Kit v1.4.0 (Interface 1 unverändert) fügt **`ak update`** hinzu, nur von Menschen aufgerufen: Es bringt ein CLI mit der Verifikation von `ak install` auf die neueste Vendor-Release — discovers, verifiziert, installiert und pinnt das `providers.toml` dieses Kits atomar neu (ein `.bak` bleibt erhalten). `--take-over` ersetzt ein vendor-verwaltetes Symlink, Downgrades werden nur auf Namen hin genehmigt, und das Update zählt erst, wenn PATH die neue Release auflöst.
 
+## Ab coding-agents-kit 1.5.0 (Interface 1)
+
+Diese Version ergänzt `ak run --json` um das Feld `tokens`, das ausschließlich vom CLI gemeldete Zähler enthält (`input`, `output`, `cache_read`, `cache_write` und `total`). Nicht gemeldete Werte bleiben `null`; das Kit schätzt sie nie. `ak usage --json` ergänzt einen `advisory`-Block mit `runs`, `tokens` und `coverage`. Er dient nur zur Information und ändert weder die Kontingentfenster des Anbieters noch das Kapazitätsurteil oder die Zulässigkeit bei `ak pick`.
+
+Wenn `--ask` oder `AGENTKIT_PERMISSIONS=ask` aktiv ist, erzwingt `ak` jetzt den ausdrücklichen Ask-Modus jedes CLI; CLIs ohne Ask-Flag bleiben unverändert. Bei diesem aktiven Opt-out endet `launch.argv` von pick-v2 mit `--ask`. herdr-peers ab v2.0.2 akzeptiert dieses abschließende Argument; v2.0.1 weist es zurück.
+
 ## Autonomie standardmäßig, mit einem Opt-out, das immer gewinnt
 
 Seit `v0.2.0` startet `ak <kind>` jeden Agenten in **Autonomie**: Es fügt das eigene Autonomie-Flag der CLI hinzu, das nur in der `providers.toml` des Kits hinterlegt ist. Autonomie ist für wegwerfbare oder abgeschottete Umgebungen gedacht, etwa einen Entwicklungscontainer.

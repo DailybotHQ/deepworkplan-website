@@ -89,6 +89,12 @@ Kit bản 1.3.0 (giao diện 1 không đổi) thêm **pick-v2**: `ak pick --kind
 
 Kit bản 1.4.0 (giao diện 1 không đổi) thêm **`ak update`**, chỉ do con người gọi: nó đưa một CLI đến bản phát hành mới nhất của nhà cung cấp với xác minh của `ak install` — khám phá, xác minh, cài đặt và ghim lại `providers.toml` của kit này một cách nguyên tử (giữ một `.bak`). `--take-over` bắt buộc khi thay thế symlink do nhà cung cấp quản lý, việc hạ phiên bản bị từ chối trừ khi nêu tên, và bản cập nhật chỉ tính khi PATH phân giải được bản mới.
 
+## Từ coding-agents-kit 1.5.0 (giao diện 1)
+
+Bản phát hành này bổ sung trường `tokens` cho `ak run --json`, chỉ chứa số liệu do CLI báo cáo (`input`, `output`, `cache_read`, `cache_write` và `total`). Giá trị không được báo cáo vẫn là `null`; kit không bao giờ tự suy ra. `ak usage --json` bổ sung khối `advisory` gồm `runs`, `tokens` và `coverage`. Khối này chỉ để tham khảo, không thay đổi cửa sổ hạn mức của nhà cung cấp, kết luận về năng lực hay điều kiện được chọn bởi `ak pick`.
+
+Khi `--ask` hoặc `AGENTKIT_PERMISSIONS=ask` được bật, `ak` nay buộc dùng chế độ ask tường minh riêng của từng CLI; CLI không có cờ ask giữ nguyên. Khi lựa chọn opt-out này được bật, `launch.argv` của pick-v2 kết thúc bằng `--ask`. herdr-peers (v2.0.2) trở lên chấp nhận đối số cuối này; v2.0.1 từ chối.
+
 ## Tự chủ theo mặc định, với lựa chọn opt-out luôn được ưu tiên
 
 Kể từ `v0.2.0`, `ak <kind>` khởi chạy mọi agent ở chế độ **tự chủ**: nó thêm cờ tự chủ của chính CLI đó, chỉ được lưu trong tệp `providers.toml` của bộ kit. Chế độ tự chủ dành cho các môi trường dùng một lần hoặc có sandbox, chẳng hạn một dev container.

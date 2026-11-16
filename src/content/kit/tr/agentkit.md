@@ -89,6 +89,12 @@ Kit v1.3.0 (arayüz 1 değişmedi) **pick-v2** ekler: `ak pick --kinds codex,cla
 
 Kit v1.4.0 (arayüz 1 değişmedi) **`ak update`** ekler — yalnızca insan tarafından çağrılır: bir CLI'ı `ak install` doğrulamasıyla satıcının en yeni sürümüne taşır — keşfeder, doğrular, kurar ve bu kitin `providers.toml` dosyasını atomik olarak yeniden sabitler (bir `.bak` tutulur). `--take-over`, satıcı tarafından yönetilen bir sembolik bağlantıyı değiştirmek için zorunludur; sürüm düşürmeler adıyla belirtilmedikçe reddedilir ve güncelleme, PATH yeni sürümü çözdüğünde sayılır.
 
+## coding-agents-kit 1.5.0'dan itibaren (arayüz 1)
+
+Bu sürüm, `ak run --json` çıktısına yalnızca CLI tarafından bildirilen sayımları içeren `tokens` alanını ekler (`input`, `output`, `cache_read`, `cache_write` ve `total`). Bildirilmeyen değerler `null` kalır; kit bunları asla tahmin etmez. `ak usage --json` çıktısına `runs`, `tokens` ve `coverage` alanlarını içeren bir `advisory` bloğu eklenir. Bu bilgi amaçlıdır; sağlayıcı kota pencerelerini, kapasite kararını veya `ak pick` uygunluğunu değiştirmez.
+
+`--ask` veya `AGENTKIT_PERMISSIONS=ask` etkinken `ak`, her CLI'nin açık ask modunu artık zorunlu kılar; ask bayrağı olmayan CLI'ler değişmez. Bu devre dışı bırakma etkinken pick-v2 `launch.argv`'nin sonuna `--ask` ekler. herdr-peers (v2.0.2) ve sonrası bu sondaki argümanı kabul eder; v2.0.1 reddeder.
+
 ## Varsayılan olarak özerklik, her zaman üstün gelen bir devre dışı bırakma seçeneğiyle
 
 `v0.2.0` sürümünden bu yana `ak <kind>`, her agent'ı **özerk** olarak başlatır: CLI'ın yalnızca kitin `providers.toml` dosyasında tutulan kendi özerklik bayrağını ekler. Özerklik, bir geliştirme konteyneri gibi atılabilir ya da korumalı (sandbox) ortamlar için tasarlanmıştır.

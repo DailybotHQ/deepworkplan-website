@@ -89,6 +89,12 @@ ak doctor
 
 킷 v1.4.0(인터페이스 1 불변)은 `ak update`를 추가합니다. 사람이 직접 호출하는 것만을 위해 설계되었으며, `ak install`의 검증과 함께 CLI를 공급업체의 최신 릴리스로 만듭니다. 발견, 검증, 설치, 그리고 이 킷의 `providers.toml`을 원자적으로 다시 고정합니다(`.bak` 보존). `--take-over`는 공급업체 관리 심볼릭 링크를 교체할 때 필요하고, 다운그레이드는 이름으로 지정하지 않으면 거부되며, PATH가 새 릴리스를 해석할 때만 업데이트가 성립합니다.
 
+## coding-agents-kit 1.5.0부터 (인터페이스 1)
+
+이 릴리스는 `ak run --json`에 `tokens` 필드를 추가하며, CLI가 보고한 수치(`input`, `output`, `cache_read`, `cache_write`, `total`)만 담습니다. 보고되지 않은 값은 `null`로 남고 kit은 추정하지 않습니다. `ak usage --json`에는 `runs`, `tokens`, `coverage`가 포함된 `advisory` 블록이 추가됩니다. 이는 참고 정보이며 공급자 할당량 구간, 용량 판정, `ak pick` 선택 자격을 바꾸지 않습니다.
+
+`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`가 활성화되면 `ak`는 각 CLI의 명시적 ask 모드를 강제합니다. ask 플래그가 없는 CLI는 변경되지 않습니다. 이 옵트아웃이 활성화된 상태에서 pick-v2의 `launch.argv`는 `--ask`로 끝납니다. herdr-peers (v2.0.2) 이상은 이 끝의 인수를 받아들이며 v2.0.1은 거부합니다.
+
 ## 기본은 자율 실행, 옵트아웃이 항상 우선한다
 
 `v0.2.0`부터 `ak <kind>`는 모든 에이전트를 **자율 모드**로 실행합니다. CLI 자체의 자율 플래그를 추가하며, 그 플래그는 키트의 `providers.toml`에만 보관됩니다. 자율 모드는 개발 컨테이너처럼 일회용이거나 샌드박스화된 환경을 위한 것입니다.
