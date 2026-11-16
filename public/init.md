@@ -35,7 +35,7 @@ methodology. Treat this as a structured engineering task â€” a Deep Work Plan â€
 
 ## 0. Read the methodology and specification
 
-The methodology stands on four pillars: **spec-first** (the plan and specification are the durable source of truth), **the repository is the harness** (context, tools, guardrails, and resumable state live with the code), **Loop engineering** (an approved plan can run through its recorded lifecycle to completion), and **measured efficiency** (instruction bytes per flow, with a published measurement path and no inferred token percentages).
+Spec-first, loop-closed: the repository is the harness and the plan runs itself to done. The methodology stands on four pillars: **spec-first** (the plan and specification are the durable source of truth), **the repository is the harness** (context, tools, guardrails, and resumable state live with the code), **loop engineering** (an approved plan keeps moving to its defined end; with the optional Herdr addon, a daemon that only a human starts nudges an idle lead and fails over to a listed successor, and a nudge adds no authority), and **measured efficiency** (instruction bytes per flow, with a published measurement path and no inferred token percentages).
 
 
 Before changing anything, read the canonical sources so you understand the standard you are adopting:
