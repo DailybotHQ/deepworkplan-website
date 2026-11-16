@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Đặc tả DWP
 
-> **Tiêu chuẩn hiện tại: v7 (DWP 7.0.0).** Đây là nền tảng đặc tả v5 được giữ lại cùng các phần mở rộng vòng đời v6 và thế hệ hợp đồng v7. Gói 7.x mặc định tạo kế hoạch mới bằng v7; một yêu cầu `v6` rõ ràng vẫn tạo ra kế hoạch v6, và các kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận. Manifest và hợp đồng v7 được công bố tại [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) và [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json); snapshot trực tiếp vẫn ở [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+**Tiêu chuẩn hiện tại: DWP 8.0.0 (bản phát hành `v8.0.0`).** Nền tảng được giữ lại bao gồm lớp bản ghi v6 và các phần mở rộng v7; kế hoạch mới mặc định dùng `plan-contract/v8`. Kế hoạch v5, v6 và v7 hiện có giữ nguyên thế hệ đã ghi nhận và chỉ được di chuyển bằng lệnh `refine migrate` rõ ràng. v8 giữ `plan-manifest/v7` và bổ sung `plan-contract/v8`, `journal-event/v8` cùng `plan-snapshot/v8`; schema manifest và journal-event v7 vẫn được hỗ trợ cho kế hoạch hiện có. [Manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [hợp đồng v8](https://deepworkplan.com/schema/plan-contract/v8.json), [sự kiện journal v8](https://deepworkplan.com/schema/journal-event/v8.json) và [snapshot v8](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này là đặc tả quy phạm cho phương pháp luận Deep Work Plan (DWP). Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 

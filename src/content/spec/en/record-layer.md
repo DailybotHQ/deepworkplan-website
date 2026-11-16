@@ -8,7 +8,7 @@ section: Record layer
 
 # Record layer
 
-> **Version scope:** This page restates the normative v6 record layer that the current standard, DWP 7.0.0, builds on. Canonical sources at release `v7.12.2`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) and [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Where this page and those files differ, the files win. v5 plans keep the [plan state](/spec/plan-state) layer and are never migrated implicitly.
+> **Version scope:** This page restates the normative v6 record layer that the current standard, DWP 8.0.0, builds on. Canonical sources at release `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_CONTRACT.md) and [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Where this page and those files differ, the files win. v5 plans keep the [plan state](/spec/plan-state) layer and are never migrated implicitly.
 
 **Version 6.0.0, extended in 7.0.0. Status: Stable.** The record layer replaces narrative completion with records: the contract is the authority, the journal is the memory, helpers do the writing, and every generated file is a projection. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
@@ -17,7 +17,6 @@ section: Record layer
 A plan is two authored artifacts and one guarded sequence. The plan markdown (`README.md` and task files) says what will be done. The **outcome contract** (`contract.json`) says what counts as done and what the plan is allowed to do. The **journal** (`journal.ndjson`) records what actually happened. `state.json` and `views/` are regenerated from the journal and MUST NOT be hand-edited; when a generated file and the journal disagree, the journal wins and the file is regenerated.
 
 ## Generation detection
-
 A plan folder is a v6-line plan if and only if it carries a `manifest.json` whose `contract` pointer resolves, a `contract.json`, or a `contracts/` revision chain. Detection MUST use these artifacts, never the installed pack version: a current pack can hold v5 plans, and an older pack can meet a v6 plan.
 
 The contract's `schema` URL names its **generation**, and the manifest and every journal event mirror it:
@@ -26,9 +25,10 @@ The contract's `schema` URL names its **generation**, and the manifest and every
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` and the `delegation` event ([Delegation](/spec/delegation)) |
-| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` and loop authority |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` and loop authority |
+The v8 live snapshot uses [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
-New plans created by the 7.x pack are v7 by default; an explicit `v6` request still materializes a v6 contract. A plan never changes generation, and a journal that mixes generations MUST be refused. Both generations project into the same [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) shape.
+New plans created by the 8.x pack are v8 by default; an explicit `v6` request still materializes a v6 contract. A plan never changes generation, and a journal that mixes generations MUST be refused. Both generations project into the same [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) shape.
 
 ## The outcome contract
 

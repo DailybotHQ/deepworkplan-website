@@ -74,7 +74,7 @@ La validazione è parte dell’attività, non un ripensamento: ogni attività in
 
 ## v6 e v7: la stessa metodologia, una struttura più rigorosa
 
-Lo standard DWP attuale è 7.0.0, implementato dalla linea di skill 7.x. Quel pacchetto usa v7 per ogni nuovo piano per impostazione predefinita; una richiesta esplicita di `v6` materializza comunque un piano v6. I piani v1, v2, v5 e v6 esistenti mantengono la generazione registrata e non vengono mai migrati silenziosamente; il passaggio di un piano v5 a v6 richiede una richiesta di migrazione esplicita.
+Lo standard DWP attuale è 8.0.0, implementato dalla linea di skill 8.x. Quel pacchetto usa v8 per ogni nuovo piano per impostazione predefinita; una richiesta esplicita di `v6` materializza comunque un piano v6. I piani v1, v2, v5 e v6 esistenti mantengono la generazione registrata e non vengono mai migrati silenziosamente; il passaggio di un piano v5 a v6 richiede una richiesta di migrazione esplicita.
 
 v6 mantiene la stessa metodologia piano → attività → gate di validazione → completamento, i comandi slash e la posizione `.dwp/plans/`. Rende più rigorosa la struttura ingegneristica con un contratto, un journal, manifest di contesto per attività, uno scheduler e il rifiuto di una allowlist vuota. v7 mantiene questo livello di registrazione e aggiunge un marcatore di task opzionale `parallel_safe`, un evento del journal `delegation` per il lavoro delimitato affidato a un altro agente e il registro degli addon `.dwp/config.json`; senza alcun addon di delega abilitato, ogni piano viene comunque eseguito in sequenza nella sessione corrente. La decisione architetturale è GO; la non inferiorità empirica dei risultati degli agenti non è stata misurata.
 

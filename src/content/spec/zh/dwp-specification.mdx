@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # DWP 规范
 
-> **当前标准：v7（DWP 7.0.0）。** 本文是保留的 v5 规范基础，并配合 v6 生命周期扩展与 v7 契约代际。7.x 技能包默认使用 v7 创建新计划；明确的 `v6` 请求仍会生成 v6 计划，现有计划保留记录的代际。v7 manifest 和 contract 发布于 [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) 和 [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json)；实时 snapshot 仍位于 [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)。
+**当前标准：DWP 8.0.0（发布版 `v8.0.0`）。** 保留的基础包括 v6 记录层和 v7 扩展；新计划默认使用 `plan-contract/v8`。现有 v5、v6 和 v7 计划保留其记录的代际，只有通过明确的 `refine migrate` 才会迁移。v8 保留 `plan-manifest/v7`，并新增 `plan-contract/v8`、`journal-event/v8` 和 `plan-snapshot/v8`；v7 清单和日志事件架构仍支持现有计划。[v7 清单](https://deepworkplan.com/schema/plan-manifest/v7.json)、[v8 契约](https://deepworkplan.com/schema/plan-contract/v8.json)、[v8 日志事件](https://deepworkplan.com/schema/journal-event/v8.json)和 [v8 快照](https://deepworkplan.com/schema/plan-snapshot/v8.json)。
 
 **版本 5.0.0。状态：稳定。** 本文档是 Deep Work Plan（DWP）方法论的规范性规范。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 

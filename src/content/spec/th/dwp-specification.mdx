@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # ข้อกำหนด DWP
 
-> **มาตรฐานปัจจุบัน: v7 (DWP 7.0.0)** นี่คือพื้นฐานข้อกำหนด v5 ที่ยังคงไว้พร้อมส่วนขยายวงจรชีวิต v6 และรุ่นสัญญา v7 แพ็ก 7.x สร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น คำขอ `v6` อย่างชัดเจนยังคงสร้างแผน v6 และแผนเดิมยังคงรุ่นที่บันทึกไว้ manifest และสัญญาของ v7 เผยแพร่ที่ [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) และ [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json) ส่วน live snapshot ยังคงอยู่ที่ [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json)
+**มาตรฐานปัจจุบัน: DWP 8.0.0 (รุ่น `v8.0.0`)** ฐานที่คงไว้ประกอบด้วยชั้นบันทึก v6 และส่วนขยาย v7 แผนใหม่ใช้ `plan-contract/v8` เป็นค่าเริ่มต้น แผน v5, v6 และ v7 ที่มีอยู่ยังคงรุ่นที่บันทึกไว้ และจะย้ายรุ่นได้เฉพาะเมื่อสั่ง `refine migrate` อย่างชัดเจน v8 คง `plan-manifest/v7` ไว้และเพิ่ม `plan-contract/v8`, `journal-event/v8` และ `plan-snapshot/v8`; schema manifest และ journal-event v7 ยังรองรับแผนเดิม [Manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [contract v8](https://deepworkplan.com/schema/plan-contract/v8.json), [journal event v8](https://deepworkplan.com/schema/journal-event/v8.json) และ [snapshot v8](https://deepworkplan.com/schema/plan-snapshot/v8.json)
 
 **เวอร์ชัน 5.0.0. สถานะ: เสถียร** เอกสารนี้คือข้อกำหนดเชิงบรรทัดฐานสำหรับระเบียบวิธี Deep Work Plan (DWP) คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 

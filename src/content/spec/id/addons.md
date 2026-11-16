@@ -8,7 +8,7 @@ section: Addons
 
 # Add-on
 
-> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar saat ini, DWP 7.0.0, juga mewajibkan ekstensi `V6_*.md` dan `V7_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Rencana v5 dan v6 yang ada mempertahankan aturan yang tercatat.
+> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar saat ini, DWP 8.0.0, juga mewajibkan ekstensi `V6_*.md` dan `V7_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Rencana v5 dan v6 yang ada mempertahankan aturan yang tercatat.
 
 **Versi 2.1.0.** Add-on adalah ekstensi dari metodologi Deep Work Plan inti. Tujuh dari delapan bersifat opsional dan **tidak pernah diperlukan untuk konformitas** — repositori tanpa addon opsional sepenuhnya AI-first dan konforman DWP. Setiap addon opsional ditawarkan saat onboarding, diterima atau ditolak secara eksplisit, dan — jika diterima — **merekonsiliasi** dengan setup yang ada alih-alih menimpanya. Satu komponen adalah pengecualian yang dinyatakan: sejak standar 2.3.0 **tinjauan lokal AI Diff Reviewer** adalah bagian dari baseline wajib — onboarding menginstalnya dan setiap Final Review menjalankannya — sementara permukaan CI-nya tetap opt-in.
 
@@ -27,7 +27,7 @@ Penemuan: alur `onboard` mengekstrak `skills/deepworkplan/addons/` dan menyajika
 
 ## Addon yang dikirim (delapan)
 
-Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wajib. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan. Empat di antaranya — devcontainer, Herdr, DeepWorkPlan Vim, dan Agentkit — adalah integrator tipis yang dipatok pada tag ke sebuah produk dengan repositori dan siklus rilisnya sendiri; setiap produk berfungsi tanpa Deep Work Plan. Addon yang diterima dicatat dalam registri addon `.dwp/config.json` (DWP 7.0.0), yang hanya dapat menawarkan atau memperkuat — tidak pernah menghalangi konformitas maupun sebuah rencana.
+Delapan addon tersedia hari ini — tujuh opt-in ditambah tinjauan lokal yang wajib. Masing-masing memiliki **halaman katalog kit** dengan detail untuk pengguna dan **spec normatif** di dalam skill Deep Work Plan. Empat di antaranya — devcontainer, Herdr, DeepWorkPlan Vim, dan Agentkit — adalah integrator tipis yang dipatok pada tag ke sebuah produk dengan repositori dan siklus rilisnya sendiri; setiap produk berfungsi tanpa Deep Work Plan. Addon yang diterima dicatat dalam registri addon `.dwp/config.json` (DWP 8.0.0), yang hanya dapat menawarkan atau memperkuat — tidak pernah menghalangi konformitas maupun sebuah rencana.
 
 ### Devcontainer (addon pertama)
 
@@ -89,7 +89,7 @@ Integrator tipis dari [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (
 - **Perilaku:** protokol peer (stamp, grant, reply, loop guard, batas kedalaman dan fan-out) berada di herdr-peers, tidak pernah di dalam paket; setiap penggunaan memerlukan grant kontrak `agent_delegation`, dan hasil delegasi tetap berstatus klaim sampai runner milik rencana itu sendiri mengamatinya
 - **Kapan ditawarkan:** opt-in eksplisit selama Fase 7b; deteksi hanya-baca atas `herdr` dan `herdr-peers`; transport hanya dapat digunakan di dalam sesi Herdr
 
-- **Loop:** Herdr v2.0.0 juga menyediakan `herdr-peers autopilot --loop` opsional yang dimulai manusia untuk kelanjutan rencana terbatas dan pengambilalihan penerus. Lihat [Rekayasa loop](/spec/loop-engineering).
+- **Loop:** Herdr v2.1.0 juga menyediakan `herdr-peers autopilot --loop` opsional yang dimulai manusia untuk kelanjutan rencana terbatas dan pengambilalihan penerus. Lihat [Rekayasa loop](/spec/loop-engineering).
 
 ### DeepWorkPlan Vim (addon ketujuh)
 

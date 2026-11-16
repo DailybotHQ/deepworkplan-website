@@ -8,7 +8,7 @@ section: Addons
 
 # Modules complémentaires
 
-> **Portée de version :** ce document est une base v5.0.0 conservée. La norme actuelle, DWP 7.0.0, exige également les extensions `V6_*.md` et `V7_*.md` applicables, répertoriées dans l’[index de spécification](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Les plans v5 et v6 existants conservent leurs règles enregistrées.
+> **Portée de version :** ce document est une base v5.0.0 conservée. La norme actuelle, DWP 8.0.0, exige également les extensions `V6_*.md` et `V7_*.md` applicables, répertoriées dans l’[index de spécification](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Les plans v5 et v6 existants conservent leurs règles enregistrées.
 
 **Version 2.1.0.** Les modules complémentaires sont des extensions de la méthodologie centrale de Deep Work Plan. Sept des huit sont optionnels et **jamais requis pour la conformité** — un dépôt sans addons optionnels est pleinement AI-first et conforme DWP. Chaque addon optionnel est proposé lors de l’onboarding, accepté ou refusé explicitement et — lorsqu’il est accepté — **réconcilie** avec la configuration existante au lieu de l’écraser. Un composant est l’exception déclarée : depuis le standard 2.3.0, la **revue locale AI Diff Reviewer** fait partie du socle requis — l’onboarding l’installe et chaque Final Review l’exécute — tandis que sa surface CI reste optionnelle.
 
@@ -27,7 +27,7 @@ Découverte : le flux `onboard` énumère `skills/deepworkplan/addons/` et prés
 
 ## Addons actifs (huit)
 
-Huit addons sont actifs aujourd’hui — sept opt-in plus la revue locale requise. Chacun a une **page du catalogue kit** avec des détails orientés utilisateur et une **spec normative** dans la skill Deep Work Plan. Quatre d’entre eux — devcontainer, Herdr, DeepWorkPlan Vim et Agentkit — sont des intégrateurs légers épinglés par tag à un produit doté de son propre dépôt et de son propre cycle de publication ; chaque produit fonctionne sans Deep Work Plan. Un addon accepté est inscrit dans le registre d’addons `.dwp/config.json` (DWP 7.0.0), qui peut seulement proposer ou amplifier — il ne conditionne jamais la conformité ni un plan.
+Huit addons sont actifs aujourd’hui — sept opt-in plus la revue locale requise. Chacun a une **page du catalogue kit** avec des détails orientés utilisateur et une **spec normative** dans la skill Deep Work Plan. Quatre d’entre eux — devcontainer, Herdr, DeepWorkPlan Vim et Agentkit — sont des intégrateurs légers épinglés par tag à un produit doté de son propre dépôt et de son propre cycle de publication ; chaque produit fonctionne sans Deep Work Plan. Un addon accepté est inscrit dans le registre d’addons `.dwp/config.json` (DWP 8.0.0), qui peut seulement proposer ou amplifier — il ne conditionne jamais la conformité ni un plan.
 
 ### Devcontainer (premier addon)
 
@@ -89,7 +89,7 @@ Un intégrateur léger de [herdr-peers](https://github.com/DailybotHQ/herdr-peer
 - **Comportement :** le protocole entre pairs (estampille, autorisation, réponse, garde anti-boucle, limites de profondeur et de fan-out) réside dans herdr-peers, jamais dans le pack ; toute utilisation exige l’autorisation de contrat `agent_delegation`, et le résultat d’un délégué reste une simple affirmation tant que l’exécuteur propre du plan ne l’a pas observé
 - **Quand proposé :** opt-in explicite pendant la Phase 7b ; détection en lecture seule de `herdr` et `herdr-peers` ; le transport n’est utilisable qu’à l’intérieur d’une session Herdr
 
-- **Boucle :** Herdr v2.0.0 fournit aussi `herdr-peers autopilot --loop`, facultatif et démarré par un humain, pour poursuivre les plans dans leurs limites et passer le relais à un successeur. Voir [Ingénierie de boucle](/spec/loop-engineering).
+- **Boucle :** Herdr v2.1.0 fournit aussi `herdr-peers autopilot --loop`, facultatif et démarré par un humain, pour poursuivre les plans dans leurs limites et passer le relais à un successeur. Voir [Ingénierie de boucle](/spec/loop-engineering).
 
 ### DeepWorkPlan Vim (septième addon)
 

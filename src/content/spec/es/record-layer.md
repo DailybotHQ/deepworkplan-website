@@ -8,7 +8,7 @@ section: Record layer
 
 # Capa de registros
 
-> **Alcance de versión:** Esta página reformula la capa de registros normativa v6 sobre la que se construye el estándar actual, DWP 7.0.0. Fuentes canónicas en la release `v7.12.2`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) y [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Donde esta página y esos archivos difieran, prevalecen los archivos. Los planes v5 conservan la capa de [estado del plan](/spec/plan-state) y nunca se migran de forma implícita.
+> **Alcance de versión:** Esta página reformula la capa de registros normativa v6 sobre la que se construye el estándar actual, DWP 8.0.0. Fuentes canónicas en la release `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_CONTRACT.md) y [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Donde esta página y esos archivos difieran, prevalecen los archivos. Los planes v5 conservan la capa de [estado del plan](/spec/plan-state) y nunca se migran de forma implícita.
 
 **Versión 6.0.0, ampliada en 7.0.0. Estado: estable.** La capa de registros sustituye la finalización narrativa por registros: el contrato es la autoridad, el diario es la memoria, los helpers hacen la escritura y todo archivo generado es una proyección. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
@@ -17,7 +17,6 @@ section: Record layer
 Un plan son dos artefactos redactados y una secuencia protegida. El plan en Markdown (`README.md` y los archivos de tarea) dice qué se hará. El **contrato de resultados** (`contract.json`) dice qué cuenta como terminado y qué tiene permitido hacer el plan. El **diario** (`journal.ndjson`) registra lo que realmente ocurrió. `state.json` y `views/` se regeneran a partir del diario y NO DEBEN editarse manualmente; cuando un archivo generado y el diario discrepan, prevalece el diario y el archivo se regenera.
 
 ## Detección de la generación
-
 Una carpeta de plan es un plan de la línea v6 si y solo si contiene un `manifest.json` cuyo puntero `contract` se resuelve, un `contract.json` o una cadena de revisiones en `contracts/`. La detección DEBE usar estos artefactos, nunca la versión del paquete instalado: un paquete actual puede contener planes v5, y un paquete más antiguo puede encontrarse con un plan v6.
 
 La URL `schema` del contrato nombra su **generación**, y el manifiesto y cada evento del diario la replican:
@@ -26,9 +25,10 @@ La URL `schema` del contrato nombra su **generación**, y el manifiesto y cada e
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` y el evento `delegation` ([Delegación](/spec/delegation)) |
-| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` y autoridad del ciclo |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` y autoridad del ciclo |
+La instantánea activa de v8 usa [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
-Los planes nuevos creados por el paquete 7.x son v7 por defecto; una petición explícita de `v6` sigue materializando un contrato v6. Un plan nunca cambia de generación, y un diario que mezcle generaciones DEBE rechazarse. Ambas generaciones se proyectan en la misma forma [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+Los planes nuevos creados por el paquete 8.x son v8 por defecto; una petición explícita de `v6` sigue materializando un contrato v6. Un plan nunca cambia de generación, y un diario que mezcle generaciones DEBE rechazarse. Ambas generaciones se proyectan en la misma forma [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 ## El contrato de resultados
 

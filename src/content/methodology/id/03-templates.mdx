@@ -29,7 +29,7 @@ Sebuah rencana adalah sebuah direktori di bawah `.dwp/plans/` bernama `PLAN_001_
 - `analysis_results/` — keluaran analisis, laporan audit, dan bukti.
 
 
-Paket 7.x saat ini membuat rencana v7 secara default. Rencana yang ada mempertahankan generasi yang tercatat; migrasi memerlukan permintaan eksplisit. Rencana baru mendapat ID numerik yang meningkat monoton dengan sedikitnya tiga digit (misalnya `PLAN_001_add_payment_webhooks/`). Skema v5 yang dibekukan menghitung ID numerik sebagai satu kata, sehingga slug v5 terdiri dari 2–4 kata dan slug v6 dan v7 dari 2–5 kata. Folder lama tanpa nomor `PLAN_<slug>/` tetap dapat dibaca dan tidak pernah diganti namanya. Jika ada rencana bernomor, `latest` merujuk ke rencana dengan ID numerik tertinggi.
+Paket v8 membuat rencana baru dengan `plan-contract/v8` secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan `refine migrate` yang eksplisit.
 
 ## Struktur berkas tugas
 

@@ -6,60 +6,177 @@ lang: en
 section: Loop engineering
 ---
 
-# Loop engineering
+# Loop engineering (normative, v8)
 
-This page defines the plan contract for loop engineering. The **plan** remains the authority; the loop supplies continuity and visibility. Add-ons can amplify the method, but cannot widen a plan's recorded authority.
+> Status: normative for the v8 generation. The loop's machinery lives in
+> herdr-peers (`autopilot --loop --appoint --brain`, the fleet map and UI,
+> the plan-queue consumer); this section defines what a **plan** records so
+> the loop can carry it to the end, and nothing more. The key words MUST,
+> MUST NOT, SHOULD and MAY are used as in RFC 2119.
 
 ## 1. The v8 rule
 
-An approved plan runs to its end without a human. Autonomy is the default **inside the plan's recorded authority**; the human is notified, never waited on—except logins and credentials, and the plan's own C1–C7 gates (such as publication, pushing, or external messages) still stop unless the plan records pre-authorization. The v7 rule remains: the methodology works alone; add-ons only amplify.
+An approved plan MUST run to completion without routine human intervention,
+inside the authority recorded in that plan. The human MUST be notified, not
+waited on, except when a login or credential is required or a plan's own C1–C7
+gate requires human input and pre-authorization is absent. At those exceptions,
+execution MUST stop at the gate until the required input is available. The
+methodology works alone; addons only amplify.
 
-## Loop semantics
+### 1.1. Loop semantics
 
-### Registration and observation
+Loop engineering describes how an optional daemon carries an approved,
+registered plan forward. It does not expand the plan's authority.
 
-With the Herdr add-on enabled, the v8 pack's `execute` flow claims a lead record and records the plan's succession. A plan is watched only when it has a lead record and its state is readable. The human starts `herdr-peers autopilot --loop`; it is a daemon, not a login item or a system service. One daemon can observe plans reported by every enabled Herdr machine. A plan without a lead record is not watched.
+**Registration and succession.** Registration uses a lead claim, which MUST
+record the lead and its succession list. The peer holding the highest lead
+epoch is the lead. With `autopilot --loop`, a plan with a readable state and a
+lead record MAY be watched; the daemon MAY prompt an idle lead to continue
+within the plan's recorded authority. If the lead pane is gone, the daemon MAY
+prompt the first reachable successor to run `lead takeover`; the helper MUST
+check whether takeover is allowed. The daemon MUST NOT write the lead record.
+A peer outside the recorded succession MAY become lead only through
+Appointment below, by its own takeover, never by the daemon.
 
-### Continuation, stalling, and failover
+**Human-started daemon and authority.** A human MUST start autopilot. The
+background daemon MAY cover enabled machines and sends fixed prompts; a prompt
+MUST NOT be treated as a new approval or authority grant. In particular, a
+continuation nudge asks the lead to respect the plan's existing gates and
+authority. A human MUST provide logins and credentials.
 
-For an open plan, the daemon prompts only the lead and only after its idle-state guards pass: the lead has been idle or done for five minutes, no lane is working, no reply is pending, the pane is in scope and not excluded, and there is no dialog, login, usage-limit screen, or human draft on the input line. The prompt is fixed and asks the lead to continue to the plan's end while respecting its gates and recorded authority. A prompt grants no authority. After three prompts without progress in plan state, the daemon records `plan_stalled` and leaves the plan until its state changes. A blocked plan is reported, not prompted.
+**Appointment.** Lead appointment MUST require both a human's recorded grant
+on the lead claim and a human start of the daemon with `--appoint`. After the
+lead and its successors meet the documented gone-and-no-progress checks, the
+daemon MAY prompt the first eligible live lane to request appointment; the
+helper MUST check the conditions again. A new lead MUST run `lead verify`
+before a merge, tag, or release.
 
-When a lead is gone, the daemon asks the first reachable listed successor to run `herdr-peers lead takeover --plan <id>`. The helper verifies the succession and advances the epoch; the daemon does not write the lead record or select an unlisted pane. A usage limit alone is not proof that a lead is gone. Protocol 2 also supports appointment from a plan's lanes, but only when a human explicitly records the grant with `lead claim --allow-appointment` and starts the daemon with `--appoint`. Before any merge, tag, or release, the acting lead runs `herdr-peers lead verify --plan <id>`.
+**Queue, events, and fleet map.** When a queued item is ready (its `after`
+plan is completed, or it has none) and its start is `prompt-lead`, the daemon
+MAY prompt its named lead to start it through the plan tool's execute flow;
+its start gate MUST check approval again. The daemon MAY report plan events as `plan-event-v1`
+JSON to the configured `--notify` command. The `fleet-v1` map reports agents,
+plans, and their roles; `fleet ui` shows the map live. The daemon MAY read
+the queue and MUST NOT write it.
 
-### Brain, events, and fleet
-
-The optional `--brain` starts a dedicated decision agent for cases the daemon's rules cannot decide. It may choose only from a closed action list. The daemon remains the only actor: it validates a permitted choice and performs the action; it never executes free-form brain text. The plan must also allow the brain in its `autonomy` block.
-
-The loop records plan events for conditions such as stalls, blockers, lost leads, completion, and queue outcomes. With the optional `--notify` integration, the daemon sends a `plan-event-v1` object to the configured notifier; the pack's Dailybot notifier turns supported events into team updates. A notification does not approve work or change the plan record. The fleet map and `herdr-peers fleet ui` show agents and plans across machines. The UI is read-only: it changes no plan state and prompts no agent. Tagged behavior is documented in [herdr-peers v2.0.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md) and its [protocol](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md).
+These behaviors are the optional Herdr integration, documented in
+[herdr-peers v2.1.0 `autopilot.md` §§1–9](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md)
+and [herdr-peers v2.1.0 `protocol.md` §12](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md#12-leadership-lead-notices-and-fencing).
 
 ## 2. The `autonomy` block (plan-contract/v8)
 
-The optional top-level `autonomy` object is closed: unknown keys are invalid. Its field names and types are canonical in the [plan-contract/v8 schema](https://deepworkplan.com/schema/plan-contract/v8.json). When the block is absent, all defaults apply. When the block exists, each omitted field keeps its own default; a consumer MUST NOT guess.
+Optional, top-level, closed: a validator MUST refuse an unknown key, and
+MUST refuse the block on any contract generation other than v8. Every
+absent key has one recorded default, and a consumer MUST apply it, never a
+guess of its own:
 
-| Field | Type and allowed values | Default when omitted |
+| Key | Type | Absent means |
 |---|---|---|
-| `stall_budget` | Integer from 1 through 10 | `3` loop prompts without progress |
-| `promptable` | Non-empty array of Herdr pane addresses | The plan's lead only |
-| `notify` | Non-empty array; currently `dailybot` | No target; loop events are still recorded |
-| `brain` | Boolean | `false`; no brain may act on this plan |
-| `queue` | `prompt-lead`, `launch`, or `none` | `none`; the plan is not queued |
+| `stall_budget` | integer 1–10 | `3` (herdr-peers' `MAX_PLAN_PROMPTS`) |
+| `promptable` | non-empty list of pane addresses | the plan's **lead only** |
+| `notify` | non-empty list of targets | no target (the loop still records) |
+| `brain` | boolean | `false` — no brain may act on this plan |
+| `queue` | `prompt-lead` \| `launch` \| `none` | `none` — the plan is not queued |
 
-A pane address uses Herdr's exact form: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. A machine ID cannot begin with `-`. These settings bound who may be prompted, who receives events, whether a brain may act, and how the plan participates in a queue. They never change the plan's acceptance criteria or gates.
+A pane address MUST match herdr-peers' exact form
+`(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`
+— a machine id never starts with `-` (it is passed to Herdr as an
+argument). An absent block means all five defaults: the human is the
+resolver, the lead is the only promptable pane, nothing is notified, no
+brain acts, the plan is not queued.
 
-## 3. Structured blockers and progress
+## 3. Structured blockers
 
-A blocked plan records a C-class and an optional `resolver` field in `state.json`'s `blocked` or `blocker` record. `resolver` is either `lead` or `human`; when absent, it means `human`. `lead` means the blocker can be resolved within the plan's recorded authority without a credential, login, consent, payment, push to main, release, or deletion. The loop, including its brain, may ask a lead to resolve only a blocker marked `lead`. Other blockers are reported for the human and are not prompted around.
+A v8 plan records why it cannot continue as data, so the loop, the fleet and
+a resuming agent read the same fields instead of scraping prose.
 
-The tagged herdr-peers fleet map may display up to 14 lines of a plan's own `PROGRESS.md` as a cleaned summary. That display is observational data, not an authority grant or a published schema for a machine-readable progress header. The pack's v8 line and its planned header shape must be checked against the 8.0.0 tag before being treated as normative.
+### 3.1. The blocker record
+
+A blocker MUST be recorded through the ledger's helper (`ledger.py block`
+to raise, `ledger.py unblock` to resolve) as a `blocker` event of
+`journal-event/v8`; a raw append of a `blocker` event MUST be refused, and
+every refused raise or resolution MUST be recorded as a refusal. A raise
+carries:
+
+| Field | Rule |
+|---|---|
+| `task` | the blocked task of this contract; a task its evidence already closed MUST NOT be blocked |
+| `reason` | non-empty, at most 1000 characters: why the task cannot continue |
+| `needs` | exactly one non-empty line, at most 500 characters: what unblocks it |
+| `class` | REQUIRED, one of `C1`–`C7` ([`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5) |
+| `resolver` | OPTIONAL, `"lead"` or `"human"`; an absent resolver MUST be read as `human` |
+
+`lead` means resolvable inside the plan's recorded authority **without** a
+credential, login, consent, payment, push to main, release or deletion.
+`resolver: "lead"` MUST be refused for `C1`, `C2`, `C5` and `C6` (approval,
+a consent or login screen, damage, terms are the human's). A resolution
+carries only the task (and an optional note).
+
+At most one blocker MUST be active per plan: a raise on another task MUST be
+refused until the active one is resolved. A re-raise on the same task MAY
+update `reason`, `needs`, `class` and `resolver`; the episode keeps the
+`since` of its first raise. While a blocker is unresolved its task MUST NOT
+complete: completion MUST be refused, and evidence that lands meanwhile does
+not close the task.
+
+### 3.2. Where readers find it
+
+The plan's `state.json` is `plan-snapshot/v8`: the `plan-snapshot/v6` shape
+with `blocker` as the active blocker — `{task, reason, since, needs, class,
+resolver?}` — or `null`, and `blocked` as a derived task status that wins over
+the others while the blocker is unresolved. Like every snapshot field it is
+projected by the ledger, never written by hand.
+
+`PROGRESS.md` SHOULD open with a structured header of four fixed lines
+directly under its title, written by create and refreshed on every
+transition (`shared/progress_header.py`):
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` and `Needs` are derived from the snapshot (the blocked task
+first, else the first task not completed); `Goal` and `Next action` are the
+executing agent's words. The rest of `PROGRESS.md` stays the agents' working
+index.
+
+### 3.3. What the loop may do with it
+
+The loop (its brain included) MUST NOT ask a lead to resolve a blocker the
+plan itself did not mark `resolver: "lead"`; everything else waits for the
+human. v6 and v7 plans record no `blocker` events, keep `plan-snapshot/v6`
+(whose `blocker` stays `null`), and every blocker they report is the
+human's.
 
 ## 4. The plan queue
 
-The plan queue is `.dwp/queue.json` with schema `dwp-queue-v1`. The pack is its only writer: `create` appends on approval, the human or lead reorders through the plan workflow, `execute` marks `started` when it claims the lead (with the lead address), finalization marks `done`, and `create` or `refine` can mark an item `skipped` with a one-line note. Queue items have a plan, an optional `after` dependency naming a plan already in the queue, state, lead, and start mode. A repository runs one plan at a time unless the queue explicitly sets `parallel: true`.
-
-The daemon is a bounded, read-only consumer. It rejects an unusable queue as empty without breaking plan execution. A queued plan can start only when its dependency is complete (or absent), it is approved, it names a lead, and the repository has no other running plan unless parallelism is enabled. The `prompt-lead` mode sends the named lead one fixed prompt: “Plan P is next in this repository's queue and approved; execute it to its end, respecting its gates.” The daemon does not write queue state. `launch` mode is not performed by this loop unless the released contract explicitly adds that behavior.
+`.dwp/queue.json`, schema `dwp-queue-v1`. Only the pack (`shared/queue.py`)
+or a human MAY write it; the daemon MUST only read it. Create appends on
+approval; a human or the lead reorders. Inside Herdr, where the lead's pane
+address exists, execute MUST mark `started` on a task start while the item is
+still `queued` (normally the plan's first task, once its lead has claimed it;
+a crash or a resume retries), together with that address (a `started` item
+without one is invalid); outside Herdr the item stays `queued` and a consumer
+reads the journal's task start as in flight. Execute marks
+`done` after the plan's closure; create/refine skip with a
+one-line note. A queue MUST NOT hold more than 64 items.
+One plan at a time per repository unless the queue carries
+`parallel: true`. Dependencies are queue-internal (`after` names a plan
+already queued). The daemon is a bounded, read-only consumer; a damaged
+queue is a quiet none and never breaks the lifecycle.
 
 ## 5. What v8 keeps
 
-V8 keeps the v7 contract for `tasks[].parallel_safe`, delegation, and the journal. The v8 journal-event set remains the v7 set; the generation ladder is ordered, so features gated as v7 remain available to v8 and later. In the record layer, v8 retains the v7 manifest and journal-event schema URLs and adds only the `plan-contract/v8` URL for the new generation. Existing v5, v6, and v7 plans keep their recorded generation and are not silently migrated.
-
-The v8 contract does not make add-ons mandatory. Without Herdr, plans still execute under their recorded authority through the core methodology. With Herdr, registration, bounded continuation, succession, notifications, the queue, and the read-only fleet view extend that same plan lifecycle.
+Everything v7 carries — `tasks[].parallel_safe`, delegation and the full v7
+event set — under one ordered generation ladder: every feature gated "v7"
+MUST be available to v8 and later. A v8 plan MUST record its events under
+`journal-event/v8` (the v7 event set plus `blocker`, §3) and project into
+`plan-snapshot/v8`; a journal that mixes generations MUST be refused. A v8
+plan MUST keep the v7 manifest line (`plan-manifest/v7`): the manifest's
+shape and its contract pointer do not change, so a new manifest URL would
+add a generation without a difference. A conformance checker MUST pair a v7
+manifest with a v8 contract. v6 and v7 plans keep their records byte for
+byte.

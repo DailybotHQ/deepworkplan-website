@@ -27,7 +27,7 @@ Un piano è una directory sotto `.dwp/plans/` denominata `PLAN_001_<slug>/`. Con
 - `<n>.task_<slug>.md` — file di specifica in dieci sezioni per ciascuna attività.
 - `analysis_results/` — directory per artefatti di analisi, report e log dei gate.
 
-Il pacchetto 7.x attuale crea i piani v7 per impostazione predefinita, con 2–5 parole nello slug come per v6. Il flusso v5 conservato utilizza 2–4 parole (poiché il relativo schema congelato conta l’ID numerico come una parola). I nuovi piani ricevono ID numerici crescenti con almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Le directory non numerate esistenti `PLAN_<slug>/` restano leggibili e non vengono mai rinominate; nessun piano esistente viene migrato implicitamente. Se esistono piani numerati, `latest` punta al piano con l’ID numerico più alto.
+Il pacchetto 8.x attuale crea i piani v8 per impostazione predefinita, con 2–5 parole nello slug come per v6. Il flusso v5 conservato utilizza 2–4 parole (poiché il relativo schema congelato conta l’ID numerico come una parola). I nuovi piani ricevono ID numerici crescenti con almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Le directory non numerate esistenti `PLAN_<slug>/` restano leggibili e non vengono mai rinominate; nessun piano esistente viene migrato implicitamente. Se esistono piani numerati, `latest` punta al piano con l’ID numerico più alto.
 
 ## Struttura del file di attività
 

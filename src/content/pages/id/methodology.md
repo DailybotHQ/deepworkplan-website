@@ -6,7 +6,7 @@ lastUpdated: 2026-11-16
 
 ## Metodologi Deep Work Plan
 
-Paket 7.x saat ini membuat rencana baru menggunakan v7 secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan permintaan eksplisit.
+Paket v8 membuat rencana baru dengan `plan-contract/v8` secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan `refine migrate` yang eksplisit.
 Deep Work Plan (DWP) adalah metodologi terbuka dan agnostik terhadap framework untuk menjalankan pekerjaan teknik yang terstruktur dan otonom dengan AI coding agent. Ia mengubah tujuan yang samar menjadi rencana yang dapat ditinjau yang dapat dieksekusi, dijeda, dilanjutkan, dan dilaporkan oleh agent — tanpa kehilangan konteks.
 
 DWP berpijak pada empat pilar — spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Dalam satu kalimat: *Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.*

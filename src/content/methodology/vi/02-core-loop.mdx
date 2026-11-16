@@ -72,7 +72,7 @@ Kiểm chứng là một phần của tác vụ, không phải điều nghĩ th�
 
 ## v6 và v7: cùng phương pháp, cấu trúc chặt chẽ hơn
 
-Tiêu chuẩn DWP hiện tại là 7.0.0, được triển khai bởi dòng skill 7.x. Gói này mặc định dùng v7 cho mọi kế hoạch mới; một yêu cầu `v6` rõ ràng vẫn tạo ra kế hoạch v6. Các kế hoạch v1, v2, v5 và v6 hiện có giữ nguyên thế hệ đã ghi nhận và không bao giờ bị di chuyển âm thầm; chuyển một kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng.
+Gói v8 mặc định tạo kế hoạch mới bằng `plan-contract/v8`. Kế hoạch hiện có giữ nguyên thế hệ đã ghi nhận; việc di chuyển cần lệnh `refine migrate` rõ ràng.
 
 v6 giữ nguyên phương pháp kế hoạch → tác vụ → cổng xác thực → hoàn tất, các lệnh slash và vị trí `.dwp/plans/`. Cấu trúc kỹ thuật chặt chẽ hơn nhờ hợp đồng, nhật ký, manifest ngữ cảnh theo tác vụ, bộ lập lịch và việc từ chối danh sách cho phép rỗng. v7 giữ nguyên lớp bản ghi đó và bổ sung dấu đánh tác vụ `parallel_safe` tùy chọn, sự kiện nhật ký `delegation` cho công việc có giới hạn được giao cho một agent khác, và sổ đăng ký addon `.dwp/config.json`; khi không bật addon ủy quyền nào, mọi kế hoạch vẫn chạy tuần tự trong phiên hiện tại. Quyết định kiến trúc là GO; tính không kém hơn theo thực nghiệm của kết quả agent chưa được đo lường.
 

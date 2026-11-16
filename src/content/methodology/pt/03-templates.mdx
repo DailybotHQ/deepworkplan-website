@@ -27,7 +27,7 @@ Um plano é um diretório em `.dwp/plans/` chamado `PLAN_001_<slug>/`. Ele cont�
 - `1.task_<slug>.md`, `2.task_<slug>.md` — arquivos individuais de tarefa em Markdown.
 - `analysis_results/` — diretório para artefatos de tarefas, relatórios de análise e evidências de validação.
 
-O pacote atual 7.x cria planos v7 por padrão, com slugs de 2–5 palavras, como os planos v6. O fluxo v5 mantido usa 2–4 palavras porque seus esquemas congelados contam o ID numérico como uma palavra. Novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas; planos existentes nunca são migrados implicitamente. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
+O pacote v8 cria novos planos com `plan-contract/v8` por padrão. Os planos existentes mantêm sua geração registrada; a migração exige um `refine migrate` explícito.
 
 ## Estrutura do arquivo de tarefa
 

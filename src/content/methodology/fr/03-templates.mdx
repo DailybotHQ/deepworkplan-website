@@ -27,7 +27,7 @@ Un plan est un répertoire sous `.dwp/plans/` nommé `PLAN_001_<slug>/`. Il cont
 - `<n>.task_<slug>.md` — fichier de spécification en dix sections par tâche.
 - `analysis_results/` — répertoire pour les artefacts d’analyse, rapports et logs de portes.
 
-Le pack 7.x actuel crée les plans v7 par défaut, dont le slug comporte 2 à 5 mots, comme pour v6. Le flux v5 conservé utilise 2 à 4 mots (son schéma figé comptant l’ID numérique comme un mot). Les nouveaux plans reçoivent des ID numériques croissants sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Les répertoires non numérotés existants `PLAN_<slug>/` restent lisibles et ne sont jamais renommés ; aucun plan existant n’est migré implicitement. En présence de plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
+Le pack v8 crée les nouveaux plans avec `plan-contract/v8` par défaut. Les plans existants conservent leur génération enregistrée ; la migration exige un `refine migrate` explicite.
 
 ## Structure d’un fichier de tâche
 

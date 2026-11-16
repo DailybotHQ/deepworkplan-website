@@ -8,7 +8,7 @@ section: Workflow
 
 # Plany Lite
 
-> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard, DWP 7.0.0, wymaga również odpowiednich rozszerzeń `V6_*.md` i `V7_*.md` wymienionych w [indeksie specyfikacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Istniejące plany v5 i v6 zachowują zapisane reguły.
+> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard, DWP 8.0.0, wymaga również odpowiednich rozszerzeń `V6_*.md` i `V7_*.md` wymienionych w [indeksie specyfikacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Istniejące plany v5 i v6 zachowują zapisane reguły.
 
 **Wersja 5.0.0. Status: stabilna.** Ten dokument specyfikuje reprezentację planu Lite, wprowadzoną obok [Specyfikacji DWP](/spec/dwp-specification): format planu dla małej i średniej ograniczonej pracy, który jest materializowany bezpośrednio, bez etapu niewykonywalnego szkicu. Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 Plan MUSI być jedną z dwóch reprezentacji, odnotowaną raz w `manifest.json` jako `plan_format`: **Full** przechowuje jeden plik na zadanie pod `<n>.task_<slug>.md`; **Lite** przechowuje kompaktowe, wykonywalne rekordy zadań inline w `README.md`, każdy za stabilną kotwicą `{#task-N}`. Plan Lite nie jest częściowym ani nieformalnym planem Full: każdy rekord zadania nadal MUSI nieść cel, Powierzchnię dotkniętą, kryteria akceptacji, bramkę walidacyjną i dziennik ukończenia, w tej samej normatywnej formie, jaką [Anatomia zadania](/spec/dwp-specification#task-anatomy) definiuje dla Full.
 
 Cztery osie opisują stan planu i MUSZĄ być śledzone niezależnie, a nie łączone:
-
 | Oś | Wartości | Znaczenie |
 |------|--------|---------|
 | Format | `lite`, `full` | Gdzie żyją rekordy zadań |

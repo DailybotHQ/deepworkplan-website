@@ -8,7 +8,7 @@ section: Addons
 
 # 애드온
 
-> **버전 범위:** 이 문서는 보존된 v5.0.0 기반 문서입니다. 현재 표준인 DWP 7.0.0은 [사양 색인](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)에 나열된 해당 `V6_*.md` 및 `V7_*.md` 확장도 요구합니다. 기존 v5 및 v6 계획은 기록된 규칙을 유지합니다.
+> **버전 범위:** 이 문서는 보존된 v5.0.0 기반 문서입니다. 현재 표준인 DWP 8.0.0은 [사양 색인](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)에 나열된 해당 `V6_*.md` 및 `V7_*.md` 확장도 요구합니다. 기존 v5 및 v6 계획은 기록된 규칙을 유지합니다.
 
 **버전 2.1.0.** 애드온은 핵심 Deep Work Plan 방법론에 대한 확장입니다. 여덟 가지 중 일곱 가지는 선택적이며 **적합성에 절대 필요하지 않습니다** — 선택적 애드온이 없는 저장소도 완전히 AI-first이며 DWP 적합합니다. 각 선택적 애드온은 온보딩 중 제안되며 명시적으로 수락 또는 거부되고, — 수락 시 — 기존 설정을 덮어쓰지 않고 **조정**합니다. 한 가지 구성 요소가 명시된 예외입니다: 표준 2.3.0부터 **AI Diff Reviewer 로컬 리뷰**는 필수 기준선의 일부입니다 — 온보딩이 이를 설치하고 모든 Final Review가 이를 실행합니다 — 반면 그 CI 표면은 옵트인으로 남습니다.
 
@@ -27,7 +27,7 @@ section: Addons
 
 ## 출시 애드온(여덟 가지)
 
-현재 여덟 가지 애드온이 출시됩니다 — 일곱 가지 옵트인과 필수 로컬 리뷰입니다. 각각 **키트 카탈로그 페이지**(사용자 대상 세부)와 Deep Work Plan 스킬 내 **규범 스펙**이 있습니다. 그중 네 가지 — devcontainer, Herdr, DeepWorkPlan Vim, Agentkit — 는 자체 리포지토리와 릴리스 주기를 가진 제품에 태그로 고정된 얇은 통합 계층이며, 모든 제품은 Deep Work Plan 없이도 작동합니다. 수락된 애드온은 `.dwp/config.json` 애드온 레지스트리(DWP 7.0.0)에 기록되며, 이 레지스트리는 제안하거나 강화할 수만 있을 뿐 적합성이나 계획을 결코 막지 않습니다.
+현재 여덟 가지 애드온이 출시됩니다 — 일곱 가지 옵트인과 필수 로컬 리뷰입니다. 각각 **키트 카탈로그 페이지**(사용자 대상 세부)와 Deep Work Plan 스킬 내 **규범 스펙**이 있습니다. 그중 네 가지 — devcontainer, Herdr, DeepWorkPlan Vim, Agentkit — 는 자체 리포지토리와 릴리스 주기를 가진 제품에 태그로 고정된 얇은 통합 계층이며, 모든 제품은 Deep Work Plan 없이도 작동합니다. 수락된 애드온은 `.dwp/config.json` 애드온 레지스트리(DWP 8.0.0)에 기록되며, 이 레지스트리는 제안하거나 강화할 수만 있을 뿐 적합성이나 계획을 결코 막지 않습니다.
 
 ### Devcontainer(첫 번째 애드온)
 
@@ -89,7 +89,7 @@ section: Addons
 - **동작:** 피어 프로토콜(스탬프, 승인, 응답, 루프 가드, 깊이 및 팬아웃 제한)은 팩이 아닌 herdr-peers에 존재함; 모든 사용에는 contract 권한 `agent_delegation`이 필요하며, 위임받은 에이전트의 결과는 계획 자체의 러너가 관찰할 때까지 주장된 상태로 남음
 - **제안 시점:** 7b 단계에서 명시적 옵트인; `herdr`와 `herdr-peers`의 읽기 전용 감지; 이 전송 수단은 Herdr 세션 안에서만 사용 가능
 
-- **루프:** Herdr v2.0.0은 범위 내 계획 지속과 후임자 인계를 위한 선택적 인간 시작 명령 `herdr-peers autopilot --loop`도 제공합니다. [루프 엔지니어링](/spec/loop-engineering)을 참조하세요.
+- **루프:** Herdr v2.1.0은 범위 내 계획 지속과 후임자 인계를 위한 선택적 인간 시작 명령 `herdr-peers autopilot --loop`도 제공합니다. [루프 엔지니어링](/spec/loop-engineering)을 참조하세요.
 
 ### DeepWorkPlan Vim(일곱 번째 애드온)
 

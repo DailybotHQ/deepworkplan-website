@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite-Pläne
 
-> **Versionsumfang:** Dies ist ein beibehaltenes v5.0.0-Basisdokument. Der aktuelle Standard, DWP 7.0.0, verlangt zusätzlich die zutreffenden `V6_*.md`- und `V7_*.md`-Erweiterungen aus dem [Spezifikationsindex](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Bestehende v5- und v6-Pläne behalten ihre aufgezeichneten Regeln.
+> **Versionsumfang:** Dies ist ein beibehaltenes v5.0.0-Basisdokument. Der aktuelle Standard, DWP 8.0.0, verlangt zusätzlich die zutreffenden `V6_*.md`- und `V7_*.md`-Erweiterungen aus dem [Spezifikationsindex](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Bestehende v5- und v6-Pläne behalten ihre aufgezeichneten Regeln.
 
 **Version 5.0.0. Status: Stabil.** Dieses Dokument spezifiziert die Lite-Plan-Darstellung, die zusammen mit der [DWP-Spezifikation](/spec/dwp-specification) eingeführt wird: ein Planformat für kleine bis mittlere, abgegrenzte Arbeiten, das direkt materialisiert wird, ohne eine nicht ausführbare Entwurfsstufe. Die Schlüsselwörter MUSS, DARF NICHT, SOLLTE, SOLLTE NICHT und KANN sind so zu interpretieren, wie in RFC 2119 beschrieben.
 
@@ -17,7 +17,6 @@ section: Workflow
 Ein Plan MUSS eine von zwei Darstellungen sein, einmal in `manifest.json` als `plan_format` festgehalten: **Full** speichert eine Datei je Aufgabe unter `<n>.task_<slug>.md`; **Lite** speichert kompakte, ausführbare Aufgabendatensätze inline in `README.md`, jeweils hinter einem stabilen `{#task-N}`-Anker. Ein Lite-Plan ist kein teilweiser oder informeller Full-Plan: Jeder Aufgabendatensatz MUSS weiterhin ein Ziel, eine Touched Surface, Akzeptanzkriterien, ein Validierungs-Gate und ein Abschlussprotokoll tragen, in derselben normativen Form, die [Aufgaben-Anatomie](/spec/dwp-specification#task-anatomy) für Full definiert.
 
 Vier Achsen beschreiben den Zustand eines Plans und MÜSSEN unabhängig voneinander verfolgt werden, statt vermischt zu werden:
-
 | Achse | Werte | Bedeutung |
 |------|--------|---------|
 | Format | `lite`, `full` | Wo die Aufgabendatensätze leben |

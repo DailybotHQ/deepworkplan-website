@@ -8,16 +8,17 @@ section: State
 
 # สถานะแผน
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 7.0.0 รุ่น `v7.12.2`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 หรือ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น **snapshot ที่ได้รับมา** ซึ่งสอดคล้องกับ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) มันถูกสร้างใหม่โดย `ledger.py project` และ MUST NOT ถูกแก้ไขด้วยมือ
+> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 8.0.0 รุ่น `v8.0.0`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 หรือ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น **snapshot ที่ได้รับมา** ซึ่งสอดคล้องกับ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) มันถูกสร้างใหม่โดย `ledger.py project` และ MUST NOT ถูกแก้ไขด้วยมือ
 
 ## ชั้นสถานะใดที่ใช้บังคับ
 
 | รุ่นของแผน | แหล่งความจริง | `state.json` | Schema |
 | --- | --- | --- | --- |
 | v5 (และแผน v1/v2 ที่เก่ากว่า) | แผน markdown โดยมีชั้น JSON นี้เป็นการฉายภาพ | เขียนโดยเอเจนต์ที่จุดโปรโตคอลด้านล่าง | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 และ v2 ยังใช้ได้สำหรับแผนที่เก่ากว่า) |
-| v6 และ v7 | สัญญาร่วมกับ journal แบบเพิ่มข้อมูลอย่างเดียว | snapshot ที่ฉายจาก journal ไม่เคยเขียนด้วยมือ | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (หรือรุ่น v6 ที่เทียบเท่ากัน) |
+| v6 และ v7 | สัญญาร่วมกับ journal แบบเพิ่มข้อมูลอย่างเดียว | snapshot ที่ฉายจาก journal ไม่เคยเขียนด้วยมือ | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (หรือรุ่น v6 ที่เทียบเท่ากัน) ; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
-แผนไม่เคยเปลี่ยนรุ่นโดยปริยาย: แผน v5 คงกฎเหล่านี้ไว้ และการย้ายแผนหนึ่งไปเป็น v6 คือการย้ายที่ชัดเจนและแสดงตัวอย่างก่อน ([ชั้นบันทึก](/spec/record-layer#coexistence-and-migration)) แหล่งอ้างอิงหลัก: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md)
+แผน v8 ใช้ `plan-manifest/v7` ร่วมกับ `plan-contract/v8`, `journal-event/v8` และ `plan-snapshot/v8`; schema manifest และ journal-event v7 ยังรองรับแผนเดิม
+แผนไม่เคยเปลี่ยนรุ่นโดยปริยาย: แผน v5 คงกฎเหล่านี้ไว้ และการย้ายแผนหนึ่งไปเป็น v6 คือการย้ายที่ชัดเจนและแสดงตัวอย่างก่อน ([ชั้นบันทึก](/spec/record-layer#coexistence-and-migration)) แหล่งอ้างอิงหลัก: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V7_CONTRACT.md)
 
 **เวอร์ชัน 5.0.0. สถานะ: เสถียร** เอกสารนี้ระบุชั้นสถานะแผนที่เครื่องอ่านได้ของระเบียบวิธี Deep Work Plan ซึ่งตอนนี้ปรับให้สอดคล้องกับเวอร์ชันของมาตรฐาน DWP เอง — ไม่มีข้อกำหนดเดิมใดถูกทำให้อ่อนลงจากการเปลี่ยนหมายเลขนี้ ฉบับแก้ไขนี้ยังบันทึกเรื่องตัวอัปเดตสถานะที่มีการป้องกัน การเผยแพร่แผนที่ผ่านการตรวจสอบ และกฎความจริงของหลักฐานที่แผนที่เสร็จสมบูรณ์ต้องปฏิบัติตาม (ดูด้านล่าง) คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 
@@ -236,7 +237,7 @@ sub-skill `verify` MUST ถือว่าการเบี่ยงเบน�
 
 ## สคีมา v7 และ v6 และความเข้ากันได้
 
-แพ็ก 7.x ปัจจุบันสร้างแผน **v7** เป็นค่าเริ่มต้น v7 คือรุ่นสัญญาที่ต่อยอดจากชั้นบันทึกของ v6: [manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) ชี้ไปยัง [สัญญา v7](https://deepworkplan.com/schema/plan-contract/v7.json) — สัญญา v6 บวกตัวระบุงาน `parallel_safe` แบบเลือกได้ — และ [เหตุการณ์ journal v7](https://deepworkplan.com/schema/journal-event/v7.json) ทุกรายการยังบันทึก `delegation` ได้ (เริ่มแล้ว เสร็จสิ้น ล้มเหลว ยกเลิก) ซึ่งไม่เคยเป็นหลักฐานด้วยตัวเอง: ผลลัพธ์ของผู้รับมอบหมายยังคงเป็นเพียงข้อกล่าวอ้างจนกว่า runner ของแผนเองจะสังเกตเห็น live snapshot และ task context manifest ใช้ร่วมกับ v6 แผนหนึ่งไม่เคยผสมรุ่นกัน และคำขอ `v6` อย่างชัดเจนยังคงสร้างแผน v6
+แพ็ก 8.x ปัจจุบันสร้างแผน **v8** เป็นค่าเริ่มต้น v8 คือรุ่นสัญญาที่ต่อยอดจากชั้นบันทึกของ v6: [manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) ชี้ไปยัง [สัญญา v7](https://deepworkplan.com/schema/plan-contract/v7.json) — สัญญา v6 บวกตัวระบุงาน `parallel_safe` แบบเลือกได้ — และ [เหตุการณ์ journal v7](https://deepworkplan.com/schema/journal-event/v7.json) ทุกรายการยังบันทึก `delegation` ได้ (เริ่มแล้ว เสร็จสิ้น ล้มเหลว ยกเลิก) ซึ่งไม่เคยเป็นหลักฐานด้วยตัวเอง: ผลลัพธ์ของผู้รับมอบหมายยังคงเป็นเพียงข้อกล่าวอ้างจนกว่า runner ของแผนเองจะสังเกตเห็น live snapshot และ task context manifest ใช้ร่วมกับ v6 แผนหนึ่งไม่เคยผสมรุ่นกัน และคำขอ `v6` อย่างชัดเจนยังคงสร้างแผน v6
 
 v6 คงวิธีการของ v5 และเพิ่มโครงสร้างวิศวกรรมที่เข้มงวดยิ่งขึ้นสำหรับแผนใหม่ manifest ระบุตัวตนชี้ไปยังสัญญาที่มีเวอร์ชัน; journal ที่เพิ่มข้อมูลได้อย่างเดียวบันทึกอำนาจและเหตุการณ์; context manifest ระบุการเลือกบริบทในแต่ละงาน; scheduler ส่งต่องานที่มีสิทธิ์เท่านั้น; และ projection สด `state.json` เป็น snapshot ที่สร้างจาก journal ระบบปฏิเสธ allowlist ความสามารถที่ว่างเปล่า สิ่งเหล่านี้เป็นการตัดสินใจทางสถาปัตยกรรม ไม่ใช่หลักฐานว่าผลลัพธ์ของ agent ดีขึ้น: ยังไม่ได้วัด non-inferiority ของผลลัพธ์
 
