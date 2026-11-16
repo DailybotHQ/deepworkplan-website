@@ -9,6 +9,16 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.70] - 2026-11-16
+
+### Changed
+
+- fix: apply the self-review findings on the loop train copy
+- feat: pin devcontainer-kit v1.2.0 — the image bakes the loop train
+- fix: apply the self-review findings on the loop train
+- feat: re-vendor pack v7.12.1 and pin coding-agents-kit v1.4.0
+- wip: prepare the pack 7.12.0 + herdr-peers 1.3.1 train (holds for 7.12.1)
+
 ## [5.0.69] - 2026-11-16
 
 ### Changed
@@ -1455,7 +1465,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.69...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.70...HEAD
+[5.0.70]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.70
 [5.0.69]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.69
 [5.0.68]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.68
 [5.0.67]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.67
