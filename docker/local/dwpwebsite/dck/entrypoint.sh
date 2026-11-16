@@ -19,6 +19,7 @@
 #   dck_authorize_keys [--add]               the dck block of authorized_keys
 #   dck_herdr_config                         Herdr config defaults, in place
 #   dck_repo_hook                            docker/local/dev-setup-hook.sh, if present
+#   dck_container_only                       the container-only volume mount points owned by the user
 #   dck_layer_persist                        per-CLI volumes of the agents layer
 #   dck_host_volume_profiles                 non-shared CLIs' ak profiles on the agentkit volume
 #   dck_git_identity                         global git [user] settings from DCK_GIT_* (no host file)
@@ -37,6 +38,7 @@
 #   DCK_USER (dev)  DCK_HOME (that user's home)  DCK_WORKSPACE (/workspace)
 #   DCK_SSH (1|0)   DCK_AUTHORIZED_KEYS          DCK_AGENTS ("claude codex ...")
 #   DCK_PERSIST_ROOT ($DCK_HOME/.dck/volumes)    DCK_REPO_HOOK
+#   DCK_CONTAINER_ONLY (workspace subpaths on named volumes, [compose] container_only)
 #   DCK_HOST_PROFILES ("claude codex": ak profiles shared from the host)
 #   DCK_HOST_CODEX (the host's Codex home, mounted)   AGENTKIT_PERMISSIONS
 #   DCK_SSH_COPY_KEYS (1: copy ~/.ssh_host/id_* into ~/.ssh; [ssh] copy_keys)
@@ -433,6 +435,54 @@ dck_repo_hook() {
     (cd "$DCK_WORKSPACE" 2>/dev/null || cd /; bash "$hook") || rc=$?
   fi
   [ "$rc" = 0 ] || dck_log "repo hook: exited $rc (the container keeps running)"
+  return 0
+}
+
+# --------------------------------------------------------------------------
+# dck_container_only — the container-only volumes ([compose] container_only)
+# --------------------------------------------------------------------------
+# Each path in DCK_CONTAINER_ONLY is a named volume mounted over a workspace
+# subpath (the workspace bind stays underneath it). Docker creates the mount
+# point root-owned, so at every start it is given to the user: the mount point
+# only, never recursively (what the volume already holds keeps its owner) and
+# never the workspace bind itself. Only normalised paths under the workspace
+# are accepted (no '..', no '.', no '//', no glob characters — the variable is
+# split with globbing off); a path outside the workspace, or one with no
+# directory there, is skipped: the compose file that set the variable did not
+# mount a volume at it after all. Runs as root in the standard start; as the
+# user (a repository's own entrypoint), it says so and changes nothing.
+
+dck_container_only() {
+  _dck_env
+  local p given=0
+  set -f
+  for p in ${DCK_CONTAINER_ONLY:-}; do
+    case "$p" in
+      */../*|*/..|*/./*|*//*|*.)
+        dck_log "container-only: skipping '$p' (not a normalised path)"
+        continue ;;
+      "$DCK_WORKSPACE"|"$DCK_WORKSPACE"/)
+        dck_log "container-only: refusing '$p' (the workspace itself is never taken over)"
+        continue ;;
+      "$DCK_WORKSPACE"/*) ;;
+      *)
+        dck_log "container-only: skipping '$p' (not a subpath of $DCK_WORKSPACE)"
+        continue ;;
+    esac
+    [ -d "$p" ] || continue
+    if _dck_is_root; then
+      if chown "$DCK_USER:$(_dck_group)" "$p" 2>/dev/null; then
+        given=$((given + 1))
+      else
+        dck_log "container-only: could not give '$p' to $DCK_USER"
+      fi
+    fi
+  done
+  set +f
+  if ! _dck_is_root; then
+    dck_log "container-only: not root; the mount point(s) are only given to $DCK_USER by the standard start"
+  fi
+  [ "$given" -gt 0 ] && dck_log "container-only: $given mount point(s) given to $DCK_USER"
   return 0
 }
 
@@ -1402,6 +1452,7 @@ dck_start() {
   _dck_as_user mkdir -p "$DCK_HOME/.local/state/herdr" 2>/dev/null || true
   dck_persist state "$DCK_HOME/.local/state/herdr/client" dir || true
   dck_persist state "$DCK_HOME/.bash_history" file || true
+  dck_container_only || true
   dck_layer_persist || true
   dck_git_identity || true
   dck_ssh_agent_access || true
