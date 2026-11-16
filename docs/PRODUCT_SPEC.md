@@ -26,6 +26,8 @@ The same repository is the coordination point for the public DeepWorkPlan ecosys
 
 **Value proposition:** A serious, neutral, technical standard that turns ad-hoc agent prompting into a repeatable, validation-first, resume-safe workflow. A Deep Work Plan is a directory of markdown files — a plan overview, per-task instruction files, a running progress log, and utility prompts — that together hold all the state an agent needs to begin, continue, and complete a body of work.
 
+The v8 narrative has four pillars: spec-first planning for one work episode; the repository as the harness; loop engineering, in which registered plans can run through completion under recorded authority; and measured efficiency, reported as instruction bytes per flow when a measurement path exists. The methodology works alone; addons amplify it. Do not describe DWP as SDD or claim an unmeasured comparative advantage. Use the working lead sentence, *“Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.”*, and the pull quote, *“Spec-first says what; the harness says where; loop engineering says how it finishes.”* Both are editorial copy and may be replaced at the DeepWorkPlan 8.0.0 tag.
+
 **Tone:** Serious, neutral, specification-grade. No hype, no exclamation marks in body copy, sentence-case headings. This is a methodology-and-spec site, not a personal blog or portfolio.
 
 ## Vision
@@ -55,7 +57,7 @@ Build a fast, accessible, multilingual site that:
 
 **Purpose:** Communicate what DWP is, who it is for, and where to go next — fast.
 
-**Sections:** A hero that leads with the context-over-models / structured-environment positioning — *"Models matter. Context matters more."* — framing the repository as the environment (context, guardrails, durable plan) where any agent executes reliably, anchored by the harness thesis (*"the repository itself becomes the harness"*); a concise "what is a Deep Work Plan" explainer; the two narrative pillars (spec-driven development, harness engineering); the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, the kit catalog, and the `/quickstart` adoption page; and a clear primary call to action.
+**Sections:** A hero led by the v8 positioning — *"Spec-first, loop-closed: the repository is the harness and the plan runs itself to done."* — framing the repository as the harness where agents execute durable plans; a concise "what is a Deep Work Plan" explainer; the four narrative pillars (spec-first planning, repository as harness, loop engineering, and measured efficiency); the core principles (single-task focus, validation-first, git-native, resume-safe); entry points into the methodology reader, the spec reader, the kit catalog, and the `/quickstart` adoption page; and a clear primary call to action.
 
 ### 2. Methodology Reader
 
@@ -92,10 +94,10 @@ Build a fast, accessible, multilingual site that:
 **Purpose:** Give humans and agents a single canonical place to start adopting DWP.
 
 **Features:**
-- HTML page at `/quickstart` (in all 17 active languages) with a "Give this to your agent" handoff block and a numbered verify → install → onboard → local review/addons → plan/execute → verify-conformance sequence framed by the two narrative pillars
+- HTML page at `/quickstart` (in all 17 active languages) with a "Give this to your agent" handoff block and a numbered verify → install → onboard → local review/addons → plan/execute → verify-conformance sequence framed by the four narrative pillars
 - A self-contained, copy-pasteable, English-only agent onboarding prompt at `/init.md` — a standalone static artifact (`public/init.md`), not a per-language content-collection page; it has no HTML sibling and is never redirected
 - Permanent redirects from `/init`, `/setup`, and `/onboarding` (plus per-language variants) to `/quickstart`
-- Stays in sync with the companion skill repo `DailybotHQ/deepworkplan-skill`
+- Stays in sync with the companion skill repo `DailybotHQ/deepworkplan-skill` and presents the four narrative pillars without making addons prerequisites
 
 ### 6. Compare and FAQ
 
@@ -134,7 +136,7 @@ website repository.
 **Features:**
 - Native Markdown endpoints for every page (`.md` URLs), kept in sync via `pnpm run md:check`
 - Content negotiation via `Accept: text/markdown` header (Cloudflare middleware)
-- No HTML→Markdown conversion — original source served for token efficiency
+- No HTML→Markdown conversion — original source is served without conversion residue; efficiency claims elsewhere use instruction bytes per flow and a stated measurement path
 - Discovery via `llms.txt`, `llms-full.txt`, and `robots.txt`
 
 **Technical details:** See [Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)

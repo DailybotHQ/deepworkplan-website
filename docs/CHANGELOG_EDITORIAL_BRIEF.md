@@ -107,10 +107,27 @@ files themselves are not restored.
   an earlier entry.
 - Do not publish internal branch names, task numbers, evaluation traces, or
   private session URLs as user-facing changelog copy.
-- Use measured token-efficiency evidence from the public ledger, never invented
-  percentage savings.
+- Use measured efficiency evidence as instruction bytes per flow only when the
+  measurement path is available; never invent token or cost percentages.
 - Detail pages should explain why each update matters to a repository owner and
   an agent maintainer, then point to the public source or specification.
 - Changelog titles lead with the short "DWP" form (e.g. "DWP v4: …"), not the
   full "Deep Work Plan" name — the full name still appears naturally in body
   copy and descriptions.
+
+## v8 narrative frame
+
+For v8 entries, use the four-pillar frame: spec-first planning per work episode;
+the repository as the harness; loop engineering; and measured efficiency.
+Describe spec-first as the planning step, not DWP's genus. Explain loop
+engineering through the plan lifecycle and its authority boundaries. State
+measured efficiency only as instruction bytes per flow with a measurement path;
+do not invent token or cost percentages. The methodology works alone; addons
+amplify it.
+
+The working lead sentence is *“Spec-first, loop-closed: the repository is the
+harness and the plan runs itself to done.”* The pull quote is *“Spec-first says
+what; the harness says where; loop engineering says how it finishes.”* These
+are editorial copy and may be replaced at the DeepWorkPlan 8.0.0 tag. Keep
+historical entries anchored to their publication date and evidence; do not
+retroactively apply the v8 labels to earlier releases.

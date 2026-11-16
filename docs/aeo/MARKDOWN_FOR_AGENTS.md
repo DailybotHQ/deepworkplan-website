@@ -16,7 +16,7 @@ Both outputs come from the same source. No HTML→Markdown conversion in the pat
 Cloudflare offers [Markdown for Agents](https://blog.cloudflare.com/markdown-for-agents/) — edge HTML→Markdown conversion when clients request `Accept: text/markdown`. However, since this site's content already exists as Markdown, serving the original source is superior:
 
 - **Source fidelity** — original formatting, code blocks, and links preserved exactly as authored
-- **Token efficiency** — no HTML tag residue from conversion; cleaner for AI consumption
+- **Lower conversion residue** — no HTML tags added by conversion; original Markdown stays readable for AI consumption. This is a format property, not a quantified token-saving claim.
 - **No edge dependency** — works on any hosting platform, not just Cloudflare
 - **Deterministic** — output is predictable and consistent across builds
 - **Cacheable** — static files served directly, no runtime processing
