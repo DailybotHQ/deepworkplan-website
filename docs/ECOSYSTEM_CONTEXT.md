@@ -37,12 +37,12 @@ last`, and Herdr pane restore through `ak`; 1.4.0 adds `ak update`, the
 verified vendor updater, human-invoked only; interface 1 unchanged),
 deepworkplan-vim `v1.0.1`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
-reviewer and the Dailybot skill vendored at those tags. The pack `v7.12.1`
-addon descriptors record herdr-peers `v2.0.0` and coding-agents-kit
-`v1.4.0` — the site pins and the pack descriptors agree (the pack
-devcontainer descriptor still records 1.1.2); devcontainer-kit `v1.2.0`
-(interface 2 unchanged) bakes herdr-peers 1.3.1, coding-agents-kit 1.4.0
-and deepworkplan-vim 1.0.1 into its image.
+reviewer and the Dailybot skill vendored at those tags. The pack `v7.12.1` addon descriptors record herdr-peers 1.3.1 and
+coding-agents-kit `v1.4.0` — the site's herdr-peers pin (`v2.0.0`) runs
+one release ahead of the pack descriptor until the pack's v8 line;
+devcontainer-kit `v1.2.0` (interface 2 unchanged) bakes herdr-peers
+1.3.1, coding-agents-kit 1.4.0 and deepworkplan-vim 1.0.1 into its
+image.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|

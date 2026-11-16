@@ -18,13 +18,13 @@ Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](http
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, Tag `v2.0.0`, Protokoll 1 |
+| Produkt | `DailybotHQ/herdr-peers`, Tag `v2.0.0`, Protokoll 2 |
 | Registry-Schlüssel | `herdr` in `.dwp/config.json` |
 | Transport | interaktiv: ein Peer in einem Herdr-Pane |
 | Stellt bereit | `subagents`, `cancel_children` |
 | Erfordert | die `agent_delegation`-Freigabe des Plan-Vertrags |
 
-**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung: die CLI-Verben und ihre dokumentierten Flags, die Exit-Codes `0`–`7`, die dokumentierten Variablen `HERDR_PEERS_*`, `DWP_PLAN` und `DWP_TASK`, Protokoll 1 sowie die JSON-Verträge `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` und der Delegationsdatensatz. Eine inkompatible Änderung an einem davon erhöht die Major-Version, und eine Änderung des Wire-Formats erhöht zusätzlich die Protokollnummer. `v1.0.0` ändert kein Verhalten gegenüber `v0.3.3`, und 0.x-Releases werden nicht mehr unterstützt.
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung: die CLI-Verben und ihre dokumentierten Flags, die Exit-Codes `0`–`7`, die dokumentierten Variablen `HERDR_PEERS_*`, `DWP_PLAN` und `DWP_TASK`, Protokoll 2 sowie die JSON-Verträge `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` und der Delegationsdatensatz. Eine inkompatible Änderung an einem davon erhöht die Major-Version, und eine Änderung des Wire-Formats erhöht zusätzlich die Protokollnummer. `v1.0.0` ändert kein Verhalten gegenüber `v0.3.3`, und 0.x-Releases werden nicht mehr unterstützt.
 
 
 ## Installation

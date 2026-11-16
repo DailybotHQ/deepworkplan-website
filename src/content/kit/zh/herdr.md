@@ -18,13 +18,13 @@ order: 7
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/herdr-peers`，标签 `v2.0.0`，协议 1 |
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v2.0.0`，协议 2 |
 | 注册表键 | `.dwp/config.json` 中的 `herdr` |
 | 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
 | 提供 | `subagents`、`cancel_children` |
 | 要求 | 计划契约中的 `agent_delegation` 授权 |
 
-**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 1，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 2，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
 
 
 ## 安装
