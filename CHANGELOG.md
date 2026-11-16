@@ -9,6 +9,12 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.66] - 2026-11-16
+
+### Changed
+
+- ci: bump actions/setup-node from 6 to 7
+
 ## [5.0.65] - 2026-11-16
 
 ### Changed
@@ -1430,7 +1436,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.65...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.66...HEAD
+[5.0.66]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.66
 [5.0.65]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.65
 [5.0.64]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.64
 [5.0.63]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.63
