@@ -36,6 +36,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
   - label: "Skill release v7.12.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
+  - label: "Skill release v7.12.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.2"
 ---
 
 Deep Work Plan v7 mempertahankan metode v6: kontrak adalah otoritas, jurnal append-only adalah memori, penjadwal menentukan apa yang berjalan berikutnya, dan sebuah tugas baru ditutup ketika bukti yang tercatat memenuhi kriterianya. v7 menambahkan kemampuan mendelegasikan dan menjaga disiplin yang sama terhadap hasilnya.
@@ -68,4 +70,6 @@ Rilis 7.12.0 (2026-11-16) mendaftarkan plan ke loop herdr-peers: sebuah plan men
 
 Rilis 7.12.1 (2026-11-16) memperbaiki notifikasi Dailybot addon Herdr: ia kini menerima nama peristiwa `herdr-peers/plan-event-v1` yang dipancarkan herdr-peers, membatasi stdin notifikator pada 64 KiB, dan memetakan `plan_lead_moved`; deskriptor addon pindah ke coding-agents-kit v1.4.0, yang `ak update`-nya didokumentasikan hanya dipanggil oleh manusia.
 
-Rilis skill yang dipasang: **7.12.1**, stabil sejak 7.0.0.
+Rilis 7.12.2 (2026-11-16) membuat addon Herdr menerima protokol 1 dan 2 herdr-peers dan mematoknya ke herdr-peers v2.0.0: pada instalasi protokol 2, deteksi tidak lagi gagal secara diam-diam dan addon mempertahankan kemampuan delegasinya.
+
+Rilis skill yang dipasang: **7.12.2**, stabil sejak 7.0.0.

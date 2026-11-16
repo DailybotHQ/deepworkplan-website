@@ -84,10 +84,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.12.1
+  git checkout v7.12.2
   # उस रिलीज़ के चेकसम डाउनलोड करें और उन्हें नीचे दिए digest से मिलाएँ:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.1/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS
   shasum -a 256 SHA256SUMS   # पिन की गई रिलीज़ में deepworkplan-skill के digest के बराबर होना चाहिए
   ./setup.sh --verify        # शून्येतर exit का अर्थ है फ़ाइल मेल नहीं खाती — रुकें
   ```
@@ -100,7 +100,7 @@ lastUpdated: 2026-10-11
 
   | रिपॉज़िटरी (github.com/DailybotHQ) | Tag | उसके `SHA256SUMS` का sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.12.1` | `a8b737d97c57091807f598206d5ef98b2d65af3fee7b5af5dc87a806db92fc97` |
+  | deepworkplan-skill | `v7.12.2` | `8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea` |
   | coding-agents-kit | `v1.4.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
   | herdr-peers | `v2.0.0` | `97509f91c5463be190307731d8417aaab2742d17850638fcc6fb0d1a9eddd011` |
   | devcontainer-kit | `v1.2.0` | `5aaf1113734d3d4308b6ffd256a4e10e60116370ad23bdfd2573f7a3a914e349` |
@@ -118,7 +118,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
 ```
 
 या OpenClaw के माध्यम से इंस्टॉल करें:

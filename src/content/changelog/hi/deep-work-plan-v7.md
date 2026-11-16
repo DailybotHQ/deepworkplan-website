@@ -36,6 +36,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
   - label: "Skill release v7.12.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
+  - label: "Skill release v7.12.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.2"
 ---
 
 Deep Work Plan v7 v6 की पद्धति बनाए रखता है: अनुबंध ही प्राधिकार है, केवल-जोड़ने वाला जर्नल स्मृति है, शेड्यूलर तय करता है कि आगे क्या चलेगा, और कोई कार्य तभी बंद होता है जब दर्ज प्रमाण उसके मानदंड पूरे करता है। v7 कार्य सौंपने की क्षमता जोड़ता है और परिणाम के आसपास वही अनुशासन बनाए रखता है।
@@ -68,4 +70,6 @@ v7 ऑर्केस्ट्रेशन और ऑडिट-योग्य�
 
 रिलीज़ 7.12.1 (2026-11-16) Herdr ऐडऑन के Dailybot नोटिफ़ायर को ठीक करती है: यह अब herdr-peers द्वारा जारी `herdr-peers/plan-event-v1` घटना नाम स्वीकार करता है, नोटिफ़ायर के stdin को 64 KiB पर सीमित करता है और `plan_lead_moved` को मैप करता है; ऐडऑन डिस्क्रिप्टर coding-agents-kit v1.4.0 पर चलते हैं, जिसका `ak update` केवल-मानव-द्वारा-बुलाया गया दर्ज है।
 
-इंस्टॉल किया गया skill रिलीज़: **7.12.1**, 7.0.0 से स्थिर।
+रिलीज़ 7.12.2 (2026-11-16) Herdr ऐडऑन को herdr-peers के प्रोटोकॉल 1 और 2 दोनों स्वीकार करने देती है और उसे herdr-peers v2.0.0 पर पिन करती है: प्रोटोकॉल 2 वाली स्थापना में पहचान अब चुपचाप विफल नहीं होती और ऐडऑन अपनी प्रतिनिधित्व (delegation) क्षमताएँ बनाए रखता है।
+
+इंस्टॉल किया गया skill रिलीज़: **7.12.2**, 7.0.0 से स्थिर।

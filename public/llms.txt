@@ -43,7 +43,7 @@ How an agent should engage: fetch the [adoption prompt](https://deepworkplan.com
 
 ## What v7 adds
 
-Deep Work Plan v7 (pack `v7.12.1`) keeps the plan, task and gate loop and adds a verifiable record and safe parallelism:
+Deep Work Plan v7 (pack `v7.12.2`) keeps the plan, task and gate loop and adds a verifiable record and safe parallelism:
 
 - **A record, not a narrative.** A plan carries an immutable outcome contract and an append-only journal; a task completes only when recorded evidence satisfies its criteria. Only the plan's own gate runner mints `observed` evidence; claims stay `asserted`, and a human judgment closes a criterion only through a recorded sign-off. Spec: [record layer](https://deepworkplan.com/spec/record-layer).
 - **Delegation with evidence.** A plan whose contract grants `agent_delegation` can hand `parallel_safe` tasks to other coding agents — headless in a git worktree (agentkit) or in another Herdr pane, on any machine (Herdr). A delegate's result stays a claim until the plan's gate observes it. Spec: [delegation](https://deepworkplan.com/spec/delegation).
@@ -53,7 +53,7 @@ Deep Work Plan v7 (pack `v7.12.1`) keeps the plan, task and gate loop and adds a
 
 ## Ecosystem (v7)
 
-The methodology works alone: no addon is required, and every addon only amplifies it. Each addon is a thin integrator inside the skill, pinned by tag to a product with its own repository, release and interface version, and every product works without Deep Work Plan: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) v2.0.0, [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) v1.4.0, [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) v1.2.0, [deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) v1.0.1. From 1.0.0, each product's public interface follows semantic versioning: an incompatible change ships only in a new major version. The addon registry (`.dwp/config.json`), addon descriptors and delegation ship in the skill's stable releases since `v7.0.0`; this site vendors `v7.12.1` (with `SHA256SUMS`). Overview: the [kit index](https://deepworkplan.com/kit).
+The methodology works alone: no addon is required, and every addon only amplifies it. Each addon is a thin integrator inside the skill, pinned by tag to a product with its own repository, release and interface version, and every product works without Deep Work Plan: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) v2.0.0, [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) v1.4.0, [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) v1.2.0, [deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim) v1.0.1. From 1.0.0, each product's public interface follows semantic versioning: an incompatible change ships only in a new major version. The addon registry (`.dwp/config.json`), addon descriptors and delegation ship in the skill's stable releases since `v7.0.0`; this site vendors `v7.12.2` (with `SHA256SUMS`). Overview: the [kit index](https://deepworkplan.com/kit).
 
 ## Developer & Agent Resources
 

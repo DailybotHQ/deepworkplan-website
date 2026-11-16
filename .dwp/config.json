@@ -18,12 +18,12 @@
     "dependency-upgrade": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/dependency-upgrade, /lib-upgrade)",
-      "version": "v7.12.0"
+      "version": "v7.12.2"
     },
     "design-system": {
       "enabled": true,
       "note": "in-pack addon: versioned with the vendored deepworkplan pack (addons/design-system, docs/DESIGN.md)",
-      "version": "v7.12.0"
+      "version": "v7.12.2"
     },
     "devcontainer": {
       "enabled": true,
