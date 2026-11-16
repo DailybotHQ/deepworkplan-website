@@ -72,4 +72,4 @@ Rilis 7.12.1 (2026-11-16) memperbaiki notifikasi Dailybot addon Herdr: ia kini m
 
 Rilis 7.12.2 (2026-11-16) membuat addon Herdr menerima protokol 1 dan 2 herdr-peers dan mematoknya ke herdr-peers v2.0.0: pada instalasi protokol 2, deteksi tidak lagi gagal secara diam-diam dan addon mempertahankan kemampuan delegasinya.
 
-Rilis skill yang dipasang: **7.12.2**, stabil sejak 7.0.0.
+Rilis 7.12.2 (2026-11-16) adalah rilis terakhir v7; v8 menjadi penerusnya.

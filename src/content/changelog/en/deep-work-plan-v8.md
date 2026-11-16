@@ -71,4 +71,6 @@ Release 8.0.0 implements DWP standard 8.0.0. New plans are created on `plan-cont
 - **Structured blockers.** A blocker is a `blocker` event of `journal-event/v8`, raised and resolved only through the ledger helper, with a task, a reason, one line of `needs`, a required class from C1 to C7 and an optional resolver. `resolver: lead` is refused for C1, C2, C5 and C6, and the loop asks a lead to resolve only a blocker the plan itself marked `resolver: lead`. `state.json` becomes `plan-snapshot/v8`, with the active blocker and a derived `blocked` status, and `PROGRESS.md` opens with a four-line header: goal, current task, next action and needs.
 - **The plan queue.** `.dwp/queue.json` (`dwp-queue-v1`) is written only by the pack's `shared/queue.py` or a human; create appends a plan on approval, and the Herdr daemon only reads it. A queue holds at most 64 plans, runs one plan at a time per repository unless it sets `parallel: true`, and a damaged queue never breaks the lifecycle.
 
+The final v7 release was **7.12.2**.
+
 Installed skill release: **8.0.0**.

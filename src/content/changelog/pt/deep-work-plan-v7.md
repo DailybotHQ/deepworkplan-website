@@ -72,4 +72,4 @@ A versão 7.12.1 (2026-11-16) corrige o notificador do Dailybot do addon do Herd
 
 A versão 7.12.2 (2026-11-16) faz o addon do Herdr aceitar os protocolos 1 e 2 do herdr-peers e o fixa no herdr-peers v2.0.0: com uma instalação de protocolo 2, a detecção não falha mais em silêncio e o addon mantém suas capacidades de delegação.
 
-Versão da skill instalada: **7.12.2**, estável desde a 7.0.0.
+A versão 7.12.2 (2026-11-16) foi a última versão de v7; v8 vem em seguida.
