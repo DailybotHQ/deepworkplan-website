@@ -75,3 +75,7 @@ Doğrulama, sonradan akla gelen bir şey değil, görevin bir parçasıdır: her
 Güncel DWP standardı 7.0.0'dır ve 7.x skill serisiyle uygulanır. Bu paket her yeni plan için varsayılan olarak v7 kullanır; açık bir `v6` isteği yine bir v6 planı oluşturur. Mevcut v1, v2, v5 ve v6 planları kayıtlı nesillerini korur ve hiçbir zaman sessizce taşınmaz; bir v5 planını v6'ya taşımak açık bir geçiş isteği gerektirir.
 
 v6 aynı plan → görev → doğrulama kapısı → tamamlama metodolojisini, slash komutlarını ve `.dwp/plans/` konumunu korur. Sözleşme, günlük, görev bağlamı bildirimleri, zamanlayıcı ve boş izin listesinin reddiyle mühendislik yapısını sıkılaştırır. v7 bu kayıt katmanını korur ve isteğe bağlı bir `parallel_safe` görev işaretçisi, başka bir ajana devredilen sınırlı iş için bir `delegation` günlük olayı ve `.dwp/config.json` eklenti kaydını ekler; hiçbir devretme eklentisi etkin değilken her plan yine geçerli oturumda sırayla çalışır. Mimari kararı GO’dur; ajan sonuçlarının deneysel olarak aşağı kalmaması ölçülmemiştir.
+
+## Çekirdek döngüden kapalı döngüye
+
+Herdr ile `execute`, lead ve halefiyeti kaydeder; insanın başlattığı `herdr-peers autopilot --loop` boşta lead'i hatırlatır, olayları bildirir ve lead kaybolursa kayıtlı halefinden devralmasını ister. Daemon yetki değil süreklilik sağlar. [Döngü mühendisliği](/methodology/08-loop-engineering) sayfasına bakın.

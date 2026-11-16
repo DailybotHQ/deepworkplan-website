@@ -117,3 +117,7 @@ Jurnal rencana orkestrator mencatat swarm: peluncuran dan hasil lane sebagai eve
 ## Melatihnya
 
 Buktikan loop ini sebelum mengandalkannya. Pada repositori percobaan dengan rencana orkestrator kecil, jalankan satu lead dan setidaknya tiga lane pada akun atau vendor yang berbeda. Batasi kapasitas yang dilaporkan satu lane — `AGENTKIT_CAPACITY_CAP=@<profile>=8` menurunkan pembacaan dan tidak pernah dapat menaikkannya — dan amati lane itu menulis paket, lead meluncurkan penerus yang menerimanya, dan penerus itu lulus gate. Batasi lead dengan cara yang sama dan amati handover serta lead baru menyelesaikan rencana. Lalu catat buktinya di `analysis_results/` milik rencana: tanpa penekanan tombol manusia, setiap paket, setiap epoch, satu ask antar-lane, dan gate-nya.
+
+## Menutup loop eksekusi
+
+Daemon opsional melanjutkan rencana disetujui, mengingatkan tanpa menambah kewenangan, dan meminta penerus terdaftar mengambil alih bila lead hilang. Manusia memulainya; kredensial, login, dan gates C1–C7 tetap ditangani manusia. Lihat [Rekayasa loop](/methodology/08-loop-engineering).

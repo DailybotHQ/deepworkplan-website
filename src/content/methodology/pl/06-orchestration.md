@@ -100,3 +100,7 @@ Plan nadrzędny zamyka się na podstawie dowodów, nie raportów:
 ## Gdy wyczerpie się konto lub prowadzący
 
 Długi przebieg trwa dłużej niż którekolwiek pojedyncze konto. Od coding-agents-kit (`v0.7.1`) i herdr-peers (`v0.3.2`) tor sprawdza własną pojemność na każdej granicy zadania i przekazuje swoją pracę dalej za pomocą pakietu, zanim jego konto się wyczerpie; prowadzący przekazuje przywództwo albo zostaje zastąpiony przez swojego zastępcę, a do dewelopera trafiają tylko kwestie krytyczne. [Autonomia roju](/pl/methodology/07-swarm-autonomy) opisuje pętlę, pakiet, sukcesję i klasy eskalacji.
+
+## Rejestracja planu dla pętli
+
+Z addonem Herdr `execute` przejmuje rekord lead planu i zapisuje następców. Człowiek może uruchomić `herdr-peers autopilot --loop`, aby kontynuować otwarte plany i poprosić wskazanego następcę o przejęcie po zniknięciu lead. Daemon obserwuje tylko zarejestrowane plany. Zobacz [Inżynieria pętli](/methodology/08-loop-engineering).

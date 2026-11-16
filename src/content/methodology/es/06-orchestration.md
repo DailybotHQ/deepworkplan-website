@@ -100,3 +100,7 @@ El plan padre se cierra con evidencia, no con informes:
 ## Cuando una cuenta o el líder se agotan
 
 Una ejecución larga dura más que cualquier cuenta. A partir de coding-agents-kit (`v0.7.1`) y herdr-peers (`v0.3.2`), un carril comprueba su propia capacidad en cada límite entre tareas y traspasa su trabajo mediante un paquete antes de que su cuenta se agote, un líder cede el liderazgo o lo reemplaza su suplente, y solo los elementos críticos llegan al desarrollador. [Autonomía del enjambre](/es/methodology/07-swarm-autonomy) describe el bucle, el paquete, la sucesión y las clases de escalación.
+
+## Registrar un plan para el ciclo
+
+Con Herdr, `execute` del paquete reclama el registro de liderazgo y anota una sucesión. Una persona puede iniciar `herdr-peers autopilot --loop` para continuar planes abiertos y pedir al sucesor indicado que asuma el liderazgo si este desaparece. El daemon solo observa planes registrados; consulta [Ingeniería del ciclo](/methodology/08-loop-engineering).

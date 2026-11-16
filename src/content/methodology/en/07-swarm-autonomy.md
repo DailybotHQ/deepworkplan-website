@@ -117,3 +117,7 @@ The orchestrator plan's journal records the swarm: lane launches and results as 
 ## Drilling it
 
 Prove the loop before relying on it. On a scratch repository with a small orchestrator plan, run a lead and at least three lanes on different accounts or vendors. Cap one lane's reported capacity — `AGENTKIT_CAPACITY_CAP=@<profile>=8` lowers the reading and can never raise it — and watch it write a packet, the lead launch a successor that accepts it, and the successor pass the gate. Cap the lead the same way and watch the handover and the new lead finish the plan. Then record the evidence in the plan's `analysis_results/`: no human keystroke, every packet, every epoch, a lane-to-lane ask, and the gates.
+
+## Closing the execution loop
+
+The optional loop daemon continues an approved plan from its lead record, nudges without adding authority, and asks a listed successor to take over when the lead is gone. A human starts it; credentials, logins, and the plan’s C1–C7 gates remain human actions. See [Loop engineering](/methodology/08-loop-engineering).

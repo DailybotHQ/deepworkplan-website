@@ -100,3 +100,7 @@ Il piano padre si chiude su evidenze, non su resoconti:
 ## Quando un account o il lead si esaurisce
 
 Un’esecuzione lunga sopravvive a qualsiasi singolo account. Da coding-agents-kit (`v0.7.1`) e herdr-peers (`v0.3.2`), una corsia controlla la propria capacità a ogni confine di task e passa il lavoro tramite un pacchetto prima che il suo account si esaurisca, un lead cede la guida o viene sostituito dal suo vice, e solo gli elementi critici arrivano allo sviluppatore. [Autonomia dello sciame](/it/methodology/07-swarm-autonomy) descrive il ciclo, il pacchetto, la successione e le classi di escalation.
+
+## Registrare un piano per il ciclo
+
+Con Herdr, `execute` acquisisce il record di lead e registra i successori. Una persona può avviare `herdr-peers autopilot --loop` per continuare i piani aperti. Il daemon osserva solo piani registrati. Vedi [Ingegneria del ciclo](/methodology/08-loop-engineering).

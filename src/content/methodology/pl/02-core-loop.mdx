@@ -75,3 +75,7 @@ Walidacja jest częścią zadania, a nie czymś doraźnym: każde zadanie wskazu
 Aktualny standard DWP to 7.0.0, wdrażany przez linię skilla 7.x. Ten pakiet domyślnie tworzy każdy nowy plan w v7; jawne żądanie `v6` nadal materializuje plan v6. Istniejące plany v1, v2, v5 i v6 zachowują zapisaną generację i nigdy nie są po cichu migrowane; przeniesienie planu v5 do v6 wymaga wyraźnego polecenia migracji.
 
 v6 zachowuje tę samą metodykę plan → zadania → bramki walidacji → ukończenie, polecenia slash i lokalizację `.dwp/plans/`. Zaostrza strukturę inżynieryjną przez kontrakt, dziennik, manifesty kontekstu zadań, harmonogram i odrzucanie pustej listy dozwolonych możliwości. v7 zachowuje tę warstwę zapisów i dodaje opcjonalny znacznik zadania `parallel_safe`, zdarzenie dziennika `delegation` dla ograniczonej pracy przekazanej innemu agentowi oraz rejestr addonów `.dwp/config.json`; bez włączonego addonu delegowania każdy plan nadal wykonuje się sekwencyjnie w bieżącej sesji. Decyzja architektoniczna to GO; empirycznej niegorszości wyników agentów nie zmierzono.
+
+## Od głównej pętli do zamkniętej
+
+Z addonem Herdr `execute` rejestruje lead i sukcesję, aby uruchomione przez człowieka `herdr-peers autopilot --loop` ponaglało bezczynnego lead, raportowało zdarzenia i prosiło wskazanego następcę o przejęcie, gdy lead zniknie. Daemon zapewnia ciągłość, nie uprawnienia. Zobacz [Inżynieria pętli](/methodology/08-loop-engineering).

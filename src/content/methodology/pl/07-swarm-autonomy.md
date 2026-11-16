@@ -117,3 +117,7 @@ Dziennik planu orkiestratora zapisuje rój: uruchomienia i wyniki torów jako zd
 ## Przećwiczenie
 
 Udowodnij działanie pętli, zanim zaczniesz na niej polegać. Na repozytorium testowym z małym planem orkiestratora uruchom prowadzącego i co najmniej trzy tory na różnych kontach lub u różnych dostawców. Ogranicz zgłaszaną pojemność jednego toru — `AGENTKIT_CAPACITY_CAP=@<profile>=8` obniża odczyt i nigdy nie może go podnieść — i obserwuj, jak tor pisze pakiet, prowadzący uruchamia następcę, który go przyjmuje, a następca zalicza bramkę. Ogranicz w ten sam sposób prowadzącego i obserwuj przekazanie oraz to, jak nowy prowadzący kończy plan. Następnie zapisz dowody w `analysis_results/` planu: brak jakiegokolwiek ludzkiego naciśnięcia klawisza, każdy pakiet, każdą epokę, ask między torami i bramki.
+
+## Zamykanie pętli wykonania
+
+Opcjonalny daemon kontynuuje zatwierdzony plan z rekordu lead, ponagla bez dodawania uprawnień i prosi wskazanego następcę o przejęcie po zniknięciu lead. Uruchamia go człowiek; poświadczenia, logowanie i gates C1–C7 pozostają po stronie człowieka. Zobacz [Inżynieria pętli](/methodology/08-loop-engineering).

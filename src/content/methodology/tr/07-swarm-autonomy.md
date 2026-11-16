@@ -117,3 +117,7 @@ Orkestratör planının günlüğü sürüyü kaydeder: şerit başlatmaları ve
 ## Tatbikat
 
 Döngüye güvenmeden önce onu kanıtlayın. Küçük bir orkestratör planı olan geçici bir depoda, farklı hesaplarda ya da sağlayıcılarda bir lider ve en az üç şerit çalıştırın. Bir şeridin bildirilen kapasitesini sınırlayın — `AGENTKIT_CAPACITY_CAP=@<profile>=8` okumayı düşürür ve asla yükseltemez — ve şeridin bir paket yazmasını, liderin paketi kabul eden bir halef başlatmasını ve halefin kapıyı geçmesini izleyin. Lideri de aynı şekilde sınırlayın ve devri ve yeni liderin planı bitirmesini izleyin. Ardından kanıtı planın `analysis_results/` dizinine kaydedin: hiçbir insan tuş vuruşu olmadığını, her paketi, her epoch'u, şeritten şeride bir soruyu ve kapıları.
+
+## Yürütme döngüsünü kapatma
+
+İsteğe bağlı daemon onaylı planı sürdürür ve yetki eklemeden hatırlatır. Daemon'ı insan başlatır; kimlik bilgileri, oturum açma ve C1–C7 gates insan işidir. [Döngü mühendisliği](/methodology/08-loop-engineering) sayfasına bakın.

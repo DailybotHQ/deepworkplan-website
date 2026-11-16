@@ -100,3 +100,7 @@ icon: network
 ## 当账户或主导者耗尽时
 
 一次长时间的运行会比任何单个账户都持久。自 coding-agents-kit (`v0.7.1`) 和 herdr-peers (`v0.3.2`) 起，通道在每个任务边界检查自己的容量，并在账户耗尽之前通过交接包把工作交出去；主导者会移交主导权，或由其副手接替；只有关键事项才会交给开发者。[集群自主](/zh/methodology/07-swarm-autonomy)描述了这一循环、交接包、继任以及上报类别。
+
+## 为循环注册计划
+
+启用 Herdr 后，pack 的 `execute` 会认领计划 lead 记录并登记继任者。人类可启动 `herdr-peers autopilot --loop` 以继续未完成计划，并在 lead 消失时请已列出的继任者接管。daemon 只观察已注册计划；参见[循环工程](/methodology/08-loop-engineering)。
