@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 O **DeepWorkPlan Vim** é o editor de terminal do Deep Work Plan: uma configuração do Neovim para pessoas, e para agentes de programação, que trabalham num terminal. Os seus planos, a sua documentação e um índice de todos os comandos ficam a uma tecla de distância.
 
-É um produto à parte, oferecido como o addon opcional `vim` do Deep Work Plan v8 (pack `v8.0.0`). O Deep Work Plan funciona com qualquer editor ou com nenhum, e o editor não exige o Deep Work Plan: acrescenta-o a uma máquina por si só, e funciona como editor exista ou não um plano. Esta página descreve a versão **v1.1.0**, uma versão de manutenção da primeira versão estável, `v1.0.0`: a partir da `v1.0.0`, o instalador e as suas opções (com as variáveis `DWP_VIM_*` correspondentes), a superfície do addon (`addon/surface.json`, interface 1), os comandos do editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands` e `:DwpConfig`, as chaves de `dwpvim.json` e os atalhos de teclado fixados pelo contrato de mapeamentos só mudam de forma incompatível numa nova versão principal.
+É um produto à parte, oferecido como o addon opcional `vim` do Deep Work Plan v8 (pack `v8.0.0`). O Deep Work Plan funciona com qualquer editor ou com nenhum, e o editor não exige o Deep Work Plan: acrescenta-o a uma máquina por si só, e funciona como editor exista ou não um plano. Esta página descreve a versão **v1.1.0**, uma versão menor da linha estável que começou com a `v1.0.0`: a partir da `v1.0.0`, o instalador e as suas opções (com as variáveis `DWP_VIM_*` correspondentes), a superfície do addon (`addon/surface.json`, interface 1), os comandos do editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands` e `:DwpConfig`, as chaves de `dwpvim.json` e os atalhos de teclado fixados pelo contrato de mapeamentos só mudam de forma incompatível numa nova versão principal.
 
 O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é o harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o loop; a metodologia funciona por conta própria.
 
@@ -65,6 +65,16 @@ Os planos e a árvore de ficheiros alternam: abrir uma barra lateral fecha a out
 Um plano orquestrador — um líder que coordena frentes em outros repositórios — também ganha uma visão de frentes só de leitura: `:DwpLanes`, ou `L` na barra lateral de planos. Lê as tabelas de frentes do plano e mostra o estado em tempo real de cada frente a partir de `herdr-peers lanes`; sem nenhum Herdr acessível, indica-o e mostra apenas as tabelas. Veja [Executar muitos agentes](/methodology/06-orchestration).
 
 Para ler no local os ficheiros Markdown de um plano, `SPC m p` pré-visualiza o buffer atual no navegador e `SPC m r` renderiza-o dentro do buffer. Ambos funcionam apenas em buffers de Markdown.
+
+## A partir do DeepWorkPlan Vim 1.1.0 (interface 1)
+
+A versão 1.1.0 acrescenta vistas só de leitura e aditivas do que o pack 8.0.0 regista. Cada uma só é apresentada quando os dados existem: um plano v7 é apresentado exatamente como antes, e o editor nunca escreve o estado do plano.
+
+- **A fila de planos.** A barra lateral de planos e o leitor mostram a fila de planos do pack (`.dwp/queue.json`, esquema `dwp-queue-v1`): o lugar de cada plano na fila e o seu estado.
+- **Bloqueios estruturados.** Um plano bloqueado tem um distintivo com a classe do seu bloqueio (C1–C7) e quem o resolve (`resolver: lead` ou `human`; um bloqueio sem resolvedor cabe à pessoa).
+- **Postura de autonomia.** Ao lado do objetivo, o leitor mostra o bloco `autonomy` de um contrato `plan-contract/v8` — orçamento de paragem, cérebro, painéis a que se pode perguntar, destinos de notificação e início da fila — com o valor predefinido registado na especificação aplicado a cada chave ausente.
+
+O seu próprio harness inclui o pack 8.0.0 e o herdr-peers 2.1.0, cada um verificado ficheiro a ficheiro contra o `SHA256SUMS` da respetiva versão.
 
 ## O dashboard
 

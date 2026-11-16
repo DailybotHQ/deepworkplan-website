@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** is the terminal editor for Deep Work Plan: a Neovim configuration for people, and for coding agents, that work in a terminal. Your plans, your documentation and an index of every command are one keystroke away.
 
-It is a separate product, offered as the optional `vim` addon of Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v1.1.0**, a maintenance release of the first stable release, `v1.0.0`: from `v1.0.0` on, the installer and its flags (with the matching `DWP_VIM_*` variables), the addon surface (`addon/surface.json`, interface 1), the editor commands `:DwpPlans`, `:DwpLanes`, `:DwpCommands` and `:DwpConfig`, the `dwpvim.json` keys and the keybindings pinned by the mapping contract change incompatibly only in a new major version.
+It is a separate product, offered as the optional `vim` addon of Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan works with any editor or none, and the editor does not require Deep Work Plan: you add it to a machine on its own, and it works as an editor whether or not a plan exists. This page describes release **v1.1.0**, a minor release of the stable line that began with `v1.0.0`: from `v1.0.0` on, the installer and its flags (with the matching `DWP_VIM_*` variables), the addon surface (`addon/surface.json`, interface 1), the editor commands `:DwpPlans`, `:DwpLanes`, `:DwpCommands` and `:DwpConfig`, the `dwpvim.json` keys and the keybindings pinned by the mapping contract change incompatibly only in a new major version.
 
 Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
 
@@ -65,6 +65,16 @@ Plans and the file tree take turns: opening one sidebar closes the other, so you
 An orchestrator plan — a lead coordinating lanes in other repositories — also gets a read-only lanes view: `:DwpLanes`, or `L` in the plans sidebar. It reads the plan's lane tables and shows each lane's live state from `herdr-peers lanes`; with no Herdr reachable, it says so and shows the tables alone. See [Running many agents](/methodology/06-orchestration).
 
 To read a plan's Markdown files in place, `SPC m p` previews the current buffer in the browser and `SPC m r` renders it inside the buffer. Both work in Markdown buffers only.
+
+## From DeepWorkPlan Vim 1.1.0 (interface 1)
+
+Release 1.1.0 adds read-only, additive views of what pack 8.0.0 records. Each one renders only when the data exists: a v7 plan renders exactly as before, and the editor never writes plan state.
+
+- **The plan queue.** The plan browser and the reader show the pack's plan queue (`.dwp/queue.json`, schema `dwp-queue-v1`): each plan's place in the queue and its state.
+- **Structured blockers.** A blocked plan carries a badge with its blocker class (C1–C7) and who resolves it (`resolver: lead` or `human`; a blocker without a resolver is the human's).
+- **Autonomy posture.** Beside the goal, the reader shows the `autonomy` block of a `plan-contract/v8` contract — stall budget, brain, promptable panes, notify targets and queue start — with the spec's recorded default applied to every absent key.
+
+Its own harness vendors pack 8.0.0 and herdr-peers 2.1.0, each verified file by file against its release `SHA256SUMS`.
 
 ## The dashboard
 

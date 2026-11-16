@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** est l’éditeur de terminal de Deep Work Plan : une configuration Neovim pour les personnes, et pour les agents de programmation, qui travaillent dans un terminal. Vos plans, votre documentation et un index de toutes les commandes sont à une touche de distance.
 
-C’est un produit distinct, proposé comme l’addon optionnel `vim` de Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan fonctionne avec n’importe quel éditeur ou sans éditeur, et l’éditeur n’exige pas Deep Work Plan : vous l’ajoutez à une machine séparément, et il fonctionne comme éditeur qu’un plan existe ou non. Cette page décrit la version **v1.1.0**, une version de maintenance de la première version stable, `v1.0.0` : à partir de `v1.0.0`, l’installateur et ses options (avec les variables `DWP_VIM_*` correspondantes), la surface de l’addon (`addon/surface.json`, interface 1), les commandes de l’éditeur `:DwpPlans`, `:DwpLanes`, `:DwpCommands` et `:DwpConfig`, les clés de `dwpvim.json` et les raccourcis clavier figés par le contrat de mappages ne changent de façon incompatible que dans une nouvelle version majeure.
+C’est un produit distinct, proposé comme l’addon optionnel `vim` de Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan fonctionne avec n’importe quel éditeur ou sans éditeur, et l’éditeur n’exige pas Deep Work Plan : vous l’ajoutez à une machine séparément, et il fonctionne comme éditeur qu’un plan existe ou non. Cette page décrit la version **v1.1.0**, une version mineure de la ligne stable commencée avec `v1.0.0` : à partir de `v1.0.0`, l’installateur et ses options (avec les variables `DWP_VIM_*` correspondantes), la surface de l’addon (`addon/surface.json`, interface 1), les commandes de l’éditeur `:DwpPlans`, `:DwpLanes`, `:DwpCommands` et `:DwpConfig`, les clés de `dwpvim.json` et les raccourcis clavier figés par le contrat de mappages ne changent de façon incompatible que dans une nouvelle version majeure.
 
 Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dépôt est le harness, le loop engineering et l’efficacité mesurée. Les addons et les intégrations peuvent étendre le harness et la boucle ; la méthodologie fonctionne seule.
 
@@ -65,6 +65,16 @@ Les plans et l’arborescence de fichiers se relaient : ouvrir une barre latéra
 Un plan orchestrateur — un coordinateur qui dirige des couloirs dans d’autres dépôts — dispose aussi d’une vue des couloirs en lecture seule : `:DwpLanes`, ou `L` dans la barre latérale des plans. Elle lit les tableaux de couloirs du plan et affiche l’état en direct de chaque couloir depuis `herdr-peers lanes` ; si aucun Herdr n’est joignable, elle le signale et n’affiche que les tableaux. Voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
 
 Pour lire sur place les fichiers Markdown d’un plan, `SPC m p` prévisualise le tampon courant dans le navigateur et `SPC m r` l’affiche dans le tampon. Les deux ne fonctionnent que dans les tampons Markdown.
+
+## À partir de DeepWorkPlan Vim 1.1.0 (interface 1)
+
+La version 1.1.0 ajoute des vues en lecture seule, purement additives, de ce que le pack 8.0.0 enregistre. Chacune ne s’affiche que lorsque les données existent : un plan v7 s’affiche exactement comme avant, et l’éditeur n’écrit jamais l’état du plan.
+
+- **La file des plans.** La barre latérale des plans et le lecteur affichent la file des plans du pack (`.dwp/queue.json`, schéma `dwp-queue-v1`) : la place de chaque plan dans la file et son état.
+- **Blocages structurés.** Un plan bloqué porte un badge indiquant la classe de son blocage (C1–C7) et qui le résout (`resolver: lead` ou `human` ; un blocage sans résolveur revient à la personne).
+- **Posture d’autonomie.** À côté de l’objectif, le lecteur affiche le bloc `autonomy` d’un contrat `plan-contract/v8` — budget de blocage, cerveau, panneaux interrogeables, destinataires des notifications et démarrage de la file — en appliquant à chaque clé absente la valeur par défaut consignée dans la spécification.
+
+Son propre harnais embarque le pack 8.0.0 et herdr-peers 2.1.0, chacun vérifié fichier par fichier par rapport au `SHA256SUMS` de sa version.
 
 ## Le tableau de bord
 

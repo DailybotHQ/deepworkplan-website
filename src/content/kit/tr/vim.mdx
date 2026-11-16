@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim**, Deep Work Plan için terminal düzenleyicisidir: terminalde çalışan insanlar ve kodlama ajanları için bir Neovim yapılandırması. Planlarınız, belgeleriniz ve tüm komutların dizini tek bir tuş uzağınızda.
 
-Ayrı bir üründür ve Deep Work Plan v8'nin (pack `v8.0.0`) isteğe bağlı `vim` eklentisi olarak sunulur. Deep Work Plan herhangi bir düzenleyiciyle ya da hiçbiriyle çalışır; düzenleyici de Deep Work Plan gerektirmez: bir makineye tek başına eklersiniz ve plan olsun ya da olmasın düzenleyici olarak çalışır. Bu sayfa, ilk kararlı sürüm `v1.0.0` için bir bakım sürümü olan **v1.1.0** sürümünü anlatır: `v1.0.0` sürümünden itibaren kurulum programı ve bayrakları (karşılık gelen `DWP_VIM_*` değişkenleriyle), eklenti yüzeyi (`addon/surface.json`, arayüz 1), `:DwpPlans`, `:DwpLanes`, `:DwpCommands` ve `:DwpConfig` düzenleyici komutları, `dwpvim.json` anahtarları ve eşleme sözleşmesinin sabitlediği tuş atamaları yalnızca yeni bir ana sürümde uyumsuz biçimde değişir.
+Ayrı bir üründür ve Deep Work Plan v8'nin (pack `v8.0.0`) isteğe bağlı `vim` eklentisi olarak sunulur. Deep Work Plan herhangi bir düzenleyiciyle ya da hiçbiriyle çalışır; düzenleyici de Deep Work Plan gerektirmez: bir makineye tek başına eklersiniz ve plan olsun ya da olmasın düzenleyici olarak çalışır. Bu sayfa, `v1.0.0` ile başlayan kararlı serinin bir ara (minor) sürümü olan **v1.1.0** sürümünü anlatır: `v1.0.0` sürümünden itibaren kurulum programı ve bayrakları (karşılık gelen `DWP_VIM_*` değişkenleriyle), eklenti yüzeyi (`addon/surface.json`, arayüz 1), `:DwpPlans`, `:DwpLanes`, `:DwpCommands` ve `:DwpConfig` düzenleyici komutları, `dwpvim.json` anahtarları ve eşleme sözleşmesinin sabitlediği tuş atamaları yalnızca yeni bir ana sürümde uyumsuz biçimde değişir.
 
 Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
@@ -65,6 +65,16 @@ Planlar ve dosya ağacı sırayla açılır: bir kenar çubuğunu açmak diğeri
 Bir orkestratör planı — diğer depolardaki şeritleri koordine eden bir lider — ayrıca salt okunur bir şeritler görünümü de alır: `:DwpLanes` ya da plan kenar çubuğunda `L`. Planın şerit tablolarını okur ve her şeridin canlı durumunu `herdr-peers lanes` üzerinden gösterir; erişilebilir bir Herdr yoksa bunu belirtir ve yalnızca tabloları gösterir. Bkz. [Birçok ajanı çalıştırmak](/methodology/06-orchestration).
 
 Bir planın Markdown dosyalarını yerinde okumak için `SPC m p` geçerli arabelleği tarayıcıda önizler, `SPC m r` ise arabellek içinde işler. İkisi de yalnızca Markdown arabelleklerinde çalışır.
+
+## DeepWorkPlan Vim 1.1.0'dan itibaren (arayüz 1)
+
+1.1.0 sürümü, 8.0.0 paketinin kaydettiklerine salt okunur, eklemeli görünümler ekler. Her biri yalnızca veri mevcut olduğunda görüntülenir: bir v7 planı tam olarak önceki gibi görüntülenir ve düzenleyici plan durumuna asla yazmaz.
+
+- **Plan kuyruğu.** Plan kenar çubuğu ve okuyucu, paketin plan kuyruğunu (`.dwp/queue.json`, şema `dwp-queue-v1`) gösterir: her planın kuyruktaki yeri ve durumu.
+- **Yapılandırılmış engeller.** Engellenmiş bir plan, engel sınıfını (C1–C7) ve engeli kimin çözeceğini (`resolver: lead` ya da `human`; çözücüsü belirtilmemiş bir engel insana aittir) gösteren bir rozet taşır.
+- **Özerklik duruşu.** Okuyucu, hedefin yanında bir `plan-contract/v8` sözleşmesinin `autonomy` bloğunu gösterir — durma bütçesi, beyin, istem gönderilebilen paneller, bildirim hedefleri ve kuyruk başlangıcı — ve eksik her anahtara spesifikasyonda kayıtlı varsayılanı uygular.
+
+Ürünün kendi harness’i 8.0.0 paketini ve herdr-peers 2.1.0 sürümünü vendor olarak içerir; her biri kendi sürümünün `SHA256SUMS` dosyasına karşı dosya dosya doğrulanmıştır.
 
 ## Başlangıç panosu
 

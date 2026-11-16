@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
 
-Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v1.1.0**, rilis pemeliharaan dari rilis stabil pertama, `v1.0.0`: sejak `v1.0.0`, pemasang beserta flag-nya (dengan variabel `DWP_VIM_*` yang sesuai), permukaan addon (`addon/surface.json`, antarmuka 1), perintah editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands`, dan `:DwpConfig`, kunci `dwpvim.json`, serta keybinding yang dipatok oleh kontrak pemetaan hanya berubah secara tidak kompatibel pada versi mayor baru.
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v1.1.0**, rilis minor dari lini stabil yang dimulai dengan `v1.0.0`: sejak `v1.0.0`, pemasang beserta flag-nya (dengan variabel `DWP_VIM_*` yang sesuai), permukaan addon (`addon/surface.json`, antarmuka 1), perintah editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands`, dan `:DwpConfig`, kunci `dwpvim.json`, serta keybinding yang dipatok oleh kontrak pemetaan hanya berubah secara tidak kompatibel pada versi mayor baru.
 
 Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
@@ -65,6 +65,16 @@ Rencana dan pohon berkas bergantian: membuka satu bilah samping menutup yang lai
 Rencana orkestrator — lead yang mengoordinasikan lane di repositori lain — juga mendapat tampilan lane hanya-baca: `:DwpLanes`, atau `L` di bilah samping rencana. Tampilan ini membaca tabel lane rencana dan menampilkan status langsung setiap lane dari `herdr-peers lanes`; bila tidak ada Herdr yang dapat dijangkau, ia menyatakannya dan hanya menampilkan tabel. Lihat [Menjalankan banyak agent](/methodology/06-orchestration).
 
 Untuk membaca berkas Markdown sebuah rencana di tempat, `SPC m p` mempratinjau buffer saat ini di peramban dan `SPC m r` merendernya di dalam buffer. Keduanya hanya berfungsi di buffer Markdown.
+
+## Sejak DeepWorkPlan Vim 1.1.0 (antarmuka 1)
+
+Rilis 1.1.0 menambahkan tampilan hanya-baca yang bersifat aditif atas apa yang dicatat oleh pack 8.0.0. Masing-masing hanya dirender bila datanya ada: rencana v7 dirender persis seperti sebelumnya, dan editor tidak pernah menulis status rencana.
+
+- **Antrean rencana.** Bilah samping rencana dan pembaca menampilkan antrean rencana milik pack (`.dwp/queue.json`, skema `dwp-queue-v1`): posisi setiap rencana dalam antrean beserta statusnya.
+- **Blocker terstruktur.** Rencana yang terblokir membawa lencana berisi kelas blocker-nya (C1–C7) dan siapa yang menyelesaikannya (`resolver: lead` atau `human`; blocker tanpa resolver menjadi tanggung jawab manusia).
+- **Postur otonomi.** Di samping tujuan, pembaca menampilkan blok `autonomy` dari kontrak `plan-contract/v8` — anggaran stall, brain, panel yang dapat menerima prompt, target notifikasi, dan awal antrean — dengan nilai default yang tercatat di spesifikasi diterapkan pada setiap kunci yang tidak ada.
+
+Harness milik editor ini sendiri mem-vendor pack 8.0.0 dan herdr-peers 2.1.0, masing-masing diverifikasi berkas demi berkas terhadap `SHA256SUMS` rilisnya.
 
 ## Dasbor
 

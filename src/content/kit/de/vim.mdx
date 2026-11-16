@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** ist der Terminal-Editor für Deep Work Plan: eine Neovim-Konfiguration für Menschen und für Coding-Agenten, die im Terminal arbeiten. Ihre Pläne, Ihre Dokumentation und ein Index aller Befehle sind einen Tastendruck entfernt.
 
-Es ist ein eigenständiges Produkt, angeboten als optionales `vim`-Addon von Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan funktioniert mit jedem Editor oder ganz ohne, und der Editor setzt Deep Work Plan nicht voraus: Sie fügen ihn einer Maschine separat hinzu, und er funktioniert als Editor, ob ein Plan existiert oder nicht. Diese Seite beschreibt Release **v1.1.0**, ein Wartungsrelease des ersten stabilen Release `v1.0.0`: Ab `v1.0.0` ändern sich der Installer und seine Flags (mit den passenden `DWP_VIM_*`-Variablen), die Addon-Oberfläche (`addon/surface.json`, Schnittstelle 1), die Editor-Befehle `:DwpPlans`, `:DwpLanes`, `:DwpCommands` und `:DwpConfig`, die Schlüssel von `dwpvim.json` und die vom Mapping-Vertrag festgelegten Tastenbelegungen inkompatibel nur in einer neuen Major-Version.
+Es ist ein eigenständiges Produkt, angeboten als optionales `vim`-Addon von Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan funktioniert mit jedem Editor oder ganz ohne, und der Editor setzt Deep Work Plan nicht voraus: Sie fügen ihn einer Maschine separat hinzu, und er funktioniert als Editor, ob ein Plan existiert oder nicht. Diese Seite beschreibt Release **v1.1.0**, ein Minor-Release der stabilen Linie, die mit `v1.0.0` begann: Ab `v1.0.0` ändern sich der Installer und seine Flags (mit den passenden `DWP_VIM_*`-Variablen), die Addon-Oberfläche (`addon/surface.json`, Schnittstelle 1), die Editor-Befehle `:DwpPlans`, `:DwpLanes`, `:DwpCommands` und `:DwpConfig`, die Schlüssel von `dwpvim.json` und die vom Mapping-Vertrag festgelegten Tastenbelegungen inkompatibel nur in einer neuen Major-Version.
 
 Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
@@ -65,6 +65,16 @@ Pläne und Dateibaum wechseln sich ab: Das Öffnen der einen Seitenleiste schlie
 Ein Orchestrator-Plan — ein Lead, der Lanes in anderen Repositorys koordiniert — erhält zusätzlich eine schreibgeschützte Lanes-Ansicht: `:DwpLanes` oder `L` in der Plan-Seitenleiste. Sie liest die Lane-Tabellen des Plans und zeigt den Live-Zustand jeder Lane aus `herdr-peers lanes`; ist kein Herdr erreichbar, sagt sie das und zeigt nur die Tabellen. Siehe [Viele Agenten betreiben](/methodology/06-orchestration).
 
 Um die Markdown-Dateien eines Plans an Ort und Stelle zu lesen, zeigt `SPC m p` den aktuellen Puffer im Browser an und `SPC m r` rendert ihn im Puffer. Beides funktioniert nur in Markdown-Puffern.
+
+## Ab DeepWorkPlan Vim 1.1.0 (Schnittstelle 1)
+
+Release 1.1.0 ergänzt schreibgeschützte, additive Ansichten dessen, was Pack 8.0.0 aufzeichnet. Jede erscheint nur, wenn die Daten vorhanden sind: Ein v7-Plan wird genau wie bisher dargestellt, und der Editor schreibt nie Planzustand.
+
+- **Die Plan-Warteschlange.** Die Plan-Seitenleiste und der Reader zeigen die Plan-Warteschlange des Packs (`.dwp/queue.json`, Schema `dwp-queue-v1`): den Platz jedes Plans in der Warteschlange und seinen Zustand.
+- **Strukturierte Blocker.** Ein blockierter Plan trägt ein Badge mit seiner Blocker-Klasse (C1–C7) und der Angabe, wer ihn auflöst (`resolver: lead` oder `human`; ein Blocker ohne Resolver gehört dem Menschen).
+- **Autonomie-Haltung.** Neben dem Ziel zeigt der Reader den `autonomy`-Block eines `plan-contract/v8`-Vertrags — Stillstandsbudget, Brain, ansprechbare Panes, Benachrichtigungsziele und Start der Warteschlange —, wobei für jeden fehlenden Schlüssel der in der Spezifikation festgehaltene Standardwert gilt.
+
+Sein eigenes Harness vendort Pack 8.0.0 und herdr-peers 2.1.0, jeweils Datei für Datei gegen die `SHA256SUMS` des jeweiligen Release verifiziert.
 
 ## Das Dashboard
 
