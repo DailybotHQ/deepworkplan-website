@@ -30,6 +30,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
   - label: "Skill release v7.10.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
+  - label: "Skill release v7.11.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
+  - label: "Skill release v7.12.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7은 v6의 방식을 유지합니다. 계약이 권한의 근거이고, 추가 전용 저널이 기억이며, 스케줄러가 다음에 실행할 작업을 정하고, 기록된 증거가 작업의 기준을 충족할 때만 작업이 종료됩니다. v7은 위임 기능을 더하면서 그 결과에 대해서도 같은 규율을 유지합니다.
@@ -56,4 +62,10 @@ v7은 오케스트레이션과 감사 가능성에서의 큰 진전이지만, �
 
 릴리스 7.10.2(2026-11-15)는 오늘의 릴리스에 맞춰 에코시스템 고정을 옮깁니다. Herdr 애드온은 herdr-peers v1.2.2로, 수정만 있는 패치로 이 버전의 autopilot은 선택지 옆에 미리보기가 표시된 질문에 답하고 스페인어·프랑스어·독일어·이탈리아어의 추천 표식을 인식합니다. agentkit은 coding-agents-kit v1.2.0으로, 이 버전의 `ak last`는 임의 터미널에서 작업 디렉터리의 최신 세션을 이어가고 Herdr 패인 안의 실행은 Herdr 재시작이나 재부팅 후 패인을 복원합니다. devcontainer-kit은 v1.1.2로, deepworkplan-vim은 v1.0.1 유지. 릴리스 워크플로는 이제 일시적 거절을 흡수하기 위해 릴리스 태그 푸시를 재시도합니다.
 
-설치된 skill 릴리스: **7.10.2**, 7.0.0 이후 안정적입니다.
+릴리스 7.11.0(2026-11-16)은 개발자의 v7 강화 시리즈를 착지시킵니다. 내구성 용어집과 가시적 제어 규칙이 가이드에 들어가고, `verify`는 완료된 플랜의 읽기 전용 준수 감사를 얻으며, 팩 문서는 내구성과 토큰 주장을 정확히 서술하고, README 태그라인은 이해 테스트의 승자로 교체되며, 라이브 create 경로는 Lite 번들을 명령 예산 안에 유지합니다.
+
+릴리스 7.12.0(2026-11-16)은 플랜을 herdr-peers 루프에 등록합니다. 플랜은 후계자 목록과 함께 리드를 청구하므로 `autopilot --loop`와 플릿 UI가 열린 모든 플랜을 보고 끝까지 계속 실행하며, Dailybot 통지기가 마일스톤을 보고합니다. 애드온 디스크립터는 herdr-peers v1.3.1과 coding-agents-kit v1.3.0으로 이동합니다
+
+릴리스 7.12.1(2026-11-16)은 Herdr 애드온의 Dailybot 통지기를 수정합니다. 이제 herdr-peers가 내보내는 `herdr-peers/plan-event-v1` 이벤트 이름을 받아들이고, 통지기의 stdin을 64 KiB로 제한하며, `plan_lead_moved`를 매핑합니다. 애드온 디스크립터는 coding-agents-kit v1.4.0으로 이동하고, 이 버전의 `ak update`는 사람이 직접 호출하는 것으로만 문서화되어 있습니다.
+
+설치된 skill 릴리스: **7.12.1**, 7.0.0 이후 안정적입니다.

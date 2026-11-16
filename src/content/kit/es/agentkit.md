@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tiene sus propias opciones para continuar una sesión, su propia forma de mantener separada una segunda cuenta, su propio modo sin interfaz y su propio interruptor para omitir las solicitudes de permiso. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** pone una sola superficie de comandos sobre todos ellos: `ak <kind> [@profile]`.
 
-Este addon integra el kit en **DWP v7** (pack `v7.10.2`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
+Este addon integra el kit en **DWP v7** (pack `v7.12.1`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
 
 ## Qué te da el kit
 
@@ -65,15 +65,15 @@ El trabajo se mueve solo entre las cuentas que declaraste para el plan, dentro d
 ## Instalación
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v1.3.0`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
+Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v1.4.0`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, interfaz 1 |
+| Producto | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, interfaz 1 |
 | Clave de registro | `agentkit` en `.dwp/config.json` |
 | Transporte | sin interfaz: un `ak run` por delegado en un worktree de git dedicado |
 | Proporciona | `subagents`, `cancel_children`, `model_routing` |
@@ -84,6 +84,8 @@ Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Win
 La versión 1.2.0 añade **`ak last`**: cada lanzamiento interactivo registra su kind y perfil por directorio de trabajo; `ak last` lo relanza con `-c` (continúa la sesión más reciente allí) en cualquier terminal, `ak last -r` abre el selector del CLI en esa cuenta, y `ak last ls` muestra el registro. Un lanzamiento dentro de un panel de Herdr también sobrevive a un reinicio de Herdr o del equipo: el panel vuelve a través de `ak --resume` en la misma cuenta, con su clave del fichero de entorno y su postura de permisos intacta (`AGENTKIT_HERDR_RESUME=0` lo desactiva).
 
 La versión 1.3.0 del kit (interfaz 1 sin cambios) añade **pick-v2**: `ak pick --kinds codex,claude` ordena entre kinds, `--model-for KIND=NAME` sobrescribe el modelo por kind, y `--json` devuelve el contrato de lanzamiento — `launch.argv` con `launch.permissions` (`auto` o `ask`) y una forma `qualifies: false`. `--model` pasa a ser un flag principal mapeado al flag propio de cada CLI (codex `-m`) — un cambio de comportamiento para los scripts que pasaban `--model` a través.
+
+La versión 1.4.0 del kit (interfaz 1 sin cambios) añade **`ak update`**, de invocación solo humana: lleva un CLI a la versión más reciente del proveedor con la verificación de `ak install` — descubre, verifica, instala y vuelve a fijar el `providers.toml` de este kit de forma atómica (se conserva un `.bak`). `--take-over` sustituye un symlink gestionado por el proveedor, las bajadas de versión se rechazan salvo que se nombren, y la actualización solo cuenta cuando el PATH resuelve la nueva versión.
 
 ## Autonomía por defecto, con una exclusión que siempre prevalece
 

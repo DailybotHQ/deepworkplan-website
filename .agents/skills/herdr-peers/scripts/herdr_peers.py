@@ -32,7 +32,7 @@ import subprocess
 import sys
 import time
 
-VERSION = '1.3.0'
+VERSION = '1.3.1'
 PROTOCOL = 1
 MARKER = '[herdr-peers]'
 DEFAULT_MAX_BYTES = 16384
@@ -3038,9 +3038,20 @@ NOTIFY_ENV = ('PATH', 'HOME', 'USER', 'LOGNAME', 'LANG', 'LC_ALL', 'LC_CTYPE', '
               'XDG_CONFIG_HOME', 'XDG_DATA_HOME', 'XDG_STATE_HOME', 'XDG_CACHE_HOME')
 
 
+def notify_budget():
+    """Seconds all notify commands of one pass may take together
+    (HERDR_PEERS_AUTOPILOT_NOTIFY_BUDGET, 1-120, default 20). One event's own
+    timeout never widens it."""
+    try:
+        value = float(os.environ.get('HERDR_PEERS_AUTOPILOT_NOTIFY_BUDGET') or NOTIFY_BUDGET)
+    except ValueError:
+        return NOTIFY_BUDGET
+    return value if 1 <= value <= 120 else NOTIFY_BUDGET
+
+
 def notify_timeout():
-    """Seconds one notify command may take, and the notify budget of a pass
-    (HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT, 1-60, default 20)."""
+    """Seconds one notify command may take (HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT,
+    1-60, default 20); always within what is left of the pass budget."""
     try:
         value = float(os.environ.get('HERDR_PEERS_AUTOPILOT_NOTIFY_TIMEOUT') or NOTIFY_TIMEOUT)
     except ValueError:
@@ -3283,7 +3294,7 @@ class AutopilotIO(object):
         (NOTIFY_BUDGET seconds in all); what does not fit waits for the next
         pass. Each run is its own process group, killed whole on timeout, with
         a minimal environment."""
-        deadline = time.time() + notify_timeout()
+        deadline = time.time() + notify_budget()
         while self.notify_queue and self.notify:
             left = deadline - time.time()
             if left <= 0.5:

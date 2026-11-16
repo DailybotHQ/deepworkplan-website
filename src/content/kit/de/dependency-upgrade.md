@@ -32,7 +32,7 @@ Die Abhängigkeiten eines Repositorys mit einem chargenweisen, validierten, rüc
 | Registrierungsschlüssel | `dependency-upgrade` in `.dwp/config.json` |
 | Deskriptor | `addons/dependency-upgrade/addon.json` (Schnittstelle 1) |
 | Befehl | `/lib-upgrade` installiert in `.agents/commands/` bei Annahme |
-| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v7.10.2`) |
+| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v7.12.1`) |
 ## Hinweise
 
 Paketmanager-agnostisch — führt niemals npm/ncu in einem Nicht-JS-Repository aus. Opt-in, nie erforderlich, und committet niemals automatisch.

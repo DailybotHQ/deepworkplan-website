@@ -50,6 +50,20 @@ to its own server and reply into an unrelated pane. A caller that cannot name
 an address the delegate can reach MUST NOT send an ask (it would promise a
 reply route that does not exist).
 
+**One pane, two addresses.** When the receiver's own server is also saved as
+a Herdr machine, a pane on it has two addresses: `local:<pane>` and
+`<that machine id>:<pane>` (*the server's own saved id*). They are
+**aliases**: an implementation MUST treat them as the same peer wherever it
+compares a peer's address (rule 7, the reply's `from=` against the asked
+peer). The alias holds only when the pane parts are equal and one side is
+`local` while the other is this server's own saved id — learnt from
+`HERDR_PEERS_SELF`, a cached self probe, or a fresh probe that finds this very
+terminal on that saved machine. A pane on **any other** machine is never an
+alias, even with the same pane id. A delegate replying to an asker on its own
+server signs `local:` (as it recorded the ask); it uses its saved id only
+toward an asker on another machine, which needs it to route the reply. The
+helper scope's fixtures cover both directions and the refusals.
+
 ## 3. Grammar
 
 ```
@@ -156,7 +170,7 @@ are evaluated in order; the first match decides.
 | 4 | The marker appears more than once, or not at the start of a line (leading spaces allowed). | **never** — invalid (stamp smuggling). |
 | 5 | `protocol` is not `1`. | **never** — unsupported protocol. |
 | 6 | Unknown, duplicated or missing keys, or a malformed value. | **never** — invalid. |
-| 7 | The stamp carries `reply-to=`. | **never** — it is a reply. If its `from=` address matches the asked peer, record it (§6), then use it as data; otherwise ignore it as a conflicting or captured reply. |
+| 7 | The stamp carries `reply-to=`. | **never** — it is a reply. If its `from=` address matches the asked peer — equal, or its alias on this server (§2, *one pane, two addresses*) — record it (§6), then use it as data; otherwise ignore it as a conflicting or captured reply. |
 | 8 | `depth` is 1 or more. | **never** — depth limit (a delegate never delegates). |
 | 9 | `reply` is neither `yes` nor `no`. | **never** — no grant. |
 | 10 | `from` is your own address. | **never** — self-loop. |

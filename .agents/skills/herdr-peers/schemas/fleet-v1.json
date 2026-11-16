@@ -1,0 +1,449 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "herdr-peers/fleet-v1",
+  "title": "herdr-peers fleet map (fleet-v1)",
+  "description": "What `herdr-peers fleet --json` prints: the map the autopilot loop keeps of every enabled machine, its agents, their repositories and the plans with a lead record, merged from each machine's plans-v1 report and Herdr's agent listing. The daemon writes it to <state root>/herdr-peers/fleet.json on its own machine and leaves a copy on every machine it collects a report from. Pane addresses inside a machine entry are as that machine names them (`local:` is that machine). `age_seconds` and `stale` are added by the reader. Never carries screen text, file content, prompt text or secrets. The daemon's own copy carries each open plan's detail; the copies it leaves on other machines carry per plan its identity, class, blocker class, progress digest, task counts, current task, addresses, epoch, update time and repository root, never its detail (detail is null), and no agent session title or working directory. Every free-text field is cleaned and token shapes are redacted before it is written.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "generated_at",
+    "daemon",
+    "machines"
+  ],
+  "properties": {
+    "schema": {
+      "const": "herdr-peers/fleet-v1"
+    },
+    "generated_at": {
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+      "description": "When the map last changed."
+    },
+    "age_seconds": {
+      "type": "integer",
+      "description": "Seconds since the daemon last confirmed this machine's copy."
+    },
+    "stale": {
+      "type": "boolean",
+      "description": "True when no autopilot loop has synced this machine for 15 minutes."
+    },
+    "daemon": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "pane",
+        "local_is",
+        "server"
+      ],
+      "properties": {
+        "pane": {
+          "type": "string",
+          "description": "The daemon's pane on its own machine."
+        },
+        "local_is": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "The saved-machine id of the daemon's machine, when it knows it: the entry `local` below is that machine."
+        },
+        "server": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "A digest naming the daemon's Herdr server, so a reader can tell whether it runs on the daemon's own server."
+        }
+      }
+    },
+    "machines": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "machine",
+          "label",
+          "agents_state",
+          "plans_state",
+          "agents",
+          "plans"
+        ],
+        "properties": {
+          "machine": {
+            "type": "string",
+            "description": "`local` (the daemon's machine) or a saved-machine id."
+          },
+          "label": {
+            "type": [
+              "string",
+              "null"
+            ]
+          },
+          "agents_state": {
+            "enum": [
+              "ok",
+              "unknown"
+            ],
+            "description": "`unknown`: the machine did not answer the last listing."
+          },
+          "plans_state": {
+            "enum": [
+              "ok",
+              "unknown",
+              "unsupported",
+              "bad_target"
+            ],
+            "description": "The last plans report: `unsupported` = no python3 there; `bad_target` = a saved target the daemon will not pass to ssh."
+          },
+          "agents": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "pane",
+                "kind",
+                "state",
+                "cwd",
+                "repo_root",
+                "branch",
+                "plans",
+                "title",
+                "state_since"
+              ],
+              "properties": {
+                "pane": {
+                  "type": "string",
+                  "pattern": "^[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}$"
+                },
+                "kind": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "state": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "cwd": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "repo_root": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^/.{0,4095}$"
+                },
+                "branch": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "plans": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "plan",
+                      "role"
+                    ],
+                    "properties": {
+                      "plan": {
+                        "type": "string",
+                        "pattern": "^(?=.{1,128}$)[A-Za-z0-9][A-Za-z0-9._-]*(?:/[A-Za-z0-9][A-Za-z0-9._-]*)*$"
+                      },
+                      "role": {
+                        "enum": [
+                          "lead",
+                          "successor",
+                          "lane"
+                        ]
+                      }
+                    }
+                  }
+                },
+                "title": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "The agent's session title as Herdr reports it: single line, at most 120 characters."
+                },
+                "state_since": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+                  "description": "When the daemon saw the agent's state last change; null until known."
+                }
+              }
+            }
+          },
+          "plans": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "plan",
+                "class",
+                "lead",
+                "epoch",
+                "succession",
+                "lanes",
+                "repo_root",
+                "blocker_class",
+                "situation",
+                "tasks_done",
+                "tasks_total",
+                "current_task",
+                "detail",
+                "progress",
+                "updated_at"
+              ],
+              "properties": {
+                "plan": {
+                  "type": "string",
+                  "pattern": "^(?=.{1,128}$)[A-Za-z0-9][A-Za-z0-9._-]*(?:/[A-Za-z0-9][A-Za-z0-9._-]*)*$"
+                },
+                "class": {
+                  "enum": [
+                    "open",
+                    "blocked",
+                    "completed",
+                    "unreadable"
+                  ]
+                },
+                "lead": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^(local|[A-Za-z0-9._-]{1,64}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}$"
+                },
+                "epoch": {
+                  "type": "integer"
+                },
+                "succession": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(local|[A-Za-z0-9._-]{1,64}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}$"
+                  }
+                },
+                "lanes": {
+                  "type": "array",
+                  "items": {
+                    "type": "string",
+                    "pattern": "^(local|[A-Za-z0-9._-]{1,64}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}$"
+                  }
+                },
+                "repo_root": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^/.{0,4095}$"
+                },
+                "blocker_class": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^C[1-7]$"
+                },
+                "situation": {
+                  "enum": [
+                    "plan_stalled",
+                    "plan_blocked",
+                    "plan_no_lead",
+                    "plan_lead_moved",
+                    "plan_completed",
+                    null
+                  ],
+                  "description": "What the loop last concluded about it; null while it runs normally."
+                },
+                "tasks_done": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ],
+                  "description": "Tasks completed or skipped; null when the state is unreadable."
+                },
+                "tasks_total": {
+                  "type": [
+                    "integer",
+                    "null"
+                  ]
+                },
+                "current_task": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "additionalProperties": false,
+                  "required": [
+                    "id",
+                    "title"
+                  ],
+                  "properties": {
+                    "id": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "Single line, at most 120 characters."
+                    }
+                  },
+                  "description": "The first task in progress, else blocked, else pending; null when every task is settled or the state is unreadable."
+                },
+                "detail": {
+                  "type": [
+                    "object",
+                    "null"
+                  ],
+                  "additionalProperties": false,
+                  "required": [
+                    "title",
+                    "tasks",
+                    "tasks_from",
+                    "blocker",
+                    "summary",
+                    "summary_at"
+                  ],
+                  "description": "Present for open and blocked plans (null otherwise): what a reader needs to follow the plan without asking its agents. Text is single-line, cleaned and cut; it is the plan's own words, shown as data.",
+                  "properties": {
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "description": "From the plan's contract or manifest."
+                    },
+                    "tasks": {
+                      "type": "array",
+                      "description": "At most 64, in plan order, starting at tasks_from.",
+                      "items": {
+                        "type": "object",
+                        "additionalProperties": false,
+                        "required": [
+                          "id",
+                          "title",
+                          "status"
+                        ],
+                        "properties": {
+                          "id": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "title": {
+                            "type": [
+                              "string",
+                              "null"
+                            ]
+                          },
+                          "status": {
+                            "enum": [
+                              "pending",
+                              "in_progress",
+                              "completed",
+                              "blocked",
+                              "skipped",
+                              null
+                            ]
+                          }
+                        }
+                      }
+                    },
+                    "blocker": {
+                      "type": [
+                        "object",
+                        "null"
+                      ],
+                      "additionalProperties": false,
+                      "required": [
+                        "reason",
+                        "needs"
+                      ],
+                      "properties": {
+                        "reason": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        },
+                        "needs": {
+                          "type": [
+                            "string",
+                            "null"
+                          ]
+                        }
+                      }
+                    },
+                    "summary": {
+                      "type": [
+                        "array",
+                        "null"
+                      ],
+                      "items": {
+                        "type": "string"
+                      },
+                      "description": "Up to 14 lines of the plan's PROGRESS.md (goal, active task, next action, blockers), as its agents wrote them."
+                    },
+                    "summary_at": {
+                      "type": [
+                        "string",
+                        "null"
+                      ],
+                      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}Z$",
+                      "description": "When PROGRESS.md was last written."
+                    },
+                    "tasks_from": {
+                      "type": "integer",
+                      "description": "Index of the first listed task: a plan with more than 64 tasks is shown as a window around its current task."
+                    }
+                  }
+                },
+                "progress": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "pattern": "^[0-9a-f]{16}$",
+                  "description": "The plan's progress digest (changes only when the plan advances)."
+                },
+                "updated_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "When its lead record was last written."
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

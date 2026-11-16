@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer (перший аддон)
 
-Тонкий інтегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закріплено на `v1.1.2`, інтерфейс `2`): шаблон Dev Containers, який `dck init` розгортає в репозиторії як його власний контейнер, а також скіл `dck-dockerfile`.
+Тонкий інтегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закріплено на `v1.2.0`, інтерфейс `2`): шаблон Dev Containers, який `dck init` розгортає в репозиторії як його власний контейнер, а також скіл `dck-dockerfile`.
 
 - **Сторінка kit:** [Devcontainer](/kit/devcontainer)
 - **Що додає:** `docker/local/<service>/Dockerfile` на основі офіційного образу середовища виконання, закріпленого за digest (`python-3.13`, `node-24` або `debian`, без спільного базового образу), `dev.sh` поверх лаунчера `dck` (`up`, `shell`, `rebuild`, `doctor`), агентів для програмування як шар, який вмикається за бажанням, порти лише на loopback, git через SSH за допомогою агента хоста без жодного ключа всередині, якщо тільки розробник сам не ввімкне `[ssh] copy_keys` у своєму профілі хоста, та машини Herdr для кожного контейнера зі стандартним розкладом
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr (шостий аддон)
 
-Тонкий інтегратор [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закріплено на `v1.3.0`, протокол `1`), **інтерактивний** транспорт делегування для планів v7.
+Тонкий інтегратор [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (закріплено на `v1.3.1`, протокол `1`), **інтерактивний** транспорт делегування для планів v7.
 
 - **Сторінка kit:** [Herdr](/kit/herdr)
 - **Що додає:** план може передати обмежене завдання агенту для програмування в іншій панелі [Herdr](https://herdr.dev) — на тій самій машині або на машині, до якої Herdr дістається через SSH, — і записати в журнал його єдину авторизовану відповідь
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit (восьмий аддон)
 
-Тонкий інтегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено на `v1.3.0`, інтерфейс `1`), **headless**-транспорт делегування для планів v7.
+Тонкий інтегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено на `v1.4.0`, інтерфейс `1`), **headless**-транспорт делегування для планів v7.
 
 - **Сторінка kit:** [Agentkit](/kit/agentkit)
 - **Що додає:** єдину поверхню команд `ak` над термінальними агентами для програмування, через яку обмежене завдання плану виконується в режимі headless; можливості `subagents`, `cancel_children` і `model_routing` він надає лише під час виконання — коли його ввімкнено, виявлено й інтерфейс сумісний

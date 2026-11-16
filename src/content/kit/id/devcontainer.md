@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.10.2`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
+Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.12.1`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
 ## Yang disediakan devcontainer-kit
 
@@ -21,20 +21,20 @@ Berikan repositori sebuah dev container yang reproducible dan terisolasi — yan
 ## Instalasi
 
 ```bash
-git clone --branch v1.1.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.1.2`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.2.0`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.1.2`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.2.0`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
 
-**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin baru (herdr-peers 1.2.1, coding-agents-kit 1.1.0, dan DeepWorkPlan Vim 1.0.1).
+**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin baru (herdr-peers 1.3.1, coding-agents-kit 1.4.0, dan DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image).
 
 ## Lapisan
 

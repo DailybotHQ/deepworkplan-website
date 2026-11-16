@@ -30,6 +30,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
   - label: "Skill release v7.10.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
+  - label: "Skill release v7.11.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
+  - label: "Skill release v7.12.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7 mempertahankan metode v6: kontrak adalah otoritas, jurnal append-only adalah memori, penjadwal menentukan apa yang berjalan berikutnya, dan sebuah tugas baru ditutup ketika bukti yang tercatat memenuhi kriterianya. v7 menambahkan kemampuan mendelegasikan dan menjaga disiplin yang sama terhadap hasilnya.
@@ -56,4 +62,10 @@ Rilis 7.10.1 (2026-11-15) mematok addon Herdr ke herdr-peers v1.2.1, yang lini 1
 
 Rilis 7.10.2 (2026-11-15) memindahkan pin ekosistem mengikuti rilis hari itu: addon Herdr ke herdr-peers v1.2.2, patch yang hanya berisi perbaikan yang autopilot-nya kini menjawab pertanyaan yang ditampilkan dengan pratinjau di samping opsinya dan mengenali tanda rekomendasi dalam bahasa Spanyol, Prancis, Jerman, dan Italia; agentkit ke coding-agents-kit v1.2.0, yang `ak last`-nya melanjutkan sesi terbaru sebuah direktori kerja di terminal mana pun dan peluncurannya di dalam pane Herdr memulihkan pane itu setelah Herdr atau mesin dijalankan ulang; devcontainer-kit ke v1.1.2 dan deepworkplan-vim tetap v1.0.1; workflow release kini mencoba ulang push tag release untuk menyerap penolakan sementara.
 
-Rilis skill yang dipasang: **7.10.2**, stabil sejak 7.0.0.
+Rilis 7.11.0 (2026-11-16) mendaratkan seri pengerasan v7 dari developer: glosarium daya tahan dan aturan kontrol yang terlihat masuk ke panduan, `verify` mendapat audit kepatuhan baca-saja untuk plan yang selesai, dokumen pack menyatakan klaim daya tahan dan token secara presisi, tagline README diganti dengan pemenang uji pemahaman, dan jalur create langsung menjaga bundle Lite dalam anggaran instruksinya.
+
+Rilis 7.12.0 (2026-11-16) mendaftarkan plan ke loop herdr-peers: sebuah plan mengklaim kepemimpinannya dengan daftar penerus, sehingga `autopilot --loop` dan fleet UI dapat melihat setiap plan terbuka dan menjaganya berjalan sampai selesai, dan notifikasi Dailybot melaporkan capaian; deskriptor addon pindah ke herdr-peers v1.3.1 dan coding-agents-kit v1.3.0
+
+Rilis 7.12.1 (2026-11-16) memperbaiki notifikasi Dailybot addon Herdr: ia kini menerima nama peristiwa `herdr-peers/plan-event-v1` yang dipancarkan herdr-peers, membatasi stdin notifikator pada 64 KiB, dan memetakan `plan_lead_moved`; deskriptor addon pindah ke coding-agents-kit v1.4.0, yang `ak update`-nya didokumentasikan hanya dipanggil oleh manusia.
+
+Rilis skill yang dipasang: **7.12.1**, stabil sejak 7.0.0.

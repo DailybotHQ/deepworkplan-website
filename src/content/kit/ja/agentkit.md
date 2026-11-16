@@ -10,7 +10,7 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.10.2`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v7**（パック `v7.12.1`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 ## キットが提供するもの
 
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.3.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.4.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.3.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.4.0`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
@@ -84,6 +84,8 @@ ak doctor
 リリース 1.2.0 は **`ak last`** を追加します。対話式の起動は作業ディレクトリごとに kind とプロファイルを記録し、`ak last` で任意のターミナルから `-c` 付きで再起動（そこで最新のセッションを続行）、`ak last -r` でそのアカウントの CLI ピッカーを開き、`ak last ls` で記録を一覧します。Herdr ペイン内での起動は、Herdr の再起動やマシンの再起動後も復活します。ペインは同じアカウントで `ak --resume` 経由で戻り、キーは env ファイルから、権限ポストゥアもそのままです（`AGENTKIT_HERDR_RESUME=0` で無効化）。
 
 キット v1.3.0（インターフェース 1 は不変）は **pick-v2** を追加します。`ak pick --kinds codex,claude` が kind を横断してランク付けし、`--model-for KIND=NAME` が kind ごとにモデルを上書きし、`--json` は起動契約を返します。`launch.argv` と `launch.permissions`（`auto` または `ask`）、そして `qualifies: false` 形式です。`--model` は各 CLI 固有のフラグ（codex は `-m`）にマップされるヘッドフラグになり、`--model` を通していたスクリプトは動作が変わります。
+
+キット v1.4.0（インターフェース 1 は不変）は **`ak update`** を追加します。人間が呼び出すことだけを意図した機能で、`ak install` の検証とともに CLI をベンダーの最新リリースへ更新します。発見、検証、インストール、そしてこのキットの `providers.toml` をアトミックに再固定（`.bak` を保持）。`--take-over` はベンダー管理のシンボリックリンクを置き換えるために必須で、ダウングレードは名指しでない限り拒否され、PATH が新しいリリースを解決したときだけ更新は成立します。
 
 ## デフォルトは自律実行、オプトアウトが常に優先
 

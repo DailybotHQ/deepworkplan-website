@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) puts coding agents in panes, on your machine and on machines it reaches over SSH. This addon lets a Deep Work Plan use those agents as **peers**: a plan can hand a bounded task to an agent in another pane, receive exactly one authorized reply, and keep a record of the exchange.
 
-It is an optional addon of **DWP v7** (pack `v7.10.2`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
+It is an optional addon of **DWP v7** (pack `v7.12.1`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.3.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v1.3.1`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v1.3.0`, protocol 1 |
+| Product | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protocol 1 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -59,7 +59,7 @@ herdr-peers does not authenticate the sender: the `from=` field in a stamp is a 
 
 ## Containers and the host
 
-With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.1.2`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
+With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.2.0`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
 
 ## Herdr or agentkit
 

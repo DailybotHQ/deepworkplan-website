@@ -31,7 +31,7 @@ section: Addons
 
 ### Devcontainer（第 1 アドオン）
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v1.1.2` に固定、インターフェース `2`）の薄いインテグレーター：`dck init` がリポジトリ自身のコンテナとしてリポジトリにレンダリングする Dev Containers テンプレートと、`dck-dockerfile` スキル。
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)（`dck`、`v1.2.0` に固定、インターフェース `2`）の薄いインテグレーター：`dck init` がリポジトリ自身のコンテナとしてリポジトリにレンダリングする Dev Containers テンプレートと、`dck-dockerfile` スキル。
 
 - **キットページ：** [Devcontainer](/kit/devcontainer)
 - **追加内容：** digest で固定したランタイム公式イメージから作る `docker/local/<service>/Dockerfile`（`python-3.13`、`node-24` または `debian`、共有ベースイメージなし）、`dck` ランチャー（`up`、`shell`、`rebuild`、`doctor`）の上に立つ `dev.sh`、オプトインのレイヤーとしてのコーディングエージェント、ループバック限定のポート、コンテナ内に鍵を置かず（開発者がホストプロファイルの `[ssh] copy_keys` でオプトインした場合を除く）ホストのエージェント経由で SSH を使う git、標準レイアウトによるコンテナごとの Herdr マシン
@@ -82,7 +82,7 @@ section: Addons
 
 ### Herdr（第 6 アドオン）
 
-[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.3.0` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
+[herdr-peers](https://github.com/DailybotHQ/herdr-peers)（`v1.3.1` に固定、プロトコル `1`）の薄いインテグレーターで、v7 計画の**対話型**委任トランスポートです。
 
 - **キットページ：** [Herdr](/kit/herdr)
 - **追加内容：** 計画は範囲の限られたタスクを、別の [Herdr](https://herdr.dev) ペインにいるコーディングエージェント——同じマシン上、または Herdr が SSH で到達できるマシン上——に渡し、認可された返信を一つだけジャーナルに記録できる
@@ -100,7 +100,7 @@ section: Addons
 
 ### Agentkit（第 8 アドオン）
 
-[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.3.0` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
+[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)（`ak`、`v1.4.0` に固定、インターフェース `1`）の薄いインテグレーターで、v7 計画の**ヘッドレス**委任トランスポートです。
 
 - **キットページ：** [Agentkit](/kit/agentkit)
 - **追加内容：** ターミナル型コーディングエージェント全体にわたる一つの `ak` コマンドサーフェスで、範囲の限られた計画タスクをヘッドレスで実行するために使う；`subagents`、`cancel_children`、`model_routing` の能力は、有効化され、検出され、互換性のあるインターフェース上にある場合にのみ、実行時に提供される

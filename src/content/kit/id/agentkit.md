@@ -10,7 +10,7 @@ order: 8
 
 Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caranya sendiri untuk memisahkan akun kedua, mode headless-nya sendiri, dan sakelarnya sendiri untuk melewati prompt izin. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** menyatukan semuanya di bawah satu permukaan perintah: `ak <kind> [@profile]`.
 
-Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.10.2`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
+Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.12.1`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
 ## Yang diberikan kit ini
 
@@ -65,15 +65,15 @@ Pekerjaan hanya berpindah di antara akun yang Anda deklarasikan untuk rencana, d
 ## Instalasi
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.3.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
+Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tidak ada yang lain. Windows menggunakan `install.ps1`. Patok `v1.4.0`: `v0.2.0` dan `v0.2.1` tidak didukung. Verifikasi rilis dengan aset `SHA256SUMS`-nya.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, antarmuka 1 |
+| Produk | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, antarmuka 1 |
 | Kunci registri | `agentkit` di `.dwp/config.json` |
 | Transport | headless: satu `ak run` per agen delegasi di dalam worktree git khusus |
 | Menyediakan | `subagents`, `cancel_children`, `model_routing` |
@@ -84,6 +84,8 @@ Persyaratan: `bash` di macOS atau Linux, dan `python3` 3.9 atau lebih baru; tida
 Rilis 1.2.0 menambahkan **`ak last`**: setiap peluncuran interaktif mencatat kind dan profilnya per direktori kerja; `ak last` meluncurkannya kembali dengan `-c` (melanjutkan sesi terbaru di sana) di terminal mana pun, `ak last -r` membuka pemilih CLI di akun itu, dan `ak last ls` menampilkan rekamannya. Peluncuran di dalam pane Herdr juga bertahan setelah Herdr atau mesin dijalankan ulang: pane kembali melalui `ak --resume` di akun yang sama, dengan kunci dari file env dan postur izinnya utuh (`AGENTKIT_HERDR_RESUME=0` mematikannya).
 
 Kit v1.3.0 (antarmuka 1 tidak berubah) menambahkan **pick-v2**: `ak pick --kinds codex,claude` memeringkat lintas kind, `--model-for KIND=NAME` menimpa model per kind, dan `--json` mengembalikan kontrak peluncuran — `launch.argv` dengan `launch.permissions` (`auto` atau `ask`) dan bentuk `qualifies: false`. `--model` menjadi flag utama yang dipetakan ke flag milik tiap CLI (codex `-m`) — perubahan perilaku untuk skrip yang meneruskan `--model`.
+
+Kit v1.4.0 (antarmuka 1 tidak berubah) menambahkan **`ak update`**, hanya dipanggil oleh manusia: ia membawa CLI ke rilis terbaru dari vendor dengan verifikasi `ak install` — menemukan, memverifikasi, memasang, dan mematok ulang `providers.toml` kit ini secara atomik (`.bak` disimpan). `--take-over` diperlukan untuk mengganti symlink yang dikelola vendor, penurunan versi ditolak kecuali disebut namanya, dan pembaruan hanya dianggap sah ketika PATH menyelesaikan rilis baru.
 
 ## Otonomi secara default, dengan opt-out yang selalu menang
 

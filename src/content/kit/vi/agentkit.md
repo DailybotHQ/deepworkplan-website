@@ -10,7 +10,7 @@ order: 8
 
 Mỗi coding agent trên terminal đều có các cờ riêng để tiếp tục một phiên, cách riêng để tách biệt tài khoản thứ hai, chế độ headless riêng và công tắc riêng để bỏ qua các lời nhắc cấp quyền. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** đặt một bề mặt lệnh duy nhất lên tất cả chúng: `ak <kind> [@profile]`.
 
-Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.10.2`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
+Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.12.1`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
 
 ## Bộ kit mang lại cho bạn những gì
 
@@ -65,15 +65,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.3.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.4.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.3.0`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |
@@ -84,6 +84,8 @@ Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; khôn
 Bản phát hành 1.2.0 thêm **`ak last`**: mỗi lần khởi động tương tác đều ghi lại kind và profile theo thư mục làm việc; `ak last` khởi động lại nó với `-c` (tiếp tục phiên mới nhất tại đó) trong bất kỳ terminal nào, `ak last -r` mở trình chọn của CLI trong tài khoản đó, và `ak last ls` liệt kê bản ghi. Một lần khởi động bên trong pane Herdr cũng sống sót qua việc Herdr hoặc máy khởi động lại: pane quay lại qua `ak --resume` với cùng tài khoản, khóa từ tệp env và tư thế quyền nguyên vẹn (`AGENTKIT_HERDR_RESUME=0` tắt nó).
 
 Kit bản 1.3.0 (giao diện 1 không đổi) thêm **pick-v2**: `ak pick --kinds codex,claude` xếp hạng qua các kind, `--model-for KIND=NAME` ghi đè mô hình theo từng kind, và `--json` trả về hợp đồng khởi động — `launch.argv` với `launch.permissions` (`auto` hoặc `ask`) và dạng `qualifies: false`. `--model` trở thành cờ đầu được ánh xạ sang cờ riêng của mỗi CLI (codex `-m`) — một thay đổi hành vi với các script truyền `--model` xuyên qua.
+
+Kit bản 1.4.0 (giao diện 1 không đổi) thêm **`ak update`**, chỉ do con người gọi: nó đưa một CLI đến bản phát hành mới nhất của nhà cung cấp với xác minh của `ak install` — khám phá, xác minh, cài đặt và ghim lại `providers.toml` của kit này một cách nguyên tử (giữ một `.bak`). `--take-over` bắt buộc khi thay thế symlink do nhà cung cấp quản lý, việc hạ phiên bản bị từ chối trừ khi nêu tên, và bản cập nhật chỉ tính khi PATH phân giải được bản mới.
 
 ## Tự chủ theo mặc định, với lựa chọn opt-out luôn được ưu tiên
 

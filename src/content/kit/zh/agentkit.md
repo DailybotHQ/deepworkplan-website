@@ -10,7 +10,7 @@ order: 8
 
 每个终端编码代理都有自己的一套参数用于继续会话，有自己的方式隔离第二个账户，有自己的无头模式，也有自己用于跳过权限提示的开关。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** 在它们之上提供统一的命令界面：`ak <kind> [@profile]`。
 
-这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.10.2`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
+这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.12.1`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
 
 ## 工具包为你提供什么
 
@@ -65,15 +65,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.3.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.4.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.3.0`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.4.0`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |
@@ -84,6 +84,8 @@ ak doctor
 1.2.0 版本新增 **`ak last`**：每个交互式启动都会按工作目录记录其 kind 和 profile；`ak last` 在任意终端用 `-c` 重新启动它（在该目录继续最近的会话），`ak last -r` 在该账号打开 CLI 的选择器，`ak last ls` 列出记录。在 Herdr 面板内的启动也能在 Herdr 重启或机器重启后恢复：面板通过 `ak --resume` 回到同一账号，密钥来自环境文件，权限姿态保持不变（`AGENTKIT_HERDR_RESUME=0` 可关闭）。
 
 套件 1.3.0 版（接口 1 不变）新增 **pick-v2**：`ak pick --kinds codex,claude` 跨 kind 排序，`--model-for KIND=NAME` 按 kind 覆盖模型，`--json` 返回启动契约——带 `launch.permissions`（`auto` 或 `ask`）的 `launch.argv` 以及 `qualifies: false` 形式。`--model` 成为映射到各 CLI 自身旗标的主旗标（codex 为 `-m`）——对透传 `--model` 的脚本来说是行为变更。
+
+套件 1.4.0 版（接口 1 不变）新增 **`ak update`**，仅可由人类调用：它以 `ak install` 的验证方式将 CLI 带到供应商的最新版本——发现、验证、安装并原子性地重新固定本套件的 `providers.toml`（保留 `.bak`）。`--take-over` 用于替换供应商管理的符号链接，除非指名否则拒绝降级，且只有当 PATH 解析到新版本时更新才算生效。
 
 ## 默认自主运行，退出选项始终优先
 

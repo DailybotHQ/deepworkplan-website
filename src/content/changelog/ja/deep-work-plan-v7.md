@@ -30,6 +30,12 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.1"
   - label: "Skill release v7.10.2"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.10.2"
+  - label: "Skill release v7.11.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.11.0"
+  - label: "Skill release v7.12.0"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.0"
+  - label: "Skill release v7.12.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v7.12.1"
 ---
 
 Deep Work Plan v7 は v6 の方法を維持します。契約が権威であり、追記専用のジャーナルが記憶であり、スケジューラが次に実行するものを決め、記録された証拠がタスクの基準を満たしたときにのみタスクが完了します。v7 は委任の能力を加え、その結果に対しても同じ規律を保ちます。
@@ -56,4 +62,10 @@ v7 はオーケストレーションと監査可能性における大きな前�
 
 リリース 7.10.2（2026-11-15）は、当日のリリースに合わせてエコシステムの固定を動かしました。Herdr アドオンを herdr-peers v1.2.2 へ。修正のみのパッチで、autopilot が選択肢の横にプレビュー付きで表示される質問に回答し、スペイン語・フランス語・ドイツ語・イタリア語の推奨マークを認識します。agentkit を coding-agents-kit v1.2.0 へ。その `ak last` は作業ディレクトリの最新セッションを任意のターミナルで再開し、Herdr ペイン内の起動は Herdr 再起動やマシン再起動の後にペインを復元します。devcontainer-kit を v1.1.2 へ、deepworkplan-vim は v1.0.1 のまま。リリースワークフローは一時的な拒否を吸収するため release tag のプッシュをリトライするようになりました。
 
-インストール済みスキルのリリースは **7.10.2** です。7.0.0 以降、安定しています。
+リリース 7.11.0（2026-11-16）は、開発者の v7 ハードニング・シリーズを着地させます。耐久性の用語集と可視化された制御ルールがガイドに入り、`verify` に完了したプランの読み取り専用コンプライアンス監査が加わり、pack のドキュメントは耐久性とトークンの主張を正確に述べ、README のタグラインは理解テストの勝者に置き換わり、ライブの create 経路は Lite バンドルを指示予算内に保ちます。
+
+リリース 7.12.0（2026-11-16）はプランを herdr-peers のループに登録します。プランは後継リスト付きでリードを請求し、`autopilot --loop` とフリート UI が開いているすべてのプランを見て終端まで走らせ続け、Dailybot ノティファイアがマイルストーンを報告します。アドオンの記述子は herdr-peers v1.3.1 と coding-agents-kit v1.3.0 に移りました。
+
+リリース 7.12.1（2026-11-16）は Herdr アドオンの Dailybot ノティファイアを修正します。herdr-peers が発する `herdr-peers/plan-event-v1` というイベント名を受け入れ、ノティファイアの stdin を 64 KiB に制限し、`plan_lead_moved` をマッピングします。アドオンの記述子は coding-agents-kit v1.4.0 に移り、その `ak update` は人間が呼び出すことだけを意図したものとして文書化されます。
+
+インストール済みスキルのリリースは **7.12.1** です。7.0.0 以降、安定しています。

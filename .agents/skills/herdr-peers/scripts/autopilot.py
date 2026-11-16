@@ -68,7 +68,6 @@ TAKEOVER_TEXT = (
     'herdr-peers lead takeover --plan %s — the helper checks itself whether the lead is really '
     'gone. If it accepts, continue executing the plan to its end, respecting its gates. If it '
     'refuses, do nothing more.')
-GONE_REASONS = ('no_agent',)
 
 BOX = {ord(c): ' ' for c in '│┃█'}
 CURSORS = '❯›>→▶'

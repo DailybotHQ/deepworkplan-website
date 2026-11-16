@@ -10,15 +10,15 @@ order: 7
 
 [Herdr](https://herdr.dev) place des agents de code dans des panneaux, sur votre machine et sur les machines qu’il atteint via SSH. Cet addon permet à un Deep Work Plan d’utiliser ces agents comme **pairs** : un plan peut confier une tâche délimitée à un agent situé dans un autre panneau, recevoir exactement une réponse autorisée et conserver une trace de l’échange.
 
-C’est un addon facultatif de **DWP v7** (pack `v7.10.2`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
+C’est un addon facultatif de **DWP v7** (pack `v7.12.1`). La méthodologie fonctionne de la même manière sans lui : si l’addon est absent ou désactivé, chaque tâche s’exécute dans la session courante, exactement comme avant.
 
 ## Ce qu’il intègre
 
-L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.3.0`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
+L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, une skill autonome sous licence MIT, épinglée à **`v1.3.1`**, utile même sans Deep Work Plan. Elle définit ce que Herdr laisse lui-même ouvert : qui peut répondre, comment la réponse retrouve son chemin d’une machine à l’autre, comment deux agents évitent de se répondre indéfiniment, et où se trouve la trace de « j’ai demandé, il a répondu ».
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/herdr-peers`, tag `v1.3.0`, protocole 1 |
+| Produit | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protocole 1 |
 | Clé de registre | `herdr` dans `.dwp/config.json` |
 | Transport | interactif : un pair dans un panneau Herdr |
 | Fournit | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ L’addon est un intégrateur léger. Le travail est effectué par **[herdr-peer
 Installez herdr-peers ainsi que la skill officielle de Herdr, dont il dépend. Chaque machine dont les agents doivent répondre a également besoin de la skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -59,7 +59,7 @@ herdr-peers n’authentifie pas l’expéditeur : le champ `from=` d’une estam
 
 ## Les conteneurs et l’hôte
 
-Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v1.1.2`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers (`v0.2.3`), chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle.
+Avec l’addon [devcontainer](/kit/devcontainer) sur devcontainer-kit `v1.2.0`, chaque conteneur dck embarque herdr-peers et rejoint le maillage lors de `dck up` : ses agents peuvent interroger les agents de l’hôte, des autres conteneurs et des autres conteneurs loopback de l’hôte, et recevoir la réponse en retour. `dck setup` installe un herdr-peers vérifié sur l’hôte, si bien que les agents de l’hôte répondent aussi. Le listener d’hôte et les clés supplémentaires qui laissent entrer d’autres conteneurs relèvent de vos décisions dans le profil d’hôte du kit ; cet addon ne les définit jamais. Depuis herdr-peers (`v0.2.3`), chaque machine conserve son propre état (`$XDG_STATE_HOME/herdr-peers/<server>/`), si bien qu’un checkout partagé par l’hôte et un conteneur ne mélange plus leurs enregistrements, et depuis devcontainer-kit (`v0.3.3`), le conteneur exporte lui-même `HERDR_PEERS_SELF`, si bien que les agents Codex à l’intérieur atteignent d’autres machines sans aucune étape manuelle.
 
 ## Herdr ou agentkit
 
