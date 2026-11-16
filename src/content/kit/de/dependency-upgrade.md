@@ -10,6 +10,8 @@ order: 3
 
 Die Abhängigkeiten eines Repositorys mit einem chargenweisen, validierten, rücknehmbaren Workflow auf den neuesten Stand bringen. Das dritte Opt-in-Addon von Deep Work Plan.
 
+Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
+
 ## Was es hinzufügt
 
 - Erkennung des **echten** Paketmanagers des Repositorys (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer und mehr) aus dem vorhandenen Manifest und der Lockfile.
@@ -23,7 +25,6 @@ Die Abhängigkeiten eines Repositorys mit einem chargenweisen, validierten, rüc
 4. Nach jeder Charge das echte Validierungs-Gate des Repositorys ausführen; jede fehlgeschlagene Charge rückgängig machen.
 5. Zusammenfassen, was aktualisiert, übersprungen und rückgängig gemacht wurde; den Entwickler committen lassen.
 
-
 ## v7-Spezifikation
 
 | Element | Wert |
@@ -33,6 +34,7 @@ Die Abhängigkeiten eines Repositorys mit einem chargenweisen, validierten, rüc
 | Deskriptor | `addons/dependency-upgrade/addon.json` (Schnittstelle 1) |
 | Befehl | `/lib-upgrade` installiert in `.agents/commands/` bei Annahme |
 | Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v7.12.2`) |
+
 ## Hinweise
 
 Paketmanager-agnostisch — führt niemals npm/ncu in einem Nicht-JS-Repository aus. Opt-in, nie erforderlich, und committet niemals automatisch.

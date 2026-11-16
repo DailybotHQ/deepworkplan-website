@@ -16,6 +16,8 @@ Depuis le standard 2.3.0, cette revue locale **fait partie du socle, ce n'est pa
 
 La frontière qui rend l'adoption sûre est délibérément étroite. Le relecteur est une skill sous licence MIT, épinglée à un tag, exécutée par l'agent de code que vous faites déjà tourner : aucun flux de Deep Work Plan ne dépend donc d'un service commercial, d'un fournisseur de CI ou d'un secret. Le **Flow A** (local uniquement) est ce que reçoit tout dépôt intégré ; le **Flow B** est proposé explicitement et jamais installé sans demande. Un développeur peut aussi refuser le relecteur purement et simplement — ce refus est consigné comme exception déclarée, et `verify` signale le dépôt comme non conforme sur ce point tant qu'il n'est pas installé.
 
+Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dépôt est le harness, le loop engineering et l’efficacité mesurée. Les addons et les intégrations peuvent étendre le harness et la boucle ; la méthodologie fonctionne seule.
+
 ## Quand l'utiliser
 
 | Signal | Action |

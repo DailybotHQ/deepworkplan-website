@@ -12,6 +12,8 @@ Nadaj repozytorium z **powierzchnią interfejsu skierowaną do użytkownika** pl
 
 „Powierzchnia interfejsu" to pojęcie mnogie: renderowany **wizualny UI**, stylizowane **wyjście CLI** oraz powierzchnia **konwersacyjna** (produkt komunikuje się na czacie lub przez e-mail) — każde z nich się liczy. Dodatek wykrywa każdą z nich niezależnie jako **profil**, a zaakceptowane profile składają się w ten sam pojedynczy plik `DESIGN.md`.
 
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
+
 ## Co dodaje
 
 - Plik `DESIGN.md` w `docs/DESIGN.md` (obok innych specyfikacji repozytorium; katalog główny repozytorium tylko wtedy, gdy nie ma drzewa `docs/`), **przywoływany z `AGENTS.md`**, dzięki czemu agenci odkrywają go tak jak resztę dokumentacji. Jedno repozytorium, jeden plik — nigdy osobne pliki per powierzchnia.
@@ -40,7 +42,6 @@ Nigdy nie jest wymagany — repozytorium z zerową liczbą opcjonalnych dodatkó
 
 Po zaakceptowaniu dodatek może zainstalować delegator `/design-system` w katalogu `.agents/commands/` repozytorium, aby później ponownie wygenerować lub odświeżyć `DESIGN.md`. Instalacja komendy jest opcjonalna; odrzucony dodatek nie instaluje żadnej.
 
-
 ## Specyfikacja v7
 
 | Element | Wartość |
@@ -50,7 +51,6 @@ Po zaakceptowaniu dodatek może zainstalować delegator `/design-system` w katal
 | Deskryptor |  (interfejs 1) |
 | Plik docelowy |  indeksowany z  |
 | Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności () |
-
 
 ## Specyfikacja v7
 

@@ -12,6 +12,8 @@ Setiap coding agent terminal memiliki flag sendiri untuk melanjutkan sesi, caran
 
 Addon ini mengintegrasikan kit tersebut ke dalam **DWP v7** (paket `v7.12.2`) sebagai transport delegasi **headless**. Addon ini opsional: tanpanya, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya. Kit itu sendiri adalah produk MIT yang bekerja tanpa Deep Work Plan.
 
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
 ## Yang diberikan kit ini
 
 - **Satu tata bahasa untuk setiap CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok`, dan `ak antigravity`, ditambah rute penyedia (Z.AI GLM, Azure OpenAI, xAI, dan Gemini API), dengan flag sesi yang sama: `-c` melanjutkan, `-r <id>` memulihkan.
@@ -87,6 +89,12 @@ Kit v1.3.0 (antarmuka 1 tidak berubah) menambahkan **pick-v2**: `ak pick --kinds
 
 Kit v1.4.0 (antarmuka 1 tidak berubah) menambahkan **`ak update`**, hanya dipanggil oleh manusia: ia membawa CLI ke rilis terbaru dari vendor dengan verifikasi `ak install` — menemukan, memverifikasi, memasang, dan mematok ulang `providers.toml` kit ini secara atomik (`.bak` disimpan). `--take-over` diperlukan untuk mengganti symlink yang dikelola vendor, penurunan versi ditolak kecuali disebut namanya, dan pembaruan hanya dianggap sah ketika PATH menyelesaikan rilis baru.
 
+## Mulai coding-agents-kit 1.5.0 (antarmuka 1)
+
+Rilis ini menambahkan kolom `tokens` pada `ak run --json`, yang hanya berisi hitungan yang dilaporkan CLI (`input`, `output`, `cache_read`, `cache_write`, dan `total`). Nilai yang tidak dilaporkan tetap `null`; kit tidak pernah memperkirakannya. `ak usage --json` menambahkan blok `advisory` berisi `runs`, `tokens`, dan `coverage`. Blok ini hanya bersifat informatif dan tidak mengubah jendela kuota penyedia, putusan kapasitas, ataupun kelayakan `ak pick`.
+
+Saat `--ask` atau `AGENTKIT_PERMISSIONS=ask` aktif, `ak` kini memaksakan mode ask eksplisit milik tiap CLI; CLI tanpa flag ask tidak berubah. Dengan opt-out ini aktif, `launch.argv` pada pick-v2 diakhiri dengan `--ask`. herdr-peers (v2.0.2) atau lebih baru menerima argumen penutup ini; v2.0.1 menolaknya.
+
 ## Otonomi secara default, dengan opt-out yang selalu menang
 
 Sejak `v0.2.0`, `ak <kind>` meluncurkan setiap agen dalam mode **otonom**: ia menambahkan flag otonomi milik CLI itu sendiri, yang hanya disimpan di `providers.toml` milik kit. Otonomi ditujukan untuk lingkungan sekali pakai atau ber-sandbox, seperti dev container.
@@ -107,6 +115,8 @@ Pada rencana v7 yang kontraknya memberikan izin `agent_delegation`, `execute` da
 | Tugas memerlukan interaksi, berjalan lama, atau berada di mesin lain | [Herdr](/kit/herdr) (rekan di panel) |
 
 Keduanya dapat dipadukan: herdr-peers dapat meluncurkan rekan di sebuah panel dengan environment yang dicetak oleh `ak env <kind> @profile`. Untuk banyak lane sekaligus, lihat [Menjalankan banyak agent](/methodology/06-orchestration).
+
+herdr-peers v2.0.0 menggunakan antarmuka ini untuk otak autopilot opsional: `ak pick --kinds ... --json` mengembalikan kontrak peluncuran pick-v2; Herdr memvalidasinya, mewajibkan `launch.permissions: ask`, lalu menjalankan `launch.argv` yang dikembalikan. Otak tidak dapat mengaktifkan flag otonomi atau bypass. `ak update` tetap dijalankan manusia; otak tidak pernah memperbarui CLI.
 
 ## Catatan
 

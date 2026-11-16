@@ -12,6 +12,8 @@ order: 2
 
 核心 Deep Work Plan 方法论对 Dailybot **零**依赖。零可选附加组件的仓库完全符合规范。仅在开发者或团队已在使用 Dailybot 时提供此附加组件；切勿为所有人自动安装。
 
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
+
 ## 何时使用
 
 | 信号 | 操作 |

@@ -1,8 +1,10 @@
 ---
 title: "Kit Deep Work Plan"
 description: "Skill i jego dziewięć sub-skilli, komendy, adaptery agentów, presety onboardingu, opcjonalne dodatki i przykłady, dzięki którym Deep Work Plan działa wszędzie."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
 ## Kit Deep Work Plan
 

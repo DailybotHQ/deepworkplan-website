@@ -6,11 +6,17 @@ lang: pl
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Addon Herdr
 
 [Herdr](https://herdr.dev) umieszcza agentów kodujących w panelach, na Twojej maszynie i na maszynach, do których dociera przez SSH. Ten addon pozwala Deep Work Plan używać tych agentów jako **peerów**: plan może przekazać ograniczone zadanie agentowi w innym panelu, otrzymać dokładnie jedną autoryzowaną odpowiedź i zachować zapis tej wymiany.
 
 Jest to opcjonalny addon **DWP v7** (pack `v7.12.2`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
+
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
+
+<HerdrLoop lang="pl" class="not-prose my-10" />
 
 ## Co integruje
 
@@ -25,7 +31,6 @@ Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.
 | Wymaga | uprawnienia `agent_delegation` w kontrakcie planu |
 
 **Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne: czasowniki CLI i ich udokumentowane flagi, kody wyjścia `0`–`7`, udokumentowane zmienne `HERDR_PEERS_*`, `DWP_PLAN` i `DWP_TASK`, protokół 1 oraz kontrakty JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` i rekord delegowania. Niekompatybilna zmiana któregokolwiek z nich podnosi wersję główną, a zmiana formatu przesyłu podnosi także numer protokołu. `v1.0.0` nie zmienia żadnego zachowania względem `v0.3.3`, a wydania 0.x nie są już wspierane.
-
 
 ## Instalacja
 
@@ -104,7 +109,7 @@ Wydanie jest wyłącznie addytywne: protokół 1 oraz wszystkie polecenia, flagi
 
 herdr-peers 1.2.0 dodaje **autopilot** (`autopilot.md`): opcjonalny demon `herdr-peers autopilot`, który uruchamia człowiek, aby długi plan nie zatrzymywał się na ekranie zatwierdzenia. Obserwuje każdego agenta na każdej włączonej maszynie Herdr i, gdy któryś czeka na ekranie, akceptuje jedną z opcji. Wydanie 1.2.1 naprawia przypadek, w którym pytanie z opcjami o długich opisach pozostawało bez odpowiedzi. Wydanie 1.2.2 odpowiada na pytanie pokazane z podglądem obok opcji i rozpoznaje znacznik rekomendacji po hiszpańsku, francusku, niemiecku i włosku. Wydanie 1.3.0 dodaje **pętlę**: `autopilot --loop` utrzymuje każdy otwarty plan w biegu do jego końca na wszystkich maszynach, `--notify`/`--notify-env` kierują jego raporty tam, gdzie chcesz, a czasowniki tylko do odczytu `plans` i `fleet` oraz fleet UI pokazują każdy tor, maszynę i otwarty plan w jednym spojrzeniu.
 
-Wydanie 2.0.0 przenosi łącze na **protokół 2** i dodaje trzy rzeczy: **mianowanie leada** — tylko na wyraźne słowo człowieka (`lead claim --allow-appointment`), plan z grantem, którego lead i wszyscy następcy zniknęli, może mianować swoją pierwszą żywą ścieżkę nowym leadem (`lead takeover --as-lane`, odpytywana dwukrotnie, najwyżej dwa mianowania na plan), a **`lead verify`** to sprawdzenie tylko do odczytu wykonywane przed każdym merge, tagiem i wydaniem; **mózg autopilota** — z `--brain` demon uruchomiony przez człowieka lanzuje dedykowanego agenta (coding-agents-kit 1.3.0 lub nowszy) i słucha go tylko w zamkniętej liście akcji, odmawiając startu w ogóle, gdy `ak` brakuje lub jest starsze; oraz **kolejka planów** — pakiet pisze `.dwp/queue.json` (schemat `dwp-queue-v1`), a z `--loop` demon uruchamia następny zakolejkowany, zatwierdzony plan bez ciebie. Na planie z grantem każda ścieżka i każdy następca muszą działać na 2.0 lub nowszym.
+Wydanie 2.0.0 przenosi łącze na **protokół 2** i dodaje trzy rzeczy: **mianowanie leada** — tylko na wyraźne słowo człowieka (`lead claim --allow-appointment`), plan z grantem, którego lead i wszyscy następcy zniknęli, może mianować swoją pierwszą żywą ścieżkę nowym leadem (`lead takeover --as-lane`, odpytywana dwukrotnie, najwyżej dwa mianowania na plan), a **`lead verify`** to sprawdzenie tylko do odczytu wykonywane przed każdym merge, tagiem i wydaniem; **mózg autopilota** — z `--brain` demon uruchomiony przez człowieka uruchamia dedykowanego agenta (coding-agents-kit 1.3.0 lub nowszy) i słucha go tylko w zamkniętej liście akcji, odmawiając startu w ogóle, gdy `ak` brakuje lub jest starsze; oraz **kolejka planów** — pakiet pisze `.dwp/queue.json` (schemat `dwp-queue-v1`), a z `--loop` demon uruchamia następny zakolejkowany, zatwierdzony plan bez ciebie. Na planie z grantem każda ścieżka i każdy następca muszą działać na 2.0 lub nowszym.
 
 - **Uruchamia go tylko człowiek.** Żadna wiadomość, żaden peer ani plan nie może go uruchomić, zatrzymać ani zmienić tego, co robi. Agent uruchamia go tylko wtedy, gdy jego człowiek poprosił o to bezpośrednio w sesji.
 - **Co akceptuje.** Pytanie z opcjami, zatwierdzenie narzędzia, zatwierdzenie planu, zaufanie do folderu oraz monit o aktualizację, który pomija. Wybiera opcję oznaczoną jako zalecana, w przeciwnym razie tę, którą CLI zaznaczyło domyślnie, w przeciwnym razie pierwszą, i przechodzi wieloetapowy dialog do końca, odczytując ekran ponownie po każdym klawiszu.
@@ -116,6 +121,20 @@ Wydanie 2.0.0 przenosi łącze na **protokół 2** i dodaje trzy rzeczy: **miano
 **Co akceptujesz, uruchamiając go.** Przy włączonym autopilocie żądanie agenta jest zatwierdzane, a człowiek go nie widzi, także polecenie, którego człowiek by odmówił. Nie ma listy zakazów: autopilot nie ocenia, co robi polecenie. Pozostają następujące mechanizmy kontroli: własny tryb uprawnień i zabezpieczenia każdego agenta, to, do czego mają dostęp jego konto i maszyna, reguły repozytorium oraz przegląd kodu przed scaleniem.
 
 Autopilot działa poza protokołem delegowania: nie wysyła żadnego zapytania, odpowiedzi ani powiadomienia, a reguła dla agentów i prowadzących pozostaje bez zmian — jedynym ekranem, na który odpowiadają klawiszami, jest zaufanie do folderu, na panelach, które sami uruchomili. Wydanie 1.2.0 dokumentuje też w `launcher.md`, jak prowadzący otwiera wielu agentów naraz za pomocą `ak`.
+
+### Sterowanie demonem i pętla v2
+
+`autopilot run` działa na pierwszym planie; `start` działa w tle; `stop`, `status` i `logs` sterują nim lub pokazują jego stan. Uruchomić go musi człowiek. Z `--loop` ponagla wyłącznie bezczynnego prowadzącego planu, zostawia zablokowane plany w spokoju, przestaje po trzech ponagleniach bez postępu, prosi zapisanego następcę o przejęcie roli brakującego prowadzącego i obsługuje zatwierdzoną kolejkę planów, wysyłając polecenie jej prowadzącemu. Dla Herdr kolejka jest tylko do odczytu. `--notify "<command>"` wysyła zdarzenia planu bez dodawania uprawnień.
+
+`--notify-env NAME` przekazuje poleceniu jedną wskazaną zmienną środowiskową. Poza tym polecenie działa w minimalnym środowisku (`PATH`, `HOME`, ustawienia regionalne i katalogi XDG), nigdy z tokenami ani kluczami.
+
+Z `--brain` Herdr używa coding-agents-kit 1.3.0 lub nowszego: `ak pick` dostarcza zweryfikowany kontrakt uruchomienia pick-v2 w trybie ask. `--brain-kinds codex,claude` ustala priorytet dostawców, a `--brain-model claude=sonnet` wybiera model. Mózg może zwrócić tylko działanie z zamkniętej listy; brak `ak` lub jego starsza wersja powoduje bezpieczną odmowę uruchomienia (fail closed). Mianowanie wymaga zarówno zgody zapisanej w planie (`lead claim --allow-appointment`), jak i opcji `--appoint` demona uruchomionego przez człowieka; tor używa `lead takeover --as-lane`. Przed każdym merge, tagiem lub wydaniem uruchom `lead verify`. `plans`, `fleet` i `fleet ui` są widokami tylko do odczytu. Demon nigdy nie uruchamia się sam, nie mianuje bez zgody, nie zapisuje kolejki ani rekordu prowadzącego, nie działa na podstawie dowolnego tekstu i nie rozszerza uprawnień.
+
+Wydanie v2.0.1 zachowuje protokół 2. Domyślny `--brain-kinds` zmienia się na `claude` (inne rodzaje nadal można wskazać), a powody wycofania braina i wykluczone profile są zapisywane w logu, mapie i statusie. Wycofanie z powodu `permission_mode` wskazuje prawdopodobną przyczynę związaną z trybem ask. Niepotrzebny już stan kolejki jest usuwany dopiero po odpowiedzi raportu maszyny; daemon ogranicza też widoczną na mapie listę wykluczonych profili do 16, zachowując pełny zestaw wykluczeń. Podczas sprawdzania appointment lane z innego otwartego planu jest teraz uznawany za członkostwo planu.
+
+Wydanie v2.0.2 zachowuje protokół 2. W argumentach uruchomienia pick-v2 w trybie ask akceptowany jest dokładnie jeden końcowy `--ask` po opcjonalnym `--model <name>`; przed uruchomieniem zostaje usunięty, a daemon sam dodaje `--ask --trust-cwd`. Inne pozycje `--ask`, własne flagi uprawnień CLI i argumenty po `--` nadal są odrzucane. Argumenty uruchomienia kitu 1.4.x pozostają bez zmian i są akceptowane. Adresy pane zakończone znakiem nowej linii są odrzucane.
+
+Wydanie v2.1.0 zachowuje protokół 2. `fleet ui` dodaje widoki `Attention`, `Active`, `Waiting`, `Done` i `All` w każdej grupie, także kolejki; mapa zyskuje opcjonalne pola `state_updated_at` i `unreadable_reason`. Uruchomiony przez człowieka daemon odmawia dialogów uprawnień lub zatwierdzenia planu, których nie może bezpiecznie zaakceptować. Nie odmawia pytaniu agenta o samą pracę; logowanie, potwierdzenie obejścia uprawnień i zaufanie do folderu nadal należą do człowieka. Odmowa braina jest obsługiwana jawnie; trzy odmowy w ciągu godziny wycofują braina. Brain może teraz otrzymać pytanie o klasyfikowany blocker. Jego akcja `ask_lead_to_resolve` może wysłać blocker z `resolver: lead` do leada planu tylko wtedy, gdy klasa to none, C3, C4 lub C7; C1 (zatwierdzenie), C2 (zgoda lub logowanie), C5 (szkoda) i C6 (warunki) pozostają po stronie człowieka, a klasy spoza C1–C7 są odrzucane. Wydanie odczytuje też zdarzenia blocker journal-event/v8 i dane blocker plan-snapshot/v8 z packa 8.0.0.
 
 ## Uwagi
 

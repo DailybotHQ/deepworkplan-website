@@ -12,6 +12,8 @@ Trao cho một repository có **bề mặt giao diện hướng tới người d
 
 Một "bề mặt giao diện" mang nghĩa số nhiều: một **UI trực quan** được render, **đầu ra CLI** có phong cách, và một bề mặt **hội thoại** (sản phẩm trò chuyện qua chat hay email) đều được tính. Addon phát hiện từng bề mặt một cách độc lập như một **profile**, và các profile được chấp nhận xếp chồng vào cùng một `DESIGN.md` duy nhất.
 
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+
 ## Nó thêm những gì
 
 - Một `DESIGN.md` tại `docs/DESIGN.md` (đặt cạnh các đặc tả khác của repo; chỉ đặt tại gốc repo khi không có cây thư mục `docs/`), **được tham chiếu từ `AGENTS.md`** để agent khám phá ra nó như phần còn lại của tài liệu. Một repo, một tệp — không bao giờ là các tệp anh em theo từng bề mặt.
@@ -40,7 +42,6 @@ Nó không bao giờ bắt buộc — một repository với không có addon t�
 
 Khi được chấp nhận, addon có thể cài một bộ ủy thác `/design-system` vào `.agents/commands/` của repo để tái sinh hay làm mới `DESIGN.md` về sau. Việc cài command là tùy chọn; một addon bị từ chối không cài gì cả.
 
-
 ## Đặc tả v7
 
 | Mục | Giá trị |
@@ -50,7 +51,6 @@ Khi được chấp nhận, addon có thể cài một bộ ủy thác `/design-
 | Bộ mô tả |  (giao diện 1) |
 | Tệp đích |  được lập chỉ mục từ  |
 | Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng () |
-
 
 ## Đặc tả v7
 

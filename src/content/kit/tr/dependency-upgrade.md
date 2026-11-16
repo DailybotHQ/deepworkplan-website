@@ -10,6 +10,8 @@ order: 3
 
 Bir deponun bağımlılıklarını gruplanmış, doğrulanmış, geri alınabilir bir iş akışıyla güncel hâle getirin. Üçüncü isteğe bağlı Deep Work Plan eklentisi.
 
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
+
 ## Neler ekler
 
 - Deponun **gerçek** paket yöneticisinin (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer ve daha fazlası) var olan manifest ve lockfile üzerinden saptanması.
@@ -23,7 +25,6 @@ Bir deponun bağımlılıklarını gruplanmış, doğrulanmış, geri alınabili
 4. Her gruptan sonra deponun gerçek doğrulama geçidini çalıştırın; başarısız olan herhangi bir grubu geri alın.
 5. Neyin yükseltildiğini, atlandığını ve geri alındığını özetleyin; commit etmeyi geliştiriciye bırakın.
 
-
 ## v7 belirtimi
 
 | Öğe | Değer |
@@ -33,6 +34,7 @@ Bir deponun bağımlılıklarını gruplanmış, doğrulanmış, geri alınabili
 | Tanımlayıcı | `addons/dependency-upgrade/addon.json` (arayüz 1) |
 | Komut | Kabul edildiğinde `.agents/commands/` içine kurulan `/lib-upgrade` |
 | Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.12.2`) |
+
 ## Notlar
 
 Paket yöneticisinden bağımsızdır — JS dışı bir depoda asla npm/ncu çalıştırmaz. İsteğe bağlıdır, hiçbir zaman zorunlu değildir ve asla otomatik commit yapmaz.

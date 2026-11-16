@@ -6,11 +6,17 @@ lang: zh
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Herdr 附加组件
 
 [Herdr](https://herdr.dev) 把编码代理放进窗格中，既可在你的机器上，也可在它通过 SSH 连接到的机器上。这个附加组件让 Deep Work Plan 把这些代理当作**对等方**来使用：计划可以把一项有边界的任务交给另一个窗格中的代理，接收恰好一条获授权的回复，并保留这次交互的记录。
 
 它是 **DWP v7**（pack `v7.12.2`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
+
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
+
+<HerdrLoop lang="zh" class="not-prose my-10" />
 
 ## 它集成了什么
 
@@ -25,7 +31,6 @@ order: 7
 | 要求 | 计划契约中的 `agent_delegation` 授权 |
 
 **自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 2，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
-
 
 ## 安装
 
@@ -116,6 +121,20 @@ herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守�
 **运行它即意味着你接受什么。** 开启 autopilot 后，代理的请求会在用户没有看到的情况下获得批准，其中包括用户本会拒绝的命令。没有拒绝列表：autopilot 不判断一条命令做了什么。仍然有效的控制手段是每个代理自身的权限模式和护栏、其账户和机器所能触及的范围、仓库的规则，以及合并前的代码审查。
 
 Autopilot 不属于委派协议：它不发送询问、回复或通知，针对代理和主导者的规则保持不变——它们唯一会发送按键的界面是文件夹信任，且仅限于它们自己启动的窗格。1.2.0 版本还在 `launcher.md` 中说明了主导者如何用 `ak` 一次打开多个代理。
+
+### Daemon 控制与 v2 执行循环
+
+`autopilot run` 在前台运行；`start` 在后台运行；`stop`、`status` 和 `logs` 用于控制或检查它。只有人可以启动它。启用 `--loop` 后，它只提醒空闲计划 lead，让受阻计划保持原状；连续三次提醒仍无进展时停止；lead 不可用时请求已记录的继任者接任；并通过向 lead 发送提示来消费已批准的计划队列。Herdr 只读取队列。`--notify "<command>"` 发送计划事件，不会扩大权限。
+
+`--notify-env NAME` 会将一个指定的环境变量传给该命令。除此之外，命令只在最小环境中运行（`PATH`、`HOME`、语言区域设置和 XDG 目录），绝不会带上令牌或密钥。
+
+启用 `--brain` 后，Herdr 使用 coding-agents-kit 1.3.0 或更高版本：`ak pick` 在 ask 模式下提供经过验证的 pick-v2 启动契约。`--brain-kinds codex,claude` 设置提供方优先级，`--brain-model claude=sonnet` 选择模型。brain 只能返回封闭列表中的操作；缺少 `ak` 或版本过旧时会安全地拒绝启动。lead 任命既需要计划授权（`lead claim --allow-appointment`），也需要由人启动 daemon 时指定 `--appoint`；lane 使用 `lead takeover --as-lane`。合并、打标签或发布前运行 `lead verify`。`plans`、`fleet` 和 `fleet ui` 仅提供只读视图。daemon 不会自行启动、无授权任命、写入队列或 lead 记录、执行自由文本指令，也不会扩大权限。
+
+v2.0.1 版保持协议 2。默认 `--brain-kinds` 改为 `claude`（仍可选择其他类型），并在日志、地图和状态输出中记录 brain 的退役原因及被排除的配置。`permission_mode` 退役会指出可能的 ask 模式原因。只有在机器报告成功返回后，才会丢弃不再需要的队列状态；daemon 还会将地图中列出的排除配置限制为 16 个，但仍保留完整的排除集合。任命检查现在也会将属于其他未完成计划的 lane 视为计划成员。
+
+v2.0.2 版保持协议 2。在 ask 模式的 pick-v2 启动参数中，可在可选的 `--model <name>` 后接受且仅接受一个末尾的 `--ask`，并在启动前移除；daemon 会自行添加 `--ask --trust-cwd`。其他位置的 `--ask`、CLI 自身的权限标志以及 `--` 后的参数仍会被拒绝。Kit 1.4.x 的启动参数保持不变，仍可接受。末尾带换行符的 pane 地址会被拒绝。
+
+v2.1.0 版保持协议 2。`fleet ui` 在各分组中新增 `Attention`、`Active`、`Waiting`、`Done` 和 `All` 视图，也包括队列；地图新增可选字段 `state_updated_at` 和 `unreadable_reason`。由人启动的 daemon 会拒绝它无法安全接受的权限或计划审批对话框；它不会拒绝 agent 自己提出的工作问题，登录、绕过权限确认和文件夹信任仍由人处理。brain 的拒绝会被明确处理；一小时内拒绝三次会退役该 brain。现在可以就带类别的阻塞向 brain 提问。它的 `ask_lead_to_resolve` 操作只有在类别为 none、C3、C4 或 C7 时，才能将带 `resolver: lead` 的阻塞转交给计划 lead；C1（审批）、C2（同意或登录）、C5（损害）和 C6（条款）仍由人处理，C1–C7 以外的类别会被拒绝。此版本还读取 pack 8.0.0 的 journal-event/v8 阻塞事件和 plan-snapshot/v8 阻塞数据。
 
 ## 备注
 

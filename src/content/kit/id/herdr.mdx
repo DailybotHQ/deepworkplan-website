@@ -6,11 +6,17 @@ lang: id
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Addon Herdr
 
 [Herdr](https://herdr.dev) menempatkan coding agent di dalam panel, di mesin Anda dan di mesin yang dijangkaunya melalui SSH. Addon ini memungkinkan sebuah Deep Work Plan menggunakan agen-agen tersebut sebagai **rekan** (peer): sebuah rencana dapat menyerahkan tugas yang terbatas kepada agen di panel lain, menerima tepat satu balasan yang diotorisasi, dan menyimpan catatan pertukaran tersebut.
 
 Ini adalah addon opsional dari **DWP v7** (pack `v7.12.2`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
+
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
+<HerdrLoop lang="id" class="not-prose my-10" />
 
 ## Apa yang diintegrasikan
 
@@ -25,7 +31,6 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 | Membutuhkan | izin `agent_delegation` dari kontrak rencana |
 
 **Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning: verb CLI beserta flag yang terdokumentasi, kode keluar `0`–`7`, variabel `HERDR_PEERS_*`, `DWP_PLAN`, dan `DWP_TASK` yang terdokumentasi, protokol 2, serta kontrak JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1`, dan catatan delegasi. Perubahan yang merusak kompatibilitas pada salah satunya menaikkan versi mayor, dan perubahan format wire juga menaikkan nomor protokol. `v1.0.0` tidak mengubah perilaku apa pun dari `v0.3.3`, dan rilis 0.x tidak lagi didukung.
-
 
 ## Instalasi
 
@@ -104,7 +109,7 @@ Rilis ini hanya menambah: protokol 1 serta semua perintah, flag, kode keluar, da
 
 herdr-peers 1.2.0 menambahkan **autopilot** (`autopilot.md`): sebuah daemon opsional, `herdr-peers autopilot`, yang dijalankan oleh manusia agar rencana yang panjang tidak berhenti di layar persetujuan. Daemon ini mengawasi setiap agen di setiap mesin Herdr yang diaktifkan dan, ketika ada agen yang menunggu di sebuah layar, menerima salah satu opsi. Rilis 1.2.1 memperbaiki kasus ketika pertanyaan yang opsinya memiliki deskripsi panjang dibiarkan tidak terjawab. Rilis 1.2.2 menjawab pertanyaan yang ditampilkan dengan pratinjau di samping opsinya dan mengenali tanda rekomendasi dalam bahasa Spanyol, Prancis, Jerman, dan Italia. Rilis 1.3.0 menambahkan **loop**: `autopilot --loop` menjaga setiap plan yang terbuka tetap berjalan sampai selesai di semua mesin, `--notify`/`--notify-env` mengarahkan laporannya ke tempat yang Anda mau, dan kata kerja baca-saja `plans` serta `fleet` bersama fleet UI memperlihatkan setiap jalur, mesin, dan plan terbuka dalam sekali pandang.
 
-Rilis 2.0.0 memindahkan jalur ke **protokol 2** dan menambahkan tiga hal: **penunjukan lead** — hanya atas perkataan eksplisit manusia (`lead claim --allow-appointment`), plan dengan grant yang lead dan semua penerusnya hilang dapat menunjuk jalur hidup pertamanya sebagai lead baru (`lead takeover --as-lane`, disondel dua kali, paling banyak dua penunjukan per plan), dan **`lead verify`** adalah pemeriksaan baca-saja yang dijalankan sebelum merge, tag, atau release apa pun; **otak autopilot** — dengan `--brain`, daemon yang dijalankan manusia meluncurkan satu agen khusus (coding-agents-kit 1.3.0 atau lebih baru) dan hanya mematuhinya dalam daftar tindakan tertutup, menolak berjalan sama sekali jika `ak` hilang atau lebih tua; dan **antrean plan** — pack menulis `.dwp/queue.json` (skema `dwp-queue-v1`) dan dengan `--loop` daemon memulai plan berikutnya yang diantrekan dan disetujui tanpa Anda. Pada plan dengan grant, setiap jalur dan penerus harus menjalankan 2.0 atau lebih baru.
+Rilis 2.0.0 mengalihkan pertukaran pesan ke **protokol 2** dan menambahkan tiga hal: **penunjukan lead** — hanya atas perkataan eksplisit manusia (`lead claim --allow-appointment`), rencana dengan izin yang lead dan semua penerusnya hilang dapat menunjuk lane hidup pertamanya sebagai lead baru (`lead takeover --as-lane`, diperiksa dua kali, paling banyak dua penunjukan per rencana), dan **`lead verify`** adalah pemeriksaan baca-saja yang dijalankan sebelum merge, tag, atau release apa pun; **otak autopilot** — dengan `--brain`, daemon yang dijalankan manusia meluncurkan satu agen khusus (coding-agents-kit 1.3.0 atau lebih baru) dan hanya mematuhinya dalam daftar tindakan tertutup, menolak berjalan sama sekali jika `ak` hilang atau lebih tua; dan **antrean rencana** — pack menulis `.dwp/queue.json` (skema `dwp-queue-v1`) dan dengan `--loop` daemon memulai rencana berikutnya yang diantrekan dan disetujui tanpa Anda. Pada rencana dengan izin, setiap lane dan penerus harus menjalankan 2.0 atau lebih baru.
 
 - **Hanya manusia yang memulainya.** Tidak ada pesan, rekan, atau rencana yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. Agen memulainya hanya ketika manusianya memintanya secara langsung di dalam sesi.
 - **Yang diterimanya.** Pertanyaan dengan opsi, persetujuan tool, persetujuan rencana, kepercayaan folder, dan prompt pembaruan, yang dilewatinya. Ia mengambil opsi yang ditandai sebagai rekomendasi, jika tidak ada maka opsi yang sudah dipilih lebih dulu oleh CLI, jika tidak ada maka opsi pertama, dan mengikuti dialog multi-langkah sampai selesai dengan membaca ulang layar setelah setiap penekanan tombol.
@@ -116,6 +121,20 @@ Rilis 2.0.0 memindahkan jalur ke **protokol 2** dan menambahkan tiga hal: **penu
 **Yang Anda terima dengan menjalankannya.** Dengan autopilot aktif, permintaan sebuah agen disetujui tanpa dilihat oleh manusia, termasuk perintah yang sebenarnya akan ditolak oleh manusia itu. Tidak ada daftar tolak (deny-list): autopilot tidak menilai apa yang dilakukan sebuah perintah. Kontrol yang tersisa adalah mode izin dan guardrail milik tiap agen, apa yang dapat dijangkau oleh akun dan mesinnya, aturan repositori, dan code review sebelum merge.
 
 Autopilot berada di luar protokol delegasi: ia tidak mengirim ask, balasan, atau pemberitahuan, dan aturan bagi agen dan lead tidak berubah — satu-satunya layar yang mereka jawab dengan tombol adalah kepercayaan folder, pada panel yang mereka luncurkan sendiri. Rilis 1.2.0 juga mendokumentasikan, di `launcher.md`, cara lead membuka beberapa agen sekaligus dengan `ak`.
+
+### Kontrol daemon dan loop v2
+
+`autopilot run` berjalan di latar depan; `start` berjalan di latar belakang; `stop`, `status`, dan `logs` mengendalikan atau memeriksanya. Manusia harus memulainya. Dengan `--loop`, daemon hanya mendorong lead rencana yang menganggur, membiarkan rencana yang terblokir, berhenti setelah tiga prompt tanpa kemajuan, meminta penerus yang tercatat mengambil alih lead yang hilang, dan memproses antrean rencana yang disetujui dengan mengirim prompt kepada lead-nya. Antrean bersifat hanya-baca bagi Herdr. `--notify "<command>"` mengirim event rencana tanpa menambah wewenang.
+
+`--notify-env NAME` meneruskan satu variabel lingkungan yang disebutkan ke perintah. Selain itu, perintah berjalan dengan lingkungan minimal (`PATH`, `HOME`, pengaturan lokal, dan direktori XDG), tidak pernah dengan token atau kunci.
+
+Dengan `--brain`, Herdr menggunakan coding-agents-kit 1.3.0 atau lebih baru: `ak pick` menyediakan kontrak peluncuran pick-v2 yang tervalidasi dalam mode ask. `--brain-kinds codex,claude` menetapkan prioritas penyedia dan `--brain-model claude=sonnet` memilih model. Otak hanya dapat mengembalikan tindakan dari daftar tertutup; jika `ak` tidak ada atau versinya lama, startup gagal secara tertutup (fail-closed). Penunjukan memerlukan dua hal sekaligus: izin pada rencana (`lead claim --allow-appointment`) dan opsi `--appoint` pada daemon yang dimulai manusia; lane menggunakan `lead takeover --as-lane`. Jalankan `lead verify` sebelum merge, tag, atau rilis. `plans`, `fleet`, dan `fleet ui` adalah tampilan hanya-baca. Daemon tidak pernah memulai dirinya sendiri, menunjuk tanpa izin, menulis antrean atau catatan lead, bertindak atas teks bebas, atau memperluas izin.
+
+Rilis v2.0.1 mempertahankan protokol 2. Nilai default `--brain-kinds` berubah menjadi `claude` (jenis lain tetap dapat dipilih), dan alasan penggantian brain serta profil yang dikecualikan dicatat dalam log, peta, dan status. Penggantian `permission_mode` menyebutkan kemungkinan penyebab pada mode ask. Status antrean yang tidak lagi diperlukan baru dibuang setelah laporan mesin mendapat jawaban; daemon juga membatasi profil yang ditampilkan pada peta menjadi 16 tanpa melupakan seluruh daftar pengecualian. Pemeriksaan appointment kini menganggap lane di rencana terbuka lain sebagai keanggotaan rencana.
+
+Rilis v2.0.2 mempertahankan protokol 2. Pada argumen peluncuran pick-v2 dalam mode ask, tepat satu `--ask` di posisi akhir diterima setelah `--model <name>` yang opsional lalu dihapus sebelum peluncuran; daemon menambahkan `--ask --trust-cwd` sendiri. Posisi `--ask` lainnya, flag izin milik CLI, dan argumen setelah `--` tetap ditolak. Argumen peluncuran kit 1.4.x tetap diterima tanpa perubahan. Alamat pane yang berakhir dengan baris baru ditolak.
+
+Rilis v2.1.0 mempertahankan protokol 2. `fleet ui` menambahkan tampilan `Attention`, `Active`, `Waiting`, `Done` dan `All` pada setiap pengelompokan, termasuk antrean; peta menambahkan kolom opsional `state_updated_at` dan `unreadable_reason`. Daemon yang dimulai oleh manusia menolak dialog izin atau persetujuan rencana yang tidak dapat diterima dengan aman. Daemon tidak menolak pertanyaan kerja dari agent; login, konfirmasi bypass izin, dan kepercayaan folder tetap ditangani manusia. Penolakan brain ditangani secara eksplisit; tiga penolakan dalam satu jam membuat brain tersebut dihentikan. Brain kini dapat ditanya tentang blocker berkelas. Tindakan `ask_lead_to_resolve` hanya dapat mengirim blocker dengan `resolver: lead` kepada lead rencana jika kelasnya none, C3, C4, atau C7; C1 (persetujuan), C2 (consent atau login), C5 (kerusakan), dan C6 (ketentuan) tetap ditangani manusia, sedangkan kelas di luar C1–C7 ditolak. Rilis ini juga membaca peristiwa blocker journal-event/v8 dan data blocker plan-snapshot/v8 dari pack 8.0.0.
 
 ## Catatan
 

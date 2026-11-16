@@ -10,6 +10,8 @@ order: 3
 
 Zaktualizuj zależności repozytorium w przepływie partii — zwalidowanym i odwracalnym. Trzeci opcjonalny addon Deep Work Plan.
 
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
+
 ## Co dodaje
 
 - Wykrywanie **rzeczywistego** menedżera pakietów repozytorium (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer i inne) na podstawie istniejącego manifestu i pliku lock.
@@ -23,7 +25,6 @@ Zaktualizuj zależności repozytorium w przepływie partii — zwalidowanym i od
 4. Uruchomienie rzeczywistej bramki walidacji repozytorium po każdej partii; wycofanie każdej, która zawiedzie.
 5. Podsumowanie tego, co zaktualizowano, pominięto i wycofano; pozostawienie commita programiście.
 
-
 ## Specyfikacja v7
 
 | Element | Wartość |
@@ -33,6 +34,7 @@ Zaktualizuj zależności repozytorium w przepływie partii — zwalidowanym i od
 | Deskryptor | `addons/dependency-upgrade/addon.json` (interfejs 1) |
 | Polecenie | `/lib-upgrade` instalowane w `.agents/commands/` po zaakceptowaniu |
 | Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v7.12.2`) |
+
 ## Uwagi
 
 Niezależny od menedżera pakietów — nigdy nie uruchamia npm/ncu w repozytorium spoza świata JS. Opcjonalny, nigdy wymagany i nigdy nie commituje automatycznie.

@@ -6,11 +6,17 @@ lang: it
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Addon Herdr
 
 [Herdr](https://herdr.dev) colloca gli agenti di codice in pannelli, sulla tua macchina e sulle macchine che raggiunge via SSH. Questo addon consente a un Deep Work Plan di usare quegli agenti come **peer**: un piano può affidare un task delimitato a un agente in un altro pannello, ricevere esattamente una risposta autorizzata e conservare una traccia dello scambio.
 
 È un addon opzionale di **DWP v7** (pack `v7.12.2`). La metodologia funziona allo stesso modo senza di esso: con l’addon assente o disattivato, ogni task viene eseguito nella sessione corrente, esattamente come prima.
+
+Deep Work Plan ha quattro pilastri: prima la specifica, il repository è la harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere la harness e il loop; la metodologia funziona da sola.
+
+<HerdrLoop lang="it" class="not-prose my-10" />
 
 ## Cosa integra
 
@@ -25,7 +31,6 @@ L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](http
 | Richiede | la concessione `agent_delegation` del contratto del piano |
 
 **Stabile da `v1.0.0`.** L’interfaccia pubblica segue il versionamento semantico: i verbi della CLI e i relativi flag documentati, i codici di uscita `0`–`7`, le variabili documentate `HERDR_PEERS_*`, `DWP_PLAN` e `DWP_TASK`, il protocollo 1 e i contratti JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` e il record di delega. Una modifica incompatibile a uno qualsiasi di essi incrementa la versione major, e una modifica al formato di trasmissione incrementa anche il numero di protocollo. `v1.0.0` non cambia alcun comportamento rispetto a `v0.3.3`, e le release 0.x non sono più supportate.
-
 
 ## Installazione
 
@@ -116,6 +121,20 @@ La versione 2.0.0 sposta il filo sul **protocollo 2** e aggiunge tre cose: **la 
 **Cosa accetti eseguendolo.** Con autopilot attivo, la richiesta di un agente viene approvata senza che la persona la veda, compreso un comando che la persona avrebbe rifiutato. Non esiste una deny-list: autopilot non giudica ciò che fa un comando. I controlli che restano sono la modalità di permessi e i guardrail propri di ogni agente, ciò che il suo account e la sua macchina possono raggiungere, le regole del repository e la code review prima di un merge.
 
 Autopilot è esterno al protocollo di delega: non invia alcuna richiesta, risposta o notifica, e la regola per agenti e lead resta invariata — l’unica schermata su cui premono tasti è quella della fiducia nella cartella, sui pannelli che hanno avviato loro. La release 1.2.0 documenta inoltre, in `launcher.md`, come un lead apre più agenti insieme con `ak`.
+
+### Comandi del daemon e loop v2
+
+`autopilot run` opera in primo piano; `start` lo avvia in background; `stop`, `status` e `logs` lo controllano o ne mostrano lo stato. Può avviarlo solo una persona. Con `--loop`, sollecita solo il lead inattivo di un piano, lascia invariati i piani bloccati, si ferma dopo tre solleciti senza progressi, chiede a un successore registrato di subentrare a un lead assente e consuma la coda dei piani approvati inviando un prompt al lead. Herdr legge soltanto la coda. `--notify "<command>"` invia eventi del piano senza aggiungere autorità.
+
+`--notify-env NAME` passa al comando una variabile d’ambiente con quel nome. Per il resto il comando gira con un ambiente minimo (`PATH`, `HOME`, la localizzazione e le directory XDG), mai con token o chiavi.
+
+Con `--brain`, Herdr usa coding-agents-kit 1.3.0 o successivo: `ak pick` fornisce un contratto di avvio pick-v2 verificato in modalità ask. `--brain-kinds codex,claude` imposta la priorità dei provider; `--brain-model claude=sonnet` seleziona un modello. Il cervello può restituire solo un’azione da un elenco chiuso; senza `ak` o con una versione precedente, il daemon si rifiuta di partire. La nomina richiede sia l’autorizzazione del piano (`lead claim --allow-appointment`) sia `--appoint` sul daemon avviato da una persona; la corsia usa `lead takeover --as-lane`. Esegui `lead verify` prima di merge, tag o release. `plans`, `fleet` e `fleet ui` sono viste di sola lettura. Il daemon non si avvia da solo, non nomina senza autorizzazione, non scrive la coda o il record di lead, non agisce su testo libero e non amplia i permessi.
+
+La versione v2.0.1 mantiene il protocollo 2. Cambia il valore predefinito di `--brain-kinds` in `claude` (gli altri tipi restano selezionabili) e registra nel log, nella mappa e nello stato i motivi di ritiro del brain e i profili esclusi. Un ritiro `permission_mode` indica la probabile causa legata alla modalità ask. Lo stato della coda non più necessario viene eliminato solo dopo la risposta di un rapporto macchina; il daemon limita inoltre a 16 i profili esclusi elencati nella mappa, senza dimenticare l’insieme completo. Per l’appointment, una lane in un altro piano aperto ora conta come appartenenza a un piano.
+
+La versione v2.0.2 mantiene il protocollo 2. In un avvio pick-v2 in modalità ask viene accettato un solo `--ask` finale dopo un `--model <name>` facoltativo e rimosso prima dell’avvio; il daemon aggiunge il proprio `--ask --trust-cwd`. Le altre posizioni di `--ask`, i flag di permesso del CLI e gli argomenti dopo `--` restano rifiutati. Gli argomenti di avvio del kit 1.4.x restano accettati senza modifiche. Gli indirizzi pane che terminano con un a capo vengono rifiutati.
+
+La versione v2.1.0 mantiene il protocollo 2. `fleet ui` aggiunge le viste `Attention`, `Active`, `Waiting`, `Done` e `All` a ogni raggruppamento, incluse le code; la mappa aggiunge i campi facoltativi `state_updated_at` e `unreadable_reason`. Il daemon avviato da una persona nega le finestre di permesso o approvazione del piano che non può accettare in sicurezza. Non nega la domanda di lavoro di un agente; accesso, conferma del bypass delle autorizzazioni e fiducia nella cartella restano alla persona. Il rifiuto del brain viene gestito esplicitamente; tre rifiuti in un’ora lo fanno ritirare. Ora è possibile chiedere al brain di valutare un blocker classificato. L’azione `ask_lead_to_resolve` può inviare al lead del piano un blocker con `resolver: lead` solo se la classe è none, C3, C4 o C7; C1 (approvazione), C2 (consenso o accesso), C5 (danno) e C6 (condizioni) restano alla persona, e le classi fuori da C1–C7 vengono rifiutate. La versione legge anche gli eventi blocker journal-event/v8 e i dati blocker plan-snapshot/v8 del pack 8.0.0.
 
 ## Note
 

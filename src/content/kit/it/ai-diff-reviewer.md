@@ -16,6 +16,8 @@ Dallo standard 2.3.0 quella revisione locale **fa parte della baseline, non è u
 
 Il confine che rende tutto questo adottabile in sicurezza è volutamente stretto. Il revisore è una skill con licenza MIT e fissata a un tag, eseguita dall'agente di codice che già utilizzi: nessun flusso di Deep Work Plan dipende quindi da un servizio commerciale, da un fornitore CI o da un segreto. Il **Flow A** (solo locale) è ciò che riceve ogni repository onboarded; il **Flow B** viene proposto esplicitamente e mai installato senza richiesta. Chi sviluppa può anche rifiutare del tutto il revisore — quel rifiuto viene registrato come eccezione dichiarata, e `verify` segnala il repository come non conforme su quel punto finché non viene installato.
 
+Deep Work Plan ha quattro pilastri: prima la specifica, il repository è la harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere la harness e il loop; la metodologia funziona da sola.
+
 ## Quando usarlo
 
 | Segnale | Azione |

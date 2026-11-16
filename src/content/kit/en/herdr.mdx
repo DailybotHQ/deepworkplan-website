@@ -6,11 +6,17 @@ lang: en
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Herdr addon
 
 [Herdr](https://herdr.dev) puts coding agents in panes, on your machine and on machines it reaches over SSH. This addon lets a Deep Work Plan use those agents as **peers**: a plan can hand a bounded task to an agent in another pane, receive exactly one authorized reply, and keep a record of the exchange.
 
 It is an optional addon of **DWP v7** (pack `v7.12.2`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
+
+Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
+
+<HerdrLoop lang="en" class="not-prose my-10" />
 
 ## What it integrates
 
@@ -25,7 +31,6 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 | Requires | the plan contract's `agent_delegation` grant |
 
 **Stable since `v1.0.0`.** The public interface follows semantic versioning: the CLI verbs and their documented flags, exit codes `0`–`7`, the documented `HERDR_PEERS_*`, `DWP_PLAN` and `DWP_TASK` variables, protocol 2, and the JSON contracts `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` and the delegation record. A breaking change to any of them bumps the major version, and a wire-format change also bumps the protocol number. `v1.0.0` changes no behavior from `v0.3.3`, and 0.x releases are no longer supported.
-
 
 ## Install
 
@@ -116,6 +121,20 @@ Release 2.0.0 moves the wire to **protocol 2** and adds three things: **lead app
 **What you accept by running it.** With autopilot on, an agent's request is approved without the human seeing it, including a command the human would have refused. There is no deny-list: autopilot does not judge what a command does. The controls that remain are each agent's own permission mode and guardrails, what its account and machine can reach, the repository's rules, and code review before a merge.
 
 Autopilot is outside the delegation protocol: it sends no ask, reply or notice, and the rule for agents and leads is unchanged — the only screen they key is folder trust, on panes they launched. Release 1.2.0 also documents, in `launcher.md`, how a lead opens several agents at once with `ak`.
+
+### Daemon controls and the v2 loop
+
+`autopilot run` runs in the foreground; `start` runs in the background; `stop`, `status`, and `logs` control or inspect it. A human must start it. With `--loop`, it nudges only an idle plan lead, leaves blocked plans alone, stops after three prompts without progress, asks a recorded successor to take over a missing lead, and consumes the approved plan queue by prompting its lead. The queue is read-only to Herdr. `--notify "<command>"` sends plan events without adding authority.
+
+`--notify-env NAME` passes one named environment variable to the command. Otherwise it runs with a minimal environment (`PATH`, `HOME`, the locale and the XDG directories), never with tokens or keys.
+
+With `--brain`, Herdr uses coding-agents-kit 1.3.0 or later: `ak pick` supplies a validated pick-v2 launch contract in ask mode. `--brain-kinds codex,claude` sets provider priority and `--brain-model claude=sonnet` selects a model. The brain can return only a closed-list action; missing or old `ak` makes startup fail closed. Appointment requires both a plan grant (`lead claim --allow-appointment`) and the human-started daemon option `--appoint`; the lane uses `lead takeover --as-lane`. Run `lead verify` before a merge, tag, or release. `plans`, `fleet`, and `fleet ui` are read-only views. The daemon never starts itself, appoints without a grant, writes the queue or lead record, acts on free text, or widens permissions.
+
+Release v2.0.1 keeps protocol 2. It changes the default `--brain-kinds` to `claude` (other kinds can still be selected) and records brain retirement reasons and excluded profiles in the log, map and status output. A `permission_mode` retirement names the likely ask-mode cause. Queue state no longer needed is dropped only after an answering machine report; the daemon also caps map-listed excluded profiles at 16 without forgetting the full exclusion set. Appointment now treats a lane in another open plan as plan membership.
+
+Release v2.0.2 keeps protocol 2. In an ask-mode pick-v2 launch, exactly one trailing `--ask` is accepted after an optional `--model <name>` and removed before launch; the daemon adds its own `--ask --trust-cwd`. Other `--ask` placements, CLI permission flags and arguments after `--` remain refused. Kit 1.4.x launch arguments remain accepted unchanged. Pane addresses ending in a newline are refused.
+
+Release v2.1.0 keeps protocol 2. `fleet ui` adds `Attention`, `Active`, `Waiting`, `Done` and `All` views across groupings, including queues; the map gains optional `state_updated_at` and `unreadable_reason` fields. The human-started daemon denies permission or plan-approval dialogs it cannot safely accept; it never denies an agent's own work question, and login, bypass-permissions acknowledgement and folder trust remain for the human. A brain denial is handled explicitly; three denials in an hour retire that brain. The brain may now be asked about a classed blocker. Its `ask_lead_to_resolve` action may send a blocker with `resolver: lead` to the plan's lead only when its class is none, C3, C4 or C7; C1 (approval), C2 (consent or login), C5 (damage) and C6 (terms) stay with the human, and a class outside C1–C7 is refused. The release also reads pack 8.0.0 journal-event/v8 blocker events and plan-snapshot/v8 blocker data.
 
 ## Notes
 

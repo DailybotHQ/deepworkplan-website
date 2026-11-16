@@ -12,6 +12,8 @@ Mỗi coding agent trên terminal đều có các cờ riêng để tiếp tục
 
 Addon này tích hợp bộ kit vào **DWP v7** (gói `v7.12.2`) làm phương thức truyền ủy thác **headless**. Addon là tùy chọn: khi không có nó, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây. Bản thân bộ kit là một sản phẩm MIT hoạt động được mà không cần Deep Work Plan.
 
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+
 ## Bộ kit mang lại cho bạn những gì
 
 - **Một cú pháp cho mọi CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` và `ak antigravity`, cùng các tuyến nhà cung cấp (Z.AI GLM, Azure OpenAI, xAI và Gemini API), với cùng các cờ phiên: `-c` để tiếp tục, `-r <id>` để khôi phục.
@@ -87,6 +89,12 @@ Kit bản 1.3.0 (giao diện 1 không đổi) thêm **pick-v2**: `ak pick --kind
 
 Kit bản 1.4.0 (giao diện 1 không đổi) thêm **`ak update`**, chỉ do con người gọi: nó đưa một CLI đến bản phát hành mới nhất của nhà cung cấp với xác minh của `ak install` — khám phá, xác minh, cài đặt và ghim lại `providers.toml` của kit này một cách nguyên tử (giữ một `.bak`). `--take-over` bắt buộc khi thay thế symlink do nhà cung cấp quản lý, việc hạ phiên bản bị từ chối trừ khi nêu tên, và bản cập nhật chỉ tính khi PATH phân giải được bản mới.
 
+## Từ coding-agents-kit 1.5.0 (giao diện 1)
+
+Bản phát hành này bổ sung trường `tokens` cho `ak run --json`, chỉ chứa số liệu do CLI báo cáo (`input`, `output`, `cache_read`, `cache_write` và `total`). Giá trị không được báo cáo vẫn là `null`; kit không bao giờ tự suy ra. `ak usage --json` bổ sung khối `advisory` gồm `runs`, `tokens` và `coverage`. Khối này chỉ để tham khảo, không thay đổi cửa sổ hạn mức của nhà cung cấp, kết luận về năng lực hay điều kiện được chọn bởi `ak pick`.
+
+Khi `--ask` hoặc `AGENTKIT_PERMISSIONS=ask` được bật, `ak` nay buộc dùng chế độ ask tường minh riêng của từng CLI; CLI không có cờ ask giữ nguyên. Khi lựa chọn opt-out này được bật, `launch.argv` của pick-v2 kết thúc bằng `--ask`. herdr-peers (v2.0.2) trở lên chấp nhận đối số cuối này; v2.0.1 từ chối.
+
 ## Tự chủ theo mặc định, với lựa chọn opt-out luôn được ưu tiên
 
 Kể từ `v0.2.0`, `ak <kind>` khởi chạy mọi agent ở chế độ **tự chủ**: nó thêm cờ tự chủ của chính CLI đó, chỉ được lưu trong tệp `providers.toml` của bộ kit. Chế độ tự chủ dành cho các môi trường dùng một lần hoặc có sandbox, chẳng hạn một dev container.
@@ -107,6 +115,8 @@ Trên một kế hoạch v7 có hợp đồng cấp quyền `agent_delegation`, 
 | Tác vụ cần tương tác, chạy lâu hoặc nằm trên một máy khác | [Herdr](/kit/herdr) (một peer trong pane) |
 
 Hai addon có thể kết hợp với nhau: herdr-peers có thể khởi chạy một peer trong pane với môi trường mà `ak env <kind> @profile` in ra. Để chạy nhiều lane cùng lúc, xem [Chạy nhiều agent](/methodology/06-orchestration).
+
+herdr-peers v2.0.0 dùng giao diện này cho bộ não autopilot tùy chọn: `ak pick --kinds ... --json` trả về hợp đồng khởi chạy pick-v2; Herdr xác thực hợp đồng, yêu cầu `launch.permissions: ask`, rồi khởi chạy `launch.argv` được trả về. Bộ não không thể bật các cờ tự chủ hoặc bypass. `ak update` vẫn do con người gọi; bộ não không bao giờ cập nhật CLI.
 
 ## Ghi chú
 

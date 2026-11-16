@@ -1,8 +1,10 @@
 ---
 title: "O Kit do Deep Work Plan"
 description: "A skill e suas nove sub-skills, commands, adaptadores de agente, presets de onboarding, addons opcionais e exemplos que tornam o Deep Work Plan executável em qualquer lugar."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é o harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o loop; a metodologia funciona por conta própria.
 
 ## O Kit do Deep Work Plan
 

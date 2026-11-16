@@ -12,6 +12,8 @@ Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayraklar�
 
 Bu eklenti, kiti **DWP v7**'ye (paket `v7.12.2`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
+
 ## Kitin size sundukları
 
 - **Her CLI için tek bir söz dizimi.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` ve `ak antigravity`, ayrıca sağlayıcı rotaları (Z.AI GLM, Azure OpenAI, xAI ve Gemini API), aynı oturum bayraklarıyla: `-c` sürdürür, `-r <id>` devam ettirir.
@@ -87,6 +89,12 @@ Kit v1.3.0 (arayüz 1 değişmedi) **pick-v2** ekler: `ak pick --kinds codex,cla
 
 Kit v1.4.0 (arayüz 1 değişmedi) **`ak update`** ekler — yalnızca insan tarafından çağrılır: bir CLI'ı `ak install` doğrulamasıyla satıcının en yeni sürümüne taşır — keşfeder, doğrular, kurar ve bu kitin `providers.toml` dosyasını atomik olarak yeniden sabitler (bir `.bak` tutulur). `--take-over`, satıcı tarafından yönetilen bir sembolik bağlantıyı değiştirmek için zorunludur; sürüm düşürmeler adıyla belirtilmedikçe reddedilir ve güncelleme, PATH yeni sürümü çözdüğünde sayılır.
 
+## coding-agents-kit 1.5.0'dan itibaren (arayüz 1)
+
+Bu sürüm, `ak run --json` çıktısına yalnızca CLI tarafından bildirilen sayımları içeren `tokens` alanını ekler (`input`, `output`, `cache_read`, `cache_write` ve `total`). Bildirilmeyen değerler `null` kalır; kit bunları asla tahmin etmez. `ak usage --json` çıktısına `runs`, `tokens` ve `coverage` alanlarını içeren bir `advisory` bloğu eklenir. Bu bilgi amaçlıdır; sağlayıcı kota pencerelerini, kapasite kararını veya `ak pick` uygunluğunu değiştirmez.
+
+`--ask` veya `AGENTKIT_PERMISSIONS=ask` etkinken `ak`, her CLI'nin açık ask modunu artık zorunlu kılar; ask bayrağı olmayan CLI'ler değişmez. Bu devre dışı bırakma etkinken pick-v2 `launch.argv`'nin sonuna `--ask` ekler. herdr-peers (v2.0.2) ve sonrası bu sondaki argümanı kabul eder; v2.0.1 reddeder.
+
 ## Varsayılan olarak özerklik, her zaman üstün gelen bir devre dışı bırakma seçeneğiyle
 
 `v0.2.0` sürümünden bu yana `ak <kind>`, her agent'ı **özerk** olarak başlatır: CLI'ın yalnızca kitin `providers.toml` dosyasında tutulan kendi özerklik bayrağını ekler. Özerklik, bir geliştirme konteyneri gibi atılabilir ya da korumalı (sandbox) ortamlar için tasarlanmıştır.
@@ -107,6 +115,8 @@ Sözleşmesi `agent_delegation` yetkisi veren bir v7 planında `execute`, `paral
 | Görev etkileşim gerektiriyor, uzun sürüyor ya da başka bir makinede bulunuyor | [Herdr](/kit/herdr) (bir bölmedeki eş) |
 
 İkisi birlikte kullanılabilir: herdr-peers, bir bölmede `ak env <kind> @profile` komutunun yazdırdığı ortamla bir eş başlatabilir. Aynı anda birçok şerit için [Birçok ajanı çalıştırmak](/methodology/06-orchestration) bölümüne bakın.
+
+herdr-peers v2.0.0, isteğe bağlı autopilot beyni için bu arayüzü kullanır: `ak pick --kinds ... --json` pick-v2 başlatma sözleşmesini döndürür; Herdr bunu doğrular, `launch.permissions: ask` koşulunu şart koşar ve ardından dönen `launch.argv` değerini başlatır. Beyin, otonomi veya bypass bayraklarını etkinleştiremez. `ak update` insan tarafından çalıştırılmaya devam eder; beyin CLI'ları asla güncellemez.
 
 ## Notlar
 

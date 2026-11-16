@@ -12,6 +12,8 @@ Every terminal coding agent has its own flags for continuing a session, its own 
 
 This addon integrates the kit into **DWP v7** (pack `v7.12.2`) as the **headless** delegation transport. It is optional: without it, every task runs in the current session, exactly as before. The kit itself is an MIT product that works without Deep Work Plan.
 
+Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
+
 ## What the kit gives you
 
 - **One grammar for every CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` and `ak antigravity`, plus provider routes (Z.AI GLM, Azure OpenAI, xAI and the Gemini API), with the same session flags: `-c` continues, `-r <id>` resumes.
@@ -87,6 +89,12 @@ Kit v1.3.0 (interface 1 unchanged) adds **pick-v2**: `ak pick --kinds codex,clau
 
 Kit v1.4.0 (interface 1 unchanged) adds **`ak update`**, human-invoked only: it brings a CLI to the vendor's newest release with `ak install`'s verification — discover, verify, install and re-pin this kit's `providers.toml` atomically (a `.bak` is kept). `--take-over` replaces a vendor-managed symlink, downgrades are refused unless named, and the update only counts when PATH resolves the new release.
 
+## From coding-agents-kit 1.5.0 (interface 1)
+
+This release adds a `tokens` field to `ak run --json`, containing only counts reported by the CLI (`input`, `output`, `cache_read`, `cache_write` and `total`). Unreported values remain `null`; the kit never imputes them. `ak usage --json` adds an `advisory` block with `runs`, `tokens` and `coverage`. It is informational and never changes vendor quota windows, the capacity verdict or `ak pick` eligibility.
+
+When `--ask` or `AGENTKIT_PERMISSIONS=ask` is active, `ak` now enforces each CLI's explicit ask mode; CLIs without an ask flag are unchanged. Under this opt-out, pick-v2's `launch.argv` ends with `--ask`. herdr-peers (v2.0.2) or later accepts that trailing argument; v2.0.1 refuses it.
+
 ## Autonomy by default, with an opt-out that always wins
 
 Since `v0.2.0`, `ak <kind>` launches every agent in **autonomy**: it adds the CLI's own autonomy flag, kept only in the kit's `providers.toml`. Autonomy is meant for disposable or sandboxed environments, such as a development container.
@@ -107,6 +115,8 @@ On a v7 plan whose contract grants `agent_delegation`, `execute` may hand a `par
 | The task needs interaction, runs long, or lives on another machine | [Herdr](/kit/herdr) (a peer in a pane) |
 
 The two compose: herdr-peers can launch a peer in a pane with the environment that `ak env <kind> @profile` prints. For many lanes at once, see [Running many agents](/methodology/06-orchestration).
+
+Herdr-peers v2.0.0 uses this interface for its optional autopilot brain: `ak pick --kinds ... --json` returns the pick-v2 launch contract; Herdr validates it, requires `launch.permissions: ask`, then launches the returned `launch.argv`. The brain cannot enable autonomy or bypass flags. `ak update` remains human-invoked; the brain never updates CLIs.
 
 ## Notes
 

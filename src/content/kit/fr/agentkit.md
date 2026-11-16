@@ -12,6 +12,8 @@ Chaque agent de code en terminal a ses propres options pour reprendre une sessio
 
 Cet addon intègre le kit dans **DWP v7** (pack `v7.12.2`) comme transport de délégation **headless**. Il est facultatif : sans lui, chaque tâche s’exécute dans la session courante, exactement comme avant. Le kit lui-même est un produit MIT qui fonctionne sans Deep Work Plan.
 
+Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dépôt est le harness, le loop engineering et l’efficacité mesurée. Les addons et les intégrations peuvent étendre le harness et la boucle ; la méthodologie fonctionne seule.
+
 ## Ce que vous apporte le kit
 
 - **Une grammaire pour chaque CLI.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok` et `ak antigravity`, ainsi que des routes de fournisseur (Z.AI GLM, Azure OpenAI, xAI et l’API Gemini), avec les mêmes options de session : `-c` continue, `-r <id>` reprend.
@@ -87,6 +89,12 @@ La version 1.3.0 du kit (interface 1 inchangée) ajoute **pick-v2** : `ak pick -
 
 La version 1.4.0 du kit (interface 1 inchangée) ajoute **`ak update`**, invoqué uniquement par un humain : il amène un CLI à la dernière version du fournisseur avec la vérification d'`ak install` — découvre, vérifie, installe et re-épingle le `providers.toml` de ce kit de manière atomique (un `.bak` est conservé). `--take-over` remplace un symlink géré par le fournisseur, les rétrogradations sont refusées sauf si nommées, et la mise à jour ne compte que lorsque PATH résout la nouvelle version.
 
+## À partir de coding-agents-kit 1.5.0 (interface 1)
+
+Cette version ajoute le champ `tokens` à `ak run --json`, avec uniquement les comptages signalés par le CLI (`input`, `output`, `cache_read`, `cache_write` et `total`). Les valeurs non signalées restent `null` ; le kit ne les impute jamais. `ak usage --json` ajoute un bloc `advisory` contenant `runs`, `tokens` et `coverage`. Il est informatif et ne modifie ni les fenêtres de quota du fournisseur, ni le verdict de capacité, ni l’éligibilité dans `ak pick`.
+
+Lorsque `--ask` ou `AGENTKIT_PERMISSIONS=ask` est actif, `ak` force désormais le mode ask explicite propre à chaque CLI ; les CLIs sans indicateur ask ne changent pas. Lorsque ce retrait est actif, `launch.argv` de pick-v2 se termine par `--ask`. herdr-peers (v2.0.2) ou ultérieur accepte cet argument final ; v2.0.1 le refuse.
+
 ## L’autonomie par défaut, avec un retrait qui l’emporte toujours
 
 Depuis `v0.2.0`, `ak <kind>` lance chaque agent en **autonomie** : il ajoute l’option d’autonomie propre à la CLI, conservée uniquement dans le `providers.toml` du kit. L’autonomie est destinée aux environnements jetables ou isolés, comme un conteneur de développement.
@@ -107,6 +115,8 @@ Sur un plan v7 dont le contrat octroie `agent_delegation`, `execute` peut confie
 | La tâche nécessite une interaction, dure longtemps ou se trouve sur une autre machine | [Herdr](/kit/herdr) (un pair dans un panneau) |
 
 Les deux se combinent : herdr-peers peut lancer un pair dans un panneau avec l’environnement qu’affiche `ak env <kind> @profile`. Pour de nombreux couloirs à la fois, voir [Faire tourner de nombreux agents](/methodology/06-orchestration).
+
+herdr-peers v2.0.0 utilise cette interface pour son cerveau facultatif d’autopilot : `ak pick --kinds ... --json` renvoie le contrat de lancement pick-v2 ; Herdr le vérifie, exige `launch.permissions: ask`, puis lance le `launch.argv` renvoyé. Le cerveau ne peut activer ni l’autonomie ni les options de bypass. `ak update` reste lancé par un humain ; le cerveau ne met jamais à jour les CLI.
 
 ## Notes
 

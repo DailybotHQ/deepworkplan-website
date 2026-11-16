@@ -12,6 +12,8 @@ Gib einem Repository mit einer **nutzerseitigen Interface-Oberfläche** eine `DE
 
 Eine „Interface-Oberfläche" ist Plural: eine gerenderte **visuelle UI**, gestylte **CLI-Ausgabe** und eine **konversationale** Oberfläche (das Produkt kommuniziert über Chat oder E-Mail) zählen jeweils einzeln. Das Addon erkennt jede davon unabhängig als **Profil**, und die akzeptierten Profile stapeln sich in dieselbe einzelne `DESIGN.md`.
 
+Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
+
 ## Was es hinzufügt
 
 - Eine `DESIGN.md` unter `docs/DESIGN.md` (neben den anderen Spezifikationen des Repos; das Repo-Stammverzeichnis nur dann, wenn es keinen `docs/`-Baum gibt), **von `AGENTS.md` referenziert**, damit Agenten sie wie die übrige Dokumentation entdecken. Ein Repo, eine Datei — niemals Geschwisterdateien pro Oberfläche.
@@ -40,7 +42,6 @@ Es ist nie erforderlich — ein Repository mit null optionalen Addons ist vollst
 
 Wenn angenommen, kann das Addon einen `/design-system`-Delegator in das `.agents/commands/`-Verzeichnis des Repos installieren, um `DESIGN.md` später neu zu erzeugen oder zu aktualisieren. Die Installation des Befehls ist optional; ein abgelehntes Addon installiert keinen.
 
-
 ## v7-Spezifikation
 
 | Element | Wert |
@@ -50,7 +51,6 @@ Wenn angenommen, kann das Addon einen `/design-system`-Delegator in das `.agents
 | Deskriptor |  (Schnittstelle 1) |
 | Zieldatei |  indexiert von  |
 | Versionierung | Gepinnt und versioniert mit dem Skill-Paket () |
-
 
 ## v7-Spezifikation
 

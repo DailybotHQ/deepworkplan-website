@@ -1,8 +1,10 @@
 ---
 title: "Deep Work Plan のキット"
 description: "スキルとその九つのサブスキル、コマンド、エージェントアダプター、オンボーディングプリセット、オプトイン式アドオン、そして Deep Work Plan をどこでも実行可能にする事例。"
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan には4つの柱があります。仕様ファースト、リポジトリこそがハーネス、Loop engineering、計測された効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論はそれ単体でも機能します。
 
 ## Deep Work Plan のキット
 

@@ -12,6 +12,8 @@ order: 8
 
 这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.12.2`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
 
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
+
 ## 工具包为你提供什么
 
 - **所有 CLI 共用一套语法。** `ak claude`、`ak codex`、`ak cursor`、`ak opencode`、`ak pi`、`ak cline`、`ak grok` 和 `ak antigravity`，以及各提供方路由（Z.AI GLM、Azure OpenAI、xAI 和 Gemini API），使用相同的会话参数：`-c` 继续，`-r <id>` 恢复。
@@ -87,6 +89,12 @@ ak doctor
 
 套件 1.4.0 版（接口 1 不变）新增 **`ak update`**，仅可由人类调用：它以 `ak install` 的验证方式将 CLI 带到供应商的最新版本——发现、验证、安装并原子性地重新固定本套件的 `providers.toml`（保留 `.bak`）。`--take-over` 用于替换供应商管理的符号链接，除非指名否则拒绝降级，且只有当 PATH 解析到新版本时更新才算生效。
 
+## coding-agents-kit 1.5.0 起（接口 1）
+
+此版本为 `ak run --json` 增加 `tokens` 字段，其中只包含 CLI 报告的计数（`input`、`output`、`cache_read`、`cache_write` 和 `total`）。未报告的值保持为 `null`；kit 不会推算。`ak usage --json` 增加包含 `runs`、`tokens` 和 `coverage` 的 `advisory` 块。该块仅供参考，不会改变供应商配额窗口、容量判定或 `ak pick` 的资格。
+
+启用 `--ask` 或 `AGENTKIT_PERMISSIONS=ask` 时，`ak` 现在会强制使用各 CLI 明确的 ask 模式；没有 ask 标志的 CLI 行为不变。启用此退出选项时，pick-v2 的 `launch.argv` 以 `--ask` 结尾。herdr-peers (v2.0.2) 或更高版本接受这个尾随参数；v2.0.1 会拒绝它。
+
 ## 默认自主运行，退出选项始终优先
 
 自 `v0.2.0` 起，`ak <kind>` 以**自主模式**启动每个代理：它会添加 CLI 自身的自主参数，该参数只保存在工具包的 `providers.toml` 中。自主模式面向可丢弃或沙箱化的环境，例如开发容器。
@@ -107,6 +115,8 @@ ak doctor
 | 任务需要交互、运行时间长，或位于另一台机器上 | [Herdr](/kit/herdr)（窗格中的一个对等方） |
 
 二者可以组合：herdr-peers 可以使用 `ak env <kind> @profile` 输出的环境，在窗格中启动一个对等方。同时运行多条通道时，请参阅[运行多个代理](/methodology/06-orchestration)。
+
+herdr-peers v2.0.0 使用此接口运行可选的 autopilot brain：`ak pick --kinds ... --json` 返回 pick-v2 启动契约；Herdr 会验证该契约，要求 `launch.permissions: ask`，然后启动返回的 `launch.argv`。brain 不能启用 autonomy 或 bypass 标志。`ak update` 仍只能由人调用；brain 不会更新 CLI。
 
 ## 备注
 

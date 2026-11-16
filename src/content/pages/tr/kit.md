@@ -1,8 +1,10 @@
 ---
 title: "Deep Work Plan kiti"
 description: "Skill ve dokuz alt skill'i, komutlar, ajan adaptörleri, onboarding hazır ayarları, tercihe dayalı eklentiler ve örnekler — Deep Work Plan'i her yerde çalıştırılabilir kılan her şey."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
 ## Deep Work Plan kiti
 

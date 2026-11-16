@@ -12,6 +12,8 @@ Hubungkan eksekusi Deep Work Plan ke **tim Dailybot** agar manusia melihat apa y
 
 Metodologi Deep Work Plan inti memiliki **nol** ketergantungan pada Dailybot. Repositori tanpa addon opsional sepenuhnya konforman. Tawarkan addon ini hanya ketika pengembang atau tim sudah menggunakan Dailybot; jangan pernah menginstal otomatis untuk semua orang.
 
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
 ## Kapan menggunakannya
 
 | Sinyal | Tindakan |

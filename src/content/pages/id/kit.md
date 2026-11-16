@@ -1,8 +1,10 @@
 ---
 title: "Kit Deep Work Plan"
 description: "Skill dan sembilan sub-skill-nya, command, adapter agent, preset onboarding, addon opt-in, dan contoh yang membuat Deep Work Plan dapat dijalankan di mana saja."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
 ## Kit Deep Work Plan
 

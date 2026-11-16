@@ -16,6 +16,8 @@ Desde o padrão 2.3.0 essa revisão local **faz parte da linha de base, não é 
 
 O limite que torna isto seguro de adotar é deliberadamente estrecho. O revisor é uma skill com licença MIT e fixada por tag, executada pelo agente de código que já utiliza, pelo que nenhum fluxo do Deep Work Plan depende de um serviço comercial, de um fornecedor de CI ou de um segredo. O **Fluxo A** (apenas local) é o que qualquer repositório integrado recebe; o **Fluxo B** é oferecido explicitamente e nunca instalado sem pedido. Quem desenvolve pode também recusar o revisor por completo — essa recusa fica registada como exceção declarada, e o `verify` reporta o repositório como não conforme nesse ponto até que seja instalado.
 
+O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é o harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o loop; a metodologia funciona por conta própria.
+
 ## Quando usar
 
 | Sinal | Ação |

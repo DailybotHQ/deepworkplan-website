@@ -10,6 +10,8 @@ order: 3
 
 Porta le dipendenze di un repository allo stato aggiornato con un workflow a lotti, validato e annullabile. Il terzo addon opt-in di Deep Work Plan.
 
+Deep Work Plan ha quattro pilastri: prima la specifica, il repository è la harness, loop engineering ed efficienza misurata. Addon e integrazioni possono estendere la harness e il loop; la metodologia funziona da sola.
+
 ## Cosa aggiunge
 
 - Il rilevamento del package manager **reale** del repo (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer e altri) dal manifest e dal lockfile esistenti.
@@ -23,7 +25,6 @@ Porta le dipendenze di un repository allo stato aggiornato con un workflow a lot
 4. Esegue il validation gate reale del repo dopo ogni lotto; annulla qualsiasi lotto che fallisce.
 5. Riassume cosa è stato aggiornato, saltato e annullato; lascia che sia lo sviluppatore a eseguire il commit.
 
-
 ## Specifica v7
 
 | Elemento | Valore |
@@ -33,6 +34,7 @@ Porta le dipendenze di un repository allo stato aggiornato con un workflow a lot
 | Descrittore | `addons/dependency-upgrade/addon.json` (interfaccia 1) |
 | Comando | `/lib-upgrade` installato in `.agents/commands/` se accettato |
 | Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.12.2`) |
+
 ## Note
 
 Indipendente dal package manager — non esegue mai npm/ncu in un repo non-JS. Opt-in, mai richiesto e non esegue mai il commit automaticamente.

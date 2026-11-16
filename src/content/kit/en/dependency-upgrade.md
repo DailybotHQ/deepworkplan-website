@@ -10,6 +10,8 @@ order: 3
 
 Bring a repository's dependencies up to date with a batched, validated, revertible workflow. The third opt-in Deep Work Plan addon.
 
+Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
+
 ## What it adds
 
 - Detection of the repo's **real** package manager (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, and more) from the manifest and lockfile that exist.

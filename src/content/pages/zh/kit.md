@@ -1,8 +1,10 @@
 ---
 title: "Deep Work Plan 套件"
 description: "让 Deep Work Plan 可在任何地方运行的技能及其九个子技能、命令、代理适配器、接入预设、可选附加组件与示例。"
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
 ## Deep Work Plan 套件
 

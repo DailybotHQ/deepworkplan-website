@@ -22,6 +22,8 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 Đây là một sản phẩm riêng, được cung cấp dưới dạng addon `vim` tùy chọn của Deep Work Plan v7 (pack `v7.12.2`). Deep Work Plan hoạt động với bất kỳ trình soạn thảo nào hoặc không cần trình soạn thảo, và trình soạn thảo này cũng không yêu cầu Deep Work Plan: bạn thêm nó vào máy một cách độc lập, và nó hoạt động như một trình soạn thảo dù có kế hoạch hay không. Trang này mô tả bản phát hành **v1.0.1**, bản bảo trì của bản phát hành ổn định đầu tiên `v1.0.0`: từ `v1.0.0` trở đi, trình cài đặt và các cờ của nó (cùng các biến `DWP_VIM_*` tương ứng), bề mặt addon (`addon/surface.json`, giao diện 1), các lệnh trình soạn thảo `:DwpPlans`, `:DwpLanes`, `:DwpCommands` và `:DwpConfig`, các khóa `dwpvim.json` và các phím tắt được ghim bởi hợp đồng ánh xạ chỉ thay đổi không tương thích trong một phiên bản chính mới.
 
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+
 ## Vì sao cần trình soạn thảo trên terminal cho Deep Work Plan
 
 Một Deep Work Plan là một thư mục Markdown dưới `.dwp/plans/`: một mục tiêu, các tác vụ nguyên tử, các cổng kiểm chứng và một nhật ký liên tục. Con người xem xét nó, agent thực thi nó, và cả hai thường làm việc đó từ terminal. Một trình soạn thảo được xây dựng cho công việc này giữ ba thứ ở gần: chính kế hoạch, tài liệu xung quanh nó, và các phím giúp bạn di chuyển giữa hai thứ đó.
@@ -136,6 +138,7 @@ Theo mặc định, trình cài đặt cài bản phát hành của chính nó, 
 Sau khi tải về và kiểm tra checksum như trên:
 
 ```bash
+
 # exact version
 DWP_VIM_VERSION=1.0.0 bash install.sh
 bash install.sh --version 1.0.0
@@ -181,6 +184,7 @@ Mỗi cờ đều có một biến môi trường tương ứng (`DWP_VIM_VERSIO
 Để ghim một bản phát hành, hãy dùng `--version` (xem [Chọn phiên bản](#choose-a-version)); với một nhánh hoặc một commit, hãy đặt `DWP_VIM_REF`. Nên ưu tiên dùng bản phát hành: các bản phát hành trước `v0.4.0` không có các thao tác kiểu VS Code, trình duyệt kế hoạch, trình xem Markdown hay trình cài đặt này.
 
 ```bash
+
 # pin a specific release, here the previous one
 curl -fsSL -o install.sh https://deepworkplan.com/vim/install.sh && \
 curl -fsSL -o install.sh.sha256 https://deepworkplan.com/vim/install.sh.sha256 && \

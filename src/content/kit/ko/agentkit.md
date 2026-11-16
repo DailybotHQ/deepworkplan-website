@@ -12,6 +12,8 @@ order: 8
 
 이 애드온은 이 키트를 **DWP v7**(팩 `v7.12.2`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
 
+Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하니스, Loop engineering, 측정된 효율입니다. 애드온과 통합 기능은 하니스와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
+
 ## 키트가 제공하는 것
 
 - **모든 CLI에 하나의 문법.** `ak claude`, `ak codex`, `ak cursor`, `ak opencode`, `ak pi`, `ak cline`, `ak grok`, `ak antigravity`, 그리고 제공자 경로(Z.AI GLM, Azure OpenAI, xAI, Gemini API)가 같은 세션 플래그를 사용합니다. `-c`는 이어 가고, `-r <id>`는 재개합니다.
@@ -87,6 +89,12 @@ ak doctor
 
 킷 v1.4.0(인터페이스 1 불변)은 `ak update`를 추가합니다. 사람이 직접 호출하는 것만을 위해 설계되었으며, `ak install`의 검증과 함께 CLI를 공급업체의 최신 릴리스로 만듭니다. 발견, 검증, 설치, 그리고 이 킷의 `providers.toml`을 원자적으로 다시 고정합니다(`.bak` 보존). `--take-over`는 공급업체 관리 심볼릭 링크를 교체할 때 필요하고, 다운그레이드는 이름으로 지정하지 않으면 거부되며, PATH가 새 릴리스를 해석할 때만 업데이트가 성립합니다.
 
+## coding-agents-kit 1.5.0부터 (인터페이스 1)
+
+이 릴리스는 `ak run --json`에 `tokens` 필드를 추가하며, CLI가 보고한 수치(`input`, `output`, `cache_read`, `cache_write`, `total`)만 담습니다. 보고되지 않은 값은 `null`로 남고 kit은 추정하지 않습니다. `ak usage --json`에는 `runs`, `tokens`, `coverage`가 포함된 `advisory` 블록이 추가됩니다. 이는 참고 정보이며 공급자 할당량 구간, 용량 판정, `ak pick` 선택 자격을 바꾸지 않습니다.
+
+`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`가 활성화되면 `ak`는 각 CLI의 명시적 ask 모드를 강제합니다. ask 플래그가 없는 CLI는 변경되지 않습니다. 이 옵트아웃이 활성화된 상태에서 pick-v2의 `launch.argv`는 `--ask`로 끝납니다. herdr-peers (v2.0.2) 이상은 이 끝의 인수를 받아들이며 v2.0.1은 거부합니다.
+
 ## 기본은 자율 실행, 옵트아웃이 항상 우선한다
 
 `v0.2.0`부터 `ak <kind>`는 모든 에이전트를 **자율 모드**로 실행합니다. CLI 자체의 자율 플래그를 추가하며, 그 플래그는 키트의 `providers.toml`에만 보관됩니다. 자율 모드는 개발 컨테이너처럼 일회용이거나 샌드박스화된 환경을 위한 것입니다.
@@ -107,6 +115,8 @@ ak doctor
 | 작업에 상호작용이 필요하거나, 오래 실행되거나, 다른 머신에 있음 | [Herdr](/kit/herdr)(페인 안의 피어) |
 
 둘은 함께 쓸 수 있습니다. herdr-peers는 `ak env <kind> @profile`이 출력하는 환경으로 페인 안에 피어를 실행할 수 있습니다. 여러 레인을 한꺼번에 운영하려면 [여러 에이전트 운영하기](/methodology/06-orchestration)를 참고하십시오.
+
+herdr-peers v2.0.0은 선택적 autopilot brain에 이 인터페이스를 사용합니다. `ak pick --kinds ... --json`이 pick-v2 실행 계약을 반환하면 Herdr가 이를 검증하고 `launch.permissions: ask`를 요구한 뒤 반환된 `launch.argv`를 실행합니다. brain은 autonomy 또는 bypass 플래그를 활성화할 수 없습니다. `ak update`는 계속 사람이 직접 실행하며 brain은 CLI를 업데이트하지 않습니다.
 
 ## 참고
 

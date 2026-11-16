@@ -16,6 +16,8 @@ Seit Standard 2.3.0 ist diese lokale Überprüfung **Teil der Baseline, kein Zus
 
 Die Grenze, die das bedenkenlos adoptierbar macht, ist bewusst eng gezogen. Der Reviewer ist eine MIT-lizenzierte, tag-gepinnte Skill, ausgeführt von dem Coding-Agent, den Sie ohnehin betreiben — kein Deep-Work-Plan-Flow hängt damit von einem kommerziellen Dienst, einem CI-Anbieter oder einem Secret ab. **Flow A** (nur lokal) ist das, was jedes geonboardete Repository erhält; **Flow B** wird ausdrücklich angeboten und nie unaufgefordert installiert. Entwickelnde können den Reviewer auch rundheraus ablehnen — diese Ablehnung wird als deklarierte Ausnahme festgehalten, und `verify` meldet das Repository in diesem Punkt als nicht konform, bis er installiert ist.
 
+Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
+
 ## Wann es zu verwenden ist
 
 | Signal | Aktion |

@@ -1,8 +1,10 @@
 ---
 title: "El Kit de Deep Work Plan"
 description: "La skill y sus nueve sub-skills, comandos, adaptadores, presets de incorporación, addons opcionales y ejemplos que hacen ejecutable DWP en cualquier stack."
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan se apoya en cuatro pilares: primero la especificación, el repositorio es el harness, loop engineering y eficiencia medida. Los addons y las integraciones pueden ampliar el harness y el bucle; la metodología funciona por sí sola.
 
 ## El Kit de Deep Work Plan
 

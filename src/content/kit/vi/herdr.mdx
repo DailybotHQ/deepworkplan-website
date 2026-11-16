@@ -6,11 +6,17 @@ lang: vi
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Herdr addon
 
 [Herdr](https://herdr.dev) đặt các coding agent vào các pane, trên máy của bạn và trên các máy mà nó kết nối tới qua SSH. Addon này cho phép một Deep Work Plan sử dụng các agent đó như **peer** (tác tử ngang hàng): một kế hoạch có thể giao một tác vụ có giới hạn cho một agent trong pane khác, nhận đúng một phản hồi được ủy quyền và lưu lại bản ghi của lần trao đổi đó.
 
 Đây là một addon tùy chọn của **DWP v7** (pack `v7.12.2`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
+
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+
+<HerdrLoop lang="vi" class="not-prose my-10" />
 
 ## Addon tích hợp những gì
 
@@ -18,14 +24,13 @@ Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[he
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v2.0.0`, giao thức 1 |
+| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v2.0.0`, giao thức 2 |
 | Khóa registry | `herdr` trong `.dwp/config.json` |
 | Phương thức truyền | tương tác: một peer trong pane Herdr |
 | Cung cấp | `subagents`, `cancel_children` |
 | Yêu cầu | quyền `agent_delegation` trong hợp đồng của kế hoạch |
 
 **Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning: các động từ CLI cùng các cờ được tài liệu hóa, mã thoát `0`–`7`, các biến `HERDR_PEERS_*`, `DWP_PLAN` và `DWP_TASK` được tài liệu hóa, giao thức 1, và các hợp đồng JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` cùng bản ghi ủy thác. Một thay đổi phá vỡ tương thích ở bất kỳ thành phần nào trong số đó sẽ tăng phiên bản chính, và một thay đổi định dạng truyền tải còn tăng cả số giao thức. `v1.0.0` không thay đổi hành vi nào so với `v0.3.3`, và các bản phát hành 0.x không còn được hỗ trợ.
-
 
 ## Cài đặt
 
@@ -116,6 +121,20 @@ Bản phát hành 2.0.0 chuyển dây sang **giao thức 2** và thêm ba thứ:
 **Bạn chấp nhận điều gì khi chạy nó.** Khi autopilot đang bật, yêu cầu của một agent được phê duyệt mà con người không nhìn thấy nó, kể cả một lệnh mà con người lẽ ra đã từ chối. Không có danh sách từ chối (deny-list): autopilot không đánh giá một lệnh làm gì. Các biện pháp kiểm soát còn lại là chế độ quyền và rào chắn bảo vệ riêng của từng agent, những gì tài khoản và máy của nó có thể tiếp cận, các quy tắc của repository và việc review mã trước khi merge.
 
 Autopilot nằm ngoài giao thức ủy thác: nó không gửi ask, phản hồi hay thông báo nào, và quy tắc dành cho agent và lead không thay đổi — màn hình duy nhất mà chúng gửi phím là màn hình tin cậy thư mục, trên các pane do chính chúng khởi chạy. Bản phát hành 1.2.0 cũng ghi lại, trong `launcher.md`, cách một lead mở nhiều agent cùng lúc bằng `ak`.
+
+### Điều khiển daemon và vòng lặp v2
+
+`autopilot run` chạy ở tiền cảnh; `start` chạy ở nền; `stop`, `status` và `logs` điều khiển hoặc kiểm tra daemon. Daemon phải do con người khởi động. Với `--loop`, daemon chỉ nhắc lead đang rảnh của một kế hoạch, để yên các kế hoạch bị chặn, dừng sau ba lời nhắc không có tiến triển, yêu cầu người kế nhiệm đã ghi nhận tiếp quản lead vắng mặt và xử lý hàng đợi kế hoạch đã duyệt bằng cách gửi lời nhắc cho lead của nó. Đối với Herdr, hàng đợi là chỉ đọc. `--notify "<command>"` gửi sự kiện kế hoạch mà không thêm quyền hạn.
+
+`--notify-env NAME` chuyển một biến môi trường được nêu tên cho lệnh. Ngoài ra, lệnh chạy với môi trường tối thiểu (`PATH`, `HOME`, thiết lập ngôn ngữ và các thư mục XDG), không bao giờ kèm token hay khóa.
+
+Với `--brain`, Herdr dùng coding-agents-kit 1.3.0 trở lên: `ak pick` cung cấp hợp đồng khởi chạy pick-v2 đã xác thực ở chế độ ask. `--brain-kinds codex,claude` đặt thứ tự ưu tiên nhà cung cấp và `--brain-model claude=sonnet` chọn model. Bộ não chỉ có thể trả về một hành động trong danh sách đóng; thiếu `ak` hoặc `ak` quá cũ thì việc khởi động thất bại an toàn (fail-closed). Việc bổ nhiệm cần cả quyền được cấp trong kế hoạch (`lead claim --allow-appointment`) lẫn tùy chọn `--appoint` của daemon do con người khởi động; lane dùng `lead takeover --as-lane`. Chạy `lead verify` trước khi merge, gắn tag hoặc phát hành. `plans`, `fleet` và `fleet ui` là các chế độ xem chỉ đọc. Daemon không bao giờ tự khởi động, bổ nhiệm khi chưa được cấp quyền, ghi hàng đợi hay bản ghi lead, hành động theo văn bản tự do hoặc mở rộng quyền.
+
+Bản v2.0.1 giữ nguyên giao thức 2. Giá trị mặc định của `--brain-kinds` đổi thành `claude` (vẫn có thể chọn các loại khác) và lý do thay brain cùng hồ sơ bị loại được ghi vào log, bản đồ và trạng thái. Lần thay do `permission_mode` nêu nguyên nhân có khả năng liên quan đến chế độ ask. Trạng thái hàng đợi không còn cần thiết chỉ bị loại bỏ sau khi báo cáo máy đã được phản hồi; daemon cũng giới hạn 16 hồ sơ bị loại được liệt kê trên bản đồ nhưng vẫn giữ toàn bộ tập loại trừ. Kiểm tra appointment giờ tính lane thuộc kế hoạch đang mở khác là thành viên kế hoạch.
+
+Bản v2.0.2 giữ nguyên giao thức 2. Trong argv pick-v2 ở chế độ ask, chỉ chấp nhận đúng một `--ask` ở cuối, sau `--model <name>` nếu có, rồi loại bỏ nó trước khi chạy; daemon tự thêm `--ask --trust-cwd`. Các vị trí `--ask` khác, cờ quyền riêng của CLI và đối số sau `--` vẫn bị từ chối. Argv của kit 1.4.x tiếp tục được chấp nhận nguyên trạng. Địa chỉ pane kết thúc bằng ký tự xuống dòng bị từ chối.
+
+Bản v2.1.0 giữ nguyên giao thức 2. `fleet ui` thêm các chế độ xem `Attention`, `Active`, `Waiting`, `Done` và `All` trong mọi nhóm, gồm cả hàng đợi; bản đồ thêm các trường tùy chọn `state_updated_at` và `unreadable_reason`. Daemon do con người khởi động sẽ từ chối hộp thoại quyền hoặc phê duyệt kế hoạch mà nó không thể chấp nhận an toàn. Nó không từ chối câu hỏi về công việc của agent; đăng nhập, xác nhận bỏ qua quyền và tin cậy thư mục vẫn do con người xử lý. Việc brain từ chối được xử lý tường minh; ba lần từ chối trong một giờ sẽ loại brain đó. Giờ đây có thể hỏi brain về blocker có phân loại. Hành động `ask_lead_to_resolve` chỉ có thể gửi blocker có `resolver: lead` tới lead của kế hoạch khi lớp là none, C3, C4 hoặc C7; C1 (phê duyệt), C2 (đồng ý hoặc đăng nhập), C5 (thiệt hại) và C6 (điều khoản) vẫn do con người xử lý, còn lớp ngoài C1–C7 bị từ chối. Bản này cũng đọc sự kiện blocker journal-event/v8 và dữ liệu blocker plan-snapshot/v8 của pack 8.0.0.
 
 ## Ghi chú
 

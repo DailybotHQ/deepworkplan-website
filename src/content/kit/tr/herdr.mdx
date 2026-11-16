@@ -6,11 +6,17 @@ lang: tr
 order: 7
 ---
 
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
 # Herdr eklentisi
 
 [Herdr](https://herdr.dev), kodlama agent'larını hem kendi makinenizde hem de SSH üzerinden eriştiği makinelerde bölmelere yerleştirir. Bu eklenti, bir Deep Work Plan'ın bu agent'ları **eş** (peer) olarak kullanmasını sağlar: bir plan, sınırları belirli bir görevi başka bir bölmedeki bir agent'a devredebilir, tam olarak bir yetkili yanıt alabilir ve bu alışverişin kaydını tutabilir.
 
 Bu, **DWP v7**'nin (pack `v7.12.2`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
+
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
+
+<HerdrLoop lang="tr" class="not-prose my-10" />
 
 ## Neyi entegre eder
 
@@ -25,7 +31,6 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 | Gerektirdiği | plan sözleşmesinin `agent_delegation` yetkisi |
 
 **`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler: CLI fiilleri ve belgelenmiş bayrakları, `0`–`7` çıkış kodları, belgelenmiş `HERDR_PEERS_*`, `DWP_PLAN` ve `DWP_TASK` değişkenleri, protokol 2 ve `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` JSON sözleşmeleri ile devretme kaydı. Bunlardan herhangi birindeki uyumsuz bir değişiklik ana sürümü yükseltir; kablo biçimindeki bir değişiklik ayrıca protokol numarasını da yükseltir. `v1.0.0`, `v0.3.3` sürümüne göre hiçbir davranışı değiştirmez ve 0.x sürümleri artık desteklenmez.
-
 
 ## Kurulum
 
@@ -104,7 +109,7 @@ Sürüm yalnızca ekleme yapar: protokol 1 ve tüm komutlar, bayraklar, çıkı�
 
 herdr-peers 1.2.0, **autopilot** özelliğini (`autopilot.md`) ekler: uzun bir planın bir onay ekranında durmaması için bir insanın başlattığı, isteğe bağlı bir arka plan süreci (daemon), `herdr-peers autopilot`. Etkinleştirilmiş her Herdr makinesindeki her agent'ı izler ve biri bir ekranda beklediğinde bir seçeneği kabul eder. 1.2.1 sürümü, seçeneklerinin açıklamaları uzun olan bir sorunun yanıtsız bırakıldığı bir durumu düzeltir. 1.2.2 sürümü, seçeneklerinin yanında bir önizlemeyle gösterilen bir soruyu yanıtlar ve önerilen işaretini İspanyolca, Fransızca, Almanca ve İtalyancada tanır. 1.3.0 sürümü **döngüyü** ekler: `autopilot --loop`, açık her planı her makinede sonuna kadar çalışır durumda tutar; `--notify`/`--notify-env` raporlarını istediğiniz yere yönlendirir; salt okunur `plans` ve `fleet` fiilleri ve fleet arayüzü her rayı, makineyi ve açık planı tek bakışta gösterir.
 
-2.0.0 sürümü hattı **protokol 2**'ye taşır ve üç şey ekler: **lead ataması** — yalnızca insanın açık sözüyle (`lead claim --allow-appointment`), lead'i ve tüm halefleri kaybolmuş onaylı bir plan, ilk yaşayan rayını yeni lead olarak atayabilir (`lead takeover --as-lane`, iki kez sorgulanır, plan başına en fazla iki atama); **`lead verify`**, herhangi bir merge, tag veya release öncesinde çalıştırılan salt okunur kontrol'dür. **autopilot beyni** — `--brain` ile insan tarafından başlatılan arka plan süreci, kendisi için ayrılmış bir agent başlatır (coding-agents-kit 1.3.0 veya yenisi) ve yalnızca kapalı bir eylem listesi içinde ona uyar; `ak` eksik veya daha eskiyse hiç başlamayı reddeder. Ve **plan kuyruğu** — pak `.dwp/queue.json` (şema `dwp-queue-v1`) yazar ve `--loop` ile arka plan süreci, kuyruktaki bir sonraki onaylı planı siz olmadan başlatır. Onaylı bir planda her ray ve her halef 2.0 veya yenisi çalıştırmalıdır.
+2.0.0 sürümü hattı **protokol 2**'ye taşır ve üç şey ekler: **lider ataması** — yalnızca insanın açık sözüyle (`lead claim --allow-appointment`), lideri ve tüm halefleri kaybolmuş, yetki verilmiş bir plan, ilk yaşayan şeridini yeni lider olarak atayabilir (`lead takeover --as-lane`, iki kez sorgulanır, plan başına en fazla iki atama); **`lead verify`**, herhangi bir merge, tag veya release öncesinde çalıştırılan salt okunur kontrol'dür. **autopilot beyni** — `--brain` ile insan tarafından başlatılan arka plan süreci, kendisi için ayrılmış bir agent başlatır (coding-agents-kit 1.3.0 veya yenisi) ve yalnızca kapalı bir eylem listesi içinde ona uyar; `ak` eksik veya daha eskiyse hiç başlamayı reddeder. Ve **plan kuyruğu** — paket `.dwp/queue.json` (şema `dwp-queue-v1`) yazar ve `--loop` ile arka plan süreci, kuyruktaki bir sonraki onaylı planı siz olmadan başlatır. Yetki verilmiş bir planda her şerit ve her halef 2.0 veya yenisi çalıştırmalıdır.
 
 - **Yalnızca bir insan başlatır.** Hiçbir mesaj, eş ya da plan onu başlatamaz, durduramaz veya yaptığı şeyi değiştiremez. Bir agent onu yalnızca insanı bunu oturumda doğrudan istediğinde başlatır.
 - **Neleri kabul eder.** Seçenekli bir soru, bir araç onayı, bir plan onayı, klasör güveni ve atladığı bir güncelleme istemi. Önerilen olarak işaretlenmiş seçeneği, yoksa CLI'ın önceden seçtiğini, o da yoksa ilkini alır ve çok adımlı bir diyaloğu, her tuştan sonra ekranı yeniden okuyarak sonuna kadar izler.
@@ -116,6 +121,20 @@ herdr-peers 1.2.0, **autopilot** özelliğini (`autopilot.md`) ekler: uzun bir p
 **Çalıştırarak neyi kabul edersiniz.** Autopilot açıkken bir agent'ın isteği, insan onu görmeden onaylanır; insanın reddedeceği bir komut da buna dahildir. Bir ret listesi (deny-list) yoktur: autopilot bir komutun ne yaptığını değerlendirmez. Geriye kalan denetimler, her agent'ın kendi izin modu ve koruma önlemleri, hesabının ve makinesinin erişebildikleri, deponun kuralları ve birleştirme öncesindeki kod incelemesidir.
 
 Autopilot devretme protokolünün dışındadır: ask, yanıt ya da bildirim göndermez; agent'lar ve liderler için kural da değişmez — tuş gönderdikleri tek ekran, kendi başlattıkları bölmelerdeki klasör güvenidir. 1.2.0 sürümü ayrıca, bir liderin `ak` ile aynı anda birkaç agent'ı nasıl açtığını `launcher.md` içinde belgeler.
+
+### Daemon denetimleri ve v2 döngüsü
+
+`autopilot run` ön planda çalışır; `start` arka planda çalışır; `stop`, `status` ve `logs` onu yönetir veya inceler. Onu bir insanın başlatması gerekir. `--loop` ile yalnızca boşta duran bir plan liderini dürter, engellenmiş planlara dokunmaz, ilerleme olmadan geçen üç istemden sonra durur, eksik bir liderin yerine geçmesi için kaydedilmiş bir haleften devralmasını ister ve onaylı plan kuyruğunu liderine istem göndererek tüketir. Kuyruk Herdr için salt okunurdur. `--notify "<command>"` yetki eklemeden plan olaylarını gönderir.
+
+`--notify-env NAME`, komuta adı verilen tek bir ortam değişkenini iletir. Aksi hâlde komut asgari bir ortamla (`PATH`, `HOME`, yerel ayar ve XDG dizinleri) çalışır; belirteçler veya anahtarlarla asla çalışmaz.
+
+`--brain` ile Herdr, coding-agents-kit 1.3.0 veya sonrasını kullanır: `ak pick`, ask modunda doğrulanmış bir pick-v2 başlatma sözleşmesi sağlar. `--brain-kinds codex,claude` sağlayıcı önceliğini belirler, `--brain-model claude=sonnet` bir model seçer. Beyin yalnızca kapalı listedeki bir eylemi döndürebilir; `ak` eksik veya eskiyse başlatma güvenli biçimde (fail-closed) başarısız olur. Atama hem bir plan iznini (`lead claim --allow-appointment`) hem de insanın başlattığı daemon’da `--appoint` seçeneğini gerektirir; şerit `lead takeover --as-lane` kullanır. Bir birleştirme, etiket veya sürüm öncesinde `lead verify` çalıştırın. `plans`, `fleet` ve `fleet ui` salt okunur görünümlerdir. Daemon asla kendi kendine başlamaz, izin olmadan atama yapmaz, kuyruğu veya lider kaydını yazmaz, serbest metne göre hareket etmez ve izinleri genişletmez.
+
+v2.0.1, protokol 2'yi korur. Varsayılan `--brain-kinds` değerini `claude` yapar (diğer türler seçilebilir) ve brain değiştirme nedenleriyle dışlanan profilleri günlükte, haritada ve durum çıktısında kaydeder. `permission_mode` nedeniyle değiştirme, ask modu olası nedenini belirtir. Artık gerekmeyen kuyruk durumu yalnızca yanıt veren bir makine raporundan sonra silinir; daemon ayrıca haritada listelenen dışlanmış profilleri 16 ile sınırlar ama tam dışlama kümesini korur. Appointment denetiminde başka bir açık plandaki lane de plan üyeliği sayılır.
+
+v2.0.2, protokol 2'yi korur. Ask modundaki pick-v2 başlatma argümanlarında isteğe bağlı `--model <name>` sonrasında tam bir tane sondaki `--ask` kabul edilir ve başlatmadan önce çıkarılır; daemon kendi `--ask --trust-cwd` seçeneklerini ekler. Diğer `--ask` konumları, CLI'nin kendi izin bayrakları ve `--` sonrasındaki argümanlar reddedilmeye devam eder. Kit 1.4.x başlatma argümanları değişmeden kabul edilir. Satır sonuyla biten pane adresleri reddedilir.
+
+v2.1.0, protokol 2'yi korur. `fleet ui`, kuyruklar dahil her gruplamada `Attention`, `Active`, `Waiting`, `Done` ve `All` görünümlerini ekler; haritaya isteğe bağlı `state_updated_at` ve `unreadable_reason` alanları eklenir. İnsan tarafından başlatılan daemon, güvenle kabul edemediği izin veya plan onayı iletişim kutularını reddeder. Bir agent'ın işe dair kendi sorusunu reddetmez; giriş, izinleri aşma onayı ve klasör güveni insana bırakılır. Brain reddi açıkça işlenir; bir saat içindeki üç ret o brain'i devre dışı bırakır. Brain'e artık sınıflandırılmış bir blocker hakkında soru sorulabilir. `ask_lead_to_resolve` action'ı, `resolver: lead` olan bir blocker'ı yalnızca sınıfı none, C3, C4 veya C7 ise planın lead'ine gönderebilir; C1 (onay), C2 (rıza veya giriş), C5 (hasar) ve C6 (şartlar) insana bırakılır, C1–C7 dışındaki sınıflar reddedilir. Sürüm ayrıca pack 8.0.0 journal-event/v8 blocker olaylarını ve plan-snapshot/v8 blocker verilerini okur.
 
 ## Notlar
 
