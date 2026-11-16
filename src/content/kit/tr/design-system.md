@@ -47,20 +47,10 @@ Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya ta
 | Öğe | Değer |
 |---|---|
 | Ürün | DeepWorkPlan design-system eklentisi |
-| Kayıt anahtarı |  içinde  |
-| Tanımlayıcı |  (arayüz 1) |
-| Hedef dosya |  üzerinden dizine eklenen  |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş () |
-
-## v7 belirtimi
-
-| Öğe | Değer |
-|---|---|
-| Ürün | DeepWorkPlan design-system eklentisi |
 | Kayıt anahtarı | `.dwp/config.json` içinde `design-system` |
 | Tanımlayıcı | `addons/design-system/addon.json` (arayüz 1) |
 | Hedef dosya | `AGENTS.md` üzerinden dizine eklenen `docs/DESIGN.md` |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.12.2`) |
+| Sürümleme | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.12.2`) |
 
 ## Özellik bazlı tasarım belgeleriyle ilişkisi
 
