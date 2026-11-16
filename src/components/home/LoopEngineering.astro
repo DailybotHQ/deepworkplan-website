@@ -23,6 +23,8 @@ const l = getTranslations(lang).home.loop;
 const prefix = getUrlPrefix(lang);
 const herdr = ECOSYSTEM_PINS.herdr;
 const base = `https://github.com/DailybotHQ/${herdr.repo}/blob/${herdr.tag}/`;
+const pack = ECOSYSTEM_PINS.pack;
+const packBase = `https://github.com/DailybotHQ/${pack.repo}/blob/${pack.tag}/`;
 
 /** Literal code and tagged source per contract, in translation order. */
 const LOOP_CONTRACTS = [
@@ -57,9 +59,12 @@ const LOOP_CONTRACTS = [
     section: '',
   },
   {
+    // The pack owns the queue: shared/queue.py is its only writer
+    // (LOOP_ENGINEERING.md §4); herdr-peers only reads it.
     code: 'dwp-queue-v1',
-    path: 'skills/herdr-peers/autopilot.md',
-    section: '§5.4',
+    path: 'skills/deepworkplan/shared/queue.py',
+    section: '',
+    repoBase: 'pack',
   },
   {
     code: 'herdr-peers lead verify',
@@ -68,7 +73,12 @@ const LOOP_CONTRACTS = [
   },
 ] as const;
 
-const rows = l.contracts.map((c, i) => ({ ...c, ...LOOP_CONTRACTS[i] }));
+const rows = l.contracts.map((c, i) => {
+  const fromPack = 'repoBase' in LOOP_CONTRACTS[i];
+  const owner = fromPack ? pack : herdr;
+  const root = fromPack ? packBase : base;
+  return { ...c, ...LOOP_CONTRACTS[i], owner, root };
+});
 ---
 
 <section
@@ -123,11 +133,11 @@ const rows = l.contracts.map((c, i) => ({ ...c, ...LOOP_CONTRACTS[i] }));
                 </td>
                 <td class="w-[22%] py-4 text-xs">
                   <a
-                    href={`${base}${row.path}`}
+                    href={`${row.root}${row.path}`}
                     class="break-all text-secondary underline underline-offset-2 dark:text-muted"
                     rel="noopener"
                   >
-                    {herdr.repo} {herdr.tag}
+                    {row.owner.repo} {row.owner.tag}
                     <br />
                     {row.path}
                     {row.section && ` ${row.section}`}
