@@ -42,7 +42,7 @@ Any agent that reads repository files. Claude Code and OpenAI Codex are behavior
 
 ### How do I use it?
 
-Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.
+Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.
 
 [Quickstart](https://deepworkplan.com/quickstart)
 
@@ -176,9 +176,9 @@ A task completes only when recorded evidence satisfies each of its acceptance cr
 
 [Read the record layer spec](https://deepworkplan.com/spec/record-layer)
 
-### Do v6 plans keep running under v7?
+### Do existing plans keep their generation under v8?
 
-Yes. Plan contracts declare their schema generation explicitly (`plan-contract/v6.json` vs `plan-contract/v7.json`). A plan never migrates its generation mid-flight. Existing v6 plans retain their recorded shape, state, and journal semantics, continuing uninterrupted under v7 tooling.
+Yes. New plans default to `plan-contract/v8`. Existing v7, v6, and v5 plans retain their recorded generation and continue under the current pack. A plan changes generation only through an explicit `/dwp-refine migrate` request.
 
 [Read about contracts](https://deepworkplan.com/spec/record-layer)
 

@@ -42,7 +42,7 @@ Avec tout agent capable de lire les fichiers d un dépôt. Claude Code et OpenAI
 
 ### Comment l’utiliser ?
 
-Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un plan en cours (le périmètre, les tâches, ou la promotion d’un plan Lite en Full) ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité ; `/dwp-upgrade` déplace une skill installée vers une version plus récente sans toucher aux plans existants. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.
+Trois étapes. D’abord, installez la skill Deep Work Plan dans votre agent de code — le chemin le plus rapide est `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (ou clonez le dépôt de la skill et exécutez `./setup.sh`). Ensuite, intégrez le dépôt une fois pour que l’agent adapte `AGENTS.md`, `docs/`, le kit `.agents/` et une zone `.dwp/` ignorée par git à votre stack : pointez-le vers https://deepworkplan.com/init.md, ou exécutez `/deepworkplan-onboard`. Enfin, planifiez et exécutez le travail avec les commandes légères : `/dwp-create <goal>` construit un plan ; `/dwp-execute` l’exécute tâche par tâche face à chaque porte ; `/dwp-refine` modifie un plan en cours (le périmètre, les tâches, ou la promotion d’un plan Lite en Full) ; `/dwp-resume` reprend après une interruption ; `/dwp-status` rapporte la progression sans exécuter ; `/dwp-verify` produit un rapport objectif de conformité ; `/dwp-upgrade` déplace une skill installée vers une version plus récente sans toucher aux plans existants. Les agents qui interceptent `/` utilisent souvent `#` à la place (par exemple `#dwp-execute`). Le point d’adoption et le démarrage rapide reprennent le même chemin en plus de détails.
 
 [Démarrage rapide](https://deepworkplan.com/fr/quickstart)
 
@@ -170,9 +170,9 @@ Une tâche ne s'achève que lorsque les preuves enregistrées satisfont à chacu
 
 [Spécification de la couche de registre](https://deepworkplan.com/fr/spec/record-layer)
 
-### Les plans v6 continuent-ils de fonctionner sous la v7 ?
+### Les plans existants conservent-ils leur génération avec v8 ?
 
-Oui. Les contrats de plan déclarent explicitement leur génération de schéma (`plan-contract/v6.json` vs `plan-contract/v7.json`). Un plan ne migre jamais en cours de route. Les plans v6 existants conservent leur structure, leur état et leur journal sous l outillage v7.
+Oui. Les nouveaux plans utilisent `plan-contract/v8` par défaut. Les plans v7, v6 et v5 existants conservent leur génération enregistrée et continuent avec le pack actuel. La génération d’un plan ne change qu’après une demande explicite avec `/dwp-refine migrate`.
 
 [En savoir plus sur les contrats](https://deepworkplan.com/fr/spec/record-layer)
 

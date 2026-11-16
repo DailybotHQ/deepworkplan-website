@@ -12,7 +12,7 @@ Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do pl
 
 > Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.
 
-> Spec-first mówi, co robić; harness — gdzie; Loop engineering — jak to się kończy.
+
 
 **Pętla:** Rejestracja (`lead claim`, lead i sukcesja) → Demon (`autopilot --loop`, uruchamia go człowiek) → Przypomnienie (`idle ≥ 5 min`, nie daje uprawnień) → Failover (`lead takeover`, pierwszy osiągalny następca) → Sygnał (`plan-event-v1`, do polecenia człowieka) → Koniec (`plan_completed`, bramki zaliczone). Każdy otwarty plan z rekordem leada, dopóki jego własny stan nie wskaże końca.
 
@@ -25,7 +25,7 @@ Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do pl
 
 1. **Spec-first** — plan jest trwałym źródłem prawdy: zadania atomowe, kryteria akceptacji i bramki walidacyjne, które agent musi przejść.
 2. **Repozytorium jest harnessem** — kontekst, narzędzia, zabezpieczenia i stan żyją w repozytorium jako zwykłe pliki, które może odczytać każdy agent.
-3. **Loop engineering** — plany działają do końca: rejestracja, demon uruchamiany przez człowieka, przypomnienia, które nie dają żadnych uprawnień, failover i zdarzenia planu.
+
 4. **Mierzona wydajność** — bajty instrukcji na przepływ, zmierzone i opublikowane wraz z metodą — nigdy wymyślone procenty tokenów.
 
 ---
@@ -34,7 +34,7 @@ Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do pl
 
 W krótkich seriach agenci kodowania są imponujący. Powierz im długą misję — migrację, nowy podsystem, refaktoryzację dziesiątek plików — a zaczną dryfować: kontekst się zapełnia, wcześniejsze decyzje blakną, a wielogodzinna praca zatrzymuje się w połowie.
 
-Deep Work Plan odpowiada podejściem spec-first: trwały plan, zadania atomowe i bramki walidacyjne, które agent musi przejść. „Skończone” przestaje być odczuciem — staje się dowodem: zweryfikowanym i możliwym do przejrzenia. Loop engineering utrzymuje następnie plan w ruchu, dopóki agent nie przejdzie tych bramek.
+
 
 Kontekst to najcenniejszy zasób agenta, dlatego harness utrzymuje własne instrukcje w niewielkim, audytowalnym zakresie. Instrukcje są ładowane stopniowo, walidacja skupia się na zmianach, a każde zadanie otrzymuje potrzebny kontekst. Publikujemy rozmiar instrukcji dla każdego przepływu w bajtach, aby ten narzut był widoczny. Plany również dopasowują się do pracy: Lite do ograniczonej poprawki, Full do zadań trwających wiele godzin. Format wynika z zakresu pracy, dzięki czemu proces pozostaje skupiony i możliwy do prześledzenia.
 
@@ -42,9 +42,11 @@ Kontekst to najcenniejszy zasób agenta, dlatego harness utrzymuje własne instr
 
 ## Plany działają do końca. Uprawnienia pozostają przy ludziach.
 
-Loop engineering to sposób, w jaki plan dobiega końca bez człowieka, który stale go sprawdza. Każdy wiersz poniżej to wydany kontrakt herdr-peers, opcjonalnego dodatku Herdr: metodyka działa bez niego, a pętla jedynie ją wzmacnia.
+Loop engineering pozwala planowi dobiec końca bez stałego nadzoru człowieka. Poniższe wiersze opisują wydane kontrakty pętli: większość pochodzi z herdr-peers, a kolejka planów jest kontraktem pakietu. Herdr jest opcjonalny; metodyka działa bez niego.
 
-| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.0.0) |
+
+
+| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.1.0) |
 | --- | --- | --- |
 | Rejestracja planu (`herdr-peers lead claim`) | Plan obserwowany przez pętlę ma rekord leada z epoką i sukcesją. Jako lead działa wyłącznie posiadacz najwyższej epoki. | `skills/herdr-peers/protocol.md` §12 |
 | Start wyłącznie przez człowieka (`herdr-peers autopilot start --loop`) | Tylko człowiek uruchamia demona, własnymi słowami. Żadne zapytanie, odpowiedź ani powiadomienie nie może go uruchomić, zatrzymać ani zmienić tego, co robi. | `skills/herdr-peers/autopilot.md` §1 |
@@ -52,7 +54,7 @@ Loop engineering to sposób, w jaki plan dobiega końca bez człowieka, który s
 | Failover na następców (`herdr-peers lead takeover`) | Gdy lead znika, pierwszy osiągalny następca zostaje poproszony o przejęcie roli, a pomocnik ponownie sprawdza dowody. Tor pracy (lane) przejmuje rolę leada tylko na podstawie zgody, którą człowiek zapisał z wyprzedzeniem. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
 | Zdarzenia planu (`plan-event-v1`) | Gdy plan utknie, zostanie zablokowany, straci leada, wystartuje z kolejki lub się zakończy, wybrane przez człowieka polecenie otrzymuje jeden obiekt plan-event-v1. Pakiet zawiera do tego notyfikator Dailybot. | `docs/schema/plan-event-v1.json` |
 | Mapa floty (`plans-v1` · `fleet-v1`) | Każda maszyna raportuje swoje plany jako plans-v1; demon utrzymuje mapę fleet-v1 wszystkich maszyn, agentów, repozytoriów i planów, a fleet ui pokazuje ją w trybie tylko do odczytu. | `docs/schema/fleet-v1.json` |
-| Kolejka planów (`dwp-queue-v1`) | Gdy plan repozytorium się kończy, następny zatwierdzony plan z jego kolejki startuje z jednym stałym promptem do swojego leada. Demon czyta kolejkę i nigdy jej nie zapisuje. | `skills/herdr-peers/autopilot.md` §5.4 |
+| Kolejka planów (`dwp-queue-v1`) | Pakiet sprawdza i zapisuje kolejkę; demon odczytuje ją, aby kontynuować oczekujące plany. | `skills/deepworkplan/shared/queue.py` |
 | Weryfikacja leada (`herdr-peers lead verify`) | Przed każdym scaleniem, tagiem czy wydaniem lead potwierdza, że nadal utrzymuje plan na każdej maszynie. Nowszy lead ją odrzuca; nieosiągalna maszyna ją zatrzymuje, chyba że to ryzyko zostało zaakceptowane i odnotowane. | `skills/herdr-peers/protocol.md` §12 |
 
 Mózg decyzyjny (`--brain`) i wyznaczanie leada (`--appoint`) to opcjonalne flagi tego samego demona, a każdą z nich włącza człowiek. Demon nigdy nie scala, nie publikuje wydań, nie loguje się ani nie zmienia uprawnień.
@@ -120,19 +122,19 @@ Harness publikuje, co każdy przepływ musi przeczytać przed startem: router, s
 
 | Przepływ | Pakiet wejściowy (bajty) |
 | --- | ---: |
-| `create` | 74 979 |
-| `execute` | 55 124 |
-| `resume` | 32 021 |
-| `refine` | 76 356 |
-| `onboard` | 82 049 |
-| `status` | 27 309 |
-| `verify` | 36 596 |
+| `create` | 75 008|
+| `execute` | 55 160|
+| `resume` | 32 047|
+| `refine` | 76 821|
+| `onboard` | 82 075|
+| `status` | 27 335|
+| `verify` | 36 725|
 
-Jednostka: bajty systemu plików. Zmierzone na wydanym pakiecie poleceniem poniżej: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v7.12.2).
+Jednostka: bajty systemu plików. Zmierzone na wydanym pakiecie poleceniem poniżej: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 
 Tokeny dostawcy, koszt i statystyki domykania pętli nie są pokazane: żadne źródło oznaczone tagiem jeszcze ich nie mierzy, więc nie mają wiersza. Liczba tokenów ze skryptu (bajty ÷ 4) to oznaczony szacunek, nigdy pomiar.
 
-[Przeczytaj rejestr ewaluacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+[Przeczytaj rejestr ewaluacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
 
 ---
 

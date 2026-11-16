@@ -42,7 +42,7 @@ Z każdym agentem czytającym pliki repozytorium. Claude Code i OpenAI Codex prz
 
 ### Jak z tego korzystać?
 
-Trzy kroki. Najpierw zainstaluj skill Deep Work Plan w swoim agencie kodującym — najszybsza ścieżka to `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (lub sklonuj repozytorium skilla i uruchom `./setup.sh`). Następnie jednorazowo wprowadź repozytorium do onboardingu, aby agent dostosował `AGENTS.md`, `docs/`, zestaw `.agents/` i obszar `.dwp/` ignorowany przez git do twojego stacku: wskaż https://deepworkplan.com/init.md lub uruchom `/deepworkplan-onboard`. Na koniec planuj i wykonuj pracę za pomocą lekkich poleceń: `/dwp-create <goal>` buduje plan; `/dwp-execute` uruchamia go zadanie po zadaniu wobec każdej bramki; `/dwp-refine` edytuje plan w toku (zakres, zadania lub promocję planu Lite do Full); `/dwp-resume` kontynuuje po przerwie; `/dwp-status` raportuje postęp bez wykonywania; `/dwp-verify` tworzy obiektywny raport zgodności; `/dwp-upgrade` przenosi zainstalowanego skilla na nowszy release bez dotykania istniejących planów. Agenci przechwytujący `/` często używają zamiast tego `#` (na przykład `#dwp-execute`). Endpoint adopcji i szybki start przechodzą tę samą ścieżkę bardziej szczegółowo.
+Trzy kroki. Najpierw zainstaluj skill Deep Work Plan w swoim agencie kodującym — najszybsza ścieżka to `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (lub sklonuj repozytorium skilla i uruchom `./setup.sh`). Następnie jednorazowo wprowadź repozytorium do onboardingu, aby agent dostosował `AGENTS.md`, `docs/`, zestaw `.agents/` i obszar `.dwp/` ignorowany przez git do twojego stacku: wskaż https://deepworkplan.com/init.md lub uruchom `/deepworkplan-onboard`. Na koniec planuj i wykonuj pracę za pomocą lekkich poleceń: `/dwp-create <goal>` buduje plan; `/dwp-execute` uruchamia go zadanie po zadaniu wobec każdej bramki; `/dwp-refine` edytuje plan w toku (zakres, zadania lub promocję planu Lite do Full); `/dwp-resume` kontynuuje po przerwie; `/dwp-status` raportuje postęp bez wykonywania; `/dwp-verify` tworzy obiektywny raport zgodności; `/dwp-upgrade` przenosi zainstalowanego skilla na nowszy release bez dotykania istniejących planów. Agenci przechwytujący `/` często używają zamiast tego `#` (na przykład `#dwp-execute`). Endpoint adopcji i szybki start przechodzą tę samą ścieżkę bardziej szczegółowo.
 
 [Szybki start](https://deepworkplan.com/pl/quickstart)
 
@@ -170,9 +170,9 @@ Zadanie kończy się tylko wtedy, gdy zarejestrowane dowody spełniają każde z
 
 [Specyfikacja warstwy rejestru](https://deepworkplan.com/pl/spec/record-layer)
 
-### Czy plany v6 zachowują zgodność i działają pod v7?
+### Czy istniejące plany zachowują swoją generację w v8?
 
-Tak. Kontrakty planów jednoznacznie deklarują wersję schematu (`plan-contract/v6.json` vs `plan-contract/v7.json`). Rozpoczęty plan nigdy nie zmienia wersji w trakcie. Istniejące plany v6 zachowują swój format i semantykę pod narzędziami v7.
+Tak. Nowe plany domyślnie używają `plan-contract/v8`. Istniejące plany v7, v6 i v5 zachowują zapisaną generację i działają dalej z obecnym pakietem. Generacja planu zmienia się wyłącznie na wyraźne żądanie `/dwp-refine migrate`.
 
 [Dowiedz się więcej o kontraktach](https://deepworkplan.com/pl/spec/record-layer)
 

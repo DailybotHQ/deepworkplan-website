@@ -42,7 +42,7 @@ Deep Work Plan은 리포지토리를 코딩 에이전트가 긴 작업을 안정
 
 ### 어떻게 사용하나요?
 
-세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 진행 중인 계획을 편집하고(범위, 작업, 또는 Lite 계획을 Full로 승격), `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성하고, `/dwp-upgrade` 는 설치된 스킬을 기존 계획을 건드리지 않고 새 릴리스로 옮깁니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.
+세 단계입니다. 먼저 코딩 에이전트에 Deep Work Plan 스킬을 설치합니다——가장 빠른 방법은 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y`(또는 스킬 리포지토리를 클론한 뒤 `./setup.sh` 실행)입니다. 두 번째로 리포지토리를 한 번 온보딩하여 에이전트가 `AGENTS.md`, `docs/`, `.agents/` 키트와 gitignore된 `.dwp/` 영역을 스택에 맞게 적응시킵니다: https://deepworkplan.com/init.md 를 가리키거나 `/deepworkplan-onboard` 를 실행합니다. 세 번째로 얇은 명령으로 작업을 계획하고 실행합니다: `/dwp-create <goal>` 이 계획을 빌드하고, `/dwp-execute` 가 각 게이트에 대해 작업 단위로 실행하고, `/dwp-refine` 이 진행 중인 계획을 편집하고(범위, 작업, 또는 Lite 계획을 Full로 승격), `/dwp-resume` 이 중단 후 계속하고, `/dwp-status` 는 실행하지 않고 진행 상황을 보고하고, `/dwp-verify` 는 객관적인 적합성 보고서를 생성하고, `/dwp-upgrade` 는 설치된 스킬을 기존 계획을 건드리지 않고 새 릴리스로 옮깁니다. `/` 를 intercept하는 에이전트는 `#` 을 쓰는 경우가 많습니다(예: `#dwp-execute`). 도입 엔드포인트와 빠른 시작이 같은 경로를 더 자세히 안내합니다.
 
 [빠른 시작](https://deepworkplan.com/ko/quickstart)
 
@@ -170,9 +170,9 @@ DWP는 엄격한 7단계 에스컬레이션 분류를 정의합니다 (AGENT_PRO
 
 [기록 레이어 사양 읽기](https://deepworkplan.com/ko/spec/record-layer)
 
-### v6 계획이 v7에서도 계속 실행되나요?
+### 기존 계획은 v8에서도 세대를 유지하나요?
 
-네. 계획 계약은 스키마 세대를 명시적으로 선언합니다 (`plan-contract/v6.json` 대 `plan-contract/v7.json`). 계획은 중간에 세대를 변경하지 않습니다. 기존 v6 계획은 v7 도구 체인에서도 원본 형식과 의미를 유지하며 원활하게 실행됩니다.
+네. 새 계획은 기본적으로 `plan-contract/v8`을 사용합니다. 기존 v7, v6, v5 계획은 기록된 세대를 유지하며 현재 팩에서 계속 실행됩니다. 계획 세대는 `/dwp-refine migrate`를 명시적으로 요청한 경우에만 바뀝니다.
 
 [계약에 대해 읽기](https://deepworkplan.com/ko/spec/record-layer)
 

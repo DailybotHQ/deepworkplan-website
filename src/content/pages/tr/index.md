@@ -12,7 +12,7 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 
 > init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.
 
-> Önce spesifikasyon neyi söyler; harness nerede olduğunu söyler; Loop engineering işin nasıl bittiğini söyler.
+
 
 **Döngü:** Kayıt (`lead claim`, lider ve halef sırası) → Daemon (`autopilot --loop`, bir insan başlatır) → Dürtme (`idle ≥ 5 min`, yetki eklemez) → Devir (`lead takeover`, erişilebilen ilk halef) → Bildirim (`plan-event-v1`, insanın komutuna) → Bitti (`plan_completed`, kapılar geçildi). Lider kaydı olan her açık plan, kendi durumu bitti diyene kadar.
 
@@ -25,7 +25,7 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 
 1. **Önce spesifikasyon** — plan kalıcı doğruluk kaynağıdır: atomik görevler, kabul kriterleri ve ajanın geçmesi gereken doğrulama kapıları.
 2. **Depo, harness’tir** — bağlam, araçlar, koruma bariyerleri ve durum, herhangi bir ajanın okuyabileceği düz dosyalar olarak depoda yaşar.
-3. **Loop engineering** — planlar sonuna kadar çalışır: kayıt, insanın başlattığı bir daemon, yetki eklemeyen dürtmeler, devralma ve plan olayları.
+
 4. **Ölçülmüş verimlilik** — akış başına yönerge baytları, yöntemiyle birlikte ölçülür ve yayımlanır — asla uydurulmuş token yüzdeleri değil.
 
 ---
@@ -34,7 +34,7 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 
 Kısa hamlelerde kodlama ajanları etkileyicidir. Ona uzun soluklu bir misyon verin — bir göç, yeni bir alt sistem, onlarca dosyayı kapsayan bir yeniden yapılandırma — ve ajan sapar: bağlam dolar, önceki kararlar solur ve saatler süren iş yarı yolda kalır.
 
-Deep Work Plan önce spesifikasyonla yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. "Bitti" bir his olmaktan çıkar — doğrulanabilir, gözden geçirilebilir kanıta dönüşür. Ardından Loop engineering, bu kapılar geçilene kadar planı ilerletmeyi sürdürür.
+
 
 Bağlam, ajanın en kıt kaynağıdır. Bu nedenle harness kendi yönergelerini hafif ve denetlenebilir tutar. Yönergeler aşamalı yüklenir, doğrulama değişikliklere odaklanır ve her görev ilgili bağlamı alır. Her akışın yönerge boyutunu bayt cinsinden yayımlayarak bu yükü görünür kılıyoruz. Planlar da işe göre biçimlenir: kapsamı sınırlı bir düzeltme için Lite, saatler süren işler için Full. Biçim işin kapsamını izler; böylece süreç odaklı ve izlenebilir kalır.
 
@@ -42,9 +42,11 @@ Bağlam, ajanın en kıt kaynağıdır. Bu nedenle harness kendi yönergelerini 
 
 ## Planlar sonuna kadar çalışır. Yetki insanlarda kalır.
 
-Loop engineering, bir planın, bir insan onu yoklamadan nasıl bittiğidir. Aşağıdaki her satır, isteğe bağlı Herdr eklentisi herdr-peers’ın yayımlanmış bir sözleşmesidir: metodoloji onsuz da çalışır, döngü yalnızca onu güçlendirir.
+Loop engineering, bir planın insan tarafından sürekli sorgulanmadan tamamlanmasını sağlar. Aşağıdaki satırlar döngünün yayımlanmış sözleşmelerini açıklar: çoğu herdr-peers kaynaklıdır; plan kuyruğu ise paket sözleşmesidir. Herdr isteğe bağlıdır ve metodoloji onsuz da çalışır.
 
-| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.0.0) |
+
+
+| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.1.0) |
 | --- | --- | --- |
 | Plan kaydı (`herdr-peers lead claim`) | Döngünün izlediği bir planın, epoch ve halef sırası içeren bir lider kaydı vardır. Yalnızca en yüksek epoch’un sahibi planın lideri olarak hareket eder. | `skills/herdr-peers/protocol.md` §12 |
 | Yalnızca insan başlatır (`herdr-peers autopilot start --loop`) | Daemon’u yalnızca bir insan, kendi sözleriyle başlatır. Hiçbir soru, yanıt veya bildirim onu başlatamaz, durduramaz ya da yaptığı şeyi değiştiremez. | `skills/herdr-peers/autopilot.md` §1 |
@@ -52,7 +54,7 @@ Loop engineering, bir planın, bir insan onu yoklamadan nasıl bittiğidir. Aşa
 | Haleflere devir (`herdr-peers lead takeover`) | Lider ortadan kalktığında, erişilebilen ilk haleften devralması istenir ve yardımcı kanıtı yeniden denetler. Bir kulvar liderliği yalnızca insanın önceden kaydettiği bir yetkiyle alır. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
 | Plan olayları (`plan-event-v1`) | Bir plan takıldığında, engellendiğinde, liderini kaybettiğinde, kuyruktan başladığında veya tamamlandığında, insanın seçtiği bir komut tek bir plan-event-v1 nesnesi alır. Paket bunun için bir Dailybot bildiricisi sunar. | `docs/schema/plan-event-v1.json` |
 | Filo haritası (`plans-v1` · `fleet-v1`) | Her makine planlarını plans-v1 olarak bildirir; daemon her makinenin, ajanın, deponun ve planın fleet-v1 haritasını tutar ve fleet ui bunu salt okunur olarak gösterir. | `docs/schema/fleet-v1.json` |
-| Plan kuyruğu (`dwp-queue-v1`) | Bir deponun planı tamamlandığında, kuyruğundaki bir sonraki onaylı plan, liderine verilen tek bir sabit istemle başlar. Daemon kuyruğu okur ve ona asla yazmaz. | `skills/herdr-peers/autopilot.md` §5.4 |
+| Plan kuyruğu (`dwp-queue-v1`) | Paket kuyruğu doğrular ve yazar; daemon bekleyen planları sürdürmek için kuyruğu okur. | `skills/deepworkplan/shared/queue.py` |
 | Lider doğrulaması (`herdr-peers lead verify`) | Herhangi bir birleştirme, etiket veya sürümden önce lider, planı her makinede hâlâ elinde tuttuğunu doğrular. Daha yeni bir lider bunu reddeder; erişilemeyen bir makine, bu risk kayda geçirilerek kabul edilmedikçe işlemi durdurur. | `skills/herdr-peers/protocol.md` §12 |
 
 Karar beyni (`--brain`) ve lider ataması (`--appoint`), aynı daemon’un tercihe dayalı bayraklarıdır ve her biri bir insan tarafından açılır. Daemon asla birleştirme yapmaz, sürüm yayımlamaz, oturum açmaz veya bir izni değiştirmez.
@@ -120,19 +122,19 @@ Harness, her akışın başlamadan önce okuması gerekenleri yayımlar: yönlen
 
 | Akış | Giriş paketi (bayt) |
 | --- | ---: |
-| `create` | 74.979 |
-| `execute` | 55.124 |
-| `resume` | 32.021 |
-| `refine` | 76.356 |
-| `onboard` | 82.049 |
-| `status` | 27.309 |
-| `verify` | 36.596 |
+| `create` | 75.008|
+| `execute` | 55.160|
+| `resume` | 32.047|
+| `refine` | 76.821|
+| `onboard` | 82.075|
+| `status` | 27.335|
+| `verify` | 36.725|
 
-Birim: dosya sistemi baytı. Yayımlanmış paket üzerinde aşağıdaki komutla ölçülmüştür: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v7.12.2).
+Birim: dosya sistemi baytı. Yayımlanmış paket üzerinde aşağıdaki komutla ölçülmüştür: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 
 Sağlayıcı token’ları, maliyet ve döngü kapanış istatistikleri gösterilmez: henüz hiçbir etiketli kaynak bunları ölçmüyor, bu yüzden satırları yok. Betiğin bayt ÷ 4 token rakamı etiketli bir tahmindir, asla bir ölçüm değildir.
 
-[Değerlendirme kaydını okuyun](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+[Değerlendirme kaydını okuyun](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
 
 ---
 

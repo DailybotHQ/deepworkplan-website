@@ -217,6 +217,11 @@ export const en: SiteTranslations = {
             'Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only.',
         },
         {
+          name: 'Plan queue',
+          detail:
+            'The pack validates and writes the `dwp-queue-v1` queue; the daemon reads it to continue queued plans.',
+        },
+        {
           name: 'Lead verify',
           detail:
             'Before any merge, tag, or release, the lead confirms it still holds the plan on every machine. A newer lead refuses it; an unreachable machine stops it unless that risk is accepted on record.',
@@ -790,7 +795,7 @@ export const en: SiteTranslations = {
         description:
           'Treat the prompt and the skill as untrusted until you have checked them. Both are open source and MIT; the skill is Markdown-first with no network calls and no telemetry. Each release publishes a SHA256SUMS over the shipped skill, so you can confirm your copy matches before running it. Releases are checksummed, not signed (signing is a documented next step).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -798,7 +803,7 @@ export const en: SiteTranslations = {
         description:
           'Add the skill to your repository so any agent can plan and execute structured work. It ships a router plus nine sub-skills — create, execute, refine, resume, status, verify, onboard, author, and upgrade. Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -903,7 +908,7 @@ export const en: SiteTranslations = {
             id: 'how-to-use',
             question: 'How do I use it?',
             answer:
-              'Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.',
+              'Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.',
             linkLabel: 'Quickstart',
             linkPath: '/quickstart',
           },
@@ -1102,9 +1107,9 @@ export const en: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Do v6 plans keep running under v7?',
+            question: 'Do existing plans keep their generation under v8?',
             answer:
-              'Yes. Plan contracts declare their schema generation explicitly (`plan-contract/v6.json` vs `plan-contract/v7.json`). A plan never migrates its generation mid-flight. Existing v6 plans retain their recorded shape, state, and journal semantics, continuing uninterrupted under v7 tooling.',
+              'Yes. New plans default to `plan-contract/v8`. Existing v7, v6, and v5 plans retain their recorded generation and continue under the current pack. A plan changes generation only through an explicit `/dwp-refine migrate` request.',
             linkLabel: 'Read about contracts',
             linkPath: '/spec/record-layer',
           },

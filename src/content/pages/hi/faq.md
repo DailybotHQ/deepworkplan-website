@@ -42,7 +42,7 @@ Deep Work Plan किसी रिपॉज़िटरी को एक सं�
 
 ### इसे कैसे उपयोग करें?
 
-तीन चरण। पहले, Deep Work Plan स्किल को अपने coding agent में इंस्टॉल करें — सबसे तेज़ रास्ता `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` है (या skill repo क्लोन करें और `./setup.sh` चलाएँ)। दूसरे, रिपॉज़िटरी को एक बार onboard करें ताकि एजेंट `AGENTS.md`, `docs/`, `.agents/` किट और gitignore की गई `.dwp/` क्षेत्र को आपके stack के अनुसार ढाले: https://deepworkplan.com/init.md पर इशारा करें, या `/deepworkplan-onboard` चलाएँ। तीसरे, पतले commands से काम की योजना बनाएँ और चलाएँ: `/dwp-create <goal>` योजना बनाता है; `/dwp-execute` प्रत्येक gate के विरुद्ध कार्य-दर-कार्य चलाता है; `/dwp-refine` एक चल रही योजना को संपादित करता है (scope, कार्य, या किसी Lite योजना को Full में उन्नत करना); `/dwp-resume` रुकावट के बाद जारी रखता है; `/dwp-status` बिना निष्पादन प्रगति रिपोर्ट करता है; `/dwp-verify` एक वस्तुनिष्ठ अनुरूपता रिपोर्ट तैयार करता है; `/dwp-upgrade` इंस्टॉल की गई स्किल को मौजूदा योजनाओं को छुए बिना एक नए रिलीज़ पर ले जाता है। `/` को intercept करने वाले एजेंट अक्सर `#` का उपयोग करते हैं (उदाहरण `#dwp-execute`)। adoption endpoint और त्वरित शुरुआत उसी रास्ते को अधिक विस्तार से बताते हैं।
+तीन चरण। पहले, Deep Work Plan स्किल को अपने coding agent में इंस्टॉल करें — सबसे तेज़ रास्ता `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` है (या skill repo क्लोन करें और `./setup.sh` चलाएँ)। दूसरे, रिपॉज़िटरी को एक बार onboard करें ताकि एजेंट `AGENTS.md`, `docs/`, `.agents/` किट और gitignore की गई `.dwp/` क्षेत्र को आपके stack के अनुसार ढाले: https://deepworkplan.com/init.md पर इशारा करें, या `/deepworkplan-onboard` चलाएँ। तीसरे, पतले commands से काम की योजना बनाएँ और चलाएँ: `/dwp-create <goal>` योजना बनाता है; `/dwp-execute` प्रत्येक gate के विरुद्ध कार्य-दर-कार्य चलाता है; `/dwp-refine` एक चल रही योजना को संपादित करता है (scope, कार्य, या किसी Lite योजना को Full में उन्नत करना); `/dwp-resume` रुकावट के बाद जारी रखता है; `/dwp-status` बिना निष्पादन प्रगति रिपोर्ट करता है; `/dwp-verify` एक वस्तुनिष्ठ अनुरूपता रिपोर्ट तैयार करता है; `/dwp-upgrade` इंस्टॉल की गई स्किल को मौजूदा योजनाओं को छुए बिना एक नए रिलीज़ पर ले जाता है। `/` को intercept करने वाले एजेंट अक्सर `#` का उपयोग करते हैं (उदाहरण `#dwp-execute`)। adoption endpoint और त्वरित शुरुआत उसी रास्ते को अधिक विस्तार से बताते हैं।
 
 [त्वरित शुरुआत](https://deepworkplan.com/hi/quickstart)
 
@@ -170,9 +170,9 @@ DWP सात वर्गों का एक सख्त एस्केल�
 
 [रिकॉर्ड लेयर विनिर्देश पढ़ें](https://deepworkplan.com/hi/spec/record-layer)
 
-### क्या v6 योजनाएं v7 के तहत चलती रहती हैं?
+### क्या मौजूदा प्लान v8 में अपनी पीढ़ी बनाए रखते हैं?
 
-हाँ। योजना अनुबंध स्पष्ट रूप से अपनी स्कीमा पीढ़ी की घोषणा करते हैं (`plan-contract/v6.json` बनाम `plan-contract/v7.json`)। कोई योजना कभी भी बीच में पीढ़ी नहीं बदलती। मौजूदा v6 योजनाएं v7 टूलिंग के तहत निर्बाध रूप से जारी रहती हैं।
+हाँ। नए प्लान डिफ़ॉल्ट रूप से `plan-contract/v8` का उपयोग करते हैं। मौजूदा v7, v6 और v5 प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं और वर्तमान पैक के साथ चलते रहते हैं। प्लान की पीढ़ी केवल स्पष्ट `/dwp-refine migrate` अनुरोध से बदलती है।
 
 [अनुबंधों के बारे में पढ़ें](https://deepworkplan.com/hi/spec/record-layer)
 

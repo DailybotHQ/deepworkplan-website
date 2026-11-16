@@ -221,6 +221,11 @@ export const th: SiteTranslations = {
             'แต่ละเครื่องรายงานแผนของตนเป็น plans-v1 daemon เก็บแผนที่ fleet-v1 ของทุกเครื่อง เอเจนต์ repository และแผน และ fleet ui แสดงผลแบบอ่านอย่างเดียว',
         },
         {
+          name: 'คิวแผน',
+          detail:
+            'แพ็กตรวจสอบและเขียนคิว `dwp-queue-v1`; daemon อ่านคิวเพื่อดำเนินแผนที่รอต่อไป',
+        },
+        {
           name: 'การยืนยัน lead',
           detail:
             'ก่อนการ merge, tag หรือ release ใด ๆ lead จะยืนยันว่ายังถือแผนอยู่บนทุกเครื่อง lead ที่ใหม่กว่าจะปฏิเสธ และเครื่องที่ติดต่อไม่ได้จะหยุดมัน เว้นแต่ความเสี่ยงนั้นได้รับการยอมรับและบันทึกไว้',
@@ -789,7 +794,7 @@ export const th: SiteTranslations = {
         description:
           'ปฏิบัติต่อพรอมต์และสกิลว่าเป็นสิ่งที่ไม่น่าเชื่อถือจนกว่าจะได้ตรวจสอบ ทั้งสองเป็นโอเพนซอร์สและ MIT สกิลเป็น Markdown-first ไม่มีการเรียกเครือข่ายและไม่มีการเก็บข้อมูลการใช้งาน ทุกรีลีสเผยแพร่ SHA256SUMS สำหรับสกิลที่ส่งมา คุณจึงสามารถยืนยันว่าสำเนาของคุณตรงกันก่อนรัน รีลีสถูกตรวจสอบด้วย checksum ไม่ใช่ลายเซ็น (การลงนามเป็นขั้นตอนถัดไปที่ได้รับการจัดทำเป็นเอกสาร)',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -797,7 +802,7 @@ export const th: SiteTranslations = {
         description:
           'เพิ่มสกิล Deep Work Plan เพื่อให้ agent ใดก็ได้สามารถวางแผนและดำเนินงานที่มีโครงสร้าง สกิลประกอบด้วย router และสกิลย่อยเก้าตัว ได้แก่ create, execute, refine, resume, status, verify, onboard, author และ upgrade',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -901,7 +906,7 @@ export const th: SiteTranslations = {
             id: 'how-to-use',
             question: 'ใช้งานอย่างไร?',
             answer:
-              'สามขั้นตอน ขั้นแรก ติดตั้ง Deep Work Plan skill ลงใน coding agent ของคุณ——เส้นทางที่เร็วที่สุดคือ `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (หรือ clone skill repo แล้วรัน `./setup.sh`) ขั้นที่สอง onboard repository ครั้งเดียว เพื่อให้ agent ปรับ `AGENTS.md`, `docs/`, ชุด `.agents/` และพื้นที่ `.dwp/` ที่ถูก gitignore ให้เข้ากับสแต็กของคุณ: ชี้ไปที่ https://deepworkplan.com/init.md หรือรัน `/deepworkplan-onboard` ขั้นที่สาม วางแผนและรันงานด้วยคำสั่งบาง ๆ: `/dwp-create <goal>` สร้างแผน; `/dwp-execute` รันทีละงานผ่านแต่ละ gate; `/dwp-refine` แก้ไขแผนที่กำลังดำเนินอยู่ (ขอบเขต งาน หรือการยกระดับแผน Lite เป็น Full); `/dwp-resume` ทำต่อหลังการหยุดชะงัก; `/dwp-status` รายงานความคืบหน้าโดยไม่รัน; `/dwp-verify` สร้างรายงานการสอดคล้องที่เป็นกลาง ส่วน `/dwp-upgrade` ย้ายสกิลที่ติดตั้งไว้ไปยังรีลีสใหม่โดยไม่แตะแผนที่มีอยู่ agent ที่ intercept `/` มักใช้ `#` แทน (เช่น `#dwp-execute`) adoption endpoint และเริ่มใช้งานเร็วอธิบายเส้นทางเดียวกันอย่างละเอียดยิ่งขึ้น',
+              'สามขั้นตอน ขั้นแรก ติดตั้ง Deep Work Plan skill ลงใน coding agent ของคุณ——เส้นทางที่เร็วที่สุดคือ `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (หรือ clone skill repo แล้วรัน `./setup.sh`) ขั้นที่สอง onboard repository ครั้งเดียว เพื่อให้ agent ปรับ `AGENTS.md`, `docs/`, ชุด `.agents/` และพื้นที่ `.dwp/` ที่ถูก gitignore ให้เข้ากับสแต็กของคุณ: ชี้ไปที่ https://deepworkplan.com/init.md หรือรัน `/deepworkplan-onboard` ขั้นที่สาม วางแผนและรันงานด้วยคำสั่งบาง ๆ: `/dwp-create <goal>` สร้างแผน; `/dwp-execute` รันทีละงานผ่านแต่ละ gate; `/dwp-refine` แก้ไขแผนที่กำลังดำเนินอยู่ (ขอบเขต งาน หรือการยกระดับแผน Lite เป็น Full); `/dwp-resume` ทำต่อหลังการหยุดชะงัก; `/dwp-status` รายงานความคืบหน้าโดยไม่รัน; `/dwp-verify` สร้างรายงานการสอดคล้องที่เป็นกลาง ส่วน `/dwp-upgrade` ย้ายสกิลที่ติดตั้งไว้ไปยังรีลีสใหม่โดยไม่แตะแผนที่มีอยู่ agent ที่ intercept `/` มักใช้ `#` แทน (เช่น `#dwp-execute`) adoption endpoint และเริ่มใช้งานเร็วอธิบายเส้นทางเดียวกันอย่างละเอียดยิ่งขึ้น',
             linkLabel: 'เริ่มใช้งานเร็ว',
             linkPath: '/quickstart',
           },
@@ -1086,9 +1091,9 @@ export const th: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'แผนงาน v6 ยังคงทำงานต่อไปภายใต้ v7 ได้หรือไม่?',
+            question: 'แผนที่มีอยู่ยังคงรุ่นเดิมเมื่อใช้ v8 หรือไม่?',
             answer:
-              'ได้ สัญญาแผนงานประกาศเวอร์ชันของสกีมาอย่างชัดเจน (`plan-contract/v6.json` เทียบกับ `plan-contract/v7.json`) แผนจะไม่เปลี่ยนเวอร์ชันระหว่างการทำงาน แผนงาน v6 เดิมจะยังคงรักษารูปแบบและสถานะไว้ภายใต้เครื่องมือ v7 อย่างราบรื่น',
+              'ใช่ แผนใหม่ใช้ `plan-contract/v8` เป็นค่าเริ่มต้น แผน v7, v6 และ v5 ที่มีอยู่จะคงรุ่นที่บันทึกไว้และทำงานต่อกับแพ็กปัจจุบัน รุ่นของแผนจะเปลี่ยนได้เฉพาะเมื่อร้องขอ `/dwp-refine migrate` อย่างชัดเจน',
             linkLabel: 'อ่านเกี่ยวกับสัญญา',
             linkPath: '/spec/record-layer',
           },

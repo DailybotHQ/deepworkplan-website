@@ -23,10 +23,10 @@ Skill'i kontrol edene kadar güvenilmez olarak değerlendirin. Her sürüm, gön
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-git checkout v7.12.2
-# Download the checksums for the release you intend to install (current release v7.12.2):
+git checkout v8.0.0
+# Download the checksums for the release you intend to install (current release v8.0.0):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS
 # Expected SHA256SUMS digest: 8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea
 ./setup.sh --verify        # sıfırdan farklı çıkış, bir dosyanın eşleşmediği anlamına gelir — durun
 ```
