@@ -773,8 +773,6 @@ export const en: SiteTranslations = {
     },
     eyebrow: 'Quickstart',
     title: 'Make your repository AI-first',
-    intro:
-      'One page to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
     handoffTitle: 'Copy into your agent',
     handoffBody:
       'Copy the full init.md prompt and paste it into your AI coding agent — Claude Code, Cursor, Codex, or any other. It reads the methodology and specification, installs the skill, and onboards this repository for Deep Work Plans.',
@@ -789,6 +787,8 @@ export const en: SiteTranslations = {
     ],
     sequenceTitle: 'The adoption path',
     orLabel: 'or',
+    loopNotifyNote:
+      'If you want Dailybot event reports, use the second command. It adds the pack notifier with --notify; notifications are optional.',
     steps: [
       {
         title: 'Verify before you install',
@@ -1036,6 +1036,25 @@ export const en: SiteTranslations = {
               'Yes — the orchestrator-hub archetype exists for exactly that. A hub repository holds the coordinating plan, and each child repository runs its own plan inside its own isolated `.dwp/` workspace, so a child never writes into the hub’s plan state. Child completeness is read from each plan’s own top-level state, not by string-matching inside it, and the hub records where it is before navigating anywhere. Each child stays an ordinary DWP repository that can also be piloted on its own.',
             linkLabel: 'Repository archetypes',
             linkPath: '/spec/archetypes',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'What is loop engineering?',
+            answer:
+              'Loop engineering closes the execution loop: after a plan is registered with a lead, the optional, human-started Herdr daemon can keep its open plan moving to completion and report stalls, blockers, lost leads, or completion. It works within the plan’s recorded authority.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Does Deep Work Plan need the daemon?',
+            answer:
+              'No. The methodology and its plans work without Herdr or a daemon. The addon is optional and adds continuity; it is never a requirement.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'What can the daemon never do?',
+            answer:
+              'It never signs in, accepts Claude’s bypass-permissions acknowledgement, widens an agent’s standing permissions, or performs merge, tag, or release operations. A nudge sends a fixed continue prompt and grants no authority.',
           },
         ],
       },
@@ -1515,6 +1534,8 @@ export const en: SiteTranslations = {
     planTitle: 'Plan and execute with the skill',
     planIntro:
       'The API above lets an agent read this site. The DWP skill is what lets an agent run the methodology — install it once in a repository and it ships a router plus nine sub-skills, invoked as slash commands (or by name, for agents that intercept slash — most use # instead, e.g. #dwp-execute).',
+    loopWorkflow:
+      'With Herdr, plan registration records the lead and succession. A human may start herdr-peers autopilot start --loop to keep open plans moving. Run herdr-peers lead verify --plan <plan-id> before any merge, tag, or release.',
     formatTitle:
       'Two independent choices: format, and how much review you want',
     formatIntro:

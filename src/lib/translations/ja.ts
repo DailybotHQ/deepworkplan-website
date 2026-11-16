@@ -783,8 +783,6 @@ export const ja: SiteTranslations = {
     },
     eyebrow: 'クイックスタート',
     title: 'このリポジトリを AI-first にする',
-    intro:
-      'あらゆるリポジトリを、仕様駆動でエージェント対応のコードベースに変える単一のエンドポイント。スキルをインストールし、エージェントにリポジトリをオンボーディングさせ、どのコーディングエージェントでも構造化された作業を計画して実行します。',
     handoffTitle: 'エージェントにコピーする',
     handoffBody:
       '完全な init.md プロンプトをコピーして、お使いの AI コーディングエージェント — Claude Code、Cursor、Codex、またはその他のツール — に貼り付けてください。方法論と仕様を読み込み、スキルをインストールし、このリポジトリを Deep Work Plan 向けにオンボーディングします。',
@@ -799,6 +797,8 @@ export const ja: SiteTranslations = {
     ],
     sequenceTitle: '採用への道のり',
     orLabel: 'または',
+    loopNotifyNote:
+      'Dailybot のイベント通知を受け取りたい場合は、2 つ目のコマンドを使います。--notify でパックの通知スクリプトを追加します。通知は任意です。',
     steps: [
       {
         title: 'インストールする前に検証する',
@@ -1038,6 +1038,25 @@ export const ja: SiteTranslations = {
               'できます。計画が事前に承認され、必須の状態レイヤーを備え、エージェントに範囲の定まった権限を与えている場合です。無人実行は、現実が計画から乖離したとき、ゲートが計画された修復範囲の外で失敗したとき、あるいは新たな承認や認証情報が必要になったときには、停止してブロッカーを記録しなければなりません。',
             linkLabel: '無人実行プロトコルを読む',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering とは何ですか？',
+            answer:
+              'loop engineering は実行ループを閉じる仕組みです。lead を登録した計画に対し、人が起動する任意の Herdr daemon がオープンな計画を完了まで進め、停滞、ブロック、lead の不在、完了を通知できます。計画に記録された権限の範囲内で動作します。',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan に daemon は必要ですか？',
+            answer:
+              'いいえ。方法論と計画は Herdr や daemon がなくても機能します。この addon は任意で、継続性を加えるものであり、必須ではありません。',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'daemon が決してできないことは何ですか？',
+            answer:
+              'ログイン、Claude の権限バイパス確認の承認、agent の恒常的な権限の拡大、merge・tag・release の実行は決して行いません。nudges は固定の続行プロンプトを送るだけで、権限を与えません。',
           },
         ],
       },
@@ -1531,6 +1550,8 @@ export const ja: SiteTranslations = {
     planTitle: 'スキルで計画し、実行する',
     planIntro:
       '上記の API はエージェントがこのサイトを読み取ることを可能にします。DWP スキルは、エージェントが方法論を実行することを可能にするものです——リポジトリに一度インストールすれば、ルーターと九つのサブスキルが提供され、スラッシュコマンドとして(または名前で、スラッシュを傍受するエージェントの場合はほとんどが代わりに # を使います。例:#dwp-execute)呼び出せます。',
+    loopWorkflow:
+      'Herdr を使う場合、計画の登録時に lead と後継順を記録します。人が herdr-peers autopilot start --loop を起動すると、オープンな計画を継続できます。merge、tag、release の前に herdr-peers lead verify --plan <plan-id> を実行してください。',
     formatTitle: '二つの独立した選択:形式と、どれだけレビューを求めるか',
     formatIntro:
       'すべての計画は、それぞれの軸から一つの値を選びます。この二つの軸は独立しています——Lite の計画で trust を実行することも、Full の計画で guided を実行することもでき、どちらも形式を変えずに後からモードを切り替えられます。',

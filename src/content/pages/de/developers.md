@@ -16,6 +16,8 @@ Es gibt keine API-Schlüssel zu erzeugen, keinen OAuth-Aufwand und keine von der
 
 Die oben beschriebene API lässt einen Agenten diese Website lesen. Die DWP-Skill ist das, was einen Agenten die Methodik ausführen lässt — installieren Sie sie einmal in einem Repository, und sie liefert einen Router plus neun Sub-Skills, aufgerufen als Slash-Befehle (oder namentlich, für Agenten, die `/` abfangen — die meisten verwenden stattdessen `#`, z. B. `#dwp-execute`).
 
+Mit Herdr hält die Planregistrierung den Lead und die Nachfolge fest. Ein Mensch kann `herdr-peers autopilot start --loop` starten, damit offene Pläne weiterlaufen. Führe vor jedem Merge, Tag oder Release `herdr-peers lead verify --plan <plan-id>` aus.
+
 Jeder Plan wählt einen Wert aus jeder der zwei unabhängigen Achsen:
 
 - **Lite** — Aufgabenprotokolle leben inline im README des Plans, hinter stabilen `#task-N`-Ankern. Gebaut für kleine, begrenzte Arbeit: ein Anliegen, ungefähr eine Sitzung.

@@ -16,6 +16,8 @@ Không có API key để tạo, không quy trình OAuth, và không có sandbox 
 
 API ở trên cho phép agent đọc trang web này. Skill DWP là thứ cho phép agent chạy phương pháp luận — cài đặt một lần vào một repository và nó cung cấp một router cùng chín sub-skill, được gọi dưới dạng slash command (hoặc theo tên, đối với các agent chặn dấu gạch chéo — hầu hết dùng `#` thay thế, ví dụ `#dwp-execute`).
 
+Với Herdr, việc đăng ký kế hoạch ghi lại lead và thứ tự kế nhiệm. Con người có thể chạy `herdr-peers autopilot start --loop` để duy trì các kế hoạch đang mở. Chạy `herdr-peers lead verify --plan <plan-id>` trước mọi thao tác merge, tag hoặc release.
+
 Mỗi kế hoạch chọn một giá trị từ mỗi trong hai trục độc lập:
 
 - **Lite** — bản ghi tác vụ nằm trực tiếp trong README của kế hoạch, phía sau các anchor `#task-N` ổn định. Được xây dựng cho công việc nhỏ, có giới hạn: một mối quan tâm, trong khoảng một lần ngồi làm.

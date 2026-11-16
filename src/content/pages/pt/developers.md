@@ -16,6 +16,8 @@ Não há chaves de API para gerar, nenhum fluxo de OAuth e nenhum sandbox separa
 
 A API acima permite que um agente leia este site. A skill DWP é o que permite que um agente execute a metodologia — instale-a uma vez em um repositório e ela traz um roteador mais nove sub-skills, invocadas como comandos de barra.
 
+Com o Herdr, o registro do plano anota o lead e a sucessão. Uma pessoa pode iniciar `herdr-peers autopilot start --loop` para manter os planos abertos em andamento. Execute `herdr-peers lead verify --plan <plan-id>` antes de qualquer merge, tag ou release.
+
 - **Lite** — registros de tarefa inline no README do plano, feito para trabalho pequeno e delimitado.
 - **Full** — um arquivo por tarefa, para trabalho de longo alcance ou com dependências reais entre tarefas.
 - **Guided (padrão)** — o agente materializa um plano revisável e pergunta antes de começar qualquer trabalho de produto.

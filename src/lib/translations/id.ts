@@ -780,8 +780,6 @@ export const id: SiteTranslations = {
     },
     eyebrow: 'Mulai Cepat',
     title: 'Jadikan repositori ini AI-first',
-    intro:
-      'Satu endpoint untuk mengubah repositori apa pun menjadi basis kode spec-driven yang siap agent. Pasang skill, biarkan agent meng-onboard repo, lalu rencanakan dan eksekusi pekerjaan terstruktur dengan coding agent mana pun.',
     handoffTitle: 'Salin ke agent Anda',
     handoffBody:
       'Salin prompt init.md lengkap dan tempelkan ke AI coding agent Anda — Claude Code, Cursor, Codex, atau lainnya. Ia membaca metodologi dan spesifikasi, memasang skill, dan meng-onboard repositori ini untuk Deep Work Plan.',
@@ -796,6 +794,8 @@ export const id: SiteTranslations = {
     ],
     sequenceTitle: 'Jalur adopsi',
     orLabel: 'atau',
+    loopNotifyNote:
+      'Jika ingin menerima laporan peristiwa Dailybot, gunakan perintah kedua. Perintah itu menambahkan notifier paket dengan --notify; notifikasi bersifat opsional.',
     steps: [
       {
         title: 'Verifikasi sebelum memasang',
@@ -1037,6 +1037,25 @@ export const id: SiteTranslations = {
               'Bisa, ketika rencana sudah disetujui sebelumnya, membawa lapisan status yang diwajibkan, dan memberi agent otoritas terbatas. Eksekusi tanpa pengawasan wajib berhenti dan mencatat blocker ketika kenyataan menyimpang, sebuah gerbang gagal di luar cakupan perbaikan yang direncanakan, atau dibutuhkan persetujuan atau kredensial baru.',
             linkLabel: 'Baca protokol tanpa pengawasan',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'Apa itu loop engineering?',
+            answer:
+              'Loop engineering menutup siklus eksekusi: setelah rencana didaftarkan dengan lead, daemon Herdr opsional yang dimulai manusia dapat menjaga rencana terbuka berjalan hingga selesai dan melaporkan kemacetan, hambatan, hilangnya lead, atau penyelesaian. Daemon tetap berada dalam kewenangan yang tercatat di rencana.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Apakah Deep Work Plan memerlukan daemon?',
+            answer:
+              'Tidak. Metode dan rencananya dapat berjalan tanpa Herdr atau daemon. Addon ini opsional untuk menambah kesinambungan, bukan prasyarat.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Apa yang tidak pernah dapat dilakukan daemon?',
+            answer:
+              'Daemon tidak pernah masuk ke akun, menyetujui pengakuan bypass-permissions Claude, memperluas izin tetap agen, atau menjalankan operasi merge, tag, maupun release. Nudge hanya mengirim prompt tetap untuk melanjutkan dan tidak memberikan kewenangan.',
           },
         ],
       },
@@ -1532,6 +1551,8 @@ export const id: SiteTranslations = {
     planTitle: 'Merencanakan dan menjalankan dengan skill',
     planIntro:
       'API di atas memungkinkan agent membaca situs ini. Skill DWP adalah yang memungkinkan agent menjalankan metodologinya — pasang sekali di sebuah repositori, dan skill ini membawa router beserta sembilan sub-skill, dipanggil sebagai slash command (atau dengan namanya, untuk agent yang meng-intercept slash — kebanyakan memakai # sebagai gantinya, misalnya #dwp-execute).',
+    loopWorkflow:
+      'Dengan Herdr, pendaftaran rencana mencatat lead dan urutan penerus. Seseorang dapat memulai herdr-peers autopilot start --loop agar rencana terbuka terus berjalan. Jalankan herdr-peers lead verify --plan <plan-id> sebelum merge, tag, atau release apa pun.',
     formatTitle:
       'Dua pilihan independen: format, dan seberapa banyak review yang Anda inginkan',
     formatIntro:

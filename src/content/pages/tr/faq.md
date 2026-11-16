@@ -126,6 +126,18 @@ Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve aja
 
 [Gözetimsiz protokolü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
 
+### loop engineering nedir?
+
+Loop engineering yürütme döngüsünü kapatır: lead kaydı olan bir planın ardından, insanın başlattığı isteğe bağlı Herdr daemon’ı açık planı tamamlanana kadar sürdürebilir; duraklama, engel, lead kaybı veya tamamlanma durumlarını bildirir. Planın kayıtlı yetkileri içinde çalışır.
+
+### Deep Work Plan daemon gerektirir mi?
+
+Hayır. Yöntem ve planları Herdr veya daemon olmadan çalışır. Addon isteğe bağlıdır ve süreklilik ekler; ön koşul değildir.
+
+### Daemon asla ne yapamaz?
+
+Oturum açamaz, Claude’un izinleri atlama onayını kabul edemez, ajanın kalıcı izinlerini genişletemez ve merge, tag veya release işlemlerini gerçekleştiremez. Nudge yalnızca sabit bir devam etme istemi gönderir ve yetki vermez.
+
 ## Çoklu ajanlar ve v7
 
 ### Birden fazla ajan bir planda paralel olarak güvenle çalışabilir mi?

@@ -778,8 +778,6 @@ export const vi: SiteTranslations = {
     },
     eyebrow: 'Khởi động nhanh',
     title: 'Biến repository này thành AI-first',
-    intro:
-      'Một endpoint để biến mọi repository thành một codebase dựa trên đặc tả, sẵn sàng cho agent. Cài skill, để một agent khởi tạo repo, rồi lập kế hoạch và thực thi công việc có cấu trúc với mọi agent lập trình.',
     handoffTitle: 'Sao chép vào agent của bạn',
     handoffBody:
       'Sao chép toàn bộ prompt init.md và dán vào agent lập trình AI của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác. Nó đọc phương pháp luận và đặc tả, cài skill, và khởi tạo repository này cho các Deep Work Plan.',
@@ -794,6 +792,8 @@ export const vi: SiteTranslations = {
     ],
     sequenceTitle: 'Lộ trình áp dụng',
     orLabel: 'hoặc',
+    loopNotifyNote:
+      'Nếu muốn nhận báo cáo sự kiện từ Dailybot, hãy dùng lệnh thứ hai. Lệnh này thêm notifier của gói bằng --notify; thông báo là tùy chọn.',
     steps: [
       {
         title: 'Xác minh trước khi cài đặt',
@@ -1037,6 +1037,25 @@ export const vi: SiteTranslations = {
               'Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng trạng thái bắt buộc và trao cho agent thẩm quyền có giới hạn. Một lượt chạy không giám sát phải dừng lại và ghi nhận một điểm chặn khi thực tế lệch khỏi kế hoạch, một cổng kiểm chứng thất bại ngoài phạm vi sửa chữa đã định, hoặc cần một phê duyệt hay thông tin xác thực mới.',
             linkLabel: 'Đọc giao thức chạy không giám sát',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering là gì?',
+            answer:
+              'Loop engineering khép kín vòng thực thi: sau khi kế hoạch được đăng ký cùng lead, daemon Herdr tùy chọn do con người khởi động có thể tiếp tục kế hoạch đang mở đến khi hoàn tất và báo khi bị đình trệ, bị chặn, mất lead hoặc hoàn thành. Daemon hoạt động trong phạm vi quyền đã ghi trong kế hoạch.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan có cần daemon không?',
+            answer:
+              'Không. Phương pháp và các kế hoạch hoạt động mà không cần Herdr hay daemon. Addon là tùy chọn, giúp duy trì tính liên tục chứ không phải điều kiện bắt buộc.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Daemon tuyệt đối không thể làm gì?',
+            answer:
+              'Daemon không đăng nhập, không chấp nhận xác nhận bỏ qua quyền của Claude, không mở rộng quyền thường trực của agent và không thực hiện merge, tag hay release. Nudge chỉ gửi lời nhắc tiếp tục cố định và không cấp thêm quyền.',
           },
         ],
       },
@@ -1532,6 +1551,8 @@ export const vi: SiteTranslations = {
     planTitle: 'Lập kế hoạch và thực thi bằng skill',
     planIntro:
       'API ở trên cho phép agent đọc trang web này. Skill DWP là thứ cho phép agent chạy phương pháp luận — cài đặt một lần vào một repository và nó cung cấp một router cùng chín sub-skill, được gọi dưới dạng slash command (hoặc theo tên, đối với các agent chặn dấu gạch chéo — hầu hết dùng # thay thế, ví dụ #dwp-execute).',
+    loopWorkflow:
+      'Với Herdr, việc đăng ký kế hoạch ghi lại lead và thứ tự kế nhiệm. Con người có thể chạy herdr-peers autopilot start --loop để duy trì các kế hoạch đang mở. Chạy herdr-peers lead verify --plan <plan-id> trước mọi thao tác merge, tag hoặc release.',
     formatTitle: 'Hai lựa chọn độc lập: định dạng, và mức độ rà soát bạn muốn',
     formatIntro:
       'Mỗi kế hoạch chọn một giá trị từ mỗi trục. Hai trục này độc lập với nhau — một kế hoạch Lite có thể chạy ở chế độ trust, một kế hoạch Full có thể chạy ở chế độ guided, và cả hai đều có thể chuyển chế độ sau này mà không cần đổi định dạng.',

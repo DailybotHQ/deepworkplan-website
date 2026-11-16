@@ -4,6 +4,8 @@ description: "Prompt onboarding yang dapat dieksekusi untuk AI agent: adopsi Dee
 lastUpdated: 2026-10-11
 ---
 
+Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.
+
 Anda adalah sebuah AI coding agent. Baca seluruh prompt ini terlebih dahulu, lalu jadikan repositori saat ini
 **AI-first**, **spec-driven**, dan **dapat dikemudikan agent** dengan mengadopsi metodologi Deep Work Plan (DWP).
 Perlakukan ini sebagai tugas teknik yang terstruktur — sebuah Deep Work Plan — bukan suntingan singkat.
@@ -433,6 +435,15 @@ metodologi:
    dan dapat diverifikasi.
 
 Siapa pun dapat menjalankan prompt ini di repositori mana pun — dan berakhir dengan basis kode yang dapat dikemudikan AI agent mana pun.
+
+## Manusia memulai loop
+
+Opsional, dengan addon Herdr: Anda — bukan agen — menjalankan herdr-peers autopilot start --loop. Setiap rencana terbuka yang memiliki catatan lead terus berjalan hingga akhir, dan notifier Anda diberi tahu saat ada rencana yang macet, terblokir, atau selesai. Jika ingin menerima laporan peristiwa Dailybot, gunakan perintah kedua. Perintah itu menambahkan notifier paket dengan --notify; notifikasi bersifat opsional.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Langkah berikutnya
 

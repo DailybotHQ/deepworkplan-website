@@ -4,6 +4,8 @@ description: "Wykonywalny prompt onboardingowy dla agentów AI: przyjmij Deep Wo
 lastUpdated: 2026-10-11
 ---
 
+Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.
+
 Jesteś agentem kodującym AI. Najpierw przeczytaj cały ten prompt, a następnie uczyń bieżące repozytorium
 **AI-first**, **spec-driven** i **sterowalnym przez agenta**, przyjmując metodykę Deep Work Plan (DWP).
 Potraktuj to jako ustrukturyzowane zadanie inżynierskie — Deep Work Plan — a nie szybką edycję.
@@ -380,6 +382,15 @@ metodyki:
    weryfikowalnej pracy.
 
 Każdy może uruchomić ten prompt na dowolnym repozytorium — i zakończyć z bazą kodu, którą może sterować dowolny agent AI.
+
+## Człowiek uruchamia pętlę
+
+Opcjonalnie, z dodatkiem Herdr: to Ty — nigdy agent — uruchamiasz herdr-peers autopilot start --loop. Każdy otwarty plan z rekordem leada działa aż do końca, a Twój notyfikator dowiaduje się, gdy któryś utknie, zostanie zablokowany lub się zakończy. Jeśli chcesz otrzymywać raporty zdarzeń Dailybot, użyj drugiego polecenia. Dodaje ono notifier z pakietu przez --notify; powiadomienia są opcjonalne.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Kolejne kroki
 

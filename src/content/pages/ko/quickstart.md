@@ -4,6 +4,8 @@ description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트:
 lastUpdated: 2026-10-11
 ---
 
+스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.
+
 당신은 AI 코딩 에이전트입니다. 먼저 이 프롬프트 전체를 읽은 뒤, Deep Work Plan(DWP)
 방법론을 채택하여 현재 리포지토리를 **AI-first**, **스펙 주도**, **에이전트 조종 가능** 상태로
 만드세요. 이것을 빠른 편집이 아니라 구조화된 엔지니어링 작업 — Deep Work Plan — 으로 다루세요.
@@ -347,6 +349,15 @@ CI 호환 기계적 계층인 `bash {skill_dir}/verify/conformance.sh`; 이 계�
    제공합니다.
 
 누구든 어떤 리포지토리에서든 이 프롬프트를 실행할 수 있으며 — 어떤 AI 에이전트든 조종할 수 있는 코드베이스로 끝맺습니다.
+
+## 사람이 루프를 시작합니다
+
+선택 사항이며 Herdr 애드온과 함께 씁니다: 에이전트가 아닌 당신이 herdr-peers autopilot start --loop를 실행합니다. 리드 기록이 있는 모든 열린 계획이 끝까지 계속 실행되고, 계획이 정체되거나 차단되거나 완료되면 알림기가 이를 전달받습니다. Dailybot 이벤트 보고서를 받으려면 두 번째 명령을 사용하세요. --notify로 팩의 알림 스크립트를 추가하며 알림은 선택 사항입니다.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## 다음 단계
 

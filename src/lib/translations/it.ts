@@ -782,8 +782,6 @@ export const it: SiteTranslations = {
     },
     eyebrow: 'Avvio rapido',
     title: 'Rendi questo repository AI-first',
-    intro:
-      'Un unico endpoint per trasformare qualsiasi repository in un codebase spec-driven e pronto per gli agenti. Installi la skill, lasci che un agente faccia l’onboarding del repo, poi pianifichi ed esegua lavoro strutturato con qualsiasi agente di coding.',
     handoffTitle: 'Copia nel Suo agente',
     handoffBody:
       "Copi il prompt completo di init.md e lo incolli nel Suo agente di coding AI — Claude Code, Cursor, Codex o qualsiasi altro. Legge la metodologia e la specifica, installa la skill e fa l'onboarding di questo repository per i Deep Work Plan.",
@@ -798,6 +796,8 @@ export const it: SiteTranslations = {
     ],
     sequenceTitle: 'Il percorso di adozione',
     orLabel: 'oppure',
+    loopNotifyNote:
+      'Se vuoi ricevere i report degli eventi su Dailybot, usa il secondo comando. Aggiunge il notifier del pacchetto con --notify; le notifiche sono facoltative.',
     steps: [
       {
         title: 'Verifichi prima di installare',
@@ -1040,6 +1040,25 @@ export const it: SiteTranslations = {
             linkLabel:
               'Legga il protocollo per le esecuzioni senza supervisione',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'Che cos’è loop engineering?',
+            answer:
+              'Loop engineering chiude il ciclo di esecuzione: dopo la registrazione di un piano con un lead, il daemon Herdr facoltativo, avviato da una persona, può portare avanti il piano aperto fino al completamento e segnalare stalli, blocchi, perdita del lead o completamento. Opera entro l’autorità registrata nel piano.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan ha bisogno del daemon?',
+            answer:
+              'No. La metodologia e i suoi piani funzionano senza Herdr o daemon. L’addon è facoltativo e aggiunge continuità; non è mai un requisito.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Che cosa non può mai fare il daemon?',
+            answer:
+              'Non effettua login, non accetta la conferma di Claude per ignorare i permessi, non amplia i permessi permanenti di un agente e non esegue operazioni di merge, tag o release. Un nudge invia un prompt fisso per continuare e non concede autorità.',
           },
         ],
       },
@@ -1534,6 +1553,8 @@ export const it: SiteTranslations = {
     planTitle: 'Pianificare ed eseguire con la skill',
     planIntro:
       'L’API sopra permette a un agente di leggere questo sito. La skill DWP è ciò che permette a un agente di eseguire la metodologia — installatela una volta in un repository e fornisce un router più nove sub-skill, invocate come comandi slash (o per nome, per gli agenti che intercettano lo slash — la maggior parte usa # al suo posto, ad esempio #dwp-execute).',
+    loopWorkflow:
+      'Con Herdr, la registrazione del piano annota il lead e la successione. Una persona può avviare herdr-peers autopilot start --loop per mantenere attivi i piani aperti. Esegui herdr-peers lead verify --plan <plan-id> prima di qualsiasi merge, tag o release.',
     formatTitle:
       'Due scelte indipendenti: il formato e quanta revisione volete',
     formatIntro:

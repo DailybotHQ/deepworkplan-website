@@ -777,8 +777,6 @@ export const ko: SiteTranslations = {
     },
     eyebrow: '빠른 시작',
     title: '이 리포지토리를 AI-first로 만들기',
-    intro:
-      '어떤 리포지토리든 스펙 주도이며 에이전트가 준비된 코드베이스로 바꾸는 단일 엔드포인트. 스킬을 설치하고, 에이전트가 리포지토리를 온보딩하게 한 뒤, 어떤 코딩 에이전트로든 구조화된 작업을 계획하고 실행하세요.',
     handoffTitle: '에이전트에 복사하기',
     handoffBody:
       '완전한 init.md 프롬프트를 복사하여 AI 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣으세요. 방법론과 스펙을 읽고, 스킬을 설치하며, 이 리포지토리를 Deep Work Plan을 위해 온보딩합니다.',
@@ -793,6 +791,8 @@ export const ko: SiteTranslations = {
     ],
     sequenceTitle: '채택 경로',
     orLabel: '또는',
+    loopNotifyNote:
+      'Dailybot 이벤트 보고서를 받으려면 두 번째 명령을 사용하세요. --notify로 팩의 알림 스크립트를 추가하며 알림은 선택 사항입니다.',
     steps: [
       {
         title: '설치하기 전에 검증',
@@ -1032,6 +1032,25 @@ export const ko: SiteTranslations = {
               '예, 계획이 사전에 승인되었고 필요한 상태 계층을 갖추었으며 에이전트에 한정된 권한이 주어진 경우에 가능합니다. 무인 실행은 현실이 계획과 어긋나거나, 계획된 수리 범위 밖에서 게이트가 실패하거나, 새로운 승인이나 자격 증명이 필요할 때 멈추고 차단 사유를 기록해야 합니다.',
             linkLabel: '무인 실행 프로토콜 읽기',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering이란 무엇인가요?',
+            answer:
+              'loop engineering은 실행 루프를 닫습니다. lead가 등록된 계획에 대해 사람이 시작하는 선택형 Herdr daemon이 열린 계획을 완료까지 진행하고 정체, 차단, lead 부재 또는 완료를 알릴 수 있습니다. 계획에 기록된 권한 범위 안에서만 작동합니다.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan에 daemon이 필요한가요?',
+            answer:
+              '아니요. 방법론과 계획은 Herdr나 daemon 없이도 작동합니다. addon은 연속성을 더하는 선택 사항이며 필수 요건이 아닙니다.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'daemon이 절대 할 수 없는 일은 무엇인가요?',
+            answer:
+              '로그인, Claude의 권한 우회 확인 승인, agent의 상시 권한 확대, merge·tag·release 작업을 절대 수행하지 않습니다. nudge는 고정된 계속 진행 프롬프트만 보내며 권한을 부여하지 않습니다.',
           },
         ],
       },
@@ -1521,6 +1540,8 @@ export const ko: SiteTranslations = {
     planTitle: '스킬로 계획하고 실행하기',
     planIntro:
       '위의 API는 에이전트가 이 사이트를 읽을 수 있게 해줍니다. DWP 스킬은 에이전트가 방법론을 실행할 수 있게 해주는 것입니다 — 리포지토리에 한 번 설치하면 라우터와 아홉 개의 하위 스킬이 함께 제공되며, 슬래시 명령으로 호출됩니다(또는 이름으로 호출합니다. 슬래시를 가로채는 에이전트는 대부분 대신 #을 사용합니다. 예: #dwp-execute).',
+    loopWorkflow:
+      'Herdr에서는 계획 등록 시 lead와 승계 순서를 기록합니다. 사람이 herdr-peers autopilot start --loop를 시작하면 열린 계획을 계속 진행할 수 있습니다. merge, tag 또는 release 전에 herdr-peers lead verify --plan <plan-id>를 실행하세요.',
     formatTitle: '두 가지 독립적인 선택: 형식, 그리고 원하는 검토의 정도',
     formatIntro:
       '모든 계획은 각 축에서 하나의 값을 선택합니다. 이 두 축은 서로 독립적입니다 — Lite 계획도 trust로 실행할 수 있고, Full 계획도 guided로 실행할 수 있으며, 어느 쪽이든 형식을 바꾸지 않고 나중에 모드를 전환할 수 있습니다.',

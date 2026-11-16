@@ -126,6 +126,18 @@ Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng tr�
 
 [Đọc giao thức chạy không giám sát](https://deepworkplan.com/vi/spec/agent-protocol)
 
+### loop engineering là gì?
+
+Loop engineering khép kín vòng thực thi: sau khi kế hoạch được đăng ký cùng lead, daemon Herdr tùy chọn do con người khởi động có thể tiếp tục kế hoạch đang mở đến khi hoàn tất và báo khi bị đình trệ, bị chặn, mất lead hoặc hoàn thành. Daemon hoạt động trong phạm vi quyền đã ghi trong kế hoạch.
+
+### Deep Work Plan có cần daemon không?
+
+Không. Phương pháp và các kế hoạch hoạt động mà không cần Herdr hay daemon. Addon là tùy chọn, giúp duy trì tính liên tục chứ không phải điều kiện bắt buộc.
+
+### Daemon tuyệt đối không thể làm gì?
+
+Daemon không đăng nhập, không chấp nhận xác nhận bỏ qua quyền của Claude, không mở rộng quyền thường trực của agent và không thực hiện merge, tag hay release. Nudge chỉ gửi lời nhắc tiếp tục cố định và không cấp thêm quyền.
+
 ## Đa tác tử & v7
 
 ### Nhiều tác tử có thể làm việc song song trên một kế hoạch an toàn không?

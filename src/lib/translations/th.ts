@@ -772,8 +772,6 @@ export const th: SiteTranslations = {
     },
     eyebrow: 'เริ่มใช้งานเร็ว',
     title: 'ทำให้ repository นี้เป็น AI-first',
-    intro:
-      'หน้าเดียวสำหรับเปลี่ยน repository ใดก็ได้ให้เป็นโค้ดเบสที่ขับเคลื่อนด้วยสเปกและพร้อมสำหรับ agent ติดตั้ง skill ให้ agent ทำ onboarding ให้กับ repo แล้ววางแผนและดำเนินงานที่มีโครงสร้างด้วย coding agent ใดก็ได้',
     handoffTitle: 'คัดลอกไปยัง agent ของคุณ',
     handoffBody:
       'คัดลอก prompt ของ init.md ทั้งหมดและวางลงใน AI coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ โดยมันจะอ่านระเบียบวิธีและข้อกำหนด ติดตั้ง skill และทำ onboarding ให้กับ repository นี้สำหรับ Deep Work Plan',
@@ -788,6 +786,8 @@ export const th: SiteTranslations = {
     ],
     sequenceTitle: 'เส้นทางการนำไปใช้',
     orLabel: 'หรือ',
+    loopNotifyNote:
+      'หากต้องการรับรายงานเหตุการณ์จาก Dailybot ให้ใช้คำสั่งที่สอง ซึ่งเพิ่มตัวแจ้งเตือนของแพ็กผ่าน --notify; การแจ้งเตือนเป็นทางเลือก',
     steps: [
       {
         title: 'ตรวจสอบก่อนติดตั้ง',
@@ -1019,6 +1019,25 @@ export const th: SiteTranslations = {
               'ได้ เมื่อแผนได้รับการอนุมัติล่วงหน้า มีชั้นสถานะที่จำเป็นครบถ้วน และให้อำนาจที่มีขอบเขตแก่ agent การรันแบบไม่มีคนเฝ้าต้องหยุดและบันทึกตัวบล็อกเมื่อสภาพจริงเบี่ยงเบนไปจากแผน เมื่อ gate ล้มเหลวนอกขอบเขตการซ่อมที่วางแผนไว้ หรือเมื่อจำเป็นต้องมีการอนุมัติหรือข้อมูลรับรอง (credential) ใหม่',
             linkLabel: 'อ่านโพรโทคอลการรันแบบไม่มีคนเฝ้า',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering คืออะไร?',
+            answer:
+              'Loop engineering คือการปิดวงจรการทำงาน: หลังลงทะเบียนแผนพร้อม lead แล้ว daemon ของ Herdr ที่เป็นตัวเลือกและมนุษย์เป็นผู้เริ่ม สามารถพาแผนที่เปิดอยู่ไปจนเสร็จและรายงานเมื่อหยุดชะงัก ถูกบล็อก ไม่มี lead หรือเสร็จสิ้น โดยทำงานภายในอำนาจที่บันทึกไว้ในแผน',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan ต้องใช้ daemon หรือไม่?',
+            answer:
+              'ไม่ต้อง วิธีการและแผนทำงานได้โดยไม่มี Herdr หรือ daemon ส่วน addon นี้เป็นทางเลือกเพื่อเพิ่มความต่อเนื่อง ไม่ใช่ข้อกำหนด',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'daemon ทำอะไรไม่ได้เด็ดขาด?',
+            answer:
+              'daemon จะไม่เข้าสู่ระบบ ไม่ยอมรับการยืนยัน bypass-permissions ของ Claude ไม่ขยายสิทธิ์ถาวรของ agent และไม่ดำเนินการ merge, tag หรือ release การ nudge ส่งเพียงข้อความให้ทำงานต่อแบบตายตัวและไม่ให้อำนาจเพิ่ม',
           },
         ],
       },
@@ -1505,6 +1524,8 @@ export const th: SiteTranslations = {
     planTitle: 'วางแผนและดำเนินการด้วยสกิล',
     planIntro:
       'API ข้างต้นทำให้ agent อ่านเว็บไซต์นี้ได้ ส่วนสกิล DWP คือสิ่งที่ทำให้ agent รันระเบียบวิธีได้ — ติดตั้งครั้งเดียวใน repository แล้วมันจะนำ router มาพร้อมกับสกิลย่อยเก้าตัว เรียกใช้เป็น slash command (หรือเรียกด้วยชื่อ สำหรับ agent ที่ intercept slash — ส่วนใหญ่ใช้ # แทน เช่น #dwp-execute)',
+    loopWorkflow:
+      'เมื่อใช้ Herdr การลงทะเบียนแผนจะบันทึก lead และลำดับผู้สืบทอด มนุษย์สามารถเริ่ม herdr-peers autopilot start --loop เพื่อให้แผนที่เปิดอยู่ดำเนินต่อได้ เรียก herdr-peers lead verify --plan <plan-id> ก่อน merge, tag หรือ release ทุกครั้ง',
     formatTitle: 'สองทางเลือกที่เป็นอิสระจากกัน: รูปแบบ และปริมาณการตรวจทานที่ต้องการ',
     formatIntro:
       'ทุกแผนเลือกค่าหนึ่งจากแต่ละแกน ทั้งสองแกนเป็นอิสระจากกัน — แผน Lite รันแบบ trust ได้ แผน Full รันแบบ guided ได้ และแต่ละแผนสามารถเปลี่ยนโหมดภายหลังได้โดยไม่ต้องเปลี่ยนรูปแบบ',

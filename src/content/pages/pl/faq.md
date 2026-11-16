@@ -126,6 +126,18 @@ Tak, gdy plan został wcześniej zatwierdzony, niesie wymaganą warstwę stanu i
 
 [Przeczytaj protokół pracy bez nadzoru](https://deepworkplan.com/pl/spec/agent-protocol)
 
+### Czym jest loop engineering?
+
+Loop engineering domyka cykl wykonania: po zarejestrowaniu planu z leadem opcjonalny daemon Herdr uruchomiony przez człowieka może prowadzić otwarty plan do końca i zgłaszać zastój, blokadę, utratę leada lub ukończenie. Działa w granicach uprawnień zapisanych w planie.
+
+### Czy Deep Work Plan wymaga daemona?
+
+Nie. Metodologia i jej plany działają bez Herdr i daemona. Dodatek jest opcjonalny i zapewnia ciągłość; nigdy nie jest wymagany.
+
+### Czego daemon nigdy nie może zrobić?
+
+Nie loguje się, nie zatwierdza potwierdzenia Claude dotyczącego pominięcia uprawnień, nie rozszerza stałych uprawnień agenta ani nie wykonuje operacji merge, tag lub release. Nudge wysyła tylko stały komunikat o kontynuacji i nie nadaje uprawnień.
+
 ## Wielu agentów i v7
 
 ### Czy wielu agentów może pracować nad jednym planem równolegle i jak zapewniane jest bezpieczeństwo?

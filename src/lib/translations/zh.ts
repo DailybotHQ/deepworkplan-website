@@ -770,8 +770,6 @@ export const zh: SiteTranslations = {
     },
     eyebrow: '快速开始',
     title: '让这个代码仓库 AI-first',
-    intro:
-      '一个端点，将任意代码仓库转化为规范驱动、面向代理就绪的代码库。安装技能，让代理接入仓库，然后用任意编码代理规划并执行结构化的工作。',
     handoffTitle: '复制到你的代理',
     handoffBody:
       '复制完整的 init.md 提示并将其粘贴到你的 AI 编码代理中——Claude Code、Cursor、Codex 或任何其他代理。它会阅读方法论与规范、安装技能，并为 Deep Work Plan 接入这个代码仓库。',
@@ -786,6 +784,8 @@ export const zh: SiteTranslations = {
     ],
     sequenceTitle: '采纳路径',
     orLabel: '或',
+    loopNotifyNote:
+      '如果需要接收 Dailybot 事件报告，请使用第二条命令。它通过 --notify 添加套件通知脚本；通知是可选的。',
     steps: [
       {
         title: '安装前先验证',
@@ -1017,6 +1017,25 @@ export const zh: SiteTranslations = {
               '可以，前提是该计划已提前获得批准、具备所需的状态层，并赋予代理有界的权限。当现实与计划出现分歧、关卡失败且超出其计划内的修复范围，或需要新的批准或凭据时，无人值守的运行必须停止并记录一个阻塞项。',
             linkLabel: '阅读无人值守协议',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: '什么是 loop engineering？',
+            answer:
+              'Loop engineering 是闭合执行循环：计划登记 lead 后，由人启动的可选 Herdr daemon 可以推动开放计划继续运行直至完成，并报告停滞、阻塞、lead 缺失或完成事件。它遵守计划记录的权限范围。',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan 需要 daemon 吗？',
+            answer:
+              '不需要。该方法及其计划无需 Herdr 或 daemon 也能运行。这个 addon 是可选的，只用于增加连续性，不是前置要求。',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'daemon 绝不会做什么？',
+            answer:
+              '它绝不会登录、替 Claude 确认绕过权限、扩大 agent 的常驻权限，也不会执行 merge、tag 或 release。提醒只会发送固定的继续提示，不会授予任何权限。',
           },
         ],
       },
@@ -1494,6 +1513,8 @@ export const zh: SiteTranslations = {
     planTitle: '通过技能规划并执行',
     planIntro:
       '上面的 API 让代理能够读取本站点。DWP 技能则让代理能够运行这套方法论——只需在仓库中安装一次，它就会附带一个路由器和九项子技能，以斜杠命令的形式调用（或按名称调用，对于会拦截斜杠的代理，大多数改用 # 代替，例如 #dwp-execute）。',
+    loopWorkflow:
+      '使用 Herdr 时，计划注册会记录 lead 和继任顺序。由人启动 herdr-peers autopilot start --loop 后，开放计划可继续运行。任何 merge、tag 或 release 操作前，请运行 herdr-peers lead verify --plan <plan-id>。',
     formatTitle: '两个独立的选择：格式，以及你想要多少审阅',
     formatIntro:
       '每个计划都从每个维度中选取一个值。这两个维度相互独立——Lite 计划可以以 trust 模式运行，Full 计划也可以以 guided 模式运行，而且两者都可以在之后切换模式而不切换格式。',

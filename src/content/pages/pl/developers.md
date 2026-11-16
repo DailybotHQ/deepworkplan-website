@@ -16,6 +16,8 @@ Nie ma tu kluczy API do wygenerowania, żadnego tańca z OAuth i żadnej piaskow
 
 Powyższe API pozwala agentowi czytać tę witrynę. Skill DWP to to, co pozwala agentowi uruchamiać metodykę — zainstaluj go raz w repozytorium, a przyniesie router plus dziewięć sub-skilli, wywoływanych jako komendy ze slashem.
 
+W Herdr rejestracja planu zapisuje lead i kolejność następców. Człowiek może uruchomić `herdr-peers autopilot start --loop`, aby kontynuować otwarte plany. Przed każdym merge, tag lub release uruchom `herdr-peers lead verify --plan <plan-id>`.
+
 - **Lite** — zapisy zadań bezpośrednio w README planu, dla małej, ograniczonej pracy.
 - **Full** — jeden plik na zadanie, dla pracy długoterminowej lub z realnymi zależnościami między zadaniami.
 - **Guided (domyślnie)** — agent materializuje plan gotowy do recenzji i pyta przed rozpoczęciem pracy produktowej.

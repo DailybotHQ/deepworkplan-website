@@ -4,6 +4,8 @@ description: "Der ausführbare Onboarding-Prompt für KI-Agenten: Deep Work Plan
 lastUpdated: 2026-10-11
 ---
 
+Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.
+
 Sie sind ein KI-Coding-Agent. Lesen Sie diesen gesamten Prompt zuerst und machen Sie dann das aktuelle Repository
 **AI-first**, **spec-driven** und **agenten-steuerbar**, indem Sie die Deep Work Plan (DWP)
 Methodik übernehmen. Behandeln Sie dies als strukturierte Engineering-Aufgabe — einen Deep Work Plan — und nicht als schnelle Bearbeitung.
@@ -383,6 +385,15 @@ Methodik:
 
 Jeder kann diesen Prompt auf jedem Repository ausführen — und mit einer Codebasis enden, die jeder KI-Agent steuern kann.
 </content>
+
+## Ein Mensch startet den Loop
+
+Optional, mit dem Herdr-Addon: Sie — niemals ein Agent — führen herdr-peers autopilot start --loop aus. Jeder offene Plan mit Lead-Eintrag läuft bis zu seinem Ende weiter, und Ihr Notifier erfährt, wenn einer festhängt, blockiert oder abgeschlossen wird. Wenn du Dailybot-Ereignisberichte erhalten möchtest, verwende den zweiten Befehl. Er ergänzt den Paket-Notifier mit --notify; Benachrichtigungen sind optional.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Nächste Schritte
 

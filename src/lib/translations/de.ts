@@ -782,8 +782,6 @@ export const de: SiteTranslations = {
     },
     eyebrow: 'Schnellstart',
     title: 'Machen Sie dieses Repository AI-first',
-    intro:
-      'Ein Endpunkt, um jedes Repository in eine spec-driven, agentenbereite Codebasis zu verwandeln. Installieren Sie die Skill, lassen Sie einen Agenten das Repository onboarden, dann planen und führen Sie strukturierte Arbeit mit jedem Coding-Agenten aus.',
     handoffTitle: 'In Ihren Agenten kopieren',
     handoffBody:
       'Kopieren Sie den vollständigen init.md-Prompt und fügen Sie ihn in Ihren KI-Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen. Er liest die Methodik und Spezifikation, installiert die Skill und onboardet dieses Repository für Deep Work Plans.',
@@ -798,6 +796,8 @@ export const de: SiteTranslations = {
     ],
     sequenceTitle: 'Der Adoptionspfad',
     orLabel: 'oder',
+    loopNotifyNote:
+      'Wenn du Dailybot-Ereignisberichte erhalten möchtest, verwende den zweiten Befehl. Er ergänzt den Paket-Notifier mit --notify; Benachrichtigungen sind optional.',
     steps: [
       {
         title: 'Vor der Installation verifizieren',
@@ -1043,6 +1043,25 @@ export const de: SiteTranslations = {
               'Ja, wenn der Plan im Voraus genehmigt wurde, die erforderliche Zustandsebene trägt und dem Agenten begrenzte Befugnisse einräumt. Ein unbeaufsichtigter Durchlauf muss stoppen und einen Blocker aufzeichnen, wenn die Realität abweicht, ein Gate außerhalb seines geplanten Reparaturumfangs fehlschlägt oder eine neue Genehmigung oder Zugangsdaten benötigt werden.',
             linkLabel: 'Protokoll für unbeaufsichtigte Durchläufe lesen',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'Was ist loop engineering?',
+            answer:
+              'Loop engineering schließt den Ausführungszyklus: Nach der Registrierung eines Plans mit Lead kann der optionale, von einem Menschen gestartete Herdr-Daemon den offenen Plan bis zum Abschluss weiterführen und Stillstand, Blockaden, einen fehlenden Lead oder den Abschluss melden. Er bleibt innerhalb der im Plan festgehaltenen Befugnisse.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Benötigt Deep Work Plan den Daemon?',
+            answer:
+              'Nein. Die Methode und ihre Pläne funktionieren ohne Herdr oder Daemon. Das Add-on ist optional und sorgt für Kontinuität; es ist keine Voraussetzung.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Was kann der Daemon niemals tun?',
+            answer:
+              'Er meldet sich niemals an, bestätigt niemals Claudes Berechtigungsumgehung, erweitert niemals dauerhafte Agentenrechte und führt keine Merge-, Tag- oder Release-Aktionen aus. Ein Nudge sendet nur eine feste Aufforderung zum Fortfahren und verleiht keine Befugnisse.',
           },
         ],
       },
@@ -1537,6 +1556,8 @@ export const de: SiteTranslations = {
     planTitle: 'Planen und mit der Skill ausführen',
     planIntro:
       'Die API oben lässt einen Agenten diese Website lesen. Die DWP-Skill lässt einen Agenten die Methodik ausführen — installieren Sie sie einmal in einem Repository, und sie liefert einen Router plus neun Sub-Skills, aufgerufen als Slash-Befehle (oder namentlich, für Agenten, die Slash abfangen — die meisten verwenden stattdessen #, z. B. #dwp-execute).',
+    loopWorkflow:
+      'Mit Herdr hält die Planregistrierung den Lead und die Nachfolge fest. Ein Mensch kann herdr-peers autopilot start --loop starten, damit offene Pläne weiterlaufen. Führe vor jedem Merge, Tag oder Release herdr-peers lead verify --plan <plan-id> aus.',
     formatTitle:
       'Zwei unabhängige Entscheidungen: Format und gewünschter Review-Umfang',
     formatIntro:

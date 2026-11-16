@@ -392,6 +392,7 @@ export interface SiteTranslations {
     accessPoints: { title: string; body: string }[];
     planTitle: string;
     planIntro: string;
+    loopWorkflow: string;
     formatTitle: string;
     formatIntro: string;
     // Four combinations: Lite, Full (the format axis) and Guided, Trust (the
@@ -527,7 +528,6 @@ export interface SiteTranslations {
     meta: { title: string; description: string };
     eyebrow: string;
     title: string;
-    intro: string;
     handoffTitle: string;
     handoffBody: string;
     /**
@@ -543,6 +543,7 @@ export interface SiteTranslations {
     whatBody: string[];
     sequenceTitle: string;
     orLabel: string;
+    loopNotifyNote: string;
     steps: {
       title: string;
       description: string;

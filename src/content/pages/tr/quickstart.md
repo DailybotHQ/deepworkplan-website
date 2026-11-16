@@ -4,6 +4,8 @@ description: "Yapay zeka ajanları için çalıştırılabilir onboarding istemi
 lastUpdated: 2026-10-11
 ---
 
+Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.
+
 Siz bir yapay zeka kodlama ajanısınız. Önce bu istemin tamamını okuyun, ardından Deep Work Plan (DWP)
 metodolojisini benimseyerek mevcut depoyu **AI-first**, **spec odaklı** ve **ajan-pilotlanabilir** hâle
 getirin. Bunu hızlı bir düzenleme değil, yapılandırılmış bir mühendislik görevi — bir Deep Work Plan —
@@ -419,6 +421,15 @@ Onboarding tamamlandığında depo, metodolojinin temel direkleri olan iki kalı
 
 Herhangi biri bu istemi herhangi bir depoda çalıştırabilir — ve herhangi bir yapay zeka ajanının
 pilotlayabileceği bir kod tabanıyla bitirebilir.
+
+## Döngüyü bir insan başlatır
+
+İsteğe bağlı, Herdr eklentisiyle: herdr-peers autopilot start --loop komutunu siz çalıştırırsınız — asla bir ajan değil. Lider kaydı olan her açık plan sonuna kadar çalışmayı sürdürür ve bir plan takıldığında, engellendiğinde veya tamamlandığında bildiriciniz bundan haberdar olur. Dailybot olay raporlarını almak istiyorsanız ikinci komutu kullanın. --notify ile paketin bildirim aracını ekler; bildirimler isteğe bağlıdır.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Sonraki adımlar
 

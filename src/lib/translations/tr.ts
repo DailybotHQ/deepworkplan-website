@@ -782,8 +782,6 @@ export const tr: SiteTranslations = {
     },
     eyebrow: 'Hızlı başlangıç',
     title: 'Bu depoyu AI-first hale getirin',
-    intro:
-      'Herhangi bir depoyu spec odaklı, ajana hazır bir kod tabanına dönüştürmek için tek bir uç nokta. Skill’i kurun, bir ajanın depoyu kuruluma almasını sağlayın, ardından herhangi bir kodlama ajanıyla yapılandırılmış işi planlayıp yürütün.',
     handoffTitle: 'Ajanınıza kopyalayın',
     handoffBody:
       "init.md isteminin tamamını kopyalayıp yapay zeka kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırın. Metodolojiyi ve spesifikasyonu okur, skill'i kurar ve bu depoyu Deep Work Plan'ler için kuruluma alır.",
@@ -798,6 +796,8 @@ export const tr: SiteTranslations = {
     ],
     sequenceTitle: 'Benimseme yolu',
     orLabel: 'veya',
+    loopNotifyNote:
+      'Dailybot olay raporlarını almak istiyorsanız ikinci komutu kullanın. --notify ile paketin bildirim aracını ekler; bildirimler isteğe bağlıdır.',
     steps: [
       {
         title: 'Kurmadan önce doğrulayın',
@@ -1042,6 +1042,25 @@ export const tr: SiteTranslations = {
               'Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve ajana sınırlı bir yetki veriyorsa. Gözetimsiz bir çalıştırma; gerçeklik saptığında, bir kapı planlanan onarım kapsamının dışında başarısız olduğunda veya yeni bir onay ya da kimlik bilgisi gerektiğinde durmalı ve bir engel kaydetmelidir.',
             linkLabel: 'Gözetimsiz protokolü okuyun',
             linkPath: '/spec/agent-protocol',
+          },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering nedir?',
+            answer:
+              'Loop engineering yürütme döngüsünü kapatır: lead kaydı olan bir planın ardından, insanın başlattığı isteğe bağlı Herdr daemon’ı açık planı tamamlanana kadar sürdürebilir; duraklama, engel, lead kaybı veya tamamlanma durumlarını bildirir. Planın kayıtlı yetkileri içinde çalışır.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan daemon gerektirir mi?',
+            answer:
+              'Hayır. Yöntem ve planları Herdr veya daemon olmadan çalışır. Addon isteğe bağlıdır ve süreklilik ekler; ön koşul değildir.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Daemon asla ne yapamaz?',
+            answer:
+              'Oturum açamaz, Claude’un izinleri atlama onayını kabul edemez, ajanın kalıcı izinlerini genişletemez ve merge, tag veya release işlemlerini gerçekleştiremez. Nudge yalnızca sabit bir devam etme istemi gönderir ve yetki vermez.',
           },
         ],
       },
@@ -1536,6 +1555,8 @@ export const tr: SiteTranslations = {
     planTitle: 'Skill ile planlayın ve yürütün',
     planIntro:
       "Yukarıdaki API, bir ajanın bu siteyi okumasını sağlar. DWP skill'i ise bir ajanın metodolojiyi çalıştırmasını sağlayan şeydir — bir depoya bir kez kurulur ve bir yönlendirici ile dokuz alt skill getirir; bunlar eğik çizgi komutları olarak çağrılır (ya da isimle, eğik çizgiyi yakalayan ajanlar için — çoğu bunun yerine # kullanır, örn. #dwp-execute).",
+    loopWorkflow:
+      'Herdr ile plan kaydı lead ve halef sırasını tutar. İnsan, açık planları sürdürmek için herdr-peers autopilot start --loop komutunu başlatabilir. Herhangi bir merge, tag veya release işleminden önce herdr-peers lead verify --plan <plan-id> çalıştırın.',
     formatTitle: 'İki bağımsız seçim: biçim ve ne kadar inceleme istediğiniz',
     formatIntro:
       'Her plan her eksenden bir değer seçer. Bunlar birbirinden bağımsızdır — bir Lite plan trust modunda çalışabilir, bir Full plan guided modunda çalışabilir ve her ikisi de biçimi değiştirmeden sonradan modu değiştirebilir.',

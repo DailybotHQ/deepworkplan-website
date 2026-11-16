@@ -4,6 +4,8 @@ description: "Il prompt di onboarding eseguibile per gli agenti AI: adotta Deep 
 lastUpdated: 2026-10-11
 ---
 
+Prima la specifica, loop chiuso: il repository è la harness e il piano si esegue da solo fino alla fine.
+
 Sei un agente di coding AI. Leggi per intero questo prompt, poi rendi il repository corrente
 **AI-first**, **spec-driven** e **pilotabile dagli agenti** adottando la metodologia Deep Work Plan
 (DWP). Trattalo come un’attività di ingegneria strutturata — un Deep Work Plan — non come una modifica veloce.
@@ -401,6 +403,15 @@ metodologia:
    verificabile.
 
 Chiunque può eseguire questo prompt su qualsiasi repository — e ottenere un codebase che qualsiasi agente AI può pilotare.
+
+## Una persona avvia il loop
+
+Opzionale, con l’addon Herdr: Lei — mai un agente — esegue herdr-peers autopilot start --loop. Ogni piano aperto con un record di lead continua fino alla fine, e il Suo notificatore viene avvisato quando uno va in stallo, si blocca o si completa. Se vuoi ricevere i report degli eventi su Dailybot, usa il secondo comando. Aggiunge il notifier del pacchetto con --notify; le notifiche sono facoltative.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Prossimi passi
 

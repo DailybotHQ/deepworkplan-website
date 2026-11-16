@@ -16,6 +16,8 @@ There are no API keys to generate, no OAuth flow, and no sandbox separate from p
 
 The API above lets an agent read this site. The DWP skill is what lets an agent run the methodology — install it once in a repository and it ships a router plus nine sub-skills, invoked as slash commands (or by name, for agents that intercept slash — most use `#` instead, e.g. `#dwp-execute`).
 
+With Herdr, plan registration records the lead and succession. A human may start `herdr-peers autopilot start --loop` to keep open plans moving. Run `herdr-peers lead verify --plan <plan-id>` before any merge, tag, or release.
+
 Every plan picks one value from each of two independent axes:
 
 - **Lite** — task records live inline in the plan's README, behind stable `#task-N` anchors. Built for small, bounded work: one concern, roughly one sitting.

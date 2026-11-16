@@ -4,6 +4,8 @@ description: "面向 AI 代理的可执行接入提示：在任意代码仓库�
 lastUpdated: 2026-10-11
 ---
 
+规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。
+
 你是一个 AI 编码代理。请先完整阅读本提示，然后通过采纳 Deep Work Plan（DWP）方法论，让当前代码仓库变得
 **AI-first**、**规范驱动**且**可被代理驾驭**。请把这当作一项结构化的工程任务——一份 Deep Work Plan——
 而非一次随手的编辑。
@@ -319,6 +321,15 @@ devcontainer 附加组件的终点是一套可运行的环境，而不是一组�
  `.agents/` 技能目录，为每个代理提供它做结构化、可验证工作所需的上下文与命令。
 
 任何人都可以在任意代码仓库上运行这条提示——并最终得到一个任意 AI 代理都能驾驭的代码库。
+
+## 由人类启动循环
+
+可选，需配合 Herdr 附加组件：由你——绝不是代理——运行 herdr-peers autopilot start --loop。每份带有主导者记录的打开计划都会持续运行到结束，当某份计划停滞、受阻或完成时，你的通知器会收到消息。 如果需要接收 Dailybot 事件报告，请使用第二条命令。它通过 --notify 添加套件通知脚本；通知是可选的。
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## 后续步骤
 

@@ -16,6 +16,8 @@ No hay claves de API que generar, ningún flujo de OAuth y ningún sandbox separ
 
 La API descrita arriba permite a un agente leer este sitio. La skill DWP es lo que permite a un agente ejecutar la metodología — instálala una vez en un repositorio y proporciona un enrutador más nueve sub-skills, invocadas como comandos de barra (o por su nombre, para agentes que interceptan `/` — la mayoría usa `#` en su lugar, por ejemplo `#dwp-execute`).
 
+Con Herdr, el registro del plan deja constancia del lead y de la sucesión. Una persona puede iniciar `herdr-peers autopilot start --loop` para mantener en marcha los planes abiertos. Ejecuta `herdr-peers lead verify --plan <plan-id>` antes de cualquier merge, tag o release.
+
 Cada plan elige un valor en cada uno de los dos ejes independientes:
 
 - **Lite** — los registros de tareas viven en línea en el README del plan, tras anclas estables `#task-N`. Pensado para trabajo pequeño y acotado: un solo asunto, aproximadamente una sesión.

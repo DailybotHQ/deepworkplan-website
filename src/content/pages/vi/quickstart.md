@@ -4,6 +4,8 @@ description: "Lời nhắc khởi tạo thực thi được cho agent AI: áp d�
 lastUpdated: 2026-10-11
 ---
 
+Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.
+
 Bạn là một agent lập trình AI. Hãy đọc toàn bộ lời nhắc này trước, rồi biến repository hiện tại thành
 **AI-first**, **dựa trên đặc tả** và **điều khiển được bằng agent** bằng cách áp dụng phương pháp luận Deep Work Plan (DWP).
 Hãy coi đây như một tác vụ kỹ thuật có cấu trúc — một Deep Work Plan — chứ không phải một chỉnh sửa nhanh.
@@ -424,6 +426,15 @@ phương pháp luận:
    kiểm chứng được.
 
 Bất cứ ai cũng có thể chạy lời nhắc này trên bất kỳ repository nào — và kết thúc với một codebase mà mọi agent AI đều có thể điều khiển.
+
+## Con người khởi động vòng lặp
+
+Tùy chọn, với addon Herdr: bạn — không bao giờ là agent — chạy herdr-peers autopilot start --loop. Mọi kế hoạch mở có bản ghi lead sẽ tiếp tục chạy đến cùng, và trình thông báo của bạn được báo khi một kế hoạch bị đình trệ, bị chặn hoặc hoàn thành. Nếu muốn nhận báo cáo sự kiện từ Dailybot, hãy dùng lệnh thứ hai. Lệnh này thêm notifier của gói bằng --notify; thông báo là tùy chọn.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## Bước tiếp theo
 
