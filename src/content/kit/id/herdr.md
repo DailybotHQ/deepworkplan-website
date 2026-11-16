@@ -14,17 +14,17 @@ Ini adalah addon opsional dari **DWP v7** (pack `v7.12.1`). Metodologinya bekerj
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v1.3.1`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v2.0.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protokol 1 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v2.0.0`, protokol 2 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
 | Membutuhkan | izin `agent_delegation` dari kontrak rencana |
 
-**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning: verb CLI beserta flag yang terdokumentasi, kode keluar `0`–`7`, variabel `HERDR_PEERS_*`, `DWP_PLAN`, dan `DWP_TASK` yang terdokumentasi, protokol 1, serta kontrak JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1`, dan catatan delegasi. Perubahan yang merusak kompatibilitas pada salah satunya menaikkan versi mayor, dan perubahan format wire juga menaikkan nomor protokol. `v1.0.0` tidak mengubah perilaku apa pun dari `v0.3.3`, dan rilis 0.x tidak lagi didukung.
+**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning: verb CLI beserta flag yang terdokumentasi, kode keluar `0`–`7`, variabel `HERDR_PEERS_*`, `DWP_PLAN`, dan `DWP_TASK` yang terdokumentasi, protokol 2, serta kontrak JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1`, dan catatan delegasi. Perubahan yang merusak kompatibilitas pada salah satunya menaikkan versi mayor, dan perubahan format wire juga menaikkan nomor protokol. `v1.0.0` tidak mengubah perilaku apa pun dari `v0.3.3`, dan rilis 0.x tidak lagi didukung.
 
 
 ## Instalasi
@@ -32,7 +32,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ Rilis ini hanya menambah: protokol 1 serta semua perintah, flag, kode keluar, da
 ## Autopilot
 
 herdr-peers 1.2.0 menambahkan **autopilot** (`autopilot.md`): sebuah daemon opsional, `herdr-peers autopilot`, yang dijalankan oleh manusia agar rencana yang panjang tidak berhenti di layar persetujuan. Daemon ini mengawasi setiap agen di setiap mesin Herdr yang diaktifkan dan, ketika ada agen yang menunggu di sebuah layar, menerima salah satu opsi. Rilis 1.2.1 memperbaiki kasus ketika pertanyaan yang opsinya memiliki deskripsi panjang dibiarkan tidak terjawab. Rilis 1.2.2 menjawab pertanyaan yang ditampilkan dengan pratinjau di samping opsinya dan mengenali tanda rekomendasi dalam bahasa Spanyol, Prancis, Jerman, dan Italia. Rilis 1.3.0 menambahkan **loop**: `autopilot --loop` menjaga setiap plan yang terbuka tetap berjalan sampai selesai di semua mesin, `--notify`/`--notify-env` mengarahkan laporannya ke tempat yang Anda mau, dan kata kerja baca-saja `plans` serta `fleet` bersama fleet UI memperlihatkan setiap jalur, mesin, dan plan terbuka dalam sekali pandang.
+
+Rilis 2.0.0 memindahkan jalur ke **protokol 2** dan menambahkan tiga hal: **penunjukan lead** — hanya atas perkataan eksplisit manusia (`lead claim --allow-appointment`), plan dengan grant yang lead dan semua penerusnya hilang dapat menunjuk jalur hidup pertamanya sebagai lead baru (`lead takeover --as-lane`, disondel dua kali, paling banyak dua penunjukan per plan), dan **`lead verify`** adalah pemeriksaan baca-saja yang dijalankan sebelum merge, tag, atau release apa pun; **otak autopilot** — dengan `--brain`, daemon yang dijalankan manusia meluncurkan satu agen khusus (coding-agents-kit 1.3.0 atau lebih baru) dan hanya mematuhinya dalam daftar tindakan tertutup, menolak berjalan sama sekali jika `ak` hilang atau lebih tua; dan **antrean plan** — pack menulis `.dwp/queue.json` (skema `dwp-queue-v1`) dan dengan `--loop` daemon memulai plan berikutnya yang diantrekan dan disetujui tanpa Anda. Pada plan dengan grant, setiap jalur dan penerus harus menjalankan 2.0 atau lebih baru.
 
 - **Hanya manusia yang memulainya.** Tidak ada pesan, rekan, atau rencana yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. Agen memulainya hanya ketika manusianya memintanya secara langsung di dalam sesi.
 - **Yang diterimanya.** Pertanyaan dengan opsi, persetujuan tool, persetujuan rencana, kepercayaan folder, dan prompt pembaruan, yang dilewatinya. Ia mengambil opsi yang ditandai sebagai rekomendasi, jika tidak ada maka opsi yang sudah dipilih lebih dulu oleh CLI, jika tidak ada maka opsi pertama, dan mengikuti dialog multi-langkah sampai selesai dengan membaca ulang layar setelah setiap penekanan tombol.

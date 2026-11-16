@@ -68,6 +68,24 @@ TAKEOVER_TEXT = (
     'herdr-peers lead takeover --plan %s — the helper checks itself whether the lead is really '
     'gone. If it accepts, continue executing the plan to its end, respecting its gates. If it '
     'refuses, do nothing more.')
+APPOINT_TEXT = (
+    '[autopilot] Plan %s has no lead: its lead and every successor are gone, and its lead '
+    'record carries the developer\'s appointment grant. You are its first live lane. Run: '
+    'herdr-peers lead takeover --plan %s --as-lane — the helper checks again, twice, that '
+    'they are really gone. If it accepts, continue executing the plan to its end, respecting '
+    'its gates, and run `herdr-peers lead verify --plan %s` before any merge, tag or release. '
+    'If it refuses, do nothing more.')
+APPOINT_GRANTS = ('lanes', 'lanes:any-kind')
+APPOINT_GRACE = 900        # seconds the evidence must hold, with the plan frozen, before an appointment
+MAX_APPOINTMENTS = 2       # appointments one daemon prompts per plan; then only the human is told
+
+# Reasons that are usually a passing state (the lead has not marked the queue yet,
+# it is finishing another plan, its directory is not listed this pass).
+QUEUE_TRANSIENT = ('started, queue not updated', 'lead busy with another plan', 'lead directory unknown')
+# The repository path is quoted as JSON data: it is never read as words of the prompt.
+QUEUE_TEXT = ("Plan %s is next in the queue of the repository at %s and approved. In that repository, "
+              "run the plan tool's execute flow for it (its start gate checks the approval again) and "
+              "execute it to its end, respecting its gates.")
 
 BOX = {ord(c): ' ' for c in '│┃█'}
 CURSORS = '❯›>→▶'
@@ -491,7 +509,7 @@ class Autopilot(object):
 
     def __init__(self, io, dry_run=False, nudge=True, catch_up=False, exclude=(),
                  clock=time.time, sleep=time.sleep, confirm=CONFIRM_DELAY, loop=False,
-                 grace=LEAD_GRACE):
+                 grace=LEAD_GRACE, appoint=False, appoint_grace=APPOINT_GRACE, brain=None):
         self.io, self.dry_run, self.nudge, self.catch_up = io, dry_run, nudge, catch_up
         self.exclude = set(exclude)
         self.clock, self.sleep, self.confirm = clock, sleep, confirm
@@ -501,7 +519,10 @@ class Autopilot(object):
         self.actions = 0
         self.passes = 0
         self.grace = grace
+        self.appoint, self.appoint_grace = appoint, appoint_grace  # human flag --appoint
         self.plans = PlanLoop(self) if loop else None
+        self.quiet = set()     # panes never nudged in prose (the brain)
+        self.brain = BrainKeeper(self, brain) if brain and self.plans else None
 
     # -- one pass ---------------------------------------------------------
     def run_pass(self):
@@ -592,6 +613,16 @@ class Autopilot(object):
             # Once a dialog was keyed, its next step is part of the same
             # dialog even when Herdr briefly reports another state.
             choice = decide(kind, 'blocked' if step and engaged(text) else state, text)
+            if choice.action == 'keys' and self.brain is not None and self.brain.is_brain(addr) \
+                    and choice.cls not in ('folder_trust', 'update_prompt') \
+                    and not (choice.cls == 'permission' and brain_mod().approval_is_answer(kind, text)):
+                # The brain reads text other agents wrote: the daemon approves
+                # nothing in its pane but its own answer command.
+                memo.left = digest
+                self.record(addr, kind, Decision('leave', 'brain_permission_refused', choice.cls),
+                            'left')
+                self.brain.refused(addr)
+                return True
             if choice.action == 'keys':
                 if digest == memo.stuck:
                     memo.tries += 1
@@ -615,6 +646,8 @@ class Autopilot(object):
             if choice.action == 'leave':
                 memo.left = digest
                 self.record(addr, kind, choice, 'left')
+                if choice.cls == 'unknown' and self.brain is not None:
+                    self.brain.ask('screen_unknown', machine, None, {'addr': addr})
             elif state in ('idle', 'done'):
                 self.maybe_nudge(machine, pane, addr, kind, memo, text, stale)
             return True
@@ -626,6 +659,11 @@ class Autopilot(object):
         to go on. Never over a human's draft, never with --no-nudge, and not
         forever."""
         now = self.clock()
+        if self.brain is not None and self.brain.is_brain(addr):
+            # The brain's own limit is the keeper's to handle, never keyed: marked
+            # so that the keeper replaces it on its next tick.
+            memo.limit_tries = max(memo.limit_tries, 1)
+            return
         if not memo.limit_at:
             memo.limit_at = now
             self.record(addr, kind, choice, 'left')
@@ -649,7 +687,7 @@ class Autopilot(object):
         self.io.prompt(machine, pane, RESUME_TEXT)
 
     def maybe_nudge(self, machine, pane, addr, kind, memo, text, stale):
-        if not self.nudge:
+        if not self.nudge or addr in self.quiet:
             return
         if stale and not self.catch_up:
             return  # stopped before autopilot started: not ours to restart
@@ -688,6 +726,13 @@ class PlanMemo(object):
         self.seen_open = False
         self.skip_seq = None   # the lead's state sequence when its screen ruled a prompt out
         self.absent = 0        # consecutive reports in which the lead's pane was not listed
+        self.extra = 0         # one more prompt the brain allowed (once per plan)
+        self.lead_kind = None  # the agent kind last seen in the lead's pane
+        self.gone_at = None    # when lead and successors were first all seen gone (appointment)
+        self.gone_progress = None
+        self.appointee = None  # (address, epoch) of the lane last asked to take the lead
+        self.appointments = 0
+        self.appointed_epoch = None
 
 
 class PlanLoop(object):
@@ -704,6 +749,10 @@ class PlanLoop(object):
         self.ap, self.io = ap, ap.io
         self.machines = {}     # machine -> {'at', 'state', 'report'}
         self.memos = {}        # (machine, plan id) -> PlanMemo
+        self.resolve = {}           # (machine, plan) -> the blocker the brain allowed its lead to resolve
+        self.queued = set()         # (machine, repo, plan) whose lead was prompted to start it
+        self.queue_told = {}        # (machine, repo, plan) -> the blocked reason already reported
+        self.queue_since = {}       # (machine, repo, plan) -> (reason, first seen)
         self.fleet_text = None      # the daemon's own map
         self.remote_text = None     # the reduced copy left on other machines
         self.fleet_key = None
@@ -772,6 +821,8 @@ class PlanLoop(object):
     # -- one pass ----------------------------------------------------------
     def run(self, listed):
         now = self.ap.clock()
+        if self.ap.brain is not None:
+            self.ap.brain.tick(listed, now)
         self.fetch(listed, now)
         prompted = set()
         for machine in sorted(listed):
@@ -785,6 +836,11 @@ class PlanLoop(object):
                     self.consider(machine, plan, by_pane, now, prompted)
                 except Exception as exc:  # one plan never stops the pass
                     self.io.warn('%s:%s' % (machine, plan.get('plan')), exc)
+            for queue in info['report'].get('queues') or []:
+                try:
+                    self.consider_queue(machine, queue, by_pane, now, prompted)
+                except Exception as exc:  # one queue never stops the pass
+                    self.io.warn('%s:queue' % machine, exc)
         self.publish(listed, now)
         flush = getattr(self.io, 'flush_events', None)
         if flush is not None:
@@ -816,23 +872,45 @@ class PlanLoop(object):
         memo.seen_open = True
         if cls == 'blocked':
             self.enter(memo, machine, plan, 'plan_blocked', addr, 'left')
+            key = (machine, plan['plan'])
+            allowed = self.resolve.get(key)
+            # Only the blocker the brain was asked about, and only while it is
+            # still one the lead may resolve; kept until the lead can be prompted.
+            if allowed is not None and (allowed != brain_mod().blocker_key(plan)
+                                        or not brain_mod().blocker_is_askable(plan)):
+                self.resolve.pop(key, None)
+            elif allowed is not None and pane is not None and self.prompt_lead(machine, plan, pane, addr, by_pane, now, prompted,
+                                 brain_mod().RESOLVE_TEXT % plan['plan'], 'plan_resolve'):
+                self.resolve.pop(key, None)
             return
+        self.resolve.pop((machine, plan['plan']), None)  # unblocked: the answer is spent
         if memo.situation in ('plan_blocked', 'plan_completed'):
             memo.situation = None
         if pane is None:
             return  # released, or led from another machine: not this daemon's to prompt
         row = by_pane.get(pane)
         pmemo = self.ap.panes.get(addr)
+        if row is not None and row.get('agent'):
+            memo.lead_kind = row.get('agent')
+        if plan.get('appointed') and memo.appointed_epoch != plan['epoch']:
+            # The record says this epoch came by appointment: reported once per epoch.
+            memo.appointed_epoch, memo.appointee = plan['epoch'], None
+            self.io.event({'schema': EVENT_SCHEMA, 'event': 'plan_appointed', 'plan': plan['plan'],
+                           'machine': machine, 'lead': plan['lead'],
+                           'repo_root': plan['repo_root'], 'blocker_class': None}, self.ap.dry_run)
         gone = None
         if row is None:
             if memo.absent < ABSENT_PASSES:
                 return  # one missing listing is not a gone lead
             gone = 'no_agent'
-        # A lead at its usage limit is not gone: the screen pass retries it, and
-        # the helper refuses a takeover on that weak evidence without --reason.
+        elif self.ap.appoint and pmemo is not None and pmemo.limit_tries >= MAX_LIMIT_RETRIES:
+            # Only for an appointment, and only once the screen pass gave up on
+            # its limit (the developer's rule); the 15-minute grace follows.
+            gone = 'usage_limit'
         if gone:
             self.succeed(memo, machine, plan, by_pane, addr, gone, prompted)
             return
+        memo.gone_at = None  # the lead is here: any appointment evidence starts over
         if memo.situation in ('plan_no_lead', 'plan_lead_moved') and plan.get('lead_in_repo') is not False:
             memo.situation = None
         if row.get('you') or addr in self.ap.exclude or pmemo is None or not row.get('in_scope', True):
@@ -863,7 +941,7 @@ class PlanLoop(object):
             return
         if memo.skip_seq is not None and memo.skip_seq == row.get('seq'):
             return  # its screen ruled a prompt out and has not moved since
-        if memo.prompts >= MAX_PLAN_PROMPTS:
+        if memo.prompts >= MAX_PLAN_PROMPTS + memo.extra:
             self.enter(memo, machine, plan, 'plan_stalled', addr, 'gave_up')
             return
         text = self.io.read(machine, pane)
@@ -882,6 +960,98 @@ class PlanLoop(object):
                        'nudged', plan=plan['plan'])
         if not self.ap.dry_run:
             self.io.prompt(machine, pane, LOOP_TEXT % plan['plan'])
+
+    def consider_queue(self, machine, queue, by_pane, now, prompted):
+        """Start the next ready item of a repository's queue: one fixed prompt to
+        its named lead, once. The queue is the pack's; the daemon only reads it.
+        In a sequential queue nothing after a queued item that cannot start
+        starts. An item that cannot start for a reason the human must fix is
+        reported once per reason; a reason that is usually a passing state is
+        reported only once it has held for the appointment grace."""
+        repo = queue.get('repo_root')
+        sequential = not queue.get('parallel')
+        for item in queue.get('items') or []:
+            key = (machine, repo, item['plan'])
+            if item.get('state') != 'queued':
+                self.queued.discard(key)
+                self.queue_told.pop(key, None)
+                self.queue_since.pop(key, None)
+                continue
+            reason = item.get('blocked_reason')
+            pane = local_pane(item.get('lead'))
+            if not reason and item.get('ready') and pane is None:
+                reason = 'lead on another machine'  # this daemon can prompt only its own panes
+            if reason:
+                if reason.startswith('waiting for'):
+                    continue  # its `after` plan decides; the queue's order is the pack's
+                if not reason.startswith('another plan'):
+                    self.tell_queue(machine, repo, item, key, reason, now)
+                if sequential:
+                    return  # nothing after a stuck item starts
+                continue
+            self.queue_since.pop(key, None)
+            if not item.get('ready'):
+                if sequential:
+                    return
+                continue
+            if key in self.queued:
+                if sequential:
+                    return  # its start is in flight: one at a time per repository
+                continue
+            addr = '%s:%s' % (machine, pane)
+            if self.prompt_lead(machine, {'plan': item['plan']}, pane, addr, by_pane, now, prompted,
+                                QUEUE_TEXT % (item['plan'], json.dumps(repo)), 'plan_queued_started'):
+                self.queued.add(key)
+                self.io.event({'schema': EVENT_SCHEMA, 'event': 'plan_queued_started',
+                               'plan': item['plan'], 'machine': machine, 'lead': item.get('lead'),
+                               'repo_root': repo, 'blocker_class': None}, self.ap.dry_run)
+            if sequential:
+                return  # one at a time per repository
+
+    def tell_queue(self, machine, repo, item, key, reason, now):
+        """Report a queued item that cannot start, once per reason; a passing
+        reason only after it held for the appointment grace."""
+        since = self.queue_since.get(key)
+        if since is None or since[0] != reason:
+            since = self.queue_since[key] = (reason, now)
+        if reason in QUEUE_TRANSIENT and now - since[1] < self.ap.appoint_grace:
+            return
+        if self.queue_told.get(key) == reason:
+            return
+        self.queue_told[key] = reason
+        self.ap.record('%s:-' % machine, None, Decision('leave', 'queue_blocked', reason),
+                       'left', plan=item['plan'])
+        self.io.event({'schema': EVENT_SCHEMA, 'event': 'queue_blocked',
+                       'plan': item['plan'], 'machine': machine, 'lead': item.get('lead'),
+                       'repo_root': repo, 'blocker_class': None}, self.ap.dry_run)
+
+    def prompt_lead(self, machine, plan, pane, addr, by_pane, now, prompted, text, cls):
+        """One fixed prompt to a plan's lead, under the same guards as the
+        loop prompt: listed, in scope, idle or done, not its own pane, no
+        dialog, login, limit or draft on its screen, the hourly cap."""
+        row = by_pane.get(pane)
+        pmemo = self.ap.panes.get(addr)
+        if row is None or row.get('you') or addr in self.ap.exclude or pmemo is None \
+                or not row.get('in_scope', True) or row.get('state') not in ('idle', 'done') \
+                or addr in prompted or not self.ap.nudge:
+            return False
+        pmemo.nudges = [t for t in pmemo.nudges if now - t < NUDGE_WINDOW]
+        if len(pmemo.nudges) >= MAX_NUDGES:
+            return False
+        text_on = self.io.read(machine, pane)
+        if text_on is None:
+            return False
+        choice = decide(row.get('agent'), row.get('state'), text_on)
+        if choice.action in ('keys', 'leave') or choice.cls == 'usage_limit' \
+                or has_draft(text_on, row.get('state')):
+            return False
+        pmemo.nudges.append(now)
+        prompted.add(addr)
+        self.ap.record(addr, row.get('agent'), Decision('prompt', cls, 'brain allowed'), 'nudged',
+                       plan=plan['plan'])
+        if not self.ap.dry_run:
+            self.io.prompt(machine, pane, text)
+        return True
 
     def succeed(self, memo, machine, plan, by_pane, addr, reason, prompted):
         """The lead is gone: ask the first reachable successor to take over,
@@ -913,7 +1083,76 @@ class PlanLoop(object):
             if not self.ap.dry_run:
                 self.io.prompt(machine, pane, TAKEOVER_TEXT % (plan['plan'], reason, plan['plan']))
             return
+        if self.appoint(memo, machine, plan, by_pane, prompted):
+            return
         self.enter(memo, machine, plan, 'plan_no_lead', addr, 'left')
+
+    def appoint(self, memo, machine, plan, by_pane, prompted):
+        """Lead and every successor gone, the plan granted and `--appoint` on:
+        after the evidence held APPOINT_GRACE with the plan frozen, ask the
+        first live lane to take the lead (`lead takeover --as-lane`, which
+        checks again). True while an appointment is under way or waiting for
+        its grace; False when there is none to make (plan_no_lead follows)."""
+        if not self.ap.appoint or plan.get('appoint') not in APPOINT_GRANTS or not self.ap.nudge:
+            return False
+        if any(local_pane(s) is None or local_pane(s) in by_pane for s in plan['succession']):
+            memo.gone_at = None  # a successor is back: the evidence starts over
+            return False  # a successor is alive (or on another machine): not ours to bypass
+        now = self.ap.clock()
+        if memo.gone_at is None or memo.gone_progress != plan['progress']:
+            memo.gone_at, memo.gone_progress = now, plan['progress']
+            return True   # first sight, or the plan moved: the grace starts now
+        if now - memo.gone_at < self.ap.appoint_grace:
+            return True
+        if memo.appointments >= MAX_APPOINTMENTS:
+            return False
+        if memo.appointee and memo.appointee[1] == plan['epoch']:
+            return True   # asked at this epoch already: the helper decides
+        for lane in plan['lanes']:
+            pane = local_pane(lane)
+            if pane is None:
+                return False  # a lane on another machine: this daemon cannot see it
+            row = by_pane.get(pane)
+            if row is None:
+                continue      # a gone lane: F10 needs every earlier lane gone, so go on
+            target = '%s:%s' % (machine, pane)
+            pmemo = self.ap.panes.get(target)
+            kind_ok = plan['appoint'] == 'lanes:any-kind' or memo.lead_kind is None \
+                or row.get('agent') == memo.lead_kind
+            if row.get('you') or target in self.ap.exclude or target in prompted \
+                    or not row.get('in_scope', True) or not kind_ok \
+                    or row.get('state') not in ('idle', 'done') or (pmemo and pmemo.limit_at) \
+                    or self.leads_elsewhere(machine, pane, plan['plan']):
+                return True   # the first live lane is not ready: wait, never skip it
+            text = self.io.read(machine, pane)
+            if text is None:
+                return True
+            choice = decide(row.get('agent'), row.get('state'), text)
+            if choice.action in ('keys', 'leave') or choice.cls == 'usage_limit' \
+                    or has_draft(text, row.get('state')):
+                return True
+            memo.appointee, memo.appointments = (target, plan['epoch']), memo.appointments + 1
+            prompted.add(target)
+            self.ap.record(target, row.get('agent'), Decision(
+                'prompt', 'plan_appointment_prompted', 'lead and successors gone'), 'nudged',
+                plan=plan['plan'])
+            self.io.event({'schema': EVENT_SCHEMA, 'event': 'plan_appointment_prompted',
+                           'plan': plan['plan'], 'machine': machine, 'lead': plan['lead'],
+                           'repo_root': plan['repo_root'], 'blocker_class': None}, self.ap.dry_run)
+            if not self.ap.dry_run:
+                self.io.prompt(machine, pane, APPOINT_TEXT % ((plan['plan'],) * 3))
+            return True
+        return False
+
+    def leads_elsewhere(self, machine, pane, plan_id):
+        """True when `pane` leads or succeeds another open plan on `machine`."""
+        report = (self.machines.get(machine) or {}).get('report') or {}
+        for other in report.get('plans', []):
+            if other['plan'] == plan_id or other['class'] not in ('open', 'blocked'):
+                continue
+            if local_pane(other['lead']) == pane or pane in [local_pane(a) for a in other['succession']]:
+                return True
+        return False
 
     def enter(self, memo, machine, plan, situation, addr, outcome):
         """A plan arrives at a situation the developer should know about:
@@ -924,6 +1163,12 @@ class PlanLoop(object):
         if outcome:
             self.ap.record(addr, None, Decision('leave', situation, 'plan needs the developer'),
                            outcome, plan=plan['plan'])
+        keeper = self.ap.brain
+        if keeper is not None:
+            if situation == 'plan_stalled':
+                keeper.ask('plan_stalled', machine, plan, {'addr': addr})
+            elif situation == 'plan_blocked' and brain_mod().blocker_is_askable(plan):
+                keeper.ask('plan_blocked', machine, plan, {'addr': addr})
         self.io.event({'schema': EVENT_SCHEMA, 'event': situation, 'plan': plan['plan'],
                        'machine': machine, 'lead': plan['lead'], 'repo_root': plan['repo_root'],
                        'blocker_class': plan['blocker_class']}, self.ap.dry_run)
@@ -969,11 +1214,21 @@ class PlanLoop(object):
                               'current_task': plan.get('current_task'),
                               'detail': plan.get('detail'),
                               'situation': memo.situation if memo else None})
+            queues = []
+            for q in report.get('queues') or []:
+                queues.append({'repo_root': q.get('repo_root'), 'parallel': bool(q.get('parallel')),
+                               'invalid': bool(q.get('invalid')),
+                               'items': [{'plan': it['plan'], 'state': it['state'], 'after': it.get('after'),
+                                          'lead': it.get('lead'), 'ready': it['ready'],
+                                          'blocked_reason': it.get('blocked_reason')}
+                                         for it in q.get('items') or []]})
             machines.append({'machine': machine, 'label': self.io.label(machine),
                              'agents_state': 'unknown' if rows is None else 'ok',
                              'plans_state': info.get('state') or 'unknown',
-                             'agents': agents, 'plans': plans})
-        body = {'schema': FLEET_SCHEMA, 'daemon': self.io.identity(), 'machines': machines}
+                             'agents': agents, 'plans': plans, 'queues': queues})
+        daemon = dict(self.io.identity())
+        daemon['brain'] = self.ap.brain.status(now) if self.ap.brain is not None else None
+        body = {'schema': FLEET_SCHEMA, 'daemon': daemon, 'machines': machines}
         key = hashlib.sha256(json.dumps(body, sort_keys=True).encode('utf-8')).hexdigest()
         if key != self.fleet_key:
             self.fleet_key = key
@@ -1000,6 +1255,192 @@ MAP_MAX_BYTES = 2 * 1024 * 1024 - 4096   # under the store's 2 MB cap, with room
 REMOTE_PLAN_KEYS = ('plan', 'class', 'blocker_class', 'progress', 'lead', 'lanes', 'succession',
                     'epoch', 'updated_at', 'repo_root', 'situation',
                     'tasks_done', 'tasks_total', 'current_task')
+
+
+def brain_mod():
+    import brain
+    return brain
+
+
+class BrainKeeper(object):
+    """The daemon's brain: launched by the daemon itself (ask mode, on the
+    best account by provider priority), briefed once, kept alive, asked
+    only what the rules cannot decide, and obeyed only within each case's
+    closed action list. See brain.py; the I/O is the helper's."""
+
+    def __init__(self, ap, opts):
+        self.ap, self.io, self.opts = ap, ap.io, opts
+        self.b = brain_mod().Brain()
+        self.excluded = set()   # profiles whose default mode skips approvals
+        self.last = None   # the brain's last decision, for the map and the watcher
+
+    # -- lifecycle ---------------------------------------------------------
+    def tick(self, listed, now):
+        b, B = self.b, brain_mod()
+        rows = dict((r['pane'], r) for r in (listed.get('local') or []))
+        self.read_answers(now)
+        for q in b.expired(now):
+            self.last = {'case': q['case'], 'action': 'default', 'plan': q['plan'],
+                         'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(now))}
+            self.ap.record(q['addr'] or 'local:-', None, Decision('leave', 'brain_default',
+                                                                   'no valid answer in time'),
+                           'left', plan=q['plan'])
+        if b.pane and b.state in ('starting', 'ready'):
+            row = rows.get(b.pane)
+            pmemo = self.ap.panes.get('local:%s' % b.pane)
+            gone = row is None and b.state == 'ready'
+            limited = pmemo is not None and pmemo.limit_tries >= 1
+            late = b.state == 'starting' and now - b.started_at > B.START_DEADLINE and not (
+                row is not None and row.get('state') in ('idle', 'done'))
+            if late:
+                # ak failed, a login screen, an agent that never came up: not this one.
+                addr = 'local:%s' % b.pane
+                self.retire('start_timeout')
+                self.io.event({'schema': EVENT_SCHEMA, 'event': 'needs_human', 'plan': None,
+                               'machine': 'local', 'lead': addr, 'repo_root': None,
+                               'blocker_class': None}, self.ap.dry_run)
+            elif gone or limited:
+                self.retire('gone' if gone else 'usage_limit')
+            elif b.state == 'starting' and row is not None and row.get('state') in ('idle', 'done'):
+                screen = self.io.read('local', b.pane) or ''
+                if B.AUTO_MODE.search('\n'.join(screen.splitlines()[-6:])):
+                    # Its profile starts in a mode that skips approvals: the
+                    # daemon's approval guard would never see them. Not this one.
+                    addr = 'local:%s' % b.pane
+                    self.excluded.add(b.profile)
+                    self.retire('permission_mode')
+                    self.refused(addr)
+                    return
+                if not self.ap.dry_run:
+                    self.io.prompt('local', b.pane, B.BRIEF)
+                b.state, b.briefed = 'ready', True
+                self.ap.record('local:%s' % b.pane, row.get('agent'),
+                               Decision('prompt', 'brain_briefed', 'brain ready'), 'nudged')
+            elif b.state == 'ready' and now - b.lease_at >= B.LEASE_RENEW:
+                if not self.ap.dry_run and self.io.brain_lease(b.kind, b.profile):
+                    b.lease_at = now
+        if b.state in ('none', 'failed') and b.can_launch(now):
+            self.launch(now)
+
+    def launch(self, now):
+        b = self.b
+        b.launches.append(now)
+        if self.ap.dry_run:
+            b.state = 'failed'
+            self.ap.record('local:-', None, Decision('leave', 'brain_launch', 'dry run: not launched'),
+                           'left')
+            return
+        try:
+            info = self.io.brain_launch(self.opts.get('kinds') or ('claude', 'codex', 'grok'),
+                                        self.opts.get('models') or {}, sorted(self.excluded))
+        except Exception as exc:  # a refusal or a tool failure: recorded, retried within the cap
+            b.state = 'failed'
+            self.ap.record('local:-', None, Decision('leave', 'brain_launch_failed',
+                                                     brain_mod().clean(str(exc), 120)), 'left')
+            return
+        b.pane, b.terminal, b.workspace = info['pane'], info['terminal'], info['workspace']
+        b.kind, b.profile, b.lease_at = info['kind'], info['profile'], now
+        b.key, b.offset, b.started_at = info.get('key'), 0, now  # the answers file starts empty
+        b.state, b.briefed = 'starting', False
+        self.ap.quiet.add('local:%s' % b.pane)
+        self.ap.record('local:%s' % b.pane, b.kind, Decision('prompt', 'brain_launched',
+                                                             '%s %s' % (b.kind, b.profile)), 'nudged')
+
+    def retire(self, why):
+        b = self.b
+        self.ap.record('local:%s' % b.pane, b.kind, Decision('leave', 'brain_replaced', why), 'left')
+        self.close()
+        b.state = 'none'
+
+    def close(self):
+        """Release the lease and close the workspace the daemon created."""
+        b = self.b
+        if b.pane and not self.ap.dry_run:
+            self.io.brain_release(b.kind, b.profile, b.workspace)
+        self.ap.quiet.discard('local:%s' % b.pane)
+        b.pane = b.terminal = b.workspace = b.key = None
+
+    # -- questions -----------------------------------------------------------
+    def ask(self, case, machine, plan, ctx):
+        """Put one question to the brain, if it is ready and the cap allows;
+        never waits. Its answer is read on a later pass."""
+        b, B = self.b, brain_mod()
+        now = self.ap.clock()
+        key = '%s|%s|%s' % (case, machine, (plan or {}).get('plan') or ctx.get('addr'))
+        if b.state != 'ready' or b.open_for(key) or not b.can_ask(now):
+            return
+        qid = B.new_question_id(self.io.random_bytes)
+        b.questions[qid] = {'case': case, 'key': key, 'at': now, 'answered': False,
+                            'machine': machine, 'plan': (plan or {}).get('plan'),
+                            'lead': (plan or {}).get('lead'), 'addr': ctx.get('addr'),
+                            'repo_root': (plan or {}).get('repo_root'),
+                            'blocker_class': (plan or {}).get('blocker_class'),
+                            'blocker_key': B.blocker_key(plan) if plan else None}
+        b.asked.append(now)
+        self.ap.record('local:%s' % b.pane, b.kind, Decision('prompt', 'brain_asked', case),
+                       'nudged', plan=(plan or {}).get('plan'))
+        if not self.ap.dry_run:
+            self.io.prompt('local', b.pane, B.question_text(qid, case, (plan or {}).get('plan'),
+                                                            machine))
+
+    def read_answers(self, now):
+        b, B = self.b, brain_mod()
+        lines, b.offset = self.io.brain_answers(b.offset)
+        for line in lines:
+            rec = B.parse_answer_line(line)
+            if rec is None:
+                continue
+            got = b.accept(rec, now, owns=lambda: self.io.brain_owns(b.pane, rec.get('ancestry')))
+            if got is None:
+                self.ap.record('local:%s' % (b.pane or '-'), None,
+                               Decision('leave', 'brain_answer_refused', B.clean(rec.get('qid'), 20)),
+                               'left')
+                continue
+            q, action = got
+            self.ap.record(q['addr'] or 'local:-', None,
+                           Decision('prompt' if action not in ('leave',) else 'leave',
+                                    'brain_' + action, q['case']),
+                           'nudged' if action != 'leave' else 'left', plan=q['plan'])
+            self.act(q, action)
+
+    def is_brain(self, addr):
+        return bool(self.b.pane) and addr == 'local:%s' % self.b.pane
+
+    def refused(self, addr):
+        """The brain asked for something the daemon will not approve: tell the
+        human once per brain."""
+        if not self.b.refused_told:
+            self.b.refused_told = True
+            self.io.event({'schema': EVENT_SCHEMA, 'event': 'needs_human', 'plan': None,
+                           'machine': 'local', 'lead': addr, 'repo_root': None,
+                           'blocker_class': None}, self.ap.dry_run)
+
+    def status(self, now):
+        """What the map shows about the brain: no prompt text, no answer text."""
+        b = self.b
+        return {'state': b.state, 'kind': b.kind, 'profile': b.profile,
+                'pane': ('local:%s' % b.pane) if b.pane else None,
+                'asked_last_hour': len([t for t in b.asked if now - t < 3600]),
+                'open_questions': sum(1 for q in b.questions.values() if not q['answered']),
+                'last': self.last}
+
+    def act(self, q, action):
+        """Run one allowed action through the daemon's own paths."""
+        self.last = {'case': q['case'], 'action': action, 'plan': q['plan'],
+                     'at': time.strftime('%Y-%m-%dT%H:%M:%SZ', time.gmtime(self.ap.clock()))}
+        loop = self.ap.plans
+        if action == 'notify_human':
+            self.io.event({'schema': EVENT_SCHEMA, 'event': 'needs_human', 'plan': q['plan'],
+                           'machine': q['machine'], 'lead': q['lead'], 'repo_root': q['repo_root'],
+                           'blocker_class': q['blocker_class']}, self.ap.dry_run)
+        elif action == 'nudge_once_more' and q['plan']:
+            memo = loop.memos.get((q['machine'], q['plan']))
+            if memo is not None and memo.extra == 0:
+                memo.extra = 1
+                if memo.situation == 'plan_stalled':
+                    memo.situation = None
+        elif action == 'ask_lead_to_resolve' and q['plan']:
+            loop.resolve[(q['machine'], q['plan'])] = q.get('blocker_key')
 
 
 def remote_copy(body):

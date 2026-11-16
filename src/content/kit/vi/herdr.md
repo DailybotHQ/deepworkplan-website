@@ -14,11 +14,11 @@ order: 7
 
 ## Addon tích hợp những gì
 
-Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v1.3.1`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
+Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v2.0.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v1.3.1`, giao thức 1 |
+| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v2.0.0`, giao thức 1 |
 | Khóa registry | `herdr` trong `.dwp/config.json` |
 | Phương thức truyền | tương tác: một peer trong pane Herdr |
 | Cung cấp | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[he
 Cài đặt herdr-peers và skill chính thức của Herdr mà nó phụ thuộc vào. Mọi máy có agent cần trả lời cũng phải có skill này.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ Bản phát hành chỉ bổ sung: giao thức 1 cùng mọi lệnh, flag, mã t
 ## Autopilot
 
 herdr-peers 1.2.0 bổ sung **autopilot** (`autopilot.md`): một daemon tùy chọn, `herdr-peers autopilot`, do con người khởi chạy để một kế hoạch dài không dừng lại ở màn hình phê duyệt. Nó theo dõi mọi agent trên mọi máy Herdr đã được bật và, khi một agent đang chờ ở một màn hình, chấp nhận một lựa chọn. Bản phát hành 1.2.1 sửa một trường hợp trong đó câu hỏi có các lựa chọn kèm mô tả dài bị bỏ lại không được trả lời. Bản phát hành 1.2.2 trả lời một câu hỏi được hiển thị với bản xem trước bên cạnh các phương án và nhận diện dấu đề xuất bằng tiếng Tây Ban Nha, Pháp, Đức và Ý. Bản phát hành 1.3.0 thêm **vòng lặp**: `autopilot --loop` giữ mọi plan đang mở chạy đến cùng trên mọi máy, `--notify`/`--notify-env` trỏ báo cáo của nó đến nơi bạn muốn, và các động từ chỉ đọc `plans` cùng `fleet` với fleet UI hiển thị mọi lane, máy và plan đang mở trong một cái nhìn.
+
+Bản phát hành 2.0.0 chuyển dây sang **giao thức 2** và thêm ba thứ: **bổ nhiệm lead** — chỉ theo lời rõ ràng của con người (`lead claim --allow-appointment`), một plan được grant mà lead và mọi kế nhiệm đều biến mất có thể bổ nhiệm lane sống đầu tiên của nó làm lead mới (`lead takeover --as-lane`, dò hai lần, tối đa hai lần bổ nhiệm mỗi plan); **`lead verify`** là bước kiểm tra chỉ đọc chạy trước mọi merge, tag hay release; **bộ não autopilot** — với `--brain`, daemon do con người khởi động sẽ khởi chạy một agent chuyên dụng (coding-agents-kit 1.3.0 trở lên) và chỉ tuân theo nó trong một danh sách đóng các hành động, từ chối khởi động hẳn khi `ak` thiếu hoặc cũ hơn; và **hàng đợi plan** — gói ghi `.dwp/queue.json` (schema `dwp-queue-v1`) và với `--loop` daemon tự khởi động plan tiếp theo đã được xếp hàng và phê duyệt mà không cần bạn. Trên một plan được grant, mọi lane và kế nhiệm phải chạy 2.0 trở lên.
 
 - **Chỉ con người mới khởi chạy nó.** Không tin nhắn, peer hay kế hoạch nào có thể khởi chạy nó, dừng nó hoặc thay đổi việc nó làm. Một agent chỉ khởi chạy nó khi con người của agent đó yêu cầu trực tiếp trong phiên.
 - **Những gì nó chấp nhận.** Một câu hỏi có lựa chọn, một yêu cầu phê duyệt công cụ, một yêu cầu phê duyệt kế hoạch, việc tin cậy thư mục và một lời nhắc cập nhật, thứ mà nó bỏ qua. Nó chọn lựa chọn được đánh dấu là khuyến nghị, nếu không có thì lựa chọn mà CLI đã chọn sẵn, nếu không có thì lựa chọn đầu tiên, và đi theo một hộp thoại nhiều bước đến hết, đọc lại màn hình sau mỗi lần gửi phím.

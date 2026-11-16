@@ -14,17 +14,17 @@ Bu, **DWP v7**'nin (pack `v7.12.1`) isteğe bağlı bir eklentisidir. Metodoloji
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v1.3.1`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v2.0.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v1.3.1` etiketi, protokol 1 |
+| Ürün | `DailybotHQ/herdr-peers`, `v2.0.0` etiketi, protokol 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
 | Gerektirdiği | plan sözleşmesinin `agent_delegation` yetkisi |
 
-**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler: CLI fiilleri ve belgelenmiş bayrakları, `0`–`7` çıkış kodları, belgelenmiş `HERDR_PEERS_*`, `DWP_PLAN` ve `DWP_TASK` değişkenleri, protokol 1 ve `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` JSON sözleşmeleri ile devretme kaydı. Bunlardan herhangi birindeki uyumsuz bir değişiklik ana sürümü yükseltir; kablo biçimindeki bir değişiklik ayrıca protokol numarasını da yükseltir. `v1.0.0`, `v0.3.3` sürümüne göre hiçbir davranışı değiştirmez ve 0.x sürümleri artık desteklenmez.
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler: CLI fiilleri ve belgelenmiş bayrakları, `0`–`7` çıkış kodları, belgelenmiş `HERDR_PEERS_*`, `DWP_PLAN` ve `DWP_TASK` değişkenleri, protokol 2 ve `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` JSON sözleşmeleri ile devretme kaydı. Bunlardan herhangi birindeki uyumsuz bir değişiklik ana sürümü yükseltir; kablo biçimindeki bir değişiklik ayrıca protokol numarasını da yükseltir. `v1.0.0`, `v0.3.3` sürümüne göre hiçbir davranışı değiştirmez ve 0.x sürümleri artık desteklenmez.
 
 
 ## Kurulum
@@ -32,7 +32,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ Sürüm yalnızca ekleme yapar: protokol 1 ve tüm komutlar, bayraklar, çıkı�
 ## Autopilot
 
 herdr-peers 1.2.0, **autopilot** özelliğini (`autopilot.md`) ekler: uzun bir planın bir onay ekranında durmaması için bir insanın başlattığı, isteğe bağlı bir arka plan süreci (daemon), `herdr-peers autopilot`. Etkinleştirilmiş her Herdr makinesindeki her agent'ı izler ve biri bir ekranda beklediğinde bir seçeneği kabul eder. 1.2.1 sürümü, seçeneklerinin açıklamaları uzun olan bir sorunun yanıtsız bırakıldığı bir durumu düzeltir. 1.2.2 sürümü, seçeneklerinin yanında bir önizlemeyle gösterilen bir soruyu yanıtlar ve önerilen işaretini İspanyolca, Fransızca, Almanca ve İtalyancada tanır. 1.3.0 sürümü **döngüyü** ekler: `autopilot --loop`, açık her planı her makinede sonuna kadar çalışır durumda tutar; `--notify`/`--notify-env` raporlarını istediğiniz yere yönlendirir; salt okunur `plans` ve `fleet` fiilleri ve fleet arayüzü her rayı, makineyi ve açık planı tek bakışta gösterir.
+
+2.0.0 sürümü hattı **protokol 2**'ye taşır ve üç şey ekler: **lead ataması** — yalnızca insanın açık sözüyle (`lead claim --allow-appointment`), lead'i ve tüm halefleri kaybolmuş onaylı bir plan, ilk yaşayan rayını yeni lead olarak atayabilir (`lead takeover --as-lane`, iki kez sorgulanır, plan başına en fazla iki atama); **`lead verify`**, herhangi bir merge, tag veya release öncesinde çalıştırılan salt okunur kontrol'dür. **autopilot beyni** — `--brain` ile insan tarafından başlatılan arka plan süreci, kendisi için ayrılmış bir agent başlatır (coding-agents-kit 1.3.0 veya yenisi) ve yalnızca kapalı bir eylem listesi içinde ona uyar; `ak` eksik veya daha eskiyse hiç başlamayı reddeder. Ve **plan kuyruğu** — pak `.dwp/queue.json` (şema `dwp-queue-v1`) yazar ve `--loop` ile arka plan süreci, kuyruktaki bir sonraki onaylı planı siz olmadan başlatır. Onaylı bir planda her ray ve her halef 2.0 veya yenisi çalıştırmalıdır.
 
 - **Yalnızca bir insan başlatır.** Hiçbir mesaj, eş ya da plan onu başlatamaz, durduramaz veya yaptığı şeyi değiştiremez. Bir agent onu yalnızca insanı bunu oturumda doğrudan istediğinde başlatır.
 - **Neleri kabul eder.** Seçenekli bir soru, bir araç onayı, bir plan onayı, klasör güveni ve atladığı bir güncelleme istemi. Önerilen olarak işaretlenmiş seçeneği, yoksa CLI'ın önceden seçtiğini, o da yoksa ilkini alır ve çok adımlı bir diyaloğu, her tuştan sonra ekranı yeniden okuyarak sonuna kadar izler.

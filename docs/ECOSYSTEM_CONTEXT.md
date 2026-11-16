@@ -26,19 +26,19 @@ debate by default; 7.11.0 lands the developer's v7 hardening series; 7.12.0
 registers plans with the herdr-peers loop plus the Dailybot notifier and
 moves the addon descriptors to herdr-peers 1.3.1 and coding-agents-kit
 1.3.0),
-herdr-peers `v1.3.1` (1.1.0 adds native debates, 1.2.x adds autopilot, an
+herdr-peers `v2.0.0` (1.1.0 adds native debates, 1.2.x adds autopilot, an
 optional daemon only a human starts; 1.3.0 adds the loop — `autopilot
 --loop` keeps every open plan running to its end on every machine — plus
-the fleet UI and the read-only `plans`/`fleet` verbs; the 1.3.1 patch
-extends the loop files; protocol 1
-unchanged), coding-agents-kit `v1.4.0` (pick-v2: `ak pick --kinds` with per-kind model
+the fleet UI and the read-only `plans`/`fleet` verbs; 2.0.0 moves the
+wire to protocol 2 — lead appointment on the human's explicit word,
+the autopilot brain, the plan queue), coding-agents-kit `v1.4.0` (pick-v2: `ak pick --kinds` with per-kind model
 override and `--json` launch contracts; `--model` as a head flag; `ak
 last`, and Herdr pane restore through `ak`; 1.4.0 adds `ak update`, the
 verified vendor updater, human-invoked only; interface 1 unchanged),
 deepworkplan-vim `v1.0.1`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
 reviewer and the Dailybot skill vendored at those tags. The pack `v7.12.1`
-addon descriptors record herdr-peers `v1.3.1` and coding-agents-kit
+addon descriptors record herdr-peers `v2.0.0` and coding-agents-kit
 `v1.4.0` — the site pins and the pack descriptors agree (the pack
 devcontainer descriptor still records 1.1.2); devcontainer-kit `v1.2.0`
 (interface 2 unchanged) bakes herdr-peers 1.3.1, coding-agents-kit 1.4.0
@@ -53,13 +53,13 @@ and deepworkplan-vim 1.0.1 into its image.
 | devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.2.0` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon (agentkit): one `ak` command for every coding agent — accounts, quota, `ak pick`, headless runs | Public | `v1.4.0` | `/kit/agentkit`, `/init.md` | Documented only |
 | deepworkplan-vim | Addon (vim): the terminal editor for plans — plan browser, lanes view, Markdown viewer | Public | `v1.0.1` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
-| herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v1.3.1` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
+| herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v2.0.0` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
 
 ## Stable interfaces (1.0)
 
 The products move from 0.x to **1.0.0** once their public interface is stable:
 from then on an incompatible change ships only in a new major version, and
-additions arrive in minor versions. herdr-peers `v1.3.1` (CLI verbs, exit
+additions arrive in minor versions. herdr-peers `v2.0.0` (CLI verbs, exit
 codes, protocol 1, the `lanes-v1` and `lead-v1` contracts),
 coding-agents-kit `v1.4.0` (the `ak` command surface, interface 1, the JSON
 schemas), deepworkplan-vim `v1.0.1` (installer, addon surface, editor
@@ -100,7 +100,7 @@ something that already exists:
 
 An orchestrator plan in this hub sequences those steps; see
 [Cross-project standards](CROSS_PROJECT_STANDARDS.md#orchestrator-plans).
-With coding-agents-kit `v1.4.0` and herdr-peers `v1.3.1` its lanes hand work on
+With coding-agents-kit `v1.4.0` and herdr-peers `v2.0.0` its lanes hand work on
 before an account runs out and the leadership survives the lead
 ([Swarm autonomy](https://deepworkplan.com/methodology/07-swarm-autonomy)).
 

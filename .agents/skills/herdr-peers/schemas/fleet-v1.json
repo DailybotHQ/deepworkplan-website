@@ -34,7 +34,8 @@
       "required": [
         "pane",
         "local_is",
-        "server"
+        "server",
+        "brain"
       ],
       "properties": {
         "pane": {
@@ -54,6 +55,87 @@
             "null"
           ],
           "description": "A digest naming the daemon's Herdr server, so a reader can tell whether it runs on the daemon's own server."
+        },
+        "brain": {
+          "type": [
+            "object",
+            "null"
+          ],
+          "description": "The daemon's brain (autopilot --brain), or null without one. Never carries question or answer text.",
+          "additionalProperties": false,
+          "required": [
+            "state",
+            "kind",
+            "profile",
+            "pane",
+            "asked_last_hour",
+            "open_questions",
+            "last"
+          ],
+          "properties": {
+            "state": {
+              "enum": [
+                "none",
+                "starting",
+                "ready",
+                "failed"
+              ]
+            },
+            "kind": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "profile": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "pane": {
+              "type": [
+                "string",
+                "null"
+              ]
+            },
+            "asked_last_hour": {
+              "type": "integer"
+            },
+            "open_questions": {
+              "type": "integer"
+            },
+            "last": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "additionalProperties": false,
+              "required": [
+                "case",
+                "action",
+                "plan",
+                "at"
+              ],
+              "properties": {
+                "case": {
+                  "type": "string"
+                },
+                "action": {
+                  "type": "string"
+                },
+                "plan": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "at": {
+                  "type": "string"
+                }
+              }
+            }
+          }
         }
       }
     },
@@ -68,7 +150,8 @@
           "agents_state",
           "plans_state",
           "agents",
-          "plans"
+          "plans",
+          "queues"
         ],
         "properties": {
           "machine": {
@@ -383,7 +466,8 @@
                       "additionalProperties": false,
                       "required": [
                         "reason",
-                        "needs"
+                        "needs",
+                        "resolver"
                       ],
                       "properties": {
                         "reason": {
@@ -397,6 +481,14 @@
                             "string",
                             "null"
                           ]
+                        },
+                        "resolver": {
+                          "enum": [
+                            "lead",
+                            "human",
+                            null
+                          ],
+                          "description": "Who the plan's state says may resolve the blocker (the blocker record's `resolver` field); null when it does not say."
                         }
                       }
                     },
@@ -438,6 +530,83 @@
                     "null"
                   ],
                   "description": "When its lead record was last written."
+                }
+              }
+            }
+          },
+          "queues": {
+            "type": "array",
+            "description": "Each repository's plan queue (queue.json beside its plans, written by the plan tool, read only): plan ids, states, readiness and why an item cannot start. No plan content.",
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": [
+                "repo_root",
+                "parallel",
+                "invalid",
+                "items"
+              ],
+              "properties": {
+                "repo_root": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "parallel": {
+                  "type": "boolean"
+                },
+                "invalid": {
+                  "type": "boolean"
+                },
+                "items": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": false,
+                    "required": [
+                      "plan",
+                      "state",
+                      "after",
+                      "lead",
+                      "ready",
+                      "blocked_reason"
+                    ],
+                    "properties": {
+                      "plan": {
+                        "type": "string"
+                      },
+                      "state": {
+                        "enum": [
+                          "queued",
+                          "started",
+                          "done",
+                          "skipped"
+                        ]
+                      },
+                      "after": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "lead": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      },
+                      "ready": {
+                        "type": "boolean"
+                      },
+                      "blocked_reason": {
+                        "type": [
+                          "string",
+                          "null"
+                        ]
+                      }
+                    }
+                  }
                 }
               }
             }

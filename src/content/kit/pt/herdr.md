@@ -14,17 +14,17 @@ O [Herdr](https://herdr.dev) coloca agentes de programação em painéis, na sua
 
 ## O que ele integra
 
-O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v1.3.1`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
+O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v2.0.0`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protocolo 1 |
+| Produto | `DailybotHQ/herdr-peers`, tag `v2.0.0`, protocolo 2 |
 | Chave de registro | `herdr` em `.dwp/config.json` |
 | Transporte | interativo: um par em um painel do Herdr |
 | Fornece | `subagents`, `cancel_children` |
 | Requer | a concessão `agent_delegation` do contrato do plano |
 
-**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico: os verbos da CLI e suas flags documentadas, os códigos de saída `0`–`7`, as variáveis documentadas `HERDR_PEERS_*`, `DWP_PLAN` e `DWP_TASK`, o protocolo 1 e os contratos JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` e o registro de delegação. Uma mudança incompatível em qualquer um deles incrementa a versão principal, e uma mudança no formato de transmissão também incrementa o número do protocolo. `v1.0.0` não altera nenhum comportamento em relação a `v0.3.3`, e as versões 0.x deixaram de ter suporte.
+**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico: os verbos da CLI e suas flags documentadas, os códigos de saída `0`–`7`, as variáveis documentadas `HERDR_PEERS_*`, `DWP_PLAN` e `DWP_TASK`, o protocolo 2 e os contratos JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` e o registro de delegação. Uma mudança incompatível em qualquer um deles incrementa a versão principal, e uma mudança no formato de transmissão também incrementa o número do protocolo. `v1.0.0` não altera nenhum comportamento em relação a `v0.3.3`, e as versões 0.x deixaram de ter suporte.
 
 
 ## Instalação
@@ -32,7 +32,7 @@ O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https:
 Instale o herdr-peers e a skill oficial do Herdr, da qual ele depende. Toda máquina cujos agentes devam responder também precisa da skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ A versão é aditiva: o protocolo 1 e todos os verbos, flags, códigos de saída
 ## Autopilot
 
 O herdr-peers 1.2.0 adiciona o **autopilot** (`autopilot.md`): um daemon opcional, `herdr-peers autopilot`, que uma pessoa inicia para que um plano longo não pare em uma tela de aprovação. Ele observa todos os agentes em todas as máquinas Herdr habilitadas e, quando um deles espera em uma tela, aceita uma opção. A versão 1.2.1 corrige um caso em que uma pergunta cujas opções têm descrições longas ficava sem resposta. A versão 1.2.2 responde uma pergunta exibida com uma prévia ao lado das opções e reconhece a marca de recomendado em espanhol, francês, alemão e italiano. A versão 1.3.0 adiciona o **loop**: `autopilot --loop` mantém cada plano aberto executando até o fim em todas as máquinas, `--notify`/`--notify-env` apontam seus relatórios para onde você quiser, e os verbos somente leitura `plans` e `fleet` junto com a fleet UI mostram cada frente, máquina e plano aberto num relance.
+
+A versão 2.0.0 move o fio para o **protocolo 2** e adiciona três coisas: **a nomeação de lead** — apenas com a palavra explícita do humano (`lead claim --allow-appointment`), um plano concedido cujo lead e todos os sucessores tenham desaparecido pode nomear sua primeira faixa viva como novo lead (`lead takeover --as-lane`, sondado duas vezes, no máximo duas nomeações por plano), e o **`lead verify`** é a verificação somente leitura a executar antes de qualquer merge, tag ou release; o **cérebro do autopilot** — com `--brain` o daemon iniciado pelo humano lança um agente dedicado (coding-agents-kit 1.3.0 ou posterior) e só lhe obedece dentro de uma lista fechada de ações, recusando-se a iniciar se o `ak` estiver ausente ou mais antigo; e a **fila de planos** — o pack escreve `.dwp/queue.json` (esquema `dwp-queue-v1`) e com `--loop` o daemon inicia o próximo plano na fila e aprovado sem você. Em um plano concedido, cada faixa e sucessor deve executar 2.0 ou posterior.
 
 - **Só uma pessoa o inicia.** Nenhuma mensagem, par ou plano pode iniciá-lo, pará-lo ou mudar o que ele faz. Um agente só o inicia quando a sua pessoa pediu isso diretamente na sessão.
 - **O que ele aceita.** Uma pergunta com opções, uma aprovação de ferramenta, uma aprovação de plano, a confiança na pasta e um prompt de atualização, que ele pula. Ele escolhe a opção marcada como recomendada; na falta dela, a que a CLI pré-selecionou; na falta desta, a primeira; e segue um diálogo de várias etapas até o fim, relendo a tela após cada tecla.

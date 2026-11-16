@@ -184,7 +184,7 @@ The lead launches a successor in the same checkout on an account with
 capacity; the successor resumes the plan from the packet.
 
 **With the plan loop.** When the human runs `herdr-peers autopilot --loop`
-([autopilot.md](autopilot.md) §9), the daemon watches every plan that has a
+([autopilot.md](autopilot.md) §5), the daemon watches every plan that has a
 lead record. It asks an idle lead to continue its plan, and when the lead
 is gone it asks the first reachable successor to run `lead takeover` — the
 table above still decides whether that takeover is allowed. So: claim the

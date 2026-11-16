@@ -14,11 +14,11 @@ order: 7
 
 ## Cosa integra
 
-L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v1.3.1`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
+L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, una skill autonoma con licenza MIT fissata a **`v2.0.0`**, utile anche senza Deep Work Plan. Definisce ciò che Herdr stesso lascia aperto: chi può rispondere, come la risposta ritrova la strada tra le macchine, come due agenti evitano di rispondersi all’infinito e dove si trova la traccia di "ho chiesto, ha risposto".
 
 | Elemento | Valore |
 |---|---|
-| Prodotto | `DailybotHQ/herdr-peers`, tag `v1.3.1`, protocollo 1 |
+| Prodotto | `DailybotHQ/herdr-peers`, tag `v2.0.0`, protocollo 1 |
 | Chiave di registro | `herdr` in `.dwp/config.json` |
 | Trasporto | interattivo: un peer in un pannello Herdr |
 | Fornisce | `subagents`, `cancel_children` |
@@ -32,7 +32,7 @@ L’addon è un integratore leggero. Il lavoro è svolto da **[herdr-peers](http
 Installa herdr-peers e la skill ufficiale di Herdr, da cui dipende. Ogni macchina i cui agenti devono rispondere ha bisogno anch’essa della skill.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v1.3.1 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -103,6 +103,8 @@ La versione è solo additiva: il protocollo 1 e tutti i verbi, flag, codici di u
 ## Autopilot
 
 herdr-peers 1.2.0 aggiunge **autopilot** (`autopilot.md`): un daemon opzionale, `herdr-peers autopilot`, che una persona avvia perché un piano lungo non si fermi a una schermata di approvazione. Osserva ogni agente su ogni macchina Herdr abilitata e, quando uno attende a una schermata, accetta un’opzione. La release 1.2.1 corregge un caso in cui una domanda le cui opzioni hanno descrizioni lunghe restava senza risposta. La versione 1.2.2 risponde a una domanda mostrata con un'anteprima accanto alle opzioni e riconosce il contrassegno di raccomandato in spagnolo, francese, tedesco e italiano. La versione 1.3.0 aggiunge il **loop**: `autopilot --loop` tiene ogni piano aperto in esecuzione fino alla fine su tutte le macchine, `--notify`/`--notify-env` puntano i suoi rapporti dove vuoi, e i verbi di sola lettura `plans` e `fleet` con la fleet UI mostrano ogni corsia, macchina e piano aperto a colpo d'occhio.
+
+La versione 2.0.0 sposta il filo sul **protocollo 2** e aggiunge tre cose: **la nomina di lead** — solo sulla parola esplicita dell'umano (`lead claim --allow-appointment`), un piano con grant il cui lead e tutti i successori sono scomparsi può nominare la sua prima corsia viva come nuovo lead (`lead takeover --as-lane`, sondato due volte, al massimo due nomine per piano), e **`lead verify`** è la verifica di sola lettura da eseguire prima di qualsiasi merge, tag o release; il **cervello dell'autopilot** — con `--brain` il demone avviato dall'umano lancia un agente dedicato (coding-agents-kit 1.3.0 o successivo) e gli obbedisce solo entro una lista chiusa di azioni, rifiutandosi del tutto di partire se `ak` manca o è più vecchio; e la **coda dei piani** — il pack scrive `.dwp/queue.json` (schema `dwp-queue-v1`) e con `--loop` il demone avvia il prossimo piano in coda e approvato senza di te. Su un piano con grant ogni corsia e ogni successore deve eseguire 2.0 o successivo.
 
 - **Lo avvia solo una persona.** Nessun messaggio, peer o piano può avviarlo, fermarlo o cambiare ciò che fa. Un agente lo avvia solo quando la sua persona lo ha chiesto direttamente nella sessione.
 - **Cosa accetta.** Una domanda con opzioni, l’approvazione di uno strumento, l’approvazione di un piano, la fiducia nella cartella e una richiesta di aggiornamento, che salta. Sceglie l’opzione contrassegnata come consigliata, altrimenti quella preselezionata dalla CLI, altrimenti la prima, e segue un dialogo in più passaggi fino alla fine, rileggendo la schermata dopo ogni tasto.
