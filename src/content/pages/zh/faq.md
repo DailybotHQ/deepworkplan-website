@@ -42,7 +42,7 @@ Deep Work Plan 将一个代码仓库转变为结构化环境，让编码代理�
 
 ### 如何使用？
 
-三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。
+三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。
 
 [快速开始](https://deepworkplan.com/zh/quickstart)
 
@@ -170,9 +170,9 @@ DWP 定义了严格的七类升级分类（AGENT_PROTOCOL §7.5）：C1 未经�
 
 [阅读记录层规范](https://deepworkplan.com/zh/spec/record-layer)
 
-### v6 版本的计划能否在 v7 下继续运行？
+### 现有计划在 v8 中会保留其代际吗？
 
-可以。计划契约明确声明了其架构代际（`plan-contract/v6.json` 与 `plan-contract/v7.json`）。正在执行的计划绝不会中途迁移。现有的 v6 计划将在 v7 工具链下无缝保持其结构与语义。
+可以。新计划默认使用 `plan-contract/v8`。现有 v7、v6 和 v5 计划保留其记录的代际，并可继续由当前技能包处理。只有通过明确请求 `/dwp-refine migrate` 才会改变计划代际。
 
 [阅读关于契约的说明](https://deepworkplan.com/zh/spec/record-layer)
 

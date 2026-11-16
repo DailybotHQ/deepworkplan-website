@@ -42,7 +42,7 @@ Dengan agen pengodean apa pun yang membaca berkas repositori. Claude Code dan Op
 
 ### Bagaimana cara menggunakannya?
 
-Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
+Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.
 
 [Mulai Cepat](https://deepworkplan.com/id/quickstart)
 
@@ -170,9 +170,9 @@ Tugas selesai hanya jika bukti tercatat memenuhi setiap kriteria penerimaannya. 
 
 [Baca spesifikasi lapisan rekaman](https://deepworkplan.com/id/spec/record-layer)
 
-### Apakah rencana v6 tetap berjalan di bawah v7?
+### Apakah rencana yang ada mempertahankan generasinya di v8?
 
-Ya. Kontrak rencana secara eksplisit mendeklarasikan generasi skema (`plan-contract/v6.json` vs `plan-contract/v7.json`). Rencana yang sedang berjalan tidak pernah bermigrasi di tengah jalan. Rencana v6 mempertahankan bentuk dan semantik jurnalnya di bawah alat v7.
+Ya. Rencana baru menggunakan `plan-contract/v8` secara default. Rencana v7, v6, dan v5 yang sudah ada mempertahankan generasi yang tercatat dan tetap berjalan dengan paket saat ini. Generasi rencana hanya berubah melalui permintaan eksplisit `/dwp-refine migrate`.
 
 [Baca tentang kontrak](https://deepworkplan.com/id/spec/record-layer)
 

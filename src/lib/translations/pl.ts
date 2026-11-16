@@ -224,6 +224,11 @@ export const pl: SiteTranslations = {
             'Każda maszyna raportuje swoje plany jako plans-v1; demon utrzymuje mapę fleet-v1 wszystkich maszyn, agentów, repozytoriów i planów, a fleet ui pokazuje ją w trybie tylko do odczytu.',
         },
         {
+          name: 'Kolejka planów',
+          detail:
+            'Pakiet sprawdza i zapisuje kolejkę `dwp-queue-v1`; demon odczytuje ją, aby kontynuować oczekujące plany.',
+        },
+        {
           name: 'Weryfikacja leada',
           detail:
             'Przed każdym scaleniem, tagiem czy wydaniem lead potwierdza, że nadal utrzymuje plan na każdej maszynie. Nowszy lead ją odrzuca; nieosiągalna maszyna ją zatrzymuje, chyba że to ryzyko zostało zaakceptowane i odnotowane.',
@@ -800,7 +805,7 @@ export const pl: SiteTranslations = {
         description:
           'Traktuj prompt i skill jako niezaufane, dopóki ich nie sprawdzisz. Oba są open source na licencji MIT; skill jest Markdown-first, bez połączeń sieciowych i bez telemetrii. Każda wersja publikuje SHA256SUMS dla dostarczonego skilla, dzięki czemu możesz potwierdzić zgodność swojej kopii przed uruchomieniem. Wersje są sumowane kontrolnie, a nie podpisywane (podpisywanie to udokumentowany kolejny krok).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -808,7 +813,7 @@ export const pl: SiteTranslations = {
         description:
           'Dodaj skill Deep Work Plan, aby dowolny agent mógł planować i realizować uporządkowaną pracę. Skill dostarcza router plus dziewięć sub-skilli — create, execute, refine, resume, status, verify, onboard, author i upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -918,7 +923,7 @@ export const pl: SiteTranslations = {
             id: 'how-to-use',
             question: 'Jak z tego korzystać?',
             answer:
-              'Trzy kroki. Najpierw zainstaluj skill Deep Work Plan w swoim agencie kodującym — najszybsza ścieżka to `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (lub sklonuj repozytorium skilla i uruchom `./setup.sh`). Następnie jednorazowo wprowadź repozytorium do onboardingu, aby agent dostosował `AGENTS.md`, `docs/`, zestaw `.agents/` i obszar `.dwp/` ignorowany przez git do twojego stacku: wskaż https://deepworkplan.com/init.md lub uruchom `/deepworkplan-onboard`. Na koniec planuj i wykonuj pracę za pomocą lekkich poleceń: `/dwp-create <goal>` buduje plan; `/dwp-execute` uruchamia go zadanie po zadaniu wobec każdej bramki; `/dwp-refine` edytuje plan w toku (zakres, zadania lub promocję planu Lite do Full); `/dwp-resume` kontynuuje po przerwie; `/dwp-status` raportuje postęp bez wykonywania; `/dwp-verify` tworzy obiektywny raport zgodności; `/dwp-upgrade` przenosi zainstalowanego skilla na nowszy release bez dotykania istniejących planów. Agenci przechwytujący `/` często używają zamiast tego `#` (na przykład `#dwp-execute`). Endpoint adopcji i szybki start przechodzą tę samą ścieżkę bardziej szczegółowo.',
+              'Trzy kroki. Najpierw zainstaluj skill Deep Work Plan w swoim agencie kodującym — najszybsza ścieżka to `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (lub sklonuj repozytorium skilla i uruchom `./setup.sh`). Następnie jednorazowo wprowadź repozytorium do onboardingu, aby agent dostosował `AGENTS.md`, `docs/`, zestaw `.agents/` i obszar `.dwp/` ignorowany przez git do twojego stacku: wskaż https://deepworkplan.com/init.md lub uruchom `/deepworkplan-onboard`. Na koniec planuj i wykonuj pracę za pomocą lekkich poleceń: `/dwp-create <goal>` buduje plan; `/dwp-execute` uruchamia go zadanie po zadaniu wobec każdej bramki; `/dwp-refine` edytuje plan w toku (zakres, zadania lub promocję planu Lite do Full); `/dwp-resume` kontynuuje po przerwie; `/dwp-status` raportuje postęp bez wykonywania; `/dwp-verify` tworzy obiektywny raport zgodności; `/dwp-upgrade` przenosi zainstalowanego skilla na nowszy release bez dotykania istniejących planów. Agenci przechwytujący `/` często używają zamiast tego `#` (na przykład `#dwp-execute`). Endpoint adopcji i szybki start przechodzą tę samą ścieżkę bardziej szczegółowo.',
             linkLabel: 'Szybki start',
             linkPath: '/quickstart',
           },
@@ -1110,9 +1115,9 @@ export const pl: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Czy plany v6 zachowują zgodność i działają pod v7?',
+            question: 'Czy istniejące plany zachowują swoją generację w v8?',
             answer:
-              'Tak. Kontrakty planów jednoznacznie deklarują wersję schematu (`plan-contract/v6.json` vs `plan-contract/v7.json`). Rozpoczęty plan nigdy nie zmienia wersji w trakcie. Istniejące plany v6 zachowują swój format i semantykę pod narzędziami v7.',
+              'Tak. Nowe plany domyślnie używają `plan-contract/v8`. Istniejące plany v7, v6 i v5 zachowują zapisaną generację i działają dalej z obecnym pakietem. Generacja planu zmienia się wyłącznie na wyraźne żądanie `/dwp-refine migrate`.',
             linkLabel: 'Dowiedz się więcej o kontraktach',
             linkPath: '/spec/record-layer',
           },

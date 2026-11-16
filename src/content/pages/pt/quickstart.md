@@ -81,10 +81,10 @@ confiável até que tenha sido verificado.
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- git checkout v7.12.2
+ git checkout v8.0.0
  # Baixe os checksums dessa versão e confira-os com o digest abaixo:
  curl -fsSL -o SHA256SUMS \
- https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS
  shasum -a 256 SHA256SUMS # deve ser igual ao digest do deepworkplan-skill em Versões fixadas
  ./setup.sh --verify # saída diferente de zero significa que um arquivo não corresponde — pare
  ```
@@ -98,10 +98,10 @@ confiável até que tenha sido verificado.
 
   | Repositório (github.com/DailybotHQ) | Tag | sha256 do seu `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.12.2` | `8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea` |
-  | coding-agents-kit | `v1.4.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
-  | herdr-peers | `v2.0.0` | `97509f91c5463be190307731d8417aaab2742d17850638fcc6fb0d1a9eddd011` |
-  | devcontainer-kit | `v1.2.0` | `5aaf1113734d3d4308b6ffd256a4e10e60116370ad23bdfd2573f7a3a914e349` |
+  | deepworkplan-skill | `v8.0.0` | `8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea` |
+  | coding-agents-kit | `v1.5.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
+  | herdr-peers | `v2.1.0` | `97509f91c5463be190307731d8417aaab2742d17850638fcc6fb0d1a9eddd011` |
+  | devcontainer-kit | `v1.3.0` | `5aaf1113734d3d4308b6ffd256a4e10e60116370ad23bdfd2573f7a3a914e349` |
   | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | nenhum publicado — a CLI de skills registra um hash de conteúdo em `skills-lock.json` |
@@ -116,7 +116,7 @@ mais nove sub-skills — `create`, `execute`, `refine`, `resume`, `status`, `ver
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y
 ```
 
 Ou instale via OpenClaw:
@@ -133,12 +133,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### Padrão atual e modelo de execução
 
-O padrão atual voltado ao repositório é o **DWP 7.0.0**, implementado pela
-versão da skill Deep Work Plan instalada acima. O pacote atual da skill
-inclui o roteador e nove sub-skills: `create`, `execute`, `refine`,
-`resume`, `status`, `verify`, `onboard`, `author` e `upgrade`.
-
-Versão instalada da skill: **7.10.2**. O pacote 7.x atual cria novos planos com v7 por padrão. Os planos existentes mantêm a geração registrada; passar um plano v5 para v6 exige uma migração explícita com prévia.
+O padrão atual do repositório é **DWP standard 8.0.0**. O pacote 8.0.0 cria novos planos com [plan-contract/v8.json](https://deepworkplan.com/schema/plan-contract/v8.json) por padrão. Os planos v7, v6 e v5 existentes mantêm a geração registrada; a migração só ocorre por meio de uma solicitação explícita a `/dwp-refine migrate`.
 
 O padrão é deliberadamente proporcional, e transforma essa proporção em uma
 propriedade do plano, não da disciplina do desenvolvedor. Um plano é
@@ -157,7 +152,7 @@ plano contém tarefas atômicas, uma **Superfície tocada** que explica o que
 mudou e quais consumidores são afetados, critérios de aceitação e um gate
 de validação selecionado do mapa de testes documentado do repositório. Um novo plano escreve o manifesto de identidade, depois o contrato e o evento de aprovação. O diário somente de acréscimo registra a execução; `state.json` é um snapshot derivado desse diário. Cada etapa pode ser recuperada após uma interrupção.
 
-A geração do esquema permanece vinculada a cada plano. O pacote 7.x atual cria planos **v7** por padrão: `manifest.json` segue https://deepworkplan.com/schema/plan-manifest/v7.json, o [contrato](https://deepworkplan.com/schema/plan-contract/v7.json) adiciona ao contrato v6 um marcador de tarefa opcional `parallel_safe`, e cada [evento do diário](https://deepworkplan.com/schema/journal-event/v7.json) também pode registrar uma `delegation`. A projeção ativa mantém inalterado o snapshot em https://deepworkplan.com/schema/plan-snapshot/v6.json, e o [manifesto de contexto da tarefa](https://deepworkplan.com/schema/context-manifest/v6.json) é compartilhado com a v6. Uma solicitação explícita de `v6` ainda materializa um plano v6. Um plano nunca muda de geração: planos v6 mantêm seus esquemas v6 ([manifesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrato](https://deepworkplan.com/schema/plan-contract/v6.json), [evento do diário](https://deepworkplan.com/schema/journal-event/v6.json)) e são executados sem alterações; planos v5 mantêm `state.json` sob https://deepworkplan.com/schema/plan-state/v5.json; planos v1, v2 e v5 existentes nunca são reescritos nem migrados implicitamente, e passar um plano v5 para v6 exige uma migração explícita com prévia.
+O conjunto publicado de esquemas v8 inclui [plan-contract/v8.json](https://deepworkplan.com/schema/plan-contract/v8.json), [journal-event/v8.json](https://deepworkplan.com/schema/journal-event/v8.json) e [plan-snapshot/v8.json](https://deepworkplan.com/schema/plan-snapshot/v8.json). `manifest.json` permanece em [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json). Os planos v7, v6 e v5 existentes mantêm sua geração; [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) e [journal-event/v7.json](https://deepworkplan.com/schema/journal-event/v7.json) continuam compatíveis. Um plano só muda de geração por meio de uma solicitação explícita a `/dwp-refine migrate`.
 
 Os addons opcionais são registrados por repositório no registro de addons versionado `.dwp/config.json` (https://deepworkplan.com/schema/dwp-config/v1.json): ausente significa não habilitado, e a metodologia funciona com todos os addons desabilitados. Um plano v7 pode entregar uma tarefa `parallel_safe` a outro agente de programação somente quando seu contrato concede `agent_delegation` e um addon de delegação (agentkit ou Herdr) está habilitado e detectado; o resultado de um delegado continua sendo uma alegação até que o próprio executor de gates do plano o observe.
 
@@ -239,9 +234,9 @@ A tabela é uma referência, não uma lista de tarefas: execute uma linha apenas
 | --- | --- | --- |
 | AI Diff Reviewer (obrigatório) | `version:` em `.agents/skills/ai-diff-reviewer/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `version:` em `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | `scripts/herdr-peers --version` na skill herdr-peers instalada | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | `scripts/herdr-peers --version` na skill herdr-peers instalada | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.1.0 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | o instalador verificado em https://deepworkplan.com/vim/install.sh (ele fixa `v1.0.1`; baixe, `shasum -a 256 -c install.sh.sha256` e depois execute) |
 
 Verifique cada download com o `SHA256SUMS` da sua versão e o digest em *Versões fixadas* acima
@@ -255,7 +250,7 @@ desde o padrão 2.3.0): a skill fixada por tag acima mais um `.review/extension.
 dependências, design system, agentkit, Herdr, DeepWorkPlan Vim) e ofereça apenas os que se encaixam neste repositório, cada um como uma escolha explícita. Um
 repositório é totalmente conforme com **zero** addons opcionais — nunca instale esses automaticamente.
 
-- **Suporte a devcontainer** — um integrador enxuto do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v1.2.0`, com sua skill `dck-dockerfile`): `dck init` renderiza o contêiner próprio do repositório (imagem oficial fixada por digest, sem imagem base compartilhada, `bash dev.sh up`) e reconcilia um devcontainer existente somente depois que seu diff é aceito. Quando aceito, siga *O caminho do devcontainer* abaixo até o stack completo.
+- **Suporte a devcontainer** — um integrador enxuto do [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixado em `v1.3.0`, com sua skill `dck-dockerfile`): `dck init` renderiza o contêiner próprio do repositório (imagem oficial fixada por digest, sem imagem base compartilhada, `bash dev.sh up`) e reconcilia um devcontainer existente somente depois que seu diff é aceito. Quando aceito, siga *O caminho do devcontainer* abaixo até o stack completo.
 - **Integração com a Dailybot** — quatro eventos do ciclo de vida (kickoff, tarefa significativa, bloqueado, conclusão) como relatórios de progresso best-effort para equipes que já usam a Dailybot, com reforço autônomo opcional via hooks (`dailybot-cli >= 3.9.0`). A instalação da skill de agente Dailybot emparelhada (3.23.20) também expõe chat, check-ins, criação de formulários, consulta à IA, quadros e tarefas do Plan, chaves API por repositório e mais — o addon conecta apenas os relatórios à execução DWP. A metodologia central tem zero dependência da Dailybot.
 - **Atualização de dependências** — atualizações independentes do gerenciador de pacotes, em lotes, validadas e reversíveis. Quando
  aceita, ela instala o comando `/lib-upgrade`.
@@ -263,8 +258,8 @@ repositório é totalmente conforme com **zero** addons opcionais — nunca inst
  (não oferecido para bibliotecas puras, serviços headless ou repos exclusivamente de infra). Três perfis se
  empilham em um único arquivo: visual-ui (recomendado com força quando detectado; instalação protegida por aceitação), cli-output e
  conversational — estes dois últimos são sempre perguntados, nunca aplicados automaticamente.
-- **agentkit** — uma instalação no nível da máquina do [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixado em `v1.4.0`): um comando para cada agente de código, uma conta por perfil, `ak usage` e `ak pick` para escolher a conta com mais folga, e `ak run` headless para planos que entregam tarefas `parallel_safe` delimitadas a outros agentes de código (um delegado por worktree). O kit inicia os agentes em autonomia por padrão e seu opt-out (`--ask` ou `AGENTKIT_PERMISSIONS=ask`) sempre prevalece.
-- **Herdr** — uma instalação no nível da máquina do [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixado em `v2.0.0`, mais a skill oficial do Herdr) para planos que pedem a um agente par num painel do Herdr, em qualquer máquina, uma única resposta autorizada, e para um líder que acompanha suas frentes.
+- **agentkit** — uma instalação no nível da máquina do [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixado em `v1.5.0`): um comando para cada agente de código, uma conta por perfil, `ak usage` e `ak pick` para escolher a conta com mais folga, e `ak run` headless para planos que entregam tarefas `parallel_safe` delimitadas a outros agentes de código (um delegado por worktree). O kit inicia os agentes em autonomia por padrão e seu opt-out (`--ask` ou `AGENTKIT_PERMISSIONS=ask`) sempre prevalece.
+- **Herdr** — uma instalação no nível da máquina do [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixado em `v2.1.0`, mais a skill oficial do Herdr) para planos que pedem a um agente par num painel do Herdr, em qualquer máquina, uma única resposta autorizada, e para um líder que acompanha suas frentes.
 - **DeepWorkPlan Vim** — o editor de terminal ([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), fixado em `v1.0.1`), uma instalação no nível da máquina que nunca sobrescreve uma configuração existente do Neovim sem consentimento explícito.
 - **AI Diff Reviewer** — a revisão local obrigatória (não uma opção): o passe de segurança de cada Final Review
  executa o [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3** (skill + `.review/extension.md`
@@ -337,7 +332,7 @@ addons agentkit e Herdr estão instalados:
   destrutivas, telas de pagamento ou de plano, telas desconhecidas e painéis que você não criou. Com
   `AGENTKIT_PERMISSIONS=ask`, as frentes perguntam antes de agir; nunca contorne esses prompts. Registre cada
   intervenção no plano pai.
-- **Mantenha o enxame em andamento.** Com o coding-agents-kit `v1.4.0` e o herdr-peers `v2.0.0`, cada agente
+- **Mantenha o enxame em andamento.** Com o coding-agents-kit `v1.5.0` e o herdr-peers `v2.1.0`, cada agente
   verifica `ak capacity --self --json` em cada limite entre tarefas; em `critical`, escreve um pacote de repasse
   (https://deepworkplan.com/schema/dwp-handoff/v1.json) e o líder inicia um sucessor no mesmo
   checkout. O líder reivindica seu plano com `herdr-peers lead claim`, as frentes se dirigem a ele como `lead`,

@@ -223,6 +223,11 @@ export const uk: SiteTranslations = {
             'Кожна машина звітує про свої плани як plans-v1; демон підтримує карту fleet-v1 усіх машин, агентів, репозиторіїв і планів, а fleet ui показує її лише для читання.',
         },
         {
+          name: 'Черга планів',
+          detail:
+            'Пакет перевіряє та записує чергу `dwp-queue-v1`; демон читає її, щоб продовжувати плани в черзі.',
+        },
+        {
           name: 'Перевірка лідера',
           detail:
             'Перед будь-яким merge, тегом чи релізом лідер підтверджує, що досі утримує план на кожній машині. Новіший лідер її відхиляє; недосяжна машина її зупиняє, якщо цей ризик не прийнято й не зафіксовано.',
@@ -801,7 +806,7 @@ export const uk: SiteTranslations = {
         description:
           'Ставтеся до промту та скілу як до ненадійних, доки не перевірите їх. Обидва є відкритими під ліцензією MIT; скіл є Markdown-first без мережевих викликів і телеметрії. Кожен реліз публікує SHA256SUMS для скілу, що постачається, тож ви можете підтвердити відповідність своєї копії перед запуском. Релізи контрольно-суміовані, але не підписані (підписання — задокументований наступний крок).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -809,7 +814,7 @@ export const uk: SiteTranslations = {
         description:
           'Додайте скіл Deep Work Plan, щоб будь-який агент міг планувати та виконувати структуровану роботу. Скіл постачає маршрутизатор плюс дев’ять суб-скілів — create, execute, refine, resume, status, verify, onboard, author та upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -919,7 +924,7 @@ export const uk: SiteTranslations = {
             id: 'how-to-use',
             question: 'Як цим користуватися?',
             answer:
-              'Три кроки. Спочатку встановіть skill Deep Work Plan у вашому агенті для кодування — найшвидший шлях: `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (або клонуйте репозиторій скіла й запустіть `./setup.sh`). Далі один раз проведіть onboarding репозиторію, щоб агент адаптував `AGENTS.md`, `docs/`, набір `.agents/` і область `.dwp/`, яку git ігнорує, до вашого стеку: вкажіть https://deepworkplan.com/init.md або запустіть `/deepworkplan-onboard`. Нарешті плануйте й виконуйте роботу за допомогою легких команд: `/dwp-create <goal>` будує план; `/dwp-execute` запускає його завдання за завданням проти кожного gate; `/dwp-refine` редагує план у процесі виконання (обсяг, завдання або підвищення плану Lite до Full); `/dwp-resume` продовжує після перерви; `/dwp-status` повідомляє про прогрес без виконання; `/dwp-verify` формує об’єктивний звіт про відповідність; `/dwp-upgrade` переносить установлену skill на новий реліз, не зачіпаючи наявні плани. Агенти, що перехоплюють `/`, часто використовують `#` замість цього (наприклад `#dwp-execute`). Ендпоінт впровадження та швидкий старт проходять тим самим шляхом детальніше.',
+              'Три кроки. Спочатку встановіть skill Deep Work Plan у вашому агенті для кодування — найшвидший шлях: `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (або клонуйте репозиторій скіла й запустіть `./setup.sh`). Далі один раз проведіть onboarding репозиторію, щоб агент адаптував `AGENTS.md`, `docs/`, набір `.agents/` і область `.dwp/`, яку git ігнорує, до вашого стеку: вкажіть https://deepworkplan.com/init.md або запустіть `/deepworkplan-onboard`. Нарешті плануйте й виконуйте роботу за допомогою легких команд: `/dwp-create <goal>` будує план; `/dwp-execute` запускає його завдання за завданням проти кожного gate; `/dwp-refine` редагує план у процесі виконання (обсяг, завдання або підвищення плану Lite до Full); `/dwp-resume` продовжує після перерви; `/dwp-status` повідомляє про прогрес без виконання; `/dwp-verify` формує об’єктивний звіт про відповідність; `/dwp-upgrade` переносить установлену skill на новий реліз, не зачіпаючи наявні плани. Агенти, що перехоплюють `/`, часто використовують `#` замість цього (наприклад `#dwp-execute`). Ендпоінт впровадження та швидкий старт проходять тим самим шляхом детальніше.',
             linkLabel: 'Швидкий старт',
             linkPath: '/quickstart',
           },
@@ -1111,9 +1116,9 @@ export const uk: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Чи продовжують плани v6 працювати під v7?',
+            question: 'Чи зберігають наявні плани своє покоління у v8?',
             answer:
-              'Так. Контракти планів чітко оголошують покоління схеми (`plan-contract/v6.json` проти `plan-contract/v7.json`). План ніколи не мігрує покоління посеред роботи. Наявні плани v6 зберігають свій формат і семантику в інструментах v7.',
+              'Так. Нові плани за замовчуванням використовують `plan-contract/v8`. Наявні плани v7, v6 і v5 зберігають записане покоління та продовжують працювати з поточним пакетом. Покоління плану змінюється лише за явним запитом `/dwp-refine migrate`.',
             linkLabel: 'Читати про контракти',
             linkPath: '/spec/record-layer',
           },

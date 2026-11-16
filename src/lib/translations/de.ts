@@ -224,6 +224,11 @@ export const de: SiteTranslations = {
             'Jede Maschine meldet ihre Pläne als plans-v1; der Daemon führt die fleet-v1-Karte aller Maschinen, Agenten, Repositories und Pläne, und fleet ui zeigt sie schreibgeschützt an.',
         },
         {
+          name: 'Planwarteschlange',
+          detail:
+            'Das Pack validiert und schreibt die `dwp-queue-v1`-Warteschlange; der Daemon liest sie, um eingereihte Pläne fortzusetzen.',
+        },
+        {
           name: 'Lead-Prüfung',
           detail:
             'Vor jedem Merge, Tag oder Release bestätigt der Lead, dass er den Plan auf jeder Maschine noch hält. Ein neuerer Lead lässt sie scheitern; eine nicht erreichbare Maschine hält sie an, es sei denn, dieses Risiko wurde nachweislich akzeptiert.',
@@ -799,7 +804,7 @@ export const de: SiteTranslations = {
         description:
           'Behandeln Sie den Prompt und das Skill als nicht vertrauenswürdig, bis Sie sie geprüft haben. Beide sind Open Source und unter MIT lizenziert; das Skill ist Markdown-first ohne Netzwerkaufrufe und ohne Telemetrie. Jedes Release veröffentlicht eine SHA256SUMS-Datei über das ausgelieferte Skill, sodass Sie bestätigen können, dass Ihre Kopie übereinstimmt, bevor Sie es ausführen. Releases sind geprüfsummt, aber nicht signiert (Signierung ist ein dokumentierter nächster Schritt).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -807,7 +812,7 @@ export const de: SiteTranslations = {
         description:
           'Fügen Sie die Deep Work Plan Skill hinzu, sodass jeder Agent strukturierte Arbeit planen und ausführen kann. Die Skill liefert einen Router plus neun Sub-Skills — create, execute, refine, resume, status, verify, onboard, author und upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -917,7 +922,7 @@ export const de: SiteTranslations = {
             id: 'how-to-use',
             question: 'Wie nutze ich es?',
             answer:
-              'Drei Schritte. Installieren Sie zuerst die Deep Work Plan-Skill in Ihrem Coding-Agent — der schnellste Weg ist `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (oder klonen Sie das Skill-Repository und führen Sie `./setup.sh` aus). Zweitens onboarden Sie das Repository einmal, damit der Agent `AGENTS.md`, `docs/`, das `.agents/`-Kit und einen gitignorierten `.dwp/`-Bereich an Ihren Stack anpasst: verweisen Sie auf https://deepworkplan.com/init.md oder führen Sie `/deepworkplan-onboard` aus. Drittens planen und führen Sie die Arbeit mit den schlanken Befehlen aus: `/dwp-create <goal>` erstellt einen Plan; `/dwp-execute` führt ihn Aufgabe für Aufgabe gegen jedes Gate aus; `/dwp-refine` bearbeitet einen laufenden Plan (Umfang, Aufgaben oder die Beförderung eines Lite-Plans zu Full); `/dwp-resume` setzt nach einer Unterbrechung fort; `/dwp-status` meldet Fortschritt ohne Ausführung; `/dwp-verify` erzeugt einen objektiven Konformitätsbericht; `/dwp-upgrade` bringt eine installierte Skill auf einen neueren Release, ohne bestehende Pläne anzutasten. Agenten, die `/` abfangen, verwenden oft `#` stattdessen (zum Beispiel `#dwp-execute`). Der Adoptions-Endpunkt und der Schnellstart gehen denselben Weg ausführlicher.',
+              'Drei Schritte. Installieren Sie zuerst die Deep Work Plan-Skill in Ihrem Coding-Agent — der schnellste Weg ist `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (oder klonen Sie das Skill-Repository und führen Sie `./setup.sh` aus). Zweitens onboarden Sie das Repository einmal, damit der Agent `AGENTS.md`, `docs/`, das `.agents/`-Kit und einen gitignorierten `.dwp/`-Bereich an Ihren Stack anpasst: verweisen Sie auf https://deepworkplan.com/init.md oder führen Sie `/deepworkplan-onboard` aus. Drittens planen und führen Sie die Arbeit mit den schlanken Befehlen aus: `/dwp-create <goal>` erstellt einen Plan; `/dwp-execute` führt ihn Aufgabe für Aufgabe gegen jedes Gate aus; `/dwp-refine` bearbeitet einen laufenden Plan (Umfang, Aufgaben oder die Beförderung eines Lite-Plans zu Full); `/dwp-resume` setzt nach einer Unterbrechung fort; `/dwp-status` meldet Fortschritt ohne Ausführung; `/dwp-verify` erzeugt einen objektiven Konformitätsbericht; `/dwp-upgrade` bringt eine installierte Skill auf einen neueren Release, ohne bestehende Pläne anzutasten. Agenten, die `/` abfangen, verwenden oft `#` stattdessen (zum Beispiel `#dwp-execute`). Der Adoptions-Endpunkt und der Schnellstart gehen denselben Weg ausführlicher.',
             linkLabel: 'Schnellstart',
             linkPath: '/quickstart',
           },
@@ -1111,9 +1116,9 @@ export const de: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Laufen v6-Pläne unter v7 unverändert weiter?',
+            question: 'Behalten bestehende Pläne unter v8 ihre Generation?',
             answer:
-              'Ja. Plankontrakte deklarieren ihre Schema-Generation explizit (`plan-contract/v6.json` vs. `plan-contract/v7.json`). Ein laufender Plan migriert niemals mittendrin. Bestehende v6-Pläne behalten ihr Format und ihre Semantik unter v7-Tools bei.',
+              'Ja. Neue Pläne verwenden standardmäßig `plan-contract/v8`. Bestehende v7-, v6- und v5-Pläne behalten ihre aufgezeichnete Generation und laufen mit dem aktuellen Pack weiter. Eine Generation ändert sich nur nach einer ausdrücklichen Anfrage mit `/dwp-refine migrate`.',
             linkLabel: 'Über Kontrakte lesen',
             linkPath: '/spec/record-layer',
           },

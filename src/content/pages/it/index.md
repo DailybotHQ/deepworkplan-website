@@ -12,7 +12,7 @@ Deep Work Plan (DWP) è una metodologia e un kit aperti, sotto licenza MIT, per 
 
 > Copi il prompt di init.md e lo incolli nel Suo agente di coding — Claude Code, Cursor, Codex o qualsiasi altro — per rendere qualsiasi repository AI-first.
 
-> La specifica dice cosa; la harness dice dove; il loop engineering dice come finisce.
+
 
 **Il loop:** Registrazione (`lead claim`, lead e successione) → Daemon (`autopilot --loop`, avviato da una persona) → Sollecito (`idle ≥ 5 min`, non aggiunge autorità) → Subentro (`lead takeover`, primo successore raggiungibile) → Notifica (`plan-event-v1`, al comando della persona) → Fatto (`plan_completed`, gate superati). Ogni piano aperto con un record di lead, finché il suo stesso stato non dice che è concluso.
 
@@ -25,7 +25,7 @@ Deep Work Plan (DWP) è una metodologia e un kit aperti, sotto licenza MIT, per 
 
 1. **Prima la specifica** — il piano è la fonte di verità duratura: task atomici, criteri di accettazione e validation gate che l’agente deve superare.
 2. **Il repository è la harness** — contesto, strumenti, guardrail e stato vivono nel repository come semplici file che qualsiasi agente può leggere.
-3. **Loop engineering** — i piani arrivano alla fine: registrazione, un daemon avviato da una persona, solleciti che non aggiungono autorità, subentro ed eventi di piano.
+
 4. **Efficienza misurata** — byte di istruzioni per flusso, misurati e pubblicati con il loro metodo — mai percentuali di token inventate.
 
 ---
@@ -34,7 +34,7 @@ Deep Work Plan (DWP) è una metodologia e un kit aperti, sotto licenza MIT, per 
 
 Nei burst brevi, gli agenti di coding sono notevoli. Affidategli una missione di lungo corso — una migrazione, un nuovo sottosistema, un refactoring su decine di file — e derivano: il contesto si riempie, le decisioni precedenti sfumano e ore di lavoro si fermano a metà.
 
-Deep Work Plan risponde mettendo la specifica al primo posto: un piano duraturo, task atomici e validation gate che l’agente deve superare. “Fatto” smette di essere una sensazione — diventa evidenza verificabile e recensibile. Il loop engineering poi mantiene il piano in movimento finché quei gate non sono superati.
+
 
 Il contesto è la risorsa più scarsa del tuo agente. Per questo il harness mantiene le proprie istruzioni essenziali e verificabili. Le istruzioni si caricano gradualmente, la validazione si concentra sulle modifiche e ogni attività riceve il contesto pertinente. Pubblichiamo in byte la quantità di istruzioni di ogni flusso, così questo carico è visibile. Anche i piani si adattano al lavoro: Lite per una correzione circoscritta e Full per attività che durano ore. Il formato segue l’ambito del lavoro e mantiene il processo focalizzato e tracciabile.
 
@@ -42,9 +42,11 @@ Il contesto è la risorsa più scarsa del tuo agente. Per questo il harness mant
 
 ## I piani arrivano alla fine. L’autorità resta alle persone.
 
-Il loop engineering è il modo in cui un piano si conclude senza che una persona debba controllarlo. Ogni riga qui sotto è un contratto rilasciato di herdr-peers, l’addon opzionale di Herdr: la metodologia funziona senza, e il loop la amplifica soltanto.
+Loop engineering permette a un piano di arrivare al termine senza che una persona debba controllarlo continuamente. Le righe seguenti descrivono i contratti rilasciati del ciclo: la maggior parte appartiene a herdr-peers, mentre la coda dei piani è un contratto del pacchetto. Herdr è facoltativo; la metodologia funziona anche senza.
 
-| Contratto | Cosa garantisce | Fonte (herdr-peers v2.0.0) |
+
+
+| Contratto | Cosa garantisce | Fonte (herdr-peers v2.1.0) |
 | --- | --- | --- |
 | Registrazione del piano (`herdr-peers lead claim`) | Un piano seguito dal loop ha un record di lead con un’epoca e una successione. Solo chi detiene l’epoca più alta agisce come suo lead. | `skills/herdr-peers/protocol.md` §12 |
 | Avvio solo umano (`herdr-peers autopilot start --loop`) | Solo una persona avvia il daemon, con parole proprie. Nessuna richiesta, risposta o notifica può avviarlo, fermarlo o cambiarne il comportamento. | `skills/herdr-peers/autopilot.md` §1 |
@@ -52,7 +54,7 @@ Il loop engineering è il modo in cui un piano si conclude senza che una persona
 | Subentro dei successori (`herdr-peers lead takeover`) | Quando il lead non c’è più, al primo successore raggiungibile viene chiesto di subentrare, e l’helper ricontrolla le evidenze. Una corsia assume il ruolo di lead solo con un’autorizzazione che la persona ha registrato in anticipo. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
 | Eventi del piano (`plan-event-v1`) | Quando un piano va in stallo, si blocca, perde il suo lead, parte dalla coda o si completa, un comando scelto dalla persona riceve un oggetto plan-event-v1. Il pacchetto include un notificatore Dailybot per questo. | `docs/schema/plan-event-v1.json` |
 | Mappa della flotta (`plans-v1` · `fleet-v1`) | Ogni macchina riporta i propri piani come plans-v1; il daemon mantiene la mappa fleet-v1 di ogni macchina, agente, repository e piano, e fleet ui la mostra in sola lettura. | `docs/schema/fleet-v1.json` |
-| Coda dei piani (`dwp-queue-v1`) | Quando il piano di un repository si completa, il piano approvato successivo nella sua coda parte con un unico prompt fisso al suo lead. Il daemon legge la coda e non la scrive mai. | `skills/herdr-peers/autopilot.md` §5.4 |
+| Coda dei piani (`dwp-queue-v1`) | Il pacchetto convalida e scrive la coda; il daemon la legge per proseguire i piani in attesa. | `skills/deepworkplan/shared/queue.py` |
 | Verifica del lead (`herdr-peers lead verify`) | Prima di qualsiasi merge, tag o release, il lead conferma di detenere ancora il piano su ogni macchina. Un lead più recente lo rifiuta; una macchina irraggiungibile lo ferma, a meno che quel rischio non sia accettato e registrato. | `skills/herdr-peers/protocol.md` §12 |
 
 Il cervello decisionale (`--brain`) e la nomina del lead (`--appoint`) sono flag opzionali dello stesso daemon, ciascuno attivato da una persona. Il daemon non esegue mai merge, non pubblica release, non effettua accessi e non modifica permessi.
@@ -120,19 +122,19 @@ La harness pubblica ciò che ogni flusso deve leggere prima di iniziare: il rout
 
 | Flusso | Bundle di ingresso (byte) |
 | --- | ---: |
-| `create` | 74.979 |
-| `execute` | 55.124 |
-| `resume` | 32.021 |
-| `refine` | 76.356 |
-| `onboard` | 82.049 |
-| `status` | 27.309 |
-| `verify` | 36.596 |
+| `create` | 75.008|
+| `execute` | 55.160|
+| `resume` | 32.047|
+| `refine` | 76.821|
+| `onboard` | 82.075|
+| `status` | 27.335|
+| `verify` | 36.725|
 
-Unità: byte del file system. Misurato sul pacchetto rilasciato con il comando qui sotto: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v7.12.2).
+Unità: byte del file system. Misurato sul pacchetto rilasciato con il comando qui sotto: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 
 Token del provider, costi e statistiche di chiusura del loop non sono mostrati: nessuna fonte con tag li misura ancora, quindi non hanno una riga. La cifra in token dello script, byte ÷ 4, è una stima dichiarata come tale, mai una misurazione.
 
-[Leggi il registro di valutazione](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+[Leggi il registro di valutazione](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
 
 ---
 

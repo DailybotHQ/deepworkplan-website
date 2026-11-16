@@ -12,7 +12,7 @@ Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning a
 
 > Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.
 
-> Spec-first says what; the harness says where; loop engineering says how it finishes.
+
 
 **The loop:** Register (`lead claim`, lead and succession) → Daemon (`autopilot --loop`, started by a human) → Nudge (`idle ≥ 5 min`, adds no authority) → Failover (`lead takeover`, first reachable successor) → Notify (`plan-event-v1`, to the human's command) → Done (`plan_completed`, gates passed). Every open plan with a lead record, until its own state says done.
 
@@ -25,7 +25,7 @@ Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning a
 
 1. **Spec-first** — the plan is the durable source of truth: atomic tasks, acceptance criteria, and validation gates the agent must pass.
 2. **The repository is the harness** — context, tools, guardrails, and state live in the repository as plain files any agent can read.
-3. **Loop engineering** — plans run to their end: registration, a human-started daemon, nudges that add no authority, failover, and plan events.
+
 4. **Measured efficiency** — instruction bytes per flow, measured and published with their method — never invented token percentages.
 
 ---
@@ -34,7 +34,7 @@ Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning a
 
 A coding agent performs beautifully on short tasks. But hand it a long-horizon mission — a migration, a new subsystem, a refactor at scale — and drift sets in: the context window fills, earlier decisions fade, and hours of work stall halfway through.
 
-Deep Work Plan answers spec-first: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence. Loop engineering then keeps the plan moving until those gates are passed.
+
 
 Context is your agent’s scarcest resource, so the harness keeps its own instructions lean and auditable. Instructions load progressively, validation follows the changes, and each task gets the context relevant to its work. We publish the instruction load for each flow in bytes, making that overhead visible. Plans scale to the work too: Lite for a bounded fix, Full for work that spans hours. The format follows the scope, keeping the process focused and traceable.
 
@@ -42,9 +42,11 @@ Context is your agent’s scarcest resource, so the harness keeps its own instru
 
 ## Plans run to their end. Authority stays with people.
 
-Loop engineering is how a plan finishes without a human polling it. Each row below is a released contract of herdr-peers, the optional Herdr addon: the methodology works without it, and the loop only amplifies it.
+Loop engineering is how a plan finishes without a human polling it. Rows below describe released contracts in the loop: most come from herdr-peers, while the plan queue is a pack contract. Herdr is optional; the methodology works without it.
 
-| Contract | What it guarantees | Source (herdr-peers v2.0.0) |
+
+
+| Contract | What it guarantees | Source (herdr-peers v2.1.0) |
 | --- | --- | --- |
 | Plan registration (`herdr-peers lead claim`) | A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead. | `skills/herdr-peers/protocol.md` §12 |
 | Human-only start (`herdr-peers autopilot start --loop`) | Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does. | `skills/herdr-peers/autopilot.md` §1 |
@@ -52,7 +54,7 @@ Loop engineering is how a plan finishes without a human polling it. Each row bel
 | Failover to successors (`herdr-peers lead takeover`) | When the lead is gone, the first reachable successor is asked to take over, and the helper checks the evidence again. A lane takes the lead only under a grant the human recorded in advance. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
 | Plan events (`plan-event-v1`) | When a plan stalls, blocks, loses its lead, starts from the queue, or completes, a command the human chose receives one plan-event-v1 object. The pack ships a Dailybot notifier for it. | `docs/schema/plan-event-v1.json` |
 | Fleet map (`plans-v1` · `fleet-v1`) | Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only. | `docs/schema/fleet-v1.json` |
-| Plan queue (`dwp-queue-v1`) | When a repository's plan completes, the next approved plan in its queue starts with one fixed prompt to its lead. The daemon reads the queue and never writes it. | `skills/herdr-peers/autopilot.md` §5.4 |
+| Plan queue (`dwp-queue-v1`) | The pack validates and writes the queue; the daemon reads it to continue queued plans. | `skills/deepworkplan/shared/queue.py` |
 | Lead verify (`herdr-peers lead verify`) | Before any merge, tag, or release, the lead confirms it still holds the plan on every machine. A newer lead refuses it; an unreachable machine stops it unless that risk is accepted on record. | `skills/herdr-peers/protocol.md` §12 |
 
 The decision brain (`--brain`) and lead appointment (`--appoint`) are opt-in flags of the same daemon, each switched on by a human. The daemon never merges, releases, signs in, or changes a permission.
@@ -120,19 +122,19 @@ The harness publishes what each flow must read before it starts: the router, the
 
 | Flow | Entry bundle (bytes) |
 | --- | ---: |
-| `create` | 74,979 |
-| `execute` | 55,124 |
-| `resume` | 32,021 |
-| `refine` | 76,356 |
-| `onboard` | 82,049 |
-| `status` | 27,309 |
-| `verify` | 36,596 |
+| `create` | 75,008|
+| `execute` | 55,160|
+| `resume` | 32,047|
+| `refine` | 76,821|
+| `onboard` | 82,075|
+| `status` | 27,335|
+| `verify` | 36,725|
 
-Unit: filesystem bytes. Measured on the released pack with the command below: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v7.12.2).
+Unit: filesystem bytes. Measured on the released pack with the command below: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 
 Provider tokens, cost, and loop-closure statistics are not shown: no tagged source measures them yet, so they have no row. The script’s bytes ÷ 4 token figure is a labeled estimate, never a measurement.
 
-[Read the evaluation ledger](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+[Read the evaluation ledger](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
 
 ---
 

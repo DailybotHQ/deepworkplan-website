@@ -12,7 +12,7 @@ Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件�
 
 > 复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。
 
-> 规范先行说明做什么；harness 说明在哪里做；Loop engineering 说明如何收尾。
+
 
 **循环：** 注册（`lead claim`，主导者与继任） → 守护进程（`autopilot --loop`，由人类启动） → 提醒（`idle ≥ 5 min`，不增加权限） → 故障转移（`lead takeover`，首个可达的继任者） → 通知（`plan-event-v1`，发往人类的命令） → 完成（`plan_completed`，关卡已通过）。每份带有主导者记录的打开计划，直到其自身状态显示完成。
 
@@ -25,7 +25,7 @@ Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件�
 
 1. **规范先行** —— 计划是持久的事实来源：原子任务、验收标准，以及代理必须通过的验证关卡。
 2. **代码仓库就是 harness** —— 上下文、工具、防护栏与状态以纯文件形式存放在代码仓库中，任何代理都可读取。
-3. **Loop engineering** —— 计划会运行到结束：注册、由人类启动的守护进程、不增加任何权限的提醒、故障转移，以及计划事件。
+
 4. **可测量的效率** —— 按流程统计的指令字节数，连同测量方法一并测量和公布——绝不编造 token 百分比。
 
 ---
@@ -34,7 +34,7 @@ Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件�
 
 短促任务中，编程代理表现出色。可一旦交给它长程任务——一次迁移、一个新子系统、大规模重构——它就会偏移：上下文被填满，先前的决策逐渐淡忘，数小时的工作半途搁浅。
 
-Deep Work Plan 以规范先行来应对：一份持久的计划、原子任务，以及代理必须通过的验证关卡。“完成”不再是感觉——而是可验证、可审查的证据。随后，Loop engineering 让计划持续推进，直到这些关卡全部通过。
+
 
 上下文是代理最稀缺的资源，因此 harness 会让自身的指令保持精简且可审计。指令逐步加载，验证聚焦于实际改动，每项任务也会获得相关上下文。我们以字节公布每个流程的指令规模，让这部分负载清晰可见。计划也随工作调整：范围明确的修复使用 Lite，持续数小时的工作使用 Full。形式跟随工作范围，让流程保持聚焦并且可追踪。
 
@@ -42,9 +42,11 @@ Deep Work Plan 以规范先行来应对：一份持久的计划、原子任务�
 
 ## 计划运行到结束。权限始终在人手中。
 
-Loop engineering 是让计划在无人轮询的情况下完成的方式。下面每一行都是 herdr-peers（可选的 Herdr 附加组件）已发布的一项契约：方法论不依赖它也能运作，循环只是放大它。
+Loop engineering 让计划无需人类轮询也能完成。以下各行描述循环中的已发布契约：大多数来自 herdr-peers，而计划队列是技能包契约。Herdr 是可选项；方法论不依赖它也能运作。
 
-| 契约 | 它保证什么 | 来源（herdr-peers v2.0.0） |
+
+
+| 契约 | 它保证什么 | 来源（herdr-peers v2.1.0） |
 | --- | --- | --- |
 | 计划注册（`herdr-peers lead claim`） | 循环所监视的计划拥有一条主导者记录，包含 epoch 与继任列表。只有持有最高 epoch 的一方才作为其主导者行事。 | `skills/herdr-peers/protocol.md` §12 |
 | 仅由人类启动（`herdr-peers autopilot start --loop`） | 只有人类能以自己的话启动守护进程。任何询问、回复或通知都无法启动它、停止它，或改变它的行为。 | `skills/herdr-peers/autopilot.md` §1 |
@@ -52,7 +54,7 @@ Loop engineering 是让计划在无人轮询的情况下完成的方式。下面
 | 故障转移至继任者（`herdr-peers lead takeover`） | 当主导者不在时，第一个可联系到的继任者会被请求接管，辅助程序会再次核查证据。一条通道只有在人类事先记录的授权下才能接任主导者。 | `skills/herdr-peers/autopilot.md` §5.2, §7 |
 | 计划事件（`plan-event-v1`） | 当计划停滞、受阻、失去主导者、从队列启动或完成时，由人类选定的命令会收到一个 plan-event-v1 对象。技能包为此附带一个 Dailybot 通知器。 | `docs/schema/plan-event-v1.json` |
 | 集群视图（`plans-v1` · `fleet-v1`） | 每台机器以 plans-v1 报告其计划；守护进程维护覆盖每台机器、代理、代码仓库与计划的 fleet-v1 视图，fleet ui 以只读方式展示它。 | `docs/schema/fleet-v1.json` |
-| 计划队列（`dwp-queue-v1`） | 当一个代码仓库的计划完成时，其队列中下一份已批准的计划会通过发给其主导者的一条固定提示启动。守护进程只读取队列，从不写入。 | `skills/herdr-peers/autopilot.md` §5.4 |
+| 计划队列（`dwp-queue-v1`） | 技能包校验并写入队列；守护进程读取它以继续执行排队计划。 | `skills/deepworkplan/shared/queue.py` |
 | 主导者核验（`herdr-peers lead verify`） | 在任何合并、打标签或发布之前，主导者会确认自己在每台机器上仍持有该计划。更新的主导者会拒绝它；无法联系的机器会使其停止，除非该风险已在记录中被接受。 | `skills/herdr-peers/protocol.md` §12 |
 
 决策大脑（`--brain`）与主导者任命（`--appoint`）是同一守护进程的可选标志，各自由人类开启。守护进程从不合并、发布、登录，也不更改任何权限。
@@ -120,19 +122,19 @@ harness 会公布每个流程在开始前必须读取的内容：路由器、子
 
 | 流程 | 入口包（字节） |
 | --- | ---: |
-| `create` | 74,979 |
-| `execute` | 55,124 |
-| `resume` | 32,021 |
-| `refine` | 76,356 |
-| `onboard` | 82,049 |
-| `status` | 27,309 |
-| `verify` | 36,596 |
+| `create` | 75,008|
+| `execute` | 55,160|
+| `resume` | 32,047|
+| `refine` | 76,821|
+| `onboard` | 82,075|
+| `status` | 27,335|
+| `verify` | 36,725|
 
-单位：文件系统字节。使用下方命令在已发布的技能包上测得：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v7.12.2）。
+单位：文件系统字节。使用下方命令在已发布的技能包上测得：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.0）。
 
 未展示提供商 token、成本与循环闭合统计：目前尚无带标签的来源对其进行测量，因此它们没有对应的行。脚本给出的“字节 ÷ 4”token 数值是标注为估算的数字，绝非测量结果。
 
-[阅读评估账本](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+[阅读评估账本](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
 
 ---
 

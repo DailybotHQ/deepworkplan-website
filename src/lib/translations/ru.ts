@@ -223,6 +223,11 @@ export const ru: SiteTranslations = {
             'Каждая машина сообщает о своих планах как plans-v1; демон ведёт карту fleet-v1 всех машин, агентов, репозиториев и планов, а fleet ui показывает её только для чтения.',
         },
         {
+          name: 'Очередь планов',
+          detail:
+            'Пакет проверяет и записывает очередь `dwp-queue-v1`; демон читает ее, чтобы продолжать планы из очереди.',
+        },
+        {
           name: 'Проверка лидера',
           detail:
             'Перед любым merge, тегом или релизом лидер подтверждает, что всё ещё удерживает план на каждой машине. Более новый лидер её отклоняет; недоступная машина её останавливает, если этот риск не принят и не зафиксирован.',
@@ -800,7 +805,7 @@ export const ru: SiteTranslations = {
         description:
           'Относитесь к промпту и навыку как к ненадёжным, пока вы их не проверили. Оба являются открытым кодом под лицензией MIT; навык построен на Markdown без сетевых запросов и без телеметрии. Каждый релиз публикует SHA256SUMS для поставляемого навыка, так что вы можете убедиться, что ваша копия совпадает, прежде чем его запускать. Релизы содержат контрольные суммы, а не подписи (подпись — задокументированный следующий шаг).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -808,7 +813,7 @@ export const ru: SiteTranslations = {
         description:
           'Добавьте навык Deep Work Plan, чтобы любой агент мог планировать и выполнять структурированную работу. Навык поставляется с маршрутизатором плюс девятью под-навыками — create, execute, refine, resume, status, verify, onboard, author и upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -917,7 +922,7 @@ export const ru: SiteTranslations = {
             id: 'how-to-use',
             question: 'Как этим пользоваться?',
             answer:
-              'Три шага. Сначала установите skill Deep Work Plan в своём агенте для кодирования — самый быстрый путь: `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (или клонируйте репозиторий skill и запустите `./setup.sh`). Затем один раз проведите onboarding репозитория, чтобы агент адаптировал `AGENTS.md`, `docs/`, набор `.agents/` и область `.dwp/`, которую git игнорирует, к вашему стеку: укажите https://deepworkplan.com/init.md или запустите `/deepworkplan-onboard`. Наконец планируйте и выполняйте работу тонкими командами: `/dwp-create <goal>` строит план; `/dwp-execute` запускает его задача за задачей против каждого gate; `/dwp-refine` редактирует план в работе (область, задачи или повышение плана Lite до Full); `/dwp-resume` продолжает после прерывания; `/dwp-status` сообщает о прогрессе без выполнения; `/dwp-verify` формирует объективный отчёт о соответствии; `/dwp-upgrade` переносит установленную skill на новый релиз, не затрагивая существующие планы. Агенты, перехватывающие `/`, часто используют `#` вместо этого (например `#dwp-execute`). Точка adoption и быстрый старт проходят тот же путь подробнее.',
+              'Три шага. Сначала установите skill Deep Work Plan в своём агенте для кодирования — самый быстрый путь: `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (или клонируйте репозиторий skill и запустите `./setup.sh`). Затем один раз проведите onboarding репозитория, чтобы агент адаптировал `AGENTS.md`, `docs/`, набор `.agents/` и область `.dwp/`, которую git игнорирует, к вашему стеку: укажите https://deepworkplan.com/init.md или запустите `/deepworkplan-onboard`. Наконец планируйте и выполняйте работу тонкими командами: `/dwp-create <goal>` строит план; `/dwp-execute` запускает его задача за задачей против каждого gate; `/dwp-refine` редактирует план в работе (область, задачи или повышение плана Lite до Full); `/dwp-resume` продолжает после прерывания; `/dwp-status` сообщает о прогрессе без выполнения; `/dwp-verify` формирует объективный отчёт о соответствии; `/dwp-upgrade` переносит установленную skill на новый релиз, не затрагивая существующие планы. Агенты, перехватывающие `/`, часто используют `#` вместо этого (например `#dwp-execute`). Точка adoption и быстрый старт проходят тот же путь подробнее.',
             linkLabel: 'Быстрый старт',
             linkPath: '/quickstart',
           },
@@ -1110,9 +1115,9 @@ export const ru: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Продолжают ли планы v6 работать под управлением v7?',
+            question: 'Сохраняют ли существующие планы свое поколение в v8?',
             answer:
-              'Да. Контракты планов явно фиксируют версию схемы (`plan-contract/v6.json` vs `plan-contract/v7.json`). План никогда не переключает поколение на лету. Существующие планы v6 сохраняют свою структуру, состояние и семантику в инструментах v7.',
+              'Да. Новые планы по умолчанию используют `plan-contract/v8`. Существующие планы v7, v6 и v5 сохраняют записанное поколение и продолжают работать с текущим пакетом. Поколение плана меняется только по явному запросу `/dwp-refine migrate`.',
             linkLabel: 'Подробнее о контрактах',
             linkPath: '/spec/record-layer',
           },

@@ -12,7 +12,7 @@ Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk mere
 
 > Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.
 
-> Spec-first menyatakan apa; harness menyatakan di mana; Loop engineering menyatakan bagaimana pekerjaan selesai.
+
 
 **Loop:** Registrasi (`lead claim`, lead dan suksesi) → Daemon (`autopilot --loop`, dimulai oleh manusia) → Dorongan (`idle ≥ 5 min`, tidak menambah wewenang) → Failover (`lead takeover`, penerus pertama yang terjangkau) → Notifikasi (`plan-event-v1`, ke perintah manusia) → Selesai (`plan_completed`, gerbang terlewati). Setiap rencana terbuka dengan catatan lead, hingga statusnya sendiri menyatakan selesai.
 
@@ -25,7 +25,7 @@ Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk mere
 
 1. **Spec-first** — rencana adalah sumber kebenaran yang tahan lama: tugas atomik, kriteria penerimaan, dan gerbang validasi yang harus dilalui agen.
 2. **Repositori adalah harness** — konteks, alat, pagar pengaman, dan status berada di repositori sebagai file biasa yang dapat dibaca agen mana pun.
-3. **Loop engineering** — rencana berjalan hingga akhir: registrasi, daemon yang dimulai manusia, dorongan yang tidak menambah wewenang, failover, dan event rencana.
+
 4. **Efisiensi terukur** — byte instruksi per alur, diukur dan dipublikasikan beserta metodenya — tidak pernah persentase token yang dikarang.
 
 ---
@@ -34,7 +34,7 @@ Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk mere
 
 Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang — sebuah migrasi, subsistem baru, refaktor puluhan file — dan mereka menyimpang: konteks penuh, keputusan sebelumnya memudar, dan kerja berjam-jam mandek di tengah jalan.
 
-Deep Work Plan menjawabnya secara spec-first: rencana yang tahan lama, tugas atomik, dan gerbang validasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau. Loop engineering kemudian menjaga rencana tetap bergerak hingga gerbang-gerbang itu terlewati.
+
 
 Konteks adalah sumber daya agen Anda yang paling langka. Karena itu, harness menjaga instruksinya sendiri tetap ringkas dan dapat diaudit. Instruksi dimuat secara bertahap, validasi berfokus pada perubahan, dan setiap tugas menerima konteks yang relevan. Kami menerbitkan ukuran instruksi tiap alur dalam byte agar bebannya terlihat. Rencana juga menyesuaikan bentuk dengan pekerjaan: Lite untuk perbaikan terbatas dan Full untuk pekerjaan yang berlangsung berjam-jam. Format mengikuti cakupan pekerjaan sehingga proses tetap fokus dan mudah ditelusuri.
 
@@ -42,9 +42,11 @@ Konteks adalah sumber daya agen Anda yang paling langka. Karena itu, harness men
 
 ## Rencana berjalan hingga akhir. Wewenang tetap di tangan manusia.
 
-Loop engineering adalah cara sebuah rencana selesai tanpa ada manusia yang terus memantaunya. Setiap baris di bawah adalah kontrak rilis dari herdr-peers, addon Herdr yang opsional: metodologi tetap berjalan tanpanya, dan loop hanya memperkuatnya.
+Loop engineering membuat rencana selesai tanpa perlu terus dipantau manusia. Baris di bawah menjelaskan kontrak siklus yang telah dirilis: sebagian besar berasal dari herdr-peers, sedangkan antrean rencana adalah kontrak paket. Herdr bersifat opsional; metodologi tetap berfungsi tanpanya.
 
-| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.0.0) |
+
+
+| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.1.0) |
 | --- | --- | --- |
 | Registrasi rencana (`herdr-peers lead claim`) | Rencana yang diawasi loop memiliki catatan lead dengan epoch dan urutan suksesi. Hanya pemegang epoch tertinggi yang bertindak sebagai lead-nya. | `skills/herdr-peers/protocol.md` §12 |
 | Hanya manusia yang memulai (`herdr-peers autopilot start --loop`) | Hanya manusia yang memulai daemon, dengan kata-katanya sendiri. Tidak ada permintaan, balasan, atau pemberitahuan yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. | `skills/herdr-peers/autopilot.md` §1 |
@@ -52,7 +54,7 @@ Loop engineering adalah cara sebuah rencana selesai tanpa ada manusia yang terus
 | Failover ke penerus (`herdr-peers lead takeover`) | Saat lead hilang, penerus pertama yang dapat dijangkau diminta mengambil alih, dan helper memeriksa ulang buktinya. Sebuah lane hanya menjadi lead berdasarkan izin yang telah dicatat manusia sebelumnya. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
 | Event rencana (`plan-event-v1`) | Saat rencana macet, terblokir, kehilangan lead, dimulai dari antrean, atau selesai, perintah yang dipilih manusia menerima satu objek plan-event-v1. Pack ini menyertakan notifier Dailybot untuk itu. | `docs/schema/plan-event-v1.json` |
 | Peta armada (`plans-v1` · `fleet-v1`) | Setiap mesin melaporkan rencananya sebagai plans-v1; daemon menyimpan peta fleet-v1 dari setiap mesin, agen, repositori, dan rencana, dan fleet ui menampilkannya secara baca-saja. | `docs/schema/fleet-v1.json` |
-| Antrean rencana (`dwp-queue-v1`) | Saat rencana sebuah repositori selesai, rencana berikutnya yang telah disetujui dalam antreannya dimulai dengan satu prompt tetap ke lead-nya. Daemon membaca antrean dan tidak pernah menulisnya. | `skills/herdr-peers/autopilot.md` §5.4 |
+| Antrean rencana (`dwp-queue-v1`) | Paket memvalidasi dan menulis antrean; daemon membacanya untuk melanjutkan rencana yang mengantre. | `skills/deepworkplan/shared/queue.py` |
 | Verifikasi lead (`herdr-peers lead verify`) | Sebelum merge, tag, atau rilis apa pun, lead memastikan bahwa ia masih memegang rencana di setiap mesin. Lead yang lebih baru menolaknya; mesin yang tidak dapat dijangkau menghentikannya kecuali risiko itu diterima secara tercatat. | `skills/herdr-peers/protocol.md` §12 |
 
 Otak keputusan (`--brain`) dan penunjukan lead (`--appoint`) adalah flag opt-in dari daemon yang sama, masing-masing diaktifkan oleh manusia. Daemon tidak pernah melakukan merge, merilis, masuk ke akun, atau mengubah izin.
@@ -120,19 +122,19 @@ Harness memublikasikan apa yang harus dibaca setiap alur sebelum dimulai: router
 
 | Alur | Bundel awal (byte) |
 | --- | ---: |
-| `create` | 74.979 |
-| `execute` | 55.124 |
-| `resume` | 32.021 |
-| `refine` | 76.356 |
-| `onboard` | 82.049 |
-| `status` | 27.309 |
-| `verify` | 36.596 |
+| `create` | 75.008|
+| `execute` | 55.160|
+| `resume` | 32.047|
+| `refine` | 76.821|
+| `onboard` | 82.075|
+| `status` | 27.335|
+| `verify` | 36.725|
 
-Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v7.12.2).
+Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
 
 Token penyedia, biaya, dan statistik penutupan loop tidak ditampilkan: belum ada sumber bertag yang mengukurnya, jadi semuanya tidak memiliki baris. Angka token byte ÷ 4 dari skrip adalah estimasi berlabel, bukan pengukuran.
 
-[Baca catatan evaluasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/docs/EVALUATION.md)
+[Baca catatan evaluasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
 
 ---
 

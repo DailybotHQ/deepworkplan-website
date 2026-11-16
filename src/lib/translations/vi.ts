@@ -222,6 +222,11 @@ export const vi: SiteTranslations = {
             'Mỗi máy báo cáo các kế hoạch của mình dưới dạng plans-v1; daemon duy trì bản đồ fleet-v1 của mọi máy, agent, repository và kế hoạch, và fleet ui hiển thị nó ở chế độ chỉ đọc.',
         },
         {
+          name: 'Hàng đợi kế hoạch',
+          detail:
+            'Pack xác thực và ghi hàng đợi `dwp-queue-v1`; daemon đọc hàng đợi để tiếp tục các kế hoạch đang chờ.',
+        },
+        {
           name: 'Xác minh lead',
           detail:
             'Trước mọi lần merge, gắn tag hay phát hành, lead xác nhận rằng nó vẫn giữ kế hoạch trên mọi máy. Một lead mới hơn sẽ từ chối; một máy không liên lạc được sẽ dừng thao tác trừ khi rủi ro đó được chấp nhận và ghi nhận.',
@@ -795,7 +800,7 @@ export const vi: SiteTranslations = {
         description:
           'Hãy coi lời nhắc và skill là không đáng tin cho đến khi bạn đã kiểm tra chúng. Cả hai đều là mã nguồn mở và cấp phép MIT; skill là Markdown-first không có lời gọi mạng và không có telemetry. Mỗi bản phát hành công bố một SHA256SUMS cho skill được giao, vì vậy bạn có thể xác nhận bản sao của mình khớp trước khi chạy nó. Các bản phát hành có checksum, không có chữ ký (ký là bước tiếp theo đã được ghi lại).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -803,7 +808,7 @@ export const vi: SiteTranslations = {
         description:
           'Thêm skill Deep Work Plan để mọi agent đều có thể lập kế hoạch và thực thi công việc có cấu trúc. Skill đi kèm một bộ định tuyến cùng chín sub-skill — create, execute, refine, resume, status, verify, onboard, author và upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -911,7 +916,7 @@ export const vi: SiteTranslations = {
             id: 'how-to-use',
             question: 'Tôi dùng nó như thế nào?',
             answer:
-              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
+              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
             linkLabel: 'Khởi động nhanh',
             linkPath: '/quickstart',
           },
@@ -1105,9 +1110,10 @@ export const vi: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Các kế hoạch v6 có tiếp tục chạy được dưới v7 không?',
+            question:
+              'Các kế hoạch hiện có có giữ nguyên thế hệ trong v8 không?',
             answer:
-              'Có. Hợp đồng kế hoạch tuyên bố rõ ràng thế hệ lược đồ (`plan-contract/v6.json` so với `plan-contract/v7.json`). Kế hoạch không bao giờ chuyển đổi thế hệ giữa chừng. Các kế hoạch v6 hiện tại giữ nguyên cấu trúc và ngữ nghĩa nhật ký dưới các công cụ v7.',
+              'Có. Kế hoạch mới mặc định dùng `plan-contract/v8`. Các kế hoạch v7, v6 và v5 hiện có giữ nguyên thế hệ đã ghi và tiếp tục chạy với pack hiện tại. Thế hệ chỉ thay đổi theo yêu cầu rõ ràng `/dwp-refine migrate`.',
             linkLabel: 'Tìm hiểu về hợp đồng',
             linkPath: '/spec/record-layer',
           },

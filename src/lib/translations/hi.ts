@@ -221,6 +221,11 @@ export const hi: SiteTranslations = {
             'हर मशीन अपनी योजनाओं की रिपोर्ट plans-v1 के रूप में देती है; डेमॉन हर मशीन, एजेंट, रिपॉज़िटरी और योजना का fleet-v1 मानचित्र रखता है, और fleet ui उसे केवल-पठन रूप में दिखाता है।',
         },
         {
+          name: 'प्लान कतार',
+          detail:
+            'पैक `dwp-queue-v1` कतार को सत्यापित करके लिखता है; डेमन कतार में मौजूद प्लान आगे चलाने के लिए इसे पढ़ता है।',
+        },
+        {
           name: 'लीड सत्यापन',
           detail:
             'किसी भी merge, tag या रिलीज़ से पहले, लीड पुष्टि करता है कि हर मशीन पर योजना अब भी उसी के पास है। नया लीड इसे अस्वीकार कर देता है; पहुँच से बाहर मशीन इसे रोक देती है, जब तक उस जोखिम को रिकॉर्ड पर स्वीकार न किया गया हो।',
@@ -793,7 +798,7 @@ export const hi: SiteTranslations = {
         description:
           'प्रॉम्प्ट और स्किल को तब तक अविश्वसनीय मानें जब तक आपने उन्हें जाँच न लिया हो। दोनों ओपन-सोर्स और MIT लाइसेंस प्राप्त हैं; स्किल Markdown-first है जिसमें कोई नेटवर्क कॉल नहीं और कोई टेलीमेट्री नहीं है। प्रत्येक रिलीज़ भेजी गई स्किल पर SHA256SUMS प्रकाशित करती है, ताकि आप चलाने से पहले पुष्टि कर सकें कि आपकी प्रति मेल खाती है। रिलीज़ चेकसम की गई हैं, हस्ताक्षरित नहीं (हस्ताक्षर एक दस्तावेज़ीकृत अगला चरण है)।',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -801,7 +806,7 @@ export const hi: SiteTranslations = {
         description:
           'Deep Work Plan स्किल जोड़ें ताकि कोई भी एजेंट संरचित काम की योजना बना सके और उसे निष्पादित कर सके। स्किल एक राउटर और नौ सब-स्किल्स के साथ आती है — create, execute, refine, resume, status, verify, onboard, author और upgrade।',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -905,7 +910,7 @@ export const hi: SiteTranslations = {
             id: 'how-to-use',
             question: 'इसे कैसे उपयोग करें?',
             answer:
-              'तीन चरण। पहले, Deep Work Plan स्किल को अपने coding agent में इंस्टॉल करें — सबसे तेज़ रास्ता `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` है (या skill repo क्लोन करें और `./setup.sh` चलाएँ)। दूसरे, रिपॉज़िटरी को एक बार onboard करें ताकि एजेंट `AGENTS.md`, `docs/`, `.agents/` किट और gitignore की गई `.dwp/` क्षेत्र को आपके stack के अनुसार ढाले: https://deepworkplan.com/init.md पर इशारा करें, या `/deepworkplan-onboard` चलाएँ। तीसरे, पतले commands से काम की योजना बनाएँ और चलाएँ: `/dwp-create <goal>` योजना बनाता है; `/dwp-execute` प्रत्येक gate के विरुद्ध कार्य-दर-कार्य चलाता है; `/dwp-refine` एक चल रही योजना को संपादित करता है (scope, कार्य, या किसी Lite योजना को Full में उन्नत करना); `/dwp-resume` रुकावट के बाद जारी रखता है; `/dwp-status` बिना निष्पादन प्रगति रिपोर्ट करता है; `/dwp-verify` एक वस्तुनिष्ठ अनुरूपता रिपोर्ट तैयार करता है; `/dwp-upgrade` इंस्टॉल की गई स्किल को मौजूदा योजनाओं को छुए बिना एक नए रिलीज़ पर ले जाता है। `/` को intercept करने वाले एजेंट अक्सर `#` का उपयोग करते हैं (उदाहरण `#dwp-execute`)। adoption endpoint और त्वरित शुरुआत उसी रास्ते को अधिक विस्तार से बताते हैं।',
+              'तीन चरण। पहले, Deep Work Plan स्किल को अपने coding agent में इंस्टॉल करें — सबसे तेज़ रास्ता `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y` है (या skill repo क्लोन करें और `./setup.sh` चलाएँ)। दूसरे, रिपॉज़िटरी को एक बार onboard करें ताकि एजेंट `AGENTS.md`, `docs/`, `.agents/` किट और gitignore की गई `.dwp/` क्षेत्र को आपके stack के अनुसार ढाले: https://deepworkplan.com/init.md पर इशारा करें, या `/deepworkplan-onboard` चलाएँ। तीसरे, पतले commands से काम की योजना बनाएँ और चलाएँ: `/dwp-create <goal>` योजना बनाता है; `/dwp-execute` प्रत्येक gate के विरुद्ध कार्य-दर-कार्य चलाता है; `/dwp-refine` एक चल रही योजना को संपादित करता है (scope, कार्य, या किसी Lite योजना को Full में उन्नत करना); `/dwp-resume` रुकावट के बाद जारी रखता है; `/dwp-status` बिना निष्पादन प्रगति रिपोर्ट करता है; `/dwp-verify` एक वस्तुनिष्ठ अनुरूपता रिपोर्ट तैयार करता है; `/dwp-upgrade` इंस्टॉल की गई स्किल को मौजूदा योजनाओं को छुए बिना एक नए रिलीज़ पर ले जाता है। `/` को intercept करने वाले एजेंट अक्सर `#` का उपयोग करते हैं (उदाहरण `#dwp-execute`)। adoption endpoint और त्वरित शुरुआत उसी रास्ते को अधिक विस्तार से बताते हैं।',
             linkLabel: 'त्वरित शुरुआत',
             linkPath: '/quickstart',
           },
@@ -1093,9 +1098,9 @@ export const hi: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'क्या v6 योजनाएं v7 के तहत चलती रहती हैं?',
+            question: 'क्या मौजूदा प्लान v8 में अपनी पीढ़ी बनाए रखते हैं?',
             answer:
-              'हाँ। योजना अनुबंध स्पष्ट रूप से अपनी स्कीमा पीढ़ी की घोषणा करते हैं (`plan-contract/v6.json` बनाम `plan-contract/v7.json`)। कोई योजना कभी भी बीच में पीढ़ी नहीं बदलती। मौजूदा v6 योजनाएं v7 टूलिंग के तहत निर्बाध रूप से जारी रहती हैं।',
+              'हाँ। नए प्लान डिफ़ॉल्ट रूप से `plan-contract/v8` का उपयोग करते हैं। मौजूदा v7, v6 और v5 प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं और वर्तमान पैक के साथ चलते रहते हैं। प्लान की पीढ़ी केवल स्पष्ट `/dwp-refine migrate` अनुरोध से बदलती है।',
             linkLabel: 'अनुबंधों के बारे में पढ़ें',
             linkPath: '/spec/record-layer',
           },

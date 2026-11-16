@@ -223,6 +223,11 @@ export const ja: SiteTranslations = {
             '各マシンは自分の計画を plans-v1 として報告し、デーモンはすべてのマシン、エージェント、リポジトリ、計画を網羅する fleet-v1 マップを保持します。fleet ui はそれを読み取り専用で表示します。',
         },
         {
+          name: '計画キュー',
+          detail:
+            'パックが `dwp-queue-v1` キューを検証して書き込み、デーモンはそれを読み取って待機中の計画を続行します。',
+        },
+        {
           name: 'リードの検証',
           detail:
             'マージ、タグ付け、リリースの前に、リードはすべてのマシンで自分がまだ計画を保持していることを確認します。より新しいリードがいれば拒否され、到達できないマシンがあれば、そのリスクが記録のうえで受け入れられていない限り停止します。',
@@ -800,7 +805,7 @@ export const ja: SiteTranslations = {
         description:
           '確認が済むまで、プロンプトとスキルを信頼できないものとして扱ってください。どちらもオープンソースで MIT ライセンスです。スキルは Markdown ファーストでネットワーク呼び出しもテレメトリーもありません。各リリースでは出荷されたスキルに対する SHA256SUMS が公開されているため、実行する前に手元のコピーが一致することを確認できます。リリースはチェックサム付きですが、署名はされていません（署名はドキュメント化された次のステップです）。',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.0 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -808,7 +813,7 @@ export const ja: SiteTranslations = {
         description:
           'Deep Work Plan スキルを追加し、どのエージェントも構造化された作業を計画して実行できるようにします。スキルはルーターと九つのサブスキル（create、execute、refine、resume、status、verify、onboard、author、upgrade）を備えます。',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -914,7 +919,7 @@ export const ja: SiteTranslations = {
             id: 'how-to-use',
             question: 'どう使いますか？',
             answer:
-              '三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` が進行中の計画（スコープ、タスク、または Lite プランから Full への昇格）を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成し、`/dwp-upgrade` がインストール済みのスキルを、既存のプランに触れることなく新しいリリースへ移動します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。',
+              '三つのステップです。まず、コーディングエージェントに Deep Work Plan スキルをインストールします——最も速い方法は `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.0 --skill deepworkplan -y`（またはスキルリポジトリをクローンして `./setup.sh` を実行）です。次に、リポジトリに一度オンボーディングし、エージェントに `AGENTS.md`、`docs/`、`.agents/` キット、gitignore された `.dwp/` 領域をあなたのスタックに適応させます：https://deepworkplan.com/init.md を指すか、`/deepworkplan-onboard` を実行します。第三に、薄いコマンドで計画と実行を行います：`/dwp-create <goal>` が計画を構築し、`/dwp-execute` が各ゲートに対してタスク単位で実行し、`/dwp-refine` が進行中の計画（スコープ、タスク、または Lite プランから Full への昇格）を編集し、`/dwp-resume` が中断後に続行し、`/dwp-status` が実行せずに進捗を報告し、`/dwp-verify` が客観的な適合性レポートを生成し、`/dwp-upgrade` がインストール済みのスキルを、既存のプランに触れることなく新しいリリースへ移動します。`/` をインターセプトするエージェントは `#` を使うことが多いです（例：`#dwp-execute`）。アダプションエンドポイントとクイックスタートが、同じ経路をより詳しく説明します。',
             linkLabel: 'クイックスタート',
             linkPath: '/quickstart',
           },
@@ -1106,9 +1111,9 @@ export const ja: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'v6 で作成された計画は v7 でも継続して実行できますか？',
+            question: '既存の計画は v8 でも世代を維持しますか？',
             answer:
-              'はい。計画契約にはスキーマ世代が明記されています (`plan-contract/v6.json` または `plan-contract/v7.json`)。実行中の計画が途中で世代移行することはありません。既存の v6 計画は v7 ツールでもそのまま動作します。',
+              'はい。新しい計画は既定で `plan-contract/v8` を使います。既存の v7、v6、v5 計画は記録された世代を維持し、現行パックで引き続き実行できます。世代が変わるのは、明示的に `/dwp-refine migrate` を依頼した場合だけです。',
             linkLabel: '契約について読む',
             linkPath: '/spec/record-layer',
           },
