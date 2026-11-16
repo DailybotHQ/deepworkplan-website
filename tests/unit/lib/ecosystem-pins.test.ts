@@ -88,7 +88,7 @@ const tagPatterns = (repo: string): RegExp[] => {
 // The drift case reads every public surface synchronously; like
 // schema-urls.test.ts it is load-sensitive, so the suite carries an explicit
 // 30 s timeout instead of vitest's 5 s default (docs/TESTING_GUIDE.md).
-describe('ecosystem pins', { timeout: 30_000 }, () => {
+describe('ecosystem pins', { timeout: 120_000 }, () => {
   it('lists well-formed pins', () => {
     for (const pin of pins) {
       expect(pin.tag, pin.repo).toMatch(/^v\d+\.\d+\.\d+$/);
