@@ -93,7 +93,7 @@ section: Addons
 
 ### DeepWorkPlan Vim (седьмой аддон)
 
-Тонкий интегратор [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (закреплён на `v1.0.1`, интерфейс `1`) — терминального редактора для Deep Work Plan (Neovim 0.12+).
+Тонкий интегратор [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (закреплён на `v1.1.0`, интерфейс `1`) — терминального редактора для Deep Work Plan (Neovim 0.12+).
 
 - **Страница kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Что добавляет:** опциональную поверхность редактора на уровне машины для агентов и людей — генерируемый индекс команд, браузер планов только для чтения и просмотрщик Markdown; каждое утверждение считывается из закреплённой машиночитаемой поверхности продукта

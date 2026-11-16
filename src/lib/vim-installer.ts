@@ -16,9 +16,9 @@ export const VIM_INSTALL_URL = 'https://deepworkplan.com/vim/install.sh';
  * public/vim/install.sh is never edited here: a new release is re-copied and
  * both constants move together (the unit test pins them to the served bytes).
  */
-export const VIM_INSTALLER_TAG = 'v1.0.1';
+export const VIM_INSTALLER_TAG = 'v1.1.0';
 export const VIM_INSTALLER_TAG_SHA256 =
-  '24a550239108a71434e993675389c27c64d88c4c07af8efc9be98d23897fb716';
+  'a3303af1c9f4e64eb69aac4c9fb269c791cab41568fc74a40d8aa365c058228c';
 
 /** The product repository (source, license, releases). */
 export const VIM_REPO_URL = 'https://github.com/DailybotHQ/deepworkplan-vim';

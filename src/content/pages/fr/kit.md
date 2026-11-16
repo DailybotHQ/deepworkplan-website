@@ -70,7 +70,7 @@ Des capacités que le flux onboard superpose à un dépôt. Sept sont facultativ
 - **[herdr](/fr/kit/herdr)** — Des pairs dans des panneaux Herdr, sur n’importe quelle machine : délégation interactive avec une seule réponse autorisée. Épinglé à `herdr-peers@v2.1.0`.
 - **[agentkit](/fr/kit/agentkit)** — Une seule commande ak pour chaque agent de code en terminal : autonomie par défaut avec possibilité de retrait, et délégation sans interface dans un worktree. Épinglé à `coding-agents-kit@v1.5.0`.
 - **[devcontainer](/fr/kit/devcontainer)** — Le conteneur de développement propre à chaque dépôt, issu d’un seul modèle : agents via ak, Herdr dans les deux sens, clés SSH uniquement sur activation explicite. Épinglé à `devcontainer-kit@v1.3.0`.
-- **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v1.0.1`.
+- **[vim](/fr/kit/vim)** — L’éditeur de terminal, avec un navigateur de plans en lecture seule et une visionneuse Markdown. Épinglé à `deepworkplan-vim@v1.1.0`.
 
 Le registre des addons et les descripteurs sont livrés dans Deep Work Plan v8 : `v8.0.0`
 

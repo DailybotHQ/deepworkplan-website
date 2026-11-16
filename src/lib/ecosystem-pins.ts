@@ -54,9 +54,9 @@ export const ECOSYSTEM_PINS = {
   },
   vim: {
     repo: 'deepworkplan-vim',
-    tag: 'v1.0.1',
+    tag: 'v1.1.0',
     sha256sums:
-      '304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7',
+      'b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187',
     role: 'DeepWorkPlan Vim addon',
   },
   reviewer: {

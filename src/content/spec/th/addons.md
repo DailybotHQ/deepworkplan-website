@@ -93,7 +93,7 @@ section: Addons
 
 ### DeepWorkPlan Vim (addon ที่เจ็ด)
 
-ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v1.0.1`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
+ตัวผสานรวมแบบบางของ [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ปักหมุดที่ `v1.1.0`, interface `1`) ตัวแก้ไขบนเทอร์มินัลสำหรับ Deep Work Plan (Neovim 0.12+)
 
 - **หน้า kit:** [DeepWorkPlan Vim](/kit/vim)
 - **สิ่งที่เพิ่ม:** พื้นผิวตัวแก้ไขระดับเครื่องแบบเลือกได้สำหรับ agent และมนุษย์ — ดัชนีคำสั่งที่สร้างขึ้น ตัวเรียกดูแผนแบบอ่านอย่างเดียว และตัวแสดง Markdown ทุกข้อกล่าวอ้างอ่านจากพื้นผิวที่เครื่องอ่านได้ซึ่งปักหมุดไว้ของผลิตภัณฑ์

@@ -40,7 +40,7 @@ last`, and Herdr pane restore through `ak`; 1.4.0 adds `ak update`, the
 verified vendor updater, human-invoked only; 1.5.0 adds reported-only token
 metering and forces each CLI's ask mode under the opt-out; interface 1
 unchanged),
-deepworkplan-vim `v1.0.1`,
+deepworkplan-vim `v1.1.0`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
 reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.0`
 addon descriptors record herdr-peers `v2.1.0`, coding-agents-kit `v1.5.0`
@@ -58,7 +58,7 @@ as 1.2.0 (herdr-peers 1.3.1, coding-agents-kit 1.4.0 and deepworkplan-vim
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |
 | devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.3.0` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon (agentkit): one `ak` command for every coding agent — accounts, quota, `ak pick`, headless runs | Public | `v1.5.0` | `/kit/agentkit`, `/init.md` | Documented only |
-| deepworkplan-vim | Addon (vim): the terminal editor for plans — plan browser, lanes view, Markdown viewer | Public | `v1.0.1` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
+| deepworkplan-vim | Addon (vim): the terminal editor for plans — plan browser, lanes view, Markdown viewer | Public | `v1.1.0` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
 | herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v2.1.0` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
 
 ## Stable interfaces (1.0)
@@ -68,7 +68,7 @@ from then on an incompatible change ships only in a new major version, and
 additions arrive in minor versions. herdr-peers `v2.1.0` (CLI verbs, exit
 codes, protocol 1, the `lanes-v1` and `lead-v1` contracts),
 coding-agents-kit `v1.5.0` (the `ak` command surface, interface 1, the JSON
-schemas), deepworkplan-vim `v1.0.1` (installer, addon surface, editor
+schemas), deepworkplan-vim `v1.1.0` (installer, addon surface, editor
 commands, `dwpvim.json`, keybindings) and devcontainer-kit `v1.3.0` (the `dck`
 verbs, flags and exit codes, the `dck.toml`, host-profile and doctor schemas,
 interface 2, the render contract) are released; each 1.0.0 changes no
