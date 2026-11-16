@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-addon-agentkit
 description: Optional DeepWorkPlan addon that integrates coding-agents-kit (the `ak` command, DailybotHQ/coding-agents-kit pinned at v1.4.0, interface 1) as the headless delegation transport - a thin integrator that detects the kit through `ak doctor --json`, offers it (never imposes it) from onboard Phase 7b, documents the install from a clone of the pinned tag plus the kit's install.sh, records the acceptance in the .dwp/config.json addon registry, and maps a v7 plan's delegation operations (launch, observe, collect, cancel) onto one `ak run` per delegate in a dedicated git worktree. Never required, never a conformance gate. The kit launches agents in autonomy by default and its opt-out (--ask or AGENTKIT_PERMISSIONS=ask) always wins; the pack spells no CLI autonomy flag, never passes --auto, and passes --ask always for a read-only delegate and for writing delegates when a plan records the opt-out.
-version: "7.12.2"
+version: "8.0.0-beta.1"
 documentation_url: https://deepworkplan.com/kit/agentkit
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -13,7 +13,7 @@ metadata: {"openclaw":{"emoji":"🧰","homepage":"https://deepworkplan.com/kit/a
 Integrate **coding-agents-kit** — one command surface (`ak`) for every
 terminal coding agent (claude, codex, cursor, opencode, pi, cline, grok and
 their provider variants, multiple accounts through profiles) — as the
-**headless** transport a v7 plan may use to delegate a `parallel_safe`
+**headless** transport a v7 or v8 plan may use to delegate a `parallel_safe`
 task. This is an **opt-in addon**, never required for a repo to be
 AI-first and never a conformance gate: without it every task runs in the
 current session exactly as before.
@@ -43,7 +43,7 @@ DWP); everything this addon relies on is the kit's frozen **interface 1**
 
 - **`onboard` Phase 7b** offers it as an explicit opt-in when the developer
   wants a plan to hand bounded tasks to other coding agents.
-- **`execute`** uses it only through `delegation.md`, only on a v7 plan whose
+- **`execute`** uses it only through `delegation.md`, only on a v7 or v8 plan whose
   contract grants `agent_delegation`, only for a `parallel_safe` task (or a
   read-only delegate), and only when `resources.py abilities` shows
   `addon:agentkit` as a `subagents` source.

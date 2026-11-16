@@ -1,7 +1,7 @@
 ---
 name: deepworkplan-verify
 description: Verify that a repository is DeepWorkPlan-conformant (AI-first) and that its plans are well-formed, producing an objective pass/fail report. Use when the developer asks to verify, audit, or check conformance of a repo or a plan.
-version: "7.12.2"
+version: "8.0.0-beta.1"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob
@@ -58,8 +58,9 @@ top — the script verifies *structure*; you verify *substance*.
 
 Conformance asks whether a plan is well-formed; the compliance audit asks
 whether finished v6/v7 work followed the rules the pack already ships:
-criteria closed on their declared evidence class, a completed Final Review,
-declared controls and their verdicts (dirty-start voids counted), §5.1.4
+criteria closed on their declared evidence class, each unclosed criterion
+named with the tasks whose gate intent owns it (an empty list when none
+does), a completed Final Review, declared controls and their verdicts (dirty-start voids counted), §5.1.4
 `control missing` observations, a verbatim request kept, and re-anchoring
 (reported unmeasured — execution leaves no record of it). It never writes.
 
