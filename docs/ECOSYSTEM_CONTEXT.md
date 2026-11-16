@@ -20,30 +20,35 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 
 Versions are the release each surface pins today; the site may only claim a
 released tag (`tests/unit/lib/install-surface-pins.test.ts` guards the
-deepworkplan-skill pins). The pins last moved on 2026-11-16: pack `v7.12.2`
-(7.10.0 settles each consequential decision through a herdr-peers `decide`
-debate by default; 7.11.0 lands the developer's v7 hardening series; 7.12.0
-registers plans with the herdr-peers loop plus the Dailybot notifier and
-moves the addon descriptors to herdr-peers 1.3.1 and coding-agents-kit
-1.3.0; 7.12.2 lets the Herdr descriptor accept herdr-peers protocol 1 and 2
-and pins herdr-peers 2.0.0),
-herdr-peers `v2.0.0` (1.1.0 adds native debates, 1.2.x adds autopilot, an
+deepworkplan-skill pins). The pins last moved on 2026-11-16 with DWP 8.0.0: pack `v8.0.0`
+(DWP standard 8.0.0 — new plans default to `plan-contract/v8`, with the
+`autonomy` block, structured blockers in `journal-event/v8` and
+`plan-snapshot/v8`, and the `dwp-queue-v1` plan queue written by
+`shared/queue.py`; v7, v6 and v5 plans keep their recorded generation; the
+7.x line ended at 7.12.2),
+herdr-peers `v2.1.0` (1.1.0 adds native debates, 1.2.x adds autopilot, an
 optional daemon only a human starts; 1.3.0 adds the loop — `autopilot
 --loop` keeps every open plan running to its end on every machine — plus
 the fleet UI and the read-only `plans`/`fleet` verbs; 2.0.0 moves the
 wire to protocol 2 — lead appointment on the human's explicit word,
-the autopilot brain, the plan queue), coding-agents-kit `v1.4.0` (pick-v2: `ak pick --kinds` with per-kind model
+the autopilot brain, the plan queue; 2.0.2 accepts the trailing `--ask` of
+an ask-mode pick-v2 launch; 2.1.0 adds the fleet UI views, denies
+permissions the daemon cannot accept and reads the v8 blockers),
+coding-agents-kit `v1.5.0` (pick-v2: `ak pick --kinds` with per-kind model
 override and `--json` launch contracts; `--model` as a head flag; `ak
 last`, and Herdr pane restore through `ak`; 1.4.0 adds `ak update`, the
-verified vendor updater, human-invoked only; interface 1 unchanged),
+verified vendor updater, human-invoked only; 1.5.0 adds reported-only token
+metering and forces each CLI's ask mode under the opt-out; interface 1
+unchanged),
 deepworkplan-vim `v1.0.1`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
-reviewer and the Dailybot skill vendored at those tags. The pack `v7.12.2` addon descriptors record herdr-peers `v2.0.0`
-(interface 1 or 2) and coding-agents-kit `v1.4.0` — the same releases
-the site pins;
-devcontainer-kit `v1.2.0` (interface 2 unchanged) bakes herdr-peers
-1.3.1, coding-agents-kit 1.4.0 and deepworkplan-vim 1.0.1 into its
-image.
+reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.0`
+addon descriptors record herdr-peers `v2.1.0`, coding-agents-kit `v1.5.0`
+and devcontainer-kit `v1.3.0` — the same releases the site pins;
+devcontainer-kit `v1.3.0` (interface 2 unchanged; adds the opt-in
+`[compose] container_only` key) bakes the same tool releases into its image
+as 1.2.0 (herdr-peers 1.3.1, coding-agents-kit 1.4.0 and deepworkplan-vim
+1.0.1).
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
