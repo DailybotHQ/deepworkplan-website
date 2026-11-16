@@ -134,7 +134,7 @@ v2.0.1 はプロトコル 2 を維持します。`--brain-kinds` の既定値を
 
 v2.0.2 はプロトコル 2 を維持します。ask モードの pick-v2 起動引数では、任意の `--model <name>` の後にある末尾の `--ask` を 1 つだけ受け付け、起動前に取り除きます。daemon 自身が `--ask --trust-cwd` を追加します。それ以外の位置にある `--ask`、CLI 固有の権限フラグ、`--` の後の引数は引き続き拒否されます。Kit 1.4.x の起動引数は変更なく受け付けます。末尾に改行がある pane アドレスは拒否されます。
 
-v2.1.0 はプロトコル 2 を維持します。`fleet ui` では各グループに `Attention`、`Active`、`Waiting`、`Done`、`All` のビューが追加され、キューもグループ化できるようになりました。マップには任意項目 `state_updated_at` と `unreadable_reason` が追加されます。人が起動した daemon は安全に受け入れられない権限や計画承認のダイアログを拒否します。agent 自身の作業上の質問は拒否せず、ログイン、権限バイパスの確認、フォルダー信頼は引き続き人が扱います。brain の拒否は明示的に処理され、1 時間に 3 回拒否するとその brain は退役します。分類付き blocker を brain に渡せるのは `resolver: lead` かつ class が none、C3、C4、C7 の場合だけです。C1、C2、C5、C6 は人が扱います。pack 8.0.0 の journal-event/v8 blocker event と plan-snapshot/v8 blocker data も読み取ります。
+v2.1.0 はプロトコル 2 を維持します。`fleet ui` では各グループに `Attention`、`Active`、`Waiting`、`Done`、`All` のビューが追加され、キューもグループ化できるようになりました。マップには任意項目 `state_updated_at` と `unreadable_reason` が追加されます。人が起動した daemon は安全に受け入れられない権限や計画承認のダイアログを拒否します。agent 自身の作業上の質問は拒否せず、ログイン、権限バイパスの確認、フォルダー信頼は引き続き人が扱います。brain の拒否は明示的に処理され、1 時間に 3 回拒否するとその brain は退役します。分類付き blocker について brain に問い合わせられるようになりました。`ask_lead_to_resolve` アクションは、class が none、C3、C4、C7 の場合に限り、`resolver: lead` の blocker を計画の lead に送れます。C1（承認）、C2（同意またはログイン）、C5（損害）、C6（規約）は人が扱い、C1–C7 以外の class は拒否されます。pack 8.0.0 の journal-event/v8 blocker event と plan-snapshot/v8 blocker data も読み取ります。
 
 ## 補足
 

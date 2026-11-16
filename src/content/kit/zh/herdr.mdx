@@ -134,7 +134,7 @@ v2.0.1 版保持协议 2。默认 `--brain-kinds` 改为 `claude`（仍可选择
 
 v2.0.2 版保持协议 2。在 ask 模式的 pick-v2 启动参数中，可在可选的 `--model <name>` 后接受且仅接受一个末尾的 `--ask`，并在启动前移除；daemon 会自行添加 `--ask --trust-cwd`。其他位置的 `--ask`、CLI 自身的权限标志以及 `--` 后的参数仍会被拒绝。Kit 1.4.x 的启动参数保持不变，仍可接受。末尾带换行符的 pane 地址会被拒绝。
 
-v2.1.0 版保持协议 2。`fleet ui` 在各分组中新增 `Attention`、`Active`、`Waiting`、`Done` 和 `All` 视图，也包括队列；地图新增可选字段 `state_updated_at` 和 `unreadable_reason`。由人启动的 daemon 会拒绝它无法安全接受的权限或计划审批对话框；它不会拒绝 agent 自己提出的工作问题，登录、绕过权限确认和文件夹信任仍由人处理。brain 的拒绝会被明确处理；一小时内拒绝三次会退役该 brain。只有当 `resolver: lead` 且类别为 none、C3、C4 或 C7 时，带类别的阻塞才可交给 brain；C1、C2、C5 和 C6 仍由人处理。此版本还读取 pack 8.0.0 的 journal-event/v8 阻塞事件和 plan-snapshot/v8 阻塞数据。
+v2.1.0 版保持协议 2。`fleet ui` 在各分组中新增 `Attention`、`Active`、`Waiting`、`Done` 和 `All` 视图，也包括队列；地图新增可选字段 `state_updated_at` 和 `unreadable_reason`。由人启动的 daemon 会拒绝它无法安全接受的权限或计划审批对话框；它不会拒绝 agent 自己提出的工作问题，登录、绕过权限确认和文件夹信任仍由人处理。brain 的拒绝会被明确处理；一小时内拒绝三次会退役该 brain。现在可以就带类别的阻塞向 brain 提问。它的 `ask_lead_to_resolve` 操作只有在类别为 none、C3、C4 或 C7 时，才能将带 `resolver: lead` 的阻塞转交给计划 lead；C1（审批）、C2（同意或登录）、C5（损害）和 C6（条款）仍由人处理，C1–C7 以外的类别会被拒绝。此版本还读取 pack 8.0.0 的 journal-event/v8 阻塞事件和 plan-snapshot/v8 阻塞数据。
 
 ## 备注
 
