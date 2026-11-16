@@ -8,7 +8,7 @@ section: Standard
 
 # Dokümantasyon standardı
 
-> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 8.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
 
 **Sürüm 5.0.0.** Bu standart, Deep Work Plan’lerin yapılarını, görevlerini ve ilerlemelerini nasıl belgelediğini ve bir deponun bir ajanın güvenle hareket edebilmesi için kendi kendini nasıl belgelediğini tanımlar. DWP metodolojisi altında oluşturulan her plan için geçerlidir. Bu sürüm, belgenin kendi sürüm numarasını eşlik ettiği DWP standardıyla hizalar — mevcut hiçbir gereksinim değişmez — ve aşağıda açıklanan sade-dizin bütçesi zorlamasını ve özellik katmanını ekler. MUST, SHOULD ve MAY anahtar kelimeleri, RFC 2119’da tanımlandığı şekilde kullanılır.
 
@@ -17,7 +17,6 @@ section: Standard
 Kök `AGENTS.md` dosyası 150–500 satırlık bir bütçe içinde KALMALIDIR. Oluşturulan veya harness tarafından bakımı yapılan içerik bunu aşacaksa, ajan ayrıntıyı sahip olduğu `docs/` kılavuzuna (veya modül/özellik belgesine) TAŞIMAK ve dizinden ona bağlantı vermek ZORUNDADIR — hiçbir şey atılmaz, yalnızca yeniden konumlandırılır ve dizin, yerinden taşınan içeriği alan her belgeye bağlantı VERMEK ZORUNDADIR. Bütçeyi aşan, elle yazılmış mevcut bir `AGENTS.md` asla sessizce yeniden yazılmaz: ajan somut bir geçiş önerisi sunar (neyin nereye taşınacağı, hangi bağlantıların ekleneceği) ve bunu yalnızca geliştiricinin onayıyla uygular. Bir uyumluluk denetleyicisi bütçeyi tavsiye niteliğinde ele alır, çünkü satır sayısı nesneldir ama yazarlık nesnel değildir — MUST, dosyayı kim yazdığına dair bir denetleyicinin tahminini değil, dosyayı oluşturan veya güncelleyen harness'i bağlar. `AGENTS.md`, var olmayan bir `docs/` dosyasına bağlantı VERMEMELİDİR.
 
 Aşağıdaki modül başına dokümantasyon katmanının üzerinde bir **özellik katmanı** yer alır: tek bir modülden daha büyük, önemli bir yetenek alanı, kendi kodunun yanında kendi `README.md`'si aracılığıyla erişilen kendi `docs/` klasörünü alır. Bir alan, iki veya daha fazla ana modülü kapsadığında, kendi kendine yeten bir alt-uygulama veya alt sistem dizinine sahip olduğunda ya da birden çok tüketicinin bağımlı olduğu kendi sözleşmelerini (bir API yüzeyi, olay veya şema sözleşmeleri) taşıdığında hak kazanır. Bir alan önemli olarak kaydedildiğinde, özellik `docs/`'u var OLMALIDIR ve en önemli girdileri, alanın kapsadığı modüllerden ve kök `AGENTS.md` dizininden, tıpkı modül başına belgeler gibi bağlanMALIDIR. Kasıtlı olarak belgelenmemiş bırakılan bir alan, kaydedilmiş bir gerekçe taşır — bir gözden kaçırma değil, bir karardır.
-
 ## Plan README
 
 Her plan, şunları içeren bir `README.md` dosyasına SAHİP OLMALIDIR:

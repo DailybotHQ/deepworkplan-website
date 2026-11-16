@@ -74,7 +74,7 @@ La validation fait partie de la tâche, ce n’est pas un ajout après coup : ch
 
 ## v6 et v7 : la même méthodologie, une structure plus stricte
 
-La norme DWP actuelle est 7.0.0, mise en œuvre par la ligne de skill 7.x. Ce pack utilise v7 par défaut pour chaque nouveau plan ; une demande explicite de `v6` matérialise toujours un plan v6. Les plans v1, v2, v5 et v6 existants conservent leur génération enregistrée et ne sont jamais migrés silencieusement ; le passage d’un plan v5 à v6 nécessite une demande de migration explicite.
+Le pack v8 crée les nouveaux plans avec `plan-contract/v8` par défaut. Les plans existants conservent leur génération enregistrée ; la migration exige un `refine migrate` explicite.
 
 v6 conserve la même méthodologie plan → tâches → barrières de validation → achèvement, les mêmes commandes slash et l’emplacement `.dwp/plans/`. La structure d’ingénierie devient plus stricte avec un contrat, un journal, des manifestes de contexte par tâche, un ordonnanceur et le refus d’une liste d’autorisations vide. v7 conserve cette couche d’enregistrement et ajoute un marqueur de tâche optionnel `parallel_safe`, un événement de journal `delegation` pour le travail borné confié à un autre agent, ainsi que le registre d’addons `.dwp/config.json` ; sans addon de délégation activé, chaque plan s’exécute toujours séquentiellement dans la session courante. La décision d’architecture est GO ; la non-infériorité empirique des résultats des agents n’a pas été mesurée.
 

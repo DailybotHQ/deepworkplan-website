@@ -8,7 +8,7 @@ section: Record layer
 
 # Kayıt katmanı
 
-> **Sürüm kapsamı:** Bu sayfa, güncel standart DWP 7.0.0'ın üzerine kurulduğu normatif v6 kayıt katmanını yeniden ifade eder. `v7.12.2` sürümündeki kanonik kaynaklar: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) ve [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir. v5 planları [plan durumu](/spec/plan-state) katmanını korur ve asla örtük olarak göç ettirilmez.
+> **Sürüm kapsamı:** Bu sayfa, güncel standart DWP 8.0.0'ın üzerine kurulduğu normatif v6 kayıt katmanını yeniden ifade eder. `v8.0.0` sürümündeki kanonik kaynaklar: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_CONTRACT.md) ve [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Bu sayfa ile bu dosyalar ayrıştığında dosyalar geçerlidir. v5 planları [plan durumu](/spec/plan-state) katmanını korur ve asla örtük olarak göç ettirilmez.
 
 **Sürüm 6.0.0, 7.0.0'da genişletildi. Durum: Kararlı.** Kayıt katmanı, anlatıya dayalı tamamlanmanın yerine kayıtları koyar: sözleşme otoritedir, günlük bellektir, yazma işini yardımcı araçlar yapar ve üretilen her dosya bir projeksiyondur. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
@@ -17,7 +17,6 @@ section: Record layer
 Bir plan, yazılmış iki yapıt ve korunan bir diziden oluşur. Plan Markdown'ı (`README.md` ve görev dosyaları) neyin yapılacağını söyler. **Sonuç sözleşmesi** (`contract.json`) neyin bitmiş sayılacağını ve planın neyi yapmaya yetkili olduğunu söyler. **Günlük** (`journal.ndjson`) gerçekte ne olduğunu kaydeder. `state.json` ve `views/` günlükten yeniden üretilir ve elle düzenlenMEMELİDİR; üretilen bir dosya ile günlük çeliştiğinde günlük geçerlidir ve dosya yeniden üretilir.
 
 ## Neslin tespiti
-
 Bir plan klasörü, ancak ve ancak `contract` işaretçisi çözümlenen bir `manifest.json`, bir `contract.json` veya bir `contracts/` revizyon zinciri taşıyorsa v6 hattı bir plandır. Tespit, kurulu paket sürümünü asla değil, bu yapıtları KULLANMALIDIR: güncel bir paket v5 planları barındırabilir ve daha eski bir paket bir v6 planıyla karşılaşabilir.
 
 Sözleşmenin `schema` URL'si onun **neslini** adlandırır; manifesto ve her günlük olayı bunu yansıtır:
@@ -26,9 +25,10 @@ Sözleşmenin `schema` URL'si onun **neslini** adlandırır; manifesto ve her g�
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` ve `delegation` olayı ([Devretme](/spec/delegation)) |
-| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` ve döngü yetkisi |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` ve döngü yetkisi |
+v8 canlı anlık görüntüsü [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json) kullanır.
 
-7.x paketinin oluşturduğu yeni planlar varsayılan olarak v7'dir; açık bir `v6` isteği yine bir v6 sözleşmesi oluşturur. Bir plan neslini asla değiştirmez ve nesilleri karıştıran bir günlük reddedilMELİDİR. Her iki nesil de aynı [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) biçimine yansıtılır.
+8.x paketinin oluşturduğu yeni planlar varsayılan olarak v7'dir; açık bir `v6` isteği yine bir v6 sözleşmesi oluşturur. Bir plan neslini asla değiştirmez ve nesilleri karıştıran bir günlük reddedilMELİDİR. Her iki nesil de aynı [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) biçimine yansıtılır.
 
 ## Sonuç sözleşmesi
 

@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite planlar
 
-> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 8.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
 
 **Sürüm 5.0.0. Durum: Kararlı.** Bu belge, [DWP spesifikasyonu](/spec/dwp-specification) ile birlikte tanıtılan Lite plan temsilini belirtir: yürütülemeyen bir taslak aşaması olmadan doğrudan somutlaştırılan, küçük ila orta ölçekli, sınırlı işler için bir plan biçimi. MUST, MUST NOT, SHOULD, SHOULD NOT ve MAY anahtar kelimeleri, RFC 2119'da açıklandığı şekilde yorumlanacaktır.
 
@@ -17,7 +17,6 @@ section: Workflow
 Bir plan, `manifest.json`'da `plan_format` olarak bir kez kaydedilen iki temsilden biri OLMALIDIR: **Full**, her görev için `<n>.task_<slug>.md` altında bir dosya saklar; **Lite**, kompakt, yürütülebilir görev kayıtlarını, her biri kararlı bir `{#task-N}` çapasının arkasında, `README.md` içinde satır içi saklar. Bir Lite plan, kısmi veya gayriresmi bir Full plan değildir: her görev kaydı, [Görev anatomisi](/spec/dwp-specification#task-anatomy)'nin Full için tanımladığıyla aynı normatif biçimde bir hedef, bir Dokunulan Yüzey, kabul kriterleri, bir doğrulama kapısı ve bir tamamlanma günlüğü TAŞIMAK ZORUNDADIR.
 
 Dört eksen bir planın durumunu tanımlar ve karıştırılmak yerine bağımsız olarak İZLENMEK ZORUNDADIR:
-
 | Eksen | Değerler | Anlam |
 |------|--------|---------|
 | Biçim | `lite`, `full` | Görev kayıtlarının nerede yaşadığı |

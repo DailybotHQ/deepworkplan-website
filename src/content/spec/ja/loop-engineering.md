@@ -14,10 +14,9 @@ section: ループエンジニアリング
 
 承認済み計画は、人間が逐次監督しなくても完了まで実行されます。自律動作の既定範囲は**計画に記録された権限内**です。人間には通知し、通常の進行の判断待ちにはしません。ただしログインと認証情報は人間が扱い、計画独自の C1–C7 gates（公開、push、外部メッセージなど）は、計画に事前承認が記録されていない限り停止条件です。v7 のルールは維持されます。方法論は単独で機能し、アドオンは強化のみ行います。
 
-## ループの意味
+### 1.1. ループの意味
 
 ### 登録と監視
-
 Herdr アドオンを有効にすると、v8 pack の `execute` が lead レコードを取得し、計画の後継を記録します。lead レコードがあり、状態を読み取れる計画のみ監視対象です。人間が `herdr-peers autopilot --loop` を起動します。これは daemon であり、ログイン項目やシステムサービスではありません。一つの daemon が有効な Herdr マシンから報告される計画を監視できます。lead レコードがない計画は監視されません。
 
 ### 継続、停滞、フェイルオーバー
@@ -30,7 +29,7 @@ lead がいなくなると、daemon は一覧の最初の到達可能な後継�
 
 任意の `--brain` は daemon のルールで決められないケースのために専用の判断 agent を起動します。閉じたアクション一覧からのみ選べます。実行主体は daemon だけです。許可された選択を検証して実行し、brain の自由文は実行しません。計画の `autonomy` ブロックも brain を許可する必要があります。
 
-ループは停滞、ブロック、lead の喪失、完了、キュー結果などを計画イベントとして記録します。任意の `--notify` 統合を使うと、daemon は設定済み notifier に `plan-event-v1` オブジェクトを送り、pack の Dailybot notifier が対応イベントをチーム通知に変換します。通知は作業を承認せず、計画レコードも変えません。フリートマップと `herdr-peers fleet ui` は複数マシンの agent と計画を表示します。UI は読み取り専用で、計画状態を変更せず agent に促しません。タグ付きの仕様は[herdr-peers v2.0.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md)と[protocol](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md)を参照してください。
+ループは停滞、ブロック、lead の喪失、完了、キュー結果などを計画イベントとして記録します。任意の `--notify` 統合を使うと、daemon は設定済み notifier に `plan-event-v1` オブジェクトを送り、pack の Dailybot notifier が対応イベントをチーム通知に変換します。通知は作業を承認せず、計画レコードも変えません。フリートマップと `herdr-peers fleet ui` は複数マシンの agent と計画を表示します。UI は読み取り専用で、計画状態を変更せず agent に促しません。タグ付きの仕様は[herdr-peers v2.1.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md)と[protocol](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md)を参照してください。
 
 ## 2. `autonomy` ブロック（plan-contract/v8）
 
@@ -46,9 +45,12 @@ lead がいなくなると、daemon は一覧の最初の到達可能な後継�
 
 pane アドレスは Herdr の正確な形式です：`(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`。machine ID は `-` で始まりません。これらの設定は、促しの対象、イベント通知先、brain の動作可否、キュー参加方法を制限します。受け入れ基準や gates は変更しません。
 
-## 3. 構造化ブロッカーと進捗
+## 3. 構造化ブロッカー
+### 3.1. ブロッカーレコード
 
+### 3.2. 参照場所
 ブロックされた計画は、`state.json` の `blocked` または `blocker` レコードに C クラスと任意の `resolver` を記録します。`resolver` は `lead` または `human` で、省略時は `human` です。`lead` は、認証情報、ログイン、同意、支払い、main への push、release、削除なしで、記録済み権限内に解決できることを意味します。brain を含むループは `lead` と記録されたブロッカーのみ lead に解決を頼めます。それ以外は人間に通知し、促しで迂回しません。
+### 3.3. ループができること
 
 タグ付き herdr-peers のフリートマップは、計画自身の `PROGRESS.md` 最大14行を整理済み要約として表示できます。これは観測情報であり、権限付与でも機械可読ヘッダーの公開 schema でもありません。pack v8 ラインで予定されるヘッダー形式は、規範とする前に 8.0.0 tag で確認する必要があります。
 

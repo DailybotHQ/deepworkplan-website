@@ -8,7 +8,7 @@ section: Workflow
 
 # Piani Lite
 
-> **Ambito della versione:** questo è un documento base v5.0.0 mantenuto. Lo standard attuale, DWP 7.0.0, richiede anche le estensioni `V6_*.md` e `V7_*.md` applicabili elencate nell’[indice delle specifiche](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). I piani v5 e v6 esistenti mantengono le regole registrate.
+> **Ambito della versione:** questo è un documento base v5.0.0 mantenuto. Lo standard attuale, DWP 8.0.0, richiede anche le estensioni `V6_*.md` e `V7_*.md` applicabili elencate nell’[indice delle specifiche](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). I piani v5 e v6 esistenti mantengono le regole registrate.
 
 **Versione 5.0.0. Stato: Stabile.** Questo documento specifica la rappresentazione di piano Lite introdotta insieme alla [Specifica DWP](/spec/dwp-specification): un formato di piano per lavoro delimitato di dimensione piccola-media che viene materializzato direttamente, senza una fase di bozza non eseguibile. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 Un piano DEVE essere una di due rappresentazioni, registrata una volta in `manifest.json` come `plan_format`: **Full** memorizza un file per attività sotto `<n>.task_<slug>.md`; **Lite** memorizza record di attività compatti ed eseguibili inline in `README.md`, ciascuno dietro un'ancora stabile `{#task-N}`. Un piano Lite non è un piano Full parziale o informale: ogni record di attività DEVE comunque portare un obiettivo, una Superficie toccata, criteri di accettazione, un validation gate e un Completion & Log, nella stessa forma normativa che l'[Anatomia dell'attività](/spec/dwp-specification#task-anatomy) definisce per Full.
 
 Quattro assi descrivono lo stato di un piano, e DEVONO essere tracciati indipendentemente anziché confusi tra loro:
-
 | Asse | Valori | Significato |
 |------|--------|-------------|
 | Formato | `lite`, `full` | Dove vivono i record di attività |

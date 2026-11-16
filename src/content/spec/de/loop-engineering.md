@@ -14,10 +14,9 @@ Diese Seite definiert den Planvertrag für Loop Engineering. Der **Plan** bleibt
 
 Ein genehmigter Plan läuft ohne menschliche Einzelaufsicht bis zum Ende. Autonomie gilt **innerhalb der im Plan aufgezeichneten Befugnisse**; der Mensch wird benachrichtigt und muss nicht auf normale Fortschritte warten. Logins und Zugangsdaten bleiben menschliche Aufgaben. Die C1–C7-Gates des Plans (etwa Veröffentlichung, Push oder externe Nachrichten) halten weiterhin an, sofern der Plan keine Vorabgenehmigung festhält. Die v7-Regel bleibt bestehen: Die Methode funktioniert allein; Addons verstärken sie nur.
 
-## Loop-Semantik
+### 1.1. Loop-Semantik
 
 ### Registrierung und Beobachtung
-
 Ist das Herdr-Addon aktiv, beansprucht der `execute`-Ablauf des v8-Packs den Lead-Eintrag und verzeichnet die Nachfolge. Überwacht wird ein Plan nur mit Lead-Eintrag und lesbarem Status. Ein Mensch startet `herdr-peers autopilot --loop`; der Daemon ist weder Login-Element noch Systemdienst. Ein Daemon kann Pläne aller aktivierten Herdr-Maschinen beobachten. Pläne ohne Lead-Eintrag werden nicht überwacht.
 
 ### Fortsetzung, Stillstand und Failover
@@ -30,7 +29,7 @@ Ist der Lead verschwunden, bittet der Daemon den ersten erreichbaren Nachfolger 
 
 Das optionale `--brain` startet einen dedizierten Entscheidungsagenten für Fälle, die Daemon-Regeln nicht entscheiden können. Er darf nur aus einer geschlossenen Aktionsliste wählen. Der Daemon bleibt der einzige Akteur: Er prüft die zulässige Wahl und führt sie aus; freien Brain-Text führt er nie aus. Der `autonomy`-Block des Plans muss das Brain ebenfalls zulassen.
 
-Der Loop zeichnet Planereignisse auf, darunter Stillstand, Blockierung, Lead-Verlust, Abschluss und Warteschlangenergebnisse. Mit der optionalen `--notify`-Integration sendet der Daemon ein `plan-event-v1`-Objekt an den konfigurierten Notifier; der Dailybot-Notifier des Packs macht unterstützte Ereignisse zu Team-Meldungen. Eine Meldung genehmigt keine Arbeit und ändert keinen Plan-Eintrag. Flottenkarte und `herdr-peers fleet ui` zeigen Agenten und Pläne auf mehreren Maschinen. Die Oberfläche ist schreibgeschützt: Sie ändert keinen Planstatus und stößt keine Agenten an. Die getaggte Semantik steht in [herdr-peers v2.0.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md) und im [Protokoll](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md).
+Der Loop zeichnet Planereignisse auf, darunter Stillstand, Blockierung, Lead-Verlust, Abschluss und Warteschlangenergebnisse. Mit der optionalen `--notify`-Integration sendet der Daemon ein `plan-event-v1`-Objekt an den konfigurierten Notifier; der Dailybot-Notifier des Packs macht unterstützte Ereignisse zu Team-Meldungen. Eine Meldung genehmigt keine Arbeit und ändert keinen Plan-Eintrag. Flottenkarte und `herdr-peers fleet ui` zeigen Agenten und Pläne auf mehreren Maschinen. Die Oberfläche ist schreibgeschützt: Sie ändert keinen Planstatus und stößt keine Agenten an. Die getaggte Semantik steht in [herdr-peers v2.1.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) und im [Protokoll](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md).
 
 ## 2. Der `autonomy`-Block (plan-contract/v8)
 
@@ -46,9 +45,12 @@ Das optionale `autonomy`-Objekt auf oberster Ebene ist geschlossen; unbekannte S
 
 Eine Pane-Adresse folgt exakt Herdrs Form: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. Eine Maschinen-ID beginnt nie mit `-`. Die Felder begrenzen, wer angestoßen wird und Meldungen erhält, ob ein Brain handeln darf und wie der Plan an einer Warteschlange teilnimmt. Sie ändern weder Abnahmekriterien noch Gates.
 
-## 3. Strukturierte Blocker und Fortschritt
+## 3. Strukturierte Blocker
+### 3.1. Der Blocker-Eintrag
 
+### 3.2. Wo Leser ihn finden
 Ein blockierter Plan zeichnet eine C-Klasse und ein optionales `resolver`-Feld im `blocked`- oder `blocker`-Eintrag von `state.json` auf. `resolver` ist `lead` oder `human`; ohne Angabe gilt `human`. `lead` bedeutet, dass der Blocker innerhalb der aufgezeichneten Befugnisse lösbar ist, ohne Zugangsdaten, Login, Zustimmung, Zahlung, Push nach main, Release oder Löschung. Der Loop einschließlich Brain darf einen Lead nur bei einem mit `lead` markierten Blocker um Lösung bitten. Andere Blocker werden dem Menschen gemeldet und nicht durch Anstöße umgangen.
+### 3.3. Was der Loop tun darf
 
 Die getaggte Herdr-Flottenkarte kann bis zu 14 bereinigte Zeilen aus dem `PROGRESS.md` des Plans anzeigen. Das sind Beobachtungsdaten, keine Befugnis und kein veröffentlichtes Schema für einen maschinenlesbaren Fortschrittskopf. Das in der v8-Packlinie geplante Kopfzeilenformat muss vor normativer Verwendung gegen Tag 8.0.0 geprüft werden.
 

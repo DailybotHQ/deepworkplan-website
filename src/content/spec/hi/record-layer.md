@@ -8,7 +8,7 @@ section: Record layer
 
 # रिकॉर्ड परत
 
-> **संस्करण दायरा:** यह पृष्ठ उस मानक v6 रिकॉर्ड परत को पुनः प्रस्तुत करता है जिस पर वर्तमान मानक, DWP 7.0.0, आधारित है। रिलीज़ `v7.12.2` पर प्रामाणिक स्रोत: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) और [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं। v5 योजनाएँ [योजना-स्थिति](/spec/plan-state) परत बनाए रखती हैं और कभी परोक्ष रूप से माइग्रेट नहीं की जातीं।
+> **संस्करण दायरा:** यह पृष्ठ उस मानक v6 रिकॉर्ड परत को पुनः प्रस्तुत करता है जिस पर वर्तमान मानक, DWP 8.0.0, आधारित है। रिलीज़ `v8.0.0` पर प्रामाणिक स्रोत: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_CONTRACT.md) और [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं। v5 योजनाएँ [योजना-स्थिति](/spec/plan-state) परत बनाए रखती हैं और कभी परोक्ष रूप से माइग्रेट नहीं की जातीं।
 
 **संस्करण 6.0.0, 7.0.0 में विस्तारित। स्थिति: स्थिर।** रिकॉर्ड परत वर्णनात्मक पूर्णता को रिकॉर्ड से प्रतिस्थापित करती है: अनुबंध प्राधिकार है, जर्नल स्मृति है, सहायक टूल लेखन करते हैं, और हर जनित फ़ाइल एक प्रक्षेपण है। कीवर्ड MUST, MUST NOT, SHOULD, SHOULD NOT और MAY की व्याख्या RFC 2119 में वर्णित अनुसार की जानी है।
 
@@ -17,7 +17,6 @@ section: Record layer
 एक योजना दो लिखित आर्टिफ़ैक्ट और एक संरक्षित अनुक्रम है। योजना markdown (`README.md` और कार्य फ़ाइलें) बताती है कि क्या किया जाएगा। **परिणाम अनुबंध** (`contract.json`) बताता है कि किसे पूर्ण माना जाएगा और योजना को क्या करने की अनुमति है। **जर्नल** (`journal.ndjson`) दर्ज करता है कि वास्तव में क्या हुआ। `state.json` और `views/` जर्नल से पुनर्जनित होते हैं और इन्हें हाथ से संपादित MUST NOT किया जाना चाहिए; जब कोई जनित फ़ाइल और जर्नल असहमत हों, तो जर्नल मान्य होता है और फ़ाइल पुनर्जनित की जाती है।
 
 ## पीढ़ी की पहचान
-
 कोई योजना फ़ोल्डर v6-श्रृंखला की योजना है यदि और केवल यदि उसमें ऐसा `manifest.json` हो जिसका `contract` पॉइंटर हल होता हो, एक `contract.json` हो, या एक `contracts/` संशोधन-शृंखला हो। पहचान इन्हीं आर्टिफ़ैक्ट से MUST होनी चाहिए, स्थापित पैक के संस्करण से कभी नहीं: एक वर्तमान पैक v5 योजनाएँ रख सकता है, और एक पुराना पैक v6 योजना से मिल सकता है।
 
 अनुबंध का `schema` URL उसकी **पीढ़ी** बताता है, और मेनिफ़ेस्ट तथा हर जर्नल घटना उसी को दोहराते हैं:
@@ -26,9 +25,10 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` और `delegation` घटना ([प्रत्यायोजन](/spec/delegation)) |
-| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` और लूप अधिकार |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` और लूप अधिकार |
+v8 का सक्रिय स्नैपशॉट [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json) उपयोग करता है।
 
-7.x पैक द्वारा बनाई गई नई योजनाएँ डिफ़ॉल्ट रूप से v7 होती हैं; स्पष्ट `v6` अनुरोध अब भी v6 अनुबंध बनाता है। कोई योजना कभी पीढ़ी नहीं बदलती, और पीढ़ियों को मिलाने वाला जर्नल अस्वीकार MUST किया जाना चाहिए। दोनों पीढ़ियाँ एक ही [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) आकार में प्रक्षेपित होती हैं।
+8.x पैक द्वारा बनाई गई नई योजनाएँ डिफ़ॉल्ट रूप से v7 होती हैं; स्पष्ट `v6` अनुरोध अब भी v6 अनुबंध बनाता है। कोई योजना कभी पीढ़ी नहीं बदलती, और पीढ़ियों को मिलाने वाला जर्नल अस्वीकार MUST किया जाना चाहिए। दोनों पीढ़ियाँ एक ही [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) आकार में प्रक्षेपित होती हैं।
 
 ## परिणाम अनुबंध
 

@@ -1,6 +1,6 @@
 ---
 title: Stan planu
-description: "Warstwa stanu planów v5 (manifest.json, state.json, rekordy bramek, uzgadnianie) oraz to, jak plany v6 i v7 zastępują ją migawką wyprowadzoną z dziennika."
+description: "Warstwa stanu planów v5 (manifest.json, state.json, rekordy bramek, uzgadnianie) oraz to, jak plany v6, v7 i v8 zastępują ją migawką wyprowadzoną z dziennika."
 order: 8
 lang: pl
 section: State
@@ -8,16 +8,17 @@ section: State
 
 # Stan planu
 
-> **Zakres wersji:** Ta strona specyfikuje **warstwę stanu v5**, którą plany v5 zachowują przez cały cykl życia. Plany tworzone przez aktualny pakiet (DWP 7.0.0, wydanie `v7.12.2`) używają zamiast niej [warstwy rekordów](/spec/record-layer). W planie v6 lub v7 autorytetem jest kontrakt wyników (`contract.json`), źródłem prawdy jest dziennik tylko do dopisywania (`journal.ndjson`), a `state.json` jest **migawką pochodną** zgodną z [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Jest regenerowany przez `ledger.py project` i NIE MOŻE być edytowany ręcznie.
+> **Zakres wersji:** Ta strona specyfikuje **warstwę stanu v5**, którą plany v5 zachowują przez cały cykl życia. Plany tworzone przez aktualny pakiet (DWP 8.0.0, wydanie `v8.0.0`) używają zamiast niej [warstwy rekordów](/spec/record-layer). W planie v6 lub v7 autorytetem jest kontrakt wyników (`contract.json`), źródłem prawdy jest dziennik tylko do dopisywania (`journal.ndjson`), a `state.json` jest **migawką pochodną** zgodną z [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Jest regenerowany przez `ledger.py project` i NIE MOŻE być edytowany ręcznie.
 
 ## Która warstwa stanu ma zastosowanie
 
 | Generacja planu | Źródło prawdy | `state.json` | Schematy |
 | --- | --- | --- | --- |
 | v5 (oraz wcześniejsze plany v1/v2) | plan w Markdown, z tą warstwą JSON jako jego projekcją | zapisywany przez agenta w opisanych poniżej punktach protokołu | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 i v2 pozostają ważne dla starszych planów) |
-| v6 i v7 | kontrakt wraz z dziennikiem tylko do dopisywania | migawka rzutowana z dziennika, nigdy nie zapisywana ręcznie | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (lub ich odpowiedniki v6) |
+| v6, v7 i v8 | kontrakt wraz z dziennikiem tylko do dopisywania | migawka rzutowana z dziennika, nigdy nie zapisywana ręcznie | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (lub ich odpowiedniki v6) |
 
-Plan nigdy nie zmienia generacji niejawnie: plany v5 zachowują te reguły, a przeniesienie planu do v6 jest jawną migracją z podglądem ([Warstwa rekordów](/spec/record-layer#coexistence-and-migration)). Źródła kanoniczne: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md).
+Plany v8 używają `plan-manifest/v7` wraz z `plan-contract/v8`, `journal-event/v8` i `plan-snapshot/v8`; schematy manifestu i zdarzeń dziennika v7 pozostają obsługiwane dla istniejących planów.
+Plan nigdy nie zmienia generacji niejawnie: plany v5 zachowują te reguły, a przeniesienie planu do v6 jest jawną migracją z podglądem ([Warstwa rekordów](/spec/record-layer#coexistence-and-migration)). Źródła kanoniczne: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Wersja 5.0.0. Status: stabilna.** Niniejszy dokument specyfikuje warstwę stanu planu odczytywalnego maszynowo metodyki Deep Work Plan, teraz dostosowaną do własnego numeru wersji standardu DWP — żadne istniejące wymaganie nie zostaje osłabione przez tę zmianę numeracji. Ta rewizja dokumentuje również strzeżony aktualizator stanu, zweryfikowaną publikację planu oraz zasady prawdziwości dowodów, które musi spełniać ukończony plan (zob. poniżej). Słowa kluczowe MUST (MUSI), MUST NOT (NIE MOŻE), SHOULD (POWINIEN), SHOULD NOT (NIE POWINIEN) i MAY (MOŻE) interpretuje się zgodnie z opisem w RFC 2119.
 
@@ -236,7 +237,7 @@ Oba schematy są wersjonowane przez URL. Pola addytywne są dozwolone w ramach w
 
 ## Schematy v7 i v6 oraz zgodność
 
-Aktualny pakiet 7.x domyślnie tworzy plany **v7**. v7 to generacja kontraktu warstwy zapisów v6: [manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) wskazuje [kontrakt v7](https://deepworkplan.com/schema/plan-contract/v7.json) — kontrakt v6 plus opcjonalny znacznik zadania `parallel_safe` — a każde [zdarzenie dziennika v7](https://deepworkplan.com/schema/journal-event/v7.json) może także zapisać `delegation` (uruchomione, ukończone, nieudane, anulowane), które samo w sobie nigdy nie jest dowodem: wynik delegata pozostaje jedynie deklarowany, dopóki nie zaobserwuje go własny wykonawca planu. Aktywna migawka i manifest kontekstu zadania są współdzielone z v6. Plan nigdy nie łączy generacji, a jawne żądanie `v6` nadal materializuje plan v6.
+Aktualny pakiet 8.x domyślnie tworzy plany **v8**. v8 to generacja kontraktu warstwy zapisów v6: [manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) wskazuje [kontrakt v7](https://deepworkplan.com/schema/plan-contract/v7.json) — kontrakt v6 plus opcjonalny znacznik zadania `parallel_safe` — a każde [zdarzenie dziennika v7](https://deepworkplan.com/schema/journal-event/v7.json) może także zapisać `delegation` (uruchomione, ukończone, nieudane, anulowane), które samo w sobie nigdy nie jest dowodem: wynik delegata pozostaje jedynie deklarowany, dopóki nie zaobserwuje go własny wykonawca planu. Aktywna migawka i manifest kontekstu zadania są współdzielone z v6. Plan nigdy nie łączy generacji, a jawne żądanie `v6` nadal materializuje plan v6.
 
 v6 zachowuje metodykę v5 i dodaje ściślejszą strukturę inżynieryjną dla nowych planów. Manifest tożsamości wskazuje wersjonowany kontrakt; dziennik wyłącznie dopisywany zapisuje uprawnienia i zdarzenia; manifesty kontekstu jawnie określają wybór kontekstu dla zadania; harmonogram przydziela tylko kwalifikującą się pracę; a aktywna projekcja `state.json` to migawka utworzona z dziennika. Pusta lista dozwolonych możliwości jest odrzucana. To decyzje architektoniczne, a nie dowód lepszych wyników agentów: nie mierzono niegorszości tych wyników.
 
@@ -250,4 +251,4 @@ Schematy manifestu i aktywnej migawki v6:
 
 Aktywna projekcja v6 to migawka, a nie przemianowany plik stanu v5. `plan-state/v5.json` pozostaje opublikowany dla planów v5; `plan-state/v6.json` nie istnieje. Istniejące plany v1, v2 i v5 zachowują zapisaną generację schematu i nigdy nie są po cichu przepisywane.
 
-Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slugi v6 i v7 mają 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.
+Nowe plany otrzymują monotonicznie rosnące identyfikatory liczbowe o długości co najmniej trzech cyfr (na przykład `PLAN_001_add_payment_webhooks/`). Zamrożone schematy v5 liczą identyfikator liczbowy jako jedno słowo, dlatego slug v5 ma 2–4 słowa, a slugi v6, v7 i v8 mają 2–5. Istniejące nienumerowane foldery `PLAN_<slug>/` pozostają czytelne i nigdy nie są przemianowywane. Jeśli istnieją plany numerowane, `latest` wskazuje plan o najwyższym identyfikatorze liczbowym.

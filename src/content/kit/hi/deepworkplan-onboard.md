@@ -35,13 +35,16 @@ usage: /deepworkplan-onboard
 
 एक रिपॉज़िटरी शून्य वैकल्पिक ऐडऑन के साथ पूरी तरह अनुरूप होती है; AI Diff Reviewer स्थानीय समीक्षा संस्करण 2.3.0 से baseline का हिस्सा है। पता लगाई गई वास्तविकता हमेशा प्रीसेट धारणाओं पर भारी पड़ती है।
 
-## v7 स्कीमा संदर्भ
+## स्कीमा संदर्भ
 
-v7 योजनाओं के लिए — जो वर्तमान 7.x पैक का डिफ़ॉल्ट है — मशीन-पठनीय स्कीमा कैटलॉग इन स्थिर URL पर प्रकाशित है। लाइव प्रोजेक्शन एक स्नैपशॉट है जो v6 के साथ साझा है; `plan-state/v6.json` या `plan-state/v7.json` मौजूद नहीं है।
+v8 योजनाओं के लिए मशीन-पठनीय स्कीमा कैटलॉग नीचे दिए गए स्थिर URL पर प्रकाशित है। v8, `plan-manifest/v7` के साथ `plan-contract/v8`, `journal-event/v8` और `plan-snapshot/v8` उपयोग करता है; मौजूदा योजनाओं के लिए v7 manifest और journal-event स्कीमा समर्थित रहते हैं।
 
 - **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
 - **Plan contract:** https://deepworkplan.com/schema/plan-contract/v7.json (v6 contract के साथ एक वैकल्पिक `parallel_safe` टास्क मार्कर)
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (`delegation` इवेंट जोड़ता है)
+- **v8 अनुबंध:** https://deepworkplan.com/schema/plan-contract/v8.json
+- **v8 जर्नल इवेंट:** https://deepworkplan.com/schema/journal-event/v8.json
+- **v8 योजना स्नैपशॉट:** https://deepworkplan.com/schema/plan-snapshot/v8.json
 - **Plan snapshot (लाइव प्रोजेक्शन, v6 के साथ साझा):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (v6 के साथ साझा):** https://deepworkplan.com/schema/context-manifest/v6.json
 - **रिपॉजिटरी कॉन्फ़िगरेशन:** https://deepworkplan.com/schema/dwp-config/v1.json
@@ -52,4 +55,4 @@ v7 योजनाओं के लिए — जो वर्तमान 7.x �
 
 v6 योजनाएँ अपने v6 स्कीमा बनाए रखती हैं ([manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [contract](https://deepworkplan.com/schema/plan-contract/v6.json), [journal event](https://deepworkplan.com/schema/journal-event/v6.json)); मौजूदा v5 योजनाएँ v5 state स्कीमा का उपयोग करती रहेंगी और पुरानी योजनाएँ कभी चुपचाप फिर से नहीं लिखी जातीं।
 
-वर्तमान 7.x पैक नए प्लान डिफ़ॉल्ट रूप से v7 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन के लिए स्पष्ट अनुरोध आवश्यक है। नई योजनाओं को कम-से-कम तीन अंकों वाली क्रमशः बढ़ती संख्यात्मक ID मिलती है (उदाहरण: `PLAN_001_add_payment_webhooks/`)। स्थिर v5 स्कीमा संख्यात्मक ID को एक शब्द गिनते हैं, इसलिए v5 slug में 2–4 शब्द और v7 slug में 2–5 शब्द होते हैं। मौजूदा बिना नंबर वाले `PLAN_<slug>/` फ़ोल्डर पढ़ने योग्य बने रहते हैं और उनका नाम कभी नहीं बदला जाता। नंबर वाली योजनाएँ मौजूद होने पर `latest` सबसे बड़ी संख्यात्मक ID वाली योजना को दर्शाता है।
+वर्तमान 8.x पैक नए प्लान डिफ़ॉल्ट रूप से v8 में बनाता है। मौजूदा प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन के लिए स्पष्ट अनुरोध आवश्यक है। नई योजनाओं को कम-से-कम तीन अंकों वाली क्रमशः बढ़ती संख्यात्मक ID मिलती है (उदाहरण: `PLAN_001_add_payment_webhooks/`)। स्थिर v5 स्कीमा संख्यात्मक ID को एक शब्द गिनते हैं, इसलिए v5 slug में 2–4 शब्द और v7 slug में 2–5 शब्द होते हैं। मौजूदा बिना नंबर वाले `PLAN_<slug>/` फ़ोल्डर पढ़ने योग्य बने रहते हैं और उनका नाम कभी नहीं बदला जाता। नंबर वाली योजनाएँ मौजूद होने पर `latest` सबसे बड़ी संख्यात्मक ID वाली योजना को दर्शाता है।

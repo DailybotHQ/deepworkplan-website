@@ -14,10 +14,9 @@ section: 루프 엔지니어링
 
 승인된 계획은 사람이 계속 지켜보지 않아도 끝까지 실행됩니다. 자율성은 **계획에 기록된 권한 안에서** 작동합니다. 로그인과 자격 증명, 그리고 계획 자체의 C1–C7 게이트(예: 게시, 푸시, 외부 메시지)는 계획에 사전 승인이 기록되지 않았다면 중단됩니다. 인간은 기다리게 하지 않고 알림을 받습니다. v7 규칙은 그대로입니다. 핵심 방법은 단독으로 작동하고 애드온은 이를 확장합니다.
 
-## 루프 의미
+### 1.1. 루프 의미
 
 ### 등록과 관찰
-
 Herdr 애드온을 사용하면 v8 팩의 `execute` 흐름이 lead 기록을 확보하고 계획의 승계 목록을 기록합니다. lead 기록과 읽을 수 있는 상태가 있는 계획만 관찰됩니다. 사람은 `herdr-peers autopilot --loop`을 시작합니다. 이는 daemon이지 로그인 항목이나 시스템 서비스가 아닙니다. 한 daemon이 활성화된 모든 Herdr 머신의 계획을 관찰할 수 있습니다. lead 기록이 없는 계획은 관찰하지 않습니다.
 
 ### 지속 실행, 정체 및 인계
@@ -30,7 +29,7 @@ lead가 사라지면 daemon은 승계 목록에서 처음으로 연결 가능한
 
 선택 사항인 `--brain`은 daemon 규칙으로 판단할 수 없는 경우에 전용 판단 에이전트를 시작합니다. brain은 닫힌 동작 목록에서만 선택합니다. daemon만 실제 행위자이며 허용된 선택을 검증해 실행합니다. 자유 형식 brain 텍스트를 실행하지 않습니다. 계획의 `autonomy` 블록도 brain을 허용해야 합니다.
 
-루프는 정체, 차단, lead 손실, 완료 및 대기열 결과 등의 계획 이벤트를 기록합니다. 선택적 `--notify` 통합을 사용하면 daemon이 설정된 알림기로 `plan-event-v1` 객체를 보냅니다. 팩의 Dailybot 알림기는 지원되는 이벤트를 팀 업데이트로 바꿉니다. 알림은 승인이나 계획 기록 변경이 아닙니다. 플릿 맵과 `herdr-peers fleet ui`는 여러 머신의 에이전트와 계획을 표시합니다. UI는 읽기 전용이며 계획 상태를 바꾸거나 에이전트를 프롬프트하지 않습니다. 자세한 내용은 [herdr-peers v2.0.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md) 및 [프로토콜](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md)을 참조하세요.
+루프는 정체, 차단, lead 손실, 완료 및 대기열 결과 등의 계획 이벤트를 기록합니다. 선택적 `--notify` 통합을 사용하면 daemon이 설정된 알림기로 `plan-event-v1` 객체를 보냅니다. 팩의 Dailybot 알림기는 지원되는 이벤트를 팀 업데이트로 바꿉니다. 알림은 승인이나 계획 기록 변경이 아닙니다. 플릿 맵과 `herdr-peers fleet ui`는 여러 머신의 에이전트와 계획을 표시합니다. UI는 읽기 전용이며 계획 상태를 바꾸거나 에이전트를 프롬프트하지 않습니다. 자세한 내용은 [herdr-peers v2.1.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) 및 [프로토콜](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md)을 참조하세요.
 
 ## 2. `autonomy` 블록 (plan-contract/v8)
 
@@ -46,9 +45,12 @@ lead가 사라지면 daemon은 승계 목록에서 처음으로 연결 가능한
 
 pane 주소는 Herdr의 정확한 형식을 사용합니다: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. 머신 ID는 `-`로 시작할 수 없습니다. 설정은 프롬프트 대상, 이벤트 수신자, brain 허용 여부와 대기열 참여를 제한합니다. 승인 기준이나 게이트는 바꾸지 않습니다.
 
-## 3. 구조화된 차단 및 진행
+## 3. 구조화된 차단
+### 3.1. 차단 기록
 
+### 3.2. 확인 위치
 차단된 계획은 `state.json`의 `blocked` 또는 `blocker` 레코드에 C 등급과 선택적 `resolver` 필드를 기록합니다. `resolver`는 `lead` 또는 `human`이며 생략하면 `human`입니다. `lead`는 자격 증명, 로그인, 동의, 결제, main 푸시, release 또는 삭제 없이 기록된 권한 안에서 해결 가능함을 뜻합니다. 루프와 brain은 `lead`로 표시된 차단만 해결하도록 lead에게 요청할 수 있습니다. 나머지는 사람에게 알리고 프롬프트로 우회하지 않습니다.
+### 3.3. 루프의 허용 동작
 
 태그된 Herdr 플릿 맵은 계획 `PROGRESS.md` 최대 14줄을 정리된 요약으로 표시할 수 있습니다. 이는 관찰 데이터이지 권한 부여나 기계 판독 진행 헤더의 공개 스키마가 아닙니다. 팩 v8 브랜치의 계획된 헤더 형식은 규범으로 보기 전에 8.0.0 태그에서 확인해야 합니다.
 

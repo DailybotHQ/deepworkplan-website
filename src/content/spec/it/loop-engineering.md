@@ -17,7 +17,6 @@ Un piano approvato arriva alla fine senza attendere una persona. L’autonomia o
 ## Semantica del ciclo
 
 ### Registrazione e osservazione
-
 Con l’addon Herdr attivo, il flusso `execute` del pack v8 rivendica la registrazione del lead e registra la successione. Sono osservati solo piani con registrazione lead e stato leggibile. Una persona avvia `herdr-peers autopilot --loop`: è un daemon, non un elemento di login né un servizio di sistema. Un daemon può osservare i piani segnalati da tutte le macchine Herdr abilitate. Senza registrazione lead il piano non è osservato.
 
 ### Continuità, stallo e passaggio
@@ -30,7 +29,7 @@ Se il lead è assente, il daemon chiede al primo successore raggiungibile di ese
 
 L’opzione `--brain` avvia un agente decisionale per i casi che le regole del daemon non risolvono. Può scegliere solo da un elenco chiuso di azioni. Il daemon resta l’unico attore: convalida una scelta consentita e agisce; non esegue mai testo libero del brain. Il blocco `autonomy` deve consentire il brain.
 
-Il ciclo registra eventi del piano per stalli, blocchi, perdita del lead, completamento e risultati della coda. Con `--notify` il daemon invia un oggetto `plan-event-v1` al notifier configurato; il notifier Dailybot del pack trasforma gli eventi supportati in aggiornamenti al team. Una notifica non approva lavoro né modifica la registrazione del piano. La mappa flotta e `herdr-peers fleet ui` mostrano agenti e piani su più macchine. L’interfaccia è di sola lettura: non modifica lo stato né sollecita agenti. Vedi [autopilot herdr-peers v2.0.0](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md) e il [protocollo](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md).
+Il ciclo registra eventi del piano per stalli, blocchi, perdita del lead, completamento e risultati della coda. Con `--notify` il daemon invia un oggetto `plan-event-v1` al notifier configurato; il notifier Dailybot del pack trasforma gli eventi supportati in aggiornamenti al team. Una notifica non approva lavoro né modifica la registrazione del piano. La mappa flotta e `herdr-peers fleet ui` mostrano agenti e piani su più macchine. L’interfaccia è di sola lettura: non modifica lo stato né sollecita agenti. Vedi [autopilot herdr-peers v2.1.0](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) e il [protocollo](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md).
 
 ## 2. Blocco `autonomy` (plan-contract/v8)
 
@@ -46,9 +45,12 @@ L’oggetto top-level facoltativo `autonomy` è chiuso: chiavi sconosciute non v
 
 Un indirizzo pane usa la forma esatta Herdr: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. L’ID macchina non può iniziare con `-`. I campi limitano chi riceve prompt ed eventi, l’azione del brain e la partecipazione alla coda; non cambiano criteri di accettazione né gate.
 
-## 3. Blocchi strutturati e avanzamento
+## 3. Blocchi strutturati
+### 3.1. Record del blocco
 
+### 3.2. Dove trovarlo
 Un piano bloccato registra una classe C e un `resolver` facoltativo nel record `blocked` o `blocker` di `state.json`. I valori sono `lead` o `human`; se assente significa `human`. `lead` indica una risoluzione entro l’autorità registrata senza credenziali, accesso, consenso, pagamento, push su main, release o eliminazione. Il ciclo, brain incluso, può chiedere al lead di risolvere solo blocchi marcati `lead`; gli altri vengono segnalati alla persona e non aggirati con prompt.
+### 3.3. Cosa può fare il ciclo
 
 La mappa flotta Herdr taggata può mostrare fino a 14 righe ripulite di `PROGRESS.md`. È un riepilogo osservativo, non autorità né uno schema pubblicato per intestazioni leggibili dalla macchina. L’intestazione prevista dalla linea v8 del pack va verificata al tag 8.0.0.
 

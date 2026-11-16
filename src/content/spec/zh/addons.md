@@ -8,7 +8,7 @@ section: Addons
 
 # 附加组件
 
-> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前标准 DWP 7.0.0 还要求遵循[规范索引](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)中适用的 `V6_*.md` 与 `V7_*.md` 扩展。现有 v5 与 v6 计划保留其记录的规则。
+> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前标准 DWP 8.0.0 还要求遵循[规范索引](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)中适用的 `V6_*.md` 与 `V7_*.md` 扩展。现有 v5 与 v6 计划保留其记录的规则。
 
 **版本 2.1.0。** 附加组件是对核心 Deep Work Plan 方法论的扩展。八个之中有七个是可选的，且**绝非符合性所必需**——零可选附加组件的仓库完全符合 AI-first 与 DWP 规范。每个可选附加组件在接入期间提供，由开发者明确接受或拒绝，且——接受后——**调和**现有设置而非覆盖。一个组件是声明的例外：自标准 2.3.0 起，**AI Diff Reviewer 本地审查**属于必备基线——接入时安装它，每份 Final Review 都运行它——而其 CI 层面保持可选。
 
@@ -27,7 +27,7 @@ section: Addons
 
 ## 已发布的附加组件（八个）
 
-当前发布八个附加组件——七个可选，外加必备的本地审查。每个都有**套件目录页**（面向用户的详情）以及 Deep Work Plan 技能内的**规范性规格**。其中四个——devcontainer、Herdr、DeepWorkPlan Vim 与 Agentkit——是按 tag 固定到某个产品的轻量集成器，该产品拥有自己的仓库与发布周期；每个产品都能脱离 Deep Work Plan 独立运行。被接受的附加组件会记录在 `.dwp/config.json` 附加组件注册表中（DWP 7.0.0），该注册表只能提供或增强能力——绝不为符合性或计划设置门控。
+当前发布八个附加组件——七个可选，外加必备的本地审查。每个都有**套件目录页**（面向用户的详情）以及 Deep Work Plan 技能内的**规范性规格**。其中四个——devcontainer、Herdr、DeepWorkPlan Vim 与 Agentkit——是按 tag 固定到某个产品的轻量集成器，该产品拥有自己的仓库与发布周期；每个产品都能脱离 Deep Work Plan 独立运行。被接受的附加组件会记录在 `.dwp/config.json` 附加组件注册表中（DWP 8.0.0），该注册表只能提供或增强能力——绝不为符合性或计划设置门控。
 
 ### Devcontainer（第一个附加组件）
 
@@ -89,7 +89,7 @@ section: Addons
 - **行为：** 对等协议（stamp、grant、reply、循环防护、深度与扇出上限）位于 herdr-peers 中，绝不在技能包中；任何使用都需要契约授权 `agent_delegation`，且受托代理的结果在计划自己的运行器观察到之前始终只是断言
 - **何时提供：** 第 7b 阶段中明确的可选项；对 `herdr` 与 `herdr-peers` 进行只读检测；该传输仅能在 Herdr 会话内使用
 
-- **循环：** Herdr v2.0.0 还提供可选、由人启动的 `herdr-peers autopilot --loop`，用于在限定权限内继续计划并交接给继任者。参见[循环工程](/spec/loop-engineering)。
+- **循环：** Herdr v2.1.0 还提供可选、由人启动的 `herdr-peers autopilot --loop`，用于在限定权限内继续计划并交接给继任者。参见[循环工程](/spec/loop-engineering)。
 
 ### DeepWorkPlan Vim（第七个附加组件）
 

@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite 계획
 
-> **버전 범위:** 이 문서는 보존된 v5.0.0 기반 문서입니다. 현재 표준인 DWP 7.0.0은 [사양 색인](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)에 나열된 해당 `V6_*.md` 및 `V7_*.md` 확장도 요구합니다. 기존 v5 및 v6 계획은 기록된 규칙을 유지합니다.
+> **버전 범위:** 이 문서는 보존된 v5.0.0 기반 문서입니다. 현재 표준인 DWP 8.0.0은 [사양 색인](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)에 나열된 해당 `V6_*.md` 및 `V7_*.md` 확장도 요구합니다. 기존 v5 및 v6 계획은 기록된 규칙을 유지합니다.
 
 **버전 5.0.0. 상태: 안정(Stable).** 이 문서는 [DWP 스펙](/spec/dwp-specification)과 함께 도입된 Lite 계획 표현 형식을 명시합니다: 실행 불가능한 초안 단계 없이 곧바로 구체화되는, 소규모에서 중간 규모의 경계가 분명한 작업을 위한 계획 포맷입니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
@@ -17,7 +17,6 @@ section: Workflow
 계획은 다음 두 표현 형식 중 하나여야(MUST) 하며, `manifest.json`에 `plan_format`으로 한 번 기록됩니다: **Full**은 `<n>.task_<slug>.md` 아래에 작업당 하나의 파일을 저장합니다; **Lite**는 간결하고 실행 가능한 작업 레코드를 `README.md`에 인라인으로 저장하며, 각 레코드는 안정적인 `{#task-N}` 앵커 뒤에 있습니다. Lite 계획은 부분적이거나 비공식적인 Full 계획이 아닙니다: 모든 작업 레코드는 [작업 구조](/spec/dwp-specification#task-anatomy)가 Full에 대해 정의하는 것과 동일한 규범적 형태로 목표, 변경 표면, 인수 기준, 검증 게이트, 완료 로그를 여전히 담아야(MUST) 합니다.
 
 계획의 상태는 네 가지 축으로 기술되며, 뒤섞이지 않고 독립적으로 추적되어야(MUST) 합니다:
-
 | 축 | 값 | 의미 |
 |------|--------|---------|
 | 형식 | `lite`, `full` | 작업 레코드가 어디에 있는지 |

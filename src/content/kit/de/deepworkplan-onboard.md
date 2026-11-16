@@ -35,13 +35,16 @@ Ein Repository in eine AI-first, spec-driven Codebasis verwandeln. Dies ist die 
 
 Ein Repository ist mit null optionalen Addons vollständig konform; die lokale Überprüfung des AI Diff Reviewer ist seit Standard 2.3.0 Teil der Baseline. Die erkannte Realität gewinnt stets über Preset-Annahmen.
 
-## v7-Schema-Referenzen
+## Schema references
 
-Für v7-Pläne — der Standard des aktuellen 7.x-Pakets — ist der maschinenlesbare Schemakatalog unter diesen stabilen URLs veröffentlicht. Die Live-Projektion ist ein mit v6 geteilter Snapshot; `plan-state/v6.json` und `plan-state/v7.json` gibt es nicht.
+Der maschinenlesbare Schemakatalog für v8-Pläne ist unter den folgenden stabilen URLs veröffentlicht. v8 verwendet `plan-manifest/v7` mit `plan-contract/v8`, `journal-event/v8` und `plan-snapshot/v8`; v7-Manifest- und Journal-Event-Schemas bleiben für bestehende Pläne unterstützt.
 
 - **Planmanifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
 - **Planvertrag:** https://deepworkplan.com/schema/plan-contract/v7.json (der v6-Vertrag plus eine optionale Task-Markierung `parallel_safe`)
 - **Journal-Ereignis:** https://deepworkplan.com/schema/journal-event/v7.json (ergänzt das Ereignis `delegation`)
+- **v8-Vertrag:** https://deepworkplan.com/schema/plan-contract/v8.json
+- **v8-Journal-Ereignis:** https://deepworkplan.com/schema/journal-event/v8.json
+- **v8-Plan-Snapshot:** https://deepworkplan.com/schema/plan-snapshot/v8.json
 - **Plan-Snapshot (Live-Projektion, mit v6 geteilt):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Kontextmanifest (mit v6 geteilt):** https://deepworkplan.com/schema/context-manifest/v6.json
 - **Repository-Konfiguration:** https://deepworkplan.com/schema/dwp-config/v1.json
@@ -52,4 +55,4 @@ Für v7-Pläne — der Standard des aktuellen 7.x-Pakets — ist der maschinenle
 
 v6-Pläne behalten ihre v6-Schemas ([Manifest](https://deepworkplan.com/schema/plan-manifest/v6.json), [Vertrag](https://deepworkplan.com/schema/plan-contract/v6.json), [Journal-Ereignis](https://deepworkplan.com/schema/journal-event/v6.json)); bestehende v5-Pläne verwenden weiterhin das v5-State-Schema, und ältere Pläne werden nie stillschweigend umgeschrieben.
 
-Das aktuelle 7.x-Paket erstellt neue Pläne standardmäßig mit v7. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag. Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v7-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
+Das aktuelle 8.x-Paket erstellt neue Pläne standardmäßig mit v8. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert einen ausdrücklichen Auftrag. Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Stellen (zum Beispiel `PLAN_001_add_payment_webhooks/`). Da die eingefrorenen v5-Schemas die numerische ID als Wort zählen, bestehen v5-Slugs aus 2–4 Wörtern; v7-Slugs aus 2–5. Bestehende unnummerierte Ordner `PLAN_<slug>/` bleiben lesbar und werden niemals umbenannt. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.

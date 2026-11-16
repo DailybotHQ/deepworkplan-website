@@ -14,10 +14,9 @@ Esta página define el contrato del plan para la ingeniería del ciclo. El **pla
 
 Un plan aprobado se ejecuta hasta el final sin una persona. La autonomía es la regla **dentro de la autoridad registrada en el plan**; se notifica a la persona, sin hacerla esperar, excepto por inicios de sesión y credenciales. Los controles C1–C7 del propio plan (como publicación, push o mensajes externos) siguen deteniendo el trabajo salvo que el plan registre una autorización previa. Se mantiene la regla de v7: la metodología funciona por sí sola; los complementos solo la amplían.
 
-## Semántica del ciclo
+### 1.1. Semántica del ciclo
 
 ### Registro y observación
-
 Con el complemento Herdr habilitado, el flujo `execute` del paquete v8 reclama un registro de liderazgo y anota la sucesión del plan. Solo se supervisa un plan con registro de liderazgo y estado legible. Una persona inicia `herdr-peers autopilot --loop`; es un daemon, no un elemento de inicio de sesión ni un servicio del sistema. Un daemon puede observar planes informados por todas las máquinas Herdr habilitadas. Un plan sin registro de liderazgo no se supervisa.
 
 ### Continuación, estancamiento y relevo
@@ -30,7 +29,7 @@ Si el liderazgo desaparece, el daemon pide al primer sucesor disponible de la li
 
 El `--brain` opcional inicia un agente de decisión dedicado para los casos que las reglas del daemon no resuelven. Solo puede elegir de una lista cerrada de acciones. El daemon sigue siendo el único actor: valida una opción permitida y realiza la acción; nunca ejecuta texto libre del brain. El bloque `autonomy` del plan también debe permitir el brain.
 
-El ciclo registra eventos del plan, como estancamientos, bloqueos, pérdida del liderazgo, finalización y resultados de la cola. Con la integración opcional `--notify`, el daemon envía un objeto `plan-event-v1` al notificador configurado; el notificador Dailybot del paquete convierte los eventos admitidos en actualizaciones para el equipo. Una notificación no aprueba trabajo ni cambia el registro del plan. El mapa de flota y `herdr-peers fleet ui` muestran agentes y planes en varias máquinas. La interfaz es de solo lectura: no cambia el estado ni avisa a agentes. El comportamiento etiquetado está documentado en [autopilot de herdr-peers v2.0.0](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md) y su [protocolo](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md).
+El ciclo registra eventos del plan, como estancamientos, bloqueos, pérdida del liderazgo, finalización y resultados de la cola. Con la integración opcional `--notify`, el daemon envía un objeto `plan-event-v1` al notificador configurado; el notificador Dailybot del paquete convierte los eventos admitidos en actualizaciones para el equipo. Una notificación no aprueba trabajo ni cambia el registro del plan. El mapa de flota y `herdr-peers fleet ui` muestran agentes y planes en varias máquinas. La interfaz es de solo lectura: no cambia el estado ni avisa a agentes. El comportamiento etiquetado está documentado en [autopilot de herdr-peers v2.1.0](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) y su [protocolo](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md).
 
 ## 2. El bloque `autonomy` (plan-contract/v8)
 
@@ -46,9 +45,12 @@ El objeto superior opcional `autonomy` es cerrado: las claves desconocidas no so
 
 Una dirección de panel usa la forma exacta de Herdr: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. El ID de máquina no puede empezar con `-`. Estos valores limitan quién puede recibir avisos y eventos, si un brain puede actuar y cómo participa el plan en una cola. No cambian los criterios de aceptación ni los controles.
 
-## 3. Bloqueos estructurados y progreso
+## 3. Bloqueos estructurados
+### 3.1. Registro del bloqueo
 
+### 3.2. Dónde se encuentra
 Un plan bloqueado registra una clase C y un campo `resolver` opcional en el registro `blocked` o `blocker` de `state.json`. `resolver` puede ser `lead` o `human`; si se omite, significa `human`. `lead` significa que el bloqueo se resuelve dentro de la autoridad registrada, sin credenciales, inicio de sesión, consentimiento, pago, push a main, release ni eliminación. El ciclo, incluido el brain, solo puede pedir al liderazgo resolver bloqueos marcados `lead`. Los demás se notifican a la persona y no se sortean con avisos.
+### 3.3. Qué puede hacer el ciclo
 
 El mapa de flota etiquetado de herdr-peers puede mostrar hasta 14 líneas del `PROGRESS.md` del plan como resumen depurado. Es un dato de observación, no una concesión de autoridad ni un esquema publicado de encabezado legible por máquinas. La forma de encabezado planeada en la línea v8 del paquete debe verificarse contra la etiqueta 8.0.0 antes de considerarla normativa.
 

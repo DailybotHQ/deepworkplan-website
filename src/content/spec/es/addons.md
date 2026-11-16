@@ -8,7 +8,7 @@ section: Addons
 
 # Complementos
 
-> **Alcance de versión:** Este documento es una base v5.0.0 conservada. El estándar actual, DWP 7.0.0, también exige las extensiones `V6_*.md` y `V7_*.md` aplicables que aparecen en el [índice de la especificación](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Los planes v5 y v6 existentes conservan sus reglas registradas.
+> **Alcance de versión:** Este documento es una base v5.0.0 conservada. El estándar actual, DWP 8.0.0, también exige las extensiones `V6_*.md` y `V7_*.md` aplicables que aparecen en el [índice de la especificación](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Los planes v5 y v6 existentes conservan sus reglas registradas.
 
 **Versión 2.1.0.** Los complementos son extensiones de la metodología central de Deep Work Plan. Siete de los ocho son opcionales y **nunca obligatorios para el cumplimiento** — un repositorio sin addons opcionales es plenamente AI-first y conforme con DWP. Cada addon opcional se ofrece durante la incorporación, se acepta o rechaza explícitamente y — cuando se acepta — **reconcilia** con la configuración existente en lugar de sobrescribirla. Un componente es la excepción declarada: desde el estándar 2.3.0 la **revisión local de AI Diff Reviewer** es parte de la línea base requerida — el onboarding la instala y cada Final Review la ejecuta — mientras que su superficie de CI sigue siendo opcional.
 
@@ -27,7 +27,7 @@ Descubrimiento: el flujo `onboard` enumera `skills/deepworkplan/addons/` y prese
 
 ## Addons activos (ocho)
 
-Hoy se distribuyen ocho addons — siete opcionales más la revisión local requerida. Cada uno tiene una **página del catálogo del kit** con detalle orientado al usuario y una **spec normativa** dentro de la skill de Deep Work Plan. Cuatro de ellos — devcontainer, Herdr, DeepWorkPlan Vim y Agentkit — son integradores ligeros fijados por tag a un producto con su propio repositorio y ciclo de versiones; cada producto funciona sin Deep Work Plan. Un addon aceptado se registra en el registro de addons `.dwp/config.json` (DWP 7.0.0), que solo puede ofrecer o amplificar — nunca condiciona la conformidad ni un plan.
+Hoy se distribuyen ocho addons — siete opcionales más la revisión local requerida. Cada uno tiene una **página del catálogo del kit** con detalle orientado al usuario y una **spec normativa** dentro de la skill de Deep Work Plan. Cuatro de ellos — devcontainer, Herdr, DeepWorkPlan Vim y Agentkit — son integradores ligeros fijados por tag a un producto con su propio repositorio y ciclo de versiones; cada producto funciona sin Deep Work Plan. Un addon aceptado se registra en el registro de addons `.dwp/config.json` (DWP 8.0.0), que solo puede ofrecer o amplificar — nunca condiciona la conformidad ni un plan.
 
 ### Devcontainer (primer addon)
 
@@ -89,7 +89,7 @@ Un integrador ligero de [herdr-peers](https://github.com/DailybotHQ/herdr-peers)
 - **Comportamiento:** el protocolo entre pares (sello, concesión, respuesta, protección contra bucles, límites de profundidad y de abanico) vive en herdr-peers, nunca en el paquete; cualquier uso requiere la concesión de contrato `agent_delegation`, y el resultado de un delegado sigue siendo una afirmación hasta que el propio ejecutor del plan lo observa
 - **Cuándo se ofrece:** opt-in explícito durante la Fase 7b; detección de solo lectura de `herdr` y `herdr-peers`; el transporte solo se puede usar dentro de una sesión de Herdr
 
-- **Ciclo:** Herdr v2.0.0 también ofrece `herdr-peers autopilot --loop`, opcional y de inicio humano, para continuar planes dentro de límites y ceder a sucesores. Consulta [Ingeniería del ciclo](/spec/loop-engineering).
+- **Ciclo:** Herdr v2.1.0 también ofrece `herdr-peers autopilot --loop`, opcional y de inicio humano, para continuar planes dentro de límites y ceder a sucesores. Consulta [Ingeniería del ciclo](/spec/loop-engineering).
 
 ### DeepWorkPlan Vim (séptimo addon)
 

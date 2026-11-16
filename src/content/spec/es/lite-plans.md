@@ -8,7 +8,7 @@ section: Workflow
 
 # Planes Lite
 
-> **Alcance de versión:** Este documento es una base v5.0.0 conservada. El estándar actual, DWP 7.0.0, también exige las extensiones `V6_*.md` y `V7_*.md` aplicables que aparecen en el [índice de la especificación](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Los planes v5 y v6 existentes conservan sus reglas registradas.
+> **Alcance de versión:** Este documento es una base v5.0.0 conservada. El estándar actual, DWP 8.0.0, también exige las extensiones `V6_*.md` y `V7_*.md` aplicables que aparecen en el [índice de la especificación](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Los planes v5 y v6 existentes conservan sus reglas registradas.
 
 **Versión 5.0.0. Estado: estable.** Este documento especifica la representación de plan Lite introducida junto con la [Especificación de DWP](/spec/dwp-specification): un formato de plan para trabajo acotado de tamaño pequeño a mediano que se materializa directamente, sin una etapa de borrador no ejecutable. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 Un plan DEBE ser una de dos representaciones, registrada una vez en `manifest.json` como `plan_format`: **Full** almacena un archivo por tarea bajo `<n>.task_<slug>.md`; **Lite** almacena registros de tarea compactos y ejecutables en línea dentro de `README.md`, cada uno tras un ancla estable `{#task-N}`. Un plan Lite no es un plan Full parcial o informal: cada registro de tarea DEBE seguir llevando un objetivo, una Superficie tocada, criterios de aceptación, una puerta de validación y un registro de finalización, con la misma forma normativa que la [Anatomía de la tarea](/spec/dwp-specification#task-anatomy) define para Full.
 
 Cuatro ejes describen el estado de un plan, y DEBEN rastrearse de forma independiente en lugar de mezclarse:
-
 | Eje | Valores | Significado |
 |------|--------|-------------|
 | Formato | `lite`, `full` | Dónde viven los registros de tarea |

@@ -14,10 +14,9 @@ Cette page définit le contrat de plan pour l’ingénierie de boucle. Le **plan
 
 Un plan approuvé va jusqu’au bout sans intervention humaine. L’autonomie s’exerce **dans l’autorité consignée du plan** ; l’humain est informé sans être attendu, sauf pour les connexions et identifiants, et les étapes C1–C7 du plan arrêtent toujours le travail à moins qu’une autorisation préalable y soit consignée. La règle v7 demeure : la méthode fonctionne seule, les modules ne font que la renforcer.
 
-## Sémantique de boucle
+### 1.1. Sémantique de boucle
 
 ### Enregistrement et observation
-
 Avec le module Herdr activé, le flux `execute` du pack v8 revendique le registre de lead et consigne la succession du plan. Seul un plan doté d’un registre de lead et d’un état lisible est observé. Un humain démarre `herdr-peers autopilot --loop` : c’est un daemon, ni un élément de connexion ni un service système. Un daemon peut observer les plans signalés par toutes les machines Herdr activées. Sans registre de lead, le plan n’est pas observé.
 
 ### Continuité, blocage et relève
@@ -30,7 +29,7 @@ Si le lead est absent, le daemon demande au premier successeur joignable de la l
 
 `--brain`, facultatif, lance un agent de décision dédié aux cas que les règles du daemon ne tranchent pas. Il ne choisit que dans une liste fermée d’actions. Le daemon reste le seul acteur : il valide un choix permis puis agit ; il n’exécute jamais de texte libre du brain. Le bloc `autonomy` du plan doit également autoriser le brain.
 
-La boucle enregistre des événements du plan, par exemple blocages, perte de lead, achèvement et résultats de file. Avec l’intégration facultative `--notify`, le daemon envoie un objet `plan-event-v1` au notificateur configuré ; le notificateur Dailybot du pack transforme les événements pris en charge en nouvelles d’équipe. Une notification n’approuve rien et ne modifie pas le registre du plan. La carte de flotte et `herdr-peers fleet ui` affichent les agents et plans sur plusieurs machines. L’interface est en lecture seule : elle ne modifie aucun état et ne sollicite aucun agent. Voir [autopilot herdr-peers v2.0.0](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md) et son [protocole](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md).
+La boucle enregistre des événements du plan, par exemple blocages, perte de lead, achèvement et résultats de file. Avec l’intégration facultative `--notify`, le daemon envoie un objet `plan-event-v1` au notificateur configuré ; le notificateur Dailybot du pack transforme les événements pris en charge en nouvelles d’équipe. Une notification n’approuve rien et ne modifie pas le registre du plan. La carte de flotte et `herdr-peers fleet ui` affichent les agents et plans sur plusieurs machines. L’interface est en lecture seule : elle ne modifie aucun état et ne sollicite aucun agent. Voir [autopilot herdr-peers v2.1.0](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) et son [protocole](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md).
 
 ## 2. Bloc `autonomy` (plan-contract/v8)
 
@@ -46,9 +45,12 @@ L’objet supérieur facultatif `autonomy` est fermé : toute clé inconnue est 
 
 Une adresse pane suit exactement la forme Herdr : `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. Un identifiant machine ne commence pas par `-`. Ces champs limitent les personnes sollicitées, les destinataires d’événements, l’action éventuelle d’un brain et la participation à la file. Ils ne changent ni critères d’acceptation ni étapes.
 
-## 3. Blocages structurés et progression
+## 3. Blocages structurés
+### 3.1. Enregistrement du blocage
 
+### 3.2. Où le trouver
 Un plan bloqué consigne une classe C et un champ `resolver` facultatif dans l’enregistrement `blocked` ou `blocker` de `state.json`. `resolver` vaut `lead` ou `human` ; absent, il signifie `human`. `lead` indique une résolution dans l’autorité consignée, sans identifiant, connexion, consentement, paiement, push vers main, release ou suppression. La boucle, brain compris, ne peut solliciter un lead que pour un blocage marqué `lead`. Les autres sont signalés à l’humain, sans contournement par sollicitation.
+### 3.3. Actions possibles de la boucle
 
 La carte de flotte Herdr publiée peut afficher jusqu’à 14 lignes de `PROGRESS.md` comme résumé nettoyé. Ce sont des données d’observation, non une attribution d’autorité ni un schéma publié d’en-tête lisible par machine. L’en-tête envisagé par la branche v8 du pack doit être vérifié avec le tag 8.0.0 avant tout statut normatif.
 

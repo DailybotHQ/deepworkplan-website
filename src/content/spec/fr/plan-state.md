@@ -1,6 +1,6 @@
 ---
 title: État du plan
-description: "La couche d'état v5 (manifest.json, state.json, enregistrements de portes, réconciliation) et son remplacement en v6 et v7 par un instantané dérivé du journal."
+description: "La couche d'état v5 (manifest.json, state.json, enregistrements de portes, réconciliation) et son remplacement en v6, v7 et v8 par un instantané dérivé du journal."
 order: 8
 lang: fr
 section: State
@@ -8,16 +8,17 @@ section: State
 
 # État du plan
 
-> **Portée de version :** cette page spécifie la **couche d'état v5**, que les plans v5 conservent toute leur vie. Les plans créés par le pack actuel (DWP 7.0.0, version `v7.12.2`) utilisent à la place la [couche d'enregistrement](/spec/record-layer). Dans un plan v6 ou v7, le contrat de résultat (`contract.json`) fait autorité, le journal en ajout seul (`journal.ndjson`) est la source de vérité, et `state.json` est un **instantané dérivé** conforme à [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Il est régénéré par `ledger.py project` et MUST NOT être édité à la main.
+> **Portée de version :** cette page spécifie la **couche d'état v5**, que les plans v5 conservent toute leur vie. Les plans créés par le pack actuel (DWP 8.0.0, version `v8.0.0`) utilisent à la place la [couche d'enregistrement](/spec/record-layer). Dans un plan v6, v7 ou v8, le contrat de résultat (`contract.json`) fait autorité, le journal en ajout seul (`journal.ndjson`) est la source de vérité, et `state.json` est un **instantané dérivé** conforme à [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Il est régénéré par `ledger.py project` et MUST NOT être édité à la main.
 
 ## Quelle couche d'état s'applique
 
 | Génération du plan | Source de vérité | `state.json` | Schémas |
 | --- | --- | --- | --- |
 | v5 (et plans v1/v2 antérieurs) | le plan markdown, avec cette couche JSON comme projection | écrit par l'agent aux points de protocole ci-dessous | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 et v2 restent valides pour les plans plus anciens) |
-| v6 et v7 | le contrat plus le journal en ajout seul | un instantané projeté depuis le journal, jamais écrit à la main | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (ou leurs équivalents v6) |
+| v6, v7 et v8 | le contrat plus le journal en ajout seul | un instantané projeté depuis le journal, jamais écrit à la main | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (ou leurs équivalents v6) |
 
-Un plan ne change jamais de génération implicitement : les plans v5 conservent ces règles, et passer l'un d'eux en v6 est une migration explicite et prévisualisée ([Couche d'enregistrement](/spec/record-layer#coexistence-and-migration)). Sources canoniques : [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md).
+Les plans v8 utilisent `plan-manifest/v7` avec `plan-contract/v8`, `journal-event/v8` et `plan-snapshot/v8` ; les schémas de manifeste et d’événement de journal v7 restent pris en charge pour les plans existants.
+Un plan ne change jamais de génération implicitement : les plans v5 conservent ces règles, et passer l'un d'eux en v6 est une migration explicite et prévisualisée ([Couche d'enregistrement](/spec/record-layer#coexistence-and-migration)). Sources canoniques : [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Version 5.0.0. Statut : stable.** Ce document spécifie la couche d'état lisible par machine de la méthodologie Deep Work Plan, désormais alignée sur le numéro de version propre du standard DWP — aucune exigence existante n'est affaiblie par cette renumérotation. Cette révision documente également le metteur à jour d'état sous garde, la publication vérifiée de plan, et les règles de vérité de preuve qu'un plan achevé doit satisfaire (voir ci-dessous). Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
@@ -236,7 +237,7 @@ Les deux schémas sont versionnés par URL. Les champs additifs sont autorisés 
 
 ## Schémas v7 et v6 et compatibilité
 
-Le pack 7.x actuel crée par défaut des plans **v7**. v7 est une génération de contrat de la couche d’enregistrement v6 : le [manifeste v7](https://deepworkplan.com/schema/plan-manifest/v7.json) pointe vers un [contrat v7](https://deepworkplan.com/schema/plan-contract/v7.json) — le contrat v6 plus un marqueur de tâche optionnel `parallel_safe` — et chaque [événement de journal v7](https://deepworkplan.com/schema/journal-event/v7.json) peut aussi enregistrer une `delegation` (lancée, terminée, échouée, annulée), qui ne constitue jamais une preuve à elle seule : le résultat d’un délégué reste une simple affirmation tant que l’exécuteur propre du plan ne l’a pas observé. L’instantané actif et le manifeste de contexte de tâche sont partagés avec v6. Un plan ne mélange jamais les générations, et une demande explicite de `v6` matérialise toujours un plan v6.
+Le pack 8.x actuel crée par défaut des plans **v8**. v8 est une génération de contrat de la couche d’enregistrement v6 : le [manifeste v7](https://deepworkplan.com/schema/plan-manifest/v7.json) pointe vers un [contrat v7](https://deepworkplan.com/schema/plan-contract/v7.json) — le contrat v6 plus un marqueur de tâche optionnel `parallel_safe` — et chaque [événement de journal v7](https://deepworkplan.com/schema/journal-event/v7.json) peut aussi enregistrer une `delegation` (lancée, terminée, échouée, annulée), qui ne constitue jamais une preuve à elle seule : le résultat d’un délégué reste une simple affirmation tant que l’exécuteur propre du plan ne l’a pas observé. L’instantané actif et le manifeste de contexte de tâche sont partagés avec v6. Un plan ne mélange jamais les générations, et une demande explicite de `v6` matérialise toujours un plan v6.
 
 v6 conserve la méthodologie v5 et ajoute une structure d’ingénierie plus stricte pour les nouveaux plans. Le manifeste d’identité pointe vers un contrat versionné ; un journal en ajout seul enregistre l’autorité et les événements ; les manifestes de contexte rendent explicite la sélection du contexte par tâche ; l’ordonnanceur ne distribue que le travail admissible ; et la projection active `state.json` est un instantané généré depuis le journal. Une liste d’autorisations vide est refusée. Ce sont des décisions d’architecture, pas la preuve de meilleurs résultats d’agents : la non-infériorité des résultats n’a pas été mesurée.
 
@@ -250,4 +251,4 @@ Les schémas v6 du manifeste et de l’instantané actif sont :
 
 La projection active de v6 est un instantané, pas un fichier d’état v5 renommé. `plan-state/v5.json` reste publié pour les plans v5 ; `plan-state/v6.json` n’existe pas. Les plans v1, v2 et v5 existants conservent leur génération de schéma enregistrée et ne sont jamais réécrits silencieusement.
 
-Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6 et v7, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
+Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v6, v7 et v8, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.

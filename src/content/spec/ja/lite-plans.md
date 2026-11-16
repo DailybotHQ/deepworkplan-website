@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite 計画
 
-> **バージョンの適用範囲:** 本文書は保持されている v5.0.0 の基盤文書です。現在の標準である DWP 7.0.0 では、[仕様インデックス](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)に記載された該当する `V6_*.md` と `V7_*.md` の拡張も適用されます。既存の v5 計画と v6 計画は記録済みの規則を維持します。
+> **バージョンの適用範囲:** 本文書は保持されている v5.0.0 の基盤文書です。現在の標準である DWP 8.0.0 では、[仕様インデックス](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)に記載された該当する `V6_*.md` と `V7_*.md` の拡張も適用されます。既存の v5 計画と v6 計画は記録済みの規則を維持します。
 
 **バージョン 5.0.0。状態: 安定。** この文書は、[DWP 仕様](/spec/dwp-specification) と並んで導入された Lite 計画の表現形式を規定します。小〜中規模の境界づけられた作業のための計画フォーマットであり、非実行可能なドラフト段階を経ることなく直接マテリアライズされます。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
@@ -17,7 +17,6 @@ section: Workflow
 計画は次の二つの表現形式のいずれかでなければならず（MUST）、`manifest.json` に `plan_format` として一度だけ記録されます。**Full** は `<n>.task_<slug>.md` の下にタスクごとに一つのファイルを保存します。**Lite** はコンパクトで実行可能なタスクレコードを `README.md` にインラインで保存し、各レコードは安定した `{#task-N}` アンカーの背後にあります。Lite 計画は部分的な、あるいは非公式な Full 計画ではありません。すべてのタスクレコードは、[タスク構造](/spec/dwp-specification#task-anatomy) が Full について定義するのと同じ規範的な形で、目標、変更対象面、受け入れ基準、検証ゲート、そして完了ログを引き続き持たなければなりません（MUST）。
 
 計画の状態は四つの軸で記述され、混同せず独立して追跡されなければなりません（MUST）。
-
 | 軸 | 値 | 意味 |
 |------|--------|---------|
 | 形式 | `lite`、`full` | タスクレコードがどこにあるか |

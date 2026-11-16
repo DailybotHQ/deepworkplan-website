@@ -8,7 +8,7 @@ section: Record layer
 
 # Шар записів
 
-> **Обсяг версії:** Ця сторінка переказує нормативний шар записів v6, на якому будується поточний стандарт DWP 7.0.0. Канонічні джерела в релізі `v7.12.2`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) і [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Якщо ця сторінка й ці файли розходяться, перевагу мають файли. Плани v5 зберігають рівень [стану плану](/spec/plan-state) і ніколи не мігрують неявно.
+> **Обсяг версії:** Ця сторінка переказує нормативний шар записів v6, на якому будується поточний стандарт DWP 8.0.0. Канонічні джерела в релізі `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_CONTRACT.md) і [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md). Якщо ця сторінка й ці файли розходяться, перевагу мають файли. Плани v5 зберігають рівень [стану плану](/spec/plan-state) і ніколи не мігрують неявно.
 
 **Версія 6.0.0, розширена у 7.0.0. Статус: стабільний.** Шар записів замінює наративне завершення записами: контракт є авторитетом, журнал — памʼяттю, записи виконують допоміжні скрипти, а кожен згенерований файл є проєкцією. Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаться згідно з RFC 2119.
 
@@ -17,7 +17,6 @@ section: Record layer
 План — це два авторські артефакти й одна захищена послідовність. Markdown плану (`README.md` і файли завдань) описує, що буде зроблено. **Контракт результату** (`contract.json`) визначає, що вважається виконаним і що плану дозволено робити. **Журнал** (`journal.ndjson`) фіксує, що насправді відбулося. `state.json` і `views/` перегенеровуються з журналу та MUST NOT редагуватися вручну; коли згенерований файл і журнал розходяться, перевагу має журнал, а файл перегенеровується.
 
 ## Визначення покоління
-
 Папка плану є планом лінії v6 тоді й лише тоді, коли вона містить `manifest.json`, чий вказівник `contract` розвʼязується, `contract.json` або ланцюжок ревізій `contracts/`. Визначення MUST спиратися на ці артефакти, а не на версію встановленого пакета: поточний пакет може містити плани v5, а старіший пакет може натрапити на план v6.
 
 URL `schema` контракту називає його **покоління**, і маніфест та кожна подія журналу його віддзеркалюють:
@@ -26,9 +25,10 @@ URL `schema` контракту називає його **покоління**, 
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` і подію `delegation` ([Делегування](/spec/delegation)) |
-| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` і повноваження циклу |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` і повноваження циклу |
+Активний знімок v8 використовує [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
-Нові плани, створені пакетом 7.x, за замовчуванням належать до v7; явний запит `v6` і далі матеріалізує контракт v6. План ніколи не змінює покоління, а журнал, що змішує покоління, MUST бути відхилений. Обидва покоління проєктуються в ту саму форму [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+Нові плани, створені пакетом 8.x, за замовчуванням належать до v7; явний запит `v6` і далі матеріалізує контракт v6. План ніколи не змінює покоління, а журнал, що змішує покоління, MUST бути відхилений. Обидва покоління проєктуються в ту саму форму [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 ## Контракт результату
 

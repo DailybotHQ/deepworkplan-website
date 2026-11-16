@@ -14,10 +14,9 @@ section: 循环工程
 
 已批准计划会在没有人工逐步看护的情况下执行至结束。自主运行的默认范围是**计划已记录的权限内**；人类会收到通知，无需等待人类处理日常进展。登录和凭据仍需人工处理；计划自身的 C1–C7 gates（例如发布、推送或对外消息）仍会停止执行，除非计划记录了预授权。v7 规则不变：核心方法可独立运行，插件只提供增强。
 
-## 循环语义
+### 1.1. 循环语义
 
 ### 注册与观察
-
 启用 Herdr 插件后，v8 pack 的 `execute` 流程会认领 lead 记录并登记计划继任者。只有存在 lead 记录且状态可读的计划才会被观察。由人类启动 `herdr-peers autopilot --loop`；它是 daemon，不是登录项或系统服务。一个 daemon 可观察所有已启用 Herdr 机器报告的计划。没有 lead 记录的计划不会被观察。
 
 ### 持续执行、停滞和故障转移
@@ -30,7 +29,7 @@ lead 消失时，daemon 会请列表中第一个可联系的继任者运行 `her
 
 可选 `--brain` 会为 daemon 规则无法判断的情况启动专用决策 agent。它只能从封闭的操作列表中选择。daemon 始终是唯一执行者：验证允许的选择并执行操作，绝不执行 brain 的自由文本。计划的 `autonomy` 块也必须允许 brain。
 
-循环会记录停滞、阻塞、lead 丢失、完成和队列结果等计划事件。启用可选 `--notify` 集成时，daemon 会把 `plan-event-v1` 对象发给配置的 notifier；pack 的 Dailybot notifier 会将支持的事件转为团队更新。通知不会批准工作或更改计划记录。舰队地图和 `herdr-peers fleet ui` 显示多台机器上的 agent 与计划。界面只读，不更改计划状态，也不提示 agent。标记版本的行为见 [herdr-peers v2.0.0 autopilot 文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/autopilot.md)和[协议文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.0.0/skills/herdr-peers/protocol.md)。
+循环会记录停滞、阻塞、lead 丢失、完成和队列结果等计划事件。启用可选 `--notify` 集成时，daemon 会把 `plan-event-v1` 对象发给配置的 notifier；pack 的 Dailybot notifier 会将支持的事件转为团队更新。通知不会批准工作或更改计划记录。舰队地图和 `herdr-peers fleet ui` 显示多台机器上的 agent 与计划。界面只读，不更改计划状态，也不提示 agent。标记版本的行为见 [herdr-peers v2.1.0 autopilot 文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md)和[协议文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md)。
 
 ## 2. `autonomy` 块（plan-contract/v8）
 
@@ -46,9 +45,12 @@ lead 消失时，daemon 会请列表中第一个可联系的继任者运行 `her
 
 Pane 地址严格采用 Herdr 格式：`(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`。机器 ID 不能以 `-` 开头。这些设置限制哪些 pane 可被提示、谁接收事件、brain 是否能行动，以及计划如何参与队列；它们不会修改验收标准或 gates。
 
-## 3. 结构化阻塞与进度
+## 3. 结构化阻塞
+### 3.1. 阻塞记录
 
+### 3.2. 读取位置
 被阻塞的计划会在 `state.json` 的 `blocked` 或 `blocker` 记录中写入 C 类别和可选 `resolver`。`resolver` 可为 `lead` 或 `human`；省略表示 `human`。`lead` 表示可在已记录权限内解决，且不需要凭据、登录、同意、付款、推送到 main、发布或删除。循环（包括 brain）只能请求 lead 解决标为 `lead` 的阻塞。其他阻塞会报告给人类，不会通过提示绕过。
+### 3.3. 循环可执行的操作
 
 已发布的 herdr-peers 舰队地图最多显示计划自身 `PROGRESS.md` 的 14 行净化摘要。这是观察数据，不是权限授予，也不是机器可读进度头的已发布 schema。pack v8 线计划的进度头格式须在 8.0.0 tag 上核验后才能作为规范。
 

@@ -8,9 +8,9 @@ section: Record layer
 
 # Sumber daya dan kemampuan
 
-> **Cakupan versi:** Halaman ini menyatakan ulang empat dokumen normatif dari standar saat ini, DWP 7.0.0, pada rilis `v7.12.2`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/CONFIG.md), dan [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_ABILITIES.md). Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku.
+> **Cakupan versi:** Halaman ini menyatakan ulang empat dokumen normatif dari standar saat ini, DWP 8.0.0, pada rilis `v8.0.0`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/CONFIG.md), dan [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V7_ABILITIES.md). Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku.
 
-**Status: Stabil (konteks dan sumber daya sejak 6.0.0; konfigurasi dan kemampuan sejak 7.0.0).** Aturan ini mengikat rencana lini v6 ([Lapisan catatan](/spec/record-layer)); standar v5 tidak tersentuh. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
+**Status: Stabil (konteks dan sumber daya sejak 6.0.0; konfigurasi dan kemampuan sejak 8.0.0).** Aturan ini mengikat rencana lini v6 ([Lapisan catatan](/spec/record-layer)); standar v5 tidak tersentuh. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
 ## Manifest konteks per tugas
 

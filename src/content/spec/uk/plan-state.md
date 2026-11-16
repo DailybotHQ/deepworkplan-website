@@ -1,6 +1,6 @@
 ---
 title: Стан плану
-description: "Шар стану плану v5 (manifest.json, state.json, записи gate, узгодження) і те, як плани v6 та v7 замінюють його знімком, похідним від журналу."
+description: "Шар стану плану v5 (manifest.json, state.json, записи gate, узгодження) і те, як плани v6, v7 та v8 замінюють його знімком, похідним від журналу."
 order: 8
 lang: uk
 section: State
@@ -8,16 +8,17 @@ section: State
 
 # Стан плану
 
-> **Обсяг версії:** Ця сторінка специфікує **шар стану v5**, який плани v5 зберігають упродовж усього життя. Плани, створені поточним пакетом (DWP 7.0.0, реліз `v7.12.2`), натомість використовують [шар записів](/spec/record-layer). У плані v6 чи v7 авторитетом є контракт результату (`contract.json`), джерелом істини — журнал лише для додавання (`journal.ndjson`), а `state.json` — це **похідний знімок**, що відповідає [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Його перегенеровує `ledger.py project`, і він MUST NOT редагуватися вручну.
+> **Обсяг версії:** Ця сторінка специфікує **шар стану v5**, який плани v5 зберігають упродовж усього життя. Плани, створені поточним пакетом (DWP 8.0.0, реліз `v8.0.0`), натомість використовують [шар записів](/spec/record-layer). У плані v6 чи v7 авторитетом є контракт результату (`contract.json`), джерелом істини — журнал лише для додавання (`journal.ndjson`), а `state.json` — це **похідний знімок**, що відповідає [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Його перегенеровує `ledger.py project`, і він MUST NOT редагуватися вручну.
 
 ## Який шар стану застосовується
 
 | Покоління плану | Джерело істини | `state.json` | Схеми |
 | --- | --- | --- | --- |
 | v5 (і раніші плани v1/v2) | markdown-план, а цей JSON-шар — його проєкція | записується агентом у точках протоколу, описаних нижче | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 і v2 лишаються чинними для старіших планів) |
-| v6 і v7 | контракт плюс журнал лише для додавання | знімок, спроєктований із журналу, ніколи не записується вручну | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (або їхні відповідники v6) |
+| v6 і v7 | контракт плюс журнал лише для додавання | знімок, спроєктований із журналу, ніколи не записується вручну | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (або їхні відповідники v6) ; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
-План ніколи не змінює покоління неявно: плани v5 зберігають ці правила, а перенесення плану на v6 — це явна міграція з попереднім переглядом ([Шар записів](/spec/record-layer#coexistence-and-migration)). Канонічні джерела: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md).
+Плани v8 використовують `plan-manifest/v7` разом із `plan-contract/v8`, `journal-event/v8` і `plan-snapshot/v8`; схеми маніфесту й подій журналу v7 залишаються підтриманими для наявних планів.
+План ніколи не змінює покоління неявно: плани v5 зберігають ці правила, а перенесення плану на v6 — це явна міграція з попереднім переглядом ([Шар записів](/spec/record-layer#coexistence-and-migration)). Канонічні джерела: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Версія 5.0.0. Статус: стабільний.** Цей документ специфікує машиночитаний рівень стану плану методології Deep Work Plan, тепер узгоджений із власною версією стандарту DWP — жодна наявна вимога не послаблюється через перенумерацію. Ця редакція також документує захищений оновлювач стану, перевірену публікацію плану та правила істинності доказів, яким має відповідати завершений план (див. нижче). Ключові слова MUST, MUST NOT, SHOULD, SHOULD NOT та MAY тлумачаються згідно з RFC 2119.
 
@@ -236,7 +237,7 @@ Markdown MUST перемагати в кожному розбіжності. Я�
 
 ## Схеми v7 і v6 та сумісність
 
-Поточний пакет 7.x за замовчуванням створює плани **v7**. v7 — це покоління контракту поверх шару записів v6: [маніфест v7](https://deepworkplan.com/schema/plan-manifest/v7.json) вказує на [контракт v7](https://deepworkplan.com/schema/plan-contract/v7.json) — контракт v6 плюс необовʼязковий маркер завдання `parallel_safe`, — а кожна [подія журналу v7](https://deepworkplan.com/schema/journal-event/v7.json) може також фіксувати `delegation` (запущено, завершено, збій, скасовано), яка сама по собі ніколи не є доказом: результат делегата лишається лише заявленим, доки його не спостерігає власний runner плану. Активний знімок і маніфест контексту завдання спільні з v6. План ніколи не змішує покоління, а явний запит `v6` і далі матеріалізує план v6.
+Поточний пакет 8.x за замовчуванням створює плани **v8**. v8 — це покоління контракту поверх шару записів v6: [маніфест v7](https://deepworkplan.com/schema/plan-manifest/v7.json) вказує на [контракт v7](https://deepworkplan.com/schema/plan-contract/v7.json) — контракт v6 плюс необовʼязковий маркер завдання `parallel_safe`, — а кожна [подія журналу v7](https://deepworkplan.com/schema/journal-event/v7.json) може також фіксувати `delegation` (запущено, завершено, збій, скасовано), яка сама по собі ніколи не є доказом: результат делегата лишається лише заявленим, доки його не спостерігає власний runner плану. Активний знімок і маніфест контексту завдання спільні з v6. План ніколи не змішує покоління, а явний запит `v6` і далі матеріалізує план v6.
 
 v6 зберігає методологію v5 і додає суворішу інженерну структуру для нових планів. Маніфест ідентичності вказує на версійований контракт; журнал лише для додавання фіксує повноваження та події; маніфести контексту визначають вибір контексту для завдання; планувальник запускає лише допустиму роботу; активна проєкція `state.json` — це знімок, створений із журналу. Порожній список дозволених можливостей відхиляється. Це архітектурні рішення, а не доказ кращих результатів агентів: не-гіршість результатів не вимірювалася.
 

@@ -29,7 +29,7 @@ Bir plan, `.dwp/plans/` altında `PLAN_001_<slug>/` olarak adlandırılmış bir
 - `analysis_results/` — analiz çıktıları, denetim raporları ve kanıtlar.
 
 
-Güncel 7.x paketi varsayılan olarak v7 planları oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş açık bir istek gerektirir. Yeni planlara en az üç basamaklı, monoton artan sayısal kimlikler verilir (örneğin `PLAN_001_add_payment_webhooks/`). Dondurulmuş v5 şemaları sayısal kimliği bir sözcük saydığı için v5 slug’ları 2–4, v7 slug’ları ise v6’daki gibi 2–5 sözcük içerir. Mevcut numarasız `PLAN_<slug>/` klasörleri okunabilir kalır ve hiçbir zaman yeniden adlandırılmaz. Numaralı planlar varsa `latest`, sayısal kimliği en yüksek olan planı gösterir.
+v8 paketi yeni planları varsayılan olarak `plan-contract/v8` ile oluşturur. Mevcut planlar kayıtlı nesillerini korur; geçiş için açık bir `refine migrate` gerekir.
 
 ## Görev dosyası yapısı
 

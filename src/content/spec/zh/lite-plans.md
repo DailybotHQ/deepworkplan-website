@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite 计划
 
-> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前标准 DWP 7.0.0 还要求遵循[规范索引](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)中适用的 `V6_*.md` 与 `V7_*.md` 扩展。现有 v5 与 v6 计划保留其记录的规则。
+> **版本范围：** 本文档是保留的 v5.0.0 基础文档。当前标准 DWP 8.0.0 还要求遵循[规范索引](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)中适用的 `V6_*.md` 与 `V7_*.md` 扩展。现有 v5 与 v6 计划保留其记录的规则。
 
 **版本 5.0.0。状态：稳定。** 本文档规定了与 [DWP 规范](/spec/dwp-specification) 一同引入的 Lite 计划形态：一种面向中小规模、边界清晰工作的计划格式，直接物化，不设不可执行的草案阶段。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
@@ -17,7 +17,6 @@ section: Workflow
 一份计划 MUST 是以下两种形态之一，在 `manifest.json` 中以 `plan_format` 一次性记录：**Full** 在 `<n>.task_<slug>.md` 下为每项任务存储一个文件；**Lite** 将紧凑、可执行的任务记录以内联形式存放在 `README.md` 中，每条记录都位于一个稳定的 `{#task-N}` 锚点之后。一份 Lite 计划并非部分或非正式的 Full 计划：每条任务记录仍然 MUST 携带目标、触及面、验收标准、验证关卡与完成日志，其规范性结构与 [任务结构](/spec/dwp-specification#task-anatomy) 为 Full 所定义的完全相同。
 
 有四个维度描述计划的状态，MUST 被独立追踪，而不是混为一谈：
-
 | 维度 | 取值 | 含义 |
 |------|------|------|
 | 格式 | `lite`、`full` | 任务记录存放在何处 |

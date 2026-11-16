@@ -8,7 +8,7 @@ section: Addons
 
 # Eklentiler
 
-> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 8.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
 
 **Sürüm 2.1.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Sekizin yedisi isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
 
@@ -27,7 +27,7 @@ Keşif: `onboard` akışı `skills/deepworkplan/addons/` dizinini numaralandır�
 
 ## Üretim eklentileri (sekiz)
 
-Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır. Bunlardan dördü — devcontainer, Herdr, DeepWorkPlan Vim ve Agentkit — kendi deposu ve sürüm döngüsü olan bir ürüne etiketle sabitlenmiş ince entegrasyon katmanlarıdır; her ürün Deep Work Plan olmadan çalışır. Kabul edilen bir eklenti `.dwp/config.json` eklenti kaydına (DWP 7.0.0) yazılır; bu kayıt yalnızca sunabilir veya güçlendirebilir — uyumluluğu ya da bir planı asla koşula bağlamaz.
+Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır. Bunlardan dördü — devcontainer, Herdr, DeepWorkPlan Vim ve Agentkit — kendi deposu ve sürüm döngüsü olan bir ürüne etiketle sabitlenmiş ince entegrasyon katmanlarıdır; her ürün Deep Work Plan olmadan çalışır. Kabul edilen bir eklenti `.dwp/config.json` eklenti kaydına (DWP 8.0.0) yazılır; bu kayıt yalnızca sunabilir veya güçlendirebilir — uyumluluğu ya da bir planı asla koşula bağlamaz.
 
 ### Devcontainer (birinci eklenti)
 
@@ -89,7 +89,7 @@ v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https:
 - **Davranış:** eşler arası protokol (damga, yetki, yanıt, döngü koruması, derinlik ve yayılım sınırları) pakette değil, herdr-peers içinde yaşar; her kullanım `agent_delegation` sözleşme yetkisini gerektirir ve bir delegenin sonucu, planın kendi çalıştırıcısı onu gözlemleyene kadar bir iddia olarak kalır
 - **Ne zaman sunulur:** Faz 7b sırasında açık opt-in; `herdr` ve `herdr-peers` için salt okunur tespit; taşıyıcı yalnızca bir Herdr oturumu içinde kullanılabilir
 
-- **Döngü:** Herdr v2.0.0 ayrıca kapsamlı devam ve halefe devir için isteğe bağlı, insanın başlattığı `herdr-peers autopilot --loop` sunar. [Döngü mühendisliği](/spec/loop-engineering) sayfasına bakın.
+- **Döngü:** Herdr v2.1.0 ayrıca kapsamlı devam ve halefe devir için isteğe bağlı, insanın başlattığı `herdr-peers autopilot --loop` sunar. [Döngü mühendisliği](/spec/loop-engineering) sayfasına bakın.
 
 ### DeepWorkPlan Vim (yedinci eklenti)
 
