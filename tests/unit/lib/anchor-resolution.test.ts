@@ -101,12 +101,13 @@ describe('findUnresolvedAnchors', () => {
 // every fragment link on every page must resolve. Skipped when no build
 // output exists so `pnpm run test` stays runnable without a build.
 describe.skipIf(!existsSync('dist'))('dist anchor resolution', () => {
-  // The scan reads every page in dist/ (2000+); under the full suite's
-  // parallel workers it exceeds vitest's 5 s default, so like
-  // ecosystem-pins.test.ts and schema-urls.test.ts it carries an explicit
-  // 30 s timeout (docs/TESTING_GUIDE.md).
+  // The scan reads every page in dist/ (2000+); it exceeds short defaults
+  // twice over: vitest's 5 s under the host suite's parallel workers, and
+  // 30 s inside the dck container, where the bind-mounted checkout's I/O is
+  // slower. Like ecosystem-pins.test.ts and schema-urls.test.ts it carries
+  // an explicit timeout (docs/TESTING_GUIDE.md) — 120 s covers both.
   it('has no unresolved fragment links in the built site', {
-    timeout: 30_000,
+    timeout: 120_000,
   }, async () => {
     const { readdirSync, readFileSync, statSync } = await import('node:fs');
     const { join, relative } = await import('node:path');
