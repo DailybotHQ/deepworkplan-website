@@ -64,3 +64,7 @@ Validation is part of the task, not an afterthought: each task names the command
 The current DWP standard is 7.0.0, implemented by the 7.x skill line. That pack uses v7 for every new plan by default; an explicit `v6` request still materializes a v6 plan. Existing v1, v2, v5, and v6 plans keep their recorded generation and are never silently migrated; moving a v5 plan to v6 requires an explicit migration request.
 
 v6 retains the same plan → task → validation-gate → completion methodology, slash commands, and `.dwp/plans/` location. It makes the engineering structure stricter with a contract, append-only journal, task context manifests, scheduler, and explicit runtime capability declarations. v7 keeps that record layer and adds an optional `parallel_safe` task marker, a `delegation` journal event for bounded work handed to another agent, and the `.dwp/config.json` addon registry; with no delegation addon enabled, every plan still runs sequentially in the current session. The architecture decision is GO; empirical superiority or non-inferiority in agent outcomes has not been measured.
+
+## From the core loop to a closed loop
+
+The core operations describe how a plan is executed. With the optional Herdr addon, `execute` claims the plan's lead record — adding a succession when the plan names successors — so a human-started `herdr-peers autopilot --loop` can nudge an idle lead, report events, and ask a listed successor to take over when the lead is gone. The daemon adds continuity, not authority; see [Loop engineering](/methodology/08-loop-engineering).

@@ -117,3 +117,7 @@ Nhật ký của kế hoạch điều phối ghi lại bầy agent: các lần k
 ## Diễn tập
 
 Hãy chứng minh vòng lặp trước khi dựa vào nó. Trên một repository thử nghiệm với một kế hoạch điều phối nhỏ, chạy một lead và ít nhất ba lane trên các tài khoản hoặc nhà cung cấp khác nhau. Giới hạn năng lực được báo cáo của một lane — `AGENTKIT_CAPACITY_CAP=@<profile>=8` hạ số đo và không bao giờ nâng nó lên — và quan sát lane đó viết một gói, lead khởi chạy một agent kế nhiệm chấp nhận gói, và agent kế nhiệm vượt qua cổng. Giới hạn lead theo cùng cách và quan sát lần handover cùng lead mới hoàn tất kế hoạch. Sau đó ghi bằng chứng vào `analysis_results/` của kế hoạch: không có phím bấm nào của con người, mọi gói, mọi epoch, một ask giữa hai lane, và các cổng.
+
+## Khép kín vòng thực thi
+
+Daemon vòng lặp tùy chọn tiếp tục một kế hoạch đã duyệt từ bản ghi lead của nó, nhắc mà không thêm quyền hạn và yêu cầu một người kế nhiệm trong danh sách tiếp quản khi lead không còn. Con người khởi động daemon; thông tin xác thực, đăng nhập và các cổng C1–C7 của kế hoạch vẫn là việc của con người. Xem [Loop engineering](/vi/methodology/08-loop-engineering).

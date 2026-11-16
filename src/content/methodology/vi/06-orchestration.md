@@ -100,3 +100,7 @@ Kế hoạch cha khép lại dựa trên bằng chứng, không dựa trên báo
 ## Khi một tài khoản hoặc lead cạn kiệt
 
 Một lần chạy dài sống lâu hơn bất kỳ tài khoản đơn lẻ nào. Từ coding-agents-kit (`v0.7.1`) và herdr-peers (`v0.3.2`), một lane kiểm tra năng lực của chính nó tại mỗi ranh giới tác vụ và chuyển giao công việc qua một gói bàn giao trước khi tài khoản của nó cạn, một lead chuyển giao quyền lead hoặc được phó lead thay thế, và chỉ những mục nghiêm trọng mới tới tay nhà phát triển. [Tự chủ của bầy agent](/vi/methodology/07-swarm-autonomy) mô tả vòng lặp, gói bàn giao, sự kế nhiệm và các lớp leo thang.
+
+## Đăng ký kế hoạch cho vòng lặp
+
+Khi addon Herdr tùy chọn được bật, `execute` của gói skill nhận bản ghi lead của kế hoạch, thêm danh sách kế nhiệm khi kế hoạch nêu tên người kế nhiệm. Con người có thể khởi động `herdr-peers autopilot --loop` để tiếp tục các kế hoạch đang mở và yêu cầu người kế nhiệm trong danh sách tiếp quản một lead không còn. Daemon chỉ theo dõi các kế hoạch đã đăng ký; xem [Loop engineering](/vi/methodology/08-loop-engineering).

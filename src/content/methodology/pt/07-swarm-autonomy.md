@@ -117,3 +117,7 @@ O diário do plano orquestrador registra o enxame: inícios e resultados das fre
 ## Ensaiar
 
 Prove o loop antes de depender dele. Em um repositório de rascunho com um plano orquestrador pequeno, rode um líder e pelo menos três frentes em contas ou fornecedores diferentes. Limite a capacidade reportada de uma frente — `AGENTKIT_CAPACITY_CAP=@<profile>=8` rebaixa a leitura e nunca pode elevá-la — e observe-a escrever um pacote, o líder iniciar um sucessor que o aceita e o sucessor passar no gate. Limite o líder da mesma forma e observe a passagem e o novo líder concluir o plano. Depois registre a evidência em `analysis_results/` do plano: nenhuma tecla humana, cada pacote, cada época, uma consulta entre frentes e os gates.
+
+## Fechar o loop de execução
+
+O daemon opcional do loop continua um plano aprovado a partir do registro de lead, avisa sem acrescentar autoridade e pede a um sucessor listado que assuma quando o lead desaparecer. Uma pessoa o inicia; credenciais, logins e os gates C1–C7 do plano continuam sendo ações humanas. Consulte [Loop engineering](/pt/methodology/08-loop-engineering).

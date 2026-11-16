@@ -117,3 +117,7 @@ Le journal du plan orchestrateur consigne l’essaim : les lancements et résult
 ## L’exercer
 
 Éprouvez la boucle avant de vous y fier. Sur un dépôt de test avec un petit plan orchestrateur, faites tourner un coordinateur et au moins trois couloirs sur des comptes ou des fournisseurs différents. Plafonnez la capacité signalée d’un couloir — `AGENTKIT_CAPACITY_CAP=@<profile>=8` abaisse la lecture et ne peut jamais l’élever — et observez-le écrire un paquet, le coordinateur lancer un successeur qui l’accepte, et le successeur passer la porte de validation. Plafonnez le coordinateur de la même manière et observez la transmission et le nouveau coordinateur terminer le plan. Consignez ensuite les preuves dans le `analysis_results/` du plan : aucune frappe humaine, chaque paquet, chaque époque, une demande d’un couloir à un autre, et les portes de validation.
+
+## Fermer la boucle d’exécution
+
+Le daemon facultatif de la boucle poursuit un plan approuvé à partir de son enregistrement de lead, relance sans ajouter d’autorité et demande à un successeur listé de prendre la relève lorsque le lead a disparu. Un humain le lance ; les identifiants, les connexions et les portes C1–C7 du plan restent des actions humaines. Voir [Loop engineering](/fr/methodology/08-loop-engineering).

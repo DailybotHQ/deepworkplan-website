@@ -117,3 +117,7 @@ Das Journal des Orchestrator-Plans hält den Schwarm fest: Lane-Starts und -Erge
 ## Den Ablauf üben
 
 Erproben Sie die Schleife, bevor Sie sich auf sie verlassen. Betreiben Sie auf einem Übungs-Repository mit einem kleinen Orchestrator-Plan einen Lead und mindestens drei Lanes auf verschiedenen Konten oder Anbietern. Begrenzen Sie die gemeldete Kapazität einer Lane — `AGENTKIT_CAPACITY_CAP=@<profile>=8` senkt den Messwert und kann ihn nie erhöhen — und beobachten Sie, wie sie ein Paket schreibt, der Lead einen Nachfolger startet, der es annimmt, und der Nachfolger das Gate besteht. Begrenzen Sie den Lead auf dieselbe Weise und beobachten Sie die Übergabe und wie der neue Lead den Plan abschließt. Halten Sie dann die Evidenz in `analysis_results/` des Plans fest: kein menschlicher Tastendruck, jedes Paket, jede Epoche, ein ask von Lane zu Lane und die Gates.
+
+## Den Ausführungsloop schließen
+
+Der optionale Loop-Daemon setzt einen genehmigten Plan anhand seines Lead-Eintrags fort, stößt an, ohne Befugnisse hinzuzufügen, und bittet einen eingetragenen Nachfolger um Übernahme, wenn der Lead verschwunden ist. Ein Mensch startet ihn; Zugangsdaten, Anmeldungen und die C1–C7-Gates des Plans bleiben menschliche Aufgaben. Siehe [Loop engineering](/de/methodology/08-loop-engineering).

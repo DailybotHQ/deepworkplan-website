@@ -117,3 +117,7 @@ El diario del plan orquestador registra el enjambre: los lanzamientos y resultad
 ## Ensayarlo
 
 Demuestra el bucle antes de confiar en él. En un repositorio de pruebas con un plan orquestador pequeño, ejecuta un líder y al menos tres carriles en cuentas o proveedores distintos. Limita la capacidad reportada de un carril — `AGENTKIT_CAPACITY_CAP=@<profile>=8` rebaja la lectura y nunca puede subirla — y observa cómo escribe un paquete, cómo el líder lanza un sucesor que lo acepta y cómo el sucesor pasa la puerta de validación. Limita al líder del mismo modo y observa la cesión y cómo el nuevo líder termina el plan. Después registra la evidencia en `analysis_results/` del plan: ninguna pulsación humana, cada paquete, cada época, una consulta entre carriles y las puertas de validación.
+
+## Cerrar el bucle de ejecución
+
+El daemon opcional del bucle continúa un plan aprobado a partir de su registro de lead, avisa sin añadir autoridad y pide a un sucesor de la lista que tome el relevo cuando el lead desaparece. Lo inicia una persona; las credenciales, los inicios de sesión y las puertas C1–C7 del plan siguen siendo acciones humanas. Consulta [Loop engineering](/es/methodology/08-loop-engineering).

@@ -75,3 +75,7 @@ Kiểm chứng là một phần của tác vụ, không phải điều nghĩ th�
 Tiêu chuẩn DWP hiện tại là 7.0.0, được triển khai bởi dòng skill 7.x. Gói này mặc định dùng v7 cho mọi kế hoạch mới; một yêu cầu `v6` rõ ràng vẫn tạo ra kế hoạch v6. Các kế hoạch v1, v2, v5 và v6 hiện có giữ nguyên thế hệ đã ghi nhận và không bao giờ bị di chuyển âm thầm; chuyển một kế hoạch v5 sang v6 cần yêu cầu di chuyển rõ ràng.
 
 v6 giữ nguyên phương pháp kế hoạch → tác vụ → cổng xác thực → hoàn tất, các lệnh slash và vị trí `.dwp/plans/`. Cấu trúc kỹ thuật chặt chẽ hơn nhờ hợp đồng, nhật ký, manifest ngữ cảnh theo tác vụ, bộ lập lịch và việc từ chối danh sách cho phép rỗng. v7 giữ nguyên lớp bản ghi đó và bổ sung dấu đánh tác vụ `parallel_safe` tùy chọn, sự kiện nhật ký `delegation` cho công việc có giới hạn được giao cho một agent khác, và sổ đăng ký addon `.dwp/config.json`; khi không bật addon ủy quyền nào, mọi kế hoạch vẫn chạy tuần tự trong phiên hiện tại. Quyết định kiến trúc là GO; tính không kém hơn theo thực nghiệm của kết quả agent chưa được đo lường.
+
+## Từ vòng lặp cốt lõi đến vòng lặp khép kín
+
+Các thao tác cốt lõi mô tả cách một kế hoạch được thực thi. Với addon Herdr tùy chọn, `execute` nhận bản ghi lead của kế hoạch — thêm danh sách kế nhiệm khi kế hoạch nêu tên người kế nhiệm — để `herdr-peers autopilot --loop` do con người khởi động có thể nhắc lead đang rảnh, báo cáo sự kiện và yêu cầu một người kế nhiệm trong danh sách tiếp quản khi lead không còn. Daemon bổ sung tính liên tục, không phải quyền hạn; xem [Loop engineering](/vi/methodology/08-loop-engineering).

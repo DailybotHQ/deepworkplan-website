@@ -100,3 +100,7 @@ Der übergeordnete Plan schließt auf Grundlage von Evidenz, nicht von Meldungen
 ## Wenn ein Konto oder der Lead ausfällt
 
 Ein langer Lauf überdauert jedes einzelne Konto. Ab coding-agents-kit (`v0.7.1`) und herdr-peers (`v0.3.2`) prüft eine Lane an jeder Aufgabengrenze ihre eigene Kapazität und gibt ihre Arbeit über ein Paket weiter, bevor ihr Konto erschöpft ist; ein Lead gibt die Leitung weiter oder wird durch seinen Stellvertreter ersetzt, und nur kritische Punkte erreichen den Entwickler. [Schwarmautonomie](/de/methodology/07-swarm-autonomy) beschreibt die Schleife, das Paket, die Nachfolge und die Eskalationsklassen.
+
+## Einen Plan für den Loop registrieren
+
+Ist das optionale Herdr-Addon aktiv, beansprucht `execute` des Packs den Lead-Eintrag des Plans und fügt eine Nachfolge hinzu, wenn der Plan Nachfolger benennt. Der Mensch kann `herdr-peers autopilot --loop` starten, um offene Pläne fortzusetzen und bei einem verschwundenen Lead den eingetragenen Nachfolger um Übernahme zu bitten. Der Daemon beobachtet nur registrierte Pläne; siehe [Loop engineering](/de/methodology/08-loop-engineering).
