@@ -6,7 +6,7 @@ version: "v7 · Delega con evidenza"
 kind: release
 lang: it
 order: 0
-featured: true
+featured: false
 sourceLabel: "Set di schemi v7 pubblicato"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

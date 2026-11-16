@@ -6,7 +6,7 @@ version: "v7 · प्रमाण के साथ प्रतिनिधि�
 kind: release
 lang: hi
 order: 0
-featured: true
+featured: false
 sourceLabel: "प्रकाशित v7 स्कीमा सेट"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

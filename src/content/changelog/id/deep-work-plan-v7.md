@@ -6,7 +6,7 @@ version: "v7 · Delegasi dengan bukti"
 kind: release
 lang: id
 order: 0
-featured: true
+featured: false
 sourceLabel: "Kumpulan skema v7 yang diterbitkan"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

@@ -6,7 +6,7 @@ version: "v7 · 증거를 갖춘 위임"
 kind: release
 lang: ko
 order: 0
-featured: true
+featured: false
 sourceLabel: "게시된 v7 스키마 세트"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

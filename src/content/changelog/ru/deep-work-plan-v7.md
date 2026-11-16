@@ -6,7 +6,7 @@ version: "v7 · Делегирование с доказательствами"
 kind: release
 lang: ru
 order: 0
-featured: true
+featured: false
 sourceLabel: "Опубликованный набор схем v7"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

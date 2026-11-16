@@ -6,7 +6,7 @@ version: "v7 · Kanıtlı devir"
 kind: release
 lang: tr
 order: 0
-featured: true
+featured: false
 sourceLabel: "Yayımlanan v7 şema kümesi"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

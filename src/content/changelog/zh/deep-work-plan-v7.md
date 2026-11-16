@@ -6,7 +6,7 @@ version: "v7 · 带证据的委派"
 kind: release
 lang: zh
 order: 0
-featured: true
+featured: false
 sourceLabel: "已发布的 v7 架构集合"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

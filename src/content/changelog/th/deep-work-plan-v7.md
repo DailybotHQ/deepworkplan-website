@@ -6,7 +6,7 @@ version: "v7 · การมอบหมายพร้อมหลักฐา�
 kind: release
 lang: th
 order: 0
-featured: true
+featured: false
 sourceLabel: "ชุดสคีมา v7 ที่เผยแพร่"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

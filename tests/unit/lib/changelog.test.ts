@@ -57,13 +57,13 @@ describe('changelog display helpers', () => {
     );
   });
 
-  it('ensures every v7 changelog locale names ECOSYSTEM_PINS.pack.tag as its installed release', () => {
+  it('ensures every v8 changelog locale names ECOSYSTEM_PINS.pack.tag as its installed release', () => {
     // Labels are translated, so anchor on the bold version rather than the
     // English phrase: every locale must state the pinned pack release.
     const dir = join(process.cwd(), 'src/content/changelog');
     const files = readdirSync(dir, { withFileTypes: true })
       .filter((entry) => entry.isDirectory())
-      .map((entry) => join(dir, entry.name, 'deep-work-plan-v7.md'));
+      .map((entry) => join(dir, entry.name, 'deep-work-plan-v8.md'));
     expect(files.length).toBeGreaterThan(1);
     const bold = `**${ECOSYSTEM_PINS.pack.tag.replace(/^v/, '')}**`;
     for (const file of files) {

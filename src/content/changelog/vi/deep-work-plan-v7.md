@@ -6,7 +6,7 @@ version: "v7 · Ủy quyền có bằng chứng"
 kind: release
 lang: vi
 order: 0
-featured: true
+featured: false
 sourceLabel: "Bộ schema v7 đã công bố"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

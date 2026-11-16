@@ -6,7 +6,7 @@ version: "v7 · 証拠を伴う委任"
 kind: release
 lang: ja
 order: 0
-featured: true
+featured: false
 sourceLabel: "公開済み v7 スキーマ一式"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

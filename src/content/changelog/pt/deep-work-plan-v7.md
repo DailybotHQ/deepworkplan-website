@@ -6,7 +6,7 @@ version: "v7 · Delegação com evidência"
 kind: release
 lang: pt
 order: 0
-featured: true
+featured: false
 sourceLabel: "Conjunto de esquemas v7 publicado"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

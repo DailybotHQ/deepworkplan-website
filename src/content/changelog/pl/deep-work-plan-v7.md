@@ -6,7 +6,7 @@ version: "v7 · Delegowanie z dowodami"
 kind: release
 lang: pl
 order: 0
-featured: true
+featured: false
 sourceLabel: "Opublikowany zestaw schematów v7"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:

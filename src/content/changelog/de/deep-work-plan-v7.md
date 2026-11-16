@@ -6,7 +6,7 @@ version: "v7 · Delegation mit Nachweis"
 kind: release
 lang: de
 order: 0
-featured: true
+featured: false
 sourceLabel: "Veröffentlichter v7-Schemasatz"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:
