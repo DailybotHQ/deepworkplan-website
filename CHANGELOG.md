@@ -9,6 +9,15 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.76] - 2026-11-16
+
+### Changed
+
+- fix: llms-full names herdr-peers protocol 2 in the addon interface note
+- feat: re-vendor pack v7.12.2 on the herdr-peers 2.0.0 train
+- fix: apply the self-review findings on the herdr 2.0.0 train
+- feat: pin herdr-peers v2.0.0 — protocol 2, lead appointment, brain, plan queue
+
 ## [5.0.75] - 2026-11-16
 
 ### Changed
@@ -1496,7 +1505,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.75...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.76...HEAD
+[5.0.76]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.76
 [5.0.75]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.75
 [5.0.74]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.74
 [5.0.73]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.73
