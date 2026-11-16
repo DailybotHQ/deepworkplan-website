@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim**, Deep Work Plan için terminal düzenleyicisidir: terminalde çalışan insanlar ve kodlama ajanları için bir Neovim yapılandırması. Planlarınız, belgeleriniz ve tüm komutların dizini tek bir tuş uzağınızda.
 
-Ayrı bir üründür ve Deep Work Plan v7'nin (pack `v7.12.2`) isteğe bağlı `vim` eklentisi olarak sunulur. Deep Work Plan herhangi bir düzenleyiciyle ya da hiçbiriyle çalışır; düzenleyici de Deep Work Plan gerektirmez: bir makineye tek başına eklersiniz ve plan olsun ya da olmasın düzenleyici olarak çalışır. Bu sayfa, ilk kararlı sürüm `v1.0.0` için bir bakım sürümü olan **v1.0.1** sürümünü anlatır: `v1.0.0` sürümünden itibaren kurulum programı ve bayrakları (karşılık gelen `DWP_VIM_*` değişkenleriyle), eklenti yüzeyi (`addon/surface.json`, arayüz 1), `:DwpPlans`, `:DwpLanes`, `:DwpCommands` ve `:DwpConfig` düzenleyici komutları, `dwpvim.json` anahtarları ve eşleme sözleşmesinin sabitlediği tuş atamaları yalnızca yeni bir ana sürümde uyumsuz biçimde değişir.
+Ayrı bir üründür ve Deep Work Plan v8'nin (pack `v8.0.0`) isteğe bağlı `vim` eklentisi olarak sunulur. Deep Work Plan herhangi bir düzenleyiciyle ya da hiçbiriyle çalışır; düzenleyici de Deep Work Plan gerektirmez: bir makineye tek başına eklersiniz ve plan olsun ya da olmasın düzenleyici olarak çalışır. Bu sayfa, ilk kararlı sürüm `v1.0.0` için bir bakım sürümü olan **v1.0.1** sürümünü anlatır: `v1.0.0` sürümünden itibaren kurulum programı ve bayrakları (karşılık gelen `DWP_VIM_*` değişkenleriyle), eklenti yüzeyi (`addon/surface.json`, arayüz 1), `:DwpPlans`, `:DwpLanes`, `:DwpCommands` ve `:DwpConfig` düzenleyici komutları, `dwpvim.json` anahtarları ve eşleme sözleşmesinin sabitlediği tuş atamaları yalnızca yeni bir ana sürümde uyumsuz biçimde değişir.
 
 Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
@@ -212,9 +212,9 @@ Kurulum programı Windows'ta çalışmaz. Deponun README dosyasındaki elle kuru
 
 Hayır. Önce bir düzenleyicidir. Deep Work Plan becerisini kurmaz ve gerektirmez; plan tarayıcısının, bir `.dwp/plans/` klasörü olana kadar listeleyecek bir şeyi olmaz.
 
-### v7 vim eklentisi bunu nasıl kullanır?
+### vim eklentisi bunu nasıl kullanır?
 
-Deep Work Plan v7, onboarding sırasında düzenleyiciyi isteğe bağlı `vim` eklentisi olarak sunar. Eklenti, mevcut bir kurulumu düzenleyicinin `addon/surface.json` dosyası üzerinden salt okunur biçimde algılar ve sabitlenmiş, sağlama toplamı doğrulanmış kurulumu yalnızca onayınızla önerir. Açık onay olmadan mevcut bir Neovim yapılandırmasının üzerine asla yazmaz ve hiçbir zaman zorunlu değildir.
+Deep Work Plan v8, onboarding sırasında düzenleyiciyi isteğe bağlı `vim` eklentisi olarak sunar. Eklenti, mevcut bir kurulumu düzenleyicinin `addon/surface.json` dosyası üzerinden salt okunur biçimde algılar ve sabitlenmiş, sağlama toplamı doğrulanmış kurulumu yalnızca onayınızla önerir. Açık onay olmadan mevcut bir Neovim yapılandırmasının üzerine asla yazmaz ve hiçbir zaman zorunlu değildir.
 
 ### Kodlama ajanları bunu nasıl kullanır?
 
@@ -237,5 +237,5 @@ Kaynak kod [DeepWorkPlan Vim deposunda](https://github.com/DailybotHQ/deepworkpl
 - [Devcontainer](/kit/devcontainer) — yeniden üretilebilir geliştirme ortamı (birinci eklenti)
 - [Dailybot](/kit/dailybot) — ekibe görünür plan yaşam döngüsü raporları (ikinci eklenti)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — plan Final Review'ları sırasında yerel inceleme (beşinci eklenti)
-- [Herdr](/kit/herdr) — bir görevi Herdr bölmesindeki eş bir ajana devretme (v7)
-- [Agentkit](/kit/agentkit) — her terminal kodlama ajanı için tek komut ve başsız (headless) devretme (v7)
+- [Herdr](/kit/herdr) — bir görevi Herdr bölmesindeki eş bir ajana devretme (v7'den beri)
+- [Agentkit](/kit/agentkit) — her terminal kodlama ajanı için tek komut ve başsız (headless) devretme (v7'den beri)

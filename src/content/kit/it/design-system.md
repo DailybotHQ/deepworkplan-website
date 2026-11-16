@@ -42,7 +42,7 @@ Non è mai obbligatorio — un repository con zero addon opzionali è pienamente
 
 Quando accettato, l’addon può installare un delegatore `/design-system` nella cartella `.agents/commands/` del repo per rigenerare o aggiornare `DESIGN.md` in seguito. Installare il comando è opzionale; un addon rifiutato non ne installa alcuno.
 
-## Specifica v7
+## Specifica v8
 
 | Elemento | Valore |
 |---|---|
@@ -50,7 +50,7 @@ Quando accettato, l’addon può installare un delegatore `/design-system` nella
 | Chiave di registro | `design-system` in `.dwp/config.json` |
 | Descrittore | `addons/design-system/addon.json` (interfaccia 1) |
 | File di destinazione | `docs/DESIGN.md` indicizzato da `AGENTS.md` |
-| Controllo versione | Fissato e versionato con il pacchetto di skill (`v7.12.2`) |
+| Controllo versione | Fissato e versionato con il pacchetto di skill (`v8.0.0`) |
 
 ## Relazione con i documenti di design per funzionalità
 

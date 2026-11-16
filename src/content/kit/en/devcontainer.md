@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v7** (pack `v7.12.2`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
+Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v8** (pack `v8.0.0`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
 
 Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
 
@@ -23,20 +23,20 @@ Deep Work Plan has four pillars: spec-first plans, the repository as the harness
 ## Install
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v1.2.0`: `v0.2.0` is unsupported.
+Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v1.3.0`: `v0.2.0` is unsupported.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/devcontainer-kit`, tag `v1.2.0`, interface 2 |
+| Product | `DailybotHQ/devcontainer-kit`, tag `v1.3.0`, interface 2 |
 | Registry key | `devcontainer` in `.dwp/config.json` |
 | Per-repository config | `.devcontainer/dck.toml` |
 | Detection | `dck doctor --json` |
 
-**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the new pins (herdr-peers 1.3.1, coding-agents-kit 1.4.0 and DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image).
+**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the current pins. The `v1.3.0` image bakes the same versions as `v1.2.0`: herdr-peers 1.3.1, coding-agents-kit 1.4.0 and DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image.
 
 ## Layers
 
@@ -104,6 +104,14 @@ copy_keys = true              # default false
 ```
 
 While it is on, `dck up` binds the host's `~/.ssh` read-only at `~/.ssh_host`, and every start copies its `id_*` keys into the container's `~/.ssh` (private keys `0600`), kept in step with the host. Agent forwarding is unchanged, and turning it off removes the copies at the next start. The cost: the whole host `~/.ssh` is readable inside the container, and the private keys rest in the state volume.
+
+## From devcontainer-kit 1.3.0 (interface 2)
+
+Release 1.3.0 keeps interface 2 and adds one opt-in key; a repository that does not set it renders exactly as before.
+
+- **`[compose] container_only`.** Workspace subpaths listed here are mounted as project-scoped named volumes (`co-<path-slug>`, for example `co-app-node_modules` over `/app/node_modules`), read-write, on the main service. What the container builds there never reaches the host's checkout. The case it exists for: the workspace is a bind mount, and an `npm` or `pnpm` install inside the container on a macOS or Windows host replaces `node_modules` with its own platform's build, breaking the host's install.
+- **Ownership at every start.** The entrypoint gives each mount point to the configured user at every container start; once the user owns it, this does nothing.
+- **One mount per path.** A path the user block also mounts is refused, and so is a derived volume name already used by `compose.state_volume` or `[compose] volumes`. The `dck.toml` schema (`dck-config-v2.json`) gains the key.
 
 ## Security defaults
 

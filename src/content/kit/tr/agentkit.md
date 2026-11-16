@@ -10,7 +10,7 @@ order: 8
 
 Her terminal kodlama agent'ının bir oturumu sürdürmek için kendi bayrakları, ikinci bir hesabı ayrı tutmak için kendi yolu, kendi başsız (headless) modu ve izin istemlerini atlamak için kendi anahtarı vardır. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)**, hepsinin üzerine tek bir komut yüzeyi koyar: `ak <kind> [@profile]`.
 
-Bu eklenti, kiti **DWP v7**'ye (paket `v7.12.2`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
+Bu eklenti, kiti **DWP v8**'ye (paket `v8.0.0`) **başsız** devretme taşıması olarak entegre eder. İsteğe bağlıdır: o olmadan her görev, tıpkı önceden olduğu gibi mevcut oturumda çalışır. Kitin kendisi, Deep Work Plan olmadan da çalışan bir MIT ürünüdür.
 
 Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış he
 ## Kurulum
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.4.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.5.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v1.4.0` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v1.5.0` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |
@@ -105,7 +105,7 @@ Eklenti hiçbir özerklik bayrağı yazmaz ve asla `--auto` geçirmez. Bir plan 
 
 ## Plana neler ekler
 
-Sözleşmesi `agent_delegation` yetkisi veren bir v7 planında `execute`, `parallel_safe` bir görevi başka bir CLI'a devredebilir: ayrılmış bir git worktree oluşturur, orada bir zaman aşımıyla `ak run` çalıştırır ve sonucu planın `analysis_results/delegations/` dizinine toplar. Sonuç, planın kendi kapı çalıştırıcısı onu gözlemleyene kadar `asserted` kanıttır. Bir delegeyi iptal etmek, onun tüm süreç ağacını durdurur.
+Sözleşmesi `agent_delegation` yetkisi veren bir v7 veya v8 planında `execute`, `parallel_safe` bir görevi başka bir CLI'a devredebilir: ayrılmış bir git worktree oluşturur, orada bir zaman aşımıyla `ak run` çalıştırır ve sonucu planın `analysis_results/delegations/` dizinine toplar. Sonuç, planın kendi kapı çalıştırıcısı onu gözlemleyene kadar `asserted` kanıttır. Bir delegeyi iptal etmek, onun tüm süreç ağacını durdurur.
 
 ## Agentkit mi Herdr mı
 
@@ -116,7 +116,7 @@ Sözleşmesi `agent_delegation` yetkisi veren bir v7 planında `execute`, `paral
 
 İkisi birlikte kullanılabilir: herdr-peers, bir bölmede `ak env <kind> @profile` komutunun yazdırdığı ortamla bir eş başlatabilir. Aynı anda birçok şerit için [Birçok ajanı çalıştırmak](/methodology/06-orchestration) bölümüne bakın.
 
-herdr-peers v2.0.0, isteğe bağlı autopilot beyni için bu arayüzü kullanır: `ak pick --kinds ... --json` pick-v2 başlatma sözleşmesini döndürür; Herdr bunu doğrular, `launch.permissions: ask` koşulunu şart koşar ve ardından dönen `launch.argv` değerini başlatır. Beyin, otonomi veya bypass bayraklarını etkinleştiremez. `ak update` insan tarafından çalıştırılmaya devam eder; beyin CLI'ları asla güncellemez.
+herdr-peers 2.0.0, isteğe bağlı autopilot beyni için bu arayüzü kullanır: `ak pick --kinds ... --json` pick-v2 başlatma sözleşmesini döndürür; Herdr bunu doğrular, `launch.permissions: ask` koşulunu şart koşar ve ardından dönen `launch.argv` değerini başlatır. Beyin, otonomi veya bypass bayraklarını etkinleştiremez. `ak update` insan tarafından çalıştırılmaya devam eder; beyin CLI'ları asla güncellemez.
 
 ## Notlar
 

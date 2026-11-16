@@ -8,7 +8,7 @@ order: 1
 
 # Addon devcontainer
 
-Donnez au dépôt un conteneur de développement reproductible et isolé, utilisable aussi bien par les personnes que par les éditeurs et les agents de code. Dans **DWP v7** (pack `v7.12.2`), cet addon intègre **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un produit MIT qui fonctionne sans Deep Work Plan. Il est facultatif : un dépôt est pleinement conforme sans lui.
+Donnez au dépôt un conteneur de développement reproductible et isolé, utilisable aussi bien par les personnes que par les éditeurs et les agents de code. Dans **DWP v8** (pack `v8.0.0`), cet addon intègre **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, un produit MIT qui fonctionne sans Deep Work Plan. Il est facultatif : un dépôt est pleinement conforme sans lui.
 
 Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dépôt est le harness, le loop engineering et l’efficacité mesurée. Les addons et les intégrations peuvent étendre le harness et la boucle ; la méthodologie fonctionne seule.
 
@@ -23,20 +23,20 @@ Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dép�
 ## Installation
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Prérequis : `bash` 3.2 ou ultérieur et `python3` 3.11 ou ultérieur sur un hôte Linux ou macOS, et Docker avec Compose v2 pour les commandes du conteneur. Vérifiez une version à l’aide de son asset `SHA256SUMS`. Épinglez `v1.2.0` : `v0.2.0` n’est pas prise en charge.
+Prérequis : `bash` 3.2 ou ultérieur et `python3` 3.11 ou ultérieur sur un hôte Linux ou macOS, et Docker avec Compose v2 pour les commandes du conteneur. Vérifiez une version à l’aide de son asset `SHA256SUMS`. Épinglez `v1.3.0` : `v0.2.0` n’est pas prise en charge.
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/devcontainer-kit`, tag `v1.2.0`, interface 2 |
+| Produit | `DailybotHQ/devcontainer-kit`, tag `v1.3.0`, interface 2 |
 | Clé de registre | `devcontainer` dans `.dwp/config.json` |
 | Configuration par dépôt | `.devcontainer/dck.toml` |
 | Détection | `dck doctor --json` |
 
-**Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique et ne change de façon incompatible que dans une nouvelle version majeure (et, pour les fichiers, avec un nouveau numéro d’interface) : les verbes de `dck` avec leurs options documentées et leurs codes de sortie (`0` succès, `1` échec, `2` usage, `3` configuration, `4` environnement, `5` refus), les schémas de `dck.toml`, du profil d’hôte et de `dck doctor --json` (interface 2), et le contrat de rendu — les fichiers que `dck init` écrit et possède, les marqueurs `dck:managed` et les blocs utilisateur qu’il préserve, et l’environnement que lit l’entrypoint. Rien ne casse depuis `v0.3.7` : exécutez `dck init` puis `dck rebuild` pour que l’image embarque les nouvelles versions épinglées (herdr-peers 1.3.1, coding-agents-kit 1.4.0 et DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image).
+**Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique et ne change de façon incompatible que dans une nouvelle version majeure (et, pour les fichiers, avec un nouveau numéro d’interface) : les verbes de `dck` avec leurs options documentées et leurs codes de sortie (`0` succès, `1` échec, `2` usage, `3` configuration, `4` environnement, `5` refus), les schémas de `dck.toml`, du profil d’hôte et de `dck doctor --json` (interface 2), et le contrat de rendu — les fichiers que `dck init` écrit et possède, les marqueurs `dck:managed` et les blocs utilisateur qu’il préserve, et l’environnement que lit l’entrypoint. Rien ne casse depuis `v0.3.7` : exécutez `dck init` puis `dck rebuild` pour que l’image embarque les versions épinglées actuelles. L’image de `v1.3.0` intègre les mêmes versions que `v1.2.0` : herdr-peers 1.3.1, coding-agents-kit 1.4.0 et DeepWorkPlan Vim 1.0.1, avec le pack vendorisé 7.12.1 également présent dans l’image.
 
 ## Couches
 
@@ -104,6 +104,14 @@ copy_keys = true              # default false
 ```
 
 Tant que l’option est active, `dck up` monte le `~/.ssh` de l’hôte en lecture seule sur `~/.ssh_host`, et chaque démarrage copie ses clés `id_*` dans le `~/.ssh` du conteneur (clés privées en `0600`), synchronisées avec l’hôte. Le transfert d’agent reste inchangé, et la désactivation supprime les copies au démarrage suivant. Le coût : tout le `~/.ssh` de l’hôte est lisible dans le conteneur, et les clés privées reposent dans le volume d’état.
+
+## Depuis devcontainer-kit 1.3.0 (interface 2)
+
+La version 1.3.0 conserve l’interface 2 et ajoute une clé optionnelle ; un dépôt qui ne la définit pas est rendu exactement comme avant.
+
+- **`[compose] container_only`.** Les sous-chemins de l’espace de travail listés ici sont montés comme volumes nommés propres au projet (`co-<path-slug>`, par exemple `co-app-node_modules` sur `/app/node_modules`), en lecture-écriture, sur le service principal. Ce que le conteneur y construit n’atteint jamais le checkout de l’hôte. Le cas qui le justifie : l’espace de travail est un bind mount, et une installation `npm` ou `pnpm` dans le conteneur sur un hôte macOS ou Windows remplace `node_modules` par la compilation de sa propre plateforme, ce qui casse l’installation de l’hôte.
+- **Propriété à chaque démarrage.** L’entrypoint attribue chaque point de montage à l’utilisateur configuré à chaque démarrage du conteneur ; une fois que l’utilisateur en est propriétaire, cela ne fait rien.
+- **Un seul montage par chemin.** Un chemin que le bloc utilisateur monte aussi est refusé, de même qu’un nom de volume dérivé déjà utilisé par `compose.state_volume` ou `[compose] volumes`. Le schéma de `dck.toml` (`dck-config-v2.json`) intègre la clé.
 
 ## Sécurité par défaut
 

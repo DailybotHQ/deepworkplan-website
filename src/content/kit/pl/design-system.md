@@ -42,17 +42,7 @@ Nigdy nie jest wymagany — repozytorium z zerową liczbą opcjonalnych dodatkó
 
 Po zaakceptowaniu dodatek może zainstalować delegator `/design-system` w katalogu `.agents/commands/` repozytorium, aby później ponownie wygenerować lub odświeżyć `DESIGN.md`. Instalacja komendy jest opcjonalna; odrzucony dodatek nie instaluje żadnej.
 
-## Specyfikacja v7
-
-| Element | Wartość |
-|---|---|
-| Produkt | Dodatek design-system dla DeepWorkPlan |
-| Klucz rejestru |  w  |
-| Deskryptor |  (interfejs 1) |
-| Plik docelowy |  indeksowany z  |
-| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności () |
-
-## Specyfikacja v7
+## Specyfikacja v8
 
 | Element | Wartość |
 |---|---|
@@ -60,7 +50,7 @@ Po zaakceptowaniu dodatek może zainstalować delegator `/design-system` w katal
 | Klucz rejestru | `design-system` w `.dwp/config.json` |
 | Deskryptor | `addons/design-system/addon.json` (interfejs 1) |
 | Plik docelowy | `docs/DESIGN.md` indeksowany z `AGENTS.md` |
-| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v7.12.2`) |
+| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v8.0.0`) |
 
 ## Związek z dokumentami projektowymi per funkcja
 

@@ -25,7 +25,7 @@ Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dép�
 4. Exécuter la vraie porte de validation du dépôt après chaque lot ; annuler tout lot qui échoue.
 5. Résumer ce qui a été mis à jour, ignoré et annulé ; laisser le développeur valider.
 
-## Spécification v7
+## Spécification v8
 
 | Élément | Valeur |
 |---|---|
@@ -33,7 +33,7 @@ Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dép�
 | Clé de registre | `dependency-upgrade` dans `.dwp/config.json` |
 | Descripteur | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Commande | `/lib-upgrade` installé dans `.agents/commands/` lorsqu'il est accepté |
-| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v7.12.2`) |
+| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v8.0.0`) |
 
 ## Notes
 

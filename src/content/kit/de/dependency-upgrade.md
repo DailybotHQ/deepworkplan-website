@@ -25,7 +25,7 @@ Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loo
 4. Nach jeder Charge das echte Validierungs-Gate des Repositorys ausführen; jede fehlgeschlagene Charge rückgängig machen.
 5. Zusammenfassen, was aktualisiert, übersprungen und rückgängig gemacht wurde; den Entwickler committen lassen.
 
-## v7-Spezifikation
+## v8-Spezifikation
 
 | Element | Wert |
 |---|---|
@@ -33,7 +33,7 @@ Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loo
 | Registrierungsschlüssel | `dependency-upgrade` in `.dwp/config.json` |
 | Deskriptor | `addons/dependency-upgrade/addon.json` (Schnittstelle 1) |
 | Befehl | `/lib-upgrade` installiert in `.agents/commands/` bei Annahme |
-| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v7.12.2`) |
+| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v8.0.0`) |
 
 ## Hinweise
 

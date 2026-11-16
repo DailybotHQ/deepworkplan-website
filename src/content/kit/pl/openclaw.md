@@ -50,7 +50,7 @@ Prymitywy harmonogramowania OpenClaw mapują bezpośrednio na model kontynuacji 
 Operacyjnie:
 
 1. Człowiek tworzy i zatwierdza plan interaktywnie. Zatwierdzenie jest punktem kontrolnym — tury nieobsługiwane nigdy nie tworzą i nie wykonują planu w jednej turze.
-2. Plan MUSI zawierać warstwę stanu odczytywalnego maszynowo (`manifest.json` + `state.json`). W przestrzeni roboczej bez gita `state.json` umożliwia bezpieczne wznowienie po awarii. Zob. [Stan planu](/spec/plan-state). W planach v6 i v7 stan jest rzutowany z dziennika tylko do dopisywania (`journal.ndjson`) za pomocą `ledger.py project`, a nie ręcznie przepisywany w plikach stanu.
+2. Plan MUSI zawierać warstwę stanu odczytywalnego maszynowo (`manifest.json` + `state.json`). W przestrzeni roboczej bez gita `state.json` umożliwia bezpieczne wznowienie po awarii. Zob. [Stan planu](/spec/plan-state). W planach v6, v7 i v8 stan jest rzutowany z dziennika tylko do dopisywania (`journal.ndjson`) za pomocą `ledger.py project`, a nie ręcznie przepisywany w plikach stanu.
 3. Każda tura heartbeat lub cron wykonuje co najwyżej jedno zadanie, przechodzi przez jego bramkę walidacyjną, atomowo aktualizuje `state.json` i wykonuje yield.
 4. Przy dowolnym warunku zatrzymania agent zapisuje pole `blocked` w `state.json` i raportuje przez normalny kanał przestrzeni roboczej. Następne spojrzenie człowieka — lub raport z bicia serca — pokazuje dokładnie to, czego potrzeba.
 

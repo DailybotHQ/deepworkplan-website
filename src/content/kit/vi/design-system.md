@@ -42,17 +42,7 @@ Nó không bao giờ bắt buộc — một repository với không có addon t�
 
 Khi được chấp nhận, addon có thể cài một bộ ủy thác `/design-system` vào `.agents/commands/` của repo để tái sinh hay làm mới `DESIGN.md` về sau. Việc cài command là tùy chọn; một addon bị từ chối không cài gì cả.
 
-## Đặc tả v7
-
-| Mục | Giá trị |
-|---|---|
-| Sản phẩm | Addon design-system của DeepWorkPlan |
-| Khóa đăng ký |  trong  |
-| Bộ mô tả |  (giao diện 1) |
-| Tệp đích |  được lập chỉ mục từ  |
-| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng () |
-
-## Đặc tả v7
+## Đặc tả v8
 
 | Mục | Giá trị |
 |---|---|
@@ -60,7 +50,7 @@ Khi được chấp nhận, addon có thể cài một bộ ủy thác `/design-
 | Khóa đăng ký | `design-system` trong `.dwp/config.json` |
 | Bộ mô tả | `addons/design-system/addon.json` (giao diện 1) |
 | Tệp đích | `docs/DESIGN.md` được lập chỉ mục từ `AGENTS.md` |
-| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.12.2`) |
+| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v8.0.0`) |
 
 ## Quan hệ với các tài liệu thiết kế theo tính năng
 

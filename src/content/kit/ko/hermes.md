@@ -32,7 +32,7 @@ resume the open plan
 
 ## 에피소드 메모리 시너지
 
-v6 및 v7 계획에서 DWP의 결정론적 검증 영수증(`outcomes.py receipt`)과 결과 레코드는 Hermes의 메모리 인덱스에 직접 공급됩니다. 완료된 각 작업은 시도된 내용, 실패한 내용, 성공한 내용을 구조화된 JSON 스키마로 전달합니다. 완료된 계획은 검색 가능한 일화 기억이 되어 에이전트가 문제가 어떻게 해결되었는지 상기할 수 있습니다.
+v6, v7 및 v8 계획에서 DWP의 결정론적 검증 영수증(`outcomes.py receipt`)과 결과 레코드는 Hermes의 메모리 인덱스에 직접 공급됩니다. 완료된 각 작업은 시도된 내용, 실패한 내용, 성공한 내용을 구조화된 JSON 스키마로 전달합니다. 완료된 계획은 검색 가능한 일화 기억이 되어 에이전트가 문제가 어떻게 해결되었는지 상기할 수 있습니다.
 
 임시 세션은 상태 파일을 수동으로 다시 작성하는 대신 `journal.ndjson`에 이벤트를 추가하고 `ledger.py project`를 통해 `state.json`을 투영합니다. [계획 상태](/spec/plan-state#outcome-records-as-episodic-memory)를 참조하세요.
 

@@ -50,7 +50,7 @@ Các primitive lập lịch của OpenClaw ánh xạ trực tiếp vào mô hìn
 Về mặt vận hành:
 
 1. Một con người tạo và chấp thuận một kế hoạch một cách tương tác. Chấp thuận là điểm kiểm soát — các lượt không có giám sát không bao giờ tạo-và-thực-thi trong một lượt.
-2. Kế hoạch phải mang lớp trạng thái có thể đọc bằng máy (`manifest.json` + `state.json`). Trong một không gian làm việc không có git, `state.json` là thứ làm cho việc tiếp tục an toàn khi sự cố có thể thực hiện được. Xem [Trạng thái kế hoạch](/spec/plan-state). Trong các kế hoạch v6 và v7, trạng thái được chiếu từ nhật ký chỉ nối thêm (`journal.ndjson`) qua `ledger.py project` thay vì viết lại các tệp trạng thái theo cách thủ công.
+2. Kế hoạch phải mang lớp trạng thái có thể đọc bằng máy (`manifest.json` + `state.json`). Trong một không gian làm việc không có git, `state.json` là thứ làm cho việc tiếp tục an toàn khi sự cố có thể thực hiện được. Xem [Trạng thái kế hoạch](/spec/plan-state). Trong các kế hoạch v6, v7 và v8, trạng thái được chiếu từ nhật ký chỉ nối thêm (`journal.ndjson`) qua `ledger.py project` thay vì viết lại các tệp trạng thái theo cách thủ công.
 3. Mỗi lượt heartbeat hay cron thực thi tối đa một tác vụ, vượt qua cổng kiểm chứng của nó, cập nhật `state.json` nguyên tử, và nhường.
 4. Khi gặp bất kỳ điều kiện dừng nào, agent ghi trường `blocked` của `state.json` và báo cáo qua kênh bình thường của không gian làm việc. Lần nhìn của con người tiếp theo — hoặc báo cáo heartbeat — thấy chính xác những gì cần thiết.
 

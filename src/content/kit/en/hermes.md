@@ -32,7 +32,7 @@ resume the open plan
 
 ## Episodic memory synergy
 
-Hermes indexes agent memory to make past work retrievable across future sessions. In v6 and v7 plans, DWP's deterministic verification receipts (`outcomes.py receipt`) and outcome records feed directly into Hermes's memory index: each completed task carries what was tried, failed, and worked in a structured JSON schema. Completed plans become retrievable episodic memory — an agent can recall how a problem was solved.
+Hermes indexes agent memory to make past work retrievable across future sessions. In v6, v7 and v8 plans, DWP's deterministic verification receipts (`outcomes.py receipt`) and outcome records feed directly into Hermes's memory index: each completed task carries what was tried, failed, and worked in a structured JSON schema. Completed plans become retrievable episodic memory — an agent can recall how a problem was solved.
 
 Ephemeral sessions append events to `journal.ndjson` and project `state.json` via `ledger.py project` rather than manually rewriting state files. See [Plan state](/spec/plan-state#outcome-records-as-episodic-memory).
 

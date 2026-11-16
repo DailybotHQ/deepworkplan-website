@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer eklentisi
 
-Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v7**'de (paket `v7.12.2`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
+Depoya yeniden üretilebilir, yalıtılmış bir geliştirme konteyneri verin — insanların, editörlerin ve kodlama agent'larının hep birlikte kullanabileceği bir konteyner. **DWP v8**'de (paket `v8.0.0`) bu eklenti, Deep Work Plan olmadan da çalışan bir MIT ürünü olan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**'i entegre eder. İsteğe bağlıdır: bir depo onsuz da tümüyle uyumludur.
 
 Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
@@ -23,20 +23,20 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 ## Kurulum
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.2.0` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.3.0` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v1.2.0` etiketi, arayüz 2 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v1.3.0` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
-**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın yeni sabitlenmiş sürümleri (herdr-peers 1.3.1, coding-agents-kit 1.4.0 ve DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image) içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın.
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın güncel sabitlenmiş sürümleri içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın. `v1.3.0` imajı, `v1.2.0` ile aynı sürümleri içerir: herdr-peers 1.3.1, coding-agents-kit 1.4.0 ve DeepWorkPlan Vim 1.0.1; vendored paket 7.12.1 de imajın içindedir.
 
 ## Katmanlar
 
@@ -104,6 +104,14 @@ copy_keys = true              # default false
 ```
 
 Açıkken `dck up`, ana makinenin `~/.ssh` dizinini `~/.ssh_host` konumuna salt okunur olarak bağlar ve her başlatma, onun `id_*` anahtarlarını konteynerin `~/.ssh` dizinine kopyalar (özel anahtarlar `0600`) ve onları ana makineyle eşit tutar. Agent yönlendirmesi değişmez; seçenek kapatıldığında kopyalar bir sonraki başlatmada kaldırılır. Bedeli: ana makinenin tüm `~/.ssh` dizini konteynerin içinden okunabilir ve özel anahtarlar durum biriminde durur.
+
+## devcontainer-kit 1.3.0 sürümünden itibaren (arayüz 2)
+
+1.3.0 sürümü arayüz 2'yi korur ve isteğe bağlı tek bir anahtar ekler; bu anahtarı ayarlamayan bir depo tam olarak eskisi gibi oluşturulur.
+
+- **`[compose] container_only`.** Burada listelenen çalışma alanı alt yolları, ana servise proje kapsamlı adlandırılmış birimler (`co-<path-slug>`; örneğin `/app/node_modules` üzerinde `co-app-node_modules`) olarak okuma-yazma kipinde bağlanır. Konteynerin orada derlediği hiçbir şey ana makinedeki çalışma kopyasına ulaşmaz. Var olma nedeni şu durumdur: çalışma alanı bir bind mount'tur ve macOS veya Windows ana makinesinde konteynerin içinde yapılan bir `npm` ya da `pnpm` kurulumu, `node_modules` dizinini kendi platformunun derlemesiyle değiştirerek ana makinedeki kurulumu bozar.
+- **Her başlatmada sahiplik.** Entrypoint, her konteyner başlatmasında her bağlama noktasını yapılandırılmış kullanıcıya verir; kullanıcı ona zaten sahipse bu adım hiçbir şey yapmaz.
+- **Yol başına tek bağlama.** Kullanıcı bloğunun da bağladığı bir yol reddedilir; `compose.state_volume` veya `[compose] volumes` tarafından zaten kullanılan türetilmiş bir birim adı da reddedilir. `dck.toml` şeması (`dck-config-v2.json`) bu anahtarı kazanır.
 
 ## Güvenlik varsayılanları
 

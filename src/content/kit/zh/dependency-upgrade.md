@@ -25,7 +25,7 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 4. 在每个批次后运行仓库真实的验证关卡；回退任何失败的批次。
 5. 总结升级了什么、跳过了什么、回退了什么；交由开发者提交。
 
-## v7 规范
+## v8 规范
 
 | 条目 | 值 |
 |---|---|
@@ -33,7 +33,7 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 | 注册键 | `.dwp/config.json` 中的 `dependency-upgrade` |
 | 描述符 | `addons/dependency-upgrade/addon.json`（接口 1） |
 | 命令 | 接受后安装至 `.agents/commands/` 的 `/lib-upgrade` |
-| 版本控制 | 随技能包固定并控制版本（`v7.12.2`） |
+| 版本控制 | 随技能包固定并控制版本（`v8.0.0`） |
 
 ## 备注
 

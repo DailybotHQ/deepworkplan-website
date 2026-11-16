@@ -13,7 +13,7 @@ prefix: plain text
 
 Hermes 是一个自主代理平台，通过 AgentSkills 标准加载技能，并在会话之间维护情节记忆。DWP 与这两个层面均有集成：技能套件从 `.agents/skills/` 加载，方式与任何其他 AgentSkills 兼容套件相同；而 `state.json` 的 outcome 记录则直接馈送到 Hermes 的记忆索引中。
 
-在 v6 与 v7 计划中，状态是通过 `ledger.py project` 从仅追加日志（`journal.ndjson`）中投影出来的，而不是手动重写状态文件。
+在 v6、v7 与 v8 计划中，状态是通过 `ledger.py project` 从仅追加日志（`journal.ndjson`）中投影出来的，而不是手动重写状态文件。
 
 ## 支持级别
 
@@ -34,7 +34,7 @@ resume the open plan
 
 ## 情节记忆协同
 
-在 v6 与 v7 计划中，DWP 的确定性验证凭证（`outcomes.py receipt`）和 outcome 记录直接馈入 Hermes 的记忆索引：每个完成的任务都在结构化 JSON 模式中携带尝试过的内容、失败的内容以及有效的内容。完成的计划成为可检索的情节记忆——代理可以回忆起具体问题是如何解决的。
+在 v6、v7 与 v8 计划中，DWP 的确定性验证凭证（`outcomes.py receipt`）和 outcome 记录直接馈入 Hermes 的记忆索引：每个完成的任务都在结构化 JSON 模式中携带尝试过的内容、失败的内容以及有效的内容。完成的计划成为可检索的情节记忆——代理可以回忆起具体问题是如何解决的。
 
 临时会话将事件追加到 `journal.ndjson` 并通过 `ledger.py project` 投影 `state.json`，而不是手动重写状态文件。参见 [Plan state](/spec/plan-state#outcome-records-as-episodic-memory)。
 

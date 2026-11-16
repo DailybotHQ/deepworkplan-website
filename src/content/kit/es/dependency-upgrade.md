@@ -25,7 +25,7 @@ Deep Work Plan se apoya en cuatro pilares: primero la especificación, el reposi
 4. Ejecuta la compuerta de validación real del repo tras cada lote; revierte cualquier lote que falle.
 5. Resume lo actualizado, lo omitido y lo revertido; deja que el desarrollador haga commit.
 
-## Especificación v7
+## Especificación v8
 
 | Elemento | Valor |
 |---|---|
@@ -33,7 +33,7 @@ Deep Work Plan se apoya en cuatro pilares: primero la especificación, el reposi
 | Clave de registro | `dependency-upgrade` en `.dwp/config.json` |
 | Descriptor | `addons/dependency-upgrade/addon.json` (interfaz 1) |
 | Comando | `/lib-upgrade` instalado en `.agents/commands/` si se acepta |
-| Control de versiones | Fijado y versionado con el paquete de skills (`v7.12.2`) |
+| Control de versiones | Fijado y versionado con el paquete de skills (`v8.0.0`) |
 
 ## Notas
 

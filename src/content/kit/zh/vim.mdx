@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** 是 Deep Work Plan 的终端编辑器：一套面向在终端中工作的人以及编程代理的 Neovim 配置。你的计划、文档和所有命令的索引，都只需一个按键。
 
-它是一个独立的产品，作为 Deep Work Plan v7（pack `v7.12.2`）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v1.0.1** 版本，即首个稳定版本 `v1.0.0` 的维护版本：自 `v1.0.0` 起，安装程序及其参数（以及对应的 `DWP_VIM_*` 变量）、附加组件接口面（`addon/surface.json`，接口 1）、编辑器命令 `:DwpPlans`、`:DwpLanes`、`:DwpCommands` 和 `:DwpConfig`、`dwpvim.json` 的键，以及由映射契约固定的键位绑定，仅在新的主版本中才会发生不兼容的变更。
+它是一个独立的产品，作为 Deep Work Plan v8（pack `v8.0.0`）的可选 `vim` 附加组件提供。Deep Work Plan 可以搭配任何编辑器使用，也可以不用编辑器；该编辑器同样不依赖 Deep Work Plan：你可以单独把它加到一台机器上，无论是否存在计划，它都能作为编辑器使用。本页描述的是 **v1.0.1** 版本，即首个稳定版本 `v1.0.0` 的维护版本：自 `v1.0.0` 起，安装程序及其参数（以及对应的 `DWP_VIM_*` 变量）、附加组件接口面（`addon/surface.json`，接口 1）、编辑器命令 `:DwpPlans`、`:DwpLanes`、`:DwpCommands` 和 `:DwpConfig`、`dwpvim.json` 的键，以及由映射契约固定的键位绑定，仅在新的主版本中才会发生不兼容的变更。
 
 Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
@@ -212,9 +212,9 @@ cd ~/.config/nvim && lua delete.lua
 
 不需要。它首先是一个编辑器。它不会安装也不依赖 Deep Work Plan 技能；在存在 `.dwp/plans/` 文件夹之前，计划浏览器只是没有内容可列。
 
-### v7 的 vim 附加组件如何使用它？
+### vim 附加组件如何使用它？
 
-Deep Work Plan v7 在引导流程中将该编辑器作为可选的 `vim` 附加组件提供。该附加组件通过编辑器的 `addon/surface.json` 以只读方式检测已有安装，并且只有在征得你同意后，才会提供固定版本、经校验和验证的安装。未经明确批准，它绝不会覆盖已有的 Neovim 配置，而且它从来不是必需的。
+Deep Work Plan v8 在引导流程中将该编辑器作为可选的 `vim` 附加组件提供。该附加组件通过编辑器的 `addon/surface.json` 以只读方式检测已有安装，并且只有在征得你同意后，才会提供固定版本、经校验和验证的安装。未经明确批准，它绝不会覆盖已有的 Neovim 配置，而且它从来不是必需的。
 
 ### 编程代理如何使用它？
 
@@ -237,5 +237,5 @@ GPL-3.0。它派生自 Andrés M Prieto 的 mu-vim，署名保留在仓库中。
 - [Devcontainer](/kit/devcontainer) — 可复现的开发环境（第一个附加组件）
 - [Dailybot](/kit/dailybot) — 团队可见的计划生命周期报告（第二个附加组件）
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — 计划最终评审期间的本地评审（第五个附加组件）
-- [Herdr](/kit/herdr) — 在 Herdr 窗格中将任务委派给对等方（v7）
-- [Agentkit](/kit/agentkit) — 一条命令覆盖所有终端编程代理，并支持无头委派（v7）
+- [Herdr](/kit/herdr) — 在 Herdr 窗格中将任务委派给对等方（自 v7 起）
+- [Agentkit](/kit/agentkit) — 一条命令覆盖所有终端编程代理，并支持无头委派（自 v7 起）

@@ -25,7 +25,7 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 4. Her gruptan sonra deponun gerçek doğrulama geçidini çalıştırın; başarısız olan herhangi bir grubu geri alın.
 5. Neyin yükseltildiğini, atlandığını ve geri alındığını özetleyin; commit etmeyi geliştiriciye bırakın.
 
-## v7 belirtimi
+## v8 belirtimi
 
 | Öğe | Değer |
 |---|---|
@@ -33,7 +33,7 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 | Kayıt anahtarı | `.dwp/config.json` içinde `dependency-upgrade` |
 | Tanımlayıcı | `addons/dependency-upgrade/addon.json` (arayüz 1) |
 | Komut | Kabul edildiğinde `.agents/commands/` içine kurulan `/lib-upgrade` |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.12.2`) |
+| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v8.0.0`) |
 
 ## Notlar
 

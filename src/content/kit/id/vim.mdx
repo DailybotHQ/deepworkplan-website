@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** adalah editor terminal untuk Deep Work Plan: konfigurasi Neovim untuk manusia, dan untuk agen pemrograman, yang bekerja di terminal. Rencana Anda, dokumentasi Anda, dan indeks semua perintah hanya sejauh satu tombol.
 
-Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v7 (pack `v7.12.2`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v1.0.1**, rilis pemeliharaan dari rilis stabil pertama, `v1.0.0`: sejak `v1.0.0`, pemasang beserta flag-nya (dengan variabel `DWP_VIM_*` yang sesuai), permukaan addon (`addon/surface.json`, antarmuka 1), perintah editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands`, dan `:DwpConfig`, kunci `dwpvim.json`, serta keybinding yang dipatok oleh kontrak pemetaan hanya berubah secara tidak kompatibel pada versi mayor baru.
+Ini adalah produk terpisah, yang ditawarkan sebagai addon `vim` opsional dari Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan bekerja dengan editor apa pun atau tanpa editor, dan editor ini tidak mensyaratkan Deep Work Plan: Anda menambahkannya ke sebuah mesin secara mandiri, dan ia berfungsi sebagai editor ada atau tidaknya rencana. Halaman ini menjelaskan rilis **v1.0.1**, rilis pemeliharaan dari rilis stabil pertama, `v1.0.0`: sejak `v1.0.0`, pemasang beserta flag-nya (dengan variabel `DWP_VIM_*` yang sesuai), permukaan addon (`addon/surface.json`, antarmuka 1), perintah editor `:DwpPlans`, `:DwpLanes`, `:DwpCommands`, dan `:DwpConfig`, kunci `dwpvim.json`, serta keybinding yang dipatok oleh kontrak pemetaan hanya berubah secara tidak kompatibel pada versi mayor baru.
 
 Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
@@ -212,9 +212,9 @@ Pemasang tidak berjalan di Windows. Gunakan jalur manual di README repositori, a
 
 Tidak. Ia adalah editor lebih dulu. Ia tidak memasang atau mensyaratkan skill Deep Work Plan; penjelajah rencana hanya tidak punya apa pun untuk dicantumkan sampai folder `.dwp/plans/` ada.
 
-### Bagaimana addon vim v7 menggunakannya?
+### Bagaimana addon vim menggunakannya?
 
-Deep Work Plan v7 menawarkan editor ini sebagai addon `vim` opsional selama onboarding. Addon tersebut mendeteksi instalasi yang sudah ada secara hanya-baca, melalui `addon/surface.json` milik editor, dan menawarkan instalasi yang dipatok serta terverifikasi checksum hanya dengan persetujuan Anda. Ia tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit, dan tidak pernah diwajibkan.
+Deep Work Plan v8 menawarkan editor ini sebagai addon `vim` opsional selama onboarding. Addon tersebut mendeteksi instalasi yang sudah ada secara hanya-baca, melalui `addon/surface.json` milik editor, dan menawarkan instalasi yang dipatok serta terverifikasi checksum hanya dengan persetujuan Anda. Ia tidak pernah menimpa konfigurasi Neovim yang sudah ada tanpa persetujuan eksplisit, dan tidak pernah diwajibkan.
 
 ### Bagaimana agen pemrograman menggunakannya?
 
@@ -237,5 +237,5 @@ Kode sumbernya ada di [repositori DeepWorkPlan Vim](https://github.com/DailybotH
 - [Devcontainer](/kit/devcontainer) — lingkungan pengembangan yang dapat direproduksi (addon pertama)
 - [Dailybot](/kit/dailybot) — pelaporan siklus hidup rencana yang terlihat oleh tim (addon kedua)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — tinjauan lokal selama Final Review rencana (addon kelima)
-- [Herdr](/kit/herdr) — mendelegasikan tugas ke agen rekan di panel Herdr (v7)
-- [Agentkit](/kit/agentkit) — satu perintah untuk setiap agen pemrograman terminal, dan delegasi headless (v7)
+- [Herdr](/kit/herdr) — mendelegasikan tugas ke agen rekan di panel Herdr (sejak v7)
+- [Agentkit](/kit/agentkit) — satu perintah untuk setiap agen pemrograman terminal, dan delegasi headless (sejak v7)

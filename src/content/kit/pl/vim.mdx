@@ -20,7 +20,7 @@ import VimInDwpLoop from '@/components/diagrams/kit/VimInDwpLoop.astro';
 
 **DeepWorkPlan Vim** to edytor terminalowy dla Deep Work Plan: konfiguracja Neovima dla ludzi i dla agentów programistycznych pracujących w terminalu. Twoje plany, dokumentacja i indeks wszystkich poleceń są o jedno naciśnięcie klawisza.
 
-To osobny produkt, oferowany jako opcjonalny addon `vim` w Deep Work Plan v7 (pack `v7.12.2`). Deep Work Plan działa z dowolnym edytorem lub bez żadnego, a edytor nie wymaga Deep Work Plan: dodajesz go do maszyny osobno, a działa jako edytor niezależnie od tego, czy istnieje jakiś plan. Ta strona opisuje wydanie **v1.0.1**, wydanie serwisowe pierwszego stabilnego wydania `v1.0.0`: od `v1.0.0` instalator i jego flagi (wraz z odpowiadającymi im zmiennymi `DWP_VIM_*`), powierzchnia addonu (`addon/surface.json`, interfejs 1), polecenia edytora `:DwpPlans`, `:DwpLanes`, `:DwpCommands` i `:DwpConfig`, klucze `dwpvim.json` oraz skróty klawiszowe przypięte przez kontrakt mapowań zmieniają się niekompatybilnie tylko w nowej wersji głównej.
+To osobny produkt, oferowany jako opcjonalny addon `vim` w Deep Work Plan v8 (pack `v8.0.0`). Deep Work Plan działa z dowolnym edytorem lub bez żadnego, a edytor nie wymaga Deep Work Plan: dodajesz go do maszyny osobno, a działa jako edytor niezależnie od tego, czy istnieje jakiś plan. Ta strona opisuje wydanie **v1.0.1**, wydanie serwisowe pierwszego stabilnego wydania `v1.0.0`: od `v1.0.0` instalator i jego flagi (wraz z odpowiadającymi im zmiennymi `DWP_VIM_*`), powierzchnia addonu (`addon/surface.json`, interfejs 1), polecenia edytora `:DwpPlans`, `:DwpLanes`, `:DwpCommands` i `:DwpConfig`, klucze `dwpvim.json` oraz skróty klawiszowe przypięte przez kontrakt mapowań zmieniają się niekompatybilnie tylko w nowej wersji głównej.
 
 Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
@@ -212,9 +212,9 @@ Instalator nie działa w systemie Windows. Skorzystaj z ręcznej ścieżki z REA
 
 Nie. To przede wszystkim edytor. Nie instaluje umiejętności Deep Work Plan ani jej nie wymaga; przeglądarka planów po prostu nie ma czego wyświetlić, dopóki nie istnieje folder `.dwp/plans/`.
 
-### Jak korzysta z niego addon vim w v7?
+### Jak korzysta z niego addon vim?
 
-Deep Work Plan v7 oferuje edytor jako opcjonalny addon `vim` podczas onboardingu. Addon wykrywa istniejącą instalację w trybie tylko do odczytu, przez plik `addon/surface.json` edytora, i proponuje przypiętą instalację zweryfikowaną sumą kontrolną wyłącznie za Twoją zgodą. Nigdy nie nadpisuje istniejącej konfiguracji Neovima bez wyraźnego zatwierdzenia i nigdy nie jest wymagany.
+Deep Work Plan v8 oferuje edytor jako opcjonalny addon `vim` podczas onboardingu. Addon wykrywa istniejącą instalację w trybie tylko do odczytu, przez plik `addon/surface.json` edytora, i proponuje przypiętą instalację zweryfikowaną sumą kontrolną wyłącznie za Twoją zgodą. Nigdy nie nadpisuje istniejącej konfiguracji Neovima bez wyraźnego zatwierdzenia i nigdy nie jest wymagany.
 
 ### Jak korzystają z niego agenci programistyczni?
 
@@ -237,5 +237,5 @@ Kod źródłowy znajduje się w [repozytorium DeepWorkPlan Vim](https://github.c
 - [Devcontainer](/kit/devcontainer) — odtwarzalne środowisko deweloperskie (pierwszy addon)
 - [Dailybot](/kit/dailybot) — raportowanie cyklu życia planu widoczne dla zespołu (drugi addon)
 - [AI Diff Reviewer](/kit/ai-diff-reviewer) — lokalny przegląd podczas Final Reviews planu (piąty addon)
-- [Herdr](/kit/herdr) — delegowanie zadania do równorzędnego agenta w panelu Herdr (v7)
-- [Agentkit](/kit/agentkit) — jedno polecenie dla każdego terminalowego agenta kodującego i delegowanie w trybie headless (v7)
+- [Herdr](/kit/herdr) — delegowanie zadania do równorzędnego agenta w panelu Herdr (od v7)
+- [Agentkit](/kit/agentkit) — jedno polecenie dla każdego terminalowego agenta kodującego i delegowanie w trybie headless (od v7)

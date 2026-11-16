@@ -32,7 +32,7 @@ resume the open plan
 
 ## Hiệp lực bộ nhớ theo sự kiện
 
-Trong các kế hoạch v6 và v7, biên nhận xác minh tất định của DWP (`outcomes.py receipt`) và các bản ghi kết quả được đưa trực tiếp vào chỉ mục bộ nhớ của Hermes: mỗi tác vụ hoàn thành mang theo những gì đã thử, thất bại và hiệu quả trong một lược đồ JSON có cấu trúc. Các kế hoạch đã hoàn thành trở thành bộ nhớ tình tiết có thể truy xuất — một agent có thể nhớ lại cách một vấn đề đã được giải quyết.
+Trong các kế hoạch v6, v7 và v8, biên nhận xác minh tất định của DWP (`outcomes.py receipt`) và các bản ghi kết quả được đưa trực tiếp vào chỉ mục bộ nhớ của Hermes: mỗi tác vụ hoàn thành mang theo những gì đã thử, thất bại và hiệu quả trong một lược đồ JSON có cấu trúc. Các kế hoạch đã hoàn thành trở thành bộ nhớ tình tiết có thể truy xuất — một agent có thể nhớ lại cách một vấn đề đã được giải quyết.
 
 Các phiên tạm thời nối thêm sự kiện vào `journal.ndjson` và chiếu `state.json` qua `ledger.py project` thay vì viết lại các tệp trạng thái theo cách thủ công. Xem [Trạng thái kế hoạch](/spec/plan-state#outcome-records-as-episodic-memory).
 

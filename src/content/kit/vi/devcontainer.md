@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v7** (gói `v7.12.2`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
+Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v8** (gói `v8.0.0`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
 
 Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
@@ -23,20 +23,20 @@ Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harne
 ## Cài đặt
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.2.0`: `v0.2.0` không được hỗ trợ.
+Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.3.0`: `v0.2.0` không được hỗ trợ.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v1.2.0`, giao diện 2 |
+| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v1.3.0`, giao diện 2 |
 | Khóa registry | `devcontainer` trong `.dwp/config.json` |
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
 
-**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim mới (herdr-peers 1.3.1, coding-agents-kit 1.4.0 và DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image).
+**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim hiện tại. Image `v1.3.0` đóng gói đúng các phiên bản như `v1.2.0`: herdr-peers 1.3.1, coding-agents-kit 1.4.0 và DeepWorkPlan Vim 1.0.1, cùng gói vendored 7.12.1 cũng nằm trong image.
 
 ## Các lớp
 
@@ -104,6 +104,14 @@ copy_keys = true              # default false
 ```
 
 Khi tùy chọn này bật, `dck up` gắn `~/.ssh` của máy host ở chế độ chỉ đọc tại `~/.ssh_host`, và mỗi lần khởi động sẽ sao chép các khóa `id_*` của nó vào `~/.ssh` của container (khóa riêng tư `0600`), luôn đồng bộ với máy host. Việc chuyển tiếp agent không thay đổi, và khi tắt tùy chọn, các bản sao sẽ bị xóa ở lần khởi động tiếp theo. Cái giá phải trả: toàn bộ `~/.ssh` của máy host có thể được đọc bên trong container, và các khóa riêng tư nằm lại trong volume trạng thái.
+
+## Từ devcontainer-kit 1.3.0 (giao diện 2)
+
+Bản phát hành 1.3.0 giữ nguyên giao diện 2 và thêm một khóa tùy chọn bật; một repository không đặt khóa này sẽ được render y hệt như trước.
+
+- **`[compose] container_only`.** Các đường dẫn con của workspace được liệt kê ở đây được gắn dưới dạng named volume theo phạm vi dự án (`co-<path-slug>`, ví dụ `co-app-node_modules` đè lên `/app/node_modules`), đọc-ghi, trên service chính. Những gì container build ở đó không bao giờ đến được bản checkout trên máy host. Trường hợp mà khóa này được tạo ra để xử lý: workspace là một bind mount, và một lần cài đặt `npm` hoặc `pnpm` bên trong container trên máy host macOS hoặc Windows sẽ thay `node_modules` bằng bản build cho nền tảng của chính nó, làm hỏng bản cài đặt của máy host.
+- **Quyền sở hữu ở mỗi lần khởi động.** Entrypoint giao từng điểm gắn cho người dùng đã cấu hình ở mỗi lần container khởi động; khi người dùng đã sở hữu nó, bước này không làm gì cả.
+- **Một lần gắn cho mỗi đường dẫn.** Một đường dẫn mà khối người dùng cũng gắn sẽ bị từ chối, và một tên volume dẫn xuất đã được `compose.state_volume` hoặc `[compose] volumes` sử dụng cũng vậy. Schema của `dck.toml` (`dck-config-v2.json`) có thêm khóa này.
 
 ## Mặc định bảo mật
 

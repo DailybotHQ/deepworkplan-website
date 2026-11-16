@@ -42,7 +42,7 @@ Asla gerekli değildir — sıfır isteğe bağlı eklentili bir depo tamamen uy
 
 Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya tazelemek için deponun `.agents/commands/` dizinine bir `/design-system` yönlendiricisi kurabilir. Komutu kurmak isteğe bağlıdır; reddedilen bir eklenti hiçbirini kurmaz.
 
-## v7 belirtimi
+## v8 belirtimi
 
 | Öğe | Değer |
 |---|---|
@@ -50,7 +50,7 @@ Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya ta
 | Kayıt anahtarı | `.dwp/config.json` içinde `design-system` |
 | Tanımlayıcı | `addons/design-system/addon.json` (arayüz 1) |
 | Hedef dosya | `AGENTS.md` üzerinden dizine eklenen `docs/DESIGN.md` |
-| Sürümleme | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.12.2`) |
+| Sürümleme | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v8.0.0`) |
 
 ## Özellik bazlı tasarım belgeleriyle ilişkisi
 

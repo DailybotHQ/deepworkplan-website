@@ -42,7 +42,7 @@ It is never required — a repository with zero optional addons is fully conform
 
 When accepted, the addon may install a `/design-system` delegator into the repo's `.agents/commands/` to regenerate or refresh `DESIGN.md` later. Installing the command is optional; a declined addon installs none.
 
-## v7 specification
+## v8 specification
 
 | Item | Value |
 |---|---|
@@ -50,7 +50,7 @@ When accepted, the addon may install a `/design-system` delegator into the repo'
 | Registry key | `design-system` in `.dwp/config.json` |
 | Descriptor | `addons/design-system/addon.json` (interface 1) |
 | Target file | `docs/DESIGN.md` indexed from `AGENTS.md` |
-| Versioning | Pinned and versioned with the skill pack (`v7.12.2`) |
+| Versioning | Pinned and versioned with the skill pack (`v8.0.0`) |
 
 ## Relationship to per-feature design docs
 

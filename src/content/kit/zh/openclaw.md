@@ -50,7 +50,7 @@ OpenClaw 的调度原语直接对应 DWP 的续行模型：
 操作流程：
 
 1. 人类以交互方式创建并审批一份计划。审批是控制点——无人值守轮次绝不在单次轮次内既创建又执行计划。
-2. 计划必须携带机器可读状态层（`manifest.json` + `state.json`）。在没有 git 的工作区中，`state.json` 是实现崩溃安全续行的关键。参见 [Plan state](/spec/plan-state)。 在 v6 与 v7 计划中，状态是通过 `ledger.py project` 从仅追加日志（`journal.ndjson`）中投影出来的，而不是手动重写状态文件。
+2. 计划必须携带机器可读状态层（`manifest.json` + `state.json`）。在没有 git 的工作区中，`state.json` 是实现崩溃安全续行的关键。参见 [Plan state](/spec/plan-state)。 在 v6、v7 与 v8 计划中，状态是通过 `ledger.py project` 从仅追加日志（`journal.ndjson`）中投影出来的，而不是手动重写状态文件。
 3. 每次心跳或 cron 轮次最多执行一项任务，通过其验证关卡，原子性地更新 `state.json`，然后让出。
 4. 遇到任何停止条件时，代理将 `state.json` 的 `blocked` 字段写入并通过工作区的正常渠道报告。下一次人工查看——或心跳报告——会准确显示所需信息。
 

@@ -13,7 +13,7 @@ prefix: plain text
 
 Hermes ist eine autonome Agenten-Plattform, die Skills über den AgentSkills-Standard lädt und episodisches Gedächtnis über Sitzungen hinweg pflegt. DWP integriert sich in beide Oberflächen: Das Skill-Paket lädt aus `.agents/skills/` auf dieselbe Weise wie jedes andere AgentSkills-kompatible Paket, und die Ergebnis-Einträge von `state.json` fließen direkt in den Speicher-Index von Hermes ein.
 
-In v6- und v7-Plänen wird der Status über `ledger.py project` aus dem reinen Anhangsjournal (`journal.ndjson`) projiziert, anstatt Statusdateien manuell neu zu schreiben.
+In v6-, v7- und v8-Plänen wird der Status über `ledger.py project` aus dem reinen Anhangsjournal (`journal.ndjson`) projiziert, anstatt Statusdateien manuell neu zu schreiben.
 
 ## Support-Level
 
@@ -34,7 +34,7 @@ resume the open plan
 
 ## Episodische Gedächtnis-Synergie
 
-In v6- und v7-Plänen fließen die deterministischen Verifizierungsbelege von DWP (`outcomes.py receipt`) und Ergebnisdatensätze direkt in den Speicherindex von Hermes ein: Jede abgeschlossene Aufgabe enthält in einem strukturierten JSON-Schema, was versucht wurde, fehlgeschlagen ist und funktioniert hat. Abgeschlossene Pläne werden zum abrufbaren episodischen Gedächtnis — ein Agent kann sich daran erinnern, wie ein Problem gelöst wurde.
+In v6-, v7- und v8-Plänen fließen die deterministischen Verifizierungsbelege von DWP (`outcomes.py receipt`) und Ergebnisdatensätze direkt in den Speicherindex von Hermes ein: Jede abgeschlossene Aufgabe enthält in einem strukturierten JSON-Schema, was versucht wurde, fehlgeschlagen ist und funktioniert hat. Abgeschlossene Pläne werden zum abrufbaren episodischen Gedächtnis — ein Agent kann sich daran erinnern, wie ein Problem gelöst wurde.
 
 Ephemere Sitzungen hängen Ereignisse an `journal.ndjson` an und projizieren `state.json` über `ledger.py project`, anstatt Statusdateien manuell neu zu schreiben. Siehe [Plan-Zustand](/spec/plan-state#outcome-records-as-episodic-memory).
 

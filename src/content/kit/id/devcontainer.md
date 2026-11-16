@@ -8,7 +8,7 @@ order: 1
 
 # Addon Devcontainer
 
-Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v7** (paket `v7.12.2`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
+Berikan repositori sebuah dev container yang reproducible dan terisolasi — yang dapat digunakan oleh orang, editor, dan coding agent. Dalam **DWP v8** (paket `v8.0.0`), addon ini mengintegrasikan **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, produk MIT yang bekerja tanpa Deep Work Plan. Addon ini opsional: sebuah repositori sepenuhnya konform tanpanya.
 
 Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
@@ -23,20 +23,20 @@ Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harne
 ## Instalasi
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.2.0`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.3.0`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.2.0`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.3.0`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
 
-**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin baru (herdr-peers 1.3.1, coding-agents-kit 1.4.0, dan DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image).
+**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin saat ini. Image `v1.3.0` memuat versi yang sama dengan `v1.2.0`: herdr-peers 1.3.1, coding-agents-kit 1.4.0, dan DeepWorkPlan Vim 1.0.1, dengan pack vendored 7.12.1 juga di dalam image.
 
 ## Lapisan
 
@@ -104,6 +104,14 @@ copy_keys = true              # default false
 ```
 
 Selama aktif, `dck up` me-mount `~/.ssh` milik host secara read-only di `~/.ssh_host`, dan setiap start menyalin kunci `id_*`-nya ke `~/.ssh` milik container (kunci privat `0600`), tetap selaras dengan host. Penerusan agent tidak berubah, dan mematikannya menghapus salinan tersebut pada start berikutnya. Konsekuensinya: seluruh `~/.ssh` milik host dapat dibaca di dalam container, dan kunci privat tersimpan di volume state.
+
+## Sejak devcontainer-kit 1.3.0 (antarmuka 2)
+
+Rilis 1.3.0 mempertahankan antarmuka 2 dan menambahkan satu kunci opt-in; repositori yang tidak menyetelnya di-render persis seperti sebelumnya.
+
+- **`[compose] container_only`.** Subpath workspace yang dicantumkan di sini di-mount sebagai named volume berlingkup proyek (`co-<path-slug>`, misalnya `co-app-node_modules` di atas `/app/node_modules`), baca-tulis, pada service utama. Apa yang dibangun container di sana tidak pernah sampai ke checkout milik host. Kasus yang menjadi alasannya: workspace adalah bind mount, dan instalasi `npm` atau `pnpm` di dalam container pada host macOS atau Windows mengganti `node_modules` dengan build untuk platformnya sendiri, sehingga merusak instalasi milik host.
+- **Kepemilikan di setiap start.** Entrypoint menyerahkan setiap titik mount kepada pengguna yang dikonfigurasi di setiap start container; begitu pengguna tersebut memilikinya, langkah ini tidak melakukan apa pun.
+- **Satu mount per path.** Path yang juga di-mount oleh blok pengguna ditolak, demikian pula nama volume turunan yang sudah dipakai oleh `compose.state_volume` atau `[compose] volumes`. Skema `dck.toml` (`dck-config-v2.json`) mendapatkan kunci ini.
 
 ## Default keamanan
 

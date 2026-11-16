@@ -25,7 +25,7 @@ Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harne
 4. Chạy validation gate thực của repo sau mỗi đợt; hoàn tác bất kỳ đợt nào thất bại.
 5. Tổng kết những gì đã nâng cấp, bỏ qua và hoàn tác; để nhà phát triển tự commit.
 
-## Đặc tả v7
+## Đặc tả v8
 
 | Mục | Giá trị |
 |---|---|
@@ -33,7 +33,7 @@ Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harne
 | Khóa đăng ký | `dependency-upgrade` trong `.dwp/config.json` |
 | Bộ mô tả | `addons/dependency-upgrade/addon.json` (giao diện 1) |
 | Lệnh | `/lib-upgrade` được cài đặt vào `.agents/commands/` khi được chấp nhận |
-| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.12.2`) |
+| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v8.0.0`) |
 
 ## Ghi chú
 

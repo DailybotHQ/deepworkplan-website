@@ -42,7 +42,7 @@ Ia tidak pernah wajib — sebuah repositori dengan nol addon opsional sepenuhnya
 
 Ketika diterima, addon dapat memasang sebuah delegator `/design-system` ke dalam `.agents/commands/` repo untuk menghasilkan ulang atau menyegarkan `DESIGN.md` di kemudian hari. Memasang command bersifat opsional; sebuah addon yang ditolak tidak memasang apa pun.
 
-## Spesifikasi v7
+## Spesifikasi v8
 
 | Item | Nilai |
 |---|---|
@@ -50,7 +50,7 @@ Ketika diterima, addon dapat memasang sebuah delegator `/design-system` ke dalam
 | Kunci registri | `design-system` di `.dwp/config.json` |
 | Deskriptor | `addons/design-system/addon.json` (antarmuka 1) |
 | File target | `docs/DESIGN.md` diindeks dari `AGENTS.md` |
-| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.12.2`) |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v8.0.0`) |
 
 ## Hubungan dengan dokumen desain per-fitur
 
