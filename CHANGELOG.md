@@ -9,6 +9,22 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.81] - 2026-11-17
+
+### Changed
+
+- fix: v8 gets its own plan-state row; docs findings from the self-review
+- docs: restore onboarding requirements
+- docs: sync final homepage hero copy
+- docs(visuals): archive obsolete visual prompt pack
+- docs(agents): rebuild skills and command catalogs
+- docs: correct multilingual and endpoint guidance
+- docs: refresh repository onboarding guidance
+- docs: align AEO markdown guidance with active languages
+- fix: refresh v8 agent discovery surfaces
+- content: correct v8 schema and protocol translations
+- fix(seo): align metadata audit with locale rules
+
 ## [5.0.80] - 2026-11-17
 
 ### Changed
@@ -1583,7 +1599,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.80...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.81...HEAD
+[5.0.81]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.81
 [5.0.80]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.80
 [5.0.79]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.79
 [5.0.78]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.78
