@@ -57,7 +57,7 @@ Build a fast, accessible, multilingual site that:
 
 **Purpose:** Communicate what DWP is, who it is for, and where to go next — fast.
 
-**Sections:** The hero uses the eyebrow “Spec-first · closed-loop”, headline “Turn your repo into one any AI agent can finish work in.”, and subtitle “Plans with acceptance criteria and validation gates live in the repository, so the work gets picked up, handed off and carried to done — within the authority you grant.” The existing lead sentence, “Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.”, remains the JSON-LD/brand line, not the visible headline. The homepage also has a concise DWP explainer, the four narrative pillars, core principles, entry points into the methodology/spec/kit readers and `/quickstart`, and a primary call to action.
+**Sections:** The hero uses the eyebrow “Spec-first · closed-loop”, headline “Turn your repo into one any AI agent can finish work in.”, and subtitle “Your repository holds the plan, the context and the checks, so the work survives restarts, moves between agents and keeps looping until every gate passes — within the authority you grant.” The existing lead sentence, “Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.”, remains the JSON-LD/brand line, not the visible headline. The homepage also has a concise DWP explainer, the four narrative pillars, core principles, entry points into the methodology/spec/kit readers and `/quickstart`, and a primary call to action.
 
 ### 2. Methodology Reader
 
