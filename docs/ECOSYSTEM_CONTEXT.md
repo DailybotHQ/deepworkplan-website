@@ -43,12 +43,11 @@ unchanged),
 deepworkplan-vim `v1.1.0`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
 reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.1`
-addon descriptors record herdr-peers `v2.1.0`, coding-agents-kit `v1.5.0`
-and devcontainer-kit `v1.4.0` — the same releases the site pins;
-devcontainer-kit `v1.4.0` (interface 2 unchanged; adds the opt-in
-`[compose] container_only` key) bakes the same tool releases into its image
-as 1.2.0 (herdr-peers 1.3.1, coding-agents-kit 1.4.0 and deepworkplan-vim
-1.0.1).
+addon descriptors record herdr-peers `v2.1.0`, coding-agents-kit `v1.5.0`,
+devcontainer-kit `v1.4.0` and deepworkplan-vim `v1.1.0` — the same releases the site pins;
+devcontainer-kit `v1.4.0` (interface 2 unchanged; 1.3.0 added the opt-in
+`[compose] container_only` key) bakes herdr-peers 2.1.0, coding-agents-kit
+1.5.0 and deepworkplan-vim 1.1.0 into its image and dogfoods pack 8.0.1.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
