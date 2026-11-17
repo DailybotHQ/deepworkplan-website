@@ -1,5 +1,4 @@
 ---
-import LoopDiagram from '@/components/diagrams/home/LoopDiagram.astro';
 import Kicker from '@/components/editorial/Kicker.astro';
 import type { Language } from '@/lib/i18n';
 import {
@@ -35,19 +34,21 @@ const initMarkdown = await getCanonicalInitMarkdown();
 >
   <div class="main-container w-full py-12 lg:py-8">
     <div
-      class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,480px)] lg:items-center lg:gap-10"
+      class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:items-center lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,460px)]"
     >
       <div class="max-w-3xl">
       <Kicker>{h.badge}</Kicker>
-      <!-- The v8 lead sentence lives in one translation key (hero.leadSentence). -->
+      <!-- hero.headline + hero.subtitle split the v8 lead sentence
+           (hero.leadSentence, still the JSON-LD source) so the h1 stays at
+           two lines at most. -->
       <h1
-        class="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.12]"
+        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-[2.6rem] lg:leading-[1.08] xl:text-6xl xl:leading-[1.05]"
         style="color: var(--color-ink);"
       >
-        {h.leadSentence}
+        {h.headline}
       </h1>
 
-      <p class="mt-6 max-w-2xl text-lg" style="color: var(--color-ink);">
+      <p class="mt-6 max-w-2xl text-lg sm:text-xl" style="color: var(--color-ink);">
         {h.subtitle}
       </p>
 
@@ -92,13 +93,6 @@ const initMarkdown = await getCanonicalInitMarkdown();
         </p>
       </div>
 
-      <p
-        class="font-display mt-6 max-w-2xl border-l-2 pl-4 text-lg italic md:text-xl"
-        style="border-color: var(--color-secondary); color: var(--color-ink);"
-      >
-        {h.pullQuote}
-      </p>
-
       <div
         class="mt-7 flex flex-col gap-4 sm:flex-row sm:flex-wrap sm:items-center"
       >
@@ -129,8 +123,24 @@ const initMarkdown = await getCanonicalInitMarkdown();
       </div>
       </div>
 
-      <div class="mt-10 lg:mt-0">
-        <LoopDiagram lang={lang} />
+      <div class="mt-10 block lg:mt-0">
+        <img
+          src="/images/visuals/home/hero-harness.webp"
+          alt={h.illustrationAlt}
+          width="680"
+          height="850"
+          class="mx-auto h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-h-[calc(100dvh-8rem)] lg:max-w-[340px] xl:max-w-[440px] lg:object-contain dark:hidden"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <img
+          src="/images/visuals/home/hero-harness-dark.webp"
+          alt={h.illustrationAlt}
+          width="680"
+          height="850"
+          class="mx-auto hidden h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-h-[calc(100dvh-8rem)] lg:max-w-[340px] xl:max-w-[440px] lg:object-contain dark:block"
+          loading="lazy"
+        />
       </div>
     </div>
   </div>

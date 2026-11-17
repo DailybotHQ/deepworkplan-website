@@ -106,8 +106,9 @@ export const pl: SiteTranslations = {
       badge: 'Otwarta metodyka · MIT · Niezależna od agenta',
       leadSentence:
         'Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.',
+      headline: 'Spec-first, z zamkniętą pętlą.',
       subtitle:
-        'Deep Work Plan zamienia każde repozytorium w harness — kontekst, zabezpieczenia i trwały plan z bramkami walidacyjnymi — w którym każdy agent kodowania wykonuje pracę długoterminową. Dodaj opcjonalną pętlę, a otwarty plan będzie działał aż do końca, bez potrzeby ciągłego sprawdzania go przez kogokolwiek.',
+        'Repozytorium jest harnessem, a plan sam wykonuje się do końca.',
       instructionLabel: 'Skopiuj do swojego agenta',
       instruction:
         'Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.',
@@ -118,6 +119,8 @@ export const pl: SiteTranslations = {
         'Spec-first mówi, co robić; harness — gdzie; Loop engineering — jak to się kończy.',
       primaryCta: 'Przeczytaj metodykę',
       secondaryCta: 'Przeczytaj specyfikację',
+      illustrationAlt:
+        'Latarnia morska na skalistym brzegu rzuca pojedynczy snop światła prowadzący niewielki statek — rycina przywołująca repozytorium jako stabilny harness, który prowadzi każdego agenta.',
     },
     pillars: {
       badge: 'Cztery filary',
@@ -226,7 +229,7 @@ export const pl: SiteTranslations = {
         {
           name: 'Kolejka planów',
           detail:
-            'Pakiet sprawdza i zapisuje kolejkę `dwp-queue-v1`; demon odczytuje ją, aby kontynuować oczekujące plany.',
+            'Pakiet sprawdza i zapisuje kolejkę dwp-queue-v1; demon odczytuje ją, aby kontynuować oczekujące plany.',
         },
         {
           name: 'Weryfikacja leada',

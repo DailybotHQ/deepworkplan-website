@@ -8,6 +8,7 @@
  * translated; names and guarantees come from translations (home.loop), in the
  * same order as LOOP_CONTRACTS below. Static, zero JS.
  */
+import LoopDiagram from '@/components/diagrams/home/LoopDiagram.astro';
 import Kicker from '@/components/editorial/Kicker.astro';
 import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 import type { Language } from '@/lib/i18n';
@@ -19,7 +20,8 @@ interface Props {
 }
 
 const { lang } = Astro.props;
-const l = getTranslations(lang).home.loop;
+const t = getTranslations(lang);
+const l = t.home.loop;
 const prefix = getUrlPrefix(lang);
 const herdr = ECOSYSTEM_PINS.herdr;
 const base = `https://github.com/DailybotHQ/${herdr.repo}/blob/${herdr.tag}/`;
@@ -96,6 +98,16 @@ const rows = l.contracts.map((c, i) => {
         {l.title}
       </h2>
       <p class="lead mt-4">{l.subtitle}</p>
+      <p
+        class="font-display mt-6 border-l-2 pl-4 text-lg italic md:text-xl"
+        style="border-color: var(--color-secondary); color: var(--color-ink);"
+      >
+        {t.home.hero.pullQuote}
+      </p>
+    </div>
+
+    <div class="mx-auto mt-10 max-w-[560px]">
+      <LoopDiagram lang={lang} />
     </div>
 
     <div class="mt-10 overflow-x-auto" role="region" tabindex="0" aria-label={l.title}>

@@ -103,8 +103,8 @@ export const th: SiteTranslations = {
       badge: 'ระเบียบวิธีแบบเปิด · MIT · ไม่ผูกกับ agent ใด',
       leadSentence:
         'สเปกมาก่อน ปิดลูปในตัว: repository คือ harness และแผนจะเดินหน้าเองจนเสร็จ',
-      subtitle:
-        'Deep Work Plan เปลี่ยนทุก repository ให้เป็น harness — บริบท ราวกันตก และแผนงานที่ยั่งยืนพร้อม validation gate — ซึ่งเอเจนต์เขียนโค้ดใดก็ลงมือทำงานระยะยาวได้ เพิ่มลูปแบบเลือกใช้ แล้วแผนที่เปิดอยู่จะเดินต่อไปจนจบโดยไม่ต้องมีใครคอยเฝ้าถาม',
+      headline: 'สเปกมาก่อน ปิดลูปในตัว',
+      subtitle: 'repository คือ harness และแผนจะเดินหน้าเองจนเสร็จ',
       instructionLabel: 'คัดลอกไปยัง agent ของคุณ',
       instruction:
         'คัดลอก prompt ของ init.md และวางลงใน coding agent ของคุณ — Claude Code, Cursor, Codex หรืออื่น ๆ — เพื่อทำให้ repository ใดก็ได้เป็น AI-first',
@@ -115,6 +115,8 @@ export const th: SiteTranslations = {
         'สเปกมาก่อนบอกว่าทำอะไร harness บอกว่าทำที่ไหน Loop engineering บอกว่าจะจบอย่างไร',
       primaryCta: 'อ่านระเบียบวิธี',
       secondaryCta: 'อ่านข้อกำหนด',
+      illustrationAlt:
+        'ภาพแกะสลักประภาคารบนชายฝั่งหินที่ฉายลำแสงเดียวนำทางเรือลำเล็ก สื่อถึง repository ที่เป็น harness อันมั่นคงซึ่งนำทาง agent ทุกตัว',
     },
     pillars: {
       badge: 'สี่เสาหลัก',
@@ -223,7 +225,7 @@ export const th: SiteTranslations = {
         {
           name: 'คิวแผน',
           detail:
-            'แพ็กตรวจสอบและเขียนคิว `dwp-queue-v1`; daemon อ่านคิวเพื่อดำเนินแผนที่รอต่อไป',
+            'แพ็กตรวจสอบและเขียนคิว dwp-queue-v1; daemon อ่านคิวเพื่อดำเนินแผนที่รอต่อไป',
         },
         {
           name: 'การยืนยัน lead',

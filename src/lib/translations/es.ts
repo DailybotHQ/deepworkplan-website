@@ -100,8 +100,9 @@ export const es: SiteTranslations = {
       badge: 'Metodología abierta · MIT · Independiente del agente',
       leadSentence:
         'Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar.',
+      headline: 'Primero la especificación, con el bucle cerrado.',
       subtitle:
-        'Deep Work Plan convierte cualquier repositorio en el harness — contexto, guardarraíles y un plan duradero con puertas de validación — donde cualquier agente de código ejecuta trabajo de largo alcance. Añade el bucle opcional y un plan abierto sigue ejecutándose hasta su fin sin que nadie tenga que vigilarlo.',
+        'El repositorio es el harness y el plan se ejecuta solo hasta terminar.',
       instructionLabel: 'Copia en tu agente',
       instruction:
         'Copia el prompt de init.md y pégalo en tu agente de código — Claude Code, Cursor, Codex, o cualquier otro — para hacer de cualquier repositorio uno AI-first.',
@@ -112,6 +113,8 @@ export const es: SiteTranslations = {
         'La especificación dice qué; el harness dice dónde; el loop engineering dice cómo termina.',
       primaryCta: 'Leer la metodología',
       secondaryCta: 'Leer la especificación',
+      illustrationAlt:
+        'Un faro en una costa rocosa proyecta un único haz que guía a una pequeña embarcación — un grabado que evoca el repositorio como un harness estable que guía a cualquier agente.',
     },
     pillars: {
       badge: 'Cuatro pilares',
@@ -221,7 +224,7 @@ export const es: SiteTranslations = {
         {
           name: 'Cola de planes',
           detail:
-            'El paquete valida y escribe la cola `dwp-queue-v1`; el daemon la lee para continuar los planes en cola.',
+            'El paquete valida y escribe la cola dwp-queue-v1; el daemon la lee para continuar los planes en cola.',
         },
         {
           name: 'Verificación del lead',

@@ -103,8 +103,8 @@ export const ko: SiteTranslations = {
       badge: '오픈 방법론 · MIT · 에이전트 비종속',
       leadSentence:
         '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
-      subtitle:
-        'Deep Work Plan은 어떤 리포지토리든 하니스 — 컨텍스트, 가드레일, 검증 게이트를 갖춘 지속되는 계획 — 로 바꾸어, 어떤 코딩 에이전트든 그 안에서 장기 작업을 실행합니다. 선택형 루프를 더하면, 열린 계획은 누구도 폴링하지 않아도 끝까지 계속 실행됩니다.',
+      headline: '스펙 우선, 루프로 완결.',
+      subtitle: '리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
       instructionLabel: '에이전트에 복사하기',
       instruction:
         'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',
@@ -115,6 +115,8 @@ export const ko: SiteTranslations = {
         '스펙 우선은 무엇을, 하니스는 어디서를, Loop engineering은 어떻게 끝나는지를 말합니다.',
       primaryCta: '방법론 읽기',
       secondaryCta: '스펙 읽기',
+      illustrationAlt:
+        '바위 해안의 등대가 한 줄기 빛을 비추어 작은 배를 인도하는 모습 — 어떤 에이전트든 이끄는 든든한 하니스로서의 리포지토리를 떠올리게 하는 판화.',
     },
     pillars: {
       badge: '네 가지 기둥',
@@ -223,7 +225,7 @@ export const ko: SiteTranslations = {
         {
           name: '계획 대기열',
           detail:
-            '팩은 `dwp-queue-v1` 대기열을 검증하고 기록하며, 데몬은 이를 읽어 대기 중인 계획을 계속 진행합니다.',
+            '팩은 dwp-queue-v1 대기열을 검증하고 기록하며, 데몬은 이를 읽어 대기 중인 계획을 계속 진행합니다.',
         },
         {
           name: '리드 검증',

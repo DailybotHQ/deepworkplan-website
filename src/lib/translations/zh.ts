@@ -103,8 +103,8 @@ export const zh: SiteTranslations = {
       badge: '开放方法论 · MIT · 代理无关',
       leadSentence:
         '规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。',
-      subtitle:
-        'Deep Work Plan 将任何代码仓库转变为 harness（运行支架）——上下文、防护栏，以及带验证关卡的持久计划——任何编码代理都能在其中执行长程工作。加上可选的循环，一份打开的计划会持续运行到结束，无需任何人去轮询它。',
+      headline: '规范先行、闭环运行。',
+      subtitle: '代码仓库就是 harness，计划自行运行直至完成。',
       instructionLabel: '复制到你的代理',
       instruction:
         '复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。',
@@ -115,6 +115,8 @@ export const zh: SiteTranslations = {
         '规范先行说明做什么；harness 说明在哪里做；Loop engineering 说明如何收尾。',
       primaryCta: '阅读方法论',
       secondaryCta: '阅读规范',
+      illustrationAlt:
+        '一座灯塔矗立在礁石海岸，射出一道光束为一艘小船指引方向——这幅版画寓意着代码仓库如同稳固的支架，引导任意代理。',
     },
     pillars: {
       badge: '四大支柱',
@@ -223,7 +225,7 @@ export const zh: SiteTranslations = {
         {
           name: '计划队列',
           detail:
-            '技能包校验并写入 `dwp-queue-v1` 队列；守护进程读取它以继续执行排队计划。',
+            '技能包校验并写入 dwp-queue-v1 队列；守护进程读取它以继续执行排队计划。',
         },
         {
           name: '主导者核验',

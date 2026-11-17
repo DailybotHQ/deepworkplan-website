@@ -105,8 +105,9 @@ export const fr: SiteTranslations = {
       badge: 'Méthodologie ouverte · MIT · Indépendante de l’agent',
       leadSentence:
         'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.',
+      headline: 'La spécification d’abord, la boucle fermée.',
       subtitle:
-        'Deep Work Plan transforme n’importe quel dépôt en harness — contexte, garde-fous et un plan durable avec des portes de validation — où n’importe quel agent de codage exécute un travail de longue haleine. Ajoutez la boucle facultative, et un plan ouvert continue de s’exécuter jusqu’à son terme sans que personne ait à le surveiller.',
+        'Le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.',
       instructionLabel: 'Copier dans votre agent',
       instruction:
         "Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n'importe quel dépôt AI-first.",
@@ -117,6 +118,8 @@ export const fr: SiteTranslations = {
         'La spécification dit quoi ; le harness dit où ; le loop engineering dit comment cela se termine.',
       primaryCta: 'Lire la méthodologie',
       secondaryCta: 'Lire la spécification',
+      illustrationAlt:
+        'Un phare sur une côte rocheuse projette un faisceau unique qui guide un petit navire — une gravure évoquant le dépôt comme un harness stable qui guide tout agent.',
     },
     pillars: {
       badge: 'Quatre piliers',
@@ -225,7 +228,7 @@ export const fr: SiteTranslations = {
         {
           name: 'File de plans',
           detail:
-            'Le pack valide et écrit la file `dwp-queue-v1` ; le démon la lit pour poursuivre les plans en attente.',
+            'Le pack valide et écrit la file dwp-queue-v1 ; le démon la lit pour poursuivre les plans en attente.',
         },
         {
           name: 'Vérification du lead',

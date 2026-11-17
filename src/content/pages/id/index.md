@@ -1,20 +1,17 @@
 ---
 title: "Deep Work Plan — eksekusi terstruktur untuk AI coding agent"
 description: "Spec-first, loop tertutup: Deep Work Plan menjadikan repositori Anda harness bagi AI coding agent; tiap rencana berjalan tuntas di loop yang dimulai manusia."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
-## Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.
+## Spec-first, loop tertutup.
 
-Deep Work Plan mengubah repositori apa pun menjadi harness — konteks, pagar pengaman, dan rencana yang tahan lama dengan gerbang validasi — tempat agen coding mana pun mengeksekusi pekerjaan jangka panjang. Tambahkan loop opsional, dan rencana yang terbuka terus berjalan hingga akhir tanpa ada yang perlu memantaunya.
+Repositori adalah harness dan rencana berjalan sendiri hingga selesai.
 
 Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk merencanakan dan mengeksekusi pekerjaan perangkat lunak yang kompleks bersama AI agent. Anda tidak memilih metode pemasangan atau menyalin template — Anda menyalin prompt init.md dan menempelkannya ke agent Anda:
 
 > Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.
 
-
-
-**Loop:** Registrasi (`lead claim`, lead dan suksesi) → Daemon (`autopilot --loop`, dimulai oleh manusia) → Dorongan (`idle ≥ 5 min`, tidak menambah wewenang) → Failover (`lead takeover`, penerus pertama yang terjangkau) → Notifikasi (`plan-event-v1`, ke perintah manusia) → Selesai (`plan_completed`, gerbang terlewati). Setiap rencana terbuka dengan catatan lead, hingga statusnya sendiri menyatakan selesai.
 
 - [Buka prompt /init](/id/quickstart)
 - [Baca metodologinya](/methodology)
@@ -38,29 +35,6 @@ Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang —
 
 
 Konteks adalah sumber daya agen Anda yang paling langka. Karena itu, harness menjaga instruksinya sendiri tetap ringkas dan dapat diaudit. Instruksi dimuat secara bertahap, validasi berfokus pada perubahan, dan setiap tugas menerima konteks yang relevan. Kami menerbitkan ukuran instruksi tiap alur dalam byte agar bebannya terlihat. Rencana juga menyesuaikan bentuk dengan pekerjaan: Lite untuk perbaikan terbatas dan Full untuk pekerjaan yang berlangsung berjam-jam. Format mengikuti cakupan pekerjaan sehingga proses tetap fokus dan mudah ditelusuri.
-
----
-
-## Rencana berjalan hingga akhir. Wewenang tetap di tangan manusia.
-
-Loop engineering membuat rencana selesai tanpa perlu terus dipantau manusia. Baris di bawah menjelaskan kontrak siklus yang telah dirilis: sebagian besar berasal dari herdr-peers, sedangkan antrean rencana adalah kontrak paket. Herdr bersifat opsional; metodologi tetap berfungsi tanpanya.
-
-
-
-| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.2.0) |
-| --- | --- | --- |
-| Registrasi rencana (`herdr-peers lead claim`) | Rencana yang diawasi loop memiliki catatan lead dengan epoch dan urutan suksesi. Hanya pemegang epoch tertinggi yang bertindak sebagai lead-nya. | `skills/herdr-peers/protocol.md` §12 |
-| Hanya manusia yang memulai (`herdr-peers autopilot start --loop`) | Hanya manusia yang memulai daemon, dengan kata-katanya sendiri. Tidak ada permintaan, balasan, atau pemberitahuan yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. | `skills/herdr-peers/autopilot.md` §1 |
-| Dorongan tanpa wewenang tambahan (`plan_stalled`) | Lead yang menganggur dari rencana terbuka menerima satu prompt tetap untuk melanjutkan. Gerbang, kondisi berhenti, dan eskalasi tetap mengikat seperti sebelumnya; tiga prompt tanpa kemajuan menandai rencana sebagai macet. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
-| Failover ke penerus (`herdr-peers lead takeover`) | Saat lead hilang, penerus pertama yang dapat dijangkau diminta mengambil alih, dan helper memeriksa ulang buktinya. Sebuah lane hanya menjadi lead berdasarkan izin yang telah dicatat manusia sebelumnya. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
-| Event rencana (`plan-event-v1`) | Saat rencana macet, terblokir, kehilangan lead, dimulai dari antrean, atau selesai, perintah yang dipilih manusia menerima satu objek plan-event-v1. Pack ini menyertakan notifier Dailybot untuk itu. | `docs/schema/plan-event-v1.json` |
-| Peta armada (`plans-v1` · `fleet-v1`) | Setiap mesin melaporkan rencananya sebagai plans-v1; daemon menyimpan peta fleet-v1 dari setiap mesin, agen, repositori, dan rencana, dan fleet ui menampilkannya secara baca-saja. | `docs/schema/fleet-v1.json` |
-| Antrean rencana (`dwp-queue-v1`) | Paket memvalidasi dan menulis antrean; daemon membacanya untuk melanjutkan rencana yang mengantre. | `skills/deepworkplan/shared/queue.py` |
-| Verifikasi lead (`herdr-peers lead verify`) | Sebelum merge, tag, atau rilis apa pun, lead memastikan bahwa ia masih memegang rencana di setiap mesin. Lead yang lebih baru menolaknya; mesin yang tidak dapat dijangkau menghentikannya kecuali risiko itu diterima secara tercatat. | `skills/herdr-peers/protocol.md` §12 |
-
-Otak keputusan (`--brain`) dan penunjukan lead (`--appoint`) adalah flag opt-in dari daemon yang sama, masing-masing diaktifkan oleh manusia. Daemon tidak pernah melakukan merge, merilis, masuk ke akun, atau mengubah izin.
-
-[Baca addon Herdr](/id/kit/herdr)
 
 ---
 
@@ -114,6 +88,33 @@ Konteks, alat, pagar pengaman, dan status tinggal di repositori Anda sebagai ber
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Lihat hasil onboarding](/id/quickstart)
+
+---
+
+## Rencana berjalan hingga akhir. Wewenang tetap di tangan manusia.
+
+Loop engineering membuat rencana selesai tanpa perlu terus dipantau manusia. Baris di bawah menjelaskan kontrak siklus yang telah dirilis: sebagian besar berasal dari herdr-peers, sedangkan antrean rencana adalah kontrak paket. Herdr bersifat opsional; metodologi tetap berfungsi tanpanya.
+
+> Spec-first menyatakan apa; harness menyatakan di mana; Loop engineering menyatakan bagaimana pekerjaan selesai.
+
+**Loop:** Registrasi (`lead claim`, lead dan suksesi) → Daemon (`autopilot --loop`, dimulai oleh manusia) → Dorongan (`idle ≥ 5 min`, tidak menambah wewenang) → Failover (`lead takeover`, penerus pertama yang terjangkau) → Notifikasi (`plan-event-v1`, ke perintah manusia) → Selesai (`plan_completed`, gerbang terlewati). Setiap rencana terbuka dengan catatan lead, hingga statusnya sendiri menyatakan selesai.
+
+
+
+| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.2.0) |
+| --- | --- | --- |
+| Registrasi rencana (`herdr-peers lead claim`) | Rencana yang diawasi loop memiliki catatan lead dengan epoch dan urutan suksesi. Hanya pemegang epoch tertinggi yang bertindak sebagai lead-nya. | `skills/herdr-peers/protocol.md` §12 |
+| Hanya manusia yang memulai (`herdr-peers autopilot start --loop`) | Hanya manusia yang memulai daemon, dengan kata-katanya sendiri. Tidak ada permintaan, balasan, atau pemberitahuan yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. | `skills/herdr-peers/autopilot.md` §1 |
+| Dorongan tanpa wewenang tambahan (`plan_stalled`) | Lead yang menganggur dari rencana terbuka menerima satu prompt tetap untuk melanjutkan. Gerbang, kondisi berhenti, dan eskalasi tetap mengikat seperti sebelumnya; tiga prompt tanpa kemajuan menandai rencana sebagai macet. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Failover ke penerus (`herdr-peers lead takeover`) | Saat lead hilang, penerus pertama yang dapat dijangkau diminta mengambil alih, dan helper memeriksa ulang buktinya. Sebuah lane hanya menjadi lead berdasarkan izin yang telah dicatat manusia sebelumnya. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Event rencana (`plan-event-v1`) | Saat rencana macet, terblokir, kehilangan lead, dimulai dari antrean, atau selesai, perintah yang dipilih manusia menerima satu objek plan-event-v1. Pack ini menyertakan notifier Dailybot untuk itu. | `docs/schema/plan-event-v1.json` |
+| Peta armada (`plans-v1` · `fleet-v1`) | Setiap mesin melaporkan rencananya sebagai plans-v1; daemon menyimpan peta fleet-v1 dari setiap mesin, agen, repositori, dan rencana, dan fleet ui menampilkannya secara baca-saja. | `docs/schema/fleet-v1.json` |
+| Antrean rencana (`dwp-queue-v1`) | Paket memvalidasi dan menulis antrean; daemon membacanya untuk melanjutkan rencana yang mengantre. | `skills/deepworkplan/shared/queue.py` |
+| Verifikasi lead (`herdr-peers lead verify`) | Sebelum merge, tag, atau rilis apa pun, lead memastikan bahwa ia masih memegang rencana di setiap mesin. Lead yang lebih baru menolaknya; mesin yang tidak dapat dijangkau menghentikannya kecuali risiko itu diterima secara tercatat. | `skills/herdr-peers/protocol.md` §12 |
+
+Otak keputusan (`--brain`) dan penunjukan lead (`--appoint`) adalah flag opt-in dari daemon yang sama, masing-masing diaktifkan oleh manusia. Daemon tidak pernah melakukan merge, merilis, masuk ke akun, atau mengubah izin.
+
+[Baca addon Herdr](/id/kit/herdr)
 
 ---
 

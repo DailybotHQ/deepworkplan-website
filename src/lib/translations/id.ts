@@ -103,8 +103,9 @@ export const id: SiteTranslations = {
       badge: 'Metodologi terbuka · MIT · Agnostik terhadap agent',
       leadSentence:
         'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
+      headline: 'Spec-first, loop tertutup.',
       subtitle:
-        'Deep Work Plan mengubah repositori apa pun menjadi harness — konteks, pagar pengaman, dan rencana yang tahan lama dengan gerbang validasi — tempat agen coding mana pun mengeksekusi pekerjaan jangka panjang. Tambahkan loop opsional, dan rencana yang terbuka terus berjalan hingga akhir tanpa ada yang perlu memantaunya.',
+        'Repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
       instructionLabel: 'Salin ke agent Anda',
       instruction:
         'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',
@@ -115,6 +116,8 @@ export const id: SiteTranslations = {
         'Spec-first menyatakan apa; harness menyatakan di mana; Loop engineering menyatakan bagaimana pekerjaan selesai.',
       primaryCta: 'Baca metodologinya',
       secondaryCta: 'Baca spesifikasinya',
+      illustrationAlt:
+        'Sebuah mercusuar di pesisir berbatu memancarkan satu berkas cahaya yang memandu kapal kecil — ukiran yang menggambarkan repositori sebagai harness mantap yang memandu agent mana pun.',
     },
     pillars: {
       badge: 'Empat pilar',
@@ -223,7 +226,7 @@ export const id: SiteTranslations = {
         {
           name: 'Antrean rencana',
           detail:
-            'Paket memvalidasi dan menulis antrean `dwp-queue-v1`; daemon membacanya untuk melanjutkan rencana yang mengantre.',
+            'Paket memvalidasi dan menulis antrean dwp-queue-v1; daemon membacanya untuk melanjutkan rencana yang mengantre.',
         },
         {
           name: 'Verifikasi lead',

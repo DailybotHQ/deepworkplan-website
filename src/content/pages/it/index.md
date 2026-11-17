@@ -1,20 +1,17 @@
 ---
 title: "Deep Work Plan — esecuzione strutturata per agenti di coding AI"
 description: "Prima la specifica, loop chiuso: Deep Work Plan rende il repository la harness degli agenti IA e ogni piano arriva alla fine in un loop avviato da una persona."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
-## Prima la specifica, loop chiuso: il repository è la harness e il piano si esegue da solo fino alla fine.
+## Prima la specifica, loop chiuso.
 
-Deep Work Plan trasforma qualsiasi repository nella harness — contesto, guardrail e un piano duraturo con validation gate — dove qualsiasi agente di coding esegue il lavoro di lungo corso. Aggiunga il loop opzionale e un piano aperto continua fino alla fine senza che nessuno debba controllarlo.
+Il repository è la harness e il piano si esegue da solo fino alla fine.
 
 Deep Work Plan (DWP) è una metodologia e un kit aperti, sotto licenza MIT, per pianificare ed eseguire lavoro software complesso con agenti AI. Non sceglie un metodo di installazione né copia un template — copia il prompt di init.md e lo incolla nel Suo agente:
 
 > Copi il prompt di init.md e lo incolli nel Suo agente di coding — Claude Code, Cursor, Codex o qualsiasi altro — per rendere qualsiasi repository AI-first.
 
-
-
-**Il loop:** Registrazione (`lead claim`, lead e successione) → Daemon (`autopilot --loop`, avviato da una persona) → Sollecito (`idle ≥ 5 min`, non aggiunge autorità) → Subentro (`lead takeover`, primo successore raggiungibile) → Notifica (`plan-event-v1`, al comando della persona) → Fatto (`plan_completed`, gate superati). Ogni piano aperto con un record di lead, finché il suo stesso stato non dice che è concluso.
 
 - [Apri il prompt /init](/it/quickstart)
 - [Leggi la metodologia](/methodology)
@@ -38,29 +35,6 @@ Nei burst brevi, gli agenti di coding sono notevoli. Affidategli una missione di
 
 
 Il contesto è la risorsa più scarsa del tuo agente. Per questo il harness mantiene le proprie istruzioni essenziali e verificabili. Le istruzioni si caricano gradualmente, la validazione si concentra sulle modifiche e ogni attività riceve il contesto pertinente. Pubblichiamo in byte la quantità di istruzioni di ogni flusso, così questo carico è visibile. Anche i piani si adattano al lavoro: Lite per una correzione circoscritta e Full per attività che durano ore. Il formato segue l’ambito del lavoro e mantiene il processo focalizzato e tracciabile.
-
----
-
-## I piani arrivano alla fine. L’autorità resta alle persone.
-
-Loop engineering permette a un piano di arrivare al termine senza che una persona debba controllarlo continuamente. Le righe seguenti descrivono i contratti rilasciati del ciclo: la maggior parte appartiene a herdr-peers, mentre la coda dei piani è un contratto del pacchetto. Herdr è facoltativo; la metodologia funziona anche senza.
-
-
-
-| Contratto | Cosa garantisce | Fonte (herdr-peers v2.2.0) |
-| --- | --- | --- |
-| Registrazione del piano (`herdr-peers lead claim`) | Un piano seguito dal loop ha un record di lead con un’epoca e una successione. Solo chi detiene l’epoca più alta agisce come suo lead. | `skills/herdr-peers/protocol.md` §12 |
-| Avvio solo umano (`herdr-peers autopilot start --loop`) | Solo una persona avvia il daemon, con parole proprie. Nessuna richiesta, risposta o notifica può avviarlo, fermarlo o cambiarne il comportamento. | `skills/herdr-peers/autopilot.md` §1 |
-| I solleciti non aggiungono autorità (`plan_stalled`) | Il lead inattivo di un piano aperto riceve un unico prompt fisso per continuare. Gate, condizioni di arresto ed escalation restano vincolanti come prima; tre prompt senza progressi segnano il piano come in stallo. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
-| Subentro dei successori (`herdr-peers lead takeover`) | Quando il lead non c’è più, al primo successore raggiungibile viene chiesto di subentrare, e l’helper ricontrolla le evidenze. Una corsia assume il ruolo di lead solo con un’autorizzazione che la persona ha registrato in anticipo. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
-| Eventi del piano (`plan-event-v1`) | Quando un piano va in stallo, si blocca, perde il suo lead, parte dalla coda o si completa, un comando scelto dalla persona riceve un oggetto plan-event-v1. Il pacchetto include un notificatore Dailybot per questo. | `docs/schema/plan-event-v1.json` |
-| Mappa della flotta (`plans-v1` · `fleet-v1`) | Ogni macchina riporta i propri piani come plans-v1; il daemon mantiene la mappa fleet-v1 di ogni macchina, agente, repository e piano, e fleet ui la mostra in sola lettura. | `docs/schema/fleet-v1.json` |
-| Coda dei piani (`dwp-queue-v1`) | Il pacchetto convalida e scrive la coda; il daemon la legge per proseguire i piani in attesa. | `skills/deepworkplan/shared/queue.py` |
-| Verifica del lead (`herdr-peers lead verify`) | Prima di qualsiasi merge, tag o release, il lead conferma di detenere ancora il piano su ogni macchina. Un lead più recente lo rifiuta; una macchina irraggiungibile lo ferma, a meno che quel rischio non sia accettato e registrato. | `skills/herdr-peers/protocol.md` §12 |
-
-Il cervello decisionale (`--brain`) e la nomina del lead (`--appoint`) sono flag opzionali dello stesso daemon, ciascuno attivato da una persona. Il daemon non esegue mai merge, non pubblica release, non effettua accessi e non modifica permessi.
-
-[Leggi l’addon Herdr](/it/kit/herdr)
 
 ---
 
@@ -114,6 +88,33 @@ Contesto, strumenti, guardrail e stato vivono nel tuo repository come semplici f
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Vedi cosa genera l’onboarding](/it/quickstart)
+
+---
+
+## I piani arrivano alla fine. L’autorità resta alle persone.
+
+Loop engineering permette a un piano di arrivare al termine senza che una persona debba controllarlo continuamente. Le righe seguenti descrivono i contratti rilasciati del ciclo: la maggior parte appartiene a herdr-peers, mentre la coda dei piani è un contratto del pacchetto. Herdr è facoltativo; la metodologia funziona anche senza.
+
+> La specifica dice cosa; la harness dice dove; il loop engineering dice come finisce.
+
+**Il loop:** Registrazione (`lead claim`, lead e successione) → Daemon (`autopilot --loop`, avviato da una persona) → Sollecito (`idle ≥ 5 min`, non aggiunge autorità) → Subentro (`lead takeover`, primo successore raggiungibile) → Notifica (`plan-event-v1`, al comando della persona) → Fatto (`plan_completed`, gate superati). Ogni piano aperto con un record di lead, finché il suo stesso stato non dice che è concluso.
+
+
+
+| Contratto | Cosa garantisce | Fonte (herdr-peers v2.2.0) |
+| --- | --- | --- |
+| Registrazione del piano (`herdr-peers lead claim`) | Un piano seguito dal loop ha un record di lead con un’epoca e una successione. Solo chi detiene l’epoca più alta agisce come suo lead. | `skills/herdr-peers/protocol.md` §12 |
+| Avvio solo umano (`herdr-peers autopilot start --loop`) | Solo una persona avvia il daemon, con parole proprie. Nessuna richiesta, risposta o notifica può avviarlo, fermarlo o cambiarne il comportamento. | `skills/herdr-peers/autopilot.md` §1 |
+| I solleciti non aggiungono autorità (`plan_stalled`) | Il lead inattivo di un piano aperto riceve un unico prompt fisso per continuare. Gate, condizioni di arresto ed escalation restano vincolanti come prima; tre prompt senza progressi segnano il piano come in stallo. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Subentro dei successori (`herdr-peers lead takeover`) | Quando il lead non c’è più, al primo successore raggiungibile viene chiesto di subentrare, e l’helper ricontrolla le evidenze. Una corsia assume il ruolo di lead solo con un’autorizzazione che la persona ha registrato in anticipo. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Eventi del piano (`plan-event-v1`) | Quando un piano va in stallo, si blocca, perde il suo lead, parte dalla coda o si completa, un comando scelto dalla persona riceve un oggetto plan-event-v1. Il pacchetto include un notificatore Dailybot per questo. | `docs/schema/plan-event-v1.json` |
+| Mappa della flotta (`plans-v1` · `fleet-v1`) | Ogni macchina riporta i propri piani come plans-v1; il daemon mantiene la mappa fleet-v1 di ogni macchina, agente, repository e piano, e fleet ui la mostra in sola lettura. | `docs/schema/fleet-v1.json` |
+| Coda dei piani (`dwp-queue-v1`) | Il pacchetto convalida e scrive la coda; il daemon la legge per proseguire i piani in attesa. | `skills/deepworkplan/shared/queue.py` |
+| Verifica del lead (`herdr-peers lead verify`) | Prima di qualsiasi merge, tag o release, il lead conferma di detenere ancora il piano su ogni macchina. Un lead più recente lo rifiuta; una macchina irraggiungibile lo ferma, a meno che quel rischio non sia accettato e registrato. | `skills/herdr-peers/protocol.md` §12 |
+
+Il cervello decisionale (`--brain`) e la nomina del lead (`--appoint`) sono flag opzionali dello stesso daemon, ciascuno attivato da una persona. Il daemon non esegue mai merge, non pubblica release, non effettua accessi e non modifica permessi.
+
+[Leggi l’addon Herdr](/it/kit/herdr)
 
 ---
 

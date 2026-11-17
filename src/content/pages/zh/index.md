@@ -1,20 +1,17 @@
 ---
 title: "Deep Work Plan — 面向 AI 编码代理的结构化执行"
 description: "规范先行、闭环运行：Deep Work Plan 让代码仓库成为 AI 编码代理的 harness，每份计划都在人类启动的循环下运行到完成。"
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
-## 规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。
+## 规范先行、闭环运行。
 
-Deep Work Plan 将任何代码仓库转变为 harness（运行支架）——上下文、防护栏，以及带验证关卡的持久计划——任何编码代理都能在其中执行长程工作。加上可选的循环，一份打开的计划会持续运行到结束，无需任何人去轮询它。
+代码仓库就是 harness，计划自行运行直至完成。
 
 Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件，用于与 AI 代理一同规划并执行复杂的软件工作。你无需挑选安装方式或复制模板——你复制 init.md 提示并将其粘贴到你的代理：
 
 > 复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。
 
-
-
-**循环：** 注册（`lead claim`，主导者与继任） → 守护进程（`autopilot --loop`，由人类启动） → 提醒（`idle ≥ 5 min`，不增加权限） → 故障转移（`lead takeover`，首个可达的继任者） → 通知（`plan-event-v1`，发往人类的命令） → 完成（`plan_completed`，关卡已通过）。每份带有主导者记录的打开计划，直到其自身状态显示完成。
 
 - [打开 /init 提示](/zh/quickstart)
 - [阅读方法论](/methodology)
@@ -38,29 +35,6 @@ Deep Work Plan（DWP）是一套开放、采用 MIT 许可的方法论与套件�
 
 
 上下文是代理最稀缺的资源，因此 harness 会让自身的指令保持精简且可审计。指令逐步加载，验证聚焦于实际改动，每项任务也会获得相关上下文。我们以字节公布每个流程的指令规模，让这部分负载清晰可见。计划也随工作调整：范围明确的修复使用 Lite，持续数小时的工作使用 Full。形式跟随工作范围，让流程保持聚焦并且可追踪。
-
----
-
-## 计划运行到结束。权限始终在人手中。
-
-Loop engineering 让计划无需人类轮询也能完成。以下各行描述循环中的已发布契约：大多数来自 herdr-peers，而计划队列是技能包契约。Herdr 是可选项；方法论不依赖它也能运作。
-
-
-
-| 契约 | 它保证什么 | 来源（herdr-peers v2.2.0） |
-| --- | --- | --- |
-| 计划注册（`herdr-peers lead claim`） | 循环所监视的计划拥有一条主导者记录，包含 epoch 与继任列表。只有持有最高 epoch 的一方才作为其主导者行事。 | `skills/herdr-peers/protocol.md` §12 |
-| 仅由人类启动（`herdr-peers autopilot start --loop`） | 只有人类能以自己的话启动守护进程。任何询问、回复或通知都无法启动它、停止它，或改变它的行为。 | `skills/herdr-peers/autopilot.md` §1 |
-| 提醒不增加权限（`plan_stalled`） | 处于空闲状态的打开计划的主导者会收到一条固定的继续提示。关卡、停止条件与升级规则照旧具有约束力；连续三次提示仍无进展，计划即被标记为停滞。 | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
-| 故障转移至继任者（`herdr-peers lead takeover`） | 当主导者不在时，第一个可联系到的继任者会被请求接管，辅助程序会再次核查证据。一条通道只有在人类事先记录的授权下才能接任主导者。 | `skills/herdr-peers/autopilot.md` §5.2, §7 |
-| 计划事件（`plan-event-v1`） | 当计划停滞、受阻、失去主导者、从队列启动或完成时，由人类选定的命令会收到一个 plan-event-v1 对象。技能包为此附带一个 Dailybot 通知器。 | `docs/schema/plan-event-v1.json` |
-| 集群视图（`plans-v1` · `fleet-v1`） | 每台机器以 plans-v1 报告其计划；守护进程维护覆盖每台机器、代理、代码仓库与计划的 fleet-v1 视图，fleet ui 以只读方式展示它。 | `docs/schema/fleet-v1.json` |
-| 计划队列（`dwp-queue-v1`） | 技能包校验并写入队列；守护进程读取它以继续执行排队计划。 | `skills/deepworkplan/shared/queue.py` |
-| 主导者核验（`herdr-peers lead verify`） | 在任何合并、打标签或发布之前，主导者会确认自己在每台机器上仍持有该计划。更新的主导者会拒绝它；无法联系的机器会使其停止，除非该风险已在记录中被接受。 | `skills/herdr-peers/protocol.md` §12 |
-
-决策大脑（`--brain`）与主导者任命（`--appoint`）是同一守护进程的可选标志，各自由人类开启。守护进程从不合并、发布、登录，也不更改任何权限。
-
-[阅读 Herdr 附加组件](/zh/kit/herdr)
 
 ---
 
@@ -114,6 +88,33 @@ Loop engineering 让计划无需人类轮询也能完成。以下各行描述循
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [查看接入流程会生成什么](/zh/quickstart)
+
+---
+
+## 计划运行到结束。权限始终在人手中。
+
+Loop engineering 让计划无需人类轮询也能完成。以下各行描述循环中的已发布契约：大多数来自 herdr-peers，而计划队列是技能包契约。Herdr 是可选项；方法论不依赖它也能运作。
+
+> 规范先行说明做什么；harness 说明在哪里做；Loop engineering 说明如何收尾。
+
+**循环：** 注册（`lead claim`，主导者与继任） → 守护进程（`autopilot --loop`，由人类启动） → 提醒（`idle ≥ 5 min`，不增加权限） → 故障转移（`lead takeover`，首个可达的继任者） → 通知（`plan-event-v1`，发往人类的命令） → 完成（`plan_completed`，关卡已通过）。每份带有主导者记录的打开计划，直到其自身状态显示完成。
+
+
+
+| 契约 | 它保证什么 | 来源（herdr-peers v2.2.0） |
+| --- | --- | --- |
+| 计划注册（`herdr-peers lead claim`） | 循环所监视的计划拥有一条主导者记录，包含 epoch 与继任列表。只有持有最高 epoch 的一方才作为其主导者行事。 | `skills/herdr-peers/protocol.md` §12 |
+| 仅由人类启动（`herdr-peers autopilot start --loop`） | 只有人类能以自己的话启动守护进程。任何询问、回复或通知都无法启动它、停止它，或改变它的行为。 | `skills/herdr-peers/autopilot.md` §1 |
+| 提醒不增加权限（`plan_stalled`） | 处于空闲状态的打开计划的主导者会收到一条固定的继续提示。关卡、停止条件与升级规则照旧具有约束力；连续三次提示仍无进展，计划即被标记为停滞。 | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| 故障转移至继任者（`herdr-peers lead takeover`） | 当主导者不在时，第一个可联系到的继任者会被请求接管，辅助程序会再次核查证据。一条通道只有在人类事先记录的授权下才能接任主导者。 | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| 计划事件（`plan-event-v1`） | 当计划停滞、受阻、失去主导者、从队列启动或完成时，由人类选定的命令会收到一个 plan-event-v1 对象。技能包为此附带一个 Dailybot 通知器。 | `docs/schema/plan-event-v1.json` |
+| 集群视图（`plans-v1` · `fleet-v1`） | 每台机器以 plans-v1 报告其计划；守护进程维护覆盖每台机器、代理、代码仓库与计划的 fleet-v1 视图，fleet ui 以只读方式展示它。 | `docs/schema/fleet-v1.json` |
+| 计划队列（`dwp-queue-v1`） | 技能包校验并写入队列；守护进程读取它以继续执行排队计划。 | `skills/deepworkplan/shared/queue.py` |
+| 主导者核验（`herdr-peers lead verify`） | 在任何合并、打标签或发布之前，主导者会确认自己在每台机器上仍持有该计划。更新的主导者会拒绝它；无法联系的机器会使其停止，除非该风险已在记录中被接受。 | `skills/herdr-peers/protocol.md` §12 |
+
+决策大脑（`--brain`）与主导者任命（`--appoint`）是同一守护进程的可选标志，各自由人类开启。守护进程从不合并、发布、登录，也不更改任何权限。
+
+[阅读 Herdr 附加组件](/zh/kit/herdr)
 
 ---
 

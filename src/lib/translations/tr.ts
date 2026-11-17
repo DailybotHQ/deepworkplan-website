@@ -105,8 +105,8 @@ export const tr: SiteTranslations = {
       badge: 'Açık metodoloji · MIT · Ajandan bağımsız',
       leadSentence:
         'Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.',
-      subtitle:
-        'Deep Work Plan, herhangi bir depoyu harness’e dönüştürür — bağlam, koruma bariyerleri ve doğrulama kapıları olan kalıcı bir plan — herhangi bir kodlama ajanı burada uzun soluklu işi yürütür. İsteğe bağlı döngüyü ekleyin; açık bir plan, kimse onu yoklamadan sonuna kadar çalışmayı sürdürür.',
+      headline: 'Önce spesifikasyon, kapalı döngü.',
+      subtitle: 'Depo harness’tir ve plan kendi kendine bitene kadar çalışır.',
       instructionLabel: 'Ajanınıza kopyalayın',
       instruction:
         'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',
@@ -117,6 +117,8 @@ export const tr: SiteTranslations = {
         'Önce spesifikasyon neyi söyler; harness nerede olduğunu söyler; Loop engineering işin nasıl bittiğini söyler.',
       primaryCta: 'Metodolojiyi okuyun',
       secondaryCta: 'Spesifikasyonu okuyun',
+      illustrationAlt:
+        'Kayalık bir kıyıdaki bir deniz feneri, küçük bir tekneye yol gösteren tek bir ışık huzmesi gönderiyor — deponun, herhangi bir ajana rehberlik eden sağlam bir harness olduğunu çağrıştıran bir gravür.',
     },
     pillars: {
       badge: 'Dört temel',
@@ -225,7 +227,7 @@ export const tr: SiteTranslations = {
         {
           name: 'Plan kuyruğu',
           detail:
-            'Paket `dwp-queue-v1` kuyruğunu doğrular ve yazar; daemon, sıradaki planları sürdürmek için kuyruğu okur.',
+            'Paket dwp-queue-v1 kuyruğunu doğrular ve yazar; daemon, sıradaki planları sürdürmek için kuyruğu okur.',
         },
         {
           name: 'Lider doğrulaması',

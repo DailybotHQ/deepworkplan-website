@@ -24,7 +24,7 @@
 
 | ID | Surface | Type | Pri | Aspect/size | Light/dark | Asset path | Status |
 | :-- | :-- | :-: | :-: | :-- | :-- | :-- | :-- |
-| HP-01 | `Hero.astro` → right column | ▦ | ★ | — | tokens | `diagrams/home/LoopDiagram.astro` | retired — engraving replaced by the v8 loop diagram (2026-11-16) |
+| HP-01 | `Hero.astro` → right column | 🖼 | ★ | 4:5 · 680×850 | light/dark pair | `home/hero-harness.webp` · `home/hero-harness-dark.webp` | done — restored 2026-11-17; the v8 loop diagram moved to `LoopEngineering.astro` |
 | HP-02 | `Pitch.astro` → right column (nautical chart) | 🖼 | M | 4:5 · 760×950 | pair | `home/pitch-chart.webp` | done |
 | HP-03 | `Quickstart.astro` → above/beside the 4 steps | ▦ | H | 16:9 · 880×495 | transparent | `home/quickstart-flow.webp` | done |
 | HP-04 | `Onboarding.astro` → beside numbered steps | ▦ | M | 16:9 · 880×495 | transparent | `home/onboarding-sequence.webp` | done |
@@ -35,6 +35,7 @@
 | HP-09 | `diagrams/home/RepoAsHarnessPlate.astro` → Act IV plate art | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-repo-as-harness.png` | done |
 | HP-10 | `Pitch.astro` → problem/answer diptych, illustration left | 🖼 | H | 4:5 · 520×650 | transparent (dual-ink PNG) | `home/plate-pitch-problem.png` | done |
 | HP-11 | `diagrams/home/ContextEconomy.astro` → Act V plate art (token economy) | 🖼 | H | 16:10 · 800×500 | transparent (dual-ink PNG) | `home/plate-context-economy.png` | done |
+| HP-12 | `LoopEngineering.astro` → loop plate below the section lead | ▦ | H | — | tokens | `diagrams/home/LoopDiagram.astro` | done — the v8 loop diagram (2026-11-16), in the hero until 2026-11-17 |
 
 > `Comparison.astro` and `Origin.astro`: candidate `skip` — Comparison is a table
 > (status marks may be CSS, not an asset); Origin already carries the Dailybot
