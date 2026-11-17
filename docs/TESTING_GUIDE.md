@@ -10,7 +10,7 @@ This project uses **Vitest** for unit and component testing. The testing infrast
 - **Svelte component tests** for key interactive components using `@testing-library/svelte`
 - **Coverage enforcement** at 80%+ on `src/lib/` code
 
-E2E testing (Playwright) is not yet configured.
+E2E testing (Playwright) is not configured; `package.json` has no E2E test script.
 
 ## Running Tests
 
@@ -52,17 +52,17 @@ All commands run from the **repository root**. Toolchain: `vitest` 5.x,
 
 | Scope | Command | Evidence of a correct run |
 | :---- | :------ | :------------------------ |
-| Full test suite | `pnpm run test` | `Test Files 27 passed (27)` · `Tests 369 passed (369)` |
-| One test file | `pnpm run test tests/unit/lib/i18n.test.ts` | `Test Files 1 passed (1)` · `Tests 49 passed (49)` |
+| Full test suite | `pnpm run test` | all configured test files pass |
+| One test file | `pnpm run test tests/unit/lib/i18n.test.ts` | the selected test file passes |
 | One test file (equivalent) | `pnpm exec vitest run tests/unit/lib/i18n.test.ts` | same as above |
-| By test name | `pnpm exec vitest run -t "<name fragment>"` | the selected count, not `229` |
-| Full lint + format | `pnpm run biome:check` | `Checked 257 files` |
+| By test name | `pnpm exec vitest run -t "<name fragment>"` | the selected count |
+| Full lint + format | `pnpm run biome:check` | `biome:check` exits 0 |
 | Scoped lint + format | `pnpm exec biome check src/lib/i18n.ts` | `Checked 1 file` |
 
 > **Trap — never pass `--` to the test script.** `pnpm run test -- <path>` does
 > **not** scope: pnpm swallows the separator and vitest receives no filter, so it
 > runs the whole suite while appearing to target one file. It prints
-> `Test Files 27 passed (27)`, not `1 passed (1)`. A gate recorded as scoped that
+> the full-suite count, not one selected file. A gate recorded as scoped that
 > prints the full count was never scoped. Drop the `--`.
 
 ### Commands that have no scoped form
@@ -77,7 +77,7 @@ and a project-wide run here is the honest gate:
 - **`pnpm run md:check`** / **`pnpm run md:content-check`** — both compare the
   built `dist/` against the Markdown endpoints and require a completed build.
 - **`pnpm run build`** — the real gate for anything that renders. Note it emits
-  1743 pages and occasionally fails on a `dist/.prerender` directory race; the
+  the generated page set and occasionally fails on a `dist/.prerender` directory race; the
   fix is `rm -rf dist` and re-run, not a code change.
 
 ### Source-to-test mapping
@@ -85,7 +85,7 @@ and a project-wide run here is the honest gate:
 The tree is **mirrored**, not co-located:
 
 - `src/lib/<name>.ts` → `tests/unit/lib/<name>.test.ts` (e.g. `vim-installer.ts` → `vim-installer.test.ts`, `software-schema.ts` → `software-schema.test.ts`)
-- Diagram figures with a 17-language inline map → one source-contract test per family under `tests/unit/components/` (`vim-diagrams-parity.test.ts` pins key parity, the `en` fallback, `role="img"` and the verified keybindings; `kit-ecosystem-parity.test.ts` pins the `KitEcosystem` plate's map parity, no hydration, the product pins of the v7 claims ledger and that every row links an existing kit page in all 17 languages)
+- Diagram figures with a 17-language inline map → one source-contract test per family under `tests/unit/components/` (`vim-diagrams-parity.test.ts` pins key parity, the `en` fallback, `role="img"` and the verified keybindings; `kit-ecosystem-parity.test.ts` pins the `KitEcosystem` plate's map parity, no hydration, the product pins of the current claims ledger and that every row links an existing kit page in all 17 languages)
 - Editorial/home components → `tests/unit/components/<topic>.test.ts`, which
   assert narrative and parity across plates rather than one component each
 - `scripts/repositories.sh` (ecosystem hub sync) → `tests/scripts/repositories.test.sh`, a bash test against offline fixture repositories run under `/bin/bash` — bash 3.2 on macOS pins 3.2 compatibility there, Linux CI runs bash 5 plus a check for bash 4+ constructs — `bash tests/scripts/repositories.test.sh`; it runs in the `public hygiene` job of `.github/workflows/ci.yml`
@@ -98,7 +98,7 @@ A changed file is not always covered by the test that shares its name:
 
 - **`src/lib/i18n.ts` and `src/lib/translations/*.ts` fan out to every page.**
   Touching them means `pnpm run i18n:check` **and** a build, not just
-  `translations.test.ts` — 1743 pages render from them.
+  `translations.test.ts` — the generated page set renders from them.
 - **Content collections (`src/content/**`) have no unit tests.** Their gates are
   `pnpm run i18n:check`, `pnpm run md:check` and the build.
 - **`.astro` pages and most components are not unit-tested.** The build plus the

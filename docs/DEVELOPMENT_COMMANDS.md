@@ -1,14 +1,14 @@
 # Development Commands
 
-Complete reference for all npm scripts and CLI commands available in deepworkplan.com.
+Reference for the pnpm scripts and CLI commands currently declared in `package.json`. Verify that file when scripts change.
 
 ## Quick Reference
 
 | Command | Description |
 |---------|-------------|
 | `pnpm run dev` | Start development server |
-| `pnpm run build` | Production build with type check; ends with the rendered-emphasis check (fails on a literal `**` or `__` in any built page) |
-| `pnpm run emphasis:check` | The rendered-emphasis check alone, over an existing `dist/` ([Standards → bold next to punctuation](STANDARDS.md#orthography--diacritical-marks-mandatory)) |
+| `pnpm run build` | Production build with type check; ends with the rendered-emphasis and anchor-resolution checks |
+| `pnpm run emphasis:check` | The rendered-emphasis check alone, over an existing `dist/` |
 | `pnpm run biome:check` | Check code quality |
 | `pnpm run biome:fix` | Auto-fix code issues |
 | `pnpm run astro:check` | TypeScript type checking |
@@ -44,7 +44,7 @@ bash dev.sh shell     # login shell inside the container (as node, in /app)
 bash dev.sh down      # stop and remove the container (named volumes kept)
 ```
 
-`dev.sh` (repo root) is a thin launcher over [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, rendered with v1.0.0). Docker is the only host requirement: without dck installed, the container verbs (`up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`) run on plain `docker compose`, and the Herdr, SSH and agent verbs ask for dck. It runs the container declared in `.devcontainer/dck.toml` without VS Code or Cursor, and the editor's "Reopen in Container" opens the same one. Verbs: `up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`, `doctor`, `ssh`, `herdr`, `herdr-layout`, `agents`, `ask`, `install-dck`, `help`. See [docker/local/README.md](../docker/local/README.md) for the full workflow.
+`dev.sh` (repo root) is a thin launcher over [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`; check `src/lib/ecosystem-pins.ts` for the current product release pin). Docker is the only host requirement: without dck installed, the container verbs (`up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`) run on plain `docker compose`, and the Herdr, SSH and agent verbs ask for dck. It runs the container declared in `.devcontainer/dck.toml` without VS Code or Cursor, and the editor's "Reopen in Container" opens the same one. Verbs: `up`, `down`, `shell`, `exec`, `build`, `rebuild`, `logs`, `ps`, `doctor`, `ssh`, `herdr`, `herdr-layout`, `agents`, `ask`, `install-dck`, `help`. See [docker/local/README.md](../docker/local/README.md) for the full workflow.
 
 API keys live in `docker/local/dwpwebsite/.env`. Compose injects it at create time, dck's entrypoint writes an environment profile for ssh and Herdr sessions, and every new bash re-reads it via `custom_commands.sh`, so after editing the file, opening a new shell is enough. Details: [How `.env` reaches your shell](../docker/local/README.md#how-dockerlocaldwpwebsiteenv-reaches-your-shell). Coding agents launched through `ak` (`claudex`, `codex-glm`, …) run in autonomy by default; set `AGENTKIT_PERMISSIONS=ask` in that file to have them ask first.
 
@@ -344,18 +344,20 @@ pnpm run dev -- --port 3000
 
 ### Devcontainer (Cursor / VS Code)
 
-The devcontainer publishes the dev server on the host's loopback only, `127.0.0.1:5555` (a port clear of macOS AirPlay Receiver). Access it at `http://localhost:5555`.
+The devcontainer publishes the dev server on the host's loopback only, `127.0.0.1:5555`. Access it at `http://localhost:5555`.
 
 ## Scripts Reference
 
-Full `package.json` scripts:
+Full `package.json` scripts (source of truth):
 
 ```json
 {
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro check && astro build && node scripts/check-rendered-emphasis.mjs && node scripts/check-anchor-resolution.mjs",
+    "emphasis:check": "node scripts/check-rendered-emphasis.mjs",
     "prebuild": "node scripts/generate-agent-skills-index.mjs && node scripts/generate-api-v1-pages.mjs && node scripts/generate-redirects.mjs && node scripts/stamp-versions.mjs",
+    "generate:agent-skills-index": "node scripts/generate-agent-skills-index.mjs",
     "astro": "astro",
     "astro:check": "astro check",
     "astro:preview": "astro preview",
@@ -365,24 +367,31 @@ Full `package.json` scripts:
     "ncu:check": "ncu",
     "ncu:upgrade": "ncu -u",
     "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "test:scripts": "bash tests/scripts/repositories.test.sh",
     "repositories": "bash scripts/repositories.sh",
+    "images:optimize": "node scripts/optimize-images.mjs",
+    "images:optimize:og": "node scripts/optimize-og-images.mjs",
+    "images:webp": "echo 'All images are natively WebP \u2014 no generation needed'",
+    "md:check": "node scripts/check-md-parity.mjs",
+    "md:check:strict": "node scripts/check-md-parity.mjs --strict",
+    "md:content-check": "node scripts/check-md-content-parity.mjs",
+    "seo:audit": "node scripts/audit-seo.mjs",
+    "aeo:audit": "node scripts/audit-aeo.mjs",
+    "agents:reachability": "bash scripts/check-agent-reachability.sh",
+    "agents:verify": "bash scripts/verify-agent-surface.sh",
+    "i18n:check": "node scripts/i18n/check.mjs",
+    "i18n:scaffold": "node scripts/i18n/scaffold-language.mjs",
+    "lighthouse": "mkdir -p .lighthouseci && lhci autorun",
+    "lighthouse:full": "mkdir -p .lighthouseci && lhci autorun --config=lighthouserc.full.cjs",
+    "lighthouse:desktop": "mkdir -p .lighthouseci && lhci autorun --config=lighthouserc.desktop.cjs",
+    "lighthouse:desktop:full": "mkdir -p .lighthouseci && lhci autorun --config=lighthouserc.desktop.full.cjs",
     "release": "bash .github/scripts/prepare_release.sh"
   }
 }
 ```
 
-## Testing (Future)
+## Testing
 
-Testing is not yet configured. When implemented:
-
-```bash
-# Unit tests (Vitest)
-pnpm run test
-
-# E2E tests (Playwright)
-pnpm run test:e2e
-
-# Watch mode
-pnpm run test:watch
-```
+Tests are configured with Vitest. Run `pnpm run test`, `pnpm run test:watch`, or `pnpm run test:coverage`. Playwright E2E testing is not configured, and there is no `test:e2e` script.
