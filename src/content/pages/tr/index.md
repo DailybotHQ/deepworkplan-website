@@ -4,9 +4,11 @@ description: "Önce spesifikasyon, kapalı döngü: Deep Work Plan deponuzu AI k
 lastUpdated: 2026-11-17
 ---
 
-## Önce spesifikasyon, kapalı döngü.
+*Önce spesifikasyon · kapalı döngü*
 
-Depo harness’tir ve plan kendi kendine bitene kadar çalışır.
+## Her yapay zekâ ajanı deponuzdaki işi bitirebilsin.
+
+Plan, bağlam ve kontroller deponuzda durur; böylece iş yeniden başlatmalardan sağ çıkar, ajanlar arasında el değiştirir ve her kapı geçilene kadar döngüde devam eder — verdiğiniz yetkinin sınırları içinde.
 
 Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini planlamak ve yürütmek için açık, MIT lisanslı bir metodoloji ve kittir. Bir kurulum yöntemi seçmez ya da bir şablon kopyalamazsınız — init.md istemini kopyalayıp ajanınıza yapıştırırsınız:
 

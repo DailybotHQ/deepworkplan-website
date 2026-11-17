@@ -4,9 +4,11 @@ description: "Đặc tả trước, vòng lặp khép kín: Deep Work Plan biế
 lastUpdated: 2026-11-17
 ---
 
-## Đặc tả trước, vòng lặp khép kín.
+*Đặc tả trước · vòng lặp khép kín*
 
-Repository là harness và kế hoạch tự chạy đến khi hoàn thành.
+## Mọi tác tử AI đều làm xong việc trong kho mã của bạn.
+
+Kho mã giữ kế hoạch, ngữ cảnh và các bước kiểm tra, nên công việc vượt qua các lần khởi động lại, chuyển giữa các tác tử và tiếp tục lặp cho đến khi mọi cổng kiểm tra đều đạt — trong phạm vi quyền hạn bạn cấp.
 
 Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp phép MIT, để lập kế hoạch và thực thi công việc phần mềm phức tạp cùng các agent AI. Bạn không phải chọn một cách cài đặt hay sao chép một mẫu — bạn sao chép prompt init.md và dán vào agent của mình:
 

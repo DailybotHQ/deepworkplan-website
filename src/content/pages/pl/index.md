@@ -4,9 +4,11 @@ description: "Spec-first, z zamkniętą pętlą: Deep Work Plan czyni repozytori
 lastUpdated: 2026-11-17
 ---
 
-## Spec-first, z zamkniętą pętlą.
+*Najpierw specyfikacja · zamknięta pętla*
 
-Repozytorium jest harnessem, a plan sam wykonuje się do końca.
+## Każdy agent AI dokończy pracę w Twoim repozytorium.
+
+Repozytorium przechowuje plan, kontekst i kontrole, więc praca przetrwa restarty, przechodzi między agentami i trwa w pętli, aż każda bramka zostanie zaliczona — w granicach uprawnień, które nadajesz.
 
 Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do planowania i wykonywania złożonej pracy programistycznej z agentami AI. Nie wybierasz metody instalacji ani nie kopiujesz szablonu — kopiujesz prompt init.md i wklejasz go do swojego agenta:
 

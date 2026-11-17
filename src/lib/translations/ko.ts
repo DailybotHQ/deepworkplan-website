@@ -100,11 +100,12 @@ export const ko: SiteTranslations = {
         '스펙 우선, 루프로 완결: Deep Work Plan은 리포지토리를 AI 코딩 에이전트의 하니스로 만들고, 각 계획은 사람이 시작한 루프로 완료까지 실행됩니다.',
     },
     hero: {
-      badge: '오픈 방법론 · MIT · 에이전트 비종속',
+      eyebrow: '스펙 우선 · 폐루프',
       leadSentence:
         '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
-      headline: '스펙 우선, 루프로 완결.',
-      subtitle: '리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
+      headline: '어떤 AI 에이전트든 작업을 끝낼 수 있는 저장소로 만드세요.',
+      subtitle:
+        '저장소가 계획, 컨텍스트, 검사를 담고 있어 작업은 재시작에도 이어지고, 에이전트 사이를 오가며, 모든 게이트를 통과할 때까지 루프를 계속합니다. 여러분이 부여한 권한 안에서만요.',
       instructionLabel: '에이전트에 복사하기',
       instruction:
         'init.md 프롬프트를 복사하여 코딩 에이전트 — Claude Code, Cursor, Codex, 또는 다른 에이전트 — 에 붙여넣어 어떤 리포지토리든 AI-first로 만드세요.',

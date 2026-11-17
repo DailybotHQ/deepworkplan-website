@@ -96,12 +96,12 @@ export const en: SiteTranslations = {
         'Spec-first, loop-closed: Deep Work Plan makes your repository the harness for AI coding agents, and each plan runs to done under a human-started loop.',
     },
     hero: {
-      badge: 'Open methodology · MIT · Agent-agnostic',
+      eyebrow: 'Spec-first · closed-loop',
       leadSentence:
         'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.',
-      headline: 'Spec-first, loop-closed.',
+      headline: 'Turn your repo into one any AI agent can finish work in.',
       subtitle:
-        'The repository is the harness and the plan runs itself to done.',
+        'Your repository holds the plan, the context and the checks, so the work survives restarts, moves between agents and keeps looping until every gate passes — within the authority you grant.',
       instructionLabel: 'Copy into your agent',
       instruction:
         'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',

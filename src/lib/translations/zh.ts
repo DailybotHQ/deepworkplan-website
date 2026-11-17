@@ -100,11 +100,12 @@ export const zh: SiteTranslations = {
         '规范先行、闭环运行：Deep Work Plan 让代码仓库成为 AI 编码代理的 harness，每份计划都在人类启动的循环下运行到完成。',
     },
     hero: {
-      badge: '开放方法论 · MIT · 代理无关',
+      eyebrow: '规范优先 · 闭环',
       leadSentence:
         '规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。',
-      headline: '规范先行、闭环运行。',
-      subtitle: '代码仓库就是 harness，计划自行运行直至完成。',
+      headline: '让你的仓库成为任何 AI 智能体都能把工作做完的地方。',
+      subtitle:
+        '你的仓库保存计划、上下文和检查项，因此工作在重启后依然延续，可在智能体之间交接，并持续循环直到每一道关卡都通过——始终在你授予的权限之内。',
       instructionLabel: '复制到你的代理',
       instruction:
         '复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。',

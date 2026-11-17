@@ -103,12 +103,12 @@ export const pt: SiteTranslations = {
         'Deep Work Plan traz o desenvolvimento guiado por especificações para agentes de IA. Torne seu repositório um harness duradouro para delegação multiagente.',
     },
     hero: {
-      badge: 'Metodologia aberta · MIT · Independente de agente',
+      eyebrow: 'Especificação primeiro · ciclo fechado',
       leadSentence:
         'Especificação primeiro, loop fechado: o repositório é o harness e o plano se executa sozinho até a conclusão.',
-      headline: 'Especificação primeiro, loop fechado.',
+      headline: 'Faça qualquer agente de IA concluir o trabalho no seu repo.',
       subtitle:
-        'O repositório é o harness e o plano se executa sozinho até a conclusão.',
+        'Seu repositório guarda o plano, o contexto e as verificações, então o trabalho sobrevive a reinícios, passa de um agente para outro e segue em ciclo até que todas as validações passem, dentro da autoridade que você concede.',
       instructionLabel: 'Copie para o seu agente',
       instruction:
         'Copie o prompt do init.md e cole-o no seu agente de código — Claude Code, Cursor, Codex, ou qualquer outro — para tornar qualquer repositório AI-first.',
