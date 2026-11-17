@@ -23,20 +23,20 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.4.0` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.4.1` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.4.0`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.4.1`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
 
-**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.4.0` image में herdr-peers 2.1.0, coding-agents-kit 1.5.0 और DeepWorkPlan Vim 1.1.0 शामिल हैं।
+**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.4.1` image में herdr-peers 2.1.0, coding-agents-kit 1.5.0 और DeepWorkPlan Vim 1.1.0 शामिल हैं।
 
 ## परतें
 
@@ -123,6 +123,10 @@ copy_keys = true              # default false
 - **coding-agents-kit 1.5.0 (इंटरफ़ेस 1)।** `AGENTKIT_PERMISSIONS=ask` या `--ask` के तहत हर CLI का अपना ask mode लागू होता है, इसलिए जिस खाते की सेटिंग्स डिफ़ॉल्ट रूप से किसी स्वायत्त mode पर हैं, वह अब स्वायत्त रूप से शुरू नहीं होता; `ak run --json` token गणना तभी रिपोर्ट करता है जब CLI करता है। `agents` परत अब भी कोई autonomy flag नहीं लिखती।
 - **DeepWorkPlan Vim 1.1.0।** वही Neovim (0.12.5); editor पैक 8.0 की plan queue, संरचित blockers और autonomy posture को read-only रूप में दिखाता है, और एक v7 plan पहले की तरह ही दिखता है।
 - **यह रिपॉज़िटरी DeepWorkPlan 8.0.1 का स्वयं उपयोग करती है (dogfooding)।** नए plans `plan-contract/v8` लिखते हैं; v7, v6 और v5 plans अपनी पीढ़ी बनाए रखते हैं।
+
+## devcontainer-kit 1.4.1 से (इंटरफ़ेस 2)
+
+रिलीज़ 1.4.1 एक पैच है: image में herdr-peers 2.2.0 शामिल है, जो वैकल्पिक `autopilot --loop --revive` जोड़ता है (ऐसी योजना के लिए एक नया एजेंट जिसका लीड और सभी उत्तराधिकारी चले गए हों, daemon शुरू करने वाले व्यक्ति की अनुमति से), और रिपॉज़िटरी DeepWorkPlan 8.0.2 का उपयोग करती है। इंटरफ़ेस 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 और dck की अपनी सतह अपरिवर्तित हैं; dck कभी daemon शुरू नहीं करता।
 
 ## सुरक्षा डिफ़ॉल्ट
 

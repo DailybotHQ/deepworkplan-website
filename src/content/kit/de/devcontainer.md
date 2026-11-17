@@ -23,20 +23,20 @@ Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loo
 ## Installation
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.4.0`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.4.1`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v1.4.0`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v1.4.1`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
 
-**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die aktuellen fixierten Versionen enthält. Das Image von `v1.4.0` enthält herdr-peers 2.1.0, coding-agents-kit 1.5.0 und DeepWorkPlan Vim 1.1.0.
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die aktuellen fixierten Versionen enthält. Das Image von `v1.4.1` enthält herdr-peers 2.1.0, coding-agents-kit 1.5.0 und DeepWorkPlan Vim 1.1.0.
 
 ## Layer
 
@@ -123,6 +123,10 @@ Release 1.4.0 behält Schnittstelle 2 bei und aktualisiert die Versionen, die da
 - **coding-agents-kit 1.5.0 (Schnittstelle 1).** Unter `AGENTKIT_PERMISSIONS=ask` oder `--ask` wird der eigene Nachfragemodus jeder CLI durchgesetzt, sodass ein Konto, dessen Einstellungen standardmäßig einen autonomen Modus vorsehen, nicht mehr autonom startet; `ak run --json` meldet Token-Zahlen nur, wenn die CLI sie meldet. Die Schicht `agents` setzt weiterhin kein Autonomie-Flag.
 - **DeepWorkPlan Vim 1.1.0.** Dasselbe Neovim (0.12.5); der Editor zeigt die Plan-Warteschlange, die strukturierten Blocker und die Autonomie-Haltung des Pakets 8.0 schreibgeschützt an, und ein v7-Plan wird wie bisher dargestellt.
 - **Das Repository nutzt DeepWorkPlan 8.0.1 selbst.** Neue Pläne schreiben `plan-contract/v8`; Pläne der Generationen v7, v6 und v5 behalten ihre Generation.
+
+## Ab devcontainer-kit 1.4.1 (Schnittstelle 2)
+
+Release 1.4.1 ist ein Patch: Das Image enthält herdr-peers 2.2.0, das das optionale `autopilot --loop --revive` ergänzt (ein neuer Agent für einen Plan, dessen Lead und Nachfolger alle fehlen, freigegeben von dem Menschen, der den Daemon startet), und das Repository nutzt DeepWorkPlan 8.0.2. Schnittstelle 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 und die eigene Oberfläche von dck bleiben unverändert; dck startet den Daemon nie.
 
 ## Sicherheitsvorgaben
 

@@ -23,20 +23,20 @@ Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dép�
 ## Installation
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Prérequis : `bash` 3.2 ou ultérieur et `python3` 3.11 ou ultérieur sur un hôte Linux ou macOS, et Docker avec Compose v2 pour les commandes du conteneur. Vérifiez une version à l’aide de son asset `SHA256SUMS`. Épinglez `v1.4.0` : `v0.2.0` n’est pas prise en charge.
+Prérequis : `bash` 3.2 ou ultérieur et `python3` 3.11 ou ultérieur sur un hôte Linux ou macOS, et Docker avec Compose v2 pour les commandes du conteneur. Vérifiez une version à l’aide de son asset `SHA256SUMS`. Épinglez `v1.4.1` : `v0.2.0` n’est pas prise en charge.
 
 | Élément | Valeur |
 |---|---|
-| Produit | `DailybotHQ/devcontainer-kit`, tag `v1.4.0`, interface 2 |
+| Produit | `DailybotHQ/devcontainer-kit`, tag `v1.4.1`, interface 2 |
 | Clé de registre | `devcontainer` dans `.dwp/config.json` |
 | Configuration par dépôt | `.devcontainer/dck.toml` |
 | Détection | `dck doctor --json` |
 
-**Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique et ne change de façon incompatible que dans une nouvelle version majeure (et, pour les fichiers, avec un nouveau numéro d’interface) : les verbes de `dck` avec leurs options documentées et leurs codes de sortie (`0` succès, `1` échec, `2` usage, `3` configuration, `4` environnement, `5` refus), les schémas de `dck.toml`, du profil d’hôte et de `dck doctor --json` (interface 2), et le contrat de rendu — les fichiers que `dck init` écrit et possède, les marqueurs `dck:managed` et les blocs utilisateur qu’il préserve, et l’environnement que lit l’entrypoint. Rien ne casse depuis `v0.3.7` : exécutez `dck init` puis `dck rebuild` pour que l’image embarque les versions épinglées actuelles. L’image de `v1.4.0` intègre herdr-peers 2.1.0, coding-agents-kit 1.5.0 et DeepWorkPlan Vim 1.1.0.
+**Stable depuis `v1.0.0`.** L’interface publique suit le versionnage sémantique et ne change de façon incompatible que dans une nouvelle version majeure (et, pour les fichiers, avec un nouveau numéro d’interface) : les verbes de `dck` avec leurs options documentées et leurs codes de sortie (`0` succès, `1` échec, `2` usage, `3` configuration, `4` environnement, `5` refus), les schémas de `dck.toml`, du profil d’hôte et de `dck doctor --json` (interface 2), et le contrat de rendu — les fichiers que `dck init` écrit et possède, les marqueurs `dck:managed` et les blocs utilisateur qu’il préserve, et l’environnement que lit l’entrypoint. Rien ne casse depuis `v0.3.7` : exécutez `dck init` puis `dck rebuild` pour que l’image embarque les versions épinglées actuelles. L’image de `v1.4.1` intègre herdr-peers 2.1.0, coding-agents-kit 1.5.0 et DeepWorkPlan Vim 1.1.0.
 
 ## Couches
 
@@ -123,6 +123,10 @@ La version 1.4.0 conserve l’interface 2 et fait évoluer les versions que l’
 - **coding-agents-kit 1.5.0 (interface 1).** Avec `AGENTKIT_PERMISSIONS=ask` ou `--ask`, le mode ask propre à chaque CLI est appliqué, de sorte qu’un compte dont les réglages utilisent par défaut un mode autonome ne démarre plus en mode autonome ; `ak run --json` ne rapporte les nombres de tokens que lorsque la CLI les fournit. La couche `agents` n’écrit toujours aucune option d’autonomie.
 - **DeepWorkPlan Vim 1.1.0.** Le même Neovim (0.12.5) ; l’éditeur affiche en lecture seule la file d’attente de plans, les blocages structurés et la posture d’autonomie du pack 8.0, et un plan v7 s’affiche comme avant.
 - **Le dépôt applique DeepWorkPlan 8.0.1 à lui-même.** Les nouveaux plans écrivent `plan-contract/v8` ; les plans v7, v6 et v5 conservent leur génération.
+
+## Depuis devcontainer-kit 1.4.1 (interface 2)
+
+La version 1.4.1 est un correctif : l’image intègre herdr-peers 2.2.0, qui ajoute l’option `autopilot --loop --revive` (un nouvel agent pour un plan dont le lead et tous les successeurs ont disparu, accordé par la personne qui démarre le démon), et le dépôt utilise DeepWorkPlan 8.0.2. L’interface 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 et la surface propre de dck ne changent pas ; dck ne démarre jamais le démon.
 
 ## Sécurité par défaut
 

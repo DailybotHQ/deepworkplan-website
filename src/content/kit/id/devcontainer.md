@@ -23,20 +23,20 @@ Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harne
 ## Instalasi
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.4.0`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.4.1`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.4.0`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.4.1`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
 
-**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin saat ini. Image `v1.4.0` memuat herdr-peers 2.1.0, coding-agents-kit 1.5.0, dan DeepWorkPlan Vim 1.1.0.
+**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin saat ini. Image `v1.4.1` memuat herdr-peers 2.1.0, coding-agents-kit 1.5.0, dan DeepWorkPlan Vim 1.1.0.
 
 ## Lapisan
 
@@ -123,6 +123,10 @@ Rilis 1.4.0 mempertahankan antarmuka 2 dan memperbarui versi yang dimuat image; 
 - **coding-agents-kit 1.5.0 (antarmuka 1).** Di bawah `AGENTKIT_PERMISSIONS=ask` atau `--ask`, mode tanya milik setiap CLI diberlakukan, sehingga akun yang pengaturannya secara default memakai mode otonom tidak lagi dimulai secara otonom; `ak run --json` melaporkan jumlah token hanya jika CLI melaporkannya. Lapisan `agents` tetap tidak menuliskan flag otonomi apa pun.
 - **DeepWorkPlan Vim 1.1.0.** Neovim yang sama (0.12.5); editor menampilkan antrean plan, blocker terstruktur, dan postur otonomi dari pack 8.0 secara read-only, dan plan v7 ditampilkan seperti sebelumnya.
 - **Repositori ini melakukan dogfooding DeepWorkPlan 8.0.1.** Plan baru menulis `plan-contract/v8`; plan v7, v6, dan v5 mempertahankan generasinya.
+
+## Sejak devcontainer-kit 1.4.1 (antarmuka 2)
+
+Rilis 1.4.1 adalah patch: image memuat herdr-peers 2.2.0, yang menambahkan opsi `autopilot --loop --revive` (satu agen baru untuk rencana yang lead dan semua penerusnya sudah tidak ada, atas izin orang yang memulai daemon), dan repositori ini memakai DeepWorkPlan 8.0.2. Antarmuka 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0, dan permukaan dck sendiri tidak berubah; dck tidak pernah memulai daemon.
 
 ## Default keamanan
 
