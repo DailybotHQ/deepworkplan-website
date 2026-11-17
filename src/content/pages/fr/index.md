@@ -4,9 +4,11 @@ description: "Spécification d’abord, boucle fermée : Deep Work Plan fait du 
 lastUpdated: 2026-11-17
 ---
 
-## La spécification d’abord, la boucle fermée.
+*Spécification d’abord · boucle fermée*
 
-Le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.
+## Tout agent IA mène le travail à terme dans votre dépôt.
+
+Votre dépôt contient le plan, le contexte et les vérifications : le travail survit aux redémarrages, passe d’un agent à l’autre et continue en boucle jusqu’à ce que chaque contrôle soit validé, dans les limites de l’autorité que vous accordez.
 
 Deep Work Plan (DWP) est une méthodologie et un kit ouverts, sous licence MIT, pour planifier et exécuter un travail logiciel complexe avec des agents IA. Vous ne choisissez pas de méthode d’installation et ne copiez aucun modèle — vous copiez le prompt init.md et le collez dans votre agent :
 

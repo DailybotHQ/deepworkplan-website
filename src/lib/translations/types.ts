@@ -131,10 +131,11 @@ export interface SiteTranslations {
       description: string;
     };
     hero: {
-      badge: string;
-      /** The v8 lead sentence (JSON-LD and quickstart lead); the hero renders it split as headline + subtitle. */
+      /** Kicker above the h1: the brand line (spec-first, closed-loop). */
+      eyebrow: string;
+      /** The v8 brand lead sentence (JSON-LD and quickstart lead); not rendered in the hero. */
       leadSentence: string;
-      /** Hero h1: the lead sentence's first clause (two lines at most). */
+      /** Hero h1: the outcome for the reader (two lines at most). */
       headline: string;
       subtitle: string;
       instructionLabel: string;

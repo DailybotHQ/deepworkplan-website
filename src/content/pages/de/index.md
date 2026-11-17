@@ -4,9 +4,11 @@ description: "Spec-first, mit geschlossenem Loop: Deep Work Plan macht Ihr Repos
 lastUpdated: 2026-11-17
 ---
 
-## Spec-first, mit geschlossenem Loop.
+*Spec-first · geschlossener Loop*
 
-Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.
+## Jeder KI-Agent bringt die Arbeit in Ihrem Repo zu Ende.
+
+Ihr Repository hält den Plan, den Kontext und die Prüfungen. So übersteht die Arbeit Neustarts, wechselt zwischen Agenten und läuft in der Schleife weiter, bis jedes Gate besteht – im Rahmen der Befugnisse, die Sie erteilen.
 
 Deep Work Plan (DWP) ist eine offene, MIT-lizenzierte Methodik und ein Kit zum Planen und Ausführen komplexer Softwarearbeit mit KI-Agenten. Sie wählen keine Installationsmethode und kopieren keine Vorlage — Sie kopieren den init.md-Prompt und fügen ihn in Ihren Agenten ein:
 

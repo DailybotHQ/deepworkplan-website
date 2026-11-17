@@ -97,12 +97,12 @@ export const es: SiteTranslations = {
         'Especificación primero, bucle cerrado: Deep Work Plan hace del repositorio el harness de los agentes de IA y cada plan acaba en un bucle iniciado por humanos.',
     },
     hero: {
-      badge: 'Metodología abierta · MIT · Independiente del agente',
+      eyebrow: 'Primero la especificación · ciclo cerrado',
       leadSentence:
         'Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar.',
-      headline: 'Primero la especificación, con el bucle cerrado.',
+      headline: 'Haz que cualquier agente de IA termine el trabajo en tu repo.',
       subtitle:
-        'El repositorio es el harness y el plan se ejecuta solo hasta terminar.',
+        'Tu repositorio guarda el plan, el contexto y las verificaciones, así que el trabajo sobrevive a los reinicios, pasa de un agente a otro y sigue en ciclo hasta que todas las validaciones pasan, dentro de la autoridad que tú concedes.',
       instructionLabel: 'Copia en tu agente',
       instruction:
         'Copia el prompt de init.md y pégalo en tu agente de código — Claude Code, Cursor, Codex, o cualquier otro — para hacer de cualquier repositorio uno AI-first.',

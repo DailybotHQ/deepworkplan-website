@@ -103,12 +103,12 @@ export const pl: SiteTranslations = {
         'Spec-first, z zamkniętą pętlą: Deep Work Plan czyni repozytorium harnessem dla agentów AI, a każdy plan działa do końca w pętli uruchomionej przez człowieka.',
     },
     hero: {
-      badge: 'Otwarta metodyka · MIT · Niezależna od agenta',
+      eyebrow: 'Najpierw specyfikacja · zamknięta pętla',
       leadSentence:
         'Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.',
-      headline: 'Spec-first, z zamkniętą pętlą.',
+      headline: 'Każdy agent AI może dokończyć pracę w Twoim repozytorium.',
       subtitle:
-        'Repozytorium jest harnessem, a plan sam wykonuje się do końca.',
+        'Repozytorium przechowuje plan, kontekst i kontrole, więc praca przetrwa restarty, przechodzi między agentami i trwa w pętli, aż każda bramka zostanie zaliczona — w granicach uprawnień, które nadajesz.',
       instructionLabel: 'Skopiuj do swojego agenta',
       instruction:
         'Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.',

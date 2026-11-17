@@ -102,11 +102,12 @@ export const tr: SiteTranslations = {
         'Önce spesifikasyon, kapalı döngü: Deep Work Plan deponuzu AI kodlama ajanları için harness yapar; her plan, insanın başlattığı döngüde sonuna dek çalışır.',
     },
     hero: {
-      badge: 'Açık metodoloji · MIT · Ajandan bağımsız',
+      eyebrow: 'Önce spesifikasyon · kapalı döngü',
       leadSentence:
         'Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.',
-      headline: 'Önce spesifikasyon, kapalı döngü.',
-      subtitle: 'Depo harness’tir ve plan kendi kendine bitene kadar çalışır.',
+      headline: 'Her yapay zekâ ajanı deponuzdaki işi bitirebilsin.',
+      subtitle:
+        'Plan, bağlam ve kontroller deponuzda durur; böylece iş yeniden başlatmalardan sağ çıkar, ajanlar arasında el değiştirir ve her kapı geçilene kadar döngüde devam eder — verdiğiniz yetkinin sınırları içinde.',
       instructionLabel: 'Ajanınıza kopyalayın',
       instruction:
         'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',

@@ -102,12 +102,12 @@ export const fr: SiteTranslations = {
         'Spécification d’abord, boucle fermée : Deep Work Plan fait du dépôt le harness des agents IA, et chaque plan va au bout dans une boucle lancée par un humain.',
     },
     hero: {
-      badge: 'Méthodologie ouverte · MIT · Indépendante de l’agent',
+      eyebrow: 'Spécification d’abord · boucle fermée',
       leadSentence:
         'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.',
-      headline: 'La spécification d’abord, la boucle fermée.',
+      headline: 'Tout agent IA mène le travail à terme dans votre dépôt.',
       subtitle:
-        'Le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout.',
+        'Votre dépôt contient le plan, le contexte et les vérifications : le travail survit aux redémarrages, passe d’un agent à l’autre et continue en boucle jusqu’à ce que chaque contrôle soit validé, dans les limites de l’autorité que vous accordez.',
       instructionLabel: 'Copier dans votre agent',
       instruction:
         "Copiez le prompt init.md et collez-le dans votre agent de code — Claude Code, Cursor, Codex ou tout autre — pour rendre n'importe quel dépôt AI-first.",

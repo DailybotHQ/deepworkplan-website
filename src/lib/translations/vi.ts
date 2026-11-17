@@ -101,11 +101,12 @@ export const vi: SiteTranslations = {
         'Đặc tả trước, vòng lặp khép kín: Deep Work Plan biến kho mã thành harness cho agent lập trình AI; mỗi kế hoạch chạy xong trong vòng lặp do người khởi động.',
     },
     hero: {
-      badge: 'Phương pháp luận mở · MIT · Độc lập với agent',
+      eyebrow: 'Đặc tả trước · vòng lặp khép kín',
       leadSentence:
         'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
-      headline: 'Đặc tả trước, vòng lặp khép kín.',
-      subtitle: 'Repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
+      headline: 'Mọi tác tử AI đều làm xong việc trong kho mã của bạn.',
+      subtitle:
+        'Kho mã giữ kế hoạch, ngữ cảnh và các bước kiểm tra, nên công việc vượt qua các lần khởi động lại, chuyển giữa các tác tử và tiếp tục lặp cho đến khi mọi cổng kiểm tra đều đạt — trong phạm vi quyền hạn bạn cấp.',
       instructionLabel: 'Sao chép vào agent của bạn',
       instruction:
         'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',
