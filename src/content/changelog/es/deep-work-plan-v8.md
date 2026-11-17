@@ -12,6 +12,8 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0
 sourceLinks:
   - label: "Lanzamiento del skill v8.0.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
+  - label: "Lanzamiento del skill v8.0.1"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
   - label: "LOOP_ENGINEERING.md (normativo, v8)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Loop engineering en el lector de especificaciones"
@@ -73,4 +75,4 @@ La versión 8.0.0 implementa el estándar DWP 8.0.0. Los planes nuevos se crean 
 
 La última versión de v7 fue la **7.12.2**.
 
-Versión del skill instalada: **8.0.0**.
+Versión del skill instalada: **8.0.1**.

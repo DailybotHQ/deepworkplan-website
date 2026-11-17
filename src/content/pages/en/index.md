@@ -130,11 +130,11 @@ The harness publishes what each flow must read before it starts: the router, the
 | `status` | 27,311|
 | `verify` | 36,701|
 
-Unit: filesystem bytes. Measured on the released pack with the command below: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
+Unit: filesystem bytes. Measured on the released pack with the command below: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.1).
 
 Provider tokens, cost, and loop-closure statistics are not shown: no tagged source measures them yet, so they have no row. The script’s bytes ÷ 4 token figure is a labeled estimate, never a measurement.
 
-[Read the evaluation ledger](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
+[Read the evaluation ledger](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.1/docs/EVALUATION.md)
 
 ---
 

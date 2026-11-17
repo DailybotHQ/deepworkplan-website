@@ -130,11 +130,11 @@ El harness publica lo que cada flujo debe leer antes de empezar: el router, el s
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Unidad: bytes del sistema de archivos. Medido sobre el paquete publicado con el comando siguiente: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
+Unidad: bytes del sistema de archivos. Medido sobre el paquete publicado con el comando siguiente: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.1).
 
 No se muestran tokens del proveedor, costes ni estadísticas de cierre del bucle: ninguna fuente etiquetada los mide todavía, así que no tienen fila. La cifra de tokens del script, bytes ÷ 4, es una estimación rotulada, nunca una medición.
 
-[Lee el registro de evaluación](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
+[Lee el registro de evaluación](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.1/docs/EVALUATION.md)
 
 ---
 

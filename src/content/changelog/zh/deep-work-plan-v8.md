@@ -12,6 +12,8 @@ sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0
 sourceLinks:
   - label: "Skill v8.0.0 发布"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
+  - label: "Skill v8.0.1 发布"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
   - label: "LOOP_ENGINEERING.md（v8 规范）"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "规范阅读器中的 Loop engineering"
@@ -73,4 +75,4 @@ Deep Work Plan v8 汇集四个理念：spec-first 开发、仓库作为智能体
 
 v7 的最后一个版本是 **7.12.2**。
 
-已安装的技能版本：**8.0.0**。
+已安装的技能版本：**8.0.1**。

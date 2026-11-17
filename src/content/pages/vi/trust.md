@@ -23,11 +23,11 @@ Hãy coi skill là không đáng tin cho đến khi bạn đã kiểm tra nó. M
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-git checkout v8.0.0
-# Download the checksums for the release you intend to install (current release v8.0.0):
+git checkout v8.0.1
+# Download the checksums for the release you intend to install (current release v8.0.1):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.0/SHA256SUMS
-# Expected SHA256SUMS digest: cb877b165b94fb8a23561ffb6dcc71e7ab9e92ad44c2f2eeef2378cc62a91408
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.1/SHA256SUMS
+# Expected SHA256SUMS digest: 0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa
 ./setup.sh --verify        # lối thoát khác không nghĩa là file không khớp — dừng lại
 ```
 

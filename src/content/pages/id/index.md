@@ -130,11 +130,11 @@ Harness memublikasikan apa yang harus dibaca setiap alur sebelum dimulai: router
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
+Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.1).
 
 Token penyedia, biaya, dan statistik penutupan loop tidak ditampilkan: belum ada sumber bertag yang mengukurnya, jadi semuanya tidak memiliki baris. Angka token byte ÷ 4 dari skrip adalah estimasi berlabel, bukan pengukuran.
 
-[Baca catatan evaluasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
+[Baca catatan evaluasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.1/docs/EVALUATION.md)
 
 ---
 

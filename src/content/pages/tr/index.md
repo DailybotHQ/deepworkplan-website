@@ -130,11 +130,11 @@ Harness, her akışın başlamadan önce okuması gerekenleri yayımlar: yönlen
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Birim: dosya sistemi baytı. Yayımlanmış paket üzerinde aşağıdaki komutla ölçülmüştür: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.0).
+Birim: dosya sistemi baytı. Yayımlanmış paket üzerinde aşağıdaki komutla ölçülmüştür: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.1).
 
 Sağlayıcı token’ları, maliyet ve döngü kapanış istatistikleri gösterilmez: henüz hiçbir etiketli kaynak bunları ölçmüyor, bu yüzden satırları yok. Betiğin bayt ÷ 4 token rakamı etiketli bir tahmindir, asla bir ölçüm değildir.
 
-[Değerlendirme kaydını okuyun](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/docs/EVALUATION.md)
+[Değerlendirme kaydını okuyun](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.1/docs/EVALUATION.md)
 
 ---
 

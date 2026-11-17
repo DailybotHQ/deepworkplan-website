@@ -33,7 +33,7 @@ Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harne
 | Kunci registri | `dependency-upgrade` di `.dwp/config.json` |
 | Deskriptor | `addons/dependency-upgrade/addon.json` (antarmuka 1) |
 | Perintah | `/lib-upgrade` diinstal ke `.agents/commands/` jika diterima |
-| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v8.0.0`) |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v8.0.1`) |
 
 ## Catatan
 
