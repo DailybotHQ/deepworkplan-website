@@ -1,6 +1,6 @@
 ---
 title: Состояние плана
-description: "Слой состояния плана v5 (manifest.json, state.json, записи gate, согласование) и то, как планы v6, v7 и v8 заменяют его снимком, производным от журнала."
+description: "Слой состояния плана v5 (manifest.json, state.json, записи gate) и снимки из журнала и схемы поколений v6, v7 и v8 для планов, созданных текущим стандартом."
 order: 8
 lang: ru
 section: State
@@ -8,14 +8,14 @@ section: State
 
 # Состояние плана
 
-> **Область версии:** эта страница специфицирует **слой состояния v5**, который планы v5 сохраняют на протяжении всей своей жизни. Планы, созданные текущим пакетом (DWP 8.0.0, релиз `v8.0.0`), вместо него используют [слой записей](/spec/record-layer). В плане v6 или v7 источником полномочий служит контракт результата (`contract.json`), источником истины — журнал только для добавления (`journal.ndjson`), а `state.json` — это **производный снимок**, соответствующий [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Он регенерируется командой `ledger.py project` и MUST NOT редактироваться вручную.
+> **Область версии:** эта страница специфицирует **слой состояния v5**, который планы v5 сохраняют на протяжении всей своей жизни. Планы, созданные текущим пакетом (DWP 8.0.0, релиз `v8.0.0`), вместо него используют [слой записей](/spec/record-layer). В планах v6 и v7 контракт результата (`contract.json`) является источником полномочий, журнал только для добавления (`journal.ndjson`) — источником истины, а `state.json` — производным снимком по схеме `plan-snapshot/v6`. В планах v8 он соответствует `plan-snapshot/v8`. Ledger пересоздает его командой `ledger.py project`; редактировать его вручную MUST NOT.
 
 ## Какой слой состояния применяется
 
 | Поколение плана | Источник истины | `state.json` | Схемы |
 | --- | --- | --- | --- |
 | v5 (и более ранние планы v1/v2) | markdown-план, проекцией которого служит этот слой JSON | записывается агентом в протокольных точках, описанных ниже | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 и v2 остаются валидными для старых планов) |
-| v6, v7 и v8 | контракт плюс журнал только для добавления | снимок, проецируемый из журнала, никогда не пишется вручную | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (или их эквиваленты v6) |
+| v6 и v7 | контракт плюс журнал только для добавления | снимок, проецируемый из журнала, никогда не пишется вручную |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (или их эквиваленты v6); v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
 Планы v8 используют `plan-manifest/v7` вместе с `plan-contract/v8`, `journal-event/v8` и `plan-snapshot/v8`; схемы манифеста и событий журнала v7 остаются поддержанными для существующих планов.
 План никогда не меняет поколение неявно: планы v5 сохраняют эти правила, а перевод плана на v6 — это явная миграция с предварительным просмотром ([Слой записей](/spec/record-layer#coexistence-and-migration)). Канонические источники: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md).

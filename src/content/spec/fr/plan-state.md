@@ -1,6 +1,6 @@
 ---
 title: État du plan
-description: "La couche d'état v5 (manifest.json, state.json, enregistrements de portes, réconciliation) et son remplacement en v6, v7 et v8 par un instantané dérivé du journal."
+description: "La couche d’état v5 (manifest.json, state.json, enregistrements de portes) et les instantanés issus du journal, avec un schéma propre aux plans v6, v7 et v8."
 order: 8
 lang: fr
 section: State
@@ -8,14 +8,14 @@ section: State
 
 # État du plan
 
-> **Portée de version :** cette page spécifie la **couche d'état v5**, que les plans v5 conservent toute leur vie. Les plans créés par le pack actuel (DWP 8.0.0, version `v8.0.0`) utilisent à la place la [couche d'enregistrement](/spec/record-layer). Dans un plan v6, v7 ou v8, le contrat de résultat (`contract.json`) fait autorité, le journal en ajout seul (`journal.ndjson`) est la source de vérité, et `state.json` est un **instantané dérivé** conforme à [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Il est régénéré par `ledger.py project` et MUST NOT être édité à la main.
+> **Portée de version :** cette page spécifie la **couche d'état v5**, que les plans v5 conservent toute leur vie. Les plans créés par le pack actuel (DWP 8.0.0, version `v8.0.0`) utilisent à la place la [couche d'enregistrement](/spec/record-layer). Dans les plans v6 et v7, le contrat de résultat (`contract.json`) fait autorité, le journal en ajout seul (`journal.ndjson`) est la source de vérité et `state.json` est un instantané dérivé conforme à `plan-snapshot/v6`. Dans les plans v8, il est conforme à `plan-snapshot/v8`. Le ledger le régénère avec `ledger.py project` ; il ne DOIT PAS être modifié à la main.
 
 ## Quelle couche d'état s'applique
 
 | Génération du plan | Source de vérité | `state.json` | Schémas |
 | --- | --- | --- | --- |
 | v5 (et plans v1/v2 antérieurs) | le plan markdown, avec cette couche JSON comme projection | écrit par l'agent aux points de protocole ci-dessous | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 et v2 restent valides pour les plans plus anciens) |
-| v6, v7 et v8 | le contrat plus le journal en ajout seul | un instantané projeté depuis le journal, jamais écrit à la main | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (ou leurs équivalents v6) |
+| v6 et v7 | le contrat plus le journal en ajout seul | un instantané projeté depuis le journal, jamais écrit à la main |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (ou leurs équivalents v6); v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
 Les plans v8 utilisent `plan-manifest/v7` avec `plan-contract/v8`, `journal-event/v8` et `plan-snapshot/v8` ; les schémas de manifeste et d’événement de journal v7 restent pris en charge pour les plans existants.
 Un plan ne change jamais de génération implicitement : les plans v5 conservent ces règles, et passer l'un d'eux en v6 est une migration explicite et prévisualisée ([Couche d'enregistrement](/spec/record-layer#coexistence-and-migration)). Sources canoniques : [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md).
