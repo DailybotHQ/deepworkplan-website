@@ -37,12 +37,11 @@ const initMarkdown = await getCanonicalInitMarkdown();
       class="lg:grid lg:grid-cols-[minmax(0,1fr)_minmax(0,340px)] lg:items-center lg:gap-10 xl:grid-cols-[minmax(0,1fr)_minmax(0,460px)]"
     >
       <div class="max-w-3xl">
-      <Kicker>{h.badge}</Kicker>
-      <!-- hero.headline + hero.subtitle split the v8 lead sentence
-           (hero.leadSentence, still the JSON-LD source) so the h1 stays at
-           two lines at most. -->
+      <Kicker>{h.eyebrow}</Kicker>
+      <!-- eyebrow = brand line; headline = the reader's outcome (two lines at
+           most); subtitle = how. hero.leadSentence stays the JSON-LD source. -->
       <h1
-        class="font-display mt-4 text-4xl font-bold tracking-tight sm:text-5xl lg:text-[2.6rem] lg:leading-[1.08] xl:text-6xl xl:leading-[1.05]"
+        class="font-display mt-4 text-[2rem] leading-[1.12] font-bold tracking-tight sm:text-[2.5rem] lg:text-[2.25rem] lg:leading-[1.1] xl:text-[2.75rem] xl:leading-[1.08]"
         style="color: var(--color-ink);"
       >
         {h.headline}
