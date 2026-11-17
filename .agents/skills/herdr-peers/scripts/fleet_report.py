@@ -138,6 +138,12 @@ def lead_record(data):
     grant = data.get('appoint')
     rec['appoint'] = grant if grant in APPOINT_GRANTS else None
     rec['appointed'] = data.get('record_via') == 'appointment'  # this epoch came by appointment
+    rec['revived'] = data.get('record_via') == 'revive'        # this epoch came by revive (2.2.0)
+    # The plan's revive budget, kept in the envelope (2.2.0): survives a daemon restart.
+    rec['revives'] = data.get('revives') if isinstance(data.get('revives'), int) \
+        and not isinstance(data.get('revives'), bool) and 0 <= data['revives'] <= 1000 else 0
+    rec['revived_at'] = data.get('revived_at') if isinstance(data.get('revived_at'), str) \
+        and TS_RE.fullmatch(data['revived_at']) else None
     if rec.get('schema') != LEAD_SCHEMA:
         return None
     if not isinstance(rec.get('plan'), str) or not PLAN_RE.fullmatch(rec['plan']):
@@ -611,6 +617,8 @@ def describe_plan(root, server, rec, panes, git, now=None, logs=None):
         'updated_at': rec['updated_at'], 'lead_in_repo': lead_in_repo,
         'tasks_done': done, 'tasks_total': total, 'current_task': current, 'detail': detail,
         'appoint': rec.get('appoint'), 'appointed': bool(rec.get('appointed')),
+        'revived': bool(rec.get('revived')), 'revives': rec.get('revives') or 0,
+        'revived_at': rec.get('revived_at'),
         'open_asks': open_asks(root, server, lead_pane, now, logs) if lead_local else None,
     }
 
@@ -721,7 +729,8 @@ def valid_fleet(doc):
             if not all(_str(p.get(k)) for k in ('class', 'lead', 'repo_root', 'blocker_class',
                                                  'situation', 'state_updated_at')):
                 return False
-            if p.get('unreadable_reason') not in UNREADABLE_REASONS + (None,):
+            if p.get('unreadable_reason') not in UNREADABLE_REASONS + (None,) \
+                    or not isinstance(p.get('revived', False), bool):
                 return False
             for k in ('tasks_done', 'tasks_total', 'epoch'):
                 v = p.get(k)
@@ -789,7 +798,11 @@ def valid_report(doc):
         if not isinstance(plan, dict) or not PLAN_KEYS <= set(plan):
             return False
         if plan.get('appoint') not in APPOINT_GRANTS + (None,) \
-                or not isinstance(plan.get('appointed'), bool):
+                or not isinstance(plan.get('appointed'), bool) \
+                or not isinstance(plan.get('revived', False), bool) \
+                or not (isinstance(plan.get('revives', 0), int) and not isinstance(plan.get('revives', 0), bool)) \
+                or not (plan.get('revived_at') is None or (isinstance(plan['revived_at'], str)
+                                                           and TS_RE.fullmatch(plan['revived_at']))):
             return False
         if plan.get('lead_in_repo') not in (True, False, None):
             return False

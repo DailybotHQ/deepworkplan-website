@@ -410,6 +410,7 @@ first matching rule decides:
 | F6 | The sender is the stored lead, epoch = stored + 1, the record names another pane as lead (or none: a release) — a lead never moves itself to the next epoch — and does not widen the appointment grant. | adopted (handover, or release when `lead` is `null`) |
 | F7 | The sender is in the stored `succession[]`, epoch = stored + 1, the record names the sender as lead, does not widen the appointment grant, and every earlier successor is gone (the receiver checks). | adopted (takeover) |
 | F8 | **Two records at one epoch** (a partition, or notices crossing): the one that comes first in a single total order over the *previous* record wins — its successors in order (a takeover), then its lanes in order (an appointment); the previous lead is not in it, because a lead never moves itself to the next epoch — and only if its own step from the previous record holds (F6, F7 or F10, with their probes and non-widening checks). The previous record is kept through same-epoch refreshes, so the order holds wherever and in whatever order the notices arrive; without it the first record stays. | adopted (the earlier in the order) |
+| F11 | The record says `via: revive` (2.2.0). | rejected: a revive is adopted only on the machine whose daemon granted it |
 | F10 | The record says `via: appointment`; the stored record carries the grant (`appoint`); the sender is in the stored `lanes[]` and names itself at epoch = stored + 1; `succession`, `appoint` and `lanes` (less the sender) equal the stored ones; and the receiver's own probes find the stored lead, **every** successor and every lane before the sender gone — strongly: an idle pane with a limit banner is not proof, and neither is a member whose machine cannot be reached (a partition or a sleeping laptop); a vanished pane on a machine that answers is. Ties: F8. | adopted (appointment) |
 | F9 | Anything else. | rejected |
 
@@ -477,6 +478,39 @@ human:
   partition heals (duplicate or conflicting local work). `lead verify` cannot
   see a machine it cannot reach, and says so (exit 5). This is the price of
   writing nothing remotely.
+
+#### Revive (2.2.0)
+
+A plan whose lead is gone and whom nobody in its record can take over may be
+carried on by a fresh agent — never by a pane the record does not know, except
+this one path, and only on the daemon's own machine.
+
+- **Consent.** The human starting the daemon with `autopilot --loop --revive`
+  is the standing grant. The daemon launches the agent itself (coding-agents-kit,
+  ask mode, a workspace in the plan's checkout) and, once it is up, writes a
+  **one-time ticket** naming the plan, the new pane, the stored epoch, the
+  workspace it created and its own pid (`0600`, created exclusively, never
+  through a symlink, 10 minutes). The ticket holds no secret: a process of the
+  same user could write one, so it is one check among several, never the only one.
+- **The revived agent acts itself**: `lead takeover --plan P --reason revive`
+  accepts only with a matching unexpired ticket, from a pane inside the
+  ticket's workspace (`herdr pane list`), a ticket naming the running
+  autopilot's pid with `--revive` among its recorded options, fewer than two
+  revives of the plan and none in the last six hours (counted in the lead record:
+  `revives`, `revived_at`), the plan's repository, and its own two probes, a minute apart, that find the lead, every
+  successor and every lane gone — strongly, or (the lead or a member) at a usage
+  limit whose own banner resets more than 30 minutes away (weak evidence,
+  recorded). An unreachable machine is not proof. The ticket is consumed before
+  the record is written: epoch + 1, `via: revive`, succession and lanes kept.
+- **Receivers never adopt a revive** (F11): its record stays on the machine whose
+  daemon granted it; a 2.0/2.1 receiver refuses the unknown `via` (fail closed).
+  Normally there is no receiver at all, since every member is gone.
+- **Coming back.** The old lead finds a higher epoch and steps down, as after an
+  appointment; the revived lead runs `lead verify` before any merge, tag or
+  release.
+- **Residual risk.** A same-user process can forge a ticket, as it can read the
+  brain's key file; the daemon's other checks (a running `--revive` daemon, the
+  probes) still apply.
 
 ### Plan mirror resolution
 

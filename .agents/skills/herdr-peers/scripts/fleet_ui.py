@@ -252,7 +252,7 @@ class Agent(object):
 class Plan(object):
     __slots__ = ('key', 'machine', 'label', 'plan', 'cls', 'lead', 'epoch', 'situation',
                  'done', 'total', 'current', 'repo', 'blocker_class', 'detail', 'members', 'search',
-                 'moved', 'why')
+                 'moved', 'why', 'revived')
 
     def __init__(self, machine, label, row):
         self.machine, self.label = machine, label
@@ -271,6 +271,7 @@ class Plan(object):
         self.detail = row.get('detail') if isinstance(row.get('detail'), dict) else None
         self.moved = parse_ts(row.get('state_updated_at'))  # when its state last changed (2.1.0 maps)
         self.why = row.get('unreadable_reason') if row.get('unreadable_reason') in UNREADABLE_WHY else None
+        self.revived = row.get('revived') is True   # its lead came by a revive (2.2.0 maps)
         self.members = []  # (role, Agent)
         self.search = ' '.join([self.plan, self.label, self.repo, self.current or '',
                                 clean((self.detail or {}).get('title'), 200)]).lower()
@@ -724,6 +725,8 @@ def group_header(g, width):
         badge = SITUATIONS.get(p.situation) or ('BLOCKED' if p.cls == 'blocked' else p.cls.upper())
         tone = 'bad' if p.needs_you else ('ok' if p.cls == 'open' else 'dim')
         line.add('▌', tone).add(' %s ' % badge, tone + '_badge').add(' ')
+        if p.revived:
+            line.add('↻ revived ', 'accent')
         title = clean((p.detail or {}).get('title'), 120)
         right = []
         if p.total:

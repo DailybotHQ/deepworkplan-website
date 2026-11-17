@@ -30,9 +30,10 @@
         "plan_appointed",
         "needs_human",
         "plan_queued_started",
-        "queue_blocked"
+        "queue_blocked",
+        "plan_revived"
       ],
-      "description": "stalled: three loop prompts without progress; blocked: the plan state records a blocker; no_lead: the lead is gone and no successor could be asked; completed: a plan the loop watched while open has finished. lead_moved: the pane the lead record names now works outside the plan's repository (a stale record); nobody is prompted. appointment_prompted: lead and every successor were gone for the appointment grace, the plan carries the grant and the daemon runs with --appoint, so its first live lane was asked to run `lead takeover --as-lane`; appointed: that lane now leads the plan. needs_human: the brain chose to tell the developer about a stalled or blocked plan or an agent waiting at an unknown screen (plan may be null). plan_queued_started: the next approved plan of a repository's queue was started by prompting its lead; queue_blocked: a queued plan cannot start for a reason the developer must fix (not approved, an amendment pending, no lead named, launch not available)."
+      "description": "stalled: three loop prompts without progress; blocked: the plan state records a blocker; no_lead: the lead is gone and no successor could be asked; completed: a plan the loop watched while open has finished. lead_moved: the pane the lead record names now works outside the plan's repository (a stale record); nobody is prompted. appointment_prompted: lead and every successor were gone for the appointment grace, the plan carries the grant and the daemon runs with --appoint, so its first live lane was asked to run `lead takeover --as-lane`; appointed: that lane now leads the plan. needs_human: the brain chose to tell the developer about a stalled or blocked plan or an agent waiting at an unknown screen (plan may be null). plan_queued_started: the next approved plan of a repository's queue was started by prompting its lead; queue_blocked: a queued plan cannot start for a reason the developer must fix (not approved, an amendment pending, no lead named, launch not available). plan_revived (2.2.0): the daemon, started with --revive, launched a fresh agent that now leads an orphan plan (lead takeover --reason revive, or a stalled lead's handover to it)."
     },
     "plan": {
       "type": [

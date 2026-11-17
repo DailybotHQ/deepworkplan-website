@@ -117,7 +117,7 @@
                 "object",
                 "null"
               ],
-              "description": "Why the last brain was retired (gone, usage_limit, start_timeout, permission_mode), its profile and when (2.0.1).",
+              "description": "Why the last brain was retired (gone, usage_limit, start_timeout, permission_mode; misbehaving since 2.1.0: three denied requests in an hour), its profile and when (2.0.1).",
               "additionalProperties": false,
               "required": [
                 "why",
@@ -584,6 +584,10 @@
                     null
                   ],
                   "description": "Why a plan is unreadable (2.1.0; optional): missing = no state.json where its lead record points; parse = its state.json does not parse or is too large; shape = a state.json shape this helper does not read (an older or newer plan generation). Null for a readable plan."
+                },
+                "revived": {
+                  "type": "boolean",
+                  "description": "This epoch came by a revive (2.2.0; optional): the daemon, started with --revive, launched a fresh agent that took the orphan plan (lead takeover --reason revive)."
                 }
               }
             }

@@ -47,7 +47,7 @@ Loop engineering permette a un piano di arrivare al termine senza che una person
 
 
 
-| Contratto | Cosa garantisce | Fonte (herdr-peers v2.1.0) |
+| Contratto | Cosa garantisce | Fonte (herdr-peers v2.2.0) |
 | --- | --- | --- |
 | Registrazione del piano (`herdr-peers lead claim`) | Un piano seguito dal loop ha un record di lead con un’epoca e una successione. Solo chi detiene l’epoca più alta agisce come suo lead. | `skills/herdr-peers/protocol.md` §12 |
 | Avvio solo umano (`herdr-peers autopilot start --loop`) | Solo una persona avvia il daemon, con parole proprie. Nessuna richiesta, risposta o notifica può avviarlo, fermarlo o cambiarne il comportamento. | `skills/herdr-peers/autopilot.md` §1 |

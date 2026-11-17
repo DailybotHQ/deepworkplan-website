@@ -40,9 +40,9 @@ export const ECOSYSTEM_PINS = {
   },
   herdr: {
     repo: 'herdr-peers',
-    tag: 'v2.1.0',
+    tag: 'v2.2.0',
     sha256sums:
-      '02837b819e79033cc9ea1fa0498c2fcd5966f86117080e16a7e44fb976966787',
+      '694766b8ee39ee57b0ce39e8d31a64ca018830159aec7989226f1d094a4c8c2c',
     role: 'Herdr addon (herdr-peers)',
   },
   devcontainer: {

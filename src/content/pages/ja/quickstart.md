@@ -47,7 +47,7 @@ lastUpdated: 2026-10-11
   | --- | --- | --- |
   | deepworkplan-skill | `v8.0.1` | `0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
-  | herdr-peers | `v2.1.0` | `02837b819e79033cc9ea1fa0498c2fcd5966f86117080e16a7e44fb976966787` |
+  | herdr-peers | `v2.2.0` | `694766b8ee39ee57b0ce39e8d31a64ca018830159aec7989226f1d094a4c8c2c` |
   | devcontainer-kit | `v1.4.0` | `67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2` |
   | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
@@ -174,7 +174,7 @@ onboard サブスキル（`/deepworkplan-onboard`）を呼び出します。実�
 | AI Diff Reviewer（必須） | `.agents/skills/ai-diff-reviewer/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md` の `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | インストール済みの herdr-peers スキル内の `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.1.0 --skill herdr-peers -g --force -y` |
+| Herdr | インストール済みの herdr-peers スキル内の `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g --force -y` |
 | devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh の検証済みインストーラー（`v1.1.0` に固定。ダウンロードし、`shasum -a 256 -c install.sh.sha256` を実行してから起動） |
 
@@ -222,7 +222,7 @@ devcontainer アドオンの終着点は、生成されたファイル一式で�
 - **見守る。** `herdr-peers lanes` はすべてのレーンの状態を表示し、ブロック中のレーンについては `herdr-peers status <pane>` が画面を分類し、`herdr pane read <pane>` がその画面を表示します。
 - **キー入力は一つの場合だけ。** `herdr pane send-keys` で送ってよいキーは、フォルダ信頼の画面への応答だけです。それも、自分で起動したペインで、`--trust-cwd` が使えなかった場合に限ります。前後で画面を読み、キーは最小限だけ送ります。
 - **それ以外はすべて読み、記録し、開発者にエスカレーションします**。Claude の権限バイパスの確認、ログインや認証情報のプロンプト、操作ごとの権限要求、破壊的な確認、支払いやプランのプロンプト、未知の画面、自分が作成していないペインです。`AGENTKIT_PERMISSIONS=ask` が設定されていれば、レーンは行動の前に確認を求めます。それらのプロンプトを決して回避してはいけません。すべての介入を親計画に記録します。
-- **スウォームを動かし続ける。** coding-agents-kit `v1.5.0` と herdr-peers `v2.1.0` があれば、各エージェントはタスクの境目ごとに `ak capacity --self --json` を確認し、`critical` ではハンドオフパケット（https://deepworkplan.com/schema/dwp-handoff/v1.json）を書き、リードが同じチェックアウトで後継を起動します。リードは `herdr-peers lead claim` で自分の計画を claim し、レーンは `lead` というアドレスでリードに連絡し、リードがいなくなれば代理が引き継ぎます（`herdr-peers lead takeover`）。日常的な選択はすべて自分で決めて記録し、エスカレーションするのはクリティカルなクラス C1–C7 だけです。詳しくは https://deepworkplan.com/methodology/07-swarm-autonomy.md を参照してください。
+- **スウォームを動かし続ける。** coding-agents-kit `v1.5.0` と herdr-peers `v2.2.0` があれば、各エージェントはタスクの境目ごとに `ak capacity --self --json` を確認し、`critical` ではハンドオフパケット（https://deepworkplan.com/schema/dwp-handoff/v1.json）を書き、リードが同じチェックアウトで後継を起動します。リードは `herdr-peers lead claim` で自分の計画を claim し、レーンは `lead` というアドレスでリードに連絡し、リードがいなくなれば代理が引き継ぎます（`herdr-peers lead takeover`）。日常的な選択はすべて自分で決めて記録し、エスカレーションするのはクリティカルなクラス C1–C7 だけです。詳しくは https://deepworkplan.com/methodology/07-swarm-autonomy.md を参照してください。
 
 ## 5. キットを進化させる（author サブスキル)
 

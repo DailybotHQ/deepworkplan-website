@@ -25,11 +25,11 @@
     },
     "herdr-peers": {
       "source": "DailybotHQ/herdr-peers",
-      "ref": "v2.1.0",
-      "commit": "49e6ab28ac87d95ec18d8ac819221be53079414a",
+      "ref": "v2.2.0",
+      "commit": "fc19e77ea748c46e87adf68d176fd79aa7bf781c",
       "sourceType": "github",
       "skillPath": "skills/herdr-peers/SKILL.md",
-      "computedHash": "ea356ee6c7946b7779720953c2c42f6f599821a8218376620dabc48b985ab08d"
+      "computedHash": "124cb0770b78c88f8929aca459d93428a4e98e9225f8bf8c81e752de1bb09bda"
     }
   }
 }

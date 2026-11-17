@@ -33,8 +33,9 @@ import stat
 import subprocess
 import sys
 import time
+import unicodedata
 
-VERSION = '2.1.0'
+VERSION = '2.2.0'
 PROTOCOL = 2          # the highest protocol this helper speaks (metadata.protocol)
 BASE_PROTOCOL = 1     # what every message is stamped with, except a granted lead notice
 SUPPORTED_PROTOCOLS = ('1', '2')
@@ -1885,6 +1886,32 @@ LEAD_SCHEMA_V2 = 'herdr-peers/lead-v2'
 # standing appointment grant, and the mark of the epoch an appointment made.
 APPOINT_GRANTS = ('lanes', 'lanes:any-kind')
 APPOINT_VIA = 'appointment'
+# A revive (2.2.0): a fresh agent the daemon launched takes an orphan plan on the human's
+# --revive start flag and the daemon's one-time ticket (protocol.md §12, PLAN_010).
+REVIVE_VIA = 'revive'
+REVIVE_REASON = 'revive'
+REVIVE_TICKET_RE = re.compile(r'revive-[0-9a-f]{16}\.json')
+REVIVE_TICKET_SCHEMA = 'herdr-peers/revive-ticket-v1'
+REVIVE_LEASE_TTL = '6h'
+MAX_REVIVES = 2             # revives per plan, kept in its lead record; then only the human
+REVIVE_LOG = 'revive-log.json'
+REVIVE_LOG_MAX = 256       # launches remembered (per-plan caps and the hourly one)
+REVIVE_EVERY = 6 * 3600     # at most one revive per plan in this window (kept in its lead record)
+UNKNOWN_DIR = 'unknown-screens'
+UNKNOWN_NAME_RE = re.compile(r'[0-9]{8}T[0-9]{6}Z-[a-z0-9]{1,16}-[0-9a-f]{12}\.txt')
+UNKNOWN_MAX = 50          # screens kept; the oldest goes first
+UNKNOWN_BYTES = 16384     # per screen
+UNKNOWN_LINES = 60
+ANSI_SEQ = re.compile(r'\x1b(?:\[[0-?]*[ -/]*[@-~]|\][^\x07\x1b]*(?:\x07|\x1b\\)|[@-_])')
+TOKEN_TAIL = re.compile(r'[A-Za-z0-9_-]{8}$')   # a line that ends inside a token
+TOKEN_HEAD = re.compile(r'[A-Za-z0-9_-]{8}')    # a next line that starts with its rest
+PEM_BEGIN = re.compile(r'-----BEGIN [A-Z0-9 ]*-----')
+PEM_END = re.compile(r'-----END [A-Z0-9 ]*-----')
+# A token's prefix is enough to drop a line: a wrapped or cut token must not escape.
+TOKEN_PREFIX = re.compile(r'\b(?:gh[pousr]_[A-Za-z0-9]{4,}|github_pat_\w{4,}|sk-ant-[\w-]{4,}|'
+                          r'sk-(?:proj-)?[A-Za-z0-9]{12,}|xox[abposr]-[\w-]{4,}|AKIA[0-9A-Z]{8,}|'
+                          r'AIza[\w-]{10,})')
+LEAD_VIAS = (APPOINT_VIA, REVIVE_VIA)
 OPTIONAL_LEAD_KEYS = frozenset(['repo_root', 'appoint', 'via'])
 MAX_APPOINTMENTS = 2          # appointments per plan; past it only the human is told
 APPOINT_PROBE_GAP = 60        # seconds between the appointee's two probes
@@ -1964,8 +1991,8 @@ def lead_record_error(rec):
         return 'keys must be %s with optional repo_root, appoint, via' % ', '.join(sorted(LEAD_KEYS))
     if rec.get('appoint') is not None and rec['appoint'] not in APPOINT_GRANTS:
         return 'appoint must be one of %s or null' % ', '.join(APPOINT_GRANTS)
-    if rec.get('via') is not None and rec['via'] != APPOINT_VIA:
-        return 'via must be %s or null' % APPOINT_VIA
+    if rec.get('via') is not None and rec['via'] not in LEAD_VIAS:
+        return 'via must be one of %s or null' % ', '.join(LEAD_VIAS)
     v2 = rec.get('appoint') is not None or rec.get('via') is not None
     root = rec.get('repo_root')
     if root is not None and (not isinstance(root, str) or not os.path.isabs(root)
@@ -2059,9 +2086,18 @@ def all_leads(store):
     return out
 
 
-def save_lead(store, record, prior, via, appointments=None):
-    """Replace a plan's lead record atomically (0600, never via a symlink)."""
+def save_lead(store, record, prior, via, appointments=None, revived=False):
+    """Replace a plan's lead record atomically (0600, never via a symlink). The
+    envelope keeps the plan's revive count and last revive time across every
+    write (`revived=True` adds one now)."""
     store.ensure()
+    kept = {}
+    try:
+        old = read_lead_file(lead_path(store, record['plan']))
+    except Stop:
+        old = None
+    if isinstance(old, dict):
+        kept = {k: old[k] for k in ('revives', 'revived_at') if k in old}
     if not os.path.isdir(lead_dir(store)):
         os.makedirs(lead_dir(store), 0o700)
     err = lead_record_error(record)
@@ -2081,6 +2117,12 @@ def save_lead(store, record, prior, via, appointments=None):
         storage['appoint'], storage['record_via'] = grant, mark
     if appointments:
         storage['appointments'] = appointments
+    storage.update(kept)
+    if revived:
+        done = kept.get('revives', 0)
+        storage['revives'] = (done if isinstance(done, int) and not isinstance(done, bool)
+                              and done >= 0 else MAX_REVIVES) + 1   # unreadable: counts as spent
+        storage['revived_at'] = now_iso()
     write_private(tmp, json.dumps(storage, sort_keys=True) + '\n')
     os.replace(tmp, path)
 
@@ -2420,6 +2462,174 @@ def lead_appoint_self(args, plan, store, pane, me, data):
                        best_effort=(rec['lead'],) + tuple(rec['succession']))
 
 
+def write_revive_ticket(store, plan, pane, epoch, ttl, pid=None, workspace=None):
+    """The daemon's one-time revive grant for one plan, one new pane and the stored
+    epoch: 0600, created exclusively, never through a symlink. Returns its path."""
+    store.ensure()
+    path = os.path.join(store.dir, 'revive-%s.json' % binascii.hexlify(os.urandom(8)).decode('ascii'))
+    body = {'schema': REVIVE_TICKET_SCHEMA, 'plan': plan, 'pane': pane, 'epoch': epoch,
+            'workspace': workspace, 'expires': int(time.time() + ttl), 'daemon_pid': pid or os.getpid()}
+    fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | NOFOLLOW, 0o600)
+    with os.fdopen(fd, 'w') as fh:
+        fh.write(json.dumps(body, sort_keys=True))
+    return path
+
+
+def find_revive_ticket(store, plan, pane, epoch, now=None):
+    """(path, ticket) of an unexpired ticket for exactly this plan, pane and epoch, or
+    None. A ticket that is not a private regular file of this user is ignored;
+    expired ones are removed."""
+    now = time.time() if now is None else now
+    try:
+        names = os.listdir(store.dir)
+    except OSError:
+        return None
+    for name in sorted(names):
+        if not REVIVE_TICKET_RE.fullmatch(name):
+            continue
+        path = os.path.join(store.dir, name)
+        try:
+            fd = os.open(path, os.O_RDONLY | NOFOLLOW)
+        except OSError:
+            continue
+        try:
+            info = os.fstat(fd)
+            if not stat.S_ISREG(info.st_mode) or info.st_uid != os.geteuid() \
+                    or info.st_mode & 0o077 or info.st_size > 4096:
+                continue
+            ticket = json.loads(os.read(fd, 4097).decode('utf-8'))
+        except (OSError, ValueError, UnicodeDecodeError):
+            continue
+        finally:
+            os.close(fd)
+        if not isinstance(ticket, dict) or ticket.get('schema') != REVIVE_TICKET_SCHEMA \
+                or not isinstance(ticket.get('expires'), int):
+            continue
+        if ticket['expires'] < now:
+            try:
+                os.unlink(path)
+            except OSError:
+                pass
+            continue
+        if ticket.get('plan') == plan and ticket.get('pane') == pane and ticket.get('epoch') == epoch:
+            return path, ticket
+    return None
+
+
+def pane_workspace(pane):
+    """The workspace id Herdr reports for a local pane, or None."""
+    rc, text, _ = herdr(['pane', 'get', pane], timeout=12)
+    if rc != 0:
+        return None
+    try:
+        found = (json.loads(text).get('result') or {}).get('pane') or {}
+    except (ValueError, AttributeError):
+        return None
+    ws = found.get('workspace_id')
+    return ws if isinstance(ws, str) and re.fullmatch(r'[A-Za-z0-9]{1,32}', ws) else None
+
+
+def iso_seconds(stamp):
+    import calendar
+    return calendar.timegm(time.strptime(stamp[:19], '%Y-%m-%dT%H:%M:%S'))
+
+
+def revive_gone(addr):
+    """(gone, state) for a revive: strong evidence, or (D3) a usage limit whose own
+    banner, read here, resets more than REVIVE_MIN_RESET away — weak evidence,
+    recorded. An unreachable machine is not proof."""
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    sys.dont_write_bytecode = True
+    import autopilot
+    is_gone, state, weak = gone(addr)
+    if weak:
+        machine, pane = resolve_machine(parse_address(addr))
+        rc, screen, _ = herdr(['pane', 'read', pane, '--source', 'visible', '--lines', '80'],
+                              machine=machine, timeout=20)
+        secs = autopilot.limit_reset_seconds(screen if rc == 0 else '', time.time())
+        if secs is not None and secs > autopilot.REVIVE_MIN_RESET:
+            return True, 'usage_limit, resets in %dm (weak)' % (secs // 60)
+        return False, 'idle at a usage limit that resets %s' % (
+            'soon' if secs is not None else 'at a time the banner does not say')
+    if is_gone and state == 'unreachable':
+        return False, 'on a machine that cannot be reached (not proof)'
+    return is_gone, state
+
+
+def lead_revive(args, plan, store, pane, me, data):
+    """`lead takeover --reason revive`: a fresh agent the daemon launched takes an
+    orphan plan. Needs the daemon's one-time ticket for this pane, plan and epoch, a
+    running daemon started with --revive, and two probes, a gap apart, that find the
+    lead, every successor and every lane gone. Writes local state only; receivers
+    elsewhere never adopt a revive."""
+    rec = data['record']
+    count, last = data.get('revives', 0), data.get('revived_at')
+    if not isinstance(count, int) or isinstance(count, bool) or count < 0 \
+            or (last is not None and not (isinstance(last, str) and TS_RE.fullmatch(last))):
+        raise Stop(EXIT_POLICY, 'plan %s has an unreadable revive count; only the human can restart it'
+                   % plan)   # fail closed, never an exception
+    if count >= MAX_REVIVES:
+        raise Stop(EXIT_POLICY, 'plan %s was already revived %d times; only the human can restart it'
+                   % (plan, MAX_REVIVES))
+    try:
+        since = time.time() - iso_seconds(last) if last is not None else None
+    except ValueError:
+        raise Stop(EXIT_POLICY, 'plan %s has an unreadable revive time; only the human can restart it'
+                   % plan)
+    if since is not None and since < REVIVE_EVERY:
+        raise Stop(EXIT_POLICY, 'plan %s was revived less than %d hours ago' % (plan, REVIVE_EVERY // 3600))
+    found = find_revive_ticket(store, plan, pane, rec['epoch'])
+    if found is None:
+        raise Stop(EXIT_POLICY, 'no revive ticket for this pane, plan %s and epoch %d' % (plan, rec['epoch']))
+    path, ticket = found
+    if not ticket.get('workspace') or pane_workspace(pane) != ticket['workspace']:
+        raise Stop(EXIT_POLICY, 'revive refused: this pane is not in the workspace the autopilot '
+                   'created for this revive')
+    pid = autopilot_pid(store)
+    opts = autopilot_options(store, pid) if pid else None
+    if not pid or ticket.get('daemon_pid') != pid or not (opts or {}).get('options', {}).get('revive'):
+        raise Stop(EXIT_POLICY, 'revive refused: the ticket does not name the running autopilot, or '
+                   'that autopilot was not started with --revive')
+    root = git_root(common=True)
+    if rec.get('repo_root') and root != rec['repo_root']:
+        raise Stop(EXIT_POLICY, 'this pane works in another repository than plan %s; a revived '
+                   'lead works in the plan\'s repository' % plan)
+    mine_ = self_strings(pane, store)
+    members = [a for a in [rec['lead']] + list(rec['succession']) + list(rec['lanes'])
+               if a and a not in mine_]
+    evidence = []
+    for probe in (1, 2):
+        evidence = []
+        for addr in members:
+            is_gone, state = revive_gone(addr)
+            if not is_gone:
+                raise Stop(EXIT_POLICY, 'revive refused: %s is %s (probe %d); a plan is revived only '
+                           'when its lead, every successor and every lane are gone' % (addr, state, probe))
+            evidence.append('%s %s' % (addr, state))
+        if probe == 1:
+            time.sleep(appoint_probe_gap())
+    with store.lock():
+        again = load_lead(store, plan)
+        if not again or again['record']['epoch'] != rec['epoch']:
+            raise Stop(EXIT_POLICY, 'the lead record of %s changed meanwhile; run `lead show`' % plan)
+        again_ticket = find_revive_ticket(store, plan, pane, rec['epoch'])
+        if again_ticket is None:
+            raise Stop(EXIT_POLICY, 'the revive ticket was used or expired meanwhile')
+        try:
+            os.unlink(again_ticket[0])   # one time: consumed before the record is written
+        except OSError:
+            raise Stop(EXIT_POLICY, 'the revive grant could not be consumed; refused')
+        record = new_lead_record(plan, me, rec['epoch'] + 1, rec['succession'],
+                                 [a for a in rec['lanes'] if a not in mine_], rec.get('repo_root'),
+                                 appoint=rec.get('appoint'), via=REVIVE_VIA)
+        save_lead(store, record, prior_of(rec, REVIVE_VIA), REVIVE_VIA,
+                  appointments=again.get('appointments'), revived=True)
+        log_lead(store, 'revived', me, record,
+                 note='revive granted by the daemon\'s --revive start flag; %s' % '; '.join(evidence)[:400])
+    return finish_lead(args, store, pane, record, 'revived',
+                       best_effort=(rec['lead'],) + tuple(rec['succession']))
+
+
 def lead_takeover(args):
     plan, store, pane, me = lead_context(args)
     data = load_lead(store, plan)
@@ -2431,6 +2641,8 @@ def lead_takeover(args):
         raise Stop(EXIT_POLICY, 'you already lead %s' % plan)
     if getattr(args, 'as_lane', False):
         return lead_appoint_self(args, plan, store, pane, me, data)
+    if args.reason == REVIVE_REASON:
+        return lead_revive(args, plan, store, pane, me, data)
     position = [i for i, a in enumerate(rec['succession']) if a in mine_]
     if not position:
         raise Stop(EXIT_POLICY, 'this pane is not in the succession of %s (%s)'
@@ -2677,6 +2889,9 @@ def transition(prev, rec, sender, gone_fn):
     if rec['lead'] != sender:
         return ('rejected', 'not fenced: %s names %s, not itself' % (sender, rec['lead']),
                 None, None)
+    if rec.get('via') == REVIVE_VIA:
+        return ('rejected', 'a revive is adopted only on the machine whose daemon granted it; '
+                'its record stays there', None, None)
     if sender in prev['succession'] and rec.get('via') != APPOINT_VIA:
         if widens_grant(prev, rec):
             return 'rejected', 'a takeover cannot widen the appointment grant', None, None
@@ -3697,6 +3912,169 @@ class AutopilotIO(object):
         return {'pane': pane_id, 'terminal': terminal, 'workspace': workspace,
                 'kind': kind, 'profile': profile, 'home': home, 'key': key}
 
+    # -- revive (autopilot --revive) -------------------------------------------
+    def revive_launch(self, plan, repo_root, kinds):
+        """Pick an account with quota (ask mode), lease it, and start one fresh agent
+        in a workspace of its own whose shell starts in the plan's checkout.
+        Returns {pane, terminal, workspace, kind, profile}; raises on any refusal."""
+        import brain
+        root = os.path.realpath(repo_root) if isinstance(repo_root, str) else None
+        if not root or root != repo_root or not os.path.isdir(root) or has_bad_control(root):
+            raise Stop(EXIT_POLICY, 'the plan\'s repository is not a directory on this machine')
+        ak = shutil.which('ak')
+        if not ak:
+            raise Stop(EXIT_ENV, 'ak is not on PATH')
+        ak = os.path.realpath(ak)
+        kinds = [k for k in kinds if isinstance(k, str) and brain.KIND_RE.fullmatch(k)]
+        if not kinds:
+            raise Stop(EXIT_POLICY, 'no agent kind to pick')
+        argv = [ak, 'pick', '--kinds', ','.join(kinds), '--owner', self.brain_owner(),
+                '--max-age', '300', '--json']
+        rc, out = bounded_run(argv, b'', 256 * 1024, 30, env=dict(os.environ, AGENTKIT_PERMISSIONS='ask'))
+        if rc not in (0, 1) or out is None:
+            raise Stop(EXIT_HERDR, 'ak pick failed')
+        try:
+            doc = json.loads(out.decode('utf-8'))
+        except (ValueError, UnicodeDecodeError):
+            raise Stop(EXIT_HERDR, 'ak pick did not print JSON')
+        kind, profile, _launch, line = brain.launch_line(doc, ak)
+        rc, _ = bounded_run([ak, 'lease', kind, profile, '--owner', self.brain_owner(),
+                             '--ttl', REVIVE_LEASE_TTL, '--purpose', 'revive'], b'', 0, 30)
+        if rc != 0:
+            raise Stop(EXIT_POLICY, 'the account %s %s could not be leased' % (kind, profile))
+        workspace = None
+        try:
+            helper_dir = os.path.dirname(os.path.abspath(__file__))
+            made = herdr_json(['workspace', 'create', '--label', ('revive %s' % plan)[:60], '--no-focus',
+                               '--cwd', root, '--env',
+                               'PATH=%s:%s' % (helper_dir, os.environ.get('PATH', '/usr/bin:/bin'))],
+                              timeout=15)
+            result = made.get('result') or {}
+            pane = (result.get('root_pane') or {})
+            workspace = (result.get('workspace') or {}).get('workspace_id')
+            pane_id, terminal = pane.get('pane_id'), pane.get('terminal_id')
+            if not (isinstance(pane_id, str) and re.fullmatch(PANE_RE, pane_id)) or pane.get('agent'):
+                raise Stop(EXIT_HERDR, 'the new workspace did not give a fresh shell pane')
+            rc, _out, _err = herdr(['pane', 'run', pane_id, line], timeout=15)
+            if rc != 0:
+                raise Stop(EXIT_HERDR, 'herdr pane run failed in the revive workspace')
+        except BaseException:
+            self.revive_release(kind, profile, workspace)
+            raise
+        return {'pane': pane_id, 'terminal': terminal, 'workspace': workspace,
+                'kind': kind, 'profile': profile}
+
+    def revive_release(self, kind, profile, workspace):
+        """Undo a revive that did not take: the lease and the workspace it created."""
+        ak = shutil.which('ak')
+        if ak and kind and profile:
+            bounded_run([os.path.realpath(ak), 'lease', 'release', kind, profile, '--owner',
+                         self.brain_owner()], b'', 0, 30)
+        if isinstance(workspace, str) and re.fullmatch(r'[A-Za-z0-9]{1,32}', workspace):
+            herdr(['workspace', 'close', workspace], timeout=15)
+
+    def revive_ticket(self, plan, pane, epoch, ttl, workspace=None):
+        return write_revive_ticket(self.store, plan, pane, epoch, ttl, workspace=workspace)
+
+    def revive_launches(self):
+        """[(time, plan)] of every revive launch this daemon's store remembers —
+        takeover or handover, taken, failed or timed out — from a private file, so
+        that a restart resets neither the per-plan caps nor the hourly one."""
+        path = os.path.join(self.store.dir, REVIVE_LOG)
+        try:
+            fd = os.open(path, os.O_RDONLY | NOFOLLOW)
+            with os.fdopen(fd, 'r', encoding='utf-8') as fh:
+                data = json.loads(fh.read(65536))
+        except (OSError, ValueError):
+            return []
+        items = data.get('launches') if isinstance(data, dict) else None
+        out = []
+        for item in items if isinstance(items, list) else []:
+            if isinstance(item, list) and len(item) == 2 and isinstance(item[0], (int, float)) \
+                    and not isinstance(item[0], bool) and isinstance(item[1], str) and PLAN_RE.fullmatch(item[1]):
+                out.append((float(item[0]), item[1]))
+        return out[-REVIVE_LOG_MAX:]
+
+    def revive_history(self, plan=None):
+        """Launch times: of the last hour across the fleet, or every one of `plan`."""
+        now = time.time()
+        return [t for t, p in self.revive_launches()
+                if (p == plan if plan is not None else now - t < 3600)]
+
+    def revive_note(self, when, plan=None):
+        items = self.revive_launches() + [(float(when), plan if isinstance(plan, str) else '-')]
+        items = [[t, p] for t, p in sorted(set(items))][-REVIVE_LOG_MAX:]
+        path = os.path.join(self.store.dir, REVIVE_LOG)
+        tmp = '%s.%d.tmp' % (path, os.getpid())
+        try:
+            write_private(tmp, json.dumps({'launches': items}))
+            os.replace(tmp, path)
+        except OSError:
+            pass
+
+    # -- unknown screens: a local corpus for new fixtures ----------------------
+    def save_unknown(self, kind, text):
+        """Keep a sanitized copy of a screen autopilot did not recognise (no key was
+        sent): escape, control and format characters removed; a private key block
+        dropped from BEGIN to END (or to the end when it never closes, or from the
+        top when only its END is shown); a line dropped when
+        it, or it joined with the next (a wrapped token), shows a secret or a
+        token's prefix — checked before any cut; capped per file and in number,
+        0600 in a 0700 directory under the state dir."""
+        text = ANSI_SEQ.sub('', text or '')
+        # Every check runs on the whole screen first; only then is it cut to its tail.
+        raw = [''.join(' ' if unicodedata.category(ch) in ('Cc', 'Cf', 'Zl', 'Zp', 'Co', 'Cs') else ch
+                       for ch in line) for line in text.splitlines()[-2000:]]
+        drop, inside = set(), False
+        for i, line in enumerate(raw):
+            if PEM_BEGIN.search(line):
+                inside = True
+            if PEM_END.search(line) and not inside:
+                drop.update(range(i + 1))   # an END whose BEGIN scrolled off: all above it may be key
+            if inside:
+                drop.add(i)
+            if PEM_END.search(line):
+                inside = False
+        hit = lambda t: bool(secret_finding(t) or TOKEN_PREFIX.search(t))
+        for i, line in enumerate(raw):
+            nxt = raw[i + 1] if i + 1 < len(raw) else ''
+            if hit(line):
+                drop.add(i)
+                if TOKEN_TAIL.search(line.rstrip()) and TOKEN_HEAD.match(nxt):
+                    drop.add(i + 1)   # the token's rest, wrapped onto the next line
+            elif not hit(nxt) and hit(line.strip() + nxt.strip()):
+                drop.update((i, i + 1))   # a token wrapped across the two lines
+        first = max(0, len(raw) - UNKNOWN_LINES)
+        drop = set(i - first for i in drop if i >= first)
+        raw = raw[first:]
+        lines = ['[redacted]' if i in drop else line.rstrip()[:400] for i, line in enumerate(raw)]
+        body = '\n'.join(lines).strip()
+        if not body or all(l in ('[redacted]', '') for l in lines):
+            return None
+        digest = hashlib.sha256(body.encode('utf-8')).hexdigest()[:12]
+        folder = os.path.join(self.store.dir, UNKNOWN_DIR)
+        try:
+            if not os.path.isdir(folder):
+                os.makedirs(folder, 0o700)
+            if os.path.islink(folder):
+                return None
+            if stat.S_IMODE(os.stat(folder).st_mode) != 0o700:
+                os.chmod(folder, 0o700)
+            names = sorted(n for n in os.listdir(folder) if UNKNOWN_NAME_RE.fullmatch(n))
+            if any(n.endswith('-%s.txt' % digest) for n in names):
+                return None   # the same screen is kept once
+            for old in names[:max(0, len(names) - UNKNOWN_MAX + 1)]:
+                os.unlink(os.path.join(folder, old))
+            name = '%s-%s-%s.txt' % (time.strftime('%Y%m%dT%H%M%SZ', time.gmtime()),
+                                     re.sub(r'[^a-z0-9]', '', (kind or 'unknown').lower())[:16] or 'unknown', digest)
+            path = os.path.join(folder, name)
+            fd = os.open(path, os.O_WRONLY | os.O_CREAT | os.O_EXCL | NOFOLLOW, 0o600)
+            with os.fdopen(fd, 'w', encoding='utf-8') as fh:
+                fh.write(body[:UNKNOWN_BYTES] + '\n')
+            return path
+        except OSError:
+            return None
+
     def brain_lease(self, kind, profile):
         ak = shutil.which('ak')
         import brain
@@ -3927,6 +4305,8 @@ def autopilot_option_argv(opts):
         argv.append('--loop')
     if opts.get('appoint'):
         argv.append('--appoint')
+    if opts.get('revive'):
+        argv.append('--revive')
     if opts.get('brain'):
         argv.append('--brain')
         if opts.get('brain_kinds'):
@@ -3974,6 +4354,12 @@ def autopilot_status(store):
             print('  options: %s' % safe(' '.join(autopilot_option_argv(opts))))
             if info.get('mode') == 'background':
                 print('  log: %s' % log_path)
+            folder = os.path.join(store.dir, UNKNOWN_DIR)
+            try:
+                kept = len([n for n in os.listdir(folder) if UNKNOWN_NAME_RE.fullmatch(n)])
+            except OSError:
+                kept = 0
+            print('  unknown screens kept for new fixtures: %d (%s)' % (kept, folder))
             brain = ((load_fleet_report().read_fleet()[0] or {}).get('daemon') or {}).get('brain') \
                 if opts.get('brain') else None
             if isinstance(brain, dict):
@@ -4269,6 +4655,8 @@ def cmd_autopilot(args):
                    'seconds')
     if args.appoint and not args.loop:
         raise Stop(EXIT_USAGE, '--appoint needs --loop: it acts on the plans the loop watches')
+    if args.revive and not args.loop:
+        raise Stop(EXIT_USAGE, '--revive needs --loop: it acts on the plans the loop watches')
     if interval < autopilot.MIN_INTERVAL and passes is None:
         raise Stop(EXIT_USAGE, '--interval is at least %d seconds' % autopilot.MIN_INTERVAL)
     exclude = set()
@@ -4334,7 +4722,7 @@ def cmd_autopilot(args):
             'no_nudge': bool(args.no_nudge), 'catch_up': bool(args.catch_up),
             'exclude': sorted(exclude), 'scope': args.scope or None,
             'loop': bool(args.loop), 'notify': args.notify, 'notify_env': keep,
-            'appoint': bool(args.appoint),
+            'appoint': bool(args.appoint), 'revive': bool(args.revive),
             'brain': bool(args.brain), 'brain_kinds': brain_kinds, 'brain_model': brain_models_raw}
     if verb == 'start':
         return autopilot_start(args, store, opts)
@@ -4384,7 +4772,7 @@ def cmd_autopilot(args):
     loop = autopilot.Autopilot(io, dry_run=args.dry_run, nudge=not args.no_nudge,
                                catch_up=args.catch_up, exclude=exclude, confirm=confirm,
                                loop=args.loop, grace=grace, appoint=args.appoint,
-                               appoint_grace=appoint_grace, brain=brain_opts)
+                               appoint_grace=appoint_grace, brain=brain_opts, revive=args.revive)
     previous = signal.signal(signal.SIGTERM, halt)
     try:
         if passes is None:
@@ -4662,6 +5050,11 @@ def build_parser():
                     help='with --loop: when a plan whose lead record carries the developer\'s grant '
                     'has lost its lead and every successor, ask its first live lane to take the '
                     'lead (lead takeover --as-lane); only on the human\'s word')
+    ap.add_argument('--revive', action='store_true',
+                    help='with --loop: when a plan on this machine lost its lead and nobody in its '
+                    'succession or lanes can take over, launch one fresh agent (ak, ask mode) to '
+                    'take it (lead takeover --reason revive); a stalled plan\'s live lead is asked '
+                    'to hand over. Your starting the daemon with it is the grant; capped')
     ap.add_argument('--loop', action='store_true',
                     help='also keep every open plan running: ask the idle lead of a plan that '
                     'is not finished to continue it, on every enabled machine')

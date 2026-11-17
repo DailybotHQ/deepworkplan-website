@@ -29,7 +29,7 @@ lead がいなくなると、daemon は一覧の最初の到達可能な後継�
 
 任意の `--brain` は daemon のルールで決められないケースのために専用の判断 agent を起動します。閉じたアクション一覧からのみ選べます。実行主体は daemon だけです。許可された選択を検証して実行し、brain の自由文は実行しません。計画の `autonomy` ブロックも brain を許可する必要があります。
 
-ループは停滞、ブロック、lead の喪失、完了、キュー結果などを計画イベントとして記録します。任意の `--notify` 統合を使うと、daemon は設定済み notifier に `plan-event-v1` オブジェクトを送り、pack の Dailybot notifier が対応イベントをチーム通知に変換します。通知は作業を承認せず、計画レコードも変えません。フリートマップと `herdr-peers fleet ui` は複数マシンの agent と計画を表示します。UI は読み取り専用で、計画状態を変更せず agent に促しません。タグ付きの仕様は[herdr-peers v2.1.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md)と[protocol](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md)を参照してください。
+ループは停滞、ブロック、lead の喪失、完了、キュー結果などを計画イベントとして記録します。任意の `--notify` 統合を使うと、daemon は設定済み notifier に `plan-event-v1` オブジェクトを送り、pack の Dailybot notifier が対応イベントをチーム通知に変換します。通知は作業を承認せず、計画レコードも変えません。フリートマップと `herdr-peers fleet ui` は複数マシンの agent と計画を表示します。UI は読み取り専用で、計画状態を変更せず agent に促しません。タグ付きの仕様は[herdr-peers v2.2.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.0/skills/herdr-peers/autopilot.md)と[protocol](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.0/skills/herdr-peers/protocol.md)を参照してください。
 
 ## 2. `autonomy` ブロック（plan-contract/v8）
 

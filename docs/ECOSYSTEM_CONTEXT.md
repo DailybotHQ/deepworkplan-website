@@ -26,14 +26,15 @@ deepworkplan-skill pins). The pins last moved on 2026-11-16 with DWP 8.0.0: pack
 `plan-snapshot/v8`, and the `dwp-queue-v1` plan queue written by
 `shared/queue.py`; v7, v6 and v5 plans keep their recorded generation; the
 7.x line ended at 7.12.2),
-herdr-peers `v2.1.0` (1.1.0 adds native debates, 1.2.x adds autopilot, an
+herdr-peers `v2.2.0` (1.1.0 adds native debates, 1.2.x adds autopilot, an
 optional daemon only a human starts; 1.3.0 adds the loop — `autopilot
 --loop` keeps every open plan running to its end on every machine — plus
 the fleet UI and the read-only `plans`/`fleet` verbs; 2.0.0 moves the
 wire to protocol 2 — lead appointment on the human's explicit word,
 the autopilot brain, the plan queue; 2.0.2 accepts the trailing `--ask` of
 an ask-mode pick-v2 launch; 2.1.0 adds the fleet UI views, denies
-permissions the daemon cannot accept and reads the v8 blockers),
+permissions the daemon cannot accept and reads the v8 blockers; 2.2.0 adds
+revive, `autopilot --loop --revive`),
 coding-agents-kit `v1.5.0` (pick-v2: `ak pick --kinds` with per-kind model
 override and `--json` launch contracts; `--model` as a head flag; `ak
 last`, and Herdr pane restore through `ak`; 1.4.0 adds `ak update`, the
@@ -43,7 +44,7 @@ unchanged),
 deepworkplan-vim `v1.1.0`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
 reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.1`
-addon descriptors record herdr-peers `v2.1.0`, coding-agents-kit `v1.5.0`,
+addon descriptors record herdr-peers `v2.2.0`, coding-agents-kit `v1.5.0`,
 devcontainer-kit `v1.4.0` and deepworkplan-vim `v1.1.0` — the same releases the site pins;
 devcontainer-kit `v1.4.0` (interface 2 unchanged; 1.3.0 added the opt-in
 `[compose] container_only` key) bakes herdr-peers 2.1.0, coding-agents-kit
@@ -58,13 +59,13 @@ devcontainer-kit `v1.4.0` (interface 2 unchanged; 1.3.0 added the opt-in
 | devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.4.0` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon (agentkit): one `ak` command for every coding agent — accounts, quota, `ak pick`, headless runs | Public | `v1.5.0` | `/kit/agentkit`, `/init.md` | Documented only |
 | deepworkplan-vim | Addon (vim): the terminal editor for plans — plan browser, lanes view, Markdown viewer | Public | `v1.1.0` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
-| herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v2.1.0` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
+| herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v2.2.0` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
 
 ## Stable interfaces (1.0)
 
 The products move from 0.x to **1.0.0** once their public interface is stable:
 from then on an incompatible change ships only in a new major version, and
-additions arrive in minor versions. herdr-peers `v2.1.0` (CLI verbs, exit
+additions arrive in minor versions. herdr-peers `v2.2.0` (CLI verbs, exit
 codes, protocol 1, the `lanes-v1` and `lead-v1` contracts),
 coding-agents-kit `v1.5.0` (the `ak` command surface, interface 1, the JSON
 schemas), deepworkplan-vim `v1.1.0` (installer, addon surface, editor
@@ -105,7 +106,7 @@ something that already exists:
 
 An orchestrator plan in this hub sequences those steps; see
 [Cross-project standards](CROSS_PROJECT_STANDARDS.md#orchestrator-plans).
-With coding-agents-kit `v1.5.0` and herdr-peers `v2.1.0` its lanes hand work on
+With coding-agents-kit `v1.5.0` and herdr-peers `v2.2.0` its lanes hand work on
 before an account runs out and the leadership survives the lead
 ([Swarm autonomy](https://deepworkplan.com/methodology/07-swarm-autonomy)).
 

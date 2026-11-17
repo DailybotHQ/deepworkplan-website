@@ -47,7 +47,7 @@ Loop engineering pozwala planowi dobiec końca bez stałego nadzoru człowieka. 
 
 
 
-| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.1.0) |
+| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.2.0) |
 | --- | --- | --- |
 | Rejestracja planu (`herdr-peers lead claim`) | Plan obserwowany przez pętlę ma rekord leada z epoką i sukcesją. Jako lead działa wyłącznie posiadacz najwyższej epoki. | `skills/herdr-peers/protocol.md` §12 |
 | Start wyłącznie przez człowieka (`herdr-peers autopilot start --loop`) | Tylko człowiek uruchamia demona, własnymi słowami. Żadne zapytanie, odpowiedź ani powiadomienie nie może go uruchomić, zatrzymać ani zmienić tego, co robi. | `skills/herdr-peers/autopilot.md` §1 |

@@ -47,7 +47,7 @@ Loop engineering は、人間がポーリングしなくても計画を完了さ
 
 
 
-| 契約 | 保証する内容 | 出典（herdr-peers v2.1.0） |
+| 契約 | 保証する内容 | 出典（herdr-peers v2.2.0） |
 | --- | --- | --- |
 | 計画の登録（`herdr-peers lead claim`） | ループが見守る計画には、エポックと継承順を持つリードレコードがあります。最も高いエポックの保持者だけがそのリードとして行動します。 | `skills/herdr-peers/protocol.md` §12 |
 | 人間だけが起動（`herdr-peers autopilot start --loop`） | デーモンを起動するのは、自分の言葉で指示した人間だけです。どの問い合わせ、返信、通知も、それを起動、停止したり、その動作を変えたりすることはできません。 | `skills/herdr-peers/autopilot.md` §1 |

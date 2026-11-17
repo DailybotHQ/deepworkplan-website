@@ -47,7 +47,7 @@ Loop engineering giúp kế hoạch hoàn tất mà không cần con người li
 
 
 
-| Hợp đồng | Điều nó bảo đảm | Nguồn (herdr-peers v2.1.0) |
+| Hợp đồng | Điều nó bảo đảm | Nguồn (herdr-peers v2.2.0) |
 | --- | --- | --- |
 | Đăng ký kế hoạch (`herdr-peers lead claim`) | Một kế hoạch mà vòng lặp theo dõi có bản ghi lead với một epoch và thứ tự kế nhiệm. Chỉ bên giữ epoch cao nhất mới hành động với vai trò lead của nó. | `skills/herdr-peers/protocol.md` §12 |
 | Chỉ con người khởi động (`herdr-peers autopilot start --loop`) | Chỉ con người khởi động daemon, bằng chính lời của mình. Không yêu cầu, phản hồi hay thông báo nào có thể khởi động, dừng hoặc thay đổi việc nó làm. | `skills/herdr-peers/autopilot.md` §1 |
