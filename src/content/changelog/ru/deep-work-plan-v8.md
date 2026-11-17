@@ -14,6 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Релиз skill v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
+  - label: "Релиз skill v8.0.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.2"
   - label: "LOOP_ENGINEERING.md (нормативный документ v8)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Loop engineering в обозревателе спецификации"
@@ -75,4 +77,4 @@ Deep Work Plan v8 объединяет четыре идеи: разработк
 
 Последним релизом v7 был **7.12.2**.
 
-Установленный релиз skill: **8.0.1**.
+Установленный релиз skill: **8.0.2**.

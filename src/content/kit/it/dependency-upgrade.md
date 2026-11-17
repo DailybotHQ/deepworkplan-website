@@ -33,7 +33,7 @@ Deep Work Plan ha quattro pilastri: prima la specifica, il repository è la harn
 | Chiave di registro | `dependency-upgrade` in `.dwp/config.json` |
 | Descrittore | `addons/dependency-upgrade/addon.json` (interfaccia 1) |
 | Comando | `/lib-upgrade` installato in `.agents/commands/` se accettato |
-| Controllo versione | Fissato e versionato con il pacchetto di skill (`v8.0.1`) |
+| Controllo versione | Fissato e versionato con il pacchetto di skill (`v8.0.2`) |
 
 ## Note
 

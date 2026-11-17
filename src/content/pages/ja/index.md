@@ -131,11 +131,11 @@ Loop engineering は、人間がポーリングしなくても計画を完了さ
 | `status` | 27,311|
 | `verify` | 36,701|
 
-単位：ファイルシステム上のバイト数。リリース済みのパックで、次のコマンドにより計測：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.1）。
+単位：ファイルシステム上のバイト数。リリース済みのパックで、次のコマンドにより計測：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.2）。
 
 プロバイダーのトークン、コスト、ループ完結の統計は表示していません。それらを計測するタグ付きのソースがまだないため、行がありません。スクリプトが示すバイト数 ÷ 4 のトークン値はラベル付きの推定値であり、計測値ではありません。
 
-[評価台帳を読む](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.1/docs/EVALUATION.md)
+[評価台帳を読む](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
 
 ---
 

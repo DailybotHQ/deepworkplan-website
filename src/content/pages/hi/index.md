@@ -131,11 +131,11 @@ Loop engineering किसी योजना को बिना मानव�
 | `status` | 27,311|
 | `verify` | 36,701|
 
-इकाई: फ़ाइल सिस्टम बाइट्स। जारी किए गए पैक पर नीचे दिए गए कमांड से मापा गया: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.1)।
+इकाई: फ़ाइल सिस्टम बाइट्स। जारी किए गए पैक पर नीचे दिए गए कमांड से मापा गया: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2)।
 
 प्रदाता टोकन, लागत और लूप-समापन आँकड़े नहीं दिखाए गए हैं: अभी कोई टैग किया गया स्रोत उन्हें नहीं मापता, इसलिए उनकी कोई पंक्ति नहीं है। स्क्रिप्ट का बाइट्स ÷ 4 टोकन आँकड़ा एक लेबल किया गया अनुमान है, कभी माप नहीं।
 
-[मूल्यांकन लेजर पढ़ें](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.1/docs/EVALUATION.md)
+[मूल्यांकन लेजर पढ़ें](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
 
 ---
 

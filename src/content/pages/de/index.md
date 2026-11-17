@@ -131,11 +131,11 @@ Das Harness veröffentlicht, was jeder Flow vor dem Start lesen muss: den Router
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Einheit: Dateisystem-Bytes. Gemessen am veröffentlichten Pack mit dem Befehl unten: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.1).
+Einheit: Dateisystem-Bytes. Gemessen am veröffentlichten Pack mit dem Befehl unten: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
 
 Provider-Tokens, Kosten und Statistiken zum Schließen des Loops werden nicht gezeigt: Noch keine getaggte Quelle misst sie, daher haben sie keine Zeile. Die Token-Zahl des Skripts (Bytes ÷ 4) ist eine gekennzeichnete Schätzung, niemals eine Messung.
 
-[Das Evaluations-Ledger lesen](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.1/docs/EVALUATION.md)
+[Das Evaluations-Ledger lesen](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
 
 ---
 

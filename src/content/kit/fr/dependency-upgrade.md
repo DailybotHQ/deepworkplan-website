@@ -33,7 +33,7 @@ Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dép�
 | Clé de registre | `dependency-upgrade` dans `.dwp/config.json` |
 | Descripteur | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Commande | `/lib-upgrade` installé dans `.agents/commands/` lorsqu'il est accepté |
-| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v8.0.1`) |
+| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v8.0.2`) |
 
 ## Notes
 

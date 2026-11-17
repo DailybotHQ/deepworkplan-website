@@ -14,6 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Skill 릴리스 v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
+  - label: "Skill 릴리스 v8.0.2"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.2"
   - label: "LOOP_ENGINEERING.md (v8 규범)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "사양 리더의 Loop engineering"
@@ -75,4 +77,4 @@ Deep Work Plan v8은 spec-first 개발, 에이전트 harness로서의 저장소,
 
 v7의 마지막 릴리스는 **7.12.2**였습니다.
 
-설치된 skill 릴리스: **8.0.1**.
+설치된 skill 릴리스: **8.0.2**.

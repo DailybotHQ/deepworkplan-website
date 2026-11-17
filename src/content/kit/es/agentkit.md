@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tiene sus propias opciones para continuar una sesión, su propia forma de mantener separada una segunda cuenta, su propio modo sin interfaz y su propio interruptor para omitir las solicitudes de permiso. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** pone una sola superficie de comandos sobre todos ellos: `ak <kind> [@profile]`.
 
-Este addon integra el kit en **DWP v8** (pack `v8.0.1`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
+Este addon integra el kit en **DWP v8** (pack `v8.0.2`) como transporte de delegación **sin interfaz** (headless). Es opcional: sin él, cada tarea se ejecuta en la sesión actual, exactamente como antes. El kit en sí es un producto MIT que funciona sin Deep Work Plan.
 
 Deep Work Plan se apoya en cuatro pilares: primero la especificación, el repositorio es el harness, loop engineering y eficiencia medida. Los addons y las integraciones pueden ampliar el harness y el bucle; la metodología funciona por sí sola.
 

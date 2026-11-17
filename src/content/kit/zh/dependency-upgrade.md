@@ -33,7 +33,7 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 | 注册键 | `.dwp/config.json` 中的 `dependency-upgrade` |
 | 描述符 | `addons/dependency-upgrade/addon.json`（接口 1） |
 | 命令 | 接受后安装至 `.agents/commands/` 的 `/lib-upgrade` |
-| 版本控制 | 随技能包固定并控制版本（`v8.0.1`） |
+| 版本控制 | 随技能包固定并控制版本（`v8.0.2`） |
 
 ## 备注
 

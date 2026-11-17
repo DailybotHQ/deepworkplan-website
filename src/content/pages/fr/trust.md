@@ -23,11 +23,11 @@ Traitez la skill comme non fiable tant que vous ne l'avez pas vérifiée. Chaque
 ```bash
 git clone https://github.com/DailybotHQ/deepworkplan-skill.git
 cd deepworkplan-skill
-git checkout v8.0.1
-# Download the checksums for the release you intend to install (current release v8.0.1):
+git checkout v8.0.2
+# Download the checksums for the release you intend to install (current release v8.0.2):
 curl -fsSL -o SHA256SUMS \
-  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.1/SHA256SUMS
-# Expected SHA256SUMS digest: 0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa
+  https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS
+# Expected SHA256SUMS digest: 332e8f9a51fe818f5e78839f99f92b60fce2b6eed8383d5e90b91c994ca019f5
 ./setup.sh --verify        # une sortie non nulle signifie qu'un fichier ne correspond pas — arrêtez
 ```
 

@@ -84,10 +84,10 @@ qu'il ait été contrôlé.
  ```bash
  git clone https://github.com/DailybotHQ/deepworkplan-skill.git
  cd deepworkplan-skill
- git checkout v8.0.1
+ git checkout v8.0.2
  # Téléchargez les checksums de cette version et comparez-les au digest ci-dessous :
  curl -fsSL -o SHA256SUMS \
- https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.1/SHA256SUMS
+ https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS
  shasum -a 256 SHA256SUMS # doit être égal au digest de deepworkplan-skill dans Versions épinglées
  ./setup.sh --verify # une sortie non nulle signifie qu'un fichier ne correspond pas — arrêtez
  ```
@@ -101,7 +101,7 @@ qu'il ait été contrôlé.
 
   | Dépôt (github.com/DailybotHQ) | Tag | sha256 de son `SHA256SUMS` |
   | --- | --- | --- |
-  | deepworkplan-skill | `v8.0.1` | `0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa` |
+  | deepworkplan-skill | `v8.0.2` | `332e8f9a51fe818f5e78839f99f92b60fce2b6eed8383d5e90b91c994ca019f5` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
   | herdr-peers | `v2.2.0` | `694766b8ee39ee57b0ce39e8d31a64ca018830159aec7989226f1d094a4c8c2c` |
   | devcontainer-kit | `v1.4.0` | `67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2` |
@@ -119,7 +119,7 @@ accompagné de neuf sous-skills — `create`, `execute`, `refine`, `resume`, `st
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
 Ou installez via OpenClaw :

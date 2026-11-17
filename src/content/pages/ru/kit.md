@@ -12,7 +12,7 @@ lastUpdated: 2026-11-16
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
 Текущий пакет 8.x по умолчанию создает новые планы по контракту v8 (`plan-contract/v8`). Планы v7, v6 и v5 сохраняют записанное поколение; миграция выполняется только через явную миграцию `refine`.
@@ -72,7 +72,7 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.
 - **[devcontainer](/ru/kit/devcontainer)** — Собственный dev-контейнер каждого репозитория из одного шаблона: агенты через ak, Herdr в обе стороны, SSH-ключи только при явном включении. Закреплено на `devcontainer-kit@v1.4.0`.
 - **[vim](/ru/kit/vim)** — Терминальный редактор с браузером планов только для чтения и просмотрщиком Markdown. Закреплено на `deepworkplan-vim@v1.1.0`.
 
-Реестр дополнений и дескрипторы поставляются в Deep Work Plan v8: `v8.0.1`
+Реестр дополнений и дескрипторы поставляются в Deep Work Plan v8: `v8.0.2`
 
 ### Примеры
 

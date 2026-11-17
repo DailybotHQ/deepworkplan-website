@@ -26,9 +26,9 @@ export interface EcosystemPin {
 export const ECOSYSTEM_PINS = {
   pack: {
     repo: 'deepworkplan-skill',
-    tag: 'v8.0.1',
+    tag: 'v8.0.2',
     sha256sums:
-      '0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa',
+      '332e8f9a51fe818f5e78839f99f92b60fce2b6eed8383d5e90b91c994ca019f5',
     role: 'the Deep Work Plan skill (pack)',
   },
   agentkit: {

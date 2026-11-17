@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 附加组件
 
-为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v8**（技能包 `v8.0.1`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
+为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v8**（技能包 `v8.0.2`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
 
 Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 

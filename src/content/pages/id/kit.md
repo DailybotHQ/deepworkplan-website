@@ -12,7 +12,7 @@ Kit adalah semua yang Anda perlukan untuk menjalankan metodologi dalam praktik. 
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.1 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
 Paket 8.x saat ini membuat rencana baru dengan kontrak v8 (`plan-contract/v8`) secara default. Rencana v7, v6, dan v5 mempertahankan generasi tercatatnya; migrasi hanya terjadi melalui migrasi `refine` yang eksplisit.
@@ -73,7 +73,7 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Tujuh bersifat opsional 
 - **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, kunci SSH hanya lewat opt-in. Dipatok pada `devcontainer-kit@v1.4.0`.
 - **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v1.1.0`.
 
-Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v8: `v8.0.1`
+Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v8: `v8.0.2`
 
 ### Contoh
 
