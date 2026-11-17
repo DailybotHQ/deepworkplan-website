@@ -1,5 +1,8 @@
 # Integration Guide — wiring the visuals into the site
 
+
+> **Historical reference:** This file reflects an earlier visual-planning pass. Route, component, asset, locale-coverage, and status claims may be stale. Verify against current source and `docs/DESIGN.md` / `docs/DIAGRAM_COMPONENTS.md` before reuse.
+
 > **Scope.** This guide is for the **follow-up** work that places the generated
 > assets into the site. The prompt-pack plan deliberately changed **no** site
 > code — everything here is instructions for a future change (ideally its own

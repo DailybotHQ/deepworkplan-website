@@ -1,5 +1,8 @@
 # Visual Inventory — Deep Work Plan
 
+
+> **Historical reference:** This file reflects an earlier visual-planning pass. Route, component, asset, locale-coverage, and status claims may be stale. Verify against current source and `docs/DESIGN.md` / `docs/DIAGRAM_COMPONENTS.md` before reuse.
+
 > Master list of every planned visual slot across the site, with a stable `ID`
 > and metadata. The **Prompt link** column points to the per-area file + anchor
 > where the full schema-complete prompt lives (filled in Tasks 2–5; status
