@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) कोडिंग एजेंटों को पेन में रखता है — आपकी मशीन पर भी और उन मशीनों पर भी जिन तक वह SSH के माध्यम से पहुँचता है। यह ऐडऑन एक Deep Work Plan को उन एजेंटों को **पीयर** (peer) के रूप में उपयोग करने देता है: एक योजना किसी सीमित कार्य को दूसरे पेन के एजेंट को सौंप सकती है, ठीक एक अधिकृत उत्तर प्राप्त कर सकती है, और उस आदान-प्रदान का रिकॉर्ड रख सकती है।
 
-यह **DWP v8** (pack `v8.0.2`) का एक वैकल्पिक ऐडऑन है। पद्धति इसके बिना भी वैसे ही काम करती है: ऐडऑन अनुपस्थित या अक्षम होने पर हर कार्य वर्तमान सत्र में ही चलता है, ठीक पहले की तरह।
+यह **DWP v8** (pack `v8.0.3`) का एक वैकल्पिक ऐडऑन है। पद्धति इसके बिना भी वैसे ही काम करती है: ऐडऑन अनुपस्थित या अक्षम होने पर हर कार्य वर्तमान सत्र में ही चलता है, ठीक पहले की तरह।
 
 Deep Work Plan के चार स्तंभ हैं: स्पेक-फ़र्स्ट योजनाएँ, रिपॉज़िटरी ही हार्नेस है, Loop engineering और मापी गई दक्षता। ऐडऑन और एकीकरण हार्नेस तथा लूप का विस्तार कर सकते हैं; कार्यविधि अपने आप भी काम करती है।
 
@@ -20,11 +20,11 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 
 ## यह क्या एकीकृत करता है
 
-यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v2.2.0`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
+यह ऐडऑन एक पतला एकीकरणकर्ता है। असली काम **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** करता है — एक स्वतंत्र MIT skill, जो **`v2.2.1`** पर पिन है और Deep Work Plan के बिना भी उपयोगी है। यह वे बातें परिभाषित करता है जिन्हें Herdr स्वयं खुला छोड़ता है: कौन उत्तर दे सकता है, उत्तर मशीनों के पार वापस अपना रास्ता कैसे खोजता है, दो एजेंट एक-दूसरे को अनंत काल तक उत्तर देने से कैसे बचते हैं, और "मैंने पूछा, उसने उत्तर दिया" का रिकॉर्ड कहाँ रहता है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/herdr-peers`, tag `v2.2.0`, प्रोटोकॉल 2 |
+| उत्पाद | `DailybotHQ/herdr-peers`, tag `v2.2.1`, प्रोटोकॉल 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `herdr` |
 | ट्रांसपोर्ट | इंटरैक्टिव: Herdr पेन में एक पीयर |
 | प्रदान करता है | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 herdr-peers और Herdr की आधिकारिक skill इंस्टॉल करें, जिस पर यह निर्भर है। जिस भी मशीन के एजेंटों को उत्तर देना है, उस पर भी यह skill होनी चाहिए।
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers प्रेषक को प्रमाणित नहीं क�
 
 ## Container और होस्ट
 
-devcontainer-kit `v1.4.1` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता। herdr-peers (`v0.2.3`) से हर मशीन अपनी स्थिति अलग रखती है (`$XDG_STATE_HOME/herdr-peers/<server>/`), इसलिए होस्ट और किसी container द्वारा साझा किया गया checkout अब उनके रिकॉर्ड आपस में नहीं मिलाता, और devcontainer-kit (`v0.3.3`) से container `HERDR_PEERS_SELF` को स्वयं export करता है, इसलिए अंदर के Codex एजेंट बिना किसी मैनुअल कदम के दूसरी मशीनों तक पहुँचते हैं।
+devcontainer-kit `v1.4.2` पर [devcontainer](/kit/devcontainer) ऐडऑन के साथ, हर dck container में herdr-peers शामिल होता है और वह `dck up` पर mesh से जुड़ जाता है: उसके एजेंट होस्ट पर, अन्य containers में और होस्ट के अन्य loopback containers में मौजूद एजेंटों से पूछ सकते हैं और उत्तर वापस पा सकते हैं। `dck setup` होस्ट पर एक सत्यापित herdr-peers इंस्टॉल करता है, इसलिए होस्ट के एजेंट भी उत्तर देते हैं। होस्ट listener और वे अतिरिक्त कुंजियाँ जो अन्य containers को भीतर आने देती हैं, kit की होस्ट प्रोफ़ाइल में आपके निर्णय हैं; यह ऐडऑन उन्हें कभी सेट नहीं करता। herdr-peers (`v0.2.3`) से हर मशीन अपनी स्थिति अलग रखती है (`$XDG_STATE_HOME/herdr-peers/<server>/`), इसलिए होस्ट और किसी container द्वारा साझा किया गया checkout अब उनके रिकॉर्ड आपस में नहीं मिलाता, और devcontainer-kit (`v0.3.3`) से container `HERDR_PEERS_SELF` को स्वयं export करता है, इसलिए अंदर के Codex एजेंट बिना किसी मैनुअल कदम के दूसरी मशीनों तक पहुँचते हैं।
 
 ## Herdr या agentkit
 
@@ -136,7 +136,7 @@ v2.0.2 प्रोटोकॉल 2 को बनाए रखता है। 
 
 v2.1.0 प्रोटोकॉल 2 को बनाए रखता है। `fleet ui` हर grouping में `Attention`, `Active`, `Waiting`, `Done` और `All` दृश्य जोड़ता है, queue सहित; मैप में वैकल्पिक `state_updated_at` और `unreadable_reason` fields जुड़ते हैं। मानव द्वारा शुरू किया गया daemon ऐसे permission या plan-approval संवाद अस्वीकार करता है जिन्हें वह सुरक्षित रूप से स्वीकार नहीं कर सकता। वह agent के काम से जुड़े अपने प्रश्न को अस्वीकार नहीं करता; login, bypass-permissions acknowledgement और folder trust मानव के पास रहते हैं। Brain की अस्वीकृति स्पष्ट रूप से संभाली जाती है; एक घंटे में तीन अस्वीकृतियाँ उस brain को retire कर देती हैं। अब brain से वर्गीकृत blocker के बारे में पूछा जा सकता है। `ask_lead_to_resolve` action `resolver: lead` वाले blocker को plan के lead तक केवल तभी भेज सकता है जब उसका वर्ग none, C3, C4 या C7 हो; C1 (approval), C2 (consent या login), C5 (damage) और C6 (terms) मानव के पास रहते हैं, और C1–C7 से बाहर के वर्ग अस्वीकार किए जाते हैं। यह रिलीज़ pack 8.0.0 के journal-event/v8 blocker events और plan-snapshot/v8 blocker data भी पढ़ती है।
 
-v2.2.0 प्रोटोकॉल 2 को बनाए रखता है और **revive** (`autopilot --loop --revive`) जोड़ता है; मानव का इस विकल्प के साथ daemon शुरू करना ही अनुमति है। इस मशीन पर कोई plan जिसका lead जा चुका है, या जो ऐसी usage limit पर है जिसका reset 30 मिनट से अधिक दूर है, और जिसे कोई उत्तराधिकारी या lane संभाल नहीं सकती, उसे एक नया agent मिलता है: `ak pick` से चुना गया quota वाला खाता, ask मोड में, ऐसे workspace में जो plan के checkout में शुरू होता है। daemon उसे एक बार उपयोग वाला टिकट देता है, और केवल वही टिकट `lead takeover --reason revive` की अनुमति देता है; नया lead फिर `lead verify` चलाता है और plan को फिर से शुरू करता है। ऐसा रुका हुआ plan जिसका lead अब भी सक्रिय है, कभी takeover नहीं किया जाता: उस lead से एक बार नए agent को `lead handover` करने के लिए कहा जाता है। सीमाएँ: प्रति plan हर 6 घंटे में एक revive, प्रति plan कुल दो, और पूरे fleet में प्रति घंटे दो; ये daemon के पुनरारंभ के बाद भी बनी रहती हैं। पुराना pane कभी बंद नहीं किया जाता और उसे कभी कीज़ नहीं भेजी जातीं। हर revive `--notify` को एक `plan_revived` event भेजता है, और `fleet ui` उस lead को revived के रूप में चिह्नित करता है। 2.0 या 2.1 receiver revive record अस्वीकार करता है (fail closed)। daemon उन स्क्रीनों की sanitized प्रति भी रखता है जिन्हें वह पहचान नहीं सका, जिनसे secrets और key blocks हटा दिए जाते हैं, ताकि उन्हें test case के रूप में जोड़ा जा सके; `autopilot status` दिखाता है कि उसके पास ऐसी कितनी प्रतियाँ हैं।
+v2.2.1 प्रोटोकॉल 2 को बनाए रखता है और **revive** (`autopilot --loop --revive`) जोड़ता है; मानव का इस विकल्प के साथ daemon शुरू करना ही अनुमति है। इस मशीन पर कोई plan जिसका lead जा चुका है, या जो ऐसी usage limit पर है जिसका reset 30 मिनट से अधिक दूर है, और जिसे कोई उत्तराधिकारी या lane संभाल नहीं सकती, उसे एक नया agent मिलता है: `ak pick` से चुना गया quota वाला खाता, ask मोड में, ऐसे workspace में जो plan के checkout में शुरू होता है। daemon उसे एक बार उपयोग वाला टिकट देता है, और केवल वही टिकट `lead takeover --reason revive` की अनुमति देता है; नया lead फिर `lead verify` चलाता है और plan को फिर से शुरू करता है। ऐसा रुका हुआ plan जिसका lead अब भी सक्रिय है, कभी takeover नहीं किया जाता: उस lead से एक बार नए agent को `lead handover` करने के लिए कहा जाता है। सीमाएँ: प्रति plan हर 6 घंटे में एक revive, प्रति plan कुल दो, और पूरे fleet में प्रति घंटे दो; ये daemon के पुनरारंभ के बाद भी बनी रहती हैं। पुराना pane कभी बंद नहीं किया जाता और उसे कभी कीज़ नहीं भेजी जातीं। हर revive `--notify` को एक `plan_revived` event भेजता है, और `fleet ui` उस lead को revived के रूप में चिह्नित करता है। 2.0 या 2.1 receiver revive record अस्वीकार करता है (fail closed)। daemon उन स्क्रीनों की sanitized प्रति भी रखता है जिन्हें वह पहचान नहीं सका, जिनसे secrets और key blocks हटा दिए जाते हैं, ताकि उन्हें test case के रूप में जोड़ा जा सके; `autopilot status` दिखाता है कि उसके पास ऐसी कितनी प्रतियाँ हैं।
 
 ## टिप्पणियाँ
 

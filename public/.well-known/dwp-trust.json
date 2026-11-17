@@ -8,8 +8,8 @@
     "skill": "https://github.com/DailybotHQ/deepworkplan-skill"
   },
   "skill": {
-    "version": "8.0.2",
-    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y",
+    "version": "8.0.3",
+    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.3 --skill deepworkplan -y",
     "markdownFirst": true,
     "networkCalls": false,
     "telemetry": false

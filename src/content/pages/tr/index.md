@@ -101,7 +101,7 @@ Loop engineering, bir planın insan tarafından sürekli sorgulanmadan tamamlanm
 
 
 
-| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.2.0) |
+| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | Plan kaydı (`herdr-peers lead claim`) | Döngünün izlediği bir planın, epoch ve halef sırası içeren bir lider kaydı vardır. Yalnızca en yüksek epoch’un sahibi planın lideri olarak hareket eder. | `skills/herdr-peers/protocol.md` §12 |
 | Yalnızca insan başlatır (`herdr-peers autopilot start --loop`) | Daemon’u yalnızca bir insan, kendi sözleriyle başlatır. Hiçbir soru, yanıt veya bildirim onu başlatamaz, durduramaz ya da yaptığı şeyi değiştiremez. | `skills/herdr-peers/autopilot.md` §1 |
@@ -127,16 +127,16 @@ Harness, her akışın başlamadan önce okuması gerekenleri yayımlar: yönlen
 | `create` | 74.974|
 | `execute` | 55.136|
 | `resume` | 32.023|
-| `refine` | 76.797|
+| `refine` | 77.014|
 | `onboard` | 82.051|
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Birim: dosya sistemi baytı. Yayımlanmış paket üzerinde aşağıdaki komutla ölçülmüştür: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
+Birim: dosya sistemi baytı. Yayımlanmış paket üzerinde aşağıdaki komutla ölçülmüştür: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
 
 Sağlayıcı token’ları, maliyet ve döngü kapanış istatistikleri gösterilmez: henüz hiçbir etiketli kaynak bunları ölçmüyor, bu yüzden satırları yok. Betiğin bayt ÷ 4 token rakamı etiketli bir tahmindir, asla bir ölçüm değildir.
 
-[Değerlendirme kaydını okuyun](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[Değerlendirme kaydını okuyun](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

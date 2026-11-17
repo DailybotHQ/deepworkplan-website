@@ -101,7 +101,7 @@ Loop engineering किसी योजना को बिना मानव�
 
 
 
-| अनुबंध | यह क्या सुनिश्चित करता है | स्रोत (herdr-peers v2.2.0) |
+| अनुबंध | यह क्या सुनिश्चित करता है | स्रोत (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | योजना पंजीकरण (`herdr-peers lead claim`) | लूप जिस योजना पर नज़र रखता है, उसका एक लीड रिकॉर्ड होता है जिसमें एक epoch और उत्तराधिकार क्रम होता है। केवल सबसे ऊँचे epoch का धारक ही उसके लीड के रूप में कार्य करता है। | `skills/herdr-peers/protocol.md` §12 |
 | केवल मनुष्य शुरू करता है (`herdr-peers autopilot start --loop`) | डेमॉन को केवल एक मनुष्य, अपने शब्दों में, शुरू करता है। कोई अनुरोध, उत्तर या सूचना उसे शुरू या बंद नहीं कर सकती, न उसके काम को बदल सकती है। | `skills/herdr-peers/autopilot.md` §1 |
@@ -127,16 +127,16 @@ Loop engineering किसी योजना को बिना मानव�
 | `create` | 74,974|
 | `execute` | 55,136|
 | `resume` | 32,023|
-| `refine` | 76,797|
+| `refine` | 77,014|
 | `onboard` | 82,051|
 | `status` | 27,311|
 | `verify` | 36,701|
 
-इकाई: फ़ाइल सिस्टम बाइट्स। जारी किए गए पैक पर नीचे दिए गए कमांड से मापा गया: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2)।
+इकाई: फ़ाइल सिस्टम बाइट्स। जारी किए गए पैक पर नीचे दिए गए कमांड से मापा गया: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3)।
 
 प्रदाता टोकन, लागत और लूप-समापन आँकड़े नहीं दिखाए गए हैं: अभी कोई टैग किया गया स्रोत उन्हें नहीं मापता, इसलिए उनकी कोई पंक्ति नहीं है। स्क्रिप्ट का बाइट्स ÷ 4 टोकन आँकड़ा एक लेबल किया गया अनुमान है, कभी माप नहीं।
 
-[मूल्यांकन लेजर पढ़ें](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[मूल्यांकन लेजर पढ़ें](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

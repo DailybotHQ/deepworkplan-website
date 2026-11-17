@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) は、コーディングエージェントをペインに配置します。あなたのマシン上でも、SSH 経由で到達できるマシン上でも可能です。このアドオンにより、Deep Work Plan はそれらのエージェントを**ピア**として使えるようになります。計画は範囲の限定されたタスクを別のペインのエージェントに渡し、認可されたちょうど一つの返信を受け取り、そのやり取りの記録を残せます。
 
-これは **DWP v8**（pack `v8.0.2`）の任意のアドオンです。方法論はこれがなくても同じように機能します。アドオンが存在しない、または無効化されている場合、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。
+これは **DWP v8**（pack `v8.0.3`）の任意のアドオンです。方法論はこれがなくても同じように機能します。アドオンが存在しない、または無効化されている場合、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。
 
 Deep Work Plan には4つの柱があります。仕様ファースト、リポジトリこそがハーネス、Loop engineering、計測された効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論はそれ単体でも機能します。
 
@@ -20,11 +20,11 @@ Deep Work Plan には4つの柱があります。仕様ファースト、リポ�
 
 ## 何を統合するか
 
-このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v2.2.0`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
+このアドオンは薄い統合レイヤーです。実際の作業は **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** が担います。これは **`v2.2.1`** に固定された独立した MIT のスキル で、Deep Work Plan がなくても役立ちます。Herdr 自体が未定義のまま残している部分を定めています。誰が回答してよいか、回答がマシンをまたいでどう戻ってくるか、二つのエージェントが互いに延々と回答し合うのをどう防ぐか、そして「質問し、回答があった」という記録をどこに保持するか、です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/herdr-peers`、タグ `v2.2.0`、プロトコル 2 |
+| プロダクト | `DailybotHQ/herdr-peers`、タグ `v2.2.1`、プロトコル 2 |
 | レジストリキー | `.dwp/config.json` 内の `herdr` |
 | トランスポート | 対話型：Herdr ペイン内のピア |
 | 提供するもの | `subagents`、`cancel_children` |
@@ -37,7 +37,7 @@ Deep Work Plan には4つの柱があります。仕様ファースト、リポ�
 herdr-peers と、それが依存する Herdr 公式のスキル をインストールします。エージェントに回答させたいすべてのマシンにも、このスキル が必要です。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers は送信者を認証しません。スタンプ内の `from=` フ�
 
 ## コンテナとホスト
 
-devcontainer-kit `v1.4.1` 上の [devcontainer](/kit/devcontainer) アドオンを使うと、すべての dck コンテナが herdr-peers を同梱し、`dck up` の時点でメッシュに参加します。そのエージェントは、ホスト上、他のコンテナ内、ホストの他のループバックコンテナ内のエージェントに問い合わせ、返信を受け取れます。`dck setup` はホストに検証済みの herdr-peers をインストールするため、ホストのエージェントも返信できます。ホストリスナーと、他のコンテナを受け入れる追加の鍵は、キットのホストプロファイルであなたが決めるものであり、このアドオンがそれらを設定することはありません。herdr-peers (`v0.2.3`) 以降、各マシンは自身の状態（`$XDG_STATE_HOME/herdr-peers/<server>/`）を持つため、ホストとコンテナが共有するチェックアウトでも互いの記録が混ざらなくなりました。また devcontainer-kit (`v0.3.3`) 以降はコンテナ自身が `HERDR_PEERS_SELF` をエクスポートするため、コンテナ内の Codex エージェントは手作業なしで他のマシンに到達できます。
+devcontainer-kit `v1.4.2` 上の [devcontainer](/kit/devcontainer) アドオンを使うと、すべての dck コンテナが herdr-peers を同梱し、`dck up` の時点でメッシュに参加します。そのエージェントは、ホスト上、他のコンテナ内、ホストの他のループバックコンテナ内のエージェントに問い合わせ、返信を受け取れます。`dck setup` はホストに検証済みの herdr-peers をインストールするため、ホストのエージェントも返信できます。ホストリスナーと、他のコンテナを受け入れる追加の鍵は、キットのホストプロファイルであなたが決めるものであり、このアドオンがそれらを設定することはありません。herdr-peers (`v0.2.3`) 以降、各マシンは自身の状態（`$XDG_STATE_HOME/herdr-peers/<server>/`）を持つため、ホストとコンテナが共有するチェックアウトでも互いの記録が混ざらなくなりました。また devcontainer-kit (`v0.3.3`) 以降はコンテナ自身が `HERDR_PEERS_SELF` をエクスポートするため、コンテナ内の Codex エージェントは手作業なしで他のマシンに到達できます。
 
 ## Herdr か agentkit か
 
@@ -136,7 +136,7 @@ v2.0.2 はプロトコル 2 を維持します。ask モードの pick-v2 起動
 
 v2.1.0 はプロトコル 2 を維持します。`fleet ui` では各グループに `Attention`、`Active`、`Waiting`、`Done`、`All` のビューが追加され、キューもグループ化できるようになりました。マップには任意項目 `state_updated_at` と `unreadable_reason` が追加されます。人が起動した daemon は安全に受け入れられない権限や計画承認のダイアログを拒否します。agent 自身の作業上の質問は拒否せず、ログイン、権限バイパスの確認、フォルダー信頼は引き続き人が扱います。brain の拒否は明示的に処理され、1 時間に 3 回拒否するとその brain は退役します。分類付き blocker について brain に問い合わせられるようになりました。`ask_lead_to_resolve` アクションは、class が none、C3、C4、C7 の場合に限り、`resolver: lead` の blocker を計画の lead に送れます。C1（承認）、C2（同意またはログイン）、C5（損害）、C6（規約）は人が扱い、C1–C7 以外の class は拒否されます。pack 8.0.0 の journal-event/v8 blocker event と plan-snapshot/v8 blocker data も読み取ります。
 
-v2.2.0 はプロトコル 2 を維持し、**revive**（`autopilot --loop --revive`）を追加します。人がこのオプションを付けて daemon を起動することが許可になります。このマシン上の計画で、lead がいなくなったか、リセットまで 30 分を超える使用量上限に達しており、どの後継者も lane も引き継げない場合、その計画には新しい agent が 1 つ割り当てられます。これは `ak pick` が選んだクォータの残るアカウントで、ask モードで動作し、計画のチェックアウトから始まるワークスペースで起動します。daemon はその agent に 1 回限りのチケットを渡し、このチケットがある場合にのみ `lead takeover --reason revive` が許可されます。新しい lead は続いて `lead verify` を実行し、計画を再開します。lead がまだ動作している停滞した計画は決して引き継がれません。代わりに、その lead に新しい agent へ `lead handover` するよう 1 回だけ依頼します。上限は計画ごとに 6 時間あたり 1 回、計画ごとに合計 2 回、fleet 全体で 1 時間あたり 2 回で、daemon を再起動しても保持されます。古い pane を閉じたり、キーを送ったりすることはありません。revive のたびに `--notify` へ `plan_revived` イベントを 1 件送り、`fleet ui` はその lead を revive 済みとして表示します。2.0 または 2.1 の受信側は revive レコードを拒否します（フェイルクローズ）。daemon は認識できなかった画面のサニタイズ済みコピーも保持します。シークレットと鍵ブロックは除去され、テストケースとして追加できます。保持している数は `autopilot status` に表示されます。
+v2.2.1 はプロトコル 2 を維持し、**revive**（`autopilot --loop --revive`）を追加します。人がこのオプションを付けて daemon を起動することが許可になります。このマシン上の計画で、lead がいなくなったか、リセットまで 30 分を超える使用量上限に達しており、どの後継者も lane も引き継げない場合、その計画には新しい agent が 1 つ割り当てられます。これは `ak pick` が選んだクォータの残るアカウントで、ask モードで動作し、計画のチェックアウトから始まるワークスペースで起動します。daemon はその agent に 1 回限りのチケットを渡し、このチケットがある場合にのみ `lead takeover --reason revive` が許可されます。新しい lead は続いて `lead verify` を実行し、計画を再開します。lead がまだ動作している停滞した計画は決して引き継がれません。代わりに、その lead に新しい agent へ `lead handover` するよう 1 回だけ依頼します。上限は計画ごとに 6 時間あたり 1 回、計画ごとに合計 2 回、fleet 全体で 1 時間あたり 2 回で、daemon を再起動しても保持されます。古い pane を閉じたり、キーを送ったりすることはありません。revive のたびに `--notify` へ `plan_revived` イベントを 1 件送り、`fleet ui` はその lead を revive 済みとして表示します。2.0 または 2.1 の受信側は revive レコードを拒否します（フェイルクローズ）。daemon は認識できなかった画面のサニタイズ済みコピーも保持します。シークレットと鍵ブロックは除去され、テストケースとして追加できます。保持している数は `autopilot status` に表示されます。
 
 ## 補足
 

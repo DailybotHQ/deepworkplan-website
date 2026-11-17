@@ -101,7 +101,7 @@ Loop engineering ทำให้แผนดำเนินจนเสร็จ
 
 
 
-| สัญญา | สิ่งที่รับประกัน | แหล่งที่มา (herdr-peers v2.2.0) |
+| สัญญา | สิ่งที่รับประกัน | แหล่งที่มา (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | การลงทะเบียนแผน (`herdr-peers lead claim`) | แผนที่ลูปเฝ้าดูมีบันทึก lead พร้อม epoch และลำดับผู้สืบทอด เฉพาะผู้ถือ epoch สูงสุดเท่านั้นที่ทำหน้าที่เป็น lead | `skills/herdr-peers/protocol.md` §12 |
 | มนุษย์เท่านั้นที่เริ่มได้ (`herdr-peers autopilot start --loop`) | มีเพียงมนุษย์ที่เริ่ม daemon ด้วยคำพูดของตนเอง ไม่มีคำถาม คำตอบ หรือการแจ้งเตือนใดที่เริ่ม หยุด หรือเปลี่ยนสิ่งที่มันทำได้ | `skills/herdr-peers/autopilot.md` §1 |
@@ -127,16 +127,16 @@ harness เผยแพร่สิ่งที่แต่ละโฟลว์
 | `create` | 74,974|
 | `execute` | 55,136|
 | `resume` | 32,023|
-| `refine` | 76,797|
+| `refine` | 77,014|
 | `onboard` | 82,051|
 | `status` | 27,311|
 | `verify` | 36,701|
 
-หน่วย: ไบต์ในระบบไฟล์ วัดบนแพ็กที่ออกรุ่นแล้วด้วยคำสั่งต่อไปนี้: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2)
+หน่วย: ไบต์ในระบบไฟล์ วัดบนแพ็กที่ออกรุ่นแล้วด้วยคำสั่งต่อไปนี้: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3)
 
 ไม่แสดง token ของผู้ให้บริการ ต้นทุน และสถิติการปิดลูป: ยังไม่มีแหล่งที่ติดแท็กใดวัดค่าเหล่านี้ จึงไม่มีแถวสำหรับมัน ตัวเลข token แบบไบต์ ÷ 4 ของสคริปต์เป็นค่าประมาณที่ระบุไว้ชัดเจน ไม่ใช่การวัด
 
-[อ่านบัญชีการประเมิน](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[อ่านบัญชีการประเมิน](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

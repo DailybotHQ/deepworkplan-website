@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev), kodlama agent'larını hem kendi makinenizde hem de SSH üzerinden eriştiği makinelerde bölmelere yerleştirir. Bu eklenti, bir Deep Work Plan'ın bu agent'ları **eş** (peer) olarak kullanmasını sağlar: bir plan, sınırları belirli bir görevi başka bir bölmedeki bir agent'a devredebilir, tam olarak bir yetkili yanıt alabilir ve bu alışverişin kaydını tutabilir.
 
-Bu, **DWP v8**'nin (pack `v8.0.2`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
+Bu, **DWP v8**'nin (pack `v8.0.3`) isteğe bağlı bir eklentisidir. Metodoloji onsuz da aynı şekilde çalışır: eklenti yoksa ya da devre dışıysa, her görev tıpkı önceden olduğu gibi mevcut oturumda çalışır.
 
 Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
 
@@ -20,11 +20,11 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 
 ## Neyi entegre eder
 
-Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v2.2.0`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
+Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** yapar: **`v2.2.1`** sürümüne sabitlenmiş, Deep Work Plan olmadan da kullanışlı, bağımsız bir MIT skill'i. Herdr'ın kendisinin açık bıraktığı noktaları tanımlar: kimin yanıt verebileceğini, yanıtın makineler arasında geri dönüş yolunu nasıl bulduğunu, iki agent'ın birbirine sonsuza dek yanıt vermekten nasıl kaçındığını ve "sordum, yanıtladı" kaydının nerede tutulduğunu.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/herdr-peers`, `v2.2.0` etiketi, protokol 2 |
+| Ürün | `DailybotHQ/herdr-peers`, `v2.2.1` etiketi, protokol 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `herdr` |
 | Taşıma | etkileşimli: bir Herdr bölmesindeki eş |
 | Sağladıkları | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ Eklenti ince bir entegratördür. İşi, **[herdr-peers](https://github.com/Dail
 herdr-peers'ı ve onun bağımlı olduğu Herdr'ın resmî skill'ini kurun. Agent'larının yanıt vermesi gereken her makinede de bu skill bulunmalıdır.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers göndereni doğrulamaz: bir damgadaki `from=` alanı bir iddiadır. 
 
 ## Konteynerler ve ana makine
 
-devcontainer-kit `v1.4.1` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
+devcontainer-kit `v1.4.2` üzerindeki [devcontainer](/kit/devcontainer) eklentisiyle her dck konteyneri herdr-peers ile birlikte gelir ve `dck up` sırasında ağa katılır: agent'ları ana makinedeki, diğer konteynerlerdeki ve ana makinenin diğer loopback konteynerlerindeki agent'lara soru sorabilir ve yanıtı geri alabilir. `dck setup`, ana makineye doğrulanmış bir herdr-peers kurar; böylece ana makinedeki agent'lar da yanıt verir. Ana makine dinleyicisi ve diğer konteynerlerin içeri girmesine izin veren ek anahtarlar, kitin ana makine profilinde sizin vereceğiniz kararlardır; bu eklenti bunları asla ayarlamaz. herdr-peers (`v0.2.3`) sürümünden itibaren her makine kendi durumunu tutar (`$XDG_STATE_HOME/herdr-peers/<server>/`), böylece ana makine ile bir konteynerin paylaştığı bir çalışma kopyası artık kayıtlarını karıştırmaz; devcontainer-kit (`v0.3.3`) sürümünden itibaren de konteyner `HERDR_PEERS_SELF` değişkenini kendisi dışa aktarır, böylece içerideki Codex agent'ları elle bir adım gerekmeden diğer makinelere ulaşır.
 
 ## Herdr mı agentkit mi
 
@@ -136,7 +136,7 @@ v2.0.2, protokol 2'yi korur. Ask modundaki pick-v2 başlatma argümanlarında is
 
 v2.1.0, protokol 2'yi korur. `fleet ui`, kuyruklar dahil her gruplamada `Attention`, `Active`, `Waiting`, `Done` ve `All` görünümlerini ekler; haritaya isteğe bağlı `state_updated_at` ve `unreadable_reason` alanları eklenir. İnsan tarafından başlatılan daemon, güvenle kabul edemediği izin veya plan onayı iletişim kutularını reddeder. Bir agent'ın işe dair kendi sorusunu reddetmez; giriş, izinleri aşma onayı ve klasör güveni insana bırakılır. Brain reddi açıkça işlenir; bir saat içindeki üç ret o brain'i devre dışı bırakır. Brain'e artık sınıflandırılmış bir blocker hakkında soru sorulabilir. `ask_lead_to_resolve` action'ı, `resolver: lead` olan bir blocker'ı yalnızca sınıfı none, C3, C4 veya C7 ise planın lead'ine gönderebilir; C1 (onay), C2 (rıza veya giriş), C5 (hasar) ve C6 (şartlar) insana bırakılır, C1–C7 dışındaki sınıflar reddedilir. Sürüm ayrıca pack 8.0.0 journal-event/v8 blocker olaylarını ve plan-snapshot/v8 blocker verilerini okur.
 
-v2.2.0, protokol 2'yi korur ve **revive** özelliğini (`autopilot --loop --revive`) ekler; daemon'ı bu seçenekle başlatan insan, izni bu şekilde vermiş olur. Bu makinedeki bir planın lead'i kaybolmuşsa ya da sıfırlanmasına 30 dakikadan fazla olan bir kullanım sınırına takılmışsa ve hiçbir halef veya lane onu devralamıyorsa, plan yeni bir agent alır: `ak pick`'in seçtiği, kotası olan bir hesap; ask modunda, planın checkout'unda başlayan bir çalışma alanında çalışır. Daemon ona tek kullanımlık bir bilet verir; `lead takeover --reason revive` yalnızca bu biletle yapılabilir. Yeni lead ardından `lead verify` çalıştırır ve planı sürdürür. Lead'i hâlâ canlı olan, duraksamış bir plan asla devralınmaz: o lead'den bir kez, yeni agent'a `lead handover` yapması istenir. Sınırlar: plan başına 6 saatte bir revive, plan başına toplam iki ve tüm fleet genelinde saatte iki; bu sayaçlar daemon yeniden başlatıldığında da korunur. Eski pane asla kapatılmaz ve ona tuş gönderilmez. Her revive, `--notify` hedefine bir `plan_revived` olayı gönderir ve `fleet ui` lead'i revive edilmiş olarak işaretler. 2.0 veya 2.1 sürümündeki bir alıcı revive kaydını reddeder (fail closed). Daemon ayrıca tanıyamadığı her ekranın, gizli bilgileri ve anahtar blokları çıkarılmış, temizlenmiş bir kopyasını saklar; böylece ekran bir test vakası olarak eklenebilir. `autopilot status` kaç kopya tuttuğunu gösterir.
+v2.2.1, protokol 2'yi korur ve **revive** özelliğini (`autopilot --loop --revive`) ekler; daemon'ı bu seçenekle başlatan insan, izni bu şekilde vermiş olur. Bu makinedeki bir planın lead'i kaybolmuşsa ya da sıfırlanmasına 30 dakikadan fazla olan bir kullanım sınırına takılmışsa ve hiçbir halef veya lane onu devralamıyorsa, plan yeni bir agent alır: `ak pick`'in seçtiği, kotası olan bir hesap; ask modunda, planın checkout'unda başlayan bir çalışma alanında çalışır. Daemon ona tek kullanımlık bir bilet verir; `lead takeover --reason revive` yalnızca bu biletle yapılabilir. Yeni lead ardından `lead verify` çalıştırır ve planı sürdürür. Lead'i hâlâ canlı olan, duraksamış bir plan asla devralınmaz: o lead'den bir kez, yeni agent'a `lead handover` yapması istenir. Sınırlar: plan başına 6 saatte bir revive, plan başına toplam iki ve tüm fleet genelinde saatte iki; bu sayaçlar daemon yeniden başlatıldığında da korunur. Eski pane asla kapatılmaz ve ona tuş gönderilmez. Her revive, `--notify` hedefine bir `plan_revived` olayı gönderir ve `fleet ui` lead'i revive edilmiş olarak işaretler. 2.0 veya 2.1 sürümündeki bir alıcı revive kaydını reddeder (fail closed). Daemon ayrıca tanıyamadığı her ekranın, gizli bilgileri ve anahtar blokları çıkarılmış, temizlenmiş bir kopyasını saklar; böylece ekran bir test vakası olarak eklenebilir. `autopilot status` kaç kopya tuttuğunu gösterir.
 
 ## Notlar
 

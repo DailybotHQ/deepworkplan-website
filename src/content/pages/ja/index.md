@@ -101,7 +101,7 @@ Loop engineering は、人間がポーリングしなくても計画を完了さ
 
 
 
-| 契約 | 保証する内容 | 出典（herdr-peers v2.2.0） |
+| 契約 | 保証する内容 | 出典（herdr-peers v2.2.1） |
 | --- | --- | --- |
 | 計画の登録（`herdr-peers lead claim`） | ループが見守る計画には、エポックと継承順を持つリードレコードがあります。最も高いエポックの保持者だけがそのリードとして行動します。 | `skills/herdr-peers/protocol.md` §12 |
 | 人間だけが起動（`herdr-peers autopilot start --loop`） | デーモンを起動するのは、自分の言葉で指示した人間だけです。どの問い合わせ、返信、通知も、それを起動、停止したり、その動作を変えたりすることはできません。 | `skills/herdr-peers/autopilot.md` §1 |
@@ -127,16 +127,16 @@ Loop engineering は、人間がポーリングしなくても計画を完了さ
 | `create` | 74,974|
 | `execute` | 55,136|
 | `resume` | 32,023|
-| `refine` | 76,797|
+| `refine` | 77,014|
 | `onboard` | 82,051|
 | `status` | 27,311|
 | `verify` | 36,701|
 
-単位：ファイルシステム上のバイト数。リリース済みのパックで、次のコマンドにより計測：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.2）。
+単位：ファイルシステム上のバイト数。リリース済みのパックで、次のコマンドにより計測：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.3）。
 
 プロバイダーのトークン、コスト、ループ完結の統計は表示していません。それらを計測するタグ付きのソースがまだないため、行がありません。スクリプトが示すバイト数 ÷ 4 のトークン値はラベル付きの推定値であり、計測値ではありません。
 
-[評価台帳を読む](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[評価台帳を読む](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

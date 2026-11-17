@@ -33,7 +33,7 @@ Deep Work Plan には4つの柱があります。仕様ファースト、リポ�
 | レジストリキー | `dependency-upgrade` in `.dwp/config.json` |
 | 記述子 | `addons/dependency-upgrade/addon.json`（インターフェース 1） |
 | コマンド | 承認時に `.agents/commands/` にインストールされる `/lib-upgrade` |
-| バージョン管理 | スキルパックと連動して固定およびバージョン管理（`v8.0.2`） |
+| バージョン管理 | スキルパックと連動して固定およびバージョン管理（`v8.0.3`） |
 
 ## 補足
 

@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) menempatkan coding agent di dalam panel, di mesin Anda dan di mesin yang dijangkaunya melalui SSH. Addon ini memungkinkan sebuah Deep Work Plan menggunakan agen-agen tersebut sebagai **rekan** (peer): sebuah rencana dapat menyerahkan tugas yang terbatas kepada agen di panel lain, menerima tepat satu balasan yang diotorisasi, dan menyimpan catatan pertukaran tersebut.
 
-Ini adalah addon opsional dari **DWP v8** (pack `v8.0.2`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
+Ini adalah addon opsional dari **DWP v8** (pack `v8.0.3`). Metodologinya bekerja sama saja tanpanya: jika addon tidak ada atau dinonaktifkan, setiap tugas berjalan di sesi saat ini, persis seperti sebelumnya.
 
 Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
 
@@ -20,11 +20,11 @@ Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harne
 
 ## Apa yang diintegrasikan
 
-Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v2.2.0`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
+Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, sebuah skill MIT mandiri yang dipatok pada **`v2.2.1`** dan berguna tanpa Deep Work Plan. Skill ini mendefinisikan hal-hal yang dibiarkan terbuka oleh Herdr sendiri: siapa yang boleh menjawab, bagaimana jawaban menemukan jalan kembali lintas mesin, bagaimana dua agen menghindari saling menjawab tanpa henti, dan di mana catatan "saya bertanya, ia menjawab" disimpan.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/herdr-peers`, tag `v2.2.0`, protokol 2 |
+| Produk | `DailybotHQ/herdr-peers`, tag `v2.2.1`, protokol 2 |
 | Kunci registri | `herdr` di `.dwp/config.json` |
 | Transport | interaktif: rekan di panel Herdr |
 | Menyediakan | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ Addon ini adalah integrator yang tipis. Pekerjaannya dilakukan oleh **[herdr-pee
 Instal herdr-peers dan skill resmi Herdr yang menjadi dependensinya. Setiap mesin yang agennya perlu menjawab juga membutuhkan skill tersebut.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers tidak mengautentikasi pengirim: kolom `from=` dalam cap adalah sebua
 
 ## Container dan host
 
-Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.4.1`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual.
+Dengan addon [devcontainer](/kit/devcontainer) pada devcontainer-kit `v1.4.2`, setiap container dck menyertakan herdr-peers dan bergabung ke mesh saat `dck up`: agennya dapat bertanya kepada agen di host, di container lain, dan di container loopback lain milik host, lalu menerima balasannya. `dck setup` memasang herdr-peers yang terverifikasi di host, sehingga agen host juga dapat membalas. Listener host dan kunci tambahan yang mengizinkan container lain masuk adalah keputusan Anda di profil host kit; addon ini tidak pernah menyetelnya. Sejak herdr-peers (`v0.2.3`), setiap mesin menyimpan state-nya sendiri (`$XDG_STATE_HOME/herdr-peers/<server>/`), sehingga checkout yang dipakai bersama oleh host dan container tidak lagi mencampur catatan keduanya, dan sejak devcontainer-kit (`v0.3.3`) container mengekspor `HERDR_PEERS_SELF` sendiri, sehingga agen Codex di dalamnya menjangkau mesin lain tanpa langkah manual.
 
 ## Herdr atau agentkit
 
@@ -136,7 +136,7 @@ Rilis v2.0.2 mempertahankan protokol 2. Pada argumen peluncuran pick-v2 dalam mo
 
 Rilis v2.1.0 mempertahankan protokol 2. `fleet ui` menambahkan tampilan `Attention`, `Active`, `Waiting`, `Done` dan `All` pada setiap pengelompokan, termasuk antrean; peta menambahkan kolom opsional `state_updated_at` dan `unreadable_reason`. Daemon yang dimulai oleh manusia menolak dialog izin atau persetujuan rencana yang tidak dapat diterima dengan aman. Daemon tidak menolak pertanyaan kerja dari agent; login, konfirmasi bypass izin, dan kepercayaan folder tetap ditangani manusia. Penolakan brain ditangani secara eksplisit; tiga penolakan dalam satu jam membuat brain tersebut dihentikan. Brain kini dapat ditanya tentang blocker berkelas. Tindakan `ask_lead_to_resolve` hanya dapat mengirim blocker dengan `resolver: lead` kepada lead rencana jika kelasnya none, C3, C4, atau C7; C1 (persetujuan), C2 (consent atau login), C5 (kerusakan), dan C6 (ketentuan) tetap ditangani manusia, sedangkan kelas di luar C1–C7 ditolak. Rilis ini juga membaca peristiwa blocker journal-event/v8 dan data blocker plan-snapshot/v8 dari pack 8.0.0.
 
-Rilis v2.2.0 mempertahankan protokol 2 dan menambahkan **revive** (`autopilot --loop --revive`); manusia yang menjalankan daemon dengan opsi ini itulah pemberian izinnya. Rencana di mesin ini yang lead-nya hilang, atau terkena batas penggunaan yang baru direset lebih dari 30 menit lagi, dan tidak dapat diambil alih oleh penerus atau lane mana pun, mendapat satu agent baru: akun yang masih memiliki kuota dari `ak pick`, dalam mode ask, di workspace yang dimulai di checkout rencana tersebut. Daemon memberinya tiket sekali pakai yang menjadi satu-satunya izin untuk `lead takeover --reason revive`; lead baru lalu menjalankan `lead verify` dan melanjutkan rencana. Rencana yang macet sementara lead-nya masih hidup tidak pernah diambil alih: lead tersebut diminta satu kali untuk melakukan `lead handover` kepada agent baru. Batasnya: satu revive per rencana setiap 6 jam, dua per rencana, dan dua per jam di seluruh fleet, dan hitungan ini tetap tersimpan meskipun daemon dimulai ulang. Pane lama tidak pernah ditutup atau dikirimi tombol. Setiap revive mengirim satu peristiwa `plan_revived` ke `--notify`, dan `fleet ui` menandai lead tersebut sebagai hasil revive. Penerima 2.0 atau 2.1 menolak catatan revive (fail closed). Daemon juga menyimpan salinan yang telah disanitasi dari setiap layar yang tidak dapat dikenalinya, dengan rahasia dan blok kunci dihapus, agar dapat ditambahkan sebagai kasus uji; `autopilot status` menampilkan jumlah yang disimpannya.
+Rilis v2.2.1 mempertahankan protokol 2 dan menambahkan **revive** (`autopilot --loop --revive`); manusia yang menjalankan daemon dengan opsi ini itulah pemberian izinnya. Rencana di mesin ini yang lead-nya hilang, atau terkena batas penggunaan yang baru direset lebih dari 30 menit lagi, dan tidak dapat diambil alih oleh penerus atau lane mana pun, mendapat satu agent baru: akun yang masih memiliki kuota dari `ak pick`, dalam mode ask, di workspace yang dimulai di checkout rencana tersebut. Daemon memberinya tiket sekali pakai yang menjadi satu-satunya izin untuk `lead takeover --reason revive`; lead baru lalu menjalankan `lead verify` dan melanjutkan rencana. Rencana yang macet sementara lead-nya masih hidup tidak pernah diambil alih: lead tersebut diminta satu kali untuk melakukan `lead handover` kepada agent baru. Batasnya: satu revive per rencana setiap 6 jam, dua per rencana, dan dua per jam di seluruh fleet, dan hitungan ini tetap tersimpan meskipun daemon dimulai ulang. Pane lama tidak pernah ditutup atau dikirimi tombol. Setiap revive mengirim satu peristiwa `plan_revived` ke `--notify`, dan `fleet ui` menandai lead tersebut sebagai hasil revive. Penerima 2.0 atau 2.1 menolak catatan revive (fail closed). Daemon juga menyimpan salinan yang telah disanitasi dari setiap layar yang tidak dapat dikenalinya, dengan rahasia dan blok kunci dihapus, agar dapat ditambahkan sebagai kasus uji; `autopilot status` menampilkan jumlah yang disimpannya.
 
 ## Catatan
 

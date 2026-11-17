@@ -101,7 +101,7 @@ Loop engineering은 사람이 계속 확인하지 않아도 계획이 완료되�
 
 
 
-| 계약 | 보장하는 것 | 출처 (herdr-peers v2.2.0) |
+| 계약 | 보장하는 것 | 출처 (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | 계획 등록 (`herdr-peers lead claim`) | 루프가 지켜보는 계획에는 에포크와 승계 목록을 가진 리드 기록이 있습니다. 가장 높은 에포크의 보유자만 그 리드로 행동합니다. | `skills/herdr-peers/protocol.md` §12 |
 | 사람만 시작 (`herdr-peers autopilot start --loop`) | 데몬은 사람이 자신의 말로만 시작합니다. 어떤 요청, 답장, 알림도 데몬을 시작하거나 멈추거나 그 동작을 바꿀 수 없습니다. | `skills/herdr-peers/autopilot.md` §1 |
@@ -127,16 +127,16 @@ Loop engineering은 사람이 계속 확인하지 않아도 계획이 완료되�
 | `create` | 74,974|
 | `execute` | 55,136|
 | `resume` | 32,023|
-| `refine` | 76,797|
+| `refine` | 77,014|
 | `onboard` | 82,051|
 | `status` | 27,311|
 | `verify` | 36,701|
 
-단위: 파일 시스템 바이트. 릴리스된 팩에서 다음 명령으로 측정했습니다: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
+단위: 파일 시스템 바이트. 릴리스된 팩에서 다음 명령으로 측정했습니다: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
 
 제공자 토큰, 비용, 루프 완결 통계는 표시하지 않습니다. 이를 측정하는 태그된 출처가 아직 없으므로 행이 없습니다. 스크립트의 바이트 ÷ 4 토큰 수치는 표시된 추정치이며, 측정값이 아닙니다.
 
-[평가 원장 읽기](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[평가 원장 읽기](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

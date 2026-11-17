@@ -35,7 +35,7 @@ import sys
 import time
 import unicodedata
 
-VERSION = '2.2.0'
+VERSION = '2.2.1'
 PROTOCOL = 2          # the highest protocol this helper speaks (metadata.protocol)
 BASE_PROTOCOL = 1     # what every message is stamped with, except a granted lead notice
 SUPPORTED_PROTOCOLS = ('1', '2')
@@ -4478,6 +4478,24 @@ def autopilot_logs(store, count, follow):
             fh.close()
 
 
+def require_agentkit(flag):
+    """Stop unless coding-agents-kit with pick-v2 is installed: `flag` launches agents
+    only through `ak pick`, so the daemon refuses to start without it."""
+    import brain as brain_module
+    need = '.'.join(map(str, brain_module.AK_MIN))
+    ak = shutil.which('ak')
+    if not ak:
+        raise Stop(EXIT_USAGE, '%s needs coding-agents-kit (`ak`) on PATH: install %s or later, '
+                   'or start without %s' % (flag, need, flag))
+    rc, out = bounded_run([os.path.realpath(ak), '--version'], b'', 4096, 10)
+    found = re.search(r'(\d+)\.(\d+)\.(\d+) \(interface (\d+)\)', (out or b'').decode('utf-8', 'replace'))
+    if rc != 0 or not found or tuple(int(x) for x in found.groups()[:3]) < brain_module.AK_MIN \
+            or int(found.group(4)) != brain_module.AK_INTERFACE:
+        raise Stop(EXIT_USAGE, '%s needs coding-agents-kit %s or later (interface %d): '
+                   '`ak pick --kinds` (pick-v2); upgrade it with `ak update`'
+                   % (flag, need, brain_module.AK_INTERFACE))
+
+
 def autopilot_start(args, store, opts):
     """Spawn this very helper as a detached `autopilot run --detached`."""
     if autopilot_lock_held(store):
@@ -4700,17 +4718,18 @@ def cmd_autopilot(args):
                            'e.g. claude=sonnet')
             models[kind] = model
             brain_models_raw.append(raw)
-        if not shutil.which('ak'):
-            raise Stop(EXIT_USAGE, '--brain needs coding-agents-kit (`ak`) on PATH')
-        rc, out = bounded_run([os.path.realpath(shutil.which('ak')), '--version'], b'', 4096, 10)
-        found = re.search(r'(\d+)\.(\d+)\.(\d+) \(interface (\d+)\)', (out or b'').decode('utf-8', 'replace'))
-        if rc != 0 or not found or tuple(int(x) for x in found.groups()[:3]) < brain_module.AK_MIN \
-                or int(found.group(4)) != brain_module.AK_INTERFACE:
-            raise Stop(EXIT_USAGE, '--brain needs coding-agents-kit %s or later (interface %d): '
-                       '`ak pick --kinds` (pick-v2)' % ('.'.join(map(str, brain_module.AK_MIN)),
-                                                       brain_module.AK_INTERFACE))
+        require_agentkit('--brain')
         brain_kinds = ','.join(kinds)
         brain_opts = {'kinds': kinds, 'models': models}
+    if args.revive:
+        # Fail-closed like --brain: every revive is launched through `ak pick`, and a
+        # daemon without it would only spend each plan's revive caps on failures.
+        require_agentkit('--revive')
+    elif not args.brain and not args.detached and not shutil.which('ak'):
+        # Optional, so only a hint, once (the detached daemon does not repeat it).
+        warn('autopilot: coding-agents-kit (`ak`) is not installed. Autopilot works without '
+             'it; with it the daemon can launch agents on the account with the most quota '
+             '(--brain, --revive).')
     keep = []
     for name in args.notify_env or []:
         if not re.fullmatch(r'[A-Za-z_][A-Za-z0-9_]{0,63}', name):

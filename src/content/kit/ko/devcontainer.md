@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 애드온
 
-사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v8**(팩 `v8.0.2`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
+사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v8**(팩 `v8.0.3`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
 
 Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하니스, Loop engineering, 측정된 효율입니다. 애드온과 통합 기능은 하니스와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
 
@@ -23,20 +23,20 @@ Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하
 ## 설치
 
 ```bash
-git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.4.1`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
+요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.4.2`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.4.1`, 인터페이스 2 |
+| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.4.2`, 인터페이스 2 |
 | 레지스트리 키 | `.dwp/config.json`의 `devcontainer` |
 | 리포지토리별 설정 | `.devcontainer/dck.toml` |
 | 감지 | `dck doctor --json` |
 
-**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 현재 고정 버전을 담도록 하세요. `v1.4.1` 이미지에는 herdr-peers 2.2.0, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0이 들어 있습니다.
+**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 현재 고정 버전을 담도록 하세요. `v1.4.2` 이미지에는 herdr-peers 2.2.0, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0이 들어 있습니다.
 
 ## 레이어
 
@@ -127,6 +127,10 @@ copy_keys = true              # default false
 ## devcontainer-kit 1.4.1부터(인터페이스 2)
 
 릴리스 1.4.1은 패치입니다. 이미지는 herdr-peers 2.2.0을 포함하며, 옵트인 `autopilot --loop --revive`(리드와 모든 후계자가 사라진 계획에 새 에이전트 하나를 띄우며, 데몬을 시작하는 사람이 허가)가 추가됩니다. 리포지토리는 DeepWorkPlan 8.0.2를 사용합니다. 인터페이스 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0과 dck 자체의 인터페이스는 변경되지 않으며, dck는 데몬을 절대 시작하지 않습니다.
+
+## devcontainer-kit 1.4.2부터(인터페이스 2)
+
+1.4.2는 패치 릴리스입니다. `node-24` 이미지가 Node 24.22.3 보안 릴리스로 바뀝니다(1.4.1은 24.21.0을 고정했기 때문에 `dck init`이 24.22.x를 쓰는 저장소를 다운그레이드할 수 있었습니다). 또한 herdr-peers의 상태(`~/.local/state/herdr-peers` 아래의 위임 로그, 리드 기록, 응답, autopilot 상태)가 이제 컨테이너의 상태 볼륨(모드 0700)에 유지되어 재빌드 후에도 남습니다. 인터페이스 2, herdr-peers 2.2.0, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0은 바뀌지 않습니다.
 
 ## 보안 기본값
 

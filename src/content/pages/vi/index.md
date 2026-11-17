@@ -101,7 +101,7 @@ Loop engineering giúp kế hoạch hoàn tất mà không cần con người li
 
 
 
-| Hợp đồng | Điều nó bảo đảm | Nguồn (herdr-peers v2.2.0) |
+| Hợp đồng | Điều nó bảo đảm | Nguồn (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | Đăng ký kế hoạch (`herdr-peers lead claim`) | Một kế hoạch mà vòng lặp theo dõi có bản ghi lead với một epoch và thứ tự kế nhiệm. Chỉ bên giữ epoch cao nhất mới hành động với vai trò lead của nó. | `skills/herdr-peers/protocol.md` §12 |
 | Chỉ con người khởi động (`herdr-peers autopilot start --loop`) | Chỉ con người khởi động daemon, bằng chính lời của mình. Không yêu cầu, phản hồi hay thông báo nào có thể khởi động, dừng hoặc thay đổi việc nó làm. | `skills/herdr-peers/autopilot.md` §1 |
@@ -127,16 +127,16 @@ Harness công bố những gì mỗi luồng phải đọc trước khi bắt đ
 | `create` | 74.974|
 | `execute` | 55.136|
 | `resume` | 32.023|
-| `refine` | 76.797|
+| `refine` | 77.014|
 | `onboard` | 82.051|
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Đơn vị: byte hệ thống tệp. Đo trên gói đã phát hành bằng lệnh bên dưới: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
+Đơn vị: byte hệ thống tệp. Đo trên gói đã phát hành bằng lệnh bên dưới: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
 
 Token của nhà cung cấp, chi phí và thống kê khép vòng lặp không được hiển thị: chưa có nguồn gắn tag nào đo chúng, nên chúng không có hàng. Con số token bằng byte ÷ 4 của script là ước tính có ghi nhãn, không bao giờ là phép đo.
 
-[Đọc sổ đánh giá](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[Đọc sổ đánh giá](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

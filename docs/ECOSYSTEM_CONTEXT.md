@@ -20,13 +20,13 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 
 Versions are the release each surface pins today; the site may only claim a
 released tag (`tests/unit/lib/install-surface-pins.test.ts` guards the
-deepworkplan-skill pins). The pins last moved on 2026-11-16 with DWP 8.0.0: pack `v8.0.2`
+deepworkplan-skill pins). The pins last moved on 2026-11-17 with DWP 8.0.0: pack `v8.0.3`
 (DWP standard 8.0.0 — new plans default to `plan-contract/v8`, with the
 `autonomy` block, structured blockers in `journal-event/v8` and
 `plan-snapshot/v8`, and the `dwp-queue-v1` plan queue written by
 `shared/queue.py`; v7, v6 and v5 plans keep their recorded generation; the
 7.x line ended at 7.12.2),
-herdr-peers `v2.2.0` (1.1.0 adds native debates, 1.2.x adds autopilot, an
+herdr-peers `v2.2.1` (1.1.0 adds native debates, 1.2.x adds autopilot, an
 optional daemon only a human starts; 1.3.0 adds the loop — `autopilot
 --loop` keeps every open plan running to its end on every machine — plus
 the fleet UI and the read-only `plans`/`fleet` verbs; 2.0.0 moves the
@@ -43,35 +43,36 @@ metering and forces each CLI's ask mode under the opt-out; interface 1
 unchanged),
 deepworkplan-vim `v1.1.0`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
-reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.2`
-addon descriptors record herdr-peers `v2.2.0`, coding-agents-kit `v1.5.0`,
-devcontainer-kit 1.4.0 and deepworkplan-vim `v1.1.0`; the site pins the same
-releases, except devcontainer-kit `v1.4.1`, the patch that bakes herdr-peers
-2.2.0 and pack 8.0.2. devcontainer-kit 1.4.0 (interface 2 unchanged; 1.3.0 added the opt-in
+reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.3`
+addon descriptors record herdr-peers 2.2.0 (the site pins the `v2.2.1` patch), coding-agents-kit `v1.5.0`,
+devcontainer-kit `v1.4.2` and deepworkplan-vim `v1.1.0`; the site pins the same
+releases. devcontainer-kit 1.4.0 (interface 2 unchanged; 1.3.0 added the opt-in
 `[compose] container_only` key) bakes herdr-peers 2.1.0, coding-agents-kit
 1.5.0 and deepworkplan-vim 1.1.0 into its image and dogfoods pack 8.0.1; `v1.4.1`
-moves the image to herdr-peers 2.2.0 and dogfoods pack 8.0.2.
+moves the image to herdr-peers 2.2.0 and dogfoods pack 8.0.2; `v1.4.2` moves
+the `node-24` image to Node 24.22.3 and keeps herdr-peers' state on the state
+volume.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
-| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v8.0.2` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
+| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v8.0.3` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
 | ai-diff-reviewer | Required local review: reviews a change set locally and in CI; every Final Review runs it | Public | `v3.3.16` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
 | agent-skill | Addon (dailybot): progress reports, check-ins, chat and more | Public | `v3.23.20` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |
-| devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.4.1` | `/kit/devcontainer`, `/init.md` | Documented only |
+| devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.4.2` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon (agentkit): one `ak` command for every coding agent — accounts, quota, `ak pick`, headless runs | Public | `v1.5.0` | `/kit/agentkit`, `/init.md` | Documented only |
 | deepworkplan-vim | Addon (vim): the terminal editor for plans — plan browser, lanes view, Markdown viewer | Public | `v1.1.0` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
-| herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v2.2.0` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
+| herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v2.2.1` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
 
 ## Stable interfaces (1.0)
 
 The products move from 0.x to **1.0.0** once their public interface is stable:
 from then on an incompatible change ships only in a new major version, and
-additions arrive in minor versions. herdr-peers `v2.2.0` (CLI verbs, exit
+additions arrive in minor versions. herdr-peers `v2.2.1` (CLI verbs, exit
 codes, protocol 1, the `lanes-v1` and `lead-v1` contracts),
 coding-agents-kit `v1.5.0` (the `ak` command surface, interface 1, the JSON
 schemas), deepworkplan-vim `v1.1.0` (installer, addon surface, editor
-commands, `dwpvim.json`, keybindings) and devcontainer-kit `v1.4.1` (the `dck`
+commands, `dwpvim.json`, keybindings) and devcontainer-kit `v1.4.2` (the `dck`
 verbs, flags and exit codes, the `dck.toml`, host-profile and doctor schemas,
 interface 2, the render contract) are released; each 1.0.0 changes no
 behavior from its last 0.x release beyond what its CHANGELOG lists. The pack,
@@ -108,7 +109,7 @@ something that already exists:
 
 An orchestrator plan in this hub sequences those steps; see
 [Cross-project standards](CROSS_PROJECT_STANDARDS.md#orchestrator-plans).
-With coding-agents-kit `v1.5.0` and herdr-peers `v2.2.0` its lanes hand work on
+With coding-agents-kit `v1.5.0` and herdr-peers `v2.2.1` its lanes hand work on
 before an account runs out and the leadership survives the lead
 ([Swarm autonomy](https://deepworkplan.com/methodology/07-swarm-autonomy)).
 
