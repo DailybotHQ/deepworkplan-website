@@ -65,6 +65,7 @@ Command files in `.agents/commands/` are native slash commands in Claude Code. O
 
 ## Repository workflows
 
+- **Execution modes:** [Team Agents Reference](../../docs/technical/TEAM_AGENTS_REFERENCE.md) covers Sequential, Subagents, Team Agents, and Orchestrator selection.
 - DWP plans and tasks: use the installed [DeepWorkPlan skill](../skills/deepworkplan/SKILL.md) and its sub-skills. Plan state lives under git-ignored `.dwp/plans/`.
 - Documentation: see [Documentation Guide](../../docs/DOCUMENTATION_GUIDE.md).
 - Translations: synchronize all active locales; see [I18N Guide](../../docs/I18N_GUIDE.md).

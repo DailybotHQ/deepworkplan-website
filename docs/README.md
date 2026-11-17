@@ -51,7 +51,7 @@ Exact versions are declared in the root `package.json`.
 | TypeScript | 6.0.3 | Type-safe development |
 | Tailwind CSS | 4.3.3 | Styling |
 | Biome | 2.5.15 | Linting and formatting |
-| MDX | 8.0.3 | Markdown components |
+| `@astrojs/mdx` | 8.0.3 | Markdown components |
 | Sätteri | 0.10.5 | Markdown processing |
 
 ## Repository overview
