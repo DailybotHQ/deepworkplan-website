@@ -6,12 +6,15 @@ Quick start guide for AI coding assistants (Cursor AI, Claude Code, ChatGPT, Gem
 
 | Technology | Version | Purpose |
 |------------|---------|---------|
-| **Astro** | 5.16.15 | Static site generator (islands architecture) |
-| **Svelte** | 5.48.0 | Interactive components |
-| **TypeScript** | 5.9.3 | Type-safe development |
-| **Tailwind CSS** | 4.1.18 | Utility-first CSS framework |
-| **Biome** | 2.3.11 | Linter and formatter |
-| **MDX** | 4.3.13 | Enhanced Markdown for content collections |
+| **Astro** | 7.3.6 | Static site generator (islands architecture) |
+| **Svelte** | 5.57.2 | Interactive components |
+| **TypeScript** | 6.0.3 | Type-safe development |
+| **Tailwind CSS** | 4.3.3 | Utility-first CSS framework |
+| **Biome** | 2.5.15 | Linter and formatter |
+| **MDX** | 8.0.3 | Enhanced Markdown for content collections |
+| **Sätteri** | 0.10.5 | Markdown processing |
+
+`package.json` is the source of truth for versions. The project requires Node.js `>=24.20.0` and pins pnpm through `packageManager`.
 
 ## Project Type
 
@@ -102,7 +105,7 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 
 - Create the file in every active language folder in the same task: `src/content/{collection}/en/`, `.../es/`, `.../pt/`, `.../zh/`, … (same English slug throughout; use the `/translate-sync` skill)
 - Every non-English language MUST carry correct diacritics/scripts for that language (Spanish ñ/tildes/¿/¡; CJK full-width punctuation; Cyrillic; Thai; Devanagari; etc.)
-- Keep the matching `src/content/pages/{en,es,pt,zh,…}/*.md` endpoint in sync (`pnpm run md:check`)
+- Keep matching `src/content/pages/{lang}/*.md` endpoints in sync for all 17 active languages (`pnpm run md:check`)
 - Validate with `pnpm run build` and `pnpm run i18n:check`
 
 ### 8. Analytics Verification Policy
@@ -111,7 +114,7 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 - Do not add `PUBLIC_GOOGLE_SITE_VERIFICATION` or `google-site-verification` meta tags.
 - Keep Bing verification as optional env-based meta tag (`PUBLIC_BING_SITE_VERIFICATION`).
 
-## DWP v6 host and authority records
+## DWP v8 plans and host authority records
 
 The current DWP standard is 8.0.0, implemented by the installed 8.0.2 skill.
 New plans use the v8 contract (`plan-contract/v8`) by default; the addon
@@ -120,7 +123,7 @@ recorded generation and are never migrated implicitly (only an explicit
 `refine migrate`).
 A v5-to-v6 migration requires an explicit request and preview.
 
-V6 plans may use only capabilities that the runtime explicitly declares. The
+Plans may use only capabilities that the runtime explicitly declares. The
 website's minimal-host baseline is `stop_agent: false`, `meter_spend: false`,
 `meter_tokens: false`, `meter_wall_clock: false`, `cancel_children: false`,
 `model_routing: false`, `subagents: false`, and `telemetry: false`. A runtime
@@ -138,7 +141,7 @@ exhausted capacity); an escalation names its class.
 Follow the approval and review rules in [AGENTS.md](../AGENTS.md). Dailybot
 reporting remains opt-in/configuration-dependent and best effort.
 
-For v6 plan outcomes, use only observable checks that this repository actually
+For plan outcomes, use only observable checks that this repository actually
 supports. [Testing Guide → Selecting a Gate](TESTING_GUIDE.md#selecting-a-gate-for-a-change)
 maps touched surfaces to real commands and documents coverage limits; rendered
 multilingual content uses the i18n, Markdown parity, and build gates there.
@@ -223,7 +226,7 @@ export const GET: APIRoute = async () => {
 
 1. Create the file in every active language folder in the same task under `src/content/{collection}/{en,es,pt,zh,…}/` (same English slug throughout; use the `/translate-sync` skill)
 2. Verify frontmatter includes required fields (`title`, `description`, `order`, `lang`)
-3. Keep the matching `src/content/pages/{en,es,pt,zh,…}/*.md` endpoint in sync (`pnpm run md:check`)
+3. Keep matching `src/content/pages/{lang}/*.md` endpoints in sync for all 17 active languages (`pnpm run md:check`)
 4. Run `pnpm run build` and `pnpm run i18n:check` to validate
 
 ### Add a Component
@@ -235,7 +238,7 @@ export const GET: APIRoute = async () => {
 ### Add a Page
 
 1. Create shared component in `src/components/pages/*Page.astro` (handles `MainLayout` internally)
-2. Create thin wrappers in `src/pages/` and `src/pages/es/` (3 lines each, pass `lang` as string literal)
+2. Create one default-language wrapper in `src/pages/` and one shared dynamic wrapper in `src/pages/[lang]/` (thin wrappers pass `lang` to the page component)
 3. Add translation keys to `src/lib/translations/` if needed
 
 ## What NOT to Do

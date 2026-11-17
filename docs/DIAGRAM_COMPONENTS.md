@@ -109,7 +109,7 @@ Build only from the design tokens in `src/styles/global.css`:
 - **Root element:** `role="img"`, `aria-label={t.ariaLabel}`, explicit
   `aspect-ratio` (and `min-height` where helpful). Wrap in
   `src/components/editorial/Figure.astro` when a caption is wanted.
-- **Spec source:** the nodes, arrows, and EN/ES labels already exist in
+- **Spec source:** the nodes, arrows, and localized labels already exist in
   `docs/visuals/prompts/*.md` (from `PLAN_site_visual_prompt_pack`) — use the
   matching entry as the blueprint and the i18n seed.
 

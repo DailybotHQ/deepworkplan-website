@@ -78,13 +78,13 @@ curl -s https://deepworkplan.com/init.md | head -20
 curl -s -H 'Accept: text/markdown' https://deepworkplan.com/kit | head -5
 ```
 
-### New in this release: orchestration at scale
+### Current ecosystem surfaces
 
 - **[Running many agents](https://deepworkplan.com/methodology/06-orchestration)** — a lead and its lanes in Herdr panes on the host, in containers and on other machines; accounts chosen by headroom (`ak usage`, `ak pick`); herdr-peers coordination (`herdr-peers lanes`, `herdr-peers status`); one lane per repository with one branch and one release; launching and unblocking lanes with no human present, within strict limits.
-- **[agentkit](https://deepworkplan.com/kit/agentkit)** — accounts and profiles, `ak profiles --json`, `ak pick`, `--trust-cwd`, the `agentkit-orchestrate` skill.
-- **[devcontainer](https://deepworkplan.com/kit/devcontainer)** — host accounts inside the container (`[agents] host_profiles`, opt-in in the host profile; only the CLIs the repository installs).
-- **[Herdr](https://deepworkplan.com/kit/herdr)** and **[DeepWorkPlan Vim](https://deepworkplan.com/kit/vim)** — lane status and the `:DwpLanes` lanes view.
-- **`/init.md`** — a pinned-releases table with digests, an idempotent pass that detects every addon, upgrades the ones you use and offers the ones that fit, the devcontainer path to the full stack, and the unattended-lane rules.
+- **[agentkit](https://deepworkplan.com/kit/agentkit)** — the optional coding-agents-kit integration; see its release documentation for the supported commands.
+- **[devcontainer](https://deepworkplan.com/kit/devcontainer)** — an optional reproducible development container; see the pinned kit and its own documentation for current configuration.
+- **[Herdr](https://deepworkplan.com/kit/herdr)** and **[DeepWorkPlan Vim](https://deepworkplan.com/kit/vim)** — optional coordination and editor integrations, documented as separately released products.
+- **`/init.md`** — the canonical machine-executable adoption prompt. Its pins are maintained separately from this README; use that endpoint for current install instructions.
 
 ## How it fits with Deep Work Plan
 
@@ -128,7 +128,7 @@ pnpm run dev            # http://localhost:5555
 | Command | Description |
 | :------ | :---------- |
 | `pnpm run dev` | Start dev server at `localhost:5555` |
-| `pnpm run build` | Production build (prebuild regenerates `.agents/skills/index.json`, then `astro check && astro build`, then the rendered-emphasis check) |
+| `pnpm run build` | Production build (prebuild regenerates indexes and redirects; runs `astro check`, `astro build`, rendered-emphasis and anchor-resolution checks) |
 | `pnpm run astro:preview` | Preview production build locally |
 | `pnpm run biome:check` | Lint and format check |
 | `pnpm run biome:fix` | Auto-fix lint and format issues |

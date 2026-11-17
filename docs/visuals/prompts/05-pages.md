@@ -1,5 +1,8 @@
 # Prompt Pack — Standalone Page Visuals
 
+
+> **Historical reference:** This file reflects an earlier visual-planning pass. Route, component, asset, locale-coverage, and status claims may be stale. Verify against current source and `docs/DESIGN.md` / `docs/DIAGRAM_COMPONENTS.md` before reuse.
+
 > **Inherits:** [STYLE_GUIDE.md](../STYLE_GUIDE.md) — house style block (§1),
 > palette (§2), light/dark strategy (§3), typography (§4), dimensions (§5), asset
 > paths (§6), bilingual EN/ES policy (§7), accessibility (§8), negative

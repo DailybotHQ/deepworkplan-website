@@ -1,5 +1,8 @@
 # Theme-toggle lamp — 4 states (light/dark × off/hover)
 
+
+> **Historical reference:** This file reflects an earlier visual-planning pass. Route, component, asset, locale-coverage, and status claims may be stale. Verify against current source and `docs/DESIGN.md` / `docs/DIAGRAM_COMPONENTS.md` before reuse.
+
 Generate the editorial **dark-mode toggle** that replaces the generic floating
 button. The toggle is a small **hurricane (oil) lamp** illustration placed
 inline in the masthead, next to the `Deep Work Plan` wordmark. Clicking it

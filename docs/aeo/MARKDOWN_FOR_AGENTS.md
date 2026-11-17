@@ -30,7 +30,7 @@ Cloudflare offers [Markdown for Agents](https://blog.cloudflare.com/markdown-for
 | `/{page}.md` (EN) | `/about.md`, `/contact.md`, `/compare.md`, `/faq.md`, `/quickstart.md` |
 | `/{lang}/{page}.md` | `/es/about.md`, `/es/compare.md`, `/es/faq.md`, `/es/quickstart.md` |
 
-Source: `src/content/pages/{lang}/` content collection for every active language. `/init.md` is a separate case — see below.
+Source: `src/content/pages/{en,es}/` content collection. `/init.md` is a separate case — see below.
 
 ### Standalone agent artifacts (not content-collection pages)
 
@@ -69,9 +69,9 @@ Markdown: send header `Accept: text/markdown` on any URL to receive Markdown ins
 | `functions/_middleware.ts` | Content negotiation (Accept: text/markdown, Accept: application/json) |
 | `src/lib/markdown-for-agents.ts` | Serialization helpers |
 | `src/lib/json-envelope.ts` | JSON envelope negotiation (precedence, title/language detection, envelope shape) |
-| `src/pages/[page].md.ts` | EN page endpoint |
-| `src/pages/es/[page].md.ts` | ES page endpoint |
-| `src/content/pages/{lang}/` | Page Markdown source files for every active language |
+| `src/pages/[page].md.ts` | English page endpoint |
+| `src/pages/[lang]/[page].md.ts` | Non-English page endpoints for every active language |
+| `src/content/pages/{lang}/` | Localized page Markdown source files |
 | `src/content.config.ts` | Pages collection schema |
 | `tests/unit/lib/markdown-for-agents.test.ts` | Unit tests |
 
@@ -97,11 +97,11 @@ The navigation is generated programmatically by `generateSiteNavigation(lang)` i
 
 ### Content Collections
 
-- **Pages**: `pages` collection in `src/content/pages/`. Each page has a version for every active language.
+- **Pages**: `pages` collection in `src/content/pages/`. Localized versions use the same slug under each active language directory.
 
 ## Scalability
 
-- **New page** → Add a `.md` file to `src/content/pages/{lang}/` for every active language; a `.md` endpoint is generated for each route
+- **New page** → Add a `.md` file to `src/content/pages/{en,es}/` and a `.md` endpoint is generated
 - **Content updates** → Reflected on next build automatically
 
 ## Performance Impact
@@ -247,8 +247,8 @@ candidates for review, not automatic defects.
 
 ## Maintenance
 
-- **Page Markdown MUST stay in sync with HTML content** — when translation strings or page components (`*Page.astro`) change, update the corresponding files for every active language in `src/content/pages/`
-- **Every active language required** — changes to a page's `.md` endpoint must be synchronized across all active language files.
+- **Page Markdown MUST stay in sync with HTML content** — when translations or page components (`*Page.astro`) change, update the corresponding files in `src/content/pages/{lang}/` for every active language.
+- **Every active language required** — localized page documents must cover the same semantic sections; the active set is the 17 locale codes documented in `AGENTS.md` and checked by `pnpm run i18n:check`.
 - **Include internal links** — page Markdown should contain links to other site pages so agents can discover the full site structure
 - **Full content, not summaries** — page Markdown should match the semantic content of the HTML page (strip presentation chrome, keep all text, links, and structure)
 - **Discovery files** — `llms.txt` and `llms-full.txt` reference the endpoints
@@ -256,11 +256,11 @@ candidates for review, not automatic defects.
 
 ### Sync Rule for AI Agents
 
-**When ANY of these change, update the corresponding `src/content/pages/{lang}/*.md` files for every active language:**
+**When ANY of these change, update the corresponding Markdown page in every active `src/content/pages/{lang}/` directory:**
 
 | What Changed | Files to Update |
 |---|---|
-| Translation strings in a locale file | `src/content/pages/{lang}/{page}.md` |
-| Page component (`*Page.astro`) adds/removes sections | Matching `.md` files in every active language |
-| New page created (via `/add-page` skill) | `.md` files in every active language (Step 4 of skill) |
-| Page removed | Remove its `.md` files from every active language |
+| Translation strings in `{lang}.ts` | `src/content/pages/{lang}/{page}.md` |
+| Page component (`*Page.astro`) adds/removes sections | Every active language's `.md` file |
+| New page created (via `/add-page` skill) | Add localized `.md` files for every active language (Step 4 of skill) |
+| Page removed | Remove the corresponding `.md` files for every active language |

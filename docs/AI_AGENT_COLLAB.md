@@ -8,8 +8,8 @@ Multiple AI agents can work on this codebase:
 
 | Agent | Guidance File | Capabilities |
 |-------|--------------|--------------|
-| **Cursor AI** | `.cursorrules` (if exists), `AGENTS.md` | Full IDE integration |
-| **Claude Code** | `CLAUDE.md` → `AGENTS.md` | Terminal access, file editing |
+| **Cursor AI** | `AGENTS.md`, `.cursor/` compatibility symlink to `.agents/` | IDE integration |
+| **Claude Code** | `CLAUDE.md` compatibility symlink to `AGENTS.md`; `.claude/` points to `.agents/` | Terminal access, file editing |
 | **ChatGPT/Codex** | `AGENTS.md` | Code generation, review |
 | **Gemini** | `AGENTS.md` | Code generation, analysis |
 | **GitHub Copilot** | Context-based | Inline completions |
@@ -21,9 +21,9 @@ Multiple AI agents can work on this codebase:
 ```
 AGENTS.md ← Single source of truth
     │
-    ├── CLAUDE.md imports via @AGENTS.md
-    ├── Cursor reads directly
-    └── Others reference directly
+    ├── CLAUDE.md → AGENTS.md (compatibility symlink)
+    ├── .claude/ and .cursor/ → .agents/ (compatibility symlinks)
+    └── Other agents read AGENTS.md directly
 ```
 
 ### Synchronization Rules
@@ -31,7 +31,7 @@ AGENTS.md ← Single source of truth
 When updating agent guidance:
 
 1. **Update `AGENTS.md`** with the change
-2. **Verify `CLAUDE.md`** still imports correctly
+2. **Verify the `CLAUDE.md` symlink** still points to `AGENTS.md`
 3. **Don't duplicate** - Keep info in one place
 
 ## Agent Handoff Protocol
@@ -106,7 +106,7 @@ git commit -m "feat: add scroll-spy nav to methodology reader
 
 - Highlights the active section while scrolling
 - Uses IntersectionObserver (no scroll listener)
-- Bilingual labels via getTranslations(lang)"
+- Localized labels via getTranslations(lang)"
 
 # Bad - vague
 git commit -m "add nav"
@@ -122,7 +122,7 @@ Added scroll-spy navigation to the methodology reader.
 
 ## Changes
 - New ScrollSpyNav.svelte component (IntersectionObserver-based)
-- Wired into MethodologyPage.astro with bilingual labels
+- Wired into MethodologyPage.astro with localized labels
 
 ## Testing
 - [x] Active section highlights correctly
