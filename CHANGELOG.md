@@ -9,6 +9,17 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.78] - 2026-11-17
+
+### Changed
+
+- fix: zh and tr devcontainer bullets name v1.4.1; the drift test reads prose between the link and its parenthesis
+- fix: v1.4.1 bake line names herdr-peers 2.2.0; CJK pins move to the current tags; the drift test reads the CJK parenthetical form
+- feat: pin devcontainer-kit v1.4.1; the addon registry records the latest releases
+- docs: LoopDiagram takes HP-12 with its own inventory row; lead-sentence JSDoc and homepage twin dates
+- feat: restore the lighthouse hero, move the loop below, expand the loop chapter
+- chore: addon registry records the latest ecosystem releases
+
 ## [5.0.77] - 2026-11-17
 
 ### Changed
@@ -1556,7 +1567,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.77...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.78...HEAD
+[5.0.78]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.78
 [5.0.77]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.77
 [5.0.76]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.76
 [5.0.75]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.75
