@@ -41,6 +41,25 @@ describe('public/api/v1 family', () => {
     expect(sections.sections).toEqual(SITE_SECTIONS);
   });
 
+  it('MCP and API section listings expose all eight addon pages and v8 loop readers', () => {
+    const paths = SITE_SECTIONS.map(({ path }) => path);
+    for (const addon of [
+      'ai-diff-reviewer',
+      'agentkit',
+      'dailybot',
+      'dependency-upgrade',
+      'design-system',
+      'devcontainer',
+      'herdr',
+      'vim',
+    ]) {
+      expect(paths).toContain(`/kit/${addon}`);
+    }
+    expect(paths).toContain('/methodology/08-loop-engineering');
+    expect(paths).toContain('/spec/loop-engineering');
+    expect(paths).toContain('/changelog/deep-work-plan-v8');
+  });
+
   it('pages.json lists every active language (including en) with sorted slugs', () => {
     const codes = (pages.languages as { code: string; pages: string[] }[]).map(
       (l) => l.code
