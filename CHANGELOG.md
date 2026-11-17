@@ -9,6 +9,57 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.77] - 2026-11-17
+
+### Changed
+
+- fix: zh and th Herdr product rows name v2.2.0; dev.sh keeps the container's own dck checksum
+- feat: pin pack v8.0.2
+- docs: kit herdr page documents herdr-peers 2.2.0 revive
+- feat: pin herdr-peers v2.2.0
+- fix: nest the loop-semantics subsections under 1.1 in the translated loop-engineering pages
+- docs: complete localized loop engineering spec
+- docs: kit devcontainer page documents devcontainer-kit 1.4.0
+- docs: record devcontainer-kit 1.4.0 in AGENTS and the ecosystem context
+- feat: pin devcontainer-kit v1.4.0
+- fix(i18n): complete v8 homepage messaging
+- fix: llms names the live addons as v8; dwp.json records the v8.0.1 conformance run
+- feat: pin pack v8.0.1 (vim v1.1.0 in its descriptor)
+- docs: kit vim page documents DeepWorkPlan Vim 1.1.0
+- feat: pin DeepWorkPlan Vim v1.1.0 and serve its verified installer
+- docs: update v8 conformance validation wording
+- feat: refresh the site to DWP 8.0.0
+- docs: stage AGENTS and ecosystem context for DWP 8.0.0 and the 8.0.0 addon pins
+- docs(site): preserve additive v8 descriptor contract
+- feat: the loop plate cites the pack's queue writer for dwp-queue-v1
+- docs: stage DWP v8 specification wording
+- feat: hermes and openclaw pages cover v8 plans
+- docs(v8): stage tag-day adoption copy
+- docs(site): stage v8 tag-day surfaces
+- feat: kit pages move to DWP v8 (pack 8.0.0) and current addon releases
+- docs(changelog): sync v8 release notes across locales
+- docs: stage DWP 8.0.0 standard wording, v8 changelog contract section, v7 entry unfeatured
+- chore: local stage of the six v8 lanes against pack 8.0.0-beta.1 (not for push)
+- docs(kit): clarify Herdr blocker routing
+- docs(kit): document Herdr 2.0.1 to 2.1.0 history
+- docs(kit): document coding-agents-kit 1.5.0 history
+- fix(landing): align v8 copy and loop semantics
+- docs(positioning): align product spec with v8 lead
+- docs(init): lead sentence and an optional, human-started loop in the pillars line
+- docs(pages): methodology twin on the v8 four pillars and eight chapters, 17 languages
+- fix(kit): tr design-system duplicate table, tr/id herdr 2.0.0 terminology
+- docs(methodology): manifesto on the v8 four pillars, 17 languages
+- docs(spec): add loop engineering v8 reader
+- feat(landing): add optional Herdr loop adoption guidance
+- fix(kit): cross-review of the v8 addon pages and the Herdr loop plate
+- fix(methodology): cross-review of the loop engineering chapter — facts, 17-language parity
+- feat(changelog): add v8 loop engineering entry
+- docs(positioning): align hub guidance with v8 pillars
+- chore: v8 landing follow-up — plate tests, retire the hero engraving, JSON-LD on the lead sentence
+- docs(methodology): add loop engineering chapter
+- content(kit): document v2 loop engineering addons
+- feat: v8 homepage — loop diagram hero, four pillars, loop engineering, measured efficiency
+
 ## [5.0.76] - 2026-11-16
 
 ### Changed
@@ -1505,7 +1556,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.76...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.77...HEAD
+[5.0.77]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.77
 [5.0.76]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.76
 [5.0.75]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.75
 [5.0.74]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.74
