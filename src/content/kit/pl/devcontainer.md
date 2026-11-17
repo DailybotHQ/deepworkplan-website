@@ -23,20 +23,20 @@ Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop e
 ## Instalacja
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v1.4.0`: `v0.2.0` nie jest obsługiwane.
+Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v1.4.1`: `v0.2.0` nie jest obsługiwane.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, tag `v1.4.0`, interfejs 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, tag `v1.4.1`, interfejs 2 |
 | Klucz rejestru | `devcontainer` w `.dwp/config.json` |
 | Konfiguracja repozytorium | `.devcontainer/dck.toml` |
 | Wykrywanie | `dck doctor --json` |
 
-**Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie wyłącznie w nowej wersji głównej (a w przypadku plików — z nowym numerem interfejsu): czasowniki `dck` wraz z udokumentowanymi flagami i kodami wyjścia (`0` sukces, `1` błąd, `2` użycie, `3` konfiguracja, `4` środowisko, `5` odmowa), schematy `dck.toml`, profilu hosta i `dck doctor --json` (interfejs 2) oraz kontrakt renderowania — pliki, które `dck init` zapisuje i którymi zarządza, znaczniki `dck:managed` i bloki użytkownika, które zachowuje, oraz środowisko odczytywane przez entrypoint. Przy przejściu z `v0.3.7` nic się nie psuje: uruchom `dck init` i `dck rebuild`, aby obraz zawierał aktualne przypięte wersje. Obraz `v1.4.0` zawiera herdr-peers 2.1.0, coding-agents-kit 1.5.0 i DeepWorkPlan Vim 1.1.0.
+**Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie wyłącznie w nowej wersji głównej (a w przypadku plików — z nowym numerem interfejsu): czasowniki `dck` wraz z udokumentowanymi flagami i kodami wyjścia (`0` sukces, `1` błąd, `2` użycie, `3` konfiguracja, `4` środowisko, `5` odmowa), schematy `dck.toml`, profilu hosta i `dck doctor --json` (interfejs 2) oraz kontrakt renderowania — pliki, które `dck init` zapisuje i którymi zarządza, znaczniki `dck:managed` i bloki użytkownika, które zachowuje, oraz środowisko odczytywane przez entrypoint. Przy przejściu z `v0.3.7` nic się nie psuje: uruchom `dck init` i `dck rebuild`, aby obraz zawierał aktualne przypięte wersje. Obraz `v1.4.1` zawiera herdr-peers 2.2.0, coding-agents-kit 1.5.0 i DeepWorkPlan Vim 1.1.0.
 
 ## Warstwy
 
@@ -123,6 +123,10 @@ Wydanie 1.4.0 zachowuje interfejs 2 i aktualizuje wersje wbudowane w obraz; wła
 - **coding-agents-kit 1.5.0 (interfejs 1).** Przy `AGENTKIT_PERMISSIONS=ask` lub `--ask` wymuszany jest własny tryb pytania każdego CLI, więc konto, którego ustawienia domyślnie wskazują tryb autonomiczny, nie uruchamia się już autonomicznie; `ak run --json` podaje liczbę tokenów tylko wtedy, gdy podaje ją CLI. Warstwa `agents` nadal nie ustawia żadnej flagi autonomii.
 - **DeepWorkPlan Vim 1.1.0.** Ten sam Neovim (0.12.5); edytor wyświetla kolejkę planów, ustrukturyzowane blokady i postawę autonomii pakietu 8.0 w trybie tylko do odczytu, a plan v7 jest wyświetlany jak dotąd.
 - **Repozytorium samo używa DeepWorkPlan 8.0.1.** Nowe plany zapisują `plan-contract/v8`; plany v7, v6 i v5 zachowują swoją generację.
+
+## Od devcontainer-kit 1.4.1 (interfejs 2)
+
+Wydanie 1.4.1 to poprawka: obraz zawiera herdr-peers 2.2.0, który dodaje opcjonalne `autopilot --loop --revive` (jeden nowy agent dla planu, którego lider i wszyscy następcy zniknęli, za zgodą człowieka uruchamiającego demona), a repozytorium korzysta z DeepWorkPlan 8.0.2. Interfejs 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 i własna powierzchnia dck pozostają bez zmian; dck nigdy nie uruchamia demona.
 
 ## Domyślne ustawienia bezpieczeństwa
 

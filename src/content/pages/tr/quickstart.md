@@ -107,7 +107,7 @@ teşvik edilir: dikkatli bir ajan, denetlenene kadar alınan bir istemi güvenil
   | deepworkplan-skill | `v8.0.2` | `332e8f9a51fe818f5e78839f99f92b60fce2b6eed8383d5e90b91c994ca019f5` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
   | herdr-peers | `v2.2.0` | `694766b8ee39ee57b0ce39e8d31a64ca018830159aec7989226f1d094a4c8c2c` |
-  | devcontainer-kit | `v1.4.0` | `67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2` |
+  | devcontainer-kit | `v1.4.1` | `ef3043e6c94643538d0e1205d1b1f1fca4168820aa47ef32680b74a186c4e792` |
   | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | yayımlanmadı — skills CLI, `skills-lock.json` içine bir içerik özeti kaydeder |
@@ -245,7 +245,7 @@ Tablo bir kontrol listesi değil, bir başvuru tablosudur: bir satırı yalnızc
 | Dailybot | `.agents/skills/dailybot/SKILL.md` içindeki `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | kurulu herdr-peers skill’i içindeki `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh adresindeki doğrulanmış kurucu (`v1.1.0` sürümüne sabitler; indirin, `shasum -a 256 -c install.sh.sha256`, ardından çalıştırın) |
 
 Her indirmeyi çalıştırmadan önce sürümünün `SHA256SUMS` dosyasına ve yukarıdaki *Sabitlenmiş
@@ -259,7 +259,7 @@ standardından itibaren gereklidir): yukarıdaki etikete sabitlenmiş skill art�
 upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim) sıralayın ve yalnızca bu depoya uyanları, her birini açık bir tercih
 olarak sunun. Bir depo, **sıfır** isteğe bağlı eklentiyle tümüyle uyumludur — onları asla otomatik kurmayın.
 
-- **Devcontainer desteği** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) için ince bir entegrasyon katmanı (`dck`, `v1.3.0` sürümüne sabitlenmiş, `dck-dockerfile` becerisiyle birlikte): `dck init` deponun kendi konteynerini oluşturur — özetle (digest) sabitlenmiş resmî imaj, ortak temel imaj yok, `bash dev.sh up` — ve mevcut bir devcontainer’ı yalnızca farkı (diff) kabul edildikten sonra uzlaştırır. Kabul edildiğinde, tam yığına ulaşmak için aşağıdaki *Devcontainer yolu*nu izleyin.
+- **Devcontainer desteği** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) için ince bir entegrasyon katmanı (`dck`, `v1.4.1` sürümüne sabitlenmiş, `dck-dockerfile` becerisiyle birlikte): `dck init` deponun kendi konteynerini oluşturur — özetle (digest) sabitlenmiş resmî imaj, ortak temel imaj yok, `bash dev.sh up` — ve mevcut bir devcontainer’ı yalnızca farkı (diff) kabul edildikten sonra uzlaştırır. Kabul edildiğinde, tam yığına ulaşmak için aşağıdaki *Devcontainer yolu*nu izleyin.
 - **Dailybot entegrasyonu** — dört yaşam döngüsü olayı (kickoff, önemli görev, engellendi, tamamlandı) olarak zaten Dailybot kullanan ekipler için en iyi çabayla ilerleme raporlaması; isteğe bağlı otonom kanca zorlama (`dailybot-cli >= 3.9.0`). Eşleştirilmiş Dailybot ajan skill’inin (3.23.20) kurulması ayrıca sohbet, check-in’ler, form yazarlığı, AI’ye sorma, Plan panoları ve görevleri, depo başına API anahtarları ve daha fazlasını açar — eklenti yalnızca raporlamayı DWP yürütmesine bağlar. Çekirdek metodolojinin Dailybot’a hiçbir bağımlılığı yoktur.
 - **Dependency upgrade** — paket yöneticisinden bağımsız, gruplanmış, doğrulanmış, geri alınabilir
   yükseltmeler. Kabul edildiğinde, `/lib-upgrade` komutunu kurar.

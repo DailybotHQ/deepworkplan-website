@@ -23,20 +23,20 @@ Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하
 ## 설치
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.4.0`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
+요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.4.1`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.4.0`, 인터페이스 2 |
+| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.4.1`, 인터페이스 2 |
 | 레지스트리 키 | `.dwp/config.json`의 `devcontainer` |
 | 리포지토리별 설정 | `.devcontainer/dck.toml` |
 | 감지 | `dck doctor --json` |
 
-**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 현재 고정 버전을 담도록 하세요. `v1.4.0` 이미지에는 herdr-peers 2.1.0, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0이 들어 있습니다.
+**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 현재 고정 버전을 담도록 하세요. `v1.4.1` 이미지에는 herdr-peers 2.2.0, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0이 들어 있습니다.
 
 ## 레이어
 
@@ -123,6 +123,10 @@ copy_keys = true              # default false
 - **coding-agents-kit 1.5.0(인터페이스 1).** `AGENTKIT_PERMISSIONS=ask` 또는 `--ask`에서는 각 CLI 자체의 확인 모드가 강제되므로, 설정 기본값이 자율 모드인 계정도 더 이상 자율 모드로 시작하지 않습니다. `ak run --json`은 CLI가 토큰 수를 보고할 때만 토큰 수를 보고합니다. `agents` 레이어는 여전히 자율성 플래그를 쓰지 않습니다.
 - **DeepWorkPlan Vim 1.1.0.** Neovim은 동일합니다(0.12.5). 편집기는 팩 8.0의 플랜 큐, 구조화된 블로커, 자율성 태세를 읽기 전용으로 표시하며, v7 플랜은 이전과 같이 표시됩니다.
 - **이 리포지토리는 DeepWorkPlan 8.0.1을 직접 사용합니다.** 새 플랜은 `plan-contract/v8`을 기록하고, v7, v6, v5 플랜은 기존 세대를 유지합니다.
+
+## devcontainer-kit 1.4.1부터(인터페이스 2)
+
+릴리스 1.4.1은 패치입니다. 이미지는 herdr-peers 2.2.0을 포함하며, 옵트인 `autopilot --loop --revive`(리드와 모든 후계자가 사라진 계획에 새 에이전트 하나를 띄우며, 데몬을 시작하는 사람이 허가)가 추가됩니다. 리포지토리는 DeepWorkPlan 8.0.2를 사용합니다. 인터페이스 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0과 dck 자체의 인터페이스는 변경되지 않으며, dck는 데몬을 절대 시작하지 않습니다.
 
 ## 보안 기본값
 
