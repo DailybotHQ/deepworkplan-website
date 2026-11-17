@@ -100,12 +100,12 @@ export const id: SiteTranslations = {
         'Spec-first, loop tertutup: Deep Work Plan menjadikan repositori Anda harness bagi AI coding agent; tiap rencana berjalan tuntas di loop yang dimulai manusia.',
     },
     hero: {
-      badge: 'Metodologi terbuka · MIT · Agnostik terhadap agent',
+      eyebrow: 'Spesifikasi dulu · loop tertutup',
       leadSentence:
         'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
-      headline: 'Spec-first, loop tertutup.',
+      headline: 'Agen AI apa pun bisa menuntaskan kerja di repo Anda.',
       subtitle:
-        'Repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
+        'Repositori Anda menyimpan rencana, konteks, dan pemeriksaan, sehingga pekerjaan bertahan melewati restart, berpindah antar-agen, dan terus berputar sampai setiap gerbang lolos — dalam batas wewenang yang Anda berikan.',
       instructionLabel: 'Salin ke agent Anda',
       instruction:
         'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',

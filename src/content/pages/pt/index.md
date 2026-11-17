@@ -4,9 +4,11 @@ description: "Especificação primeiro, loop fechado: o Deep Work Plan faz do re
 lastUpdated: 2026-11-17
 ---
 
-## Especificação primeiro, loop fechado.
+*Especificação primeiro · ciclo fechado*
 
-O repositório é o harness e o plano se executa sozinho até a conclusão.
+## Faça qualquer agente de IA concluir o trabalho no seu repo.
+
+Seu repositório guarda o plano, o contexto e as verificações, então o trabalho sobrevive a reinícios, passa de um agente para outro e segue em ciclo até que todas as validações passem, dentro da autoridade que você concede.
 
 O Deep Work Plan (DWP) é uma metodologia e um kit abertos, licenciados sob MIT, para planejar e executar trabalho de software complexo com agentes de IA. Você não escolhe um método de instalação nem copia um template — você copia o prompt do init.md e cola no seu agente:
 

@@ -4,9 +4,11 @@ description: "Spec-first, loop tertutup: Deep Work Plan menjadikan repositori An
 lastUpdated: 2026-11-17
 ---
 
-## Spec-first, loop tertutup.
+*Spesifikasi dulu · loop tertutup*
 
-Repositori adalah harness dan rencana berjalan sendiri hingga selesai.
+## Agen AI apa pun bisa menuntaskan kerja di repo Anda.
+
+Repositori Anda menyimpan rencana, konteks, dan pemeriksaan, sehingga pekerjaan bertahan melewati restart, berpindah antar-agen, dan terus berputar sampai setiap gerbang lolos — dalam batas wewenang yang Anda berikan.
 
 Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk merencanakan dan mengeksekusi pekerjaan perangkat lunak yang kompleks bersama AI agent. Anda tidak memilih metode pemasangan atau menyalin template — Anda menyalin prompt init.md dan menempelkannya ke agent Anda:
 
