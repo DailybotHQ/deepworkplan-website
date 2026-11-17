@@ -181,7 +181,7 @@ export const en: SiteTranslations = {
       badge: 'Loop engineering',
       title: 'Plans run to their end. Authority stays with people.',
       subtitle:
-        'Loop engineering is how a plan finishes without a human polling it. Each row below is a released contract of herdr-peers, the optional Herdr addon: the methodology works without it, and the loop only amplifies it.',
+        'Loop engineering is how a plan finishes without a human polling it. Rows below describe released contracts in the loop: most come from herdr-peers, while the plan queue is a pack contract. Herdr is optional; the methodology works without it.',
       colContract: 'Contract',
       colGuarantee: 'What it guarantees',
       colSource: 'Source',

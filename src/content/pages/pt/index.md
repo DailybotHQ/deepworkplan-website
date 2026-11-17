@@ -26,6 +26,7 @@ O Deep Work Plan (DWP) é uma metodologia e um kit abertos, licenciados sob MIT,
 1. **Especificação primeiro** — o plano é a fonte de verdade duradoura: tarefas atômicas, critérios de aceitação e validation gates que o agente precisa passar.
 2. **O repositório é o harness** — contexto, ferramentas, guardrails e estado vivem no repositório como arquivos de texto simples que qualquer agente pode ler.
 
+3. **Loop engineering** — Os planos chegam ao fim: registro, um daemon iniciado por uma pessoa, lembretes que não acrescentam autoridade, substituição e eventos de plano.
 4. **Eficiência medida** — bytes de instrução por fluxo, medidos e publicados com o seu método — nunca porcentagens de tokens inventadas.
 
 ---

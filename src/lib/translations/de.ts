@@ -14,7 +14,7 @@ export const de: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — strukturierte Ausführung für KI-Coding-Agenten',
   siteDescription:
-    'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende. Die gemessene Effizienz wird in Instruktionsbytes pro Ablauf erfasst.',
+    'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und jeder Plan läuft bis zum Ende. Effizienz messen wir in Instruktionsbytes pro Ablauf.',
 
   // Navigation
   nav: {
@@ -188,7 +188,7 @@ export const de: SiteTranslations = {
       title:
         'Pläne laufen bis zu ihrem Ende. Die Befugnis bleibt bei Menschen.',
       subtitle:
-        'Loop engineering beschreibt, wie ein Plan zu Ende kommt, ohne dass ein Mensch ständig nachfragt. Jede Zeile unten ist ein veröffentlichter Vertrag von herdr-peers, dem optionalen Herdr-Addon: Die Methodik funktioniert auch ohne dieses Addon, und der Loop verstärkt sie nur.',
+        'Loop engineering ermöglicht den Abschluss eines Plans, ohne dass ein Mensch ständig nachfragt. Die folgenden Zeilen beschreiben veröffentlichte Verträge des Loops: Die meisten stammen von herdr-peers, während die Planwarteschlange ein Pack-Vertrag ist. Herdr ist optional; die Methodik funktioniert auch ohne das Addon.',
       colContract: 'Vertrag',
       colGuarantee: 'Was er garantiert',
       colSource: 'Quelle',

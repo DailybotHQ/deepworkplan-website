@@ -14,7 +14,7 @@ export const tr: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — yapay zeka kodlama ajanları için yapılandırılmış yürütme',
   siteDescription:
-    'Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır. Ölçülen verimlilik, akış başına talimat byte sayısıyla ifade edilir.',
+    'Önce spesifikasyon, kapalı döngü: depo harness’tir ve her plan sonuna kadar çalışır. Verimliliği akış başına talimat baytıyla ölçeriz.',
 
   // Navigation
   nav: {
@@ -187,7 +187,7 @@ export const tr: SiteTranslations = {
       badge: 'Loop engineering',
       title: 'Planlar sonuna kadar çalışır. Yetki insanlarda kalır.',
       subtitle:
-        'Loop engineering, bir planın, bir insan onu yoklamadan nasıl bittiğidir. Aşağıdaki her satır, isteğe bağlı Herdr eklentisi herdr-peers’ın yayımlanmış bir sözleşmesidir: metodoloji onsuz da çalışır, döngü yalnızca onu güçlendirir.',
+        'Loop engineering, bir planın insan tarafından sürekli sorgulanmadan tamamlanmasını sağlar. Aşağıdaki satırlar döngünün yayımlanmış sözleşmelerini açıklar: çoğu herdr-peers kaynaklıdır; plan kuyruğu ise paket sözleşmesidir. Herdr isteğe bağlıdır ve metodoloji onsuz da çalışır.',
       colContract: 'Sözleşme',
       colGuarantee: 'Neyi garanti eder',
       colSource: 'Kaynak',

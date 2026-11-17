@@ -13,7 +13,7 @@ export const zh: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — 面向 AI 编码代理的结构化执行',
   siteDescription:
-    '规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。效率以每个流程的指令字节数衡量。',
+    '规范先行、闭环运行：代码仓库是执行环境，计划持续运行直至完成。效率按每个流程的指令字节数衡量，并公开测量方法，绝不编造 token 百分比。',
 
   // Navigation
   nav: {
@@ -185,7 +185,7 @@ export const zh: SiteTranslations = {
       badge: 'Loop engineering',
       title: '计划运行到结束。权限始终在人手中。',
       subtitle:
-        'Loop engineering 是让计划在无人轮询的情况下完成的方式。下面每一行都是 herdr-peers（可选的 Herdr 附加组件）已发布的一项契约：方法论不依赖它也能运作，循环只是放大它。',
+        'Loop engineering 让计划无需人类轮询也能完成。以下各行描述循环中的已发布契约：大多数来自 herdr-peers，而计划队列是技能包契约。Herdr 是可选项；方法论不依赖它也能运作。',
       colContract: '契约',
       colGuarantee: '它保证什么',
       colSource: '来源',

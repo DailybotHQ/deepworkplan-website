@@ -26,6 +26,7 @@ Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini pla
 1. **Önce spesifikasyon** — plan kalıcı doğruluk kaynağıdır: atomik görevler, kabul kriterleri ve ajanın geçmesi gereken doğrulama kapıları.
 2. **Depo, harness’tir** — bağlam, araçlar, koruma bariyerleri ve durum, herhangi bir ajanın okuyabileceği düz dosyalar olarak depoda yaşar.
 
+3. **Loop engineering** — Planlar sonuna kadar çalışır: kayıt, insanın başlattığı bir daemon, yetki eklemeyen dürtmeler, devralma ve plan olayları.
 4. **Ölçülmüş verimlilik** — akış başına yönerge baytları, yöntemiyle birlikte ölçülür ve yayımlanır — asla uydurulmuş token yüzdeleri değil.
 
 ---

@@ -14,7 +14,7 @@ export const it: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — esecuzione strutturata per agenti di coding AI',
   siteDescription:
-    'Prima la specifica, loop chiuso: il repository è la harness e il piano si esegue da solo fino alla fine. L’efficienza misurata è espressa in byte di istruzioni per flusso.',
+    'Spec-first, loop chiuso: il repository è la harness e ogni piano arriva alla fine. Misuriamo l’efficienza in byte di istruzioni per flusso.',
 
   // Navigation
   nav: {
@@ -187,7 +187,7 @@ export const it: SiteTranslations = {
       badge: 'Loop engineering',
       title: 'I piani arrivano alla fine. L’autorità resta alle persone.',
       subtitle:
-        'Il loop engineering è il modo in cui un piano si conclude senza che una persona debba controllarlo. Ogni riga qui sotto è un contratto rilasciato di herdr-peers, l’addon opzionale di Herdr: la metodologia funziona senza, e il loop la amplifica soltanto.',
+        'Loop engineering permette a un piano di arrivare al termine senza che una persona debba controllarlo continuamente. Le righe seguenti descrivono i contratti rilasciati del ciclo: la maggior parte appartiene a herdr-peers, mentre la coda dei piani è un contratto del pacchetto. Herdr è facoltativo; la metodologia funziona anche senza.',
       colContract: 'Contratto',
       colGuarantee: 'Cosa garantisce',
       colSource: 'Fonte',

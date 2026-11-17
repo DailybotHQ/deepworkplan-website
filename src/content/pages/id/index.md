@@ -26,6 +26,7 @@ Deep Work Plan (DWP) adalah metodologi dan kit terbuka berlisensi MIT untuk mere
 1. **Spec-first** — rencana adalah sumber kebenaran yang tahan lama: tugas atomik, kriteria penerimaan, dan gerbang validasi yang harus dilalui agen.
 2. **Repositori adalah harness** — konteks, alat, pagar pengaman, dan status berada di repositori sebagai file biasa yang dapat dibaca agen mana pun.
 
+3. **Loop engineering** — Rencana berjalan hingga akhir: registrasi, daemon yang dimulai manusia, dorongan yang tidak menambah wewenang, failover, dan event rencana.
 4. **Efisiensi terukur** — byte instruksi per alur, diukur dan dipublikasikan beserta metodenya — tidak pernah persentase token yang dikarang.
 
 ---

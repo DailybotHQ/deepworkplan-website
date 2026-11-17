@@ -187,7 +187,7 @@ export const ja: SiteTranslations = {
       badge: 'Loop engineering',
       title: '計画は最後まで走る。権限は人の手に残る。',
       subtitle:
-        'Loop engineering とは、人間がポーリングしなくても計画が完了する仕組みです。下の各行は、任意の Herdr アドオンである herdr-peers のリリース済みの契約です。方法論はそれなしでも機能し、ループはそれを増幅するだけです。',
+        'Loop engineering は、人間がポーリングしなくても計画を完了させる仕組みです。以下の行はループのリリース済み契約を示します。大半は herdr-peers の契約で、計画キューはパックの契約です。Herdr は任意であり、方法論はそれなしでも機能します。',
       colContract: '契約',
       colGuarantee: '保証する内容',
       colSource: '出典',

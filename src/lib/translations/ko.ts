@@ -185,7 +185,7 @@ export const ko: SiteTranslations = {
       badge: 'Loop engineering',
       title: '계획은 끝까지 실행됩니다. 권한은 사람에게 남습니다.',
       subtitle:
-        'Loop engineering은 사람이 폴링하지 않아도 계획이 완료되는 방식입니다. 아래 각 행은 선택형 Herdr 애드온인 herdr-peers의 릴리스된 계약입니다. 방법론은 이것 없이도 작동하며, 루프는 이를 증폭할 뿐입니다.',
+        'Loop engineering은 사람이 계속 확인하지 않아도 계획이 완료되도록 합니다. 아래 행은 루프의 릴리스된 계약을 설명합니다. 대부분은 herdr-peers 계약이며 계획 대기열은 팩 계약입니다. Herdr는 선택 사항이며, 방법론은 이를 사용하지 않아도 작동합니다.',
       colContract: '계약',
       colGuarantee: '보장하는 것',
       colSource: '출처',
