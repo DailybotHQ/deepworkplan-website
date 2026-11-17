@@ -540,6 +540,13 @@ record can take over, by launching **one** fresh agent:
   one `plan_revived` event reaches `--notify`; the map marks the revived lead
   and `fleet ui` shows `↻ revived`.
 
+**Fail-closed:** every revive is launched through `ak pick`, so with
+`--revive` a missing `ak` or one older than 1.3.0 makes the daemon refuse to
+start, with a message naming the version it needs — it never runs a daemon
+that would only spend each plan's revive caps on launches that cannot work.
+Without `--brain` and `--revive` the kit stays optional: when `ak` is not
+installed, starting autopilot prints one line suggesting it and carries on.
+
 Login and consent screens stay yours: a revived agent that meets one is left
 there and you are told, like any pane.
 
@@ -783,6 +790,7 @@ Use `--scope` to keep it to some machines.
 | An agent at its usage limit is not continued | the retry runs every 30 minutes, at most 48 times | wait for the reset, or move the lane (orchestra.md) |
 | A plan is reported `plan_stalled`, `plan_blocked` or `plan_no_lead` | three prompts without progress, a blocker in its state, or a gone lead with no successor to ask | look at the plan; `--brain` may decide stalls and some blockers; `--appoint` covers a lost lead if you granted it |
 | `start --brain` refuses to start | `ak` is missing or older than 1.3.0 (`--brain` is fail-closed) | install or upgrade coding-agents-kit, or start without `--brain` |
+| `start --loop --revive` refuses to start | `ak` is missing or older than 1.3.0 (`--revive` is fail-closed) | install or upgrade coding-agents-kit, or start without `--revive` |
 | The brain is retired at once | its account's profile defaults to a mode that skips approvals (auto, bypass, accept edits), or its agent did not come up within two minutes | `autopilot status` (its brain line) or `autopilot logs` names why (`why=permission_mode`, the excluded `@profile`, or `why=start_timeout`); change that profile's default, or exclude it with `--brain-kinds` |
 | A queued plan does not start | it waits for its `after` plan or another plan of its repository; or `queue_blocked` named why: not approved (or edited or amended since), no lead, its lead works elsewhere, on another machine, in a directory this machine cannot see, or on another plan, it already began, or it is a `launch` item; in a sequential queue the items after it wait too | fix what the reason names; the daemon reads the queue again on the next report |
 | `lead verify` exits 5 | a machine of the plan could not be reached | wait until it answers, or pass `--allow-unreached` to accept the risk (recorded) |

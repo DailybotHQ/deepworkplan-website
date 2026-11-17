@@ -26,9 +26,9 @@ export interface EcosystemPin {
 export const ECOSYSTEM_PINS = {
   pack: {
     repo: 'deepworkplan-skill',
-    tag: 'v8.0.2',
+    tag: 'v8.0.3',
     sha256sums:
-      '332e8f9a51fe818f5e78839f99f92b60fce2b6eed8383d5e90b91c994ca019f5',
+      'f40ebde7c45654b316703bf7a2435dd645e39eebca4327529489ca82dcc2c1e3',
     role: 'the Deep Work Plan skill (pack)',
   },
   agentkit: {
@@ -40,16 +40,16 @@ export const ECOSYSTEM_PINS = {
   },
   herdr: {
     repo: 'herdr-peers',
-    tag: 'v2.2.0',
+    tag: 'v2.2.1',
     sha256sums:
-      '694766b8ee39ee57b0ce39e8d31a64ca018830159aec7989226f1d094a4c8c2c',
+      '9855c62532381915b7f562fcec5649787bc5345d59243ac692051662469f5d93',
     role: 'Herdr addon (herdr-peers)',
   },
   devcontainer: {
     repo: 'devcontainer-kit',
-    tag: 'v1.4.1',
+    tag: 'v1.4.2',
     sha256sums:
-      'ef3043e6c94643538d0e1205d1b1f1fca4168820aa47ef32680b74a186c4e792',
+      'c8f2b57dc7c36ea2d212b9819ee6420344acbb0c64a46eace020a98a23e4d76a',
     role: 'devcontainer addon (`dck`)',
   },
   vim: {

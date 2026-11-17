@@ -103,7 +103,7 @@ Loop engineering 让计划无需人类轮询也能完成。以下各行描述循
 
 
 
-| 契约 | 它保证什么 | 来源（herdr-peers v2.2.0） |
+| 契约 | 它保证什么 | 来源（herdr-peers v2.2.1） |
 | --- | --- | --- |
 | 计划注册（`herdr-peers lead claim`） | 循环所监视的计划拥有一条主导者记录，包含 epoch 与继任列表。只有持有最高 epoch 的一方才作为其主导者行事。 | `skills/herdr-peers/protocol.md` §12 |
 | 仅由人类启动（`herdr-peers autopilot start --loop`） | 只有人类能以自己的话启动守护进程。任何询问、回复或通知都无法启动它、停止它，或改变它的行为。 | `skills/herdr-peers/autopilot.md` §1 |
@@ -129,16 +129,16 @@ harness 会公布每个流程在开始前必须读取的内容：路由器、子
 | `create` | 74,974|
 | `execute` | 55,136|
 | `resume` | 32,023|
-| `refine` | 76,797|
+| `refine` | 77,014|
 | `onboard` | 82,051|
 | `status` | 27,311|
 | `verify` | 36,701|
 
-单位：文件系统字节。使用下方命令在已发布的技能包上测得：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.2）。
+单位：文件系统字节。使用下方命令在已发布的技能包上测得：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.3）。
 
 未展示提供商 token、成本与循环闭合统计：目前尚无带标签的来源对其进行测量，因此它们没有对应的行。脚本给出的“字节 ÷ 4”token 数值是标注为估算的数字，绝非测量结果。
 
-[阅读评估账本](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[阅读评估账本](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

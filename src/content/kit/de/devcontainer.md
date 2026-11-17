@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer-Addon
 
-Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v8** (Paket `v8.0.2`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
+Geben Sie dem Repository einen reproduzierbaren, isolierten Entwicklungscontainer — einen, den Menschen, Editoren und Coding-Agenten gleichermaßen nutzen können. In **DWP v8** (Paket `v8.0.3`) integriert dieses Addon **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, ein MIT-Produkt, das ohne Deep Work Plan funktioniert. Es ist optional: Ein Repository ist auch ohne es vollständig konform.
 
 Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
@@ -23,20 +23,20 @@ Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loo
 ## Installation
 
 ```bash
-git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.4.1`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.4.2`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v1.4.1`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v1.4.2`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
 
-**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die aktuellen fixierten Versionen enthält. Das Image von `v1.4.1` enthält herdr-peers 2.2.0, coding-agents-kit 1.5.0 und DeepWorkPlan Vim 1.1.0.
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die aktuellen fixierten Versionen enthält. Das Image von `v1.4.2` enthält herdr-peers 2.2.0, coding-agents-kit 1.5.0 und DeepWorkPlan Vim 1.1.0.
 
 ## Layer
 
@@ -127,6 +127,10 @@ Release 1.4.0 behält Schnittstelle 2 bei und aktualisiert die Versionen, die da
 ## Ab devcontainer-kit 1.4.1 (Schnittstelle 2)
 
 Release 1.4.1 ist ein Patch: Das Image enthält herdr-peers 2.2.0, das das optionale `autopilot --loop --revive` ergänzt (ein neuer Agent für einen Plan, dessen Lead und Nachfolger alle fehlen, freigegeben von dem Menschen, der den Daemon startet), und das Repository nutzt DeepWorkPlan 8.0.2. Schnittstelle 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 und die eigene Oberfläche von dck bleiben unverändert; dck startet den Daemon nie.
+
+## Ab devcontainer-kit 1.4.2 (Schnittstelle 2)
+
+Release 1.4.2 ist ein Patch: Das `node-24`-Image wechselt auf das Sicherheitsrelease Node 24.22.3 (1.4.1 pinnte 24.21.0, sodass `dck init` ein Repository auf 24.22.x herabstufen konnte), und der Zustand von herdr-peers — das Delegationsprotokoll, die Lead-Einträge, die Antworten und der Autopilot-Zustand unter `~/.local/state/herdr-peers` — bleibt nun auf dem Zustandsvolume des Containers (Modus 0700) und übersteht einen Neubau. Schnittstelle 2, herdr-peers 2.2.0, coding-agents-kit 1.5.0 und DeepWorkPlan Vim 1.1.0 bleiben unverändert.
 
 ## Sicherheitsvorgaben
 

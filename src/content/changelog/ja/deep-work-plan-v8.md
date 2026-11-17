@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Skill リリース v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Skill リリース v8.0.2"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.2"
+  - label: "Skill リリース v8.0.3"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.3"
   - label: "LOOP_ENGINEERING.md（v8 規範）"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "仕様リーダーの Loop engineering"
@@ -77,4 +77,4 @@ Deep Work Plan v8 は、spec-first 開発、エージェント harness として
 
 v7 の最終リリースは **7.12.2** です。
 
-インストール済みスキルのリリースは **8.0.2** です。
+インストール済みスキルのリリースは **8.0.3** です。

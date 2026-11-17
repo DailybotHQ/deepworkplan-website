@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Skill v8.0.1 sürümü"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Skill v8.0.2 sürümü"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.2"
+  - label: "Skill v8.0.3 sürümü"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.3"
   - label: "LOOP_ENGINEERING.md (v8 normatif)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Belirtim okuyucusunda Loop engineering"
@@ -77,4 +77,4 @@ Paketin v7.11.0 sağlamlaştırması ve v7.12.x plan kaydı ve bildirim sürüml
 
 Son v7 sürümü **7.12.2** idi.
 
-Yüklü skill sürümü: **8.0.2**.
+Yüklü skill sürümü: **8.0.3**.

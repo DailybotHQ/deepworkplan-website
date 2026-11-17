@@ -31,7 +31,7 @@ Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme
 
 ### Devcontainer (birinci eklenti)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v1.4.1` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v1.4.2` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
 
 - **Kit sayfası:** [Devcontainer](/kit/devcontainer)
 - **Ne ekler:** çalışma zamanının digest ile sabitlenmiş resmi imajından üretilen `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` veya `debian`, paylaşılan temel imaj yok), `dck` başlatıcısı (`up`, `shell`, `rebuild`, `doctor`) üzerine kurulu `dev.sh`, opt-in bir katman olarak kodlama agent'ları, yalnızca loopback portları, içeride hiçbir anahtar olmadan (geliştirici host profilinde `[ssh] copy_keys` ile bunu açıkça seçmedikçe) host'un agent'ı üzerinden SSH ile git ve standart düzene sahip container başına Herdr makineleri
@@ -82,7 +82,7 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 ### Herdr (altıncı eklenti)
 
-v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v2.2.0`, protokol `2`) için ince bir entegrasyon katmanı.
+v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v2.2.1`, protokol `2`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Herdr](/kit/herdr)
 - **Ne ekler:** bir plan, sınırlı bir görevi aynı makinede veya Herdr'ın SSH üzerinden ulaştığı bir makinede, başka bir [Herdr](https://herdr.dev) panelindeki bir kodlama agent'ına devredebilir ve onun tek yetkili yanıtını journal'a kaydedebilir

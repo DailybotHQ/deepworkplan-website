@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v8** (gói `v8.0.2`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
+Mang đến cho repository một dev container có thể tái lập và được cô lập — dùng chung được cho con người, trình soạn thảo và coding agent. Trong **DWP v8** (gói `v8.0.3`), addon này tích hợp **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, một sản phẩm MIT hoạt động được mà không cần Deep Work Plan. Addon là tùy chọn: một repo vẫn hoàn toàn tuân thủ khi không có nó.
 
 Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
@@ -23,20 +23,20 @@ Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harne
 ## Cài đặt
 
 ```bash
-git clone --branch v1.4.1 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.4.1`: `v0.2.0` không được hỗ trợ.
+Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.4.2`: `v0.2.0` không được hỗ trợ.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v1.4.1`, giao diện 2 |
+| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v1.4.2`, giao diện 2 |
 | Khóa registry | `devcontainer` trong `.dwp/config.json` |
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
 
-**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim hiện tại. Image `v1.4.1` đóng gói herdr-peers 2.2.0, coding-agents-kit 1.5.0 và DeepWorkPlan Vim 1.1.0.
+**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim hiện tại. Image `v1.4.2` đóng gói herdr-peers 2.2.0, coding-agents-kit 1.5.0 và DeepWorkPlan Vim 1.1.0.
 
 ## Các lớp
 
@@ -127,6 +127,10 @@ Bản phát hành 1.4.0 giữ nguyên giao diện 2 và cập nhật các phiên
 ## Từ devcontainer-kit 1.4.1 (giao diện 2)
 
 Bản phát hành 1.4.1 là bản vá: image tích hợp herdr-peers 2.2.0, bổ sung tùy chọn `autopilot --loop --revive` (một agent mới cho kế hoạch mà lead và mọi người kế nhiệm đều không còn, do người khởi động daemon cho phép), và repository dùng DeepWorkPlan 8.0.2. Giao diện 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 và bề mặt riêng của dck không đổi; dck không bao giờ khởi động daemon.
+
+## Từ devcontainer-kit 1.4.2 (giao diện 2)
+
+Bản 1.4.2 là một bản vá: image `node-24` chuyển sang bản bảo mật Node 24.22.3 (1.4.1 ghim 24.21.0, nên `dck init` có thể hạ cấp một kho mã đang dùng 24.22.x), và trạng thái của herdr-peers — nhật ký ủy quyền, bản ghi trưởng nhóm, các phản hồi và trạng thái autopilot trong `~/.local/state/herdr-peers` — giờ được giữ trên volume trạng thái của container (chế độ 0700) và vẫn còn sau khi build lại. Giao diện 2, herdr-peers 2.2.0, coding-agents-kit 1.5.0 và DeepWorkPlan Vim 1.1.0 không thay đổi.
 
 ## Mặc định bảo mật
 

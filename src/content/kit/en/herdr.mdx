@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) puts coding agents in panes, on your machine and on machines it reaches over SSH. This addon lets a Deep Work Plan use those agents as **peers**: a plan can hand a bounded task to an agent in another pane, receive exactly one authorized reply, and keep a record of the exchange.
 
-It is an optional addon of **DWP v8** (pack `v8.0.2`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
+It is an optional addon of **DWP v8** (pack `v8.0.3`). The methodology works the same without it: with the addon absent or disabled, every task runs in the current session, exactly as before.
 
 Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
 
@@ -20,11 +20,11 @@ Deep Work Plan has four pillars: spec-first plans, the repository as the harness
 
 ## What it integrates
 
-The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v2.2.0`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
+The addon is a thin integrator. The work is done by **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, a standalone MIT skill pinned at **`v2.2.1`** that is useful without Deep Work Plan. It defines what Herdr itself leaves open: who may answer, how the answer finds its way back across machines, how two agents avoid answering each other forever, and where the record of "I asked, it answered" lives.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/herdr-peers`, tag `v2.2.0`, protocol 2 |
+| Product | `DailybotHQ/herdr-peers`, tag `v2.2.1`, protocol 2 |
 | Registry key | `herdr` in `.dwp/config.json` |
 | Transport | interactive: a peer in a Herdr pane |
 | Provides | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ The addon is a thin integrator. The work is done by **[herdr-peers](https://gith
 Install herdr-peers and Herdr's official skill, which it depends on. Every machine whose agents should answer needs the skill too.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers does not authenticate the sender: the `from=` field in a stamp is a 
 
 ## Containers and the host
 
-With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.4.1`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
+With the [devcontainer](/kit/devcontainer) addon on devcontainer-kit `v1.4.2`, every dck container ships herdr-peers and joins the mesh at `dck up`: its agents can ask agents on the host, in the other containers and in the host's other loopback containers, and get the reply back. `dck setup` installs a verified herdr-peers on the host, so host agents reply too. The host listener and the extra keys that let other containers in are your decisions in the kit's host profile; this addon never sets them. Since herdr-peers (`v0.2.3`), each machine keeps its own state (`$XDG_STATE_HOME/herdr-peers/<server>/`), so a checkout shared by the host and a container no longer mixes their records, and since devcontainer-kit (`v0.3.3`) the container exports `HERDR_PEERS_SELF` itself, so Codex agents inside reach other machines with no hand step.
 
 ## Herdr or agentkit
 
@@ -137,6 +137,8 @@ Release v2.0.2 keeps protocol 2. In an ask-mode pick-v2 launch, exactly one trai
 Release v2.1.0 keeps protocol 2. `fleet ui` adds `Attention`, `Active`, `Waiting`, `Done` and `All` views across groupings, including queues; the map gains optional `state_updated_at` and `unreadable_reason` fields. The human-started daemon denies permission or plan-approval dialogs it cannot safely accept; it never denies an agent's own work question, and login, bypass-permissions acknowledgement and folder trust remain for the human. A brain denial is handled explicitly; three denials in an hour retire that brain. The brain may now be asked about a classed blocker. Its `ask_lead_to_resolve` action may send a blocker with `resolver: lead` to the plan's lead only when its class is none, C3, C4 or C7; C1 (approval), C2 (consent or login), C5 (damage) and C6 (terms) stay with the human, and a class outside C1–C7 is refused. The release also reads pack 8.0.0 journal-event/v8 blocker events and plan-snapshot/v8 blocker data.
 
 Release v2.2.0 keeps protocol 2 and adds **revive** (`autopilot --loop --revive`); the human starting the daemon with it is the grant. A plan on this machine whose lead is gone, or at a usage limit that resets more than 30 minutes away, and whom no successor or lane can take over gets one fresh agent: an account with quota from `ak pick`, in ask mode, in a workspace that starts in the plan's checkout. The daemon gives it a one-time ticket that alone allows `lead takeover --reason revive`; the new lead then runs `lead verify` and resumes the plan. A stalled plan whose lead is still live is never taken over: that lead is asked once to `lead handover` to the fresh agent. Caps: one revive per plan per 6 hours, two per plan, and two an hour across the fleet, kept across daemon restarts. The old pane is never closed or keyed. Each revive sends one `plan_revived` event to `--notify`, and `fleet ui` marks the lead as revived. A 2.0 or 2.1 receiver refuses the revive record (fail closed). The daemon also keeps a sanitized copy of any screen it could not recognise, with secrets and key blocks removed, so it can be added as a test case; `autopilot status` shows how many it holds.
+
+Release v2.2.1 keeps protocol 2 with no wire change. `autopilot --loop --revive` now refuses to start when coding-agents-kit is missing or older than 1.3.0, the same fail-closed check as `--brain`, instead of spending the revive caps on failed launches; the daemon launches the brain and revived agents only through `ak` (`ak pick`, ask mode), never the bare CLI.
 
 ## Notes
 

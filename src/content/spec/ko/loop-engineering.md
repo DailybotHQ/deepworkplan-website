@@ -29,7 +29,7 @@ lead가 사라지면 daemon은 승계 목록에서 처음으로 연결 가능한
 
 선택 사항인 `--brain`은 daemon 규칙으로 판단할 수 없는 경우에 전용 판단 에이전트를 시작합니다. brain은 닫힌 동작 목록에서만 선택합니다. daemon만 실제 행위자이며 허용된 선택을 검증해 실행합니다. 자유 형식 brain 텍스트를 실행하지 않습니다. 계획의 `autonomy` 블록도 brain을 허용해야 합니다.
 
-루프는 정체, 차단, lead 손실, 완료 및 대기열 결과 등의 계획 이벤트를 기록합니다. 선택적 `--notify` 통합을 사용하면 daemon이 설정된 알림기로 `plan-event-v1` 객체를 보냅니다. 팩의 Dailybot 알림기는 지원되는 이벤트를 팀 업데이트로 바꿉니다. 알림은 승인이나 계획 기록 변경이 아닙니다. 플릿 맵과 `herdr-peers fleet ui`는 여러 머신의 에이전트와 계획을 표시합니다. UI는 읽기 전용이며 계획 상태를 바꾸거나 에이전트를 프롬프트하지 않습니다. 자세한 내용은 [herdr-peers v2.2.0 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.0/skills/herdr-peers/autopilot.md) 및 [프로토콜](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.0/skills/herdr-peers/protocol.md)을 참조하세요.
+루프는 정체, 차단, lead 손실, 완료 및 대기열 결과 등의 계획 이벤트를 기록합니다. 선택적 `--notify` 통합을 사용하면 daemon이 설정된 알림기로 `plan-event-v1` 객체를 보냅니다. 팩의 Dailybot 알림기는 지원되는 이벤트를 팀 업데이트로 바꿉니다. 알림은 승인이나 계획 기록 변경이 아닙니다. 플릿 맵과 `herdr-peers fleet ui`는 여러 머신의 에이전트와 계획을 표시합니다. UI는 읽기 전용이며 계획 상태를 바꾸거나 에이전트를 프롬프트하지 않습니다. 자세한 내용은 [herdr-peers v2.2.1 autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.1/skills/herdr-peers/autopilot.md) 및 [프로토콜](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.1/skills/herdr-peers/protocol.md)을 참조하세요.
 
 ## 2. `autonomy` 블록 (plan-contract/v8)
 

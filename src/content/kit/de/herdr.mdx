@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) bringt Coding-Agenten in Panes unter, auf Ihrem Rechner und auf Rechnern, die es über SSH erreicht. Dieses Addon lässt einen Deep Work Plan diese Agenten als **Peers** nutzen: Ein Plan kann eine abgegrenzte Aufgabe an einen Agenten in einem anderen Pane übergeben, genau eine autorisierte Antwort erhalten und einen Nachweis des Austauschs aufbewahren.
 
-Es ist ein optionales Addon von **DWP v8** (pack `v8.0.2`). Die Methodik funktioniert ohne es genauso: Fehlt das Addon oder ist es deaktiviert, läuft jede Aufgabe wie bisher in der aktuellen Sitzung.
+Es ist ein optionales Addon von **DWP v8** (pack `v8.0.3`). Die Methodik funktioniert ohne es genauso: Fehlt das Addon oder ist es deaktiviert, läuft jede Aufgabe wie bisher in der aktuellen Sitzung.
 
 Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loop engineering und gemessene Effizienz. Addons und Integrationen können Harness und Loop erweitern; die Methodik funktioniert auch ohne sie.
 
@@ -20,11 +20,11 @@ Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loo
 
 ## Was es integriert
 
-Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v2.2.0`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
+Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, ein eigenständiger MIT-Skill, fixiert auf **`v2.2.1`**, der auch ohne Deep Work Plan nützlich ist. Er legt fest, was Herdr selbst offenlässt: wer antworten darf, wie die Antwort über Rechnergrenzen hinweg zurückfindet, wie zwei Agenten vermeiden, einander endlos zu antworten, und wo der Nachweis „Ich habe gefragt, es hat geantwortet“ liegt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, Tag `v2.2.0`, Protokoll 2 |
+| Produkt | `DailybotHQ/herdr-peers`, Tag `v2.2.1`, Protokoll 2 |
 | Registry-Schlüssel | `herdr` in `.dwp/config.json` |
 | Transport | interaktiv: ein Peer in einem Herdr-Pane |
 | Stellt bereit | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ Das Addon ist ein schlanker Integrator. Die Arbeit erledigt **[herdr-peers](http
 Installieren Sie herdr-peers und den offiziellen Skill von Herdr, von dem es abhängt. Jeder Rechner, dessen Agenten antworten sollen, braucht den Skill ebenfalls.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers authentifiziert den Absender nicht: Das Feld `from=` in einem Stempe
 
 ## Container und Host
 
-Mit dem Addon [devcontainer](/kit/devcontainer) auf devcontainer-kit `v1.4.1` bringt jeder dck-Container herdr-peers mit und tritt bei `dck up` dem Mesh bei: Seine Agenten können Agenten auf dem Host, in den anderen Containern und in den anderen Loopback-Containern des Hosts fragen und erhalten die Antwort zurück. `dck setup` installiert ein verifiziertes herdr-peers auf dem Host, sodass auch Host-Agenten antworten. Der Host-Listener und die zusätzlichen Schlüssel, die andere Container hereinlassen, sind Ihre Entscheidungen im Host-Profil des Kits; dieses Addon setzt sie nie. Seit herdr-peers (`v0.2.3`) führt jeder Rechner seinen eigenen Zustand (`$XDG_STATE_HOME/herdr-peers/<server>/`), sodass ein Checkout, den sich Host und Container teilen, ihre Aufzeichnungen nicht mehr vermischt, und seit devcontainer-kit (`v0.3.3`) exportiert der Container `HERDR_PEERS_SELF` selbst, sodass Codex-Agenten darin ohne Handgriff andere Rechner erreichen.
+Mit dem Addon [devcontainer](/kit/devcontainer) auf devcontainer-kit `v1.4.2` bringt jeder dck-Container herdr-peers mit und tritt bei `dck up` dem Mesh bei: Seine Agenten können Agenten auf dem Host, in den anderen Containern und in den anderen Loopback-Containern des Hosts fragen und erhalten die Antwort zurück. `dck setup` installiert ein verifiziertes herdr-peers auf dem Host, sodass auch Host-Agenten antworten. Der Host-Listener und die zusätzlichen Schlüssel, die andere Container hereinlassen, sind Ihre Entscheidungen im Host-Profil des Kits; dieses Addon setzt sie nie. Seit herdr-peers (`v0.2.3`) führt jeder Rechner seinen eigenen Zustand (`$XDG_STATE_HOME/herdr-peers/<server>/`), sodass ein Checkout, den sich Host und Container teilen, ihre Aufzeichnungen nicht mehr vermischt, und seit devcontainer-kit (`v0.3.3`) exportiert der Container `HERDR_PEERS_SELF` selbst, sodass Codex-Agenten darin ohne Handgriff andere Rechner erreichen.
 
 ## Herdr oder Agentkit
 
@@ -137,6 +137,8 @@ v2.0.2 behält Protokoll 2 bei. Bei einem Pick-v2-Start im Ask-Modus wird genau 
 v2.1.0 behält Protokoll 2 bei. `fleet ui` ergänzt in jeder Gruppierung die Ansichten `Attention`, `Active`, `Waiting`, `Done` und `All` sowie die Queue-Gruppierung; die Karte erhält die optionalen Felder `state_updated_at` und `unreadable_reason`. Der von einem Menschen gestartete Daemon verweigert Berechtigungs- oder Planfreigabe-Dialoge, die er nicht sicher annehmen kann. Eine Arbeitsfrage des Agenten verweigert er nicht; Login, Bypass-Bestätigung und Ordnervertrauen bleiben beim Menschen. Eine Verweigerung durch das Brain wird ausdrücklich behandelt; drei Verweigerungen innerhalb einer Stunde führen zur Ablösung. Das Brain kann nun zu einem klassifizierten Blocker befragt werden. Seine Aktion `ask_lead_to_resolve` darf einen Blocker mit `resolver: lead` nur dann an den Plan-Lead senden, wenn die Klasse none, C3, C4 oder C7 ist; C1 (Freigabe), C2 (Einwilligung oder Anmeldung), C5 (Schaden) und C6 (Bedingungen) bleiben beim Menschen, und Klassen außerhalb C1–C7 werden abgelehnt. Außerdem liest diese Version die Blocker-Ereignisse journal-event/v8 und Blocker-Daten plan-snapshot/v8 aus Pack 8.0.0.
 
 v2.2.0 behält Protokoll 2 bei und ergänzt **Revive** (`autopilot --loop --revive`); dass ein Mensch den Daemon damit startet, ist die Freigabe. Ein Plan auf diesem Rechner, dessen Lead verschwunden ist oder an einem Nutzungslimit steht, das sich erst in mehr als 30 Minuten zurücksetzt, und den weder ein Nachfolger noch eine Lane übernehmen kann, erhält einen frischen Agenten: ein Konto mit Kontingent aus `ak pick`, im Ask-Modus, in einem Workspace, der im Checkout des Plans startet. Der Daemon gibt ihm ein Einmal-Ticket, das allein `lead takeover --reason revive` erlaubt; der neue Lead führt anschließend `lead verify` aus und setzt den Plan fort. Ein stockender Plan, dessen Lead noch lebt, wird nie übernommen: Dieser Lead wird einmal gebeten, per `lead handover` an den frischen Agenten zu übergeben. Grenzen: ein Revive pro Plan alle 6 Stunden, zwei pro Plan und zwei pro Stunde über die gesamte Flotte, erhalten über Daemon-Neustarts hinweg. Der alte Bereich wird nie geschlossen und erhält keine Tastatureingaben. Jedes Revive sendet ein `plan_revived`-Ereignis an `--notify`, und `fleet ui` markiert den Lead als wiederbelebt. Ein Empfänger mit 2.0 oder 2.1 lehnt den Revive-Datensatz ab (fail closed). Außerdem bewahrt der Daemon eine bereinigte Kopie jedes Bildschirms auf, den er nicht erkennen konnte, ohne Geheimnisse und Schlüsselblöcke, damit sie als Testfall aufgenommen werden kann; `autopilot status` zeigt, wie viele er aufbewahrt.
+
+v2.2.1 behält Protokoll 2 ohne Änderung am Nachrichtenformat bei. `autopilot --loop --revive` verweigert jetzt den Start, wenn coding-agents-kit fehlt oder älter als 1.3.0 ist – dieselbe Fail-closed-Prüfung wie bei `--brain` –, statt die Revive-Grenzen mit fehlgeschlagenen Starts zu verbrauchen; der Daemon startet das Brain und wiederbelebte Agenten nur über `ak` (`ak pick`, Ask-Modus), nie über die nackte CLI.
 
 ## Hinweise
 

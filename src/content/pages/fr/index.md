@@ -103,7 +103,7 @@ Loop engineering permet à un plan d’aller jusqu’au bout sans qu’un humain
 
 
 
-| Contrat | Ce qu’il garantit | Source (herdr-peers v2.2.0) |
+| Contrat | Ce qu’il garantit | Source (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | Enregistrement du plan (`herdr-peers lead claim`) | Un plan que la boucle surveille possède un enregistrement de lead avec une époque et une succession. Seul le détenteur de l’époque la plus élevée agit comme son lead. | `skills/herdr-peers/protocol.md` §12 |
 | Démarrage humain uniquement (`herdr-peers autopilot start --loop`) | Seul un humain démarre le démon, avec ses propres mots. Aucune demande, réponse ou notification ne peut le démarrer, l’arrêter ou modifier ce qu’il fait. | `skills/herdr-peers/autopilot.md` §1 |
@@ -129,16 +129,16 @@ Le harness publie ce que chaque flux doit lire avant de démarrer : le routeur, 
 | `create` | 74 974|
 | `execute` | 55 136|
 | `resume` | 32 023|
-| `refine` | 76 797|
+| `refine` | 77 014|
 | `onboard` | 82 051|
 | `status` | 27 311|
 | `verify` | 36 701|
 
-Unité : octets du système de fichiers. Mesuré sur le pack publié avec la commande ci-dessous : `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
+Unité : octets du système de fichiers. Mesuré sur le pack publié avec la commande ci-dessous : `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
 
 Les tokens du fournisseur, le coût et les statistiques de fermeture de boucle ne sont pas affichés : aucune source étiquetée ne les mesure encore, ils n’ont donc pas de ligne. Le chiffre de tokens du script, octets ÷ 4, est une estimation signalée comme telle, jamais une mesure.
 
-[Lire le registre d’évaluation](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[Lire le registre d’évaluation](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

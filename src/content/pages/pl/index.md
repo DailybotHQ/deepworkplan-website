@@ -103,7 +103,7 @@ Loop engineering pozwala planowi dobiec końca bez stałego nadzoru człowieka. 
 
 
 
-| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.2.0) |
+| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | Rejestracja planu (`herdr-peers lead claim`) | Plan obserwowany przez pętlę ma rekord leada z epoką i sukcesją. Jako lead działa wyłącznie posiadacz najwyższej epoki. | `skills/herdr-peers/protocol.md` §12 |
 | Start wyłącznie przez człowieka (`herdr-peers autopilot start --loop`) | Tylko człowiek uruchamia demona, własnymi słowami. Żadne zapytanie, odpowiedź ani powiadomienie nie może go uruchomić, zatrzymać ani zmienić tego, co robi. | `skills/herdr-peers/autopilot.md` §1 |
@@ -129,16 +129,16 @@ Harness publikuje, co każdy przepływ musi przeczytać przed startem: router, s
 | `create` | 74 974|
 | `execute` | 55 136|
 | `resume` | 32 023|
-| `refine` | 76 797|
+| `refine` | 77 014|
 | `onboard` | 82 051|
 | `status` | 27 311|
 | `verify` | 36 701|
 
-Jednostka: bajty systemu plików. Zmierzone na wydanym pakiecie poleceniem poniżej: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
+Jednostka: bajty systemu plików. Zmierzone na wydanym pakiecie poleceniem poniżej: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
 
 Tokeny dostawcy, koszt i statystyki domykania pętli nie są pokazane: żadne źródło oznaczone tagiem jeszcze ich nie mierzy, więc nie mają wiersza. Liczba tokenów ze skryptu (bajty ÷ 4) to oznaczony szacunek, nigdy pomiar.
 
-[Przeczytaj rejestr ewaluacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[Przeczytaj rejestr ewaluacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 
