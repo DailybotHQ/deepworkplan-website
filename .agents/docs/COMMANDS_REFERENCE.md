@@ -1,117 +1,54 @@
-# Commands Reference
+# Commands reference
 
-> **Auto-maintained.** Update this file whenever a skill or command is added or removed.
-> This repository (deepworkplan.com) has its own commands tailored to an Astro documentation-and-marketing site with multilingual content.
-> See [Skills & Agents Catalog](skills_agents_catalog.md) for detailed tiers, capabilities, and domain guides.
+This index reflects the current `.agents/commands/` files and skills commonly invoked directly. Procedure files are authoritative: read the linked procedure before invoking it. Claude Code uses slash commands; other tools may use a hash prefix or plain command name.
 
----
+## Repository command files
 
-## How to Invoke Commands
+| Command | Procedure |
+|---|---|
+| `/agent-create` | [agent-create.md](../commands/agent-create.md) |
+| `/agent-list` | [agent-list.md](../commands/agent-list.md) |
+| `/branch` | [branch.md](../commands/branch.md) |
+| `/code-review` | [code-review.md](../commands/code-review.md) |
+| `/commit` | [commit.md](../commands/commit.md) |
+| `/doc` | [doc.md](../commands/doc.md) |
+| `/dwp-create` | [dwp-create.md](../commands/dwp-create.md) |
+| `/dwp-execute` | [dwp-execute.md](../commands/dwp-execute.md) |
+| `/dwp-refine` | [dwp-refine.md](../commands/dwp-refine.md) |
+| `/dwp-resume` | [dwp-resume.md](../commands/dwp-resume.md) |
+| `/dwp-status` | [dwp-status.md](../commands/dwp-status.md) |
+| `/dwp-upgrade` | [dwp-upgrade.md](../commands/dwp-upgrade.md) |
+| `/dwp-verify` | [dwp-verify.md](../commands/dwp-verify.md) |
+| `/lib-upgrade` | [lib-upgrade.md](../commands/lib-upgrade.md) |
+| `/pr` | [pr.md](../commands/pr.md) |
+| `/skill-create` | [skill-create.md](../commands/skill-create.md) |
+| `/skill-list` | [skill-list.md](../commands/skill-list.md) |
 
-Different agents use different prefixes — **the behavior is identical, only the prefix changes:**
+## Skills commonly invoked directly
 
-| Agent | Prefix | Example |
-|-------|--------|---------|
-| **Claude Code** | `/` (native) | `/dwp-create` |
-| **OpenAI Codex** | `#` | `#dwp-create` |
-| **Cursor AI** | `#` | `#dwp-create` |
-| **Gemini / others** | `#` | `#dwp-create` |
+| Skill | Procedure |
+|---|---|
+| `/add-component` | [add-component](../skills/add-component/SKILL.md) |
+| `/add-diagram-component` | [add-diagram-component](../skills/add-diagram-component/SKILL.md) |
+| `/add-language` | [add-language](../skills/add-language/SKILL.md) |
+| `/add-page` | [add-page](../skills/add-page/SKILL.md) |
+| `/ai-diff-reviewer` | [ai-diff-reviewer](../skills/ai-diff-reviewer/SKILL.md) |
+| `/dailybot` | [dailybot](../skills/dailybot/SKILL.md) |
+| `/deepworkplan` | [deepworkplan](../skills/deepworkplan/SKILL.md) |
+| `/doc-edit` | [doc-edit](../skills/doc-edit/SKILL.md) |
+| `/fix-lint` | [fix-lint](../skills/fix-lint/SKILL.md) |
+| `/git-commit-push` | [git-commit-push](../skills/git-commit-push/SKILL.md) |
+| `/herdr-peers` | [herdr-peers](../skills/herdr-peers/SKILL.md) |
+| `/pr-review-lite` | [pr-review-lite](../skills/pr-review-lite/SKILL.md) |
+| `/quick-fix` | [quick-fix](../skills/quick-fix/SKILL.md) |
+| `/refactor-safe` | [refactor-safe](../skills/refactor-safe/SKILL.md) |
+| `/responsive-lighthouse-audit` | [responsive-lighthouse-audit](../skills/responsive-lighthouse-audit/SKILL.md) |
+| `/security-check` | [security-check](../skills/security-check/SKILL.md) |
+| `/translate-sync` | [translate-sync](../skills/translate-sync/SKILL.md) |
+| `/type-fix` | [type-fix](../skills/type-fix/SKILL.md) |
+| `/update-styles` | [update-styles](../skills/update-styles/SKILL.md) |
+| `/write-tests` | [write-tests](../skills/write-tests/SKILL.md) |
 
-> **Why `#` for non-Claude agents?** Most AI CLIs (Codex, Cursor) intercept `/` as their own system commands, so `/dwp-create` never reaches the AI. Using `#` avoids that interception. You can also just write the command name in plain text: "run dwp-create".
+## Keep this index current
 
-When a command is invoked (via `/`, `#`, or by name), the agent MUST:
-
-1. **READ** the linked procedure file completely
-2. **FOLLOW** its step-by-step instructions exactly
-3. **DO NOT** improvise or skip steps — the procedure file IS the spec
-
----
-
-## Deep Work Plans
-
-> The `dwp-*` command files are **thin delegators**: each routes to the installed
-> `deepworkplan` skill (`.agents/skills/deepworkplan/SKILL.md` and its create/execute/
-> refine/resume/status sub-skills), which holds the canonical procedure. Plans and
-> drafts land in the gitignored `.dwp/` (`.dwp/plans/`, `.dwp/drafts/`).
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/dwp-create` | `.agents/commands/dwp-create.md` → `.agents/skills/deepworkplan/SKILL.md` | Create a deep work plan (unified flow: info, draft, refine, final) |
-| `/dwp-execute` | `.agents/commands/dwp-execute.md` → `.agents/skills/deepworkplan/SKILL.md` | Execute an existing deep work plan |
-| `/dwp-refine` | `.agents/commands/dwp-refine.md` → `.agents/skills/deepworkplan/SKILL.md` | Refine a draft or modify an existing final plan |
-| `/dwp-resume` | `.agents/commands/dwp-resume.md` → `.agents/skills/deepworkplan/SKILL.md` | Resume an interrupted deep work plan |
-| `/dwp-status` | `.agents/commands/dwp-status.md` → `.agents/skills/deepworkplan/SKILL.md` | Check status of deep work plans without executing |
-| `/dwp-upgrade` | `.agents/commands/dwp-upgrade.md` → `.agents/skills/deepworkplan/SKILL.md` | Check for a newer DeepWorkPlan skill; install and re-onboard only on explicit acceptance |
-| `/dwp-verify` | `.agents/commands/dwp-verify.md` → `.agents/skills/deepworkplan/SKILL.md` | Verify repo/plan conformance against the DWP spec (read-only) |
-
-## Git & Version Control
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/branch` | `.agents/commands/branch.md` | Generate branch names following naming convention |
-| `/commit` | `.agents/commands/commit.md` | Generate a conventional commit from staged changes |
-| `/pr` | `.agents/commands/pr.md` | Generate a pull request description from branch changes |
-| `/git-commit-push` | `.agents/skills/git-commit-push/SKILL.md` | Commit all changes and push to remote |
-
-## Code Quality & Review
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/code-review` | `.agents/commands/code-review.md` | Review code focusing on critical issues |
-| `/pr-review-lite` | `.agents/skills/pr-review-lite/SKILL.md` | Quick checklist review of a PR (style, bugs, patterns) |
-| `/fix-lint` | `.agents/skills/fix-lint/SKILL.md` | Fix Biome linting/formatting errors in 1-3 files |
-| `/type-fix` | `.agents/skills/type-fix/SKILL.md` | Fix TypeScript type errors in 1-3 files |
-| `/quick-fix` | `.agents/skills/quick-fix/SKILL.md` | Fix small bugs in 1-3 files following existing patterns |
-| `/security-check` | `.agents/skills/security-check/SKILL.md` | Quick security checklist (secrets, API routes, client exposure) |
-
-## Documentation
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/doc` | `.agents/commands/doc.md` | Document a module following the documentation guide |
-| `/doc-edit` | `.agents/skills/doc-edit/SKILL.md` | Update documentation files (README, comments, MDX, markdown) |
-
-## Feature Development
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/add-component` | `.agents/skills/add-component/SKILL.md` | Create new Astro or Svelte component with correct patterns |
-| `/add-page` | `.agents/skills/add-page/SKILL.md` | Create new page with routing and MainLayout |
-| `/update-styles` | `.agents/skills/update-styles/SKILL.md` | Update Tailwind styles with dark mode support |
-| `/refactor-safe` | `.agents/skills/refactor-safe/SKILL.md` | Safe refactor in bounded scope (1-10 files, no behavior change) |
-| `/write-tests` | `.agents/skills/write-tests/SKILL.md` | Add or expand unit/integration tests (Vitest) |
-
-## i18n & Translation
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/translate-sync` | `.agents/skills/translate-sync/SKILL.md` | Synchronize content between English and Spanish versions |
-
-## Dependency Management
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/lib-upgrade` | `.agents/commands/lib-upgrade.md` → `.agents/skills/deepworkplan/addons/dependency-upgrade/SKILL.md` | Upgrade project dependencies (addon-provided thin delegator to the dependency-upgrade addon) |
-
-## Skills & Agents Management
-
-| Command | Procedure File | Description |
-|---------|---------------|-------------|
-| `/skill-create` | `.agents/commands/skill-create.md` → `.agents/skills/deepworkplan/author/SKILL.md` | Create a new skill (thin delegator to the `deepworkplan-author` sub-skill) |
-| `/skill-list` | `.agents/commands/skill-list.md` | List all available skills with tier and description |
-| `/agent-create` | `.agents/commands/agent-create.md` → `.agents/skills/deepworkplan/author/SKILL.md` | Create a new agent (thin delegator to the `deepworkplan-author` sub-skill) |
-| `/agent-list` | `.agents/commands/agent-list.md` | List all available agents with tier and description |
-
----
-
-## Maintaining This File
-
-> **CRITICAL:** This file MUST be updated whenever a skill or command is added or removed.
-
-When creating new skills via `/skill-create`:
-1. Add the command to the correct category table above
-2. Use format: | `/command-name` | `.agents/skills/command-name/SKILL.md` | Brief description |
-
-When creating new commands via `.agents/commands/`:
-1. Add the command to the correct category table above
-2. Use format: | `/command-name` | `.agents/commands/command-name.md` | Brief description |
+When a command or commonly invoked skill is added or removed, update this index and the [skills and agents catalog](skills_agents_catalog.md). The command tree and skill `SKILL.md` files are the source of truth.
