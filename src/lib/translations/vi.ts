@@ -186,7 +186,7 @@ export const vi: SiteTranslations = {
       badge: 'Loop engineering',
       title: 'Kế hoạch chạy đến cùng. Quyền hạn vẫn thuộc về con người.',
       subtitle:
-        'Loop engineering là cách một kế hoạch hoàn thành mà không cần con người liên tục theo dõi. Mỗi hàng dưới đây là một hợp đồng đã phát hành của herdr-peers, addon Herdr tùy chọn: phương pháp luận vẫn hoạt động khi không có nó, và vòng lặp chỉ khuếch đại phương pháp luận.',
+        'Loop engineering giúp kế hoạch hoàn tất mà không cần con người liên tục kiểm tra. Các hàng dưới đây mô tả những hợp đồng đã phát hành của vòng lặp: phần lớn thuộc herdr-peers, còn hàng đợi kế hoạch là hợp đồng của pack. Herdr là tùy chọn; phương pháp vẫn hoạt động khi không có nó.',
       colContract: 'Hợp đồng',
       colGuarantee: 'Điều nó bảo đảm',
       colSource: 'Nguồn',

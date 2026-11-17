@@ -185,7 +185,7 @@ export const id: SiteTranslations = {
       badge: 'Loop engineering',
       title: 'Rencana berjalan hingga akhir. Wewenang tetap di tangan manusia.',
       subtitle:
-        'Loop engineering adalah cara sebuah rencana selesai tanpa ada manusia yang terus memantaunya. Setiap baris di bawah adalah kontrak rilis dari herdr-peers, addon Herdr yang opsional: metodologi tetap berjalan tanpanya, dan loop hanya memperkuatnya.',
+        'Loop engineering membuat rencana selesai tanpa perlu terus dipantau manusia. Baris di bawah menjelaskan kontrak siklus yang telah dirilis: sebagian besar berasal dari herdr-peers, sedangkan antrean rencana adalah kontrak paket. Herdr bersifat opsional; metodologi tetap berfungsi tanpanya.',
       colContract: 'Kontrak',
       colGuarantee: 'Yang dijaminnya',
       colSource: 'Sumber',

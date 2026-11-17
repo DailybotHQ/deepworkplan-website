@@ -14,7 +14,7 @@ export const fr: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — exécution structurée pour les agents de code IA',
   siteDescription:
-    'La spécification d’abord, la boucle fermée : le dépôt est le harness et le plan s’exécute de lui-même jusqu’au bout. L’efficacité mesurée est exprimée en octets d’instructions par flux.',
+    'La spécification d’abord, boucle fermée : le dépôt est le harness et chaque plan va jusqu’au bout. L’efficacité se mesure en octets d’instructions par flux.',
 
   // Navigation
   nav: {
@@ -187,7 +187,7 @@ export const fr: SiteTranslations = {
       badge: 'Loop engineering',
       title: 'Les plans vont jusqu’au bout. L’autorité reste aux humains.',
       subtitle:
-        'Le loop engineering, c’est la façon dont un plan se termine sans qu’un humain ait à le surveiller. Chaque ligne ci-dessous est un contrat publié de herdr-peers, l’addon facultatif Herdr : la méthodologie fonctionne sans lui, et la boucle ne fait que l’amplifier.',
+        'Loop engineering permet à un plan d’aller jusqu’au bout sans qu’un humain le surveille. Les lignes ci-dessous décrivent les contrats publiés de la boucle : la plupart proviennent de herdr-peers, tandis que la file de plans est un contrat du pack. Herdr est facultatif ; la méthodologie fonctionne sans lui.',
       colContract: 'Contrat',
       colGuarantee: 'Ce qu’il garantit',
       colSource: 'Source',

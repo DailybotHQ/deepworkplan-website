@@ -9,7 +9,7 @@ export const es: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — ejecución estructurada para agentes de IA',
   siteDescription:
-    'Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar. La eficiencia medida se expresa en bytes de instrucciones por flujo.',
+    'Primero la especificación, bucle cerrado: el repositorio es el harness y cada plan llega a su fin. Medimos la eficiencia en bytes de instrucciones por flujo.',
 
   // Navigation
   nav: {
@@ -183,7 +183,7 @@ export const es: SiteTranslations = {
       title:
         'Los planes llegan a su fin. La autoridad sigue en manos de las personas.',
       subtitle:
-        'El loop engineering es la forma en que un plan termina sin que una persona tenga que vigilarlo. Cada fila de esta tabla es un contrato publicado de herdr-peers, el complemento opcional de Herdr: la metodología funciona sin él, y el bucle solo la amplifica.',
+        'Loop engineering es la forma en que un plan termina sin que una persona tenga que vigilarlo. Las filas siguientes describen contratos publicados del ciclo: la mayoría pertenecen a herdr-peers y la cola de planes es un contrato del paquete. Herdr es opcional; la metodología funciona sin él.',
       colContract: 'Contrato',
       colGuarantee: 'Qué garantiza',
       colSource: 'Fuente',

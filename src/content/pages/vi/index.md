@@ -26,6 +26,7 @@ Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp ph
 1. **Đặc tả trước** — kế hoạch là nguồn sự thật bền vững: các tác vụ nguyên tử, tiêu chí chấp nhận và cổng kiểm chứng mà agent buộc phải qua.
 2. **Repository là harness** — ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository dưới dạng tệp thuần mà mọi agent đều đọc được.
 
+3. **Loop engineering** — Kế hoạch chạy đến cùng: đăng ký, một daemon do con người khởi động, lời nhắc không thêm quyền hạn, chuyển giao dự phòng và sự kiện kế hoạch.
 4. **Hiệu quả đo được** — số byte chỉ dẫn cho mỗi luồng, được đo và công bố cùng phương pháp — không bao giờ là tỷ lệ phần trăm token bịa ra.
 
 ---

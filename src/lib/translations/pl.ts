@@ -188,7 +188,7 @@ export const pl: SiteTranslations = {
       badge: 'Loop engineering',
       title: 'Plany działają do końca. Uprawnienia pozostają przy ludziach.',
       subtitle:
-        'Loop engineering to sposób, w jaki plan dobiega końca bez człowieka, który stale go sprawdza. Każdy wiersz poniżej to wydany kontrakt herdr-peers, opcjonalnego dodatku Herdr: metodyka działa bez niego, a pętla jedynie ją wzmacnia.',
+        'Loop engineering pozwala planowi dobiec końca bez stałego nadzoru człowieka. Poniższe wiersze opisują wydane kontrakty pętli: większość pochodzi z herdr-peers, a kolejka planów jest kontraktem pakietu. Herdr jest opcjonalny; metodyka działa bez niego.',
       colContract: 'Kontrakt',
       colGuarantee: 'Co gwarantuje',
       colSource: 'Źródło',
