@@ -10,7 +10,7 @@ featured: true
 sourceLabel: "Version du skill 8.0.0"
 sourceUrl: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
 sourceLinks:
-  - label: "Version du skill 8.0.0"
+  - label: "Version du skill v8.0.3"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Version du skill 8.0.0"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"

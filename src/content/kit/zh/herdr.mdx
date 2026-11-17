@@ -136,7 +136,9 @@ v2.0.2 版保持协议 2。在 ask 模式的 pick-v2 启动参数中，可在可
 
 v2.1.0 版保持协议 2。`fleet ui` 在各分组中新增 `Attention`、`Active`、`Waiting`、`Done` 和 `All` 视图，也包括队列；地图新增可选字段 `state_updated_at` 和 `unreadable_reason`。由人启动的 daemon 会拒绝它无法安全接受的权限或计划审批对话框；它不会拒绝 agent 自己提出的工作问题，登录、绕过权限确认和文件夹信任仍由人处理。brain 的拒绝会被明确处理；一小时内拒绝三次会退役该 brain。现在可以就带类别的阻塞向 brain 提问。它的 `ask_lead_to_resolve` 操作只有在类别为 none、C3、C4 或 C7 时，才能将带 `resolver: lead` 的阻塞转交给计划 lead；C1（审批）、C2（同意或登录）、C5（损害）和 C6（条款）仍由人处理，C1–C7 以外的类别会被拒绝。此版本还读取 pack 8.0.0 的 journal-event/v8 阻塞事件和 plan-snapshot/v8 阻塞数据。
 
-v2.2.1 版保持协议 2，并新增 **revive**（`autopilot --loop --revive`）；由人带此选项启动 daemon 即构成授权。如果本机上某个计划的 lead 已不在，或处于用量限额且重置时间在 30 分钟以后，而且没有继任者或 lane 能够接管，该计划会获得一个新的 agent：一个由 `ak pick` 选出、仍有额度的账号，以 ask 模式运行，所在工作区从该计划的检出目录启动。daemon 为它发放一张一次性票据，只有凭此票据才能执行 `lead takeover --reason revive`；新 lead 随后运行 `lead verify` 并继续执行计划。lead 仍然存活的停滞计划绝不会被接管：daemon 只会请该 lead 一次，通过 `lead handover` 移交给新 agent。上限：每个计划每 6 小时最多 revive 一次、总共最多两次，整个 fleet 每小时最多两次，这些计数在 daemon 重启后仍会保留。旧 pane 绝不会被关闭，也不会被发送按键。每次 revive 都会向 `--notify` 发送一个 `plan_revived` 事件，`fleet ui` 会将该 lead 标记为已 revive。2.0 或 2.1 版的接收方会拒绝 revive 记录（失败即关闭）。daemon 还会为它无法识别的每个界面保存一份脱敏副本，移除其中的机密信息和密钥块，以便将其加入测试用例；`autopilot status` 会显示已保存的数量。
+v2.2.0 版保持协议 2，并新增 **revive**（`autopilot --loop --revive`）；由人带此选项启动 daemon 即构成授权。如果本机上某个计划的 lead 已不在，或处于用量限额且重置时间在 30 分钟以后，而且没有继任者或 lane 能够接管，该计划会获得一个新的 agent：一个由 `ak pick` 选出、仍有额度的账号，以 ask 模式运行，所在工作区从该计划的检出目录启动。daemon 为它发放一张一次性票据，只有凭此票据才能执行 `lead takeover --reason revive`；新 lead 随后运行 `lead verify` 并继续执行计划。lead 仍然存活的停滞计划绝不会被接管：daemon 只会请该 lead 一次，通过 `lead handover` 移交给新 agent。上限：每个计划每 6 小时最多 revive 一次、总共最多两次，整个 fleet 每小时最多两次，这些计数在 daemon 重启后仍会保留。旧 pane 绝不会被关闭，也不会被发送按键。每次 revive 都会向 `--notify` 发送一个 `plan_revived` 事件，`fleet ui` 会将该 lead 标记为已 revive。2.0 或 2.1 版的接收方会拒绝 revive 记录（失败即关闭）。daemon 还会为它无法识别的每个界面保存一份脱敏副本，移除其中的机密信息和密钥块，以便将其加入测试用例；`autopilot status` 会显示已保存的数量。
+
+v2.2.1 版保持协议 2，消息格式不变。当 coding-agents-kit 缺失或低于 1.3.0 时，`autopilot --loop --revive` 现在拒绝启动（与 `--brain` 相同的失败即关闭检查），不再把 revive 的次数上限耗费在失败的启动上；daemon 只通过 `ak`（`ak pick`，ask 模式）启动 brain 和被唤起的 agent，从不直接调用 CLI。
 
 ## 备注
 

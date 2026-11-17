@@ -34,7 +34,8 @@ wire to protocol 2 — lead appointment on the human's explicit word,
 the autopilot brain, the plan queue; 2.0.2 accepts the trailing `--ask` of
 an ask-mode pick-v2 launch; 2.1.0 adds the fleet UI views, denies
 permissions the daemon cannot accept and reads the v8 blockers; 2.2.0 adds
-revive, `autopilot --loop --revive`),
+revive, `autopilot --loop --revive`; 2.2.1 refuses to start revive without
+coding-agents-kit 1.3.0 or later),
 coding-agents-kit `v1.5.0` (pick-v2: `ak pick --kinds` with per-kind model
 override and `--json` launch contracts; `--model` as a head flag; `ak
 last`, and Herdr pane restore through `ak`; 1.4.0 adds `ak update`, the
