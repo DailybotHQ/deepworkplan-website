@@ -39,21 +39,48 @@ El objeto superior opcional `autonomy` es cerrado: las claves desconocidas no so
 |---|---|---|
 | `stall_budget` | Entero de 1 a 10 | `3` avisos sin progreso |
 | `promptable` | Lista no vacía de direcciones de panel Herdr | Solo el liderazgo del plan |
-| `notify` | Lista no vacía; actualmente `dailybot` | Ningún destino; el ciclo registra eventos |
+| `notify` | Lista no vacía de destinos | Ningún destino; el ciclo registra eventos |
 | `brain` | Booleano | `false`; ningún brain puede actuar sobre el plan |
 | `queue` | `prompt-lead`, `launch` o `none` | `none`; el plan no está en cola |
 
 Una dirección de panel usa la forma exacta de Herdr: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. El ID de máquina no puede empezar con `-`. Estos valores limitan quién puede recibir avisos y eventos, si un brain puede actuar y cómo participa el plan en una cola. No cambian los criterios de aceptación ni los controles.
 
 ## 3. Bloqueos estructurados
+
+El plan v8 registra como datos por qué no puede continuar, para que ciclo, flota y agente que retoma lean los mismos campos.
+
 ### 3.1. Registro del bloqueo
 
+El ledger usa `ledger.py block` para abrir y `ledger.py unblock` para resolver; registra eventos `blocker` de `journal-event/v8`. Rechaza escrituras directas y registra cada rechazo.
+
+| Campo | Regla |
+|---|---|
+| `task` | Tarea bloqueada del contrato; no puede estar ya cerrada por evidencias. |
+| `reason` | Obligatorio, no vacío, máximo 1000 caracteres: motivo. |
+| `needs` | Obligatorio, una línea no vacía, máximo 500 caracteres: requisito para continuar. |
+| `class` | Obligatorio: `C1`–`C7` de [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5. |
+| `resolver` | Opcional: `lead` o `human`; si falta, se interpreta como `human`. |
+
+`lead` solo resuelve dentro de la autoridad registrada, sin credenciales, login, consentimiento, pago, push a main, publicación ni eliminación. Se rechaza `resolver: "lead"` para `C1`, `C2`, `C5` y `C6`. Puede existir un único bloqueo activo; no se abre otro hasta resolverlo. Reabrir la misma tarea puede cambiar `reason`, `needs`, `class` y `resolver`, pero conserva el primer `since`. La resolución solo contiene la tarea y una nota opcional. Una tarea bloqueada no se completa: se rechaza su cierre y las nuevas evidencias no la cierran.
+
 ### 3.2. Dónde se encuentra
-Un plan bloqueado registra una clase C y un campo `resolver` opcional en el registro `blocked` o `blocker` de `state.json`. `resolver` puede ser `lead` o `human`; si se omite, significa `human`. `lead` significa que el bloqueo se resuelve dentro de la autoridad registrada, sin credenciales, inicio de sesión, consentimiento, pago, push a main, release ni eliminación. El ciclo, incluido el brain, solo puede pedir al liderazgo resolver bloqueos marcados `lead`. Los demás se notifican a la persona y no se sortean con avisos.
+
+`state.json` usa `plan-snapshot/v8`, con la estructura de `plan-snapshot/v6`, `blocker` como `{task, reason, since, needs, class, resolver?}` o `null`, y `blocked` como estado derivado prioritario mientras siga el bloqueo. El ledger proyecta el snapshot; no se edita a mano.
+
+`PROGRESS.md` DEBERÍA empezar bajo el título con cuatro líneas fijas; create las escribe y las actualiza en cada transición (`shared/progress_header.py`):
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` y `Needs` derivan del snapshot (tarea bloqueada primero, si no la primera incompleta). El agente escribe `Goal` y `Next action`. El resto es el índice de trabajo.
+
 ### 3.3. Qué puede hacer el ciclo
 
-El mapa de flota etiquetado de herdr-peers puede mostrar hasta 14 líneas del `PROGRESS.md` del plan como resumen depurado. Es un dato de observación, no una concesión de autoridad ni un esquema publicado de encabezado legible por máquinas. La forma de encabezado planeada en la línea v8 del paquete debe verificarse contra la etiqueta 8.0.0 antes de considerarla normativa.
-
+El ciclo, incluido brain, solo pide al liderazgo resolver un bloqueo marcado `resolver: "lead"`; los demás esperan a la persona. v6/v7 no registran `blocker`, conservan `plan-snapshot/v6` (`blocker` siempre `null`) y sus bloqueos corresponden a la persona.
 ## 4. La cola de planes
 
 La cola es `.dwp/queue.json` con esquema `dwp-queue-v1`. Solo el paquete la escribe: `create` agrega un plan al aprobarlo; la persona o el liderazgo reordenan mediante el flujo del plan; `execute` marca `started` al reclamar el liderazgo (con su dirección); la finalización marca `done`; `create` o `refine` pueden marcar `skipped` con una nota de una línea. Cada elemento contiene plan, dependencia `after` opcional que nombra un plan ya en cola, estado, liderazgo y modo de inicio. Un repositorio ejecuta un plan a la vez salvo que la cola indique expresamente `parallel: true`.
@@ -62,6 +89,4 @@ El daemon es un consumidor acotado y de solo lectura. Una cola inválida se trat
 
 ## 5. Lo que v8 conserva
 
-V8 conserva el contrato v7 para `tasks[].parallel_safe`, la delegación y el journal. El conjunto de eventos del journal v8 sigue siendo el de v7; la escala de generaciones es ordenada, por lo que las funciones marcadas como v7 siguen disponibles en v8 y posteriores. En la capa de registros, v8 conserva las URL de esquema del manifiesto y de eventos del journal v7 y añade únicamente la URL `plan-contract/v8` para la nueva generación. Los planes v5, v6 y v7 mantienen su generación registrada y no se migran en silencio.
-
-V8 no hace obligatorios los complementos. Sin Herdr, los planes siguen ejecutándose dentro de su autoridad registrada mediante la metodología central. Con Herdr, el registro, la continuación acotada, la sucesión, las notificaciones, la cola y la vista de flota de solo lectura amplían el mismo ciclo de vida del plan.
+v8 conserva todo v7, incluidos `tasks[].parallel_safe`, la delegación y su conjunto completo de eventos. Las funciones v7 siguen disponibles en generaciones posteriores. v8 registra el conjunto de eventos v7 más `blocker` en `journal-event/v8` y lo proyecta en `plan-snapshot/v8`; se rechazan journals de generaciones mezcladas. Mantiene `plan-manifest/v7` y su forma y puntero sin cambios; el comprobador empareja manifiesto v7 y contrato v8. v6 y v7 conservan sus registros byte por byte.

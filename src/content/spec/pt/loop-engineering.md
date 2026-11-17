@@ -39,21 +39,48 @@ O objeto opcional de nível superior `autonomy` é fechado: chaves desconhecidas
 |---|---|---|
 | `stall_budget` | Inteiro de 1 a 10 | `3` avisos sem progresso |
 | `promptable` | Lista não vazia de endereços de painel Herdr | Somente o lead do plano |
-| `notify` | Lista não vazia; atualmente `dailybot` | Nenhum destino; o ciclo ainda registra eventos |
+| `notify` | Lista não vazia de destinos | Nenhum destino; o ciclo ainda registra eventos |
 | `brain` | Booleano | `false`; nenhum brain pode agir neste plano |
 | `queue` | `prompt-lead`, `launch` ou `none` | `none`; o plano não está na fila |
 
 Um endereço de painel usa o formato exato de Herdr: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. O ID da máquina não pode começar com `-`. Esses valores limitam quem pode receber avisos e eventos, se um brain pode agir e como o plano participa de uma fila. Eles não alteram critérios de aceitação nem gates.
 
 ## 3. Bloqueios estruturados
+
+O plano v8 registra como dados por que não pode continuar, para que ciclo, frota e agente que retoma leiam os mesmos campos.
+
 ### 3.1. Registro do bloqueio
 
+O ledger usa `ledger.py block` para abrir e `ledger.py unblock` para resolver, registrando eventos `blocker` de `journal-event/v8`. Recusa a gravação direta e registra cada recusa.
+
+| Campo | Regra |
+|---|---|
+| `task` | Tarefa bloqueada do contrato; não pode estar encerrada por evidências. |
+| `reason` | Obrigatório, não vazio, até 1000 caracteres: motivo. |
+| `needs` | Obrigatório, uma linha não vazia, até 500 caracteres: requisito para continuar. |
+| `class` | Obrigatório: `C1`–`C7` de [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5. |
+| `resolver` | Opcional: `lead` ou `human`; se ausente, vale `human`. |
+
+`lead` resolve dentro da autoridade registrada, sem credenciais, login, consentimento, pagamento, push para main, publicação ou exclusão. `resolver: "lead"` é recusado para `C1`, `C2`, `C5` e `C6`. Há no máximo um bloqueio ativo; outro não abre até sua resolução. Reabrir a mesma tarefa pode atualizar `reason`, `needs`, `class` e `resolver`, mantendo o primeiro `since`. A resolução contém a tarefa e nota opcional. Uma tarefa bloqueada não conclui; a conclusão é recusada e novas evidências não a encerram.
+
 ### 3.2. Onde encontrá-lo
-Um plano bloqueado registra uma classe C e um campo opcional `resolver` no registro `blocked` ou `blocker` de `state.json`. `resolver` pode ser `lead` ou `human`; quando ausente, significa `human`. `lead` significa que o bloqueio pode ser resolvido dentro da autoridade registrada, sem credenciais, login, consentimento, pagamento, push para main, release ou exclusão. O ciclo, inclusive o brain, só pode pedir que o lead resolva bloqueios marcados `lead`. Os demais são reportados à pessoa, sem tentativa de contorná-los por avisos.
+
+`state.json` usa `plan-snapshot/v8`: estrutura de `plan-snapshot/v6`, com `blocker` igual a `{task, reason, since, needs, class, resolver?}` ou `null`; `blocked` é o estado derivado prioritário enquanto o bloqueio estiver aberto. O ledger projeta o snapshot; não se edita manualmente.
+
+`PROGRESS.md` DEVERIA começar sob o título com quatro linhas fixas, escritas por create e atualizadas a cada transição (`shared/progress_header.py`):
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` e `Needs` vêm do snapshot (tarefa bloqueada primeiro, caso contrário a primeira incompleta). O agente escreve `Goal` e `Next action`. O restante é índice de trabalho.
+
 ### 3.3. O que o ciclo pode fazer
 
-O mapa de frota marcado do herdr-peers pode mostrar até 14 linhas do próprio `PROGRESS.md` do plano como resumo higienizado. Essa exibição é dado observacional, não concessão de autoridade nem schema publicado de cabeçalho legível por máquina. O formato de cabeçalho planejado na linha v8 do pacote deve ser conferido na tag 8.0.0 antes de ser tratado como normativo.
-
+O ciclo, inclusive brain, só pede ao lead que resolva bloqueio marcado `resolver: "lead"`; os demais aguardam a pessoa. v6/v7 não registram `blocker` e mantêm `plan-snapshot/v6` com `blocker` nulo; seus bloqueios cabem à pessoa.
 ## 4. A fila de planos
 
 A fila é `.dwp/queue.json`, schema `dwp-queue-v1`. Só o pacote escreve: `create` acrescenta um plano quando aprovado; a pessoa ou o lead reordenam pelo fluxo do plano; `execute` marca `started` ao reivindicar o lead (com seu endereço); a finalização marca `done`; `create` ou `refine` podem marcar `skipped` com uma nota de uma linha. Cada item contém plano, dependência `after` opcional que nomeia um plano já enfileirado, estado, lead e modo de início. Um repositório executa um plano por vez, a menos que a fila defina explicitamente `parallel: true`.
@@ -62,6 +89,4 @@ O daemon é consumidor limitado e somente leitura. Uma fila inválida é tratada
 
 ## 5. O que o v8 preserva
 
-O v8 preserva o contrato v7 para `tasks[].parallel_safe`, delegação e journal. O conjunto de eventos do journal v8 continua igual ao do v7; a escala de gerações é ordenada, então recursos marcados como v7 continuam disponíveis no v8 e posteriores. Na camada de registros, o v8 mantém as URLs de schema do manifesto e dos eventos de journal do v7 e adiciona somente a URL `plan-contract/v8` para a nova geração. Planos v5, v6 e v7 mantêm a geração registrada e não são migrados silenciosamente.
-
-O v8 não torna add-ons obrigatórios. Sem Herdr, os planos ainda executam dentro da autoridade registrada usando a metodologia central. Com Herdr, registro, continuidade limitada, sucessão, notificações, fila e visualização de frota somente leitura ampliam o mesmo ciclo de vida do plano.
+O v8 preserva tudo do v7, incluindo `tasks[].parallel_safe`, delegação e o conjunto completo de eventos. Recursos v7 continuam nas gerações seguintes. O v8 registra eventos v7 mais `blocker` em `journal-event/v8` e projeta em `plan-snapshot/v8`; journals mistos são recusados. Mantém `plan-manifest/v7`, sua forma e ponteiro; o verificador associa manifesto v7 a contrato v8. v6 e v7 preservam registros byte por byte.

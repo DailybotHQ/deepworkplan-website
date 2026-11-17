@@ -39,21 +39,48 @@ L’oggetto top-level facoltativo `autonomy` è chiuso: chiavi sconosciute non v
 |---|---|---|
 | `stall_budget` | Intero da 1 a 10 | `3` sollecitazioni senza progresso |
 | `promptable` | Elenco non vuoto di indirizzi pane Herdr | Solo il lead del piano |
-| `notify` | Elenco non vuoto; ora `dailybot` | Nessun destinatario; gli eventi restano registrati |
+| `notify` | Elenco non vuoto di destinatari | Nessun destinatario; gli eventi restano registrati |
 | `brain` | Booleano | `false` |
 | `queue` | `prompt-lead`, `launch` o `none` | `none` |
 
 Un indirizzo pane usa la forma esatta Herdr: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. L’ID macchina non può iniziare con `-`. I campi limitano chi riceve prompt ed eventi, l’azione del brain e la partecipazione alla coda; non cambiano criteri di accettazione né gate.
 
 ## 3. Blocchi strutturati
+
+Il piano v8 registra come dati perché non può proseguire, così ciclo, flotta e agente che riprende leggono gli stessi campi.
+
 ### 3.1. Record del blocco
 
+Il ledger apre con `ledger.py block` e risolve con `ledger.py unblock`, registrando `blocker` in `journal-event/v8`. Rifiuta aggiunte dirette e registra ogni rifiuto.
+
+| Campo | Regola |
+|---|---|
+| `task` | Attività bloccata del contract; non può essere già chiusa dalle prove. |
+| `reason` | Obbligatorio, non vuoto, massimo 1000 caratteri: motivo. |
+| `needs` | Obbligatorio, una sola riga non vuota, massimo 500 caratteri: requisito per continuare. |
+| `class` | Obbligatorio: `C1`–`C7` di [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5. |
+| `resolver` | Facoltativo `lead` o `human`; se assente vale `human`. |
+
+`lead` risolve entro l’autorità registrata, senza credenziali, accesso, consenso, pagamento, push su main, pubblicazione o eliminazione. `resolver: "lead"` è rifiutato per `C1`, `C2`, `C5`, `C6`. È attivo al massimo un blocco; un altro è rifiutato fino alla risoluzione. Riaprire la stessa attività può aggiornare `reason`, `needs`, `class` e `resolver`, mantenendo il primo `since`. La risoluzione contiene attività e nota facoltativa. Il blocco aperto impedisce il completamento e nuove prove non chiudono l’attività.
+
 ### 3.2. Dove trovarlo
-Un piano bloccato registra una classe C e un `resolver` facoltativo nel record `blocked` o `blocker` di `state.json`. I valori sono `lead` o `human`; se assente significa `human`. `lead` indica una risoluzione entro l’autorità registrata senza credenziali, accesso, consenso, pagamento, push su main, release o eliminazione. Il ciclo, brain incluso, può chiedere al lead di risolvere solo blocchi marcati `lead`; gli altri vengono segnalati alla persona e non aggirati con prompt.
+
+`state.json` usa `plan-snapshot/v8`, struttura di `plan-snapshot/v6`, `blocker` come `{task, reason, since, needs, class, resolver?}` o `null` e `blocked` come stato derivato prioritario. Il ledger proietta i campi; non si scrivono a mano.
+
+`PROGRESS.md` DOVREBBE iniziare sotto il titolo con quattro righe fisse, scritte da create e aggiornate a ogni transizione (`shared/progress_header.py`):
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` e `Needs` derivano dallo snapshot: prima l’attività bloccata, altrimenti la prima incompleta. L’agente scrive `Goal` e `Next action`.
+
 ### 3.3. Cosa può fare il ciclo
 
-La mappa flotta Herdr taggata può mostrare fino a 14 righe ripulite di `PROGRESS.md`. È un riepilogo osservativo, non autorità né uno schema pubblicato per intestazioni leggibili dalla macchina. L’intestazione prevista dalla linea v8 del pack va verificata al tag 8.0.0.
-
+Il ciclo, brain incluso, chiede al lead di risolvere solo se è indicato `resolver: "lead"`. Gli altri attendono la persona. v6/v7 non registrano `blocker`, mantengono `plan-snapshot/v6` con `blocker` nullo; i loro blocchi spettano alla persona.
 ## 4. Coda dei piani
 
 La coda è `.dwp/queue.json`, schema `dwp-queue-v1`. Scrive solo il pack: `create` aggiunge all’approvazione; persona o lead riordinano tramite il flusso del piano; `execute` segna `started` quando rivendica il lead con il suo indirizzo; la finalizzazione segna `done`; `create` o `refine` possono segnare `skipped` con una nota breve. Ogni voce contiene piano, dipendenza `after` facoltativa, stato, lead e modalità d’avvio. Senza `parallel: true`, un repository esegue un piano alla volta.
@@ -62,4 +89,4 @@ Il daemon è un consumer limitato in sola lettura. Una coda non valida è tratta
 
 ## 5. Cosa conserva v8
 
-v8 conserva dal contratto v7 `tasks[].parallel_safe`, delega e journal; gli eventi del journal restano quelli v7. Nel livello di registrazione mantiene gli URL v7 di manifest e journal-event e aggiunge solo `plan-contract/v8`. I piani v5, v6 e v7 mantengono la generazione registrata senza migrazione silenziosa. Herdr è facoltativo: senza, vale il metodo centrale; con Herdr, registrazione, continuità limitata, successione, notifiche, coda e vista flotta in sola lettura estendono lo stesso ciclo.
+v8 conserva tutto v7: `tasks[].parallel_safe`, delega e insieme completo di eventi; le funzioni v7 restano disponibili. v8 registra gli eventi v7 più `blocker` in `journal-event/v8` e li proietta in `plan-snapshot/v8`; i journal misti sono rifiutati. `plan-manifest/v7` mantiene forma e puntatore; la verifica associa manifest v7 e contract v8. I registri v6/v7 restano identici byte per byte.

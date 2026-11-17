@@ -39,21 +39,48 @@ Das optionale `autonomy`-Objekt auf oberster Ebene ist geschlossen; unbekannte S
 |---|---|---|
 | `stall_budget` | Ganzzahl von 1 bis 10 | `3` Anstöße ohne Fortschritt |
 | `promptable` | Nichtleere Liste von Herdr-Pane-Adressen | Nur der Lead des Plans |
-| `notify` | Nichtleere Zielliste; derzeit `dailybot` | Kein Ziel; der Loop zeichnet Ereignisse dennoch auf |
+| `notify` | Nichtleere Zielliste | Kein Ziel; der Loop zeichnet Ereignisse dennoch auf |
 | `brain` | Boolean | `false`; kein Brain handelt für den Plan |
 | `queue` | `prompt-lead`, `launch` oder `none` | `none`; der Plan ist nicht eingereiht |
 
 Eine Pane-Adresse folgt exakt Herdrs Form: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. Eine Maschinen-ID beginnt nie mit `-`. Die Felder begrenzen, wer angestoßen wird und Meldungen erhält, ob ein Brain handeln darf und wie der Plan an einer Warteschlange teilnimmt. Sie ändern weder Abnahmekriterien noch Gates.
 
 ## 3. Strukturierte Blocker
+
+Ein v8-Plan speichert den Grund einer Unterbrechung als Daten, damit Loop, Flotte und fortsetzende Agenten dieselben Felder lesen.
+
 ### 3.1. Der Blocker-Eintrag
 
+Das Ledger öffnet mit `ledger.py block` und löst mit `ledger.py unblock` auf. Es speichert `blocker` in `journal-event/v8`; direktes Anhängen wird abgewiesen und jede Ablehnung protokolliert.
+
+| Feld | Regel |
+|---|---|
+| `task` | Blockierte Aufgabe des Contracts; eine bereits durch Nachweise geschlossene Aufgabe darf nicht blockiert werden. |
+| `reason` | Erforderlich, nicht leer, höchstens 1000 Zeichen: Grund des Stillstands. |
+| `needs` | Erforderlich, genau eine nicht leere Zeile, höchstens 500 Zeichen: Voraussetzung zum Fortsetzen. |
+| `class` | Erforderlich: `C1`–`C7` aus [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5. |
+| `resolver` | Optional `lead` oder `human`; fehlt es, gilt `human`. |
+
+`lead` löst innerhalb der aufgezeichneten Befugnisse, ohne Zugangsdaten, Login, Zustimmung, Zahlung, Push auf main, Veröffentlichung oder Löschung. Für `C1`, `C2`, `C5` und `C6` wird `resolver: "lead"` abgewiesen. Je Plan ist höchstens ein Blocker aktiv. Eine andere Aufgabe wird bis zur Auflösung abgewiesen. Derselbe Blocker kann `reason`, `needs`, `class`, `resolver` ändern, behält aber das erste `since`. Die Auflösung enthält Aufgabe und optionale Notiz. Die offene Aufgabe kann nicht abgeschlossen werden; neue Nachweise schließen sie nicht.
+
 ### 3.2. Wo Leser ihn finden
-Ein blockierter Plan zeichnet eine C-Klasse und ein optionales `resolver`-Feld im `blocked`- oder `blocker`-Eintrag von `state.json` auf. `resolver` ist `lead` oder `human`; ohne Angabe gilt `human`. `lead` bedeutet, dass der Blocker innerhalb der aufgezeichneten Befugnisse lösbar ist, ohne Zugangsdaten, Login, Zustimmung, Zahlung, Push nach main, Release oder Löschung. Der Loop einschließlich Brain darf einen Lead nur bei einem mit `lead` markierten Blocker um Lösung bitten. Andere Blocker werden dem Menschen gemeldet und nicht durch Anstöße umgangen.
+
+`state.json` verwendet `plan-snapshot/v8`: die Form von `plan-snapshot/v6`, `blocker` als `{task, reason, since, needs, class, resolver?}` oder `null` und `blocked` als vorrangigen abgeleiteten Status. Das Ledger projiziert diese Felder; sie werden nie manuell geschrieben.
+
+`PROGRESS.md` SOLLTE direkt unter dem Titel mit vier festen Zeilen beginnen. create schreibt sie und aktualisiert sie bei jedem Übergang (`shared/progress_header.py`):
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` und `Needs` stammen aus dem Snapshot (zuerst blockierte, sonst erste offene Aufgabe). Der ausführende Agent schreibt `Goal` und `Next action`.
+
 ### 3.3. Was der Loop tun darf
 
-Die getaggte Herdr-Flottenkarte kann bis zu 14 bereinigte Zeilen aus dem `PROGRESS.md` des Plans anzeigen. Das sind Beobachtungsdaten, keine Befugnis und kein veröffentlichtes Schema für einen maschinenlesbaren Fortschrittskopf. Das in der v8-Packlinie geplante Kopfzeilenformat muss vor normativer Verwendung gegen Tag 8.0.0 geprüft werden.
-
+Loop einschließlich brain darf nur bei `resolver: "lead"` den lead um Lösung bitten. Sonst ist der Mensch zuständig. v6/v7 speichern keine `blocker`-Ereignisse und behalten `plan-snapshot/v6` (`blocker` bleibt `null`); ihre Blocker gehören dem Menschen.
 ## 4. Die Planwarteschlange
 
 Die Warteschlange ist `.dwp/queue.json` mit Schema `dwp-queue-v1`. Nur das Pack schreibt sie: `create` hängt bei Genehmigung an; Mensch oder Lead sortieren im Planablauf um; `execute` setzt `started` beim Beanspruchen des Leads samt Lead-Adresse; die Finalisierung setzt `done`; `create` oder `refine` können mit einer einzeiligen Notiz `skipped` setzen. Ein Eintrag enthält Plan, optionale `after`-Abhängigkeit auf einen bereits eingereihten Plan, Status, Lead und Startmodus. Pro Repository läuft ein Plan, sofern die Warteschlange nicht ausdrücklich `parallel: true` setzt.
@@ -62,6 +89,4 @@ Der Daemon ist ein begrenzter Leser. Eine unbrauchbare Warteschlange gilt als le
 
 ## 5. Was v8 beibehält
 
-v8 behält den v7-Vertrag für `tasks[].parallel_safe`, Delegation und Journal. Die v8-Journalereignisse entsprechen weiterhin v7; die Generationsleiter ist geordnet, daher bleiben v7-Funktionen auch in v8 und später verfügbar. In der Record-Schicht behält v8 die v7-Schema-URLs für Manifest und Journalereignisse bei und ergänzt für die neue Generation nur `plan-contract/v8`. Bestehende v5-, v6- und v7-Pläne behalten ihre aufgezeichnete Generation und werden nicht stillschweigend migriert.
-
-v8 macht keine Addons zur Pflicht. Ohne Herdr laufen Pläne durch die Kernmethode innerhalb der aufgezeichneten Befugnisse. Mit Herdr erweitern Registrierung, begrenzte Fortsetzung, Nachfolge, Meldungen, Warteschlange und schreibgeschützte Flottenansicht denselben Planlebenszyklus.
+v8 bewahrt alles aus v7, darunter `tasks[].parallel_safe`, Delegation und den vollständigen Ereignissatz; v7-Funktionen bleiben verfügbar. v8 speichert den v7-Ereignissatz plus `blocker` in `journal-event/v8` und projiziert nach `plan-snapshot/v8`; gemischte Journals werden abgewiesen. `plan-manifest/v7` bleibt samt Form und Verweis erhalten; die Prüfung kombiniert v7-Manifest und v8-Contract. v6/v7-Aufzeichnungen bleiben bytegenau.

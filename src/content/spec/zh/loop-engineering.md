@@ -39,21 +39,48 @@ lead 消失时，daemon 会请列表中第一个可联系的继任者运行 `her
 |---|---|---|
 | `stall_budget` | 1 到 10 的整数 | `3` 次无进展提示 |
 | `promptable` | 非空 Herdr pane 地址列表 | 仅计划 lead |
-| `notify` | 非空目标列表；当前为 `dailybot` | 无目标；循环仍记录事件 |
+| `notify` | 非空目标列表 | 无目标；循环仍记录事件 |
 | `brain` | 布尔值 | `false`；brain 不得对计划采取行动 |
 | `queue` | `prompt-lead`、`launch` 或 `none` | `none`；计划不进入队列 |
 
 Pane 地址严格采用 Herdr 格式：`(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`。机器 ID 不能以 `-` 开头。这些设置限制哪些 pane 可被提示、谁接收事件、brain 是否能行动，以及计划如何参与队列；它们不会修改验收标准或 gates。
 
 ## 3. 结构化阻塞
+
+v8 计划将无法继续的原因记录为数据，使循环、舰队和恢复工作的代理读取相同字段。
+
 ### 3.1. 阻塞记录
 
+ledger 用 `ledger.py block` 创建、用 `ledger.py unblock` 解决，并记录为 `journal-event/v8` 的 `blocker` 事件。直接追加会被拒绝，且每次拒绝都会记录。
+
+| 字段 | 规则 |
+|---|---|
+| `task` | contract 中受阻的任务；不得阻塞已被证据关闭的任务。 |
+| `reason` | 必填、非空，最多 1000 个字符：原因。 |
+| `needs` | 必填，恰好一行非空内容，最多 500 个字符：继续所需条件。 |
+| `class` | 必填：`C1`–`C7`，见 [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5。 |
+| `resolver` | 可选：`lead` 或 `human`；缺省为 `human`。 |
+
+`lead` 仅在记录权限内解决，不涉及凭据、登录、同意、付款、推送到 main、发布或删除。`C1`、`C2`、`C5`、`C6` 必须拒绝 `resolver: "lead"`。每个计划最多一个活动阻塞，解决前不得创建另一个。同一任务重开可更新 `reason`、`needs`、`class`、`resolver`，但保留首次 `since`。解决记录只有任务和可选备注。受阻任务不得完成；完成会被拒绝，新证据也不会关闭任务。
+
 ### 3.2. 读取位置
-被阻塞的计划会在 `state.json` 的 `blocked` 或 `blocker` 记录中写入 C 类别和可选 `resolver`。`resolver` 可为 `lead` 或 `human`；省略表示 `human`。`lead` 表示可在已记录权限内解决，且不需要凭据、登录、同意、付款、推送到 main、发布或删除。循环（包括 brain）只能请求 lead 解决标为 `lead` 的阻塞。其他阻塞会报告给人类，不会通过提示绕过。
-### 3.3. 循环可执行的操作
 
-已发布的 herdr-peers 舰队地图最多显示计划自身 `PROGRESS.md` 的 14 行净化摘要。这是观察数据，不是权限授予，也不是机器可读进度头的已发布 schema。pack v8 线计划的进度头格式须在 8.0.0 tag 上核验后才能作为规范。
+`state.json` 使用 `plan-snapshot/v8`：沿用 `plan-snapshot/v6` 结构，`blocker` 为 `{task, reason, since, needs, class, resolver?}` 或 `null`；`blocked` 是阻塞期间优先的派生任务状态。ledger 投影这些字段，绝不手动编辑。
 
+`PROGRESS.md` 应在标题下直接以四行固定头部开篇，由 create 写入并在每次转换时更新（`shared/progress_header.py`）：
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` 和 `Needs` 来自快照（先取受阻任务，否则取首个未完成任务）；执行代理填写 `Goal` 和 `Next action`。其余仍是工作索引。
+
+### 3.3. 循环可以做什么
+
+循环（包括 brain）只能请求 lead 解决标记为 `resolver: "lead"` 的阻塞，其他情况等待人工处理。v6/v7 不记录 `blocker`，保留 `plan-snapshot/v6`（`blocker` 为 `null`），其阻塞均由人处理。
 ## 4. 计划队列
 
 队列位于 `.dwp/queue.json`，schema 为 `dwp-queue-v1`。只有 pack 会写入：`create` 在批准时追加；人类或 lead 通过计划流程调整顺序；`execute` 认领 lead 时标为 `started`（并记录 lead 地址）；最终完成时标为 `done`；`create` 或 `refine` 可用单行说明标为 `skipped`。队列项包含计划、可选 `after` 依赖（指向队列中已有计划）、状态、lead 和启动模式。除非队列明确设置 `parallel: true`，每个仓库一次运行一个计划。
@@ -62,6 +89,4 @@ daemon 是有界的只读消费者。损坏队列按空队列处理，不影响�
 
 ## 5. v8 保留的内容
 
-v8 保留 v7 的 `tasks[].parallel_safe`、delegation 和 journal 契约。v8 journal 事件集与 v7 相同；代际顺序递进，因此标为 v7 的功能在 v8 及后续代际仍可用。在记录层中，v8 保留 v7 manifest 和 journal-event schema URL，只为新一代增加 `plan-contract/v8` URL。v5、v6、v7 计划继续保留已记录代际，不会静默迁移。
-
-v8 不要求安装插件。没有 Herdr 时，核心方法仍让计划在自身记录权限内执行。启用 Herdr 后，注册、有限持续执行、继任、通知、队列和只读舰队视图增强同一计划生命周期。
+v8 保留 v7 的全部内容，包括 `tasks[].parallel_safe`、委派和完整事件集；v7 功能在后续代际继续提供。v8 将 v7 事件集加 `blocker` 记录在 `journal-event/v8` 并投影到 `plan-snapshot/v8`；拒绝混合代际 journal。v8 保留 `plan-manifest/v7`，其结构和指针不变；检查器将 v7 manifest 与 v8 contract 配对。v6/v7 记录逐字节保留。

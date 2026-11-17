@@ -39,21 +39,48 @@ lead がいなくなると、daemon は一覧の最初の到達可能な後継�
 |---|---|---|
 | `stall_budget` | 1〜10 の整数 | 進展のない促し `3` 回 |
 | `promptable` | 空でない Herdr pane アドレス配列 | 計画の lead のみ |
-| `notify` | 空でない宛先配列。現在は `dailybot` | 宛先なし。ループはイベントを記録する |
+| `notify` | 空でない宛先リスト | 宛先なし。ループはイベントを記録する |
 | `brain` | Boolean | `false`。brain は計画に作用しない |
 | `queue` | `prompt-lead`、`launch`、`none` | `none`。計画はキューに入らない |
 
 pane アドレスは Herdr の正確な形式です：`(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`。machine ID は `-` で始まりません。これらの設定は、促しの対象、イベント通知先、brain の動作可否、キュー参加方法を制限します。受け入れ基準や gates は変更しません。
 
 ## 3. 構造化ブロッカー
+
+v8 計画は継続できない理由をデータとして記録し、ループ、フリート、再開するエージェントが同じフィールドを参照できるようにします。
+
 ### 3.1. ブロッカーレコード
 
+ledger の `ledger.py block` で起票し、`ledger.py unblock` で解消します。`journal-event/v8` の `blocker` イベントとして記録され、生の追加は拒否され、拒否も記録されます。
+
+| フィールド | 規則 |
+|---|---|
+| `task` | contract のブロック中タスク。証拠で完了済みのタスクはブロックしません。 |
+| `reason` | 必須、空でなく最大1000文字。停止理由。 |
+| `needs` | 必須、空でない1行、最大500文字。継続に必要なもの。 |
+| `class` | 必須、[`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5 の `C1`–`C7`。 |
+| `resolver` | 任意の `lead` または `human`。省略時は `human`。 |
+
+`lead` は記録済み権限内で、認証、ログイン、同意、支払い、main への push、公開、削除なしに解決できることです。`C1`、`C2`、`C5`、`C6` では `resolver: "lead"` を拒否します。有効なブロッカーは計画ごとに最大1件。別タスクへの起票は解消まで拒否。同じタスクの再起票は `reason`、`needs`、`class`、`resolver` を更新できますが、最初の `since` を保持します。解消記録はタスクと任意メモのみ。未解消中の完了は拒否され、新しい証拠も閉じません。
+
 ### 3.2. 参照場所
-ブロックされた計画は、`state.json` の `blocked` または `blocker` レコードに C クラスと任意の `resolver` を記録します。`resolver` は `lead` または `human` で、省略時は `human` です。`lead` は、認証情報、ログイン、同意、支払い、main への push、release、削除なしで、記録済み権限内に解決できることを意味します。brain を含むループは `lead` と記録されたブロッカーのみ lead に解決を頼めます。それ以外は人間に通知し、促しで迂回しません。
+
+`state.json` は `plan-snapshot/v8`。`plan-snapshot/v6` の形に従い、`blocker` は `{task, reason, since, needs, class, resolver?}` または `null`、`blocked` は未解消中に優先される派生状態です。ledger が投影し、手入力しません。
+
+`PROGRESS.md` はタイトル直下に固定4行を置くことが推奨されます。create が書き、各遷移で更新します（`shared/progress_header.py`）：
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` と `Needs` は snapshot から導出（ブロック中タスク、なければ最初の未完了）。`Goal` と `Next action` は実行エージェントが記述します。
+
 ### 3.3. ループができること
 
-タグ付き herdr-peers のフリートマップは、計画自身の `PROGRESS.md` 最大14行を整理済み要約として表示できます。これは観測情報であり、権限付与でも機械可読ヘッダーの公開 schema でもありません。pack v8 ラインで予定されるヘッダー形式は、規範とする前に 8.0.0 tag で確認する必要があります。
-
+ループ（brain 含む）は `resolver: "lead"` の指定があるブロッカーだけ lead に解決を依頼できます。それ以外は人間を待ちます。v6/v7 は `blocker` イベントを記録せず、`plan-snapshot/v6`（`blocker` は常に `null`）を維持し、ブロッカーは人間が扱います。
 ## 4. 計画キュー
 
 キューは `.dwp/queue.json` にある `dwp-queue-v1` です。書き込むのは pack のみです。`create` は承認時に追加し、人間または lead は計画フローで順序を変更し、`execute` は lead の claim 時に lead アドレスとともに `started` にし、finalize は `done` にします。`create` または `refine` は1行の理由を添えて `skipped` にできます。各項目には計画、キュー内の既存計画を指す任意の `after`、状態、lead、開始モードがあります。キューが明示的に `parallel: true` を指定しない限り、リポジトリでは一度に一計画を実行します。
@@ -62,6 +89,4 @@ daemon は上限付きの読み取り専用 consumer です。使えないキュ
 
 ## 5. v8 が維持するもの
 
-v8 は `tasks[].parallel_safe`、delegation、journal について v7 契約を維持します。v8 の journal-event 集合は v7 と同じです。世代は順序立っており、v7 として指定された機能は v8 以降でも使用できます。record layer では v7 の manifest と journal-event schema URL を保ち、新世代には `plan-contract/v8` URL だけを追加します。既存の v5、v6、v7 計画は記録済み世代を保ち、暗黙に移行されません。
-
-v8 は add-on を必須にしません。Herdr がなくても、計画は中核手法によって記録済み権限内で実行されます。Herdr があれば、登録、制限付き継続、後継、通知、キュー、読み取り専用フリート表示で同じ計画ライフサイクルが強化されます。
+v8 は `tasks[].parallel_safe`、委譲、v7 の全イベントを含む v7 の内容を維持し、v7 機能は後続世代でも利用できます。v8 は v7 イベント集合に `blocker` を加えたものを `journal-event/v8` に記録し `plan-snapshot/v8` に投影します。世代混在 journal は拒否します。`plan-manifest/v7` の形とポインターを保ち、検証器は v7 manifest と v8 contract を組み合わせます。v6/v7 の記録はバイト単位で保持されます。

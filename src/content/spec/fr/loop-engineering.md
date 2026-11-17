@@ -39,21 +39,48 @@ L’objet supérieur facultatif `autonomy` est fermé : toute clé inconnue est 
 |---|---|---|
 | `stall_budget` | Entier de 1 à 10 | `3` sollicitations sans progrès |
 | `promptable` | Liste non vide d’adresses de pane Herdr | Le lead du plan seul |
-| `notify` | Liste non vide ; actuellement `dailybot` | Aucune cible ; les événements restent consignés |
+| `notify` | Liste non vide de cibles | Aucune cible ; les événements restent consignés |
 | `brain` | Booléen | `false` ; aucun brain ne peut agir |
 | `queue` | `prompt-lead`, `launch` ou `none` | `none` ; plan non mis en file |
 
 Une adresse pane suit exactement la forme Herdr : `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`. Un identifiant machine ne commence pas par `-`. Ces champs limitent les personnes sollicitées, les destinataires d’événements, l’action éventuelle d’un brain et la participation à la file. Ils ne changent ni critères d’acceptation ni étapes.
 
 ## 3. Blocages structurés
+
+Un plan v8 enregistre les raisons de blocage comme données pour que boucle, flotte et agent repreneur lisent les mêmes champs.
+
 ### 3.1. Enregistrement du blocage
 
+Le ledger utilise `ledger.py block` pour ouvrir et `ledger.py unblock` pour résoudre, avec un événement `blocker` de `journal-event/v8`. L’ajout direct et toute opération refusée sont consignés.
+
+| Champ | Règle |
+|---|---|
+| `task` | Tâche bloquée du contract ; une tâche déjà close par ses preuves ne peut être bloquée. |
+| `reason` | Obligatoire, non vide, 1000 caractères maximum : motif. |
+| `needs` | Obligatoire, une seule ligne non vide, 500 caractères maximum : condition pour continuer. |
+| `class` | Obligatoire : `C1`–`C7` d’[`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5. |
+| `resolver` | Facultatif `lead` ou `human` ; absent, il vaut `human`. |
+
+`lead` résout dans l’autorité consignée, sans identifiants, connexion, consentement, paiement, push vers main, publication ni suppression. `resolver: "lead"` est refusé pour `C1`, `C2`, `C5` et `C6`. Un seul blocage actif est permis ; une autre ouverture est refusée jusqu’à résolution. Une réouverture peut actualiser les champs mais conserve le premier `since`. La résolution contient la tâche et une note facultative. Une tâche bloquée ne peut être close ; de nouvelles preuves ne la ferment pas.
+
 ### 3.2. Où le trouver
-Un plan bloqué consigne une classe C et un champ `resolver` facultatif dans l’enregistrement `blocked` ou `blocker` de `state.json`. `resolver` vaut `lead` ou `human` ; absent, il signifie `human`. `lead` indique une résolution dans l’autorité consignée, sans identifiant, connexion, consentement, paiement, push vers main, release ou suppression. La boucle, brain compris, ne peut solliciter un lead que pour un blocage marqué `lead`. Les autres sont signalés à l’humain, sans contournement par sollicitation.
+
+`state.json` utilise `plan-snapshot/v8` : la forme de `plan-snapshot/v6`, avec `blocker` égal à `{task, reason, since, needs, class, resolver?}` ou `null`, et `blocked` comme statut dérivé prioritaire. Le ledger projette les champs sans écriture manuelle.
+
+`PROGRESS.md` DEVRAIT commencer sous le titre par quatre lignes fixes, écrites par create et actualisées à chaque transition (`shared/progress_header.py`) :
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` et `Needs` dérivent du snapshot (tâche bloquée d’abord, sinon première tâche inachevée). L’agent écrit `Goal` et `Next action`.
+
 ### 3.3. Actions possibles de la boucle
 
-La carte de flotte Herdr publiée peut afficher jusqu’à 14 lignes de `PROGRESS.md` comme résumé nettoyé. Ce sont des données d’observation, non une attribution d’autorité ni un schéma publié d’en-tête lisible par machine. L’en-tête envisagé par la branche v8 du pack doit être vérifié avec le tag 8.0.0 avant tout statut normatif.
-
+La boucle, brain compris, ne demande au lead que les blocages marqués `resolver: "lead"` ; les autres attendent l’humain. v6/v7 ne consignent pas `blocker`, gardent `plan-snapshot/v6` (`blocker` à `null`) ; leurs blocages relèvent de l’humain.
 ## 4. File de plans
 
 La file est `.dwp/queue.json`, schéma `dwp-queue-v1`. Seul le pack écrit : `create` ajoute à l’approbation ; l’humain ou le lead réordonne via le flux de plan ; `execute` marque `started` en revendiquant le lead et son adresse ; la finalisation marque `done` ; `create` ou `refine` peut marquer `skipped` avec une note d’une ligne. Chaque entrée comporte un plan, une dépendance `after` facultative vers un plan déjà en file, un état, un lead et un mode de démarrage. Un dépôt n’exécute qu’un plan à la fois, sauf `parallel: true` explicite.
@@ -62,6 +89,4 @@ Le daemon est un consommateur borné en lecture seule. Une file inutilisable est
 
 ## 5. Éléments conservés par v8
 
-v8 conserve du contrat v7 `tasks[].parallel_safe`, la délégation et le journal. L’ensemble d’événements du journal reste celui de v7 ; l’ordre des générations conserve les fonctionnalités v7 dans v8 et les suivantes. Dans la couche de registres, v8 garde les URL v7 du manifeste et des événements de journal et ajoute seulement l’URL `plan-contract/v8`. Les plans v5, v6 et v7 gardent leur génération, sans migration silencieuse.
-
-v8 ne rend pas les modules obligatoires. Sans Herdr, les plans suivent la méthode centrale et leur autorité consignée. Avec Herdr, enregistrement, continuité bornée, succession, notifications, file et vue de flotte en lecture seule prolongent le même cycle de vie.
+v8 conserve tout v7, dont `tasks[].parallel_safe`, la délégation et l’ensemble complet d’événements ; les fonctions v7 restent disponibles. v8 enregistre les événements v7 plus `blocker` dans `journal-event/v8` et les projette dans `plan-snapshot/v8` ; un journal mixte est refusé. `plan-manifest/v7` garde sa forme et son pointeur ; le vérificateur associe manifeste v7 et contract v8. Les enregistrements v6/v7 restent identiques octet par octet.
