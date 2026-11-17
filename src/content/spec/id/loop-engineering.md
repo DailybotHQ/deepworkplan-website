@@ -14,13 +14,13 @@ Halaman ini menjelaskan kontrak loop engineering. **Rencana** adalah sumber wewe
 Rencana disetujui berjalan sampai selesai tanpa menunggu manusia. Otonomi berlaku **dalam wewenang rencana yang tercatat**. Manusia diberi tahu; login, kredensial, dan gate C1–C7 menghentikan kerja kecuali otorisasi awal tercatat. Aturan v7 tetap: metode inti berjalan sendiri.
 
 ### 1.1. Semantik loop
-### Registrasi dan pengamatan
+#### Registrasi dan pengamatan
 Dengan Herdr, `execute` pack v8 mencatat lead dan penerus. Hanya rencana dengan catatan lead dan state yang dapat dibaca diamati. Manusia memulai `herdr-peers autopilot --loop`; daemon bukan item login atau layanan sistem.
 
-### Kelanjutan dan pengambilalihan
+#### Kelanjutan dan pengambilalihan
 Daemon hanya mem-prompt lead jika lima menit idle/selesai, tak ada lane bekerja atau balasan tertunda, pane di cakupan dan tidak dikecualikan, serta tak ada dialog/login/batas penggunaan/draf manusia. Prompt tetap meminta penyelesaian sesuai gate dan wewenang; prompt tidak memberi wewenang. Tiga prompt tanpa kemajuan mencatat `plan_stalled`; blocker dilaporkan, bukan diprompt. Jika lead hilang, daemon meminta penerus pertama yang terjangkau menjalankan `herdr-peers lead takeover --plan <id>`; daemon tidak menulis catatan atau memilih pane yang tak terdaftar. Batas penggunaan bukan bukti kehilangan. Protocol 2 hanya mengizinkan penunjukan setelah manusia menjalankan `lead claim --allow-appointment` dan daemon dimulai dengan `--appoint`. Sebelum merge/tag/release, lead menjalankan `herdr-peers lead verify --plan <id>`.
 
-### Brain, peristiwa, armada
+#### Brain, peristiwa, armada
 `--brain` opsional memilih dari daftar aksi tertutup; daemon satu-satunya aktor dan tidak menjalankan teks bebas. `autonomy` harus mengizinkannya. Loop merekam peristiwa; `--notify` mengirim `plan-event-v1` ke notifier, dan Dailybot pack menyampaikan peristiwa yang didukung. Peta armada dan `herdr-peers fleet ui` hanya baca. Lihat [autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) dan [protokol](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md).
 
 ## 2. Blok `autonomy`

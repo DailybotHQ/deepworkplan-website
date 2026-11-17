@@ -16,16 +16,16 @@ Um plano aprovado é executado até o fim sem uma pessoa. A autonomia é o padr�
 
 ### 1.1. Semântica do ciclo
 
-### Registro e observação
+#### Registro e observação
 Com o add-on Herdr habilitado, o fluxo `execute` do pacote v8 reivindica o registro de lead e anota a sucessão do plano. Um plano só é observado quando tem registro de lead e seu estado pode ser lido. Uma pessoa inicia `herdr-peers autopilot --loop`; ele é um daemon, não um item de login nem serviço do sistema. Um daemon pode observar planos informados por todas as máquinas Herdr habilitadas. Sem registro de lead, o plano não é observado.
 
-### Continuidade, estagnação e sucessão
+#### Continuidade, estagnação e sucessão
 
 Para um plano aberto, o daemon avisa somente o lead, e apenas quando as condições de inatividade são atendidas: o lead está idle ou done há cinco minutos, nenhuma lane está trabalhando, não há resposta pendente, o painel está dentro do escopo e não excluído, e não há diálogo, login, limite de uso ou rascunho humano na linha de entrada. A mensagem é fixa e pede que o lead conclua o plano respeitando gates e autoridade registrada. O aviso não concede autoridade. Após três avisos sem progresso no estado do plano, registra `plan_stalled` e deixa o plano parado até o estado mudar. Um plano bloqueado é reportado, não avisado.
 
 Se o lead desaparecer, o daemon pede ao primeiro sucessor acessível listado que execute `herdr-peers lead takeover --plan <id>`. O helper verifica a sucessão e avança o epoch; o daemon não grava o registro nem escolhe um painel não listado. Um limite de uso, sozinho, não prova que o lead desapareceu. O protocolo 2 também permite nomear um lead entre as lanes do plano, mas somente se uma pessoa registrar a concessão explícita com `lead claim --allow-appointment` e iniciar o daemon com `--appoint`. Antes de qualquer merge, tag ou release, o lead ativo executa `herdr-peers lead verify --plan <id>`.
 
-### Brain, eventos e frota
+#### Brain, eventos e frota
 
 O `--brain` opcional inicia um agente de decisão dedicado aos casos que as regras do daemon não resolvem. Ele só pode escolher ações de uma lista fechada. O daemon continua sendo o único ator: valida uma escolha permitida e executa a ação; nunca executa texto livre do brain. O bloco `autonomy` do plano também precisa permitir o brain.
 

@@ -16,16 +16,16 @@ section: ループエンジニアリング
 
 ### 1.1. ループの意味
 
-### 登録と監視
+#### 登録と監視
 Herdr アドオンを有効にすると、v8 pack の `execute` が lead レコードを取得し、計画の後継を記録します。lead レコードがあり、状態を読み取れる計画のみ監視対象です。人間が `herdr-peers autopilot --loop` を起動します。これは daemon であり、ログイン項目やシステムサービスではありません。一つの daemon が有効な Herdr マシンから報告される計画を監視できます。lead レコードがない計画は監視されません。
 
-### 継続、停滞、フェイルオーバー
+#### 継続、停滞、フェイルオーバー
 
 未完了の計画では、daemon は lead にのみ促します。lead が5分間 idle または done で、lane が作業中でなく、返信待ちがなく、pane が範囲内かつ除外されておらず、ダイアログ、ログイン、使用上限、入力欄の人間の下書きもない場合に限ります。固定プロンプトは gates と記録済み権限を守り、計画を最後まで実行するよう求めます。促しは権限を追加しません。計画状態に進展のない促しが3回続くと `plan_stalled` を記録し、状態が変わるまで放置します。ブロック中の計画には促さず、報告します。
 
 lead がいなくなると、daemon は一覧の最初の到達可能な後継に `herdr-peers lead takeover --plan <id>` の実行を依頼します。helper が後継順を検証して epoch を進めます。daemon は lead レコードを書かず、一覧外の pane を選びません。使用上限だけでは lead が消えた証拠になりません。Protocol 2 は計画の lane から lead を任命できますが、人間が `lead claim --allow-appointment` で明示的な許可を記録し、`--appoint` 付きで daemon を起動した場合に限ります。merge、tag、release の前には、作業中の lead が `herdr-peers lead verify --plan <id>` を実行します。
 
-### brain、イベント、フリート
+#### brain、イベント、フリート
 
 任意の `--brain` は daemon のルールで決められないケースのために専用の判断 agent を起動します。閉じたアクション一覧からのみ選べます。実行主体は daemon だけです。許可された選択を検証して実行し、brain の自由文は実行しません。計画の `autonomy` ブロックも brain を許可する必要があります。
 

@@ -16,16 +16,16 @@ section: 循环工程
 
 ### 1.1. 循环语义
 
-### 注册与观察
+#### 注册与观察
 启用 Herdr 插件后，v8 pack 的 `execute` 流程会认领 lead 记录并登记计划继任者。只有存在 lead 记录且状态可读的计划才会被观察。由人类启动 `herdr-peers autopilot --loop`；它是 daemon，不是登录项或系统服务。一个 daemon 可观察所有已启用 Herdr 机器报告的计划。没有 lead 记录的计划不会被观察。
 
-### 持续执行、停滞和故障转移
+#### 持续执行、停滞和故障转移
 
 对于开放计划，daemon 只提示 lead，并且必须通过空闲检查：lead 已空闲或完成五分钟，没有 lane 正在工作、没有待回复；pane 在允许范围内且未排除；屏幕不是对话框、登录、使用限额，也没有人类草稿。固定提示要求 lead 遵守 gates 和已记录权限，把计划执行到底。提示不授予任何权限。计划状态连续三次提示仍无进展后，daemon 记录 `plan_stalled` 并等待状态变化。已阻塞的计划会被报告，不会被反复提示。
 
 lead 消失时，daemon 会请列表中第一个可联系的继任者运行 `herdr-peers lead takeover --plan <id>`。helper 会验证继任顺序并增加 epoch；daemon 不会写 lead 记录，也不会选择名单外的 pane。单有使用限额不能证明 lead 已消失。协议 2 也支持从计划 lane 中任命 lead，但必须由人类先运行 `lead claim --allow-appointment` 记录明确授权，并以 `--appoint` 启动 daemon。任何 merge、tag 或 release 前，当前 lead 都须运行 `herdr-peers lead verify --plan <id>`。
 
-### brain、事件和舰队
+#### brain、事件和舰队
 
 可选 `--brain` 会为 daemon 规则无法判断的情况启动专用决策 agent。它只能从封闭的操作列表中选择。daemon 始终是唯一执行者：验证允许的选择并执行操作，绝不执行 brain 的自由文本。计划的 `autonomy` 块也必须允许 brain。
 

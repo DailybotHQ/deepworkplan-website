@@ -16,16 +16,16 @@ Ein genehmigter Plan läuft ohne menschliche Einzelaufsicht bis zum Ende. Autono
 
 ### 1.1. Loop-Semantik
 
-### Registrierung und Beobachtung
+#### Registrierung und Beobachtung
 Ist das Herdr-Addon aktiv, beansprucht der `execute`-Ablauf des v8-Packs den Lead-Eintrag und verzeichnet die Nachfolge. Überwacht wird ein Plan nur mit Lead-Eintrag und lesbarem Status. Ein Mensch startet `herdr-peers autopilot --loop`; der Daemon ist weder Login-Element noch Systemdienst. Ein Daemon kann Pläne aller aktivierten Herdr-Maschinen beobachten. Pläne ohne Lead-Eintrag werden nicht überwacht.
 
-### Fortsetzung, Stillstand und Failover
+#### Fortsetzung, Stillstand und Failover
 
 Bei offenen Plänen stößt der Daemon ausschließlich den Lead an, wenn die Ruhebedingungen erfüllt sind: fünf Minuten idle oder done, keine arbeitende Lane, keine erwartete Antwort, Pane im Geltungsbereich und nicht ausgeschlossen, kein Dialog, Login, Nutzungslimit oder menschlicher Entwurf in der Eingabezeile. Der feste Prompt fordert zur Fortsetzung bis zum Ende unter Einhaltung der Gates und aufgezeichneten Befugnisse auf. Ein Anstoß erteilt keine Befugnis. Nach drei Anstößen ohne Statusfortschritt zeichnet der Daemon `plan_stalled` auf und wartet auf eine Zustandsänderung. Blockierte Pläne werden gemeldet, nicht angestoßen.
 
 Ist der Lead verschwunden, bittet der Daemon den ersten erreichbaren Nachfolger der Liste um `herdr-peers lead takeover --plan <id>`. Der Helper prüft die Nachfolge und erhöht die Epoche; der Daemon schreibt keinen Lead-Eintrag und wählt kein Pane außerhalb der Liste. Ein Nutzungslimit allein belegt keinen verschwundenen Lead. Protocol 2 erlaubt auch eine Ernennung aus den Plan-Lanes, aber nur mit ausdrücklich menschlich erteiltem `lead claim --allow-appointment` und einem Daemonstart mit `--appoint`. Vor jedem Merge, Tag oder Release führt der aktive Lead `herdr-peers lead verify --plan <id>` aus.
 
-### Brain, Ereignisse und Flotte
+#### Brain, Ereignisse und Flotte
 
 Das optionale `--brain` startet einen dedizierten Entscheidungsagenten für Fälle, die Daemon-Regeln nicht entscheiden können. Er darf nur aus einer geschlossenen Aktionsliste wählen. Der Daemon bleibt der einzige Akteur: Er prüft die zulässige Wahl und führt sie aus; freien Brain-Text führt er nie aus. Der `autonomy`-Block des Plans muss das Brain ebenfalls zulassen.
 

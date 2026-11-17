@@ -16,16 +16,16 @@ Un plan approuvé va jusqu’au bout sans intervention humaine. L’autonomie s�
 
 ### 1.1. Sémantique de boucle
 
-### Enregistrement et observation
+#### Enregistrement et observation
 Avec le module Herdr activé, le flux `execute` du pack v8 revendique le registre de lead et consigne la succession du plan. Seul un plan doté d’un registre de lead et d’un état lisible est observé. Un humain démarre `herdr-peers autopilot --loop` : c’est un daemon, ni un élément de connexion ni un service système. Un daemon peut observer les plans signalés par toutes les machines Herdr activées. Sans registre de lead, le plan n’est pas observé.
 
-### Continuité, blocage et relève
+#### Continuité, blocage et relève
 
 Pour un plan ouvert, le daemon sollicite uniquement le lead après les contrôles d’inactivité : cinq minutes sans activité ou avec le lead terminé, aucune lane active, aucune réponse en attente, pane autorisé et non exclu, sans dialogue, écran de connexion ou limite d’usage, ni brouillon humain dans la ligne de saisie. Le message fixe demande au lead de poursuivre jusqu’au bout en respectant étapes et autorité consignées. Une sollicitation n’ajoute aucune autorité. Après trois sollicitations sans progrès dans l’état du plan, le daemon inscrit `plan_stalled` et attend un changement d’état. Un plan bloqué est signalé, pas sollicité.
 
 Si le lead est absent, le daemon demande au premier successeur joignable de la liste d’exécuter `herdr-peers lead takeover --plan <id>`. L’outil vérifie la succession et avance l’époque ; le daemon n’écrit pas le registre et ne choisit aucun pane non répertorié. Une limite d’usage seule ne prouve pas l’absence. Le protocole 2 autorise aussi la nomination d’un lead parmi les lanes du plan, seulement après autorisation explicite humaine via `lead claim --allow-appointment` et démarrage du daemon avec `--appoint`. Avant tout merge, tag ou release, le lead actif exécute `herdr-peers lead verify --plan <id>`.
 
-### Brain, événements et flotte
+#### Brain, événements et flotte
 
 `--brain`, facultatif, lance un agent de décision dédié aux cas que les règles du daemon ne tranchent pas. Il ne choisit que dans une liste fermée d’actions. Le daemon reste le seul acteur : il valide un choix permis puis agit ; il n’exécute jamais de texte libre du brain. Le bloc `autonomy` du plan doit également autoriser le brain.
 

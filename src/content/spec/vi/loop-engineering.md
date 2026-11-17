@@ -14,13 +14,13 @@ Trang này định nghĩa hợp đồng loop engineering. **Kế hoạch** là n
 Kế hoạch được duyệt chạy đến hết mà không chờ người. Tính tự chủ chỉ trong **thẩm quyền đã ghi của kế hoạch**. Người được thông báo; đăng nhập, thông tin xác thực và cổng C1–C7 dừng việc trừ khi có quyền trước. Quy tắc v7 giữ nguyên: phương pháp cốt lõi tự hoạt động, addon chỉ mở rộng.
 
 ### 1.1. Ngữ nghĩa vòng lặp
-### Đăng ký và quan sát
+#### Đăng ký và quan sát
 Khi bật Herdr, `execute` của pack v8 nhận bản ghi lead và lưu kế nhiệm. Chỉ kế hoạch có lead và state đọc được mới theo dõi. Người khởi chạy `herdr-peers autopilot --loop`; đây là daemon, không phải mục đăng nhập hay dịch vụ hệ thống.
 
-### Tiếp tục và chuyển giao
+#### Tiếp tục và chuyển giao
 Daemon chỉ nhắc lead khi kế hoạch mở, lead nhàn rỗi/hoàn tất năm phút, không lane làm hoặc chờ trả lời, pane trong phạm vi và không bị loại, không hộp thoại/đăng nhập/giới hạn sử dụng/bản nháp. Lời nhắc cố định yêu cầu hoàn tất theo cổng và quyền đã ghi; không cấp quyền. Ba lời nhắc không tiến triển ghi `plan_stalled`; kế hoạch bị chặn chỉ báo. Nếu lead vắng, daemon nhờ người kế nhiệm đầu tiên chạy `herdr-peers lead takeover --plan <id>`; daemon không ghi lead hoặc chọn pane ngoài danh sách. Giới hạn sử dụng không chứng minh vắng mặt. Protocol 2 chỉ cho phép bổ nhiệm khi người ghi quyền `lead claim --allow-appointment` và khởi chạy daemon với `--appoint`. Trước merge/tag/release, lead chạy `herdr-peers lead verify --plan <id>`.
 
-### Brain, sự kiện và đội máy
+#### Brain, sự kiện và đội máy
 `--brain` tùy chọn chỉ chọn từ danh sách hành động đóng; daemon là tác nhân duy nhất, không chạy văn bản tự do. `autonomy` phải cho phép. Vòng lặp ghi sự kiện; `--notify` gửi `plan-event-v1`, Dailybot chuyển sự kiện hỗ trợ thành cập nhật nhóm. Bản đồ đội máy và `herdr-peers fleet ui` chỉ đọc. Xem [autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) và [protocol](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md).
 
 ## 2. Khối `autonomy`

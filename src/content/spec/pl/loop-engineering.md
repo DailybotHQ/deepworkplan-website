@@ -14,13 +14,13 @@ Ta strona opisuje kontrakt loop engineering. **Plan** jest źródłem uprawnień
 Zatwierdzony plan biegnie do końca bez oczekiwania na człowieka. Autonomia działa **w granicach uprawnień zapisanych w planie**. Człowiek otrzymuje powiadomienia; logowanie, dane dostępowe i bramki C1–C7 wstrzymują pracę bez zapisanej zgody wstępnej. Reguła v7 trwa: podstawowa metoda działa samodzielnie.
 
 ### 1.1. Semantyka pętli
-### Rejestracja i obserwacja
+#### Rejestracja i obserwacja
 Z Herdr przepływ `execute` v8 rejestruje lead i sukcesję. Obserwuje tylko plany z lead i czytelnym stanem. Człowiek uruchamia `herdr-peers autopilot --loop`; to daemon, nie element logowania ani usługa systemowa.
 
-### Kontynuacja i przejęcie
+#### Kontynuacja i przejęcie
 Daemon przypomina tylko leadowi, gdy plan jest otwarty, lead pozostaje bezczynny lub ukończony pięć minut, żadna lane nie pracuje ani nie czeka na odpowiedź, pane jest w zakresie i niewykluczone, brak dialogu/logowania/limitu użycia i szkicu człowieka. Stały komunikat żąda ukończenia zgodnie z uprawnieniami i bramkami; nie dodaje uprawnień. Trzy przypomnienia bez postępu zapisują `plan_stalled`; plan zablokowany jest zgłaszany, nie ponaglany. Przy zniknięciu lead daemon prosi pierwszego dostępnego następcę o `herdr-peers lead takeover --plan <id>`; nie zapisuje lead ani nie wybiera nieujętego pane. Limit użycia nie dowodzi nieobecności. Protocol 2 dopuszcza mianowanie po jawnym `lead claim --allow-appointment` człowieka i uruchomieniu daemon z `--appoint`. Przed merge/tag/release lead uruchamia `herdr-peers lead verify --plan <id>`.
 
-### Brain, zdarzenia, flota
+#### Brain, zdarzenia, flota
 Opcjonalny `--brain` wybiera z zamkniętej listy; daemon pozostaje jedynym wykonawcą i nie uruchamia dowolnego tekstu. Wymaga zgody `autonomy`. Pętla zapisuje zdarzenia; `--notify` wysyła `plan-event-v1`, a Dailybot przekazuje obsługiwane zdarzenia zespołowi. Powiadomienie nie zatwierdza pracy. Mapa floty i `herdr-peers fleet ui` są tylko do odczytu. Zobacz [autopilot](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/autopilot.md) i [protokół](https://github.com/DailybotHQ/herdr-peers/blob/v2.1.0/skills/herdr-peers/protocol.md).
 
 ## 2. Blok `autonomy`

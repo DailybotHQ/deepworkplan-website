@@ -16,16 +16,16 @@ Un plan aprobado se ejecuta hasta el final sin una persona. La autonomía es la 
 
 ### 1.1. Semántica del ciclo
 
-### Registro y observación
+#### Registro y observación
 Con el complemento Herdr habilitado, el flujo `execute` del paquete v8 reclama un registro de liderazgo y anota la sucesión del plan. Solo se supervisa un plan con registro de liderazgo y estado legible. Una persona inicia `herdr-peers autopilot --loop`; es un daemon, no un elemento de inicio de sesión ni un servicio del sistema. Un daemon puede observar planes informados por todas las máquinas Herdr habilitadas. Un plan sin registro de liderazgo no se supervisa.
 
-### Continuación, estancamiento y relevo
+#### Continuación, estancamiento y relevo
 
 Para un plan abierto, el daemon avisa únicamente al liderazgo y solo cuando pasan los controles de inactividad: lleva cinco minutos inactivo o terminado, ninguna lane trabaja, no hay respuestas pendientes, el panel está dentro del alcance y no está excluido, y no muestra diálogos, inicio de sesión, límite de uso ni un borrador humano en la línea de entrada. El mensaje es fijo y pide continuar hasta el final respetando los controles y la autoridad registrada. El aviso no concede autoridad. Tras tres avisos sin avance en el estado del plan, registra `plan_stalled` y lo deja quieto hasta que cambie el estado. Un plan bloqueado se informa, no recibe avisos.
 
 Si el liderazgo desaparece, el daemon pide al primer sucesor disponible de la lista que ejecute `herdr-peers lead takeover --plan <id>`. El helper verifica la sucesión y aumenta la época; el daemon no escribe el registro ni elige un panel no listado. Un límite de uso por sí solo no demuestra que el liderazgo desapareció. El protocolo 2 también permite nombrar un liderazgo entre las lanes del plan, pero solo si una persona registra explícitamente el permiso con `lead claim --allow-appointment` e inicia el daemon con `--appoint`. Antes de cualquier merge, tag o release, el liderazgo activo ejecuta `herdr-peers lead verify --plan <id>`.
 
-### Brain, eventos y flota
+#### Brain, eventos y flota
 
 El `--brain` opcional inicia un agente de decisión dedicado para los casos que las reglas del daemon no resuelven. Solo puede elegir de una lista cerrada de acciones. El daemon sigue siendo el único actor: valida una opción permitida y realiza la acción; nunca ejecuta texto libre del brain. El bloque `autonomy` del plan también debe permitir el brain.
 
