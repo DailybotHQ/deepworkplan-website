@@ -59,7 +59,7 @@ export default defineConfig({
 
 ## Content Collections API
 
-The site uses Astro Content Collections for its documentation content: `methodology`, `spec`, `kit`, `changelog`, and `pages`. Full schemas live in `src/content.config.ts`; supported language codes come from `LANGUAGE_CODES` in `src/lib/i18n.ts`.
+The site uses Astro Content Collections for its documentation content: `methodology`, `spec`, `kit`, `changelog`, and `pages`. Full schemas live in `src/content.config.ts`; supported language codes are defined in `src/lib/language-codes.ts` (re-exported as `LANGUAGE_CODES` from `src/lib/i18n.ts`).
 
 ### Methodology Collection Schema
 

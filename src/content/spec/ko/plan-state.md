@@ -15,7 +15,8 @@ section: State
 | 계획 세대 | 진실 공급원 | `state.json` | 스키마 |
 | --- | --- | --- | --- |
 | v5(및 이전의 v1/v2 계획) | Markdown 계획, 이 JSON 레이어는 그 프로젝션 | 아래 프로토콜 지점에서 에이전트가 작성 | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json)(이전 계획에는 v1과 v2가 계속 유효) |
-| v6 및 v7 | 계약과 추가 전용 저널 | 저널에서 투영된 스냅샷, 손으로 작성하는 일은 결코 없음 |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)(또는 그 v6 대응 스키마); v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
+| v6 및 v7 | 계약과 추가 전용 저널 | 저널에서 투영된 스냅샷, 손으로 작성하는 일은 결코 없음 |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)(또는 그 v6 대응 스키마) |
+| v8 | 계약과 추가 전용 저널 | 저널에서 투영된 스냅샷, 손으로 작성하는 일은 결코 없음 |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json), [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json), [`plan-snapshot/v8`](https://deepworkplan.com/schema/plan-snapshot/v8.json) |
 
 v8 계획은 `plan-manifest/v7`과 함께 `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8`을 사용합니다. v7 manifest 및 journal-event 스키마는 기존 계획에 계속 지원됩니다.
 계획은 암묵적으로 세대를 바꾸는 일이 결코 없습니다: v5 계획은 이 규칙을 유지하며, v6으로 옮기는 것은 명시적이고 미리 보기가 제공되는 마이그레이션입니다([기록 레이어](/spec/record-layer#coexistence-and-migration)). 정식 출처: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V7_CONTRACT.md).

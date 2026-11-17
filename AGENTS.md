@@ -23,6 +23,7 @@ Stack versions come from `package.json`: Astro 7.3.6, Svelte 5.57.2, TypeScript 
 | Tests and gate selection | [docs/TESTING_GUIDE.md](docs/TESTING_GUIDE.md) |
 | Commands and audits | [docs/DEVELOPMENT_COMMANDS.md](docs/DEVELOPMENT_COMMANDS.md) |
 | Translation workflow | [docs/I18N_GUIDE.md](docs/I18N_GUIDE.md) |
+| Security, provenance and install posture | [docs/SECURITY.md](docs/SECURITY.md) (public counterparts: `/trust`, `/.well-known/dwp-trust.json`) |
 | Performance and accessibility | [docs/PERFORMANCE.md](docs/PERFORMANCE.md), [docs/ACCESSIBILITY.md](docs/ACCESSIBILITY.md) |
 | SEO and agent endpoints | [docs/SEO.md](docs/SEO.md), [docs/aeo/MARKDOWN_FOR_AGENTS.md](docs/aeo/MARKDOWN_FOR_AGENTS.md) |
 | Product voice and design | [docs/PRODUCT_SPEC.md](docs/PRODUCT_SPEC.md), [docs/BRAND_GUIDE.md](docs/BRAND_GUIDE.md), [docs/DESIGN.md](docs/DESIGN.md) |

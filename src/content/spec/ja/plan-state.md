@@ -15,7 +15,8 @@ section: State
 | 計画の世代 | 信頼できる情報源 | `state.json` | スキーマ |
 | --- | --- | --- | --- |
 | v5（およびそれ以前の v1/v2 計画） | Markdown の計画と、その投影としてのこの JSON レイヤー | 下記のプロトコルポイントでエージェントが書き込む | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json)、[`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json)（古い計画では v1 と v2 も引き続き有効） |
-| v6 と v7 | 契約と追記専用ジャーナル | ジャーナルから投影されるスナップショットで、手で書かれることは決してない |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json)、[`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json)、[`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)（またはそれらの v6 相当）; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
+| v6 と v7 | 契約と追記専用ジャーナル | ジャーナルから投影されるスナップショットで、手で書かれることは決してない |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json)、[`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json)、[`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)（またはそれらの v6 相当） |
+| v8 | 契約と追記専用ジャーナル | ジャーナルから投影されるスナップショットで、手で書かれることは決してない |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json), [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json), [`plan-snapshot/v8`](https://deepworkplan.com/schema/plan-snapshot/v8.json) |
 
 v8 計画は `plan-manifest/v7` と `plan-contract/v8`、`journal-event/v8`、`plan-snapshot/v8` を使用します。v7 のマニフェストとジャーナルイベントのスキーマは既存計画で引き続きサポートされます。
 計画が暗黙のうちに世代を変えることは決してありません。v5 計画はこれらの規則を維持し、v6 への移行は明示的でプレビュー付きのマイグレーションです（[レコードレイヤー](/spec/record-layer#coexistence-and-migration)）。正規の情報源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V7_CONTRACT.md)。

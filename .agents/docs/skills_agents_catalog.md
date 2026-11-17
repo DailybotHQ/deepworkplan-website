@@ -9,20 +9,20 @@ Counts: **20 skills**, **5 agent definitions**, and **17 command files**.
 | Skill | Invocation | Summary |
 |---|---|---|
 | [add-component](../skills/add-component/SKILL.md) | `/add-component` | Create new Astro or Svelte components with correct patterns. Use proactively when creating new UI components. |
-| [add-diagram-component](../skills/add-diagram-component/SKILL.md) | `/add-diagram-component` | Create an editorial HTML/CSS/SVG diagram component (Editorial Interactive Asset) and embed it in-body via MDX. Use proactively when adding a diagram/figure to a methodolo |
+| [add-diagram-component](../skills/add-diagram-component/SKILL.md) | `/add-diagram-component` | Create an editorial HTML/CSS/SVG diagram component (Editorial Interactive Asset) and embed it in-body via MDX. |
 | [add-language](../skills/add-language/SKILL.md) | `/add-language` | Add a new language to the site end-to-end (scaffold → translate → native review → QA). Use when adding a locale beyond the active set. |
 | [add-page](../skills/add-page/SKILL.md) | `/add-page` | Create new pages with correct routing and MainLayout usage. Use proactively when creating new pages. |
-| [ai-diff-reviewer](../skills/ai-diff-reviewer/SKILL.md) | `/ai-diff-reviewer` | Local & CI companion to the AI Diff Reviewer GitHub Action (DailybotHQ/ai-diff-reviewer). Router for six capabilities — (1) review the current branch diff locally (same m |
-| [dailybot](../skills/dailybot/SKILL.md) | `/dailybot` | Official Dailybot agent skill pack — report progress, check messages, send emails, announce agent status, complete check-ins, give kudos (to users or teams), resolve team |
-| [deepworkplan](../skills/deepworkplan/SKILL.md) | `/deepworkplan` | DeepWorkPlan — turn any repo AI-first and run Deep Work Plans. Routes to create, execute, refine, resume, status, verify, upgrade, and repo-onboarding sub-skills based on |
+| [ai-diff-reviewer](../skills/ai-diff-reviewer/SKILL.md) | `/ai-diff-reviewer` | Local and CI companion to the AI Diff Reviewer GitHub Action: local branch review, extension generation, setup, PR authoring and CI review follow-up. |
+| [dailybot](../skills/dailybot/SKILL.md) | `/dailybot` | Official Dailybot agent skill pack: progress reports, check-ins, forms, chat messages, kudos and more, routed to the right sub-skill. |
+| [deepworkplan](../skills/deepworkplan/SKILL.md) | `/deepworkplan` | DeepWorkPlan — turn any repo AI-first and run Deep Work Plans: create, execute, refine, resume, status, verify, upgrade and onboarding. |
 | [doc-edit](../skills/doc-edit/SKILL.md) | `/doc-edit` | Update documentation files including README, comments, and inline docs. Use proactively for documentation updates. |
 | [fix-lint](../skills/fix-lint/SKILL.md) | `/fix-lint` | Fix Biome linting/formatting errors in 1-3 files using auto-fix and minimal manual edits. Use proactively for lint issues. |
 | [git-commit-push](../skills/git-commit-push/SKILL.md) | `/git-commit-push` | Commit all staged/unstaged changes and push to remote. Use proactively for committing and pushing changes. |
-| [herdr-peers](../skills/herdr-peers/SKILL.md) | `/herdr-peers` | Ask another coding agent in a Herdr pane — on this machine or another one — and get exactly one authorized reply back, with a loop guard, depth limit 1, a fan-out cap and |
+| [herdr-peers](../skills/herdr-peers/SKILL.md) | `/herdr-peers` | Ask another coding agent in a Herdr pane, on this machine or another, and get exactly one authorized reply; also plan leads, debates and the human-started autopilot. |
 | [pr-review-lite](../skills/pr-review-lite/SKILL.md) | `/pr-review-lite` | Quick checklist review of a PR for style, obvious bugs, and missing tests. Use proactively for lightweight PR reviews. |
 | [quick-fix](../skills/quick-fix/SKILL.md) | `/quick-fix` | Fix small bugs and issues in 1-3 files following existing patterns. Use proactively for simple bug fixes. |
 | [refactor-safe](../skills/refactor-safe/SKILL.md) | `/refactor-safe` | Safe refactor in bounded scope (1-10 files, no behavior change). Use proactively for safe, bounded refactoring tasks. |
-| [responsive-lighthouse-audit](../skills/responsive-lighthouse-audit/SKILL.md) | `/responsive-lighthouse-audit` | Audit the site's responsiveness across breakpoints and drive Lighthouse to near-100 on mobile AND desktop. Use proactively for responsive/performance/accessibility audits |
+| [responsive-lighthouse-audit](../skills/responsive-lighthouse-audit/SKILL.md) | `/responsive-lighthouse-audit` | Audit the site's responsiveness across breakpoints and drive Lighthouse to near-100 on mobile AND desktop. |
 | [security-check](../skills/security-check/SKILL.md) | `/security-check` | Quick security checklist for a PR or set of files (secrets, input, logging). Use proactively for security reviews. |
 | [translate-sync](../skills/translate-sync/SKILL.md) | `/translate-sync` | Synchronize content from English across all active languages. Use proactively when content needs multilingual synchronization. |
 | [type-fix](../skills/type-fix/SKILL.md) | `/type-fix` | Fix TypeScript type errors in 1-3 files (explicit types, prefer no any). Use proactively for TypeScript type issues. |
