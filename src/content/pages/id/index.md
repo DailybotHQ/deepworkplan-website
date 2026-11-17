@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — eksekusi terstruktur untuk AI coding agent"
 description: "Spec-first, loop tertutup: Deep Work Plan menjadikan repositori Anda harness bagi AI coding agent; tiap rencana berjalan tuntas di loop yang dimulai manusia."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## Spec-first, loop tertutup.

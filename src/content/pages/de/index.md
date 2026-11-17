@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — strukturierte Ausführung für KI-Coding-Agenten"
 description: "Spec-first, mit geschlossenem Loop: Deep Work Plan macht Ihr Repository zum Harness für KI-Coding-Agenten, und jeder Plan läuft im Loop bis zum Ende."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## Spec-first, mit geschlossenem Loop.

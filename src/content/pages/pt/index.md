@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — execução estruturada para agentes de código de IA"
 description: "Especificação primeiro, loop fechado: o Deep Work Plan faz do repositório o harness dos agentes de IA, e cada plano termina num loop iniciado por humanos."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## Especificação primeiro, loop fechado.

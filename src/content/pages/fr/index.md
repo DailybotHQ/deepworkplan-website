@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — exécution structurée pour les agents de code IA"
 description: "Spécification d’abord, boucle fermée : Deep Work Plan fait du dépôt le harness des agents IA, et chaque plan va au bout dans une boucle lancée par un humain."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## La spécification d’abord, la boucle fermée.

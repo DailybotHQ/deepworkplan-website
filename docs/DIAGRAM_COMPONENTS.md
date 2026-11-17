@@ -250,10 +250,10 @@ Status: `todo` → `built`. Spec column → entry in `docs/visuals/prompts/`.
 | HP-03 | `QuickstartFlow` | home | 01-homepage#hp-03 | built |
 | HP-04 | `OnboardingSequence` | home | 01-homepage#hp-04 | built |
 | HP-05 | `ArchetypesCompare` | home | 01-homepage#hp-05 | built |
-| HP-10 | `LoopDiagram` | home | — (v8 loop plate in the homepage loop-engineering section, PLAN_025; stages traced to the pinned herdr-peers tag; the hero keeps the HP-01 engraving) | built |
+| HP-12 | `LoopDiagram` | home | — (v8 loop plate in the homepage loop-engineering section, PLAN_025; stages traced to the pinned herdr-peers tag; the hero keeps the HP-01 engraving) | built |
 
 **Illustrations kept as images (not in this system):** HP-01 (faro hero —
-retired 2026-11-16 and restored 2026-11-17; HP-10 `LoopDiagram` moved to the
+retired 2026-11-16 and restored 2026-11-17; HP-12 `LoopDiagram` moved to the
 loop-engineering section), HP-02
 (pitch chart), and HP-06…HP-09 (home story plates — see the §0 note) — see
 `docs/visuals/`.

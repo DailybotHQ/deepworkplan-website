@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — ejecución estructurada para agentes de IA"
 description: "Especificación primero, bucle cerrado: Deep Work Plan hace del repositorio el harness de los agentes de IA y cada plan acaba en un bucle iniciado por humanos."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## Primero la especificación, con el bucle cerrado.

@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — AI 코딩 에이전트를 위한 구조화된 실행"
 description: "스펙 우선, 루프로 완결: Deep Work Plan은 리포지토리를 AI 코딩 에이전트의 하니스로 만들고, 각 계획은 사람이 시작한 루프로 완료까지 실행됩니다."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## 스펙 우선, 루프로 완결.

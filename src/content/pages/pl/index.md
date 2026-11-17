@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — ustrukturyzowane wykonanie dla agentów kodujących AI"
 description: "Spec-first, z zamkniętą pętlą: Deep Work Plan czyni repozytorium harnessem dla agentów AI, a każdy plan działa do końca w pętli uruchomionej przez człowieka."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## Spec-first, z zamkniętą pętlą.

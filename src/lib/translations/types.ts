@@ -132,7 +132,7 @@ export interface SiteTranslations {
     };
     hero: {
       badge: string;
-      /** The v8 lead sentence — the one place to swap the hero wording. */
+      /** The v8 lead sentence (JSON-LD and quickstart lead); the hero renders it split as headline + subtitle. */
       leadSentence: string;
       /** Hero h1: the lead sentence's first clause (two lines at most). */
       headline: string;

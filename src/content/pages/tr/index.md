@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — yapay zeka kodlama ajanları için yapılandırılmış yürütme"
 description: "Önce spesifikasyon, kapalı döngü: Deep Work Plan deponuzu AI kodlama ajanları için harness yapar; her plan, insanın başlattığı döngüde sonuna dek çalışır."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## Önce spesifikasyon, kapalı döngü.

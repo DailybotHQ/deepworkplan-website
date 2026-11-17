@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI"
 description: "Đặc tả trước, vòng lặp khép kín: Deep Work Plan biến kho mã thành harness cho agent lập trình AI; mỗi kế hoạch chạy xong trong vòng lặp do người khởi động."
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## Đặc tả trước, vòng lặp khép kín.

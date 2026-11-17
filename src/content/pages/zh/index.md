@@ -1,7 +1,7 @@
 ---
 title: "Deep Work Plan — 面向 AI 编码代理的结构化执行"
 description: "规范先行、闭环运行：Deep Work Plan 让代码仓库成为 AI 编码代理的 harness，每份计划都在人类启动的循环下运行到完成。"
-lastUpdated: 2026-11-16
+lastUpdated: 2026-11-17
 ---
 
 ## 规范先行、闭环运行。
