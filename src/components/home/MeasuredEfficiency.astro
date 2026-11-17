@@ -5,7 +5,7 @@
  *
  * The numbers are the "Compulsory read set per flow" block printed by
  * `bash tests/efficiency/measure-instruction-load.sh` on a clean export of the
- * deepworkplan-skill tag pinned in src/lib/ecosystem-pins.ts (v8.0.2; unit:
+ * deepworkplan-skill tag pinned in src/lib/ecosystem-pins.ts (v8.0.3; unit:
  * filesystem bytes). When the pack pin moves, re-run the script on the new tag
  * and replace FLOW_BYTES and MEASURED_AT together — a figure measured on one
  * tag must never be shown under another. Metrics no tagged source measures
@@ -26,13 +26,13 @@ const e = getTranslations(lang).home.efficiency;
 const pack = ECOSYSTEM_PINS.pack;
 
 /** The tag FLOW_BYTES was measured on. */
-const MEASURED_AT: string = 'v8.0.2';
+const MEASURED_AT: string = 'v8.0.3';
 /** Entry bundle per flow, filesystem bytes, at MEASURED_AT. */
 const FLOW_BYTES = [
   { flow: 'create', bytes: 74974 },
   { flow: 'execute', bytes: 55136 },
   { flow: 'resume', bytes: 32023 },
-  { flow: 'refine', bytes: 76797 },
+  { flow: 'refine', bytes: 77014 },
   { flow: 'onboard', bytes: 82051 },
   { flow: 'status', bytes: 27311 },
   { flow: 'verify', bytes: 36701 },

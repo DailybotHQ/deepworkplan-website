@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) đặt các coding agent vào các pane, trên máy của bạn và trên các máy mà nó kết nối tới qua SSH. Addon này cho phép một Deep Work Plan sử dụng các agent đó như **peer** (tác tử ngang hàng): một kế hoạch có thể giao một tác vụ có giới hạn cho một agent trong pane khác, nhận đúng một phản hồi được ủy quyền và lưu lại bản ghi của lần trao đổi đó.
 
-Đây là một addon tùy chọn của **DWP v8** (pack `v8.0.2`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
+Đây là một addon tùy chọn của **DWP v8** (pack `v8.0.3`). Phương pháp hoạt động y như cũ khi không có nó: nếu addon không có mặt hoặc bị tắt, mọi tác vụ đều chạy trong phiên hiện tại, đúng như trước đây.
 
 Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
 
@@ -20,11 +20,11 @@ Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harne
 
 ## Addon tích hợp những gì
 
-Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v2.2.0`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
+Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** đảm nhận: một skill MIT độc lập được ghim ở **`v2.2.1`**, vẫn hữu ích khi không dùng Deep Work Plan. Nó định nghĩa những điều mà bản thân Herdr để ngỏ: ai được phép trả lời, câu trả lời tìm đường quay về qua các máy như thế nào, làm sao để hai agent không trả lời nhau mãi mãi, và bản ghi "tôi đã hỏi, nó đã trả lời" được lưu ở đâu.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v2.2.0`, giao thức 2 |
+| Sản phẩm | `DailybotHQ/herdr-peers`, tag `v2.2.1`, giao thức 2 |
 | Khóa registry | `herdr` trong `.dwp/config.json` |
 | Phương thức truyền | tương tác: một peer trong pane Herdr |
 | Cung cấp | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ Addon này là một lớp tích hợp mỏng. Công việc thực sự do **[he
 Cài đặt herdr-peers và skill chính thức của Herdr mà nó phụ thuộc vào. Mọi máy có agent cần trả lời cũng phải có skill này.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers không xác thực bên gửi: trường `from=` trong một con d�
 
 ## Container và máy host
 
-Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v1.4.1`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
+Với addon [devcontainer](/kit/devcontainer) trên devcontainer-kit `v1.4.2`, mọi container dck đều có sẵn herdr-peers và tham gia mạng lưới khi `dck up`: các agent của nó có thể hỏi các agent trên máy host, trong các container khác và trong các container loopback khác của máy host, rồi nhận lại phản hồi. `dck setup` cài đặt một herdr-peers đã được xác minh trên máy host, nên các agent trên máy host cũng phản hồi được. Listener trên máy host và các khóa bổ sung cho phép container khác truy cập là quyết định của bạn trong hồ sơ host của bộ kit; addon này không bao giờ thiết lập chúng. Từ herdr-peers (`v0.2.3`), mỗi máy giữ trạng thái riêng của mình (`$XDG_STATE_HOME/herdr-peers/<server>/`), nên một bản checkout được máy host và một container dùng chung không còn trộn lẫn bản ghi của chúng, và từ devcontainer-kit (`v0.3.3`), container tự export `HERDR_PEERS_SELF`, nên các agent Codex bên trong có thể tiếp cận máy khác mà không cần bước thủ công nào.
 
 ## Herdr hay agentkit
 
@@ -137,6 +137,8 @@ Bản v2.0.2 giữ nguyên giao thức 2. Trong argv pick-v2 ở chế độ ask
 Bản v2.1.0 giữ nguyên giao thức 2. `fleet ui` thêm các chế độ xem `Attention`, `Active`, `Waiting`, `Done` và `All` trong mọi nhóm, gồm cả hàng đợi; bản đồ thêm các trường tùy chọn `state_updated_at` và `unreadable_reason`. Daemon do con người khởi động sẽ từ chối hộp thoại quyền hoặc phê duyệt kế hoạch mà nó không thể chấp nhận an toàn. Nó không từ chối câu hỏi về công việc của agent; đăng nhập, xác nhận bỏ qua quyền và tin cậy thư mục vẫn do con người xử lý. Việc brain từ chối được xử lý tường minh; ba lần từ chối trong một giờ sẽ loại brain đó. Giờ đây có thể hỏi brain về blocker có phân loại. Hành động `ask_lead_to_resolve` chỉ có thể gửi blocker có `resolver: lead` tới lead của kế hoạch khi lớp là none, C3, C4 hoặc C7; C1 (phê duyệt), C2 (đồng ý hoặc đăng nhập), C5 (thiệt hại) và C6 (điều khoản) vẫn do con người xử lý, còn lớp ngoài C1–C7 bị từ chối. Bản này cũng đọc sự kiện blocker journal-event/v8 và dữ liệu blocker plan-snapshot/v8 của pack 8.0.0.
 
 Bản v2.2.0 giữ nguyên giao thức 2 và thêm **revive** (`autopilot --loop --revive`); việc con người khởi động daemon với tùy chọn này chính là sự cho phép. Một kế hoạch trên máy này có lead đã mất, hoặc đang chạm giới hạn sử dụng còn hơn 30 phút nữa mới được đặt lại, và không có người kế nhiệm hay lane nào có thể tiếp quản, sẽ nhận một agent mới: một tài khoản còn hạn mức do `ak pick` chọn, chạy ở chế độ ask, trong một workspace bắt đầu tại bản checkout của kế hoạch. Daemon cấp cho agent đó một vé dùng một lần, và chỉ vé này mới cho phép `lead takeover --reason revive`; lead mới sau đó chạy `lead verify` và tiếp tục kế hoạch. Một kế hoạch bị đình trệ mà lead vẫn còn hoạt động thì không bao giờ bị tiếp quản: lead đó được yêu cầu một lần để `lead handover` cho agent mới. Giới hạn: mỗi kế hoạch một lần revive trong 6 giờ, tối đa hai lần cho mỗi kế hoạch, và hai lần mỗi giờ trên toàn fleet; các giới hạn này được giữ lại qua các lần khởi động lại daemon. Pane cũ không bao giờ bị đóng hay bị gửi phím. Mỗi lần revive gửi một sự kiện `plan_revived` tới `--notify`, và `fleet ui` đánh dấu lead đó là đã được revive. Bên nhận 2.0 hoặc 2.1 từ chối bản ghi revive (fail closed). Daemon cũng giữ một bản sao đã được làm sạch của mọi màn hình mà nó không nhận diện được, đã loại bỏ bí mật và khối khóa, để có thể thêm làm ca kiểm thử; `autopilot status` cho biết nó đang giữ bao nhiêu bản.
+
+Bản v2.2.1 giữ nguyên giao thức 2, không đổi định dạng thông điệp. `autopilot --loop --revive` giờ từ chối khởi động khi thiếu coding-agents-kit hoặc phiên bản cũ hơn 1.3.0 — cùng kiểu kiểm tra đóng khi lỗi như `--brain` — thay vì tiêu hết giới hạn revive vào các lần khởi chạy thất bại; daemon chỉ khởi chạy brain và các agent được hồi sinh qua `ak` (`ak pick`, chế độ ask), không bao giờ gọi CLI trực tiếp.
 
 ## Ghi chú
 

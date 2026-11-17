@@ -12,7 +12,7 @@ import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
 
 [Herdr](https://herdr.dev) umieszcza agentów kodujących w panelach, na Twojej maszynie i na maszynach, do których dociera przez SSH. Ten addon pozwala Deep Work Plan używać tych agentów jako **peerów**: plan może przekazać ograniczone zadanie agentowi w innym panelu, otrzymać dokładnie jedną autoryzowaną odpowiedź i zachować zapis tej wymiany.
 
-Jest to opcjonalny addon **DWP v8** (pack `v8.0.2`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
+Jest to opcjonalny addon **DWP v8** (pack `v8.0.3`). Metodyka działa bez niego tak samo: gdy addonu brak lub jest wyłączony, każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd.
 
 Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
@@ -20,11 +20,11 @@ Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop e
 
 ## Co integruje
 
-Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v2.2.0`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
+Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, samodzielny skill na licencji MIT przypięty do **`v2.2.1`**, użyteczny także bez Deep Work Plan. Definiuje to, co sam Herdr pozostawia otwarte: kto może odpowiedzieć, jak odpowiedź wraca między maszynami, jak dwaj agenci unikają odpowiadania sobie nawzajem bez końca i gdzie znajduje się zapis „zapytałem, odpowiedział”.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/herdr-peers`, tag `v2.2.0`, protokół 2 |
+| Produkt | `DailybotHQ/herdr-peers`, tag `v2.2.1`, protokół 2 |
 | Klucz rejestru | `herdr` w `.dwp/config.json` |
 | Transport | interaktywny: peer w panelu Herdr |
 | Zapewnia | `subagents`, `cancel_children` |
@@ -37,7 +37,7 @@ Addon jest cienkim integratorem. Pracę wykonuje **[herdr-peers](https://github.
 Zainstaluj herdr-peers oraz oficjalny skill Herdr, od którego zależy. Każda maszyna, której agenci mają odpowiadać, również potrzebuje tego skilla.
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g -y
 npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
 ```
 
@@ -64,7 +64,7 @@ herdr-peers nie uwierzytelnia nadawcy: pole `from=` w stemplu jest twierdzeniem.
 
 ## Kontenery i host
 
-Z addonem [devcontainer](/kit/devcontainer) na devcontainer-kit `v1.4.1` każdy kontener dck zawiera herdr-peers i dołącza do sieci przy `dck up`: jego agenci mogą pytać agentów na hoście, w innych kontenerach i w pozostałych kontenerach loopback hosta, i otrzymać odpowiedź. `dck setup` instaluje na hoście zweryfikowany herdr-peers, więc agenci hosta także odpowiadają. Listener na hoście i dodatkowe klucze, które wpuszczają inne kontenery, to twoje decyzje w profilu hosta kitu; ten addon nigdy ich nie ustawia. Od herdr-peers (`v0.2.3`) każda maszyna przechowuje własny stan (`$XDG_STATE_HOME/herdr-peers/<server>/`), więc checkout współdzielony przez host i kontener nie miesza już ich zapisów, a od devcontainer-kit (`v0.3.3`) kontener sam eksportuje `HERDR_PEERS_SELF`, więc agenci Codex wewnątrz docierają do innych maszyn bez ręcznych kroków.
+Z addonem [devcontainer](/kit/devcontainer) na devcontainer-kit `v1.4.2` każdy kontener dck zawiera herdr-peers i dołącza do sieci przy `dck up`: jego agenci mogą pytać agentów na hoście, w innych kontenerach i w pozostałych kontenerach loopback hosta, i otrzymać odpowiedź. `dck setup` instaluje na hoście zweryfikowany herdr-peers, więc agenci hosta także odpowiadają. Listener na hoście i dodatkowe klucze, które wpuszczają inne kontenery, to twoje decyzje w profilu hosta kitu; ten addon nigdy ich nie ustawia. Od herdr-peers (`v0.2.3`) każda maszyna przechowuje własny stan (`$XDG_STATE_HOME/herdr-peers/<server>/`), więc checkout współdzielony przez host i kontener nie miesza już ich zapisów, a od devcontainer-kit (`v0.3.3`) kontener sam eksportuje `HERDR_PEERS_SELF`, więc agenci Codex wewnątrz docierają do innych maszyn bez ręcznych kroków.
 
 ## Herdr czy agentkit
 
@@ -137,6 +137,8 @@ Wydanie v2.0.2 zachowuje protokół 2. W argumentach uruchomienia pick-v2 w tryb
 Wydanie v2.1.0 zachowuje protokół 2. `fleet ui` dodaje widoki `Attention`, `Active`, `Waiting`, `Done` i `All` w każdej grupie, także kolejki; mapa zyskuje opcjonalne pola `state_updated_at` i `unreadable_reason`. Uruchomiony przez człowieka daemon odmawia dialogów uprawnień lub zatwierdzenia planu, których nie może bezpiecznie zaakceptować. Nie odmawia pytaniu agenta o samą pracę; logowanie, potwierdzenie obejścia uprawnień i zaufanie do folderu nadal należą do człowieka. Odmowa braina jest obsługiwana jawnie; trzy odmowy w ciągu godziny wycofują braina. Brain może teraz otrzymać pytanie o klasyfikowany blocker. Jego akcja `ask_lead_to_resolve` może wysłać blocker z `resolver: lead` do leada planu tylko wtedy, gdy klasa to none, C3, C4 lub C7; C1 (zatwierdzenie), C2 (zgoda lub logowanie), C5 (szkoda) i C6 (warunki) pozostają po stronie człowieka, a klasy spoza C1–C7 są odrzucane. Wydanie odczytuje też zdarzenia blocker journal-event/v8 i dane blocker plan-snapshot/v8 z packa 8.0.0.
 
 Wydanie v2.2.0 zachowuje protokół 2 i dodaje **revive** (`autopilot --loop --revive`); uruchomienie daemona z tą opcją przez człowieka stanowi zgodę. Plan na tej maszynie, którego lead zniknął lub osiągnął limit użycia resetowany za ponad 30 minut, i którego nie może przejąć żaden następca ani tor, otrzymuje nowego agenta: konto z dostępnym limitem wybrane przez `ak pick`, w trybie pytań, w przestrzeni roboczej otwieranej w checkoucie planu. Daemon wydaje mu jednorazowy bilet, który jako jedyny pozwala na `lead takeover --reason revive`; nowy lead uruchamia następnie `lead verify` i wznawia plan. Zablokowany plan, którego lead nadal działa, nigdy nie jest przejmowany: ten lead jest jeden raz proszony o `lead handover` do nowego agenta. Limity: jeden revive na plan co 6 godzin, dwa na plan i dwa na godzinę w całej flocie, zachowywane między restartami daemona. Stary panel nigdy nie jest zamykany ani nie otrzymuje naciśnięć klawiszy. Każdy revive wysyła jedno zdarzenie `plan_revived` do `--notify`, a `fleet ui` oznacza leada jako przywróconego. Odbiorca w wersji 2.0 lub 2.1 odrzuca rekord revive (fail closed). Daemon przechowuje też oczyszczoną kopię każdego ekranu, którego nie rozpoznał, bez sekretów i bloków kluczy, aby można ją było dodać jako przypadek testowy; `autopilot status` pokazuje, ile ich przechowuje.
+
+Wydanie v2.2.1 zachowuje protokół 2 bez zmian formatu wiadomości. `autopilot --loop --revive` odmawia teraz startu, gdy brakuje coding-agents-kit lub jest starszy niż 1.3.0 — ta sama kontrola fail-closed co przy `--brain` — zamiast zużywać limity revive na nieudane uruchomienia; daemon uruchamia brain i przywrócone agenty wyłącznie przez `ak` (`ak pick`, tryb ask), nigdy bezpośrednio przez CLI.
 
 ## Uwagi
 

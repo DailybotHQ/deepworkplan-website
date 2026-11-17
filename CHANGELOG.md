@@ -9,6 +9,15 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.80] - 2026-11-17
+
+### Changed
+
+- fix: dwp.json records the 8.0.3 conformance run (17/17, 2026-11-17)
+- fix: French v8 changelog labels match their release links
+- fix: revive is a 2.2.0 feature; 2.2.1 adds its fail-closed ak check
+- feat: pin pack v8.0.3, herdr-peers v2.2.1 and devcontainer-kit v1.4.2
+
 ## [5.0.79] - 2026-11-17
 
 ### Changed
@@ -1574,7 +1583,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.79...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.80...HEAD
+[5.0.80]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.80
 [5.0.79]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.79
 [5.0.78]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.78
 [5.0.77]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.77

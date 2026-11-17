@@ -31,7 +31,7 @@ Eight addons ship today — seven opt-in plus the required local review. Each ha
 
 ### Devcontainer (first addon)
 
-A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v1.4.1`, interface `2`): a Dev Containers template that `dck init` renders into the repository as its own container, plus the `dck-dockerfile` skill.
+A thin integrator of [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, pinned `v1.4.2`, interface `2`): a Dev Containers template that `dck init` renders into the repository as its own container, plus the `dck-dockerfile` skill.
 
 - **Kit page:** [Devcontainer](/kit/devcontainer)
 - **What it adds:** `docker/local/<service>/Dockerfile` from the runtime's official image pinned by digest (`python-3.13`, `node-24` or `debian`, no shared base image), `dev.sh` over the `dck` launcher (`up`, `shell`, `rebuild`, `doctor`), coding agents as an opt-in layer, loopback-only ports, git over SSH through the host's agent with no key inside unless the developer opts in with `[ssh] copy_keys` in their host profile, and Herdr machines per container with the standard layout
@@ -82,7 +82,7 @@ The **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (mark
 
 ### Herdr (sixth addon)
 
-A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v2.2.0`, protocol `2`), the **interactive** delegation transport of v7 plans.
+A thin integrator of [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (pinned `v2.2.1`, protocol `2`), the **interactive** delegation transport of v7 plans.
 
 - **Kit page:** [Herdr](/kit/herdr)
 - **What it adds:** a plan can hand a bounded task to a coding agent in another [Herdr](https://herdr.dev) pane, on the same machine or one Herdr reaches over SSH, and record its single authorized reply in the journal

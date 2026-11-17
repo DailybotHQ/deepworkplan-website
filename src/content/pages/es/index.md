@@ -103,7 +103,7 @@ Loop engineering es la forma en que un plan termina sin que una persona tenga qu
 
 
 
-| Contrato | Qué garantiza | Fuente (herdr-peers v2.2.0) |
+| Contrato | Qué garantiza | Fuente (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | Registro del plan (`herdr-peers lead claim`) | Un plan que el bucle vigila tiene un registro de lead con una época y una sucesión. Solo quien tiene la época más alta actúa como su lead. | `skills/herdr-peers/protocol.md` §12 |
 | Inicio solo humano (`herdr-peers autopilot start --loop`) | Solo una persona inicia el daemon, con sus propias palabras. Ninguna consulta, respuesta o aviso puede iniciarlo, detenerlo ni cambiar lo que hace. | `skills/herdr-peers/autopilot.md` §1 |
@@ -129,16 +129,16 @@ El harness publica lo que cada flujo debe leer antes de empezar: el router, el s
 | `create` | 74.974|
 | `execute` | 55.136|
 | `resume` | 32.023|
-| `refine` | 76.797|
+| `refine` | 77.014|
 | `onboard` | 82.051|
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Unidad: bytes del sistema de archivos. Medido sobre el paquete publicado con el comando siguiente: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
+Unidad: bytes del sistema de archivos. Medido sobre el paquete publicado con el comando siguiente: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
 
 No se muestran tokens del proveedor, costes ni estadísticas de cierre del bucle: ninguna fuente etiquetada los mide todavía, así que no tienen fila. La cifra de tokens del script, bytes ÷ 4, es una estimación rotulada, nunca una medición.
 
-[Lee el registro de evaluación](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[Lee el registro de evaluación](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 

@@ -103,7 +103,7 @@ Loop engineering дає плану завершитися без постійн�
 
 
 
-| Контракт | Що він гарантує | Джерело (herdr-peers v2.2.0) |
+| Контракт | Що він гарантує | Джерело (herdr-peers v2.2.1) |
 | --- | --- | --- |
 | Реєстрація плану (`herdr-peers lead claim`) | План, за яким стежить цикл, має запис лідера з епохою та порядком наступництва. Лідером діє лише власник найвищої епохи. | `skills/herdr-peers/protocol.md` §12 |
 | Запуск лише людиною (`herdr-peers autopilot start --loop`) | Лише людина запускає демон, власними словами. Жоден запит, відповідь чи сповіщення не може його запустити, зупинити або змінити те, що він робить. | `skills/herdr-peers/autopilot.md` §1 |
@@ -129,16 +129,16 @@ Harness публікує, що кожен потік мусить прочита
 | `create` | 74 974|
 | `execute` | 55 136|
 | `resume` | 32 023|
-| `refine` | 76 797|
+| `refine` | 77 014|
 | `onboard` | 82 051|
 | `status` | 27 311|
 | `verify` | 36 701|
 
-Одиниця: байти файлової системи. Виміряно на випущеному пакеті командою нижче: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.2).
+Одиниця: байти файлової системи. Виміряно на випущеному пакеті командою нижче: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
 
 Токени провайдера, вартість і статистику замикання циклу не показано: жодне позначене тегом джерело їх поки не вимірює, тож для них немає рядка. Кількість токенів у скрипті (байти ÷ 4) — позначена оцінка, а не вимірювання.
 
-[Читати журнал оцінювання](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/docs/EVALUATION.md)
+[Читати журнал оцінювання](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
 
 ---
 
