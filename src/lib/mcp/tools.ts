@@ -111,6 +111,24 @@ export const SITE_SECTIONS: {
       'How a v7 plan hands parallel_safe tasks to other coding agents under the agent_delegation grant, with gated evidence.',
   },
   {
+    name: 'Methodology — loop engineering',
+    path: '/methodology/08-loop-engineering',
+    description:
+      'The v8 execution loop: plan registration, a human-started daemon, nudges, structured blockers, succession, revive, queue, events and the fleet map.',
+  },
+  {
+    name: 'Specification — loop engineering',
+    path: '/spec/loop-engineering',
+    description:
+      'The normative v8 rules for recorded autonomy, plan registration, daemon actions, blockers, succession, revive and queue consumption.',
+  },
+  {
+    name: 'Changelog — DWP v8',
+    path: '/changelog/deep-work-plan-v8',
+    description:
+      'Source-backed record of Deep Work Plan v8 and the loop-engineering release.',
+  },
+  {
     name: 'Herdr addon',
     path: '/kit/herdr',
     description:
@@ -127,6 +145,30 @@ export const SITE_SECTIONS: {
     path: '/kit/devcontainer',
     description:
       "Optional addon (devcontainer-kit): each repository's own dev container, with coding agents as an opt-in layer.",
+  },
+  {
+    name: 'Dailybot addon',
+    path: '/kit/dailybot',
+    description:
+      'Optional addon for best-effort plan lifecycle reports to a Dailybot team; the core methodology has no Dailybot dependency.',
+  },
+  {
+    name: 'Dependency-upgrade addon',
+    path: '/kit/dependency-upgrade',
+    description:
+      'Optional package-manager-agnostic dependency upgrades in small validated, revertible batches.',
+  },
+  {
+    name: 'Design-system addon',
+    path: '/kit/design-system',
+    description:
+      'Optional interface-scoped addon that reasons from a repository’s real design sources to create or reconcile DESIGN.md.',
+  },
+  {
+    name: 'AI Diff Reviewer addon',
+    path: '/kit/ai-diff-reviewer',
+    description:
+      'Local review in every DWP Final Review; an optional CI review surface is offered separately.',
   },
   {
     name: 'DeepWorkPlan Vim',
