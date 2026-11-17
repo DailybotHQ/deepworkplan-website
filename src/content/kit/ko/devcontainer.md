@@ -8,7 +8,9 @@ order: 1
 
 # Devcontainer 애드온
 
-사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v7**(팩 `v7.12.2`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
+사람, 편집기, 코딩 에이전트 모두가 사용할 수 있는, 재현 가능하고 격리된 개발 컨테이너를 리포지토리에 제공합니다. **DWP v8**(팩 `v8.0.2`)에서 이 애드온은 Deep Work Plan 없이도 동작하는 MIT 제품인 [**devcontainer-kit**](https://github.com/DailybotHQ/devcontainer-kit)을 통합합니다. 선택형이며, 리포지토리는 이것 없이도 완전히 적합합니다.
+
+Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하니스, Loop engineering, 측정된 효율입니다. 애드온과 통합 기능은 하니스와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
 
 ## devcontainer-kit이 제공하는 것
 
@@ -21,20 +23,20 @@ order: 1
 ## 설치
 
 ```bash
-git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.2.0`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
+요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.4.0`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.2.0`, 인터페이스 2 |
+| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.4.0`, 인터페이스 2 |
 | 레지스트리 키 | `.dwp/config.json`의 `devcontainer` |
 | 리포지토리별 설정 | `.devcontainer/dck.toml` |
 | 감지 | `dck doctor --json` |
 
-**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 새 고정 버전(herdr-peers 1.3.1, coding-agents-kit 1.4.0, DeepWorkPlan Vim 1.0.1, with the vendored pack 7.12.1 also in the image)을 담도록 하세요.
+**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 현재 고정 버전을 담도록 하세요. `v1.4.0` 이미지에는 herdr-peers 2.1.0, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0이 들어 있습니다.
 
 ## 레이어
 
@@ -102,6 +104,25 @@ copy_keys = true              # default false
 ```
 
 켜져 있는 동안 `dck up`은 호스트의 `~/.ssh`를 읽기 전용으로 `~/.ssh_host`에 바인딩하고, 시작할 때마다 그 안의 `id_*` 키를 컨테이너의 `~/.ssh`로 복사하여(개인 키는 `0600`) 호스트와 맞춰 둡니다. 에이전트 전달은 그대로이며, 끄면 다음 시작 때 복사본이 제거됩니다. 대가는 호스트의 `~/.ssh` 전체를 컨테이너 안에서 읽을 수 있고, 개인 키가 상태 볼륨에 저장된다는 점입니다.
+
+## devcontainer-kit 1.3.0부터(인터페이스 2)
+
+릴리스 1.3.0은 인터페이스 2를 유지하고 옵트인 키 하나를 추가합니다. 이 키를 설정하지 않은 리포지토리는 이전과 정확히 같게 렌더링됩니다.
+
+- **`[compose] container_only`.** 여기에 나열한 워크스페이스 하위 경로는 프로젝트 범위의 이름 있는 볼륨(`co-<path-slug>`, 예를 들어 `/app/node_modules` 위의 `co-app-node_modules`)으로 메인 서비스에 읽기-쓰기로 마운트됩니다. 컨테이너가 그 안에서 빌드한 것은 호스트의 체크아웃에 결코 닿지 않습니다. 이 키가 필요한 경우는 다음과 같습니다. 워크스페이스는 바인드 마운트이고, macOS나 Windows 호스트에서 컨테이너 안의 `npm` 또는 `pnpm` 설치가 `node_modules`를 컨테이너 자체 플랫폼용 빌드로 바꿔 호스트의 설치를 망가뜨립니다.
+- **시작할 때마다 소유권 지정.** 엔트리포인트는 컨테이너가 시작할 때마다 각 마운트 지점을 구성된 사용자에게 넘깁니다. 사용자가 이미 소유하고 있으면 아무것도 하지 않습니다.
+- **경로마다 하나의 마운트.** 사용자 블록도 마운트하는 경로는 거부되며, 파생된 볼륨 이름이 이미 `compose.state_volume`이나 `[compose] volumes`에서 사용 중인 경우도 마찬가지입니다. `dck.toml` 스키마(`dck-config-v2.json`)에 이 키가 추가됩니다.
+
+1.3.0 이미지에는 1.2.0과 같은 버전이 들어 있었습니다. herdr-peers 1.3.1, coding-agents-kit 1.4.0, DeepWorkPlan Vim 1.0.1이며, 벤더링된 팩 7.12.1도 포함되었습니다.
+
+## devcontainer-kit 1.4.0부터(인터페이스 2)
+
+릴리스 1.4.0은 인터페이스 2를 유지하고 이미지에 들어가는 버전을 올립니다. dck 자체의 인터페이스는 바뀌지 않습니다.
+
+- **herdr-peers 2.1.0(프로토콜 2).** 사람의 명시적인 지시에 따른 리드 지정, 옵트인 방식의 페일 클로즈 autopilot 브레인, 플랜 큐는 2.0.0에서 도입되었으며, 질문, 알림, 응답은 1.x 피어와 호환됩니다. 2.1.0은 `fleet ui` 뷰를 추가하고, 데몬이 수락할 수 없는 권한 요청은 에이전트를 계속 기다리게 두지 않고 거부하며, 팩 8.0의 블로커 분류를 읽습니다. dck는 데몬을 시작하지 않습니다.
+- **coding-agents-kit 1.5.0(인터페이스 1).** `AGENTKIT_PERMISSIONS=ask` 또는 `--ask`에서는 각 CLI 자체의 확인 모드가 강제되므로, 설정 기본값이 자율 모드인 계정도 더 이상 자율 모드로 시작하지 않습니다. `ak run --json`은 CLI가 토큰 수를 보고할 때만 토큰 수를 보고합니다. `agents` 레이어는 여전히 자율성 플래그를 쓰지 않습니다.
+- **DeepWorkPlan Vim 1.1.0.** Neovim은 동일합니다(0.12.5). 편집기는 팩 8.0의 플랜 큐, 구조화된 블로커, 자율성 태세를 읽기 전용으로 표시하며, v7 플랜은 이전과 같이 표시됩니다.
+- **이 리포지토리는 DeepWorkPlan 8.0.1을 직접 사용합니다.** 새 플랜은 `plan-contract/v8`을 기록하고, v7, v6, v5 플랜은 기존 세대를 유지합니다.
 
 ## 보안 기본값
 

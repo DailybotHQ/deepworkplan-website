@@ -1,0 +1,143 @@
+---
+title: Herdr
+description: "Passe trabalho a outro agente de código em um painel do Herdr, em qualquer máquina, e receba uma única resposta autorizada. Planos que delegam, com registro."
+kind: addon
+lang: pt
+order: 7
+---
+
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
+# Addon Herdr
+
+O [Herdr](https://herdr.dev) coloca agentes de programação em painéis, na sua máquina e nas máquinas que ele alcança por SSH. Este addon permite que um Deep Work Plan use esses agentes como **pares**: um plano pode passar uma tarefa delimitada a um agente em outro painel, receber exatamente uma resposta autorizada e manter um registro da troca.
+
+É um addon opcional do **DWP v8** (pack `v8.0.2`). A metodologia funciona da mesma forma sem ele: com o addon ausente ou desativado, cada tarefa é executada na sessão atual, exatamente como antes.
+
+O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é o harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o loop; a metodologia funciona por conta própria.
+
+<HerdrLoop lang="pt" class="not-prose my-10" />
+
+## O que ele integra
+
+O addon é um integrador enxuto. O trabalho é feito pelo **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)**, uma skill independente com licença MIT fixada em **`v2.2.0`**, útil mesmo sem o Deep Work Plan. Ela define o que o próprio Herdr deixa em aberto: quem pode responder, como a resposta encontra o caminho de volta entre máquinas, como dois agentes evitam responder um ao outro para sempre e onde fica o registro de "perguntei, respondeu".
+
+| Item | Valor |
+|---|---|
+| Produto | `DailybotHQ/herdr-peers`, tag `v2.2.0`, protocolo 2 |
+| Chave de registro | `herdr` em `.dwp/config.json` |
+| Transporte | interativo: um par em um painel do Herdr |
+| Fornece | `subagents`, `cancel_children` |
+| Requer | a concessão `agent_delegation` do contrato do plano |
+
+**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico: os verbos da CLI e suas flags documentadas, os códigos de saída `0`–`7`, as variáveis documentadas `HERDR_PEERS_*`, `DWP_PLAN` e `DWP_TASK`, o protocolo 2 e os contratos JSON `herdr-peers/lanes-v1`, `herdr-peers/lead-v1` e o registro de delegação. Uma mudança incompatível em qualquer um deles incrementa a versão principal, e uma mudança no formato de transmissão também incrementa o número do protocolo. `v1.0.0` não altera nenhum comportamento em relação a `v0.3.3`, e as versões 0.x deixaram de ter suporte.
+
+## Instalação
+
+Instale o herdr-peers e a skill oficial do Herdr, da qual ele depende. Toda máquina cujos agentes devam responder também precisa da skill.
+
+```bash
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
+```
+
+Requisitos: Herdr 0.9.1 ou mais recente, `bash` e `python3` 3.9 ou mais recente (apenas a biblioteca padrão). O onboarding oferece o addon e registra sua resposta no registro de addons; ele nunca é ativado sem consentimento.
+
+## O que ele adiciona a um plano
+
+- **Delegação a um par.** Em um plano v7 ou v8 cujo contrato concede `agent_delegation`, o `execute` pode passar uma tarefa `parallel_safe`, ou uma pergunta somente leitura, a um agente em outro painel, nesta máquina ou em outra.
+- **Uma resposta autorizada.** A solicitação leva um carimbo que autoriza exatamente uma resposta. O par responde uma vez por meio do helper, e a resposta leva um carimbo próprio.
+- **Um registro antes de confiar.** Cada delegação é gravada em `analysis_results/delegations.ndjson` do plano antes de a resposta ser usada, e corresponde ao evento de diário `delegation` dos planos v7 e v8.
+- **Os resultados continuam sendo alegações até serem verificados.** A resposta de um par é evidência `asserted` até que o próprio executor de gates do plano a observe. Ela nunca fecha uma tarefa sozinha.
+
+## Modelo de segurança
+
+| Regra | O que significa |
+|---|---|
+| Concessão primeiro | A delegação só é executada quando o contrato do plano concede `agent_delegation`. |
+| Limite de profundidade 1 | Uma mensagem carimbada com `depth=1` ou `reply-to=` nunca é respondida, e um delegado nunca delega. |
+| Limite de fan-out | No máximo quatro pares por solicitante, por padrão. |
+| Dados, não instruções | Uma resposta nunca concede uma autoridade que o receptor já não tivesse. |
+| Um escritor por caminho | Um par que escreve trabalha em sua própria worktree git. |
+
+O herdr-peers não autentica o remetente: o campo `from=` de um carimbo é uma alegação. A mitigação é a lista de permissões `HERDR_PEERS_SCOPE`, que limita os workspaces e as máquinas que um par aceita.
+
+## Contêineres e o host
+
+Com o addon [devcontainer](/kit/devcontainer) sobre o devcontainer-kit `v1.4.0`, todo contêiner dck traz o herdr-peers e entra na malha no `dck up`: seus agentes podem consultar agentes no host, nos outros contêineres e nos outros contêineres loopback do host, e receber a resposta de volta. `dck setup` instala um herdr-peers verificado no host, então os agentes do host também respondem. O listener do host e as chaves extras que deixam outros contêineres entrar são decisões suas no perfil do host do kit; este addon nunca os define. Desde o herdr-peers (`v0.2.3`), cada máquina mantém o próprio estado (`$XDG_STATE_HOME/herdr-peers/<server>/`), então um checkout compartilhado pelo host e por um contêiner não mistura mais os registros de cada um, e desde o devcontainer-kit (`v0.3.3`) o próprio contêiner exporta `HERDR_PEERS_SELF`, então os agentes Codex lá dentro alcançam outras máquinas sem nenhum passo manual.
+
+## Herdr ou agentkit
+
+Os dois addons implementam a mesma interface de delegação — `launch`, `observe`, `collect`, `cancel` — com transportes diferentes.
+
+| Situação | Usar |
+|---|---|
+| Uma tarefa `parallel_safe` delimitada com uma saída declarada | [agentkit](/kit/agentkit) (`ak run` headless em uma worktree) |
+| A tarefa precisa de interação, é longa ou fica em outra máquina | Herdr (um par em um painel) |
+
+Para um líder que executa muitas frentes ao mesmo tempo — painéis no host, em contêineres e em outras máquinas, cada um na própria conta —, `herdr-peers lanes` lista cada frente com seu estado, `herdr-peers status <pane>` classifica a tela em que uma frente bloqueada está, e cada registro de delegação nomeia a conta e o fornecedor que o realizaram. Veja [Executar muitos agentes](/methodology/06-orchestration).
+
+**Cada lane nomeia seu painel.** Sob as regras de autonomia de swarm (Guide §17.2), cada lane passa seu próprio painel com  em cada verbo de herdr-peers (, , , , , , ) para evitar atribuição incorreta de mensagens e saturação de slots de distribuição. Os lanes do Codex exigem isso com rigor especial devido ao compartilhamento de servidor em segundo plano entre sessões.
+
+## Avisos e liderança
+
+O herdr-peers (`v0.3.2`) acrescenta o que permite a um enxame sobreviver ao seu líder ([Autonomia do enxame](/pt/methodology/07-swarm-autonomy)):
+
+- **Avisos.** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` envia uma mensagem de mão única com o selo `reply=no`. O `check` do receptor a classifica como aviso, registra-a como dado e nunca responde. Avisos não consomem nenhuma vaga de fan-out e podem ser enviados enquanto uma consulta está aberta; use-os para anúncios de repasse, mudanças de líder e difusões de release.
+- **Um registro de líder por plano.** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` torna um agente o líder de um plano; `lead show` imprime o registro (schema `herdr-peers/lead-v1`: plano, líder, época, sucessão, frentes, hora de atualização). `lead handover <addr> --plan <P>` repassa a liderança, `lead takeover --plan <P>` permite que o primeiro suplente alcançável a assuma quando o líder sumiu, e `lead release --plan <P>` a encerra. Cada mudança incrementa a época e avisa todas as frentes. Reivindique o plano antes de iniciar suas frentes: `lead` só é resolvido quando existe um registro. A partir do `v0.3.2` o registro guarda localmente o repositório que reivindica e recusa uma reivindicação do mesmo id de plano vinda de outro repositório; nomeie esse plano `--plan <repo>/<id>`.
+- **Isolamento (fencing).** Uma frente aceita um aviso de líder apenas do agente que lhe deu o briefing (primeira reivindicação), do líder atual na época seguinte (passagem) ou da primeira entrada alcançável da sucessão na época seguinte (tomada). Todo o resto é registrado e ignorado, e um líder que volta e vê uma época maior se retira.
+- **O endereço `lead`.** `ask lead …` e `notify lead …` resolvem para o líder atual de `--plan` (senão, de `$DWP_PLAN`), então nenhum briefing de frente fixa no código o painel do líder.
+- **Telas `usage_limit`.** `status` e `lanes` reconhecem a mensagem de limite de uso de uma CLI como a classe de tela `usage_limit`, cujo próximo passo é um repasse. Ela nunca recebe teclas. `lanes --json` acrescenta o plano, seu líder, a época e a última capacidade reportada de cada frente.
+
+As frentes também podem consultar umas às outras para obter informação e coordenação — uma interface, o nome de uma flag, o estado de um branch —, mas só o líder atribui trabalho. A profundidade 1 e o limite de fan-out continuam valendo. Com a `v0.2.x` não há avisos nem registros de líder: as frentes consultam o endereço do líder que consta no seu briefing, e uma mudança de líder é retransmitida pelo desenvolvedor.
+
+## Debates
+
+O herdr-peers 1.1.0 adiciona uma sub-skill nativa de **debate** (`debate.md`): um agente líder conduz um painel de pares em painéis do Herdr ao longo de rodadas e encerra com um único resultado em que a pessoa pode confiar, com sua evidência e sua divergência. Use-a apenas quando a pessoa pedir um debate, um painel, um red team, uma pesquisa feita por vários agentes ou ângulos, ou um segundo painel sobre um resultado; a opinião de um único agente é uma única consulta.
+
+- **Primeiro o propósito.** O líder escolhe o propósito — **decidir**, **pesquisar** o estado da arte, **testar sob estresse**, **verificar** ou **gerar** — e cada um tem seus formatos, sua contagem e seu entregável. Os propósitos se encadeiam (pesquisar → decidir, decidir → verificar), e um debate é dimensionado como rápido, padrão ou profundo.
+- **O contrato do líder.** O líder nunca vota; as palavras da pessoa são copiadas literalmente; os briefings chegam ao painel por um único canal; cada painel grava seu parecer em disco e responde com uma linha; nenhum painel realiza ações externas.
+- **Formatos.** Pesquisa por ângulos, rodadas clássicas, pacote de rascunho, interrogatório cruzado afirmação por afirmação, red team e depois defensores, steelman e depois julgamento, desafio às cegas com contexto novo, painel de replicação e propostas divergentes. Uma decisão sempre termina em um espaço de veredito forçado.
+- **O verbo `herdr-peers debate`.** `tally` conta cédulas ordenadas e vereditos por item (Borda, Copeland, duelos par a par, o vencedor e o perdedor de Condorcet); `claims` funde os registros de afirmações das raias em estados como estabelecida, contestada ou refutada, que são um quórum, não uma verificação; `anon` copia os pareceres com nomes anônimos, com o mapeamento em uma chave privada; `filings` lista pareceres presentes, ausentes e curtos para reconsultar apenas os painéis que faltam.
+- **Montar o painel.** `panel` propõe um painel e não executa nada. Os assentos são distribuídos em rodízio entre provedores de modelos e, dentro de um provedor, vai primeiro o assento com mais cota, vindo de painéis ociosos e, quando o agentkit (`ak`) está instalado, das contas que `ak pick` propõe. Sem `ak`, recomenda o coding-agents-kit (opcional, `v1.0.1` ou posterior).
+- **Modelos.** Dezesseis modelos em `templates/debate/`, da nota da pessoa e dos briefings de pesquisa, de teste de estresse e de rodada aos arquivos de cédulas e de afirmações, ao pacote de passagem do líder e aos registros de decisão, de estado da arte, de teste de estresse e de replicação.
+- **Entrega a um par bloqueado.** `reply` e `notify` tentam de novo a entrega a um par bloqueado em uma pergunta por até `--wait-blocked` segundos; continua sendo exatamente uma resposta.
+
+A versão é aditiva: o protocolo 1 e todos os verbos, flags, códigos de saída e contratos JSON permanecem inalterados.
+
+## Autopilot
+
+O herdr-peers 1.2.0 adiciona o **autopilot** (`autopilot.md`): um daemon opcional, `herdr-peers autopilot`, que uma pessoa inicia para que um plano longo não pare em uma tela de aprovação. Ele observa todos os agentes em todas as máquinas Herdr habilitadas e, quando um deles espera em uma tela, aceita uma opção. A versão 1.2.1 corrige um caso em que uma pergunta cujas opções têm descrições longas ficava sem resposta. A versão 1.2.2 responde uma pergunta exibida com uma prévia ao lado das opções e reconhece a marca de recomendado em espanhol, francês, alemão e italiano. A versão 1.3.0 adiciona o **loop**: `autopilot --loop` mantém cada plano aberto executando até o fim em todas as máquinas, `--notify`/`--notify-env` apontam seus relatórios para onde você quiser, e os verbos somente leitura `plans` e `fleet` junto com a fleet UI mostram cada frente, máquina e plano aberto num relance.
+
+A versão 2.0.0 move o fio para o **protocolo 2** e adiciona três coisas: **a nomeação de lead** — apenas com a palavra explícita do humano (`lead claim --allow-appointment`), um plano concedido cujo lead e todos os sucessores tenham desaparecido pode nomear sua primeira faixa viva como novo lead (`lead takeover --as-lane`, sondado duas vezes, no máximo duas nomeações por plano), e o **`lead verify`** é a verificação somente leitura a executar antes de qualquer merge, tag ou release; o **cérebro do autopilot** — com `--brain` o daemon iniciado pelo humano lança um agente dedicado (coding-agents-kit 1.3.0 ou posterior) e só lhe obedece dentro de uma lista fechada de ações, recusando-se a iniciar se o `ak` estiver ausente ou mais antigo; e a **fila de planos** — o pack escreve `.dwp/queue.json` (esquema `dwp-queue-v1`) e com `--loop` o daemon inicia o próximo plano na fila e aprovado sem você. Em um plano concedido, cada faixa e sucessor deve executar 2.0 ou posterior.
+
+- **Só uma pessoa o inicia.** Nenhuma mensagem, par ou plano pode iniciá-lo, pará-lo ou mudar o que ele faz. Um agente só o inicia quando a sua pessoa pediu isso diretamente na sessão.
+- **O que ele aceita.** Uma pergunta com opções, uma aprovação de ferramenta, uma aprovação de plano, a confiança na pasta e um prompt de atualização, que ele pula. Ele escolhe a opção marcada como recomendada; na falta dela, a que a CLI pré-selecionou; na falta desta, a primeira; e segue um diálogo de várias etapas até o fim, relendo a tela após cada tecla.
+- **Agentes que param para perguntar.** Um agente que encerrou seu turno perguntando em prosa recebe um único prompt fixo para continuar, no máximo três vezes por painel por hora. Um limite de uso é tentado de novo a cada 30 minutos, por no máximo um dia.
+- **O que ele nunca toca.** Um prompt de login, de autenticação, de chave de API ou de código de dispositivo; a confirmação do modo bypass-permissions do Claude; uma opção que recusa; uma opção que amplia as permissões permanentes de um agente, como `always allow` ou o modo automático; um painel sem um menu que ele reconheça; um painel cuja linha de entrada contém o rascunho de uma pessoa.
+- **Controles.** `--dry-run` registra o que ele faria e não envia nada; `--scope` e `--exclude` o mantêm longe de uma máquina ou de um painel; `herdr-peers autopilot status` e `herdr-peers autopilot stop` informam sobre ele e o encerram. Cada ação é uma linha no registro de delegações, sem texto de tela.
+- **CLIs verificadas.** Claude Code, Codex, Cursor, Grok, Pi e Antigravity, em painéis reais. As telas do OpenCode não foram verificadas.
+
+**O que você aceita ao executá-lo.** Com o autopilot ligado, a solicitação de um agente é aprovada sem que a pessoa a veja, inclusive um comando que a pessoa teria recusado. Não há lista de bloqueio: o autopilot não julga o que um comando faz. Os controles que restam são o modo de permissões e as salvaguardas de cada agente, o que a conta e a máquina dele conseguem alcançar, as regras do repositório e a revisão de código antes de um merge.
+
+O autopilot fica fora do protocolo de delegação: não envia nenhuma consulta, resposta ou aviso, e a regra para agentes e líderes permanece inalterada — a única tela em que eles pressionam teclas é a de confiança na pasta, em painéis que eles mesmos iniciaram. A versão 1.2.0 também documenta, em `launcher.md`, como um líder abre vários agentes de uma vez com o `ak`.
+
+### Controles do daemon e o loop da versão 2
+
+`autopilot run` executa em primeiro plano; `start`, em segundo plano; `stop`, `status` e `logs` controlam ou inspecionam o daemon. Só uma pessoa pode iniciá-lo. Com `--loop`, ele avisa apenas o lead ocioso de um plano, não mexe em planos bloqueados, para após três avisos sem progresso, pede a um sucessor registrado que assuma um lead ausente e consome a fila de planos aprovados enviando um aviso ao lead. O Herdr apenas lê a fila. `--notify "<command>"` envia eventos do plano sem ampliar a autoridade.
+
+`--notify-env NAME` passa ao comando uma variável de ambiente com esse nome. Fora isso, o comando roda com um ambiente mínimo (`PATH`, `HOME`, a localidade e os diretórios XDG), nunca com tokens ou chaves.
+
+Com `--brain`, o Herdr usa coding-agents-kit 1.3.0 ou posterior: `ak pick` fornece um contrato de inicialização pick-v2 validado no modo ask. `--brain-kinds codex,claude` define a prioridade dos provedores e `--brain-model claude=sonnet` seleciona um modelo. O cérebro só pode retornar uma ação de uma lista fechada; se `ak` estiver ausente ou desatualizado, a inicialização falha de forma fechada. A designação exige tanto a concessão do plano (`lead claim --allow-appointment`) quanto a opção `--appoint` do daemon iniciado por uma pessoa; a faixa usa `lead takeover --as-lane`. Execute `lead verify` antes de merge, tag ou release. `plans`, `fleet` e `fleet ui` são visualizações somente leitura. O daemon nunca se inicia sozinho, nem designa sem concessão, nem grava a fila ou o registro do lead, nem age com base em texto livre, nem amplia permissões.
+
+A versão v2.0.1 mantém o protocolo 2. Ela muda `--brain-kinds` para o padrão `claude` (outros tipos continuam disponíveis) e registra no log, no mapa e no status os motivos de retirada do brain e os perfis excluídos. Uma retirada `permission_mode` indica a provável causa relacionada ao modo ask. O estado da fila que não é mais necessário só é descartado depois que um relatório da máquina responde; o daemon também limita a 16 os perfis excluídos listados no mapa, sem esquecer o conjunto completo. Para o appointment, uma lane em outro plano aberto agora conta como participação em plano.
+
+A versão v2.0.2 mantém o protocolo 2. Em um lançamento pick-v2 com ask ativo, exatamente um `--ask` final é aceito depois de um `--model <name>` opcional e removido antes do lançamento; o daemon acrescenta seu próprio `--ask --trust-cwd`. Outras posições de `--ask`, opções de permissão do próprio CLI e argumentos depois de `--` continuam recusados. Os argumentos de lançamento do kit 1.4.x continuam aceitos sem alterações. Endereços de pane terminados em nova linha são recusados.
+
+A versão v2.1.0 mantém o protocolo 2. `fleet ui` adiciona as vistas `Attention`, `Active`, `Waiting`, `Done` e `All` em todos os agrupamentos, inclusive filas; o mapa ganha os campos opcionais `state_updated_at` e `unreadable_reason`. O daemon, iniciado por uma pessoa, nega diálogos de permissão ou aprovação de plano que não possa aceitar com segurança; nunca nega a pergunta de trabalho de um agente, e login, confirmação de bypass de permissões e confiança da pasta continuam com a pessoa. Uma negação do brain é tratada explicitamente; três negações em uma hora retiram esse brain. Agora é possível consultar o brain sobre um bloqueio com classe. A ação `ask_lead_to_resolve` pode enviar ao lead do plano um bloqueio com `resolver: lead` somente quando a classe for none, C3, C4 ou C7; C1 (aprovação), C2 (consentimento ou login), C5 (dano) e C6 (termos) continuam com a pessoa, e classes fora de C1–C7 são recusadas. A versão também lê eventos de bloqueio journal-event/v8 e dados de bloqueio plan-snapshot/v8 do pack 8.0.0.
+
+A versão v2.2.0 mantém o protocolo 2 e adiciona **revive** (`autopilot --loop --revive`); a pessoa iniciar o daemon com essa opção é a autorização. Um plano nesta máquina cujo lead não existe mais, ou atingiu um limite de uso que só se renova em mais de 30 minutos, e que nenhum sucessor ou lane pode assumir, recebe um agente novo: uma conta com cota obtida de `ak pick`, em modo de consulta, em um espaço de trabalho que abre no checkout do plano. O daemon lhe entrega um ticket de uso único, o único que permite `lead takeover --reason revive`; o novo lead então executa `lead verify` e retoma o plano. Um plano parado cujo lead continua ativo nunca é assumido: esse lead recebe um único pedido para fazer `lead handover` ao agente novo. Limites: um revive por plano a cada 6 horas, dois por plano e dois por hora em toda a frota, mantidos entre reinícios do daemon. O painel antigo nunca é fechado nem recebe teclas. Cada revive envia um evento `plan_revived` para `--notify`, e `fleet ui` marca o lead como revivido. Um receptor 2.0 ou 2.1 recusa o registro de revive (fail closed). O daemon também guarda uma cópia sanitizada de qualquer tela que não conseguiu reconhecer, sem segredos nem blocos de chaves, para que possa ser adicionada como caso de teste; `autopilot status` mostra quantas ele guarda.
+
+## Notas
+
+Opcional e nunca obrigatório. Um repositório é totalmente conforme com zero addons opcionais, e nenhum fluxo depende deste. A ida e volta entre dois painéis e entre máquinas é coberta por testes contra um Herdr simulado; planeje uma primeira execução supervisionada.

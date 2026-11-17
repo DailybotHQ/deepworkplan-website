@@ -16,6 +16,8 @@ description: "Deep Work Plan のエージェントサーフェス：読み取り
 
 上記の API はエージェントがこのサイトを読み取ることを可能にします。DWP スキルは、エージェントが方法論を実行することを可能にするものです——リポジトリに一度インストールすれば、ルーターと九つのサブスキルが提供され、スラッシュコマンドとして（または名前で、スラッシュを傍受するエージェントの場合はほとんどが代わりに `#` を使います。例：`#dwp-execute`）呼び出せます。
 
+Herdr を使う場合、計画の登録時に lead と後継順を記録します。人が `herdr-peers autopilot start --loop` を起動すると、オープンな計画を継続できます。merge、tag、release の前に `herdr-peers lead verify --plan <plan-id>` を実行してください。
+
 すべての計画は、二つの独立した軸からそれぞれ一つの値を選びます。
 
 - **Lite** — タスク記録は計画の README 内に、安定した `#task-N` アンカーの下でインラインに存在します。小さく範囲の定まった作業向けです:一つの関心事を、おおよそ一回の作業時間で。
@@ -129,7 +131,7 @@ Deep Work Plan スキルの公式インストールパスです——/init エ�
 
 ```bash
 # 1. Install the DWP skill — same command the /init endpoint gives agents
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication

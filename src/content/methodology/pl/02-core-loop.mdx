@@ -72,6 +72,10 @@ Walidacja jest częścią zadania, a nie czymś doraźnym: każde zadanie wskazu
 
 ## v6 i v7: ta sama metodyka, ściślejsza struktura
 
-Aktualny standard DWP to 7.0.0, wdrażany przez linię skilla 7.x. Ten pakiet domyślnie tworzy każdy nowy plan w v7; jawne żądanie `v6` nadal materializuje plan v6. Istniejące plany v1, v2, v5 i v6 zachowują zapisaną generację i nigdy nie są po cichu migrowane; przeniesienie planu v5 do v6 wymaga wyraźnego polecenia migracji.
+Aktualny standard DWP to 8.0.0, wdrażany przez linię skilla 8.x. Ten pakiet domyślnie tworzy każdy nowy plan w v8; jawne żądanie `v6` nadal materializuje plan v6. Istniejące plany v1, v2, v5 i v6 zachowują zapisaną generację i nigdy nie są po cichu migrowane; przeniesienie planu v5 do v6 wymaga wyraźnego polecenia migracji.
 
 v6 zachowuje tę samą metodykę plan → zadania → bramki walidacji → ukończenie, polecenia slash i lokalizację `.dwp/plans/`. Zaostrza strukturę inżynieryjną przez kontrakt, dziennik, manifesty kontekstu zadań, harmonogram i odrzucanie pustej listy dozwolonych możliwości. v7 zachowuje tę warstwę zapisów i dodaje opcjonalny znacznik zadania `parallel_safe`, zdarzenie dziennika `delegation` dla ograniczonej pracy przekazanej innemu agentowi oraz rejestr addonów `.dwp/config.json`; bez włączonego addonu delegowania każdy plan nadal wykonuje się sekwencyjnie w bieżącej sesji. Decyzja architektoniczna to GO; empirycznej niegorszości wyników agentów nie zmierzono.
+
+## Od głównej pętli do pętli zamkniętej
+
+Podstawowe operacje opisują, jak wykonuje się plan. Z opcjonalnym dodatkiem Herdr `execute` przejmuje rekord prowadzącego planu — dodając sukcesję, gdy plan wskazuje następców — aby uruchomiony przez człowieka `herdr-peers autopilot --loop` mógł ponaglić bezczynnego prowadzącego, raportować zdarzenia i poprosić następcę z listy o przejęcie, gdy prowadzącego zabraknie. Demon dodaje ciągłość, nie uprawnienia; zobacz [Loop engineering](/pl/methodology/08-loop-engineering).

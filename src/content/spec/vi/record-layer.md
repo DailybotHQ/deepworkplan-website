@@ -8,7 +8,7 @@ section: Record layer
 
 # Lớp bản ghi
 
-> **Phạm vi phiên bản:** Trang này trình bày lại lớp bản ghi v6 có tính quy phạm mà tiêu chuẩn hiện tại, DWP 7.0.0, xây dựng trên đó. Nguồn chính thức tại bản phát hành `v7.12.2`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) và [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên. Kế hoạch v5 giữ lớp [trạng thái kế hoạch](/spec/plan-state) và không bao giờ được di chuyển một cách ngầm định.
+> **Phạm vi phiên bản:** Trang này trình bày lại lớp bản ghi v6 có tính quy phạm mà tiêu chuẩn hiện tại, DWP 8.0.0, xây dựng trên đó. Nguồn chính thức tại bản phát hành `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_CONTRACT.md) và [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Khi trang này và các tệp đó khác nhau, các tệp được ưu tiên. Kế hoạch v5 giữ lớp [trạng thái kế hoạch](/spec/plan-state) và không bao giờ được di chuyển một cách ngầm định.
 
 **Phiên bản 6.0.0, mở rộng trong 7.0.0. Trạng thái: Ổn định.** Lớp bản ghi thay thế việc hoàn tất bằng lời tường thuật bằng các bản ghi: hợp đồng là thẩm quyền, nhật ký là bộ nhớ, các helper thực hiện việc ghi, và mọi tệp được sinh ra đều là một phép chiếu. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
@@ -17,7 +17,6 @@ section: Record layer
 Một kế hoạch gồm hai thành phần được soạn thảo và một chuỗi được bảo vệ. Markdown của kế hoạch (`README.md` và các tệp tác vụ) nói điều gì sẽ được làm. **Hợp đồng kết quả** (`contract.json`) nói điều gì được tính là xong và kế hoạch được phép làm gì. **Nhật ký** (`journal.ndjson`) ghi lại điều đã thực sự xảy ra. `state.json` và `views/` được tái tạo từ nhật ký và KHÔNG ĐƯỢC (MUST NOT) chỉnh sửa bằng tay; khi một tệp được sinh ra và nhật ký không khớp nhau, nhật ký thắng và tệp được tái tạo.
 
 ## Nhận diện thế hệ
-
 Một thư mục kế hoạch là một kế hoạch thuộc dòng v6 khi và chỉ khi nó mang một `manifest.json` có con trỏ `contract` phân giải được, một `contract.json`, hoặc một chuỗi bản sửa đổi `contracts/`. Việc nhận diện PHẢI (MUST) dựa trên các thành phần này, không bao giờ dựa trên phiên bản gói đã cài: một gói hiện tại có thể chứa kế hoạch v5, và một gói cũ hơn có thể gặp một kế hoạch v6.
 
 URL `schema` của hợp đồng nêu tên **thế hệ** của nó, và manifest cùng mọi sự kiện nhật ký phản chiếu thế hệ đó:
@@ -26,8 +25,10 @@ URL `schema` của hợp đồng nêu tên **thế hệ** của nó, và manifes
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` và sự kiện `delegation` ([Ủy quyền](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` và thẩm quyền vòng lặp |
+Ảnh chụp trạng thái đang hoạt động của v8 dùng [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
-Các kế hoạch mới do gói 7.x tạo ra mặc định là v7; một yêu cầu `v6` tường minh vẫn vật liệu hóa một hợp đồng v6. Một kế hoạch không bao giờ đổi thế hệ, và một nhật ký trộn lẫn các thế hệ PHẢI (MUST) bị từ chối. Cả hai thế hệ đều chiếu vào cùng một hình dạng [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+Các kế hoạch mới do gói 8.x tạo ra mặc định là v7; một yêu cầu `v6` tường minh vẫn vật liệu hóa một hợp đồng v6. Một kế hoạch không bao giờ đổi thế hệ, và một nhật ký trộn lẫn các thế hệ PHẢI (MUST) bị từ chối. Cả hai thế hệ đều chiếu vào cùng một hình dạng [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json).
 
 ## Hợp đồng kết quả
 

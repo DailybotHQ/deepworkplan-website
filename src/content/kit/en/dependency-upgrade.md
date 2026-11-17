@@ -10,6 +10,8 @@ order: 3
 
 Bring a repository's dependencies up to date with a batched, validated, revertible workflow. The third opt-in Deep Work Plan addon.
 
+Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
+
 ## What it adds
 
 - Detection of the repo's **real** package manager (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, and more) from the manifest and lockfile that exist.
@@ -23,7 +25,7 @@ Bring a repository's dependencies up to date with a batched, validated, revertib
 4. Run the repo's real validation gate after each batch; revert any batch that fails.
 5. Summarize what was upgraded, skipped, and reverted; let the developer commit.
 
-## v7 specification
+## v8 specification
 
 | Item | Value |
 |---|---|
@@ -31,7 +33,7 @@ Bring a repository's dependencies up to date with a batched, validated, revertib
 | Registry key | `dependency-upgrade` in `.dwp/config.json` |
 | Descriptor | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Command | `/lib-upgrade` installed into `.agents/commands/` when accepted |
-| Versioning | Pinned and versioned with the skill pack (`v7.12.2`) |
+| Versioning | Pinned and versioned with the skill pack (`v8.0.2`) |
 
 ## Notes
 

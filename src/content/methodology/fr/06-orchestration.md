@@ -100,3 +100,7 @@ Le plan parent se clôt sur des preuves, pas sur des comptes rendus :
 ## Quand un compte ou le coordinateur s’épuise
 
 Une longue exécution survit à n’importe quel compte pris isolément. Depuis coding-agents-kit (`v0.7.1`) et herdr-peers (`v0.3.2`), un couloir vérifie sa propre capacité à chaque frontière de tâche et passe son travail au moyen d’un paquet avant que son compte ne s’épuise, un coordinateur transmet le leadership ou est remplacé par son suppléant, et seuls les éléments critiques parviennent au développeur. [Autonomie de l’essaim](/fr/methodology/07-swarm-autonomy) décrit la boucle, le paquet, la succession et les classes d’escalade.
+
+## Enregistrer un plan pour la boucle
+
+Lorsque l’addon facultatif Herdr est actif, `execute` du pack revendique l’enregistrement de lead du plan, en ajoutant une succession lorsque le plan nomme des successeurs. L’humain peut lancer `herdr-peers autopilot --loop` pour poursuivre les plans ouverts et demander au successeur listé de prendre la relève d’un lead disparu. Le daemon n’observe que les plans enregistrés ; voir [Loop engineering](/fr/methodology/08-loop-engineering).

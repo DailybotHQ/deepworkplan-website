@@ -4,6 +4,8 @@ description: "AI 에이전트를 위한 실행 가능한 온보딩 프롬프트:
 lastUpdated: 2026-10-11
 ---
 
+스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.
+
 당신은 AI 코딩 에이전트입니다. 먼저 이 프롬프트 전체를 읽은 뒤, Deep Work Plan(DWP)
 방법론을 채택하여 현재 리포지토리를 **AI-first**, **스펙 주도**, **에이전트 조종 가능** 상태로
 만드세요. 이것을 빠른 편집이 아니라 구조화된 엔지니어링 작업 — Deep Work Plan — 으로 다루세요.
@@ -32,7 +34,7 @@ lastUpdated: 2026-10-11
 
 ## 0. 방법론과 스펙을 읽으세요
 
-이 방법론은 세 개의 기둥 위에 섭니다. **스펙 주도 개발**(작성된 스펙이 진실 공급원), **하니스 엔지니어링**(리포지토리가 컨텍스트, 도구, 가드레일, 상태를 나릅니다), 그리고 **토큰 효율**(하니스는 점진적으로 로드되고 검증은 변경된 부분에 닿습니다 — 설계상 긴 시간을 겨냥한 작업이며 효율은 구조에서 나옵니다).
+방법론에는 네 가지 기둥이 있습니다. **spec-first**(계획과 사양이 지속 가능한 기준 정보), **리포지토리가 하니스**(컨텍스트, 도구, 보호 장치, 상태를 담음), **Loop engineering**(사람이 시작하는 선택적 루프가 등록된 계획의 완료를 지원), **측정된 효율**(지침 부하를 흐름별 바이트로 측정하며 토큰 절감량을 추정하지 않음).
 
 무엇을 바꾸기 전에, 채택하려는 표준을 이해하도록 정규 출처를 읽으세요.
 
@@ -77,10 +79,10 @@ lastUpdated: 2026-10-11
   ```bash
   git clone https://github.com/DailybotHQ/deepworkplan-skill.git
   cd deepworkplan-skill
-  git checkout v7.12.2
+  git checkout v8.0.2
   # 그 릴리스의 체크섬을 다운로드하고 아래 다이제스트와 대조하세요:
   curl -fsSL -o SHA256SUMS \
-    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS
+    https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS
   shasum -a 256 SHA256SUMS # 고정된 릴리스의 deepworkplan-skill 다이제스트와 같아야 합니다
   ./setup.sh --verify        # 0이 아닌 종료 코드는 파일이 일치하지 않음을 의미합니다 — 중단하세요
   ```
@@ -93,11 +95,11 @@ lastUpdated: 2026-10-11
 
   | 리포지토리(github.com/DailybotHQ) | 태그 | 해당 `SHA256SUMS`의 sha256 |
   | --- | --- | --- |
-  | deepworkplan-skill | `v7.12.2` | `8c44afadc56fa72c33077eb932810520b3b3a424feaab8a719550f15fd8e53ea` |
-  | coding-agents-kit | `v1.4.0` | `1ae33b64622a91a624c3fc1d483ae8b200896de6eb9f7a3f04cd7f23ce2fb2c6` |
-  | herdr-peers | `v2.0.0` | `97509f91c5463be190307731d8417aaab2742d17850638fcc6fb0d1a9eddd011` |
-  | devcontainer-kit | `v1.2.0` | `5aaf1113734d3d4308b6ffd256a4e10e60116370ad23bdfd2573f7a3a914e349` |
-  | deepworkplan-vim | `v1.0.1` | `304667a4fa5914e503332213549b49105c87577d42d1b757f82d3a9a4d1156c7` |
+  | deepworkplan-skill | `v8.0.2` | `332e8f9a51fe818f5e78839f99f92b60fce2b6eed8383d5e90b91c994ca019f5` |
+  | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
+  | herdr-peers | `v2.2.0` | `694766b8ee39ee57b0ce39e8d31a64ca018830159aec7989226f1d094a4c8c2c` |
+  | devcontainer-kit | `v1.4.0` | `67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2` |
+  | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | 게시되지 않음 — skills CLI가 `skills-lock.json`에 콘텐츠 해시를 기록합니다 |
 - **문제를 신고하세요.** 보안 문제는 해당 리포지토리에서 **GitHub의 취약점 신고** 기능을 통해 비공개로 신고해 주세요 — `https://github.com/DailybotHQ/deepworkplan-skill/security` 또는 `https://github.com/DailybotHQ/deepworkplan-website/security` — 공개 이슈로 신고하지 마세요. 각 리포지토리의 `SECURITY.md`, `https://deepworkplan.com/.well-known/security.txt`, 그리고 신뢰 페이지 `https://deepworkplan.com/trust`도 참고하세요.
@@ -111,7 +113,7 @@ lastUpdated: 2026-10-11
 
 ```bash
 # pinned to the current release (the skills CLI honours only this tree-URL form for a tag):
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
 또는 OpenClaw를 통해 설치:
@@ -128,12 +130,7 @@ git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkpla
 
 ### 현재 표준과 실행 모델
 
-현재 리포지토리 기준 표준은 **DWP 7.0.0**이며, 위에서 설치한 Deep Work
-Plan 스킬 릴리스로 구현됩니다. 현재 스킬 팩에는 라우터와 아홉 개의
-하위 스킬이 포함됩니다: `create`, `execute`, `refine`, `resume`,
-`status`, `verify`, `onboard`, `author`, `upgrade`.
-
-설치된 skill 릴리스: **7.10.2**. 현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, v5 계획을 v6으로 옮기려면 명시적 요청과 미리보기가 필요합니다.
+현재 저장소 표준은 **DWP standard 8.0.0**입니다. 8.0.0 팩은 기본적으로 [plan-contract/v8.json](https://deepworkplan.com/schema/plan-contract/v8.json)을 사용해 새 계획을 만듭니다. 기존 v7, v6, v5 계획은 기록된 세대를 유지하며, 마이그레이션은 `/dwp-refine migrate`를 명시적으로 요청한 경우에만 수행됩니다.
 
 이 표준은 의도적으로 비례적이며, 그 비례성을 개발자의 규율이 아니라
 계획의 속성으로 만듭니다. 계획은 작고 한정된 작업을 위해 계획의
@@ -150,23 +147,7 @@ Full 계획에서는 리포지토리가 지속적인 실행 표면이 됩니다.
 **접촉 표면**, 승인 기준, 그리고 리포지토리의 문서화된 테스트 맵에서
 선택된 검증 게이트가 포함됩니다. 새 계획은 identity manifest, 버전이 지정된 계약, 승인 이벤트 순서로 기록합니다. 추가 전용 저널이 실행을 기록하고 `state.json`은 그 저널에서 생성된 스냅샷입니다. 중단 후 각 단계를 복구할 수 있습니다.
 
-스키마 세대는 각 계획에 연결됩니다. 현재 7.x 팩은 기본적으로 **v7** 계획을
-생성합니다. `manifest.json`은 https://deepworkplan.com/schema/plan-manifest/v7.json 을
-따르고, [계약](https://deepworkplan.com/schema/plan-contract/v7.json)은 v6 계약에
-선택적 `parallel_safe` 작업 표시를 추가하며, 모든
-[저널 이벤트](https://deepworkplan.com/schema/journal-event/v7.json)는 `delegation`도
-기록할 수 있습니다. 라이브 프로젝션은 변경되지 않은 스냅샷
-https://deepworkplan.com/schema/plan-snapshot/v6.json 을 그대로 유지하며,
-[작업 컨텍스트 매니페스트](https://deepworkplan.com/schema/context-manifest/v6.json)는
-v6과 공유됩니다. 명시적으로 `v6`을 요청하면 여전히 v6 계획이 생성됩니다.
-계획의 세대는 결코 바뀌지 않습니다. v6 계획은 v6 스키마
-([매니페스트](https://deepworkplan.com/schema/plan-manifest/v6.json),
-[계약](https://deepworkplan.com/schema/plan-contract/v6.json),
-[저널 이벤트](https://deepworkplan.com/schema/journal-event/v6.json))를 유지하고
-변경 없이 실행됩니다. v5 계획은 `state.json`에
-https://deepworkplan.com/schema/plan-state/v5.json 을 계속 사용합니다. 기존 v1,
-v2, v5 계획은 다시 작성되거나 암묵적으로 마이그레이션되지 않으며, v5 계획을
-v6으로 옮기려면 명시적이고 미리보기를 거친 마이그레이션이 필요합니다.
+공개된 v8 스키마 집합에는 [plan-contract/v8.json](https://deepworkplan.com/schema/plan-contract/v8.json), [journal-event/v8.json](https://deepworkplan.com/schema/journal-event/v8.json), [plan-snapshot/v8.json](https://deepworkplan.com/schema/plan-snapshot/v8.json)이 포함됩니다. `manifest.json`은 계속 [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json)을 사용합니다. 기존 v7, v6, v5 계획은 기록된 세대를 유지하고, [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json)과 [journal-event/v7.json](https://deepworkplan.com/schema/journal-event/v7.json)은 계속 지원됩니다. 계획 세대는 `/dwp-refine migrate`를 명시적으로 요청한 경우에만 바뀝니다.
 
 선택적 애드온은 리포지토리별로 추적되는 애드온 레지스트리 `.dwp/config.json`
 (https://deepworkplan.com/schema/dwp-config/v1.json)에 기록됩니다. 기록이 없으면
@@ -241,10 +222,10 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 | --- | --- | --- |
 | AI Diff Reviewer(필수) | `.agents/skills/ai-diff-reviewer/SKILL.md`의 `version:` | `npx --yes skills add https://github.com/DailybotHQ/ai-diff-reviewer/tree/v3.3.16 --skill ai-diff-reviewer --force -y` |
 | Dailybot | `.agents/skills/dailybot/SKILL.md`의 `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
-| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
-| Herdr | 설치된 herdr-peers 스킬의 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.0.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.2.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
-| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh 의 검증된 설치 프로그램(`v1.0.1`로 고정; 다운로드 후 `shasum -a 256 -c install.sh.sha256`을 실행하고 나서 실행) |
+| agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
+| Herdr | 설치된 herdr-peers 스킬의 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g --force -y` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | https://deepworkplan.com/vim/install.sh 의 검증된 설치 프로그램(`v1.1.0`로 고정; 다운로드 후 `shasum -a 256 -c install.sh.sha256`을 실행하고 나서 실행) |
 
 각 다운로드는 실행하기 전에 해당 릴리스의 `SHA256SUMS`와 위 *고정된 릴리스*의 다이제스트로 검증하세요.
 
@@ -252,7 +233,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 
 **선택적 애드온.** 일곱 가지 선택적 애드온(devcontainer, Dailybot, dependency upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim)을 열거하고 이 리포지토리에 맞는 것만 각각 명시적 선택형으로 제안하세요. 리포지토리는 선택적 애드온이 **하나도** 없어도 완전히 적합합니다 — 그것들은 결코 자동 설치하지 마세요.
 
-- **Devcontainer 지원** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v1.2.0`로 고정, `dck-dockerfile` 스킬 포함)의 얇은 통합 계층: `dck init`이 리포지토리 고유의 컨테이너를 생성하고(공식 이미지를 다이제스트로 고정, 공유 베이스 이미지 없음, `bash dev.sh up`), 기존 devcontainer는 diff가 수락된 뒤에만 조정합니다. 수락되면 아래 *devcontainer 경로*를 따라 전체 스택까지 완성하세요.
+- **Devcontainer 지원** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v1.3.0`로 고정, `dck-dockerfile` 스킬 포함)의 얇은 통합 계층: `dck init`이 리포지토리 고유의 컨테이너를 생성하고(공식 이미지를 다이제스트로 고정, 공유 베이스 이미지 없음, `bash dev.sh up`), 기존 devcontainer는 diff가 수락된 뒤에만 조정합니다. 수락되면 아래 *devcontainer 경로*를 따라 전체 스택까지 완성하세요.
 - **Dailybot 연동** — 네 가지 라이프사이클 이벤트(kickoff, 중요 작업, 블로킹, 완료)를 이미 Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 보고로 제공하며, 선택적 자율 훅 강제(`dailybot-cli >= 3.9.0`). 페어링된 Dailybot 에이전트 스킬(3.23.20)을 설치하면 채팅, 체크인, 폼 작성, AI 질의, Plan 보드와 작업, 저장소별 API 키 등도 노출됩니다 — 이 애드온은 DWP 실행에 보고만 연결합니다. 핵심 방법론은 Dailybot 의존성이 전혀 없습니다.
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
   채택되면 `/lib-upgrade` 명령을 설치합니다.
@@ -260,9 +241,9 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
   (순수 라이브러리, 헤드리스 서비스, 인프라 전용 리포지토리에는 제공하지 않음). 세 가지 프로필이
   하나의 파일에 쌓입니다: visual-ui(감지되면 강력히 권장; 설치는 수락으로 제어), cli-output, conversational — 후자 두 개는
   항상 질문하며 자동 적용하지 않습니다.
-- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v1.4.0`로 고정)의 머신 수준 설치: 모든 코딩 에이전트를 위한 하나의 명령, 프로필마다 하나의 계정, 여유가 가장 많은 계정을 고르는 `ak usage`와 `ak pick`, 그리고 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 헤드리스 `ak run`(worktree마다 위임 대상 하나). 키트는 기본적으로 에이전트를 자율 모드로 시작하며, 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선합니다.
-- **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획, 그리고 자신의 레인을 지켜보는 리드를 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v2.0.0`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
-- **DeepWorkPlan Vim** — 터미널 에디터([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v1.0.1`로 고정)로, 명시적 동의 없이 기존 Neovim 설정을 절대 덮어쓰지 않는 머신 수준 설치입니다.
+- **agentkit** — [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)(`ak`, `v1.5.0`로 고정)의 머신 수준 설치: 모든 코딩 에이전트를 위한 하나의 명령, 프로필마다 하나의 계정, 여유가 가장 많은 계정을 고르는 `ak usage`와 `ak pick`, 그리고 범위가 정해진 `parallel_safe` 작업을 다른 코딩 에이전트에 넘기는 계획을 위한 헤드리스 `ak run`(worktree마다 위임 대상 하나). 키트는 기본적으로 에이전트를 자율 모드로 시작하며, 그 옵트아웃(`--ask` 또는 `AGENTKIT_PERMISSIONS=ask`)이 항상 우선합니다.
+- **Herdr** — 어느 머신에서든 Herdr 페인의 피어 에이전트에게 승인된 응답 하나를 요청하는 계획, 그리고 자신의 레인을 지켜보는 리드를 위한 [herdr-peers](https://github.com/DailybotHQ/herdr-peers)(`v2.1.0`으로 고정, Herdr 공식 스킬 포함)의 머신 수준 설치.
+- **DeepWorkPlan Vim** — 터미널 에디터([deepworkplan-vim](https://github.com/DailybotHQ/deepworkplan-vim), `v1.1.0`로 고정)로, 명시적 동의 없이 기존 Neovim 설정을 절대 덮어쓰지 않는 머신 수준 설치입니다.
 - **AI Diff Reviewer** — 필수 로컬 리뷰입니다(선택형 아님): 모든 Final Review의 보안 점검이 계획의 누적 변경 집합에 대해 [AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer) **v3**(skill + 필수 `.review/extension.md`)를 실행합니다. 누락된 스킬이나 확장은 기록된 `local reviewer not installed` 발견 사항입니다 — 절대 조용한 건너뜀이 아니며 절대 깜짝 부트스트랩이 아닙니다: 설치는 온보딩 동의 또는 명시적 애드온 호출에 속합니다. 호출 오류는 소프트 실패하며, 완료된 패스의 **검증된 `critical` 결과**는 여전히 완료를 차단합니다 (v3, BC-07 — 검증되지 않은 크리티컬 주장은 주석 달린 경고로 표시되며, `incomplete`/`timeout` 검토는 깨끗한 패스가 아님, BC-04). **Flow B**(`pr-review.yml`을 갖춘 CI 게이트)는 명시적 선택형으로 제안되며 요청 없이 설치되는 일이 결코 없습니다. 어떤 Deep Work Plan 흐름도 상업 서비스, CI 공급자 또는 시크릿을 요구하지 않습니다.
 
 ### devcontainer 경로(수락된 경우)
@@ -294,7 +275,7 @@ devcontainer 애드온의 끝은 생성된 파일 묶음이 아니라 동작하�
 - **지켜보기.** `herdr-peers lanes`는 모든 레인의 상태를 보여 주고, 차단된 레인에 대해서는 `herdr-peers status <pane>`가 화면을 분류하며 `herdr pane read <pane>`가 그 화면을 보여 줍니다.
 - **키 입력은 한 가지 경우뿐.** `herdr pane send-keys`로 보낼 수 있는 키는 폴더 신뢰 화면에 대한 응답뿐이며, 그것도 직접 시작한 페인에서 `--trust-cwd`를 쓸 수 없었던 경우로 한정됩니다. 보내기 전과 후에 화면을 읽고, 키는 최소한만 보내세요.
 - **나머지는 모두 읽고, 기록하고,** 개발자에게 **에스컬레이션**하세요: Claude의 권한 우회 확인, 로그인과 자격 증명 프롬프트, 작업별 권한 요청, 파괴적인 확인, 결제나 요금제 프롬프트, 알 수 없는 화면, 직접 만들지 않은 페인. `AGENTKIT_PERMISSIONS=ask`가 설정되어 있으면 레인은 행동하기 전에 묻습니다. 그 프롬프트를 절대 우회하지 마세요. 모든 개입을 상위 계획에 기록하세요.
-- **스웜을 계속 돌아가게 하기.** coding-agents-kit `v1.4.0`과 herdr-peers `v2.0.0`을 쓰면 각 에이전트는 모든 작업 경계에서 `ak capacity --self --json`을 확인합니다. `critical`이 되면 핸드오프 패킷(https://deepworkplan.com/schema/dwp-handoff/v1.json)을 쓰고, 리드가 같은 체크아웃에서 후임을 시작합니다. 리드는 `herdr-peers lead claim`으로 자신의 계획을 claim하고, 레인은 리드를 `lead`라는 주소로 부르며, 리드가 사라지면 대리가 넘겨받습니다(`herdr-peers lead takeover`). 일상적인 선택은 모두 스스로 결정하고 기록하며, 치명적 클래스 C1–C7만 에스컬레이션하세요. 참고: https://deepworkplan.com/methodology/07-swarm-autonomy.md.
+- **스웜을 계속 돌아가게 하기.** coding-agents-kit `v1.5.0`과 herdr-peers `v2.2.0`을 쓰면 각 에이전트는 모든 작업 경계에서 `ak capacity --self --json`을 확인합니다. `critical`이 되면 핸드오프 패킷(https://deepworkplan.com/schema/dwp-handoff/v1.json)을 쓰고, 리드가 같은 체크아웃에서 후임을 시작합니다. 리드는 `herdr-peers lead claim`으로 자신의 계획을 claim하고, 레인은 리드를 `lead`라는 주소로 부르며, 리드가 사라지면 대리가 넘겨받습니다(`herdr-peers lead takeover`). 일상적인 선택은 모두 스스로 결정하고 기록하며, 치명적 클래스 C1–C7만 에스컬레이션하세요. 참고: https://deepworkplan.com/methodology/07-swarm-autonomy.md.
 
 ## 5. 키트를 발전시키세요 (author 하위 스킬)
 
@@ -347,6 +328,15 @@ CI 호환 기계적 계층인 `bash {skill_dir}/verify/conformance.sh`; 이 계�
    제공합니다.
 
 누구든 어떤 리포지토리에서든 이 프롬프트를 실행할 수 있으며 — 어떤 AI 에이전트든 조종할 수 있는 코드베이스로 끝맺습니다.
+
+## 사람이 루프를 시작합니다
+
+선택 사항이며 Herdr 애드온과 함께 씁니다: 에이전트가 아닌 당신이 herdr-peers autopilot start --loop를 실행합니다. 리드 기록이 있는 모든 열린 계획이 끝까지 계속 실행되고, 계획이 정체되거나 차단되거나 완료되면 알림기가 이를 전달받습니다. Dailybot 이벤트 보고서를 받으려면 두 번째 명령을 사용하세요. --notify로 팩의 알림 스크립트를 추가하며 알림은 선택 사항입니다.
+
+```bash
+herdr-peers autopilot start --loop
+herdr-peers autopilot start --loop --notify "python3 .agents/skills/deepworkplan/addons/herdr/scripts/notify-dailybot.py"
+```
 
 ## 다음 단계
 

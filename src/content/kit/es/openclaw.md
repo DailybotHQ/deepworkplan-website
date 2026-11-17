@@ -50,7 +50,7 @@ Las primitivas de programación de OpenClaw se corresponden directamente con el 
 En la práctica:
 
 1. Un ser humano crea y aprueba un plan de forma interactiva. La aprobación es el punto de control — los turnos desatendidos nunca crean y ejecutan en un mismo turno.
-2. El plan debe llevar la capa de estado legible por máquina (`manifest.json` + `state.json`). En un workspace sin git, `state.json` es lo que hace posible la reanudación segura ante fallos. Véase [Estado del plan](/spec/plan-state). En planes v6 y v7, el estado se proyecta desde el diario de solo adición (`journal.ndjson`) mediante `ledger.py project` en lugar de reescribir manualmente los archivos de estado.
+2. El plan debe llevar la capa de estado legible por máquina (`manifest.json` + `state.json`). En un workspace sin git, `state.json` es lo que hace posible la reanudación segura ante fallos. Véase [Estado del plan](/spec/plan-state). En planes v6, v7 y v8, el estado se proyecta desde el diario de solo adición (`journal.ndjson`) mediante `ledger.py project` en lugar de reescribir manualmente los archivos de estado.
 3. Cada turno de latido o cron ejecuta como máximo una tarea, pasa su puerta de validación, actualiza `state.json` de forma atómica y cede.
 4. Ante cualquier condición de parada, el agente escribe el campo `blocked` de `state.json` e informa a través del canal habitual del workspace. La próxima revisión humana — o el informe del latido — verá exactamente lo que se necesita.
 

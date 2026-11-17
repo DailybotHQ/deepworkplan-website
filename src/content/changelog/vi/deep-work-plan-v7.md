@@ -6,7 +6,7 @@ version: "v7 · Ủy quyền có bằng chứng"
 kind: release
 lang: vi
 order: 0
-featured: true
+featured: false
 sourceLabel: "Bộ schema v7 đã công bố"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:
@@ -72,4 +72,4 @@ Bản phát hành 7.12.1 (2026-11-16) sửa bộ thông báo Dailybot của addo
 
 Bản phát hành 7.12.2 (2026-11-16) cho phép addon Herdr chấp nhận cả giao thức 1 và 2 của herdr-peers và ghim nó vào herdr-peers v2.0.0: với bản cài đặt giao thức 2, việc phát hiện không còn thất bại âm thầm và addon giữ nguyên các khả năng ủy thác.
 
-Phiên bản skill đã cài: **7.12.2**, ổn định từ 7.0.0.
+Bản phát hành 7.12.2 (2026-11-16) là bản v7 cuối cùng; v8 kế nhiệm bản này.

@@ -6,7 +6,7 @@ version: "v7 · 증거를 갖춘 위임"
 kind: release
 lang: ko
 order: 0
-featured: true
+featured: false
 sourceLabel: "게시된 v7 스키마 세트"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:
@@ -72,4 +72,4 @@ v7은 오케스트레이션과 감사 가능성에서의 큰 진전이지만, �
 
 릴리스 7.12.2(2026-11-16)는 Herdr 애드온이 herdr-peers 프로토콜 1과 2를 모두 받아들이도록 하고 herdr-peers v2.0.0에 고정합니다. 프로토콜 2 설치에서도 감지가 더 이상 조용히 실패하지 않으며 애드온은 위임 기능을 유지합니다.
 
-설치된 skill 릴리스: **7.12.2**, 7.0.0 이후 안정적입니다.
+릴리스 7.12.2(2026-11-16)는 v7의 마지막 릴리스이며, v8이 그 뒤를 잇습니다.

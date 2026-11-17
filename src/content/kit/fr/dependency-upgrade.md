@@ -10,6 +10,8 @@ order: 3
 
 Mettre les dépendances d’un dépôt à jour avec un workflow par lots, validé et réversible. Le troisième addon facultatif de Deep Work Plan.
 
+Deep Work Plan repose sur quatre piliers : la spécification d’abord, le dépôt est le harness, le loop engineering et l’efficacité mesurée. Les addons et les intégrations peuvent étendre le harness et la boucle ; la méthodologie fonctionne seule.
+
 ## Ce qu’il ajoute
 
 - La détection du gestionnaire de paquets **réel** du dépôt (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, et davantage) à partir du manifeste et du fichier de verrouillage existants.
@@ -23,8 +25,7 @@ Mettre les dépendances d’un dépôt à jour avec un workflow par lots, valid�
 4. Exécuter la vraie porte de validation du dépôt après chaque lot ; annuler tout lot qui échoue.
 5. Résumer ce qui a été mis à jour, ignoré et annulé ; laisser le développeur valider.
 
-
-## Spécification v7
+## Spécification v8
 
 | Élément | Valeur |
 |---|---|
@@ -32,7 +33,8 @@ Mettre les dépendances d’un dépôt à jour avec un workflow par lots, valid�
 | Clé de registre | `dependency-upgrade` dans `.dwp/config.json` |
 | Descripteur | `addons/dependency-upgrade/addon.json` (interface 1) |
 | Commande | `/lib-upgrade` installé dans `.agents/commands/` lorsqu'il est accepté |
-| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v7.12.2`) |
+| Gestion des versions | Épinglé et versionné avec le pack de compétences (`v8.0.2`) |
+
 ## Notes
 
 Indépendant du gestionnaire de paquets — n’exécute jamais npm/ncu dans un dépôt non JS. Facultatif, jamais requis, et ne valide jamais automatiquement.

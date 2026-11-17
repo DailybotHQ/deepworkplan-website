@@ -72,6 +72,10 @@ Validasi adalah bagian dari tugas, bukan renungan belakangan: setiap tugas menye
 
 ## v6 dan v7: metodologi yang sama, struktur lebih ketat
 
-Standar DWP saat ini adalah 7.0.0, diimplementasikan oleh lini skill 7.x. Paket tersebut menggunakan v7 untuk setiap rencana baru secara default; permintaan `v6` yang eksplisit tetap menghasilkan rencana v6. Rencana v1, v2, v5, dan v6 yang ada mempertahankan generasi yang tercatat dan tidak pernah dimigrasikan secara diam-diam; memindahkan rencana v5 ke v6 memerlukan permintaan migrasi eksplisit.
+Paket v8 membuat rencana baru dengan `plan-contract/v8` secara default. Rencana yang ada mempertahankan generasi tercatat; migrasi memerlukan `refine migrate` yang eksplisit.
 
 v6 mempertahankan metodologi rencana → tugas → gerbang validasi → penyelesaian, perintah slash, dan lokasi `.dwp/plans/` yang sama. Struktur rekayasanya diperketat dengan kontrak, jurnal, manifest konteks per tugas, penjadwal, dan penolakan daftar izin kosong. v7 mempertahankan lapisan catatan tersebut dan menambahkan penanda tugas `parallel_safe` opsional, peristiwa jurnal `delegation` untuk pekerjaan terbatas yang diserahkan ke agen lain, serta registri addon `.dwp/config.json`; tanpa addon delegasi yang diaktifkan, setiap rencana tetap berjalan secara berurutan di sesi saat ini. Keputusan arsitektur adalah GO; non-inferioritas empiris hasil agen belum diukur.
+
+## Dari loop inti ke loop tertutup
+
+Operasi inti menjelaskan cara sebuah rencana dieksekusi. Dengan addon Herdr yang opsional, `execute` mengklaim catatan lead rencana — menambahkan suksesi bila rencana menyebutkan penerus — sehingga `herdr-peers autopilot --loop` yang dimulai manusia dapat mendorong lead yang menganggur, melaporkan event, dan meminta penerus dalam daftar mengambil alih saat lead hilang. Daemon menambah kesinambungan, bukan wewenang; lihat [Loop engineering](/id/methodology/08-loop-engineering).

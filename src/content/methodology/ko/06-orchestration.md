@@ -100,3 +100,7 @@ icon: network
 ## 계정이나 리드가 바닥날 때
 
 긴 실행은 어떤 한 계정보다 오래 갑니다. coding-agents-kit (`v0.7.1`)과 herdr-peers (`v0.3.2`)부터 레인은 모든 작업 경계에서 자신의 용량을 확인하고 계정이 바닥나기 전에 패킷으로 작업을 넘기며, 리드는 리더십을 넘기거나 대리로 교체되고, 개발자에게는 치명적인 항목만 전달됩니다. [스웜 자율](/ko/methodology/07-swarm-autonomy)은 그 루프, 패킷, 승계, 에스컬레이션 클래스를 설명합니다.
+
+## 루프를 위한 계획 등록
+
+선택적 Herdr 애드온이 활성화되면 팩의 `execute`가 계획의 lead 기록을 확보하고, 계획이 후계자를 지정한 경우 승계 순서를 추가합니다. 사람은 `herdr-peers autopilot --loop`을 시작해 열린 계획을 계속 진행하고, lead가 사라지면 목록의 후계자에게 takeover를 요청할 수 있습니다. daemon은 등록된 계획만 관찰합니다. [Loop engineering](/ko/methodology/08-loop-engineering)을 참조하세요.

@@ -24,9 +24,9 @@ The capability of an AI coding agent depends less on the model than on the quali
 
 This reframes what it means to delegate well. Good delegation is not asking an agent for work — it is defining the work clearly enough that it can be executed correctly: the goal, the constraints, the context the agent would otherwise lack, and the criteria that decide whether it succeeded. Most of the value is created before execution begins.
 
-Deep Work Plan is the discipline of doing that upstream work in a durable, repeatable form. Its two founding pillars are the two halves of good direction: a **specification** states what "correct" looks like, and a **harness** gives the agent the context and tools to reach it. A third discipline keeps the combination affordable at scale: **token efficiency**, because a harness that works is one the agent can actually carry through a long horizon. Together they convert a model's raw ability into dependable engineering — sustained across a task that runs for hours, and preserved across agents that change between sessions.
+Deep Work Plan is the discipline of doing that upstream work in a durable, repeatable form. It stands on four pillars. The first two are the two halves of good direction: **spec-first** — a specification states what "correct" looks like — and **the repository is the harness** — the repository gives the agent the context and tools to reach it. The third makes the work finish: **loop engineering** keeps an approved plan moving to its defined end without a human polling it. The fourth keeps the combination affordable and honest about it: **measured efficiency**, because a harness that works is one the agent can actually carry through a long horizon, and its cost is measured rather than asserted. In one sentence: *Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.* Together they convert a model's raw ability into dependable engineering — sustained across a task that runs for hours, and preserved across agents that change between sessions.
 
-## Spec-driven by design
+## Spec-first
 
 This is the first pillar of the methodology, and like "harness" it is worth defining plainly.
 
@@ -38,7 +38,7 @@ This is the first pillar of the methodology, and like "harness" it is worth defi
 
 **How DWP differs.** A broader spec-driven movement has formed around this idea, including GitHub Spec Kit, Amazon Kiro, and Tessl. Those approaches tend to be bound to a particular tool or platform. DWP is deliberately different: it is tool-agnostic and repo-native. The specification lives in the repository as plain markdown, so it travels with the code rather than with a vendor's product — and it composes directly with the second pillar, since the spec is itself part of the harness the repository carries.
 
-## The repository becomes the harness
+## The repository is the harness
 
 This is the second pillar of the methodology, and it deserves a plain definition — "harness" has become a loaded term, and much of the industry uses it without saying what it means.
 
@@ -60,9 +60,15 @@ This is the second pillar of the methodology, and it deserves a plain definition
 
 Because every element is a file in the repository rather than a feature of a tool, the harness is portable by construction: any agent that reads markdown and runs shell commands can open the same files, with no bespoke per-tool framework. That is the one-line claim the rest of the methodology rests on: *the repository itself becomes the harness*. It is a claim about what the repository carries, not a guarantee that a model reliably finds the right flow unaided on a fresh request — which is why the kit also ships explicit `dwp-*` entry points and a router `SKILL.md`: file portability and reliable routing are different properties, and only the first is built by construction alone.
 
-## Efficient by construction
+## Loop engineering
 
-The first pillar makes the work correct; the second makes it portable. The third keeps it **affordable** — because context is the scarcest resource a coding agent has, and a methodology that wastes it fails exactly when the work gets long.
+This is the third pillar. A specification and a harness make the work correct and portable; on their own they do not make it finish. A long plan stalls when its agent stops at the end of a turn, waits at a screen, runs out of capacity, or disappears — and the usual remedy is a human checking in every twenty minutes. Loop engineering removes that babysitting without handing over control.
+
+With the optional Herdr addon, the plan registers a lead and, when it names them, successors. A daemon that only a human starts watches every registered plan: it nudges an idle lead to continue, asks the first reachable successor to take over a lead that is gone, and reports when a plan stalls, blocks, or completes. A nudge adds no authority — the plan's gates, stop conditions, and escalations bind exactly as before, and credentials, logins, and the plan's own human checkpoints stay with people. The methodology works without the loop; the loop only amplifies it. See [Loop engineering](/methodology/08-loop-engineering).
+
+## Measured efficiency
+
+The first pillar makes the work correct; the second makes it portable; the third makes it finish. The fourth keeps it **affordable** — because context is the scarcest resource a coding agent has, and a methodology that wastes it fails exactly when the work gets long — and keeps that claim **measured**: instruction bytes per flow, never invented token percentages.
 
 Three mechanisms do the work:
 
@@ -85,4 +91,4 @@ DWP imposes a lightweight structure that addresses each failure directly:
 
 ## Markdown all the way down
 
-DWP defines structure, not software. There is no runtime to install, no dependency tree, and no lock-in. The plan, the tasks, and the running log are all plain markdown that any agent can read, any person can review, and any version-control system can track cleanly. The result is execution you can read, audit, and trust.
+DWP defines structure, not software. There is no runtime to install, no dependency tree, and no lock-in; the optional loop daemon belongs to an addon, not to the methodology. The plan, the tasks, and the running log are all plain markdown that any agent can read, any person can review, and any version-control system can track cleanly. The result is execution you can read, audit, and trust.

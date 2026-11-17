@@ -105,6 +105,40 @@
             "open_questions": {
               "type": "integer"
             },
+            "excluded": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "Profiles excluded from the next pick because they start in a mode that skips approvals, at most 16 (2.0.1)."
+            },
+            "retired": {
+              "type": [
+                "object",
+                "null"
+              ],
+              "description": "Why the last brain was retired (gone, usage_limit, start_timeout, permission_mode; misbehaving since 2.1.0: three denied requests in an hour), its profile and when (2.0.1).",
+              "additionalProperties": false,
+              "required": [
+                "why",
+                "profile",
+                "at"
+              ],
+              "properties": {
+                "why": {
+                  "type": "string"
+                },
+                "profile": {
+                  "type": [
+                    "string",
+                    "null"
+                  ]
+                },
+                "at": {
+                  "type": "string"
+                }
+              }
+            },
             "last": {
               "type": [
                 "object",
@@ -530,6 +564,30 @@
                     "null"
                   ],
                   "description": "When its lead record was last written."
+                },
+                "state_updated_at": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "description": "When the plan's state.json last changed (2.1.0; optional, absent in older maps). fleet ui calls an open plan stale after 24 h without movement."
+                },
+                "unreadable_reason": {
+                  "type": [
+                    "string",
+                    "null"
+                  ],
+                  "enum": [
+                    "missing",
+                    "parse",
+                    "shape",
+                    null
+                  ],
+                  "description": "Why a plan is unreadable (2.1.0; optional): missing = no state.json where its lead record points; parse = its state.json does not parse or is too large; shape = a state.json shape this helper does not read (an older or newer plan generation). Null for a readable plan."
+                },
+                "revived": {
+                  "type": "boolean",
+                  "description": "This epoch came by a revive (2.2.0; optional): the daemon, started with --revive, launched a fresh agent that took the orphan plan (lead takeover --reason revive)."
                 }
               }
             }

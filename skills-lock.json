@@ -17,19 +17,19 @@
     },
     "deepworkplan": {
       "source": "DailybotHQ/deepworkplan-skill",
-      "ref": "v7.12.2",
-      "commit": "9569b69442e19ccf029d895b6eee302c8846bc98",
+      "ref": "v8.0.2",
+      "commit": "4d3e2f6c433e40b446a8940339a8d5c4f8a02b6b",
       "sourceType": "github",
       "skillPath": "skills/deepworkplan/SKILL.md",
-      "computedHash": "21ece40c143ee9cd477fba1252ab50295ff3e51ae821f57171427c6c0c8b49b0"
+      "computedHash": "3ba5d4dd6440c63f8fd988c4fb779ddf25b690d9eaf36d2eb04db85c6c47b6e0"
     },
     "herdr-peers": {
       "source": "DailybotHQ/herdr-peers",
-      "ref": "v2.0.0",
-      "commit": "d2008d7264e5ff231ba28fcc20ee3a17c3a6306c",
+      "ref": "v2.2.0",
+      "commit": "fc19e77ea748c46e87adf68d176fd79aa7bf781c",
       "sourceType": "github",
       "skillPath": "skills/herdr-peers/SKILL.md",
-      "computedHash": "e49489e5d69e978f1318917eee7b714145e682ae718a98fd207d832e0a7b55c9"
+      "computedHash": "124cb0770b78c88f8929aca459d93428a4e98e9225f8bf8c81e752de1bb09bda"
     }
   }
 }

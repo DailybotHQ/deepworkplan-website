@@ -74,6 +74,10 @@ Validierung ist Teil der Aufgabe, kein nachträglicher Gedanke: Jede Aufgabe ben
 
 ## v6 und v7: dieselbe Methodik, strengere Struktur
 
-Der aktuelle DWP-Standard ist 7.0.0, umgesetzt durch die 7.x-Skill-Linie. Dieses Paket verwendet standardmäßig v7 für jeden neuen Plan; eine ausdrückliche `v6`-Anforderung materialisiert weiterhin einen v6-Plan. Bestehende v1-, v2-, v5- und v6-Pläne behalten ihre aufgezeichnete Generation und werden nie stillschweigend migriert; die Überführung eines v5-Plans zu v6 erfordert einen ausdrücklichen Migrationsauftrag.
+Das v8-Paket erstellt neue Pläne standardmäßig mit `plan-contract/v8`. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert ein ausdrückliches `refine migrate`.
 
 v6 behält dieselbe Methodik aus Plan → Aufgaben → Validierungsschranken → Abschluss, dieselben Slash-Befehle und den Speicherort `.dwp/plans/` bei. Die technische Struktur wird durch Vertrag, Journal, Kontextmanifeste pro Aufgabe, Scheduler und die Ablehnung einer leeren Allowlist strenger. v7 behält diese Aufzeichnungsschicht bei und ergänzt eine optionale Task-Markierung `parallel_safe`, ein Journal-Ereignis `delegation` für begrenzte, an einen anderen Agenten übergebene Arbeit sowie die Addon-Registry `.dwp/config.json`; ohne aktiviertes Delegations-Addon läuft jeder Plan weiterhin sequenziell in der aktuellen Sitzung. Die Architekturentscheidung lautet GO; eine empirische Nichtunterlegenheit der Agentenergebnisse wurde nicht gemessen.
+
+## Vom Kernloop zum geschlossenen Loop
+
+Die Kernoperationen beschreiben, wie ein Plan ausgeführt wird. Mit dem optionalen Herdr-Addon beansprucht `execute` den Lead-Eintrag des Plans — und fügt eine Nachfolge hinzu, wenn der Plan Nachfolger benennt —, damit ein von einem Menschen gestartetes `herdr-peers autopilot --loop` einen untätigen Lead anstoßen, Ereignisse melden und einen eingetragenen Nachfolger um Übernahme bitten kann, wenn der Lead verschwunden ist. Der Daemon bringt Kontinuität, keine Befugnis; siehe [Loop engineering](/de/methodology/08-loop-engineering).

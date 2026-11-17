@@ -16,6 +16,8 @@ Nie ma tu kluczy API do wygenerowania, żadnego tańca z OAuth i żadnej piaskow
 
 Powyższe API pozwala agentowi czytać tę witrynę. Skill DWP to to, co pozwala agentowi uruchamiać metodykę — zainstaluj go raz w repozytorium, a przyniesie router plus dziewięć sub-skilli, wywoływanych jako komendy ze slashem.
 
+W Herdr rejestracja planu zapisuje lead i kolejność następców. Człowiek może uruchomić `herdr-peers autopilot start --loop`, aby kontynuować otwarte plany. Przed każdym merge, tag lub release uruchom `herdr-peers lead verify --plan <plan-id>`.
+
 - **Lite** — zapisy zadań bezpośrednio w README planu, dla małej, ograniczonej pracy.
 - **Full** — jeden plik na zadanie, dla pracy długoterminowej lub z realnymi zależnościami między zadaniami.
 - **Guided (domyślnie)** — agent materializuje plan gotowy do recenzji i pyta przed rozpoczęciem pracy produktowej.
@@ -125,7 +127,7 @@ Oficjalna ścieżka instalacji umiejętności Deep Work Plan — ta sama komenda
 
 ```bash
 # 1. Install the DWP skill — same command the /init endpoint gives agents
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication

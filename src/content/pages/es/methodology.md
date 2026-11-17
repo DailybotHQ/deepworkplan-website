@@ -1,23 +1,25 @@
 ---
 title: "La Metodología Deep Work Plan"
-description: "Siete capítulos, del manifiesto a la autonomía del enjambre: principios, bucle central, plantillas, skills, arquetipos, muchos agentes y enjambres."
-lastUpdated: 2026-10-12
+description: "Ocho capítulos, del manifiesto al loop engineering: principios, bucle central, plantillas, skills, arquetipos, muchos agentes, enjambres y el bucle."
+lastUpdated: 2026-11-16
 ---
 
 ## La Metodología Deep Work Plan
 
-El paquete 7.x actual crea planes nuevos con v7 de forma predeterminada. Los planes existentes conservan su generación registrada; la migración requiere una solicitud explícita.
+El paquete v8 crea planes nuevos con `plan-contract/v8` de forma predeterminada. Los planes existentes conservan su generación; la migración requiere un `refine migrate` explícito.
 Deep Work Plan (DWP) es una metodología abierta y agnóstica de frameworks para ejecutar trabajo de ingeniería estructurado y autónomo con agentes de programación con IA. Convierte un objetivo difuso en un plan revisable que un agente puede ejecutar, pausar, reanudar y reportar — sin perder el contexto.
 
-DWP se apoya en tres pilares.
+DWP se apoya en cuatro pilares — primero la especificación, el repositorio es el harness, loop engineering y eficiencia medida. En una frase: *Primero la especificación, con el bucle cerrado: el repositorio es el harness y el plan se ejecuta solo hasta terminar.*
 
-**Desarrollo guiado por especificación.** En vez de tratar una transcripción de chat como la fuente de verdad, primero escribes *qué* debe ser cierto — objetivo, alcance, criterios de aceptación y las comprobaciones que prueban que está hecho — y el agente ejecuta contra esa especificación. En DWP el plan *es* la especificación: plan → tareas atómicas → puertas de validación → finalización. Escribir primero la especificación reduce la desviación (el agente se mide frente a criterios declarados), hace el trabajo verificable (cada puerta pasa o falla) y lo hace reanudable (la especificación sobrevive a cualquier sesión o agente). Independiente de herramientas y nativa del repositorio, se distingue de los sistemas guiados por especificación atados a una herramienta como GitHub Spec Kit, Amazon Kiro y Tessl.
+**Primero la especificación.** En vez de tratar una transcripción de chat como la fuente de verdad, primero escribes *qué* debe ser cierto — objetivo, alcance, criterios de aceptación y las comprobaciones que prueban que está hecho — y el agente ejecuta contra esa especificación. En DWP el plan *es* la especificación: plan → tareas atómicas → puertas de validación → finalización. Escribir primero la especificación reduce la desviación (el agente se mide frente a criterios declarados), hace el trabajo verificable (cada puerta pasa o falla) y lo hace reanudable (la especificación sobrevive a cualquier sesión o agente). Independiente de herramientas y nativa del repositorio, se distingue de los sistemas guiados por especificación atados a una herramienta como GitHub Spec Kit, Amazon Kiro y Tessl.
 
-**Ingeniería de harness — el repositorio se convierte en el harness.** Un modelo de lenguaje por sí solo es solo un predictor de texto; lo que lo hace un ingeniero fiable es el *harness* que lo rodea — contexto, herramientas, un bucle de control, salvaguardas y estado persistente. La ingeniería de harness es diseñar ese andamiaje de forma deliberada. La posición de DWP es que debe vivir en el repositorio, no en una herramienta: el contexto como `AGENTS.md` + `docs/`, las herramientas como el kit `.agents/`, el bucle de control como el plan, las salvaguardas como las puertas de validación y el estado como el `.dwp/` ignorado por git. Como cada parte es un archivo del repo, el harness es portable — de modo que cualquier agente puede pilotar cualquier repo.
+**El repositorio es el harness.** Un modelo de lenguaje por sí solo es solo un predictor de texto; lo que lo hace un ingeniero fiable es el *harness* que lo rodea — contexto, herramientas, un bucle de control, salvaguardas y estado persistente. La ingeniería de harness es diseñar ese andamiaje de forma deliberada. La posición de DWP es que debe vivir en el repositorio, no en una herramienta: el contexto como `AGENTS.md` + `docs/`, las herramientas como el kit `.agents/`, el bucle de control como el plan, las salvaguardas como las puertas de validación y el estado como el `.dwp/` ignorado por git. Como cada parte es un archivo del repo, el harness es portable — de modo que cualquier agente puede pilotar cualquier repo.
 
-**Eficiencia de tokens — de largo alcance por diseño, eficiente por construcción.** El contexto es el recurso más escaso que tiene un agente de código, y una metodología que lo desperdicia falla justo cuando el trabajo se alarga. DWP carga las instrucciones de forma progresiva — cada guía se carga cuando se dispara su desencadenante —, selecciona la validación a partir de lo que cada tarea realmente toca y decide las skills de forma local por tarea. Los bytes de instrucción que cada flujo requiere se miden y publican; sin porcentajes de tokens inventados.
+**Loop engineering.** Una especificación y un harness hacen que el trabajo sea correcto y portable; el loop engineering hace que termine. Con el complemento opcional Herdr, un plan registra su lead y, cuando los nombra, sus sucesores; un daemon que solo una persona inicia avisa a un lead inactivo para que continúe, pide al primer sucesor disponible que releve a un lead que ya no está e informa cuando un plan se detiene, se bloquea o se completa. Un aviso no añade autoridad — las puertas y escalaciones del plan siguen siendo vinculantes como antes. La metodología funciona sin el bucle; el bucle solo la amplifica.
 
-La metodología se explica en siete capítulos:
+**Eficiencia medida.** El contexto es el recurso más escaso que tiene un agente de código, y una metodología que lo desperdicia falla justo cuando el trabajo se alarga. DWP carga las instrucciones de forma progresiva — cada guía se carga cuando se dispara su desencadenante —, selecciona la validación a partir de lo que cada tarea realmente toca y decide las skills de forma local por tarea. Los bytes de instrucción que cada flujo requiere se miden y publican; sin porcentajes de tokens inventados.
+
+La metodología se explica en ocho capítulos:
 
 1. **Manifiesto** — qué es un Deep Work Plan y por qué importa la ejecución estructurada.
 2. **Bucle central** — el ciclo planificar-ejecutar-verificar que impulsa cada tarea.
@@ -26,6 +28,7 @@ La metodología se explica en siete capítulos:
 5. **Arquetipos** — adaptar la metodología a repos individuales y hubs orquestadores.
 6. **Ejecutar muchos agentes** — un líder y sus carriles entre paneles, contenedores, máquinas y cuentas, con una rama y una publicación por repositorio.
 7. **Autonomía del enjambre** — comprobaciones de capacidad en los límites entre tareas, paquetes de traspaso, sucesión del líder con épocas y escalación solo de lo crítico, para que un enjambre sobreviva al límite de una cuenta o a la pérdida de un agente.
+8. **Loop engineering** — registro del plan, el daemon iniciado por una persona, avisos que no añaden autoridad, relevo hacia los sucesores, eventos del plan, la cola de planes y el mapa de la flota.
 
 - [Leer la metodología](/es/methodology)
 - [Leer la especificación](/es/spec)

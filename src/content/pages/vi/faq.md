@@ -42,7 +42,7 @@ Với bất kỳ tác tử lập trình nào đọc được tệp trong kho mã
 
 ### Tôi dùng nó như thế nào?
 
-Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.
+Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.
 
 [Khởi động nhanh](https://deepworkplan.com/vi/quickstart)
 
@@ -126,6 +126,18 @@ Có, khi kế hoạch đã được phê duyệt từ trước, mang tầng tr�
 
 [Đọc giao thức chạy không giám sát](https://deepworkplan.com/vi/spec/agent-protocol)
 
+### loop engineering là gì?
+
+Loop engineering khép kín vòng thực thi: sau khi kế hoạch được đăng ký cùng lead, daemon Herdr tùy chọn do con người khởi động có thể tiếp tục kế hoạch đang mở đến khi hoàn tất và báo khi bị đình trệ, bị chặn, mất lead hoặc hoàn thành. Daemon hoạt động trong phạm vi quyền đã ghi trong kế hoạch.
+
+### Deep Work Plan có cần daemon không?
+
+Không. Phương pháp và các kế hoạch hoạt động mà không cần Herdr hay daemon. Addon là tùy chọn, giúp duy trì tính liên tục chứ không phải điều kiện bắt buộc.
+
+### Daemon tuyệt đối không thể làm gì?
+
+Daemon không đăng nhập, không chấp nhận xác nhận bỏ qua quyền của Claude, không mở rộng quyền thường trực của agent và không thực hiện merge, tag hay release. Nudge chỉ gửi lời nhắc tiếp tục cố định và không cấp thêm quyền.
+
 ## Đa tác tử & v7
 
 ### Nhiều tác tử có thể làm việc song song trên một kế hoạch an toàn không?
@@ -158,9 +170,9 @@ Một nhiệm vụ chỉ hoàn thành khi bằng chứng được ghi nhận th�
 
 [Đọc đặc tả lớp bản ghi](https://deepworkplan.com/vi/spec/record-layer)
 
-### Các kế hoạch v6 có tiếp tục chạy được dưới v7 không?
+### Các kế hoạch hiện có có giữ nguyên thế hệ trong v8 không?
 
-Có. Hợp đồng kế hoạch tuyên bố rõ ràng thế hệ lược đồ (`plan-contract/v6.json` so với `plan-contract/v7.json`). Kế hoạch không bao giờ chuyển đổi thế hệ giữa chừng. Các kế hoạch v6 hiện tại giữ nguyên cấu trúc và ngữ nghĩa nhật ký dưới các công cụ v7.
+Có. Kế hoạch mới mặc định dùng `plan-contract/v8`. Các kế hoạch v7, v6 và v5 hiện có giữ nguyên thế hệ đã ghi và tiếp tục chạy với pack hiện tại. Thế hệ chỉ thay đổi theo yêu cầu rõ ràng `/dwp-refine migrate`.
 
 [Tìm hiểu về hợp đồng](https://deepworkplan.com/vi/spec/record-layer)
 

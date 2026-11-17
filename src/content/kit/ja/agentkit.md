@@ -10,7 +10,9 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v7**（パック `v7.12.2`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v8**（パック `v8.0.2`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+
+Deep Work Plan には4つの柱があります。仕様ファースト、リポジトリこそがハーネス、Loop engineering、計測された効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論はそれ単体でも機能します。
 
 ## キットが提供するもの
 
@@ -65,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.4.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.5.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.4.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.5.0`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
@@ -87,6 +89,12 @@ ak doctor
 
 キット v1.4.0（インターフェース 1 は不変）は **`ak update`** を追加します。人間が呼び出すことだけを意図した機能で、`ak install` の検証とともに CLI をベンダーの最新リリースへ更新します。発見、検証、インストール、そしてこのキットの `providers.toml` をアトミックに再固定（`.bak` を保持）。`--take-over` はベンダー管理のシンボリックリンクを置き換えるために必須で、ダウングレードは名指しでない限り拒否され、PATH が新しいリリースを解決したときだけ更新は成立します。
 
+## coding-agents-kit 1.5.0 から（インターフェース 1）
+
+このリリースでは `ak run --json` に `tokens` フィールドが加わり、CLI が報告した件数（`input`、`output`、`cache_read`、`cache_write`、`total`）だけを含みます。報告されない値は `null` のままで、kit が推定することはありません。`ak usage --json` には `runs`、`tokens`、`coverage` を含む `advisory` ブロックが加わります。これは参考情報であり、ベンダーのクォータ枠、キャパシティ判定、`ak pick` の選択適格性を変えません。
+
+`--ask` または `AGENTKIT_PERMISSIONS=ask` が有効な場合、`ak` は各 CLI 固有の明示的な ask モードを強制するようになりました。ask フラグを持たない CLI の動作は変わりません。このオプトアウトが有効な場合、pick-v2 の `launch.argv` の末尾に `--ask` が付きます。herdr-peers (v2.0.2) 以降はこの末尾の引数を受け付けますが、v2.0.1 は拒否します。
+
 ## デフォルトは自律実行、オプトアウトが常に優先
 
 `v0.2.0` 以降、`ak <kind>` はすべてのエージェントを**自律モード**で起動します。CLI 自身の自律フラグを追加し、そのフラグはキットの `providers.toml` にのみ保持されます。自律モードは、開発コンテナのような使い捨ての環境やサンドボックス化された環境を想定しています。
@@ -97,7 +105,7 @@ ak doctor
 
 ## 計画に追加されるもの
 
-コントラクトが `agent_delegation` を付与している v7 の計画では、`execute` が `parallel_safe` なタスクを別の CLI に渡せます。専用の git worktree を作成し、そこでタイムアウト付きで `ak run` を実行し、結果を計画の `analysis_results/delegations/` に収集します。結果は、計画自身のゲートランナーが観測するまで `asserted` な証拠です。委任先をキャンセルすると、そのプロセスツリー全体が停止します。
+コントラクトが `agent_delegation` を付与している v7 または v8 の計画では、`execute` が `parallel_safe` なタスクを別の CLI に渡せます。専用の git worktree を作成し、そこでタイムアウト付きで `ak run` を実行し、結果を計画の `analysis_results/delegations/` に収集します。結果は、計画自身のゲートランナーが観測するまで `asserted` な証拠です。委任先をキャンセルすると、そのプロセスツリー全体が停止します。
 
 ## Agentkit か Herdr か
 
@@ -107,6 +115,8 @@ ak doctor
 | タスクに対話が必要、長時間実行される、または別のマシン上にある | [Herdr](/kit/herdr)（ペイン内のピア） |
 
 二つは組み合わせられます。herdr-peers は、`ak env <kind> @profile` が出力する環境を使って、ペイン内にピアを起動できます。多数のレーンを同時に動かす場合は、[多数のエージェントを動かす](/methodology/06-orchestration)を参照してください。
+
+herdr-peers 2.0.0 の任意機能である autopilot brain はこのインターフェースを使います。`ak pick --kinds ... --json` が pick-v2 の起動契約を返し、Herdr はそれを検証して `launch.permissions: ask` を必須とし、返された `launch.argv` を実行します。brain が autonomy や bypass のフラグを有効にすることはありません。`ak update` は引き続き人が実行し、brain は CLI を更新しません。
 
 ## 補足
 

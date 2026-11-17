@@ -1,6 +1,6 @@
 ---
 title: Stato del piano
-description: "Il livello di stato v5 (manifest.json, state.json, gate record, riconciliazione) e come i piani v6 e v7 lo sostituiscono con uno snapshot derivato dal journal."
+description: "Il livello di stato v5 (manifest.json, state.json, gate record, riconciliazione) e come i piani v6, v7 e v8 lo sostituiscono con uno snapshot derivato dal journal."
 order: 8
 lang: it
 section: State
@@ -8,16 +8,17 @@ section: State
 
 # Stato del piano
 
-> **Ambito della versione:** questa pagina specifica il **livello di stato v5**, che i piani v5 mantengono per tutta la loro vita. I piani creati dal pack attuale (DWP 7.0.0, release `v7.12.2`) usano invece il [livello di registrazione](/spec/record-layer). In un piano v6 o v7 il contratto di risultato (`contract.json`) è l'autorità, il journal append-only (`journal.ndjson`) è la fonte di verità e `state.json` è uno **snapshot derivato** conforme a [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Viene rigenerato da `ledger.py project` e NON DEVE essere modificato a mano.
+> **Ambito della versione:** questa pagina specifica il **livello di stato v5**, che i piani v5 mantengono per tutta la loro vita. I piani creati dal pack attuale (DWP 8.0.0, release `v8.0.0`) usano invece il [livello di registrazione](/spec/record-layer). In un piano v6 o v7 il contratto di risultato (`contract.json`) è l'autorità, il journal append-only (`journal.ndjson`) è la fonte di verità e `state.json` è uno **snapshot derivato** conforme a [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Viene rigenerato da `ledger.py project` e NON DEVE essere modificato a mano.
 
 ## Quale livello di stato si applica
 
 | Generazione del piano | Fonte di verità | `state.json` | Schemi |
 | --- | --- | --- | --- |
 | v5 (e i precedenti piani v1/v2) | il piano in markdown, con questo livello JSON come sua proiezione | scritto dall'agente nei punti di protocollo descritti sotto | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 e v2 restano validi per i piani più vecchi) |
-| v6 e v7 | il contratto più il journal append-only | uno snapshot proiettato dal journal, mai scritto a mano | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (o i loro equivalenti v6) |
+| v6, v7 e v8 | il contratto più il journal append-only | uno snapshot proiettato dal journal, mai scritto a mano | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (o i loro equivalenti v6) |
 
-Un piano non cambia mai generazione implicitamente: i piani v5 mantengono queste regole, e portarne uno alla v6 è una migrazione esplicita e con anteprima ([Livello di registrazione](/it/spec/record-layer#coesistenza-e-migrazione)). Fonti canoniche: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md).
+I piani v8 usano `plan-manifest/v7` con `plan-contract/v8`, `journal-event/v8` e `plan-snapshot/v8`; gli schemi manifest e journal-event v7 restano supportati per i piani esistenti.
+Un piano non cambia mai generazione implicitamente: i piani v5 mantengono queste regole, e portarne uno alla v6 è una migrazione esplicita e con anteprima ([Livello di registrazione](/it/spec/record-layer#coesistenza-e-migrazione)). Fonti canoniche: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Versione 5.0.0. Stato: Stabile.** Questo documento specifica il livello di stato del piano leggibile dalle macchine della metodologia Deep Work Plan, ora allineato alla versione dello standard DWP stesso — nessun requisito esistente viene indebolito dalla rinumerazione. Questa revisione documenta anche l'aggiornatore di stato protetto, la pubblicazione verificata del piano e le regole di verità dell'evidenza che un piano completato deve soddisfare (vedi sotto). Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
@@ -236,7 +237,7 @@ Entrambi gli schema sono versionati tramite URL. I campi aggiuntivi sono consent
 
 ## Schemi v7 e v6 e compatibilità
 
-Il pacchetto 7.x attuale crea per impostazione predefinita piani **v7**. v7 è una generazione di contratto del livello di registrazione v6: il [manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) punta a un [contratto v7](https://deepworkplan.com/schema/plan-contract/v7.json) — il contratto v6 più un marcatore di task opzionale `parallel_safe` — e ogni [evento del journal v7](https://deepworkplan.com/schema/journal-event/v7.json) può anche registrare una `delegation` (avviata, completata, fallita, annullata), che non è mai di per sé una prova: il risultato di un delegato resta un’asserzione finché il runner del piano stesso non lo osserva. Lo snapshot attivo e il manifest di contesto del task sono condivisi con v6. Un piano non mescola mai generazioni, e una richiesta esplicita di `v6` materializza comunque un piano v6.
+Il pacchetto 8.x attuale crea per impostazione predefinita piani **v8**. v8 è una generazione di contratto del livello di registrazione v6: il [manifest v7](https://deepworkplan.com/schema/plan-manifest/v7.json) punta a un [contratto v7](https://deepworkplan.com/schema/plan-contract/v7.json) — il contratto v6 più un marcatore di task opzionale `parallel_safe` — e ogni [evento del journal v7](https://deepworkplan.com/schema/journal-event/v7.json) può anche registrare una `delegation` (avviata, completata, fallita, annullata), che non è mai di per sé una prova: il risultato di un delegato resta un’asserzione finché il runner del piano stesso non lo osserva. Lo snapshot attivo e il manifest di contesto del task sono condivisi con v6. Un piano non mescola mai generazioni, e una richiesta esplicita di `v6` materializza comunque un piano v6.
 
 v6 mantiene la metodologia v5 e aggiunge una struttura ingegneristica più rigorosa per i nuovi piani. Il manifest di identità punta a un contratto versionato; un journal append-only registra autorità ed eventi; i manifest di contesto rendono esplicita la selezione del contesto per attività; lo scheduler avvia solo il lavoro idoneo; e la proiezione attiva `state.json` è uno snapshot generato dal journal. Una allowlist vuota viene rifiutata. Si tratta di decisioni architetturali, non di prove di risultati migliori degli agenti: la non inferiorità dei risultati non è stata misurata.
 
@@ -250,4 +251,4 @@ Gli schemi v6 per manifest e snapshot attivo sono:
 
 La proiezione attiva v6 è uno snapshot, non un file di stato v5 rinominato. `plan-state/v5.json` resta pubblicato per i piani v5; `plan-state/v6.json` non esiste. I piani v1, v2 e v5 esistenti mantengono la generazione di schema registrata e non vengono mai riscritti silenziosamente.
 
-I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6 e v7 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.
+I nuovi piani ricevono ID numerici monotoni di almeno tre cifre (ad esempio `PLAN_001_add_payment_webhooks/`). Poiché gli schemi v5 congelati contano l’ID numerico come una parola, gli slug v5 hanno 2–4 parole e quelli v6, v7 e v8 ne hanno 2–5. Le cartelle esistenti senza numero `PLAN_<slug>/` restano leggibili e non vengono mai rinominate. Se esistono piani numerati, `latest` risolve nel piano con l’ID numerico più alto.

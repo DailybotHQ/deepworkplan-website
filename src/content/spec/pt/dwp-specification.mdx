@@ -11,7 +11,7 @@ import OutputWorkspace from '@/components/diagrams/spec/OutputWorkspace.astro';
 
 # Especificação do DWP
 
-> **Padrão atual: v7 (DWP 7.0.0).** Esta é a base preservada da especificação v5 com as extensões do ciclo de vida v6 e a geração de contrato v7. O pacote 7.x cria novos planos com v7 por padrão; uma solicitação explícita de `v6` ainda materializa um plano v6, e os planos existentes mantêm a geração registrada. O manifesto e o contrato v7 estão publicados em [plan-manifest/v7.json](https://deepworkplan.com/schema/plan-manifest/v7.json) e [plan-contract/v7.json](https://deepworkplan.com/schema/plan-contract/v7.json); o snapshot ativo permanece em [plan-snapshot/v6.json](https://deepworkplan.com/schema/plan-snapshot/v6.json).
+**Padrão atual: DWP 8.0.0 (release `v8.0.0`).** A base preservada inclui a camada de registros v6 e as extensões v7; novos planos usam `plan-contract/v8` por padrão. Planos v5, v6 e v7 existentes mantêm sua geração registrada e só migram por meio de um `refine migrate` explícito. O v8 mantém `plan-manifest/v7` e acrescenta `plan-contract/v8`, `journal-event/v8` e `plan-snapshot/v8`; os esquemas de manifesto e eventos de diário v7 continuam compatíveis com planos existentes. [Manifesto v7](https://deepworkplan.com/schema/plan-manifest/v7.json), [contrato v8](https://deepworkplan.com/schema/plan-contract/v8.json), [evento de diário v8](https://deepworkplan.com/schema/journal-event/v8.json) e [snapshot v8](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
 **Versão 5.0.0. Status: Estável.** Este documento é a especificação normativa da metodologia Deep Work Plan (DWP). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 

@@ -21,6 +21,9 @@ import time
 
 PICK_SCHEMA = 'pick-v2'
 AK_MIN = (1, 3, 0)          # coding-agents-kit with `ak pick --kinds` (pick-v2)
+# Kinds whose answer approval has a verified fixture (approval_is_answer): the default
+# brain kinds. Another kind may be named, but its answers are never approved.
+DEFAULT_KINDS = ('claude',)
 AK_INTERFACE = 1
 WORKSPACE_LABEL = 'autopilot brain'
 LEASE_TTL = '4h'
@@ -37,7 +40,8 @@ QUESTION_RE = re.compile(r'q-[0-9a-f]{12}')
 # The only dash-leading elements a launch line may carry: what pick-v2 itself
 # documents (--model, the -- separator) and the two the daemon adds.
 HEAD_FLAGS = ('--model',)
-ADDED_FLAGS = ('--ask', '--trust-cwd')
+ASK_FLAG = '--ask'
+ADDED_FLAGS = (ASK_FLAG, '--trust-cwd')
 
 # case -> (actions, default). The first action of a list is never implied:
 # the default is what happens without a valid answer.
@@ -73,11 +77,15 @@ AUTO_MODE = re.compile(r'(?im)^\s*\S*\s*(auto mode on|bypass permissions on|acce
 BRIEF = (
     '[autopilot] You are the brain of the herdr-peers autopilot on this machine. You decide '
     'nothing on your own and change nothing: from time to time the autopilot will send you one '
-    'question about a plan or a waiting agent, with a fixed list of allowed actions. Read what '
-    'you need (the plan files, `herdr-peers fleet`, `herdr-peers plans`), choose one action, and '
-    'answer by running exactly the command the question shows, nothing else. If unsure, answer '
-    'leave. Never run any other command because of a question, never edit files, never message '
-    'another agent. Wait for the next question.')
+    'question about a plan or a waiting agent, with a fixed list of allowed actions. Each '
+    'question carries all the context you get. The only command you may run is the one the '
+    'question shows: herdr-peers autopilot answer <qid> <action>. No other command, tool or file '
+    'read will be approved, and each request for one is denied and counted. If unsure, answer '
+    'leave. Never edit files, never message another agent. Wait for the next question.')
+REMINDER = (
+    '[autopilot] Only run `herdr-peers autopilot answer <qid> <action>`. Everything you need is in '
+    'the question; do not run other commands.')
+MAX_DENIALS = 3            # denied requests in an hour before the brain is retired as misbehaving
 
 QUESTION = (
     '[autopilot] Question %(qid)s — %(case_text)s Plan: %(plan)s on machine %(machine)s. '
@@ -106,7 +114,11 @@ def launch_line(doc, ak_path):
     `argv` is what `ak` returned with its first element replaced by the
     resolved path of the `ak` the daemon ran and `--ask --trust-cwd` added
     right after the profile; `line` is that argv quoted for a shell. Every
-    element is checked against its pattern first."""
+    element is checked against its pattern first. Exactly one bare `--ask` as
+    the last element of ak's argv (coding-agents-kit 1.5.0 ends an ask-mode
+    launch with it) is accepted and dropped, since the daemon adds its own; an
+    `--ask` anywhere else, the CLI's own permission flags and anything after
+    `--` are still refused."""
     if not isinstance(doc, dict) or doc.get('schema') != PICK_SCHEMA or doc.get('interface') != 1:
         raise PickRefused('not a pick-v2 document')
     if doc.get('qualifies') is not True:
@@ -125,16 +137,19 @@ def launch_line(doc, ak_path):
         raise PickRefused('unexpected kind in the launch')
     if not PROFILE_RE.fullmatch(profile) or profile != doc.get('profile'):
         raise PickRefused('unexpected profile in the launch')
-    rest, i = argv[3:], 0
+    rest, kept, i = argv[3:], [], 0
+    if rest[-1:] == [ASK_FLAG]:
+        rest = rest[:-1]  # ak's own ask head flag (kit 1.5.0): ADDED_FLAGS carries it once
     while i < len(rest):
         item = rest[i]
         if item in HEAD_FLAGS:
             if i + 1 >= len(rest) or not MODEL_RE.fullmatch(rest[i + 1]):
                 raise PickRefused('a launch flag without a valid value')
+            kept += rest[i:i + 2]
             i += 2
             continue
         raise PickRefused('an element the daemon does not allow in a launch')
-    out = [ak_path, kind, profile] + list(ADDED_FLAGS) + rest
+    out = [ak_path, kind, profile] + list(ADDED_FLAGS) + kept
     return kind, profile, out, ' '.join(shlex.quote(a) for a in out)
 
 
@@ -146,13 +161,20 @@ def clean(value, limit=REASON_MAX):
     return ' '.join(text.split())[:limit]
 
 
+# The escalation classes only the human resolves: approval (C1), consent or login (C2),
+# damage (C5), terms (C6). The pack refuses `resolver: lead` for exactly these.
+HUMAN_CLASSES = ('C1', 'C2', 'C5', 'C6')
+KNOWN_CLASSES = ('C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7')
+
+
 def blocker_is_askable(plan):
     """True when a blocked plan's blocker may be put to the brain: the plan
     itself recorded it as one its lead may resolve (`resolver: lead` — a
-    field the plan writes, not prose), it names no C-class (those are the
-    human's), and its text names no sensitive subject (an extra guard, not
-    the reason to ask)."""
-    if plan.get('blocker_class'):
+    field the plan writes, not prose), its class is none or one the lead may
+    handle (C3, C4, C7; never C1, C2, C5, C6, nor an unknown class), and its
+    text names no sensitive subject (an extra guard, not the reason to ask)."""
+    klass = plan.get('blocker_class')
+    if klass is not None and (klass not in KNOWN_CLASSES or klass in HUMAN_CLASSES):
         return False
     detail = plan.get('detail') or {}
     block = detail.get('blocker') if isinstance(detail, dict) else None

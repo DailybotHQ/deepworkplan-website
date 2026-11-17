@@ -16,6 +16,8 @@ description: "Deep Work Plan का एजेंट सतह: संस्क�
 
 ऊपर दिया गया API किसी एजेंट को यह साइट पढ़ने देता है। DWP स्किल वह है जो किसी एजेंट को पद्धति चलाने देती है — इसे किसी रिपॉज़िटरी में एक बार इंस्टॉल करें और यह एक राउटर तथा नौ सब-स्किल्स स्लैश कमांड के रूप में लाती है (या नाम से, उन एजेंटों के लिए जो स्लैश को intercept करते हैं — अधिकांश इसके बजाय `#` का उपयोग करते हैं, जैसे `#dwp-execute`)।
 
+Herdr में योजना का पंजीकरण lead और उत्तराधिकार क्रम दर्ज करता है। खुले plans जारी रखने के लिए कोई मानव `herdr-peers autopilot start --loop` शुरू कर सकता है। किसी भी merge, tag या release से पहले `herdr-peers lead verify --plan <plan-id>` चलाएँ।
+
 हर योजना दो स्वतंत्र अक्षों में से हर एक से एक मान चुनती है:
 
 - **Lite** — कार्य-रिकॉर्ड योजना के README में ही, स्थिर `#task-N` एंकरों के पीछे रहते हैं। छोटे, सीमित काम के लिए बनाया गया: एक सरोकार, लगभग एक बैठक।
@@ -129,7 +131,7 @@ Deep Work Plan स्किल के लिए आधिकारिक इं�
 
 ```bash
 # 1. Install the DWP skill — same command the /init endpoint gives agents
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication

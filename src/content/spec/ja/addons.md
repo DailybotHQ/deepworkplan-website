@@ -8,7 +8,7 @@ section: Addons
 
 # アドオン
 
-> **バージョンの適用範囲:** 本文書は保持されている v5.0.0 の基盤文書です。現在の標準である DWP 7.0.0 では、[仕様インデックス](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)に記載された該当する `V6_*.md` と `V7_*.md` の拡張も適用されます。既存の v5 計画と v6 計画は記録済みの規則を維持します。
+> **バージョンの適用範囲:** 本文書は保持されている v5.0.0 の基盤文書です。現在の標準である DWP 8.0.0 では、[仕様インデックス](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md)に記載された該当する `V6_*.md` と `V7_*.md` の拡張も適用されます。既存の v5 計画と v6 計画は記録済みの規則を維持します。
 
 **バージョン 2.1.0。** アドオンはコア Deep Work Plan 方法論への拡張機能です。8 つのうち 7 つはオプションであり、**適合に決して不要**——オプションアドオンがゼロのリポジトリも完全に AI-first で DWP 適合です。各オプションアドオンはオンボーディング中に提供され、明示的に受け入れまたは拒否され、——受け入れた場合——既存セットアップを上書きせず**調和**します。1 つのコンポーネントだけが明言された例外です：標準 2.3.0 以降、**AI Diff Reviewer ローカルレビュー**は必須ベースラインの一部であり——オンボーディングがそれをインストールし、すべての Final Review がそれを実行します——CI サーフェスのみがオプトインのままです。
 
@@ -27,7 +27,7 @@ section: Addons
 
 ## 出荷済みアドオン（8 つ）
 
-現在 8 つのアドオンが出荷されています——7 つのオプションと、必須のローカルレビューです。各々に**キットカタログページ**（ユーザー向け詳細）と Deep Work Plan スキル内の**規範スペック**があります。そのうち 4 つ——devcontainer、Herdr、DeepWorkPlan Vim、Agentkit——は、独自のリポジトリとリリースサイクルを持つ製品にタグで固定された薄いインテグレーターです。どの製品も Deep Work Plan なしで動作します。受け入れられたアドオンは `.dwp/config.json` アドオンレジストリ（DWP 7.0.0）に記録されます。このレジストリは提供や増強を行えるだけで、適合や計画をゲートすることは決してありません。
+現在 8 つのアドオンが出荷されています——7 つのオプションと、必須のローカルレビューです。各々に**キットカタログページ**（ユーザー向け詳細）と Deep Work Plan スキル内の**規範スペック**があります。そのうち 4 つ——devcontainer、Herdr、DeepWorkPlan Vim、Agentkit——は、独自のリポジトリとリリースサイクルを持つ製品にタグで固定された薄いインテグレーターです。どの製品も Deep Work Plan なしで動作します。受け入れられたアドオンは `.dwp/config.json` アドオンレジストリ（DWP 8.0.0）に記録されます。このレジストリは提供や増強を行えるだけで、適合や計画をゲートすることは決してありません。
 
 ### Devcontainer（第 1 アドオン）
 
@@ -89,9 +89,11 @@ section: Addons
 - **動作：** ピアプロトコル（stamp、grant、reply、ループガード、深さとファンアウトの上限）は herdr-peers にあり、パックには決して含まれない；どの利用にも contract の権限付与 `agent_delegation` が必要で、委任先の結果は計画自身のランナーが観測するまで主張にとどまる
 - **提供タイミング：** フェーズ 7b での明示的なオプトイン；`herdr` と `herdr-peers` を読み取り専用で検出；このトランスポートは Herdr セッション内でのみ使用可能
 
+- **ループ：** Herdr v2.1.0 は、人が起動する任意の `herdr-peers autopilot --loop` も提供し、範囲内で計画を続行して後継者へ引き継ぎます。[ループエンジニアリング](/spec/loop-engineering)を参照。
+
 ### DeepWorkPlan Vim（第 7 アドオン）
 
-[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.0.1` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
+[DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim)（`v1.1.0` に固定、インターフェース `1`）の薄いインテグレーターで、Deep Work Plan のためのターミナルエディター（Neovim 0.12+）です。
 
 - **キットページ：** [DeepWorkPlan Vim](/kit/vim)
 - **追加内容：** エージェントと人間のための任意のマシンレベルのエディターサーフェス——生成されるコマンドインデックス、読み取り専用の計画ブラウザー、Markdown ビューア；すべての記述は製品の固定された機械可読サーフェスから読み取られる

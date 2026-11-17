@@ -16,6 +16,8 @@ Tidak ada kunci API untuk dibuat, tidak ada alur OAuth, dan tidak ada sandbox ya
 
 API di atas memungkinkan agent membaca situs ini. Skill DWP adalah yang memungkinkan agent menjalankan metodologinya — pasang sekali di sebuah repositori, dan skill ini membawa router beserta sembilan sub-skill, dipanggil sebagai slash command (atau dengan namanya, untuk agent yang meng-intercept slash — kebanyakan memakai `#` sebagai gantinya, misalnya `#dwp-execute`).
 
+Dengan Herdr, pendaftaran rencana mencatat lead dan urutan penerus. Seseorang dapat memulai `herdr-peers autopilot start --loop` agar rencana terbuka terus berjalan. Jalankan `herdr-peers lead verify --plan <plan-id>` sebelum merge, tag, atau release apa pun.
+
 Setiap rencana memilih satu nilai dari masing-masing dua sumbu yang independen:
 
 - **Lite** — Catatan tugas hidup langsung di README rencana, di balik anchor `#task-N` yang stabil. Dibuat untuk pekerjaan kecil dan berbatas: satu concern, kira-kira satu sesi kerja.
@@ -129,7 +131,7 @@ Jalur instalasi resmi untuk skill Deep Work Plan — perintah yang sama dengan y
 
 ```bash
 # 1. Install the DWP skill — same command the /init endpoint gives agents
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication

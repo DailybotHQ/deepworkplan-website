@@ -24,9 +24,9 @@ Bir yapay zeka kodlama ajanının yeteneği, modelden çok kendisine verilen yö
 
 Bu, iyi delege etmenin ne anlama geldiğini yeniden çerçeveler. İyi delege etmek, bir ajandan iş istemek değildir — işi, doğru biçimde yürütülebilecek kadar açık tanımlamaktır: hedef, kısıtlar, ajanın aksi takdirde sahip olmayacağı bağlam ve başarılı olup olmadığına karar veren ölçütler. Değerin çoğu, yürütme başlamadan önce yaratılır.
 
-Deep Work Plan, bu yukarı yöndeki işi kalıcı, tekrarlanabilir bir biçimde yapma disiplinidir. İki kurucu direği, iyi yönün iki yarısıdır: bir **spesifikasyon** “doğru”nun neye benzediğini belirtir ve bir **harness** ajana ona ulaşması için bağlamı ve araçları verir. Üçüncü bir disiplin, bu birleşimi büyük ölçekte uygun maliyetli tutar: **token verimliliği** — çünkü işe yarayan bir harness, ajanın uzun bir ufuk boyunca gerçekten taşıyabileceği harness’tır. Birlikte, bir modelin ham yeteneğini güvenilir mühendisliğe dönüştürürler — saatlerce süren bir görev boyunca sürdürülen ve oturumlar arasında değişen ajanlar boyunca korunan biçimde.
+Deep Work Plan, bu yukarı yöndeki işi kalıcı, tekrarlanabilir bir biçimde yapma disiplinidir. Dört temel direk üzerinde durur. İlk ikisi iyi yönün iki yarısıdır: **önce spesifikasyon** — bir spesifikasyon “doğru”nun neye benzediğini belirtir — ve **depo, harness’tir** — depo, ajana ona ulaşması için bağlamı ve araçları verir. Üçüncüsü işin bitmesini sağlar: **Loop engineering**, onaylı bir planı, bir insan onu sürekli yoklamadan tanımlı sonuna doğru ilerletir. Dördüncüsü bu birleşimi uygun maliyetli ve bu konuda dürüst tutar: **ölçülmüş verimlilik** — çünkü işe yarayan bir harness, ajanın uzun bir ufuk boyunca gerçekten taşıyabileceği harness’tır ve maliyeti iddia edilmek yerine ölçülür. Tek cümleyle: *Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.* Birlikte, bir modelin ham yeteneğini güvenilir mühendisliğe dönüştürürler — saatlerce süren bir görev boyunca sürdürülen ve oturumlar arasında değişen ajanlar boyunca korunan biçimde.
 
-## Tasarım gereği spec odaklı
+## Önce spesifikasyon
 
 Bu, metodolojinin ilk temel direğidir ve “harness” gibi onu da açıkça tanımlamaya değer.
 
@@ -38,7 +38,7 @@ Bu, metodolojinin ilk temel direğidir ve “harness” gibi onu da açıkça ta
 
 **DWP nasıl farklılaşır.** Bu fikrin etrafında, GitHub Spec Kit, Amazon Kiro ve Tessl dahil daha geniş bir spec odaklı hareket oluştu. Bu yaklaşımlar belirli bir araca ya da platforma bağlı olma eğilimindedir. DWP kasıtlı olarak farklıdır: araçtan bağımsız ve repo-native’dir. Spesifikasyon, depoda düz Markdown olarak yaşar; böylece bir satıcının ürünüyle değil, kodla birlikte gezer — ve ikinci temel direkle doğrudan birleşir, çünkü spesifikasyonun kendisi deponun taşıdığı harness’ın bir parçasıdır.
 
-## Depo, harness haline gelir
+## Depo, harness’tir
 
 Bu, metodolojinin ikinci temel direğidir ve açık bir tanımı hak eder — “harness” yüklü bir terime dönüştü ve sektörün çoğu onu ne anlama geldiğini söylemeden kullanıyor.
 
@@ -60,9 +60,15 @@ Bu, metodolojinin ikinci temel direğidir ve açık bir tanımı hak eder — �
 
 Her öğe bir aracın özelliği değil, depodaki bir dosya olduğu için harness, yapısı gereği taşınabilirdir: Markdown okuyan ve kabuk komutları çalıştırabilen herhangi bir ajan, araç başına özel bir çerçeveye gerek kalmadan aynı dosyaları açabilir. Metodolojinin geri kalanının üzerine dayandığı tek satırlık iddia budur: *deponun kendisi harness haline gelir*. Bu, deponun taşıdığı şeye dair bir iddiadır; bir modelin yardımsız, taze bir istekte doğru akışı güvenilir biçimde bulacağının garantisi değildir — kit'in açık `dwp-*` giriş noktalarını ve bir yönlendirici `SKILL.md`'yi de bu yüzden sunması: dosya taşınabilirliği ile güvenilir yönlendirme farklı özelliklerdir ve yalnızca birincisi tek başına yapı gereği inşa edilmiştir.
 
-## Yapı gereği verimli
+## Loop engineering
 
-İlk direk işi doğru kılar; ikincisi onu taşınabilir kılar. Üçüncüsü onu **uygun maliyetli** tutar — çünkü bağlam, bir kodlama ajanının sahip olduğu en kıt kaynaktır ve onu israf eden bir metodoloji, tam da iş uzamaya başladığında başarısız olur.
+Bu, üçüncü temel direktir. Bir spesifikasyon ve bir harness işi doğru ve taşınabilir kılar; tek başlarına onu bitirmezler. Uzun bir plan, ajanı bir turun sonunda durduğunda, bir ekranda beklediğinde, kapasitesi tükendiğinde ya da ortadan kaybolduğunda takılır — ve olağan çare, her yirmi dakikada bir kontrol eden bir insandır. Loop engineering, denetimi devretmeden bu sürekli gözetimi ortadan kaldırır.
+
+İsteğe bağlı Herdr eklentisiyle plan bir lider ve, adlandırıyorsa, halefler kaydeder. Yalnızca bir insanın başlattığı bir daemon her kayıtlı planı izler: boşta duran lideri devam etmesi için dürter, ortadan kalkmış bir liderin yerini almasını erişilebilen ilk haleften ister ve bir plan takıldığında, engellendiğinde ya da tamamlandığında bildirir. Bir dürtme yetki eklemez — planın kapıları, durma koşulları ve yükseltmeleri tam olarak önceki gibi bağlayıcıdır; kimlik bilgileri, oturum açmalar ve planın kendi insan kontrol noktaları insanlarda kalır. Metodoloji döngü olmadan da çalışır; döngü yalnızca onu güçlendirir. [Loop engineering](/tr/methodology/08-loop-engineering) bölümüne bakın.
+
+## Ölçülmüş verimlilik
+
+İlk direk işi doğru kılar; ikincisi onu taşınabilir kılar; üçüncüsü onu bitirir. Dördüncüsü onu **uygun maliyetli** tutar — çünkü bağlam, bir kodlama ajanının sahip olduğu en kıt kaynaktır ve onu israf eden bir metodoloji, tam da iş uzamaya başladığında başarısız olur — ve bu iddiayı **ölçülmüş** tutar: uydurma token yüzdeleri değil, akış başına yönerge baytları.
 
 Üç mekanizma işi yapar:
 
@@ -85,4 +91,4 @@ DWP, her başarısızlığa doğrudan değinen hafif bir yapı dayatır:
 
 ## Baştan sona Markdown
 
-DWP, yazılım değil, yapı tanımlar. Kurulacak bir çalışma zamanı, bir bağımlılık ağacı ya da bir kilitlenme yoktur. Plan, görevler ve çalışma günlüğünün tümü, herhangi bir ajanın okuyabileceği, herhangi bir kişinin gözden geçirebileceği ve herhangi bir sürüm denetim sisteminin temiz biçimde izleyebileceği düz Markdown’dır. Sonuç, okuyabileceğiniz, denetleyebileceğiniz ve güvenebileceğiniz bir yürütmedir.
+DWP, yazılım değil, yapı tanımlar. Kurulacak bir çalışma zamanı, bir bağımlılık ağacı ya da bir kilitlenme yoktur; isteğe bağlı döngü daemon’u metodolojiye değil, bir eklentiye aittir. Plan, görevler ve çalışma günlüğünün tümü, herhangi bir ajanın okuyabileceği, herhangi bir kişinin gözden geçirebileceği ve herhangi bir sürüm denetim sisteminin temiz biçimde izleyebileceği düz Markdown’dır. Sonuç, okuyabileceğiniz, denetleyebileceğiniz ve güvenebileceğiniz bir yürütmedir.

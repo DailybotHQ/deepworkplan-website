@@ -8,7 +8,7 @@ section: Addons
 
 # Eklentiler
 
-> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 7.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
+> **Sürüm kapsamı:** Bu belge, korunan bir v5.0.0 temel belgesidir. Güncel standart DWP 8.0.0, [şartname dizininde](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md) listelenen geçerli `V6_*.md` ve `V7_*.md` uzantılarını da gerektirir. Mevcut v5 ve v6 planları kayıtlı kurallarını korur.
 
 **Sürüm 2.1.0.** Eklentiler, temel Deep Work Plan metodolojisine uzantılardır. Sekizin yedisi isteğe bağlıdır ve **uyumluluk için asla gerekli değildir** — sıfır isteğe bağlı eklentili bir depo tamamen AI-first ve DWP uyumludur. Her isteğe bağlı eklenti onboarding sırasında sunulur, açıkça kabul veya reddedilir ve — kabul edildiğinde — mevcut kurulumu ezmek yerine **uzlaştırır**. Bir bileşen beyan edilen istisnadır: 2.3.0 standardından itibaren **AI Diff Reviewer yerel incelemesi** gerekli temelin bir parçasıdır — onboarding onu kurar ve her Final Review onu çalıştırır — CI yüzeyi ise isteğe bağlı kalır.
 
@@ -27,11 +27,11 @@ Keşif: `onboard` akışı `skills/deepworkplan/addons/` dizinini numaralandır�
 
 ## Üretim eklentileri (sekiz)
 
-Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır. Bunlardan dördü — devcontainer, Herdr, DeepWorkPlan Vim ve Agentkit — kendi deposu ve sürüm döngüsü olan bir ürüne etiketle sabitlenmiş ince entegrasyon katmanlarıdır; her ürün Deep Work Plan olmadan çalışır. Kabul edilen bir eklenti `.dwp/config.json` eklenti kaydına (DWP 7.0.0) yazılır; bu kayıt yalnızca sunabilir veya güçlendirebilir — uyumluluğu ya da bir planı asla koşula bağlamaz.
+Bugün sekiz eklenti sunulmaktadır — yedi opt-in artı gerekli yerel inceleme. Her birinin kullanıcıya yönelik ayrıntılı bir **kit katalog sayfası** ve Deep Work Plan skill'i içinde **normatif spec**'i vardır. Bunlardan dördü — devcontainer, Herdr, DeepWorkPlan Vim ve Agentkit — kendi deposu ve sürüm döngüsü olan bir ürüne etiketle sabitlenmiş ince entegrasyon katmanlarıdır; her ürün Deep Work Plan olmadan çalışır. Kabul edilen bir eklenti `.dwp/config.json` eklenti kaydına (DWP 8.0.0) yazılır; bu kayıt yalnızca sunabilir veya güçlendirebilir — uyumluluğu ya da bir planı asla koşula bağlamaz.
 
 ### Devcontainer (birinci eklenti)
 
-[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v1.2.0` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
+[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, `v1.4.0` sürümüne sabitlenmiş, arayüz `2`) için ince bir entegratör: `dck init` komutunun depoya, deponun kendi container'ı olarak oluşturduğu bir Dev Containers şablonu ve `dck-dockerfile` skill'i.
 
 - **Kit sayfası:** [Devcontainer](/kit/devcontainer)
 - **Ne ekler:** çalışma zamanının digest ile sabitlenmiş resmi imajından üretilen `docker/local/<service>/Dockerfile` (`python-3.13`, `node-24` veya `debian`, paylaşılan temel imaj yok), `dck` başlatıcısı (`up`, `shell`, `rebuild`, `doctor`) üzerine kurulu `dev.sh`, opt-in bir katman olarak kodlama agent'ları, yalnızca loopback portları, içeride hiçbir anahtar olmadan (geliştirici host profilinde `[ssh] copy_keys` ile bunu açıkça seçmedikçe) host'un agent'ı üzerinden SSH ile git ve standart düzene sahip container başına Herdr makineleri
@@ -82,16 +82,18 @@ Tutarlı UI, CLI veya konuşma çıktısı için herhangi bir kodlama agent'ın�
 
 ### Herdr (altıncı eklenti)
 
-v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v2.0.0`, protokol `2`) için ince bir entegrasyon katmanı.
+v7 planlarının **etkileşimli** devretme taşıyıcısı: [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (sabitlenmiş `v2.2.0`, protokol `2`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Herdr](/kit/herdr)
 - **Ne ekler:** bir plan, sınırlı bir görevi aynı makinede veya Herdr'ın SSH üzerinden ulaştığı bir makinede, başka bir [Herdr](https://herdr.dev) panelindeki bir kodlama agent'ına devredebilir ve onun tek yetkili yanıtını journal'a kaydedebilir
 - **Davranış:** eşler arası protokol (damga, yetki, yanıt, döngü koruması, derinlik ve yayılım sınırları) pakette değil, herdr-peers içinde yaşar; her kullanım `agent_delegation` sözleşme yetkisini gerektirir ve bir delegenin sonucu, planın kendi çalıştırıcısı onu gözlemleyene kadar bir iddia olarak kalır
 - **Ne zaman sunulur:** Faz 7b sırasında açık opt-in; `herdr` ve `herdr-peers` için salt okunur tespit; taşıyıcı yalnızca bir Herdr oturumu içinde kullanılabilir
 
+- **Döngü:** Herdr v2.1.0 ayrıca kapsamlı devam ve halefe devir için isteğe bağlı, insanın başlattığı `herdr-peers autopilot --loop` sunar. [Döngü mühendisliği](/spec/loop-engineering) sayfasına bakın.
+
 ### DeepWorkPlan Vim (yedinci eklenti)
 
-Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v1.0.1`, arayüz `1`) için ince bir entegrasyon katmanı.
+Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (sabitlenmiş `v1.1.0`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [DeepWorkPlan Vim](/kit/vim)
 - **Ne ekler:** agent'lar ve insanlar için isteğe bağlı, makine düzeyinde bir düzenleyici yüzeyi — üretilmiş bir komut dizini, salt okunur bir plan tarayıcısı ve bir Markdown görüntüleyicisi; her iddia ürünün sabitlenmiş, makine tarafından okunabilir yüzeyinden okunur
@@ -100,7 +102,7 @@ Deep Work Plan için terminal düzenleyicisi (Neovim 0.12+): [DeepWorkPlan Vim](
 
 ### Agentkit (sekizinci eklenti)
 
-v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v1.4.0`, arayüz `1`) için ince bir entegrasyon katmanı.
+v7 planlarının **arayüzsüz (headless)** devretme taşıyıcısı: [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, sabitlenmiş `v1.5.0`, arayüz `1`) için ince bir entegrasyon katmanı.
 
 - **Kit sayfası:** [Agentkit](/kit/agentkit)
 - **Ne ekler:** terminal kodlama agent'ları üzerinde tek bir `ak` komut yüzeyi; sınırlı bir plan görevini arayüzsüz çalıştırmak için kullanılır; `subagents`, `cancel_children` ve `model_routing` yeteneklerini yalnızca çalışma zamanında, etkinleştirildiğinde, tespit edildiğinde ve uyumlu bir arayüz üzerinde olduğunda sağlar

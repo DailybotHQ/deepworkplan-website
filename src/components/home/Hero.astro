@@ -1,4 +1,5 @@
 ---
+import LoopDiagram from '@/components/diagrams/home/LoopDiagram.astro';
 import Kicker from '@/components/editorial/Kicker.astro';
 import type { Language } from '@/lib/i18n';
 import {
@@ -38,12 +39,12 @@ const initMarkdown = await getCanonicalInitMarkdown();
     >
       <div class="max-w-3xl">
       <Kicker>{h.badge}</Kicker>
+      <!-- The v8 lead sentence lives in one translation key (hero.leadSentence). -->
       <h1
-        class="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl"
+        class="font-display mt-4 text-3xl font-bold tracking-tight sm:text-4xl lg:text-[2.75rem] lg:leading-[1.12]"
         style="color: var(--color-ink);"
       >
-        {h.title}{' '}
-        <span style="color: var(--color-secondary);">{h.titleEmphasis}</span>
+        {h.leadSentence}
       </h1>
 
       <p class="mt-6 max-w-2xl text-lg" style="color: var(--color-ink);">
@@ -128,24 +129,8 @@ const initMarkdown = await getCanonicalInitMarkdown();
       </div>
       </div>
 
-      <div class="mt-10 block lg:mt-0">
-        <img
-          src="/images/visuals/home/hero-harness.webp"
-          alt={h.illustrationAlt}
-          width="680"
-          height="850"
-          class="mx-auto h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[480px] dark:hidden"
-          loading="eager"
-          fetchpriority="high"
-        />
-        <img
-          src="/images/visuals/home/hero-harness-dark.webp"
-          alt={h.illustrationAlt}
-          width="680"
-          height="850"
-          class="mx-auto hidden h-auto w-full max-w-[260px] sm:max-w-[340px] lg:max-w-[480px] dark:block"
-          loading="lazy"
-        />
+      <div class="mt-10 lg:mt-0">
+        <LoopDiagram lang={lang} />
       </div>
     </div>
   </div>

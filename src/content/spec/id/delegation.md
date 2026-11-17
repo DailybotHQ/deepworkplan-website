@@ -8,7 +8,7 @@ section: Record layer
 
 # Delegasi
 
-> **Cakupan versi:** Halaman ini menyatakan ulang generasi kontrak v7 pada rilis `v7.12.2`. Sumber kanonis: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md) dan [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/execute/delegation.md) milik alur execute. Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku.
+> **Cakupan versi:** Halaman ini menyatakan ulang generasi kontrak v7 pada rilis `v8.0.0`. Sumber kanonis: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md) dan [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/execute/delegation.md) milik alur execute. Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku.
 
 **Versi 7.0.0. Status: Stabil.** v7 adalah generasi kontrak baru dari [lapisan catatan](/spec/record-layer), bukan siklus hidup baru: semua yang ada dalam dokumen kontrak, siklus hidup, konteks, dan sumber daya v6 tetap berlaku kecuali halaman ini menyatakan lain. Tidak mendelegasikan selalu benar. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
@@ -100,3 +100,5 @@ Orkestrator tidak pernah mendelegasikan tugas-tugas **rencana anak**: rencana an
 - [Lapisan catatan](/spec/record-layer) — kontrak dan jurnal yang diperluas oleh halaman ini.
 - [Sumber daya dan kemampuan](/spec/resources-and-abilities) — kemampuan, grant, dan registri addon.
 - [Addon Herdr](/kit/herdr) dan [addon Agentkit](/kit/agentkit) — dua transport tersebut.
+
+- [Rekayasa loop](/spec/loop-engineering) — loop rencana dan otonominya yang terbatas.

@@ -1,0 +1,143 @@
+---
+title: Herdr
+description: "把任务交给任意机器上 Herdr 面板里的另一个编码代理，只取回一条经授权的回复。会委派的计划，每次交换都有完整的记录。"
+kind: addon
+lang: zh
+order: 7
+---
+
+import HerdrLoop from '@/components/diagrams/kit/HerdrLoop.astro';
+
+# Herdr 附加组件
+
+[Herdr](https://herdr.dev) 把编码代理放进窗格中，既可在你的机器上，也可在它通过 SSH 连接到的机器上。这个附加组件让 Deep Work Plan 把这些代理当作**对等方**来使用：计划可以把一项有边界的任务交给另一个窗格中的代理，接收恰好一条获授权的回复，并保留这次交互的记录。
+
+它是 **DWP v8**（pack `v8.0.2`）的一个可选附加组件。没有它，方法论的运作方式完全相同：附加组件缺失或被禁用时，每项任务都在当前会话中运行，与以往完全一样。
+
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
+
+<HerdrLoop lang="zh" class="not-prose my-10" />
+
+## 它集成了什么
+
+该附加组件是一个轻量的集成层。实际工作由 **[herdr-peers](https://github.com/DailybotHQ/herdr-peers)** 完成，它是一个独立的 MIT 技能，固定在 **`v2.2.0`**，脱离 Deep Work Plan 也能使用。它定义了 Herdr 本身留白的部分：谁可以回答，答复如何跨机器返回，两个代理如何避免无休止地互相回答，以及“我提问、它回答”的记录存放在哪里。
+
+| 项目 | 值 |
+|---|---|
+| 产品 | `DailybotHQ/herdr-peers`，标签 `v2.2.0`，协议 2 |
+| 注册表键 | `.dwp/config.json` 中的 `herdr` |
+| 传输方式 | 交互式：Herdr 窗格中的一个对等方 |
+| 提供 | `subagents`、`cancel_children` |
+| 要求 | 计划契约中的 `agent_delegation` 授权 |
+
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本：CLI 动词及其文档化的参数、退出码 `0`–`7`、文档化的 `HERDR_PEERS_*`、`DWP_PLAN` 和 `DWP_TASK` 变量、协议 2，以及 JSON 契约 `herdr-peers/lanes-v1`、`herdr-peers/lead-v1` 和委派记录。对其中任何一项的破坏性变更都会提升主版本号，线路格式的变更还会同时提升协议编号。`v1.0.0` 相对 `v0.3.3` 没有任何行为变化，0.x 版本不再受支持。
+
+## 安装
+
+安装 herdr-peers 及其所依赖的 Herdr 官方技能。凡是其代理需要作答的机器，也都需要安装该技能。
+
+```bash
+npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.0 --skill herdr-peers -g -y
+npx --yes skills add https://github.com/herdrdev/herdr/tree/v0.9.3 --skill herdr -g -y
+```
+
+要求：Herdr 0.9.1 或更新版本、`bash`，以及 `python3` 3.9 或更新版本（仅使用标准库）。接入流程会提供该附加组件，并把你的回答记录在附加组件注册表中；未经同意，它绝不会被启用。
+
+## 它为计划添加了什么
+
+- **委派给对等方。** 在契约授予 `agent_delegation` 的 v7 或 v8 计划中，`execute` 可以把一项 `parallel_safe` 任务或一个只读问题，交给另一个窗格中的代理，无论该代理在本机还是在另一台机器上。
+- **一条获授权的回复。** 请求带有一个戳记，只授权恰好一条答复。对等方通过辅助程序回复一次，回复本身也带有自己的戳记。
+- **先记录，后依赖。** 每次委派都会在回复被使用之前写入计划的 `analysis_results/delegations.ndjson`，并对应 v7 和 v8 计划的 `delegation` 日志事件。
+- **结果在核验前仍是声明。** 对等方的答复在计划自身的门控运行器观察到它之前，都属于 `asserted` 证据。它绝不会独自关闭一项任务。
+
+## 安全模型
+
+| 规则 | 含义 |
+|---|---|
+| 先有授权 | 仅当计划契约授予 `agent_delegation` 时才会进行委派。 |
+| 深度上限 1 | 带有 `depth=1` 或 `reply-to=` 戳记的消息绝不会被回答，被委派者也绝不会再委派。 |
+| 扇出上限 | 默认情况下，每个调用方最多四个对等方。 |
+| 是数据，不是指令 | 回复绝不会授予接收方原本没有的权限。 |
+| 每条路径一个写入者 | 会写入文件的对等方在自己的 git worktree 中工作。 |
+
+herdr-peers 不对发送方进行身份验证：戳记中的 `from=` 字段只是一项声明。缓解措施是 `HERDR_PEERS_SCOPE` 允许列表，它限定了对等方所接受的工作区和机器。
+
+## 容器与主机
+
+借助基于 devcontainer-kit `v1.4.0` 的 [devcontainer](/kit/devcontainer) 附加组件，每个 dck 容器都自带 herdr-peers，并在 `dck up` 时加入网格：其中的代理可以向主机上、其他容器中以及主机的其他 loopback 容器中的代理提问，并收到回复。`dck setup` 会在主机上安装经过校验的 herdr-peers，因此主机上的代理也能回复。主机监听器以及允许其他容器接入的额外密钥由你在工具包的主机配置文件中决定；本附加组件从不设置它们。自 herdr-peers (`v0.2.3`) 起，每台机器都保留自己的状态（`$XDG_STATE_HOME/herdr-peers/<server>/`），因此主机与容器共享的检出不再混淆彼此的记录；自 devcontainer-kit (`v0.3.3`) 起，容器会自行导出 `HERDR_PEERS_SELF`，因此容器内的 Codex 代理无需手动步骤即可访问其他机器。
+
+## Herdr 还是 agentkit
+
+两个附加组件实现同一个委派接口——`launch`、`observe`、`collect`、`cancel`——但使用不同的传输方式。
+
+| 情形 | 使用 |
+|---|---|
+| 一项有边界、声明了输出的 `parallel_safe` 任务 | [agentkit](/kit/agentkit)（在 worktree 中以无头方式运行 `ak run`） |
+| 任务需要交互、运行时间长，或位于另一台机器上 | Herdr（窗格中的一个对等方） |
+
+如果主导者要同时运行多条通道——位于主机、容器和其他机器上的窗格，各自使用自己的账户——`herdr-peers lanes` 会列出每条通道及其状态，`herdr-peers status <pane>` 会对受阻通道所停留的界面进行分类，而每条委派记录都会写明承担该工作的账户和厂商。参见[运行多个代理](/methodology/06-orchestration)。
+
+**Codex 通道要指明自己的窗格。** Codex 通过同一账户所有会话共享的后台服务器运行通道的命令，因此它继承的窗格 id 可能属于另一个通道。Codex 通道在每个 herdr-peers 命令（`ask`, `reply`, `notify`, `check`, `wait`, `lanes`, `cancel`）上用 `--pane <pane>` 传入主导者任务说明中给出的自身窗格。
+
+## 通知与主导权
+
+herdr-peers (`v0.3.2`) 加入了让代理集群在主导者离开后仍能延续的能力（[集群自主](/zh/methodology/07-swarm-autonomy)）：
+
+- **通知。** `herdr-peers notify <addr|lead> "<text>" --pane <pane>` 发送一条带 `reply=no` 戳记的单向消息。接收方的 `check` 把它归类为通知，作为数据记录下来，从不回复。通知不占用扇出名额，并且可以在一次询问尚未结束时发送；它们用于交接公告、主导者变更和发布广播。
+- **每份计划一条主导者记录。** `herdr-peers lead claim --plan <P> --succession <A,B> --lanes <A,B>` 让一个代理成为某份计划的主导者；`lead show` 打印该记录（schema `herdr-peers/lead-v1`：计划、主导者、epoch、继任列表、通道、更新时间）。`lead handover <addr> --plan <P>` 移交主导权，`lead takeover --plan <P>` 在主导者离开时让第一个可达的副手接管，`lead release --plan <P>` 结束主导。每次变更都会提升 epoch 并通知每条通道。在启动计划的通道之前先认领该计划：`lead` 只有在记录存在后才能解析。从 `v0.3.2` 起，记录会在本地保存认领它的仓库，并拒绝另一个仓库对同一计划 id 的认领；请将那份计划写作 `--plan <repo>/<id>`。
+- **隔离（fencing）。** 通道只接受以下来源的主导者通知：为它下达任务说明的代理（首次认领）、处于下一个 epoch 的当前主导者（移交），或处于下一个 epoch 的第一个可达继任条目（接管）。其他任何通知都会被记录并忽略；重新出现的主导者若看到更高的 epoch，就会让位。
+- **`lead` 地址。** `ask lead …` 和 `notify lead …` 解析为 `--plan`（否则为 `$DWP_PLAN`）的当前主导者，因此任何通道任务说明都无需写死主导者的窗格。
+- **`usage_limit` 界面。** `status` 和 `lanes` 会把 CLI 的用量限额消息识别为界面类别 `usage_limit`，其下一步是交接。绝不对它发送按键。`lanes --json` 会加上计划、其主导者、epoch 以及每条通道最近一次报告的容量。
+
+通道之间也可以互相询问信息并进行协调——一个接口、一个参数名、一个分支状态——但只有主导者分配工作。深度为一和扇出上限依然有效。在 `v0.2.x` 中没有通知，也没有主导者记录：通道从任务说明中获得主导者地址并向其询问，主导者变更由开发者转达。
+
+## 辩论
+
+herdr-peers 1.1.0 新增原生的 **debate** 子技能（`debate.md`）：由一个主导智能体组织 Herdr 窗格中的对等智能体组成评审团，经过多轮讨论，最后得出一个用户可以信赖的结果，并附上证据和异议。只有在用户要求辩论、评审团、红队、由多个智能体或从多个角度开展的研究，或对某个结果再组织一次评审时才使用；单个智能体的意见只需一次 ask。
+
+- **先定目的。** 主导者先选择目的——**决策**、**调研**技术现状、**压力测试**、**验证**或**生成**——每种目的都有各自的形式、计数方式和交付物。目的可以串联（调研 → 决策，决策 → 验证），辩论规模分为快速、标准和深入三档。
+- **主导者的约定。** 主导者从不投票；用户的原话逐字照录；简报只经由一个渠道送达评审团；每个窗格把陈述写入磁盘，并用一行回复；任何窗格都不执行外部操作。
+- **辩论形式。** 角度调研、经典轮次、草案包、逐条主张交叉质询、先红队后辩护、先强化再评判、全新上下文盲审挑战、复现评审团和发散提案。决策类辩论总是在限定的结论范围内收尾。
+- **`herdr-peers debate` 命令。** `tally` 统计排序选票和逐项结论（Borda、Copeland、两两对决、Condorcet 胜者与败者）；`claims` 把各条工作线的主张台账合并为已确立、有争议、已驳倒等状态，这些状态只是多数共识，而非验证；`anon` 以匿名文件名复制陈述，映射关系保存在私有密钥中；`filings` 列出已提交、缺失和过短的陈述，只需重新询问缺失的窗格。
+- **组建评审团。** `panel` 只提议评审团，不执行任何操作。席位在各模型提供商之间轮流分配，同一提供商内额度最多的席位优先，来源包括空闲窗格，以及安装了 agentkit（`ak`）时 `ak pick` 提议的账号。没有 `ak` 时，它会推荐 coding-agents-kit（可选，`v1.0.1` 或更高版本）。
+- **模板。** `templates/debate/` 下有十六个模板，涵盖用户说明，调研、压力测试和各轮简报，选票与主张文件，主导者的交接包，以及决策、技术现状、压力测试和复现记录。
+- **向受阻对等方投递。** `reply` 和 `notify` 会在最长 `--wait-blocked` 秒内，重试向卡在提问处的对等方投递；回复仍然只有一次。
+
+此版本只做增量：协议 1 以及所有命令、参数、退出码和 JSON 契约均保持不变。
+
+## Autopilot
+
+herdr-peers 1.2.0 新增 **autopilot**（`autopilot.md`）：一个可选的守护进程 `herdr-peers autopilot`，由用户启动，使长时间运行的计划不会停在审批界面上。它监视每台已启用的 Herdr 机器上的每个代理，当某个代理停在某个界面上等待时，就接受一个选项。1.2.1 版本修复了一种情况：选项带有较长描述的问题会得不到回答。1.2.2 版本会回答选项旁带有预览的问题，并能识别西班牙语、法语、德语和意大利语的推荐标记。1.3.0 版本加入了**循环**：`autopilot --loop` 让每个打开的计划在所有机器上一直运行到结束，`--notify`/`--notify-env` 把它的报告指向你指定的位置，只读动词 `plans` 和 `fleet` 加上 fleet UI 一览每条通道、每台机器和每个打开的计划。
+
+2.0.0 版本将线路移至**协议 2**并新增三项功能：**lead 任命**——仅在人类明确发话时（`lead claim --allow-appointment`），一个已授权的计划在其 lead 和所有继任者都消失后，可以任命其第一条存活通道为新 lead（`lead takeover --as-lane`，探测两次，每个计划至多任命两次）；**`lead verify`** 是在任何 merge、tag 或 release 之前运行的只读检查；**autopilot 大脑**——使用 `--brain` 时，由人类启动的守护进程会启动一个专属智能体（coding-agents-kit 1.3.0 或更高），且只在封闭的动作列表内服从它，当 `ak` 缺失或过旧时拒绝启动；以及**计划队列**——pack 写出 `.dwp/queue.json`（模式 `dwp-queue-v1`），使用 `--loop` 时守护进程会自动启动下一个已排队、已批准的计划。在已授权的计划上，每条通道和继任者都必须运行 2.0 或更高版本。
+
+- **只有用户能启动它。** 任何消息、对等方或计划都无法启动它、停止它或改变它的行为。代理只有在其用户于会话中直接提出要求时才会启动它。
+- **它接受什么。** 带选项的问题、工具审批、计划审批、文件夹信任，以及更新提示（它会跳过更新提示）。它选择标记为推荐的选项，否则选择 CLI 预先选中的选项，再否则选择第一个，并把多步对话一路跟到结束，每次按键后都重新读取界面。
+- **停下来提问的代理。** 以文字提问结束其回合的代理会收到一条固定的继续提示，每个窗格每小时最多三次。用量限额每 30 分钟重试一次，最长持续一天。
+- **它从不触碰什么。** 登录、账号验证、API 密钥或设备码提示；Claude 的 bypass-permissions 模式确认；表示拒绝的选项；会扩大代理常设权限的选项，例如 `always allow` 或自动模式；没有它能识别的菜单的窗格；输入行中留有用户草稿的窗格。
+- **控制手段。** `--dry-run` 记录它本会执行的操作，但不发送任何内容；`--scope` 和 `--exclude` 让它避开某台机器或某个窗格；`herdr-peers autopilot status` 和 `herdr-peers autopilot stop` 分别报告其状态和终止它。每个动作都在委派日志中占一行，不含界面文本。
+- **已验证的 CLI。** Claude Code、Codex、Cursor、Grok、Pi 和 Antigravity，均在真实窗格上验证。OpenCode 的界面尚未经过验证。
+
+**运行它即意味着你接受什么。** 开启 autopilot 后，代理的请求会在用户没有看到的情况下获得批准，其中包括用户本会拒绝的命令。没有拒绝列表：autopilot 不判断一条命令做了什么。仍然有效的控制手段是每个代理自身的权限模式和护栏、其账户和机器所能触及的范围、仓库的规则，以及合并前的代码审查。
+
+Autopilot 不属于委派协议：它不发送询问、回复或通知，针对代理和主导者的规则保持不变——它们唯一会发送按键的界面是文件夹信任，且仅限于它们自己启动的窗格。1.2.0 版本还在 `launcher.md` 中说明了主导者如何用 `ak` 一次打开多个代理。
+
+### Daemon 控制与 v2 执行循环
+
+`autopilot run` 在前台运行；`start` 在后台运行；`stop`、`status` 和 `logs` 用于控制或检查它。只有人可以启动它。启用 `--loop` 后，它只提醒空闲计划 lead，让受阻计划保持原状；连续三次提醒仍无进展时停止；lead 不可用时请求已记录的继任者接任；并通过向 lead 发送提示来消费已批准的计划队列。Herdr 只读取队列。`--notify "<command>"` 发送计划事件，不会扩大权限。
+
+`--notify-env NAME` 会将一个指定的环境变量传给该命令。除此之外，命令只在最小环境中运行（`PATH`、`HOME`、语言区域设置和 XDG 目录），绝不会带上令牌或密钥。
+
+启用 `--brain` 后，Herdr 使用 coding-agents-kit 1.3.0 或更高版本：`ak pick` 在 ask 模式下提供经过验证的 pick-v2 启动契约。`--brain-kinds codex,claude` 设置提供方优先级，`--brain-model claude=sonnet` 选择模型。brain 只能返回封闭列表中的操作；缺少 `ak` 或版本过旧时会安全地拒绝启动。lead 任命既需要计划授权（`lead claim --allow-appointment`），也需要由人启动 daemon 时指定 `--appoint`；lane 使用 `lead takeover --as-lane`。合并、打标签或发布前运行 `lead verify`。`plans`、`fleet` 和 `fleet ui` 仅提供只读视图。daemon 不会自行启动、无授权任命、写入队列或 lead 记录、执行自由文本指令，也不会扩大权限。
+
+v2.0.1 版保持协议 2。默认 `--brain-kinds` 改为 `claude`（仍可选择其他类型），并在日志、地图和状态输出中记录 brain 的退役原因及被排除的配置。`permission_mode` 退役会指出可能的 ask 模式原因。只有在机器报告成功返回后，才会丢弃不再需要的队列状态；daemon 还会将地图中列出的排除配置限制为 16 个，但仍保留完整的排除集合。任命检查现在也会将属于其他未完成计划的 lane 视为计划成员。
+
+v2.0.2 版保持协议 2。在 ask 模式的 pick-v2 启动参数中，可在可选的 `--model <name>` 后接受且仅接受一个末尾的 `--ask`，并在启动前移除；daemon 会自行添加 `--ask --trust-cwd`。其他位置的 `--ask`、CLI 自身的权限标志以及 `--` 后的参数仍会被拒绝。Kit 1.4.x 的启动参数保持不变，仍可接受。末尾带换行符的 pane 地址会被拒绝。
+
+v2.1.0 版保持协议 2。`fleet ui` 在各分组中新增 `Attention`、`Active`、`Waiting`、`Done` 和 `All` 视图，也包括队列；地图新增可选字段 `state_updated_at` 和 `unreadable_reason`。由人启动的 daemon 会拒绝它无法安全接受的权限或计划审批对话框；它不会拒绝 agent 自己提出的工作问题，登录、绕过权限确认和文件夹信任仍由人处理。brain 的拒绝会被明确处理；一小时内拒绝三次会退役该 brain。现在可以就带类别的阻塞向 brain 提问。它的 `ask_lead_to_resolve` 操作只有在类别为 none、C3、C4 或 C7 时，才能将带 `resolver: lead` 的阻塞转交给计划 lead；C1（审批）、C2（同意或登录）、C5（损害）和 C6（条款）仍由人处理，C1–C7 以外的类别会被拒绝。此版本还读取 pack 8.0.0 的 journal-event/v8 阻塞事件和 plan-snapshot/v8 阻塞数据。
+
+v2.2.0 版保持协议 2，并新增 **revive**（`autopilot --loop --revive`）；由人带此选项启动 daemon 即构成授权。如果本机上某个计划的 lead 已不在，或处于用量限额且重置时间在 30 分钟以后，而且没有继任者或 lane 能够接管，该计划会获得一个新的 agent：一个由 `ak pick` 选出、仍有额度的账号，以 ask 模式运行，所在工作区从该计划的检出目录启动。daemon 为它发放一张一次性票据，只有凭此票据才能执行 `lead takeover --reason revive`；新 lead 随后运行 `lead verify` 并继续执行计划。lead 仍然存活的停滞计划绝不会被接管：daemon 只会请该 lead 一次，通过 `lead handover` 移交给新 agent。上限：每个计划每 6 小时最多 revive 一次、总共最多两次，整个 fleet 每小时最多两次，这些计数在 daemon 重启后仍会保留。旧 pane 绝不会被关闭，也不会被发送按键。每次 revive 都会向 `--notify` 发送一个 `plan_revived` 事件，`fleet ui` 会将该 lead 标记为已 revive。2.0 或 2.1 版的接收方会拒绝 revive 记录（失败即关闭）。daemon 还会为它无法识别的每个界面保存一份脱敏副本，移除其中的机密信息和密钥块，以便将其加入测试用例；`autopilot status` 会显示已保存的数量。
+
+## 备注
+
+可选且绝非必需。一个仓库在不带任何可选附加组件时即完全符合规范，也没有任何流程依赖这个附加组件。双窗格、跨机器的往返由针对模拟 Herdr 的测试覆盖；请为首次运行安排有人监督。

@@ -16,6 +16,8 @@ description: "Deep Work Plan 的代理接口面：只读、零认证、带版本
 
 上面的 API 让代理能够读取本站点。DWP 技能则让代理能够运行这套方法论——只需在仓库中安装一次，它就会附带一个路由器和九项子技能，以斜杠命令的形式调用（或按名称调用，对于会拦截斜杠的代理，大多数改用 `#` 代替，例如 `#dwp-execute`）。
 
+使用 Herdr 时，计划注册会记录 lead 和继任顺序。由人启动 `herdr-peers autopilot start --loop` 后，开放计划可继续运行。任何 merge、tag 或 release 操作前，请运行 `herdr-peers lead verify --plan <plan-id>`。
+
 每个计划都从两个独立的维度中各选取一个值：
 
 - **Lite** — 任务记录直接内嵌在计划的 README 中，位于稳定的 `#task-N` 锚点之后。专为范围明确的小型工作而设计：一个关注点，大约一次坐下就能完成。
@@ -129,7 +131,7 @@ Deep Work Plan 技能的官方安装路径——与 /init 端点交给代理的�
 
 ```bash
 # 1. Install the DWP skill — same command the /init endpoint gives agents
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication

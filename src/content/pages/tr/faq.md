@@ -42,7 +42,7 @@ Depo dosyalarını okuyan tüm ajanlarla çalışır. Claude Code ve OpenAI Code
 
 ### Nasıl kullanılır?
 
-Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
+Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.
 
 [Hızlı başlangıç](https://deepworkplan.com/tr/quickstart)
 
@@ -126,6 +126,18 @@ Evet, plan önceden onaylanmışsa, gerekli durum katmanını taşıyorsa ve aja
 
 [Gözetimsiz protokolü okuyun](https://deepworkplan.com/tr/spec/agent-protocol)
 
+### loop engineering nedir?
+
+Loop engineering yürütme döngüsünü kapatır: lead kaydı olan bir planın ardından, insanın başlattığı isteğe bağlı Herdr daemon’ı açık planı tamamlanana kadar sürdürebilir; duraklama, engel, lead kaybı veya tamamlanma durumlarını bildirir. Planın kayıtlı yetkileri içinde çalışır.
+
+### Deep Work Plan daemon gerektirir mi?
+
+Hayır. Yöntem ve planları Herdr veya daemon olmadan çalışır. Addon isteğe bağlıdır ve süreklilik ekler; ön koşul değildir.
+
+### Daemon asla ne yapamaz?
+
+Oturum açamaz, Claude’un izinleri atlama onayını kabul edemez, ajanın kalıcı izinlerini genişletemez ve merge, tag veya release işlemlerini gerçekleştiremez. Nudge yalnızca sabit bir devam etme istemi gönderir ve yetki vermez.
+
 ## Çoklu ajanlar ve v7
 
 ### Birden fazla ajan bir planda paralel olarak güvenle çalışabilir mi?
@@ -158,9 +170,9 @@ Bir görev, yalnızca kaydedilen kanıtlar kabul kriterlerinin her birini karş�
 
 [Kayıt katmanı spesifikasyonunu okuyun](https://deepworkplan.com/tr/spec/record-layer)
 
-### v6 planları v7 altında çalışmaya devam eder mi?
+### Mevcut planlar v8 altında nesillerini korur mu?
 
-Evet. Plan sözleşmeleri şema neslini açıkça bildirir (`plan-contract/v6.json` veya `plan-contract/v7.json`). Bir plan asla uçuş ortasında nesil değiştirmez. Mevcut v6 planları biçimlerini ve semantiklerini koruyarak v7 araçları altında kesintisiz devam eder.
+Evet. Yeni planlar varsayılan olarak `plan-contract/v8` kullanır. Mevcut v7, v6 ve v5 planları kaydedilmiş nesillerini korur ve güncel paketle çalışmayı sürdürür. Plan nesli yalnızca açık bir `/dwp-refine migrate` isteğiyle değişir.
 
 [Sözleşmeler hakkında okuyun](https://deepworkplan.com/tr/spec/record-layer)
 

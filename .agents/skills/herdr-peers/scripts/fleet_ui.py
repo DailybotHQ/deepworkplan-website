@@ -40,7 +40,19 @@ TICK = 1.0                 # seconds between two header redraws
 SCREEN_EVERY = 2.0         # seconds between two live screen reads in a detail panel
 SCREEN_LINES = 20
 MIN_W, MIN_H = 50, 12
+HEADER_ROWS = 4            # brand, counts, grouping tabs, facet tabs; then a rule; then the body
 GROUPINGS = ('plan', 'repo', 'machine', 'queue')
+# One facet model for every grouping: does it need me, is it moving, is it waiting, is it done.
+FACETS = ('attention', 'active', 'waiting', 'done', 'all')
+FOCUS = 'focus'            # the default view: attention and active together; never done
+FILTERS = (FOCUS,) + FACETS
+FACET_LABEL = {'attention': 'Attention', 'active': 'Active', 'waiting': 'Waiting', 'done': 'Done', 'all': 'All'}
+FACET_SHORT = {'attention': 'A', 'active': 'Ac', 'waiting': 'W', 'done': 'D', 'all': 'All'}
+STALE_PLAN_AFTER = 24 * 3600   # an open plan whose state has not moved for this long needs attention
+# Why a plan is unreadable, as its machine's report says (2.1.0 maps).
+UNREADABLE_WHY = {'missing': 'no state.json where its lead record points',
+                  'parse': 'its state.json does not parse (or is too large)',
+                  'shape': 'a state.json shape this helper does not read (an older or newer plan generation)'}
 QUEUE_MARK = {'queued': ('○', 'dim'), 'started': ('▶', 'accent'), 'done': ('✓', 'ok'), 'skipped': ('–', 'dim')}
 
 # Agent states as the map reports them, folded into what a human reads.
@@ -137,6 +149,16 @@ def duration(seconds):
     return '%dd' % (seconds // 86400)
 
 
+def span(seconds):
+    """A long stretch the way a human reads it: '2d 4h', '5h 12m', '40m'."""
+    seconds = max(0, int(seconds or 0))
+    if seconds >= 86400:
+        return '%dd %dh' % (seconds // 86400, seconds % 86400 // 3600)
+    if seconds >= 3600:
+        return '%dh %02dm' % (seconds // 3600, seconds % 3600 // 60)
+    return '%dm' % (seconds // 60)
+
+
 def parse_ts(stamp):
     """Seconds since the epoch of an ISO-8601 UTC stamp, or None."""
     if not isinstance(stamp, str):
@@ -229,7 +251,8 @@ class Agent(object):
 
 class Plan(object):
     __slots__ = ('key', 'machine', 'label', 'plan', 'cls', 'lead', 'epoch', 'situation',
-                 'done', 'total', 'current', 'repo', 'blocker_class', 'detail', 'members', 'search')
+                 'done', 'total', 'current', 'repo', 'blocker_class', 'detail', 'members', 'search',
+                 'moved', 'why', 'revived')
 
     def __init__(self, machine, label, row):
         self.machine, self.label = machine, label
@@ -246,6 +269,9 @@ class Plan(object):
         self.repo = clean(row.get('repo_root'), 400)
         self.blocker_class = clean(row.get('blocker_class'), 4) or None
         self.detail = row.get('detail') if isinstance(row.get('detail'), dict) else None
+        self.moved = parse_ts(row.get('state_updated_at'))  # when its state last changed (2.1.0 maps)
+        self.why = row.get('unreadable_reason') if row.get('unreadable_reason') in UNREADABLE_WHY else None
+        self.revived = row.get('revived') is True   # its lead came by a revive (2.2.0 maps)
         self.members = []  # (role, Agent)
         self.search = ' '.join([self.plan, self.label, self.repo, self.current or '',
                                 clean((self.detail or {}).get('title'), 200)]).lower()
@@ -297,6 +323,8 @@ class Index(object):
                           'after': clean(it.get('after'), 128) or None, 'lead': clean(it.get('lead'), 120) or None,
                           'ready': it.get('ready') is True, 'blocked': clean(it.get('blocked_reason'), 120) or None}
                          for it in q.get('items') or [] if isinstance(it, dict)]
+                for n, it in enumerate(items):
+                    it['pos'] = n + 1   # its place in the queue, kept when a view filters the rest out
                 queues.append({'repo': clean(q.get('repo_root'), 400), 'parallel': q.get('parallel') is True,
                                'invalid': q.get('invalid') is True, 'items': items})
             self.machines.append({'machine': machine, 'label': label,
@@ -305,7 +333,9 @@ class Index(object):
                                   'agents': agents, 'plans': plans, 'queues': queues})
             for q in queues:
                 for n, it in enumerate(q['items']):
-                    self.queue_pos['%s/%s' % (machine, it['plan'])] = (n + 1, len(q['items']), it['state'])
+                    # A plan that began while the queue still says queued counts as started.
+                    self.queue_pos['%s/%s' % (machine, it['plan'])] = (
+                        n + 1, len(q['items']), 'started' if queue_in_flight(it) else it['state'])
             self.agents.extend(agents)
             self.plans.extend(plans)
             for a in agents:
@@ -339,64 +369,219 @@ class Index(object):
 
 
 class Group(object):
-    __slots__ = ('key', 'kind', 'title', 'subtitle', 'plan', 'members', 'tone', 'queue_pos')
+    __slots__ = ('key', 'kind', 'title', 'subtitle', 'plan', 'members', 'tone', 'queue_pos', 'facet',
+                 'stale')
 
     def __init__(self, key, kind, title, subtitle='', plan=None, members=None, tone='normal'):
         self.key, self.kind, self.title, self.subtitle = key, kind, title, subtitle
         self.plan, self.members, self.tone = plan, members or [], tone
         self.queue_pos = None
+        self.facet = None
+        self.stale = None
 
 
 def _matches(text, needle):
     return not needle or needle in text
 
 
-def build_view(index, grouping='plan', needle=''):
-    """The groups shown for a grouping and a filter. Pure."""
+# --- facets: pure classification, one facet per item --------------------------------
+
+def wanted(facet):
+    """The facets a view shows."""
+    if facet == 'all':
+        return frozenset(FACETS[:4] + ('unreadable',))   # an unreadable plan shows only under All
+    if facet in FACETS:
+        return frozenset([facet])
+    return frozenset(('attention', 'active'))     # FOCUS, and anything unknown
+
+
+def stale_for(plan, now, stale_after=STALE_PLAN_AFTER):
+    """Seconds an open plan's state has not moved, when past the threshold; else None."""
+    if plan.cls != 'open' or plan.moved is None or now is None:
+        return None
+    still = now - plan.moved
+    return still if still > stale_after else None
+
+
+def plan_facet(plan, now=None, queue_state=None, stale_after=STALE_PLAN_AFTER):
+    """attention: blocked, stalled, no lead, a moved lead, or open with no movement
+    past the threshold — something the developer can act on now; active: open and
+    moving; waiting: queued, not started; done: completed; unreadable: the map
+    cannot say (shown only under All)."""
+    if plan.cls == 'completed':
+        return 'done'
+    if plan.cls == 'unreadable':
+        return 'unreadable'
+    if plan.needs_you or plan.cls != 'open':
+        return 'attention'
+    if queue_state == 'queued':
+        return 'waiting'
+    if stale_for(plan, now, stale_after) is not None:
+        return 'attention'
+    return 'active'
+
+
+def attention_order(plan, now=None):
+    """The order inside Attention: NO LEAD and blocked first, then the daemon's other
+    judgments (stalled, a moved lead), then no movement; nearest to done first,
+    and among the still ones the longest still first."""
+    pct = (plan.done or 0) / float(plan.total) if plan.total else 0.0
+    if plan.situation in ('plan_no_lead', 'plan_blocked') or plan.cls == 'blocked':
+        return (0, -pct, plan.plan)
+    if plan.needs_you:
+        return (1, -pct, plan.plan)
+    return (2, -(stale_for(plan, now) or 0), plan.plan)
+
+
+FACET_ORDER = {'attention': 0, 'active': 1, 'waiting': 2, 'done': 3, 'unreadable': 4}
+
+
+def agent_facet(agent):
+    """attention: waiting at a question or approval, or a state the map could not read;
+    active: working; waiting: free (idle or done). An agent is never done."""
+    return {'working': 'active', 'idle': 'waiting'}.get(agent.state, 'attention')
+
+
+def queue_in_flight(item):
+    """A queued item whose plan already began (the pack leaves it `queued` outside
+    Herdr; the report says 'started, queue not updated'): it is running."""
+    return item.get('state') == 'queued' and (item.get('blocked') or '').startswith('started')
+
+
+def queue_reason_blocks(reason):
+    return bool(reason) and not (reason.startswith('waiting') or reason.startswith('another plan')
+                                 or reason.startswith('started'))
+
+
+def queue_item_facet(item):
+    """attention: a queued item whose reason blocks it; active: started; waiting:
+    queued (ready, or waiting its turn); done: done or skipped."""
+    state = item.get('state')
+    if state == 'started' or queue_in_flight(item):
+        return 'active'
+    if state in ('done', 'skipped'):
+        return 'done'
+    if state == 'queued':
+        return 'attention' if queue_reason_blocks(item.get('blocked')) else 'waiting'
+    return 'attention'
+
+
+def _plan_units(index, needle, now):
+    """(facet, kind, payload) for every plan, and every queued plan the map has no
+    plan row for yet, that the search keeps."""
+    units = []
+    for plan in index.plans:
+        pos = index.queue_pos.get(plan.key)
+        f = plan_facet(plan, now, pos[2] if pos else None)
+        if needle and not _matches(plan.search, needle) \
+                and not any(_matches(a.search, needle) for _, a in plan.members):
+            continue
+        units.append((f, 'plan', plan))
+    for m in index.machines:
+        for q in m.get('queues') or []:
+            for n, it in enumerate(q['items']):
+                key = '%s/%s' % (m['machine'], it['plan'])
+                if it['state'] != 'queued' or key in index.plan_by_key:
+                    continue
+                if needle and not _matches(('%s %s %s' % (it['plan'], q['repo'], m['label'])).lower(), needle):
+                    continue
+                units.append((queue_item_facet(it), 'queued', (m, q, it, n + 1)))
+    return units
+
+
+def facet_counts(index, grouping='plan', needle='', now=None):
+    """How many items each facet holds in a grouping, under the search. Pure.
+    Plans count plans (and queued plans not yet on the map; unreadable plans count
+    under All and in `unreadable`, never under Attention); repositories and
+    machines count agents (and, by machine, each machine that did not answer, as
+    attention); queues count items (and each invalid queue file, as attention)."""
+    out = dict((f, 0) for f in FACETS + ('unreadable',))
+    if index is None:
+        return out
     needle = (needle or '').strip().lower()
+    if grouping == 'plan':
+        facets = [f for f, _, _ in _plan_units(index, needle, now)]
+    elif grouping == 'queue':
+        facets = []
+        for m in index.machines:
+            for q in m.get('queues') or []:
+                hit = not needle or needle in (q['repo'] + ' ' + m['label']).lower()
+                if q['invalid'] and (hit or not needle):
+                    facets.append('attention')
+                facets.extend(queue_item_facet(it) for it in q['items']
+                              if hit or needle in it['plan'].lower())
+    else:
+        facets = [agent_facet(a) for a in index.agents if _matches(a.search, needle)]
+        if grouping == 'machine':
+            facets.extend('attention' for m in index.machines if m['agents_state'] != 'ok'
+                          and _matches(m['label'].lower(), needle))
+    for f in facets:
+        out[f] += 1
+    out['all'] = len(facets)
+    return out
+
+
+def build_view(index, grouping='plan', needle='', facet=FOCUS, now=None):
+    """The groups shown for a grouping, a facet and a search. Pure."""
+    needle = (needle or '').strip().lower()
+    want = wanted(facet)
     groups = []
     if grouping == 'plan':
-        in_plan = set()
-        plans = sorted(index.plans, key=lambda p: (p.rank, p.label, p.plan))
-        for plan in plans:
+        in_plan, unreadable = set(), []   # unreadable plans: a dimmed group at the very end (All only)
+        units = _plan_units(index, needle, now)
+        shown = [(f, p) for f, kind, p in units if kind == 'plan' and f in want]
+        for f, plan in sorted(shown, key=lambda u: (FACET_ORDER.get(u[0], 5),) + (
+                attention_order(u[1], now) if u[0] == 'attention' else (0, u[1].label, u[1].plan))):
             members = [(r, a) for r, a in plan.members if _matches(a.search, needle)]
-            if needle and not members and not _matches(plan.search, needle):
-                continue
-            if plan.cls == 'completed' and not members and not needle:
-                continue  # a finished plan with nobody on it is history, not the fleet
+            if not needle:
+                members = list(plan.members)
             for _, a in plan.members:
                 in_plan.add(a.key)
-            tone = 'bad' if plan.needs_you else ('dim' if plan.cls == 'completed' else 'normal')
+            tone = 'bad' if f == 'attention' else ('dim' if plan.cls in ('completed', 'unreadable') else 'normal')
             group = Group(plan.key, 'plan', plan.plan, plan.label, plan, members, tone)
             group.queue_pos = index.queue_pos.get(plan.key)
-            groups.append(group)
-        busy = [('', a) for a in index.agents if a.key not in in_plan and a.state != 'idle'
-                and _matches(a.search, needle)]
-        idle = [('', a) for a in index.agents if a.key not in in_plan and a.state == 'idle'
-                and _matches(a.search, needle)]
+            group.facet = f
+            group.stale = stale_for(plan, now)
+            (unreadable if f == 'unreadable' else groups).append(group)
+        for f, kind, (m, q, it, pos) in [u for u in units if u[1] == 'queued' and u[0] in want]:
+            name = os.path.basename(q['repo'].rstrip('/')) or '(repository)'
+            reason = 'ready — starts next' if it['ready'] else (it['blocked'] or 'waiting its turn')
+            g = Group('queued:%s/%s' % (m['machine'], it['plan']), 'queued', it['plan'],
+                      '%s · %s · queue %d/%d · %s' % (m['label'], name, pos, len(q['items']), reason),
+                      None, [], 'bad' if f == 'attention' else 'normal')
+            g.facet = f
+            groups.append(g)
+        outside = [a for a in index.agents if a.key not in in_plan and _matches(a.search, needle)
+                   and agent_facet(a) in want]
+        busy = [('', a) for a in outside if a.state != 'idle']
+        idle = [('', a) for a in outside if a.state == 'idle']
         if busy:
             groups.append(Group('busy', 'busy', 'Working outside any plan', '', None,
                                 sorted(busy, key=lambda m: m[1].key)))
         if idle:
             groups.append(Group('idle', 'idle', 'Doing nothing — free to take work', '', None,
                                 sorted(idle, key=lambda m: m[1].key), 'free'))
+        groups.extend(unreadable)
     elif grouping == 'queue':
         for m in index.machines:
             for q in m.get('queues') or []:
-                if needle and not any(needle in it['plan'].lower() for it in q['items']) \
-                        and needle not in (q['repo'] + ' ' + m['label']).lower():
+                hit = not needle or needle in (q['repo'] + ' ' + m['label']).lower()
+                items = [it for it in q['items'] if (hit or needle in it['plan'].lower())
+                         and queue_item_facet(it) in want]
+                bad = q['invalid'] and 'attention' in want and hit
+                if not items and not bad and not (facet == 'all' and hit):
                     continue
                 name = os.path.basename(q['repo'].rstrip('/')) or '(repository)'
                 sub = '%s · %s%s' % (m['label'], 'parallel' if q['parallel'] else 'one at a time',
                                       ' · INVALID queue file' if q['invalid'] else '')
                 g = Group('queue:%s:%s' % (m['machine'], q['repo']), 'queue', name, sub, None, [],
                           'bad' if q['invalid'] else 'normal')
-                g.plan = (m['machine'], q['items'])
+                g.plan = (m['machine'], items)
                 groups.append(g)
     elif grouping == 'repo':
         repos = {}
         for a in index.agents:
-            if _matches(a.search, needle):
+            if _matches(a.search, needle) and agent_facet(a) in want:
                 repos.setdefault(a.repo or '', []).append(('', a))
         for repo in sorted(repos, key=lambda r: (r == '', os.path.basename(r).lower(), r)):
             members = sorted(repos[repo], key=lambda m: (STATE_ORDER.index(m[1].state), m[1].key))
@@ -408,15 +593,68 @@ def build_view(index, grouping='plan', needle=''):
                                 None, members))
     else:
         for m in index.machines:
-            members = [('', a) for a in m['agents'] if _matches(a.search, needle)]
-            if needle and not members:
+            down = m['agents_state'] != 'ok'
+            members = [('', a) for a in m['agents'] if _matches(a.search, needle) and agent_facet(a) in want]
+            if down:
+                if 'attention' not in want or (needle and not _matches(m['label'].lower(), needle)):
+                    continue
+            elif not members and (needle or facet != 'all'):
                 continue
-            sub = 'unreachable' if m['agents_state'] != 'ok' else '%d agents' % len(m['agents'])
-            tone = 'dim' if m['agents_state'] != 'ok' else 'normal'
+            sub = 'unreachable' if down else '%d agents' % len(m['agents'])
             groups.append(Group('machine:' + m['machine'], 'machine', m['label'], sub, None,
                                 sorted(members, key=lambda x: (STATE_ORDER.index(x[1].state), x[1].key)),
-                                tone))
+                                'dim' if down else 'normal'))
     return groups
+
+
+def unreadable_hint(grouping, facet, counts):
+    """The one quiet line Attention shows about plans it leaves out: unreadable
+    plans live under All."""
+    n = (counts or {}).get('unreadable', 0)
+    if grouping != 'plan' or not n or facet not in (FOCUS, 'attention'):
+        return None
+    return '%d unreadable plan%s: see All (5)' % (n, '' if n == 1 else 's')
+
+
+def empty_note(grouping, facet, counts, needle='', free=0):
+    """What an empty view says: why it is empty, and where the rest is. `free`: agents
+    doing nothing, which the Plans view lists under Waiting."""
+    c = counts or {}
+    if needle:
+        return 'nothing here matches "%s" · %d in All' % (needle, c.get('all', 0))
+    if grouping == 'plan':
+        notes = {
+            FOCUS: 'Nothing needs you and nothing is moving · %d waiting · %d done' % (c.get('waiting', 0),
+                                                                                       c.get('done', 0)),
+            'attention': 'Nothing needs you · %d plan%s moving' % (c.get('active', 0),
+                                                                   '' if c.get('active', 0) == 1 else 's'),
+            'active': 'Nothing is moving · %d need%s you · %d waiting' % (
+                c.get('attention', 0), 's' if c.get('attention', 0) == 1 else '', c.get('waiting', 0)),
+            'waiting': 'No plan is queued',
+            'done': 'No plan has finished yet',
+            'all': 'The map lists no plan'}
+        if free and facet in (FOCUS, 'attention', 'active'):
+            return notes.get(facet, notes[FOCUS]) + ' · %d free agent%s under Waiting' % (
+                free, '' if free == 1 else 's')
+    elif grouping == 'queue':
+        notes = {
+            FOCUS: 'No queued plan is stuck or started · %d waiting · %d done' % (c.get('waiting', 0),
+                                                                                c.get('done', 0)),
+            'attention': 'No queued plan is stuck · %d started · %d waiting' % (c.get('active', 0),
+                                                                              c.get('waiting', 0)),
+            'active': 'No queued plan has started · %d waiting' % c.get('waiting', 0),
+            'waiting': 'Nothing is waiting in a queue',
+            'done': 'No queued plan has finished',
+            'all': 'No repository has a plan queue'}
+    else:
+        notes = {
+            FOCUS: 'No agent needs you or is working · %d free' % c.get('waiting', 0),
+            'attention': 'No agent needs you · %d working' % c.get('active', 0),
+            'active': 'No agent is working · %d free' % c.get('waiting', 0),
+            'waiting': 'No agent is free · %d working' % c.get('active', 0),
+            'done': 'Agents are never done: the free ones are under Waiting',
+            'all': 'The map lists no agent'}
+    return notes.get(facet, notes[FOCUS])
 
 
 # ======================================================================= view
@@ -487,6 +725,8 @@ def group_header(g, width):
         badge = SITUATIONS.get(p.situation) or ('BLOCKED' if p.cls == 'blocked' else p.cls.upper())
         tone = 'bad' if p.needs_you else ('ok' if p.cls == 'open' else 'dim')
         line.add('▌', tone).add(' %s ' % badge, tone + '_badge').add(' ')
+        if p.revived:
+            line.add('↻ revived ', 'accent')
         title = clean((p.detail or {}).get('title'), 120)
         right = []
         if p.total:
@@ -509,10 +749,15 @@ def group_header(g, width):
         for text, style in right:
             line.add(text, style)
     else:
-        mark = {'idle': '○', 'busy': '●', 'repo': '▤', 'machine': '▣', 'queue': '☰'}.get(g.kind, '▸')
-        line.add('▌', 'free' if g.tone == 'free' else 'accent')
-        line.add(' %s %s ' % (mark, g.title), 'group_title')
-        line.add('(%d)' % (len(g.plan[1]) if g.kind == 'queue' else len(g.members)), 'dim')
+        mark = {'idle': '○', 'busy': '●', 'repo': '▤', 'machine': '▣', 'queue': '☰',
+                'queued': '◌'}.get(g.kind, '▸')
+        line.add('▌', 'bad' if g.tone == 'bad' else ('free' if g.tone == 'free' else 'accent'))
+        if g.kind == 'queued':
+            line.add(' QUEUED ', 'bad_badge' if g.tone == 'bad' else 'dim_badge').add(' ')
+            line.add('%s ' % g.title, 'group_title')
+        else:
+            line.add(' %s %s ' % (mark, g.title), 'group_title')
+            line.add('(%d)' % (len(g.plan[1]) if g.kind == 'queue' else len(g.members)), 'dim')
         if g.subtitle:
             line.add('  ' + g.subtitle, 'dim')
     return line
@@ -526,6 +771,11 @@ def render_list(groups, now, width):
         lines.append(group_header(g, width))
         if g.kind == 'plan':
             p = g.plan
+            if p.cls == 'unreadable':
+                lines.append(Line(target=('plan', g.key)).add(
+                    '    ? unreadable: %s' % UNREADABLE_WHY.get(p.why, 'the report does not say why'), 'dim'))
+            if getattr(g, 'stale', None):
+                lines.append(Line(target=('plan', g.key)).add('    ◷ no movement for %s' % span(g.stale), 'bad'))
             if p.current and p.cls != 'completed':
                 lines.append(Line(target=('plan', g.key)).add('    ▶ now: ', 'accent').add(p.current, 'title'))
             block = (p.detail or {}).get('blocker') if p.detail else None
@@ -536,15 +786,15 @@ def render_list(groups, now, width):
                 lines.append(Line(target=('plan', g.key)).add('    nobody on the map works on this plan', 'dim'))
         if g.kind == 'queue':
             machine, items = g.plan
-            for n, it in enumerate(items):
+            for it in items:
                 mark, style = QUEUE_MARK.get(it['state'], ('?', 'dim'))
                 line = Line(target=('plan', '%s/%s' % (machine, it['plan'])))
-                line.add('    %2d. ' % (n + 1), 'dim').add(mark + ' ', style).add(pad(it['plan'], 44), 'group_title')
+                line.add('    %2d. ' % it.get('pos', 0), 'dim').add(mark + ' ', style).add(pad(it['plan'], 44), 'group_title')
                 line.add(pad(it['state'], 9), style)
                 if it['ready']:
                     line.add('ready — starts next', 'ok')
                 elif it['blocked'] and it['state'] == 'queued':
-                    waiting = it['blocked'].startswith('waiting') or it['blocked'].startswith('another plan')
+                    waiting = not queue_reason_blocks(it['blocked'])
                     line.add(it['blocked'], 'dim' if waiting else 'bad')
                 if it['lead']:
                     line.add('  lead ' + it['lead'], 'dim')
@@ -555,8 +805,103 @@ def render_list(groups, now, width):
     return [fit_line(l, width) for l in lines]
 
 
-def render_header(index, age, grouping, needle, width, error=None):
-    """The two header rows and the tab row."""
+def render_facets(facet, counts, width, grouping='plan'):
+    """The facet row: (Line, spans), spans = [(x0, x1, facet)] for the mouse. The full
+    form ('1 Attention 2 · 2 Active 7 …') falls back to 'A2 Ac7 W3 D21 All33' when
+    narrow. Only Attention takes the alert tone, and only when it holds something."""
+    counts = counts or {}
+    want = wanted(facet)
+
+    def build(short, hints=True):
+        line, spans, x = Line().add(' '), [], 1
+        for n, f in enumerate(FACETS):
+            if n and not short:
+                line.add(' · ', 'dim')
+                x += 3
+            elif n:
+                line.add(' ')
+                x += 1
+            k = counts.get(f, 0)
+            text = ('%s%d' % (FACET_SHORT[f], k)) if short else (' %d %s %d ' % (n + 1, FACET_LABEL[f], k))
+            on = (f in want and facet != 'all') or f == facet
+            if f == 'attention' and k:
+                style = 'bad_badge' if on else 'bad'
+            elif on:
+                style = 'tab_on'
+            elif f == 'done' and grouping in ('repo', 'machine'):
+                style = 'dim'
+            else:
+                style = 'tab' if not short else 'dim'
+            line.add(text, style)
+            spans.append((x, x + width_of(text), f))
+            x += width_of(text)
+        if facet == FOCUS and not short and hints:
+            line.add('   needs you + moving', 'dim')
+        if not short and hints:
+            line.add('   ←→ 1-5', 'dim')
+        return line, spans
+
+    for short, hints in ((False, True), (False, False), (True, False)):
+        line, spans = build(short, hints)
+        if sum(width_of(t) for t, _ in line.segs) <= width:
+            break
+    return fit_line(line, width), spans
+
+
+def header_counts(counts, plans, brain, width):
+    """The second header row: agent states, the plans summary, the brain. When it
+    does not fit it degrades in steps — the brain's details go first, then the
+    states compact, then the brain — so the plans summary is never cut."""
+    def states(compact):
+        segs = []
+        for state, label in (('working', 'working'), ('waiting', 'waiting'), ('idle', 'idle'),
+                             ('unknown', 'unknown')):
+            n = counts.get(state, 0)
+            mark = {'working': '●', 'waiting': '◆', 'idle': '○', 'unknown': '?'}[state]
+            segs.append((('%s%d ' % (mark, n)) if compact else ('%s %d %s   ' % (mark, n, label)),
+                         state if n else 'dim'))
+        return segs
+
+    def plan_summary(short=False):
+        return [('│ ' if short else '│ plans: ', 'dim'),
+                ('%d need you' % plans.get('needs_you', 0), 'bad' if plans.get('needs_you') else 'dim'),
+                (' · %d running · %d done   ' % (plans.get('open', 0), plans.get('completed', 0)), 'dim')]
+
+    def brain_segs(level):
+        if not brain or level in ('none', 'bare'):
+            return []
+        bstate = clean(brain.get('state'), 12)
+        segs = [('│ brain ', 'dim'), ('◎ ', 'working' if bstate == 'ready' else 'warn')]
+        if level == 'min':
+            return segs + [(bstate, 'accent')]
+        segs.append(('%s %s %s' % (clean(brain.get('kind'), 12) or '-', clean(brain.get('profile'), 24) or '',
+                                   bstate), 'accent'))
+        if level == 'short':
+            return segs
+        last = brain.get('last') if isinstance(brain.get('last'), dict) else None
+        if isinstance(brain.get('asked_last_hour'), int):
+            segs.append((' · %d asked/h' % brain['asked_last_hour'], 'dim'))
+        if last:
+            segs.append((' · last: %s %s' % (clean(last.get('action'), 24), clean(last.get('plan'), 40)), 'dim'))
+        retired = brain.get('retired') if isinstance(brain.get('retired'), dict) else None
+        if retired and bstate != 'ready':
+            segs.append((' · retired: %s' % clean(retired.get('why'), 20), 'warn'))
+        excluded = [clean(p, 24) for p in brain.get('excluded') or [] if isinstance(p, str)]
+        if excluded:
+            segs.append((' · excluded: %s' % clean(','.join(excluded), 60), 'warn'))
+        return segs
+
+    line = None
+    for compact, level in ((False, 'full'), (False, 'short'), (True, 'short'), (True, 'min'), (True, 'none'),
+                           (True, 'bare')):
+        line = Line([(' ', 'normal')] + states(compact) + plan_summary(level == 'bare') + brain_segs(level))
+        if sum(width_of(t) for t, _ in line.segs[:-1]) + width_of(line.segs[-1][0].rstrip()) <= width:
+            break
+    return line
+
+
+def render_header(index, age, grouping, needle, width, error=None, facet=FOCUS, facet_counts=None):
+    """The two header rows, the tab row and the facet row."""
     counts, plans, answering = index.counts() if index else ({}, {}, 0)
     stale = age is not None and age > STALE_AFTER
     tone = 'bad' if stale or age is None else ('warn' if age > AGING_AFTER else 'ok')
@@ -574,34 +919,16 @@ def render_header(index, age, grouping, needle, width, error=None):
         used = sum(width_of(t) for t, _ in top.segs)
         if used + width_of(right) < width:
             top.add(' ' * (width - used - width_of(right))).add(right, 'dim')
-    second = Line().add(' ')
-    for state, label in (('working', 'working'), ('waiting', 'waiting'), ('idle', 'idle'),
-                         ('unknown', 'unknown')):
-        n = counts.get(state, 0)
-        mark = {'working': '●', 'waiting': '◆', 'idle': '○', 'unknown': '?'}[state]
-        second.add('%s %d %s   ' % (mark, n, label), state if n else 'dim')
     brain = ((index.daemon or {}).get('brain') if index else None)
-    if isinstance(brain, dict):
-        bstate = clean(brain.get('state'), 12)
-        second.add('│ brain ', 'dim').add('◎ ', 'working' if bstate == 'ready' else 'warn')
-        second.add('%s %s %s' % (clean(brain.get('kind'), 12) or '-', clean(brain.get('profile'), 24) or '',
-                                 bstate), 'accent')
-        last = brain.get('last') if isinstance(brain.get('last'), dict) else None
-        if isinstance(brain.get('asked_last_hour'), int):
-            second.add(' · %d asked/h' % brain['asked_last_hour'], 'dim')
-        if last:
-            second.add(' · last: %s %s' % (clean(last.get('action'), 24), clean(last.get('plan'), 40)), 'dim')
-        second.add('   ')
-    second.add('│ plans: ', 'dim')
-    second.add('%d need you' % plans.get('needs_you', 0), 'bad' if plans.get('needs_you') else 'dim')
-    second.add(' · %d running · %d done' % (plans.get('open', 0), plans.get('completed', 0)), 'dim')
+    second = header_counts(counts, plans, brain if isinstance(brain, dict) else None, width)
     tabs = Line().add(' ')
     for key, label in (('plan', 'Plans'), ('repo', 'Repos'), ('machine', 'Machines'), ('queue', 'Queues')):
         style = 'tab_on' if key == grouping else 'tab'
         tabs.add(' %s %s ' % ({'queue': 'u'}.get(key, label[0].lower()), label), style).add(' ')
     if needle:
         tabs.add('   filter: ', 'dim').add(needle, 'accent')
-    return [fit_line(l, width) for l in (top, second, tabs)]
+    facets, _ = render_facets(facet, facet_counts, width, grouping)
+    return [fit_line(l, width) for l in (top, second, tabs)] + [facets]
 
 
 def render_plan(plan, now, width):
@@ -690,7 +1017,7 @@ def render_agent(a, index, now, width, screen=None, screen_note=None):
 
 
 def footer(mode, width, focus_ok=False):
-    keys = {'list': '↑↓ move  ⏎ open  p/r/m group  / filter  ? help  q quit',
+    keys = {'list': '↑↓ move  ⏎ open  ←→ 1-5 view  p/r/m/u group  / filter  ? help  q quit',
             'plan': '↑↓ scroll  ⏎ agent  esc back  q quit',
             'agent': '↑↓ scroll  %s esc back  q quit' % ('f focus pane ' if focus_ok else ''),
             'help': 'esc back  q quit'}[mode]
@@ -707,6 +1034,9 @@ HELP = [
     '   plans that need you first; agents working outside plans; agents doing nothing.',
     'r  group by repository     m  group by machine     u  each repository\'s plan queue',
     '/  filter (pane, plan, repository, branch, title, machine)   esc clears it',
+    '←→ [ ]  cycle the view   1-5  Attention, Active, Waiting, Done, All (per grouping, kept)',
+    '   Attention: needs you (blocked, stalled, no lead, no movement for 24 h, unreachable).',
+    '   Active: moving. Waiting: queued or free. Done: finished. The default is Attention + Active.',
     '⏎ or click  open a plan or an agent      f  focus that agent\'s pane (Herdr)',
     '↑↓ j k  move   PgUp PgDn  page   g G  top / bottom   q  quit',
     '',
@@ -796,11 +1126,15 @@ class App(object):
     """The watcher. Drives a Term: `size()`, `draw(y, line)`, `flush()`,
     `read_key(timeout) -> str | None`, `last_mouse() -> (x, y) | None`."""
 
-    def __init__(self, term, source, link_factory=HerdrLink, clock=time.time, grouping='plan'):
+    def __init__(self, term, source, link_factory=HerdrLink, clock=time.time, grouping='plan', facet=FOCUS):
         self.term, self.source, self.clock = term, source, clock
         self.link_factory = link_factory
         self.link = None
         self.grouping = grouping if grouping in GROUPINGS else 'plan'
+        # The view of each grouping, kept for the session.
+        self.facets = dict((g, facet if facet in FILTERS else FOCUS) for g in GROUPINGS)
+        self.counts = dict((f, 0) for f in FACETS)
+        self.facet_spans = []
         self.needle, self.typing = '', False
         self.mode = 'list'            # list, plan, agent, help
         self.stack = []               # previous (mode, target, scroll)
@@ -824,16 +1158,37 @@ class App(object):
             self.link = self.link_factory(self.source.fleet) if self.source.fleet else None
             self.dirty = True
 
+    @property
+    def facet(self):
+        return self.facets[self.grouping]
+
+    def set_facet(self, facet):
+        if facet in FILTERS and facet != self.facet:
+            self.facets[self.grouping] = facet
+            self.sel_target, self.sel, self.scroll = None, 0, 0
+        self.dirty = True
+
+    def step_facet(self, step):
+        """Cycle: the default view, then each facet."""
+        n = FILTERS.index(self.facet) if self.facet in FILTERS else 0
+        self.set_facet(FILTERS[(n + step) % len(FILTERS)])
+
     def rebuild(self, now):
         width = self.width
+        # Counts and views are built here, once per change; a tick only redraws them.
+        self.counts = facet_counts(self.index, self.grouping, self.needle, now)
         if self.mode == 'list':
-            self.groups = build_view(self.index, self.grouping, self.needle) if self.index else []
+            self.groups = build_view(self.index, self.grouping, self.needle, self.facet, now) \
+                if self.index else []
             self.lines = render_list(self.groups, now, width)
             if not self.lines:
-                note = ('no agent matches "%s"' % self.needle) if self.needle else (
+                note = empty_note(self.grouping, self.facet, self.counts, self.needle,
+                                  self.index.counts()[0].get('idle', 0)) if self.index else \
                     'no map on this machine yet — start `herdr-peers autopilot --loop`'
-                    if self.index is None else 'the map lists no agent')
                 self.lines = [fit_line(Line().add('  ' + note, 'dim'), width)]
+            hint = unreadable_hint(self.grouping, self.facet, self.counts) if self.index else None
+            if hint:
+                self.lines.append(fit_line(Line().add('  ◌ ' + hint, 'dim'), width))
             self.place_selection()
         elif self.mode == 'plan':
             plan = self.index.plan_by_key.get(self.target[1]) if self.index else None
@@ -862,7 +1217,7 @@ class App(object):
 
     # -- drawing -----------------------------------------------------------
     def body_rows(self):
-        return max(1, self.height - 5)
+        return max(1, self.height - HEADER_ROWS - 2)
 
     def draw(self, now):
         w, h = self.term.size()
@@ -875,14 +1230,17 @@ class App(object):
             self.term.flush()
             return
         age = self.source.age(now)
+        if self.dirty:
+            self.rebuild(now)
         header = render_header(self.index, age, self.grouping,
-                               self.needle + ('▏' if self.typing else ''), w, self.source.error)
+                               self.needle + ('▏' if self.typing else ''), w, self.source.error,
+                               self.facet, self.counts)
+        self.facet_spans = render_facets(self.facet, self.counts, w, self.grouping)[1]
         for y, line in enumerate(header):
             self.term.draw(y, line)
         if self.dirty:
-            self.rebuild(now)
             self.dirty = False
-            self.term.draw(3, fit_line(Line().add('─' * w, 'rule'), w))
+            self.term.draw(HEADER_ROWS, fit_line(Line().add('─' * w, 'rule'), w))
             rows = self.body_rows()
             if self.mode == 'list':
                 if self.sel < self.scroll:
@@ -895,7 +1253,7 @@ class App(object):
                 line = self.lines[at] if at < len(self.lines) else fit_line(Line(), w)
                 if self.mode == 'list' and at == self.sel and line.target:
                     line = Line([(t, 'selected') for t, _ in line.segs], line.target)
-                self.term.draw(4 + i, line)
+                self.term.draw(HEADER_ROWS + 1 + i, line)
             more = len(self.lines) - self.scroll - rows
             status = Line().add(' ' + (self.message or ''), 'warn')
             if more > 0:
@@ -977,6 +1335,12 @@ class App(object):
             self.move(-10 ** 6)
         elif key == 'G':
             self.move(10 ** 6)
+        elif key in ('left', '[') and self.mode == 'list':
+            self.step_facet(-1)
+        elif key in ('right', ']') and self.mode == 'list':
+            self.step_facet(1)
+        elif key in ('1', '2', '3', '4', '5') and self.mode == 'list':
+            self.set_facet(FACETS[int(key) - 1])
         elif key in ('p', 'r', 'm', 'u') and self.mode == 'list':
             self.grouping = {'p': 'plan', 'r': 'repo', 'm': 'machine', 'u': 'queue'}[key]
             self.sel_target, self.sel, self.scroll, self.dirty = None, 0, 0, True
@@ -1015,7 +1379,12 @@ class App(object):
         if not event:
             return
         x, y, kind = event
-        row = y - 4
+        if y == HEADER_ROWS - 1 and self.mode == 'list' and kind in ('click', 'double'):
+            for x0, x1, facet in self.facet_spans:
+                if x0 <= x < x1:
+                    self.set_facet(facet)
+            return
+        row = y - HEADER_ROWS - 1
         if row < 0 or row >= self.body_rows():
             return
         at = self.scroll + row
@@ -1177,7 +1546,7 @@ class CursesTerm(object):
                     '\x08': 'backspace', '\t': 'tab'}.get(ch, ch)
         names = {c.KEY_UP: 'up', c.KEY_DOWN: 'down', c.KEY_PPAGE: 'pgup', c.KEY_NPAGE: 'pgdn',
                  c.KEY_ENTER: 'enter', c.KEY_BACKSPACE: 'backspace', c.KEY_RESIZE: 'resize',
-                 c.KEY_HOME: 'g', c.KEY_END: 'G'}
+                 c.KEY_HOME: 'g', c.KEY_END: 'G', c.KEY_LEFT: 'left', c.KEY_RIGHT: 'right'}
         if ch == c.KEY_MOUSE:
             try:
                 _id, x, y, _z, state = c.getmouse()
@@ -1200,31 +1569,41 @@ class CursesTerm(object):
         return self.mouse
 
 
-def snapshot(source, now, width=100, grouping='plan'):
+def snapshot(source, now, width=100, grouping='plan', facet=FOCUS):
     """The fleet view as plain text, once: for agents, pipes and checks."""
     source.poll()
     index = Index(source.fleet) if source.fleet else None
+    counts = facet_counts(index, grouping, '', now)
     out = [l.text().rstrip() for l in render_header(index, source.age(now), grouping, '', width,
-                                                     source.error)]
+                                                     source.error, facet, counts)]
     out.append('─' * width)
     if index is None:
         out.append('  no map on this machine yet — start `herdr-peers autopilot --loop`')
     else:
-        out.extend(l.text().rstrip() for l in render_list(build_view(index, grouping), now, width))
-        for plan in sorted(index.plans, key=lambda p: (p.rank, p.plan)):
+        groups = build_view(index, grouping, '', facet, now)
+        lines = render_list(groups, now, width)
+        if lines:
+            out.extend(l.text().rstrip() for l in lines)
+        else:
+            out.append('  ' + empty_note(grouping, facet, counts, '', index.counts()[0].get('idle', 0)))
+        hint = unreadable_hint(grouping, facet, counts)
+        if hint:
+            out.append('  ◌ ' + hint)
+        shown = [g.plan for g in groups if g.kind == 'plan']
+        for plan in sorted(shown, key=lambda p: (p.rank, p.plan)):
             if plan.cls in ('open', 'blocked'):
                 out.append('')
                 out.extend(l.text().rstrip() for l in render_plan(plan, now, width))
     return '\n'.join(out).rstrip() + '\n'
 
 
-def run_curses(path, grouping='plan'):
+def run_curses(path, grouping='plan', facet=FOCUS):
     """Start the live watcher in this terminal."""
     import curses
 
     def main(stdscr):
         os.environ.setdefault('ESCDELAY', '25')
-        app = App(CursesTerm(curses, stdscr), FileSource(path), grouping=grouping)
+        app = App(CursesTerm(curses, stdscr), FileSource(path), grouping=grouping, facet=facet)
         return app.run()
 
     os.environ.setdefault('ESCDELAY', '25')

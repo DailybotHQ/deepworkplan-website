@@ -13,7 +13,7 @@ export const id: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — eksekusi terstruktur untuk AI coding agent',
   siteDescription:
-    'Deep Work Plan adalah pengembangan berbasis spesifikasi di mana repositori menjadi harness: tugas atomik, gerbang validasi, dan multi-agen yang aman.',
+    'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai. Efisiensi terukur dinyatakan dalam byte instruksi per alur.',
 
   // Navigation
   nav: {
@@ -97,14 +97,14 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — eksekusi terstruktur untuk AI coding agent',
       description:
-        'Deep Work Plan menghadirkan pengembangan berbasis spesifikasi ke agen AI. Ubah repositori menjadi harness tahan lama untuk eksekusi dan delegasi multi-agen.',
+        'Spec-first, loop tertutup: Deep Work Plan menjadikan repositori Anda harness bagi AI coding agent; tiap rencana berjalan tuntas di loop yang dimulai manusia.',
     },
     hero: {
       badge: 'Metodologi terbuka · MIT · Agnostik terhadap agent',
-      title: 'Model itu penting.',
-      titleEmphasis: 'Konteks lebih penting.',
+      leadSentence:
+        'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
       subtitle:
-        'Deep Work Plan mengubah repositori apa pun menjadi lingkungan terstruktur — konteks, pagar pengaman, dan rencana yang tahan lama — tempat agen coding mana pun mengeksekusi dengan presisi dan efisien serta menyelesaikan kerja jangka panjang.',
+        'Deep Work Plan mengubah repositori apa pun menjadi harness — konteks, pagar pengaman, dan rencana yang tahan lama dengan gerbang validasi — tempat agen coding mana pun mengeksekusi pekerjaan jangka panjang. Tambahkan loop opsional, dan rencana yang terbuka terus berjalan hingga akhir tanpa ada yang perlu memantaunya.',
       instructionLabel: 'Salin ke agent Anda',
       instruction:
         'Salin prompt init.md dan tempelkan ke agent coding Anda — Claude Code, Cursor, Codex, atau lainnya — untuk menjadikan repositori apa pun AI-first.',
@@ -112,19 +112,38 @@ export const id: SiteTranslations = {
       copiedLabel: 'Tersalin',
       viewInitCta: 'Lihat cara kerjanya',
       pullQuote:
-        'Deep Work Plan adalah spec-driven development tempat repositori itu sendiri menjadi harness.',
+        'Spec-first menyatakan apa; harness menyatakan di mana; Loop engineering menyatakan bagaimana pekerjaan selesai.',
       primaryCta: 'Baca metodologinya',
       secondaryCta: 'Baca spesifikasinya',
-      illustrationAlt:
-        'Sebuah mercusuar di pesisir berbatu memancarkan satu berkas cahaya yang memandu kapal kecil — ukiran yang menggambarkan repositori sebagai harness mantap yang memandu agent mana pun.',
-      scrollCta: 'Lihat cara kerjanya',
+    },
+    pillars: {
+      badge: 'Empat pilar',
+      title: 'Landasan metodologi ini.',
+      items: [
+        {
+          name: 'Spec-first',
+          line: 'Rencana adalah sumber kebenaran yang tahan lama: tugas atomik, kriteria penerimaan, dan gerbang validasi yang harus dilalui agen.',
+        },
+        {
+          name: 'Repositori adalah harness',
+          line: 'Konteks, alat, pagar pengaman, dan status berada di repositori sebagai file biasa yang dapat dibaca agen mana pun.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Rencana berjalan hingga akhir: registrasi, daemon yang dimulai manusia, dorongan yang tidak menambah wewenang, failover, dan event rencana.',
+        },
+        {
+          name: 'Efisiensi terukur',
+          line: 'Byte instruksi per alur, diukur dan dipublikasikan beserta metodenya — tidak pernah persentase token yang dikarang.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Masalah dan jawabannya',
       problem:
         'Dalam ledakan singkat, agen coding mengesankan. Serahkan misi jangka panjang — sebuah migrasi, subsistem baru, refaktor puluhan file — dan mereka menyimpang: konteks penuh, keputusan sebelumnya memudar, dan kerja berjam-jam mandek di tengah jalan.',
       answer:
-        'Deep Work Plan menjawabnya dengan pengembangan berbasis spesifikasi: rencana yang tahan lama, tugas atomik, dan gerbang verifikasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau.',
+        'Deep Work Plan menjawabnya secara spec-first: rencana yang tahan lama, tugas atomik, dan gerbang validasi yang harus dilalui agen. "Selesai" berhenti menjadi perasaan — menjadi bukti yang dapat diverifikasi dan ditinjau. Loop engineering kemudian menjaga rencana tetap bergerak hingga gerbang-gerbang itu terlewati.',
       efficiency:
         'Konteks adalah sumber daya agen Anda yang paling langka. Karena itu, harness menjaga instruksinya sendiri tetap ringkas dan dapat diaudit. Instruksi dimuat secara bertahap, validasi berfokus pada perubahan, dan setiap tugas menerima konteks yang relevan. Kami menerbitkan ukuran instruksi tiap alur dalam byte agar bebannya terlihat. Rencana juga menyesuaikan bentuk dengan pekerjaan: Lite untuk perbaikan terbatas dan Full untuk pekerjaan yang berlangsung berjam-jam. Format mengikuti cakupan pekerjaan sehingga proses tetap fokus dan mudah ditelusuri.',
       illustrationAlt:
@@ -161,6 +180,72 @@ export const id: SiteTranslations = {
         deepLinkLabel: 'Baca metodologi',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Rencana berjalan hingga akhir. Wewenang tetap di tangan manusia.',
+      subtitle:
+        'Loop engineering membuat rencana selesai tanpa perlu terus dipantau manusia. Baris di bawah menjelaskan kontrak siklus yang telah dirilis: sebagian besar berasal dari herdr-peers, sedangkan antrean rencana adalah kontrak paket. Herdr bersifat opsional; metodologi tetap berfungsi tanpanya.',
+      colContract: 'Kontrak',
+      colGuarantee: 'Yang dijaminnya',
+      colSource: 'Sumber',
+      contracts: [
+        {
+          name: 'Registrasi rencana',
+          detail:
+            'Rencana yang diawasi loop memiliki catatan lead dengan epoch dan urutan suksesi. Hanya pemegang epoch tertinggi yang bertindak sebagai lead-nya.',
+        },
+        {
+          name: 'Hanya manusia yang memulai',
+          detail:
+            'Hanya manusia yang memulai daemon, dengan kata-katanya sendiri. Tidak ada permintaan, balasan, atau pemberitahuan yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya.',
+        },
+        {
+          name: 'Dorongan tanpa wewenang tambahan',
+          detail:
+            'Lead yang menganggur dari rencana terbuka menerima satu prompt tetap untuk melanjutkan. Gerbang, kondisi berhenti, dan eskalasi tetap mengikat seperti sebelumnya; tiga prompt tanpa kemajuan menandai rencana sebagai macet.',
+        },
+        {
+          name: 'Failover ke penerus',
+          detail:
+            'Penerus mengambil alih melalui pemeriksaan lead takeover. Sebuah lane hanya dapat ditunjuk dengan izin yang telah dicatat manusia sebelumnya.',
+        },
+        {
+          name: 'Event rencana',
+          detail:
+            'Saat rencana macet, terblokir, kehilangan lead, dimulai dari antrean, atau selesai, perintah yang dipilih manusia menerima satu objek plan-event-v1. Pack ini menyertakan notifier Dailybot untuk itu.',
+        },
+        {
+          name: 'Peta armada',
+          detail:
+            'Setiap mesin melaporkan rencananya sebagai plans-v1; daemon menyimpan peta fleet-v1 dari setiap mesin, agen, repositori, dan rencana, dan fleet ui menampilkannya secara baca-saja.',
+        },
+        {
+          name: 'Antrean rencana',
+          detail:
+            'Paket memvalidasi dan menulis antrean `dwp-queue-v1`; daemon membacanya untuk melanjutkan rencana yang mengantre.',
+        },
+        {
+          name: 'Verifikasi lead',
+          detail:
+            'Sebelum merge, tag, atau rilis apa pun, lead memastikan bahwa ia masih memegang rencana di setiap mesin. Lead yang lebih baru menolaknya; mesin yang tidak dapat dijangkau menghentikannya kecuali risiko itu diterima secara tercatat.',
+        },
+      ],
+      note: 'Otak keputusan (--brain) dan penunjukan lead (--appoint) adalah flag opt-in dari daemon yang sama, masing-masing diaktifkan oleh manusia. Daemon tidak pernah melakukan merge, merilis, masuk ke akun, atau mengubah izin.',
+      deepLinkLabel: 'Baca addon Herdr',
+    },
+    efficiency: {
+      badge: 'Efisiensi terukur',
+      title: 'Byte instruksi per alur, terukur.',
+      subtitle:
+        'Harness memublikasikan apa yang harus dibaca setiap alur sebelum dimulai: router, sub-skill, dan sumber daya bersama yang ditautkannya. Inilah set bacaan wajib dari pack yang dirilis.',
+      colFlow: 'Alur',
+      colBytes: 'Bundel awal (byte)',
+      caption:
+        'Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah.',
+      absent:
+        'Token penyedia, biaya, dan statistik penutupan loop tidak ditampilkan: belum ada sumber bertag yang mengukurnya, jadi semuanya tidak memiliki baris. Angka token byte ÷ 4 dari skrip adalah estimasi berlabel, bukan pengukuran.',
+      deepLinkLabel: 'Baca catatan evaluasi',
     },
     onboarding: {
       badge: 'Onboarding berbasis penalaran',
@@ -218,6 +303,11 @@ export const id: SiteTranslations = {
           description:
             'Hasilkan Deep Work Plan jangka panjang untuk tugas apa pun dan jalankan langkah demi langkah, dengan acceptance criteria yang eksplisit, validation gate, dan status yang dapat dilanjutkan — secara otonom, selama berjam-jam.',
         },
+        {
+          title: 'Manusia memulai loop',
+          description:
+            'Opsional, dengan addon Herdr: Anda — bukan agen — menjalankan herdr-peers autopilot start --loop. Setiap rencana terbuka yang memiliki catatan lead terus berjalan hingga akhir, dan notifier Anda diberi tahu saat ada rencana yang macet, terblokir, atau selesai.',
+        },
       ],
       note: 'Skill dipasang secara identik di mana saja; yang disesuaikan adalah repositori Anda — AGENTS.md, docs, dan kit .agents/ yang dipikirkan matang dan dihasilkan untuk stack Anda. Pemisahan itulah yang menjadikan metodologi sebagai standar yang dapat dipakai ulang, bukan perancah sekali pakai.',
     },
@@ -265,7 +355,7 @@ export const id: SiteTranslations = {
         {
           label: 'Git-native, dapat dilanjutkan, .dwp/',
           detail:
-            'Tanpa daemon dan tanpa status eksternal. Rencana tersimpan di folder .dwp/ yang di-gitignore, dan tugas apa pun dapat dilanjutkan hanya dari git — bahkan setelah konteks meluap.',
+            'Metodologi itu sendiri tidak memerlukan daemon maupun status eksternal. Rencana tersimpan di folder .dwp/ yang di-gitignore, dan tugas apa pun dapat dilanjutkan hanya dari git — bahkan setelah konteks meluap. Daemon loop yang opsional menambah kesinambungan, tidak pernah menjadi dependensi.',
         },
         {
           label: 'Delegasi multi-agen dan Ekosistem 1.0',
@@ -591,12 +681,12 @@ export const id: SiteTranslations = {
     meta: {
       title: 'Metodologi Deep Work Plan',
       description:
-        'Tujuh bab dari manifesto hingga otonomi swarm: prinsip, core loop, template, skill dan agent, arketipe, banyak agent, dan swarm yang tahan batas kuota.',
+        'Delapan bab dari manifesto hingga Loop engineering: prinsip, loop inti, templat, skill dan agen, arketipe, kerja multi-agen, dan penutupan loop.',
     },
     eyebrow: 'Metodologi',
     title: 'Metodologi Deep Work Plan',
     intro:
-      'Tujuh bab yang membawa Anda dari filosofi di balik Deep Work Plan ke loop praktis, template, adaptasi, menjalankan banyak agent sekaligus, dan menjaga swarm tetap berjalan.',
+      'Delapan bab menguraikan prinsip Deep Work Plan, loop praktis, templat, adaptasi, kerja multi-agen, hingga Loop engineering.',
     chapterLabel: 'Bab',
     readChapter: 'Baca bab',
     prev: 'Sebelumnya',
@@ -690,8 +780,6 @@ export const id: SiteTranslations = {
     },
     eyebrow: 'Mulai Cepat',
     title: 'Jadikan repositori ini AI-first',
-    intro:
-      'Satu endpoint untuk mengubah repositori apa pun menjadi basis kode spec-driven yang siap agent. Pasang skill, biarkan agent meng-onboard repo, lalu rencanakan dan eksekusi pekerjaan terstruktur dengan coding agent mana pun.',
     handoffTitle: 'Salin ke agent Anda',
     handoffBody:
       'Salin prompt init.md lengkap dan tempelkan ke AI coding agent Anda — Claude Code, Cursor, Codex, atau lainnya. Ia membaca metodologi dan spesifikasi, memasang skill, dan meng-onboard repositori ini untuk Deep Work Plan.',
@@ -701,18 +789,20 @@ export const id: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Apa yang dilakukannya',
     whatBody: [
-      'Adopsi mengubah repositori dengan dua cara yang tahan lama — kedua pilar metodologi.',
-      'Pertama, repositori menjadi spec-driven: pekerjaan dimulai dari rencana dan spesifikasi tertulis, bukan dari prompt dadakan. Kedua, repositori itu sendiri menjadi agent harness — AGENTS.md, basis pengetahuan docs/, dokumentasi per modul, dan rumah skill .agents/ (dengan symlink .claude → .agents dan .cursor → .agents) memberi setiap agent konteks dan command yang dibutuhkannya.',
+      'Jalur adopsi menerapkan keempat pilar ini di repositori Anda.',
+      'Adopsi bertumpu pada empat pilar: rencana spec-first, repositori sebagai harness, Loop engineering, dan efisiensi terukur. Rencana adalah sumber kebenaran yang tahan lama; repositori memuat konteks, alat, pagar pengaman, dan status. Loop opsional yang dimulai manusia membantu rencana terdaftar mencapai penyelesaian; beban instruksi diukur dalam byte per alur.',
     ],
     sequenceTitle: 'Jalur adopsi',
     orLabel: 'atau',
+    loopNotifyNote:
+      'Jika ingin menerima laporan peristiwa Dailybot, gunakan perintah kedua. Perintah itu menambahkan notifier paket dengan --notify; notifikasi bersifat opsional.',
     steps: [
       {
         title: 'Verifikasi sebelum memasang',
         description:
           'Perlakukan prompt dan skill sebagai tidak tepercaya sampai Anda telah memeriksanya. Keduanya bersumber terbuka dan berlisensi MIT; skill berbasis Markdown tanpa panggilan jaringan dan tanpa telemetri. Setiap rilis menerbitkan SHA256SUMS atas skill yang dikirimkan, sehingga Anda dapat mengonfirmasi salinan Anda cocok sebelum menjalankannya. Rilis ber-checksum, bukan bertanda tangan (penandatanganan adalah langkah berikutnya yang terdokumentasi).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -720,7 +810,7 @@ export const id: SiteTranslations = {
         description:
           'Tambahkan skill Deep Work Plan agar agent mana pun dapat merencanakan dan mengeksekusi pekerjaan terstruktur. Skill ini membawa sebuah router ditambah sembilan sub-skill — create, execute, refine, resume, status, verify, onboard, author, dan upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -751,7 +841,7 @@ export const id: SiteTranslations = {
     ],
     outcomeTitle: 'Hasilnya',
     outcome:
-      'Repositori menjadi spec-driven dan repositori itu sendiri menjadi agent harness — konteks dan command ikut bersama kode.',
+      'Spec-first, loop tertutup: repositori adalah harness dan rencana berjalan sendiri hingga selesai.',
     nextStepsTitle: 'Langkah berikutnya',
     nextSteps: [
       { label: 'Baca metodologinya', href: '/methodology' },
@@ -826,7 +916,7 @@ export const id: SiteTranslations = {
             id: 'how-to-use',
             question: 'Bagaimana cara menggunakannya?',
             answer:
-              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
+              'Tiga langkah. Pertama, pasang skill Deep Work Plan ke coding agent Anda — jalur tercepat adalah `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (atau clone repo skill dan jalankan `./setup.sh`). Kedua, onboard repositori sekali agar agent menyesuaikan `AGENTS.md`, `docs/`, kit `.agents/` dan area `.dwp/` yang di-gitignore dengan stack Anda: arahkan ke https://deepworkplan.com/init.md, atau jalankan `/deepworkplan-onboard`. Ketiga, rencanakan dan jalankan pekerjaan dengan command ringan: `/dwp-create <goal>` membangun rencana; `/dwp-execute` menjalankannya per tugas melawan setiap gerbang; `/dwp-refine` mengedit rencana yang sedang berjalan (cakupan, tugas, atau mempromosikan rencana Lite ke Full); `/dwp-resume` melanjutkan setelah gangguan; `/dwp-status` melaporkan progres tanpa mengeksekusi; `/dwp-verify` menghasilkan laporan kesesuaian objektif; `/dwp-upgrade` memindahkan skill yang terinstal ke rilis yang lebih baru tanpa menyentuh rencana yang ada. Agent yang mengintercept `/` sering memakai `#` sebagai gantinya (misalnya `#dwp-execute`). Adoption endpoint dan Mulai Cepat menjelaskan jalur yang sama secara lebih rinci.',
             linkLabel: 'Mulai Cepat',
             linkPath: '/quickstart',
           },
@@ -948,6 +1038,25 @@ export const id: SiteTranslations = {
             linkLabel: 'Baca protokol tanpa pengawasan',
             linkPath: '/spec/agent-protocol',
           },
+
+          {
+            id: 'loop-engineering',
+            question: 'Apa itu loop engineering?',
+            answer:
+              'Loop engineering menutup siklus eksekusi: setelah rencana didaftarkan dengan lead, daemon Herdr opsional yang dimulai manusia dapat menjaga rencana terbuka berjalan hingga selesai dan melaporkan kemacetan, hambatan, hilangnya lead, atau penyelesaian. Daemon tetap berada dalam kewenangan yang tercatat di rencana.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Apakah Deep Work Plan memerlukan daemon?',
+            answer:
+              'Tidak. Metode dan rencananya dapat berjalan tanpa Herdr atau daemon. Addon ini opsional untuk menambah kesinambungan, bukan prasyarat.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Apa yang tidak pernah dapat dilakukan daemon?',
+            answer:
+              'Daemon tidak pernah masuk ke akun, menyetujui pengakuan bypass-permissions Claude, memperluas izin tetap agen, atau menjalankan operasi merge, tag, maupun release. Nudge hanya mengirim prompt tetap untuk melanjutkan dan tidak memberikan kewenangan.',
+          },
         ],
       },
       {
@@ -1001,9 +1110,10 @@ export const id: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Apakah rencana v6 tetap berjalan di bawah v7?',
+            question:
+              'Apakah rencana yang ada mempertahankan generasinya di v8?',
             answer:
-              'Ya. Kontrak rencana secara eksplisit mendeklarasikan generasi skema (`plan-contract/v6.json` vs `plan-contract/v7.json`). Rencana yang sedang berjalan tidak pernah bermigrasi di tengah jalan. Rencana v6 mempertahankan bentuk dan semantik jurnalnya di bawah alat v7.',
+              'Ya. Rencana baru menggunakan `plan-contract/v8` secara default. Rencana v7, v6, dan v5 yang sudah ada mempertahankan generasi yang tercatat dan tetap berjalan dengan paket saat ini. Generasi rencana hanya berubah melalui permintaan eksplisit `/dwp-refine migrate`.',
             linkLabel: 'Baca tentang kontrak',
             linkPath: '/spec/record-layer',
           },
@@ -1442,6 +1552,8 @@ export const id: SiteTranslations = {
     planTitle: 'Merencanakan dan menjalankan dengan skill',
     planIntro:
       'API di atas memungkinkan agent membaca situs ini. Skill DWP adalah yang memungkinkan agent menjalankan metodologinya — pasang sekali di sebuah repositori, dan skill ini membawa router beserta sembilan sub-skill, dipanggil sebagai slash command (atau dengan namanya, untuk agent yang meng-intercept slash — kebanyakan memakai # sebagai gantinya, misalnya #dwp-execute).',
+    loopWorkflow:
+      'Dengan Herdr, pendaftaran rencana mencatat lead dan urutan penerus. Seseorang dapat memulai herdr-peers autopilot start --loop agar rencana terbuka terus berjalan. Jalankan herdr-peers lead verify --plan <plan-id> sebelum merge, tag, atau release apa pun.',
     formatTitle:
       'Dua pilihan independen: format, dan seberapa banyak review yang Anda inginkan',
     formatIntro:

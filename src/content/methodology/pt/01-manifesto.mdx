@@ -24,21 +24,9 @@ A capacidade de um agente de código de IA depende menos do modelo do que da qua
 
 Isso reformula o que significa delegar bem. Boa delegação não é pedir trabalho a um agente — é definir o trabalho com clareza suficiente para que ele possa ser executado corretamente: o objetivo, as restrições, o contexto que o agente de outra forma não teria e os critérios que decidem se ele foi bem-sucedido. A maior parte do valor é criada antes de a execução começar.
 
-O Deep Work Plan é a disciplina de fazer esse trabalho de montante de forma duradoura e repetível. Seus dois pilares fundacionais são as duas metades de uma boa direção: uma **especificação** declara como é o "correto" e um **harness** dá ao agente o contexto e as ferramentas para alcançá-lo. Juntos, eles convertem a habilidade bruta de um modelo em engenharia confiável — sustentada ao longo de uma tarefa que dura horas e preservada entre agentes que mudam de uma sessão para outra. Uma terceira disciplina mantém a combinação acessível em escala: a **eficiência de tokens**, porque um harness que funciona é um que o agente pode carregar por um horizonte longo.
+O Deep Work Plan é a disciplina de fazer esse trabalho de montante de forma duradoura e repetível. Ele se apoia em quatro pilares. Os dois primeiros são as duas metades de uma boa direção: **especificação primeiro** — uma especificação declara como é o "correto" — e **o repositório é o harness** — o repositório dá ao agente o contexto e as ferramentas para alcançá-lo. O terceiro faz o trabalho chegar ao fim: o **loop engineering** mantém um plano aprovado em andamento até seu fim definido sem que uma pessoa precise ficar verificando. O quarto mantém a combinação acessível e honesta a esse respeito: a **eficiência medida**, porque um harness que funciona é um que o agente pode carregar por um horizonte longo, e seu custo é medido em vez de afirmado. Em uma frase: *Especificação primeiro, loop fechado: o repositório é o harness e o plano se executa sozinho até a conclusão.* Juntos, eles convertem a habilidade bruta de um modelo em engenharia confiável — sustentada ao longo de uma tarefa que dura horas e preservada entre agentes que mudam de uma sessão para outra.
 
-## Eficiente por construção
-
-O primeiro pilar torna o trabalho correto; o segundo o torna portátil. O terceiro o mantém **acessível** — porque o contexto é o recurso mais escasso que um agente de código tem, e uma metodologia que o desperdiça falha exatamente quando o trabalho se alonga.
-
-Três mecanismos fazem o trabalho:
-
-- **Divulgação progressiva.** O agente lê um núcleo essencial, e cada guia ou seção da especificação é carregado apenas quando o próprio fluxo dispara o gatilho. O agente carrega o capítulo de que precisa, não o livro inteiro.
-- **Validação selecionada pela superfície tocada.** Cada tarefa registra o que muda e escolhe seu portão pela classe de risco — uma mudança pequena e isolada se prova de forma delimitada; uma mudança em maquinaria compartilhada se prova amplamente.
-- **Aprendizado local por tarefa.** Quando uma tarefa produz um padrão reutilizável, a decisão acontece dentro dela, onde a evidência está fresca — não em uma retrospectiva que ninguém lê.
-
-Nada disso afirma ser sem perdas por construção, nem é promovido com porcentagens inventadas. Os bytes de instrução que cada fluxo exige são medidos e publicados; as afirmações comportamentais são respaldadas por replays com falhas semeadas; e uma avaliação com agentes novos — os mesmos dois recursos construídos sem harness, com a versão maior anterior e com esta — já foi executada sob um protocolo congelado. Ela mediu o que os mecanismos entregam no primeiro dia de um estranho: agentes em uma árvore com harness leram menos bytes do que o controle sem harness nas duas tarefas, e as sessões de recurso desta versão consumiram menos entrada e saída de modelo do que as da versão maior anterior, conforme o harness reportou, em uma única carga de trabalho. A mesma avaliação marca os limites com clareza. O onboarding é um custo único que só se paga quando os fluxos são usados, e em cinco execuções novas nenhum agente entrou nos fluxos sozinho — os fluxos são comandos que você, ou um agente que sabe chamá-los, invoca. O segundo recurso na mesma árvore custou menos em todas as configurações medidas, incluindo o controle sem harness: parte dessa amortização pertence à própria árvore, e o harness existe para torná-la deliberada.
-
-## Orientado a especificação por design
+## Especificação primeiro
 
 Este é o primeiro pilar da metodologia e, assim como "harness", vale a pena defini-lo com clareza.
 
@@ -50,7 +38,7 @@ Este é o primeiro pilar da metodologia e, assim como "harness", vale a pena def
 
 **Como o DWP se diferencia.** Formou-se um movimento mais amplo de desenvolvimento orientado a especificação em torno dessa ideia, incluindo GitHub Spec Kit, Amazon Kiro e Tessl. Essas abordagens tendem a estar atreladas a uma ferramenta ou plataforma específica. O DWP é deliberadamente diferente: é independente de ferramenta e nativo do repositório. A especificação vive no repositório como markdown puro, de modo que viaja com o código em vez de com o produto de um fornecedor — e compõe-se diretamente com o segundo pilar, já que a própria especificação faz parte do harness que o repositório carrega.
 
-## O repositório se torna o harness
+## O repositório é o harness
 
 Este é o segundo pilar da metodologia e merece uma definição clara — "harness" tornou-se um termo carregado, e boa parte do setor o usa sem dizer o que ele significa.
 
@@ -72,6 +60,24 @@ Este é o segundo pilar da metodologia e merece uma definição clara — "harne
 
 Como cada elemento é um arquivo no repositório, e não um recurso de uma ferramenta, o harness é portátil por construção: qualquer agente que leia markdown e execute comandos de shell pode abrir os mesmos arquivos, sem nenhum framework sob medida por ferramenta. Essa é a afirmação de uma linha sobre a qual o restante da metodologia se apoia: *o próprio repositório se torna o harness*. É uma afirmação sobre o que o repositório carrega, não uma garantia de que um modelo encontre de forma confiável o fluxo correto sem ajuda diante de uma solicitação nova — por isso o kit também inclui pontos de entrada explícitos `dwp-*` e um `SKILL.md` roteador: portabilidade de arquivos e roteamento confiável são propriedades diferentes, e apenas a primeira é construída por si só.
 
+## Loop engineering
+
+Este é o terceiro pilar. Uma especificação e um harness tornam o trabalho correto e portátil; sozinhos, não o fazem chegar ao fim. Um plano longo estagna quando seu agente para no fim de um turno, espera diante de uma tela, esgota sua capacidade ou desaparece — e o remédio habitual é uma pessoa verificando a cada vinte minutos. O loop engineering elimina essa vigilância constante sem abrir mão do controle.
+
+Com o addon opcional Herdr, o plano registra um lead e, quando os nomeia, sucessores. Um daemon que só uma pessoa inicia acompanha cada plano registrado: avisa um lead ocioso para continuar, pede ao primeiro sucessor alcançável que assuma o lugar de um lead que desapareceu e informa quando um plano estagna, é bloqueado ou é concluído. Um aviso não acrescenta autoridade — os gates do plano, suas condições de parada e seus escalonamentos valem exatamente como antes, e credenciais, logins e os pontos de controle humanos do próprio plano continuam com as pessoas. A metodologia funciona sem o loop; o loop apenas a amplifica. Consulte [Loop engineering](/pt/methodology/08-loop-engineering).
+
+## Eficiência medida
+
+O primeiro pilar torna o trabalho correto; o segundo o torna portátil; o terceiro o faz chegar ao fim. O quarto o mantém **acessível** — porque o contexto é o recurso mais escasso que um agente de código tem, e uma metodologia que o desperdiça falha exatamente quando o trabalho se alonga — e mantém essa afirmação **medida**: bytes de instrução por fluxo, nunca porcentagens de tokens inventadas.
+
+Três mecanismos fazem o trabalho:
+
+- **Divulgação progressiva.** O agente lê um núcleo essencial, e cada guia ou seção da especificação é carregado apenas quando o próprio fluxo dispara o gatilho. O agente carrega o capítulo de que precisa, não o livro inteiro.
+- **Validação selecionada pela superfície tocada.** Cada tarefa registra o que muda e escolhe seu portão pela classe de risco — uma mudança pequena e isolada se prova de forma delimitada; uma mudança em maquinaria compartilhada se prova amplamente.
+- **Aprendizado local por tarefa.** Quando uma tarefa produz um padrão reutilizável, a decisão acontece dentro dela, onde a evidência está fresca — não em uma retrospectiva que ninguém lê.
+
+Nada disso afirma ser sem perdas por construção, nem é promovido com porcentagens inventadas. Os bytes de instrução que cada fluxo exige são medidos e publicados; as afirmações comportamentais são respaldadas por replays com falhas semeadas; e uma avaliação com agentes novos — os mesmos dois recursos construídos sem harness, com a versão maior anterior e com esta — já foi executada sob um protocolo congelado. Ela mediu o que os mecanismos entregam no primeiro dia de um estranho: agentes em uma árvore com harness leram menos bytes do que o controle sem harness nas duas tarefas, e as sessões de recurso desta versão consumiram menos entrada e saída de modelo do que as da versão maior anterior, conforme o harness reportou, em uma única carga de trabalho. A mesma avaliação marca os limites com clareza. O onboarding é um custo único que só se paga quando os fluxos são usados, e em cinco execuções novas nenhum agente entrou nos fluxos sozinho — os fluxos são comandos que você, ou um agente que sabe chamá-los, invoca. O segundo recurso na mesma árvore custou menos em todas as configurações medidas, incluindo o controle sem harness: parte dessa amortização pertence à própria árvore, e o harness existe para torná-la deliberada.
+
 ## Por que a execução autônoma estruturada importa
 
 Os agentes de código de IA modernos são capazes, mas sem direção. Aponte um deles para uma tarefa não trivial e ele tende a começar a editar arquivos imediatamente, perder o controle do que alterou e produzir um trabalho difícil de revisar e impossível de retomar.
@@ -85,4 +91,4 @@ O DWP impõe uma estrutura leve que aborda cada falha diretamente:
 
 ## Markdown até o fim
 
-O DWP define estrutura, não software. Não há runtime para instalar, nem árvore de dependências, nem lock-in. O plano, as tarefas e o registro de execução são todos markdown puro que qualquer agente pode ler, qualquer pessoa pode revisar e qualquer sistema de controle de versão pode rastrear com clareza. O resultado é uma execução que você pode ler, auditar e na qual pode confiar.
+O DWP define estrutura, não software. Não há runtime para instalar, nem árvore de dependências, nem lock-in; o daemon opcional do loop pertence a um addon, não à metodologia. O plano, as tarefas e o registro de execução são todos markdown puro que qualquer agente pode ler, qualquer pessoa pode revisar e qualquer sistema de controle de versão pode rastrear com clareza. O resultado é uma execução que você pode ler, auditar e na qual pode confiar.

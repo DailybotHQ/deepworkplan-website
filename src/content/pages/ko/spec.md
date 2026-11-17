@@ -6,7 +6,7 @@ lastUpdated: 2026-09-28
 
 ## Deep Work Plan 스펙
 
-**현재 표준: v7(DWP 7.0.0).** 아래 문서는 유지되는 기본 사양입니다. v6는 계약, 추가 전용 저널, 작업별 컨텍스트, 리소스 제어 및 수명 주기 규칙을 더했고, v7은 그 기록 계층을 유지하면서 선택적 `parallel_safe` 작업 표시, `delegation` 저널 이벤트, `.dwp/config.json` 애드온 레지스트리, 애드온이 제공하는 능력을 추가합니다. [v7 manifest 스키마](https://deepworkplan.com/schema/plan-manifest/v7.json), [contract 스키마](https://deepworkplan.com/schema/plan-contract/v7.json), [live snapshot 스키마](https://deepworkplan.com/schema/plan-snapshot/v6.json)(v6과 공유)를 참고하세요. 기존 v5 및 v6 계획은 기록된 규칙을 유지합니다. 현재 7.x 팩은 새 계획을 기본적으로 v7로 생성합니다. 기존 계획은 기록된 세대를 유지하며, 마이그레이션에는 명시적 요청이 필요합니다.
+**현재 표준: DWP 8.0.0(릴리스 `v8.0.0`).** 유지되는 기반에는 v6 기록 계층과 v7 확장이 포함되며 새 계획은 기본적으로 `plan-contract/v8`을 사용합니다. 기존 v5, v6, v7 계획은 기록된 세대를 유지하며 명시적인 `refine migrate`를 통해서만 마이그레이션됩니다. v8은 `plan-manifest/v7`을 유지하고 `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8`을 추가합니다. v7 manifest 및 journal-event 스키마는 기존 계획에 계속 지원됩니다. [v7 manifest](https://deepworkplan.com/schema/plan-manifest/v7.json), [v8 contract](https://deepworkplan.com/schema/plan-contract/v8.json), [v8 journal event](https://deepworkplan.com/schema/journal-event/v8.json), [v8 snapshot](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
 스펙은 방법론의 정밀하고 읽기 쉬운 정의입니다 — 사람과 에이전트가 공유하는 구조와 프로토콜입니다. 규범적 RFC-2119 용어로, 스펙 주도 계획이 어떻게 구조화되고 에이전트가 그것에 어떻게 맞춰 실행해야 하는지를 명시합니다: 계획이 진실 공급원이고, 검증 게이트는 이진(binary)이며, 리포지토리 자체가 에이전트에 필요한 하니스를 담습니다. 순서가 있는 문서들로 구성됩니다.
 

@@ -42,7 +42,7 @@ Con cualquier agente que lea archivos del repositorio. Claude Code y OpenAI Code
 
 ### ¿Cómo lo uso?
 
-Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad; `/dwp-upgrade` mueve una skill instalada a una versión más reciente sin tocar los planes existentes. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.
+Tres pasos. Primero, instala la skill Deep Work Plan en tu agente de código — la vía más rápida es `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (o clona el repositorio de la skill y ejecuta `./setup.sh`). Segundo, incorpora el repositorio una vez para que el agente adapte `AGENTS.md`, `docs/`, el kit `.agents/` y un área `.dwp/` ignorada por git a tu stack: apúntalo a https://deepworkplan.com/init.md, o ejecuta `/deepworkplan-onboard`. Tercero, planifica y ejecuta el trabajo con los comandos ligeros: `/dwp-create <goal>` construye un plan; `/dwp-execute` lo ejecuta tarea por tarea frente a cada puerta; `/dwp-refine` edita un plan en curso (alcance, tareas, o promover un plan Lite a Full); `/dwp-resume` continúa tras una interrupción; `/dwp-status` informa del progreso sin ejecutar; `/dwp-verify` produce un informe objetivo de conformidad; `/dwp-upgrade` mueve una skill instalada a una versión más reciente sin tocar los planes existentes. Los agentes que interceptan `/` suelen usar `#` en su lugar (por ejemplo `#dwp-execute`). El endpoint de adopción y el inicio rápido recorren el mismo camino con más detalle.
 
 [Inicio rápido](https://deepworkplan.com/es/quickstart)
 
@@ -126,6 +126,18 @@ Sí, siempre que el plan se haya aprobado de antemano, incluya la capa de estado
 
 [Leer el protocolo sin supervisión](https://deepworkplan.com/es/spec/agent-protocol)
 
+### ¿Qué es loop engineering?
+
+Loop engineering cierra el ciclo de ejecución: cuando un plan se registra con un lead, el daemon opcional de Herdr, iniciado por una persona, puede mantener el plan abierto en marcha hasta completarlo e informar de bloqueos, falta de progreso, pérdida del lead o finalización. Respeta la autoridad registrada en el plan.
+
+### ¿Deep Work Plan necesita el daemon?
+
+No. La metodología y sus planes funcionan sin Herdr ni daemon. El addon es opcional y añade continuidad; nunca es un requisito.
+
+### ¿Qué cosas nunca puede hacer el daemon?
+
+Nunca inicia sesión, acepta el reconocimiento de Claude para omitir permisos, amplía los permisos permanentes de un agente ni realiza operaciones de merge, tag o release. Un aviso envía un mensaje fijo para continuar y no concede autoridad.
+
 ## Múltiples agentes y v7
 
 ### ¿Pueden varios agentes trabajar en un plan en paralelo y cómo se garantiza la seguridad?
@@ -158,9 +170,9 @@ Una tarea se completa únicamente cuando la evidencia registrada satisface cada 
 
 [Leer la especificación de la capa de registro](https://deepworkplan.com/es/spec/record-layer)
 
-### ¿Los planes v6 siguen ejecutándose bajo v7?
+### ¿Los planes existentes conservan su generación con v8?
 
-Sí. Los contratos de planes declaran explícitamente su generación de esquema (`plan-contract/v6.json` frente a `plan-contract/v7.json`). Un plan nunca migra su generación a mitad de ejecución. Los planes v6 existentes conservan su estructura, estado y semántica de diario registrados, continuando sin interrupciones con las herramientas de v7.
+Sí. Los planes nuevos usan `plan-contract/v8` de forma predeterminada. Los planes v7, v6 y v5 existentes conservan su generación registrada y continúan con el paquete actual. Un plan solo cambia de generación mediante una solicitud explícita a `/dwp-refine migrate`.
 
 [Leer sobre contratos](https://deepworkplan.com/es/spec/record-layer)
 

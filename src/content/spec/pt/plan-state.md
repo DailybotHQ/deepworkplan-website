@@ -1,6 +1,6 @@
 ---
 title: Estado do plano
-description: "A camada de estado v5 do plano (manifest.json, state.json, registros de gate, reconciliação) e como planos v6 e v7 a trocam por um snapshot derivado do diário."
+description: "A camada de estado v5 do plano (manifest.json, state.json, registros de gate, reconciliação) e como planos v6, v7 e v8 a trocam por um snapshot derivado do diário."
 order: 8
 lang: pt
 section: State
@@ -8,16 +8,17 @@ section: State
 
 # Estado do plano
 
-> **Escopo da versão:** Esta página especifica a **camada de estado v5**, que os planos v5 mantêm por toda a sua vida. Os planos criados pelo pacote atual (DWP 7.0.0, release `v7.12.2`) usam a [camada de registros](/spec/record-layer) em seu lugar. Em um plano v6 ou v7, o contrato de resultado (`contract.json`) é a autoridade, o diário somente de acréscimo (`journal.ndjson`) é a fonte de verdade e `state.json` é um **snapshot derivado** conforme [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Ele é regenerado por `ledger.py project` e NÃO DEVE (MUST NOT) ser editado manualmente.
+> **Escopo da versão:** Esta página especifica a **camada de estado v5**, que os planos v5 mantêm por toda a sua vida. Os planos criados pelo pacote atual (DWP 8.0.0, release `v8.0.0`) usam a [camada de registros](/spec/record-layer) em seu lugar. Em um plano v6, v7 ou v8, o contrato de resultado (`contract.json`) é a autoridade, o diário somente de acréscimo (`journal.ndjson`) é a fonte de verdade e `state.json` é um **snapshot derivado** conforme [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Ele é regenerado por `ledger.py project` e NÃO DEVE (MUST NOT) ser editado manualmente.
 
 ## Qual camada de estado se aplica
 
 | Geração do plano | Fonte de verdade | `state.json` | Esquemas |
 | --- | --- | --- | --- |
 | v5 (e planos anteriores v1/v2) | o plano markdown, com esta camada JSON como sua projeção | escrito pelo agente nos pontos de protocolo abaixo | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 e v2 continuam válidos para planos mais antigos) |
-| v6 e v7 | o contrato mais o diário somente de acréscimo | um snapshot projetado a partir do diário, nunca escrito à mão | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (ou seus equivalentes v6) |
+| v6, v7 e v8 | o contrato mais o diário somente de acréscimo | um snapshot projetado a partir do diário, nunca escrito à mão | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (ou seus equivalentes v6) |
 
-Um plano nunca muda de geração implicitamente: os planos v5 mantêm estas regras, e mover um deles para v6 é uma migração explícita e pré-visualizada ([Camada de registros](/spec/record-layer#coexistence-and-migration)). Fontes canônicas: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md).
+Planos v8 usam `plan-manifest/v7` com `plan-contract/v8`, `journal-event/v8` e `plan-snapshot/v8`; os esquemas de manifesto e eventos de diário v7 continuam compatíveis com planos existentes.
+Um plano nunca muda de geração implicitamente: os planos v5 mantêm estas regras, e mover um deles para v6 é uma migração explícita e pré-visualizada ([Camada de registros](/spec/record-layer#coexistence-and-migration)). Fontes canônicas: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **Versão 5.0.0. Status: Estável.** Este documento especifica a camada de estado legível por máquina da metodologia Deep Work Plan, agora alinhada com a versão própria do padrão DWP — nenhum requisito existente é enfraquecido pela renumeração. Esta revisão também documenta o atualizador de estado protegido, a publicação verificada de planos e as regras de veracidade de evidência que um plano concluído deve satisfazer (veja abaixo). As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
@@ -236,7 +237,7 @@ Ambos os schemas são versionados por URL. Campos aditivos são permitidos dentr
 
 ## Esquemas v7 e v6 e compatibilidade
 
-O pacote 7.x atual cria planos **v7** por padrão. O v7 é uma geração de contrato da camada de registros do v6: o [manifesto v7](https://deepworkplan.com/schema/plan-manifest/v7.json) aponta para um [contrato v7](https://deepworkplan.com/schema/plan-contract/v7.json) — o contrato v6 mais um marcador de tarefa opcional `parallel_safe` — e cada [evento de diário v7](https://deepworkplan.com/schema/journal-event/v7.json) também pode registrar uma `delegation` (iniciada, concluída, falha, cancelada), que nunca é evidência por si só: o resultado de um delegado continua sendo uma afirmação até que o próprio executor do plano o observe. O snapshot ativo e o manifesto de contexto da tarefa são compartilhados com o v6. Um plano nunca mistura gerações, e uma solicitação explícita de `v6` ainda materializa um plano v6.
+O pacote 8.x atual cria planos **v8** por padrão. O v8 é uma geração de contrato da camada de registros do v6: o [manifesto v7](https://deepworkplan.com/schema/plan-manifest/v7.json) aponta para um [contrato v7](https://deepworkplan.com/schema/plan-contract/v7.json) — o contrato v6 mais um marcador de tarefa opcional `parallel_safe` — e cada [evento de diário v7](https://deepworkplan.com/schema/journal-event/v7.json) também pode registrar uma `delegation` (iniciada, concluída, falha, cancelada), que nunca é evidência por si só: o resultado de um delegado continua sendo uma afirmação até que o próprio executor do plano o observe. O snapshot ativo e o manifesto de contexto da tarefa são compartilhados com o v6. Um plano nunca mistura gerações, e uma solicitação explícita de `v6` ainda materializa um plano v6.
 
 v6 mantém a metodologia v5 e acrescenta uma estrutura de engenharia mais rigorosa para novos planos. O manifesto de identidade aponta para um contrato versionado; um diário apenas de acréscimo registra autoridade e eventos; manifestos de contexto tornam explícita a seleção de contexto por tarefa; o agendador despacha apenas trabalho elegível; e a projeção ativa é `state.json`, gerada como snapshot a partir do diário. Uma lista de permissões vazia é recusada. Essas adições são uma decisão de arquitetura, não evidência de melhores resultados dos agentes: a não inferioridade dos resultados não foi medida.
 
@@ -250,4 +251,4 @@ Os esquemas v6 do manifesto e do snapshot ativo são:
 
 A projeção ativa do v6 é um snapshot, não um arquivo de estado v5 renomeado. `plan-state/v5.json` continua publicado para planos v5; não existe `plan-state/v6.json`. Planos existentes v1, v2 e v5 mantêm a geração de esquema registrada e nunca são reescritos silenciosamente.
 
-Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6 e v7 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.
+Os novos planos recebem IDs numéricos monotônicos com pelo menos três dígitos (por exemplo, `PLAN_001_add_payment_webhooks/`). Como os esquemas v5 congelados contam o ID numérico como uma palavra, os slugs v5 têm 2–4 palavras; os slugs v6, v7 e v8 têm 2–5. As pastas existentes sem numeração `PLAN_<slug>/` continuam legíveis e nunca são renomeadas. Quando há planos numerados, `latest` resolve para o plano com o maior ID numérico.

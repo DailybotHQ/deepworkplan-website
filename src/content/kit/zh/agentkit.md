@@ -10,7 +10,9 @@ order: 8
 
 每个终端编码代理都有自己的一套参数用于继续会话，有自己的方式隔离第二个账户，有自己的无头模式，也有自己用于跳过权限提示的开关。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** 在它们之上提供统一的命令界面：`ak <kind> [@profile]`。
 
-这个附加组件把该工具包集成进 **DWP v7**（技能包 `v7.12.2`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
+这个附加组件把该工具包集成进 **DWP v8**（技能包 `v8.0.2`），作为**无头**委派传输方式。它是可选的：没有它，每项任务都在当前会话中运行，与以往完全一样。工具包本身是一个 MIT 产品，脱离 Deep Work Plan 也能使用。
+
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
 ## 工具包为你提供什么
 
@@ -65,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.4.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.5.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.4.0`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.5.0`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |
@@ -87,6 +89,12 @@ ak doctor
 
 套件 1.4.0 版（接口 1 不变）新增 **`ak update`**，仅可由人类调用：它以 `ak install` 的验证方式将 CLI 带到供应商的最新版本——发现、验证、安装并原子性地重新固定本套件的 `providers.toml`（保留 `.bak`）。`--take-over` 用于替换供应商管理的符号链接，除非指名否则拒绝降级，且只有当 PATH 解析到新版本时更新才算生效。
 
+## coding-agents-kit 1.5.0 起（接口 1）
+
+此版本为 `ak run --json` 增加 `tokens` 字段，其中只包含 CLI 报告的计数（`input`、`output`、`cache_read`、`cache_write` 和 `total`）。未报告的值保持为 `null`；kit 不会推算。`ak usage --json` 增加包含 `runs`、`tokens` 和 `coverage` 的 `advisory` 块。该块仅供参考，不会改变供应商配额窗口、容量判定或 `ak pick` 的资格。
+
+启用 `--ask` 或 `AGENTKIT_PERMISSIONS=ask` 时，`ak` 现在会强制使用各 CLI 明确的 ask 模式；没有 ask 标志的 CLI 行为不变。启用此退出选项时，pick-v2 的 `launch.argv` 以 `--ask` 结尾。herdr-peers (v2.0.2) 或更高版本接受这个尾随参数；v2.0.1 会拒绝它。
+
 ## 默认自主运行，退出选项始终优先
 
 自 `v0.2.0` 起，`ak <kind>` 以**自主模式**启动每个代理：它会添加 CLI 自身的自主参数，该参数只保存在工具包的 `providers.toml` 中。自主模式面向可丢弃或沙箱化的环境，例如开发容器。
@@ -97,7 +105,7 @@ ak doctor
 
 ## 它为计划添加了什么
 
-在契约授予 `agent_delegation` 的 v7 计划中，`execute` 可以把一项 `parallel_safe` 任务交给另一个 CLI：它创建一个专用的 git worktree，在其中带超时地运行 `ak run`，并把结果收集到计划的 `analysis_results/delegations/` 中。在计划自身的门控运行器观察到之前，该结果都属于 `asserted` 证据。取消一个被委派者会停止其整个进程树。
+在契约授予 `agent_delegation` 的 v7 或 v8 计划中，`execute` 可以把一项 `parallel_safe` 任务交给另一个 CLI：它创建一个专用的 git worktree，在其中带超时地运行 `ak run`，并把结果收集到计划的 `analysis_results/delegations/` 中。在计划自身的门控运行器观察到之前，该结果都属于 `asserted` 证据。取消一个被委派者会停止其整个进程树。
 
 ## Agentkit 还是 Herdr
 
@@ -107,6 +115,8 @@ ak doctor
 | 任务需要交互、运行时间长，或位于另一台机器上 | [Herdr](/kit/herdr)（窗格中的一个对等方） |
 
 二者可以组合：herdr-peers 可以使用 `ak env <kind> @profile` 输出的环境，在窗格中启动一个对等方。同时运行多条通道时，请参阅[运行多个代理](/methodology/06-orchestration)。
+
+herdr-peers 2.0.0 使用此接口运行可选的 autopilot brain：`ak pick --kinds ... --json` 返回 pick-v2 启动契约；Herdr 会验证该契约，要求 `launch.permissions: ask`，然后启动返回的 `launch.argv`。brain 不能启用 autonomy 或 bypass 标志。`ak update` 仍只能由人调用；brain 不会更新 CLI。
 
 ## 备注
 

@@ -8,7 +8,7 @@ section: Record layer
 
 # 记录层
 
-> **版本范围：** 本页重述当前标准 DWP 7.0.0 所依托的规范性 v6 记录层。发布版本 `v7.12.2` 的规范来源：[`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) 与 [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md)。本页与这些文件不一致时，以文件为准。v5 计划保留 [plan state](/spec/plan-state) 状态层，绝不会被隐式迁移。
+> **版本范围：** 本页重述当前标准 DWP 8.0.0 所依托的规范性 v6 记录层。发布版本 `v8.0.0` 的规范来源：[`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_CONTRACT.md) 与 [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md)。本页与这些文件不一致时，以文件为准。v5 计划保留 [plan state](/spec/plan-state) 状态层，绝不会被隐式迁移。
 
 **版本 6.0.0，在 7.0.0 中扩展。状态：稳定。** 记录层以记录取代叙述式的完成声明：契约是权威，日志是记忆，由辅助工具负责写入，每个生成的文件都是一份投影。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
@@ -17,7 +17,6 @@ section: Record layer
 一份计划由两类编写的产物和一个受保护的序列组成。计划 Markdown（`README.md` 与任务文件）说明将要做什么。**结果契约**（`contract.json`）说明什么算作完成，以及计划被允许做什么。**日志**（`journal.ndjson`）记录实际发生了什么。`state.json` 与 `views/` 从日志重新生成，MUST NOT 手动编辑；当生成的文件与日志不一致时，以日志为准，并重新生成该文件。
 
 ## 代际检测
-
 一个计划文件夹当且仅当带有一个 `contract` 指针可解析的 `manifest.json`、一个 `contract.json` 或一条 `contracts/` 修订链时，才是 v6 系列计划。检测 MUST 依据这些产物，绝不依据已安装技能包的版本：当前的技能包可能持有 v5 计划，而较旧的技能包也可能遇到 v6 计划。
 
 契约的 `schema` URL 标明其**代际**，清单与每个日志事件都与之保持一致：
@@ -26,8 +25,10 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` 与 `delegation` 事件（[委派](/spec/delegation)） |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` 和循环权限 |
+v8 的实时快照使用 [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json)。
 
-7.x 技能包创建的新计划默认是 v7；明确的 `v6` 请求仍会物化一份 v6 契约。计划绝不改变代际，混合了不同代际的日志 MUST 被拒绝。两个代际都投影到同一个 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 形态。
+8.x 技能包创建的新计划默认是 v7；明确的 `v6` 请求仍会物化一份 v6 契约。计划绝不改变代际，混合了不同代际的日志 MUST 被拒绝。两个代际都投影到同一个 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 形态。
 
 ## 结果契约
 

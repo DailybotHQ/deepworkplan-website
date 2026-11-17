@@ -45,7 +45,7 @@ curl -s https://deepworkplan.com/methodology \\
 curl -s https://deepworkplan.com/es/developers.md`;
 
 const cliExample = `# 1. Install the DWP skill — same command the /init endpoint gives agents
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication
@@ -156,6 +156,9 @@ const breadcrumbSchema = {
       <Kicker>{p.planTitle}</Kicker>
       <p class="mt-4 text-lg leading-relaxed" style="color: var(--color-ink);">
         {p.planIntro}
+      </p>
+      <p class="mt-4 max-w-3xl leading-relaxed" style="color: var(--color-muted);">
+        {p.loopWorkflow}
       </p>
 
       <h3

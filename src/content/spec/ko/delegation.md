@@ -8,7 +8,7 @@ section: Record layer
 
 # 위임
 
-> **버전 범위:** 이 페이지는 릴리스 `v7.12.2` 기준 v7 계약 세대를 다시 서술합니다. 정식 출처: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md)와 execute 플로우의 [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/execute/delegation.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다.
+> **버전 범위:** 이 페이지는 릴리스 `v8.0.0` 기준 v7 계약 세대를 다시 서술합니다. 정식 출처: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md)와 execute 플로우의 [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/execute/delegation.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다.
 
 **버전 7.0.0. 상태: 안정(Stable).** v7은 새로운 수명 주기가 아니라 [기록 레이어](/spec/record-layer)의 새로운 계약 세대입니다: 이 페이지가 달리 말하지 않는 한 v6의 계약, 수명 주기, 컨텍스트, 리소스 문서의 모든 내용이 적용됩니다. 위임하지 않는 것은 언제나 올바릅니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
@@ -100,3 +100,5 @@ v1, v2, v5, v6 스키마의 바이트는 변경되지 않습니다. 위임하지
 - [기록 레이어](/spec/record-layer) — 이 페이지가 확장하는 계약과 저널.
 - [리소스와 능력](/spec/resources-and-abilities) — 능력, 권한 부여, 애드온 레지스트리.
 - [Herdr 애드온](/kit/herdr)과 [Agentkit 애드온](/kit/agentkit) — 두 가지 전송 방식.
+
+- [루프 엔지니어링](/spec/loop-engineering) — 계획 루프와 제한된 자율성.

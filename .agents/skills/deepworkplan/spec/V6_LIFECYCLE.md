@@ -45,15 +45,20 @@ event:
 |---|---|---|---|---|
 | v6 | `plan-contract/v6` | `journal-event/v6` | `plan-manifest/v6` | — |
 | v7 | `plan-contract/v7` | `journal-event/v7` | `plan-manifest/v7` | `tasks[].parallel_safe`, the `delegation` event ([`V7_CONTRACT.md`](V7_CONTRACT.md)) |
+| v8 | `plan-contract/v8` | `journal-event/v8` | `plan-manifest/v7` | the optional `autonomy` block and structured blockers (the `blocker` event, projected into `plan-snapshot/v8`) ([`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md)); everything v7 carries |
 
-Both generations run through the same loops and helpers and project into
-the same `plan-snapshot/v6` shape. A plan never changes generation: a v6
-plan keeps v6 forever, and a journal mixing generations is refused.
+Every generation runs through the same loops and helpers. v6 and v7 plans
+project into the same `plan-snapshot/v6` shape; v8 plans project into
+`plan-snapshot/v8`, the same shape with the structured blocker wired
+([`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md) §3). A plan never changes
+generation: a v6 plan keeps v6 forever, and a journal mixing generations is
+refused.
 
 ## 2. Activation (normative)
 
-With the current 7.x pack, new plans use the v7 contract generation by
-default (§1 table); an explicit `v6` request materializes a v6 contract. A
+With the current 8.x pack, new plans use the v8 contract generation by
+default (§1 table); an explicit `v7` or `v6` request materializes that
+contract generation. A
 developer's explicit v6 request also selects this flow when an older pack
 provides it.
 A 5.x pack without that request follows its recorded v5 flow. Existing

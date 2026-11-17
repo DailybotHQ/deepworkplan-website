@@ -1,18 +1,20 @@
 ---
 title: "Deep Work Plan のキット"
 description: "スキルとその九つのサブスキル、コマンド、エージェントアダプター、オンボーディングプリセット、オプトイン式アドオン、そして Deep Work Plan をどこでも実行可能にする事例。"
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan には4つの柱があります。仕様ファースト、リポジトリこそがハーネス、Loop engineering、計測された効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論はそれ単体でも機能します。
 
 ## Deep Work Plan のキット
 
 キットは、この方法論を実際に実行するために必要なものすべてです。`DailybotHQ/deepworkplan-skill` からインストールします。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
-現在の 7.x パックは新しい計画を既定で v7 として作成します。既存の計画は記録された世代を維持し、移行には明示的な依頼が必要です。
+現在の 8.x パックは新しい計画を既定で v8 コントラクト（`plan-contract/v8`）で作成します。v7、v6、v5 の計画は記録された世代を維持し、移行は明示的な `refine` による移行でのみ行われます。
 
 ### スキルとそのサブスキル
 
@@ -62,12 +64,12 @@ onboard フローがリポジトリに重ねる各機能です。七つはオプ
 **方法論は単独で機能します。アドオンはそれを強化します。** 各アドオンは Deep Work Plan スキル内の薄いインテグレーターであり、独自のリポジトリ、リリース、インターフェースバージョンを持つ製品にタグで固定されています。どの製品も Deep Work Plan なしで動作し、必須のアドオンはありません。
 
 - **Deep Work Plan スキル** — 計画の作成、実行、検証、再開、改善を行います。アドオンは不要です。
-- **[herdr](/ja/kit/herdr)** — 任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。固定バージョン：`herdr-peers@v2.0.0`。
-- **[agentkit](/ja/kit/agentkit)** — あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：デフォルトで自律実行（オプトアウト可）、そして worktree 内でのヘッドレス委任。固定バージョン：`coding-agents-kit@v1.4.0`。
-- **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、SSH 鍵はオプトイン時のみ。固定バージョン：`devcontainer-kit@v1.2.0`。
-- **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v1.0.1`。
+- **[herdr](/ja/kit/herdr)** — 任意のマシン上の Herdr ペインにいるピア：認可された返信を一つだけ受け取る対話型委任。固定バージョン：`herdr-peers@v2.2.0`。
+- **[agentkit](/ja/kit/agentkit)** — あらゆるターミナル型コーディングエージェントに使える一つの ak コマンド：デフォルトで自律実行（オプトアウト可）、そして worktree 内でのヘッドレス委任。固定バージョン：`coding-agents-kit@v1.5.0`。
+- **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、SSH 鍵はオプトイン時のみ。固定バージョン：`devcontainer-kit@v1.4.0`。
+- **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v1.1.0`。
 
-アドオンのレジストリと記述子は Deep Work Plan v7 に含まれています： `v7.12.2`
+アドオンのレジストリと記述子は Deep Work Plan v8 に含まれています： `v8.0.2`
 
 ### 事例
 

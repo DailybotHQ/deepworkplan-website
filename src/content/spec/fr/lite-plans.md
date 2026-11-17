@@ -8,7 +8,7 @@ section: Workflow
 
 # Plans Lite
 
-> **Portée de version :** ce document est une base v5.0.0 conservée. La norme actuelle, DWP 7.0.0, exige également les extensions `V6_*.md` et `V7_*.md` applicables, répertoriées dans l’[index de spécification](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Les plans v5 et v6 existants conservent leurs règles enregistrées.
+> **Portée de version :** ce document est une base v5.0.0 conservée. La norme actuelle, DWP 8.0.0, exige également les extensions `V6_*.md` et `V7_*.md` applicables, répertoriées dans l’[index de spécification](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Les plans v5 et v6 existants conservent leurs règles enregistrées.
 
 **Version 5.0.0. Statut : stable.** Ce document spécifie la représentation de plan Lite introduite aux côtés de la [Spécification DWP](/spec/dwp-specification) : un format de plan pour un travail borné de petite à moyenne taille qui est matérialisé directement, sans étape d'ébauche non exécutable. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 Un plan MUST être l'une de deux représentations, consignée une fois dans `manifest.json` sous `plan_format` : **Full** stocke un fichier par tâche sous `<n>.task_<slug>.md` ; **Lite** stocke des enregistrements de tâche compacts et exécutables en ligne dans `README.md`, chacun derrière une ancre stable `{#task-N}`. Un plan Lite n'est pas un plan Full partiel ou informel : chaque enregistrement de tâche MUST toujours porter un objectif, une Surface touchée, des critères d'acceptation, une porte de validation, et un Completion & Log, selon la même forme normative que l'[Anatomie d'une tâche](/spec/dwp-specification#task-anatomy) définit pour Full.
 
 Quatre axes décrivent l'état d'un plan, et MUST être suivis indépendamment plutôt que confondus :
-
 | Axe | Valeurs | Signification |
 |------|--------|-------------|
 | Format | `lite`, `full` | Où vivent les enregistrements de tâche |

@@ -6,7 +6,7 @@ version: "v7 · Kanıtlı devir"
 kind: release
 lang: tr
 order: 0
-featured: true
+featured: false
 sourceLabel: "Yayımlanan v7 şema kümesi"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:
@@ -72,4 +72,4 @@ v7, orkestrasyon ve denetlenebilirlikte bir adımdır; ancak henüz tamamen müd
 
 7.12.2 sürümü (2026-11-16), Herdr eklentisinin herdr-peers protokol 1 ve 2'yi kabul etmesini sağlar ve onu herdr-peers v2.0.0'a sabitler: protokol 2 kurulumunda algılama artık sessizce başarısız olmaz ve eklenti devretme yeteneklerini korur.
 
-Yüklü skill sürümü: **7.12.2**, 7.0.0'dan beri kararlı.
+7.12.2 sürümü (2026-11-16) son v7 sürümüdür; ardından v8 gelir.

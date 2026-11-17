@@ -50,12 +50,13 @@ OPEN_ASK_WINDOW = 2 * 3600   # an ask older than this was abandoned, not awaited
 
 MACHINE_RE = r'(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63})'
 PANE_RE = r'[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}'
-ADDR_RE = re.compile(r'^(%s):(%s)$' % (MACHINE_RE, PANE_RE))
+ADDR_RE = re.compile(r'^(%s):(%s)\Z' % (MACHINE_RE, PANE_RE))  # \Z: no trailing newline
 PLAN_RE = re.compile(r'(?=.{1,128}$)[A-Za-z0-9][A-Za-z0-9._-]*(?:/[A-Za-z0-9][A-Za-z0-9._-]*)*')
 TS_RE = re.compile(r'\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d+)?Z')
 SERVER_DIR_RE = re.compile(r'[0-9a-f]{64}')
 BRANCH_RE = re.compile(r'[A-Za-z0-9][A-Za-z0-9._/@+-]{0,199}')
 BLOCK_CLASS_RE = re.compile(r'\bC[1-7]\b')
+CLASS_RE = re.compile(r'C[1-7]')
 APPOINT_GRANTS = ('lanes', 'lanes:any-kind')
 TASK_STATUSES = ('pending', 'in_progress', 'completed', 'blocked', 'skipped')
 TITLE_MAX = 120
@@ -137,6 +138,12 @@ def lead_record(data):
     grant = data.get('appoint')
     rec['appoint'] = grant if grant in APPOINT_GRANTS else None
     rec['appointed'] = data.get('record_via') == 'appointment'  # this epoch came by appointment
+    rec['revived'] = data.get('record_via') == 'revive'        # this epoch came by revive (2.2.0)
+    # The plan's revive budget, kept in the envelope (2.2.0): survives a daemon restart.
+    rec['revives'] = data.get('revives') if isinstance(data.get('revives'), int) \
+        and not isinstance(data.get('revives'), bool) and 0 <= data['revives'] <= 1000 else 0
+    rec['revived_at'] = data.get('revived_at') if isinstance(data.get('revived_at'), str) \
+        and TS_RE.fullmatch(data['revived_at']) else None
     if rec.get('schema') != LEAD_SCHEMA:
         return None
     if not isinstance(rec.get('plan'), str) or not PLAN_RE.fullmatch(rec['plan']):
@@ -338,11 +345,17 @@ def plan_detail(state, plan_dir):
                  'needs': clean_text(blocker.get('needs') if isinstance(blocker.get('needs'), str)
                                      else None, SUMMARY_LINE_MAX),
                  # Who the plan says may resolve it: a field the plan writes, never prose.
+                 # A blocker whose explicit class is not one of C1-C7 backs no resolver.
                  'resolver': blocker.get('resolver') if blocker.get('resolver') in ('lead', 'human')
+                 and (blocker.get('class') is None
+                      or (isinstance(blocker.get('class'), str) and CLASS_RE.fullmatch(blocker['class'])))
                  else None}
     summary, written = plan_summary(plan_dir)
     return {'title': plan_title(plan_dir), 'tasks': tasks, 'tasks_from': start, 'blocker': block,
             'summary': summary, 'summary_at': written}
+
+
+UNREADABLE_REASONS = ('missing', 'parse', 'shape')   # no state.json; it does not parse; an unknown shape
 
 
 def classify(state):
@@ -383,9 +396,13 @@ def classify(state):
         cls = 'open'
     block_class = None
     if cls == 'blocked' and blocker:
-        text = ' '.join(str(blocker.get(k) or '') for k in ('class', 'needs', 'reason'))[:2000]
-        found = BLOCK_CLASS_RE.search(text)
-        block_class = found.group(0) if found else None
+        named = blocker.get('class')
+        if isinstance(named, str) and CLASS_RE.fullmatch(named):
+            block_class = named   # an explicit class (plan-snapshot/v8 always records one) wins over prose
+        elif named is None:
+            text = ' '.join(str(blocker.get(k) or '') for k in ('needs', 'reason'))[:2000]
+            found = BLOCK_CLASS_RE.search(text)
+            block_class = found.group(0) if found else None
     progress = hashlib.sha256(json.dumps(
         [top, statuses, satisfied, state.get('checkpoint'), blocker, state.get('completed_count')],
         sort_keys=True, default=str).encode('utf-8')).hexdigest()[:16]
@@ -579,9 +596,11 @@ def describe_plan(root, server, rec, panes, git, now=None, logs=None):
             lead_in_repo = lead_top == found_at or lead_top == rec.get('repo_root')
     cls, block_class, progress, updated = 'unreadable', None, None, None
     done = total = current = detail = None
+    why = 'missing'  # why a plan is unreadable: no state.json, it does not parse, or an unknown shape
     if path:
         state = load_json(path, MAX_STATE_BYTES)
         cls, block_class, progress = classify(state)
+        why = 'parse' if state is None else 'shape'
         if cls != 'unreadable':
             done, total, current = task_progress(state)
         if cls in ('open', 'blocked'):  # a finished plan needs no detail on the map
@@ -594,9 +613,12 @@ def describe_plan(root, server, rec, panes, git, now=None, logs=None):
         'succession': rec['succession'], 'lanes': rec['lanes'], 'repo_root': rec.get('repo_root'),
         'plan_dir': os.path.dirname(path) if path else None, 'class': cls,
         'blocker_class': block_class, 'progress': progress, 'state_updated_at': updated,
+        'unreadable_reason': why if cls == 'unreadable' else None,
         'updated_at': rec['updated_at'], 'lead_in_repo': lead_in_repo,
         'tasks_done': done, 'tasks_total': total, 'current_task': current, 'detail': detail,
         'appoint': rec.get('appoint'), 'appointed': bool(rec.get('appointed')),
+        'revived': bool(rec.get('revived')), 'revives': rec.get('revives') or 0,
+        'revived_at': rec.get('revived_at'),
         'open_asks': open_asks(root, server, lead_pane, now, logs) if lead_local else None,
     }
 
@@ -671,7 +693,11 @@ def valid_fleet(doc):
                 _str(brain['last'].get(k)) for k in ('case', 'action', 'plan', 'at'))))
             and all(brain.get(k) is None or (isinstance(brain.get(k), int)
                                              and not isinstance(brain.get(k), bool))
-                    for k in ('asked_last_hour', 'open_questions'))):
+                    for k in ('asked_last_hour', 'open_questions'))
+            and isinstance(brain.get('excluded', []), list) and len(brain.get('excluded', [])) <= 16
+            and all(isinstance(p, str) for p in brain.get('excluded', []))
+            and (brain.get('retired') is None or (isinstance(brain['retired'], dict) and all(
+                _str(brain['retired'].get(k)) for k in ('why', 'profile', 'at'))))):
         return False
     for m in doc['machines']:
         if not isinstance(m, dict) or not isinstance(m.get('machine'), str) or not _str(m.get('label')):
@@ -701,7 +727,10 @@ def valid_fleet(doc):
             if not isinstance(p, dict) or not isinstance(p.get('plan'), str):
                 return False
             if not all(_str(p.get(k)) for k in ('class', 'lead', 'repo_root', 'blocker_class',
-                                                 'situation')):
+                                                 'situation', 'state_updated_at')):
+                return False
+            if p.get('unreadable_reason') not in UNREADABLE_REASONS + (None,) \
+                    or not isinstance(p.get('revived', False), bool):
                 return False
             for k in ('tasks_done', 'tasks_total', 'epoch'):
                 v = p.get(k)
@@ -769,7 +798,11 @@ def valid_report(doc):
         if not isinstance(plan, dict) or not PLAN_KEYS <= set(plan):
             return False
         if plan.get('appoint') not in APPOINT_GRANTS + (None,) \
-                or not isinstance(plan.get('appointed'), bool):
+                or not isinstance(plan.get('appointed'), bool) \
+                or not isinstance(plan.get('revived', False), bool) \
+                or not (isinstance(plan.get('revives', 0), int) and not isinstance(plan.get('revives', 0), bool)) \
+                or not (plan.get('revived_at') is None or (isinstance(plan['revived_at'], str)
+                                                           and TS_RE.fullmatch(plan['revived_at']))):
             return False
         if plan.get('lead_in_repo') not in (True, False, None):
             return False
@@ -782,6 +815,8 @@ def valid_report(doc):
         if not isinstance(epoch, int) or isinstance(epoch, bool) or not 1 <= epoch <= MAX_EPOCH:
             return False
         if not valid_addresses(plan.get('succession')) or not valid_addresses(plan.get('lanes')):
+            return False
+        if plan.get('unreadable_reason') not in UNREADABLE_REASONS + (None,):
             return False
         if plan.get('class') not in ('open', 'blocked', 'completed', 'unreadable'):
             return False

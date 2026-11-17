@@ -76,7 +76,7 @@ better. Count characters, but compare against this range instead.
 
 ### Keywords
 
-Every page renders the global site keywords via `<meta name="keywords">` (Deep Work Plan, DWP methodology, AI coding agents, spec-driven development, etc.), defined alongside `SITE_DESCRIPTION` in `src/lib/constances.ts`.
+Every page renders the global site keywords via `<meta name="keywords">` (Deep Work Plan, DWP methodology, AI coding agents, spec-first planning, loop engineering, etc.), defined alongside `SITE_DESCRIPTION` in `src/lib/constances.ts`. Use “spec-first” for DWP's planning step per work episode; use “spec-driven development” when describing or comparing that neighboring category, never as DWP's genus. Do not imply a measured advantage over neighboring methods.
 
 ### Customizing Per-Page
 

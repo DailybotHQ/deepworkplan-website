@@ -8,7 +8,7 @@ section: Addons
 
 # Add-on
 
-> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 7.0.0, cũng yêu cầu các phần mở rộng `V6_*.md` và `V7_*.md` áp dụng được liệt kê trong [mục lục đặc tả](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Các kế hoạch v5 và v6 hiện có giữ nguyên quy tắc đã ghi nhận.
+> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 8.0.0, cũng yêu cầu các phần mở rộng `V6_*.md` và `V7_*.md` áp dụng được liệt kê trong [mục lục đặc tả](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Các kế hoạch v5 và v6 hiện có giữ nguyên quy tắc đã ghi nhận.
 
 **Phiên bản 2.1.0.** Add-on là phần mở rộng của phương pháp Deep Work Plan cốt lõi. Bảy trong tám addon là tùy chọn và **không bao giờ bắt buộc để tuân thủ** — kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn AI-first và tuân thủ DWP. Mỗi addon tùy chọn được đề xuất trong onboarding, chấp nhận hoặc từ chối rõ ràng và — khi được chấp nhận — **đối chiếu** với thiết lập hiện có thay vì ghi đè. Một thành phần là ngoại lệ được khai báo: kể từ chuẩn 2.3.0, **đánh giá cục bộ AI Diff Reviewer** là một phần của chuẩn cơ sở bắt buộc — onboarding cài đặt nó và mọi Final Review chạy nó — trong khi bề mặt CI của nó vẫn là opt-in.
 
@@ -27,11 +27,11 @@ Khám phá: luồng `onboard` liệt kê `skills/deepworkplan/addons/` và trìn
 
 ## Addon đang phát hành (tám)
 
-Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục bộ bắt buộc. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan. Bốn trong số đó — devcontainer, Herdr, DeepWorkPlan Vim và Agentkit — là các bộ tích hợp mỏng được ghim theo tag vào một sản phẩm có repository và chu kỳ phát hành riêng; mọi sản phẩm đều hoạt động mà không cần Deep Work Plan. Một addon được chấp nhận sẽ được ghi vào sổ đăng ký addon `.dwp/config.json` (DWP 7.0.0), vốn chỉ có thể đề xuất hoặc khuếch đại — không bao giờ chặn sự tuân thủ hay một kế hoạch.
+Hôm nay có tám addon — bảy addon opt-in cộng với đánh giá cục bộ bắt buộc. Mỗi addon có **trang danh mục kit** với chi tiết hướng người dùng và **spec chuẩn** bên trong skill Deep Work Plan. Bốn trong số đó — devcontainer, Herdr, DeepWorkPlan Vim và Agentkit — là các bộ tích hợp mỏng được ghim theo tag vào một sản phẩm có repository và chu kỳ phát hành riêng; mọi sản phẩm đều hoạt động mà không cần Deep Work Plan. Một addon được chấp nhận sẽ được ghi vào sổ đăng ký addon `.dwp/config.json` (DWP 8.0.0), vốn chỉ có thể đề xuất hoặc khuếch đại — không bao giờ chặn sự tuân thủ hay một kế hoạch.
 
 ### Devcontainer (addon đầu tiên)
 
-Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v1.2.0`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
+Một bộ tích hợp mỏng của [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, ghim ở `v1.4.0`, giao diện `2`): một template Dev Containers mà `dck init` tạo vào repository như container riêng của repository, kèm skill `dck-dockerfile`.
 
 - **Trang kit:** [Devcontainer](/kit/devcontainer)
 - **Bổ sung:** `docker/local/<service>/Dockerfile` từ image chính thức của runtime được ghim theo digest (`python-3.13`, `node-24` hoặc `debian`, không có image cơ sở dùng chung), `dev.sh` chạy trên trình khởi chạy `dck` (`up`, `shell`, `rebuild`, `doctor`), coding agent như một lớp opt-in, cổng chỉ dùng loopback, git qua SSH thông qua agent của máy host mà không có khóa nào bên trong, trừ khi nhà phát triển chủ động bật `[ssh] copy_keys` trong hồ sơ host của mình, và máy Herdr cho mỗi container với bố cục tiêu chuẩn
@@ -82,16 +82,18 @@ Nâng cấp phụ thuộc không phụ thuộc package manager, theo lô, đã x
 
 ### Herdr (addon thứ sáu)
 
-Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v2.0.0`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
+Bộ tích hợp mỏng của [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (ghim `v2.2.0`, giao thức `1`), phương thức truyền ủy quyền **tương tác** của các kế hoạch v7.
 
 - **Trang kit:** [Herdr](/kit/herdr)
 - **Bổ sung:** một kế hoạch có thể giao một tác vụ có giới hạn cho một coding agent trong một pane [Herdr](https://herdr.dev) khác, trên cùng máy hoặc trên một máy mà Herdr kết nối tới qua SSH, và ghi lại phản hồi được ủy quyền duy nhất của nó vào nhật ký
 - **Hành vi:** giao thức peer (stamp, grant, reply, loop guard, giới hạn độ sâu và fan-out) nằm trong herdr-peers, không bao giờ nằm trong gói; mọi lần sử dụng đều cần grant hợp đồng `agent_delegation`, và kết quả của agent được ủy quyền vẫn chỉ là khẳng định cho đến khi runner của chính kế hoạch quan sát được nó
 - **Khi đề xuất:** opt-in rõ ràng trong Giai đoạn 7b; phát hiện chỉ đọc `herdr` và `herdr-peers`; phương thức truyền chỉ dùng được bên trong một phiên Herdr
 
+- **Vòng lặp:** Herdr v2.1.0 còn cung cấp `herdr-peers autopilot --loop` tùy chọn do con người khởi chạy để tiếp tục kế hoạch trong phạm vi và chuyển giao cho người kế nhiệm. Xem [Kỹ thuật vòng lặp](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (addon thứ bảy)
 
-Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v1.0.1`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
+Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (ghim `v1.1.0`, giao diện `1`), trình soạn thảo terminal cho Deep Work Plan (Neovim 0.12+).
 
 - **Trang kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Bổ sung:** một bề mặt trình soạn thảo tùy chọn ở cấp máy cho agent và con người — chỉ mục lệnh được sinh tự động, trình duyệt kế hoạch chỉ đọc và trình xem Markdown; mọi tuyên bố đều được đọc từ bề mặt máy đọc được đã ghim của sản phẩm
@@ -100,7 +102,7 @@ Bộ tích hợp mỏng của [DeepWorkPlan Vim](https://github.com/DailybotHQ/d
 
 ### Agentkit (addon thứ tám)
 
-Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v1.4.0`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
+Bộ tích hợp mỏng của [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, ghim `v1.5.0`, giao diện `1`), phương thức truyền ủy quyền **headless** của các kế hoạch v7.
 
 - **Trang kit:** [Agentkit](/kit/agentkit)
 - **Bổ sung:** một bề mặt lệnh `ak` duy nhất cho các coding agent trên terminal, dùng để chạy headless một tác vụ kế hoạch có giới hạn; nó chỉ đóng góp các khả năng `subagents`, `cancel_children` và `model_routing` khi chạy, lúc được bật, được phát hiện và ở trên một giao diện tương thích

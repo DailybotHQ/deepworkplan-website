@@ -6,7 +6,7 @@ version: "v7 · 証拠を伴う委任"
 kind: release
 lang: ja
 order: 0
-featured: true
+featured: false
 sourceLabel: "公開済み v7 スキーマ一式"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:
@@ -72,4 +72,4 @@ v7 はオーケストレーションと監査可能性における大きな前�
 
 リリース 7.12.2（2026-11-16）では、Herdr アドオンが herdr-peers のプロトコル 1 と 2 の両方を受け入れ、herdr-peers v2.0.0 に固定されます。プロトコル 2 の環境でも検出が黙って失敗することはなくなり、アドオンは委任機能を維持します。
 
-インストール済みスキルのリリースは **7.12.2** です。7.0.0 以降、安定しています。
+リリース 7.12.2（2026-11-16）が v7 の最終リリースであり、v8 がその後継です。

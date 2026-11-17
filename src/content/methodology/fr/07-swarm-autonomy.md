@@ -41,7 +41,7 @@ Chaque couloir a un plan, au moins un plan Lite dans son propre dépôt, et ce p
 
 ## La boucle de capacité
 
-Un agent vérifie sa propre marge avant de commencer chaque tâche, après toute porte de validation ou étape qui a duré plus de 20 minutes, chaque fois que sa CLI affiche un avertissement de limite d’utilisation, et avant d’accepter une passation ou le leadership. La vérification est `ak capacity --self --json` de coding-agents-kit `v1.4.0`, que le helper du pack traduit en décision :
+Un agent vérifie sa propre marge avant de commencer chaque tâche, après toute porte de validation ou étape qui a duré plus de 20 minutes, chaque fois que sa CLI affiche un avertissement de limite d’utilisation, et avant d’accepter une passation ou le leadership. La vérification est `ak capacity --self --json` de coding-agents-kit `v1.5.0`, que le helper du pack traduit en décision :
 
 | Verdict | Décision | Un couloir | Un coordinateur, pour lui-même |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Le **paquet de passation** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/d
 
 ## Succession du coordinateur
 
-herdr-peers `v2.0.0` conserve un enregistrement de coordinateur par plan — coordinateur, époque, liste de succession et couloirs — et résout l’adresse `lead` vers le coordinateur actuel, si bien qu’aucune consigne de couloir ne code en dur le panneau du coordinateur.
+herdr-peers `v2.2.0` conserve un enregistrement de coordinateur par plan — coordinateur, époque, liste de succession et couloirs — et résout l’adresse `lead` vers le coordinateur actuel, si bien qu’aucune consigne de couloir ne code en dur le panneau du coordinateur.
 
 - **Revendiquer d’abord, lancer ensuite.** Le coordinateur exécute `herdr-peers lead claim --plan <P> --succession <A,B>` avant de lancer le moindre couloir — l’adresse `lead` ne se résout qu’une fois un enregistrement créé —, actualise l’enregistrement avec `--lanes <A,B>` à mesure que les couloirs démarrent et exécute `lead release` lorsque le plan est terminé. Depuis herdr-peers (`v0.3.2`), l’enregistrement conserve localement le dépôt qui revendique, et un plan portant le même identifiant dans un autre dépôt est nommé `--plan <repo>/<id>`. La succession par défaut est son successeur prévu, puis les couloirs du checkout propre au plan par ordre de lancement, puis tout couloir sur le même hôte ; les couloirs dans des conteneurs ou sur d’autres machines viennent en dernier.
 - **Transmission, planifiée.** Au niveau `low`, le coordinateur désigne un successeur pressenti. Au niveau `critical`, il écrit un paquet de coordinateur — tableau des couloirs, demandes ouvertes, ordre de publication, fusions en attente, décisions —, exécute `herdr-peers lead handover <addr> --plan <P>`, qui incrémente l’époque et notifie chaque couloir, et s’arrête. Le successeur accepte le paquet, reprend le plan orchestrateur et revérifie chaque couloir.
@@ -117,3 +117,7 @@ Le journal du plan orchestrateur consigne l’essaim : les lancements et résult
 ## L’exercer
 
 Éprouvez la boucle avant de vous y fier. Sur un dépôt de test avec un petit plan orchestrateur, faites tourner un coordinateur et au moins trois couloirs sur des comptes ou des fournisseurs différents. Plafonnez la capacité signalée d’un couloir — `AGENTKIT_CAPACITY_CAP=@<profile>=8` abaisse la lecture et ne peut jamais l’élever — et observez-le écrire un paquet, le coordinateur lancer un successeur qui l’accepte, et le successeur passer la porte de validation. Plafonnez le coordinateur de la même manière et observez la transmission et le nouveau coordinateur terminer le plan. Consignez ensuite les preuves dans le `analysis_results/` du plan : aucune frappe humaine, chaque paquet, chaque époque, une demande d’un couloir à un autre, et les portes de validation.
+
+## Fermer la boucle d’exécution
+
+Le daemon facultatif de la boucle poursuit un plan approuvé à partir de son enregistrement de lead, relance sans ajouter d’autorité et demande à un successeur listé de prendre la relève lorsque le lead a disparu. Un humain le lance ; les identifiants, les connexions et les portes C1–C7 du plan restent des actions humaines. Voir [Loop engineering](/fr/methodology/08-loop-engineering).

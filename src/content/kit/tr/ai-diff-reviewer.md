@@ -16,6 +16,8 @@ Bu eklenti o diff'in başına ikinci bir okuyucu oturtur. **[AI Diff Reviewer](h
 
 Bunu gönül rahatlığıyla benimsenebilir kılan sınır bilinçli olarak dardır. İnceleyici, MIT lisanslı ve etikete sabitlenmiş bir skill'dir ve hâlihazırda çalıştırdığınız kod agent'ı tarafından yürütülür; dolayısıyla hiçbir Deep Work Plan akışı ticari bir hizmete, bir CI sağlayıcısına ya da bir gizli anahtara bağlı değildir. **Flow A** (yalnızca yerel), kuruluma alınmış her deponun aldığı şeydir; **Flow B** açıkça önerilir ve istenmeden asla kurulmaz. Geliştirici inceleyiciyi büsbütün reddedebilir de — bu reddediş beyan edilmiş bir istisna olarak kaydedilir ve kurulana kadar `verify` depoyu bu noktada uyumsuz olarak raporlar.
 
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
+
 ## Ne zaman kullanılır
 
 | Sinyal | Eylem |

@@ -8,7 +8,7 @@ section: Record layer
 
 # Lapisan catatan
 
-> **Cakupan versi:** Halaman ini menyatakan ulang lapisan catatan v6 yang normatif, yang menjadi dasar standar saat ini, DWP 7.0.0. Sumber kanonis pada rilis `v7.12.2`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) dan [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku. Rencana v5 tetap memakai lapisan [status rencana](/spec/plan-state) dan tidak pernah dimigrasikan secara implisit.
+> **Cakupan versi:** Halaman ini menyatakan ulang lapisan catatan v6 yang normatif, yang menjadi dasar standar saat ini, DWP 8.0.0. Sumber kanonis pada rilis `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_CONTRACT.md) dan [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). Jika halaman ini dan berkas-berkas tersebut berbeda, berkas-berkas itulah yang berlaku. Rencana v5 tetap memakai lapisan [status rencana](/spec/plan-state) dan tidak pernah dimigrasikan secara implisit.
 
 **Versi 6.0.0, diperluas di 7.0.0. Status: Stabil.** Lapisan catatan menggantikan penyelesaian naratif dengan catatan: kontrak adalah otoritasnya, jurnal adalah memorinya, helper yang melakukan penulisan, dan setiap berkas yang dihasilkan adalah sebuah proyeksi. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
@@ -17,7 +17,6 @@ section: Record layer
 Sebuah rencana terdiri dari dua artefak yang ditulis dan satu urutan yang dijaga. Markdown rencana (`README.md` dan berkas tugas) menyatakan apa yang akan dikerjakan. **Kontrak hasil** (`contract.json`) menyatakan apa yang dihitung sebagai selesai dan apa yang boleh dilakukan rencana. **Jurnal** (`journal.ndjson`) mencatat apa yang benar-benar terjadi. `state.json` dan `views/` dibuat ulang dari jurnal dan MUST NOT diedit secara manual; ketika sebuah berkas yang dihasilkan dan jurnal tidak sepakat, jurnal yang menang dan berkas itu dibuat ulang.
 
 ## Deteksi generasi
-
 Sebuah folder rencana adalah rencana lini v6 jika dan hanya jika ia membawa `manifest.json` yang penunjuk `contract`-nya dapat di-resolve, sebuah `contract.json`, atau rantai revisi `contracts/`. Deteksi MUST menggunakan artefak-artefak ini, tidak pernah versi paket yang terpasang: paket terbaru dapat menyimpan rencana v5, dan paket yang lebih lama dapat menjumpai rencana v6.
 
 URL `schema` milik kontrak menamai **generasinya**, dan manifest serta setiap peristiwa jurnal mencerminkannya:
@@ -26,8 +25,10 @@ URL `schema` milik kontrak menamai **generasinya**, dan manifest serta setiap pe
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` dan peristiwa `delegation` ([Delegasi](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` dan wewenang loop |
+Snapshot aktif v8 menggunakan [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json).
 
-Rencana baru yang dibuat oleh paket 7.x adalah v7 secara default; permintaan `v6` yang eksplisit tetap mematerialisasikan kontrak v6. Sebuah rencana tidak pernah berganti generasi, dan jurnal yang mencampur generasi MUST ditolak. Kedua generasi diproyeksikan ke bentuk [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) yang sama.
+Rencana baru yang dibuat oleh paket 8.x adalah v8 secara default; permintaan `v6` yang eksplisit tetap mematerialisasikan kontrak v6. Sebuah rencana tidak pernah berganti generasi, dan jurnal yang mencampur generasi MUST ditolak. Kedua generasi diproyeksikan ke bentuk [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) yang sama.
 
 ## Kontrak hasil
 

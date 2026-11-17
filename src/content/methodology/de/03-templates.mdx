@@ -27,7 +27,7 @@ Ein Plan ist ein Verzeichnis unter `.dwp/plans/` mit dem Namen `PLAN_001_<slug>/
 - `<n>.task_<slug>.md` — Zehnteilige Spezifikationsdatei je Aufgabe.
 - `analysis_results/` — Verzeichnis für Analyseartefakte, Berichte und Gate-Logs.
 
-Das aktuelle 7.x-Paket erstellt standardmäßig v7-Pläne mit 2–5 Wörtern im Slug, wie schon bei v6. Der beibehaltene v5-Ablauf verwendet 2–4 Wörter (da dessen Schema die numerische ID als Wort zählt). Neue Pläne erhalten monoton steigende numerische IDs mit mindestens drei Ziffern (z. B. `PLAN_001_add_payment_webhooks/`). Bestehende unnummerierte `PLAN_<slug>/`-Ordner bleiben lesbar und werden niemals umbenannt; bestehende Pläne werden niemals stillschweigend migriert. Wenn nummerierte Pläne vorhanden sind, löst `latest` zum Plan mit der höchsten numerischen ID auf.
+Das v8-Paket erstellt neue Pläne standardmäßig mit `plan-contract/v8`. Bestehende Pläne behalten ihre aufgezeichnete Generation; eine Migration erfordert ein ausdrückliches `refine migrate`.
 
 ## Struktur der Aufgabendatei
 

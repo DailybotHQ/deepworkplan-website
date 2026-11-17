@@ -8,7 +8,7 @@ section: Record layer
 
 # 기록 레이어
 
-> **버전 범위:** 이 페이지는 현재 표준인 DWP 7.0.0이 기반으로 삼는 규범적 v6 기록 레이어를 다시 서술합니다. 릴리스 `v7.12.2` 기준 정식 출처: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md), [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다. v5 계획은 [계획 상태](/spec/plan-state) 레이어를 유지하며 암묵적으로 마이그레이션되는 일은 결코 없습니다.
+> **버전 범위:** 이 페이지는 현재 표준인 DWP 8.0.0이 기반으로 삼는 규범적 v6 기록 레이어를 다시 서술합니다. 릴리스 `v8.0.0` 기준 정식 출처: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_CONTRACT.md), [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md). 이 페이지와 해당 파일이 다를 경우 파일이 우선합니다. v5 계획은 [계획 상태](/spec/plan-state) 레이어를 유지하며 암묵적으로 마이그레이션되는 일은 결코 없습니다.
 
 **버전 6.0.0, 7.0.0에서 확장. 상태: 안정(Stable).** 기록 레이어는 서술형 완료를 기록으로 대체합니다: 계약이 권한의 근거이고, 저널이 기억이며, 헬퍼가 기록을 작성하고, 생성된 모든 파일은 프로젝션입니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
@@ -17,7 +17,6 @@ section: Record layer
 계획은 두 개의 작성된 산출물과 하나의 보호된 시퀀스로 이루어집니다. 계획 Markdown(`README.md`와 작업 파일)은 무엇을 할지 말합니다. **결과 계약**(`contract.json`)은 무엇이 완료로 인정되는지, 그리고 계획이 무엇을 할 수 있는지 말합니다. **저널**(`journal.ndjson`)은 실제로 일어난 일을 기록합니다. `state.json`과 `views/`는 저널로부터 재생성되며 손으로 편집해서는 안 됩니다(MUST NOT). 생성된 파일과 저널이 불일치하면 저널이 우선하고 파일은 재생성됩니다.
 
 ## 세대 감지
-
 계획 폴더는 `contract` 포인터가 해석되는 `manifest.json`, `contract.json`, 또는 `contracts/` 개정 체인을 갖고 있을 때, 그리고 그때에만 v6 계열 계획입니다. 감지는 이 산출물을 사용해야(MUST) 하며, 설치된 팩 버전을 사용해서는 결코 안 됩니다: 현재 팩이 v5 계획을 담을 수 있고, 이전 팩이 v6 계획을 만날 수도 있기 때문입니다.
 
 계약의 `schema` URL이 그 **세대**를 나타내며, 매니페스트와 모든 저널 이벤트가 이를 그대로 반영합니다:
@@ -26,8 +25,10 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe`와 `delegation` 이벤트([위임](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` 및 루프 권한 |
+v8 라이브 스냅샷은 [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json)을 사용합니다.
 
-7.x 팩이 생성하는 새 계획은 기본적으로 v7입니다. 명시적으로 `v6`을 요청하면 여전히 v6 계약이 구체화됩니다. 계획은 세대를 바꾸는 일이 결코 없으며, 세대가 섞인 저널은 거부되어야(MUST) 합니다. 두 세대 모두 동일한 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 형태로 투영됩니다.
+8.x 팩이 생성하는 새 계획은 기본적으로 v7입니다. 명시적으로 `v6`을 요청하면 여전히 v6 계약이 구체화됩니다. 계획은 세대를 바꾸는 일이 결코 없으며, 세대가 섞인 저널은 거부되어야(MUST) 합니다. 두 세대 모두 동일한 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 형태로 투영됩니다.
 
 ## 결과 계약
 

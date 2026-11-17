@@ -42,7 +42,7 @@ Deep Work Plan เปลี่ยน repository ให้เป็นสภา�
 
 ### ใช้งานอย่างไร?
 
-สามขั้นตอน ขั้นแรก ติดตั้ง Deep Work Plan skill ลงใน coding agent ของคุณ——เส้นทางที่เร็วที่สุดคือ `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (หรือ clone skill repo แล้วรัน `./setup.sh`) ขั้นที่สอง onboard repository ครั้งเดียว เพื่อให้ agent ปรับ `AGENTS.md`, `docs/`, ชุด `.agents/` และพื้นที่ `.dwp/` ที่ถูก gitignore ให้เข้ากับสแต็กของคุณ: ชี้ไปที่ https://deepworkplan.com/init.md หรือรัน `/deepworkplan-onboard` ขั้นที่สาม วางแผนและรันงานด้วยคำสั่งบาง ๆ: `/dwp-create <goal>` สร้างแผน; `/dwp-execute` รันทีละงานผ่านแต่ละ gate; `/dwp-refine` แก้ไขแผนที่กำลังดำเนินอยู่ (ขอบเขต งาน หรือการยกระดับแผน Lite เป็น Full); `/dwp-resume` ทำต่อหลังการหยุดชะงัก; `/dwp-status` รายงานความคืบหน้าโดยไม่รัน; `/dwp-verify` สร้างรายงานการสอดคล้องที่เป็นกลาง ส่วน `/dwp-upgrade` ย้ายสกิลที่ติดตั้งไว้ไปยังรีลีสใหม่โดยไม่แตะแผนที่มีอยู่ agent ที่ intercept `/` มักใช้ `#` แทน (เช่น `#dwp-execute`) adoption endpoint และเริ่มใช้งานเร็วอธิบายเส้นทางเดียวกันอย่างละเอียดยิ่งขึ้น
+สามขั้นตอน ขั้นแรก ติดตั้ง Deep Work Plan skill ลงใน coding agent ของคุณ——เส้นทางที่เร็วที่สุดคือ `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (หรือ clone skill repo แล้วรัน `./setup.sh`) ขั้นที่สอง onboard repository ครั้งเดียว เพื่อให้ agent ปรับ `AGENTS.md`, `docs/`, ชุด `.agents/` และพื้นที่ `.dwp/` ที่ถูก gitignore ให้เข้ากับสแต็กของคุณ: ชี้ไปที่ https://deepworkplan.com/init.md หรือรัน `/deepworkplan-onboard` ขั้นที่สาม วางแผนและรันงานด้วยคำสั่งบาง ๆ: `/dwp-create <goal>` สร้างแผน; `/dwp-execute` รันทีละงานผ่านแต่ละ gate; `/dwp-refine` แก้ไขแผนที่กำลังดำเนินอยู่ (ขอบเขต งาน หรือการยกระดับแผน Lite เป็น Full); `/dwp-resume` ทำต่อหลังการหยุดชะงัก; `/dwp-status` รายงานความคืบหน้าโดยไม่รัน; `/dwp-verify` สร้างรายงานการสอดคล้องที่เป็นกลาง ส่วน `/dwp-upgrade` ย้ายสกิลที่ติดตั้งไว้ไปยังรีลีสใหม่โดยไม่แตะแผนที่มีอยู่ agent ที่ intercept `/` มักใช้ `#` แทน (เช่น `#dwp-execute`) adoption endpoint และเริ่มใช้งานเร็วอธิบายเส้นทางเดียวกันอย่างละเอียดยิ่งขึ้น
 
 [เริ่มใช้งานเร็ว](https://deepworkplan.com/th/quickstart)
 
@@ -126,6 +126,18 @@ gate ที่ล้มเหลวคือสัญญาณให้ซ่อ
 
 [อ่านโพรโทคอลการรันแบบไม่มีคนเฝ้า](https://deepworkplan.com/th/spec/agent-protocol)
 
+### loop engineering คืออะไร?
+
+Loop engineering คือการปิดวงจรการทำงาน: หลังลงทะเบียนแผนพร้อม lead แล้ว daemon ของ Herdr ที่เป็นตัวเลือกและมนุษย์เป็นผู้เริ่ม สามารถพาแผนที่เปิดอยู่ไปจนเสร็จและรายงานเมื่อหยุดชะงัก ถูกบล็อก ไม่มี lead หรือเสร็จสิ้น โดยทำงานภายในอำนาจที่บันทึกไว้ในแผน
+
+### Deep Work Plan ต้องใช้ daemon หรือไม่?
+
+ไม่ต้อง วิธีการและแผนทำงานได้โดยไม่มี Herdr หรือ daemon ส่วน addon นี้เป็นทางเลือกเพื่อเพิ่มความต่อเนื่อง ไม่ใช่ข้อกำหนด
+
+### daemon ทำอะไรไม่ได้เด็ดขาด?
+
+daemon จะไม่เข้าสู่ระบบ ไม่ยอมรับการยืนยัน bypass-permissions ของ Claude ไม่ขยายสิทธิ์ถาวรของ agent และไม่ดำเนินการ merge, tag หรือ release การ nudge ส่งเพียงข้อความให้ทำงานต่อแบบตายตัวและไม่ให้อำนาจเพิ่ม
+
 ## หลายเอเจนต์และ v7
 
 ### เอเจนต์หลายตัวสามารถทำงานบนแผนเดียวกันแบบคู่ขนานได้อย่างปลอดภัยหรือไม่?
@@ -158,9 +170,9 @@ DWP กำหนดการจำแนกการส่งต่อปัญ�
 
 [อ่านข้อกำหนดเลเยอร์การบันทึก](https://deepworkplan.com/th/spec/record-layer)
 
-### แผนงาน v6 ยังคงทำงานต่อไปภายใต้ v7 ได้หรือไม่?
+### แผนที่มีอยู่ยังคงรุ่นเดิมเมื่อใช้ v8 หรือไม่?
 
-ได้ สัญญาแผนงานประกาศเวอร์ชันของสกีมาอย่างชัดเจน (`plan-contract/v6.json` เทียบกับ `plan-contract/v7.json`) แผนจะไม่เปลี่ยนเวอร์ชันระหว่างการทำงาน แผนงาน v6 เดิมจะยังคงรักษารูปแบบและสถานะไว้ภายใต้เครื่องมือ v7 อย่างราบรื่น
+ใช่ แผนใหม่ใช้ `plan-contract/v8` เป็นค่าเริ่มต้น แผน v7, v6 และ v5 ที่มีอยู่จะคงรุ่นที่บันทึกไว้และทำงานต่อกับแพ็กปัจจุบัน รุ่นของแผนจะเปลี่ยนได้เฉพาะเมื่อร้องขอ `/dwp-refine migrate` อย่างชัดเจน
 
 [อ่านเกี่ยวกับสัญญา](https://deepworkplan.com/th/spec/record-layer)
 

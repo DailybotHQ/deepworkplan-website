@@ -100,3 +100,7 @@ O plano pai fecha com evidência, não com relatórios:
 ## Quando uma conta ou o líder se esgota
 
 Uma execução longa dura mais que qualquer conta. A partir do coding-agents-kit (`v0.7.1`) e do herdr-peers (`v0.3.2`), uma frente verifica a própria capacidade em cada limite entre tarefas e repassa o trabalho por meio de um pacote antes que sua conta se esgote, um líder repassa a liderança ou é substituído pelo seu suplente, e só os itens críticos chegam ao desenvolvedor. [Autonomia do enxame](/pt/methodology/07-swarm-autonomy) descreve o loop, o pacote, a sucessão e as classes de escalação.
+
+## Registrar um plano para o loop
+
+Quando o addon opcional Herdr está ativo, `execute` do pacote reivindica o registro de lead do plano, acrescentando uma sucessão quando o plano nomeia sucessores. A pessoa pode iniciar `herdr-peers autopilot --loop` para continuar planos abertos e pedir ao sucessor listado que assuma no lugar de um lead que desapareceu. O daemon observa somente planos registrados; consulte [Loop engineering](/pt/methodology/08-loop-engineering).

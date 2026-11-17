@@ -14,7 +14,7 @@ export const de: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — strukturierte Ausführung für KI-Coding-Agenten',
   siteDescription:
-    'Deep Work Plan ist spezifikationsgetriebene Entwicklung mit dem Repository als Harness: atomare Aufgaben, Validierungs-Gates und sichere Multi-Agenten.',
+    'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und jeder Plan läuft bis zum Ende. Effizienz messen wir in Instruktionsbytes pro Ablauf.',
 
   // Navigation
   nav: {
@@ -99,14 +99,14 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — strukturierte Ausführung für KI-Coding-Agenten',
       description:
-        'Deep Work Plan bringt spezifikationsgetriebene Entwicklung zu KI-Agenten: Machen Sie Ihr Repository zum robusten Harness für Multi-Agenten-Delegation.',
+        'Spec-first, mit geschlossenem Loop: Deep Work Plan macht Ihr Repository zum Harness für KI-Coding-Agenten, und jeder Plan läuft im Loop bis zum Ende.',
     },
     hero: {
       badge: 'Offene Methodik · MIT · Agenten-agnostisch',
-      title: 'Modelle zählen.',
-      titleEmphasis: 'Kontext zählt mehr.',
+      leadSentence:
+        'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.',
       subtitle:
-        'Deep Work Plan verwandelt jedes Repository in eine strukturierte Umgebung — Kontext, Guardrails und einen dauerhaften Plan — in der jeder Coding-Agent präzise und effizient arbeitet und langlaufende Arbeit abschließt.',
+        'Deep Work Plan macht jedes Repository zum Harness — Kontext, Guardrails und ein dauerhafter Plan mit Validierungs-Gates —, in dem jeder Coding-Agent langlaufende Arbeit ausführt. Fügen Sie den optionalen Loop hinzu, und ein offener Plan läuft bis zu seinem Ende weiter, ohne dass jemand nachfragen muss.',
       instructionLabel: 'In Ihren Agenten kopieren',
       instruction:
         'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',
@@ -114,19 +114,38 @@ export const de: SiteTranslations = {
       copiedLabel: 'Kopiert',
       viewInitCta: 'So funktioniert es',
       pullQuote:
-        'Deep Work Plan ist spec-driven Development, bei der das Repository selbst zum Harness wird.',
+        'Spec-first sagt, was; das Harness, wo; Loop engineering, wie es zu Ende geht.',
       primaryCta: 'Methodik lesen',
       secondaryCta: 'Spezifikation lesen',
-      illustrationAlt:
-        'Ein Leuchtturm an felsiger Küste wirft einen einzelnen Strahl, der ein kleines Schiff lenkt — ein Stich, der das Repository als stabilen Anker („harness“) zeigt, der jeden Agenten führt.',
-      scrollCta: 'So funktioniert es',
+    },
+    pillars: {
+      badge: 'Vier Säulen',
+      title: 'Worauf die Methodik aufbaut.',
+      items: [
+        {
+          name: 'Spec-first',
+          line: 'Der Plan ist die dauerhafte Quelle der Wahrheit: atomare Aufgaben, Akzeptanzkriterien und Validierungs-Gates, die der Agent bestehen muss.',
+        },
+        {
+          name: 'Das Repository ist das Harness',
+          line: 'Kontext, Werkzeuge, Guardrails und Zustand liegen als einfache Dateien im Repository, die jeder Agent lesen kann.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Pläne laufen bis zu ihrem Ende: Registrierung, ein von einem Menschen gestarteter Daemon, Anstöße ohne zusätzliche Befugnis, Failover und Plan-Ereignisse.',
+        },
+        {
+          name: 'Gemessene Effizienz',
+          line: 'Instruktions-Bytes pro Flow, gemessen und mit ihrer Methode veröffentlicht — niemals erfundene Token-Prozentsätze.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Das Problem und die Antwort',
       problem:
         'In kurzen Spitzen sind Coding-Agenten beeindruckend. Übergeben Sie ihnen eine langlaufende Mission — eine Migration, ein neues Subsystem, eine Refaktorierung über Dutzende Dateien —, driftet der Agent ab: Der Kontext füllt sich, frühere Entscheidungen verblassen und stundenlange Arbeit bleibt auf halbem Weg liegen.',
       answer:
-        'Deep Work Plan antwortet mit spec-driven development: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. „Fertig“ ist kein Gefühl mehr — es wird zu überprüfbarer, reviewbarer Evidenz.',
+        'Deep Work Plan antwortet spec-first: ein dauerhafter Plan, atomare Aufgaben und Validierungs-Gates, die der Agent bestehen muss. „Fertig“ ist kein Gefühl mehr — es wird zu überprüfbarer, reviewbarer Evidenz. Loop engineering hält den Plan dann in Bewegung, bis diese Gates bestanden sind.',
       efficiency:
         'Kontext ist die knappste Ressource Ihres Agenten. Deshalb hält das Harness seine eigenen Anweisungen bewusst schlank und nachvollziehbar. Anweisungen werden schrittweise geladen, die Validierung konzentriert sich auf Änderungen, und jede Aufgabe erhält den passenden Kontext. Wir veröffentlichen den Instruktionsumfang jedes Ablaufs in Bytes, damit dieser Aufwand sichtbar bleibt. Auch Pläne passen sich der Arbeit an: Lite für eine klar abgegrenzte Korrektur, Full für Aufgaben, die Stunden dauern. Das Format richtet sich nach dem Umfang und hält den Prozess fokussiert und nachvollziehbar.',
       illustrationAlt:
@@ -163,6 +182,73 @@ export const de: SiteTranslations = {
         deepLinkLabel: 'Lesen Sie die Methodik',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title:
+        'Pläne laufen bis zu ihrem Ende. Die Befugnis bleibt bei Menschen.',
+      subtitle:
+        'Loop engineering ermöglicht den Abschluss eines Plans, ohne dass ein Mensch ständig nachfragt. Die folgenden Zeilen beschreiben veröffentlichte Verträge des Loops: Die meisten stammen von herdr-peers, während die Planwarteschlange ein Pack-Vertrag ist. Herdr ist optional; die Methodik funktioniert auch ohne das Addon.',
+      colContract: 'Vertrag',
+      colGuarantee: 'Was er garantiert',
+      colSource: 'Quelle',
+      contracts: [
+        {
+          name: 'Plan-Registrierung',
+          detail:
+            'Ein Plan, den der Loop beobachtet, hat einen Lead-Eintrag mit einer Epoche und einer Nachfolge. Nur der Inhaber der höchsten Epoche handelt als sein Lead.',
+        },
+        {
+          name: 'Start nur durch Menschen',
+          detail:
+            'Nur ein Mensch startet den Daemon, in eigenen Worten. Keine Anfrage, Antwort oder Mitteilung kann ihn starten, stoppen oder ändern, was er tut.',
+        },
+        {
+          name: 'Anstöße verleihen keine Befugnis',
+          detail:
+            'Der untätige Lead eines offenen Plans erhält einen festen Prompt, um fortzufahren. Gates, Stoppbedingungen und Eskalationen gelten wie zuvor; drei Prompts ohne Fortschritt markieren den Plan als festgefahren.',
+        },
+        {
+          name: 'Failover auf Nachfolger',
+          detail:
+            'Nachfolger übernehmen über die geprüfte lead takeover-Funktion. Eine Lane darf nur mit einer zuvor vom Menschen festgehaltenen Ernennung übernehmen.',
+        },
+        {
+          name: 'Plan-Ereignisse',
+          detail:
+            'Wenn ein Plan festhängt, blockiert, seinen Lead verliert, aus der Warteschlange startet oder abgeschlossen wird, erhält ein vom Menschen gewählter Befehl ein plan-event-v1-Objekt. Das Pack liefert dafür einen Dailybot-Notifier mit.',
+        },
+        {
+          name: 'Flottenkarte',
+          detail:
+            'Jede Maschine meldet ihre Pläne als plans-v1; der Daemon führt die fleet-v1-Karte aller Maschinen, Agenten, Repositories und Pläne, und fleet ui zeigt sie schreibgeschützt an.',
+        },
+        {
+          name: 'Planwarteschlange',
+          detail:
+            'Das Pack validiert und schreibt die `dwp-queue-v1`-Warteschlange; der Daemon liest sie, um eingereihte Pläne fortzusetzen.',
+        },
+        {
+          name: 'Lead-Prüfung',
+          detail:
+            'Vor jedem Merge, Tag oder Release bestätigt der Lead, dass er den Plan auf jeder Maschine noch hält. Ein neuerer Lead lässt sie scheitern; eine nicht erreichbare Maschine hält sie an, es sei denn, dieses Risiko wurde nachweislich akzeptiert.',
+        },
+      ],
+      note: 'Die Entscheidungslogik (--brain) und die Lead-Ernennung (--appoint) sind Opt-in-Flags desselben Daemons, die jeweils ein Mensch einschaltet. Der Daemon führt nie einen Merge oder ein Release durch, meldet sich nie an und ändert keine Berechtigung.',
+      deepLinkLabel: 'Das Herdr-Addon lesen',
+    },
+    efficiency: {
+      badge: 'Gemessene Effizienz',
+      title: 'Instruktions-Bytes pro Flow, gemessen.',
+      subtitle:
+        'Das Harness veröffentlicht, was jeder Flow vor dem Start lesen muss: den Router, die Sub-Skill und die gemeinsamen Ressourcen, die sie verlinkt. Das sind die Pflichtlektüren des veröffentlichten Packs.',
+      colFlow: 'Flow',
+      colBytes: 'Einstiegsbündel (Bytes)',
+      caption:
+        'Einheit: Dateisystem-Bytes. Gemessen am veröffentlichten Pack mit dem Befehl unten.',
+      absent:
+        'Provider-Tokens, Kosten und Statistiken zum Schließen des Loops werden nicht gezeigt: Noch keine getaggte Quelle misst sie, daher haben sie keine Zeile. Die Token-Zahl des Skripts (Bytes ÷ 4) ist eine gekennzeichnete Schätzung, niemals eine Messung.',
+      deepLinkLabel: 'Das Evaluations-Ledger lesen',
     },
     onboarding: {
       badge: 'Reasoning-basiertes Onboarding',
@@ -219,6 +305,11 @@ export const de: SiteTranslations = {
           description:
             'Erzeugen Sie langfristige Deep Work Plans für jede Aufgabe und führen Sie diese Schritt für Schritt aus — mit expliziten Akzeptanzkriterien, Validierungs-Gates und wiederaufnehmbarem Zustand — autonom, über Stunden hinweg.',
         },
+        {
+          title: 'Ein Mensch startet den Loop',
+          description:
+            'Optional, mit dem Herdr-Addon: Sie — niemals ein Agent — führen herdr-peers autopilot start --loop aus. Jeder offene Plan mit Lead-Eintrag läuft bis zu seinem Ende weiter, und Ihr Notifier erfährt, wenn einer festhängt, blockiert oder abgeschlossen wird.',
+        },
       ],
       note: 'Die Skill wird überall identisch installiert; angepasst wird Ihr Repository — die AGENTS.md, die Dokumentation und das für Ihren Stack erzeugte, durchdachte .agents/-Kit. Diese Trennung macht die Methodik zu einem wiederverwendbaren Standard und nicht zu einem einmaligen Gerüst.',
     },
@@ -266,7 +357,7 @@ export const de: SiteTranslations = {
         {
           label: 'Git-nativ, wiederaufnehmbar, .dwp/',
           detail:
-            'Kein Daemon und kein externer Zustand. Pläne landen in einem per gitignore ausgeschlossenen .dwp/-Ordner, und jede Aufgabe setzt allein aus git wieder auf — selbst nach einem Kontextüberlauf.',
+            'Die Methodik selbst braucht keinen Daemon und keinen externen Zustand. Pläne landen in einem per gitignore ausgeschlossenen .dwp/-Ordner, und jede Aufgabe setzt allein aus git wieder auf — selbst nach einem Kontextüberlauf. Der optionale Loop-Daemon fügt Kontinuität hinzu, niemals eine Abhängigkeit.',
         },
         {
           label: 'Multi-Agenten-Delegation und Ökosystem 1.0',
@@ -592,12 +683,12 @@ export const de: SiteTranslations = {
     meta: {
       title: 'Die Deep Work Plan Methodik',
       description:
-        'Sieben Kapitel vom Manifest bis zur Schwarmautonomie: Prinzipien, Kernschleife, Vorlagen, Skills und Agenten, Archetypen, viele Agenten und robuste Schwärme.',
+        'Acht Kapitel vom Manifest bis Loop engineering: Prinzipien, Kernschleife, Vorlagen, Skills und Agenten, Archetypen, Multi-Agenten-Arbeit und Loop-Schluss.',
     },
     eyebrow: 'Methodik',
     title: 'Die Deep Work Plan Methodik',
     intro:
-      'Sieben Kapitel, die Sie von der Philosophie hinter Deep Work Plan zur praktischen Schleife, den Vorlagen, den Anpassungen, vielen Agenten gleichzeitig und einem Schwarm führen, der weiterläuft.',
+      'Acht Kapitel führen von den Prinzipien und der praktischen Schleife von Deep Work Plan über Vorlagen, Anpassungen und Multi-Agenten-Arbeit bis zu Loop engineering.',
     chapterLabel: 'Kapitel',
     readChapter: 'Kapitel lesen',
     prev: 'Zurück',
@@ -691,8 +782,6 @@ export const de: SiteTranslations = {
     },
     eyebrow: 'Schnellstart',
     title: 'Machen Sie dieses Repository AI-first',
-    intro:
-      'Ein Endpunkt, um jedes Repository in eine spec-driven, agentenbereite Codebasis zu verwandeln. Installieren Sie die Skill, lassen Sie einen Agenten das Repository onboarden, dann planen und führen Sie strukturierte Arbeit mit jedem Coding-Agenten aus.',
     handoffTitle: 'In Ihren Agenten kopieren',
     handoffBody:
       'Kopieren Sie den vollständigen init.md-Prompt und fügen Sie ihn in Ihren KI-Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen. Er liest die Methodik und Spezifikation, installiert die Skill und onboardet dieses Repository für Deep Work Plans.',
@@ -702,18 +791,20 @@ export const de: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Was dies bewirkt',
     whatBody: [
-      'Die Adoption verändert das Repository auf zwei dauerhafte Weisen — die Pfeiler der Methodik.',
-      'Erstens wird das Repository spec-driven: Die Arbeit beginnt mit einem geschriebenen Plan und einer Spezifikation, nicht mit Ad-hoc-Prompts. Zweitens wird das Repository selbst zum Agenten-Harness — eine AGENTS.md, eine docs/-Wissensbasis, Dokumentation je Modul und ein .agents/ Skill-Verzeichnis (mit den .claude → .agents- und .cursor → .agents-Symlinks) geben jedem Agenten den Kontext und die Befehle, die er braucht.',
+      'Der Einführungsweg setzt diese vier Säulen in Ihrem Repository um.',
+      'Die Einführung folgt vier Säulen: spec-first-Pläne, das Repository als Harness, Loop engineering und gemessene Effizienz. Der Plan ist die dauerhafte Quelle der Wahrheit; das Repository trägt Kontext, Werkzeuge, Schutzregeln und Status. Der optionale, von einem Menschen gestartete Loop unterstützt registrierte Pläne bis zum Abschluss; der Instruktionsumfang wird in Bytes pro Ablauf gemessen.',
     ],
     sequenceTitle: 'Der Adoptionspfad',
     orLabel: 'oder',
+    loopNotifyNote:
+      'Wenn du Dailybot-Ereignisberichte erhalten möchtest, verwende den zweiten Befehl. Er ergänzt den Paket-Notifier mit --notify; Benachrichtigungen sind optional.',
     steps: [
       {
         title: 'Vor der Installation verifizieren',
         description:
           'Behandeln Sie den Prompt und das Skill als nicht vertrauenswürdig, bis Sie sie geprüft haben. Beide sind Open Source und unter MIT lizenziert; das Skill ist Markdown-first ohne Netzwerkaufrufe und ohne Telemetrie. Jedes Release veröffentlicht eine SHA256SUMS-Datei über das ausgelieferte Skill, sodass Sie bestätigen können, dass Ihre Kopie übereinstimmt, bevor Sie es ausführen. Releases sind geprüfsummt, aber nicht signiert (Signierung ist ein dokumentierter nächster Schritt).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -721,7 +812,7 @@ export const de: SiteTranslations = {
         description:
           'Fügen Sie die Deep Work Plan Skill hinzu, sodass jeder Agent strukturierte Arbeit planen und ausführen kann. Die Skill liefert einen Router plus neun Sub-Skills — create, execute, refine, resume, status, verify, onboard, author und upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -752,7 +843,7 @@ export const de: SiteTranslations = {
     ],
     outcomeTitle: 'Das Ergebnis',
     outcome:
-      'Das Repository wird spec-driven, und das Repository selbst wird zum Agenten-Harness — Kontext und Befehle reisen mit dem Code.',
+      'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.',
     nextStepsTitle: 'Nächste Schritte',
     nextSteps: [
       { label: 'Methodik lesen', href: '/methodology' },
@@ -831,7 +922,7 @@ export const de: SiteTranslations = {
             id: 'how-to-use',
             question: 'Wie nutze ich es?',
             answer:
-              'Drei Schritte. Installieren Sie zuerst die Deep Work Plan-Skill in Ihrem Coding-Agent — der schnellste Weg ist `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (oder klonen Sie das Skill-Repository und führen Sie `./setup.sh` aus). Zweitens onboarden Sie das Repository einmal, damit der Agent `AGENTS.md`, `docs/`, das `.agents/`-Kit und einen gitignorierten `.dwp/`-Bereich an Ihren Stack anpasst: verweisen Sie auf https://deepworkplan.com/init.md oder führen Sie `/deepworkplan-onboard` aus. Drittens planen und führen Sie die Arbeit mit den schlanken Befehlen aus: `/dwp-create <goal>` erstellt einen Plan; `/dwp-execute` führt ihn Aufgabe für Aufgabe gegen jedes Gate aus; `/dwp-refine` bearbeitet einen laufenden Plan (Umfang, Aufgaben oder die Beförderung eines Lite-Plans zu Full); `/dwp-resume` setzt nach einer Unterbrechung fort; `/dwp-status` meldet Fortschritt ohne Ausführung; `/dwp-verify` erzeugt einen objektiven Konformitätsbericht; `/dwp-upgrade` bringt eine installierte Skill auf einen neueren Release, ohne bestehende Pläne anzutasten. Agenten, die `/` abfangen, verwenden oft `#` stattdessen (zum Beispiel `#dwp-execute`). Der Adoptions-Endpunkt und der Schnellstart gehen denselben Weg ausführlicher.',
+              'Drei Schritte. Installieren Sie zuerst die Deep Work Plan-Skill in Ihrem Coding-Agent — der schnellste Weg ist `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (oder klonen Sie das Skill-Repository und führen Sie `./setup.sh` aus). Zweitens onboarden Sie das Repository einmal, damit der Agent `AGENTS.md`, `docs/`, das `.agents/`-Kit und einen gitignorierten `.dwp/`-Bereich an Ihren Stack anpasst: verweisen Sie auf https://deepworkplan.com/init.md oder führen Sie `/deepworkplan-onboard` aus. Drittens planen und führen Sie die Arbeit mit den schlanken Befehlen aus: `/dwp-create <goal>` erstellt einen Plan; `/dwp-execute` führt ihn Aufgabe für Aufgabe gegen jedes Gate aus; `/dwp-refine` bearbeitet einen laufenden Plan (Umfang, Aufgaben oder die Beförderung eines Lite-Plans zu Full); `/dwp-resume` setzt nach einer Unterbrechung fort; `/dwp-status` meldet Fortschritt ohne Ausführung; `/dwp-verify` erzeugt einen objektiven Konformitätsbericht; `/dwp-upgrade` bringt eine installierte Skill auf einen neueren Release, ohne bestehende Pläne anzutasten. Agenten, die `/` abfangen, verwenden oft `#` stattdessen (zum Beispiel `#dwp-execute`). Der Adoptions-Endpunkt und der Schnellstart gehen denselben Weg ausführlicher.',
             linkLabel: 'Schnellstart',
             linkPath: '/quickstart',
           },
@@ -953,6 +1044,25 @@ export const de: SiteTranslations = {
             linkLabel: 'Protokoll für unbeaufsichtigte Durchläufe lesen',
             linkPath: '/spec/agent-protocol',
           },
+
+          {
+            id: 'loop-engineering',
+            question: 'Was ist loop engineering?',
+            answer:
+              'Loop engineering schließt den Ausführungszyklus: Nach der Registrierung eines Plans mit Lead kann der optionale, von einem Menschen gestartete Herdr-Daemon den offenen Plan bis zum Abschluss weiterführen und Stillstand, Blockaden, einen fehlenden Lead oder den Abschluss melden. Er bleibt innerhalb der im Plan festgehaltenen Befugnisse.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Benötigt Deep Work Plan den Daemon?',
+            answer:
+              'Nein. Die Methode und ihre Pläne funktionieren ohne Herdr oder Daemon. Das Add-on ist optional und sorgt für Kontinuität; es ist keine Voraussetzung.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Was kann der Daemon niemals tun?',
+            answer:
+              'Er meldet sich niemals an, bestätigt niemals Claudes Berechtigungsumgehung, erweitert niemals dauerhafte Agentenrechte und führt keine Merge-, Tag- oder Release-Aktionen aus. Ein Nudge sendet nur eine feste Aufforderung zum Fortfahren und verleiht keine Befugnisse.',
+          },
         ],
       },
       {
@@ -1006,9 +1116,9 @@ export const de: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Laufen v6-Pläne unter v7 unverändert weiter?',
+            question: 'Behalten bestehende Pläne unter v8 ihre Generation?',
             answer:
-              'Ja. Plankontrakte deklarieren ihre Schema-Generation explizit (`plan-contract/v6.json` vs. `plan-contract/v7.json`). Ein laufender Plan migriert niemals mittendrin. Bestehende v6-Pläne behalten ihr Format und ihre Semantik unter v7-Tools bei.',
+              'Ja. Neue Pläne verwenden standardmäßig `plan-contract/v8`. Bestehende v7-, v6- und v5-Pläne behalten ihre aufgezeichnete Generation und laufen mit dem aktuellen Pack weiter. Eine Generation ändert sich nur nach einer ausdrücklichen Anfrage mit `/dwp-refine migrate`.',
             linkLabel: 'Über Kontrakte lesen',
             linkPath: '/spec/record-layer',
           },
@@ -1446,6 +1556,8 @@ export const de: SiteTranslations = {
     planTitle: 'Planen und mit der Skill ausführen',
     planIntro:
       'Die API oben lässt einen Agenten diese Website lesen. Die DWP-Skill lässt einen Agenten die Methodik ausführen — installieren Sie sie einmal in einem Repository, und sie liefert einen Router plus neun Sub-Skills, aufgerufen als Slash-Befehle (oder namentlich, für Agenten, die Slash abfangen — die meisten verwenden stattdessen #, z. B. #dwp-execute).',
+    loopWorkflow:
+      'Mit Herdr hält die Planregistrierung den Lead und die Nachfolge fest. Ein Mensch kann herdr-peers autopilot start --loop starten, damit offene Pläne weiterlaufen. Führe vor jedem Merge, Tag oder Release herdr-peers lead verify --plan <plan-id> aus.',
     formatTitle:
       'Zwei unabhängige Entscheidungen: Format und gewünschter Review-Umfang',
     formatIntro:

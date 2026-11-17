@@ -35,13 +35,16 @@ Transformer un dépôt en une base de code AI-first, pilotée par la spécificat
 
 Un dépôt est pleinement conforme avec zéro addon optionnel ; la revue locale d’AI Diff Reviewer fait partie de la ligne de base depuis le standard 2.3.0. La réalité détectée l’emporte toujours sur les hypothèses des presets.
 
-## Références des schémas v7
+## Schema references
 
-Pour les plans v7 — le défaut du pack 7.x actuel —, le catalogue des schémas lisibles par machine est publié à ces URL stables. La projection active est un instantané partagé avec v6 ; ni `plan-state/v6.json` ni `plan-state/v7.json` n’existent.
+Le catalogue des schémas lisibles par machine pour les plans v8 est publié aux URL stables ci-dessous. v8 utilise `plan-manifest/v7` avec `plan-contract/v8`, `journal-event/v8` et `plan-snapshot/v8` ; les schémas de manifeste et d’événement de journal v7 restent pris en charge pour les plans existants.
 
 - **Manifeste du plan :** https://deepworkplan.com/schema/plan-manifest/v7.json
 - **Contrat du plan :** https://deepworkplan.com/schema/plan-contract/v7.json (le contrat v6 plus un marqueur de tâche optionnel `parallel_safe`)
 - **Événement du journal :** https://deepworkplan.com/schema/journal-event/v7.json (ajoute l’événement `delegation`)
+- **Contrat v8 :** https://deepworkplan.com/schema/plan-contract/v8.json
+- **Événement de journal v8 :** https://deepworkplan.com/schema/journal-event/v8.json
+- **Instantané de plan v8 :** https://deepworkplan.com/schema/plan-snapshot/v8.json
 - **Instantané du plan (projection active, partagée avec v6) :** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Manifeste de contexte (partagé avec v6) :** https://deepworkplan.com/schema/context-manifest/v6.json
 - **Configuration du dépôt :** https://deepworkplan.com/schema/dwp-config/v1.json
@@ -52,4 +55,4 @@ Pour les plans v7 — le défaut du pack 7.x actuel —, le catalogue des schém
 
 Les plans v6 conservent leurs schémas v6 ([manifeste](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrat](https://deepworkplan.com/schema/plan-contract/v6.json), [événement du journal](https://deepworkplan.com/schema/journal-event/v6.json)) ; les plans v5 existants continuent d’utiliser le schéma d’état v5, et les anciens plans ne sont jamais réécrits silencieusement.
 
-Le pack 7.x actuel crée les nouveaux plans en v7 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite. Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v7, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.
+Le pack 8.x actuel crée les nouveaux plans en v8 par défaut. Les plans existants conservent leur génération enregistrée ; une migration exige une demande explicite. Les nouveaux plans reçoivent des ID numériques croissants, sur au moins trois chiffres (par exemple `PLAN_001_add_payment_webhooks/`). Comme les schémas v5 figés comptent l’ID numérique comme un mot, les slugs v5 comportent 2 à 4 mots ; les slugs v7, 2 à 5. Les dossiers existants non numérotés `PLAN_<slug>/` restent lisibles et ne sont jamais renommés. S’il existe des plans numérotés, `latest` désigne celui dont l’ID numérique est le plus élevé.

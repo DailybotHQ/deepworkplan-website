@@ -8,7 +8,7 @@ section: Record layer
 
 # Delega
 
-> **Ambito della versione:** questa pagina riformula la generazione di contratto v7 alla release `v7.12.2`. Fonti canoniche: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md) e il [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/execute/delegation.md) del flusso execute. Dove questa pagina e quei file divergono, prevalgono i file.
+> **Ambito della versione:** questa pagina riformula la generazione di contratto v7 alla release `v8.0.0`. Fonti canoniche: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md) e il [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/execute/delegation.md) del flusso execute. Dove questa pagina e quei file divergono, prevalgono i file.
 
 **Versione 7.0.0. Stato: Stabile.** La v7 è una nuova generazione di contratto del [livello di registrazione](/spec/record-layer), non un nuovo ciclo di vita: tutto ciò che è nei documenti v6 su contratto, ciclo di vita, contesto e risorse si applica salvo diversa indicazione di questa pagina. Non delegare è sempre corretto. Le parole chiave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devono essere interpretate come descritto nella RFC 2119.
 
@@ -100,3 +100,5 @@ Un orchestratore non delega mai le attività di un **piano figlio**: i figli ven
 - [Livello di registrazione](/spec/record-layer) — il contratto e il journal che questa pagina estende.
 - [Risorse e capacità](/spec/resources-and-abilities) — capacità, concessioni e il registro degli addon.
 - [Addon Herdr](/kit/herdr) e [Addon Agentkit](/kit/agentkit) — i due trasporti.
+
+- [Ingegneria del ciclo](/spec/loop-engineering) — il ciclo del piano e la sua autonomia limitata.

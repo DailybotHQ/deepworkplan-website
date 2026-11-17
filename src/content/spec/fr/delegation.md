@@ -8,7 +8,7 @@ section: Record layer
 
 # Délégation
 
-> **Portée de version :** cette page reformule la génération de contrat v7 à la version `v7.12.2`. Sources canoniques : [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md) et le fichier [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/execute/delegation.md) du flux execute. En cas de divergence entre cette page et ces fichiers, les fichiers prévalent.
+> **Portée de version :** cette page reformule la génération de contrat v7 à la version `v8.0.0`. Sources canoniques : [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md) et le fichier [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/execute/delegation.md) du flux execute. En cas de divergence entre cette page et ces fichiers, les fichiers prévalent.
 
 **Version 7.0.0. Statut : stable.** v7 est une nouvelle génération de contrat de la [couche d'enregistrement](/spec/record-layer), pas un nouveau cycle de vie : tout ce que disent les documents v6 sur le contrat, le cycle de vie, le contexte et les ressources s'applique, sauf indication contraire de cette page. Ne pas déléguer est toujours correct. Les mots-clés MUST, MUST NOT, SHOULD, SHOULD NOT et MAY doivent être interprétés comme décrit dans la RFC 2119.
 
@@ -100,3 +100,5 @@ Un orchestrateur ne délègue jamais les tâches d'un **plan enfant** : les enfa
 - [Couche d'enregistrement](/spec/record-layer) — le contrat et le journal que cette page étend.
 - [Ressources et capacités](/spec/resources-and-abilities) — capacités, autorisations et registre d'addons.
 - [Addon Herdr](/kit/herdr) et [addon Agentkit](/kit/agentkit) — les deux transports.
+
+- [Ingénierie de boucle](/spec/loop-engineering) — la boucle du plan et son autonomie limitée.

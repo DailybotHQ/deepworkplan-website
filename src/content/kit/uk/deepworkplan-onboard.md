@@ -35,13 +35,16 @@ usage: /deepworkplan-onboard
 
 Репозиторій повністю відповідає вимогам і без жодного опційного доповнення; локальний огляд AI Diff Reviewer є частиною базового рівня починаючи зі стандарту 2.3.0. Виявлена реальність завжди важливіша за припущення пресета.
 
-## Посилання на схеми v7
+## Посилання на схеми
 
-Для планів v7 — типового покоління поточного пакета 7.x — каталог машиночитних схем опубліковано за такими стабільними URL. Активна проєкція — це знімок, спільний із v6; `plan-state/v6.json` і `plan-state/v7.json` не існують.
+Каталог машиночитних схем для планів v8 опубліковано за наведеними нижче стабільними URL. v8 використовує `plan-manifest/v7` разом із `plan-contract/v8`, `journal-event/v8` і `plan-snapshot/v8`; схеми маніфесту й подій журналу v7 залишаються підтриманими для наявних планів.
 
 - **Plan manifest:** https://deepworkplan.com/schema/plan-manifest/v7.json
 - **Plan contract:** https://deepworkplan.com/schema/plan-contract/v7.json (контракт v6 плюс необовʼязковий маркер завдання `parallel_safe`)
 - **Journal event:** https://deepworkplan.com/schema/journal-event/v7.json (додає подію `delegation`)
+- **Контракт v8:** https://deepworkplan.com/schema/plan-contract/v8.json
+- **Подія журналу v8:** https://deepworkplan.com/schema/journal-event/v8.json
+- **Знімок плану v8:** https://deepworkplan.com/schema/plan-snapshot/v8.json
 - **Plan snapshot (активна проєкція, спільна з v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Context manifest (спільний із v6):** https://deepworkplan.com/schema/context-manifest/v6.json
 - **Конфігурація репозиторію:** https://deepworkplan.com/schema/dwp-config/v1.json
@@ -52,4 +55,4 @@ usage: /deepworkplan-onboard
 
 Плани v6 зберігають свої схеми v6 ([маніфест](https://deepworkplan.com/schema/plan-manifest/v6.json), [контракт](https://deepworkplan.com/schema/plan-contract/v6.json), [подія журналу](https://deepworkplan.com/schema/journal-event/v6.json)); наявні плани v5 і далі використовують схему стану v5, а старі плани ніколи не переписуються непомітно.
 
-Поточний пакет 7.x за замовчуванням створює нові плани у форматі v7. Наявні плани зберігають зафіксоване покоління; міграція потребує явного запиту. Нові плани отримують монотонно зростаючі числові ID завдовжки щонайменше три цифри (наприклад, `PLAN_001_add_payment_webhooks/`). Заморожені схеми v5 рахують числовий ID як одне слово, тому slug v5 містить 2–4 слова, а slug v7 — 2–5. Наявні папки без номера `PLAN_<slug>/` залишаються доступними для читання й ніколи не перейменовуються. Якщо є нумеровані плани, `latest` вказує на план із найбільшим числовим ID.
+Поточний пакет 8.x за замовчуванням створює нові плани у форматі v8. Наявні плани зберігають зафіксоване покоління; міграція потребує явного запиту. Нові плани отримують монотонно зростаючі числові ID завдовжки щонайменше три цифри (наприклад, `PLAN_001_add_payment_webhooks/`). Заморожені схеми v5 рахують числовий ID як одне слово, тому slug v5 містить 2–4 слова, а slug v7 — 2–5. Наявні папки без номера `PLAN_<slug>/` залишаються доступними для читання й ніколи не перейменовуються. Якщо є нумеровані плани, `latest` вказує на план із найбільшим числовим ID.

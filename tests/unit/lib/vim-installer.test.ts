@@ -4,6 +4,7 @@ import { resolve } from 'node:path';
 
 import { describe, expect, it } from 'vitest';
 
+import { ECOSYSTEM_PINS } from '@/lib/ecosystem-pins';
 import {
   buildInstallCommand,
   getInstallerFacts,
@@ -44,7 +45,7 @@ describe('getInstallerFacts', () => {
 
 describe('installer provenance', () => {
   it('serves the byte-identical installer of the pinned product release', () => {
-    expect(VIM_INSTALLER_TAG).toBe('v1.0.1');
+    expect(VIM_INSTALLER_TAG).toBe(ECOSYSTEM_PINS.vim.tag);
     expect(getInstallerFacts().sha256).toBe(VIM_INSTALLER_TAG_SHA256);
   });
 

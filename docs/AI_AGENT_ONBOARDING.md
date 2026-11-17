@@ -113,10 +113,11 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 
 ## DWP v6 host and authority records
 
-The current DWP standard is 7.0.0, implemented by the installed 7.12.2 skill.
-New plans use the v7 contract by default; the addon registry is the tracked
-`.dwp/config.json`; plans from earlier
-generations retain their recorded format and are never migrated implicitly.
+The current DWP standard is 8.0.0, implemented by the installed 8.0.2 skill.
+New plans use the v8 contract (`plan-contract/v8`) by default; the addon
+registry is the tracked `.dwp/config.json`; v7, v6 and v5 plans retain their
+recorded generation and are never migrated implicitly (only an explicit
+`refine migrate`).
 A v5-to-v6 migration requires an explicit request and preview.
 
 V6 plans may use only capabilities that the runtime explicitly declares. The

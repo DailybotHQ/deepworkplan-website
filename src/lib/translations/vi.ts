@@ -14,7 +14,7 @@ export const vi: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI',
   siteDescription:
-    'Deep Work Plan là phát triển theo đặc tả nơi kho lưu trữ trở thành bộ khung: nhiệm vụ nguyên tử, cổng kiểm tra và điều phối đa tác tử an toàn.',
+    'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành. Hiệu quả được đo bằng byte chỉ dẫn trên mỗi luồng.',
 
   // Navigation
   nav: {
@@ -98,14 +98,14 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — thực thi có cấu trúc cho các agent lập trình AI',
       description:
-        'Deep Work Plan mang quy trình phát triển theo đặc tả đến các tác tử lập trình AI. Biến kho mã thành bộ khung bền vững cho ủy quyền đa tác tử an toàn.',
+        'Đặc tả trước, vòng lặp khép kín: Deep Work Plan biến kho mã thành harness cho agent lập trình AI; mỗi kế hoạch chạy xong trong vòng lặp do người khởi động.',
     },
     hero: {
       badge: 'Phương pháp luận mở · MIT · Độc lập với agent',
-      title: 'Mô hình quan trọng.',
-      titleEmphasis: 'Ngữ cảnh quan trọng hơn.',
+      leadSentence:
+        'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
       subtitle:
-        'Deep Work Plan biến mọi repository thành một môi trường có cấu trúc — ngữ cảnh, rào chắn và một kế hoạch bền vững — nơi bất kỳ agent lập trình nào cũng thực thi chính xác và hiệu quả, và hoàn thành công việc dài hơi.',
+        'Deep Work Plan biến mọi repository thành harness — ngữ cảnh, rào chắn và một kế hoạch bền vững với các cổng kiểm chứng — nơi bất kỳ agent lập trình nào cũng thực thi công việc dài hơi. Thêm vòng lặp tùy chọn, và một kế hoạch đang mở sẽ tiếp tục chạy đến cùng mà không cần ai theo dõi.',
       instructionLabel: 'Sao chép vào agent của bạn',
       instruction:
         'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',
@@ -113,19 +113,38 @@ export const vi: SiteTranslations = {
       copiedLabel: 'Đã sao chép',
       viewInitCta: 'Xem cách hoạt động',
       pullQuote:
-        'Deep Work Plan là phát triển dựa trên đặc tả, nơi bản thân repository trở thành harness.',
+        'Đặc tả trước cho biết làm gì; harness cho biết ở đâu; Loop engineering cho biết công việc kết thúc thế nào.',
       primaryCta: 'Đọc phương pháp luận',
       secondaryCta: 'Đọc đặc tả',
-      illustrationAlt:
-        'Một ngọn hải đăng trên bờ đá phát ra một luồng sáng duy nhất dẫn đường cho con tàu nhỏ — bản khắc gợi hình ảnh repository như một harness vững vàng dẫn lối cho mọi agent.',
-      scrollCta: 'Xem cách hoạt động',
+    },
+    pillars: {
+      badge: 'Bốn trụ cột',
+      title: 'Nền tảng của phương pháp luận.',
+      items: [
+        {
+          name: 'Đặc tả trước',
+          line: 'Kế hoạch là nguồn sự thật bền vững: các tác vụ nguyên tử, tiêu chí chấp nhận và cổng kiểm chứng mà agent buộc phải qua.',
+        },
+        {
+          name: 'Repository là harness',
+          line: 'Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository dưới dạng tệp thuần mà mọi agent đều đọc được.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Kế hoạch chạy đến cùng: đăng ký, một daemon do con người khởi động, lời nhắc không thêm quyền hạn, chuyển giao dự phòng và sự kiện kế hoạch.',
+        },
+        {
+          name: 'Hiệu quả đo được',
+          line: 'Số byte chỉ dẫn cho mỗi luồng, được đo và công bố cùng phương pháp — không bao giờ là tỷ lệ phần trăm token bịa ra.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Vấn đề và lời giải',
       problem:
         'Trong những đợt ngắn, agent lập trình rất ấn tượng. Giao cho nó một nhiệm vụ dài hơi — một bản di chuyển, một phân hệ mới, một bản refactor hàng chục tệp — nó sẽ trôi dạt: ngữ cảnh đầy lên, các quyết định trước đó phai nhạt và hàng giờ công việc dở dang giữa chừng.',
       answer:
-        'Deep Work Plan trả lời bằng phát triển theo đặc tả: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được.',
+        'Deep Work Plan trả lời bằng cách đặt đặc tả lên trước: một kế hoạch bền vững, các tác vụ nguyên tử và cổng kiểm chứng agent buộc phải qua. “Xong” không còn là cảm giác — trở thành bằng chứng kiểm chứng được và review được. Sau đó Loop engineering giữ cho kế hoạch tiếp tục tiến lên cho đến khi các cổng ấy được vượt qua.',
       efficiency:
         'Ngữ cảnh là tài nguyên khan hiếm nhất của agent, vì vậy harness giữ phần hướng dẫn của chính nó gọn nhẹ và dễ kiểm tra. Hướng dẫn được tải dần, bước xác thực tập trung vào phần đã thay đổi, và mỗi tác vụ nhận đúng ngữ cảnh liên quan. Chúng tôi công bố dung lượng hướng dẫn của từng luồng bằng byte để phần tải này luôn minh bạch. Kế hoạch cũng tùy theo công việc: Lite cho một sửa đổi có phạm vi rõ ràng, Full cho công việc kéo dài nhiều giờ. Định dạng theo sát phạm vi công việc, giúp quy trình tập trung và dễ theo dõi.',
       illustrationAlt:
@@ -162,6 +181,72 @@ export const vi: SiteTranslations = {
         deepLinkLabel: 'Đọc phương pháp luận',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Kế hoạch chạy đến cùng. Quyền hạn vẫn thuộc về con người.',
+      subtitle:
+        'Loop engineering giúp kế hoạch hoàn tất mà không cần con người liên tục kiểm tra. Các hàng dưới đây mô tả những hợp đồng đã phát hành của vòng lặp: phần lớn thuộc herdr-peers, còn hàng đợi kế hoạch là hợp đồng của pack. Herdr là tùy chọn; phương pháp vẫn hoạt động khi không có nó.',
+      colContract: 'Hợp đồng',
+      colGuarantee: 'Điều nó bảo đảm',
+      colSource: 'Nguồn',
+      contracts: [
+        {
+          name: 'Đăng ký kế hoạch',
+          detail:
+            'Một kế hoạch mà vòng lặp theo dõi có bản ghi lead với một epoch và thứ tự kế nhiệm. Chỉ bên giữ epoch cao nhất mới hành động với vai trò lead của nó.',
+        },
+        {
+          name: 'Chỉ con người khởi động',
+          detail:
+            'Chỉ con người khởi động daemon, bằng chính lời của mình. Không yêu cầu, phản hồi hay thông báo nào có thể khởi động, dừng hoặc thay đổi việc nó làm.',
+        },
+        {
+          name: 'Lời nhắc không thêm quyền hạn',
+          detail:
+            'Lead đang rảnh của một kế hoạch mở nhận một lời nhắc cố định để tiếp tục. Các cổng, điều kiện dừng và cơ chế leo thang vẫn ràng buộc như trước; ba lời nhắc không có tiến triển sẽ đánh dấu kế hoạch là bị đình trệ.',
+        },
+        {
+          name: 'Chuyển giao cho người kế nhiệm',
+          detail:
+            'Người kế nhiệm tiếp quản qua bước kiểm tra lead takeover. Chỉ có thể bổ nhiệm một lane khi con người đã ghi nhận quyền đó từ trước.',
+        },
+        {
+          name: 'Sự kiện kế hoạch',
+          detail:
+            'Khi một kế hoạch bị đình trệ, bị chặn, mất lead, bắt đầu từ hàng đợi hoặc hoàn thành, một lệnh do con người chọn sẽ nhận một đối tượng plan-event-v1. Gói skill kèm sẵn một trình thông báo Dailybot cho việc này.',
+        },
+        {
+          name: 'Bản đồ đội máy',
+          detail:
+            'Mỗi máy báo cáo các kế hoạch của mình dưới dạng plans-v1; daemon duy trì bản đồ fleet-v1 của mọi máy, agent, repository và kế hoạch, và fleet ui hiển thị nó ở chế độ chỉ đọc.',
+        },
+        {
+          name: 'Hàng đợi kế hoạch',
+          detail:
+            'Pack xác thực và ghi hàng đợi `dwp-queue-v1`; daemon đọc hàng đợi để tiếp tục các kế hoạch đang chờ.',
+        },
+        {
+          name: 'Xác minh lead',
+          detail:
+            'Trước mọi lần merge, gắn tag hay phát hành, lead xác nhận rằng nó vẫn giữ kế hoạch trên mọi máy. Một lead mới hơn sẽ từ chối; một máy không liên lạc được sẽ dừng thao tác trừ khi rủi ro đó được chấp nhận và ghi nhận.',
+        },
+      ],
+      note: 'Bộ não quyết định (--brain) và việc chỉ định lead (--appoint) là các cờ tùy chọn của cùng một daemon, mỗi cờ do con người bật. Daemon không bao giờ merge, phát hành, đăng nhập hay thay đổi quyền truy cập.',
+      deepLinkLabel: 'Đọc về addon Herdr',
+    },
+    efficiency: {
+      badge: 'Hiệu quả đo được',
+      title: 'Số byte chỉ dẫn cho mỗi luồng, đã được đo.',
+      subtitle:
+        'Harness công bố những gì mỗi luồng phải đọc trước khi bắt đầu: bộ định tuyến, sub-skill và các tài nguyên dùng chung mà nó liên kết. Đây là các tập đọc bắt buộc của gói đã phát hành.',
+      colFlow: 'Luồng',
+      colBytes: 'Gói đầu vào (byte)',
+      caption:
+        'Đơn vị: byte hệ thống tệp. Đo trên gói đã phát hành bằng lệnh bên dưới.',
+      absent:
+        'Token của nhà cung cấp, chi phí và thống kê khép vòng lặp không được hiển thị: chưa có nguồn gắn tag nào đo chúng, nên chúng không có hàng. Con số token bằng byte ÷ 4 của script là ước tính có ghi nhãn, không bao giờ là phép đo.',
+      deepLinkLabel: 'Đọc sổ đánh giá',
     },
     onboarding: {
       badge: 'Khởi tạo dựa trên suy luận',
@@ -218,6 +303,11 @@ export const vi: SiteTranslations = {
           description:
             'Sinh ra các Deep Work Plan dài hơi cho mọi tác vụ và chạy chúng từng bước, với tiêu chí chấp nhận rõ ràng, các cổng kiểm chứng và trạng thái có thể tiếp tục — tự chủ, trong nhiều giờ.',
         },
+        {
+          title: 'Con người khởi động vòng lặp',
+          description:
+            'Tùy chọn, với addon Herdr: bạn — không bao giờ là agent — chạy herdr-peers autopilot start --loop. Mọi kế hoạch mở có bản ghi lead sẽ tiếp tục chạy đến cùng, và trình thông báo của bạn được báo khi một kế hoạch bị đình trệ, bị chặn hoặc hoàn thành.',
+        },
       ],
       note: 'Skill được cài giống hệt nhau ở mọi nơi; thứ được thích ứng là repository của bạn — AGENTS.md, tài liệu và bộ kit .agents/ được suy luận cho stack của bạn. Chính sự phân tách đó biến phương pháp luận thành một tiêu chuẩn tái sử dụng được thay vì một bộ khung dùng một lần.',
     },
@@ -265,7 +355,7 @@ export const vi: SiteTranslations = {
         {
           label: 'Thuần git, có thể tiếp tục, .dwp/',
           detail:
-            'Không daemon, không trạng thái ngoài. Kế hoạch nằm trong thư mục .dwp/ được gitignore, và mọi tác vụ tiếp tục chỉ từ git — kể cả sau khi ngữ cảnh tràn.',
+            'Bản thân phương pháp luận không cần daemon, không cần trạng thái ngoài. Kế hoạch nằm trong thư mục .dwp/ được gitignore, và mọi tác vụ tiếp tục chỉ từ git — kể cả sau khi ngữ cảnh tràn. Daemon vòng lặp tùy chọn bổ sung tính liên tục, không bao giờ là một phụ thuộc.',
         },
         {
           label: 'Ủy quyền đa tác tử và Hệ sinh thái 1.0',
@@ -588,12 +678,12 @@ export const vi: SiteTranslations = {
     meta: {
       title: 'Phương pháp luận Deep Work Plan',
       description:
-        'Bảy chương từ tuyên ngôn tới tự chủ của bầy agent: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, các kiểu hình, nhiều agent và bầy agent vượt qua giới hạn.',
+        'Tám chương từ tuyên ngôn đến Loop engineering: nguyên tắc, vòng lặp lõi, mẫu, skill và agent, kiểu hình, công việc đa agent và khép kín vòng lặp.',
     },
     eyebrow: 'Phương pháp luận',
     title: 'Phương pháp luận Deep Work Plan',
     intro:
-      'Bảy chương đưa bạn từ triết lý đằng sau Deep Work Plan tới vòng lặp thực hành, các mẫu, những thích ứng, cách chạy nhiều agent cùng lúc và cách giữ cho một bầy agent tiếp tục chạy.',
+      'Tám chương trình bày nguyên tắc Deep Work Plan, vòng lặp thực hành, các mẫu, cách thích ứng, công việc đa agent và Loop engineering.',
     chapterLabel: 'Chương',
     readChapter: 'Đọc chương',
     prev: 'Trước',
@@ -688,8 +778,6 @@ export const vi: SiteTranslations = {
     },
     eyebrow: 'Khởi động nhanh',
     title: 'Biến repository này thành AI-first',
-    intro:
-      'Một endpoint để biến mọi repository thành một codebase dựa trên đặc tả, sẵn sàng cho agent. Cài skill, để một agent khởi tạo repo, rồi lập kế hoạch và thực thi công việc có cấu trúc với mọi agent lập trình.',
     handoffTitle: 'Sao chép vào agent của bạn',
     handoffBody:
       'Sao chép toàn bộ prompt init.md và dán vào agent lập trình AI của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác. Nó đọc phương pháp luận và đặc tả, cài skill, và khởi tạo repository này cho các Deep Work Plan.',
@@ -699,18 +787,20 @@ export const vi: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Điều này làm gì',
     whatBody: [
-      'Việc áp dụng thay đổi repository theo hai cách bền vững — hai trụ cột của phương pháp luận.',
-      'Thứ nhất, repository trở thành dựa trên đặc tả: công việc bắt đầu từ một kế hoạch và đặc tả được viết ra, không phải từ những lời nhắc tùy hứng. Thứ hai, bản thân repository trở thành harness của agent — một AGENTS.md, một cơ sở tri thức docs/, tài liệu cho từng mô-đun và một thư mục skill .agents/ (với các symlink .claude → .agents và .cursor → .agents) trao cho mọi agent ngữ cảnh và các command nó cần.',
+      'Lộ trình áp dụng hiện thực hóa bốn trụ cột này trong repository của bạn.',
+      'Việc áp dụng dựa trên bốn trụ cột: kế hoạch spec-first, repository làm harness, Loop engineering và hiệu quả được đo lường. Kế hoạch là nguồn sự thật lâu dài; repository lưu ngữ cảnh, công cụ, rào chắn và trạng thái. Vòng lặp tùy chọn do con người khởi chạy giúp kế hoạch đã đăng ký đi đến hoàn tất; tải chỉ dẫn được đo bằng byte trên mỗi luồng.',
     ],
     sequenceTitle: 'Lộ trình áp dụng',
     orLabel: 'hoặc',
+    loopNotifyNote:
+      'Nếu muốn nhận báo cáo sự kiện từ Dailybot, hãy dùng lệnh thứ hai. Lệnh này thêm notifier của gói bằng --notify; thông báo là tùy chọn.',
     steps: [
       {
         title: 'Xác minh trước khi cài đặt',
         description:
           'Hãy coi lời nhắc và skill là không đáng tin cho đến khi bạn đã kiểm tra chúng. Cả hai đều là mã nguồn mở và cấp phép MIT; skill là Markdown-first không có lời gọi mạng và không có telemetry. Mỗi bản phát hành công bố một SHA256SUMS cho skill được giao, vì vậy bạn có thể xác nhận bản sao của mình khớp trước khi chạy nó. Các bản phát hành có checksum, không có chữ ký (ký là bước tiếp theo đã được ghi lại).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -718,7 +808,7 @@ export const vi: SiteTranslations = {
         description:
           'Thêm skill Deep Work Plan để mọi agent đều có thể lập kế hoạch và thực thi công việc có cấu trúc. Skill đi kèm một bộ định tuyến cùng chín sub-skill — create, execute, refine, resume, status, verify, onboard, author và upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -749,7 +839,7 @@ export const vi: SiteTranslations = {
     ],
     outcomeTitle: 'Kết quả',
     outcome:
-      'Repository trở thành dựa trên đặc tả và bản thân repository trở thành harness của agent — ngữ cảnh và các command đi theo mã nguồn.',
+      'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
     nextStepsTitle: 'Bước tiếp theo',
     nextSteps: [
       { label: 'Đọc phương pháp luận', href: '/methodology' },
@@ -826,7 +916,7 @@ export const vi: SiteTranslations = {
             id: 'how-to-use',
             question: 'Tôi dùng nó như thế nào?',
             answer:
-              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
+              'Ba bước. Trước hết, cài skill Deep Work Plan vào coding agent của bạn — đường nhanh nhất là `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (hoặc clone repo skill và chạy `./setup.sh`). Thứ hai, onboard repository một lần để agent thích ứng `AGENTS.md`, `docs/`, bộ kit `.agents/` và vùng `.dwp/` được gitignore với stack của bạn: trỏ tới https://deepworkplan.com/init.md, hoặc chạy `/deepworkplan-onboard`. Thứ ba, lập kế hoạch và chạy công việc với các lệnh mỏng: `/dwp-create <goal>` dựng kế hoạch; `/dwp-execute` chạy từng tác vụ qua mỗi cổng; `/dwp-refine` sửa một kế hoạch đang chạy dở (phạm vi, tác vụ, hoặc nâng cấp một kế hoạch Lite lên Full); `/dwp-resume` tiếp tục sau gián đoạn; `/dwp-status` báo tiến độ mà không thực thi; `/dwp-verify` tạo báo cáo phù hợp khách quan; `/dwp-upgrade` chuyển một skill đã cài sang bản phát hành mới hơn mà không đụng đến các kế hoạch hiện có. Agent chặn `/` thường dùng `#` thay thế (ví dụ `#dwp-execute`). Adoption endpoint và Khởi động nhanh đi cùng con đường với chi tiết hơn.',
             linkLabel: 'Khởi động nhanh',
             linkPath: '/quickstart',
           },
@@ -948,6 +1038,25 @@ export const vi: SiteTranslations = {
             linkLabel: 'Đọc giao thức chạy không giám sát',
             linkPath: '/spec/agent-protocol',
           },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering là gì?',
+            answer:
+              'Loop engineering khép kín vòng thực thi: sau khi kế hoạch được đăng ký cùng lead, daemon Herdr tùy chọn do con người khởi động có thể tiếp tục kế hoạch đang mở đến khi hoàn tất và báo khi bị đình trệ, bị chặn, mất lead hoặc hoàn thành. Daemon hoạt động trong phạm vi quyền đã ghi trong kế hoạch.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan có cần daemon không?',
+            answer:
+              'Không. Phương pháp và các kế hoạch hoạt động mà không cần Herdr hay daemon. Addon là tùy chọn, giúp duy trì tính liên tục chứ không phải điều kiện bắt buộc.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Daemon tuyệt đối không thể làm gì?',
+            answer:
+              'Daemon không đăng nhập, không chấp nhận xác nhận bỏ qua quyền của Claude, không mở rộng quyền thường trực của agent và không thực hiện merge, tag hay release. Nudge chỉ gửi lời nhắc tiếp tục cố định và không cấp thêm quyền.',
+          },
         ],
       },
       {
@@ -1001,9 +1110,10 @@ export const vi: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Các kế hoạch v6 có tiếp tục chạy được dưới v7 không?',
+            question:
+              'Các kế hoạch hiện có có giữ nguyên thế hệ trong v8 không?',
             answer:
-              'Có. Hợp đồng kế hoạch tuyên bố rõ ràng thế hệ lược đồ (`plan-contract/v6.json` so với `plan-contract/v7.json`). Kế hoạch không bao giờ chuyển đổi thế hệ giữa chừng. Các kế hoạch v6 hiện tại giữ nguyên cấu trúc và ngữ nghĩa nhật ký dưới các công cụ v7.',
+              'Có. Kế hoạch mới mặc định dùng `plan-contract/v8`. Các kế hoạch v7, v6 và v5 hiện có giữ nguyên thế hệ đã ghi và tiếp tục chạy với pack hiện tại. Thế hệ chỉ thay đổi theo yêu cầu rõ ràng `/dwp-refine migrate`.',
             linkLabel: 'Tìm hiểu về hợp đồng',
             linkPath: '/spec/record-layer',
           },
@@ -1442,6 +1552,8 @@ export const vi: SiteTranslations = {
     planTitle: 'Lập kế hoạch và thực thi bằng skill',
     planIntro:
       'API ở trên cho phép agent đọc trang web này. Skill DWP là thứ cho phép agent chạy phương pháp luận — cài đặt một lần vào một repository và nó cung cấp một router cùng chín sub-skill, được gọi dưới dạng slash command (hoặc theo tên, đối với các agent chặn dấu gạch chéo — hầu hết dùng # thay thế, ví dụ #dwp-execute).',
+    loopWorkflow:
+      'Với Herdr, việc đăng ký kế hoạch ghi lại lead và thứ tự kế nhiệm. Con người có thể chạy herdr-peers autopilot start --loop để duy trì các kế hoạch đang mở. Chạy herdr-peers lead verify --plan <plan-id> trước mọi thao tác merge, tag hoặc release.',
     formatTitle: 'Hai lựa chọn độc lập: định dạng, và mức độ rà soát bạn muốn',
     formatIntro:
       'Mỗi kế hoạch chọn một giá trị từ mỗi trục. Hai trục này độc lập với nhau — một kế hoạch Lite có thể chạy ở chế độ trust, một kế hoạch Full có thể chạy ở chế độ guided, và cả hai đều có thể chuyển chế độ sau này mà không cần đổi định dạng.',

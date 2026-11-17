@@ -8,7 +8,7 @@ section: Record layer
 
 # प्रत्यायोजन
 
-> **संस्करण दायरा:** यह पृष्ठ रिलीज़ `v7.12.2` पर v7 अनुबंध पीढ़ी को पुनः प्रस्तुत करता है। प्रामाणिक स्रोत: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md) और execute flow की [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/execute/delegation.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं।
+> **संस्करण दायरा:** यह पृष्ठ रिलीज़ `v8.0.0` पर v7 अनुबंध पीढ़ी को पुनः प्रस्तुत करता है। प्रामाणिक स्रोत: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md) और execute flow की [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/execute/delegation.md)। जहाँ यह पृष्ठ और वे फ़ाइलें भिन्न हों, वहाँ फ़ाइलें मान्य होती हैं।
 
 **संस्करण 7.0.0। स्थिति: स्थिर।** v7 [रिकॉर्ड परत](/spec/record-layer) की एक नई अनुबंध पीढ़ी है, नया जीवनचक्र नहीं: v6 के अनुबंध, जीवनचक्र, संदर्भ और संसाधन दस्तावेज़ों की हर बात लागू होती है जब तक यह पृष्ठ अन्यथा न कहे। प्रत्यायोजन न करना हमेशा सही है। कीवर्ड MUST, MUST NOT, SHOULD, SHOULD NOT और MAY की व्याख्या RFC 2119 में वर्णित अनुसार की जानी है।
 
@@ -100,3 +100,5 @@ v1, v2, v5 और v6 स्कीमा के बाइट्स अपरि�
 - [रिकॉर्ड परत](/spec/record-layer) — वह अनुबंध और जर्नल जिसे यह पृष्ठ विस्तारित करता है।
 - [संसाधन और क्षमताएँ](/spec/resources-and-abilities) — क्षमताएँ, अनुदान और ऐडऑन रजिस्ट्री।
 - [Herdr ऐडऑन](/kit/herdr) और [Agentkit ऐडऑन](/kit/agentkit) — दो transports।
+
+- [लूप इंजीनियरिंग](/spec/loop-engineering) — योजना लूप और उसकी सीमित स्वायत्तता.

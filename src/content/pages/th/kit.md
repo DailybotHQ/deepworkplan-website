@@ -1,8 +1,10 @@
 ---
 title: "Kit ของ Deep Work Plan"
 description: "skill และ sub-skill เก้าตัว คำสั่ง adapter สำหรับเอเจนต์ preset สำหรับการออนบอร์ด ส่วนเสริมแบบเลือกเข้าร่วม และตัวอย่างที่ทำให้ Deep Work Plan รันได้ทุกที่"
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan มีเสาหลักสี่ประการ ได้แก่ สเปกมาก่อน, repository คือ harness, Loop engineering และประสิทธิภาพที่วัดได้ ส่วนเสริมและการผสานการทำงานช่วยขยาย harness และลูปได้ แต่ระเบียบวิธีนี้ทำงานได้ด้วยตัวเอง
 
 ## Kit ของ Deep Work Plan
 
@@ -10,10 +12,10 @@ kit คือทุกอย่างที่คุณต้องใช้เ�
 `DailybotHQ/deepworkplan-skill`
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
-แพ็ก 7.x ปัจจุบันสร้างแผนใหม่ด้วย v7 เป็นค่าเริ่มต้น แผนเดิมคงรุ่นที่บันทึกไว้ การย้ายต้องมีคำขออย่างชัดเจน
+แพ็ก 8.x ปัจจุบันสร้างแผนใหม่ด้วยสัญญา v8 (`plan-contract/v8`) เป็นค่าเริ่มต้น แผนของ v7, v6 และ v5 คงรุ่นที่บันทึกไว้ การย้ายจะเกิดขึ้นผ่านการย้ายด้วย `refine` อย่างชัดเจนเท่านั้น
 
 ### skill และ sub-skill ของมัน
 
@@ -65,12 +67,12 @@ skill ของ Deep Work Plan คือตัวกำหนดเส้นท�
 **ระเบียบวิธีทำงานได้ด้วยตัวเอง ส่วนเสริมช่วยขยายพลังของมัน** ส่วนเสริมแต่ละตัวเป็นตัวเชื่อมต่อแบบบางภายในสกิล Deep Work Plan ซึ่งปักหมุดด้วย tag ไปยังผลิตภัณฑ์ที่มี repository, release และเวอร์ชันอินเทอร์เฟซเป็นของตัวเอง ทุกผลิตภัณฑ์ทำงานได้โดยไม่ต้องใช้ Deep Work Plan และไม่มีส่วนเสริมใดที่จำเป็น
 
 - **สกิล Deep Work Plan** — สร้าง ดำเนินการ ตรวจสอบ ทำต่อ และปรับปรุงแผน ไม่ต้องใช้ส่วนเสริมใด
-- **[herdr](/th/kit/herdr)** — peer ใน pane ของ Herdr บนเครื่องใดก็ได้: การมอบหมายงานแบบโต้ตอบที่มีการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียว ปักหมุดที่ `herdr-peers@v2.0.0`
-- **[agentkit](/th/kit/agentkit)** — คำสั่ง ak เดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว: ทำงานอัตโนมัติโดยค่าเริ่มต้นพร้อมทางเลือกปิด และการมอบหมายงานแบบ headless ใน worktree ปักหมุดที่ `coding-agents-kit@v1.4.0`
-- **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และคัดลอก SSH key เฉพาะเมื่อเลือกเปิดใช้ ปักหมุดที่ `devcontainer-kit@v1.2.0`
-- **[vim](/th/kit/vim)** — ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown ปักหมุดที่ `deepworkplan-vim@v1.0.1`
+- **[herdr](/th/kit/herdr)** — peer ใน pane ของ Herdr บนเครื่องใดก็ได้: การมอบหมายงานแบบโต้ตอบที่มีการตอบกลับที่ได้รับอนุญาตเพียงครั้งเดียว ปักหมุดที่ `herdr-peers@v2.2.0`
+- **[agentkit](/th/kit/agentkit)** — คำสั่ง ak เดียวสำหรับเอเจนต์เขียนโค้ดบนเทอร์มินัลทุกตัว: ทำงานอัตโนมัติโดยค่าเริ่มต้นพร้อมทางเลือกปิด และการมอบหมายงานแบบ headless ใน worktree ปักหมุดที่ `coding-agents-kit@v1.5.0`
+- **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และคัดลอก SSH key เฉพาะเมื่อเลือกเปิดใช้ ปักหมุดที่ `devcontainer-kit@v1.4.0`
+- **[vim](/th/kit/vim)** — ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown ปักหมุดที่ `deepworkplan-vim@v1.1.0`
 
-รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v7: `v7.12.2`
+รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v8: `v8.0.2`
 
 ### ตัวอย่าง
 

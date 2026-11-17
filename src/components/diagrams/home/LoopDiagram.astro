@@ -1,0 +1,444 @@
+---
+/**
+ * LoopDiagram — the homepage hero plate for loop engineering: how an open plan
+ * runs to its end. Registration → daemon → nudge → failover → notify → done.
+ *
+ * Every stage is a released contract of herdr-peers (the pin in
+ * src/lib/ecosystem-pins.ts): `lead claim` (protocol.md §12), the human-started
+ * `autopilot --loop` (autopilot.md §1, §5), the one fixed continue prompt to a
+ * lead idle for 5 minutes (§5.2–5.3), `lead takeover` by the first reachable
+ * successor (§5.2), the `plan-event-v1` object sent to the human's `--notify`
+ * command (§8), and `plan_completed`. The stage codes are literal and never
+ * translated. HTML/CSS; language-keyed i18n (en fallback); role="img"; dark
+ * mode through tokens; zero JS.
+ */
+import type { Language } from '@/lib/i18n';
+
+interface Props {
+  lang?: Language;
+  class?: string;
+}
+const { lang = 'en', class: className = '' } = Astro.props;
+
+/** Literal stage codes, in stage order — identical in every language. */
+const CODES = [
+  'lead claim',
+  'autopilot --loop',
+  'idle ≥ 5 min',
+  'lead takeover',
+  'plan-event-v1',
+  'plan_completed',
+] as const;
+
+const i18n = {
+  en: {
+    ariaLabel:
+      'The loop of a plan: its lead registers with a succession, a human starts the daemon, an idle lead gets a nudge that adds no authority, a gone lead fails over to the first reachable successor, the human is notified, and the plan reaches done.',
+    title: 'The loop',
+    footnote:
+      'Every open plan with a lead record, until its own state says done.',
+    stages: [
+      { name: 'Register', note: 'Lead and succession' },
+      { name: 'Daemon', note: 'Started by a human' },
+      { name: 'Nudge', note: 'Adds no authority' },
+      { name: 'Failover', note: 'First reachable successor' },
+      { name: 'Notify', note: 'To the human’s command' },
+      { name: 'Done', note: 'Gates passed' },
+    ],
+  },
+  es: {
+    ariaLabel:
+      'El bucle de un plan: su lead se registra con una sucesión, una persona inicia el daemon, un lead inactivo recibe un recordatorio que no añade autoridad, un lead ausente cede el relevo al primer sucesor disponible, se notifica a la persona y el plan llega a su fin.',
+    title: 'El bucle',
+    footnote:
+      'Cada plan abierto con registro de lead, hasta que su propio estado diga que terminó.',
+    stages: [
+      { name: 'Registro', note: 'Lead y sucesión' },
+      { name: 'Daemon', note: 'Lo inicia una persona' },
+      { name: 'Recordatorio', note: 'No añade autoridad' },
+      { name: 'Relevo', note: 'Primer sucesor disponible' },
+      { name: 'Aviso', note: 'Al comando de la persona' },
+      { name: 'Terminado', note: 'Controles superados' },
+    ],
+  },
+  pt: {
+    ariaLabel:
+      'O loop de um plano: o seu lead se registra com uma sucessão, uma pessoa inicia o daemon, um lead ocioso recebe um lembrete que não acrescenta autoridade, um lead ausente é substituído pelo primeiro sucessor alcançável, a pessoa é notificada e o plano chega ao fim.',
+    title: 'O loop',
+    footnote:
+      'Todo plano aberto com registro de lead, até que o próprio estado diga que terminou.',
+    stages: [
+      { name: 'Registro', note: 'Lead e sucessão' },
+      { name: 'Daemon', note: 'Iniciado por uma pessoa' },
+      { name: 'Lembrete', note: 'Não acrescenta autoridade' },
+      { name: 'Substituição', note: 'Primeiro sucessor alcançável' },
+      { name: 'Aviso', note: 'Ao comando da pessoa' },
+      { name: 'Concluído', note: 'Verificações aprovadas' },
+    ],
+  },
+  zh: {
+    ariaLabel:
+      '计划的循环：其主导者连同继任列表进行注册，由人类启动守护进程，空闲的主导者会收到不增加任何权限的提醒，离开的主导者故障转移给第一个可联系到的继任者，人类收到通知，计划抵达完成。',
+    title: '循环',
+    footnote: '每份带有主导者记录的打开计划，直到其自身状态显示完成。',
+    stages: [
+      { name: '注册', note: '主导者与继任' },
+      { name: '守护进程', note: '由人类启动' },
+      { name: '提醒', note: '不增加权限' },
+      { name: '故障转移', note: '首个可达的继任者' },
+      { name: '通知', note: '发往人类的命令' },
+      { name: '完成', note: '验证关卡已通过' },
+    ],
+  },
+  ja: {
+    ariaLabel:
+      '計画のループです。リードが継承順とともに登録し、人間がデーモンを起動し、アイドル状態のリードは権限を加えない催促を受け、いなくなったリードは最初に到達可能な継承者へフェイルオーバーし、人間に通知が届き、計画は完了に至ります。',
+    title: 'ループ',
+    footnote:
+      'リードレコードを持つすべての開いている計画が、自らの状態が完了を示すまで。',
+    stages: [
+      { name: '登録', note: 'リードと継承順' },
+      { name: 'デーモン', note: '人間が起動' },
+      { name: '催促', note: '権限を加えない' },
+      { name: '引き継ぎ', note: '最初に到達可能な継承者' },
+      { name: '通知', note: '人間のコマンドへ' },
+      { name: '完了', note: '検証を通過' },
+    ],
+  },
+  de: {
+    ariaLabel:
+      'Der Loop eines Plans: Sein Lead registriert sich mit einer Nachfolge, ein Mensch startet den Daemon, ein untätiger Lead erhält einen Anstoß ohne zusätzliche Befugnis, ein verschwundener Lead übergibt per Failover an den ersten erreichbaren Nachfolger, der Mensch wird benachrichtigt, und der Plan wird abgeschlossen.',
+    title: 'Der Loop',
+    footnote:
+      'Jeder offene Plan mit Lead-Eintrag, bis sein eigener Zustand „fertig“ meldet.',
+    stages: [
+      { name: 'Registrieren', note: 'Lead und Nachfolge' },
+      { name: 'Daemon', note: 'Von einem Menschen gestartet' },
+      { name: 'Anstoß', note: 'Ohne zusätzliche Befugnis' },
+      { name: 'Failover', note: 'Erster erreichbarer Nachfolger' },
+      { name: 'Melden', note: 'An den Befehl des Menschen' },
+      { name: 'Fertig', note: 'Prüfungen bestanden' },
+    ],
+  },
+  fr: {
+    ariaLabel:
+      'La boucle d’un plan : son lead s’enregistre avec une succession, un humain démarre le démon, un lead inactif reçoit une relance qui n’ajoute aucune autorité, un lead disparu passe la relève au premier successeur joignable, l’humain est notifié et le plan arrive à son terme.',
+    title: 'La boucle',
+    footnote:
+      'Chaque plan ouvert doté d’un enregistrement de lead, jusqu’à ce que son propre état indique qu’il est terminé.',
+    stages: [
+      { name: 'Enregistrement', note: 'Lead et succession' },
+      { name: 'Démon', note: 'Lancé par un humain' },
+      { name: 'Relance', note: 'N’ajoute aucune autorité' },
+      { name: 'Relève', note: 'Premier successeur joignable' },
+      { name: 'Notification', note: 'Vers la commande de l’humain' },
+      { name: 'Terminé', note: 'Vérifications réussies' },
+    ],
+  },
+  ko: {
+    ariaLabel:
+      '계획의 루프: 리드가 승계 목록과 함께 등록하고, 사람이 데몬을 시작하며, 유휴 리드는 권한을 더하지 않는 넛지를 받고, 사라진 리드는 처음으로 연결 가능한 승계자에게 페일오버되며, 사람에게 알림이 가고, 계획이 완료에 이릅니다.',
+    title: '루프',
+    footnote:
+      '리드 기록이 있는 모든 열린 계획, 자체 상태가 완료를 말할 때까지.',
+    stages: [
+      { name: '등록', note: '리드와 승계' },
+      { name: '데몬', note: '사람이 시작' },
+      { name: '넛지', note: '권한 추가 없음' },
+      { name: '페일오버', note: '첫 연결 가능 승계자' },
+      { name: '알림', note: '사람의 명령으로' },
+      { name: '완료', note: '검증 통과' },
+    ],
+  },
+  ru: {
+    ariaLabel:
+      'Цикл плана: его лидер регистрируется с порядком преемственности, человек запускает демон, простаивающий лидер получает напоминание без полномочий, пропавший лидер передаёт роль первому достижимому преемнику, человек получает уведомление, и план доходит до завершения.',
+    title: 'Цикл',
+    footnote:
+      'Каждый открытый план с записью лидера — пока его собственное состояние не скажет, что он завершён.',
+    stages: [
+      { name: 'Регистрация', note: 'Лидер и преемственность' },
+      { name: 'Демон', note: 'Запускает человек' },
+      { name: 'Напоминание', note: 'Без полномочий' },
+      { name: 'Failover', note: 'Первый достижимый преемник' },
+      { name: 'Уведомление', note: 'В команду человека' },
+      { name: 'Готово', note: 'Проверки пройдены' },
+    ],
+  },
+  it: {
+    ariaLabel:
+      'Il loop di un piano: il suo lead si registra con una successione, una persona avvia il daemon, un lead inattivo riceve un sollecito che non aggiunge autorità, a un lead assente subentra il primo successore raggiungibile, la persona viene avvisata e il piano arriva alla fine.',
+    title: 'Il loop',
+    footnote:
+      'Ogni piano aperto con un record di lead, finché il suo stesso stato non dice che è concluso.',
+    stages: [
+      { name: 'Registrazione', note: 'Lead e successione' },
+      { name: 'Daemon', note: 'Avviato da una persona' },
+      { name: 'Sollecito', note: 'Non aggiunge autorità' },
+      { name: 'Subentro', note: 'Primo successore raggiungibile' },
+      { name: 'Notifica', note: 'Al comando della persona' },
+      { name: 'Fatto', note: 'Verifiche superate' },
+    ],
+  },
+  tr: {
+    ariaLabel:
+      'Bir planın döngüsü: lideri bir halef sırasıyla kaydolur, bir insan daemon’u başlatır, boşta kalan lider yetki eklemeyen bir dürtme alır, ortadan kalkan liderin yerini erişilebilen ilk halef alır, insana bildirilir ve plan tamamlanır.',
+    title: 'Döngü',
+    footnote:
+      'Lider kaydı olan her açık plan, kendi durumu bitti diyene kadar.',
+    stages: [
+      { name: 'Kayıt', note: 'Lider ve halef sırası' },
+      { name: 'Daemon', note: 'Bir insan başlatır' },
+      { name: 'Dürtme', note: 'Yetki eklemez' },
+      { name: 'Devir', note: 'Erişilebilen ilk halef' },
+      { name: 'Bildirim', note: 'İnsanın komutuna' },
+      { name: 'Bitti', note: 'Kontroller geçildi' },
+    ],
+  },
+  id: {
+    ariaLabel:
+      'Loop sebuah rencana: lead-nya mendaftar dengan urutan suksesi, manusia memulai daemon, lead yang menganggur menerima dorongan yang tidak menambah wewenang, lead yang hilang digantikan penerus pertama yang terjangkau, manusia diberi tahu, dan rencana mencapai selesai.',
+    title: 'Loop',
+    footnote:
+      'Setiap rencana terbuka dengan catatan lead, hingga statusnya sendiri menyatakan selesai.',
+    stages: [
+      { name: 'Registrasi', note: 'Lead dan suksesi' },
+      { name: 'Daemon', note: 'Dimulai oleh manusia' },
+      { name: 'Dorongan', note: 'Tanpa wewenang tambahan' },
+      { name: 'Failover', note: 'Penerus pertama yang terjangkau' },
+      { name: 'Notifikasi', note: 'Ke perintah manusia' },
+      { name: 'Selesai', note: 'Pemeriksaan lulus' },
+    ],
+  },
+  vi: {
+    ariaLabel:
+      'Vòng lặp của một kế hoạch: lead của nó đăng ký cùng thứ tự kế nhiệm, con người khởi động daemon, lead đang rảnh nhận lời nhắc không thêm quyền hạn, lead vắng mặt được chuyển giao cho người kế nhiệm đầu tiên liên lạc được, con người được thông báo, và kế hoạch hoàn thành.',
+    title: 'Vòng lặp',
+    footnote:
+      'Mọi kế hoạch mở có bản ghi lead, cho đến khi chính trạng thái của nó báo đã xong.',
+    stages: [
+      { name: 'Đăng ký', note: 'Lead và kế nhiệm' },
+      { name: 'Daemon', note: 'Do con người khởi động' },
+      { name: 'Nhắc', note: 'Không thêm quyền hạn' },
+      { name: 'Chuyển giao', note: 'Người kế nhiệm đầu tiên' },
+      { name: 'Thông báo', note: 'Tới lệnh của con người' },
+      { name: 'Xong', note: 'Đạt các bước kiểm tra' },
+    ],
+  },
+  hi: {
+    ariaLabel:
+      'एक योजना का लूप: उसका लीड उत्तराधिकार क्रम के साथ पंजीकृत होता है, एक मनुष्य डेमॉन शुरू करता है, निष्क्रिय लीड को ऐसा संकेत मिलता है जो कोई अधिकार नहीं जोड़ता, चले गए लीड का कार्य पहले पहुँच-योग्य उत्तराधिकारी को मिलता है, मनुष्य को सूचित किया जाता है, और योजना पूर्ण होती है।',
+    title: 'लूप',
+    footnote: 'लीड रिकॉर्ड वाली हर खुली योजना, जब तक उसकी अपनी स्थिति पूर्ण न बताए।',
+    stages: [
+      { name: 'पंजीकरण', note: 'लीड और उत्तराधिकार' },
+      { name: 'डेमॉन', note: 'मनुष्य द्वारा शुरू' },
+      { name: 'संकेत', note: 'कोई अधिकार नहीं जोड़ता' },
+      { name: 'फ़ेलओवर', note: 'पहला पहुँच-योग्य उत्तराधिकारी' },
+      { name: 'सूचना', note: 'मनुष्य के कमांड को' },
+      { name: 'पूर्ण', note: 'जाँचें सफल' },
+    ],
+  },
+  pl: {
+    ariaLabel:
+      'Pętla planu: jego lead rejestruje się z sukcesją, człowiek uruchamia demona, bezczynny lead dostaje przypomnienie, które nie daje uprawnień, nieobecny lead przekazuje rolę pierwszemu osiągalnemu następcy, człowiek zostaje powiadomiony, a plan dobiega końca.',
+    title: 'Pętla',
+    footnote:
+      'Każdy otwarty plan z rekordem leada, dopóki jego własny stan nie wskaże końca.',
+    stages: [
+      { name: 'Rejestracja', note: 'Lead i sukcesja' },
+      { name: 'Demon', note: 'Uruchamia go człowiek' },
+      { name: 'Przypomnienie', note: 'Nie daje uprawnień' },
+      { name: 'Failover', note: 'Pierwszy osiągalny następca' },
+      { name: 'Sygnał', note: 'Do polecenia człowieka' },
+      { name: 'Koniec', note: 'Kontrole zaliczone' },
+    ],
+  },
+  uk: {
+    ariaLabel:
+      'Цикл плану: його лідер реєструється з порядком наступництва, людина запускає демон, лідер, що простоює, отримує нагадування без повноважень, відсутній лідер передає роль першому досяжному наступнику, людина отримує сповіщення, і план доходить до завершення.',
+    title: 'Цикл',
+    footnote:
+      'Кожен відкритий план із записом лідера — доки його власний стан не скаже, що його завершено.',
+    stages: [
+      { name: 'Реєстрація', note: 'Лідер і наступництво' },
+      { name: 'Демон', note: 'Запускає людина' },
+      { name: 'Нагадування', note: 'Без повноважень' },
+      { name: 'Failover', note: 'Перший досяжний наступник' },
+      { name: 'Сповіщення', note: 'До команди людини' },
+      { name: 'Готово', note: 'Перевірки пройдено' },
+    ],
+  },
+  th: {
+    ariaLabel:
+      'ลูปของแผน: lead ลงทะเบียนพร้อมลำดับผู้สืบทอด มนุษย์เริ่ม daemon lead ที่ว่างอยู่ได้รับการกระตุ้นที่ไม่เพิ่มอำนาจ lead ที่หายไปสลับไปยังผู้สืบทอดคนแรกที่ติดต่อได้ มนุษย์ได้รับแจ้ง และแผนไปถึงความเสร็จสิ้น',
+    title: 'ลูป',
+    footnote: 'ทุกแผนที่เปิดอยู่และมีบันทึก lead จนกว่าสถานะของมันเองจะบอกว่าเสร็จ',
+    stages: [
+      { name: 'ลงทะเบียน', note: 'lead และผู้สืบทอด' },
+      { name: 'Daemon', note: 'มนุษย์เป็นผู้เริ่ม' },
+      { name: 'กระตุ้น', note: 'ไม่เพิ่มอำนาจ' },
+      { name: 'สลับ', note: 'ผู้สืบทอดแรกที่ติดต่อได้' },
+      { name: 'แจ้ง', note: 'ถึงคำสั่งของมนุษย์' },
+      { name: 'เสร็จ', note: 'ผ่านเกณฑ์แล้ว' },
+    ],
+  },
+} as const;
+
+const t = i18n[lang as keyof typeof i18n] ?? i18n.en;
+const last = t.stages.length - 1;
+---
+
+<figure
+  class={`editorial-asset loopd ${className}`}
+  role="img"
+  aria-label={t.ariaLabel}
+>
+  <div class="editorial-asset__grid" aria-hidden="true"></div>
+  <div class="editorial-asset__body">
+    <p class="loopd-title kicker">{t.title}</p>
+    <ol class="loopd-grid">
+      {
+        t.stages.map((stage, i) => (
+          <li class={`loopd-node loopd-node--${i + 1}${i === last ? ' loopd-node--done' : ''}`}>
+            <span class="loopd-num nums-tabular">
+              {String(i + 1).padStart(2, '0')}
+            </span>
+            <span class="loopd-name">{stage.name}</span>
+            <code class="loopd-code">{CODES[i]}</code>
+            <span class="loopd-note">{stage.note}</span>
+            {i < last && (
+              <span class="loopd-arrow" aria-hidden="true" />
+            )}
+          </li>
+        ))
+      }
+    </ol>
+    <p class="loopd-foot">{t.footnote}</p>
+  </div>
+</figure>
+
+<style>
+  .loopd {
+    color: var(--color-ink);
+  }
+  .loopd-title {
+    margin: 0 0 0.9rem;
+    color: var(--color-ink);
+  }
+  .loopd-grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.6rem;
+  }
+  .loopd-node {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    min-width: 0;
+    border: 1px solid var(--color-line);
+    border-radius: 4px;
+    padding: 0.6rem 0.65rem;
+    background-color: var(--color-paper);
+  }
+  .loopd-node--done {
+    border-color: var(--color-secondary);
+  }
+  .loopd-num {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--color-muted);
+  }
+  .loopd-node--done .loopd-num {
+    color: var(--color-ink);
+  }
+  .loopd-name {
+    font-family: var(--font-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+  .loopd-code {
+    font-size: 0.7rem;
+    line-height: 1.3;
+    color: var(--color-ink);
+    overflow-wrap: anywhere;
+  }
+  .loopd-note {
+    font-size: 0.78rem;
+    line-height: 1.3;
+    color: var(--color-muted);
+  }
+  .loopd-arrow {
+    display: none;
+  }
+  .loopd-foot {
+    margin: 0.9rem 0 0;
+    font-size: 0.8rem;
+    line-height: 1.4;
+    color: var(--color-muted);
+  }
+
+  /* Serpentine on wider plates: 1 → 2 → 3, then ↓, then 4 ← 5 ← 6 reads back. */
+  @media (min-width: 640px) {
+    .loopd-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: 1.4rem;
+      row-gap: 1.4rem;
+    }
+    .loopd-node--4 {
+      grid-column: 3;
+      grid-row: 2;
+    }
+    .loopd-node--5 {
+      grid-column: 2;
+      grid-row: 2;
+    }
+    .loopd-node--6 {
+      grid-column: 1;
+      grid-row: 2;
+    }
+    .loopd-arrow {
+      display: block;
+      position: absolute;
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      line-height: 1;
+    }
+    .loopd-node--1 .loopd-arrow,
+    .loopd-node--2 .loopd-arrow {
+      top: 50%;
+      right: -1.15rem;
+      transform: translateY(-50%);
+    }
+    .loopd-node--1 .loopd-arrow::before,
+    .loopd-node--2 .loopd-arrow::before {
+      content: '→';
+    }
+    .loopd-node--3 .loopd-arrow {
+      left: 50%;
+      bottom: -1.2rem;
+      transform: translateX(-50%);
+    }
+    .loopd-node--3 .loopd-arrow::before {
+      content: '↓';
+    }
+    .loopd-node--4 .loopd-arrow,
+    .loopd-node--5 .loopd-arrow {
+      top: 50%;
+      left: -1.15rem;
+      transform: translateY(-50%);
+    }
+    .loopd-node--4 .loopd-arrow::before,
+    .loopd-node--5 .loopd-arrow::before {
+      content: '←';
+    }
+    .loopd-node--5 .loopd-arrow {
+      color: var(--color-secondary);
+    }
+  }
+</style>

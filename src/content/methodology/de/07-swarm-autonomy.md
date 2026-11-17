@@ -41,7 +41,7 @@ Jede Lane hat einen Plan, mindestens einen Lite-Plan in ihrem eigenen Repository
 
 ## Die Kapazitätsschleife
 
-Ein Agent prüft seinen eigenen Spielraum vor dem Beginn jeder Aufgabe, nach jedem Gate oder Schritt, der länger als 20 Minuten lief, immer wenn seine CLI eine Nutzungslimit-Warnung zeigt, und bevor er eine Übergabe oder die Leitung annimmt. Die Prüfung ist `ak capacity --self --json` aus coding-agents-kit `v1.4.0`, die der Helfer des Pakets in eine Entscheidung übersetzt:
+Ein Agent prüft seinen eigenen Spielraum vor dem Beginn jeder Aufgabe, nach jedem Gate oder Schritt, der länger als 20 Minuten lief, immer wenn seine CLI eine Nutzungslimit-Warnung zeigt, und bevor er eine Übergabe oder die Leitung annimmt. Die Prüfung ist `ak capacity --self --json` aus coding-agents-kit `v1.5.0`, die der Helfer des Pakets in eine Entscheidung übersetzt:
 
 | Urteil | Entscheidung | Eine Lane | Ein Lead, für sich selbst |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Das **Übergabepaket** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/dwp-h
 
 ## Lead-Nachfolge
 
-herdr-peers `v2.0.0` führt pro Plan einen Lead-Eintrag — Lead, Epoche, Nachfolgeliste und Lanes — und löst die Adresse `lead` zum aktuellen Lead auf, sodass kein Lane-Auftrag das Pane des Leads fest einträgt.
+herdr-peers `v2.2.0` führt pro Plan einen Lead-Eintrag — Lead, Epoche, Nachfolgeliste und Lanes — und löst die Adresse `lead` zum aktuellen Lead auf, sodass kein Lane-Auftrag das Pane des Leads fest einträgt.
 
 - **Erst beanspruchen, dann starten.** Der Lead führt `herdr-peers lead claim --plan <P> --succession <A,B>` aus, bevor er irgendeine Lane startet — die Adresse `lead` wird erst aufgelöst, sobald ein Eintrag existiert —, aktualisiert den Eintrag mit `--lanes <A,B>`, während Lanes starten, und führt `lead release` aus, wenn der Plan fertig ist. Ab herdr-peers (`v0.3.2`) hält der Eintrag das beanspruchende Repository lokal fest, und ein Plan mit derselben ID in einem anderen Repository wird `--plan <repo>/<id>` genannt. Die Standardnachfolge ist sein geplanter Nachfolger, dann die Lanes im eigenen Checkout des Plans in Startreihenfolge, dann jede Lane auf demselben Host; Lanes in Containern oder auf anderen Rechnern kommen zuletzt.
 - **Übergabe, geplant.** Bei `low` benennt der Lead einen designierten Nachfolger. Bei `critical` schreibt er ein Lead-Paket — Lane-Tabelle, offene asks, Release-Reihenfolge, ausstehende Merges, Entscheidungen —, führt `herdr-peers lead handover <addr> --plan <P>` aus, das die Epoche erhöht und jede Lane benachrichtigt, und hält an. Der Nachfolger nimmt das Paket an, nimmt den Orchestrator-Plan wieder auf und prüft jede Lane erneut.
@@ -117,3 +117,7 @@ Das Journal des Orchestrator-Plans hält den Schwarm fest: Lane-Starts und -Erge
 ## Den Ablauf üben
 
 Erproben Sie die Schleife, bevor Sie sich auf sie verlassen. Betreiben Sie auf einem Übungs-Repository mit einem kleinen Orchestrator-Plan einen Lead und mindestens drei Lanes auf verschiedenen Konten oder Anbietern. Begrenzen Sie die gemeldete Kapazität einer Lane — `AGENTKIT_CAPACITY_CAP=@<profile>=8` senkt den Messwert und kann ihn nie erhöhen — und beobachten Sie, wie sie ein Paket schreibt, der Lead einen Nachfolger startet, der es annimmt, und der Nachfolger das Gate besteht. Begrenzen Sie den Lead auf dieselbe Weise und beobachten Sie die Übergabe und wie der neue Lead den Plan abschließt. Halten Sie dann die Evidenz in `analysis_results/` des Plans fest: kein menschlicher Tastendruck, jedes Paket, jede Epoche, ein ask von Lane zu Lane und die Gates.
+
+## Den Ausführungsloop schließen
+
+Der optionale Loop-Daemon setzt einen genehmigten Plan anhand seines Lead-Eintrags fort, stößt an, ohne Befugnisse hinzuzufügen, und bittet einen eingetragenen Nachfolger um Übernahme, wenn der Lead verschwunden ist. Ein Mensch startet ihn; Zugangsdaten, Anmeldungen und die C1–C7-Gates des Plans bleiben menschliche Aufgaben. Siehe [Loop engineering](/de/methodology/08-loop-engineering).

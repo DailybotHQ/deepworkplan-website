@@ -24,9 +24,9 @@ Możliwości agenta kodującego AI zależą mniej od modelu niż od jakości kie
 
 To na nowo ujmuje, co znaczy dobrze delegować. Dobra delegacja to nie proszenie agenta o pracę — to definiowanie pracy na tyle jasno, by mogła zostać wykonana poprawnie: cel, ograniczenia, kontekst, którego agentowi inaczej brakuje, oraz kryteria rozstrzygające, czy się powiodło. Większość wartości powstaje, zanim rozpocznie się realizacja.
 
-Deep Work Plan to dyscyplina wykonywania tej wstępnej pracy w trwałej, powtarzalnej formie. Jego dwa filary założycielskie to dwie połowy dobrego kierunku: **specyfikacja** określa, jak wygląda „poprawne”, a **harness** daje agentowi kontekst i narzędzia, by to osiągnąć. Trzecia dyscyplina sprawia, że ta kombinacja pozostaje przystępna kosztowo w skali: **efektywność tokenów** — bo harness, który działa, to taki, który agent jest w stanie nieść przez długi dystans. Razem zamieniają surową zdolność modelu w niezawodną inżynierię — podtrzymywaną przez zadanie trwające godzinami i zachowaną pomiędzy agentami, którzy zmieniają się między sesjami.
+Deep Work Plan to dyscyplina wykonywania tej wstępnej pracy w trwałej, powtarzalnej formie. Opiera się na czterech filarach. Dwa pierwsze to dwie połowy dobrego kierunku: **spec-first** — specyfikacja określa, jak wygląda „poprawne” — oraz **repozytorium jest harnessem** — repozytorium daje agentowi kontekst i narzędzia, by to osiągnąć. Trzeci sprawia, że praca dobiega końca: **loop engineering** utrzymuje zatwierdzony plan w ruchu aż do jego określonego końca, bez człowieka, który stale go sprawdza. Czwarty sprawia, że ta kombinacja pozostaje przystępna kosztowo i uczciwa w tej kwestii: **mierzona wydajność** — bo harness, który działa, to taki, który agent jest w stanie nieść przez długi dystans, a jego koszt jest mierzony, a nie deklarowany. W jednym zdaniu: *Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.* Razem zamieniają surową zdolność modelu w niezawodną inżynierię — podtrzymywaną przez zadanie trwające godzinami i zachowaną pomiędzy agentami, którzy zmieniają się między sesjami.
 
-## Spec-driven z założenia
+## Spec-first
 
 To pierwszy filar metodyki i — podobnie jak „harness” — wart jest jasnego zdefiniowania.
 
@@ -38,7 +38,7 @@ To pierwszy filar metodyki i — podobnie jak „harness” — wart jest jasneg
 
 **Czym DWP się różni.** Wokół tej idei uformował się szerszy ruch spec-driven, obejmujący GitHub Spec Kit, Amazon Kiro i Tessl. Te podejścia bywają związane z konkretnym narzędziem lub platformą. DWP jest celowo inny: jest niezależny od narzędzia i natywny dla repozytorium. Specyfikacja żyje w repozytorium jako zwykły Markdown, więc podróżuje razem z kodem, a nie z produktem dostawcy — i komponuje się bezpośrednio z drugim filarem, ponieważ sama specyfikacja jest częścią harness, który niesie repozytorium.
 
-## Repozytorium staje się harness
+## Repozytorium jest harnessem
 
 To drugi filar metodyki i zasługuje na jasną definicję — „harness” stał się terminem obciążonym znaczeniami, a spora część branży używa go bez wyjaśniania, co oznacza.
 
@@ -60,9 +60,15 @@ To drugi filar metodyki i zasługuje na jasną definicję — „harness” sta�
 
 Ponieważ każdy element jest plikiem w repozytorium, a nie funkcją narzędzia, harness jest przenośny z samej konstrukcji: dowolny agent, który czyta markdown i uruchamia polecenia powłoki, może otworzyć te same pliki, bez autorskiego frameworka per narzędzie. To jednolinijkowa teza, na której opiera się reszta metodyki: *samo repozytorium staje się harness*. Jest to twierdzenie o tym, co niesie repozytorium, a nie gwarancja, że model niezawodnie znajdzie właściwy przepływ bez pomocy przy świeżym żądaniu — dlatego kit dostarcza również jawne punkty wejścia `dwp-*` oraz router `SKILL.md`: przenośność plików i niezawodne routowanie to różne właściwości, a tylko ta pierwsza jest zbudowana z samej konstrukcji.
 
-## Wydajność z samej konstrukcji
+## Loop engineering
 
-Pierwszy filar czyni pracę poprawną; drugi czyni ją przenośną. Trzeci dba o to, by pozostawała **przystępna kosztowo** — bo kontekst to najrzadszy zasób, jakim dysponuje agent kodujący, a metodyka, która go marnuje, zawodzi dokładnie wtedy, gdy praca robi się długa.
+To trzeci filar. Specyfikacja i harness czynią pracę poprawną i przenośną; same w sobie nie sprawiają, że dobiega ona końca. Długi plan utyka, gdy jego agent zatrzymuje się na końcu tury, czeka na ekranie, wyczerpuje swoje zasoby albo znika — a zwykłym lekarstwem jest człowiek, który zagląda do niego co dwadzieścia minut. Loop engineering usuwa to niańczenie, nie oddając kontroli.
+
+Z opcjonalnym dodatkiem Herdr plan rejestruje prowadzącego oraz, jeśli ich wskazuje, następców. Demon, którego uruchamia wyłącznie człowiek, obserwuje każdy zarejestrowany plan: ponagla bezczynnego prowadzącego do kontynuowania, prosi pierwszego osiągalnego następcę o przejęcie roli prowadzącego, którego zabrakło, i zgłasza, gdy plan utyka, zostaje zablokowany lub dobiega końca. Ponaglenie nie dodaje żadnych uprawnień — bramki planu, warunki zatrzymania i eskalacje obowiązują dokładnie tak jak wcześniej, a poświadczenia, logowanie i własne punkty kontrolne planu przeznaczone dla człowieka pozostają w rękach ludzi. Metodyka działa bez pętli; pętla jedynie ją wzmacnia. Zobacz [Loop engineering](/pl/methodology/08-loop-engineering).
+
+## Mierzona wydajność
+
+Pierwszy filar czyni pracę poprawną; drugi czyni ją przenośną; trzeci sprawia, że dobiega końca. Czwarty dba o to, by pozostawała **przystępna kosztowo** — bo kontekst to najrzadszy zasób, jakim dysponuje agent kodujący, a metodyka, która go marnuje, zawodzi dokładnie wtedy, gdy praca robi się długa — i by to twierdzenie było **mierzone**: bajty instrukcji na przepływ, nigdy wymyślone procenty tokenów.
 
 Pracę tę wykonują trzy mechanizmy:
 
@@ -85,4 +91,4 @@ DWP narzuca lekką strukturę, która adresuje każdą z tych słabości bezpoś
 
 ## Markdown na wskroś
 
-DWP definiuje strukturę, nie oprogramowanie. Nie ma środowiska uruchomieniowego do zainstalowania, drzewa zależności ani vendor lock-in. Plan, zadania i bieżący dziennik to wszystko zwykły Markdown, który każdy agent może przeczytać, każda osoba może przejrzeć, a każdy system kontroli wersji może czysto śledzić. Efektem jest realizacja, którą można czytać, audytować i której można ufać.
+DWP definiuje strukturę, nie oprogramowanie. Nie ma środowiska uruchomieniowego do zainstalowania, drzewa zależności ani vendor lock-in; opcjonalny demon pętli należy do dodatku, nie do metodyki. Plan, zadania i bieżący dziennik to wszystko zwykły Markdown, który każdy agent może przeczytać, każda osoba może przejrzeć, a każdy system kontroli wersji może czysto śledzić. Efektem jest realizacja, którą można czytać, audytować i której można ufać.

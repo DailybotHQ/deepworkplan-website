@@ -9,7 +9,7 @@ export const en: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — structured execution for AI coding agents',
   siteDescription:
-    'Deep Work Plan is spec-driven development where the repository becomes the harness: atomic tasks, validation gates, and safe multi-agent execution.',
+    'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done. Measured efficiency is tracked in instruction bytes per flow.',
 
   // Navigation
   nav: {
@@ -93,14 +93,14 @@ export const en: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — structured execution for AI coding agents',
       description:
-        'Deep Work Plan brings spec-driven development to AI coding agents. Turn your repository into a durable harness for long-horizon execution and multi-agent delegation.',
+        'Spec-first, loop-closed: Deep Work Plan makes your repository the harness for AI coding agents, and each plan runs to done under a human-started loop.',
     },
     hero: {
       badge: 'Open methodology · MIT · Agent-agnostic',
-      title: 'Models matter.',
-      titleEmphasis: 'Context matters more.',
+      leadSentence:
+        'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.',
       subtitle:
-        'Deep Work Plan turns any repository into a structured environment — context, guardrails, and a durable plan — where any coding agent executes and finishes long-horizon work with precision and efficiency.',
+        'Deep Work Plan turns any repository into the harness — context, guardrails, and a durable plan with validation gates — where any coding agent executes long-horizon work. Add the optional loop, and an open plan keeps running to its end without anyone polling it.',
       instructionLabel: 'Copy into your agent',
       instruction:
         'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',
@@ -108,19 +108,38 @@ export const en: SiteTranslations = {
       copiedLabel: 'Copied',
       viewInitCta: 'See how it works',
       pullQuote:
-        'Deep Work Plan is spec-driven development where the repository itself becomes the harness.',
+        'Spec-first says what; the harness says where; loop engineering says how it finishes.',
       primaryCta: 'Read the methodology',
       secondaryCta: 'Read the spec',
-      illustrationAlt:
-        'A lighthouse on a rocky shore casts a single beam guiding a small vessel — an engraving evoking the repository as a steady harness that guides any agent.',
-      scrollCta: 'See how it works',
+    },
+    pillars: {
+      badge: 'Four pillars',
+      title: 'What the methodology stands on.',
+      items: [
+        {
+          name: 'Spec-first',
+          line: 'The plan is the durable source of truth: atomic tasks, acceptance criteria, and validation gates the agent must pass.',
+        },
+        {
+          name: 'The repository is the harness',
+          line: 'Context, tools, guardrails, and state live in the repository as plain files any agent can read.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Plans run to their end: registration, a human-started daemon, nudges that add no authority, failover, and plan events.',
+        },
+        {
+          name: 'Measured efficiency',
+          line: 'Instruction bytes per flow, measured and published with their method — never invented token percentages.',
+        },
+      ],
     },
     pitch: {
       kicker: 'The problem and the answer',
       problem:
         'A coding agent performs beautifully on short tasks. But hand it a long-horizon mission — a migration, a new subsystem, a refactor at scale — and drift sets in: the context window fills, earlier decisions fade, and hours of work stall halfway through.',
       answer:
-        'Deep Work Plan answers with spec-driven development: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence.',
+        'Deep Work Plan answers spec-first: a durable plan, atomic tasks, and validation gates the agent must pass. Done stops being a feeling — it becomes verifiable, reviewable evidence. Loop engineering then keeps the plan moving until those gates are passed.',
       efficiency:
         'Context is your agent’s scarcest resource, so the harness keeps its own instructions lean and auditable. Instructions load progressively, validation follows the changes, and each task gets the context relevant to its work. We publish the instruction load for each flow in bytes, making that overhead visible. Plans scale to the work too: Lite for a bounded fix, Full for work that spans hours. The format follows the scope, keeping the process focused and traceable.',
       illustrationAlt:
@@ -157,6 +176,72 @@ export const en: SiteTranslations = {
         deepLinkLabel: 'Read the methodology',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Plans run to their end. Authority stays with people.',
+      subtitle:
+        'Loop engineering is how a plan finishes without a human polling it. Rows below describe released contracts in the loop: most come from herdr-peers, while the plan queue is a pack contract. Herdr is optional; the methodology works without it.',
+      colContract: 'Contract',
+      colGuarantee: 'What it guarantees',
+      colSource: 'Source',
+      contracts: [
+        {
+          name: 'Plan registration',
+          detail:
+            'A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead.',
+        },
+        {
+          name: 'Human-only start',
+          detail:
+            'Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does.',
+        },
+        {
+          name: 'Nudges add no authority',
+          detail:
+            'The idle lead of an open plan gets one fixed prompt to continue. Gates, stop conditions, and escalations bind as before; three prompts without progress mark the plan stalled.',
+        },
+        {
+          name: 'Failover to successors',
+          detail:
+            'Successors take over through the fenced lead-takeover check. A lane can be appointed only with a grant the human recorded in advance.',
+        },
+        {
+          name: 'Plan events',
+          detail:
+            'When a plan stalls, blocks, loses its lead, starts from the queue, or completes, a command the human chose receives one plan-event-v1 object. The pack ships a Dailybot notifier for it.',
+        },
+        {
+          name: 'Fleet map',
+          detail:
+            'Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only.',
+        },
+        {
+          name: 'Plan queue',
+          detail:
+            'The pack validates and writes the `dwp-queue-v1` queue; the daemon reads it to continue queued plans.',
+        },
+        {
+          name: 'Lead verify',
+          detail:
+            'Before any merge, tag, or release, the lead confirms it still holds the plan on every machine. A newer lead refuses it; an unreachable machine stops it unless that risk is accepted on record.',
+        },
+      ],
+      note: 'The decision brain (--brain) and lead appointment (--appoint) are opt-in flags of the same daemon, each switched on by a human. The daemon never merges, releases, signs in, or changes a permission.',
+      deepLinkLabel: 'Read the Herdr addon',
+    },
+    efficiency: {
+      badge: 'Measured efficiency',
+      title: 'Instruction bytes per flow, measured.',
+      subtitle:
+        'The harness publishes what each flow must read before it starts: the router, the sub-skill, and the shared resources it links. These are the compulsory read sets of the released pack.',
+      colFlow: 'Flow',
+      colBytes: 'Entry bundle (bytes)',
+      caption:
+        'Unit: filesystem bytes. Measured on the released pack with the command below.',
+      absent:
+        'Provider tokens, cost, and loop-closure statistics are not shown: no tagged source measures them yet, so they have no row. The script’s bytes ÷ 4 token figure is a labeled estimate, never a measurement.',
+      deepLinkLabel: 'Read the evaluation ledger',
     },
     onboarding: {
       badge: 'Reasoning-based onboarding',
@@ -212,6 +297,11 @@ export const en: SiteTranslations = {
           description:
             'Generate long-horizon Deep Work Plans for any task and run them step by step, with explicit acceptance criteria, validation gates, and resumable state — autonomously, for hours.',
         },
+        {
+          title: 'A human starts the loop',
+          description:
+            'Optional, with the Herdr addon: you — never an agent — run herdr-peers autopilot start --loop. Every open plan with a lead record keeps running to its end, and your notifier hears when one stalls, blocks, or completes.',
+        },
       ],
       note: 'The skill is installed identically everywhere; what is adapted is your repository — the AGENTS.md, docs, and reasoned .agents/ kit generated for your stack. That split is what makes the methodology a reusable standard rather than a one-off scaffold.',
     },
@@ -259,7 +349,7 @@ export const en: SiteTranslations = {
         {
           label: 'Git-native, resumable, .dwp/',
           detail:
-            'No daemon and no external state. Plans land in a gitignored .dwp/ folder, and any task resumes from git alone — even after context overflows.',
+            'The methodology itself needs no daemon and no external state. Plans land in a gitignored .dwp/ folder, and any task resumes from git alone — even after context overflows. The optional loop daemon adds continuity, never a dependency.',
         },
         {
           label: 'Multi-agent delegation and Ecosystem 1.0',
@@ -583,12 +673,12 @@ export const en: SiteTranslations = {
     meta: {
       title: 'The Deep Work Plan Methodology',
       description:
-        'Seven chapters from manifesto to swarm autonomy: principles, core loop, templates, skills and agents, archetypes, many agents, and swarms that outlive a limit.',
+        'Eight chapters from manifesto to Loop engineering: principles, core loop, templates, skills and agents, archetypes, multi-agent work, and loop closure.',
     },
     eyebrow: 'Methodology',
     title: 'The Deep Work Plan Methodology',
     intro:
-      'Seven chapters that take you from the philosophy behind Deep Work Plan to the practical loop, templates, adaptations, running many agents at once, and keeping a swarm running.',
+      'Eight chapters take you from Deep Work Plan’s principles through its practical loop, templates, adaptations, multi-agent work, and Loop engineering.',
     chapterLabel: 'Chapter',
     readChapter: 'Read chapter',
     prev: 'Previous',
@@ -683,8 +773,6 @@ export const en: SiteTranslations = {
     },
     eyebrow: 'Quickstart',
     title: 'Make your repository AI-first',
-    intro:
-      'One page to turn any repository into a spec-driven, agent-ready codebase. Install the skill, let an agent onboard the repo, then plan and execute structured work with any coding agent.',
     handoffTitle: 'Copy into your agent',
     handoffBody:
       'Copy the full init.md prompt and paste it into your AI coding agent — Claude Code, Cursor, Codex, or any other. It reads the methodology and specification, installs the skill, and onboards this repository for Deep Work Plans.',
@@ -694,18 +782,20 @@ export const en: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'What this does',
     whatBody: [
-      'Adoption changes the repository in two durable ways — the pillars of the methodology.',
-      'First, the repository becomes spec-driven: work begins from a written plan and specification, not from ad-hoc prompts. Second, the repository itself becomes the agent harness — an AGENTS.md, a docs/ knowledge base, per-module docs, and a .agents/ skill home (with the .claude → .agents and .cursor → .agents symlinks) give every agent the context and commands it needs.',
+      'The adoption path puts these four pillars into practice in your repository.',
+      'Four pillars guide adoption: spec-first plans, the repository as the harness, Loop engineering, and measured efficiency. The plan is the durable source of truth; the repository carries the context, tools, guardrails, and state. The optional, human-started loop helps registered plans reach completion, while instruction load is measured in bytes per flow.',
     ],
     sequenceTitle: 'The adoption path',
     orLabel: 'or',
+    loopNotifyNote:
+      'If you want Dailybot event reports, use the second command. It adds the pack notifier with --notify; notifications are optional.',
     steps: [
       {
         title: 'Verify before you install',
         description:
           'Treat the prompt and the skill as untrusted until you have checked them. Both are open source and MIT; the skill is Markdown-first with no network calls and no telemetry. Each release publishes a SHA256SUMS over the shipped skill, so you can confirm your copy matches before running it. Releases are checksummed, not signed (signing is a documented next step).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -713,7 +803,7 @@ export const en: SiteTranslations = {
         description:
           'Add the skill to your repository so any agent can plan and execute structured work. It ships a router plus nine sub-skills — create, execute, refine, resume, status, verify, onboard, author, and upgrade. Use the Skills CLI for the fastest path, or clone the repo and run setup where git and a shell are available.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -744,7 +834,7 @@ export const en: SiteTranslations = {
     ],
     outcomeTitle: 'The outcome',
     outcome:
-      'The repository becomes spec-driven and agent-pilotable: the plan is the durable source of truth, and the repository itself becomes the harness any agent runs against.',
+      'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.',
     nextStepsTitle: 'Next steps',
     nextSteps: [
       { label: 'Read the methodology', href: '/methodology' },
@@ -818,7 +908,7 @@ export const en: SiteTranslations = {
             id: 'how-to-use',
             question: 'How do I use it?',
             answer:
-              'Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.',
+              'Three steps. First, install the Deep Work Plan skill into your coding agent — the fastest path is `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (or clone the skill repo and run `./setup.sh`). Second, onboard the repository once so the agent adapts `AGENTS.md`, `docs/`, the `.agents/` kit and a gitignored `.dwp/` area to your stack: point it at https://deepworkplan.com/init.md, or run `/deepworkplan-onboard`. Third, plan and run work with the thin commands: `/dwp-create <goal>` builds a plan; `/dwp-execute` runs it task by task against each gate; `/dwp-refine` edits an in-flight plan (scope, tasks, or promoting a Lite plan to Full); `/dwp-resume` continues after an interruption; `/dwp-status` reports progress without executing; `/dwp-verify` produces an objective conformance report; `/dwp-upgrade` moves an installed skill to a newer release without touching existing plans. Agents that intercept `/` often use `#` instead (for example `#dwp-execute`). The adoption endpoint and the quickstart walk the same path in more detail.',
             linkLabel: 'Quickstart',
             linkPath: '/quickstart',
           },
@@ -947,6 +1037,25 @@ export const en: SiteTranslations = {
             linkLabel: 'Repository archetypes',
             linkPath: '/spec/archetypes',
           },
+
+          {
+            id: 'loop-engineering',
+            question: 'What is loop engineering?',
+            answer:
+              'Loop engineering closes the execution loop: after a plan is registered with a lead, the optional, human-started Herdr daemon can keep its open plan moving to completion and report stalls, blockers, lost leads, or completion. It works within the plan’s recorded authority.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Does Deep Work Plan need the daemon?',
+            answer:
+              'No. The methodology and its plans work without Herdr or a daemon. The addon is optional and adds continuity; it is never a requirement.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'What can the daemon never do?',
+            answer:
+              'It never signs in, accepts Claude’s bypass-permissions acknowledgement, widens an agent’s standing permissions, or performs merge, tag, or release operations. A nudge sends a fixed continue prompt and grants no authority.',
+          },
         ],
       },
       {
@@ -998,9 +1107,9 @@ export const en: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'Do v6 plans keep running under v7?',
+            question: 'Do existing plans keep their generation under v8?',
             answer:
-              'Yes. Plan contracts declare their schema generation explicitly (`plan-contract/v6.json` vs `plan-contract/v7.json`). A plan never migrates its generation mid-flight. Existing v6 plans retain their recorded shape, state, and journal semantics, continuing uninterrupted under v7 tooling.',
+              'Yes. New plans default to `plan-contract/v8`. Existing v7, v6, and v5 plans retain their recorded generation and continue under the current pack. A plan changes generation only through an explicit `/dwp-refine migrate` request.',
             linkLabel: 'Read about contracts',
             linkPath: '/spec/record-layer',
           },
@@ -1425,6 +1534,8 @@ export const en: SiteTranslations = {
     planTitle: 'Plan and execute with the skill',
     planIntro:
       'The API above lets an agent read this site. The DWP skill is what lets an agent run the methodology — install it once in a repository and it ships a router plus nine sub-skills, invoked as slash commands (or by name, for agents that intercept slash — most use # instead, e.g. #dwp-execute).',
+    loopWorkflow:
+      'With Herdr, plan registration records the lead and succession. A human may start herdr-peers autopilot start --loop to keep open plans moving. Run herdr-peers lead verify --plan <plan-id> before any merge, tag, or release.',
     formatTitle:
       'Two independent choices: format, and how much review you want',
     formatIntro:

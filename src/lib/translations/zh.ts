@@ -13,7 +13,7 @@ export const zh: SiteTranslations = {
   siteTitle: 'Deep Work Plan',
   siteTitleFull: 'Deep Work Plan — 面向 AI 编码代理的结构化执行',
   siteDescription:
-    'Deep Work Plan 是一种规范驱动开发方法，仓库本身即为治理框架：通过原子任务、确定性验证关卡和安全的多代理协同实现长时间自主执行。',
+    '规范先行、闭环运行：代码仓库是执行环境，计划持续运行直至完成。效率按每个流程的指令字节数衡量，并公开测量方法，绝不编造 token 百分比。',
 
   // Navigation
   nav: {
@@ -97,14 +97,14 @@ export const zh: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan — 面向 AI 编码代理的结构化执行',
       description:
-        'Deep Work Plan 将规范驱动开发带入 AI 编码代理。将你的代码仓库转化为持久的治理框架，实现可靠的长时间自主执行与多代理安全委托。',
+        '规范先行、闭环运行：Deep Work Plan 让代码仓库成为 AI 编码代理的 harness，每份计划都在人类启动的循环下运行到完成。',
     },
     hero: {
       badge: '开放方法论 · MIT · 代理无关',
-      title: '模型很重要。',
-      titleEmphasis: '上下文更重要。',
+      leadSentence:
+        '规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。',
       subtitle:
-        'Deep Work Plan 将任何仓库转变为结构化环境——上下文、防护栏和持久计划——任何编码代理都能在其中精准而高效地执行，并完成长程工作。',
+        'Deep Work Plan 将任何代码仓库转变为 harness（运行支架）——上下文、防护栏，以及带验证关卡的持久计划——任何编码代理都能在其中执行长程工作。加上可选的循环，一份打开的计划会持续运行到结束，无需任何人去轮询它。',
       instructionLabel: '复制到你的代理',
       instruction:
         '复制 init.md 提示并将其粘贴到你的编码代理中——Claude Code、Cursor、Codex 或任何其他代理——让任意代码仓库变为 AI-first。',
@@ -112,19 +112,38 @@ export const zh: SiteTranslations = {
       copiedLabel: '已复制',
       viewInitCta: '了解它的工作原理',
       pullQuote:
-        'Deep Work Plan 是一种规范驱动的开发方式，在其中代码仓库本身成为执行的 harness（运行支架）。',
+        '规范先行说明做什么；harness 说明在哪里做；Loop engineering 说明如何收尾。',
       primaryCta: '阅读方法论',
       secondaryCta: '阅读规范',
-      illustrationAlt:
-        '一座灯塔矗立在礁石海岸，射出一道光束为一艘小船指引方向——这幅版画寓意着代码仓库如同稳固的支架，引导任意代理。',
-      scrollCta: '了解它的工作原理',
+    },
+    pillars: {
+      badge: '四大支柱',
+      title: '这套方法论立足于什么。',
+      items: [
+        {
+          name: '规范先行',
+          line: '计划是持久的事实来源：原子任务、验收标准，以及代理必须通过的验证关卡。',
+        },
+        {
+          name: '代码仓库就是 harness',
+          line: '上下文、工具、防护栏与状态以纯文件形式存放在代码仓库中，任何代理都可读取。',
+        },
+        {
+          name: 'Loop engineering',
+          line: '计划会运行到结束：注册、由人类启动的守护进程、不增加任何权限的提醒、故障转移，以及计划事件。',
+        },
+        {
+          name: '可测量的效率',
+          line: '按流程统计的指令字节数，连同测量方法一并测量和公布——绝不编造 token 百分比。',
+        },
+      ],
     },
     pitch: {
       kicker: '问题与答案',
       problem:
         '短促任务中，编程代理表现出色。可一旦交给它长程任务——一次迁移、一个新子系统、大规模重构——它就会偏移：上下文被填满，先前的决策逐渐淡忘，数小时的工作半途搁浅。',
       answer:
-        'Deep Work Plan 以规范驱动开发应对：一份持久的计划、原子任务，以及代理必须通过的验证关卡。“完成”不再是感觉——而是可验证、可审查的证据。',
+        'Deep Work Plan 以规范先行来应对：一份持久的计划、原子任务，以及代理必须通过的验证关卡。“完成”不再是感觉——而是可验证、可审查的证据。随后，Loop engineering 让计划持续推进，直到这些关卡全部通过。',
       efficiency:
         '上下文是代理最稀缺的资源，因此 harness 会让自身的指令保持精简且可审计。指令逐步加载，验证聚焦于实际改动，每项任务也会获得相关上下文。我们以字节公布每个流程的指令规模，让这部分负载清晰可见。计划也随工作调整：范围明确的修复使用 Lite，持续数小时的工作使用 Full。形式跟随工作范围，让流程保持聚焦并且可追踪。',
       illustrationAlt:
@@ -161,6 +180,71 @@ export const zh: SiteTranslations = {
         deepLinkLabel: '阅读方法论',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: '计划运行到结束。权限始终在人手中。',
+      subtitle:
+        'Loop engineering 让计划无需人类轮询也能完成。以下各行描述循环中的已发布契约：大多数来自 herdr-peers，而计划队列是技能包契约。Herdr 是可选项；方法论不依赖它也能运作。',
+      colContract: '契约',
+      colGuarantee: '它保证什么',
+      colSource: '来源',
+      contracts: [
+        {
+          name: '计划注册',
+          detail:
+            '循环所监视的计划拥有一条主导者记录，包含 epoch 与继任列表。只有持有最高 epoch 的一方才作为其主导者行事。',
+        },
+        {
+          name: '仅由人类启动',
+          detail:
+            '只有人类能以自己的话启动守护进程。任何询问、回复或通知都无法启动它、停止它，或改变它的行为。',
+        },
+        {
+          name: '提醒不增加权限',
+          detail:
+            '处于空闲状态的打开计划的主导者会收到一条固定的继续提示。关卡、停止条件与升级规则照旧具有约束力；连续三次提示仍无进展，计划即被标记为停滞。',
+        },
+        {
+          name: '故障转移至继任者',
+          detail:
+            '继任者通过带有围栏校验的 lead takeover 流程接任。只有在人类事先记录授权时，才可任命一条通道接任。',
+        },
+        {
+          name: '计划事件',
+          detail:
+            '当计划停滞、受阻、失去主导者、从队列启动或完成时，由人类选定的命令会收到一个 plan-event-v1 对象。技能包为此附带一个 Dailybot 通知器。',
+        },
+        {
+          name: '设备舰队视图',
+          detail:
+            '每台机器以 plans-v1 报告其计划；守护进程维护覆盖每台机器、代理、代码仓库与计划的 fleet-v1 视图，fleet ui 以只读方式展示它。',
+        },
+        {
+          name: '计划队列',
+          detail:
+            '技能包校验并写入 `dwp-queue-v1` 队列；守护进程读取它以继续执行排队计划。',
+        },
+        {
+          name: '主导者核验',
+          detail:
+            '在任何合并、打标签或发布之前，主导者会确认自己在每台机器上仍持有该计划。更新的主导者会拒绝它；无法联系的机器会使其停止，除非该风险已在记录中被接受。',
+        },
+      ],
+      note: '决策大脑（--brain）与主导者任命（--appoint）是同一守护进程的可选标志，各自由人类开启。守护进程从不合并、发布、登录，也不更改任何权限。',
+      deepLinkLabel: '阅读 Herdr 附加组件',
+    },
+    efficiency: {
+      badge: '可测量的效率',
+      title: '按流程统计的指令字节数，经过测量。',
+      subtitle:
+        'harness 会公布每个流程在开始前必须读取的内容：路由器、子技能，以及它所链接的共享资源。这些是已发布技能包的必读集合。',
+      colFlow: '流程',
+      colBytes: '入口包（字节）',
+      caption: '单位：文件系统字节。使用下方命令在已发布的技能包上测得。',
+      absent:
+        '未展示提供商 token、成本与循环闭合统计：目前尚无带标签的来源对其进行测量，因此它们没有对应的行。脚本给出的“字节 ÷ 4”token 数值是标注为估算的数字，绝非测量结果。',
+      deepLinkLabel: '阅读评估账本',
     },
     onboarding: {
       badge: '基于推理的接入',
@@ -216,6 +300,11 @@ export const zh: SiteTranslations = {
           description:
             '为任意任务生成长周期的 Deep Work Plan 并逐步运行，配合明确的验收标准、验证关卡与可恢复状态——自主运行，长达数小时。',
         },
+        {
+          title: '由人类启动循环',
+          description:
+            '可选，需配合 Herdr 附加组件：由你——绝不是代理——运行 herdr-peers autopilot start --loop。每份带有主导者记录的打开计划都会持续运行到结束，当某份计划停滞、受阻或完成时，你的通知器会收到消息。',
+        },
       ],
       note: '技能在各处的安装完全一致；被适配的是你的代码仓库——为你的技术栈生成的 AGENTS.md、文档与经过推理的 .agents/ 套件。正是这种区分，使这套方法论成为可复用的标准，而非一次性的脚手架。',
     },
@@ -263,7 +352,7 @@ export const zh: SiteTranslations = {
         {
           label: 'Git 原生、可恢复、.dwp/',
           detail:
-            '无守护进程，无外部状态。计划落入被 gitignore 的 .dwp/ 目录，任意任务仅凭 git 即可恢复——即便上下文溢出之后也是如此。',
+            '方法论本身不需要守护进程，也不需要外部状态。计划落入被 gitignore 的 .dwp/ 目录，任意任务仅凭 git 即可恢复——即便上下文溢出之后也是如此。可选的循环守护进程增加的是连续性，而绝不是依赖。',
         },
         {
           label: '多代理委托与 1.0 生态系统',
@@ -585,12 +674,12 @@ export const zh: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan 方法论',
       description:
-        '从宣言到集群自主，共七章：原则、核心循环、模板、技能与代理、代码仓库原型、同时运行多个代理，以及能跨越限额持续运行的代理集群。',
+        '八章内容从宣言讲到 Loop engineering，涵盖原则、核心循环、模板、技能与代理、多代理协作、闭环执行与实践指南。',
     },
     eyebrow: '方法论',
     title: 'Deep Work Plan 方法论',
     intro:
-      '七章内容，带你从 Deep Work Plan 背后的理念，走到实操循环、模板、适配、同时运行多个代理，以及让代理集群持续运行。',
+      '八章内容介绍 Deep Work Plan 的原则、实操循环、模板、适配方式、多代理协作，最终讲到 Loop engineering。',
     chapterLabel: '章',
     readChapter: '阅读本章',
     prev: '上一章',
@@ -681,8 +770,6 @@ export const zh: SiteTranslations = {
     },
     eyebrow: '快速开始',
     title: '让这个代码仓库 AI-first',
-    intro:
-      '一个端点，将任意代码仓库转化为规范驱动、面向代理就绪的代码库。安装技能，让代理接入仓库，然后用任意编码代理规划并执行结构化的工作。',
     handoffTitle: '复制到你的代理',
     handoffBody:
       '复制完整的 init.md 提示并将其粘贴到你的 AI 编码代理中——Claude Code、Cursor、Codex 或任何其他代理。它会阅读方法论与规范、安装技能，并为 Deep Work Plan 接入这个代码仓库。',
@@ -692,18 +779,20 @@ export const zh: SiteTranslations = {
     codeLabel: '终端',
     whatTitle: '它做了什么',
     whatBody: [
-      '采纳会以两种持久的方式改变代码仓库——这正是方法论的两大支柱。',
-      '其一，代码仓库变得规范驱动：工作从一份书面的计划与规范开始，而非从临时提示开始。其二，代码仓库本身成为代理的 harness（运行支架）——一份 AGENTS.md、一套 docs/ 知识库、各模块文档，以及一个 .agents/ 技能目录（含 .claude → .agents 和 .cursor → .agents 符号链接）,为每个代理提供它所需的上下文与命令。',
+      '采用流程会在你的代码仓库中落实这四个支柱。',
+      '采用方法论有四个支柱：spec-first 计划、作为 harness 的代码仓库、Loop engineering 和可测量的效率。计划是持久的事实来源；代码仓库承载上下文、工具、防护措施和状态。由人启动的可选循环帮助已登记的计划运行至完成，指令负载按每个流程的字节数衡量。',
     ],
     sequenceTitle: '采纳路径',
     orLabel: '或',
+    loopNotifyNote:
+      '如果需要接收 Dailybot 事件报告，请使用第二条命令。它通过 --notify 添加套件通知脚本；通知是可选的。',
     steps: [
       {
         title: '安装前先验证',
         description:
           '在核查之前，请将提示和技能视为不可信的。两者均为开源且采用 MIT 许可；该技能以 Markdown 为核心，无网络调用，也无遥测。每个发布版本都会发布一份涵盖所有已发布技能文件的 SHA256SUMS，以便你在运行前确认副本匹配。发布版本有校验和，但未签名（签名是已记录的下一步计划）。',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -711,7 +800,7 @@ export const zh: SiteTranslations = {
         description:
           '添加 Deep Work Plan 技能，让任意代理都能规划并执行结构化的工作。该技能附带一个路由器外加九个子技能——create、execute、refine、resume、status、verify、onboard、author 与 upgrade。',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -741,8 +830,7 @@ export const zh: SiteTranslations = {
       },
     ],
     outcomeTitle: '成果',
-    outcome:
-      '代码仓库变得规范驱动，而代码仓库本身成为代理的 harness（运行支架）——上下文与命令随代码一同传递。',
+    outcome: '规范先行、闭环运行：代码仓库就是 harness，计划自行运行直至完成。',
     nextStepsTitle: '后续步骤',
     nextSteps: [
       { label: '阅读方法论', href: '/methodology' },
@@ -814,7 +902,7 @@ export const zh: SiteTranslations = {
             id: 'how-to-use',
             question: '如何使用？',
             answer:
-              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
+              '三步。首先，将 Deep Work Plan 技能安装到你的编码代理中——最快的路径是 `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y`（或克隆 skill 仓库并运行 `./setup.sh`）。其次，对仓库做一次接入，让代理根据你的技术栈适配 `AGENTS.md`、`docs/`、`.agents/` 套件和被 gitignore 的 `.dwp/` 区域：指向 https://deepworkplan.com/init.md，或运行 `/deepworkplan-onboard`。第三，用精简命令规划并执行工作：`/dwp-create <goal>` 构建计划；`/dwp-execute` 逐任务、逐关卡执行；`/dwp-refine` 编辑一份进行中的计划（范围、任务，或将 Lite 计划提升为 Full）；`/dwp-resume` 在中断后继续；`/dwp-status` 报告进度但不执行；`/dwp-verify` 产出客观的符合性报告；`/dwp-upgrade` 将已安装的技能迁移到新版本，且不触碰既有计划。会拦截 `/` 的代理通常改用 `#`（例如 `#dwp-execute`）。接入端点与快速开始以更详尽的方式走同一条路。',
             linkLabel: '快速开始',
             linkPath: '/quickstart',
           },
@@ -929,6 +1017,25 @@ export const zh: SiteTranslations = {
             linkLabel: '阅读无人值守协议',
             linkPath: '/spec/agent-protocol',
           },
+
+          {
+            id: 'loop-engineering',
+            question: '什么是 loop engineering？',
+            answer:
+              'Loop engineering 是闭合执行循环：计划登记 lead 后，由人启动的可选 Herdr daemon 可以推动开放计划继续运行直至完成，并报告停滞、阻塞、lead 缺失或完成事件。它遵守计划记录的权限范围。',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan 需要 daemon 吗？',
+            answer:
+              '不需要。该方法及其计划无需 Herdr 或 daemon 也能运行。这个 addon 是可选的，只用于增加连续性，不是前置要求。',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'daemon 绝不会做什么？',
+            answer:
+              '它绝不会登录、替 Claude 确认绕过权限、扩大 agent 的常驻权限，也不会执行 merge、tag 或 release。提醒只会发送固定的继续提示，不会授予任何权限。',
+          },
         ],
       },
       {
@@ -977,9 +1084,9 @@ export const zh: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'v6 版本的计划能否在 v7 下继续运行？',
+            question: '现有计划在 v8 中会保留其代际吗？',
             answer:
-              '可以。计划契约明确声明了其架构代际（`plan-contract/v6.json` 与 `plan-contract/v7.json`）。正在执行的计划绝不会中途迁移。现有的 v6 计划将在 v7 工具链下无缝保持其结构与语义。',
+              '可以。新计划默认使用 `plan-contract/v8`。现有 v7、v6 和 v5 计划保留其记录的代际，并可继续由当前技能包处理。只有通过明确请求 `/dwp-refine migrate` 才会改变计划代际。',
             linkLabel: '阅读关于契约的说明',
             linkPath: '/spec/record-layer',
           },
@@ -1405,6 +1512,8 @@ export const zh: SiteTranslations = {
     planTitle: '通过技能规划并执行',
     planIntro:
       '上面的 API 让代理能够读取本站点。DWP 技能则让代理能够运行这套方法论——只需在仓库中安装一次，它就会附带一个路由器和九项子技能，以斜杠命令的形式调用（或按名称调用，对于会拦截斜杠的代理，大多数改用 # 代替，例如 #dwp-execute）。',
+    loopWorkflow:
+      '使用 Herdr 时，计划注册会记录 lead 和继任顺序。由人启动 herdr-peers autopilot start --loop 后，开放计划可继续运行。任何 merge、tag 或 release 操作前，请运行 herdr-peers lead verify --plan <plan-id>。',
     formatTitle: '两个独立的选择：格式，以及你想要多少审阅',
     formatIntro:
       '每个计划都从每个维度中选取一个值。这两个维度相互独立——Lite 计划可以以 trust 模式运行，Full 计划也可以以 guided 模式运行，而且两者都可以在之后切换模式而不切换格式。',

@@ -6,7 +6,7 @@ version: "v7 · Delegation mit Nachweis"
 kind: release
 lang: de
 order: 0
-featured: true
+featured: false
 sourceLabel: "Veröffentlichter v7-Schemasatz"
 sourceUrl: "https://deepworkplan.com/schema/plan-contract/v7.json"
 sourceLinks:
@@ -72,4 +72,4 @@ Release 7.12.1 (2026-11-16) repariert den Dailybot-Notifier des Herdr-Addons: Er
 
 Release 7.12.2 (2026-11-16) lässt das Herdr-Addon die herdr-peers-Protokolle 1 und 2 akzeptieren und pinnt es auf herdr-peers v2.0.0: Bei einer Installation mit Protokoll 2 schlägt die Erkennung nicht mehr stillschweigend fehl, und das Addon behält seine Delegationsfähigkeiten.
 
-Installierte Skill-Version: **7.12.2**, stabil seit 7.0.0.
+Release 7.12.2 (2026-11-16) war die letzte v7-Version; v8 folgt darauf.

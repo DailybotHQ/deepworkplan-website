@@ -8,7 +8,7 @@ section: Record layer
 
 # ชั้นบันทึก
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงชั้นบันทึก v6 เชิงบรรทัดฐานซึ่งมาตรฐานปัจจุบัน DWP 7.0.0 ต่อยอดขึ้นมา แหล่งอ้างอิงหลักในรุ่น `v7.12.2`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) และ [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก แผน v5 คงชั้น [สถานะแผน](/spec/plan-state) ไว้และไม่เคยถูกย้ายโดยปริยาย
+> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงชั้นบันทึก v6 เชิงบรรทัดฐานซึ่งมาตรฐานปัจจุบัน DWP 8.0.0 ต่อยอดขึ้นมา แหล่งอ้างอิงหลักในรุ่น `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_CONTRACT.md) และ [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก แผน v5 คงชั้น [สถานะแผน](/spec/plan-state) ไว้และไม่เคยถูกย้ายโดยปริยาย
 
 **เวอร์ชัน 6.0.0 ขยายใน 7.0.0 สถานะ: เสถียร** ชั้นบันทึกแทนที่การประกาศการเสร็จสิ้นด้วยคำบรรยายด้วยบันทึก: สัญญาเป็นผู้มีอำนาจ journal เป็นหน่วยความจำ helper เป็นผู้เขียน และไฟล์ที่ถูกสร้างขึ้นทุกไฟล์เป็นการฉายภาพ คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 
@@ -17,7 +17,6 @@ section: Record layer
 แผนประกอบด้วยสิ่งประดิษฐ์ที่เขียนขึ้นสองชิ้นและลำดับเหตุการณ์ที่มีการป้องกันหนึ่งชุด แผน markdown (`README.md` และไฟล์งาน) บอกว่าจะทำอะไร **สัญญาผลลัพธ์** (`contract.json`) บอกว่าอะไรนับว่าเสร็จและแผนได้รับอนุญาตให้ทำอะไร **journal** (`journal.ndjson`) บันทึกสิ่งที่เกิดขึ้นจริง `state.json` และ `views/` ถูกสร้างใหม่จาก journal และ MUST NOT ถูกแก้ไขด้วยมือ เมื่อไฟล์ที่ถูกสร้างขึ้นขัดแย้งกับ journal ให้ยึด journal และสร้างไฟล์นั้นใหม่
 
 ## การตรวจจับรุ่น
-
 โฟลเดอร์แผนเป็นแผนสาย v6 ก็ต่อเมื่อมี `manifest.json` ที่ตัวชี้ `contract` แปลงค่าได้ มี `contract.json` หรือมีสายการแก้ไข `contracts/` เท่านั้น การตรวจจับ MUST ใช้สิ่งประดิษฐ์เหล่านี้ ไม่ใช่เวอร์ชันของแพ็กที่ติดตั้งอยู่: แพ็กปัจจุบันอาจมีแผน v5 อยู่ และแพ็กที่เก่ากว่าอาจพบแผน v6
 
 URL `schema` ของสัญญาระบุ **รุ่น** ของมัน และ manifest กับเหตุการณ์ journal ทุกรายการสะท้อนรุ่นเดียวกัน
@@ -26,8 +25,10 @@ URL `schema` ของสัญญาระบุ **รุ่น** ของม�
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` และเหตุการณ์ `delegation` ([การมอบหมายงาน](/spec/delegation)) |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` และอำนาจของลูป |
+สแนปช็อตที่ใช้งานของ v8 ใช้ [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json)
 
-แผนใหม่ที่สร้างโดยแพ็ก 7.x เป็น v7 โดยค่าเริ่มต้น คำขอ `v6` ที่ระบุชัดยังคงสร้างสัญญา v6 แผนไม่เคยเปลี่ยนรุ่น และ journal ที่ผสมหลายรุ่น MUST ถูกปฏิเสธ ทั้งสองรุ่นฉายเข้าสู่รูปแบบ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) เดียวกัน
+แผนใหม่ที่สร้างโดยแพ็ก 8.x เป็น v7 โดยค่าเริ่มต้น คำขอ `v6` ที่ระบุชัดยังคงสร้างสัญญา v6 แผนไม่เคยเปลี่ยนรุ่น และ journal ที่ผสมหลายรุ่น MUST ถูกปฏิเสธ ทั้งสองรุ่นฉายเข้าสู่รูปแบบ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) เดียวกัน
 
 ## สัญญาผลลัพธ์
 

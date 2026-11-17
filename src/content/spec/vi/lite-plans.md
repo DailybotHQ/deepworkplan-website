@@ -8,7 +8,7 @@ section: Workflow
 
 # Kế hoạch Lite
 
-> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 7.0.0, cũng yêu cầu các phần mở rộng `V6_*.md` và `V7_*.md` áp dụng được liệt kê trong [mục lục đặc tả](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Các kế hoạch v5 và v6 hiện có giữ nguyên quy tắc đã ghi nhận.
+> **Phạm vi phiên bản:** Đây là tài liệu nền v5.0.0 được giữ lại. Tiêu chuẩn hiện tại, DWP 8.0.0, cũng yêu cầu các phần mở rộng `V6_*.md` và `V7_*.md` áp dụng được liệt kê trong [mục lục đặc tả](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Các kế hoạch v5 và v6 hiện có giữ nguyên quy tắc đã ghi nhận.
 
 **Phiên bản 5.0.0. Trạng thái: Ổn định.** Tài liệu này đặc tả biểu diễn kế hoạch Lite được giới thiệu cùng với [Đặc tả DWP](/spec/dwp-specification): một định dạng kế hoạch cho công việc có giới hạn, quy mô nhỏ đến vừa, được vật liệu hóa trực tiếp, không qua giai đoạn bản nháp không thể thực thi. Các từ khóa MUST, MUST NOT, SHOULD, SHOULD NOT và MAY được diễn giải như mô tả trong RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 Một kế hoạch PHẢI (MUST) là một trong hai biểu diễn, được ghi lại một lần trong `manifest.json` dưới dạng `plan_format`: **Full** lưu một tệp cho mỗi tác vụ dưới `<n>.task_<slug>.md`; **Lite** lưu các bản ghi tác vụ gọn nhẹ, có thể thực thi, nội tuyến trong `README.md`, mỗi bản ghi nằm sau một neo `{#task-N}` ổn định. Một kế hoạch Lite không phải là một kế hoạch Full không đầy đủ hay không chính thức: mỗi bản ghi tác vụ vẫn PHẢI (MUST) mang một mục tiêu, một Touched Surface, tiêu chí chấp nhận, một cổng kiểm chứng và một nhật ký hoàn tất, theo cùng hình thức quy phạm mà [Cấu trúc tác vụ](/spec/dwp-specification#task-anatomy) định nghĩa cho Full.
 
 Bốn trục mô tả trạng thái của một kế hoạch, và PHẢI (MUST) được theo dõi độc lập thay vì bị trộn lẫn:
-
 | Trục | Giá trị | Ý nghĩa |
 |------|--------|---------|
 | Định dạng | `lite`, `full` | Nơi các bản ghi tác vụ tồn tại |

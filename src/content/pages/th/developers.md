@@ -16,6 +16,8 @@ description: "พื้นผิว agent ของ Deep Work Plan: API แบ�
 
 API ข้างต้นทำให้ agent อ่านเว็บไซต์นี้ได้ ส่วนสกิล DWP คือสิ่งที่ทำให้ agent รันระเบียบวิธีได้ — ติดตั้งครั้งเดียวใน repository แล้วมันจะนำ router มาพร้อมกับสกิลย่อยเก้าตัว เรียกใช้เป็น slash command (หรือเรียกด้วยชื่อ สำหรับ agent ที่ intercept slash — ส่วนใหญ่ใช้ `#` แทน เช่น `#dwp-execute`)
 
+เมื่อใช้ Herdr การลงทะเบียนแผนจะบันทึก lead และลำดับผู้สืบทอด มนุษย์สามารถเริ่ม `herdr-peers autopilot start --loop` เพื่อให้แผนที่เปิดอยู่ดำเนินต่อได้ เรียก `herdr-peers lead verify --plan <plan-id>` ก่อน merge, tag หรือ release ทุกครั้ง
+
 ทุกแผนเลือกค่าหนึ่งจากสองแกนที่เป็นอิสระจากกัน:
 
 - **Lite** — บันทึกงานอยู่ใน README ของแผนโดยตรง อยู่หลัง anchor `#task-N` ที่คงที่ สร้างมาสำหรับงานเล็กและมีขอบเขตจำกัด: ประเด็นเดียว ประมาณหนึ่งรอบการทำงาน
@@ -129,7 +131,7 @@ curl -s https://deepworkplan.com/es/developers.md
 
 ```bash
 # 1. Install the DWP skill — same command the /init endpoint gives agents
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 
 # 2. Official CLI — zero-dependency client over this API (Node >= 18),
 #    prepared in the site repo's cli/ directory pending npm publication

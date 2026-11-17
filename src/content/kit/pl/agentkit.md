@@ -10,7 +10,9 @@ order: 8
 
 Każdy terminalowy agent kodujący ma własne flagi do kontynuowania sesji, własny sposób oddzielenia drugiego konta, własny tryb headless i własny przełącznik pomijania pytań o uprawnienia. **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** nakłada na nie wszystkie jedną powierzchnię poleceń: `ak <kind> [@profile]`.
 
-Ten addon integruje kit z **DWP v7** (pakiet `v7.12.2`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
+Ten addon integruje kit z **DWP v8** (pakiet `v8.0.2`) jako transport delegowania **headless**. Jest opcjonalny: bez niego każde zadanie wykonuje się w bieżącej sesji, dokładnie jak dotąd. Sam kit to produkt na licencji MIT, który działa bez Deep Work Plan.
+
+Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop engineering i mierzona wydajność. Dodatki i integracje mogą rozszerzać harness oraz pętlę; metodologia działa także bez nich.
 
 ## Co daje kit
 
@@ -65,15 +67,15 @@ Praca przemieszcza się wyłącznie między kontami, które zadeklarowałeś dla
 ## Instalacja
 
 ```bash
-git clone --branch v1.4.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v1.4.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
+Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v1.5.0`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, tag `v1.4.0`, interfejs 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, interfejs 1 |
 | Klucz rejestru | `agentkit` w `.dwp/config.json` |
 | Transport | headless: jedno `ak run` na delegata w dedykowanym git worktree |
 | Zapewnia | `subagents`, `cancel_children`, `model_routing` |
@@ -87,6 +89,12 @@ Wydanie zestawu 1.3.0 (interfejs 1 bez zmian) dodaje **pick-v2**: `ak pick --kin
 
 Zestaw 1.4.0 (interfejs 1 bez zmian) dodaje **`ak update`**, wywoływany wyłącznie przez człowieka: przenosi CLI do najnowszego wydania dostawcy z weryfikacją `ak install` — wykrywa, weryfikuje, instaluje i ponownie przypina `providers.toml` tego zestawu atomowo (zachowywany jest `.bak`). `--take-over` jest wymagany do zastąpienia dowiązania zarządzanego przez dostawcę, downgrade'y są odrzucane bez podania nazwy, a aktualizacja liczy się dopiero, gdy PATH rozwiąże nowe wydanie.
 
+## Od coding-agents-kit 1.5.0 (interfejs 1)
+
+To wydanie dodaje pole `tokens` do `ak run --json`; zawiera ono wyłącznie wartości zgłoszone przez CLI (`input`, `output`, `cache_read`, `cache_write` i `total`). Niepodane wartości pozostają `null`; kit ich nie szacuje. `ak usage --json` dodaje blok `advisory` z polami `runs`, `tokens` i `coverage`. Ma on charakter informacyjny i nie zmienia okien limitów dostawcy, oceny pojemności ani kwalifikacji w `ak pick`.
+
+Gdy aktywne jest `--ask` lub `AGENTKIT_PERMISSIONS=ask`, `ak` wymusza teraz jawny tryb ask danego CLI; CLI bez flagi ask pozostają bez zmian. Przy aktywnym opt-out `launch.argv` w pick-v2 kończy się na `--ask`. herdr-peers (v2.0.2) lub nowszy akceptuje ten końcowy argument; v2.0.1 go odrzuca.
+
 ## Autonomia domyślnie, z rezygnacją, która zawsze wygrywa
 
 Od `v0.2.0` `ak <kind>` uruchamia każdego agenta w trybie **autonomii**: dodaje własną flagę autonomii danego CLI, przechowywaną wyłącznie w pliku `providers.toml` kitu. Autonomia jest przeznaczona dla środowisk jednorazowych lub odizolowanych, takich jak kontener deweloperski.
@@ -97,7 +105,7 @@ Addon nie zapisuje żadnej flagi autonomii i nigdy nie przekazuje `--auto`. Prze
 
 ## Co dodaje do planu
 
-W planie v7, którego kontrakt przyznaje `agent_delegation`, `execute` może przekazać zadanie `parallel_safe` innemu CLI: tworzy dedykowany git worktree, uruchamia tam `ak run` z limitem czasu i zbiera wynik do `analysis_results/delegations/` planu. Wynik jest dowodem `asserted`, dopóki własny gate runner planu go nie zaobserwuje. Anulowanie delegata zatrzymuje całe jego drzewo procesów.
+W planie v7 lub v8, którego kontrakt przyznaje `agent_delegation`, `execute` może przekazać zadanie `parallel_safe` innemu CLI: tworzy dedykowany git worktree, uruchamia tam `ak run` z limitem czasu i zbiera wynik do `analysis_results/delegations/` planu. Wynik jest dowodem `asserted`, dopóki własny gate runner planu go nie zaobserwuje. Anulowanie delegata zatrzymuje całe jego drzewo procesów.
 
 ## Agentkit czy Herdr
 
@@ -107,6 +115,8 @@ W planie v7, którego kontrakt przyznaje `agent_delegation`, `execute` może prz
 | Zadanie wymaga interakcji, trwa długo lub działa na innej maszynie | [Herdr](/kit/herdr) (peer w panelu) |
 
 Oba można łączyć: herdr-peers może uruchomić peera w panelu ze środowiskiem, które wypisuje `ak env <kind> @profile`. Przy wielu torach naraz zobacz [Uruchamianie wielu agentów](/methodology/06-orchestration).
+
+herdr-peers 2.0.0 używa tego interfejsu dla opcjonalnego mózgu autopilota: `ak pick --kinds ... --json` zwraca kontrakt uruchomienia pick-v2; Herdr go weryfikuje, wymaga `launch.permissions: ask`, a następnie uruchamia zwrócone `launch.argv`. Mózg nie może włączyć flag autonomii ani obejścia uprawnień. `ak update` nadal uruchamia wyłącznie człowiek; mózg nigdy nie aktualizuje CLI.
 
 ## Uwagi
 

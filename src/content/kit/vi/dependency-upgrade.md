@@ -10,6 +10,8 @@ order: 3
 
 Đưa các dependency của một repository lên phiên bản mới với quy trình theo từng đợt, đã kiểm chứng và có thể hoàn tác. Addon tùy chọn thứ ba của Deep Work Plan.
 
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+
 ## Addon này bổ sung gì
 
 - Phát hiện trình quản lý gói **thực** của repo (npm/pnpm/yarn + ncu, pip/poetry/uv, cargo, go mod, bundler, composer, và nhiều hơn) từ manifest và lockfile đang tồn tại.
@@ -23,8 +25,7 @@ order: 3
 4. Chạy validation gate thực của repo sau mỗi đợt; hoàn tác bất kỳ đợt nào thất bại.
 5. Tổng kết những gì đã nâng cấp, bỏ qua và hoàn tác; để nhà phát triển tự commit.
 
-
-## Đặc tả v7
+## Đặc tả v8
 
 | Mục | Giá trị |
 |---|---|
@@ -32,7 +33,8 @@ order: 3
 | Khóa đăng ký | `dependency-upgrade` trong `.dwp/config.json` |
 | Bộ mô tả | `addons/dependency-upgrade/addon.json` (giao diện 1) |
 | Lệnh | `/lib-upgrade` được cài đặt vào `.agents/commands/` khi được chấp nhận |
-| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v7.12.2`) |
+| Quản lý phiên bản | Được ghim và tạo phiên bản cùng gói kỹ năng (`v8.0.2`) |
+
 ## Ghi chú
 
 Không phụ thuộc trình quản lý gói — không bao giờ chạy npm/ncu trong một repo không phải JS. Tùy chọn, không bao giờ bắt buộc, và không bao giờ tự động commit.

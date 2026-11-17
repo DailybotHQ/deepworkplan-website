@@ -12,6 +12,8 @@ order: 4
 
 Bir “arayüz yüzeyi” çoğuldur: işlenen bir **görsel UI**, stilize **CLI çıktısı** ve bir **konuşma** yüzeyi (ürünün sohbet veya e-posta üzerinden konuşması) ayrı ayrı sayılır. Eklenti her birini bağımsız olarak bir **profil** olarak saptar ve kabul edilen profiller aynı tek `DESIGN.md` içinde üst üste eklenir.
 
+Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harness’tir, loop engineering ve ölçülmüş verimlilik. Eklentiler ve entegrasyonlar harness’i ve döngüyü genişletebilir; metodoloji tek başına da çalışır.
+
 ## Neler ekler
 
 - `docs/DESIGN.md` konumunda bir `DESIGN.md` (deponun diğer spesifikasyonlarının yanında; yalnızca bir `docs/` ağacı olmadığında depo kökünde), **`AGENTS.md`’den başvurulan**; böylece ajanlar onu belgelerin geri kalanı gibi keşfeder. Bir depo, bir dosya — asla yüzey başına kardeş dosyalar değil.
@@ -40,19 +42,7 @@ Asla gerekli değildir — sıfır isteğe bağlı eklentili bir depo tamamen uy
 
 Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya tazelemek için deponun `.agents/commands/` dizinine bir `/design-system` yönlendiricisi kurabilir. Komutu kurmak isteğe bağlıdır; reddedilen bir eklenti hiçbirini kurmaz.
 
-
-## v7 belirtimi
-
-| Öğe | Değer |
-|---|---|
-| Ürün | DeepWorkPlan design-system eklentisi |
-| Kayıt anahtarı |  içinde  |
-| Tanımlayıcı |  (arayüz 1) |
-| Hedef dosya |  üzerinden dizine eklenen  |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş () |
-
-
-## v7 belirtimi
+## v8 belirtimi
 
 | Öğe | Değer |
 |---|---|
@@ -60,7 +50,7 @@ Kabul edildiğinde eklenti, `DESIGN.md`’yi daha sonra yeniden üretmek veya ta
 | Kayıt anahtarı | `.dwp/config.json` içinde `design-system` |
 | Tanımlayıcı | `addons/design-system/addon.json` (arayüz 1) |
 | Hedef dosya | `AGENTS.md` üzerinden dizine eklenen `docs/DESIGN.md` |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v7.12.2`) |
+| Sürümleme | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v8.0.2`) |
 
 ## Özellik bazlı tasarım belgeleriyle ilişkisi
 

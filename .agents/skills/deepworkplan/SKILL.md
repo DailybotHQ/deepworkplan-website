@@ -1,7 +1,7 @@
 ---
 name: deepworkplan
 description: DeepWorkPlan — turn any repo AI-first and run Deep Work Plans. Routes to create, execute, refine, resume, status, verify, upgrade, and repo-onboarding sub-skills based on intent. Use when the developer wants to plan, execute, manage, or verify structured multi-task work, or make a repository AI-agent-ready.
-version: "7.12.2"
+version: "8.0.2"
 documentation_url: https://deepworkplan.com
 user-invocable: true
 allowed-tools: Bash, Read, Grep, Glob, Edit, Write
@@ -10,17 +10,12 @@ metadata: {"openclaw":{"emoji":"🧠","homepage":"https://deepworkplan.com","req
 
 # DeepWorkPlan — Methodology Skill (Router)
 
-Models matter; context matters more. The **DeepWorkPlan** skill turns any
-repository into a structured environment — context, guardrails, and a durable
-plan — where any coding agent executes reliably on short or long work. It makes
-the repository "AI-first" — `AGENTS.md` + `docs/` + per-module docs + `.agents/`
-(with the `.claude → .agents` and `.cursor → .agents` symlinks) — and runs structured **Deep Work
-Plans**: Lite plans for bounded work and Full task-file plans for longer work;
-an AI agent creates, refines, executes task-by-task,
-and resumes. All plan output lands in a gitignored `.dwp/` directory
-at the repo root (`.dwp/plans/`).
+The repository is the harness.
+**Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.** Plans are Lite (bounded work) or Full (task files, longer work). Planning is spec-first per episode: the plan precedes the code, with acceptance criteria, as git-ignored, exportable `.dwp/plans/` state any agent can resume, not a maintained specification. Loop engineering registers a lead and its succession; an optional daemon a human starts nudges without adding authority. Plans run within their recorded authority and gates; the method works alone.
 
-Source of truth: <https://deepworkplan.com>. License: MIT.
+DWP measures the instruction bytes each flow loads. It has not shown a general saving in provider tokens.
+
+Source: <https://deepworkplan.com>.
 
 ## Start here (first run)
 
@@ -160,8 +155,8 @@ developer which they mean before routing.
   or mutate files — regardless of how they are invoked.
 - **Plan generation is detected, never assumed.** A plan folder carrying a
   `manifest.json` contract pointer, a `contract.json`, or a `contracts/`
-  revision chain is **v6** (contract generation v6 or v7,
-  `spec/V7_CONTRACT.md`) — create and execute route it through their
+  revision chain is **v6** (contract generation v6–v8,
+  `spec/V6_LIFECYCLE.md`) — create and execute route it through their
   `v6.md` loops (contract, journal, scheduler, verified closure). Anything
   else keeps the recorded v5 lifecycle, is never migrated silently, and a
   v5-only runner that meets a v6 plan reports it as unsupported rather

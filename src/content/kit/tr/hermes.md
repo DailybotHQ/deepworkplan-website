@@ -32,7 +32,7 @@ resume the open plan
 
 ## Bölümsel bellek sinerjisi
 
-v6 ve v7 planlarında, DWP'nin deterministik doğrulama makbuzları (`outcomes.py receipt`) ve sonuç kayıtları doğrudan Hermes'in bellek indeksine beslenir: tamamlanan her görev denenen, başarısız olan ve çalışan şeyleri yapılandırılmış bir JSON şemasında taşır. Tamamlanan planlar alınabilir epizodik bellek haline gelir — bir ajan bir sorunun nasıl çözüldüğünü hatırlayabilir.
+v6, v7 ve v8 planlarında, DWP'nin deterministik doğrulama makbuzları (`outcomes.py receipt`) ve sonuç kayıtları doğrudan Hermes'in bellek indeksine beslenir: tamamlanan her görev denenen, başarısız olan ve çalışan şeyleri yapılandırılmış bir JSON şemasında taşır. Tamamlanan planlar alınabilir epizodik bellek haline gelir — bir ajan bir sorunun nasıl çözüldüğünü hatırlayabilir.
 
 Kısa ömürlü oturumlar olayları `journal.ndjson` dosyasına ekler ve durum dosyalarını manuel olarak yeniden yazmak yerine `ledger.py project` aracılığıyla `state.json` dosyasını yansıtır. Bkz. [Plan durumu](/spec/plan-state#outcome-records-as-episodic-memory).
 

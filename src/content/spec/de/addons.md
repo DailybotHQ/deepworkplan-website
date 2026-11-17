@@ -8,7 +8,7 @@ section: Addons
 
 # Add-ons
 
-> **Versionsumfang:** Dies ist ein beibehaltenes v5.0.0-Basisdokument. Der aktuelle Standard, DWP 7.0.0, verlangt zusätzlich die zutreffenden `V6_*.md`- und `V7_*.md`-Erweiterungen aus dem [Spezifikationsindex](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Bestehende v5- und v6-Pläne behalten ihre aufgezeichneten Regeln.
+> **Versionsumfang:** Dies ist ein beibehaltenes v5.0.0-Basisdokument. Der aktuelle Standard, DWP 8.0.0, verlangt zusätzlich die zutreffenden `V6_*.md`- und `V7_*.md`-Erweiterungen aus dem [Spezifikationsindex](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Bestehende v5- und v6-Pläne behalten ihre aufgezeichneten Regeln.
 
 **Version 2.1.0.** Add-ons sind Erweiterungen der zentralen Deep Work Plan-Methodik. Sieben der acht sind optional und **niemals für Konformität erforderlich** — ein Repository ohne optionale Addons ist vollständig AI-first und DWP-konform. Jedes optionale Addon wird beim Onboarding angeboten, explizit angenommen oder abgelehnt und — bei Annahme — mit bestehendem Setup **abgeglichen**, statt es zu überschreiben. Eine Komponente ist die deklarierte Ausnahme: Seit Standard 2.3.0 ist die **lokale Überprüfung des AI Diff Reviewer** Teil der erforderlichen Baseline — das Onboarding installiert sie und jedes Final Review führt sie aus —, während ihre CI-Oberfläche Opt-in bleibt.
 
@@ -27,11 +27,11 @@ Discovery: Der `onboard`-Ablauf enumeriert `skills/deepworkplan/addons/` und pr�
 
 ## Aktive Addons (acht)
 
-Acht Addons sind heute aktiv — sieben optionale plus die erforderliche lokale Überprüfung. Jedes hat eine **Kit-Katalogseite** mit nutzerorientierten Details und eine **normative Spec** innerhalb der Deep Work Plan-Skill. Vier davon — devcontainer, Herdr, DeepWorkPlan Vim und Agentkit — sind schlanke Integratoren, per Tag an ein Produkt mit eigenem Repository und eigenem Release-Zyklus fixiert; jedes Produkt funktioniert ohne Deep Work Plan. Ein angenommenes Addon wird in der Addon-Registry `.dwp/config.json` (DWP 7.0.0) erfasst, die nur anbieten oder verstärken kann — sie blockiert nie die Konformität oder einen Plan.
+Acht Addons sind heute aktiv — sieben optionale plus die erforderliche lokale Überprüfung. Jedes hat eine **Kit-Katalogseite** mit nutzerorientierten Details und eine **normative Spec** innerhalb der Deep Work Plan-Skill. Vier davon — devcontainer, Herdr, DeepWorkPlan Vim und Agentkit — sind schlanke Integratoren, per Tag an ein Produkt mit eigenem Repository und eigenem Release-Zyklus fixiert; jedes Produkt funktioniert ohne Deep Work Plan. Ein angenommenes Addon wird in der Addon-Registry `.dwp/config.json` (DWP 8.0.0) erfasst, die nur anbieten oder verstärken kann — sie blockiert nie die Konformität oder einen Plan.
 
 ### Devcontainer (erstes Addon)
 
-Ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixiert auf `v1.2.0`, Interface `2`): ein Dev-Containers-Template, das `dck init` als eigenen Container des Repositorys in das Repository rendert, dazu der Skill `dck-dockerfile`.
+Ein schlanker Integrator von [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fixiert auf `v1.4.0`, Interface `2`): ein Dev-Containers-Template, das `dck init` als eigenen Container des Repositorys in das Repository rendert, dazu der Skill `dck-dockerfile`.
 
 - **Kit-Seite:** [Devcontainer](/kit/devcontainer)
 - **Was es hinzufügt:** `docker/local/<service>/Dockerfile` aus dem offiziellen, per Digest fixierten Image der Runtime (`python-3.13`, `node-24` oder `debian`, kein gemeinsames Basis-Image), `dev.sh` über dem `dck`-Launcher (`up`, `shell`, `rebuild`, `doctor`), Coding-Agenten als Opt-in-Schicht, Ports ausschließlich auf Loopback, Git über SSH durch den Agenten des Hosts ohne Schlüssel im Container, es sei denn, der Entwickler aktiviert dies per Opt-in mit `[ssh] copy_keys` in seinem Host-Profil, und Herdr-Maschinen pro Container mit dem Standard-Layout
@@ -82,16 +82,18 @@ Der **[AI Diff Reviewer](https://github.com/DailybotHQ/ai-diff-reviewer)** (Mark
 
 ### Herdr (sechstes Addon)
 
-Ein schlanker Integrator von [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixiert auf `v2.0.0`, Protokoll `1`), der **interaktive** Delegationstransport von v7-Plänen.
+Ein schlanker Integrator von [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (fixiert auf `v2.2.0`, Protokoll `1`), der **interaktive** Delegationstransport von v7-Plänen.
 
 - **Kit-Seite:** [Herdr](/kit/herdr)
 - **Was es hinzufügt:** Ein Plan kann eine begrenzte Aufgabe an einen Coding-Agenten in einem anderen [Herdr](https://herdr.dev)-Pane übergeben, auf derselben Maschine oder auf einer, die Herdr per SSH erreicht, und dessen einzige autorisierte Antwort im Journal aufzeichnen
 - **Verhalten:** Das Peer-Protokoll (Stempel, Freigabe, Antwort, Schleifenschutz, Tiefen- und Fan-out-Grenzen) liegt in herdr-peers, nie im Paket; jede Nutzung erfordert die Vertragsfreigabe `agent_delegation`, und das Ergebnis eines Delegierten bleibt eine Behauptung, bis der eigene Runner des Plans es beobachtet
 - **Wann angeboten:** explizites Opt-in in Phase 7b; nur lesende Erkennung von `herdr` und `herdr-peers`; der Transport ist nur innerhalb einer Herdr-Sitzung nutzbar
 
+- **Loop:** Herdr v2.1.0 bietet außerdem das optionale, von einem Menschen gestartete `herdr-peers autopilot --loop` für begrenzte Planfortsetzung und Nachfolgerübernahme. Siehe [Loop Engineering](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (siebtes Addon)
 
-Ein schlanker Integrator von [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fixiert auf `v1.0.1`, Interface `1`), dem Terminal-Editor für Deep Work Plan (Neovim 0.12+).
+Ein schlanker Integrator von [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fixiert auf `v1.1.0`, Interface `1`), dem Terminal-Editor für Deep Work Plan (Neovim 0.12+).
 
 - **Kit-Seite:** [DeepWorkPlan Vim](/kit/vim)
 - **Was es hinzufügt:** eine optionale, maschinenweite Editor-Oberfläche für Agenten und Menschen — ein generierter Befehlsindex, ein schreibgeschützter Plan-Browser und ein Markdown-Viewer; jede Aussage wird aus der fixierten maschinenlesbaren Oberfläche des Produkts gelesen
@@ -100,7 +102,7 @@ Ein schlanker Integrator von [DeepWorkPlan Vim](https://github.com/DailybotHQ/de
 
 ### Agentkit (achtes Addon)
 
-Ein schlanker Integrator von [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixiert auf `v1.4.0`, Schnittstelle `1`), der **Headless**-Delegationstransport von v7-Plänen.
+Ein schlanker Integrator von [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fixiert auf `v1.5.0`, Schnittstelle `1`), der **Headless**-Delegationstransport von v7-Plänen.
 
 - **Kit-Seite:** [Agentkit](/kit/agentkit)
 - **Was es hinzufügt:** eine einheitliche `ak`-Befehlsoberfläche über Terminal-Coding-Agenten, mit der eine begrenzte Planaufgabe headless ausgeführt wird; es steuert die Fähigkeiten `subagents`, `cancel_children` und `model_routing` nur zur Laufzeit bei, wenn es aktiviert, erkannt und auf einem kompatiblen Interface ist

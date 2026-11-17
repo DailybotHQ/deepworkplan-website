@@ -8,7 +8,7 @@ section: Record layer
 
 # Delegation
 
-> **Version scope:** This page restates the v7 contract generation at release `v7.12.2`. Canonical sources: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md) and the execute flow's [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/execute/delegation.md). Where this page and those files differ, the files win.
+> **Version scope:** This page restates the v7 contract generation at release `v8.0.0`. Canonical sources: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md) and the execute flow's [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/execute/delegation.md). Where this page and those files differ, the files win.
 
 **Version 7.0.0. Status: Stable.** v7 is a new contract generation of the [record layer](/spec/record-layer), not a new lifecycle: everything in the v6 contract, lifecycle, context and resources documents applies unless this page says otherwise. Not delegating is always correct. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
@@ -100,3 +100,5 @@ An orchestrator never delegates a **child plan's** tasks: children run in their 
 - [Record layer](/spec/record-layer) — the contract and journal this page extends.
 - [Resources and abilities](/spec/resources-and-abilities) — abilities, grants and the addon registry.
 - [Herdr addon](/kit/herdr) and [Agentkit addon](/kit/agentkit) — the two transports.
+
+- [Loop engineering](/spec/loop-engineering) — the plan loop and its bounded autonomy.

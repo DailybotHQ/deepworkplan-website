@@ -8,7 +8,7 @@ section: Workflow
 
 # Rencana Lite
 
-> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar saat ini, DWP 7.0.0, juga mewajibkan ekstensi `V6_*.md` dan `V7_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Rencana v5 dan v6 yang ada mempertahankan aturan yang tercatat.
+> **Cakupan versi:** Ini adalah dokumen dasar v5.0.0 yang dipertahankan. Standar saat ini, DWP 8.0.0, juga mewajibkan ekstensi `V6_*.md` dan `V7_*.md` yang berlaku dan tercantum dalam [indeks spesifikasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Rencana v5 dan v6 yang ada mempertahankan aturan yang tercatat.
 
 **Versi 5.0.0. Status: Stabil.** Dokumen ini menetapkan representasi rencana Lite yang diperkenalkan bersama [Spesifikasi DWP](/spec/dwp-specification): sebuah format rencana untuk pekerjaan terbatas berskala kecil hingga menengah yang dimaterialisasikan secara langsung, tanpa tahap draf yang tidak dapat dieksekusi. Kata kunci MUST, MUST NOT, SHOULD, SHOULD NOT, dan MAY harus ditafsirkan sebagaimana dijelaskan dalam RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 Sebuah rencana MUST berupa salah satu dari dua representasi, dicatat sekali di `manifest.json` sebagai `plan_format`: **Full** menyimpan satu berkas per tugas di bawah `<n>.task_<slug>.md`; **Lite** menyimpan catatan tugas yang kompak dan dapat dieksekusi secara inline di `README.md`, masing-masing di balik jangkar `{#task-N}` yang stabil. Sebuah rencana Lite bukanlah rencana Full yang sebagian atau informal: setiap catatan tugas MUST tetap membawa sebuah tujuan, sebuah Touched Surface, acceptance criteria, sebuah validation gate, dan sebuah log penyelesaian, dalam bentuk normatif yang sama seperti yang didefinisikan [Anatomi tugas](/spec/dwp-specification#task-anatomy) untuk Full.
 
 Empat sumbu menggambarkan status sebuah rencana, dan MUST dilacak secara independen, bukan dicampuradukkan:
-
 | Sumbu | Nilai | Makna |
 |------|--------|---------|
 | Format | `lite`, `full` | Di mana catatan tugas berada |

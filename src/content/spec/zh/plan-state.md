@@ -8,16 +8,17 @@ section: State
 
 # Plan state
 
-> **版本范围：** 本页规定 **v5 状态层**，v5 计划在其整个生命周期内都保留它。当前技能包（DWP 7.0.0，发布版本 `v7.12.2`）创建的计划改用[记录层](/spec/record-layer)。在 v6 或 v7 计划中，结果契约（`contract.json`）是权威，仅追加日志（`journal.ndjson`）是事实来源，而 `state.json` 是一份符合 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 的**派生快照**。它由 `ledger.py project` 重新生成，MUST NOT 手动编辑。
+> **版本范围：** 本页规定 **v5 状态层**，v5 计划在其整个生命周期内都保留它。当前技能包（DWP 8.0.0，发布版本 `v8.0.0`）创建的计划改用[记录层](/spec/record-layer)。在 v6、v7 或 v8 计划中，结果契约（`contract.json`）是权威，仅追加日志（`journal.ndjson`）是事实来源，而 `state.json` 是一份符合 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) 的**派生快照**。它由 `ledger.py project` 重新生成，MUST NOT 手动编辑。
 
 ## 适用哪一个状态层
 
 | 计划代际 | 事实来源 | `state.json` | 模式 |
 | --- | --- | --- | --- |
 | v5（以及更早的 v1/v2 计划） | Markdown 计划，本 JSON 层是其投影 | 由代理在下文的协议节点处写入 | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json)、[`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json)（v1 与 v2 对较旧的计划仍然有效） |
-| v6 与 v7 | 契约加上仅追加日志 | 从日志投影出的快照，绝不手动写入 | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json)、[`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json)、[`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)（或其 v6 对应版本） |
+| v6 与 v7 | 契约加上仅追加日志 | 从日志投影出的快照，绝不手动写入 | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json)、[`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json)、[`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)（或其 v6 对应版本） ; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
-计划绝不会隐式地改变代际：v5 计划保留这些规则，而将其迁移到 v6 是一次明确的、可预览的迁移（[记录层](/spec/record-layer#coexistence-and-migration)）。规范来源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md)。
+v8 计划使用 `plan-manifest/v7`，以及 `plan-contract/v8`、`journal-event/v8` 和 `plan-snapshot/v8`；v7 清单和日志事件架构仍支持现有计划。
+计划绝不会隐式地改变代际：v5 计划保留这些规则，而将其迁移到 v6 是一次明确的、可预览的迁移（[记录层](/spec/record-layer#coexistence-and-migration)）。规范来源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md)。
 
 **版本 5.0.0。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层，现已与 DWP 标准自身的版本号对齐——此次重新编号不削弱任何既有要求。本次修订还记录了受保护的状态更新器、经验证的计划发布，以及一份已完成计划必须满足的证据真实性规则（见下文）。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 
@@ -236,7 +237,7 @@ Markdown MUST 在每次分歧中获胜。若 `state.json` 显示任务 4 已 `co
 
 ## v7 与 v6 架构与兼容性
 
-当前 7.x 技能包默认创建 **v7** 计划。v7 是 v6 记录层的一个契约代际：[v7 清单](https://deepworkplan.com/schema/plan-manifest/v7.json)指向 [v7 契约](https://deepworkplan.com/schema/plan-contract/v7.json)——即 v6 契约加上可选的 `parallel_safe` 任务标记——并且每个 [v7 日志事件](https://deepworkplan.com/schema/journal-event/v7.json)还可以记录一次 `delegation`（launched、completed、failed、cancelled）；它本身绝不构成证据：受托代理的结果在计划自己的运行器观察到之前始终只是断言。实时快照与任务上下文清单与 v6 共用。一个计划绝不混用代际，明确的 `v6` 请求仍会生成 v6 计划。
+当前 8.x 技能包默认创建 **v8** 计划。v8 是 v6 记录层的一个契约代际：[v7 清单](https://deepworkplan.com/schema/plan-manifest/v7.json)指向 [v7 契约](https://deepworkplan.com/schema/plan-contract/v7.json)——即 v6 契约加上可选的 `parallel_safe` 任务标记——并且每个 [v7 日志事件](https://deepworkplan.com/schema/journal-event/v7.json)还可以记录一次 `delegation`（launched、completed、failed、cancelled）；它本身绝不构成证据：受托代理的结果在计划自己的运行器观察到之前始终只是断言。实时快照与任务上下文清单与 v6 共用。一个计划绝不混用代际，明确的 `v6` 请求仍会生成 v6 计划。
 
 v6 保留 v5 方法论，并为新计划增加更严格的工程结构。身份清单指向有版本的契约；只追加的日志记录授权和事件；任务上下文清单明确上下文选择；调度器只派发符合条件的工作；实时投影是由日志生成的快照 `state.json`。空能力允许列表会被拒绝。这些变化是架构决策，并非代理结果更好的证据：尚未测量代理结果的非劣效性。
 

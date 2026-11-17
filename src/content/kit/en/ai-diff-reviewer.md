@@ -16,6 +16,8 @@ Since standard 2.3.0 that local review is **part of the baseline, not an extra**
 
 The boundary that makes this safe to adopt is deliberately narrow. The reviewer is an MIT-licensed, tag-pinned skill executed by the coding agent you already run, so no Deep Work Plan flow depends on a commercial service, a CI provider, or a secret. **Flow A** (local-only) is what every onboarded repository gets; **Flow B** is offered explicitly and never installed unrequested. A developer may also decline the reviewer outright — that decline is recorded as a declared exception, and `verify` reports the repository as non-conformant on that point until it is installed.
 
+Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
+
 ## When to use it
 
 | Signal | Action |

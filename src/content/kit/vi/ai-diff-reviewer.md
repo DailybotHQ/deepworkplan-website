@@ -16,6 +16,8 @@ Kể từ chuẩn 2.3.0, bản đánh giá cục bộ đó **là một phần c�
 
 Ranh giới khiến việc áp dụng này trở nên an toàn được vạch hẹp một cách có chủ ý. Trình đánh giá là một skill giấy phép MIT, được ghim theo tag, và do chính coding agent bạn đang chạy thực thi, nên không luồng Deep Work Plan nào phụ thuộc vào một dịch vụ thương mại, một nhà cung cấp CI hay một secret. **Flow A** (chỉ cục bộ) là thứ mà mọi kho đã onboarding đều nhận được; **Flow B** được đề nghị một cách tường minh và không bao giờ tự cài khi chưa được yêu cầu. Người phát triển cũng có thể từ chối hẳn trình đánh giá — lời từ chối đó được ghi lại như một ngoại lệ được khai báo, và `verify` báo cáo kho là không tuân thủ ở điểm ấy cho tới khi nó được cài đặt.
 
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+
 ## Khi nào sử dụng
 
 | Tín hiệu | Hành động |

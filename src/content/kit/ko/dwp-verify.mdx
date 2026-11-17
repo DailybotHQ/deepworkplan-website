@@ -35,7 +35,7 @@ import CmdVerify from '@/components/diagrams/kit/CmdVerify.astro';
 3. 각 실패를 나열하며 **CONFORMANT** 또는 **NOT CONFORMANT**를 보고합니다.
 4. 미비점을 Deep Work Plan으로 포착하도록 제안합니다. 조용히 고치는 일은 결코 없습니다.
 
-**세대별 계획 검증.** 저장소 출처 검증기는 현재 DWP 표준 7.0.0을 허용하지만 계획 검사는 세대별로 수행됩니다. v6 또는 v7 계획은 manifest의 contract 포인터, `contract.json` 또는 `contracts/` 개정 체인으로 식별하며, `conformance.sh --plan`이 계획 자체의 기록에 비추어 읽기 전용으로 판정합니다. 모든 contract 개정이 유효한지, manifest가 contract의 세대와 일치하는지, journal이 끊기지 않고 유효한지, 승인이 현재 contract를 인용하는지, `state.json`이 journal projection과 일치하는지를 확인합니다(오래된 snapshot은 권고 사항이며 다시 생성되고, 직접 수정하지 않습니다). v5 수명 주기 검사는 v5 이하 계획에만 적용되며, v5 마무리 절차는 v6 또는 v7 계획을 거부합니다. 여러 세대는 함께 존재하며 검증 중 어느 것도 마이그레이션되지 않습니다.
+**세대별 계획 검증.** 저장소 출처 검증기는 현재 DWP 표준 8.0.0을 허용하지만 계획 검사는 세대별로 수행됩니다. v6, v7 또는 v8 계획은 manifest의 contract 포인터, `contract.json` 또는 `contracts/` 개정 체인으로 식별하며, `conformance.sh --plan`이 계획 자체의 기록에 비추어 읽기 전용으로 판정합니다. 모든 contract 개정이 유효한지, manifest가 contract의 세대와 일치하는지(v8 contract는 v7 manifest와 짝을 이룹니다), journal이 끊기지 않고 유효한지, 승인이 현재 contract를 인용하는지, `state.json`이 journal projection과 일치하는지 확인합니다. snapshot은 v6 및 v7 계획에서 `plan-snapshot/v6`, v8 계획에서 `plan-snapshot/v8`과 대조합니다(오래된 snapshot은 권고 사항이며 다시 생성되고 직접 수정하지 않습니다). v5 수명 주기 검사는 v5 이하 계획에만 적용되며, v5 마무리 절차는 v6, v7 또는 v8 계획을 거부합니다. 여러 세대는 함께 존재하며 검증 중 어느 것도 마이그레이션되지 않습니다.
 
 ## 별칭
 

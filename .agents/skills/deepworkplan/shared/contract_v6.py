@@ -37,11 +37,23 @@ JOURNAL_SCHEMA_URL = 'https://deepworkplan.com/schema/journal-event/v6.json'
 # carry exactly its generation's journal URL (mixed generations refused).
 CONTRACT_SCHEMA_URL_V7 = 'https://deepworkplan.com/schema/plan-contract/v7.json'
 JOURNAL_SCHEMA_URL_V7 = 'https://deepworkplan.com/schema/journal-event/v7.json'
-CONTRACT_GENERATIONS = {CONTRACT_SCHEMA_URL: 'v6', CONTRACT_SCHEMA_URL_V7: 'v7'}
-JOURNAL_GENERATIONS = {JOURNAL_SCHEMA_URL: 'v6', JOURNAL_SCHEMA_URL_V7: 'v7'}
-JOURNAL_URL_BY_GENERATION = {'v6': JOURNAL_SCHEMA_URL, 'v7': JOURNAL_SCHEMA_URL_V7}
+CONTRACT_SCHEMA_URL_V8 = 'https://deepworkplan.com/schema/plan-contract/v8.json'
+JOURNAL_SCHEMA_URL_V8 = 'https://deepworkplan.com/schema/journal-event/v8.json'
+
+# The v8 generation (spec/LOOP_ENGINEERING.md) adds one optional top-level
+# `autonomy` block to v7 — the plan's recorded authority for the loop — and
+# its own journal generation: journal-event/v8 = v7 + the `blocker` event
+# (structured blockers, LOOP_ENGINEERING.md section 3). The manifest line
+# stays plan-manifest/v7: the manifest's shape and pointer do not change.
+CONTRACT_GENERATIONS = {CONTRACT_SCHEMA_URL: 'v6', CONTRACT_SCHEMA_URL_V7: 'v7',
+                        CONTRACT_SCHEMA_URL_V8: 'v8'}
+JOURNAL_GENERATIONS = {JOURNAL_SCHEMA_URL: 'v6', JOURNAL_SCHEMA_URL_V7: 'v7',
+                       JOURNAL_SCHEMA_URL_V8: 'v8'}
+JOURNAL_URL_BY_GENERATION = {'v6': JOURNAL_SCHEMA_URL, 'v7': JOURNAL_SCHEMA_URL_V7,
+                              'v8': JOURNAL_SCHEMA_URL_V8}
 CONTRACT_URL_BY_GENERATION = {'v6': CONTRACT_SCHEMA_URL,
-                              'v7': CONTRACT_SCHEMA_URL_V7}
+                              'v7': CONTRACT_SCHEMA_URL_V7,
+                              'v8': CONTRACT_SCHEMA_URL_V8}
 
 # v7 delegation (spec/V7_CONTRACT.md section 3; ecosystem contract 2.5).
 DELEGATION_TRANSPORTS = ('headless', 'interactive')
@@ -51,8 +63,19 @@ ID_ADDON = re.compile(r'^[a-z][a-z0-9-]{0,63}$')
 DIGEST = re.compile(r'^sha256:[0-9a-f]{64}$')
 
 
+# The contract generations in order: a feature gated on a generation is
+# available to every later one (spec/LOOP_ENGINEERING.md §5).
+GENERATION_ORDER = ('v6', 'v7', 'v8')
+
+
+def generation_at_least(generation, floor):
+    """True when `generation` is `floor` or a later contract generation."""
+    return (generation in GENERATION_ORDER
+            and GENERATION_ORDER.index(generation) >= GENERATION_ORDER.index(floor))
+
+
 def contract_generation(doc):
-    """'v6' or 'v7' from the contract's schema URL, else None."""
+    """'v6', 'v7' or 'v8' from the contract's schema URL, else None."""
     if not isinstance(doc, dict):
         return None
     return CONTRACT_GENERATIONS.get(doc.get('schema'))
@@ -105,6 +128,23 @@ JOURNAL_EVENT_TYPES = ('task_start', 'approval', 'gate_run', 'observation',
 
 # v7 catalog: the v6 catalog plus `delegation` (V7_CONTRACT.md section 3).
 JOURNAL_EVENT_TYPES_V7 = JOURNAL_EVENT_TYPES + ('delegation',)
+# v8 catalog: the v7 catalog plus `blocker` (LOOP_ENGINEERING.md section 3).
+JOURNAL_EVENT_TYPES_V8 = JOURNAL_EVENT_TYPES_V7 + ('blocker',)
+JOURNAL_CATALOG_BY_GENERATION = {'v6': JOURNAL_EVENT_TYPES,
+                                 'v7': JOURNAL_EVENT_TYPES_V7,
+                                 'v8': JOURNAL_EVENT_TYPES_V8}
+
+# v8 structured blockers (LOOP_ENGINEERING.md section 3). The class is the
+# escalation class of AGENT_PROTOCOL.md section 7.5; `resolver` says who may
+# resolve it (absent = human). `lead` is refused for the classes that by
+# definition need a human: approval (C1), a consent or login screen (C2),
+# damage (C5) and terms (C6).
+BLOCKER_ACTIONS = ('raised', 'resolved')
+BLOCKER_CLASSES = ('C1', 'C2', 'C3', 'C4', 'C5', 'C6', 'C7')
+BLOCKER_RESOLVERS = ('lead', 'human')
+BLOCKER_HUMAN_ONLY_CLASSES = ('C1', 'C2', 'C5', 'C6')
+BLOCKER_REASON_MAX = 1000
+BLOCKER_NEEDS_MAX = 500
 
 # Types whose payload carries evidence and therefore a trust label.
 EVIDENCE_TYPES = ('gate_run', 'observation', 'resource_sample',
@@ -206,6 +246,54 @@ def _closed(obj, known, path, errors):
 
 # ---------------------------------------------------------------- contract
 
+# v8 autonomy block (spec/LOOP_ENGINEERING.md): the plan's recorded
+# authority for the loop. Closed keys; every default is the conservative one.
+AUTONOMY_KEYS = ('stall_budget', 'promptable', 'notify', 'brain', 'queue')
+AUTONOMY_NOTIFY_TARGETS = ('dailybot',)
+AUTONOMY_QUEUE_STARTS = ('prompt-lead', 'launch', 'none')
+# herdr-peers' exact form (MACHINE_RE): a machine id is passed to Herdr
+# as an argument and must never read as an option, so it cannot start with '-'.
+PANE_ADDRESS = re.compile(r"^(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}$")
+
+
+def autonomy_errors(doc):
+    """Errors in the optional v8 `autonomy` block; empty means valid (or
+    absent — the block is optional and its defaults are conservative)."""
+    block = doc.get('autonomy')
+    if block is None:
+        return []
+    if not isinstance(block, dict):
+        return ['autonomy: expected an object']
+    errors = []
+    _closed(block, set(AUTONOMY_KEYS), 'autonomy', errors)
+    budget = block.get('stall_budget')
+    if 'stall_budget' in block and (not isinstance(budget, int) or isinstance(budget, bool)
+                                    or not 1 <= budget <= 10):
+        errors.append('autonomy.stall_budget: an integer from 1 to 10 loop prompts')
+    promptable = block.get('promptable')
+    if 'promptable' in block:
+        if not isinstance(promptable, list) or not promptable:
+            errors.append('autonomy.promptable: a non-empty list of pane addresses')
+        else:
+            for addr in promptable:
+                if not isinstance(addr, str) or not PANE_ADDRESS.fullmatch(addr):
+                    errors.append('autonomy.promptable: %r is not a pane address' % (addr,))
+    notify = block.get('notify')
+    if 'notify' in block:
+        if not isinstance(notify, list) or not notify:
+            errors.append('autonomy.notify: a non-empty list of targets')
+        else:
+            for target in notify:
+                if target not in AUTONOMY_NOTIFY_TARGETS:
+                    errors.append('autonomy.notify: unknown target %r' % (target,))
+    if 'brain' in block and not isinstance(block['brain'], bool):
+        errors.append('autonomy.brain: a boolean (may a brain act on this plan)')
+    queue = block.get('queue')
+    if 'queue' in block and queue not in AUTONOMY_QUEUE_STARTS:
+        errors.append('autonomy.queue: one of %s' % ', '.join(AUTONOMY_QUEUE_STARTS))
+    return errors
+
+
 def contract_errors(doc, parents=None):
     """All validation errors for one v6 contract document.
 
@@ -216,12 +304,20 @@ def contract_errors(doc, parents=None):
     errors = []
     if not isinstance(doc, dict):
         return ['contract: expected a JSON object']
-    _closed(doc, {'schema', 'spec_version', 'plan', 'revision',
-                  'contract_id', 'parent_contract_id', 'created_at', 'title',
-                  'outcome', 'acceptance', 'invariants', 'scope',
-                  'authorization', 'permissions', 'dependencies',
-                  'resource_envelope', 'scheduling', 'tasks'}, 'contract',
-            errors)
+    generation = contract_generation(doc)
+    allowed = {'schema', 'spec_version', 'plan', 'revision',
+               'contract_id', 'parent_contract_id', 'created_at', 'title',
+               'outcome', 'acceptance', 'invariants', 'scope',
+               'authorization', 'permissions', 'dependencies',
+               'resource_envelope', 'scheduling', 'tasks'}
+    if generation == 'v8':
+        allowed.add('autonomy')
+    _closed(doc, allowed, 'contract', errors)
+    if 'autonomy' in doc and generation != 'v8':
+        errors.append('contract.autonomy: only the v8 generation carries the '
+                      'autonomy block (generations never mix)')
+    if generation == 'v8':
+        errors.extend(autonomy_errors(doc))
     declared = doc.get('schema')
     if declared not in CONTRACT_GENERATIONS:
         # Mixed-era refusal (section 9.1): v5 and older documents keep their
@@ -302,7 +398,7 @@ def contract_errors(doc, parents=None):
     _envelope_errors(doc, errors)
     _scheduling_errors(doc, errors)
     _tasks_errors(doc, criteria, errors,
-                  v7=CONTRACT_GENERATIONS[declared] == 'v7')
+                  v7=generation_at_least(CONTRACT_GENERATIONS[declared], 'v7'))
     return errors
 
 
@@ -923,8 +1019,7 @@ def journal_event_errors(event, contract=None):
                       (expected or JOURNAL_SCHEMA_URL, event_url))
         return errors
     etype = event.get('type')
-    catalog = JOURNAL_EVENT_TYPES_V7 if \
-        JOURNAL_GENERATIONS[event_url] == 'v7' else JOURNAL_EVENT_TYPES
+    catalog = JOURNAL_CATALOG_BY_GENERATION[JOURNAL_GENERATIONS[event_url]]
     if etype not in catalog:
         errors.append('event.type: unknown event type %r (closed catalog: '
                       '%s)' % (etype, ', '.join(catalog)))
@@ -1415,7 +1510,66 @@ def _v_delegation(event, errors):
                       'asserted until the parent runner observes it)')
 
 
+def blocker_payload_errors(event, path='event'):
+    """Errors in one blocker raise/resolve payload (LOOP_ENGINEERING.md
+    section 3); shared by the journal validator and the ledger's writer so
+    a refusal names the same rule either way."""
+    errors = []
+    tid = event.get('task')
+    if not isinstance(tid, str) or not ID_TASK.match(tid):
+        errors.append('%s.task: expected a T-* id' % path)
+    action = event.get('action')
+    if action not in BLOCKER_ACTIONS:
+        errors.append('%s.action: expected raised/resolved' % path)
+        return errors
+    if action == 'resolved':
+        extra = sorted(k for k in ('reason', 'needs', 'class', 'resolver')
+                       if k in event)
+        if extra:
+            errors.append('%s: a resolution carries only the task (and an '
+                          'optional note), not %s' % (path, ', '.join(extra)))
+        return errors
+    reason = event.get('reason')
+    if not isinstance(reason, str) or not reason.strip() or \
+            len(reason) > BLOCKER_REASON_MAX:
+        errors.append('%s.reason: expected a non-empty string (<= %d chars)'
+                      % (path, BLOCKER_REASON_MAX))
+    needs = event.get('needs')
+    if not isinstance(needs, str) or not needs.strip() or \
+            len(needs) > BLOCKER_NEEDS_MAX or '\n' in needs or '\r' in needs:
+        errors.append('%s.needs: expected one non-empty line (<= %d chars) '
+                      'saying what unblocks the task' % (path, BLOCKER_NEEDS_MAX))
+    klass = event.get('class')
+    if klass not in BLOCKER_CLASSES:
+        errors.append('%s.class: expected one of %s (AGENT_PROTOCOL.md 7.5)'
+                      % (path, '/'.join(BLOCKER_CLASSES)))
+    if 'resolver' in event:
+        resolver = event['resolver']
+        if resolver not in BLOCKER_RESOLVERS:
+            errors.append('%s.resolver: expected lead/human (absent = human)'
+                          % path)
+        elif resolver == 'lead' and klass in BLOCKER_HUMAN_ONLY_CLASSES:
+            errors.append('%s.resolver: lead is refused for %s - approval, '
+                          'consent or login, damage and terms are the '
+                          "human's (LOOP_ENGINEERING.md section 3)"
+                          % (path, klass))
+    return errors
+
+
+def _v_blocker(event, errors):
+    """LOOP_ENGINEERING.md section 3: one blocker raise or resolution.
+
+    Not an evidence type (no trust label). Recorded only by the ledger's
+    block/unblock helper, never by a raw append.
+    """
+    _closed(event, {'schema', 'type', 'seq', 'ts', 'plan', 'contract_id',
+                    'actor', 'note', 'task', 'action', 'reason', 'needs',
+                    'class', 'resolver'}, 'event', errors)
+    errors.extend(blocker_payload_errors(event))
+
+
 _EVENT_VALIDATORS = {
+    'blocker': _v_blocker,
     'delegation': _v_delegation,
     'task_start': _v_task_start,
     'approval': _v_approval,
@@ -1722,6 +1876,27 @@ def self_test():
     v6_marked['tasks'][0]['parallel_safe'] = True
     if not contract_errors(v6_marked):
         failures.append('parallel_safe under the v6 URL must fail')
+    # The parallel_safe overlap warning (R8): a dropped or inverted check
+    # must fail the self-test, not only the external bats suite.
+    def overlap_pair(surface_a, surface_b, chained=False):
+        return {'tasks': [
+            {'id': 'T-a', 'parallel_safe': True,
+             'touched_surface': [surface_a]},
+            {'id': 'T-b', 'parallel_safe': True,
+             'touched_surface': [surface_b],
+             'prerequisites': ['T-a'] if chained else []}]}
+    for label, doc, expected in (
+            ('same-path parallel_safe pair warns',
+             overlap_pair('src/product.py', 'src/product.py'), 1),
+            ('prerequisite-chained pair is silent',
+             overlap_pair('src/product.py', 'src/product.py', True), 0),
+            ('disjoint parallel_safe pair is silent',
+             overlap_pair('src/a.py', 'src/b.py'), 0)):
+        probes[0] += 1
+        got = len(parallel_overlap_warnings(doc))
+        if got != expected:
+            failures.append('%s: expected %d warning(s), got %d'
+                            % (label, expected, got))
     v7_stamped = dict(v7, contract_id=compute_contract_id(v7))
     delegation = {'schema': JOURNAL_SCHEMA_URL_V7, 'type': 'delegation',
                   'seq': 1, 'ts': '2026-10-09T00:00:00Z',
@@ -1744,6 +1919,53 @@ def self_test():
              lambda e: e.pop('prompt_digest'), v7_stamped)):
         probes[0] += 1
         ev = dict(delegation)
+        mutate(ev)
+        if not journal_event_errors(ev, against):
+            failures.append('mutant %r should fail' % label)
+    # v8 generation (LOOP_ENGINEERING.md section 3): the blocker event is
+    # valid only under the v8 journal URL, and its rules hold.
+    v8 = json.loads(json.dumps(v7))
+    v8['schema'] = CONTRACT_SCHEMA_URL_V8
+    v8_stamped = dict(v8, contract_id=compute_contract_id(v8))
+    raised = {'schema': JOURNAL_SCHEMA_URL_V8, 'type': 'blocker', 'seq': 2,
+              'ts': '2026-11-16T00:00:00Z', 'plan': v8['plan'],
+              'contract_id': v8_stamped['contract_id'],
+              'actor': {'kind': 'agent', 'identity': 'selftest'},
+              'task': v8['tasks'][0]['id'], 'action': 'raised',
+              'reason': 'the fixture repository is missing',
+              'needs': 'clone the fixture repository', 'class': 'C3',
+              'resolver': 'lead'}
+    resolved = dict({k: v for k, v in raised.items()
+                     if k not in ('reason', 'needs', 'class', 'resolver')},
+                    action='resolved', seq=3)
+    for label, event in (('a v8 blocker raise', raised),
+                         ('a v8 blocker resolution', resolved)):
+        probes[0] += 1
+        if journal_event_errors(event, v8_stamped):
+            failures.append('%s should be valid: %s'
+                            % (label, journal_event_errors(event,
+                                                           v8_stamped)[:1]))
+    for label, mutate, against in (
+            ('blocker under the v7 journal URL',
+             lambda e: e.update(schema=JOURNAL_SCHEMA_URL_V7), v7_stamped),
+            ('v8 event under a v7 contract', lambda e: None, v7_stamped),
+            ('lead resolver on a C1 blocker',
+             lambda e: e.update({'class': 'C1'}), v8_stamped),
+            ('lead resolver on a C2 blocker',
+             lambda e: e.update({'class': 'C2'}), v8_stamped),
+            ('lead resolver on a C5 blocker',
+             lambda e: e.update({'class': 'C5'}), v8_stamped),
+            ('lead resolver on a C6 blocker',
+             lambda e: e.update({'class': 'C6'}), v8_stamped),
+            ('blocker without a class', lambda e: e.pop('class'), v8_stamped),
+            ('multi-line needs',
+             lambda e: e.update(needs='one\ntwo'), v8_stamped),
+            ('unknown resolver',
+             lambda e: e.update(resolver='brain'), v8_stamped),
+            ('blocker claims trust',
+             lambda e: e.update(trust='asserted'), v8_stamped)):
+        probes[0] += 1
+        ev = dict(raised)
         mutate(ev)
         if not journal_event_errors(ev, against):
             failures.append('mutant %r should fail' % label)

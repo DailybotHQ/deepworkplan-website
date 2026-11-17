@@ -41,7 +41,7 @@ Toda frente tem um plano, no mínimo um plano Lite no próprio repositório, e e
 
 ## O loop de capacidade
 
-Um agente verifica a própria folga antes de começar cada tarefa, depois de qualquer gate ou passo que tenha levado mais de 20 minutos, sempre que sua CLI mostra um aviso de limite de uso e antes de aceitar um repasse ou a liderança. A verificação é `ak capacity --self --json` do coding-agents-kit `v1.4.0`, que o helper do pack transforma em uma decisão:
+Um agente verifica a própria folga antes de começar cada tarefa, depois de qualquer gate ou passo que tenha levado mais de 20 minutos, sempre que sua CLI mostra um aviso de limite de uso e antes de aceitar um repasse ou a liderança. A verificação é `ak capacity --self --json` do coding-agents-kit `v1.5.0`, que o helper do pack transforma em uma decisão:
 
 | Veredito | Decisão | Uma frente | Um líder, para si mesmo |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ O **pacote de repasse** ([`dwp-handoff/v1`](https://deepworkplan.com/schema/dwp-
 
 ## Sucessão do líder
 
-O herdr-peers `v2.0.0` mantém um registro de líder por plano — líder, época, lista de sucessão e frentes — e resolve o endereço `lead` para o líder atual, então nenhum briefing de frente fixa no código o painel do líder.
+O herdr-peers `v2.2.0` mantém um registro de líder por plano — líder, época, lista de sucessão e frentes — e resolve o endereço `lead` para o líder atual, então nenhum briefing de frente fixa no código o painel do líder.
 
 - **Primeiro reivindicar, depois iniciar.** O líder executa `herdr-peers lead claim --plan <P> --succession <A,B>` antes de iniciar qualquer frente — o endereço `lead` só é resolvido quando existe um registro —, atualiza o registro com `--lanes <A,B>` à medida que as frentes começam e executa `lead release` quando o plano termina. A partir do herdr-peers (`v0.3.2`) o registro guarda localmente o repositório que reivindica, e um plano com o mesmo id em outro repositório é nomeado `--plan <repo>/<id>`. A sucessão padrão é o sucessor planejado, depois as frentes no próprio checkout do plano por ordem de início, depois qualquer frente no mesmo host; frentes em contêineres ou em outras máquinas vêm por último.
 - **Passagem, planejada.** Em `low`, o líder designa um sucessor. Em `critical`, ele escreve um pacote de líder — tabela de frentes, consultas abertas, ordem de release, merges pendentes, decisões —, executa `herdr-peers lead handover <addr> --plan <P>`, que incrementa a época e avisa todas as frentes, e para. O sucessor aceita o pacote, retoma o plano orquestrador e verifica de novo cada frente.
@@ -117,3 +117,7 @@ O diário do plano orquestrador registra o enxame: inícios e resultados das fre
 ## Ensaiar
 
 Prove o loop antes de depender dele. Em um repositório de rascunho com um plano orquestrador pequeno, rode um líder e pelo menos três frentes em contas ou fornecedores diferentes. Limite a capacidade reportada de uma frente — `AGENTKIT_CAPACITY_CAP=@<profile>=8` rebaixa a leitura e nunca pode elevá-la — e observe-a escrever um pacote, o líder iniciar um sucessor que o aceita e o sucessor passar no gate. Limite o líder da mesma forma e observe a passagem e o novo líder concluir o plano. Depois registre a evidência em `analysis_results/` do plano: nenhuma tecla humana, cada pacote, cada época, uma consulta entre frentes e os gates.
+
+## Fechar o loop de execução
+
+O daemon opcional do loop continua um plano aprovado a partir do registro de lead, avisa sem acrescentar autoridade e pede a um sucessor listado que assuma quando o lead desaparecer. Uma pessoa o inicia; credenciais, logins e os gates C1–C7 do plano continuam sendo ações humanas. Consulte [Loop engineering](/pt/methodology/08-loop-engineering).

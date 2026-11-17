@@ -8,7 +8,7 @@ section: Addons
 
 # Dodatki
 
-> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard, DWP 7.0.0, wymaga również odpowiednich rozszerzeń `V6_*.md` i `V7_*.md` wymienionych w [indeksie specyfikacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Istniejące plany v5 i v6 zachowują zapisane reguły.
+> **Zakres wersji:** To zachowany dokument bazowy v5.0.0. Aktualny standard, DWP 8.0.0, wymaga również odpowiednich rozszerzeń `V6_*.md` i `V7_*.md` wymienionych w [indeksie specyfikacji](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Istniejące plany v5 i v6 zachowują zapisane reguły.
 
 **Wersja 2.1.0.** Dodatki to rozszerzenia podstawowej metodyki Deep Work Plan. Siedem z ośmiu jest opcjonalnych i **nigdy nie są wymagane do zgodności** — repozytorium bez opcjonalnych addonów jest w pełni AI-first i zgodne z DWP. Każdy opcjonalny addon jest proponowany podczas onboardingu, wyraźnie akceptowany lub odrzucany, a po akceptacji **uzgadnia** się z istniejącą konfiguracją zamiast ją nadpisywać. Jeden komponent jest zadeklarowanym wyjątkiem: od standardu 2.3.0 **lokalny przegląd AI Diff Reviewer** jest częścią wymaganej linii bazowej — onboarding go instaluje, a każde Final Review go uruchamia — podczas gdy jego powierzchnia CI pozostaje opcjonalna.
 
@@ -27,11 +27,11 @@ Odkrywanie: przepływ `onboard` enumeruje `skills/deepworkplan/addons/` i prezen
 
 ## Dostępne addony (osiem)
 
-Dziś dostępnych jest osiem addonów — siedem opcjonalnych plus wymagany lokalny przegląd. Każdy ma **stronę katalogu kit** ze szczegółami dla użytkownika oraz **normatywną specyfikację** w skillu Deep Work Plan. Cztery z nich — devcontainer, Herdr, DeepWorkPlan Vim i Agentkit — to cienkie integratory przypięte tagiem do produktu z własnym repozytorium i cyklem wydań; każdy produkt działa bez Deep Work Plan. Zaakceptowany addon jest zapisywany w rejestrze addonów `.dwp/config.json` (DWP 7.0.0), który może jedynie proponować lub wzmacniać — nigdy nie warunkuje zgodności ani planu.
+Dziś dostępnych jest osiem addonów — siedem opcjonalnych plus wymagany lokalny przegląd. Każdy ma **stronę katalogu kit** ze szczegółami dla użytkownika oraz **normatywną specyfikację** w skillu Deep Work Plan. Cztery z nich — devcontainer, Herdr, DeepWorkPlan Vim i Agentkit — to cienkie integratory przypięte tagiem do produktu z własnym repozytorium i cyklem wydań; każdy produkt działa bez Deep Work Plan. Zaakceptowany addon jest zapisywany w rejestrze addonów `.dwp/config.json` (DWP 8.0.0), który może jedynie proponować lub wzmacniać — nigdy nie warunkuje zgodności ani planu.
 
 ### Devcontainer (pierwszy addon)
 
-Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v1.2.0`, interfejs `2`): szablon Dev Containers, który `dck init` renderuje do repozytorium jako jego własny kontener, plus skill `dck-dockerfile`.
+Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v1.4.0`, interfejs `2`): szablon Dev Containers, który `dck init` renderuje do repozytorium jako jego własny kontener, plus skill `dck-dockerfile`.
 
 - **Strona kit:** [Devcontainer](/kit/devcontainer)
 - **Co dodaje:** `docker/local/<service>/Dockerfile` z oficjalnego obrazu środowiska uruchomieniowego przypiętego przez digest (`python-3.13`, `node-24` lub `debian`, bez współdzielonego obrazu bazowego), `dev.sh` nad launcherem `dck` (`up`, `shell`, `rebuild`, `doctor`), agentów kodujących jako warstwę opt-in, porty tylko na loopbacku, git przez SSH za pośrednictwem agenta hosta bez żadnego klucza w środku, chyba że deweloper włączy `[ssh] copy_keys` w swoim profilu hosta, oraz maszyny Herdr dla każdego kontenera ze standardowym układem
@@ -82,16 +82,18 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 
 ### Herdr (szósty addon)
 
-Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v2.0.0`, protokół `1`), **interaktywny** transport delegowania planów v7.
+Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v2.2.0`, protokół `1`), **interaktywny** transport delegowania planów v7.
 
 - **Strona kit:** [Herdr](/kit/herdr)
 - **Co dodaje:** plan może przekazać ograniczone zadanie agentowi kodującemu w innym panelu [Herdr](https://herdr.dev), na tej samej maszynie lub na takiej, do której Herdr sięga przez SSH, i zapisać jego jedną autoryzowaną odpowiedź w dzienniku
 - **Zachowanie:** protokół peerów (stempel, uprawnienie, odpowiedź, ochrona przed pętlą, limity głębokości i rozgałęzienia) znajduje się w herdr-peers, nigdy w pakiecie; każde użycie wymaga uprawnienia kontraktu `agent_delegation`, a wynik delegata pozostaje jedynie deklarowany, dopóki nie zaobserwuje go własny wykonawca planu
 - **Kiedy proponowany:** wyraźna zgoda w Phase 7b; wykrywanie `herdr` i `herdr-peers` tylko do odczytu; transport działa wyłącznie wewnątrz sesji Herdr
 
+- **Pętla:** Herdr v2.1.0 oferuje także opcjonalne, uruchamiane przez człowieka `herdr-peers autopilot --loop` do ograniczonej kontynuacji planu i przejęcia przez następcę. Zobacz [Inżynierię pętli](/spec/loop-engineering).
+
 ### DeepWorkPlan Vim (siódmy addon)
 
-Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v1.0.1`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
+Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v1.1.0`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
 
 - **Strona kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Co dodaje:** opcjonalną powierzchnię edytora na poziomie maszyny dla agentów i ludzi — generowany indeks poleceń, przeglądarkę planów tylko do odczytu i przeglądarkę Markdown; każde twierdzenie jest odczytywane z przypiętej, czytelnej maszynowo powierzchni produktu
@@ -100,7 +102,7 @@ Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-
 
 ### Agentkit (ósmy addon)
 
-Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v1.4.0`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
+Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v1.5.0`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
 
 - **Strona kit:** [Agentkit](/kit/agentkit)
 - **Co dodaje:** jedną powierzchnię poleceń `ak` nad terminalowymi agentami kodującymi, używaną do bezgłowego wykonania ograniczonego zadania planu; wnosi możliwości `subagents`, `cancel_children` i `model_routing` wyłącznie w czasie działania, gdy jest włączony, wykryty i na zgodnym interfejsie

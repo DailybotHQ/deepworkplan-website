@@ -12,6 +12,8 @@ Beri sebuah repositori dengan **permukaan antarmuka yang menghadap pengguna** se
 
 Sebuah "permukaan antarmuka" bersifat jamak: sebuah **UI visual** yang dirender, **output CLI** yang bergaya, dan sebuah permukaan **percakapan** (produk berbicara lewat chat atau email) masing-masing terhitung. Addon mendeteksi masing-masing secara independen sebagai sebuah **profil**, dan profil-profil yang diterima ditumpuk ke dalam satu `DESIGN.md` yang sama.
 
+Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harness, loop engineering, dan efisiensi terukur. Addon dan integrasi dapat memperluas harness dan loop; metodologinya tetap berfungsi sendiri.
+
 ## Apa yang ditambahkannya
 
 - Sebuah `DESIGN.md` di `docs/DESIGN.md` (berdampingan dengan spesifikasi lain repo; akar repo hanya ketika tidak ada pohon `docs/`), **dirujuk dari `AGENTS.md`** sehingga agent menemukannya seperti dokumen lainnya. Satu repo, satu berkas — tidak pernah berkas saudara per-permukaan.
@@ -40,8 +42,7 @@ Ia tidak pernah wajib — sebuah repositori dengan nol addon opsional sepenuhnya
 
 Ketika diterima, addon dapat memasang sebuah delegator `/design-system` ke dalam `.agents/commands/` repo untuk menghasilkan ulang atau menyegarkan `DESIGN.md` di kemudian hari. Memasang command bersifat opsional; sebuah addon yang ditolak tidak memasang apa pun.
 
-
-## Spesifikasi v7
+## Spesifikasi v8
 
 | Item | Nilai |
 |---|---|
@@ -49,7 +50,8 @@ Ketika diterima, addon dapat memasang sebuah delegator `/design-system` ke dalam
 | Kunci registri | `design-system` di `.dwp/config.json` |
 | Deskriptor | `addons/design-system/addon.json` (antarmuka 1) |
 | File target | `docs/DESIGN.md` diindeks dari `AGENTS.md` |
-| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v7.12.2`) |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v8.0.2`) |
+
 ## Hubungan dengan dokumen desain per-fitur
 
 Ini adalah sebuah berkas sistem desain **tingkat-repo, persisten** — berbeda dari sebuah dokumen desain teknis per-fitur ("requirements → design → tasks" `design.md` dari alur kerja spec-driven yang terikat tooling). Deep Work Plan sengaja tidak membawa archetype dokumen-desain per-fitur terpisah: README sebuah rencana, acceptance criteria setiap tugas, dan validation gate sudah mencakup peran itu. Addon ini mengisi satu celah yang tidak dicakup peran tersebut: konteks desain antarmuka yang tahan lama dan repo-native.

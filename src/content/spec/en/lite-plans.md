@@ -8,7 +8,7 @@ section: Workflow
 
 # Lite plans
 
-> **Version scope:** This is a retained v5.0.0 base document. The current standard, DWP 7.0.0, also requires the applicable `V6_*.md` and `V7_*.md` extensions listed in the [specification index](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Existing v5 and v6 plans keep their recorded rules.
+> **Version scope:** This is a retained v5.0.0 base document. The current standard, DWP 8.0.0, also requires the applicable `V6_*.md` and `V7_*.md` extensions listed in the [specification index](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Existing v5 and v6 plans keep their recorded rules.
 
 **Version 5.0.0. Status: Stable.** This document specifies the Lite plan representation introduced alongside the [DWP specification](/spec/dwp-specification): a plan format for small-to-medium bounded work that is materialized directly, with no non-executable draft stage. The keywords MUST, MUST NOT, SHOULD, SHOULD NOT, and MAY are to be interpreted as described in RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 A plan MUST be one of two representations, recorded once in `manifest.json` as `plan_format`: **Full** stores one file per task under `<n>.task_<slug>.md`; **Lite** stores compact, executable task records inline in `README.md`, each behind a stable `{#task-N}` anchor. A Lite plan is not a partial or informal Full plan: every task record MUST still carry a goal, a Touched Surface, acceptance criteria, a validation gate, and a completion log, in the same normative shape [Task anatomy](/spec/dwp-specification#task-anatomy) defines for Full.
 
 Four axes describe a plan's state, and MUST be tracked independently rather than conflated:
-
 | Axis | Values | Meaning |
 |------|--------|---------|
 | Format | `lite`, `full` | Where task records live |

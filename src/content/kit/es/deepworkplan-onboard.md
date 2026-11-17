@@ -35,13 +35,16 @@ Convierte un repositorio en una base de código AI-first y guiada por especifica
 
 Un repositorio es plenamente conforme con cero addons opcionales; la revisión local de AI Diff Reviewer es parte de la línea base desde el estándar 2.3.0. La realidad detectada siempre gana sobre las suposiciones del preset.
 
-## Referencias de esquemas v7
+## Schema references
 
-Para los planes v7 — el valor predeterminado del paquete 7.x actual — el catálogo de esquemas legibles por máquina se publica en estas URL estables. La proyección activa es un snapshot compartido con v6; no existe `plan-state/v6.json` ni `plan-state/v7.json`.
+El paquete v8 crea planes nuevos con `plan-contract/v8` de forma predeterminada. Los planes existentes conservan su generación registrada; la migración requiere un `refine migrate` explícito.
 
 - **Manifiesto del plan:** https://deepworkplan.com/schema/plan-manifest/v7.json
 - **Contrato del plan:** https://deepworkplan.com/schema/plan-contract/v7.json (el contrato v6 más un marcador de tarea opcional `parallel_safe`)
 - **Evento del diario:** https://deepworkplan.com/schema/journal-event/v7.json (añade el evento `delegation`)
+- **Contrato v8:** https://deepworkplan.com/schema/plan-contract/v8.json
+- **Evento de diario v8:** https://deepworkplan.com/schema/journal-event/v8.json
+- **Snapshot del plan v8:** https://deepworkplan.com/schema/plan-snapshot/v8.json
 - **Snapshot del plan (proyección activa, compartida con v6):** https://deepworkplan.com/schema/plan-snapshot/v6.json
 - **Manifiesto de contexto (compartido con v6):** https://deepworkplan.com/schema/context-manifest/v6.json
 - **Configuración del repositorio:** https://deepworkplan.com/schema/dwp-config/v1.json
@@ -52,4 +55,4 @@ Para los planes v7 — el valor predeterminado del paquete 7.x actual — el cat
 
 Los planes v6 conservan sus esquemas v6 ([manifiesto](https://deepworkplan.com/schema/plan-manifest/v6.json), [contrato](https://deepworkplan.com/schema/plan-contract/v6.json), [evento del diario](https://deepworkplan.com/schema/journal-event/v6.json)); los planes v5 existentes siguen usando el esquema de estado v5, y los planes antiguos nunca se reescriben silenciosamente.
 
-El paquete 7.x actual crea planes nuevos con v7 de forma predeterminada. Los planes existentes conservan su generación registrada; la migración requiere una solicitud explícita. Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v7 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.
+El paquete 8.x actual crea planes nuevos con v8 de forma predeterminada. Los planes existentes conservan su generación registrada; la migración requiere una solicitud explícita. Los planes nuevos reciben identificadores numéricos monotónicos de al menos tres dígitos (por ejemplo, `PLAN_001_add_payment_webhooks/`). Como los esquemas v5 congelados cuentan el ID numérico como una palabra, los slugs v5 tienen 2–4 palabras; los slugs v7 tienen 2–5. Las carpetas existentes sin numerar `PLAN_<slug>/` siguen siendo legibles y nunca se renombran. Si hay planes numerados, `latest` resuelve al plan con el ID numérico más alto.

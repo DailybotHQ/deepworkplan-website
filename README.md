@@ -26,15 +26,14 @@
 
 [deepworkplan.com](https://deepworkplan.com) is the official website for the **Deep Work Plan (DWP)** methodology, and this repository is its source. DWP turns any repository into an AI-first, agent-pilotable codebase: it documents the repository (`AGENTS.md`, `docs/`, an `.agents/` kit), installs the Deep Work Plan skill, and lets any coding agent run long-horizon plans against explicit acceptance criteria and validation gates. It is for developers and teams who hand real, multi-step work to coding agents and need it finished and verified, not just attempted.
 
-**The problem.** Long work fills any model's context, detail falls away, and an agent declares itself done without proof. DWP keeps the plan, the gates and the state in the repository, so any agent — or a different one tomorrow — can resume the work and prove each step. *Deep Work Plan is spec-driven development where the repository itself becomes the harness.*
+**The problem.** Long work fills any model's context, detail falls away, and an agent declares itself done without proof. DWP keeps the plan, the gates and the state in the repository, so any agent — or a different one tomorrow — can resume the work and prove each step. *Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.*
 
-The methodology rests on five ideas, and the site is built to argue them:
+Deep Work Plan v8 rests on four pillars, and the site is built to argue them:
 
-1. **You steer; the agents do the hours.** You decide what *done* means and where the lines are. The plan carries your intent.
-2. **The plan is what the agent returns to.** Atomic tasks, validation gates and resumable state give the agent something durable to come back to.
-3. **Done is a contract, not a feeling.** Every task names its acceptance criteria and the checks that must pass.
-4. **The repository is the harness.** Context, tools, guardrails and state live in the repository as plain files any agent can read.
-5. **Context is the scarcest resource.** Instructions load progressively, validation is selected from what each task touched, and skills are decided task-locally.
+1. **Spec-first.** The plan is written before the code, with acceptance criteria and validation gates; done is a contract, not a feeling.
+2. **The repository is the harness.** Context, tools, guardrails and resumable state live in the repository as plain files any agent can read.
+3. **Loop engineering.** An approved plan registers a lead and its succession and keeps moving to its end inside its recorded authority; the optional daemon is started by a human and adds no authority.
+4. **Measured efficiency.** Instructions load progressively and validation is selected from what each task touched, measured in instruction bytes per flow, never in invented token percentages.
 
 The site ships in 17 languages (English, Spanish, Portuguese, Chinese, Japanese, German, French, Korean, Russian, Italian, Turkish, Indonesian, Vietnamese, Hindi, Polish, Ukrainian, Thai) and serves every page as Markdown to agents. It hosts the methodology, the readable specification, the kit catalog and the machine-executable [`/init.md`](https://deepworkplan.com/init.md) adoption prompt.
 
@@ -53,11 +52,11 @@ Read and follow the instructions at https://deepworkplan.com/init.md to make thi
 To install the skill by hand, pinned to its release and verified first:
 
 ```bash
-git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill
-curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS
+git clone --branch v8.0.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill
+curl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS
 shasum -a 256 SHA256SUMS   # compare with the digest in /init.md → Pinned releases
 ./setup.sh --verify        # non-zero exit means a file does not match — stop
-cd .. && npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+cd .. && npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
 Then run `/deepworkplan-onboard` in your agent, and `/dwp-create <goal>` → `/dwp-execute` → `/dwp-verify` from there.

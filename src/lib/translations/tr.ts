@@ -14,7 +14,7 @@ export const tr: SiteTranslations = {
   siteTitleFull:
     'Deep Work Plan — yapay zeka kodlama ajanları için yapılandırılmış yürütme',
   siteDescription:
-    'Deep Work Plan, deponun harness görevi gördüğü spesifikasyon odaklı geliştirmedir: atomik görevler, doğrulama geçitleri ve güvenli çoklu ajanlar.',
+    'Önce spesifikasyon, kapalı döngü: depo harness’tir ve her plan sonuna kadar çalışır. Verimliliği akış başına talimat baytıyla ölçeriz.',
 
   // Navigation
   nav: {
@@ -99,14 +99,14 @@ export const tr: SiteTranslations = {
       title:
         'Deep Work Plan — yapay zeka kodlama ajanları için yapılandırılmış yürütme',
       description:
-        'Deep Work Plan, yapay zeka ajanlarına spesifikasyon odaklı geliştirme getirir. Deponuzu uzun vadeli yürütme için dayanıklı bir harness a dönüştürün.',
+        'Önce spesifikasyon, kapalı döngü: Deep Work Plan deponuzu AI kodlama ajanları için harness yapar; her plan, insanın başlattığı döngüde sonuna dek çalışır.',
     },
     hero: {
       badge: 'Açık metodoloji · MIT · Ajandan bağımsız',
-      title: 'Modeller önemlidir.',
-      titleEmphasis: 'Bağlam daha da önemlidir.',
+      leadSentence:
+        'Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.',
       subtitle:
-        'Deep Work Plan, herhangi bir depoyu yapılandırılmış bir ortama dönüştürür — bağlam, koruma bariyerleri ve kalıcı bir plan — herhangi bir kodlama ajanı burada hassas ve verimli çalışır ve uzun soluklu işi tamamlar.',
+        'Deep Work Plan, herhangi bir depoyu harness’e dönüştürür — bağlam, koruma bariyerleri ve doğrulama kapıları olan kalıcı bir plan — herhangi bir kodlama ajanı burada uzun soluklu işi yürütür. İsteğe bağlı döngüyü ekleyin; açık bir plan, kimse onu yoklamadan sonuna kadar çalışmayı sürdürür.',
       instructionLabel: 'Ajanınıza kopyalayın',
       instruction:
         'init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.',
@@ -114,19 +114,38 @@ export const tr: SiteTranslations = {
       copiedLabel: 'Kopyalandı',
       viewInitCta: 'Nasıl çalıştığını görün',
       pullQuote:
-        'Deep Work Plan, deponun kendisinin harness haline geldiği spec odaklı geliştirmedir.',
+        'Önce spesifikasyon neyi söyler; harness nerede olduğunu söyler; Loop engineering işin nasıl bittiğini söyler.',
       primaryCta: 'Metodolojiyi okuyun',
       secondaryCta: 'Spesifikasyonu okuyun',
-      illustrationAlt:
-        'Kayalık bir kıyıdaki bir deniz feneri, küçük bir tekneye yol gösteren tek bir ışık huzmesi gönderiyor — deponun, herhangi bir ajana rehberlik eden sağlam bir harness olduğunu çağrıştıran bir gravür.',
-      scrollCta: 'Nasıl çalıştığını görün',
+    },
+    pillars: {
+      badge: 'Dört temel',
+      title: 'Metodolojinin dayandığı temeller.',
+      items: [
+        {
+          name: 'Önce spesifikasyon',
+          line: 'Plan kalıcı doğruluk kaynağıdır: atomik görevler, kabul kriterleri ve ajanın geçmesi gereken doğrulama kapıları.',
+        },
+        {
+          name: 'Depo, harness’tir',
+          line: 'Bağlam, araçlar, koruma bariyerleri ve durum, herhangi bir ajanın okuyabileceği düz dosyalar olarak depoda yaşar.',
+        },
+        {
+          name: 'Loop engineering',
+          line: 'Planlar sonuna kadar çalışır: kayıt, insanın başlattığı bir daemon, yetki eklemeyen dürtmeler, devralma ve plan olayları.',
+        },
+        {
+          name: 'Ölçülmüş verimlilik',
+          line: 'Akış başına yönerge baytları, yöntemiyle birlikte ölçülür ve yayımlanır — asla uydurulmuş token yüzdeleri değil.',
+        },
+      ],
     },
     pitch: {
       kicker: 'Sorun ve çözüm',
       problem:
         'Kısa hamlelerde kodlama ajanları etkileyicidir. Ona uzun soluklu bir misyon verin — bir göç, yeni bir alt sistem, onlarca dosyayı kapsayan bir yeniden yapılandırma — ve ajan sapar: bağlam dolar, önceki kararlar solur ve saatler süren iş yarı yolda kalır.',
       answer:
-        'Deep Work Plan, spesifikasyon odaklı geliştirme ile yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. "Bitti" bir his olmaktan çıkar — geçerlenebilir, gözden geçirilebilir kanıta dönüşür.',
+        'Deep Work Plan önce spesifikasyonla yanıt verir: dayanıklı bir plan, atomik görevler ve ajanın geçmesi gereken doğrulama kapıları. "Bitti" bir his olmaktan çıkar — doğrulanabilir, gözden geçirilebilir kanıta dönüşür. Ardından Loop engineering, bu kapılar geçilene kadar planı ilerletmeyi sürdürür.',
       efficiency:
         'Bağlam, ajanın en kıt kaynağıdır. Bu nedenle harness kendi yönergelerini hafif ve denetlenebilir tutar. Yönergeler aşamalı yüklenir, doğrulama değişikliklere odaklanır ve her görev ilgili bağlamı alır. Her akışın yönerge boyutunu bayt cinsinden yayımlayarak bu yükü görünür kılıyoruz. Planlar da işe göre biçimlenir: kapsamı sınırlı bir düzeltme için Lite, saatler süren işler için Full. Biçim işin kapsamını izler; böylece süreç odaklı ve izlenebilir kalır.',
       illustrationAlt:
@@ -163,6 +182,72 @@ export const tr: SiteTranslations = {
         deepLinkLabel: 'Metodolojiyi okuyun',
         deepLinkHref: '/methodology',
       },
+    },
+    loop: {
+      badge: 'Loop engineering',
+      title: 'Planlar sonuna kadar çalışır. Yetki insanlarda kalır.',
+      subtitle:
+        'Loop engineering, bir planın insan tarafından sürekli sorgulanmadan tamamlanmasını sağlar. Aşağıdaki satırlar döngünün yayımlanmış sözleşmelerini açıklar: çoğu herdr-peers kaynaklıdır; plan kuyruğu ise paket sözleşmesidir. Herdr isteğe bağlıdır ve metodoloji onsuz da çalışır.',
+      colContract: 'Sözleşme',
+      colGuarantee: 'Neyi garanti eder',
+      colSource: 'Kaynak',
+      contracts: [
+        {
+          name: 'Plan kaydı',
+          detail:
+            'Döngünün izlediği bir planın, epoch ve halef sırası içeren bir lider kaydı vardır. Yalnızca en yüksek epoch’un sahibi planın lideri olarak hareket eder.',
+        },
+        {
+          name: 'Yalnızca insan başlatır',
+          detail:
+            'Daemon’u yalnızca bir insan, kendi sözleriyle başlatır. Hiçbir soru, yanıt veya bildirim onu başlatamaz, durduramaz ya da yaptığı şeyi değiştiremez.',
+        },
+        {
+          name: 'Dürtmeler yetki eklemez',
+          detail:
+            'Açık bir planın boşta kalan lideri, devam etmesi için sabit bir istem alır. Kapılar, durma koşulları ve eskalasyonlar önceki gibi bağlayıcıdır; ilerleme olmadan geçen üç istem planı takılmış olarak işaretler.',
+        },
+        {
+          name: 'Haleflere devir',
+          detail:
+            'Halefler, doğrulamalı lead takeover akışıyla görevi devralır. Bir lane ancak insanın önceden kaydettiği bir yetkiyle atanabilir.',
+        },
+        {
+          name: 'Plan olayları',
+          detail:
+            'Bir plan takıldığında, engellendiğinde, liderini kaybettiğinde, kuyruktan başladığında veya tamamlandığında, insanın seçtiği bir komut tek bir plan-event-v1 nesnesi alır. Paket bunun için bir Dailybot bildiricisi sunar.',
+        },
+        {
+          name: 'Filo haritası',
+          detail:
+            'Her makine planlarını plans-v1 olarak bildirir; daemon her makinenin, ajanın, deponun ve planın fleet-v1 haritasını tutar ve fleet ui bunu salt okunur olarak gösterir.',
+        },
+        {
+          name: 'Plan kuyruğu',
+          detail:
+            'Paket `dwp-queue-v1` kuyruğunu doğrular ve yazar; daemon, sıradaki planları sürdürmek için kuyruğu okur.',
+        },
+        {
+          name: 'Lider doğrulaması',
+          detail:
+            'Herhangi bir birleştirme, etiket veya sürümden önce lider, planı her makinede hâlâ elinde tuttuğunu doğrular. Daha yeni bir lider bunu reddeder; erişilemeyen bir makine, bu risk kayda geçirilerek kabul edilmedikçe işlemi durdurur.',
+        },
+      ],
+      note: 'Karar beyni (--brain) ve lider ataması (--appoint), aynı daemon’un tercihe dayalı bayraklarıdır ve her biri bir insan tarafından açılır. Daemon asla birleştirme yapmaz, sürüm yayımlamaz, oturum açmaz veya bir izni değiştirmez.',
+      deepLinkLabel: 'Herdr eklentisini okuyun',
+    },
+    efficiency: {
+      badge: 'Ölçülmüş verimlilik',
+      title: 'Akış başına yönerge baytları, ölçülmüş.',
+      subtitle:
+        'Harness, her akışın başlamadan önce okuması gerekenleri yayımlar: yönlendirici, alt skill ve bağlantı verdiği paylaşılan kaynaklar. Bunlar yayımlanmış paketin zorunlu okuma kümeleridir.',
+      colFlow: 'Akış',
+      colBytes: 'Giriş paketi (bayt)',
+      caption:
+        'Birim: dosya sistemi baytı. Yayımlanmış paket üzerinde aşağıdaki komutla ölçülmüştür.',
+      absent:
+        'Sağlayıcı token’ları, maliyet ve döngü kapanış istatistikleri gösterilmez: henüz hiçbir etiketli kaynak bunları ölçmüyor, bu yüzden satırları yok. Betiğin bayt ÷ 4 token rakamı etiketli bir tahmindir, asla bir ölçüm değildir.',
+      deepLinkLabel: 'Değerlendirme kaydını okuyun',
     },
     onboarding: {
       badge: 'Akıl yürütmeye dayalı kuruluma alma',
@@ -220,6 +305,11 @@ export const tr: SiteTranslations = {
           description:
             'Herhangi bir görev için uzun soluklu Deep Work Plan’ler üretin ve bunları adım adım çalıştırın; açık kabul kriterleri, doğrulama kapıları ve sürdürülebilir durumla — saatlerce otonom biçimde.',
         },
+        {
+          title: 'Döngüyü bir insan başlatır',
+          description:
+            'İsteğe bağlı, Herdr eklentisiyle: herdr-peers autopilot start --loop komutunu siz çalıştırırsınız — asla bir ajan değil. Lider kaydı olan her açık plan sonuna kadar çalışmayı sürdürür ve bir plan takıldığında, engellendiğinde veya tamamlandığında bildiriciniz bundan haberdar olur.',
+        },
       ],
       note: 'Skill her yerde aynı şekilde kurulur; uyarlanan şey deponuzdur — yığınınız için üretilen AGENTS.md, dokümanlar ve akıl yürütülmüş .agents/ kiti. Bu ayrım, metodolojiyi tek seferlik bir iskele yerine yeniden kullanılabilir bir standart yapan şeydir.',
     },
@@ -267,7 +357,7 @@ export const tr: SiteTranslations = {
         {
           label: 'Git-native, sürdürülebilir, .dwp/',
           detail:
-            'Daemon yok, harici durum yok. Planlar gitignore’lanmış bir .dwp/ klasörüne iner ve herhangi bir görev — bağlam taştıktan sonra bile — yalnızca git üzerinden kaldığı yerden sürdürülür.',
+            'Metodolojinin kendisi daemon ya da harici durum gerektirmez. Planlar gitignore’lanmış bir .dwp/ klasörüne iner ve herhangi bir görev — bağlam taştıktan sonra bile — yalnızca git üzerinden kaldığı yerden sürdürülür. İsteğe bağlı döngü daemon’u süreklilik ekler, asla bir bağımlılık eklemez.',
         },
         {
           label: 'Çoklu ajan delegasyonu ve Ekosistem 1.0',
@@ -592,12 +682,12 @@ export const tr: SiteTranslations = {
     meta: {
       title: 'Deep Work Plan Metodolojisi',
       description:
-        'Manifestodan sürü özerkliğine yedi bölüm: ilkeler, çekirdek döngü, şablonlar, skill’ler ve ajanlar, arketipler, birçok ajan ve bir sınırı atlatan sürüler.',
+        'Manifestodan Loop engineering’e sekiz bölüm: ilkeler, temel döngü, şablonlar, skill ve ajanlar, arketipler, çoklu ajan çalışması ve döngünün kapanışı.',
     },
     eyebrow: 'Metodoloji',
     title: 'Deep Work Plan Metodolojisi',
     intro:
-      'Deep Work Plan’in arkasındaki felsefeden pratik döngüye, şablonlara, uyarlamalara, aynı anda birçok ajanı çalıştırmaya ve bir sürüyü çalışır tutmaya götüren yedi bölüm.',
+      'Sekiz bölüm Deep Work Plan’in ilkelerini ve pratik döngüsünü; şablonları, uyarlamaları, çoklu ajan çalışmasını ve Loop engineering’i anlatır.',
     chapterLabel: 'Bölüm',
     readChapter: 'Bölümü oku',
     prev: 'Önceki',
@@ -692,8 +782,6 @@ export const tr: SiteTranslations = {
     },
     eyebrow: 'Hızlı başlangıç',
     title: 'Bu depoyu AI-first hale getirin',
-    intro:
-      'Herhangi bir depoyu spec odaklı, ajana hazır bir kod tabanına dönüştürmek için tek bir uç nokta. Skill’i kurun, bir ajanın depoyu kuruluma almasını sağlayın, ardından herhangi bir kodlama ajanıyla yapılandırılmış işi planlayıp yürütün.',
     handoffTitle: 'Ajanınıza kopyalayın',
     handoffBody:
       "init.md isteminin tamamını kopyalayıp yapay zeka kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırın. Metodolojiyi ve spesifikasyonu okur, skill'i kurar ve bu depoyu Deep Work Plan'ler için kuruluma alır.",
@@ -703,18 +791,20 @@ export const tr: SiteTranslations = {
     codeLabel: 'Terminal',
     whatTitle: 'Bu ne yapar',
     whatBody: [
-      'Benimseme, depoyu kalıcı iki şekilde değiştirir — metodolojinin temel direkleri.',
-      'İlk olarak, depo spec odaklı hale gelir: iş, gelişigüzel istemlerden değil, yazılı bir plan ve spesifikasyondan başlar. İkinci olarak, deponun kendisi ajan harness’ı haline gelir — bir AGENTS.md, bir docs/ bilgi tabanı, modül başına dokümanlar ve bir .agents/ skill yuvası (.claude → .agents ve .cursor → .agents sembolik bağlarıyla), her ajana ihtiyaç duyduğu bağlamı ve komutları verir.',
+      'Benimseme yolu bu dört sütunu deponuzda uygulamaya geçirir.',
+      'Benimseme dört sütuna dayanır: spec-first planlar, harness olarak depo, Loop engineering ve ölçülen verimlilik. Plan kalıcı doğruluk kaynağıdır; depo bağlamı, araçları, korumaları ve durumu taşır. İnsan tarafından başlatılan isteğe bağlı döngü, kayıtlı planların tamamlanmasına yardımcı olur; talimat yükü akış başına byte olarak ölçülür.',
     ],
     sequenceTitle: 'Benimseme yolu',
     orLabel: 'veya',
+    loopNotifyNote:
+      'Dailybot olay raporlarını almak istiyorsanız ikinci komutu kullanın. --notify ile paketin bildirim aracını ekler; bildirimler isteğe bağlıdır.',
     steps: [
       {
         title: 'Kurmadan önce doğrulayın',
         description:
           'İstemi ve skill’i denetleyene kadar güvenilmez olarak ele alın. Her ikisi de açık kaynaklıdır ve MIT lisanslıdır; skill, ağ çağrısı ve telemetri içermeyen Markdown odaklı bir yapıdadır. Her sürüm, gönderilen skill üzerinde bir SHA256SUMS yayımlar; çalıştırmadan önce kopyanızın eşleştiğini doğrulayabilirsiniz. Sürümler sağlama toplamlıdır, imzalı değildir (imzalama, belgelenmiş bir sonraki adımdır).',
         commands: [
-          'git clone --branch v7.12.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v7.12.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
+          'git clone --branch v8.0.2 https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill\ncurl -fsSL -o SHA256SUMS https://github.com/DailybotHQ/deepworkplan-skill/releases/download/v8.0.2/SHA256SUMS\nshasum -a 256 SHA256SUMS\n./setup.sh --verify',
         ],
       },
       {
@@ -722,7 +812,7 @@ export const tr: SiteTranslations = {
         description:
           'Herhangi bir ajanın yapılandırılmış işi planlayıp yürütebilmesi için Deep Work Plan skill’ini ekleyin. Skill, bir yönlendirici ve dokuz alt skill ile gelir — create, execute, refine, resume, status, verify, onboard, author ve upgrade.',
         commands: [
-          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y',
+          'npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y',
           'openclaw skills install deepworkplan',
           'git clone https://github.com/DailybotHQ/deepworkplan-skill.git && cd deepworkplan-skill && ./setup.sh',
         ],
@@ -753,7 +843,7 @@ export const tr: SiteTranslations = {
     ],
     outcomeTitle: 'Sonuç',
     outcome:
-      'Depo spec odaklı hale gelir ve deponun kendisi ajan harness’ı haline gelir — bağlam ve komutlar kodla birlikte gezer.',
+      'Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.',
     nextStepsTitle: 'Sonraki adımlar',
     nextSteps: [
       { label: 'Metodolojiyi okuyun', href: '/methodology' },
@@ -831,7 +921,7 @@ export const tr: SiteTranslations = {
             id: 'how-to-use',
             question: 'Nasıl kullanılır?',
             answer:
-              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
+              "Üç adım. Önce Deep Work Plan skill'ini kodlama ajanınıza kurun — en hızlı yol `npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y` (veya skill repo'sunu klonlayıp `./setup.sh` çalıştırmak). İkinci olarak, depoyu bir kez onboard edin; ajan `AGENTS.md`, `docs/`, `.agents/` kitini ve gitignore edilmiş `.dwp/` alanını yığınınıza uyarlasın: https://deepworkplan.com/init.md adresine yönlendirin veya `/deepworkplan-onboard` çalıştırın. Üçüncü olarak, ince komutlarla planlayın ve çalıştırın: `/dwp-create <goal>` bir plan oluşturur; `/dwp-execute` her kapıya karşı görev görev çalıştırır; `/dwp-refine` devam eden bir planı düzenler (kapsam, görevler veya bir Lite planın Full'e yükseltilmesi); `/dwp-resume` bir kesintiden sonra devam eder; `/dwp-status` çalıştırmadan ilerlemeyi raporlar; `/dwp-verify` nesnel bir uygunluk raporu üretir; `/dwp-upgrade` yüklü bir skill’i var olan planlara dokunmadan daha yeni bir sürüme taşır. `/` komutunu yakalayan ajanlar genellikle `#` kullanır (örneğin `#dwp-execute`). Adoption endpoint ve hızlı başlangıç aynı yolu daha ayrıntılı anlatır.",
             linkLabel: 'Hızlı başlangıç',
             linkPath: '/quickstart',
           },
@@ -953,6 +1043,25 @@ export const tr: SiteTranslations = {
             linkLabel: 'Gözetimsiz protokolü okuyun',
             linkPath: '/spec/agent-protocol',
           },
+
+          {
+            id: 'loop-engineering',
+            question: 'loop engineering nedir?',
+            answer:
+              'Loop engineering yürütme döngüsünü kapatır: lead kaydı olan bir planın ardından, insanın başlattığı isteğe bağlı Herdr daemon’ı açık planı tamamlanana kadar sürdürebilir; duraklama, engel, lead kaybı veya tamamlanma durumlarını bildirir. Planın kayıtlı yetkileri içinde çalışır.',
+          },
+          {
+            id: 'loop-daemon-required',
+            question: 'Deep Work Plan daemon gerektirir mi?',
+            answer:
+              'Hayır. Yöntem ve planları Herdr veya daemon olmadan çalışır. Addon isteğe bağlıdır ve süreklilik ekler; ön koşul değildir.',
+          },
+          {
+            id: 'loop-daemon-boundaries',
+            question: 'Daemon asla ne yapamaz?',
+            answer:
+              'Oturum açamaz, Claude’un izinleri atlama onayını kabul edemez, ajanın kalıcı izinlerini genişletemez ve merge, tag veya release işlemlerini gerçekleştiremez. Nudge yalnızca sabit bir devam etme istemi gönderir ve yetki vermez.',
+          },
         ],
       },
       {
@@ -1006,9 +1115,9 @@ export const tr: SiteTranslations = {
           },
           {
             id: 'v6-compatibility',
-            question: 'v6 planları v7 altında çalışmaya devam eder mi?',
+            question: 'Mevcut planlar v8 altında nesillerini korur mu?',
             answer:
-              'Evet. Plan sözleşmeleri şema neslini açıkça bildirir (`plan-contract/v6.json` veya `plan-contract/v7.json`). Bir plan asla uçuş ortasında nesil değiştirmez. Mevcut v6 planları biçimlerini ve semantiklerini koruyarak v7 araçları altında kesintisiz devam eder.',
+              'Evet. Yeni planlar varsayılan olarak `plan-contract/v8` kullanır. Mevcut v7, v6 ve v5 planları kaydedilmiş nesillerini korur ve güncel paketle çalışmayı sürdürür. Plan nesli yalnızca açık bir `/dwp-refine migrate` isteğiyle değişir.',
             linkLabel: 'Sözleşmeler hakkında okuyun',
             linkPath: '/spec/record-layer',
           },
@@ -1446,6 +1555,8 @@ export const tr: SiteTranslations = {
     planTitle: 'Skill ile planlayın ve yürütün',
     planIntro:
       "Yukarıdaki API, bir ajanın bu siteyi okumasını sağlar. DWP skill'i ise bir ajanın metodolojiyi çalıştırmasını sağlayan şeydir — bir depoya bir kez kurulur ve bir yönlendirici ile dokuz alt skill getirir; bunlar eğik çizgi komutları olarak çağrılır (ya da isimle, eğik çizgiyi yakalayan ajanlar için — çoğu bunun yerine # kullanır, örn. #dwp-execute).",
+    loopWorkflow:
+      'Herdr ile plan kaydı lead ve halef sırasını tutar. İnsan, açık planları sürdürmek için herdr-peers autopilot start --loop komutunu başlatabilir. Herhangi bir merge, tag veya release işleminden önce herdr-peers lead verify --plan <plan-id> çalıştırın.',
     formatTitle: 'İki bağımsız seçim: biçim ve ne kadar inceleme istediğiniz',
     formatIntro:
       'Her plan her eksenden bir değer seçer. Bunlar birbirinden bağımsızdır — bir Lite plan trust modunda çalışabilir, bir Full plan guided modunda çalışabilir ve her ikisi de biçimi değiştirmeden sonradan modu değiştirebilir.',

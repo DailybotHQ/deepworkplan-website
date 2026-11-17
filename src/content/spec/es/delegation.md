@@ -8,7 +8,7 @@ section: Record layer
 
 # Delegación
 
-> **Alcance de versión:** Esta página reformula la generación de contrato v7 en la release `v7.12.2`. Fuentes canónicas: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md) y el [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/execute/delegation.md) del flujo de ejecución. Donde esta página y esos archivos difieran, prevalecen los archivos.
+> **Alcance de versión:** Esta página reformula la generación de contrato v7 en la release `v8.0.0`. Fuentes canónicas: [`V7_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md) y el [`delegation.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/execute/delegation.md) del flujo de ejecución. Donde esta página y esos archivos difieran, prevalecen los archivos.
 
 **Versión 7.0.0. Estado: estable.** v7 es una nueva generación de contrato de la [capa de registros](/spec/record-layer), no un nuevo ciclo de vida: todo lo establecido en los documentos de contrato, ciclo de vida, contexto y recursos de v6 se aplica salvo que esta página indique otra cosa. No delegar siempre es correcto. Las palabras clave MUST (DEBE), MUST NOT (NO DEBE), SHOULD (DEBERÍA), SHOULD NOT (NO DEBERÍA) y MAY (PUEDE) se interpretan según las describe el RFC 2119.
 
@@ -100,3 +100,5 @@ Un orquestador nunca delega las tareas de un **plan hijo**: los hijos se ejecuta
 - [Capa de registros](/spec/record-layer) — el contrato y el diario que esta página amplía.
 - [Recursos y capacidades](/spec/resources-and-abilities) — capacidades, concesiones y el registro de addons.
 - [Addon Herdr](/kit/herdr) y [addon Agentkit](/kit/agentkit) — los dos transportes.
+
+- [Ingeniería del ciclo](/spec/loop-engineering) — the plan loop and its bounded autonomy.

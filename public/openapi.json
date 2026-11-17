@@ -65,7 +65,7 @@
                 },
                 "examples": {
                   "body": {
-                    "value": "# Deep Work Plan\n\n> Context matters more than models…"
+                    "value": "# Deep Work Plan\n\n> Spec-first, loop-closed: the repository is the harness and the plan runs itself to done…"
                   }
                 }
               }
@@ -870,7 +870,7 @@
                   },
                   "skill": {
                     "name": "deepworkplan",
-                    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y"
+                    "install": "npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y"
                   },
                   "endpoints": {
                     "init": "https://deepworkplan.com/init.md"

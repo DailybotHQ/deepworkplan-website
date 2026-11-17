@@ -8,7 +8,7 @@ section: Record layer
 
 # レコードレイヤー
 
-> **バージョンの適用範囲:** このページは、現在の標準である DWP 7.0.0 が土台とする規範的な v6 レコードレイヤーを要約したものです。リリース `v7.12.2` における正規の情報源は [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_CONTRACT.md) と [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) です。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。v5 計画は [計画の状態](/spec/plan-state) レイヤーを維持し、暗黙のうちに移行されることは決してありません。
+> **バージョンの適用範囲:** このページは、現在の標準である DWP 8.0.0 が土台とする規範的な v6 レコードレイヤーを要約したものです。リリース `v8.0.0` における正規の情報源は [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_CONTRACT.md) と [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) です。このページとそれらのファイルが食い違う場合は、ファイルが優先されます。v5 計画は [計画の状態](/spec/plan-state) レイヤーを維持し、暗黙のうちに移行されることは決してありません。
 
 **バージョン 6.0.0、7.0.0 で拡張。状態: 安定。** レコードレイヤーは、物語的な完了報告をレコードで置き換えます。契約が権威であり、ジャーナルが記憶であり、ヘルパーが書き込みを行い、生成されるすべてのファイルは投影です。キーワード MUST、MUST NOT、SHOULD、SHOULD NOT、MAY は、RFC 2119 に記述されたとおりに解釈されます。
 
@@ -17,7 +17,6 @@ section: Record layer
 計画は、人が書く二つの成果物と、ガードされた一つのシーケンスです。計画の Markdown（`README.md` とタスクファイル）は、何を行うかを述べます。**アウトカム契約**（`contract.json`）は、何をもって完了とみなし、計画に何が許されるかを述べます。**ジャーナル**（`journal.ndjson`）は、実際に何が起きたかを記録します。`state.json` と `views/` はジャーナルから再生成され、手で編集してはなりません（MUST NOT）。生成されたファイルとジャーナルが食い違う場合はジャーナルが優先され、ファイルが再生成されます。
 
 ## 世代の検出
-
 計画フォルダーが v6 系の計画であるのは、`contract` ポインターが解決される `manifest.json`、`contract.json`、または `contracts/` のリビジョンチェーンのいずれかを持つ場合であり、かつその場合に限ります。検出はこれらの成果物を用いなければならず（MUST）、インストール済みのパックのバージョンを用いてはなりません。現在のパックが v5 計画を抱えていることも、古いパックが v6 計画に出会うこともあるためです。
 
 契約の `schema` URL がその**世代**を示し、マニフェストとすべてのジャーナルイベントはそれを反映します。
@@ -26,8 +25,10 @@ section: Record layer
 | --- | --- | --- | --- | --- |
 | v6 | [`plan-contract/v6`](https://deepworkplan.com/schema/plan-contract/v6.json) | [`journal-event/v6`](https://deepworkplan.com/schema/journal-event/v6.json) | [`plan-manifest/v6`](https://deepworkplan.com/schema/plan-manifest/v6.json) | — |
 | v7 | [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json) | [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `parallel_safe` と `delegation` イベント（[委任](/spec/delegation)） |
+| v8 | [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json) | [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json) | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json) | `autonomy` とループ権限 |
+v8 のライブスナップショットは [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json) を使用します。
 
-7.x パックが作成する新しい計画は既定で v7 です。明示的に `v6` を要求すれば、引き続き v6 の契約がマテリアライズされます。計画が世代を変えることは決してなく、世代が混在したジャーナルは拒否されなければなりません（MUST）。どちらの世代も同じ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) の形へ投影されます。
+8.x パックが作成する新しい計画は既定で v8 です。明示的に `v6` を要求すれば、引き続き v6 の契約がマテリアライズされます。計画が世代を変えることは決してなく、世代が混在したジャーナルは拒否されなければなりません（MUST）。どちらの世代も同じ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) の形へ投影されます。
 
 ## アウトカム契約
 

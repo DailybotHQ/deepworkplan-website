@@ -1,8 +1,8 @@
 # PLAN_STATE.md — Machine-Readable Plan State
 
 > **Version scope:** This is a retained v5.0.0 base document. The current
-> v6 standard also requires the applicable `V6_*.md` extensions indexed in
-> [README.md](README.md). Existing v5 plans keep this document’s recorded rules.
+> standard (8.0.0) also requires the applicable `V6_*.md` extensions, their
+> v7 additions and `LOOP_ENGINEERING.md`, indexed in [README.md](README.md). Existing v5 plans keep this document’s recorded rules.
 
 ## Abstract
 
@@ -471,7 +471,11 @@ new-generation URL — `https://deepworkplan.com/schema/plan-snapshot/v6.json`
 is a generation snapshot of the v2 shape), and the v6 snapshot is a
 different artifact projected from the journal, not a mutation of those
 shapes. The same rule gave v6 the `plan-contract/v6` and
-`journal-event/v6` labels.
+`journal-event/v6` labels. v8 plans project into the next generation of
+that label, `https://deepworkplan.com/schema/plan-snapshot/v8.json`
+(`spec/schema/plan-snapshot-v8.schema.json`): the v6 shape with `blocker`
+as the active structured blocker and `blocked` as a derived task status
+([`LOOP_ENGINEERING.md`](LOOP_ENGINEERING.md) §3).
 
 **Materialization order.** `shared/ledger.py materialize` writes the v6
 records in exactly this order — manifest, contract, approval event — each

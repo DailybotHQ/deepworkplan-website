@@ -8,7 +8,7 @@ section: Workflow
 
 # Planos Lite
 
-> **Escopo da versão:** Este é um documento-base v5.0.0 mantido. O padrão atual, DWP 7.0.0, também exige as extensões `V6_*.md` e `V7_*.md` aplicáveis listadas no [índice da especificação](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Os planos v5 e v6 existentes mantêm as regras registradas.
+> **Escopo da versão:** Este é um documento-base v5.0.0 mantido. O padrão atual, DWP 8.0.0, também exige as extensões `V6_*.md` e `V7_*.md` aplicáveis listadas no [índice da especificação](https://github.com/DailybotHQ/deepworkplan-skill/blob/main/skills/deepworkplan/spec/README.md). Os planos v5 e v6 existentes mantêm as regras registradas.
 
 **Versão 5.0.0. Status: Estável.** Este documento especifica a representação de plano Lite introduzida junto com a [Especificação do DWP](/spec/dwp-specification): um formato de plano para trabalho pequeno a médio e delimitado que é materializado diretamente, sem uma etapa de rascunho não executável. As palavras-chave MUST, MUST NOT, SHOULD, SHOULD NOT e MAY devem ser interpretadas conforme descrito na RFC 2119.
 
@@ -17,7 +17,6 @@ section: Workflow
 Um plano DEVE (MUST) ser uma de duas representações, registrada uma vez em `manifest.json` como `plan_format`: **Full** armazena um arquivo por tarefa em `<n>.task_<slug>.md`; **Lite** armazena registros de tarefa compactos e executáveis em linha em `README.md`, cada um atrás de uma âncora estável `{#task-N}`. Um plano Lite não é um plano Full parcial ou informal: todo registro de tarefa DEVE (MUST) continuar carregando um objetivo, uma Superfície tocada, critérios de aceitação, um validation gate e um Completion & Log, na mesma forma normativa que a [Anatomia da tarefa](/spec/dwp-specification#task-anatomy) define para Full.
 
 Quatro eixos descrevem o estado de um plano, e DEVEM (MUST) ser rastreados independentemente, em vez de misturados:
-
 | Eixo | Valores | Significado |
 |------|--------|-------------|
 | Formato | `lite`, `full` | Onde vivem os registros de tarefa |

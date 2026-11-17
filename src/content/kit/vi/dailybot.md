@@ -12,6 +12,8 @@ Kết nối thực thi Deep Work Plan với **nhóm Dailybot** để con ngườ
 
 Phương pháp Deep Work Plan cốt lõi có **không** phụ thuộc Dailybot. Kho lưu trữ không có addon tùy chọn nào vẫn hoàn toàn tuân thủ. Chỉ đề xuất addon này khi nhà phát triển hoặc nhóm đã dùng Dailybot; không bao giờ tự động cài cho mọi người.
 
+Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harness, loop engineering và hiệu quả đo được. Addon và các tích hợp có thể mở rộng harness và vòng lặp; phương pháp vẫn hoạt động độc lập.
+
 ## Khi nào dùng
 
 | Tín hiệu | Hành động |

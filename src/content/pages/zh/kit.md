@@ -1,8 +1,10 @@
 ---
 title: "Deep Work Plan 套件"
 description: "让 Deep Work Plan 可在任何地方运行的技能及其九个子技能、命令、代理适配器、接入预设、可选附加组件与示例。"
-lastUpdated: 2026-10-09
+lastUpdated: 2026-11-16
 ---
+
+Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
 ## Deep Work Plan 套件
 
@@ -10,10 +12,10 @@ lastUpdated: 2026-10-09
 `DailybotHQ/deepworkplan-skill` 安装：
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v7.12.2 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.2 --skill deepworkplan -y
 ```
 
-当前 7.x 技能包默认使用 v7 创建新计划。现有计划保留记录的代际；迁移必须明确请求。
+当前 8.x 技能包默认使用 v8 契约（`plan-contract/v8`）创建新计划。v7、v6 和 v5 的计划保留其记录的代际；只有通过明确的 `refine` 迁移才会进行迁移。
 
 ### 技能及其各子技能
 
@@ -65,12 +67,12 @@ onboard 流程向仓库叠加的各项能力。其中七个是可选的，绝非
 **方法论可以独立运作。附加组件让它更强。** 每个附加组件都是 Deep Work Plan 技能中的一个轻量集成层，按 tag 固定到一个拥有独立仓库、发布版本和接口版本的产品。每个产品都可以脱离 Deep Work Plan 独立运行，且不需要任何附加组件。
 
 - **Deep Work Plan 技能** — 创建、执行、验证、恢复和完善计划。无需任何附加组件。
-- **[herdr](/zh/kit/herdr)** — 在任意机器上的 Herdr 窗格中协作的对等方：交互式委派，仅允许一次经授权的回复。固定于：`herdr-peers@v2.0.0`。
-- **[agentkit](/zh/kit/agentkit)** — 一个 ak 命令适用于所有终端编码代理：默认自主运行并可选择退出，并在 worktree 中进行无界面委派。固定于：`coding-agents-kit@v1.4.0`。
-- **[devcontainer](/zh/kit/devcontainer)** — 用一个模板生成每个仓库自己的开发容器：代理经由 ak 运行，Herdr 双向互通，仅在选择启用时才放入 SSH 密钥。固定于：`devcontainer-kit@v1.2.0`。
-- **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v1.0.1`。
+- **[herdr](/zh/kit/herdr)** — 在任意机器上的 Herdr 窗格中协作的对等方：交互式委派，仅允许一次经授权的回复。固定于：`herdr-peers@v2.2.0`。
+- **[agentkit](/zh/kit/agentkit)** — 一个 ak 命令适用于所有终端编码代理：默认自主运行并可选择退出，并在 worktree 中进行无界面委派。固定于：`coding-agents-kit@v1.5.0`。
+- **[devcontainer](/zh/kit/devcontainer)** — 用一个模板生成每个仓库自己的开发容器：代理经由 ak 运行，Herdr 双向互通，仅在选择启用时才放入 SSH 密钥。固定于：`devcontainer-kit@v1.4.0`。
+- **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v1.1.0`。
 
-附加组件注册表和描述文件随 Deep Work Plan v7 发布： `v7.12.2`
+附加组件注册表和描述文件随 Deep Work Plan v8 发布： `v8.0.2`
 
 ### 示例
 

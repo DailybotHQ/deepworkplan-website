@@ -8,16 +8,17 @@ section: State
 
 # 계획 상태
 
-> **버전 범위:** 이 페이지는 v5 계획이 수명 전체 동안 유지하는 **v5 상태 레이어**를 명시합니다. 현재 팩(DWP 7.0.0, 릴리스 `v7.12.2`)이 생성하는 계획은 대신 [기록 레이어](/spec/record-layer)를 사용합니다. v6 또는 v7 계획에서는 결과 계약(`contract.json`)이 권한의 근거이고, 추가 전용 저널(`journal.ndjson`)이 진실 공급원이며, `state.json`은 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json)을 따르는 **파생 스냅샷**입니다. 이 스냅샷은 `ledger.py project`로 재생성되며 손으로 편집해서는 안 됩니다(MUST NOT).
+> **버전 범위:** 이 페이지는 v5 계획이 수명 전체 동안 유지하는 **v5 상태 레이어**를 명시합니다. 현재 팩(DWP 8.0.0, 릴리스 `v8.0.0`)이 생성하는 계획은 대신 [기록 레이어](/spec/record-layer)를 사용합니다. v6, v7 또는 v8 계획에서는 결과 계약(`contract.json`)이 권한의 근거이고, 추가 전용 저널(`journal.ndjson`)이 진실 공급원이며, `state.json`은 [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json)을 따르는 **파생 스냅샷**입니다. 이 스냅샷은 `ledger.py project`로 재생성되며 손으로 편집해서는 안 됩니다(MUST NOT).
 
 ## 어떤 상태 레이어가 적용되는가
 
 | 계획 세대 | 진실 공급원 | `state.json` | 스키마 |
 | --- | --- | --- | --- |
 | v5(및 이전의 v1/v2 계획) | Markdown 계획, 이 JSON 레이어는 그 프로젝션 | 아래 프로토콜 지점에서 에이전트가 작성 | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json)(이전 계획에는 v1과 v2가 계속 유효) |
-| v6 및 v7 | 계약과 추가 전용 저널 | 저널에서 투영된 스냅샷, 손으로 작성하는 일은 결코 없음 | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)(또는 그 v6 대응 스키마) |
+| v6 및 v7 | 계약과 추가 전용 저널 | 저널에서 투영된 스냅샷, 손으로 작성하는 일은 결코 없음 | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json)(또는 그 v6 대응 스키마) ; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
-계획은 암묵적으로 세대를 바꾸는 일이 결코 없습니다: v5 계획은 이 규칙을 유지하며, v6으로 옮기는 것은 명시적이고 미리 보기가 제공되는 마이그레이션입니다([기록 레이어](/spec/record-layer#coexistence-and-migration)). 정식 출처: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v7.12.2/skills/deepworkplan/spec/V7_CONTRACT.md).
+v8 계획은 `plan-manifest/v7`과 함께 `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8`을 사용합니다. v7 manifest 및 journal-event 스키마는 기존 계획에 계속 지원됩니다.
+계획은 암묵적으로 세대를 바꾸는 일이 결코 없습니다: v5 계획은 이 규칙을 유지하며, v6으로 옮기는 것은 명시적이고 미리 보기가 제공되는 마이그레이션입니다([기록 레이어](/spec/record-layer#coexistence-and-migration)). 정식 출처: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md).
 
 **버전 5.0.0. 상태: 안정(Stable).** 이 문서는 Deep Work Plan 방법론의 기계 가독 계획 상태 레이어를 명시하며, 이제 DWP 표준 자체의 버전과 맞춰져 있습니다 — 이 재번호 매기기로 인해 기존 요건이 약화되는 일은 없습니다. 이번 개정은 또한 보호된 상태 업데이터, 검증된 계획 발행, 그리고 완료된 계획이 충족해야 하는 증거-진실 규칙(아래 참고)을 문서화합니다. 키워드 MUST, MUST NOT, SHOULD, SHOULD NOT, MAY는 RFC 2119에 기술된 대로 해석됩니다.
 
@@ -236,7 +237,7 @@ Markdown은 모든 불일치에서 이겨야(MUST) 합니다. `state.json`이 �
 
 ## v7 및 v6 스키마와 호환성
 
-현재 7.x 팩은 기본적으로 **v7** 계획을 생성합니다. v7은 v6 기록 계층의 contract 세대입니다. [v7 manifest](https://deepworkplan.com/schema/plan-manifest/v7.json)는 [v7 contract](https://deepworkplan.com/schema/plan-contract/v7.json)(v6 contract에 선택적 `parallel_safe` 작업 표시를 더한 것)를 가리키며, 모든 [v7 저널 이벤트](https://deepworkplan.com/schema/journal-event/v7.json)는 `delegation`(launched, completed, failed, cancelled)도 기록할 수 있습니다. 이는 그 자체로 결코 증거가 아닙니다: 위임받은 에이전트의 결과는 계획 자체의 러너가 관찰할 때까지 주장된 상태로 남습니다. 라이브 스냅샷과 작업 컨텍스트 매니페스트는 v6과 공유됩니다. 계획은 세대를 결코 섞지 않으며, 명시적으로 `v6`을 요청하면 여전히 v6 계획이 생성됩니다.
+현재 8.x 팩은 기본적으로 **v8** 계획을 생성합니다. v8은 v6 기록 계층의 contract 세대입니다. [v7 manifest](https://deepworkplan.com/schema/plan-manifest/v7.json)는 [v7 contract](https://deepworkplan.com/schema/plan-contract/v7.json)(v6 contract에 선택적 `parallel_safe` 작업 표시를 더한 것)를 가리키며, 모든 [v7 저널 이벤트](https://deepworkplan.com/schema/journal-event/v7.json)는 `delegation`(launched, completed, failed, cancelled)도 기록할 수 있습니다. 이는 그 자체로 결코 증거가 아닙니다: 위임받은 에이전트의 결과는 계획 자체의 러너가 관찰할 때까지 주장된 상태로 남습니다. 라이브 스냅샷과 작업 컨텍스트 매니페스트는 v6과 공유됩니다. 계획은 세대를 결코 섞지 않으며, 명시적으로 `v6`을 요청하면 여전히 v6 계획이 생성됩니다.
 
 v6는 v5 방법론을 유지하면서 새 계획에 더 엄격한 엔지니어링 구조를 추가합니다. 식별 매니페스트는 버전이 지정된 계약을 가리키고, 추가 전용 저널은 권한과 이벤트를 기록합니다. 작업별 컨텍스트 매니페스트는 컨텍스트 선택을 명시하며 스케줄러는 실행 가능한 작업만 전달합니다. 라이브 프로젝션 `state.json`은 저널에서 생성되는 스냅샷입니다. 빈 허용 목록은 거부됩니다. 이는 아키텍처 결정이며 에이전트 성과가 더 좋다는 증거가 아닙니다. 성과 비열등성은 측정되지 않았습니다.
 

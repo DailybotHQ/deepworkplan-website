@@ -41,7 +41,7 @@ Setiap lane memiliki rencana, setidaknya rencana Lite di repositorinya sendiri, 
 
 ## Loop kapasitas
 
-Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah gate atau langkah apa pun yang berjalan lebih dari 20 menit, setiap kali CLI-nya menampilkan peringatan batas penggunaan, dan sebelum menerima handoff atau kepemimpinan. Pemeriksaannya adalah `ak capacity --self --json` dari coding-agents-kit `v1.4.0`, yang diubah helper pack menjadi sebuah keputusan:
+Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah gate atau langkah apa pun yang berjalan lebih dari 20 menit, setiap kali CLI-nya menampilkan peringatan batas penggunaan, dan sebelum menerima handoff atau kepemimpinan. Pemeriksaannya adalah `ak capacity --self --json` dari coding-agents-kit `v1.5.0`, yang diubah helper pack menjadi sebuah keputusan:
 
 | Verdict | Keputusan | Sebuah lane | Sebuah lead, untuk dirinya sendiri |
 | --- | --- | --- | --- |
@@ -68,7 +68,7 @@ Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah ga
 
 ## Suksesi lead
 
-herdr-peers `v2.0.0` menyimpan satu catatan lead per rencana — lead, epoch, daftar suksesi, dan lane — dan mengarahkan alamat `lead` ke lead saat ini, sehingga tidak ada arahan lane yang menuliskan panel lead secara permanen.
+herdr-peers `v2.2.0` menyimpan satu catatan lead per rencana — lead, epoch, daftar suksesi, dan lane — dan mengarahkan alamat `lead` ke lead saat ini, sehingga tidak ada arahan lane yang menuliskan panel lead secara permanen.
 
 - **Klaim dulu, lalu luncurkan.** Lead menjalankan `herdr-peers lead claim --plan <P> --succession <A,B>` sebelum meluncurkan lane mana pun — alamat `lead` baru dapat di-resolve setelah sebuah catatan ada — memperbarui catatan itu dengan `--lanes <A,B>` saat lane dimulai, dan menjalankan `lead release` ketika rencana selesai. Sejak herdr-peers (`v0.3.2`), catatan itu menyimpan repositori yang mengklaimnya secara lokal, dan rencana dengan id yang sama di repositori lain dinamai `--plan <repo>/<id>`. Suksesi default adalah penerus yang direncanakan, lalu lane di checkout rencana itu sendiri menurut urutan peluncuran, lalu lane mana pun di host yang sama; lane di container atau di mesin lain berada di urutan terakhir.
 - **Handover, terencana.** Pada `low`, lead menunjuk calon penerus. Pada `critical`, ia menulis paket lead — tabel lane, ask yang terbuka, urutan rilis, merge yang tertunda, keputusan — menjalankan `herdr-peers lead handover <addr> --plan <P>`, yang menaikkan epoch dan memberi tahu setiap lane, lalu berhenti. Penerus menerima paket, melanjutkan rencana orkestrator, dan memeriksa ulang setiap lane.
@@ -117,3 +117,7 @@ Jurnal rencana orkestrator mencatat swarm: peluncuran dan hasil lane sebagai eve
 ## Melatihnya
 
 Buktikan loop ini sebelum mengandalkannya. Pada repositori percobaan dengan rencana orkestrator kecil, jalankan satu lead dan setidaknya tiga lane pada akun atau vendor yang berbeda. Batasi kapasitas yang dilaporkan satu lane — `AGENTKIT_CAPACITY_CAP=@<profile>=8` menurunkan pembacaan dan tidak pernah dapat menaikkannya — dan amati lane itu menulis paket, lead meluncurkan penerus yang menerimanya, dan penerus itu lulus gate. Batasi lead dengan cara yang sama dan amati handover serta lead baru menyelesaikan rencana. Lalu catat buktinya di `analysis_results/` milik rencana: tanpa penekanan tombol manusia, setiap paket, setiap epoch, satu ask antar-lane, dan gate-nya.
+
+## Menutup loop eksekusi
+
+Daemon loop yang opsional melanjutkan rencana yang disetujui dari catatan lead-nya, mendorong tanpa menambah wewenang, dan meminta penerus dalam daftar mengambil alih saat lead hilang. Manusia yang memulainya; kredensial, login, dan gate C1–C7 milik rencana tetap menjadi tindakan manusia. Lihat [Loop engineering](/id/methodology/08-loop-engineering).

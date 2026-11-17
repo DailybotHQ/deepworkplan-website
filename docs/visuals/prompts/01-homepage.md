@@ -47,7 +47,12 @@
 >   with soft (not hard-cropped) edges, centered with margin.
 > This is the default for the whole pack — already folded into each prompt below.
 
-### HP-01 — Hero illustration (repository as harness / guiding light)
+### HP-01 — Hero illustration (repository as harness / guiding light) — retired
+
+> **Retired 2026-11-16.** The hero's right column now renders the v8 loop
+> diagram (`src/components/diagrams/home/LoopDiagram.astro`, HTML/CSS, 17
+> languages). The engraving pair generated from this prompt was deleted from
+> `public/images/visuals/home/`; the prompt below is kept as history only.
 
 - **Target surface:** `src/components/home/Hero.astro` → the right column. The hero currently constrains content to `max-w-3xl` on the left; integration exposes a right column on `lg` to hold this illustration.
 - **Type:** illustration
@@ -445,7 +450,7 @@
 
 | ID | Kind | Status |
 | :-- | :-- | :-- |
-| HP-01 | illustration (image) | done — hero faro |
+| HP-01 | illustration (image) | retired — replaced by the v8 loop diagram |
 | HP-02 | illustration (image) | done — pitch chart |
 | HP-03 | diagram (component) | done — `QuickstartFlow` |
 | HP-04 | diagram (component) | done — `OnboardingSequence` |

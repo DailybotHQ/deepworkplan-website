@@ -50,7 +50,7 @@ Le primitive di scheduling di OpenClaw si mappano direttamente sul modello di co
 Operativamente:
 
 1. Un essere umano crea e approva un piano in modo interattivo. L'approvazione è il punto di controllo — i turni non presidiati non creano ed eseguono in un unico turno.
-2. Il piano deve portare il livello di stato leggibile dalle macchine (`manifest.json` + `state.json`). In un workspace senza git, `state.json` è ciò che rende possibile la ripresa sicura dopo un crash. Vedi [Stato del piano](/spec/plan-state). Nei piani v6 e v7, lo stato viene proiettato dal giornale di solo accodamento (`journal.ndjson`) tramite `ledger.py project` anziché riscrivere manualmente i file di stato.
+2. Il piano deve portare il livello di stato leggibile dalle macchine (`manifest.json` + `state.json`). In un workspace senza git, `state.json` è ciò che rende possibile la ripresa sicura dopo un crash. Vedi [Stato del piano](/spec/plan-state). Nei piani v6, v7 e v8, lo stato viene proiettato dal giornale di solo accodamento (`journal.ndjson`) tramite `ledger.py project` anziché riscrivere manualmente i file di stato.
 3. Ogni heartbeat o turno cron esegue al massimo un'attività, supera il suo validation gate, aggiorna `state.json` atomicamente e cede il controllo.
 4. In caso di stop condition, l'agente scrive il campo `blocked` di `state.json` e notifica attraverso il canale normale del workspace. La prossima occhiata umana — o il report del heartbeat — vede esattamente ciò che è necessario.
 
