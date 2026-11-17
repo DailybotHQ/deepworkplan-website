@@ -6,7 +6,7 @@ lastUpdated: 2026-11-17
 
 *Najpierw specyfikacja · zamknięta pętla*
 
-## Każdy agent AI dokończy pracę w Twoim repozytorium.
+## Każdy agent AI może dokończyć pracę w Twoim repozytorium.
 
 Repozytorium przechowuje plan, kontekst i kontrole, więc praca przetrwa restarty, przechodzi między agentami i trwa w pętli, aż każda bramka zostanie zaliczona — w granicach uprawnień, które nadajesz.
 

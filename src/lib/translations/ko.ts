@@ -100,7 +100,7 @@ export const ko: SiteTranslations = {
         '스펙 우선, 루프로 완결: Deep Work Plan은 리포지토리를 AI 코딩 에이전트의 하니스로 만들고, 각 계획은 사람이 시작한 루프로 완료까지 실행됩니다.',
     },
     hero: {
-      eyebrow: '스펙 우선 · 폐루프',
+      eyebrow: '스펙 우선 · 루프로 완결',
       leadSentence:
         '스펙 우선, 루프로 완결: 리포지토리가 하니스이며 계획은 스스로 완료까지 실행됩니다.',
       headline: '어떤 AI 에이전트든 작업을 끝낼 수 있는 저장소로 만드세요.',

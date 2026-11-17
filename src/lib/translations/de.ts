@@ -102,12 +102,12 @@ export const de: SiteTranslations = {
         'Spec-first, mit geschlossenem Loop: Deep Work Plan macht Ihr Repository zum Harness für KI-Coding-Agenten, und jeder Plan läuft im Loop bis zum Ende.',
     },
     hero: {
-      eyebrow: 'Spec-first · geschlossener Regelkreis',
+      eyebrow: 'Spec-first · geschlossener Loop',
       leadSentence:
         'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.',
-      headline: 'Jeder KI-Agent bringt die Arbeit in deinem Repo zu Ende.',
+      headline: 'Jeder KI-Agent bringt die Arbeit in Ihrem Repo zu Ende.',
       subtitle:
-        'Dein Repository hält den Plan, den Kontext und die Prüfungen. So übersteht die Arbeit Neustarts, wechselt zwischen Agenten und läuft in der Schleife weiter, bis jedes Gate besteht – im Rahmen der Befugnisse, die du erteilst.',
+        'Ihr Repository hält den Plan, den Kontext und die Prüfungen. So übersteht die Arbeit Neustarts, wechselt zwischen Agenten und läuft in der Schleife weiter, bis jedes Gate besteht – im Rahmen der Befugnisse, die Sie erteilen.',
       instructionLabel: 'In Ihren Agenten kopieren',
       instruction:
         'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',

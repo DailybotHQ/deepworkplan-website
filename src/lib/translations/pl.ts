@@ -106,7 +106,7 @@ export const pl: SiteTranslations = {
       eyebrow: 'Najpierw specyfikacja · zamknięta pętla',
       leadSentence:
         'Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.',
-      headline: 'Każdy agent AI dokończy pracę w Twoim repozytorium.',
+      headline: 'Każdy agent AI może dokończyć pracę w Twoim repozytorium.',
       subtitle:
         'Repozytorium przechowuje plan, kontekst i kontrole, więc praca przetrwa restarty, przechodzi między agentami i trwa w pętli, aż każda bramka zostanie zaliczona — w granicach uprawnień, które nadajesz.',
       instructionLabel: 'Skopiuj do swojego agenta',

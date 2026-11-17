@@ -105,9 +105,9 @@ export const it: SiteTranslations = {
       eyebrow: 'Prima la specifica · ciclo chiuso',
       leadSentence:
         'Prima la specifica, loop chiuso: il repository è la harness e il piano si esegue da solo fino alla fine.',
-      headline: 'Qualsiasi agente IA porta a termine il lavoro nel tuo repo.',
+      headline: 'Qualsiasi agente IA porta a termine il lavoro nel Suo repo.',
       subtitle:
-        'Il tuo repository custodisce il piano, il contesto e i controlli, così il lavoro sopravvive ai riavvii, passa da un agente all’altro e continua in ciclo finché ogni gate non è superato, entro l’autorità che concedi.',
+        'Il Suo repository custodisce il piano, il contesto e i controlli, così il lavoro sopravvive ai riavvii, passa da un agente all’altro e continua in ciclo finché ogni gate non è superato, entro l’autorità che Lei concede.',
       instructionLabel: 'Copia nel Suo agente',
       instruction:
         'Copi il prompt di init.md e lo incolli nel Suo agente di coding — Claude Code, Cursor, Codex o qualsiasi altro — per rendere qualsiasi repository AI-first.',

@@ -6,9 +6,9 @@ lastUpdated: 2026-11-17
 
 *Prima la specifica · ciclo chiuso*
 
-## Qualsiasi agente IA porta a termine il lavoro nel tuo repo.
+## Qualsiasi agente IA porta a termine il lavoro nel Suo repo.
 
-Il tuo repository custodisce il piano, il contesto e i controlli, così il lavoro sopravvive ai riavvii, passa da un agente all’altro e continua in ciclo finché ogni gate non è superato, entro l’autorità che concedi.
+Il Suo repository custodisce il piano, il contesto e i controlli, così il lavoro sopravvive ai riavvii, passa da un agente all’altro e continua in ciclo finché ogni gate non è superato, entro l’autorità che Lei concede.
 
 Deep Work Plan (DWP) è una metodologia e un kit aperti, sotto licenza MIT, per pianificare ed eseguire lavoro software complesso con agenti AI. Non sceglie un metodo di installazione né copia un template — copia il prompt di init.md e lo incolla nel Suo agente:
 
