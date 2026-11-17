@@ -109,7 +109,7 @@ sampai sudah diperiksa.
   | deepworkplan-skill | `v8.0.1` | `0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
   | herdr-peers | `v2.1.0` | `02837b819e79033cc9ea1fa0498c2fcd5966f86117080e16a7e44fb976966787` |
-  | devcontainer-kit | `v1.3.0` | `663b06f3be1108b93d401e8b9ec9da77b1f6953b86a98729bf54a8bfc5fae969` |
+  | devcontainer-kit | `v1.4.0` | `67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2` |
   | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | tidak diterbitkan — skills CLI mencatat hash konten di `skills-lock.json` |
@@ -250,7 +250,7 @@ Tabel ini adalah rujukan, bukan daftar periksa: jalankan sebuah baris hanya untu
 | Dailybot | `version:` di `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` di skill herdr-peers yang terpasang | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.1.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | installer terverifikasi di https://deepworkplan.com/vim/install.sh (mematok `v1.1.0`; unduh, `shasum -a 256 -c install.sh.sha256`, lalu jalankan) |
 
 Verifikasi setiap unduhan terhadap `SHA256SUMS` rilisnya dan digest di *Rilis yang dipatok* di atas
@@ -265,7 +265,7 @@ design system, agentkit, Herdr, DeepWorkPlan Vim) dan tawarkan hanya yang cocok 
 eksplisit. Sebuah repositori sepenuhnya konforman dengan **nol** addon opsional — jangan pernah
 memasang yang itu secara otomatis.
 
-- **Dukungan devcontainer** — integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v1.3.0`, dengan skill `dck-dockerfile`-nya): `dck init` merender container milik repositori itu sendiri — image resmi yang dipatok berdasarkan digest, tanpa base image bersama, `bash dev.sh up` — dan merekonsiliasi devcontainer yang sudah ada hanya setelah diff-nya diterima. Ketika diterima, ikuti *Jalur devcontainer* di bawah hingga stack lengkap.
+- **Dukungan devcontainer** — integrator tipis untuk [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, dipatok pada `v1.4.0`, dengan skill `dck-dockerfile`-nya): `dck init` merender container milik repositori itu sendiri — image resmi yang dipatok berdasarkan digest, tanpa base image bersama, `bash dev.sh up` — dan merekonsiliasi devcontainer yang sudah ada hanya setelah diff-nya diterima. Ketika diterima, ikuti *Jalur devcontainer* di bawah hingga stack lengkap.
 - **Integrasi Dailybot** — empat peristiwa siklus hidup (kickoff, tugas signifikan, terblokir, penyelesaian) sebagai pelaporan kemajuan secara best-effort untuk tim yang sudah memakai Dailybot, dengan penegakan hook otonom opsional (`dailybot-cli >= 3.9.0`). Memasang skill agent Dailybot yang dipasangkan (3.23.20) juga membuka chat, check-in, penulisan form, tanya AI, board dan tugas Plan, API key per repo, dan lainnya — addon ini hanya menghubungkan pelaporan ke eksekusi DWP. Metodologi inti tidak memiliki ketergantungan apa pun pada Dailybot.
 - **Dependency upgrade** — peningkatan yang agnostik terhadap package manager, terkelompok, tervalidasi, dan dapat dikembalikan. Ketika
   diterima, ia memasang command `/lib-upgrade`.

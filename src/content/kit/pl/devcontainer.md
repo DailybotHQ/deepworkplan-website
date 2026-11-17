@@ -23,20 +23,20 @@ Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop e
 ## Instalacja
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v1.3.0`: `v0.2.0` nie jest obsługiwane.
+Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v1.4.0`: `v0.2.0` nie jest obsługiwane.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, tag `v1.3.0`, interfejs 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, tag `v1.4.0`, interfejs 2 |
 | Klucz rejestru | `devcontainer` w `.dwp/config.json` |
 | Konfiguracja repozytorium | `.devcontainer/dck.toml` |
 | Wykrywanie | `dck doctor --json` |
 
-**Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie wyłącznie w nowej wersji głównej (a w przypadku plików — z nowym numerem interfejsu): czasowniki `dck` wraz z udokumentowanymi flagami i kodami wyjścia (`0` sukces, `1` błąd, `2` użycie, `3` konfiguracja, `4` środowisko, `5` odmowa), schematy `dck.toml`, profilu hosta i `dck doctor --json` (interfejs 2) oraz kontrakt renderowania — pliki, które `dck init` zapisuje i którymi zarządza, znaczniki `dck:managed` i bloki użytkownika, które zachowuje, oraz środowisko odczytywane przez entrypoint. Przy przejściu z `v0.3.7` nic się nie psuje: uruchom `dck init` i `dck rebuild`, aby obraz zawierał aktualne przypięte wersje. Obraz `v1.3.0` zawiera te same wersje co `v1.2.0`: herdr-peers 1.3.1, coding-agents-kit 1.4.0 i DeepWorkPlan Vim 1.0.1, a także dołączony pakiet 7.12.1.
+**Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie wyłącznie w nowej wersji głównej (a w przypadku plików — z nowym numerem interfejsu): czasowniki `dck` wraz z udokumentowanymi flagami i kodami wyjścia (`0` sukces, `1` błąd, `2` użycie, `3` konfiguracja, `4` środowisko, `5` odmowa), schematy `dck.toml`, profilu hosta i `dck doctor --json` (interfejs 2) oraz kontrakt renderowania — pliki, które `dck init` zapisuje i którymi zarządza, znaczniki `dck:managed` i bloki użytkownika, które zachowuje, oraz środowisko odczytywane przez entrypoint. Przy przejściu z `v0.3.7` nic się nie psuje: uruchom `dck init` i `dck rebuild`, aby obraz zawierał aktualne przypięte wersje. Obraz `v1.4.0` zawiera te same wersje co `v1.2.0`: herdr-peers 1.3.1, coding-agents-kit 1.4.0 i DeepWorkPlan Vim 1.0.1, a także dołączony pakiet 7.12.1.
 
 ## Warstwy
 

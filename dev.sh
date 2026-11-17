@@ -18,7 +18,7 @@
 set -euo pipefail
 DCK_RENDERED_WITH="v1.3.0"
 # sha256 of that release's SHA256SUMS, when the rendering dck knew it (else empty).
-DCK_SUMS_SHA256="663b06f3be1108b93d401e8b9ec9da77b1f6953b86a98729bf54a8bfc5fae969"
+DCK_SUMS_SHA256="67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2"
 # The compose project dck uses, so plain compose never acts on another checkout.
 DCK_PROJECT="deepworkplan-website"
 cd "$(dirname "$0")"

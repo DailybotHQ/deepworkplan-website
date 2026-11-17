@@ -23,20 +23,20 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 ## Kurulum
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.3.0` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.4.0` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v1.3.0` etiketi, arayüz 2 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v1.4.0` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
-**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın güncel sabitlenmiş sürümleri içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın. `v1.3.0` imajı, `v1.2.0` ile aynı sürümleri içerir: herdr-peers 1.3.1, coding-agents-kit 1.4.0 ve DeepWorkPlan Vim 1.0.1; vendored paket 7.12.1 de imajın içindedir.
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın güncel sabitlenmiş sürümleri içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın. `v1.4.0` imajı, `v1.2.0` ile aynı sürümleri içerir: herdr-peers 1.3.1, coding-agents-kit 1.4.0 ve DeepWorkPlan Vim 1.0.1; vendored paket 7.12.1 de imajın içindedir.
 
 ## Katmanlar
 

@@ -23,20 +23,20 @@ Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하
 ## 설치
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.3.0`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
+요구 사항: Linux 또는 macOS 호스트의 `bash` 3.2 이상과 `python3` 3.11 이상, 그리고 컨테이너 명령을 위한 Docker와 Compose v2. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요. `v1.4.0`에 고정하세요. `v0.2.0`은 지원되지 않습니다.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.3.0`, 인터페이스 2 |
+| 제품 | `DailybotHQ/devcontainer-kit`, 태그 `v1.4.0`, 인터페이스 2 |
 | 레지스트리 키 | `.dwp/config.json`의 `devcontainer` |
 | 리포지토리별 설정 | `.devcontainer/dck.toml` |
 | 감지 | `dck doctor --json` |
 
-**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 현재 고정 버전을 담도록 하세요. `v1.3.0` 이미지에는 `v1.2.0`과 같은 버전이 들어 있습니다. herdr-peers 1.3.1, coding-agents-kit 1.4.0, DeepWorkPlan Vim 1.0.1이며, 벤더링된 팩 7.12.1도 이미지에 포함됩니다.
+**`v1.0.0`부터 안정 버전입니다.** 공개 인터페이스는 시맨틱 버저닝을 따르며, 호환성을 깨는 변경은 새 메이저 버전에서만 이루어집니다(파일의 경우 새 인터페이스 번호도 함께). 그 대상은 `dck` 동사와 문서화된 플래그 및 종료 코드(`0` 성공, `1` 실패, `2` 사용법, `3` 구성, `4` 환경, `5` 거부), `dck.toml`, 호스트 프로필, `dck doctor --json` 스키마(인터페이스 2), 그리고 렌더링 계약, 즉 `dck init`이 작성하고 소유하는 파일, 그것이 보존하는 `dck:managed` 마커와 사용자 블록, 엔트리포인트가 읽는 환경입니다. `v0.3.7`에서 넘어올 때 깨지는 것은 없습니다. `dck init`과 `dck rebuild`를 실행해 이미지가 현재 고정 버전을 담도록 하세요. `v1.4.0` 이미지에는 `v1.2.0`과 같은 버전이 들어 있습니다. herdr-peers 1.3.1, coding-agents-kit 1.4.0, DeepWorkPlan Vim 1.0.1이며, 벤더링된 팩 7.12.1도 이미지에 포함됩니다.
 
 ## 레이어
 

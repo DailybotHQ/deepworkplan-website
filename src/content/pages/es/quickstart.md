@@ -104,7 +104,7 @@ que ha sido comprobado.
   | deepworkplan-skill | `v8.0.1` | `0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
   | herdr-peers | `v2.1.0` | `02837b819e79033cc9ea1fa0498c2fcd5966f86117080e16a7e44fb976966787` |
-  | devcontainer-kit | `v1.3.0` | `663b06f3be1108b93d401e8b9ec9da77b1f6953b86a98729bf54a8bfc5fae969` |
+  | devcontainer-kit | `v1.4.0` | `67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2` |
   | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | no se publica — la CLI de skills registra un hash de contenido en `skills-lock.json` |
@@ -240,7 +240,7 @@ La tabla es una referencia, no una lista de tareas: ejecuta una fila solo para l
 | Dailybot | `version:` en `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` en la skill herdr-peers instalada | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.1.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | el instalador verificado en https://deepworkplan.com/vim/install.sh (fija `v1.1.0`; descárgalo, `shasum -a 256 -c install.sh.sha256` y luego ejecútalo) |
 
 Verifica cada descarga contra el `SHA256SUMS` de su versión y el digest de *Versiones fijadas* de arriba
@@ -254,7 +254,7 @@ desde el estándar 2.3.0): la skill fijada por tag de arriba más un `.review/ex
 dependencias, design system, agentkit, Herdr, DeepWorkPlan Vim) y ofrece solo los que encajan en este repositorio, cada uno como una opción explícita. Un
 repositorio es totalmente conforme con **cero** addons opcionales — nunca instales esos automáticamente.
 
-- **Soporte de devcontainer** — un integrador ligero de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fijado en `v1.3.0`, con su skill `dck-dockerfile`): `dck init` renderiza el contenedor propio del repositorio (imagen oficial fijada por digest, sin imagen base compartida, `bash dev.sh up`) y concilia un devcontainer existente solo después de que se acepte su diff. Cuando se acepta, sigue *El camino del devcontainer* de abajo hasta el stack completo.
+- **Soporte de devcontainer** — un integrador ligero de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, fijado en `v1.4.0`, con su skill `dck-dockerfile`): `dck init` renderiza el contenedor propio del repositorio (imagen oficial fijada por digest, sin imagen base compartida, `bash dev.sh up`) y concilia un devcontainer existente solo después de que se acepte su diff. Cuando se acepta, sigue *El camino del devcontainer* de abajo hasta el stack completo.
 - **Integración con Dailybot** — cuatro eventos del ciclo de vida (kickoff, tarea significativa, bloqueado, finalización) como informes de progreso de mejor esfuerzo para equipos que ya usan Dailybot, con refuerzo autónomo opcional mediante hooks (`dailybot-cli >= 3.9.0`). La instalación del skill de agente Dailybot emparejado (3.23.20) también expone chat, check-ins, creación de formularios, preguntar a la IA, tableros y tareas de Plan, claves API por repo y más — el addon solo conecta reportes con la ejecución de DWP. La metodología central no tiene dependencia de Dailybot.
 - **Actualización de dependencias** — actualizaciones independientes del gestor de paquetes, por lotes,
  validadas y revertibles. Cuando se acepta, instala el comando `/lib-upgrade`.

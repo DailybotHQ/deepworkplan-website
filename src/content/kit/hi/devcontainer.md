@@ -23,20 +23,20 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.3.0` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.4.0` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.3.0`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.4.0`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
 
-**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.3.0` image में वही संस्करण शामिल हैं जो `v1.2.0` में थे: herdr-peers 1.3.1, coding-agents-kit 1.4.0 और DeepWorkPlan Vim 1.0.1, और vendored पैक 7.12.1 भी image में मौजूद है।
+**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.4.0` image में वही संस्करण शामिल हैं जो `v1.2.0` में थे: herdr-peers 1.3.1, coding-agents-kit 1.4.0 और DeepWorkPlan Vim 1.0.1, और vendored पैक 7.12.1 भी image में मौजूद है।
 
 ## परतें
 

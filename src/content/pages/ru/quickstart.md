@@ -102,7 +102,7 @@ Spec-first, с замкнутым циклом: репозиторий — эт�
   | deepworkplan-skill | `v8.0.1` | `0a49c301d4b2d7e47ad521ec1acd02de1a2477b0bc66acc589f8722abf9a89aa` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
   | herdr-peers | `v2.1.0` | `02837b819e79033cc9ea1fa0498c2fcd5966f86117080e16a7e44fb976966787` |
-  | devcontainer-kit | `v1.3.0` | `663b06f3be1108b93d401e8b9ec9da77b1f6953b86a98729bf54a8bfc5fae969` |
+  | devcontainer-kit | `v1.4.0` | `67761d9e45c9238e07f51ee13d67a1dea5f06f668c9cd39a0df66f8a663344f2` |
   | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | не публикуется — CLI skills записывает хеш содержимого в `skills-lock.json` |
@@ -233,7 +233,7 @@ CI-поверхность, которая никогда не требуется
 | Dailybot | `version:` в `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` в установленном навыке herdr-peers | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.1.0 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.3.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.0 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | проверенный установщик по адресу https://deepworkplan.com/vim/install.sh (закрепляет `v1.1.0`; скачайте, `shasum -a 256 -c install.sh.sha256`, затем запустите) |
 
 Прежде чем запускать любую загрузку, сверьте её с `SHA256SUMS` её релиза и дайджестом в *Закреплённых релизах*
@@ -247,7 +247,7 @@ CI-поверхность, которая никогда не требуется
 design system, agentkit, Herdr, DeepWorkPlan Vim) и предложите только те, что подходят этому репозиторию, каждое как явный opt-in. Репозиторий
 полностью соответствует стандарту и с **нулём** опциональных дополнений — никогда не устанавливайте их автоматически.
 
-- **Поддержка Devcontainer** — тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён `v1.3.0`, с навыком `dck-dockerfile`): `dck init` генерирует собственный контейнер репозитория — официальный образ, закреплённый по digest, без общего базового образа, `bash dev.sh up` — и согласует существующий devcontainer только после того, как его diff принят. После принятия пройдите *Путь devcontainer* ниже до полного стека.
+- **Поддержка Devcontainer** — тонкий интегратор [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, закреплён `v1.4.0`, с навыком `dck-dockerfile`): `dck init` генерирует собственный контейнер репозитория — официальный образ, закреплённый по digest, без общего базового образа, `bash dev.sh up` — и согласует существующий devcontainer только после того, как его diff принят. После принятия пройдите *Путь devcontainer* ниже до полного стека.
 - **Интеграция Dailybot** — четыре события жизненного цикла (kickoff, значимая задача, блокировка, завершение) как отчётность о прогрессе по принципу best-effort для команд, уже использующих Dailybot, с опциональным автономным обеспечением хуков (`dailybot-cli >= 3.9.0`). Установка парного навыка агента Dailybot (3.23.20) также открывает чат, чек-ины, создание форм, вопросы к AI, доски и задачи Plan, API-ключи на репозиторий и многое другое — дополнение подключает только отчётность к выполнению DWP. Основная методология имеет ноль зависимости от Dailybot.
 - **Dependency upgrade** — независимые от менеджера пакетов, партийные, проверяемые, обратимые обновления. При
   принятии оно устанавливает команду `/lib-upgrade`.
