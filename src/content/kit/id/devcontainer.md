@@ -36,7 +36,7 @@ Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di ho
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
 
-**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin saat ini. Image `v1.4.1` memuat herdr-peers 2.1.0, coding-agents-kit 1.5.0, dan DeepWorkPlan Vim 1.1.0.
+**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin saat ini. Image `v1.4.1` memuat herdr-peers 2.2.0, coding-agents-kit 1.5.0, dan DeepWorkPlan Vim 1.1.0.
 
 ## Lapisan
 

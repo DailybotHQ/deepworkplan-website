@@ -67,7 +67,7 @@ const tagPatterns = (repo: string): RegExp[] => {
     // A linked product with its pin in the parenthetical, in every language
     // (spec addons: `(\`dck\`, pinned \`v…\`` / `fijado en \`v…\``).
     new RegExp(
-      `\\[${r}\\]\\([^)]*\\) [(（][^)）\\n]*?\`(v\\d+\\.\\d+\\.\\d+)\``,
+      `\\[${r}\\]\\([^)]*\\) ?[(（][^)）\\n]*?\`(v\\d+\\.\\d+\\.\\d+)\``,
       'g'
     ),
     new RegExp(
