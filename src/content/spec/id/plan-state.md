@@ -1,6 +1,6 @@
 ---
 title: Status rencana
-description: "Lapisan status rencana v5 (manifest.json, state.json, catatan gate, rekonsiliasi) dan bagaimana rencana v6 dan v7 menggantinya dengan snapshot turunan jurnal."
+description: "Lapisan status rencana v5 (manifest.json, state.json, catatan gate) dan snapshot turunan jurnal dengan skema khusus untuk rencana v6, v7, dan v8."
 order: 8
 lang: id
 section: State
@@ -8,14 +8,15 @@ section: State
 
 # Status rencana
 
-> **Cakupan versi:** Halaman ini menetapkan **lapisan status v5**, yang dipertahankan rencana v5 sepanjang hidupnya. Rencana yang dibuat oleh paket saat ini (DWP 8.0.0, rilis `v8.0.0`) menggunakan [lapisan catatan](/spec/record-layer) sebagai gantinya. Dalam rencana v6, v7 atau v8, kontrak hasil (`contract.json`) adalah otoritasnya, jurnal append-only (`journal.ndjson`) adalah sumber kebenarannya, dan `state.json` adalah **snapshot turunan** yang sesuai dengan [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Snapshot ini dibuat ulang oleh `ledger.py project` dan MUST NOT diedit secara manual.
+> **Cakupan versi:** Halaman ini menetapkan **lapisan status v5**, yang dipertahankan rencana v5 sepanjang hidupnya. Rencana yang dibuat oleh paket saat ini (DWP 8.0.0, rilis `v8.0.0`) menggunakan [lapisan catatan](/spec/record-layer) sebagai gantinya. Dalam rencana v6 dan v7, kontrak hasil (`contract.json`) adalah otoritasnya, jurnal append-only (`journal.ndjson`) adalah sumber kebenaran, dan `state.json` merupakan snapshot turunan sesuai `plan-snapshot/v6`. Dalam rencana v8, snapshot mengikuti `plan-snapshot/v8`. Ledger membuatnya ulang dengan `ledger.py project`; berkas ini MUST NOT diedit secara manual.
 
 ## Lapisan status mana yang berlaku
 
 | Generasi rencana | Sumber kebenaran | `state.json` | Skema |
 | --- | --- | --- | --- |
 | v5 (dan rencana v1/v2 yang lebih lama) | rencana markdown, dengan lapisan JSON ini sebagai proyeksinya | ditulis oleh agent pada titik-titik protokol di bawah | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 dan v2 tetap valid untuk rencana lama) |
-| v6 dan v7 | kontrak ditambah jurnal append-only | snapshot yang diproyeksikan dari jurnal, tidak pernah ditulis secara manual | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (atau padanan v6-nya) ; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
+| v6 dan v7 | kontrak ditambah jurnal append-only | snapshot yang diproyeksikan dari jurnal, tidak pernah ditulis secara manual |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (atau padanan v6-nya) |
+| v8 | kontrak ditambah jurnal append-only | snapshot yang diproyeksikan dari jurnal, tidak pernah ditulis secara manual |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json), [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json), [`plan-snapshot/v8`](https://deepworkplan.com/schema/plan-snapshot/v8.json) |
 
 Rencana v8 menggunakan `plan-manifest/v7` bersama `plan-contract/v8`, `journal-event/v8`, dan `plan-snapshot/v8`; skema manifest dan journal-event v7 tetap didukung untuk rencana yang ada.
 Sebuah rencana tidak pernah berganti generasi secara implisit: rencana v5 tetap memakai aturan ini, dan memindahkannya ke v6 adalah migrasi eksplisit yang dipratinjau terlebih dahulu ([Lapisan catatan](/spec/record-layer#coexistence-and-migration)). Sumber kanonis: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V7_CONTRACT.md).

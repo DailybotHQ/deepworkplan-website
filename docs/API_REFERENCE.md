@@ -16,7 +16,7 @@ deepworkplan.com is a static site with an edge middleware. It exposes a read-onl
 | `/api/mcp` | JSON-RPC (edge) | MCP server (Streamable HTTP, stateless) — see `functions/api/mcp.ts` |
 | `/openapi.json` | JSON (static) | OpenAPI 3.1 specification of the whole agent API |
 | `/{page}.md`, `/{lang}/{page}.md` | Markdown | Agent-friendly page content (17 languages) |
-| `/methodology/{slug}.md`, `/spec/{slug}.md`, `/kit/{slug}.md`, `/examples/{slug}.md` | Markdown | Agent-friendly content-collection docs (every language) |
+| `/methodology/{slug}.md`, `/spec/{slug}.md`, `/kit/{slug}.md`, `/examples/{slug}.md`, `/changelog/{slug}.md` | Markdown | Agent-friendly reader content (localized where available) |
 | `/init.md` | Markdown | Canonical agent adoption prompt |
 | `/sitemap-index.xml` | Sitemap | Search engine indexing |
 
@@ -28,10 +28,12 @@ Every rendered page and content-collection doc has a matching `.md` endpoint ser
 
 | Route | Purpose |
 |-------|---------|
-| `src/pages/[page].md.ts` | EN page endpoints |
-| `src/pages/es/[page].md.ts` | ES page endpoints |
-| `src/pages/{methodology,spec,kit,examples}/[slug].md.ts` | EN content-collection endpoints |
-| `src/pages/es/{methodology,spec,kit,examples}/[slug].md.ts` | ES content-collection endpoints |
+| `src/pages/[page].md.ts` | English agent-friendly page endpoints |
+| `src/pages/[lang]/[page].md.ts` | Non-English page endpoints for every active language |
+| `src/pages/{methodology,spec,kit,examples}/[slug].md.ts` | English reader endpoints |
+| `src/pages/[lang]/{methodology,spec,kit,examples}/[slug].md.ts` | Localized reader endpoints for every active language |
+| `src/pages/[lang]/changelog.md.ts` and `src/pages/[lang]/changelog/[slug].md.ts` | Localized changelog index and entries |
+| `src/pages/{compare,changelog}/...` and `src/pages/[lang]/{compare,changelog}/...` | Comparison and changelog endpoints |
 
 See **[Markdown for Agents](aeo/MARKDOWN_FOR_AGENTS.md)** for the response format and content-negotiation behavior.
 
@@ -57,19 +59,21 @@ export default defineConfig({
 
 ## Content Collections API
 
-The site uses Astro Content Collections for its documentation content: `methodology`, `spec`, `kit`, and `pages`. Full schemas live in `src/content.config.ts`.
+The site uses Astro Content Collections for its documentation content: `methodology`, `spec`, `kit`, `changelog`, and `pages`. Full schemas live in `src/content.config.ts`; supported language codes are defined in `src/lib/language-codes.ts` (re-exported as `LANGUAGE_CODES` from `src/lib/i18n.ts`).
 
 ### Methodology Collection Schema
 
 ```typescript
-// src/content.config.ts
+// src/content.config.ts (language enum abbreviated to its source)
+const langEnum = z.enum(LANGUAGE_CODES as unknown as [string, ...string[]]);
+
 const methodology = defineCollection({
   loader: glob({ base: './src/content/methodology', pattern: '**/*.md' }),
   schema: z.object({
     title: z.string(),
     description: z.string(),
     order: z.number(),
-    lang: z.enum(['en', 'es']),
+    lang: langEnum,
     summary: z.string().optional(),
     icon: z.string().optional(),
   }),
@@ -86,7 +90,7 @@ const kit = defineCollection({
       title: z.string(),
       description: z.string(),
       kind: z.enum(['command', 'adapter', 'preset', 'example', 'addon']),
-      lang: z.enum(['en', 'es']),
+      lang: langEnum,
       order: z.number().optional(),
     })
     .loose(),

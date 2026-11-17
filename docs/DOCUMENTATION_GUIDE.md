@@ -63,11 +63,11 @@ Code comments for non-obvious logic:
 const readingTime = Math.ceil(wordCount / 200);
 
 /**
- * Filters posts by tag and sorts by date
+ * Filters entries by a key and returns them in the requested order
  * @param tag - Tag to filter by, or undefined for all
  * @returns Sorted array of posts
  */
-export async function getPostsByTag(tag?: string) {
+export async function getEntriesByKey(key?: string) {
   // ...
 }
 ```
@@ -126,7 +126,7 @@ Always include:
 ```markdown
 ### Creating a Methodology Doc
 
-Create a new file in `src/content/methodology/{en,es}/`:
+Create the matching English-slug file in every active locale folder under `src/content/methodology/`:
 
 \`\`\`markdown
 ---
@@ -152,8 +152,8 @@ Doc content here...
 
 ### Agent-Friendly Content (AEO)
 
-- When adding new pages, create corresponding `.md` files in `src/content/pages/{en,es}/`
-- When updating page content or translations, update corresponding `.md` files
+- When adding pages, create corresponding agent Markdown files in every active `src/content/pages/<locale>/` folder
+- When updating page content or translations, update the corresponding agent Markdown files in every active locale
 - When content structure changes, update `public/llms.txt` and `public/llms-full.txt`
 
 ### Don't Over-Document
@@ -224,7 +224,7 @@ Common issues and solutions.
 
 ## Related
 
-- [Link to related doc](./related.md)
+- [Related architecture guidance](./ARCHITECTURE.md)
 ```
 
 ### README.md Template
@@ -335,7 +335,7 @@ Use consistent formatting:
 ### Command Name
 
 \`\`\`bash
-pnpm run command
+pnpm run biome:check
 \`\`\`
 
 **What it does:** Brief description.

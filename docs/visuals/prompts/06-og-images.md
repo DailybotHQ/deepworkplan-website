@@ -1,5 +1,8 @@
 # OG image prompts — English baseline + 16 localizations
 
+
+> **Historical reference:** This file reflects an earlier visual-planning pass. Route, component, asset, locale-coverage, and status claims may be stale. Verify against current source and `docs/DESIGN.md` / `docs/DIAGRAM_COMPONENTS.md` before reuse.
+
 Generate the Open Graph hero image used by every page of deepworkplan.com.
 This file is the **single source of truth** for the design, the strings to draw,
 and the per-language variants.

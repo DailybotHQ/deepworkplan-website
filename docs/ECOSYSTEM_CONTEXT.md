@@ -18,6 +18,11 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 
 ## Posture
 
+> **Dated snapshot:** This table records the pins in the checked-out source when it
+> was last updated (2026-11-17). Use
+> `src/lib/ecosystem-pins.ts` and `/init.md` for the committed installation
+> state. This page is not a substitute for those pin surfaces.
+
 Versions are the release each surface pins today; the site may only claim a
 released tag (`tests/unit/lib/install-surface-pins.test.ts` guards the
 deepworkplan-skill pins). The pins last moved on 2026-11-17 with DWP 8.0.0: pack `v8.0.3`

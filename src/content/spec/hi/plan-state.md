@@ -1,6 +1,6 @@
 ---
 title: योजना-स्थिति
-description: "v5 योजना-स्थिति परत (manifest.json, state.json, गेट रिकॉर्ड, पुनर्मेल) और कैसे v6 तथा v7 योजनाएँ इसे जर्नल से व्युत्पन्न स्नैपशॉट से प्रतिस्थापित करती हैं।"
+description: "v5 योजना-स्थिति परत (manifest.json, state.json, गेट रिकॉर्ड) और v6, v7, v8 योजनाओं के लिए जर्नल-आधारित, पीढ़ी-विशिष्ट स्नैपशॉट और उनकी स्कीमा।"
 order: 8
 lang: hi
 section: State
@@ -8,14 +8,15 @@ section: State
 
 # योजना-स्थिति
 
-> **संस्करण दायरा:** यह पृष्ठ **v5 state परत** का विनिर्देश करता है, जिसे v5 योजनाएँ अपने पूरे जीवनकाल रखती हैं। वर्तमान पैक (DWP 8.0.0, रिलीज़ `v8.0.0`) द्वारा बनाई गई योजनाएँ इसके बजाय [रिकॉर्ड परत](/spec/record-layer) का उपयोग करती हैं। किसी v6 या v7 योजना में परिणाम अनुबंध (`contract.json`) प्राधिकार है, केवल-जोड़ जर्नल (`journal.ndjson`) सत्य का स्रोत है, और `state.json` एक **व्युत्पन्न स्नैपशॉट** है जो [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) के अनुरूप है। इसे `ledger.py project` पुनर्जनित करता है और इसे हाथ से संपादित MUST NOT किया जाना चाहिए।
+> **संस्करण दायरा:** यह पृष्ठ **v5 state परत** का विनिर्देश करता है, जिसे v5 योजनाएँ अपने पूरे जीवनकाल रखती हैं। वर्तमान पैक (DWP 8.0.0, रिलीज़ `v8.0.0`) द्वारा बनाई गई योजनाएँ इसके बजाय [रिकॉर्ड परत](/spec/record-layer) का उपयोग करती हैं। v6 और v7 योजनाओं में परिणाम अनुबंध (`contract.json`) प्राधिकार है, केवल-जोड़ जर्नल (`journal.ndjson`) सत्य का स्रोत है, और `state.json`, `plan-snapshot/v6` के अनुरूप व्युत्पन्न स्नैपशॉट है। v8 योजनाओं में यह `plan-snapshot/v8` के अनुरूप होता है। Ledger इसे `ledger.py project` से फिर बनाता है; इसे हाथ से संपादित MUST NOT किया जाना चाहिए।
 
 ## कौन-सी state परत लागू होती है
 
 | योजना-पीढ़ी | सत्य का स्रोत | `state.json` | स्कीमा |
 | --- | --- | --- | --- |
 | v5 (और पुरानी v1/v2 योजनाएँ) | markdown योजना, जिसका प्रक्षेपण यह JSON परत है | नीचे दिए प्रोटोकॉल बिंदुओं पर एजेंट द्वारा लिखा जाता है | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (पुरानी योजनाओं के लिए v1 और v2 मान्य बने रहते हैं) |
-| v6, v7 और v8 | अनुबंध और केवल-जोड़ जर्नल | जर्नल से प्रक्षेपित स्नैपशॉट, कभी हाथ से नहीं लिखा जाता | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (या उनके v6 समकक्ष) |
+| v6 और v7 | अनुबंध और केवल-जोड़ जर्नल | जर्नल से प्रक्षेपित स्नैपशॉट, कभी हाथ से नहीं लिखा जाता |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (या उनके v6 समकक्ष) |
+| v8 | अनुबंध और केवल-जोड़ जर्नल | जर्नल से प्रक्षेपित स्नैपशॉट, कभी हाथ से नहीं लिखा जाता |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json), [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json), [`plan-snapshot/v8`](https://deepworkplan.com/schema/plan-snapshot/v8.json) |
 
 v8 योजनाएँ `plan-manifest/v7` के साथ `plan-contract/v8`, `journal-event/v8` और `plan-snapshot/v8` उपयोग करती हैं; मौजूदा योजनाओं के लिए v7 manifest और journal-event स्कीमा समर्थित रहते हैं।
 कोई योजना कभी परोक्ष रूप से पीढ़ी नहीं बदलती: v5 योजनाएँ ये नियम बनाए रखती हैं, और किसी एक को v6 पर ले जाना एक स्पष्ट, पूर्वावलोकित माइग्रेशन है ([रिकॉर्ड परत](/spec/record-layer#coexistence-and-migration))। प्रामाणिक स्रोत: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V7_CONTRACT.md)।

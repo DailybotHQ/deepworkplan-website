@@ -5,9 +5,9 @@ Guide for implementing and maintaining multilingual support in deepworkplan.com.
 ## Overview
 
 deepworkplan.com is a multilingual site engineered to scale to **N languages**.
-The registry targets **16 languages**; a language goes **live only when its
-translation files exist** (availability is derived from file presence — see
-`getActiveLanguages()`). The i18n system is built on four pillars:
+The language registry lists **17 locales** (English plus 16 non-default
+languages). A registered locale is active only when its translation file exists
+(availability is derived from file presence — see `getActiveLanguages()`). The i18n system is built on four pillars:
 
 1. **Centralized registry** in `src/lib/i18n.ts` (`LANGUAGE_CODES`, `LANGUAGES`,
    helpers) + the dependency-free `src/lib/language-codes.ts` (shared with the
@@ -22,32 +22,34 @@ translation files exist** (availability is derived from file presence — see
 | Language | Code | Route Prefix | Status |
 |----------|------|-------------|--------|
 | English | `en` | `/` (root) | Default (canonical) |
-| Spanish | `es` | `/es/` | Live |
-| Portuguese | `pt` | `/pt/` | Target |
-| Chinese (Simplified) | `zh` | `/zh/` | Target |
-| Japanese | `ja` | `/ja/` | Target |
-| German | `de` | `/de/` | Target |
-| French | `fr` | `/fr/` | Target |
-| Korean | `ko` | `/ko/` | Target |
-| Russian | `ru` | `/ru/` | Target |
-| Italian | `it` | `/it/` | Target |
-| Turkish | `tr` | `/tr/` | Target |
-| Indonesian | `id` | `/id/` | Target |
-| Vietnamese | `vi` | `/vi/` | Target |
-| Hindi | `hi` | `/hi/` | Target |
-| Polish | `pl` | `/pl/` | Target |
-| Ukrainian | `uk` | `/uk/` | Target |
-| Thai | `th` | `/th/` | Target |
+| Spanish | `es` | `/es/` | Active |
+| Portuguese | `pt` | `/pt/` | Active |
+| Chinese (Simplified) | `zh` | `/zh/` | Active |
+| Japanese | `ja` | `/ja/` | Active |
+| German | `de` | `/de/` | Active |
+| French | `fr` | `/fr/` | Active |
+| Korean | `ko` | `/ko/` | Active |
+| Russian | `ru` | `/ru/` | Active |
+| Italian | `it` | `/it/` | Active |
+| Turkish | `tr` | `/tr/` | Active |
+| Indonesian | `id` | `/id/` | Active |
+| Vietnamese | `vi` | `/vi/` | Active |
+| Hindi | `hi` | `/hi/` | Active |
+| Polish | `pl` | `/pl/` | Active |
+| Ukrainian | `uk` | `/uk/` | Active |
+| Thai | `th` | `/th/` | Active |
 
-> "Target" languages are registered but go live only once their
-> `src/lib/translations/<code>.ts` + content files exist. Bare BCP-47 codes are
-> used in URLs/IDs; region-qualified forms (`ogLocale` `pt_BR`, `dateLocale`
-> `pt-BR`) live in the registry. Arabic (RTL) is a planned future wave.
+All 17 listed locales are active in the current site. To add a new locale,
+first add its code to `src/lib/language-codes.ts` and its metadata to
+`src/lib/i18n.ts`, then add the translation file and content in every relevant
+collection. Bare BCP-47 codes are used in URLs/IDs; region-qualified forms
+(`ogLocale` `pt_BR`, `dateLocale` `pt-BR`) live in the registry. Arabic (RTL) is
+a planned future wave.
 
 ## Adding a New Language
 
-1. The 16 target languages are already in `LANGUAGE_CODES` / `LANGUAGES`
-   (`src/lib/i18n.ts`). For a brand-new language beyond those, add its code to
+1. The existing 17 locales are registered in `src/lib/language-codes.ts` and
+   `src/lib/i18n.ts`. For a brand-new locale, add its code to
    `src/lib/language-codes.ts` and a `LANGUAGES` entry (name, nativeName,
    hreflang, ogLocale, dateLocale, urlPrefix, flag).
 2. Scaffold the English-seeded skeleton:
@@ -108,7 +110,7 @@ export interface SiteTranslations {
 }
 ```
 
-Each language has its own object (`en` and `es`) implementing this interface with complete key parity.
+Each active language has its own object implementing this interface with complete key parity.
 
 ### Using Translations in Components
 
@@ -182,7 +184,7 @@ itemsInSection: (section) => `Items in "${section}"`,
 itemsInSection: (section) => `Elementos en "${section}"`,
 ```
 
-## Bilingual Content
+## Multilingual Content
 
 ### Methodology / Spec / Kit Docs
 
@@ -361,10 +363,10 @@ The header (and mobile menu) include a language switcher built from
 `getActiveLanguages()`. The collapsed trigger shows the **current language code
 only** (e.g. `EN`); the open dropdown lists every other active language as
 **`Native name (Code)`** — e.g. `Español (Es)`, `Português (Pt)`, `中文 (Zh)` —
-so codes aren't cryptic at 16 languages. It maps the current path to each
+so codes remain clear across all active languages. It maps the current path to each
 language version (preserving the page), e.g. `/about` ↔ `/es/about` ↔ `/pt/about`.
 
-## Bilingual Compliance Checklist
+## Multilingual Compliance Checklist
 
 Before committing any content change, verify:
 
@@ -376,8 +378,8 @@ Before committing any content change, verify:
 - [ ] Date formatting uses locale-aware formatting with `lang` prop
 - [ ] Page titles and SEO descriptions use translation keys
 - [ ] The `lang` prop is passed through the full component hierarchy
-- [ ] Page Markdown files exist in both `src/content/pages/en/` and `src/content/pages/es/`
-- [ ] When page content or translations change, corresponding `.md` files updated (both languages)
+- [ ] Page Markdown files exist in every active locale under `src/content/pages/<locale>/`
+- [ ] When page content or translations change, corresponding `.md` files updated in every active language
 
 ## Known Limitations
 

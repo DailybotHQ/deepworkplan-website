@@ -4,6 +4,8 @@ This document describes the technical architecture of deepworkplan.com, the meth
 
 ## High-Level Architecture
 
+**Version and release note:** Historical provenance entries below describe the state on their recorded dates. For current ecosystem release pins, use `src/lib/ecosystem-pins.ts`; do not treat an older snapshot as install guidance. Stack versions are declared in `package.json`.
+
 ```
 ┌─────────────────────────────────────────────────────────────────┐
 │                        deepworkplan.com                           │
@@ -100,7 +102,7 @@ src/
 │   │   └── VimInstall.astro        # Download → verify → run commands (no pipe into a shell) + copy button, consent callout, "inspect before you run" with the live installer SHA-256
 │   │
 │   ├── diagrams/           # Editorial Interactive Assets (see docs/DIAGRAM_COMPONENTS.md)
-│   │   └── kit/                    # incl. VimCommandIndex.astro (SPC h h plate), VimInDwpLoop.astro (plan browser + Markdown viewer beside the DWP loop) and KitEcosystem.astro (v7 ecosystem plate on the kit index: methodology works alone, addons pinned to products)
+│   │   └── kit/                    # incl. VimCommandIndex.astro (SPC h h plate), VimInDwpLoop.astro (plan browser + Markdown viewer beside the DWP loop) and KitEcosystem.astro (ecosystem plate on the kit index: methodology works alone, addons pinned to products)
 │   │
 │   ├── pages/              # Shared page components (*Page.astro, QuickstartPage, readers)
 │   │   ├── ComparePage.astro       # Objective comparison and source notes
@@ -393,7 +395,7 @@ const presets = await getCollection('kit', ({ data }) =>
 ### Content File Structure
 
 Methodology, spec, and kit content is split by language folder. Slugs are in English on both
-languages; the EN and ES versions of a document share the same English slug.
+languages; localized versions of a document share the same English slug.
 
 ```
 src/content/
@@ -500,7 +502,7 @@ The bypass conditions (path contains `.` or starts with `/_astro/`, `/__vite`, `
 
 **Kit examples: one page each, under `/examples`.** Kit entries of kind `example` are rendered only by `src/pages/examples/[slug].astro` (and `[lang]`); the four kit routes skip them, and `/kit/<example>` plus its `.md` twin 301 to `/examples/<example>` in every language through `REDIRECT_PAIRS` (`tests/unit/lib/redirects.test.ts`).
 
-**DeepWorkPlan Vim: one official page per addon.** Vim is documented **once**, as a kit addon at `/kit/vim` (and `/<lang>/kit/vim`): `src/content/kit/<lang>/vim.mdx` ×17, embedding `VimInstall` (`src/components/vim/`) and the two figures `VimCommandIndex` and `VimInDwpLoop` (`src/components/diagrams/kit/`). There is no standalone `/vim` page: `/vim` and `/vim.md` (and the language-prefixed forms) are 301 aliases to `/kit/vim` and `/kit/vim.md` through `REDIRECT_PAIRS`, and `vim` stays in `KNOWN_BASE_PATHS` as a redirect source. The installer is the static file `public/vim/install.sh`, served at `/vim/install.sh` with a pinned `Content-Type` (`public/_headers`) and aliased from the apex `/install.sh` (and its checksum from `/install.sh.sha256`) by `ROOT_ONLY_REDIRECT_PAIRS`; it is a byte-identical copy of `install.sh` at the product release named by `VIM_INSTALLER_TAG` (`v1.0.0`, served with its `install.sh.sha256`, SHA-256 `VIM_INSTALLER_TAG_SHA256` in `src/lib/vim-installer.ts`, pinned by `tests/unit/lib/vim-installer.test.ts`) and is never edited here — a new release is re-copied and both constants move together. Its SHA-256, size and line count shown on the page are computed at build time from those exact bytes (`src/lib/vim-installer.ts`). The page's `SoftwareApplication` structured data comes from the kit `software` frontmatter (`src/lib/software-schema.ts`) and is merged with the page's `TechArticle` in one JSON-LD `@graph`. Every statement about the product must trace to the product repository (the Vim claims ledger of PLAN_002_vim_flagship_official_page): the editor is a separate product, offered as the optional `vim` addon of DWP v7 (never required), the page describes release `v1.0.0` (whose installer pins its own release; `--version` / `DWP_VIM_VERSION` choose an exact version, a `>=` floor or `latest`, and `DWP_VIM_REF` a branch or commit) and shows the install as download, verify, run — never a pipe into a shell, and no copy claims `vim.deepworkplan.com` is live. Claims for the v7 refresh trace to `PLAN_004_v7_kit_pages_and_vendor`'s `V7_CLAIMS_LEDGER.md` (rows C-39–C-50).
+**DeepWorkPlan Vim: one official page per addon.** Vim is documented **once**, as a kit addon at `/kit/vim` (and `/<lang>/kit/vim`): `src/content/kit/<lang>/vim.mdx` ×17, embedding `VimInstall` (`src/components/vim/`) and the two figures `VimCommandIndex` and `VimInDwpLoop` (`src/components/diagrams/kit/`). There is no standalone `/vim` page: `/vim` and `/vim.md` (and the language-prefixed forms) are 301 aliases to `/kit/vim` and `/kit/vim.md` through `REDIRECT_PAIRS`, and `vim` stays in `KNOWN_BASE_PATHS` as a redirect source. The installer is the static file `public/vim/install.sh`, served at `/vim/install.sh` with a pinned `Content-Type` (`public/_headers`) and aliased from the apex `/install.sh` (and its checksum from `/install.sh.sha256`) by `ROOT_ONLY_REDIRECT_PAIRS`; it is a byte-identical copy of `install.sh` at the product release named by `VIM_INSTALLER_TAG` (`v1.1.0`, the pin in `src/lib/ecosystem-pins.ts`, served with its `install.sh.sha256`, SHA-256 `VIM_INSTALLER_TAG_SHA256` in `src/lib/vim-installer.ts`, pinned by `tests/unit/lib/vim-installer.test.ts`) and is never edited here — a new release is re-copied and both constants move together. Its SHA-256, size and line count shown on the page are computed at build time from those exact bytes (`src/lib/vim-installer.ts`). The page's `SoftwareApplication` structured data comes from the kit `software` frontmatter (`src/lib/software-schema.ts`) and is merged with the page's `TechArticle` in one JSON-LD `@graph`. Every statement about the product must trace to the product repository (the Vim claims ledger of PLAN_002_vim_flagship_official_page): the editor is a separate product, offered as the optional `vim` addon of DWP v8 (never required), the page describes release `v1.1.0` (whose installer pins its own release; `--version` / `DWP_VIM_VERSION` choose an exact version, a `>=` floor or `latest`, and `DWP_VIM_REF` a branch or commit) and shows the install as download, verify, run — never a pipe into a shell, and no copy claims `vim.deepworkplan.com` is live. Claims for the v7 refresh trace to `PLAN_004_v7_kit_pages_and_vendor`'s `V7_CLAIMS_LEDGER.md` (rows C-39–C-50).
 
 ## Agent API
 
@@ -779,7 +781,7 @@ Page wrappers in `src/pages/` never use translations directly — they just pass
 
 ### Localized Content Collections
 
-Methodology, spec, and kit content is split by language folder; the EN and ES versions of a
+Methodology, spec, and kit content is split by language folder; localized versions of a
 document share the same English slug:
 
 ```
@@ -991,7 +993,7 @@ Dev-only portal at `/internal/`. Uses `InternalLayout` or `ShowcaseLayout` (neve
 
   **Vendored provenance recorded on 2026-09-17:** this copy was the released upstream tag **`v5.5.1`** (`3117819`), superseding `v5.5.0`, installed via the documented command `npx --yes skills add DailybotHQ/deepworkplan-skill@v5.5.1 --skill deepworkplan --force -y`. The recorded `diff -rq` was **byte-identical** against the tag's canonical `skills/deepworkplan/` tree — empty output — with `skills-lock.json` updated by the CLI itself (hash `f38b4f5c…`, superseding `019aecad…`).
 
-**Current website dogfood:** `.agents/skills/deepworkplan/SKILL.md` declares
+**Historical website dogfood snapshot (2026-10-25):** `.agents/skills/deepworkplan/SKILL.md` declares
 version **7.9.0** (stable, `latest`), installed by its pinned tag (tree-URL
 form) and byte-identical to that tag (178 files) on 2026-10-25; it supersedes
 `7.8.1` (2026-10-13, verified against the release `SHA256SUMS`, 178 files), `7.8.0` (2026-10-13), `7.7.1` (2026-10-12), `7.7.0` (2026-10-12, 178 files), `7.6.3` (2026-10-12, 175 files), `7.6.2` (2026-10-12, 175 files), `7.6.1` (2026-10-12, 175 files), `7.6.0` (2026-10-11, 175 files) and `7.5.1` (2026-10-10, 171 files), which superseded `7.1.0`. The implemented DWP standard is
@@ -1004,7 +1006,7 @@ generation and are never migrated implicitly.
 
 **Previous v6.0.2 copy (2026-10-01 → 2026-10-09):** the vendored tree was byte-identical to the released upstream tag at commit `dd1e10e` (verified with `diff -rq` against `git archive` of the tag on 2026-10-01); `skills-lock.json` records hash `3a421e59ddcdd5593ce2f7cd1c7d6b836c9b8fb225fab2ee67ea7fc842d2d162`. v6.0.2 only repins the Dailybot addon docs to agent-skill v3.23.2, so this supersedes the historical v5.5.1, v6.0.0 and v6.0.1 provenance above. The plain released tag install overwrites nothing that is not already upstream. If a divergence is ever reintroduced — the repo-adapted path this section authorizes — re-stamp this paragraph to say what it carries and that a tag install will overwrite it, exactly as the 2026-09-13 entry did. Local adaptation remains the command kit (nine delegators: seven `dwp-*` plus `/skill-create` and `/agent-create`, refreshed from the skill's own `onboard/command-templates/` on 2026-09-17) and this provenance protocol. This repository keeps the AI Diff Reviewer local review as the baseline and, since 2026-09-25, also runs a CI self-review (`.github/workflows/self-review.yml`): a single grok leg label-gated on `ready` (remove and re-add the label to re-run). The two addon skills (dailybot, ai-diff-reviewer) remain release-auto-refreshed — `ai-diff-reviewer` was refreshed to **v2.3.1** on 2026-09-17 and to **v3.1.1** on 2026-09-25 (PR #87 dogfood; installed `version:` asserted against the tag).
 
-**Current dailybot addon copy (2026-10-09):** `.agents/skills/dailybot/SKILL.md` declares version **3.23.3** (and `ai-diff-reviewer` **3.3.0**), refreshed by the release workflow's dogfood step for `v5.0.29` (previously `v3.23.2`, installed with `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot --force -y` on 2026-10-01); `skills-lock.json` records the content hash. The pack exposes 17 capabilities (the former Tasks sub-skill is now **Plan**, under `dailybot plan`), requires `dailybot-cli >= 3.9.0` as its baseline and `>= 3.25.0` for Plan. The vendored `deepworkplan` v6.0.2 addon text pins the same 3.23.2, so the two vendored copies and the website's public pages agree.
+**Historical Dailybot addon snapshot (2026-10-09):** `.agents/skills/dailybot/SKILL.md` declares version **3.23.3** (and `ai-diff-reviewer` **3.3.0**), refreshed by the release workflow's dogfood step for `v5.0.29` (previously `v3.23.2`, installed with `npx --yes skills add DailybotHQ/agent-skill@v3.23.2 --skill dailybot --force -y` on 2026-10-01); `skills-lock.json` records the content hash. The pack exposes 17 capabilities (the former Tasks sub-skill is now **Plan**, under `dailybot plan`), requires `dailybot-cli >= 3.9.0` as its baseline and `>= 3.25.0` for Plan. The vendored `deepworkplan` v6.0.2 addon text pins the same 3.23.2, so the two vendored copies and the website's public pages agree.
 
 ### Official CLI publishing (same release workflow)
 

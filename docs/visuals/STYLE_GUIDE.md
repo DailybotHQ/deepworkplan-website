@@ -1,5 +1,8 @@
 # Visual Style Guide — Deep Work Plan
 
+
+> **Historical reference:** This file reflects an earlier visual-planning pass. Route, component, asset, locale-coverage, and status claims may be stale. Verify against current source and `docs/DESIGN.md` / `docs/DIAGRAM_COMPONENTS.md` before reuse.
+
 > **Purpose.** This is the canonical house style for every illustration and
 > diagram on deepworkplan.com, plus the **prompt schema** that every entry in
 > `prompts/*.md` must follow. Read this before writing or generating any visual.

@@ -12,7 +12,7 @@
 
 - [ ] Check Google Search Console for crawl errors: https://search.google.com/search-console
 - [ ] Check Bing Webmaster Tools: https://www.bing.com/webmasters
-- [ ] Verify indexed page count matches expected (pages in both languages)
+- [ ] Verify indexed page count matches the expected routes across all 17 active languages
 - [ ] Check for any pages showing "Excluded" or "Not indexed" status
 
 ## 3. Sitemap & Robots
@@ -61,7 +61,7 @@ Record results:
 - [ ] Ensure `llms.txt` references Markdown endpoints: `grep "\.md" public/llms.txt`
 - [ ] Verify content negotiation middleware: `grep "text/markdown" functions/_middleware.ts`
 - [ ] **Sync check:** Compare page `.md` files against HTML content — no major sections missing (`pnpm run md:check`)
-- [ ] **Bilingual sync:** EN and ES `.md` files cover the same sections (`ls src/content/pages/en/ src/content/pages/es/`)
+- [ ] **Language parity:** localized `.md` files cover the same required sections across active language directories (`src/content/pages/{en,es,pt,zh,ja,de,fr,ko,ru,it,tr,id,vi,hi,pl,uk,th}/`)
 - [ ] **Analytics:** Verify `markdown_request` events appear in Umami (Events tab → filter `markdown_request`)
 - [ ] **Analytics sources:** Check both `content_negotiation` and `direct_url` sources are being captured
 - [ ] Full docs: [Markdown for Agents](MARKDOWN_FOR_AGENTS.md)

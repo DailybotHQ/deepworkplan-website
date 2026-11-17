@@ -432,8 +432,8 @@ icon: "compass"                      # Optional
 ### Content Creation Workflow (MANDATORY)
 
 - Never create methodology/spec/kit content in only one language.
-- For EN/ES, create or update both versions in the same task (use the `/translate-sync` skill).
-- Keep matching `src/content/pages/{en,es}/*.md` endpoints in sync (`pnpm run md:check`).
+- For every active language, create or update localized versions in the same task (use the `/translate-sync` skill).
+- Keep matching `src/content/pages/{lang}/*.md` endpoints in sync across all active languages (`pnpm run md:check`).
 
 For collection schemas, see **[Architecture Guide](ARCHITECTURE.md)** and `src/content.config.ts`.
 
@@ -513,13 +513,9 @@ if (!post) {
 }
 ```
 
-## Testing Standards (Future)
+## Testing Standards
 
-Testing is not yet configured. When implemented:
-
-- **Framework**: Vitest for unit tests, Playwright for E2E
-- **File naming**: `*.test.ts` or `*.spec.ts`
-- **Location**: `tests/` directory or co-located with source
+Unit and component tests use Vitest and live under `tests/unit/` as `*.test.ts` files. Playwright end-to-end testing is not configured. Run `pnpm run test`; use `pnpm run test:watch` for watch mode and `pnpm run test:coverage` for coverage. See [Testing Guide](TESTING_GUIDE.md).
 
 ## Meta Description Length (MANDATORY)
 

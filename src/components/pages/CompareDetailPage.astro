@@ -26,8 +26,23 @@ const details = c.alternatives[alternative.id];
 const prefix = getUrlPrefix(lang);
 const siteUrl = Astro.site?.href?.replace(/\/$/, '') ?? '';
 const title = `${details.name} × Deep Work Plan`;
-const pageTitle = `${details.name} × Deep Work Plan — ${c.title}`;
-const description = `${details.whatItDoesWell} ${details.audience}`;
+const descriptionSource = `${details.whatItDoesWell} ${details.audience}`
+  .replace(/\s+/g, ' ')
+  .trim();
+const descriptionLimit = ['zh', 'ja', 'ko'].includes(lang) ? 90 : 160;
+const descriptionCharacters = Array.from(descriptionSource);
+const descriptionCut = descriptionCharacters
+  .slice(0, descriptionLimit - 1)
+  .join('');
+const wordBoundary = descriptionCut.lastIndexOf(' ');
+const excerpt =
+  wordBoundary > descriptionLimit - 24
+    ? descriptionCut.slice(0, wordBoundary)
+    : descriptionCut.trimEnd();
+const description =
+  descriptionCharacters.length <= descriptionLimit
+    ? descriptionSource
+    : `${excerpt}…`;
 const reviewedOn = new Date(
   `${COMPARE_REVIEWED_ON}T00:00:00Z`
 ).toLocaleDateString(lang, {
@@ -39,14 +54,14 @@ const reviewedOn = new Date(
 const webPageSchema = {
   '@context': 'https://schema.org',
   '@type': 'WebPage',
-  name: pageTitle,
+  name: title,
   description,
   url: `${siteUrl}${prefix}/compare/${alternative.id}`,
   dateModified: COMPARE_REVIEWED_ON,
 };
 ---
 
-<MainLayout lang={lang} title={pageTitle} description={description}>
+<MainLayout lang={lang} title={title} description={description}>
   <JsonLd slot="head" data={webPageSchema} />
   <article class="main-container py-16 md:py-24">
     <a

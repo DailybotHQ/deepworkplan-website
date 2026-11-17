@@ -203,12 +203,18 @@ for (const { pagePath, content } of checkable) {
   if (!description) {
     addFinding('critical', 'Description', pagePath, 'missing meta description');
   } else {
-    if (description.length < 130 || description.length > 160) {
+    const descriptionLength = Array.from(description).length;
+    const descriptionMin = ['zh', 'ja', 'ko'].includes(lang) ? 60 : 130;
+    const descriptionMax = ['zh', 'ja', 'ko'].includes(lang) ? 90 : 160;
+    if (
+      descriptionLength < descriptionMin ||
+      descriptionLength > descriptionMax
+    ) {
       addFinding(
         'warning',
         'Description',
         pagePath,
-        `length ${description.length} (outside 130–160 target)`
+        `length ${descriptionLength} (outside ${descriptionMin}–${descriptionMax} target)`
       );
     }
     if (!descriptionsByLang.has(lang)) descriptionsByLang.set(lang, new Map());
@@ -330,6 +336,21 @@ for (const { pagePath, content } of checkable) {
       pagePath,
       `${h1s.length} <h1> elements found`
     );
+  }
+  const headingLevels = [...content.matchAll(/<h([1-6])[\s>]/g)].map((match) =>
+    Number(match[1])
+  );
+  let previousHeadingLevel = 0;
+  for (const level of headingLevels) {
+    if (previousHeadingLevel > 0 && level > previousHeadingLevel + 1) {
+      addFinding(
+        'warning',
+        'Headings',
+        pagePath,
+        `heading level skipped from h${previousHeadingLevel} to h${level}`
+      );
+    }
+    previousHeadingLevel = level;
   }
 }
 

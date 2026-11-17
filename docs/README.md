@@ -1,135 +1,76 @@
-# Documentation Index
+# Documentation index
 
-Welcome to the **deepworkplan.com** documentation. This guide helps developers and AI agents understand, maintain, and extend the project.
+Use this index to find the source guide for a task. `package.json` and the source tree are authoritative when command names, versions, routes, or file inventories change.
 
-## Quick Navigation
+## Project and implementation
 
-### Getting Started
+| Guide | Covers |
+|---|---|
+| [AI Agent Onboarding](AI_AGENT_ONBOARDING.md) | Stack, repository layout, authority and safe work |
+| [Architecture](ARCHITECTURE.md) | Astro structure, routing, collections, middleware, vendoring |
+| [Product Specification](PRODUCT_SPEC.md) | Site scope, positioning, audiences and product surfaces |
+| [Development Commands](DEVELOPMENT_COMMANDS.md) | Current package scripts, audits and local development |
+| [Standards](STANDARDS.md) | Code, content, imports, accessibility and description standards |
+| [Testing Guide](TESTING_GUIDE.md) | Vitest commands, surface-to-gate mapping, coverage limits |
+| [I18N Guide](I18N_GUIDE.md) | Active languages, translation workflow and parity checks |
+| [Performance](PERFORMANCE.md) | Static rendering, images, hydration and performance checks |
+| [Accessibility](ACCESSIBILITY.md) | WCAG AA, keyboard access, semantics and alternatives |
+| [SEO](SEO.md) | Metadata, structured data, multilingual SEO and agent discovery |
+| [Security](SECURITY.md) | Static-site, API and repository security practices |
 
-| Document | Description |
-|----------|-------------|
-| [AI Agent Onboarding](AI_AGENT_ONBOARDING.md) | Quick start guide for AI coding assistants |
-| [Development Commands](DEVELOPMENT_COMMANDS.md) | npm scripts and CLI reference |
-| [Standards](STANDARDS.md) | Coding conventions and best practices |
+## Design and content
 
-### Architecture & Design
+| Guide | Covers |
+|---|---|
+| [Brand Guide](BRAND_GUIDE.md) | Broadsheet identity, palette, typography and editorial primitives |
+| [Design system](DESIGN.md) | Agent-facing tokens and component guidance; read before editing UI |
+| [Diagram components](DIAGRAM_COMPONENTS.md) | Editorial HTML/CSS/SVG figures and their translation/accessibility rules |
+| [Visual documentation](visuals/README.md) | Historical prompt archive and current design references |
+| [Documentation Guide](DOCUMENTATION_GUIDE.md) | Writing and maintaining project docs |
+| [Documentation Inventory](DOCUMENTATION_INVENTORY.md) | Documentation coverage index |
 
-| Document | Description |
-|----------|-------------|
-| [Product Spec](PRODUCT_SPEC.md) | Vision, features, and goals for deepworkplan.com |
-| [Brand Guide](BRAND_GUIDE.md) | Color palette, typography, logo usage, and visual identity |
-| [DESIGN.md](DESIGN.md) | Agent-facing design-system spec (Broadsheet tokens, components, WCAG do's & don'ts) — read before generating UI |
-| [Architecture](ARCHITECTURE.md) | Technical architecture, patterns, and decisions |
-| [Performance](PERFORMANCE.md) | SSG optimization, images, caching strategies |
-| [Ecosystem Context](ECOSYSTEM_CONTEXT.md) | The ecosystem hub role: repositories, posture, pack/addon/site claims, release order, boundaries |
-| [Cross-Project Standards](CROSS_PROJECT_STANDARDS.md) | Where work lands, repository boundaries, orchestrator plans, per-repo gates, PR conventions |
+## Agents and ecosystem
 
-### Development Guides
+| Guide | Covers |
+|---|---|
+| [AI Agent Collaboration](AI_AGENT_COLLAB.md) | Coordination patterns and cross-agent context |
+| [Ecosystem Context](ECOSYSTEM_CONTEXT.md) | Public repositories, roles, releases and boundaries |
+| [Cross-Project Standards](CROSS_PROJECT_STANDARDS.md) | Where work lands, child plans, gates and PR conventions |
+| [Repositories index](../repositories/README.md) | Public ecosystem repository list and gates |
+| [Skills and agents catalog](../.agents/docs/skills_agents_catalog.md) | Current `.agents/` procedures and specialist agents |
+| [Commands reference](../.agents/docs/COMMANDS_REFERENCE.md) | Current command files and direct skill procedures |
 
-| Document | Description |
-|----------|-------------|
-| [Testing Guide](TESTING_GUIDE.md) | Test setup and conventions (future) |
-| [I18N Guide](I18N_GUIDE.md) | Internationalization and language support |
-| [Security](./SECURITY.md) | Static site security best practices |
+## Technology stack
 
-### AI & Collaboration
+Exact versions are declared in the root `package.json`.
 
-| Document | Description |
-|----------|-------------|
-| [AI Agent Collaboration](AI_AGENT_COLLAB.md) | Multi-agent coordination guidelines |
-| [Documentation Guide](DOCUMENTATION_GUIDE.md) | How to write and maintain docs |
-| [Documentation Inventory](DOCUMENTATION_INVENTORY.md) | Coverage tracking |
+| Technology | Current version | Purpose |
+|---|---:|---|
+| Astro | 7.3.6 | Static site generator |
+| Svelte | 5.57.2 | Interactive components |
+| TypeScript | 6.0.3 | Type-safe development |
+| Tailwind CSS | 4.3.3 | Styling |
+| Biome | 2.5.15 | Linting and formatting |
+| `@astrojs/mdx` | 8.0.3 | Markdown components |
+| Sätteri | 0.10.5 | Markdown processing |
 
-## Technology Stack
+## Repository overview
 
-| Technology | Version | Purpose |
-|------------|---------|---------|
-| **Astro** | 5.16.15 | Static site generator |
-| **Svelte** | 5.48.0 | Interactive components |
-| **TypeScript** | 5.9.3 | Type-safe development |
-| **Tailwind CSS** | 4.1.18 | Utility-first styling |
-| **Biome** | 2.3.11 | Linting and formatting |
-| **MDX** | 4.3.13 | Enhanced Markdown |
+- `src/content/{methodology,spec,kit,pages}/`: multilingual content collections with 17 active locales.
+- `src/pages/`: English routes plus one dynamic `[lang]` route tree for non-English locales.
+- `src/components/`, `src/layouts/`, `src/lib/`: UI, layouts, and shared logic.
+- `public/`, `functions/`: static artifacts and Cloudflare Pages Functions.
+- `.agents/`: canonical cross-agent skills, commands, agents, and settings.
+- `.dwp/`: local plan output; git-ignored except the tracked addon registry.
+- `repositories/`: ecosystem clones; git-ignored except `README.md` and `manifest.json`.
 
-## Project Structure Overview
-
-```
-deepworkplan.com/
-├── src/
-│   ├── components/      # Reusable UI components (.astro, .svelte)
-│   ├── content/         # Content Collections (methodology/, spec/, kit/, pages/)
-│   ├── layouts/         # Page layouts (MainLayout.astro)
-│   ├── lib/             # Utility functions and types
-│   ├── pages/           # File-based routing
-│   └── styles/          # Global CSS and Tailwind
-├── public/              # Static assets (images, fonts, icons)
-├── docs/                # This documentation folder
-└── .dwp/                # Deep Work Plan output (git-ignored)
-```
-
-## Quick Commands
+## Getting started
 
 ```bash
-# Development
-pnpm run dev              # Start dev server
-pnpm run build            # Production build
-pnpm run astro:preview    # Preview build
-
-# Code Quality
-pnpm run biome:check      # Check linting/formatting
-pnpm run biome:fix        # Auto-fix issues
-pnpm run astro:check      # TypeScript checking
-
-# Deployment
-pnpm run build            # Production build (Cloudflare Pages)
+pnpm install --frozen-lockfile
+pnpm run dev
+pnpm run biome:check
+pnpm run test
 ```
 
-## Key Concepts
-
-### Content Collections
-
-Methodology, spec, and kit docs live in `src/content/{methodology,spec,kit}/{en,es}/` as Markdown files. Schemas are defined in `src/content.config.ts`. For example, the `methodology` schema:
-
-- **title** - Doc title (required)
-- **description** - Doc summary (required)
-- **order** - Reader ordering (required)
-- **lang** - `en` or `es` (required)
-- **summary** / **icon** - Optional metadata
-
-### Component Types
-
-1. **Astro Components** (`.astro`) - Static, build-time rendered
-2. **Svelte Components** (`.svelte`) - Interactive, client-side hydrated
-
-Use `client:load` or `client:visible` directives to hydrate Svelte components.
-
-### Internationalization
-
-- English: `/` (default)
-- Spanish: `/es/`
-
-Components receive a `lang` prop for language-specific content.
-
-## For AI Agents
-
-If you're an AI coding assistant, start here:
-
-1. **Read [AGENTS.md](../AGENTS.md)** - Main guidance document
-2. **Read [AI Agent Onboarding](AI_AGENT_ONBOARDING.md)** - Quick checklist
-3. **Follow [Standards](STANDARDS.md)** - Coding conventions
-
-## Contributing
-
-1. Follow the coding standards in [STANDARDS.md](STANDARDS.md)
-2. Update relevant documentation after changes
-3. Run `pnpm run biome:check` before committing
-4. Use conventional commit messages
-
-## Documentation Maintenance
-
-When updating documentation:
-
-- Keep language consistent (English only)
-- Update cross-references when renaming/moving docs
-- Add new documents to this index
-- Track coverage in [DOCUMENTATION_INVENTORY.md](DOCUMENTATION_INVENTORY.md)
+For a documentation-only change, consult the applicable guide and choose validation by touched surface in [Testing Guide](TESTING_GUIDE.md). The site-wide checks are listed in [Development Commands](DEVELOPMENT_COMMANDS.md).
