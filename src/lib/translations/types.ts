@@ -134,6 +134,8 @@ export interface SiteTranslations {
       badge: string;
       /** The v8 lead sentence — the one place to swap the hero wording. */
       leadSentence: string;
+      /** Hero h1: the lead sentence's first clause (two lines at most). */
+      headline: string;
       subtitle: string;
       instructionLabel: string;
       instruction: string;
@@ -143,6 +145,7 @@ export interface SiteTranslations {
       pullQuote: string;
       primaryCta: string;
       secondaryCta: string;
+      illustrationAlt: string;
     };
     pillars: {
       badge: string;

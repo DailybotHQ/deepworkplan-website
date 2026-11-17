@@ -105,8 +105,8 @@ export const ja: SiteTranslations = {
       badge: 'オープンな方法論 · MIT · エージェント非依存',
       leadSentence:
         '仕様ファースト、ループで完結：リポジトリがハーネスとなり、計画は自ら完了まで走り続けます。',
-      subtitle:
-        'Deep Work Plan はあらゆるリポジトリをハーネス——コンテキスト、ガードレール、検証ゲートを備えた永続的な計画——に変え、どんなコーディングエージェントもそこで長期の作業を実行します。任意のループを加えれば、開いている計画は誰もポーリングすることなく最後まで走り続けます。',
+      headline: '仕様ファースト、ループで完結。',
+      subtitle: 'リポジトリがハーネスとなり、計画は自ら完了まで走り続けます。',
       instructionLabel: 'エージェントにコピーする',
       instruction:
         'init.md のプロンプトをコピーして、お使いのコーディングエージェント — Claude Code、Cursor、Codex、またはその他のツール — に貼り付けることで、あらゆるリポジトリを AI-first にします。',
@@ -117,6 +117,8 @@ export const ja: SiteTranslations = {
         '仕様ファーストは何をするかを、ハーネスはどこでするかを、Loop engineering はどう終えるかを示します。',
       primaryCta: '方法論を読む',
       secondaryCta: '仕様を読む',
+      illustrationAlt:
+        '岩場の岸辺に立つ灯台が一筋の光で小舟を導く版画。どんなエージェントも導く安定したハーネスとしてのリポジトリを想起させる。',
     },
     pillars: {
       badge: '4つの柱',
@@ -225,7 +227,7 @@ export const ja: SiteTranslations = {
         {
           name: '計画キュー',
           detail:
-            'パックが `dwp-queue-v1` キューを検証して書き込み、デーモンはそれを読み取って待機中の計画を続行します。',
+            'パックが dwp-queue-v1 キューを検証して書き込み、デーモンはそれを読み取って待機中の計画を続行します。',
         },
         {
           name: 'リードの検証',

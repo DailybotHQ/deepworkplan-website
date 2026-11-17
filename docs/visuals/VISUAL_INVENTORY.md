@@ -24,7 +24,7 @@
 
 | ID | Surface | Type | Pri | Aspect/size | Light/dark | Asset path | Status |
 | :-- | :-- | :-: | :-: | :-- | :-- | :-- | :-- |
-| HP-01 | `Hero.astro` → right column | ▦ | ★ | — | tokens | `diagrams/home/LoopDiagram.astro` | retired — engraving replaced by the v8 loop diagram (2026-11-16) |
+| HP-01 | `Hero.astro` → right column | 🖼 | ★ | 4:5 · 680×850 | light/dark pair | `home/hero-harness.webp` · `home/hero-harness-dark.webp` | done — restored 2026-11-17; the v8 loop diagram moved to `LoopEngineering.astro` |
 | HP-02 | `Pitch.astro` → right column (nautical chart) | 🖼 | M | 4:5 · 760×950 | pair | `home/pitch-chart.webp` | done |
 | HP-03 | `Quickstart.astro` → above/beside the 4 steps | ▦ | H | 16:9 · 880×495 | transparent | `home/quickstart-flow.webp` | done |
 | HP-04 | `Onboarding.astro` → beside numbered steps | ▦ | M | 16:9 · 880×495 | transparent | `home/onboarding-sequence.webp` | done |

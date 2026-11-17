@@ -4,17 +4,14 @@ description: "Đặc tả trước, vòng lặp khép kín: Deep Work Plan biế
 lastUpdated: 2026-11-16
 ---
 
-## Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.
+## Đặc tả trước, vòng lặp khép kín.
 
-Deep Work Plan biến mọi repository thành harness — ngữ cảnh, rào chắn và một kế hoạch bền vững với các cổng kiểm chứng — nơi bất kỳ agent lập trình nào cũng thực thi công việc dài hơi. Thêm vòng lặp tùy chọn, và một kế hoạch đang mở sẽ tiếp tục chạy đến cùng mà không cần ai theo dõi.
+Repository là harness và kế hoạch tự chạy đến khi hoàn thành.
 
 Deep Work Plan (DWP) là một phương pháp luận và bộ kit mở, cấp phép MIT, để lập kế hoạch và thực thi công việc phần mềm phức tạp cùng các agent AI. Bạn không phải chọn một cách cài đặt hay sao chép một mẫu — bạn sao chép prompt init.md và dán vào agent của mình:
 
 > Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.
 
-
-
-**Vòng lặp:** Đăng ký (`lead claim`, lead và thứ tự kế nhiệm) → Daemon (`autopilot --loop`, do con người khởi động) → Nhắc (`idle ≥ 5 min`, không thêm quyền hạn) → Chuyển giao (`lead takeover`, người kế nhiệm đầu tiên liên lạc được) → Thông báo (`plan-event-v1`, tới lệnh của con người) → Xong (`plan_completed`, đã qua các cổng). Mọi kế hoạch mở có bản ghi lead, cho đến khi chính trạng thái của nó báo đã xong.
 
 - [Mở lời nhắc /init](/vi/quickstart)
 - [Đọc phương pháp luận](/methodology)
@@ -38,29 +35,6 @@ Trong những đợt ngắn, agent lập trình rất ấn tượng. Giao cho n�
 
 
 Ngữ cảnh là tài nguyên khan hiếm nhất của agent, vì vậy harness giữ phần hướng dẫn của chính nó gọn nhẹ và dễ kiểm tra. Hướng dẫn được tải dần, bước xác thực tập trung vào phần đã thay đổi, và mỗi tác vụ nhận đúng ngữ cảnh liên quan. Chúng tôi công bố dung lượng hướng dẫn của từng luồng bằng byte để phần tải này luôn minh bạch. Kế hoạch cũng tùy theo công việc: Lite cho một sửa đổi có phạm vi rõ ràng, Full cho công việc kéo dài nhiều giờ. Định dạng theo sát phạm vi công việc, giúp quy trình tập trung và dễ theo dõi.
-
----
-
-## Kế hoạch chạy đến cùng. Quyền hạn vẫn thuộc về con người.
-
-Loop engineering giúp kế hoạch hoàn tất mà không cần con người liên tục kiểm tra. Các hàng dưới đây mô tả những hợp đồng đã phát hành của vòng lặp: phần lớn thuộc herdr-peers, còn hàng đợi kế hoạch là hợp đồng của pack. Herdr là tùy chọn; phương pháp vẫn hoạt động khi không có nó.
-
-
-
-| Hợp đồng | Điều nó bảo đảm | Nguồn (herdr-peers v2.2.0) |
-| --- | --- | --- |
-| Đăng ký kế hoạch (`herdr-peers lead claim`) | Một kế hoạch mà vòng lặp theo dõi có bản ghi lead với một epoch và thứ tự kế nhiệm. Chỉ bên giữ epoch cao nhất mới hành động với vai trò lead của nó. | `skills/herdr-peers/protocol.md` §12 |
-| Chỉ con người khởi động (`herdr-peers autopilot start --loop`) | Chỉ con người khởi động daemon, bằng chính lời của mình. Không yêu cầu, phản hồi hay thông báo nào có thể khởi động, dừng hoặc thay đổi việc nó làm. | `skills/herdr-peers/autopilot.md` §1 |
-| Lời nhắc không thêm quyền hạn (`plan_stalled`) | Lead đang rảnh của một kế hoạch mở nhận một lời nhắc cố định để tiếp tục. Các cổng, điều kiện dừng và cơ chế leo thang vẫn ràng buộc như trước; ba lời nhắc không có tiến triển sẽ đánh dấu kế hoạch là bị đình trệ. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
-| Chuyển giao cho người kế nhiệm (`herdr-peers lead takeover`) | Khi lead không còn, người kế nhiệm đầu tiên liên lạc được sẽ được yêu cầu tiếp quản, và trình trợ giúp kiểm tra lại bằng chứng. Một lane chỉ nhận vai trò lead theo quyền mà con người đã ghi nhận từ trước. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
-| Sự kiện kế hoạch (`plan-event-v1`) | Khi một kế hoạch bị đình trệ, bị chặn, mất lead, bắt đầu từ hàng đợi hoặc hoàn thành, một lệnh do con người chọn sẽ nhận một đối tượng plan-event-v1. Gói skill kèm sẵn một trình thông báo Dailybot cho việc này. | `docs/schema/plan-event-v1.json` |
-| Bản đồ đội máy (`plans-v1` · `fleet-v1`) | Mỗi máy báo cáo các kế hoạch của mình dưới dạng plans-v1; daemon duy trì bản đồ fleet-v1 của mọi máy, agent, repository và kế hoạch, và fleet ui hiển thị nó ở chế độ chỉ đọc. | `docs/schema/fleet-v1.json` |
-| Hàng đợi kế hoạch (`dwp-queue-v1`) | Pack xác thực và ghi hàng đợi; daemon đọc hàng đợi để tiếp tục các kế hoạch đang chờ. | `skills/deepworkplan/shared/queue.py` |
-| Xác minh lead (`herdr-peers lead verify`) | Trước mọi lần merge, gắn tag hay phát hành, lead xác nhận rằng nó vẫn giữ kế hoạch trên mọi máy. Một lead mới hơn sẽ từ chối; một máy không liên lạc được sẽ dừng thao tác trừ khi rủi ro đó được chấp nhận và ghi nhận. | `skills/herdr-peers/protocol.md` §12 |
-
-Bộ não quyết định (`--brain`) và việc chỉ định lead (`--appoint`) là các cờ tùy chọn của cùng một daemon, mỗi cờ do con người bật. Daemon không bao giờ merge, phát hành, đăng nhập hay thay đổi quyền truy cập.
-
-[Đọc về addon Herdr](/vi/kit/herdr)
 
 ---
 
@@ -114,6 +88,33 @@ Ngữ cảnh, công cụ, rào chắn và trạng thái nằm trong repository c
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Xem onboarding tạo ra gì](/vi/quickstart)
+
+---
+
+## Kế hoạch chạy đến cùng. Quyền hạn vẫn thuộc về con người.
+
+Loop engineering giúp kế hoạch hoàn tất mà không cần con người liên tục kiểm tra. Các hàng dưới đây mô tả những hợp đồng đã phát hành của vòng lặp: phần lớn thuộc herdr-peers, còn hàng đợi kế hoạch là hợp đồng của pack. Herdr là tùy chọn; phương pháp vẫn hoạt động khi không có nó.
+
+> Đặc tả trước cho biết làm gì; harness cho biết ở đâu; Loop engineering cho biết công việc kết thúc thế nào.
+
+**Vòng lặp:** Đăng ký (`lead claim`, lead và thứ tự kế nhiệm) → Daemon (`autopilot --loop`, do con người khởi động) → Nhắc (`idle ≥ 5 min`, không thêm quyền hạn) → Chuyển giao (`lead takeover`, người kế nhiệm đầu tiên liên lạc được) → Thông báo (`plan-event-v1`, tới lệnh của con người) → Xong (`plan_completed`, đã qua các cổng). Mọi kế hoạch mở có bản ghi lead, cho đến khi chính trạng thái của nó báo đã xong.
+
+
+
+| Hợp đồng | Điều nó bảo đảm | Nguồn (herdr-peers v2.2.0) |
+| --- | --- | --- |
+| Đăng ký kế hoạch (`herdr-peers lead claim`) | Một kế hoạch mà vòng lặp theo dõi có bản ghi lead với một epoch và thứ tự kế nhiệm. Chỉ bên giữ epoch cao nhất mới hành động với vai trò lead của nó. | `skills/herdr-peers/protocol.md` §12 |
+| Chỉ con người khởi động (`herdr-peers autopilot start --loop`) | Chỉ con người khởi động daemon, bằng chính lời của mình. Không yêu cầu, phản hồi hay thông báo nào có thể khởi động, dừng hoặc thay đổi việc nó làm. | `skills/herdr-peers/autopilot.md` §1 |
+| Lời nhắc không thêm quyền hạn (`plan_stalled`) | Lead đang rảnh của một kế hoạch mở nhận một lời nhắc cố định để tiếp tục. Các cổng, điều kiện dừng và cơ chế leo thang vẫn ràng buộc như trước; ba lời nhắc không có tiến triển sẽ đánh dấu kế hoạch là bị đình trệ. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Chuyển giao cho người kế nhiệm (`herdr-peers lead takeover`) | Khi lead không còn, người kế nhiệm đầu tiên liên lạc được sẽ được yêu cầu tiếp quản, và trình trợ giúp kiểm tra lại bằng chứng. Một lane chỉ nhận vai trò lead theo quyền mà con người đã ghi nhận từ trước. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Sự kiện kế hoạch (`plan-event-v1`) | Khi một kế hoạch bị đình trệ, bị chặn, mất lead, bắt đầu từ hàng đợi hoặc hoàn thành, một lệnh do con người chọn sẽ nhận một đối tượng plan-event-v1. Gói skill kèm sẵn một trình thông báo Dailybot cho việc này. | `docs/schema/plan-event-v1.json` |
+| Bản đồ đội máy (`plans-v1` · `fleet-v1`) | Mỗi máy báo cáo các kế hoạch của mình dưới dạng plans-v1; daemon duy trì bản đồ fleet-v1 của mọi máy, agent, repository và kế hoạch, và fleet ui hiển thị nó ở chế độ chỉ đọc. | `docs/schema/fleet-v1.json` |
+| Hàng đợi kế hoạch (`dwp-queue-v1`) | Pack xác thực và ghi hàng đợi; daemon đọc hàng đợi để tiếp tục các kế hoạch đang chờ. | `skills/deepworkplan/shared/queue.py` |
+| Xác minh lead (`herdr-peers lead verify`) | Trước mọi lần merge, gắn tag hay phát hành, lead xác nhận rằng nó vẫn giữ kế hoạch trên mọi máy. Một lead mới hơn sẽ từ chối; một máy không liên lạc được sẽ dừng thao tác trừ khi rủi ro đó được chấp nhận và ghi nhận. | `skills/herdr-peers/protocol.md` §12 |
+
+Bộ não quyết định (`--brain`) và việc chỉ định lead (`--appoint`) là các cờ tùy chọn của cùng một daemon, mỗi cờ do con người bật. Daemon không bao giờ merge, phát hành, đăng nhập hay thay đổi quyền truy cập.
+
+[Đọc về addon Herdr](/vi/kit/herdr)
 
 ---
 

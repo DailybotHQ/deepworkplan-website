@@ -4,17 +4,14 @@ description: "Önce spesifikasyon, kapalı döngü: Deep Work Plan deponuzu AI k
 lastUpdated: 2026-11-16
 ---
 
-## Önce spesifikasyon, kapalı döngü: depo harness’tir ve plan kendi kendine bitene kadar çalışır.
+## Önce spesifikasyon, kapalı döngü.
 
-Deep Work Plan, herhangi bir depoyu harness’e dönüştürür — bağlam, koruma bariyerleri ve doğrulama kapıları olan kalıcı bir plan — herhangi bir kodlama ajanı burada uzun soluklu işi yürütür. İsteğe bağlı döngüyü ekleyin; açık bir plan, kimse onu yoklamadan sonuna kadar çalışmayı sürdürür.
+Depo harness’tir ve plan kendi kendine bitene kadar çalışır.
 
 Deep Work Plan (DWP), yapay zeka ajanlarıyla karmaşık yazılım işlerini planlamak ve yürütmek için açık, MIT lisanslı bir metodoloji ve kittir. Bir kurulum yöntemi seçmez ya da bir şablon kopyalamazsınız — init.md istemini kopyalayıp ajanınıza yapıştırırsınız:
 
 > init.md istemini kopyalayıp kodlama ajanınıza — Claude Code, Cursor, Codex veya herhangi bir diğeri — yapıştırarak herhangi bir depoyu AI-first hale getirin.
 
-
-
-**Döngü:** Kayıt (`lead claim`, lider ve halef sırası) → Daemon (`autopilot --loop`, bir insan başlatır) → Dürtme (`idle ≥ 5 min`, yetki eklemez) → Devir (`lead takeover`, erişilebilen ilk halef) → Bildirim (`plan-event-v1`, insanın komutuna) → Bitti (`plan_completed`, kapılar geçildi). Lider kaydı olan her açık plan, kendi durumu bitti diyene kadar.
 
 - [/init istemini açın](/tr/quickstart)
 - [Metodolojiyi okuyun](/methodology)
@@ -38,29 +35,6 @@ Kısa hamlelerde kodlama ajanları etkileyicidir. Ona uzun soluklu bir misyon ve
 
 
 Bağlam, ajanın en kıt kaynağıdır. Bu nedenle harness kendi yönergelerini hafif ve denetlenebilir tutar. Yönergeler aşamalı yüklenir, doğrulama değişikliklere odaklanır ve her görev ilgili bağlamı alır. Her akışın yönerge boyutunu bayt cinsinden yayımlayarak bu yükü görünür kılıyoruz. Planlar da işe göre biçimlenir: kapsamı sınırlı bir düzeltme için Lite, saatler süren işler için Full. Biçim işin kapsamını izler; böylece süreç odaklı ve izlenebilir kalır.
-
----
-
-## Planlar sonuna kadar çalışır. Yetki insanlarda kalır.
-
-Loop engineering, bir planın insan tarafından sürekli sorgulanmadan tamamlanmasını sağlar. Aşağıdaki satırlar döngünün yayımlanmış sözleşmelerini açıklar: çoğu herdr-peers kaynaklıdır; plan kuyruğu ise paket sözleşmesidir. Herdr isteğe bağlıdır ve metodoloji onsuz da çalışır.
-
-
-
-| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.2.0) |
-| --- | --- | --- |
-| Plan kaydı (`herdr-peers lead claim`) | Döngünün izlediği bir planın, epoch ve halef sırası içeren bir lider kaydı vardır. Yalnızca en yüksek epoch’un sahibi planın lideri olarak hareket eder. | `skills/herdr-peers/protocol.md` §12 |
-| Yalnızca insan başlatır (`herdr-peers autopilot start --loop`) | Daemon’u yalnızca bir insan, kendi sözleriyle başlatır. Hiçbir soru, yanıt veya bildirim onu başlatamaz, durduramaz ya da yaptığı şeyi değiştiremez. | `skills/herdr-peers/autopilot.md` §1 |
-| Dürtmeler yetki eklemez (`plan_stalled`) | Açık bir planın boşta kalan lideri, devam etmesi için sabit bir istem alır. Kapılar, durma koşulları ve eskalasyonlar önceki gibi bağlayıcıdır; ilerleme olmadan geçen üç istem planı takılmış olarak işaretler. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
-| Haleflere devir (`herdr-peers lead takeover`) | Lider ortadan kalktığında, erişilebilen ilk haleften devralması istenir ve yardımcı kanıtı yeniden denetler. Bir kulvar liderliği yalnızca insanın önceden kaydettiği bir yetkiyle alır. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
-| Plan olayları (`plan-event-v1`) | Bir plan takıldığında, engellendiğinde, liderini kaybettiğinde, kuyruktan başladığında veya tamamlandığında, insanın seçtiği bir komut tek bir plan-event-v1 nesnesi alır. Paket bunun için bir Dailybot bildiricisi sunar. | `docs/schema/plan-event-v1.json` |
-| Filo haritası (`plans-v1` · `fleet-v1`) | Her makine planlarını plans-v1 olarak bildirir; daemon her makinenin, ajanın, deponun ve planın fleet-v1 haritasını tutar ve fleet ui bunu salt okunur olarak gösterir. | `docs/schema/fleet-v1.json` |
-| Plan kuyruğu (`dwp-queue-v1`) | Paket kuyruğu doğrular ve yazar; daemon bekleyen planları sürdürmek için kuyruğu okur. | `skills/deepworkplan/shared/queue.py` |
-| Lider doğrulaması (`herdr-peers lead verify`) | Herhangi bir birleştirme, etiket veya sürümden önce lider, planı her makinede hâlâ elinde tuttuğunu doğrular. Daha yeni bir lider bunu reddeder; erişilemeyen bir makine, bu risk kayda geçirilerek kabul edilmedikçe işlemi durdurur. | `skills/herdr-peers/protocol.md` §12 |
-
-Karar beyni (`--brain`) ve lider ataması (`--appoint`), aynı daemon’un tercihe dayalı bayraklarıdır ve her biri bir insan tarafından açılır. Daemon asla birleştirme yapmaz, sürüm yayımlamaz, oturum açmaz veya bir izni değiştirmez.
-
-[Herdr eklentisini okuyun](/tr/kit/herdr)
 
 ---
 
@@ -114,6 +88,33 @@ Bağlam, araçlar, koruma bariyerleri ve durum; herhangi bir ajanın okuyabilece
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Onboarding çıktısını görün](/tr/quickstart)
+
+---
+
+## Planlar sonuna kadar çalışır. Yetki insanlarda kalır.
+
+Loop engineering, bir planın insan tarafından sürekli sorgulanmadan tamamlanmasını sağlar. Aşağıdaki satırlar döngünün yayımlanmış sözleşmelerini açıklar: çoğu herdr-peers kaynaklıdır; plan kuyruğu ise paket sözleşmesidir. Herdr isteğe bağlıdır ve metodoloji onsuz da çalışır.
+
+> Önce spesifikasyon neyi söyler; harness nerede olduğunu söyler; Loop engineering işin nasıl bittiğini söyler.
+
+**Döngü:** Kayıt (`lead claim`, lider ve halef sırası) → Daemon (`autopilot --loop`, bir insan başlatır) → Dürtme (`idle ≥ 5 min`, yetki eklemez) → Devir (`lead takeover`, erişilebilen ilk halef) → Bildirim (`plan-event-v1`, insanın komutuna) → Bitti (`plan_completed`, kapılar geçildi). Lider kaydı olan her açık plan, kendi durumu bitti diyene kadar.
+
+
+
+| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.2.0) |
+| --- | --- | --- |
+| Plan kaydı (`herdr-peers lead claim`) | Döngünün izlediği bir planın, epoch ve halef sırası içeren bir lider kaydı vardır. Yalnızca en yüksek epoch’un sahibi planın lideri olarak hareket eder. | `skills/herdr-peers/protocol.md` §12 |
+| Yalnızca insan başlatır (`herdr-peers autopilot start --loop`) | Daemon’u yalnızca bir insan, kendi sözleriyle başlatır. Hiçbir soru, yanıt veya bildirim onu başlatamaz, durduramaz ya da yaptığı şeyi değiştiremez. | `skills/herdr-peers/autopilot.md` §1 |
+| Dürtmeler yetki eklemez (`plan_stalled`) | Açık bir planın boşta kalan lideri, devam etmesi için sabit bir istem alır. Kapılar, durma koşulları ve eskalasyonlar önceki gibi bağlayıcıdır; ilerleme olmadan geçen üç istem planı takılmış olarak işaretler. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Haleflere devir (`herdr-peers lead takeover`) | Lider ortadan kalktığında, erişilebilen ilk haleften devralması istenir ve yardımcı kanıtı yeniden denetler. Bir kulvar liderliği yalnızca insanın önceden kaydettiği bir yetkiyle alır. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Plan olayları (`plan-event-v1`) | Bir plan takıldığında, engellendiğinde, liderini kaybettiğinde, kuyruktan başladığında veya tamamlandığında, insanın seçtiği bir komut tek bir plan-event-v1 nesnesi alır. Paket bunun için bir Dailybot bildiricisi sunar. | `docs/schema/plan-event-v1.json` |
+| Filo haritası (`plans-v1` · `fleet-v1`) | Her makine planlarını plans-v1 olarak bildirir; daemon her makinenin, ajanın, deponun ve planın fleet-v1 haritasını tutar ve fleet ui bunu salt okunur olarak gösterir. | `docs/schema/fleet-v1.json` |
+| Plan kuyruğu (`dwp-queue-v1`) | Paket kuyruğu doğrular ve yazar; daemon bekleyen planları sürdürmek için kuyruğu okur. | `skills/deepworkplan/shared/queue.py` |
+| Lider doğrulaması (`herdr-peers lead verify`) | Herhangi bir birleştirme, etiket veya sürümden önce lider, planı her makinede hâlâ elinde tuttuğunu doğrular. Daha yeni bir lider bunu reddeder; erişilemeyen bir makine, bu risk kayda geçirilerek kabul edilmedikçe işlemi durdurur. | `skills/herdr-peers/protocol.md` §12 |
+
+Karar beyni (`--brain`) ve lider ataması (`--appoint`), aynı daemon’un tercihe dayalı bayraklarıdır ve her biri bir insan tarafından açılır. Daemon asla birleştirme yapmaz, sürüm yayımlamaz, oturum açmaz veya bir izni değiştirmez.
+
+[Herdr eklentisini okuyun](/tr/kit/herdr)
 
 ---
 

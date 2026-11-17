@@ -99,8 +99,9 @@ export const en: SiteTranslations = {
       badge: 'Open methodology · MIT · Agent-agnostic',
       leadSentence:
         'Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.',
+      headline: 'Spec-first, loop-closed.',
       subtitle:
-        'Deep Work Plan turns any repository into the harness — context, guardrails, and a durable plan with validation gates — where any coding agent executes long-horizon work. Add the optional loop, and an open plan keeps running to its end without anyone polling it.',
+        'The repository is the harness and the plan runs itself to done.',
       instructionLabel: 'Copy into your agent',
       instruction:
         'Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.',
@@ -111,6 +112,8 @@ export const en: SiteTranslations = {
         'Spec-first says what; the harness says where; loop engineering says how it finishes.',
       primaryCta: 'Read the methodology',
       secondaryCta: 'Read the spec',
+      illustrationAlt:
+        'A lighthouse on a rocky shore casts a single beam guiding a small vessel — an engraving evoking the repository as a steady harness that guides any agent.',
     },
     pillars: {
       badge: 'Four pillars',
@@ -219,7 +222,7 @@ export const en: SiteTranslations = {
         {
           name: 'Plan queue',
           detail:
-            'The pack validates and writes the `dwp-queue-v1` queue; the daemon reads it to continue queued plans.',
+            'The pack validates and writes the dwp-queue-v1 queue; the daemon reads it to continue queued plans.',
         },
         {
           name: 'Lead verify',

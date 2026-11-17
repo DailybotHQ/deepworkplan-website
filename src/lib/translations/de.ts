@@ -105,8 +105,9 @@ export const de: SiteTranslations = {
       badge: 'Offene Methodik · MIT · Agenten-agnostisch',
       leadSentence:
         'Spec-first, mit geschlossenem Loop: Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.',
+      headline: 'Spec-first, mit geschlossenem Loop.',
       subtitle:
-        'Deep Work Plan macht jedes Repository zum Harness — Kontext, Guardrails und ein dauerhafter Plan mit Validierungs-Gates —, in dem jeder Coding-Agent langlaufende Arbeit ausführt. Fügen Sie den optionalen Loop hinzu, und ein offener Plan läuft bis zu seinem Ende weiter, ohne dass jemand nachfragen muss.',
+        'Das Repository ist das Harness, und der Plan läuft von selbst bis zum Ende.',
       instructionLabel: 'In Ihren Agenten kopieren',
       instruction:
         'Kopieren Sie den init.md-Prompt und fügen Sie ihn in Ihren Coding-Agenten ein — Claude Code, Cursor, Codex oder einen anderen — um jedes Repository AI-first zu machen.',
@@ -117,6 +118,8 @@ export const de: SiteTranslations = {
         'Spec-first sagt, was; das Harness, wo; Loop engineering, wie es zu Ende geht.',
       primaryCta: 'Methodik lesen',
       secondaryCta: 'Spezifikation lesen',
+      illustrationAlt:
+        'Ein Leuchtturm an felsiger Küste wirft einen einzelnen Strahl, der ein kleines Schiff lenkt — ein Stich, der das Repository als stabilen Anker („harness“) zeigt, der jeden Agenten führt.',
     },
     pillars: {
       badge: 'Vier Säulen',
@@ -226,7 +229,7 @@ export const de: SiteTranslations = {
         {
           name: 'Planwarteschlange',
           detail:
-            'Das Pack validiert und schreibt die `dwp-queue-v1`-Warteschlange; der Daemon liest sie, um eingereihte Pläne fortzusetzen.',
+            'Das Pack validiert und schreibt die dwp-queue-v1-Warteschlange; der Daemon liest sie, um eingereihte Pläne fortzusetzen.',
         },
         {
           name: 'Lead-Prüfung',

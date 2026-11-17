@@ -4,17 +4,14 @@ description: "Spec-first, z zamkniętą pętlą: Deep Work Plan czyni repozytori
 lastUpdated: 2026-11-16
 ---
 
-## Spec-first, z zamkniętą pętlą: repozytorium jest harnessem, a plan sam wykonuje się do końca.
+## Spec-first, z zamkniętą pętlą.
 
-Deep Work Plan zamienia każde repozytorium w harness — kontekst, zabezpieczenia i trwały plan z bramkami walidacyjnymi — w którym każdy agent kodowania wykonuje pracę długoterminową. Dodaj opcjonalną pętlę, a otwarty plan będzie działał aż do końca, bez potrzeby ciągłego sprawdzania go przez kogokolwiek.
+Repozytorium jest harnessem, a plan sam wykonuje się do końca.
 
 Deep Work Plan (DWP) to otwarta metodyka i kit na licencji MIT, służące do planowania i wykonywania złożonej pracy programistycznej z agentami AI. Nie wybierasz metody instalacji ani nie kopiujesz szablonu — kopiujesz prompt init.md i wklejasz go do swojego agenta:
 
 > Skopiuj prompt init.md i wklej go do swojego agenta kodowania — Claude Code, Cursor, Codex lub innego — aby uczynić dowolne repozytorium AI-first.
 
-
-
-**Pętla:** Rejestracja (`lead claim`, lead i sukcesja) → Demon (`autopilot --loop`, uruchamia go człowiek) → Przypomnienie (`idle ≥ 5 min`, nie daje uprawnień) → Failover (`lead takeover`, pierwszy osiągalny następca) → Sygnał (`plan-event-v1`, do polecenia człowieka) → Koniec (`plan_completed`, bramki zaliczone). Każdy otwarty plan z rekordem leada, dopóki jego własny stan nie wskaże końca.
 
 - [Otwórz prompt /init](/pl/quickstart)
 - [Przeczytaj metodykę](/methodology)
@@ -38,29 +35,6 @@ W krótkich seriach agenci kodowania są imponujący. Powierz im długą misję 
 
 
 Kontekst to najcenniejszy zasób agenta, dlatego harness utrzymuje własne instrukcje w niewielkim, audytowalnym zakresie. Instrukcje są ładowane stopniowo, walidacja skupia się na zmianach, a każde zadanie otrzymuje potrzebny kontekst. Publikujemy rozmiar instrukcji dla każdego przepływu w bajtach, aby ten narzut był widoczny. Plany również dopasowują się do pracy: Lite do ograniczonej poprawki, Full do zadań trwających wiele godzin. Format wynika z zakresu pracy, dzięki czemu proces pozostaje skupiony i możliwy do prześledzenia.
-
----
-
-## Plany działają do końca. Uprawnienia pozostają przy ludziach.
-
-Loop engineering pozwala planowi dobiec końca bez stałego nadzoru człowieka. Poniższe wiersze opisują wydane kontrakty pętli: większość pochodzi z herdr-peers, a kolejka planów jest kontraktem pakietu. Herdr jest opcjonalny; metodyka działa bez niego.
-
-
-
-| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.2.0) |
-| --- | --- | --- |
-| Rejestracja planu (`herdr-peers lead claim`) | Plan obserwowany przez pętlę ma rekord leada z epoką i sukcesją. Jako lead działa wyłącznie posiadacz najwyższej epoki. | `skills/herdr-peers/protocol.md` §12 |
-| Start wyłącznie przez człowieka (`herdr-peers autopilot start --loop`) | Tylko człowiek uruchamia demona, własnymi słowami. Żadne zapytanie, odpowiedź ani powiadomienie nie może go uruchomić, zatrzymać ani zmienić tego, co robi. | `skills/herdr-peers/autopilot.md` §1 |
-| Przypomnienia nie dają uprawnień (`plan_stalled`) | Bezczynny lead otwartego planu otrzymuje jeden stały prompt, by kontynuować. Bramki, warunki zatrzymania i eskalacje obowiązują jak wcześniej; trzy prompty bez postępu oznaczają plan jako utknięty. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
-| Failover na następców (`herdr-peers lead takeover`) | Gdy lead znika, pierwszy osiągalny następca zostaje poproszony o przejęcie roli, a pomocnik ponownie sprawdza dowody. Tor pracy (lane) przejmuje rolę leada tylko na podstawie zgody, którą człowiek zapisał z wyprzedzeniem. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
-| Zdarzenia planu (`plan-event-v1`) | Gdy plan utknie, zostanie zablokowany, straci leada, wystartuje z kolejki lub się zakończy, wybrane przez człowieka polecenie otrzymuje jeden obiekt plan-event-v1. Pakiet zawiera do tego notyfikator Dailybot. | `docs/schema/plan-event-v1.json` |
-| Mapa floty (`plans-v1` · `fleet-v1`) | Każda maszyna raportuje swoje plany jako plans-v1; demon utrzymuje mapę fleet-v1 wszystkich maszyn, agentów, repozytoriów i planów, a fleet ui pokazuje ją w trybie tylko do odczytu. | `docs/schema/fleet-v1.json` |
-| Kolejka planów (`dwp-queue-v1`) | Pakiet sprawdza i zapisuje kolejkę; demon odczytuje ją, aby kontynuować oczekujące plany. | `skills/deepworkplan/shared/queue.py` |
-| Weryfikacja leada (`herdr-peers lead verify`) | Przed każdym scaleniem, tagiem czy wydaniem lead potwierdza, że nadal utrzymuje plan na każdej maszynie. Nowszy lead ją odrzuca; nieosiągalna maszyna ją zatrzymuje, chyba że to ryzyko zostało zaakceptowane i odnotowane. | `skills/herdr-peers/protocol.md` §12 |
-
-Mózg decyzyjny (`--brain`) i wyznaczanie leada (`--appoint`) to opcjonalne flagi tego samego demona, a każdą z nich włącza człowiek. Demon nigdy nie scala, nie publikuje wydań, nie loguje się ani nie zmienia uprawnień.
-
-[Przeczytaj o dodatku Herdr](/pl/kit/herdr)
 
 ---
 
@@ -114,6 +88,33 @@ Kontekst, narzędzia, zabezpieczenia i stan mieszkają w Twoim repozytorium jako
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [Zobacz, co tworzy onboarding](/pl/quickstart)
+
+---
+
+## Plany działają do końca. Uprawnienia pozostają przy ludziach.
+
+Loop engineering pozwala planowi dobiec końca bez stałego nadzoru człowieka. Poniższe wiersze opisują wydane kontrakty pętli: większość pochodzi z herdr-peers, a kolejka planów jest kontraktem pakietu. Herdr jest opcjonalny; metodyka działa bez niego.
+
+> Spec-first mówi, co robić; harness — gdzie; Loop engineering — jak to się kończy.
+
+**Pętla:** Rejestracja (`lead claim`, lead i sukcesja) → Demon (`autopilot --loop`, uruchamia go człowiek) → Przypomnienie (`idle ≥ 5 min`, nie daje uprawnień) → Failover (`lead takeover`, pierwszy osiągalny następca) → Sygnał (`plan-event-v1`, do polecenia człowieka) → Koniec (`plan_completed`, bramki zaliczone). Każdy otwarty plan z rekordem leada, dopóki jego własny stan nie wskaże końca.
+
+
+
+| Kontrakt | Co gwarantuje | Źródło (herdr-peers v2.2.0) |
+| --- | --- | --- |
+| Rejestracja planu (`herdr-peers lead claim`) | Plan obserwowany przez pętlę ma rekord leada z epoką i sukcesją. Jako lead działa wyłącznie posiadacz najwyższej epoki. | `skills/herdr-peers/protocol.md` §12 |
+| Start wyłącznie przez człowieka (`herdr-peers autopilot start --loop`) | Tylko człowiek uruchamia demona, własnymi słowami. Żadne zapytanie, odpowiedź ani powiadomienie nie może go uruchomić, zatrzymać ani zmienić tego, co robi. | `skills/herdr-peers/autopilot.md` §1 |
+| Przypomnienia nie dają uprawnień (`plan_stalled`) | Bezczynny lead otwartego planu otrzymuje jeden stały prompt, by kontynuować. Bramki, warunki zatrzymania i eskalacje obowiązują jak wcześniej; trzy prompty bez postępu oznaczają plan jako utknięty. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Failover na następców (`herdr-peers lead takeover`) | Gdy lead znika, pierwszy osiągalny następca zostaje poproszony o przejęcie roli, a pomocnik ponownie sprawdza dowody. Tor pracy (lane) przejmuje rolę leada tylko na podstawie zgody, którą człowiek zapisał z wyprzedzeniem. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Zdarzenia planu (`plan-event-v1`) | Gdy plan utknie, zostanie zablokowany, straci leada, wystartuje z kolejki lub się zakończy, wybrane przez człowieka polecenie otrzymuje jeden obiekt plan-event-v1. Pakiet zawiera do tego notyfikator Dailybot. | `docs/schema/plan-event-v1.json` |
+| Mapa floty (`plans-v1` · `fleet-v1`) | Każda maszyna raportuje swoje plany jako plans-v1; demon utrzymuje mapę fleet-v1 wszystkich maszyn, agentów, repozytoriów i planów, a fleet ui pokazuje ją w trybie tylko do odczytu. | `docs/schema/fleet-v1.json` |
+| Kolejka planów (`dwp-queue-v1`) | Pakiet sprawdza i zapisuje kolejkę; demon odczytuje ją, aby kontynuować oczekujące plany. | `skills/deepworkplan/shared/queue.py` |
+| Weryfikacja leada (`herdr-peers lead verify`) | Przed każdym scaleniem, tagiem czy wydaniem lead potwierdza, że nadal utrzymuje plan na każdej maszynie. Nowszy lead ją odrzuca; nieosiągalna maszyna ją zatrzymuje, chyba że to ryzyko zostało zaakceptowane i odnotowane. | `skills/herdr-peers/protocol.md` §12 |
+
+Mózg decyzyjny (`--brain`) i wyznaczanie leada (`--appoint`) to opcjonalne flagi tego samego demona, a każdą z nich włącza człowiek. Demon nigdy nie scala, nie publikuje wydań, nie loguje się ani nie zmienia uprawnień.
+
+[Przeczytaj o dodatku Herdr](/pl/kit/herdr)
 
 ---
 

@@ -47,12 +47,12 @@
 >   with soft (not hard-cropped) edges, centered with margin.
 > This is the default for the whole pack — already folded into each prompt below.
 
-### HP-01 — Hero illustration (repository as harness / guiding light) — retired
+### HP-01 — Hero illustration (repository as harness / guiding light)
 
-> **Retired 2026-11-16.** The hero's right column now renders the v8 loop
-> diagram (`src/components/diagrams/home/LoopDiagram.astro`, HTML/CSS, 17
-> languages). The engraving pair generated from this prompt was deleted from
-> `public/images/visuals/home/`; the prompt below is kept as history only.
+> **Restored 2026-11-17.** Retired on 2026-11-16 for the v8 loop diagram, the
+> engraving pair is back in the hero's right column; the loop diagram
+> (`src/components/diagrams/home/LoopDiagram.astro`) now illustrates the
+> homepage loop-engineering section.
 
 - **Target surface:** `src/components/home/Hero.astro` → the right column. The hero currently constrains content to `max-w-3xl` on the left; integration exposes a right column on `lg` to hold this illustration.
 - **Type:** illustration

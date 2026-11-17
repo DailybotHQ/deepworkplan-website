@@ -106,8 +106,9 @@ export const pt: SiteTranslations = {
       badge: 'Metodologia aberta · MIT · Independente de agente',
       leadSentence:
         'Especificação primeiro, loop fechado: o repositório é o harness e o plano se executa sozinho até a conclusão.',
+      headline: 'Especificação primeiro, loop fechado.',
       subtitle:
-        'O Deep Work Plan transforma qualquer repositório no harness — contexto, guardrails e um plano duradouro com validation gates — onde qualquer agente de código executa trabalho de longo alcance. Adicione o loop opcional e um plano aberto continua em execução até o fim sem que ninguém precise acompanhá-lo.',
+        'O repositório é o harness e o plano se executa sozinho até a conclusão.',
       instructionLabel: 'Copie para o seu agente',
       instruction:
         'Copie o prompt do init.md e cole-o no seu agente de código — Claude Code, Cursor, Codex, ou qualquer outro — para tornar qualquer repositório AI-first.',
@@ -118,6 +119,8 @@ export const pt: SiteTranslations = {
         'A especificação diz o quê; o harness diz onde; o loop engineering diz como termina.',
       primaryCta: 'Leia a metodologia',
       secondaryCta: 'Leia a especificação',
+      illustrationAlt:
+        'Um farol em uma costa rochosa projeta um único feixe que guia uma pequena embarcação — uma gravura que evoca o repositório como um harness firme que guia qualquer agente.',
     },
     pillars: {
       badge: 'Quatro pilares',
@@ -226,7 +229,7 @@ export const pt: SiteTranslations = {
         {
           name: 'Fila de planos',
           detail:
-            'O pacote valida e grava a fila `dwp-queue-v1`; o daemon a lê para continuar os planos enfileirados.',
+            'O pacote valida e grava a fila dwp-queue-v1; o daemon a lê para continuar os planos enfileirados.',
         },
         {
           name: 'Verificação do lead',

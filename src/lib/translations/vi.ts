@@ -104,8 +104,8 @@ export const vi: SiteTranslations = {
       badge: 'Phương pháp luận mở · MIT · Độc lập với agent',
       leadSentence:
         'Đặc tả trước, vòng lặp khép kín: repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
-      subtitle:
-        'Deep Work Plan biến mọi repository thành harness — ngữ cảnh, rào chắn và một kế hoạch bền vững với các cổng kiểm chứng — nơi bất kỳ agent lập trình nào cũng thực thi công việc dài hơi. Thêm vòng lặp tùy chọn, và một kế hoạch đang mở sẽ tiếp tục chạy đến cùng mà không cần ai theo dõi.',
+      headline: 'Đặc tả trước, vòng lặp khép kín.',
+      subtitle: 'Repository là harness và kế hoạch tự chạy đến khi hoàn thành.',
       instructionLabel: 'Sao chép vào agent của bạn',
       instruction:
         'Sao chép prompt init.md và dán vào agent lập trình của bạn — Claude Code, Cursor, Codex, hoặc bất kỳ agent nào khác — để biến mọi repository thành AI-first.',
@@ -116,6 +116,8 @@ export const vi: SiteTranslations = {
         'Đặc tả trước cho biết làm gì; harness cho biết ở đâu; Loop engineering cho biết công việc kết thúc thế nào.',
       primaryCta: 'Đọc phương pháp luận',
       secondaryCta: 'Đọc đặc tả',
+      illustrationAlt:
+        'Một ngọn hải đăng trên bờ đá phát ra một luồng sáng duy nhất dẫn đường cho con tàu nhỏ — bản khắc gợi hình ảnh repository như một harness vững vàng dẫn lối cho mọi agent.',
     },
     pillars: {
       badge: 'Bốn trụ cột',
@@ -224,7 +226,7 @@ export const vi: SiteTranslations = {
         {
           name: 'Hàng đợi kế hoạch',
           detail:
-            'Pack xác thực và ghi hàng đợi `dwp-queue-v1`; daemon đọc hàng đợi để tiếp tục các kế hoạch đang chờ.',
+            'Pack xác thực và ghi hàng đợi dwp-queue-v1; daemon đọc hàng đợi để tiếp tục các kế hoạch đang chờ.',
         },
         {
           name: 'Xác minh lead',

@@ -4,17 +4,14 @@ description: "Spec-first, loop-closed: Deep Work Plan makes your repository the 
 lastUpdated: 2026-11-16
 ---
 
-## Spec-first, loop-closed: the repository is the harness and the plan runs itself to done.
+## Spec-first, loop-closed.
 
-Deep Work Plan turns any repository into the harness — context, guardrails, and a durable plan with validation gates — where any coding agent executes long-horizon work. Add the optional loop, and an open plan keeps running to its end without anyone polling it.
+The repository is the harness and the plan runs itself to done.
 
 Deep Work Plan (DWP) is an open, MIT-licensed methodology and kit for planning and executing complex software work with AI agents. You do not pick an install method or copy a template — you copy the init.md prompt and paste it into your agent:
 
 > Copy the init.md prompt and paste it into your coding agent — Claude Code, Cursor, Codex, or any other — to make any repository AI-first.
 
-
-
-**The loop:** Register (`lead claim`, lead and succession) → Daemon (`autopilot --loop`, started by a human) → Nudge (`idle ≥ 5 min`, adds no authority) → Failover (`lead takeover`, first reachable successor) → Notify (`plan-event-v1`, to the human's command) → Done (`plan_completed`, gates passed). Every open plan with a lead record, until its own state says done.
 
 - [Open the /init prompt](/quickstart)
 - [Read the methodology](/methodology)
@@ -38,29 +35,6 @@ A coding agent performs beautifully on short tasks. But hand it a long-horizon m
 
 
 Context is your agent’s scarcest resource, so the harness keeps its own instructions lean and auditable. Instructions load progressively, validation follows the changes, and each task gets the context relevant to its work. We publish the instruction load for each flow in bytes, making that overhead visible. Plans scale to the work too: Lite for a bounded fix, Full for work that spans hours. The format follows the scope, keeping the process focused and traceable.
-
----
-
-## Plans run to their end. Authority stays with people.
-
-Loop engineering is how a plan finishes without a human polling it. Rows below describe released contracts in the loop: most come from herdr-peers, while the plan queue is a pack contract. Herdr is optional; the methodology works without it.
-
-
-
-| Contract | What it guarantees | Source (herdr-peers v2.2.0) |
-| --- | --- | --- |
-| Plan registration (`herdr-peers lead claim`) | A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead. | `skills/herdr-peers/protocol.md` §12 |
-| Human-only start (`herdr-peers autopilot start --loop`) | Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does. | `skills/herdr-peers/autopilot.md` §1 |
-| Nudges add no authority (`plan_stalled`) | The idle lead of an open plan gets one fixed prompt to continue. Gates, stop conditions, and escalations bind as before; three prompts without progress mark the plan stalled. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
-| Failover to successors (`herdr-peers lead takeover`) | When the lead is gone, the first reachable successor is asked to take over, and the helper checks the evidence again. A lane takes the lead only under a grant the human recorded in advance. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
-| Plan events (`plan-event-v1`) | When a plan stalls, blocks, loses its lead, starts from the queue, or completes, a command the human chose receives one plan-event-v1 object. The pack ships a Dailybot notifier for it. | `docs/schema/plan-event-v1.json` |
-| Fleet map (`plans-v1` · `fleet-v1`) | Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only. | `docs/schema/fleet-v1.json` |
-| Plan queue (`dwp-queue-v1`) | The pack validates and writes the queue; the daemon reads it to continue queued plans. | `skills/deepworkplan/shared/queue.py` |
-| Lead verify (`herdr-peers lead verify`) | Before any merge, tag, or release, the lead confirms it still holds the plan on every machine. A newer lead refuses it; an unreachable machine stops it unless that risk is accepted on record. | `skills/herdr-peers/protocol.md` §12 |
-
-The decision brain (`--brain`) and lead appointment (`--appoint`) are opt-in flags of the same daemon, each switched on by a human. The daemon never merges, releases, signs in, or changes a permission.
-
-[Read the Herdr addon](/kit/herdr)
 
 ---
 
@@ -114,6 +88,33 @@ Context, tools, guardrails, and state live in your repository as plain files any
 **SPEC · TASKS · CHECKS · STATE · TOOLS**
 
 [See what onboarding generates](/quickstart)
+
+---
+
+## Plans run to their end. Authority stays with people.
+
+Loop engineering is how a plan finishes without a human polling it. Rows below describe released contracts in the loop: most come from herdr-peers, while the plan queue is a pack contract. Herdr is optional; the methodology works without it.
+
+> Spec-first says what; the harness says where; loop engineering says how it finishes.
+
+**The loop:** Register (`lead claim`, lead and succession) → Daemon (`autopilot --loop`, started by a human) → Nudge (`idle ≥ 5 min`, adds no authority) → Failover (`lead takeover`, first reachable successor) → Notify (`plan-event-v1`, to the human's command) → Done (`plan_completed`, gates passed). Every open plan with a lead record, until its own state says done.
+
+
+
+| Contract | What it guarantees | Source (herdr-peers v2.2.0) |
+| --- | --- | --- |
+| Plan registration (`herdr-peers lead claim`) | A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead. | `skills/herdr-peers/protocol.md` §12 |
+| Human-only start (`herdr-peers autopilot start --loop`) | Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does. | `skills/herdr-peers/autopilot.md` §1 |
+| Nudges add no authority (`plan_stalled`) | The idle lead of an open plan gets one fixed prompt to continue. Gates, stop conditions, and escalations bind as before; three prompts without progress mark the plan stalled. | `skills/herdr-peers/autopilot.md` §5.2–5.3 |
+| Failover to successors (`herdr-peers lead takeover`) | When the lead is gone, the first reachable successor is asked to take over, and the helper checks the evidence again. A lane takes the lead only under a grant the human recorded in advance. | `skills/herdr-peers/autopilot.md` §5.2, §7 |
+| Plan events (`plan-event-v1`) | When a plan stalls, blocks, loses its lead, starts from the queue, or completes, a command the human chose receives one plan-event-v1 object. The pack ships a Dailybot notifier for it. | `docs/schema/plan-event-v1.json` |
+| Fleet map (`plans-v1` · `fleet-v1`) | Each machine reports its plans as plans-v1; the daemon keeps the fleet-v1 map of every machine, agent, repository, and plan, and fleet ui shows it read-only. | `docs/schema/fleet-v1.json` |
+| Plan queue (`dwp-queue-v1`) | The pack validates and writes the queue; the daemon reads it to continue queued plans. | `skills/deepworkplan/shared/queue.py` |
+| Lead verify (`herdr-peers lead verify`) | Before any merge, tag, or release, the lead confirms it still holds the plan on every machine. A newer lead refuses it; an unreachable machine stops it unless that risk is accepted on record. | `skills/herdr-peers/protocol.md` §12 |
+
+The decision brain (`--brain`) and lead appointment (`--appoint`) are opt-in flags of the same daemon, each switched on by a human. The daemon never merges, releases, signs in, or changes a permission.
+
+[Read the Herdr addon](/kit/herdr)
 
 ---
 

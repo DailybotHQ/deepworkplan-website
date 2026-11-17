@@ -105,8 +105,9 @@ export const it: SiteTranslations = {
       badge: 'Metodologia aperta · MIT · Indipendente dall’agente',
       leadSentence:
         'Prima la specifica, loop chiuso: il repository è la harness e il piano si esegue da solo fino alla fine.',
+      headline: 'Prima la specifica, loop chiuso.',
       subtitle:
-        'Deep Work Plan trasforma qualsiasi repository nella harness — contesto, guardrail e un piano duraturo con validation gate — dove qualsiasi agente di coding esegue il lavoro di lungo corso. Aggiunga il loop opzionale e un piano aperto continua fino alla fine senza che nessuno debba controllarlo.',
+        'Il repository è la harness e il piano si esegue da solo fino alla fine.',
       instructionLabel: 'Copia nel Suo agente',
       instruction:
         'Copi il prompt di init.md e lo incolli nel Suo agente di coding — Claude Code, Cursor, Codex o qualsiasi altro — per rendere qualsiasi repository AI-first.',
@@ -117,6 +118,8 @@ export const it: SiteTranslations = {
         'La specifica dice cosa; la harness dice dove; il loop engineering dice come finisce.',
       primaryCta: 'Leggi la metodologia',
       secondaryCta: 'Leggi la specifica',
+      illustrationAlt:
+        'Un faro su una costa rocciosa proietta un unico fascio che guida una piccola imbarcazione — un’incisione che evoca il repository come una harness stabile che guida qualsiasi agente.',
     },
     pillars: {
       badge: 'Quattro pilastri',
@@ -225,7 +228,7 @@ export const it: SiteTranslations = {
         {
           name: 'Coda dei piani',
           detail:
-            'Il pacchetto convalida e scrive la coda `dwp-queue-v1`; il daemon la legge per proseguire i piani in attesa.',
+            'Il pacchetto convalida e scrive la coda dwp-queue-v1; il daemon la legge per proseguire i piani in attesa.',
         },
         {
           name: 'Verifica del lead',
