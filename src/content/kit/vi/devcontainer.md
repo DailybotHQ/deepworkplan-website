@@ -36,7 +36,7 @@ Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host 
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
 
-**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim hiện tại. Image `v1.4.0` đóng gói đúng các phiên bản như `v1.2.0`: herdr-peers 1.3.1, coding-agents-kit 1.4.0 và DeepWorkPlan Vim 1.0.1, cùng gói vendored 7.12.1 cũng nằm trong image.
+**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim hiện tại. Image `v1.4.0` đóng gói herdr-peers 2.1.0, coding-agents-kit 1.5.0 và DeepWorkPlan Vim 1.1.0.
 
 ## Các lớp
 
@@ -112,6 +112,17 @@ Bản phát hành 1.3.0 giữ nguyên giao diện 2 và thêm một khóa tùy c
 - **`[compose] container_only`.** Các đường dẫn con của workspace được liệt kê ở đây được gắn dưới dạng named volume theo phạm vi dự án (`co-<path-slug>`, ví dụ `co-app-node_modules` đè lên `/app/node_modules`), đọc-ghi, trên service chính. Những gì container build ở đó không bao giờ đến được bản checkout trên máy host. Trường hợp mà khóa này được tạo ra để xử lý: workspace là một bind mount, và một lần cài đặt `npm` hoặc `pnpm` bên trong container trên máy host macOS hoặc Windows sẽ thay `node_modules` bằng bản build cho nền tảng của chính nó, làm hỏng bản cài đặt của máy host.
 - **Quyền sở hữu ở mỗi lần khởi động.** Entrypoint giao từng điểm gắn cho người dùng đã cấu hình ở mỗi lần container khởi động; khi người dùng đã sở hữu nó, bước này không làm gì cả.
 - **Một lần gắn cho mỗi đường dẫn.** Một đường dẫn mà khối người dùng cũng gắn sẽ bị từ chối, và một tên volume dẫn xuất đã được `compose.state_volume` hoặc `[compose] volumes` sử dụng cũng vậy. Schema của `dck.toml` (`dck-config-v2.json`) có thêm khóa này.
+
+Image 1.3.0 đã đóng gói đúng các phiên bản như 1.2.0: herdr-peers 1.3.1, coding-agents-kit 1.4.0 và DeepWorkPlan Vim 1.0.1, cùng gói vendored 7.12.1.
+
+## Từ devcontainer-kit 1.4.0 (giao diện 2)
+
+Bản phát hành 1.4.0 giữ nguyên giao diện 2 và cập nhật các phiên bản mà image đóng gói; bề mặt riêng của dck không thay đổi.
+
+- **herdr-peers 2.1.0 (giao thức 2).** Việc bổ nhiệm lead theo lời chỉ định rõ ràng của con người, bộ não autopilot tùy chọn bật và đóng khi lỗi (fail-closed), cùng hàng đợi kế hoạch có từ 2.0.0; các câu hỏi, thông báo và phản hồi vẫn tương thích với các peer 1.x. 2.1.0 thêm các chế độ xem `fleet ui`, từ chối một quyền mà daemon không thể chấp nhận thay vì để agent chờ, và đọc các lớp blocker của gói 8.0. dck không bao giờ khởi động daemon.
+- **coding-agents-kit 1.5.0 (giao diện 1).** Với `AGENTKIT_PERMISSIONS=ask` hoặc `--ask`, chế độ hỏi riêng của từng CLI được thực thi, nên một tài khoản có cài đặt mặc định ở chế độ tự chủ không còn khởi động ở chế độ tự chủ; `ak run --json` chỉ báo cáo số token khi CLI báo cáo chúng. Lớp `agents` vẫn không ghi bất kỳ cờ tự chủ nào.
+- **DeepWorkPlan Vim 1.1.0.** Cùng Neovim (0.12.5); trình soạn thảo hiển thị hàng đợi kế hoạch, các blocker có cấu trúc và tư thế tự chủ của gói 8.0 ở chế độ chỉ đọc, và một kế hoạch v7 vẫn hiển thị như trước.
+- **Repository này tự dùng DeepWorkPlan 8.0.1 (dogfooding).** Các kế hoạch mới ghi `plan-contract/v8`; các kế hoạch v7, v6 và v5 giữ nguyên thế hệ của chúng.
 
 ## Mặc định bảo mật
 

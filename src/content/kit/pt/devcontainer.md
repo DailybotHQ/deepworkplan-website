@@ -36,7 +36,7 @@ Requisitos: `bash` 3.2 ou mais recente e `python3` 3.11 ou mais recente em um ho
 | Configuração por repositório | `.devcontainer/dck.toml` |
 | Detecção | `dck doctor --json` |
 
-**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico e só muda de forma incompatível em uma nova versão principal (e, para os arquivos, com um novo número de interface): os verbos do `dck` com suas flags documentadas e seus códigos de saída (`0` ok, `1` falha, `2` uso, `3` configuração, `4` ambiente, `5` recusado), os esquemas do `dck.toml`, do perfil do host e do `dck doctor --json` (interface 2), e o contrato de renderização: os arquivos que `dck init` escreve e gerencia, os marcadores `dck:managed` e os blocos de usuário que ele preserva, e o ambiente que o entrypoint lê. Nada quebra a partir da `v0.3.7`: execute `dck init` e `dck rebuild` para que a imagem traga as versões fixadas atuais. A imagem da `v1.4.0` incorpora as mesmas versões da `v1.2.0`: herdr-peers 1.3.1, coding-agents-kit 1.4.0 e DeepWorkPlan Vim 1.0.1, com o pacote vendorizado 7.12.1 também na imagem.
+**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico e só muda de forma incompatível em uma nova versão principal (e, para os arquivos, com um novo número de interface): os verbos do `dck` com suas flags documentadas e seus códigos de saída (`0` ok, `1` falha, `2` uso, `3` configuração, `4` ambiente, `5` recusado), os esquemas do `dck.toml`, do perfil do host e do `dck doctor --json` (interface 2), e o contrato de renderização: os arquivos que `dck init` escreve e gerencia, os marcadores `dck:managed` e os blocos de usuário que ele preserva, e o ambiente que o entrypoint lê. Nada quebra a partir da `v0.3.7`: execute `dck init` e `dck rebuild` para que a imagem traga as versões fixadas atuais. A imagem da `v1.4.0` incorpora herdr-peers 2.1.0, coding-agents-kit 1.5.0 e DeepWorkPlan Vim 1.1.0.
 
 ## Camadas
 
@@ -112,6 +112,17 @@ A versão 1.3.0 mantém a interface 2 e adiciona uma chave opcional; um reposit�
 - **`[compose] container_only`.** Os subcaminhos do espaço de trabalho listados aqui são montados como volumes nomeados com escopo de projeto (`co-<path-slug>`, por exemplo `co-app-node_modules` sobre `/app/node_modules`), em leitura e escrita, no serviço principal. O que o contêiner compila ali nunca chega ao checkout do host. O caso para o qual existe: o espaço de trabalho é um bind mount, e uma instalação de `npm` ou `pnpm` dentro do contêiner em um host macOS ou Windows substitui `node_modules` pela compilação da própria plataforma, quebrando a instalação do host.
 - **Propriedade a cada início.** O entrypoint atribui cada ponto de montagem ao usuário configurado a cada início do contêiner; quando o usuário já é o dono, isso não faz nada.
 - **Uma montagem por caminho.** Um caminho que o bloco de usuário também monta é recusado, assim como um nome de volume derivado já usado por `compose.state_volume` ou `[compose] volumes`. O esquema do `dck.toml` (`dck-config-v2.json`) passa a incluir a chave.
+
+A imagem da 1.3.0 incorporava as mesmas versões da 1.2.0: herdr-peers 1.3.1, coding-agents-kit 1.4.0 e DeepWorkPlan Vim 1.0.1, com o pacote vendorizado 7.12.1.
+
+## A partir do devcontainer-kit 1.4.0 (interface 2)
+
+A versão 1.4.0 mantém a interface 2 e atualiza as versões que a imagem incorpora; a superfície própria do dck não muda.
+
+- **herdr-peers 2.1.0 (protocolo 2).** A nomeação de lead mediante a palavra explícita do humano, o cérebro do autopilot opcional e com bloqueio seguro em caso de falha, e a fila de planos chegam com a 2.0.0; perguntas, avisos e respostas continuam compatíveis com peers 1.x. A 2.1.0 adiciona as vistas do `fleet ui`, nega uma permissão que o daemon não pode aceitar em vez de deixar o agente esperando e lê as classes de bloqueio do pack 8.0. O dck nunca inicia o daemon.
+- **coding-agents-kit 1.5.0 (interface 1).** Com `AGENTKIT_PERMISSIONS=ask` ou `--ask`, o modo ask próprio de cada CLI é aplicado, de modo que uma conta cujas configurações usam por padrão um modo autônomo deixa de iniciar em modo autônomo; `ak run --json` informa contagens de tokens somente quando a CLI as informa. A camada `agents` continua sem escrever nenhuma flag de autonomia.
+- **DeepWorkPlan Vim 1.1.0.** O mesmo Neovim (0.12.5); o editor exibe em modo somente leitura a fila de planos, os bloqueios estruturados e a postura de autonomia do pack 8.0, e um plano v7 é exibido como antes.
+- **O repositório aplica o DeepWorkPlan 8.0.1 a si mesmo.** Os planos novos escrevem `plan-contract/v8`; os planos v7, v6 e v5 mantêm sua geração.
 
 ## Padrões de segurança
 

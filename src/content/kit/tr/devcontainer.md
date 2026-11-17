@@ -36,7 +36,7 @@ Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
-**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın güncel sabitlenmiş sürümleri içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın. `v1.4.0` imajı, `v1.2.0` ile aynı sürümleri içerir: herdr-peers 1.3.1, coding-agents-kit 1.4.0 ve DeepWorkPlan Vim 1.0.1; vendored paket 7.12.1 de imajın içindedir.
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın güncel sabitlenmiş sürümleri içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın. `v1.4.0` imajı herdr-peers 2.1.0, coding-agents-kit 1.5.0 ve DeepWorkPlan Vim 1.1.0 sürümlerini içerir.
 
 ## Katmanlar
 
@@ -112,6 +112,17 @@ Açıkken `dck up`, ana makinenin `~/.ssh` dizinini `~/.ssh_host` konumuna salt 
 - **`[compose] container_only`.** Burada listelenen çalışma alanı alt yolları, ana servise proje kapsamlı adlandırılmış birimler (`co-<path-slug>`; örneğin `/app/node_modules` üzerinde `co-app-node_modules`) olarak okuma-yazma kipinde bağlanır. Konteynerin orada derlediği hiçbir şey ana makinedeki çalışma kopyasına ulaşmaz. Var olma nedeni şu durumdur: çalışma alanı bir bind mount'tur ve macOS veya Windows ana makinesinde konteynerin içinde yapılan bir `npm` ya da `pnpm` kurulumu, `node_modules` dizinini kendi platformunun derlemesiyle değiştirerek ana makinedeki kurulumu bozar.
 - **Her başlatmada sahiplik.** Entrypoint, her konteyner başlatmasında her bağlama noktasını yapılandırılmış kullanıcıya verir; kullanıcı ona zaten sahipse bu adım hiçbir şey yapmaz.
 - **Yol başına tek bağlama.** Kullanıcı bloğunun da bağladığı bir yol reddedilir; `compose.state_volume` veya `[compose] volumes` tarafından zaten kullanılan türetilmiş bir birim adı da reddedilir. `dck.toml` şeması (`dck-config-v2.json`) bu anahtarı kazanır.
+
+1.3.0 imajı, 1.2.0 ile aynı sürümleri içeriyordu: herdr-peers 1.3.1, coding-agents-kit 1.4.0 ve DeepWorkPlan Vim 1.0.1; vendored paket 7.12.1 de imajın içindeydi.
+
+## devcontainer-kit 1.4.0 sürümünden itibaren (arayüz 2)
+
+1.4.0 sürümü arayüz 2'yi korur ve imajın içerdiği sürümleri günceller; dck'nin kendi yüzeyi değişmez.
+
+- **herdr-peers 2.1.0 (protokol 2).** İnsanın açık talimatıyla lider ataması, isteğe bağlı ve hata durumunda kapalı kalan (fail-closed) autopilot beyni ve plan kuyruğu 2.0.0 ile gelir; sorular, bildirimler ve yanıtlar 1.x eşleriyle uyumlu kalır. 2.1.0, `fleet ui` görünümlerini ekler, daemon'un kabul edemediği bir izni agent'ı bekletmek yerine reddeder ve paket 8.0'ın engel sınıflarını okur. dck daemon'u hiçbir zaman başlatmaz.
+- **coding-agents-kit 1.5.0 (arayüz 1).** `AGENTKIT_PERMISSIONS=ask` veya `--ask` altında her CLI'nin kendi sorma kipi uygulanır; böylece ayarları varsayılan olarak otonom bir kipte olan bir hesap artık otonom başlamaz. `ak run --json`, token sayılarını yalnızca CLI bildirdiğinde raporlar. `agents` katmanı hâlâ hiçbir otonomi bayrağı yazmaz.
+- **DeepWorkPlan Vim 1.1.0.** Aynı Neovim (0.12.5); düzenleyici, paket 8.0'ın plan kuyruğunu, yapılandırılmış engelleri ve otonomi duruşunu salt okunur olarak gösterir; bir v7 planı ise eskisi gibi görüntülenir.
+- **Depo, DeepWorkPlan 8.0.1'i kendi üzerinde kullanır.** Yeni planlar `plan-contract/v8` yazar; v7, v6 ve v5 planları kendi nesillerini korur.
 
 ## Güvenlik varsayılanları
 

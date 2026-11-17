@@ -36,7 +36,7 @@ cd your-repo && dck init && bash dev.sh up
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
 
-**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.4.0` image में वही संस्करण शामिल हैं जो `v1.2.0` में थे: herdr-peers 1.3.1, coding-agents-kit 1.4.0 और DeepWorkPlan Vim 1.0.1, और vendored पैक 7.12.1 भी image में मौजूद है।
+**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.4.0` image में herdr-peers 2.1.0, coding-agents-kit 1.5.0 और DeepWorkPlan Vim 1.1.0 शामिल हैं।
 
 ## परतें
 
@@ -112,6 +112,17 @@ copy_keys = true              # default false
 - **`[compose] container_only`.** यहाँ सूचीबद्ध workspace उप-पथ मुख्य service पर प्रोजेक्ट-स्कोप वाले named volumes (`co-<path-slug>`, उदाहरण के लिए `/app/node_modules` पर `co-app-node_modules`) के रूप में read-write mount किए जाते हैं। container वहाँ जो कुछ build करता है, वह कभी होस्ट के checkout तक नहीं पहुँचता। यह जिस स्थिति के लिए है: workspace एक bind mount है, और macOS या Windows होस्ट पर container के अंदर `npm` या `pnpm` install `node_modules` को अपने ही प्लेटफ़ॉर्म के build से बदल देता है, जिससे होस्ट का install टूट जाता है।
 - **हर start पर स्वामित्व।** entrypoint हर container start पर हर mount point कॉन्फ़िगर किए गए उपयोगकर्ता को सौंपता है; एक बार उपयोगकर्ता उसका स्वामी हो जाए, तो यह कुछ नहीं करता।
 - **हर पथ के लिए एक mount।** जिस पथ को user ब्लॉक भी mount करता है, उसे अस्वीकार कर दिया जाता है, और उसी तरह उस व्युत्पन्न volume नाम को भी जिसका उपयोग `compose.state_volume` या `[compose] volumes` पहले से कर रहे हैं। `dck.toml` स्कीमा (`dck-config-v2.json`) में यह कुंजी जुड़ जाती है।
+
+1.3.0 image में वही संस्करण शामिल थे जो 1.2.0 में थे: herdr-peers 1.3.1, coding-agents-kit 1.4.0 और DeepWorkPlan Vim 1.0.1, साथ में vendored पैक 7.12.1।
+
+## devcontainer-kit 1.4.0 से (इंटरफ़ेस 2)
+
+रिलीज़ 1.4.0 इंटरफ़ेस 2 को बनाए रखती है और image में शामिल संस्करणों को आगे बढ़ाती है; dck की अपनी सतह अपरिवर्तित रहती है।
+
+- **herdr-peers 2.1.0 (प्रोटोकॉल 2)।** मनुष्य के स्पष्ट निर्देश पर lead की नियुक्ति, opt-in fail-closed autopilot brain और plan queue 2.0.0 के साथ आते हैं; प्रश्न, सूचनाएँ और उत्तर 1.x peers के साथ संगत रहते हैं। 2.1.0 `fleet ui` views जोड़ता है, जिस अनुमति को daemon स्वीकार नहीं कर सकता उसे एजेंट को प्रतीक्षा में छोड़ने के बजाय अस्वीकार करता है, और पैक 8.0 की blocker classes पढ़ता है। dck कभी daemon शुरू नहीं करता।
+- **coding-agents-kit 1.5.0 (इंटरफ़ेस 1)।** `AGENTKIT_PERMISSIONS=ask` या `--ask` के तहत हर CLI का अपना ask mode लागू होता है, इसलिए जिस खाते की सेटिंग्स डिफ़ॉल्ट रूप से किसी स्वायत्त mode पर हैं, वह अब स्वायत्त रूप से शुरू नहीं होता; `ak run --json` token गणना तभी रिपोर्ट करता है जब CLI करता है। `agents` परत अब भी कोई autonomy flag नहीं लिखती।
+- **DeepWorkPlan Vim 1.1.0।** वही Neovim (0.12.5); editor पैक 8.0 की plan queue, संरचित blockers और autonomy posture को read-only रूप में दिखाता है, और एक v7 plan पहले की तरह ही दिखता है।
+- **यह रिपॉज़िटरी DeepWorkPlan 8.0.1 का स्वयं उपयोग करती है (dogfooding)।** नए plans `plan-contract/v8` लिखते हैं; v7, v6 और v5 plans अपनी पीढ़ी बनाए रखते हैं।
 
 ## सुरक्षा डिफ़ॉल्ट
 
