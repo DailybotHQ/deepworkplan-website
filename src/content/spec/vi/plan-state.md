@@ -1,6 +1,6 @@
 ---
 title: Trạng thái kế hoạch
-description: "Lớp trạng thái v5 (manifest.json, state.json, bản ghi cổng, điều hòa) và cách kế hoạch v6, v7 thay thế nó bằng một snapshot dẫn xuất từ nhật ký."
+description: "Lớp trạng thái kế hoạch v5 (manifest.json, state.json, bản ghi cổng) và snapshot từ nhật ký với lược đồ riêng cho kế hoạch v6, v7, v8."
 order: 8
 lang: vi
 section: State
@@ -8,14 +8,14 @@ section: State
 
 # Trạng thái kế hoạch
 
-> **Phạm vi phiên bản:** Trang này đặc tả **lớp trạng thái v5**, mà các kế hoạch v5 giữ trong suốt vòng đời của chúng. Các kế hoạch được tạo bởi gói hiện tại (DWP 8.0.0, bản phát hành `v8.0.0`) dùng [lớp bản ghi](/spec/record-layer) thay thế. Trong một kế hoạch v6 hoặc v7, hợp đồng kết quả (`contract.json`) là thẩm quyền, nhật ký chỉ ghi thêm (`journal.ndjson`) là nguồn chân lý, và `state.json` là một **snapshot dẫn xuất** tuân theo [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json). Nó được tái tạo bởi `ledger.py project` và KHÔNG ĐƯỢC (MUST NOT) chỉnh sửa bằng tay.
+> **Phạm vi phiên bản:** Trang này đặc tả **lớp trạng thái v5**, mà các kế hoạch v5 giữ trong suốt vòng đời của chúng. Các kế hoạch được tạo bởi gói hiện tại (DWP 8.0.0, bản phát hành `v8.0.0`) dùng [lớp bản ghi](/spec/record-layer) thay thế. Trong kế hoạch v6 và v7, hợp đồng kết quả (`contract.json`) là thẩm quyền, nhật ký chỉ ghi thêm (`journal.ndjson`) là nguồn chân lý, còn `state.json` là snapshot dẫn xuất theo `plan-snapshot/v6`. Trong kế hoạch v8, snapshot tuân theo `plan-snapshot/v8`. Ledger tái tạo tệp bằng `ledger.py project`; MUST NOT chỉnh sửa thủ công.
 
 ## Lớp trạng thái nào áp dụng
 
 | Thế hệ kế hoạch | Nguồn chân lý | `state.json` | Schema |
 | --- | --- | --- | --- |
 | v5 (và các kế hoạch v1/v2 cũ hơn) | kế hoạch markdown, với lớp JSON này là phép chiếu của nó | được agent ghi tại các điểm giao thức bên dưới | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 và v2 vẫn hợp lệ cho các kế hoạch cũ hơn) |
-| v6, v7 và v8 | hợp đồng cộng với nhật ký chỉ ghi thêm | một snapshot được chiếu từ nhật ký, không bao giờ ghi bằng tay | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (hoặc các bản tương đương v6) |
+| v6 và v7 | hợp đồng cộng với nhật ký chỉ ghi thêm | một snapshot được chiếu từ nhật ký, không bao giờ ghi bằng tay |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (hoặc các bản tương đương v6); v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
 Kế hoạch v8 dùng `plan-manifest/v7` cùng `plan-contract/v8`, `journal-event/v8` và `plan-snapshot/v8`; schema manifest và journal-event v7 vẫn được hỗ trợ cho kế hoạch hiện có.
 Một kế hoạch không bao giờ đổi thế hệ một cách ngầm định: kế hoạch v5 giữ các quy tắc này, và việc chuyển một kế hoạch sang v6 là một lần di chuyển tường minh, có xem trước ([Lớp bản ghi](/spec/record-layer#coexistence-and-migration)). Nguồn chính thức: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md).

@@ -1,6 +1,6 @@
 ---
 title: สถานะแผน
-description: "ชั้นสถานะแผน v5 (manifest.json, state.json, บันทึก gate และการกระทบยอด) และวิธีที่แผน v6 และ v7 แทนที่ชั้นนี้ด้วย snapshot ที่ได้จาก journal"
+description: "ชั้นสถานะแผน v5 (manifest.json, state.json และบันทึก gate) กับ snapshot จาก journal ที่ใช้สคีมาเฉพาะของแผนแต่ละรุ่น ได้แก่ v6, v7 และ v8"
 order: 8
 lang: th
 section: State
@@ -8,14 +8,14 @@ section: State
 
 # สถานะแผน
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 8.0.0 รุ่น `v8.0.0`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 หรือ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น **snapshot ที่ได้รับมา** ซึ่งสอดคล้องกับ [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) มันถูกสร้างใหม่โดย `ledger.py project` และ MUST NOT ถูกแก้ไขด้วยมือ
+> **ขอบเขตเวอร์ชัน:** หน้านี้ระบุ **ชั้นสถานะ v5** ซึ่งแผน v5 ใช้ตลอดอายุของแผน แผนที่สร้างโดยแพ็กปัจจุบัน (DWP 8.0.0 รุ่น `v8.0.0`) ใช้ [ชั้นบันทึก](/spec/record-layer) แทน ในแผน v6 และ v7 สัญญาผลลัพธ์ (`contract.json`) เป็นผู้มีอำนาจ journal แบบเพิ่มข้อมูลอย่างเดียว (`journal.ndjson`) เป็นแหล่งความจริง และ `state.json` เป็น snapshot ที่สร้างจากข้อมูลตาม `plan-snapshot/v6` ส่วนแผน v8 ใช้ `plan-snapshot/v8` ledger สร้างไฟล์นี้ใหม่ด้วย `ledger.py project` และ MUST NOT แก้ไขด้วยมือ
 
 ## ชั้นสถานะใดที่ใช้บังคับ
 
 | รุ่นของแผน | แหล่งความจริง | `state.json` | Schema |
 | --- | --- | --- | --- |
 | v5 (และแผน v1/v2 ที่เก่ากว่า) | แผน markdown โดยมีชั้น JSON นี้เป็นการฉายภาพ | เขียนโดยเอเจนต์ที่จุดโปรโตคอลด้านล่าง | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 และ v2 ยังใช้ได้สำหรับแผนที่เก่ากว่า) |
-| v6 และ v7 | สัญญาร่วมกับ journal แบบเพิ่มข้อมูลอย่างเดียว | snapshot ที่ฉายจาก journal ไม่เคยเขียนด้วยมือ | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (หรือรุ่น v6 ที่เทียบเท่ากัน) ; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
+| v6 และ v7 | สัญญาร่วมกับ journal แบบเพิ่มข้อมูลอย่างเดียว | snapshot ที่ฉายจาก journal ไม่เคยเขียนด้วยมือ |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (หรือรุ่น v6 ที่เทียบเท่ากัน); v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
 แผน v8 ใช้ `plan-manifest/v7` ร่วมกับ `plan-contract/v8`, `journal-event/v8` และ `plan-snapshot/v8`; schema manifest และ journal-event v7 ยังรองรับแผนเดิม
 แผนไม่เคยเปลี่ยนรุ่นโดยปริยาย: แผน v5 คงกฎเหล่านี้ไว้ และการย้ายแผนหนึ่งไปเป็น v6 คือการย้ายที่ชัดเจนและแสดงตัวอย่างก่อน ([ชั้นบันทึก](/spec/record-layer#coexistence-and-migration)) แหล่งอ้างอิงหลัก: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md)

@@ -1,6 +1,6 @@
 ---
 title: Plan durumu
-description: "v5 plan durum katmanı (manifest.json, state.json, kapı kayıtları, uzlaştırma) ve v6 ile v7 planlarının onu günlükten türetilen anlık görüntüyle değiştirmesi."
+description: "v5 plan durum katmanı (manifest.json, state.json, kapı kayıtları) ve v6, v7, v8 planlarında kullanılan, nesle özgü günlük türevi anlık görüntüler."
 order: 8
 lang: tr
 section: State
@@ -8,14 +8,14 @@ section: State
 
 # Plan durumu
 
-> **Sürüm kapsamı:** Bu sayfa, v5 planlarının tüm ömürleri boyunca koruduğu **v5 durum katmanını** belirtir. Güncel paketin (DWP 8.0.0, `v8.0.0` sürümü) oluşturduğu planlar bunun yerine [kayıt katmanını](/spec/record-layer) kullanır. Bir v6, v7 veya v8 planında sonuç sözleşmesi (`contract.json`) otoritedir, yalnızca eklemeli günlük (`journal.ndjson`) doğruluk kaynağıdır ve `state.json`, [`plan-snapshot/v6`](https://deepworkplan.com/schema/plan-snapshot/v6.json) şemasına uyan **türetilmiş bir anlık görüntüdür**. `ledger.py project` tarafından yeniden üretilir ve elle düzenlenMEMELİDİR.
+> **Sürüm kapsamı:** Bu sayfa, v5 planlarının tüm ömürleri boyunca koruduğu **v5 durum katmanını** belirtir. Güncel paketin (DWP 8.0.0, `v8.0.0` sürümü) oluşturduğu planlar bunun yerine [kayıt katmanını](/spec/record-layer) kullanır. v6 ve v7 planlarında sonuç sözleşmesi (`contract.json`) yetkidir, yalnızca eklemeli günlük (`journal.ndjson`) doğruluk kaynağıdır ve `state.json`, `plan-snapshot/v6` şemasına uygun türetilmiş bir anlık görüntüdür. v8 planlarında `plan-snapshot/v8` kullanılır. Ledger bunu `ledger.py project` ile yeniden üretir ve elle düzenlenMEMELİDİR.
 
 ## Hangi durum katmanı geçerlidir
 
 | Plan nesli | Doğruluk kaynağı | `state.json` | Şemalar |
 | --- | --- | --- | --- |
 | v5 (ve daha eski v1/v2 planları) | Markdown planı; bu JSON katmanı onun projeksiyonudur | aşağıdaki protokol noktalarında ajan tarafından yazılır | [`plan-manifest/v5`](https://deepworkplan.com/schema/plan-manifest/v5.json), [`plan-state/v5`](https://deepworkplan.com/schema/plan-state/v5.json) (v1 ve v2 eski planlar için geçerli kalır) |
-| v6 ve v7 | sözleşme artı yalnızca eklemeli günlük | günlükten yansıtılan bir anlık görüntü, asla elle yazılmaz | [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (veya v6 karşılıkları) ; v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
+| v6 ve v7 | sözleşme artı yalnızca eklemeli günlük | günlükten yansıtılan bir anlık görüntü, asla elle yazılmaz |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v7`](https://deepworkplan.com/schema/plan-contract/v7.json), [`journal-event/v7`](https://deepworkplan.com/schema/journal-event/v7.json) (veya v6 karşılıkları); v8: `plan-manifest/v7`, `plan-contract/v8`, `journal-event/v8`, `plan-snapshot/v8` |
 
 v8 planları `plan-manifest/v7` ile birlikte `plan-contract/v8`, `journal-event/v8` ve `plan-snapshot/v8` kullanır; v7 manifest ve journal-event şemaları mevcut planlar için desteklenmeye devam eder.
 Bir plan neslini asla örtük olarak değiştirmez: v5 planları bu kuralları korur ve birini v6'ya taşımak açık, önizlenen bir göçtür ([Kayıt katmanı](/spec/record-layer#coexistence-and-migration)). Kanonik kaynaklar: [V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.2/skills/deepworkplan/spec/V7_CONTRACT.md).
