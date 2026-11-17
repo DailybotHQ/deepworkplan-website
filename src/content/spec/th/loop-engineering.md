@@ -30,20 +30,51 @@ Daemon เตือนเฉพาะ lead เมื่อแผนเปิด,
 |---|---|---|
 | `stall_budget` | จำนวนเต็ม 1–10 | `3` |
 | `promptable` | รายการที่อยู่ pane Herdr | lead เท่านั้น |
-| `notify` | รายการ; `dailybot` | ไม่มีเป้าหมาย แต่บันทึกเหตุการณ์ |
+| `notify` | รายการเป้าหมายที่ไม่ว่าง | ไม่มีเป้าหมาย แต่บันทึกเหตุการณ์ |
 | `brain` | boolean | `false` |
 | `queue` | `prompt-lead`, `launch`, `none` | `none` |
 
 รูปแบบ pane: `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}`; machine ID ห้ามขึ้นต้น `-`. ฟิลด์จำกัดผู้รับและการทำงาน ไม่เปลี่ยนเกณฑ์หรือ gate
 
 ## 3. ตัวบล็อกแบบมีโครงสร้าง
+
+แผน v8 บันทึกเหตุผลที่ทำต่อไม่ได้เป็นข้อมูล เพื่อให้ลูป ฟลีต และเอเจนต์ที่กลับมาทำงานอ่านฟิลด์เดียวกัน
+
 ### 3.1. ระเบียนตัวบล็อก
-`blocked`/`blocker` ใน `state.json` มีคลาส C และ `resolver` (`lead`/`human`, ค่าเริ่มต้น `human`). `lead` หมายถึงแก้ได้ภายในอำนาจที่บันทึก โดยไม่ใช้ข้อมูลรับรอง ล็อกอิน ความยินยอม จ่ายเงิน push ไป main, release หรือลบ วงจรขอให้ lead จัดการเฉพาะตัวบล็อก `lead`; อื่นแจ้งมนุษย์ แผนที่ Herdr อาจแสดง `PROGRESS.md` ที่ทำความสะอาดแล้วสูงสุด 14 บรรทัด เป็นสรุป ไม่ใช่ schema header เครื่อง รูปแบบที่วางแผนต้องตรวจที่ tag 8.0.0
+
+ledger ใช้ `ledger.py block` เพื่อเปิดและ `ledger.py unblock` เพื่อแก้ไข โดยบันทึกเหตุการณ์ `blocker` ใน `journal-event/v8`; ปฏิเสธการเพิ่มโดยตรงและบันทึกทุกการปฏิเสธ
+
+| ฟิลด์ | กฎ |
+|---|---|
+| `task` | งานที่ถูกบล็อกใน contract; ห้ามบล็อกงานที่หลักฐานปิดแล้ว |
+| `reason` | จำเป็น ไม่ว่าง ไม่เกิน 1000 ตัวอักษร: เหตุผล |
+| `needs` | จำเป็น หนึ่งบรรทัดไม่ว่างเท่านั้น ไม่เกิน 500 ตัวอักษร: สิ่งที่ต้องมีเพื่อทำต่อ |
+| `class` | จำเป็น เป็น `C1`–`C7` จาก [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5 |
+| `resolver` | ไม่บังคับ `lead` หรือ `human`; หากไม่มีคือ `human` |
+
+`lead` แก้ได้ในอำนาจที่บันทึกโดยไม่ใช้ข้อมูลรับรอง ล็อกอิน ความยินยอม ชำระเงิน push ไป main เผยแพร่ หรือลบ ต้องปฏิเสธ `resolver: "lead"` สำหรับ `C1`, `C2`, `C5`, `C6` มีตัวบล็อกทำงานอยู่ได้หนึ่งรายการต่อแผน รายการใหม่ถูกปฏิเสธจนกว่ารายการเดิมแก้แล้ว เปิดซ้ำงานเดิมอัปเดตฟิลด์ได้แต่คง `since` แรก การแก้มีเพียงงานและหมายเหตุที่ไม่บังคับ งานที่ยังถูกบล็อกทำให้เสร็จไม่ได้ หลักฐานใหม่ก็ไม่ปิดงาน
+
 ### 3.2. ตำแหน่งที่อ่านข้อมูล
 
+`state.json` ใช้ `plan-snapshot/v8`: รูปแบบ `plan-snapshot/v6`, `blocker` เป็น `{task, reason, since, needs, class, resolver?}` หรือ `null` และ `blocked` เป็นสถานะงานที่ได้มาและมีลำดับก่อนขณะยังไม่แก้ Ledger ฉายข้อมูล ห้ามเขียนเอง
+
+`PROGRESS.md` ควรเริ่มด้วยสี่บรรทัดคงที่ใต้ชื่อเรื่อง create เขียนและปรับทุกครั้งที่เปลี่ยนสถานะ (`shared/progress_header.py`):
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` และ `Needs` มาจาก snapshot (งานที่ถูกบล็อกก่อน มิฉะนั้นงานแรกที่ยังไม่เสร็จ) เอเจนต์เขียน `Goal` และ `Next action`
+
 ### 3.3. สิ่งที่วงจรทำได้
+
+วงจร รวม brain ขอ lead แก้ได้เฉพาะตัวบล็อกที่ระบุ `resolver: "lead"` อื่นต้องรอมนุษย์ แผน v6/v7 ไม่บันทึก `blocker` คง `plan-snapshot/v6` (`blocker` เป็น `null` เสมอ); ตัวบล็อกเป็นเรื่องของมนุษย์
 ## 4. คิวแผน
 `.dwp/queue.json` ใช้ `dwp-queue-v1`; มีเพียง pack เขียน `create` เพิ่มเมื่ออนุมัติ มนุษย์/lead จัดลำดับ `execute` ใส่ `started` เมื่อรับ lead พร้อมที่อยู่ จบแล้ว `done`; `create`/`refine` ทำ `skipped` พร้อมบันทึกสั้นได้ มี `after` เป็น dependency ทางเลือก หากไม่มี `parallel: true` จะทำทีละแผน daemon อ่านอย่างจำกัด; คิวผิดถือว่าว่าง `prompt-lead` ส่งข้อความคงที่ “Plan P is next in this repository's queue and approved; execute it to its end, respecting its gates.” daemon ไม่เขียนคิวหรือทำ `launch` หากสัญญาที่เผยแพร่ไม่อนุญาต
 
 ## 5. สิ่งที่ v8 คงไว้
-v8 คง `tasks[].parallel_safe`, delegation, journal และชุดเหตุการณ์ journal v7 ชั้น record คง URL manifest/journal-event v7 และเพิ่มเพียง `plan-contract/v8` แผนรุ่นเก่าไม่ย้ายเงียบ Herdr เป็นทางเลือก
+
+v8 คงเนื้อหาทั้งหมดของ v7 รวม `tasks[].parallel_safe` การมอบหมาย และชุดเหตุการณ์ครบถ้วน ฟีเจอร์ v7 ยังใช้ได้ต่อไป v8 บันทึกชุดเหตุการณ์ v7 บวก `blocker` ใน `journal-event/v8` และฉายเป็น `plan-snapshot/v8`; ปฏิเสธ journal ที่ปะปนรุ่น `plan-manifest/v7` คงรูปแบบและ pointer; ตัวตรวจสอบจับคู่ manifest v7 กับ contract v8 บันทึก v6/v7 คงเดิมทุกไบต์

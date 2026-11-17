@@ -30,20 +30,51 @@ Daemon खुली योजना में lead को तभी संके
 |---|---|---|
 | `stall_budget` | पूर्णांक 1–10 | `3` संकेत |
 | `promptable` | Herdr pane पते | केवल lead |
-| `notify` | सूची; `dailybot` | कोई लक्ष्य नहीं; घटना दर्ज |
+| `notify` | गैर-रिक्त लक्ष्य सूची | कोई लक्ष्य नहीं; घटना दर्ज |
 | `brain` | boolean | `false` |
 | `queue` | `prompt-lead`, `launch`, `none` | `none` |
 
 पता `(?:local|[A-Za-z0-9][A-Za-z0-9._-]{0,63}):[A-Za-z0-9]{1,32}:[A-Za-z0-9]{1,32}` रूप का है; machine ID `-` से शुरू नहीं होता। ये सीमाएँ criteria या gates नहीं बदलतीं।
 
 ## 3. संरचित अवरोध
+
+v8 योजना रुकने का कारण डेटा के रूप में रखती है ताकि loop, fleet और काम फिर शुरू करने वाला एजेंट वही फ़ील्ड पढ़ें।
+
 ### 3.1. अवरोध रिकॉर्ड
-`state.json` का `blocked`/`blocker` C वर्ग और वैकल्पिक `resolver` (`lead`/`human`, default `human`) रखता है। `lead` का अर्थ credential, login, consent, भुगतान, main push, release या deletion बिना दर्ज अधिकार में समाधान है। loop केवल `lead` blocker पर अनुरोध करता है; बाकी मानव को सूचित होते हैं। fleet map `PROGRESS.md` से साफ की हुई 14 पंक्तियों तक दिखा सकता है; यह header schema नहीं, जिसे tag 8.0.0 पर पुनः जाँचना है।
+
+Ledger खोलने के लिए `ledger.py block` और हल करने के लिए `ledger.py unblock` इस्तेमाल करता है; यह `journal-event/v8` का `blocker` event है। सीधे जोड़ना अस्वीकार होता है और हर अस्वीकृति दर्ज होती है।
+
+| फ़ील्ड | नियम |
+|---|---|
+| `task` | इस contract का अवरुद्ध कार्य; प्रमाण से बंद कार्य को रोक नहीं सकते। |
+| `reason` | अनिवार्य, रिक्त नहीं, अधिकतम 1000 वर्ण: कारण। |
+| `needs` | अनिवार्य, ठीक एक गैर-रिक्त पंक्ति, अधिकतम 500 वर्ण: आगे बढ़ने की आवश्यकता। |
+| `class` | अनिवार्य: [`AGENT_PROTOCOL.md`](AGENT_PROTOCOL.md) §7.5 की `C1`–`C7` श्रेणी। |
+| `resolver` | वैकल्पिक `lead` या `human`; अनुपस्थित हो तो `human`। |
+
+`lead` दर्ज अधिकार में credentials, login, consent, payment, main push, release या deletion बिना हल करता है। `C1`, `C2`, `C5`, `C6` में `resolver: "lead"` अस्वीकार है। प्रति योजना एक सक्रिय अवरोध; हल होने तक दूसरा अस्वीकार। उसी कार्य को फिर खोलकर फ़ील्ड बदल सकते हैं, पर शुरुआती `since` वही रहता है। समाधान में कार्य और वैकल्पिक टिप्पणी है। खुला अवरोध कार्य पूरा नहीं होने देता; नया प्रमाण भी उसे बंद नहीं करता।
+
 ### 3.2. इसे कहाँ पढ़ें
 
+`state.json`, `plan-snapshot/v8` है: `plan-snapshot/v6` का आकार, `blocker` में `{task, reason, since, needs, class, resolver?}` या `null`; `blocked` प्राथमिक व्युत्पन्न स्थिति है। Ledger प्रोजेक्ट करता है; हाथ से नहीं लिखें।
+
+`PROGRESS.md` शीर्षक के नीचे चार स्थिर पंक्तियों से शुरू होना चाहिए। create लिखता और हर transition पर ताज़ा करता है (`shared/progress_header.py`):
+
+```text
+Goal: <one line>
+Current task: <task id> - <title> (<status>)
+Next action: <one line>
+Needs: none | <class> (<resolver>): <needs>
+```
+
+`Current task` और `Needs` snapshot से निकलते हैं (पहले अवरुद्ध कार्य, अन्यथा पहला अधूरा)। एजेंट `Goal` और `Next action` लिखता है।
+
 ### 3.3. लूप क्या कर सकता है
+
+brain सहित loop, केवल `resolver: "lead"` चिह्नित अवरोध पर lead से कह सकता है; बाकी मानव के लिए हैं। v6/v7 `blocker` events नहीं रखते, `plan-snapshot/v6` बनाए रखते हैं (`blocker` हमेशा `null`); सभी अवरोध मानव के हैं.
 ## 4. योजना कतार
 `.dwp/queue.json` `dwp-queue-v1` है; केवल pack लिखता है। `create` अनुमोदन पर जोड़ता है, मानव/lead क्रम बदलते हैं, `execute` lead दावा करने पर `started`, पूर्णता पर `done` लिखता है; `create`/`refine` एक-पंक्ति नोट से `skipped` कर सकते हैं। `after` वैकल्पिक है; `parallel: true` बिना एक योजना चले। daemon सीमित read-only है और अमान्य कतार खाली मानता है। `prompt-lead` स्थिर संदेश भेजता है: “Plan P is next in this repository's queue and approved; execute it to its end, respecting its gates.” daemon कतार नहीं लिखता, न अनुबंध बिना `launch` करता है।
 
 ## 5. v8 में कायम
-v8 v7 `tasks[].parallel_safe`, delegation, journal और घटना-समूह रखता है; रिकॉर्ड परत v7 manifest/journal-event URL रखकर केवल `plan-contract/v8` जोड़ती है। पुराने plans migrate नहीं होते। Herdr वैकल्पिक है।
+
+v8, v7 की `tasks[].parallel_safe`, delegation और पूरी event set सहित सभी बातें रखता है; v7 सुविधाएँ आगे भी उपलब्ध हैं। v8, v7 events और `blocker` को `journal-event/v8` में दर्ज कर `plan-snapshot/v8` में प्रोजेक्ट करता है; मिश्रित journal अस्वीकार है। `plan-manifest/v7` का आकार और pointer बना रहता है; checker v7 manifest को v8 contract से जोड़ता है। v6/v7 रिकॉर्ड byte-for-byte सुरक्षित हैं।
