@@ -23,20 +23,20 @@ Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop e
 ## Instalacja
 
 ```bash
-git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v1.4.2`: `v0.2.0` nie jest obsługiwane.
+Wymagania: `bash` 3.2 lub nowszy oraz `python3` 3.11 lub nowszy na hoście z Linuksem lub macOS, a także Docker z Compose v2 dla poleceń kontenera. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`. Przypnij `v1.4.3`: `v0.2.0` nie jest obsługiwane.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, tag `v1.4.2`, interfejs 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, tag `v1.4.3`, interfejs 2 |
 | Klucz rejestru | `devcontainer` w `.dwp/config.json` |
 | Konfiguracja repozytorium | `.devcontainer/dck.toml` |
 | Wykrywanie | `dck doctor --json` |
 
-**Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie wyłącznie w nowej wersji głównej (a w przypadku plików — z nowym numerem interfejsu): czasowniki `dck` wraz z udokumentowanymi flagami i kodami wyjścia (`0` sukces, `1` błąd, `2` użycie, `3` konfiguracja, `4` środowisko, `5` odmowa), schematy `dck.toml`, profilu hosta i `dck doctor --json` (interfejs 2) oraz kontrakt renderowania — pliki, które `dck init` zapisuje i którymi zarządza, znaczniki `dck:managed` i bloki użytkownika, które zachowuje, oraz środowisko odczytywane przez entrypoint. Przy przejściu z `v0.3.7` nic się nie psuje: uruchom `dck init` i `dck rebuild`, aby obraz zawierał aktualne przypięte wersje. Obraz `v1.4.2` zawiera herdr-peers 2.2.0, coding-agents-kit 1.5.0 i DeepWorkPlan Vim 1.1.0.
+**Stabilny od `v1.0.0`.** Publiczny interfejs stosuje wersjonowanie semantyczne i zmienia się niekompatybilnie wyłącznie w nowej wersji głównej (a w przypadku plików — z nowym numerem interfejsu): czasowniki `dck` wraz z udokumentowanymi flagami i kodami wyjścia (`0` sukces, `1` błąd, `2` użycie, `3` konfiguracja, `4` środowisko, `5` odmowa), schematy `dck.toml`, profilu hosta i `dck doctor --json` (interfejs 2) oraz kontrakt renderowania — pliki, które `dck init` zapisuje i którymi zarządza, znaczniki `dck:managed` i bloki użytkownika, które zachowuje, oraz środowisko odczytywane przez entrypoint. Przy przejściu z `v0.3.7` nic się nie psuje: uruchom `dck init` i `dck rebuild`, aby obraz zawierał aktualne przypięte wersje. Obraz `v1.4.3` zawiera Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 i DeepWorkPlan Vim 1.1.0.
 
 ## Warstwy
 
@@ -131,6 +131,10 @@ Wydanie 1.4.1 to poprawka: obraz zawiera herdr-peers 2.2.0, który dodaje opcjon
 ## Od devcontainer-kit 1.4.2 (interfejs 2)
 
 Wydanie 1.4.2 to łatka: obraz `node-24` przechodzi na wydanie bezpieczeństwa Node 24.22.3 (1.4.1 przypinało 24.21.0, więc `dck init` mogło obniżyć wersję repozytorium na 24.22.x), a stan herdr-peers — dziennik delegacji, rekordy lidera, odpowiedzi i stan autopilota w `~/.local/state/herdr-peers` — pozostaje teraz na woluminie stanu kontenera (tryb 0700) i przetrwa przebudowę. Interfejs 2, herdr-peers 2.2.0, coding-agents-kit 1.5.0 i DeepWorkPlan Vim 1.1.0 się nie zmieniają.
+
+## Od devcontainer-kit 1.4.3 (interfejs 2)
+
+Wydanie 1.4.3 to poprawka: obraz przechodzi na Herdr 0.9.5, pobierany teraz z `herdrdev/herdr` (dokąd przeniósł się projekt) i weryfikowany względem skrótów z wydania dostawcy — 0.9.4 utrzymuje serwer Herdr przy życiu, gdy zamyka się powłoka, która go uruchomiła — oraz na herdr-peers 2.2.1, którego `autopilot --loop --revive` odmawia startu bez coding-agents-kit 1.3.0 lub nowszego. Interfejs 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 i własna powierzchnia dck się nie zmieniają; dck nigdy nie uruchamia demona.
 
 ## Domyślne ustawienia bezpieczeństwa
 

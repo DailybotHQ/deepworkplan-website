@@ -104,7 +104,7 @@ qu'il ait été contrôlé.
   | deepworkplan-skill | `v8.0.3` | `f40ebde7c45654b316703bf7a2435dd645e39eebca4327529489ca82dcc2c1e3` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
   | herdr-peers | `v2.2.1` | `9855c62532381915b7f562fcec5649787bc5345d59243ac692051662469f5d93` |
-  | devcontainer-kit | `v1.4.2` | `c8f2b57dc7c36ea2d212b9819ee6420344acbb0c64a46eace020a98a23e4d76a` |
+  | devcontainer-kit | `v1.4.3` | `fb16da0052f1803c1af03a1eb71acf56c6bb98b253f742c8d3a9a65d6d12e9df` |
   | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | aucun publié — la CLI skills enregistre un hash de contenu dans `skills-lock.json` |
@@ -242,7 +242,7 @@ Le tableau est une référence, pas une liste de contrôle : n’exécutez une l
 | Dailybot | `version:` dans `.agents/skills/dailybot/SKILL.md` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | `scripts/herdr-peers --version` dans la skill herdr-peers installée | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | l’installateur vérifié à https://deepworkplan.com/vim/install.sh (il épingle `v1.1.0` ; téléchargez-le, `shasum -a 256 -c install.sh.sha256`, puis exécutez-le) |
 
 Vérifiez chaque téléchargement par rapport au `SHA256SUMS` de sa version et au digest de *Versions épinglées*
@@ -256,7 +256,7 @@ depuis le standard 2.3.0) : la skill épinglée par tag ci-dessus plus un `.revi
 dépendances, design system, agentkit, Herdr, DeepWorkPlan Vim) et proposez uniquement ceux qui conviennent à ce dépôt, chacun comme un choix explicite. Un
 dépôt est pleinement conforme avec **zéro** addon facultatif — ne les installez jamais automatiquement.
 
-- **Prise en charge du devcontainer** — un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v1.4.2`, avec sa skill `dck-dockerfile`) : `dck init` génère le conteneur propre au dépôt (image officielle épinglée par digest, aucune image de base partagée, `bash dev.sh up`) et ne réconcilie un devcontainer existant qu’après acceptation de son diff. Une fois accepté, suivez *Le parcours devcontainer* ci-dessous jusqu’à la pile complète.
+- **Prise en charge du devcontainer** — un intégrateur léger de [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, épinglé à `v1.4.3`, avec sa skill `dck-dockerfile`) : `dck init` génère le conteneur propre au dépôt (image officielle épinglée par digest, aucune image de base partagée, `bash dev.sh up`) et ne réconcilie un devcontainer existant qu’après acceptation de son diff. Une fois accepté, suivez *Le parcours devcontainer* ci-dessous jusqu’à la pile complète.
 - **Intégration Dailybot** — quatre événements du cycle de vie (kickoff, tâche significative, bloqué, achèvement) comme rapports de progression au mieux pour les équipes utilisant déjà Dailybot, avec une couche facultative d’application autonome des hooks (`dailybot-cli >= 3.9.0`). L’installation du skill d’agent Dailybot apparié (3.23.20) expose aussi le chat, les check-ins, la création de formulaires, la consultation IA, les tableaux et tâches Plan, les clés API par dépôt et plus — l’addon ne raccorde que le reporting à l’exécution DWP. La méthodologie de base n’a aucune dépendance à Dailybot.
 - **Mise à jour des dépendances** — des mises à jour indépendantes du gestionnaire de paquets, par lots, validées et réversibles. Lorsqu’elle est
  acceptée, elle installe la commande `/lib-upgrade`.

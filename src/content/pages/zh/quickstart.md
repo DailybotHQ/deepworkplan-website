@@ -57,7 +57,7 @@ lastUpdated: 2026-10-11
   | deepworkplan-skill | `v8.0.3` | `f40ebde7c45654b316703bf7a2435dd645e39eebca4327529489ca82dcc2c1e3` |
   | coding-agents-kit | `v1.5.0` | `d8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3` |
   | herdr-peers | `v2.2.1` | `9855c62532381915b7f562fcec5649787bc5345d59243ac692051662469f5d93` |
-  | devcontainer-kit | `v1.4.2` | `c8f2b57dc7c36ea2d212b9819ee6420344acbb0c64a46eace020a98a23e4d76a` |
+  | devcontainer-kit | `v1.4.3` | `fb16da0052f1803c1af03a1eb71acf56c6bb98b253f742c8d3a9a65d6d12e9df` |
   | deepworkplan-vim | `v1.1.0` | `b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187` |
   | ai-diff-reviewer | `v3.3.16` | `af29e32655378c3f4efc7f05fa3b92c87040e3ba45a8f980e1179a7f6c1bc398` |
   | agent-skill | `v3.23.20` | 未发布——skills CLI 会在 `skills-lock.json` 中记录内容哈希 |
@@ -202,7 +202,7 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 | Dailybot | `.agents/skills/dailybot/SKILL.md` 中的 `version:` | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot --force -y` |
 | agentkit | `ak --version` | `(cd "$(mktemp -d)" && git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh)` |
 | Herdr | 已安装的 herdr-peers 技能中的 `scripts/herdr-peers --version` | `npx --yes skills add https://github.com/DailybotHQ/herdr-peers/tree/v2.2.1 --skill herdr-peers -g --force -y` |
-| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
+| devcontainer | `dck --version` | `(cd "$(mktemp -d)" && git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh)` |
 | DeepWorkPlan Vim | `git -C ~/.config/nvim describe --tags` | 位于 https://deepworkplan.com/vim/install.sh 的经校验安装器（锁定 `v1.1.0`；下载后执行 `shasum -a 256 -c install.sh.sha256`，再运行） |
 
 运行每个下载内容之前，先用其发布版本的 `SHA256SUMS` 以及上文*锁定的发布版本*中的摘要进行校验。
@@ -211,7 +211,7 @@ DWP 标准、有限的权限以及明确的停止条件。如果某个关卡在�
 
 **可选附加组件。** 列举七个可选附加组件（devcontainer、Dailybot、dependency upgrade、design system、agentkit、Herdr、DeepWorkPlan Vim），只提供适合此仓库的那些，每一个都作为一项明确的可选项。一个仓库在不带**任何**可选附加组件时即完全符合规范——绝不自动安装它们。
 
-- **Devcontainer 支持** —— [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) 的轻量集成层（`dck`，锁定 `v1.4.2`，附带其 `dck-dockerfile` 技能）：`dck init` 渲染仓库自己的容器——官方镜像按摘要固定、不使用共享基础镜像、`bash dev.sh up`——并且仅在差异被接受之后才协调现有的 devcontainer。被采纳时，按照下方的*Devcontainer 路径*完成整套环境。
+- **Devcontainer 支持** —— [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) 的轻量集成层（`dck`，锁定 `v1.4.3`，附带其 `dck-dockerfile` 技能）：`dck init` 渲染仓库自己的容器——官方镜像按摘要固定、不使用共享基础镜像、`bash dev.sh up`——并且仅在差异被接受之后才协调现有的 devcontainer。被采纳时，按照下方的*Devcontainer 路径*完成整套环境。
 - **Dailybot 集成** —— 四个生命周期事件（启动、重要任务、阻塞、完成）作为面向已在使用 Dailybot 的团队的尽力而为式进展报告，并可选启用自主的钩子强制层（`dailybot-cli >= 3.9.0`）。安装配套的 Dailybot 代理技能（3.23.20）还会暴露聊天、签到、表单创建、AI 询问、Plan 看板与任务、每仓库 API 密钥等功能——该附加组件仅将报告接入 DWP 执行。核心方法论对 Dailybot 零依赖。
 - **Dependency upgrade** —— 包管理器无关、分批次、经验证、可回退的升级。被
  采纳时，它会安装 `/lib-upgrade` 命令。

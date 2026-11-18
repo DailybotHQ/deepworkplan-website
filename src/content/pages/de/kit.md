@@ -69,7 +69,7 @@ Fähigkeiten, die der onboard-Ablauf einem Repository hinzufügt. Sieben sind op
 - **Deep Work Plan Skill** — Pläne erstellen, ausführen, verifizieren, fortsetzen und verfeinern. Benötigt kein Addon.
 - **[herdr](/de/kit/herdr)** — Peers in Herdr-Panes, auf jeder Maschine: interaktive Delegation mit genau einer autorisierten Antwort. Fixiert auf `herdr-peers@v2.2.1`.
 - **[agentkit](/de/kit/agentkit)** — Ein einziger Befehl ak für jeden Terminal-Coding-Agenten: Autonomie standardmäßig mit einem Opt-out und Headless-Delegation in einem Worktree. Fixiert auf `coding-agents-kit@v1.5.0`.
-- **[devcontainer](/de/kit/devcontainer)** — Der eigene Dev-Container jedes Repositorys aus einer einzigen Vorlage: Agenten über ak, Herdr in beide Richtungen, SSH-Schlüssel nur per Opt-in. Fixiert auf `devcontainer-kit@v1.4.2`.
+- **[devcontainer](/de/kit/devcontainer)** — Der eigene Dev-Container jedes Repositorys aus einer einzigen Vorlage: Agenten über ak, Herdr in beide Richtungen, SSH-Schlüssel nur per Opt-in. Fixiert auf `devcontainer-kit@v1.4.3`.
 - **[vim](/de/kit/vim)** — Der Terminal-Editor, mit einem schreibgeschützten Plan-Browser und einem Markdown-Viewer. Fixiert auf `deepworkplan-vim@v1.1.0`.
 
 Die Addon-Registry und die Deskriptoren werden in Deep Work Plan v8 ausgeliefert: `v8.0.3`

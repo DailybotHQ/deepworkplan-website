@@ -23,20 +23,20 @@ O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é
 ## Instalação
 
 ```bash
-git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisitos: `bash` 3.2 ou mais recente e `python3` 3.11 ou mais recente em um host Linux ou macOS, e Docker com Compose v2 para os comandos do contêiner. Verifique uma versão com o asset `SHA256SUMS` dela. Fixe a `v1.4.2`: a `v0.2.0` não tem suporte.
+Requisitos: `bash` 3.2 ou mais recente e `python3` 3.11 ou mais recente em um host Linux ou macOS, e Docker com Compose v2 para os comandos do contêiner. Verifique uma versão com o asset `SHA256SUMS` dela. Fixe a `v1.4.3`: a `v0.2.0` não tem suporte.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/devcontainer-kit`, tag `v1.4.2`, interface 2 |
+| Produto | `DailybotHQ/devcontainer-kit`, tag `v1.4.3`, interface 2 |
 | Chave de registro | `devcontainer` em `.dwp/config.json` |
 | Configuração por repositório | `.devcontainer/dck.toml` |
 | Detecção | `dck doctor --json` |
 
-**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico e só muda de forma incompatível em uma nova versão principal (e, para os arquivos, com um novo número de interface): os verbos do `dck` com suas flags documentadas e seus códigos de saída (`0` ok, `1` falha, `2` uso, `3` configuração, `4` ambiente, `5` recusado), os esquemas do `dck.toml`, do perfil do host e do `dck doctor --json` (interface 2), e o contrato de renderização: os arquivos que `dck init` escreve e gerencia, os marcadores `dck:managed` e os blocos de usuário que ele preserva, e o ambiente que o entrypoint lê. Nada quebra a partir da `v0.3.7`: execute `dck init` e `dck rebuild` para que a imagem traga as versões fixadas atuais. A imagem da `v1.4.2` incorpora herdr-peers 2.2.0, coding-agents-kit 1.5.0 e DeepWorkPlan Vim 1.1.0.
+**Estável desde `v1.0.0`.** A interface pública segue o versionamento semântico e só muda de forma incompatível em uma nova versão principal (e, para os arquivos, com um novo número de interface): os verbos do `dck` com suas flags documentadas e seus códigos de saída (`0` ok, `1` falha, `2` uso, `3` configuração, `4` ambiente, `5` recusado), os esquemas do `dck.toml`, do perfil do host e do `dck doctor --json` (interface 2), e o contrato de renderização: os arquivos que `dck init` escreve e gerencia, os marcadores `dck:managed` e os blocos de usuário que ele preserva, e o ambiente que o entrypoint lê. Nada quebra a partir da `v0.3.7`: execute `dck init` e `dck rebuild` para que a imagem traga as versões fixadas atuais. A imagem da `v1.4.3` incorpora Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 e DeepWorkPlan Vim 1.1.0.
 
 ## Camadas
 
@@ -131,6 +131,10 @@ A versão 1.4.1 é um patch: a imagem incorpora o herdr-peers 2.2.0, que adicion
 ## A partir do devcontainer-kit 1.4.2 (interface 2)
 
 A versão 1.4.2 é um patch: a imagem `node-24` passa para a versão de segurança Node 24.22.3 (a 1.4.1 fixava 24.21.0, então `dck init` podia rebaixar um repositório em 24.22.x), e o estado do herdr-peers — o registro de delegações, os registros de liderança, as respostas e o estado do autopilot em `~/.local/state/herdr-peers` — agora fica no volume de estado do contêiner (modo 0700) e sobrevive a uma reconstrução. A interface 2, herdr-peers 2.2.0, coding-agents-kit 1.5.0 e DeepWorkPlan Vim 1.1.0 não mudam.
+
+## A partir do devcontainer-kit 1.4.3 (interface 2)
+
+A versão 1.4.3 é um patch: a imagem passa para o Herdr 0.9.5, agora baixado de `herdrdev/herdr` (para onde o projeto mudou) e verificado contra os digests da release do fornecedor — o 0.9.4 mantém o servidor do Herdr em execução quando o shell que o iniciou é fechado — e para o herdr-peers 2.2.1, cujo `autopilot --loop --revive` se recusa a iniciar sem o coding-agents-kit 1.3.0 ou mais recente. A interface 2, o coding-agents-kit 1.5.0, o DeepWorkPlan Vim 1.1.0 e a superfície própria do dck não mudam; o dck nunca inicia o daemon.
 
 ## Padrões de segurança
 
