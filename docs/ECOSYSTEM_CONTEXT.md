@@ -19,7 +19,7 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 ## Posture
 
 > **Dated snapshot:** This table records the pins in the checked-out source when it
-> was last updated (2026-11-17). Use
+> was last updated (2026-11-18). Use
 > `src/lib/ecosystem-pins.ts` and `/init.md` for the committed installation
 > state. This page is not a substitute for those pin surfaces.
 
