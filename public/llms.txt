@@ -62,7 +62,7 @@ The supported prior generation, Deep Work Plan v7 (pack `v7.12.2`), keeps the pl
 
 ## Ecosystem (v8)
 
-The methodology works alone; addons only amplify it. The pack 8.0.3 descriptors pin herdr-peers 2.2.0 (the site pins the v2.2.1 patch), coding-agents-kit v1.5.0, devcontainer-kit 1.4.2 (the site pins the v1.4.3 patch), deepworkplan-vim v1.1.0, Dailybot v3.23.20, and AI Diff Reviewer v3.3.16. The dependency-upgrade and design-system addons have no external pin. Overview: the [kit index](https://deepworkplan.com/kit).
+The methodology works alone; addons only amplify it. The pack 8.0.4 descriptors pin herdr-peers v2.2.1, coding-agents-kit v1.5.0, devcontainer-kit v1.4.3, deepworkplan-vim v1.1.0, Dailybot v3.23.20, and AI Diff Reviewer v3.3.16. The dependency-upgrade and design-system addons have no external pin. Overview: the [kit index](https://deepworkplan.com/kit).
 
 ## Developer & Agent Resources
 

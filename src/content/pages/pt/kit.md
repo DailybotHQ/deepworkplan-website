@@ -12,7 +12,7 @@ O kit é tudo o que você precisa para executar a metodologia na prática. Ele �
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.3 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
 ```
 
 O pacote 8.x atual cria novos planos com o contrato v8 (`plan-contract/v8`) por padrão. Os planos v7, v6 e v5 mantêm a geração registrada; a migração só acontece por meio de uma migração `refine` explícita.
@@ -72,7 +72,7 @@ Capacidades que o fluxo de onboarding adiciona a um repositório. Sete são opci
 - **[devcontainer](/pt/kit/devcontainer)** — O contêiner de desenvolvimento próprio de cada repositório a partir de um único template: agentes via ak, Herdr nos dois sentidos, chaves SSH apenas mediante opt-in. Fixado em `devcontainer-kit@v1.4.3`.
 - **[vim](/pt/kit/vim)** — O editor de terminal, com um navegador de planos somente leitura e um visualizador de Markdown. Fixado em `deepworkplan-vim@v1.1.0`.
 
-O registro de addons e os descritores são distribuídos no Deep Work Plan v8: `v8.0.3`
+O registro de addons e os descritores são distribuídos no Deep Work Plan v8: `v8.0.4`
 
 ### Exemplos
 

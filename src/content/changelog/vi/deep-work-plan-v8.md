@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Bản phát hành skill v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Bản phát hành skill v8.0.3"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.3"
+  - label: "Bản phát hành skill v8.0.4"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.4"
   - label: "LOOP_ENGINEERING.md (chuẩn tắc, v8)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Loop engineering trong trình đọc đặc tả"
@@ -77,4 +77,4 @@ Bản phát hành 8.0.0 triển khai tiêu chuẩn DWP 8.0.0. Kế hoạch mới
 
 Bản phát hành v7 cuối cùng là **7.12.2**.
 
-Bản phát hành skill đã cài đặt: **8.0.3**.
+Bản phát hành skill đã cài đặt: **8.0.4**.

@@ -50,7 +50,7 @@ Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하
 | 레지스트리 키 | `.dwp/config.json`의 `design-system` |
 | 기술자 | `addons/design-system/addon.json` (인터페이스 1) |
 | 대상 파일 | `AGENTS.md`에서 색인된 `docs/DESIGN.md` |
-| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v8.0.3`) |
+| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v8.0.4`) |
 
 ## 기능별 디자인 문서와의 관계
 

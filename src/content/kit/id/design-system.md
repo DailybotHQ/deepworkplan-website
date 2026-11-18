@@ -50,7 +50,7 @@ Ketika diterima, addon dapat memasang sebuah delegator `/design-system` ke dalam
 | Kunci registri | `design-system` di `.dwp/config.json` |
 | Deskriptor | `addons/design-system/addon.json` (antarmuka 1) |
 | File target | `docs/DESIGN.md` diindeks dari `AGENTS.md` |
-| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v8.0.3`) |
+| Pembuatan versi | Disematkan dan diberi versi bersama paket skill (`v8.0.4`) |
 
 ## Hubungan dengan dokumen desain per-fitur
 

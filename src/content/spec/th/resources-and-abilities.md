@@ -8,7 +8,7 @@ section: Record layer
 
 # ทรัพยากรและความสามารถ
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงเอกสารเชิงบรรทัดฐานสี่ฉบับของมาตรฐานปัจจุบัน DWP 8.0.0 ในรุ่น `v8.0.0`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/CONFIG.md) และ [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V7_ABILITIES.md) หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก
+> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงเอกสารเชิงบรรทัดฐานสี่ฉบับของมาตรฐานปัจจุบัน DWP 8.0.0 ในรุ่น `v8.0.0`: [`V6_CONTEXT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/V6_CONTEXT.md), [`V6_RESOURCES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/V6_RESOURCES.md), [`CONFIG.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/CONFIG.md) และ [`V7_ABILITIES.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/V7_ABILITIES.md) หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก
 
 **สถานะ: เสถียร (บริบทและทรัพยากรตั้งแต่ 6.0.0 การกำหนดค่าและความสามารถตั้งแต่ 8.0.0)** กฎเหล่านี้ผูกพันแผนสาย v6 ([ชั้นบันทึก](/spec/record-layer)) มาตรฐาน v5 ไม่ได้รับผลกระทบ คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 

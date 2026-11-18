@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Rilis skill v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Rilis skill v8.0.3"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.3"
+  - label: "Rilis skill v8.0.4"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.4"
   - label: "LOOP_ENGINEERING.md (normatif, v8)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Loop engineering di pembaca spesifikasi"
@@ -77,4 +77,4 @@ Rilis 8.0.0 menerapkan standar DWP 8.0.0. Rencana baru dibuat dengan `plan-contr
 
 Rilis v7 terakhir adalah **7.12.2**.
 
-Rilis skill yang terpasang: **8.0.3**.
+Rilis skill yang terpasang: **8.0.4**.

@@ -50,7 +50,7 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 | 注册键 | `.dwp/config.json` 中的 `design-system` |
 | 描述符 | `addons/design-system/addon.json`（接口 1） |
 | 目标文件 | 从 `AGENTS.md` 建立索引的 `docs/DESIGN.md` |
-| 版本控制 | 随技能包固定并控制版本（`v8.0.3`） |
+| 版本控制 | 随技能包固定并控制版本（`v8.0.4`） |
 
 ## 与按特性的设计文档的关系
 

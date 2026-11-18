@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "รุ่น skill v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "รุ่น skill v8.0.3"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.3"
+  - label: "รุ่น skill v8.0.4"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.4"
   - label: "LOOP_ENGINEERING.md (เอกสารมาตรฐาน v8)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Loop engineering ในตัวอ่านข้อกำหนด"
@@ -77,4 +77,4 @@ Deep Work Plan v8 รวมแนวคิดสี่ประการ ได�
 
 รุ่นสุดท้ายของ v7 คือ **7.12.2**.
 
-รุ่น skill ที่ติดตั้ง: **8.0.3**.
+รุ่น skill ที่ติดตั้ง: **8.0.4**.
