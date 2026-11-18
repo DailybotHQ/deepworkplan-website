@@ -27,8 +27,8 @@
     },
     "devcontainer": {
       "enabled": true,
-      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v1.0.1); devcontainer-kit v1.4.2 is the adopted release",
-      "version": "v1.4.2"
+      "note": "dck container: docker/local/dwpwebsite (dck init, rendered with v1.0.1); devcontainer-kit v1.4.3 is the adopted release",
+      "version": "v1.4.3"
     },
     "herdr": {
       "enabled": true,

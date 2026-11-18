@@ -23,20 +23,20 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 ## Kurulum
 
 ```bash
-git clone --branch v1.4.2 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.4.2` sürümüne sabitleyin: `v0.2.0` desteklenmez.
+Gereksinimler: Linux veya macOS ana makinesinde `bash` 3.2 veya daha yenisi ve `python3` 3.11 veya daha yenisi; konteyner komutları için de Compose v2 ile Docker. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın. `v1.4.3` sürümüne sabitleyin: `v0.2.0` desteklenmez.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/devcontainer-kit`, `v1.4.2` etiketi, arayüz 2 |
+| Ürün | `DailybotHQ/devcontainer-kit`, `v1.4.3` etiketi, arayüz 2 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `devcontainer` |
 | Depo başına yapılandırma | `.devcontainer/dck.toml` |
 | Algılama | `dck doctor --json` |
 
-**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın güncel sabitlenmiş sürümleri içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın. `v1.4.2` imajı herdr-peers 2.2.0, coding-agents-kit 1.5.0 ve DeepWorkPlan Vim 1.1.0 sürümlerini içerir.
+**`v1.0.0` sürümünden beri kararlı.** Genel arayüz anlamsal sürümlemeyi izler ve yalnızca yeni bir ana sürümde (dosyalar için ayrıca yeni bir arayüz numarasıyla) uyumsuz biçimde değişir: belgelenmiş bayrakları ve çıkış kodlarıyla (`0` başarılı, `1` başarısız, `2` kullanım, `3` yapılandırma, `4` ortam, `5` reddedildi) `dck` fiilleri; `dck.toml`, ana makine profili ve `dck doctor --json` şemaları (arayüz 2); ve oluşturma sözleşmesi — `dck init` komutunun yazdığı ve sahiplendiği dosyalar, koruduğu `dck:managed` işaretçileri ve kullanıcı blokları ile entrypoint'in okuduğu ortam. `v0.3.7` sürümünden geçişte hiçbir şey bozulmaz: imajın güncel sabitlenmiş sürümleri içermesi için `dck init` ve `dck rebuild` komutlarını çalıştırın. `v1.4.3` imajı Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 ve DeepWorkPlan Vim 1.1.0 sürümlerini içerir.
 
 ## Katmanlar
 
@@ -131,6 +131,10 @@ Açıkken `dck up`, ana makinenin `~/.ssh` dizinini `~/.ssh_host` konumuna salt 
 ## devcontainer-kit 1.4.2 sürümünden itibaren (arayüz 2)
 
 1.4.2 bir yamadır: `node-24` imajı Node 24.22.3 güvenlik sürümüne geçer (1.4.1, 24.21.0'ı sabitliyordu; bu yüzden `dck init` 24.22.x kullanan bir depoyu eski sürüme düşürebiliyordu) ve herdr-peers'ın durumu — `~/.local/state/herdr-peers` altındaki yetki devri günlüğü, lider kayıtları, yanıtlar ve autopilot durumu — artık konteynerin durum biriminde (mod 0700) kalır ve yeniden derlemeden sonra korunur. Arayüz 2, herdr-peers 2.2.0, coding-agents-kit 1.5.0 ve DeepWorkPlan Vim 1.1.0 değişmez.
+
+## devcontainer-kit 1.4.3 sürümünden itibaren (arayüz 2)
+
+1.4.3 bir yamadır: imaj, artık `herdrdev/herdr` deposundan (projenin taşındığı yer) indirilen ve sağlayıcının sürüm özetleriyle doğrulanan Herdr 0.9.5'e geçer (0.9.4, Herdr sunucusunu başlatan kabuk kapandığında sunucuyu çalışır durumda tutar) ve `autopilot --loop --revive` komutu coding-agents-kit 1.3.0 veya daha yenisi olmadan başlamayı reddeden herdr-peers 2.2.1'e geçer. Arayüz 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 ve dck'nin kendi yüzeyi değişmez; dck daemon'ı hiçbir zaman başlatmaz.
 
 ## Güvenlik varsayılanları
 
