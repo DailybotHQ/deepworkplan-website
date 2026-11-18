@@ -50,7 +50,7 @@ Wenn angenommen, kann das Addon einen `/design-system`-Delegator in das `.agents
 | Registrierungsschlüssel | `design-system` in `.dwp/config.json` |
 | Deskriptor | `addons/design-system/addon.json` (Schnittstelle 1) |
 | Zieldatei | `docs/DESIGN.md` indexiert von `AGENTS.md` |
-| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v8.0.3`) |
+| Versionierung | Gepinnt und versioniert mit dem Skill-Paket (`v8.0.4`) |
 
 ## Verhältnis zu featurebezogenen Design-Dokumenten
 

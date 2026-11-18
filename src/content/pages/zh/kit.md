@@ -12,7 +12,7 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 `DailybotHQ/deepworkplan-skill` 安装：
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.3 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
 ```
 
 当前 8.x 技能包默认使用 v8 契约（`plan-contract/v8`）创建新计划。v7、v6 和 v5 的计划保留其记录的代际；只有通过明确的 `refine` 迁移才会进行迁移。
@@ -72,7 +72,7 @@ onboard 流程向仓库叠加的各项能力。其中七个是可选的，绝非
 - **[devcontainer](/zh/kit/devcontainer)** — 用一个模板生成每个仓库自己的开发容器：代理经由 ak 运行，Herdr 双向互通，仅在选择启用时才放入 SSH 密钥。固定于：`devcontainer-kit@v1.4.3`。
 - **[vim](/zh/kit/vim)** — 终端编辑器，带有只读的计划浏览器和 Markdown 查看器。固定于：`deepworkplan-vim@v1.1.0`。
 
-附加组件注册表和描述文件随 Deep Work Plan v8 发布： `v8.0.3`
+附加组件注册表和描述文件随 Deep Work Plan v8 发布： `v8.0.4`
 
 ### 示例
 

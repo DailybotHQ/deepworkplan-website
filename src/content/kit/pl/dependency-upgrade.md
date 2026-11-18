@@ -33,7 +33,7 @@ Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop e
 | Klucz rejestru | `dependency-upgrade` w `.dwp/config.json` |
 | Deskryptor | `addons/dependency-upgrade/addon.json` (interfejs 1) |
 | Polecenie | `/lib-upgrade` instalowane w `.agents/commands/` po zaakceptowaniu |
-| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v8.0.3`) |
+| Wersjonowanie | Przypięte i wersjonowane z pakietem umiejętności (`v8.0.4`) |
 
 ## Uwagi
 

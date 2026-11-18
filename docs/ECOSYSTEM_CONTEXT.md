@@ -19,13 +19,13 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 ## Posture
 
 > **Dated snapshot:** This table records the pins in the checked-out source when it
-> was last updated (2026-11-17). Use
+> was last updated (2026-11-18). Use
 > `src/lib/ecosystem-pins.ts` and `/init.md` for the committed installation
 > state. This page is not a substitute for those pin surfaces.
 
 Versions are the release each surface pins today; the site may only claim a
 released tag (`tests/unit/lib/install-surface-pins.test.ts` guards the
-deepworkplan-skill pins). The pins last moved on 2026-11-17 with DWP 8.0.0: pack `v8.0.3`
+deepworkplan-skill pins). The pins last moved on 2026-11-18 with DWP 8.0.0: pack `v8.0.4`
 (DWP standard 8.0.0 — new plans default to `plan-contract/v8`, with the
 `autonomy` block, structured blockers in `journal-event/v8` and
 `plan-snapshot/v8`, and the `dwp-queue-v1` plan queue written by
@@ -49,10 +49,10 @@ metering and forces each CLI's ask mode under the opt-out; interface 1
 unchanged),
 deepworkplan-vim `v1.1.0`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
-reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.3`
-addon descriptors record herdr-peers 2.2.0 (the site pins the `v2.2.1` patch), coding-agents-kit `v1.5.0`,
-devcontainer-kit 1.4.2 (the site pins the `v1.4.3` patch) and deepworkplan-vim `v1.1.0`; the site pins the same
-releases otherwise. devcontainer-kit 1.4.0 (interface 2 unchanged; 1.3.0 added the opt-in
+reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.4`
+addon descriptors record herdr-peers `v2.2.1`, coding-agents-kit `v1.5.0`,
+devcontainer-kit `v1.4.3` and deepworkplan-vim `v1.1.0`; the site pins the same
+releases. devcontainer-kit 1.4.0 (interface 2 unchanged; 1.3.0 added the opt-in
 `[compose] container_only` key) bakes herdr-peers 2.1.0, coding-agents-kit
 1.5.0 and deepworkplan-vim 1.1.0 into its image and dogfoods pack 8.0.1; `v1.4.1`
 moves the image to herdr-peers 2.2.0 and dogfoods pack 8.0.2; 1.4.2 moves
@@ -61,7 +61,7 @@ volume; `v1.4.3` moves the image to Herdr 0.9.5 and herdr-peers 2.2.1.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
-| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v8.0.3` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
+| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v8.0.4` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
 | ai-diff-reviewer | Required local review: reviews a change set locally and in CI; every Final Review runs it | Public | `v3.3.16` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
 | agent-skill | Addon (dailybot): progress reports, check-ins, chat and more | Public | `v3.23.20` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |

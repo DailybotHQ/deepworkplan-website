@@ -19,7 +19,7 @@ section: State
 | v8 | 契约加上仅追加日志 | 从日志投影出的快照，绝不手动写入 |  [`plan-manifest/v7`](https://deepworkplan.com/schema/plan-manifest/v7.json), [`plan-contract/v8`](https://deepworkplan.com/schema/plan-contract/v8.json), [`journal-event/v8`](https://deepworkplan.com/schema/journal-event/v8.json), [`plan-snapshot/v8`](https://deepworkplan.com/schema/plan-snapshot/v8.json) |
 
 v8 计划使用 `plan-manifest/v7`，以及 `plan-contract/v8`、`journal-event/v8` 和 `plan-snapshot/v8`；v7 清单和日志事件架构仍支持现有计划。
-计划绝不会隐式地改变代际：v5 计划保留这些规则，而将其迁移到 v6 是一次明确的、可预览的迁移（[记录层](/spec/record-layer#coexistence-and-migration)）。规范来源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V7_CONTRACT.md)。
+计划绝不会隐式地改变代际：v5 计划保留这些规则，而将其迁移到 v6 是一次明确的、可预览的迁移（[记录层](/spec/record-layer#coexistence-and-migration)）。规范来源：[V6_LIFECYCLE.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/V6_LIFECYCLE.md) · [V7_CONTRACT.md](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/V7_CONTRACT.md)。
 
 **版本 5.0.0。状态：稳定。** 本文档规定了 Deep Work Plan 方法论的机器可读计划状态层，现已与 DWP 标准自身的版本号对齐——此次重新编号不削弱任何既有要求。本次修订还记录了受保护的状态更新器、经验证的计划发布，以及一份已完成计划必须满足的证据真实性规则（见下文）。关键词 MUST、MUST NOT、SHOULD、SHOULD NOT 与 MAY 应按 RFC 2119 中所述加以解释。
 

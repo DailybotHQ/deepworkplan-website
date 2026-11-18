@@ -8,7 +8,7 @@ section: Record layer
 
 # ชั้นบันทึก
 
-> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงชั้นบันทึก v6 เชิงบรรทัดฐานซึ่งมาตรฐานปัจจุบัน DWP 8.0.0 ต่อยอดขึ้นมา แหล่งอ้างอิงหลักในรุ่น `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_CONTRACT.md) และ [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/skills/deepworkplan/spec/V6_LIFECYCLE.md) หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก แผน v5 คงชั้น [สถานะแผน](/spec/plan-state) ไว้และไม่เคยถูกย้ายโดยปริยาย
+> **ขอบเขตเวอร์ชัน:** หน้านี้เรียบเรียงชั้นบันทึก v6 เชิงบรรทัดฐานซึ่งมาตรฐานปัจจุบัน DWP 8.0.0 ต่อยอดขึ้นมา แหล่งอ้างอิงหลักในรุ่น `v8.0.0`: [`V6_CONTRACT.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/V6_CONTRACT.md) และ [`V6_LIFECYCLE.md`](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/skills/deepworkplan/spec/V6_LIFECYCLE.md) หากหน้านี้กับไฟล์เหล่านั้นแตกต่างกัน ให้ยึดไฟล์เป็นหลัก แผน v5 คงชั้น [สถานะแผน](/spec/plan-state) ไว้และไม่เคยถูกย้ายโดยปริยาย
 
 **เวอร์ชัน 6.0.0 ขยายใน 7.0.0 สถานะ: เสถียร** ชั้นบันทึกแทนที่การประกาศการเสร็จสิ้นด้วยคำบรรยายด้วยบันทึก: สัญญาเป็นผู้มีอำนาจ journal เป็นหน่วยความจำ helper เป็นผู้เขียน และไฟล์ที่ถูกสร้างขึ้นทุกไฟล์เป็นการฉายภาพ คำสำคัญ MUST, MUST NOT, SHOULD, SHOULD NOT และ MAY ให้ตีความตามที่อธิบายไว้ใน RFC 2119
 

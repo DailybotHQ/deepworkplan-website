@@ -134,11 +134,11 @@ Loop engineering은 사람이 계속 확인하지 않아도 계획이 완료되�
 | `status` | 27,311|
 | `verify` | 36,701|
 
-단위: 파일 시스템 바이트. 릴리스된 팩에서 다음 명령으로 측정했습니다: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.3).
+단위: 파일 시스템 바이트. 릴리스된 팩에서 다음 명령으로 측정했습니다: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.4).
 
 제공자 토큰, 비용, 루프 완결 통계는 표시하지 않습니다. 이를 측정하는 태그된 출처가 아직 없으므로 행이 없습니다. 스크립트의 바이트 ÷ 4 토큰 수치는 표시된 추정치이며, 측정값이 아닙니다.
 
-[평가 원장 읽기](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.3/docs/EVALUATION.md)
+[평가 원장 읽기](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/docs/EVALUATION.md)
 
 ---
 
