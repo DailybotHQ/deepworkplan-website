@@ -44,7 +44,7 @@ Una conexión opcional al **equipo de Dailybot** del desarrollador para visibili
 
 - **Página del kit:** [Dailybot](/kit/dailybot) — referencia completa de capacidades
 - **Qué conecta el addon de DWP:** cuatro reportes del ciclo de vida del plan (inicio, tarea significativa, bloqueado, finalización) vía la sub-skill `report` de dailybot; refuerzo determinístico opcional mediante hooks (`dailybot hook`, CLI `>= 3.9.0`)
-- **Skill emparejada:** instalar [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (fijada en **v3.23.20**) expone **17 capacidades** — chat en Slack/Teams/Discord/Google Chat, check-ins, creación de formularios, ask AI, kudos, tableros y tareas de Plan, etiquetas de la organización, claves API por repo (`.dailybot/env.json`), correo y más. El addon de DWP solo conecta **report**; el resto de capacidades se invocan directamente mediante la skill de Dailybot
+- **Skill emparejada:** instalar [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (fijada en **v3.23.21**) expone **17 capacidades** — chat en Slack/Teams/Discord/Google Chat, check-ins, creación de formularios, ask AI, kudos, tableros y tareas de Plan, etiquetas de la organización, claves API por repo (`.dailybot/env.json`), correo y más. El addon de DWP solo conecta **report**; el resto de capacidades se invocan directamente mediante la skill de Dailybot
 - **Auth:** totalmente delegada a la skill de Dailybot (`dailybot login` o `DAILYBOT_API_KEY`); este addon nunca almacena credenciales
 - **Salvaguarda neutral respecto al proveedor:** el DWP central tiene **cero** dependencia de Dailybot; nunca instalar automáticamente para todos
 - **Cuándo se ofrece:** el desarrollador o el equipo ya usan Dailybot, o piden explícitamente reportes al equipo
@@ -93,7 +93,7 @@ Un integrador ligero de [herdr-peers](https://github.com/DailybotHQ/herdr-peers)
 
 ### DeepWorkPlan Vim (séptimo addon)
 
-Un integrador ligero de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fijado en `v1.1.0`, interfaz `1`), el editor de terminal para Deep Work Plan (Neovim 0.12+).
+Un integrador ligero de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (fijado en `v1.1.1`, interfaz `1`), el editor de terminal para Deep Work Plan (Neovim 0.12+).
 
 - **Página del kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Qué añade:** una superficie de editor opcional, a nivel de máquina, para agentes y humanos — un índice de comandos generado, un explorador de planes de solo lectura y un visor de Markdown; cada afirmación se lee de la superficie legible por máquina fijada del producto
@@ -102,7 +102,7 @@ Un integrador ligero de [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepwor
 
 ### Agentkit (octavo addon)
 
-Un integrador ligero de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v1.5.1`, interfaz `1`), el transporte de delegación **sin interfaz** (headless) de los planes v7.
+Un integrador ligero de [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, fijado en `v1.5.2`, interfaz `1`), el transporte de delegación **sin interfaz** (headless) de los planes v7.
 
 - **Página del kit:** [Agentkit](/kit/agentkit)
 - **Qué añade:** una única superficie de comandos `ak` sobre los agentes de codificación de terminal, usada para ejecutar sin interfaz una tarea acotada del plan; aporta las capacidades `subagents`, `cancel_children` y `model_routing` solo en tiempo de ejecución, cuando está habilitado, detectado y sobre una interfaz compatible

@@ -44,7 +44,7 @@ section: Addons
 
 - **Сторінка kit:** [Dailybot](/kit/dailybot) — повна довідка можливостей
 - **Що підключає DWP-аддон:** чотири звіти життєвого циклу плану (kickoff, significant task, blocked, completion) через sub-skill dailybot `report`; опційне детерміноване примусове виконання хуків (`dailybot hook`, CLI `>= 3.9.0`)
-- **Парний скіл:** встановлення [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (закріплено на **v3.23.20**) відкриває **17 можливостей** — чат у Slack/Teams/Discord/Google Chat, check-in, створення форм, ask AI, kudos, дошки й завдання Plan, мітки організації, per-repo API keys (`.dailybot/env.json`), email тощо. DWP-аддон підключає лише **report**; інші можливості викликаються безпосередньо через скіл Dailybot
+- **Парний скіл:** встановлення [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (закріплено на **v3.23.21**) відкриває **17 можливостей** — чат у Slack/Teams/Discord/Google Chat, check-in, створення форм, ask AI, kudos, дошки й завдання Plan, мітки організації, per-repo API keys (`.dailybot/env.json`), email тощо. DWP-аддон підключає лише **report**; інші можливості викликаються безпосередньо через скіл Dailybot
 - **Auth:** повністю делеговано скілу Dailybot (`dailybot login` або `DAILYBOT_API_KEY`); цей аддон ніколи не зберігає облікові дані
 - **Vendor-neutral guardrail:** основний DWP має **нульову** залежність від Dailybot; ніколи не встановлюйте автоматично для всіх
 - **Коли пропонувати:** розробник або команда вже використовує Dailybot або явно просить командне звітування
@@ -93,7 +93,7 @@ section: Addons
 
 ### DeepWorkPlan Vim (сьомий аддон)
 
-Тонкий інтегратор [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (закріплено на `v1.1.0`, інтерфейс `1`), термінального редактора для Deep Work Plan (Neovim 0.12+).
+Тонкий інтегратор [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (закріплено на `v1.1.1`, інтерфейс `1`), термінального редактора для Deep Work Plan (Neovim 0.12+).
 
 - **Сторінка kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Що додає:** опційну поверхню редактора на рівні машини для агентів і людей — згенерований індекс команд, переглядач планів лише для читання та переглядач Markdown; кожне твердження зчитується із закріпленої машиночитної поверхні продукту
@@ -102,7 +102,7 @@ section: Addons
 
 ### Agentkit (восьмий аддон)
 
-Тонкий інтегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено на `v1.5.1`, інтерфейс `1`), **headless**-транспорт делегування для планів v7.
+Тонкий інтегратор [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, закріплено на `v1.5.2`, інтерфейс `1`), **headless**-транспорт делегування для планів v7.
 
 - **Сторінка kit:** [Agentkit](/kit/agentkit)
 - **Що додає:** єдину поверхню команд `ak` над термінальними агентами для програмування, через яку обмежене завдання плану виконується в режимі headless; можливості `subagents`, `cancel_children` і `model_routing` він надає лише під час виконання — коли його ввімкнено, виявлено й інтерфейс сумісний

@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Opcjonalny addon DWP: raportuj cykl życia planu zespołowi Dailybot, wymuszanie hooków i pełny skill agenta Dailybot v3.23.20 (czat, formularze, Plan i więcej)."
+description: "Opcjonalny addon DWP: raportuj cykl życia planu zespołowi Dailybot, wymuszanie hooków i pełny skill agenta Dailybot v3.23.21 (czat, formularze, Plan i więcej)."
 kind: addon
 lang: pl
 order: 2
@@ -25,7 +25,7 @@ Deep Work Plan ma cztery filary: Spec-first, repozytorium jest harnessem, Loop e
 
 ## Co ten addon łączy (celowo wąsko)
 
-Addon DWP Dailybot **nie wymyśla** Dailybot na nowo. Łączy wykonanie planu z sub-skillem dailybot **`report`** i opcjonalnie commituje hooki harnessa. Reszta — instalacja, zgoda, uwierzytelnianie, styl pisania — jest **delegowana** do oficjalnego [skilla agenta Dailybot](https://github.com/DailybotHQ/agent-skill) (obecnie **v3.23.20**).
+Addon DWP Dailybot **nie wymyśla** Dailybot na nowo. Łączy wykonanie planu z sub-skillem dailybot **`report`** i opcjonalnie commituje hooki harnessa. Reszta — instalacja, zgoda, uwierzytelnianie, styl pisania — jest **delegowana** do oficjalnego [skilla agenta Dailybot](https://github.com/DailybotHQ/agent-skill) (obecnie **v3.23.21**).
 
 ### Cztery zdarzenia cyklu życia
 
@@ -71,7 +71,7 @@ Addon **proponuje** ścieżki instalacji; skill Dailybot odpowiada za zgodę i w
 
 | Komponent | Polecenie / ścieżka |
 |-----------|----------------|
-| **Skill agenta Dailybot** (zalecany) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot -y` |
+| **Skill agenta Dailybot** (zalecany) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.21 --skill dailybot -y` |
 | **Aktualizacja istniejącego skilla** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (baza pakietu `>= 3.9.0`; Plan wymaga `>= 3.25.0`) | Instalowany przez skill przy pierwszym użyciu przez `shared/auth.md`; lub `pip install 'dailybot-cli>=3.9.0'`, Homebrew lub installer ze sprawdzonym checksum na [cli.dailybot.com](https://cli.dailybot.com) |
@@ -88,9 +88,9 @@ Ten addon **nigdy** nie pyta o e-mail, OTP ani klucze API i **nigdy** nie przech
 
 Rozwiązywanie auth działa w trybie **Bearer-first**: token sesji ma priorytet, z przezroczystym ponowieniem Bearer→klucz API przy `401`/`403`, więc nieaktualny token nigdy nie blokuje ważnego klucza. Jeśli auth zostanie odrzucone lub jest niedostępne, raportowanie jest cicho pomijane — praca trwa dalej.
 
-## Sparowany skill Dailybot — 17 możliwości (v3.23.20)
+## Sparowany skill Dailybot — 17 możliwości (v3.23.21)
 
-Instalacja skilla agenta Dailybot daje znacznie więcej niż łączy addon DWP. Oficjalny pakiet skilli (skill **v3.23.20**, CLI baza **>= 3.9.0**, Plan **>= 3.25.0**, bieżąca publikacja CLI **3.25.0**) udostępnia **17 skoordynowanych sub-skilli**:
+Instalacja skilla agenta Dailybot daje znacznie więcej niż łączy addon DWP. Oficjalny pakiet skilli (skill **v3.23.21**, CLI baza **>= 3.9.0**, Plan **>= 3.25.0**, bieżąca publikacja CLI **3.25.0**) udostępnia **17 skoordynowanych sub-skilli**:
 
 | Sub-skill | Co robi |
 |-----------|--------------|

@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # пропустити облі
 ## Встановлення
 
 ```bash
-git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.2 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v1.5.1`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
+Вимоги: `bash` на macOS або Linux і `python3` 3.9 або новіший; більше нічого. Windows використовує `install.ps1`. Закріпіть `v1.5.2`: `v0.2.0` і `v0.2.1` не підтримуються. Перевірте реліз за його ресурсом `SHA256SUMS`.
 
 | Елемент | Значення |
 |---|---|
-| Продукт | `DailybotHQ/coding-agents-kit`, тег `v1.5.1`, інтерфейс 1 |
+| Продукт | `DailybotHQ/coding-agents-kit`, тег `v1.5.2`, інтерфейс 1 |
 | Ключ реєстру | `agentkit` у `.dwp/config.json` |
 | Транспорт | headless: один `ak run` на делегата в окремому git worktree |
 | Надає | `subagents`, `cancel_children`, `model_routing` |

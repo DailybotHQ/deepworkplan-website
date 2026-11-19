@@ -24,7 +24,7 @@ DWP được phân phối dưới dạng skill nằm trong `.agents/skills/` (đ
 Tùy chọn: [coding-agents-kit](/kit/agentkit) có thể cài đặt CLI này và khởi chạy nó bằng `ak claude`. Trình cài đặt chính thức của nhà cung cấp cũng hoạt động tốt như vậy.
 
 ```bash
-git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.2 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak install claude
 ```
 

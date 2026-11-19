@@ -44,8 +44,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.3.0"
   - label: "coding-agents-kit v1.4.0"
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.4.0"
-  - label: "coding-agents-kit v1.5.1"
-    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.1"
+  - label: "coding-agents-kit v1.5.2"
+    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.2"
   - label: "devcontainer-kit v1.3.0"
     url: "https://github.com/DailybotHQ/devcontainer-kit/releases/tag/v1.3.0"
 ---

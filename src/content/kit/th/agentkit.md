@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # ข้ามบัญชี�
 ## การติดตั้ง
 
 ```bash
-git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.2 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-ข้อกำหนด: `bash` บน macOS หรือ Linux และ `python3` 3.9 ขึ้นไป ไม่ต้องมีอย่างอื่น Windows ใช้ `install.ps1` ให้ตรึงไว้ที่ `v1.5.1` เนื่องจาก `v0.2.0` และ `v0.2.1` ไม่ได้รับการสนับสนุน ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น
+ข้อกำหนด: `bash` บน macOS หรือ Linux และ `python3` 3.9 ขึ้นไป ไม่ต้องมีอย่างอื่น Windows ใช้ `install.ps1` ให้ตรึงไว้ที่ `v1.5.2` เนื่องจาก `v0.2.0` และ `v0.2.1` ไม่ได้รับการสนับสนุน ตรวจสอบรีลีสด้วย asset `SHA256SUMS` ของรีลีสนั้น
 
 | รายการ | ค่า |
 |---|---|
-| ผลิตภัณฑ์ | `DailybotHQ/coding-agents-kit` แท็ก `v1.5.1` อินเทอร์เฟซ 1 |
+| ผลิตภัณฑ์ | `DailybotHQ/coding-agents-kit` แท็ก `v1.5.2` อินเทอร์เฟซ 1 |
 | คีย์ใน registry | `agentkit` ใน `.dwp/config.json` |
 | ช่องทางการส่ง | headless: `ak run` หนึ่งครั้งต่อผู้รับมอบหมายหนึ่งราย ใน git worktree เฉพาะ |
 | สิ่งที่มอบให้ | `subagents`, `cancel_children`, `model_routing` |

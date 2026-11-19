@@ -33,9 +33,9 @@ export const ECOSYSTEM_PINS = {
   },
   agentkit: {
     repo: 'coding-agents-kit',
-    tag: 'v1.5.1',
+    tag: 'v1.5.2',
     sha256sums:
-      'fb4c71edec9fc510658045d53994fe9426fb752627a922a03616a832219ee3d1',
+      '1cc0caebd19156c0390ef9b59d04c551716dbe02c9ce67c102786a467f10d0b0',
     role: 'agentkit addon (`ak`)',
   },
   herdr: {
@@ -54,9 +54,9 @@ export const ECOSYSTEM_PINS = {
   },
   vim: {
     repo: 'deepworkplan-vim',
-    tag: 'v1.1.0',
+    tag: 'v1.1.1',
     sha256sums:
-      'b6942c217e1985ce36638a1f2d29530e82a6e92dcdea1ef5e0390fddb7ce2187',
+      'adc365db490a038e5f40fd9413b655f01d8be5bc6babbe6adaef56a650af36eb',
     role: 'DeepWorkPlan Vim addon',
   },
   reviewer: {
@@ -68,7 +68,7 @@ export const ECOSYSTEM_PINS = {
   },
   dailybot: {
     repo: 'agent-skill',
-    tag: 'v3.23.20',
+    tag: 'v3.23.21',
     sha256sums: null,
     role: 'Dailybot addon (agent skill)',
   },

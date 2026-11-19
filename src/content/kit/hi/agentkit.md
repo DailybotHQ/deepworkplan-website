@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # दूसरों को ल
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.2 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v1.5.1` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
+आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v1.5.2` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, इंटरफ़ेस 1 |
+| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.5.2`, इंटरफ़ेस 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `agentkit` |
 | ट्रांसपोर्ट | headless: हर प्रत्यायोजित एजेंट के लिए एक समर्पित git worktree में एक `ak run` |
 | प्रदान करता है | `subagents`, `cancel_children`, `model_routing` |

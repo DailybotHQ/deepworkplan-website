@@ -67,15 +67,15 @@ Praca przemieszcza się wyłącznie między kontami, które zadeklarowałeś dla
 ## Instalacja
 
 ```bash
-git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.2 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v1.5.1`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
+Wymagania: `bash` na macOS lub Linuksie oraz `python3` 3.9 lub nowszy; nic więcej. Windows używa `install.ps1`. Przypnij `v1.5.2`: `v0.2.0` i `v0.2.1` nie są obsługiwane. Zweryfikuj wydanie za pomocą jego zasobu `SHA256SUMS`.
 
 | Element | Wartość |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, interfejs 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, tag `v1.5.2`, interfejs 1 |
 | Klucz rejestru | `agentkit` w `.dwp/config.json` |
 | Transport | headless: jedno `ak run` na delegata w dedykowanym git worktree |
 | Zapewnia | `subagents`, `cancel_children`, `model_routing` |

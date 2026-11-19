@@ -67,15 +67,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.2 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.5.1`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.5.2`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.5.2`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |

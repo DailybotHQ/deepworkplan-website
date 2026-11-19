@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.2 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.5.1`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.5.2`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.5.1`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.5.2`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |

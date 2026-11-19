@@ -68,9 +68,9 @@ Capacità che il flusso di onboard aggiunge a un repo. Sette sono opzionali e ma
 
 - **Skill Deep Work Plan** — Crea, esegue, verifica, riprende e affina i piani. Non richiede alcun addon.
 - **[herdr](/it/kit/herdr)** — Peer in pannelli Herdr, su qualsiasi macchina: delega interattiva con una sola risposta autorizzata. Fissato a `herdr-peers@v2.2.1`.
-- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v1.5.1`.
+- **[agentkit](/it/kit/agentkit)** — Un solo comando ak per ogni agente di codice da terminale: autonomia predefinita con opt-out, e delega headless in un worktree. Fissato a `coding-agents-kit@v1.5.2`.
 - **[devcontainer](/it/kit/devcontainer)** — Il container di sviluppo proprio di ogni repository da un unico template: agenti tramite ak, Herdr in entrambi i sensi, chiavi SSH solo su opt-in. Fissato a `devcontainer-kit@v1.4.4`.
-- **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v1.1.0`.
+- **[vim](/it/kit/vim)** — L’editor da terminale, con un browser dei piani in sola lettura e un visualizzatore Markdown. Fissato a `deepworkplan-vim@v1.1.1`.
 
 Il registro degli addon e i descrittori sono distribuiti in Deep Work Plan v8: `v8.0.6`
 
