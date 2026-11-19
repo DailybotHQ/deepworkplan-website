@@ -12,7 +12,7 @@ Bộ kit là mọi thứ bạn cần để chạy phương pháp luận trong th
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
 ```
 
 Gói 8.x hiện tại mặc định tạo kế hoạch mới bằng hợp đồng v8 (`plan-contract/v8`). Các kế hoạch v7, v6 và v5 giữ nguyên thế hệ đã ghi nhận; việc di chuyển chỉ diễn ra qua một lần di chuyển `refine` rõ ràng.
@@ -68,11 +68,11 @@ Các năng lực mà luồng onboard bổ sung vào một repo. Bảy addon là 
 
 - **Skill Deep Work Plan** — Tạo, thực thi, xác minh, tiếp tục và tinh chỉnh kế hoạch. Không cần addon nào.
 - **[herdr](/vi/kit/herdr)** — Các agent ngang hàng trong các pane của Herdr, trên bất kỳ máy nào: ủy thác tương tác với đúng một phản hồi được ủy quyền. Ghim tại `herdr-peers@v2.2.1`.
-- **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v1.5.0`.
+- **[agentkit](/vi/kit/agentkit)** — Một lệnh ak duy nhất cho mọi agent lập trình trên terminal: tự chủ theo mặc định với lựa chọn opt-out, và ủy thác headless trong một worktree. Ghim tại `coding-agents-kit@v1.5.1`.
 - **[devcontainer](/vi/kit/devcontainer)** — Dev container riêng của mỗi repository từ một template: agent qua ak, Herdr hai chiều, khóa SSH chỉ khi chủ động bật. Ghim tại `devcontainer-kit@v1.4.3`.
 - **[vim](/vi/kit/vim)** — Trình soạn thảo terminal, với trình duyệt kế hoạch chỉ đọc và trình xem Markdown. Ghim tại `deepworkplan-vim@v1.1.0`.
 
-Registry addon và các descriptor được phân phối trong Deep Work Plan v8: `v8.0.4`
+Registry addon và các descriptor được phân phối trong Deep Work Plan v8: `v8.0.5`
 
 ### Ví dụ
 

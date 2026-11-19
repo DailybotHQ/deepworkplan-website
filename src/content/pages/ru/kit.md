@@ -12,7 +12,7 @@ lastUpdated: 2026-11-16
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
 ```
 
 Текущий пакет 8.x по умолчанию создает новые планы по контракту v8 (`plan-contract/v8`). Планы v7, v6 и v5 сохраняют записанное поколение; миграция выполняется только через явную миграцию `refine`.
@@ -68,11 +68,11 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.
 
 - **Навык Deep Work Plan** — Создаёт, выполняет, проверяет, возобновляет и уточняет планы. Не требует дополнений.
 - **[herdr](/ru/kit/herdr)** — Peer-агенты в панелях Herdr на любой машине: интерактивное делегирование с одним авторизованным ответом. Закреплено на `herdr-peers@v2.2.1`.
-- **[agentkit](/ru/kit/agentkit)** — Одна команда ak для любого терминального агента для кода: автономия по умолчанию с возможностью отказа и делегирование без интерфейса в worktree. Закреплено на `coding-agents-kit@v1.5.0`.
+- **[agentkit](/ru/kit/agentkit)** — Одна команда ak для любого терминального агента для кода: автономия по умолчанию с возможностью отказа и делегирование без интерфейса в worktree. Закреплено на `coding-agents-kit@v1.5.1`.
 - **[devcontainer](/ru/kit/devcontainer)** — Собственный dev-контейнер каждого репозитория из одного шаблона: агенты через ak, Herdr в обе стороны, SSH-ключи только при явном включении. Закреплено на `devcontainer-kit@v1.4.3`.
 - **[vim](/ru/kit/vim)** — Терминальный редактор с браузером планов только для чтения и просмотрщиком Markdown. Закреплено на `deepworkplan-vim@v1.1.0`.
 
-Реестр дополнений и дескрипторы поставляются в Deep Work Plan v8: `v8.0.4`
+Реестр дополнений и дескрипторы поставляются в Deep Work Plan v8: `v8.0.5`
 
 ### Примеры
 

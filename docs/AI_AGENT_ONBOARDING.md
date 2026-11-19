@@ -116,7 +116,7 @@ Methodology/spec/kit docs live in multilingual content collections (17 active la
 
 ## DWP v8 plans and host authority records
 
-The current DWP standard is 8.0.0, implemented by the installed 8.0.4 skill.
+The current DWP standard is 8.0.0, implemented by the installed 8.0.5 skill.
 New plans use the v8 contract (`plan-contract/v8`) by default; the addon
 registry is the tracked `.dwp/config.json`; v7, v6 and v5 plans retain their
 recorded generation and are never migrated implicitly (only an explicit

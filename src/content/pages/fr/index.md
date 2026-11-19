@@ -134,11 +134,11 @@ Le harness publie ce que chaque flux doit lire avant de démarrer : le routeur, 
 | `status` | 27 311|
 | `verify` | 36 701|
 
-Unité : octets du système de fichiers. Mesuré sur le pack publié avec la commande ci-dessous : `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.4).
+Unité : octets du système de fichiers. Mesuré sur le pack publié avec la commande ci-dessous : `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5).
 
 Les tokens du fournisseur, le coût et les statistiques de fermeture de boucle ne sont pas affichés : aucune source étiquetée ne les mesure encore, ils n’ont donc pas de ligne. Le chiffre de tokens du script, octets ÷ 4, est une estimation signalée comme telle, jamais une mesure.
 
-[Lire le registre d’évaluation](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/docs/EVALUATION.md)
+[Lire le registre d’évaluation](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
 
 ---
 

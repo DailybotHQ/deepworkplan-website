@@ -33,7 +33,7 @@ Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하
 | 레지스트리 키 | `.dwp/config.json`의 `dependency-upgrade` |
 | 기술자 | `addons/dependency-upgrade/addon.json` (인터페이스 1) |
 | 명령 | 수락 시 `.agents/commands/`에 설치되는 `/lib-upgrade` |
-| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v8.0.4`) |
+| 버전 관리 | 스킬 팩과 함께 고정 및 버전 관리 (`v8.0.5`) |
 
 ## 참고
 

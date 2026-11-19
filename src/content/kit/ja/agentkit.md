@@ -10,7 +10,7 @@ order: 8
 
 ターミナルで動くコーディングエージェントは、それぞれが独自のフラグでセッションを継続し、独自の方法で二つめのアカウントを分離し、独自のヘッドレスモードと、権限プロンプトを飛ばすための独自のスイッチを持っています。**[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** は、それらすべての上に一つのコマンド体系を被せます：`ak <kind> [@profile]`。
 
-このアドオンは、このキットを **DWP v8**（パック `v8.0.4`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
+このアドオンは、このキットを **DWP v8**（パック `v8.0.5`）に**ヘッドレス**な委任トランスポートとして統合します。任意のアドオンであり、これがなければ、すべてのタスクはこれまでとまったく同じく現在のセッションで実行されます。キット自体は MIT のプロダクトで、Deep Work Plan がなくても動作します。
 
 Deep Work Plan には4つの柱があります。仕様ファースト、リポジトリこそがハーネス、Loop engineering、計測された効率です。アドオンと統合機能はハーネスとループを拡張できますが、方法論はそれ単体でも機能します。
 
@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 他者にリースされた�
 ## インストール
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.5.0` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
+要件：macOS または Linux 上の `bash`、および `python3` 3.9 以降。それ以外は不要です。Windows では `install.ps1` を使います。`v1.5.1` に固定してください。`v0.2.0` と `v0.2.1` はサポート対象外です。リリースは、その `SHA256SUMS` アセットで検証してください。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.5.0`、インターフェース 1 |
+| プロダクト | `DailybotHQ/coding-agents-kit`、タグ `v1.5.1`、インターフェース 1 |
 | レジストリキー | `.dwp/config.json` 内の `agentkit` |
 | トランスポート | ヘッドレス：委任先ごとに専用の git worktree で `ak run` を一回 |
 | 提供するもの | `subagents`、`cancel_children`、`model_routing` |
@@ -94,6 +94,10 @@ ak doctor
 このリリースでは `ak run --json` に `tokens` フィールドが加わり、CLI が報告した件数（`input`、`output`、`cache_read`、`cache_write`、`total`）だけを含みます。報告されない値は `null` のままで、kit が推定することはありません。`ak usage --json` には `runs`、`tokens`、`coverage` を含む `advisory` ブロックが加わります。これは参考情報であり、ベンダーのクォータ枠、キャパシティ判定、`ak pick` の選択適格性を変えません。
 
 `--ask` または `AGENTKIT_PERMISSIONS=ask` が有効な場合、`ak` は各 CLI 固有の明示的な ask モードを強制するようになりました。ask フラグを持たない CLI の動作は変わりません。このオプトアウトが有効な場合、pick-v2 の `launch.argv` の末尾に `--ask` が付きます。herdr-peers (v2.0.2) 以降はこの末尾の引数を受け付けますが、v2.0.1 は拒否します。
+
+## coding-agents-kit 1.5.1 から（インターフェース 1）
+
+パッチリリースで、`ak doctor --json` の形式は変わりません。`ak install` と `ak update` は npm の CLI を `--include=optional` 付きでインストールするようになり、Codex はプラットフォームごとのネイティブバイナリを保持します。インストールした CLI は起動できなければなりません（`--version` が 0 で終了すること。キーの変数なしで確認します）。起動できない場合、`ak` は一度だけ再インストールし、それでも起動しなければ CLI 自身のエラーを添えてインストール失敗として報告します。`ak doctor` は、見つかるのに起動しない CLI を問題として示し、修復方法を示します。
 
 ## デフォルトは自律実行、オプトアウトが常に優先
 

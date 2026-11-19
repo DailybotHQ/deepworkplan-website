@@ -10,7 +10,7 @@ order: 8
 
 터미널 코딩 에이전트는 저마다 세션을 이어 가는 고유한 플래그, 두 번째 계정을 분리하는 고유한 방식, 고유한 헤드리스 모드, 그리고 권한 프롬프트를 건너뛰는 고유한 스위치를 갖고 있습니다. [**coding-agents-kit**](https://github.com/DailybotHQ/coding-agents-kit)는 그 모두 위에 하나의 명령 체계를 얹습니다: `ak <kind> [@profile]`.
 
-이 애드온은 이 키트를 **DWP v8**(팩 `v8.0.4`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
+이 애드온은 이 키트를 **DWP v8**(팩 `v8.0.5`)에 **헤드리스** 위임 전송 방식으로 통합합니다. 선택형이며, 이것이 없으면 모든 작업은 이전과 똑같이 현재 세션에서 실행됩니다. 키트 자체는 Deep Work Plan 없이도 동작하는 MIT 제품입니다.
 
 Deep Work Plan의 네 가지 기둥은 스펙 우선, 리포지토리가 곧 하니스, Loop engineering, 측정된 효율입니다. 애드온과 통합 기능은 하니스와 루프를 확장할 수 있지만, 방법론은 단독으로도 작동합니다.
 
@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 다른 소유자에게 리스
 ## 설치
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.5.0`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
+요구 사항: macOS 또는 Linux의 `bash`, 그리고 `python3` 3.9 이상. 그 밖에는 필요 없습니다. Windows는 `install.ps1`을 사용합니다. `v1.5.1`에 고정하세요. `v0.2.0`과 `v0.2.1`은 지원되지 않습니다. 릴리스는 해당 `SHA256SUMS` 자산으로 검증하세요.
 
 | 항목 | 값 |
 |---|---|
-| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.5.0`, 인터페이스 1 |
+| 제품 | `DailybotHQ/coding-agents-kit`, 태그 `v1.5.1`, 인터페이스 1 |
 | 레지스트리 키 | `.dwp/config.json`의 `agentkit` |
 | 전송 방식 | 헤드리스: 위임 대상마다 전용 git worktree에서 `ak run` 한 번 |
 | 제공 | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ ak doctor
 이 릴리스는 `ak run --json`에 `tokens` 필드를 추가하며, CLI가 보고한 수치(`input`, `output`, `cache_read`, `cache_write`, `total`)만 담습니다. 보고되지 않은 값은 `null`로 남고 kit은 추정하지 않습니다. `ak usage --json`에는 `runs`, `tokens`, `coverage`가 포함된 `advisory` 블록이 추가됩니다. 이는 참고 정보이며 공급자 할당량 구간, 용량 판정, `ak pick` 선택 자격을 바꾸지 않습니다.
 
 `--ask` 또는 `AGENTKIT_PERMISSIONS=ask`가 활성화되면 `ak`는 각 CLI의 명시적 ask 모드를 강제합니다. ask 플래그가 없는 CLI는 변경되지 않습니다. 이 옵트아웃이 활성화된 상태에서 pick-v2의 `launch.argv`는 `--ask`로 끝납니다. herdr-peers (v2.0.2) 이상은 이 끝의 인수를 받아들이며 v2.0.1은 거부합니다.
+
+## coding-agents-kit 1.5.1부터 (인터페이스 1)
+
+패치 릴리스이며 `ak doctor --json` 형식은 바뀌지 않습니다. `ak install`과 `ak update`는 이제 npm CLI를 `--include=optional`로 설치하므로 Codex가 플랫폼별 네이티브 바이너리를 유지합니다. 설치된 CLI는 실행되어야 합니다(`--version`이 0으로 종료되며, 키 변수 없이 확인합니다). 그렇지 않으면 `ak`가 한 번 다시 설치하고, 그래도 실행되지 않으면 CLI 자체의 오류와 함께 설치 실패로 보고합니다. `ak doctor`는 찾을 수는 있지만 실행되지 않는 CLI를 문제로 표시하고 복구 방법을 알려 줍니다.
 
 ## 기본은 자율 실행, 옵트아웃이 항상 우선한다
 

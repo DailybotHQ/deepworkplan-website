@@ -12,7 +12,7 @@ Kit adalah semua yang Anda perlukan untuk menjalankan metodologi dalam praktik. 
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
 ```
 
 Paket 8.x saat ini membuat rencana baru dengan kontrak v8 (`plan-contract/v8`) secara default. Rencana v7, v6, dan v5 mempertahankan generasi tercatatnya; migrasi hanya terjadi melalui migrasi `refine` yang eksplisit.
@@ -69,11 +69,11 @@ Kemampuan yang ditambahkan alur onboard ke sebuah repo. Tujuh bersifat opsional 
 
 - **Skill Deep Work Plan** — Membuat, menjalankan, memverifikasi, melanjutkan, dan menyempurnakan rencana. Tidak memerlukan addon.
 - **[herdr](/id/kit/herdr)** — Rekan di panel Herdr, di mesin mana pun: delegasi interaktif dengan satu balasan yang diotorisasi. Dipatok pada `herdr-peers@v2.2.1`.
-- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: otonomi secara default dengan opt-out, dan delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v1.5.0`.
+- **[agentkit](/id/kit/agentkit)** — Satu perintah ak untuk setiap coding agent di terminal: otonomi secara default dengan opt-out, dan delegasi headless di dalam worktree. Dipatok pada `coding-agents-kit@v1.5.1`.
 - **[devcontainer](/id/kit/devcontainer)** — Dev container milik setiap repositori dari satu template: agen melalui ak, Herdr dua arah, kunci SSH hanya lewat opt-in. Dipatok pada `devcontainer-kit@v1.4.3`.
 - **[vim](/id/kit/vim)** — Editor terminal, dengan penjelajah rencana hanya-baca dan penampil Markdown. Dipatok pada `deepworkplan-vim@v1.1.0`.
 
-Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v8: `v8.0.4`
+Registri addon dan deskriptor dikirimkan dalam Deep Work Plan v8: `v8.0.5`
 
 ### Contoh
 

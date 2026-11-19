@@ -134,11 +134,11 @@ Harness công bố những gì mỗi luồng phải đọc trước khi bắt đ
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Đơn vị: byte hệ thống tệp. Đo trên gói đã phát hành bằng lệnh bên dưới: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.4).
+Đơn vị: byte hệ thống tệp. Đo trên gói đã phát hành bằng lệnh bên dưới: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5).
 
 Token của nhà cung cấp, chi phí và thống kê khép vòng lặp không được hiển thị: chưa có nguồn gắn tag nào đo chúng, nên chúng không có hàng. Con số token bằng byte ÷ 4 của script là ước tính có ghi nhãn, không bao giờ là phép đo.
 
-[Đọc sổ đánh giá](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/docs/EVALUATION.md)
+[Đọc sổ đánh giá](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
 
 ---
 

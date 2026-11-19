@@ -12,7 +12,7 @@ Deep Work Plan має чотири опори: Spec-first; репозиторі�
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
 ```
 
 Поточний пакет 8.x за замовчуванням створює нові плани за контрактом v8 (`plan-contract/v8`). Плани v7, v6 і v5 зберігають зафіксоване покоління; міграція відбувається лише через явну міграцію `refine`.
@@ -68,11 +68,11 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.
 
 - **Скіл Deep Work Plan** — Створює, виконує, перевіряє, відновлює та уточнює плани. Не потребує аддонів.
 - **[herdr](/uk/kit/herdr)** — Peer-агенти в панелях Herdr на будь-якій машині: інтерактивне делегування з однією авторизованою відповіддю. Закріплено на `herdr-peers@v2.2.1`.
-- **[agentkit](/uk/kit/agentkit)** — Одна команда ak для кожного термінального агента для програмування: автономія за замовчуванням із можливістю відмови та делегування без інтерфейсу у worktree. Закріплено на `coding-agents-kit@v1.5.0`.
+- **[agentkit](/uk/kit/agentkit)** — Одна команда ak для кожного термінального агента для програмування: автономія за замовчуванням із можливістю відмови та делегування без інтерфейсу у worktree. Закріплено на `coding-agents-kit@v1.5.1`.
 - **[devcontainer](/uk/kit/devcontainer)** — Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, SSH-ключі лише за явного ввімкнення. Закріплено на `devcontainer-kit@v1.4.3`.
 - **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v1.1.0`.
 
-Реєстр аддонів і дескриптори постачаються в Deep Work Plan v8: `v8.0.4`
+Реєстр аддонів і дескриптори постачаються в Deep Work Plan v8: `v8.0.5`
 
 ### Приклади
 

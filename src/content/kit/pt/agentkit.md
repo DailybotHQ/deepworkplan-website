@@ -10,7 +10,7 @@ order: 8
 
 Cada agente de código de terminal tem suas próprias flags para continuar uma sessão, sua própria forma de manter separada uma segunda conta, seu próprio modo headless e sua própria opção para pular os pedidos de permissão. O **[coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit)** coloca uma única superfície de comandos sobre todos eles: `ak <kind> [@profile]`.
 
-Este addon integra o kit ao **DWP v8** (pack `v8.0.4`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
+Este addon integra o kit ao **DWP v8** (pack `v8.0.5`) como transporte de delegação **headless**. É opcional: sem ele, cada tarefa é executada na sessão atual, exatamente como antes. O kit em si é um produto MIT que funciona sem o Deep Work Plan.
 
 O Deep Work Plan tem quatro pilares: especificação primeiro, o repositório é o harness, loop engineering e eficiência medida. Addons e integrações podem ampliar o harness e o loop; a metodologia funciona por conta própria.
 
@@ -67,15 +67,15 @@ O trabalho só circula entre as contas que você declarou para o plano, dentro d
 ## Instalação
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v1.5.0`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
+Requisitos: `bash` no macOS ou Linux e `python3` 3.9 ou mais recente; nada mais. O Windows usa `install.ps1`. Fixe a `v1.5.1`: a `v0.2.0` e a `v0.2.1` não têm suporte. Verifique uma versão com o asset `SHA256SUMS` dela.
 
 | Item | Valor |
 |---|---|
-| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, interface 1 |
+| Produto | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, interface 1 |
 | Chave de registro | `agentkit` em `.dwp/config.json` |
 | Transporte | headless: um `ak run` por delegado em uma worktree git dedicada |
 | Fornece | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ A versão 1.4.0 do kit (interface 1 inalterada) adiciona o **`ak update`**, de i
 Esta versão adiciona o campo `tokens` a `ak run --json`, contendo somente as contagens informadas pelo CLI (`input`, `output`, `cache_read`, `cache_write` e `total`). Valores não informados permanecem `null`; o kit nunca os imputa. `ak usage --json` adiciona um bloco `advisory` com `runs`, `tokens` e `coverage`. Ele é informativo e nunca altera as janelas de cota do fornecedor, o veredito de capacidade nem a elegibilidade de `ak pick`.
 
 Quando `--ask` ou `AGENTKIT_PERMISSIONS=ask` está ativo, `ak` agora força o modo explícito de confirmação de cada CLI; os CLIs sem uma opção de confirmação não mudam. Com esse opt-out ativo, `launch.argv` do pick-v2 termina com `--ask`. herdr-peers (v2.0.2) ou posterior aceita esse argumento final; a v2.0.1 o rejeita.
+
+## A partir de coding-agents-kit 1.5.1 (interface 1)
+
+É uma versão de correção; o formato de `ak doctor --json` não muda. `ak install` e `ak update` agora instalam as CLIs do npm com `--include=optional`, então o Codex mantém seu binário nativo de cada plataforma. Uma CLI instalada precisa iniciar (`--version` termina com 0, testado sem variáveis de chave); caso contrário, o `ak` a reinstala uma vez e então informa a instalação como falha, com o erro da própria CLI. `ak doctor` sinaliza uma CLI que é encontrada mas não inicia e indica o reparo.
 
 ## Autonomia por padrão, com um opt-out que sempre prevalece
 

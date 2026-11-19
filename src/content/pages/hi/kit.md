@@ -11,7 +11,7 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 किट वह सब कुछ है जिसकी आपको पद्धति को व्यवहार में चलाने के लिए आवश्यकता है। इसे `DailybotHQ/deepworkplan-skill` से स्थापित किया जाता है:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
 ```
 
 वर्तमान 8.x पैक नए प्लान डिफ़ॉल्ट रूप से v8 अनुबंध (`plan-contract/v8`) के साथ बनाता है। v7, v6 और v5 के प्लान अपनी दर्ज पीढ़ी बनाए रखते हैं; माइग्रेशन केवल एक स्पष्ट `refine` माइग्रेशन के ज़रिए होता है।
@@ -65,11 +65,11 @@ Claude Code, Cursor, OpenAI Codex, GitHub Copilot, Google Gemini, OpenCode, Wind
 
 - **Deep Work Plan स्किल** — योजनाएँ बनाएँ, निष्पादित करें, सत्यापित करें, फिर से शुरू करें और परिष्कृत करें। किसी ऐडऑन की आवश्यकता नहीं।
 - **[herdr](/hi/kit/herdr)** — किसी भी मशीन पर Herdr पेन में पीयर: एक अधिकृत उत्तर के साथ इंटरैक्टिव डेलिगेशन। पिन किया गया `herdr-peers@v2.2.1`।
-- **[agentkit](/hi/kit/agentkit)** — हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: opt-out के साथ डिफ़ॉल्ट स्वायत्तता, और worktree में हेडलेस डेलिगेशन। पिन किया गया `coding-agents-kit@v1.5.0`।
+- **[agentkit](/hi/kit/agentkit)** — हर टर्मिनल कोडिंग एजेंट के लिए एक ak कमांड: opt-out के साथ डिफ़ॉल्ट स्वायत्तता, और worktree में हेडलेस डेलिगेशन। पिन किया गया `coding-agents-kit@v1.5.1`।
 - **[devcontainer](/hi/kit/devcontainer)** — एक टेम्पलेट से हर रिपॉज़िटरी का अपना dev container: ak के ज़रिए एजेंट, दोनों दिशाओं में Herdr, SSH कुंजियाँ केवल opt-in पर। पिन किया गया `devcontainer-kit@v1.4.3`।
 - **[vim](/hi/kit/vim)** — टर्मिनल एडिटर, केवल-पढ़ने योग्य योजना ब्राउज़र और Markdown व्यूअर के साथ। पिन किया गया `deepworkplan-vim@v1.1.0`।
 
-ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v8 में आते हैं: `v8.0.4`
+ऐडऑन रजिस्ट्री और डिस्क्रिप्टर Deep Work Plan v8 में आते हैं: `v8.0.5`
 
 ### उदाहरण
 
