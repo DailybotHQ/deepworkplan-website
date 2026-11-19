@@ -50,7 +50,7 @@ When accepted, the addon may install a `/design-system` delegator into the repo'
 | Registry key | `design-system` in `.dwp/config.json` |
 | Descriptor | `addons/design-system/addon.json` (interface 1) |
 | Target file | `docs/DESIGN.md` indexed from `AGENTS.md` |
-| Versioning | Pinned and versioned with the skill pack (`v8.0.4`) |
+| Versioning | Pinned and versioned with the skill pack (`v8.0.5`) |
 
 ## Relationship to per-feature design docs
 

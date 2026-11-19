@@ -87,7 +87,7 @@ Deep Work Plan v7 (pack `v7.12.2`) keeps the plan, task and gate loop and adds a
 
 ### Ecosystem (v8)
 
-The methodology works alone; addons only amplify it. The pack 8.0.4 descriptors pin herdr-peers v2.2.1, coding-agents-kit v1.5.0, devcontainer-kit v1.4.3, deepworkplan-vim v1.1.0, Dailybot v3.23.20, and AI Diff Reviewer v3.3.16. The dependency-upgrade and design-system addons have no external pin. See the [kit index](https://deepworkplan.com/kit).
+The methodology works alone; addons only amplify it. The pack 8.0.5 descriptors pin herdr-peers v2.2.1, coding-agents-kit v1.5.1, devcontainer-kit v1.4.3, deepworkplan-vim v1.1.0, Dailybot v3.23.20, and AI Diff Reviewer v3.3.16. The dependency-upgrade and design-system addons have no external pin. See the [kit index](https://deepworkplan.com/kit).
 
 The current v8 reader pages include the [loop engineering chapter](https://deepworkplan.com/methodology/08-loop-engineering), its [normative specification](https://deepworkplan.com/spec/loop-engineering), and the [v8 release record](https://deepworkplan.com/changelog/deep-work-plan-v8). The published v8 schemas are [plan-contract/v8](https://deepworkplan.com/schema/plan-contract/v8.json), [journal-event/v8](https://deepworkplan.com/schema/journal-event/v8.json), and [plan-snapshot/v8](https://deepworkplan.com/schema/plan-snapshot/v8.json); they are served byte-identical to the vendored pack schemas.
 

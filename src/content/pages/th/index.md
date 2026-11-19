@@ -134,11 +134,11 @@ harness เผยแพร่สิ่งที่แต่ละโฟลว์
 | `status` | 27,311|
 | `verify` | 36,701|
 
-หน่วย: ไบต์ในระบบไฟล์ วัดบนแพ็กที่ออกรุ่นแล้วด้วยคำสั่งต่อไปนี้: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.4)
+หน่วย: ไบต์ในระบบไฟล์ วัดบนแพ็กที่ออกรุ่นแล้วด้วยคำสั่งต่อไปนี้: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5)
 
 ไม่แสดง token ของผู้ให้บริการ ต้นทุน และสถิติการปิดลูป: ยังไม่มีแหล่งที่ติดแท็กใดวัดค่าเหล่านี้ จึงไม่มีแถวสำหรับมัน ตัวเลข token แบบไบต์ ÷ 4 ของสคริปต์เป็นค่าประมาณที่ระบุไว้ชัดเจน ไม่ใช่การวัด
 
-[อ่านบัญชีการประเมิน](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.4/docs/EVALUATION.md)
+[อ่านบัญชีการประเมิน](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
 
 ---
 

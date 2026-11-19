@@ -11,7 +11,7 @@ Deep Work Plan には4つの柱があります。仕様ファースト、リポ�
 キットは、この方法論を実際に実行するために必要なものすべてです。`DailybotHQ/deepworkplan-skill` からインストールします。
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.4 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
 ```
 
 現在の 8.x パックは新しい計画を既定で v8 コントラクト（`plan-contract/v8`）で作成します。v7、v6、v5 の計画は記録された世代を維持し、移行は明示的な `refine` による移行でのみ行われます。
@@ -69,7 +69,7 @@ onboard フローがリポジトリに重ねる各機能です。七つはオプ
 - **[devcontainer](/ja/kit/devcontainer)** — 一つのテンプレートから作る、リポジトリごとの開発コンテナ：エージェントは ak 経由、Herdr は双方向、SSH 鍵はオプトイン時のみ。固定バージョン：`devcontainer-kit@v1.4.3`。
 - **[vim](/ja/kit/vim)** — 読み取り専用の計画ブラウザと Markdown ビューアを備えたターミナルエディタ。固定バージョン：`deepworkplan-vim@v1.1.0`。
 
-アドオンのレジストリと記述子は Deep Work Plan v8 に含まれています： `v8.0.4`
+アドオンのレジストリと記述子は Deep Work Plan v8 に含まれています： `v8.0.5`
 
 ### 事例
 
