@@ -9,6 +9,13 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.84] - 2026-11-19
+
+### Changed
+
+- chore: pin pack v8.0.5 (agentkit descriptor on coding-agents-kit v1.5.1)
+- chore: pin coding-agents-kit v1.5.1 (npm CLIs keep native binaries; failed starts fail the install)
+
 ## [5.0.83] - 2026-11-18
 
 ### Changed
@@ -1612,7 +1619,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.83...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.84...HEAD
+[5.0.84]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.84
 [5.0.83]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.83
 [5.0.82]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.82
 [5.0.81]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.81
