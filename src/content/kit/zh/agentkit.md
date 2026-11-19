@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # 跳过已租给他人的账�
 ## 安装
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.5.0`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
+要求：macOS 或 Linux 上的 `bash`，以及 `python3` 3.9 或更新版本；仅此而已。Windows 使用 `install.ps1`。请固定 `v1.5.1`：`v0.2.0` 和 `v0.2.1` 不受支持。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.5.0`，接口 1 |
+| 产品 | `DailybotHQ/coding-agents-kit`，标签 `v1.5.1`，接口 1 |
 | 注册表键 | `.dwp/config.json` 中的 `agentkit` |
 | 传输方式 | 无头：每个被委派者在专用的 git worktree 中执行一次 `ak run` |
 | 提供 | `subagents`、`cancel_children`、`model_routing` |
@@ -94,6 +94,10 @@ ak doctor
 此版本为 `ak run --json` 增加 `tokens` 字段，其中只包含 CLI 报告的计数（`input`、`output`、`cache_read`、`cache_write` 和 `total`）。未报告的值保持为 `null`；kit 不会推算。`ak usage --json` 增加包含 `runs`、`tokens` 和 `coverage` 的 `advisory` 块。该块仅供参考，不会改变供应商配额窗口、容量判定或 `ak pick` 的资格。
 
 启用 `--ask` 或 `AGENTKIT_PERMISSIONS=ask` 时，`ak` 现在会强制使用各 CLI 明确的 ask 模式；没有 ask 标志的 CLI 行为不变。启用此退出选项时，pick-v2 的 `launch.argv` 以 `--ask` 结尾。herdr-peers (v2.0.2) 或更高版本接受这个尾随参数；v2.0.1 会拒绝它。
+
+## coding-agents-kit 1.5.1 起（接口 1）
+
+这是一个补丁版本，`ak doctor --json` 的格式不变。`ak install` 和 `ak update` 现在使用 `--include=optional` 安装 npm CLI，因此 Codex 会保留各平台的原生二进制文件。已安装的 CLI 必须能够启动（`--version` 以 0 退出，在没有密钥变量的情况下探测）；否则 `ak` 会重新安装一次，若仍无法启动，则附上该 CLI 自身的错误并报告安装失败。`ak doctor` 会标出能被找到但无法启动的 CLI，并给出修复方法。
 
 ## 默认自主运行，退出选项始终优先
 

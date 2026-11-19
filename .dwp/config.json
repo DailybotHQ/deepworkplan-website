@@ -2,8 +2,8 @@
   "addons": {
     "agentkit": {
       "enabled": true,
-      "note": "coding-agents-kit v1.5.0 is the adopted release (the site and pack pin it); the dck v1.0.1 render in this container still bakes v1.0.1 until it is re-rendered; every ak profile, @default included, is its own account",
-      "version": "v1.5.0"
+      "note": "coding-agents-kit v1.5.1 is the adopted release (the site and pack pin it); the dck v1.0.1 render in this container still bakes v1.0.1 until it is re-rendered; every ak profile, @default included, is its own account",
+      "version": "v1.5.1"
     },
     "ai-diff-reviewer": {
       "enabled": true,

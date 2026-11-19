@@ -67,15 +67,15 @@ Work moves only among the accounts you declared for the plan, within each vendor
 ## Install
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v1.5.0`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
+Requirements: `bash` on macOS or Linux, and `python3` 3.9 or newer; nothing else. Windows uses `install.ps1`. Pin `v1.5.1`: `v0.2.0` and `v0.2.1` are unsupported. Verify a release with its `SHA256SUMS` asset.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, interface 1 |
+| Product | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, interface 1 |
 | Registry key | `agentkit` in `.dwp/config.json` |
 | Transport | headless: one `ak run` per delegate in a dedicated git worktree |
 | Provides | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ Kit v1.4.0 (interface 1 unchanged) adds **`ak update`**, human-invoked only: it 
 This release adds a `tokens` field to `ak run --json`, containing only counts reported by the CLI (`input`, `output`, `cache_read`, `cache_write` and `total`). Unreported values remain `null`; the kit never imputes them. `ak usage --json` adds an `advisory` block with `runs`, `tokens` and `coverage`. It is informational and never changes vendor quota windows, the capacity verdict or `ak pick` eligibility.
 
 When `--ask` or `AGENTKIT_PERMISSIONS=ask` is active, `ak` now enforces each CLI's explicit ask mode; CLIs without an ask flag are unchanged. Under this opt-out, pick-v2's `launch.argv` ends with `--ask`. herdr-peers (v2.0.2) or later accepts that trailing argument; v2.0.1 refuses it.
+
+## From coding-agents-kit 1.5.1 (interface 1)
+
+A patch release; the `ak doctor --json` shape is unchanged. `ak install` and `ak update` now install npm CLIs with `--include=optional`, so Codex keeps its per-platform native binary. An installed CLI must start (`--version` exits 0, probed without key variables); otherwise `ak` reinstalls it once and then reports a failed install with the CLI's own error. `ak doctor` flags a CLI that resolves but does not start and names the repair.
 
 ## Autonomy by default, with an opt-out that always wins
 

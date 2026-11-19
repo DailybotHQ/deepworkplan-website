@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # başkalarına kiralanmış he
 ## Kurulum
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.5.0` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
+Gereksinimler: macOS veya Linux üzerinde `bash` ve `python3` 3.9 veya daha yenisi; başka hiçbir şey. Windows `install.ps1` kullanır. `v1.5.1` sürümüne sabitleyin: `v0.2.0` ve `v0.2.1` desteklenmez. Bir sürümü `SHA256SUMS` varlığıyla doğrulayın.
 
 | Öğe | Değer |
 |---|---|
-| Ürün | `DailybotHQ/coding-agents-kit`, `v1.5.0` etiketi, arayüz 1 |
+| Ürün | `DailybotHQ/coding-agents-kit`, `v1.5.1` etiketi, arayüz 1 |
 | Kayıt defteri anahtarı | `.dwp/config.json` içinde `agentkit` |
 | Taşıma | başsız: her delege için ayrılmış bir git worktree'de bir `ak run` |
 | Sağladıkları | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ Kit v1.4.0 (arayüz 1 değişmedi) **`ak update`** ekler — yalnızca insan tar
 Bu sürüm, `ak run --json` çıktısına yalnızca CLI tarafından bildirilen sayımları içeren `tokens` alanını ekler (`input`, `output`, `cache_read`, `cache_write` ve `total`). Bildirilmeyen değerler `null` kalır; kit bunları asla tahmin etmez. `ak usage --json` çıktısına `runs`, `tokens` ve `coverage` alanlarını içeren bir `advisory` bloğu eklenir. Bu bilgi amaçlıdır; sağlayıcı kota pencerelerini, kapasite kararını veya `ak pick` uygunluğunu değiştirmez.
 
 `--ask` veya `AGENTKIT_PERMISSIONS=ask` etkinken `ak`, her CLI'nin açık ask modunu artık zorunlu kılar; ask bayrağı olmayan CLI'ler değişmez. Bu devre dışı bırakma etkinken pick-v2 `launch.argv`'nin sonuna `--ask` ekler. herdr-peers (v2.0.2) ve sonrası bu sondaki argümanı kabul eder; v2.0.1 reddeder.
+
+## coding-agents-kit 1.5.1'den itibaren (arayüz 1)
+
+Bu bir yama sürümüdür; `ak doctor --json` biçimi değişmez. `ak install` ve `ak update` artık npm CLI'larını `--include=optional` ile kurar; böylece Codex her platforma özgü yerel ikili dosyasını korur. Kurulan bir CLI başlamalıdır (`--version` 0 ile çıkar, anahtar değişkenleri olmadan denenir); aksi halde `ak` onu bir kez yeniden kurar, ardından kurulumu CLI'ın kendi hatasıyla başarısız olarak bildirir. `ak doctor`, bulunan ama başlamayan bir CLI'ı işaretler ve onarımı belirtir.
 
 ## Varsayılan olarak özerklik, her zaman üstün gelen bir devre dışı bırakma seçeneğiyle
 

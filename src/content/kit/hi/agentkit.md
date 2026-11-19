@@ -67,15 +67,15 @@ ak pick codex --owner local:w1:p1 --count 2      # दूसरों को ल
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v1.5.0` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
+आवश्यकताएँ: macOS या Linux पर `bash`, और `python3` 3.9 या नया; और कुछ नहीं। Windows `install.ps1` का उपयोग करता है। `v1.5.1` पिन करें: `v0.2.0` और `v0.2.1` समर्थित नहीं हैं। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, इंटरफ़ेस 1 |
+| उत्पाद | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, इंटरफ़ेस 1 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `agentkit` |
 | ट्रांसपोर्ट | headless: हर प्रत्यायोजित एजेंट के लिए एक समर्पित git worktree में एक `ak run` |
 | प्रदान करता है | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ ak doctor
 इस रिलीज़ में `ak run --json` के लिए `tokens` फ़ील्ड जुड़ता है, जिसमें केवल CLI द्वारा रिपोर्ट की गई गणनाएँ (`input`, `output`, `cache_read`, `cache_write` और `total`) होती हैं। रिपोर्ट न की गई वैल्यू `null` रहती हैं; kit उनका अनुमान नहीं लगाता। `ak usage --json` में `runs`, `tokens` और `coverage` वाला `advisory` ब्लॉक जुड़ता है। यह केवल जानकारी देता है और प्रदाता की quota विंडो, क्षमता के निर्णय या `ak pick` की पात्रता नहीं बदलता।
 
 `--ask` या `AGENTKIT_PERMISSIONS=ask` सक्रिय होने पर `ak` अब हर CLI का स्पष्ट ask मोड लागू करता है; जिन CLI में ask फ़्लैग नहीं है वे अपरिवर्तित रहते हैं। यह opt-out सक्रिय होने पर, pick-v2 के `launch.argv` का अंत `--ask` से होता है। herdr-peers (v2.0.2) या उसके बाद का संस्करण इस अंतिम argument को स्वीकार करता है; v2.0.1 इसे अस्वीकार करता है।
+
+## coding-agents-kit 1.5.1 से (इंटरफ़ेस 1)
+
+यह एक पैच रिलीज़ है; `ak doctor --json` का स्वरूप नहीं बदलता। `ak install` और `ak update` अब npm CLI को `--include=optional` के साथ इंस्टॉल करते हैं, ताकि Codex हर प्लेटफ़ॉर्म की अपनी नेटिव बाइनरी बनाए रखे। इंस्टॉल की गई CLI को शुरू होना चाहिए (`--version` 0 पर समाप्त होता है, कुंजी वाले वेरिएबल के बिना जाँचा गया); नहीं तो `ak` उसे एक बार फिर इंस्टॉल करता है और फिर CLI की अपनी त्रुटि के साथ इंस्टॉल को विफल बताता है। `ak doctor` उस CLI को चिह्नित करता है जो मिलती है पर शुरू नहीं होती, और सुधार का तरीका बताता है।
 
 ## डिफ़ॉल्ट रूप से स्वायत्तता, ऐसे opt-out के साथ जो हमेशा प्रभावी रहता है
 

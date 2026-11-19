@@ -67,15 +67,15 @@ El trabajo se mueve solo entre las cuentas que declaraste para el plan, dentro d
 ## Instalación
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v1.5.0`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
+Requisitos: `bash` en macOS o Linux, y `python3` 3.9 o posterior; nada más. Windows usa `install.ps1`. Fija `v1.5.1`: `v0.2.0` y `v0.2.1` no tienen soporte. Verifica una versión con su asset `SHA256SUMS`.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, interfaz 1 |
+| Producto | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, interfaz 1 |
 | Clave de registro | `agentkit` en `.dwp/config.json` |
 | Transporte | sin interfaz: un `ak run` por delegado en un worktree de git dedicado |
 | Proporciona | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ La versión 1.4.0 del kit (interfaz 1 sin cambios) añade **`ak update`**, de in
 Esta versión agrega el campo `tokens` a `ak run --json`, con únicamente los conteos que informa el CLI (`input`, `output`, `cache_read`, `cache_write` y `total`). Los valores no informados quedan como `null`; el kit nunca los imputa. `ak usage --json` agrega un bloque `advisory` con `runs`, `tokens` y `coverage`. Es informativo y nunca cambia las ventanas de cuota del proveedor, el veredicto de capacidad ni la elegibilidad de `ak pick`.
 
 Cuando está activo `--ask` o `AGENTKIT_PERMISSIONS=ask`, `ak` ahora fuerza el modo de confirmación explícito propio de cada CLI; los CLI sin una opción para pedir confirmación no cambian. Con esta exclusión activa, `launch.argv` de pick-v2 termina con `--ask`. herdr-peers (v2.0.2) o posterior acepta ese argumento final; v2.0.1 lo rechaza.
+
+## Desde coding-agents-kit 1.5.1 (interfaz 1)
+
+Es una versión de parche; la forma de `ak doctor --json` no cambia. `ak install` y `ak update` ahora instalan las CLI de npm con `--include=optional`, así que Codex conserva su binario nativo de cada plataforma. Una CLI instalada debe arrancar (`--version` termina con 0, probado sin variables de claves); si no, `ak` la reinstala una vez y luego informa la instalación como fallida con el error de la propia CLI. `ak doctor` señala una CLI que se resuelve pero no arranca y nombra la reparación.
 
 ## Autonomía por defecto, con una exclusión que siempre prevalece
 

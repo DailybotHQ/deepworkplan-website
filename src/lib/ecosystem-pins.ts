@@ -33,9 +33,9 @@ export const ECOSYSTEM_PINS = {
   },
   agentkit: {
     repo: 'coding-agents-kit',
-    tag: 'v1.5.0',
+    tag: 'v1.5.1',
     sha256sums:
-      'd8057636d357ba056ab8c8a7feec58d31b53cb58c91d943109b7f22590b5cca3',
+      'fb4c71edec9fc510658045d53994fe9426fb752627a922a03616a832219ee3d1',
     role: 'agentkit addon (`ak`)',
   },
   herdr: {

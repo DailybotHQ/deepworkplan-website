@@ -67,15 +67,15 @@ Công việc chỉ di chuyển giữa các tài khoản bạn đã khai báo cho
 ## Cài đặt
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.5.0`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
+Yêu cầu: `bash` trên macOS hoặc Linux, và `python3` 3.9 trở lên; không gì khác. Windows dùng `install.ps1`. Hãy ghim `v1.5.1`: `v0.2.0` và `v0.2.1` không được hỗ trợ. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.5.0`, giao diện 1 |
+| Sản phẩm | `DailybotHQ/coding-agents-kit`, tag `v1.5.1`, giao diện 1 |
 | Khóa registry | `agentkit` trong `.dwp/config.json` |
 | Phương thức truyền | headless: một `ak run` cho mỗi agent được ủy thác, trong một git worktree riêng |
 | Cung cấp | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ Kit bản 1.4.0 (giao diện 1 không đổi) thêm **`ak update`**, chỉ do co
 Bản phát hành này bổ sung trường `tokens` cho `ak run --json`, chỉ chứa số liệu do CLI báo cáo (`input`, `output`, `cache_read`, `cache_write` và `total`). Giá trị không được báo cáo vẫn là `null`; kit không bao giờ tự suy ra. `ak usage --json` bổ sung khối `advisory` gồm `runs`, `tokens` và `coverage`. Khối này chỉ để tham khảo, không thay đổi cửa sổ hạn mức của nhà cung cấp, kết luận về năng lực hay điều kiện được chọn bởi `ak pick`.
 
 Khi `--ask` hoặc `AGENTKIT_PERMISSIONS=ask` được bật, `ak` nay buộc dùng chế độ ask tường minh riêng của từng CLI; CLI không có cờ ask giữ nguyên. Khi lựa chọn opt-out này được bật, `launch.argv` của pick-v2 kết thúc bằng `--ask`. herdr-peers (v2.0.2) trở lên chấp nhận đối số cuối này; v2.0.1 từ chối.
+
+## Từ coding-agents-kit 1.5.1 (giao diện 1)
+
+Đây là bản vá; định dạng của `ak doctor --json` không đổi. `ak install` và `ak update` giờ cài các CLI từ npm với `--include=optional`, nên Codex giữ được tệp nhị phân gốc cho từng nền tảng. Một CLI đã cài phải khởi động được (`--version` thoát với mã 0, được kiểm tra mà không có biến khóa); nếu không, `ak` cài lại nó một lần rồi báo cáo bản cài thất bại kèm lỗi của chính CLI đó. `ak doctor` đánh dấu một CLI được tìm thấy nhưng không khởi động được và nêu cách sửa.
 
 ## Tự chủ theo mặc định, với lựa chọn opt-out luôn được ưu tiên
 

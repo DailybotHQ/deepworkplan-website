@@ -67,15 +67,15 @@ Arbeit bewegt sich nur zwischen den Konten, die Sie für den Plan deklariert hab
 ## Installation
 
 ```bash
-git clone --branch v1.5.0 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
+git clone --branch v1.5.1 https://github.com/DailybotHQ/coding-agents-kit && ./coding-agents-kit/install.sh
 ak doctor
 ```
 
-Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v1.5.0`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
+Voraussetzungen: `bash` unter macOS oder Linux und `python3` 3.9 oder neuer; sonst nichts. Windows verwendet `install.ps1`. Fixieren Sie `v1.5.1`: `v0.2.0` und `v0.2.1` werden nicht unterstützt. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v1.5.0`, Schnittstelle 1 |
+| Produkt | `DailybotHQ/coding-agents-kit`, Tag `v1.5.1`, Schnittstelle 1 |
 | Registry-Schlüssel | `agentkit` in `.dwp/config.json` |
 | Transport | headless: ein `ak run` pro Delegiertem in einem eigenen Git-Worktree |
 | Stellt bereit | `subagents`, `cancel_children`, `model_routing` |
@@ -94,6 +94,10 @@ Kit v1.4.0 (Interface 1 unverändert) fügt **`ak update`** hinzu, nur von Mensc
 Diese Version ergänzt `ak run --json` um das Feld `tokens`, das ausschließlich vom CLI gemeldete Zähler enthält (`input`, `output`, `cache_read`, `cache_write` und `total`). Nicht gemeldete Werte bleiben `null`; das Kit schätzt sie nie. `ak usage --json` ergänzt einen `advisory`-Block mit `runs`, `tokens` und `coverage`. Er dient nur zur Information und ändert weder die Kontingentfenster des Anbieters noch das Kapazitätsurteil oder die Zulässigkeit bei `ak pick`.
 
 Wenn `--ask` oder `AGENTKIT_PERMISSIONS=ask` aktiv ist, erzwingt `ak` jetzt den ausdrücklichen Ask-Modus jedes CLI; CLIs ohne Ask-Flag bleiben unverändert. Bei diesem aktiven Opt-out endet `launch.argv` von pick-v2 mit `--ask`. herdr-peers ab v2.0.2 akzeptiert dieses abschließende Argument; v2.0.1 weist es zurück.
+
+## Ab coding-agents-kit 1.5.1 (Interface 1)
+
+Ein Patch-Release; die Form von `ak doctor --json` bleibt unverändert. `ak install` und `ak update` installieren npm-CLIs jetzt mit `--include=optional`, sodass Codex seine plattformspezifische native Binärdatei behält. Eine installierte CLI muss starten (`--version` endet mit 0, geprüft ohne Schlüsselvariablen); andernfalls installiert `ak` sie einmal neu und meldet danach eine fehlgeschlagene Installation mit dem eigenen Fehler der CLI. `ak doctor` markiert eine CLI, die gefunden wird, aber nicht startet, und nennt die Reparatur.
 
 ## Autonomie standardmäßig, mit einem Opt-out, das immer gewinnt
 
