@@ -103,7 +103,7 @@ Loop engineering is how a plan finishes without a human polling it. Rows below d
 
 
 
-| Contract | What it guarantees | Source (herdr-peers v2.2.1) |
+| Contract | What it guarantees | Source (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Plan registration (`herdr-peers lead claim`) | A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead. | `skills/herdr-peers/protocol.md` §12 |
 | Human-only start (`herdr-peers autopilot start --loop`) | Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does. | `skills/herdr-peers/autopilot.md` §1 |

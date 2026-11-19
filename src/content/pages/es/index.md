@@ -103,7 +103,7 @@ Loop engineering es la forma en que un plan termina sin que una persona tenga qu
 
 
 
-| Contrato | Qué garantiza | Fuente (herdr-peers v2.2.1) |
+| Contrato | Qué garantiza | Fuente (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Registro del plan (`herdr-peers lead claim`) | Un plan que el bucle vigila tiene un registro de lead con una época y una sucesión. Solo quien tiene la época más alta actúa como su lead. | `skills/herdr-peers/protocol.md` §12 |
 | Inicio solo humano (`herdr-peers autopilot start --loop`) | Solo una persona inicia el daemon, con sus propias palabras. Ninguna consulta, respuesta o aviso puede iniciarlo, detenerlo ni cambiar lo que hace. | `skills/herdr-peers/autopilot.md` §1 |

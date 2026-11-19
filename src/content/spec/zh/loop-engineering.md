@@ -29,7 +29,7 @@ lead 消失时，daemon 会请列表中第一个可联系的继任者运行 `her
 
 可选 `--brain` 会为 daemon 规则无法判断的情况启动专用决策 agent。它只能从封闭的操作列表中选择。daemon 始终是唯一执行者：验证允许的选择并执行操作，绝不执行 brain 的自由文本。计划的 `autonomy` 块也必须允许 brain。
 
-循环会记录停滞、阻塞、lead 丢失、完成和队列结果等计划事件。启用可选 `--notify` 集成时，daemon 会把 `plan-event-v1` 对象发给配置的 notifier；pack 的 Dailybot notifier 会将支持的事件转为团队更新。通知不会批准工作或更改计划记录。舰队地图和 `herdr-peers fleet ui` 显示多台机器上的 agent 与计划。界面只读，不更改计划状态，也不提示 agent。标记版本的行为见 [herdr-peers v2.2.1 autopilot 文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.1/skills/herdr-peers/autopilot.md)和[协议文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.1/skills/herdr-peers/protocol.md)。
+循环会记录停滞、阻塞、lead 丢失、完成和队列结果等计划事件。启用可选 `--notify` 集成时，daemon 会把 `plan-event-v1` 对象发给配置的 notifier；pack 的 Dailybot notifier 会将支持的事件转为团队更新。通知不会批准工作或更改计划记录。舰队地图和 `herdr-peers fleet ui` 显示多台机器上的 agent 与计划。界面只读，不更改计划状态，也不提示 agent。标记版本的行为见 [herdr-peers v2.2.2 autopilot 文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.2/skills/herdr-peers/autopilot.md)和[协议文档](https://github.com/DailybotHQ/herdr-peers/blob/v2.2.2/skills/herdr-peers/protocol.md)。
 
 ## 2. `autonomy` 块（plan-contract/v8）
 

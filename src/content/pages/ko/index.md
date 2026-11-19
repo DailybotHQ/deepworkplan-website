@@ -103,7 +103,7 @@ Loop engineering은 사람이 계속 확인하지 않아도 계획이 완료되�
 
 
 
-| 계약 | 보장하는 것 | 출처 (herdr-peers v2.2.1) |
+| 계약 | 보장하는 것 | 출처 (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | 계획 등록 (`herdr-peers lead claim`) | 루프가 지켜보는 계획에는 에포크와 승계 목록을 가진 리드 기록이 있습니다. 가장 높은 에포크의 보유자만 그 리드로 행동합니다. | `skills/herdr-peers/protocol.md` §12 |
 | 사람만 시작 (`herdr-peers autopilot start --loop`) | 데몬은 사람이 자신의 말로만 시작합니다. 어떤 요청, 답장, 알림도 데몬을 시작하거나 멈추거나 그 동작을 바꿀 수 없습니다. | `skills/herdr-peers/autopilot.md` §1 |

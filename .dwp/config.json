@@ -32,8 +32,8 @@
     },
     "herdr": {
       "enabled": true,
-      "note": "herdr-peers v2.2.1 vendored at .agents/skills/herdr-peers (skills-lock.json, SHA256SUMS verified); the dck v1.0.1 image in this container still bakes v1.0.0 until it is re-rendered",
-      "version": "v2.2.1"
+      "note": "herdr-peers v2.2.2 vendored at .agents/skills/herdr-peers (skills-lock.json, SHA256SUMS verified); the dck v1.0.1 image in this container still bakes v1.0.0 until it is re-rendered",
+      "version": "v2.2.2"
     },
     "vim": {
       "enabled": true,

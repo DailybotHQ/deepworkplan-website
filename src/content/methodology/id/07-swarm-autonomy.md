@@ -68,7 +68,7 @@ Sebuah agent memeriksa ruangnya sendiri sebelum memulai setiap tugas, setelah ga
 
 ## Suksesi lead
 
-herdr-peers `v2.2.1` menyimpan satu catatan lead per rencana — lead, epoch, daftar suksesi, dan lane — dan mengarahkan alamat `lead` ke lead saat ini, sehingga tidak ada arahan lane yang menuliskan panel lead secara permanen.
+herdr-peers `v2.2.2` menyimpan satu catatan lead per rencana — lead, epoch, daftar suksesi, dan lane — dan mengarahkan alamat `lead` ke lead saat ini, sehingga tidak ada arahan lane yang menuliskan panel lead secara permanen.
 
 - **Klaim dulu, lalu luncurkan.** Lead menjalankan `herdr-peers lead claim --plan <P> --succession <A,B>` sebelum meluncurkan lane mana pun — alamat `lead` baru dapat di-resolve setelah sebuah catatan ada — memperbarui catatan itu dengan `--lanes <A,B>` saat lane dimulai, dan menjalankan `lead release` ketika rencana selesai. Sejak herdr-peers (`v0.3.2`), catatan itu menyimpan repositori yang mengklaimnya secara lokal, dan rencana dengan id yang sama di repositori lain dinamai `--plan <repo>/<id>`. Suksesi default adalah penerus yang direncanakan, lalu lane di checkout rencana itu sendiri menurut urutan peluncuran, lalu lane mana pun di host yang sama; lane di container atau di mesin lain berada di urutan terakhir.
 - **Handover, terencana.** Pada `low`, lead menunjuk calon penerus. Pada `critical`, ia menulis paket lead — tabel lane, ask yang terbuka, urutan rilis, merge yang tertunda, keputusan — menjalankan `herdr-peers lead handover <addr> --plan <P>`, yang menaikkan epoch dan memberi tahu setiap lane, lalu berhenti. Penerus menerima paket, melanjutkan rencana orkestrator, dan memeriksa ulang setiap lane.

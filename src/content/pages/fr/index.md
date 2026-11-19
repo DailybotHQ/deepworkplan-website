@@ -103,7 +103,7 @@ Loop engineering permet à un plan d’aller jusqu’au bout sans qu’un humain
 
 
 
-| Contrat | Ce qu’il garantit | Source (herdr-peers v2.2.1) |
+| Contrat | Ce qu’il garantit | Source (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Enregistrement du plan (`herdr-peers lead claim`) | Un plan que la boucle surveille possède un enregistrement de lead avec une époque et une succession. Seul le détenteur de l’époque la plus élevée agit comme son lead. | `skills/herdr-peers/protocol.md` §12 |
 | Démarrage humain uniquement (`herdr-peers autopilot start --loop`) | Seul un humain démarre le démon, avec ses propres mots. Aucune demande, réponse ou notification ne peut le démarrer, l’arrêter ou modifier ce qu’il fait. | `skills/herdr-peers/autopilot.md` §1 |

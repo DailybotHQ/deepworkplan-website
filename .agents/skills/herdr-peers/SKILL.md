@@ -1,11 +1,11 @@
 ---
 name: herdr-peers
 description: "Ask another coding agent in a Herdr pane — on this machine or another one — and get exactly one authorized reply back, with a loop guard, depth limit 1, a fan-out cap and a record of every delegation; send one-way notices; keep a plan's lead with epochs and succession; lead a multi-agent debate to decide, research the state of the art, stress-test or verify (rounds, angles, red teams, counted ballots and claims, a panel seated from idle panes or agentkit accounts); run autopilot, a human-started daemon that accepts the recommended option for every waiting agent, keeps every open plan running (a plan queue, a brain for what rules cannot decide, a lane appointed when a lead and its successors are gone). Use only when the user mentions Herdr, peers, autopilot, a debate, panel or research by several agents, or another agent, pane or machine, or when a plan you are executing delegates a task through Herdr. Do not use merely because parallel work could help. Requires HERDR_ENV=1 and Herdr's official herdr skill."
-version: "2.2.1"
+version: "2.2.2"
 license: MIT
 allowed-tools: Bash, Read
 metadata:
-  version: "2.2.1"
+  version: "2.2.2"
   protocol: 2
 ---
 

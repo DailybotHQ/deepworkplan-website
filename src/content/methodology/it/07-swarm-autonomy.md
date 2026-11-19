@@ -68,7 +68,7 @@ Il **pacchetto di consegna** ([`dwp-handoff/v1`](https://deepworkplan.com/schema
 
 ## Successione del lead
 
-herdr-peers `v2.2.1` mantiene un record di lead per piano — lead, epoca, lista di successione e corsie — e risolve l’indirizzo `lead` nel lead corrente, così nessun brief di corsia codifica in modo fisso il pannello del lead.
+herdr-peers `v2.2.2` mantiene un record di lead per piano — lead, epoca, lista di successione e corsie — e risolve l’indirizzo `lead` nel lead corrente, così nessun brief di corsia codifica in modo fisso il pannello del lead.
 
 - **Prima rivendicare, poi avviare.** Il lead esegue `herdr-peers lead claim --plan <P> --succession <A,B>` prima di avviare qualsiasi corsia — l’indirizzo `lead` si risolve solo quando esiste un record —, aggiorna il record con `--lanes <A,B>` man mano che le corsie partono ed esegue `lead release` quando il piano è concluso. Da herdr-peers (`v0.3.2`) il record conserva localmente il repository che rivendica, e un piano con lo stesso id in un altro repository si indica con `--plan <repo>/<id>`. La successione predefinita è il suo successore previsto, poi le corsie nel checkout del piano stesso in ordine di avvio, poi qualsiasi corsia sullo stesso host; le corsie nei container o su altre macchine vengono per ultime.
 - **Cessione, pianificata.** A `low` il lead designa un successore. A `critical` scrive un pacchetto del lead — tabella delle corsie, richieste aperte, ordine di rilascio, merge in sospeso, decisioni —, esegue `herdr-peers lead handover <addr> --plan <P>`, che incrementa l’epoca e notifica ogni corsia, e si ferma. Il successore accetta il pacchetto, riprende il piano orchestratore e ricontrolla ogni corsia.

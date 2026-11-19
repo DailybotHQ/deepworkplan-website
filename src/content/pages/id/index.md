@@ -103,7 +103,7 @@ Loop engineering membuat rencana selesai tanpa perlu terus dipantau manusia. Bar
 
 
 
-| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.2.1) |
+| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Registrasi rencana (`herdr-peers lead claim`) | Rencana yang diawasi loop memiliki catatan lead dengan epoch dan urutan suksesi. Hanya pemegang epoch tertinggi yang bertindak sebagai lead-nya. | `skills/herdr-peers/protocol.md` §12 |
 | Hanya manusia yang memulai (`herdr-peers autopilot start --loop`) | Hanya manusia yang memulai daemon, dengan kata-katanya sendiri. Tidak ada permintaan, balasan, atau pemberitahuan yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. | `skills/herdr-peers/autopilot.md` §1 |

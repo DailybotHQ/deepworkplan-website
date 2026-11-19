@@ -103,7 +103,7 @@ Loop engineering, bir planın insan tarafından sürekli sorgulanmadan tamamlanm
 
 
 
-| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.2.1) |
+| Sözleşme | Neyi garanti eder | Kaynak (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Plan kaydı (`herdr-peers lead claim`) | Döngünün izlediği bir planın, epoch ve halef sırası içeren bir lider kaydı vardır. Yalnızca en yüksek epoch’un sahibi planın lideri olarak hareket eder. | `skills/herdr-peers/protocol.md` §12 |
 | Yalnızca insan başlatır (`herdr-peers autopilot start --loop`) | Daemon’u yalnızca bir insan, kendi sözleriyle başlatır. Hiçbir soru, yanıt veya bildirim onu başlatamaz, durduramaz ya da yaptığı şeyi değiştiremez. | `skills/herdr-peers/autopilot.md` §1 |
