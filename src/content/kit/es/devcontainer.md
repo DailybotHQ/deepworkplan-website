@@ -23,20 +23,20 @@ Deep Work Plan se apoya en cuatro pilares: primero la especificación, el reposi
 ## Instalación
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requisitos: `bash` 3.2 o posterior y `python3` 3.11 o posterior en un host Linux o macOS, y Docker con Compose v2 para los comandos del contenedor. Verifica una versión con su asset `SHA256SUMS`. Fija `v1.4.3`: `v0.2.0` no tiene soporte.
+Requisitos: `bash` 3.2 o posterior y `python3` 3.11 o posterior en un host Linux o macOS, y Docker con Compose v2 para los comandos del contenedor. Verifica una versión con su asset `SHA256SUMS`. Fija `v1.4.4`: `v0.2.0` no tiene soporte.
 
 | Elemento | Valor |
 |---|---|
-| Producto | `DailybotHQ/devcontainer-kit`, tag `v1.4.3`, interfaz 2 |
+| Producto | `DailybotHQ/devcontainer-kit`, tag `v1.4.4`, interfaz 2 |
 | Clave de registro | `devcontainer` en `.dwp/config.json` |
 | Configuración por repositorio | `.devcontainer/dck.toml` |
 | Detección | `dck doctor --json` |
 
-**Estable desde `v1.0.0`.** La interfaz pública sigue el versionado semántico y solo cambia de forma incompatible en una nueva versión mayor (y, para los archivos, con un nuevo número de interfaz): los verbos de `dck` con sus opciones documentadas y sus códigos de salida (`0` correcto, `1` fallo, `2` uso, `3` configuración, `4` entorno, `5` rechazado), los esquemas de `dck.toml`, del perfil del host y de `dck doctor --json` (interfaz 2), y el contrato de renderizado: los archivos que `dck init` escribe y gestiona, los marcadores `dck:managed` y los bloques de usuario que conserva, y el entorno que lee el entrypoint. Nada se rompe al actualizar desde `v0.3.7`: ejecuta `dck init` y `dck rebuild` para que la imagen incluya las versiones fijadas actuales. La imagen de `v1.4.3` incorpora Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 y DeepWorkPlan Vim 1.1.0.
+**Estable desde `v1.0.0`.** La interfaz pública sigue el versionado semántico y solo cambia de forma incompatible en una nueva versión mayor (y, para los archivos, con un nuevo número de interfaz): los verbos de `dck` con sus opciones documentadas y sus códigos de salida (`0` correcto, `1` fallo, `2` uso, `3` configuración, `4` entorno, `5` rechazado), los esquemas de `dck.toml`, del perfil del host y de `dck doctor --json` (interfaz 2), y el contrato de renderizado: los archivos que `dck init` escribe y gestiona, los marcadores `dck:managed` y los bloques de usuario que conserva, y el entorno que lee el entrypoint. Nada se rompe al actualizar desde `v0.3.7`: ejecuta `dck init` y `dck rebuild` para que la imagen incluya las versiones fijadas actuales. La imagen de `v1.4.4` incorpora Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.1 y DeepWorkPlan Vim 1.1.0.
 
 ## Capas
 
@@ -135,6 +135,10 @@ La versión 1.4.2 es un parche: la imagen `node-24` pasa a la versión de seguri
 ## Desde devcontainer-kit 1.4.3 (interfaz 2)
 
 La versión 1.4.3 es un parche: la imagen pasa a Herdr 0.9.5, que ahora se descarga de `herdrdev/herdr` (adonde se trasladó el proyecto) y se verifica contra los digests de la release del proveedor —0.9.4 mantiene el servidor de Herdr en marcha cuando se cierra la shell que lo inició—, y a herdr-peers 2.2.1, cuyo `autopilot --loop --revive` se niega a arrancar sin coding-agents-kit 1.3.0 o posterior. La interfaz 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 y la superficie propia de dck no cambian; dck nunca inicia el daemon.
+
+## Desde devcontainer-kit 1.4.4 (interfaz 2)
+
+La versión 1.4.4 es un parche: la capa `agents` pasa a coding-agents-kit 1.5.1, cuyos `ak install` y `ak update` conservan el binario nativo de cada plataforma en las CLI instaladas con npm (Codex primero) y dan por fallida una instalación cuya CLI no arranca, y la capa `dailybot` pasa a la CLI de Dailybot 3.29.2, con su wheel verificado contra el SHA-256 de PyPI. La interfaz 2, Herdr 0.9.5, herdr-peers 2.2.1, DeepWorkPlan Vim 1.1.0 y la superficie propia de dck no cambian.
 
 ## Valores de seguridad predeterminados
 

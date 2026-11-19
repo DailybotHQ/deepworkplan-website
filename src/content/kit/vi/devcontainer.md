@@ -23,20 +23,20 @@ Deep Work Plan có bốn trụ cột: đặc tả trước, repository là harne
 ## Cài đặt
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.4.3`: `v0.2.0` không được hỗ trợ.
+Yêu cầu: `bash` 3.2 trở lên và `python3` 3.11 trở lên trên máy host Linux hoặc macOS, cùng Docker với Compose v2 cho các lệnh container. Hãy xác minh một bản phát hành bằng tệp đính kèm `SHA256SUMS` của nó. Hãy ghim `v1.4.4`: `v0.2.0` không được hỗ trợ.
 
 | Mục | Giá trị |
 |---|---|
-| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v1.4.3`, giao diện 2 |
+| Sản phẩm | `DailybotHQ/devcontainer-kit`, tag `v1.4.4`, giao diện 2 |
 | Khóa registry | `devcontainer` trong `.dwp/config.json` |
 | Cấu hình theo từng repository | `.devcontainer/dck.toml` |
 | Phát hiện | `dck doctor --json` |
 
-**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim hiện tại. Image `v1.4.3` đóng gói Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 và DeepWorkPlan Vim 1.1.0.
+**Ổn định từ `v1.0.0`.** Giao diện công khai tuân theo semantic versioning và chỉ thay đổi không tương thích trong một phiên bản chính mới (và, đối với các tệp, một số giao diện mới): các động từ `dck` cùng các cờ và mã thoát được tài liệu hóa (`0` thành công, `1` thất bại, `2` sai cách dùng, `3` cấu hình, `4` môi trường, `5` bị từ chối), các schema của `dck.toml`, hồ sơ host và `dck doctor --json` (giao diện 2), và hợp đồng render — các tệp mà `dck init` ghi và sở hữu, các marker `dck:managed` và khối người dùng mà nó giữ nguyên, cùng môi trường mà entrypoint đọc. Không có gì bị phá vỡ khi chuyển từ `v0.3.7`: hãy chạy `dck init` và `dck rebuild` để image mang các phiên bản ghim hiện tại. Image `v1.4.4` đóng gói Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.1 và DeepWorkPlan Vim 1.1.0.
 
 ## Các lớp
 
@@ -135,6 +135,10 @@ Bản 1.4.2 là một bản vá: image `node-24` chuyển sang bản bảo mật
 ## Từ devcontainer-kit 1.4.3 (giao diện 2)
 
 Bản 1.4.3 là một bản vá: image chuyển sang Herdr 0.9.5, nay được tải từ `herdrdev/herdr` (nơi dự án đã chuyển đến) và được kiểm tra theo digest bản phát hành của nhà cung cấp — 0.9.4 giữ cho máy chủ Herdr tiếp tục chạy khi shell đã khởi động nó bị đóng — và sang herdr-peers 2.2.1, với `autopilot --loop --revive` từ chối khởi động nếu không có coding-agents-kit 1.3.0 trở lên. Giao diện 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 và bề mặt riêng của dck không đổi; dck không bao giờ khởi động daemon.
+
+## Từ devcontainer-kit 1.4.4 (giao diện 2)
+
+Bản 1.4.4 là bản vá: lớp `agents` chuyển sang coding-agents-kit 1.5.1, trong đó `ak install` và `ak update` giữ tệp nhị phân gốc theo nền tảng của các CLI cài bằng npm (trước hết là Codex) và coi là thất bại một bản cài có CLI không khởi động được; lớp `dailybot` chuyển sang Dailybot CLI 3.29.2, với tệp wheel được kiểm tra theo SHA-256 của PyPI. Giao diện 2, Herdr 0.9.5, herdr-peers 2.2.1, DeepWorkPlan Vim 1.1.0 và bề mặt riêng của dck không thay đổi.
 
 ## Mặc định bảo mật
 

@@ -23,20 +23,20 @@ Deep Work Plan には4つの柱があります。仕様ファースト、リポ�
 ## インストール
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v1.4.3` に固定してください。`v0.2.0` はサポート対象外です。
+要件：Linux または macOS ホスト上の `bash` 3.2 以降と `python3` 3.11 以降、そしてコンテナコマンド用の Docker と Compose v2。リリースは、その `SHA256SUMS` アセットで検証してください。`v1.4.4` に固定してください。`v0.2.0` はサポート対象外です。
 
 | 項目 | 値 |
 |---|---|
-| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v1.4.3`、インターフェース 2 |
+| プロダクト | `DailybotHQ/devcontainer-kit`、タグ `v1.4.4`、インターフェース 2 |
 | レジストリキー | `.dwp/config.json` 内の `devcontainer` |
 | リポジトリごとの設定 | `.devcontainer/dck.toml` |
 | 検出 | `dck doctor --json` |
 
-**`v1.0.0` 以降は安定版です。** 公開インターフェースはセマンティックバージョニングに従い、互換性のない変更は新しいメジャーバージョンでのみ行われます（ファイルについては、新しいインターフェース番号も伴います）。対象は、`dck` の動詞とドキュメント化されたフラグおよび終了コード（`0` 成功、`1` 失敗、`2` 使用法、`3` 設定、`4` 環境、`5` 拒否）、`dck.toml`、ホストプロファイル、`dck doctor --json` のスキーマ（インターフェース 2）、そしてレンダリング契約、すなわち `dck init` が書き込み所有するファイル、それが保持する `dck:managed` マーカーとユーザーブロック、エントリポイントが読み取る環境です。`v0.3.7` からの移行で壊れるものはありません。`dck init` と `dck rebuild` を実行し、イメージに現在の固定バージョンを反映させてください。`v1.4.3` のイメージには Herdr 0.9.5、herdr-peers 2.2.1、coding-agents-kit 1.5.0、DeepWorkPlan Vim 1.1.0 が組み込まれています。
+**`v1.0.0` 以降は安定版です。** 公開インターフェースはセマンティックバージョニングに従い、互換性のない変更は新しいメジャーバージョンでのみ行われます（ファイルについては、新しいインターフェース番号も伴います）。対象は、`dck` の動詞とドキュメント化されたフラグおよび終了コード（`0` 成功、`1` 失敗、`2` 使用法、`3` 設定、`4` 環境、`5` 拒否）、`dck.toml`、ホストプロファイル、`dck doctor --json` のスキーマ（インターフェース 2）、そしてレンダリング契約、すなわち `dck init` が書き込み所有するファイル、それが保持する `dck:managed` マーカーとユーザーブロック、エントリポイントが読み取る環境です。`v0.3.7` からの移行で壊れるものはありません。`dck init` と `dck rebuild` を実行し、イメージに現在の固定バージョンを反映させてください。`v1.4.4` のイメージには Herdr 0.9.5、herdr-peers 2.2.1、coding-agents-kit 1.5.1、DeepWorkPlan Vim 1.1.0 が組み込まれています。
 
 ## レイヤー
 
@@ -135,6 +135,10 @@ copy_keys = true              # default false
 ## devcontainer-kit 1.4.3 以降（インターフェース 2）
 
 リリース 1.4.3 はパッチです。イメージは Herdr 0.9.5 に移行し、Herdr は現在 `herdrdev/herdr`（プロジェクトの移転先）からダウンロードされ、ベンダーのリリースダイジェストで検証されます（0.9.4 では、Herdr サーバーを起動したシェルを閉じてもサーバーが動き続けます）。あわせて herdr-peers 2.2.1 に移行し、その `autopilot --loop --revive` は coding-agents-kit 1.3.0 以降がないと起動を拒否します。インターフェース 2、coding-agents-kit 1.5.0、DeepWorkPlan Vim 1.1.0 と dck 自体のインターフェースは変わりません。dck がデーモンを起動することはありません。
+
+## devcontainer-kit 1.4.4 から（インターフェース 2）
+
+リリース 1.4.4 はパッチです。`agents` レイヤーは coding-agents-kit 1.5.1 に移行します。その `ak install` と `ak update` は npm でインストールした CLI（まず Codex）のプラットフォーム別ネイティブバイナリを保持し、CLI が起動しないインストールを失敗として扱います。`dailybot` レイヤーは Dailybot CLI 3.29.2 に移行し、その wheel は PyPI の SHA-256 と照合されます。インターフェース 2、Herdr 0.9.5、herdr-peers 2.2.1、DeepWorkPlan Vim 1.1.0、dck 自身の公開面は変わりません。
 
 ## セキュリティのデフォルト
 

@@ -47,9 +47,9 @@ export const ECOSYSTEM_PINS = {
   },
   devcontainer: {
     repo: 'devcontainer-kit',
-    tag: 'v1.4.3',
+    tag: 'v1.4.4',
     sha256sums:
-      'fb16da0052f1803c1af03a1eb71acf56c6bb98b253f742c8d3a9a65d6d12e9df',
+      '8926e576e35583f06fc4c5507da7a746ad16363c57a0197ec790d915b5b07a04',
     role: 'devcontainer addon (`dck`)',
   },
   vim: {

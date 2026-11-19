@@ -58,7 +58,7 @@ releases. devcontainer-kit 1.4.0 (interface 2 unchanged; 1.3.0 added the opt-in
 1.5.0 and deepworkplan-vim 1.1.0 into its image and dogfoods pack 8.0.1; `v1.4.1`
 moves the image to herdr-peers 2.2.0 and dogfoods pack 8.0.2; 1.4.2 moves
 the `node-24` image to Node 24.22.3 and keeps herdr-peers' state on the state
-volume; `v1.4.3` moves the image to Herdr 0.9.5 and herdr-peers 2.2.1.
+volume; `v1.4.3` moves the image to Herdr 0.9.5 and herdr-peers 2.2.1; `v1.4.4` moves the agents layer to coding-agents-kit 1.5.1 and the Dailybot CLI to 3.29.2.
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
@@ -66,7 +66,7 @@ volume; `v1.4.3` moves the image to Herdr 0.9.5 and herdr-peers 2.2.1.
 | ai-diff-reviewer | Required local review: reviews a change set locally and in CI; every Final Review runs it | Public | `v3.3.16` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
 | agent-skill | Addon (dailybot): progress reports, check-ins, chat and more | Public | `v3.23.20` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |
-| devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.4.3` | `/kit/devcontainer`, `/init.md` | Documented only |
+| devcontainer-kit | Addon (devcontainer): a reproducible dev container per repository, wired to Herdr and the host's accounts | Public | `v1.4.4` | `/kit/devcontainer`, `/init.md` | Documented only |
 | coding-agents-kit | Addon (agentkit): one `ak` command for every coding agent — accounts, quota, `ak pick`, headless runs | Public | `v1.5.1` | `/kit/agentkit`, `/init.md` | Documented only |
 | deepworkplan-vim | Addon (vim): the terminal editor for plans — plan browser, lanes view, Markdown viewer | Public | `v1.1.0` (the product page, the kit plate, `/init.md` and the installer mirror) | `/init.md`, the kit plate and `/kit/vim` | Documented and served (installer mirror) |
 | herdr-peers | Addon (herdr): ask an agent in another Herdr pane, on any machine, and get one authorized reply | Public | `v2.2.1` | `/kit/herdr`, `/init.md` | Vendored skill `.agents/skills/herdr-peers/` (pinned; moves only with the site's pin) |
@@ -79,7 +79,7 @@ additions arrive in minor versions. herdr-peers `v2.2.1` (CLI verbs, exit
 codes, protocol 1, the `lanes-v1` and `lead-v1` contracts),
 coding-agents-kit `v1.5.1` (the `ak` command surface, interface 1, the JSON
 schemas), deepworkplan-vim `v1.1.0` (installer, addon surface, editor
-commands, `dwpvim.json`, keybindings) and devcontainer-kit `v1.4.3` (the `dck`
+commands, `dwpvim.json`, keybindings) and devcontainer-kit `v1.4.4` (the `dck`
 verbs, flags and exit codes, the `dck.toml`, host-profile and doctor schemas,
 interface 2, the render contract) are released; each 1.0.0 changes no
 behavior from its last 0.x release beyond what its CHANGELOG lists. The pack,

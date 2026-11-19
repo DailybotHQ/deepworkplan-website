@@ -23,20 +23,20 @@ Deep Work Plan hat vier Säulen: Spec-first, das Repository ist das Harness, Loo
 ## Installation
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.4.3`: `v0.2.0` wird nicht unterstützt.
+Voraussetzungen: `bash` 3.2 oder neuer und `python3` 3.11 oder neuer auf einem Linux- oder macOS-Host sowie Docker mit Compose v2 für die Container-Befehle. Prüfen Sie ein Release anhand seines `SHA256SUMS`-Assets. Fixieren Sie `v1.4.4`: `v0.2.0` wird nicht unterstützt.
 
 | Element | Wert |
 |---|---|
-| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v1.4.3`, Schnittstelle 2 |
+| Produkt | `DailybotHQ/devcontainer-kit`, Tag `v1.4.4`, Schnittstelle 2 |
 | Registry-Schlüssel | `devcontainer` in `.dwp/config.json` |
 | Konfiguration pro Repository | `.devcontainer/dck.toml` |
 | Erkennung | `dck doctor --json` |
 
-**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die aktuellen fixierten Versionen enthält. Das Image von `v1.4.3` enthält Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 und DeepWorkPlan Vim 1.1.0.
+**Stabil seit `v1.0.0`.** Die öffentliche Schnittstelle folgt semantischer Versionierung und ändert sich inkompatibel nur in einer neuen Major-Version (und bei den Dateien mit einer neuen Schnittstellennummer): die `dck`-Verben mit ihren dokumentierten Flags und Exit-Codes (`0` ok, `1` fehlgeschlagen, `2` Aufruf, `3` Konfiguration, `4` Umgebung, `5` abgelehnt), die Schemas von `dck.toml`, Host-Profil und `dck doctor --json` (Schnittstelle 2) sowie der Render-Vertrag — die Dateien, die `dck init` schreibt und verwaltet, die `dck:managed`-Markierungen und Benutzerblöcke, die es bewahrt, und die Umgebung, die der Entrypoint liest. Ab `v0.3.7` bricht nichts: Führen Sie `dck init` und `dck rebuild` aus, damit das Image die aktuellen fixierten Versionen enthält. Das Image von `v1.4.4` enthält Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.1 und DeepWorkPlan Vim 1.1.0.
 
 ## Layer
 
@@ -135,6 +135,10 @@ Release 1.4.2 ist ein Patch: Das `node-24`-Image wechselt auf das Sicherheitsrel
 ## Ab devcontainer-kit 1.4.3 (Schnittstelle 2)
 
 Release 1.4.3 ist ein Patch: Das Image wechselt zu Herdr 0.9.5, das jetzt von `herdrdev/herdr` (wohin das Projekt umgezogen ist) geladen und gegen die Release-Digests des Herstellers geprüft wird – 0.9.4 hält den Herdr-Server am Laufen, wenn die Shell, die ihn gestartet hat, geschlossen wird –, und zu herdr-peers 2.2.1, dessen `autopilot --loop --revive` ohne coding-agents-kit 1.3.0 oder neuer nicht startet. Schnittstelle 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 und die eigene Oberfläche von dck bleiben unverändert; dck startet den Daemon nie.
+
+## Ab devcontainer-kit 1.4.4 (Schnittstelle 2)
+
+Release 1.4.4 ist ein Patch: Die Schicht `agents` wechselt zu coding-agents-kit 1.5.1, dessen `ak install` und `ak update` die native Plattform-Binärdatei per npm installierter CLIs (zuerst Codex) behalten und eine Installation als fehlgeschlagen werten, deren CLI nicht startet; die Schicht `dailybot` wechselt zur Dailybot CLI 3.29.2, deren Wheel gegen den SHA-256 von PyPI geprüft wird. Schnittstelle 2, Herdr 0.9.5, herdr-peers 2.2.1, DeepWorkPlan Vim 1.1.0 und die eigene Oberfläche von dck bleiben unverändert.
 
 ## Sicherheitsvorgaben
 

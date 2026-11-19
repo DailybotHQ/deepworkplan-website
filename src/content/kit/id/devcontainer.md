@@ -23,20 +23,20 @@ Deep Work Plan memiliki empat pilar: rencana spec-first, repositori adalah harne
 ## Instalasi
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.4.3`: `v0.2.0` tidak didukung.
+Persyaratan: `bash` 3.2 atau lebih baru dan `python3` 3.11 atau lebih baru di host Linux atau macOS, serta Docker dengan Compose v2 untuk perintah container. Verifikasi rilis dengan aset `SHA256SUMS`-nya. Patok `v1.4.4`: `v0.2.0` tidak didukung.
 
 | Item | Nilai |
 |---|---|
-| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.4.3`, antarmuka 2 |
+| Produk | `DailybotHQ/devcontainer-kit`, tag `v1.4.4`, antarmuka 2 |
 | Kunci registri | `devcontainer` di `.dwp/config.json` |
 | Konfigurasi per repositori | `.devcontainer/dck.toml` |
 | Deteksi | `dck doctor --json` |
 
-**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin saat ini. Image `v1.4.3` memuat Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0, dan DeepWorkPlan Vim 1.1.0.
+**Stabil sejak `v1.0.0`.** Antarmuka publiknya mengikuti semantic versioning dan hanya berubah secara tidak kompatibel pada versi mayor baru (dan, untuk file, nomor antarmuka baru): verb `dck` beserta flag dan kode keluar yang terdokumentasi (`0` ok, `1` gagal, `2` penggunaan, `3` konfigurasi, `4` lingkungan, `5` ditolak), skema `dck.toml`, profil host, dan `dck doctor --json` (antarmuka 2), serta kontrak render — file yang ditulis dan dimiliki oleh `dck init`, penanda `dck:managed` dan blok pengguna yang dipertahankannya, dan environment yang dibaca oleh entrypoint. Tidak ada yang rusak saat beralih dari `v0.3.7`: jalankan `dck init` dan `dck rebuild` agar image membawa pin saat ini. Image `v1.4.4` memuat Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.1, dan DeepWorkPlan Vim 1.1.0.
 
 ## Lapisan
 
@@ -135,6 +135,10 @@ Rilis 1.4.2 adalah patch: image `node-24` beralih ke rilis keamanan Node 24.22.3
 ## Sejak devcontainer-kit 1.4.3 (antarmuka 2)
 
 Rilis 1.4.3 adalah patch: image beralih ke Herdr 0.9.5, yang kini diunduh dari `herdrdev/herdr` (tempat proyek itu pindah) dan diperiksa terhadap digest rilis vendor — 0.9.4 membuat server Herdr tetap berjalan saat shell yang memulainya ditutup — dan ke herdr-peers 2.2.1, yang `autopilot --loop --revive`-nya menolak berjalan tanpa coding-agents-kit 1.3.0 atau yang lebih baru. Antarmuka 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0, dan permukaan dck sendiri tidak berubah; dck tidak pernah memulai daemon.
+
+## Mulai devcontainer-kit 1.4.4 (antarmuka 2)
+
+Rilis 1.4.4 adalah patch: lapisan `agents` beralih ke coding-agents-kit 1.5.1, yang `ak install` dan `ak update`-nya mempertahankan biner native platform pada CLI yang dipasang lewat npm (Codex lebih dulu) dan menganggap gagal pemasangan yang CLI-nya tidak bisa berjalan, dan lapisan `dailybot` beralih ke Dailybot CLI 3.29.2, dengan wheel yang diperiksa terhadap SHA-256 dari PyPI. Antarmuka 2, Herdr 0.9.5, herdr-peers 2.2.1, DeepWorkPlan Vim 1.1.0, dan permukaan dck sendiri tidak berubah.
 
 ## Default keamanan
 
