@@ -12,7 +12,7 @@ Deep Work Plan має чотири опори: Spec-first; репозиторі�
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.6 --skill deepworkplan -y
 ```
 
 Поточний пакет 8.x за замовчуванням створює нові плани за контрактом v8 (`plan-contract/v8`). Плани v7, v6 і v5 зберігають зафіксоване покоління; міграція відбувається лише через явну міграцію `refine`.
@@ -72,7 +72,7 @@ npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.
 - **[devcontainer](/uk/kit/devcontainer)** — Власний dev-контейнер кожного репозиторію з одного шаблону: агенти через ak, Herdr в обидва боки, SSH-ключі лише за явного ввімкнення. Закріплено на `devcontainer-kit@v1.4.4`.
 - **[vim](/uk/kit/vim)** — Термінальний редактор із оглядачем планів лише для читання та переглядачем Markdown. Закріплено на `deepworkplan-vim@v1.1.0`.
 
-Реєстр аддонів і дескриптори постачаються в Deep Work Plan v8: `v8.0.5`
+Реєстр аддонів і дескриптори постачаються в Deep Work Plan v8: `v8.0.6`
 
 ### Приклади
 

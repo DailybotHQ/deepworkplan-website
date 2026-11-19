@@ -134,11 +134,11 @@ La harness pubblica ciò che ogni flusso deve leggere prima di iniziare: il rout
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Unità: byte del file system. Misurato sul pacchetto rilasciato con il comando qui sotto: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5).
+Unità: byte del file system. Misurato sul pacchetto rilasciato con il comando qui sotto: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.6).
 
 Token del provider, costi e statistiche di chiusura del loop non sono mostrati: nessuna fonte con tag li misura ancora, quindi non hanno una riga. La cifra in token dello script, byte ÷ 4, è una stima dichiarata come tale, mai una misurazione.
 
-[Leggi il registro di valutazione](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
+[Leggi il registro di valutazione](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.6/docs/EVALUATION.md)
 
 ---
 

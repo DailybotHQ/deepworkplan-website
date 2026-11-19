@@ -134,11 +134,11 @@ harness 会公布每个流程在开始前必须读取的内容：路由器、子
 | `status` | 27,311|
 | `verify` | 36,701|
 
-单位：文件系统字节。使用下方命令在已发布的技能包上测得：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.5）。
+单位：文件系统字节。使用下方命令在已发布的技能包上测得：`bash tests/efficiency/measure-instruction-load.sh`（deepworkplan-skill v8.0.6）。
 
 未展示提供商 token、成本与循环闭合统计：目前尚无带标签的来源对其进行测量，因此它们没有对应的行。脚本给出的“字节 ÷ 4”token 数值是标注为估算的数字，绝非测量结果。
 
-[阅读评估账本](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
+[阅读评估账本](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.6/docs/EVALUATION.md)
 
 ---
 

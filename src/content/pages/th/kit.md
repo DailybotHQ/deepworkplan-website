@@ -12,7 +12,7 @@ kit คือทุกอย่างที่คุณต้องใช้เ�
 `DailybotHQ/deepworkplan-skill`
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.6 --skill deepworkplan -y
 ```
 
 แพ็ก 8.x ปัจจุบันสร้างแผนใหม่ด้วยสัญญา v8 (`plan-contract/v8`) เป็นค่าเริ่มต้น แผนของ v7, v6 และ v5 คงรุ่นที่บันทึกไว้ การย้ายจะเกิดขึ้นผ่านการย้ายด้วย `refine` อย่างชัดเจนเท่านั้น
@@ -72,7 +72,7 @@ skill ของ Deep Work Plan คือตัวกำหนดเส้นท�
 - **[devcontainer](/th/kit/devcontainer)** — dev container ของแต่ละ repository จากเทมเพลตเดียว: เอเจนต์ผ่าน ak, Herdr สองทาง และคัดลอก SSH key เฉพาะเมื่อเลือกเปิดใช้ ปักหมุดที่ `devcontainer-kit@v1.4.4`
 - **[vim](/th/kit/vim)** — ตัวแก้ไขบนเทอร์มินัล พร้อมตัวเรียกดูแผนแบบอ่านอย่างเดียวและตัวแสดงผล Markdown ปักหมุดที่ `deepworkplan-vim@v1.1.0`
 
-รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v8: `v8.0.5`
+รีจิสทรีของส่วนเสริมและตัวอธิบายถูกจัดส่งมาใน Deep Work Plan v8: `v8.0.6`
 
 ### ตัวอย่าง
 

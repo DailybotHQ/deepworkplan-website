@@ -134,11 +134,11 @@ Harness публикует, что каждый поток должен проч
 | `status` | 27 311|
 | `verify` | 36 701|
 
-Единица: байты файловой системы. Измерено на выпущенном пакете командой ниже: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5).
+Единица: байты файловой системы. Измерено на выпущенном пакете командой ниже: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.6).
 
 Токены провайдера, стоимость и статистика замыкания цикла не показаны: ни один помеченный тегом источник их пока не измеряет, поэтому у них нет строки. Число токенов из скрипта (байты ÷ 4) — помеченная оценка, а не измерение.
 
-[Читать журнал оценки](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
+[Читать журнал оценки](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.6/docs/EVALUATION.md)
 
 ---
 

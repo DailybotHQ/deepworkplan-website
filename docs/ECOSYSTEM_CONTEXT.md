@@ -25,7 +25,7 @@ reads `repositories/` (pinned by `tests/unit/lib/hub-isolation.test.ts`).
 
 Versions are the release each surface pins today; the site may only claim a
 released tag (`tests/unit/lib/install-surface-pins.test.ts` guards the
-deepworkplan-skill pins). The pins last moved on 2026-11-19 with DWP 8.0.0: pack `v8.0.5`
+deepworkplan-skill pins). The pins last moved on 2026-11-19 with DWP 8.0.0: pack `v8.0.6`
 (DWP standard 8.0.0 — new plans default to `plan-contract/v8`, with the
 `autonomy` block, structured blockers in `journal-event/v8` and
 `plan-snapshot/v8`, and the `dwp-queue-v1` plan queue written by
@@ -50,9 +50,9 @@ CLIs' native platform binaries and fails an install whose CLI cannot start; inte
 unchanged),
 deepworkplan-vim `v1.1.0`,
 ai-diff-reviewer `v3.3.16` and agent-skill `v3.23.20`, with the pack, the
-reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.5`
+reviewer and the Dailybot skill vendored at those tags. The pack `v8.0.6`
 addon descriptors record herdr-peers `v2.2.1`, coding-agents-kit `v1.5.1`,
-devcontainer-kit `v1.4.3` and deepworkplan-vim `v1.1.0`; the site pins the same
+devcontainer-kit `v1.4.4` and deepworkplan-vim `v1.1.0`; the site pins the same
 releases. devcontainer-kit 1.4.0 (interface 2 unchanged; 1.3.0 added the opt-in
 `[compose] container_only` key) bakes herdr-peers 2.1.0, coding-agents-kit
 1.5.0 and deepworkplan-vim 1.1.0 into its image and dogfoods pack 8.0.1; `v1.4.1`
@@ -62,7 +62,7 @@ volume; `v1.4.3` moves the image to Herdr 0.9.5 and herdr-peers 2.2.1; `v1.4.4` 
 
 | Repository | Role | Visibility | Released tag the site pins | Where the site makes the claim | Consumed by this repo as |
 |------------|------|------------|----------------------------|--------------------------------|--------------------------|
-| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v8.0.5` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
+| deepworkplan-skill | Pack (source of truth for the methodology, spec and kit) | Public | `v8.0.6` | `/init.md`, `/quickstart`, kit pages, spec reader | Vendored skill `.agents/skills/deepworkplan/` (repo-adapted, refreshed only by a reviewed change) |
 | ai-diff-reviewer | Required local review: reviews a change set locally and in CI; every Final Review runs it | Public | `v3.3.16` | `/kit/ai-diff-reviewer`, `/init.md` | Vendored skill (auto-refreshed on every site release) and the CI self-review action |
 | agent-skill | Addon (dailybot): progress reports, check-ins, chat and more | Public | `v3.23.20` | `/kit/dailybot` | Vendored `dailybot` skill (auto-refreshed on every site release); **also owned by the Dailybot hub** |
 | cli | Consumer: the Dailybot CLI | Public | auto-release on merge | — | Reference production consumer of the full DWP stack (pack, every addon, dck container); **also owned by the Dailybot hub** |

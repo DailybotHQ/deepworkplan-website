@@ -33,7 +33,7 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 | Kayıt anahtarı | `.dwp/config.json` içinde `dependency-upgrade` |
 | Tanımlayıcı | `addons/dependency-upgrade/addon.json` (arayüz 1) |
 | Komut | Kabul edildiğinde `.agents/commands/` içine kurulan `/lib-upgrade` |
-| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v8.0.5`) |
+| Sürüm oluşturma | Beceri paketiyle sabitlenmiş ve sürümlenmiş (`v8.0.6`) |
 
 ## Notlar
 

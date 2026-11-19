@@ -50,7 +50,7 @@ Cuando se acepta, el addon puede instalar un delegador `/design-system` en el `.
 | Clave de registro | `design-system` en `.dwp/config.json` |
 | Descriptor | `addons/design-system/addon.json` (interfaz 1) |
 | Archivo de destino | `docs/DESIGN.md` indexado desde `AGENTS.md` |
-| Control de versiones | Fijado y versionado con el paquete de skills (`v8.0.5`) |
+| Control de versiones | Fijado y versionado con el paquete de skills (`v8.0.6`) |
 
 ## Relación con los documentos de diseño por funcionalidad
 

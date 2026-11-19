@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Skill रिलीज़ v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Skill रिलीज़ v8.0.5"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.5"
+  - label: "Skill रिलीज़ v8.0.6"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.6"
   - label: "LOOP_ENGINEERING.md (v8 का मानक दस्तावेज़)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "विशिष्टता रीडर में Loop engineering"
@@ -77,4 +77,4 @@ Deep Work Plan v8 चार विचारों को जोड़ता ह�
 
 v7 की अंतिम रिलीज़ **7.12.2** थी।
 
-इंस्टॉल किए गए skill की रिलीज़: **8.0.5**.
+इंस्टॉल किए गए skill की रिलीज़: **8.0.6**.
