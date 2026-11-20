@@ -90,7 +90,7 @@ Rozwiązywanie auth działa w trybie **Bearer-first**: token sesji ma priorytet,
 
 ## Sparowany skill Dailybot — 17 możliwości (v3.23.21)
 
-Instalacja skilla agenta Dailybot daje znacznie więcej niż łączy addon DWP. Oficjalny pakiet skilli (skill **v3.23.21**, CLI baza **>= 3.9.0**, Plan **>= 3.25.0**, bieżąca publikacja CLI **3.25.0**) udostępnia **17 skoordynowanych sub-skilli**:
+Instalacja skilla agenta Dailybot daje znacznie więcej niż łączy addon DWP. Oficjalny pakiet skilli (skill **v3.23.21**, CLI baza **>= 3.9.0**, Plan **>= 3.25.0**) udostępnia **17 skoordynowanych sub-skilli**:
 
 | Sub-skill | Co robi |
 |-----------|--------------|

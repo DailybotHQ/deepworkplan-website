@@ -90,7 +90,7 @@ La risoluzione dell'auth è **Bearer-first**: un token di sessione ha la priorit
 
 ## La skill Dailybot abbinata — 17 capacità (v3.23.21)
 
-Installare la skill agente Dailybot porta molto più di quanto l'addon DWP collega. Il pacchetto skill ufficiale (skill **v3.23.21**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, publish CLI corrente **3.25.0**) espone **17 sub-skill coordinate**:
+Installare la skill agente Dailybot porta molto più di quanto l'addon DWP collega. Il pacchetto skill ufficiale (skill **v3.23.21**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**) espone **17 sub-skill coordinate**:
 
 | Sub-skill | Cosa fa |
 |-----------|--------------|

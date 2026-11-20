@@ -90,7 +90,7 @@ Resolusi auth bersifat **Bearer-first**: token sesi diprioritaskan, dengan retry
 
 ## Skill Dailybot yang dipasangkan — 17 kemampuan (v3.23.21)
 
-Menginstal skill agen Dailybot membawa jauh lebih banyak daripada yang dihubungkan addon DWP. Paket skill resmi (skill **v3.23.21**, baseline CLI **>= 3.9.0**, Plan **>= 3.25.0**, publish CLI saat ini **3.25.0**) mengekspos **17 sub-skill terkoordinasi**:
+Menginstal skill agen Dailybot membawa jauh lebih banyak daripada yang dihubungkan addon DWP. Paket skill resmi (skill **v3.23.21**, baseline CLI **>= 3.9.0**, Plan **>= 3.25.0**) mengekspos **17 sub-skill terkoordinasi**:
 
 | Sub-skill | Fungsinya |
 |-----------|--------------|

@@ -90,7 +90,7 @@ Phân giải xác thực theo **Bearer-first**: token phiên được ưu tiên,
 
 ## Skill Dailybot đi kèm — 17 khả năng (v3.23.21)
 
-Cài skill agent Dailybot mang lại nhiều hơn nhiều so với addon DWP kết nối. Gói skill chính thức (skill **v3.23.21**, CLI cơ sở **>= 3.9.0**, Plan **>= 3.25.0**, bản publish CLI hiện tại **3.25.0**) mở **17 sub-skill phối hợp**:
+Cài skill agent Dailybot mang lại nhiều hơn nhiều so với addon DWP kết nối. Gói skill chính thức (skill **v3.23.21**, CLI cơ sở **>= 3.9.0**, Plan **>= 3.25.0**) mở **17 sub-skill phối hợp**:
 
 | Sub-skill | Chức năng |
 |-----------|--------------|

@@ -234,7 +234,7 @@ onboard 하위 스킬(`/deepworkplan-onboard`)을 호출하세요. 실제 리포
 **선택적 애드온.** 일곱 가지 선택적 애드온(devcontainer, Dailybot, dependency upgrade, design system, agentkit, Herdr, DeepWorkPlan Vim)을 열거하고 이 리포지토리에 맞는 것만 각각 명시적 선택형으로 제안하세요. 리포지토리는 선택적 애드온이 **하나도** 없어도 완전히 적합합니다 — 그것들은 결코 자동 설치하지 마세요.
 
 - **Devcontainer 지원** — [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)(`dck`, `v1.4.4`로 고정, `dck-dockerfile` 스킬 포함)의 얇은 통합 계층: `dck init`이 리포지토리 고유의 컨테이너를 생성하고(공식 이미지를 다이제스트로 고정, 공유 베이스 이미지 없음, `bash dev.sh up`), 기존 devcontainer는 diff가 수락된 뒤에만 조정합니다. 수락되면 아래 *devcontainer 경로*를 따라 전체 스택까지 완성하세요.
-- **Dailybot 연동** — 네 가지 라이프사이클 이벤트(kickoff, 중요 작업, 블로킹, 완료)를 이미 Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 보고로 제공하며, 선택적 자율 훅 강제(`dailybot-cli >= 3.9.0`). 페어링된 Dailybot 에이전트 스킬(3.23.20)을 설치하면 채팅, 체크인, 폼 작성, AI 질의, Plan 보드와 작업, 저장소별 API 키 등도 노출됩니다 — 이 애드온은 DWP 실행에 보고만 연결합니다. 핵심 방법론은 Dailybot 의존성이 전혀 없습니다.
+- **Dailybot 연동** — 네 가지 라이프사이클 이벤트(kickoff, 중요 작업, 블로킹, 완료)를 이미 Dailybot을 사용하는 팀을 위한 최선 노력 기반의 진행 보고로 제공하며, 선택적 자율 훅 강제(`dailybot-cli >= 3.9.0`). 페어링된 Dailybot 에이전트 스킬(3.23.21)을 설치하면 채팅, 체크인, 폼 작성, AI 질의, Plan 보드와 작업, 저장소별 API 키 등도 노출됩니다 — 이 애드온은 DWP 실행에 보고만 연결합니다. 핵심 방법론은 Dailybot 의존성이 전혀 없습니다.
 - **Dependency upgrade** — 패키지 관리자 비종속, 배치 단위, 검증되고 되돌릴 수 있는 업그레이드.
   채택되면 `/lib-upgrade` 명령을 설치합니다.
 - **Design system** — 감지된 인터페이스 표면이 있는 리포지토리에만 제공되는 선택형 `docs/DESIGN.md`

@@ -90,7 +90,7 @@ Die Auth-Auflösung ist **Bearer-first**: ein Session-Token hat Vorrang, mit ein
 
 ## Die gepaarte Dailybot-Skill — 17 Fähigkeiten (v3.23.21)
 
-Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon verbindet. Das offizielle Skill-Paket (Skill **v3.23.21**, CLI-Baseline **>= 3.9.0**, Plan **>= 3.25.0**, aktuelle CLI-Veröffentlichung **3.25.0**) exponiert **17 koordinierte Sub-Skills**:
+Die Installation der Dailybot-Agent-Skill bringt weit mehr als das DWP-Addon verbindet. Das offizielle Skill-Paket (Skill **v3.23.21**, CLI-Baseline **>= 3.9.0**, Plan **>= 3.25.0**) exponiert **17 koordinierte Sub-Skills**:
 
 | Sub-Skill | Was sie tut |
 |-----------|--------------|

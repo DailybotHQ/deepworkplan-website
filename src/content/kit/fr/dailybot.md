@@ -90,7 +90,7 @@ La résolution de l'auth est **Bearer d'abord** : un jeton de session est priori
 
 ## La skill jumelée Dailybot — 17 capacités (v3.23.21)
 
-Installer la skill agent Dailybot apporte bien plus que ce que l'addon DWP connecte. Le pack officiel de skills (skill **v3.23.21**, CLI de référence **>= 3.9.0**, Plan **>= 3.25.0**, publication CLI actuelle **3.25.0**) expose **17 sous-skills coordonnées** :
+Installer la skill agent Dailybot apporte bien plus que ce que l'addon DWP connecte. Le pack officiel de skills (skill **v3.23.21**, CLI de référence **>= 3.9.0**, Plan **>= 3.25.0**) expose **17 sous-skills coordonnées** :
 
 | Sous-skill | Ce qu'elle fait |
 |-----------|--------------|

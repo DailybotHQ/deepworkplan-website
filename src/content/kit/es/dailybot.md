@@ -90,7 +90,7 @@ La resolución de autenticación es **Bearer primero**: un token de sesión tien
 
 ## La skill emparejada de Dailybot — 17 capacidades (v3.23.21)
 
-Instalar la skill de agente Dailybot aporta mucho más de lo que conecta el addon de DWP. El paquete oficial de skills (skill **v3.23.21**, CLI base **>= 3.9.0**, Plan **>= 3.25.0**, publicación actual del CLI **3.25.0**) expone **17 sub-skills coordinadas**:
+Instalar la skill de agente Dailybot aporta mucho más de lo que conecta el addon de DWP. El paquete oficial de skills (skill **v3.23.21**, CLI base **>= 3.9.0**, Plan **>= 3.25.0**) expone **17 sub-skills coordinadas**:
 
 | Sub-skill | Qué hace |
 |-----------|--------------|

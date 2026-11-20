@@ -90,7 +90,7 @@ Addon นี้ **ไม่** ถาม email OTP หรือ API keys แล�
 
 ## Dailybot skill คู่กัน — 17 ความสามารถ (v3.23.21)
 
-การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **v3.23.21** CLI baseline **>= 3.9.0** Plan **>= 3.25.0** publish CLI ปัจจุบัน **3.25.0**) เปิด **17 sub-skill ที่ประสานกัน**:
+การติดตั้ง Dailybot agent skill ได้มากกว่าที่ DWP addon เชื่อม ชุด skill อย่างเป็นทางการ (skill **v3.23.21** CLI baseline **>= 3.9.0** Plan **>= 3.25.0**) เปิด **17 sub-skill ที่ประสานกัน**:
 
 | Sub-skill | ทำอะไร |
 |-----------|--------------|

@@ -90,7 +90,7 @@ Kimlik doğrulama çözümü **Bearer-first**'tür: bir oturum token'ı öncelik
 
 ## Eşleşen Dailybot skill — 17 yetenek (v3.23.21)
 
-Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlasını getirir. Resmi skill paketi (skill **v3.23.21**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, güncel CLI yayını **3.25.0**) **17 koordineli alt-skill** sunar:
+Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlasını getirir. Resmi skill paketi (skill **v3.23.21**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**) **17 koordineli alt-skill** sunar:
 
 | Alt-skill | Ne yapar |
 |-----------|--------------|
