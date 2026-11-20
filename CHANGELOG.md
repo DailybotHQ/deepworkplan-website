@@ -9,6 +9,18 @@ existing GitHub release notes.
 
 ## [Unreleased]
 
+## [5.0.85] - 2026-11-20
+
+### Changed
+
+- docs: the vim kit page describes release v1.1.1 in the ARCHITECTURE claims ledger
+- docs: name Dailybot skill 3.23.21 in /init, quickstart and kit blurbs; drop stale CLI 3.25.0 claim
+- docs: state the site's later patch pins next to the pack 8.0.6 descriptors
+- chore: pin herdr-peers v2.2.2 (vendored skill verified against SHA256SUMS)
+- chore: pin coding-agents-kit v1.5.2, deepworkplan-vim v1.1.1 and agent-skill v3.23.21
+- chore: pin pack v8.0.6 (devcontainer descriptor on devcontainer-kit v1.4.4)
+- chore: pin devcontainer-kit v1.4.4 (image on coding-agents-kit 1.5.1 and Dailybot CLI 3.29.2)
+
 ## [5.0.84] - 2026-11-19
 
 ### Changed
@@ -1619,7 +1631,8 @@ This release brings the site fully up to date with the v7 generation of Deep Wor
 - content(aeo): sync .md endpoints with the living-kit narrative (Task 6 follow-up)
 - docs,content: narrate the author sub-skill, maintenance addon, and DWP dogfooding
 
-[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.84...HEAD
+[Unreleased]: https://github.com/DailybotHQ/deepworkplan-website/compare/v5.0.85...HEAD
+[5.0.85]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.85
 [5.0.84]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.84
 [5.0.83]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.83
 [5.0.82]: https://github.com/DailybotHQ/deepworkplan-website/releases/tag/v5.0.82
