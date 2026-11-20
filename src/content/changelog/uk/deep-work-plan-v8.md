@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Реліз skill v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Реліз skill v8.0.5"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.5"
+  - label: "Реліз skill v8.0.6"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.6"
   - label: "LOOP_ENGINEERING.md (нормативний документ v8)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Loop engineering у переглядачі специфікації"
@@ -44,8 +44,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.3.0"
   - label: "coding-agents-kit v1.4.0"
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.4.0"
-  - label: "coding-agents-kit v1.5.1"
-    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.1"
+  - label: "coding-agents-kit v1.5.2"
+    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.2"
   - label: "devcontainer-kit v1.3.0"
     url: "https://github.com/DailybotHQ/devcontainer-kit/releases/tag/v1.3.0"
 ---
@@ -77,4 +77,4 @@ Deep Work Plan v8 поєднує чотири ідеї: розробку spec-fi
 
 Останнім релізом v7 був **7.12.2**.
 
-Встановлений реліз skill: **8.0.5**.
+Встановлений реліз skill: **8.0.6**.

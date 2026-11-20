@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v8** (पैक `v8.0.5`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
+रिपॉज़िटरी को एक पुनरुत्पाद्य, पृथक development container दें — ऐसा, जिसका उपयोग लोग, एडिटर और कोडिंग एजेंट सभी कर सकें। **DWP v8** (पैक `v8.0.6`) में यह ऐडऑन **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)** को एकीकृत करता है — एक MIT उत्पाद जो Deep Work Plan के बिना भी काम करता है। यह वैकल्पिक है: इसके बिना भी एक रिपॉज़िटरी पूरी तरह अनुरूप होती है।
 
 Deep Work Plan के चार स्तंभ हैं: स्पेक-फ़र्स्ट योजनाएँ, रिपॉज़िटरी ही हार्नेस है, Loop engineering और मापी गई दक्षता। ऐडऑन और एकीकरण हार्नेस तथा लूप का विस्तार कर सकते हैं; कार्यविधि अपने आप भी काम करती है।
 
@@ -23,20 +23,20 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 ## इंस्टॉल
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.4.3` पिन करें: `v0.2.0` समर्थित नहीं है।
+आवश्यकताएँ: Linux या macOS होस्ट पर `bash` 3.2 या नया और `python3` 3.11 या नया, तथा container कमांड के लिए Compose v2 के साथ Docker। किसी रिलीज़ को उसके `SHA256SUMS` asset से सत्यापित करें। `v1.4.4` पिन करें: `v0.2.0` समर्थित नहीं है।
 
 | मद | मान |
 |---|---|
-| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.4.3`, इंटरफ़ेस 2 |
+| उत्पाद | `DailybotHQ/devcontainer-kit`, tag `v1.4.4`, इंटरफ़ेस 2 |
 | रजिस्ट्री कुंजी | `.dwp/config.json` में `devcontainer` |
 | प्रति-रिपॉज़िटरी config | `.devcontainer/dck.toml` |
 | पहचान | `dck doctor --json` |
 
-**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.4.3` image में Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 और DeepWorkPlan Vim 1.1.0 शामिल हैं।
+**`v1.0.0` से स्थिर।** सार्वजनिक इंटरफ़ेस semantic versioning का पालन करता है और असंगत रूप से केवल नए मेजर संस्करण में बदलता है (और फ़ाइलों के लिए, नई इंटरफ़ेस संख्या के साथ): `dck` क्रियाएँ और उनके प्रलेखित फ़्लैग तथा एग्ज़िट कोड (`0` ठीक, `1` विफल, `2` उपयोग, `3` कॉन्फ़िगरेशन, `4` परिवेश, `5` अस्वीकृत), `dck.toml`, होस्ट-प्रोफ़ाइल और `dck doctor --json` स्कीमा (इंटरफ़ेस 2), और रेंडर अनुबंध — वे फ़ाइलें जिन्हें `dck init` लिखता है और जिनका स्वामी है, वे `dck:managed` मार्कर और उपयोगकर्ता ब्लॉक जिन्हें यह सुरक्षित रखता है, तथा वह परिवेश जिसे entrypoint पढ़ता है। `v0.3.7` से आगे बढ़ने पर कुछ नहीं टूटता: `dck init` और `dck rebuild` चलाएँ ताकि image में मौजूदा पिन आ जाएँ। `v1.4.4` image में Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.1 और DeepWorkPlan Vim 1.1.0 शामिल हैं।
 
 ## परतें
 
@@ -135,6 +135,10 @@ copy_keys = true              # default false
 ## devcontainer-kit 1.4.3 से (इंटरफ़ेस 2)
 
 रिलीज़ 1.4.3 एक पैच है: image Herdr 0.9.5 पर जाती है, जो अब `herdrdev/herdr` से डाउनलोड होता है (जहाँ प्रोजेक्ट स्थानांतरित हुआ) और vendor के रिलीज़ digest से जाँचा जाता है — 0.9.4 Herdr सर्वर को तब भी चालू रखता है जब उसे शुरू करने वाला shell बंद हो जाता है — और herdr-peers 2.2.1 पर, जिसका `autopilot --loop --revive` coding-agents-kit 1.3.0 या नए के बिना शुरू होने से मना कर देता है। इंटरफ़ेस 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 और dck की अपनी सतह अपरिवर्तित हैं; dck कभी daemon शुरू नहीं करता।
+
+## devcontainer-kit 1.4.4 से (इंटरफ़ेस 2)
+
+रिलीज़ 1.4.4 एक पैच है: `agents` परत coding-agents-kit 1.5.1 पर जाती है, जिसके `ak install` और `ak update` npm से इंस्टॉल की गई CLI (पहले Codex) की नेटिव प्लेटफ़ॉर्म बाइनरी बनाए रखते हैं और जिस इंस्टॉल की CLI शुरू न हो उसे विफल मानते हैं; `dailybot` परत Dailybot CLI 3.29.2 पर जाती है, जिसकी wheel को PyPI के SHA-256 से जाँचा जाता है। इंटरफ़ेस 2, Herdr 0.9.5, herdr-peers 2.2.1, DeepWorkPlan Vim 1.1.0 और dck की अपनी सतह नहीं बदलतीं।
 
 ## सुरक्षा डिफ़ॉल्ट
 

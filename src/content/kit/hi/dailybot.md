@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "ऑप्ट-इन DWP ऐडऑन: योजना जीवनचक्र की रिपोर्ट Dailybot टीम को, वैकल्पिक हुक प्रवर्तन, और पूर्ण Dailybot एजेंट स्किल v3.23.20 (चैट, फ़ॉर्म, Plan और अधिक)।"
+description: "ऑप्ट-इन DWP ऐडऑन: योजना जीवनचक्र की रिपोर्ट Dailybot टीम को, वैकल्पिक हुक प्रवर्तन, और पूर्ण Dailybot एजेंट स्किल v3.23.21 (चैट, फ़ॉर्म, Plan और अधिक)।"
 kind: addon
 lang: hi
 order: 2
@@ -25,7 +25,7 @@ Deep Work Plan के चार स्तंभ हैं: स्पेक-फ�
 
 ## यह ऐडऑन क्या जोड़ता है (जानबूझकर संकीर्ण)
 
-DWP Dailybot ऐडऑन Dailybot को **दोबारा नहीं बनाता**। यह योजना निष्पादन को dailybot **`report`** sub-skill से जोड़ता है और वैकल्पिक रूप से harness हुक कमिट करता है। बाकी सब — इंस्टॉल, सहमति, authentication, लेखन शैली — आधिकारिक [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **v3.23.20**) को **सौंपा** जाता है।
+DWP Dailybot ऐडऑन Dailybot को **दोबारा नहीं बनाता**। यह योजना निष्पादन को dailybot **`report`** sub-skill से जोड़ता है और वैकल्पिक रूप से harness हुक कमिट करता है। बाकी सब — इंस्टॉल, सहमति, authentication, लेखन शैली — आधिकारिक [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill) (वर्तमान में **v3.23.21**) को **सौंपा** जाता है।
 
 ### चार जीवनचक्र घटनाएँ
 
@@ -71,7 +71,7 @@ Payload योजना की state परत (`state.json`) से निक�
 
 | घटक | कमांड / पथ |
 |-----------|----------------|
-| **Dailybot agent skill** (अनुशंसित) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot -y` |
+| **Dailybot agent skill** (अनुशंसित) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.21 --skill dailybot -y` |
 | **मौजूदा स्किल अपडेट** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (पैक बेसलाइन `>= 3.9.0`; Plan के लिए `>= 3.25.0`) | स्किल द्वारा पहले उपयोग पर `shared/auth.md` के माध्यम से; या `pip install 'dailybot-cli>=3.9.0'`, Homebrew, या [cli.dailybot.com](https://cli.dailybot.com) पर checksum-verified installer |
@@ -88,9 +88,9 @@ Payload योजना की state परत (`state.json`) से निक�
 
 Auth resolution **Bearer-first** है: session token को प्राथमिकता मिलती है, `401`/`403` पर पारदर्शी Bearer→API-key retry के साथ, ताकि कोई बासी token किसी वैध key को कभी अवरुद्ध न करे। यदि auth अस्वीकृत या अनुपलब्ध हो, रिपोर्टिंग चुपचाप छोड़ दी जाती है — कार्य जारी रहता है।
 
-## जोड़ी गई Dailybot स्किल — 17 क्षमताएँ (v3.23.20)
+## जोड़ी गई Dailybot स्किल — 17 क्षमताएँ (v3.23.21)
 
-Dailybot agent skill इंस्टॉल करने से DWP ऐडऑन से कहीं अधिक मिलता है। आधिकारिक स्किल पैक (स्किल **v3.23.20**, CLI बेसलाइन **>= 3.9.0**, Plan **>= 3.25.0**, वर्तमान CLI publish **3.25.0**) **17 समन्वित sub-skills** प्रदान करता है:
+Dailybot agent skill इंस्टॉल करने से DWP ऐडऑन से कहीं अधिक मिलता है। आधिकारिक स्किल पैक (स्किल **v3.23.21**, CLI बेसलाइन **>= 3.9.0**, Plan **>= 3.25.0**) **17 समन्वित sub-skills** प्रदान करता है:
 
 | Sub-skill | क्या करता है |
 |-----------|--------------|

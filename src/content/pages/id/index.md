@@ -103,7 +103,7 @@ Loop engineering membuat rencana selesai tanpa perlu terus dipantau manusia. Bar
 
 
 
-| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.2.1) |
+| Kontrak | Yang dijaminnya | Sumber (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Registrasi rencana (`herdr-peers lead claim`) | Rencana yang diawasi loop memiliki catatan lead dengan epoch dan urutan suksesi. Hanya pemegang epoch tertinggi yang bertindak sebagai lead-nya. | `skills/herdr-peers/protocol.md` §12 |
 | Hanya manusia yang memulai (`herdr-peers autopilot start --loop`) | Hanya manusia yang memulai daemon, dengan kata-katanya sendiri. Tidak ada permintaan, balasan, atau pemberitahuan yang dapat memulainya, menghentikannya, atau mengubah apa yang dilakukannya. | `skills/herdr-peers/autopilot.md` §1 |
@@ -134,11 +134,11 @@ Harness memublikasikan apa yang harus dibaca setiap alur sebelum dimulai: router
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5).
+Satuan: byte sistem berkas. Diukur pada pack yang dirilis dengan perintah di bawah: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.6).
 
 Token penyedia, biaya, dan statistik penutupan loop tidak ditampilkan: belum ada sumber bertag yang mengukurnya, jadi semuanya tidak memiliki baris. Angka token byte ÷ 4 dari skrip adalah estimasi berlabel, bukan pengukuran.
 
-[Baca catatan evaluasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
+[Baca catatan evaluasi](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.6/docs/EVALUATION.md)
 
 ---
 

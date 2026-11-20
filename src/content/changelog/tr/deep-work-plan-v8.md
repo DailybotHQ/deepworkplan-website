@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Skill v8.0.1 sürümü"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Skill v8.0.5 sürümü"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.5"
+  - label: "Skill v8.0.6 sürümü"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.6"
   - label: "LOOP_ENGINEERING.md (v8 normatif)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Belirtim okuyucusunda Loop engineering"
@@ -44,8 +44,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.3.0"
   - label: "coding-agents-kit v1.4.0"
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.4.0"
-  - label: "coding-agents-kit v1.5.1"
-    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.1"
+  - label: "coding-agents-kit v1.5.2"
+    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.2"
   - label: "devcontainer-kit v1.3.0"
     url: "https://github.com/DailybotHQ/devcontainer-kit/releases/tag/v1.3.0"
 ---
@@ -77,4 +77,4 @@ Paketin v7.11.0 sağlamlaştırması ve v7.12.x plan kaydı ve bildirim sürüml
 
 Son v7 sürümü **7.12.2** idi.
 
-Yüklü skill sürümü: **8.0.5**.
+Yüklü skill sürümü: **8.0.6**.

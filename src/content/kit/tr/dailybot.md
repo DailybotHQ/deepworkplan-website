@@ -1,6 +1,6 @@
 ---
 title: Dailybot
-description: "Opt-in DWP eklentisi: plan yaşam döngüsünü Dailybot ekibine raporlar; isteğe bağlı hook ve tam Dailybot agent skill v3.23.20 (sohbet, form, Plan, daha fazlası)."
+description: "Opt-in DWP eklentisi: plan yaşam döngüsünü Dailybot ekibine raporlar; isteğe bağlı hook ve tam Dailybot agent skill v3.23.21 (sohbet, form, Plan, daha fazlası)."
 kind: addon
 lang: tr
 order: 2
@@ -25,7 +25,7 @@ Deep Work Plan’in dört temel direği vardır: önce spesifikasyon, depo harne
 
 ## Bu eklentinin bağladıkları (kasıtlı olarak dar)
 
-DWP Dailybot eklentisi Dailybot'u **yeniden icat etmez**. Plan yürütmesini dailybot **`report`** alt-skill'ine bağlar ve isteğe bağlı olarak harness hook'larını commit'ler. Geri kalan her şey — kurulum, onay, kimlik doğrulama, yazım stili — resmi [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill)'e (şu an **v3.23.20**) **ertelenir**.
+DWP Dailybot eklentisi Dailybot'u **yeniden icat etmez**. Plan yürütmesini dailybot **`report`** alt-skill'ine bağlar ve isteğe bağlı olarak harness hook'larını commit'ler. Geri kalan her şey — kurulum, onay, kimlik doğrulama, yazım stili — resmi [Dailybot agent skill](https://github.com/DailybotHQ/agent-skill)'e (şu an **v3.23.21**) **ertelenir**.
 
 ### Dört yaşam döngüsü olayı
 
@@ -71,7 +71,7 @@ Eklenti kurulum yollarını **sunar**; Dailybot skill onay ve doğrulamayı yön
 
 | Bileşen | Komut / yol |
 |-----------|----------------|
-| **Dailybot agent skill** (önerilen) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.20 --skill dailybot -y` |
+| **Dailybot agent skill** (önerilen) | `npx --yes skills add https://github.com/DailybotHQ/agent-skill/tree/v3.23.21 --skill dailybot -y` |
 | **Mevcut skill'i güncelle** | `npx --yes skills update dailybot -y` |
 | **OpenClaw** | `openclaw skills install dailybot` |
 | **Dailybot CLI** (paket baseline'ı `>= 3.9.0`; Plan için `>= 3.25.0`) | İlk kullanımda skill tarafından doğrulanmış `shared/auth.md` ile kurulur; veya `pip install 'dailybot-cli>=3.9.0'`, Homebrew veya [cli.dailybot.com](https://cli.dailybot.com)'daki checksum doğrulanmış yükleyici |
@@ -88,9 +88,9 @@ Bu eklenti **asla** e-posta, OTP veya API anahtarı istemez ve kimlik bilgilerin
 
 Kimlik doğrulama çözümü **Bearer-first**'tür: bir oturum token'ı önceliklidir ve `401`/`403` durumunda şeffaf bir Bearer→API-anahtarı yeniden denemesiyle eski bir token asla geçerli bir anahtarı engellemez. Kimlik doğrulama reddedilirse veya kullanılamazsa raporlama sessizce atlanır — çalışma devam eder.
 
-## Eşleşen Dailybot skill — 17 yetenek (v3.23.20)
+## Eşleşen Dailybot skill — 17 yetenek (v3.23.21)
 
-Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlasını getirir. Resmi skill paketi (skill **v3.23.20**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**, güncel CLI yayını **3.25.0**) **17 koordineli alt-skill** sunar:
+Dailybot agent skill kurmak, DWP eklentisinin bağladığından çok daha fazlasını getirir. Resmi skill paketi (skill **v3.23.21**, CLI baseline **>= 3.9.0**, Plan **>= 3.25.0**) **17 koordineli alt-skill** sunar:
 
 | Alt-skill | Ne yapar |
 |-----------|--------------|

@@ -12,7 +12,7 @@ El kit es todo lo que necesitas para ejecutar la metodología en la práctica. S
 `DailybotHQ/deepworkplan-skill`:
 
 ```bash
-npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.5 --skill deepworkplan -y
+npx --yes skills add https://github.com/DailybotHQ/deepworkplan-skill/tree/v8.0.6 --skill deepworkplan -y
 ```
 
 El paquete 8.x actual crea planes nuevos con el contrato v8 (`plan-contract/v8`) de forma predeterminada. Los planes v7, v6 y v5 conservan su generación registrada; la migración solo ocurre mediante una migración `refine` explícita.
@@ -72,12 +72,12 @@ AI-first; la revisión local de AI Diff Reviewer es requerida desde el estándar
 **La metodología funciona sola. Los addons la amplifican.** Cada addon es un integrador ligero dentro de la skill de Deep Work Plan, fijado por etiqueta a un producto con su propio repositorio, versión y versión de interfaz. Cada producto funciona sin Deep Work Plan, y ningún addon es obligatorio.
 
 - **Skill de Deep Work Plan** — Crea, ejecuta, verifica, reanuda y refina planes. No necesita ningún addon.
-- **[herdr](/es/kit/herdr)** — Pares en paneles de Herdr, en cualquier máquina: delegación interactiva con una única respuesta autorizada. Fijado en `herdr-peers@v2.2.1`.
-- **[agentkit](/es/kit/agentkit)** — Un solo comando ak para cada agente de programación en terminal: autonomía por defecto con una exclusión, y delegación sin interfaz en un worktree. Fijado en `coding-agents-kit@v1.5.1`.
-- **[devcontainer](/es/kit/devcontainer)** — El contenedor de desarrollo propio de cada repositorio desde una sola plantilla: agentes a través de ak, Herdr en ambos sentidos, claves SSH solo si se activa la opción. Fijado en `devcontainer-kit@v1.4.3`.
-- **[vim](/es/kit/vim)** — El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown. Fijado en `deepworkplan-vim@v1.1.0`.
+- **[herdr](/es/kit/herdr)** — Pares en paneles de Herdr, en cualquier máquina: delegación interactiva con una única respuesta autorizada. Fijado en `herdr-peers@v2.2.2`.
+- **[agentkit](/es/kit/agentkit)** — Un solo comando ak para cada agente de programación en terminal: autonomía por defecto con una exclusión, y delegación sin interfaz en un worktree. Fijado en `coding-agents-kit@v1.5.2`.
+- **[devcontainer](/es/kit/devcontainer)** — El contenedor de desarrollo propio de cada repositorio desde una sola plantilla: agentes a través de ak, Herdr en ambos sentidos, claves SSH solo si se activa la opción. Fijado en `devcontainer-kit@v1.4.4`.
+- **[vim](/es/kit/vim)** — El editor de terminal, con un explorador de planes de solo lectura y un visor de Markdown. Fijado en `deepworkplan-vim@v1.1.1`.
 
-El registro de addons y los descriptores se distribuyen en Deep Work Plan v8: `v8.0.5`
+El registro de addons y los descriptores se distribuyen en Deep Work Plan v8: `v8.0.6`
 
 ### Ejemplos
 

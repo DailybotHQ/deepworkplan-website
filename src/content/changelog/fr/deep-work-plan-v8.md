@@ -14,8 +14,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.0"
   - label: "Version du skill v8.0.1"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.1"
-  - label: "Version du skill v8.0.5"
-    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.5"
+  - label: "Version du skill v8.0.6"
+    url: "https://github.com/DailybotHQ/deepworkplan-skill/releases/tag/v8.0.6"
   - label: "LOOP_ENGINEERING.md (normatif, v8)"
     url: "https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.0/skills/deepworkplan/spec/LOOP_ENGINEERING.md"
   - label: "Loop engineering dans le lecteur de spécification"
@@ -44,8 +44,8 @@ sourceLinks:
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.3.0"
   - label: "coding-agents-kit v1.4.0"
     url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.4.0"
-  - label: "coding-agents-kit v1.5.1"
-    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.1"
+  - label: "coding-agents-kit v1.5.2"
+    url: "https://github.com/DailybotHQ/coding-agents-kit/releases/tag/v1.5.2"
   - label: "devcontainer-kit v1.3.0"
     url: "https://github.com/DailybotHQ/devcontainer-kit/releases/tag/v1.3.0"
 ---
@@ -77,4 +77,4 @@ La version 8.0.0 implémente le standard DWP 8.0.0. Les nouveaux plans sont cré
 
 La dernière version v7 était la **7.12.2**.
 
-Version du skill installé : **8.0.5**.
+Version du skill installé : **8.0.6**.

@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer addon
 
-Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v8** (pack `v8.0.5`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
+Give the repository a reproducible, isolated development container — one that people, editors and coding agents can all use. In **DWP v8** (pack `v8.0.6`) this addon integrates **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**, an MIT product that works without Deep Work Plan. It is optional: a repository is fully conformant without it.
 
 Deep Work Plan has four pillars: spec-first plans, the repository as the harness, loop engineering, and measured efficiency. Addons and integrations can extend the harness and loop; the methodology works on its own.
 
@@ -23,20 +23,20 @@ Deep Work Plan has four pillars: spec-first plans, the repository as the harness
 ## Install
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v1.4.3`: `v0.2.0` is unsupported.
+Requirements: `bash` 3.2 or newer and `python3` 3.11 or newer on a Linux or macOS host, and Docker with Compose v2 for the container commands. Verify a release with its `SHA256SUMS` asset. Pin `v1.4.4`: `v0.2.0` is unsupported.
 
 | Item | Value |
 |---|---|
-| Product | `DailybotHQ/devcontainer-kit`, tag `v1.4.3`, interface 2 |
+| Product | `DailybotHQ/devcontainer-kit`, tag `v1.4.4`, interface 2 |
 | Registry key | `devcontainer` in `.dwp/config.json` |
 | Per-repository config | `.devcontainer/dck.toml` |
 | Detection | `dck doctor --json` |
 
-**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the current pins. The `v1.4.3` image bakes Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.0 and DeepWorkPlan Vim 1.1.0.
+**Stable since `v1.0.0`.** The public interface follows semantic versioning and changes incompatibly only in a new major version (and, for the files, a new interface number): the `dck` verbs with their documented flags and exit codes (`0` ok, `1` failed, `2` usage, `3` configuration, `4` environment, `5` refused), the `dck.toml`, host-profile and `dck doctor --json` schemas (interface 2), and the render contract — the files `dck init` writes and owns, the `dck:managed` markers and user blocks it preserves, and the environment the entrypoint reads. Nothing breaks from `v0.3.7`: run `dck init` and `dck rebuild` so the image carries the current pins. The `v1.4.4` image bakes Herdr 0.9.5, herdr-peers 2.2.1, coding-agents-kit 1.5.1 and DeepWorkPlan Vim 1.1.0.
 
 ## Layers
 
@@ -135,6 +135,10 @@ Release 1.4.2 is a patch: the `node-24` image moves to the Node 24.22.3 security
 ## From devcontainer-kit 1.4.3 (interface 2)
 
 Release 1.4.3 is a patch: the image moves to Herdr 0.9.5, now downloaded from `herdrdev/herdr` (where the project moved) and checked against the vendor's release digests — 0.9.4 keeps the Herdr server running when the shell that started it closes — and to herdr-peers 2.2.1, whose `autopilot --loop --revive` refuses to start without coding-agents-kit 1.3.0 or newer. Interface 2, coding-agents-kit 1.5.0, DeepWorkPlan Vim 1.1.0 and dck's own surface are unchanged; dck never starts the daemon.
+
+## From devcontainer-kit 1.4.4 (interface 2)
+
+Release 1.4.4 is a patch: the `agents` layer moves to coding-agents-kit 1.5.1, whose `ak install` and `ak update` keep the native platform binary of npm-installed CLIs (Codex first) and fail an install whose CLI cannot start, and the `dailybot` layer moves to the Dailybot CLI 3.29.2, its wheel checked against PyPI's SHA-256. Interface 2, Herdr 0.9.5, herdr-peers 2.2.1, DeepWorkPlan Vim 1.1.0 and dck's own surface are unchanged.
 
 ## Security defaults
 

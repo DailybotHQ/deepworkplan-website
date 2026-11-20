@@ -103,7 +103,7 @@ Loop engineering é como um plano chega ao fim sem que uma pessoa precise acompa
 
 
 
-| Contrato | O que garante | Fonte (herdr-peers v2.2.1) |
+| Contrato | O que garante | Fonte (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Registro do plano (`herdr-peers lead claim`) | Um plano que o loop acompanha tem um registro de lead com uma época e uma sucessão. Só quem detém a época mais alta atua como seu lead. | `skills/herdr-peers/protocol.md` §12 |
 | Início só por humanos (`herdr-peers autopilot start --loop`) | Só uma pessoa inicia o daemon, com suas próprias palavras. Nenhuma pergunta, resposta ou aviso pode iniciá-lo, pará-lo ou mudar o que ele faz. | `skills/herdr-peers/autopilot.md` §1 |
@@ -134,11 +134,11 @@ O harness publica o que cada fluxo precisa ler antes de começar: o router, a su
 | `status` | 27.311|
 | `verify` | 36.701|
 
-Unidade: bytes do sistema de arquivos. Medido no pacote publicado com o comando abaixo: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5).
+Unidade: bytes do sistema de arquivos. Medido no pacote publicado com o comando abaixo: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.6).
 
 Tokens do provedor, custo e estatísticas de fechamento do loop não são exibidos: nenhuma fonte com tag os mede ainda, então eles não têm linha. A cifra de tokens do script, bytes ÷ 4, é uma estimativa identificada como tal, nunca uma medição.
 
-[Leia o registro de avaliação](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
+[Leia o registro de avaliação](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.6/docs/EVALUATION.md)
 
 ---
 

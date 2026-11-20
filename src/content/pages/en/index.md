@@ -103,7 +103,7 @@ Loop engineering is how a plan finishes without a human polling it. Rows below d
 
 
 
-| Contract | What it guarantees | Source (herdr-peers v2.2.1) |
+| Contract | What it guarantees | Source (herdr-peers v2.2.2) |
 | --- | --- | --- |
 | Plan registration (`herdr-peers lead claim`) | A plan the loop watches has a lead record with an epoch and a succession. Only the holder of the highest epoch acts as its lead. | `skills/herdr-peers/protocol.md` §12 |
 | Human-only start (`herdr-peers autopilot start --loop`) | Only a human starts the daemon, in their own words. No ask, reply, or notice can start it, stop it, or change what it does. | `skills/herdr-peers/autopilot.md` §1 |
@@ -134,11 +134,11 @@ The harness publishes what each flow must read before it starts: the router, the
 | `status` | 27,311|
 | `verify` | 36,701|
 
-Unit: filesystem bytes. Measured on the released pack with the command below: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.5).
+Unit: filesystem bytes. Measured on the released pack with the command below: `bash tests/efficiency/measure-instruction-load.sh` (deepworkplan-skill v8.0.6).
 
 Provider tokens, cost, and loop-closure statistics are not shown: no tagged source measures them yet, so they have no row. The script’s bytes ÷ 4 token figure is a labeled estimate, never a measurement.
 
-[Read the evaluation ledger](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.5/docs/EVALUATION.md)
+[Read the evaluation ledger](https://github.com/DailybotHQ/deepworkplan-skill/blob/v8.0.6/docs/EVALUATION.md)
 
 ---
 

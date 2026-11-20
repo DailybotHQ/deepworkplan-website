@@ -8,7 +8,7 @@ order: 1
 
 # Devcontainer 附加组件
 
-为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v8**（技能包 `v8.0.5`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
+为仓库提供一个可复现、隔离的开发容器——人、编辑器和编码代理都能使用。在 **DWP v8**（技能包 `v8.0.6`）中，这个附加组件集成了 **[devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit)**——一个脱离 Deep Work Plan 也能使用的 MIT 产品。它是可选的：一个仓库不带它也完全符合规范。
 
 Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loop engineering 和可测量的效率。插件与集成可以扩展 harness 和循环；方法论本身即可独立运作。
 
@@ -23,20 +23,20 @@ Deep Work Plan 有四大支柱：规范先行、代码仓库就是 harness、Loo
 ## 安装
 
 ```bash
-git clone --branch v1.4.3 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
+git clone --branch v1.4.4 https://github.com/DailybotHQ/devcontainer-kit && ./devcontainer-kit/install.sh
 cd your-repo && dck init && bash dev.sh up
 ```
 
-要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v1.4.3`：`v0.2.0` 不受支持。
+要求：Linux 或 macOS 主机上的 `bash` 3.2 或更新版本和 `python3` 3.11 或更新版本，以及用于容器命令的 Docker 与 Compose v2。可使用发布版本的 `SHA256SUMS` 资产对其进行校验。请固定 `v1.4.4`：`v0.2.0` 不受支持。
 
 | 项目 | 值 |
 |---|---|
-| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v1.4.3`，接口 2 |
+| 产品 | `DailybotHQ/devcontainer-kit`，标签 `v1.4.4`，接口 2 |
 | 注册表键 | `.dwp/config.json` 中的 `devcontainer` |
 | 每仓库配置 | `.devcontainer/dck.toml` |
 | 检测 | `dck doctor --json` |
 
-**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上当前的固定版本。`v1.4.3` 镜像内置 Herdr 0.9.5、herdr-peers 2.2.1、coding-agents-kit 1.5.0 和 DeepWorkPlan Vim 1.1.0。
+**自 `v1.0.0` 起稳定。** 公共接口遵循语义化版本，仅在新的主版本中才会发生不兼容变更（对于文件而言，还会提升接口编号）：`dck` 动词及其文档化的参数和退出码（`0` 成功、`1` 失败、`2` 用法错误、`3` 配置错误、`4` 环境错误、`5` 已拒绝），`dck.toml`、主机配置文件和 `dck doctor --json` 的模式（接口 2），以及渲染契约——`dck init` 写入并拥有的文件、它所保留的 `dck:managed` 标记和用户块，以及入口点读取的环境。从 `v0.3.7` 升级不会破坏任何内容：运行 `dck init` 和 `dck rebuild`，让镜像带上当前的固定版本。`v1.4.4` 镜像内置 Herdr 0.9.5、herdr-peers 2.2.1、coding-agents-kit 1.5.1 和 DeepWorkPlan Vim 1.1.0。
 
 ## 层
 
@@ -135,6 +135,10 @@ copy_keys = true              # default false
 ## 自 devcontainer-kit 1.4.3 起（接口 2）
 
 1.4.3 是一个补丁版本：镜像升级到 Herdr 0.9.5，现改从 `herdrdev/herdr`（项目迁移后的地址）下载，并按供应商发布的摘要校验——0.9.4 让启动 Herdr 服务器的 shell 关闭后服务器仍继续运行；同时升级到 herdr-peers 2.2.1，其 `autopilot --loop --revive` 在缺少 coding-agents-kit 1.3.0 或更新版本时拒绝启动。接口 2、coding-agents-kit 1.5.0、DeepWorkPlan Vim 1.1.0 以及 dck 自身的接口均未变化；dck 从不启动守护进程。
+
+## devcontainer-kit 1.4.4 起（接口 2）
+
+1.4.4 版是一个补丁：`agents` 层改用 coding-agents-kit 1.5.1，其 `ak install` 和 `ak update` 会保留通过 npm 安装的 CLI（首先是 Codex）的各平台原生二进制文件，并把 CLI 无法启动的安装视为失败；`dailybot` 层改用 Dailybot CLI 3.29.2，其 wheel 会对照 PyPI 的 SHA-256 进行校验。接口 2、Herdr 0.9.5、herdr-peers 2.2.1、DeepWorkPlan Vim 1.1.0 以及 dck 自身的公开接口均不变。
 
 ## 安全默认值
 

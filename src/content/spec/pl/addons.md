@@ -31,7 +31,7 @@ Dziś dostępnych jest osiem addonów — siedem opcjonalnych plus wymagany loka
 
 ### Devcontainer (pierwszy addon)
 
-Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v1.4.3`, interfejs `2`): szablon Dev Containers, który `dck init` renderuje do repozytorium jako jego własny kontener, plus skill `dck-dockerfile`.
+Cienki integrator [devcontainer-kit](https://github.com/DailybotHQ/devcontainer-kit) (`dck`, przypięty do `v1.4.4`, interfejs `2`): szablon Dev Containers, który `dck init` renderuje do repozytorium jako jego własny kontener, plus skill `dck-dockerfile`.
 
 - **Strona kit:** [Devcontainer](/kit/devcontainer)
 - **Co dodaje:** `docker/local/<service>/Dockerfile` z oficjalnego obrazu środowiska uruchomieniowego przypiętego przez digest (`python-3.13`, `node-24` lub `debian`, bez współdzielonego obrazu bazowego), `dev.sh` nad launcherem `dck` (`up`, `shell`, `rebuild`, `doctor`), agentów kodujących jako warstwę opt-in, porty tylko na loopbacku, git przez SSH za pośrednictwem agenta hosta bez żadnego klucza w środku, chyba że deweloper włączy `[ssh] copy_keys` w swoim profilu hosta, oraz maszyny Herdr dla każdego kontenera ze standardowym układem
@@ -44,7 +44,7 @@ Opcjonalne połączenie z **zespołem Dailybot** programisty dla widoczności po
 
 - **Strona kit:** [Dailybot](/kit/dailybot) — pełna referencja możliwości
 - **Co łączy addon DWP:** cztery raporty cyklu życia planu (kickoff, significant task, blocked, completion) przez sub-skill dailybot `report`; opcjonalne deterministyczne wymuszanie hooków (`dailybot hook`, CLI `>= 3.9.0`)
-- **Sparowany skill:** instalacja [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (przypięty **v3.23.20**) udostępnia **17 możliwości** — czat na Slack/Teams/Discord/Google Chat, check-iny, tworzenie formularzy, ask AI, kudos, tablice i zadania Plan, etykiety organizacji, klucze API per-repo (`.dailybot/env.json`), e-mail i więcej. Addon DWP łączy tylko **report**; pozostałe możliwości wywołuje się bezpośrednio przez skill Dailybot
+- **Sparowany skill:** instalacja [DailybotHQ/agent-skill](https://github.com/DailybotHQ/agent-skill) (przypięty **v3.23.21**) udostępnia **17 możliwości** — czat na Slack/Teams/Discord/Google Chat, check-iny, tworzenie formularzy, ask AI, kudos, tablice i zadania Plan, etykiety organizacji, klucze API per-repo (`.dailybot/env.json`), e-mail i więcej. Addon DWP łączy tylko **report**; pozostałe możliwości wywołuje się bezpośrednio przez skill Dailybot
 - **Auth:** w pełni delegowane do skilla Dailybot (`dailybot login` lub `DAILYBOT_API_KEY`); ten addon nigdy nie przechowuje poświadczeń
 - **Zabezpieczenie neutralne wobec dostawcy:** podstawowy DWP ma **zero** zależności od Dailybot; nigdy nie instaluj automatycznie dla wszystkich
 - **Kiedy proponować:** programista lub zespół już korzysta z Dailybot lub wyraźnie prosi o raportowanie zespołowe
@@ -82,7 +82,7 @@ Aktualizacje zależności niezależne od menedżera pakietów, partiami, zwalido
 
 ### Herdr (szósty addon)
 
-Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v2.2.1`, protokół `2`), **interaktywny** transport delegowania planów v7.
+Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przypięty `v2.2.2`, protokół `2`), **interaktywny** transport delegowania planów v7.
 
 - **Strona kit:** [Herdr](/kit/herdr)
 - **Co dodaje:** plan może przekazać ograniczone zadanie agentowi kodującemu w innym panelu [Herdr](https://herdr.dev), na tej samej maszynie lub na takiej, do której Herdr sięga przez SSH, i zapisać jego jedną autoryzowaną odpowiedź w dzienniku
@@ -93,7 +93,7 @@ Cienki integrator [herdr-peers](https://github.com/DailybotHQ/herdr-peers) (przy
 
 ### DeepWorkPlan Vim (siódmy addon)
 
-Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v1.1.0`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
+Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-vim) (przypięty `v1.1.1`, interfejs `1`), edytora terminalowego dla Deep Work Plan (Neovim 0.12+).
 
 - **Strona kit:** [DeepWorkPlan Vim](/kit/vim)
 - **Co dodaje:** opcjonalną powierzchnię edytora na poziomie maszyny dla agentów i ludzi — generowany indeks poleceń, przeglądarkę planów tylko do odczytu i przeglądarkę Markdown; każde twierdzenie jest odczytywane z przypiętej, czytelnej maszynowo powierzchni produktu
@@ -102,7 +102,7 @@ Cienki integrator [DeepWorkPlan Vim](https://github.com/DailybotHQ/deepworkplan-
 
 ### Agentkit (ósmy addon)
 
-Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v1.5.1`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
+Cienki integrator [coding-agents-kit](https://github.com/DailybotHQ/coding-agents-kit) (`ak`, przypięty `v1.5.2`, interfejs `1`), **bezgłowego** (headless) transportu delegowania planów v7.
 
 - **Strona kit:** [Agentkit](/kit/agentkit)
 - **Co dodaje:** jedną powierzchnię poleceń `ak` nad terminalowymi agentami kodującymi, używaną do bezgłowego wykonania ograniczonego zadania planu; wnosi możliwości `subagents`, `cancel_children` i `model_routing` wyłącznie w czasie działania, gdy jest włączony, wykryty i na zgodnym interfejsie
